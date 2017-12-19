@@ -1,0 +1,3 @@
+# Managing a Multi\-AZ Failover<a name="Appendix.OracleCloudHSM.Multi-AZ"></a>
+
+You do not need to set up a AWS CloudHSM Classic HA partition group for your standby DB instance if you are using a Multi\-AZ deployment\. In fact, the details of a failover are handled automatically for you\. During a failover, the standby instance becomes the new primary instance and the HSM continues to work with the new primary instance\.

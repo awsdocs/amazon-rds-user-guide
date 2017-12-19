@@ -1,0 +1,328 @@
+# Step 2: Create an EC2 Instance and Install a Web Server<a name="CHAP_Tutorials.WebServerDB.CreateWebServer"></a>
+
+In this step you create a web server to connect to the Amazon RDS DB instance that you created in [Step 1: Create an RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\. 
+
+## Launch an EC2 Instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.LaunchEC2"></a>
+
+First you create an Amazon EC2 instance in the public subnet of your VPC\. 
+
+**To launch an EC2 instance**
+
+1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. Choose **EC2 Dashboard**, and then choose **Launch Instance**, as shown following\.  
+![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
+
+1. Choose the **Amazon Linux** Amazon Machine Image \(AMI\), as shown following\.  
+![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
+
+1. Choose the `t2.micro` instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
+![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
+
+1. On the **Configure Instance Details** page, shown following, set these values and leave the other values as their defaults:
+
+   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
+
+   + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)
+
+   + **Auto\-assign Public IP:** `Enable`  
+![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)
+
+1. Choose **Next: Add Storage**\.
+
+1. On the **Add Storage** page, leave the default values and choose **Next: Tag Instance**\.
+
+1. On the **Tag Instance** page, shown following, choose **Create Tag** and set **Value** for the `Name` tag to `tutorial-web-server`, and then choose **Next: Configure Security Group**\.  
+![\[Tag Instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_15.png)
+
+1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**, and then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. The security group must include inbound rules for SSH and HTTP access\.   
+![\[Configure Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_16.png)
+
+1. Choose **Review and Launch**\.
+
+1. On the **Review Instance Launch** page, shown following, verify your settings and then choose **Launch**\.  
+![\[Review Instance Launch\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_17.png)
+
+1. On the **Select an existing key pair or create a new key pair** page, shown following, choose `Create a new key pair` and set **Key pair name** to `tutorial-key-pair`\. Choose **Download Key Pair**, and then save the key pair file on your local machine\. You use this key pair file to connect to your EC2 instance\.  
+![\[Select an Existing Key Pair or Create a New Key Pair\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_18.png)
+
+1. To launch your EC2 instance, choose **Launch Instances**\. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-7abfcfb8`\.  
+![\[Launch Status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_19.png)
+
+1. To find your instance, choose **View Instances**\.
+
+1. Wait until **Instance Status** for your instance reads as `running` before continuing\. 
+
+## Install an Apache web server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
+
+Next you connect to your EC2 instance and install the web server\.
+
+**To connect to your EC2 instance and install the Apache web server with PHP**
+
+1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html)\.
+
+1. To get the latest bug fixes and security updates, update the software on your EC2 instance by using the following command:
+**Note**  
+The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
+
+   ```
+   [ec2-user ~]$ sudo yum update –y
+   ```
+
+1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time:
+
+   ```
+   [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
+   ```
+
+1. Start the web server with the command shown following:
+
+   ```
+   [ec2-user ~]$ sudo service httpd start
+   ```
+
+   You can test that your web server is properly installed and started by entering the public DNS name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. If you don't see the Apache test page, then verify that your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+**Note**  
+The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
+
+1. Configure the web server to start with each system boot using the **chkconfig** command:
+
+   ```
+   [ec2-user ~]$ sudo chkconfig httpd on
+   ```
+
+To allow `ec2-user` to manage files in the default root directory for your Apache web server, you need to modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance, and then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
+
+**To set file permissions for the Apache web server**
+
+1. Add the `www` group to your EC2 instance with the following command:
+
+   ```
+   [ec2-user ~]$ sudo groupadd www
+   ```
+
+1. Add the `ec2-user` user to the `www` group:
+
+   ```
+   [ec2-user ~]$ sudo usermod -a -G www ec2-user
+   ```
+
+1. To refresh your permissions and include the new `www` group, log out:
+
+   ```
+   [ec2-user ~]$ exit
+   ```
+
+1. Log back in again and verify that the `www` group exists with the `groups` command:
+
+   ```
+   [ec2-user ~]$ groups
+   ec2-user wheel www
+   ```
+
+1. Change the group ownership of the `/var/www` directory and its contents to the `www` group:
+
+   ```
+   [ec2-user ~]$ sudo chown -R root:www /var/www
+   ```
+
+1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future:
+
+   ```
+   [ec2-user ~]$ sudo chmod 2775 /var/www
+   [ec2-user ~]$ find /var/www -type d -exec sudo chmod 2775 {} +
+   ```
+
+1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions:
+
+   ```
+   [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +
+   ```
+
+## Connect your Apache web server to your RDS DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
+
+Next, you add content to your Apache web server that connects to your Amazon RDS DB instance\.
+
+**To add content to the Apache web server that connects to your RDS DB instance**
+
+1. While still connected to your EC2 instance, change the directory to `/var/www` and create a new subdirectory named `inc`:
+
+   ```
+   [ec2-user ~]$ cd /var/www
+   [ec2-user ~]$ mkdir inc
+   [ec2-user ~]$ cd inc
+   ```
+
+1. Create a new file in the `inc` directory named `dbinfo.inc`, and then edit the file by calling nano \(or the editor of your choice\)\.
+
+   ```
+   [ec2-user ~]$ >dbinfo.inc
+   [ec2-user ~]$ nano dbinfo.inc
+   ```
+
+1. Add the following contents to the `dbinfo.inc` file, where *endpoint* is the endpoint of your RDS MySQL DB instance, without the port, and *master password* is the master password for your RDS MySQL DB instance\.
+**Note**  
+Placing the user name and password information in a folder that is not part of the document root for your web server reduces the possibility of your security information being exposed\.
+
+   ```
+   <?php
+   
+   define('DB_SERVER', 'endpoint');
+   define('DB_USERNAME', 'tutorial_user');
+   define('DB_PASSWORD', 'master password');
+   define('DB_DATABASE', 'sample');
+   
+   ?>
+   ```
+
+1. Save and close the `dbinfo.inc` file\.
+
+1. Change the directory to `/var/www/html`:
+
+   ```
+   [ec2-user ~]$ cd /var/www/html
+   ```
+
+1. Create a new file in the `html` directory named `SamplePage.php`, and then edit the file by calling nano \(or the editor of your choice\)\.
+
+   ```
+   [ec2-user ~]$ >SamplePage.php
+   [ec2-user ~]$ nano SamplePage.php
+   ```
+
+1. Add the following contents to the `SamplePage.php` file:
+**Note**  
+Placing the user name and password information in a folder that is not part of the document root for your web server reduces the possibility of your security information being exposed\.
+
+   ```
+   <?php include "../inc/dbinfo.inc"; ?>
+   <html>
+   <body>
+   <h1>Sample page</h1>
+   <?php
+   
+     /* Connect to MySQL and select the database. */
+     $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+   
+     if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+   
+     $database = mysqli_select_db($connection, DB_DATABASE);
+   
+     /* Ensure that the Employees table exists. */
+     VerifyEmployeesTable($connection, DB_DATABASE); 
+   
+     /* If input fields are populated, add a row to the Employees table. */
+     $employee_name = htmlentities($_POST['Name']);
+     $employee_address = htmlentities($_POST['Address']);
+   
+     if (strlen($employee_name) || strlen($employee_address)) {
+       AddEmployee($connection, $employee_name, $employee_address);
+     }
+   ?>
+   
+   <!-- Input form -->
+   <form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
+     <table border="0">
+       <tr>
+         <td>Name</td>
+         <td>Address</td>
+       </tr>
+       <tr>
+         <td>
+           <input type="text" name="Name" maxlength="45" size="30" />
+         </td>
+         <td>
+           <input type="text" name="Address" maxlength="90" size="60" />
+         </td>
+         <td>
+           <input type="submit" value="Add Data" />
+         </td>
+       </tr>
+     </table>
+   </form>
+   
+   <!-- Display table data. -->
+   <table border="1" cellpadding="2" cellspacing="2">
+     <tr>
+       <td>ID</td>
+       <td>Name</td>
+       <td>Address</td>
+     </tr>
+   
+   <?php
+   
+   $result = mysqli_query($connection, "SELECT * FROM Employees"); 
+   
+   while($query_data = mysqli_fetch_row($result)) {
+     echo "<tr>";
+     echo "<td>",$query_data[0], "</td>",
+          "<td>",$query_data[1], "</td>",
+          "<td>",$query_data[2], "</td>";
+     echo "</tr>";
+   }
+   ?>
+   
+   </table>
+   
+   <!-- Clean up. -->
+   <?php
+   
+     mysqli_free_result($result);
+     mysqli_close($connection);
+   
+   ?>
+   
+   </body>
+   </html>
+   
+   
+   <?php
+   
+   /* Add an employee to the table. */
+   function AddEmployee($connection, $name, $address) {
+      $n = mysqli_real_escape_string($connection, $name);
+      $a = mysqli_real_escape_string($connection, $address);
+   
+      $query = "INSERT INTO `Employees` (`Name`, `Address`) VALUES ('$n', '$a');";
+   
+      if(!mysqli_query($connection, $query)) echo("<p>Error adding employee data.</p>");
+   }
+   
+   /* Check whether the table exists and, if not, create it. */
+   function VerifyEmployeesTable($connection, $dbName) {
+     if(!TableExists("Employees", $connection, $dbName)) 
+     { 
+        $query = "CREATE TABLE `Employees` (
+            `ID` int(11) NOT NULL AUTO_INCREMENT,
+            `Name` varchar(45) DEFAULT NULL,
+            `Address` varchar(90) DEFAULT NULL,
+            PRIMARY KEY (`ID`),
+            UNIQUE KEY `ID_UNIQUE` (`ID`)
+          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+   
+        if(!mysqli_query($connection, $query)) echo("<p>Error creating table.</p>");
+     }
+   }
+   
+   /* Check for the existence of a table. */
+   function TableExists($tableName, $connection, $dbName) {
+     $t = mysqli_real_escape_string($connection, $tableName);
+     $d = mysqli_real_escape_string($connection, $dbName);
+   
+     $checktable = mysqli_query($connection, 
+         "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
+   
+     if(mysqli_num_rows($checktable) > 0) return true;
+   
+     return false;
+   }
+   ?>
+   ```
+
+1. Save and close the `SamplePage.php` file\.
+
+1. Verify that your web server successfully connects to your RDS MySQL DB instance by opening a web browser and browsing to `http://EC2 instance endpoint/SamplePage.php`, for example: `http://ec2-55-122-41-31.us-west-2.compute.amazonaws.com/SamplePage.php`\.
+
+You can use `SamplePage.php` to add data to your RDS MySQL DB instance\. The data that you add is then displayed on the page\. 
+
+To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 

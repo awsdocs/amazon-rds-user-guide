@@ -1,0 +1,137 @@
+# Restoring from a DB Snapshot<a name="USER_RestoreFromSnapshot"></a>
+
+Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a DB instance by restoring from this DB snapshot\. When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You cannot restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
+
+You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from **Magnetic \(Standard\)** storage, the migration process is the slowest\. That's because **Magnetic** storage doesn't have the IOPS capability of **Provisioned IOPS** or **General Purpose \(SSD\)** storage\. 
+
+## Parameter Group Considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
+
+When you restore a DB instance, the default DB parameter group is associated with the restored instance\. As soon as the restore is complete and your new DB instance is available, you must associate any custom DB parameter group used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
+
+**Important**  
+We recommend that you retain the parameter group for any DB snapshots you create, so that you can associate your restored DB instance with the correct parameter group\. 
+
+## Security Group Considerations<a name="USER_RestoreFromSnapshot.Security"></a>
+
+When you restore a DB instance, the default security group is associated with the restored instance\. As soon as the restore is complete and your new DB instance is available, you must associate any custom security groups used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
+
+## Option Group Considerations<a name="USER_RestoreFromSnapshot.Options"></a>
+
+When you restore a DB instance, the option group associated with the DB snapshot is associated with the restored DB instance after it is created\. For example, if the DB snapshot you are restoring from uses Oracle Transparent Data Encryption, the restored DB instance will use the same option group\. 
+
+When you assign an option group to a DB instance, the option group is also linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. If a DB instance is in a VPC, the option group associated with the DB instance is linked to that VPC\. This means that you cannot use the option group assigned to a DB instance if you attempt to restore the instance into a different VPC or onto a different platform\. If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. For persistent or permanent options, when restoring a DB instance into a different VPC you must create a new option group that includes the persistent or permanent option\. 
+
+## Microsoft SQL Server Considerations<a name="USER_RestoreFromSnapshot.MSSQL"></a>
+
+When you restore a Microsoft SQL Server DB snapshot to a new instance, you can always restore to the same edition as your snapshot\. In some cases, you can also change the edition of the DB instance\. The following are the limitations when you change editions: 
+
++ The DB snapshot must have enough storage allocated for the new edition\. 
+
++ Only the following edition changes are supported: 
+
+  + From Standard Edition to Enterprise Edition 
+
+  + From Web Edition to Standard Edition or Enterprise Edition 
+
+  + From Express Edition to Web Edition, Standard Edition or Enterprise Edition 
+
+If you want to change from one edition to a new edition that is not supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether or not your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\. 
+
+## Oracle Considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
+
+If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. If you restore a DB instance from a DB snapshot, you must modify the restored DB instance to use the parameter group that has a matching or greater `compatible` parameter value\. This should be done as soon as possible after the restore action, and you must then reboot your DB instance\. 
+
+You can upgrade a DB snapshot while it is still a DB snapshot, before you restore it\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\. 
+
+## AWS Management Console<a name="USER_RestoreFromSnapshot.CON"></a>
+
+**To restore a DB instance from a DB snapshot**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Snapshots**\.
+
+1. Choose the DB snapshot that you want to restore from\.   
+![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DBSnapshot-restore1.png)
+
+1. Choose **Restore Snapshot**\. 
+
+   The **Restore DB Instance** window appears\. 
+
+1. For **DB Instance Identifier**, type the name for your restored DB instance\. 
+
+1. Choose **Restore DB Instance**\. 
+
+1. If you want to restore the functionality of the DB instance to that of the DB instance that the snapshot was created from, you must modify the DB instance to use the security group\. The next steps assume that your DB instance is in a VPC\. If your DB instance is not in a VPC, use the EC2 Management Console to locate the security group you need for the DB instance\. 
+
+   1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\. 
+
+   1. In the navigation pane, choose **Security Groups**\. 
+
+   1. Select the security group that you want to use for your DB instances\. If necessary, add rules to link the security group to a security group for an EC2 instance\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
+
+## CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
+
+To restore a DB instance from a DB snapshot, use the AWS CLI command [restore\-db\-instance\-from\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)\. 
+
+In this example, you restore from a previously created DB snapshot named *mydbsnapshot*\. You restore to a new DB instance named *mynewdbinstance*\. 
+
+**Example**  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds restore-db-instance-from-db-snapshot \
+2.     --db-instance-identifier mynewdbinstance \
+3.     --db-snapshot-identifier mydbsnapshot
+```
+For Windows:  
+
+```
+1. aws rds restore-db-instance-from-db-snapshot ^
+2.     --db-instance-identifier mynewdbinstance ^
+3.     --db-snapshot-identifier mydbsnapshot
+```
+This command returns output similar to the following:  
+
+```
+1. DBINSTANCE  mynewdbinstance  db.m3.large  MySQL     50       sa              creating  3  n  5.6.27  general-public-license
+```
+
+After the DB instance has been restored, you must add the DB instance to the security group and parameter group used by the DB instance used to create the DB snapshot if you want the same functionality as that of the previous DB instance\.
+
+## API<a name="USER_RestoreFromSnapshot.API"></a>
+
+To restore a DB instance from a DB snapshot, call the Amazon RDS API function [RestoreDBInstanceFromDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) with the following parameters: 
+
++ `DBSnapshotIdentifier` 
+
++ `DBInstanceIdentifier` 
+
+In this example, you restore from a previously created DB snapshot named *mydbsnapshot*\. You restore to a new DB instance named *mynewdbinstance*\. 
+
+**Example**  
+
+```
+ 1. https://rds.us-east-1.amazonaws.com/
+ 2.    ?Action=RestoreDBInstanceFromDBSnapshot
+ 3.    &DBInstanceIdentifier=mynewdbinstance
+ 4.    &DBSnapshotIdentifier=rds%3Amysqldb-2014-04-22-08-15
+ 5.    &SignatureMethod=HmacSHA256
+ 6.    &SignatureVersion=4
+ 7.    &Version=2013-09-09
+ 8.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+ 9.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
+10.    &X-Amz-Date=20140428T232655Z
+11.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+12.    &X-Amz-Signature=78ac761e8c8f54a8c0727f4e67ad0a766fbb0024510b9aa34ea6d1f7df52fe92
+```
+
+## Related Topics<a name="USER_RestoreFromSnapshot.related"></a>
+
++ [Tutorial: Restore a DB Instance from a DB Snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
+
++ [Creating a DB Snapshot](USER_CreateSnapshot.md)
+
++ [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
+
++ [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)

@@ -1,0 +1,137 @@
+# Importing Data into a MySQL DB Instance by Using Other Methods<a name="MySQL.Procedural.Importing.Other"></a>
+
+If your scenario supports it, it's easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\. 
+
+Following, you can find information about alternate methods to import your MySQL data to an Amazon RDS DB instance running MySQL\. 
+
+We recommend using the procedures in this section to import data into or export it from a MySQL DB instance\. You can use these procedures to import data from other MySQL DB instances, MySQL instances running external to Amazon RDS, and other types of data sources\. To use replication to export data to an instance of MySQL that is running external to Amazon RDS, we recommend using the procedure discussed in [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md) 
+
+## Overview<a name="MySQL.Procedural.Importing.Overview"></a>
+
+We recommend the following procedures for importing data into a MySQL DB instance in the situations described:
+
++ You might be able to use the AWS Database Migration Service to migrate your data in the most efficient way\. AWS DMS can migrate databases with minimal downtime and, for many database engines, continue ongoing replication until you are ready to switch over to your MySQL DB instance\. You can use AWS DMS to migrate from a non\-MySQL database engine to an Amazon RDS MySQL DB instance, or to do a partial migration of a MySQL database\. If you are migrating to MySQL from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [What is AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\.
+
+  We recommend that you do not use AWS DMS and instead use the MySQL database migration tools if all of following conditions are met:
+
+  + You have a homogeneous migration, where you are migrating from a MySQL database to an Amazon RDS MySQL DB instance\.
+
+  + You are migrating an entire database\.
+
+    AWS DMS is a good option if you are migrating a subset of the data from your MySQL database to Amazon RDS\. However, when migrating an entire database, AWS DMS creates tables, primary keys, and in some cases unique indexes, but it doesn't create any other objects that are not required to efficiently migrate the data from the source\. For example, it doesn't create secondary indexes, non\-primary key constraints, or data defaults\. If you are migrating your full database, you can copy your schema to your RDS MySQL DB instance and then use AWS DMS to migrate your data, or use the native MySQL migration tools discussed later in this topic\.
+
+  + Using the MySQL database migration tools reduces the amount of downtime required to migrate your database\. For example, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
+
++ To import data from an existing database in a MySQL DB instance, you can create a Read Replica, and then promote the Read Replica\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
+
++ To move small amounts of MySQL data, or where service interruption on the source MySQL database isn’t an issue, you can use a simple procedure to copy the data directly to your Amazon RDS MySQL DB instance using a command\-line utility\. For more information, see [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md)\.
+
++ To move large amounts of MySQL data, or when you want to minimize service interruption for live sites or applications that use an external MySQL instance, you can back up the data, copy it to Amazon Elastic Compute Cloud \(Amazon EC2\), and import it into an Amazon RDS MySQL DB instance\. You can then use replication to bring the two instances into sync for any data that has been added to the source system since the copy to Amazon EC2\. For more information [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
+
++ For data in sources other than an existing MySQL database, you can create flat files and import them using the `mysqlimport` utility\. For more information, see [Importing Data From Any Source to a MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.AnySource.md)\.
+
++ To set up replication using an existing MySQL DB instance as the replication master, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+
+**Note**  
+The 'mysql' system database contains authentication and authorization information required to log in to your DB instance and access your data\. Dropping, altering, renaming, or truncating tables, data, or other contents of the 'mysql' database in your DB instance can result in error and may render the DB instance and your data inaccessible\. If this occurs, the DB instance can be restored from a snapshot using the AWS CLI `restore-db-instance-from-db-snapshot` command, or recovered using the AWS CLI `restore-db-instance-to-point-in-time` command\. 
+
+## Importing Data Considerations<a name="MySQL.Procedural.Importing.Advanced"></a>
+
+This section contains additional technical information related to loading data into MySQL\. It is intended for advanced users who are familiar with the MySQL server architecture\. Note that all comments related to LOAD DATA LOCAL INFILE apply to `mysqlimport` as well\. 
+
+### Binary Log<a name="MySQL.Procedural.Importing.Advanced.Log"></a>
+
+Data loads incur a performance penalty and require additional free disk space \(up to 4X more\) when binary logging is enabled versus loading the same data with binary logging turned off\. The severity of the performance penalty and the amount of free disk space required is directly proportional to the size of the transactions used to load the data\. 
+
+### Transaction Size<a name="MySQL.Procedural.Importing.Advanced.Size"></a>
+
+Transaction size plays an important role in MySQL data loads\. It has a major influence on resource consumption, disk space utilization, resume process, time to recover, and input format \(flat files or SQL\)\. This section describes how transaction size affects binary logging and makes the case for disabling binary logging during large data loads\. As noted earlier, binary logging is enabled and disabled by setting the Amazon RDS automated backup retention period\. Non\-zero values enable binary logging, and zero disables it\. We also describe the impact of large transactions on InnoDB and why it's important to keep transaction sizes small\. 
+
+#### Small Transactions<a name="MySQL.Procedural.Importing.Advanced.Log.Small"></a>
+
+For small transactions, binary logging doubles the number of disk writes required to load the data\. Depending upon the upload rate, other database activity taking place during the load, and the capacity of your Amazon RDS DB instance, this can severely degrade performance for other database sessions and increase the time required to load the data\. 
+
+The binary logs also consume disk space roughly equal to the amount of data loaded until they are backed up and removed\. Fortunately, Amazon RDS minimizes this by backing up and removing binary logs on a frequent basis\. 
+
+#### Large Transactions<a name="MySQL.Procedural.Importing.Advanced.Log.Large"></a>
+
+Large transactions incur a 3X penalty for IOPS and disk consumption with binary logging enabled\. This is due to the binary log cache spilling to disk, consuming disk space and incurring additional IO for each write\. The cache cannot be written to the binlog until the transaction commits or rolls back, so it consumes disk space in proportion to the amount of data loaded\. When the transaction commits, the cache must be copied to the binlog, creating a third copy of the data on disk\. 
+
+Because of this, there must be at least three times as much free disk space available to load the data compared to loading with binary logging disabled\. For example, 10GB of data loaded as a single transaction will consume at least 30GB disk space during the load: 10GB for the table \+ 10GB for the binary log cache \+ 10GB for the binary log itself\. The cache file remains on disk until the session that created it terminates or the session fills its binary log cache again during another transaction\. The binary log must remain on disk until backed up, so it may be some time before the extra 20GB is freed\. 
+
+If the data was loaded using LOAD DATA LOCAL INFILE, yet another copy of the data is created if the database has to be recovered from a backup made prior to the load\. During recovery, MySQL extracts the data from the binary log into a flat file and then executes LOAD DATA LOCAL INFILE, just as the original transaction, only this time the input file is local to the database server\. Continuing with the example above, recovery will fail unless there is at least 40GB free disk space available\.
+
+#### Disable Binary Logging<a name="MySQL.Procedural.Importing.AnySource.Advanced.Disable"></a>
+
+Whenever possible, disable binary logging during large data loads to avoid the resource overhead and addition disk space requirements\. In Amazon RDS, disabling binary logging is as simple as setting the backup retention period to zero\. If you do this, it's recommended that you take a DB snapshot of the database instance immediately before the load so that you can quickly and easily undo changes made during loading if the need arises\. 
+
+After the load, set the backup retention period back to an appropriate \(no zero\) value\. 
+
+You cannot set the backup retention period to zero if the DB instance is a source DB instance for Read Replicas\.
+
+### InnoDB<a name="MySQL.Procedural.Importing.Advanced.InnoDB"></a>
+
+The information in this section provides a strong argument for keeping transaction sizes small when using InnoDB\.
+
+#### Undo<a name="MySQL.Procedural.Importing.Advanced.InnoDB.Undo"></a>
+
+InnoDB generates undo to support features such as transaction rollback and MVCC\. Undo is stored in the InnoDB system tablespace \(usually ibdata1\) and is retained until removed by the purge thread\. The purge thread cannot advance beyond the undo of the oldest active transaction, so it is effectively blocked until the transaction commits or completes a rollback\. If the database is processing other transactions during the load, their undo also accumulates in the system tablespace and cannot be removed even if they commit and no other transaction needs the undo for MVCC\. In this situation, all transactions \(including read\-only transactions\) that access any of the rows changed by any transaction \(not just the load transaction\) slow down as they scan through undo that could have been purged if not for the long running load transaction\. 
+
+Since undo is stored in the system tablespace and since the system tablespace never shrinks in size, large data load transactions can cause the system tablespace to become quite large, consuming disk space that cannot be reclaimed without recreating the database from scratch\. 
+
+#### Rollback<a name="MySQL.Procedural.Importing.Advanced.InnoDB.Rollback"></a>
+
+InnoDB is optimized for commits\. Rolling back a large transaction can take a very, very long time\. In some cases, it may be faster to perform a point\-in\-time recovery or restore a DB snapshot\. 
+
+### Input Data Format<a name="MySQL.Procedural.Importing.Advanced.InputFormat"></a>
+
+MySQL can accept incoming data in one of two forms: flat files and SQL\. This section points out some key advantages and disadvantages of each\.
+
+#### Flat Files<a name="MySQL.Procedural.Importing.Advanced.InputFormat.FlatFiles"></a>
+
+Loading flat files with LOAD DATA LOCAL INFILE can be the fastest and least costly method of loading data as long as transactions are kept relatively small\. Compared to loading the same data with SQL, flat files usually require less network traffic, lowering transmission costs and load much faster due to the reduced overhead in the database\. 
+
+#### One Big Transaction<a name="MySQL.Procedural.Importing.Advanced.InputFormat.BigTransaction"></a>
+
+LOAD DATA LOCAL INFILE loads the entire flat file as one transaction\. This isn't necessarily a bad thing\. If the size of the individual files can be kept small, this has a number of advantages:
+
++ Resume Capability \- Keeping track of which files have been loaded is easy\. If a problem arises during the load, you can pick up where you left off with little effort\. Some data may have to be retransmitted to Amazon RDS, but with small files, the amount retransmitted is minimal\.
+
++ Load data in parallel \- If you've got IOPs and network bandwidth to spare with a single file load, loading in parallel may save time\.
+
++ Throttle the load rate \- Data load impacting other processes? Throttle the load by increasing the interval between files\. 
+
+#### Be Careful<a name="MySQL.Procedural.Importing.Advanced.InputFormat.Careful"></a>
+
+The advantages of LOAD DATA LOCAL INFILE diminish rapidly as transaction size increases\. If breaking up a large set of data into smaller ones isn't an option, SQL may be the better choice\. 
+
+#### SQL<a name="MySQL.Procedural.Importing.Advanced.InputFormat.SQL"></a>
+
+SQL has one main advantage over flat files: it's easy to keep transaction sizes small\. However, SQL can take significantly longer to load than flat files and it can be difficult to determine where to resume the load after a failure\. For example, mysqldump files are not restartable\. If a failure occurs while loading a mysqldump file, the file will require modification or replacement before the load can resume\. The alternative is to restore to the point in time prior to the load and replay the file once the cause of the failure has been corrected\. 
+
+### Take Checkpoints Using Amazon RDS Snapshots<a name="MySQL.Procedural.Importing.Advanced.Checkpoints"></a>
+
+If you have a load that's going to take several hours or even days, loading without binary logging isn't a very attractive prospect unless you can take periodic checkpoints\. This is where the Amazon RDS DB snapshot feature comes in very handy\. A DB snapshot creates a point\-in\-time consistent copy of your database instance which can be used restore the database to that point in time after a crash or other mishap\. 
+
+To create a checkpoint, simply take a DB snapshot\. Any previous DB snapshots taken for checkpoints can be removed without affecting durability or restore time\. 
+
+Snapshots are fast too, so frequent checkpointing doesn't add significantly to load time\. 
+
+### Decreasing Load Time<a name="MySQL.Procedural.Importing.Advanced.LoadTime"></a>
+
+Here are some additional tips to reduce load times: 
+
++ Create all secondary indexes prior to loading\. This is counter\-intuitive for those familiar with other databases\. Adding or modifying a secondary index causes MySQL to create a new table with the index changes, copy the data from the existing table to the new table, and drop the original table\. 
+
++ Load data in PK order\. This is particularly helpful for InnoDB tables where load times can be reduced by 75\-80% and data file size cut in half\. 
+
++ Disable foreign key constraints foreign\_key\_checks=0 For flat files loaded with LOAD DATA LOCAL INFILE, this is required in many cases\. For any load, disabling FK checks will provide significant performance gains\. Just be sure to enable the constraints and verify the data after the load\. 
+
++ Load in parallel unless already near a resource limit\. Use partitioned tables when appropriate\. 
+
++ Use multi\-value inserts when loading with SQL to minimize statement execution overhead\. When using mysqldump, this is done automatically\.
+
++ Reduce InnoDB log IO innodb\_flush\_log\_at\_trx\_commit=0 
+
+**Note**  
+Using innodb\_flush\_log\_at\_trx\_commit=0 causes InnoDB to flush its logs every second instead of at each commit\. This provides a significant speed advantage, but can lead to data loss during a crash\. Use with caution\. 

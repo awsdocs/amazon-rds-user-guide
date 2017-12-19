@@ -1,0 +1,126 @@
+# Working with Amazon Resource Names \(ARNs\) in Amazon RDS<a name="USER_Tagging.ARN"></a>
+
+Resources created in Amazon Web Services are each uniquely identified with an Amazon Resource Name \(ARN\)\. For certain Amazon RDS operations, you must uniquely identify an Amazon RDS resource by specifying its ARN\. For example, when you create an RDS DB instance Read Replica, you must supply the ARN for the source DB instance\. 
+
+## Constructing an ARN for Amazon RDS<a name="USER_Tagging.ARN.Constructing"></a>
+
+Resources created in Amazon Web Services are each uniquely identified with an Amazon Resource Name \(ARN\)\. You can construct an ARN for an Amazon RDS resource using the following syntax\. 
+
+ `arn:aws:rds:<region>:<account number>:<resourcetype>:<name>` 
+
+
+****  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html)
+
+The following table shows the format that you should use when constructing an ARN for a particular Amazon RDS resource type\. 
+
+
+****  
+
+| Resource Type | ARN Format | 
+| --- | --- | 
+| DB instance  |  arn:aws:rds:*<region>*:*<account>*:db:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:db:my-mysql-instance-1
+```  | 
+| DB cluster |  arn:aws:rds:*<region>*:*<account>*:cluster:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:cluster:my-aurora-cluster-1
+```  | 
+| Event subscription  |  arn:aws:rds:*<region>*:*<account>*:es:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:es:my-subscription
+```  | 
+| DB option group  |  arn:aws:rds:*<region>*:*<account>*:og:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:og:my-og-oracle-tde
+```  | 
+| DB parameter group  |  arn:aws:rds:*<region>*:*<account>*:pg:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:pg:my-param-enable-logs
+```  | 
+| DB cluster parameter group  |  arn:aws:rds:*<region>*:*<account>*:cluster\-pg:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:cluster-pg:my-cluster-param-timezone
+```  | 
+| Reserved DB instance  |  arn:aws:rds:*<region>*:*<account>*:ri:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:ri:my-reserved-postgresql
+```  | 
+| DB security group  |  arn:aws:rds:*<region>*:*<account>*:secgrp:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:secgrp:my-public
+```  | 
+| DB snapshot  |  arn:aws:rds:*<region>*:*<account>*:snapshot:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:snapshot:my-mysql-snap-20130507
+```  | 
+| DB cluster snapshot  |  arn:aws:rds:*<region>*:*<account>*:cluster\-snapshot:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:cluster-snapshot:my-aurora-snap-20160809
+```  | 
+| DB subnet group  |  arn:aws:rds:*<region>*:*<account>*:subgrp:*<name>* For example: 
+
+```
+arn:aws:rds:us-east-2:123456789012:subgrp:my-subnet-10
+```  | 
+
+## Getting an Existing ARN<a name="USER_Tagging.ARN.Getting"></a>
+
+You can get the ARN of an RDS resource by using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
+
+### AWS Management Console<a name="USER_Tagging.ARN.CON"></a>
+
+To get an ARN from the AWS Management Console, navigate to the resource you want an ARN for, and choose **See Details** for that resource\. For example, you can get the ARN for a DB instance from the **Configuration Details** page as shown following\. 
+
+![\[DB instance ARN\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DB-instance-arn.png)
+
+### AWS CLI<a name="USER_Tagging.ARN.CLI"></a>
+
+To get an ARN from the AWS CLI for a particular RDS resource, you use the `describe` command for that resource\. The following table shows each RDS CLI command, and the ARN property used with the command to get an ARN\. 
+
+
+****  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html)
+
+For example, the following AWS CLI command gets the ARN for a DB instance\.
+
+**Example**  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds describe-db-instances \
+2. --db-instance-identifier DBInstanceIdentifier \
+3. --region us-west-2
+```
+For Windows:  
+
+```
+1. aws rds describe-db-instances ^
+2. --db-instance-identifier DBInstanceIdentifier ^
+3. --region us-west-2
+```
+
+### API<a name="USER_Tagging.ARN.API"></a>
+
+To get an ARN for a particular RDS resource, you can call the following RDS API actions and use the ARN properties shown following\.
+
+
+****  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html)
+
+## Related Topics<a name="USER_Tagging.ARN.related"></a>
+
++ [Tagging Amazon RDS Resources](USER_Tagging.md)
+
++ [Amazon RDS DB Instance Lifecycle](CHAP_CommonTasks.md)

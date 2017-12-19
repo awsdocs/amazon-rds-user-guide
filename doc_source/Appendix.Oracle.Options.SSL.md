@@ -1,0 +1,188 @@
+# Oracle SSL<a name="Appendix.Oracle.Options.SSL"></a>
+
+You enable Secure Sockets Layer \(SSL\) encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with an Oracle DB instance\. You specify the port you want to communicate over using SSL\. You must configure the Oracle client as shown in this following section\. 
+
+You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections which allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and an Oracle client\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\. 
+
+**Note**  
+You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
+
+You can use SSL encryption with the following Oracle database versions and editions: 
+
++ 12\.1\.0\.2: all versions, all editions including Standard Edition Two
+
++ 11\.2\.0\.4: all versions, Enterprise Edition
+
++ 11\.2\.0\.4: v6 and later, Standard Edition, Standard Edition One, Enterprise Edition
+
+**Note**  
+You cannot use both SSL and Oracle native network encryption \(NNE\) on the same instance\. If you use SSL encryption, you must disable any other connection encryption\.
+
+## Configuring an Oracle Client to Use SSL with an Oracle DB Instance<a name="Appendix.Oracle.Options.SSL.ClientConfiguration"></a>
+
+You must configure the Oracle client before connecting to an Oracle DB instance that uses the Oracle SSL option\.
+
+**To configure an Oracle client to use SSL to connect to an Oracle DB instance**
+
+1. Set the ORACLE\_HOME environment variable to the location of your Oracle home directory\.
+
+   The path to your Oracle home directory depends on your installation\. The following is an example that sets the ORACLE\_HOME environment variable:
+
+   ```
+   prompt>export ORACLE_HOME=/home/user/app/user/product/12.1.0/dbhome_1 
+   ```
+
+   For information about setting Oracle environment variables, see [SQL\*Plus Environment Variables](http://docs.oracle.com/database/121/SQPUG/ch_two.htm#SQPUG331) in the Oracle documentation and the Oracle installation guide for your operating system\.
+
+1. Append **$ORACLE\_HOME/lib** to the LD\_LIBRARY\_PATH environment variable\.
+
+   The following is an example that sets the LD\_LIBRARY\_PATH environment variable:
+
+   ```
+   prompt>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib 
+   ```
+
+1. Create a directory for the Oracle wallet at $ORACLE\_HOME/ssl\_wallet\.
+
+   The following is an example that creates the Oracle wallet directory:
+
+   ```
+   prompt>mkdir $ORACLE_HOME/ssl_wallet 
+   ```
+
+1. Download the RDS CA certificates file from [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem ](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem) and then put the file in the ssl\_wallet directory\.
+
+   The RDS CA certificates file for AWS GovCloud \(US\) is available at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-ca\-2012\-us\-gov\-west\-1\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem)\.
+
+1. In the $ORACLE\_HOME/network/admin directory, modify or create the* tnsnames\.ora* file and include the following entry:
+
+   ```
+   <database name>= (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCPS) 
+      (HOST = <endpoint>) (PORT = <ssl port number>)))(CONNECT_DATA = (SID = <database name>))
+      (SECURITY = (SSL_SERVER_CERT_DN = "C=US,ST=Washington,L=Seattle,O=Amazon.com,OU=RDS,CN=<endpoint>")))
+   ```
+
+1. In the same directory, modify or create the *sqlnet\.ora* file and include the following parameters:
+
+   ```
+   WALLET_LOCATION = (SOURCE = (METHOD = FILE) (METHOD_DATA = (DIRECTORY = $ORACLE_HOME/ssl_wallet))) 
+   SSL_CLIENT_AUTHENTICATION = FALSE 
+   SSL_VERSION = 1.0 
+   SSL_CIPHER_SUITES = (SSL_RSA_WITH_AES_256_CBC_SHA) 
+   SSL_SERVER_DN_MATCH = ON
+   ```
+
+1. Run the following commands to create the Oracle wallet:
+
+   ```
+   prompt>orapki wallet create -wallet $ORACLE_HOME/ssl_wallet -auto_login_only   
+   
+   prompt>orapki wallet add -wallet $ORACLE_HOME/ssl_wallet -trusted_cert -cert
+         $ORACLE_HOME/ssl_wallet/rds-ca-2015-root.pem -auto_login_only
+   ```
+
+## Connecting to an Oracle DB Instance Using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
+
+After you configure the Oracle client to use SSL as described preceding, you can connect to the Oracle DB instance with the SSL option\. For example, to connect to the DB instance using SQL\*Plus, use the following command:
+
+```
+sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCPS)(HOST = <endpoint>) (PORT = <ssl port number>))(CONNECT_DATA = (SID = <database name>)))'
+```
+
+You can also connect to the Oracle DB instance without using SSL\. For example, the following command connects to the DB instance through the clear text port without SSL encryption:
+
+```
+sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <endpoint>) (PORT = <port number>))(CONNECT_DATA = (SID = <database name>)))'
+```
+
+If you want to close Transmission Control Protocol \(TCP\) port access, create a security group with no IP address ingresses and add it to the instance\. This addition closes connections over the TCP port, while still allowing connections over the SSL port that are specified from IP addresses within the range permitted by the SSL option security group\.
+
+## Setting Up an SSL Connection Over JDBC<a name="Appendix.Oracle.Options.SSL.JDBC"></a>
+
+To use an SSL connection over JDBC, you must create a keystore, trust the Amazon RDS root CA certificate, and use the code snippet specified below\.
+
+To create the keystore in JKS format, use the following command\. For more information about creating the keystore, see the [Oracle documentation](https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html)\. 
+
+```
+keytool -keystore clientkeystore -genkey -alias client
+```
+
+Next, follow these steps to trust the Amazon RDS root CA certificate:
+
+1.  1\. Download the Amazon RDS root CA certificate from [https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. 
+
+1.  Convert the certificate to DER format using the following command: 
+
+   ```
+   openssl x509 -outform der -in rds-ca-2015-root.pem -out rds-ca-2015-root.der                    
+   ```
+
+1.  Import the certificate into the keystore using the following command: 
+
+   ```
+   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2015-root.der                    
+   ```
+
+The following code snippet shows how to setup the SSL connection using JDBC:
+
+```
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+ 
+public class OracleSslConnectionTest {
+    private static final String DB_SERVER_NAME = "<dns-name-provided-by-amazon-rds>";
+    private static final Integer SSL_PORT = "<ssl-option-port-configured-in-option-group>";
+    private static final String DB_SID = "<oracle-sid>";
+    private static final String DB_USER = "<user name>";
+    private static final String DB_PASSWORD = "<password>";
+    // This key store has only the prod root ca: https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem
+    private static final String KEY_STORE_FILE_PATH = "<file-path-to-keystore>";
+    private static final String KEY_STORE_PASS = "<keystore-password>";
+ 
+    public static void main(String[] args) throws SQLException {
+        final Properties properties = new Properties();
+        final String connectionString = String.format(
+                "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST=%s)(PORT=%d))(CONNECT_DATA=(SID=%s)))",
+                DB_SERVER_NAME, SSL_PORT, DB_SID);
+        properties.put("user", DB_USER);
+        properties.put("password", DB_PASSWORD);
+        properties.put("oracle.jdbc.J2EE13Compliant", "true");
+        properties.put("javax.net.ssl.trustStore", KEY_STORE_FILE_PATH);
+        properties.put("javax.net.ssl.trustStoreType", "JKS");
+        properties.put("javax.net.ssl.trustStorePassword", KEY_STORE_PASS);
+        final Connection connection = DriverManager.getConnection(connectionString, properties);
+        // If no exception, that means handshake has passed, and an SSL connection can be opened
+    }
+}
+```
+
+## Enforcing a DN Match with an SSL Connection<a name="Appendix.Oracle.Options.SSL.DNMatch"></a>
+
+The Oracle parameter SSL\_SERVER\_DN\_MATCH can be used to enforce that the distinguished name \(DN\) for the database server matches its service name\. If you enforce the match verifications, then SSL ensures that the certificate is from the server\. If you do not enforce the match verification, then SSL performs the check but allows the connection, regardless if there is a match\. If you do not enforce the match, you allow the server to potentially fake its identify\.
+
+To enforce DN matching, add the DN match property and use the connection string specified below\.
+
+Add the property to the client connection to enforce DN matching:
+
+```
+properties.put("oracle.net.ssl_server_dn_match", "TRUE”);                
+```
+
+Use the following connection string to enforce DN matching when using SSL:
+
+```
+final String connectionString = String.format(
+    "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCPS)(HOST=%s)(PORT=%d))" +
+    "(CONNECT_DATA=(SID=%s))" +
+    "(SECURITY = (SSL_SERVER_CERT_DN = 
+\"C=US,ST=Washington,L=Seattle,O=Amazon.com,OU=RDS,CN=%s\")))",
+    DB_SERVER_NAME, SSL_PORT, DB_SID, DB_SERVER_NAME);
+```
+
+## Related Topics<a name="Appendix.Oracle.Options.SSL.Related"></a>
+
++ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
+
++ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)
