@@ -219,13 +219,15 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same region as you
 
 1. Open the [Amazon RDS Console](https://console.aws.amazon.com/rds/)\. In the upper\-right corner, select the region that contains your Amazon EC2 instance\.
 
-1. Choose **Launch a DB Instance**, and then go through the steps to select options for your DB instance:
+1. In the navigation pane, choose **Instances**\.
 
-   1. On the **Select Engine** page, choose **MySQL** or **MariaDB**, as appropriate\.
+1. Choose **Launch a DB instance**, and then go through the steps to select options for your DB instance:
 
-   1. On the **Do you plan to use this database for production purposes?** page, choose **No** to skip configuring Multi\-AZ deployment and provisioned IOPS storage\.
+   1. On the **Select engine** page, choose **MySQL** or **MariaDB**, as appropriate, and then choose **Next**\.
 
-   1. In the **Instance Specifications** section of the **Specify DB Details** page, specify the DB instance class and allocated storage size that you have determined are appropriate\. Choose **No** for **Multi\-AZ Deployment**\. Specify whether or not to use Provisioned IOPS as you determined in Step 2\. For **DB Engine Version**, choose the version that is compatible with your source MySQL instance, as follows:
+   1. On the **Choose use case** page, choose **Dev/Test – MySQL** to skip configuring Multi\-AZ deployment and provisioned IOPS storage\.
+
+   1. In the **Instance specifications** section of the **Specify DB details** page, specify the DB instance class and allocated storage size that you have determined are appropriate\. Choose **No** for **Multi\-AZ deployment**\. For **Storage type**, specify whether or not to use **Provisioned IOPS \(SSD\)** as you determined in Step 2\. For **DB engine version**, choose the version that is compatible with your source MySQL instance, as follows:
 
       + If your source instance is MySQL 5\.1\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x\.
 
@@ -245,17 +247,17 @@ If your source MySQL 5\.6\.x instance runs a version prior to version 5\.6\.4, o
 
       In the **Settings** section, specify the requested database and user information\. Choose **Next** when you are done\.
 
-   1. In the **Network & Security** section of the **Configure Advanced Settings** page, select the same VPC and VPC security group as for your Amazon EC2 instance\. This approach ensures that your Amazon EC2 instance and your Amazon RDS instance are visible to each other over the network\. Set **Publicly Accessible** to `Yes`\. Your DB instance must be publicly accessible to set up replication with your source database as described later in this topic\. Accept the default values for all other boxes in this section\. 
+   1. In the **Network & Security** section of the **Configure advanced settings** page, select the same VPC and VPC security group as for your Amazon EC2 instance\. This approach ensures that your Amazon EC2 instance and your Amazon RDS instance are visible to each other over the network\. Set **Public accessibility** to `Yes`\. Your DB instance must be publicly accessible to set up replication with your source database as described later in this topic\. Accept the default values for all other boxes in this section\. 
 
-      In the **Database Options** section, specify a database name\. Accept the default values for all other boxes in this section\.
+      In the **Database options** section, specify a database name\. Accept the default values for all other boxes in this section\.
 
-      In the **Backup** section, set the backup retention period to 0\. Accept the default values for all other boxes in this section\.
+      In the **Backup** section, set the backup retention period to **0 days**\. Accept the default values for all other boxes in this section\.
 
-      In the **Maintenance** section, accept the default values for all of the boxes\. Choose **Launch Instance** when you are done\.
+      Accept the default values for the remaining options\. Choose **Launch DB instance** when you are done\.
 
    Do not configure multiple Availability Zones, backup retention, or Read Replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way you want them for the production instance\. For a detailed walkthrough of creating an Amazon RDS MySQL DB instance, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. For a detailed walkthrough of creating an Amazon RDS MariaDB DB instance, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\.
 
-1. Review the default configuration options for the Amazon RDS DB instance\. In the left navigation pane of the Amazon RDS Management Console, choose **Parameter Groups** , and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group does not have the configuration options that you want, find a different one that does, or create a new parameter group\. For more information on creating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. If you decide to use a different parameter group than the default, associate it with your Amazon RDS DB instance\. For more information, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md) or [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
+1. Review the default configuration options for the Amazon RDS DB instance\. In the left navigation pane of the Amazon RDS Management Console, choose **Parameter groups** , and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group does not have the configuration options that you want, find a different one that does, or create a new parameter group\. For more information on creating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. If you decide to use a different parameter group than the default, associate it with your Amazon RDS DB instance\. For more information, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md) or [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
 
 1. Connect to the new Amazon RDS DB instance as the master user, and create the users required to support the administrators, applications, and services that need to access the instance\. The host name for the Amazon RDS DB instance is the **Endpoint** value for this instance without including the port number, for example `mysampledb.claxc2oy9ak1.us-west-2.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 

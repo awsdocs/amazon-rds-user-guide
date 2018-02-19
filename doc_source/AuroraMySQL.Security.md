@@ -105,4 +105,4 @@ You can use the GRANT statement to require SSL connections for specific users ac
  ` GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL ` 
 
 **Note**  
-For more information on SSL connections with MySQL, see the [MySQL documentation](http://dev.mysql.com/doc/refman/5.6/en/ssl-connections.html)\.
+For more information on SSL connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.

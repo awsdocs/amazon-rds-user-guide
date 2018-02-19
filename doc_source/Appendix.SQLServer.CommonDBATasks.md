@@ -11,6 +11,7 @@ When working with a SQL Server DB instance, you can run scripts to modify a newl
 + [Collations and Character Sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
 + [Determining a Recovery Model for Your Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
 + [Dropping a Microsoft SQL Server Database in a Multi\-AZ with Mirroring Deployment](Appendix.SQLServer.CommonDBATasks.DropMirrorDB.md)
++ [Enabling and Disabling Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)
 + [Renaming a Microsoft SQL Server Database in a Multi\-AZ with Mirroring Deployment](Appendix.SQLServer.CommonDBATasks.RenamingDB.md)
 + [Resetting the `db_owner` Role Password](Appendix.SQLServer.CommonDBATasks.ResetPassword.md)
 + [Restoring License\-Terminated DB Instances](Appendix.SQLServer.CommonDBATasks.RestoreLTI.md)

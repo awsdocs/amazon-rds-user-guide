@@ -8,7 +8,7 @@ Amazon RDS supports DB instances running several versions of MySQL\. You can use
 
 + MySQL 5\.5
 
-For more information about minor version suport, see [MySQL on Amazon RDS Versions](#MySQL.Concepts.VersionMgmt)\. 
+For more information about minor version support, see [MySQL on Amazon RDS Versions](#MySQL.Concepts.VersionMgmt)\. 
 
 You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MySQL DB instance\. You can then use the resizing the DB instance, authorizing connections to the DB instance, creating and restoring from backups or snapshots, creating Multi\-AZ secondaries, creating Read Replicas, and monitoring the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\. 
 

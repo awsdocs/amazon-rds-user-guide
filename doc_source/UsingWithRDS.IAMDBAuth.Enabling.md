@@ -21,23 +21,31 @@ Each of these creation workflows has a **Configure Advanced Settings** page, whe
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. From the dashboard, choose either **Instances** or **Clusters**\.
+1. In the navigation pane, choose either **Instances** or **Clusters**\.
 
-1. Choose the DB instance or DB cluster that you want to modify, and then choose **Instance Actions**, **Modify** or **Modify Cluster** as appropriate\.
+1. Choose the DB instance or DB cluster that you want to modify, and then complete one of the following actions:
 
-1. In the **Database Options** section, for **Enable IAM DB Authentication** choose **Yes** \(to enable\) or **No** \(to disable\), and then choose **Continue**\.
+   + For a DB instance, choose **Instance actions**, and then choose **Modify**\.
 
-1. Choose **Modify DB Instance** or **Modify Cluster** as appropriate\.
+   + For a DB cluster, choose **Cluster actions**, and then choose **Modify cluster**\.
+
+1. In the **Database options** section, for **IAM DB Authentication**, choose **Enable IAM DB authorization** or **No** \(to disable\), and then choose **Continue**\.
+
+1. To apply the changes immediately, choose **Apply immediately**\.
+
+1. Choose **Modify DB instance** or **Modify cluster** as appropriate\.
 
 **To restore a DB instance or cluster**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. From the dashboard, choose **Snapshots**\.
+1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the snapshot you want to restore, and then choose **Snapshot Actions**, **Restore Snapshot**\.
+1. Choose the snapshot you want to restore, and then choose **Restore Snapshot** from **Snapshot Actions**\.
 
-1. In the **Database Options** section, go to **Enable IAM DB Authentication** and choose **Yes** \(to enable\) or **No** \(to disable\)\.
+1. In the **Settings** section, type an identifier for the DB instance in **DB Instance Identifier**\.
+
+1. In the **Database options** section, for **IAM DB Authentication**, choose **Enable IAM DB authorization** or **No** \(to disable\)\.
 
 1. Choose **Restore DB Instance**\.
 

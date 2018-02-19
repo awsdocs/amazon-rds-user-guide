@@ -49,7 +49,7 @@ Amazon cloud computing resources are housed in highly available data center faci
 
 Each region contains multiple distinct locations called Availability Zones, or AZs\. Each Availability Zone is engineered to be isolated from failures in other Availability Zones, and to provide inexpensive, low\-latency network connectivity to other Availability Zones in the same region\. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location\. For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you select this option, Amazon automatically provisions and maintains a synchronous standby replica of your DB instance in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to the standby replica to provide data redundancy, failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. 
+You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you select this option, Amazon automatically provisions and maintains a secondary standby DB instance in a different Availability Zone\. Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance to provide data redundancy, failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)\. 
 
 ## Security<a name="Welcome.Concepts.SecurityGroups"></a>
 

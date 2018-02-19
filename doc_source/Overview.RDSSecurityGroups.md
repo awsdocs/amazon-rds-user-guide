@@ -58,6 +58,10 @@ The following diagram shows this scenario\.
 
 For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
 
+## Creating a VPC Security Group<a name="Overview.RDSSecurityGroups.Create"></a>
+
+You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to the DB Instance in the VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup) and [Security Groups](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
+
 ## Associating a Security Group with a DB Instance<a name="Overview.RDSSecurityGroups.Associate"></a>
 
 You can associate a security group with a DB instance by using **Modify** on the RDS console, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\. For security group considerations when you restore a DB instance from a DB snapshot, see [Security Group Considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Security)\.
@@ -71,7 +75,7 @@ DB VPC security groups are deprecated, and they are different from DB security g
 
 We strongly recommend that you delete any DB VPC security groups that you currently use\. If you don't delete your DB VPC security groups, you might encounter unintended behaviors with your RDS DB instances, which can be as severe as losing access to a DB instance\. The unintended behaviors are a result of an action such as an update to a DB instance, an option group, or similar\. Such updates cause RDS to resynchronize the DB VPC security group with the VPC security group\. This resynchronization can result in your security information being overwritten with incorrect and outdated security information\. This result can have a severe impact on your access to your RDS DB instances\.
 
-### How Can I Determine If I Have a DB VPC Security Group?<a name="w3ab1c21c21c19b8"></a>
+### How Can I Determine If I Have a DB VPC Security Group?<a name="w3ab1c21c21c21b8"></a>
 
 Because DB VPC security groups have been deprecated, they don't appear in the RDS console\. However, you can call the [describe\-db\-security\-groups](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-security-groups.html) AWS CLI command or the [DescribeDBSecurityGroups](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html) API action to determine if you have any DB VPC security groups\.
 
@@ -123,13 +127,13 @@ If you run the `DescribeDBSecurityGroups` API action, then you can identify DB V
 </DBSecurityGroup>
 ```
 
-### How Do I Delete a DB VPC Security Group?<a name="w3ab1c21c21c19c10"></a>
+### How Do I Delete a DB VPC Security Group?<a name="w3ab1c21c21c21c10"></a>
 
 Because DB VPC security groups don't appear in the RDS console, you must call the [delete\-db\-security\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-security-group.html) AWS CLI command or the [DeleteDBSecurityGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSecurityGroup.html) API action to delete a DB VPC security group\.
 
 After you delete a DB VPC security group, your DB instances in your VPC continue to be secured by the VPC security group for that VPC\. The DB VPC security group that was deleted was merely a copy of the VPC security group information\.
 
-### Review Your AWS CloudFormation Templates<a name="w3ab1c21c21c19c12"></a>
+### Review Your AWS CloudFormation Templates<a name="w3ab1c21c21c21c12"></a>
 
 Older versions of AWS CloudFormation templates can contain instructions to create a DB VPC security group\. Because DB VPC security groups are not yet fully deprecated, they can still be created\. Make sure that any AWS CloudFormation templates that you use to provision a DB instance with security settings don't also create a DB VPC security group\. Don't use AWS CloudFormation templates that create an RDS `DBSecurityGroup` with an `EC2VpcId` as shown in the following example\.
 

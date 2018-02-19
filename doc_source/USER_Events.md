@@ -165,8 +165,8 @@ The following tables shows the event category and a list of events when a DB clu
 |  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
 |  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
 |  failure  | RDS\-EVENT\-0083 |  Amazon Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.  | 
-|  migration  | RDS\-EVENT\-0076 |  Migration to an Amazon Aurora DB cluster failed\.  | 
-|  migration  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Amazon Aurora DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0076 |  Migration to an Amazon Aurora DB cluster failed\.  | 
+|  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Amazon Aurora DB cluster\.  | 
 
 The following tables shows the event category and a list of events when a DB cluster snapshot is the source type\.
 
@@ -204,8 +204,7 @@ You can specify the type of source you want to be notified of and the Amazon RDS
 
    1. Select **Yes** to enable the subscription\. If you want to create the subscription but to not have notifications sent yet, select **No**\.
 
-   1. Depending on the source type you selected, select the event categories and sources you want to receive event notifications for\.  
-![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Create1.png)
+   1. Depending on the source type you selected, select the event categories and sources you want to receive event notifications for\.
 
    1. Click **Yes, Create**\.
 
@@ -340,14 +339,13 @@ After you have created a subscription, you can change the subscription name, sou
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the Amazon RDS Console navigation pane, click **Event Notification**\. 
+1.  In the Amazon RDS Console navigation pane, click **Event subscriptions**\. 
 
-1.  In the **DB Event Notifications** pane, select the subscription that you want to modify\. 
+1.  In the **Event subscriptions** pane, select the subscription that you want to modify and click **Edit**\. 
 
-1.  Make your changes to the subscription in the lower pane\.  
-![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Modify1.png)
+1.  Make your changes to the subscription in either the **Target** or **Source** sections\.
 
-1. Click **Update**\. The Amazon RDS console indicates that the subscription is being modified\.  
+1. Click **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Modify2.png)
 
 ### CLI<a name="USER_Events.Modifying.CLI"></a>

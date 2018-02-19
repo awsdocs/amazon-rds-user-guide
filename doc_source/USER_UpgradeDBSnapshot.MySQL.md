@@ -16,8 +16,9 @@ You can upgrade manual DB snapshots, which can be encrypted or not encrypted, fr
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose **Upgrade Snapshot**\. During the upgrade process, all snapshot actions except **Upgrade Snapshot** are disabled\. Also, the DB snapshot status changes from **available** to **upgrading**, and then changes to **active** upon completion\. If the DB snapshot can't be upgraded because of snapshot corruption issues, the status changes to **unavailable**\. You can't recover the snapshot from this state\.   
-![\[MySQL Modify DB Snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Upgrade-Snapshot.png)
+1. Choose **Snapshot Actions**, and then choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\. 
+
+1. Choose **Modify Snapshot** to upgrade the snapshot\. During the upgrade process, all snapshot actions are disabled\. Also, the DB snapshot status changes from **available** to **upgrading**, and then changes to **active** upon completion\. If the DB snapshot can't be upgraded because of snapshot corruption issues, the status changes to **unavailable**\. You can't recover the snapshot from this state\. 
 
 ## AWS CLI<a name="USER_UpgradeDBSnapshot.MySQL.CLI"></a>
 

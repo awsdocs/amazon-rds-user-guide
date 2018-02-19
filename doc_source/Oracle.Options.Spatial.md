@@ -53,7 +53,7 @@ There is a brief outage while the `SPATIAL` option is added\. After you add the 
 
    1. For **Engine**, choose **oracle\-ee**\. 
 
-   1. For **Major Engine Version**, choose **11\.2** or **12\.1** for your DB instance\. 
+   1. For **Major engine version**, choose **11\.2** or **12\.1** for your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

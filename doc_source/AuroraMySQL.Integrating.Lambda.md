@@ -44,6 +44,9 @@ lambda_sync (
 )
 ```
 
+**Note**  
+You can use triggers to call Lambda on data\-modifying statements\. Remember that triggers are not executed once per SQL statement, but once per row modified, one row at a time\. Trigger execution is synchronous, and the data\-modifying statement will not return until trigger execution completes\.
+
 #### Parameters for the lambda\_sync Function<a name="AuroraMySQL.Integrating.NativeLambda.lambda_functions.Sync.Parameters"></a>
 
 The `lambda_sync` function has the following parameters\.

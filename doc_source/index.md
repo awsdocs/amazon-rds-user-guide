@@ -1,7 +1,7 @@
 # Amazon Relational Database Service User Guide
 
 -----
-*****Copyright &copy; 2017 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -66,6 +66,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Preview: Using Amazon Performance Insights](USER_PerfInsights.md)
       + [Access Control for Performance Insights](USER_PerfInsights.access-control.md)
       + [Frequently Asked Questions](USER_PerfInsights.FAQ.md)
+      + [Performance Insights Reference](USER_PerfInsights.Reference.md)
    + [Using Amazon RDS Event Notification](USER_Events.md)
    + [Viewing Amazon RDS Events](USER_ListEvents.md)
    + [Amazon RDS Database Log Files](USER_LogAccess.md)
@@ -93,6 +94,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)
    + [Working with DB Security Groups (EC2-Classic Platform)](USER_WorkingWithSecurityGroups.md)
    + [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)
+   + [Using Service-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)
 + [Amazon Virtual Private Cloud (VPCs) and Amazon RDS](USER_VPC.md)
    + [Determining Whether You Are Using the EC2-VPC or EC2-Classic Platform](USER_VPC.FindDefaultVPC.md)
    + [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)
@@ -136,12 +138,13 @@ Amazon's trademarks and trade dress may not be used in
          + [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)
          + [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)
          + [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)
-         + [Exporting Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
+         + [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
          + [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)
       + [Best Practices with Amazon Aurora MySQL](AuroraMySQL.BestPractices.md)
       + [Amazon Aurora MySQL Reference](AuroraMySQL.Reference.md)
       + [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)
          + [Aurora Lab Mode Features](AuroraMySQL.Updates.LabModeFeatures.md)
+         + [Amazon Aurora MySQL Database Engine Updates 2018-02-06](AuroraMySQL.Updates.20180206.md)
          + [Amazon Aurora MySQL Database Engine Updates 2017-12-11](AuroraMySQL.Updates.20171211.md)
          + [Amazon Aurora MySQL Database Engine Updates 2017-11-20](AuroraMySQL.Updates.20171120.md)
          + [Amazon Aurora MySQL Database Engine Updates 2017-10-24](AuroraMySQL.Updates.20171024.md)
@@ -166,7 +169,8 @@ Amazon's trademarks and trade dress may not be used in
          + [MySQL Bugs Fixed by Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.MySQLBugs.md)
    + [Working with Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md)
       + [Migrating Data to Amazon Aurora PostgreSQL](AuroraPostgreSQL.Migrating.md)
-         + [Migrating Data from a PostgreSQL DB Instance to an Amazon Aurora PostgreSQL DB Cluster by Using a DB Snapshot](AuroraPostgreSQL.Migrating.RDSPostgreSQL.md)
+         + [Migrating an RDS PostgreSQL Snapshot to Aurora](AuroraPostgreSQL.Migrating.RDSPostgreSQL.Import.md)
+         + [Migrating Data from a PostgreSQL DB Instance to an Aurora PostgreSQL DB Cluster by Using an Aurora Read Replica](AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.md)
       + [Managing Amazon Aurora PostgreSQL](AuroraPostgreSQL.Managing.md)
       + [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)
       + [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)
@@ -207,6 +211,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Collations and Character Sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
       + [Determining a Recovery Model for Your Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
       + [Dropping a Microsoft SQL Server Database in a Multi-AZ with Mirroring Deployment](Appendix.SQLServer.CommonDBATasks.DropMirrorDB.md)
+      + [Enabling and Disabling Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)
       + [Renaming a Microsoft SQL Server Database in a Multi-AZ with Mirroring Deployment](Appendix.SQLServer.CommonDBATasks.RenamingDB.md)
       + [Resetting the db_owner Role Password](Appendix.SQLServer.CommonDBATasks.ResetPassword.md)
       + [Restoring License-Terminated DB Instances](Appendix.SQLServer.CommonDBATasks.RestoreLTI.md)
@@ -316,5 +321,4 @@ Amazon's trademarks and trade dress may not be used in
    + [Using the Query API](Using_the_Query_API.md)
    + [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)
    + [RDS REST API Reference](RESTReference.md)
-+ [Resources for Amazon RDS](RelatedResources.md)
 + [Document History](WhatsNew.md)

@@ -17,7 +17,7 @@ The following is the retention schedule for Oracle alert logs, audit files, and 
 
 | Log Type | Retention Schedule | 
 | --- | --- | 
-|  Alert Logs  |   The default retention period for alert logs is 30 days\. Amazon RDS may delete alert logs older than 30 days\. Oracle rotates alert logs when they exceed 10MB, at which point they will be unavailable from the Amazon RDS views\.    | 
+|  Alert Logs  |   The text alert log is rotated daily with 30 day retention managed by Amazon RDS\. The XML alert log is retained for at least 7 days and can be accessed using the `ALERTLOG` view\.    | 
 |  Audit Files  |   The default retention period for audit files is 7 days\. Amazon RDS may delete audit files older than 7 days\.    | 
 |  Trace files  |  The default retention period for trace files is 7 days\. Amazon RDS may delete trace files older than 7 days\.    | 
 

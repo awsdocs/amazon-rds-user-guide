@@ -3,7 +3,7 @@
 **Note**  
 Integration with other AWS services is available for Amazon Aurora MySQL version 1\.8 and later\. Some integration features are only available for later versions of Aurora MySQL\. For more information on Aurora versions, see [Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.md)\.
 
-For your Aurora MySQL DB cluster to access other services on your behalf, you must create and configure an AWS Identity and Access Management \(IAM\) role to authorize database users in your DB cluster to access other AWS services\. For more information, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\.
+For your Aurora MySQL DB cluster to access other services on your behalf, create and configure an AWS Identity and Access Management \(IAM\) role\. This role authorizes database users in your DB cluster to access other AWS services\. For more information, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\.
 
 You must also configure your Aurora DB cluster to allow outbound connections to the target AWS service\. For more information, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\.
 
@@ -15,7 +15,7 @@ If you do so, your database users can perform these actions using other AWS serv
 
 + Save data from your DB cluster into text files stored in an Amazon S3 bucket by using the `SELECT INTO OUTFILE S3` statement\. For more information, see [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)\.
 
-+ Export audit log data to Amazon CloudWatch Logs MySQL\. For more information, see [Exporting Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.
++ Export audit log data to Amazon CloudWatch Logs MySQL\. For more information, see [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)\.
 
 + Automatically add or remove Aurora Replicas with Application Auto Scaling\. For more information, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\.
 

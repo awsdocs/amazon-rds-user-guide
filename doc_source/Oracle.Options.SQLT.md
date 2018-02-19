@@ -93,7 +93,7 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
 
    1. For **Engine**, choose the Oracle edition that you want to use\. The SQLT option is supported on all editions\. 
 
-   1. For **Major Engine Version**, choose **11\.2** or **12\.1**\. 
+   1. For **Major engine version**, choose **11\.2** or **12\.1**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

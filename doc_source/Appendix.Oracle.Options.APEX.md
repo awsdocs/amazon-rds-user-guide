@@ -58,9 +58,7 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
 
    1. For **Engine**, choose the Oracle edition that you want to use\. The APEX options are supported on all editions\. 
 
-   1. For **Major Engine Version**, choose **11\.2** or **12\.1**\. 
-
-   1. For **APEX Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.1\.1\.v1 is the default for 11g, and version 4\.2\.6\.v1 is the default for 12c\. 
+   1. For **Major engine version**, choose **11\.2** or **12\.1**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
@@ -69,6 +67,8 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
    + For Oracle 12c, add the **APEX** and **APEX\-DEV** options\.
 
    + For Oracle 11g, first add the **XMLDB** option as a prerequisite, then add the **APEX** and **APEX\-DEV** options\. 
+
+   For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.1\.1\.v1 is the default for 11g, and version 4\.2\.6\.v1 is the default for 12c\. 
 **Important**  
 If you add the APEX options to an existing option group that is already attached to one or more DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
 

@@ -12,7 +12,7 @@ You control when to upgrade your DB instance to a new version supported by Amazo
 
 If your DB instance is using read replication, you must upgrade all of the Read Replicas before upgrading the source instance\. 
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on the size of your DB instance\. 
+If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on the size of your DB instance\. 
 
 ## Major Version Upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Major"></a>
 
@@ -102,21 +102,23 @@ If your MySQL DB instance is currently in use with a production application, you
 
    1. On the console, choose **Instances**, and then choose the DB instance that you want to upgrade\.
 
-   1. Choose **Instance Actions**, and then choose **Create Read Replica**\.
+   1. Choose **Instance actions**, and then choose **Create read replica**\.
 
-   1. Provide a value for **DB Instance Identifier** for your Read Replica and ensure that the DB instance **Class** and other settings match your MySQL 5\.5 DB instance\.
+   1. Provide a value for **DB instance identifier** for your Read Replica and ensure that the **DB instance class** and other settings match your MySQL 5\.5 DB instance\.
 
-   1. Choose **Yes, Create Read Replica**\.
+   1. Choose **Create read replica**\.
 
 1. When the Read Replica has been created and **Status** shows **available**, upgrade the Read Replica to MySQL 5\.6\. 
 
    1. On the console, choose **Instances**, and then choose the Read Replica that you just created\.
 
-   1. Choose **Instance Actions**, and then choose **Modify**\.
+   1. Choose **Instance actions**, and then choose **Modify**\.
 
-   1. For **DB Engine Version**, choose the MySQL 5\.6 version to upgrade to, and then choose **Apply Immediately**\. Choose **Continue**\.
+   1. For **DB engine version**, choose the MySQL 5\.6 version to upgrade to, and then choose **Continue**\.
 
-   1. Choose **Modify DB Instance** to start the upgrade\. 
+   1. For **Scheduling of Modifications**, choose **Apply immediately**\.
+
+   1. Choose **Modify DB instance** to start the upgrade\. 
 
 1. When the upgrade is complete and **Status** shows `available`, verify that the upgraded Read Replica is up to date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the Read Replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up to date\. 
 
@@ -127,13 +129,13 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
 
    1. On the console, choose **Instances**, and then choose the Read Replica that you just upgraded\.
 
-   1. Choose **Instance Actions**, and then choose **Promote Read Replica**\.
+   1. Choose **Instance actions**, and then choose **Promote read replica**\.
 
-   1. Enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
+   1. Choose **Yes** to enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 
       Choose **Continue**\.
 
-   1. Choose **Yes, Promote Read Replica**\.
+   1. Choose **Promote Read Replica**\.
 
 1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 5\.6 DB instance, add Read Replicas, set up Multi\-AZ support, and so on\.
 
@@ -143,17 +145,15 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Instances**, and then choose the DB instance that you want to upgrade\. 
 
-1. Choose the check box for the DB instance that you want to upgrade\. 
+1. Choose **Instance actions**, and then choose **Modify**\. 
 
-1. Choose **Instance Actions**, and then choose **Modify**\. 
+1. For **DB engine version**, choose the new version\.
 
-1. For **DB Engine Version**, choose the new version\.
+1. Choose **Continue**\.
 
-1. To upgrade immediately, select **Apply Immediately**\. To delay the upgrade to the next maintenance window, clear **Apply Immediately**\. 
-
-1. Choose **Continue**\. 
+1. To upgrade immediately, select **Apply immediately**\. To delay the upgrade to the next maintenance window, choose **Apply during the next scheduled maintenance window**\. 
 
 1. Review the modification summary information\. To proceed with the upgrade, choose **Modify DB Instance**\. To cancel the upgrade, choose **Cancel** or **Back**\. 
 

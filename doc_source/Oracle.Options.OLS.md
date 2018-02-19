@@ -32,7 +32,7 @@ After you add the Label Security option, as soon as the option group is active, 
 
    1. For **Engine**, choose **oracle\-ee**\. 
 
-   1. For **Major Engine Version**, choose **12\.1**\. 
+   1. For **Major engine version**, choose **12\.1**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

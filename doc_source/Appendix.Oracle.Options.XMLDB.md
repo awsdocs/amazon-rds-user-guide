@@ -25,7 +25,7 @@ After you add the XML DB option, as soon as the option group is active, XML DB i
 
    1. For **Engine**, choose the edition of Oracle you want to use\. 
 
-   1. For **Major Engine Version**, choose **11\.2**\. 
+   1. For **Major engine version**, choose **11\.2**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

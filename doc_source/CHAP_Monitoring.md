@@ -38,21 +38,19 @@ AWS provides various tools that you can use to monitor Amazon RDS\. You can conf
 
 You can use the following automated monitoring tools to watch Amazon RDS and report when something is wrong:
 
-+ **Amazon CloudWatch Alarms** – Watch a single metric over a time period that you specify, and perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon Simple Notification Service \(Amazon SNS\) topic or Auto Scaling policy\. CloudWatch alarms do not invoke actions simply because they are in a particular state; the state must have changed and been maintained for a specified number of periods\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)\.
-
-+ **Amazon CloudWatch Logs** – Monitor, store, and access your log files from AWS CloudTrail or other sources\. For more information, see [Monitoring Log Files](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchLogs.html) in the *Amazon CloudWatch User Guide*\.
-
-+ **Amazon RDS Enhanced Monitoring** — provides metrics in real time for the operating system that your DB instance or DB cluster runs on\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
-
-+ **Amazon CloudWatch Events** – Match events and route them to one or more target functions or streams to make changes, capture state information, and take corrective action\. For more information, see [What is Amazon CloudWatch Events](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatchEvents.html) in the *Amazon CloudWatch User Guide*\.
-
-+ **AWS CloudTrail Log Monitoring** – Share log files between accounts, monitor CloudTrail log files in real time by sending them to CloudWatch Logs, write log processing applications in Java, and validate that your log files have not changed after delivery by CloudTrail\. For more information, see [Working with CloudTrail Log Files](http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-working-with-log-files.html) in the *AWS CloudTrail User Guide*\. 
-
-  For information on using AWS CloudTrail Log Monitoring with Amazon RDS, see [Logging Amazon RDS API Calls Using AWS CloudTrail](USER_Auditing.md)\.
-
 + **Amazon RDS Events** – Subscribe to Amazon RDS events to be notified when changes occur with a DB instance, DB cluster, DB snapshot, DB cluster snapshot, DB parameter group, or DB security group\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
-+ **Database log files** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS APIs\. You can also query some database log files that are loaded into database tables\. For more information, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
++ **Database log files** – View, download, or watch database log files using the Amazon RDS console or Amazon RDS API actions\. You can also query some database log files that are loaded into database tables\. For more information, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
+
++ **Amazon RDS Enhanced Monitoring** — Look at metrics in real time for the operating system that your DB instance or DB cluster runs on\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
+
+In addition, Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities:
+
++ **Amazon CloudWatch Metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database instance and cluster\. You are not charged additionally for Amazon RDS metrics in CloudWatch\. For more information, see [[ERROR] BAD/MISSING LINK TEXT](#USER_Monitoring)\.
+
++ ** Amazon CloudWatch Alarms** – You can watch a single Amazon RDS metric over a specific time period, and perform one or more actions based on the value of the metric relative to a threshold you set\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)
+
++ **Amazon CloudWatch Logs** – MariaDB, MySQL, and Aurora MySQL enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/) 
 
 ### Manual Monitoring Tools<a name="monitoring_manual_tools"></a>
 
@@ -104,7 +102,7 @@ Another important part of monitoring Amazon RDS involves manually monitoring tho
 
 ## Monitoring with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
-You can monitor DB instance using CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. These statistics are recorded for a period of two weeks, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon RDS metric data is automatically sent to Amazon CloudWatch in 1\-minute periods\. For more information about Amazon CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+You can monitor DB instances using Amazon CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. These statistics are recorded for a period of two weeks, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon RDS metric data is automatically sent to CloudWatch in 1\-minute periods\. For more information about CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
 ### Amazon RDS Metrics and Dimensions<a name="metrics_dimensions"></a>
 
@@ -121,8 +119,7 @@ Metrics are grouped first by the service namespace, and then by the various dime
 1. In the navigation pane, choose **Metrics**\. Choose the **RDS** metric namespace\.  
 ![\[Choose metric namespace\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-01.png)
 
-1. Select a metric dimension, for example, **By Database Class**\.  
-![\[Choose metric dimension\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-02.png)
+1. Select a metric dimension, for example, **By Database Class**\.
 
 1. To sort the metrics, use the column heading\. To graph a metric, select the check box next to the metric\. To filter by resource, choose the resource ID and then choose **Add to search**\. To filter by metric, choose the metric name and then choose **Add to search**\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-03.png)
@@ -143,6 +140,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | Metric | Description | 
 | --- | --- | 
 | BinLogDiskUsage |  The amount of disk space occupied by binary logs on the master\. Applies to MySQL read replicas\. Units: Bytes  | 
+| BufferCacheHitRatio |  The percentage of requests that are served by the buffer cache\. Units: Bytes  | 
 | BurstBalance |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.  Units: Percent  | 
 | CPUUtilization |  The percentage of CPU utilization\. Units: Percent  | 
 | CPUCreditUsage |  \[T2 instances\] The number of CPU credits used by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100% utilization for one minute or an equivalent combination of vCPUs, utilization, and time \(for example, one vCPU running at 50% utilization for two minutes or two vCPUs running at 25% utilization for two minutes\)\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\. Units: Credits \(vCPU\-minutes\)  | 
@@ -184,7 +182,7 @@ Amazon RDS metrics data can be filtered by using any of the dimensions in the fo
 |  DatabaseClass  |  This dimension filters the data you request for all instances in a database class\. For example, you can aggregate metrics for all instances that belong to the database class `db.m1.small`  | 
 |  EngineName  |  This dimension filters the data you request for the identified engine name only\. For example, you can aggregate metrics for all instances that have the engine name `mysql`\.  | 
 
-### Creating CloudWatch Alarms to Monitor Amazon RDS<a name="creating_alarms"></a>
+#### Creating CloudWatch Alarms to Monitor Amazon RDS<a name="creating_alarms"></a>
 
 You can create a CloudWatch alarm that sends an Amazon SNS message when the alarm changes state\. An alarm watches a single metric over a time period you specify, and performs one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon SNS topic or Auto Scaling policy\.
 
@@ -214,58 +212,82 @@ If you use **Create topic** to create a new Amazon SNS topic, the email addresse
 
 + Call [http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)\. For more information, see *[Amazon CloudWatch API Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 
 
-## Viewing DB Instance Metrics<a name="USER_Monitoring"></a>
+## Publishing Database Engine Logs to Amazon CloudWatch Logs<a name="publishing_cloudwatchlogs"></a>
+
+You can configure your Amazon RDS database engine to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage, which you can manage with the CloudWatch Logs Agent\. For example, you can determine when to rotate log records from a host to the log service, so you can access the raw logs when you need to\. 
+
+You can export logs for Amazon RDS MariaDB \(versions 10\.0 and 10\.1\), Amazon RDS MySQL \(versions 5\.6 and 5\.7\), and Aurora MySQL\. 
+
+**Note**  
+You must have a Service Linked Role before you enable log data publishing\. For more information about Service Linked Roles, see the following: [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
+
+For specific requirements for these engines, see the following:
+
++ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
+
++ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
+
++ [[ERROR] BAD/MISSING LINK TEXT](AuroraMySQL.Integrating.CloudWatch.md)
+
+### Configuring CloudWatch Log Integration<a name="integrating_cloudwatchlogs.configure"></a>
+
+To publish your database log files to CloudWatch Logs, choose which logs to publish\. Make this choice in the **Advanced Settings** section when you create a new DB instance\. You can also modify an existing DB instance to begin publishing\. 
+
+![\[Add CloudWatch Logs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AddCWLogs.png)
+
+ After you have enabled publishing, Amazon RDS continuously streams all of the DB instance log records to a log group\. For example, you have a log group `/aws/rds/instance/log type` for each type of log that you publish\. This log group is in the same AWS Region as the database instance that generates the log\.
+
+ After you have published log records, you can use CloudWatch Logs to search and filter the records\. For more information about searching and filtering logs, see [Searching and Filtering Log Data](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html)\. 
+
+### Viewing DB Instance Metrics<a name="USER_Monitoring"></a>
 
 Amazon RDS provides metrics so that you can monitor the health of your DB instances and DB clusters\. You can monitor both DB instance metrics and operating system \(OS\) metrics\.
 
 This section provides details on how you can view metrics for your DB instance using the RDS console and CloudWatch\. For information on monitoring metrics for the operating system of your DB instance in real time using CloudWatch Logs, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
-### Viewing Metrics by Using the Console<a name="USER_Monitoring.CON"></a>
+#### Viewing Metrics by Using the Console<a name="USER_Monitoring.CON"></a>
 
 **To view DB and OS metrics for a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**\.
+1. In the navigation pane, choose **Instances**\.
 
-1. Select the check box to the left of the DB cluster you need information about\. For **Show Monitoring**, choose the option for how you want to view your metrics from these:
+1. Select the check box to the left of the DB you need information about\. For **Show Monitoring**, choose the option for how you want to view your metrics from these:
 
-   + **Show Multi\-Graph View** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
+   + **CloudWatch** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
 
-   + **Show Single Graph View** – Shows a single metric at a time with more detail\. Each metric includes a graph showing the metric monitored over a specific time span\.
+   + **Enhanced monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.
 
-   + **Show Latest Metrics View** – Shows a summary of DB instance metrics without graphs\. **Full Monitoring View** includes an option for full\-screen viewing\.
-
-   + **Enhanced Monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.  
+   + **OS Process list** – Shows details for each process running in the selected instance\.  
 ![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics0.png)
 **Tip**  
-To select the time range of the metrics represented by the graphs, use **Time Range**\.  
-You can choose any graph to bring up a more detailed view of the graph, using which you can apply metric\-specific filters to the metric data\.   
-**Time Range** is not available for the Enhanced Monitoring Dashboard\.
+You can select the time range of the metrics represented by the graphs with the time range drop\-down list\.  
+You can choose any graph to bring up a more detailed view\. You can also apply metric\-specific filters to the data\. 
 
-### DB Instance Metrics<a name="USER_Monitoring.DB"></a>
+#### DB Instance Metrics<a name="USER_Monitoring.DB"></a>
 
 Amazon RDS integrates with CloudWatch metrics to provide a variety of DB instance metrics\. You can view CloudWatch metrics using the RDS console, AWS CLI, or API\.
 
  For a complete list of Amazon RDS metrics, go to [ Amazon RDS Dimensions and Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html) in the *Amazon CloudWatch User Guide*\. 
 
-#### Viewing DB Metrics by Using the CloudWatch CLI<a name="USER_Monitoring.CLI"></a>
+##### Viewing DB Metrics by Using the CloudWatch CLI<a name="USER_Monitoring.CLI"></a>
 
 **Note**  
-The following CLI example requires the CloudWatch command line tools\. For more information on CloudWatch and to download the developer tools, go to the [Amazon CloudWatch product page](https://aws.amazon.com/cloudwatch)\. Note that the `StartTime` and `EndTime` values supplied in this example are for illustrative purposes\. You must substitute appropriate start and end time values for your DB instance\.
+The following CLI example requires the CloudWatch command line tools\. For more information on CloudWatch and to download the developer tools, see the [Amazon CloudWatch product page](https://aws.amazon.com/cloudwatch)\. The `StartTime` and `EndTime` values supplied in this example are for illustrative purposes\. You must substitute appropriate start and end time values for your DB instance\.
 
 **To view usage and performance statistics for a DB instance**
 
-+ Use the CloudWatch command `mon-get-stats` with the following parameters:
++ Use the CloudWatch command `mon-get-stats` with the following parameters\.
 
   ```
   1. PROMPT>mon-get-stats FreeStorageSpace --dimensions="DBInstanceIdentifier=mydbinstance" --statistics= Average 
   2.   --namespace="AWS/RDS" --start-time 2009-10-16T00:00:00 --end-time 2009-10-16T00:02:00
   ```
 
-#### Viewing DB Metrics by Using the CloudWatch API<a name="USER_Monitoring.API"></a>
+##### Viewing DB Metrics by Using the CloudWatch API<a name="USER_Monitoring.API"></a>
 
-Note that the `StartTime` and `EndTime` values supplied in this example are for illustrative purposes\. You must substitute appropriate start and end time values for your DB instance\.
+The `StartTime` and `EndTime` values supplied in this example are for illustrative purposes\. You must substitute appropriate start and end time values for your DB instance\.
 
 **To view usage and performance statistics for a DB instance**
 
@@ -301,7 +323,7 @@ Note that the `StartTime` and `EndTime` values supplied in this example are for 
   14. 	&Signature=<Signature>
   ```
 
-## Related Topics<a name="CHAP_Monitoring.related"></a>
+### Related Topics<a name="CHAP_Monitoring.related"></a>
 
 + [Using Amazon RDS Event Notification](USER_Events.md)
 

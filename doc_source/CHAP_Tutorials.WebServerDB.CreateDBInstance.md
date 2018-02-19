@@ -13,59 +13,63 @@ Before you begin this step, you must have a VPC with both public and private sub
 
 1. Choose **Instances**\.
 
-1. Choose **Launch DB Instance**\.
+1. Choose **Launch DB instance**\.
 
-1. On the **Select Engine** page, shown following, choose the MySQL DB engine, and then choose **Select**\.   
-![\[Select Engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
+1. On the **Select engine** page, shown following, choose **MySQL**, and then choose **Next**\.   
+![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
 
-1. On the **Production** page, below **Dev/Test**, choose **MySQL This instance is intended for use outside of production**, and then choose **Next Step**\.
+1. On the **Choose use case** page, choose **Dev/Test – MySQL**, and then choose **Next**\.
 
-1. On the **Specify DB Details** page, shown following, set these values:
+1. On the **Specify DB details** page, shown following, set these values:
 
-   + **DB Engine Version:** Use the default value\.
+   + **License model:** Use the default value\.
 
-   + **DB Instance Class:** `db.t2.micro`
+   + **DB engine version:** Use the default value\.
 
-   + **Multi\-AZ Deployment:** `No`
+   + **DB instance class:** `db.t2.small`
 
-   + **Storage Type:** `General Purpose (SSD)`
+   + **Multi\-AZ deployment:** `No`
 
-   + **Allocated Storage:** `50 GB`
+   + **Storage type:** `General Purpose (SSD)`
 
-   + **DB Instance Identifier:** `tutorial-db-instance`
+   + **Allocated storage:** `20 GB`
 
-   + **Master Username:** `tutorial_user`
+   + **DB instance identifier:** `tutorial-db-instance`
 
-   + **Master Password:** Choose a password\.
+   + **Master username:** `tutorial_user`
 
-   + **Confirm Password:** Retype the password\.  
-![\[Specify DB Details Panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_08.png)
+   + **Master password:** Choose a password\.
 
-1. Choose **Next Step** and set the following values in the **Configure Advanced Settings** page, shown following:
+   + **Confirm password:** Retype the password\.  
+![\[Specify DB details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_08.png)
 
-   + **VPC:** Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
+1. Choose **Next** and set the following values in the **Configure advanced settings** page:
+
+   + **Virtual Private Cloud \(VPC\):** Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
 **Note**  
 The VPC must have subnets in different availability zones\.
 
-   + **Subnet group:** `Create a new DB Subnet Group`
+   + **Subnet group:** `The subnet group for the VPC`
 
-   + **Publicly Accessible:** `No`
+   + **Public accessibility:** `No`
 
-   + **Availability Zone:** `No Preference`
+   + **Availability zone:** `No Preference`
 
-   + **VPC Security Group\(s\):** Choose an existing security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
+   + **VPC security groups:** Choose an existing security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
 
-   + **Database Name:** `sample`  
+   + **Database name:** `sample`
+
+   Leave the default settings for the other options\.  
 ![\[Configure Advanced Settings Panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_09.png)
 
-1. To create your Amazon RDS MySQL DB instance, choose **Launch DB Instance**\.
+1. To create your Amazon RDS MySQL DB instance, choose **Launch DB instance**\.
 
-1. On the next page, choose **View Your DB Instances** to view your RDS MySQL DB instance\.
+1. On the next page, choose **View DB instances details** to view your RDS MySQL DB instance\.
 
-1. Wait for the status of your new DB instance to show as `available`\. Then choose the selection box to the left of your DB instance to display the DB instance details, shown following\.   
-![\[DB Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_10.png)
+1. Wait for the **DB instance status** of your new DB instance to show as `available`\. Then scroll to the **Connect** section, shown following\.  
+![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_10.png)
 
-   Make note of the endpoint for your DB instance\. This endpoint shows the server name and port that you use to connect your web server to your RDS DB instance\.
+   Make note of the endpoint and port for your DB instance\. You will use this information to connect your web server to your RDS DB instance\.
 
 To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 
 

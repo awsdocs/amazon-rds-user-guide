@@ -22,7 +22,7 @@ You can scale your Aurora PostgreSQL DB cluster by modifying the DB instance cla
 
 ### Maximum Connections to an Aurora PostgreSQL DB Instance<a name="AuroraPostgreSQL.Managing.MaxConnections"></a>
 
-The maximum number of connections allowed to an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\. By default, this value is set to the following equation \(the log function represents log base 2\):
+The maximum number of connections allowed to an Aurora PostgreSQL DB instance is determined by the `max_connections` parameter in the instance\-level parameter group for the DB instance\. By default, this value is set to the following equation:
 
 `LEAST({DBInstanceClassMemory/9531392},5000)`\.
 

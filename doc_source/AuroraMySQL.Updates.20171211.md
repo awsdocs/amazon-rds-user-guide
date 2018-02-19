@@ -8,7 +8,7 @@ With version 1\.16 of Aurora, we are using a cluster patching model where all no
 
 Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
 
-## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20170807.ZDP"></a>
+## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20171211.ZDP"></a>
 
 The zero\-downtime patching \(ZDP\) attempts, on a *best\-effort* basis, to preserve client connections through an engine patch\. If ZDP executes successfully, application sessions are preserved and the database engine restarts while patching\. The database engine restart can cause a transient \(5 second or so\) drop in throughput\.
 

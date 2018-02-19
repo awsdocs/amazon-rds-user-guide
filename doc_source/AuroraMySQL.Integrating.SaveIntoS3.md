@@ -18,7 +18,7 @@ For more information about DB cluster parameters, see [Amazon Aurora DB Cluster 
 The database user that issues the `SELECT INTO OUTFILE S3` statement must be granted the `SELECT INTO S3` privilege to issue the statement\. The master user name for a DB cluster is granted the `SELECT INTO S3` privilege by default\. You can grant the privilege to another user by using the following statement\.
 
 ```
-GRANT SELECT INTO S3 ON *.* TO user@domain-or-ip-address
+GRANT SELECT INTO S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
 The `SELECT INTO S3` privilege is specific to Amazon Aurora MySQL and is not available for MySQL databases or RDS MySQL DB instances\. If you have set up replication between an Aurora MySQL DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT SELECT INTO S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS MySQL DB instance, use the [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md) statement\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter ](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.

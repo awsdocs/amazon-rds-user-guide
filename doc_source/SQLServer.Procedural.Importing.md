@@ -22,7 +22,7 @@ Using \.bak files to back up and restore databases is heavily optimized, and is 
 
 + Store and transfer backup files into and out of Amazon RDS through Amazon S3, giving you an added layer of protection for disaster recovery\. 
 
-Native backup and restore is available in all AWS Regions, and for both Single\-AZ and Multi\-AZ DB instances\. Native backup and restore is available for all editions of Microsoft SQL Server supported on Amazon RDS, and for both the License Included and the Bring Your Own License models\. 
+Native backup and restore is available in all AWS Regions, and for both Single\-AZ and Multi\-AZ DB instances\. Native backup and restore is available for all editions of Microsoft SQL Server supported on Amazon RDS\. 
 
 The following are some limitations to using native backup and restore: 
 
@@ -179,37 +179,68 @@ There are stored procedures for backing up your database, restoring your databas
 To back up your database, you call the `rds_backup_database` stored procedure\. 
 
 **Note**  
-You can't back up a database during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
+You can't back up a database during the maintenance window, or when Amazon RDS is taking a snapshot\. 
 
-The following parameters are required: 
+**The following parameters are required: **
 
-+ **`@source_db_name`** – The name of the database to create a backup of\. 
++ **`@source_db_name`** – The name of the database to back up
 
-+ **`@s3_arn_to_backup_to`** – The Amazon S3 bucket to save the backup file in, and the name of the file\. The file can have the extension `.bak`, or any extension you want\. 
++ **`@s3_arn_to_backup_to`** – The bucket to use for the backup, plus the name of the file \(Amazon S3 bucket \+ key ARN\)\. 
 
-The following parameters are optional: 
+  The file can have any extension, but `.bak` is traditional\. 
 
-+ **`@kms_master_key_arn`** – If you want to encrypt the backup file, the key to use to encrypt the file\. For more information about encryption keys, see [ Getting Started ](http://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
+**The following parameters are optional: **
 
-+ **`@overwrite_S3_backup_file`** – Whether or not to overwrite the backup file if it already exists in the Amazon S3 bucket\. Specify `1` to overwrite the existing file\. This overwrites any file in the bucket with the specified name, whether it is a backup file or another type of file\. Specify `0` to not overwrite the existing file, and return an error instead if the file already exists\. The default is `0`\. 
++ **`@kms_master_key_arn`** – The key to encrypt the backup \(KMS customer master key ARN\)\. 
 
-**Example Without Encryption**  
+  For more information about encryption keys, see [ Getting Started ](http://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
+
++ **`@overwrite_S3_backup_file`** – Defaults to `0`
+
+  + `0` – Don't overwrite the existing file\. Return an error instead if the file already exists\. 
+
+  + `1` – Overwrite an existing file that has the specified name, even if it isn't a backup file\. 
+
++ **`@type`** – Defaults to `differential`, not case sensitive
+
+  + `differential` – Take a differential backup\.
+
+  + `full` – Take a full backup\.
+
+**Example Differential Backup without Encryption**  
 
 ```
 1. exec msdb.dbo.rds_backup_database 
 2.         @source_db_name='database_name', 
 3.         @s3_arn_to_backup_to='arn:aws:s3:::bucket_name/file_name_and_extension',
-4.         @overwrite_S3_backup_file=1;
+4.         @overwrite_S3_backup_file=1,
+5.         @type='differential';
 ```
 
-**Example With Encryption**  
+**Example Full Backup with Encryption**  
 
 ```
 1. exec msdb.dbo.rds_backup_database 
 2.         @source_db_name='database_name',
 3.         @s3_arn_to_backup_to='arn:aws:s3:::bucket_name/file_name_and_extension',
 4.         @kms_master_key_arn='arn:aws:kms:region:account-id:key/key-id',
-5.         @overwrite_S3_backup_file=1;
+5.         @overwrite_S3_backup_file=1,
+6.         @type='FULL';
+```
+
+The differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want to take a differential backup, and a snapshot exists, make another full backup before proceeding with the differential\. 
+
+You can look for the last full backup or snapshot using the following sample SQL: 
+
+```
+select top 1 
+    database_name
+    , backup_start_date
+    , backup_finish_date 
+    from    msdb.dbo.backupset 
+    where   database_name='name-of-database'
+    and     type = 'D' 
+    order by backup_start_date desc;
 ```
 
 ### Restoring a Database<a name="SQLServer.Procedural.Importing.Native.Using.Restore"></a>

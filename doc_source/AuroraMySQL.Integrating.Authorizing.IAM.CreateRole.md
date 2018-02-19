@@ -6,7 +6,7 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 **To create an IAM role to allow Amazon RDS to access AWS services**
 
-1. Open the [IAM Console](https://console.aws.amazon.com/iam/home?#home)\.
+1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
 1. In the navigation pane, choose **Roles**\.
 
@@ -14,7 +14,7 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. Under **AWS service**, choose **RDS**\.
 
-1. Under **Select your use case**, choose **RDS**\.
+1. Under **Select your use case**, choose **RDS – CloudHSM and Directory Service**\.
 
 1. Choose **Next: Permissions**\.
 
@@ -43,3 +43,5 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 1. When it appears in the list, select the policy that you defined earlier in either [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md), [Creating an IAM Policy to Access AWS Lambda Resources](AuroraMySQL.Integrating.Authorizing.IAM.LambdaCreatePolicy.md), or [Allowing Amazon Aurora to Access Amazon CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)\.
 
 1. Choose **Attach policy**\.
+
+1. Complete the steps in [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.

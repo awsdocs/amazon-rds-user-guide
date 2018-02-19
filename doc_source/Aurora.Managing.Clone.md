@@ -40,28 +40,25 @@ The following scenarios illustrate how the copy\-on\-write protocol works\.
 
 Data in a source database is stored in pages\. In the following diagram, the source database has four pages\.
 
-![\[ Amazon Aurora source database, before database cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone001.png)
+![\[Amazon Aurora source database, before database cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone001.png)
 
 ### After Database Cloning<a name="Aurora.Managing.Clone.After"></a>
 
 As shown in the following diagram, there are no changes in the source database after database cloning\. Both the source database and the clone database point to the same four pages\. None of the pages has been physically copied, so no additional storage is required\.
 
-![\[ Amazon Aurora source database and clone database, after database
-                        cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone002.png)
+![\[Amazon Aurora source database and clone database, after database cloning\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone002.png)
 
 ### When a Change Occurs on the Source Database<a name="Aurora.Managing.Clone.Protocol.SourceWrite"></a>
 
 In the following example, the source database makes a change to the data in `Page 1`\. Instead of writing to the original `Page 1`, additional storage is used to create a new page, called `Page 1'`\. The source database now points to the new `Page 1'`, and also to `Page 2`, `Page 3`, and `Page 4`\. The clone database continues to point to `Page 1` through `Page 4`\.
 
-![\[ Amazon Aurora source database and clone database, after change occurs
-                        in source database\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone003.png)
+![\[Amazon Aurora source database and clone database, after change occurs in source database\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone003.png)
 
 ### When a Change Occurs on the Clone Database<a name="Aurora.Managing.Clone.Protocol.CloneWrite"></a>
 
 In the following diagram, the clone database has also made a change, this time in `Page 4`\. Instead of writing to the original `Page 4`, additional storage is used to create a new page, called `Page 4'`\. The source database continues to point to `Page 1'`, and also `Page 2` through Page 4, but the clone database now points to `Page 1` through `Page 3`, and also `Page 4'`\.
 
-![\[ Amazon Aurora source database and clone database, after change occurs
-                        on clone database\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone004.png)
+![\[Amazon Aurora source database and clone database, after change occurs on clone database\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraClone004.png)
 
 As shown in the second scenario, after database cloning there is no additional storage required at the point of clone creation\. However, as changes occur in the source database and clone database, only the changed pages are created, as shown in the third and fourth scenarios\. As more changes occur over time in both the source database and clone database, you need incrementally more storage to capture and store the changes\. 
 
@@ -79,9 +76,9 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 
 1. In the navigation pane, choose **Instances**\. Choose the primary instance for the DB cluster that you want to create a clone of\.
 
-1. Choose **Instance Actions**, and then choose **Create Clone**\.
+1. Choose **Instance actions**, and then choose **Create clone**\.
 
-1. In the **Create Clone** pane, type a name for the primary instance of the clone DB cluster as the **DB Instance Identifier**\.
+1. On the **Create Clone** page, type a name for the primary instance of the clone DB cluster as the **DB instance identifier**\.
 
    If you want to, set any other settings for the clone DB cluster\. For information about the different DB cluster settings, see [AWS Management Console](Aurora.CreateInstance.md#Aurora.CreateInstance.Console)\.
 

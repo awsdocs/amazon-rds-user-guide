@@ -47,13 +47,13 @@ The following steps show you how to work with Oracle Statspack on Amazon RDS:
    exec RDSADMIN.RDS_RUN_SPREPORT(<begin snap>,<end snap>);
    ```
 
-   For example, the following Amazon RDS command would create a report based on the interval between Statspack snapshots 1 and 7:
+   For example, the following Amazon RDS command would create a report based on the interval between Statspack snapshots 1 and 2:
 
    ```
-   exec RDSADMIN.RDS_RUN_SPREPORT(1,7);
+   exec RDSADMIN.RDS_RUN_SPREPORT(1,2);
    ```
 
-The file name of the Statspack report that is generated includes the number of the two Statspack snapshots used\. For example, a report file created using Statspack snapshots 1 and 7 would be named ORCL\_spreport\_1\_7\.lst\. You can download the Statspack report by selecting the report in the Log section of the RDS console and clicking **Download** or you can use the trace file procedures explained in [Working with Oracle Trace Files](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles)\. 
+The file name of the Statspack report that is generated includes the number of the two Statspack snapshots used\. For example, a report file created using Statspack snapshots 1 and 2 would be named ORCL\_spreport\_1\_2\.lst\. You can download the Statspack report by selecting the report in the **Log** section of the DB instance details on the RDS console and clicking **Download** or you can use the trace file procedures explained in [Working with Oracle Trace Files](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles)\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/statspack1.png)
 
