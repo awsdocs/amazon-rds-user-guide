@@ -8,9 +8,20 @@ To authenticate to your RDS DB instance, you can use one of the authentication m
 
 + To learn how to authenticate to MySQL using IAM database authentication, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\.
 
-You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. If an endpoint value is `myinstance.123456789012.us-east-1.rds.amazonaws.com:3306`, then you would specify the following values in a MySQL connection string: 
+You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. 
 
-+ For host or host name, specify `myinstance.123456789012.us-east-1.rds.amazonaws.com`
+To find the endpoint for a MySQL DB instance in the AWS Management Console:
+
+1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+
+1. Choose the MySQL DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+
+1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
+
+If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com` and the port value is `3306`, then you would specify the following values in a MySQL connection string:
+
++ For host or host name, specify `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com`
 
 + For port, specify `3306`
 
@@ -30,10 +41,10 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 
 ## Connecting from the MySQL Utility<a name="USER_ConnectToInstance.CLI"></a>
 
-To connect to a DB instance using the MySQL utility, type the following command at a command prompt to connect to a DB instance using the MySQL utility\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. Enter the master user password when prompted\. 
+To connect to a DB instance using the MySQL utility, type the following command at a command prompt to connect to a DB instance using the MySQL utility\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. Enter the master user password when prompted\. 
 
 ```
-mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p
+mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p
 ```
 
 You will see output similar to the following\.
@@ -59,7 +70,7 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 1. Type the following command at a command prompt to connect to a DB instance with SSL using the MySQL utility\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. 
 
    ```
-   mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem
    ```
 
 1. You can require that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. 
@@ -67,13 +78,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
    For MySQL 5\.7 and later:
 
    ```
-   mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-mode=VERIFY_IDENTITY
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-mode=VERIFY_IDENTITY
    ```
 
    For MySQL 5\.6 and earlier:
 
    ```
-   mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert
    ```
 
 1. Enter the master user password when prompted\.

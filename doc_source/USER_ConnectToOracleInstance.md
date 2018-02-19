@@ -22,10 +22,10 @@ You can find the endpoint for a DB instance using the Amazon RDS console or the 
 
    1. Choose **Instances** to display a list of your DB instances\. 
 
-   1. Choose the row for your Oracle DB instance to display the summary information for the DB instance\.   
-![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
+   1. Choose the Oracle DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
 
-   1. Copy the endpoint\. The **Endpoint** field has two parts that are separated by a colon \(:\)\. The part before the colon is the DNS name for the DB instance, and the part following the colon is the port number\. Make sure that you copy both parts\. 
+   1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
+![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
 ### CLI<a name="USER_Endpoint.CLI"></a>
 
@@ -90,8 +90,7 @@ To connect to your DB instance, you need its DNS name and port number\. For info
       ```
 
    1. Click the **execute** icon to run the query\.  
-![\[Running a query in Oracle SQL Developer using the execute
-                                    icon\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-run.png)
+![\[Running a query in Oracle SQL Developer using the execute icon\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-run.png)
 
       SQL Developer returns the database name\.  
 ![\[Query results in Oracle SQL Developer\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-results.png)

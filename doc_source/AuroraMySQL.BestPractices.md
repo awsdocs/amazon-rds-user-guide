@@ -366,6 +366,26 @@ In the output, the `Hash Join Inner table` is the table used to build hash table
 
 For more information about the extended `EXPLAIN` output format, see [Extended EXPLAIN Output Format](https://dev.mysql.com/doc/refman/5.6/en/explain-extended.html) in the MySQL product documentation\.
 
+## Working with Foreign Keys in Aurora MySQL<a name="Aurora.BestPractices.ForeignKeys"></a>
+
+We strongly recommend that you don't run any data definition language \(DDL\) statements when the `foreign_key_checks` variable is set to `0` \(off\)\.
+
+If you need to insert or update rows that require a transient violation of foreign keys, follow these steps:
+
+1. Set `foreign_key_checks` to `0`\.
+
+1. Make your data manipulation language \(DML\) changes\.
+
+1. Make sure that your completed changes don't violate any foreign key constraints\.
+
+1. Set `foreign_key_checks` to `1` \(on\)\.
+
+In addition, follow these other best practices for foreign key constraints:
+
++ Make sure that your client applications don't set the `foreign_key_checks` variable to `0` as a part of the `init_connect` variable\.
+
++ If a restore from a logical backup such as `mysqldump` fails or is incomplete, make sure that `foreign_key_checks` is set to `1` before starting any other operations in the same session\. A logical backup sets `foreign_key_checks` to `0` when it starts\.
+
 ## Related Topics<a name="AuroraMySQL.BestPractices.RelatedTopics"></a>
 
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

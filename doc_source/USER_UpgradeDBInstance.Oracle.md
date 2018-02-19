@@ -117,7 +117,7 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 
 ## AWS Management Console<a name="USER_UpgradeDBInstance.Oracle.Console"></a>
 
-To upgrade an Oracle DB instance by using the AWS Management Console, you follow the same procedure as when you modify the DB instance\. For more detailed instructions, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+To upgrade an Oracle DB instance by using the AWS Management Console, you follow the same procedure as when you modify the DB instance\. To upgrade, change the DB engine version\. For more detailed instructions, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## CLI<a name="USER_UpgradeDBInstance.Oracle.CLI"></a>
 

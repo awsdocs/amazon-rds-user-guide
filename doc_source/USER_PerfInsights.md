@@ -6,6 +6,8 @@ Performance Insights expands on existing Amazon RDS monitoring features to illus
 
 The central metric for Performance Insights is **DB Load**, which represents the average number of active sessions for the database engine\. An *active session* is a connection that has submitted work to the database engine and is waiting for a response from it\. For example, if you submit a SQL query to the database engine, the database session is active while the database engine is processing that query\. 
 
+By combining **DB Load** with *wait event* data you can get a complete picture of the state for an active session\. Wait events vary by database engine\. You can see a list of the most commonly used wait events for Aurora PostgreSQL at [Amazon RDS PostgreSQL Events ](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.Waitevents)\. For a complete list of all PostgreSQL wait events see, [ PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE)\. 
+
 Session information is collected, aggregated, and displayed in the dashboard as the **Average Active Sessions** chart\. The **Average Active Sessions** chart displays the **Max CPU** value as a line, so you can see if active sessions are exceeding it or not\. The **Max CPU** value is determined by the number of **vCPU** \(virtual CPU\) cores for your DB instance\. 
 
 If you find that the load in the **Average Active Sessions** chart is often above the **Max CPU** line and the primary wait state is CPU, the system CPU is overloaded\. In these cases, you might want to throttle connections to the instance, tune any SQL queries with a high CPU load, or consider a larger instance class\. High and consistent instances of any wait state indicate that there might be bottlenecks or resource contention issues that you should resolve, even if the load does not cross the **Max CPU** line\.
@@ -19,6 +21,7 @@ The following video provides an overview of Performance Insights\.
 + [Additional User Interface Features](#USER_PerfInsights.UIcontrols)
 + [Access Control for Performance Insights](USER_PerfInsights.access-control.md)
 + [Frequently Asked Questions](USER_PerfInsights.FAQ.md)
++ [Performance Insights Reference](USER_PerfInsights.Reference.md)
 
 ## Using the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
 

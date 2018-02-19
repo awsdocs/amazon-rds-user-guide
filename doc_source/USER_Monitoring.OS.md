@@ -38,7 +38,7 @@ CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB in
 
 ## Setting Up for and Enabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling"></a>
 
-### Before You Begin<a name="w3ab1c19c25c13b2"></a>
+### Before You Begin<a name="w3ab1c19c23c13b2"></a>
 
 Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring the required permissions using an AWS Identity and Access Management \(IAM\) role\. 
 
@@ -64,7 +64,7 @@ To create the appropriate IAM role to permit Amazon RDS to communicate with the 
 
 1. For **Role Name**, type a name for your role, for example **emaccess**, and then choose **Create role**\.
 
-### Enabling and Disabling Enhanced Monitoring<a name="w3ab1c19c25c13b4"></a>
+### Enabling and Disabling Enhanced Monitoring<a name="w3ab1c19c23c13b4"></a>
 
 You can enable Enhanced Monitoring when you create a DB instance or Read Replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you do not need to reboot your DB instance for the change to take effect\. 
 
@@ -149,15 +149,15 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w3ab1c19c25c17b6"></a>
+### Available OS Metrics<a name="w3ab1c19c23c17b6"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for Amazon Aurora, MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w3ab1c19c25c17b6b4"></a>
+#### Metrics for Amazon Aurora, MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w3ab1c19c23c17b6b4"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w3ab1c19c25c17b6b6"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w3ab1c19c23c17b6b6"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 

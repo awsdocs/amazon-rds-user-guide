@@ -15,7 +15,7 @@ This option can be considerably faster than migrating data using `mysqldump`, be
 **Note**  
 The Amazon S3 bucket and the Amazon Aurora MySQL DB cluster must be in the same region\.
 
-Aurora MySQL doesn't restore everything from your database\. You should save the database schema and values for the following items from your source MySQL or MariaDB database and add them to your restored Aurora MySQL DB cluster after it has been created\.
+Aurora MySQL doesn't restore everything from your database\. You should save the database schema and values for the following items from your source MySQL database and add them to your restored Aurora MySQL DB cluster after it has been created\.
 
 + User accounts
 
@@ -102,58 +102,11 @@ As an alternative, you can manually create the role using the following procedur
 
 **To create an IAM role for Amazon RDS to access Amazon S3**
 
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Complete the steps in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
 
-1. In the navigation pane, choose **Roles**\.
+1. Complete the steps in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
 
-1. Choose **Create New Role**, specify a value for **Role Name** for the new role, and then choose **Next Step**\.
-
-1. Under **AWS Service Roles**, find **Amazon RDS** and choose **Select**\.
-
-1. Don't select a policy to attach in the **Attach Policy** step\. Instead, choose **Next Step**\.
-
-1. Review your role information, and then choose **Create Role**\.
-
-1. In the list of roles, choose the name of your newly created role\. Choose the **Permissions** tab\.
-
-1. Choose **Inline Policies**\. Because your new role has no policy attached, you are prompted to create one\. Click the link to create a new policy\.
-
-1. On the **Set Permissions** page, choose **Custom Policy** and then choose **Select**\.
-
-1. Type a **Policy Name** such as `S3-bucket-policy`\. Add the following code for **Policy Document**, replacing *<bucket name>* with the name of the Amazon S3 bucket that you are allowing access to\.
-
-   As part of the policy document, you can also include a file name prefix\. If you specify a prefix, then Aurora creates the DB cluster using the files in the Amazon S3 bucket that begin with the specified prefix\. If you don't specify a prefix, then Aurora creates the DB cluster using all of the files in the Amazon S3 bucket\.
-
-   To specify a prefix, replace *<prefix>* following with the prefix of your file names\. Include the asterisk \(\*\) after the prefix\. If you don't want to specify a prefix, specify only an asterisk\.
-
-   ```
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Effect": "Allow",
-               "Action": [
-                   "s3:ListBucket",
-                   "s3:GetBucketLocation"
-               ],
-               "Resource": [
-                   "arn:aws:s3:::<bucket name>"
-               ]
-           },
-           {
-               "Effect": "Allow",
-               "Action": [
-                   "s3:GetObject"
-               ],
-               "Resource": [
-                   "arn:aws:s3:::<bucket name>/<prefix>*"
-               ]
-           }
-       ]
-   }
-   ```
-
-1. Choose **Apply Policy**\.
+1. Complete the steps in [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 
 ### Backing Up Files to be Restored as an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup"></a>
 
@@ -237,37 +190,34 @@ You can restore your backup files from your Amazon S3 bucket to create a new Ama
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the RDS dashboard, choose **Restore Aurora DB Cluster from Amazon S3**\.
+1. In the RDS dashboard, choose **Restore from S3** under **Create instance**\.
 
-1. In the **Specify Source Backup Details**, specify the following:    
+1. On the **Select engine** page, choose Amazon Aurora and choose the MySQL\-compatible edition, and choose **Next**\.
+
+1. In the **Specify source backup details**, specify the following:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
-   A typical **Specify Source Backup Details** page looks like the following\.  
+   A typical **Specify source backup details** page looks like the following\.  
 ![\[Amazon Aurora Migrate from an Amazon S3 bucket\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraMigrateS3_01.png)
 
-1. Choose **Next Step**\.
+1. Choose **Next**\.
 
-1. On the **Specify DB Details** page, specify your DB cluster information\. The following table shows settings for a DB instance\.    
+1. On the **Specify DB details** page, specify your DB cluster information\. The following table shows settings for a DB instance\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
-   A typical **Specify DB Details** page looks like the following\.   
-![\[Amazon Aurora Launch DB Instance Wizard DB Instance
-                                    Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch02.png)
+   A typical **Specify DB details** page looks like the following\.   
+![\[Amazon Aurora Launch DB Instance Wizard DB Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch02.png)
 
 1. Confirm your master password, and then choose **Next**\.
 
-1. On the **Configure Advanced Settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
+1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora MySQL DB cluster\. The following table shows the advanced settings for a DB cluster\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Migrating.ExtMySQL.html)
 
-   A typical **Configure Advanced Settings** page looks like the following\.   
-![\[Amazon Aurora Launch DB Instance Wizard Configure Advanced
-                                    Settings\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch03.png)
-
-1. Choose **Launch DB Instance** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
+1. Choose **Launch DB instance** to launch your Aurora DB instance, and then choose **Close** to close the wizard\. 
 
 On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
-To view the newly created cluster, choose the **Clusters** view in the Amazon RDS console\. For more information, see [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)\.
+To view the newly created cluster, choose the **Clusters** view in the Amazon RDS console and choose the cluster\. For more information, see [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)\.
 
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch04.png)
 

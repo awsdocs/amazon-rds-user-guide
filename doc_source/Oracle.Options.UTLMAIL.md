@@ -51,7 +51,7 @@ After you add the UTL\_MAIL option, as soon as the option group is active, UTL\_
 
    1. For **Engine**, choose the edition of Oracle you want to use\. 
 
-   1. For **Major Engine Version**, choose **11\.2** or **12\.1**\. 
+   1. For **Major engine version**, choose **11\.2** or **12\.1**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

@@ -176,8 +176,8 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `max_locks_per_transaction` | Yes | 
 | `max_replication_slots` | Yes | 
 | `max_stack_depth` | Yes | 
-| `max_standby_archive_delay` | Yes | 
-| `max_standby_streaming_delay` | Yes | 
+| `max_standby_archive_delay` | No | 
+| `max_standby_streaming_delay` | No | 
 | `max_wal_senders` | Yes | 
 | `max_worker_processes` | Yes | 
 | `min_parallel_relation_size` | Yes | 
@@ -205,7 +205,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `quote_all_identifiers` | Yes | 
 | `random_page_cost` | Yes | 
 | `rds.force_admin_logging_level` | Yes | 
-| `rds.log_retention_period` | No | 
+| `rds.log_retention_period` | Yes | 
 | `rds.rds_superuser_reserved_connections` | Yes | 
 | `rds.superuser_variables` | No | 
 | `replacement_sort_tuples` | Yes | 
@@ -251,6 +251,30 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `xmlbinary` | Yes | 
 | `xmloption` | Yes | 
 
-## Related Topics<a name="AuroraPostgreSQL.Reference.RelatedTopics"></a>
+## Amazon RDS PostgreSQL Events<a name="AuroraPostgreSQL.Reference.Waitevents"></a>
 
-+ [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
+The following are some common wait events for Aurora PostgreSQL\.
+
+**BufferPin:BufferPin**  
+In this wait event, a session is waiting to access a data buffer during a period when no other session can examine that buffer\. Buffer pin waits can be protracted if another process holds an open cursor which last read data from the buffer in question\.
+
+**Client:ClientRead**  
+In this wait event, a session is receiving data from an application client\. This wait might be prevalent during bulk data loads using the COPY statement, or for applications that pass data to Aurora using many round trips between the client and the database\. A high number of client read waits per transaction may indicate excessive round trips, such as parameter passing\. You should compare this against the expected number of statements per transaction\. 
+
+**IO:DataFilePrefetch**  
+In this wait event, a session is waiting for an asynchronous prefetch from Aurora Storage\. 
+
+**IO:DataFileRead**  
+In this wait event, a session is reading data from Aurora Storage\. This may be a typical wait event for I/O intensive workloads\. SQL statements showing a comparatively large proportion of this wait event compared to other SQL statements may be using an inefficient query plan that requires reading large amounts of data\.
+
+**IO:XactSync**  
+In this wait event, a session is issuing a COMMIT or ROLLBACK, requiring the current transaction’s changes to be persisted\. Aurora is waiting for Aurora storage to acknowledge persistence\.   
+This wait most often arises when there is a very high rate of commit activity on the system\. You can sometimes alleviate this wait by modifying applications to commit transactions in batches\. You might see this wait at the same time as CPU waits in a case where the DB load exceeds the number of virtual CPUs \(vCPUs\) for the DB instance\. In this case, the storage persistence might be competing for CPU with CPU\-intensive database workloads\. To alleviate this scenario, you can try reducing those workloads, or scaling up to a DB instance with more vCPUs\. 
+
+**Lock:transactionid**  
+In this wait event, a session is trying to modify data that has been modified by another session, and is waiting for the other session’s transaction to be committed or rolled back\. You can investigate blocking and waiting sessions in the pg\_locks view\. 
+
+**LWLock:buffer\_content**  
+In this wait event, a session is waiting to read or write a data page in memory while another session has that page locked for writing\. Heavy write contention for a single page \(hot page\), due to frequent updates of the same piece of data by many sessions, could lead to prevalence of this wait event\. Excessive use of foreign key constraints could increase lock duration, leading to increased contention\. You should investigate workloads experiencing high buffer\_content waits for usage of foreign key constraints to determine if the constraints are necessary\. 
+
+For a complete list of PostgreSQL wait events, see [PostgreSQL wait\-event table](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE)\.

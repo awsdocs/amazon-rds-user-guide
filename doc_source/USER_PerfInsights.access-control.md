@@ -14,7 +14,7 @@ In addition, `AmazonRDSFullAccess` contains all the permissions needed for using
 
 ## Using a Custom IAM Policy<a name="USER_PerfInsights.access-control.custom-policy"></a>
 
-You can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
+For users who don’t have full access with the `AmazonRDSFullAccess` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
 
 **To create a custom policy**
 
@@ -46,6 +46,8 @@ You can grant access to Performance Insights by creating or modifying a user\-ma
          ]
      }
      ```
+**Note**  
+Currently, when you enter this policy, the **Visual editor** tab displays a warning that the `pi` resource is not recognized\. You can ignore this warning\.
 
    When the settings are as you want them, choose **Create Policy**\.
 
@@ -58,6 +60,8 @@ You can now attach the policy to an IAM user or role\. The following procedure a
 1. In the left navigation pane, choose **Users**\.
 
 1. Choose an existing user from the list\.
+**Important**  
+To use Performance Insights, the user must have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [AWS Managed \(Predefined\) Policies for Amazon RDS](UsingWithRDS.IAM.AccessControl.IdentityBased.md#UsingWithRDS.IAM.AccessControl.ManagedPolicies)\.
 
 1. On the **Summary** page, choose **Add permissions**\.
 

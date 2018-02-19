@@ -87,7 +87,7 @@ To get an ARN from the AWS Management Console, navigate to the resource you want
 
 ### AWS CLI<a name="USER_Tagging.ARN.CLI"></a>
 
-To get an ARN from the AWS CLI for a particular RDS resource, you use the `describe` command for that resource\. The following table shows each RDS CLI command, and the ARN property used with the command to get an ARN\. 
+To get an ARN from the AWS CLI for a particular RDS resource, you use the `describe` command for that resource\. The following table shows each AWS CLI command, and the ARN property used with the command to get an ARN\. 
 
 
 ****  

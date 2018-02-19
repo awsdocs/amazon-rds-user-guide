@@ -18,11 +18,13 @@ You can modify your DB cluster by using the **Clusters** view of the RDS console
 
 To modify a DB instance that is a member of a DB cluster, use the **Instances** view\.
 
-For example, the following screenshot shows the details page for the DB cluster named `aurora-sample-cluster`\. The DB cluster has one DB instance shown in the **DB Cluster Members** list, named `aurora-sample`\. This instance is the primary instance for the DB cluster\.
+For example, the following image shows the details page for the DB cluster named `aurora-sample-cluster`\. The DB cluster has one DB instance shown in the **DB Cluster Members** list, named `aurora-sample`\. This instance is the primary instance for the DB cluster\.
+
+To view the details page for a DB cluster, choose Clusters in the navigation pane, and then click the name of the DB cluster\.
 
 ![\[Amazon Aurora DB Cluster View\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraView01.png)
 
-If you click the link for the `aurora-sample` DB instance identifier, the Amazon RDS console takes you to the **Instances** view for the `aurora-sample` DB instance as shown in the following screenshot\.
+If you click the link for the `aurora-sample` DB instance identifier, the Amazon RDS console takes you to the **Instances** view for the `aurora-sample` DB instance as shown in the following image\.
 
 ![\[Amazon Aurora DB Instance View\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraView02.png)
 

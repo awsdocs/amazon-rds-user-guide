@@ -4,7 +4,7 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 **To create an IAM policy to grant invoke to your AWS Lambda functions**
 
-1. Open the [IAM Console](https://console.aws.amazon.com/iam/home?#home)\.
+1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
 1. In the navigation pane, choose **Policies**\.
 
@@ -33,3 +33,5 @@ You can repeat this to add corresponding function permission statements to your 
 1. Set **Name** to a name for your IAM policy, for example `AllowAuroraToExampleFunction`\. You use this name when you create an IAM role to associate with your Aurora DB cluster\. You can also add an optional **Description** value\.
 
 1. Choose **Create policy**\.
+
+1. Complete the steps in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.

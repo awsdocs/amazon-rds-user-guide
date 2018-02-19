@@ -14,7 +14,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your MariaDB databases\.
 
-In this example, you create a DB instance running the MariaDB database engine called *east1\-mariadb\-instance1*, with a *db\.t2\.small* DB instance class, 5 GB of storage, and automated backups enabled with a retention period of one day\.
+In this example, you create a DB instance running the MariaDB database engine called *mariadb\-instance1*, with a *db\.t2\.small* DB instance class, 20 GB of storage, and automated backups enabled with a retention period of one day\.
 
 **To create a MariaDB DB instance**
 
@@ -24,27 +24,30 @@ In this example, you create a DB instance running the MariaDB database engine ca
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB Instance**\. The **Launch DB Instance Wizard** opens on the **Select Engine** page\.   
+1. Choose **Launch DB instance**\. The **Launch DB Instance Wizard** opens on the **Select engine** page\.   
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch01.png)
 
-1. On the **Select Engine** page, choose the MariaDB icon, and then choose **Select** for the MariaDB engine\.
+1. Choose the **MariaDB**, and then choose **Next**\.
 
-1. Next, the **Production?** page asks if you plan to use the DB instance you are creating for production\. Because this is an example instance, choose **No**\. When you are finished, choose **Next**\.
+1. The **Choose use case** page asks if you plan to use the DB instance you are creating for production\. Because this is an example instance, choose **Dev/Test \- MariaDB**\. Then, choose **Next**\.
 **Note**  
-If you create a production instance, you typically choose **Yes** on this page to enable the failover option Multi\-AZ and the Provisioned IOPS storage option\.
+If you create a production instance, you typically choose **Production \- MariaDB** on this page to enable the failover option Multi\-AZ and the Provisioned IOPS storage option\.
 
-1. On the **Specify DB Details** page, specify your DB instance information\. The following table shows settings for an example DB instance\. When the settings are as you want them, choose **Next**\.  
+1. On the **Specify DB details** page, specify your DB instance information\. The following table shows settings for an example DB instance\. When the settings are as you want them, choose **Next**\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MariaDB.html)  
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch02.png)
 
-1.  On the **Configure Advanced Settings** page, provide additional information that RDS needs to launch the MariaDB DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Launch DB Instance**\.  
+1.  On the **Configure advanced settings** page, provide additional information that RDS needs to launch the MariaDB DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Launch DB instance**\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MariaDB.html)  
-![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch03.png)
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MariaDB.html)
 
-1. On the RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to a database on the DB instance\. Depending on the DB instance class and store allocated, it can take several minutes for the new DB instance to become available\.   
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch06.png)
+1. Choose **Launch DB instance**\. 
+
+1. Choose **View DB instance details**\. 
+
+   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
+![\[My DB instances details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch06.png)
 
 ## Connecting to a Database on a DB Instance Running the MariaDB Database Engine<a name="CHAP_GettingStarted.Connecting.MariaDB"></a>
 
@@ -52,29 +55,38 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 
  **To connect to a database on a DB instance using the `mysql` command\-line tool** 
 
-Type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name for your DB instance for `<endpoint>`, the master user name you used for `<mymasteruser>`, and provide the master password you used when prompted for a password\.
+1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
 
-```
-PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p <master password>
-```
+   1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-You should see output similar to the following\.
+   1. Choose the MariaDB DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
 
-```
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 272
-Server version: 5.5.5-10.0.17-MariaDB-log MariaDB Server
+   1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to a MariaDB DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
 
-Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+1. Type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`*, the master user name you used for *`<mymasteruser>`*, and provide the master password you used when prompted for a password\.
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+   ```
+   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p <mymastepassword>
+   ```
 
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+   You should see output similar to the following\.
 
-mysql >
-```
+   ```
+   Welcome to the MySQL monitor.  Commands end with ; or \g.
+   Your MySQL connection id is 272
+   Server version: 5.5.5-10.0.17-MariaDB-log MariaDB Server
+   
+   Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+   
+   Oracle is a registered trademark of Oracle Corporation and/or its
+   affiliates. Other names may be trademarks of their respective
+   owners.
+   
+   Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+   
+   mysql >
+   ```
 
 ## Deleting a DB Instance<a name="CHAP_GettingStarted.Deleting.MariaDB"></a>
 
@@ -84,10 +96,12 @@ Once you have connected to the sample DB instance that you created, you should d
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. For **Instances**, choose the DB instance you want to delete\.
+1. In the navigation pane, choose **Instances**\.
 
-1. For **Instance Actions**, choose **Delete**\.
+1. Choose the DB instance you want to delete\.
 
-1.  For **Create final Snapshot?**, choose **No**\.
+1. For **Instance actions**, choose **Delete**\.
 
-1. Choose **Yes, Delete**\. 
+1. For **Create final snapshot?**, choose **No**, and select the acknowledgment\.
+
+1. Choose **Delete**\. 

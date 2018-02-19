@@ -54,15 +54,19 @@ To access the `memcached` interface, an application must specify both the DNS na
 
 1. In the top right corner of the AWS Management Console, select the region that contains the DB instance\.
 
-1. In the navigation pane, click **Instances**\.
+1. In the navigation pane, choose **Instances**\.
 
-1.  Select the arrow to the left of name of the DB Instance running the MySQL database engine\. In the description display, note the value of the **endpoint** field\. The DNS name is the part of the endpoint up to the semicolon \(:\)\. Ignore the semicolon and the port number after the semicolon, that port is not used to access the `memcached` interface\.
+1. Select the DB Instance running the MySQL database engine\.
 
-1. Note the name listed in the **Option Group\(s\)** field\.
+1. Choose **Instance actions**, and then choose **See details** \. to display the details for the DB instance\. 
 
-1. In the navigation pane, click **Option Groups**\.
+1. In the **Connect** section, note the value of the **Endpoint** field\. The DNS name is the same as the endpoint\. Also, note that the port in the **Connect** section is not used to access the `memcached` interface\.
 
-1. Select the arrow to the left of the name of the option group used by the MySQL DB instance\. In the description display, note the value of the **port** setting in the **MEMCACHED** option\.
+1. In the **Details** section, note the name listed in the **Option Group** field\.
+
+1. In the navigation pane, click **Option groups**\.
+
+1. Click the name of the option group used by the MySQL DB instance to show the option group details\. In the **Options** section, note the value of the **Port** setting for the **MEMCACHED** option\.
 
 ## MySQL memcached Option Settings<a name="w3ab1c34c69c15c16"></a>
 

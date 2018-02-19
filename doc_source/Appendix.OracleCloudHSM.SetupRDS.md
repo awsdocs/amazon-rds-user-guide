@@ -140,19 +140,25 @@ To create a IAM role that Amazon RDS uses to access the AWS CloudHSM Classic API
 
 **To create a IAM role for Amazon RDS to access the AWS CloudHSM Classic API**
 
-1.  Open the [IAM Console](https://console.aws.amazon.com//iam/home?#home) at [https://console\.aws\.amazon\.com](https://console.aws.amazon.com/)\.
+1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
 1. In the left navigation pane, click **Roles**\.
 
-1. Click **Create New Role**\.
+1. Click **Create role**\.
 
-1. In the **Role Name** text box, type **RDSCloudHsmAuthorization**\. Currently, you must use this name\. Click **Next Step**\.
+1. Click **AWS Service** and choose **RDS**\.
 
-1. Click **AWS Service Roles**, scroll to **Amazon RDS**, choose **Select**\.
+1. Under **Select your use case**, choose **RDS**\.
 
-1. On the **Attach Policy** page, click **Next Step**\. The correct policy is already attached to this role\.
+1. Choose **Next: Permissions**\.
 
-1. Review the information and then click **Create Role**\.
+1. On the **Attached permissions policy** page, choose **Next: Review**\.
+
+1. In **Role name** on the **Review** page, type **RDSCloudHsmAuthorization**\. Currently, you must use this name\. 
+
+   In **Role description**, you can also type a description for the role\.
+
+1. Review the information and then click **Create role**\.
 
 ### Using Separate AWS CloudHSM Classic and Amazon RDS Accounts for Amazon RDS to Access AWS CloudHSM Classic<a name="Appendix.OracleCloudHSM.SetupRDS.Permissions.TwoAccounts"></a>
 
@@ -166,62 +172,98 @@ To use two accounts, you must have the following:
 
 **To add DB account permission to access AWS CloudHSM Classic resources under the AWS CloudHSM Classic account**
 
-1.  Open the [IAM Console](https://console.aws.amazon.com//iam/home?#home) at [https://console\.aws\.amazon\.com/](https://console.aws.amazon.com/)\. 
+1. Create the IAM policy\.
 
-1. Log in using your DB account\.
+   1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
-1.  In the left navigation pane, choose **Roles**\. 
+   1. Log in using your DB account\.
 
-1.  Choose **Create New Role**\. 
+   1. In the navigation pane, choose **Policies**\.
 
-1.  For **Role Name**, type **RDSCloudHsmAssumeAuthorization**\. Currently, you must use this role name for this approach to work\. Choose **Next Step**\. 
+   1. Choose **Create policy**\.
 
-1.  Choose **AWS Service Roles**, scroll to **Amazon RDS**, choose **Select**\. 
+   1. Choose **JSON** tab\.
 
-1.  On the **Attach Policy** page, do not attach a policy\. Choose **Next Step**\. 
+   1. Copy the following policy information and paste it into the policy text field: 
 
-1.  Review the information, and then choose **Create Role**\. 
+      ```
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "sts:AssumeRole"
+                  ],
+                  "Resource": "*"
+              }
+          ]
+      }
+      ```
 
-1.  For Roles, choose the **RDSCloudHsmAssumeAuthorization** role\. 
+   1. Choose **Review policy**\.
 
-1.  For Permissions, choose **Inline Policies**\. Text appears that provides a link; click **click here**\. 
+   1. In **Name**, type **AssumeRole**\. You can also add an optional **Description** value\.
 
-1.  On the **Set Permissions** page, choose **Custom Policy**, then choose **Select**\. 
+   1. Choose **Create policy**\.
 
-1.  For **Policy Name**, type **AssumeRole**\. 
+1. Create the role\.
 
-1.  For **Policy Document**, type the following policy information: 
+   1. In the navigation pane of the [IAM console](https://console.aws.amazon.com/iam/home?#home), choose **Roles**\.
 
-   ```
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Effect": "Allow",
-               "Action": [
-                   "sts:AssumeRole"
-               ],
-               "Resource": "*"
-           }
-       ]
-   }
-   ```
+   1. Choose **Create role**\.
 
-1.  Choose **Apply Policy**, and then log out of your DB account\. 
+   1. Under **AWS service**, choose **RDS**\.
+
+   1. Under **Select your use case**, choose **RDS**\.
+
+   1. Choose **Next: Permissions**\.
+
+   1. Choose **Next: Review**\.
+
+   1. In **Role name** on the **Review** page, type **RDSCloudHsmAssumeAuthorization**\. Currently, you must use this name\. 
+
+      In **Role description**, you can also type a description for the role\.
+
+   1. Choose **Create Role**\.
+
+1. Attach the policy to the role\.
+
+   1. In the navigation pane of the [IAM console](https://console.aws.amazon.com/iam/home?#home), choose **Roles**\.
+
+   1. In the **Search** field, enter **RDSCloudHsmAssumeAuthorization**, and click the role when it appears in the list\.
+
+   1. On the **Permissions** tab, detach the following default roles from the policy:
+
+      + `AmazonRDSDirectoryServiceAccess`
+
+      + `RDSCloudHsmAuthorizationRole`
+
+      To detach a role, click the **X** associated with the role on the right, and then click **Detach**\.
+
+   1. On the **Permissions** tab, choose **Attach policy**\.
+
+   1. On the **Attach policy** page, enter **AssumeRole** in the **Search** field\.
+
+   1. When it appears in the list, select the **AssumeRole** policy\.
+
+   1. Choose **Attach policy**\.
 
 **To revise the AWS CloudHSM Classic account to trust permission to access AWS CloudHSM Classic resources under the AWS CloudHSM Classic account**
 
-1.  Open the [IAM Console](https://console.aws.amazon.com//iam/home?#home) at [https://console\.aws\.amazon\.com/](https://console.aws.amazon.com/)\. 
+1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
 1.  Log in using your AWS CloudHSM Classic account\. 
 
-1.  In the left navigation pane, choose **Roles**\. 
+1.  In the left navigation pane, choose **Roles**\.
 
-1.  Choose the **RDSCloudHsmAuthorization** role\. This role is the one created for a single account CloudHSM\-RDS\. 
+1. In the **Search** field, enter **RDSCloudHsmAuthorization**, and click the role when it appears in the list\. This role is the one created for a single account CloudHSM\-RDS\.
 
-1.  Choose **Edit Trust Relationship**\. 
+1. Choose the **Trust relationships** tab\.
 
-1.  Add your DB account as a trusted account\. The policy document should look like the following, with your DB account replacing the <*DB\_ACCOUNT\_ID>* placeholder: 
+1. Choose **Edit trust relationship**\. 
+
+1. Add your DB account as a trusted account\. The policy document should look like the following, with your DB account replacing the *<DB\_ACCOUNT\_ID>* placeholder: 
 
    ```
    {
@@ -232,7 +274,7 @@ To use two accounts, you must have the following:
          "Effect": "Allow",
          "Principal": {
            "Service": "rds.amazonaws.com",
-           "AWS":[   "arn:aws:iam::$<DB_ACCOUNT_ID>$:role/RDSCloudHsmAssumeAuthorization"
+           "AWS":[   "arn:aws:iam::<DB_ACCOUNT_ID>:role/RDSCloudHsmAssumeAuthorization"
            ]
          },
          "Action": "sts:AssumeRole"

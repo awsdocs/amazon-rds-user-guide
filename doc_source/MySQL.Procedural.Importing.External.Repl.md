@@ -55,7 +55,7 @@ The permissions required to start replication on an Amazon RDS DB instance are r
        --single-transaction ^
        --compress ^
        --order-by-primary ^
-       -u <local_user> \
+       -u <local_user> ^
        -p<local_password> | mysql ^
            --host=hostname ^
            --port=3306 ^

@@ -23,3 +23,9 @@ In addition to Aurora Replicas, you have the following options for replication w
 + An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\. Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora MySQL, see [Replication with Amazon Aurora MySQL](AuroraMySQL.Replication.md)\.
+
+## Replication with Aurora PostgreSQL<a name="Aurora.Replication.AuroraPostgreSQL"></a>
+
+In addition to Aurora Replicas, you can set up replication between an Amazon RDS PostgreSQL DB instance as the master and an Aurora PostgreSQL DB cluster\. You do so by creating an Aurora Read Replica of an Amazon RDS PostgreSQL DB instance\.
+
+For more information about replication with Aurora PostgreSQL, see [Replication with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Replication.md)\.

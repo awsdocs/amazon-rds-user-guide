@@ -12,7 +12,7 @@ Amazon RDS supports DB instances running several versions and editions of Micros
 
 + SQL Server 2008 R2, version 10\.50\.6529\.0, SP3 QFE, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
 
-For information about licensing options for the different SQL Server versions and editions, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. 
+For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. 
 
 With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running SQL Server can be used inside a VPC\. You can also use SSL to connect to a DB instance running SQL Server, and you can use TDE to encrypt data at rest\. Amazon RDS currently supports Multi\-AZ deployments for SQL Server using SQL Server Mirroring as a high\-availability, failover solution\. 
 
@@ -93,10 +93,8 @@ The following are the latest\-generation DB instance classes supported for Micro
 
 | SQL Server Edition | 2017 and 2016 Support | 2014, 2012, and 2008 R2 Support | 
 | --- | --- | --- | 
-|  Enterprise Edition \(Bring Your Own License\)  |  db\.m4\.large–16xlarge db\.r4\.large–16xlarge db\.t2\.small–large  |  db\.m4\.large–10xlarge db\.r4\.large–8xlarge db\.t2\.small–large  | 
-|  Enterprise Edition \(License Included\)  |  db\.m4\.xlarge–16xlarge db\.r4\.xlarge–16xlarge —  |  db\.m4\.xlarge–10xlarge db\.r4\.xlarge–8xlarge —  | 
-|  Standard Edition \(Bring Your Own License\)  |  db\.m4\.large–16xlarge db\.r4\.large–16xlarge db\.t2\.small–large  |  db\.m4\.large–10xlarge db\.r4\.large–8xlarge db\.t2\.small–large  | 
-|  Standard Edition \(License Included\)  |  db\.m4\.large–16xlarge, except db\.m4\.10xlarge db\.r4\.large–16xlarge —  |  db\.m4\.large–4xlarge db\.r4\.large–8xlarge —  | 
+|  Enterprise Edition |  db\.m4\.xlarge–16xlarge db\.r4\.xlarge–16xlarge —  |  db\.m4\.xlarge–10xlarge db\.r4\.xlarge–8xlarge —  | 
+|  Standard Edition |  db\.m4\.large–16xlarge, except db\.m4\.10xlarge db\.r4\.large–16xlarge —  |  db\.m4\.large–4xlarge db\.r4\.large–8xlarge —  | 
 |  Web Edition  |  db\.m4\.large–4xlarge db\.r4\.large–2xlarge db\.t2\.small–medium  |  db\.m4\.large–4xlarge db\.r4\.large–2xlarge db\.t2\.small–medium  | 
 |  Express Edition  |  — — db\.t2\.micro–medium  |  db\.m1\.small–small — db\.t2\.micro–medium  | 
 
@@ -219,38 +217,6 @@ Amazon RDS supports the following versions of SQL Server 2016:
 
 + Version 13\.00\.2164\.0, RTM CU2, for all editions, and all AWS Regions 
 
-SQL Server 2016 includes many new features, such as the following: 
-
-+ Query store
-
-+ Operational Analytics
-
-+ Temporal tables
-
-+ Always encrypted \(Supported for all editions on 13\.00\.4422\.0 SP1 CU2 and later\.\)
-
-+ JSON support
-
-For the full list of SQL Server 2016 features, see [What's New in SQL Server 2016](https://msdn.microsoft.com/en-us/library/bb500435.aspx) and [SQL Server 2016 Service Pack 1 \(SP1\) Released](https://blogs.msdn.microsoft.com/sqlreleaseservices/sql-server-2016-service-pack-1-sp1-released/) in the Microsoft documentation\. 
-
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
-
-### Microsoft SQL Server 2014 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2014"></a>
-
-Amazon RDS supports the following versions of SQL Server 2014: 
-
-+ Version 12\.00\.5546\.0, SP2 CU5, for all editions and all AWS Regions 
-
-+ Version 12\.00\.5000\.0, SP2, for all editions and all AWS Regions 
-
-+ Version 12\.00\.4422\.0, SP1 CU2, for all editions except Enterprise Edition, and all AWS Regions except Canada \(Central\), and EU \(London\) 
-
-In addition to supported features of SQL Server 2012, Amazon RDS supports the new query optimizer available in SQL Server 2014, and also the delayed durability feature\. 
-
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
-
-SQL Server 2014 supports all the parameters from SQL Server 2012 and uses the same default values\. SQL Server 2014 includes one new parameter, backup checksum default\. For more information, see [How to enable the CHECKSUM option if backup utilities do not expose the option](https://support.microsoft.com/en-us/kb/2656988) in the Microsoft documentation\. 
-
 ### Microsoft SQL Server 2012 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2012"></a>
 
 Amazon RDS supports the following versions of SQL Server 2012: 
@@ -273,7 +239,7 @@ In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the
 
 + Flexible Server Roles
 
-+ Service Broker \(note that Service Broker Endpoints are not supported\)
++ Service Broker is supported, Service Broker endpoints are not supported
 
 + Partially Contained Databases
 
@@ -343,7 +309,145 @@ Amazon RDS supports the following SQL Server 2008 R2 features:
 
 + Spatial and location features
 
-+ Service Broker \(note that Service Broker Endpoints are not supported\)
++ Service Broker is supported, Service Broker endpoints are not supported
+
++ Change Tracking
+
++ Database Mirroring
+
++ The ability to use an Amazon RDS SQL DB instance as a data source for Reporting, Analysis, and Integration Services that are running on a separate server\.
+
+For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+
+## Microsoft SQL Server Engine Version Management<a name="SQLServer.Concepts.General.Patching"></a>
+
+With Amazon RDS, you control when to upgrade your SQL Server DB instance to new versions supported by Amazon RDS\. You can maintain compatibility with specific SQL Server versions, test new versions with your application before deploying in production, and perform version upgrades on your own terms and timelines\. 
+
+Currently, you perform all SQL Server database upgrades manually\. For more information about upgrading a SQL Server DB instance, see [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)\. 
+
+## Change Data Capture Support for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.CDC"></a>
+
+Amazon RDS supports change data capture \(CDC\) for your DB instances running Microsoft SQL Server\. CDC captures changes that are made to the data in your tables, and stores metadata about each change that you can access later\. For more information, see [Change Data Capture](https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/track-data-changes-sql-server#Capture) in the Microsoft documentation\. 
+
+Amazon RDS supports CDC for the following SQL Server editions and versions:
+
++ Microsoft SQL Server Enterprise Edition \(2017, 2016, 2014, 2012, 2008 R2\) 
+
++ Microsoft SQL Server Standard Edition \(2017, 2016 version 13\.00\.4422\.0 SP1 CU2 and later\) 
+
+To use CDC with your Amazon RDS DB instances, first enable or disable CDC at the database level by using RDS\-provided stored procedures\. After that, any user that has the `db_owner` role for that database can use the native Microsoft stored procedures to control CDC on that database\. For more information, see [Enabling and Disabling Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)\. 
+
+You can use CDC and AWS Database Migration Service to enable ongoing replication from SQL Server DB instances\.     
+
+## Microsoft SQL Server 2014 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2014"></a>
+
+Amazon RDS supports the following versions of SQL Server 2014: 
+
++ Version 12\.00\.5546\.0, SP2 CU5, for all editions and all AWS Regions 
+
++ Version 12\.00\.5000\.0, SP2, for all editions and all AWS Regions 
+
++ Version 12\.00\.4422\.0, SP1 CU2, for all editions except Enterprise Edition, and all AWS Regions except Canada \(Central\), and EU \(London\) 
+
+In addition to supported features of SQL Server 2012, Amazon RDS supports the new query optimizer available in SQL Server 2014, and also the delayed durability feature\. 
+
+For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+
+SQL Server 2014 supports all the parameters from SQL Server 2012 and uses the same default values\. SQL Server 2014 includes one new parameter, backup checksum default\. For more information, see [How to enable the CHECKSUM option if backup utilities do not expose the option](https://support.microsoft.com/en-us/kb/2656988) in the Microsoft documentation\. 
+
+## Microsoft SQL Server 2012 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2012"></a>
+
+Amazon RDS supports the following versions of SQL Server 2012: 
+
++ Version 11\.00\.6594\.0, SP3 CU8, for all editions and all AWS Regions 
+
++ Version 11\.00\.6020\.0, SP3, for all editions and all AWS Regions 
+
++ Version 11\.00\.5058\.0, SP2, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
+
++ Version 11\.00\.2100\.60, RTM, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
+
+For more information about SQL Server 2012, see [Features Supported by the Editions of SQL Server 2012](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.110%29.aspx) in the Microsoft documentation\. 
+
+In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the following SQL Server 2012 features: 
+
++ Columnstore indexes \(Enterprise Edition\)
+
++ Online Index Create, Rebuild and Drop for XML, varchar\(max\), nvarchar\(max\), and varbinary\(max\) data types \(Enterprise Edition\)
+
++ Flexible Server Roles
+
++ Service Broker is supported, Service Broker endpoints are not supported
+
++ Partially Contained Databases
+
++ Sequences
+
++ Transparent Data Encryption \(Enterprise Edition only\)
+
++ THROW statement
+
++ New and enhanced spatial types
+
++ UTF\-16 Support
+
++ ALTER ANY SERVER ROLE server\-level permission
+
+For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+
+Some SQL Server parameters have changed in SQL Server 2012\. 
+
++ The following parameters have been removed from SQL Server 2012: `awe enabled`, `precompute rank`, and `sql mail xps`\. These parameters were not modifiable in SQL Server DB Instances and their removal should have no impact on your SQL Server use\. 
+
++ A new `contained database authentication` parameter in SQL Server 2012 supports partially contained databases\. When you enable this parameter and then create a partially contained database, an authorized user's user name and password is stored within the partially contained database instead of in the master database\. For more information about partially contained databases, see [Contained Databases](http://msdn.microsoft.com/en-us/library/ff929071.aspx) in the Microsoft documentation\. 
+
+## Microsoft SQL Server 2008 R2 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2008"></a>
+
+Amazon RDS supports the following versions of SQL Server 2008 R2: 
+
++ Version 10\.50\.6529\.0, SP3 QFE, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
+
++ Version 10\.50\.6000\.34, SP3, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
+
++ Version 10\.50\.2789\.0, SP1, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
+
+For more information about SQL Server 2008 R2, see [Features Supported by the Editions of SQL Server 2008 R2](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.105%29.aspx) in the Microsoft documentation\. 
+
+Amazon RDS supports the following SQL Server 2008 R2 features:
+
++ Core database engine features
+
++ SQL Server development tools:
+
+  + Visual Studio integration
+
+  + IntelliSense
+
++ SQL Server management tools:
+
+  + SQL Server Management Studio \(SMS\)
+
+  + sqlcmd
+
+  + SQL Server Profiler \(client side traces; workaround available for server side\)
+
+  + SQL Server Migration Assistant \(SSMA\)
+
+  + Database Engine Tuning Advisor
+
+  + SQL Server Agent
+
++ Safe CLR
+
++ Full\-text search \(except semantic search\)
+
++ SSL
+
++ Transparent Data Encryption \(Enterprise Edition only\)
+
++ Spatial and location features
+
++ Service Broker is supported, Service Broker endpoints are not supported
 
 + Change Tracking
 
@@ -383,8 +487,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 
 + FILESTREAM support
 
-+ Instant file initialization
-
 + Maintenance Plans
 
 + Performance Data Collector
@@ -393,15 +495,19 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 
 + PolyBase
 
++ R
+
 + Replication
 
 + Resource Governor
 
++ SQL Server Audit
+
 + Server\-level triggers
 
-+ Service Broker or additional T\-SQL endpoints \(all operations using CREATE ENDPOINT are unavailable\)
++ Service Broker endpoints
 
-+ SQL Server Audit
++ T\-SQL endpoints \(all operations using CREATE ENDPOINT are unavailable\)
 
 + WCF Data Services
 
@@ -486,6 +592,7 @@ You can set your local time zone to one of the values listed in the following ta
 | Middle East Standard Time | \(UTC\+02:00\) | Beirut |  | 
 | Mountain Standard Time | \(UTC–07:00\) | Mountain Time \(US and Canada\) |  | 
 | Mountain Standard Time \(Mexico\) | \(UTC–07:00\) | Chihuahua, La Paz, Mazatlan |  | 
+| US Mountain Standard Time | \(UTC–07:00\) | Arizona | This time zone does not observe daylight savings time\. | 
 | New Zealand Standard Time | \(UTC\+12:00\) | Auckland, Wellington |  | 
 | Newfoundland Standard Time | \(UTC–03:30\) | Newfoundland |  | 
 | Pacific SA Standard Time | \(UTC–03:00\) | Santiago |  | 

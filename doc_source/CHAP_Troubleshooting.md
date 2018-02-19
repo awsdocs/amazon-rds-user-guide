@@ -15,6 +15,7 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 + [Amazon RDS Oracle GoldenGate Issues](#CHAP_Troubleshooting.Oracle.GoldenGate)
 + [Cannot Connect to Amazon RDS SQL Server DB Instance](#CHAP_Troubleshooting.SQLServer.Connect)
 + [Cannot Connect to Amazon RDS PostgreSQL DB Instance](#CHAP_Troubleshooting.PostgreSQL.Connect)
++ [Cannot Set Backup Retention Period to 0](#CHAP_Troubleshooting.Backup.Retention)
 
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
@@ -487,3 +488,7 @@ If you can send and receive communications through the port you specified, check
 The most common problem when attempting to connect to a PostgreSQL DB instance is that the security group assigned to the DB instance has incorrect access rules\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about creating a security group for your DB instance, see [Provide Access to the DB Instance in the VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
 
 The most common error is `could not connect to server: Connection timed out`\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through your local firewall\.
+
+## Cannot Set Backup Retention Period to 0<a name="CHAP_Troubleshooting.Backup.Retention"></a>
+
+ There are several reasons why you may need to set the backup retention period to 0\. For example, you can disable automatic backups immediately by setting the retention period to 0\. If you set the value to 0 and receive a message saying that the retention period must be between 1 and 35, check to make sure you haven't setup a read replica for the instance\. Read replicas require backups for managing read replica logs, thus, you can't set the retention period of 0\. 

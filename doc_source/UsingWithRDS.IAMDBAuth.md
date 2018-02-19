@@ -32,14 +32,17 @@ IAM database authentication is available for the following database engines and 
 
 ## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 
-With IAM database authentication, you are limited to a maximum of 20 connections per second\. If you are using a `db.t2.micro` instance class, the limit is 10 connections per second\.
+With IAM database authentication, you are limited to a maximum of 20 new connections per second\. If you are using a `db.t2.micro` instance class, the limit is 10 connections per second\.
 
-The Amazon RDS for MySQL and Aurora MySQL database engines do not impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance or cluster\. If you exceed the maximum connection\-per\-second limit, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can even cause existing connections to drop\.
+The Amazon RDS for MySQL and Aurora MySQL database engines do not impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance or cluster\. If you exceed the maximum new\-connection\-per\-second limit, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can even cause existing connections to drop\.
 
 We recommend the following:
 
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
 
-+ Don't use IAM database authentication if your application requires more than the maximum number of connections\.
++ Don't use IAM database authentication if your application requires more than 20 new connections per second\.
 
 + Use IAM database authentication only for workloads that can be easily retried\.
+
+**Note**  
+For information about the maximum total connections for MySQL, see see [Maximum MySQL connections](USER_ConnectToInstance.md#USER_ConnectToInstance.max_connections)\. For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.md#AuroraMySQL.Managing.MaxConnections)\.

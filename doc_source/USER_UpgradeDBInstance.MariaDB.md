@@ -18,7 +18,7 @@ You control when to upgrade your DB instance to a new version supported by Amazo
 
 If your DB instance is using read replication, you must upgrade all of the Read Replicas before upgrading the source instance\. 
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on your database engine, engine version, and the size of your DB instance\. 
+If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on your database engine, engine version, and the size of your DB instance\. 
 
 ## AWS Management Console<a name="USER_UpgradeDBInstance.MariaDB.Console"></a>
 
@@ -26,19 +26,19 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby r
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to upgrade\. 
 
-1. Choose the check box for the DB instance that you want to upgrade\. 
+1. Choose **Instance actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
 
-1. Choose **Instance Actions**, and then choose **Modify**\. 
+1. For **DB engine version**, choose the new version\.
 
-1. For **DB Engine Version**, choose the new version\.
+1. Choose **Continue** and check the summary of modifications\. 
 
-1. To upgrade immediately, select **Apply Immediately**\. To delay the upgrade to the next maintenance window, clear **Apply Immediately**\. 
+1. To apply the changes immediately, select **Apply immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
-1. Choose **Continue**\. 
+1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 
-1. Review the modification summary information\. To proceed with the upgrade, choose **Modify DB Instance**\. To cancel the upgrade, choose **Cancel** or **Back**\. 
+   Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
 ## CLI<a name="USER_UpgradeDBInstance.MariaDB.CLI"></a>
 

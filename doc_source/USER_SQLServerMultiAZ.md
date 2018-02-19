@@ -153,6 +153,6 @@ You can also view the Availability Zone of the standby mirror using the AWS CLI 
 
 ## Related Topics<a name="USER_SQLServerMultiAZ.related"></a>
 
-+ [Licensing Microsoft SQL Server Multi\-AZ Deployments](SQLServer.Concepts.General.Licensing.md#SQLServer.Concepts.General.Licensing.MAZ)
++ [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)
 
 + [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)

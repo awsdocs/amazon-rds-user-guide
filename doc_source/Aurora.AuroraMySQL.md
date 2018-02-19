@@ -55,13 +55,15 @@ You will get output similar to the following:
 
 ## Amazon Aurora MySQL and Spatial Data<a name="Aurora.AuroraMySQL.Spatial"></a>
 
-Amazon Aurora MySQL supports the same [Spatial Data Types](https://dev.mysql.com/doc/refman/5.6/en/spatial-datatypes.html) and [Spatial Relation Functions](https://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.6\. Aurora MySQL also supports spatial indexing on InnoDB tables, similar to that offered by MySQL 5\.7, which improves query performance on large datasets for queries that use spatial data\. Note that Aurora MySQL uses a different indexing strategy than MySQL, using a space\-filling curve on a B\-tree instead of an R\-tree\.
+Amazon Aurora MySQL supports the same spatial data types and spatial relation functions as the equivalent MySQL release\. For example, Amazon Aurora MySQL 5\.7 supports the same [spatial data types](https://dev.mysql.com/doc/refman/5.7/en/spatial-types.html) and [spatial relation functions](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-object-shapes.html) as MySQL 5\.7\. 
+
+Aurora MySQL also supports spatial indexing on InnoDB tables, similar to that offered by MySQL 5\.7\. Spatial indexing improves query performance on large datasets for queries that use spatial data\. Aurora MySQL uses a different indexing strategy than MySQL, using a space\-filling curve on a B\-tree instead of an R\-tree\.
 
 The following data definition language \(DDL\) statements are supported for creating indexes on columns that use spatial data types\.
 
 ### CREATE TABLE<a name="Aurora.AuroraMySQL.Spatial.create_table"></a>
 
- You can use the SPATIAL INDEX keywords in a CREATE TABLE statement to add a spatial index to a column in a new table\. For example:
+ You can use the SPATIAL INDEX keywords in a CREATE TABLE statement to add a spatial index to a column in a new table\. Following is an example\.
 
 ```
 CREATE TABLE test (shape POLYGON NOT NULL, SPATIAL INDEX(shape)); 
@@ -69,7 +71,7 @@ CREATE TABLE test (shape POLYGON NOT NULL, SPATIAL INDEX(shape));
 
 ### ALTER TABLE<a name="Aurora.AuroraMySQL.Spatial.alter_table"></a>
 
-You can use the SPATIAL INDEX keywords in an ALTER TABLE statement to add a spatial index to a column in an existing table\. For example:
+You can use the SPATIAL INDEX keywords in an ALTER TABLE statement to add a spatial index to a column in an existing table\. Following is an example\.
 
 ```
 ALTER TABLE test ADD SPATIAL INDEX(shape); 
@@ -77,23 +79,56 @@ ALTER TABLE test ADD SPATIAL INDEX(shape);
 
 ### CREATE INDEX<a name="Aurora.AuroraMySQL.Spatial.create_index"></a>
 
-You can also use the SPATIAL keyword in a CREATE INDEX statement to add a spatial index to a column in an existing table\. For example:
+You can use the SPATIAL keyword in a CREATE INDEX statement to add a spatial index to a column in an existing table\. Following is an example\.
 
 ```
 CREATE SPATIAL INDEX shape_index ON test (shape);
 ```
 
-## Comparison of Amazon Aurora MySQL and Amazon RDS for MySQL<a name="Aurora.AuroraMySQL.Compare"></a>
+## Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareReleases"></a>
 
-Although Aurora instances are compatible with MySQL client applications, Aurora has advantages over MySQL as well as limitations to the MySQL features that Aurora supports\. This functionality can influence your decision about whether Amazon Aurora or MySQL on Amazon RDS are the best cloud database for your solution\. The following table shows the differences between Amazon Aurora and Amazon RDS for MySQL\.
+The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, but these features are currently not supported in Aurora MySQL 5\.7\.
 
++ Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 
-| Feature | Amazon Aurora | Amazon RDS for MySQL | 
-| --- | --- | --- | 
-| Read scaling | Supports up to 15 Aurora Replicas with minimal impact on the performance of write operations\. | Supports up to 5 Read Replicas with some impact on the performance of write operations\. | 
-| Failover target | Aurora Replicas are automatic failover targets with no data loss\. | Read Replicas can be manually promoted to the master DB instance with potential data loss\. | 
-| MySQL version | Supports only MySQL version 5\.6\. | Supports MySQL versions 5\.5, 5\.6, and 5\.7\. | 
-| AWS Region | Aurora DB clusters can only be created in the following regions: US East \(N\. Virginia\) \(us\-east\-1\), US East \(Ohio\) \(us\-east\-2\), US West \(N\. California\) \(us\-west\-1\), US West \(Oregon\) \(us\-west\-2\), Canada \(Central\) \(ca\-central\-1\), Asia Pacific \(Mumbai\) \(ap\-south\-1\), Asia Pacific \(Tokyo\) \(ap\-northeast\-1\), Asia Pacific \(Seoul\) \(ap\-northeast\-2\), Asia Pacific \(Sydney\) \(ap\-southeast\-2\), EU \(Frankfurt\) \(eu\-central\-1\), EU \(Ireland\) \(eu\-west\-1\), EU \(London\) \(eu\-west\-2\)\.  | Available in all AWS regions\. | 
-| MySQL storage engine |  Supports only InnoDB\. Tables from other storage engines are automatically converted to InnoDB\. For information on converting existing MySQL tables to InnoDB and importing into an Aurora cluster, see [Migrating Data to an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Migrating.md)\.  Because Amazon Aurora only supports the InnoDB engine, the `NO_ENGINE_SUBSTITUTION` option of the `SQL_MODE` database parameter is enabled\. This disables the ability to create an in\-memory table, unless that table is specified as `TEMPORARY`\.   | Supports both MyISAM and InnoDB\. | 
-| Read Replicas with a different storage engine than the master instance | MySQL \(non\-RDS\) Read Replicas that replicate with an Aurora DB cluster can only use InnoDB\. | Read Replicas can use both MyISAM and InnoDB\. | 
-| Database engine parameters | Some parameters apply to the entire Aurora DB cluster and are managed by DB cluster parameter groups\. Other parameters apply to each individual DB instance in a DB cluster and are managed by DB parameter groups\. For more information, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups)\. | Parameters apply to each individual DB instance or Read Replica and are managed by DB parameter groups\. | 
++ Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
+
++ Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
+
++ Scan batching\. For more information, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
+
++ Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
+
+Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
+
+The performance schema is disabled for Aurora MySQL 5\.7\.
+
+## Comparison of Aurora MySQL 5\.7 and MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareMySQL57"></a>
+
+The following features are supported in MySQL 5\.7\.12 but are currently not supported in Aurora MySQL 5\.7:
+
++ Global transaction identifiers \(GTIDs\)
+
++ Group replication plugin
+
++ Increased page size
+
++ InnoDB buffer pool loading at startup
+
++ InnoDB full\-text parser plugin
+
++ Multisource replication
+
++ Online buffer pool resizing
+
++ Password validation plugin
+
++ Query rewrite plugins
+
++ Replication filtering
+
++ The `CREATE TABLESPACE` SQL statement
+
++ X Protocol
+
+For more information about these features, see the [MySQL 5\.7 documentation](https://dev.mysql.com/doc/refman/5.7/en/)\.

@@ -57,11 +57,11 @@ For each DB instance that you run in a VPC, you should reserve at least one addr
 
 One common Amazon RDS scenario is to have a VPC in which you have an EC2 instance with a public\-facing web application and a DB instance with a database that is not publicly accessible\. For example, you can create a VPC that has a public subnet and a private subnet\. Amazon EC2 instances that function as web servers can be deployed in the public subnet, and the Amazon RDS DB instances are deployed in the private subnet\. In such a deployment, only the web servers have access to the DB instances\. For an illustration of this scenario, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
 
-When you launch a DB instance inside a VPC, you can designate whether the DB instance you create has a DNS that resolves to a public IP address by using the *PubliclyAccessible* parameter\. This parameter lets you designate whether there is public access to the DB instance\. Note that access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance does not permit it\. 
+When you launch a DB instance inside a VPC, you can designate whether the DB instance you create has a DNS that resolves to a public IP address by using the *Public accessibility* parameter\. This parameter lets you designate whether there is public access to the DB instance\. Note that access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance does not permit it\. 
 
-You can modify a DB instance to turn on or off public accessibility by modifying the *PubliclyAccessible* parameter\. This parameter is modified just like any other DB instance parameter\. For more information, see the modifying section for your DB engine\.
+You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* parameter\. This parameter is modified just like any other DB instance parameter\. For more information, see the modifying section for your DB engine\.
 
-The following illustration shows the **Publicly Accessible** option in the **Launch DB Instance Wizard**\. 
+The following illustration shows the **Public accessibility** option in the **Launch DB Instance Wizard**\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/VPC-example4.png)
 
@@ -111,7 +111,7 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Subnet Groups**\.
+1. In the navigation pane, choose **Subnet groups**\.
 
 1. Choose **Create DB Subnet Group**\.
 
@@ -121,10 +121,10 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 1.  For **VPC ID**, choose the VPC that you created\. 
 
-1. In the **Add Subnet\(s\) to this Subnet Group** section, click the **add all the subnets** link\.   
+1. In the **Add Subnet** section, click the **Add all the subnets related to this VPC** link\.   
 ![\[Create DB Subnet Group button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC101.png)
 
-1. Choose **Yes, Create**, and then choose **Close**\. 
+1. Choose **Create**\. 
 
     Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\. 
 
@@ -157,7 +157,7 @@ For details on how to create a DB instance for your DB engine, see the topic fol
 
 You can use the AWS Management Console to easily move your DB instance to a different VPC\. 
 
-For details on how to modify a DB instance for your DB engine, see the topic in the table following that discusses your DB engine\. In the **Network & Security** section of the modify page, shown following, for **Subnet Group**, enter the new subnet group\. The new subnet group must be a subnet group in a new VPC\.  
+For details on how to modify a DB instance for your DB engine, see the topic in the table following that discusses your DB engine\. In the **Network & Security** section of the modify page, shown following, for **Subnet group**, enter the new subnet group\. The new subnet group must be a subnet group in a new VPC\.  
 
 ![\[Modify DB Instance panel Subnet Group section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2-VPC.png)
 

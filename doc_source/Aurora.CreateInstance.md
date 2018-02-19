@@ -54,31 +54,29 @@ The following procedures describe how to use the AWS Management Console to launc
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB Instance** to start the Launch DB Instance wizard\. The wizard opens on the **Select Engine** page\.
+1. Choose **Launch DB instance** to start the Launch DB Instance wizard\. The wizard opens on the **Select engine** page\.
 
-1. On the **Select Engine** page, choose the **Select** button for either the MySQL\-compatible or PostgreSQL\-compatible edition of Aurora\.  
+1. On the **Select Engine** page, choose MySQL 5\.6\-compatible, MySQL 5\.7\-compatible, or PostgreSQL\-compatible edition of Aurora\.  
 ![\[Amazon Aurora Launch DB Instance Wizard Select Engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch01.png)
 
-1. On the **Specify DB Details** page, specify your DB cluster information\. The following table shows settings for a DB instance\.    
+1. Choose **Next**\.
+
+1. On the **Specify DB details** page, specify your DB instance information\. The following table shows settings for a DB instance\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.CreateInstance.html)
 
-   A typical **Specify DB Details** page looks like the following\.   
+   A typical **Specify DB details** page looks like the following\.   
 ![\[Amazon Aurora Launch DB Instance Wizard DB Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch02.png)
 
 1. Confirm your master password and choose **Next**\.
 
-1. On the **Configure Advanced Settings** page, you can customize additional settings for your Aurora DB cluster\. The following table shows the advanced settings for a DB cluster\.     
+1. On the **Configure advanced settings** page, you can customize additional settings for your Aurora DB cluster\. The following table shows the advanced settings for a DB cluster\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.CreateInstance.html)
 
-   A typical **Configure Advanced Settings** page looks like the following\.   
-![\[Amazon Aurora Launch DB Instance Wizard Configure Advanced
-                                Settings\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch03.png)
-
-1. Click **Launch DB Instance** to launch your Aurora DB instance, and then click **Close** to close the wizard\. 
+1. Click **Launch DB instance** to launch your Aurora DB instance, and then click **Close** to close the wizard\. 
 
    On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance will have a status of **creating** until the DB instance is created and ready for use\. When the state changes to available, you can connect to the primary instance for your DB cluster\. Depending on the DB instance class and store allocated, it can take several minutes for the new instance to be available\.
 
-   To view the newly created cluster, choose the **Clusters** view in the Amazon RDS console\. For more information, see [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)\.  
+   To view the newly created cluster, choose the **Clusters** view in the Amazon RDS console and click the DB cluster to show the DB cluster details\. For more information, see [Viewing an Amazon Aurora DB Cluster](Aurora.Viewing.md)\.  
 ![\[Amazon Aurora DB Instances List\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch04.png)
 
    Note the port and the endpoint of the cluster\. Use the endpoint and port of the cluster in your JDBC and ODBC connection strings for any application that performs write or read operations\.
@@ -98,14 +96,10 @@ Amazon Aurora also supports replication with an external database, or an RDS DB 
 
 1. Select the check box to the left of the primary instance for your Aurora DB cluster\.
 
-1. Choose **Instance Actions**, and then choose **Create Aurora Replica**\.
+1. Choose **Instance actions**, and then choose **Create Aurora replica**\.
 
-1. On the Create Aurora Replica page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
+1. On the **Create Aurora replica** page, specify options for your Aurora Replica\. The following table shows settings for an Aurora Replica\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.CreateInstance.html)
-
-   A typical **Create Aurora Replica** page looks like the following\.  
-![\[Amazon Aurora Launch DB Instance Wizard Create Aurora
-                                Replica\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch05.png)
 
 1. Click **Create Aurora Replica** to create the Aurora Replica\.
 
@@ -118,15 +112,41 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
 **To launch an Aurora MySQL DB cluster using the AWS CLI**
 
+When you create an Aurora MySQL DB cluster or DB instance, ensure that you specify the correct value for the `--engine` parameter value based on the MySQL compatibility of the DB cluster or DB instance\.
+
++ When you create an Aurora MySQL 5\.7 DB cluster or DB instance, you must specify `aurora-mysql` for the `--engine` parameter\.
+
++ When you create an Aurora MySQL 5\.6 DB cluster or DB instance, you must specify `aurora` for the `--engine` parameter\.
+
+Complete the following steps:
+
 1. Identify the DB subnet group and VPC security group ID for your new DB cluster, and then call the [create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) AWS CLI command to create the Aurora MySQL DB cluster\.
 
-   For example, the following command creates a new DB cluster named `sample-cluster`\.
+   For example, the following command creates a new MySQL 5\.7–compatible DB cluster named `sample-cluster`\.
+
+   For Linux, OS X, or Unix:
+
+   ```
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql \
+        --engine-version 5.7.12 --master-username user-name --master-user-password password \
+        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+   ```
+
+   For Windows:
+
+   ```
+   aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora-mysql ^
+       --engine-version 5.7.12 --master-username user-name --master-user-password password ^
+       --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
+   ```
+
+   The following command creates a new MySQL 5\.6–compatible DB cluster named `sample-cluster`\.
 
    For Linux, OS X, or Unix:
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora \
-        --master-username user-name --master-user-password password \
+        --engine-version 5.6.10a --master-username user-name --master-user-password password \
         --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
@@ -134,7 +154,7 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
    ```
    aws rds create-db-cluster --db-cluster-identifier sample-cluster --engine aurora ^
-       --master-username user-name --master-user-password password ^
+       --engine-version 5.6.10a --master-username user-name --master-user-password password ^
        --db-subnet-group-name mysubnetgroup --vpc-security-group-ids sg-c7e5b0d2
    ```
 
@@ -142,18 +162,36 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
    Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create the primary instance for your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` parameter value\.
 
+   For example, the following command creates a new MySQL 5\.7–compatible DB instance named `sample-instance`\.
+
    For Linux, OS X, or Unix:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance \
-        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r3.large
+        --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large
    ```
 
    For Windows:
 
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance ^
-        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r3.large
+        --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large
+   ```
+
+   The following command creates a new MySQL 5\.6–compatible DB instance named `sample-instance`\.
+
+   For Linux, OS X, or Unix:
+
+   ```
+   aws rds create-db-instance --db-instance-identifier sample-instance \
+        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large
+   ```
+
+   For Windows:
+
+   ```
+   aws rds create-db-instance --db-instance-identifier sample-instance ^
+        --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large
    ```
 
 **To launch an Aurora PostgreSQL DB cluster using the AWS CLI**
@@ -200,15 +238,17 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 
 After you create the primary instance for a DB cluster, you can create up to 15 Aurora Replicas in your DB cluster to support read\-only queries\.
 
-We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availabilty Zones to improve the availability of your DB cluster\. For more information, see [Availability](Aurora.Overview.md#Aurora.Overview.Availability)\.
+We recommend that you distribute the primary instance and Aurora Replicas in your DB cluster over multiple Availability Zones to improve the availability of your DB cluster\. For more information, see [Availability](Aurora.Overview.md#Aurora.Overview.Availability)\.
 
-Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an Aurora Replica in your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` parameter value\. You can optionally specify an Availability Zone for the Aurora Replica using the `--availability-zone` parameter, as shown in the following example\.
+Call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an Aurora Replica in your DB cluster\. Include the name of the DB cluster as the `--db-cluster-identifier` parameter value\. You can optionally specify an Availability Zone for the Aurora Replica using the `--availability-zone` parameter, as shown in the following examples\.
+
+For example, the following command creates a new MySQL 5\.7–compatible Aurora Replica named `sample-instance-us-west-2a`\.
 
 For Linux, OS X, or Unix:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
-    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r3.large \
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large \
     --availability-zone us-west-2a
 ```
 
@@ -216,7 +256,25 @@ For Windows:
 
 ```
 aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
-    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r3.large ^
+    --db-cluster-identifier sample-cluster --engine aurora-mysql --db-instance-class db.r4.large ^
+    --availability-zone us-west-2a
+```
+
+The following command creates a new MySQL 5\.6–compatible Aurora Replica named `sample-instance-us-west-2a`\.
+
+For Linux, OS X, or Unix:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a \
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large \
+    --availability-zone us-west-2a
+```
+
+For Windows:
+
+```
+aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
+    --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large ^
     --availability-zone us-west-2a
 ```
 

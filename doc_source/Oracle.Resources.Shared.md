@@ -96,7 +96,7 @@ In the following procedure, you add rules to your security group to control inbo
 
 1. In the top\-right corner of the AWS Management Console, confirm that you are in the correct AWS Region for your VPC\. 
 
-1. In the upper\-left corner, choose **VPC Dashboard**, choose **Security Groups**, and then choose your security group, for example **sg\-db\-1**\. 
+1. In the upper\-left corner, choose **VPC Dashboard**, choose **Security Groups**, and then choose your security group, for example **sgdb\-1**\. 
 
 1. At the bottom of the console, choose the **Inbound Rules** tab, and then choose **Edit**\. 
 
@@ -117,30 +117,31 @@ You can use Amazon RDS to host an Oracle DB instance\. In the following procedur
 
 1. In the top\-right corner of the AWS Management Console, choose the AWS Region for your DB instance\. Choose the same AWS Region as your VPC\. 
 
-1. In the upper\-left corner, choose **RDS Dashboard** and then choose **Launch a DB Instance**\. 
+1. Choose **Instances** and then choose **Launch DB instance**\. 
 
-1. On the page **Step 1: Select Engine**, choose **Oracle**, and then choose the **Select** button for the Oracle Database Enterprise Edition\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch01.png)
+1. On the page **Select engine**, choose **Oracle**, and then choose **Oracle Database Enterprise Edition**\.   
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
 
-1. On the page **Step 2: Production?**, choose **Production**, and then choose **Next Step**\. 
+1. Choose **Next**\.
+
+1. On the page **Choose use case**, choose **Production**, and then choose **Next**\. 
 **Note**  
-For a DB instance for development and testing you can choose **Dev/Test**\.
+For a DB instance for development and testing, you can choose **Dev/Test**\.
 
-1. On the page **Step 3: Specify DB Details**, shown following, set these values:  
+1. On the page **Specify DB details**, shown following, set these values:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
 ![\[Specify DB Details form\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-DB.png)
 
-1. Choose **Next Step**\.
+1. Choose **Next**\.
 
-1. On the page **Step 4: Configure Advanced Settings**, shown following, set these values:  
+1. On the page **Configure advanced settings**, shown following, set these values:  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
-![\[Specify DB Details form\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-Advanced.png)
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 
-1. Choose **Launch DB Instance**\.
+1.  On the final page of the wizard, choose **View DB instance details**\. 
 
-   On the RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until it's ready to use\. When the status of the DB instance changes to **available**, you can connect to it\. Depending on the DB instance configuration, it can take several minutes for the new DB instance to become available\. 
+On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it could take several minutes for the new instance to be available\. 
 
 ## Additional Amazon RDS Interfaces<a name="Oracle.Resources.Shared.CLIAPI"></a>
 

@@ -14,7 +14,7 @@ MariaDB writes to the error log only on startup, shutdown, and when it encounter
 
 ## Accessing the MariaDB Slow Query and General Logs<a name="USER_LogAccess.MariaDB.Generallog"></a>
 
-The MariaDB slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
+The MariaDB slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, AWS CLI, or AWS SDKs\.
 
 You can control MariaDB logging by using the parameters in this list:
 
@@ -36,9 +36,9 @@ You can control MariaDB logging by using the parameters in this list:
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
 
-+ When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. If the remaining combined log file size after the deletion exceeds a threshold of 2 percent of a DB instance's allocated space, then the largest log files are deleted until the log file size no longer exceeds the threshold\. 
++ When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
 
-+ When `TABLE` logging is enabled, log tables are rotated every 24 hours if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\.
++ When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\.
 
   When log tables are rotated, the current log table is copied to a backup log table and the entries in the current log table are removed\. If the backup log table already exists, then it is deleted before the current log table is copied to the backup\. You can query the backup log table if needed\. The backup log table for the `mysql.general_log` table is named `mysql.general_log_backup`\. The backup log table for the `mysql.slow_log` table is named `mysql.slow_log_backup`\.
 
@@ -55,6 +55,82 @@ For more information about the slow query and general logs, go to the following 
 + [Slow Query Log](http://mariadb.com/kb/en/mariadb/slow-query-log/)
 
 + [General Query Log](http://mariadb.com/kb/en/mariadb/general-query-log/)
+
+## Publishing MariaDB Logs to CloudWatch Logs<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs"></a>
+
+You can configure your Amazon RDS MariaDB database instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
+
+Amazon RDS publishes each MariaDB database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\.
+
+The following table summarizes the requirements for the various MariaDB logs\.
+
+
+| Log | Requirement | 
+| --- | --- | 
+|  Audit log  |  You must have a custom option group with the option `"MARIDADB_AUDIT_PLUGIN"`  | 
+|  General log  |  You must have a custom parameter group with the option `"general-log = '1'"`  | 
+|  Slow query log  |  You must have a custom parameter group with the option `"slow-query-log = '1'"`  | 
+|  Log in file  |  You must have a custom parameter group with the option `"log-out = 'FILE'"`  | 
+
+**To publish MariaDB logs to CloudWatch Logs from the console**
+
+1. Open the Amazon RDS console
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. For **Instance Actions**, choose **Modify**\.
+
+1. Open the **Log exports** section, and then choose the logs you want to start publishing to CloudWatch Logs\. 
+
+1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
+
+### Publishing Logs to CloudWatch Logs with the CLI<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.CLI"></a>
+
+ You can publish a MariaDB DB log with the AWS CLI\. You can call either the `modify-db-instance` or `create-db-instance` commands with the following parameters: 
+
++ `-- db-instance-identifier`
+
++ `-- cloudwatch-logs-export-configuration`
+
++ `-- apply-immediately`
+
+**Example**  
+The following command modifies an existing MariaDB instance to publish log files to CloudWatch Logs\.  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds modify-dbinstance \
+2.     --db-instance-identifier mydbinstance \
+3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
+4.     --apply-immediately  \
+```
+For Windows:  
+
+```
+1. aws rds modify-dbinstance ^
+2.     --db-instance-identifier mydbinstance ^
+3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
+4.     --apply-immediately  ^
+```
+
+**Example**  
+The following command creates a MariaDB instance to publish log files to CloudWatch Logs\.  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds create-dbinstance \
+2.     --db-instance-identifier mydbinstance \
+3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
+4.     --apply-immediately  \
+```
+For Windows:  
+
+```
+1. aws rds create-dbinstance ^
+2.     --db-instance-identifier mydbinstance ^
+3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
+4.     --apply-immediately  ^
+```
 
 ## Log File Size<a name="USER_LogAccess.MariaDB.LogFileSize"></a>
 
@@ -196,7 +272,7 @@ BEGIN
 COMMIT/*!*/;
 ```
 
-The following statement enables session\-level annotations for this sames transaction, and disables them after committing the transaction:
+The following statement enables session\-level annotations for this same transaction, and disables them after committing the transaction:
 
 ```
 CREATE DATABASE IF NOT EXISTS test;

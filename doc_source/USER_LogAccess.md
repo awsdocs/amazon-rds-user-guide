@@ -17,7 +17,7 @@ For engine\-specific documentation, see the following:
 
 ## Viewing and Listing Database Log Files<a name="USER_LogAccess.Procedural.Viewing"></a>
 
-You can view database log files for your DB engine by using the Amazon RDS console\. You can list what log files are available for download or monitoring by using the Amazon RDS CLI or APIs\. 
+You can view database log files for your DB engine by using the Amazon RDS console\. You can list what log files are available for download or monitoring by using the AWS CLI or Amazon RDS API\. 
 
 **Note**  
  If you cannot view the list of log files for an existing Oracle DB instance, reboot the instance to view the list\. 
@@ -30,7 +30,7 @@ You can view database log files for your DB engine by using the Amazon RDS conso
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file you want to view, and then choose **Instance Actions | See Details**\. 
+1. Choose the DB instance that has the log file you want to view, and then choose **Instance Actions**, **See Details**\. 
 
 1.  Choose the **Recent Events & Logs** tab\. 
 
@@ -56,7 +56,7 @@ To list the available database log files for a DB instance call the Amazon RDS A
 
 You can use the Amazon RDS console or the AWS CLI to download a database log file\. 
 
-You can download a complete log file by using the [DownloadCompleteDBLogFile](RESTReference.md#RESTReference.DownloadCompleteDBLogFile) REST API\. You can also download complete log files by using the `rds-download-db-logfile` RDS CLI command\. For more information, see [ The `rds-download-db-logfile` Command ](RESTReference.md#RESTReference.DownloadCompleteDBLogFile.CLIversion)\. 
+You can download a complete log file by using the [DownloadCompleteDBLogFile](RESTReference.md#RESTReference.DownloadCompleteDBLogFile) REST API\. You can also download complete log files by using the `rds-download-db-logfile` CLI command\. For more information, see [ The `rds-download-db-logfile` Command ](RESTReference.md#RESTReference.DownloadCompleteDBLogFile.CLIversion)\. 
 
 ### AWS Management Console<a name="USER_LogAccess.Procedural.Downloading.CON"></a>
 
@@ -66,7 +66,7 @@ You can download a complete log file by using the [DownloadCompleteDBLogFile](RE
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file you want to view, and then choose **Instance Actions | See Details**\. 
+1. Choose the DB instance that has the log file you want to view, and then choose **Instance Actions**, **See Details**\. 
 
 1. Choose the **Recent Events & Logs** tab\. 
 
@@ -111,11 +111,25 @@ You can monitor the contents of a log file by using the Amazon RDS console\.
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file you want to watch, and then choose **Instance Actions | See Details**\. 
+1. Choose the DB instance that has the log file you want to watch, and then choose **Instance Actions**, **See Details**\. 
 
 1.  Choose the **Recent Events & Logs** tab\. 
 
 1. In the **Logs** pane, choose the **Watch** button next to the log you want to watch\.
+
+## Publishing Database Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
+
+In addition to viewing and downloading DB instance logs, you can also publish logs to Amazon CloudWatch Logs for real\-time analysis\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and you can use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs store your log data in highly durable storage, which you can manage with the CloudWatch Logs Agent\.
+
+AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information about setting a CloudWatch Log retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\. 
+
+ For more information about publishing database logs to CloudWatch Logs, see the following:
+
++ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
+
++ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
+
++ [[ERROR] BAD/MISSING LINK TEXT](AuroraMySQL.Integrating.CloudWatch.md)
 
 ## Related Topics<a name="USER_LogAccess.related"></a>
 

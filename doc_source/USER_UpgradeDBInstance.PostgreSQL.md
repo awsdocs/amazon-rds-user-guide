@@ -22,11 +22,11 @@ ALTER EXTENSION POSTGIS UPDATE TO '2.2.2'
 If your backup retention period is greater than 0, Amazon RDS takes two DB snapshots during both the major and minor upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
 
 **Note**  
-Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)\. 
 
 After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. The primary and standby DB instances are upgraded at the same time, and you experience an outage until the upgrade is complete\. 
+If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time, and you experience an outage until the upgrade is complete\. 
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
@@ -101,7 +101,7 @@ To list all databases on an instance, use the following query:
             AND n.nspname NOT IN ('pg_catalog', 'information_schema');
       ```
 
-1. Perform a `VACUUM` operation before upgrading your instance\. The `pg_upgrade` utility vacuums each database when you upgrade to a different major version\. If you haven't performed a `VACUUM` operation, the upgrade process can take much longer, causing increased downtime for your RDS instance\. 
+   Perform a `VACUUM` operation before upgrading your instance\. The `pg_upgrade` utility vacuums each database when you upgrade to a different major version\. If you haven't performed a `VACUUM` operation, the upgrade process can take much longer, causing increased downtime for your RDS instance\. 
 
 1. Perform a dry run of your major version upgrade\. We highly recommend testing major version upgrade on a duplicate of your production database before attempting it on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or point\-in\-time restore your database to its latest restorable time\. After you have completed the major version upgrade, consider testing your application on the upgraded database with a similar workload in order to verify that everything works as expected\. After the upgrade is verified, you can delete this test instance\. 
 
@@ -114,6 +114,9 @@ You can use Amazon RDS to view two logs that the `pg_upgrade` utility produces: 
 You cannot perform a point\-in\-time restore of your instance to a point in time during the upgrade process\. During the upgrade process, RDS takes an automatic backup of the instance after the upgrade has been performed\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic backup of your instance has completed\. 
 
 The `public` and `template1` databases and the `public` schema in every database on the instance are renamed during the major version upgrade\. These objects will appear in the logs with their original name and a random string appended\. The string is appended so that custom settings such as the `locale` and `owner` are preserved during the major version upgrade\. Once the upgrade completes, the objects are renamed back to their original names\. 
+
+**Note**  
+After you have completed the upgrade, you should run the `ANALYZE` operation to refresh the `pg_statistic` table\.
 
 ## Minor Version Upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
 

@@ -38,9 +38,9 @@ Amazon RDS provides several metrics that you can use to determine how your DB in
 
 General purpose \(SSD\) storage offers cost\-effective storage that is ideal for small or medium\-sized database workloads\. The following are the storage size ranges for General purpose \(SSD\) DB instances: 
 
-+ MySQL, MariaDB, and PostgreSQL DB instances: 5 GiB–16 TiB 
++ MySQL, MariaDB, and PostgreSQL DB instances: 20 GiB–16 TiB 
 
-+ Oracle DB instances: 10 GiB–16 TiB 
++ Oracle DB instances: 20 GiB–16 TiB 
 
 + SQL Server Enterprise and Standard editions: 200 GiB–16 TiB 
 
@@ -61,7 +61,7 @@ When your storage requires more than the base performance I/O level, it uses I/O
 If your storage uses all of its I/O credit balance, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\. 
 
 **Note**  
-Storage conversions between magnetic storage and General Purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 Minutes\) allocated for General Purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approx\. 3,000 IOPS\. The remaining data is converted at the base performance rate of 100 IOPS per GiB of allocated General Purpose \(SSD\) storage\. This approach can result in longer conversion times\. You can provision more General Purpose \(SSD\) storage to increase your base I/O performance rate, thus improving the conversion time, but note that you cannot reduce storage size once it has been allocated\.
+Storage conversions between magnetic storage and General Purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 Minutes\) allocated for General Purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approx\. 3,000 IOPS\. The remaining data is converted at the base performance rate of 3 IOPS per GiB of allocated General Purpose \(SSD\) storage\. This approach can result in longer conversion times\. You can provision more General Purpose \(SSD\) storage to increase your base I/O performance rate, thus improving the conversion time, but note that you cannot reduce storage size once it has been allocated\.
 
 The following table lists several storage sizes\. For each, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
 
@@ -131,7 +131,7 @@ For more information about pricing, see [Amazon RDS Pricing](https://aws.amazon.
 
 Using Provisioned IOPS storage increases the number of I/O requests that the system can process concurrently\. Increased concurrency allows for decreased latency since I/O requests spend less time in a queue\. Decreased latency allows for faster database commits, which improves response time and allows for higher database throughput\. 
 
-For example, consider a heavily loaded OLTP database provisioned for 10,000 Provisioned IOPS that runs consistently at the channel limit of 105 Mbps throughput for reads\. The workload isn’t perfectly balanced, so there is some unused write channel bandwidth\. The instance would consume less than 10,000 IOPS and but would still benefit from increasing capacity to 20,000 Provisioned IOPS\. 
+For example, consider a heavily loaded OLTP database provisioned for 10,000 Provisioned IOPS that runs consistently at the channel limit of 105 Mbps throughput for reads\. The workload isn’t perfectly balanced, so there is some unused write channel bandwidth\. The instance would consume less than 10,000 IOPS but would still benefit from increasing capacity to 20,000 Provisioned IOPS\. 
 
 Increasing Provisioned IOPS capacity from 10,000 to 20,000 doubles the system’s capacity for concurrent I/O\.  Increased concurrency means decreased latency, which allows transactions to complete faster, so the database transaction rate increases\. Read and write latency would improve by different amounts and the system would settle into a new equilibrium based on whichever resource becomes constrained first\. 
 
@@ -257,10 +257,6 @@ The following are Amazon RDS storage limitations:
 
   Although your DB instance is available for reads and writes when adding storage, you might experience degraded performance until the process is complete\. Adding storage might take several hours; the duration of the process depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned\. Typical scale storage time, depending on the size of the source volume, is between one and two hours, but can take up to several days in some cases\. During the scaling process, the DB instance is available for use but might experience performance degradation\. While storage is being added, nightly backups are suspended and no other Amazon RDS operations can take place, including modify, reboot, delete, create Read Replica, and create DB Snapshot\.
 
-   In general, previous generation DB instance classes don't support storage sizes greater than 6 TiB\. The only exception is the db\.m3\.medium instance class, which supports storage up to a maximum of 16 TiB\. 
-
   For more information about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
-**Note**  
-These limitations don't apply to current generation and next generation instance classes\.
 
-+ For any type of instance class \(next generation, current generation, or previous generation\), storage conversions to or from magnetic storage and any other type of storage can take a long time\. Storage conversions between magnetic storage and general purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 minutes\) allocated for general purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approximately 3,000 IOPS\. The remaining data is converted at the base performance rate of 100 IOPS per GiB of allocated general purpose \(SSD\) storage\. This approach can result in longer conversion times\.
++ For any type of instance class \(next generation, current generation, or previous generation\), storage conversions to or from magnetic storage and any other type of storage can take a long time\. Storage conversions between magnetic storage and general purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 minutes\) allocated for general purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approximately 3,000 IOPS\. The remaining data is converted at the base performance rate of 3 IOPS per GiB of allocated general purpose \(SSD\) storage\. This approach can result in longer conversion times\.

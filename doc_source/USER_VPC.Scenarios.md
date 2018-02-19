@@ -30,7 +30,9 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1.  In the navigation pane, choose **Security Groups**\. 
 
-1. Select or create a security group that you want to allow access to members of another security group\. In the scenario above, this would be the security group you will use for your DB instances\. Choose **Add Rule**\.
+1. Select or create a security group for which you want to allow access to members of another security group\. In the scenario above, this would be the security group you will use for your DB instances\. Choose the **Inbound Rules** tab, and then choose **Edit**\.
+
+1. Choose **Add another rule**\.
 
 1. From **Type**, choose **All ICMP**\. In the **Source** box, start typing the ID of the security group; this provides you with a list of security groups\. Select the security group with members that you want to have access to the resources protected by this security group\. In the scenario above, this would be the security group you will use for your EC2 instance\.
 
@@ -52,7 +54,7 @@ The following diagram shows this scenario\.
 
 A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account within a single region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html)\. 
 
- Use the public IP of the DB instance when you need to connect to a DB instance that is in a different VPC and region from your EC2 instance\. The DB instance must allow public access, must be in a public subnet, and the subnet must have an Internet gateway\. Amazon RDS automatically creates a public subnet for your DB instance when you set the **VPC** option to **Create new VPC** and **Publicly Accessible** option to **Yes** when you create the DB instance\. 
+ Use the public IP of the DB instance when you need to connect to a DB instance that is in a different VPC and region from your EC2 instance\. The DB instance must allow public access, must be in a public subnet, and the subnet must have an Internet gateway\. Amazon RDS automatically creates a public subnet for your DB instance when you set the **VPC** option to **Create new VPC** and **Public accessibility** option to **Yes** when you create the DB instance\. 
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.ClassicLink"></a>
 
@@ -70,13 +72,13 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 
 1.  In the navigation pane, choose **Your VPCs**\. 
 
-1.  For **VPC**, choose the VPC used by the DB instance\. 
+1.  Choose the VPC used by the DB instance\. 
 
-1.  For **Actions** menu, choose **Enable ClassicLink**\. In the confirmation dialog box, choose **Yes, Enable**\. 
+1.  In **Actions**, choose **Enable ClassicLink**\. In the confirmation dialog box, choose **Yes, Enable**\. 
 
 1.  On the EC2 console, select the EC2 instance you want to connect to the DB instance in the VPC\. 
 
-1.  For **Actions** menu, choose **ClassicLink**, and then choose **Link to VPC**\. 
+1.  In **Actions**, choose **ClassicLink**, and then choose **Link to VPC**\. 
 
 1.  On the **Link to VPC** page, choose the security group you want to use, and then choose **Link to VPC**\. 
 

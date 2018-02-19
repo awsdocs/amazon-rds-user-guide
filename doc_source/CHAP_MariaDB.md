@@ -2,63 +2,44 @@
 
 Amazon RDS supports DB instances running several versions of MariaDB\. You can use the following major versions: 
 
++ MariaDB 10\.2
+
 + MariaDB 10\.1
 
 + MariaDB 10\.0
 
-For more information about minor version suport, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\. 
+For more information about minor version support, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\. 
 
 You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MariaDB DB instance\. You can then use the Amazon RDS tools to perform management actions for the DB instance, such as reconfiguring or resizing the DB instance, authorizing connections to the DB instance, creating and restoring from backups or snapshots, creating Multi\-AZ secondaries, creating Read Replicas, and monitoring the performance of the DB instance\. You use standard MariaDB utilities and applications to store and access the data in the DB instance\. 
 
-MariaDB is available in all of the AWS regions\. For more information about AWS Regions, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
+MariaDB is available in all of the AWS Regions\. For more information about AWS Regions, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 
 You can use Amazon RDS for MariaDB databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under an executed Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS Services in Scope by Compliance Program](https://aws.amazon.com/compliance/services-in-scope/)\. 
 
+Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting Up for Amazon RDS](CHAP_SettingUp.md)\. 
+
 ## Common Management Tasks for MariaDB on Amazon RDS<a name="MariaDB.Concepts.General"></a>
 
-These are the common management tasks you perform with an Amazon RDS MariaDB DB instance, with links to information about each task: 
+The following are the common management tasks you perform with an Amazon RDS DB instance running MariaDB, with links to relevant documentation for each task\. 
 
-+ Before creating a DB instance, you should complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\.
 
-+ After you have met your prerequisites, such as creating security groups or DB parameter groups, you can create an Amazon RDS MariaDB DB instance\. For information on this process, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\.
+****  
 
-+ After creating your security group and DB instance, you can connect to the DB instance from MariaDB applications and utilities\. For information, see [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)\.
+| Task Area | Relevant Documentation | 
+| --- | --- | 
+|  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)  | 
+|  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. Multi\-AZ deployments for SQL Server are implemented using SQL Server’s native Mirroring technology\.   |  [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)  | 
+|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account does not have a default VPC, and you want the DB instance in a VPC, you must create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
+|  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you access your DB instance from an Amazon EC2 instance\.   In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)   | 
+|  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
+|  **Importing and Exporting Data** Establish procedures for importing or exporting data\.   |  [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)  | 
+|  **Replication** You can offload read traffic from your primary MariaDB DB instance by creating Read Replicas\.   |  [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)  | 
+|  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\.   |  [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)  | 
+|  **Backup and Restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working With Backups](USER_WorkingWithAutomatedBackups.md)  | 
+|  **Monitoring** You can monitor your SQL Server DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your SQL Server DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md) [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
-+ A newly created Amazon RDS DB instance has one empty database with the name you specified when you created the DB instance, and one master user account with the name and password you specified\. You must use a tool or utility compatible with MariaDB to log in as the master user, and then use MariaDB commands and SQL statements to add all of the users and elements required for your applications to store and retrieve data in the DB instance, such as the following:
-
-  + Create all user IDs and grant them the appropriate permissions\. For information, see [MariaDB User Account Management](http://mariadb.com/kb/en/mariadb/user-account-management/) in the MariaDB documentation\.
-
-  + Create any required databases and objects such as tables and views\. For information, see [Data Definition](http://mariadb.com/kb/en/mariadb/data-definition/) in the MariaDB documentation\.
-
-  + Establish procedures for importing or exporting data\. For information on some recommended procedures, see [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)\.
-
-+ You might need to periodically change your DB instance, such as to resize or reconfigure the DB instance\. For information on doing so, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. For additional information on specific tasks, see the following:
-
-  + [Renaming a DB Instance](USER_RenameInstance.md)
-
-  + [Deleting a DB Instance](USER_DeleteInstance.md)
-
-  + [Rebooting a DB Instance](USER_RebootInstance.md)
-
-  + [Tagging Amazon RDS Resources](USER_Tagging.md)
-
-  + [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
-  + [Adjusting the Preferred DB Instance Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#AdjustingTheMaintenanceWindow)
-
-+ You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\. For information, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
-
-+ You can monitor an instance through actions such as viewing the MariaDB logs, Amazon CloudWatch metrics for Amazon RDS, and events\. For information, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
-
-+ You can offload read traffic from your primary MariaDB DB instance by creating Read Replicas\. For information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
-
-+ Several Amazon RDS features that you can use with MariaDB DB instances are common across the Amazon RDS database engines\. For information on these, see the following:
-
-  + [Working with Reserved DB Instances](USER_WorkingWithReservedDBInstances.md)
-
-  + [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)
-
-Also, several appendices include useful information about working with Amazon RDS MariaDB DB instances:
+There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
 
 + [Appendix: Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
 
@@ -75,22 +56,9 @@ Amazon RDS currently supports the following versions of MariaDB:
 
 | Major Version | Minor Version | 
 | --- | --- | 
+| MariaDB 10\.2 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
-
-Over time, we plan to support additional MariaDB versions for Amazon RDS\. The number of new version releases supported in a given year will vary based on the frequency and content of the MariaDB version releases and the outcome of a thorough vetting of the release by our database engineering team\. However, as a general guidance, we aim to support new MariaDB versions within 3\-5 months of their General Availability release\.
-
-You can specify any currently supported MariaDB version when creating a new DB Instance\. If no version is specified, Amazon RDS will default to a supported version, typically the most recent version\. If a major version \(e\.g\. MariaDB 10\.0\) is specified but a minor version is not, Amazon RDS will default to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB Instances, use the DescribeDBEngineVersions API\.
-
-With Amazon RDS, you control when to upgrade your MariaDB instance to a new version supported by Amazon RDS\. You can maintain compatibility with specific MariaDB versions, test new versions with your application before deploying in production, and perform version upgrades at times that best fit your schedule\.
-
-Unless you specify otherwise, your DB instance is automatically upgraded to new MariaDB minor versions as they are supported by Amazon RDS\. This patching occurs during your scheduled maintenance window, and it is announced on the [ Amazon RDS Community Forum](https://forums.aws.amazon.com/) in advance\. To turn off automatic version upgrades, change the **Auto Minor Version Upgrade** setting for the DB instance to **No**\. For more information on modifying the DB instance, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
-
-If you opt out of automatic minor version upgrades, you can manually upgrade to a supported minor version release by following the same procedure as for a major version update\. For information, see [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)\.
-
-You cannot set major version upgrades to occur automatically, because they involve some compatibility risk\. Instead, you must make a request to upgrade the DB instance to a different major version\. You should thoroughly test your databases and applications against the new target version before upgrading your production instances\. For information about upgrading a DB instance, see [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)\.
-
-You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
 The Amazon RDS deprecation policy for MariaDB includes the following:
 
@@ -98,56 +66,97 @@ The Amazon RDS deprecation policy for MariaDB includes the following:
 
 + We intend to support minor MariaDB version releases for at least 1 year after they are initially supported by Amazon RDS\. 
 
-+ After a MariaDB major or minor version has been deprecated, we expect to provide a three\-month grace period for you to initiate an upgrade to a supported version prior to an automatic upgrade being applied during your scheduled maintenance window\. 
++ After a MariaDB major or minor version has been deprecated, we expect to provide a three\-month grace period for you to upgrade your DB instance to a supported version\. After that, your DB instance is upgraded automatically during your scheduled maintenance window\. 
 
-## MariaDB, MySQL, and Amazon Aurora Feature Comparison<a name="MariaDB.Concepts.Feature.Matrix"></a>
+## Version and Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
-Use the following table to compare MariaDB, MySQL, and Aurora features to determine which DB engine is the best choice for your DB instance\. 
+### MariaDB 10\.2 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-2"></a>
 
+Amazon RDS supports the following versions of MariaDB 10\.2: 
 
-****  
++ 10\.2\.11 \(supported in all AWS Regions\)
 
-| Feature | MariaDB | MySQL | Amazon Aurora | 
-| --- | --- | --- | --- | 
-|   **Storage engines**   |  Supports XtraDB fully, and Aria with some limitations\.  |  Supports both MyISAM and InnoDB\.  |  Supports only InnoDB\. Tables from other storage engines are automatically converted to InnoDB\. Because Amazon Aurora only supports the InnoDB engine, the NO\_ENGINE\_SUBSTITUTION option of the SQL\_MODE database parameter is enabled\. Enabling this option disables the ability to create an in\-memory table, unless that table is specified as TEMPORARY\.  | 
-|   **Plugins**   |  Supports plugins\. For more information, see [Appendix: Options for MariaDB Database Engine](Appendix.MariaDB.Options.md)\.   |  Supports plugins\. For more information, see [Options for MySQL DB Instances](Appendix.MySQL.Options.md)\.   |  Doesn't support plugins\.  | 
-|  **Join and subquery performance**   |  Includes query optimizer improvements for joins and subqueries faster than those in MySQL 5\.5 and 5\.6\. For more information, see [Optimizer Feature Comparison Matrix](http://mariadb.com/kb/en/mariadb/optimizer-feature-comparison-matrix/) in the MariaDB documentation\.  |  Query optimizer performance in keeping with MySQL 5\.5, 5\.6, or 5\.7, depending on the version you selected for your Amazon RDS MySQL DB instance\.  |  Query optimizer performance in keeping with MySQL 5\.6\.  | 
-|   **Group commit**   |  Supports group commits\. For more information, see [Optimizer Feature Comparison Matrix](http://mariadb.com/kb/en/mariadb/group-commit-for-the-binary-log/) in the MariaDB documentation\. Supports additional tuning of group commits by setting the `binlog_commit_wait_count` parameter to determine the number of transactions that must complete before performing a group commit, and by setting the `binlog_commit_wait_usec` parameter to delay performing a group commit by a specified number of milliseconds\. For more information on these parameters, see [binlog\_commit\_wait\_count](http://mariadb.com/kb/en/mariadb/replication-and-binary-log-server-system-variables/#binlog_commit_wait_count) or [binlog\_commit\_wait\_usec](https://mariadb.com/kb/en/mariadb/replication-and-binary-log-server-system-variables/#binlog_commit_wait_usec) in the MariaDB documentation\. For more information on setting parameters for a DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.  |  Supports group commits\.  |  Supports group commits\.  | 
-|   **Progress reporting**   | Supports progress reporting for some long\-running commands\. For more information, see [Progress Reporting](http://mariadb.com/kb/en/mariadb/progress-reporting/) in the MariaDB documentation\. |  Doesn't support progress reporting\.  |  Doesn't support progress reporting\.  | 
-|   **Roles**   |  Support creation of custom roles for easily assigning sets of privileges to groups of users\. For more information, see [Roles](http://mariadb.com/kb/en/mariadb/roles-overview/) in the MariaDB documentation\.  |  Doesn't support roles\.  |  Doesn't support roles\.  | 
-|   **SHOW EXPLAIN**   |  Supports the SHOW EXPLAIN command, using which you can get a description of the query plan for a query running in a specified thread\. For more information, see [SHOW EXPLAIN](http://mariadb.com/kb/en/mariadb/show-explain/) in the MariaDB documentation\.  |  Doesn't support SHOW EXPLAIN\.  |  Doesn't support SHOW EXPLAIN\.  | 
-|   **Table elimination**   |  Supports table elimination, which sometimes allows the DB instance to improve performance by resolving a query without accessing some of the tables that the query refers to\. For more information, see [Table Elimination](http://mariadb.com/kb/en/mariadb/table-elimination/) in the MariaDB documentation\.  |  Doesn't support table elimination\.  |  Doesn't support table elimination\.  | 
-|   **Thread pooling**   |  Supports thread pooling to enable the DB instance to handle more connections without performance degradation\. For more information, see [Thread Pool in MariaDB](http://mariadb.com/kb/en/mariadb/thread-pool-in-mariadb/) in the MariaDB documentation\.  |  Doesn't support thread pooling\.  |  Doesn't support thread pooling\.  | 
-|   **Virtual columns**   |  Supports virtual columns\. These table columns have their values automatically calculated using a deterministic expression, typically based on the values of other columns in the table\. For more information, see [Virtual \(Computed\) Columns](http://mariadb.com/kb/en/mariadb/virtual-computed-columns/) in the MariaDB documentation\.  |  Doesn't support virtual columns\.  |  Doesn't support virtual columns\.  | 
-|   **Global transaction IDs**   |  Supports the MariaDB implementation of global transaction IDs \(GTIDs\)\. For more information, see [Global Transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.  Amazon RDS doesn't permit changes to the domain ID portion of a MariaDB GTID\.   |  Doesn't support the MySQL implementation of global transaction IDs\.  |  Doesn't support the MySQL implementation of global transaction IDs\.  | 
-|   **Parallel replication**   |  Supports parallel replication, which increases replication performance by allowing queries to process in parallel on the replica\. For more information, see [Parallel Replication](http://mariadb.com/kb/en/mariadb/parallel-replication/) in the MariaDB documentation\. Although parallel replication is similar to multithreaded replication in MySQL 5\.6, it has some enhancements, such as not requiring partitioning across schemas and permitting group commits to replicate in parallel\.  |  MySQL 5\.6 and 5\.7 support multithreaded replication\. For more information, see [Replication Slave Options and Variables](http://dev.mysql.com/doc/refman/5.6/en/replication-options-slave.html) in the MySQL documentation\. MySQL 5\.5 doesn't support multithreaded replication\.  |  Supports the MySQL 5\.6 implementation of multithreaded replication\.  | 
-|  **Database engine parameters**   |  Parameters apply to each individual DB instance or Read Replica and are managed by DB parameter groups\.  |  Parameters apply to each individual DB instance or Read Replica and are managed by DB parameter groups\.  |  Some parameters apply to the entire Aurora DB cluster and are managed by DB cluster parameter groups\. Other parameters apply to each individual DB instance in a DB cluster and are managed by DB parameter groups\.  | 
-|  **Read Replicas with a different storage engine than the master instance**   |  Read Replicas can use XtraDB\.  |  Read Replicas can use both MyISAM and InnoDB\.  |  MySQL \(non\-RDS\) Read Replicas that replicate with an Aurora DB cluster can only use InnoDB\.  | 
-|   **Read scaling**   |  Supports up to 5 Read Replicas with some impact on the performance of write operations\.  |  Supports up to 5 Read Replicas with some impact on the performance of write operations\.  |  Supports up to 15 Aurora Replicas with minimal impact on the performance of write operations\.  | 
-|   **Failover target**   |  You can manually promote Read Replicas to the master DB instance with potential data loss\.  |  You can manually promote Read Replicas to the master DB instance with potential data loss\.  |  Aurora Replicas are automatic failover targets with no data loss\.  | 
-|   **AWS region**   |  Available in all AWS regions\.  |  Available in all AWS regions\.  |  Aurora DB clusters are not available in all AWS Regions\. For more information, see [Availability](Aurora.Overview.md#Aurora.Overview.Availability)\.   | 
+Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.2 or later: 
 
-### MariaDB Features Supported in Version 10\.1<a name="MariaDB.Concepts.Features.Version.10-1"></a>
++ ALTER USER
 
-Amazon RDS supports the following features in MariaDB DB instances running MariaDB version 10\.1 or later:
++ Common Table Expressions
 
-+ [Optimistic in\-order parallel replication](https://mariadb.com/kb/en/parallel-replication/#optimistic-mode-of-in-order-parallel-replication)
++ Compressing Events to Reduce Size of the Binary Log
 
-+ [Page Compression](https://mariadb.com/kb/en/innodbxtradb-page-compression/)
++ CREATE USER — new options for limiting resource usage and TLS/SSL
 
-+ [XtraDB data scrubbing and defragmentation](https://mariadb.com/kb/en/defragmenting-innodb-tablespaces/)
++ EXECUTE IMMEDIATE
 
-## MariaDB Features Not Supported by Amazon RDS<a name="MariaDB.Concepts.Features"></a>
++ Flashback
 
-Amazon RDS currently doesn't support the following MariaDB features:
++ InnoDB — now the default storage engine instead of XtraDB
 
-+ Data at Rest Encryption
++ InnoDB — set the buffer pool size dynamically
 
-+ MariaDB Galera Cluster
++ JSON Functions
+
++ Window Functions
+
++ WITH
+
+For a list of all MariaDB 10\.2 features and their documentation, see [Changes & Improvements in MariaDB 10\.2](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-102/) and [Release Notes \- MariaDB 10\.2 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-102-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
+
+### MariaDB 10\.1 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-1"></a>
+
+Amazon RDS supports the following versions of MariaDB 10\.1: 
+
++ 10\.1\.26 \(supported in all AWS Regions\)
+
++ 10\.1\.23 \(supported in all AWS Regions\)
+
++ 10\.1\.19 \(supported in all AWS Regions\)
+
++ 10\.1\.14 \(supported in all AWS Regions except us\-east\-2\)
+
+Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.1 or later: 
+
++ Optimistic in\-order parallel replication
+
++ Page Compression
+
++ XtraDB data scrubbing and defragmentation
+
+For a list of all MariaDB 10\.1 features and their documentation, see [Changes & Improvements in MariaDB 10\.1](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-101/) and [Release Notes \- MariaDB 10\.1 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-101-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
+
+### MariaDB 10\.0 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-0"></a>
+
+Amazon RDS supports the following versions of MariaDB 10\.0: 
+
++ 10\.0\.32 \(supported in all AWS Regions\)
+
++ 10\.0\.31 \(supported in all AWS Regions\)
+
++ 10\.0\.28 \(supported in all AWS Regions\)
+
++ 10\.0\.24 \(supported in all AWS Regions\)
+
++ 10\.0\.17 \(supported in all AWS Regions except us\-east\-2, ca\-central\-1, eu\-west\-2\)
+
+For a list of all MariaDB 10\.0 features and their documentation, see [Changes & Improvements in MariaDB 10\.0](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-100/) and [Release Notes \- MariaDB 10\.0 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-100-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
+
+## Features Not Supported<a name="MariaDB.Concepts.FeatureNonSupport"></a>
+
+The following MariaDB features are not supported on Amazon RDS:
 
 + HandlerSocket
 
 + JSON table type
+
++ MariaDB ColumnStore
+
++ MariaDB Galera Cluster
 
 + Multi\-source Replication
 
@@ -159,7 +168,7 @@ Amazon RDS currently doesn't support the following MariaDB features:
 
 + Table and Tablespace Encryption
 
-To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\.
+To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. 
 
 ## Supported Storage Engines for MariaDB on Amazon RDS<a name="MariaDB.Concepts.Storage"></a>
 
@@ -244,18 +253,26 @@ To allow management of the DB instance, the standard `kill` and `kill_query` com
 
 Amazon RDS supports SSL connections with DB instances running the MariaDB database engine\. 
 
-Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
+Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
-To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example:
-
- `mysql -h mymariadbinstance.abcd1234.rds-us-east-1.amazonaws.com --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert` 
-
-You can use the GRANT statement to require SSL connections for specific users accounts\. For example, you can use the following statement to require SSL connections on the user account **encrypted\_user**:
-
- ` GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL ` 
+The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
 
 **Note**  
-For more information on SSL connections with MariaDB, see the [SSL Overview](http://mariadb.com/kb/en/mariadb/ssl-connections/) in the MariaDB documentation\.
+MariaDB 10\.2 now uses OpenSSL for secure connections\.
+
+To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
+
+```
+1. mysql -h myinstance.abcd1234.rds-us-east-1.amazonaws.com --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
+```
+
+You can use the GRANT statement to require SSL connections for specific users accounts\. For example, you can use the following statement to require SSL connections on the user account *encrypted\_user*: 
+
+```
+1. GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL
+```
+
+For more information on SSL connections with MariaDB, see the [SSL Overview](http://mariadb.com/kb/en/mariadb/ssl-connections/) in the MariaDB documentation\. 
 
 ## XtraDB Cache Warming<a name="MariaDB.Concepts.XtraDBCacheWarming"></a>
 

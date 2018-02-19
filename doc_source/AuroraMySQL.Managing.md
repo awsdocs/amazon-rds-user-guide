@@ -20,6 +20,12 @@ You can scale your Aurora MySQL DB cluster by modifying the DB instance class fo
 |  db\.r3\.2xlarge  |  8  | 26 | 61 | 
 |  db\.r3\.4xlarge  |  16  | 52 | 122 | 
 |  db\.r3\.8xlarge  |  32  | 104 | 244 | 
+|  db\.r4\.large  |  2  | 7 | 15\.25 | 
+|  db\.r4\.xlarge  |  4  | 13\.5 | 30\.5 | 
+|  db\.r4\.2xlarge  |  8  | 27 | 61 | 
+|  db\.r4\.4xlarge  |  16  | 53 | 122 | 
+|  db\.r4\.8xlarge  |  32  | 99 | 244 | 
+|  db\.r4\.16xlarge  |  64  | 195 | 488 | 
 
 ### Maximum Connections to an Aurora MySQL DB Instance<a name="AuroraMySQL.Managing.MaxConnections"></a>
 
@@ -45,6 +51,12 @@ The following table lists the resulting default value of `max_connections` for e
 |  db\.r3\.2xlarge  |  3000  | 
 |  db\.r3\.4xlarge  |  4000  | 
 |  db\.r3\.8xlarge  |  5000  | 
+|  db\.r4\.large  |  1000  | 
+|  db\.r4\.xlarge  |  2000  | 
+|  db\.r4\.2xlarge  |  3000  | 
+|  db\.r4\.4xlarge  |  4000  | 
+|  db\.r4\.8xlarge  |  5000  | 
+|  db\.r4\.16xlarge  |  6000  | 
 
 ## Testing Amazon Aurora Using Fault Injection Queries<a name="AuroraMySQL.Managing.FaultInjectionQueries"></a>
 

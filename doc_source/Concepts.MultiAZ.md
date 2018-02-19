@@ -7,7 +7,7 @@ In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a s
 **Note**  
 The high\-availability feature is not a scaling solution for read\-only scenarios; you cannot use a standby replica to serve read traffic\. To service read\-only traffic, you should use a Read Replica\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
-![\[High Availability Scenario \]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
+![\[High Availability Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
 
 Using the RDS console, you can create a Multi\-AZ deployment by simply specifying Multi\-AZ when creating a DB instance\. You can also use the console to convert existing DB instances to Multi\-AZ deployments by modifying the DB instance and specifying the Multi\-AZ option\. The RDS console shows the Availability Zone of the standby replica, called the secondary AZ\.
 
@@ -55,6 +55,6 @@ For information on how you can respond to failovers, reduce recovery time, and o
 
 + [Multi\-AZ Deployments for Microsoft SQL Server with Database Mirroring](USER_SQLServerMultiAZ.md)
 
-+ [Licensing Microsoft SQL Server Multi\-AZ Deployments](SQLServer.Concepts.General.Licensing.md#SQLServer.Concepts.General.Licensing.MAZ)
++ [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)
 
 + [Licensing Oracle Multi\-AZ Deployments](CHAP_Oracle.md#Oracle.Concepts.Licensing.MAZ)

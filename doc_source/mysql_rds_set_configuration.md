@@ -24,7 +24,7 @@ To specify the number of hours for Amazon RDS to retain binary logs on a DB inst
 
 `call mysql.rds_set_configuration('binlog retention hours', 24);`
 
-For MySQL DB instances, the maximum `binlog retention hours` value is 168 \(7 days\)\. For Amazon Aurora DB instances, the maximum is 720 \(30 days\)\.
+For MySQL DB instances, the maximum `binlog retention hours` value is 168 \(7 days\)\. For Amazon Aurora MySQL DB clusters, the maximum is 2160 \(90 days\)\.
 
 After you set the retention period, monitor storage usage for the DB instance to ensure that the retained binary logs don't take up too much storage\.
 

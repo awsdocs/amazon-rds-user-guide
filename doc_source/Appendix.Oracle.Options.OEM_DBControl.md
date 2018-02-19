@@ -48,7 +48,7 @@ After you add the OEM option, you don't need to restart your DB instance\. As so
 
    1. For **Engine** choose the oracle edition for your DB instance\. 
 
-   1. For **Major Engine Version** choose **11\.2** or **12\.1** for your DB instance\. 
+   1. For **Major engine version** choose **11\.2** or **12\.1** for your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

@@ -26,7 +26,7 @@ For DB instances in a single Availability Zone, the DB instance is unavailable f
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. On the navigation pane on the Amazon RDS console, choose ** DB Instances**\.
+1. On the navigation pane on the Amazon RDS console, choose **Instances**\.
 
 1. Choose the DB instance that you want to modify\.
 
@@ -35,9 +35,11 @@ For DB instances in a single Availability Zone, the DB instance is unavailable f
 1. For **Storage Type**, choose a value for the DB instance, and type a value for **Allocated Storage**\. If you are modifying your DB instance to use the Provisioned IOPS storage type, then also provide a **Provisioned IOPS** value\. For more information, see [Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Modify)\.  
 ![\[Modify the storage type of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/modify-storage-type.png)
 
-1. To immediately initiate conversion of the DB instance to use the new storage type, select the **Apply Immediately** check box\. If the check box is cleared \(the default\), the changes are applied during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+1. Choose**Continue** to move to the next screen\.
 
-1. When the settings are as you want them, choose **Continue**\.
+1. To immediately initiate conversion of the DB instance to use the new storage type, select the **Apply Immediately** check box in the **Scheduling of Modifications** section\. If you want the changes to be applied in the next maintenance window, choose that option\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+
+1. When the settings are as you want them, choose **Modify DB Instance**\.
 
 ### CLI<a name="w3ab1c25c31c10c11"></a>
 

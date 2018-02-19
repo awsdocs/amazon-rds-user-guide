@@ -20,7 +20,7 @@ The following are some limitations and recommendations for importing backup file
 
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
 
-+ You can't import a MySQL 5\.5 database\. 
++ You can't import a MySQL 5\.5 or 5\.7 database\. 
 
 + You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 database\. You can upgrade your DB instance after you complete the import\. 
 
@@ -45,6 +45,8 @@ The following are some limitations and recommendations for importing backup file
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
 
 + Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local Time Zone for MySQL DB Instances](CHAP_MySQL.md#MySQL.Concepts.LocalTimeZone)\. 
+
++ Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 5\.7 to version 5\.6, and you can't migrate from version 5\.6\.39 to version 5\.6\.37\.
 
 ## Overview of Setting Up to Import Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Enabling"></a>
 
@@ -214,9 +216,9 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
 1. Choose **Restore from S3** to launch the wizard\. 
 
-   The wizard opens on the **Select Engine** page\. 
+   The wizard opens on the **Select engine** page\. 
 
-1. On the **Select Engine** page, choose the MySQL icon, and then choose the **Select** button\. 
+1. On the **Select engine** page, choose the MySQL icon, and then choose **Next**\. 
 
    The **Specify source backup details** page appears\.   
 ![\[The page where you specify the details for your source database backup\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mys-s3-ingestion.png)
@@ -229,23 +231,23 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
    1. For **S3 bucket**, choose your Amazon S3 bucket\. 
 
-   1. \(Optional\) For **S3 bucket prefix**, type a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a sub\-folder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\.\) In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
+   1. \(Optional\) For **S3 folder path prefix**, type a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a sub\-folder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\.\) In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
 
-   1. For **Create a new role**, choose **Yes** to have a new IAM role created for you in your account, or choose **No** to select an existing IAM role\. 
+   1. For **Create a new role**, choose **Yes** to create a new IAM role in your account, or choose **No** to select an existing IAM role\. 
 
-   1. For **IAM Role**, select an existing IAM role, or specify the name for a new IAM Role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a New Role**\. 
+   1. For **IAM role**, select an existing IAM role, or specify the name for a new IAM Role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a New Role**\. 
 
 1. Choose **Next** to continue\. The **Specify DB Details** page appears\. 
 
-   On the **Specify DB Details** page, specify your DB instance information\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
+   On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
 **Note**  
 Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
 
-1. Choose **Next** to continue\. The **Configure Advanced Settings** page appears\. 
+1. Choose **Next** to continue\. The **Configure advanced settings** page appears\. 
 
-   On the **Configure Advanced Settings** page, provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
+   Provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
 
-1. Choose **Launch DB Instance**\. 
+1. Choose **Launch DB instance**\. 
 
 ## CLI<a name="MySQL.Procedural.Importing.CLI"></a>
 

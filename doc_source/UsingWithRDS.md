@@ -30,6 +30,7 @@ For more information on managing access to Amazon RDS resources and your databas
 + [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)
 + [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)
 + [Related Topics](#Overview.RDSSecurityGroups.Related)
++ [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)
 
 ## Related Topics<a name="Overview.RDSSecurityGroups.Related"></a>
 

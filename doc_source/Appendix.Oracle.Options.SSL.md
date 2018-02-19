@@ -57,7 +57,7 @@ You must configure the Oracle client before connecting to an Oracle DB instance 
 1. In the $ORACLE\_HOME/network/admin directory, modify or create the* tnsnames\.ora* file and include the following entry:
 
    ```
-   <database name>= (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCPS) 
+   <net_service_name>= (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCPS) 
       (HOST = <endpoint>) (PORT = <ssl port number>)))(CONNECT_DATA = (SID = <database name>))
       (SECURITY = (SSL_SERVER_CERT_DN = "C=US,ST=Washington,L=Seattle,O=Amazon.com,OU=RDS,CN=<endpoint>")))
    ```
@@ -83,7 +83,13 @@ You must configure the Oracle client before connecting to an Oracle DB instance 
 
 ## Connecting to an Oracle DB Instance Using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
 
-After you configure the Oracle client to use SSL as described preceding, you can connect to the Oracle DB instance with the SSL option\. For example, to connect to the DB instance using SQL\*Plus, use the following command:
+After you configure the Oracle client to use SSL as described previously, you can connect to the Oracle DB instance with the SSL option\. For example, you can connect using SQL\*Plus and a *<net\_service\_name>* in a tnsnames\.ora file:
+
+```
+sqlplus <mydbuser>@<net_service_name>
+```
+
+You can also connect to the DB instance using SQL\*Plus without using a tnsnames\.ora file by using the following command:
 
 ```
 sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCPS)(HOST = <endpoint>) (PORT = <ssl port number>))(CONNECT_DATA = (SID = <database name>)))'

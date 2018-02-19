@@ -472,8 +472,6 @@ You can use huge pages with the following versions and editions of Oracle:
 
 + 11\.2\.0\.4, all editions
 
-You can use huge pages with any DB instance class that has at least 14 GiB of memory\. Huge pages are not supported for the db\.m1, db\.m2, and db\.m3 DB instance classes\. For more information, see [Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
-
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
@@ -484,7 +482,24 @@ To control whether huge pages are enabled for a DB instance automatically, you c
 
 + For next generation instance classes, such as db\.r4, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `ONLY`\.
 
-To enable huge pages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use huge pages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to 0\. For more information about setting DB parameters for your DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
+Huge pages are not enabled by default for the following DB instance classes\. 
+
+
+****  
+
+| DB Instance Class Family | DB Instance Classes with Huge Pages Not Enabled by Default | 
+| --- | --- | 
+|  db\.m4  |  db\.m4\.large, db\.m4\.xlarge, db\.m4\.2xlarge, db\.m4\.4xlarge, db\.m4\.10xlarge  | 
+|  db\.m3  |  db\.m3\.medium, db\.m3\.large, db\.m3\.xlarge, db\.m3\.2xlarge  | 
+|  db\.m2  |  db\.m2\.xlarge, db\.m2\.2xlarge, db\.m2\.4xlarge  | 
+|  db\.m1  |  db\.m1\.small, db\.m1\.medium, db\.m1\.large, db\.m1\.xlarge  | 
+|  db\.r3  |  db\.r3\.large, db\.r3\.xlarge, db\.r3\.2xlarge, db\.r3\.4xlarge, db\.r3\.8xlarge  | 
+|  db\.t2  |  db\.t2\.micro, db\.t2\.small, db\.t2\.medium, db\.t2\.large  | 
+|  db\.t1  |  db\.t1\.micro  | 
+
+For more information about DB instance classes, see [Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
+
+To enable huge pages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use huge pages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
 You can also set the `sga_target`, `sga_max_size`, and `pga_aggregate_target` parameters\. When you set system global area \(SGA\) and program global area \(PGA\) memory parameters, add the values together\. Subtract this total from your available instance memory \(`DBInstanceClassMemory`\) to determine the free memory beyond the huge pages allocation\. You must leave free memory of at least 2 GiB, or 10 percent of the total available instance memory, whichever is smaller\. 
 
@@ -510,7 +525,7 @@ Assume the following parameters values are set in a parameter group\.
 6. use_large_pages          = {DBInstanceClassHugePagesDefault}
 ```
 
-The parameter group is used by a next generation db\.r4 instance class with less than 100 GiB of memory and a current generation db\.r3 instance with more than 100 GiB memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, huge pages are enabled on the db\.r4 instance, but it is disabled on the db\.r3 instance\.
+The parameter group is used by a next generation db\.r4 instance class with less than 100 GiB of memory and a current generation db\.r3 instance with more than 100 GiB memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, huge pages are enabled on the db\.r4 instance, but disabled on the db\.r3 instance\.
 
 Consider another example with following parameters values set in a parameter group\.
 

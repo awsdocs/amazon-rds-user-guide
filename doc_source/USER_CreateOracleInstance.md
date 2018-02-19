@@ -15,32 +15,31 @@ For an example that walks you through the process of creating and connecting to 
 
 1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **DB Instances**\. 
+1. In the navigation pane, choose **Instances**\. 
 
 1. Choose **Launch DB Instance** to start the **Launch DB Instance Wizard**\. 
 
-    The wizard opens on the **Select Engine** page\. The Oracle editions that are available vary by region\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch01.png)
+    The wizard opens on the **Select engine** page\. The Oracle editions that are available vary by region\.   
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
 
-1. In the **Select Engine** window, choose the **Select** button for the Oracle DB engine you want to use\. 
+1. In the **Select engine** window, choose the **Select** button for the Oracle DB engine you want to use and then choose **Next**\. 
 
-1. The next step asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Yes**\. By choosing **Yes**, the failover option **Multi\-AZ** and the **Provisioned IOPS** storage option will be preselected in the following step\. 
+1. The next step asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. When you choose **Production**, the failover option **Multi\-AZ deployment** and the **Provisioned IOPS** storage option will be preselected in the following step\. 
 
-1. Choose **Next** to continue\. The **Specify DB Details** page appears\. 
+1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
 
-   On the **Specify DB Details** page, specify your DB instance information\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\.   
+   On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\.   
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch02.png)
 
-1. Choose **Next** to continue\. The **Configure Advanced Settings** page appears\. 
+1. Choose **Next** to continue\. The **Configure advanced settings** page appears\. 
 
-   On the **Configure Advanced Settings** page, provide additional information that RDS needs to launch the DB instance\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\.   
-![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch03.png)
+   On the **Configure advanced settings** page, provide additional information that RDS needs to launch the DB instance\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 
-1. Choose **Launch DB Instance**\. 
+1. Choose **Launch DB instance**\. 
 
-1.  On the final page of the wizard, choose **Close**\. 
+1.  On the final page of the wizard, choose **View DB instance details**\. 
 
-On the RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it could take several minutes for the new instance to be available\. 
+On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it could take several minutes for the new instance to be available\. 
 
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
 
@@ -159,32 +158,32 @@ The following table contains details about settings that you choose when you cre
 
 | Setting | Setting Description | 
 | --- | --- | 
-|  Allocated Storage  |  The amount of storage to allocate your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
-|  Auto Minor Version Upgrade  |  Amazon RDS does not support automatic minor version upgrades for DB instances running Oracle\. You must modify your DB instance manually to perform a minor version upgrade\.  Some options, such as Oracle Locator, Oracle Multimedia, and Oracle Spatial, require that you enable automatic minor version upgrades\. Upgrades for DB instances that use these options are installed during your scheduled maintenance window, and an outage occurs during the upgrade\. You can't disable automatic minor version upgrades at the same time as you modify the option group to remove such an option\.     | 
-|  Availability Zone  |  The availability zone for your DB instance\. Use the default of **No Preference** unless you need to specify a particular Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
-|  Backup Retention Period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
-|  Backup Window  |  The time period during which Amazon RDS automatically takes a backup of your DB instance\. Unless you have a specific time that you want to have your database backup, use the default of **No Preference**\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
-|  Character Set Name  |  The character set for your DB instance\. The default value of **AL32UTF8** is for the Unicode 5\.0 UTF\-8 Universal character set\. You cannot change the character set after the DB instance is created\.   For more information, see [Oracle Character Sets Supported in Amazon RDS](Appendix.OracleCharacterSets.md)\.   | 
-|  Copy Tags To Snapshots  |  Select this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
-|  Database Name  |  The name for the database on your DB instance\. The name must begin with a letter and contain up to 8 alpha\-numeric characters\. You can't specify the string NULL, or any other reserved word, for the database name\. If you do not provide a name, Amazon RDS does not create a database on the DB instance you are creating\.   | 
-|  Database Port  |  The port that you want to access the DB instance through\. Oracle installations default to port 1521\.   | 
-|  DB Engine Version  |  The version of Oracle that you want to use\.  | 
-|  DB Instance Class  |  The DB instance class that you want to use\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.   | 
-|  DB Instance Identifier  |  The name for your DB instance\. The name must be unique for your account and region\. You can add some intelligence to the name, such as including the region and DB engine you chose, for example **oracle\-instance1**\.   | 
-|  DB Parameter Group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
-|  Enable Encryption  |  **Yes** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
-|  Enable Enhanced Monitoring  |  **Yes** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
-|  License Model  |  The license model that you want to use\. Choose **license\-included** to use the general license agreement for Oracle\. Choose **bring\-your\-own\-license** to use your existing Oracle license\.  For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.   | 
-|  Maintenance Window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
-|  Master User Name  |  The name that you use as the master user name to log on to your DB instance with all database privileges\. This user account is used to log into the DB instance and is granted DBA privileges\.  For more information, see [Oracle Security](CHAP_Oracle.md#Oracle.Concepts.RestrictedDBAPrivileges)\.   | 
-|  Master User Password  |  The password for your master user account\. The password must contain from 8 to 30 printable ASCII characters \(excluding /,", and @\)\.   | 
-|  Multi\-AZ Deployment  |  **Yes** to create a standby replica of your DB instance in another availability zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
-|  Option Group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
-|  Publicly Accessible  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
-|  Storage Type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
-|  Subnet Group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
-|  VPC  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC\. If you are creating a DB instance on the previous E2\-Classic platform, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.   | 
-|  VPC Security Group  |  If you are a new customer to AWS, choose the default VPC\. If you have created your own VPC security group, choose the VPC security group you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
+|  Allocated storage  |  The amount of storage to allocate your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
+|  Auto minor version upgrade  |  Amazon RDS does not support automatic minor version upgrades for DB instances running Oracle\. You must modify your DB instance manually to perform a minor version upgrade\.  Some options, such as Oracle Locator, Oracle Multimedia, and Oracle Spatial, require that you enable automatic minor version upgrades\. Upgrades for DB instances that use these options are installed during your scheduled maintenance window, and an outage occurs during the upgrade\. You can't disable automatic minor version upgrades at the same time as you modify the option group to remove such an option\.     | 
+|  Availability zone  |  The availability zone for your DB instance\. Use the default of **No Preference** unless you need to specify a particular Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
+|  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
+|  Backup window  |  The time period during which Amazon RDS automatically takes a backup of your DB instance\. Unless you have a specific time that you want to have your database backup, use the default of **No Preference**\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
+|  Character set name  |  The character set for your DB instance\. The default value of **AL32UTF8** is for the Unicode 5\.0 UTF\-8 Universal character set\. You cannot change the character set after the DB instance is created\.   For more information, see [Oracle Character Sets Supported in Amazon RDS](Appendix.OracleCharacterSets.md)\.   | 
+|  Copy tags to snapshots  |  Select this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
+|  Database name  |  The name for the database on your DB instance\. The name must begin with a letter and contain up to 8 alpha\-numeric characters\. You can't specify the string NULL, or any other reserved word, for the database name\. If you do not provide a name, Amazon RDS does not create a database on the DB instance you are creating\.   | 
+|  Database port  |  The port that you want to access the DB instance through\. Oracle installations default to port 1521\.   | 
+|  DB engine version  |  The version of Oracle that you want to use\.  | 
+|  DB instance class  |  The DB instance class that you want to use\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.   | 
+|  DB instance identifier  |  The name for your DB instance\. The name must be unique for your account and region\. You can add some intelligence to the name, such as including the region and DB engine you chose, for example **oracle\-instance1**\.   | 
+|  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
+|  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
+|  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
+|  License model  |  The license model that you want to use\. Choose **license\-included** to use the general license agreement for Oracle\. Choose **bring\-your\-own\-license** to use your existing Oracle license\.  For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.   | 
+|  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
+|  Master username  |  The name that you use as the master user name to log on to your DB instance with all database privileges\. This user account is used to log into the DB instance and is granted DBA privileges\.  For more information, see [Oracle Security](CHAP_Oracle.md#Oracle.Concepts.RestrictedDBAPrivileges)\.   | 
+|  Master password  |  The password for your master user account\. The password must contain from 8 to 30 printable ASCII characters \(excluding /,", and @\)\.   | 
+|  Multi\-AZ deployment  |  **Create replica in different zone** to create a standby replica of your DB instance in another availability zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
+|  Option group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
+|  Public accessibility  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
+|  Storage type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
+|  Subnet group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
+|  Virtual Private Cloud \(VPC\)  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC\. If you are creating a DB instance on the previous E2\-Classic platform, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.   | 
+|  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateOracleInstance.Related"></a>
 

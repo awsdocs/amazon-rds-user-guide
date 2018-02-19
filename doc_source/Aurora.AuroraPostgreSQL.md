@@ -19,6 +19,8 @@ The following table shows the regions where Aurora PostgreSQL is currently avail
 | Canada \(Central\) | [https://console\.aws\.amazon\.com/rds/home?region=ca\-central\-1](https://console.aws.amazon.com/rds/home?region=ca-central-1) | 
 | EU \(Frankfurt\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-central\-1](https://console.aws.amazon.com/rds/home?region=eu-central-1) | 
 | EU \(Ireland\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-1](https://console.aws.amazon.com/rds/home?region=eu-west-1) | 
+| EU \(Paris\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-3](https://console.aws.amazon.com/rds/home?region=eu-west-3) | 
+| Asia Pacific \(Tokyo\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-1](https://console.aws.amazon.com/rds/home?region=ap-northeast-1) | 
 
 ## Comparison of Amazon Aurora PostgreSQL and Amazon RDS for PostgreSQL<a name="Aurora.AuroraPostgreSQL.Compare"></a>
 

@@ -18,7 +18,7 @@ For more information about DB cluster parameters, see [Amazon Aurora DB Cluster 
 The database user that issues the `LOAD DATA FROM S3` or `LOAD XML FROM S3` statement must be granted the `LOAD FROM S3` privilege to issue either statement\. The master user name for a DB cluster is granted the `LOAD FROM S3` privilege by default\. You can grant the privilege to another user by using the following statement\.
 
 ```
-GRANT LOAD FROM S3 ON *.* TO user@domain-or-ip-address
+GRANT LOAD FROM S3 ON *.* TO 'user'@'domain-or-ip-address'
 ```
 
 The `LOAD FROM S3` privilege is specific to Amazon Aurora and is not available for MySQL databases or RDS MySQL DB instances\. If you have set up replication between an Aurora DB cluster as the replication master and a MySQL database as the replication client, then the `GRANT LOAD FROM S3` statement causes replication to stop with an error\. You can safely skip the error to resume replication\. To skip the error on an RDS MySQL DB instance, use the [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md) statement\. To skip the error on an external MySQL database, use the [SET GLOBAL sql\_slave\_skip\_counter ](http://dev.mysql.com/doc/refman/5.6/en/set-global-sql-slave-skip-counter.html) statement\.
@@ -218,9 +218,9 @@ The following table describes the fields in the `aurora_s3_load_history` table\.
 
 | Field | Description | 
 | --- | --- | 
-| `load_prefix` |  <a name="para_yt5_qkv_sy"></a>The URI that was specified in the load statement\. This URI can map to a single data file for a `LOAD DATA FROM S3 FILE` statement, an Amazon S3 prefix that maps to multiple data files for a `LOAD DATA FROM S3 PREFIX` statement, or a single manifest file that contains the names of files to be loaded for a `LOAD DATA FROM S3 MANIFEST` statement\.  | 
+| `load_prefix` |  <a name="para_yt5_qkv_sy"></a>The URI that was specified in the load statement\. This URI can map to any of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Integrating.LoadFromS3.html)  | 
 |  `file_name`  |  The name of a file that was loaded into Aurora from Amazon S3 using the URI identified in the `load_prefix` field\.  | 
-| `version_number` |  The version number of the file identified by the `file_name` field that was loaded, if the Amazon S3 bucket is versioned\.  | 
+| `version_number` |  The version number of the file identified by the `file_name` field that was loaded, if the Amazon S3 bucket has a version number\.  | 
 |  `bytes_loaded`  |  The size of the file loaded, in bytes\.  | 
 | `load_timestamp`  |  The timestamp when the `LOAD DATA FROM S3` statement completed\.  | 
 

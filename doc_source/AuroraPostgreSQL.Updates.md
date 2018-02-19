@@ -8,11 +8,7 @@ Amazon Aurora includes certain features that are general to Aurora and available
 
 An Aurora DB instance provides two version numbers, the Aurora version number and the Aurora database engine version number\. For more information about the Aurora version number, see [Amazon Aurora Versions](Aurora.Updates.md#Aurora.Updates.Versions)\.
 
-You can get the Aurora database engine version number for an Aurora PostgreSQL DB instance by querying for the `SERVER_VERSION` run\-time parameter\. To get the Aurora database engine version number, use one of the following queries\.
-
-```
-SELECT SERVER_VERSION();
-```
+You can get the Aurora database engine version number for an Aurora PostgreSQL DB instance by querying for the `SERVER_VERSION` run\-time parameter\. To get the Aurora database engine version number, use the following query\.
 
 ```
 SHOW SERVER_VERSION;

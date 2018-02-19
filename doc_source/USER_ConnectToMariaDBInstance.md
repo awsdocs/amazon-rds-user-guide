@@ -2,9 +2,20 @@
 
 Once Amazon RDS provisions your DB instance, you can use any standard MariaDB client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\.
 
-You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. If an endpoint value is `myinstance.123456789012.us-east-1.rds.amazonaws.com:3306`, then you specify the following values in a MariaDB connection string:
+You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\.
 
-+ For host or host name, specify `myinstance.123456789012.us-east-1.rds.amazonaws.com`
+To find the endpoint for a MariaDB instance in the AWS Management Console:
+
+1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+
+1. Choose the MariaDB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+
+1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to a MariaDB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
+
+If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com:3306`, then you specify the following values in a MariaDB connection string:
+
++ For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`
 
 + For port, specify `3306`
 
@@ -20,7 +31,7 @@ You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\.
 
 ## Connecting from the mysql Utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
 
-To connect to a DB instance using the mysql utility, type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
+To connect to a DB instance using the mysql utility, type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
 
 ```
 mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
@@ -55,13 +66,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 1. Type the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
 
    ```
-   mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem 
+   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem 
    ```
 
 1. Include the `--ssl-verify-server-cert` parameter so that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. For example:
 
    ```
-   mysql -h myinstance.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert 
+   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert 
    ```
 
 1. Type the master user password when prompted\.

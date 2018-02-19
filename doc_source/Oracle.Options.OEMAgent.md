@@ -86,7 +86,7 @@ After you add the Management Agent option, you don't need to restart your DB ins
 
    1. For **Engine** choose the oracle edition for your DB instance\. 
 
-   1. For **Major Engine Version** choose **11\.2** or **12\.1** for your DB instance\. 
+   1. For **Major engine version** choose **11\.2** or **12\.1** for your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
@@ -121,6 +121,8 @@ After you enable the Management Agent option, use the following procedure to beg
    1. For **Monitoring Agent**, choose the agent with the same identifier as your Amazon RDS DB instance identifier\. 
 
    1. Choose **Add Manually**\.
+
+   1. Enter the host name for the Amazon RDS DB instance, or select the host name from the list\. Ensure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
 
    1. Specify the following database properties: 
 

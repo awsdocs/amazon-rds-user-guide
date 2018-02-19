@@ -1,6 +1,6 @@
 # Amazon Aurora MySQL Database Engine Updates<a name="AuroraMySQL.Updates"></a>
 
-Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clusters during system maintenance windows\. The timing when updates are applied depends on the region and maintenance window setting for the DB cluster, as well as the type of update\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. You can view or change your maintenance window settings from the [AWS Management Console](https://console.aws.amazon.com/)\. 
+Amazon Aurora releases updates regularly\. Updates are applied to Aurora DB clusters during system maintenance windows\. The timing when updates are applied depends on the region and maintenance window setting for the DB cluster, as well as the type of update\. Updates are applied to all instances in a DB cluster simultaneously\. An update requires a database restart on all instances in a DB cluster, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. You can view or change your maintenance window settings from the [AWS Management Console](https://console.aws.amazon.com/)\. 
 
 ## Amazon Aurora Versions<a name="AuroraMySQL.Updates.Versions"></a>
 
@@ -47,9 +47,11 @@ For more information on how Amazon RDS manages database and operating system upd
 
 Aurora lab mode is used to enable Aurora features that are available in the current Aurora database version, but are not enabled by default\. While Aurora lab mode features are not recommended for use in production DB clusters, you can use Aurora lab mode to enable these features for DB clusters in your development and test environments\. For more information about Aurora features available when Aurora lab mode is enabled, see [Aurora Lab Mode Features](AuroraMySQL.Updates.LabModeFeatures.md)\.
 
-To enable Aurora lab mode, set the `aurora_lab_mode` parameter to `1` in the parameter group for your primary instance or Aurora Replica\. The `aurora_lab_mode` parameter is an instance\-level parameter that is in the `default.aurora5.6` parameter group by default\. For information on modifying a DB parameter group, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For information on parameter groups and Amazon Aurora, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+The `aurora_lab_mode` parameter is an instance\-level parameter that is in the default parameter group\. The parameter is set to `0` \(disabled\) in the default parameter group\. To enable Aurora lab mode, create a custom parameter group, set the `aurora_lab_mode` parameter to `1` \(enabled\) in the custom parameter group, and modify your primary instance or Aurora Replica to use the custom parameter group\. For information on modifying a DB parameter group, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For information on parameter groups and Amazon Aurora, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
+
++ [Amazon Aurora MySQL Database Engine Updates 2018\-02\-06](AuroraMySQL.Updates.20180206.md) \(Version 2\.01\)
 
 + [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md) \(Version 1\.16\)
 

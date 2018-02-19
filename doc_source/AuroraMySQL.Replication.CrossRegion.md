@@ -22,7 +22,7 @@ For each source DB cluster, you can only have one cross\-region Read Replica DB 
 
 Before you can create an Aurora MySQL DB cluster that is a cross\-region Read Replica, you must enable binary logging on your source Aurora MySQL DB cluster\. Cross\-region replication for Aurora MySQL uses MySQL binary replication to replay changes on the cross\-region Read Replica DB cluster\.
 
-To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the `default.aurora5.6` cluster parameter group by default\. If your DB cluster uses the default DB cluster parameter group, you will need to create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\.
+To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, you will need to create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\.
 
 For more information, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
@@ -46,10 +46,9 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Select the check box for the DB cluster that you want to create a cross\-region Read Replica for\. Choose **Instance Actions**, and then choose **Create Cross Region Read Replica**\.  
-![\[Instance Actions: Create Cross Region Read Replica\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCrossRegionRepl_01.png)
+1. Select the check box for the DB instance that you want to create a cross\-region Read Replica for\. Choose **Instance actions**, and then choose **Create cross region read replica**\.
 
-1. In the **Cross Region Read Replica** panel, select the option settings for your cross\-region Read Replica DB cluster, as described in the following table\.    
+1. On the **Create cross region read replica** page, select the option settings for your cross\-region Read Replica DB cluster, as described in the following table\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Replication.CrossRegion.html)
 
 1. Choose **Create** to create your cross\-region Read Replica for Aurora\.

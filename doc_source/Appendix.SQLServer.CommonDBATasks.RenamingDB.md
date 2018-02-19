@@ -1,8 +1,19 @@
 # Renaming a Microsoft SQL Server Database in a Multi\-AZ with Mirroring Deployment<a name="Appendix.SQLServer.CommonDBATasks.RenamingDB"></a>
 
-You can't rename a database on a Microsoft SQL Server DB instance that is in a SQL Server Multi\-AZ with Mirroring deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ with Mirroring for the DB instance, then rename the database, and finally turn Multi\-AZ with Mirroring back on for the DB instance\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+To rename a Microsoft SQL Server database instance that uses Multi\-AZ with Mirroring, use the following procedure:
 
-You can rename a database using the following procedure, which renames a database from MOO to ZAR\. The procedure is analogous to the command `DDL ALTER DATABASE [MOO] MODIFY NAME = [ZAR]`\. 
+1. First, turn off Multi\-AZ with Mirroring for the DB instance\.
+
+1. Rename the database by running `rdsadmin.dbo.rds_modify_db_name`\.
+
+1. Then, turn on Multi\-AZ with Mirroring for the DB instance, to return it to its original state\.
+
+For more information, see [Adding Multi\-AZ with Mirroring to a Microsoft SQL Server DB Instance](USER_SQLServerMultiAZ.md#USER_SQLServerMultiAZ.Adding)\. 
+
+**Note**  
+If your instance doesn't use Multi\-AZ with Mirroring , you don't need to change any settings before or after running `rdsadmin.dbo.rds_modify_db_name` \. 
+
+**Example: **In the following example, the `rdsadmin.dbo.rds_modify_db_name` stored procedure renames a database from **MOO** to **ZAR**\. This is similar to running the statement `DDL ALTER DATABASE [MOO] MODIFY NAME = [ZAR]`\. 
 
 ```
 EXEC rdsadmin.dbo.rds_modify_db_name N’MOO’, N’ZAR’

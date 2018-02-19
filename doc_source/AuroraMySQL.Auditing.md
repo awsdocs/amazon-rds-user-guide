@@ -52,11 +52,11 @@ Connect and disconnect events aren't affected by this variable; they are always 
 
 ## Viewing Audit Logs<a name="AuroraMySQL.Auditing.View"></a>
 
-You can view and download the audit logs by using the AWS console\. On the **Instances** page, select and expand the DB cluster, then choose **Logs**\.
+You can view and download the audit logs by using the AWS console\. On the **Instances** page, click the DB instance to show its details, then scroll to the **Logs** section\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/aurora-log.png)
 
-To download a log file, locate that file in the **Logs** section and then choose **download**\.
+To download a log file, select that file in the **Logs** section and then choose **Download**\.
 
 You can also get a list of the log files by using the [describe\-db\-log\-files](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can view the content of a log file by using the [download\-db\-log\-file\-portion](http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command, and download a log file by using the [DownloadCompleteDBLogFile](RESTReference.md#RESTReference.DownloadCompleteDBLogFile) REST API\.
 

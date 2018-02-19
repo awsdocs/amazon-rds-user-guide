@@ -40,13 +40,13 @@ You can use the following steps to create an IAM policy that provides the minimu
 
 **To create an IAM policy to grant access to your CloudWatch Logs resources**
 
-1. Open the [IAM Console](https://console.aws.amazon.com/iam/home?#home)\.
+1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home)\.
 
 1. In the navigation pane, choose **Policies**\.
 
 1. Choose **Create policy**\.
 
-1. On the **Visual editor** tab, choose **Choose a service**, and then choose **Cloudwatch Logs**\.
+1. On the **Visual editor** tab, choose **Choose a service**, and then choose **CloudWatch Logs**\.
 
 1. Choose **Select actions** and then choose the Amazon CloudWatch Logs permissions needed for the IAM policy\.
 
@@ -85,3 +85,5 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. Set **Name** to a name for your IAM policy, for example `AmazonRDSCloudWatchLogs`\. You use this name when you create an IAM role to associate with your Aurora DB cluster\. You can also add an optional **Description** value\.
 
 1. Choose **Create policy**\.
+
+1. Complete the steps in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.

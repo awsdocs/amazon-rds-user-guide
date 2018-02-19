@@ -21,50 +21,55 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
 1. Choose **Clusters**\.
 
-1. Choose the Aurora DB cluster that you want to associate an IAM role with, and then choose **Manage IAM Roles**\.  
-![\[Manage IAM Roles for a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraAssociateIAMRole-01.png)
+1. Choose the Aurora DB cluster that you want to associate an IAM role with, and then choose **Manage IAM roles** in **Cluster actions**\.
 
-1. In **Manage IAM Roles**, choose the role to associate with your DB cluster from **Available roles**\.  
+1. In **Manage IAM roles**, choose the role to associate with your DB cluster from **Add IAM roles to this cluster**\.  
 ![\[Associate an IAM role with a DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraAssociateIAMRole-02.png)
+
+1. Choose **Add role**\.
 
 1. \(Optional\) To stop associating an IAM role with a DB cluster and remove the related permission, choose **Delete** for the role\.
 
 1. Choose **Done**\.
 
-1. In the RDS console, choose **Parameter Groups** in the navigation pane\.
+1. In the RDS console, choose **Parameter groups** in the navigation pane\.
 
-1. If you are already using a custom DB parameter group, you can select that group to use instead of creating a new DB cluster parameter group\. If you are using the default DB cluster parameter group, you will need to create a new DB cluster parameter group, as described in the following steps: 
+1. If you are already using a custom DB parameter group, you can select that group to use instead of creating a new DB cluster parameter group\. If you are using the default DB cluster parameter group, create a new DB cluster parameter group, as described in the following steps: 
 
-   1. Choose **Create Parameter Group**\.  
+   1. Choose **Create Parameter Group**\.
+
+   1. For **Parameter group family**, choose `aurora5.6` for an Aurora MySQL 5\.6\-compatible DB cluster, or choose `aurora5.7` for an Aurora MySQL 5\.7\-compatible DB cluster\.
+
+   1. For **Type**, choose **DB Cluster Parameter Group**\. 
+
+   1. For **Group name**, type the name of your new DB cluster parameter group\.
+
+   1. For **Description**, type a description for your new DB cluster parameter group\.  
 ![\[Create a DB cluster parameter group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraAssociateIAMRole-03.png)
-
-      For **Parameter Group Family**, choose `aurora5.6`\.
-
-   1. For **Type**, choose `DB cluster parameter group`\. 
-
-   1. For **Group Name**, type the name of your new DB cluster parameter group\.
-
-   1. For **Description**, type a description for your new DB cluster parameter group\.
 
    1. Choose **Create**\. 
 
-1. Select your DB cluster parameter group and choose **Edit Parameters**\.
+1. On the **Parameter groups** page, select your DB cluster parameter group and choose **Edit** from **Parameter group actions**\.
+
+1. Choose **Edit parameters**\.
 
 1. Set the appropriate cluster\-level parameters to the related IAM role ARN values\. For example, you can set just the `aws_default_s3_role` parameter to `arn:aws:iam::123456789012:role/AllowAuroraS3Role`\.
 
-1. Choose **Save Changes**\.
+1. Choose **Save changes**\.
 
 1. Choose **Instances**, and then select the primary instance for your Aurora DB cluster\.
 
-1. Choose **Instance Actions** and then choose **Modify**\.
+1. Choose **Instance actions** and then choose **Modify**\.
 
-1. Set the **DB Cluster Parameter Group** to the new DB cluster parameter group that you created\. Select **Apply Immediately**\. Choose **Continue**\.
+1. Scroll to **Database options** and set the **DB cluster parameter group** to the new DB cluster parameter group that you created\. Choose **Continue**\.
 
-1. Verify your changes and then choose **Modify DB Instance**\.
+1. Verify your changes and then choose **Apply immediately**\.
 
-1. The primary instance for your DB cluster will still be selected in the list of instances\. Choose **Instance Actions**, and then choose **Reboot**\.
+1. Choose **Modify DB Instance**\.
 
-   When the instance has rebooted, your IAM roles will be associated with your DB cluster\.
+1. The primary instance for your DB cluster is still selected in the list of instances\. Choose **Instance Actions**, and then choose **Reboot**\.
+
+   When the instance has rebooted, your IAM roles is associated with your DB cluster\.
 
    For more information about cluster parameter groups, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
 
@@ -77,7 +82,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
    PROMPT> aws rds add-role-to-db-cluster --db-cluster-identifier my-cluster --role-arn arn:aws:iam::123456789012:role/AllowAuroraLambdaRole
    ```
 
-1. If you are using the default DB cluster parameter group, you will need to create a new DB cluster parameter group\. If you are already using a custom DB parameter group, you can use that group instead of creating a new DB cluster parameter group\.
+1. If you are using the default DB cluster parameter group, create a new DB cluster parameter group\. If you are already using a custom DB parameter group, you can use that group instead of creating a new DB cluster parameter group\.
 
    To create a new DB cluster parameter group, call the `create-db-cluster-parameter-group` command from the AWS CLI, as shown following\.
 
@@ -85,6 +90,8 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
    PROMPT> aws rds create-db-cluster-parameter-group  --db-cluster-parameter-group-name AllowAWSAccess \
         --db-parameter-group-family aurora5.6 --description "Allow access to Amazon S3 and AWS Lambda"
    ```
+
+   For an Aurora MySQL 5\.7\-compatible DB cluster, specify `aurora5.7` for `--db-parameter-group-family`\.
 
 1. Set the appropriate cluster\-level parameter or parameters and the related IAM role ARN values in your DB cluster parameter group, as shown following\. 
 
@@ -101,6 +108,6 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
    PROMPT> aws rds reboot-db-instance --db-instance-identifier my-cluster-primary
    ```
 
-   When the instance has rebooted, your IAM roles will be associated with your DB cluster\.
+   When the instance has rebooted, your IAM roles are associated with your DB cluster\.
 
    For more information about cluster parameter groups, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
