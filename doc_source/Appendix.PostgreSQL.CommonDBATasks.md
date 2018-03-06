@@ -7,6 +7,7 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 
 + [Creating Roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL Database Access](#Appendix.PostgreSQL.CommonDBATasks.Access)
++ [Setting PostgreSQL Database Privileges](#Appendix.PostgreSQL.CommonDBATasks.Privileges)
 + [Working with PostgreSQL Parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
 + [Working with PostgreSQL Autovacuum on Amazon RDS](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)
 + [Audit Logging for a PostgreSQL DB Instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
