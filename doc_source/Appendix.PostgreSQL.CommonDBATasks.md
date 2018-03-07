@@ -7,6 +7,7 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 
 + [Creating Roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL Database Access](#Appendix.PostgreSQL.CommonDBATasks.Access)
++ [Setting PostgreSQL Database Privileges](#Appendix.PostgreSQL.CommonDBATasks.Privileges)
 + [Working with PostgreSQL Parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
 + [Working with PostgreSQL Autovacuum on Amazon RDS](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)
 + [Audit Logging for a PostgreSQL DB Instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
@@ -32,6 +33,10 @@ GRANT ROLE
 
 ## Managing PostgreSQL Database Access<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>
 
+On a local instance, you can specify different access methods in the pg\_hba\.conf file\. However, changes to the pg\_hba\.conf file require operating system access, so you cannot edit the pg\_hba\.conf in Amazon RDS\. Therefore the only allowed authentication method is `md5`, meaning password authentication\. To avoid sending unencrypted passwords, cosider [setting up SSL](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL) for your database connections\.
+
+## Setting PostgreSQL Database Privileges<a name="Appendix.PostgreSQL.CommonDBATasks.Privileges"></a>
+
 By default, when PostgreSQL database objects are created, they receive "public" access privileges\. You can revoke all privileges to a database and then explicitly add privileges back as you need them\.
 
 As the master user, you can remove all privileges from a database using the following command format\.
@@ -48,7 +53,8 @@ grant connect on database test to mytestuser;
 GRANT
 ```
 
-On a local instance, you can specify database privileges in the pg\_hba\.conf file\. However, when using PostgreSQL with Amazon RDS it is better to restrict privileges at the PostgreSQL level\. Changes to the pg\_hba\.conf file require a server restart so you cannot edit the pg\_hba\.conf in Amazon RDS, but privilege changes at the PostgreSQL level occur immediately\.
+For more details, please consult the official PostgreSQL documentation on the [`GRANT`](https://www.postgresql.org/docs/current/static/sql-grant.html) command\.
+
 
 ## Working with PostgreSQL Parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
 
