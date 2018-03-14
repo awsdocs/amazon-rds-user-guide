@@ -1,6 +1,6 @@
 # Using Windows Authentication with a Microsoft SQL Server DB Instance<a name="USER_SQLServerWinAuth"></a>
 
-You can use Windows Authentication to authenticate users when they connect to your Amazon RDS DB instance running Microsoft SQL Server\. The DB instance works with AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), also called **Microsoft AD**, to enable Windows Authentication\. When users authenticate with a SQL Server DB instance joined to the trusting domain, authentication requests are forwarded to the domain directory that you create with AWS Directory Service\. 
+You can use Windows Authentication to authenticate users when they connect to your Amazon RDS DB instance running Microsoft SQL Server\. The DB instance works with AWS Directory Service for Microsoft Active Directory, also called **Microsoft AD**, to enable Windows Authentication\. When users authenticate with a SQL Server DB instance joined to the trusting domain, authentication requests are forwarded to the domain directory that you create with AWS Directory Service\. 
 
 Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions except the following: 
 
@@ -16,7 +16,7 @@ To get Windows Authentication using an on\-premises or self\-hosted Microsoft Ac
 
 To set up Windows authentication for a SQL Server DB instance, do the following steps \(explained in greater detail in this section\): 
 
-1. Use the AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), also called Microsoft AD, either from the AWS console or AWS Directory Service API to create a Microsoft AD directory\. 
+1. Use the AWS Directory Service for Microsoft Active Directory, also called Microsoft AD, either from the AWS console or AWS Directory Service API to create a Microsoft AD directory\. 
 
 1. If you use the AWS CLI or Amazon RDS API to create your SQL Server DB instance, you need to create an IAM role that uses the managed IAM policy AmazonRDSDirectoryServiceAccess\. The role allows Amazon RDS to make calls to your directory\. If you use the AWS console to create your SQL Server DB instance, AWS creates the IAM role for you\. 
 
@@ -44,9 +44,9 @@ If you want to check to make sure your connection is using Kerberos, you can run
 
 ## Setting Up Windows Authentication for SQL Server DB Instances<a name="USER_SQLServerWinAuth.SettingUp"></a>
 
-You use AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), also called **Microsoft AD**, to set up Windows Authentication for a SQL Server DB instance\. To set up Windows Authentication, you take the following steps: 
+You use AWS Directory Service for Microsoft Active Directory, also called **Microsoft AD**, to set up Windows Authentication for a SQL Server DB instance\. To set up Windows Authentication, you take the following steps: 
 
-### Step 1: Create a Directory Using the AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\)<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
+### Step 1: Create a Directory Using the AWS Directory Service for Microsoft Active Directory<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
 
 AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create a Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC; this redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
 
@@ -60,7 +60,7 @@ Be sure to save this password\. AWS Directory Service does not store this passwo
 
 +  Creates a security group for the directory controllers\. 
 
-When you launch an AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), AWS creates an Organizational Unit \(OU\) that contains all your directory’s objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
+When you launch an AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all your directory’s objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
  The *admin* account that was created with your *Microsoft AD* directory has permissions for the most common administrative activities for your OU: 
 
@@ -86,7 +86,7 @@ When you launch an AWS Directory Service for Microsoft Active Directory \(Enterp
 
 +  View security event logs 
 
-**To create a directory with AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\)**
+**To create a directory with AWS Directory Service for Microsoft Active Directory**
 
 1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservice/) navigation pane, select **Directories** and choose** Set up Directory**\. 
 
@@ -115,7 +115,7 @@ When you launch an AWS Directory Service for Microsoft Active Directory \(Enterp
 
 1.  Provide the following information in the **VPC Details** section and choose** Next Step**\.   
 **VPC**  
- The VPC for the directory\. Note that the SQL Server DB instance must be created in this same VPC\.   
+ The VPC for the directory\. *Note that the SQL Server DB instance must be created in this same VPC*\.   
 **Subnets**  
  Select the subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
 
