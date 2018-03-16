@@ -105,7 +105,7 @@ The following example removes the TDE encryption from a database called `custome
 
 When all objects are unencrypted, you can modify the DB instance to be associated with an option group without the **TDE** option or you can remove the **TDE** option from the option group\. 
 
-## Performance Considerations<a name="w3ab1c32c99c13c45"></a>
+## Performance Considerations<a name="w3ab1c30c99c13c45"></a>
 
 The performance of a SQL Server DB instance can be impacted by using transparent data encryption\. 
 

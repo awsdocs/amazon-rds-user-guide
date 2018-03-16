@@ -2,13 +2,15 @@
 
 **Version:** 2\.01
 
-Amazon Aurora MySQL 2\.01 is generally available\. 
+Amazon Aurora MySQL 2\.01 is generally available\. Going forward, Aurora MySQL 2\.x versions will be compatible with MySQL 5\.7 and Aurora MySQL 1\.x versions will be compatible with MySQL 5\.6\. 
 
-Going forward, Aurora MySQL 2\.x versions will be compatible with MySQL 5\.7\.12 and Aurora MySQL 1\.x versions will be compatible with MySQL 5\.6\.10\. When creating a new Aurora MySQL DB cluster, including those restored from snapshots, you have the option of choosing compatibility with either MySQL 5\.7\.12 or MySQL 5\.6\.10\.
+When creating a new Aurora MySQL DB cluster, including those restored from snapshots, you have the option of choosing compatibility with either MySQL 5\.7 or MySQL 5\.6\.
 
 You can restore snapshots of Aurora MySQL 1\.14\*, 1\.15\*, and 1\.16\* into Aurora MySQL 2\.01\.
 
 We do not allow in\-place upgrade of Aurora MySQL 1\.x clusters into Aurora MySQL 2\.01 or restore to Aurora MySQL 2\.01 from an Amazon S3 backup\. We plan to remove these restrictions in a later Aurora MySQL 2\.x release\.
+
+The performance schema is disabled for Aurora MySQL 5\.7\.
 
 ## Comparison with Aurora MySQL 5\.6<a name="AuroraMySQL.Updates.20180206.Compare56"></a>
 
@@ -18,7 +20,7 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, b
 
 + Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
 
-+ Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
++ Native functions for synchronously invoking AWS Lambda functions\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
 
 + Scan batching\. For more information, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 
@@ -26,13 +28,11 @@ The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, b
 
 Currently, Aurora MySQL 2\.01 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
 
-The performance schema is disabled for Aurora MySQL 5\.7\.
+## MySQL 5\.7 compatibility<a name="AuroraMySQL.Updates.20180206.Compatibility"></a>
 
-## MySQL 5\.7\.12 compatibility<a name="AuroraMySQL.Updates.20180206.Compatibility"></a>
+Amazon Aurora MySQL 2\.01 is wire\-compatible with MySQL 5\.7 and includes features such as JSON support, spatial indexes, and generated columns\. Amazon Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
 
-Amazon Aurora MySQL 2\.01 is wire\-compatible with MySQL 5\.7\.12 and includes features such as JSON support, spatial indexes, and generated columns\. Amazon Aurora MySQL uses a native implementation of spatial indexing using z\-order curves to deliver >20x better write performance and >10x better read performance than MySQL 5\.7 for spatial datasets\.
-
-Amazon Aurora MySQL 2\.01 does not currently support the following MySQL 5\.7\.12 features:
+Amazon Aurora MySQL 2\.01 does not currently support the following MySQL 5\.7 features:
 
 + Global transaction identifiers \(GTIDs\)
 

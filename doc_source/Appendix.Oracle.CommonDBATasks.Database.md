@@ -52,7 +52,7 @@ The following example resizes a bigfile tablespace named `users2` to 200 MB:
 The following example adds an additional datafile to a smallfile tablespace named users2: 
 
 ```
-1. alter tablespace users3 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
+1. alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
 ```
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
@@ -150,7 +150,7 @@ The following example changes the time zone to the time zone of the Africa/Algie
 
 After you alter the time zone by using the `alter_db_time_zone` procedure, you must reboot the DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
 
-## Working with Oracle External Tables<a name="Appendix.Oracle.CommonDBATasks.Extenral_Tables"></a>
+## Working with Oracle External Tables<a name="Appendix.Oracle.CommonDBATasks.External_Tables"></a>
 
 *Oracle external tables *are tables with data that is not in the database\. Instead, the data is in external files that the database can access\. By using external tables, you can access data without loading it into the database\. For more information about external tables, see [Managing External Tables](http://docs.oracle.com/database/121/ADMIN/tables.htm#ADMIN01507) in the Oracle documentation\. 
 

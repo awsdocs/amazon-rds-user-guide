@@ -17,10 +17,12 @@ The following table shows the regions where Aurora MySQL is currently available\
 | Asia Pacific \(Mumbai\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-south\-1](https://console.aws.amazon.com/rds/home?region=ap-south-1) | 
 | Asia Pacific \(Tokyo\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-1](https://console.aws.amazon.com/rds/home?region=ap-northeast-1) | 
 | Asia Pacific \(Seoul\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-2](https://console.aws.amazon.com/rds/home?region=ap-northeast-2) | 
+| Asia Pacific \(Singapore\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-1](https://console.aws.amazon.com/rds/home?region=ap-southeast-1) | 
 | Asia Pacific \(Sydney\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-2](https://console.aws.amazon.com/rds/home?region=ap-southeast-2) | 
 | EU \(Frankfurt\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-central\-1](https://console.aws.amazon.com/rds/home?region=eu-central-1) | 
 | EU \(Ireland\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-1](https://console.aws.amazon.com/rds/home?region=eu-west-1) | 
 | EU \(London\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-2](https://console.aws.amazon.com/rds/home?region=eu-west-2) | 
+| EU \(Paris\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-west\-3](https://console.aws.amazon.com/rds/home?region=eu-west-3) | 
 
 ## Amazon Aurora MySQL Performance Enhancements<a name="Aurora.AuroraMySQL.Performance"></a>
 

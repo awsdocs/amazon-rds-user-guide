@@ -27,7 +27,7 @@ The `mysql.rds_skip_repl_error` procedure is available in these versions of Amaz
 **Important**  
 If you attempt to call `mysql.rds_skip_repl_error` and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
 
-### Slave Down or Disabled Error<a name="w3ab1c34c81c17b7c14"></a>
+### Slave Down or Disabled Error<a name="w3ab1c32c81c17b7c14"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
 

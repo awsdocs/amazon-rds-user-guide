@@ -9,21 +9,9 @@ Although Amazon Aurora is compatible with the MySQL and PostgreSQL database engi
 
 | Database Engine | Queries | 
 | --- | --- | 
-|   MySQL   |  
-
-```
-select AURORA_VERSION();
-```  | 
-|   MySQL   |  
-
-```
-select @@aurora_version;
-```  | 
-|   PostgreSQL   |  
-
-```
-SELECT AURORA_VERSION();
-```  | 
+|   MySQL   |  <pre>select AURORA_VERSION();</pre>  | 
+|   MySQL   |  <pre>select @@aurora_version;</pre>  | 
+|   PostgreSQL   |  <pre>SELECT AURORA_VERSION();</pre>  | 
 
 ## Amazon Aurora Database Upgrades \(Patching\)<a name="AuroraMySQL.Updates.Patching"></a>
 
@@ -43,6 +31,9 @@ Before automatic upgrade, new database engine releases show as an **available** 
 
 For more information on how Amazon RDS manages database and operating system updates, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\. 
 
+**Note**  
+If your current Aurora MySQL version is 1\.14\.x, but it is lower than 1\.14\.4, you can only upgrade to 1\.14\.4 \(which supports db\.r4 instance classes\)\. Also, to upgrade from 1\.14\.x to a higher major Aurora MySQL version, such as 1\.17, the 1\.14\.x version must be 1\.14\.4\.
+
 ## Aurora Lab Mode<a name="AuroraMySQL.Updates.LabMode"></a>
 
 Aurora lab mode is used to enable Aurora features that are available in the current Aurora database version, but are not enabled by default\. While Aurora lab mode features are not recommended for use in production DB clusters, you can use Aurora lab mode to enable these features for DB clusters in your development and test environments\. For more information about Aurora features available when Aurora lab mode is enabled, see [Aurora Lab Mode Features](AuroraMySQL.Updates.LabModeFeatures.md)\.
@@ -51,48 +42,10 @@ The `aurora_lab_mode` parameter is an instance\-level parameter that is in the d
 
 ## Related Topics<a name="AuroraMySQL.Updates.Related"></a>
 
-+ [Amazon Aurora MySQL Database Engine Updates 2018\-02\-06](AuroraMySQL.Updates.20180206.md) \(Version 2\.01\)
++ [Aurora Lab Mode Features](AuroraMySQL.Updates.LabModeFeatures.md)
 
-+ [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md) \(Version 1\.16\)
++ [Amazon Aurora MySQL 2\.0 Database Engine Updates ](AuroraMySQL.Updates.20Updates.md)
 
-+ [Amazon Aurora MySQL Database Engine Updates 2017\-11\-20](AuroraMySQL.Updates.20171120.md) \(Version 1\.15\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates 2017\-10\-24](AuroraMySQL.Updates.20171024.md) \(Version 1\.15\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-09\-22](AuroraMySQL.Updates.20170922.md) \(Version 1\.14\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-08\-07](AuroraMySQL.Updates.20170807.md) \(Version 1\.14\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-05\-15](AuroraMySQL.Updates.20170515.md) \(Version 1\.13\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-04\-05](AuroraMySQL.Updates.20170405.md) \(Version 1\.12\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-02\-23](AuroraMySQL.Updates.20170223.md) \(Version 1\.11\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2017\-01\-12](AuroraMySQL.Updates.20170112.md) \(Version 1\.10\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-12\-14](AuroraMySQL.Updates.20161214.md) \(Version 1\.10\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-11\-10](AuroraMySQL.Updates.20161110.md) \(Versions 1\.9\.0, 1\.9\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-10\-26](AuroraMySQL.Updates.20161026.md) \(Version 1\.8\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-10\-18](AuroraMySQL.Updates.20161018.md) \(Version 1\.8\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-09\-20](AuroraMySQL.Updates.20160920.md) \(Version 1\.7\.1\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-08\-30](AuroraMySQL.Updates.20160830.md) \(Version 1\.7\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-06\-01](AuroraMySQL.Updates.20160601.md) \(Version 1\.6\.5\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-04\-06](AuroraMySQL.Updates.20160406.md) \(Version 1\.6\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2016\-01\-11](AuroraMySQL.Updates.20160111.md) \(Version 1\.5\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2015\-12\-03](AuroraMySQL.Updates.20151203.md) \(Version 1\.4\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2015\-10\-16](AuroraMySQL.Updates.20151016.md) \(Versions 1\.2, 1\.3\)
-
-+ [Amazon Aurora MySQL Database Engine Updates: 2015\-08\-24](AuroraMySQL.Updates.20150824.md) \(Version 1\.1\)
++ [Amazon Aurora MySQL 1\.1 Database Engine Updates ](AuroraMySQL.Updates.11Updates.md)
 
 + [MySQL Bugs Fixed by Amazon Aurora MySQL Database Engine Updates](AuroraMySQL.Updates.MySQLBugs.md)

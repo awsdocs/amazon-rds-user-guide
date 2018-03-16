@@ -48,7 +48,7 @@ There are also several appendices with useful information about working with Ama
 
 ## MySQL on Amazon RDS Versions<a name="MySQL.Concepts.VersionMgmt"></a>
 
-For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.6 to 5\.7\. A version change is considered minor if only the minor version number changes—for example, going from version 5\.7\.16 to 5\.7\.19\. 
+For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.6 to 5\.7\. A version change is considered minor if only the minor version number changes—for example, going from version 5\.7\.16 to 5\.7\.21\. 
 
 Amazon RDS currently supports the following versions of MySQL: 
 
@@ -193,6 +193,22 @@ Amazon RDS creates an SSL certificate and installs the certificate on the DB ins
 
 An SSL certificate created by Amazon RDS is the trusted root entity and should work in most cases but might fail if your application does not accept certificate chains\. If your application does not accept certificate chains, you might need to use an intermediate certificate to connect to your region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\) region using SSL\. For a list of regional intermediate certificates that you can download, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. 
 
+MySQL uses yaSSL for secure connections in the following versions:
+
++ MySQL version 5\.7\.19 and earlier
+
++ MySQL version 5\.6\.37 and earlier
+
++ MySQL version 5\.5\.57 and earlier
+
+MySQL uses OpenSSL for secure connections in the following versions:
+
++ MySQL version 5\.7\.21 and later
+
++ MySQL version 5\.6\.39 and later
+
++ MySQL version 5\.5\.59 and later
+
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
 For MySQL 5\.7 and later:
@@ -209,10 +225,18 @@ mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
 --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
 ```
 
-You can use the GRANT statement to require SSL connections for specific users accounts\. For example, you can use the following statement to require SSL connections on the user account encrypted\_user:
+You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
+
+For MySQL 5\.7 and later:
 
 ```
- GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL 
+ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
+```
+
+For MySQL 5\.6 and earlier:
+
+```
+GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
 For more information on SSL connections with MySQL, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/secure-connections.html)\. 

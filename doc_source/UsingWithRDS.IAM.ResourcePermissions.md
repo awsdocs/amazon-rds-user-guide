@@ -24,7 +24,7 @@ Resource\-level permissions refers to the ability to specify the resources on wh
 
 The following lists RDS API operations and their related actions, resources, and condition keys\.
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.ResourcePermissions.html)
+<a name="actions-related-to-objects-table"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAM.ResourcePermissions.html)
 
 ## Amazon RDS Actions That Don't Support Resource\-Level Permissions<a name="UsingWithRDS.IAM.UnsupportedResourceLevelPermissions"></a>
 

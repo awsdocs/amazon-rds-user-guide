@@ -15,7 +15,7 @@ You can specify a Multi\-AZ deployment using the CLI as well\. Use the AWS CLI [
 
 The RDS console shows the Availability Zone of the standby replica \(called the secondary AZ\), or you can use the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to find the secondary AZ\.
 
-DB instances using Multi\-AZ deployments may have increased write and commit latency compared to a Single\-AZ deployment, due to the synchronous data replication that occurs\. You may have a change in latency if your deployment fails over to the standby replica, although AWS is engineered with low\-latency network connectivity between Availability Zones\. For production workloads, we recommend that you use Provisioned IOPS and DB instance classes \(m1\.large and larger\) that are optimized for Provisioned IOPS for fast, consistent performance\.
+DB instances using Multi\-AZ deployments may have increased write and commit latency compared to a Single\-AZ deployment, due to the synchronous data replication that occurs\. You may have a change in latency if your deployment fails over to the standby replica, although AWS is engineered with low\-latency network connectivity between Availability Zones\. For production workloads, we recommend that you use Provisioned IOPS and DB instance classes \(m4\.large and larger\) that are optimized for Provisioned IOPS for fast, consistent performance\.
 
 ## Modifying a DB Instance to Be a Multi\-AZ Deployment<a name="Concepts.MultiAZ.Migrating"></a>
 

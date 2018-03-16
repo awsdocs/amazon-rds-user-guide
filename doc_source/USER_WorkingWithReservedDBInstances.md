@@ -9,7 +9,7 @@ The general process for working with reserved DB instances is: First get informa
 When you purchase a reserved instance in Amazon RDS, you purchase a commitment to getting a discounted rate, on a specific DB instance type, for the duration of the reserved instance\. To use an Amazon RDS reserved instance, you create a new DB instance just like you do for an on\-demand instance\. The new DB instance you create must match the specifications of the reserved instance\. If the specifications of the new DB instance matches an existing reserved instance for your account, you are billed at the discounted rate offered for the reserved instance; otherwise, the DB instance is billed at an on\-demand rate\. 
 
 **Note**  
-You can move a reserved DB instance from an EC2\-Classic \(non\-VPC\) instance into an Amazon Virtual Private Cloud \(Amazon VPC\) without additional charge\. 
+ The discount from a reserved DB instance will apply to usage irrespective of whether the instance is running in an EC2\-Classic \(non\-VPC\) or Amazon Virtual Private Cloud \(Amazon VPC\)\. For information about moving a DB instance into a VPC, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 For more information about reserved DB instances, including pricing, see [Amazon RDS Reserved Instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
 

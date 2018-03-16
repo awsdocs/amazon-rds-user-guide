@@ -209,6 +209,6 @@ The following are some known issues for working with RCU, with some troubleshoot
 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w3ab1c36c83c19c19"></a>
+## Related Topics<a name="w3ab1c34c83c19c19"></a>
 
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

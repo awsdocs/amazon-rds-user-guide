@@ -36,7 +36,7 @@ You can set up GTID\-based replication from an external MariaDB instance of vers
 **Note**  
 The permissions required to start replication on an Amazon RDS MariaDB DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS MariaDB database\. 
 
-To start replication between an external master instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. 
+To start replication between an external master instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. <a name="MariaDB.Procedural.Importing.External.Repl.Procedure"></a>
 
 **To Start Replication**
 

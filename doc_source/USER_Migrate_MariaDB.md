@@ -8,7 +8,9 @@ After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associa
 
 Incompatibilities between MySQL and MariaDB include the following:
 
-+ You cannot migrate a DB snapshot created with MySQL 5\.7 or MySQL 5\.5 to MariaDB 10\.1\.
++ You can't migrate a DB snapshot created with MySQL 5\.7 or MySQL 5\.5 to MariaDB 10\.1\.
+
++ You can't migrate an encrypted snapshot\.
 
 + If the source MySQL database uses a SHA256 password hash, you need to reset user passwords that are SHA256 hashed before you can connect to the MariaDB database\. The following code shows how to reset a password that is SHA256 hashed:
 

@@ -218,7 +218,7 @@ There are several reasons you might want to promote a Read Replica to a standalo
 
 When you promote a Read Replica, the new DB instance that is created retains the backup retention period, the backup window, and the parameter group of the former Read Replica source\. The promotion process can take several minutes or longer to complete, depending on the size of the Read Replica\. Once you promote the Read Replica to a new DB instance, it's just like any other DB instance\. For example, you can convert the new DB instance into a Multi\-AZ DB instance, create Read Replicas from it, and perform point\-in\-time restore operations\. Because the promoted DB instance is no longer a Read Replica, you can't use it as a replication target\. If a source DB instance has several Read Replicas, promoting one of the Read Replicas to a DB instance has no effect on the other replicas\. 
 
-We recommend that you disable automated backups on your Read Replica before promoting the Read Replica\. This approach ensures that no backup is performed during the promotion process\. Once the instance is promoted to a primary instance, backups are performed based on your backup settings\. 
+ Backup duration is a function of the amount of changes to the database since the previous backup\. If you plan to promote a Read Replica to a standalone instance, we recommend that you enable backups and complete at least one backup prior to promotion\. In addition, a Read Replica cannot be promoted to a standalone instance when it is in the `backing-up` status\. If you have enabled backups on your Read Replica, configure the automated backup window so that daily backups do not interfere with Read Replica promotion\. 
 
 The following steps show the general process for promoting a Read Replica to a DB instance: 
 
@@ -574,7 +574,7 @@ You can monitor how far a MySQL or MariaDB Read Replica is lagging the source DB
 
 ## Troubleshooting a MySQL or MariaDB Read Replica Problem<a name="USER_ReadRepl.Troubleshooting"></a>
 
-MySQL and MariaDB's replication technologies are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the Read Replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the Read Replica are serialized using a single I/O thread, which can lead to a lag between the source instance and Read Replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html)\. For more information about read\-only replicas in the MariaDB documentation, go to [Replication Overview](http://mariadb.com/kb/en/mariadb/replication-overview/)\.
+The replication technologies for MySQL and MariaDB are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the Read Replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the Read Replica are serialized using a single I/O thread, which can lead to a lag between the source instance and Read Replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html)\. For more information about read\-only replicas in the MariaDB documentation, go to [Replication Overview](http://mariadb.com/kb/en/mariadb/replication-overview/)\.
 
 You can do several things to reduce the lag between updates to a source DB instance and the subsequent updates to the Read Replica, such as the following:
 
@@ -609,15 +609,12 @@ The PostgreSQL parameter, `wal_keep_segments`, dictates how many Write Ahead Log
  The PostgreSQL log on the Read Replica shows when Amazon RDS is recovering a Read Replica that is this state by replaying archived WAL files\. 
 
 ```
-  2014-11-07 19:01:10 UTC::@:[23180]:DEBUG:  switched WAL source from archive to stream after
-      failure 2014-11-07 19:01:10 UTC::@:[11575]:LOG:  started streaming WAL from primary at
-      1A/D3000000 on timeline 1 2014-11-07 19:01:10 UTC::@:[11575]:FATAL:  could not receive
-      data from WAL stream: ERROR:  requested WAL segment 000000010000001A000000D3 has already been
-      removed 2014-11-07 19:01:10 UTC::@:[23180]:DEBUG:  could not restore file
-      "00000002.history" from archive: return code 0 2014-11-07 19:01:15
-      UTC::@:[23180]:DEBUG:  switched WAL source from stream to archive after failure
-      recovering 000000010000001A000000D3 2014-11-07 19:01:16 UTC::@:[23180]:LOG:  restored log file "000000010000001A000000D3"
-        from archive
+2014-11-07 19:01:10 UTC::@:[23180]:DEBUG: switched WAL source from archive to stream after failure
+2014-11-07 19:01:10 UTC::@:[11575]:LOG: started streaming WAL from primary at 1A/D3000000 on timeline 1
+2014-11-07 19:01:10 UTC::@:[11575]:FATAL: could not receive data from WAL stream: ERROR: requested WAL segment 000000010000001A000000D3 has already been removed
+2014-11-07 19:01:10 UTC::@:[23180]:DEBUG: could not restore file "00000002.history" from archive: return code 0
+2014-11-07 19:01:15 UTC::@:[23180]:DEBUG: switched WAL source from stream to archive after failure recovering 000000010000001A000000D3
+2014-11-07 19:01:16 UTC::@:[23180]:LOG: restored log file "000000010000001A000000D3" from archive
 ```
 
 After a certain amount of time, Amazon RDS replays enough archived WAL files on the replica to catch up and allow the Read Replica to begin streaming again\. At this point, PostgreSQL resumes streaming and writes a similar line to the following to the log file\.

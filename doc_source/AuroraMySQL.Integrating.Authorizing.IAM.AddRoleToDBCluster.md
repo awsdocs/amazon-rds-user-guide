@@ -38,7 +38,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
 
    1. Choose **Create Parameter Group**\.
 
-   1. For **Parameter group family**, choose `aurora5.6` for an Aurora MySQL 5\.6\-compatible DB cluster, or choose `aurora5.7` for an Aurora MySQL 5\.7\-compatible DB cluster\.
+   1. For **Parameter group family**, choose `aurora5.6` for an Aurora MySQL 5\.6\-compatible DB cluster, or choose `aurora-mysql5.7` for an Aurora MySQL 5\.7\-compatible DB cluster\.
 
    1. For **Type**, choose **DB Cluster Parameter Group**\. 
 
@@ -91,7 +91,7 @@ To associate an IAM role to permit your Amazon RDS cluster to communicate with o
         --db-parameter-group-family aurora5.6 --description "Allow access to Amazon S3 and AWS Lambda"
    ```
 
-   For an Aurora MySQL 5\.7\-compatible DB cluster, specify `aurora5.7` for `--db-parameter-group-family`\.
+   For an Aurora MySQL 5\.7\-compatible DB cluster, specify `aurora-mysql5.7` for `--db-parameter-group-family`\.
 
 1. Set the appropriate cluster\-level parameter or parameters and the related IAM role ARN values in your DB cluster parameter group, as shown following\. 
 

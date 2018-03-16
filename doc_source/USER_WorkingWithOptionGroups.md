@@ -64,7 +64,7 @@ After you create a new option group, it has no options\. To learn how to add opt
 
 ### AWS Management Console<a name="USER_WorkingWithOptionGroups.Create.Console"></a>
 
- One way of creating on option group is by using the AWS Management Console\. 
+ One way of creating an option group is by using the AWS Management Console\. 
 
 **To create a new option group by using the console**
 

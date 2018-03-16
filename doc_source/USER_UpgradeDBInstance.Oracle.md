@@ -23,14 +23,13 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby r
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
-Amazon RDS supports the following upgrades to an Oracle DB instance\. 
+Amazon RDS supports upgrades of Oracle DB instances running Oracle version 11\.2\.0\.4 to Oracle version 12\.1\.0\.2\.v5 and higher\. You must modify the DB instance manually to perform a major version upgrade\. Major version upgrades do not occur automatically\. 
 
-
-****  
-
-| Current Version | Upgrade Path | 
-| --- | --- | 
-|  11\.2\.0\.4\.v1, 11\.2\.0\.4\.v3 – 11\.2\.0\.4\.v14   |  Upgrade directly to 12\.1\.0\.2\.v10  | 
+**Note**  
+Major version upgrades are not supported for deprecated Oracle versions, such as Oracle version 11\.2\.0\.3 and 11\.2\.0\.2\.
+Major version downgrades are not supported\.
+A major version upgrade from 11g to 12c must upgrade to an Oracle PSU that was released in the same month or later\.  
+For example, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v11 is supported\. However, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v9 is not supported, because Oracle version 11\.2\.0\.4\.v14 was released in October 2017 while Oracle version 12\.1\.0\.2\.v9 was released in July 2017\. For information about the release date for each Oracle PSU, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.
 
 ## Oracle Minor Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Minor"></a>
 
@@ -46,6 +45,9 @@ The following minor version upgrades are not supported\.
 | 12\.1\.0\.2\.v6 | 12\.1\.0\.2\.v7 | 
 | 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v7 | 
 | 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v6 | 
+
+**Note**  
+Minor version downgrades are not supported\.
 
 ## Oracle SE2 Upgrade Paths<a name="USER_UpgradeDBInstance.Oracle.SE2"></a>
 

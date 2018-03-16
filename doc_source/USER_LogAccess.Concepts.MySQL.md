@@ -60,6 +60,9 @@ You can configure your Amazon RDS MySQL DB instance to publish log data to a log
 
 Amazon RDS publishes each MySQL database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\. 
 
+**Note**  
+Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6 and 5\.7\.
+
 **To publish MySQL DB logs to CloudWatch Logs from the console**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.

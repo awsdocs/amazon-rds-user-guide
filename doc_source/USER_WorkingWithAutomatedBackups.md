@@ -122,7 +122,7 @@ To disable automated backups immediately, call the [ModifyDBInstance](http://doc
 
 ## Enabling Automated Backups<a name="USER_WorkingWithAutomatedBackups.Enabling"></a>
 
-If your DB instance doesn't have automated backups enabled, you can enable them at any time\. You enable automated backups by setting the backup retention period to a positive non\-zero value\. When automated backups are enabled, an outage occurs and a backup is immediately created\. 
+If your DB instance doesn't have automated backups enabled, you can enable them at any time\. You enable automated backups by setting the backup retention period to a positive non\-zero value\. When automated backups are enabled, your RDS instance and database is taken offline and a backup is immediately created\. 
 
 In this example, you enable automated backups for a DB instance named *mydbinstance* by setting the backup retention period to a positive non\-zero value \(in this case, 3\)\. 
 
@@ -235,7 +235,9 @@ For the MySQL DB engine, automated backups are only supported for the InnoDB sto
 
 ## Automated Backups with Unsupported MariaDB Storage Engines<a name="Overview.BackupDeviceRestrictionsMariaDB"></a>
 
-For the MariaDB DB engine, automated backups are only supported for the XtraDB storage engine; use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the XtraDB storage engine\. 
+For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine \(version 10\.2 and later\) and XtraDB storage engine \(versions 10\.0 and 10\.1\)\. Use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the XtraDB storage engine\. 
+
++ To convert existing Aria tables to InnoDB tables, you can use ALTER TABLE command\. For example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
 
 + To convert existing Aria tables to XtraDB tables, you can use ALTER TABLE command\. For example: `ALTER TABLE table_name ENGINE=xtradb, ALGORITHM=COPY;` 
 

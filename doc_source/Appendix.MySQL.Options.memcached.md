@@ -26,7 +26,7 @@ You enable `memcached` support for an Amazon RDS MySQL 5\.6 or later instance by
 
 You turn off the `memcached` support for an instance by modifying the instance and specifying the default option group for your MySQL version\. For more information about modifying a MySQL instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\.
 
-## MySQL memcached Security Considerations<a name="w3ab1c34c69c15c12"></a>
+## MySQL memcached Security Considerations<a name="w3ab1c32c69c15c12"></a>
 
 The `memcached` protocol does not support user authentication\. For more information about MySQL `memcached` security considerations, go to [memcached Deployment](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-using-deployment.html) and [Using memcached as a MySQL Caching Layer](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-mysql-frontend.html)\.
 
@@ -36,7 +36,7 @@ You can take the following actions to help increase the security of the `memcach
 
 + Ensure that you associate the `memcached` interface with either a VPC or DB security group that limits access to known, trusted client addresses or EC2 instances\. For more information about managing security groups, see [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
 
-## MySQL memcached Connection Information<a name="w3ab1c34c69c15c14"></a>
+## MySQL memcached Connection Information<a name="w3ab1c32c69c15c14"></a>
 
 To access the `memcached` interface, an application must specify both the DNS name of the Amazon RDS instance and the `memcached` port number\. For example, if an instance has a DNS name of `my-cache-instance.cg034hpkmmjt.region.rds.amazonaws.com` and the memcached interface is using port 11212, the connection information specified in PHP would be:
 
@@ -68,11 +68,11 @@ To access the `memcached` interface, an application must specify both the DNS na
 
 1. Click the name of the option group used by the MySQL DB instance to show the option group details\. In the **Options** section, note the value of the **Port** setting for the **MEMCACHED** option\.
 
-## MySQL memcached Option Settings<a name="w3ab1c34c69c15c16"></a>
+## MySQL memcached Option Settings<a name="w3ab1c32c69c15c16"></a>
 
 Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Amazon RDS `MEMCACHED` option\.
 
-### MySQL memcached Parameters<a name="w3ab1c34c69c15c16b4"></a>
+### MySQL memcached Parameters<a name="w3ab1c32c69c15c16b4"></a>
 
 +  `DAEMON_MEMCACHED_R_BATCH_SIZE` \- an integer that specifies how many `memcached` read operations \(get\) to perform before doing a COMMIT to start a new transaction\. The allowed values are 1 to 4294967295, the default is 1\. The option does not take effect until the instance is restarted\.
 
@@ -88,7 +88,7 @@ Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Am
 
 Amazon RDS configures these MySQL `memcached` parameters, they cannot be modified: `DAEMON_MEMCACHED_LIB_NAME`, `DAEMON_MEMCACHED_LIB_PATH`, and `INNODB_API_ENABLE_BINLOG`\. The parameters that MySQL administrators set by using `daemon_memcached_options` are available as individual `MEMCACHED` option settings in Amazon RDS\.
 
-### MySQL `daemon_memcached_options` Parameters<a name="w3ab1c34c69c15c16b6"></a>
+### MySQL `daemon_memcached_options` Parameters<a name="w3ab1c32c69c15c16b6"></a>
 
 +  `BINDING_PROTOCOL` \- a string that specifies the binding protocol to use\. The allowed values are `auto`, `ascii`, or `binary`\. The default is `auto`, which means the server automatically negotiates the protocol with the client\. The option does not take effect until the instance is restarted\.
 

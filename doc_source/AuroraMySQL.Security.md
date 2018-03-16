@@ -96,13 +96,35 @@ We recommend the MariaDB Connector/J client as a client that supports SAN with S
 
 The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
 
-To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, for example:
+To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
- `mysql -h mycluster-primary.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert` 
+For MySQL 5\.7 and later:
 
-You can use the GRANT statement to require SSL connections for specific users accounts\. For example, you can use the following statement to require SSL connections on the user account `encrypted_user`\.
+```
+mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=VERIFY_IDENTITY
+```
 
- ` GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL ` 
+For MySQL 5\.6 and earlier:
+
+```
+mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
+```
+
+You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
+
+For MySQL 5\.7 and later:
+
+```
+ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
+```
+
+For MySQL 5\.6 and earlier:
+
+```
+GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
+```
 
 **Note**  
 For more information on SSL connections with MySQL, see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)\.

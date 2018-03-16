@@ -12,10 +12,6 @@ Amazon RDS supports a special AWS Region called AWS GovCloud \(US\) that is desi
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
-Amazon RDS supports the endpoints listed in the following table\. 
-
-
-****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 
 If you do not explicitly specify an endpoint, the US West \(Oregon\) endpoint is the default\. 

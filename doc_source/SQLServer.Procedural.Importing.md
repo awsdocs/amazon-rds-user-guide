@@ -201,7 +201,7 @@ You can't back up a database during the maintenance window, or when Amazon RDS i
 
   + `1` – Overwrite an existing file that has the specified name, even if it isn't a backup file\. 
 
-+ **`@type`** – Defaults to `differential`, not case sensitive
++ **`@type`** – Defaults to `FULL`, not case sensitive
 
   + `differential` – Take a differential backup\.
 

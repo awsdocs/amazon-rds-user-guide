@@ -143,7 +143,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 **Memory**
 
-+  Freeable Memory – How much RAM is available on the DB instance, in megabytes\. 
++ Freeable Memory – How much RAM is available on the DB instance, in megabytes\. The red line in the Monitoring tab metrics is marked at 75% for CPU, Memory and Storage Metrics\. If instance memory consumption frequently crosses that line, then this indcates that you should check your workload or upgrade your instance\. 
 
 +  Swap Usage – How much swap space is used by the DB instance, in megabytes\. 
 
@@ -241,9 +241,7 @@ In addition, Federated Storage Engine is currently not supported by Amazon RDS f
 
 ## Best Practices for Working with MariaDB Storage Engines<a name="CHAP_BestPractices.MariaDB"></a>
 
-The Point\-In\-Time Restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine and are supported for the XtraDB storage engine only\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a Point\-In\-Time Restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. 
-
-XtraDB is the recommended and supported storage engine for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated Backups with Unsupported MariaDB Storage Engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
+The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated Backups with Unsupported MariaDB Storage Engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
 
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 
@@ -268,6 +266,8 @@ Modify your DB parameter group to include the following settings\. You should te
 + Disable the `synchronous_commit` parameter \(do not turn off FSYNC\)\.
 
 + Disable the PostgreSQL autovacuum parameter\.
+
++ Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information see, [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/static/sql-createtable.html) 
 
 Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands with these settings\.
 

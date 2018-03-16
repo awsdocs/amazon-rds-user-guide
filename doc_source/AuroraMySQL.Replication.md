@@ -9,6 +9,9 @@ Aurora Replicas work well for read scaling because they are fully dedicated to r
 **Important**  
 Aurora Replicas for Aurora MySQL always use the `REPEATABLE READ` default transaction isolation level for operations on InnoDB tables\. You can use the `SET TRANSACTION ISOLATION LEVEL` command to change the transaction level only for the primary instance of an Aurora MySQL DB cluster\. This restriction avoids user\-level locks on Aurora Replicas, and allows Aurora Replicas to scale to support thousands of active user connections while still keeping replica lag to a minimum\.
 
+**Note**  
+DDL statements executed on the primary instance might interrupt database connections on the associated Aurora Replicas\. If an Aurora Replica connection is actively using a database object, such as a table, and that object is modified on the primary instance using a DDL statement, the Aurora Replica connection is interrupted\.
+
 ## Replication Options for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Options"></a>
 
 You can set up replication between any of the following options:

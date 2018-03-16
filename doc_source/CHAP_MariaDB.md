@@ -172,7 +172,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 ## Supported Storage Engines for MariaDB on Amazon RDS<a name="MariaDB.Concepts.Storage"></a>
 
-While MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the XtraDB storage engine for MariaDB DB instances\. Amazon RDS features such as Point\-In\-Time Restore and snapshot restore require a recoverable storage engine and are supported for the XtraDB storage engine only\. Amazon RDS also supports Aria, although using Aria might have a negative impact on recovery in the event of an instance failure\. However, if you need to use spatial indexes to handle geographic data, you should use Aria because spatial indexes are not supported by XtraDB\.
+While MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. Amazon RDS features such as Point\-In\-Time Restore and snapshot restore require a recoverable storage engine and are supported only for the recommended storage engine for the MariaDB version\. Amazon RDS also supports Aria, although using Aria might have a negative impact on recovery in the event of an instance failure\. However, if you need to use spatial indexes to handle geographic data on MariaDB 10\.1 or 10\.0, you should use Aria because spatial indexes are not supported by XtraDB\. On MariaDB 10\.2 and higher, the InnoDB storage engine supports spatial indexes\.
 
 Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
@@ -262,28 +262,46 @@ MariaDB 10\.2 now uses OpenSSL for secure connections\.
 
 To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
-```
-1. mysql -h myinstance.abcd1234.rds-us-east-1.amazonaws.com --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
-```
-
-You can use the GRANT statement to require SSL connections for specific users accounts\. For example, you can use the following statement to require SSL connections on the user account *encrypted\_user*: 
+For MariaDB 10\.2 and later:
 
 ```
-1. GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL
+mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=VERIFY_IDENTITY
+```
+
+For MariaDB 10\.1 and earlier:
+
+```
+mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
+```
+
+You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MariaDB version, to require SSL connections on the user account `encrypted_user`\.
+
+For MariaDB 10\.2 and later:
+
+```
+ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
+```
+
+For MariaDB 10\.1 and earlier:
+
+```
+GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
 For more information on SSL connections with MariaDB, see the [SSL Overview](http://mariadb.com/kb/en/mariadb/ssl-connections/) in the MariaDB documentation\. 
 
-## XtraDB Cache Warming<a name="MariaDB.Concepts.XtraDBCacheWarming"></a>
+## Cache Warming<a name="MariaDB.Concepts.XtraDBCacheWarming"></a>
 
-XtraDB cache warming can provide performance gains for your MariaDB DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This approach bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. For more information on XtraDB cache warming, see [Dumping and restoring the buffer pool](http://mariadb.com/kb/en/mariadb/xtradbinnodb-buffer-pool/#dumping-and-restoring-the-buffer-pool) in the MariaDB documentation\.
+InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) cache warming can provide performance gains for your MariaDB DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This approach bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. For more information on cache warming, see [Dumping and restoring the buffer pool](http://mariadb.com/kb/en/mariadb/xtradbinnodb-buffer-pool/#dumping-and-restoring-the-buffer-pool) in the MariaDB documentation\.
 
-To enable XtraDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_restore_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group affects all MariaDB DB instances that use that parameter group\. To enable XtraDB cache warming for specific MariaDB DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
+To enable cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_restore_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group affects all MariaDB DB instances that use that parameter group\. To enable cache warming for specific MariaDB DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
-XtraDB cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you don't commonly see a significant performance benefit\.
+Cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you don't commonly see a significant performance benefit\.
 
 **Important**  
-If your MariaDB DB instance doesn't shut down normally, such as during a failover, then the buffer pool state isn't saved to disk\. In this case, MariaDB loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the XtraDB cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand\.  
+If your MariaDB DB instance doesn't shut down normally, such as during a failover, then the buffer pool state isn't saved to disk\. In this case, MariaDB loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand\.  
 You can create an event to dump the buffer pool automatically and at a regular interval\. For example, the following statement creates an event named `periodic_buffer_pool_dump` that dumps the buffer pool every hour\.   
 
 ```
@@ -295,7 +313,7 @@ For more information, see [Events](http://mariadb.com/kb/en/mariadb/stored-progr
 
 ### Dumping and Loading the Buffer Pool on Demand<a name="MariaDB.Concepts.XtraDBCacheWarming.OnDemand"></a>
 
-You can save and load the XtraDB cache on demand using the following stored procedures:
+You can save and load the cache on demand using the following stored procedures:
 
 + To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
 
@@ -309,7 +327,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 
 ## Common DBA Tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 
-Killing sessions or queries, skipping replication errors, working with XtraDB tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in an Amazon RDS MySQL DB instance, as described in [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running XtraDB as well\.
+Killing sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in an Amazon RDS MySQL DB instance, as described in [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
 
 ## Local Time Zone for MariaDB DB Instances<a name="MariaDB.Concepts.LocalTimeZone"></a>
 

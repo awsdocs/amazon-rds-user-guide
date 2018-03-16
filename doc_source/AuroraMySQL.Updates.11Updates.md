@@ -1,0 +1,49 @@
+# Amazon Aurora MySQL 1\.1 Database Engine Updates<a name="AuroraMySQL.Updates.11Updates"></a>
+
+The following are Amazon Aurora 1\.1 database engine updates:
+
++ [Amazon Aurora MySQL Database Engine Updates 2018\-03\-13](AuroraMySQL.Updates.117.md) \(Version 1\.17\)
+
++ [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md) \(Version 1\.16\)
+
++ [Amazon Aurora MySQL Database Engine Updates 2017\-11\-20](AuroraMySQL.Updates.20171120.md) \(Version 1\.15\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates 2017\-10\-24](AuroraMySQL.Updates.20171024.md) \(Version 1\.15\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2018\-03\-13](AuroraMySQL.Updates.1144.md) \(Version 1\.14\.4\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-09\-22](AuroraMySQL.Updates.20170922.md) \(Version 1\.14\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-08\-07](AuroraMySQL.Updates.20170807.md) \(Version 1\.14\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-05\-15](AuroraMySQL.Updates.20170515.md) \(Version 1\.13\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-04\-05](AuroraMySQL.Updates.20170405.md) \(Version 1\.12\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-02\-23](AuroraMySQL.Updates.20170223.md) \(Version 1\.11\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2017\-01\-12](AuroraMySQL.Updates.20170112.md) \(Version 1\.10\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-12\-14](AuroraMySQL.Updates.20161214.md) \(Version 1\.10\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-11\-10](AuroraMySQL.Updates.20161110.md) \(Versions 1\.9\.0, 1\.9\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-10\-26](AuroraMySQL.Updates.20161026.md) \(Version 1\.8\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-10\-18](AuroraMySQL.Updates.20161018.md) \(Version 1\.8\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-09\-20](AuroraMySQL.Updates.20160920.md) \(Version 1\.7\.1\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-08\-30](AuroraMySQL.Updates.20160830.md) \(Version 1\.7\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-06\-01](AuroraMySQL.Updates.20160601.md) \(Version 1\.6\.5\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-04\-06](AuroraMySQL.Updates.20160406.md) \(Version 1\.6\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2016\-01\-11](AuroraMySQL.Updates.20160111.md) \(Version 1\.5\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2015\-12\-03](AuroraMySQL.Updates.20151203.md) \(Version 1\.4\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2015\-10\-16](AuroraMySQL.Updates.20151016.md) \(Versions 1\.2, 1\.3\)
+
++ [Amazon Aurora MySQL Database Engine Updates: 2015\-08\-24](AuroraMySQL.Updates.20150824.md) \(Version 1\.1\)

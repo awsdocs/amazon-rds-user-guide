@@ -126,8 +126,8 @@ The following table contains details about which settings you can modify, which 
 
 ## Related Topics<a name="USER_ModifyInstance.Postgres.RelatedTopics"></a>
 
-+ [[ERROR] BAD/MISSING LINK TEXT](USER_RebootInstance.md) 
++ [[Rebooting a DB Instance](USER_RebootInstance.md)](USER_RebootInstance.md) 
 
-+ [[ERROR] BAD/MISSING LINK TEXT](USER_ConnectToPostgreSQLInstance.md)
++ [[Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)](USER_ConnectToPostgreSQLInstance.md)
 
-+ [[ERROR] BAD/MISSING LINK TEXT](USER_UpgradeDBInstance.PostgreSQL.md)
++ [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)

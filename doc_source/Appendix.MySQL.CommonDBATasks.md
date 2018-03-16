@@ -68,7 +68,7 @@ MySQL processes each metadata file, which includes tablespaces, during the crash
 
 Since the `innodb_file_per_table` parameter resides in a parameter group, you can change the parameter value by editing the parameter group used by your DB instance without having to reboot the DB instance\. After the setting is changed, for example, from 1 \(create individual tables\) to 0 \(use shared tablespace\), new InnoDB tables will be added to the shared tablespace while existing tables continue to have individual tablespaces\. To move an InnoDB table to the shared tablespace, you must use the `ALTER TABLE` command\.
 
-### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w3ab1c34c73c13c12"></a>
+### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w3ab1c32c73c13c12"></a>
 
 You can move an InnoDB table's metadata from its own tablespace to the shared tablespace, which will rebuild the table metadata according to the `innodb_file_per_table` parameter setting\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
@@ -76,16 +76,18 @@ You can move an InnoDB table's metadata from its own tablespace to the shared ta
 ALTER TABLE table_name ENGINE = InnoDB, ALGORITHM=COPY; 
 ```
 
-For example, the following query returns an `ALTER TABLE` statement for every InnoDB table\.
+For example, the following query returns an `ALTER TABLE` statement for every InnoDB table that is not in the shared tablespace\.
 
 ```
 SELECT CONCAT('ALTER TABLE `', 
-    REPLACE(TABLE_SCHEMA, '`', '``'), '`.`', 
-    REPLACE(TABLE_NAME, '`', '``'), '` ENGINE=InnoDB, ALGORITHM=COPY;') 
-    FROM INFORMATION_SCHEMA.TABLES 
-    WHERE TABLE_TYPE = 'BASE TABLE' 
-    AND ENGINE = 'InnoDB' AND TABLE_SCHEMA <> 'mysql';
+REPLACE(LEFT(NAME , INSTR((NAME), '/') - 1), '`', '``'), '`.`', 
+REPLACE(SUBSTR(NAME FROM INSTR(NAME, '/') + 1), '`', '``'), '` ENGINE=InnoDB, ALGORITHM=COPY;') AS Query 
+FROM INFORMATION_SCHEMA.INNODB_SYS_TABLES 
+WHERE SPACE <> 0 AND LEFT(NAME, INSTR((NAME), '/') - 1) NOT IN ('mysql','');
 ```
+
+**Note**  
+This query is supported on MySQL 5\.6 and later\.
 
 Rebuilding a MySQL table to move the table's metadata to the shared tablespace requires additional storage space temporarily to rebuild the table, so the DB instance must have storage space available\. During rebuilding, the table is locked and inaccessible to queries\. For small tables or tables not frequently accessed, this may not be an issue; for large tables or tables frequently accessed in a heavily concurrent environment, you can rebuild tables on a Read Replica\. 
 

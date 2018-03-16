@@ -2,12 +2,20 @@
 
 You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Aurora MySQL DB cluster\. The new Aurora MySQL DB cluster is populated with the data from the original Amazon RDS MySQL DB instance\. The DB snapshot must have been made from an Amazon RDS DB instance running MySQL version 5\.6 or 5\.7\.
 
-You can migrate a MySQL version 5\.6 snapshot to Aurora MySQL version 5\.6 or 5\.7\. You can only migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.7\.
+You can migrate either a manual or automated DB snapshot\. After the DB cluster is created, you can then create optional Aurora Replicas\.
+
+When the MySQL DB instance and the Aurora DB cluster are running the same version of MySQL, you can restore the MySQL snapshot directly to the Aurora DB cluster\. For example, you can restore a MySQL version 5\.6 snapshot directly to Aurora MySQL version 5\.6, but you can't restore a MySQL version 5\.6 snapshot directly to Aurora MySQL version 5\.7\.
+
+If you want to migrate a MySQL version 5\.6 snapshot to Aurora MySQL version 5\.7, you can perform the the migration in one of the following ways:
+
++ Migrate the MySQL version 5\.6 snapshot to Aurora MySQL version 5\.6, take a snapshot of the Aurora MySQL version 5\.6 DB cluster, and then restore the Aurora MySQL version 5\.6 snapshot to Aurora MySQL version 5\.7\.
+
++ Upgrade the MySQL version 5\.6 snapshot to MySQL version 5\.7, take a snapshot of the MySQL version 5\.7 DB instance, and then restore the MySQL version 5\.7 snapshot to Aurora MySQL version 5\.7\.
+
+You can't migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.6\.
 
 **Note**  
-Currently, you cannot restore a snapshot created with Aurora MySQL version 1\.16 or later into an Aurora MySQL 5\.7 DB cluster\.
-
-You can migrate either a manual or automated DB snapshot\. After the DB cluster is created, you can then create optional Aurora Replicas\.
+ You can also migrate a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. For more information, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using an Aurora Read Replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\. 
 
 The general steps you must take are as follows:
 
@@ -24,11 +32,9 @@ Amazon RDS limits each AWS account to one snapshot copy into each AWS Region at 
 
 ## How Much Space Do I Need?<a name="AuroraMySQL.Migrating.RDSMySQL.Space"></a>
 
-When you migrate a snapshot of a MySQL DB instance into an Aurora MySQL DB cluster, Aurora uses an Amazon Elastic Block Store \(Amazon EBS\) volume to format the data from the snapshot before migrating it\. In some cases, additional space is needed to format the data for migration\. When migrating data into your DB cluster, observe the following guidelines and limitations:
+When you migrate a snapshot of a MySQL DB instance into an Aurora MySQL DB cluster, Aurora uses an Amazon Elastic Block Store \(Amazon EBS\) volume to format the data from the snapshot before migrating it\. In some cases, additional space is needed to format the data for migration\.
 
-+ Although Aurora supports storage up to 64 TB in size, the process of migrating a snapshot into an Aurora MySQL DB cluster is limited by the size of the Amazon EBS volume of the snapshot\. Thus, the maximum size for a snapshot that you can migrate is 6 TB\.
-
-+ Tables that are not MyISAM tables and are not compressed can be up to 6 TB in size\. If you have MyISAM tables, then Aurora must use additional space in the volume to convert the tables to be compatible with Aurora MySQL\. If you have compressed tables, then Aurora must use additional space in the volume to expand these tables before storing them on the Aurora cluster volume\. Because of this additional space requirement, you should ensure that none of the MyISAM and compressed tables being migrated from your MySQL DB instance exceeds 3 TB in size\.
+Tables that are not MyISAM tables and are not compressed can be up to 16 TB in size\. If you have MyISAM tables, then Aurora must use additional space in the volume to convert the tables to be compatible with Aurora MySQL\. If you have compressed tables, then Aurora must use additional space in the volume to expand these tables before storing them on the Aurora cluster volume\. Because of this additional space requirement, you should ensure that none of the MyISAM and compressed tables being migrated from your MySQL DB instance exceeds 8 TB in size\.
 
 ## Reducing the Amount of Space Required to Migrate Data into Amazon Aurora MySQL<a name="AuroraMySQL.Migrating.RDSMySQL.PreImport"></a>
 

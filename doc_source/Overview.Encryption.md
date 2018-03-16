@@ -16,7 +16,7 @@ Amazon RDS also supports encrypting an Oracle or SQL Server DB instance with Tra
 
 To manage the keys used for encrypting and decrypting your Amazon RDS resources, you use the [AWS Key Management Service \(AWS KMS\)](http://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create encryption keys and define the policies that control how these keys can be used\. AWS KMS supports CloudTrail, so you can audit key usage to verify that keys are being used appropriately\. Your AWS KMS keys can be used in combination with Amazon RDS and supported AWS services such as Amazon Simple Storage Service \(Amazon S3\), Amazon Elastic Block Store \(Amazon EBS\), and Amazon Redshift\. For a list of services that support AWS KMS, go to [Supported Services](http://docs.aws.amazon.com/kms/latest/developerguide/services.html) in the *AWS Key Management Service Developer Guide*\.
 
-All logs, backups, and snapshots are encrypted for an Amazon RDS encrypted instance\. A Read Replica of an Amazon RDS encrypted instance is also encrypted using the same key as the master instance when both are in the same region\. If the master and Read Replica are in different regions, you encrypt using the encryption key for that region\. 
+All logs, backups, and snapshots are encrypted for an Amazon RDS encrypted instance\. A Read Replica of an Amazon RDS encrypted instance is also encrypted using the same key as the master instance when both are in the same region\. If the master and Read Replica are in different regions, you encrypt using the encryption key for that region\. You can create an encrypted Read Replica of an unencrypted DB instance, and you can create an unencrypted Read Replica of an encrypted DB instance\.
 
 ## Enabling Amazon RDS Encryption for a DB Instance<a name="Overview.Encryption.Enabling"></a>
 
@@ -83,8 +83,6 @@ The following limitations exist for Amazon RDS encrypted instances:
   However, because you can encrypt a copy of an unencrypted DB snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)\. You don't need to encrypt an Amazon Aurora DB cluster snapshot in order to create an encrypted copy of an Aurora DB cluster\. If you specify a KMS encryption key when restoring from an unencrypted DB cluster snapshot, the restored DB cluster is encrypted using the specified KMS encryption key\.
 
 + DB instances that are encrypted cannot be modified to disable encryption\.
-
-+ You cannot have an encrypted Read Replica of an unencrypted DB instance or an unencrypted Read Replica of an encrypted DB instance\.
 
 + Encrypted Read Replicas must be encrypted with the same key as the source DB instance\.
 

@@ -4,7 +4,7 @@
 
 Amazon Aurora MySQL 1\.12 is now the preferred version for the creation of new DB clusters, including restores from snapshots\.
 
-This is not a mandatory upgrade for existing clusters\. You will have the option to upgrade existing clusters to version 1\.12 after we complete the fleet\-wide patch to 1\.11 \(see Aurora 1\.11 release notes and corresponding [forum announcement](https://forums.aws.amazon.com/ann.jspa?annID=4444)\)\. With version 1\.12 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
+This is not a mandatory upgrade for existing clusters\. You will have the option to upgrade existing clusters to version 1\.12 after we complete the fleet\-wide patch to 1\.11 \(see Aurora 1\.11 [release notes](AuroraMySQL.Updates.20170223.md) and corresponding [forum announcement](https://forums.aws.amazon.com/ann.jspa?annID=4444)\)\. With version 1\.12 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## New Features<a name="AuroraMySQL.Updates.20170405.New"></a>
 

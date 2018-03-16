@@ -252,6 +252,9 @@ You can copy custom DB parameter groups that you create\. Copying a parameter gr
 
 After you copy a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group\. This allows Amazon RDS to fully complete the copy action before the parameter group is used as the default for a new DB instance\. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the `character_set_database` parameter\. You can use the **Parameter Groups** option of the [Amazon RDS console](https://console.aws.amazon.com/rds/) or the [describe\-db\-parameters](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command to verify that your DB parameter group has been created\.
 
+**Note**  
+You can't copy a default parameter group\. However, you can create a new parameter group that is based on a default parameter group\.
+
 ### CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
 
 To copy a DB parameter group, use the AWS CLI [copy\-db\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required parameters:

@@ -43,6 +43,8 @@ To create a DB security group, you need to provide a name and a description\.
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. Choose **Security Groups** in the navigation pane on the left side of the window\.
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
 
 1. Choose **Create DB Security Group**\.
 

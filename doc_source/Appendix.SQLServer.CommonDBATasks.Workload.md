@@ -42,7 +42,7 @@ DECLARE @rc INT
 DECLARE @traceid INT
 
 EXEC @rc = sp_trace_create @traceid OUTPUT, 2, @file_name, @max_file_size
-IF (@rc != 0) BEGIN
+IF (@rc = 0) BEGIN
    EXEC sp_trace_setevent @traceid, 10, 1, @on
    EXEC sp_trace_setevent @traceid, 10, 2, @on
    EXEC sp_trace_setevent @traceid, 10, 3, @on

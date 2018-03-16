@@ -33,13 +33,25 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [Asia Pacific \(Seoul\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-2.pem)
 
+[Asia Pacific \(Osaka\-Local\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-3.pem)
+
 [Asia Pacific \(Singapore\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-southeast-1.pem)
 
 [Asia Pacific \(Sydney\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-southeast-2.pem)
 
+[Canada \(Central\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ca-central-1.pem)
+
+[China \(Beijing\)](https://s3.amazonaws.com/rds-downloads/rds-cn-north-1-ca-certificate.pem)
+
+[China \(Ningxia\)](https://s3.amazonaws.com/rds-downloads/rds-ca-cn-northwest-1.pem)
+
 [EU \(Frankfurt\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-central-1.pem)
 
 [EU \(Ireland\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-1.pem)
+
+[EU \(London\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-2.pem)
+
+[EU \(Paris\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-3.pem)
 
 [South America \(São Paulo\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-sa-east-1.pem)
 
@@ -51,11 +63,9 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [US West \(Oregon\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem)
 
-[ China \(Beijing\)](https://s3.amazonaws.com/rds-downloads/rds-cn-north-1-ca-certificate.pem)
-
 [ AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012; for CA\-2017, see following\)
 
-### GovCloud \(US\) SSL Certificates 2017<a name="w3ab1c21c17c25c32"></a>
+### GovCloud \(US\) SSL Certificates 2017<a name="w3ab1c21c17c25c42"></a>
 
 To maintain connectivity, you need to update the CA\-2012 SSL certificates your client or application is using to connect to RDS before August 15, 2017, at 20:00 UTC\. Follow these steps:
 

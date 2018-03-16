@@ -27,7 +27,7 @@ For more information on PostgreSQL Read Replicas, see [Working with Read Replica
 |  RDSToAuroraPostgreSQLReplicaLag  |  The amount of time in seconds an Aurora PostgreSQL DB cluster lags behind the source RDS database instance\.  | 
 |  TransactionLogsDiskUsage  |  The disk space used by the transaction logs\. Units: Megabytes  | 
 
-For more information about monitoring your Amazon RDS instance see [[ERROR] BAD/MISSING LINK TEXT](CHAP_Monitoring.md)\.
+For more information about monitoring your Amazon RDS instance see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
 
 ## Creating an Aurora Read Replica<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.Replica.Create"></a>
 

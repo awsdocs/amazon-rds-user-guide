@@ -46,7 +46,7 @@ You can use the following automated monitoring tools to watch Amazon RDS and rep
 
 In addition, Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities:
 
-+ **Amazon CloudWatch Metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database instance and cluster\. You are not charged additionally for Amazon RDS metrics in CloudWatch\. For more information, see [[ERROR] BAD/MISSING LINK TEXT](#USER_Monitoring)\.
++ **Amazon CloudWatch Metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database instance and cluster\. You are not charged additionally for Amazon RDS metrics in CloudWatch\. For more information, see [Viewing DB Instance Metrics](#USER_Monitoring)\.
 
 + ** Amazon CloudWatch Alarms** – You can watch a single Amazon RDS metric over a specific time period, and perform one or more actions based on the value of the metric relative to a threshold you set\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)
 
@@ -140,13 +140,12 @@ The `AWS/RDS` namespace includes the following metrics\.
 | Metric | Description | 
 | --- | --- | 
 | BinLogDiskUsage |  The amount of disk space occupied by binary logs on the master\. Applies to MySQL read replicas\. Units: Bytes  | 
-| BufferCacheHitRatio |  The percentage of requests that are served by the buffer cache\. Units: Bytes  | 
 | BurstBalance |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.  Units: Percent  | 
 | CPUUtilization |  The percentage of CPU utilization\. Units: Percent  | 
-| CPUCreditUsage |  \[T2 instances\] The number of CPU credits used by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100% utilization for one minute or an equivalent combination of vCPUs, utilization, and time \(for example, one vCPU running at 50% utilization for two minutes or two vCPUs running at 25% utilization for two minutes\)\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\. Units: Credits \(vCPU\-minutes\)  | 
-| CPUCreditBalance |  \[T2 instances\] The number of earned CPU credits accumulated since the instance was launched, less the credits used, up to a maximum number based on the instance size\. Credits are stored in the credit balance after they are earned, and removed from the credit balance when they are used\. The credit balance has a maximum limit, determined by the instance size\. If the credit balance has reached the limit, additional earned credits are not added to the balance\. The credits in the `CPUCreditBalance` are available for the instance to use to burst beyond its baseline CPU utilization\. Credits on a running instance do not expire\. However, if you stop an instance, it loses all the credits in the credit balance\. CPU credit metrics are available at a five\-minute frequency only\. Units: Credits \(vCPU\-minutes\)  | 
-| CPUSurplusCreditBalance  |  \[T2 instances\] The number of surplus credits that have been used by a T2 Unlimited instance when its `CPUCreditBalance` is zero\. The `CPUSurplusCreditBalance` is paid down by earned CPU credits\. Units: Credits \(vCPU\-minutes\)   | 
-| CPUSurplusCreditsCharged |  \[T2 instances\] The number of surplus credits that have been used by a T2 Unlimited instance that are not offset by earned CPU credits\. `CPUSurplusCreditsCharged` tracks the surplus credits that incur an additional charge, and represents the difference between `CPUSurplusCreditBalance` and `CPUCreditBalance`\. Units: Credits \(vCPU\-minutes\)   | 
+| CPUCreditUsage |  \[T2 instances\] The number of CPU credits spent by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100% utilization for one minute or an equivalent combination of vCPUs, utilization, and time \(for example, one vCPU running at 50% utilization for two minutes or two vCPUs running at 25% utilization for two minutes\)\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\. Units: Credits \(vCPU\-minutes\)  | 
+| CPUCreditBalance |  \[T2 instances\] The number of earned CPU credits that an instance has accrued since it was launched or started\. For T2 Standard, the `CPUCreditBalance` also includes the number of launch credits that have been accrued\. Credits are accrued in the credit balance after they are earned, and removed from the credit balance when they are spent\. The credit balance has a maximum limit, determined by the instance size\. Once the limit is reached, any new credits that are earned are discarded\. For T2 Standard, launch credits do not count towards the limit\. The credits in the `CPUCreditBalance` are available for the instance to spend to burst beyond its baseline CPU utilization\. When an instance is running, credits in the `CPUCreditBalance` do not expire\. When the instance stops, the `CPUCreditBalance` does not persist, and all accrued credits are lost\. CPU credit metrics are available at a five\-minute frequency only\. Units: Credits \(vCPU\-minutes\)  | 
+| CPUSurplusCreditBalance  |  \[T2 Unlimited instances\] The number of surplus credits that have been spent by a T2 Unlimited instance when its `CPUCreditBalance` is zero\. The `CPUSurplusCreditBalance` is paid down by earned CPU credits\. If the number of surplus credits exceeds the maximum number of credits the instance can earn in a 24\-hour period, the spent surplus credits above the maximum incur an additional charge\. Units: Credits \(vCPU\-minutes\)   | 
+| CPUSurplusCreditsCharged |  \[T2 Unlimited instances\] The number of spent surplus credits that are not paid down by earned CPU credits, and thus incur an additional charge\. Spent surplus credits are charged when any of the following occurs:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Monitoring.html) Units: Credits \(vCPU\-minutes\)   | 
 | DatabaseConnections |  The number of database connections in use\. Units: Count  | 
 | DiskQueueDepth |  The number of outstanding IOs \(read/write requests\) waiting to access the disk\. Units: Count  | 
 | FreeableMemory |  The amount of available random access memory\. Units: Bytes  | 
@@ -206,7 +205,7 @@ If you use **Create topic** to create a new Amazon SNS topic, the email addresse
 
 **To set an alarm using the AWS CLI**
 
-+ Call [http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html](http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html)\. For more information, see *[AWS Command Line Interface Reference](http://docs.aws.amazon.com/cli/latest/reference/)*\.
++ Call [http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html](http://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html)\. For more information, see *[AWS CLI Command Reference](http://docs.aws.amazon.com/cli/latest/reference/)*\.
 
 **To set an alarm using the CloudWatch API**
 
@@ -223,11 +222,11 @@ You must have a Service Linked Role before you enable log data publishing\. For 
 
 For specific requirements for these engines, see the following:
 
-+ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
++ [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 
-+ [[ERROR] BAD/MISSING LINK TEXT](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
++ [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
 
-+ [[ERROR] BAD/MISSING LINK TEXT](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
 
 ### Configuring CloudWatch Log Integration<a name="integrating_cloudwatchlogs.configure"></a>
 

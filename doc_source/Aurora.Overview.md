@@ -28,22 +28,24 @@ Availability in AWS Regions for Amazon Aurora varies by database engine compatib
 
 ## Aurora Endpoints<a name="Aurora.Overview.Endpoints"></a>
 
-You can connect to DB instances in an Amazon Aurora DB cluster by using an endpoint\. An endpoint is a URL that contains a host address and a port, separated by a colon\. The following endpoints are available from an Aurora DB cluster\.
+You can connect to DB instances in an Amazon Aurora DB cluster by using an endpoint\. An endpoint is a URL that contains a host address and a port\. The following endpoints are available from an Aurora DB cluster\.
 
 Cluster endpoint  
-An endpoint for a Aurora DB cluster that connects to the current primary instance for that DB cluster\. Each Aurora DB cluster has a cluster endpoint\.  
-The cluster endpoint provides failover support for read/write connections to the DB cluster\. If the current primary instance of a DB cluster fails, Aurora automatically fails over to a new primary instance\. During a failover, the DB cluster continues to serve connection requests to the cluster endpoint from the new primary instance, with minimal interruption of service\.  
+A cluster endpoint is an endpoint for an Aurora DB cluster that connects to the current primary instance for that DB cluster\. Each Aurora DB cluster has a cluster endpoint and one primary instance\.  
+The cluster endpoint provides failover support for read/write connections to the DB cluster\. Use the cluster endpoint for all write operations on the DB cluster, including inserts, updates, deletes, and data definition language \(DDL\) changes\. You can also use the cluster endpoint for read operations, such as queries\.  
+If the current primary instance of a DB cluster fails, Aurora automatically fails over to a new primary instance\. During a failover, the DB cluster continues to serve connection requests to the cluster endpoint from the new primary instance, with minimal interruption of service\.  
 The following example illustrates a cluster endpoint for an Aurora MySQL DB cluster\.  
 `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com:3306`
 
 Reader endpoint  
-An endpoint for an Aurora DB cluster that connects to one of the available Aurora Replicas for that DB cluster\. Each Aurora DB cluster has a reader endpoint\.  
-The reader endpoint provides load balancing support for read\-only connections to the DB cluster\. The DB cluster distributes connection requests to the reader endpoint among available Aurora Replicas\. If the DB cluster contains only a primary instance, the reader endpoint serves connection requests from the primary instance\. If an Aurora Replica is created for that DB cluster, the reader endpoint continues to serve connection requests to the reader endpoint from the new Aurora Replica, with minimal interruption in service\.  
+A reader endpoint is an endpoint for an Aurora DB cluster that connects to one of the available Aurora Replicas for that DB cluster\. Each Aurora DB cluster has a reader endpoint\. If there is more than one Aurora Replica, the reader endpoint directs each connection request to one of the Aurora Replicas\.  
+The reader endpoint provides load balancing support for read\-only connections to the DB cluster\. Use the reader endpoint for read operations, such as queries\. You can't use the reader endpoint for write operations\.  
+The DB cluster distributes connection requests to the reader endpoint among available Aurora Replicas\. If the DB cluster contains only a primary instance, the reader endpoint serves connection requests from the primary instance\. If an Aurora Replica is created for that DB cluster, the reader endpoint continues to serve connection requests to the reader endpoint from the new Aurora Replica, with minimal interruption in service\.  
 The following example illustrates a reader endpoint for an Aurora MySQL DB cluster\.  
 `mydbcluster.cluster-ro-123456789012.us-east-1.rds.amazonaws.com:3306`
 
 Instance endpoint  
-An endpoint for a DB instance in an Aurora DB cluster that connects to that specific DB instance\. Each DB instance in a DB cluster, regardless of instance type, has its own unique instance endpoint\.  
+An instance endpoint is an endpoint for a DB instance in an Aurora DB cluster that connects to that specific DB instance\. Each DB instance in a DB cluster, regardless of instance type, has its own unique instance endpoint\. So, there is one instance endpoint for the current primary instance of the DB cluster, and there is one instance endpoint for each of the Aurora Replicas in the DB cluster\.  
 The instance endpoint provides direct control over connections to the DB cluster, for scenarios where using the cluster endpoint or reader endpoint may not be appropriate\. For example, your client application may require load balancing by read workload, instead of by connections, in which case you can configure multiple clients to connect to different Aurora Replicas in a DB cluster to distribute read workloads\. For an example that uses instance endpoints to improve connection speed after a failover, see [Fast Failover with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md#AuroraPostgreSQL.BestPractices.FastFailover)\.  
 The following example illustrates an instance endpoint for a DB instance in an Aurora MySQL DB cluster\.  
 `mydbinstance.123456789012.us-east-1.rds.amazonaws.com:3306`

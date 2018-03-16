@@ -74,7 +74,19 @@ The role permissions policy allows Amazon RDS to complete the following actions 
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. If you encounter the following error message:  
 **Unable to create the resource\. Verify that you have permission to create service linked role\. Otherwise wait and try again later\.**  
  Make sure you have the following permissions enabled:   
-`{ "Action": "iam:CreateServiceLinkedRole", "Effect": "Allow", "Resource": "arn:aws:iam::*:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS", "Condition": { "StringLike": { "iam:AWSServiceName":"rds.amazonaws.com" } } } `  
+
+```
+{
+    "Action": "iam:CreateServiceLinkedRole",
+    "Effect": "Allow",
+    "Resource": "arn:aws:iam::*:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS",
+    "Condition": {
+        "StringLike": {
+            "iam:AWSServiceName":"rds.amazonaws.com"
+        }
+    }
+}
+```
  For more information, see [Service\-Linked Role Permissions](http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#service-linked-role-permissions) in the *IAM User Guide*\.
 
 ## Creating a Service\-Linked Role for Amazon RDS<a name="create-service-linked-role"></a>
@@ -133,7 +145,7 @@ Use one of these procedures to delete each of your instances\.
 1. Choose **Delete**\.
 
 **To delete an instance \(CLI\)**  
-See `[delete\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html)` in the *AWS Command Line Interface Reference*\.
+See `[delete\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html)` in the *AWS CLI Command Reference*\.
 
 **To delete an instance \(API\)**  
 See `[DeleteDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)` in the *Amazon Relational Database Service API Reference*\.
@@ -153,7 +165,7 @@ Use one of the following procedures to delete a single cluster\. Repeat the proc
 1. Choose **Delete**\.
 
 **To delete a cluster \(CLI\)**  
-See `[delete\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-cluster.html)` in the *AWS Command Line Interface Reference*\.
+See `[delete\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-cluster.html)` in the *AWS CLI Command Reference*\.
 
 **To delete a cluster \(API\)**  
 See `[DeleteDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBCluster.html)` in the *Amazon Relational Database Service API Reference*\.

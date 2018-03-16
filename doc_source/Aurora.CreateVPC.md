@@ -7,7 +7,7 @@ For a helpful and detailed guide on connecting to an Amazon Aurora DB cluster, y
 
 ## Create a VPC and Subnets<a name="CHAP_Aurora.CreateVPC"></a>
 
-You can only create an Amazon Aurora DB cluster in an Amazon Virtual Private Cloud \(VPC\) that has at least one subnet in at least two of the Availability Zones in the region where you want to deploy your DB cluster\. You can create an Aurora DB cluster in the default VPC for your AWS account, or you can create a user\-defined VPC\. For information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
+You can only create an Amazon Aurora DB cluster in a Virtual Private Cloud \(VPC\) that spans two Availability Zones, and each zone must contain at least one subnet\. You can create an Aurora DB cluster in the default VPC for your AWS account, or you can create a user\-defined VPC\. For information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
 
 Amazon RDS will, optionally, create a VPC and subnet group for you to use with your Amazon Aurora DB cluster\. This can be helpful if you have never created a VPC, or if you would like to create a new VPC that is separate from your other VPCs\. If you want Amazon RDS to create a VPC and subnet group for you, then skip this procedure and see [Create a DB Cluster](CHAP_GettingStarted.CreatingConnecting.Aurora.md#CHAP_GettingStarted.Aurora.CreateDBCluster)\.
 
@@ -95,7 +95,7 @@ The last step in creating a VPC for use with your Amazon Aurora DB cluster is to
 
 To connect to your Aurora DB instance, you will need to add an inbound rule to your VPC security group that allows inbound traffic to connect\.
 
-1. Determine the IP address that you will be using to connect to the Aurora cluster\. You can use the service at [http://checkip\.amazonaws\.com](http://checkip.amazonaws.com) to determine your public IP address\. If you are connecting through an ISP or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
+1. Determine the IP address that you will be using to connect to the Aurora cluster\. You can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com) to determine your public IP address\. If you are connecting through an ISP or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
 If you use `0.0.0.0/0`, you enable all IP addresses to access your DB cluster\. This is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your DB cluster\.
 

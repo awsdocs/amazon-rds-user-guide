@@ -51,14 +51,11 @@ You can upgrade a DB snapshot while it is still a DB snapshot, before you restor
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the DB snapshot that you want to restore from\.   
-![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DBSnapshot-restore1.png)
+1. Choose the DB snapshot that you want to restore from\. 
 
-1. Choose **Restore Snapshot**\. 
+1. From the **Actions** drop\-down, choose **Restore Snapshot**\. 
 
-   The **Restore DB Instance** window appears\. 
-
-1. For **DB Instance Identifier**, type the name for your restored DB instance\. 
+1. On the **Restore DB Instance** page, in the **DB Instance Identifier** field, type the name for your restored DB instance\. 
 
 1. Choose **Restore DB Instance**\. 
 

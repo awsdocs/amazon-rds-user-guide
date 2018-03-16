@@ -1,6 +1,6 @@
 # Sharing a DB Snapshot or DB Cluster Snapshot<a name="USER_ShareSnapshot"></a>
 
-Using Amazon RDS, you can share a manual DB snapshot or DB cluster snapshot\. Sharing snapshots works as described following\.
+Using Amazon RDS, you can share a manual DB snapshot or DB cluster snapshot in the following ways:
 
 + Sharing a manual DB snapshot or DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to copy the snapshot\.
 
@@ -185,6 +185,28 @@ If you set **DB Snapshot Visibility** to **Public**, all AWS accounts can restor
 ![\[Permit AWS accounts to restore a manual DB snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ShareSnapshot_delete.png)
 
 1. Choose **Save** to save your changes\.
+
+## AWS CLI<a name="USER_ShareSnapshot.CLI"></a>
+
+To share a DB snapshot, use the `aws rds modify-db-snapshot-attribute` command\. Use the `--values-to-add` parameter to add a list of the IDs for the AWS accounts that are authorized to restore the manual snapshot\. 
+
+The following example permits two AWS account identifiers, `123451234512` and `123456789012`, to restore the DB snapshot named `manual-snapshot1`, and removes the `all` attribute value to mark the snapshot as private\.
+
+```
+			aws rds modify-db-snapshot-attribute \ 
+--db-snapshot-identifier manual-snapshot1 \ 
+--attribute-name restore \ 
+--values-to-add '["111122223333","444455556666"]'
+```
+
+To remove an AWS account identifier from the list, use the `-- values-to-remove` parameter\. The following example prevents AWS account ID 444455556666 from restoring the snapshot\.
+
+```
+			aws rds modify-db-snapshot-attribute \ 
+--db-snapshot-identifier manual-snapshot1 \ 
+--attribute-name restore \ 
+--values-to-remove '["444455556666 "]'
+```
 
 ## API<a name="USER_ShareSnapshot.API"></a>
 

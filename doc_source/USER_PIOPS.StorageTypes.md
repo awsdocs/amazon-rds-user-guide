@@ -26,22 +26,22 @@ For DB instances in a single Availability Zone, the DB instance is unavailable f
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. On the navigation pane on the Amazon RDS console, choose **Instances**\.
+1. In the navigation pane, choose **Instances**\.
 
 1. Choose the DB instance that you want to modify\.
 
-1. For **Instance Actions**, choose **Modify**\.
+1. For **Instance actions**, choose **Modify**\.
 
-1. For **Storage Type**, choose a value for the DB instance, and type a value for **Allocated Storage**\. If you are modifying your DB instance to use the Provisioned IOPS storage type, then also provide a **Provisioned IOPS** value\. For more information, see [Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Modify)\.  
+1. For **Storage type**, choose a value for the DB instance, and type a value for **Allocated Storage**\. If you are modifying your DB instance to use the Provisioned IOPS storage type, then also provide a **Provisioned IOPS** value\. For more information, see [Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Modify)\.  
 ![\[Modify the storage type of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/modify-storage-type.png)
 
 1. Choose**Continue** to move to the next screen\.
 
-1. To immediately initiate conversion of the DB instance to use the new storage type, select the **Apply Immediately** check box in the **Scheduling of Modifications** section\. If you want the changes to be applied in the next maintenance window, choose that option\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+1. To immediately initiate conversion of the DB instance to use the new storage type, select the **Apply immediately** check box in the **Scheduling of modifications** section\. If you want the changes to be applied in the next maintenance window, choose that option\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
 
-1. When the settings are as you want them, choose **Modify DB Instance**\.
+1. When the settings are as you want them, choose **Modify DB instance**\.
 
-### CLI<a name="w3ab1c25c31c10c11"></a>
+### CLI<a name="w3ab1c23c31c10c11"></a>
 
 To modify a DB instance to use a different storage type, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 
@@ -51,7 +51,7 @@ To modify a DB instance to use a different storage type, use the AWS CLI [http:/
 
 + `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
 
-### API<a name="w3ab1c25c31c10c13"></a>
+### API<a name="w3ab1c23c31c10c13"></a>
 
 Use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
 
@@ -65,37 +65,37 @@ Use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference
 
 You can modify the settings for an Oracle, PostgreSQL, MySQL, or MariaDB DB instance that uses Provisioned IOPS storage by using the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. You must specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose from 1000 IOPS and 100 GiB of storage up to 40,000 IOPS and 16 TiB \(16384 GiB\) of storage, depending on your database engine\. You cannot reduce the amount of allocated storage from the value currently allocated for the DB instance\. For more information, see [Using Provisioned IOPS Storage with Multi\-AZ, Read Replicas, Snapshots, VPC, and DB Instance Classes](CHAP_Storage.md#Overview.ProvisionedIOPS-support)\. 
 
-### AWS Management Console<a name="w3ab1c25c31c12b5"></a>
+### AWS Management Console<a name="w3ab1c23c31c12b5"></a>
 
 **To modify the Provisioned IOPS settings for a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**\.
+1. In the navigation pane, choose **Instances**\.
 **Note**  
-To filter the list of DB instances, for **Search DB Instances**, type a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
+To filter the list of DB instances, for **Filter instances**, type a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
 
 1. Choose the DB instance with Provisioned IOPS storage that you want to modify\.
 
-1. For **Instance Actions**, choose **Modify**\.
+1. For **Instance actions**, choose **Modify**\.
 
-1.  On the **Modify DB Instance** page, type the value that you want for either **Allocated Storage** or **Provisioned IOPS**\.   
+1.  On the **Modify DB Instance** page, choose **Provisioned IOPS \(SSD\)** for **Storage type**, and then set the amount of Provisioned IOPS you want for **Provisioned IOPS**\.   
 ![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops1-mod.png)
 
-   If the value you specify for either **Allocated Storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed indicating the range of values required for the other parameter\.
-
-1. To apply the changes to the DB instance immediately, select the **Apply Immediately** check box\. If you leave the check box cleared, the changes are applied during the next maintenance window\.
+   If the value you specify for either **Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed indicating the range of values required for the other parameter\.
 
 1. Choose **Continue**\.
 
-1. Review the parameters that will be changed, and choose **Modify DB Instance** to complete the modification\.
+1. To apply the changes to the DB instance immediately, select the **Apply immediately** check box in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\. 
 
-   The new value for allocated storage or for provisioned IOPS appears in the **Pending Values** column\.  
+1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
+
+   The new value for allocated storage or for provisioned IOPS appears in the **Status** column\.  
 ![\[Pending Values column\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops3-mod.png)
 
-### CLI<a name="w3ab1c25c31c12b7"></a>
+### CLI<a name="w3ab1c23c31c12b7"></a>
 
-To modify the Provisioned IOPS settings for a DB instance use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
+To modify the Provisioned IOPS settings for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 
 + `--storage-type` – Set to `io1` for Provisioned IOPS\.
 
@@ -105,9 +105,9 @@ To modify the Provisioned IOPS settings for a DB instance use the AWS CLI [http:
 
 + `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately\. Use `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\.
 
-### API<a name="w3ab1c25c31c12b9"></a>
+### API<a name="w3ab1c23c31c12b9"></a>
 
-To modify the Provisioned IOPS settings for a DB instance use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
+To modify the Provisioned IOPS settings for a DB instance, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
 
 + `StorageType` – Set to `io1` for Provisioned IOPS\.
 
@@ -121,24 +121,36 @@ To modify the Provisioned IOPS settings for a DB instance use the Amazon RDS API
 
 You can create a DB instance that uses Provisioned IOPS by setting several parameters when you launch the DB instance\. You can use the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. For more information about the settings you should use when creating a DB instance, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md), [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md), [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md), or [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
 
-### AWS Management Console<a name="w3ab1c25c31c14b5"></a>
+### AWS Management Console<a name="w3ab1c23c31c14b5"></a>
 
 **To create a new DB instance that uses Provisioned IOPS storage**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. From the Amazon RDS console, choose **Launch DB Instance**\.
+1. From the Amazon RDS console, choose **Instances**\.
 
-1.  In the Launch RDS DB Instance wizard, on the **Engine Selection** page, choose the **Select** button next to the DB engine that you want\. 
+1. Choose **Launch DB instance**\.
 
-1. On the **Specify DB Details** page, choose **Provisioned IOPS \(SSD\)** for **Storage Type**\. 
+1.  In the Launch RDS DB Instance wizard, on the **Engine Selection** page, choose the DB engine that you want\. 
+
+1. Choose **Next**\.
+
+1. On the **Choose use case** page, choose either the **Production** or **Dev/Test** environment\.
+
+1. Choose **Next**\.
+
+1. On the **Specify DB details** page, choose **Provisioned IOPS \(SSD\)** for **Storage type**\. 
 
 1. Specify values for **Allocated Storage** and **Provisioned IOPS**\. For information about the allowed ranges and ratios, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\.   
 ![\[piops2\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops2-new.png)
 
-1. When the settings are as you want them, choose **Continue**\. Type the remaining values to create the DB instance\.
+1. Choose **Next**\.
 
-### CLI<a name="w3ab1c25c31c14b7"></a>
+1. Add the details on the **Configure advanced settings** page\.
+
+1. When the settings are as you want them, choose **Launch DB instance**\.
+
+### CLI<a name="w3ab1c23c31c14b7"></a>
 
 To create a new DB instance that uses Provisioned IOPS storage, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
 
@@ -148,7 +160,7 @@ To create a new DB instance that uses Provisioned IOPS storage, use the AWS CLI 
 
 + `--iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
 
-### API<a name="w3ab1c25c31c14b9"></a>
+### API<a name="w3ab1c23c31c14b9"></a>
 
 To create a new DB instance that uses Provisioned IOPS storage, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html) action\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
 
@@ -162,7 +174,7 @@ To create a new DB instance that uses Provisioned IOPS storage, use the Amazon R
 
 You can create a MySQL or MariaDB Read Replica that uses Provisioned IOPS storage\. You can create a Read Replica that uses Provisioned IOPS storage by using a source DB instance that uses either standard storage or Provisioned IOPS storage\.
 
-### AWS Management Console<a name="w3ab1c25c31c16b5"></a>
+### AWS Management Console<a name="w3ab1c23c31c16b5"></a>
 
 For a complete description on how to create a Read Replica, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
 
@@ -170,18 +182,17 @@ For a complete description on how to create a Read Replica, see [Creating a Read
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Navigation** pane, choose **DB Instances**\.
+1. In the navigation pane, choose ** Instances**\.
 
-1. Choose the MySQL or MariaDB DB instance with Provisioned IOPS storage that you want to use as the source for the Read Replica, and choose **Instance Actions**, **Create Read Replica**\.
+1. Choose the MySQL or MariaDB DB instance with Provisioned IOPS storage that you want to use as the source for the Read Replica, and choose **Instance actions**, **Create read replica**\.
 **Important**  
 The DB instance that you are creating a Read Replica for must have allocated storage within the range of storage for MySQL and MariaDB PIOPS \(100 GiB–16 TiB\)\. If the allocated storage for that DB instance is not within that range, then the **Provisioned IOPS** storage type isn't available as an option when creating the Read Replica\. Instead, you can set only the **GP2** or **Standard** storage types\. You can modify the allocated storage for the source DB instance to be within the range of storage for MySQL and MariaDB PIOPS before creating a Read Replica\. For more information on the PIOPS range of storage, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\. For information on modifying a MySQL DB instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\. For information on modifying a MariaDB DB instance, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
 
-1. On the **Create Read Replica DB Instance** page, type a DB instance identifier for the Read Replica\.   
-![\[Create Read Replica with Provisioned IOPS\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops3-read.png)
+1. On the **Create read replica DB instance** page, type a DB instance identifier for the Read Replica\. 
 
-1. Choose **Yes, Create Read Replica**\.
+1. Choose **Yes, Create read replica**\.
 
-### CLI<a name="w3ab1c25c31c16b7"></a>
+### CLI<a name="w3ab1c23c31c16b7"></a>
 
 To create a Read Replica DB instance that uses Provisioned IOPS, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
 
@@ -189,7 +200,7 @@ To create a Read Replica DB instance that uses Provisioned IOPS, use the AWS CLI
 
 + `--iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
 
-### API<a name="w3ab1c25c31c16b9"></a>
+### API<a name="w3ab1c23c31c16b9"></a>
 
 To create a Read Replica DB instance that uses Provisioned IOPS, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstanceReadReplica.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstanceReadReplica.html) action\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
 

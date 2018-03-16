@@ -20,7 +20,7 @@ For more information about working with DB security groups, see [Working with DB
 
 ## VPC Security Groups<a name="Overview.RDSSecurityGroups.VPCSec"></a>
 
-Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules do not apply to DB instances\. You must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
+Each VPC security group rule enables a specific source to access a DB instance in a VPC that is associated with that VPC security group\. The source can be a range of addresses \(for example, 203\.0\.113\.0/24\), or another VPC security group\. By specifying a VPC security group as the source, you allow incoming traffic from all instances \(typically application servers\) that use the source VPC security group\. VPC security groups can have rules that govern both inbound and outbound traffic, though the outbound traffic rules typically do not apply to DB instances\. Outbound traffic rules only apply if the DB instance acts as a client\. For example, outbound traffic rules apply to an Oracle DB instance with outbound database links\. You must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. 
 
 When you create rules for your VPC security group that allow access to the instances in your VPC, you must specify a port for each range of addresses that the rule allows access for\. For example, if you want to enable SSH access to instances in the VPC, then you create a rule allowing access to TCP port 22 for the specified range of addresses\.
 
@@ -60,7 +60,7 @@ For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs
 
 ## Creating a VPC Security Group<a name="Overview.RDSSecurityGroups.Create"></a>
 
-You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to the DB Instance in the VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup) and [Security Groups](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
+You can create a VPC security group for a DB instance by using the VPC console\. For information about creating a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup) and [Security Groups](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\.
 
 ## Associating a Security Group with a DB Instance<a name="Overview.RDSSecurityGroups.Associate"></a>
 

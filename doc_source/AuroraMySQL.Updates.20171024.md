@@ -39,7 +39,7 @@ ZDP applies only to the primary instance of a DB cluster\. ZDP is not applicable
 
 + **Asynchronous Key Prefetch** – Asynchronous key prefetch \(AKP\) is a feature targeted to improve the performance of non\-cached index joins, by prefetching keys in memory ahead of when they are needed\. The primary use case targeted by AKP is an index join between a small outer and large inner table, where the index is highly selective on the larger table\. Also, when the Multi\-Range Read \(MRR\) interface is enabled, AKP will be leveraged for a secondary to primary index lookup\. Smaller instances which have memory constraints might in some cases be able to leverage AKP, given the right key cardinality\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
 
-+ **Fast DDL** – We have extended the feature that was released in Aurora v1\.13 to operations that include default values\. With this extension, Fast DDL is applicable for operations that add a nullable column at the end of a table, with or without default values\. The feature remains under Aurora lab mode\. For more information, see [Altering Tables in Amazon Aurora Using Fast DDL](AuroraMySQL.Managing.md#AuroraMySQL.Managing.FastDDL)\.
++ **Fast DDL** – We have extended the feature that was released in [Aurora v1\.13](AuroraMySQL.Updates.20170515.md) to operations that include default values\. With this extension, Fast DDL is applicable for operations that add a nullable column at the end of a table, with or without default values\. The feature remains under Aurora lab mode\. For more information, see [Altering Tables in Amazon Aurora Using Fast DDL](AuroraMySQL.Managing.md#AuroraMySQL.Managing.FastDDL)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20171024.Improvements"></a>
 
@@ -75,9 +75,9 @@ ZDP applies only to the primary instance of a DB cluster\. ZDP is not applicable
 
 ## Integration of MySQL Bug Fixes<a name="AuroraMySQL.Updates.20171024.BugFixes"></a>
 
-+ CREATE USER accepts plugin and password hash, but ignores the password hash \(Bug \#78033
++ CREATE USER accepts plugin and password hash, but ignores the password hash \(Bug \#78033\)
 
-+ Ignorable events do not work and are not tested \(Bug \#74683
++ Ignorable events do not work and are not tested \(Bug \#74683\)
 
 + NEW\->OLD ASSERT FAILURE `GTID\_MODE > 0' IN 5\.6\.24 AT LOG\_EVENT\.CC:13555 \(Bug\#20436436
 
@@ -85,6 +85,6 @@ ZDP applies only to the primary instance of a DB cluster\. ZDP is not applicable
 
 + MySQL instance stalling “doing SYNC index” \(Bug \#73816
 
-+ ASSERT RBT\_EMPTY\(INDEX\_CACHE\->WORDS\) IN ALTER TABLE CHANGE COLUMN \(Bug \#17536995
++ ASSERT RBT\_EMPTY\(INDEX\_CACHE\->WORDS\) IN ALTER TABLE CHANGE COLUMN \(Bug \#17536995\)
 
-+ InnoDB Fulltext search doesn't find records when savepoints are involved \(Bug \#70333
++ InnoDB Fulltext search doesn't find records when savepoints are involved \(Bug \#70333\)

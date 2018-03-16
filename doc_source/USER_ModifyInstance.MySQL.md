@@ -6,6 +6,11 @@ We recommend that you test any changes on a test instance before modifying a pro
 
 After you modify your DB instance settings, you can apply the changes immediately, or apply them during the next maintenance window for the DB instance\. Some modifications cause an interruption by restarting the DB instance\. 
 
+**Note**  
+When you modify a DB instance, Amazon RDS will reboot the instance if both of the following are true:  
+You change the DB instance class\.
+You specify a custom parameter group\.
+
 ## AWS Management Console<a name="USER_ModifyInstance.MySQL.Console"></a>
 
 **To modify a MySQL DB instance**

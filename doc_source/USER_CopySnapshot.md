@@ -4,6 +4,8 @@ With Amazon Relational Database Service \(Amazon RDS\), you can copy DB snapshot
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy a snapshot across AWS accounts\. 
 
+Copying an automated snapshot to another AWS account is a two\-step process: You first create a manual snapshot from the automated snapshot, and then you copy the manual snapshot to the other account\. 
+
 You can't copy a DB cluster snapshot across regions and accounts in a single step\. Perform one step for each of these copy actions\. As an alternative to copying, you can also share manual snapshots with other AWS accounts\. For more information, see [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)\. 
 
 ## Limitations<a name="USER_CopySnapshot.Limitations"></a>
@@ -14,7 +16,7 @@ The following are some limitations when you copy snapshots:
 
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy may fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
 
-+ You can have up to five snapshot copy requests in progress to a single destination per account\.
++ You can have up to five snapshot copy requests in progress to a single destination region per account\.
 
 + You can't copy a DB snapshot across regions if it was created from an Oracle DB instance that is using AWS CloudHSM Classic to store TDE Keys\. 
 
@@ -28,7 +30,11 @@ For more information about backup storage costs, see [Amazon RDS Pricing](https:
 
 ## Copying Shared Snapshots<a name="USER_CopySnapshot.Shared"></a>
 
-You can copy snapshots shared to you by other AWS accounts\. If you are copying an encrypted snapshot that has been shared from another AWS account, you must have access to the KMS encryption key that was used to encrypt the snapshot\. You can copy shared unencrypted DB snapshots across regions, but you can only copy shared encrypted DB snapshots in the same AWS Region\. You can only copy shared DB cluster snapshots, encrypted or not, in the same AWS Region\. For more information, see [Sharing an Encrypted Snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted)\. 
+You can copy snapshots shared to you by other AWS accounts\. If you are copying an encrypted snapshot that has been shared from another AWS account, you must have access to the KMS encryption key that was used to encrypt the snapshot\. 
+
+You can copy a shared DB snapshot across regions, provided that the snapshot is unencrypted\. However, if the shared DB snapshot is encrypted, you can only copy it in the same AWS Region\. 
+
+You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same AWS Region\. For more information, see [Sharing an Encrypted Snapshot](USER_ShareSnapshot.md#USER_ShareSnapshot.Encrypted)\. 
 
 ## Handling Encryption<a name="USER_CopySnapshot.Encryption"></a>
 

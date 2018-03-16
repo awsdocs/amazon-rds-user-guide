@@ -3,7 +3,7 @@
 The status of a DB instance indicates the health of the instance\. You can view the status of a DB instance by using the RDS console, the AWS CLI command [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API action [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
 
 **Note**  
-Amazon RDS also uses another status called *maintenance status*, which is shown in the Maintenance column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see \. 
+Amazon RDS also uses another status called *maintenance status*, which is shown in the Maintenance column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)\. 
 
 
 | DB Instance Status | Description | 

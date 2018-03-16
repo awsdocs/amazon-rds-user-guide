@@ -25,20 +25,8 @@ To get the Aurora version number from an Aurora DB instance using a particular d
 
 | Database Engine | Queries | 
 | --- | --- | 
-|  Amazon Aurora MySQL  |  
-
-```
-SELECT AURORA_VERSION();
-``` 
-
-```
-SHOW @@aurora_version;
-```  | 
-|  Amazon Aurora PostgreSQL  |  
-
-```
-SELECT AURORA_VERSION();
-```  | 
+|  Amazon Aurora MySQL  |  <pre>SELECT AURORA_VERSION();</pre> <pre>SHOW @@aurora_version;</pre>  | 
+|  Amazon Aurora PostgreSQL  |  <pre>SELECT AURORA_VERSION();</pre>  | 
 
 ## Related Topics<a name="Aurora.Updates.RelatedTopics"></a>
 

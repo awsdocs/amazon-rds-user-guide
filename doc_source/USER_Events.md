@@ -6,13 +6,13 @@
 + [Listing Your Amazon RDS Event Notification Subscriptions](#USER_Events.ListSubscription)
 + [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)
 + [Adding a Source Identifier to an Amazon RDS Event Notification Subscription](#USER_Events.AddingSource)
-+ [Removing a Source identifier from an Amazon RDS Event Notification Subscription](#USER_Events.RemovingSource)
++ [Removing a Source Identifier from an Amazon RDS Event Notification Subscription](#USER_Events.RemovingSource)
 + [Listing the Amazon RDS Event Notification Categories](#USER_Events.ListingCategories)
 + [Deleting an Amazon RDS Event Notification Subscription](#USER_Events.Deleting)
 
  Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon RDS event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS region, such as an email, a text message, or a call to an HTTP endpoint\. 
 
-Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance,DB cluster, DB snapshot, DB cluster snapshot, DB security group, or for a DB parameter group\. For example, if you subscribe to the Backup category for a given DB instance, you will be notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a Configuration Change category for a DB security group, you will be notified when the DB security group is changed\. You will also receive notification when an event notification subscription changes\.
+Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance, DB cluster, DB snapshot, DB cluster snapshot, DB security group, or for a DB parameter group\. For example, if you subscribe to the Backup category for a given DB instance, you will be notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a Configuration Change category for a DB security group, you will be notified when the DB security group is changed\. You will also receive notification when an event notification subscription changes\.
 
 Note that for Amazon Aurora, events occur at the cluster rather than instance level, so you won't receive events if you subscribe to an Aurora DB instance\. Subscribe to the DB cluster instead\.
 
@@ -29,7 +29,7 @@ The process for subscribing to Amazon RDS event notification is as follows:
 
 1. Create an Amazon RDS event notification subscription by using the Amazon RDS console, AWS CLI, or API\.
 
-1. Amazon RDS sends an approval email or SMS message to the addresses you submitted with your subscription\. To confirm your subscription, click the link in the notification you were sent\.
+1. Amazon RDS sends an approval email or SMS message to the addresses you submitted with your subscription\. To confirm your subscription, choose the link in the notification you were sent\.
 
 1. When you have confirmed the subscription, the status of your subscription is updated in the Amazon RDS console's **My Event Subscriptions** section\.
 
@@ -48,8 +48,8 @@ The following table shows the event category and a list of events when a DB inst
 
 |  Category  | Amazon RDS Event ID |  Description  | 
 | --- | --- | --- | 
-|  availability  | RDS\-EVENT\-0006 |  The DB instance is restarting and will be unavailable until the restart is complete\.  | 
-|  availability  | RDS\-EVENT\-0004 |  The DB instance has shut down\.  | 
+|  availability  | RDS\-EVENT\-0006 |  The DB instance is restarting due to a previous controlled shutdown, or a recovery\. The DB instance will be unavailable until the restart completes\.  | 
+|  availability  | RDS\-EVENT\-0004 |  The DB instance is undergoing a controlled shutdown\.  | 
 |  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
 |  backup  | RDS\-EVENT\-0001 |  A backup of the DB instance has started\.   | 
 |  backup  | RDS\-EVENT\-0002 |  A backup of the DB instance is complete\.  | 
@@ -57,7 +57,7 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0024 |  The DB instance is being converted to a Multi\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0030 |  The DB instance is being converted to a Single\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0012 |  The DB instance class for this DB instance is being changed\.   | 
-|  configuration change  | RDS\-EVENT\-0018 |  The current storage settings for this DB instance is being changed\.  | 
+|  configuration change  | RDS\-EVENT\-0018 |  The current storage settings for this DB instance are being changed\.  | 
 |  configuration change  | RDS\-EVENT\-0011 |  A parameter group for this DB instance has changed\.  | 
 |  configuration change  | RDS\-EVENT\-0028 |  Automatic backups for this DB instance have been disabled\.  | 
 |  configuration change  | RDS\-EVENT\-0032 |  Automatic backups for this DB instance have been enabled\.  | 
@@ -65,7 +65,7 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0025 |  The DB instance has been converted to a Multi\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0029 |  The DB instance has been converted to a Single\-AZ DB instance\.  | 
 |  configuration change  | RDS\-EVENT\-0014 |  The DB instance class for this DB instance has changed\.  | 
-|  configuration change  | RDS\-EVENT\-0017 |  The storage settings for this DB instance has changed\.  | 
+|  configuration change  | RDS\-EVENT\-0017 |  The storage settings for this DB instance have changed\.  | 
 |  configuration change  | RDS\-EVENT\-0010 |  The DB instance has been removed from a security group\.  | 
 |  configuration change  | RDS\-EVENT\-0016 |  The master password for the DB instance has been reset\.  | 
 |  configuration change  | RDS\-EVENT\-0067 |  An attempt to reset the master password for the DB instance has failed\.  | 
@@ -79,7 +79,7 @@ The following table shows the event category and a list of events when a DB inst
 | failover | RDS\-EVENT\-0049 | A Multi\-AZ failover has completed\. | 
 |  failover  | RDS\-EVENT\-0050 |  A Multi\-AZ activation has started after a successful instance recovery\.  | 
 |  failover  | RDS\-EVENT\-0051 |  A Multi\-AZ activation is complete\. Your database should be accessible now\.  | 
-|  failure  | RDS\-EVENT\-0031 |  The DB instance has failed\. We recommend that you begin a point\-in\-time\-restore for the DB instance\.  | 
+|  failure  | RDS\-EVENT\-0031 |  The DB instance has failed due to an incompatible configuration or an underlying storage issue\. Begin a point\-in\-time\-restore for the DB instance\.  | 
 |  failure  | RDS\-EVENT\-0036 |  The DB instance is in an incompatible network\. Some of the specified subnet IDs are invalid or do not exist\.  | 
 |  failure  | RDS\-EVENT\-0035 |  The DB instance has invalid parameters\. For example, MySQL could not start because a memory\-related parameter is set too high for this instance class, so the customer action would be to modify the memory parameter and reboot the DB instance\.  | 
 |  failure  | RDS\-EVENT\-0058 |  Error while creating Statspack user account PERFSTAT\. Please drop the account before adding the Statspack option\.  | 
@@ -98,7 +98,7 @@ The following table shows the event category and a list of events when a DB inst
 | notification | RDS\-EVENT\-0055 | The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of tables on your DB instance\. For information about recommended best practices, see [Amazon RDS Basic Operational Guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\. | 
 | notification | RDS\-EVENT\-0056 | The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of databases on your DB instance\. For information about recommended best practices, see [Amazon RDS Basic Operational Guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\. | 
 | notification | RDS\-EVENT\-0064 | The TDE key has been rotated\. For more information about Oracle TDE, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\. For more information about SQL Server TDE, see [Microsoft SQL Server Transparent Data Encryption Support](Appendix.SQLServer.Options.TDE.md)\.  | 
-| notification | RDS\-EVENT\-0084 |  You attempted to convert a DB instance to Multi\-AZ, but it contains in\-memory file groups which are not supported for Multi\-AZ\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server with Database Mirroring](USER_SQLServerMultiAZ.md)\.   | 
+| notification | RDS\-EVENT\-0084 |  You attempted to convert a DB instance to Multi\-AZ, but it contains in\-memory file groups that are not supported for Multi\-AZ\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server with Database Mirroring](USER_SQLServerMultiAZ.md)\.   | 
 | notification | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 
 | notification | RDS\-EVENT\-0088 |  The DB instance has been started\.  | 
 | read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\. For information on troubleshooting Read Replica errors, see [Troubleshooting a MySQL or MariaDB Read Replica Problem](USER_ReadRepl.md#USER_ReadRepl.Troubleshooting)\. | 
@@ -125,7 +125,7 @@ The following table shows the event category and a list of events when a DB para
 | --- | --- | --- | 
 |  configuration change  | RDS\-EVENT\-0037 |  The parameter group was modified\.  | 
 
-The following tables shows the event category and a list of events when a DB security group is the source type\.
+The following table shows the event category and a list of events when a DB security group is the source type\.
 
 **Categories and Events for the DB Security Group Source Type**
 
@@ -135,7 +135,7 @@ The following tables shows the event category and a list of events when a DB sec
 |  configuration change  | RDS\-EVENT\-0038 |  The security group has been modified\.  | 
 |  failure  | RDS\-EVENT\-0039 |  The Amazon EC2 security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
 
-The following tables shows the event category and a list of events when a DB snapshot is the source type\.
+The following table shows the event category and a list of events when a DB snapshot is the source type\.
 
 **Categories and Events for the DB Snapshot Source Type**
 
@@ -152,7 +152,7 @@ The following tables shows the event category and a list of events when a DB sna
 | creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
 | creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
 
-The following tables shows the event category and a list of events when a DB cluster is the source type\.
+The following table shows the event category and a list of events when a DB cluster is the source type\.
 
 **Categories and Events for the DB Cluster Source Type**
 
@@ -168,7 +168,7 @@ The following tables shows the event category and a list of events when a DB clu
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Amazon Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Amazon Aurora DB cluster\.  | 
 
-The following tables shows the event category and a list of events when a DB cluster snapshot is the source type\.
+The following table shows the event category and a list of events when a DB cluster snapshot is the source type\.
 
 **Categories and Events for the DB Cluster Snapshot Source Type**
 
@@ -190,30 +190,31 @@ You can specify the type of source you want to be notified of and the Amazon RDS
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the Amazon RDS Console navigation pane, click **Event Subscriptions**\. 
+1.  In navigation pane, choose **Event Subscriptions**\. 
 
-1.  In the **Event Subscriptions** pane, click **Create Event Subscription**\. 
+1.  In the **Event subscriptions** pane, choose **Create event subscription**\. 
 
-1.  In the **Create Event Subscription** dialog box, do the following:
+1.  In the **Create event subscription** dialog box, do the following:
 
-   1. Type a name for the event notification subscription in the **Name** text box\.
+   1. Type a name for the event notification subscription for **Name**\.
 
-   1. Select an existing Amazon SNS Amazon Resource Name \(ARN\) for an Amazon SNS topic in the **Send notifications to** dropdown menu or click **create topic** to enter the name of a topic and a list of recipients\.
+   1. For **Send notifications to**, choose an existing Amazon SNS Amazon Resource Name \(ARN\) for an Amazon SNS topic, or choose **create topic** to enter the name of a topic and a list of recipients\.
 
-   1. Select a source type from the **Source Type** dropdown menu\.
+   1. For **Source type**, choose a source type\.
 
-   1. Select **Yes** to enable the subscription\. If you want to create the subscription but to not have notifications sent yet, select **No**\.
+   1. Choose **Yes** to enable the subscription\. If you want to create the subscription but to not have notifications sent yet, choose **No**\.
 
-   1. Depending on the source type you selected, select the event categories and sources you want to receive event notifications for\.
+   1. Depending on the source type you selected, choose the event categories and sources that you want to receive event notifications for\.
 
-   1. Click **Yes, Create**\.
+   1. Choose **Create**\.
 
-1. The Amazon RDS console indicates that the subscription is being created\.  
+The Amazon RDS console indicates that the subscription is being created\.
+
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Create2.png)
 
 ### CLI<a name="USER_Events.Subscribing.CLI"></a>
 
-To subscribe to RDS Event Notification, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html) command\. Include the following required parameters:
+To subscribe to RDS event notification, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html) command\. Include the following required parameters:
 
 + `--subscription-name`
 
@@ -239,7 +240,7 @@ aws rds create-event-subscription ^
 
 ### API<a name="USER_Events.Subscribing.API"></a>
 
-To subscribe to Amazon RDS Event Notification call the Amazon RDS API function [ `CreateEventSubscription`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html)\. Include the following required parameters: 
+To subscribe to Amazon RDS event notification, call the Amazon RDS API function [ `CreateEventSubscription`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html)\. Include the following required parameters: 
 
 + `SubscriptionName`
 
@@ -274,7 +275,7 @@ You can list your current Amazon RDS event notification subscriptions\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the Amazon RDS Console navigation pane, click **Event Subscriptions**\. The Event Subscriptions pane shows all your event notification subscriptions\.  
+1.  In the navigation pane, choose **Event subscriptions**\. The **Event subscriptions** pane shows all your event notification subscriptions\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-ListSubs.png)
 
 ### CLI<a name="USER_Events.ListSubscription.CLI"></a>
@@ -339,13 +340,13 @@ After you have created a subscription, you can change the subscription name, sou
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the Amazon RDS Console navigation pane, click **Event subscriptions**\. 
+1.  In the navigation pane, choose **Event subscriptions**\. 
 
-1.  In the **Event subscriptions** pane, select the subscription that you want to modify and click **Edit**\. 
+1.  In the **Event subscriptions** pane, choose the subscription that you want to modify and choose **Edit**\. 
 
 1.  Make your changes to the subscription in either the **Target** or **Source** sections\.
 
-1. Click **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
+1. Choose **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Modify2.png)
 
 ### CLI<a name="USER_Events.Modifying.CLI"></a>
@@ -373,7 +374,7 @@ For Windows:
 
 ### API<a name="USER_Events.Modifying.API"></a>
 
-To modify an Amazon RDS Event, call the Amazon RDS API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html)\. Include the following required parameter:
+To modify an Amazon RDS event, call the Amazon RDS API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html)\. Include the following required parameter:
 
 + `SubscriptionName`
 
@@ -402,7 +403,7 @@ You can add a source identifier \(the Amazon RDS source generating the event\) t
 
 ### AWS Management Console<a name="USER_Events.AddingSource.Console"></a>
 
-You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. See the topic [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying) for more information\.
+You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\.
 
 ### CLI<a name="USER_Events.AddingSource.CLI"></a>
 
@@ -413,7 +414,7 @@ To add a source identifier to an Amazon RDS event notification subscription, use
 + `--source-identifier`
 
 **Example**  
-The following example adds the source identifier `mysqldb` to the `myrdseventsubscription.` subscription\.  
+The following example adds the source identifier `mysqldb` to the `myrdseventsubscription` subscription\.  
 For Linux, OS X, or Unix:  
 
 ```
@@ -454,13 +455,13 @@ https://rds.us-east-1.amazonaws.com/
    &X-Amz-Signature=347d5e788e809cd06c50214b12750a3c39716bf65b239bb6f7ee8ff5374e2df9
 ```
 
-## Removing a Source identifier from an Amazon RDS Event Notification Subscription<a name="USER_Events.RemovingSource"></a>
+## Removing a Source Identifier from an Amazon RDS Event Notification Subscription<a name="USER_Events.RemovingSource"></a>
 
 You can remove a source identifier \(the Amazon RDS source generating the event\) from a subscription if you no longer want to be notified of events for that source\. 
 
 ### AWS Management Console<a name="USER_Events.RemovingSource.Console"></a>
 
-You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. See the topic [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying) for more information\.
+You can easily add or remove source identifiers using the Amazon RDS console by selecting or deselecting them when modifying a subscription\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\.
 
 ### CLI<a name="USER_Events.RemovingSource.CLI"></a>
 
@@ -562,11 +563,11 @@ You can delete a subscription when you no longer need it\. All subscribers to th
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In the Amazon RDS Console navigation pane, click **DB Event Subscriptions**\. 
+1.  In the navigation pane, choose **DB Event Subscriptions**\. 
 
-1.  In the **My DB Event Subscriptions** pane, click the subscription that you want to delete\. 
+1.  In the **My DB Event Subscriptions** pane, choose the subscription that you want to delete\. 
 
-1. Click **Delete**\.
+1. Choose **Delete**\.
 
 1. The Amazon RDS console indicates that the subscription is being deleted\.  
 ![\[Delete an event notification subscription\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Delete.png)

@@ -2,7 +2,7 @@
 
 The following table describes the important changes to the documentation since the last release of the* Amazon Relational Database Service User Guide\.*
 
-+ **Latest documentation update: **February 19, 2018
++ **Latest documentation update: **March 13, 2018
 
 + **Current API version: **2014\-10\-31
 
@@ -11,6 +11,12 @@ The following table describes the important changes to the documentation since t
 
 | Change | Description | Date Changed | 
 | --- | --- | --- | 
+| Aurora PostgreSQL Support for new regions |  Aurora PostgreSQL is now available in the EU \(London\) and Asia Pacific \(Singapore\) regions\. For more information, see [Availability for Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md#Aurora.AuroraPostgreSQL.Availability)\.   | March 13, 2018 | 
+| MySQL 5\.7\.21, 5\.6\.39, and 5\.5\.59 |  You can now create Amazon RDS DB instances running MySQL versions 5\.7\.21, 5\.6\.39, and 5\.5\.59\. For more information, see [MySQL on Amazon RDS Versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.   | March 9, 2018 | 
+| Amazon RDS for Oracle now supports Oracle REST Data Services |  Amazon RDS for Oracle supports Oracle REST Data Services as part of the APEX option\. For more information, see [Oracle Application Express](Appendix.Oracle.Options.APEX.md)\.   | March 9, 2018 | 
+| Amazon Aurora with MySQL compatibility available in new AWS Region |  Aurora MySQL is now available in the Asia Pacific \(Singapore\) region\. For the complete list of AWS Regions for Aurora MySQL, see [Availability for Amazon Aurora MySQL](Aurora.AuroraMySQL.md#Aurora.AuroraMySQL.Availability)\.   | March 6, 2018 | 
+|  Support for PostgreSQL 10\.1  |  Amazon RDS now supports version 10\.1 of PostgreSQL\. For more information, see [PostgreSQL Version 10\.1 on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version101)  |  February 27, 2018  | 
+| Oracle January 2018 PSU |  Amazon RDS for Oracle has released database engine versions 12\.1\.0\.2\.v11 and 11\.2\.0\.4\.v15 to support the January 2018 Oracle Database Patch Set Update \(PSU\)\. For more information, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.   | February 22, 2018 | 
 | Amazon RDS DB instances running Microsoft SQL Server no longer have the BYOL licensing model\.  |  All new Amazon RDS DB instances that run SQL Server have a license included\.   | February 19, 2018 | 
 | Amazon RDS DB instances running Microsoft SQL Server support change data capture \(CDC\)  |  DB instances running Amazon RDS for Microsoft SQL Server now support change data capture \(CDC\)\. For more information, see [Change Data Capture Support for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.CDC)\.   | February 6, 2018 | 
 | Aurora MySQL supports a new major version |  You can now create Aurora MySQL DB clusters running MySQL version 5\.7\. For more information, see [Amazon Aurora MySQL Database Engine Updates 2018\-02\-06](AuroraMySQL.Updates.20180206.md)\.   | February 6, 2018 | 
@@ -21,6 +27,7 @@ The following table describes the important changes to the documentation since t
 | Amazon Aurora with PostgreSQL compatibility available in new AWS Region |  Aurora PostgreSQL is now available in the EU \(Paris\) region\. For the complete list of AWS Regions for Aurora PostgreSQL, see [Availability for Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md#Aurora.AuroraPostgreSQL.Availability)\.   | December 22, 2017 | 
 | Amazon RDS PostgreSQL supports new instance types |  Aurora PostgreSQL now supports new instance types\. For the complete list of instance types, see [Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.   | December 20, 2017 | 
 | Oracle October 2017 PSU |  Amazon RDS for Oracle has released database engine versions 12\.1\.0\.2\.v10 and 11\.2\.0\.4\.v14 to support the October 2017 Oracle Database Patch Set Update \(PSU\)\. For more information, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.   | December 19, 2017 | 
+| Amazon Aurora with MySQL compatibility available in new AWS Region |  Aurora MySQL is now available in the EU \(Paris\) region\. For the complete list of AWS Regions for Aurora MySQL, see [Availability for Amazon Aurora MySQL](Aurora.AuroraMySQL.md#Aurora.AuroraMySQL.Availability)\.   | December 18, 2017 | 
 | Aurora MySQL supports hash joins |  This feature can improve query performance when you need to join a large amount of data by using an equijoin\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.   | December 11, 2017 | 
 | Aurora MySQL supports native functions to invoke AWS Lambda functions |  You can call the native functions `lambda_sync` and `lambda_async` when you use Aurora MySQL\. For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.   | December 11, 2017 | 
 | Added Aurora PostgreSQL HIPAA compliance |  Aurora PostgreSQL now supports building HIPAA compliant applications, see [Working with Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md)\.   | December 6, 2017 | 

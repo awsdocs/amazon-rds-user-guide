@@ -18,17 +18,17 @@ The Amazon RDS CLI documentation can be found at [What Is the AWS Command Line I
 
 The following sections show you how to set up the Amazon RDS CLI, add the required permissions for RDS to access your HSMs, create an option group with the **TDE\_HSM** option, and how to create or modify a DB instance that will use the **TDE\_HSM** option\. 
 
-## Security Group<a name="w3ab1c36c83c11c27c11"></a>
+## Security Group<a name="w3ab1c34c83c11c27c11"></a>
 
 To allow the RDS instance to communicate with the HSM, the security group ENI assigned to the HSM appliance must authorize ingress connectivity on TCP port 1792 from the DB instance\. Additionally, the Network ACL associated with the HSM's ENI must permit ingress TCP port 1792 from the RDS instance, and egress connections from the HSM to the Dynamic Port range on the RDS instance\. For more information about the Dynamic TCP Port range, please see the [Amazon VPC documentation](http://docs.aws.amazon.com//AmazonVPC/latest/UserGuide/VPC_ACLs.html#VPC_ACLs_Ephemeral_Ports)\. 
 
 If you used the AWS CloudFormation template to create your AWS CloudHSM Classic environment, modify the security group that allows SSH and NTLS from the public subnet\. If you didn't use the AWS CloudFormation template, modify the security group associated with the ENI assigned to the HSM appliance\. 
 
-## DB Subnet Group<a name="w3ab1c36c83c11c27c13"></a>
+## DB Subnet Group<a name="w3ab1c34c83c11c27c13"></a>
 
 The DB subnet group that you assign to your Oracle DB instance must have the same subnets as those in the VPC used by the AWS CloudHSM Classic\. For information about how to create a DB subnet group, see [Creating a DB Subnet Group](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html#USER_VPC.CreateDBSubnetGroup), or you can use the AWS CLI [create\-db\-subnet\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-subnet-group.html) command to create the DB subnet group\.
 
-## Setting Up the Amazon RDS CLI<a name="w3ab1c36c83c11c27c15"></a>
+## Setting Up the Amazon RDS CLI<a name="w3ab1c34c83c11c27c15"></a>
 
 The Amazon RDS CLI can be installed on a computer running the Linux or Windows operating system and that has Java version 1\.6 or higher installed\. 
 
@@ -285,7 +285,7 @@ To use two accounts, you must have the following:
 
 1. Choose **Update Trust Policy**\.
 
-#### Creating an Amazon VPC Using the DB Account That Can Connect to Your HSM<a name="w3ab1c36c83c11c27c17b9c13"></a>
+#### Creating an Amazon VPC Using the DB Account That Can Connect to Your HSM<a name="w3ab1c34c83c11c27c17b9c13"></a>
 
 HSM appliances are provisioned into an HSM\-specific Amazon VPC\. By default, only hosts inside the HSM VPC can see the HSM devices\. Thus, all DB instances need to be created inside the HSM VPC or in a VPC that can be linked to the HSM VPC using VPC peering\.
 
@@ -301,7 +301,7 @@ To use AWS CloudHSM Classic with an Amazon RDS DB instance in a different VPC \(
 
 Note that you must configure both VPCs' routing tables so that network traffic goes to the correct VPC \(from the DB VPC to the HSM VPC, and from the HSM VPC to the DB VPC\)\. The two VPCs don’t need to share the same security group, though the security groups must not prevent network traffic between the two VPCs\.
 
-## Creating an Option Group with the TDE\_HSM Option<a name="w3ab1c36c83c11c27c19"></a>
+## Creating an Option Group with the TDE\_HSM Option<a name="w3ab1c34c83c11c27c19"></a>
 
 The **TDE\_HSM** option can be added to an existing option group just like other Oracle options, or you can create a new option group and add the **TDE\_HSM** option\. The following Amazon RDS CLI example creates an option group for Oracle Enterprise Edition 11\.2 named *tdehsm\-option\-group*\. 
 
@@ -355,11 +355,11 @@ The output of the command should appear similar to the following example:
 OPTION  TDE_HSM  y  n  Oracle Advanced Security - TDE with HSM
 ```
 
-## Adding the AWS CloudHSM Classic Parameters to an Oracle DB Instance<a name="w3ab1c36c83c11c27c21"></a>
+## Adding the AWS CloudHSM Classic Parameters to an Oracle DB Instance<a name="w3ab1c34c83c11c27c21"></a>
 
 An Oracle Enterprise Edition DB instance that uses AWS CloudHSM Classic must have two new parameters added to the DB instance\. The `tde-credential-arn` and `tde-credential-password` parameters are new parameters you must include when creating a new DB instance or when modifying an existing DB instance to use AWS CloudHSM Classic\. 
 
-### Creating a New Oracle DB Instance with Additional Parameters for AWS CloudHSM Classic<a name="w3ab1c36c83c11c27c21b5"></a>
+### Creating a New Oracle DB Instance with Additional Parameters for AWS CloudHSM Classic<a name="w3ab1c34c83c11c27c21b5"></a>
 
 When creating a new DB instance to use with AWS CloudHSM Classic, there are several requirements:
 
@@ -426,7 +426,7 @@ SUBNETGROUP  dev-test  test group  Complete  vpc-3facfe54
       OPTIONGROUP  tdehsm-option-group  pending-apply
 ```
 
-### Modifying an Existing DB Instance to Add Parameters for AWS CloudHSM Classic<a name="w3ab1c36c83c11c27c21b7"></a>
+### Modifying an Existing DB Instance to Add Parameters for AWS CloudHSM Classic<a name="w3ab1c34c83c11c27c21b7"></a>
 
 The following command modifies an existing Oracle Enterprise Edition DB instance and adds the `tde-credential-arn` and `tde-credential-password` parameters\. Note that you must also include in the command the option group that contains the **TDE\_HSM** option\.
 

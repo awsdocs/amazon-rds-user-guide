@@ -75,7 +75,7 @@ You can use many standard methods to trace individual sessions connected to an O
 
 ### Retrieving Trace Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Retrieving"></a>
 
-You can retrieve any trace file in `background_dump_dest` using a standard SQL query of an Amazon RDS managed external table\. To use this method, you must execute the procedure to set the location for this table to the specific trace file\. 
+You can retrieve any trace file in `background_dump_dest` using a standard SQL query of an Amazon RDS–managed external table\. To use this method, you must execute the procedure to set the location for this table to the specific trace file\. 
 
 For example, you can use the `rdsadmin.tracefile_listing` view mentioned above to list the all of the trace files on the system\. You can then set the tracefile\_table view to point to the intended trace file using the following procedure: 
 
@@ -142,7 +142,7 @@ To access the listener log, use the following SQL statement:
 ```
 
 **Note**  
-Oracle rotates the alert and listener logs when they exceed 10MB, at which point they will be unavailable from the Amazon RDS views\. 
+Oracle rotates the alert and listener logs when they exceed 10 MB, at which point they will be unavailable from the Amazon RDS views\. 
 
 ## Related Topics<a name="USER_LogAccess.Concepts.Oracle.Related"></a>
 

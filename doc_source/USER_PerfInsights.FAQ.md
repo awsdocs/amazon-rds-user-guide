@@ -58,7 +58,7 @@ A: Customers using Enhanced Monitoring to monitor operating system metrics shoul
 
 **Q: Is the data stored in Performance Insights encrypted?**
 
-A: Yes\. Performance Insights encrypts all potentially sensitive data using your own AWS Key Management Service \(AWS KMS\) key\. Data is encrypted in flight and at rest\. AWS personnel cannot access or see any potentially sensitive performance data\. Only your users on your AWS account with full access to RDS can view Performance Insights\. You can revoke RDS’s grant for your KMS key, which enables us to process and display your performance data, at any time\.
+A: Yes\. Performance Insights encrypts all potentially sensitive data using your own AWS Key Management Service \(AWS KMS\) key\. Data is encrypted in flight and at rest\. AWS personnel cannot access or see any potentially sensitive performance data\. Only your users on your AWS account with full access to RDS can view Performance Insights\. You can revoke the RDS grant for your KMS key, which enables us to process and display your performance data, at any time\.
 
 **Q: If I turn off Performance Insights, does AWS retain the data or is it deleted?**
 

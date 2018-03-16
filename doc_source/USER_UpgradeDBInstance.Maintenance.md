@@ -69,25 +69,25 @@ For the purpose of this example, we assume that the DB instance named *mydbinsta
 
 **To adjust the preferred maintenance window**
 
-1.  Launch the AWS Management Console\. 
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-   1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\. 
 
-   1.  Click on the **DB Instances** link in the Navigation panel on the left side of the console display\. 
+1. Choose **Instance actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
 
-       The **My Instances** list appears\. 
-
-   1.  Right\-click on the **DB Instance** in the **My DB Instances** list and select **Modify** from the drop\-down menu\. 
-
-       The **Modify DB Instance** window appears\. 
-
-1.  Type the maintenance window into the Maintenance Window text box using the format "day:hour:minute\-day:hour:minute"\. 
+1. In the **Maintenance** section, update the maintenance window\.
 **Note**  
 The maintenance window and the backup window for the DB instance cannot overlap\. If you enter a value for the maintenance window that overlaps the backup window, an error message appears\. 
 
-1.  Click the **OK** button\. 
+1. Choose **Continue**\.
 
-    Changes to the maintenance window take effect immediately\.
+   On the confirmation page, review your changes\.
+
+1. To apply the changes to the maintenance window immediately, select **Apply immediately**\. 
+
+1.  Choose **Modify DB Instance** to save your changes\. 
+
+   Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
 ### CLI<a name="AdjustingTheMaintenanceWindow.CLI"></a>
 
@@ -152,15 +152,21 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 
 1. Choose **Clusters** on the left of the console\.
 
-1. Choose the DB cluster that you want to adjust the preferred maintenance window for\.
+1. Choose the DB cluster for which you want to change the maintenance window\.
 
-1. Choose **Modify Cluster**\.
+1. From **Actions**, choose **Modify cluster**\.
 
-1. In the **Maintenance** section of the console, set the **Start Day**, **Start Time**, and **Duration** to the values for your new, preferred maintenance window\.
+1. In the **Maintenance** section, update the maintenance window\.
 
-1. Choose **Apply Immediately**, and then choose **Continue**\.
+1. Choose **Continue**\.
 
-1. Verify your updated values, and then choose **Modify Cluster**\.
+   On the confirmation page, review your changes\.
+
+1. To apply the changes to the maintenance window immediately, select **Apply immediately**\. 
+
+1.  Choose **Modify cluster** to save your changes\. 
+
+   Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
 ### CLI<a name="AdjustingTheMaintenanceWindow.Aurora.CLI"></a>
 

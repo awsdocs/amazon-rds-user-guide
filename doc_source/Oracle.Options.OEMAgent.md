@@ -36,6 +36,8 @@ The following are prerequisites for using Management Agent:
 
   + For OMS 13c2 with Oracle patch 25163555 applied, use OEM Agent 13\.2\.0\.0\.v2 or later\.
 
+    Use OMSPatcher to apply the patch\.
+
   + For unpatched OMS 13c2, use OEM Agent 13\.2\.0\.0\.v1\.
 
 + In most cases, you need to configure your VPC to allow connections from OMS to your DB instance\. If you are not familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
@@ -65,7 +67,7 @@ Amazon RDS supports the following settings for the Management Agent option\.
 | **Port** \(`AGENT_PORT`\) | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.   | 
 | **Security Groups** | — |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.   | 
 | **OMS\_HOST** |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.   | 
-| **OMS\_PORT** | An integer value |  The port on the OMS host that listens for the Management Agent\.   | 
+| **OMS\_PORT** | An integer value |  The HTTPS upload port on the OMS Host that listens for the Management Agent\.  To determine the HTTPS upload port, connect to the OMS host, and run the following command \(which requires the `SYSMAN` password\): emctl status oms \-details   | 
 | **AGENT\_REGISTRATION\_PASSWORD** | A string value |  The password that the Management Agent uses to authenticate itself with the OMS\. We recommend that you create a persistent password in your OMS before enabling the OEM\_AGENT option\. With a persistent password you can share a single Management Agent option group among multiple Amazon RDS databases\.   | 
 
 ## Adding the Management Agent Option<a name="Oracle.Options.OEMAgent.Add"></a>

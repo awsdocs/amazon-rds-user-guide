@@ -21,7 +21,7 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 
 When you cannot connect to a DB instance, the following are common causes:
 
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about setting up a security group, see [Provide Access to the DB Instance in the VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
++ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about setting up a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
 
@@ -253,7 +253,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 + Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html)\.
 
-+ Warm the InnoDB for MySQL or XtraDB for MariaDB buffer pool on the Read Replica\. If you have a small set of tables that are being updated often, and you are using the InnoDB or XtraDB table schema, then dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool, which can reduce replica lag\. The following shows an example\.
++ Warm the buffer pool on the Read Replica for InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\. If you have a small set of tables that are being updated often, and you are using the InnoDB or XtraDB table schema, then dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool, which can reduce replica lag\. The following shows an example\.
 
   For Linux, OS X, or Unix:
 
@@ -289,7 +289,7 @@ Common situations that can cause replication errors include the following:
 
 + Writing to tables on a Read Replica\. If you are creating indexes on a Read Replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you are writing to tables on the Read Replica, it can break replication\.
 
-+ Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the InnoDB for MySQL and XtraDB for MariaDB storage engines\.
++ Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\.
 
   You can convert a MyISAM table to InnoDB with the following command:
 
@@ -451,7 +451,7 @@ You might encounter the following error message from Amazon Aurora:
 ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
 ```
 
-Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables does not autogrow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. To find the amount of local SSD storage for R3 DB instance types, go to [Memory Optimized R3 instances](https://aws.amazon.com/ec2/instance-types/#memory-optimized)\.
+Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables does not autogrow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. To find the amount of local SSD storage for memory optimized instance types, go to [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/#memory-optimized)\.
 
 If your workload cannot be modified to reduce the amount temporary storage required, then you can scale your DB instances up to use a DB instance class that has more local SSD storage\. 
 
@@ -485,7 +485,7 @@ If you can send and receive communications through the port you specified, check
 
 ## Cannot Connect to Amazon RDS PostgreSQL DB Instance<a name="CHAP_Troubleshooting.PostgreSQL.Connect"></a>
 
-The most common problem when attempting to connect to a PostgreSQL DB instance is that the security group assigned to the DB instance has incorrect access rules\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about creating a security group for your DB instance, see [Provide Access to the DB Instance in the VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
+The most common problem when attempting to connect to a PostgreSQL DB instance is that the security group assigned to the DB instance has incorrect access rules\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about creating a security group for your DB instance, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
 
 The most common error is `could not connect to server: Connection timed out`\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through your local firewall\.
 

@@ -22,8 +22,6 @@ Amazon RDS supports Multi\-AZ with Mirroring for SQL Server in all AWS Regions, 
 
   + US West \(N\. California\)
 
-  + Asia Pacific \(Singapore\)
-
   + AWS GovCloud \(US\)
 
 + Supported in most cases 

@@ -9,6 +9,7 @@ The following table shows what Oracle PSUs are applied to the Oracle versions in
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2018 January | [12\.1\.0\.2\.v11](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v11) | [11\.2\.0\.4\.v15](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v15) | 
 | 2017 October | [12\.1\.0\.2\.v10](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v10) | [11\.2\.0\.4\.v14](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v14) | 
 | 2017 July | [12\.1\.0\.2\.v9](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v9) | [11\.2\.0\.4\.v13](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v13) | 
 | 2017 April | [12\.1\.0\.2\.v8](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v8) | [11\.2\.0\.4\.v12](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v12) | 

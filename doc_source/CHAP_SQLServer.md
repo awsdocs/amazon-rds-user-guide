@@ -2,17 +2,17 @@
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is shown following\. For the full list of supported versions and editions, see [Version and Feature Support on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport)\. 
 
-+ SQL Server 2017, version 14\.00\.1000\.169, RTM, for all editions, and all AWS Regions
++ SQL Server 2017 RTM CU3 14\.00\.3015\.40, released per [KB4052987](https://support.microsoft.com/en-us/help/4052987/cumulative-update-3-for-sql-server-2017) on 4 January 2018\. 
 
-+ SQL Server 2016, version 13\.00\.4451\.0, SP1 CU5, for all editions, and all AWS Regions
++ SQL Server 2016 SP1 CU7 13\.00\.4466\.4, released per [KB4057119](https://support.microsoft.com/en-us/help/4057119/cumulative-update-7-for-sql-server-2016-sp1) on 4 January 2018\. 
 
-+ SQL Server 2014, version 12\.00\.5546\.0, SP2 CU5, for all editions and all AWS Regions
++ SQL Server 2014 SP2 CU10 12\.00\.5571\.0, released per [KB4052725](https://support.microsoft.com/en-us/help/2936603/sql-server-2014-build-versions) on 16 January 2018\. 
 
-+ SQL Server 2012version 11\.00\.6594\.0, SP3 CU8, for all editions and all AWS Regions
++ SQL Server 2012 SP4 GDR 11\.00\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on 12 January 2017\. 
 
-+ SQL Server 2008 R2, version 10\.50\.6529\.0, SP3 QFE, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
++ SQL Server 2008 R2 SP3 GDR 10\.50\.6560\.0, released per [KB4057113](https://support.microsoft.com/en-us/help/4057113/security-update-for-vulnerabilities-in-sql-server) on 6 January 2018\. Not available in US East \(Ohio\), Canada \(Central\), and EU \(London\) 
 
-For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. 
+For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
 
 With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running SQL Server can be used inside a VPC\. You can also use SSL to connect to a DB instance running SQL Server, and you can use TDE to encrypt data at rest\. Amazon RDS currently supports Multi\-AZ deployments for SQL Server using SQL Server Mirroring as a high\-availability, failover solution\. 
 
@@ -335,7 +335,7 @@ Amazon RDS supports CDC for the following SQL Server editions and versions:
 
 + Microsoft SQL Server Standard Edition \(2017, 2016 version 13\.00\.4422\.0 SP1 CU2 and later\) 
 
-To use CDC with your Amazon RDS DB instances, first enable or disable CDC at the database level by using RDS\-provided stored procedures\. After that, any user that has the `db_owner` role for that database can use the native Microsoft stored procedures to control CDC on that database\. For more information, see [Enabling and Disabling Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)\. 
+To use CDC with your Amazon RDS DB instances, first enable or disable CDC at the database level by using RDS\-provided stored procedures\. After that, any user that has the `db_owner` role for that database can use the native Microsoft stored procedures to control CDC on that database\. For more information, see [Using Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)\. 
 
 You can use CDC and AWS Database Migration Service to enable ongoing replication from SQL Server DB instances\.     
 
@@ -470,8 +470,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Buffer pool extension
 
 + BULK INSERT and OPENROWSET\(BULK\.\.\.\) features
-
-+ Change Data Capture \(CDC\) \- Consider using Change Tracking as an alternative to CDC\.
 
 + Data Quality Services
 

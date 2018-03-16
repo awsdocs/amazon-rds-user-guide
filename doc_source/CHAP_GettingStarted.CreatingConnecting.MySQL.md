@@ -67,7 +67,7 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 1. Type the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL monitor\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and the master password you used for *<password>*\.
 
    ```
-   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser>> -p
+   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
    ```
 
    You should see output similar to the following\.

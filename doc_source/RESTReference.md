@@ -4,11 +4,11 @@ Standard API syntax cannot be used in certain scenarios\. The `DownloadCompleteD
 
 ## DownloadCompleteDBLogFile<a name="RESTReference.DownloadCompleteDBLogFile"></a>
 
-### Description<a name="w3ab1c44c17b5b5"></a>
+### Description<a name="w3ab1c42c17b5b5"></a>
 
 Downloads the contents of the specified database log file\.
 
-### Request Parameters<a name="w3ab1c44c17b5b7"></a>
+### Request Parameters<a name="w3ab1c42c17b5b7"></a>
 
 **DBInstanceIdentifier**  
 The customer\-assigned name of the DB instance that contains the log file you want to download\.
@@ -16,7 +16,7 @@ The customer\-assigned name of the DB instance that contains the log file you wa
 **LogFileName**  
 The name of the log file to be downloaded\.
 
-### Syntax<a name="w3ab1c44c17b5b9"></a>
+### Syntax<a name="w3ab1c42c17b5b9"></a>
 
 ```
 GET /v13/downloadCompleteLogFile/DBInstanceIdentifier/LogFileName HTTP/1.1
@@ -24,17 +24,17 @@ Content-type: application/json
 host: rds.region.amazonaws.com
 ```
 
-### Response Elements<a name="w3ab1c44c17b5c11"></a>
+### Response Elements<a name="w3ab1c42c17b5c11"></a>
 
 The `DownloadCompleteDBLogFile` REST API returns the contents of the requested log file as a stream\.
 
-### Errors<a name="w3ab1c44c17b5c13"></a>
+### Errors<a name="w3ab1c42c17b5c13"></a>
 
 **DBInstanceNotFound**  
 `DBInstanceIdentifier` does not refer to an existing DB instance\.   
 HTTP Status Code: 404
 
-### Examples<a name="w3ab1c44c17b5c15"></a>
+### Examples<a name="w3ab1c42c17b5c15"></a>
 
 The following example downloads the log file named *log/ERROR\.6* for the DB instance named *sample\-sql* in the *us\-west\-2* region\.
 
@@ -69,7 +69,7 @@ For example, the following command downloads a log named *log/ERROR\.4* for the 
 PROMPT> rds-download-db-logfile myexampledb --region us-west-2 --log-file-name log/ERROR.4 > errorlog.txt
 ```
 
-## Related Topics<a name="w3ab1c44c17b9"></a>
+## Related Topics<a name="w3ab1c42c17b9"></a>
 
 + [Downloading a Database Log File](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)
 

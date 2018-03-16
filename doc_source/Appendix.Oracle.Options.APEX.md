@@ -89,6 +89,25 @@ After the Amazon RDS APEX options are installed, you must change the password fo
 2. alter user APEX_PUBLIC_USER account unlock;
 ```
 
+## Configuring RESTful Services for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ConfigureRESTful"></a>
+
+To configure RESTful services in APEX \(not needed for APEX 4\.1\.1\.V1\), use SQL\*Plus to connect to your DB instance as the master user, and then run the `rdsadmin.rdsadmin_run_apex_rest_config` stored procedure\. When you run the stored procedure, you provide passwords for the following users:
+
++ `APEX_LISTENER`
+
++ `APEX_REST_PULIC_USER`
+
+The stored procedure runs the `apex_rest_config.sql` script, which creates new database accounts for these users\.
+
+**Note**  
+Configuration is not required for Oracle APEX version 4\.1\.1\.v1\. You do not need to run the stored procedure for this Oracle APEX version only\.
+
+The following command runs the stored procedure:
+
+```
+1. exec rdsadmin.rdsadmin_run_apex_rest_config('apex_listener_password', 'apex_rest_public_user_password');
+```
+
 ## Installing and Configuring the APEX Listener<a name="Appendix.Oracle.Options.APEX.Listener"></a>
 
 You are now ready to install and configure a listener for use with Oracle APEX\. You can use one of these products for this purpose: 
@@ -172,8 +191,6 @@ The APEX Listener is now ready for use\.
 
 ## Upgrading the APEX Version<a name="Appendix.Oracle.Options.APEX.Upgrade"></a>
 
-If you are planning to do a major version upgrade of your DB instance, and you are using an APEX version that is not compatible with your target database version, you can upgrade your version of APEX at the same time as your DB instance\. This can reduce the time it takes to upgrade your DB instance\. 
-
 **Important**  
 Back up your DB instance before you upgrade APEX\. For more information, see [Creating a DB Snapshot](USER_CreateSnapshot.md) and [Testing an Upgrade](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.UpgradeTesting)\. 
 
@@ -186,6 +203,10 @@ To upgrade APEX with your DB instance, do the following:
 + When you upgrade your DB instance, specify the new option group for your upgraded DB instance\. 
 
 After you upgrade your version of APEX, the APEX schema for the previous version might still exist in your database\. If you don't need it anymore, you can drop the old APEX schema from your database after you upgrade\. 
+
+If you upgrade the APEX version and RESTful services were not configured in the previous APEX version, we recommend that you configure RESTful services\. For more information, see [ Configuring RESTful Services for Oracle APEX](#Appendix.Oracle.Options.APEX.ConfigureRESTful)\.
+
+If you are planning to do a major version upgrade of your DB instance, and you are using an APEX version that is not compatible with your target database version, you can upgrade your version of APEX before you upgrade your DB instance\. Upgrading APEX first can reduce the amount of time it takes to upgrade your DB instance\. 
 
 ## Removing the APEX Option<a name="Appendix.Oracle.Options.APEX.Remove"></a>
 

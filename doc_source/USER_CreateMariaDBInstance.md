@@ -65,6 +65,9 @@ To create a MariaDB DB instance by using the AWS CLI, call the [create\-db\-inst
 
 + `--backup-retention-period`
 
+**Note**  
+If you require a specific minor version of MariaDB, include the `--engine-version` parameter\.
+
 **Example**  
 The following command creates a MariaDB instance named *mydbinstance*\.  
 For Linux, OS X, or Unix:  
@@ -72,7 +75,7 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds create-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --db-instance-class db.m1.small \
+3.     --db-instance-class db.m4.xlarge \
 4.     --engine mariadb \
 5.     --allocated-storage 20 \
 6.     --master-username masteruser \
@@ -84,19 +87,17 @@ For Windows:
 ```
 1. aws rds create-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --db-instance-class db.m1.small ^
+3.     --db-instance-class db.m4.xlarge ^
 4.     --engine mariadb ^
 5.     --allocated-storage 20 ^
 6.     --master-username masteruser ^
 7.     --master-user-password masteruserpassword ^
 8.     --backup-retention-period 3
 ```
-This command should produce output similar to the following:  
+This command should produce output that begins with information that is similar to the following:  
 
 ```
-1. DBINSTANCE  mydbinstance  db.m1.small  mariadb  20  sa  creating  3  ****  n  10.0.17
-2. SECGROUP  default  active
-3. PARAMGRP  default.mariadb10.0  in-sync
+1. DBINSTANCE 20 True 3 rds-ca-2015 False   arn:aws:rds:us-east-1:1234567890:db:mydbinstance db.m4.xlarge mydbinstance creating 0 **** mariadb 10.1.26 
 ```
 
 ## API<a name="USER_CreateMariaDBInstance.API"></a>
@@ -121,6 +122,9 @@ To create a MariaDB DB instance by using the Amazon RDS API, call the [CreateDBI
 
 + `MasterUserPassword`
 
+**Note**  
+If you require a specific minor version of MariaDB, include the `EngineVersion` parameter\.
+
 **Example**  
 
 ```
@@ -128,7 +132,7 @@ To create a MariaDB DB instance by using the Amazon RDS API, call the [CreateDBI
  2.     ?Action=CreateDBInstance
  3.     &AllocatedStorage=20
  4.     &BackupRetentionPeriod=3
- 5.     &DBInstanceClass=db.m3.medium
+ 5.     &DBInstanceClass=db.m4.xlarge
  6.     &DBInstanceIdentifier=mydbinstance
  7.     &DBName=mydatabase
  8.     &DBSecurityGroups.member.1=mysecuritygroup

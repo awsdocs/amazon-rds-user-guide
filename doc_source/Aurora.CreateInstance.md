@@ -1,6 +1,6 @@
 # Creating an Amazon Aurora DB Cluster<a name="Aurora.CreateInstance"></a>
 
-An Amazon Aurora DB cluster consists of one DB instances, compatible with either MySQL or PostgreSQL, and a cluster volume that represents the data for the DB cluster, copied across three Availability Zones as a single, virtual volume\. The DB cluster contains a primary instance and, optionally, up to 15 Aurora Replicas\. For more information about Aurora DB clusters, see [Overview of Amazon Aurora](Aurora.Overview.md)\.
+An Amazon Aurora DB cluster consists of a DB instance, compatible with either MySQL or PostgreSQL, and a cluster volume that represents the data for the DB cluster, copied across three Availability Zones as a single, virtual volume\. The DB cluster contains a primary instance and, optionally, up to 15 Aurora Replicas\. For more information about Aurora DB clusters, see [Overview of Amazon Aurora](Aurora.Overview.md)\.
 
 The following topic shows how to create an Aurora DB cluster and then add an Aurora Replica for that DB cluster\.
 
@@ -15,7 +15,7 @@ The following are prerequisites to create a DB cluster\.
 
 ### VPC<a name="Aurora.CreateInstance.Prerequisites.VPC"></a>
 
-An Amazon Aurora DB cluster can only be created in an Amazon Virtual Private Cloud \(VPC\) with at least one subnet in each of at least two of the Availability Zones in the AWS Region where you want to deploy your DB cluster\. By distributing your cluster instances across at least two Availability Zones, you ensure that there will be instances available in your DB cluster in the unlikely case of an Availability Zone failure\. Note that the cluster volume for your Aurora DB cluster will always span three Availability Zones to provide durable storage with less possibility of data loss\. 
+You can only create an Amazon Aurora DB cluster in a Virtual Private Cloud \(VPC\) that spans two Availability Zones, and each zone must contain at least one subnet\. By distributing your cluster instances across at least two Availability Zones, you ensure that there will be instances available in your DB cluster in the unlikely case of an Availability Zone failure\. Note that the cluster volume for your Aurora DB cluster will always span three Availability Zones to provide durable storage with less possibility of data loss\. 
 
 If you are using the AWS Management Console to create your Aurora DB cluster, then you can have Amazon RDS automatically create a VPC for you\. Alternatively, you can use an existing VPC or create a new VPC for your Aurora DB cluster\. Your VPC must have at least one subnet in each of at least two Availability Zones in order for you to use it with an Amazon Aurora DB cluster\. For more information, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\. For information on VPCs, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
 
@@ -44,7 +44,7 @@ If you don't have a default VPC or you have not created a VPC, you can have Amaz
 
 ### Launching an Aurora DB Cluster<a name="Aurora.CreateInstance.Console.DBInstance"></a>
 
-The following procedures describe how to use the AWS Management Console to launch an Aurora DB cluster and create an Aurora Replica\.
+The following procedures describe how to use the AWS Management Console to launch an Aurora DB cluster and create an Aurora Replica\.<a name="Aurora.CreateInstance.Console.Create"></a>
 
 **To launch an Aurora DB cluster using the AWS Management Console**
 
@@ -108,7 +108,7 @@ Note the endpoint of the Aurora Replica\. Use the endpoint of the Aurora Replica
 ## CLI<a name="Aurora.CreateInstance.CLI"></a>
 
 **Note**  
-Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill the required prerequisites, such as creating a VPC and an RDS DB subnet group\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.
+Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill the required prerequisites, such as creating a VPC and an RDS DB subnet group\. For more information, see [DB Cluster Prerequisites](#Aurora.CreateInstance.Prerequisites)\.<a name="Aurora.CreateInstance.CLI.DBCluster.MySQL"></a>
 
 **To launch an Aurora MySQL DB cluster using the AWS CLI**
 
@@ -192,7 +192,7 @@ Complete the following steps:
    ```
    aws rds create-db-instance --db-instance-identifier sample-instance ^
         --db-cluster-identifier sample-cluster --engine aurora --db-instance-class db.r4.large
-   ```
+   ```<a name="Aurora.CreateInstance.CLI.DBCluster.PostgreSQL"></a>
 
 **To launch an Aurora PostgreSQL DB cluster using the AWS CLI**
 

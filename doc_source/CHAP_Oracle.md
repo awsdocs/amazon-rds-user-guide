@@ -184,7 +184,7 @@ Several parameter have new value ranges for Oracle 12c on Amazon RDS\. The follo
 | Parameter Name | 12c Range | 11g Range | 
 | --- | --- | --- | 
 |  [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)  |  os | db \[, extended\] | xml \[, extended\]  |  os | db \[, extended\] | xml \[, extended\] | true | false  | 
-|  [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)  |  Starts with 11\.0\.0  |  Starts with 10\.0\.0  | 
+|  [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)  |  For DB instances upgraded from Oracle 11g, automatically set to 12\.0\.0 on Amazon RDS unless a lower value is explicitly provided during the upgrade \(as low as 11\.2\.0\)  For new Oracle 12c DB instances, starts with 12\.0\.0 on Amazon RDS |  Starts with 11\.2\.0 on Amazon RDS | 
 |  [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)  |  PERMITTED | PREFERRED | ALWAYS | IGNORE | FORCE  |  PERMITTED | ALWAYS | IGNORE | FORCE  | 
 |  [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)  |  1\-100  |  1\-36  | 
 |  [optimizer\_features\_enable](http://docs.oracle.com/database/121/REFRN/GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C.htm#REFRN10141)  |  8\.0\.0 to 12\.1\.0\.2  |  8\.0\.0 to 11\.2\.0\.4  | 
@@ -323,7 +323,7 @@ Several Oracle 11g PL/SQL packages are not supported in Oracle 12c\. These packa
 
 ### Oracle 11g Supported Features<a name="Oracle.Concepts.FeatureSupport.11g.Supported"></a>
 
-The following list shows the Oracle 11g features supported by Amazon RDS\. For a complete list of features supported by each Oracle 11g edition, see [Oracle Database 11g Editions](http://www.oracle.com/technetwork/community/database-11g-product-family-technic-133664.pdf)\. 
+The following list shows the Oracle 11g features supported by Amazon RDS\. 
 
 + Total Recall
 
@@ -428,7 +428,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.2 according to th
 | Date | Information | 
 | --- | --- | 
 |  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.2   | 
-|  April 15, 2018  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  April 15, 2019  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ### Deprecation of Oracle 11\.2\.0\.3<a name="Oracle.Concepts.Deprecate.11203"></a>
 
@@ -444,7 +444,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.3 according to th
 | Date | Information | 
 | --- | --- | 
 |  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.3\.   | 
-|  March 15, 2018  |  Any 11\.2\.0\.3 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  March 15, 2019  |  Any 11\.2\.0\.3 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ### Deprecation of Oracle 12\.1\.0\.1<a name="Oracle.Concepts.Deprecate.12101"></a>
 
@@ -460,7 +460,7 @@ Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to th
 | Date | Information | 
 | --- | --- | 
 |  February 15, 2017  |  You can no longer create DB instances that use Oracle version 12\.1\.0\.1\.   | 
-|  June 1, 2018  |  Any 12\.1\.0\.1 snapshots are upgraded to 12\.1\.0\.2\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  June 1, 2019  |  Any 12\.1\.0\.1 snapshots are upgraded to 12\.1\.0\.2\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ## Using Huge Pages with an Oracle DB Instance<a name="Oracle.Concepts.HugePages"></a>
 

@@ -29,7 +29,7 @@ Each of these creation workflows has a **Configure Advanced Settings** page, whe
 
    + For a DB cluster, choose **Cluster actions**, and then choose **Modify cluster**\.
 
-1. In the **Database options** section, for **IAM DB Authentication**, choose **Enable IAM DB authorization** or **No** \(to disable\), and then choose **Continue**\.
+1. In the **Database options** section, for **IAM DB authentication**, choose **Enable IAM DB authentication** or **Disable**, and then choose **Continue**\.
 
 1. To apply the changes immediately, choose **Apply immediately**\.
 
@@ -45,7 +45,7 @@ Each of these creation workflows has a **Configure Advanced Settings** page, whe
 
 1. In the **Settings** section, type an identifier for the DB instance in **DB Instance Identifier**\.
 
-1. In the **Database options** section, for **IAM DB Authentication**, choose **Enable IAM DB authorization** or **No** \(to disable\)\.
+1. In the **Database options** section, for **IAM DB authentication**, choose **Enable IAM DB authentication** or **Disable**\.
 
 1. Choose **Restore DB Instance**\.
 
