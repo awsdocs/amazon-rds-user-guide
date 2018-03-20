@@ -187,7 +187,7 @@ The following points are important facts you should know about Amazon RDS storag
 
 + Maximum channel bandwidth depends on the DB instance class\.
 
-+ I/O size doesn't affect the IOPS values reported by the metrics, which are based solely on the number of I/Os over time\. This functionality means that it is possible to consume all of the IOPS provisioned with fewer I/Os than specified if the I/O sizes are larger than 32 KB\. For example, a system provisioned for 5,000 IOPS can attain a maximum of 2,500 IOPS with 64 KB I/O or 1,250 IOPS with 128 KB IO\. 
++ I/O size doesn't affect the IOPS values reported by the metrics, which are based solely on the number of I/Os over time\. This functionality means that it is possible to consume all of the IOPS provisioned with fewer I/Os than specified if the I/O sizes are larger than 32 KB\. For example, a system provisioned for 5,000 IOPS can attain a maximum of 2,500 IOPS with 64 KB I/O or 1,250 IOPS with 128 KB I/O\. 
 
   Magnetic storage doesn't provision I/O capacity, so all I/O sizes are counted as a single I/O\. General purpose storage provisions I/O capacity based on the size of the volume\. For more information on general purpose storage throughput, see [General Purpose \(SSD\) Volumes](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_gp2)\.
 
