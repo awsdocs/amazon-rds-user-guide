@@ -22,11 +22,8 @@ Amazon RDS supports the following settings for the MariaDB Audit Plugin option\.
 ## Adding the MariaDB Audit Plugin<a name="Appendix.MySQL.Options.AuditPlugin.Add"></a>
 
 The general process for adding the MariaDB Audit Plugin to a DB instance is the following: 
-
 + Create a new option group, or copy or modify an existing option group
-
 + Add the option to the option group
-
 + Associate the option group with the DB instance
 
 After you add the MariaDB Audit Plugin, you don't need to restart your DB instance\. As soon as the option group is active, auditing begins immediately\. 
@@ -38,9 +35,7 @@ After you add the MariaDB Audit Plugin, you don't need to restart your DB instan
 1. Add the **MARIADB\_AUDIT\_PLUGIN** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Audit Plugin Option Settings](#Appendix.MySQL.Options.AuditPlugin.Options)\. 
 
 1. Apply the option group to a new or existing DB instance\. 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\. 
 
 ## Viewing and Downloading the MariaDB Audit Plugin Log<a name="Appendix.MySQL.Options.AuditPlugin.Log"></a>
@@ -56,7 +51,5 @@ After you enable the MariaDB Audit Plugin, you can modify the settings\. For mor
 Amazon RDS doesn't support turning off logging in the MariaDB Audit Plugin\. However, you can remove the plugin from a DB instance\. After you remove the MariaDB Audit Plugin, you need to restart your DB instance to stop auditing\. 
 
 To remove the MariaDB Audit Plugin from a DB instance, do one of the following: 
-
 + Remove the MariaDB Audit Plugin option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
-
 + Modify the DB instance and specify a different option group that doesn't include the plugin\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\. 

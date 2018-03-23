@@ -5,7 +5,7 @@ The easiest way to create an Amazon Aurora DB cluster is to use the Amazon RDS c
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB cluster\.
 
-
+**Topics**
 + [Create a DB Cluster](#CHAP_GettingStarted.Aurora.CreateDBCluster)
 + [Connect to an Instance in a DB Cluster](#CHAP_GettingStarted.Aurora.Connect)
 + [Delete the Sample DB Cluster, DB Subnet Group, and VPC](#CHAP_GettingStarted.Deleting.Aurora)
@@ -35,42 +35,30 @@ Aurora is not available in all AWS Regions\. For a list of AWS Regions where Aur
 1. Choose **Next**\.
 
 1. Set the following values on the **Specify DB details** page: 
-
    + **DB instance class:** `db.r4.large`
-
    + **DB instance identifier:** `gs-db-instance1`
-
    + **Master username:** Using alphanumeric characters, type a master user name, used to log on to your DB instances in the DB cluster\.
-
    + **Master password** and **Confirm Password:** Type a password in the **Master Password** box that contains from 8 to 41 printable ASCII characters \(excluding /,", and @\) for your master user password, used to log on to your database\. Then type the password again in the **Confirm Password** box\.  
 ![\[Specify DB details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraLaunch02.png)
 
 1. Choose **Next** and set the following values on the **Configure Advanced Settings** page: 
-
    + **Virtual Private Cloud \(VPC\):** If you have an existing VPC, then you can use that VPC with your Amazon Aurora DB cluster by choosing your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by choosing **Create a new VPC**\. This example uses the **Create a new VPC** option\.
-
    + **Subnet group:** If you have an existing subnet group, then you can use that subnet group with your Amazon Aurora DB cluster by choosing your subnet group identifier, for example, `gs-subnet-group1`\.
 
      Otherwise, you can choose to have Amazon RDS create a subnet group for you by choosing **Create a new subnet group**\. This example uses the **Create a new subnet group** option\.
-
    + **Public accessibility:** `Yes`
 **Note**  
 Your production DB cluster might not need to be in a public subnet, because only your application servers require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Publicly Accessible** to `No`\.
-
    + **Availability zone:** `No Preference`
-
    + **VPC security groups:** If you have one or more existing VPC security groups, then you can use one or more of those VPC security groups with your Amazon Aurora DB cluster by choosing your VPC security group identifiers, for example, `gs-security-group1`\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC security group for you by choosing **Create a new Security group**\. This example uses the **Create a new Security group** option\.
-
    + **DB Cluster Identifier:** `gs-db-cluster1`
-
    + **Database name:** `sampledb`
 **Note**  
 This creates the default database\. To create additional databases, connect to the DB cluster and use the SQL command `CREATE DATABASE`\. 
-
    + **Database port:** `3306`
 **Note**  
 You might be behind a corporate firewall that does not allow access to default ports such as the Aurora MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora DB cluster\.

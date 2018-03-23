@@ -32,11 +32,8 @@ s3-region://bucket-name/file-name-or-prefix
 ```
 
 The path includes the following values:
-
 + `region` \(optional\) – The AWS Region that contains the Amazon S3 bucket to load from\. This value is optional\. If you don't specify a `region` value, then Aurora loads your file from Amazon S3 in the same region as your DB cluster\.
-
 + `bucket-name` – The name of the Amazon S3 bucket that contains the data to load\. Object prefixes that identify a virtual folder path are supported\.
-
 + `file-name-or-prefix` – The name of the Amazon S3 text file or XML file, or a prefix that identifies one or more text or XML files to load\. You can also specify a manifest file that identifies one or more text files to load\. For more information about using a manifest file to load text files from Amazon S3, see [Using a Manifest to Specify Data Files to Load](#AuroraMySQL.Integrating.LoadFromS3.Manifest)\.
 
 ## LOAD DATA FROM S3<a name="AuroraMySQL.Integrating.LoadFromS3.Text"></a>
@@ -68,29 +65,17 @@ LOAD DATA FROM S3 [FILE | PREFIX | MANIFEST] 'S3-URI'
 ### Parameters<a name="AuroraMySQL.Integrating.LoadFromS3.Text.Parameters"></a>
 
 Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD DATA INFILE Syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html) in the MySQL documentation\.
-
-+ **FILE | PREFIX | MANIFEST** – Identifies whether to load the data from a single file, from all files that match a given prefix, or from all files in a specified manifest\. `FILE` is the default\.
-
++ **FILE \| PREFIX \| MANIFEST** – Identifies whether to load the data from a single file, from all files that match a given prefix, or from all files in a specified manifest\. `FILE` is the default\.
 + **S3\-URI** – Specifies the URI for a text or manifest file to load, or an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a Path to an Amazon S3 Bucket](#AuroraMySQL.Integrating.LoadFromS3.URI)\.
-
-+ **REPLACE | IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
-
++ **REPLACE \| IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
   + Specify `REPLACE` if you want the input row to replace the existing row in the table\.
-
   + Specify `IGNORE` if you want to discard the input row\. `IGNORE` is the default\.
-
 + **INTO TABLE** – Identifies the name of the database table to load the input rows into\.
-
 + **PARTITION** – Requires that all input rows be inserted into the partitions identified by the specified list of comma\-separated partition names\. If an input row cannot be inserted into one of the specified partitions, then the statement fails and an error is returned\.
-
 + **CHARACTER SET** – Identifies the character set of the data in the input file\.
-
-+ **FIELDS | COLUMNS** – Identifies how the fields or columns in the input file are delimited\. Fields are tab\-delimited by default\.
-
++ **FIELDS \| COLUMNS** – Identifies how the fields or columns in the input file are delimited\. Fields are tab\-delimited by default\.
 + **LINES** – Identifies how the lines in the input file are delimited\. Lines are delimited by a carriage return by default\.
-
-+ **IGNORE *number* LINES | ROWS** – Specifies to ignore a certain number of lines or rows at the start of the input file\. For example, you can use `IGNORE 1 LINES` to skip over an initial header line containing column names, or `IGNORE 2 ROWS` to skip over the first two rows of data in the input file\.
-
++ **IGNORE *number* LINES \| ROWS** – Specifies to ignore a certain number of lines or rows at the start of the input file\. For example, you can use `IGNORE 1 LINES` to skip over an initial header line containing column names, or `IGNORE 2 ROWS` to skip over the first two rows of data in the input file\.
 + **col\_name\_or\_user\_var, \.\.\.** – Specifies a comma\-separated list of one or more column names or user variables that identify which columns to load by name\. The name of a user variable used for this purpose must match the name of an element from the text file, prefixed with @\. You can employ user variables to store the corresponding field values for subsequent reuse\. 
 
   For example, the following statement loads the first column from the input file into the first column of `table1`, and sets the value of the `table_column2` column in `table1` to the input value of the second column divided by 100\.
@@ -101,7 +86,6 @@ Following, you can find a list of the required and optional parameters used by t
       (column1, @var1)
       SET table_column2 = @var1/100;
   ```
-
 + **SET** – Specifies a comma\-separated list of assignment operations that set the values of columns in the table to values not included in the input file\.
 
   For example, the following statement sets the first two columns of `table1` to the values in the first two columns from the input file, and then sets the value of the `column3` in `table1` to the current time stamp\.
@@ -259,13 +243,11 @@ LOAD DATA FROM S3 MANIFEST 's3-us-west-2://aurora-bucket/q1_sales.json'
 ## LOAD XML FROM S3<a name="AuroraMySQL.Integrating.LoadFromS3.XML"></a>
 
 You can use the `LOAD XML FROM S3` statement to load data from XML files stored on an Amazon S3 bucket in one of three different XML formats:
-
 + Column names as attributes of a `<row>` element\. The attribute value identifies the contents of the table field\.
 
   ```
   <row column1="value1" column2="value2" .../>
   ```
-
 + Column names as child elements of a `<row>` element\. The value of the child element identifies the contents of the table field\.
 
   ```
@@ -274,7 +256,6 @@ You can use the `LOAD XML FROM S3` statement to load data from XML files stored 
     <column2>value2</column2>
   </row>
   ```
-
 + Column names in the `name` attribute of `<field>` elements in a `<row>` element\. The value of the `<field>` element identifies the contents of the table field\. 
 
   ```
@@ -301,25 +282,15 @@ LOAD XML FROM S3 'S3-URI'
 ### Parameters<a name="AuroraMySQL.Integrating.LoadFromS3.XML.Parameters"></a>
 
 Following, you can find a list of the required and optional parameters used by the `LOAD DATA FROM S3` statement\. You can find more details about some of these parameters in [LOAD XML Syntax](https://dev.mysql.com/doc/refman/5.6/en/load-xml.html) in the MySQL documentation\.
-
-+ **FILE | PREFIX** – Identifies whether to load the data from a single file, or from all files that match a given prefix\. `FILE` is the default\.
-
-+ **REPLACE | IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
-
++ **FILE \| PREFIX** – Identifies whether to load the data from a single file, or from all files that match a given prefix\. `FILE` is the default\.
++ **REPLACE \| IGNORE** – Determines what action to take if an input row as the same unique key values as an existing row in the database table\.
   + Specify `REPLACE` if you want the input row to replace the existing row in the table\.
-
   + Specify `IGNORE` if you want to discard the input row\. `IGNORE` is the default\.
-
 + **INTO TABLE** – Identifies the name of the database table to load the input rows into\.
-
 + **PARTITION** – Requires that all input rows be inserted into the partitions identified by the specified list of comma\-separated partition names\. If an input row cannot be inserted into one of the specified partitions, then the statement fails and an error is returned\.
-
 + **CHARACTER SET** – Identifies the character set of the data in the input file\.
-
 + **ROWS IDENTIFIED BY** – Identifies the element name that identifies a row in the input file\. The default is `<row>`\.
-
-+ **IGNORE *number* LINES | ROWS** – Specifies to ignore a certain number of lines or rows at the start of the input file\. For example, you can use `IGNORE 1 LINES` to skip over the first line in the text file, or `IGNORE 2 ROWS` to skip over the first two rows of data in the input XML\.
-
++ **IGNORE *number* LINES \| ROWS** – Specifies to ignore a certain number of lines or rows at the start of the input file\. For example, you can use `IGNORE 1 LINES` to skip over the first line in the text file, or `IGNORE 2 ROWS` to skip over the first two rows of data in the input XML\.
 + **field\_name\_or\_user\_var, \.\.\.** – Specifies a comma\-separated list of one or more XML element names or user variables that identify which elements to load by name\. The name of a user variable used for this purpose must match the name of an element from the XML file, prefixed with @\. You can employ user variables to store the corresponding field values for subsequent reuse\. 
 
   For example, the following statement loads the first column from the input file into the first column of `table1`, and sets the value of the `table_column2` column in `table1` to the input value of the second column divided by 100\.
@@ -330,7 +301,6 @@ Following, you can find a list of the required and optional parameters used by t
      (column1, @var1)
      SET table_column2 = @var1/100;
   ```
-
 + **SET** – Specifies a comma\-separated list of assignment operations that set the values of columns in the table to values not included in the input file\.
 
   For example, the following statement sets the first two columns of `table1` to the values in the first two columns from the input file, and then sets the value of the `column3` in `table1` to the current time stamp\.
@@ -345,11 +315,7 @@ Following, you can find a list of the required and optional parameters used by t
   You can use subqueries in the right side of `SET` assignments\. For a subquery that returns a value to be assigned to a column, you can use only a scalar subquery\. Also, you cannot use a subquery to select from the table that is being loaded\. 
 
 ## Related Topics<a name="AuroraMySQL.Integrating.LoadFromS3.RelatedTopics"></a>
-
 + [Integrating Amazon Aurora MySQL with Other AWS Services](AuroraMySQL.Integrating.md)
-
 + [Saving Data from an Amazon Aurora MySQL DB Cluster into Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.SaveIntoS3.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

@@ -17,9 +17,7 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 ## Major Version Upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Major"></a>
 
 Amazon RDS supports the following in\-place upgrades for major versions of the MySQL database engine:
-
 + MySQL 5\.5 to MySQL 5\.6
-
 + MySQL 5\.6 to MySQL 5\.7
 
 **Note**  
@@ -71,9 +69,7 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 **To test a major version upgrade**
 
 1. Review the upgrade documentation for the new version of the database engine to see if there are compatibility issues that might affect your database or applications: 
-
    +  [MySQL 5\.5 Upgrade Documentation](http://dev.mysql.com/doc/refman/5.5/en/upgrading-from-previous-series.html) 
-
    +  [MySQL 5\.6 Upgrade Documentation](http://dev.mysql.com/doc/refman/5.6/en/upgrading-from-previous-series.html) 
 
 1. If your DB instance is a member of a custom DB parameter group, you need to create a new DB parameter group with your existing settings that is compatible with the new major version\. Specify the new DB parameter group when you upgrade your test instance, so that your upgrade testing ensures that it works correctly\. For more information about creating a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
@@ -160,13 +156,9 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
 ## CLI<a name="USER_UpgradeDBInstance.MySQL.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-
 + `--db-instance-identifier` – the name of the db instance\. 
-
 + `--engine-version` – the version number of the database engine to upgrade to\. 
-
 + `--allow-major-version-upgrade` – to to upgrade major version\. 
-
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
 **Example**  
@@ -192,13 +184,9 @@ For Windows:
 ## API<a name="USER_UpgradeDBInstance.MySQL.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-
 + `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
-
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
-
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
 
 **Example**  
@@ -220,7 +208,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.MySQL.Related"></a>
-
 + [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
 + [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)

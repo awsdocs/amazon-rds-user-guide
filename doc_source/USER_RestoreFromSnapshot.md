@@ -24,15 +24,10 @@ When you assign an option group to a DB instance, the option group is also linke
 ## Microsoft SQL Server Considerations<a name="USER_RestoreFromSnapshot.MSSQL"></a>
 
 When you restore a Microsoft SQL Server DB snapshot to a new instance, you can always restore to the same edition as your snapshot\. In some cases, you can also change the edition of the DB instance\. The following are the limitations when you change editions: 
-
 + The DB snapshot must have enough storage allocated for the new edition\. 
-
 + Only the following edition changes are supported: 
-
   + From Standard Edition to Enterprise Edition 
-
   + From Web Edition to Standard Edition or Enterprise Edition 
-
   + From Express Edition to Web Edition, Standard Edition or Enterprise Edition 
 
 If you want to change from one edition to a new edition that is not supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether or not your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\. 
@@ -99,9 +94,7 @@ After the DB instance has been restored, you must add the DB instance to the sec
 ## API<a name="USER_RestoreFromSnapshot.API"></a>
 
 To restore a DB instance from a DB snapshot, call the Amazon RDS API function [RestoreDBInstanceFromDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) with the following parameters: 
-
 + `DBSnapshotIdentifier` 
-
 + `DBInstanceIdentifier` 
 
 In this example, you restore from a previously created DB snapshot named *mydbsnapshot*\. You restore to a new DB instance named *mynewdbinstance*\. 
@@ -124,11 +117,7 @@ In this example, you restore from a previously created DB snapshot named *mydbsn
 ```
 
 ## Related Topics<a name="USER_RestoreFromSnapshot.related"></a>
-
 + [Tutorial: Restore a DB Instance from a DB Snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
-
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)
-
 + [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
-
 + [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)

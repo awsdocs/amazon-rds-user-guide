@@ -5,7 +5,7 @@ The easiest way to create a DB instance is to use the AWS Management Console\. O
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-
+**Topics**
 + [Creating a MySQL DB Instance](#CHAP_GettingStarted.Creating.MySQL)
 + [Connecting to a Database on a DB Instance Running the MySQL Database Engine](#CHAP_GettingStarted.Connecting.MySQL)
 + [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.MySQL)

@@ -5,25 +5,16 @@ Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
 Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult or tedious management tasks of a relational database: 
-
 + When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon RDS, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\. 
-
 + Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. 
-
 + To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
-
 + You can have automated backups performed when you need them, or manually create your own backup snapshot\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\. 
-
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MySQL, MariaDB, or PostgreSQL Read Replicas to increase read scaling\. 
-
 + You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server, and the new, MySQL\-compatible Amazon Aurora DB engine \(for information, see [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)\)\. 
-
 + In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\. 
 
 If you are new to AWS products and services, begin learning more with the following resources: 
-
 + For an overview of all AWS products, see [What is Cloud Computing?](http://aws.amazon.com/what-is-aws/)\. 
-
 + Amazon Web Services provides a number of database services\. For guidance on which service is best for your environment, see [Running Databases on AWS](http://aws.amazon.com/running_databases/)\. 
 
 ## DB Instances<a name="Welcome.Concepts.DBInstance"></a>
@@ -84,17 +75,11 @@ AWS also provides libraries, sample code, tutorials, and other resources to help
 ## How You Are Charged for Amazon RDS<a name="Welcome.Costs"></a>
 
  When you use Amazon RDS, you pay only for what you use, and there are no minimum or setup fees\. You are billed according to the following criteria\. 
-
 +  Instance class – Pricing is based on the class \(for example, micro, small, large, xlarge\) of the DB instance consumed\. 
-
 +  Running time – You are billed by the instance\-hour, which is equivalent to a single instance running for an hour\. For example, both a single instance running for two hours and two instances running for one hour consume two instance\-hours\. If a DB instance runs for only part of an hour, you are charged for a full instance\-hour\. 
-
 +  Storage – The storage capacity that you have provisioned to your DB instance is billed per GB per month\. If you scale your provisioned storage capacity within the month, your bill is pro\-rated\. 
-
 +  I/O requests per month – Total number of storage I/O requests that you have made in a billing cycle\. 
-
 +  Backup storage – Backup storage is the storage that is associated with automated database backups and any active database snapshots that you have taken\. Increasing your backup retention period or taking additional database snapshots increases the backup storage consumed by your database\. Amazon RDS provides backup storage up to 100% of your provisioned database storage at no additional charge\. For example, if you have 10 GB\-months of provisioned database storage, we provide up to 10 GB\-months of backup storage at no additional charge\. Most databases require less raw storage for a backup than for the primary dataset, so if you don’t keep multiple backups, you never pay for backup storage\. Backup storage is free only for active DB instances\. 
-
 +  Data transfer –Internet data transfer in and out of your DB instance\. 
 
 In addition to regular RDS pricing, you can purchase reserved DB instances\. Reserved DB instances let you make a one\-time up\-front payment for a DB instance and reserve the DB instance for a one\- or three\-year term at significantly lower rates\. For more information on reserved DB instances, see [Working with Reserved DB Instances](USER_WorkingWithReservedDBInstances.md) 
@@ -112,15 +97,9 @@ Create a DB instance using instructions in the [Getting Started with Amazon RDS]
 ### Database Engine–Specific Topics<a name="Welcome.WhatsNext.DBTopics"></a>
 
 You can review information specific to a particular DB engine in the following sections: 
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [MariaDB on Amazon RDS](CHAP_MariaDB.md)
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-
 + [MySQL on Amazon RDS](CHAP_MySQL.md)
-
 + [Oracle on Amazon RDS](CHAP_Oracle.md)
-
 + [PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md)

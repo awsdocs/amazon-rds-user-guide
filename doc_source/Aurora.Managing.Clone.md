@@ -3,37 +3,25 @@
 Using database cloning, you can quickly and cost\-effectively create clones of all your databases\. The clone databases require only minimal additional space when first created\. Database cloning uses a copy\-on\-write protocol, in which data is copied at the time that data changes, either on the source databases or the clone databases\. You can make multiple clones from the same DB cluster\. You can also create additional clones from other clones\. For more information on how the copy\-on\-write protocol works in the context of Aurora storage, see [Copy\-on\-Write Protocol for Database Cloning](#Aurora.Managing.Clone.Protocol)\. 
 
 You can use database cloning in a variety of use cases, especially where you don't want to have an impact on your production environment, such as the following:  
-
 + Experiment with and assess the impact of changes, such as schema changes or parameter group changes
-
 + Perform workload\-intensive operations, such as exporting data or running analytical queries
-
 + Create a copy of a production DB cluster in a non\-production environment for development or testing
 
 ## Limitations<a name="Aurora.Managing.Clone.Limitations"></a>
 
 There are some limitations involved with database cloning, described following:
-
 + Cloning is only supported for Aurora MySQL instances\. 
-
 + You cannot create clone databases across AWS regions\. The clone databases must be created in the same region as the source databases\.
-
 + Currently, you are limited to up to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
-
 + Cross\-account database cloning is not currently supported\.
-
 + You can provide a different virtual private cloud \(VPC\) for your clone\. However, the subnets in those VPCs must map to the same set of Availability Zones\.
 
 ## Copy\-on\-Write Protocol for Database Cloning<a name="Aurora.Managing.Clone.Protocol"></a>
 
 The following scenarios illustrate how the copy\-on\-write protocol works\.
-
 + [Before Database Cloning](#Aurora.Managing.Clone.Protocol.Before)
-
 + [After Database Cloning](#Aurora.Managing.Clone.After)
-
 + [When a Change Occurs on the Source Database](#Aurora.Managing.Clone.Protocol.SourceWrite)
-
 + [When a Change Occurs on the Clone Database](#Aurora.Managing.Clone.Protocol.CloneWrite)
 
 ### Before Database Cloning<a name="Aurora.Managing.Clone.Protocol.Before"></a>
@@ -89,15 +77,10 @@ The following procedure describes how to clone an Aurora DB cluster using the AW
 The following procedure describes how to clone an Aurora DB cluster using the AWS CLI\.
 
 **To create a clone of a DB cluster using the AWS CLI**
-
 + Call the [restore\-db\-cluster\-to\-point\-in\-time](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-to-point-in-time.html) AWS CLI command and supply the following values:
-
   + `--source-db-cluster-identifier` – the name of the source DB cluster to create a clone of\.
-
   + `--db-cluster-identifier` – the name of the clone DB cluster\.
-
   + `--restore-type copy-on-write` – values that indicate to create a clone DB cluster\.
-
   + `--use-latest-restorable-time` – specifies that the latest restorable backup time is used\.
 
   The following example creates a clone of the DB cluster named `sample-source-cluster`\. The name of the clone DB cluster is `sample-cluster-clone`\.

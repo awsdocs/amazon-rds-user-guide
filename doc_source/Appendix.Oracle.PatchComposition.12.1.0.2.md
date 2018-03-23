@@ -1,49 +1,29 @@
 # Database Engine: 12\.1\.0\.2<a name="Appendix.Oracle.PatchComposition.12.1.0.2"></a>
 
 The following versions are available for database engine 12\.1\.0\.2:
-
 + [Version 12\.1\.0\.2\.v11](#Appendix.Oracle.PatchComposition.12.1.0.2.v11)
-
 + [Version 12\.1\.0\.2\.v10](#Appendix.Oracle.PatchComposition.12.1.0.2.v10)
-
 + [Version 12\.1\.0\.2\.v9](#Appendix.Oracle.PatchComposition.12.1.0.2.v9)
-
 + [Version 12\.1\.0\.2\.v8](#Appendix.Oracle.PatchComposition.12.1.0.2.v8)
-
 + [Version 12\.1\.0\.2\.v7](#Appendix.Oracle.PatchComposition.12.1.0.2.v7)
-
 + [Version 12\.1\.0\.2\.v6](#Appendix.Oracle.PatchComposition.12.1.0.2.v6)
-
 + [Version 12\.1\.0\.2\.v5](#Appendix.Oracle.PatchComposition.12.1.0.2.v5)
-
 + [Version 12\.1\.0\.2\.v4](#Appendix.Oracle.PatchComposition.12.1.0.2.v4)
-
 + [Version 12\.1\.0\.2\.v3](#Appendix.Oracle.PatchComposition.12.1.0.2.v3)
-
 + [Version 12\.1\.0\.2\.v2](#Appendix.Oracle.PatchComposition.12.1.0.2.v2)
-
 + [Version 12\.1\.0\.2\.v1](#Appendix.Oracle.PatchComposition.12.1.0.2.v1)
 
 ## Version 12\.1\.0\.2\.v11<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v11"></a>
 
 Version 12\.1\.0\.2\.v11 adds support for the following: 
-
 + Patch 26925311: DATABASE PATCH SET UPDATE 12\.1\.0\.2\.180116
-
 + Patch 27001733: OJVM PATCH SET UPDATE 12\.1\.0\.2\.180116
-
 + Patch 27015449: RDBMS \- PROACTIVE DSTV31 UPDATE \- TZDATA2017C
-
 + Patch 27015468: PROACTIVE DSTV31 UPDATE \- TZDATA2017C \- NEED OJVM FIX
-
 + Patch 17969866: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
-
 + Patch 20394750: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
-
 + Patch 21171382: AUTO DOP COMPUTES A HIGH DOP UNNECESSARILY
-
 + Patch 27315904: JSON Database Patch
-
 + Patch 20033733: ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 
 ### Oracle patch 26925311, released January 2018<a name="w3ab1c34c87c13b6b7"></a>
@@ -53,17 +33,11 @@ Bugs fixed: 21099555, 22175564, 19141838, 22083366, 20842388, 19865345, 20117253
 ## Version 12\.1\.0\.2\.v10<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v10"></a>
 
 Version 12\.1\.0\.2\.v10 adds support for the following: 
-
 + Oracle October 2017 PSU, a combination of database PSU \(patch 26713565\) \+ OJVM component PSU \(patch 26635845\) 
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866\)
-
 + DBMS\_STATS AUTO DOP COMPUTES A HIGH DOP UNNECESSARILY \(patch 21171382\)
-
 + JSON bundle patch \(patch 26750145\)
-
 + KGL heap size patch \(patch 20033733\)
-
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
 
 ### Oracle patch 26713565, released October 2017<a name="w3ab1c34c87c13b8b7"></a>
@@ -73,21 +47,13 @@ Bugs fixed: 21099555, 22175564, 19141838, 22083366, 20842388, 19865345, 20117253
 ## Version 12\.1\.0\.2\.v9<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v9"></a>
 
 Version 12\.1\.0\.2\.v9 adds support for the following: 
-
 + Oracle July 2017 PSU, a combination of database PSU \(patch 26609783\) \+ OJVM component PSU \(patch 26027162\) 
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866\)
-
 + DBMS\_STATS AUTO DOP COMPUTES A HIGH DOP UNNECESSARILY \(patch 21171382\)
-
 + JSON bundle patch \(patch 26083365\)
-
 + KGL heap size patch \(patch 20033733 for 12\.1\.0\.2\)
-
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
-
 + Adds support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
-
 + Adds support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
 ### Oracle patch 26609783, released July 2017<a name="w3ab1c34c87c13c10b7"></a>
@@ -97,25 +63,15 @@ Bugs fixed: 21099555, 22175564, 19141838, 22083366, 20842388, 19865345, 20117253
 ## Version 12\.1\.0\.2\.v8<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v8"></a>
 
 Version 12\.1\.0\.2\.v8 adds support for the following: 
-
 + Oracle patch 25433980, a combination of database PSU \(patch 25171037\) \+ OJVM component PSU \(patch 25437695\) 
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866 for 12\.1\.0\.2\)
-
 + Oracle Forms patch 18307021 for 12\.1\.0\.2
-
 + DBMS\_STATS Patch \(patch 21171382 for 12\.1\.0\.2\)
-
 + JSON bundle patch \(patch 25531469 for 12\.1\.0\.2\)
-
 + KGL heap size patch \(patch 20033733 for 12\.1\.0\.2\)
-
 + Fixed a bug that affected PSU apply after upgrade to 12\.1\.0\.2\.v5, v6, and v7
-
 + Timezone file DSTv28 \(patch 24701840\)
-
 + Adds support for the `DBMS_CHANGE_NOTIFICATION` package
-
 + Adds support for `XSTREAM` packages and views \(may require additional licensing\)
 
 ### Oracle patch 25171037, released April 2017<a name="w3ab1c34c87c13c12b7"></a>
@@ -125,17 +81,11 @@ Bugs fixed: 21099555, 22175564, 19141838, 22083366, 20842388, 20117253, 19865345
 ## Version 12\.1\.0\.2\.v7<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v7"></a>
 
 Version 12\.1\.0\.2\.v7 adds support for the following: 
-
 + Oracle patch 24917069, a combination of database PSU \(patch 24732082\) \+ OJVM component PSU \(patch 24917972\) 
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866 for 12\.1\.0\.2\)
-
 + Oracle Forms patch 18307021 for 12\.1\.0\.2
-
 + DBMS\_STATS Patch \(patch 21171382 for 12\.1\.0\.2\)
-
 + JSON bundle patch \(patch 25089615 for 12\.1\.0\.2\)
-
 + KGL heap size patch \(patch 20033733 for 12\.1\.0\.2\)
 
 ### Oracle patch 24917069, released January 2017<a name="w3ab1c34c87c13c14b6"></a>
@@ -145,19 +95,12 @@ Bugs fixed: 24917972, 25067795, 24534298, 25076732, 25076756, 24315824, 21659726
 ## Version 12\.1\.0\.2\.v6<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v6"></a>
 
 Version 12\.1\.0\.2\.v6 adds support for the following: 
-
 + Oracle patch 24433133, a combination of database PSU \(patch 24006101\) \+ OJVM component PSU \(patch 24315824\) 
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866 for 12\.1\.0\.2\)
-
 + Oracle Forms patch 18307021 for 12\.1\.0\.2
-
 + DBMS\_STATS Patch \(patch 21171382 for 12\.1\.0\.2\)
-
 + JSON bundle patch \(patch 24568656 for 12\.1\.0\.2\)
-
 + Fixed a bug that caused 12c upgrade scripts to drop customer directories
-
 + Made DIAG log directory available to customers
 
 ### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.161018 \(patch 24006101, released October 2016\)<a name="w3ab1c34c87c13c16b6"></a>
@@ -167,17 +110,11 @@ Bugs fixed: 21099555, 22175564, 19141838, 22083366, 20842388, 20117253, 19865345
 ## Version 12\.1\.0\.2\.v5<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v5"></a>
 
 Version 12\.1\.0\.2\.v5 adds support for the following: 
-
 + Oracle patch 23615289, a combination of database PSU \(patch 23054246\) \+ OJVM component PSU \(patch 23177536\)
-
 + Timezone file DSTv26 \(patch 22873635 for 12\.1\.0\.2\)
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866 for 12\.1\.0\.2\)
-
 + Oracle Forms patch 18307021 for 12\.1\.0\.2
-
 + Added the ability to create custom password verify functions\. For more information, see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
-
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
 ### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160719 \(patch 23054246, released July 2016\)<a name="w3ab1c34c87c13c18b6"></a>
@@ -187,17 +124,11 @@ Bugs fixed: 19189525, 21847223, 21099555, 21649497, 19075256, 19141838, 22762046
 ## Version 12\.1\.0\.2\.v4<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v4"></a>
 
 Version 12\.1\.0\.2\.v4 adds support for the following: 
-
 + Oracle PSU 12\.1\.0\.2\.160419 \(22291127\)
-
 + Timezone file DSTv25 \(patch 22037014\)
-
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866\)
-
 + Adds the ability for the master user to grant the EM\_EXPRESS\_BASIC and EM\_EXPRESS\_ALL roles
-
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
-
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
 ### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160419 \(patch 22291127, released April 2016\)<a name="w3ab1c34c87c13c20b6"></a>
@@ -207,13 +138,9 @@ Bugs fixed: 21847223, 19189525, 19075256, 19141838, 22762046, 20117253, 19865345
 ## Version 12\.1\.0\.2\.v3<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v3"></a>
 
 Version 12\.1\.0\.2\.v3 adds support for the following: 
-
 + Oracle PSU 12\.1\.0\.2\.160119 \(21948354\)\.
-
 + Timezone file DSTv25 \(patch 22037014 for 12\.1\.0\.2\)\. 12\.1\.0\.1 includes DSTv24, patch 20875898 \(unchanged from 12\.1\.0\.1\.v3\), because a backport of DSTv25 was unavailable at build time\.
-
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database\.
-
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects\.
 
 ### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160119 \(patch 21948354, released January 2016\)<a name="w3ab1c34c87c13c22b6"></a>
@@ -223,9 +150,7 @@ Bugs fixed: 19189525, 19075256, 19141838, 19865345, 19791273, 19280225, 18845653
 ## Version 12\.1\.0\.2\.v2<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v2"></a>
 
 Version 12\.1\.0\.2\.v2 adds support for the following: 
-
 + Oracle PSU 12\.1\.0\.2\.5 \(21359755\)
-
 + Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
 ### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.5 \(patch 21359755, released October 2015\)<a name="w3ab1c34c87c13c24b6"></a>
@@ -235,15 +160,10 @@ Bugs fixed: 19189525, 19075256, 19865345, 19791273, 19280225, 18845653, 19248799
 ## Version 12\.1\.0\.2\.v1<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v1"></a>
 
 Version 12\.1\.0\.2\.v1 adds support for the following: 
-
 + Oracle PSU 12\.1\.0\.2\.3 \(20299023\)
-
 + The In\-Memory option allows storing a subset of data in an in\-memory column format optimized for performance\. 
-
 + Installs additional Oracle Text knowledge bases from Oracle Database\. Examples media \(English and French\) 
-
 +  Provides access to DBMS\_REPAIR through RDSADMIN\.RDSADMIN\_DBMS\_REPAIR 
-
 + Grants ALTER DATABASE LINK, ALTER PUBLIC DATABASE LINK, EXEMPT ACCESS POLICY, EXEMPT IDENTITY POLICY, and EXEMPT REDACTION POLICY to master user 
 
 **Note**  
@@ -254,7 +174,5 @@ Version 12\.1\.0\.2\.v1 supports Enterprise Edition only\.
 Bugs fixed: 19189525, 19065556, 19075256, 19723336, 19077215, 19865345, 18845653 19280225, 19524384, 19248799, 18988834, 19048007, 18288842, 19238590 18921743, 18952989, 16870214, 19928926, 19134173, 19180770, 19018206 19197175, 19149990, 18849537, 19730508, 19183343, 19012119, 19001390 18202441, 19067244, 19189317, 19644859, 19358317, 19390567, 20074391 19279273, 19706965, 19068970, 19841800, 19512341, 14643995, 19619732 20348653, 18607546, 18940497, 19670108, 19649152, 19065677, 19547370 18948177, 19315691, 19637186, 19676905, 18964978, 19035573, 19176326 18967382, 19174430, 19176223, 19532017, 18674047, 19074147, 19054077 19536415, 19708632, 19289642, 20425790, 19335438, 18856999, 19371175 19468347, 19195895, 19154375, 16359751, 18990693, 19439759, 19769480 19272708, 19978542, 19329654, 19873610, 19174521, 19520602, 19382851 19658708, 19304354, 19052488, 19291380, 18681056, 19896336, 17835294 19076343, 19791377, 19068610, 19561643, 18618122, 20440930, 18456643 18909599, 19487147, 19143550, 19185876, 19016730, 18250893, 20347562 19627012, 16619249, 18354830, 19577410, 19687159, 19001359, 19174942 19518079, 18610915, 18674024, 18306996, 19309466, 19081128, 19915271 19157754, 19058490, 20284155, 18791688, 18885870, 19303936, 19434529 19018447, 18417036, 19597439, 20235511, 19022470, 18964939, 19430401 19044962, 19385656, 19501299, 17274537, 19409212, 19440586, 19606174 18436647, 19023822, 19684504, 19178851, 19124589, 19805359, 19024808 19597583, 19155797, 19393542, 19050649, 19028800 
 
 ## Related Topics<a name="Appendix.Oracle.PatchComposition.12.1.0.2.Related"></a>
-
 + [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
-
 + [Oracle on Amazon RDS](CHAP_Oracle.md)

@@ -59,19 +59,15 @@ aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engin
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command with the following parameters\.
-
 + `--db-cluster-identifier`
 
   The name of your DB cluster\.
-
 + `--db-instance-class`
 
   The name of the DB instance class to use for your primary instance\.
-
 + `--db-instance-identifier`
 
   The name of your primary instance\.
-
 + `--engine aurora`
 
 In this example, you create a primary instance named *myreadreplicainstance* for the DB cluster named *myreadreplicacluster*, using the DB instance class specified in *myinstanceclass*\.
@@ -101,31 +97,23 @@ aws rds create-db-instance \
 To create an Aurora Read Replica from a source MySQL DB instance, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API commands to create a new Aurora DB cluster and primary instance\. Do not specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source MySQL DB instance\. 
 
 You can create a new Aurora DB cluster for an Aurora Read Replica from a source MySQL DB instance by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API command with the following parameters:
-
 + `DBClusterIdentifier`
 
   The name of the DB cluster to create\.
-
 + `DBSubnetGroupName`
 
   The name of the DB subnet group to associate with this DB cluster\.
-
 + `Engine=aurora`
-
 + `KmsKeyId`
 
   The AWS Key Management Service \(AWS KMS\) encryption key to optionally encrypt the DB cluster with, depending on whether your MySQL DB instance is encrypted\.
-
   + If your MySQL DB instance isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\. Otherwise, your DB cluster is encrypted at rest using the default encryption key for your account\.
-
   + If your MySQL DB instance is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. Otherwise, your DB cluster is encrypted at rest using the encryption key for the MySQL DB instance\.
 **Note**  
 You can't create an unencrypted DB cluster from an encrypted MySQL DB instance\.
-
 + `ReplicationSourceIdentifier`
 
   The Amazon Resource Name \(ARN\) for the source MySQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\. 
-
 + `VpcSecurityGroupIds`
 
   The list of EC2 VPC security groups to associate with this DB cluster\.
@@ -155,19 +143,15 @@ https://rds.us-east-1.amazonaws.com/
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API command with the following parameters:
-
 + `DBClusterIdentifier`
 
   The name of your DB cluster\.
-
 + `DBInstanceClass`
 
   The name of the DB instance class to use for your primary instance\.
-
 + `DBInstanceIdentifier`
 
   The name of your primary instance\.
-
 + `Engine=aurora`
 
 In this example, you create a primary instance named *myreadreplicainstance* for the DB cluster named *myreadreplicacluster*, using the DB instance class specified in *myinstanceclass*\.
@@ -279,9 +263,6 @@ aws rds promote-read-replica-db-cluster ^
 ```
 
 ## Related Topics<a name="AuroraMySQL.Migrating.RDSMySQL.Replica.RelatedTopics"></a>
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)
-
 + [Replication with Amazon Aurora](Aurora.Replication.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

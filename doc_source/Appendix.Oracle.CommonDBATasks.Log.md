@@ -349,9 +349,6 @@ The following code grants and revokes the `DROP ANY DIRECTORY` privilege:
 ```
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Log.Related"></a>
-
 + [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-
 + [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-
 + [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)

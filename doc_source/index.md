@@ -325,5 +325,4 @@ Amazon's trademarks and trade dress may not be used in
 + [Amazon RDS Application Programming Interface (API)](ProgrammingGuide.md)
    + [Using the Query API](Using_the_Query_API.md)
    + [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)
-   + [RDS REST API Reference](RESTReference.md)
 + [Document History](WhatsNew.md)

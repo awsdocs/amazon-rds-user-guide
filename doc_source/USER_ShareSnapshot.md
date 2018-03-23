@@ -1,11 +1,8 @@
 # Sharing a DB Snapshot or DB Cluster Snapshot<a name="USER_ShareSnapshot"></a>
 
 Using Amazon RDS, you can share a manual DB snapshot or DB cluster snapshot in the following ways:
-
 + Sharing a manual DB snapshot or DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to copy the snapshot\.
-
 + Sharing an unencrypted manual DB snapshot enables authorized AWS accounts to directly restore a DB instance from the snapshot instead of taking a copy of it and restoring from that\. This isn't supported for encrypted manual DB snapshots\.
-
 + Sharing a manual DB cluster snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to directly restore a DB cluster from the snapshot instead of taking a copy of it and restoring from that\.
 
 **Note**  
@@ -16,9 +13,7 @@ For more information on copying a snapshot, see [Copying a DB Snapshot or DB Clu
 You can share a manual snapshot with up to 20 other AWS accounts\. You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Take care when sharing a snapshot as public so that none of your private information is included in any of your public snapshots\. 
 
 The following limitations apply when sharing manual snapshots with other AWS accounts:
-
 + When you restore a DB instance or DB cluster from a shared snapshot using the AWS Command Line Interface \(AWS CLI\) or Amazon RDS API, you must specify the Amazon Resource Name \(ARN\) of the shared snapshot as the snapshot identifier\.
-
 + You cannot share a DB snapshot that uses an option group with permanent or persistent options\.
 
   A *permanent option* cannot be removed from an option group\. Option groups with persistent options cannot be removed from a DB instance once the option group has been assigned to the DB instance\.
@@ -37,11 +32,8 @@ You can share DB snapshots or DB cluster snapshots that have been encrypted "at 
 1. Use the AWS Management Console, AWS CLI, or Amazon RDS API to share the encrypted snapshot with the other accounts\.
 
 These restrictions apply to sharing encrypted snapshots:
-
 + You can't share encrypted snapshots as public\.
-
 + You can't share Oracle or Microsoft SQL Server snapshots that are encrypted using Transparent Data Encryption \(TDE\)\.
-
 + You can't share a snapshot that has been encrypted using the default AWS KMS encryption key of the AWS account that shared the snapshot\. 
 
 ### Allowing Access to an AWS KMS Encryption Key<a name="USER_ShareSnapshot.Encrypted.KeyPolicy"></a>
@@ -155,11 +147,9 @@ Using the Amazon RDS console, you can share a manual DB snapshot or DB cluster s
 1. Choose **Snapshot Actions**, and then choose **Share Snapshot**\.
 
 1. Choose one of the following options for **DB Snapshot Visibility**\.
-
    + If the source DB cluster is unencrypted, choose **Public** to permit all AWS accounts to restore a DB instance from your manual DB snapshot, or choose **Private** to permit only AWS accounts that you specify to restore a DB instance from your manual DB snapshot\.
 **Warning**  
 If you set **DB Snapshot Visibility** to **Public**, all AWS accounts can restore a DB instance from your manual DB snapshot and have access to your data\. Do not share any manual DB snapshots that contain private information as **Public**\.
-
    + If the source DB cluster is encrypted, **DB Snapshot Visibility** is set as **Private** because encrypted snapshots can't be shared as public\.
 
 1. For **AWS Account ID**, type the AWS account identifier for an account that you want to permit to restore a DB instance or DB cluster from your manual snapshot, and then choose **Add**\. Repeat to include additional AWS account identifiers, up to 20 AWS accounts\.
@@ -238,9 +228,6 @@ https://rds.us-west-2.amazonaws.com/
 To list all of the AWS accounts permitted to restore a snapshot, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshotAttributes.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshotAttributes.html) or [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusterSnapshotAttributes.html) API action\.
 
 ## Related Topics<a name="USER_ShareSnapshot.Related"></a>
-
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)
-
 + [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)

@@ -14,13 +14,11 @@ Use the procedures in this topic to immediately upgrade or schedule an upgrade f
 
 1. Select the check box for the DB instance or DB cluster that has a required operating system update\. 
 
-1. Choose **Instance Actions** for a DB instance, or **Cluster Actions** for a DB cluster, and then choose one of the following:
-
-   + **Upgrade Now**
-
-   + **Upgrade at Next Window**
+1. Choose **Instance actions** for a DB instance, or **Actions** for a DB cluster, and then choose one of the following:
+   + **Upgrade now**
+   + **Upgrade at next window**
 **Note**  
-If you choose **Upgrade at Next Window** and later want to delay the OS update, you can select **Defer Upgrade**\.
+If you choose **Upgrade at next window** and later want to delay the OS update, you can select **Defer upgrade**\.
 
 ## CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
@@ -63,9 +61,7 @@ For Windows:
 You can also return a list of resources for a DB instance or DB cluster by specifying the `--filters` parameter of the `describe-pending-maintenance-actions` AWS CLI command\. The format for the `--filters` command is `Name=filter-name,Value=resource-id,...`\.
 
 The following are the accepted values for the `Name` parameter of a filter:
-
 + `db-instance-id` – Accepts a list of DB instance identifiers or Amazon Resource Names \(ARNs\)\. The returned list only includes pending maintenance actions for the DB instances identified by these identifiers or ARNs\.
-
 + `db-cluster-id` – Accepts a list of DB cluster identifiers or ARNs\. The returned list only includes pending maintenance actions for the DB clusters identified by these identifiers or ARNs\.
 
 For example, the following example returns the pending maintenance actions for the `sample-cluster1` and `sample-cluster2` DB clusters\.
@@ -124,7 +120,5 @@ To return a list of resources that have at least one pending OS update, call the
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.OSUpgrades.Related"></a>
-
 + [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
 + [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)

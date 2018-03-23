@@ -19,17 +19,11 @@ If you are configuring replication to export data to an instance of MySQL extern
 You can also call `mysql.rds_start_replication` on the replica to restart any replication process that you previously stopped by calling [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
 The `mysql.rds_start_replication` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Related Topics<a name="mysql_rds_start_replication.related"></a>
-
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
-
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

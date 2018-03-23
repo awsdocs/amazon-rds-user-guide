@@ -40,17 +40,11 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 ## CLI<a name="USER_CreatePostgreSQLInstance.CLI"></a>
 
 To create a PostgreSQL DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the following parameters:
-
 + `--db-instance-identifier`
-
 + `--allocated-storage`
-
 + `--db-instance-class`
-
 + `--engine`
-
 + `--master-username`
-
 + `--master-user-password`
 
 **Example**  
@@ -87,19 +81,12 @@ This command should produce output similar to the following:
 ## API<a name="USER_CreatePostgreSQLInstance.API"></a>
 
 To create a PostgreSQL DB instance, use the Amazon RDS API[http://docs.aws.amazon.com/](http://docs.aws.amazon.com/) command with the following parameters:
-
 + `Engine = postgres`
-
 + `DBInstanceIdentifier = pgdbinstance`
-
 + `DBInstanceClass = db.t2.small`
-
 + `AllocatedStorage = 20`
-
 + `BackupRetentionPeriod = 3`
-
 + `MasterUsername = masterawsuser`
-
 + `MasterUserPassword = masteruserpassword`
 
 **Example**  
@@ -128,9 +115,6 @@ To create a PostgreSQL DB instance, use the Amazon RDS API[http://docs.aws.amazo
 ```
 
 ## Related Topics<a name="USER_CreatePostgreSQLInstance.related"></a>
-
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-
 +  [DB Instance Class](Concepts.DBInstanceClass.md) 
-
 +  [Deleting a DB Instance](USER_DeleteInstance.md) 

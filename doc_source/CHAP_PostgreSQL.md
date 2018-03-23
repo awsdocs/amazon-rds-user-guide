@@ -10,7 +10,7 @@ Amazon RDS for PostgreSQL is compliant with many industry standards\. For exampl
 
 To import PostgreSQL data into a DB instance, follow the information in the [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md) section\. 
 
-
+**Topics**
 + [Common Management Tasks for PostgreSQL on Amazon RDS](#CHAP_PostgreSQL.CommonTasks)
 + [Amazon RDS PostgreSQL Planning Information](#PostgreSQL.Concepts)
 + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
@@ -50,7 +50,7 @@ Amazon RDS supports DB instances running several editions of PostgreSQL\. This s
 
 For information about importing PostgreSQL data into a DB instance, see [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)\.
 
-
+**Topics**
 + [Using the rds\_superuser Role](#PostgreSQL.Concepts.rds_superuser)
 + [Supported PostgreSQL Database Versions](#PostgreSQL.Concepts.General.DBVersions)
 + [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)
@@ -60,20 +60,16 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is similar to the PostgreSQL superuser role \(customarily named postgres in local instances\) but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges on your DB instance and you should not assign this role to users unless they need the most access to the DB instance\.
 
 The `rds_superuser` role can do the following:
-
 + Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL Features](#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
-
 + Manage tablespaces, including creating and deleting them\. For more information, see this section in the [PostgreSQL documentation\.](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html)
-
 + View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and kill their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
-
 + Grant and revoke the rds\_replication role onto all roles that are not the `rds_superuser` role\. For more information, see this section in the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-grant.html)\.
 
 ### Supported PostgreSQL Database Versions<a name="PostgreSQL.Concepts.General.DBVersions"></a>
 
 Amazon RDS supports the following PostgreSQL versions\.
 
-
+**Topics**
 + [PostgreSQL Version 10\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version101)
 + [PostgreSQL Version 9\.6\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version966)
 + [PostgreSQL Version 9\.6\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version965)
@@ -106,19 +102,12 @@ PostgreSQL version 10\.1 contains several bug fixes for issues in release 10\. F
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 PostgreSQL version 10\.1 includes the following changes: 
-
 + **Declarative table partitioning** – PostgreSQL 10 adds table partitioning to SQL syntax and native tuple routing\. 
-
 + **Parallel queries** – When you create a new PostreSQL 10\.1 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter [max\_parallel\_workers\_per\_gather](https://www.postgresql.org/docs/10/static/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) is set to 2 by default, but you can modify it to support your specific workload requirements\.
-
 + **Support for the International Compontents for Unicode \(ICU\)** – You can use the ICU library to provide explicitly versioned collations\. Amazon RDS for PostgreSQL 10\.1 is compiled with ICU version 60\.2\. For more information about ICU implementation in PostgreSQL, see [Collation Support](https://www.postgresql.org/docs/10/static/collation.html)\.
-
 + **Huge pages** – Huge pages is a feature of the Linux kernel that uses multiple page size capabilities of modern hardware architectures\. Amazon RDS for PostgreSQL supports huge pages with a global configuration parameter\. When you create a new PostgreSQL 10\.1 instance with RDS, the `huge_pages` parameter is set to `"on"` for the` default.postgres10` parameter group\. You can modify this setting to support your specific workload requirements\. 
-
 + **PL/v8 update** – PL/v8 is a procedural language that allows you to write functions in JavaScript that you can then call from SQL\. This release of PostgreSQL supports version 2\.1\.0 of PL/v8\.
-
 + **Renaming of xlog and location** – In PostgreSQL version 10 the abbreviation "xlog" has changed to "wal", and the term "location" has changed to "lsn"\. For more information, see [ https://www\.postgresql\.org/docs/10/static/release\-10\.html\#id\-1\.11\.6\.8\.4](https://www.postgresql.org/docs/10/static/release-10.html#id-1.11.6.8.4)\. 
-
 + **tsearch2 module** – Amazon RDS will continue to provide the `tsearch2` module in PostgreSQL version 10, but will remove it in the next major version release\. If your application uses tsearch2 functions update it to use the equivalent functions the core engine provides\. For more information about using `tsearch2`, see [tsearch2 module](https://www.postgresql.org/docs/9.6/static/tsearch2.html)\.
 
 For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
@@ -128,11 +117,8 @@ For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Sup
 PostgreSQL version 9\.6\.6 contains several bug fixes for issues in release 9\.6\.5\. For more information on the fixes in 9\.6\.6, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-6.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 This version includes the following features: 
-
 + Supports the `orafce` extension, version 3\.6\.1\. This extension contains functions that are native to commercial databases, and can be helpful if you are porting a commercial database to PostgreSQL\.For more information about using `orafce` with Amazon RDS, see [Working with the orafce Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.orafce)\.
-
 + Supports the `prefix` extension, version 1\.2\.6\. This extension provides an operator for text prefix searches\. For more information about `prefix`, see the [prefix project on GitHub](https://github.com/dimitri/prefix)\.
-
 + Supports version 2\.3\.4 of PostGIS, version 2\.4\.2 of pgrouting, and an updated version of wal2json\.
 
 For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
@@ -148,13 +134,9 @@ For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Sup
 #### PostgreSQL Version 9\.6\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version963"></a>
 
 PostgreSQL version 9\.6\.3 contains several new features and bug fixes\. This version includes the following features: 
-
 + Supports the extension `pg_repack` version 1\.4\.0\. You can use this extension to remove bloat from tables and indexes\. For more information on using `pg_repack` with Amazon RDS, see [Working with the pg\_repack Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pg_repack)\.
-
 + Supports the extension `pgaudit` version 1\.1\.0\. This extension provides detailed session and object audit logging\. For more information on using pgaudit with Amazon RDS, see [Working with the pgaudit Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
-
 + Supports `wal2json`, an output plugin for logical decoding\.
-
 + Supports the `auto_explain` module\. You can use this module to log execution plans of slow statements automatically\. The following example shows how to use `auto_explain` from within an Amazon RDS PostgreSQL session:
 
   ```
@@ -166,15 +148,10 @@ PostgreSQL version 9\.6\.3 contains several new features and bug fixes\. This ve
 #### PostgreSQL Version 9\.6\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version962"></a>
 
 PostgreSQL version 9\.6\.2 contains several new features and bug fixes\. The new version also includes the following extension versions: 
-
 + PostGIS version 2\.3\.2
-
 + [ pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) version 1\.1–Provides a way to examine the free space map \(FSM\)\. This extension provides an overloaded function called pg\_freespace\. The functions show the value recorded in the free space map for a given page, or for all pages in the relation\.
-
 + [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) version 1\.1\.3– Provides control of execution plans by using hinting phrases at the beginning of SQL statements\.
-
 + log\_fdw version 1\.0–Using this extension from Amazon RDS, you can load and query your database engine log from within the database\. For more information, see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw)\.
-
 + With this version release, you can now edit the `max_worker_processes` parameter in a DB parameter group\. 
 
 PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. For more information, see [ALTER ENUM for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)\.
@@ -186,25 +163,15 @@ PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. Fo
 PostgreSQL version 9\.6\.1 contains several new features and improvements\. For more information about the fixes and improvements in PostgreSQL 9\.6\.1, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/release-9-6-1.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. For information about performing parallel queries and phrase searching using Amazon RDS for PostgreSQL 9\.6\.1, see the [AWS Database Blog](https://aws.amazon.com/blogs/database/performing-parallel-queries-and-phrase-searching-with-amazon-rds-for-postgresql-9-6-1/)\.
 
 PostgreSQL version 9\.6\.1 includes the following changes:
-
 + **Parallel query execution**: Supports parallel execution of large read\-only queries, allowing sequential scans, hash joins, nested loops, and aggregates to be run in parallel\. By default, parallel query execution is not enabled\. To enable parallel query execution, set the parameter `max_parallel_workers_per_gather` to a value larger than zero\.
-
 + **Updated postgres\_fdw extension**: Supports remote JOINs, SORTs, UPDATEs, and DELETE operations\.
-
 + **PL/v8 update**: Provides version 1\.5\.3 of the PL/v8 language\.
-
 + **PostGIS version update**: Supports POSTGIS="2\.3\.0 r15146" GEOS="3\.5\.0\-CAPI\-1\.9\.0 r4084" PROJ="Rel\. 4\.9\.2, 08 September 2015" GDAL="GDAL 2\.1\.1, released 2016/07/07" LIBXML="2\.9\.1" LIBJSON="0\.12" RASTER
-
 + **Vacuum improvement**: Avoids scanning pages unnecessarily during vacuum freeze operations\.
-
 + **Full\-text search support for phrases**: Supports the ability to specify a phrase\-search query in tsquery input using the new operators <\-> and <N>\.
-
 + **Two new extensions are supported**:
-
   + `bloom`, an index access method based on [Bloom filters](http://en.wikipedia.org/wiki/Bloom_filter)
-
   + `pg_visibility`, which provides a means for examining the visibility map and page\-level visibility information of a table\.
-
 + With the release of version 9\.6\.2, you can now edit the `max_worker_processes` parameter in a PostgreSQL version 9\.6\.1 DB parameter group\.
 
 You can create a new PostgreSQL 9\.6\.1 database instance using the AWS Management Console, AWS CLI, or RDS API\. You can also upgrade an existing PostgreSQL 9\.5 instance to version 9\.6\.1 using major version upgrade\. If you want to upgrade a DB instance from version 9\.3 or 9\.4 to 9\.6, you must perform a point\-and\-click upgrade to the next major version first\. Each upgrade operation involves a short period of unavailability for your DB instance\.
@@ -220,11 +187,8 @@ PostgreSQL version 9\.5\.9 contains several bug fixes for issues in version 9\.5
 #### PostgreSQL Version 9\.5\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version957"></a>
 
 PostgreSQL version 9\.5\.7 contains several new features and bug fixes\. This version includes the following features: 
-
 + Supports the extension `pgaudit` version 1\.0\.5\. This extension provides detailed session and object audit logging\. For more information on using `pgaudit` with Amazon RDS, see [Working with the pgaudit Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
-
 + Supports `wal2json`, an output plugin for logical decoding\.
-
 + Supports the `auto_explain` module\. You can use this module to log execution plans of slow statements automatically\. The following example shows how to use `auto_explain` from within an Amazon RDS PostgreSQL session\.
 
   ```
@@ -236,11 +200,8 @@ PostgreSQL version 9\.5\.7 contains several new features and bug fixes\. This ve
 #### PostgreSQL Version 9\.5\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version956"></a>
 
 PostgreSQL version 9\.5\.6 contains several new features and bug fixes\. The new version also includes the following extension versions: 
-
 + PostGIS version 2\.2\.5
-
 + [ pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) version 1\.1–Provides a way to examine the free space map \(FSM\)\. This extension provides an overloaded function called pg\_freespace\. This function shows the value recorded in the free space map for a given page, or for all pages in the relation\.
-
 + [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) version 1\.1\.3– Provides control of execution plans by using hinting phrases at the beginning of SQL statements\.
 
 PostgreSQL version 9\.5\.6 on Amazon RDS also supports altering enum values\. For more information, see [ALTER ENUM for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)\.
@@ -266,41 +227,26 @@ PostgreSQL version 9\.5\.2 doesn't support the previous generation db\.m1 or db\
 Native PostgreSQL version 9\.5\.2 introduced the command ALTER USER WITH BYPASSRLS\. 
 
 This release includes updates from previous versions, including the following:
-
 + **CVE\-2016\-2193:** Fixes an issue where a query plan might be reused for more than one ROLE in the same session\. Reusing a query plan can cause the query to use the wrong set of Row Level Security \(RLS\) policies\.
-
 + **CVE\-2016\-3065:** Fixes a server crash bug triggered by using `pageinspect` with BRIN index pages\. Because an attacker might be able to expose a few bytes of server memory, this crash is being treated as a security issue\.
 
 Major enhancements in RDS PostgreSQL 9\.5 include the following:
-
 + UPSERT: Allow INSERTs that would generate constraint conflicts to be turned into UPDATEs or ignored
-
 + Add the GROUP BY analysis features GROUPING SETS, CUBE, and ROLLUP
-
 + Add row\-level security control
-
 + Create mechanisms for tracking the progress of replication, including methods for identifying the origin of individual changes during logical replication
-
 + Add Block Range Indexes \(BRIN\)
-
 + Add substantial performance improvements for sorting
-
 + Add substantial performance improvements for multi\-CPU machines
-
 + PostGIS 2\.2\.2 \- To use this latest version of PostGIS, use the ALTER EXTENSION UPDATE statement to update after you upgrade to version 9\.5\.2\. Example: 
 
   ALTER EXTENSION POSTGIS UPDATE TO '2\.2\.2' 
-
 + Improved visibility of autovacuum sessions by allowing the rds\_superuser account to view autovacuum sessions in pg\_stat\_activity\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
 
 RDS PostgreSQL version 9\.5\.2 includes the following new extensions:
-
 + **address\_standardizer** – A single\-line address parser that takes an input address and normalizes it based on a set of rules stored in a table, helper lex, and gaz tables\.
-
 + [hstore\_plperl](http://www.postgresql.org/docs/current/static/hstore.html) – Provides transforms for the `hstore` type for PL/Perl\. 
-
 + [tsm\_system\_rows](http://www.postgresql.org/docs/current/static/tsm-system-rows.html) – Provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\.
-
 + [tsm\_system\_time](http://www.postgresql.org/docs/current/static/tsm-system-time.html) – Provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\. 
 
 #### PostgreSQL Version 9\.4\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9415"></a>
@@ -371,7 +317,7 @@ PostgreSQL version 9\.3\.12 includes improved visibility of autovacuum sessions 
 
 Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 
-
+**Topics**
 + [PostgreSQL Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
 + [Supported PostgreSQL Features](#PostgreSQL.Concepts.General.FeatureSupport)
 + [Limits for PostgreSQL DB Instances](#PostgreSQL.Concepts.General.Limits)
@@ -382,7 +328,7 @@ Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 
 PostgreSQL supports many PostgreSQL extensions and modules\. Extensions and modules expand on the functionality provided by the PostgreSQL engine\. The following sections show the extensions and modules supported by Amazon RDS for the major PostgreSQL versions\.
 
-
+**Topics**
 + [PostgreSQL Version 10\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)
 + [PostgreSQL Version 9\.6\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x)
 + [PostgreSQL Version 9\.5\.x Extensions Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x)
@@ -773,9 +719,7 @@ Before you can use the PostGIS extension, you must create it by running the foll
 The `log_fdw` extension is new for Amazon RDS for PostgreSQL version 9\.6\.2 and later\. Using this extension, you can access your database engine log using a SQL interface\. In addition to viewing the *stderr* log files that are generated by default on RDS, you can view CSV logs \(set the `log_destination` parameter to `csvlog`\) and build foreign tables with the data neatly split into several columns\.
 
 This extension introduces two new functions that make it easy to create foreign tables for database logs:
-
 + `list_postgres_log_files()` – Lists the files in the database log directory and the file size in bytes\.
-
 + `create_foreign_table_for_log_file(table_name text, server_name text, log_file_name text)` – Builds a foreign table for the specified file in the current database\.
 
 All functions created by `log_fdw` are owned by `rds_superuser`\. Members of the `rds_superuser` role can grant access to these functions to other database users\.
@@ -856,7 +800,7 @@ The following example shows how to use the `log_fdw` extension\.
 
 Amazon RDS supports many of the most common PostgreSQL features\. These include:
 
-
+**Topics**
 + [Logical Replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)
 + [Event Triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)
 + [Huge Pages for Amazon RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.HugePages)
@@ -876,11 +820,8 @@ The most common clients for PostgreSQL logical replication are AWS Database Migr
 For more information on using logical replication with PostgreSQL, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/logicaldecoding-example.html)\.
 
 To enable logical replication for an Amazon RDS for PostgreSQL DB instance, you must do the following:
-
 + The AWS user account initiating the logical replication for the PostgreSQL database on Amazon RDS must have the rds\_superuser role and the rds\_replication role\. The rds\_replication role grants permissions to manage logical slots and to stream data using logical slots\.
-
 + Set the `rds.logical_replication` parameter to 1\. It is a static parameter that requires a reboot to take effect\. As part of applying this parameter, we set the `wal_level`, `max_wal_senders`, `max_replication_slots`, and `max_connections` parameters\. These parameter changes can increase WAL generation, so you should only set the `rds.logical_replication` parameter when you are using logical slots\.
-
 + Create a logical replication slot as explained following\. This process requires a decoding plugin to be specified; currently we support the ‘test\_decoding’ output plugin that ships with PostgreSQL\.
 
 ##### Working with Logical Replication Slots<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplicationSlots"></a>
@@ -955,9 +896,7 @@ EXECUTE PROCEDURE raise_notice_func();
 For more information about PostgreSQL event triggers, see [Event Triggers](https://www.postgresql.org/docs/current/static/event-triggers.html) in the PostgreSQL documentation\.
 
 There are several limitations to using PostgreSQL event triggers on Amazon RDS\. These include:
-
 + You cannot create event triggers on read replicas\. You can, however, create event triggers on a read replica master\. The event triggers are then copied to the read replica\. The event triggers on the read replica don't fire on the read replica when changes are pushed from the master\. However, if the read replica is promoted, the existing event triggers fire when database operations occur\.
-
 + To perform a major version upgrade to a PostgreSQL DB instance that uses event triggers, you must delete the event triggers before you upgrade the instance\.
 
 ##### Huge Pages for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.HugePages"></a>
@@ -1044,33 +983,22 @@ orange
 #### Limits for PostgreSQL DB Instances<a name="PostgreSQL.Concepts.General.Limits"></a>
 
 You can have up to 40 PostgreSQL DB instances\. The following is a list of limitations for PostgreSQL on Amazon RDS:
-
 + The maximum storage size for PostgreSQL DB instances is the following: 
-
   + General Purpose \(SSD\) storage: 16 TB 
-
   + Provisioned IOPS storage: 16 TB 
-
   + Magnetic storage: 3 TB 
-
 + The minimum storage size for PostgreSQL DB instances is the following: 
-
   + General Purpose \(SSD\) storage: 5 GB 
-
   + Provisioned IOPS storage: 100 GB 
-
   + Magnetic storage: 5 GB 
-
 + Amazon RDS reserves up to 3 connections for system maintenance\. If you specify a value for the user connections parameter, you need to add 3 to the number of connections that you expect to use\. 
 
 #### Upgrading a PostgreSQL DB Instance<a name="PostgreSQL.Concepts.General.Patching"></a>
 
 There are two types of upgrades you can manage for your PostgreSQL DB instance:
-
 + OS Updates – Occasionally, Amazon RDS might need to update the underlying operating system of your DB instance to apply security fixes or OS changes\. You can decide when Amazon RDS applies OS updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\.
 
   For more information about OS updates, see [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)\.
-
 +  Database Engine Upgrades – When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. Amazon RDS supports both major and minor version upgrades for PostgreSQL DB instances\. 
 
   For more information about PostgreSQL DB engine upgrades, see [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1079,7 +1007,7 @@ There are two types of upgrades you can manage for your PostgreSQL DB instance:
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. 
 
-
+**Topics**
 + [Requiring an SSL Connection to a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL.Requiring)
 + [Determining the SSL Connection Status](#PostgreSQL.Concepts.General.SSL.Status)
 

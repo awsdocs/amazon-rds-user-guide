@@ -19,9 +19,7 @@ The Amazon RDS console shows logs for the past week through the current day\. Yo
 ## Using the rds\_read\_error\_log Procedure<a name="Appendix.SQLServer.CommonDBATasks.Logs.SP"></a>
 
 To view Microsoft SQL server error and agent logs, use the Amazon RDS stored procedure `rds_read_error_log` with the following parameters: 
-
 + **`@index`** – the version of the log to retrieve\. The default value is 0, which retrieves the current error log\. Specify 1 to retrieve the previous log, specify 2 to retrieve the one before that, and so on\. 
-
 + **`@type`** – the type of log to retrieve\. Specify 1 to retrieve an error log\. Specify 2 to retrieve an agent log\. 
 
 **Example**  
@@ -32,9 +30,6 @@ EXEC rdsadmin.dbo.rds_read_error_log @index = 0, @type = 1;
 ```
 
 ## Related Topics<a name="Appendix.SQLServer.CommonDBATasks.Logs.Related"></a>
-
 + [Amazon RDS Database Log Files](USER_LogAccess.md)
-
 + [Microsoft SQL Server Database Log Files](USER_LogAccess.Concepts.SQLServer.md)
-
 + [Working with Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md)

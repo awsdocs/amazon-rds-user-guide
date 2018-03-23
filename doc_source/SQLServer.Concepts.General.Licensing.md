@@ -5,13 +5,9 @@ When you set up an Amazon RDS DB instance for Microsoft SQL Server, the software
 This means that you don't need to purchase SQL Server licenses separately\. AWS holds the license for the SQL Server database software\. Amazon RDS pricing includes the software license, underlying hardware resources, and Amazon RDS management capabilities\. 
 
 Amazon RDS supports the following Microsoft SQL Server editions: 
-
 + Enterprise
-
 + Standard
-
 + Web
-
 + Express
 
 **Note**  
@@ -30,7 +26,5 @@ For more information, see [Restoring License\-Terminated DB Instances](Appendix.
 Because of licensing requirements, we can't offer SQL Server Developer edition on Amazon RDS\. You can use Express edition for many development, testing, and other nonproduction needs\. However, if you need the full feature capabilities of an enterprise\-level installation of SQL Server, you must use a dedicated host environment\. You can download and install SQL Server Developer edition \(and other MSDN products\) on Amazon EC2\. Dedicated infrastructure is not required for Developer edition\. By using your own host, you also gain access to other programmability features that are not accessible on Amazon RDS\. For more information on the difference between SQL Server editions, see [Editions and supported features of SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2017) in the Microsoft documentation\.
 
 ## Related Topics<a name="SQLServer.Concepts.General.Licensing.Related"></a>
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-
 + [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)

@@ -29,41 +29,28 @@ You can also choose for your new Amazon Aurora PostgreSQL DB cluster to be encry
 1. Choose **Migrate Database**\.
 
 1. Set the following values on the **Migrate Database** page:
-
    + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 terabytes \(TB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)\.
-
    + **DB Instance Identifier**: Type a name for the DB cluster that is unique for your account in the region you selected\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the region and DB engine you selected, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:
-
      + It must contain from 1 to 63 alphanumeric characters or hyphens\.
-
      + Its first character must be a letter\.
-
      + It cannot end with a hyphen or contain two consecutive hyphens\.
-
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-
    + **VPC**: If you have an existing VPC, then you can use that VPC with your Amazon Aurora PostgreSQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by selecting **Create a new VPC**\. 
-
    + **Subnet Group**: If you have an existing subnet group, then you can use that subnet group with your Amazon Aurora PostgreSQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.
 
      Otherwise, you can choose to have Amazon RDS create a subnet group for you by selecting **Create a new subnet group**\. 
-
    + **Publicly Accessible**: Select **No** to specify that instances in your DB cluster can only be accessed by resources inside of your VPC\. Select **Yes** to specify that instances in your DB cluster can be accessed by resources on the public network\. The default is **Yes**\.
 **Note**  
 Your production DB cluster might not need to be in a public subnet, because only your application servers will require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Publicly Accessible** to **No**\.
-
    + **Availability Zone**: Select the Availability Zone to host the primary instance for your Amazon Aurora PostgreSQL DB cluster\. To have Amazon RDS select an Availability Zone for you, select **No Preference**\.
-
    + **Database Port**: Type the default port to be used when connecting to instances in the Amazon Aurora PostgreSQL DB cluster\. The default is `5432`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the PostgreSQL default port, 5432\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Amazon Aurora PostgreSQL DB cluster\.
-
    + **Enable Encryption**: Choose **Yes** for your new Amazon Aurora PostgreSQL DB cluster to be encrypted at rest\. If you choose **Yes**, you will be required to choose an AWS KMS encryption key as the **Master Key** value\.
-
    + **Auto Minor Version Upgrade**: Select **Yes** if you want to enable your Amazon Aurora PostgreSQL DB cluster to receive minor PostgreSQL DB engine version upgrades automatically when they become available\.
 
      The **Auto Minor Version Upgrade** option only applies to upgrades to PostgreSQL minor engine versions for your Amazon Aurora PostgreSQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.

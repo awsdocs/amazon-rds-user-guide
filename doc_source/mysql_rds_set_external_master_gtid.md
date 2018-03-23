@@ -64,9 +64,6 @@ call mysql.rds_set_external_master_gtid ('Sourcedb.some.com',3306,'ReplicationUs
 ```
 
 ## Related Topics<a name="mysql_rds_set_external_master_gtid.related"></a>
-
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
-
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

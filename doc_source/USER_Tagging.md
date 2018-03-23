@@ -3,29 +3,17 @@
 You can use Amazon RDS tags to add metadata to your Amazon RDS resources\. In addition, these tags can be used with IAM policies to manage access to Amazon RDS resources and to control what actions can be applied to the Amazon RDS resources\. Finally, these tags can be used to track costs by grouping expenses for similarly tagged resources\. 
 
 All Amazon RDS resources can be tagged
-
 + DB instances
-
 + DB clusters
-
 + Read Replicas
-
 + DB snapshots
-
 + DB cluster snapshots
-
 + Reserved DB instances
-
 + Event subscriptions
-
 + DB option groups
-
 + DB parameter groups
-
 + DB cluster parameter groups
-
 + DB security groups
-
 + DB subnet groups
 
 For information on managing access to tagged resources with IAM policies, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\. 
@@ -39,9 +27,7 @@ Use tags to organize your AWS bill to reflect your own cost structure\. To do th
 Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 10 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
 
 AWS does not apply any semantic meaning to your tags; tags are interpreted strictly as character strings\. Amazon RDS can set tags on a DB instance or other Amazon RDS resources, depending on the settings that you use when you create the resource\. For example, Amazon RDS might add a tag indicating that a DB instance is for production or for testing\.
-
 + The tag key is the required name of the tag\. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:" or "rds:"\. The string can contain only the set of Unicode letters, digits, white\-space, '\_', '\.', '/', '=', '\+', '\-' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-\]\*\)$"\)\.
-
 + The tag value is an optional string value of the tag\. The string value can be from 1 to 256 Unicode characters in length and cannot be prefixed with "aws:"\. The string can contain only the set of Unicode letters, digits, white\-space, '\_', '\.', '/', '=', '\+', '\-' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-\]\*\)$"\)\.
 
   Values do not have to be unique in a tag set and can be null\. For example, you can have a key\-value pair in a tag set of project/Trinity and cost\-center/Trinity\. 
@@ -55,13 +41,9 @@ Tags are cached for authorization purposes\. Because of this, additions and upda
 When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance and any access policies for the DB snapshot also match those of the source DB instance\. Tags are not copied by default\. 
 
 You can specify that tags are copied to DB snapshots for the following actions: 
-
 + Creating a DB instance\.
-
 + Restoring a DB instance\.
-
 + Creating a Read Replica\.
-
 + Copying a DB snapshot\.
 
 **Note**  
@@ -77,50 +59,49 @@ The process to tag an Amazon RDS resource is similar for all resources\. The fol
 
 1. In the navigation pane, choose **Instances**\.
 **Note**  
-To filter the list of DB instances in the **DB Instances** pane, in the box beside the **Viewing** box, type a text string\. Only DB instances that contain the string appear\.
+To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
 
-1. Select the DB instance that you want to tag\. The inline summary appears\. 
+1. Select the DB instance that you want to tag\. 
 
-1. In the inline summary, choose the details icon to open the details section\.   
-![\[Console details icon\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsole-DetailsIcon.png)
+1. Choose **Instance actions**, then choose **See details**\. 
 
-1. In the details section, scroll down and choose **Tags** to open the tags section\. 
+1. In the details section, scroll down to the **Tags** section\. 
 
-1. Choose **Add/Edit Tags**\. The Tag DB Instance pane appears\.   
-![\[Console Tag DB Instance pane\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging5.png)
+1. Choose **Add**\. The **Add tags** window appears\.   
+![\[Add tags window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging5.png)
 
-1. Choose **Add another Tag**\. 
+1. Type a value for **Tag key** and **Value**\.
 
-1. Type a key and value for the tag, and then choose **Save Tags**\. 
+1. To add another tag, you can choose **Add another Tag** and type a value for its **Tag key** and **Value**\. 
+
+   Repeat this step as many times as necessary\.
+
+1. Choose **Add**\. 
 
 **To delete a tag from a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, click **Instances**\.
+1. In the navigation pane, choose **Instances**\.
 **Note**  
-To filter the list of DB instances in the **DB Instances** pane, in the box beside the **Viewing** box, type a text string\. Only DB instances that contain the string appear\.
+To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
 
-1. Select the DB instance from which you want to remove a tag\. The inline summary appears\. 
+1. Select the DB instance that you want to tag\. 
 
-1. In the inline summary, choose the details icon to open the details section\.   
-![\[Console details icon\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsole-DetailsIcon.png)
+1. Choose **Instance actions**, then choose **See details**\. 
 
-1. In the details section, scroll down and choose **Tags** to open the tags section\. 
+1. In the details section, scroll down to the **Tags** section\. 
 
-1. Choose **Add/Edit Tags**\. The Tag DB Instance pane appears\.   
-![\[Console Tag DB Instance pane\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging5.png)
+1. Choose the tag you want to delete\.  
+![\[Tags section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging6.png)
 
-1. Choose the red "X" in the **Remove** column next to the tag you want to delete, and then choose **Save Tags**\. 
+1. Choose **Remove**, and then choose **Remove** in the **Remove tags** window\. 
 
 ## CLI<a name="USER_Tagging.CLI"></a>
 
 You can add, list, or remove tags for a DB instance using the AWS CLI\.
-
 + To add one or more tags to an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html)\.
-
 + To list the tags on an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/list-tags-for-resource.html)\.
-
 + To remove one or more tags from an Amazon RDS resource, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html](http://docs.aws.amazon.com/cli/latest/reference/rds/remove-tags-from-resource.html)\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
@@ -128,11 +109,8 @@ To learn more about how to construct the required ARN, see [Constructing an ARN 
 ## API<a name="USER_Tagging.API"></a>
 
 You can add, list, or remove tags for a DB instance using the Amazon RDS API\.
-
 + To add a tag to an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html) operation\.
-
 + To list tags that are assigned to an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html)\.
-
 + To remove tags from an Amazon RDS resource, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html) operation\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
@@ -161,5 +139,4 @@ The following table provides a list of the allowed XML tags and their characteri
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 
 ## Related Topics<a name="USER_Tagging.related"></a>
-
 + [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)

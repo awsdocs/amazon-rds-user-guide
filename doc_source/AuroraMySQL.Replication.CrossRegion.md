@@ -5,13 +5,9 @@ You can create an Amazon Aurora MySQL DB cluster as a Read Replica in a differen
 You can create Read Replicas of both encrypted and unencrypted DB clusters\. The Read Replica must be encrypted if the source DB cluster is encrypted\.
 
 When you create an Aurora MySQL DB cluster Read Replica in another region, you should be aware of the following:
-
 + In a cross\-region scenario, there is more lag time between the source DB cluster and the Read Replica due to the longer network channels between regions\.
-
 + Data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. The following cross\-region replication actions generate charges for the data transferred out of the source region:
-
   + When you create the Read Replica, Amazon RDS takes a snapshot of the source cluster and transfers the snapshot to the Read Replica region\.
-
   + For each data modification made in the source databases, Amazon RDS transfers data from the source region to the Read Replica region\.
 
   For more information about Amazon RDS data transfer pricing, see [Amazon Aurora Pricing](http://aws.amazon.com/rds/aurora/pricing/)\.

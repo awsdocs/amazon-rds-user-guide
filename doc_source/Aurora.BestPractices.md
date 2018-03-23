@@ -11,5 +11,4 @@ Some of the best practices for Amazon Aurora are specific to a particular databa
 |  Amazon Aurora PostgreSQL  |  See [Best Practices with Amazon Aurora PostgreSQL](AuroraPostgreSQL.BestPractices.md)  | 
 
 ## Related Topics<a name="Aurora.BestPractices.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

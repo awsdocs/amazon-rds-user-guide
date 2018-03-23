@@ -18,12 +18,10 @@ This approach can be helpful if you want to add logic to your application code t
 
 Amazon Aurora MySQL instances that use the `db.t2.small` or `db.t2.medium` DB instance classes are best suited for applications that do not support a high workload for an extended amount of time\. T2 instances are designed to provide moderate baseline performance and the capability to burst to significantly higher performance as required by your workload\. They are intended for workloads that don't use the full CPU often or consistently, but occasionally need to burst\. The `db.t2.small` and `db.t2.medium` DB instance classes are best used for development and test servers, or other non\-production servers\. For more details on T2 instances, see [T2 Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html)\.
 
-The Performance Schema should not be enabled on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
+The MySQL Performance Schema should not be enabled on Amazon Aurora MySQL T2 instances\. If the Performance Schema is enabled, the T2 instance might run out of memory\.
 
 When you use a T2 instance for the primary instance or Aurora Replicas in an Aurora MySQL DB cluster, we recommend the following:
-
 + If you use a T2 instance as a DB instance class in your DB cluster, then we recommend that all instances in your DB cluster use the same DB instance class\. For example, if you use `db.t2.medium` for your primary instance, then we recommend that you use `db.t2.medium` for your Aurora Replicas as well\.
-
 + Monitor your CPU Credit Balance \(`CPUCreditBalance`\) to ensure that it is at a sustainable level\. That is, CPU credits are being accumulated at the same rate as they are being used\.
 
   When you have exhausted the CPU credits for an instance, you see an immediate drop in the available CPU and an increase in the read and write latency for the instance\. This situation results in a severe decrease in the overall performance of the instance\.
@@ -31,7 +29,6 @@ When you use a T2 instance for the primary instance or Aurora Replicas in an Aur
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use a one of the supported R3 DB instance classes \(scale compute\)\.
 
   For more information on monitoring metrics, see [Monitoring an Amazon Aurora DB Cluster](Aurora.Monitoring.md)\.
-
 + Monitor the replica lag \(`AuroraReplicaLag`\) between the primary instance and the Aurora Replicas in your Aurora MySQL DB cluster\. 
 
   If an Aurora Replica runs out of CPU credits before the primary instance, the lag behind the primary instance results in the Aurora Replica frequently restarting\. This result is common when an application has a heavy load of read operations distributed among Aurora Replicas in an Aurora MySQL DB cluster, at the same time that the primary instance has a minimal load of write operations\.
@@ -39,7 +36,6 @@ When you use a T2 instance for the primary instance or Aurora Replicas in an Aur
   If you see a sustained increase in replica lag, make sure that your CPU credit balance for the Aurora Replicas in your DB cluster is not being exhausted\.
 
   If your CPU credit balance is not at a sustainable level, then we recommend that you modify your DB instance to use one of the supported R3 DB instance classes \(scale compute\)\.
-
 + Keep the number of inserts per transaction below 1 million for DB clusters that have binary logging enabled\.
 
   If the DB cluster parameter group for your DB cluster has the `binlog_format` parameter set to a value other than `OFF`, then your DB cluster might experience out\-of\-memory conditions if the DB cluster receives transactions that contain over 1 million rows to insert\. You can monitor the freeable memory \(`FreeableMemory`\) metric to determine if your DB cluster is running out of available memory\. You then check the write operations \(`VolumeWriteIOPS`\) metric to see if your primary instance is receiving a heavy load of writer operations\. If this is the case, then we recommend that you update your application to limit the number of inserts in a transaction to less than 1 million\. Alternatively, you can modify your instance to use one of the supported R3 DB instance classes \(scale compute\)\.
@@ -64,9 +60,7 @@ To take advantage of the AKP feature, a query must use both BKA and MRR\. Typica
 ### Enabling Asynchronous Key Prefetch<a name="Aurora.BestPractices.AKP.Enabling"></a>
 
 You can enable the AKP feature by setting `aurora_use_key_prefetch`, a MySQL server variable, to `on`\. By default, this value is set to `on`\. However, AKP cannot be enabled until you also enable the BKA Join algorithm and disable cost\-based MRR functionality\. To do so, you must set the following values for `optimizer_switch`, a MySQL server variable:
-
 + Set `batched_key_access` to `on`\. This value controls the use of the BKA Join algorithm\. By default, this value is set to `off`\. 
-
 + Set `mrr_cost_based` to `off`\. This value controls the use of cost\-based MRR functionality\. By default, this value is set to `on`\. 
 
 Currently, you can set these values only at the session level\. The following example illustrates how to set these values to enable AKP for the current session by executing SET statements\.
@@ -90,9 +84,7 @@ For more information about the **batched\_key\_access** and **mrr\_cost\_based**
 You can confirm whether a query can take advantage of the AKP feature\. To do so, use the EXPLAIN statement with the EXTENDED keyword to profile the query before running it\. The *EXPLAIN statement* provides information about the execution plan to use for a specified query\.
 
 In the output for the EXPLAIN statement, the `Extra` column describes additional information included with the execution plan\. If the AKP feature applies to a table used in the query, this column includes one of the following values:
-
 + `Using Key Prefetching`
-
 + `Using join buffer (Batched Key Access with Key Prefetching)`
 
 The following example shows use of EXPLAIN with EXTENDED to view the execution plan for a query that can take advantage of AKP\.
@@ -153,9 +145,7 @@ You can use Amazon Aurora with your MySQL DB instance to take advantage of the r
 For information on creating an Amazon Aurora DB cluster, see [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)\.
 
 When you set up replication between your MySQL DB instance and your Amazon Aurora DB cluster, be sure to follow these guidelines:
-
 + Use the Amazon Aurora DB cluster endpoint address when you reference your Amazon Aurora MySQL DB cluster\. If a failover occurs, then the Aurora Replica that is promoted to the primary instance for the Aurora MySQL DB cluster continues to use the DB cluster endpoint address\.
-
 + Maintain the binlogs on your master instance until you have verified that they have been applied to the Aurora Replica\. This maintenance ensures that you can restore your master instance in the event of a failure\.
 
 **Important**  
@@ -287,9 +277,7 @@ The procedure lists steps to transfer a copy of your database data to an Amazon 
 ## Using XA Transactions with Amazon Aurora MySQL<a name="AuroraMySQL.BestPractices.XA"></a>
 
 We recommend that you don't use eXtended Architecture \(XA\) transactions with Aurora MySQL, because they can cause long recovery times if the XA was in the `PREPARED` state\. If you must use XA transactions with Aurora MySQL, follow these best practices:
-
 + Don't leave an XA transaction open in the `PREPARED` state\.
-
 + Keep XA transactions as small as possible\.
 
 For more information about using XA transactions with MySQL, see [XA Transactions](https://dev.mysql.com/doc/refman/5.6/en/xa.html) in the MySQL documentation\.
@@ -299,28 +287,20 @@ For more information about using XA transactions with MySQL, see [XA Transaction
 When you need to join a large amount of data by using an equijoin, a hash join can improve query performance\. You can enable hash joins for Aurora MySQL\. 
 
 A hash join column can be any complex expression\. In a hash join column, you can compare across data types in the following ways:
-
 + You can compare anything across the category of precise numeric data types, such as `int`, `bigint`, `numeric`, and `bit`\.
-
 + You can compare anything across the category of approximate numeric data types, such as `float` and `double`\.
-
 + You can compare items across string types if the string types have the same character set and collation\.
-
 + You can compare items with date and timestamp data types if the types are the same\.
 
 **Note**  
 Data types in different categories cannot compare\.
 
 The following restrictions apply to hash joins for Aurora MySQL:
-
 + Left\-right outer joins are not supported\.
-
 + Semijoins such as subqueries are not supported, unless the subqueries are materialized first\.
-
 + Multiple\-table updates or deletes are not supported\.
 **Note**  
 Single\-table updates or deletes are supported\.
-
 + BLOB and spatial data type columns cannot be join columns in a hash join\.
 
 ### Enabling Hash Joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
@@ -342,9 +322,7 @@ mysql> SET optimizer_switch='hash_join_cost_based=off';
 To find out whether a query can take advantage of a hash join, use the EXPLAIN statement to profile the query first\. The *EXPLAIN statement* provides information about the execution plan to use for a specified query\.
 
 In the output for the EXPLAIN statement, the `Extra` column describes additional information included with the execution plan\. If a hash join applies to the tables used in the query, this column includes values similar to the following:
-
 + `Using where; Using join buffer (Hash Join Outer table table1_name)`
-
 + `Using where; Using join buffer (Hash Join Inner table table2_name)`
 
 The following example shows the use of EXPLAIN to view the execution plan for a hash join query\.
@@ -381,11 +359,8 @@ If you need to insert or update rows that require a transient violation of forei
 1. Set `foreign_key_checks` to `1` \(on\)\.
 
 In addition, follow these other best practices for foreign key constraints:
-
 + Make sure that your client applications don't set the `foreign_key_checks` variable to `0` as a part of the `init_connect` variable\.
-
 + If a restore from a logical backup such as `mysqldump` fails or is incomplete, make sure that `foreign_key_checks` is set to `1` before starting any other operations in the same session\. A logical backup sets `foreign_key_checks` to `0` when it starts\.
 
 ## Related Topics<a name="AuroraMySQL.BestPractices.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

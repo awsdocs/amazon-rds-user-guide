@@ -12,18 +12,14 @@ Each DB instance has a DB instance identifier\. This customer\-supplied name uni
 Each DB instance supports a database engine\. Amazon RDS currently supports MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server, and Amazon Aurora database engines\. 
 
 When creating a DB instance, some database engines require that a database name be specified\. A DB instance can host multiple databases, or a single Oracle database with multiple schemas\. The database name value depends on the database engine: 
-
 + For the MySQL and MariaDB database engines, the database name is the name of a database hosted in your DB instance\. Databases hosted by the same DB instance must have a unique name within that instance\. 
-
 + For the Oracle database engine, database name is used to set the value of ORACLE\_SID, which must be supplied when connecting to the Oracle RDS instance\. 
-
 + For the Microsoft SQL Server database engine, database name is not a supported parameter\.
-
 + For the PostgreSQL database engine, the database name is the name of a database hosted in your DB instance\. A database name is not required when creating a DB instance\. Databases hosted by the same DB instance must have a unique name within that instance\.
 
 Amazon RDS creates a master user account for your DB instance as part of the creation process\. This master user has permissions to create databases and to perform create, delete, select, update, and insert operations on tables the master user creates\. You must set the master user password when you create a DB instance, but you can change it at any time using the Amazon AWS command line tools, Amazon RDS API actions, or the AWS Management Console\. You can also change the master user password and manage users using standard SQL commands\. 
 
-
+**Topics**
 + [DB Instance Class](Concepts.DBInstanceClass.md)
 + [DB Instance Status](Overview.DBInstance.Status.md)
 + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)

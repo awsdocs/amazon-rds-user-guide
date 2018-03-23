@@ -69,9 +69,7 @@ Find instructions on how to create a snapshot of your replication master for you
 ### 4\. Load the Snapshot into Your Replica<a name="AuroraMySQL.Replication.MySQL.LoadSnapshot"></a>
 
 Before loading the snapshot of your replication master into your replica, make sure that you consider the following:
-
 + If you will be replicating across AWS regions, you cannot use an Aurora MySQL DB cluster snapshot to load your replica\. DB cluster snapshots cannot be copied across regions\. To work across regions, you can create an Aurora MySQL DB instance in another region from a DB snapshot of an RDS MySQL DB instance\. Copy the DB snapshot to the region where your replication slave will be hosted and then create an Aurora MySQL DB cluster or MySQL DB instance from that snapshot\. For information on copying snapshots to other regions, see [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)\.
-
 + If you will be loading data from a dump of a MySQL database that is external to Amazon RDS, then you might want to create an EC2 instance to copy the dump files to, and then load the data into your DB cluster or DB instance from that EC2 instance\. Using this approach, you can compress the dump file\(s\) before copying them to the EC2 instance in order to reduce the network costs associated with copying data to Amazon RDS\. You can also encrypt the dump file or files to secure the data as it is being transferred across the network\.
 
 Find instructions on how to load the snapshot of your replication master into your replica for your database engine following\.
@@ -142,7 +140,5 @@ Find instructions on how to disable binary logging on the replication master for
 |  MySQL \(external\)  |  **To disable binary logging on an external MySQL database** Connect to the MySQL database and call the `STOP REPLICATION` command\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Replication.MySQL.html)  | 
 
 ## Related Topics<a name="AuroraMySQL.Replication.MySQL.RelatedTopics"></a>
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

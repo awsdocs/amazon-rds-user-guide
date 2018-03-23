@@ -3,11 +3,8 @@
  If you have an existing PostgreSQL deployment that you want to move to Amazon RDS, the complexity of your task depends on the size of your database and the types of database objects that you are transferring\. For example, consider a database that contains datasets on the order of gigabytes, along with stored procedures and triggers\. Such a database is going to be more complicated than a simple database with only a few megabytes of test data and no triggers or stored procedures\. 
 
 We recommend that you use native PostgreSQL database migration tools under the following conditions:
-
 + You have a homogeneous migration, where you are migrating from a database with the same database engine as the target database\.
-
 + You are migrating an entire database\.
-
 + The native tools allow you to migrate your system with minimal downtime\.
 
 In most other cases, performing a database migration using AWS Database Migration Service \(AWS DMS\) is the best approach\. AWS DMS can migrate databases without downtime and, for many database engines, continue ongoing replication until you are ready to switch over to the target database\. You can migrate to either the same database engine or a different database engine using AWS DMS\. If you are migrating to a different database engine than your source database, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [ What is AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\.
@@ -15,9 +12,7 @@ In most other cases, performing a database migration using AWS Database Migratio
 Modify your DB parameter group to include the following settings *for your import only*\. You should test the parameter settings to find the most efficient settings for your DB instance size\. You also need to revert back to production values for these parameters after your import completes\.
 
 Modify your DB instance settings to the following:
-
 + Disable DB instance backups \(set backup\_retention to 0\)\.
-
 + Disable Multi\-AZ\.
 
 Modify your DB parameter group to include the following settings\. You should only use these settings when importing data\. You should test the parameter settings to find the most efficient settings for your DB instance size\. You also need to revert back to production values for these parameters after your import completes\.

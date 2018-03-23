@@ -1,9 +1,7 @@
 # Setting Up Amazon RDS to Host Tools and Third\-Party Software for Oracle<a name="Oracle.Resources.Shared"></a>
 
 You can use Amazon RDS to host an Oracle DB instance that supports software and components such as the following: 
-
 + Siebel Customer Relationship Management \(CRM\)
-
 + Oracle Fusion Middleware Metadata — installed by the Repository Creation Utility \(RCU\)
 
 The following procedures help you create an Oracle DB instance on Amazon RDS that you can use to host additional software and components for Oracle\. 
@@ -150,13 +148,8 @@ In the preceding procedures, we use the AWS Management Console to perform tasks\
 For more information, see [AWS Command Line Interface Reference for Amazon RDS](http://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon Relational Database Service API Reference](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
 
 ## Related Topics<a name="w3ab1c34c83b7c15"></a>
-
 + [Setting Up for Amazon RDS](CHAP_SettingUp.md)
-
 + [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
-
 + [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)
-
 + [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)
-
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)

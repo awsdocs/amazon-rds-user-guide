@@ -1,17 +1,11 @@
 # Using SSL to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
 
 You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, Amazon Aurora, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
-
 + [Using SSL with Aurora DB Clusters](Aurora.Overview.md#Aurora.Overview.Security.SSL)
-
 + [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
-
 + [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
-
 + [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
-
 + [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
-
 + [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
 A root certificate that works for all regions can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. It is the trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\. 

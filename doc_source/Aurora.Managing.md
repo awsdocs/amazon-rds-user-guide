@@ -5,13 +5,9 @@ In the following sections, you can find information about managing performance, 
 ## Managing Performance and Scaling for Aurora DB Clusters<a name="Aurora.Managing.Performance"></a>
 
 You can use the following options to manage performance and scaling for Aurora DB clusters and DB instances:
-
 + [Storage Scaling](#Aurora.Managing.Performance.StorageScaling)
-
 + [Instance Scaling](#Aurora.Managing.Performance.InstanceScaling)
-
 + [Read Scaling](#Aurora.Managing.Performance.ReadScaling)
-
 + [Managing Connections](#Aurora.Managing.MaxConnections)
 
 ### Storage Scaling<a name="Aurora.Managing.Performance.StorageScaling"></a>
@@ -49,9 +45,7 @@ The maximum number of connections allowed to an Aurora DB instance is determined
 An Aurora DB cluster is fault tolerant by design\. The cluster volume spans multiple Availability Zones in a single AWS Region, and each Availability Zone contains a copy of the cluster volume data\. This functionality means that your DB cluster can tolerate a failure of an Availability Zone without any loss of data and only a brief interruption of service\.
 
 If the primary instance in a DB cluster fails, Aurora automatically fails over to a new primary instance in one of two ways:
-
 + By promoting an existing Aurora Replica to the new primary instance
-
 + By creating a new primary instance
 
 If the DB cluster has one or more Aurora Replicas, then an Aurora Replica is promoted to the primary instance during a failure event\. A failure event results in a brief interruption, during which read and write operations fail with an exception\. However, service is typically restored in less than 120 seconds, and often less than 60 seconds\. To increase the availability of your DB cluster, we recommend that you create at least one or more Aurora Replicas in two or more different Availability Zones\. 
@@ -124,5 +118,4 @@ The DB cluster and DB instance parameters available to you in Aurora vary depend
 |  Amazon Aurora PostgreSQL  |  See [Amazon Aurora PostgreSQL Parameters](AuroraPostgreSQL.Reference.md#AuroraPostgreSQL.Reference.ParameterGroups)  | 
 
 ## Related Topics<a name="Aurora.Managing.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

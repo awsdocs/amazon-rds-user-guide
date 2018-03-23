@@ -26,19 +26,12 @@ All VPC and EC2 resources that you use with your Aurora DB cluster must be in on
 ![\[Begin the Create a VPC Wizard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCreateVPC01.png)
 
 1. Set the following values in the **Create VPC** panel:
-
    + **IP CIDR block:** `10.0.0.0/16`
-
    + **VPC name:** `gs-cluster-vpc`
-
    + **Public subnet:** `10.0.0.0/24`
-
    + **Availability Zone:** `us-east-1a`
-
    + **Subnet name:** `gs-subnet1`
-
    + **Enable DNS hostnames:** `Yes`
-
    + **Hardware tenancy:** `Default`  
 ![\[Create a VPC with a Single Public Subnet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCreateVPC02.png)
 
@@ -51,13 +44,9 @@ All VPC and EC2 resources that you use with your Aurora DB cluster must be in on
 1. To add the second subnet to your VPC, in the VPC Dashboard click **Subnets**, and then click **Create Subnet**\. An Amazon Aurora DB cluster requires at least two VPC subnets\.
 
 1. Set the following values in the **Create Subnet** panel:
-
    + **Name tag:** `gs-subnet2`
-
    + **VPC:** Select the VPC that you created in the previous step, for example: `vpc-a464d1c1 (10.0.0.0/16) | gs-cluster-vpc`\.
-
    + **Availability Zone:** `us-east-1c`
-
    + **CIDR block:** `10.0.1.0/24`  
 ![\[Create a Subnet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCreateVPC03.png)
 
@@ -79,13 +68,9 @@ The last step in creating a VPC for use with your Amazon Aurora DB cluster is to
 1. In the VPC Dashboard, click **Security Groups**, and then click **Create Security Group**\.
 
 1. Set the following values in the **Create Security Group** panel:
-
    + **Name tag:** `gs-securitygroup1`
-
    + **Group name:** `gs-securitygroup1`
-
    + **Description:** `Getting Started Security Group`
-
    + **VPC:** Select the VPC that you created earlier, for example: `vpc-b5754bcd | gs-cluster-vpc`\.  
 ![\[Create a Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCreateVPC05.png)
 
@@ -104,9 +89,7 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your DB cluster\. 
 1. Select the **Inbound Rules** tab, and then click the **Edit** button\.
 
 1. Set the following values for your new inbound rule:
-
    + **Type:** `All Traffic`
-
    + **Source:** The IP address or range from the previous step, for example `203.0.113.25/32`\.  
 ![\[Add Ingress Rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraCreateVPC06.png)
 
@@ -123,11 +106,8 @@ The last thing that you need before you can create an Aurora DB cluster is a DB 
 1. Select **Subnet Groups**, and then click **Create DB Subnet Group**\.
 
 1. Set the following values for your new DB subnet group:
-
    + **Name:** `gs-subnetgroup1`
-
    + **Description:** `Getting Started Subnet Group`
-
    + **VPC ID:** Select the VPC that you created in the previous procedure, for example, `gs-cluster-vpc (vpc-b5754bcd)`\.
 
 1. Click **Add all the subnets related to this VPC** to add the subnets for the VPC that you created in earlier steps\. You can also add each subnet individually by selecting the **Availability zone** and the **Subnet** and clicking **Add subnet**\.  

@@ -1,9 +1,7 @@
 # Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Integrating.Lambda"></a>
 
 You can invoke a Lambda function from an Aurora MySQL DB cluster in the following ways:
-
 + [Invoking a Lambda Function with an Aurora MySQL Native Function](#AuroraMySQL.Integrating.NativeLambda)
-
 + [Invoking a Lambda Function with an Aurora MySQL Stored Procedure](#AuroraMySQL.Integrating.ProcLambda)
 
 For Aurora MySQL version 1\.16 and later, we recommend using an Aurora MySQL native function\. Starting with Aurora MySQL version 1\.16, using a stored procedure is deprecated\.
@@ -102,11 +100,8 @@ SELECT lambda_async(
 ```
 
 ### Related Topics<a name="AuroraMySQL.Integrating.NativeLambda.RelatedTopics"></a>
-
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)
 
 ## Invoking a Lambda Function with an Aurora MySQL Stored Procedure<a name="AuroraMySQL.Integrating.ProcLambda"></a>
@@ -275,9 +270,6 @@ mysql> insert into Customer_Feedback (customer_name, customer_feedback) VALUES (
 ```
 
 ### Related Topics<a name="AuroraMySQL.Integrating.Lambda.RelatedTopics"></a>
-
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html.html)

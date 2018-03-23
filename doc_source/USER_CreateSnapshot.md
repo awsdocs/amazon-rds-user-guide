@@ -24,9 +24,7 @@ When you create a DB snapshot, you need to identify which DB instance you are go
 ## CLI<a name="USER_CreateSnapshot.CLI"></a>
 
 When you create a DB snapshot using the AWS CLI, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. You can do this by using the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) command with the following parameters:
-
 + `--db-instance-identifier`
-
 + `--db-snapshot-identifier`
 
 In this example, you create a DB snapshot called *mydbsnapshot* for a DB instance called *mydbinstance*\.
@@ -56,9 +54,7 @@ The output from this command should look similar to the following:
 ## API<a name="USER_CreateSnapshot.API"></a>
 
 When you create a DB snapshot using the Amazon RDS API, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) command with the following parameters:
-
 + DBInstanceIdentifier
-
 + DBSnapshotIdentifier
 
 In this example, you create a DB snapshot called *mydbsnapshot* for a DB instance called *mydbinstance*\.
@@ -81,9 +77,6 @@ https://rds.us-east-1.amazonaws.com/
 ```
 
 ## Related Topics<a name="USER_CreateSnapshot.related"></a>
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
-
 + [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
-
 + [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)

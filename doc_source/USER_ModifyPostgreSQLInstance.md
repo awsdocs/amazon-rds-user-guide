@@ -32,13 +32,9 @@ To modify a PostgreSQL DB instance, use the AWS CLI command [http://docs.aws.ama
 The following code modifies `pgdbinstance` by setting the backup retention period to 1 week \(7 days\) and disabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.  
 
 **Parameters**
-
 + `--db-instance-identifier`—the name of the db instance
-
 + `--backup-retention-period`—the number of days to retain automatic backups\.
-
 + `--no-auto-minor-version-upgrade`—disallow automatic minor version upgrades\. To allow automatic minor version upgrades, use `--auto-minor-version-upgrade`\.
-
 + `--no-apply-immediately`—apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\.
 For Linux, OS X, or Unix:  
 
@@ -67,13 +63,9 @@ To modify a PostgreSQL DB instance, use the [http://docs.aws.amazon.com/AmazonRD
 The following code modifies `pgdbinstance` by setting the backup retention period to 1 week \(7 days\) and disabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.  
 
 **Parameters**
-
 + `DBInstanceIdentifier`—the name of the db instance
-
 + `BackupRetentionPeriod`—the number of days to retain automatic backups\.
-
 + `AutoMinorVersionUpgrade`=`false`—disallow automatic minor version upgrades\. To allow automatic minor version upgrades, set the value to `true`\.
-
 + `ApplyImmediately`=`false`—apply changes during the next maintenance window\. To apply changes immediately, set the value to `true`\.
 
 ```
@@ -125,9 +117,6 @@ The following table contains details about which settings you can modify, which 
 |  Subnet Group  |  The subnet group for the DB instance\. You can use this setting to move your DB instance to a different VPC\.  If your DB instance is not in a VPC, you can use this setting to move your DB instance into a VPC\.  For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\.   | – | – | 
 
 ## Related Topics<a name="USER_ModifyInstance.Postgres.RelatedTopics"></a>
-
 + [[Rebooting a DB Instance](USER_RebootInstance.md)](USER_RebootInstance.md) 
-
 + [[Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)](USER_ConnectToPostgreSQLInstance.md)
-
 + [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)

@@ -23,21 +23,15 @@ If you are using the AWS Management Console to create your Aurora DB cluster, th
 You can communicate with an EC2 instance that is not in a VPC and an Amazon Aurora DB cluster using ClassicLink\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC](USER_VPC.Scenarios.md#USER_VPC.ClassicLink)\.
 
 If you don't have a default VPC or you have not created a VPC, you can have Amazon RDS automatically create a VPC for you when you create an Aurora DB cluster using the AWS Management Console\. Otherwise, you must do the following:
-
 + Create a VPC with at least one subnet in each of at least two of the Availability Zones in the region where you want to deploy your DB cluster\. For more information, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
-
 + Specify a VPC security group that authorizes connections to your Aurora DB cluster\. For more information, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-
 + Specify an RDS DB subnet group that defines at least two subnets in the VPC that can be used by the Aurora DB cluster\. For more information, see [Working with DB Subnet Groups](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Subnets)\.
 
 ### Additional Prerequisites<a name="Aurora.CreateInstance.Prerequisites.Additional"></a>
-
 + If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
 
   If you are using an IAM account to access the Amazon RDS console, you must first log on to the AWS Management Console with your IAM account, and then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
 + If you want to tailor the configuration parameters for your DB cluster, you must specify a DB cluster parameter group and DB parameter group with the required parameter settings\. For information about creating or modifying a DB cluster parameter group or DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
 + You must determine the TCP/IP port number you will specify for your DB cluster\. The firewalls at some companies block connections to the default ports \(3306 for MySQL, 5432 for PostgreSQL\) for Aurora\. If your company firewall blocks the default port, choose another port for your DB cluster\. All instances in a DB cluster use the same port\.
 
 ## AWS Management Console<a name="Aurora.CreateInstance.Console"></a>
@@ -113,9 +107,7 @@ Before you can create an Aurora DB cluster using the AWS CLI, you must fulfill t
 **To launch an Aurora MySQL DB cluster using the AWS CLI**
 
 When you create an Aurora MySQL DB cluster or DB instance, ensure that you specify the correct value for the `--engine` parameter value based on the MySQL compatibility of the DB cluster or DB instance\.
-
 + When you create an Aurora MySQL 5\.7 DB cluster or DB instance, you must specify `aurora-mysql` for the `--engine` parameter\.
-
 + When you create an Aurora MySQL 5\.6 DB cluster or DB instance, you must specify `aurora` for the `--engine` parameter\.
 
 Complete the following steps:
@@ -279,5 +271,4 @@ aws rds create-db-instance --db-instance-identifier sample-instance-us-west-2a ^
 ```
 
 ## Related Topics<a name="Aurora.CreateInstance.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

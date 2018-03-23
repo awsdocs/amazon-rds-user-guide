@@ -61,7 +61,5 @@ The process for using Oracle Transparent Data Encryption \(TDE\) with Amazon RDS
 You can use Oracle Data Pump to import or export encrypted dump files\. Amazon RDS supports the password encryption mode \(ENCRYPTION\_MODE=PASSWORD\) for Oracle Data Pump\. Amazon RDS does not support transparent encryption mode \(ENCRYPTION\_MODE=TRANSPARENT\) for Oracle Data Pump\. For more information about using Oracle Data Pump with Amazon RDS, see [Oracle Data Pump](Oracle.Procedural.Importing.md#Oracle.Procedural.Importing.DataPump)\. 
 
 ## Related Topics<a name="Appendix.Oracle.Options.AdvSecurity.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

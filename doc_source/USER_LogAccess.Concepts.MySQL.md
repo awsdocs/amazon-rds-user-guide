@@ -17,27 +17,17 @@ MySQL writes to the error log only on startup, shutdown, and when it encounters 
 The MySQL slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
 
 You can control MySQL logging by using the parameters in this list:
-
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
-
 + `general_log`: To create the general log, set to 1\. The default is 0\.
-
 + `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query execution time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose execution time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
-
 + `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. The default is 0\. Queries that do not use an index are logged even if their execution time is less than the value of the `long_query_time` parameter\.
-
 + `log_output option`: You can specify one of the following options for the `log_output` parameter\. 
-
   + **TABLE** \(default\)– Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\. 
-
   + **FILE**– Write both general and slow query logs to the file system\. Log files are rotated hourly\. 
-
   + **NONE**– Disable logging\.
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
-
 + When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
-
 + When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\. You can subscribe to the `low_free_storage` event to be notified when log tables are rotated to free up space\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
   When log tables are rotated, the current log table is copied to a backup log table and the entries in the current log table are removed\. If the backup log table already exists, then it is deleted before the current log table is copied to the backup\. You can query the backup log table if needed\. The backup log table for the `mysql.general_log` table is named `mysql.general_log_backup`\. The backup log table for the `mysql.slow_log` table is named `mysql.slow_log_backup`\.
@@ -49,9 +39,7 @@ When logging is enabled, Amazon RDS rotates table logs or deletes log files at r
 To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
-
 + [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
-
 + [The General Query Log](http://dev.mysql.com/doc/refman/5.6/en/query-log.html)
 
 ## Publishing MySQL Logs to CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs"></a>
@@ -76,11 +64,8 @@ Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.
 ### Publishing Logs to CloudWatch Logs with the CLI<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CLI"></a>
 
  You can publish a MySQL DB log with the AWS CLI\. You can call either the `modify-db-instance` or `create-db-instance` commands with the following parameters: 
-
 + `-- db-instance-identifier`
-
 + `-- cloudwatch-logs-export-configuration`
-
 + `-- apply-immediately`
 
 **Example**  
@@ -173,23 +158,14 @@ For more information on DB parameter groups, see [Working with DB Parameter Grou
 You can use the mysqlbinlog utility to download or stream binary logs from Amazon RDS instances running MySQL 5\.6 or later\. The binary log is downloaded to your local computer, where you can perform actions such as replaying the log using the mysql utility\. For more information about using the mysqlbinlog utility, go to [Using mysqlbinlog to Back Up Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog-backup.html)\.
 
  To run the mysqlbinlog utility against an Amazon RDS instance, use the following options: 
-
 +  Specify the `--read-from-remote-server` option\. 
-
 +  `--host`: Specify the DNS name from the endpoint of the instance\. 
-
 +  `--port`: Specify the port used by the instance\. 
-
 +  `--user`: Specify a MySQL user that has been granted the replication slave permission\. 
-
 +  `--password`: Specify the password for the user, or omit a password value so that the utility prompts you for a password\. 
-
 + To have the file downloaded in binary format, specify the `--raw` option\. 
-
 +  `--result-file`: Specify the local file to receive the raw output\. 
-
 + Specify the names of one or more binary log files\. To get a list of the available logs, use the SQL command SHOW BINARY LOGS\.
-
 + To stream the binary log files, specify the `--stop-never` option\. 
 
 For more information about mysqlbinlog options, go to [mysqlbinlog \- Utility for Processing Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog.html)\. 

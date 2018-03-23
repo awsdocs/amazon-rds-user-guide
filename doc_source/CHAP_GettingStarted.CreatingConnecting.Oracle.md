@@ -98,13 +98,8 @@ Once you are done exploring the sample DB instance that you created, you should 
 1. Choose **Delete**\. 
 
 ## Related Topics<a name="CHAP_GettingStarted.Oracle.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)
-
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-
 + [Oracle on Amazon RDS](CHAP_Oracle.md)

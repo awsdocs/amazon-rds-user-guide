@@ -9,17 +9,10 @@ CALL mysql.rds_enable_gsh_rotation;
 ```
 
 ## Related Topics<a name="mysql_rds_enable_gsh_rotation.related"></a>
-
 + [mysql\.rds\_enable\_gsh\_collector](mysql_rds_enable_gsh_collector.md)
-
 + [mysql\.rds\_set\_gsh\_collector](mysql_rds_set_gsh_collector.md)
-
 + [mysql\.rds\_disable\_gsh\_collector](mysql_rds_disable_gsh_collector.md)
-
 + [mysql\.rds\_collect\_global\_status\_history](mysql_rds_collect_global_status_history.md)
-
 + [mysql\.rds\_set\_gsh\_rotation](mysql_rds_set_gsh_rotation.md)
-
 + [mysql\.rds\_disable\_gsh\_rotation](mysql_rds_disable_gsh_rotation.md)
-
 + [mysql\.rds\_rotate\_global\_status\_history](mysql_rds_rotate_global_status_history.md)

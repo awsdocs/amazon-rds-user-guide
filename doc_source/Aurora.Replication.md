@@ -15,11 +15,8 @@ For details on how to create an Aurora Replica, see [Creating an Aurora Replica 
 ## Replication with Aurora MySQL<a name="Aurora.Replication.AuroraMySQL"></a>
 
 In addition to Aurora Replicas, you have the following options for replication with Aurora MySQL:
-
 + Two Aurora MySQL DB clusters in different AWS Regions, by creating an Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region\.
-
 + Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
-
 + An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\. Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\.
 
 For more information about replication with Aurora MySQL, see [Replication with Amazon Aurora MySQL](AuroraMySQL.Replication.md)\.

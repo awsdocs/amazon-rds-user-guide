@@ -7,13 +7,9 @@ A default DB parameter group is created if you create a DB instance without spec
  If you want to use your own DB parameter group, you simply create a new DB parameter group, modify the desired parameters, and modify your DB instance to use the new DB parameter group\. All DB instances that are associated with a particular DB parameter group get all parameter updates to that DB parameter group\. You can also copy an existing parameter group with the AWS CLI [copy\-db\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command\. Copying a parameter group is a convenient solution when you have already created a DB parameter group and you want to include most of the custom parameters and values from that group in a new DB parameter group\.
 
 Here are some important points you should know about working with parameters in a DB parameter group:
-
 + When you change a dynamic parameter and save the DB parameter group, the change is applied immediately regardless of the **Apply Immediately** setting\. When you change a static parameter and save the DB parameter group, the parameter change will take effect after you manually reboot the DB instance\. You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API action \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\.
-
 + When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the new DB parameter group is used by the DB instance\. 
-
-+ The value for a DB parameter can be specified as an integer; an integer expression built from formulas, variables, functions, and operators; or as a log expression\. For more information, see [DB Parameter Values](#USER_ParamValuesRef)
-
++ The value for a DB parameter can be specified as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB Parameter Values](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group prior to creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   You can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -21,12 +17,10 @@ Here are some important points you should know about working with parameters in 
   ```
   ALTER DATABASE database_name CHARACTER SET character_set_name COLLATE collation;
   ```
-
 + Improperly setting parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying a DB parameter group\. You should try out parameter group setting changes on a test DB instance before applying those parameter group changes to a production DB instance\. 
-
 + Amazon Aurora uses both DB parameter groups and DB cluster parameter groups\. Parameters in a DB parameter group apply to a single DB instance in an Aurora DB cluster\. Parameters in a DB cluster parameter group apply to every DB instance in a DB cluster\. For more information, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups)\.
 
-
+**Topics**
 + [Creating a DB Parameter Group](#USER_WorkingWithParamGroups.Creating)
 + [Modifying Parameters in a DB Parameter Group](#USER_WorkingWithParamGroups.Modifying)
 + [Copying a DB Parameter Group](#USER_WorkingWithParamGroups.Copying)
@@ -44,30 +38,27 @@ The following section shows you how to create a new DB parameter group\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Click **Parameter Groups** in the **Navigation** list on the left side of the window\.
+1. In the navigation pane, choose **Parameter groups**\.
 
-1. Click the **Create DB Parameter Group** button\.
+1. Choose **Create parameter group**\.
 
-   The **Create DB Parameter Group** window appears\.
+   The **Create parameter group** window appears\.
 
-1. Select a DB parameter group family in the **DB Parameter Group Family** drop\-down list box\.
+1. In the **Parameter group family** list, select a DB parameter group family 
 
-1. Type the name of the new DB parameter group in the **DB Parameter Group** text box\.
+1. In the **Group name** box, type the name of the new DB parameter group\.
 
-1. Type a description for the new DB parameter group in the **Description** text box\. 
+1. In the **Description** box, type a description for the new DB parameter group\. 
 
-1. Click the **Yes, Create** button\. 
+1. Choose **Create**\.
 
 ### CLI<a name="USER_WorkingWithParamGroups.Creating.CLI"></a>
 
 To create a DB parameter group, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-parameter-group.html) command\. The following example creates a DB parameter group named *mydbparametergroup* for MySQL version 5\.6 with a description of "*My new parameter group*\."
 
 Include the following required parameters:
-
 + `--db-parameter-group-name`
-
 + `--db-parameter-group-family`
-
 + `--description`
 
 **Example**  
@@ -98,11 +89,8 @@ This command produces output similar to the following:
 To create a DB parameter group, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBParameterGroup.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBParameterGroup.html) action\. The following example creates a DB parameter group named *mydbparametergroup* for MySQL version 5\.6 with a description of "*My new parameter group*\."
 
 Include the following required parameters:
-
 + `DBParameterGroupName = mydbparametergroup`
-
 + `DBParameterGroupFamily = MySQL5.6`
-
 + `Description = My new parameter group`
 
 **Example**  
@@ -153,26 +141,22 @@ The RDS console shows the status of the DB parameter group associated with a DB 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Click **Parameter Groups** in the navigation pane on the left side of the window\.
-
-   The available DB parameter groups appear in a list\.
+1. In the navigation pane, choose **Parameter groups**\.
 
 1. In the list, select the parameter group you want to modify\.
 
-1. Select **Edit Parameters**\.
+1. Choose **Parameter group actions**, and then choose **Edit**\.
 
 1. Change the values of the parameters you want to modify\. You can scroll through the parameters using the arrow keys at the top right of the dialog box\. 
 
    Note that you cannot change values in a default parameter group\.
 
-1. Click **Save Changes**\.
+1. Choose **Save changes**\.
 
 ### CLI<a name="USER_WorkingWithParamGroups.Modifying.CLI"></a>
 
 To modify a DB parameter group, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) command with the following required parameters:
-
 + `--db-parameter-group-name`
-
 + `--parameters`
 
 The following example modifies the` max_connections` and `max_allowed_packet` values in the DB parameter group named *mydbparametergroup*\.
@@ -206,9 +190,7 @@ The command produces output like the following:
 ### API<a name="USER_WorkingWithParamGroups.Modifying.API"></a>
 
 To modify a DB parameter group, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBParameterGroup.html) command with the following required parameters:
-
 + `DBParameterGroupName`
-
 + `Parameters`
 
 The following example modifies the` max_connections` and `max_allowed_packet` values in the DB parameter group named *mydbparametergroup*\.
@@ -255,14 +237,29 @@ After you copy a DB parameter group, you should wait at least 5 minutes before c
 **Note**  
 You can't copy a default parameter group\. However, you can create a new parameter group that is based on a default parameter group\.
 
+### AWS Management Console<a name="USER_WorkingWithParamGroups.Copying.CON"></a>
+
+**To copy a DB parameter group**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Parameter groups**\.
+
+1. In the list, select the custom parameter group you want to copy\.
+
+1. Choose **Parameter group actions**, and then choose **Copy**\.
+
+1. In **New DB parameter group identifier**, type a name for the new parameter group\.
+
+1. In **Description**, type a description for the new parameter group\.
+
+1. Choose **Copy**\.
+
 ### CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
 
 To copy a DB parameter group, use the AWS CLI [copy\-db\-parameter\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required parameters:
-
 + `--source-db-parameter-group-identifier`
-
 + `--target-db-parameter-group-identifier`
-
 + `--target-db-parameter-group-description`
 
 The following example creates a new DB parameter group named `mygroup2` that is a copy of the DB parameter group `mygroup1`\.
@@ -288,11 +285,8 @@ For Windows:
 ### API<a name="USER_WorkingWithParamGroups.Copying.API"></a>
 
 To copy a DB parameter group, use the RDS API [CopyDBParameterGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBParameterGroup.html) action with the following required parameters:
-
 + `SourceDBPparameterGroupIdentifier = arn%3Aaws%3Ards%3Aus-west-2%3A123456789012%3Apg%3Amygroup1`
-
 + `TargetDBPparameterGroupIdentifier = mygroup2`
-
 + `TargetDBPparameterGroupDescription = DB%20parameter%20group%202`
 
 The following example creates a new DB parameter group named `mygroup2` that is a copy of the DB parameter group `mygroup1`\.
@@ -344,7 +338,7 @@ Default parameter groups are automatically created from a default parameter temp
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Click **Parameter Groups** in the navigation pane on the left side of the window\.
+1. In the navigation pane, choose **Parameter groups**\.
 
    The DB parameter groups appear in a list\.
 
@@ -468,16 +462,15 @@ You can get a list of all parameters in a DB parameter group and their values\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Click **Parameter Groups** in the navigation pane on the left side of the window\.
+1. In the navigation pane, choose **Parameter groups**\.
 
    The DB parameter groups appear in a list\.
 
-1.  Select a DB parameter group from the list\. Click the Details page icon to see the list of parameters for the selected DB parameter group\.
+1. Click the name of the parameter group to see the its list of parameters\.
 
 ### CLI<a name="USER_WorkingWithParamGroups.Viewing.CLI"></a>
 
 To view the parameter values for a DB parameter group, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command with the following required parameter\.
-
 + `--db-parameter-group-name`
 
 **Example**  
@@ -500,7 +493,6 @@ The command returns a response like the following:
 ### API<a name="USER_WorkingWithParamGroups.Viewing.API"></a>
 
 To view the parameter values for a DB parameter group, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBParameters.html) command with the following required parameter\.
-
 + `DBParameterGroupName` = *mydbparametergroup*
 
 **Example**  
@@ -566,15 +558,10 @@ The command returns a response like the following:
 ## DB Parameter Values<a name="USER_ParamValuesRef"></a>
 
 The value for a DB parameter can be specified as:
-
 + An integer constant
-
 + A DB parameter formula
-
 + A DB parameter function
-
 + A character string constant
-
 + A log expression \(the log function represents log base 2\), such as value=**\{log\(DBInstanceClassMemory/8187281418\)\*1000\}** 
 
 ### DB Parameter Formulas<a name="USER_ParamFormulas"></a>

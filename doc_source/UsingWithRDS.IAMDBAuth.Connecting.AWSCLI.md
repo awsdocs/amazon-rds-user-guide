@@ -2,7 +2,7 @@
 
 You can connect from the command line to an RDS DB instance or Aurora DB cluster with the AWS CLI and `mysql` command line tool as described following\.
 
-
+**Topics**
 + [Generating an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
 + [Connecting to a DB Instance or DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
 
@@ -19,13 +19,9 @@ aws rds generate-db-auth-token \
 ```
 
 In the example, the parameters are as follows:
-
 + `--hostname` — The host name of the DB instance or DB cluster that you want to access\.
-
 + `--port` — The port number used for connecting to the DB instance or DB cluster\.
-
 + `--region` — The AWS Region where the DB instance or DB cluster is running\. 
-
 + `--username` — The database account that you want to access\.
 
 The first several characters of the token look like the following\.
@@ -43,17 +39,11 @@ mysql --host=hostName --port=portNumber --ssl-ca=[full path]rds-combined-ca-bund
 ```
 
 The parameters are as follows:
-
 + `--host` — The host name of the DB instance or DB cluster that you want to access\.
-
 + `--port` — The port number used for connecting to the DB instance or DB cluster\.
-
 + `--ssl-ca` — The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
-
 + `--enable-cleartext-plugin` — A value that specifies that `AWSAuthenticationPlugin` must be used for this connection\.
-
 + `--user` — The database account that you want to access\.
-
 + `--password` — A signed IAM authentication token\.
 
 The authentication token consists of several hundred characters\. It can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows one way to perform this workaround\.

@@ -7,7 +7,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 Creating a DB instance and connecting to a database on a DB instance is slightly different for each of the DB engines\. Choose the DB engine following that you want to use for detailed information on creating and connecting to the DB instance\. After you have created and connected to your DB instance, there are instructions to help you delete the DB instance\. 
 
-
+**Topics**
 + [Creating a DB Cluster and Connecting to a Database on an Amazon Aurora DB Instance](CHAP_GettingStarted.CreatingConnecting.Aurora.md)
 + [Creating a MariaDB DB Instance and Connecting to a Database on a MariaDB DB Instance](CHAP_GettingStarted.CreatingConnecting.MariaDB.md)
 + [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)

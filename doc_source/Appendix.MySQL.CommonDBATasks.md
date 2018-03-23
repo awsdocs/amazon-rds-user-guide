@@ -4,7 +4,7 @@ This section describes the Amazon RDS\-specific implementations of some common D
 
 For information about working with MySQL log files on Amazon RDS, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
 
-
+**Topics**
 + [Killing a Session or Query](#Appendix.MySQL.CommonDBATasks.Kill)
 + [Skipping the Current Replication Error](#Appendix.MySQL.CommonDBATasks.SkipError)
 + [Working with InnoDB Tablespaces to Improve Crash Recovery Times](#Appendix.MySQL.CommonDBATasks.Tables)

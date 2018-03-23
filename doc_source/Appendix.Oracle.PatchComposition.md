@@ -24,6 +24,6 @@ The following table shows what Oracle PSUs are applied to the Oracle versions in
 | 2014 July | — | [11\.2\.0\.4\.v2](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v2)\(Deprecated\) | 
 | 2014 January | — | [11\.2\.0\.4\.v1](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v1) | 
 
-
+**Topics**
 + [Database Engine: 12\.1\.0\.2](Appendix.Oracle.PatchComposition.12.1.0.2.md)
 + [Database Engine: 11\.2\.0\.4](Appendix.Oracle.PatchComposition.11.2.0.4.md)

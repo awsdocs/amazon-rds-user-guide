@@ -13,49 +13,29 @@ We recommend that you import your database to Amazon RDS by using backup files i
 ## Limitations and Recommendations for Importing Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Limitations"></a>
 
 The following are some limitations and recommendations for importing backup files from Amazon S3: 
-
 + You can only import your data to a new DB instance, not an existing DB instance\. 
-
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
-
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
-
 + You can't import a MySQL 5\.5 or 5\.7 database\. 
-
 + You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 database\. You can upgrade your DB instance after you complete the import\. 
-
 + You can't restore databases larger than 6 TB in size\. 
-
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
-
 + Your Amazon S3 bucket can't be encrypted\. 
-
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
-
 + Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and then change the instance class later\. For more information about instance classes, see [Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
-
 + Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If a backup file exceeds 5 TB, then you must split the backup file into smaller files\. 
-
 + Amazon RDS limits the number of files uploaded to an Amazon S3 bucket to 1 million\. If the backup data for your database, including all full and incremental backups, exceeds 1 million files, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\. 
-
 + User accounts are not imported automatically\. Save your user accounts from your source database and add them to your new DB instance later\. 
-
 + Functions are not imported automatically\. Save your functions from your source database and add them to your new DB instance later\. 
-
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
-
 + Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local Time Zone for MySQL DB Instances](CHAP_MySQL.md#MySQL.Concepts.LocalTimeZone)\. 
-
 + Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 5\.7 to version 5\.6, and you can't migrate from version 5\.6\.39 to version 5\.6\.37\.
 
 ## Overview of Setting Up to Import Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Enabling"></a>
 
 These are the components you need to set up to import backup files from Amazon S3 to Amazon RDS: 
-
 + An Amazon S3 bucket to store your backup files\.
-
 + A backup of your on\-premises database created by Percona XtraBackup\.
-
 + An AWS Identity and Access Management \(IAM\) role to allow Amazon RDS to access the bucket\.
 
 If you already have an Amazon S3 bucket, you can use that\. If you don't have an Amazon S3 bucket, you can create a new one\. Your Amazon S3 bucket can't be encrypted\. If you want to create a new bucket, see [Creating a Bucket](http://docs.aws.amazon.com/AmazonS3/latest/user-guide/CreatingaBucket.html)\. 
@@ -67,7 +47,6 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 ## Creating Your Database Backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
 Use the Percona XtraBackup software to create your backup\. Amazon RDS supports backup files created with the following versions of the Percona XtraBackup software: 
-
 + For MySQL 5\.6, use Percona XtraBackup version 2\.3\.
 
 We recommend that if you don't already have Percona XtraBackup installed, you use the latest version of the software available\. You can download Percona XtraBackup from [the Percona website](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
@@ -87,11 +66,8 @@ innobackupex --user=<myuser> --password=<password> --no-timestamp /on-premises/s
 ```
 
 If you want to compress your backup into a single file \(which can be split later, if needed\), you can save your backup in one of the following formats: 
-
 + Gzip \(\.gz\)
-
 + tar \(\.tar\)
-
 + Percona xbstream \(\.xbstream\)
 
 The following command creates a backup of your MySQL database split into multiple Gzip files\. 
@@ -255,27 +231,16 @@ To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, c
 
 **Note**  
 Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
-
 + `--allocated-storage`
-
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--s3-bucket-name`
-
 + `--s3-ingestion-role-arn`
-
 + `--s3-prefix`
-
 + `--source-engine`
-
 + `--source-engine-version`
 
 **Example**  
@@ -317,7 +282,5 @@ For Windows:
 To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) action\. 
 
 ## Related Topics<a name="MySQL.Procedural.Importing.Related"></a>
-
 + [Importing Data into a MySQL DB Instance by Using Other MethodsImporting Data by Using Other Methods](MySQL.Procedural.Importing.Other.md)
-
 + [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

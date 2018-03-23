@@ -38,11 +38,8 @@ For example, consider a query on a table with two indexes where the search argum
 In this case, the search engine will search both indexes\. However, due to the bug, the merged results are incorrect\. 
 
 To resolve this issue, you can do one of the following: 
-
 + Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
 + Upgrade your MySQL DB instance to MySQL version 5\.6 or 5\.7\. For more information, see [Upgrading a MySQL DB Snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
-
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
@@ -87,7 +84,6 @@ We don't recommend allowing tables to grow to the maximum file size\. In general
 One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, go to [https://dev\.mysql\.com/doc/refman/5\.6/en/partitioning\.html](https://dev.mysql.com/doc/refman/5.6/en/partitioning.html) in the MySQL documentation\. 
 
 **To determine the file size of a table**
-
 + Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\.
 
   ```
@@ -98,11 +94,9 @@ One option that you can use for breaking a large table up into smaller tables is
   ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\. 
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 

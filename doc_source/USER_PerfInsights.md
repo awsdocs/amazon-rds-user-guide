@@ -16,7 +16,7 @@ The following video provides an overview of Performance Insights\.
 
 [![AWS Videos](http://img.youtube.com/vi/4462hcfkApM/0.jpg)](http://www.youtube.com/watch?v=4462hcfkApM)
 
-
+**Topics**
 + [Using the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard)
 + [Additional User Interface Features](#USER_PerfInsights.UIcontrols)
 + [Access Control for Performance Insights](USER_PerfInsights.access-control.md)
@@ -27,7 +27,7 @@ The following video provides an overview of Performance Insights\.
 
 The Performance Insights dashboard contains database performance information to help you analyze and troubleshoot performance issues\. On the main dashboard page, you can view information about the database load, and drill into details for a particular wait state, SQL query, host, or user\.
 
-
+**Topics**
 + [Opening the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.Opening)
 + [Performance Insights Dashboard Components](#USER_PerfInsights.UsingDashboard.Components)
 + [Analyzing Database Load Using the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad)
@@ -127,7 +127,5 @@ When you choose **Pause**, the load chart stops autorefreshing\. When you choose
 When you choose **Zoom out**, the load chart zooms out to the next largest time interval\.
 
 ### Related Topics<a name="USER_PerfInsights.related"></a>
-
 + [Using Amazon RDS Event Notification](USER_Events.md)
-
 + [Amazon RDS Database Log Files](USER_LogAccess.md)

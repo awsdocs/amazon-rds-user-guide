@@ -15,20 +15,16 @@ The number of Oracle databases you can support on a single AWS CloudHSM Classic 
 AWS CloudHSM Classic works with Amazon Virtual Private Cloud \(Amazon VPC\)\. An appliance is provisioned inside your VPC with a private IP address that you specify, providing simple and private network connectivity to your Amazon RDS DB instance\. Your HSM appliances are dedicated exclusively to you and are isolated from other AWS customers\. For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md) and [Creating a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\. 
 
 To use AWS CloudHSM Classic with an Amazon RDS Oracle DB instance, you must complete the following tasks, which are explained in detail in the following sections: 
-
 + [Setting Up AWS CloudHSM Classic to Work with Amazon RDS](Appendix.OracleCloudHSM.SetupCloudHSM.md)
-
 + [Setting Up Amazon RDS to Work with AWS CloudHSM Classic](Appendix.OracleCloudHSM.SetupRDS.md)
 
 When you complete the entire setup, you should have the following AWS components\. 
-
 + An AWS CloudHSM Classic control instance that will communicate with the HSM appliance using port 22, and the AWS CloudHSM Classic endpoint\. The AWS CloudHSM Classic control instance is an Amazon EC2 instance that is in the same VPC as the HSMs and is used to manage the HSMs\. 
-
 + An Amazon RDS Oracle DB instance that will communicate with the Amazon RDS service endpoint, as well as the HSM appliance using port 1792\.
 
 ![\[AWS CloudHSM Classic-RDS network\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/hsm_rds_networking-beta.png)
 
-
+**Topics**
 + [Setting Up AWS CloudHSM Classic to Work with Amazon RDS](Appendix.OracleCloudHSM.SetupCloudHSM.md)
 + [Setting Up Amazon RDS to Work with AWS CloudHSM Classic](Appendix.OracleCloudHSM.SetupRDS.md)
 + [Verifying the HSM Connection, the Oracle Keys in the HSM, and the TDE Key](Appendix.OracleCloudHSM.Verify.md)

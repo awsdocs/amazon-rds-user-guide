@@ -9,23 +9,16 @@ For more information about instance class pricing, see [Amazon RDS Pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance Type](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
-
 + **db\.m4** – Third\-generation instance classes that provide more computing capacity than the second\-generation db\.m3 instance classes at a lower price\. 
-
 + **db\.m3** – Second\-generation instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. 
-
 + **db\.m1** – First\-generation general\-purpose instance classes\. 
 
 The following are the Memory Optimized DB instance classes available:
-
 + **db\.r4** – Third\-generation instance classes optimized for memory\-intensive applications and that offer a better price per GiB of RAM than the db\.r3 instance classes\. 
-
 + **db\.r3** – Second\-generation instance classes that provide memory optimization and more computing capacity than the first\-generation db\.m2 instance classes, at a lower price\. The db\.r3 DB instances classes are not available in the South America \(São Paulo\) region\. 
-
 + **db\.m2** – First\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
-
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
 
 ## Specifications for All Available DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
@@ -104,15 +97,10 @@ For general purpose \(gp2\) storage, the maximum throughput is 1,280 Mbps \(160 
 ## Changing Your DB Instance Class<a name="Concepts.DBInstanceClass.Changing"></a>
 
 You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions for your specific database engine\. 
-
 + [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-
 + [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-
 + [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
 
 MySQL DB instances created after April 23, 2014, can change to the db\.r3 instance class by modifying the DB instance just as with any other modification\. MySQL DB instances running MySQL versions 5\.5 and created before April 23, 2014, must first upgrade to MySQL version 5\.6\. For more information, see [Upgrading the MySQL DB Engine](USER_UpgradeDBInstance.MySQL.md)\. 
@@ -120,7 +108,5 @@ MySQL DB instances created after April 23, 2014, can change to the db\.r3 instan
 Some instance classes require that your DB instance is in a VPC\. If your current DB instance is not in a VPC, and you want to use an instance class that requires a VPC, first move your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 ## Related Topics<a name="Concepts.DBInstanceClass.Related"></a>
-
 + [DB Instance RAM Recommendations](CHAP_BestPractices.md#CHAP_BestPractices.Performance.RAM)
-
 + [Storage for Amazon RDS](CHAP_Storage.md)

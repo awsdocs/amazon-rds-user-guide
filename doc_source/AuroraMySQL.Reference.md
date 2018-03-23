@@ -320,5 +320,4 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `wait_timeout` | Yes | 
 
 ## Related Topics<a name="AuroraMySQL.Reference.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

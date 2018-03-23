@@ -21,42 +21,26 @@ Before you begin this step, you must have a VPC with both public and private sub
 1. On the **Choose use case** page, choose **Dev/Test – MySQL**, and then choose **Next**\.
 
 1. On the **Specify DB details** page, shown following, set these values:
-
    + **License model:** Use the default value\.
-
    + **DB engine version:** Use the default value\.
-
    + **DB instance class:** `db.t2.small`
-
    + **Multi\-AZ deployment:** `No`
-
    + **Storage type:** `General Purpose (SSD)`
-
    + **Allocated storage:** `20 GB`
-
    + **DB instance identifier:** `tutorial-db-instance`
-
    + **Master username:** `tutorial_user`
-
    + **Master password:** Choose a password\.
-
    + **Confirm password:** Retype the password\.  
 ![\[Specify DB details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_08.png)
 
 1. Choose **Next** and set the following values in the **Configure advanced settings** page:
-
    + **Virtual Private Cloud \(VPC\):** Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
 **Note**  
 The VPC must have subnets in different availability zones\.
-
    + **Subnet group:** `The subnet group for the VPC`
-
    + **Public accessibility:** `No`
-
    + **Availability zone:** `No Preference`
-
    + **VPC security groups:** Choose an existing security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
-
    + **Database name:** `sample`
 
    Leave the default settings for the other options\.  

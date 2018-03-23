@@ -5,7 +5,7 @@ The easiest way to create a MariaDB DB instance is to use the Amazon RDS console
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-
+**Topics**
 + [Creating a MariaDB Instance](#CHAP_GettingStarted.Creating.MariaDB)
 + [Connecting to a Database on a DB Instance Running the MariaDB Database Engine](#CHAP_GettingStarted.Connecting.MariaDB)
 + [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.MariaDB)

@@ -10,7 +10,7 @@ For a tutorial that shows you how to create a VPC that you can use with a common
 
 To learn how to work with an Amazon RDS DB instances inside a VPC, see the following:
 
-
+**Topics**
 + [Working with a DB Instance in a VPC](#Overview.RDSVPC.Create)
 + [Working with DB Subnet Groups](#USER_VPC.Subnets)
 + [Hiding a DB Instance in a VPC from the Internet](#USER_VPC.Hiding)
@@ -21,25 +21,17 @@ To learn how to work with an Amazon RDS DB instances inside a VPC, see the follo
 ## Working with a DB Instance in a VPC<a name="Overview.RDSVPC.Create"></a>
 
 Here are some tips on working with a DB instance in a VPC:
-
 + Your VPC must have at least one subnet in at least two of the Availability Zones in the region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
-
 + If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. 
-
 + Your VPC must have a DB subnet group that you create \(for more information, see the next section\)\. You create a DB subnet group by specifying the subnets you created\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to select a subnet and an IP address within that subnet to assign to your DB instance\.
-
 + Your VPC must have a VPC security group that allows access to the DB instance\. 
-
 + The CIDR blocks in each of your subnets must be large enough to accommodate spare IP addresses for Amazon RDS to use during maintenance activities, including failover and compute scaling\. 
-
 +  A VPC can have an *instance tenancy* attribute of either *default* or *dedicated*\. All default VPCs have the instance tenancy attribute set to default, and a default VPC can support any DB instance class\. 
 
   If you choose to have your DB instance in a dedicated VPC where the instance tenancy attribute is set to dedicated, the DB instance class of your DB instance must be one of the approved Amazon EC2 dedicated instance types\. For example, the m3\.medium EC2 dedicated instance corresponds to the db\.m3\.medium DB instance class\. For information about instance tenancy in a VPC, go to [Using EC2 Dedicated Instances](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
   For more information about the instance types that can be in a dedicated instance, see [Amazon EC2 Dedicated Instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on the EC2 pricing page\. 
-
 + When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. Furthermore, if a DB instance is in a VPC, the option group associated with the instance is linked to that VPC\. This linkage means that you cannot use the option group assigned to a DB instance if you attempt to restore the instance into a different VPC or onto a different platform\.
-
 + If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. Note that with persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
 
 ## Working with DB Subnet Groups<a name="USER_VPC.Subnets"></a>
@@ -73,15 +65,10 @@ The following procedures help you create a DB instance in a VPC\. If your accoun
 If you want your DB instance in the VPC to be publicly accessible, you must update the DNS information for the VPC by enabling the VPC attributes *DNS hostnames* and *DNS resolution*\. For information about updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html)\. 
 
 Follow these steps to create a DB instance in a VPC:
-
 + [Step 1: Create a VPC](#USER_VPC.CreatingVPC) 
-
 + [Step 2: Add Subnets to the VPC](#USER_VPC.AddingSubnets) 
-
 +  [Step 3: Create a DB Subnet Group](#USER_VPC.CreateDBSubnetGroup)
-
 +  [Step 4: Create a VPC Security Group](#USER_VPC.CreateVPCSecurityGroup)
-
 +  [Step 5: Create a DB Instance in the VPC](#USER_VPC.CreateDBInstanceInVPC) 
 
 ### Step 1: Create a VPC<a name="USER_VPC.CreatingVPC"></a>
@@ -180,23 +167,16 @@ Updating VPCs is not currently supported for Aurora clusters\.
 Some legacy DB instances on the EC2\-Classic platform are not in a VPC\. If your DB instance is not in a VPC, you can use the AWS Management Console to easily move your DB instance into a VPC\. Before you can move a DB instance not in a VPC, into a VPC, you must create the VPC\. 
 
 Follow these steps to create a VPC for your DB instance\. 
-
 + [Step 1: Create a VPC](#USER_VPC.CreatingVPC)
-
 + [Step 2: Add Subnets to the VPC](#USER_VPC.AddingSubnets)
-
 +  [Step 3: Create a DB Subnet Group](#USER_VPC.CreateDBSubnetGroup)
-
 +  [Step 4: Create a VPC Security Group](#USER_VPC.CreateVPCSecurityGroup)
 
 After you create the VPC, follow these steps to move your DB instance into the VPC\. 
-
 + [Updating the VPC for a DB Instance](#USER_VPC.VPC2VPC)
 
 The following are some limitations to moving your DB instance into the VPC\. 
-
 + Moving a Multi\-AZ DB instance not in a VPC into a VPC is not currently supported\.
-
 + Moving a DB instance with Read Replicas not in a VPC into a VPC is not currently supported\.
 
 If you move your DB instance into a VPC, and you are using a custom option group with your DB instance, then you need to change the option group that is associated with your DB instance\. Option groups are platform\-specific, and moving to a VPC is a change in platform\. To use a custom option group in this case, assign the default VPC option group to the DB instance, assign an option group that is used by other DB instances in the VPC you are moving to, or create a new option group and assign it to the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 

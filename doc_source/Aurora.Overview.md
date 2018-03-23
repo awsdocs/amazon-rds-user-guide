@@ -7,9 +7,7 @@ Aurora makes it simple and cost\-effective to set up, operate, and scale your My
 Amazon Aurora is a drop\-in replacement for MySQL and PostgreSQL\. The code, tools and applications you use today with your existing MySQL and PostgreSQL databases can be used with Amazon Aurora\.
 
 When you create an Amazon Aurora instance, you create a DB cluster\. A DB cluster consists of one or more DB instances, and a cluster volume that manages the data for those instances\. An Aurora cluster volume is a virtual database storage volume that spans multiple Availability Zones, with each Availability Zone having a copy of the DB cluster data\. Two types of DB instances make up an Aurora DB cluster:
-
 + **Primary instance** – Supports read and write operations, and performs all of the data modifications to the cluster volume\. Each Aurora DB cluster has one primary instance\.
-
 + **Aurora Replica** – Supports only read operations\. Each Aurora DB cluster can have up to 15 Aurora Replicas in addition to the primary instance\. Multiple Aurora Replicas distribute the read workload, and by locating Aurora Replicas in separate Availability Zones you can also increase database availability\.
 
 The following diagram illustrates the relationship between the cluster volume, the primary instance, and Aurora Replicas in an Aurora DB cluster\.
@@ -53,7 +51,6 @@ The following example illustrates an instance endpoint for a DB instance in an A
 ### Endpoint Considerations<a name="Aurora.Overview.Endpoints.Considerations"></a>
 
 Some considerations for working with Aurora endpoints are as follows:
-
 + Before using an instance endpoint to connect to a specific DB instance in a DB cluster, consider using the cluster endpoint or reader endpoint for the DB cluster instead\.
 
   The cluster endpoint and reader endpoint provide support for high\-availability scenarios\. If the primary instance of a DB cluster fails, Aurora automatically fails over to a new primary instance\. It does so by either promoting an existing Aurora Replica to a new primary instance or creating a new primary instance\. If a failover occurs, you can use the cluster endpoint to reconnect to the newly promoted or created primary instance, or use the reader endpoint to reconnect to one of the other Aurora Replicas in the DB cluster\. 
@@ -61,9 +58,7 @@ Some considerations for working with Aurora endpoints are as follows:
   If you don't take this approach, you can still make sure that you're connecting to the right DB instance in the DB cluster for the intended operation\. To do so, you can manually or programmatically discover the resulting set of available DB instances in the DB cluster and confirm their instance types after failover, before using the instance endpoint of a specific DB instance\.
 
   For more information about failovers, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.md#Aurora.Managing.FaultTolerance)\.
-
 + The reader endpoint only load\-balances connections to available Aurora Replicas in an Aurora DB cluster\. It does not load\-balance specific queries\. If you want to load\-balance queries to distribute the read workload for a DB cluster, you need to manage that in your application and use instance endpoints to connect directly to Aurora Replicas to balance the load\.
-
 + During a failover, the reader endpoint might direct connections to the new primary instance of a DB cluster for a short time, when an Aurora Replica is promoted to the new primary instance\.
 
 ## Amazon Aurora Storage<a name="Aurora.Overview.Storage"></a>
@@ -99,21 +94,14 @@ Aurora is designed to recover from a crash almost instantaneously and continue t
 For more information about crash recovery, see [Fault Tolerance for an Aurora DB Cluster](Aurora.Managing.md#Aurora.Managing.FaultTolerance)\.
 
 The following are considerations for binary logging and crash recovery on Aurora MySQL:
-
 + Enabling binary logging on Aurora directly affects the recovery time after a crash, because it forces the DB instance to perform binary log recovery\. 
-
 + The type of binary logging used affects the size and efficiency of logging\. For the same amount of database activity, some formats log more information than others in the binary logs\. The following settings for the `binlog_format` parameter result in different amounts of log data:
-
   + `ROW` — The most log data
-
   + `STATEMENT` — The least log data
-
   + `MIXED` — A moderate amount of log data that usually provides the best combination of data integrity and performance
 
   The amount of binary log data affects recovery time\. If there is more data logged in the binary logs, the DB instance must process more data during recovery, which increases recovery time\. 
-
 + Aurora does not need the binary logs to replicate data within a DB cluster or to perform point in time restore \(PITR\)\.
-
 + If you don't need the binary log for external replication \(or an external binary log stream\), we recommend that you set the `binlog_format` parameter to `OFF` to disable binary logging\. Doing so reduces recovery time\. 
 
 For more information about Aurora binary logging and replication, see [Replication with Amazon Aurora](Aurora.Replication.md)\. For more information about the implications of different MySQL replication types, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
@@ -134,19 +122,14 @@ For more information about performance enhancements for Aurora MySQL, see [Amazo
 ## Amazon Aurora Security<a name="Aurora.Overview.Security"></a>
 
 Security for Amazon Aurora is managed at three levels:
-
 + To control who can perform Amazon RDS management actions on Aurora DB clusters and DB instances, you use AWS Identity and Access Management \(IAM\)\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
 
   If you are using an IAM account to access the Amazon RDS console, you must first log on to the AWS Management Console with your IAM account, and then go to the Amazon RDS console at [https://console\.aws\.amazon\.com/rds](https://console.aws.amazon.com/rds)\.
-
 + Aurora DB clusters must be created in an Amazon Virtual Private Cloud \(VPC\)\. To control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a VPC, you use a VPC security group\. These endpoint and port connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to a DB instance\. For more information on VPCs, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
-
 + To authenticate logins and permissions for an Amazon Aurora DB cluster, you can take either of the following approaches, or a combination of them\.
-
   + You can take the same approach as with a stand\-alone instance of MySQL or PostgreSQL\.
 
     Techniques for authenticating logins and permissions for stand\-alone instances of MySQL or PostgreSQL, such as using SQL commands or modifying database schema tables, also work with Aurora\. For more information, see [Security with Amazon Aurora MySQL](AuroraMySQL.Security.md) or [Security with Amazon Aurora PostgreSQL](AuroraPostgreSQL.Security.md)\.
-
   + You can also use IAM database authentication for Aurora MySQL\.
 
     With IAM database authentication, you authenticate to your Aurora MySQL DB cluster by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\.

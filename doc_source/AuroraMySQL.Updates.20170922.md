@@ -9,5 +9,4 @@ With version 1\.14\.1 of Aurora MySQL, we are using a cluster patching model whe
 Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20170922.Improvements"></a>
-
 + Fixed race conditions associated with inserts and purge to improve the stability of the Fast DDL feature, which remains in Aurora MySQL lab mode\.

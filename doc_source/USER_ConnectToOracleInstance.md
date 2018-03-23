@@ -63,17 +63,11 @@ To connect to your DB instance, you need its DNS name and port number\. For info
 ![\[Oracle SQL Developer with add icon highlighted\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-plus.png)
 
 1. In the **New/Select Database Connection** dialog box, provide the information for your DB instance:
-
    + For **Connection Name**, type a name that describes the connection, such as `Oracle-RDS`\.
-
    + For **Username**, type the name of the database administrator for the DB instance\.
-
    + For **Password**, type the password for the database administrator\.
-
    + For **Hostname**, type or paste the DNS name of the DB instance\.
-
    + For **Port**, type the port number\.
-
    + For **SID**, type the Oracle database SID\.
 
    The completed dialog box should look similar to the following\.  
@@ -161,9 +155,6 @@ The following are issues you might encounter when you try to connect to your Ora
 |  **Invalid username/password; logon denied – Oracle, Error: ORA\-01017**   |  You were able to reach the DB instance, but the connection was refused\. This is usually caused by providing an incorrect user name or password\. Verify the user name and password, and then retry\.   | 
 
 ## Related Topics<a name="USER_ConnectToOracleInstance.related"></a>
-
 + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

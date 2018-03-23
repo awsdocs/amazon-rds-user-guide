@@ -17,11 +17,8 @@ Run the MySQL `show slave status\G` command to determine if there are errors\. I
 For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL or MariaDB Read Replica Problem](USER_ReadRepl.md#USER_ReadRepl.Troubleshooting)\.
 
 The `mysql.rds_skip_repl_error` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 **Important**  

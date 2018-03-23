@@ -10,16 +10,13 @@ When you start a DB instance that you previously stopped, the DB instance retain
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to start\. 
 
-1. Choose **Instance Actions**, and then choose **Start**\. 
-
-1.  Choose **Continue**\. 
+1. Choose **Instance actions**, and then choose **Start**\. 
 
 ## CLI<a name="USER_StartInstance.CLI"></a>
 
 To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following parameters: 
-
 + `--db-instance-identifier` – the name of the db instance\. 
 
 **Example**  
@@ -31,7 +28,6 @@ To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http
 ## API<a name="USER_StartInstance.API"></a>
 
 To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) action with the following parameters: 
-
 + `DBInstanceIdentifier` – the name of the db instance\. 
 
 **Example**  
@@ -51,7 +47,5 @@ To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](h
 ```
 
 ## Related Topics<a name="USER_StartInstance.Related"></a>
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)
-
 + [Rebooting a DB Instance](USER_RebootInstance.md)

@@ -4,7 +4,7 @@ You can encrypt your Amazon RDS instances and snapshots at rest by enabling the 
 
 Amazon RDS encrypted instances use the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your Amazon RDS instance\. Once your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You don't need to modify your database client applications to use encryption\. 
 
-
+**Topics**
 + [Enabling Amazon RDS Encryption for a DB Instance](#Overview.Encryption.Enabling)
 + [Availability of Amazon RDS Encrypted Instances](#Overview.Encryption.Availability)
 + [Managing Amazon RDS Encryption Keys](#Overview.Encryption.Keys)
@@ -21,17 +21,11 @@ All logs, backups, and snapshots are encrypted for an Amazon RDS encrypted insta
 ## Enabling Amazon RDS Encryption for a DB Instance<a name="Overview.Encryption.Enabling"></a>
 
 To enable encryption for a new DB instance, choose **Yes** for **Enable encryption** on the Amazon RDS console\. For information on creating a DB instance, see one of the following topics:
-
 + [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)
-
 + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-
 + [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-
 + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
-
 + [Creating an Amazon Aurora DB Cluster](Aurora.CreateInstance.md)
-
 + [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)
 
 If you use the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an encrypted RDS DB instance, set the `--storage-encrypted` parameter to true\. If you use the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API action, set the `StorageEncrypted` parameter to true\.
@@ -77,17 +71,12 @@ If you disable the key for an encrypted DB instance, you cannot read from or wri
 ## Limitations of Amazon RDS Encrypted Instances<a name="Overview.Encryption.Limitations"></a>
 
 The following limitations exist for Amazon RDS encrypted instances:
-
 + You can only enable encryption for an Amazon RDS DB instance when you create it, not after the DB instance is created\.
 
   However, because you can encrypt a copy of an unencrypted DB snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)\. You don't need to encrypt an Amazon Aurora DB cluster snapshot in order to create an encrypted copy of an Aurora DB cluster\. If you specify a KMS encryption key when restoring from an unencrypted DB cluster snapshot, the restored DB cluster is encrypted using the specified KMS encryption key\.
-
 + DB instances that are encrypted cannot be modified to disable encryption\.
-
 + Encrypted Read Replicas must be encrypted with the same key as the source DB instance\.
-
 + You cannot restore an unencrypted backup or snapshot to an encrypted DB instance\. You can, however, restore an unencrypted Aurora DB cluster snapshot to an encrypted Aurora DB cluster if you specify a KMS encryption key when you restore from the unencrypted DB cluster snapshot\.
-
 + To copy an encrypted snapshot from one region to another, you must specify the KMS key identifier of the destination region\. This is because KMS encryption keys are specific to the region that they are created in\.
 
  The source snapshot remains encrypted throughout the copy process\. AWS Key Management Service uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope Encryption](http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\. 

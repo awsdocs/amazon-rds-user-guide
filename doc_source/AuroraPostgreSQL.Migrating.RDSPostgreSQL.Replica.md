@@ -2,7 +2,7 @@
 
 Amazon RDS uses the PostgreSQL DB engines' streaming replication functionality to create a special type of DB cluster called an Aurora Read Replica for a source PostgreSQL DB instance\. Updates made to the source PostgreSQL DB instance are asynchronously replicated to the Aurora Read Replica\. 
 
-We recommend using this functionality to migrate from a PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by creating an Aurora Read Replica of your source PostgreSQL DB instance\. When the replica lag between the PostgreSQL DB instance and the Aurora Read Replica is 0, you can promote the Aurora Read Replica to be a standalone Aurora PostgreSQL DB cluster which can accept write loads\. Be prepared for migration to take a while, roughly several hours per terabyte \(TB\) of data\. While the migration is in progress, your Amazon RDS PostgreSQL instance will accumulate Write Ahead Log Segments \(WAL\)\. You should make sure your Amazon RDS instance has sufficient storage capacity for these segments\. 
+We recommend using this functionality to migrate from an Amazon RDS PostgreSQL DB instance to an Aurora PostgreSQL DB cluster by creating an Aurora Read Replica of your source PostgreSQL DB instance\. When the replica lag between the PostgreSQL DB instance and the Aurora Read Replica is 0, you can promote the Aurora Read Replica to be a standalone Aurora PostgreSQL DB cluster which can accept write loads\. Be prepared for migration to take a while, roughly several hours per terabyte \(TB\) of data\. While the migration is in progress, your Amazon RDS PostgreSQL instance will accumulate Write Ahead Log Segments \(WAL\)\. You should make sure your Amazon RDS instance has sufficient storage capacity for these segments\. 
 
 For a list of regions where Aurora is available, see [Availability for Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md#Aurora.AuroraPostgreSQL.Availability)\.
 
@@ -74,19 +74,15 @@ aws rds create-db-cluster --db-cluster-identifier sample-replica-cluster --engin
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command with the following parameters\.
-
 + `--db-cluster-identifier`
 
   The name of your DB cluster\.
-
 + `--db-instance-class`
 
   The name of the DB instance class to use for your primary instance\.
-
 + `--db-instance-identifier`
 
   The name of your primary instance\.
-
 + `--engine aurora-postgresql`
 
   The database engine to use\.
@@ -118,23 +114,18 @@ aws rds create-db-instance \
 To create an Aurora Read Replica from a source PostgreSQL DB instance, use the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) and [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API commands to create a new Aurora DB cluster and primary instance\. Do not specify the master username, master password, or database name as the Aurora Read Replica uses the same master username, master password, and database name as the source PostgreSQL DB instance\. 
 
 You can create a new Aurora DB cluster for an Aurora Read Replica from a source PostgreSQL DB instance by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) Amazon RDS API command with the following parameters:
-
 + `DBClusterIdentifier`
 
   The name of the DB cluster to create\.
-
 + `DBSubnetGroupName`
 
   The name of the DB subnet group to associate with this DB cluster\.
-
 + `Engine=aurora-postgresql`
 
   The name of the engine to use\.
-
 + `ReplicationSourceIdentifier`
 
   The Amazon Resource Name \(ARN\) for the source PostgreSQL DB instance\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\. 
-
 + `VpcSecurityGroupIds`
 
   The list of EC2 VPC security groups to associate with this DB cluster\.
@@ -164,19 +155,15 @@ https://rds.us-east-1.amazonaws.com/
 If you use the console to create an Aurora Read Replica, then Amazon RDS automatically creates the primary instance for your DB cluster Aurora Read Replica\. If you use the AWS CLI to create an Aurora Read Replica, you must explicitly create the primary instance for your DB cluster\. The primary instance is the first instance that is created in a DB cluster\.
 
 You can create a primary instance for your DB cluster by using the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) Amazon RDS API command with the following parameters:
-
 + `DBClusterIdentifier`
 
   The name of your DB cluster\.
-
 + `DBInstanceClass`
 
   The name of the DB instance class to use for your primary instance\.
-
 + `DBInstanceIdentifier`
 
   The name of your primary instance\.
-
 + `Engine=aurora-postgresql`
 
   The name of the engine to use\.
@@ -241,7 +228,5 @@ aws rds promote-read-replica-db-cluster ^
 ```
 
 ## Related Topics<a name="AuroraPostgreSQL.Migrating.RDSPostgreSQL.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

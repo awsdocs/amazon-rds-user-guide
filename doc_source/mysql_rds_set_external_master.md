@@ -70,11 +70,8 @@ After calling `mysql.rds_set_external_master` to configure an Amazon RDS DB inst
 When `mysql.rds_set_external_master` is called, Amazon RDS records the time, user, and an action of "set master" in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 
 The `mysql.rds_set_external_master` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Examples<a name="mysql_rds_set_external_master-examples"></a>
@@ -93,9 +90,6 @@ call mysql.rds_set_external_master(
 ```
 
 ## Related Topics<a name="mysql_rds_set_external_master.related"></a>
-
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
-
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

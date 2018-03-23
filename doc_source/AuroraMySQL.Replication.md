@@ -6,6 +6,8 @@ Aurora Replicas are independent endpoints in an Aurora DB cluster, best used for
 
 Aurora Replicas work well for read scaling because they are fully dedicated to read operations on your cluster volume\. Write operations are managed by the primary instance\. Because the cluster volume is shared among all instances in your Aurora MySQL DB cluster, no additional work is required to replicate a copy of the data for each Aurora Replica\. In contrast, MySQL Read Replicas must replay, on a single thread, all write operations from the master DB instance to their local data store\. This limitation can affect the ability of MySQL Read Replicas to support large volumes of read traffic\.
 
+With Aurora MySQL, when an Aurora Replica is deleted, its instance endpoint is removed immediately, and the Aurora Replica is removed from the reader endpoint\. If there are statements executing on the Aurora Replica that is being deleted, there is a five minute grace period\. Existing statements can finish gracefully during the grace period\. When the grace period ends, the Aurora Replica is shut down and deleted\.
+
 **Important**  
 Aurora Replicas for Aurora MySQL always use the `REPEATABLE READ` default transaction isolation level for operations on InnoDB tables\. You can use the `SET TRANSACTION ISOLATION LEVEL` command to change the transaction level only for the primary instance of an Aurora MySQL DB cluster\. This restriction avoids user\-level locks on Aurora Replicas, and allows Aurora Replicas to scale to support thousands of active user connections while still keeping replica lag to a minimum\.
 
@@ -15,15 +17,12 @@ DDL statements executed on the primary instance might interrupt database connect
 ## Replication Options for Amazon Aurora MySQL<a name="AuroraMySQL.Replication.Options"></a>
 
 You can set up replication between any of the following options:
-
 + Two Aurora MySQL DB clusters in different AWS regions, by creating an Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region\.
 
   For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
-
 + Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
 
   For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\.
-
 + An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.
 
    Typically, this approach is used for migration to Aurora MySQL, rather than for ongoing replication\. For more information, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using a DB Snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.

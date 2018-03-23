@@ -1,11 +1,8 @@
 # MariaDB on Amazon RDS<a name="CHAP_MariaDB"></a>
 
 Amazon RDS supports DB instances running several versions of MariaDB\. You can use the following major versions: 
-
 + MariaDB 10\.2
-
 + MariaDB 10\.1
-
 + MariaDB 10\.0
 
 For more information about minor version support, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\. 
@@ -40,9 +37,7 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Log Files** You can access the log files for your SQL Server DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md) [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
 There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
-
 + [Appendix: Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
-
 + [Appendix: MariaDB on Amazon RDS SQL Reference](Appendix.MariaDB.SQLRef.md)
 
 ## MariaDB on Amazon RDS Versions<a name="MariaDB.Concepts.VersionMgmt"></a>
@@ -60,44 +55,27 @@ Amazon RDS currently supports the following versions of MariaDB:
 | MariaDB 10\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 
-The Amazon RDS deprecation policy for MariaDB includes the following:
-
-+ We intend to support major MariaDB version releases, starting with MariaDB 10\.0\.17, for 3 years after they are initially supported by Amazon RDS\. 
-
-+ We intend to support minor MariaDB version releases for at least 1 year after they are initially supported by Amazon RDS\. 
-
-+ After a MariaDB major or minor version has been deprecated, we expect to provide a three\-month grace period for you to upgrade your DB instance to a supported version\. After that, your DB instance is upgraded automatically during your scheduled maintenance window\. 
+For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](https://aws.amazon.com/rds/faqs/)\.
 
 ## Version and Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
 ### MariaDB 10\.2 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-2"></a>
 
 Amazon RDS supports the following versions of MariaDB 10\.2: 
-
++ 10\.2\.12 \(supported in all AWS Regions\)
 + 10\.2\.11 \(supported in all AWS Regions\)
 
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.2 or later: 
-
 + ALTER USER
-
 + Common Table Expressions
-
 + Compressing Events to Reduce Size of the Binary Log
-
 + CREATE USER — new options for limiting resource usage and TLS/SSL
-
 + EXECUTE IMMEDIATE
-
 + Flashback
-
 + InnoDB — now the default storage engine instead of XtraDB
-
 + InnoDB — set the buffer pool size dynamically
-
 + JSON Functions
-
 + Window Functions
-
 + WITH
 
 For a list of all MariaDB 10\.2 features and their documentation, see [Changes & Improvements in MariaDB 10\.2](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-102/) and [Release Notes \- MariaDB 10\.2 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-102-series/) on the MariaDB website\. 
@@ -107,21 +85,15 @@ For a list of unsupported features, see [Features Not Supported](#MariaDB.Concep
 ### MariaDB 10\.1 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-1"></a>
 
 Amazon RDS supports the following versions of MariaDB 10\.1: 
-
++ 10\.1\.31 \(supported in all AWS Regions\)
 + 10\.1\.26 \(supported in all AWS Regions\)
-
 + 10\.1\.23 \(supported in all AWS Regions\)
-
 + 10\.1\.19 \(supported in all AWS Regions\)
-
 + 10\.1\.14 \(supported in all AWS Regions except us\-east\-2\)
 
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.1 or later: 
-
 + Optimistic in\-order parallel replication
-
 + Page Compression
-
 + XtraDB data scrubbing and defragmentation
 
 For a list of all MariaDB 10\.1 features and their documentation, see [Changes & Improvements in MariaDB 10\.1](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-101/) and [Release Notes \- MariaDB 10\.1 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-101-series/) on the MariaDB website\. 
@@ -131,15 +103,11 @@ For a list of unsupported features, see [Features Not Supported](#MariaDB.Concep
 ### MariaDB 10\.0 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-0"></a>
 
 Amazon RDS supports the following versions of MariaDB 10\.0: 
-
++ 10\.0\.34 \(supported in all AWS Regions\)
 + 10\.0\.32 \(supported in all AWS Regions\)
-
 + 10\.0\.31 \(supported in all AWS Regions\)
-
 + 10\.0\.28 \(supported in all AWS Regions\)
-
 + 10\.0\.24 \(supported in all AWS Regions\)
-
 + 10\.0\.17 \(supported in all AWS Regions except us\-east\-2, ca\-central\-1, eu\-west\-2\)
 
 For a list of all MariaDB 10\.0 features and their documentation, see [Changes & Improvements in MariaDB 10\.0](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-100/) and [Release Notes \- MariaDB 10\.0 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-100-series/) on the MariaDB website\. 
@@ -149,23 +117,14 @@ For a list of unsupported features, see [Features Not Supported](#MariaDB.Concep
 ## Features Not Supported<a name="MariaDB.Concepts.FeatureNonSupport"></a>
 
 The following MariaDB features are not supported on Amazon RDS:
-
 + HandlerSocket
-
 + JSON table type
-
 + MariaDB ColumnStore
-
 + MariaDB Galera Cluster
-
 + Multi\-source Replication
-
 + Password validation plugin, `simple_password_check`, and `cracklib_password_check` 
-
 + Replication Filters
-
 + Storage engine\-specific object attributes, as described in [Engine\-defined New Table/Field/Index Attributes](http://mariadb.com/kb/en/mariadb/engine-defined-new-tablefieldindex-attributes/)\.
-
 + Table and Tablespace Encryption
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. 
@@ -179,65 +138,37 @@ Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 ## MariaDB Security on Amazon RDS<a name="MariaDB.Concepts.UsersAndPrivileges"></a>
 
 Security for Amazon RDS MariaDB DB instances is managed at three levels:
-
 + AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
-
 + When you create a DB instance, you use either a VPC security group or a DB security group to control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance\. These connections can be made using Secure Socket Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to the DB instance\.
-
 + Once a connection has been opened to a MariaDB DB instance, authentication of the login and permissions are applied the same way as in a stand\-alone instance of MariaDB\. Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in stand\-alone databases, as does directly modifying database schema tables\.
 
  When you create an Amazon RDS DB instance, the master user has the following default privileges: 
-
 +  `alter` 
-
 +  `alter routine` 
-
 +  `create` 
-
 +  `create routine` 
-
 +  `create temporary tables` 
-
 +  `create user` 
-
 +  `create view` 
-
 +  `delete` 
-
 +  `drop` 
-
 +  `event` 
-
 +  `execute` 
-
 +  `grant option` 
-
 +  `index` 
-
 +  `insert` 
-
 +  `lock tables` 
-
 +  `process` 
-
 +  `references` 
-
 +  `reload` 
 
   This privilege is limited on Amazon RDS MariaDB DB instances\. It doesn't grant access to the FLUSH LOGS or FLUSH TABLES WITH READ LOCK operations\.
-
 +  `replication client` 
-
 +  `replication slave` 
-
 +  `select` 
-
 +  `show databases` 
-
 +  `show view` 
-
 +  `trigger` 
-
 +  `update` 
 
 For more information about these privileges, see [User Account Management](http://mariadb.com/kb/en/mariadb/grant/) in the MariaDB documentation\.
@@ -257,8 +188,14 @@ Amazon RDS creates an SSL certificate and installs the certificate on the DB ins
 
 The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
 
-**Note**  
-MariaDB 10\.2 now uses OpenSSL for secure connections\.
+MariaDB uses yaSSL for secure connections in the following versions:
++ MariaDB version 10\.1\.26 and earlier
++ MariaDB version 10\.0\.32 and earlier
+
+MariaDB uses OpenSSL for secure connections in the following versions:
++ MariaDB version 10\.2\.11 and later
++ MariaDB version 10\.1\.31 and later
++ MariaDB version 10\.0\.34 and later
 
 To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
 
@@ -314,11 +251,8 @@ For more information, see [Events](http://mariadb.com/kb/en/mariadb/stored-progr
 ### Dumping and Loading the Buffer Pool on Demand<a name="MariaDB.Concepts.XtraDBCacheWarming.OnDemand"></a>
 
 You can save and load the cache on demand using the following stored procedures:
-
 + To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
-
 + To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql_rds_innodb_buffer_pool_load_now.md) stored procedure\.
-
 + To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql_rds_innodb_buffer_pool_load_abort.md) stored procedure\.
 
 ## Database Parameters for MariaDB<a name="MariaDB.Concepts.Parameters"></a>
