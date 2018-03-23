@@ -57,11 +57,8 @@ For Windows:
 ## API<a name="USER_PIT.API"></a>
 
 To restore a DB instance to a specified time, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) function with the following parameters:
-
 + `SourceDBInstanceIdentifier = mysourcedbinstance`
-
 + `TargetDBInstanceIdentifier = mytargetdbinstance`
-
 + `RestoreTime = 2013-10-14T23:45:00.000Z`
 
 **Example**  
@@ -83,9 +80,6 @@ To restore a DB instance to a specified time, call the Amazon RDS API [http://do
 ```
 
 ## Related Topics<a name="USER_PIT.Related"></a>
-
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
-
 + [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)

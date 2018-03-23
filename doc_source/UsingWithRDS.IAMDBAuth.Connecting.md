@@ -10,6 +10,6 @@ Alternatively, you can use the AWS SDK for Java to manually create and manually 
 
 Once you have a signed IAM authentication token, you can connect to an Amazon RDS DB instance or Aurora DB cluster\. Following, you can find out how to do this using either the `mysql` command line tool or the AWS SDK for Java\.
 
-
+**Topics**
 + [Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
 + [AWS SDK for Java](UsingWithRDS.IAMDBAuth.Connecting.Java.md)

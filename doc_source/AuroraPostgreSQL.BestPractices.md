@@ -5,15 +5,10 @@ This topic includes information on best practices and options for using or migra
 ## Fast Failover with Amazon Aurora PostgreSQL<a name="AuroraPostgreSQL.BestPractices.FastFailover"></a>
 
 There are several things you can do to make a failover perform faster with Aurora PostgreSQL\. This section discusses each of the following ways:
-
 + Aggressively set TCP keepalives to ensure that longer running queries that are waiting for a server response will be killed before the read timeout expires in the event of a failure\.
-
 + Set the Java DNS caching timeouts aggressively to ensure the Aurora Read\-Only Endpoint can properly cycle through read\-only nodes on subsequent connection attempts\.
-
 + Set the timeout variables used in the JDBC connection string as low as possible\. Use separate connection objects for short and long running queries\.
-
 + Use the provided read and write Aurora endpoints to establish a connection to the cluster\.
-
 + Use RDS APIs to test application response on server side failures and use a packet dropping tool to test application response for client\-side failures\.
 
 ### Setting TCP Keepalives Parameters<a name="AuroraPostgreSQL.BestPractices.FastFailover.TCPKeepalives"></a>
@@ -23,15 +18,12 @@ The TCP keepalive process is simple: when you set up a TCP connection, you assoc
 Enabling TCP keepalive parameters and setting them aggressively ensures that if your client is no longer able to connect to the database, then any active connections are quickly closed\. This action allows the application to react appropriately, such as by picking a new host to connect to\.
 
 The following TCP keepalive parameters need to be set:
-
 + `tcp_keepalive_time` controls the time, in seconds, after which a keepalive packet is sent when no data has been sent by the socket \(ACKs are not considered data\)\. We recommend the following setting: 
 
    `tcp_keepalive_time = 1`
-
 + `tcp_keepalive_intvl` controls the time, in seconds, between sending subsequent keepalive packets after the initial packet is sent \(set using the `tcp_keepalive_time` parameter\)\. We recommend the following setting:
 
   `tcp_keepalive_intvl = 1`
-
 + `tcp_keepalive_probes` is the number of unacknowledged keepalive probes that occur before the application is notified\. We recommend the following setting: 
 
   `tcp_keepalive_probes = 5`
@@ -106,21 +98,14 @@ my-node4.cksc6xlmwcyw.us-east-1-beta.rds.amazonaws.com:5432
 The benefit of this approach is that the PostgreSQL JDBC connection driver will loop through all nodes on this list to find a valid connection, whereas when using the Aurora endpoints only two nodes will be tried per connection attempt\. The downside of using DB instance nodes is that if you add or remove nodes from your cluster and the list of instance endpoints becomes stale, the connection driver may never find the correct host to connect to\.
 
 Setting the following parameters aggressively helps ensure that your application doesn't wait too long to connect to any one host\. 
-
 + `loginTimeout` \- Controls how long your application waits to login to the database *after* a socket connection has been established\.
-
 + `connectTimeout` \- Controls how long the socket waits to establish a connection to the database\.
 
 Other application parameters can be modified to speed up the connection process, depending on how aggressive you want your application to be\.
-
 + `cancelSignalTimeout` \- In some applications, you may want to send a "best effort" cancel signal on a query that has timed out\. If this cancel signal is in your failover path, you should consider setting it aggressively to avoid sending this signal to a dead host\.
-
 + `socketTimeout` \- This parameter controls how long the socket waits for read operations\. This parameter can be used as a global "query timeout" to ensure no query waits longer than this value\. A good practice is to have one connection handler that runs short lived queries and sets this value lower, and to have another connection handler for long running queries with this value set much higher\. Then, you can rely on TCP keepalive parameters to kill long running queries if the server goes down\.
-
 + `tcpKeepAlive` \- Enable this parameter to ensure the TCP keepalive parameters that you set are respected\.
-
 + `targetServerType`\- This parameter can be used to control whether the driver connects to a read \(slave\) or write \(master\) node\. Possible values are: `any`, `master`, `slave `and `preferSlave`\. The `preferSlave` value attempts to establish a connection to a reader first but falls back and connects to the writer if no reader connection can be established\.
-
 + `loadBalanceHosts` \- When set to `true`, this parameter has the application connect to a random host chosen from a list of candidate hosts\.
 
 #### Other Options for Obtaining The Host String<a name="AuroraPostgreSQL.BestPractices.FastFailover.Configuring.HostString"></a>
@@ -209,7 +194,6 @@ For availability purposes, a good practice would be to default to using the [Aur
 In all cases you must have a DB Cluster with >= 2 DB instances in it\.
 
 From the server side, certain APIs can cause an outage that can be used to test how your applications responds:
-
 + [FailoverDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html) \- Will attempt to promote a new DB Instance in your DB Cluster to writer
 
   ```
@@ -225,13 +209,9 @@ From the server side, certain APIs can cause an outage that can be used to test 
       rdsClient.failoverDBCluster(request);
   }
   ```
-
 + [RebootDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html)\- Failover is not guaranteed in this API\. It will shutdown the database on the writer, though, and can be used to test how your application responds to connections dropping \(note that the **ForceFailover **parameter is not applicable for Aurora engines and instead should use the FailoverDBCluster API\)
-
 + [ModifyDBCluster ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html)\- Modifying the **Port **will cause an outage when the nodes in the cluster begin listening on a new port\. In general your application can respond to this failure by ensuring that only your application controls port changes and can appropriately update the endpoints it depends on, by having someone manually update the port when they make modifications at the API level, or by querying the RDS API in your application to determine if the port has changed\.
-
 + [ModifyDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\- Modifying the **DBInstanceClass** will cause an outage
-
 + [DeleteDBInstance ](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)\- Deleting the master/writer will cause a new DB Instance to be promoted to writer in your DB Cluster
 
 From the application/client side, if using Linux, you can test how the application responds to sudden packet drops based on port, host, or if tcp keepalive packets are not sent or received by using iptables\.
@@ -340,5 +320,4 @@ public class FastFailoverDriverManager {
 ```
 
 ## Related Topics<a name="AuroraPostgreSQL.BestPractices.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

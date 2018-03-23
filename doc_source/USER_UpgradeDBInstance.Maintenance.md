@@ -92,9 +92,7 @@ The maintenance window and the backup window for the DB instance cannot overlap\
 ### CLI<a name="AdjustingTheMaintenanceWindow.CLI"></a>
 
 To adjust the preferred maintenance window, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters:
-
 + `--db-instance-identifier`
-
 + `--preferred-maintenance-window`
 
 **Example**  
@@ -117,9 +115,7 @@ aws rds modify-db-instance ^
 ### API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
 To adjust the preferred maintenance window, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters:
-
 + `DBInstanceIdentifier = mydbinstance`
-
 + `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
 
 **Example**  
@@ -171,9 +167,7 @@ The Aurora DB cluster maintenance window should fall at the time of lowest usage
 ### CLI<a name="AdjustingTheMaintenanceWindow.Aurora.CLI"></a>
 
 To adjust the preferred DB cluster maintenance window, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-cluster.html) command with the following parameters:
-
 + `--db-cluster-identifier`
-
 + `--preferred-maintenance-window`
 
 **Example**  
@@ -196,9 +190,7 @@ aws rds modify-db-cluster ^
 ### API<a name="AdjustingTheMaintenanceWindow.Aurora.API"></a>
 
 To adjust the preferred DB cluster maintenance window, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBCluster.html) action with the following parameters:
-
 + `DBClusterIdentifier = my-cluster`
-
 + `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
 
 **Example**  
@@ -220,7 +212,5 @@ The following code example sets the maintenance window to Tuesdays from 4:00\-4:
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.Maintenance.Related"></a>
-
 + [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
-
 + [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)

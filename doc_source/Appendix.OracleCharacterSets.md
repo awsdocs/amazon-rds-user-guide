@@ -44,19 +44,12 @@ Setting the NLS\_LANG environment parameter in your client’s environment is th
 |  ZHT32EUC  |  EUC 32\-bit Traditional Chinese  | 
 
 You can also set the following National Language Support \(NLS\) initialization parameters at the instance level for an Oracle DB instance in Amazon RDS:
-
 + NLS\_DATE\_FORMAT
-
 + NLS\_LENGTH\_SEMANTICS
-
 + NLS\_NCHAR\_CONV\_EXCP
-
 + NLS\_TIME\_FORMAT
-
 + NLS\_TIME\_TZ\_FORMAT
-
 + NLS\_TIMESTAMP\_FORMAT
-
 + NLS\_TIMESTAMP\_TZ\_FORMAT
 
 For information about modifying instance parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.

@@ -101,9 +101,7 @@ To know when the modification is in effect, call `describe-db-instances` for the
 ### API<a name="USER_WorkingWithAutomatedBackups.Disabling.API"></a>
 
 To disable automated backups immediately, call the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
-
 + `DBInstanceIdentifier = mydbinstance`
-
 + `BackupRetentionPeriod = 0`
 
 **Example**  
@@ -151,11 +149,8 @@ To enable automated backups immediately, use the AWS CLI [http://docs.aws.amazon
 In this example, we will enable automated backups by setting the backup retention period to 3 days\.
 
 Include the following parameters:
-
 + `--db-instance-identifier`
-
 + `--backup-retention-period`
-
 + `--apply-immediately` or `--no-apply-immediately`
 
 **Example**  
@@ -183,11 +178,8 @@ To enable automated backups immediately, use the AWS CLI [http://docs.aws.amazon
 In this example, we will enable automated backups by setting the backup retention period to 3 days\.
 
 Include the following parameters:
-
 + `DBInstanceIdentifier`
-
 + `BackupRetentionPeriod`
-
 + `ApplyImmediately = true`
 
 **Example**  
@@ -208,11 +200,8 @@ Include the following parameters:
 ## Automated Backups with Unsupported MySQL Storage Engines<a name="Overview.BackupDeviceRestrictions"></a>
 
 For the MySQL DB engine, automated backups are only supported for the InnoDB storage engine; use of these features with other MySQL storage engines, including MyISAM, may lead to unreliable behavior while restoring from backups\. Specifically, since storage engines like MyISAM do not support reliable crash recovery, your tables can be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
-
 + To convert existing MyISAM tables to InnoDB tables, you can use alter table command\. For example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
-
 + If you choose to use MyISAM, you can attempt to manually repair tables that become damaged after a crash by using the REPAIR command \(see: [http://dev\.mysql\.com/doc/refman/5\.5/en/repair\-table\.html](http://dev.mysql.com/doc/refman/5.5/en/repair-table.html)\)\. However, as noted in the MySQL documentation, there is a good chance that you will not be able to recover all your data\. 
-
 + If you want to take a snapshot of your MyISAM tables prior to restoring, follow these steps: 
 
   1. Stop all activity to your MyISAM tables \(that is, close all sessions\)\. 
@@ -236,13 +225,9 @@ For the MySQL DB engine, automated backups are only supported for the InnoDB sto
 ## Automated Backups with Unsupported MariaDB Storage Engines<a name="Overview.BackupDeviceRestrictionsMariaDB"></a>
 
 For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine \(version 10\.2 and later\) and XtraDB storage engine \(versions 10\.0 and 10\.1\)\. Use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the XtraDB storage engine\. 
-
 + To convert existing Aria tables to InnoDB tables, you can use ALTER TABLE command\. For example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
-
 + To convert existing Aria tables to XtraDB tables, you can use ALTER TABLE command\. For example: `ALTER TABLE table_name ENGINE=xtradb, ALGORITHM=COPY;` 
-
 + If you choose to use Aria, you can attempt to manually repair tables that become damaged after a crash by using the REPAIR TABLE command\. For more information, see [http://mariadb\.com/kb/en/mariadb/repair\-table/](http://mariadb.com/kb/en/mariadb/repair-table/)\. 
-
 + If you want to take a snapshot of your Aria tables prior to restoring, follow these steps: 
 
   1. Stop all activity to your Aria tables \(that is, close all sessions\)\.
@@ -252,5 +237,4 @@ For the MariaDB DB engine, automated backups are only supported with the InnoDB 
   1. Create a snapshot of your DB instance\. When the snapshot has completed, release the locks and resume activity on the Aria tables\. These steps force Aria to flush data stored in memory to disk, thereby ensuring a clean start when you restore from a DB snapshot\. 
 
 ## Related Topics<a name="USER_WorkingWithAutomatedBackups.related"></a>
-
 +  [Restoring a DB Instance to a Specified Time](USER_PIT.md) 

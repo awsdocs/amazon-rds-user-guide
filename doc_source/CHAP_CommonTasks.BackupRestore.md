@@ -2,7 +2,7 @@
 
 This section shows how to back up and restore a DB instance\. 
 
-
+**Topics**
 + [Working With Backups](USER_WorkingWithAutomatedBackups.md)
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)

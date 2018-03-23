@@ -11,15 +11,10 @@ You can't copy a DB cluster snapshot across regions and accounts in a single ste
 ## Limitations<a name="USER_CopySnapshot.Limitations"></a>
 
 The following are some limitations when you copy snapshots: 
-
 + You can't copy a snapshot to or from the following regions: AWS GovCloud \(US\), China \(Beijing\)\. 
-
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy may fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
-
 + You can have up to five snapshot copy requests in progress to a single destination region per account\.
-
 + You can't copy a DB snapshot across regions if it was created from an Oracle DB instance that is using AWS CloudHSM Classic to store TDE Keys\. 
-
 + Depending on the regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. If there is a large number of cross\-region snapshot copy requests from a given source AWS Region, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 ## Snapshot Retention<a name="USER_CopySnapshot.Retention"></a>
@@ -71,9 +66,6 @@ If your source database engine is MariaDB, Microsoft SQL Server, MySQL, Oracle, 
 If your source database engine is Aurora, then your snapshot is a DB cluster snapshot\. For instructions on how to copy a db cluster snapshot, see [Copying a DB Cluster Snapshot](USER_CopyDBClusterSnapshot.CrossRegion.md)\. 
 
 ## Related Topics<a name="USER_CopySnapshot.Related"></a>
-
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
-
 + [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

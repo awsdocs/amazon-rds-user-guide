@@ -1,6 +1,6 @@
 # Using Amazon RDS Event Notification<a name="USER_Events"></a>
 
-
+**Topics**
 + [Amazon RDS Event Categories and Event Messages](#USER_Events.Messages)
 + [Subscribing to Amazon RDS Event Notification](#USER_Events.Subscribing)
 + [Listing Your Amazon RDS Event Notification Subscriptions](#USER_Events.ListSubscription)
@@ -215,9 +215,7 @@ The Amazon RDS console indicates that the subscription is being created\.
 ### CLI<a name="USER_Events.Subscribing.CLI"></a>
 
 To subscribe to RDS event notification, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html) command\. Include the following required parameters:
-
 + `--subscription-name`
-
 + `--sns-topic-arn`
 
 **Example**  
@@ -241,9 +239,7 @@ aws rds create-event-subscription ^
 ### API<a name="USER_Events.Subscribing.API"></a>
 
 To subscribe to Amazon RDS event notification, call the Amazon RDS API function [ `CreateEventSubscription`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html)\. Include the following required parameters: 
-
 + `SubscriptionName`
-
 + `SnsTopicArn`
 
 **Example**  
@@ -352,7 +348,6 @@ After you have created a subscription, you can change the subscription name, sou
 ### CLI<a name="USER_Events.Modifying.CLI"></a>
 
 To modify an Amazon RDS event notification subscription, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-event-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-event-subscription.html) command\. Include the following required parameter:
-
 + `--subscription-name`
 
 **Example**  
@@ -375,7 +370,6 @@ For Windows:
 ### API<a name="USER_Events.Modifying.API"></a>
 
 To modify an Amazon RDS event, call the Amazon RDS API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html)\. Include the following required parameter:
-
 + `SubscriptionName`
 
 **Example**  
@@ -408,9 +402,7 @@ You can easily add or remove source identifiers using the Amazon RDS console by 
 ### CLI<a name="USER_Events.AddingSource.CLI"></a>
 
 To add a source identifier to an Amazon RDS event notification subscription, use the AWS CLI [http://docs.aws.amazon.com/](http://docs.aws.amazon.com/) command\. Include the following required parameters:
-
 + `--subscription-name`
-
 + `--source-identifier`
 
 **Example**  
@@ -433,9 +425,7 @@ For Windows:
 ### API<a name="USER_Events.AddingSource.API"></a>
 
 To add a source identifier to an Amazon RDS event notification subscription, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddSourceIdentifierToSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddSourceIdentifierToSubscription.html)\. Include the following required parameters:
-
 + `SubscriptionName`
-
 + `SourceIdentifier`
 
 **Example**  
@@ -466,9 +456,7 @@ You can easily add or remove source identifiers using the Amazon RDS console by 
 ### CLI<a name="USER_Events.RemovingSource.CLI"></a>
 
 To remove a source identifier from an Amazon RDS event notification subscription, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/remove-source-identifier-from-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/remove-source-identifier-from-subscription.html) command\. Include the following required parameters:
-
 + `--subscription-name`
-
 + `--source-identifier`
 
 **Example**  
@@ -491,9 +479,7 @@ For Windows:
 ### API<a name="USER_Events.RemovingSource.API"></a>
 
 To remove a source identifier from an Amazon RDS event notification subscription, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveSourceIdentifierFromSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveSourceIdentifierFromSubscription.html) command\. Include the following required parameters:
-
 + `SubscriptionName`
-
 + `SourceIdentifier`
 
 **Example**  
@@ -575,7 +561,6 @@ You can delete a subscription when you no longer need it\. All subscribers to th
 ### CLI<a name="USER_Events.Deleting.CLI"></a>
 
 To delete an Amazon RDS event notification subscription, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/delete-event-subscription.html](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-event-subscription.html) command\. Include the following required parameter:
-
 + `--subscription-name`
 
 **Example**  
@@ -588,7 +573,6 @@ The following example deletes the subscription `myrdssubscription`\.
 ### API<a name="USER_Events.Deleting.API"></a>
 
 To delete an Amazon RDS event notification subscription, use the RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteEventSubscription.html) command\. Include the following required parameter:
-
 + `SubscriptionName`
 
 **Example**  

@@ -1,9 +1,7 @@
 # Document History<a name="WhatsNew"></a>
 
 The following table describes the important changes to the documentation since the last release of the* Amazon Relational Database Service User Guide\.*
-
-+ **Latest documentation update: **March 13, 2018
-
++ **Latest documentation update: **March 21, 2018
 + **Current API version: **2014\-10\-31
 
 
@@ -11,6 +9,7 @@ The following table describes the important changes to the documentation since t
 
 | Change | Description | Date Changed | 
 | --- | --- | --- | 
+| MariaDB 10\.2\.12, 10\.1\.31, and 10\.0\.34 |  You can now create Amazon RDS DB instances running MariaDB versions 10\.2\.12, 10\.1\.31, and 10\.0\.34\. For more information, see [MariaDB on Amazon RDS Versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)\.   | March 21, 2018 | 
 | Aurora PostgreSQL Support for new regions |  Aurora PostgreSQL is now available in the EU \(London\) and Asia Pacific \(Singapore\) regions\. For more information, see [Availability for Amazon Aurora PostgreSQL](Aurora.AuroraPostgreSQL.md#Aurora.AuroraPostgreSQL.Availability)\.   | March 13, 2018 | 
 | MySQL 5\.7\.21, 5\.6\.39, and 5\.5\.59 |  You can now create Amazon RDS DB instances running MySQL versions 5\.7\.21, 5\.6\.39, and 5\.5\.59\. For more information, see [MySQL on Amazon RDS Versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.   | March 9, 2018 | 
 | Amazon RDS for Oracle now supports Oracle REST Data Services |  Amazon RDS for Oracle supports Oracle REST Data Services as part of the APEX option\. For more information, see [Oracle Application Express](Appendix.Oracle.Options.APEX.md)\.   | March 9, 2018 | 

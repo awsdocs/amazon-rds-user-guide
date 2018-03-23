@@ -1,9 +1,7 @@
 # Upgrading the Microsoft SQL Server DB Engine<a name="USER_UpgradeDBInstance.SQLServer"></a>
 
 When Amazon RDS supports a new version of Microsoft SQL Server, you can upgrade your DB instances to the new version\. Amazon RDS supports the following upgrades to a Microsoft SQL Server DB instance: 
-
 + Major Version Upgrades
-
 + Minor Version Upgrades
 
 You must perform all upgrades manually, and an outage occurs while the upgrade takes place\. The time for the outage varies based on your engine version and the size of your DB instance\. 
@@ -42,11 +40,8 @@ Currently, you can't upgrade your existing DB instance to SQL Server 2017\.
 You can use Microsoft SQL Server database compatibility levels to adjust some database behaviors to mimic previous versions of SQL Server\. For more information, see [Compatibility Level](https://msdn.microsoft.com/en-us/library/bb510680.aspx) in the Microsoft documentation\. 
 
 The following are the compatibility levels of the SQL Server versions: 
-
 + SQL Server 2016 – compatibility level 130
-
 + SQL Server 2014 – compatibility level 120
-
 + SQL Server 2012 – compatibility level 110
 
 When you upgrade your DB instance, all existing databases remain at their original compatibility level\. For example, if you upgrade from SQL Server 2012 to SQL Server 2014, all existing databases have a compatibility level of 110\. Any new database created after the upgrade have compatibility level 120\. 
@@ -61,7 +56,7 @@ You can change the compatibility level of a database by using the ALTER DATABASE
 
 Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server with Database Mirroring](USER_SQLServerMultiAZ.md)\. 
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. The primary and standby instances are upgraded at the same time, and you experience an outage until the upgrade is complete\. 
+If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. Amazon RDS does rolling upgrades\. You have an outage only for the duration of a failover\. 
 
 SQL Server 2014 Enterprise Edition and SQL Server 2016 Enterprise Edition support in\-memory optimization\. Multi\-AZ deployments are not supported on DB instances that have in\-memory optimization enabled\. When you upgrade your DB instance with Multi\-AZ enabled, Amazon RDS automatically disables in\-memory optimization\. 
 
@@ -86,11 +81,8 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 **To test a major version upgrade**
 
 1. Review the upgrade documentation for the new version of the database engine to see if there are compatibility issues that might affect your database or applications: 
-
    +  [Upgrade to SQL Server 2016](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.130%29.aspx) 
-
    +  [Upgrade to SQL Server 2014](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.120%29.aspx) 
-
    +  [Upgrade to SQL Server 2012](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.110%29.aspx) 
 
 1. If your DB instance uses a custom option group, create a new option group compatible with the new version you are upgrading to\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG)\. 
@@ -102,11 +94,8 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 1. Restore the DB snapshot to create a new test DB instance\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
 1. Modify this new test DB instance to upgrade it to the new version, by using one of the following methods: 
-
    + [AWS Management Console](#USER_UpgradeDBInstance.SQLServer.Console)
-
    + [CLI](#USER_UpgradeDBInstance.SQLServer.CLI)
-
    + [API](#USER_UpgradeDBInstance.SQLServer.API)
 
 1. Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. 
@@ -122,19 +111,13 @@ To upgrade a Microsoft SQL Server DB instance by using the AWS Management Consol
 ## CLI<a name="USER_UpgradeDBInstance.SQLServer.CLI"></a>
 
 To upgrade a Microsoft SQL Server DB instance by using the AWS CLI, call the [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
-
 + `--db-instance-identifier` – the name of the db instance\. 
-
 + `--engine-version` – the version number of the database engine to upgrade to\. 
-
 + `--allow-major-version-upgrade` – to upgrade major version\. 
-
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)\. 
-
 + `--option-group-name` – the option group for the upgraded db instance\. 
-
 + `--db-parameter-group-name` – the parameter group for the upgraded db instance\. 
 
 **Example**  
@@ -165,19 +148,13 @@ aws rds modify-db-instance ^
 ## API<a name="USER_UpgradeDBInstance.SQLServer.API"></a>
 
 To upgrade a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
-
 + `DBInstanceIdentifier` – the name of the db instance\. 
-
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
-
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)\. 
-
 + `OptionGroupName` – the option group for the upgraded db instance\. 
-
 + `DBParameterGroupName` – the parameter group for the upgraded db instance\. 
 
 **Example**  
@@ -203,9 +180,6 @@ The following code upgrades a DB instance\. These changes are applied during the
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.SQLServer.Related"></a>
-
 + [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
 + [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
-
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)

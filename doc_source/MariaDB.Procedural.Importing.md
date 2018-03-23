@@ -3,11 +3,8 @@
 Following, you can find information about  methods to import your MariaDB data to an Amazon RDS DB instance running MariaDB\. 
 
 To do an initial data import into a MariaDB DB instance, you can use the procedures documented in [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md), as follows: 
-
 + To move data from an Amazon RDS MySQL DB instance, a MariaDB or MySQL instance in Amazon Elastic Compute Cloud \(Amazon EC2\) in the same VPC as your Amazon RDS MariaDB DB instance, or a small on\-premises instance of MariaDB or MySQL, you can use the procedure documented in [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md)\.
-
 + To move data from a large or production on\-premises instance of MariaDB or MySQL, you can use the procedure documented in [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
-
 + To move data from an instance of MariaDB or MySQL that is in EC2 in a different VPC than your Amazon RDS MariaDB DB instance, or to move data from any data source that can output delimited text files, you can use the procedure documented in [Importing Data From Any Source to a MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.AnySource.md)\.
 
 You can also use AWS Database Migration Service \(AWS DMS\) to import data into an Amazon RDS DB instance\. AWS DMS can migrate databases without downtime and, for many database engines, continue ongoing replication until you are ready to switch over to the target database\. You can migrate to MariaDB from either the same database engine or a different database engine using AWS DMS\. If you are migrating from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see see [ What is AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. 
@@ -15,9 +12,7 @@ You can also use AWS Database Migration Service \(AWS DMS\) to import data into 
 You can configure replication into an Amazon RDS MariaDB DB instance using MariaDB global transaction identifiers \(GTIDs\) when the external instance is MariaDB version 10\.0\.24 or greater, or using binary log coordinates for MySQL instances or MariaDB instances on earlier versions than 10\.0\.24\. Note that MariaDB GTIDs are implemented differently than MySQL GTIDs, which are not supported by Amazon RDS\. 
 
 To configure replication into a MariaDB DB instance, you can use the following procedures: 
-
 + To configure replication into a MariaDB DB instance from an external MySQL instance or an external MariaDB instance running a version prior to 10\.0\.24, you can use the procedure documented in [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
-
 + To configure replication into a MariaDB DB instance from an external MariaDB instance running version 10\.0\.24 or greater, you can use the procedure documented in [Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance](#MariaDB.Procedural.Replication.GTID)\.
 
 **Note**  
@@ -26,11 +21,8 @@ The mysql system database contains authentication and authorization information 
 ## Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
 
 You can set up GTID\-based replication from an external MariaDB instance of version 10\.0\.24 or greater into an Amazon RDS MariaDB DB instance\. Be sure to follow these guidelines when you set up an external replication master and a replica on Amazon RDS:
-
 + Monitor failover events for the Amazon RDS MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-
 + Maintain the binlogs on your master instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your master instance in the event of a failure\.
-
 + Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and Point\-In\-Time Restore, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
 
 **Note**  

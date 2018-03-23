@@ -4,7 +4,7 @@ This section describes the Amazon RDS implementations of some common DBA tasks f
 
 For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
-
+**Topics**
 + [Creating Roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL Database Access](#Appendix.PostgreSQL.CommonDBATasks.Access)
 + [Working with PostgreSQL Parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
@@ -283,7 +283,7 @@ We strongly recommend that you use the autovacuum feature for PostgreSQL databas
 
 For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog entry [Implement an Early Warning System for Transaction ID Wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
-
+**Topics**
 + [Maintenance Work Memory](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
 + [Determining if the Tables in Your Database Need Vacuuming](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming)
 + [Determining Which Tables Are Currently Eligible for Autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables)
@@ -298,9 +298,7 @@ For information on creating a process that warns you about transaction ID wrapar
 One of the most important parameters influencing autovacuum performance is the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter\. This parameter determines how much memory you allocate for autovacuum to use to scan a database table and to hold all the row IDs that are going to be vacuumed\. If you set the value of the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter too low, the vacuum process might have to scan the table multiple times to complete its work, possibly impacting performance\.
 
 When doing calculations to determine the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value, keep in mind two things:
-
 + The default unit is KB for this parameter\.
-
 + The [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter works in conjunction with the [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) parameter\. If you have many small tables, allocate more [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) and less [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)\. If you have large tables \(say, larger than 100 GB\), allocate more memory and fewer workers\. You need to have enough memory allocated to succeed on your biggest table\. Each [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) can use the memory you allocate, so you should make sure the combination of workers and memory equal the total memory you want to allocate\.
 
  In general terms, for large hosts, set the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter to a value between one and two gigabytes\. For extremely large hosts, set the parameter to a value between two and four gigabytes\. The value you set for this parameter should depend on the workload\. Amazon RDS has updated its default for this parameter to be `GREATEST({DBInstanceClassMemory/63963136*1024},65536)`\. 
@@ -331,21 +329,15 @@ postgres   | 1693881061
 When the age of a database hits two billion, TransactionID \(XID\) wraparound occurs and the database will go into read only\. This query can be used to produce a metric and run a few times a day\. By default, autovacuum is set to keep the age of transactions to no more than 200,000,000 \([https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE)\)\.
 
 A sample monitoring strategy might look like this:
-
 + Autovacuum\_freeze\_max\_age is set to 200 million\.
-
 + If a table hits 500 million unvacuumed transactions, a low\-severity alarm is triggered\. This isn’t an unreasonable value, but it could indicate that autovacuum isn’t keeping up\.
-
 + If a table ages to one billion, this should be treated as an actionable alarm\. In general, you want to keep ages closer to autovacuum\_freeze\_max\_age for performance reasons\. Investigation using the following steps is recommended\.
-
 + If a table hits 1\.5 billion unvacuumed transactions, a high\-severity alarm is triggered\. Depending on how quickly your database uses XIDs, this alarm can indicate that the system is running out of time to run autovacuum and that you should consider immediate resolution\.
 
 If a table is constantly breaching these thresholds, you need further modify your autovacuum parameters\. By default, VACUUM \(which has cost\-based delays disabled\) is more aggressive than default autovacuum, but, also more intrusive to the system as a whole\.
 
 We have the following recommendations:
-
 + Be aware and enable a monitoring mechanism so that you are aware of the age of your oldest transactions\.
-
 + For busier tables, perform a manual vacuum freeze regularly during a maintenance window in addition to relying on autovacuum\. For information on performing a manual vacuum freeze, see [ Performing a Manual Vacuum Freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)\.
 
 ### Determining Which Tables Are Currently Eligible for Autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables"></a>
@@ -449,9 +441,7 @@ GREATEST({DBInstanceClassMemory/63963136*1024},65536)
 ```
 
 Short running autovacuum sessions can also indicate problems:
-
 + It can indicate that there aren't enough autovacuum\_max\_workers for your workload\. You will need to indicate the number of workers\.
-
 + It can indicate that there is an index corruption \(autovacuum will crash and restart on the same relation but make no progress\)\. You will need to run a manual vacuum freeze verbose \_\_\_table\_\_\_ to see the exact cause\.
 
 ### Performing a Manual Vacuum Freeze<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze"></a>
@@ -586,15 +576,10 @@ where name in (
 ```
 
 While these all affect autovacuum, some of the most important ones are:
-
 + [Maintenance\_Work\_mem](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE_WORK_MEM)
-
 + [Autovacuum\_freeze\_max\_age](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE)
-
 + [Autovacuum\_max\_workers](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS)
-
 + [Autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
-
 + [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
 #### Table\-Level Parameters<a name="w3ab1c36c41c15c21c10"></a>
@@ -628,11 +613,8 @@ NOTE: PostgreSQL version 9\.4\.7 and later includes improved visibility of autov
 ## Audit Logging for a PostgreSQL DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
 There are several parameters you can set to log activity that occurs on your PostgreSQL DB instance\. These parameters include the following:
-
 +  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
-
 + The `rds.force_admin_logging_level` parameter logs actions by the RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
-
 + The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5000 will write activity to the log that takes more than 5 seconds and will show "vacuum skipped" messages\. For more information on this parameter, see [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
 
 ## Working with the pgaudit Extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
@@ -753,15 +735,10 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
 PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, you can get a good general overview at [PostGIS Introduction](http://workshops.boundlessgeo.com/postgis-intro/introduction.html)\.
 
 You need to perform a bit of setup before you can use the PostGIS extension\. The following list shows what you need to do; each step is described in greater detail later in this section\.
-
 + Connect to the DB instance using the master user name used to create the DB instance\.
-
 + Load the PostGIS extensions\.
-
 + Transfer ownership of the extensions to the`rds_superuser` role\.
-
 + Transfer ownership of the objects to the `rds_superuser` role\.
-
 + Test the extensions\.
 
 ### Step 1: Connect to the DB Instance Using the Master Username Used to Create the DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>

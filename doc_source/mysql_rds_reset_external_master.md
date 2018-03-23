@@ -18,17 +18,11 @@ We recommend that you use Read Replicas to manage replication between two Amazon
 For more information about using replication to import data from an instance of MySQL running external to Amazon RDS, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
 
 The `mysql.rds_reset_external_master` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Related Topics<a name="mysql_rds_reset_external_master.related"></a>
-
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
-
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
-
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

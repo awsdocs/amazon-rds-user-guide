@@ -32,11 +32,8 @@ s3-region://bucket-name/file-prefix
 ```
 
 The path includes the following values:
-
 + `region` \(optional\) – The AWS Region that contains the Amazon S3 bucket to save the data into\. This value is optional\. If you don't specify a `region` value, then Aurora saves your files into Amazon S3 in the same region as your DB cluster\.
-
 + `bucket-name` – The name of the Amazon S3 bucket to save the data into\. Object prefixes that identify a virtual folder path are supported\.
-
 + `file-prefix` – The Amazon S3 object prefix that identifies the files to be saved in Amazon S3\. 
 
 The data files created by the `SELECT INTO OUTFILE S3` statement use the following path, in which *00000* represents a 5\-digit, zero\-based integer number\.
@@ -46,11 +43,8 @@ s3-region://bucket-name/file-prefix.part_00000
 ```
 
 For example, suppose that a `SELECT INTO OUTFILE S3` statement specifies `s3-us-west-2://bucket/prefix` as the path in which to store data files and creates three data files\. The specified Amazon S3 bucket contains the following data files\.
-
 + s3\-us\-west\-2://bucket/prefix\.part\_00000
-
 + s3\-us\-west\-2://bucket/prefix\.part\_00001
-
 + s3\-us\-west\-2://bucket/prefix\.part\_00002
 
 ## Creating a Manifest to List Data Files<a name="AuroraMySQL.Integrating.SaveIntoS3.Manifest"></a>
@@ -120,10 +114,8 @@ export_options:
 ### Parameters<a name="AuroraMySQL.Integrating.SaveIntoS3.Statement.Parameters"></a>
 
 Following, you can find a list of the required and optional parameters used by the `SELECT INTO OUTFILE S3` statement that are specific to Aurora\. 
-
 + **s3\-uri** – Specifies the URI for an Amazon S3 prefix to use\. Specify the URI using the syntax described in [Specifying a Path to an Amazon S3 Bucket](#AuroraMySQL.Integrating.SaveIntoS3.URI)\.
-
-+ **MANIFEST \{ON | OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
++ **MANIFEST \{ON \| OFF\}** – Indicates whether a manifest file is created in Amazon S3\. The manifest file is a JavaScript Object Notation \(JSON\) file that can be used to load data into an Aurora DB cluster with the `LOAD DATA FROM S3 MANIFEST` statement\. For more information about `LOAD DATA FROM S3 MANIFEST`, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 
   If `MANIFEST ON` is specified in the query, the manifest file is created in Amazon S3 after all data files have been created and uploaded\. The manifest file is created using the following path: 
 
@@ -132,25 +124,18 @@ Following, you can find a list of the required and optional parameters used by t
   ```
 
   For more information about the format of the manifest file's contents, see [Creating a Manifest to List Data Files](#AuroraMySQL.Integrating.SaveIntoS3.Manifest)\.
-
-+ **OVERWRITE \{ON | OFF\}** – Indicates whether existing files in the specified Amazon S3 bucket are overwritten\. If `OVERWRITE ON` is specified, existing files that match the file prefix in the URI specified in `s3-uri`are overwritten\. Otherwise, an error occurs\.
++ **OVERWRITE \{ON \| OFF\}** – Indicates whether existing files in the specified Amazon S3 bucket are overwritten\. If `OVERWRITE ON` is specified, existing files that match the file prefix in the URI specified in `s3-uri`are overwritten\. Otherwise, an error occurs\.
 
 You can find more details about other parameters in [SELECT Syntax](https://dev.mysql.com/doc/refman/5.6/en/select.html) and [LOAD DATA INFILE Syntax](https://dev.mysql.com/doc/refman/5.6/en/load-data.html), in the MySQL documentation\.
 
 ### Considerations<a name="AuroraMySQL.Integrating.SaveIntoS3.Considerations"></a>
 
 The number of files written to the Amazon S3 bucket depends on the amount of data selected by the `SELECT INTO OUTFILE S3` statement and the file size threshold for Aurora MySQL\. The default file size threshold is 6 gigabytes \(GB\)\. If the data selected by the statement is less than the file size threshold, a single file is created; otherwise, multiple files are created\. Other considerations for files created by this statement include the following:
-
 + Aurora MySQL guarantees that rows in data files are not split across file boundaries\. For multiple files, the size of every data file except the last is typically close to the file size threshold\. However, occasionally staying under the file size threshold results in a row being split across two data files\. In this case, Aurora MySQL creates a data file that keeps the row intact, but might be larger than the file size threshold\. 
-
 + Because each SELECT statement in Aurora MySQL runs as an atomic transaction, a `SELECT INTO OUTFILE S3` statement that selects a large data set might run for some time\. If the statement fails for any reason, you might need to start over and execute the statement again\. If the statement fails, however, files already uploaded to Amazon S3 remain in the specified Amazon S3 bucket\. You can use another statement to upload the remaining data instead of starting over again\.
-
 + If the amount of data to be selected is large \(more than 25 GB\), we recommend that you use multiple `SELECT INTO OUTFILE S3` statements to save the data to Amazon S3\. Each statement should select a different portion of the data to be saved, and also specify a different `file_prefix` in the `s3-uri` parameter to use when saving the data files\. Partitioning the data to be selected with multiple statements makes it easier to recover from execution error, because only a portion of data needs to be re\-selected and uploaded to Amazon S3 if an error occurs during the execution of a particular statement\. Using multiple statements also helps to avoid a single long\-running transaction, which can improve performance\. 
-
 + If multiple `SELECT INTO OUTFILE S3` statements that use the same `file_prefix` in the `s3-uri` parameter run in parallel to select data into Amazon S3, the behavior is undefined\.
-
 + Metadata, such as table schema or file metadata, is not uploaded by Aurora MySQL to Amazon S3\.
-
 + In some cases, you might re\-run a `SELECT INTO OUTFILE S3` query, such as to recover from a failure\. In these cases, you must either remove any existing data files in the Amazon S3 bucket with the same file prefix specified in `s3-uri`, or include `OVERWRITE ON` in the `SELECT INTO OUTFILE S3` query\.
 
 The `SELECT INTO OUTFILE S3` statement returns a typical MySQL error number and response on success or failure\. If you don't have access to the MySQL error number and response, the easiest way to determine when it's done is by specifying `MANIFEST ON` in the statement\. The manifest file is the last file written by the statement\. In other words, if you have a manifest file, the statement has completed execution\.
@@ -198,11 +183,7 @@ SELECT * FROM employees INTO OUTFILE S3 's3://aurora-select-into-s3-pdx/sample_e
 ```
 
 ## Related Topics<a name="AuroraMySQL.Integrating.SaveIntoS3.RelatedTopics"></a>
-
 + [Integrating Aurora with Other AWS Services](Aurora.Integrating.md)
-
 + [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

@@ -46,23 +46,14 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 ## CLI<a name="USER_CreateMariaDBInstance.CLI"></a>
 
 To create a MariaDB DB instance by using the AWS CLI, call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for MariaDB DB Instances](#USER_CreateMariaDBInstance.Settings)\. 
-
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--db-security-groups`
-
 + `--db-subnet-group`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--allocated-storage`
-
 + `--backup-retention-period`
 
 **Note**  
@@ -103,23 +94,14 @@ This command should produce output that begins with information that is similar 
 ## API<a name="USER_CreateMariaDBInstance.API"></a>
 
 To create a MariaDB DB instance by using the Amazon RDS API, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for MariaDB DB Instances](#USER_CreateMariaDBInstance.Settings)\. 
-
 + `AllocatedStorage`
-
 + `BackupRetentionPeriod`
-
 + `DBInstanceClass`
-
 + `DBInstanceIdentifier`
-
 + `DBSecurityGroups`
-
 + `DBSubnetGroup`
-
 + `Engine`
-
 + `MasterUsername`
-
 + `MasterUserPassword`
 
 **Note**  
@@ -185,11 +167,7 @@ The following table contains details about settings that you choose when you cre
 |  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateMariaDBInstance.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)
-
 + [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

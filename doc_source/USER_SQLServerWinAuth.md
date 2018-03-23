@@ -3,11 +3,8 @@
 You can use Windows Authentication to authenticate users when they connect to your Amazon RDS DB instance running Microsoft SQL Server\. The DB instance works with AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), also called **Microsoft AD**, to enable Windows Authentication\. When users authenticate with a SQL Server DB instance joined to the trusting domain, authentication requests are forwarded to the domain directory that you create with AWS Directory Service\. 
 
 Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions except the following: 
-
 + US West \(N\. California\)
-
 + Asia Pacific \(Mumbai\)
-
 + South America \(São Paulo\)
 
 Amazon RDS uses Mixed Mode for Windows Authentication\. This approach means that the *master user *\(the name and password used to create your SQL Server DB instance\) uses SQL Authentication\. Because the master user account is a privileged credential, you should restrict access to this account\. 
@@ -51,39 +48,26 @@ You use AWS Directory Service for Microsoft Active Directory \(Enterprise Editio
 AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create a Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC; this redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
 
  When you create a *Microsoft AD* directory, AWS Directory Service performs the following tasks on your behalf: 
-
 +  Sets up a Microsoft Active Directory within the VPC\. 
-
 +  Creates a directory administrator account with the user name Admin and the specified password\. You use this account to manage your directory\. 
 **Note**  
 Be sure to save this password\. AWS Directory Service does not store this password and it cannot be retrieved or reset\.
-
 +  Creates a security group for the directory controllers\. 
 
 When you launch an AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\), AWS creates an Organizational Unit \(OU\) that contains all your directory’s objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
  The *admin* account that was created with your *Microsoft AD* directory has permissions for the most common administrative activities for your OU: 
-
 +  Create update, or delete users, groups, and computers 
-
 +  Add resources to your domain such as file or print servers, and then assign permissions for those resources to users and groups in your OU 
-
 +  Create additional OUs and containers 
-
 +  Delegate authority 
-
 +  Create and link group policies 
-
 +  Restore deleted objects from the Active Directory Recycle Bin 
-
 +  Run AD and DNS Windows PowerShell modules on the Active Directory Web Service 
 
  The *admin* account also has rights to perform the following domain\-wide activities: 
-
 +  Manage DNS configurations \(Add, remove, or update records, zones, and forwarders\) 
-
 +  View DNS event logs 
-
 +  View security event logs 
 
 **To create a directory with AWS Directory Service for Microsoft Active Directory \(Enterprise Edition\)**
@@ -100,14 +84,10 @@ When you launch an AWS Directory Service for Microsoft Active Directory \(Enterp
 **Administrator password**  
  The password for the directory administrator\. The directory creation process creates an administrator account with the user name Admin and this password\.   
  The directory administrator password and cannot include the word "admin\." The password is case\-sensitive and must be between 8 and 64 characters in length, inclusive\. It must also contain at least one character from three of the following four categories:   
-
    +  Lowercase letters \(a\-z\) 
-
    +  Uppercase letters \(A\-Z\) 
-
    +  Numbers \(0\-9\) 
-
-   +  Non\-alphanumeric characters \(\~\!@\#$%^&\*\_\-\+=`|\\\(\)\{\}\[\]:;"'<>,\.?/\)   
+   +  Non\-alphanumeric characters \(\~\!@\#$%^&\*\_\-\+=`\|\\\(\)\{\}\[\]:;"'<>,\.?/\)   
 **Confirm password**  
  Retype the administrator password\.   
 **Description**  
@@ -162,23 +142,16 @@ To create users and groups in an AWS Directory Service directory, you must be co
 ### Step 4: Create or Modify a SQL Server DB Instance<a name="USER_SQLServerWinAuth.SettingUp.CreateModify"></a>
 
  Next, you create or modify a Microsoft SQL Server DB instance for use with the directory\. You can do this in one of the following ways: 
-
 +  Create a new SQL Server DB instance 
-
 +  Modify an existing SQL Server DB instance 
-
 +  Restore a SQL Server DB instance from a DB Snapshot 
-
 +  Restore a SQL Server DB instance from a Point\-in\-Time Restore 
 
  Windows Authentication is only supported for SQL Server DB instances in a VPC, and the DB instance must be in the same VPC as the directory\. 
 
  Several parameters are required for the DB instance to be able to use the domain directory you created: 
-
 +  For the **domain** parameter, you must enter the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
-
 +  Use the same VPC that was used when you created the directory\. 
-
 +  Use a security group that allows egress within the VPC so the DB instance can communicate with the directory\. 
 
 ![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth1.png)
@@ -205,35 +178,22 @@ CREATE LOGIN [<user or group>] FROM WINDOWS WITH DEFAULT_DATABASE = [master],
  You can use the AWS console, AWS CLI, or the Amazon RDS API to manage your DB instance and its relationship with your domain, such as moving the DB instance into, out of, or between domains\. 
 
  For example, using the Amazon RDS API, you can do the following: 
-
 +  To re\-attempt a domain join for a failed membership, use the *ModifyDBInstance* API action and specify the current membership's directory ID\. 
-
 +  To update the IAM role name for membership, use the *ModifyDBInstance* API action and specify the current membership's directory ID and the new IAM role\. 
-
 +  To remove a DB instance from a domain, use the *ModifyDBInstance* API action and specify 'none' as the domain parameter\. 
-
 +  To move a DB instance from one domain to another, use the *ModifyDBInstance* API action and specify the domain identifier of the new domain as the domain parameter\. 
-
 +  To list membership for each DB instance, use the *DescribeDBInstances* API action\. 
 
 ### Understanding Domain Membership<a name="USER_SQLServerWinAuth.Understanding"></a>
 
  After you create or modify your DB instance, the instance becomes a member of the domain\. The AWS console indicates the status of the domain membership for the DB instance\. The status of the DB instance can be one of the following: 
-
 +  joined \- The instance is a member of the domain\. 
-
 +  joining \- The instance is in the process of becoming a member of the domain\. 
-
 +  pending\-join \- The instance membership is pending \. 
-
 +  pending\-maintenance\-join \- AWS will attempt to make the instance a member of the domain during the next scheduled maintenance window\. 
-
 +  pending\-removal \- The removal of the instance from the domain is pending\. 
-
 +  pending\-maintenance\-removal \- AWS will attempt to remove the instance from the domain during the next scheduled maintenance window\. 
-
 +  failed \- A configuration problem has prevented the instance from joining the domain\. Check and fix your configuration before re\-issuing the instance modify command\. 
-
 +  removing \- The instance is being removed from the domain\. 
 
  A request to become a member of a domain can fail because of a network connectivity issue or an incorrect IAM role\. If you create a DB instance or modify an existing instance and the attempt to become a member of a domain fails, you should re\-issue the modify command or modify the newly created instance to join the domain\. 
@@ -249,7 +209,5 @@ CREATE LOGIN [<user or group>] FROM WINDOWS WITH DEFAULT_DATABASE = [master],
 You can restore a DB snapshot or do a point\-in\-time restore for a SQL Server DB instance and then add it to a domain\. Once the DB instance is restored, modify the instance using the process explained in the section [Step 4: Create or Modify a SQL Server DB Instance](#USER_SQLServerWinAuth.SettingUp.CreateModify) to add the DB instance to a domain\. 
 
 ## Related Topics<a name="USER_SQLServerWinAuth.related"></a>
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-
 + [Security in Amazon RDS](UsingWithRDS.md)

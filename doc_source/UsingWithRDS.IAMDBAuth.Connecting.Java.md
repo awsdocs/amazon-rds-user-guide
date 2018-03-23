@@ -2,7 +2,7 @@
 
 You can connect from the command line to an RDS DB instance or Aurora DB cluster with the AWS SDK for Java as described following\.
 
-
+**Topics**
 + [Generating an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
 + [Manually Constructing an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2)
 + [Connecting to a DB Instance or DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect)
@@ -231,21 +231,13 @@ public class CreateRDSAuthTokenManually {
 The following code example shows how to generate an authentication token, and then use it to connect to an Amazon RDS instance running MySQL\.
 
 To run this code example, you need the AWS SDK for Java \([https://aws\.amazon\.com/sdk\-for\-java](https://aws.amazon.com/sdk-for-java)\)\. In addition, you need the following:
-
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.
-
 + An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
-
 + Modify the values of the following variables as needed:
-
   + `RDS_INSTANCE_HOSTNAME` – The host name of the DB instance or DB cluster that you want to access\.
-
   + `RDS_INSTANCE_PORT` – The port number used for connecting to the DB instance or DB cluster\.
-
   + `REGION_NAME` – The AWS Region where the DB instance or DB cluster is running\.
-
   + `DB_USER` – The database account that you want to access\.
-
   + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.

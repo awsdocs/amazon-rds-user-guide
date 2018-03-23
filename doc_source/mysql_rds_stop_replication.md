@@ -19,17 +19,11 @@ If you are configuring replication to export data to an instance of MySQL extern
 You can also use `mysql.rds_stop_replication` to stop replication between two Amazon RDS DB instances\. You typically stop replication to perform a long running operation on the replica, such as creating a large index on the replica\. You can restart any replication process that you stopped by calling [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
 The `mysql.rds_stop_replication` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Related Topics<a name="mysql_rds_stop_replication.related"></a>
-
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
-
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)

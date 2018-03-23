@@ -1,11 +1,8 @@
 # Viewing an Amazon Aurora DB Cluster<a name="Aurora.Viewing"></a>
 
 You have several options for viewing information about your Amazon Aurora DB clusters and the DB instances in your DB clusters\.
-
 + You can view DB clusters and DB instances in the Amazon RDS console by using the **Clusters** view\. 
-
 + You can get DB cluster and DB instance information using the AWS Command Line Interface \(AWS CLI\)\.
-
 + You can get DB cluster and DB instance information using the Amazon RDS API\.
 
 ## AWS Management Console<a name="Aurora.Viewing.Console"></a>
@@ -199,5 +196,4 @@ The action returns the following output:
 ```
 
 ## Related Topics<a name="Aurora.Viewing.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

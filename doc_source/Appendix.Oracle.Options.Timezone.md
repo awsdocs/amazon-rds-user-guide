@@ -54,9 +54,7 @@ If you add the time zone option to an existing option group that is already atta
    For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Time Zone Option Settings](#Appendix.Oracle.Options.Timezone.Options)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the time zone option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ### CLI<a name="Appendix.Oracle.Options.Timezone.CLI"></a>
@@ -112,7 +110,5 @@ The following values can be used for the time zone option\.
 |  UTC  |  UTC  | 
 
 ## Related Topics<a name="Appendix.Oracle.Options.Timezone.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

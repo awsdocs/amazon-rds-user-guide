@@ -23,11 +23,8 @@ When a new patch version of the Aurora PostgreSQL database engine is released, n
 Before automatic upgrade, new database engine releases show as an **available** maintenance upgrade for your DB cluster\. You can manually upgrade the database version for your DB cluster by applying the available maintenance action\. We encourage you to apply the update on a nonproduction instance before the automatic upgrade\. That way, you can see how changes in the new version affect your instances and applications\.
 
 **To apply pending maintenance actions**
-
 + **By using the Amazon RDS Management Console** – Log on to the Amazon RDS console and choose **Clusters**\. Choose the DB cluster that shows an **available** maintenance upgrade\. Choose **Cluster Actions**\. Choose **Upgrade Now** to immediately update the database version for your DB cluster\. Or choose **Upgrade at Next Window** to update the database version for your DB cluster during the next cluster maintenance window\. 
-
 + **By using the AWS CLI** – Call the [apply\-pending\-maintenance\-action](http://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command and specify the Amazon Resource Name \(ARN\) for your DB cluster for the `--resource-id` option and `system-update` for the `--apply-action` option\. Set the `--opt-in-type` option to `immediate` to immediately update the database version for your DB cluster\. Or set it to `next-maintenance` to update the database version for your DB cluster during the next cluster maintenance window\. 
-
 + **By using the Amazon RDS API** – Call the [ApplyPendingMaintenanceAction](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) API action and specify the Amazon Resource Name \(ARN\) for your DB cluster for the `ResourceId` parameter and `system-update` for the `ApplyAction` parameter\. Set the `OptInType` parameter to `immediate` to immediately update the database version for your DB cluster, or `next-maintenance` to update the database version for your instance during the next cluster maintenance window\. 
 
 For more information on how Amazon RDS manages database and operating system updates, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\. 

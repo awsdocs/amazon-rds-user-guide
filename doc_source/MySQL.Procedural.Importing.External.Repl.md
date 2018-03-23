@@ -3,11 +3,8 @@
 You can set up replication between an Amazon RDS MySQL or MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\. Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance](MariaDB.Procedural.Importing.md#MariaDB.Procedural.Replication.GTID) to set up GTID\-based replication\.
 
  Be sure to follow these guidelines when you set up an external replication master and a replica on Amazon RDS: 
-
 + Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-
 + Maintain the binlogs on your master instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your master instance in the event of a failure\.
-
 + Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and point\-in\-time restore, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
 
 **Note**  
@@ -62,8 +59,11 @@ The permissions required to start replication on an Amazon RDS DB instance are r
            -u <RDS_user_name> ^
            -p<RDS_password>
    ```
+**Important**  
+Make sure there is not a space between the `-p` option and the entered password\.
 **Note**  
-Make sure there is not a space between the `-p` option and the entered password\. 
+Exclude the following schemas from the dump file: `sys`, `performance_schema`, and `information_schema`\. The `mysqldump` utility excludes these schemas by default\.
+If you need to migrate users and privileges, consider using a tool that generates the data control language \(DCL\) for recreating them, such as the [pt\-show\-grants](https://www.percona.com/doc/percona-toolkit/LATEST/pt-show-grants.html) utility\.
 
    Use the `--host`, `--user (-u)`, `--port` and `-p` options in the `mysql` command to specify the hostname, username, port, and password to connect to your Amazon RDS DB instance\. The host name is the DNS name from the Amazon RDS DB instance endpoint, for example, `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 

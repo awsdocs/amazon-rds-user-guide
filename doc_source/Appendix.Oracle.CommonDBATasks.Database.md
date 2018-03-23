@@ -118,11 +118,9 @@ The following example disables distributed recovery:
 ## Setting the Database Time Zone<a name="Appendix.Oracle.CommonDBATasks.TimeZoneSupport"></a>
 
 There are two different ways that you can set the time zone of your Amazon RDS Oracle database: 
-
 + You can use the `Timezone` option\. 
 
   The `Timezone` option changes the time zone at the host level and impacts all date columns and values such as `SYSDATE`\. For more information about the `Timezone` option, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
-
 + You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_db_time_zone`\. 
 
   The `alter_db_time_zone` procedure changes the time zone for only certain data types, and doesn't change `SYSDATE`\. There are additional restrictions on setting the time zone listed in the [Oracle documentation](http://docs.oracle.com/cd/B19306_01/server.102/b14225/ch4datetime.htm#i1006705)\. 
@@ -349,9 +347,6 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_dataf
 | `p_rman_to_dbms_output` | boolean | `TRUE`, `FALSE` | `FALSE` | Optional | When `TRUE`, the RMAN output is sent to the `DBMS_OUTPUT` package in addition to a file in the `BDUMP` directory\. When using SQL\*Plus, execute `SET SERVEROUTPUT ON` to see the output\. When `FALSE`, the RMAN output is only sent to a file in the `BDUMP` directory\.  | 
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Database.Related"></a>
-
 + [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-
 + [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)
-
 + [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)

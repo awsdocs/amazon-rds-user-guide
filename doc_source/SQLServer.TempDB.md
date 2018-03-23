@@ -82,11 +82,9 @@ If your Amazon RDS DB instance is in a Multi\-AZ Deployment for Microsoft SQL Se
 The tempdb database can't be replicated\. No data that you store on your primary instance is replicated to your secondary instance\. 
 
 If you modify any database options on the tempdb database, you can capture those changes on the secondary by using one of the following methods: 
-
 + First modify your DB instance and turn Multi\-AZ off, then modify tempdb, and finally turn Multi\-AZ back on\. This method doesn't involve any downtime\. 
 
   For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
-
 + First modify tempdb in the original primary instance, then fail over manually, and finally modify tempdb in the new primary instance\. This method involves downtime\. 
 
   For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 

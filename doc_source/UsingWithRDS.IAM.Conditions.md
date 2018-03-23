@@ -5,15 +5,11 @@ When you grant permissions in Amazon RDS, you can specify conditions that determ
 ## Overview<a name="UsingWithRDS.IAM.Conditions.Overview"></a>
 
 In Amazon RDS, you have the option to specify conditions when granting permissions using an IAM policy \(see [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl)\)\. For example, you can: 
-
 + Allow users to create a DB instance only if they specify a particular database engine\.
-
 + Allow users to modify RDS resources that are tagged with a particular tag name and tag value\.
 
 There are two ways to specify conditions in an IAM policy for Amazon RDS:
-
 + [Using Condition Keys](http://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/UsingWithRDS.IAM.Conditions.html#UsingWithRDS.IAM.SpecifyingConditions)
-
 + [Using Custom Tags](http://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/UsingWithRDS.IAM.Conditions.html#UsingWithRDS.IAM.SpecifyingCustomTags)
 
 ## Specifying Conditions: Using Condition Keys<a name="UsingWithRDS.IAM.SpecifyingConditions"></a>
@@ -238,9 +234,6 @@ The `Resource` line in the policy identifies a resource by its Amazon Resource N
 ```
 
 ## Related Topics<a name="w3ab1c21c13c17c11"></a>
-
 + [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl)
-
 + [Amazon RDS API Permissions: Actions, Resources, and Conditions Reference](UsingWithRDS.IAM.ResourcePermissions.md)
-
 + [Security in Amazon RDS](UsingWithRDS.md)

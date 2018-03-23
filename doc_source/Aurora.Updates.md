@@ -29,5 +29,4 @@ To get the Aurora version number from an Aurora DB instance using a particular d
 |  Amazon Aurora PostgreSQL  |  <pre>SELECT AURORA_VERSION();</pre>  | 
 
 ## Related Topics<a name="Aurora.Updates.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

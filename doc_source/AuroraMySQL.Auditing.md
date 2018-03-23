@@ -25,17 +25,11 @@ Enables or disables Advanced Auditing\. This parameter defaults to OFF; set it t
 Contains the comma\-delimited list of events to log\. Events must be specified in all caps, and there should be no white space between the list elements, for example: `CONNECT,QUERY_DDL`\. This parameter defaults to an empty string\.
 
 You can log any combination of the following events: 
-
 + CONNECT – Logs both successful and failed connections and also disconnections\. This event includes user information\.
-
 + QUERY – Logs all queries in plain text, including queries that fail due to syntax or permission errors\.
-
 + QUERY\_DCL – Similar to the QUERY event, but returns only data control language \(DCL\) queries \(GRANT, REVOKE, and so on\)\.
-
 + QUERY\_DDL – Similar to the QUERY event, but returns only data definition language \(DDL\) queries \(CREATE, ALTER, and so on\)\.
-
 + QUERY\_DML – Similar to the QUERY event, but returns only data manipulation language \(DML\) queries \(INSERT, UPDATE, and so on\)\.
-
 + TABLE – Logs the tables that were affected by query execution\.
 
 ### `server_audit_excl_users`<a name="AuroraMySQL.Auditing.Enable.server_audit_excl_users"></a>
@@ -58,7 +52,7 @@ You can view and download the audit logs by using the AWS console\. On the **Ins
 
 To download a log file, select that file in the **Logs** section and then choose **Download**\.
 
-You can also get a list of the log files by using the [describe\-db\-log\-files](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can view the content of a log file by using the [download\-db\-log\-file\-portion](http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command, and download a log file by using the [DownloadCompleteDBLogFile](RESTReference.md#RESTReference.DownloadCompleteDBLogFile) REST API\.
+You can also get a list of the log files by using the [describe\-db\-log\-files](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) AWS CLI command\. You can download the contents of a log file by using the [download\-db\-log\-file\-portion](http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html) AWS CLI command\. For more information, see [Viewing and Listing Database Log Files](USER_LogAccess.md#USER_LogAccess.Procedural.Viewing) and [Downloading a Database Log File](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\.
 
 ## Audit Log Details<a name="AuroraMySQL.Auditing.Logs"></a>
 

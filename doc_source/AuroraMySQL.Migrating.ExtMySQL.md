@@ -1,9 +1,7 @@
 # Migrating Data from an External MySQL Database to an Amazon Aurora MySQL DB Cluster<a name="AuroraMySQL.Migrating.ExtMySQL"></a>
 
 If your database supports the InnoDB or MyISAM tablespaces, you have these options for migrating your data to an Amazon Aurora MySQL DB cluster: 
-
 + You can create a dump of your data using the `mysqldump` utility, and then import that data into an existing Amazon Aurora MySQL DB cluster\. For more information, see [Migrating from MySQL to Amazon Aurora by Using mysqldump](#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.
-
 + You can copy the full and incremental backup files from your database to an Amazon S3 bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\. This option can be considerably faster than migrating data using `mysqldump`\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
 ## Migrating Data from MySQL by Using an Amazon S3 Bucket<a name="AuroraMySQL.Migrating.ExtMySQL.S3"></a>
@@ -16,21 +14,15 @@ This option can be considerably faster than migrating data using `mysqldump`, be
 The Amazon S3 bucket and the Amazon Aurora MySQL DB cluster must be in the same region\.
 
 Aurora MySQL doesn't restore everything from your database\. You should save the database schema and values for the following items from your source MySQL database and add them to your restored Aurora MySQL DB cluster after it has been created\.
-
 + User accounts
-
 + Functions
-
 + Stored procedures
-
 + Time zone information\. Time zone information is loaded from the local operating system of your Amazon Aurora MySQL DB cluster\. For more information, see [Local Time Zone for Amazon Aurora DB Clusters](Aurora.Overview.md#Aurora.Overview.LocalTimeZone)\.
 
 ### Before You Begin<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs"></a>
 
 Before you can copy your data to an Amazon S3 bucket and restore a DB cluster from those files, you must do the following:
-
 + Install Percona XtraBackup on your local server\.
-
 + Permit Aurora MySQL to access your Amazon S3 bucket on your behalf\.
 
 #### Installing Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.XtraBackup"></a>
@@ -43,13 +35,9 @@ You must use Percona XtraBackup version 2\.3 or later\. Aurora MySQL is not comp
 #### Required Permissions<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Prereqs.Permitting"></a>
 
 To migrate your MySQL data to an Amazon Aurora MySQL DB cluster, several permissions are required:
-
 + The user that is requesting that Amazon RDS create a new cluster from an Amazon S3 bucket must have permission to list the buckets for your AWS account\. You grant the user this permission using an AWS Identity and Access Management \(IAM\) policy\.
-
 + Amazon RDS requires permission to act on your behalf to access the Amazon S3 bucket where you store the files used to create your Amazon Aurora MySQL DB cluster\. You grant Amazon RDS the required permissions using an IAM service role\. 
-
 + The user making the request must also have permission to list the IAM roles for your AWS account\.
-
 + If the user making the request will create the IAM service role, or will request that Amazon RDS create the IAM service role \(by using the console\), then the user must have permission to create an IAM role for your AWS account\.
 
 For example, the following IAM policy grants a user the minimum required permissions to use the console to list IAM roles, create an IAM role, and list the Amazon S3 buckets for your account\.
@@ -123,11 +111,8 @@ innobackupex --user=myuser --password=<password> --no-timestamp /s3-restore/back
 ```
 
 If you want to compress your backup into a single file \(which can be split, if needed\), you can use the `--stream` option to save your backup in one of the following formats:
-
 + Gzip \(\.gz\)
-
 + tar \(\.tar\)
-
 + Percona xbstream \(\.xbstream\)
 
 The following command creates a backup of your MySQL database split into multiple Gzip files\.
@@ -228,7 +213,5 @@ Note the port and the endpoint of the cluster\. Use the endpoint and port of the
 Because Amazon Aurora MySQL is a MySQL\-compatible database, you can use the `mysqldump` utility to copy data from your MySQL or MariaDB database to an existing Aurora MySQL DB cluster\. For a discussion of how to do so with MySQL databases that are very large, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. For MySQL databases that have smaller amounts of data, see [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md)\.
 
 ## Related Topics<a name="AuroraMySQL.Migrating.ExtMySQL.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

@@ -49,11 +49,8 @@ Option settings control the behavior of an option\. For example, the Oracle Adva
 ### Mutually Exclusive Options<a name="Overview.OptionGroups.Exclusive"></a>
 
 Some options are mutually exclusive\. You can use one or the other, but not both at the same time\. The following options are mutually exclusive: 
-
 + [Oracle Enterprise Manager Database Express](Appendix.Oracle.Options.OEM_DBControl.md) and [Oracle Management Agent for Enterprise Manager Cloud Control](Oracle.Options.OEMAgent.md)\. 
-
 + [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle SSL](Appendix.Oracle.Options.SSL.md)\. 
-
 + [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md) and [Using AWS CloudHSM Classic to Store Amazon RDS Oracle TDE Keys](Appendix.OracleCloudHSM.md)\. 
 
 ## Creating an Option Group<a name="USER_WorkingWithOptionGroups.Create"></a>
@@ -70,11 +67,11 @@ After you create a new option group, it has no options\. To learn how to add opt
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option Groups**\.
+1. In the navigation pane, choose **Option groups**\.
 
-1. Choose **Create Group**\.
+1. Choose **Create group**\.
 
-1. In the **Create Option Group** dialog box, do the following:
+1. In the **Create option group** window, do the following:
 
    1. For **Name**, type a name for the option group that is unique within your AWS account\. The name can contain only letters, digits, and hyphens\. 
 
@@ -82,20 +79,16 @@ After you create a new option group, it has no options\. To learn how to add opt
 
    1. For **Engine**, choose the DB engine that you want\. 
 
-   1. For **Major Engine Version**, choose the major version of the DB engine that you want\. 
+   1. For **Major engine version**, choose the major version of the DB engine that you want\. 
 
-1. To continue, choose **Yes, Create**\. To cancel the operation instead, choose **Cancel**\. 
+1. To continue, choose **Create**\. To cancel the operation instead, choose **Cancel**\. 
 
 ### CLI<a name="USER_WorkingWithOptionGroups.Create.CLI"></a>
 
 To create an option group, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-option-group.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-option-group.html) command with the following required parameters\.
-
 + `--option-group-name`
-
 + `--engine-name`
-
 + `--major-engine-version`
-
 + `--option-group-description`
 
 **Example**  
@@ -122,13 +115,9 @@ aws rds create-option-group ^
 ### API<a name="USER_WorkingWithOptionGroups.Create.API"></a>
 
 To create an option group, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) action\. Include the following parameters:
-
 + `OptionGroupName = testoptiongroup`
-
 + `EngineName = oracle-ee`
-
 + `MajorEngineVersion = 11.2`
-
 + `OptionGroupDescription = Test%20option%20group`
 
 **Example**  
@@ -157,11 +146,8 @@ You can use the AWS CLI or the Amazon RDS API to make a copy of an option group\
 ### CLI<a name="USER_WorkingWithOptionGroups.Copy.CLI"></a>
 
 To copy an option group, use the AWS CLI [copy\-option\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/copy-option-group.html) command\. Include the following required parameters:
-
 + `--source-option-group-identifier`
-
 + `--target-option-group-identifier`
-
 + `--target-option-group-description`
 
 **Example**  
@@ -186,11 +172,8 @@ aws rds copy-option-group ^
 ### API<a name="USER_WorkingWithOptionGroups.Copy.API"></a>
 
 To copy an option group, call the Amazon RDS API [CopyOptionGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyOptionGroup.html) action\. Include the following required parameters\.
-
 + `SourceOptionGroupIdentifier = arn%3Aaws%3Ards%3Aus-west-2%3A123456789012%3og%3Amy-remote-option-group`
-
 + `TargetOptionGroupIdentifier = new-local-option-group`
-
 + `TargetOptionGroupDescription = Option%20group%202`
 
 **Example**  
@@ -217,9 +200,7 @@ The following example creates an option group named `new-local-option-group`, wh
 You can add an option to an existing option group\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific DB engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
 
 Option group changes must be applied immediately in two cases: 
-
 + When you add an option that adds or updates a port value, such as the `OEM` option\. 
-
 + When you add or remove an option group with an option that includes a port value\. 
 
 In these cases, you must select the **Apply Immediately** option in the console, or include the `Apply-Immediately` option when using the AWS CLI or set the `Apply-Immediately` parameter to `true` when using the Amazon RDS API\. Options that don't include port values can be applied immediately, or can be applied during the next maintenance window for the DB instance\. 
@@ -232,12 +213,12 @@ You can use the AWS Management Console to add an option to an option group\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option Groups**\.
+1. In the navigation pane, choose **Option groups**\.
 
-1. Select the option group that you want to modify, and then choose **Add Option**\.   
+1. Select the option group that you want to modify, and then choose **Add 0ption**\.   
 ![\[Console option group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-addoption1.png)
 
-1. In the **Add Option** dialog box, do the following: 
+1. In the **Add option** window, do the following: 
 
    1. Choose the option that you want to add\. You might need to provide additional values, depending on the option that you select\. For example, when you choose the `OEM` option, you must also type a port value and specify a DB security group\.
 
@@ -249,7 +230,6 @@ You can use the AWS Management Console to add an option to an option group\.
 ### CLI<a name="USER_WorkingWithOptionGroups.AddOptions.CLI"></a>
 
 To add an option to an option group, run the AWS CLI [add\-option\-to\-option\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/add-option-to-option-group.html) command with the option that you want to add\. To enable the new option immediately on all associated DB instances, include the `--apply-immediately` parameter\. By default, the option is enabled for each associated DB instance during its next maintenance window\. Include the following required parameter:
-
 + `--option-group-name`
 
 **Example**  
@@ -344,7 +324,6 @@ OPTIONGROUP  my-option-group  oracle-ee  11.2                  My option group  
 ### API<a name="USER_WorkingWithOptionGroups.AddOptions.API"></a>
 
 To add an option to an option group using the Amazon RDS API, call the [ModifyOptionGroup](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) action with the option that you want to add\. To enable the new option immediately on all associated DB instances, include the `ApplyImmediately` parameter and set it to `true`\. By default, the option is enabled for each associated DB instance during its next maintenance window\. Include the following required parameter:
-
 + `OptionGroupName`
 
 **Example**  
@@ -378,7 +357,7 @@ You can use the AWS Management Console to list all of the options and option set
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option Groups**\. The **Options** column in the table shows the options and option settings in the option group\.
+1. In the navigation pane, choose **Option groups**\. The **Options** column in the table shows the options and option settings in the option group\.
 
 ### CLI<a name="USER_WorkingWithOptionGroups.ListOption.CLI"></a>
 
@@ -495,9 +474,7 @@ The output from the preceding action is similar to the following:
 After you have added an option that has modifiable option settings, you can modify the settings at any time\. If you change options or option settings in an option group, those changes are applied to all DB instances that are associated with that option group\. For more information on what settings are available for the various options, see the documentation for your specific engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
 
 Option group changes must be applied immediately in two cases: 
-
 + When you add an option that adds or updates a port value, such as the `OEM` option\. 
-
 + When you add or remove an option group with an option that includes a port value\. 
 
 In these cases, you must select the **Apply Immediately** option in the console, or include the `Apply-Immediately` option when using the AWS CLI or set the `Apply-Immediately` parameter to `true` when using the Amazon RDS API\. Options that don't include port values can be applied immediately, or can be applied during the next maintenance window for the DB instance\. 
@@ -510,11 +487,11 @@ You can use the AWS Management Console to modify an option setting\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option Groups**\. 
+1. In the navigation pane, choose **Option groups**\. 
 
-1. Select the option group whose option that you want to modify, and then choose **Modify Option**\. 
+1. Select the option group whose option that you want to modify, and then choose **Modify option**\. 
 
-1. In the **Modify Option** dialog box, from **Installed Options**, choose the option whose setting you want to modify\. Make the changes that you want\.
+1. In the **Modify option** window, from **Installed Options**, choose the option whose setting you want to modify\. Make the changes that you want\.
 
 1. To enable the option as soon as you add it, for **Apply Immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is enabled for each associated DB instance during its next maintenance window\. 
 
@@ -679,17 +656,14 @@ You can use the AWS Management Console to remove an option from an option group\
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option Groups**\. 
+1. In the navigation pane, choose **Option groups**\. 
 
-1. Select the option group whose option you want to remove, and then choose **Delete Option**\.   
-![\[Console remove option db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-removeoption.png)
+1. Select the option group whose option you want to remove, and then choose **Delete option**\. 
 
-1. In the **Delete Option** dialog box, do the following: 
-
+1. In the **Delete option** window, do the following: 
    +  Select the check box for the option that you want to delete\. 
-
-   + For the deletion to take effect as soon as you make it, for **Apply Immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is deleted for each associated DB instance during its next maintenance window\.   
-![\[Console Tags edit db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-removeoption2.png)
+   + For the deletion to take effect as soon as you make it, for **Apply immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is deleted for each associated DB instance during its next maintenance window\.   
+![\[Delete option group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-removeoption2.png)
 
 1. When the settings are as you want them, choose **Yes, Delete**\. 
 
@@ -726,9 +700,7 @@ OPTIONGROUP    testoptiongroup oracle-ee   11.2    Test option group
 To remove an option from an option group, use the Amazon RDS API [ `ModifyOptionGroup`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) action\. By default, the option is removed from each associated DB instance during its next maintenance window\. To apply the change immediately, include the `ApplyImmediately` parameter and set it to `true`\. 
 
 Include the following parameters: 
-
 + `OptionGroupName = myawsuser-og02`
-
 + `OptionsToRemove.OptionName = OEM`
 
 **Example**  

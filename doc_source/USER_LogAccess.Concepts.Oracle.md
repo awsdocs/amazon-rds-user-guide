@@ -145,5 +145,4 @@ To access the listener log, use the following SQL statement:
 Oracle rotates the alert and listener logs when they exceed 10 MB, at which point they will be unavailable from the Amazon RDS views\. 
 
 ## Related Topics<a name="USER_LogAccess.Concepts.Oracle.Related"></a>
-
 + [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)

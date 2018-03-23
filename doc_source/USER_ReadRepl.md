@@ -12,11 +12,8 @@ Amazon RDS sets up a secure communications channel between the source DB instanc
 ## Overview of Amazon RDS Read Replicas<a name="USER_ReadRepl.Overview"></a>
 
 Deploying one or more Read Replicas for a given source DB instance might make sense in a variety of scenarios, including the following: 
-
 + Scaling beyond the compute or I/O capacity of a single DB instance for read\-heavy database workloads\. You can direct this excess read traffic to one or more Read Replicas\. 
-
 + Serving read traffic while the source DB instance is unavailable\. If your source DB instance can't take I/O requests \(for example, due to I/O suspension for backups or scheduled maintenance\), you can direct read traffic to your Read Replicas\. For this use case, keep in mind that the data on the Read Replica might be "stale" because the source DB instance is unavailable\. 
-
 + Business reporting or data warehousing scenarios where you might want business reporting queries to run against a Read Replica, rather than your primary, production DB instance\. 
 
 By default, a Read Replica is created with the same storage type as the source DB instance\. However, you can create a Read Replica that has a different storage type from the source DB instance based on the options listed in the following table\. 
@@ -28,11 +25,8 @@ Amazon RDS doesn't support circular replication\. You can't configure a DB insta
 For MySQL, MariaDB, and PostgreSQL Read Replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. For MySQL and MariaDB, the `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW SLAVE STATUS` command\. For PostgreSQL, the `ReplicaLag` metric reports the value of `SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS slave_lag`\. 
 
 Common causes for replication lag for MySQL and MariaDB are the following: 
-
 + A network outage\.
-
 + Writing to tables with indexes on a Read Replica\. If the `read_only` parameter is not set to 0 on the Read Replica, it can break replication\.
-
 + Using a nontransactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MySQL and the XtraDB storage engine on MariaDB\.
 
 When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, then replication is currently not active\. `ReplicaLag` = \-1 is equivalent to `Seconds_Behind_Master` = `NULL`\. 
@@ -63,23 +57,15 @@ You can create up to five Read Replicas from one source DB instance\. For replic
 Amazon RDS overrides any incompatible parameters on a Read Replica if it prevents the Read Replica from starting\. For example, suppose that the `max_connections` parameter value is higher on the source DB instance than on the Read Replica\. In that case, Amazon RDS updates the parameter on the Read Replica to be the same value as that on the source DB instance\. 
 
 Here are some important facts about PostgreSQL Read Replicas: 
-
 + PostgreSQL Read Replicas are read\-only and can't be made writable\.
-
 + You can't create a Read Replica from another Read Replica \(that is, you can't create cascading Read Replicas\)\. 
-
 + You can promote a PostgreSQL Read Replica to be a new source DB instance\. However, the Read Replica doesn't become the new source DB instance automatically\. The Read Replica, when promoted, stops receiving WAL communications and is no longer a read\-only instance\. You must set up any replication you intend to have going forward because the promoted Read Replica is now a new source DB instance\. 
-
 + A PostgreSQL Read Replica reports a replication lag of up to five minutes if there are no user transactions occurring on the source DB instance\. 
-
 + Before a DB instance can serve as a source DB instance, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. 
 
 In several situations, a PostgreSQL source DB instance can unintentionally break replication with a Read Replica\. These situations include the following: 
-
 + The `max_wal_senders` parameter is set too low to provide enough data to the number of Read Replicas\. This situation causes replication to stop\. 
-
 + The PostgreSQL parameter `wal_keep_segments` dictates how many WAL files are kept to provide data to the Read Replicas\. The parameter value specifies the number of logs to keep\. If you set the parameter value too low, you can cause a Read Replica to fall so far behind that streaming replication stops\. In this case, Amazon RDS reports a replication error and begins recovery on the Read Replica by replaying the source DB instance's archived WAL logs\. This recovery process continues until the Read Replica has caught up enough to continue streaming replication\. For more information, see [Troubleshooting a PostgreSQL Read Replica Problem](#USER_ReadRepl.TroubleshootingPostgreSQL)\. 
-
 + A PostgreSQL Read Replica requires a reboot if the source DB instance endpoint changes\. 
 
 When the WAL stream that provides data to a Read Replica is broken, PostgreSQL switches into recovery mode to restore the Read Replica by using archived WAL files\. When this process is complete, PostgreSQL attempts to re\-establish streaming replication\. 
@@ -149,15 +135,15 @@ If your MySQL DB instance uses a nontransactional engine such as MyISAM, you nee
 
 1. In the **Instances** pane, select the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica\. 
 
-1. For **Instance Actions**, choose **Create Read Replica**\. 
+1. For **Instance actions**, choose **Create read replica**\. 
 
 1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type as the source DB instance for the Read Replica\. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\. Creating your Read Replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 
-1. Choose the settings you want to use\. For **DB Instance Identifier**, type a name for the Read Replica\. Adjust other settings as needed\. 
+1. Choose the settings you want to use\. For **DB instance identifier**, type a name for the Read Replica\. Adjust other settings as needed\. 
 
-1. Choose the network, security, database, and maintenance settings you want to use\. 
+1. Choose the other settings you want to use\. 
 
-1. Choose **Create Read Replica**\.
+1. Choose **Create read replica**\.
 
 ### CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
@@ -201,11 +187,8 @@ To create a Read Replica from a source MySQL, MariaDB, or PostgreSQL DB instance
 You can promote a MySQL, MariaDB, or PostgreSQL Read Replica into a standalone DB instance\. When you promote a Read Replica, the DB instance is rebooted before it becomes available\. 
 
 There are several reasons you might want to promote a Read Replica to a standalone DB instance: 
-
 + **Performing DDL operations \(MySQL and MariaDB only\)** – DDL operations, such as creating or rebuilding indexes, can take time and impose a significant performance penalty on your DB instance\. You can perform these operations on a MySQL or MariaDB Read Replica once the Read Replica is in sync with its source DB instance\. Then you can promote the Read Replica and direct your applications to use the promoted instance\. 
-
 + **Sharding** – Sharding embodies the "share\-nothing" architecture and essentially involves breaking a large database into several smaller databases\. One common way to split a database is splitting tables that are not joined in the same query onto different hosts\. Another method is duplicating a table across multiple hosts and then using a hashing algorithm to determine which host receives a given update\. You can create Read Replicas corresponding to each of your shards \(smaller databases\) and promote them when you decide to convert them into standalone shards\. You can then carve out the key space \(if you are splitting rows\) or distribution of tables for each of the shards depending on your requirements\. 
-
 + **Implementing failure recovery** – You can use Read Replica promotion as a data recovery scheme if the source DB instance fails\. However, if you require synchronous replication, automatic failure detection, and failover, we recommend that you run your DB instance as a Multi\-AZ deployment instead\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)\. 
 
   If you are aware of the ramifications and limitations of asynchronous replication and you still want to use Read Replica promotion for data recovery, you can do so\. To do this, first create a Read Replica and then monitor the source DB instance for failures\. In the event of a failure, do the following: 
@@ -240,11 +223,11 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 
 1. In the Amazon RDS console, choose **Instances**\. 
 
-   The **Instance** pane appears\. Look at the **Replication role** column to see your read replicas\. 
+   The **Instance** pane appears\. Each Read Replica shows **replica** in the **Replication role** column\. 
 
-1. In the **Instances** pane, select the read replica that you want to promote\. 
+1. In the **Instances** pane, select the Read Replica that you want to promote\. 
 
-1. Choose Instance actions, and then choose **Promote read replica**\. 
+1. Choose **Instance actions**, and then choose **Promote read replica**\. 
 
 1. On the **Promote Read Replica** page, enter the backup retention period and the backup window for the new promoted DB instance\. 
 
@@ -289,11 +272,8 @@ To promote a Read Replica to a DB instance, call [ `PromoteReadReplica`](http://
 ## Creating a Read Replica in a Different AWS Region<a name="USER_ReadRepl.XRgn"></a>
 
 With Amazon Relational Database Service \(Amazon RDS\), you can create a MySQL, PostgreSQL, or MariaDB Read Replica in a different AWS Region than the source DB instance\. You create a Read Replica to do the following:
-
 + Improve your disaster recovery capabilities\.
-
 + Scale read operations into an AWS Region closer to your users\.
-
 + Make it easier to migrate from a data center in one AWS Region to a data center in another AWS Region\.
 
 Creating a MySQL, PostgreSQL, or MariaDB Read Replica in a different AWS Region than the source instance is similar to creating a replica in the same AWS Region\. To create a Read Replica across regions, you can use the AWS Management Console, run the [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API action\.
@@ -315,21 +295,17 @@ You can create a Read Replica across regions using the AWS Management Console\.
 
 1. In the navigation pane, choose **Instances**\.
 
-1. In the **Instances** window, choose the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica, and then choose **Create Read Replica** from **Instance Actions**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+1. In the **Instances** pane, choose the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica, and then choose **Create read replica** from **Instance actions**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
 1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type for the Read Replica\. 
 
 1. Choose the other settings you want to use: 
+   + For **DB instance identifier**, type a name for the Read Replica\.
+   + In the **Network & Security** section, choose a value for **Designation region** and **Designation DB subnet group**\.
+   +  To create an encrypted Read Replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the KMS key identifier of the destination AWS Region\. 
+   + Choose the other settings you want to use\. 
 
-   + For **DB Instance Identifier**, type a name for the Read Replica\.
-
-   + In the **Network & Security** section, choose a value for **Designation Region** and **Designation DB Subnet Group**\.
-
-   +  To create an encrypted Read Replica in another AWS Region, choose **Enable Encryption**, and then choose **Master Key**\. For **Master Key**, choose the KMS key identifier of the destination AWS Region\. 
-
-   + Choose the remaining network, security, database, and maintenance settings you want to use\. 
-
-1. Choose **Create Read Replica**\.
+1. Choose **Create read replica**\.
 
 ### CLI<a name="USER_ReadRepl.XRgn.CLI"></a>
 
@@ -342,13 +318,9 @@ For example, if your source DB instance is in the US East \(N\. Virginia\) regio
 For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\.
 
  To create an encrypted Read Replica in a different AWS Region than the source DB instance, you can use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command from the destination AWS Region\. The following parameters are used to create an encrypted Read Replica in another AWS Region: 
-
 +  `--source-region` — The AWS Region that the encrypted Read Replica is created in\. If `source-region` is not specified, you must specify a `pre-signed-url`\. A `pre-signed-url` is a URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` action that is called in the source AWS Region where the Read Replica is created from\. To learn more about the `pre-signed-url`, see [ `CreateDBInstanceReadReplica`](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. 
-
 +  `--source-db-instance-identifier` — The DB instance identifier for the encrypted Read Replica that is created\. This identifier must be in the ARN format for the source AWS Region\. The AWS Region specified in `source-db-instance-identifier` must match the AWS Region specified as the `source-region`\. 
-
 +  `--db-instance-identifier` — The identifier for the encrypted Read Replica in the destination AWS Region\. 
-
 +  `--kms-key-id` — The AWS KMS key identifier for the key to use to encrypt the Read Replica in the destination AWS Region\. 
 
 The following code creates a Read Replica in the `us-west-2` region\.
@@ -441,29 +413,19 @@ For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in 
 ### Cross\-Region Replication Considerations<a name="USER_ReadRepl.XRgn.Cnsdr"></a>
 
 All of the considerations for performing replication within an AWS Region apply to cross\-region replication\. The following extra considerations apply when replicating between regions: 
-
 + You can only replicate between regions when using Amazon RDS DB instances of MariaDB, PostgreSQL \(versions 9\.4\.7 and 9\.5\.2 and later\), or MySQL 5\.6 and later\.
-
 + A source DB instance can have cross\-region Read Replicas in multiple regions\. 
-
 + You can only create a cross\-region Amazon RDS Read Replica from a source Amazon RDS DB instance that is not a Read Replica of another Amazon RDS DB instance\.
-
 + You can't set up a replication channel into or out of the AWS GovCloud \(US\) region\.
-
 + You can expect to see a higher level of lag time for any Read Replica that is in a different AWS Region than the source instance, due to the longer network channels between regional data centers\.
-
 + Within an AWS Region, all cross\-region Read Replicas created from the same source DB instance must either be in the same Amazon VPC or be outside of a VPC\. For cross\-region Read Replicas, any of the create Read Replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\. 
-
 + You can create a cross\-region Read Replica in a VPC from a source DB instance that is not in a VPC\. You can also create a cross\-region Read Replica that is not in a VPC from a source DB instance that is in a VPC\.
-
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-region Read Replica instances\. 
 
 ### Cross\-Region Replication Costs<a name="USER_ReadRepl.XRgn.Costs"></a>
 
 The data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. These cross\-region replication actions generate charges for the data transferred out of the source AWS Region:
-
 + When you create a Read Replica, Amazon RDS takes a snapshot of the source instance and transfers the snapshot to the Read Replica region\.
-
 + For each data modification made in the source databases, Amazon RDS transfers data from the source AWS Region to the Read Replica region\.
 
 For more information about data transfer pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
@@ -471,11 +433,8 @@ For more information about data transfer pricing, see [Amazon RDS Pricing](https
 For MySQL and MariaDB instances, you can reduce your data transfer costs by reducing the number of cross\-region Read Replicas that you create\. For example, suppose that you have a source DB instance in one AWS Region and want to have three Read Replicas in another AWS Region\. In this case, you create only one of the Read Replicas from the source DB instance\. You create the other two replicas from the first Read Replica instead of the source DB instance\. 
 
 For example, if you have `source-instance-1` in one AWS Region, you can do the following:
-
 + Create `read-replica-1` in the new AWS Region, specifying `source-instance-1` as the source\.
-
 + Create `read-replica-2` from `read-replica-1`\.
-
 + Create `read-replica-3` from `read-replica-1`\.
 
 In this example, you are only charged for the data transferred from `source-instance-1` to `read-replica-1`\. You are not charged for the data transferred from `read-replica-1` to the other two replicas because they are all in the same AWS Region\. If you create all three replicas directly from `source-instance-1`, you are charged for the data transfers to all three replicas\.
@@ -499,11 +458,8 @@ Amazon RDS uses the following process to create a cross\-region Read Replica\. D
    For MySQL, MariaDB, and PostgreSQL Read Replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. For MySQL and MariaDB, the `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW SLAVE STATUS` command\. For PostgreSQL, the `ReplicaLag` metric reports the value of `SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS slave_lag`\.
 
    Common causes for replication lag for MySQL and MariaDB are the following: 
-
    + A network outage\.
-
    + Writing to tables with indexes on a Read Replica\. If the `read_only` parameter is not set to 0 on the Read Replica, it can break replication\.
-
    + Using a non\-transactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MySQL and the XtraDB storage engine on MariaDB\.
 
    When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, then replication is currently not active\. `ReplicaLag` = \-1 is equivalent to `Seconds_Behind_Master` = `NULL`\. 
@@ -554,18 +510,16 @@ For Windows:
 
 ## Monitoring Read Replication<a name="USER_ReadRepl.Monitoring"></a>
 
- You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica; you can also see the status of a Read Replica using the AWS CLI `describe-db-instances` command or the Amazon RDS API `DescribeDBInstances` action\. 
+You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica in the **Availability and durability** section of the Read Replica details\. To view the details for a Read Replica, select the Read Replica in the list of instances in the Amazon RDS console, and choose **See details** from **Instance actions**\. 
 
 ![\[Read Replica status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ReadReplicaStatus.png)
 
+You can also see the status of a Read Replica using the AWS CLI `describe-db-instances` command or the Amazon RDS API `DescribeDBInstances` action\.
+
 The status of a Read Replica can be one of the following: 
-
 + ****Replicating**—**The Read Replica is replicating successfully\.
-
 + ****Error**—**An error has occurred with the replication\. Check the **Replication Error** field in the Amazon RDS console or the event log to determine the exact error\. For more information about troubleshooting a replication error, see [Troubleshooting a MySQL or MariaDB Read Replica Problem](#USER_ReadRepl.Troubleshooting)\.
-
 + ****Stopped**—**\(MySQL or MariaDB only\) Replication has stopped because of a customer initiated request\.
-
 + ****Terminated**—**Replication is terminated\. This occurs if replication is stopped for more than thirty consecutive days, either manually or due to a replication error\. In this case, Amazon RDS terminates replication between the master DB instance and all Read Replicas in order to prevent increased storage requirements on the master DB instance and long failover times\. 
 
   Broken replication can affect storage because the logs can grow in size and number due to the high volume of errors messages being written to the log\. Broken replication can also affect failure recovery due to the time Amazon RDS requires to maintain and process the large number of logs during recovery\.
@@ -577,9 +531,7 @@ You can monitor how far a MySQL or MariaDB Read Replica is lagging the source DB
 The replication technologies for MySQL and MariaDB are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the Read Replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the Read Replica are serialized using a single I/O thread, which can lead to a lag between the source instance and Read Replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html)\. For more information about read\-only replicas in the MariaDB documentation, go to [Replication Overview](http://mariadb.com/kb/en/mariadb/replication-overview/)\.
 
 You can do several things to reduce the lag between updates to a source DB instance and the subsequent updates to the Read Replica, such as the following:
-
 + Sizing a Read Replica to have a storage size and DB instance class comparable to the source DB instance\.
-
 + Ensuring that parameter settings in the DB parameter groups used by the source DB instance and the Read Replica are compatible\. For more information and an example, see the discussion of the `max_allowed_packet` parameter later in this section\.
 
 Amazon RDS monitors the replication status of your Read Replicas and updates the `Replication State` field of the Read Replica instance to `Error` if replication stops for any reason\. An example might be if DML queries run on your Read Replica conflict with the updates made on the source DB instance\. 
@@ -589,11 +541,8 @@ You can review the details of the associated error thrown by the MySQL or MariaD
 One common issue that can cause replication errors is when the value for the `max_allowed_packet` parameter for a Read Replica is less than the `max_allowed_packet` parameter for the source DB instance\. The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group that is used to specify the maximum size of DML code that can be executed on the database\. In some cases, the `max_allowed_packet` parameter value in the DB parameter group associated with a source DB instance is smaller than the `max_allowed_packet` parameter value in the DB parameter group associated with the source's Read Replica\. In these cases, the replication process can throw an error \(Packet bigger than 'max\_allowed\_packet' bytes\) and stop replication\. You can fix the error by having the source and Read Replica use DB parameter groups with the same `max_allowed_packet` parameter values\. 
 
 Other common situations that can cause replication errors include the following:
-
 + Writing to tables on a Read Replica\. If you are creating indexes on a Read Replica, you need to have the `read_only` parameter set to **0** to create the indexes\. If you are writing to tables on the Read Replica, it might break replication\. 
-
 +  Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MySQL and the XtraDB storage engine on MariaDB\.
-
 +  Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html)\. 
 
 If you decide that you can safely skip an error, you can follow the steps described in the section [Skipping the Current Replication Error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Otherwise, you can delete the Read Replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old Read Replica\. If a replication error is fixed, the `Replication State` changes to *replicating*\.

@@ -1,17 +1,12 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Oracle Database\. You can use the following versions and editions: 
-
 + Oracle 12c, Version 12\.1\.0\.2
-
 + Oracle 11g, Version 11\.2\.0\.4
 
 Amazon RDS also currently supports the following versions and editions that are on deprecation paths, because Oracle no longer provides patches for them: 
-
 + Oracle 12c, Version 12\.1\.0\.1 \([Deprecation of Oracle 12\.1\.0\.1](#Oracle.Concepts.Deprecate.12101)\) 
-
 + Oracle 11g, Version 11\.2\.0\.3 \([Deprecation of Oracle 11\.2\.0\.3](#Oracle.Concepts.Deprecate.11203)\) 
-
 + Oracle 11g, Version 11\.2\.0\.2 \([Deprecation of Oracle 11\.2\.0\.2](#Oracle.Concepts.Deprecate.11202)\) 
 
 You can create DB instances and DB snapshots, point\-in\-time restores and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
@@ -43,11 +38,8 @@ The following are the common management tasks you perform with an Amazon RDS Ora
 |  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md)  | 
 
 There are also advanced tasks and optional features for working with Oracle DB instances\. For more information, see the following documentation: 
-
 + For information on common DBA tasks for Oracle on Amazon RDS, see [Common DBA Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.md)\.
-
 + For information on Oracle GoldenGate support, see [Using Oracle GoldenGate with Amazon RDS](Appendix.OracleGoldenGate.md)\. 
-
 + For information on Siebel Customer Relationship Management \(CRM\) support, see [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)\. 
 
 ## Oracle Licensing<a name="Oracle.Concepts.Licensing"></a>
@@ -59,9 +51,7 @@ There are two licensing options available for Amazon RDS for Oracle; License Inc
 In the License Included model, you don't need to purchase Oracle licenses separately; AWS holds the license for the Oracle database software\. In this model, if you have an AWS Support account with case support, you contact AWS Support for both Amazon RDS and Oracle Database service requests\. 
 
 The License Included model is supported on Amazon RDS for the following Oracle database editions: 
-
 + Oracle Database Standard Edition One \(SE1\)
-
 + Oracle Database Standard Edition Two \(SE2\)
 
 ### Bring Your Own License \(BYOL\)<a name="Oracle.Concepts.Licensing.BYOL"></a>
@@ -71,13 +61,9 @@ In the Bring Your Own License model, you can use your existing Oracle Database l
 In this model, you continue to use your active Oracle support account, and you contact Oracle directly for Oracle Database service requests\. If you have an AWS Support account with case support, you can contact AWS Support for Amazon RDS issues\. Amazon Web Services and Oracle have a multi\-vendor support process for cases which require assistance from both organizations\. 
 
 The Bring Your Own License model is supported on Amazon RDS for the following Oracle database editions:
-
 + Oracle Database Enterprise Edition \(EE\)
-
 + Oracle Database Standard Edition \(SE\)
-
 + Oracle Database Standard Edition One \(SE1\)
-
 + Oracle Database Standard Edition Two \(SE2\)
 
 ### Licensing Oracle Multi\-AZ Deployments<a name="Oracle.Concepts.Licensing.MAZ"></a>
@@ -107,17 +93,11 @@ The following are the DB instance classes supported for Oracle\.
 ## Oracle Security<a name="Oracle.Concepts.RestrictedDBAPrivileges"></a>
 
 The Oracle database engine uses role\-based security\. A role is a collection of privileges that can be granted to or revoked from a user\. A predefined role, named *DBA*, normally allows all administrative privileges on an Oracle database engine\. The following privileges are not available for the DBA role on an Amazon RDS DB instance using the Oracle engine: 
-
 + Alter database
-
 + Alter system
-
 + Create any directory
-
 + Drop any directory
-
 + Grant any privilege
-
 + Grant any role
 
 When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts are locked and cannot be used\. 
@@ -183,9 +163,9 @@ Several parameter have new value ranges for Oracle 12c on Amazon RDS\. The follo
 
 | Parameter Name | 12c Range | 11g Range | 
 | --- | --- | --- | 
-|  [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)  |  os | db \[, extended\] | xml \[, extended\]  |  os | db \[, extended\] | xml \[, extended\] | true | false  | 
+|  [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)  |  os \| db \[, extended\] \| xml \[, extended\]  |  os \| db \[, extended\] \| xml \[, extended\] \| true \| false  | 
 |  [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)  |  For DB instances upgraded from Oracle 11g, automatically set to 12\.0\.0 on Amazon RDS unless a lower value is explicitly provided during the upgrade \(as low as 11\.2\.0\)  For new Oracle 12c DB instances, starts with 12\.0\.0 on Amazon RDS |  Starts with 11\.2\.0 on Amazon RDS | 
-|  [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)  |  PERMITTED | PREFERRED | ALWAYS | IGNORE | FORCE  |  PERMITTED | ALWAYS | IGNORE | FORCE  | 
+|  [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)  |  PERMITTED \| PREFERRED \| ALWAYS \| IGNORE \| FORCE  |  PERMITTED \| ALWAYS \| IGNORE \| FORCE  | 
 |  [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)  |  1\-100  |  1\-36  | 
 |  [optimizer\_features\_enable](http://docs.oracle.com/database/121/REFRN/GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C.htm#REFRN10141)  |  8\.0\.0 to 12\.1\.0\.2  |  8\.0\.0 to 11\.2\.0\.4  | 
 |  [parallel\_degree\_policy](http://docs.oracle.com/database/121/REFRN/GUID-BF09265F-8545-40D4-BD29-E58D5F02B0E5.htm#REFRN10310)  |  MANUAL,LIMITED,AUTO,ADAPTIVE  |  MANUAL,LIMITED,AUTO  | 
@@ -211,43 +191,26 @@ aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee
 ### Amazon RDS System Privileges for Oracle 12c<a name="Oracle.Concepts.FeatureSupport.12c.Privileges"></a>
 
 Several new system privileges have been granted to the system account for Oracle 12c\. These new system privileges include:
-
 + ALTER ANY CUBE BUILD PROCESS
-
 + ALTER ANY MEASURE FOLDER
-
 + ALTER ANY SQL TRANSLATION PROFILE
-
 + CREATE ANY SQL TRANSLATION PROFILE
-
 + CREATE SQL TRANSLATION PROFILE
-
 + DROP ANY SQL TRANSLATION PROFILE
-
 + EM EXPRESS CONNECT
-
 + EXEMPT DDL REDACTION POLICY
-
 + EXEMPT DML REDACTION POLICY
-
 + EXEMPT REDACTION POLICY
-
 + LOGMINING
-
 + REDEFINE ANY TABLE
-
 + SELECT ANY CUBE BUILD PROCESS
-
 + SELECT ANY MEASURE FOLDER
-
 + USE ANY SQL TRANSLATION PROFILE
 
 ### Amazon RDS Options for Oracle 12c<a name="Oracle.Concepts.FeatureSupport.12c.Options"></a>
 
 Several Oracle options changed between Oracle 11g and Oracle 12c, though most of the options remain the same between the two versions\. The Oracle 12c changes include the following: 
-
 + Oracle Enterprise Manager Database Express 12c replaced Oracle Enterprise Manager 11g Database Control\. For more information, see [Oracle Enterprise Manager Database Express](Appendix.Oracle.Options.OEM_DBControl.md)\. 
-
 + The option XMLDB is installed by default in Oracle 12c\. You no longer need to install this option yourself\. 
 
 ### Amazon RDS PL/SQL Packages for Oracle 12c<a name="Oracle.Concepts.FeatureSupport.12c.Packages"></a>
@@ -288,35 +251,21 @@ Oracle 12c includes a number of new built\-in PL/SQL packages\. The packages inc
 ### Oracle 12c Features Not Supported<a name="Oracle.Concepts.FeatureSupport.12c.NotSupported"></a>
 
 The following features are not supported for Oracle 12c on Amazon RDS:
-
 + Automated Storage Management
-
 + Data Guard / Active Data Guard
-
 + Database Vault
-
 + Java Support
-
 + Multitenant Database
-
 + Real Application Clusters \(RAC\)
-
 + Unified Auditing
 
 Several Oracle 11g PL/SQL packages are not supported in Oracle 12c\. These packages include:
-
 + DBMS\_AUTO\_TASK\_IMMEDIATE
-
 + DBMS\_CDC\_PUBLISH
-
 + DBMS\_CDC\_SUBSCRIBE
-
 + DBMS\_EXPFIL
-
 + DBMS\_OBFUSCATION\_TOOLKIT
-
 + DBMS\_RLMGR
-
 + SDO\_NET\_MEM
 
 ## Oracle 11g with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.11g"></a>
@@ -324,75 +273,42 @@ Several Oracle 11g PL/SQL packages are not supported in Oracle 12c\. These packa
 ### Oracle 11g Supported Features<a name="Oracle.Concepts.FeatureSupport.11g.Supported"></a>
 
 The following list shows the Oracle 11g features supported by Amazon RDS\. 
-
 + Total Recall
-
 + Flashback Table, Query and Transaction Query
-
 + Virtual Private Database
-
 + Fine\-Grained Auditing
-
 + Comprehensive support for Microsoft \.NET, OLE DB, and ODBC
-
 + Automatic Memory Management
-
 + Automatic Undo Management
-
 + Advanced Compression
-
 + Partitioning
-
 + Star Query Optimization
-
 + Summary Management \- Materialized View Query Rewrite
-
 + Oracle Data Redaction
-
 + Distributed Queries/Transactions
-
 + Text
-
 + Materialized Views
-
 + Import/Export and sqlldr Support
-
 + Oracle Enterprise Manager Database Control
-
 + Oracle XML DB \(without the XML DB Protocol Server\)
-
 + Oracle Application Express
-
 + Automatic Workload Repository for Enterprise Edition \(AWR\)\. For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)
-
 + Datapump \(network only\)
-
 + Native network encryption 
-
 + Transparent data encryption \(Oracle TDE\), part of the Oracle Advanced Security feature 
 
 ### Oracle 11g Features Not Supported<a name="Oracle.Concepts.FeatureSupport.11g.Unsupported"></a>
 
 The following features are not supported for Oracle 11g on Amazon RDS:
-
 + Real Application Clusters \(RAC\)
-
 + Real Application Testing
-
 + Data Guard / Active Data Guard
-
 + Oracle Enterprise Manager Grid Control
-
 + Automated Storage Management
-
 + Database Vault
-
 + Streams
-
 + Java Support
-
 + Oracle Label Security
-
 + Oracle XML DB Protocol Server
 
 ### Amazon RDS Parameters for Oracle 11g<a name="Oracle.Concepts.FeatureSupport.11g.Parameters"></a>
@@ -467,19 +383,14 @@ Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to th
 Amazon RDS for Oracle supports Linux kernel huge pages for increased database scalability\. The use of huge pages results in smaller page tables and less CPU time spent on memory management, increasing the performance of large database instances\. For more information, see [Overview of HugePages](https://docs.oracle.com/database/121/UNXAR/appi_vlm.htm#UNXAR400) in the Oracle documentation\. 
 
 You can use huge pages with the following versions and editions of Oracle: 
-
 + 12\.1\.0\.2, all editions
-
 + 11\.2\.0\.4, all editions
 
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
-
 + For the current generation DB instance classes \(db\.t2, db\.r3, and db\.m4\), `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default\. You can enable huge pages manually if the instance class has at least 14 GiB of memory\.
-
 + For next generation instance classes, such as db\.r4, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `ONLY` by default\.
-
 + For next generation instance classes, such as db\.r4, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `ONLY`\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
@@ -552,21 +463,13 @@ After huge pages are active on your DB instance, you can view huge pages informa
 Amazon RDS supports outbound network access on your DB instances running Oracle\. You can use `utl_http`, `utl_tcp`, and `utl_smtp` to connect from your DB instance to the network\. 
 
 Note the following about working with outbound network access:
-
 + To use `utl_http` on DB instances running Oracle 11g, you must install the XMLDB option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
-
 + Outbound network access with `utl_http`, `utl_tcp`, and `utl_smtp` is supported only for Oracle DB instances in a VPC\. To determine whether or not your DB instance is in a VPC, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. To move a DB instance not in a VPC into a VPC, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
-
 + To use SMTP with the UTL\_MAIL option, see [Oracle UTL\_MAIL](Oracle.Options.UTLMAIL.md)\.
-
 + The Domain Name Server \(DNS\) name of the remote host can be any of the following: 
-
   + Publicly resolvable\.
-
   + The endpoint of an Amazon RDS DB instance\.
-
   + Resolvable through a custom DNS server\. For more information, see [Setting Up a Custom DNS Server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\. 
-
   + The private DNS name of an Amazon EC2 instance in the same VPC or a peered VPC\. In this case, make sure that the name is resolvable through a custom DNS server\. Alternatively, to use the DNS provided by Amazon, you can enable the `enableDnsSupport` attribute in the VPC settings and enable DNS resolution support for the VPC peering connection\. For more information, see [DNS Support in Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-support) and [Modifying Your VPC Peering Connection](http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/working-with-vpc-peering.html#modify-peering-connections)\. 
 
 ## Using OEM, APEX, TDE, and Other Options<a name="Oracle.Concepts.General.Options"></a>

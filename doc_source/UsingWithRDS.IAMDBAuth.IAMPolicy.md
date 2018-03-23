@@ -28,11 +28,8 @@ The following example policy allows an IAM user to connect to a DB instance usin
 Don't confuse the `rds-db:` prefix with other Amazon RDS action prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\. 
 
 The example policy includes a single statement with the following elements:
-
 + `Effect`—Specify `Allow` to grant access to the DB instance\. If you don't explicitly allow access, then access is denied by default\.
-
 + `Action`—Specify `rds-db:connect` to allow connection to the DB instance\.
-
 + `Resource`—Specify an Amazon Resource Name \(ARN\) that describes one database account in one DB instance\. The ARN format is as follows\.
 
   ```
@@ -40,11 +37,8 @@ The example policy includes a single statement with the following elements:
   ```
 
   In this format, the following are so:
-
   + `region` is the AWS Region for the Amazon RDS DB instance\. In the example policy, the AWS Region is `us-west-2`\.
-
   + `account-id` is the AWS account number for the DB instance\. In the example policy, the account number is `123456789012`\.
-
   + `dbi-resource-id` is the identifier for the DB instance\. This identifier is unique to an AWS Region and never changes\. In the example policy, the identifier is `db-12ABC34DEFG5HIJ6KLMNOP78QR`\.
 
     To find a DB instance resource ID in the AWS Management Console for Amazon RDS, choose the DB instance you want, and then choose **Instance Actions**, **See Details**\. The **Resource ID** is shown in the **Configuration Details** section\.
@@ -55,7 +49,6 @@ The example policy includes a single statement with the following elements:
     aws rds describe-db-instances \
         --query "DBInstances[*].[DBInstanceIdentifier,DbiResourceId]"
     ```
-
   + `db-user-name` is the name of the MySQL database account to associate with IAM authentication\. In the example policy, the database account is `jane_doe`\.
 
 You can construct other ARNs to support various access patterns\. The following policy allows access to two different database accounts in a DB instance:

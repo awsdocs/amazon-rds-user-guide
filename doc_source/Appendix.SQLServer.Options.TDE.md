@@ -3,15 +3,10 @@
 Amazon RDS supports using Transparent Data Encryption \(TDE\) to encrypt stored data on your DB instances running Microsoft SQL Server\. TDE automatically encrypts data before it is written to storage, and automatically decrypts data when the data is read from storage\. 
 
 Amazon RDS supports TDE for the following SQL Server versions and editions:
-
 + SQL Server 2017 Enterprise Edition
-
 + SQL Server 2016 Enterprise Edition
-
 + SQL Server 2014 Enterprise Edition
-
 + SQL Server 2012 Enterprise Edition
-
 + SQL Server 2008 R2 Enterprise Edition
 
 To enable transparent data encryption for a DB instance that is running SQL Server, specify the **TDE** option in an Amazon RDS option group that is associated with that DB instance\. 
@@ -68,9 +63,7 @@ Transparent data encryption is used in scenarios where you need to encrypt sensi
 The **TDE** option is a persistent option than cannot be removed from an option group unless all DB instances and backups are disassociated from the option group\. Once you add the **TDE** option to an option group, the option group can only be associated with DB instances that use TDE\. For more information about persistent options in an option group, see [Option Groups Overview](USER_WorkingWithOptionGroups.md#Overview.OptionGroups)\. 
 
  Because the **TDE**  option is a persistent option, you can have a conflict between the option group and an associated DB instance\. You can have a conflict between the option group and an associated DB instance in the following situations: 
-
 + The current option group has the **TDE** option, and you replace it with an option group that does not have the **TDE** option\. 
-
 + You restore from a DB snapshot to a new DB instance that does not have an option group that contains the TDE option\. For more information about this scenario, see [Option Group Considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
 
  To disable TDE for a DB instance, first ensure that there are no encrypted objects left on the DB instance by either unencrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you will not be allowed to disable TDE for the DB instance\. When you use the AWS Management Console to remove the **TDE** option from an option group, the console indicates that it is processing, and an event is created indicating an error if the option group is associated with an encrypted DB instance or DB snapshot\.

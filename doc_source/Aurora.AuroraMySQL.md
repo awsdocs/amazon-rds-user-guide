@@ -33,9 +33,7 @@ Amazon Aurora includes performance enhancements to support the diverse needs of 
 Fast insert accelerates parallel inserts sorted by primary key and applies specifically to `LOAD DATA` and `INSERT INTO ... SELECT ...` statements\. Fast insert caches the position of a cursor in an index traversal while executing the statement\. This avoids unnecessarily traversing the index again\.
 
 You can monitor the following metrics to determine the effectiveness of fast insert for your DB cluster:
-
 + `aurora_fast_insert_cache_hits`: A counter that is incremented when the cached cursor is successfully retrieved and verified\. 
-
 + `aurora_fast_insert_cache_misses`: A counter that is incremented when the cached cursor is no longer valid and Aurora performs a normal index traversal\.
 
 You can retrieve the current value of the fast insert metrics using the following command:
@@ -90,15 +88,10 @@ CREATE SPATIAL INDEX shape_index ON test (shape);
 ## Comparison of Aurora MySQL 5\.6 and Aurora MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareReleases"></a>
 
 The following Amazon Aurora MySQL features are supported in Aurora MySQL 5\.6, but these features are currently not supported in Aurora MySQL 5\.7\.
-
 + Asynchronous key prefetch \(AKP\)\. For more information, see [Working with Asynchronous Key Prefetch in Amazon Aurora](AuroraMySQL.BestPractices.md#Aurora.BestPractices.AKP)\.
-
 + Hash joins\. For more information, see [Working with Hash Joins in Aurora MySQL](AuroraMySQL.BestPractices.md#Aurora.BestPractices.HashJoin)\.
-
 + Native functions for synchronously invoking AWS Lambda functions\. You can asynchronously invoke AWS Lambda functions from Aurora MySQL 5\.7\. For more information, see [Invoking a Lambda Function with an Aurora MySQL Native Function](AuroraMySQL.Integrating.Lambda.md#AuroraMySQL.Integrating.NativeLambda)\.
-
 + Scan batching\. For more information, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
-
 + Migrating data from MySQL using an Amazon S3 bucket\. For more information, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.
 
 Currently, Aurora MySQL 5\.7 does not support features added in Aurora MySQL version 1\.16 and later\. For information about Aurora MySQL version 1\.16, see [Amazon Aurora MySQL Database Engine Updates 2017\-12\-11](AuroraMySQL.Updates.20171211.md)\.
@@ -108,29 +101,17 @@ The performance schema is disabled for Aurora MySQL 5\.7\.
 ## Comparison of Aurora MySQL 5\.7 and MySQL 5\.7<a name="Aurora.AuroraMySQL.CompareMySQL57"></a>
 
 The following features are supported in MySQL 5\.7\.12 but are currently not supported in Aurora MySQL 5\.7:
-
 + Global transaction identifiers \(GTIDs\)
-
 + Group replication plugin
-
 + Increased page size
-
 + InnoDB buffer pool loading at startup
-
 + InnoDB full\-text parser plugin
-
 + Multisource replication
-
 + Online buffer pool resizing
-
 + Password validation plugin
-
 + Query rewrite plugins
-
 + Replication filtering
-
 + The `CREATE TABLESPACE` SQL statement
-
 + X Protocol
 
 For more information about these features, see the [MySQL 5\.7 documentation](https://dev.mysql.com/doc/refman/5.7/en/)\.

@@ -3,13 +3,11 @@
 Once Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. It is important to note that the security group you assigned to the DB instance when you created it must allow access to the DB instance\. If you have difficulty connecting to the DB instance, the problem is most often with the access rules you set up in the security group you assigned to the DB instance\.
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. If an endpoint value is `myinstance.123456789012.us-east-1.rds.amazonaws.com:5432`, then you would specify the following values in a PostgreSQL connection string:
-
 + For host or host name, specify 
 
   ```
   myinstance.123456789012.us-east-1.rds.amazonaws.com
   ```
-
 + For port, specify 
 
   ```
@@ -17,9 +15,7 @@ You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](ht
   ```
 
 Two common causes of connection failures to a new DB instance are:
-
 + The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the PostgreSQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
-
 + The DB instance was created using the default port of 5432, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, modify the instance to use a different port\.
 
 This section shows two ways to connect to a PostgreSQL DB instance\. The first example uses *pgAdmin*, a popular Open Source administration and development tool for PostgreSQL\. You can download and use *pgAdmin* without having a local instance of PostgreSQL on your client computer\. The second example uses *psql*, a command line utility that is part of a PostgreSQL installation\. To use *psql*, you must have a PostgreSQL installed on your client computer or have installed the *psql* client on your machine\. 
@@ -90,11 +86,7 @@ By far the most common problem that occurs when attempting to connect to a datab
 The most common error is *could not connect to server: Connection timed out*\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the DB security group assigned to the DB instance has the necessary rules to allow access through any firewall your connection may be going through\.
 
 ## Related Topics<a name="USER_ConnectToPostgreSQLInstance.related"></a>
-
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-
 +  [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md) 
-
 +  [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 
-
 +  [Deleting a DB Instance](USER_DeleteInstance.md) 

@@ -20,7 +20,7 @@ The time required to reboot your DB instance depends on the crash recovery proce
 
 1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to reboot\. 
 
-1. Choose **Instance Actions** and then choose **Reboot**\. 
+1. Choose **Instance actions** and then choose **Reboot**\. 
 
    The **Reboot DB Instance** page appears\.
 

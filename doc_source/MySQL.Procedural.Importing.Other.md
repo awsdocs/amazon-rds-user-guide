@@ -9,27 +9,18 @@ We recommend using the procedures in this section to import data into or export 
 ## Overview<a name="MySQL.Procedural.Importing.Overview"></a>
 
 We recommend the following procedures for importing data into a MySQL DB instance in the situations described:
-
 + You might be able to use the AWS Database Migration Service to migrate your data in the most efficient way\. AWS DMS can migrate databases with minimal downtime and, for many database engines, continue ongoing replication until you are ready to switch over to your MySQL DB instance\. You can use AWS DMS to migrate from a non\-MySQL database engine to an Amazon RDS MySQL DB instance, or to do a partial migration of a MySQL database\. If you are migrating to MySQL from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [What is AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\.
 
   We recommend that you do not use AWS DMS and instead use the MySQL database migration tools if all of following conditions are met:
-
   + You have a homogeneous migration, where you are migrating from a MySQL database to an Amazon RDS MySQL DB instance\.
-
   + You are migrating an entire database\.
 
     AWS DMS is a good option if you are migrating a subset of the data from your MySQL database to Amazon RDS\. However, when migrating an entire database, AWS DMS creates tables, primary keys, and in some cases unique indexes, but it doesn't create any other objects that are not required to efficiently migrate the data from the source\. For example, it doesn't create secondary indexes, non\-primary key constraints, or data defaults\. If you are migrating your full database, you can copy your schema to your RDS MySQL DB instance and then use AWS DMS to migrate your data, or use the native MySQL migration tools discussed later in this topic\.
-
   + Using the MySQL database migration tools reduces the amount of downtime required to migrate your database\. For example, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
-
 + To import data from an existing database in a MySQL DB instance, you can create a Read Replica, and then promote the Read Replica\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
-
 + To move small amounts of MySQL data, or where service interruption on the source MySQL database isn’t an issue, you can use a simple procedure to copy the data directly to your Amazon RDS MySQL DB instance using a command\-line utility\. For more information, see [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md)\.
-
 + To move large amounts of MySQL data, or when you want to minimize service interruption for live sites or applications that use an external MySQL instance, you can back up the data, copy it to Amazon Elastic Compute Cloud \(Amazon EC2\), and import it into an Amazon RDS MySQL DB instance\. You can then use replication to bring the two instances into sync for any data that has been added to the source system since the copy to Amazon EC2\. For more information [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
-
 + For data in sources other than an existing MySQL database, you can create flat files and import them using the `mysqlimport` utility\. For more information, see [Importing Data From Any Source to a MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.AnySource.md)\.
-
 + To set up replication using an existing MySQL DB instance as the replication master, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Note**  
@@ -94,11 +85,8 @@ Loading flat files with LOAD DATA LOCAL INFILE can be the fastest and least cost
 #### One Big Transaction<a name="MySQL.Procedural.Importing.Advanced.InputFormat.BigTransaction"></a>
 
 LOAD DATA LOCAL INFILE loads the entire flat file as one transaction\. This isn't necessarily a bad thing\. If the size of the individual files can be kept small, this has a number of advantages:
-
 + Resume Capability \- Keeping track of which files have been loaded is easy\. If a problem arises during the load, you can pick up where you left off with little effort\. Some data may have to be retransmitted to Amazon RDS, but with small files, the amount retransmitted is minimal\.
-
 + Load data in parallel \- If you've got IOPs and network bandwidth to spare with a single file load, loading in parallel may save time\.
-
 + Throttle the load rate \- Data load impacting other processes? Throttle the load by increasing the interval between files\. 
 
 #### Be Careful<a name="MySQL.Procedural.Importing.Advanced.InputFormat.Careful"></a>
@@ -120,17 +108,11 @@ Snapshots are fast too, so frequent checkpointing doesn't add significantly to l
 ### Decreasing Load Time<a name="MySQL.Procedural.Importing.Advanced.LoadTime"></a>
 
 Here are some additional tips to reduce load times: 
-
 + Create all secondary indexes prior to loading\. This is counter\-intuitive for those familiar with other databases\. Adding or modifying a secondary index causes MySQL to create a new table with the index changes, copy the data from the existing table to the new table, and drop the original table\. 
-
 + Load data in PK order\. This is particularly helpful for InnoDB tables where load times can be reduced by 75\-80% and data file size cut in half\. 
-
 + Disable foreign key constraints foreign\_key\_checks=0 For flat files loaded with LOAD DATA LOCAL INFILE, this is required in many cases\. For any load, disabling FK checks will provide significant performance gains\. Just be sure to enable the constraints and verify the data after the load\. 
-
 + Load in parallel unless already near a resource limit\. Use partitioned tables when appropriate\. 
-
 + Use multi\-value inserts when loading with SQL to minimize statement execution overhead\. When using mysqldump, this is done automatically\.
-
 + Reduce InnoDB log IO innodb\_flush\_log\_at\_trx\_commit=0 
 
 **Note**  

@@ -3,21 +3,13 @@
 Oracle GoldenGate is used to collect, replicate, and manage transactional data between databases\. It is a log\-based change data capture \(CDC\) and replication software package used with Oracle databases for online transaction processing \(OLTP\) systems\. GoldenGate creates trail files that contain the most recent changed data from the source database and then pushes these files to the target database\. You can use Oracle GoldenGate with Amazon RDS for Active\-Active database replication, zero\-downtime migration and upgrades, disaster recovery, data protection, and in\-region and cross\-region replication\. 
 
 The following are important points to know when working with Oracle GoldenGate on Amazon RDS: 
-
 + You are responsible for setting up and managing GoldenGate on Amazon RDS\. 
-
 + Amazon RDS supports Oracle GoldenGate under the bring\-your\-own\-license model in all AWS regions\. For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
-
 + Amazon RDS supports Oracle GoldenGate for Oracle Database Standard Edition Two \(SE2\), Standard Edition One \(SE1\), Standard Edition \(SE\), and Enterprise Edition \(EE\)\. 
-
 + Amazon RDS supports Oracle GoldenGate for database version 11\.2\.0\.4 or 12\.1\.0\.2\. 
-
 + Amazon RDS supports Oracle GoldenGate version 11\.2\.1 and 12\.1\.x\. 
-
 + Amazon RDS supports migration and replication across Oracle databases using Oracle GoldenGate\. We do not support nor prevent customers from migrating or replicating across heterogeneous databases\. 
-
 + You can use GoldenGate on Amazon RDS Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. Since trail files save data unencrypted by default, you should encrypt the pipeline between the source instance, the GoldenGate hub, and the target instance using `sqlnet.ora` encryption\. For more information on `sqlnet.ora` encryption, see the [Oracle documentation](https://docs.oracle.com/goldengate/1212/gg-winux/GIORA/classic_capture.htm)\. 
-
 + Oracle GoldenGate DDL is not currently supported\. 
 
 ## Overview<a name="Appendix.OracleGoldenGate.Overview"></a>
@@ -52,13 +44,9 @@ Any issues that impact running Oracle GoldenGate on an on\-premises environment 
 You can use GoldenGate using Amazon RDS to upgrade to major versions of Oracle\. For example, you can use GoldenGate using Amazon RDS to upgrade from an Oracle version 8 on\-premises database to an Oracle database running version 11\.2\.0\.4 on an Amazon RDS DB instance\.
 
 To set up Oracle GoldenGate using Amazon RDS, you configure the hub on the EC2 instance, and then configure the source and target databases\. The following steps show how to set up GoldenGate for use with Amazon RDS\. Each step is explained in detail in the following sections: 
-
 + [Setting Up an Oracle GoldenGate Hub on EC2](#Appendix.OracleGoldenGate.Hub)
-
 + [Setting Up a Source Database for Use with GoldenGate on Amazon RDS](#Appendix.OracleGoldenGate.Source)
-
 + [Setting Up a Target Database for Use with GoldenGate on Amazon RDS](#Appendix.OracleGoldenGate.Target)
-
 + [Working with the EXTRACT and REPLICAT Utilities of Oracle GoldenGate](#Appendix.OracleGoldenGate.ExtractReplicat)
 
 ## Setting Up an Oracle GoldenGate Hub on EC2<a name="Appendix.OracleGoldenGate.Hub"></a>
@@ -68,13 +56,9 @@ There are several steps to creating an Oracle GoldenGate hub on an Amazon EC2 in
 Since the EC2 instance that is serving as the GoldenGate hub stores and processes the transaction information from the source database into trail files, you must have enough allocated storage to store the trail files\. You must also ensure that the EC2 instance has enough processing power to manage the amount of data being processed and enough memory to store the transaction information before it is written to the trail file\.
 
 The following tasks set up a GoldenGate hub on an Amazon EC2 instance; each task is explained in detail in this section\. The tasks include:
-
 + Add an alias to the tnsname\.ora file
-
 + Create the GoldenGate subdirectories
-
 + Update the GLOBALS parameter file
-
 + Configure the mgr\.prm file and start the *manager*
 
 Add the following entry to the tnsname\.ora file to create an alias\. For more information on the tnsname\.ora file, see the [Oracle documentation](http://docs.oracle.com/cd/B28359_01/network.111/b28317/tnsnames.htm#NETRF007)\.
@@ -125,15 +109,10 @@ Once you have completed these steps, the GoldenGate hub is ready for use\. Next,
 ## Setting Up a Source Database for Use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Source"></a>
 
  When your source database is running version 11\.2\.0\.4 or later, there are three tasks you need to accomplish to set up a source database for use with GoldenGate: 
-
 + Set the `compatible` parameter to 11\.2\.0\.4 or later\. 
-
 + Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. This parameter turns on supplemental logging for the source database\. If your source database is on an Amazon RDS DB instance, you must have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\.
-
 + Set the retention period for archived redo logs for the GoldenGate source database\. 
-
 + Create a GoldenGate user account on the source database\.
-
 + Grant the necessary privileges to the GoldenGate user\.
 
 The source database must have the `compatible` parameter set to 11\.2\.0\.4 or later\. If you are using an Oracle database on an Amazon RDS DB instance as the source database, you must have a parameter group with the `compatible` parameter set to 11\.2\.0\.4 or later associated with the DB instance\. If you change the `compatible` parameter in a parameter group associated with the DB instance, the change requires an instance reboot\. You can use the following Amazon RDS CLI commands to create a new parameter group and set the `compatible` parameter\. Note that you must associate the new parameter group with the source DB instance:
@@ -238,13 +217,9 @@ EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
 ## Setting Up a Target Database for Use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Target"></a>
 
 The following tasks set up a target DB instance for use with GoldenGate:
-
 + Set the `compatible` parameter to 11\.2\.0\.4 or later
-
 +  Set the ENABLE\_GOLDENGATE\_REPLICATION parameter to *True*\. If your target database is on an Amazon RDS DB instance, you must have a parameter group assigned to the DB instance with the ENABLE\_GOLDENGATE\_REPLICATION parameter set to *true*\. For more information about the ENABLE\_GOLDENGATE\_REPLICATION parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346) \. 
-
 + Create and manage a GoldenGate user account on the target database
-
 + Grant the necessary privileges to the GoldenGate user
 
  GoldenGate runs as a database user and must have the appropriate database privileges, so you must create a GoldenGate user account on the target database\. The following statements create a user named *oggadm1*: 
@@ -295,7 +270,6 @@ The Oracle GoldenGate utilities `EXTRACT` and `REPLICAT` work together to keep t
 The `EXTRACT` utility retrieves, converts, and outputs data from the source database to trail files\. `EXTRACT` queues transaction details to memory or to temporary disk storage\. When the transaction is committed to the source database, `EXTRACT` flushes all of the transaction details to a trail file for routing to the GoldenGate on\-premises or EC2\-instance hub and then to the target database\.
 
 The following tasks enable and start the `EXTRACT` utility:
-
 + Configure the `EXTRACT` parameter file on the GoldenGate hub \(on\-premises or EC2 instance\)\. The following listing shows an example `EXTRACT` parameter file\.
 
   ```
@@ -312,19 +286,16 @@ The following tasks enable and start the `EXTRACT` utility:
   	 
   TABLE EXAMPLE.TABLE;
   ```
-
 + On the GoldenGate hub, launch the GoldenGate command line interface \(*ggsci*\)\. Log into the source database\. The following example shows the format for logging in:
 
   ```
    dblogin userid <user>@<db tnsname> 
   ```
-
 + Add a checkpoint table for the database:
 
   ```
   add checkpointtable 
   ```
-
 + Add transdata to turn on supplemental logging for the database table:
 
   ```
@@ -336,7 +307,6 @@ The following tasks enable and start the `EXTRACT` utility:
   ```
   add trandata <user>.* 
   ```
-
 + Using the `ggsci` command line, enable the `EXTRACT` utility using the following commands:
 
   ```
@@ -345,13 +315,11 @@ The following tasks enable and start the `EXTRACT` utility:
      extract <extractname-from-paramfile>, 
      MEGABYTES Xm
   ```
-
 + Register the `EXTRACT` utility with the database so that the archive logs are not deleted\. This allows you to recover old, uncommitted transactions if necessary\. To register the `EXTRACT` utility with the database, use the following command:
 
   ```
    register EXTRACT <extract process name>, DATABASE  
   ```
-
 + To start the `EXTRACT` utility, use the following command:
 
   ```
@@ -363,7 +331,6 @@ The following tasks enable and start the `EXTRACT` utility:
 The `REPLICAT` utility is used to "push" transaction information in the trail files to the target database\.
 
 The following tasks enable and start the `REPLICAT` utility:
-
 + Configure the `REPLICAT` parameter file on the GoldenGate hub \(on\-premises or EC2 instance\)\. The following listing shows an example `REPLICAT` parameter file\.
 
   ```
@@ -376,25 +343,21 @@ The following tasks enable and start the `REPLICAT` utility:
   ASSUMETARGETDEFS
   MAP EXAMPLE.TABLE, TARGET EXAMPLE.TABLE;
   ```
-
 + Launch the GoldenGate command line interface \(ggsci\)\. Log into the target database\. The following example shows the format for logging in:
 
   ```
    dblogin userid <user>@<db tnsname>  
   ```
-
 + Using the *ggsci* command line, add a checkpoint table\. Note that the user indicated should be the GoldenGate user account, not the target table schema owner\. The following example creates a checkpoint table named *gg\_checkpoint*\.
 
   ```
   add checkpointtable <user>.gg_checkpoint  
   ```
-
 + To enable the `REPLICAT` utility, use the following command:
 
   ```
   add replicat <replicat name> EXTTRAIL <extract trail file> CHECKPOINTTABLE <user>.gg_checkpoint  
   ```
-
 + To start the `REPLICAT` utility, use the following command:
 
   ```
@@ -405,7 +368,7 @@ The following tasks enable and start the `REPLICAT` utility:
 
 This section explains the most common issues when using GoldenGate with Amazon RDS\.
 
-
+**Topics**
 + [Log Retention](#Appendix.OracleGoldenGate.Troubleshooting.Logs)
 + [GoldenGate appears to be properly configured but replication is not working](#w3ab1c34c83c15c19c10)
 
@@ -422,26 +385,22 @@ for sequence 1306Not able to establish initial position for begin time 2014-03-0
 ### GoldenGate appears to be properly configured but replication is not working<a name="w3ab1c34c83c15c19c10"></a>
 
 For pre\-existing tables, GoldenGate needs to be told which SCN it should work from\. Take the following steps to fix this issue:
-
 + Launch the GoldenGate command line interface \(ggsci\)\. Log into the source database\. The following example shows the format for logging in:
 
   ```
   dblogin userid <user>@<db tnsname> 
   ```
-
 + Using the ggsci command line, set up the start SCN for the `EXTRACT` process\. The following example sets the SCN to 223274 for the extract:
 
   ```
   ALTER EXTRACT <extract process name> SCN 223274
   start <extract process name>
   ```
-
 + Log into the target database\. The following example shows the format for logging in:
 
   ```
   dblogin userid <user>@<db tnsname> 
   ```
-
 + Using the ggsci command line, set up the start SCN for the `REPLICAT` process\. The following example sets the SCN to 223274 for the `REPLICAT`:
 
   ```

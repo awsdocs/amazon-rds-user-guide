@@ -38,11 +38,8 @@ The destination AWS Region must have the same database engine version available 
 1. \(Optional\) Select **Copy Tags** to copy tags and values from the snapshot to the copy of the snapshot\. 
 
 1. \(Optional\) For **Enable Encryption**, choose one of the following options: 
-
    + Choose **No** if the DB snapshot isn't encrypted and you don't want to encrypt the copy\. 
-
    + Choose **Yes** if the DB snapshot isn't encrypted but you want to encrypt the copy\. In this case, for **Master Key**, specify the KMS key identifier to use to encrypt the DB snapshot copy\. 
-
    + Choose **Yes** if the DB snapshot is encrypted\. In this case, you must encrypt the copy, so **Yes** is already selected\. For **Master Key**, specify the KMS key identifier to use to encrypt the DB snapshot copy\. 
 
 1. Choose **Copy Snapshot**\.
@@ -52,35 +49,21 @@ The destination AWS Region must have the same database engine version available 
 You can copy a DB snapshot by using the AWS CLI command [copy\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-snapshot.html)\. If you are copying the snapshot to a new AWS Region, run the command in the new AWS Region\. 
 
 The following options are used to copy a DB snapshot\. Not all options are required for all scenarios\. Use the descriptions and the examples that follow to determine which options to use\. 
-
 + `--source-db-snapshot-identifier` – The identifier for the source DB snapshot\. 
-
   + If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier\. For example, `rds:mysql-instance1-snapshot-20130805`\. 
-
   + If the source snapshot is in a different AWS Region than the copy, specify a valid DB snapshot ARN\. For example, `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`\. 
-
   + If you are copying from a shared manual DB snapshot, this parameter must be the Amazon Resource Name \(ARN\) of the shared DB snapshot\. 
-
   + If you are copying an encrypted snapshot this parameter must be in the ARN format for the source AWS Region, and must match the `SourceDBSnapshotIdentifier` in the `PreSignedUrl` parameter\. 
-
 + `--target-db-snapshot-identifier` – The identifier for the new copy of the encrypted DB snapshot\. 
-
 + `--copy-tags` – Include the copy tags option to copy tags and values from the snapshot to the copy of the snapshot\. 
-
 + `--option-group-name` – The option group to associate with the copy of the snapshot\. 
 
   Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a non\-default option group\. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across regions\. For more information, see [Option Group Considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
-
 + `--kms-key-id` – The AWS KMS key ID for an encrypted DB snapshot\. The KMS key ID is the Amazon Resource Name \(ARN\), KMS key identifier, or the KMS key alias for the KMS encryption key\. 
-
   + If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new KMS encryption key\. If you don't specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot\. 
-
   + If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter\. 
-
   + If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted\. 
-
   + If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region\. KMS encryption keys are specific to the AWS Region that they are created in, and you cannot use encryption keys from one AWS Region in another AWS Region\. 
-
 + `--source-region` – The ID of the AWS Region of the source DB snapshot\. If you copy an encrypted snapshot to a different AWS Region, then you must specify this option\. 
 
 **Example From Unencrypted, To Same Region**  
@@ -147,53 +130,34 @@ For Windows:
 You can copy a DB snapshot by using the Amazon RDS API action [CopyDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBSnapshot.html)\. If you are copying the snapshot to a new AWS Region, perform the action in the new AWS Region\. 
 
 The following parameters are used to copy a DB snapshot\. Not all parameters are required for all scenarios\. Use the descriptions and the examples that follow to determine which parameters to use\. 
-
 + `SourceDBSnapshotIdentifier` – The identifier for the source DB snapshot\. 
-
   + If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier\. For example, `rds:mysql-instance1-snapshot-20130805`\. 
-
   + If the source snapshot is in a different AWS Region than the copy, specify a valid DB snapshot ARN\. For example, `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805`\. 
-
   + If you are copying from a shared manual DB snapshot, this parameter must be the Amazon Resource Name \(ARN\) of the shared DB snapshot\. 
-
   + If you are copying an encrypted snapshot this parameter must be in the ARN format for the source AWS Region, and must match the `SourceDBSnapshotIdentifier` in the `PreSignedUrl` parameter\. 
-
 + `TargetDBSnapshotIdentifier` – The identifier for the new copy of the encrypted DB snapshot\. 
-
 + `CopyTags` – Set this parameter to `true` to copy tags and values from the snapshot to the copy of the snapshot\. The default is `false`\. 
-
 + `OptionGroupName` – The option group to associate with the copy of the snapshot\. 
 
   Specify this parametr if you are copying a snapshot from one AWS Region to another, and your DB instance uses a non\-default option group\. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this parameter when copying across regions\. For more information, see [Option Group Considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
-
 + `KmsKeyId` – The AWS KMS key ID for an encrypted DB snapshot\. The KMS key ID is the Amazon Resource Name \(ARN\), KMS key identifier, or the KMS key alias for the KMS encryption key\. 
-
   + If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new KMS encryption key\. If you don't specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot\. 
-
   + If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter\. 
-
   + If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted\. 
-
   + If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region\. KMS encryption keys are specific to the AWS Region that they are created in, and you cannot use encryption keys from one AWS Region in another AWS Region\. 
-
 + `PreSignedUrl` – The URL that contains a Signature Version 4 signed request for the `CopyDBSnapshot` API action in the source AWS Region that contains the source DB snapshot to copy\. 
 
   You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API\. You can specify the source region option instead of this parameter when you copy an encrypted DB snapshot from another AWS Region by using the AWS CLI\. 
 
   The presigned URL must be a valid request for the `CopyDBSnapshot` API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied\. The presigned URL request must contain the following parameter values: 
-
   + `DestinationRegion` \- The AWS Region that the encrypted DB snapshot will be copied to\. This AWS Region is the same one where the `CopyDBSnapshot` action is called that contains this presigned URL\. 
 
     For example, if you copy an encrypted DB snapshot from the us\-west\-2 region to the us\-east\-1 region, then you call the `CopyDBSnapshot` action in the us\-east\-1 region and provide a presigned URL that contains a call to the `CopyDBSnapshot` action in the us\-west\-2 region\. For this example, the `DestinationRegion` in the presigned URL must be set to the us\-east\-1 region\. 
-
   + `KmsKeyId` \- The KMS key identifier for the key to use to encrypt the copy of the DB snapshot in the destination AWS Region\. This is the same identifier for both the `CopyDBSnapshot` action that is called in the destination AWS Region, and the action contained in the presigned URL\. 
-
   + `SourceDBSnapshotIdentifier` \- The DB snapshot identifier for the encrypted snapshot to be copied\. This identifier must be in the Amazon Resource Name \(ARN\) format for the source AWS Region\. For example, if you are copying an encrypted DB snapshot from the us\-west\-2 region, then your `SourceDBSnapshotIdentifier` looks like the following example: `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`\. 
 
   For more information on Signature Version 4 signed requests, see the following:
-
   + [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the Amazon Simple Storage Service API Reference
-
   + [Signature Version 4 Signing Process](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the AWS General Reference
 
 **Example From Unencrypted, To Same Region**  

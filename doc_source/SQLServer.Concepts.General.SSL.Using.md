@@ -5,9 +5,7 @@ You can use Secure Sockets Layer \(SSL\) to encrypt connections between your cli
 When you create a SQL Server DB instance, Amazon RDS creates an SSL certificate for it\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
 There are 2 ways to use SSL to connect to your SQL Server DB instance: 
-
 + Force SSL for all connections — this happens transparently to the client, and the client doesn't have to do any work to use SSL\. 
-
 + Encrypt specific connections — this sets up an SSL connection from a specific client computer, and you must do work on the client to encrypt connections\. 
 
 ## Forcing Connections to Your DB Instance to Use SSL<a name="SQLServer.Concepts.General.SSL.Forcing"></a>
@@ -131,7 +129,5 @@ To enable SSL encryption for clients that connect using JDBC, you might need to 
    ```
 
 ## Related Topics<a name="TODO.Related"></a>
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-
 + [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)

@@ -80,5 +80,4 @@ In addition to your Siebel Database, you can also use Amazon Web Services to sup
 | Siebel Gateway Name Server |  You can host your Siebel Gateway Name Server on an EC2 instance\. You can then put your server in the same VPC with the DB instance and use the VPC security group to access the database\. For more information, see [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
 
 ## Related Topics<a name="w3ab1c34c83c23c19"></a>
-
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)

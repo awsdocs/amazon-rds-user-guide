@@ -78,11 +78,8 @@ To monitor the health and performance of your Aurora DB cluster, you can view so
 1. Choose **Instance actions**, and then choose **See details**\. 
 
 1. In the Cloudwatch section, choose one of the following options from **Monitoring** for how you want to view your metrics:
-
    + **Cloudwatch** – Shows a summary of CloudWatch metrics\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
-
    + **Enhanced monitoring** – Shows a summary of OS metrics available to an Aurora DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
-
    + **OS process list** – Shows the processes running on the DB instance or DB cluster and their related metrics including CPU percentage, memory usage, and so on\.   
 ![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/AuroraMetrics01.png)
 
@@ -94,50 +91,29 @@ To monitor the health and performance of your Aurora DB cluster, you can view so
 Not all of the metrics provided by Amazon Aurora are available to you in the Amazon RDS console\. You can view them using other tools, however, such as the AWS CLI and CloudWatch API\. In addition, some of the metrics that are available in the Amazon RDS console are either shown only for specific instance classes, or with different names and different units of measurement\. 
 
 The following Aurora metrics are not available in the Amazon RDS console:
-
 + `AuroraBinlogReplicaLag`
-
 + `DeleteLatency`
-
 + `DeleteThroughput`
-
 + `EngineUptime`
-
 + `InsertLatency`
-
 + `InsertThroughput`
-
 + `NetworkThroughput`
-
 + `Queries`
-
 + `UpdateLatency`
-
 + `UpdateThroughput`
 
 In addition, some Aurora metrics are either shown only for specific instance classes, or only for DB instances, or with different names and different units of measurement:
-
 + The `CPUCreditBalance` and `CPUCreditUsage` metrics are displayed only for `db.t2.small` and `db.t2.medium` instances
-
 + The following metrics that are displayed with different names, as listed:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Monitoring.html)
-
 + The following metrics apply to an entire Aurora DB cluster, but are displayed only when viewing DB instances for an Aurora DB cluster in the Amazon RDS console:
-
   + `VolumeBytesUsed`
-
   + `VolumeReadIOPs`
-
   + `VolumeWriteIOPs`
-
 + The following metrics are displayed in megabytes, instead of bytes, in the Amazon RDS console:
-
   + `FreeableMemory`
-
   + `FreeLocalStorage`
-
   + `NetworkReceiveThroughput`
-
   + `NetworkTransmitThroughput`
 
 ### Latest Metrics View<a name="Aurora.Monitoring.Metrics.RDSAvailability.LMV"></a>
@@ -155,5 +131,4 @@ You can view a subset of categorized Aurora metrics in the Latest Metrics view o
 The **Failed SQL Statements** metric, displayed under the **SQL** category of the Latest Metrics view in the Amazon RDS console, does not apply to Amazon Aurora\.
 
 ## Related Topics<a name="Aurora.Monitoring.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

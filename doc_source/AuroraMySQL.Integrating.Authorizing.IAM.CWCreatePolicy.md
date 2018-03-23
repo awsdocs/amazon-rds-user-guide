@@ -51,17 +51,11 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. Choose **Select actions** and then choose the Amazon CloudWatch Logs permissions needed for the IAM policy\.
 
    Ensure that the following permissions are selected:
-
    + `CreateLogGroup`
-
    + `CreateLogStream`
-
    + `DescribeLogStreams`
-
    + `GetLogEvents`
-
    + `PutLogEvents`
-
    + `PutRetentionPolicy`
 
 1. Choose **Resources** and choose **Add ARN** for **log\-group**\.
@@ -71,11 +65,8 @@ You can use the following steps to create an IAM policy that provides the minimu
 1. Choose **Add ARN** for **log\-stream**\.
 
 1. In the **Add ARN\(s\)** dialog box, enter the following values:
-
    + **Log Group Name** – `log-group:/aws/rds/*`
-
    + **Log Stream** – `log-stream`
-
    + **Log Stream Name** – `*`
 
 1. In the **Add ARN\(s\)** dialog box, choose **Add**

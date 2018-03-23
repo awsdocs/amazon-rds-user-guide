@@ -14,17 +14,13 @@ To find the endpoint for a MariaDB instance in the AWS Management Console:
 ![\[Connect to a MariaDB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
 
 If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com:3306`, then you specify the following values in a MariaDB connection string:
-
 + For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`
-
 + For port, specify `3306`
 
 You can connect to an Amazon RDS MariaDB DB instance by using tools like the `mysql` command line utility\. For more information on using the `mysql` utility, go to [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is HeidiSQL; for more information, go to the [ Download HeidiSQL](http://www.heidisql.com/download.php) page\.
 
 Two common causes of connection failures to a new DB instance are the following:
-
 + The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the MariaDB application or utility is running\. If the DB instance was created in an Amazon VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
-
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 
 You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\. For information, see [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
@@ -114,11 +110,7 @@ SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
 
 ## Related Topics<a name="USER_ConnectToMariaDBInstance.related"></a>
-
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-
 +  [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md) 
-
 +  [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 
-
 +  [Deleting a DB Instance](USER_DeleteInstance.md) 

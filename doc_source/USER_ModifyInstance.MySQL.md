@@ -113,11 +113,7 @@ The following table contains details about which settings you can modify, which 
 |  Subnet group  |  The subnet group for the DB instance\. You can use this setting to move your DB instance to a different VPC\.  If your DB instance is not in a VPC, you can use this setting to move your DB instance into a VPC\.  For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\.   | – | – | 
 
 ## Related Topics<a name="USER_ModifyInstance.MySQL.Related"></a>
-
 + [Rebooting a DB Instance](USER_RebootInstance.md)
-
 + [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)
-
 + [Upgrading the MySQL DB Engine](USER_UpgradeDBInstance.MySQL.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

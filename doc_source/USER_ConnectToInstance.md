@@ -3,9 +3,7 @@
  Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. Once Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
 
 To authenticate to your RDS DB instance, you can use one of the authentication methods for MySQL and IAM database authentication\.
-
 + To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication Method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
-
 + To learn how to authenticate to MySQL using IAM database authentication, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\.
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. 
@@ -20,17 +18,13 @@ To find the endpoint for a MySQL DB instance in the AWS Management Console:
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
 If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com` and the port value is `3306`, then you would specify the following values in a MySQL connection string:
-
 + For host or host name, specify `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com`
-
 + For port, specify `3306`
 
 You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL utility, go to [mysql \- The MySQL Command Line Tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. 
 
 Two common causes of connection failures to a new DB instance are:
-
 + The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
-
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 
 You can use SSL encryption on connections to an Amazon RDS MySQL DB instance\. For information, see [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\. 
@@ -120,13 +114,8 @@ SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
 
 ## Related Topics<a name="USER_ConnectToInstance.related"></a>
-
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-
 +  [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md) 
-
 +  [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 
-
 +  [Deleting a DB Instance](USER_DeleteInstance.md) 
-
 +  [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md) 

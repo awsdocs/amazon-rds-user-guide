@@ -158,9 +158,6 @@ The following are issues you might encounter when you attempt to connect to your
 |  **No connection could be made because the target machine actively refused it – Microsoft SQL Server, Error: 10061**   |  You were able to reach the DB instance but the connection was refused\. This is usually caused by specifying the user name or password incorrectly\. Verify the user name and password and then retry\.   | 
 
 ## Related Topics<a name="USER_ConnectToMicrosoftSQLServerInstance.related"></a>
-
 + [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

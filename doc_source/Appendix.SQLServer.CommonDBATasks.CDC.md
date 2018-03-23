@@ -19,7 +19,7 @@ To disable CDC, `msdb.dbo.rds_cdc_disable_db` run \.
 2. exec msdb.dbo.rds_cdc_disable_db '<database name>'
 ```
 
-
+**Topics**
 + [Tracking Tables with Change Data Capture](#Appendix.SQLServer.CommonDBATasks.CDC.tables)
 + [Change Data Capture Jobs](#Appendix.SQLServer.CommonDBATasks.CDC.jobs)
 + [Change Data Capture for Multi\-AZ Instances](#Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ)
@@ -58,11 +58,8 @@ To view the CDC configuration for your tables, run [sys\.sp\_cdc\_help\_change\_
 ```
 
 For more information on CDC tables, functions, and stored procedures in SQL Server documentation, see the following:
-
 + [Change Data Capture Stored Procedures \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/change-data-capture-stored-procedures-transact-sql)
-
 + [Change Data Capture Functions \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/change-data-capture-functions-transact-sql)
-
 + [Change Data Capture Tables \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-tables/change-data-capture-tables-transact-sql)
 
 ## Change Data Capture Jobs<a name="Appendix.SQLServer.CommonDBATasks.CDC.jobs"></a>
@@ -72,13 +69,9 @@ When you enable CDC, SQL Server creates the CDC jobs\. Database owners \(`db_own
 To control behavior of CDC in a database, use native SQL Server procedures such as [sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql) and [sp\_cdc\_start\_job ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-start-job-transact-sql)\. To change CDC job parameters, like `maxtrans` and `maxscans`, you can use [sp\_cdc\_change\_jobs\. ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-help-jobs-transact-sql)\.
 
 To get more information regarding the CDC jobs, you can query the following dynamic management views: 
-
 + sys\.dm\_cdc\_errors
-
 + sys\.dm\_cdc\_log\_scan\_sessions
-
 + sysjobs
-
 + sysjobhistory
 
 ## Change Data Capture for Multi\-AZ Instances<a name="Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ"></a>
@@ -86,11 +79,8 @@ To get more information regarding the CDC jobs, you can query the following dyna
 If you use CDC on a Multi\-AZ instance, make sure the mirror's CDC job configuration matches the one on the principal\. CDC jobs are mapped to the `database_id`\. If the database IDs on the mirror are different from the principal, then the jobs won't be associated with the correct database\. To try to prevent errors after failover, RDS drops and recreates the jobs on the new principal\. The recreated jobs use the parameters that the principal recorded before failover\.
 
 Although this process runs quickly, it's still possible that the CDC jobs might run before RDS can correct them\. Here are three ways to force parameters to be consistent between principal and mirror:
-
 + Use the same job parameters for all the databases that have CDC enabled\. 
-
 + Before you change the CDC job configuration, convert the Multi\-AZ instance to Single\-AZ\.
-
 + Manually transfer the parameters whenever you change them on the principal\.
 
 To view and define the CDC parameters that are used to recreate the CDC jobs after a failover, use `rds_show_configuration` and `rds_set_configuration`\. 

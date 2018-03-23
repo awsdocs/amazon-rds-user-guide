@@ -7,9 +7,7 @@ You can migrate either a manual or automated DB snapshot\. After the DB cluster 
 When the MySQL DB instance and the Aurora DB cluster are running the same version of MySQL, you can restore the MySQL snapshot directly to the Aurora DB cluster\. For example, you can restore a MySQL version 5\.6 snapshot directly to Aurora MySQL version 5\.6, but you can't restore a MySQL version 5\.6 snapshot directly to Aurora MySQL version 5\.7\.
 
 If you want to migrate a MySQL version 5\.6 snapshot to Aurora MySQL version 5\.7, you can perform the the migration in one of the following ways:
-
 + Migrate the MySQL version 5\.6 snapshot to Aurora MySQL version 5\.6, take a snapshot of the Aurora MySQL version 5\.6 DB cluster, and then restore the Aurora MySQL version 5\.6 snapshot to Aurora MySQL version 5\.7\.
-
 + Upgrade the MySQL version 5\.6 snapshot to MySQL version 5\.7, take a snapshot of the MySQL version 5\.7 DB instance, and then restore the MySQL version 5\.7 snapshot to Aurora MySQL version 5\.7\.
 
 You can't migrate a MySQL version 5\.7 snapshot to Aurora MySQL version 5\.6\.
@@ -39,11 +37,8 @@ Tables that are not MyISAM tables and are not compressed can be up to 16 TB in s
 ## Reducing the Amount of Space Required to Migrate Data into Amazon Aurora MySQL<a name="AuroraMySQL.Migrating.RDSMySQL.PreImport"></a>
 
 You might want to modify your database schema prior to migrating it into Amazon Aurora\. Such modification can be helpful in the following cases: 
-
 + You want to speed up the migration process\.
-
 + You are unsure of how much space you need to provision\.
-
 + You have attempted to migrate your data and the migration has failed due to a lack of provisioned space\.
 
 You can make the following changes to improve the process of migrating a database into Amazon Aurora\.
@@ -160,49 +155,34 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
    The **Migrate Database** page appears\.
 
 1. Set the following values on the **Migrate Database** page:
-
    + **Migrate to DB Engine**: Select `aurora`\.
-
    + **DB Engine Version**: Select the DB engine version for the Aurora MySQL DB cluster\.
-
    + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 terabytes \(TB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)\.
-
    + **DB Instance Identifier**: Type a name for the DB cluster that is unique for your account in the region you selected\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the region and DB engine you selected, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:
-
      + It must contain from 1 to 63 alphanumeric characters or hyphens\.
-
      + Its first character must be a letter\.
-
      + It cannot end with a hyphen or contain two consecutive hyphens\.
-
      + It must be unique for all DB instances per AWS account, per AWS Region\.
-
    + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your Aurora MySQL DB cluster by selecting your VPC identifier, for example `vpc-a464d1c1`\. For information on using an existing VPC, see [How to Create a VPC for Use with Amazon Aurora](Aurora.CreateVPC.md)\.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by selecting **Create a new VPC**\. 
-
    + **Subnet group**: If you have an existing subnet group, then you can use that subnet group with your Aurora MySQL DB cluster by selecting your subnet group identifier, for example `gs-subnet-group1`\.
 
      Otherwise, you can choose to have Amazon RDS create a subnet group for you by selecting **Create a new subnet group**\. 
-
    + **Public accessibility**: Select **No** to specify that instances in your DB cluster can only be accessed by resources inside of your VPC\. Select **Yes** to specify that instances in your DB cluster can be accessed by resources on the public network\. The default is **Yes**\.
 **Note**  
 Your production DB cluster might not need to be in a public subnet, because only your application servers will require access to your DB cluster\. If your DB cluster doesn't need to be in a public subnet, set **Publicly Accessible** to **No**\.
-
    + **Availability Zone**: Select the Availability Zone to host the primary instance for your Aurora MySQL DB cluster\. To have Amazon RDS select an Availability Zone for you, select **No Preference**\.
-
    + **Database Port**: Type the default port to be used when connecting to instances in the Aurora MySQL DB cluster\. The default is `3306`\.
 **Note**  
 You might be behind a corporate firewall that doesn't allow access to default ports such as the MySQL default port, 3306\. In this case, provide a port value that your corporate firewall allows\. Remember that port value later when you connect to the Aurora MySQL DB cluster\.
-
    + **Encryption**: Choose **Enable Encryption** for your new Aurora MySQL DB cluster to be encrypted at rest\. If you choose **Enable Encryption**, you will be required to choose an AWS KMS encryption key as the **Master Key** value\.
 
      If your DB snapshot isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\.
 
      If your DB snapshot is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. You can specify the encryption key used by the DB snapshot or a different key\. You can't create an unencrypted DB cluster from an encrypted DB snapshot\.
-
    + **Auto Minor Version Upgrade**: Select **Yes** if you want to enable your Aurora MySQL DB cluster to receive minor MySQL DB engine version upgrades automatically when they become available\.
 
      The **Auto Minor Version Upgrade** option only applies to upgrades to MySQL minor engine versions for your Amazon Aurora MySQL DB cluster\. It doesn't apply to regular patches applied to maintain system stability\.
@@ -218,23 +198,17 @@ You can migrate a DB snapshot of an Amazon RDS MySQL DB instance to create an Au
 If the DB snapshot is not in the AWS Region where you want to locate your data, copy the DB snapshot to that region\. For more information, see [Copying a DB Snapshot](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)\.
 
 You can create an Aurora DB cluster from a DB snapshot of an Amazon RDS MySQL DB instance by using the [http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-cluster-from-snapshot.html) command with the following parameters:
-
 + `--db-cluster-identifier`
 
   The name of the DB cluster to create\.
-
 + Either `--engine aurora-mysql` for a MySQL 5\.7–compatible DB cluster, or `--engine aurora` for a MySQL 5\.6–compatible DB cluster
-
 + `--kms-key-id`
 
   The AWS Key Management Service \(AWS KMS\) encryption key to optionally encrypt the DB cluster with, depending on whether your DB snapshot is encrypted\.
-
   + If your DB snapshot isn't encrypted, specify an encryption key to have your DB cluster encrypted at rest\. Otherwise, your DB cluster isn't encrypted\.
-
   + If your DB snapshot is encrypted, specify an encryption key to have your DB cluster encrypted at rest using the specified encryption key\. Otherwise, your DB cluster is encrypted at rest using the encryption key for the DB snapshot\.
 **Note**  
 You can't create an unencrypted DB cluster from an encrypted DB snapshot\.
-
 + `--snapshot-identifier`
 
   The Amazon Resource Name \(ARN\) of the DB snapshot to migrate\. For more information about Amazon RDS ARNs, see [Amazon Relational Database Service \(Amazon RDS\)](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-rds)\.
@@ -282,7 +256,5 @@ aws rds restore-db-cluster-from-snapshot ^
 ```
 
 ## Related Topics<a name="AuroraMySQL.Migrating.RDSMySQL.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
-
 + [Migrating Data to an Amazon Aurora DB Cluster](Aurora.Migrate.md)

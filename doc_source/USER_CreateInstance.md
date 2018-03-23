@@ -46,23 +46,14 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 ## CLI<a name="USER_CreateInstance.CLI"></a>
 
 To create a MySQL DB instance by using the AWS CLI, call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for MySQL DB Instances](#USER_CreateInstance.Settings)\. 
-
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--db-security-groups`
-
 + `--db-subnet-group`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--allocated-storage`
-
 + `--backup-retention-period`
 
 **Example**  
@@ -102,23 +93,14 @@ This command should produce output similar to the following:
 ## API<a name="USER_CreateInstance.API"></a>
 
 To create a MySQL DB instance by using the Amazon RDS API, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for MySQL DB Instances](#USER_CreateInstance.Settings)\. 
-
 + `AllocatedStorage`
-
 + `BackupRetentionPeriod`
-
 + `DBInstanceClass`
-
 + `DBInstanceIdentifier`
-
 + `DBSecurityGroups`
-
 + `DBSubnetGroup`
-
 + `Engine`
-
 + `MasterUsername`
-
 + `MasterUserPassword`
 
 **Example**  
@@ -183,11 +165,7 @@ The following table contains details about settings that you choose when you cre
 |  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateInstance.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)
-
 + [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

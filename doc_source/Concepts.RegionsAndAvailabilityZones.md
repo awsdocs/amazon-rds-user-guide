@@ -17,7 +17,5 @@ To create or work with an Amazon RDS DB instance in a specific AWS Region, use t
 If you do not explicitly specify an endpoint, the US West \(Oregon\) endpoint is the default\. 
 
 ## Related Topics<a name="Overview.Concepts.RegionsAndAvailabilityZones.Related"></a>
-
 +  [Regions and Availability Zones](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) in the *Amazon Elastic Compute Cloud User Guide*\. 
-
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 

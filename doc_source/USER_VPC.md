@@ -10,7 +10,7 @@ Accounts that support only the *EC2\-VPC* platform have a default VPC\. All new 
 
 Some legacy DB instances on the *EC2\-Classic* platform are not in a VPC\. The legacy *EC2\-Classic* platform does not have a default VPC, but as is true for either platform, you can create your own VPC and specify that a DB instance be located in that VPC\. 
 
-
+**Topics**
 + [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)
 + [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)
 + [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)

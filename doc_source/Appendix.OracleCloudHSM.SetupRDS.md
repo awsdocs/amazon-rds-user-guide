@@ -1,17 +1,11 @@
 # Setting Up Amazon RDS to Work with AWS CloudHSM Classic<a name="Appendix.OracleCloudHSM.SetupRDS"></a>
 
 To use AWS CloudHSM Classic with an Oracle DB instance using Oracle TDE, you must do the following tasks:
-
 + Ensure that the security group associated with the Oracle DB instance allows access to the HSM port 1792\.
-
 + Create a DB subnet group that uses the same subnets as those in the VPC used by your HSMs, and then assign that DB subnet group to your Oracle DB instance\.
-
 + Set up the Amazon RDS CLI\.
-
 + Add IAM permissions for Amazon RDS to use when accessing AWS CloudHSM Classic\.
-
 + Add the **TDE\_HSM** option to the option group associated with your Oracle DB instance using the Amazon RDS CLI\.
-
 + Add two new DB instance parameters to the Oracle DB instance that will use AWS CloudHSM Classic\. The `tde-credential-arn` parameter is the Amazon Resource Number \(ARN\) of the high\-availability \(HA\) partition group returned from the `create-hapg` command\. The `tde-credential-password` is the partition password you used when you initialized the HA partition group\.
 
 The Amazon RDS CLI documentation can be found at [What Is the AWS Command Line Interface?](http://docs.aws.amazon.com//cli/latest/userguide/cli-chap-welcome.html) and the section [Getting Set Up with the AWS Command Line Interface](http://docs.aws.amazon.com//cli/latest/userguide/cli-chap-getting-set-up.html)\. General instructions on using the AWS CLI can be found at [Using the AWS Command Line Interface](http://docs.aws.amazon.com//cli/latest/userguide/cli-chap-using.html)\. 
@@ -130,7 +124,7 @@ aws rds describe-db-instances --headers
 
 You can use a single AWS account to work with Amazon RDS and AWS CloudHSM Classic or you can use two separate accounts, one for Amazon RDS and one for AWS CloudHSM Classic\. This section provides information on both processes\. 
 
-
+**Topics**
 + [Adding IAM Permissions for a Single Account for Amazon RDS to Access the AWS CloudHSM Classic API](#Appendix.OracleCloudHSM.SetupRDS.Permissions.OneAccount)
 + [Using Separate AWS CloudHSM Classic and Amazon RDS Accounts for Amazon RDS to Access AWS CloudHSM Classic](#Appendix.OracleCloudHSM.SetupRDS.Permissions.TwoAccounts)
 
@@ -165,9 +159,7 @@ To create a IAM role that Amazon RDS uses to access the AWS CloudHSM Classic API
 If you want to separately manage your AWS CloudHSM Classic and Amazon RDS resources, you can use the two services with separate accounts\. To use two different accounts, you must set up each account as described in the following section\.
 
 To use two accounts, you must have the following:
-
 + An account that is enabled for the AWS CloudHSM Classic service and that is the owner of your hardware security module \(HSM\) devices\. Generally, this account is your AWS CloudHSM Classic account, with a customer ID of HSM\_ACCOUNT\_ID\.
-
 + An account for Amazon RDS that you can use to create and manage a DB instance that uses Oracle TDE\. Generally, this account is your DB account, with a customer ID DB\_ACCOUNT\_ID\.
 
 **To add DB account permission to access AWS CloudHSM Classic resources under the AWS CloudHSM Classic account**
@@ -234,9 +226,7 @@ To use two accounts, you must have the following:
    1. In the **Search** field, enter **RDSCloudHsmAssumeAuthorization**, and click the role when it appears in the list\.
 
    1. On the **Permissions** tab, detach the following default roles from the policy:
-
       + `AmazonRDSDirectoryServiceAccess`
-
       + `RDSCloudHsmAuthorizationRole`
 
       To detach a role, click the **X** associated with the role on the right, and then click **Detach**\.
@@ -362,15 +352,11 @@ An Oracle Enterprise Edition DB instance that uses AWS CloudHSM Classic must hav
 ### Creating a New Oracle DB Instance with Additional Parameters for AWS CloudHSM Classic<a name="w3ab1c34c83c11c27c21b5"></a>
 
 When creating a new DB instance to use with AWS CloudHSM Classic, there are several requirements:
-
 + You must include the option group that contains the **TDE\_HSM** option
-
 + You must provide values for the `tde-credential-arn` and `tde-credential-password` parameters\. The `tde-credential-arn` parameter value is the Amazon Resource Number \(ARN\) of the HA partition group returned from the `create-hapg` command\. You can also retrieve the ARNs of all of your high\-availability partition groups with the `list-hapgs` command\.
 
   The `tde-credential-password` is the partition password you used when you initialized the HA partition group\. 
-
 + The IAM Role that provides cross\-service access must be created\.
-
 + You must create an Oracle Enterprise Edition DB instance\.
 
 The following command creates a new Oracle Enterprise Edition DB instance called *HsmInstance\-test01* that includes the two parameters that provide AWS CloudHSM Classic access and uses an option group called *tdehsm\-option\-group*\.

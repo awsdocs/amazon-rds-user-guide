@@ -1,5 +1,7 @@
 # Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime<a name="MySQL.Procedural.Importing.NonRDSRepl"></a>
 
+If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\. 
+
 When importing data from an external MySQL or MariaDB database that supports a live application to an Amazon RDS MySQL or MariaDB DB instance, you can use the following procedure to minimize the impact on application availability\. This procedure can also help if you are working with a very large database, because you can reduce the cost of the import by reducing the amount of data that is passed across the network to AWS\.
 
 In this procedure, you transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS DB instance\. You then use replication to bring the Amazon RDS DB instance up\-to\-date with your live external instance, before redirecting your application to the Amazon RDS DB instance\. You configure MariaDB replication based on global transaction identifiers \(GTIDs\) if the external instance is MariaDB 10\.0\.2 or greater and the target instance is Amazon RDS MariaDB; otherwise, you configure replication based on binary log coordinates\. We recommend GTID\-based replication if your external database supports it due to its enhanced crash\-safety features\. For more information, see [Global Transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
@@ -23,6 +25,8 @@ Before you start the backup operation, you must set the replication options on t
 
 **Note**  
 Your database needs to be stopped to set the replication options and be in read\-only mode while the backup copy is created, so you need to schedule a maintenance window for these operations\.
+Exclude the following schemas from the dump file: `sys`, `performance_schema`, and `information_schema`\. The `mysqldump` utility excludes these schemas by default\.
+If you need to migrate users and privileges, consider using a tool that generates the data control language \(DCL\) for recreating them, such as the [pt\-show\-grants](https://www.percona.com/doc/percona-toolkit/LATEST/pt-show-grants.html) utility\.
 
 ### To Set Replication Options<a name="MySQL.Procedural.Importing.Repl.Setup.Procedure"></a>
 
@@ -63,7 +67,6 @@ Your database needs to be stopped to set the replication options and be in read\
    Use `chmod` if necessary to make sure that the directory where the backup file is being created is writeable\.
 **Important**  
 On Windows, run the command window as an administrator\.
-
    + To produce SQL output, use the following command:
 
      For Linux, OS X, or Unix:
@@ -91,7 +94,6 @@ On Windows, run the command window as an administrator\.
          -u <local_user> ^
          -p <password>
      ```
-
    + To produce delimited\-text output, use the following command:
 
      For Linux, OS X, or Unix:
@@ -145,13 +147,11 @@ You must create any stored procedures, triggers, functions, or events manually i
    Note the GTID returned; you need it to configure replication\.
 
 1. Compress the copied data to reduce the amount of network resources needed to copy your data to the Amazon RDS DB instance\. Take note of the size of the backup file; you need this information when determining how large an Amazon EC2 instance to create\. When you are done, compress the backup file using GZIP or your preferred compression utility\. 
-
    + To compress SQL output, use the following command:
 
      ```
      gzip backup.sql
      ```
-
    + To compress delimited\-text output, use the following command:
 
      ```
@@ -192,13 +192,11 @@ Be sure to copy sensitive data using a secure network transfer protocol\.
    For more information, see [Connect to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon Elastic Compute Cloud User Guide for Linux*\.
 
 1. While connected to your Amazon EC2 instance, decompress your database backup file\. For example:
-
    + To decompress SQL output, use the following command:
 
      ```
      gzip backup.sql.gz -d
      ```
-
    + To decompress delimited\-text output, use the following command:
 
      ```
@@ -228,17 +226,11 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same region as you
    1. On the **Choose use case** page, choose **Dev/Test – MySQL** to skip configuring Multi\-AZ deployment and provisioned IOPS storage\.
 
    1. In the **Instance specifications** section of the **Specify DB details** page, specify the DB instance class and allocated storage size that you have determined are appropriate\. Choose **No** for **Multi\-AZ deployment**\. For **Storage type**, specify whether or not to use **Provisioned IOPS \(SSD\)** as you determined in Step 2\. For **DB engine version**, choose the version that is compatible with your source MySQL instance, as follows:
-
       + If your source instance is MySQL 5\.1\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x\.
-
       + If your source instance is MySQL 5\.5\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x or greater\.
-
       + If your source instance is MySQL 5\.6\.x, the Amazon RDS DB instance must be MySQL 5\.6\.x or MariaDB\.
-
       + If your source instance is MySQL 5\.7\.x, the Amazon RDS DB instance must be MySQL 5\.7\.x, 5\.6\.x, or MariaDB\.
-
       + If your source instance is MariaDB 5\.1, 5\.2, or 5\.3, the Amazon RDS DB instance must be MySQL 5\.1\.x\.
-
       + If your source instance is MariaDB 5\.5 or greater, the Amazon RDS DB instance must be MariaDB\.
 **Important**  
 If your source MySQL 5\.6\.x instance runs a version prior to version 5\.6\.4, or if the source MySQL 5\.6\.x instance was upgraded from a version prior to version 5\.6\.4, then you must create an Amazon RDS MySQL DB instance running version 5\.6\.27 or later\.
@@ -272,13 +264,11 @@ If your source MySQL 5\.6\.x instance runs a version prior to version 5\.6\.4, o
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
 
 1. At the `mysql` prompt, run the `source` command and pass it the name of your database dump file to load the data into the Amazon RDS DB instance\.
-
    + For SQL format, use the following command:
 
      ```
      mysql> source backup.sql;
      ```
-
    + For delimited\-text format, first create the database \(if it isn’t the default database you created when setting up the Amazon RDS DB instance\):
 
      ```

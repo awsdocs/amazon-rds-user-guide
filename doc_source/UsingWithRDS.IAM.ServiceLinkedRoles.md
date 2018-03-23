@@ -13,61 +13,34 @@ For information about other services that support service\-linked roles, see [AW
 Amazon RDS uses the service\-linked role named **AWSServiceRoleForRDS** – to allow Amazon RDS to call AWS services on behalf of your database instances\.
 
 The AWSServiceRoleForRDS service\-linked role trusts the following services to assume the role:
-
 + `rds.amazonaws.com`
 
 The role permissions policy allows Amazon RDS to complete the following actions on the specified resources:
-
 + Actions on `ec2`:
-
   + `AssignPrivateIpAddresses`
-
   + `AuthorizeSecurityGroupIngress`
-
   + `CreateNetworkInterface`
-
   + `CreateSecurityGroup`
-
   + `DeleteNetworkInterface`
-
   + `DeleteSecurityGroup`
-
   + `DescribeAvailabilityZones`
-
   + `DescribeInternetGateways`
-
   + `DescribeSecurityGroups`
-
   + `DescribeSubnets`
-
   + `DescribeVpcAttribute`
-
   + `DescribeVpcs`
-
   + `ModifyNetworkInterfaceAttribute`
-
   + `RevokeSecurityGroupIngress`
-
   + `UnassignPrivateIpAddresses`
-
 + Actions on `sns`:
-
   + `ListTopic`
-
   + `Publish`
-
 + Actions on `cloudwatch`:
-
   + `PutMetricData`
-
   + `GetMetricData`
-
   + `CreateLogStream`
-
   + `PullLogEvents`
-
   + `DescribeLogStreams`
-
   + `CreateLogGroup`
 
 **Note**  

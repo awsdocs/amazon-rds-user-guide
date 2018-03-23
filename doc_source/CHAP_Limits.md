@@ -2,7 +2,7 @@
 
 This topic describes the resource limits and naming constraints for Amazon RDS\.
 
-
+**Topics**
 + [Limits in Amazon RDS](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
 + [File Size Limits in Amazon RDS](#RDS_Limits.FileSize)
@@ -85,11 +85,9 @@ Use the following SQL command to determine if any of your tables are too large a
 ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\.
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
@@ -122,11 +120,9 @@ Use the following SQL command to determine if any of your tables are too large a
 ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\.
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.

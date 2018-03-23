@@ -86,7 +86,5 @@ execute statspack.purge(<begin snap>, <end snap>);
 ```
 
 ## Related Topics<a name="Appendix.Oracle.Options.Statspack.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

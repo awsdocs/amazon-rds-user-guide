@@ -5,31 +5,21 @@ You have several options for migrating data from your existing database to an Am
 There are two different types of migration: physical and logical\. Physical migration means that physical copies of database files are used to migrate the database\. Logical migration means that the migration is accomplished by applying logical database changes, such as inserts, updates, and deletes\.
 
 Physical migration has the following advantages:
-
 + Physical migration is faster than logical migration, especially for large databases\.
-
 + Database performance does not suffer when a backup is taken for physical migration\.
-
 + Physical migration can migrate everything in the source database, including complex database components\.
 
 Physical migration has the following limitations:
-
 + The `innodb_page_size` parameter must be set to its default value \(`16KB`\)\.
-
 + The `innodb_data_file_path` must be configured with the default data file name `"ibdata1"`\. The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
-
 + The `innodb_log_files_in_group` parameter must be set to its default value \(`2`\)\.
 
 Logical migration has the following advantages:
-
 + You can migrate subsets of the database, such as specific tables or parts of a table\.
-
 + The data can be migrated regardless of the physical storage structure\.
 
 Logical migration has the following limitations:
-
 + Logical migration is usually slower than physical migration\.
-
 + Complex database components can slow down the logical migration process\. In some cases, complex database components can even block logical migration\.
 
 The following table describes your options and the type of migration for each option\.
@@ -48,5 +38,4 @@ The following table describes your options and the type of migration for each op
 If you are migrating a MySQL database external to Amazon RDS, the migration options described in the table are supported only if your database supports the InnoDB or MyISAM tablespaces\.
 
 ## Related Topics<a name="AuroraMySQL.Migrating.RelatedTopics"></a>
-
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

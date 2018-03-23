@@ -33,11 +33,8 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must modify your DB instance manually to perform a major version upgrade\. You should thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. A best practice we recommend is to perform the major version upgrade on a restored instance that you create from a DB snapshot\.
 
 Amazon RDS supports an in\-place upgrade from the following:
-
 + A PostgreSQL 9\.3\.x DB instance to a PostgreSQL 9\.4\.x DB instance
-
 + A PostgreSQL 9\.4\.x DB instance to a PostgreSQL 9\.5\.x DB instance
-
 + A PostgreSQL 9\.5\.x DB instance to a PostgreSQL 9\.6\.x DB instance
 
  Amazon RDS uses the `pg_upgrade` utility found at [http://www\.postgresql\.org/docs/9\.4/static/pgupgrade\.html](http://www.postgresql.org/docs/9.4/static/pgupgrade.html) to safely upgrade your instance\. 
@@ -147,13 +144,9 @@ If your PostgreSQL DB instance is using read replication, you must upgrade all o
 ## CLI<a name="USER_UpgradeDBInstance.PostgreSQL.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-
 + `--db-instance-identifier` – the name of the db instance\. 
-
 + `--engine-version` – the version number of the database engine to upgrade to\. 
-
 + `--allow-major-version-upgrade` – to to upgrade major version\. 
-
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
 **Example**  
@@ -179,13 +172,9 @@ For Windows:
 ## API<a name="USER_UpgradeDBInstance.PostgreSQL.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-
 + `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
-
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
-
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
 
 **Example**  
@@ -207,7 +196,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.PostgreSQL.Related"></a>
-
 + [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
 + [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)

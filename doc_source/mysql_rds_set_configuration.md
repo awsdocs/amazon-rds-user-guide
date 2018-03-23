@@ -29,11 +29,8 @@ For MySQL DB instances, the maximum `binlog retention hours` value is 168 \(7 da
 After you set the retention period, monitor storage usage for the DB instance to ensure that the retained binary logs don't take up too much storage\.
 
 The `mysql.rds_set_configuration` is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Related Topics<a name="mysql_rds_set_configuration.related"></a>
-
 + [mysql\.rds\_show\_configuration](mysql_rds_show_configuration.md)

@@ -1,11 +1,8 @@
 # MySQL on Amazon RDS<a name="CHAP_MySQL"></a>
 
 Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions: 
-
 + MySQL 5\.7
-
 + MySQL 5\.6
-
 + MySQL 5\.5
 
 For more information about minor version support, see [MySQL on Amazon RDS Versions](#MySQL.Concepts.VersionMgmt)\. 
@@ -39,11 +36,8 @@ The following are the common management tasks you perform with an Amazon RDS MyS
 |  **Replicating your data** Create a MySQL Read Replica—optionally, in a different AWS Region—for load balancing, disaster recovery, and processing read\-heavy database workloads, such as for analysis and reporting\.   |   [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)   [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)   | 
 
 There are also several appendices with useful information about working with Amazon RDS MySQL DB instances: 
-
 + [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)
-
 + [Options for MySQL DB Instances](Appendix.MySQL.Options.md)
-
 + [Appendix: MySQL on Amazon RDS SQL Reference](Appendix.MySQL.SQLRef.md)
 
 ## MySQL on Amazon RDS Versions<a name="MySQL.Concepts.VersionMgmt"></a>
@@ -73,28 +67,16 @@ Amazon RDS currently supports the major version upgrades from MySQL version 5\.5
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
-The Amazon RDS deprecation policy for MySQL includes the following:
-
-+ We intend to support major MySQL version releases, including MySQL 5\.5, for 3 years after they are initially supported by Amazon RDS\. 
-
-+ We intend to support minor MySQL version releases \(for example, MySQL 5\.5\.46\) for at least 1 year after they are initially supported by Amazon RDS\. 
-
-+ After a MySQL major or minor version has been “deprecated,” we expect to provide a three month grace period for you to initiate an upgrade to a supported version prior to an automatic upgrade being applied during your scheduled maintenance window\. 
+For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](https://aws.amazon.com/rds/faqs/)\.
 
 ## MySQL Features Not Supported By Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
 Amazon RDS does not currently support the following MySQL features: 
-
 + Global Transaction IDs
-
 + Transportable Table Space
-
 + Authentication Plugin
-
 + Password Strength Plugin
-
 + Replication Filters
-
 + Semi\-synchronous Replication
 
  In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those used for backups\. Amazon RDS manages backups for you\. 
@@ -114,11 +96,8 @@ MySQL 5\.1 is no longer supported in Amazon RDS\. However, you can restore exist
 ## MySQL Security on Amazon RDS<a name="MySQL.Concepts.UsersAndPrivileges"></a>
 
 Security for Amazon RDS MySQL DB instances is managed at three levels:
-
 + AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\. 
-
 + When you create a DB instance, you use either a VPC security group or a DB security group to control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance\. These connections can be made using SSL\. In addition, firewall rules at your company can control whether devices running at your company can open connections to the DB instance\. 
-
 + To authenticate login and permissions for a MySQL DB instance, you can take either of the following approaches, or a combination of them\. 
 
   You can take the same approach as with a stand\-alone instance of MySQL\. Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in on\-premises databases, as does directly modifying database schema tables\. For information, see [MySQL User Account Management](https://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html) in the MySQL documentation\. 
@@ -126,53 +105,29 @@ Security for Amazon RDS MySQL DB instances is managed at three levels:
   You can also use IAM database authentication\. With IAM database authentication, you authenticate to your DB instance by using an IAM user or IAM role and an authentication token\. An *authentication token* is a unique value that is generated using the Signature Version 4 signing process\. By using IAM database authentication, you can use the same credentials to control access to your AWS resources and your databases\. For more information, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\. 
 
  When you create an Amazon RDS DB instance, the master user has the following default privileges: 
-
 + `alter`
-
 + `alter routine`
-
 + `create`
-
 + `create routine`
-
 + `create temporary tables`
-
 + `create user`
-
 + `create view`
-
 + `delete`
-
 + `drop`
-
 + `event`
-
 + `execute`
-
 + `grant option`
-
 + `index`
-
 + `insert`
-
 + `lock tables`
-
 + `process`
-
 + `references`
-
 + `replication client`
-
 + `replication slave (MySQL 5.6 and later) `
-
 + `select`
-
 + `show databases`
-
 + `show view`
-
 + `trigger`
-
 + `update`
 
 **Note**  
@@ -194,19 +149,13 @@ Amazon RDS creates an SSL certificate and installs the certificate on the DB ins
 An SSL certificate created by Amazon RDS is the trusted root entity and should work in most cases but might fail if your application does not accept certificate chains\. If your application does not accept certificate chains, you might need to use an intermediate certificate to connect to your region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\) region using SSL\. For a list of regional intermediate certificates that you can download, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. 
 
 MySQL uses yaSSL for secure connections in the following versions:
-
 + MySQL version 5\.7\.19 and earlier
-
 + MySQL version 5\.6\.37 and earlier
-
 + MySQL version 5\.5\.57 and earlier
 
 MySQL uses OpenSSL for secure connections in the following versions:
-
 + MySQL version 5\.7\.21 and later
-
 + MySQL version 5\.6\.39 and later
-
 + MySQL version 5\.5\.59 and later
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca parameter` to reference the public key, for example: 
@@ -267,11 +216,8 @@ For more information on MySQL events, see [Event Syntax](https://dev.mysql.com/d
 ### Dumping and Loading the Buffer Pool on Demand<a name="MySQL.Concepts.InnoDBCacheWarming.OnDemand"></a>
 
 For MySQL version 5\.6\.19 and later, you can save and load the InnoDB cache "on demand\."
-
 + To dump the current state of the buffer pool to disk, call the [mysql\.rds\_innodb\_buffer\_pool\_dump\_now](mysql_rds_innodb_buffer_pool_dump_now.md) stored procedure\.
-
 + To load the saved state of the buffer pool from disk, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_now](mysql_rds_innodb_buffer_pool_load_now.md) stored procedure\.
-
 + To cancel a load operation in progress, call the [mysql\.rds\_innodb\_buffer\_pool\_load\_abort](mysql_rds_innodb_buffer_pool_load_abort.md) stored procedure\.
 
 ## Local Time Zone for MySQL DB Instances<a name="MySQL.Concepts.LocalTimeZone"></a>

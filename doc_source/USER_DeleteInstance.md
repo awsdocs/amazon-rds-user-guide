@@ -25,22 +25,20 @@ You can't create a final snapshot of your DB instance if it has one of the follo
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **DB Instances** list, select the DB instance that you want to delete\. 
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to delete\. 
 
-1. Choose **Instance Actions**, and then choose **Delete**\. 
+1. Choose **Instance actions**, and then choose **Delete**\. 
 
 1. For **Create final Snapshot?**, choose **Yes** or **No**\. 
 
-1. If you chose yes in the previous step, for **Final Snapshot name** type the name of your final DB snapshot\. 
+1. If you chose yes in the previous step, for **Final snapshot name** type the name of your final DB snapshot\. 
 
-1. Choose **Yes, Delete**\. 
+1. Choose **Delete**\. 
 
 ## CLI<a name="USER_DeleteInstance.CLI"></a>
 
 To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance.html) command with the following parameters: 
-
 + `--db-instance-identifier`
-
 + `--final-db-snapshot-identifier` or `--skip-final-snapshot`
 
 **Example With a Final Snapshot**  
@@ -78,9 +76,7 @@ For Windows:
 ## API<a name="USER_DeleteInstance.API"></a>
 
 To delete a DB instance by using the Amazon RDS API, call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action with the following parameters: 
-
 + `DBInstanceIdentifier`
-
 + `FinalDBSnapshotIdentifier` or `SkipFinalSnapshot`
 
 **Example With a Final Snapshot**  
@@ -118,5 +114,4 @@ To delete a DB instance by using the Amazon RDS API, call the [http://docs.aws.a
 ```
 
 ## Related Topics<a name="USER_DeleteInstance.Related"></a>
-
 + [Stopping an Amazon RDS DB Instance Temporarily](USER_StopInstance.md)

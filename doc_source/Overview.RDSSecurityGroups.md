@@ -1,11 +1,8 @@
 # Amazon RDS Security Groups<a name="Overview.RDSSecurityGroups"></a>
 
 Security groups control the access that traffic has in and out of a DB instance\. Three types of security groups are used with Amazon RDS: DB security groups, VPC security groups, and Amazon EC2 security groups\. In simple terms, these work as follows:
-
 + A DB security group controls access to EC2\-Classic DB instances that are not in a VPC\.
-
 + A VPC security group controls access to DB instances and EC2 instances inside a VPC\.
-
 + An EC2 security group controls access to an EC2 instance\.
 
 By default, network access is turned off to a DB instance\. You can specify rules in a security group that allows access from an IP address range, port, or EC2 security group\. Once ingress rules are configured, the same rules apply to all DB instances that are associated with that security group\. You can specify up to 20 rules in a security group\.

@@ -8,11 +8,8 @@ You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL opt
 You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 
 You can use SSL encryption with the following Oracle database versions and editions: 
-
 + 12\.1\.0\.2: all versions, all editions including Standard Edition Two
-
 + 11\.2\.0\.4: all versions, Enterprise Edition
-
 + 11\.2\.0\.4: v6 and later, Standard Edition, Standard Edition One, Enterprise Edition
 
 **Note**  
@@ -188,7 +185,5 @@ final String connectionString = String.format(
 ```
 
 ## Related Topics<a name="Appendix.Oracle.Options.SSL.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

@@ -38,9 +38,7 @@ After you add the Native Backup and Restore option, you don't need to restart yo
    1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. If you choose **Yes**, for **Master Key** you must also choose an encryption key\. For more information about encryption keys, see [ Getting Started ](http://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
 
 1. Apply the option group to a new or existing DB instance\. 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 
 ## Modifying Native Backup and Restore Option Settings<a name="Appendix.SQLServer.Options.BackupRestore.ModifySettings"></a>
@@ -52,7 +50,5 @@ After you enable the Native Backup and Restore option, you can modify the settin
 You can turn off the native backup and restore feature by removing the option from your DB instance\. After you remove the Native Backup and Restore option, you don't need to restart your DB instance\. 
 
 To remove the Native Backup and Restore option from a DB instance, do one of the following: 
-
 + Remove the Native Backup and Restore option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
-
 + Modify the DB instance and specify a different option group that doesn't include the Native Backup and Restore option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
