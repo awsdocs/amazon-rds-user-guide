@@ -1,6 +1,6 @@
 # Importing Data into an Amazon RDS MySQL DB Instance<a name="MySQL.Procedural.Importing"></a>
 
-Amazon Relational Database Service \(Amazon RDS\) supports importing MySQL databases by using backup files\. You can create a backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
+Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
 
 The following diagram shows the supported scenario\.
 

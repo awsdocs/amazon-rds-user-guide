@@ -3,15 +3,23 @@
 You can configure an Amazon Aurora DB cluster to publish audit log events to a log group in Amazon CloudWatch Logs\. By using audit log events, you can perform real\-time analysis of the audit events observed on your DB cluster, using CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log data in highly durable storage\. You can also change the log retention setting so that any log events older than this setting are automatically deleted\. The CloudWatch Logs agent makes it easier to quickly send both rotated and nonrotated log data off of a host and into the log service\. You can then access the raw log data when you need it\.
 
 **Note**  
-Publishing audit log data from Aurora to CloudWatch Logs can incur data ingestion and archived storage charges on CloudWatch Logs\. You are only charged for published audit log data that exceeds the free tier provided by CloudWatch Logs\. For more information, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
+Publishing audit log data from Aurora to CloudWatch Logs can incur data ingestion and archived storage charges on CloudWatch Logs\. You are charged only for published audit log data that exceeds the free tier provided by CloudWatch Logs\. For more information, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\.
 
-## Giving Aurora Access to Amazon CloudWatch Logs<a name="AuroraMySQL.Integrating.CloudWatch.Access"></a>
+## Giving Aurora Access to CloudWatch Logs<a name="AuroraMySQL.Integrating.CloudWatch.Access"></a>
 
-To publish audit logs to Amazon CloudWatch Logs, first give your Aurora DB cluster permission to access CloudWatch Logs\. To grant permission, create an AWS Identity and Access Management \(IAM\) role with the necessary permissions, and then associate the role with your DB cluster\. For details and instructions on how to permit your Aurora DB cluster to communicate with CloudWatch Logs on your behalf, see [Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf](AuroraMySQL.Integrating.Authorizing.md)\.
+Before you can publish audit logs to Amazon CloudWatch Logs, you must first give your Aurora MySQL DB cluster permission to access CloudWatch Logs\.
 
-**Note**  
-Set the `aws_default_logs_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aws_default_logs_role`, the logs aren't streamed to CloudWatch\. If the specified role doesn't have the required permissions, we report this situation through events\.  
-For more information about DB cluster parameters, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+**To give Aurora MySQL access to CloudWatch Logs**
+
+1. Create an AWS Identity and Access Management \(IAM\) policy that provides the permissions that allow your Aurora MySQL DB cluster to publish audit logs to CloudWatch Logs\. For instructions, see [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)\.
+
+1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
+
+1. Set the `aws_default_logs_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aws_default_logs_role`, the logs aren't streamed to CloudWatch\. If the specified role doesn't have the required permissions, we report this situation through events\.
+
+   For more information about DB cluster parameters, see [Amazon Aurora MySQL Parameters](AuroraMySQL.Reference.md#AuroraMySQL.Reference.ParameterGroups)\.
+
+1. To permit database users in an Aurora MySQL DB cluster to access CloudWatch, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\. For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
 
 ## Enabling Audit Log Publishing to Amazon CloudWatch Logs in an Aurora DB Cluster<a name="AuroraMySQL.Integrating.CloudWatch.Enable"></a>
 

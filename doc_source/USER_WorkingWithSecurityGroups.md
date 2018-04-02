@@ -25,7 +25,6 @@ If you are on the EC2\-VPC platform, you must use VPC security groups instead of
 + [Authorizing Network Access to a DB Security Group from an IP Range](#USER_WorkingWithSecurityGroups.Authorizing)
 + [Authorizing Network Access to a DB Instance from an Amazon EC2 Instance](#USER_WorkingWithSecurityGroups.AuthorizingEC2)
 + [Revoking Network Access to a DB Instance from an IP Range](#USER_WorkingWithSecurityGroups.Revoking)
-+ [Related Topics](#USER_WorkingWithSecurityGroups.related)
 
 ## Creating a DB Security Group<a name="USER_WorkingWithSecurityGroups.Creating"></a>
 
@@ -404,6 +403,3 @@ To revoke an ingress rule for a CIDR IP range on a DB security group, call the A
 8.     &AWSAccessKeyId=<AWS Access Key ID>
 9.     &Signature=<Signature>
 ```
-
-## Related Topics<a name="USER_WorkingWithSecurityGroups.related"></a>
-+  [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 

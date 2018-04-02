@@ -1,6 +1,6 @@
 # Security in Amazon RDS<a name="UsingWithRDS"></a>
 
-You can manage access to your Amazon Relational Database Service \(Amazon RDS\) resources and your databases on a DB instance\. The method you use to manage access depends on what type of task the user needs to perform with Amazon RDS: 
+You can manage access to your Amazon RDS resources and your databases on a DB instance\. The method you use to manage access depends on what type of task the user needs to perform with Amazon RDS: 
 + Run your DB instance in an Amazon Virtual Private Cloud \(VPC\) for the greatest possible network access control\. For more information about creating a DB instance in a VPC, see [Using Amazon RDS with Amazon Virtual Private Cloud \(VPC\)](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html)\. 
 + Use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage RDS resources\. For example, you can use IAM to determine who is allowed to create, describe, modify, and delete DB instances, tag resources, or modify DB security groups\. For information on setting up a IAM user, see [Create an IAM User](CHAP_SettingUp.md#CHAP_SettingUp.IAM)
 + Use security groups to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB instance\. When you first create a DB instance, its firewall prevents any database access except through rules specified by an associated security group\. 

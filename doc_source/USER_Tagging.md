@@ -32,6 +32,9 @@ AWS does not apply any semantic meaning to your tags; tags are interpreted stric
 
   Values do not have to be unique in a tag set and can be null\. For example, you can have a key\-value pair in a tag set of project/Trinity and cost\-center/Trinity\. 
 
+**Note**  
+You can add a tag to a snapshot, however, your bill will not reflect this grouping\.
+
 You can use the AWS Management Console, the command line interface, or the Amazon RDS API to add, list, and delete tags on Amazon RDS resources\. When using the command line interface or the Amazon RDS API, you must provide the Amazon Resource Name \(ARN\) for the Amazon RDS resource you want to work with\. For more information about constructing an ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
 Tags are cached for authorization purposes\. Because of this, additions and updates to tags on Amazon RDS resources can take several minutes before they are available\. 

@@ -37,7 +37,7 @@ General purpose \(SSD\) storage offers cost\-effective storage that is ideal for
 
 General purpose \(SSD\) storage can deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Between 100 IOPS \(for volumes of 33\.33 GiB and below\) and 10,000 IOPS \(for volumes of 3,334 GiB and above\), baseline performance increases at the rate of 3 IOPS per GiB of volume size\. Burst performance is determined by the instance I/O credit balance\. I/O credit balance is explained in more detail below\. 
 
-Some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your strorage capacity to meet the needs of your workloads\.
+Some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
 
 ### I/O Credits and Burst Performance<a name="CHAP_Storage.IO.Credits"></a>
 
@@ -142,7 +142,7 @@ The Amazon RDS API supports Provisioned IOPS storage in the following actions:
 
 ## Adding Storage and Changing Storage Type for MariaDB, MySQL, Oracle, and PostgreSQL<a name="CHAP_Storage.AddingChanging"></a>
 
-For existing DB instances, you might observe some I/O capacity improvement If you run these types of DB instances on current\-generation or next\-generation instance classes, scaling up storage typically only takes a few minutes\. Similarly, converting to a different storage type completes in a short amount of time after a brief DB instance outage\. For more information about current\-generation and next\-generation instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+For existing DB instances, you might observe some I/O capacity improvement If you run these types of DB instances on current\-generation or latest\-generation instance classes, scaling up storage typically only takes a few minutes\. Similarly, converting to a different storage type completes in a short amount of time after a brief DB instance outage\. For more information about current\-generation and latest\-generation instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 After you modify the storage for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\. However, you can't make further storage modifications for either six hours or while the DB instance status is **storage\-optimization**, whichever is longer\. 
 
@@ -213,11 +213,9 @@ To help you verify that you are making the best use of your Provisioned IOPS sto
 
 The following are Amazon RDS storage limitations:
 + You can't decrease allocated storage for a DB instance\.
-+ If your DB instance is running on a previous generation instance class, adding storage or converting to a different storage type can take time and might slightly reduce the performance of your DB instance\. So, you should plan when to make these changes\.
++ If your DB instance is running on a previous\-generation instance class, adding storage or converting to a different storage type can take time and might slightly reduce the performance of your DB instance\. So, you should plan when to make these changes\.
 
   Although your DB instance is available for reads and writes when adding storage, you might experience degraded performance until the process is complete\. Adding storage might take several hours; the duration of the process depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned\. Typical scale storage time, depending on the size of the source volume, is between one and two hours, but can take up to several days in some cases\. During the scaling process, the DB instance is available for use but might experience performance degradation\. While storage is being added, nightly backups are suspended and no other Amazon RDS operations can take place, including modify, reboot, delete, create Read Replica, and create DB Snapshot\.
 
   For more information about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
-  
-+ For any type of instance class \(next generation, current generation, or previous generation\), storage conversions to or from magnetic storage and any other type of storage can take a long time\. Storage conversions between magnetic storage and general purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 minutes\) allocated for general purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approximately 3,000 IOPS\. The remaining data is converted at the base performance rate of 3 IOPS per GiB of allocated general purpose \(SSD\) storage\. This approach can result in longer conversion times\.
-
++ For any type of instance class \(latest\-generation, current\-generation, or previous\-generation\), storage conversions to or from magnetic storage and any other type of storage can take a long time\. Storage conversions between magnetic storage and general purpose \(SSD\) storage can potentially deplete the initial 5\.4 million I/O credits \(3,000 IOPS X 30 minutes\) allocated for general purpose \(SSD\) storage\. When performing these storage conversions, the first 82 GiB of data is converted at approximately 3,000 IOPS\. The remaining data is converted at the base performance rate of 3 IOPS per GiB of allocated general purpose \(SSD\) storage\. This approach can result in longer conversion times\.

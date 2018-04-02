@@ -5,7 +5,7 @@
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-## AWS Management Console<a name="USER_CreatePostgreSQLInstance.CON"></a>
+## <a name="USER_CreatePostgreSQLInstance.CON"></a>
 
 **To launch a PostgreSQL DB instance**
 
@@ -18,21 +18,21 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 1. Click **Launch DB Instance** to start the **Launch DB Instance Wizard**\.
 
     The wizard opens on the **Select Engine** page\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch01.png)
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch01a.png)
 
-1. On the **Select Engine** page, click the PostgreSQL icon and then click the **Select** button for the PostgreSQL DB engine\.
+1. On the **Select Engine** page, choose the PostgreSQL icon, and then choose **Next**\.
 
-1. Next, the **Production?** page asks if you are planning to use the DB instance you are creating for production\. If you are, select **Yes**\. By selecting **Yes**, the failover option **Multi\-AZ** and the **Provisioned IOPS** storage option are preselected in the following step\. Click **Next** when you are finished\.
+1. Next, the **Use case** page asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. If you choose this option, the failover option **Multi\-AZ** and the **Provisioned IOPS** storage options are preselected in the following step\. Choose **Next** when you are finished\.
 
-1. On the **Specify DB Details** page, specify your DB instance information\. Click **Next** when you are finished\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html)  
-![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch02.png)
+1. On the **Specify DB Details** page, specify your DB instance information\. Choose **Next** when you are finished\.  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html)
 
-1.  On the **Configure Advanced Settings** page, provide additional information that Amazon RDS needs to launch the PostgreSQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then click **Launch DB Instance**\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html)  
-![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch03.png)
+1.  On the **Configure Advanced Settings** page, provide additional information that RDS needs to launch the PostgreSQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Launch DB Instance**\.  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html)
 
-1.  On the final page of the wizard, click **Close**\. 
+1.  On the final page of the wizard, choose **Launch DB instance**\. 
 
 1. On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance will have a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and store allocated, it could take several minutes for the new instance to be available\.  
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch06.png)

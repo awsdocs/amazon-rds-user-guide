@@ -232,8 +232,3 @@ The `Resource` line in the policy identifies a resource by its Amazon Resource N
    ]
 }
 ```
-
-## Related Topics<a name="w3ab1c21c13c17c11"></a>
-+ [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl)
-+ [Amazon RDS API Permissions: Actions, Resources, and Conditions Reference](UsingWithRDS.IAM.ResourcePermissions.md)
-+ [Security in Amazon RDS](UsingWithRDS.md)

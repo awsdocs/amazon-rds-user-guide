@@ -67,7 +67,7 @@ In the following sections, you can find information about Aurora backups and how
 
 Aurora backs up your cluster volume automatically and retains restore data for the length of the *backup retention period*\. Aurora backups are continuous and incremental so you can quickly restore to any point within the backup retention period\. No performance impact or interruption of database service occurs as backup data is being written\. You can specify a backup retention period, from 1 to 35 days, when you create or modify a DB cluster\.
 
-If you want to retain a backup beyond the backup retention period, you can also take a snapshot of the data in your cluster volume\. Storing snapshots incurs the standard storage charges for Amazon RDS\. For more information about RDS storage pricing, see [Amazon Relational Database Service Pricing](http://aws.amazon.com/rds/pricing/)\. 
+If you want to retain a backup beyond the backup retention period, you can also take a snapshot of the data in your cluster volume\. Storing snapshots incurs the standard storage charges for Amazon RDS\. For more information about RDS storage pricing, see [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/)\. 
 
 Because Aurora retains incremental restore data for the entire backup retention period, you only need to create a snapshot for data that you want to retain beyond the backup retention period\. You can create a new DB cluster from the snapshot\.
 

@@ -22,7 +22,7 @@ IAM database authentication provides the following benefits:
 IAM database authentication is available for the following database engines and instance classes:
 + MySQL 5\.6, minor version 5\.6\.34 or higher\. All instance classes are supported, except for `db.m1.small`\. 
 + MySQL 5\.7, minor version 5\.7\.16 or higher\. All instance classes are supported, except for `db.m1.small`\. 
-+ Amazon Aurora 1\.10 or higher\. All instance classes are supported, except for `db.t2.small`\.
++ Aurora with MySQL compatibility, version 1\.10 or higher\. All instance classes are supported, except for `db.t2.small`\.
 
 ## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
 

@@ -1,6 +1,6 @@
 # Importing and Exporting SQL Server Databases<a name="SQLServer.Procedural.Importing"></a>
 
-Amazon Relational Database Service \(Amazon RDS\) supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. You can import and export SQL Server databases in a single, easily portable file\. You can create a full backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto an existing Amazon RDS DB instance running SQL Server\. You can back up an Amazon RDS SQL Server database, store it on Amazon S3, and then restore the backup file onto an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. 
+Amazon RDS supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. You can import and export SQL Server databases in a single, easily portable file\. You can create a full backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto an existing Amazon RDS DB instance running SQL Server\. You can back up an Amazon RDS SQL Server database, store it on Amazon S3, and then restore the backup file onto an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. 
 
 The following diagram shows the supported scenarios\.
 

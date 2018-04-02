@@ -21,6 +21,12 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 
  When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named postgres in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges on your DB instance and you should not assign this role to users unless they need the most access to the DB instance\.
 
+The `rds_superuser` role can do the following:
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL Features](PostgreSQL.Concepts.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
++ Manage tablespaces, including creating and deleting them\. For more information, see this section in the [PostgreSQL documentation\.](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html)
++ View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and kill their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
++ Grant and revoke the rds\_replication role onto all roles that are not the `rds_superuser` role\. For more information, see this section in the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-grant.html)\.
+
 The following example shows how to create a user and then grant the user the `rds_superuser` role\. User\-defined roles, such as `rds_superuser`, have to be granted\.
 
 ```
@@ -582,7 +588,7 @@ While these all affect autovacuum, some of the most important ones are:
 + [Autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
 + [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
-#### Table\-Level Parameters<a name="w3ab1c36c41c15c21c10"></a>
+#### Table\-Level Parameters<a name="w3ab1c36c39c15c21c10"></a>
 
 Autovacuum related [storage parameters](https://www.postgresql.org/docs/current/static/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) can be set at a table level, which can be better than altering the behavior of the entire database\. For large tables, you might need to set aggressive settings and you might not want to make autovacuum behave that way for all tables\.
 

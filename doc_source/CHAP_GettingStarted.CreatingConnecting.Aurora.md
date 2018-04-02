@@ -1,6 +1,6 @@
 # Creating a DB Cluster and Connecting to a Database on an Amazon Aurora DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.Aurora"></a>
 
-The easiest way to create an Amazon Aurora DB cluster is to use the Amazon RDS console\. Once you have created the DB cluster, you can use standard MySQL utilities, such as MySQL Workbench, or PostgreSQL utilities, such as pgAdmin, to connect to a database on the DB cluster\.
+The easiest way to create an Amazon Aurora DB cluster is to use the Amazon RDS Management Console\. Once you have created the DB cluster, you can use standard MySQL utilities, such as MySQL Workbench, or PostgreSQL utilities, such as pgAdmin, to connect to a database on the DB cluster\.
 
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB cluster\.

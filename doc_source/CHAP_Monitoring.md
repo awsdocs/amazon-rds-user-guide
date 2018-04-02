@@ -116,7 +116,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | NetworkReceiveThroughput |  The incoming \(Receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
 | NetworkTransmitThroughput |  The outgoing \(Transmit\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
 | OldestReplicationSlotLag |  The lagging size of the replica lagging the most in terms of WAL data received\. Applies to PostgreSQL\. Units: Megabytes  | 
-| ReadIOPS |  The average number of disk I/O operations per second during the polling period\. Units: Count/Second  | 
+| ReadIOPS |  The average number of disk read I/O operations per second during the polling period\. Units: Count/Second  | 
 | ReadLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | ReadThroughput |  The average number of bytes read from disk per second\. Units: Bytes/Second  | 
 | ReplicaLag |  The amount of time a Read Replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, and PostgreSQL Read Replicas\. Units: Seconds  | 
@@ -124,7 +124,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | SwapUsage |  The amount of swap space used on the DB instance\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
 | TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/second  | 
-| WriteIOPS |  The average number of disk I/O operations per second\. Units: Count/Second  | 
+| WriteIOPS |  The average number of write disk I/O operations per second\. Units: Count/Second  | 
 | WriteLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | WriteThroughput |  The average number of bytes written to disk per second\. Units: Bytes/Second  | 
 

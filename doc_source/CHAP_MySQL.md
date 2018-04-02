@@ -20,7 +20,7 @@ The following are the common management tasks you perform with an Amazon RDS MyS
 
 | Task Area | Relevant Documentation | 
 | --- | --- | 
-|  **Understanding Amazon Relational Database Service \(Amazon RDS\)** Understand key Amazon RDS components, including DB instances, regions, Availability Zones, security groups, parameter groups, and option groups\.  |  [What Is Amazon Relational Database Service \(Amazon RDS\)?](Welcome.md)  | 
+|  **Understanding Amazon RDS** Understand key Amazon RDS components, including DB instances, regions, Availability Zones, security groups, parameter groups, and option groups\.  |  [What Is Amazon Relational Database Service \(Amazon RDS\)?](Welcome.md)  | 
 |  **Setting up Amazon RDS for first time use** Set up Amazon RDS so that you can create MySQL DB instances in Amazon Web Services \(AWS\)\.  |  [Setting Up for Amazon RDS](CHAP_SettingUp.md)   | 
 |  **Understanding Amazon RDS DB instances** Create virtual MySQL server instances that run in AWS\. Because DB instances are the building blocks of Amazon RDS, we recommend that you understand their principles\.  |  [Amazon RDS DB Instances](Overview.DBInstance.md)  | 
 |  **Creating a DB instance for production** Create a DB instance for production purposes\. Creating an instance includes choosing a DB instance class with appropriate processing power and memory capacity and choosing a storage type that supports the way you expect to use your database\.   |   [DB Instance Class](Concepts.DBInstanceClass.md)   [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)   | 

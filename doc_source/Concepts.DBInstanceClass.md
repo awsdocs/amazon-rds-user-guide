@@ -9,14 +9,14 @@ For more information about instance class pricing, see [Amazon RDS Pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance Type](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
-+ **db\.m4** – Third\-generation instance classes that provide more computing capacity than the second\-generation db\.m3 instance classes at a lower price\. 
-+ **db\.m3** – Second\-generation instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. 
-+ **db\.m1** – First\-generation general\-purpose instance classes\. 
++ **db\.m4** – Latest\-generation instance classes that provide more computing capacity than the previous db\.m3 instance classes at a lower price\. 
++ **db\.m3** – Previous\-generation instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m3 instance classes provide more computing capacity than the previous db\.m1 instance classes\. 
++ **db\.m1** – Previous\-generation general\-purpose instance classes\. 
 
 The following are the Memory Optimized DB instance classes available:
-+ **db\.r4** – Third\-generation instance classes optimized for memory\-intensive applications and that offer a better price per GiB of RAM than the db\.r3 instance classes\. 
-+ **db\.r3** – Second\-generation instance classes that provide memory optimization and more computing capacity than the first\-generation db\.m2 instance classes, at a lower price\. The db\.r3 DB instances classes are not available in the South America \(São Paulo\) region\. 
-+ **db\.m2** – First\-generation memory\-optimized instance classes\. 
++ **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications and that offer a better price per GiB of RAM than the db\.r3 instance classes\. 
++ **db\.r3** – Previous\-generation instance classes that provide memory optimization and more computing capacity than the db\.m2 instance classes, at a lower price\. The db\.r3 instances classes are not available in the South America \(São Paulo\) region\. 
++ **db\.m2** – Previous\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
@@ -37,7 +37,7 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.m4\.2xlarge | 8 | 25\.5 | 32 | Yes | Yes | 1,000 | High | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.m4\.xlarge | 4 | 13 | 16 | Yes | Yes | 750 | High | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.m4\.large | 2 | 6\.5 | 8 | Yes | Yes | 450 | Moderate | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
-| db\.m3 – Current Generation Standard Instance Classes | 
+| db\.m3 – Previous Generation Standard Instance Classes | 
 | db\.m3\.2xlarge | 8 | 26 | 30 | No | Yes | 1,000 | High | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.m3\.xlarge | 4 | 13 | 15 | No | Yes | 500 | High | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.m3\.large | 2 | 6\.5 | 7\.5 | No | No | — | Moderate | No | No | Yes | Yes8 | Yes | Yes10 | Yes | 
@@ -47,14 +47,14 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.m1\.large | 2 | 2 | 7\.5 | No | Yes | 450 | Moderate | No | No | No | Yes8 | MySQL 5\.6, 5\.5 | Yes10 | PostgreSQL 9\.4, 9\.3 | 
 | db\.m1\.medium | 1 | 1 | 3\.75 | No | No | — | Moderate | No | No | No | Yes8 | MySQL 5\.6, 5\.5 | Yes10 | PostgreSQL 9\.4, 9\.3 | 
 | db\.m1\.small | 1 | 1 | 1\.7 | No | No | — | Very Low | No | No | No | Yes8 | MySQL 5\.6, 5\.5 | Yes10 | PostgreSQL 9\.4, 9\.3 | 
-| db\.r4 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | Yes | Yes | 3,500 | Up to 10 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,750 | Up to 10 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 875 | Up to 10 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 437 | Up to 10 Gbps | 1\.15 and later | Yes | Yes | Yes8 | MySQL 5\.7, 5\.69 | Yes10 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r3 – Current Generation Memory Optimized Instance Classes | 
+| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | Yes | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | Yes | No | Yes | Yes8 | Yes | Yes10 | Yes | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | Yes | No | Yes | Yes8 | Yes | Yes10 | Yes | 
@@ -78,7 +78,7 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 
 1. **Memory \(GiB\)** – The RAM memory, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. For example, the db\.m1 instance class has the same memory to vCPU ratio as the db\.m3 instance class, but for most use cases the db\.m3 instance class provides better, more consistent performance, than the db\.m1 instance class\. 
 
-1. **VPC Only** – The instance class is supported only for DB instances that are in a VPC\. If your current DB instance is not in a VPC, and you want to use an instance class that requires a VPC, first move your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
+1. **VPC Only** – The instance class is supported only for DB instances that are in an Amazon Virtual Private Cloud \(VPC\)\. If your current DB instance is not in a VPC, and you want to use an instance class that requires a VPC, first move your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 1. **EBS\-Optimized** – The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the Amazon EC2 documentation\. 
 

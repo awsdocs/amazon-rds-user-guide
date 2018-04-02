@@ -1,4 +1,4 @@
-# Allowing Amazon Aurora to Access Amazon CloudWatch Logs Resources<a name="AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy"></a>
+# Creating an IAM Policy to Access CloudWatch Logs Resources<a name="AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy"></a>
 
 Aurora can access CloudWatch Logs to export audit log data from an Aurora DB cluster\. However, you must first create an IAM policy that provides the log group and log stream permissions that allow Aurora to access CloudWatch Logs\. 
 
@@ -36,7 +36,7 @@ The following policy adds the permissions required by Aurora to access Amazon Cl
 }
 ```
 
-You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access CloudWatch Logs on your behalf\. To allow Aurora full access to CloudWatch Logs, you can skip these steps and use the `CloudWatchLogsFullAccess` predefined IAM policy instead of creating your own\. For more information, see [Using Identity\-Based Policies \(IAM Policies\) for CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//iam-identity-based-access-control-cwl.html#managed-policies-cwl)\.
+You can use the following steps to create an IAM policy that provides the minimum required permissions for Aurora to access CloudWatch Logs on your behalf\. To allow Aurora full access to CloudWatch Logs, you can skip these steps and use the `CloudWatchLogsFullAccess` predefined IAM policy instead of creating your own\. For more information, see [Using Identity\-Based Policies \(IAM Policies\) for CloudWatch Logs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//iam-identity-based-access-control-cwl.html#managed-policies-cwl) in the* Amazon CloudWatch User Guide\.*
 
 **To create an IAM policy to grant access to your CloudWatch Logs resources**
 

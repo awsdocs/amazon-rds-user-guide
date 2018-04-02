@@ -1,10 +1,10 @@
 # Upgrading the PostgreSQL DB Engine<a name="USER_UpgradeDBInstance.PostgreSQL"></a>
 
-When Amazon Relational Database Service \(Amazon RDS\) supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. 
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. 
 
 Amazon RDS supports major and minor version upgrades for PostgreSQL DB instances\. 
 
-Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon Relational Database Service \(Amazon RDS\) doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You can initiate a major version upgrade manually by modifying your instance\. However, there are recommended steps to follow when performing a major version upgrade\. For details, see [Major Version Upgrades](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
+Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You can initiate a major version upgrade manually by modifying your instance\. However, there are recommended steps to follow when performing a major version upgrade\. For details, see [Major Version Upgrades](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
 
 You can initiate a minor version upgrade manually by modifying your instance, or select the **Auto Minor Version Upgrade** option when creating or modifying a DB instance to have your instance automatically upgraded once the new version is tested and approved by Amazon RDS\. 
 

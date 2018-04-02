@@ -1,6 +1,6 @@
 # Getting Started with Amazon RDS<a name="CHAP_GettingStarted"></a>
 
-This section shows you how to create and connect to a DB instance using Amazon RDS\. You can create, or launch, a DB instance that uses MySQL, Oracle, PostgreSQL, Microsoft SQL Server, Amazon Aurora, or MariaDB\. 
+This section shows you how to create and connect to a DB instance using Amazon Relational Database Service \(Amazon RDS\)\. You can create, or launch, a DB instance that uses MySQL, Oracle, PostgreSQL, Microsoft SQL Server, Amazon Aurora, or MariaDB\. 
 
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\. 

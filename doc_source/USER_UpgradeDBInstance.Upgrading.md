@@ -1,6 +1,6 @@
 # Upgrading a DB Instance Engine Version<a name="USER_UpgradeDBInstance.Upgrading"></a>
 
-When Amazon Relational Database Service \(Amazon RDS\) supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. For more information about major and minor version upgrades, see the following documentation for your DB engine: 
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. For more information about major and minor version upgrades, see the following documentation for your DB engine: 
 + [Amazon Aurora Updates](Aurora.Updates.md)
 + [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)
 + [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)

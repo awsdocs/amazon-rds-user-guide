@@ -1,12 +1,12 @@
 # Upgrading the MariaDB DB Engine<a name="USER_UpgradeDBInstance.MariaDB"></a>
 
-When Amazon Relational Database Service \(Amazon RDS\) supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. You must modify the DB instance manually to perform a major version upgrade\.  
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. You must modify the DB instance manually to perform a major version upgrade\.  
 
 For more information about MariaDB supported versions and version management, see [MariaDB on Amazon RDS Versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)\. 
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.MariaDB.Overview"></a>
 
-Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon Relational Database Service \(Amazon RDS\) doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You should thoroughly test any upgrade before applying it to your production instances\. 
+Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You should thoroughly test any upgrade before applying it to your production instances\. 
 
 Minor version upgrades that contain database changes that are backward\-compatible with the previous version might be applied automatically\. Amazon RDS doesn't automatically upgrade an Amazon RDS DB instance until after posting an announcement to the forums announcement page, and sending customers an e\-mail notification\. Automatic upgrades are scheduled so that you can plan around them, because downtime is required to upgrade a DB instance, even for Multi\-AZ instances\. 
 

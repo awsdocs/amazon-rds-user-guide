@@ -64,7 +64,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance have some
 
 The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
-The following are the latest\-generation DB instance classes supported for Microsoft SQL Server\. 
+The following are the DB instance classes supported for Microsoft SQL Server\. 
 
 
 ****  

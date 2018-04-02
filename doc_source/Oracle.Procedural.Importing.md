@@ -61,6 +61,8 @@ The import process using Oracle Data Pump and the DBMS\_FILE\_TRANSFER package h
    ```
 
    This example grants the new user the CREATE SESSION privilege and the RESOURCE role\. Additional privileges and roles might be required depending on the database objects you will import\. 
+**Note**  
+Replace *schema\_1* with the name of your schema in this step and in the following steps\.
 
 ### Step 2: Grant privileges to user on source database<a name="Oracle.Procedural.Importing.DataPump.Step1"></a>
 
@@ -99,6 +101,9 @@ DBMS_DATAPUMP.START_JOB(hdnl);
 END;
 /
 ```
+
+**Note**  
+Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/database/121/SUTIL/GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7.htm#SUTIL815) in the Oracle documentation\.
 
 ### Step 4: Create a database link to the target DB instance<a name="Oracle.Procedural.Importing.DataPump.Step3"></a>
 
@@ -150,7 +155,7 @@ END;
 /
 ```
 
-You can verify the data import by viewing the user's tables on the DB instance\. For example, the following query returns the number of tables for schema\_1: 
+You can verify the data import by viewing the user's tables on the DB instance\. For example, the following query returns the number of tables for *schema\_1*: 
 
 ```
 select count(*) from dba_tables where owner='SCHEMA_1'; 

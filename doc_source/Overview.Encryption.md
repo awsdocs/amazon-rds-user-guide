@@ -50,11 +50,11 @@ Amazon RDS encryption is available for the following DB instance classes:
 
 | Instance Type | Instance Class | 
 | --- | --- | 
-| General Purpose \(M4\)—Current Generation |  db\.m4\.large db\.m4\.xlarge db\.m4\.2xlarge db\.m4\.4xlarge db\.m4\.10xlarge db\.m4\.16xlarge  | 
-| Memory Optimized \(R3\)—Current Generation |  db\.r3\.large db\.r3\.xlarge db\.r3\.2xlarge db\.r3\.4xlarge db\.r3\.8xlarge  | 
-| Memory Optimized \(R4\)—Next Generation |  db\.r4\.large db\.r4\.xlarge db\.r4\.2xlarge db\.r4\.4xlarge db\.r4\.8xlarge db\.r4\.16xlarge  | 
-| Burst Capable \(T2\)—Current Generation |  db\.t2\.small db\.t2\.medium db\.t2\.large db\.t2\.xlarge db\.t2\.2xlarge  | 
-| General Purpose \(M3\)—Previous Generation |  db\.m3\.medium db\.m3\.large db\.m3\.xlarge db\.m3\.2xlarge  | 
+| General Purpose \(M4\) |  db\.m4\.large db\.m4\.xlarge db\.m4\.2xlarge db\.m4\.4xlarge db\.m4\.10xlarge db\.m4\.16xlarge  | 
+| Memory Optimized \(R3\) |  db\.r3\.large db\.r3\.xlarge db\.r3\.2xlarge db\.r3\.4xlarge db\.r3\.8xlarge  | 
+| Memory Optimized \(R4\) |  db\.r4\.large db\.r4\.xlarge db\.r4\.2xlarge db\.r4\.4xlarge db\.r4\.8xlarge db\.r4\.16xlarge  | 
+| Burst Capable \(T2\) |  db\.t2\.small db\.t2\.medium db\.t2\.large db\.t2\.xlarge db\.t2\.2xlarge  | 
+| General Purpose \(M3\) |  db\.m3\.medium db\.m3\.large db\.m3\.xlarge db\.m3\.2xlarge  | 
 
 **Note**  
 Encryption at rest is not available for DB instances running SQL Server Express Edition\.   

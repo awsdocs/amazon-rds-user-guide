@@ -55,7 +55,7 @@ You can compare usage for different reserved instance sizes by using normalized 
 | 4xlarge | 32 | 64 | 
 | 8xlarge | 64 | 128 | 
 | 10xlarge | 80 | 160 | 
-| 16xlarge | 132 | 264 | 
+| 16xlarge | 128 | 256 | 
 
 For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` db instances in your account in the same region, the billing benefit is applied in full to both instances\. 
 

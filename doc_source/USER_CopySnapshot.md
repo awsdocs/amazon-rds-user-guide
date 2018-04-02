@@ -1,6 +1,6 @@
 # Copying a DB Snapshot or DB Cluster Snapshot<a name="USER_CopySnapshot"></a>
 
-With Amazon Relational Database Service \(Amazon RDS\), you can copy DB snapshots and DB cluster snapshots\. You can copy automated or manual snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
+With Amazon RDS, you can copy DB snapshots and DB cluster snapshots\. You can copy automated or manual snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy a snapshot across AWS accounts\. 
 
@@ -14,7 +14,7 @@ The following are some limitations when you copy snapshots:
 + You can't copy a snapshot to or from the following regions: AWS GovCloud \(US\), China \(Beijing\)\. 
 + If you delete a source snapshot before the target snapshot becomes available, the snapshot copy may fail\. Verify that the target snapshot has a status of `AVAILABLE` before you delete a source snapshot\. 
 + You can have up to five snapshot copy requests in progress to a single destination region per account\.
-+ You can't copy a DB snapshot across regions if it was created from an Oracle DB instance that is using AWS CloudHSM Classic to store TDE Keys\. 
++ You can't copy a DB snapshot across regions if it was created from an Oracle DB instance that is using AWS CloudHSM Classic to store TDE keys\. 
 + Depending on the regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. If there is a large number of cross\-region snapshot copy requests from a given source AWS Region, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 ## Snapshot Retention<a name="USER_CopySnapshot.Retention"></a>

@@ -59,6 +59,7 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0012 |  The DB instance class for this DB instance is being changed\.   | 
 |  configuration change  | RDS\-EVENT\-0018 |  The current storage settings for this DB instance are being changed\.  | 
 |  configuration change  | RDS\-EVENT\-0011 |  A parameter group for this DB instance has changed\.  | 
+|  configuration change  | RDS\-EVENT\-0092 |  A parameter group for this DB instance has finished updating\.  | 
 |  configuration change  | RDS\-EVENT\-0028 |  Automatic backups for this DB instance have been disabled\.  | 
 |  configuration change  | RDS\-EVENT\-0032 |  Automatic backups for this DB instance have been enabled\.  | 
 |  configuration change  | RDS\-EVENT\-0033 |  There are \[count\] users that match the master user name\. Users not tied to a specific host have been reset\.  | 

@@ -26,7 +26,7 @@ The basic building block of Amazon RDS is the *DB instance*\. A DB instance is a
  The computation and memory capacity of a DB instance is determined by its *DB instance class*\. You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 **Note**  
-For pricing information on DB instance classes, go to the Pricing section of the [Amazon Relational Database Service \(Amazon RDS\)](http://aws.amazon.com/rds/) product page\. 
+For pricing information on DB instance classes, go to the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
 
 DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It’s important to have sufficient storage so that your databases have room to grow and that features for the DB engine have room to write content or log entries\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\. 
 

@@ -70,13 +70,8 @@ PROMPT> rds-download-db-logfile myexampledb --region us-west-2 --log-file-name l
 ```
 
 ## Related Topics<a name="w3ab1c42c17b9"></a>
-
 + [Downloading a Database Log File](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)
-
 +  [download\-db\-logfile\-portion](http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)
-
 + [DownloadDBLogFilePortion](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html)
-
 + [RDS Query API Documentation](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)
-
 + [ Signature Version 4 Signing Process](http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) 

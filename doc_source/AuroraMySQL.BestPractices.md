@@ -305,7 +305,7 @@ Single\-table updates or deletes are supported\.
 
 ### Enabling Hash Joins<a name="Aurora.BestPractices.HashJoin.Enabling"></a>
 
-You can enable hash joins by setting `optimizer_switch`, a MySQL server variable, to `on`\. The following example illustrates how to enable hash joins\.
+You can enable hash joins by setting `optimizer_switch`, a MySQL server variable, to `on`\. The `optimizer_switch` parameter is set to `on` for hash joins by default\. The following example illustrates how to enable hash joins\.
 
 ```
 mysql> SET optimizer_switch='hash_join=on';
@@ -316,6 +316,9 @@ With this setting, the optimizer chooses to use a hash join based on cost, query
 ```
 mysql> SET optimizer_switch='hash_join_cost_based=off';
 ```
+
+**Note**  
+Currently, Aurora lab mode must be enabled to use hash joins for Aurora MySQL\. For information about enabling Aurora lab mode, see [Aurora Lab Mode](AuroraMySQL.Updates.md#AuroraMySQL.Updates.LabMode)\.
 
 ### Optimizing Queries for Hash Joins<a name="Aurora.BestPractices.HashJoin.Optimizing"></a>
 

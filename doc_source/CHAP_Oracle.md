@@ -389,9 +389,9 @@ You can use huge pages with the following versions and editions of Oracle:
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
-+ For the current generation DB instance classes \(db\.t2, db\.r3, and db\.m4\), `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default\. You can enable huge pages manually if the instance class has at least 14 GiB of memory\.
-+ For next generation instance classes, such as db\.r4, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `ONLY` by default\.
-+ For next generation instance classes, such as db\.r4, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `ONLY`\.
++ For the DB instance classes db\.t2, db\.r3, and db\.m4, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default\. You can enable huge pages manually if the instance class has at least 14 GiB of memory\.
++ For DB instance class db\.r4, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `ONLY` by default\.
++ For DB instance class db\.r4, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `ONLY`\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
 
@@ -436,7 +436,7 @@ Assume the following parameters values are set in a parameter group\.
 6. use_large_pages          = {DBInstanceClassHugePagesDefault}
 ```
 
-The parameter group is used by a next generation db\.r4 instance class with less than 100 GiB of memory and a current generation db\.r3 instance with more than 100 GiB memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, huge pages are enabled on the db\.r4 instance, but disabled on the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory and a db\.r3 instance with more than 100 GiB memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, huge pages are enabled on the db\.r4 instance, but disabled on the db\.r3 instance\.
 
 Consider another example with following parameters values set in a parameter group\.
 
@@ -449,10 +449,10 @@ Consider another example with following parameters values set in a parameter gro
 6. use_large_pages         = FALSE
 ```
 
-The parameter group is used by a next generation db\.r4 instance class with less than 100 GiB of memory and a current generation db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on both the db\.r4 instance and the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory and a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on both the db\.r4 instance and the db\.r3 instance\.
 
 **Note**  
-If this parameter group is used by a next generation db\.r4 instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
+If this parameter group is used by a db\.r4 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
 
 After you configure your parameters, you must reboot your DB instance for the changes to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
 

@@ -7,13 +7,21 @@ Loading data into a table from text files in an Amazon S3 bucket is available fo
 
 ## Giving Aurora Access to Amazon S3<a name="AuroraMySQL.Integrating.LoadFromS3.Authorize"></a>
 
-Before you can load data from an Amazon S3 bucket, you must give your Aurora MySQL DB cluster permission to access Amazon S3\. To grant permission, 
+Before you can load data from an Amazon S3 bucket, you must first give your Aurora MySQL DB cluster permission to access Amazon S3\.
 
-1. Create an AWS Identity and Access Management \(IAM\) role with the necessary permissions, and then associate the role with your DB cluster\. You must also configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For details and instructions on how to permit your Aurora MySQL DB cluster to communicate with Amazon S3 on your behalf, see [Setting Up IAM Roles to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.md)\. 
+**To give Aurora MySQL access to Amazon S3**
 
-2. You must set either the `aurora_load_from_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for the `aurora_load_from_s3_role`, the IAM role specified in `aws_default_s3_role` is used\. For more information about DB cluster parameters, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups)\.
+1. Create an AWS Identity and Access Management \(IAM\) policy that provides the bucket and object permissions that allow your Aurora MySQL DB cluster to access Amazon S3\. For instructions, see [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)\.
 
-3. To permit database users in an Amazon Aurora DB cluster to access S3, you associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with that DB cluster. For associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+1. Create an IAM role, and attach the IAM policy you created in [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md) to the new IAM role\. For instructions, see [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md)\.
+
+1. Set either the `aurora_select_into_s3_role` or `aws_default_s3_role` DB cluster parameter to the Amazon Resource Name \(ARN\) of the new IAM role\. If an IAM role isn't specified for `aurora_select_into_s3_role`, the IAM role specified in `aws_default_s3_role` is used\. 
+
+   For more information about DB cluster parameters, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups)\.
+
+1. To permit database users in an Aurora MySQL DB cluster to access Amazon S3, associate the role that you created in [Creating an IAM Role to Allow Amazon Aurora to Access AWS Services](AuroraMySQL.Integrating.Authorizing.IAM.CreateRole.md) with the DB cluster\. For information about associating an IAM role with a DB cluster, see [Associating an IAM Role with an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Authorizing.IAM.AddRoleToDBCluster.md)\.
+
+1. Configure your Aurora MySQL DB cluster to allow outbound connections to Amazon S3\. For instructions, see [Enabling Network Communication from Amazon Aurora MySQL to Other AWS Services](AuroraMySQL.Integrating.Authorizing.Network.md)\.
 
 ## Granting Privileges to Load Data in Amazon Aurora MySQL<a name="AuroraMySQL.Integrating.LoadFromS3.Grant"></a>
 

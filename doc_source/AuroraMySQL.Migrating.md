@@ -27,7 +27,7 @@ The following table describes your options and the type of migration for each op
 
 | Migrating From | Migration Type | Solution | 
 | --- | --- | --- | 
-| An RDS MySQL DB instance | Physical |  You can migrate from an RDS MySQL DB instance by first by creating an Aurora MySQL Read Replica of a MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora MySQL Read Replica is 0, you can direct your client applications to read from the Aurora Read Replica and then stop replication to make the Aurora MySQL Read Replica a standalone Aurora MySQL DB cluster for reading and writing\. For details, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using an Aurora Read Replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\.  | 
+| An Amazon RDS MySQL DB instance | Physical |  You can migrate from an RDS MySQL DB instance by first by creating an Aurora MySQL Read Replica of a MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora MySQL Read Replica is 0, you can direct your client applications to read from the Aurora Read Replica and then stop replication to make the Aurora MySQL Read Replica a standalone Aurora MySQL DB cluster for reading and writing\. For details, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using an Aurora Read Replica](AuroraMySQL.Migrating.RDSMySQL.Replica.md)\.  | 
 | An RDS MySQL DB instance | Physical |  You can migrate data directly from an Amazon RDS MySQL DB snapshot to an Amazon Aurora MySQL DB cluster\. For details, see [Migrating Data from a MySQL DB Instance to an Amazon Aurora MySQL DB Cluster by Using a DB Snapshot](AuroraMySQL.Migrating.RDSMySQL.md)\.  | 
 | A MySQL database external to Amazon RDS | Logical |  You can create a dump of your data using the `mysqldump` utility, and then import that data into an existing Amazon Aurora MySQL DB cluster\. For details, see [Migrating from MySQL to Amazon Aurora by Using mysqldump](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.mysqldump)\.  | 
 | A MySQL database external to Amazon RDS | Physical |  You can copy the backup files from your database to an Amazon Simple Storage Service \(Amazon S3\) bucket, and then restore an Amazon Aurora MySQL DB cluster from those files\. This option can be considerably faster than migrating data using `mysqldump`\. For details, see [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)\.  | 
@@ -36,6 +36,7 @@ The following table describes your options and the type of migration for each op
 
 **Note**  
 If you are migrating a MySQL database external to Amazon RDS, the migration options described in the table are supported only if your database supports the InnoDB or MyISAM tablespaces\.
+If the MySQL database you are migrating to Aurora MySQL uses `memcached`, remove `memcached` before migrating it\.
 
 ## Related Topics<a name="AuroraMySQL.Migrating.RelatedTopics"></a>
 + [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

@@ -1,6 +1,6 @@
 # Working with an Amazon RDS DB Instance in a VPC<a name="USER_VPC.WorkingWithRDSInstanceinaVPC"></a>
 
-Unless you are working with a legacy DB instance, your DB instance is in a virtual private cloud \(VPC\)\. A virtual private cloud is a virtual network that is logically isolated from other virtual networks in the AWS cloud\. Amazon Virtual Private Cloud \(Amazon VPC\) lets you launch AWS resources, such as an Amazon Relational Database Service \(Amazon RDS\) or Amazon Elastic Compute Cloud \(Amazon EC2\) instance, into a VPC\. The VPC can either be a default VPC that comes with your account or one that you create\. All VPCs are associated with your AWS account\. 
+Unless you are working with a legacy DB instance, your DB instance is in a virtual private cloud \(VPC\)\. A virtual private cloud is a virtual network that is logically isolated from other virtual networks in the AWS Cloud\. Amazon VPC lets you launch AWS resources, such as an Amazon RDS or Amazon EC2 instance, into a VPC\. The VPC can either be a default VPC that comes with your account or one that you create\. All VPCs are associated with your AWS account\. 
 
 Your default VPC has three subnets you can use to isolate resources inside the VPC\. The default VPC also has an Internet Gateway that can be used to provide access to resources inside the VPC from outside the VPC\. 
 
@@ -21,7 +21,7 @@ To learn how to work with an Amazon RDS DB instances inside a VPC, see the follo
 ## Working with a DB Instance in a VPC<a name="Overview.RDSVPC.Create"></a>
 
 Here are some tips on working with a DB instance in a VPC:
-+ Your VPC must have at least one subnet in at least two of the Availability Zones in the region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
++ Your VPC must have at least two subnets\. These subnets must be in two different Availability Zones in the region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
 + If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. 
 + Your VPC must have a DB subnet group that you create \(for more information, see the next section\)\. You create a DB subnet group by specifying the subnets you created\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to select a subnet and an IP address within that subnet to assign to your DB instance\.
 + Your VPC must have a VPC security group that allows access to the DB instance\. 

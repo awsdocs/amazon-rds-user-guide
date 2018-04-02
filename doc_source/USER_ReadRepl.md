@@ -57,7 +57,7 @@ You can create up to five Read Replicas from one source DB instance\. For replic
 Amazon RDS overrides any incompatible parameters on a Read Replica if it prevents the Read Replica from starting\. For example, suppose that the `max_connections` parameter value is higher on the source DB instance than on the Read Replica\. In that case, Amazon RDS updates the parameter on the Read Replica to be the same value as that on the source DB instance\. 
 
 Here are some important facts about PostgreSQL Read Replicas: 
-+ PostgreSQL Read Replicas are read\-only and can't be made writable\.
++ Each PostgreSQL Read Replica is read\-only and can't be made a writable Read Replica\.
 + You can't create a Read Replica from another Read Replica \(that is, you can't create cascading Read Replicas\)\. 
 + You can promote a PostgreSQL Read Replica to be a new source DB instance\. However, the Read Replica doesn't become the new source DB instance automatically\. The Read Replica, when promoted, stops receiving WAL communications and is no longer a read\-only instance\. You must set up any replication you intend to have going forward because the promoted Read Replica is now a new source DB instance\. 
 + A PostgreSQL Read Replica reports a replication lag of up to five minutes if there are no user transactions occurring on the source DB instance\. 
@@ -271,7 +271,7 @@ To promote a Read Replica to a DB instance, call [ `PromoteReadReplica`](http://
 
 ## Creating a Read Replica in a Different AWS Region<a name="USER_ReadRepl.XRgn"></a>
 
-With Amazon Relational Database Service \(Amazon RDS\), you can create a MySQL, PostgreSQL, or MariaDB Read Replica in a different AWS Region than the source DB instance\. You create a Read Replica to do the following:
+With Amazon RDS, you can create a MySQL, PostgreSQL, or MariaDB Read Replica in a different AWS Region than the source DB instance\. You create a Read Replica to do the following:
 + Improve your disaster recovery capabilities\.
 + Scale read operations into an AWS Region closer to your users\.
 + Make it easier to migrate from a data center in one AWS Region to a data center in another AWS Region\.
