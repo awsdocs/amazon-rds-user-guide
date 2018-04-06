@@ -8,6 +8,9 @@ With version 1\.17\.1 of Aurora MySQL, we are using a cluster patching model whe
 
 Should you have any questions or concerns, the AWS Support Team is available on the community forums and through [AWS Premium Support](http://aws.amazon.com/support)\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
 
+**Note**  
+There is an issue in the latest version of the Aurora MySQL engine\. After upgrading to 1\.17\.1, the engine version is reported incorrectly as `1.17`\. If you upgraded to 1\.17\.1, you can confirm the upgrade by checking the **Maintenance** column for the DB cluster in the AWS Management Console\. If it displays `none`, then the engine is upgraded to 1\.17\.1\.
+
 ## Improvements<a name="AuroraMySQL.Updates.1171.Improvements"></a>
 + Fixed an issue in binary log recovery that resulted in longer recovery times for situations with large binary log index files which can happen if binary logs rotate very often\.
 + Fixed an issue in the query optimizer that generated an inefficient query plan for partitioned tables\.

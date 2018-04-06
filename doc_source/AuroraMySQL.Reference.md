@@ -35,6 +35,7 @@ The following table shows all of the parameters that apply to the entire Aurora 
 |  `character_set_database`  |  Yes  | 
 |  `character_set_filesystem`  |  Yes  | 
 |  `character_set_results`  |  Yes  | 
+|  `character_set_server`  |  Yes  | 
 |  `collation_connection`  |  Yes  | 
 |  `collation_server`  |  Yes  | 
 |  `completion_type`  |  Yes  | 

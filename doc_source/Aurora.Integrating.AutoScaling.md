@@ -217,7 +217,7 @@ Currently, Aurora MySQL supports the following predefined metrics in Aurora Auto
 + **RDSReaderAverageCPUUtilization** – The average value of the `CPUUtilization` Aurora MySQL metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 + **RDSReaderAverageDatabaseConnections** – The average value of the `DatabaseConnections` Aurora MySQL metric in CloudWatch across all Aurora Replicas in the Aurora DB cluster\.
 
-For more information about the `CPUUtilization` and `DatabaseConnections` metrics for Aurora MySQL, see [Amazon Aurora MySQL Metrics](Aurora.Monitoring.md#Aurora.AuroraMySQL.Monitoring.Metrics)\.
+For more information about the `CPUUtilization` and `DatabaseConnections` metrics for Aurora MySQL, see [Amazon Aurora Metrics](Aurora.Monitoring.md#Aurora.AuroraMySQL.Monitoring.Metrics)\.
 
 To use a predefined metric in your scaling policy, you create a target tracking configuration for your scaling policy\. This configuration must include a `PredefinedMetricSpecification` for the predefined metric and a `TargetValue` for the target value of that metric\.
 

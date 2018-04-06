@@ -33,7 +33,7 @@ After CDC is enabled on the database, you can start tracking specific tables\. Y
  2. exec sys.sp_cdc_enable_table   
  3.    @source_schema           = N'<source_schema>'
  4. ,  @source_name             = N'<source_name>'
- 5. ,  @role_name               = N'<table name>'
+ 5. ,  @role_name               = N'<role name>'
  6. 
  7. --The following parameters are optional:
  8.  

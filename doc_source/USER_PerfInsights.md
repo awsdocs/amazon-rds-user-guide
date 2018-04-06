@@ -14,7 +14,7 @@ If you find that the load in the **Average Active Sessions** chart is often abov
 
 The following video provides an overview of Performance Insights\.
 
-[![AWS Videos](http://img.youtube.com/vi/4462hcfkApM/0.jpg)](http://www.youtube.com/watch?v=4462hcfkApM)
+[![AWS Videos](http://img.youtube.com/vi/xzVyu1prBvY/0.jpg)](http://www.youtube.com/watch?v=xzVyu1prBvY)
 
 **Topics**
 + [Using the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard)
