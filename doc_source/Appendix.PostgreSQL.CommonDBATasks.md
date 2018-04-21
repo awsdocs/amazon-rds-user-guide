@@ -394,7 +394,7 @@ autovacuum_freeze_max_age::float)
     or
     coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
 coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-pg_table_size(c.oid) <= n_dead_tup
+c.reltuples <= n_dead_tup
    -- or 1 = 1
 )
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
