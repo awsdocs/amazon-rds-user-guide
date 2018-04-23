@@ -12,7 +12,7 @@ You can use the following options to manage performance and scaling for Aurora D
 
 ### Storage Scaling<a name="Aurora.Managing.Performance.StorageScaling"></a>
 
-Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gigabyte \(GB\) increments up to 64 TB\.
+Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gibibyte \(GiB\) increments up to 64 TiB\.
 
 The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\.
 

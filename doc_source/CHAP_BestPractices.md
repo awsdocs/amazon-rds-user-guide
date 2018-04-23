@@ -186,8 +186,8 @@ You have several different options for improving performance and stability in Am
 ## Best Practices for Working with MySQL Storage Engines<a name="CHAP_BestPractices.MySQLStorage"></a>
 
 On a MySQL DB instance, observe the following table creation limits:
-+ You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the instance is 200 GB or larger in size\.
-+ You’re limited to 1000 tables if you are either using standard storage, or using General Purpose storage and the instance is less than 200 GB in size\.
++ You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the DB instance is 200 GiB or larger in size\.
++ You’re limited to 1000 tables if you are either using standard storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
 
 We recommend these limits because having large numbers of tables significantly increases database recovery time after a failover or database crash\. If you need to create more tables than recommended, set the `innodb_file_per_table` parameter to 0\. For more information, see [Working with InnoDB Tablespaces to Improve Crash Recovery Times](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.Tables) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 

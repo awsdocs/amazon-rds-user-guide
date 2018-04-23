@@ -1,8 +1,8 @@
-# Amazon RDS Maintenance<a name="USER_UpgradeDBInstance.Maintenance"></a>
+# Maintaining an Amazon RDS DB Instance<a name="USER_UpgradeDBInstance.Maintenance"></a>
 
-Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB instance's or DB cluster's underlying operating system \(OS\)\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
+Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB instance's or DB cluster's underlying operating system \(OS\) or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
 
-Maintenance items require that Amazon RDS take your DB instance or DB cluster offline for a short time\. Maintenance that require a resource to be offline include scale compute operations, which generally take only a few minutes from start to finish, and required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
+Maintenance items require that Amazon RDS take your DB instance or DB cluster offline for a short time\. Maintenance that requires a resource to be offline include scale compute operations, which generally take only a few minutes from start to finish, and required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
 
 DB instances are not automatically backed up when an OS update is applied, so you should back up your DB instances before you apply an update\. 
 
@@ -10,23 +10,108 @@ You can view whether a maintenance update is available for your DB instance or D
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailable.png)
 
-If an update is available, you can take one of the actions in the following table\. 
+If an update is available, you can take one of the actions\. 
++ Defer the maintenance items\.
++ Apply the maintenance items immediately\.
++ Schedule the maintenance items to start during your next maintenance window\.
++ Take no action\.
 
-
-****  
-
-| Action | Notes | 
-| --- | --- | 
-|  Defer the maintenance items\.  |  Certain OS updates are marked as **Required**\. If you defer a required update, you receive a notice from Amazon RDS indicating when the update will be performed on your DB instance or DB cluster\. Other updates are **Available**\. You can defer these updates indefinitely\.   | 
-|  Apply the maintenance items immediately\.  |  For instructions, see [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)\.   | 
-|  Schedule the maintenance items to start during your next maintenance window\.   |  For instructions, see [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)\.   | 
-|  Take no action\.  |  The updates are applied during your next maintenance window\.   | 
+**Note**  
+Certain OS updates are marked as **Required**\. If you defer a required update, you receive a notice from Amazon RDS indicating when the update will be performed on your DB instance or DB cluster\. Other updates are **Available**\. You can defer these updates indefinitely\.
 
 The maintenance window determines when pending operations start, but does not limit the total execution time of these operations\. Maintenance operations are not guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
-## Multi\-AZ Deployments for RDS DB Instances<a name="w3ab1c15c33c19"></a>
+## Applying Updates for a DB Instance or DB Cluster<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
-Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS will conduct maintenance by following these steps: 
+With Amazon RDS, you can choose when to apply maintenance operations\. You can decide when Amazon RDS applies updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
+
+Use the procedures in this topic to immediately upgrade or schedule an upgrade for your DB instance\. For more information, see [Maintaining an Amazon RDS DB Instance](#USER_UpgradeDBInstance.Maintenance)\. 
+
+### AWS Management Console<a name="USER_UpgradeDBInstance.OSUpgrades.Console"></a>
+
+**To manage an update for a DB instance or DB cluster**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Instances** to manage updates for a DB instance, or **Clusters** to manage updates for an Aurora DB cluster\. 
+
+1. Select the check box for the DB instance or DB cluster that has a required update\. 
+
+1. Choose **Instance actions** for a DB instance, or **Actions** for a DB cluster, and then choose one of the following:
+   + **Upgrade now**
+   + **Upgrade at next window**
+**Note**  
+If you choose **Upgrade at next window** and later want to delay the update, you can select **Defer upgrade**\.
+
+### CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
+
+To apply a pending update to a DB instance or DB cluster, use the [apply\-pending\-maintenance\-action](http://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command\.
+
+**Example**  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds apply-pending-maintenance-action \
+2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db \
+3.     --apply-action system-update \
+4.     --opt-in-type immediate
+```
+For Windows:  
+
+```
+1. aws rds apply-pending-maintenance-action ^
+2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db ^
+3.     --apply-action system-update ^
+4.     --opt-in-type immediate
+```
+
+To return a list of resources that have at least one pending update, use the [describe\-pending\-maintenance\-actions](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
+
+**Example**  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds describe-pending-maintenance-actions \
+2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
+```
+For Windows:  
+
+```
+1. aws rds describe-pending-maintenance-actions ^
+2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
+```
+
+You can also return a list of resources for a DB instance or DB cluster by specifying the `--filters` parameter of the `describe-pending-maintenance-actions` AWS CLI command\. The format for the `--filters` command is `Name=filter-name,Value=resource-id,...`\.
+
+The following are the accepted values for the `Name` parameter of a filter:
++ `db-instance-id` – Accepts a list of DB instance identifiers or Amazon Resource Names \(ARNs\)\. The returned list only includes pending maintenance actions for the DB instances identified by these identifiers or ARNs\.
++ `db-cluster-id` – Accepts a list of DB cluster identifiers or ARNs\. The returned list only includes pending maintenance actions for the DB clusters identified by these identifiers or ARNs\.
+
+For example, the following example returns the pending maintenance actions for the `sample-cluster1` and `sample-cluster2` DB clusters\.
+
+**Example**  
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds describe-pending-maintenance-actions \
+2. 	--filters Name=db-cluster-id,Values=sample-cluster1,sample-cluster2
+```
+For Windows:  
+
+```
+1. aws rds describe-pending-maintenance-actions ^
+2. 	--filters Name=db-cluster-id,Values=sample-cluster1,sample-cluster2
+```
+
+### API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
+
+To apply an update to a DB instance or DB cluster, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) action\.
+
+To return a list of resources that have at least one pending update, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) action\.
+
+## Maintenance for Multi\-AZ Deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
+
+Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS will apply operating system updates by following these steps: 
 
 1. Perform maintenance on the standby\.
 
@@ -212,5 +297,4 @@ The following code example sets the maintenance window to Tuesdays from 4:00\-4:
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.Maintenance.Related"></a>
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
 + [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)

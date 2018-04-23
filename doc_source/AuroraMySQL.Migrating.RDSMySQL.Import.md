@@ -157,7 +157,7 @@ You can also choose for your new Aurora MySQL DB cluster to be encrypted at rest
 1. Set the following values on the **Migrate Database** page:
    + **Migrate to DB Engine**: Select `aurora`\.
    + **DB Engine Version**: Select the DB engine version for the Aurora MySQL DB cluster\.
-   + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 terabytes \(TB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)\.
+   + **DB Instance Class**: Select a DB instance class that has the required storage and capacity for your database, for example `db.r3.large`\. Aurora cluster volumes automatically grow as the amount of data in your database increases, up to a maximum size of 64 tebibytes \(TiB\)\. So you only need to select a DB instance class that meets your current storage requirements\. For more information, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)\.
    + **DB Instance Identifier**: Type a name for the DB cluster that is unique for your account in the region you selected\. This identifier is used in the endpoint addresses for the instances in your DB cluster\. You might choose to add some intelligence to the name, such as including the region and DB engine you selected, for example **aurora\-cluster1**\.
 
      The DB instance identifier has the following constraints:

@@ -6,7 +6,7 @@
 + **AWS Lambda integration** – You can now asynchronously invoke an AWS Lambda function from an Aurora DB cluster using the `mysql.lambda_async` procedure\. For more information, see [Invoking a Lambda Function from an Amazon Aurora MySQL DB Cluster](AuroraMySQL.Integrating.Lambda.md)\.
 + **Load data from Amazon S3** – You can now load text or XML files from an Amazon S3 bucket into your Aurora DB cluster using the `LOAD DATA FROM S3` or `LOAD XML FROM S3` commands\. For more information, see [Loading Data into an Amazon Aurora MySQL DB Cluster from Text Files in an Amazon S3 Bucket](AuroraMySQL.Integrating.LoadFromS3.md)\.
 + **Catalog migration** – Aurora now persists catalog metadata in the cluster volume to support versioning\. This enables seamless catalog migration across versions and restores\.
-+ **Cluster\-level maintenance and patching** – Aurora now manages maintenance updates for an entire DB cluster\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
++ **Cluster\-level maintenance and patching** – Aurora now manages maintenance updates for an entire DB cluster\. For more information, see [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Improvements<a name="AuroraMySQL.Updates.20161018.Improvements"></a>
 + Fixed an issue where an Aurora Replica crashes when not granting a metadata lock to an inflight DDL table\.

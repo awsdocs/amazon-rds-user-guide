@@ -79,10 +79,10 @@ Once Amazon RDS provisions your DB cluster and creates the primary instance, you
 1. Type the following command at a command prompt on a client computer to connect to a database on an Aurora MySQL DB cluster using the MySQL monitor\. Use the cluster endpoint to connect to the primary instance, and the master user name that you created previously\. \(You are prompted for a password\.\) If you supplied a port value other than 3306, use that for the `-P` parameter instead\.
 
    ```
-   PROMPT> mysql -h <cluster endpoint> -P 3306 -u <mymasteruser> -p						
+   PROMPT> mysql -h <cluster endpoint> -P 3306 -u <mymasteruser>						
    ```
 
-   You should see output similar to the following\.
+   After you enter the password for the user, you should see output similar to the following\.
 
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.

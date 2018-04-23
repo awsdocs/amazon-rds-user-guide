@@ -43,15 +43,13 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC<a name="USER_VPC.Scenario3"></a>
 
- When your DB instance is in a different VPC from the EC2 instance you are using to access it, there are several ways to access the DB instance\. If the DB instance and EC2 instance are in different VPCs but in the same region, you can use VPC peering\. If the DB instance and the EC2 instance are in different regions, you must use the public IP of the DB instance to access it\.
+ When your DB instance is in a different VPC from the EC2 instance you are using to access it, you can use VPC peering to access the DB instance\.
 
 The following diagram shows this scenario\. 
 
 ![\[A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC2EC2VPC.png)
 
-A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, or with a VPC in another AWS account within a single region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html)\. 
-
- Use the public IP of the DB instance when you need to connect to a DB instance that is in a different VPC and region from your EC2 instance\. The DB instance must allow public access, must be in a public subnet, and the subnet must have an Internet gateway\. Amazon RDS automatically creates a public subnet for your DB instance when you set the **VPC** option to **Create new VPC** and **Public accessibility** option to **Yes** when you create the DB instance\. 
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html)\. 
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.ClassicLink"></a>
 

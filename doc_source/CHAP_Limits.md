@@ -34,7 +34,7 @@ The following table lists the resources and their limits per region\.
 | Subnet groups | 50 | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
-| Total storage for all DB instances | 100 TB | 
+| Total storage for all DB instances | 100 TiB | 
 
 1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. Of those 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 can be Amazon Aurora, MySQL, MariaDB, PostgreSQL or Oracle under the "BYOL" model\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
 
@@ -58,7 +58,7 @@ The following table describes naming constraints in Amazon RDS\.
 
 ### Aurora File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.Aurora"></a>
 
-With Amazon Aurora, the table size limit is only constrained by the size of the Aurora cluster volume, which has a maximum of 64 terabytes \(TB\)\. As a result, the maximum table size for a table in an Aurora database is 64 TB\.
+With Amazon Aurora, the table size limit is only constrained by the size of the Aurora cluster volume, which has a maximum of 64 tebibytes \(TiB\)\. As a result, the maximum table size for a table in an Aurora database is 64 TiB\.
 
 ### MySQL File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MySQL"></a>
 

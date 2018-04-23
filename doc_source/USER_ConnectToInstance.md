@@ -38,10 +38,10 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 To connect to a DB instance using the MySQL utility, type the following command at a command prompt to connect to a DB instance using the MySQL utility\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. Enter the master user password when prompted\. 
 
 ```
-mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p
+mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser
 ```
 
-You will see output similar to the following\.
+After you enter the password for the user, you will see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.

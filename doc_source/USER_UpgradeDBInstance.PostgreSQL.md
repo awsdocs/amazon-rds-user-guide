@@ -196,5 +196,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.PostgreSQL.Related"></a>
-+ [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
++ [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

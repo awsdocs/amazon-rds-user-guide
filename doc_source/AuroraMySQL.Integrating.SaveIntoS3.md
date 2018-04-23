@@ -152,7 +152,7 @@ The `SELECT INTO OUTFILE S3` statement returns a typical MySQL error number and 
 
 Currently, there's no way to directly monitor the progress of the `SELECT INTO OUTFILE S3` statement during execution\. However, suppose that you're writing a large amount of data from Aurora MySQL to Amazon S3 using this statement, and you know the size of the data selected by the statement\. In this case, you can estimate progress by monitoring the creation of data files in Amazon S3\.
 
-To do so, you can use the fact that a data file is created in the specified Amazon S3 bucket for about every 6GB of data selected by the statement\. Divide the size of the data selected by 6GB to get the estimated number of data files to create\. You can then estimate the progress of the statement by monitoring the number of files uploaded to Amazon S3 during execution\.
+To do so, you can use the fact that a data file is created in the specified Amazon S3 bucket for about every 6 GB of data selected by the statement\. Divide the size of the data selected by 6 GB to get the estimated number of data files to create\. You can then estimate the progress of the statement by monitoring the number of files uploaded to Amazon S3 during execution\.
 
 ### Examples<a name="AuroraMySQL.Integrating.SaveIntoS3.Examples"></a>
 

@@ -196,7 +196,7 @@ SQL Server Management Studio includes the following tools, which are useful in i
 The Generate and Publish Scripts Wizard creates a script that contains the schema of a database, the data itself, or both\. If you generate a script for a database in your local SQL Server deployment, you can then run the script to transfer the information that it contains to an Amazon RDS DB instance\. 
 
 **Note**  
-For databases of 1 GB or larger, it is more efficient to script only the database schema and then use the Import and Export Wizard or the bulk copy feature of SQL Server to transfer the data\. 
+For databases of 1 GiB or larger, it is more efficient to script only the database schema and then use the Import and Export Wizard or the bulk copy feature of SQL Server to transfer the data\. 
 
 For detailed information about the Generate and Publish Scripts Wizard, see the [Microsoft SQL Server documentation](http://msdn.microsoft.com/en-us/library/ms178078%28v=sql.105%29.aspx)\. 
 

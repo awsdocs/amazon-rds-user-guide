@@ -2,7 +2,7 @@
 
 Amazon RDS uses the MySQL DB engines' binary log replication functionality to create a special type of DB cluster called an Aurora Read Replica for a source MySQL DB instance\. Updates made to the source MySQL DB instance are asynchronously replicated to the Aurora Read Replica\. 
 
-We recommend using this functionality to migrate from a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora Read Replica is 0, you can direct your client applications to the Aurora Read Replica and then stop replication to make the Aurora Read Replica a standalone Aurora MySQL DB cluster\. Be prepared for migration to take a while, roughly several hours per terabyte \(TB\) of data\.
+We recommend using this functionality to migrate from a MySQL DB instance to an Aurora MySQL DB cluster by creating an Aurora Read Replica of your source MySQL DB instance\. When the replica lag between the MySQL DB instance and the Aurora Read Replica is 0, you can direct your client applications to the Aurora Read Replica and then stop replication to make the Aurora Read Replica a standalone Aurora MySQL DB cluster\. Be prepared for migration to take a while, roughly several hours per tebibyte \(TiB\) of data\.
 
 For a list of regions where Aurora is available, see [Availability for Amazon Aurora MySQL](Aurora.AuroraMySQL.md#Aurora.AuroraMySQL.Availability)\.
 

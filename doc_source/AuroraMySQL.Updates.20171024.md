@@ -6,7 +6,7 @@ Amazon Aurora v1\.15 is generally available\. All new database clusters, includi
 
 With version 1\.15 of Aurora, we are using a cluster patching model where all nodes in an Aurora DB cluster are patched at the same time\. Updates require a database restart, so you will experience 20 to 30 seconds of downtime, after which you can resume using your DB cluster or clusters\. If your DB clusters are currently running Aurora v1\.14 or Aurora v1\.14\.1, Aurora's zero\-downtime patching feature may allow client connections to your Aurora primary instance to persist through the upgrade, depending on your workload\.
 
-Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
+Should you have any questions or concerns, the AWS Support Team is available on the community forums and through AWS Premium Support at [http://aws\.amazon\.com/support](http://aws.amazon.com/support)\. For more information, see [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
 ## Zero\-Downtime Patching<a name="AuroraMySQL.Updates.20171024.ZDP"></a>
 
