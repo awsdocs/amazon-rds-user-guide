@@ -46,10 +46,7 @@ For more information about the slow query and general logs, go to the following 
 
 ## Publishing MariaDB Logs to CloudWatch Logs<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs"></a>
 
-You can configure your Amazon RDS MariaDB database instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
-
-**Note**  
-Publishing log files to CloudWatch Logs is only supported for MariaDB versions 10\.0 and 10\.1\.
+You can configure your Amazon RDS MariaDB DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
 Amazon RDS publishes each MariaDB database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\.
 
@@ -65,60 +62,97 @@ The following table summarizes the requirements for the various MariaDB logs\.
 
 **To publish MariaDB logs to CloudWatch Logs from the console**
 
-1. Open the Amazon RDS console
-
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. For **Instance Actions**, choose **Modify**\.
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\.
 
-1. Open the **Log exports** section, and then choose the logs you want to start publishing to CloudWatch Logs\. 
+1. For **Instance actions**, choose **Modify**\.
+
+1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
 ### Publishing Logs to CloudWatch Logs with the CLI<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.CLI"></a>
 
- You can publish a MariaDB DB log with the AWS CLI\. You can call either the `modify-db-instance` or `create-db-instance` commands with the following parameters: 
-+ `-- db-instance-identifier`
-+ `-- cloudwatch-logs-export-configuration`
-+ `-- apply-immediately`
+ You can publish a MariaDB logs with the AWS CLI\. You can call the [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
++ `--db-instance-identifier`
++ `--cloudwatch-logs-export-configuration`
++ `--apply-immediately`
+
+You can also publish MariaDB logs by calling the following AWS CLI commands: 
++ [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
++ [http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)
++ [http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html)
++ [http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html)
+
+Run one of these AWS CLI commands with the following options: 
++ `--db-instance-identifier`
++ `--enable-cloudwatch-logs-exports`
++ `--db-instance-class`
++ `--engine`
+
+Other options might be required depending on the AWS CLI command you run\.
 
 **Example**  
-The following command modifies an existing MariaDB instance to publish log files to CloudWatch Logs\.  
+The following command modifies an existing MariaDB DB instance to publish log files to CloudWatch Logs\.  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-dbinstance \
+1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
-4.     --apply-immediately  \
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
+4.     --apply-immediately
 ```
 For Windows:  
 
 ```
-1. aws rds modify-dbinstance ^
+1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
-4.     --apply-immediately  ^
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
+4.     --apply-immediately
 ```
 
 **Example**  
-The following command creates a MariaDB instance to publish log files to CloudWatch Logs\.  
+The following command creates a MariaDB DB instance and publishes log files to CloudWatch Logs\.  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-dbinstance \
+1. aws rds create-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
-4.     --apply-immediately  \
+3.     --enable-cloudwatch-logs-exports '["error","general","audit","slowquery"]' \
+4.     --db-instance-class db.m4.large \
+5.     --engine mariadb
 ```
 For Windows:  
 
 ```
-1. aws rds create-dbinstance ^
+1. aws rds create-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --db-cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
-4.     --apply-immediately  ^
+3.     --enable-cloudwatch-logs-exports '["error","general","audit","slowquery"]' ^
+4.     --db-instance-class db.m4.large ^
+5.     --engine mariadb
 ```
+
+### Publishing Logs to CloudWatch Logs with the RDS API<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.API"></a>
+
+You can publish MariaDB logs with the RDS API\. You can call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
++ `DBInstanceIdentifier`
++ `CloudwatchLogsExportConfiguration`
++ `ApplyImmediately`
+
+You can also publish MariaDB logs by calling the following RDS API actions: 
++ [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
++ [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
++ [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
++ [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
+
+Run one of these RDS API actions with the following parameters: 
++ `DBInstanceIdentifier`
++ `EnableCloudwatchLogsExports`
++ `Engine`
++ `DBInstanceClass`
+
+Other parameters might be required depending on the AWS CLI command you run\.
 
 ## Log File Size<a name="USER_LogAccess.MariaDB.LogFileSize"></a>
 

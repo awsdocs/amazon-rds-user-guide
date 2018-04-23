@@ -30,16 +30,16 @@ In the event of a planned or unplanned outage of your DB instance, Amazon RDS au
 The failover mechanism automatically changes the DNS record of the DB instance to point to the standby DB instance\. As a result, you need to re\-establish any existing connections to your DB instance\. Due to how the Java DNS caching mechanism works, you may need to reconfigure your JVM environment\. For more information on how to manage a Java application that caches DNS values in the case of a failover, see the [AWS SDK for Java](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-jvm-ttl.html)\. 
 
 Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention\. The primary DB instance switches over automatically to the standby replica if any of the following conditions occur: 
-+ An Availability Zone outage 
-+ The primary DB instance fails 
-+ The DB instance's server type is changed 
-+ The operating system of the DB instance is undergoing software patching 
-+ A manual failover of the DB instance was initiated using **Reboot with failover**
++ An Availability Zone outage occurs\.
++ The primary DB instance fails\.
++ The DB instance's DB instance class is changed\.
++ The operating system of the DB instance is undergoing software patching\.
++ A manual failover of the DB instance was initiated using **Reboot with failover**\.
 
 There are several ways to determine if your Multi\-AZ DB instance has failed over:
-+  DB event subscriptions can be setup to notify you via email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS Event Notification](USER_Events.md) 
++  DB event subscriptions can be setup to notify you via email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS Event Notification](USER_Events.md)\. 
 + You can view your DB events by using the Amazon RDS console or API actions\.
-+  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API actions\. 
++  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API actions\.
 
 For information on how you can respond to failovers, reduce recovery time, and other best practices for Amazon RDS, see [Best Practices for Amazon RDS](CHAP_BestPractices.md)\.
 

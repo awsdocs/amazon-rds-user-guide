@@ -121,7 +121,7 @@ You can monitor the contents of a log file by using the Amazon RDS console\.
 
 In addition to viewing and downloading DB instance logs, you can also publish logs to Amazon CloudWatch Logs for real\-time analysis\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and you can use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs store your log data in highly durable storage, which you can manage with the CloudWatch Logs Agent\.
 
-AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information about setting a CloudWatch Log retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)\. 
+AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information about setting a CloudWatch Log retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
 
  For more information about publishing database logs to CloudWatch Logs, see the following:
 + [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)

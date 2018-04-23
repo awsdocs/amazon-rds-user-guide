@@ -14,7 +14,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 The basic building block of Amazon RDS is the DB instance\. This is the environment in which you run your MySQL databases\. 
 
-In this example, you create a DB instance running the MySQL database engine called *mysql\-instance1*, with a *db\.m1\.small* DB instance class, 20 GB of storage, and automated backups enabled with a retention period of one day\.
+In this example, you create a DB instance running the MySQL database engine called *mysql\-instance1*, with a *db\.m1\.small* DB instance class, 20 GiB of storage, and automated backups enabled with a retention period of one day\.
 
 **To create a MySQL DB instance**
 
@@ -67,10 +67,10 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 1. Type the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL monitor\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and the master password you used for *<password>*\.
 
    ```
-   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
+   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser>
    ```
 
-   You should see output similar to the following\.
+   After you enter the password for the user, you should see output similar to the following\.
 
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.

@@ -6,7 +6,7 @@ You can use SSL from your application to encrypt a connection to a DB instance r
 + [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
 + [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
-+ [Using SSL with a PostgreSQL DB Instance](PostgreSQL.Concepts.md#PostgreSQL.Concepts.General.SSL)
++ [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
 A root certificate that works for all regions can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. It is the trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\. 
 
@@ -58,13 +58,3 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 [US West \(Oregon\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem)
 
 [ AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012; for CA\-2017, see following\)
-
-### GovCloud \(US\) SSL Certificates 2017<a name="w3ab1c21c17c25c42"></a>
-
-To maintain connectivity, you need to update the CA\-2012 SSL certificates your client or application is using to connect to RDS before August 15, 2017, at 20:00 UTC\. Follow these steps:
-
-1. Download the new [AWS GovCloud Intermediate SSL certificate bundle](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-bundle-us-gov-west-1.pem)\.
-
-1. Use the new certificates you downloaded in the previous step to update your database client or application by following the steps on the download page\. This action is specific to the configuration of your client or application\.
-
-Use the Modify operation for your RDS instance on the AWS Management Console \(or the ModifyDBInstance API\) to change the Certificate Authority \(CA\) from rds\-ca\-2012 to rds\-ca\-2017, and then choose **Apply Immediately**\. This operation updates the SSL certificates on the RDS instance and initiates a reboot operation to have the new certificates take effect\. This reboot operation typically takes less than two minutes to complete\. In some cases, such as when a database has a large number of tables, a reboot can take longer\. For more information, see [Best Practices for Amazon RDS](CHAP_BestPractices.md)\. 

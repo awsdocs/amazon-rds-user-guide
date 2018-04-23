@@ -26,7 +26,7 @@ Before you begin this step, you must have a VPC with both public and private sub
    + **DB instance class:** `db.t2.small`
    + **Multi\-AZ deployment:** `No`
    + **Storage type:** `General Purpose (SSD)`
-   + **Allocated storage:** `20 GB`
+   + **Allocated storage:** `20 GiB`
    + **DB instance identifier:** `tutorial-db-instance`
    + **Master username:** `tutorial_user`
    + **Master password:** Choose a password\.

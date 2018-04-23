@@ -243,25 +243,6 @@ To subscribe to Amazon RDS event notification, call the Amazon RDS API function 
 + `SubscriptionName`
 + `SnsTopicArn`
 
-**Example**  
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=CreateEventSubscription
-   &Enabled=true
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &SnsTopicArn=arn%3Aaws%3Asns%3Aus-east-1%3A802#########%3Amyawsuser-RDS
-   &SourceType=db-security-group
-   &SubscriptionName=myeventsubscription
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140425/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140425T214325Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=7045960f6ab15609571fb05278004256e186b7633ab2a3ae46826d7713e0b461
-```
-
 ## Listing Your Amazon RDS Event Notification Subscriptions<a name="USER_Events.ListSubscription"></a>
 
 You can list your current Amazon RDS event notification subscriptions\.
@@ -373,25 +354,6 @@ For Windows:
 To modify an Amazon RDS event, call the Amazon RDS API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyEventSubscription.html)\. Include the following required parameter:
 + `SubscriptionName`
 
-**Example**  
-The following code enables `myeventsubscription`\.  
-
-```
- 1. https://rds.us-west-2.amazonaws.com/
- 2.    ?Action=ModifyEventSubscription
- 3.    &Enabled=true
- 4.    &SignatureMethod=HmacSHA256
- 5.    &SignatureVersion=4
- 6.    &SnsTopicArn=arn%3Aaws%3Asns%3Aus-west-2%3A802#########%3Amy-rds-events
- 7.    &SubscriptionName=myeventsubscription
- 8.    &Version=2014-09-01
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-west-2/rds/aws4_request
-11.    &X-Amz-Date=20140428T183020Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=3d85bdfaf13861e93a9528824d9876ed87e6e01aaf43a962ce6f2a39247cf33a
-```
-
 ## Adding a Source Identifier to an Amazon RDS Event Notification Subscription<a name="USER_Events.AddingSource"></a>
 
 You can add a source identifier \(the Amazon RDS source generating the event\) to an existing subscription\.
@@ -428,23 +390,6 @@ For Windows:
 To add a source identifier to an Amazon RDS event notification subscription, call the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddSourceIdentifierToSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddSourceIdentifierToSubscription.html)\. Include the following required parameters:
 + `SubscriptionName`
 + `SourceIdentifier`
-
-**Example**  
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=AddSourceIdentifierToSubscription
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &SourceIdentifier=mysqldb
-   &SubscriptionName=myrdseventsubscription
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140422/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140422T230442Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=347d5e788e809cd06c50214b12750a3c39716bf65b239bb6f7ee8ff5374e2df9
-```
 
 ## Removing a Source Identifier from an Amazon RDS Event Notification Subscription<a name="USER_Events.RemovingSource"></a>
 
@@ -483,24 +428,6 @@ To remove a source identifier from an Amazon RDS event notification subscription
 + `SubscriptionName`
 + `SourceIdentifier`
 
-**Example**  
-The following example removes the source identifier `mysqldb` from the `myrdseventsubscription` subscription\.  
-
-```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=RemoveSourceIdentifierFromSubscription
- 3.    &SignatureMethod=HmacSHA256
- 4.    &SignatureVersion=4
- 5.    &SourceIdentifier=mysqldb
- 6.    &SubscriptionName=myrdseventsubscription
- 7.    &Version=2014-09-01
- 8.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 9.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
-10.    &X-Amz-Date=20140428T222718Z
-11.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-12.    &X-Amz-Signature=4419f0015657ee120d781849ffdc6642eeafeee42bf1d18c4b2ed8eb732f7bf8
-```
-
 ## Listing the Amazon RDS Event Notification Categories<a name="USER_Events.ListingCategories"></a>
 
 All events for a resource type are grouped into categories\. To view the list of categories available, use the following procedures\.
@@ -524,21 +451,6 @@ To list the Amazon RDS event notification categories, use the AWS CLI [http://do
 ### API<a name="USER_Events.ListingCategories.API"></a>
 
 To list the Amazon RDS event notification categories, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventCategories.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventCategories.html) command\. This command has no required parameters\.
-
-**Example**  
-
-```
-https://rds.us-west-2.amazonaws.com/
-   ?Action=DescribeEventCategories
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140421/us-west-2/rds/aws4_request
-   &X-Amz-Date=20140421T194732Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=6e25c542bf96fe24b28c12976ec92d2f856ab1d2a158e21c35441a736e4fde2b
-```
 
 ## Deleting an Amazon RDS Event Notification Subscription<a name="USER_Events.Deleting"></a>
 
@@ -575,20 +487,3 @@ The following example deletes the subscription `myrdssubscription`\.
 
 To delete an Amazon RDS event notification subscription, use the RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteEventSubscription.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteEventSubscription.html) command\. Include the following required parameter:
 + `SubscriptionName`
-
-**Example**  
-The following example deletes the subscription `myrdssubscription`\.  
-
-```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=DeleteEventSubscription
- 3.    &SignatureMethod=HmacSHA256 
- 4.    &SignatureVersion=4
- 5.    &SubscriptionName=myrdssubscription
- 6.    &Version=2014-09-01
- 7.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 8.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140423/us-east-1/rds/aws4_request
- 9.    &X-Amz-Date=20140423T203337Z
-10.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-11.    &X-Amz-Signature=05aa834e364a9e1a279d44cc955694518fc96fff638c74faa2be45783102e785
-```

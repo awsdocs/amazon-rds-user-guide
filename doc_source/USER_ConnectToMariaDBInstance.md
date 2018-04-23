@@ -30,10 +30,10 @@ You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\.
 To connect to a DB instance using the mysql utility, type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
 
 ```
-mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
+mysql -h <endpoint> -P 3306 -u <mymasteruser>
 ```
 
-You will see output similar to the following\.
+After you enter the password for the user, you will see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.

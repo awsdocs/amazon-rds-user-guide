@@ -48,15 +48,15 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance have some
 + Amazon RDS for SQL Server does not support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ with Mirroring deployment\. 
 + The maximum storage size for SQL Server DB instances is the following: 
-  + General Purpose \(SSD\) storage: 16 TB for all editions 
-  + Provisioned IOPS storage: 16 TB for all editions 
-  + Magnetic storage: 1 TB for all editions 
+  + General Purpose \(SSD\) storage: 16 TiB for all editions 
+  + Provisioned IOPS storage: 16 TiB for all editions 
+  + Magnetic storage: 1 TiB for all editions 
 
   If you have a scenario that requires a larger amount of storage, you can use sharding across multiple DB instances to get around the limit\. This approach requires data\-dependent routing logic in applications that connect to the sharded system\. You can use an existing sharding framework, or you can write custom code to enable sharding\. If you use an existing framework, the framework can't install any components on the same server as the DB instance\. 
 + The minimum storage size for SQL Server DB instances is the following: 
-  + General Purpose \(SSD\) storage: 200 GB for Enterprise and Standard editions, 20 GB for Web and Express editions 
-  + Provisioned IOPS storage: 200 GB for Enterprise and Standard editions, 100 GB for Web and Express editions 
-  + Magnetic storage: 200 GB for Enterprise and Standard editions, 20 GB for Web and Express editions 
+  + General Purpose \(SSD\) storage: 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
+  + Provisioned IOPS storage: 200 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
+  + Magnetic storage: 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
 + Amazon RDS doesn't support running SQL Server Analysis Services, SQL Server Integration Services, SQL Server Reporting Services, Data Quality Services, or Master Data Services on the same server as your Amazon RDS DB instance\. To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premise SQL Server instance, to act as the Reporting, Analysis, Integration, or Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\. 
 + Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of a DROP DATABASE might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the DROP DATABASE command was issued, which means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the DROP DATABASE command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\. 
 

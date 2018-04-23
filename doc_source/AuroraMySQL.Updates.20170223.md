@@ -4,7 +4,7 @@
 
 We will patch all Amazon Aurora MySQL DB clusters with the latest version over a short period following the release\. DB clusters are patched using the legacy procedure with a downtime of about 5\-30 seconds\. 
 
-Patching occurs during the system maintenance window that you have specified for each of your database instances\. You can view or change this window using the AWS Management Console\. For more information, see [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)\.
+Patching occurs during the system maintenance window that you have specified for each of your database instances\. You can view or change this window using the AWS Management Console\. For more information, see [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
 Alternatively, you can apply the patch immediately in the AWS Management Console by choosing a DB cluster, choosing **Cluster Actions**, and then choosing **Upgrade Now**\.
 

@@ -10,7 +10,6 @@ You can use database cloning in a variety of use cases, especially where you don
 ## Limitations<a name="Aurora.Managing.Clone.Limitations"></a>
 
 There are some limitations involved with database cloning, described following:
-+ Cloning is only supported for Aurora MySQL instances\. 
 + You cannot create clone databases across AWS regions\. The clone databases must be created in the same region as the source databases\.
 + Currently, you are limited to up to 15 clones based on a copy, including clones based on other clones\. After that, only copies can be created\. However, each copy can also have up to 15 clones\. 
 + Cross\-account database cloning is not currently supported\.

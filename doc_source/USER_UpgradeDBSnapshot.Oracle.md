@@ -97,4 +97,4 @@ The following example upgrades a DB snapshot\.
 ## Related Topics<a name="USER_UpgradeDBSnapshot.Oracle.Related"></a>
 + [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)
 + [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
++ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

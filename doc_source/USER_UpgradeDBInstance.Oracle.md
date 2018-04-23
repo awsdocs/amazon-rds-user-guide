@@ -184,5 +184,5 @@ The following code upgrades a DB instance\. These changes are applied during the
 
 ## Related Topics<a name="USER_UpgradeDBInstance.Oracle.Related"></a>
 + [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
++ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)

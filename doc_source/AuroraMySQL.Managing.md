@@ -33,7 +33,7 @@ The maximum number of connections allowed to an Aurora MySQL DB instance is dete
 
 `GREATEST({log(DBInstanceClassMemory/805306368)*45},{log(DBInstanceClassMemory/8187281408)*1000})`\.
 
-Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r3\.xlarge, which has 30\.5 gigabytes \(GB\) of memory\. Then the maximum connections allowed is 2000, as shown in the following equation:
+Setting the `max_connections` parameter to this equation makes sure that the number of allowed connection scales well with the size of the instance\. For example, suppose your DB instance class is db\.r3\.xlarge, which has 30\.5 gibibytes \(GiB\) of memory\. Then the maximum connections allowed is 2000, as shown in the following equation:
 
 ```
 log( (30.5 * 1073741824) / 8187281408 ) * 1000 = 2000

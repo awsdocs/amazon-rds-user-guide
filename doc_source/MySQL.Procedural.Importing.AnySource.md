@@ -1,6 +1,6 @@
 # Importing Data From Any Source to a MySQL or MariaDB DB Instance<a name="MySQL.Procedural.Importing.AnySource"></a>
 
-If you have more than 1GB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- A Data Import Program](http://dev.mysql.com/doc/refman/5.6/en/mysqlimport.html) in the MySQL documentation\.
+If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- A Data Import Program](http://dev.mysql.com/doc/refman/5.6/en/mysqlimport.html) in the MySQL documentation\.
 
 We also recommend creating DB snapshots of the target Amazon RDS DB instance before and after the data load\. Amazon RDS DB snapshots are complete backups of your DB instance that can be used to restore your DB instance to a known state\. When you initiate a DB snapshot, I/O operations to your database instance are momentarily suspended while your database is backed up\. 
 
@@ -26,9 +26,9 @@ Use a common format, such as CSV \(Comma\-Separated Values\), to store the data 
 
 Whenever possible, order the data by the primary key of the table being loaded\. This drastically improves load times and minimizes disk storage requirements\. 
 
-The speed and efficiency of this procedure is dependent upon keeping the size of the files small\. If the uncompressed size of any individual file is larger than 1GB, split it into multiple files and load each one separately\.
+The speed and efficiency of this procedure is dependent upon keeping the size of the files small\. If the uncompressed size of any individual file is larger than 1 GiB, split it into multiple files and load each one separately\.
 
-On Unix\-like systems \(including Linux\), use the 'split' command\. For example, the following command splits the sales\.csv file into multiple files of less than 1GB, splitting only at line breaks \(\-C 1024m\)\. The new files will be named sales\.part\_00, sales\.part\_01, etc\. 
+On Unix\-like systems \(including Linux\), use the 'split' command\. For example, the following command splits the sales\.csv file into multiple files of less than 1 GiB, splitting only at line breaks \(\-C 1024m\)\. The new files will be named sales\.part\_00, sales\.part\_01, etc\. 
 
 ```
 split -C 1024m -d sales.csv sales.part_ 

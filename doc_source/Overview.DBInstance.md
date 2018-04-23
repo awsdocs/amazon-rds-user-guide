@@ -24,8 +24,6 @@ Amazon RDS creates a master user account for your DB instance as part of the cre
 + [DB Instance Status](Overview.DBInstance.Status.md)
 + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
 + [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)
-+ [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
 + [Amazon RDS DB Instance Lifecycle](CHAP_CommonTasks.md)
 + [Tagging Amazon RDS Resources](USER_Tagging.md)
 + [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)

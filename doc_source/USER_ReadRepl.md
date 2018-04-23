@@ -93,7 +93,7 @@ You can create a Read Replica as a Multi\-AZ DB instance\. Amazon RDS creates a 
 **Note**  
 Currently PostgreSQL Read Replicas can only be created as single\-AZ DB instances\.
 
-For MySQL and MariaDB DB instances, in some cases Read Replicas can't be switched to the secondary if some binlog events aren't flushed during the failure\. In these cases, you must manually delete and recreate the Read Replicas\. You can reduce the chance of this happening by setting the `sync_binlog=1`, `innodb_flush_log_at_trx_commit=1`, and `innodb_support_xa=1` dynamic variables\. These settings might reduce performance, so test their impact before implementing the changes to a production environment\. In MySQL 5\.5, `sync_binlog` defaults to `0`, but in MySQL 5\.6 and later or MariaDB\, problems are less likely to occur because these parameters are all set by default\. 
+For MySQL and MariaDB DB instances, in some cases Read Replicas can't be switched to the secondary if some binlog events aren't flushed during the failure\. In these cases, you must manually delete and recreate the Read Replicas\. You can reduce the chance of this happening by setting the following dynamic variable values: `sync_binlog=1`, `innodb_flush_log_at_trx_commit=1`, and `innodb_support_xa=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\. For MySQL 5\.5, `sync_binlog` defaults to `0`, but in MySQL 5\.6 and later or MariaDB, problems are less likely to occur because these parameters are all set to the recommended values by default\.
 
 You usually configure replication between Amazon RDS DB instances, but you can configure replication to import databases from instances of MySQL or MariaDB running outside of Amazon RDS, or to export databases to such instances\. For more information, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
@@ -113,7 +113,7 @@ When you create a Read Replica, Amazon RDS takes a DB snapshot of your source DB
 
 When creating a Read Replica, there are a few things to consider\. First, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a Read Replica that is the source DB instance for another Read Replica\. For MySQL DB instances, automatic backups are supported only for Read Replicas running MySQL 5\.6 and later, but not for MySQL versions 5\.5\. To enable automatic backups on an Amazon RDS MySQL version 5\.6 and later Read Replica, first create the Read Replica, then modify the Read Replica to enable automatic backups\. 
 
-### Preparing MySQL DB Instances That Use MyISAM<a name="w3ab1c15c49c19b9"></a>
+### Preparing MySQL DB Instances That Use MyISAM<a name="w3ab1c15c41c19b9"></a>
 
 If your MySQL DB instance uses a nontransactional engine such as MyISAM, you need to perform the following steps to successfully set up your Read Replica\. These steps are required to ensure that the Read Replica has a consistent copy of your data\. These steps are not required if all of your tables use a transactional engine such as InnoDB\. 
 

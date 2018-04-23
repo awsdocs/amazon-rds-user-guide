@@ -26,6 +26,7 @@ Here are some important points you should know about working with parameters in 
 + [Copying a DB Parameter Group](#USER_WorkingWithParamGroups.Copying)
 + [Listing DB Parameter Groups](#USER_WorkingWithParamGroups.Listing)
 + [Viewing Parameter Values for a DB Parameter Group](#USER_WorkingWithParamGroups.Viewing)
++ [Comparing DB Parameter Groups](#USER_WorkingWithParamGroups.Comparing)
 + [DB Parameter Values](#USER_ParamValuesRef)
 
 ## Creating a DB Parameter Group<a name="USER_WorkingWithParamGroups.Creating"></a>
@@ -171,7 +172,7 @@ For Linux, OS X, or Unix:
 1. aws rds modify-db-parameter-group \
 2.     --db-parameter-group-name mydbparametergroup \
 3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" \
-4.     --parameters "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 For Windows:  
 
@@ -179,7 +180,7 @@ For Windows:
 1. aws rds modify-db-parameter-group ^
 2.     --db-parameter-group-name mydbparametergroup ^
 3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" ^
-4.     --parameters "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 The command produces output like the following:  
 
@@ -554,6 +555,20 @@ The command returns a response like the following:
 39.   </ResponseMetadata>
 40. </DescribeDBParametersResponse>
 ```
+
+## Comparing DB Parameter Groups<a name="USER_WorkingWithParamGroups.Comparing"></a>
+
+You can use the AWS Management Console to view the differences between two parameter groups for the same DB engine and version\.
+
+**To compare two DB parameter groups**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Parameter groups**\.
+
+1. In the list, select the two parameter groups you want to compare\.
+
+1. Choose **Parameter group actions**, and then choose **Compare**\.
 
 ## DB Parameter Values<a name="USER_ParamValuesRef"></a>
 
