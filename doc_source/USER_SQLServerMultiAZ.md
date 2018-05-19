@@ -14,7 +14,6 @@ Amazon RDS supports Multi\-AZ with Mirroring for the following SQL Server versio
 Amazon RDS supports Multi\-AZ with Mirroring for SQL Server in all AWS Regions, with the following exceptions:
 + Not supported 
   + US West \(N\. California\)
-  + AWS GovCloud \(US\)
 + Supported in most cases 
   + Asia Pacific \(Sydney\) – Supported for [DB instances in VPCs](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
   + Asia Pacific \(Tokyo\) – Supported for [DB instances in VPCs](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
