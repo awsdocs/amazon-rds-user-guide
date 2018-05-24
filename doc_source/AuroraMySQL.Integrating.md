@@ -7,6 +7,3 @@ Amazon Aurora MySQL integrates with other AWS services so that you can extend yo
 + Automatically add or remove Aurora Replicas with Application Auto Scaling\. For more information, see [Using Amazon Aurora Auto Scaling with Aurora Replicas](Aurora.Integrating.AutoScaling.md)\.
 
 Aurora secures the ability to access other AWS services by using AWS Identity and Access Management \(IAM\)\. You grant permission to access other AWS services by creating an IAM role with the necessary permissions, and then associating the role with your DB cluster\. For details and instructions on how to permit your Aurora MySQL DB cluster to access other AWS services on your behalf, see [Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf](AuroraMySQL.Integrating.Authorizing.md)\.
-
-## Related Topics<a name="AuroraMySQL.Integrating.RelatedTopics"></a>
-+ [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

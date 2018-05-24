@@ -1,4 +1,4 @@
-# Appendix: Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
+# Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
 
 Amazon RDS incorporates bug fixes from Oracle via their quarterly Database Patch Set Updates \(PSU\)\. You can be confident that your DB instance is running a stable, common version of the database software that has been regression tested by both Oracle and Amazon\. We do not support applying one\-off patches to individual DB instances\. 
 

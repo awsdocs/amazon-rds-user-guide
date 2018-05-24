@@ -2,7 +2,7 @@
 
 Use the procedures in this topic to copy a DB snapshot\. For an overview of copying a snapshot, see [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md) 
 
-If your source database engine is MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL, then your snapshot is a DB snapshot\. If your source database engine is Aurora, then your snapshot is a DB cluster snapshot\. For instructions on how to copy a db cluster snapshot, see [Copying a DB Cluster Snapshot](USER_CopyDBClusterSnapshot.CrossRegion.md)\. 
+If your source database engine is MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL, then your snapshot is a DB snapshot\. If your source database engine is Aurora, then your snapshot is a DB cluster snapshot\. For instructions on how to copy a DB cluster snapshot, see [Copying a DB Cluster Snapshot](USER_CopyDBClusterSnapshot.CrossRegion.md)\. 
 
 For each AWS account, you can copy up to five DB snapshots at a time from one AWS Region to another\. If you copy a DB snapshot to another AWS Region, you create a manual DB snapshot that is retained in that AWS Region\. Copying a DB snapshot out of the source AWS Region incurs Amazon RDS data transfer charges\. 
 

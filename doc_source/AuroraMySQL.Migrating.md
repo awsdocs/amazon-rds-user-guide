@@ -37,6 +37,3 @@ The following table describes your options and the type of migration for each op
 **Note**  
 If you are migrating a MySQL database external to Amazon RDS, the migration options described in the table are supported only if your database supports the InnoDB or MyISAM tablespaces\.
 If the MySQL database you are migrating to Aurora MySQL uses `memcached`, remove `memcached` before migrating it\.
-
-## Related Topics<a name="AuroraMySQL.Migrating.RelatedTopics"></a>
-+ [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)

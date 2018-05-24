@@ -38,7 +38,11 @@ To create an IAM role to permit your Amazon RDS cluster to communicate with othe
 
 1. On the **Attach policy** page, enter the name of your policy in the **Search** field\.
 
-1. When it appears in the list, select the policy that you defined earlier in either [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md), [Creating an IAM Policy to Access AWS Lambda Resources](AuroraMySQL.Integrating.Authorizing.IAM.LambdaCreatePolicy.md), or [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)\.
+1. When it appears in the list, select the policy that you defined earlier using the instructions in one of the following sections:
+   + [Creating an IAM Policy to Access Amazon S3 Resources](AuroraMySQL.Integrating.Authorizing.IAM.S3CreatePolicy.md)
+   + [Creating an IAM Policy to Access AWS Lambda Resources](AuroraMySQL.Integrating.Authorizing.IAM.LambdaCreatePolicy.md)
+   + [Creating an IAM Policy to Access CloudWatch Logs Resources](AuroraMySQL.Integrating.Authorizing.IAM.CWCreatePolicy.md)
+   + [Creating an IAM Policy to Access AWS KMS Resources](AuroraMySQL.Integrating.Authorizing.IAM.KMSCreatePolicy.md)
 
 1. Choose **Attach policy**\.
 

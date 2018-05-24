@@ -147,5 +147,5 @@ After replication on the MySQL instance has caught up with the Amazon RDS source
 On the Amazon RDS Read Replica, call the `mysql.rds_start_replication` stored procedure\. This will allow Amazon RDS to start purging the binary log files from the source MySQL DB instance\.
 
 ## Related Topics<a name="MySQL.Procedural.Exporting.Related"></a>
-+ [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)
++ [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)
 + [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

@@ -114,7 +114,7 @@ Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or 
   + General Purpose \(SSD\)
   + Provisioned IOPS \(PIOPS\)
 
-  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [DB instance storage](CHAP_Storage.md)\.
 
 When you have the information you need to create the security group and the DB instance, continue to the next step\.
 

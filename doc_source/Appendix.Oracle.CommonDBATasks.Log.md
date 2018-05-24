@@ -118,7 +118,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_logfile` to dr
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `grp` | positive | — | requried | The group number of the log\. | 
+| `grp` | positive | — | required | The group number of the log\. | 
 
 The following example drops the log with group number 3: 
 

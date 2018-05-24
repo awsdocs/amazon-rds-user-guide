@@ -15,7 +15,7 @@ The `mysql.rds_reset_external_master` procedure must be run by the master user\.
 **Note**  
 We recommend that you use Read Replicas to manage replication between two Amazon RDS DB instances when possible, and only use this and other replication\-related stored procedures to enable more complex replication topologies between Amazon RDS DB instances\. These stored procedures are primarily offered to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
-For more information about using replication to import data from an instance of MySQL running external to Amazon RDS, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
+For more information about using replication to import data from an instance of MySQL running external to Amazon RDS, see [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
 
 The `mysql.rds_reset_external_master` procedure is available in these versions of Amazon RDS MySQL:
 + MySQL 5\.5

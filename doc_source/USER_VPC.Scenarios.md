@@ -91,11 +91,9 @@ The following diagram shows this scenario\.
 We recommend the following configuration:
 + A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
 + A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
++ An Amazon RDS DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
 + An Internet gateway which connects the VPC to the Internet and to other AWS products\.
-+ An instance with a private IP address in the subnet range \(for example: 10\.0\.0\.6\), which enables the instance to communicate with other instances in the VPC, and an Elastic IP address \(for example: 198\.51\.100\.2\), which enables the instance to be reached from the Internet\.
-+ A route table entry that enables instances in the subnet to communicate with other instances in the VPC, and a route table entry that enables instances in the subnet to communicate directly over the Internet\.
-
-For more information, see scenario 1 in the [VPC documentation](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario1.html)\. 
++ A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
 
 ## A DB Instance Not in a VPC Accessed by an EC2 Instance in a VPC<a name="USER_VPC.Scenario5"></a>
 
@@ -127,7 +125,7 @@ The following diagram shows this scenario\.
 
 ![\[A DB Instance Not in a VPC Accessed by an EC2 Instance Not in a VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/legacyRDS2legacyec2.png)
 
-You must create a DB security group for the instance that permits access from the port you specified when creating the instance\. For example, you could use a connection string similar to this connection string used with *sqlplus* to access an Oracle DB instance:
+You must create a security group for the DB instance that permits access from the port you specified when creating the DB instance\. For example, you could use a connection string similar to this connection string used with *sqlplus* to access an Oracle DB instance:
 
 ```
 PROMPT>sqlplus 'mydbusr@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<endpoint>)

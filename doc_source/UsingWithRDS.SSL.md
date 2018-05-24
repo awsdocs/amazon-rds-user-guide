@@ -57,4 +57,6 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [US West \(Oregon\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem)
 
-[ AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012; for CA\-2017, see following\)
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
+
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)

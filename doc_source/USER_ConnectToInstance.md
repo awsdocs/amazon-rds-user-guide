@@ -38,7 +38,7 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 To connect to a DB instance using the MySQL utility, type the following command at a command prompt to connect to a DB instance using the MySQL utility\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. Enter the master user password when prompted\. 
 
 ```
-mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser
+mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p
 ```
 
 After you enter the password for the user, you will see output similar to the following\.
@@ -64,7 +64,7 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 1. Type the following command at a command prompt to connect to a DB instance with SSL using the MySQL utility\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. 
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p
    ```
 
 1. You can require that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. 
@@ -72,13 +72,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
    For MySQL 5\.7 and later:
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-mode=VERIFY_IDENTITY
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-mode=VERIFY_IDENTITY -p
    ```
 
    For MySQL 5\.6 and earlier:
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert -p
    ```
 
 1. Enter the master user password when prompted\.

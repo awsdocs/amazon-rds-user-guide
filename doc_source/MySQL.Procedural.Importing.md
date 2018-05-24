@@ -1,14 +1,14 @@
-# Importing Data into an Amazon RDS MySQL DB Instance<a name="MySQL.Procedural.Importing"></a>
+# Restoring a Backup into an Amazon RDS MySQL DB Instance<a name="MySQL.Procedural.Importing"></a>
 
-Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
+Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
 
-The following diagram shows the supported scenario\.
+You can find the supported scenario in the following diagram\.
 
 ![\[MySQL importing backup files from S3 architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-bak-file.png)
 
-Importing backup files from Amazon S3  is supported for MySQL version 5\.6\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
+Importing backup files from Amazon S3 is supported for MySQL version 5\.6\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
 
-We recommend that you import your database to Amazon RDS by using backup files if your database can be offline while the backup file is created, copied, and restored\. If your on\-premises database can't be offline, you can use binlog replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What Is AWS Database Migration Service? ](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
+We recommend that you import your database to Amazon RDS by using backup files if your database can be offline while the backup file is created, copied, and restored\. If your on\-premises database can't be offline, you can use binlog replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What Is AWS Database Migration Service?](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 
 ## Limitations and Recommendations for Importing Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Limitations"></a>
 
@@ -42,7 +42,7 @@ If you already have an Amazon S3 bucket, you can use that\. If you don't have an
 
 Use the Percona XtraBackup tool to create your backup\. For more information, see [Creating Your Database Backup](#MySQL.Procedural.Importing.Backup)\. 
 
-If you already have an IAM role, you can use that\. If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you in your account by the wizard when you restore the database by using the AWS Management Console\. If you want to create a new IAM role manually, or attach trust and permissions policies to an existing IAM role, see [Creating an IAM Role Manually](#MySQL.Procedural.Importing.Enabling.IAM)\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console) 
+If you already have an IAM role, you can use that\. If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you in your account by the wizard when you restore the database by using the AWS Management Console\. If you want to create a new IAM role manually, or attach trust and permissions policies to an existing IAM role, see [Creating an IAM Role Manually](#MySQL.Procedural.Importing.Enabling.IAM)\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console)\. 
 
 ## Creating Your Database Backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
@@ -106,15 +106,15 @@ Amazon RDS consumes your backup files based on the file name\. Name your backup 
 
 Amazon RDS consumes your backup files in alphabetical order and also in natural number order\. Use the `split` option when you issue the `innobackupex` command to ensure that your backup files are written and named in the proper order\. 
 
-Amazon RDS doesn't support partial backups created using Percona XtraBackup\. You can't use the `--include`, `--tables-file`, or `--databases` options to create a partial backup when you backup the source files for your database\. 
+Amazon RDS doesn't support partial backups created using Percona XtraBackup\. You can't use the `--include`, `--tables-file`, or `--databases` options to create a partial backup when you back up the source files for your database\. 
 
 Amazon RDS supports incremental backups created using Percona XtraBackup with or without the `--no-timestamp` option\. We recommend that you use the `--no-timestamp` option to reduce the depth of the directory structure for your incremental backup\. 
 
 ## Creating an IAM Role Manually<a name="MySQL.Procedural.Importing.Enabling.IAM"></a>
 
-If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console) 
+If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console)\. 
 
-If you want to manually create a new IAM role to use to import your database from Amazon S3, you create a role to delegate permissions from the Amazon RDS service to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. To import your backup files from Amazon S3, use trust and permissions policies similar to the examples following\. For more information about creating the role, see [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
+To manually create a new IAM role for importing your database from Amazon S3, create a role to delegate permissions from Amazon RDS to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. To import your backup files from Amazon S3, use trust and permissions policies similar to the examples following\. For more information about creating the role, see [Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
 Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console) 
 
@@ -207,7 +207,7 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
    1. For **S3 bucket**, choose your Amazon S3 bucket\. 
 
-   1. \(Optional\) For **S3 folder path prefix**, type a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a sub\-folder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\.\) In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
+   1. \(Optional\) For **S3 folder path prefix**, type a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
 
    1. For **Create a new role**, choose **Yes** to create a new IAM role in your account, or choose **No** to select an existing IAM role\. 
 
@@ -282,5 +282,5 @@ For Windows:
 To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) action\. 
 
 ## Related Topics<a name="MySQL.Procedural.Importing.Related"></a>
-+ [Importing Data into a MySQL DB Instance by Using Other MethodsImporting Data by Using Other Methods](MySQL.Procedural.Importing.Other.md)
++ [Importing Data into a MySQL DB InstanceImporting Data into a MySQL DB Instance](MySQL.Procedural.Importing.Other.md)
 + [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

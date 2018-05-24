@@ -76,7 +76,7 @@ After the Amazon RDS APEX options are installed, you must change the password fo
 
 To configure RESTful services in APEX \(not needed for APEX 4\.1\.1\.V1\), use SQL\*Plus to connect to your DB instance as the master user, and then run the `rdsadmin.rdsadmin_run_apex_rest_config` stored procedure\. When you run the stored procedure, you provide passwords for the following users:
 + `APEX_LISTENER`
-+ `APEX_REST_PULIC_USER`
++ `APEX_REST_PUBLIC_USER`
 
 The stored procedure runs the `apex_rest_config.sql` script, which creates new database accounts for these users\.
 

@@ -62,6 +62,7 @@ Here are some important facts about PostgreSQL Read Replicas:
 + You can promote a PostgreSQL Read Replica to be a new source DB instance\. However, the Read Replica doesn't become the new source DB instance automatically\. The Read Replica, when promoted, stops receiving WAL communications and is no longer a read\-only instance\. You must set up any replication you intend to have going forward because the promoted Read Replica is now a new source DB instance\. 
 + A PostgreSQL Read Replica reports a replication lag of up to five minutes if there are no user transactions occurring on the source DB instance\. 
 + Before a DB instance can serve as a source DB instance, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. 
++ If you use the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension to access data from a remote server, the Read Replica will also have access to the remote server\. For more information about using `postgres_fdw`, see [Accessing External Data with the postgres\_fdw Extension](Appendix.PostgreSQL.CommonDBATasks.md#postgresql-commondbatasks-fdw)\. 
 
 In several situations, a PostgreSQL source DB instance can unintentionally break replication with a Read Replica\. These situations include the following: 
 + The `max_wal_senders` parameter is set too low to provide enough data to the number of Read Replicas\. This situation causes replication to stop\. 
@@ -113,7 +114,7 @@ When you create a Read Replica, Amazon RDS takes a DB snapshot of your source DB
 
 When creating a Read Replica, there are a few things to consider\. First, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a Read Replica that is the source DB instance for another Read Replica\. For MySQL DB instances, automatic backups are supported only for Read Replicas running MySQL 5\.6 and later, but not for MySQL versions 5\.5\. To enable automatic backups on an Amazon RDS MySQL version 5\.6 and later Read Replica, first create the Read Replica, then modify the Read Replica to enable automatic backups\. 
 
-### Preparing MySQL DB Instances That Use MyISAM<a name="w3ab1c15c41c19b9"></a>
+### Preparing MySQL DB Instances That Use MyISAM<a name="w3ab1c15c46c19b9"></a>
 
 If your MySQL DB instance uses a nontransactional engine such as MyISAM, you need to perform the following steps to successfully set up your Read Replica\. These steps are required to ensure that the Read Replica has a consistent copy of your data\. These steps are not required if all of your tables use a transactional engine such as InnoDB\. 
 
@@ -558,34 +559,33 @@ The PostgreSQL parameter, `wal_keep_segments`, dictates how many Write Ahead Log
  The PostgreSQL log on the Read Replica shows when Amazon RDS is recovering a Read Replica that is this state by replaying archived WAL files\. 
 
 ```
-2014-11-07 19:01:10 UTC::@:[23180]:DEBUG: switched WAL source from archive to stream after failure
-2014-11-07 19:01:10 UTC::@:[11575]:LOG: started streaming WAL from primary at 1A/D3000000 on timeline 1
-2014-11-07 19:01:10 UTC::@:[11575]:FATAL: could not receive data from WAL stream: ERROR: requested WAL segment 000000010000001A000000D3 has already been removed
-2014-11-07 19:01:10 UTC::@:[23180]:DEBUG: could not restore file "00000002.history" from archive: return code 0
-2014-11-07 19:01:15 UTC::@:[23180]:DEBUG: switched WAL source from stream to archive after failure recovering 000000010000001A000000D3
-2014-11-07 19:01:16 UTC::@:[23180]:LOG: restored log file "000000010000001A000000D3" from archive
+2014-11-07 19:01:10 UTC::@:[23180]:DEBUG:  switched WAL source from archive to stream after failure
+2014-11-07 19:01:10 UTC::@:[11575]:LOG:  started streaming WAL from primary at 1A/D3000000 on timeline 1 
+2014-11-07 19:01:10 UTC::@:[11575]:FATAL:  could not receive data from WAL stream: ERROR:  requested WAL segment 000000010000001A000000D3 has already been removed
+2014-11-07 19:01:10 UTC::@:[23180]:DEBUG:  could not restore file "00000002.history" from archive: return code 0
+2014-11-07 19:01:15 UTC::@:[23180]:DEBUG:  switched WAL source from stream to archive after failure recovering 000000010000001A000000D3 
+2014-11-07 19:01:16 UTC::@:[23180]:LOG:  restored log file "000000010000001A000000D3" from archive
 ```
 
-After a certain amount of time, Amazon RDS replays enough archived WAL files on the replica to catch up and allow the Read Replica to begin streaming again\. At this point, PostgreSQL resumes streaming and writes a similar line to the following to the log file\.
+ After a certain amount of time, Amazon RDS replays enough archived WAL files on the replica to catch up and allow the Read Replica to begin streaming again\. At this point, PostgreSQL resumes streaming and writes a similar line to the following to the log file\.
 
 ```
-  2014-11-07 19:41:36 UTC::@:[24714]:LOG:  started streaming WAL from primary at 1B/B6000000
-      on timeline 1
+  
+2014-11-07 19:41:36 UTC::@:[24714]:LOG:  started streaming WAL from primary at 1B/B6000000 on timeline 1
 ```
 
 You can determine how many WAL files you should keep by looking at the checkpoint information in the log\. The PostgreSQL log shows the following information at each checkpoint\. By looking at the "\# recycled" transaction log files of these log statements, you can understand how many transaction files will be recycled during a time range and use this information to tune the `wal_keep_segments` parameter\. 
 
 ```
-  2014-11-07 19:59:35 UTC::@:[26820]:LOG:  checkpoint complete: wrote 376 buffers (0.2%); 0
-      transaction log file(s) added, 0 removed, 1 recycled; write=35.681 s, sync=0.013 s,
-      total=35.703 s; sync files=10, longest=0.013 s, average=0.001 s
+  
+2014-11-07 19:59:35 UTC::@:[26820]:LOG:  checkpoint complete: wrote 376 buffers (0.2%); 0 transaction log file(s) added, 0 removed, 1 recycled; write=35.681 s, sync=0.013 s,total=35.703 s; sync files=10, longest=0.013 s, average=0.001 s
 ```
 
 For example, suppose that the PostgreSQL log shows that 35 files are recycled from the "checkpoint completed" log statements within a 5\-minute time frame\. In that case, we know that with this usage pattern a Read Replica relies on 35 transaction files in five minutes\. A Read Replica can't survive five minutes in a nonstreaming state if the source DB instance is set to the default `wal_keep_segments` parameter value of 32\.
 
 ### Troubleshooting PostgreSQL Read Replica Problems Across AWS Regions<a name="USER_ReadRepl.TroubleshootingPostgreSQL.AcrossRegions"></a>
 
-PostgreSQL \(versions 9\.4\.7 and 9\.5\.2 exclusively\) uses physical replication slots to manage Write Ahead Log \(WAL\) retention on the source DB instance\. For each cross\-region Read Replica instance, Amazon RDS creates and associates a physical replication slot\. You can use two Amazon CloudWatch metrics, `Oldest Replication Slot Lag` and `Transaction Logs Disk Usage`, to see how far behind the most lagging replica is in terms of WAL data received and to see how much storage is being used for WAL data\. The `Transaction Logs Disk Usage` value can substantially increase when a cross\-region Read Replica is lagging significantly\.
+Versions 9\.4\.7 and later minor releases, 9\.5\.2 and later minor releases, 9\.6, and 10 of PostgreSQL use physical replication slots to manage Write Ahead Log \(WAL\) retention on the source DB instance\. For each cross\-region Read Replica instance, Amazon RDS creates and associates a physical replication slot\. You can use two Amazon CloudWatch metrics, `Oldest Replication Slot Lag` and `Transaction Logs Disk Usage`, to see how far behind the most lagging replica is in terms of WAL data received and to see how much storage is being used for WAL data\. The `Transaction Logs Disk Usage` value can substantially increase when a cross\-region Read Replica is lagging significantly\.
 
 If the workload on your DB instance generates a large amount of WAL data, you might need to change the DB instance class of your source DB instance and Read Replica\. In that case, you change it to one with high \(10 Gbps\) network performance for the replica to keep up\. The Amazon CloudWatch metric `Transaction Logs Generation` can help you understand the rate at which your workload is generating WAL data\. 
 

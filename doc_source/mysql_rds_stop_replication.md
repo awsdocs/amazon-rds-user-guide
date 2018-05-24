@@ -12,7 +12,7 @@ CALL mysql.rds_stop_replication;
 
 The `mysql.rds_stop_replication` procedure must be run by the master user\. 
 
-If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_stop_replication` on the replica to stop the replication process after the import has completed\. For more information, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
+If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_stop_replication` on the replica to stop the replication process after the import has completed\. For more information, see [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
 
 If you are configuring replication to export data to an instance of MySQL external to Amazon RDS, you call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 

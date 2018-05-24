@@ -37,7 +37,7 @@ There are two ways to shrink the tempdb database on your Amazon RDS DB instance\
 
 ### Using the rds\_shrink\_tempdbfile Procedure<a name="SQLServer.TempDB.Shrinking.Proc"></a>
 
-You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no down time for your DB instance\. 
+You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no downtime for your DB instance\. 
 
 The `rds_shrink_tempdbfile` procedure has the following parameters\. 
 

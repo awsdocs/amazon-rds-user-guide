@@ -4,6 +4,9 @@ Amazon RDS creates a storage volume snapshot of your DB instance, backing up the
 
 You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from **Magnetic \(Standard\)** storage, the migration process is the slowest\. That's because **Magnetic** storage doesn't have the IOPS capability of **Provisioned IOPS** or **General Purpose \(SSD\)** storage\. 
 
+**Note**  
+You can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\.
+
 ## Parameter Group Considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
 When you restore a DB instance, the default DB parameter group is associated with the restored instance\. As soon as the restore is complete and your new DB instance is available, you must associate any custom DB parameter group used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
@@ -105,7 +108,7 @@ In this example, you restore from a previously created DB snapshot named *mydbsn
  1. https://rds.us-east-1.amazonaws.com/
  2.    ?Action=RestoreDBInstanceFromDBSnapshot
  3.    &DBInstanceIdentifier=mynewdbinstance
- 4.    &DBSnapshotIdentifier=rds%3Amysqldb-2014-04-22-08-15
+ 4.    &DBSnapshotIdentifier=mydbsnapshot
  5.    &SignatureMethod=HmacSHA256
  6.    &SignatureVersion=4
  7.    &Version=2013-09-09

@@ -16,6 +16,7 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 + [Using pgBadger for Log Analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
 + [Viewing the Contents of pg\_config](#Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig)
 + [Working with the orafce Extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
++ [Accessing External Data with the postgres\_fdw Extension](#postgresql-commondbatasks-fdw)
 
 ## Creating Roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
@@ -359,7 +360,7 @@ Vacuum threshold = vacuum base threshold + vacuum scale factor * number of tuple
 While you are connected to your database, run the following query to see a list of tables that autovacuum sees as eligible for vacuuming:
 
 ```
-WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
+  WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
 pg_settings WHERE name = 'autovacuum_vacuum_threshold')
     , vsf AS (SELECT setting AS autovacuum_vacuum_scale_factor FROM 
 pg_settings WHERE name = 'autovacuum_vacuum_scale_factor')
@@ -376,7 +377,7 @@ SELECT
 autovacuum_freeze_max_age
     , (coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) 
 + coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-pg_table_size(c.oid)) as autovacuum_vacuum_tuples
+c.reltuples) as autovacuum_vacuum_tuples
     , n_dead_tup as dead_tuples
 FROM pg_class c join pg_namespace ns on ns.oid = c.relnamespace
 join pg_stat_all_tables stat on stat.relid = c.oid
@@ -394,7 +395,7 @@ autovacuum_freeze_max_age::float)
     or
     coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
 coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-pg_table_size(c.oid) <= n_dead_tup
+c.reltuples <= n_dead_tup
    -- or 1 = 1
 )
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
@@ -404,41 +405,55 @@ ORDER BY age(relfrozenxid) DESC LIMIT 50;
 
 If you need to manually vacuum a table, you need to determine if autovacuum is currently running\. If it is, you might need to adjust parameters to make it run more efficiently, or terminate autovacuum so you can manually run VACUUM\.
 
-Use the following query to determine if autovacuum is running, and how long it has been running\. This query requires Amazon RDS PostgreSQL 9\.3\.12 or later, 9\.4\.7 or later, and 9\.5\.2\+ to have full visibility into rdsadmin processes currently running\.
+Use the following query to determine if autovacuum is running, how long it has been running, and if it is waiting on another session\. 
+
+If you are using Amazon RDS PostgreSQL 9\.6\+ or higher, use this query:
 
 ```
-SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
-AS xact_runtime, query
-FROM pg_stat_activity WHERE upper(query) like '%VACUUM%' ORDER BY 
-xact_start;
+SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query
+FROM pg_stat_activity 
+WHERE upper(query) like '%VACUUM%' 
+ORDER BY xact_start;
 ```
 
 After running the query, you should see output similar to the following\.
 
 ```
-datname | usename  |  pid  | waiting |      xact_runtime       | 
-query  --
- mydb    | rdsadmin | 16473 | f       | 33 days 16:32:11.600656 | 
- autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
- mydb    | rdsadmin | 22553 | f       | 14 days 09:15:34.073141 | 
- autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
- mydb    | rdsadmin | 41909 | f       | 3 days 02:43:54.203349  | 
- autovacuum: VACUUM ANALYZE public.mytable3
- mydb    | rdsadmin |   618 | f       | 00:00:00                | 
- SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
- AS xact_runtime, query+
-         |          |       |         |                         | 
-         FROM pg_stat_activity                                          
-         +
-         |          |       |         |                         | 
-         WHERE query like '%VACUUM%'                                    
-         +
-         |          |       |         |                         | 
-         ORDER BY xact_start;
-(4	rows)
+ datname | usename  |  pid  | state  | wait_event |      xact_runtime       | query  
+ --------+----------+-------+--------+------------+-------------------------+--------------------------------------------------------------------------------------------------------
+ mydb    | rdsadmin | 16473 | active |            | 33 days 16:32:11.600656 | autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
+ mydb    | rdsadmin | 22553 | active |            | 14 days 09:15:34.073141 | autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
+ mydb    | rdsadmin | 41909 | active |            | 3 days 02:43:54.203349  | autovacuum: VACUUM ANALYZE public.mytable3
+ mydb    | rdsadmin |   618 | active |            | 00:00:00                | SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query+
+         |          |       |        |            |                         | FROM pg_stat_activity                                                                                 +
+         |          |       |        |            |                         | WHERE query like '%VACUUM%'                                                                           +
+         |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
 ```
 
-Several issues can cause long running \(multiple days\) autovacuum session\. The most common issue is that your[https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value is set too low for the size of the table or rate of updates\. 
+If you are using a version less than Amazon RDS PostgreSQL 9\.6, but, 9\.3\.12 or later, 9\.4\.7 or later, or 9\.5\.2\+, use this query:
+
+```
+SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query
+FROM pg_stat_activity 
+WHERE upper(query) like '%VACUUM%' 
+ORDER BY xact_start;
+```
+
+After running the query, you should see output similar to the following\.
+
+```
+ datname | usename  |  pid  | waiting |       xact_runtime      | query  
+ --------+----------+-------+---------+-------------------------+----------------------------------------------------------------------------------------------
+ mydb    | rdsadmin | 16473 | f       | 33 days 16:32:11.600656 | autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
+ mydb    | rdsadmin | 22553 | f       | 14 days 09:15:34.073141 | autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
+ mydb    | rdsadmin | 41909 | f       | 3 days 02:43:54.203349  | autovacuum: VACUUM ANALYZE public.mytable3
+ mydb    | rdsadmin |   618 | f       | 00:00:00                | SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query+
+         |          |       |         |                         | FROM pg_stat_activity                                                                       +                 
+         |          |       |         |                         | WHERE query like '%VACUUM%'                                                                 +
+         |          |       |         |                         | ORDER BY xact_start;                                                                        +
+```
+
+Several issues can cause long running \(multiple days\) autovacuum session\. The most common issue is that your [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value is set too low for the size of the table or rate of updates\. 
 
 We recommend that you use the following formula to set the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value\.
 
@@ -588,7 +603,7 @@ While these all affect autovacuum, some of the most important ones are:
 + [Autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
 + [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
-#### Table\-Level Parameters<a name="w3ab1c36c39c15c21c10"></a>
+#### Table\-Level Parameters<a name="w3ab1c34c39c15c21c10"></a>
 
 Autovacuum related [storage parameters](https://www.postgresql.org/docs/current/static/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) can be set at a table level, which can be better than altering the behavior of the entire database\. For large tables, you might need to set aggressive settings and you might not want to make autovacuum behave that way for all tables\.
 
@@ -938,3 +953,41 @@ If you want to enable `orafce` on a different database in the same instance, use
    ```
 **Note**  
 If you want to see the list of owners for the oracle schema, use the `\dn` psql command\.
+
+## Accessing External Data with the postgres\_fdw Extension<a name="postgresql-commondbatasks-fdw"></a>
+
+You can access data in a table on a remote database server with the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension\. If you set up a remote connection from your PostgreSQL DB instance, access is also available to your Read Replica\. 
+
+**To use postgres\_fdw to access a remote database server**
+
+1. Install the postgres\_fdw extension\.
+
+   ```
+   CREATE EXTENSION postgres_fdw;
+   ```
+
+1. Create a foreign data server using CREATE SERVER\.
+
+   ```
+   CREATE SERVER foreign_server
+   FOREIGN DATA WRAPPER postgres_fdw
+   OPTIONS (host 'xxx.xx.xxx.xx', port '5432', dbname 'foreign_db');
+   ```
+
+1. Create a user mapping to identify the role to be used on the remote server\.
+
+   ```
+   CREATE USER MAPPING FOR local_user
+   SERVER foreign_server
+   OPTIONS (user 'foreign_user', password 'password');
+   ```
+
+1. Create a table that maps to the table on the remote server\.
+
+   ```
+   CREATE FOREIGN TABLE foreign_table (
+           id integer NOT NULL,
+           data text)
+   SERVER foreign_server
+   OPTIONS (schema_name 'some_schema', table_name 'some_table');
+   ```

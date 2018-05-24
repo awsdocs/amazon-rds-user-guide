@@ -20,7 +20,7 @@ For information on managing access to tagged resources with IAM policies, see [A
 
 ## Overview of Amazon RDS Resource Tags<a name="Overview.Tagging"></a>
 
-An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of “project” and a tag value of “Salix,” indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as environment=test or environment =production\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
+An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of “project” and a tag value of “Salix,” indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as environment=test or environment=production\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
 
 Use tags to organize your AWS bill to reflect your own cost structure\. To do this, sign up to get your AWS account bill with tag key values included\. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values\. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Cost Allocation and Tagging](http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in *About AWS Billing and Cost Management*\.
 
@@ -64,9 +64,7 @@ The process to tag an Amazon RDS resource is similar for all resources\. The fol
 **Note**  
 To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
 
-1. Select the DB instance that you want to tag\. 
-
-1. Choose **Instance actions**, then choose **See details**\. 
+1. Click on the name of the DB instance that you want to tag to show its details\. 
 
 1. In the details section, scroll down to the **Tags** section\. 
 
@@ -89,16 +87,14 @@ To filter the list of DB instances in the **Instances** pane, type a text string
 **Note**  
 To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
 
-1. Select the DB instance that you want to tag\. 
-
-1. Choose **Instance actions**, then choose **See details**\. 
+1. Click on the name of the DB instance to show its details\. 
 
 1. In the details section, scroll down to the **Tags** section\. 
 
 1. Choose the tag you want to delete\.  
 ![\[Tags section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging6.png)
 
-1. Choose **Remove**, and then choose **Remove** in the **Remove tags** window\. 
+1. Choose **Delete**, and then choose **Delete** in the **Delete tags** window\. 
 
 ## CLI<a name="USER_Tagging.CLI"></a>
 

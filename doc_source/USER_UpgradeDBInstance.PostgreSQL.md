@@ -144,7 +144,7 @@ If your PostgreSQL DB instance is using read replication, you must upgrade all o
 ## CLI<a name="USER_UpgradeDBInstance.PostgreSQL.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 + `--engine-version` – the version number of the database engine to upgrade to\. 
 + `--allow-major-version-upgrade` – to to upgrade major version\. 
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
@@ -172,7 +172,7 @@ For Windows:
 ## API<a name="USER_UpgradeDBInstance.PostgreSQL.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-+ `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
++ `DBInstanceIdentifier` – the name of the DB instance, for example *mydbinstance*\. 
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 

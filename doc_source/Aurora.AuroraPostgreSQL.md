@@ -17,6 +17,7 @@ The following table shows the regions where Aurora PostgreSQL is currently avail
 | Asia Pacific \(Mumbai\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-south\-1](https://console.aws.amazon.com/rds/home?region=ap-south-1) | 
 | Asia Pacific \(Singapore\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-1](https://console.aws.amazon.com/rds/home?region=ap-southeast-1) | 
 | Asia Pacific \(Sydney\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-southeast\-2](https://console.aws.amazon.com/rds/home?region=ap-southeast-2) | 
+| Asia Pacific \(Seoul\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-2](https://console.aws.amazon.com/rds/home?region=ap-northeast-2) | 
 | Asia Pacific \(Tokyo\) | [https://console\.aws\.amazon\.com/rds/home?region=ap\-northeast\-1](https://console.aws.amazon.com/rds/home?region=ap-northeast-1) | 
 | Canada \(Central\) | [https://console\.aws\.amazon\.com/rds/home?region=ca\-central\-1](https://console.aws.amazon.com/rds/home?region=ca-central-1) | 
 | EU \(Frankfurt\) | [https://console\.aws\.amazon\.com/rds/home?region=eu\-central\-1](https://console.aws.amazon.com/rds/home?region=eu-central-1) | 

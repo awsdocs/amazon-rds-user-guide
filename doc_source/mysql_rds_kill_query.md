@@ -11,7 +11,7 @@ CALL mysql.rds_kill_query(queryID);
 ## Parameters<a name="mysql_rds_kill_query-parameters"></a>
 
  *queryID*   
-The identity of the query that will be terminated\.
+The identity of the query to be terminated\.
 
 ## Usage Notes<a name="mysql_rds_kill_query-usage-notes"></a>
 

@@ -63,7 +63,7 @@ If your source database engine is MariaDB, Microsoft SQL Server, MySQL, Oracle, 
 
 ## Copying a DB Cluster Snapshot<a name="USER_CopyDBSnapshot.CopyDBClusterSnapshot"></a>
 
-If your source database engine is Aurora, then your snapshot is a DB cluster snapshot\. For instructions on how to copy a db cluster snapshot, see [Copying a DB Cluster Snapshot](USER_CopyDBClusterSnapshot.CrossRegion.md)\. 
+If your source database engine is Aurora, then your snapshot is a DB cluster snapshot\. For instructions on how to copy a DB cluster snapshot, see [Copying a DB Cluster Snapshot](USER_CopyDBClusterSnapshot.CrossRegion.md)\. 
 
 ## Related Topics<a name="USER_CopySnapshot.Related"></a>
 + [Creating a DB Snapshot](USER_CreateSnapshot.md)

@@ -106,8 +106,6 @@ The `AWS/RDS` namespace includes the following metrics\.
 | CPUUtilization |  The percentage of CPU utilization\. Units: Percent  | 
 | CPUCreditUsage |  \[T2 instances\] The number of CPU credits spent by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100% utilization for one minute or an equivalent combination of vCPUs, utilization, and time \(for example, one vCPU running at 50% utilization for two minutes or two vCPUs running at 25% utilization for two minutes\)\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\. Units: Credits \(vCPU\-minutes\)  | 
 | CPUCreditBalance |  \[T2 instances\] The number of earned CPU credits that an instance has accrued since it was launched or started\. For T2 Standard, the `CPUCreditBalance` also includes the number of launch credits that have been accrued\. Credits are accrued in the credit balance after they are earned, and removed from the credit balance when they are spent\. The credit balance has a maximum limit, determined by the instance size\. Once the limit is reached, any new credits that are earned are discarded\. For T2 Standard, launch credits do not count towards the limit\. The credits in the `CPUCreditBalance` are available for the instance to spend to burst beyond its baseline CPU utilization\. When an instance is running, credits in the `CPUCreditBalance` do not expire\. When the instance stops, the `CPUCreditBalance` does not persist, and all accrued credits are lost\. CPU credit metrics are available at a five\-minute frequency only\. Units: Credits \(vCPU\-minutes\)  | 
-| CPUSurplusCreditBalance  |  \[T2 Unlimited instances\] The number of surplus credits that have been spent by a T2 Unlimited instance when its `CPUCreditBalance` is zero\. The `CPUSurplusCreditBalance` is paid down by earned CPU credits\. If the number of surplus credits exceeds the maximum number of credits the instance can earn in a 24\-hour period, the spent surplus credits above the maximum incur an additional charge\. Units: Credits \(vCPU\-minutes\)   | 
-| CPUSurplusCreditsCharged |  \[T2 Unlimited instances\] The number of spent surplus credits that are not paid down by earned CPU credits, and thus incur an additional charge\. Spent surplus credits are charged when any of the following occurs:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Monitoring.html) Units: Credits \(vCPU\-minutes\)   | 
 | DatabaseConnections |  The number of database connections in use\. Units: Count  | 
 | DiskQueueDepth |  The number of outstanding IOs \(read/write requests\) waiting to access the disk\. Units: Count  | 
 | FreeableMemory |  The amount of available random access memory\. Units: Bytes  | 
@@ -116,7 +114,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | NetworkReceiveThroughput |  The incoming \(Receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
 | NetworkTransmitThroughput |  The outgoing \(Transmit\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
 | OldestReplicationSlotLag |  The lagging size of the replica lagging the most in terms of WAL data received\. Applies to PostgreSQL\. Units: Megabytes  | 
-| ReadIOPS |  The average number of disk read I/O operations per second during the polling period\. Units: Count/Second  | 
+| ReadIOPS |  The average number of disk read I/O operations per second\. Units: Count/Second  | 
 | ReadLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | ReadThroughput |  The average number of bytes read from disk per second\. Units: Bytes/Second  | 
 | ReplicaLag |  The amount of time a Read Replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, and PostgreSQL Read Replicas\. Units: Seconds  | 
@@ -124,7 +122,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | SwapUsage |  The amount of swap space used on the DB instance\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
 | TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/second  | 
-| WriteIOPS |  The average number of write disk I/O operations per second\. Units: Count/Second  | 
+| WriteIOPS |  The average number of disk write I/O operations per second\. Units: Count/Second  | 
 | WriteLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | WriteThroughput |  The average number of bytes written to disk per second\. Units: Bytes/Second  | 
 
@@ -183,7 +181,7 @@ You must have a Service Linked Role before you enable log data publishing\. For 
 For specific requirements for these engines, see the following:
 + [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 + [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
-+ [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
 
 ### Configuring CloudWatch Log Integration<a name="integrating_cloudwatchlogs.configure"></a>
 
@@ -218,7 +216,7 @@ This section provides details on how you can view metrics for your DB instance u
 You can select the time range of the metrics represented by the graphs with the time range drop\-down list\.  
 You can choose any graph to bring up a more detailed view\. You can also apply metric\-specific filters to the data\. 
 
-#### DB Instance Metrics<a name="USER_Monitoring.DB"></a>
+#### Viewing DB Instance Metrics with the CLI or API<a name="USER_Monitoring.DB"></a>
 
 Amazon RDS integrates with CloudWatch metrics to provide a variety of DB instance metrics\. You can view CloudWatch metrics using the RDS console, AWS CLI, or API\.
 
@@ -248,29 +246,4 @@ The `StartTime` and `EndTime` values supplied in this example are for illustrati
   + `StartTime` = `2009-10-16T00:00:00`
   + `EndTime` = `2009-10-16T00:02:00`
   + `Period` = `60`
-  + `MeasureName` = `FreeStorageSpace`  
-**Example**  
-
-  ```
-   1. http://monitoring.amazonaws.com/
-   2. 	?SignatureVersion=2
-   3. 	&Action=GetMetricStatistics
-   4. 	&Version=2009-05-15
-   5. 	&StartTime=2009-10-16T00:00:00
-   6. 	&EndTime=2009-10-16T00:02:00
-   7. 	&Period=60
-   8. 	&Statistics.member.1=Average
-   9. 	&Dimensions.member.1="DBInstanceIdentifier=mydbinstance"
-  10. 	&Namespace=AWS/RDS
-  11. 	&MeasureName=FreeStorageSpace						
-  12. 	&Timestamp=2009-10-15T17%3A48%3A21.746Z
-  13. 	&AWSAccessKeyId=<AWS Access Key ID>
-  14. 	&Signature=<Signature>
-  ```
-
-### Related Topics<a name="CHAP_Monitoring.related"></a>
-+ [Using Amazon RDS Event Notification](USER_Events.md)
-+ [Viewing Amazon RDS Events](USER_ListEvents.md)
-+ [Amazon RDS Database Log Files](USER_LogAccess.md)
-+ [Logging Amazon RDS API Calls Using AWS CloudTrail](USER_Auditing.md)
-+ [What Is Amazon Relational Database Service \(Amazon RDS\)?](Welcome.md)
+  + `MeasureName` = `FreeStorageSpace`

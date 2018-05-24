@@ -182,12 +182,12 @@ The permissions required to start replication on an Amazon Aurora MySQL DB clust
        --single-transaction \
        --compress \
        --order-by-primary \
-       –u <local_user> \
+       -u <local_user> \
        -p <local_password> | mysql \
            --host aurora_cluster_endpoint_address \
-           –-port 3306 \
-           –u <RDS_user_name> \
-           –p <RDS_password>
+           --port 3306 \
+           -u <RDS_user_name> \
+           -p <RDS_password>
    ```
 
    For Windows:
@@ -198,17 +198,17 @@ The permissions required to start replication on an Amazon Aurora MySQL DB clust
        --single-transaction ^
        --compress ^
        --order-by-primary ^
-       –u <local_user> ^
+       -u <local_user> ^
        -p <local_password> | mysql ^
            --host aurora_cluster_endpoint_address ^
-           –-port 3306 ^
-           –u <RDS_user_name> ^
-           –p <RDS_password>
+           --port 3306 ^
+           -u <RDS_user_name> ^
+           -p <RDS_password>
    ```
 **Note**  
 Make sure that there is not a space between the `-p` option and the entered password\. 
 
-   Use the `‐‐host`, `‐‐user (-u)`, `‐‐port` and `–p` options in the `mysql` command to specify the hostname, user name, port, and password to connect to your Aurora DB cluster\. The host name is the DNS name from the Amazon Aurora DB cluster endpoint, for example, `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the cluster details in the Amazon RDS Management Console\.
+   Use the `‐‐host`, `‐‐user (-u)`, `‐‐port` and `-p` options in the `mysql` command to specify the hostname, user name, port, and password to connect to your Aurora DB cluster\. The host name is the DNS name from the Amazon Aurora DB cluster endpoint, for example, `mydbcluster.cluster-123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the cluster details in the Amazon RDS Management Console\.
 
 1. Make the source MySQL DB instance writeable again:
 

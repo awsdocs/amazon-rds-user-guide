@@ -22,6 +22,7 @@ Amazon RDS creates a master user account for your DB instance as part of the cre
 **Topics**
 + [DB Instance Class](Concepts.DBInstanceClass.md)
 + [DB Instance Status](Overview.DBInstance.Status.md)
++ [DB instance storage](CHAP_Storage.md)
 + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
 + [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)
 + [Amazon RDS DB Instance Lifecycle](CHAP_CommonTasks.md)
@@ -31,3 +32,4 @@ Amazon RDS creates a master user account for your DB instance as part of the cre
 + [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)
 + [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)
 + [Working with Reserved DB Instances](USER_WorkingWithReservedDBInstances.md)
++ [Working with Storage](USER_PIOPS.StorageTypes.md)

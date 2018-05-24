@@ -14,7 +14,7 @@ You can use the following options to manage performance and scaling for Aurora D
 
 Aurora storage automatically scales with the data in your cluster volume\. As your data grows, your cluster volume storage grows in 10 gibibyte \(GiB\) increments up to 64 TiB\.
 
-The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\.
+The size of your cluster volume is checked on an hourly basis to determine your storage costs\. For pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 
 ### Instance Scaling<a name="Aurora.Managing.Performance.InstanceScaling"></a>
 
@@ -23,7 +23,7 @@ You can scale your Aurora DB cluster as needed by modifying the DB instance clas
 
 | Database Engine | Instance Scaling | 
 | --- | --- | 
-|  Amazon Aurora MySQL  |  See [Scaling Aurora MySQL DB Instances](AuroraMySQL.Managing.md#AuroraMySQL.Managing.Performance.InstanceScaling)  | 
+|  Amazon Aurora MySQL  |  See [Scaling Aurora MySQL DB Instances](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.Performance.InstanceScaling)  | 
 |  Amazon Aurora PostgreSQL  |  See [Scaling Aurora PostgreSQL DB Instances](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.Performance.InstanceScaling)  | 
 
 ### Read Scaling<a name="Aurora.Managing.Performance.ReadScaling"></a>
@@ -37,7 +37,7 @@ The maximum number of connections allowed to an Aurora DB instance is determined
 
 | Database engine | max\_connections default value | 
 | --- | --- | 
-|  Amazon Aurora MySQL  |  See [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.md#AuroraMySQL.Managing.MaxConnections)  | 
+|  Amazon Aurora MySQL  |  See [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)  | 
 |  Amazon Aurora PostgreSQL  |  See [Maximum Connections to an Aurora PostgreSQL DB Instance](AuroraPostgreSQL.Managing.md#AuroraPostgreSQL.Managing.MaxConnections)  | 
 
 ## Fault Tolerance for an Aurora DB Cluster<a name="Aurora.Managing.FaultTolerance"></a>
@@ -96,6 +96,10 @@ You can determine when the restore of a DB cluster is complete by checking the `
 1. Choose **Launch DB Instance** to launch the restored DB instance\.
 
    A new DB instance is created with the name you specified, and a new DB cluster is created\. The DB cluster name is the new DB instance name followed by `–cluster`\. For example, if the new DB instance name is `myrestoreddb`, the new DB cluster name is `myrestoreddb-cluster`\.
+
+#### Backtracking a DB Cluster<a name="Aurora.Managing.Backups.Restore.Backtracking"></a>
+
+You can also backtrack a DB server to "rewind" the DB cluster to a previous point in time, after configuring the DB cluster for backtracking\. Unlike restoring a DB server, backtracking a DB server doesn't require creating a new Aurora DB cluster, which makes backtracking much faster\. However, you must configure backtracking before you can use it, and it has a few other limitations\. For more information, see [Backtracking an Aurora DB Cluster](AuroraMySQL.Managing.Backtrack.md)\.
 
 #### Database Cloning for Aurora<a name="Aurora.Managing.Backups.Restore.Cloning"></a>
 

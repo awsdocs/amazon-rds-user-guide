@@ -20,7 +20,7 @@ You can set up replication between any of the following options:
 + Two Aurora MySQL DB clusters in different AWS regions, by creating an Aurora Read Replica of an Aurora MySQL DB cluster in a different AWS Region\.
 
   For more information, see [Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions](AuroraMySQL.Replication.CrossRegion.md)\.
-+ Two Aurora MySQL DB clusters in the same region, by using MySQL binary log \(binlog\) replication\.
++ Two Aurora MySQL DB clusters in the same AWS Region, by using MySQL binary log \(binlog\) replication\.
 
   For more information, see [Replication Between Aurora and MySQL or Between Aurora and Another Aurora DB Cluster](AuroraMySQL.Replication.MySQL.md)\.
 + An Amazon RDS MySQL DB instance as the master and an Aurora MySQL DB cluster, by creating an Aurora Read Replica of an Amazon RDS MySQL DB instance\.

@@ -251,7 +251,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `xmlbinary` | Yes | 
 | `xmloption` | Yes | 
 
-## Amazon RDS PostgreSQL Events<a name="AuroraPostgreSQL.Reference.Waitevents"></a>
+## Amazon Aurora PostgreSQL Events<a name="AuroraPostgreSQL.Reference.Waitevents"></a>
 
 The following are some common wait events for Aurora PostgreSQL\.
 

@@ -17,7 +17,7 @@ When you start a DB instance that you previously stopped, the DB instance retain
 ## CLI<a name="USER_StartInstance.CLI"></a>
 
 To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 
 **Example**  
 
@@ -28,7 +28,7 @@ To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http
 ## API<a name="USER_StartInstance.API"></a>
 
 To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) action with the following parameters: 
-+ `DBInstanceIdentifier` – the name of the db instance\. 
++ `DBInstanceIdentifier` – the name of the DB instance\. 
 
 **Example**  
 

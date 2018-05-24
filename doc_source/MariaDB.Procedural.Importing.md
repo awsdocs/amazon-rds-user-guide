@@ -2,7 +2,7 @@
 
 Following, you can find information about  methods to import your MariaDB data to an Amazon RDS DB instance running MariaDB\. 
 
-To do an initial data import into a MariaDB DB instance, you can use the procedures documented in [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md), as follows: 
+To do an initial data import into a MariaDB DB instance, you can use the procedures documented in [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md), as follows: 
 + To move data from an Amazon RDS MySQL DB instance, a MariaDB or MySQL instance in Amazon Elastic Compute Cloud \(Amazon EC2\) in the same VPC as your Amazon RDS MariaDB DB instance, or a small on\-premises instance of MariaDB or MySQL, you can use the procedure documented in [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md)\.
 + To move data from a large or production on\-premises instance of MariaDB or MySQL, you can use the procedure documented in [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\.
 + To move data from an instance of MariaDB or MySQL that is in EC2 in a different VPC than your Amazon RDS MariaDB DB instance, or to move data from any data source that can output delimited text files, you can use the procedure documented in [Importing Data From Any Source to a MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.AnySource.md)\.
@@ -115,10 +115,10 @@ Make sure there is not a space between the `-p` option and the entered password\
 1. Make the Amazon RDS MariaDB DB instance the replica\. Connect to the Amazon RDS MariaDB DB instance as the master user and identify the external MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in Step 2\. The following is an example: 
 
    ```
-   CALL mysql.rds_set_external_master_gtid ('master_server_ip_address', 3306,
-       'repl_user', '<password>', '<GTID>', 0);
+   CALL mysql.rds_set_external_master_gtid ('<master_server_ip_address>', 3306, 'repl_user', '<password>', '<GTID>', 0);
    ```
-   The `master_server_ip_address` is the IP address of master MariaDB instance\. Note that EC2 Private DNS address is currently not supported\.
+
+   The `master_server_ip_address` is the IP address of master MariaDB instance\. An EC2 private DNS address is currently not supported\.
 
 1. On the Amazon RDS MariaDB DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication: 
 

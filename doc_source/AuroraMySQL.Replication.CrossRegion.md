@@ -1,24 +1,24 @@
 # Replicating Amazon Aurora MySQL DB Clusters Across AWS Regions<a name="AuroraMySQL.Replication.CrossRegion"></a>
 
-You can create an Amazon Aurora MySQL DB cluster as a Read Replica in a different AWS Region than the source DB cluster\. Taking this approach can improve your disaster recovery capabilities, let you scale read operations into a region that is closer to your users, and make it easier to migrate from one region to another\.
+You can create an Amazon Aurora MySQL DB cluster as a Read Replica in a different AWS Region than the source DB cluster\. Taking this approach can improve your disaster recovery capabilities, let you scale read operations into an AWS Region that is closer to your users, and make it easier to migrate from one AWS Region to another\.
 
 You can create Read Replicas of both encrypted and unencrypted DB clusters\. The Read Replica must be encrypted if the source DB cluster is encrypted\.
 
-When you create an Aurora MySQL DB cluster Read Replica in another region, you should be aware of the following:
+When you create an Aurora MySQL DB cluster Read Replica in another AWS Region, you should be aware of the following:
 + In a cross\-region scenario, there is more lag time between the source DB cluster and the Read Replica due to the longer network channels between regions\.
-+ Data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. The following cross\-region replication actions generate charges for the data transferred out of the source region:
++ Data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. The following cross\-region replication actions generate charges for the data transferred out of the source AWS Region:
   + When you create the Read Replica, Amazon RDS takes a snapshot of the source cluster and transfers the snapshot to the Read Replica region\.
   + For each data modification made in the source databases, Amazon RDS transfers data from the source region to the Read Replica region\.
 
   For more information about Amazon RDS data transfer pricing, see [Amazon Aurora Pricing](http://aws.amazon.com/rds/aurora/pricing/)\.
 
-For each source DB cluster, you can only have one cross\-region Read Replica DB cluster\. Both your source DB cluster and your cross\-region Read Replica DB cluster can have up to 15 Aurora Replicas along with the primary instance for the DB cluster\. This functionality lets you scale read operations for both your source region and your replication target region\.
+For each source DB cluster, you can only have one cross\-region Read Replica DB cluster\. Both your source DB cluster and your cross\-region Read Replica DB cluster can have up to 15 Aurora Replicas along with the primary instance for the DB cluster\. This functionality lets you scale read operations for both your source AWS Region and your replication target AWS Region\.
 
 ## Before You Begin<a name="AuroraMySQL.Replication.CrossRegion.Prerequisites"></a>
 
 Before you can create an Aurora MySQL DB cluster that is a cross\-region Read Replica, you must enable binary logging on your source Aurora MySQL DB cluster\. Cross\-region replication for Aurora MySQL uses MySQL binary replication to replay changes on the cross\-region Read Replica DB cluster\.
 
-To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, you will need to create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\.
+To enable binary logging on an Aurora MySQL DB cluster, update the `binlog_format` parameter for your source DB cluster\. The `binlog_format` parameter is a cluster\-level parameter that is in the default cluster parameter group\. If your DB cluster uses the default DB cluster parameter group, create a new DB cluster parameter group to modify `binlog_format` settings\. We recommend that you set the `binlog_format` to `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your Aurora DB cluster for the change to take effect\.
 
 For more information, see [Amazon Aurora DB Cluster and DB Instance Parameters](Aurora.Managing.md#Aurora.Managing.ParameterGroups) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
@@ -51,9 +51,9 @@ Use the following procedures to create a cross\-region Read Replica from an Auro
 
 **CLI**
 
-1. Call the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command in the region where you want to create the Read Replica DB cluster\. Include the `--replication-source-identifier` option and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
+1. Call the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command in the AWS Region where you want to create the Read Replica DB cluster\. Include the `--replication-source-identifier` option and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
 
-   For cross\-region replication where the DB cluster identified by `--replication-source-identifier` is encrypted, you must also specify either the `--source-region` or `--pre-signed-url` option, and the `--kms-key-id` option\. Using `--source-region` autogenerates a pre\-signed URL that is a valid request for the `CreateDBCluster` API action that can be executed in the source region that contains the encrypted DB cluster to be replicated\. Using `--pre-signed-url` requires you to construct a pre\-signed URL manually instead\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination region\. To learn more about these options, see `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)`\. 
+   For cross\-region replication where the DB cluster identified by `--replication-source-identifier` is encrypted, you must also specify either the `--source-region` or `--pre-signed-url` option, and the `--kms-key-id` option\. Using `--source-region` autogenerates a pre\-signed URL that is a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. Using `--pre-signed-url` requires you to construct a pre\-signed URL manually instead\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To learn more about these options, see `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)`\. 
 **Note**  
 You can set up cross\-region replication from an unencrypted DB cluster to an encrypted Read Replica by specifying `--storage-encrypted` and providing a value for `--kms-key-id`\. In this case, you don't need to specify `--source-region` or `--pre-signed-url`\.
 
@@ -135,9 +135,9 @@ You can set up cross\-region replication from an unencrypted DB cluster to an en
 
 **API**
 
-1. Call the RDS API `[CreateDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)` action in the region where you want to create the Read Replica DB cluster\. Include the `ReplicationSourceIdentifier` parameter and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
+1. Call the RDS API `[CreateDBCluster](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)` action in the AWS Region where you want to create the Read Replica DB cluster\. Include the `ReplicationSourceIdentifier` parameter and specify the Amazon Resource Name \(ARN\) of the source DB cluster to create a Read Replica for\. 
 
-   For cross\-region replication where the DB cluster identified by `ReplicationSourceIdentifier` is encrypted, you must also specify the `PreSignedUrl` and `KmsKeyId` parameters\. The pre\-signed URL must be a valid request for the `CreateDBCluster` API action that can be executed in the source region that contains the encrypted DB cluster to be replicated\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination region\. To automatically rather than manually generate a presigned URL, use the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command with the `--source-region` option instead\.
+   For cross\-region replication where the DB cluster identified by `ReplicationSourceIdentifier` is encrypted, you must also specify the `PreSignedUrl` and `KmsKeyId` parameters\. The pre\-signed URL must be a valid request for the `CreateDBCluster` API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be replicated\. The KMS key ID is used to encrypt the Read Replica, and must be a KMS encryption key valid for the destination AWS Region\. To automatically rather than manually generate a presigned URL, use the AWS CLI `[create\-db\-cluster](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html)` command with the `--source-region` option instead\.
 **Note**  
 You can set up cross\-region replication from an unencrypted DB cluster to an encrypted Read Replica by specifying `StorageEncrypted` as **true** and providing a value for `KmsKeyId`\. In this case, you don't need to specify `PreSignedUrl`\.
 

@@ -4,7 +4,7 @@ How you import data into an Amazon RDS DB instance depends on the amount of data
 
 You can also use AWS Database Migration Service \(AWS DMS\) to import data into an Amazon RDS DB instance\. AWS DMS can migrate databases without downtime and, for many database engines, continue ongoing replication until you are ready to switch over to the target database\. You can migrate to Oracle from either the same database engine or a different database engine using AWS DMS\. If you are migrating from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [ What is AWS Database Migration Service](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. 
 
-Before you use any of these migration techniques, we recommend the best practice of taking a backup of your database\. You can back up your Amazon RDS instances by creating snapshots\. Later, you can restore the database from the snapshots\. For more information, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\. 
+Before you use any of these migration techniques, we recommend the best practice of taking a backup of your database\. After you import the data, you can back up your Amazon RDS DB instances by creating snapshots\. Later, you can restore the database from the snapshots\. For more information, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\. 
 
 ## Oracle SQL Developer<a name="Oracle.Procedural.Importing.SQLDeveloper"></a>
 
