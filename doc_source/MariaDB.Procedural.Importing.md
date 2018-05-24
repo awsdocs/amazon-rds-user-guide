@@ -115,9 +115,10 @@ Make sure there is not a space between the `-p` option and the entered password\
 1. Make the Amazon RDS MariaDB DB instance the replica\. Connect to the Amazon RDS MariaDB DB instance as the master user and identify the external MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in Step 2\. The following is an example: 
 
    ```
-   CALL mysql.rds_set_external_master_gtid ('mymasterserver.mydomain.com', 3306,
+   CALL mysql.rds_set_external_master_gtid ('master_server_ip_address', 3306,
        'repl_user', '<password>', '<GTID>', 0);
    ```
+   The `master_server_ip_address` is the IP address of master MariaDB instance\. Note that EC2 Private DNS address is currently not supported\.
 
 1. On the Amazon RDS MariaDB DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication: 
 
