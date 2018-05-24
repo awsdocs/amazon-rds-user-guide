@@ -240,7 +240,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
   ```
   1. PROMPT> mysqldump \
-  2.     –h <endpoint> \
+  2.     -h <endpoint> \
   3.     --port=<port> \
   4.     -u=<username> \
   5.     -p <password> \
@@ -251,7 +251,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
   ```
   1. PROMPT> mysqldump ^
-  2.     –h <endpoint> ^
+  2.     -h <endpoint> ^
   3.     --port=<port> ^
   4.     -u=<username> ^
   5.     -p <password> ^

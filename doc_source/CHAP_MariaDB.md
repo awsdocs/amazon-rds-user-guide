@@ -37,8 +37,8 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Log Files** You can access the log files for your SQL Server DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md) [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
 There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
-+ [Appendix: Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
-+ [Appendix: MariaDB on Amazon RDS SQL Reference](Appendix.MariaDB.SQLRef.md)
++ [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
++ [MariaDB on Amazon RDS SQL Reference](Appendix.MariaDB.SQLRef.md)
 
 ## MariaDB on Amazon RDS Versions<a name="MariaDB.Concepts.VersionMgmt"></a>
 
@@ -257,7 +257,7 @@ You can save and load the cache on demand using the following stored procedures:
 
 ## Database Parameters for MariaDB<a name="MariaDB.Concepts.Parameters"></a>
 
-By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For more information on the parameters available for the Amazon RDS MariaDB DB engine, see [Appendix: Parameters for MariaDB](Appendix.MariaDB.Parameters.md)\.
+By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For more information on the parameters available for the Amazon RDS MariaDB DB engine, see [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)\.
 
 ## Common DBA Tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 

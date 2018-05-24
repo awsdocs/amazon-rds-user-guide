@@ -50,7 +50,7 @@ The authentication token consists of several hundred characters\. It can be unwi
 
 ```
 RDSHOST="rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com"
-TOKEN="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 3306 --username jane_doe )"
+TOKEN="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 3306 --region us-west-2 --username jane_doe )"
 
 mysql --host=$RDSHOST --port=3306 --ssl-ca=/sample_dir/rds-combined-ca-bundle.pem --enable-cleartext-plugin --user=jane_doe --password=$TOKEN
 ```

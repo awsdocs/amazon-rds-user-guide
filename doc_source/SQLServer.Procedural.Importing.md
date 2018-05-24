@@ -48,7 +48,9 @@ To enable native backup and restore on your DB instance, you add the `SQLSERVER_
 
 If you want to manually create a new IAM role to use with native backup and restore, you create a role to delegate permissions from the Amazon RDS service to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. For the native backup and restore feature, use trust and permissions policies similar to the examples following\. For more information about creating the role, see [ Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
-The trust and permissions policies require that you provide an Amazon Resource Name \(ARN\)\. For more information about ARN formatting, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
+To use the trust and permissions policies, you provide an Amazon Resource Name \(ARN\)\. For more information about ARN formatting, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
+
+In the first example following, we use the service principle name `rds.amazon.aws.com` as an alias for all service accounts\. In the other examples, we specify an ARN to identify another account, user, or role that we're granting access to in the trust policy\. 
 
 **Example Trust Policy for Native Backup and Restore**  
 

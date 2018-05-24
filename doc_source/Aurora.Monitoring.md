@@ -1,6 +1,6 @@
 # Monitoring an Amazon Aurora DB Cluster<a name="Aurora.Monitoring"></a>
 
-Amazon Aurora provides a variety of Amazon CloudWatch metrics that you can monitor to determine the health and performance of your Aurora DB cluster\. You can use various tools, such as the Amazon RDS Management Console, AWS CLI, and CloudWatch API, to view Aurora metrics\. If your Aurora DB cluster is running a PostgreSQL instance you can use Amazon Performance Insights to get a complete view of your cluster's performance\. For more information about Performance Insights, see [Preview: Using Amazon Performance Insights](USER_PerfInsights.md)\. For more general information about monitoring, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
+Amazon Aurora provides a variety of Amazon CloudWatch metrics that you can monitor to determine the health and performance of your Aurora DB cluster\. You can use various tools, such as the Amazon RDS Management Console, AWS CLI, and CloudWatch API, to view Aurora metrics\. If your Aurora DB cluster is running a PostgreSQL instance you can use Amazon Performance Insights to get a complete view of your cluster's performance\. For more information about Performance Insights, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\. For more general information about monitoring, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
 
 ## Amazon Aurora Metrics<a name="Aurora.AuroraMySQL.Monitoring.Metrics"></a>
 
@@ -18,7 +18,11 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 |  `AuroraReplicaLag`  |  For an Aurora Replica, the amount of lag when replicating updates from the primary instance, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `AuroraReplicaLagMaximum`  |  The maximum amount of lag between the primary instance and each Aurora DB instance in the DB cluster, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `AuroraReplicaLagMinimum`  |  The minimum amount of lag between the primary instance and each Aurora DB instance in the DB cluster, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
-|  `BinLogDiskUsage`  | The amount of disk space occupied by binary logs on the master, in bytes\.  | Aurora MySQL | 
+|  `BinLogDiskUsage`  |  The amount of disk space occupied by binary logs on the master, in bytes\.  |  Aurora MySQL  | 
+|  `BacktrackChangeRecordsCreationRate`  |  The number of backtrack change records created over five minutes for your DB cluster\.  |  Aurora MySQL  | 
+|  `BacktrackChangeRecordsStored`  |  The actual number of backtrack change records used by your DB cluster\.  |  Aurora MySQL  | 
+|  `BacktrackWindowActual`  |  The difference between the target backtrack window and the actual backtrack window\.  |  Aurora MySQL  | 
+|  `BacktrackWindowAlert`  |  The number of times that the actual backtrack window is smaller than the target backtrack window for a given period of time\.  |  Aurora MySQL  | 
 |  `BlockedTransactions`  | The average number of transactions in the database that are blocked per second\.  | Aurora MySQL | 
 |  `BufferCacheHitRatio`  |  The percentage of requests that are served by the buffer cache\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `CommitLatency`  | The amount of latency for commit operations, in milliseconds\.  | Aurora MySQL and Aurora PostgreSQL | 
@@ -59,7 +63,7 @@ The `AWS/RDS` namespace includes the following metrics that apply to database en
 |  `UpdateThroughput`  |  The average number of update queries per second\.  | Aurora MySQL | 
 | `VolumeBytesUsed` |  The amount of storage used by your Aurora DB instance, in bytes\. This value affects the cost of the Aurora DB cluster \(for pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\)\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `VolumeReadIOPs`  |  The average number of billed read I/O operations from a cluster volume, reported at 5\-minute intervals\. Billed read operations are calculated at the cluster volume level, aggregated from all instances in the Aurora DB cluster, and then reported at 5\-minute intervals\. The value is calculated by taking the value of the **Read operations** metric over a 5\-minute period\. You can determine the amount of billed read operations per second by taking the value of the **Billed read operations** metric and dividing by 300 seconds\. For example, if the **Billed read operations** returns 13,686, then the billed read operations per second is 45 \(13,686 / 300 = 45\.62\)\.  You accrue billed read operations for queries that request database pages that aren't in the buffer cache and therefore must be loaded from storage\. You might see spikes in billed read operations as query results are read from storage and then loaded into the buffer cache\.   | Aurora MySQL and Aurora PostgreSQL | 
-|  `VolumeWriteIOPs`  |  The average number of write disk I/O operations to the cluster volume, reported at 5\-minute intervals\.  | Aurora MySQL and Aurora PostgreSQL | 
+|  `VolumeWriteIOPs`  |  The average number of write disk I/O operations to the cluster volume, reported at 5\-minute intervals\. See the description of VolumeReadIOPS above for a detailed description of how billed write operations are calculated\.  | Aurora MySQL and Aurora PostgreSQL | 
 |  `WriteIOPS`  |  The average number of disk I/O operations per second\.  Aurora PostgreSQL reports read and write IOPS separately, on 1\-minute intervals\.  | Aurora PostgreSQL | 
 |  `WriteLatency`  |  The average amount of time taken per disk I/O operation\.  | Aurora PostgreSQL | 
 |  `WriteThroughput`  |  The average number of bytes written to disk per second\.  | Aurora PostgreSQL | 

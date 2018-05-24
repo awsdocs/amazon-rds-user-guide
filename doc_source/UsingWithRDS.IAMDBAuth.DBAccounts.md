@@ -8,7 +8,7 @@ To create a database account for MySQL, connect to the DB instance or DB cluster
 CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS'; 
 ```
 
-The `IDENTIFIED WITH` clause allows MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause maps the `jane_doe` database account to the corresponding IAM user or role\.
+The `IDENTIFIED WITH` clause allows MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause refers to the authentication method, and the specified database account must have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role must be named `jane_doe`\.
 
 **Note**  
 If you see the following message, it means that the AWS\-provided plugin is not available for the current DB instance or DB cluster\.  

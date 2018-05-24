@@ -140,7 +140,7 @@ The following table contains details about settings that you choose when you cre
 
 | Setting | Setting Description | 
 | --- | --- | 
-|  Allocated Storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
+|  Allocated Storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [DB instance storage](CHAP_Storage.md)\.   | 
 |  Auto Minor Version Upgrade  |  **Yes** to enable your DB instance to receive minor DB engine version upgrades automatically when they become available\.   | 
 |  Availability Zone  |  The availability zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Backup Retention Period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial DB instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 

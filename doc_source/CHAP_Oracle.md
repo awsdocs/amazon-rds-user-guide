@@ -83,12 +83,26 @@ The following are the DB instance classes supported for Oracle\.
 
 | Oracle Edition | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
 | --- | --- | --- | 
-|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 1 \(SE1\) License Included  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.large  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.m2\.xlarge–db\.m2\.4xlarge db\.m1\.small–db\.m1\.xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) License Included  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.large  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+
+### Deprecated DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
+
+ In 2018, Amazon RDS is deprecating support for db\.m1 and db\.m2 DB instance classes\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Therefore, to provide the best experience for AWS customers, we are deprecating these DB instance classes\. 
+
+Amazon RDS is deprecating support for db\.m1 and db\.m2 DB instance classes according to the following schedule\. 
+
+
+****  
+
+| Date | Information | 
+| --- | --- | 
+|  May 11, 2018  |  You can no longer create DB instances that use the db\.m1 or db\.m2 DB instance classes\.   | 
+|  September 12, 2018  |  We will end support of the db\.m1 and db\.m2 DB instance classes on Amazon RDS for Oracle\. If you have DB instances that use db\.m1 and db\.m2 DB instance classes, we strongly recommend that you update them to use a DB instance class that is not deprecated\.  Any snapshot that uses the db\.m1 or db\.m2 DB instance class is updated to use a comparable DB instance class that is not deprecated\. You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ## Oracle Security<a name="Oracle.Concepts.RestrictedDBAPrivileges"></a>
 
@@ -150,7 +164,7 @@ The following table shows the new Amazon RDS parameters for Oracle 12c:
 |  [pdb\_file\_name\_convert](http://docs.oracle.com/database/121/REFRN/GUID-074F8896-D565-4139-BCDB-C81C9D741941.htm#REFRN10322)  |  | N | Maps names of existing files to new file names\. | 
 |  [pga\_aggregate\_limit](http://docs.oracle.com/database/121/REFRN/GUID-E364D0E5-19F2-4081-B55E-131DF09CFDB3.htm#REFRN10328)  |  1\-max of memory  | Y | Specifies a limit on the aggregate PGA memory consumed by the instance\.  | 
 |  [processor\_group\_name](http://docs.oracle.com/database/121/REFRN/GUID-4CE6E299-4D81-45D8-9EAC-48E76E4911BA.htm#REFRN10323)  |  | N | Instructs the database instance to run itself within the specified operating system processor group\.  | 
-|  [spatial\_vector\_acceleration](http://docs.oracle.com/database/121/REFRN/GUID-1B7E8737-E176-46AD-BC68-1FCBBD4D05B6.htm#REFRN10337)  |  TRUE,FALSE  | N | Enables or disables the spatial vector acceleration, part of spacial option\.  | 
+|  [spatial\_vector\_acceleration](http://docs.oracle.com/database/121/REFRN/GUID-1B7E8737-E176-46AD-BC68-1FCBBD4D05B6.htm#REFRN10337)  |  TRUE,FALSE  | N | Enables or disables the spatial vector acceleration, part of spatial option\.  | 
 |  [temp\_undo\_enabled](http://docs.oracle.com/database/121/REFRN/GUID-E2A01A84-2D63-401F-B64E-C96B18C5DCA6.htm#REFRN10326)  |  TRUE,FALSE \(default\)  | Y | Determines whether transactions within a particular session can have a temporary undo log\.  | 
 |  [threaded\_execution](http://docs.oracle.com/database/121/REFRN/GUID-7A668A49-9FC5-4245-AD27-10D90E5AE8A8.htm#REFRN10335)  |  TRUE,FALSE  | N | Enables the multithreaded Oracle model, but prevents OS authentication\.  | 
 |  [unified\_audit\_sga\_queue\_size](http://docs.oracle.com/database/121/REFRN/GUID-060707DF-8431-4866-8B9F-4F450472D95E.htm#REFRN10343)  |  1 MB \- 30 MB  | Y | Specifies the size of the system global area \(SGA\) queue for unified auditing\.  | 
@@ -326,7 +340,7 @@ aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee
 DB Engine Version Management is a feature of Amazon RDS that enables you to control when and how the database engine software running your DB instances is patched and upgraded\. This feature gives you the flexibility to maintain compatibility with database engine patch versions, test new patch versions to ensure they work effectively with your application before deploying in production, and perform version upgrades on your own terms and timelines\. 
 
 **Note**  
-Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB Engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
+Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB Engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
 Currently, you perform all Oracle database upgrades manually\. For more information about upgrading an Oracle DB instance, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\. 
 
@@ -343,7 +357,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.2 according to th
 
 | Date | Information | 
 | --- | --- | 
-|  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.2   | 
+|  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.2\.   | 
 |  April 15, 2019  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ### Deprecation of Oracle 11\.2\.0\.3<a name="Oracle.Concepts.Deprecate.11203"></a>
@@ -366,7 +380,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.3 according to th
 
 In 2017, Amazon RDS is deprecating support for Oracle version 12\.1\.0\.1\. Oracle is no longer providing patches for this version\. Therefore, to provide the best experience for AWS customers, we are deprecating this version\. 
 
-There are no longer any production DB instances running Oracle version 12\.1\.0\.1\. You might still have a snapshot of an 12\.1\.0\.1 DB instance\. 
+There are no longer any production DB instances running Oracle version 12\.1\.0\.1\. You might still have a snapshot of a 12\.1\.0\.1 DB instance\. 
 
 Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to the following schedule\. 
 
@@ -389,9 +403,9 @@ You can use huge pages with the following versions and editions of Oracle:
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
-+ For the DB instance classes db\.t2, db\.r3, and db\.m4, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default\. You can enable huge pages manually if the instance class has at least 14 GiB of memory\.
-+ For DB instance class db\.r4, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `ONLY` by default\.
-+ For DB instance class db\.r4, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `ONLY`\.
++ For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually if the instance class is in the db\.t2, db\.r3, or db\.m4 family and it has at least 14 GiB of memory\.
++ For DB instance classes not mentioned in the table below, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\.
++ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, and `use_large_pages` evaluates to `ONLY`\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
 
@@ -413,6 +427,8 @@ For more information about DB instance classes, see [Specifications for All Avai
 To enable huge pages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use huge pages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
 You can also set the `sga_target`, `sga_max_size`, and `pga_aggregate_target` parameters\. When you set system global area \(SGA\) and program global area \(PGA\) memory parameters, add the values together\. Subtract this total from your available instance memory \(`DBInstanceClassMemory`\) to determine the free memory beyond the huge pages allocation\. You must leave free memory of at least 2 GiB, or 10 percent of the total available instance memory, whichever is smaller\. 
+
+After you configure your parameters, you must reboot your DB instance for the changes to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
 
 The following is a sample parameter configuration for huge pages that enables huge pages manually\. You should set the values to meet your needs\. 
 
@@ -453,8 +469,6 @@ The parameter group is used by a db\.r4 DB instance class with less than 100 GiB
 
 **Note**  
 If this parameter group is used by a db\.r4 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
-
-After you configure your parameters, you must reboot your DB instance for the changes to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
 
 After huge pages are active on your DB instance, you can view huge pages information by enabling enhanced monitoring\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. 
 

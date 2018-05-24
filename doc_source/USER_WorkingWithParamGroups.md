@@ -581,7 +581,7 @@ The value for a DB parameter can be specified as:
 
 ### DB Parameter Formulas<a name="USER_ParamFormulas"></a>
 
-A DB parameter formula is an expression that resolves to an integer value, and is enclosed in braces: \{\}\. Formulas can be specified for either a DB parameter value or as an argument to a DB parameter function\.
+A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. Formulas can be specified for either a DB parameter value or as an argument to a DB parameter function\.
 
 Syntax
 
@@ -603,7 +603,7 @@ Syntax
 
 ### DB Parameter Formula Variables<a name="USER_FormulaVariables"></a>
 
-Formula variables return integers\. The names of the variables are case sensitive\.
+Each formula variable returns integer or a Boolean value\. The names of the variables are case sensitive\.
 
 AllocatedStorage  
 Returns the size, in bytes, of the data volume\.
@@ -613,6 +613,10 @@ Returns the number of bytes of memory allocated to the DB instance class associa
 
 EndPointPort  
 Returns the number of the port used when connecting to the DB instance\.
+
+DBInstanceClassHugePagesDefault  
+Returns a Boolean value\. Currently, it is only supported for Oracle engines\.  
+For more information, see [Using Huge Pages with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.HugePages)\.
 
 ### DB Parameter Formula Operators<a name="USER_FormulaOperators"></a>
 
@@ -642,6 +646,15 @@ The parameter arguments can be specified as either integers or formulas\. Each f
 
 **Note**  
 DB Parameter functions are not currently supported in CLI\.
+
+IF\(\)  
+Returns an argument\. Currently, it is only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Using Huge Pages with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.HugePages)\.  
+Syntax  
+
+```
+IF(argument1, argument2, argument3)
+```
+Returns the second argument if the first argument evaluates to true\. Returns the third argument otherwise\.
 
 GREATEST\(\)  
 Returns the largest value from a list of integers or parameter formulas\.  

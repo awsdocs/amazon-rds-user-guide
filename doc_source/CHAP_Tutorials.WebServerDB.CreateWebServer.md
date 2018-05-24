@@ -65,7 +65,7 @@ Next you connect to your EC2 instance and install the web server\.
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
 
    ```
-   [ec2-user ~]$ sudo yum update –y
+   [ec2-user ~]$ sudo yum update -y
    ```
 
 1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time:

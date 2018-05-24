@@ -28,7 +28,7 @@ The basic building block of Amazon RDS is the *DB instance*\. A DB instance is a
 **Note**  
 For pricing information on DB instance classes, go to the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
 
-DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It’s important to have sufficient storage so that your databases have room to grow and that features for the DB engine have room to write content or log entries\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\. 
+DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It’s important to have sufficient storage so that your databases have room to grow and that features for the DB engine have room to write content or log entries\. For more information, see [DB instance storage](CHAP_Storage.md)\. 
 
 You can run a DB instance on a virtual private cloud using the Amazon Virtual Private Cloud \(VPC\) service\. When you use a virtual private cloud, you have control over your virtual networking environment: you can select your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it is running in a VPC or not; Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There is no additional cost to run your DB instance in a VPC\. For more information on VPC and RDS, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\. 
 
@@ -84,7 +84,7 @@ AWS also provides libraries, sample code, tutorials, and other resources to help
 
 In addition to regular RDS pricing, you can purchase reserved DB instances\. Reserved DB instances let you make a one\-time up\-front payment for a DB instance and reserve the DB instance for a one\- or three\-year term at significantly lower rates\. For more information on reserved DB instances, see [Working with Reserved DB Instances](USER_WorkingWithReservedDBInstances.md) 
 
-For Amazon RDS pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\. 
+For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\. 
 
 ## What's Next?<a name="Welcome.WhatsNext"></a>
 

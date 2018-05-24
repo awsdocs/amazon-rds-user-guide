@@ -11,7 +11,7 @@ CALL mysql.rds_kill(processID);
 ## Parameters<a name="mysql_rds_kill-parameters"></a>
 
  *processID*   
-The identity of the connection thread that will be terminated\.
+The identity of the connection thread to be terminated\.
 
 ## Usage Notes<a name="mysql_rds_kill-usage-notes"></a>
 

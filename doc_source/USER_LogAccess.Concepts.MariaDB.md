@@ -55,7 +55,7 @@ The following table summarizes the requirements for the various MariaDB logs\.
 
 | Log | Requirement | 
 | --- | --- | 
-|  Audit log  |  You must have a custom option group with the option `"MARIDADB_AUDIT_PLUGIN"`  | 
+|  Audit log  |  You must have a custom option group with the option `"MARIADB_AUDIT_PLUGIN"`  | 
 |  General log  |  You must have a custom parameter group with the option `"general-log = '1'"`  | 
 |  Slow query log  |  You must have a custom parameter group with the option `"slow-query-log = '1'"`  | 
 |  Log in file  |  You must have a custom parameter group with the option `"log-out = 'FILE'"`  | 

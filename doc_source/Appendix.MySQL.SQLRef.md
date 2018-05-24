@@ -1,4 +1,4 @@
-# Appendix: MySQL on Amazon RDS SQL Reference<a name="Appendix.MySQL.SQLRef"></a>
+# MySQL on Amazon RDS SQL Reference<a name="Appendix.MySQL.SQLRef"></a>
 
 This appendix describes system stored procedures that are available for Amazon RDS instances running the MySQL DB engine\.
 
@@ -9,6 +9,8 @@ The following system stored procedures are supported for Amazon RDS DB instances
 **Replication** 
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
++ [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md)
++ [mysql\.rds\_remove\_binlog\_ssl\_material](mysql_rds_remove_binlog_ssl_material.md)
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)
 + [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)

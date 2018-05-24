@@ -126,7 +126,7 @@ AWS retains log data published to CloudWatch Logs for an indefinite time period 
  For more information about publishing database logs to CloudWatch Logs, see the following:
 + [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 + [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
-+ [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Amazon Aurora MySQL Logs to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
 
 ## Reading Log File Contents Using REST<a name="DownloadCompleteDBLogFile"></a>
 

@@ -83,7 +83,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_
 | --- | --- | --- | --- | --- | 
 | `tablespace_name` | varchar | — | required | The name of the default temporary tablespace\. | 
 
-The following example sets the default tepmorary tablespace to *temp01*: 
+The following example sets the default temporary tablespace to *temp01*: 
 
 ```
 1. exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
@@ -132,7 +132,7 @@ The `alter_db_time_zone` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_tz` | varchar2 | — | required |  The new time zone as an named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
+| `p_new_tz` | varchar2 | — | required |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
 The following example changes the time zone to UTC plus 3 hours: 
 

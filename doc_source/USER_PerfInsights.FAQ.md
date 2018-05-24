@@ -26,7 +26,7 @@ A: Yes\. By default, Performance Insights displays a moving one hour window of p
 
 **Q: How much does Performance Insights cost?**
 
-A: Performance Insights will include 24 hours of retained data and console access only\)\. Performance Insights while in preview, offers a free tier that includes a trailing 24 hours of performance data retention\. Pricing for longer term data retention will be published at GA\. 
+A: Performance Insights free tier includes 7 days of rolling data retention\. A fee\-based long\-term data retention option will be offered in a future release\. 
 
 **Q: How far back can I look at performance data stored in Performance Insights?**
 

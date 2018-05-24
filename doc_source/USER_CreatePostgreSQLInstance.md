@@ -5,7 +5,7 @@
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-## <a name="USER_CreatePostgreSQLInstance.CON"></a>
+## Create a PostgreSQL DB Instance<a name="USER_CreatePostgreSQLInstance.CON"></a>
 
 **To launch a PostgreSQL DB instance**
 

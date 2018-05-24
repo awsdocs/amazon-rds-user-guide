@@ -93,7 +93,7 @@ public class CreateRDSAuthTokenManually {
     public static void main(String[] args) throws Exception {
 
         String region = "us-west-2";
-        String instanceName = "rdsmysql.cdgmuqiadpid.us-west-2rds.amazonaws.com";
+        String instanceName = "rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com";
         String port = "3306";
         String username = "jane_doe";
 	

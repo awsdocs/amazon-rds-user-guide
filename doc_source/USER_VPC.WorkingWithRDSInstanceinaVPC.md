@@ -31,8 +31,8 @@ Here are some tips on working with a DB instance in a VPC:
   If you choose to have your DB instance in a dedicated VPC where the instance tenancy attribute is set to dedicated, the DB instance class of your DB instance must be one of the approved Amazon EC2 dedicated instance types\. For example, the m3\.medium EC2 dedicated instance corresponds to the db\.m3\.medium DB instance class\. For information about instance tenancy in a VPC, go to [Using EC2 Dedicated Instances](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
   For more information about the instance types that can be in a dedicated instance, see [Amazon EC2 Dedicated Instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on the EC2 pricing page\. 
-+ When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. Furthermore, if a DB instance is in a VPC, the option group associated with the instance is linked to that VPC\. This linkage means that you cannot use the option group assigned to a DB instance if you attempt to restore the instance into a different VPC or onto a different platform\.
-+ If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. Note that with persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
++ When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. Furthermore, if a DB instance is in a VPC, the option group associated with the DB instance is linked to that VPC\. This linkage means that you cannot use the option group assigned to a DB instance if you attempt to restore the DB instance into a different VPC or onto a different platform\.
++ If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the DB instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. Note that with persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\.
 
 ## Working with DB Subnet Groups<a name="USER_VPC.Subnets"></a>
 
@@ -106,9 +106,9 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 1. For **Description**, type a description for your DB subnet group\. 
 
-1.  For **VPC ID**, choose the VPC that you created\. 
+1.  For **VPC**, choose the VPC that you created\. 
 
-1. In the **Add Subnet** section, click the **Add all the subnets related to this VPC** link\.   
+1. In the **Add subnets** section, click the **Add all the subnets related to this VPC** link\.   
 ![\[Create DB Subnet Group button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC101.png)
 
 1. Choose **Create**\. 

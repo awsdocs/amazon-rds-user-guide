@@ -16,14 +16,6 @@ innodb_buffer_pool_size = (536870912 * 4) * 8 = 17179869184
 
 For details on this MySQL 5\.7 bug, go to [https://bugs\.mysql\.com/bug\.php?id=79379](https://bugs.mysql.com/bug.php?id=79379) in the MySQL documentation\. 
 
-## MySQL Version 5\.5\.40 Asynchronous I/O Is Disabled<a name="MySQL.Concepts.KnownIssuesAndLimitations.AsyncIO"></a>
-
-You might observe reduced I/O performance if you have a MySQL DB instance that was created before April 23, 2014, and then upgraded to MySQL version 5\.5\.40 after October 17, 2014\. This reduced performance can be caused by an error that disables the `innodb_use_native_aio` parameter even if the corresponding DB parameter group enables the `innodb_use_native_aio` parameter\. 
-
-To resolve this error, we recommend that you upgrade your MySQL DB instance running version 5\.5\.40 to version 5\.5\.40a, which corrects this behavior\. For information on minor version upgrades, see [Upgrading the MySQL DB Engine](USER_UpgradeDBInstance.MySQL.md)\. 
-
-For more information on MySQL asynchronous I/O, go to [Asynchronous I/O on Linux](https://dev.mysql.com/doc/refman/5.7/en/innodb-linux-native-aio.html) in the MySQL documentation\. 
-
 ## Index Merge Optimization Returns Wrong Results<a name="MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization"></a>
 
 Queries that use index merge optimization might return wrong results due to a bug in the MySQL query optimizer that was introduced in MySQL 5\.5\.37\. When you issue a query against a table with multiple indexes the optimizer scans ranges of rows based on the multiple indexes, but does not merge the results together correctly\. For more information on the query optimizer bug, go to [http://bugs\.mysql\.com/bug\.php?id=72745](https://bugs.mysql.com/bug.php?id=72745) and [http://bugs\.mysql\.com/bug\.php?id=68194](https://bugs.mysql.com/bug.php?id=68194) in the MySQL bug database\. 

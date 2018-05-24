@@ -130,7 +130,7 @@ You can create a new Aurora DB cluster for an Aurora Read Replica from a source 
 
   The list of EC2 VPC security groups to associate with this DB cluster\.
 
-In this example, you create a DB cluster named *myreadreplicacluster* from a source PostgrSQL DB instance with an ARN set to *mysqlmasterARN*, associated with a DB subnet group named *mysubnetgroup* and a VPC security group named *mysecuritygroup*\.
+In this example, you create a DB cluster named *myreadreplicacluster* from a source PostgreSQL DB instance with an ARN set to *mysqlmasterARN*, associated with a DB subnet group named *mysubnetgroup* and a VPC security group named *mysecuritygroup*\.
 
 **Example**  
 

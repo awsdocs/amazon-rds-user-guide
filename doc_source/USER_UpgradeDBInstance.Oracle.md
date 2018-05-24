@@ -6,7 +6,7 @@ When Amazon RDS supports a new version of Oracle, you can upgrade your DB instan
 
 You must perform all upgrades manually, and an outage occurs while the upgrade takes place\. The time for the outage varies based on your engine version and the size of your DB instance\. 
 
-For information about what Oracle versions are available on Amazon RDS, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
+For information about what Oracle versions are available on Amazon RDS, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
@@ -27,7 +27,7 @@ Amazon RDS supports upgrades of Oracle DB instances running Oracle version 11\.2
 Major version upgrades are not supported for deprecated Oracle versions, such as Oracle version 11\.2\.0\.3 and 11\.2\.0\.2\.
 Major version downgrades are not supported\.
 A major version upgrade from 11g to 12c must upgrade to an Oracle PSU that was released in the same month or later\.  
-For example, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v11 is supported\. However, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v9 is not supported, because Oracle version 11\.2\.0\.4\.v14 was released in October 2017 while Oracle version 12\.1\.0\.2\.v9 was released in July 2017\. For information about the release date for each Oracle PSU, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.
+For example, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v11 is supported\. However, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v9 is not supported, because Oracle version 11\.2\.0\.4\.v14 was released in October 2017 while Oracle version 12\.1\.0\.2\.v9 was released in July 2017\. For information about the release date for each Oracle PSU, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.
 
 ## Oracle Minor Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Minor"></a>
 

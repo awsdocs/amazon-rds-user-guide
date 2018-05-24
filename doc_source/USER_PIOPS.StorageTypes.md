@@ -1,28 +1,28 @@
-# Working with Storage Types<a name="USER_PIOPS.StorageTypes"></a>
+# Working with Storage<a name="USER_PIOPS.StorageTypes"></a>
 
-To specify how you want your data stored in Amazon RDS, you select a storage type and provide a storage size \(in gibibytes\) when you create or modify a DB instance\. You can change the type of storage your instance uses by modifying the DB instance, but changing the storage type results in a short outage for the instance\. However, increasing the allocated storage doesn't result in an outage\. For more information about Amazon RDS storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
-
-You can't reduce the amount of storage once it has been allocated\. The only way to reduce the amount of storage allocated to a DB instance is to dump the data out of the DB instance and create a new DB instance with less storage space\. You then load the data into the new DB instance\.
-
-When estimating your storage needs, consider that Amazon RDS allocates a minimum amount of storage for file system structures\. This reserved space can be up to 3 percent of the allocated storage for a DB instance, though in most cases the reserved space is far less\. We recommend that you set up an Amazon CloudWatch alarm for your DB instance's free storage space and react when necessary\. For information on setting CloudWatch alarms, see the [CloudWatch Getting Started Guide](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/GettingStarted.html)\. 
+To specify how you want your data stored in Amazon RDS, you select a storage type and provide a storage size when you create or modify a DB instance\. Later, you can increase the amount or change the type of storage by modifying the DB instance\. For more information about which storage type to use for your workload, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
 
 **Topics**
-+ [Modifying a DB Instance to Use a Different Storage Type](#USER_PIOPS.ModifyingExisting)
-+ [Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Modify)
-+ [Creating a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Creating)
-+ [Creating a MySQL or MariaDB Read Replica That Uses Provisioned IOPS Storage](#USER_PIOPS.CreatingRR)
++ [Increasing DB instance storage capacity](#USER_PIOPS.ModifyingExisting)
++ [Changing your storage type](#USER_PIOPS.Modify)
++ [Modifying Provisioned IOPS SSD storage settings](#User_PIOPS.Increase)
 
-## Modifying a DB Instance to Use a Different Storage Type<a name="USER_PIOPS.ModifyingExisting"></a>
+## Increasing DB instance storage capacity<a name="USER_PIOPS.ModifyingExisting"></a>
 
-You can use the Amazon RDS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\) to modify a DB instance to use Standard \(Magnetic\), General Purpose \(SSD\), or Provisioned IOPS storage\. You must specify either a value for allocated storage or specify both allocated storage and IOPS values\. You might need to modify the amount of allocated storage in order to maintain the required ratio between IOPS and storage\. For more information about the required ratio between IOPS and storage, see [Using Provisioned IOPS Storage with Multi\-AZ, Read Replicas, Snapshots, VPC, and DB Instance Classes](CHAP_Storage.md#Overview.ProvisionedIOPS-support)\. 
+If you need space for additional data, you can scale up the storage of an existing DB instance\. To do so, you can use the Amazon RDS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. If you are using General Purpose SSD or Provisioned IOPS SSD storage, you can increase your storage to a maximum of 16 TiB\. Scaling storage for Amazon RDS for SQL Server database instance, is supported only for General Purpose SSD or Provisioned IOPS SSD storage types\.  
 
-An immediate outage occurs when you convert from one storage type to another\. The data for that DB instance is migrated to a new volume\. The duration of the migration depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned \(if any\)\. The typical migration time is a few minutes, and the DB instance is available for use during the migration\. However, when you are migrating to or from magnetic storage, the migration time usually takes longer, up to several days in some cases\. During the migration to or from magnetic storage, the DB instance is available for use, but might experience performance degradation\. 
+We recommend that you create a CloudWatch alarm to monitor the amount of free storage for your DB instance so you can respond when necessary\. For more information on setting CloudWatch alarms, see [Using Amazon RDS Event Notification](USER_Events.md)\. 
 
-For DB instances in a single Availability Zone, the DB instance is unavailable for a few minutes when the conversion is initiated\. For Multi\-AZ deployments, the time the DB instance is unavailable is limited to the time it takes for a failover operation to complete, which typically takes less than two minutes\. Although your DB instance is available for reads and writes during the conversion, you might experience degraded performance until the conversion process is complete\. This process can take several hours\. 
+In most cases, scaling storage doesn't require any outage and does not degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is `storage-optimization`\. The DB instance is fully operational after a storage modification\. However, you can't make further storage modifications for either six \(6\) hours or while the DB instance status is storage\-optimization, whichever is longer\. 
+
+If you have a SQL Server DB instance and have not modified the storage configuration since November 2017, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the storage\-optimization state\. Performance might be degraded during storage optimization\. 
+
+**Note**  
+You can't reduce the amount of storage for a DB instance after it has been allocated\.
 
 ### AWS Management Console<a name="USER_PIOPS.ModifyingExisting.console"></a>
 
-**To modify a DB instance to use a different storage type**
+**To increase storage for a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -32,36 +32,42 @@ For DB instances in a single Availability Zone, the DB instance is unavailable f
 
 1. For **Instance actions**, choose **Modify**\.
 
-1. For **Storage type**, choose a value for the DB instance, and type a value for **Allocated Storage**\. If you are modifying your DB instance to use the Provisioned IOPS storage type, then also provide a **Provisioned IOPS** value\. For more information, see [Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage](#USER_PIOPS.Modify)\.  
-![\[Modify the storage type of a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/modify-storage-type.png)
+1. Type a new value for **Allocated Storage**\. It must be greater than the current value\.   
+![\[Modify the amount of storage for a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/scale-gs2.png)
+**Note**  
+When you increase Allocated Storage it must be by at least 10 %\. If you try to increase by less than 10 % you see an error\.
 
-1. Choose**Continue** to move to the next screen\.
+1. Choose **Continue** to move to the next screen\.
 
-1. To immediately initiate conversion of the DB instance to use the new storage type, select the **Apply immediately** check box in the **Scheduling of modifications** section\. If you want the changes to be applied in the next maintenance window, choose that option\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+1. To immediately initiate conversion of the DB instance to use the new storage type, choose the **Apply immediately** check box in the **Scheduling of modifications** section\. If you want the changes to be applied in the next maintenance window, choose that option\. 
 
 1. When the settings are as you want them, choose **Modify DB instance**\.
 
-### CLI<a name="w3ab1c23c31c10c11"></a>
+### CLI<a name="w3ab1c15c66b8c15b3"></a>
 
-To modify a DB instance to use a different storage type, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
+To increase the storage for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--storage-type` – The new storage type for the DB instance\. You can specify `gp2` for general purpose \(SSD\), `io1` for Provisioned IOPS\), or `standard` for magnetic storage\.
-+ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
++ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
 
-### API<a name="w3ab1c23c31c10c13"></a>
+### API<a name="w3ab1c15c66b8c15b5"></a>
 
-Use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
+To increase storage for a DB instance, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `StorageType` – The new storage type for the DB instance\. You can specify `gp2` for general purpose \(SSD\), `io1` for Provisioned IOPS\), or `standard` for magnetic storage\.
-+ `ApplyImmediately` – Set to `True` if you want to initiate conversion immediately\. If `False` \(the default\), the conversion is applied during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
++ `ApplyImmediately` – Set this option to `True` if you want to initiate conversion immediately\. If this option is `False` \(the default\), the scaling is applied during the next maintenance window\. An immediate outage occurs when the conversion is applied\.
 
-## Modifying IOPS and Storage Settings for a DB Instance That Uses Provisioned IOPS Storage<a name="USER_PIOPS.Modify"></a>
+   For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
 
-You can modify the settings for an Oracle, PostgreSQL, MySQL, or MariaDB DB instance that uses Provisioned IOPS storage by using the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. You must specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose from 1000 IOPS and 100 GiB of storage up to 40,000 IOPS and 16 TiB \(16384 GiB\) of storage, depending on your database engine\. You cannot reduce the amount of allocated storage from the value currently allocated for the DB instance\. For more information, see [Using Provisioned IOPS Storage with Multi\-AZ, Read Replicas, Snapshots, VPC, and DB Instance Classes](CHAP_Storage.md#Overview.ProvisionedIOPS-support)\. 
+## Changing your storage type<a name="USER_PIOPS.Modify"></a>
 
-### AWS Management Console<a name="w3ab1c23c31c12b5"></a>
+You can change the type of storage for your DB instance by using the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. 
 
-**To modify the Provisioned IOPS settings for a DB instance**
+When you convert from one storage type to another an outage occurs while the data for that DB instance is migrated to a new volume\. The duration of the migration depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned \(if any\)\. The typical migration time is a few minutes\. The DB instance is available for use during the migration\. However, when you are migrating to or from magnetic storage, the migration time can take up to several days in some cases\. During the migration to or from magnetic storage, the DB instance is available for use, but might experience performance degradation\. 
+
+Storage conversions from Provisioned IOPS SSD or magnetic storage to General Purpose SSD storage can potentially deplete the I/O credits allocated for General Purpose SSD storage\. This is especially on smaller volumes\. After the initial I/O burst credits for the volume are depleted, the remaining data is converted at the base performance rate of 3 IOPS per GiB of allocated General Purpose SSD storage\. This approach can result in significantly longer conversion times\. 
+
+### AWS Management Console<a name="USER_PIOPS.Modify.con"></a>
+
+**To change the storage type for a DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -69,117 +75,120 @@ You can modify the settings for an Oracle, PostgreSQL, MySQL, or MariaDB DB inst
 **Note**  
 To filter the list of DB instances, for **Filter instances**, type a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
 
-1. Choose the DB instance with Provisioned IOPS storage that you want to modify\.
+1. Choose the DB instance that you want to modify\.
 
 1. For **Instance actions**, choose **Modify**\.
 
-1.  On the **Modify DB Instance** page, choose **Provisioned IOPS \(SSD\)** for **Storage type**, and then set the amount of Provisioned IOPS you want for **Provisioned IOPS**\.   
+1. On the **Modify DB Instance page**, choose the type of storage from the **Storage type** list\. If you are modifying your DB instance to use Provisioned IOPS SSD storage type, then also provide a Provisioned IOPS value\.   
 ![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops1-mod.png)
-
-   If the value you specify for either **Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed indicating the range of values required for the other parameter\.
 
 1. Choose **Continue**\.
 
-1. To apply the changes to the DB instance immediately, select the **Apply immediately** check box in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\. 
+1. To apply the changes to the DB instance immediately, choose the **Apply immediately** check box in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\. 
+
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [ DB instance storageDB Instance Storage Shows the different storage types available for a DB instance on Amazon RDS\.   DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\. Amazon Aurora uses a proprietary storage system\. For more information about Aurora storage, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)      Amazon RDS Storage TypesStorage Types  Specify the storage size \(GiB\) and optionally select Provisioned IOPS when you create a new DB instance for data storage in Amazon RDS\.   Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, SQL Server, PostgreSQL, and Oracle RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. The following list briefly describes the three storage types:    **General Purpose SSD** – General Purpose SSD , also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\.  For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD Storage](#Concepts.Storage.GeneralSSD)\.    **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\.   For more information about provisioned IOPS storage, including the storage size ranges, see [Provisioned IOPS SSD Storage](#USER_PIOPS)\.    **Magnetic** – Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS for any new storage needs\. The maximum amount of storage allowed for DB instances on magnetic storage is less than that of the other storage types\.     Several factors can affect the performance of Amazon EBS volumes, such as instance configuration, I/O characteristics, and workload demand\. For more information about getting the most out of your Provisioned IOPS volumes, see [Amazon EBS Volume Performance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html)\.     General Purpose SSD Storage  General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances:    MySQL, Oracle, MariaDB, and PostgreSQL DB instances: 20 GiB–16 TiB    SQL Server Enterprise and Standard editions: 200 GiB–16 TiB    SQL Server Web and Express editions: 20 GiB–16 TiB     Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, which means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS, and 3,000 IOPS for a 1\-TiB volume\. Volumes of 3\.34 TiB and greater have a baseline performance of 10,000 IOPS\.  Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time \(burst is not relevant for volumes above 1 TiB\)\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\.  Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.   I/O Credits and Burst Performance  General Purpose SSD storage performance is governed by volume size, which dictates the base performance level of the volume and how quickly it accumulates I/O credits\. Larger volumes have higher base performance levels and accumulate I/O credits faster\. *I/O credits* represent the available bandwidth that your General Purpose SSD storage can use to burst large amounts of I/O when more than the base level of performance is needed\. The more I/O credits your storage has for I/O, the more time it can burst beyond its base performance level and the better it performs when your workload requires more performance\. When using General Purpose SSD storage, your DB instance receives an initial I/O credit balance of 5\.4 million I/O credits\. This initial credit balance is enough to sustain a burst performance of 3,000 IOPS for 30 minutes\. This balance is designed to provide a fast initial boot cycle for boot volumes and to provide a good bootstrapping experience for other applications\. Volumes earn I/O credits at the baseline performance rate of 3 IOPS for each GiB of volume size\. For example, a 100\-GiB SSD volume has a baseline performance of 300 IOPS\.  When your storage requires more than the base performance I/O level, it uses I/O credits in the I/O credit balance to burst to the required performance level\. Such a burst goes to a maximum of 3,000 IOPS\. Storage larger than 1,000 GiB has a base performance that is equal or greater than the maximum burst performance\. Thus, its I/O credit balance never depletes and it can burst indefinitely\. When your storage uses fewer I/O credits than it earns in a second, unused I/O credits are added to the I/O credit balance\. The maximum I/O credit balance for a DB instance using General Purpose SSD storage is equal to the initial I/O credit balance \(5\.4 million I/O credits\)\. Suppose that your storage uses all of its I/O credit balance\. If so, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\.   Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage](USER_PIOPS.StorageTypes.md)\.   The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.  
+
+
+|  **Storage size \(GiB\)**  |  **Base Performance \(IOPS\)**  | **Maximum Burst Duration at 3,000 IOPS \(Seconds\)**  | **Seconds to Fill Empty I/O Credit Balance**  | 
+| --- | --- | --- | --- | 
+|  1  |  100  |  1,862  |  54,000  | 
+|  100  |  300  |  2,000  |  18,000  | 
+|  250  |  750  |  2,400  |  7,200  | 
+|  500  |  1,500  |  3,600  |  3,600  | 
+|  750  |  2,250  |  7,200  |  2,400  | 
+|  1,000  |  3,000  |  Infinite  |  N/A  | 
+|  3,333  |  10,000  |  Infinite  |  N/A  | 
+|  10,000  |  10,000  |  Infinite  |  N/A  |  The burst duration of your storage depends on the size of the storage, the burst IOPS required, and the I/O credit balance when the burst begins\. This relationship is shown in the equation following\. 
+
+```
+                              (Credit balance)
+   Burst duration =  ------------------------------------
+                     (Burst IOPS) - 3(Storage size in GiB)
+``` You might notice that your storage performance is frequently limited to the base level due to an empty I/O credit balance\. If so, consider allocating more General Purpose SSD storage with a higher base performance level\. Alternatively, you can switch to Provisioned IOPS storage for workloads that require sustained IOPS performance\. For workloads with steady state I/O requirements, provisioning less than 100 GiB of General Purpose SSD storage might result in higher latencies if you exhaust your I/O credit balance\. In general, most workloads never exceed the I/O credit balance\. For a more detailed description of how baseline performance and I/O credit balance affect performance see [Understanding Burst vs\. Baseline Performance with Amazon RDS and GP2](https://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/)\.     Provisioned IOPS SSD StorageProvisioned IOPS Storage  Improve the performance of your DB instance by using Amazon RDS Provisioned IOPS \(input/output operations per second\) storage\.    For production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS \(input/output operations per second\) storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that have consistent performance requirements\. Provisioned IOPS helps performance tuning of these workloads\.  When you create a DB instance, you specify an IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.   Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\.    The following table shows the range of Provisioned IOPS and storage size range for each database engine\. 
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)  Combining Provisioned IOPS Storage with Multi\-AZ deployments, or Read Replicas For production OLTP use cases, we recommend that you use Multi\-AZ deployments for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance\. You can also use Provisioned IOPS SSD storage with Read Replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a Read Replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for Read Replicas with a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your Read Replicas performance in this case might differ from that of a configuration where both the master DB instance and the Read Replicas use Provisioned IOPS SSD storage\.    Provisioned IOPS Storage Costs With Provisioned IOPS storage you are charged for the provisioned resources resources whether or not you use them in a given month\.    For more information about pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\.   Getting the most out of Amazon RDS Provisioned IOPS SSD storage  If your workload is I/O constrained, using Provisioned IOPS SSD storage can increase the number of I/O requests that the system can process concurrently\. Increased concurrency allows for decreased latency because I/O requests spend less time in a queue\. Decreased latency allows for faster database commits, which improves response time and allows for higher database throughput\.  Provisioned IOPS SSD storage provides a way to reserve I/O capacity by specifying IOPS\. However, as with any other system capacity attribute, its maximum throughput under load is constrained by the resource that is consumed first\. That resource might be network bandwidth, CPU, memory, or database internal resources\.     Magnetic storage  Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The following are some limitations for magnetic storage:   Doesn't allow you to scale storage when using the SQL Server database engine\. Doesn't support elastic volumes\. Limited to a maximum size of 4 TiB\. Limited to a maximum of 1,000 IOPS\.    Monitoring storage performance  Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. The following metrics are useful for monitoring storage for your DB instance:     **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\.     **Latency** – The elapsed time between the submission of an I/O request and its completion\. This metric is reported as the average latency for a given time interval\. Amazon RDS reports read and write latency separately on 1\-minute intervals in units of seconds\. Typical values for latency are in the millisecond \(ms\)\. For example, Amazon RDS reports 2 ms as 0\.002 seconds\.     **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel’s maximum bandwidth\.     **Queue Depth** – The number of I/O requests in the queue waiting to be serviced\. These are I/O requests that have been submitted by the application but have not been sent to the device because the device is busy servicing other I/O requests\. Time spent waiting in the queue is a component of latency and service time \(not available as a metric\)\. This metric is reported as the average queue depth for a given time interval\. Amazon RDS reports queue depth in 1\-minute intervals\. Typical values for queue depth range from zero to several hundred\.    Measured IOPS values are independent of the size of the individual I/O operation\. This means that when you measure I/O performance, you should look at the throughput of the instance, not simply the number of I/O operations\.        Factors That Affect Storage Performance Both system activities and database workload can affect storage performance\.  **System activities** The following system\-related activities consume I/O capacity and might reduce database instance performance while in progress:   Multi\-AZ standby creation   Read replica creation   Changing storage types   **Database workload** In some cases your database or application design results in concurrency issues, locking, or other forms of database contention\. In these cases, you might not be able to use all the provisioned bandwidth directly\. In addition, you may encounter the following workload\-related situations:   The throughput limit of the underlying instance type is reached\.   Queue depth is consistently less than 1 because your application is not driving enough I/O operations\.   You experience query contention in the database even though some I/O capacity is unused\.   If there isn’t at least one system resource that is at or near a limit, and adding threads doesn’t increase the database transaction rate, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, you should seek the advice of a database performance tuning expert\.  **DB instance class** To get the most performance out of your Amazon RDS database instance, choose a current generation instance type with enough bandwidth to support your storage type\. For example, you can choose EBS\-optimized instances and instances with 10\-gigabit network connectivity\. For the full list of Amazon EC2 instance types that support EBS optimization, see [Instance types that support EBS optimization](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)\.   ](CHAP_Storage.md) 
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 
-   The new value for allocated storage or for provisioned IOPS appears in the **Status** column\.  
-![\[Pending Values column\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops3-mod.png)
+### CLI<a name="w3ab1c15c66c10b9b3"></a>
 
-### CLI<a name="w3ab1c23c31c12b7"></a>
+To change the type of storage for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
++ `--storage-type` – Set to `io1` for Provisioned IOPS\.
++ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately\. Use `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\.
 
-To modify the Provisioned IOPS settings for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
+### API<a name="w3ab1c15c66c10b9b5"></a>
+
+To change the type of storage for a DB instance, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
++ `StorageType` – Set to `io1` for Provisioned IOPS\.
++ `ApplyImmediately` – Set this option to `True` if you want to initiate conversion immediately\. If this option is `False` \(the default\), the conversion is applied during the next maintenance window\.
+
+## Modifying Provisioned IOPS SSD storage settings<a name="User_PIOPS.Increase"></a>
+
+You can modify the settings for a DB instance that uses Provisioned IOPS SSD Storage by using the AWS Management Console, the Amazon RDS API, or the AWS CLI\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose between 1,000 IOPS and 100 GiB of storage up to 40,000 IOPS and 16 TiB \(16384 GiB\) of storage, depending on your database engine\. 
+
+Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
+
+### AWS Management Console<a name="User_PIOPS.Increase.con"></a>
+
+**To change the Provisioned IOPS settings for a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Instances**\.
+**Note**  
+To filter the list of DB instances, for **Filter instances**, type a text string for Amazon RDS to use to filter the results\. Only DB instances whose names contain the string appear\.
+
+1. Choose the DB instance with Provisioned IOPS that you want to modify\.
+
+1. For **Instance actions**, choose **Modify**\.
+
+1. On the **Modify DB Instance page**, choose Provisioned IOPS for **Storage type** and then provide a Provisioned IOPS value\.   
+![\[Console Tags tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops2-new.png)
+
+   If the value you specify for either ** Allocated storage** or **Provisioned IOPS** is outside the limits supported by the other parameter, a warning message is displayed\. This messages gives the range of values required for the other parameter\. 
+
+1. Choose **Continue**\.
+
+1. To apply the changes to the DB instance immediately, choose the **Apply immediately** check box in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\. 
+
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [ DB instance storageDB Instance Storage Shows the different storage types available for a DB instance on Amazon RDS\.   DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\. Amazon Aurora uses a proprietary storage system\. For more information about Aurora storage, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage)      Amazon RDS Storage TypesStorage Types  Specify the storage size \(GiB\) and optionally select Provisioned IOPS when you create a new DB instance for data storage in Amazon RDS\.   Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, SQL Server, PostgreSQL, and Oracle RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. The following list briefly describes the three storage types:    **General Purpose SSD** – General Purpose SSD , also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\.  For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD Storage](#Concepts.Storage.GeneralSSD)\.    **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\.   For more information about provisioned IOPS storage, including the storage size ranges, see [Provisioned IOPS SSD Storage](#USER_PIOPS)\.    **Magnetic** – Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS for any new storage needs\. The maximum amount of storage allowed for DB instances on magnetic storage is less than that of the other storage types\.     Several factors can affect the performance of Amazon EBS volumes, such as instance configuration, I/O characteristics, and workload demand\. For more information about getting the most out of your Provisioned IOPS volumes, see [Amazon EBS Volume Performance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html)\.     General Purpose SSD Storage  General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances:    MySQL, Oracle, MariaDB, and PostgreSQL DB instances: 20 GiB–16 TiB    SQL Server Enterprise and Standard editions: 200 GiB–16 TiB    SQL Server Web and Express editions: 20 GiB–16 TiB     Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, which means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS, and 3,000 IOPS for a 1\-TiB volume\. Volumes of 3\.34 TiB and greater have a baseline performance of 10,000 IOPS\.  Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time \(burst is not relevant for volumes above 1 TiB\)\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\.  Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.   I/O Credits and Burst Performance  General Purpose SSD storage performance is governed by volume size, which dictates the base performance level of the volume and how quickly it accumulates I/O credits\. Larger volumes have higher base performance levels and accumulate I/O credits faster\. *I/O credits* represent the available bandwidth that your General Purpose SSD storage can use to burst large amounts of I/O when more than the base level of performance is needed\. The more I/O credits your storage has for I/O, the more time it can burst beyond its base performance level and the better it performs when your workload requires more performance\. When using General Purpose SSD storage, your DB instance receives an initial I/O credit balance of 5\.4 million I/O credits\. This initial credit balance is enough to sustain a burst performance of 3,000 IOPS for 30 minutes\. This balance is designed to provide a fast initial boot cycle for boot volumes and to provide a good bootstrapping experience for other applications\. Volumes earn I/O credits at the baseline performance rate of 3 IOPS for each GiB of volume size\. For example, a 100\-GiB SSD volume has a baseline performance of 300 IOPS\.  When your storage requires more than the base performance I/O level, it uses I/O credits in the I/O credit balance to burst to the required performance level\. Such a burst goes to a maximum of 3,000 IOPS\. Storage larger than 1,000 GiB has a base performance that is equal or greater than the maximum burst performance\. Thus, its I/O credit balance never depletes and it can burst indefinitely\. When your storage uses fewer I/O credits than it earns in a second, unused I/O credits are added to the I/O credit balance\. The maximum I/O credit balance for a DB instance using General Purpose SSD storage is equal to the initial I/O credit balance \(5\.4 million I/O credits\)\. Suppose that your storage uses all of its I/O credit balance\. If so, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\.   Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage](USER_PIOPS.StorageTypes.md)\.   The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.  
+
+
+|  **Storage size \(GiB\)**  |  **Base Performance \(IOPS\)**  | **Maximum Burst Duration at 3,000 IOPS \(Seconds\)**  | **Seconds to Fill Empty I/O Credit Balance**  | 
+| --- | --- | --- | --- | 
+|  1  |  100  |  1,862  |  54,000  | 
+|  100  |  300  |  2,000  |  18,000  | 
+|  250  |  750  |  2,400  |  7,200  | 
+|  500  |  1,500  |  3,600  |  3,600  | 
+|  750  |  2,250  |  7,200  |  2,400  | 
+|  1,000  |  3,000  |  Infinite  |  N/A  | 
+|  3,333  |  10,000  |  Infinite  |  N/A  | 
+|  10,000  |  10,000  |  Infinite  |  N/A  |  The burst duration of your storage depends on the size of the storage, the burst IOPS required, and the I/O credit balance when the burst begins\. This relationship is shown in the equation following\. 
+
+```
+                              (Credit balance)
+   Burst duration =  ------------------------------------
+                     (Burst IOPS) - 3(Storage size in GiB)
+``` You might notice that your storage performance is frequently limited to the base level due to an empty I/O credit balance\. If so, consider allocating more General Purpose SSD storage with a higher base performance level\. Alternatively, you can switch to Provisioned IOPS storage for workloads that require sustained IOPS performance\. For workloads with steady state I/O requirements, provisioning less than 100 GiB of General Purpose SSD storage might result in higher latencies if you exhaust your I/O credit balance\. In general, most workloads never exceed the I/O credit balance\. For a more detailed description of how baseline performance and I/O credit balance affect performance see [Understanding Burst vs\. Baseline Performance with Amazon RDS and GP2](https://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/)\.     Provisioned IOPS SSD StorageProvisioned IOPS Storage  Improve the performance of your DB instance by using Amazon RDS Provisioned IOPS \(input/output operations per second\) storage\.    For production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS \(input/output operations per second\) storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that have consistent performance requirements\. Provisioned IOPS helps performance tuning of these workloads\.  When you create a DB instance, you specify an IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.   Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\.    The following table shows the range of Provisioned IOPS and storage size range for each database engine\. 
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)  Combining Provisioned IOPS Storage with Multi\-AZ deployments, or Read Replicas For production OLTP use cases, we recommend that you use Multi\-AZ deployments for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance\. You can also use Provisioned IOPS SSD storage with Read Replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a Read Replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for Read Replicas with a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your Read Replicas performance in this case might differ from that of a configuration where both the master DB instance and the Read Replicas use Provisioned IOPS SSD storage\.    Provisioned IOPS Storage Costs With Provisioned IOPS storage you are charged for the provisioned resources resources whether or not you use them in a given month\.    For more information about pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\.   Getting the most out of Amazon RDS Provisioned IOPS SSD storage  If your workload is I/O constrained, using Provisioned IOPS SSD storage can increase the number of I/O requests that the system can process concurrently\. Increased concurrency allows for decreased latency because I/O requests spend less time in a queue\. Decreased latency allows for faster database commits, which improves response time and allows for higher database throughput\.  Provisioned IOPS SSD storage provides a way to reserve I/O capacity by specifying IOPS\. However, as with any other system capacity attribute, its maximum throughput under load is constrained by the resource that is consumed first\. That resource might be network bandwidth, CPU, memory, or database internal resources\.     Magnetic storage  Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The following are some limitations for magnetic storage:   Doesn't allow you to scale storage when using the SQL Server database engine\. Doesn't support elastic volumes\. Limited to a maximum size of 4 TiB\. Limited to a maximum of 1,000 IOPS\.    Monitoring storage performance  Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. The following metrics are useful for monitoring storage for your DB instance:     **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\.     **Latency** – The elapsed time between the submission of an I/O request and its completion\. This metric is reported as the average latency for a given time interval\. Amazon RDS reports read and write latency separately on 1\-minute intervals in units of seconds\. Typical values for latency are in the millisecond \(ms\)\. For example, Amazon RDS reports 2 ms as 0\.002 seconds\.     **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel’s maximum bandwidth\.     **Queue Depth** – The number of I/O requests in the queue waiting to be serviced\. These are I/O requests that have been submitted by the application but have not been sent to the device because the device is busy servicing other I/O requests\. Time spent waiting in the queue is a component of latency and service time \(not available as a metric\)\. This metric is reported as the average queue depth for a given time interval\. Amazon RDS reports queue depth in 1\-minute intervals\. Typical values for queue depth range from zero to several hundred\.    Measured IOPS values are independent of the size of the individual I/O operation\. This means that when you measure I/O performance, you should look at the throughput of the instance, not simply the number of I/O operations\.        Factors That Affect Storage Performance Both system activities and database workload can affect storage performance\.  **System activities** The following system\-related activities consume I/O capacity and might reduce database instance performance while in progress:   Multi\-AZ standby creation   Read replica creation   Changing storage types   **Database workload** In some cases your database or application design results in concurrency issues, locking, or other forms of database contention\. In these cases, you might not be able to use all the provisioned bandwidth directly\. In addition, you may encounter the following workload\-related situations:   The throughput limit of the underlying instance type is reached\.   Queue depth is consistently less than 1 because your application is not driving enough I/O operations\.   You experience query contention in the database even though some I/O capacity is unused\.   If there isn’t at least one system resource that is at or near a limit, and adding threads doesn’t increase the database transaction rate, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, you should seek the advice of a database performance tuning expert\.  **DB instance class** To get the most performance out of your Amazon RDS database instance, choose a current generation instance type with enough bandwidth to support your storage type\. For example, you can choose EBS\-optimized instances and instances with 10\-gigabit network connectivity\. For the full list of Amazon EC2 instance types that support EBS optimization, see [Instance types that support EBS optimization](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)\.   ](CHAP_Storage.md) 
+
+1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
+
+   The new value for allocated storage or for Provisioned IOPS appears in the **Status** column\. 
+
+### CLI<a name="w3ab1c15c66c12b7b3"></a>
+
+To change the Provisioned IOPS setting for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 + `--storage-type` – Set to `io1` for Provisioned IOPS\.
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
 + `--iops` – The new amount of Provisioned IOPS for the DB instance, expressed in I/O operations per second\.
 + `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately\. Use `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\.
 
-### API<a name="w3ab1c23c31c12b9"></a>
+### API<a name="w3ab1c15c66c12b7b5"></a>
 
-To modify the Provisioned IOPS settings for a DB instance, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
+To change the Provisioned IOPS settings for a DB instance, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Set the following parameters:
 + `StorageType` – Set to `io1` for Provisioned IOPS\.
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
 + `Iops` – The new IOPS rate for the DB instance, expressed in I/O operations per second\.
-+ `ApplyImmediately` – Set to `True` if you want to initiate conversion immediately\. If `False` \(the default\), the conversion is applied during the next maintenance window\.
-
-## Creating a DB Instance That Uses Provisioned IOPS Storage<a name="USER_PIOPS.Creating"></a>
-
-You can create a DB instance that uses Provisioned IOPS by setting several parameters when you launch the DB instance\. You can use the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. For more information about the settings you should use when creating a DB instance, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md), [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md), [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md), or [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
-
-### AWS Management Console<a name="w3ab1c23c31c14b5"></a>
-
-**To create a new DB instance that uses Provisioned IOPS storage**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. From the Amazon RDS console, choose **Instances**\.
-
-1. Choose **Launch DB instance**\.
-
-1.  In the Launch RDS DB Instance wizard, on the **Engine Selection** page, choose the DB engine that you want\. 
-
-1. Choose **Next**\.
-
-1. On the **Choose use case** page, choose either the **Production** or **Dev/Test** environment\.
-
-1. Choose **Next**\.
-
-1. On the **Specify DB details** page, choose **Provisioned IOPS \(SSD\)** for **Storage type**\. 
-
-1. Specify values for **Allocated Storage** and **Provisioned IOPS**\. For information about the allowed ranges and ratios, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\.   
-![\[piops2\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/piops2-new.png)
-
-1. Choose **Next**\.
-
-1. Add the details on the **Configure advanced settings** page\.
-
-1. When the settings are as you want them, choose **Launch DB instance**\.
-
-### CLI<a name="w3ab1c23c31c14b7"></a>
-
-To create a new DB instance that uses Provisioned IOPS storage, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
-+ `--storage-type` – Set to `io1` for Provisioned IOPS\.
-+ `--allocated-storage` \- Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
-
-### API<a name="w3ab1c23c31c14b9"></a>
-
-To create a new DB instance that uses Provisioned IOPS storage, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html) action\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
-+ `StorageType` – Set to `io1` for Provisioned IOPS\.
-+ `AllocatedStorage` \- Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `Iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
-
-## Creating a MySQL or MariaDB Read Replica That Uses Provisioned IOPS Storage<a name="USER_PIOPS.CreatingRR"></a>
-
-You can create a MySQL or MariaDB Read Replica that uses Provisioned IOPS storage\. You can create a Read Replica that uses Provisioned IOPS storage by using a source DB instance that uses either standard storage or Provisioned IOPS storage\.
-
-### AWS Management Console<a name="w3ab1c23c31c16b5"></a>
-
-For a complete description on how to create a Read Replica, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
-
-**To create a Read Replica DB instance that uses Provisioned IOPS storage**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose ** Instances**\.
-
-1. Choose the MySQL or MariaDB DB instance with Provisioned IOPS storage that you want to use as the source for the Read Replica, and choose **Instance actions**, **Create read replica**\.
-**Important**  
-The DB instance that you are creating a Read Replica for must have allocated storage within the range of storage for MySQL and MariaDB PIOPS \(100 GiB–16 TiB\)\. If the allocated storage for that DB instance is not within that range, then the **Provisioned IOPS** storage type isn't available as an option when creating the Read Replica\. Instead, you can set only the **GP2** or **Standard** storage types\. You can modify the allocated storage for the source DB instance to be within the range of storage for MySQL and MariaDB PIOPS before creating a Read Replica\. For more information on the PIOPS range of storage, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\. For information on modifying a MySQL DB instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\. For information on modifying a MariaDB DB instance, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
-
-1. On the **Create read replica DB instance** page, type a DB instance identifier for the Read Replica\. 
-
-1. Choose **Yes, Create read replica**\.
-
-### CLI<a name="w3ab1c23c31c16b7"></a>
-
-To create a Read Replica DB instance that uses Provisioned IOPS, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
-+ `--allocated-storage` \- Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
-
-### API<a name="w3ab1c23c31c16b9"></a>
-
-To create a Read Replica DB instance that uses Provisioned IOPS, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstanceReadReplica.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstanceReadReplica.html) action\. Specify the required parameters and include values for the following parameters that apply to Provisioned IOPS storage:
-+ `AllocatedStorage` \- Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `Iops` \- The new IOPS rate for the DB instance, expressed in I/O operations per second\.
++ `ApplyImmediately` – Set this option to `True` if you want to initiate conversion immediately\. If this option is `False` \(the default\), the modification is applied during the next maintenance window\.

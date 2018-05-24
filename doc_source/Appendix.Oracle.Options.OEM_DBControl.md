@@ -70,7 +70,7 @@ When you access either tool from you web browser, a login window appears that pr
 
 After you enable OEM Database, you can modify the Security Groups setting for the option\. 
 
-You can't modify the OEM port number after you have associated the option group with a a DB instance\. To change the OEM port number for a DB instance, do the following: 
+You can't modify the OEM port number after you have associated the option group with a DB instance\. To change the OEM port number for a DB instance, do the following: 
 
 1. Create a new option group\.
 

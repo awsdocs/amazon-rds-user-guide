@@ -12,7 +12,7 @@ CALL mysql.rds_start_replication;
 
 The `mysql.rds_start_replication` procedure must be run by the master user\.
 
-If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_start_replication` on the replica to start the replication process after you have called [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) to build the replication configuration\. For more information, see [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
+If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_start_replication` on the replica to start the replication process after you have called [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) to build the replication configuration\. For more information, see [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\.
 
 If you are configuring replication to export data to an instance of MySQL external to Amazon RDS, you call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 

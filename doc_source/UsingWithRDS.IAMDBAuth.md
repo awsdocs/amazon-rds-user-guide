@@ -36,4 +36,4 @@ We recommend the following:
 + Use IAM database authentication only for workloads that can be easily retried\.
 
 **Note**  
-For information about the maximum total connections for MySQL, see see [Maximum MySQL connections](USER_ConnectToInstance.md#USER_ConnectToInstance.max_connections)\. For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.md#AuroraMySQL.Managing.MaxConnections)\.
+For information about the maximum total connections for MySQL, see see [Maximum MySQL connections](USER_ConnectToInstance.md#USER_ConnectToInstance.max_connections)\. For information about the maximum total connections for Aurora MySQL, see [Maximum Connections to an Aurora MySQL DB Instance](AuroraMySQL.Managing.Performance.md#AuroraMySQL.Managing.MaxConnections)\.

@@ -35,7 +35,7 @@ Incompatibilities between MySQL and MariaDB include the following:
 
 1. On the **Migrate Database** page, provide additional information that RDS needs to launch the MariaDB DB instance\.
    + **DB Engine Version**: Choose the version of the MariaDB database engine that you want to use\. For more information, see [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)\. 
-   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
    + **Multi\-AZ Deployment**: Choose **Yes** to deploy your DB instance in multiple Availability Zones; otherwise, **No**\. For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
    + **DB Snapshot ID**: Type a name for the DB snapshot identifier\. 
 

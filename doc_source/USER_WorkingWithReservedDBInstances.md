@@ -57,7 +57,7 @@ You can compare usage for different reserved instance sizes by using normalized 
 | 10xlarge | 80 | 160 | 
 | 16xlarge | 128 | 256 | 
 
-For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` db instances in your account in the same region, the billing benefit is applied in full to both instances\. 
+For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same region, the billing benefit is applied in full to both instances\. 
 
 ![\[Applying a reserved DB instance in full to smaller DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-instance-flex-full.png)
 

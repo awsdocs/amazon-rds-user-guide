@@ -24,7 +24,7 @@ Amazon RDS supports using the `memcached` interface to InnoDB tables that was in
 
 You turn off the `memcached` support for an instance by modifying the instance and specifying the default option group for your MySQL version\. For more information about modifying a MySQL instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\.
 
-## MySQL memcached Security Considerations<a name="w3ab1c32c69c15c10"></a>
+## MySQL memcached Security Considerations<a name="w3ab1c30c68c15c10"></a>
 
 The `memcached` protocol does not support user authentication\. For more information about MySQL `memcached` security considerations, go to [memcached Deployment](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-using-deployment.html) and [Using memcached as a MySQL Caching Layer](http://dev.mysql.com/doc/refman/5.6/en/ha-memcached-mysql-frontend.html)\.
 
@@ -32,7 +32,7 @@ You can take the following actions to help increase the security of the `memcach
 + Specify a different port than the default of 11211 when adding the `MEMCACHED` option to the option group\.
 + Ensure that you associate the `memcached` interface with either a VPC or DB security group that limits access to known, trusted client addresses or EC2 instances\. For more information about managing security groups, see [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
 
-## MySQL memcached Connection Information<a name="w3ab1c32c69c15c12"></a>
+## MySQL memcached Connection Information<a name="w3ab1c30c68c15c12"></a>
 
 To access the `memcached` interface, an application must specify both the DNS name of the Amazon RDS instance and the `memcached` port number\. For example, if an instance has a DNS name of `my-cache-instance.cg034hpkmmjt.region.rds.amazonaws.com` and the memcached interface is using port 11212, the connection information specified in PHP would be:
 
@@ -64,11 +64,11 @@ To access the `memcached` interface, an application must specify both the DNS na
 
 1. Click the name of the option group used by the MySQL DB instance to show the option group details\. In the **Options** section, note the value of the **Port** setting for the **MEMCACHED** option\.
 
-## MySQL memcached Option Settings<a name="w3ab1c32c69c15c14"></a>
+## MySQL memcached Option Settings<a name="w3ab1c30c68c15c14"></a>
 
 Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Amazon RDS `MEMCACHED` option\.
 
-### MySQL memcached Parameters<a name="w3ab1c32c69c15c14b4"></a>
+### MySQL memcached Parameters<a name="w3ab1c30c68c15c14b4"></a>
 +  `DAEMON_MEMCACHED_R_BATCH_SIZE` \- an integer that specifies how many `memcached` read operations \(get\) to perform before doing a COMMIT to start a new transaction\. The allowed values are 1 to 4294967295, the default is 1\. The option does not take effect until the instance is restarted\.
 +  `DAEMON_MEMCACHED_W_BATCH_SIZE` \- an integer that specifies how many `memcached` write operations, such as add, set, or incr, to perform before doing a COMMIT to start a new transaction\. The allowed values are 1 to 4294967295, the default is 1\. The option does not take effect until the instance is restarted\.
 +  `INNODB_API_BK_COMMIT_INTERVAL` \- an integer that specifies how often to auto\-commit idle connections that use the InnoDB `memcached` interface\. The allowed values are 1 to 1073741824, the default is 5\. The option takes effect immediately, without requiring that you restart the instance\.
@@ -78,7 +78,7 @@ Amazon RDS exposes the MySQL `memcached` parameters as option settings in the Am
 
 Amazon RDS configures these MySQL `memcached` parameters, they cannot be modified: `DAEMON_MEMCACHED_LIB_NAME`, `DAEMON_MEMCACHED_LIB_PATH`, and `INNODB_API_ENABLE_BINLOG`\. The parameters that MySQL administrators set by using `daemon_memcached_options` are available as individual `MEMCACHED` option settings in Amazon RDS\.
 
-### MySQL `daemon_memcached_options` Parameters<a name="w3ab1c32c69c15c14b6"></a>
+### MySQL `daemon_memcached_options` Parameters<a name="w3ab1c30c68c15c14b6"></a>
 +  `BINDING_PROTOCOL` \- a string that specifies the binding protocol to use\. The allowed values are `auto`, `ascii`, or `binary`\. The default is `auto`, which means the server automatically negotiates the protocol with the client\. The option does not take effect until the instance is restarted\.
 +  `BACKLOG_QUEUE_LIMIT` \- an integer that specifies how many network connections can be waiting to be processed by `memcached`\. Increasing this limit may reduce errors received by a client that is not able to connect to the `memcached` instance, but does not improve the performance of the server\. The allowed values are 1 to 2048, the default is 1024\. The option does not take effect until the instance is restarted\.
 +  `CAS_DISABLED` \- a Boolean that enables \(1 \(true\)\) or disables \(0 \(false\)\) the use of compare and swap \(CAS\), which reduces the per\-item size by 8 bytes\. The default is 0 \(false\)\. The option does not take effect until the instance is restarted\.
@@ -86,7 +86,7 @@ Amazon RDS configures these MySQL `memcached` parameters, they cannot be modifie
 +  `CHUNK_SIZE_GROWTH_FACTOR` \- a float that controls the size of new chunks\. The size of a new chunk is the size of the previous chunk times `CHUNK_SIZE_GROWTH_FACTOR`\. The allowed values are 1 to 2, the default is 1\.25\. The option does not take effect until the instance is restarted\.
 +  `ERROR_ON_MEMORY_EXHAUSTED` \- a Boolean, when set to 1 \(true\) it specifies that `memcached` will return an error rather than evicting items when there is no more memory to store items\. If set to 0 \(false\), `memcached` will evict items if there is no more memory\. The default is 0 \(false\)\. The option does not take effect until the instance is restarted\.
 +  `MAX_SIMULTANEOUS_CONNECTIONS` \- an integer that specifies the maximum number of concurrent connections\. Setting this value to anything under 10 prevents MySQL from starting\. The allowed values are 10 to 1024, the default is 1024\. The option does not take effect until the instance is restarted\.
-+  `VERBOSITY` \- an string that specifies the level of information logged in the MySQL error log by the `memcached` service\. The default is v\. The option does not take effect until the instance is restarted\. The allowed values are:
++  `VERBOSITY` \- a string that specifies the level of information logged in the MySQL error log by the `memcached` service\. The default is v\. The option does not take effect until the instance is restarted\. The allowed values are:
   +  `v` \- Logs errors and warnings while executing the main event loop\.
   +  `vv` \- In addition to the information logged by v, also logs each client command and the response\.
   +  `vvv` \- In addition to the information logged by vv, also logs internal state transitions\.

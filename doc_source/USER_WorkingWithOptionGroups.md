@@ -9,7 +9,7 @@ Some DB engines offer additional features that make it easier to manage data and
 
 | Database Engine | Relevant Documentation | 
 | --- | --- | 
-|  `MariaDB`  |  [Appendix: Options for MariaDB Database Engine](Appendix.MariaDB.Options.md)  | 
+|  `MariaDB`  |  [Options for MariaDB Database Engine](Appendix.MariaDB.Options.md)  | 
 |  `Microsoft SQL Server`  |  [Options for the Microsoft SQL Server Database Engine](Appendix.SQLServer.Options.md)  | 
 |  `MySQL`  |  [Options for MySQL DB Instances](Appendix.MySQL.Options.md)  | 
 |  `Oracle`  |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
@@ -106,8 +106,8 @@ For Windows:
 ```
 aws rds create-option-group ^
     --option-group-name testoptiongroup ^
-    -–engine-name oracle-ee ^
-    -–major-engine-version 12.1 ^
+    --engine-name oracle-ee ^
+    --major-engine-version 12.1 ^
     --option-group-description "Test option group"
 ```
 
@@ -448,7 +448,7 @@ For Linux, OS X, or Unix:
   
 aws rds remove-option-from-option-group \
     --option-group-name testoptiongroup \
-    -–options OEM \
+    --options OEM \
     --apply-immediately
 ```
 For Windows:  
@@ -456,7 +456,7 @@ For Windows:
 ```
 aws rds remove-option-from-option-group ^
     --option-group-name testoptiongroup ^
-    -–options OEM ^
+    --options OEM ^
     --apply-immediately
 ```
 Command output is similar to the following:  

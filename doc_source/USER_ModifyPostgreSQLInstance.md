@@ -32,7 +32,7 @@ To modify a PostgreSQL DB instance, use the AWS CLI command [http://docs.aws.ama
 The following code modifies `pgdbinstance` by setting the backup retention period to 1 week \(7 days\) and disabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.  
 
 **Parameters**
-+ `--db-instance-identifier`—the name of the db instance
++ `--db-instance-identifier`—the name of the DB instance
 + `--backup-retention-period`—the number of days to retain automatic backups\.
 + `--no-auto-minor-version-upgrade`—disallow automatic minor version upgrades\. To allow automatic minor version upgrades, use `--auto-minor-version-upgrade`\.
 + `--no-apply-immediately`—apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\.
@@ -63,7 +63,7 @@ To modify a PostgreSQL DB instance, use the [http://docs.aws.amazon.com/AmazonRD
 The following code modifies `pgdbinstance` by setting the backup retention period to 1 week \(7 days\) and disabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.  
 
 **Parameters**
-+ `DBInstanceIdentifier`—the name of the db instance
++ `DBInstanceIdentifier`—the name of the DB instance
 + `BackupRetentionPeriod`—the number of days to retain automatic backups\.
 + `AutoMinorVersionUpgrade`=`false`—disallow automatic minor version upgrades\. To allow automatic minor version upgrades, set the value to `true`\.
 + `ApplyImmediately`=`false`—apply changes during the next maintenance window\. To apply changes immediately, set the value to `true`\.
@@ -94,7 +94,7 @@ The following table contains details about which settings you can modify, which 
 
 | Setting | Setting Description | When the Change Occurs | Downtime Notes | 
 | --- | --- | --- | --- | 
-|  Allocated Storage  |  The storage, in gigabytes, that you want to allocate for your DB instance\. You can only increase the allocated storage, you can't reduce the allocated storage\.  You can't modify allocated storage if the DB instance status is `storage-optimization` or if the allocated storage for the DB instance has been modified in the last six hours\. The maximum storage allowed depends on the storage type\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   |  If **Apply Immediately** is set to true, the change occurs immediately\.  If **Apply Immediately** is set to false, the change occurs during the next maintenance window\.   |  No downtime\. Performance may be degraded during the change\.   | 
+|  Allocated Storage  |  The storage, in gigabytes, that you want to allocate for your DB instance\. You can only increase the allocated storage, you can't reduce the allocated storage\.  You can't modify allocated storage if the DB instance status is `storage-optimization` or if the allocated storage for the DB instance has been modified in the last six hours\. The maximum storage allowed depends on the storage type\. For more information, see [DB instance storage](CHAP_Storage.md)\.   |  If **Apply Immediately** is set to true, the change occurs immediately\.  If **Apply Immediately** is set to false, the change occurs during the next maintenance window\.   |  No downtime\. Performance may be degraded during the change\.   | 
 |  Auto Minor Version Upgrade  |  If you want your DB instance to receive minor engine version upgrades automatically when they become available, click **Yes**\. Upgrades are installed only during your scheduled maintenance window\.   | – | – | 
 |  Backup Retention Period  |  The number of days that automatic backups are retained\. To disable automatic backups, set the backup retention period to 0\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   |  If **Apply Immediately** is set to true, the change occurs immediately\.  If **Apply Immediately** is set to false and you change the setting from a non\-zero value to another non\-zero value, the change is applied asynchronously, as soon as possible\. Otherwise, the change occurs during the next maintenance window\.   |  An outage occurs if you change from 0 to a non\-zero value, or from a non\-zero value to 0\.   | 
 |  Backup Window  |  The time range during which automated backups of your databases occur\. The backup window is a start time in Universal Coordinated Time \(UTC\), and a duration in hours\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   |  The change is applied asynchronously, as soon as possible\.   | – | 
