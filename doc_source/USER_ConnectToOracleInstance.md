@@ -96,7 +96,7 @@ You can use a utility like SQL\*Plus to connect to an Amazon RDS DB instance run
 To connect to your DB instance, you need its DNS name and port number\. For information about finding the DNS name and port number for a DB instance, see [Finding the Endpoint of Your DB Instance](#USER_Endpoint)\.
 
 **Example To connect to an Oracle DB instance using SQL\*Plus**  
-In the following examples, substitute the DNS name for your DB instance, and then include the port number and the Oracle SID\. The SID value is the name of the DB instance's database that you specified when you created the DB instance, and not the name of the DB instance\.   
+In the following examples, substitute the DNS name for your DB instance, and then include the port number and the Oracle SID\. The SID value is the name of the DB instance's database that you specified when you created the DB instance, and not the name of the DB instance\. For **Username**, replace **mydbusr** to match the username of the database administrator for the DB instance\. After that you will be prompted for the database **password**\.
 For Linux, OS X, or Unix:  
 
 ```
