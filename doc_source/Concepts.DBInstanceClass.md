@@ -17,7 +17,7 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), EU \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\. 
 + **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer a better price per GiB of RAM than the db\.r3 instance classes\. 
-+ **db\.r3** – Previous\-generation instance classes that provide memory optimization and more computing capacity than the db\.m2 instance classes\. The db\.r3 instances classes are not available in the South America \(São Paulo\) region\. 
++ **db\.r3** – Previous\-generation instance classes that provide memory optimization and more computing capacity than the db\.m2 instance classes\. The db\.r3 instances classes are not available in the South America \(São Paulo\), or EU \(Paris\) regions\. 
 + **db\.m2** – Previous\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
