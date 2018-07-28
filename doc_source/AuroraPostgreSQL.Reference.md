@@ -111,7 +111,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `default_transaction_isolation` | Yes | 
 | `default_transaction_read_only` | Yes | 
 | `effective_cache_size` | Yes | 
-| `effective_io_concurrency` | Yes | 
+| `effective_io_concurrency` | No | 
 | `enable_bitmapscan` | Yes | 
 | `enable_hashagg` | Yes | 
 | `enable_hashjoin` | Yes | 
@@ -137,7 +137,7 @@ The following table shows all of the parameters that apply to a specific DB inst
 | `gin_fuzzy_search_limit` | Yes | 
 | `gin_pending_list_limit` | Yes | 
 | `hba_file` | No | 
-| `hot_standby_feedback` | Yes | 
+| `hot_standby_feedback` | No | 
 | `ident_file` | No | 
 | `idle_in_transaction_session_timeout` | Yes | 
 | `join_collapse_limit` | Yes | 
