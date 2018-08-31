@@ -13,7 +13,6 @@ The cost for using Enhanced Monitoring varies depends on several factors:
 ## Enhanced Monitoring Availability<a name="USER_Monitoring.OS.Availability"></a>
 
 Enhanced Monitoring is available for the following database engines:
-+ Amazon Aurora
 + MariaDB
 + Microsoft SQL Server
 + MySQL version 5\.5 or later
@@ -59,7 +58,7 @@ To create the appropriate IAM role to permit Amazon RDS to communicate with the 
 You can enable Enhanced Monitoring when you create a DB instance or Read Replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you do not need to reboot your DB instance for the change to take effect\. 
 
 You can enable Enhanced Monitoring in the RDS console when you do one of the following actions: 
-+ **Launch a DB Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
++ **Create a Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
 + **Create Read Replica** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
 + **Modify a DB Instance** – You can enable Enhanced Monitoring in the **Modify DB Instance** page\.
 
@@ -129,14 +128,14 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w3ab1c19c23c17b7"></a>
+### Available OS Metrics<a name="w4aac19c13c19b7"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for Amazon Aurora, MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w3ab1c19c23c17b7b5"></a>
+#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w4aac19c13c19b7b5"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w3ab1c19c23c17b7b7"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w4aac19c13c19b7b9"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

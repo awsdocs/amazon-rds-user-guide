@@ -36,6 +36,7 @@ Amazon RDS supports an in\-place upgrade from the following:
 + A PostgreSQL 9\.3\.x DB instance to a PostgreSQL 9\.4\.x DB instance
 + A PostgreSQL 9\.4\.x DB instance to a PostgreSQL 9\.5\.x DB instance
 + A PostgreSQL 9\.5\.x DB instance to a PostgreSQL 9\.6\.x DB instance
++ A PostgreSQL 9\.6\.x DB instance to a PostgreSQL 10\.x DB instance
 
  Amazon RDS uses the `pg_upgrade` utility found at [http://www\.postgresql\.org/docs/9\.4/static/pgupgrade\.html](http://www.postgresql.org/docs/9.4/static/pgupgrade.html) to safely upgrade your instance\. 
 
@@ -196,5 +197,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.PostgreSQL.Related"></a>
-+ [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
++ [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

@@ -170,4 +170,4 @@ The following table contains details about settings that you choose when you cre
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 + [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)
 + [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)

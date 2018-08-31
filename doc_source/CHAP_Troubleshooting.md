@@ -11,7 +11,6 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 + [Amazon RDS DB Instance Running Out of Storage](#CHAP_Troubleshooting.Storage)
 + [Amazon RDS Insufficient DB Instance Capacity](#CHAP_Troubleshooting.Capacity)
 + [Amazon RDS MySQL and MariaDB Issues](#CHAP_Troubleshooting.MySQL)
-+ [Amazon Aurora Issues](#CHAP_Troubleshooting.Aurora)
 + [Amazon RDS Oracle GoldenGate Issues](#CHAP_Troubleshooting.Oracle.GoldenGate)
 + [Cannot Connect to Amazon RDS SQL Server DB Instance](#CHAP_Troubleshooting.SQLServer.Connect)
 + [Cannot Connect to Amazon RDS PostgreSQL DB Instance](#CHAP_Troubleshooting.PostgreSQL.Connect)
@@ -20,7 +19,9 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
 When you cannot connect to a DB instance, the following are common causes:
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about setting up a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
++ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\.
+
+  For more information about setting up a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
 + Your DB instance is still being created and is not yet available\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\. 
 
@@ -55,7 +56,9 @@ If Telnet actions return success, your security group is properly configured\.
 
 ### Troubleshooting Connection Authentication<a name="CHAP_Troubleshooting.Connecting.Authorization"></a>
 
-If you can connect to your DB instance but you get authentication errors, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance; for more information, see one of the following topics:
+If you can connect to your DB instance but you get authentication errors, you might want to reset the master user password for the DB instance\. You can do this by modifying the RDS instance\. 
+
+For more information about modifying a DB instance, see one of the following topics:
 + [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
@@ -63,7 +66,9 @@ If you can connect to your DB instance but you get authentication errors, you mi
 
 ## Amazon RDS Security Issues<a name="CHAP_Troubleshooting.Security"></a>
 
-To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create IAM users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\. For more information on creating IAM users, see [Create an IAM User](CHAP_SettingUp.md#CHAP_SettingUp.IAM)\. 
+To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create IAM users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
+
+For more information on creating IAM users, see [Create an IAM User](CHAP_SettingUp.md#CHAP_SettingUp.IAM)\.
 
 ### Error Message "Failed to retrieve account attributes, certain console functions may be impaired\."<a name="CHAP_Troubleshooting.Security.AccountAttributes"></a>
 
@@ -71,13 +76,17 @@ There are several reasons you would get this error; it could be because your acc
 
 ## Resetting the DB Instance Owner Role Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 
-You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. For more information about modifying a SQL Server DB instance, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
+You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\.
+
+For more information about modifying a SQL Server DB instance, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
 
 ## Amazon RDS DB Instance Outage or Reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
  A DB instance outage can occur when a DB instance is rebooted, when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you manually reboot your DB instance or when you change a DB instance setting that requires a reboot before it can take effect\.   
 
-When you modify a setting for a DB instance, you can determine when the change is applied by using the **Apply Immediately** setting\. To see a table that shows DB instance actions and the effect that setting the **Apply Immediately** value has, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\.  
+When you modify a setting for a DB instance, you can determine when the change is applied by using the **Apply Immediately** setting\.
+
+To see a table that shows DB instance actions and the effect that setting the **Apply Immediately** value has, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\.
 
  A DB instance reboot only occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately or it can occur during the DB instance's maintenance window\. 
 
@@ -96,7 +105,7 @@ When you change a static parameter in a DB parameter group, the change will not 
 
 If you change a parameter in a DB parameter group but you don't see the changes take effect, you most likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately; when you change a static parameter, the change won't take effect until you reboot the DB instance associated with the parameter group\. 
 
-You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API action \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API action \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Amazon RDS DB Instance Running Out of Storage<a name="CHAP_Troubleshooting.Storage"></a>
 
@@ -186,11 +195,13 @@ Note that you can receive notifications when your storage space is exhausted usi
 
 If you get an `InsufficientDBInstanceCapacity` error when you try to modify a DB instance class, it might be because the DB instance is on the EC2\-Classic platform and is therefore not in a VPC\. Some DB instance classes require a VPC\. For example, if you are on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon Elastic Compute Cloud instance types that are only available in a VPC, see [Instance Types Available Only in a VPC](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\.
 
-To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\.
+To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\.
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\. For information about troubleshooting instance capacity issues for Amazon EC2, see [Troubleshooting Instance Capacity](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-capacity.html) in the *Amazon Elastic Compute Cloud User Guide*\.
 
 ## Amazon RDS MySQL and MariaDB Issues<a name="CHAP_Troubleshooting.MySQL"></a>
+
+You can diagnose and correct problems with MySQL and MariaDB DB instances\.
 
 ### Index Merge Optimization Returns Wrong Results<a name="CHAP_Troubleshooting.MySQL.IndexMergeOptimization"></a>
 
@@ -280,7 +291,7 @@ The following steps can help resolve your replication error:
 + If you encounter a temporary performance issue due to high DML load, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the Read Replica\. Doing this can help the Read Replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
 + You can delete the Read Replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old Read Replica\.
 
-If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL or MariaDB Read Replica Problem](USER_ReadRepl.md#USER_ReadRepl.Troubleshooting)\.
+If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
 ### Creating Triggers with Binary Logging Enabled Requires SUPER Privilege<a name="CHAP_Troubleshooting.MySQL.CreatingTriggers"></a>
 
@@ -409,20 +420,6 @@ To resolve this issue, set the following parameter values:
 + `innodb_support_xa = 1`
 + `innodb_flush_log_at_trx_commit = 1`
 
-## Amazon Aurora Issues<a name="CHAP_Troubleshooting.Aurora"></a>
-
-### No Space Left on Device Error<a name="CHAP_Troubleshooting.Aurora.NoSpaceLeft"></a>
-
-You might encounter the following error message from Amazon Aurora:
-
-```
-ERROR 3 (HY000): Error writing file '/rdsdbdata/tmp/XXXXXXXX' (Errcode: 28 - No space left on device)
-```
-
-Each DB instance in an Amazon Aurora DB cluster uses local SSD storage to store temporary tables for a session\. This local storage for temporary tables does not autogrow like the Aurora cluster volume\. Instead, the amount of local storage is limited\. The limit is based on the DB instance class for DB instances in your DB cluster\. To find the amount of local SSD storage for memory optimized instance types, go to [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/#memory-optimized)\.
-
-If your workload cannot be modified to reduce the amount temporary storage required, then you can scale your DB instances up to use a DB instance class that has more local SSD storage\. 
-
 ## Amazon RDS Oracle GoldenGate Issues<a name="CHAP_Troubleshooting.Oracle.GoldenGate"></a>
 
 ### Retaining Logs for Sufficient Time<a name="CHAP_Troubleshooting.Oracle.GoldenGate.Logs"></a>
@@ -438,7 +435,7 @@ The source database must retain archived redo logs\. The duration for log retent
 ## Cannot Connect to Amazon RDS SQL Server DB Instance<a name="CHAP_Troubleshooting.SQLServer.Connect"></a>
 
 When you have problems connecting to a DB instance using SQL Server Management Studio, the following are some common causes: 
-+ The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the instance's security group are not in sync\. If you use your DB instance’s endpoint and port with Microsoft SQL Server Management Studio and cannot connect, the problem is most likely the egress or ingress rules on your firewall\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about security groups, see [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
++ The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the instance's security group are not in sync\. If you use your DB instance’s endpoint and port with Microsoft SQL Server Management Studio and cannot connect, the problem is most likely the egress or ingress rules on your firewall\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about security groups, see [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
 + Your DB instance is still being created and is not yet available\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\.
 

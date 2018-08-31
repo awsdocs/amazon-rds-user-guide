@@ -47,22 +47,23 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 ## Creating Your Database Backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
 Use the Percona XtraBackup software to create your backup\. Amazon RDS supports backup files created with the following versions of the Percona XtraBackup software: 
++ For MySQL 5\.7, use Percona XtraBackup version 2\.4 or later\.
 + For MySQL 5\.6, use Percona XtraBackup version 2\.3\.
 
-We recommend that if you don't already have Percona XtraBackup installed, you use the latest version of the software available\. You can download Percona XtraBackup from [the Percona website](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
+We recommend that if you don't already have Percona XtraBackup installed, you use the latest version of the software available\. You can download Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
 
 You can create a full backup of your MySQL database files using Percona XtraBackup\. Alternatively, if you already use Percona XtraBackup to back up your MySQL database files, you can upload your existing full and incremental backup directories and files\. 
 
-For more information about backing up your database with Percona XtraBackup, see [Percona XtraBackup \- Documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/index.html) and [The innobackupex Script](https://www.percona.com/doc/percona-xtrabackup/2.1/innobackupex/innobackupex_script.html) on the Percona website\. 
+For more information about backing up your database with Percona XtraBackup, see [Percona XtraBackup \- Documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/index.html) and [ The xtrabackup Binary](https://www.percona.com/doc/percona-xtrabackup/LATEST/xtrabackup_bin/xtrabackup_binary.html) on the Percona website\. 
 
 ### Creating a Full Backup With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Full"></a>
 
-To create a full backup of your MySQL database files that can be restored from Amazon S3, use the Percona XtraBackup utility \(`innobackupex`\) to back up your database\. 
+To create a full backup of your MySQL database files that can be restored from Amazon S3, use the Percona XtraBackup utility \(`xtrabackup`\) to back up your database\. 
 
-For example, the following command creates a backup of a MySQL database and stores the files in the folder `/on-premises/s3-restore/backup` folder\. 
+For example, the following command creates a backup of a MySQL database and stores the files in the folder `/s3-restore/backup` folder\. 
 
 ```
-innobackupex --user=<myuser> --password=<password> --no-timestamp /on-premises/s3-restore/backup
+xtrabackup --user=<myuser> --password=<password> /s3-restore/backup
 ```
 
 If you want to compress your backup into a single file \(which can be split later, if needed\), you can save your backup in one of the following formats: 
@@ -73,30 +74,30 @@ If you want to compress your backup into a single file \(which can be split late
 The following command creates a backup of your MySQL database split into multiple Gzip files\. 
 
 ```
-innobackupex --user=<myuser> --password=<password> --stream=tar \
-   /on-premises/s3-restore/backup | gzip - | split -d --bytes=500MB \
-   - /on-premises/s3-restore/backup/backup.tar.gz
+xtrabackup --user=<myuser> --password=<password> --stream=tar \
+   /s3-restore/backup | gzip - | split -d --bytes=500MB \
+   - /s3-restore/backup/backup.tar.gz
 ```
 
 The following command creates a backup of your MySQL database split into multiple tar files\. 
 
 ```
-innobackupex --user=<myuser> --password=<password> --stream=tar \
-   /on-premises/s3-restore/backup | split -d --bytes=500MB \
-   - /on-premises/s3-restore/backup/backup.tar
+xtrabackup --user=<myuser> --password=<password> --stream=tar \
+   /s3-restore/backup | split -d --bytes=500MB \
+   - /s3-restore/backup/backup.tar
 ```
 
 The following command creates a backup of your MySQL database split into multiple xbstream files\. 
 
 ```
-innobackupex --stream=xbstream  \
-   /on-premises/s3-restore/backup | split -d --bytes=500MB \
-   - /on-premises/s3-restore/backup/backup.xbstream
+xtrabackup --stream=xbstream --user=myuser --password=<password>  \
+   /s3-restore/backup | split -d --bytes=500MB \
+   - /s3-restore/backup/backup.xbstream
 ```
 
 ### Using Incremental Backups With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Incr"></a>
 
-If you already use Percona XtraBackup to perform full and incremental backups of your MySQL database files, you don't need to create a full backup and upload the backup files to Amazon S3\. Instead, you can save a significant amount of time by copying your existing backup directories and files to your Amazon S3 bucket\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental Backups with innobackupex](https://www.percona.com/doc/percona-xtrabackup/2.1/innobackupex/incremental_backups_innobackupex.html)\. 
+If you already use Percona XtraBackup to perform full and incremental backups of your MySQL database files, you don't need to create a full backup and upload the backup files to Amazon S3\. Instead, you can save a significant amount of time by copying your existing backup directories and files to your Amazon S3 bucket\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental Backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\. 
 
 When copying your existing full and incremental backup files to an Amazon S3 bucket, you must recursively copy the contents of the base directory\. Those contents include the full backup and also all incremental backup directories and files\. This copy must preserve the directory structure in the Amazon S3 bucket\. Amazon RDS iterates through all files and directories\. Amazon RDS uses the `xtrabackup-checkpoints` file that is included with each incremental backup to identify the base directory, and to order incremental backups by log sequence number \(LSN\) range\. 
 
@@ -104,11 +105,11 @@ When copying your existing full and incremental backup files to an Amazon S3 buc
 
 Amazon RDS consumes your backup files based on the file name\. Name your backup files with the appropriate file extension based on the file format—for example, `.xbstream` for files stored using the Percona xbstream format\. 
 
-Amazon RDS consumes your backup files in alphabetical order and also in natural number order\. Use the `split` option when you issue the `innobackupex` command to ensure that your backup files are written and named in the proper order\. 
+Amazon RDS consumes your backup files in alphabetical order and also in natural number order\. Use the `split` option when you issue the `xtrabackup` command to ensure that your backup files are written and named in the proper order\. 
 
-Amazon RDS doesn't support partial backups created using Percona XtraBackup\. You can't use the `--include`, `--tables-file`, or `--databases` options to create a partial backup when you back up the source files for your database\. 
+Amazon RDS doesn't support partial backups created using Percona XtraBackup\. You can't use the following options to create a partial backup when you back up the source files for your database: `--tables`, `--tables-exclude`, `--tables-file`, `--databases`, `--databases-exclude`, or `--databases-file`\.
 
-Amazon RDS supports incremental backups created using Percona XtraBackup with or without the `--no-timestamp` option\. We recommend that you use the `--no-timestamp` option to reduce the depth of the directory structure for your incremental backup\. 
+Amazon RDS supports incremental backups created using Percona XtraBackup\. For more information about creating incremental backups using Percona XtraBackup, see [Incremental Backup](https://www.percona.com/doc/percona-xtrabackup/LATEST/backup_scenarios/incremental_backup.html)\.
 
 ## Creating an IAM Role Manually<a name="MySQL.Procedural.Importing.Enabling.IAM"></a>
 

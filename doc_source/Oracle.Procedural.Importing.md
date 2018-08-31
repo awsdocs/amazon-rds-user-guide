@@ -23,7 +23,9 @@ Oracle Data Pump is a long\-term replacement for the Oracle Export/Import utilit
 + Import data from an Amazon RDS Oracle DB instance to an Oracle database \(either on\-premises or Amazon EC2 instance\)
 + Import data between Amazon RDS Oracle DB instances \(for example, to migrate data from EC2\-Classic to VPC\)
 
-To download Oracle Data Pump utilities, go to [http://www\.oracle\.com/technetwork/database/features/instant\-client](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)\. 
+To download Oracle Data Pump utilities, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\. 
+
+For compatibility considerations when migrating between versions of Oracle Database, see [the Oracle documentation](https://docs.oracle.com/database/121/SUTIL/GUID-BAA3B679-A758-4D55-9820-432D9EB83C68.htm#SUTIL110)\. 
 
  The following process uses Oracle Data Pump and the [DBMS\_FILE\_TRANSFER](https://docs.oracle.com/database/121/ARPLS/d_ftran.htm#ARPLS095) package\. The process connects to a source Oracle instance \(which can be an on\-premises or Amazon EC2 instance, or an Amazon RDS Oracle DB instance\) and exports data using the [DBMS\_DATAPUMP](https://docs.oracle.com/database/121/ARPLS/d_datpmp.htm#ARPLS356) package\. It then uses the DBMS\_FILE\_TRANSFER\.PUT\_FILE method to copy the dump file from the Oracle instance to the DATA\_PUMP\_DIR directory on the target Amazon RDS Oracle DB instance that is connected using a database link\. The final step imports the data from the copied dump file into the Amazon RDS Oracle DB instance using the DBMS\_DATAPUMP package\. 
 
@@ -185,7 +187,7 @@ exec utl_file.fremove('DATA_PUMP_DIR','sample_copied.dmp');
 
 The Oracle Export/Import utilities are best suited for migrations where the data size is small and data types such as binary float and double are not required\. The import process creates the schema objects so you do not need to run a script to create them beforehand, making this process well suited for databases with small tables\. The following example demonstrates how these utilities can be used to export and import specific tables\. 
 
-To download Oracle export and import utilities, go to [http://www\.oracle\.com/technetwork/database/features/instant\-client](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)\. 
+To download Oracle export and import utilities, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\. 
 
 Export the tables from the source database using the command below\. Substitute username/password as appropriate\. 
 
@@ -206,7 +208,7 @@ There are other variations of the Export and Import commands that might be bette
 
 Oracle SQL\*Loader is well suited for large databases that have a limited number of objects in them\. Since the process involved in exporting from a source database and loading to a target database is very specific to the schema, the following example creates the sample schema objects, exports from a source, and then loads it into a target database\. 
 
-To download Oracle SQL\*Loader, go to [http://www\.oracle\.com/technetwork/database/features/instant\-client](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)\. 
+To download Oracle SQL\*Loader, go to [http://www\.oracle\.com/technetwork/database/enterprise\-edition/downloads/index\.html](http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)\. 
 
 1. Create a sample source table using the command below\.
 

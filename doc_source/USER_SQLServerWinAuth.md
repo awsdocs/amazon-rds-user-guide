@@ -72,7 +72,7 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 
 **To create a directory with AWS Directory Service for Microsoft Active Directory**
 
-1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservice/) navigation pane, select **Directories** and choose** Set up Directory**\. 
+1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservicev2/) navigation pane, select **Directories** and choose** Set up Directory**\. 
 
 1.  Choose **Create AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option currently supported for use with Amazon RDS\. 
 
@@ -210,4 +210,4 @@ You can restore a DB snapshot or do a point\-in\-time restore for a SQL Server D
 
 ## Related Topics<a name="USER_SQLServerWinAuth.related"></a>
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-+ [Security in Amazon RDS](UsingWithRDS.md)
++ [Configuring Security in Amazon RDS](UsingWithRDS.md)

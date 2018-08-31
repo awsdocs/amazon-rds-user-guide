@@ -1,6 +1,6 @@
 # Replication with a MySQL or MariaDB Instance Running External to Amazon RDS<a name="MySQL.Procedural.Importing.External.Repl"></a>
 
-You can set up replication between an Amazon RDS MySQL or MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\. Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance](MariaDB.Procedural.Importing.md#MariaDB.Procedural.Replication.GTID) to set up GTID\-based replication\.
+You can set up replication between an Amazon RDS MySQL or MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\. Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
 
  Be sure to follow these guidelines when you set up an external replication master and a replica on Amazon RDS: 
 + Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
@@ -10,7 +10,7 @@ You can set up replication between an Amazon RDS MySQL or MariaDB DB instance an
 **Note**  
 The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS database\.
 
-## Start Replication Between an External Master Instance and a DB Instance on Amazon RDS<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
+## Start replication between an external master instance and a DB instance on Amazon RDS<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
 
 1. Make the source MySQL or MariaDB instance read\-only:
 
@@ -19,7 +19,7 @@ The permissions required to start replication on an Amazon RDS DB instance are r
    mysql> SET GLOBAL read_only = ON;
    ```
 
-1. Run the `SHOW MASTER STATUS` command on the source MySQL or MariaDB instance to determine the binlog location\. You receive output similar to the following example\. 
+1. Run the `SHOW MASTER STATUS` command on the source MySQLor MariaDB instance to determine the binlog location\. You will receive output similar to the following example: 
 
    ```
    File                        Position  
@@ -59,13 +59,10 @@ The permissions required to start replication on an Amazon RDS DB instance are r
            -u <RDS_user_name> ^
            -p<RDS_password>
    ```
-**Important**  
-Make sure that there is not a space between the `-p` option and the entered password\.
 **Note**  
-Exclude the following schemas from the dump file: `sys`, `performance_schema`, and `information_schema`\. The `mysqldump` utility excludes these schemas by default\.
-If you need to migrate users and privileges, consider using a tool that generates the data control language \(DCL\) for recreating them, such as the [pt\-show\-grants](https://www.percona.com/doc/percona-toolkit/LATEST/pt-show-grants.html) utility\.
+Make sure there is not a space between the `-p` option and the entered password\. 
 
-   Use the `--host`, `--user (-u)`, `--port` and `-p` options in the `mysql` command to specify the hostname, user name, port, and password to connect to your Amazon RDS DB instance\. The host name is the DNS name from the Amazon RDS DB instance endpoint, for example, `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
+   Use the `--host`, `--user (-u)`, `--port` and `-p` options in the `mysql` command to specify the hostname, username, port, and password to connect to your Amazon RDS DB instance\. The host name is the DNS name from the Amazon RDS DB instance endpoint, for example, `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 
 1. Make the source MySQL or MariaDB instance writeable again:
 
@@ -76,7 +73,7 @@ If you need to migrate users and privileges, consider using a tool that generate
 
    For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command:
 
@@ -86,7 +83,7 @@ If you need to migrate users and privileges, consider using a tool that generate
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
 
-1. Using the client of your choice, connect to the external instance and create a user to use for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example: 
+1. Using the client of your choice, connect to the external instance and create a user that will be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example: 
 
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
@@ -104,6 +101,8 @@ If you need to migrate users and privileges, consider using a tool that generate
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306,
        'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
    ```
+**Note**  
+On Amazon RDS MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
 
 1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication:
 

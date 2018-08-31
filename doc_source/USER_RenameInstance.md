@@ -23,7 +23,7 @@ The most common reasons for renaming a DB instance are that you are promoting a 
 
 If you delete the old master DB instance, you are responsible for deleting any unwanted DB snapshots of the old master instance\. 
 
-For information about promoting a Read Replica, see [Promoting a Read Replica to Be a DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
+For information about promoting a Read Replica, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
 ## AWS Management Console<a name="USER_RenameInstance.CON"></a>
 

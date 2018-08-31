@@ -47,5 +47,5 @@ To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](h
 ```
 
 ## Related Topics<a name="USER_StartInstance.Related"></a>
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
-+ [Rebooting a DB Instance](USER_RebootInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)
++ [Rebooting a DB Instance ](USER_RebootInstance.md)

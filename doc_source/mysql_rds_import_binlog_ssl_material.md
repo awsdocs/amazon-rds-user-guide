@@ -27,7 +27,7 @@ Prepare for encrypted replication before you run this procedure:
 For more information, see [ Creating SSL Certificates and Keys Using openssl](https://dev.mysql.com/doc/refman/5.7/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
 
 **Important**  
-After you prepare for encrypted replication, use an SSL connection to run this procedure\. The client key must not be transferred across an insecure connection\. For information about connecting to an Aurora MySQL DB cluster with SSL, see [Using SSL with Aurora MySQL DB Clusters](AuroraMySQL.Security.md#AuroraMySQL.Security.SSL)\.
+After you prepare for encrypted replication, use an SSL connection to run this procedure\. The client key must not be transferred across an insecure connection\. 
 
 This procedure imports SSL information from an external MySQL database into an Aurora MySQL DB cluster\. The SSL information is in \.pem format files that contain the SSL information for the Aurora MySQL DB cluster\. During encrypted replication, the Aurora MySQL DB cluster acts a client to the MySQL database server\. The certificates and keys for the Aurora MySQL client are in files in \.pem format\.
 
@@ -72,8 +72,10 @@ BQoQzd8v7yeb7OzlPnWOyN0qFU0XA246RA8QFYiCNYwI3f05p6KLxEXAMPLE
 -----END RSA PRIVATE KEY-----\n"}');
 ```
 
+**Note**  
+For information about using Amazon Aurora, see the [http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
+
 ## Related Topics<a name="mysql_rds_import_binlog_ssl_material.related"></a>
-+ [Migrating Data from MySQL by Using an Amazon S3 Bucket](AuroraMySQL.Migrating.ExtMySQL.md#AuroraMySQL.Migrating.ExtMySQL.S3)
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

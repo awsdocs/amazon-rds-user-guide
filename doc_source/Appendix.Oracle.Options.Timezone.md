@@ -21,7 +21,7 @@ Amazon RDS supports the following settings for the time zone option\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Time Zone** |  One of the available time zones\. For the full list, see [Available Time Zones](#Appendix.Oracle.Options.Timezone.Zones)\.   |  The new time zone for your DB instance\.   | 
+| `TIME_ZONE` |  One of the available time zones\. For the full list, see [Available Time Zones](#Appendix.Oracle.Options.Timezone.Zones)\.   |  The new time zone for your DB instance\.   | 
 
 ## Adding the Time Zone Option<a name="Appendix.Oracle.Options.Timezone.Add"></a>
 

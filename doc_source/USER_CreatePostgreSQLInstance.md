@@ -117,4 +117,4 @@ To create a PostgreSQL DB instance, use the Amazon RDS API[http://docs.aws.amazo
 ## Related Topics<a name="USER_CreatePostgreSQLInstance.related"></a>
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
 +  [DB Instance Class](Concepts.DBInstanceClass.md) 
-+  [Deleting a DB Instance](USER_DeleteInstance.md) 
++  [Deleting a DB Instance ](USER_DeleteInstance.md) 

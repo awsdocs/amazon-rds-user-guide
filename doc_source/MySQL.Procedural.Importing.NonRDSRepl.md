@@ -172,7 +172,7 @@ Older AWS accounts can also launch instances in Amazon EC2\-Classic mode\. In th
 
 1. Open the [Amazon EC2 Management Console](https://console.aws.amazon.com/ec2) and select the AWS Region to contain both your Amazon EC2 instance and your Amazon RDS DB instance\. Launch an Amazon EC2 instance using the VPC, subnet, and security group that you created in Step 1\. Ensure that you select an instance type with enough storage for your database backup file when it is uncompressed\. For details on Amazon EC2 instances, see [Getting Started with Amazon EC2 Linux Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) in the *Amazon Elastic Compute Cloud User Guide for Linux*\.
 
-1.  To connect to your Amazon RDS DB instance from your Amazon EC2 instance, you need to edit your VPC security group, and add an inbound rule specifying the private IP address of your EC2 instance\. You can find the private IP address on the **Details** tab of the **Instance** pane in the EC2 console window\. To edit the VPC security group and add an inbound rule, choose **Security Groups** in the EC2 console navigation pane, choose your security group, and then add an inbound rule for MySQL/Aurora specifying the private IP address of your EC2 instance\. To learn how to add an inbound rule to a VPC security group, see [Adding and Removing Rules](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html#AddRemoveRules)\.
+1.  To connect to your Amazon RDS DB instance from your Amazon EC2 instance, you need to edit your VPC security group, and add an inbound rule specifying the private IP address of your EC2 instance\. You can find the private IP address on the **Details** tab of the **Instance** pane in the EC2 console window\. To edit the VPC security group and add an inbound rule, choose **Security Groups** in the EC2 console navigation pane, choose your security group, and then add an inbound rule for MySQL/Aurora specifying the private IP address of your EC2 instance\. To learn how to add an inbound rule to a VPC security group, see [Adding and Removing Rules](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\.
 
 1. Copy your compressed database backup file from your local system to your Amazon EC2 instance\. Use `chmod` if necessary to make sure you have write permission for the target directory of the Amazon EC2 instance\. You can use `scp` or an SSH client to copy the file\. The following is an example:
 
@@ -314,7 +314,7 @@ The permissions required to start replication on an Amazon RDS DB instance are r
 
 Earlier, you enabled binary logging and set a unique server ID for your source database\. Now you can set up your Amazon RDS DB instance as a replica with your live database as the replication master\.
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your source instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command:
 
@@ -389,7 +389,7 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
 
 ### To Redirect Your Live Application to Your Amazon RDS MySQL or MariaDB DB Instance and Stop Replication<a name="MySQL.Procedural.Importing.Redirect.App.Procedure"></a>
 
-1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
 1. Verify that the Seconds\_Behind\_Master field in the [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the replication master:
 
@@ -397,13 +397,15 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
    SHOW SLAVE STATUS;
    ```
 
+1. Close all connections to the source when their transactions complete\.
+
+1. Update your application to use the Amazon RDS DB instance\. This update typically involves changing the connection settings to identify the host name and port of the Amazon RDS DB instance, the user account and password to connect with, and the database to use\.
+
 1. Stop replication for the Amazon RDS instance using the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) command:
 
    ```
    CALL mysql.rds_stop_replication;
    ```
-
-1. Update your application to use the Amazon RDS DB instance\. This update typically involves changing the connection settings to identify the host name and port of the Amazon RDS DB instance, the user account and password to connect with, and the database to use\.
 
 1. Run the [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) command on your Amazon RDS DB instance to reset the replication configuration so this instance is no longer identified as a replica:
 
@@ -414,4 +416,4 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
 1. Enable additional Amazon RDS features such as Multi\-AZ support and Read Replicas\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md) and [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
 **Note**  
- If you no longer need the Amazon RDS instance used in this procedure, you should delete the RDS instance to reduce your Amazon AWS resource usage\. To delete an RDS instance, see [Deleting a DB Instance](USER_DeleteInstance.md)\. 
+ If you no longer need the Amazon RDS instance used in this procedure, you should delete the RDS instance to reduce your Amazon AWS resource usage\. To delete an RDS instance, see [Deleting a DB Instance ](USER_DeleteInstance.md)\. 

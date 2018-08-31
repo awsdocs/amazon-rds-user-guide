@@ -10,7 +10,7 @@ The following are some limitations to using Management Agent:
 + Administrative tasks such as job execution and database patching, that require host credentials, are not supported\. 
 + Host metrics and the process list are not guaranteed to reflect the actual system state\. 
 + Autodiscovery is not supported\. You must manually add database targets\. 
-+ OMS module availability depends your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
++ OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
 + Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the OEM\_AGENT option, we recommend that you scale up to a larger DB instance class\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
@@ -32,7 +32,7 @@ Additional configuration is required to allow your OMS host and your Amazon RDS 
 + To connect from your OMS to the Management Agent, if your OMS has a publicly resolvable host name, you must add the OMS address to a security group\. Your security group must have inbound rules that allow access to the DB instance port and the Management Agent port\. For an example of creating a security and adding inbound rules, see [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. 
 + To connect from your OMS to the Management Agent, if your OMS doesn't have a publicly resolvable host name, use one of the following: 
   + If your OMS is hosted on an Amazon Elastic Compute Cloud \(Amazon EC2\) instance in a private VPC, you can set up VPC peering to connect from OMS to Management Agent\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\. 
-  + If your OMS is hosted on\-premises, you can set up a VPN connection to allow access from OMS to Management Agent\. For more information, see [A DB Instance in a VPC Accessed by a Client Application Through the Internet](USER_VPC.Scenarios.md#USER_VPC.Scenario4) or [VPN Connections](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpn-connections.html)\. 
+  + If your OMS is hosted on\-premises, you can set up a VPN connection to allow access from OMS to Management Agent\. For more information, see [A DB Instance in a VPC Accessed by a Client Application Through the Internet](USER_VPC.Scenarios.md#USER_VPC.Scenario4) or [VPN Connections](http://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html)\. 
 
 ## Management Agent Option Settings<a name="Oracle.Options.OEMAgent.Options"></a>
 
@@ -43,7 +43,7 @@ Amazon RDS supports the following settings for the Management Agent option\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) |  13\.2\.0\.0 13\.1\.0\.0 12\.1\.0\.4 12\.1\.0\.5  |  The version of the Management Agent software\.   | 
+| **Version** \(`AGENT_VERSION`\) |  13\.2\.0\.0 13\.1\.0\.0 12\.1\.0\.4 12\.1\.0\.5  |  The version of the Management Agent software\.   In the AWS GovCloud \(US\) region, only version 13\.2\.0\.0 is available\.   | 
 | **Port** \(`AGENT_PORT`\) | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.   | 
 | **Security Groups** | — |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.   | 
 | **OMS\_HOST** |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.   | 
@@ -102,7 +102,9 @@ After you enable the Management Agent option, use the following procedure to beg
 
    1. Choose **Add Manually**\.
 
-   1. Enter the host name for the Amazon RDS DB instance, or select the host name from the list\. Ensure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
+   1. Enter the endpoint for the Amazon RDS DB instance, or select it from the from the host name list\. Ensure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
+
+      For information about finding the endpoint for your Amazon RDS DB instance, see [Finding the Endpoint of Your DB Instance](USER_ConnectToOracleInstance.md#USER_Endpoint)\.
 
    1. Specify the following database properties: 
       + For **Target name**, type a name\. 

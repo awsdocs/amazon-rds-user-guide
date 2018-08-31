@@ -150,7 +150,7 @@ The following table contains details about settings that you choose when you cre
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
-|  IAM DB authentication  |  **Enable IAM DB authentication** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\.   | 
+|  IAM DB authentication  |  **Enable IAM DB authentication** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL](UsingWithRDS.IAMDBAuth.md)\.   | 
 |  License model  |  MySQL has only one license model, **general\-public\-license** the general license agreement for MySQL\.   | 
 | **Log exports** |  Select the types of MySQL database log files to generate\. For more information, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)\.   | 
 |  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
@@ -168,4 +168,4 @@ The following table contains details about settings that you choose when you cre
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 + [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)
 + [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)

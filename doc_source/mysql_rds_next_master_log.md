@@ -30,7 +30,7 @@ The `mysql.rds_next_master_log` procedure is available in these versions of Amaz
 
 ## Examples<a name="mysql_rds_next_master_log-examples"></a>
 
-Assume replication fails on an Amazon RDS Read Replica\. Running `SHOW SLAVE STATUS\G` on the replica returns the following result:
+Assume replication fails on an Amazon RDS Read Replica\. Running `SHOW SLAVE STATUS\G` on the Read Replica returns the following result:
 
 ```
 *************************** 1. row ***************************

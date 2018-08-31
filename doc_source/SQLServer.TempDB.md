@@ -67,7 +67,7 @@ The following example shrinks a tempdb database file named `test_file`, and requ
 
 ### Setting the SIZE Property<a name="SQLServer.TempDB.Shrinking.Size"></a>
 
-You can also shrink the tempdb database by setting the `SIZE` property and then restarting your DB instance\. For more information about restarting your DB instance, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+You can also shrink the tempdb database by setting the `SIZE` property and then restarting your DB instance\. For more information about restarting your DB instance, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 
 
 The following example demonstrates setting the `SIZE` property to 1024 MB\. 
 
@@ -87,4 +87,4 @@ If you modify any database options on the tempdb database, you can capture those
   For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 + First modify tempdb in the original primary instance, then fail over manually, and finally modify tempdb in the new primary instance\. This method involves downtime\. 
 
-  For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+  For more information, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 

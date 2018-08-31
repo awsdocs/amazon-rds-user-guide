@@ -11,7 +11,7 @@ You are most likely on the EC2\-VPC platform \(and must use VPC security groups\
 + If you have never created a DB instance before\.
 + If you are creating a DB instance in an AWS Region you have not used before\.
 
-Otherwise, if you are on the EC2\-Classic platform, you use DB security groups to manage access to your Amazon RDS DB instances\. For more information about the differences between DB security groups and VPC security groups, see [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
+Otherwise, if you are on the EC2\-Classic platform, you use DB security groups to manage access to your Amazon RDS DB instances\. For more information about the differences between DB security groups and VPC security groups, see [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)\.
 
 **Note**  
 To determine which platform you are on, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\.  
@@ -20,7 +20,7 @@ If you are on the EC2\-VPC platform, you must use VPC security groups instead of
 **Topics**
 + [Creating a DB Security Group](#USER_WorkingWithSecurityGroups.Creating)
 + [Listing Available DB Security Groups](#USER_WorkingWithSecurityGroups.Listing)
-+ [Viewing a DB security group](#USER_WorkingWithSecurityGroups.Viewing)
++ [Viewing a DB Security Group](#USER_WorkingWithSecurityGroups.Viewing)
 + [Associating a DB Security Group with a DB Instance](#USER_WorkingWithSecurityGroups.Associate)
 + [Authorizing Network Access to a DB Security Group from an IP Range](#USER_WorkingWithSecurityGroups.Authorizing)
 + [Authorizing Network Access to a DB Instance from an Amazon EC2 Instance](#USER_WorkingWithSecurityGroups.AuthorizingEC2)
@@ -136,7 +136,7 @@ To list all available DB security groups for an AWS account, call [http://docs.a
 8.     &Signature=<Signature>
 ```
 
-## Viewing a DB security group<a name="USER_WorkingWithSecurityGroups.Viewing"></a>
+## Viewing a DB Security Group<a name="USER_WorkingWithSecurityGroups.Viewing"></a>
 
 You can view detailed information about your DB security group to see what IP ranges have been authorized\.
 
@@ -189,7 +189,9 @@ To view properties of a specific DB security group, call [http://docs.aws.amazon
 
 ## Associating a DB Security Group with a DB Instance<a name="USER_WorkingWithSecurityGroups.Associate"></a>
 
-You can associate a DB security group with a DB instance using the RDS console's **Modify** option, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\. 
+You can associate a DB security group with a DB instance using the RDS console's **Modify** option, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\.
+
+ For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance and Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md)\.
 
 ## Authorizing Network Access to a DB Security Group from an IP Range<a name="USER_WorkingWithSecurityGroups.Authorizing"></a>
 
@@ -340,9 +342,9 @@ To authorize network access to an Amazon EC2 security group, call that Amazon RD
 
 ## Revoking Network Access to a DB Instance from an IP Range<a name="USER_WorkingWithSecurityGroups.Revoking"></a>
 
-You can easily revoke network access from a CIDR IP range to DB Instances belonging to a DB security group by revoking the associated CIDR IP ingress rule\.
+You can easily revoke network access from a CIDR IP range to DB instances belonging to a DB security group by revoking the associated CIDR IP ingress rule\.
 
-In this example, you revoke an ingress rule for a CIDR IP on a DB Security Group\.
+In this example, you revoke an ingress rule for a CIDR IP range on a DB security group\.
 
 ### AWS Management Console<a name="USER_WorkingWithSecurityGroups.Revoking.CON"></a>
 

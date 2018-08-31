@@ -51,6 +51,8 @@ Amazon RDS publishes each MySQL database log as a separate database stream in th
 **Note**  
 Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6 and 5\.7\.
 
+### AWS Management Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
+
 **To publish MySQL logs to CloudWatch Logs using the console**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
@@ -63,7 +65,7 @@ Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
-### Publishing Logs to CloudWatch Logs with the CLI<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CLI"></a>
+### AWS CLI<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CLI"></a>
 
  You can publish MySQL logs with the AWS CLI\. You can call the [http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier`
@@ -85,13 +87,13 @@ Run one of these AWS CLI commands with the following options:
 Other options might be required depending on the AWS CLI command you run\.
 
 **Example**  
-The following command modifies an existing MySQL DB instance to publish log files to CloudWatch Logs\.  
+The following example modifies an existing MySQL DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `audit`, `error`, `general`, and `slowquery`\.  
 For Linux, OS X, or Unix:  
 
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' \
 4.     --apply-immediately
 ```
 For Windows:  
@@ -99,18 +101,18 @@ For Windows:
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' ^
 4.     --apply-immediately
 ```
 
 **Example**  
-The following command creates a MySQL DB instance and publishes log files to CloudWatch Logs\.  
+The following example creates a MySQL DB instance and publishes log files to CloudWatch Logs\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `audit`, `error`, `general`, and `slowquery`\.  
 For Linux, OS X, or Unix:  
 
 ```
 1. aws rds create-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --enable-cloudwatch-logs-exports '["error","general","audit","slowquery"]' \
+3.     --enable-cloudwatch-logs-exports '["audit","error","general","slowquery"]' \
 4.     --db-instance-class db.m4.large \
 5.     --engine MySQL
 ```
@@ -119,12 +121,12 @@ For Windows:
 ```
 1. aws rds create-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --enable-cloudwatch-logs-exports '["error","general","audit","slowquery"]' ^
+3.     --enable-cloudwatch-logs-exports '["audit","error","general","slowquery"]' ^
 4.     --db-instance-class db.m4.large ^
 5.     --engine MySQL
 ```
 
-### Publishing Logs to CloudWatch Logs with the RDS API<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.API"></a>
+### RDS API<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.API"></a>
 
 You can publish MySQL logs with the RDS API\. You can call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
 + `DBInstanceIdentifier`

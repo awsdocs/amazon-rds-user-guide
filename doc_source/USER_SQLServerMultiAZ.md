@@ -14,7 +14,6 @@ Amazon RDS supports Multi\-AZ with Mirroring for the following SQL Server versio
 Amazon RDS supports Multi\-AZ with Mirroring for SQL Server in all AWS Regions, with the following exceptions:
 + Not supported 
   + US West \(N\. California\)
-  + AWS GovCloud \(US\)
 + Supported in most cases 
   + Asia Pacific \(Sydney\) – Supported for [DB instances in VPCs](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
   + Asia Pacific \(Tokyo\) – Supported for [DB instances in VPCs](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
@@ -31,7 +30,6 @@ When modifying an existing SQL Server DB instance using the AWS Management Conso
 The following are some restrictions when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
 + Cross\-region Multi\-AZ is not currently supported\. 
 + You can't configure the standby to accept database read activity\. 
-+ Multi\-AZ with Mirroring is not supported for DB instances with dedicated tenancy\. 
 + Multi\-AZ with Mirroring is not supported for DB instances with in\-memory optimization enabled\. For more information, see [Unsupported SQL Server Features for In\-Memory OLTP](https://msdn.microsoft.com/en-us/library/dn133181.aspx) in the Microsoft documentation\. 
 + You can't rename a database on a SQL Server DB instance that is in a SQL Server Multi\-AZ with Mirroring deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ for the DB instance, then rename the database, and finally turn Multi\-AZ back on for the DB instance\. 
 

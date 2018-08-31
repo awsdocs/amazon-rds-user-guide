@@ -59,6 +59,6 @@ The VPC must have subnets in different availability zones\.
 
 To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 
 
-## Next Step<a name="w3ab1b9c37c17c11"></a>
+## Next Step<a name="w4aab9c33c17c11"></a>
 
 [Step 2: Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)

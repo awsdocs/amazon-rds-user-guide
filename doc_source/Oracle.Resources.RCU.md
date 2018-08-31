@@ -24,7 +24,7 @@ Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\
 + RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
 + RCU 12c with Oracle database 11\.2\.0\.4\.v8 or later
 
-Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle Fusion Middleware Licensing Information User Manual ](http://docs.oracle.com/cd/E55108_01/doc.1213/e56762/toc.htm) in the Oracle documentation\. 
+Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle Fusion Middleware Licensing Information User Manual ](https://docs.oracle.com/cd/E55108_01/doc.62016/e56762/toc.htm) in the Oracle documentation\. 
 
 Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Editions \(SE, SE One, or SE Two\)\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\. 
 
@@ -185,5 +185,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w3ab1c32c83c19c19"></a>
+## Related Topics<a name="w4aac30c83c19c19"></a>
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

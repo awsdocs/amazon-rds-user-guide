@@ -41,7 +41,11 @@ If you use Oracle GoldenGate, always retain the parameter group with the `compat
 
 You can upgrade a DB snapshot while it is still a DB snapshot, before you restore it\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\. 
 
-## AWS Management Console<a name="USER_RestoreFromSnapshot.CON"></a>
+## Restoring from a Snapshot<a name="USER_RestoreFromSnapshot.Restoring"></a>
+
+You can restore a DB instance from a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+### AWS Management Console<a name="USER_RestoreFromSnapshot.CON"></a>
 
 **To restore a DB instance from a DB snapshot**
 
@@ -65,7 +69,7 @@ You can upgrade a DB snapshot while it is still a DB snapshot, before you restor
 
    1. Select the security group that you want to use for your DB instances\. If necessary, add rules to link the security group to a security group for an EC2 instance\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
 
-## CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
+### CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 
 To restore a DB instance from a DB snapshot, use the AWS CLI command [restore\-db\-instance\-from\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)\. 
 
@@ -94,33 +98,8 @@ This command returns output similar to the following:
 
 After the DB instance has been restored, you must add the DB instance to the security group and parameter group used by the DB instance used to create the DB snapshot if you want the same functionality as that of the previous DB instance\.
 
-## API<a name="USER_RestoreFromSnapshot.API"></a>
+### API<a name="USER_RestoreFromSnapshot.API"></a>
 
 To restore a DB instance from a DB snapshot, call the Amazon RDS API function [RestoreDBInstanceFromDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) with the following parameters: 
-+ `DBSnapshotIdentifier` 
 + `DBInstanceIdentifier` 
-
-In this example, you restore from a previously created DB snapshot named *mydbsnapshot*\. You restore to a new DB instance named *mynewdbinstance*\. 
-
-**Example**  
-
-```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=RestoreDBInstanceFromDBSnapshot
- 3.    &DBInstanceIdentifier=mynewdbinstance
- 4.    &DBSnapshotIdentifier=mydbsnapshot
- 5.    &SignatureMethod=HmacSHA256
- 6.    &SignatureVersion=4
- 7.    &Version=2013-09-09
- 8.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 9.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
-10.    &X-Amz-Date=20140428T232655Z
-11.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-12.    &X-Amz-Signature=78ac761e8c8f54a8c0727f4e67ad0a766fbb0024510b9aa34ea6d1f7df52fe92
-```
-
-## Related Topics<a name="USER_RestoreFromSnapshot.related"></a>
-+ [Tutorial: Restore a DB Instance from a DB Snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
-+ [Creating a DB Snapshot](USER_CreateSnapshot.md)
-+ [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
-+ [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)
++ `DBSnapshotIdentifier` 

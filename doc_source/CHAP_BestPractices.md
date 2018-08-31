@@ -8,9 +8,9 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [Amazon RDS Security Best Practices](#CHAP_BestPractices.Security)
 + [Using Enhanced Monitoring to Identify Operating System Issues](#CHAP_BestPractices.EnhancedMonitoring)
 + [Using Metrics to Identify Performance Issues](#CHAP_BestPractices.UsingMetrics)
-+ [Best Practices for Working with Amazon Aurora](#CHAP_BestPractices.Aurora)
 + [Best Practices for Working with MySQL Storage Engines](#CHAP_BestPractices.MySQLStorage)
 + [Best Practices for Working with MariaDB Storage Engines](#CHAP_BestPractices.MariaDB)
++ [Best Practices for Working with Oracle](#CHAP_BestPractices.Oracle)
 + [Best Practices for Working with PostgreSQL](#CHAP_BestPractices.PostgreSQL)
 + [Best Practices for Working with SQL Server](#CHAP_BestPractices.SQLServer)
 + [Working with DB Parameter Groups](#CHAP_BestPractices.DBParameterGroup)
@@ -33,7 +33,7 @@ The following are basic operational guidelines that everyone should follow when 
 
 ## DB Instance RAM Recommendations<a name="CHAP_BestPractices.Performance.RAM"></a>
 
-An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\.
+An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
 
 ## Amazon RDS Security Best Practices<a name="CHAP_BestPractices.Security"></a>
 
@@ -45,12 +45,13 @@ Use AWS IAM accounts to control access to Amazon RDS API actions, especially act
 
 For more information about IAM, go to [AWS Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
 
+Use the AWS Management Console, the AWS CLI, or the Amazon RDS API to change the password for your master user\. If you use another tool, such as a SQL client, to change the master user password, it might result in privileges being revoked for the user unintentionally\.
+
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
 
 Enhanced Monitoring is available for the following database engines:
-+ Amazon Aurora
 + MariaDB
 + Microsoft SQL Server
 + MySQL version 5\.5 or later
@@ -63,7 +64,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w3ab1c13c15b4"></a>
+### Viewing Performance Metrics<a name="w4aac13c15b4"></a>
 
  You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
@@ -83,7 +84,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 **Note**  
  Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
- You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\. 
+ You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\. 
 
 ****To set a CloudWatch alarm****
 
@@ -179,10 +180,6 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  Go to [Query Optimizations](https://mariadb.com/kb/en/mariadb/query-optimizations/) in the MariaDB documentation for more information on writing queries for better performance\.
 
-## Best Practices for Working with Amazon Aurora<a name="CHAP_BestPractices.Aurora"></a>
-
-You have several different options for improving performance and stability in Amazon Aurora, depending on the database engine used by your Aurora DB cluster and DB instances\. For more information about best practices with Amazon Aurora, see [Best Practices with Amazon Aurora](Aurora.BestPractices.md)\.
-
 ## Best Practices for Working with MySQL Storage Engines<a name="CHAP_BestPractices.MySQLStorage"></a>
 
 On a MySQL DB instance, observe the following table creation limits:
@@ -206,6 +203,10 @@ In addition, Federated Storage Engine is currently not supported by Amazon RDS f
 ## Best Practices for Working with MariaDB Storage Engines<a name="CHAP_BestPractices.MariaDB"></a>
 
 The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated Backups with Unsupported MariaDB Storage Engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
+
+## Best Practices for Working with Oracle<a name="CHAP_BestPractices.Oracle"></a>
+
+For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html) and the video [ Running Oracle Databases on Amazon RDS](https://www.youtube.com/watch?reload=9&v=GMVKBjXjp20)\.
 
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 
@@ -284,7 +285,9 @@ When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS
 
 ## Working with DB Parameter Groups<a name="CHAP_BestPractices.DBParameterGroup"></a>
 
-We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. For information about backing up your DB instance, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
+We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
+
+For information about backing up your DB instance, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Amazon RDS Best Practices Presentation Video<a name="CHAP_BestPractices.Presentation"></a>
 

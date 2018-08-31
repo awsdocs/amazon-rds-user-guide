@@ -59,7 +59,7 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 
    1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-   1. Choose the MySQL DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+   1. Click the MySQL DB instance name to display its details\. 
 
    1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)

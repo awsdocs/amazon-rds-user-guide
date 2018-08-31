@@ -70,7 +70,7 @@ Both private subnets must use the same route table\. In the following procedure,
 
    1. Choose **Save**\.
 
-A security group acts as a virtual firewall for your DB instance to control inbound and outbound traffic\. In the following procedure, you create a security group for your DB instance\. For more information about security groups, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)\. 
+A security group acts as a virtual firewall for your DB instance to control inbound and outbound traffic\. In the following procedure, you create a security group for your DB instance\. For more information about security groups, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)\. 
 
 **To create a VPC security group for a Private Amazon RDS DB Instance**
 
@@ -86,7 +86,7 @@ A security group acts as a virtual firewall for your DB instance to control inbo
 
 1. Choose **Yes, Create**\.
 
-In the following procedure, you add rules to your security group to control inbound traffic to your DB instance\. For more information about inbound rules, see [Security Group Rules](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html#SecurityGroupRules)\. 
+In the following procedure, you add rules to your security group to control inbound traffic to your DB instance\. For more information about inbound rules, see [Security Group Rules](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)\. 
 
 **To add inbound rules to the security group**
 
@@ -145,9 +145,9 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 
 In the preceding procedures, we use the AWS Management Console to perform tasks\. Amazon Web Services also provides the AWS Command Line Interface \(AWS CLI\), and an application programming interface \(API\)\. You can use the AWS CLI or the API to automate many of the tasks for managing Amazon RDS, including tasks to manage an Oracle DB instance with Amazon RDS\. 
 
-For more information, see [AWS Command Line Interface Reference for Amazon RDS](http://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon Relational Database Service API Reference](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
+For more information, see [AWS Command Line Interface Reference for Amazon RDS](http://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon RDS API Reference](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
 
-## Related Topics<a name="w3ab1c32c83b7c15"></a>
+## Related Topics<a name="w4aac30c83b7c15"></a>
 + [Setting Up for Amazon RDS](CHAP_SettingUp.md)
 + [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
 + [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)

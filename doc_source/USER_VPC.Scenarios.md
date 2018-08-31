@@ -49,7 +49,7 @@ The following diagram shows this scenario\.
 
 ![\[A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC2EC2VPC.png)
 
-A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-peering.html)\. 
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see the [VPC documentation](http://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html)\. 
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.ClassicLink"></a>
 
@@ -95,6 +95,8 @@ We recommend the following configuration:
 + An Internet gateway which connects the VPC to the Internet and to other AWS products\.
 + A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
 
+For information about creating a DB instance in a VPC, see [Creating a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
+
 ## A DB Instance Not in a VPC Accessed by an EC2 Instance in a VPC<a name="USER_VPC.Scenario5"></a>
 
 In the case where you have an EC2 instance in a VPC and an RDS DB instance not in a VPC, you can connect them over the public Internet\. 
@@ -115,7 +117,7 @@ To connect your DB instance and your EC2 instance over the public Internet, do t
   An ingress rule specifies a network port and a CIDR/IP range\. For example, you can add an ingress rule that allows port 3306 to connect to a MySQL RDS DB instance, and a CIDR/IP range of `203.0.113.25/32`\. For more information, see [Authorizing Network Access to a DB Security Group from an IP Range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 ## A DB Instance Not in a VPC Accessed by an EC2 Instance Not in a VPC<a name="USER_VPC.Scenario7"></a>
 
@@ -139,7 +141,6 @@ For more information, see the following documentation\.
 
 | Database Engine | Relevant Documentation | 
 | --- | --- | 
-| Amazon Aurora | [Connecting to an Amazon Aurora DB Cluster](Aurora.Connecting.md) | 
 | MariaDB | [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md) | 
 | Microsoft SQL Server | [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md) | 
 | MySQL | [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md) | 
@@ -147,7 +148,7 @@ For more information, see the following documentation\.
 | PostgreSQL | [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md) | 
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 ## A DB Instance Not in a VPC Accessed by a Client Application Through the Internet<a name="USER_VPC.Scenario6"></a>
 
@@ -163,4 +164,4 @@ In this scenario, you must ensure that the DB security group for the RDS DB inst
 If you intend to access a DB instance behind a firewall, talk with your network administrator to determine the IP addresses you should use\.
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 

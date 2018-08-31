@@ -1,6 +1,6 @@
 # DB instance storage<a name="CHAP_Storage"></a>
 
-DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\. Amazon Aurora uses a proprietary storage system\. For more information about Aurora storage, see [Amazon Aurora Storage](Aurora.Overview.md#Aurora.Overview.Storage) 
+DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\.  
 
 ## Amazon RDS Storage Types<a name="Concepts.Storage"></a>
 
@@ -95,7 +95,7 @@ You can also use Provisioned IOPS SSD storage with Read Replicas for MySQL, Mari
 
 ### Provisioned IOPS Storage Costs<a name="Overview.ProvisionedIOPS-cost"></a>
 
-With Provisioned IOPS storage you are charged for the provisioned resources resources whether or not you use them in a given month\. 
+With Provisioned IOPS storage, you are charged for the provisioned resources whether or not you use them in a given month\. 
 
 For more information about pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
@@ -115,7 +115,7 @@ Amazon RDS also supports magnetic storage for backward compatibility\. We recomm
 
 ## Monitoring storage performance<a name="Concepts.Storage.Metrics"></a>
 
-Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 The following metrics are useful for monitoring storage for your DB instance: 
 +  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\. 

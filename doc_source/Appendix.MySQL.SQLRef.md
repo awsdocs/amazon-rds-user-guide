@@ -8,10 +8,13 @@ The following system stored procedures are supported for Amazon RDS DB instances
 
 **Replication** 
 + [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)
++ [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md)
++ [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md)
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
 + [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md)
 + [mysql\.rds\_remove\_binlog\_ssl\_material](mysql_rds_remove_binlog_ssl_material.md)
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
++ [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md)
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)
 + [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)
 + [mysql\.rds\_next\_master\_log](mysql_rds_next_master_log.md)

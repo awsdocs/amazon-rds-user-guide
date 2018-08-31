@@ -30,7 +30,7 @@ These resources and subresources have unique Amazon Resource Names \(ARNs\) asso
 | DB option group | `arn:aws:rds:region:account-id:og:option-group-name` | 
 | DB parameter group | `arn:aws:rds:region:account-id:pg:parameter-group-name` | 
 | DB snapshot | `arn:aws:rds:region:account-id:snapshot:snapshot-name` | 
-| DB security group | `arn:aws:rds:region:account-id:secgrp:security-group-name` | 
+| DB security group | `arn:aws:rds:region:account-id:secgrp:security-group-name`   | 
 | DB subnet group | `arn:aws:rds:region:account-id:subgrp:subnet-group-name` | 
 | Event subscription | `arn:aws:rds:region:account-id:es:subscription-name` | 
 | Read Replica | `arn:aws:rds:region:account-id:db:db-instance-name` | 

@@ -8,7 +8,7 @@ To find the endpoint for a MariaDB instance in the AWS Management Console:
 
 1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-1. Choose the MariaDB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+1. Click the MariaDB DB instance name to display its details\. 
 
 1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MariaDB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
@@ -112,5 +112,5 @@ SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ## Related Topics<a name="USER_ConnectToMariaDBInstance.related"></a>
 +  [Amazon RDS DB Instances](Overview.DBInstance.md) 
 +  [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md) 
-+  [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 
-+  [Deleting a DB Instance](USER_DeleteInstance.md) 
++  [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md) 
++  [Deleting a DB Instance ](USER_DeleteInstance.md) 
