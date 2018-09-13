@@ -23,16 +23,13 @@ During a minor or major version upgrade of SQL Server, the **Free Storage Space*
 
 Amazon RDS currently supports the following major version upgrades to a Microsoft SQL Server DB instance\. 
 
-**Note**  
-Currently, you can't upgrade your existing DB instance to SQL Server 2017\.
-
-
 ****  
 
 | Current Version | Supported Upgrade Versions | 
 | --- | --- | 
-|  SQL Server 2014  |  SQL Server 2016  | 
-|  SQL Server 2012  |  SQL Server 2016 SQL Server 2014  | 
+|  SQL Server 2016  |  SQL Server 2017  | 
+|  SQL Server 2014  |  SQL Server 2016 SQL Server 2017  | 
+|  SQL Server 2012  |  SQL Server 2016 SQL Server 2014 SQL Server 2017  | 
 |  SQL Server 2008 R2  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
 
 ### Database Compatibility Level<a name="USER_UpgradeDBInstance.SQLServer.Major.Compatibility"></a>
@@ -40,6 +37,7 @@ Currently, you can't upgrade your existing DB instance to SQL Server 2017\.
 You can use Microsoft SQL Server database compatibility levels to adjust some database behaviors to mimic previous versions of SQL Server\. For more information, see [Compatibility Level](https://msdn.microsoft.com/en-us/library/bb510680.aspx) in the Microsoft documentation\. 
 
 The following are the compatibility levels of the SQL Server versions: 
++ SQL Server 2017 - compatibility level 140
 + SQL Server 2016 – compatibility level 130
 + SQL Server 2014 – compatibility level 120
 + SQL Server 2012 – compatibility level 110
@@ -58,7 +56,7 @@ Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. Amazon RDS does rolling upgrades\. You have an outage only for the duration of a failover\. 
 
-SQL Server 2014 Enterprise Edition and SQL Server 2016 Enterprise Edition support in\-memory optimization\. Multi\-AZ deployments are not supported on DB instances that have in\-memory optimization enabled\. When you upgrade your DB instance with Multi\-AZ enabled, Amazon RDS automatically disables in\-memory optimization\. 
+SQL Server 2014 Enterprise Edition, SQL Server 2016 Enterprise Edition, and SQL Server 2017 Enterprise Edition support in\-memory optimization\. Multi\-AZ deployments are not supported on DB instances that have in\-memory optimization enabled\. When you upgrade your DB instance with Multi\-AZ enabled, Amazon RDS automatically disables in\-memory optimization\. 
 
 ## Option and Parameter Group Considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG"></a>
 
@@ -81,6 +79,7 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 **To test a major version upgrade**
 
 1. Review the upgrade documentation for the new version of the database engine to see if there are compatibility issues that might affect your database or applications: 
+   +  [Upgrade to SQL Server 2017](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.140%29.aspx) 
    +  [Upgrade to SQL Server 2016](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.130%29.aspx) 
    +  [Upgrade to SQL Server 2014](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.120%29.aspx) 
    +  [Upgrade to SQL Server 2012](https://msdn.microsoft.com/en-us/library/bb677622%28v=sql.110%29.aspx) 
@@ -183,3 +182,4 @@ The following code upgrades a DB instance\. These changes are applied during the
 + [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)
 + [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
+
