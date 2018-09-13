@@ -1,6 +1,6 @@
 # Amazon RDS API Permissions: Actions, Resources, and Conditions Reference<a name="UsingWithRDS.IAM.ResourcePermissions"></a>
 
-When you set up [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl) and write permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following as a reference\. 
+When you set up [access control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl) and write permissions policies that you can attach to an IAM identity \(identity\-based policies\), you can use the following as a reference\.
 
 The following lists each Amazon RDS API operation\. Included in the list are the corresponding actions for which you can grant permissions to perform the action, the AWS resource that you can grant the permissions for, and condition keys that you can include for fine\-grained access control\. You specify the actions in the policy's `Action` field, the resource value in the policy's `Resource` field, and conditions in the policy's `Condition` field\. For more information about conditions, see [Using IAM Policy Conditions for Fine\-Grained Access Control](UsingWithRDS.IAM.Conditions.md)\. 
 

@@ -56,7 +56,7 @@ Be sure to save this password\. AWS Directory Service does not store this passwo
 
 When you launch an AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all your directory’s objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
- The *admin* account that was created with your *AWS Managed Microsoft AD* directory has permissions for the most common administrative activities for your OU: 
+The *admin* account that was created with your *AWS Managed Microsoft AD* directory has permissions for the most common administrative activities for your OU: 
 +  Create update, or delete users, groups, and computers 
 +  Add resources to your domain such as file or print servers, and then assign permissions for those resources to users and groups in your OU 
 +  Create additional OUs and containers 
@@ -72,7 +72,7 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 
 **To create a directory with AWS Directory Service for Microsoft Active Directory**
 
-1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservice/) navigation pane, select **Directories** and choose** Set up Directory**\. 
+1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservicev2/) navigation pane, select **Directories** and choose** Set up Directory**\. 
 
 1.  Choose **Create AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option currently supported for use with Amazon RDS\. 
 
@@ -95,7 +95,7 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 
 1.  Provide the following information in the **VPC Details** section and choose** Next Step**\.   
 **VPC**  
- The VPC for the directory\. Note that the SQL Server DB instance must be created in this same VPC\.   
+ The VPC for the directory\. *Note that the SQL Server DB instance must be created in this same VPC*\.   
 **Subnets**  
  Select the subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
 
@@ -210,4 +210,4 @@ You can restore a DB snapshot or do a point\-in\-time restore for a SQL Server D
 
 ## Related Topics<a name="USER_SQLServerWinAuth.related"></a>
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-+ [Security in Amazon RDS](UsingWithRDS.md)
++ [Configuring Security in Amazon RDS](UsingWithRDS.md)

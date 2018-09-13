@@ -5,7 +5,7 @@ Once you have completed all the set up steps, you can verify the HSM is working 
 **Note**  
 Before you continue, you must verify that the option group that you created for your Oracle instance returns a status of `in-sync`\. You can verify this passing the DB instance identifier to the `describe-db-instances` command\.
 
-## Verifying the HSM Connection<a name="w3ab1c34c83c11c29b9"></a>
+## Verifying the HSM Connection<a name="w4aac30c83c11c29b9"></a>
 
 You can verify the connection between an Oracle DB instance and the HSM\. Connect to the Oracle DB instance and use the following command:
 
@@ -28,7 +28,7 @@ OPEN
 1 row selected.
 ```
 
-## Verifying the Oracle Keys in the HSM<a name="w3ab1c34c83c11c29c11"></a>
+## Verifying the Oracle Keys in the HSM<a name="w4aac30c83c11c29c11"></a>
 
 Once Amazon RDS starts and Oracle is running, Oracle creates two master keys on the HSM\. Do the following steps to confirm the existence of the master keys in the HSM\. You can run these commands from the prompt on the Amazon EC2 control instance or from the Amazon RDS Oracle DB instance\.
 
@@ -67,7 +67,7 @@ Once Amazon RDS starts and Oracle is running, Oracle creates two master keys on 
    Command Result : 0 (Success)
    ```
 
-## Verifying the TDE Key<a name="w3ab1c34c83c11c29c13"></a>
+## Verifying the TDE Key<a name="w4aac30c83c11c29c13"></a>
 
 The final step to verifying that the TDE key is correctly stored in the HSM is to create an encrypted tablespace\. The following commands creates an encrypted tablespace and shows that it is encrypted\.
 

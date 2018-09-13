@@ -2,6 +2,9 @@
 
 Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud\. It provides cost\-efficient, resizable capacity for an industry\-standard relational database and manages common database administration tasks\. 
 
+**Note**  
+This guide covers non\-Aurora Amazon RDS database engines\. For information about using Amazon Aurora, see the [http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
+
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
 Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult or tedious management tasks of a relational database: 
@@ -10,7 +13,7 @@ Why do you want a managed relational database service? Because Amazon RDS takes 
 + To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
 + You can have automated backups performed when you need them, or manually create your own backup snapshot\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\. 
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MySQL, MariaDB, or PostgreSQL Read Replicas to increase read scaling\. 
-+ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server, and the new, MySQL\-compatible Amazon Aurora DB engine \(for information, see [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)\)\. 
++ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\. 
 + In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\. 
 
 If you are new to AWS products and services, begin learning more with the following resources: 
@@ -28,7 +31,7 @@ The basic building block of Amazon RDS is the *DB instance*\. A DB instance is a
 **Note**  
 For pricing information on DB instance classes, go to the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
 
-DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It’s important to have sufficient storage so that your databases have room to grow and that features for the DB engine have room to write content or log entries\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\. 
+DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It’s important to have sufficient storage so that your databases have room to grow and that features for the DB engine have room to write content or log entries\. For more information, see [DB instance storage](CHAP_Storage.md)\. 
 
 You can run a DB instance on a virtual private cloud using the Amazon Virtual Private Cloud \(VPC\) service\. When you use a virtual private cloud, you have control over your virtual networking environment: you can select your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it is running in a VPC or not; Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There is no additional cost to run your DB instance in a VPC\. For more information on VPC and RDS, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\. 
 
@@ -46,7 +49,7 @@ You can run your DB instance in several Availability Zones, an option called a M
 
 A security group controls the access to a DB instance\. It does so by allowing access to IP address ranges or Amazon EC2 instances that you specify\. 
 
-Amazon RDS uses DB security groups, VPC security groups, and EC2 security groups\. In simple terms, a DB security group controls access to a DB instance that is not in a VPC, a VPC security group controls access to a DB instance inside a VPC, and an Amazon EC2 security group controls access to an EC2 instance and can be used with a DB instance\. For more information about security groups, see [Security in Amazon RDS](UsingWithRDS.md)\. 
+Amazon RDS uses DB security groups, VPC security groups, and EC2 security groups\. In simple terms, a DB security group controls access to a DB instance that is not in a VPC, a VPC security group controls access to a DB instance inside a VPC, and an Amazon EC2 security group controls access to an EC2 instance and can be used with a DB instance\. For more information about security groups, see [Configuring Security in Amazon RDS](UsingWithRDS.md)\. 
 
 ## Monitoring an Amazon RDS DB Instance<a name="Welcome.Monitoring"></a>
 
@@ -66,7 +69,7 @@ You can use the AWS Command Line Interface \(AWS CLI\) to access the Amazon RDS 
 
 ### Programming with Amazon RDS<a name="Welcome.Interfaces.API"></a>
 
-If you are a developer, you can access the Amazon RDS programmatically\. For more information, see [Amazon RDS Application Programming Interface \(API\)](ProgrammingGuide.md)\. 
+If you are a developer, you can access the Amazon RDS programmatically\. For more information, see [Amazon RDS Application Programming Interface \(API\) Reference](ProgrammingGuide.md)\. 
 
 For application development, we recommend that you use one of the AWS Software Development Kits \(SDKs\)\. The AWS SDKs handle low\-level details such as authentication, retry logic, and error handling, so that you can focus on your application logic\. AWS SDKs are available for a wide variety of languages\. For more information, see [Tools for Amazon Web Services ](https://aws.amazon.com/tools/)\. 
 
@@ -74,17 +77,9 @@ AWS also provides libraries, sample code, tutorials, and other resources to help
 
 ## How You Are Charged for Amazon RDS<a name="Welcome.Costs"></a>
 
- When you use Amazon RDS, you pay only for what you use, and there are no minimum or setup fees\. You are billed according to the following criteria\. 
-+  Instance class – Pricing is based on the class \(for example, micro, small, large, xlarge\) of the DB instance consumed\. 
-+  Running time – You are billed by the instance\-hour, which is equivalent to a single instance running for an hour\. For example, both a single instance running for two hours and two instances running for one hour consume two instance\-hours\. If a DB instance runs for only part of an hour, you are charged for a full instance\-hour\. 
-+  Storage – The storage capacity that you have provisioned to your DB instance is billed per GiB per month\. If you scale your provisioned storage capacity within the month, your bill is pro\-rated\. 
-+  I/O requests per month – Total number of storage I/O requests that you have made in a billing cycle\. 
-+  Backup storage – Backup storage is the storage that is associated with automated database backups and any active database snapshots that you have taken\. Increasing your backup retention period or taking additional database snapshots increases the backup storage consumed by your database\. Amazon RDS provides backup storage up to 100% of your provisioned database storage at no additional charge\. For example, if you have 10 GiB\-months of provisioned database storage, we provide up to 10 GiB\-months of backup storage at no additional charge\. Most databases require less raw storage for a backup than for the primary dataset, so if you don’t keep multiple backups, you never pay for backup storage\. Backup storage is free only for active DB instances\. 
-+  Data transfer –Internet data transfer in and out of your DB instance\. 
+ When you use Amazon RDS, you can choose to use on\-demand DB instances or reserved DB instances\. For more information, see [DB Instance Billing](User_DBInstanceBilling.md)\. 
 
-In addition to regular RDS pricing, you can purchase reserved DB instances\. Reserved DB instances let you make a one\-time up\-front payment for a DB instance and reserve the DB instance for a one\- or three\-year term at significantly lower rates\. For more information on reserved DB instances, see [Working with Reserved DB Instances](USER_WorkingWithReservedDBInstances.md) 
-
-For Amazon RDS pricing information, see the [Amazon RDS product page](http://aws.amazon.com/rds/#pricing)\. 
+For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 
 ## What's Next?<a name="Welcome.WhatsNext"></a>
 
@@ -97,7 +92,6 @@ Create a DB instance using instructions in the [Getting Started with Amazon RDS]
 ### Database Engine–Specific Topics<a name="Welcome.WhatsNext.DBTopics"></a>
 
 You can review information specific to a particular DB engine in the following sections: 
-+ [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)
 + [MariaDB on Amazon RDS](CHAP_MariaDB.md)
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
 + [MySQL on Amazon RDS](CHAP_MySQL.md)

@@ -1,4 +1,4 @@
-# Appendix: Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
+# Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
 
 Amazon RDS incorporates bug fixes from Oracle via their quarterly Database Patch Set Updates \(PSU\)\. You can be confident that your DB instance is running a stable, common version of the database software that has been regression tested by both Oracle and Amazon\. We do not support applying one\-off patches to individual DB instances\. 
 
@@ -9,6 +9,7 @@ The following table shows what Oracle PSUs are applied to the Oracle versions in
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2018 April | [12\.1\.0\.2\.v12](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v12) | [11\.2\.0\.4\.v16](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v16) | 
 | 2018 January | [12\.1\.0\.2\.v11](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v11) | [11\.2\.0\.4\.v15](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v15) | 
 | 2017 October | [12\.1\.0\.2\.v10](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v10) | [11\.2\.0\.4\.v14](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v14) | 
 | 2017 July | [12\.1\.0\.2\.v9](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v9) | [11\.2\.0\.4\.v13](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v13) | 

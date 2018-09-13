@@ -8,16 +8,20 @@ Oracle APEX consists of two main components:
 
 When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. You must install the Oracle APEX Listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
 
-Amazon RDS supports the following versions of Oracle APEX for Oracle 12c: 
-+ Oracle APEX version 5\.1\.2\.v1
-+ Oracle APEX version 5\.0\.4\.v1
-+ Oracle APEX version 4\.2\.6\.v1
+The APEX option uses storage on the DB instance class for your DB instance\.
 
-Amazon RDS supports the following versions of Oracle APEX for Oracle 11g: 
-+ Oracle APEX version 5\.1\.2\.v1
-+ Oracle APEX version 5\.0\.4\.v1
-+ Oracle APEX version 4\.2\.6\.v1
-+ Oracle APEX version 4\.1\.1\.v1
+Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 12c on Amazon RDS: 
++ Oracle APEX version 5\.1\.4\.v1 — 220 MiB
++ Oracle APEX version 5\.1\.2\.v1 — 150 MiB
++ Oracle APEX version 5\.0\.4\.v1 — 140 MiB
++ Oracle APEX version 4\.2\.6\.v1 — 160 MiB
+
+Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 11g on Amazon RDS: 
++ Oracle APEX version 5\.1\.4\.v1 — 220 MiB
++ Oracle APEX version 5\.1\.2\.v1 — 150 MiB
++ Oracle APEX version 5\.0\.4\.v1 — 140 MiB
++ Oracle APEX version 4\.2\.6\.v1 — 160 MiB
++ Oracle APEX version 4\.1\.1\.v1 — 130 MiB
 
 ## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 
@@ -76,7 +80,7 @@ After the Amazon RDS APEX options are installed, you must change the password fo
 
 To configure RESTful services in APEX \(not needed for APEX 4\.1\.1\.V1\), use SQL\*Plus to connect to your DB instance as the master user, and then run the `rdsadmin.rdsadmin_run_apex_rest_config` stored procedure\. When you run the stored procedure, you provide passwords for the following users:
 + `APEX_LISTENER`
-+ `APEX_REST_PULIC_USER`
++ `APEX_REST_PUBLIC_USER`
 
 The stored procedure runs the `apex_rest_config.sql` script, which creates new database accounts for these users\.
 
@@ -177,6 +181,9 @@ After you upgrade your version of APEX, the APEX schema for the previous version
 If you upgrade the APEX version and RESTful services were not configured in the previous APEX version, we recommend that you configure RESTful services\. For more information, see [ Configuring RESTful Services for Oracle APEX](#Appendix.Oracle.Options.APEX.ConfigureRESTful)\.
 
 If you are planning to do a major version upgrade of your DB instance, and you are using an APEX version that is not compatible with your target database version, you can upgrade your version of APEX before you upgrade your DB instance\. Upgrading APEX first can reduce the amount of time it takes to upgrade your DB instance\. 
+
+**Note**  
+After upgrading APEX, install and configure a listener for use with the upgraded version\. For instructions, see [Installing and Configuring the APEX Listener](#Appendix.Oracle.Options.APEX.Listener)\.
 
 ## Removing the APEX Option<a name="Appendix.Oracle.Options.APEX.Remove"></a>
 

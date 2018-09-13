@@ -118,7 +118,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_logfile` to dr
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `grp` | positive | — | requried | The group number of the log\. | 
+| `grp` | positive | — | required | The group number of the log\. | 
 
 The following example drops the log with group number 3: 
 
@@ -282,7 +282,11 @@ The following example retains 24 hours of redo logs:
 4.         value => '24');
 5. end;
 6. /
+7. commit;
 ```
+
+**Note**  
+The commit is required for the change to take effect\.
 
 You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.show_configuration` to view how long archived redo logs are retained for your DB instance\.
 

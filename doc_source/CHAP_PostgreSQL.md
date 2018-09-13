@@ -16,37 +16,122 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
 + [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
 + [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)
++ [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)
 + [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
 + [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
-+ [Amazon Amazon RDS PostgreSQL versions and extensions](#PostgreSQL.Concepts)
++ [Working with the Database Preview Environment](#working-with-the-database-preview-environment)
++ [Amazon RDS for PostgreSQL Versions and Extensions](#PostgreSQL.Concepts)
 
 ## Common Management Tasks for PostgreSQL on Amazon RDS<a name="CHAP_PostgreSQL.CommonTasks"></a>
 
-The following are the common management tasks you perform with an Amazon RDS PostgreSQL DB instance, with links to relevant documentation for each task\. 
+The following are the common management tasks you perform with an Amazon RDS for PostgreSQL DB instance, with links to relevant documentation for each task\. 
 
 
 | Task Area | Relevant Documentation | 
 | --- | --- | 
 |  **Setting up Amazon RDS for first\-time use** There are prerequisites you must complete before you create your DB instance\. For example, DB instances are created by default with a firewall that prevents access to it\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.   |  [Setting Up for Amazon RDS](CHAP_SettingUp.md)  | 
-|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)  | 
+|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)  | 
 |  **Finding supported PostgreSQL versions** Amazon RDS supports several versions of PostgreSQL\.   |  [Supported PostgreSQL Database Versions](#PostgreSQL.Concepts.General.DBVersions)  | 
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account does not have a default VPC, and you want the DB instance in a VPC, you must create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read only Read Replicas \(master/standby\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md) [PostgreSQL Read Replicas \(Version 9\.3\.5 and Later\)PostgreSQL Read Replicas](USER_ReadRepl.md#USER_ReadRepl.PostgreSQL) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
-|  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you need to create a DB security group\. If your DB instance is on the *EC2\-VPC* platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)  | 
+|  **Setting up read only Read Replicas \(master/standby\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md) [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
+|  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you need to create a DB security group\. If your DB instance is on the *EC2\-VPC* platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
 |  **Connecting to your PostgreSQL DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as pgadmin III\.   |  [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md) [Using SSL with a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL)  | 
 |  **Backing up and restoring your DB instance** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)  | 
-|  **Monitoring the activity and performance of your DB instance** You can monitor a PostgreSQL DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
+|  **Monitoring the activity and performance of your DB instance** You can monitor a PostgreSQL DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
 |  **Upgrading the PostgreSQL database version** You can do both major and minor version upgrades for your PostgreSQL DB instance\.   |  [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching) [Major Version Upgrades](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)  | 
 |  **Working with log files** You can access the log files for your PostgreSQL DB instance\.   |  [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)  | 
 |  **Understanding the best practices for PostgreSQL DB instances** Find some of the best practices for working with PostgreSQL on Amazon RDS\.   |  [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)  | 
 
-## Amazon Amazon RDS PostgreSQL versions and extensions<a name="PostgreSQL.Concepts"></a>
+## Working with the Database Preview Environment<a name="working-with-the-database-preview-environment"></a>
 
-Amazon RDS supports DB instances running several editions of PostgreSQL\. This section shows how you can work with PostgreSQL on Amazon RDS\. You should also be aware of the limits for PostgreSQL DB instances\.
+When you create a DB instance in Amazon RDS, you know that the PostgreSQL version it's based on has been tested and is fully supported by Amazon\. The PostgreSQL community releases new versions and new extensions continuously\. You can try out new PostgreSQL versions and extensions before they are fully supported\. To do that, you can create a new DB instance in the Database Preview Environment\. 
+
+DB instances in the Database Preview Environment are similar to DB instances in a production environment\. However, keep in mind several important factors:
++ All DB instances are deleted 60 days after you create them, along with any backups and snapshots\.
++ You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
++ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
++ You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS Database Preview Environment Forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
++ You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
++ You can't copy a snapshot of a DB instance to a production environment\.
++ Some Amazon RDS features aren't available in the preview environment, as described following\.
+
+### Features Not Supported in the Preview Environment<a name="preview-environment-exclusions"></a>
+
+The following features are not available in the preview environment:
++ Cross\-region snapshot copy
++ Cross\-region Read Replicas
++ Extensions not in the following table of supported extensions
+
+The PostgreSQL extensions supported in the Database Preview Environment are listed following\.
+
+
+| Extension | Version | 
+| --- | --- | 
+|  amcheck  |  1\.1  | 
+|  bloom  |  1\.0  | 
+|  btree\_gin  |  1\.3  | 
+|  btree\_gist  |  1\.5  | 
+|  citext  |  1\.5  | 
+|  cube  |  1\.4  | 
+|  dblink  |  1\.2  | 
+|  dict\_int  |  1\.0  | 
+|  dict\_xsyn  |  1\.0  | 
+|  earthdistance  |  1\.1  | 
+|  fuzzystrmatch  |  1\.1  | 
+|  hstore  |  1\.5  | 
+|  hstore\_plper  |  1\.0  | 
+|  intagg  |  1\.1  | 
+|  antarray  |  1\.2  | 
+|  isn  |  1\.2  | 
+|  log\_fdw  |  1\.0  | 
+|  ltree  |  1\.1  | 
+|  pg\_buffercache  |  1\.3  | 
+|  pg\_freespacemap  |  1\.2  | 
+|  pg\_prewarm  |  1\.2  | 
+|  pg\_stat\_statements  |  1\.5  | 
+|  pg\_trgm  |  1\.4  | 
+|  pg\_visibility  |  1\.2  | 
+|  pgcrypto  |  1\.3  | 
+|  pgrowlocks  |  1\.2  | 
+|  pgstattuple  |  1\.5  | 
+|  plperl  |  1\.0  | 
+|  plpgsql  |  1\.0  | 
+|  pltcl  |  1\.0  | 
+|  postgres\_fdw  |  1\.0  | 
+|  sslinfo  |  1\.2  | 
+|  tablefunc  |  1\.0  | 
+|  test\_parser  |  1\.0  | 
+|  tsm\_system\_rows  |  1\.0  | 
+|  tsm\_system\_time  |  1\.0  | 
+|  unaccent  |  1\.1  | 
+|  uuid\_ossp  |  1\.1  | 
+
+### Creating a New DB Instance in the Preview Environment<a name="create-db-instance-in-preview-environment"></a>
+
+Use the following procedure to create a DB instance in the preview environment\.
+
+**To create a DB instance in the preview environment**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1.  Choose **Dashboard** from the navigation pane\. 
+
+1. Choose **Switch to database preview environment**\.   
+![\[Dialog box to select the preview environment\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/instance_preview.png)
+
+   You also can navigate directly to the [Database Preview Environment](https://us-east-2.console.aws.amazon.com/rds-preview/home?region=us-east-2#)\.
+**Note**  
+If you want to create an instance in the Database Preview Environment with the API or CLI the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
+
+1. Continue with the procedure as described in [Create a PostgreSQL DB Instance](USER_CreatePostgreSQLInstance.md#USER_CreatePostgreSQLInstance.CON)\.
+
+## Amazon RDS for PostgreSQL Versions and Extensions<a name="PostgreSQL.Concepts"></a>
+
+Amazon RDS supports DB instances running several editions of PostgreSQL\. Use this section to see how to work with PostgreSQL on Amazon RDS\. You should also be aware of the limits for PostgreSQL DB instances\.
 
 For information about importing PostgreSQL data into a DB instance, see [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)\.
 
@@ -59,14 +144,18 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 Amazon RDS supports the following PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL Version 11 Beta 1 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version11)
++ [PostgreSQL Version 10\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version104)
 + [PostgreSQL Version 10\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version103)
 + [PostgreSQL Version 10\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version101)
++ [PostgreSQL Version 9\.6\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version969)
 + [PostgreSQL Version 9\.6\.8 on Amazon RDS](#PostgreSQL.Concepts.General.version968)
 + [PostgreSQL Version 9\.6\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version966)
 + [PostgreSQL Version 9\.6\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version965)
 + [PostgreSQL Version 9\.6\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version963)
 + [PostgreSQL Version 9\.6\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version962)
 + [PostgreSQL Version 9\.6\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version961)
++ [PostgreSQL Version 9\.5\.13 on Amazon RDS](#PostgreSQL.Concepts.General.version9513)
 + [PostgreSQL Version 9\.5\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9512)
 + [PostgreSQL Version 9\.5\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version9510)
 + [PostgreSQL Version 9\.5\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version959)
@@ -74,6 +163,7 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL Version 9\.5\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version956)
 + [PostgreSQL Version 9\.5\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version954)
 + [PostgreSQL Version 9\.5\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version952)
++ [PostgreSQL Version 9\.4\.18 on Amazon RDS](#PostgreSQL.Concepts.General.version9418)
 + [PostgreSQL Version 9\.4\.17 on Amazon RDS](#PostgreSQL.Concepts.General.version9417)
 + [PostgreSQL Version 9\.4\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9415)
 + [PostgreSQL Version 9\.4\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9414)
@@ -81,6 +171,7 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL Version 9\.4\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version9411)
 + [PostgreSQL Version 9\.4\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version949)
 + [PostgreSQL Version 9\.4\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version947)
++ [PostgreSQL Version 9\.3\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9323)
 + [PostgreSQL Version 9\.3\.22 on Amazon RDS](#PostgreSQL.Concepts.General.version9322)
 + [PostgreSQL Version 9\.3\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9320)
 + [PostgreSQL Version 9\.3\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9319)
@@ -89,15 +180,40 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL Version 9\.3\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9314)
 + [PostgreSQL Version 9\.3\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9312)
 
+#### PostgreSQL Version 11 Beta 1 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version11"></a>
+
+PostgreSQL version 11 Beta 1 contains several improvements that are described in [PostgreSQL 11 Beta 1 Released\!](https://www.postgresql.org/about/news/1855/) 
+
+For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\.
+
+#### PostgreSQL Version 10\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version104"></a>
+
+PostgreSQL version 10\.4 contains several bug fixes for issues in release 10\.3\. For more information on the fixes in 10\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-4.html)\.
+
+This version also includes the following changes:
++ Support for PostgreSQL 10 Logical Replication using the native publication and subscription framework\. RDS PostgreSQL databases can function as both publishers and subscribers\. You can specify replication to other PostgreSQL databases at the database\-level or at the table\-level\. With logical replication, the publisher and subscriber databases need not be physically identical \(block\-to\-block\) to each other\. This allows for use cases such as data consolidation, data distribution, and data replication across different database versions for 10\.4 and above\. For more details, refer to [Logical Replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
++ The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
++ Update of the `GDAL` library, which is used by the PostGIS extension\. See [Working with PostGIS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS)\.
++ Update of the `ip4r` extension to version 2\.1\.1\.
++ Update of the `pg_repack` extension to version 1\.4\.3\. See [Working with the pg\_repack Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pg_repack)\.
++ Update of the `plv8` extension to version 2\.1\.2\.
+
+For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+
+**Note**  
+The `tsearch2` extension will be removed in the next major release\. We encourage customers still using pre\-8\.3 text search to migrate to the equivalent built\-in features\.For more information about migrating, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/textsearch-migration.html)\.
+
 #### PostgreSQL Version 10\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version103"></a>
 
 PostgreSQL version 10\.3 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.3, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-3.html)\.
 
-Version 2\.1\.0 of PL/v8 is now available\. If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immediately take advantage of the new extension but the catalog metadata will not reflect this fact\. See [Upgrade PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8) for the optional steps to synchronize your catalog metadata with the new version of PL/v8\.
+Version 2\.1\.0 of PL/v8 is now available\. If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immediately take advantage of the new extension but the catalog metadata will not reflect this fact\. See [Upgrade PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8) for the steps to synchronize your catalog metadata with the new version of PL/v8\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 10\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version101"></a>
 
@@ -107,20 +223,35 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 PostgreSQL version 10\.1 includes the following changes: 
 + **Declarative table partitioning** – PostgreSQL 10 adds table partitioning to SQL syntax and native tuple routing\. 
-+ **Parallel queries** – When you create a new PostreSQL 10\.1 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter [max\_parallel\_workers\_per\_gather](https://www.postgresql.org/docs/10/static/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) is set to 2 by default, but you can modify it to support your specific workload requirements\.
-+ **Support for the International Compontents for Unicode \(ICU\)** – You can use the ICU library to provide explicitly versioned collations\. Amazon RDS for PostgreSQL 10\.1 is compiled with ICU version 60\.2\. For more information about ICU implementation in PostgreSQL, see [Collation Support](https://www.postgresql.org/docs/10/static/collation.html)\.
++ **Parallel queries** – When you create a new PostgreSQL 10\.1 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter [max\_parallel\_workers\_per\_gather](https://www.postgresql.org/docs/10/static/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) is set to 2 by default, but you can modify it to support your specific workload requirements\.
++ **Support for the International Components for Unicode \(ICU\)** – You can use the ICU library to provide explicitly versioned collations\. Amazon RDS for PostgreSQL 10\.1 is compiled with ICU version 60\.2\. For more information about ICU implementation in PostgreSQL, see [Collation Support](https://www.postgresql.org/docs/10/static/collation.html)\.
 + **Huge pages** – Huge pages is a feature of the Linux kernel that uses multiple page size capabilities of modern hardware architectures\. Amazon RDS for PostgreSQL supports huge pages with a global configuration parameter\. When you create a new PostgreSQL 10\.1 instance with RDS, the `huge_pages` parameter is set to `"on"` for the` default.postgres10` parameter group\. You can modify this setting to support your specific workload requirements\. 
 + **PL/v8 update** – PL/v8 is a procedural language that allows you to write functions in JavaScript that you can then call from SQL\. This release of PostgreSQL supports version 2\.1\.0 of PL/v8\.
 + **Renaming of xlog and location** – In PostgreSQL version 10 the abbreviation "xlog" has changed to "wal", and the term "location" has changed to "lsn"\. For more information, see [ https://www\.postgresql\.org/docs/10/static/release\-10\.html\#id\-1\.11\.6\.8\.4](https://www.postgresql.org/docs/10/static/release-10.html#id-1.11.6.8.4)\. 
 + **tsearch2 module** – Amazon RDS will continue to provide the `tsearch2` module in PostgreSQL version 10, but will remove it in the next major version release\. If your application uses tsearch2 functions update it to use the equivalent functions the core engine provides\. For more information about using `tsearch2`, see [tsearch2 module](https://www.postgresql.org/docs/9.6/static/tsearch2.html)\.
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+
+#### PostgreSQL Version 9\.6\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version969"></a>
+
+PostgreSQL version 9\.6\.9 contains several bug fixes for issues in release 9\.6\.8\. For more information on the fixes in 9\.6\.9, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-9.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+This version includes the following changes: 
++ The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
++ Update of the `GDAL` library, which is used by the PostGIS extension\. See [Working with PostGIS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.PostGIS)\.
++ Update of the `ip4r` extension to version 2\.1\.1\.
++ Update of the `pgaudit` extension to version 1\.1\.1\. See [Working with the pgaudit Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
+
+  Update of the `pg_repack` extension to version 1\.4\.3\. See [Working with the pg\_repack Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pg_repack)\.
++ Update of the `plv8` extension to version 2\.1\.2\.
+
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.6\.8 on Amazon RDS<a name="PostgreSQL.Concepts.General.version968"></a>
 
 PostgreSQL version 9\.6\.8 contains several bug fixes for issues in release 9\.6\.6\. For more information on the fixes in 9\.6\.8, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-8.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.6\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version966"></a>
 
@@ -131,7 +262,7 @@ This version includes the following features:
 + Supports the `prefix` extension, version 1\.2\.6\. This extension provides an operator for text prefix searches\. For more information about `prefix`, see the [prefix project on GitHub](https://github.com/dimitri/prefix)\.
 + Supports version 2\.3\.4 of PostGIS, version 2\.4\.2 of pgrouting, and an updated version of wal2json\.
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.6\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version965"></a>
 
@@ -139,7 +270,7 @@ PostgreSQL version 9\.6\.5 contains several bug fixes for issues in release 9\.6
 
 This version also includes support for the [pgrouting](http://pgrouting.org/) and [postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) extensions, and the [decoder\_raw](https://github.com/michaelpq/pg_plugins/tree/master/decoder_raw) optional module\.
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.6\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version963"></a>
 
@@ -161,7 +292,7 @@ PostgreSQL version 9\.6\.2 contains several new features and bug fixes\. The new
 + PostGIS version 2\.3\.2
 + [ pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) version 1\.1–Provides a way to examine the free space map \(FSM\)\. This extension provides an overloaded function called pg\_freespace\. The functions show the value recorded in the free space map for a given page, or for all pages in the relation\.
 + [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) version 1\.1\.3– Provides control of execution plans by using hinting phrases at the beginning of SQL statements\.
-+ log\_fdw version 1\.0–Using this extension from Amazon RDS, you can load and query your database engine log from within the database\. For more information, see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw)\.
++ log\_fdw version 1\.0–Using this extension from Amazon RDS, you can load and query your database engine log from within the database\. For more information, see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw)\.
 + With this version release, you can now edit the `max_worker_processes` parameter in a DB parameter group\. 
 
 PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. For more information, see [ALTER ENUM for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)\.
@@ -186,11 +317,22 @@ PostgreSQL version 9\.6\.1 includes the following changes:
 
 You can create a new PostgreSQL 9\.6\.1 database instance using the AWS Management Console, AWS CLI, or RDS API\. You can also upgrade an existing PostgreSQL 9\.5 instance to version 9\.6\.1 using major version upgrade\. If you want to upgrade a DB instance from version 9\.3 or 9\.4 to 9\.6, you must perform a point\-and\-click upgrade to the next major version first\. Each upgrade operation involves a short period of unavailability for your DB instance\.
 
+#### PostgreSQL Version 9\.5\.13 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9513"></a>
+
+PostgreSQL version 9\.5\.13 contains several bug fixes for issues in release 9\.5\.12\. For more information on the fixes in 9\.5\.13, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-13.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+This version includes the following extension updates: 
++ Update of the `pgaudit` extension to version 1\.0\.6\. See [Working with the pgaudit Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
++ Update of the `pg_hint_plan` extension to version 1\.1\.5\. 
++ Update of the `plv8` extension to version 2\.1\.2\.
+
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+
 #### PostgreSQL Version 9\.5\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9512"></a>
 
 PostgreSQL version 9\.5\.12 contains several bug fixes for issues in release 9\.5\.10 For more information on the fixes in 9\.5\.12, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-12.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.5\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9510"></a>
 
@@ -265,11 +407,17 @@ RDS PostgreSQL version 9\.5\.2 includes the following new extensions:
 + [tsm\_system\_rows](http://www.postgresql.org/docs/current/static/tsm-system-rows.html) – Provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\.
 + [tsm\_system\_time](http://www.postgresql.org/docs/current/static/tsm-system-time.html) – Provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\. 
 
+#### PostgreSQL Version 9\.4\.18 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9418"></a>
+
+PostgreSQL version 9\.4\.18 contains several bug fixes for issues in release 9\.4\.17\. For more information on the fixes in 9\.4\.18, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-18.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+The `plv8` extension has been updated to version 2\.1\.2\. For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+
 #### PostgreSQL Version 9\.4\.17 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9417"></a>
 
 PostgreSQL version 9\.4\.17 contains several bug fixes for issues in release 9\.4\.15\. For more information on the fixes in 9\.4\.17, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-17.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.4\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9415"></a>
 
@@ -309,11 +457,20 @@ PostgreSQL version 9\.4\.7 contains several fixes to issue found in previous ver
 
 PostgreSQL version 9\.4\.7 includes improved visibility of autovacuum sessions by allowing the rds\_superuser account to view autovacuum sessions in pg\_stat\_activity\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
 
+#### PostgreSQL Version 9\.3\.23 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9323"></a>
+
+PostgreSQL version 9\.3\.23 contains several bug fixes for issues in release 9\.3\.22\. For more information on the fixes in 9\.3\.23, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-23.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+The `plv8` extension has been updated to version 2\.1\.2\. For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+
+**Note**  
+Amazon RDS for PostgreSQL has announced version 9\.3\.x is scheduled for retirement in September, 2018\. We encourage you to upgrade your 9\.3\.x databases to the latest version at your earliest convenience\. 
+
 #### PostgreSQL Version 9\.3\.22 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9322"></a>
 
 PostgreSQL version 9\.3\.22 contains several bug fixes for issues in release 9\.3\.20\. For more information on the fixes in 9\.3\.22, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-22.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-For the complete list of extensions supported by Amazon RDS PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.3\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9320"></a>
 
@@ -364,7 +521,7 @@ PostgreSQL supports many PostgreSQL extensions and modules\. Extensions and modu
 + [PostgreSQL Version 9\.4\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.94x)
 + [PostgreSQL Version 9\.3\.x Extensions Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.93x)
 + [PostgreSQL Extension Support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.SupportedPerVersion)
-+ [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw)
++ [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw)
 
 You can find a list of extensions supported by Amazon RDS in the default DB parameter group for that PostgreSQL version\. You can also see the current extensions list using `psql` by showing the `rds.extensions` parameter as in the following example\.
 
@@ -380,274 +537,274 @@ Parameters added in a minor version release might display inaccurately when usin
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 10 that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
 
-| Extension | 10\.1 | 10\.3 | 
-| --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 
-| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 
-| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 
-| [chkpass](http://www.postgresql.org/docs/10/static/chkpass.html) | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 
-| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 
-| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 
-| log\_fdw—see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 
-| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 
-| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.2\.0 | 1\.2\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.0 | 1\.3\.0 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 
-| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.2 | 1\.4\.2 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 
-| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 
-| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 
-| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.5\.2 | 2\.5\.2 | 
-| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 
-| plcoffee | 2\.1\.0 | 2\.1\.0 | 
-| plls | 2\.1\.0 | 2\.1\.0 | 
-| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 2\.1\.0 | 2\.1\.0 | 
-| [PostGIS](http://www.postgis.net/) | 2\.4\.2 | 2\.4\.2 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.4\.2 | 2\.4\.2 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.4\.2 | 2\.4\.2 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 
-| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.10\.2 | 2\.10\.2 | 
-|  [ prefix](http://pgfoundry.org/projects/prefix) | 1\.2\.0 | 1\.2\.0 | 
-| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 
-|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 
+| Extension | 10\.1 | 10\.3 | 10\.4 | 
+| --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 
+| [chkpass](http://www.postgresql.org/docs/10/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 
+| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.1\.1 | 
+| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 
+| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 
+| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 
+| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 
+| plcoffee | 2\.1\.0 | 2\.1\.0 | 2\.1\.0 | 
+| plls | 2\.1\.0 | 2\.1\.0 | 2\.1\.0 | 
+| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 
+|  [ prefix](http://pgfoundry.org/projects/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 
 
 The `tsearch2` extension is deprecated in version 10\. The PostgreSQL team plans to remove `tsearch2` from the next major release of PostgreSQL\.
 
 The following modules are supported as shown for versions of PostgreSQL 10\.
 
 
-| Module | Version 10\.1 | 10\.3 | 
-| --- | --- | --- | 
-| amcheck | Not Supported | Supported | 
-| auto\_explain | Supported | Supported | 
-| decoder\_raw | Supported | Supported | 
-| ICU | Version 60\.2 supported | Version 60\.2 supported | 
-| test\_decoder | Supported | Supported | 
-| wal2json | Supported | Supported | 
+| Module | Version 10\.1 | 10\.3 | 10\.4 | 
+| --- | --- | --- | --- | 
+| amcheck | Not Supported | Supported | Supported | 
+| auto\_explain | Supported | Supported | Supported | 
+| decoder\_raw | Supported | Supported | Supported | 
+| ICU | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | 
+| test\_decoder | Supported | Supported | Supported | 
+| wal2json | Commit hash 5352cc41 | Commit hash 5352cc41 | Commit hash 5352cc41 | 
 
 ##### PostgreSQL Version 9\.6\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x"></a>
 
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 9\.6\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
 
-| Extension | 9\.6\.1 | 9\.6\.2 | 9\.6\.3 | 9\.6\.5 | 9\.6\.6 | 9\.6\.8 | 
-| --- | --- | --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 
-| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
-| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| log\_fdw—see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [orafce](https://github.com/orafce/orafce) |  N/A | N/A | N/A | N/A | 3\.6\.1 | 3\.6\.1 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | N/A | N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.2\.2 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_repack ](http://reorg.github.io/pg_repack/) | N/A | N/A | 1\.4\.0 | 1\.4\.1 | 1\.4\.2 | 1\.4\.2 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | N/A | N/A | N/A | 2\.3\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| plcoffee | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 
-| plls | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 
-| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 2\.1\.0 | 
-| [PostGIS](http://www.postgis.net/) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | N/A | N/A | N/A | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 
-|  [ prefix](http://pgfoundry.org/projects/prefix) | N/A | N/A | N/A | N/A | 1\.2\.6 | 1\.2\.6 | 
-| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| Extension | 9\.6\.1 | 9\.6\.2 | 9\.6\.3 | 9\.6\.5 | 9\.6\.6 | 9\.6\.8 | 9\.6\.9 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.1\.1 | 
+| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [orafce](https://github.com/orafce/orafce) |  N/A | N/A | N/A | N/A | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | N/A | N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1\.1 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.2\.2 | 1\.2\.2 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_repack ](http://reorg.github.io/pg_repack/) | N/A | N/A | 1\.4\.0 | 1\.4\.1 | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | N/A | N/A | N/A | 2\.3\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| plcoffee | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 
+| plls | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 
+| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 2\.1\.0 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | N/A | N/A | N/A | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 
+|  [ prefix](http://pgfoundry.org/projects/prefix) | N/A | N/A | N/A | N/A | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 
+| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
 The following modules are supported as shown for versions of PostgreSQL 9\.6\.
 
 
-| Module | 9\.6\.1 | 9\.6\.2 | 9\.6\.3 | 9\.6\.5 | 9\.6\.8 | 
-| --- | --- | --- | --- | --- | --- | 
-| auto\_explain | N/A | N/A | Supported | Supported | Supported | 
-| decoder\_raw | N/A | N/A | N/A | Supported | Supported | 
-| test\_decoder | Supported | Supported | Supported | Supported | Supported | 
-| wal2json | N/A | N/a | Supported | Supported | Supported | 
+| Module | 9\.6\.1 | 9\.6\.2 | 9\.6\.3 | 9\.6\.5 | 9\.6\.8 | 9\.6\.9 | 
+| --- | --- | --- | --- | --- | --- | --- | 
+| auto\_explain | N/A | N/A | Supported | Supported | Supported | Supported | 
+| decoder\_raw | N/A | N/A | N/A | Supported | Supported | Supported | 
+| test\_decoder | Supported | Supported | Supported | Supported | Supported | Supported | 
+| wal2json | N/A | N/a | Commit hash 2828409a | Commit hash 645ab69a | Commit hash 5352cc41 | Commit hash 5352cc41 | 
 
 ##### PostgreSQL Version 9\.5\.x Extensions Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x"></a>
 
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 9\.5\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\.
 
 
-| Extension | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.10 | 9\.5\.12 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.3\.4 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.3\.4 | 
-| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | N/A | N/A | N/A | N/A | N/A | N/A | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.2 | 
-| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.3 | 
-| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.2 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
-| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1 | 
-| log\_fdw—see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | N/A | N/A | N/A | N/A | N/A | N/A | 1\.0 | 
-| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1 | 
-| [ pgaudit](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | N/A | N/A | N/A | 1\.0\.5 | 1\.0\.5 | 1\.0\.5 | 3\.6\.1 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.1\.3 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.1 | 
-| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.4\.2 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 1\.4 | 
-| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.3 | 
-| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.2 | 
-| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.4\.2 | 
-| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.4 | 
-| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.5\.3 | 
-| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.5\.3 | 
-| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 
-| [PostGIS](http://www.postgis.net/) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 1\.0 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 1\.0 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 1\.5\.3 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 2\.3\.4 | 
-| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 2\.3\.4 | 
-| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 2\.3\.4 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 2\.10\.2 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.2\.6 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.2 | 
-|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| Extension | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.10 | 9\.5\.12 | 9\.5\.13 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 
+| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
+| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 
+| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pgaudit](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | N/A | N/A | N/A | 1\.0\.5 | 1\.0\.5 | 1\.0\.5 | 1\.0\.5 | 1\.0\.6 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.5 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | N/A | 
+| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.0 | 
+| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.0 | 
+| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 
 The following modules are supported as shown for versions of PostgreSQL 9\.5\.
 
 
-| Module | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.12 | 
-| --- | --- | --- | --- | --- | --- | --- | 
-| auto\_explain | N/A | N/A | N/A | Supported | Supported | Supported | 
-| test\_decoder | N/A | N/A | Supported | Supported | Supported | Supported | 
-| wal2json | N/A | N/a | N/A | Supported | Supported | Supported | 
+| Module | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.12 | 9\.5\.13 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| auto\_explain | N/A | N/A | N/A | Supported | Supported | Supported | Supported | 
+| test\_decoder | N/A | N/A | Supported | Supported | Supported | Supported | Supported | 
+| wal2json | N/A | N/a | N/A | Commit hash 2828409a | Commit hash 2828409a | Commit hash 2828409a | Commit hash 2828409a | 
 
 ##### PostgreSQL Version 9\.4\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.94x"></a>
 
 The following tables show the PostgreSQL extensions and modules for PostgreSQL version 9\.4\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.4/static/extend-extensions.html)\. 
 
 
-| Extension | 9\.4\.7 | 9\.4\.9 | 9\.4\.11 | 9\.4\.12 | 9\.4\.14 | 9\.4\.15 | 9\.4\.17 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
-| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| log\_fdw—see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
-| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
-| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 
-| [PostGIS](http://www.postgis.net/) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| Extension | 9\.4\.7 | 9\.4\.9 | 9\.4\.11 | 9\.4\.12 | 9\.4\.14 | 9\.4\.15 | 9\.4\.17 | 9\.4\.18 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 
+| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
+| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
+| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
+|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 
 The following modules are supported as shown for versions of PostgreSQL 9\.4\.
 
@@ -661,61 +818,61 @@ The following modules are supported as shown for versions of PostgreSQL 9\.4\.
 The following table shows PostgreSQL extensions for PostgreSQL version 9\.3\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
 
-| Extension | 9\.3\.12 | 9\.3\.14 | 9\.3\.16 | 9\.3\.17 | 9\.3\.19 | 9\.3\.20 | 9\.3\.22 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| log\_fdw—see [Using the `log_fdw` Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
-| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
-| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 
-| [PostGIS](http://www.postgis.net/) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | 
-|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| Extension | 9\.3\.12 | 9\.3\.14 | 9\.3\.16 | 9\.3\.17 | 9\.3\.19 | 9\.3\.20 | 9\.3\.22 | 9\.3\.23 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [chkpass](http://www.postgresql.org/docs/9.6/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/9.6/static/fuzzystrmatch.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [hstore](http://www.postgresql.org/docs/9.6/static/hstore.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/9.6/static/hstore.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ intagg](http://www.postgresql.org/docs/9.6/static/intagg.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| plcoffee | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
+| plls | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
+| [ plperl](https://www.postgresql.org/docs/current/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 2\.1\.8 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | 
+|  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 
 ##### PostgreSQL Extension Support for PostGIS on Amazon RDS<a name="CHAP_PostgreSQL.Extensions.SupportedPerVersion"></a>
 
-The following table shows the PostGIS component versions that ship with the Amazon RDS PostgreSQL versions\.
+The following table shows the PostGIS component versions that ship with the Amazon RDS for PostgreSQL versions\.
 
 
 | Version | PostGIS | GEOS | GDAL | PROJ | 
@@ -736,7 +893,9 @@ The following table shows the PostGIS component versions that ship with the Amaz
 | 9\.6\.2 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
 | 9\.6\.3 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
 | 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, 15 August 2016 | 
+| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
 | 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, 15 August 2016 | 
+| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
 
 Before you can use the PostGIS extension, you must create it by running the following command\.
 
@@ -744,7 +903,7 @@ Before you can use the PostGIS extension, you must create it by running the foll
  CREATE EXTENSION POSTGIS;
 ```
 
-##### Using the `log_fdw` Extension<a name="CHAP_PostgreSQL.Extensions.log_fdw"></a>
+##### Using the log\_fdw Extension<a name="CHAP_PostgreSQL.Extensions.log_fdw"></a>
 
 The `log_fdw` extension is new for Amazon RDS for PostgreSQL version 9\.6\.2 and later\. Using this extension, you can access your database engine log using a SQL interface\. In addition to viewing the *stderr* log files that are generated by default on RDS, you can view CSV logs \(set the `log_destination` parameter to `csvlog`\) and build foreign tables with the data neatly split into several columns\.
 
@@ -756,7 +915,7 @@ All functions created by `log_fdw` are owned by `rds_superuser`\. Members of the
 
 The following example shows how to use the `log_fdw` extension\.
 
-**To use the `log_fdw` extension**
+**To use the log\_fdw extension**
 
 1. Get the `log_fdw` extension\.
 
@@ -828,7 +987,7 @@ The following example shows how to use the `log_fdw` extension\.
 
 #### Upgrade PL/v8<a name="PostgreSQL.Concepts.General.UpgradingPLv8"></a>
 
-If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immediately take advantage of the new extension but the catalog metadata will not reflect this fact\. The following optional steps will synchronize your catalog metadata with the new version of PL/v8\. 
+If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immediately take advantage of the new extension but the catalog metadata will not reflect this fact\. The following steps will synchronize your catalog metadata with the new version of PL/v8\. These steps are optional but we highly recommended you complete them to avoid metadata mismatch warnings\.
 
 1. Verify that you need to update\.
 
@@ -853,7 +1012,7 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immedia
 
    The upgrade will drop all your PL/v8 functions\. Take a snapshot of your instance as a precaution\. You can continue with the following steps while the snapshot is being created\.
 
-   For steps to create a snapshot see, 
+   For steps to create a snapshot see, [Creating a DB Snapshot](USER_CreateSnapshot.md)
 
 1. Get a count of the functions you need to drop and recreate\.
 
@@ -893,7 +1052,7 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immedia
 
 1. Drop the functions and extensions\.
 
-   The following code drops any plv8 based objects\. The cascade option ensures that any dependent are dropped\.
+   The following code drops any PL/v8 based objects\. The cascade option ensures that any dependent are dropped\.
 
    `drop extension plv8 cascade;`
 
@@ -921,7 +1080,7 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you will immedia
 
    `select * from pg_available_extensions where name in ('plv8','plls','plcoffee'); `
 **Note**  
-PL/v8 verstion 2 will add the following extra row to your result set:  
+PL/v8 version 2 will add the following extra row to your result set:  
 
    ```
        proname    |  nspname   | lanname
@@ -944,18 +1103,37 @@ Amazon RDS supports many of the most common PostgreSQL features\. These include:
 
 ##### Logical Replication for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication"></a>
 
-Beginning with PostgreSQL version 9\.4, PostgreSQL supports the streaming of WAL changes using logical replication slots\. Amazon RDS supports logical replication for a PostgreSQL DB instance version 9\.4\.9 and higher and 9\.5\.4 and higher\. Using logical replication, you can set up logical replication slots on your instance and stream database changes through these slots to a client like pg\_recvlogical\. Logical slots are created at the database level and support replication connections to a single database\. 
+Beginning with PostgreSQL version 10\.4, RDS supports the publication and subscription SQL Syntax for PostgreSQL 10 Logical Replication\.
 
-PostgreSQL logical replication on Amazon RDS is enabled by a new parameter, a new replication connection type, and a new security role\. The client for the replication can be any client that is capable of establishing a replication connection to a database on a PostgreSQL DB instance\. 
+**To enable logical replication for an Amazon RDS for PostgreSQL DB instance**
 
-The most common clients for PostgreSQL logical replication are AWS Database Migration Service or a custom\-managed host on an AWS EC2 instance\. The logical replication slot knows nothing about the receiver of the stream; there is no requirement that the target be a replica database\. If you set up a logical replication slot and don't read from the slot, data can be written to your DB instance's storage and you can quickly fill up the storage on your instance\.
+1. The AWS user account requires the **rds\_superuser** role to perform logical replication for the PostgreSQL database on Amazon RDS\.
 
-For more information on using logical replication with PostgreSQL, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/logicaldecoding-example.html)\.
+1. Set the `rds.logical_replication` parameter to 1\. 
 
-To enable logical replication for an Amazon RDS for PostgreSQL DB instance, you must do the following:
-+ The AWS user account initiating the logical replication for the PostgreSQL database on Amazon RDS must have the rds\_superuser role and the rds\_replication role\. The rds\_replication role grants permissions to manage logical slots and to stream data using logical slots\.
-+ Set the `rds.logical_replication` parameter to 1\. It is a static parameter that requires a reboot to take effect\. As part of applying this parameter, we set the `wal_level`, `max_wal_senders`, `max_replication_slots`, and `max_connections` parameters\. These parameter changes can increase WAL generation, so you should only set the `rds.logical_replication` parameter when you are using logical slots\.
-+ Create a logical replication slot as explained following\. This process requires a decoding plugin to be specified; currently we support the ‘test\_decoding’ output plugin that ships with PostgreSQL\.
+1. Modify the inbound rules of the security group for the publisher instance \(production\) to allow the subscriber instance \(replica\) to connect\. This is usually done by including the IP address of the subscriber in the security group\.
+
+For more information on PostgreSQL logical replication, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/static/logical-replication.html)\. 
+
+##### Logical Decoding and Logical Replication<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalDecoding"></a>
+
+Beginning with PostgreSQL version 9\.4, RDS supports the streaming of WAL changes using logical replication slots\. Amazon RDS supports logical decoding for a PostgreSQL DB instance version 9\.4\.9 and higher and 9\.5\.4 and higher\. You can set up logical replication slots on your instance and stream database changes through these slots to a client such as `pg_recvlogical`\. Logical replication slots are created at the database level and support replication connections to a single database\. 
+
+The most common clients for PostgreSQL logical replication are the AWS Database Migration Service or a custom\-managed host on an AWS EC2 instance\. The logical replication slot knows nothing about the receiver of the stream, and there is no requirement that the target be a replica database\. If you set up a logical replication slot and don't read from the slot, data can be written and quickly fill up your DB instance's storage\.
+
+PostgreSQL logical replication and logical decoding on Amazon RDS are enabled with a parameter, a replication connection type, and a security role\. The client for logical decoding can be any client that is capable of establishing a replication connection to a database on a PostgreSQL DB instance\. 
+
+**To enable logical decoding for an Amazon RDS for PostgreSQL DB instance**
+
+1. The user account requires the **rds\_superuser** role to enable logical replication\. The user account also requires the **rds\_replication** role to grant permissions to manage logical slots and to stream data using logical slots\.
+
+1. Set the `rds.logical_replication` static parameter to 1\. As part of applying this parameter, we also set the parameters `wal_level`, `max_wal_senders`, `max_replication_slots`, and `max_connections`\. These parameter changes can increase WAL generation, so you should only set the `rds.logical_replication` parameter when you are using logical slots\.
+
+1. Reboot the DB instance for the static `rds.logical_replication` parameter to take effect\.
+
+1. Create a logical replication slot as explained in the next section\. This process requires that you specify a decoding plugin\. Currently we support the `test_decoding` output plugin that ships with PostgreSQL\.
+
+For more information on PostgreSQL logical decoding, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/logicaldecoding-explanation.html)\.
 
 ##### Working with Logical Replication Slots<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplicationSlots"></a>
 
@@ -1051,7 +1229,7 @@ Tablespaces are supported in PostgreSQL on Amazon RDS for compatibility; since a
 
 ##### Autovacuum for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Autovacuum"></a>
 
-The PostgreSQL auto\-vacuum is an optional, but highly recommended, parameter that by default is turned on for new PostgreSQL DB instances\. Do not turn this parameter off\. For more information on using auto\-vacuum with Amazon RDS PostgreSQL, see [Working with PostgreSQL Autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)\.
+The PostgreSQL auto\-vacuum is an optional, but highly recommended, parameter that by default is turned on for new PostgreSQL DB instances\. Do not turn this parameter off\. For more information on using auto\-vacuum with Amazon RDS for PostgreSQL, see [Working with PostgreSQL Autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)\.
 
 ##### RAM Disk for the stats\_temp\_directory<a name="PostgreSQL.Concepts.General.FeatureSupport.RamDisk"></a>
 
@@ -1086,7 +1264,7 @@ stats_temp_directory
 
 ##### ALTER ENUM for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.AlterEnum"></a>
 
-Amazon RDS PostgreSQL versions 9\.6\.2 and 9\.5\.6 and later support the ability to alter enumerations\. This feature is not available in other versions on Amazon RDS\.
+Amazon RDS for PostgreSQL versions 9\.6\.2 and 9\.5\.6 and later support the ability to alter enumerations\. This feature is not available in other versions on Amazon RDS\.
 
 The following code shows an example of altering an enum value\.
 
@@ -1131,7 +1309,7 @@ You can have up to 40 PostgreSQL DB instances\. The following is a list of limit
 There are two types of upgrades you can manage for your PostgreSQL DB instance:
 + OS Updates – Occasionally, Amazon RDS might need to update the underlying operating system of your DB instance to apply security fixes or OS changes\. You can decide when Amazon RDS applies OS updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\.
 
-  For more information about OS updates, see [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
+  For more information about OS updates, see [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
 +  Database Engine Upgrades – When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. Amazon RDS supports both major and minor version upgrades for PostgreSQL DB instances\. 
 
   For more information about PostgreSQL DB engine upgrades, see [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)\.
@@ -1184,7 +1362,7 @@ postgres=>
 
 ##### Determining the SSL Connection Status<a name="PostgreSQL.Concepts.General.SSL.Status"></a>
 
- The encrypted status of your connection is shown in the logon banner when you connect to the DB instance: 
+The encrypted status of your connection is shown in the logon banner when you connect to the DB instance:
 
 ```
 Password for user master: 

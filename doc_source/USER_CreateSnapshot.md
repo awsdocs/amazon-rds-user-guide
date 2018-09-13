@@ -4,22 +4,26 @@ Amazon RDS creates a storage volume snapshot of your DB instance, backing up the
 
 When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\. 
 
+You can create a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
+
 ## AWS Management Console<a name="USER_CreateSnapshot.CON"></a>
 
 **To create a DB snapshot**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, click **DB Instances**\.
+1. In the navigation pane, choose **Instances**\.
 
-1. Click **Instance Actions**, and then click **Take DB Snapshot**\.
+1. In the list of DB instances, select the DB instance for which you want to take a snapshot\.
+
+1. Choose **Instance actions**, and then choose **Take snapshot**\.
 
    The **Take DB Snapshot** window appears\.
 
-1.  Type the name of the snapshot in the **Snapshot Name** text box\.   
+1. Type the name of the snapshot in the **Snapshot Name** box\.  
 ![\[Console db snapshot edit db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DBSnapshot.png)
 
-1.  Click **Yes, Take Snapshot**\. 
+1. Choose **Take Snapshot**\.
 
 ## CLI<a name="USER_CreateSnapshot.CLI"></a>
 
@@ -44,39 +48,9 @@ For Windows:
 2.     --db-instance-identifier mydbinstance ^
 3.     --db-snapshot-identifier mydbsnapshot
 ```
-The output from this command should look similar to the following:  
-
-```
-1. DBSNAPSHOT  mydbsnapshot  mydbinstance  2009-10-21T01:54:49.521Z  MySQL     50
-2. creating  sa  5.6.27 general-public-license
-```
 
 ## API<a name="USER_CreateSnapshot.API"></a>
 
 When you create a DB snapshot using the Amazon RDS API, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) command with the following parameters:
 + DBInstanceIdentifier
 + DBSnapshotIdentifier
-
-In this example, you create a DB snapshot called *mydbsnapshot* for a DB instance called *mydbinstance*\.
-
-**Example**  
-
-```
-https://rds.us-east-1.amazonaws.com/
-    ?Action=CreateDBSnapshot
-    &DBInstanceIdentifier=mydbinstance
-    &DBSnapshotIdentifier=mydbsnapshot
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2013-09-09
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20140423/us-east-1/rds/aws4_request
-    &X-Amz-Date=20140423T161105Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=e9649af6edcfbab4016f04d72e1b7fc16d8734c37477afcf25b3def625484ed2
-```
-
-## Related Topics<a name="USER_CreateSnapshot.related"></a>
-+ [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
-+ [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)
-+ [Sharing a DB Snapshot or DB Cluster Snapshot](USER_ShareSnapshot.md)

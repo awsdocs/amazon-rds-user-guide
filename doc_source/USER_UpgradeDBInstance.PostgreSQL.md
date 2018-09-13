@@ -36,6 +36,7 @@ Amazon RDS supports an in\-place upgrade from the following:
 + A PostgreSQL 9\.3\.x DB instance to a PostgreSQL 9\.4\.x DB instance
 + A PostgreSQL 9\.4\.x DB instance to a PostgreSQL 9\.5\.x DB instance
 + A PostgreSQL 9\.5\.x DB instance to a PostgreSQL 9\.6\.x DB instance
++ A PostgreSQL 9\.6\.x DB instance to a PostgreSQL 10\.x DB instance
 
  Amazon RDS uses the `pg_upgrade` utility found at [http://www\.postgresql\.org/docs/9\.4/static/pgupgrade\.html](http://www.postgresql.org/docs/9.4/static/pgupgrade.html) to safely upgrade your instance\. 
 
@@ -144,7 +145,7 @@ If your PostgreSQL DB instance is using read replication, you must upgrade all o
 ## CLI<a name="USER_UpgradeDBInstance.PostgreSQL.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 + `--engine-version` – the version number of the database engine to upgrade to\. 
 + `--allow-major-version-upgrade` – to to upgrade major version\. 
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
@@ -172,7 +173,7 @@ For Windows:
 ## API<a name="USER_UpgradeDBInstance.PostgreSQL.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-+ `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
++ `DBInstanceIdentifier` – the name of the DB instance, for example *mydbinstance*\. 
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
@@ -196,5 +197,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.PostgreSQL.Related"></a>
-+ [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
++ [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

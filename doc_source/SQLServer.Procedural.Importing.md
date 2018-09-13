@@ -29,7 +29,7 @@ The following are some limitations to using native backup and restore:
 
 We recommend that you use native backup and restore to migrate your database to Amazon RDS if your database can be offline while the backup file is created, copied, and restored\. If your on\-premises database can't be offline, we recommend that you use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [ What Is AWS Database Migration Service? ](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 
-Native backup and restore is not intended to replace the data recovery capabilities of the cross\-region snapshot copy feature\. We recommend that you use snapshot copy to copy your database snapshot to another region for cross\-region disaster recovery in Amazon RDS\. For more information, see [Copying a DB Snapshot or DB Cluster Snapshot](USER_CopySnapshot.md)\. 
+Native backup and restore is not intended to replace the data recovery capabilities of the cross\-region snapshot copy feature\. We recommend that you use snapshot copy to copy your database snapshot to another region for cross\-region disaster recovery in Amazon RDS\. For more information, see [Copying a Snapshot](USER_CopySnapshot.md)\. 
 
 ## Setting Up for Native Backup and Restore<a name="SQLServer.Procedural.Importing.Native.Enabling"></a>
 
@@ -48,7 +48,9 @@ To enable native backup and restore on your DB instance, you add the `SQLSERVER_
 
 If you want to manually create a new IAM role to use with native backup and restore, you create a role to delegate permissions from the Amazon RDS service to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. For the native backup and restore feature, use trust and permissions policies similar to the examples following\. For more information about creating the role, see [ Creating a Role to Delegate Permissions to an AWS Service](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
-The trust and permissions policies require that you provide an Amazon Resource Name \(ARN\)\. For more information about ARN formatting, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
+To use the trust and permissions policies, you provide an Amazon Resource Name \(ARN\)\. For more information about ARN formatting, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
+
+In the first example following, we use the service principle name `rds.amazon.aws.com` as an alias for all service accounts\. In the other examples, we specify an ARN to identify another account, user, or role that we're granting access to in the trust policy\. 
 
 **Example Trust Policy for Native Backup and Restore**  
 
@@ -323,7 +325,7 @@ The following are issues you might encounter when you use native backup and rest
 
 | Issue | Troubleshooting Suggestions | 
 | --- | --- | 
-|  `Access Denied`   |  Verify that you have provided a correct bucket, in the correct format\. The ARN must include the file name\.  For more information, see [Using Native Backup and Restore](#SQLServer.Procedural.Importing.Native.Using)\.   | 
+|  `Access Denied`   |  The backup or restore process is unable to access the backup file\. This is usually caused by issues like the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)  | 
 |  `BACKUP DATABASE WITH COMPRESSION is not supported on <edition_name> Edition`   |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\.  For more information, see [Compressing Backup Files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
 |  `Database <database_name> cannot be restored because there is already an existing database with the same family_guid on the instance`   |  You can't restore a backup file to the same DB instance that was used to create the backup file\. Instead, restore the backup file to a new DB instance\.  You also can't restore the same backup file to a DB instance multiple times\. That is, you can't restore a backup file to a DB instance that already contains the database that you are restoring\. Instead, restore the backup file to a new DB instance\.   | 
 |  `Key <ARN> does not exist`   |  You attempted to restore an encrypted backup, but didn't provide a valid encryption key\. Check your encryption key and retry\.  For more information, see [Restoring a Database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.   | 

@@ -4,7 +4,7 @@ If you use a DB instance intermittently, for temporary testing, or for a daily d
 
 You can stop and start DB instances that are running the following engines: MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL\. Stopping and starting a DB instance is supported for all DB instance classes, and in all AWS Regions\. 
 
-When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. Amazon RDS automatically backs up a stopped DB instance\. 
+When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
 
 You can stop a DB instance for up to seven days\. If you do not manually start your DB instance after seven days, your DB instance is automatically started\. 
 
@@ -54,7 +54,7 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 ## CLI<a name="USER_StopInstance.CLI"></a>
 
 To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/stop-db-instance.html) command with the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 
 **Example**  
 
@@ -65,9 +65,9 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](http:/
 ## API<a name="USER_StopInstance.API"></a>
 
 To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) action with the following parameter: 
-+ `DBInstanceIdentifier` – the name of the db instance\. 
++ `DBInstanceIdentifier` – the name of the DB instance\. 
 
 ## Related Topics<a name="USER_StopInstance.Related"></a>
 + [Starting an Amazon RDS DB Instance That Was Previously Stopped](USER_StartInstance.md)
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
-+ [Rebooting a DB Instance](USER_RebootInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)
++ [Rebooting a DB Instance ](USER_RebootInstance.md)

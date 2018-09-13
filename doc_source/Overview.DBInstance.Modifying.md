@@ -28,12 +28,9 @@ Changes to some database settings are applied immediately, even if you choose to
 + [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)
 + [Settings for PostgreSQL DB Instances](USER_ModifyPostgreSQLInstance.md#USER_ModifyInstance.Postgres.Settings)
 
-**Note**  
-For Aurora, when you modify a DB cluster, only the New DB Cluster Identifier and Master User Password settings are affected by the apply immediately setting\. All other modifications are applied immediately, regardless of the value of the apply immediately setting\. 
-
 ## Related Topics<a name="Overview.DBInstance.Modifying.Related"></a>
 + [Renaming a DB Instance](USER_RenameInstance.md)
-+ [Rebooting a DB Instance](USER_RebootInstance.md)
++ [Rebooting a DB Instance ](USER_RebootInstance.md)
 + [Stopping an Amazon RDS DB Instance Temporarily](USER_StopInstance.md)
 + [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)
 + [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)

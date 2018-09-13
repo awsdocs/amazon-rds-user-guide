@@ -28,7 +28,7 @@ Configure an egress rule for the external instance to operate as a Read Replica 
 
 If the Read Replica is running in an Amazon EC2 instance in an Amazon VPC, specify the egress rules in a VPC security group\. If the Read Replica is running in an Amazon EC2 instance that is not in a VPC, specify the egress rule in an Amazon EC2 security group\. If the Read Replica is installed on\-premises, specify the egress rule in a firewall\.
 
-If the Read Replica is running in a VPC, configure VPC ACL rules in addition to the security group egress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)\.
+If the Read Replica is running in a VPC, configure VPC ACL rules in addition to the security group egress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
 + ACL ingress rule allowing TCP traffic to ports 1024\-65535 from the IP address of the source MySQL DB instance\.
 + ACL egress rule: allowing outbound TCP traffic to the port and IP address of the source MySQL DB instance\.
 
@@ -44,7 +44,7 @@ Configure ingress rules on the system running the replication source MySQL DB in
 
 If the Amazon RDS instance is running in a VPC, specify the ingress rules in a VPC security group\. If the Amazon RDS instance is not running in an in a VPC, specify the ingress rules in a database security group\.
 
-If the Amazon RDS instance is running in a VPC, configure VPC ACL rules in addition to the security group ingress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)\.
+If the Amazon RDS instance is running in a VPC, configure VPC ACL rules in addition to the security group ingress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
 + ACL ingress rule: allow TCP connections to the port used by the Amazon RDS instance from the IP address of the external MySQL Read Replica\.
 + ACL egress rule: allow TCP connections from ports 1024\-65535 to the IP address of the external MySQL Read Replica\.
 
@@ -147,5 +147,5 @@ After replication on the MySQL instance has caught up with the Amazon RDS source
 On the Amazon RDS Read Replica, call the `mysql.rds_start_replication` stored procedure\. This will allow Amazon RDS to start purging the binary log files from the source MySQL DB instance\.
 
 ## Related Topics<a name="MySQL.Procedural.Exporting.Related"></a>
-+ [Importing Data into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)
++ [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)
 + [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

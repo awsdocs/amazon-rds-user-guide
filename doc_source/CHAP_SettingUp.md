@@ -50,13 +50,13 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
 1. Choose **Next: Permissions**\.
 
-1. On the **Set permissions for user** page, choose **Add user to group**\.
+1. On the **Set permissions** page, choose **Add user to group**\.
 
 1. Choose **Create group**\.
 
-1. In the **Create group** dialog box, type **Administrators**\.
+1. In the **Create group** dialog box, for **Group name** type **Administrators**\.
 
-1. For **Filter**, choose **Job function**\.
+1. For **Filter policies**, select the check box for **AWS managed \- job function**\.
 
 1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 
@@ -96,7 +96,7 @@ Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or 
 
   For information on how to determine if your account has a default VPC in a particular AWS Region, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\.
 
-  The follow list describes the rules for each VPC option:
+  The following list describes the rules for each VPC option:
   + **Default VPC** – If your AWS account has a default VPC in the current AWS Region, that VPC is configured to support DB instances\. If you specify the default VPC when you create the DB instance, do the following:
     + Create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\. 
     + Specify the default DB subnet group\. If this is the first DB instance you have created in this AWS Region, Amazon RDS creates the default DB subnet group when it creates the DB instance\.
@@ -114,7 +114,7 @@ Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or 
   + General Purpose \(SSD\)
   + Provisioned IOPS \(PIOPS\)
 
-  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [DB instance storage](CHAP_Storage.md)\.
 
 When you have the information you need to create the security group and the DB instance, continue to the next step\.
 
@@ -167,7 +167,6 @@ Once you have completed the setup requirements, you can launch a DB instance usi
 
 | Database Engine | Documentation | 
 | --- | --- | 
-| Amazon Aurora | [Creating a DB Cluster and Connecting to a Database on an Amazon Aurora DB Instance](CHAP_GettingStarted.CreatingConnecting.Aurora.md) | 
 | MariaDB | [Creating a MariaDB DB Instance and Connecting to a Database on a MariaDB DB Instance](CHAP_GettingStarted.CreatingConnecting.MariaDB.md) | 
 | Microsoft SQL Server | [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md) | 
 | MySQL | [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md) | 

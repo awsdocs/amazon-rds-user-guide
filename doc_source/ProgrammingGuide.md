@@ -1,4 +1,4 @@
-# Amazon RDS Application Programming Interface \(API\)<a name="ProgrammingGuide"></a>
+# Amazon RDS Application Programming Interface \(API\) Reference<a name="ProgrammingGuide"></a>
 
 In addition to the AWS Management Console, and the AWS Command Line Interface \(AWS CLI\), Amazon Relational Database Service \(Amazon RDS\) also provides an application programming interface \(API\)\. You can use the API to automate tasks for managing your DB instances and other objects in Amazon RDS\. 
 + For an alphabetical list of API actions, see [API Actions](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html)\.

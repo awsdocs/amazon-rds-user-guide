@@ -23,6 +23,8 @@ If your DB instance is using read replication, you must upgrade all of the Read 
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on your database engine, engine version, and the size of your DB instance\. 
 
+If you are using a custom parameter group, and you perform a major version upgrade, you must specify either a default parameter group for the new DB engine version or create your own custom parameter group for the new DB engine version\. Associating the new parameter group with the DB instance requires a customer\-initiated database reboot after the upgrade completes\. The instance's parameter group status will show `pending-reboot` if the instance needs to be rebooted to apply the parameter group changes\. An instance's parameter group status can be viewed in the AWS console or by using a "describe" call such as `describe-db-instances`\.
+
 ## AWS Management Console<a name="USER_UpgradeDBInstance.MariaDB.Console"></a>
 
 **To upgrade the engine version of a DB instance by using the AWS Management Console**
@@ -46,7 +48,7 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 ## CLI<a name="USER_UpgradeDBInstance.MariaDB.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 + `--engine-version` – the version number of the database engine to upgrade to\. 
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
@@ -73,7 +75,7 @@ For Windows:
 ## API<a name="USER_UpgradeDBInstance.MariaDB.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-+ `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
++ `DBInstanceIdentifier` – the name of the DB instance, for example *mydbinstance*\. 
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
 
@@ -96,5 +98,5 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.MariaDB.Related"></a>
-+ [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
++ [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

@@ -37,7 +37,7 @@ There are two ways to shrink the tempdb database on your Amazon RDS DB instance\
 
 ### Using the rds\_shrink\_tempdbfile Procedure<a name="SQLServer.TempDB.Shrinking.Proc"></a>
 
-You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no down time for your DB instance\. 
+You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no downtime for your DB instance\. 
 
 The `rds_shrink_tempdbfile` procedure has the following parameters\. 
 
@@ -67,7 +67,7 @@ The following example shrinks a tempdb database file named `test_file`, and requ
 
 ### Setting the SIZE Property<a name="SQLServer.TempDB.Shrinking.Size"></a>
 
-You can also shrink the tempdb database by setting the `SIZE` property and then restarting your DB instance\. For more information about restarting your DB instance, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+You can also shrink the tempdb database by setting the `SIZE` property and then restarting your DB instance\. For more information about restarting your DB instance, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 
 
 The following example demonstrates setting the `SIZE` property to 1024 MB\. 
 
@@ -87,4 +87,4 @@ If you modify any database options on the tempdb database, you can capture those
   For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 + First modify tempdb in the original primary instance, then fail over manually, and finally modify tempdb in the new primary instance\. This method involves downtime\. 
 
-  For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+  For more information, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 

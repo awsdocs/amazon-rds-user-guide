@@ -2,18 +2,12 @@
 
 You can view, download, and watch database logs using the Amazon RDS console, the AWS Command Line Interface \(AWS CLI\), or the Amazon RDS API\. Viewing, downloading, or watching transaction logs is not supported\. 
 
-For engine\-specific documentation, see the following\.
-
-
-****  
-
-| Database Engine | Relevant Documentation | 
-| --- | --- | 
-|  MariaDB  |  You can access the error log, the slow query log, and the general log\. For more information, see [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)\.  | 
-|  Microsoft SQL Server  |  You can access SQL Server error logs, agent logs, and trace files\. For more information, see [Microsoft SQL Server Database Log Files](USER_LogAccess.Concepts.SQLServer.md)\.  | 
-|  MySQL  |  You can access the error log, the slow query log, and the general log\. For more information, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)\.  | 
-|  Oracle  |  You can access Oracle alert logs, audit files, and trace files\. For more information, see [Oracle Database Log Files](USER_LogAccess.Concepts.Oracle.md)\.  | 
-|  PostgreSQL  |  You can access query logs and error logs\. Error logs can contain auto\-vacuum and connection information, as well as rds\_admin actions\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.  | 
+For engine\-specific information, see the following:
++ [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)
++ [Microsoft SQL Server Database Log Files](USER_LogAccess.Concepts.SQLServer.md)
++ [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
++ [Oracle Database Log Files](USER_LogAccess.Concepts.Oracle.md)
++ [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)
 
 ## Viewing and Listing Database Log Files<a name="USER_LogAccess.Procedural.Viewing"></a>
 
@@ -30,13 +24,13 @@ You can view database log files for your DB engine by using the Amazon RDS conso
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file that you want to view, and then choose **Instance Actions**, **See Details**\. 
+1. Click the name of the DB instance that has the log file that you want to view\.
 
 1. Scroll down to the **Logs** section\. 
 
 1. In the **Logs** section, choose the log you wish to view and then choose **View**\.
 
-### CLI<a name="USER_LogAccess.CLI"></a>
+### AWS CLI<a name="USER_LogAccess.CLI"></a>
 
 To list the available database log files for a DB instance, use the AWS CLI [http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-log-files.html) command\.
 
@@ -64,7 +58,7 @@ You can use the Amazon RDS console, AWS CLI or API to download a database log fi
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file that you want to view, and then choose **Instance actions**, **See details**\. 
+1. Click the name of the DB instance that has the log file that you want to view\.
 
 1. Scroll down to the **Logs** section\. 
 
@@ -73,7 +67,7 @@ You can use the Amazon RDS console, AWS CLI or API to download a database log fi
 1. Open the context \(right\-click\) menu for the link provided, and then choose **Save Link As**\. Type the location where you want the log file to be saved, and then choose **Save**\.  
 ![\[viewing log file\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/log_download2.png)
 
-### CLI<a name="USER_LogAccess.Procedural.Downloading.CLI"></a>
+### AWS CLI<a name="USER_LogAccess.Procedural.Downloading.CLI"></a>
 
 To download a database log file, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html](http://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)\. By default, this command will download only the latest portion of a log file; however, you can download an entire file by specifying the parameter `--starting-token 0`\.
 
@@ -84,20 +78,20 @@ For Linux, OS X, or Unix:
 
 ```
 1. aws rds download-db-log-file-portion \
-2.     --db-instance-identifier myexampledb \
-3.     --starting-token 0 --output text \
-4.     --log-file-name log/ERROR.4 > errorlog.txt
+2. 						--db-instance-identifier myexampledb \
+3. 						--starting-token 0 --output text \
+4. 						--log-file-name log/ERROR.4 > errorlog.txt
 ```
 For Windows:  
 
 ```
 1. aws rds download-db-log-file-portion ^
-2.     --db-instance-identifier myexampledb ^
-3.     --starting-token 0 --output text ^
-4.     --log-file-name log/ERROR.4 > errorlog.txt
+2. 						--db-instance-identifier myexampledb ^
+3. 						--starting-token 0 --output text ^
+4. 						--log-file-name log/ERROR.4 > errorlog.txt
 ```
 
-### API<a name="USER_LogAccess.Procedural.Downloading.API"></a>
+### RDS API<a name="USER_LogAccess.Procedural.Downloading.API"></a>
 
 To download a database log file, use the Amazon RDS API [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DownloadDBLogFilePortion.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DownloadDBLogFilePortion.html) action\.
 
@@ -113,20 +107,18 @@ You can monitor the contents of a log file by using the Amazon RDS console\.
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose the DB instance that has the log file that you want to watch, and then choose **Instance actions**, **See details**\. 
+1. Click the name of the DB instance that has the log file that you want to view\.
 
-1. In the **Logs** pane, choose a log filem, and then choose **Watch**\.
+1. In the **Logs** pane, choose a log file, and then choose **Watch**\.
 
 ## Publishing Database Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
 
-In addition to viewing and downloading DB instance logs, you can also publish logs to Amazon CloudWatch Logs for real\-time analysis\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and you can use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs store your log data in highly durable storage, which you can manage with the CloudWatch Logs Agent\.
+In addition to viewing and downloading DB instance logs, you can publish logs to Amazon CloudWatch Logs\. CloudWatch Logs lets you perform real\-time analysis of the log data, store the data in highly durable storage,and manage the data with the CloudWatch Logs Agent\. AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
 
-AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information about setting a CloudWatch Log retention period, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
-
- For more information about publishing database logs to CloudWatch Logs, see the following:
+ For engine\-specific information, see the following:
 + [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 + [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
-+ [Publishing Audit Log Data From Amazon Aurora to Amazon CloudWatch Logs](AuroraMySQL.Integrating.CloudWatch.md)
++ [Publishing Oracle Logs to Amazon CloudWatch Logs](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Oracle.PublishtoCloudWatchLogs)
 
 ## Reading Log File Contents Using REST<a name="DownloadCompleteDBLogFile"></a>
 
@@ -163,5 +155,3 @@ X-Amz-Signature: 353a4f14b3f250142d9afc34f9f9948154d46ce7d4ec091d0cdabbcf8b40c55
 
 If you specify a nonexistent DB instance, the response consists of the following error:
 + `DBInstanceNotFound`—`DBInstanceIdentifier` does not refer to an existing DB instance\. \(HTTP status code: 404\)
-
-## <a name="USER_LogAccess.related"></a>

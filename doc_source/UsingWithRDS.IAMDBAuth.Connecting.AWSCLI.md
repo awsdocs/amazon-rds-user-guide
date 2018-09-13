@@ -1,10 +1,10 @@
-# Command Line: AWS CLI and mysql Client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI"></a>
+# Connecting to Your DB Instance from the Command Line: AWS CLI and mysql Client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI"></a>
 
-You can connect from the command line to an RDS DB instance or Aurora DB cluster with the AWS CLI and `mysql` command line tool as described following\.
+You can connect from the command line to an Amazon RDS DB instance with the AWS CLI and `mysql` command line tool as described following\.
 
 **Topics**
 + [Generating an Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
-+ [Connecting to a DB Instance or DB Cluster](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
++ [Connecting to a DB Instance](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
 
 ## Generating an Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken"></a>
 
@@ -19,9 +19,9 @@ aws rds generate-db-auth-token \
 ```
 
 In the example, the parameters are as follows:
-+ `--hostname` — The host name of the DB instance or DB cluster that you want to access\.
-+ `--port` — The port number used for connecting to the DB instance or DB cluster\.
-+ `--region` — The AWS Region where the DB instance or DB cluster is running\. 
++ `--hostname` — The host name of the DB instance that you want to access\.
++ `--port` — The port number used for connecting to your DB instance \.
++ `--region` — The AWS Region where the DB instance is running\. 
 + `--username` — The database account that you want to access\.
 
 The first several characters of the token look like the following\.
@@ -30,7 +30,7 @@ The first several characters of the token look like the following\.
 rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com:3306/?Action=connect&DBUser=jane_doe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=900...
 ```
 
-## Connecting to a DB Instance or DB Cluster<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect"></a>
+## Connecting to a DB Instance<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect"></a>
 
 The general format for connecting is shown following\.
 
@@ -39,9 +39,9 @@ mysql --host=hostName --port=portNumber --ssl-ca=[full path]rds-combined-ca-bund
 ```
 
 The parameters are as follows:
-+ `--host` — The host name of the DB instance or DB cluster that you want to access\.
-+ `--port` — The port number used for connecting to the DB instance or DB cluster\.
-+ `--ssl-ca` — The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
++ `--host` — The host name of the DB instance that you want to access\.
++ `--port` — The port number used for connecting to your DB instance\.
++ `--ssl-ca` — The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` — A value that specifies that `AWSAuthenticationPlugin` must be used for this connection\.
 + `--user` — The database account that you want to access\.
 + `--password` — A signed IAM authentication token\.
@@ -50,7 +50,7 @@ The authentication token consists of several hundred characters\. It can be unwi
 
 ```
 RDSHOST="rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com"
-TOKEN="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 3306 --username jane_doe )"
+TOKEN="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 3306 --region us-west-2 --username jane_doe )"
 
 mysql --host=$RDSHOST --port=3306 --ssl-ca=/sample_dir/rds-combined-ca-bundle.pem --enable-cleartext-plugin --user=jane_doe --password=$TOKEN
 ```

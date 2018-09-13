@@ -1,6 +1,6 @@
 # Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
 
-A common scenario includes an Amazon RDS DB instance in an Amazon VPC, that shares data with a Web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
+A common scenario includes an Amazon RDS DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
 
 The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)\. 
 
@@ -56,10 +56,10 @@ You must have either two private subnets or two public subnets available to crea
 
 1. On the **Create Subnet** page, set these values: 
    + **Name tag:** `Tutorial private 2`
-   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-f1b76594 (10.0.0.0/16) | tutorial-vpc`
+   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
    + **Availability Zone:** `us-west-2b` 
 **Note**  
-Choose an Availability Zone different from the one that you chose for the first private subnet\.
+Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
    + **IPv4 CIDR block:** `10.0.2.0/24`
 
 1. When you're finished, choose **Yes, Create**\.
@@ -67,6 +67,8 @@ Choose an Availability Zone different from the one that you chose for the first 
 1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, `Tutorial private 1`\. 
 
 1. Below the list of subnets, choose the **Route Table** tab, and note the value for **Route Table**—for example: `rtb-98b613fd`\. 
+
+1. In the list of subnets, deselect the first private subnet\.
 
 1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route Table** tab\. 
 
@@ -88,7 +90,7 @@ Next you create a security group for public access\. To connect to public instan
    + **Name tag:** `tutorial-securitygroup`
    + **Group name:** `tutorial-securitygroup`
    + **Description:** `Tutorial Security Group`
-   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-f1b76594 (10.0.0.0/16) | tutorial-vpc` 
+   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc` 
 
 1. To create the security group, choose **Yes, Create**\.
 
@@ -132,7 +134,7 @@ To keep your Amazon RDS DB instance private, create a second security group for 
    + **Name tag:** `tutorial-db-securitygroup`
    + **Group name:** `tutorial-db-securitygroup`
    + **Description:** `Tutorial DB Instance Security Group`
-   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-f1b76594 (10.0.0.0/16) | tutorial-vpc`
+   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
 
 1. To create the security group, choose **Yes, Create**\.
 
@@ -149,3 +151,26 @@ To keep your Amazon RDS DB instance private, create a second security group for 
    + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
 
 1. To save your settings, choose **Save**\.
+
+## Create a DB Subnet Group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
+
+A DB subnet group is a collection of subnets that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances\.
+
+**To create a DB subnet group**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Subnet groups**\.
+
+1. Choose **Create DB Subnet Group**\.
+
+1. On the **Create DB subnet group** page, set these values in **Subnet group details**:
+   + **Name:** `tutorial-db-subnet-group`
+   + **Description:** `Tutorial DB Subnet Group`
+   + **VPC:** `tutorial-vpc (vpc-identifier)` 
+
+1. In the **Add subnets** section, click the **Add all the subnets related to this VPC** link\. 
+
+1. Choose **Create**\. 
+
+    Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\. 

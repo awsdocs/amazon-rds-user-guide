@@ -91,7 +91,7 @@ psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --
 
 ### Troubleshooting Connection Issues<a name="CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting"></a>
 
-By far the most common problem that occurs when attempting to connect to a database on a DB instance is the access rules in the security group assigned to the DB instance\. If you used the default DB security group when you created the DB instance, chances are good that the security group did not have the rules that allow you to access the instance\. For more information about Amazon RDS security groups, see [Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)
+By far the most common problem that occurs when attempting to connect to a database on a DB instance is the access rules in the security group assigned to the DB instance\. If you used the default DB security group when you created the DB instance, chances are good that the security group did not have the rules that allow you to access the instance\. For more information about Amazon RDS security groups, see [Controlling Access with Amazon RDS Security Groups](Overview.RDSSecurityGroups.md)
 
 The most common error is *could not connect to server: Connection timed out*\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through any firewall your connection may be going through\.
 

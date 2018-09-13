@@ -1,4 +1,4 @@
-# Working with Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances"></a>
+# Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances"></a>
 
 Reserved DB instances let you reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and region\. 
 
@@ -7,9 +7,6 @@ The general process for working with reserved DB instances is: First get informa
 ## Overview of Reserved Instances<a name="USER_WorkingWithReservedDBInstances.Overview"></a>
 
 When you purchase a reserved instance in Amazon RDS, you purchase a commitment to getting a discounted rate, on a specific DB instance type, for the duration of the reserved instance\. To use an Amazon RDS reserved instance, you create a new DB instance just like you do for an on\-demand instance\. The new DB instance you create must match the specifications of the reserved instance\. If the specifications of the new DB instance matches an existing reserved instance for your account, you are billed at the discounted rate offered for the reserved instance; otherwise, the DB instance is billed at an on\-demand rate\. 
-
-**Note**  
- The discount from a reserved DB instance will apply to usage irrespective of whether the instance is running in an EC2\-Classic \(non\-VPC\) or Amazon Virtual Private Cloud \(Amazon VPC\)\. For information about moving a DB instance into a VPC, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 For more information about reserved DB instances, including pricing, see [Amazon RDS Reserved Instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
 
@@ -33,7 +30,6 @@ When you purchase a reserved instance, one of the things that you specify is the
 If you have a DB instance, and you need to scale it to larger capacity, your reserved instance is automatically applied to your scaled DB instance\. That is, your reserved instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved instances are available for DB instances with the same AWS Region, database engine, and instance family\. Reserved instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. 
 
 Size\-flexible reserved instances are available for the following database engines: 
-+ Amazon Aurora
 + MariaDB
 + MySQL
 + Oracle, Bring Your Own License
@@ -57,7 +53,7 @@ You can compare usage for different reserved instance sizes by using normalized 
 | 10xlarge | 80 | 160 | 
 | 16xlarge | 128 | 256 | 
 
-For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` db instances in your account in the same region, the billing benefit is applied in full to both instances\. 
+For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same region, the billing benefit is applied in full to both instances\. 
 
 ![\[Applying a reserved DB instance in full to smaller DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-instance-flex-full.png)
 
@@ -90,8 +86,6 @@ You can use the AWS Management Console to work with reserved instances as shown 
 1. For **DB instance class**, choose the DB instance class\.
 
 1. For **Multi\-AZ deployment**, choose whether or not you want a Multi\-AZ deployment\.
-**Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved instance, the cluster is automatically created as Multi\-AZ\. 
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 
@@ -116,8 +110,6 @@ After you have information about the available reserved DB instance offerings, y
 1. For **DB instance class**, choose the DB instance class\.
 
 1. For **Multi\-AZ deployment**, choose whether or not you want a Multi\-AZ deployment\.
-**Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved instance, the cluster is automatically created as Multi\-AZ\. 
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 
@@ -385,6 +377,3 @@ The API returns output similar to the following:
 40.   </ResponseMetadata>
 41. </DescribeReservedDBInstancesResponse>
 ```
-
-## Related Topics<a name="USER_WorkingWithReservedDBInstances.Related"></a>
-+ [How You Are Charged for Amazon RDS](Welcome.md#Welcome.Costs)

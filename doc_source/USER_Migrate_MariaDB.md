@@ -8,6 +8,7 @@ After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associa
 
 Incompatibilities between MySQL and MariaDB include the following:
 + You can't migrate a DB snapshot created with MySQL 5\.7 or MySQL 5\.5 to MariaDB 10\.1\.
++ You can't migrate a DB snapshot created with MySQL 5\.6\.40 or 5\.7\.22 to MariaDB\.
 + You can't migrate an encrypted snapshot\.
 + If the source MySQL database uses a SHA256 password hash, you need to reset user passwords that are SHA256 hashed before you can connect to the MariaDB database\. The following code shows how to reset a password that is SHA256 hashed:
 
@@ -35,7 +36,7 @@ Incompatibilities between MySQL and MariaDB include the following:
 
 1. On the **Migrate Database** page, provide additional information that RDS needs to launch the MariaDB DB instance\.
    + **DB Engine Version**: Choose the version of the MariaDB database engine that you want to use\. For more information, see [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)\. 
-   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
    + **Multi\-AZ Deployment**: Choose **Yes** to deploy your DB instance in multiple Availability Zones; otherwise, **No**\. For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
    + **DB Snapshot ID**: Type a name for the DB snapshot identifier\. 
 

@@ -110,14 +110,14 @@ To upgrade a Microsoft SQL Server DB instance by using the AWS Management Consol
 ## CLI<a name="USER_UpgradeDBInstance.SQLServer.CLI"></a>
 
 To upgrade a Microsoft SQL Server DB instance by using the AWS CLI, call the [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
-+ `--db-instance-identifier` – the name of the db instance\. 
++ `--db-instance-identifier` – the name of the DB instance\. 
 + `--engine-version` – the version number of the database engine to upgrade to\. 
 + `--allow-major-version-upgrade` – to upgrade major version\. 
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)\. 
-+ `--option-group-name` – the option group for the upgraded db instance\. 
-+ `--db-parameter-group-name` – the parameter group for the upgraded db instance\. 
++ `--option-group-name` – the option group for the upgraded DB instance\. 
++ `--db-parameter-group-name` – the parameter group for the upgraded DB instance\. 
 
 **Example**  
 The following code upgrades a DB instance\. These changes are applied during the next maintenance window\.   
@@ -147,14 +147,14 @@ aws rds modify-db-instance ^
 ## API<a name="USER_UpgradeDBInstance.SQLServer.API"></a>
 
 To upgrade a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
-+ `DBInstanceIdentifier` – the name of the db instance\. 
++ `DBInstanceIdentifier` – the name of the DB instance\. 
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)\. 
-+ `OptionGroupName` – the option group for the upgraded db instance\. 
-+ `DBParameterGroupName` – the parameter group for the upgraded db instance\. 
++ `OptionGroupName` – the option group for the upgraded DB instance\. 
++ `DBParameterGroupName` – the parameter group for the upgraded DB instance\. 
 
 **Example**  
 The following code upgrades a DB instance\. These changes are applied during the next maintenance window\.   
@@ -179,6 +179,7 @@ The following code upgrades a DB instance\. These changes are applied during the
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.SQLServer.Related"></a>
-+ [Maintaining an Amazon RDS DB Instance](USER_UpgradeDBInstance.Maintenance.md)
-+ [Applying Updates for a DB Instance or DB Cluster](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
++ [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
+

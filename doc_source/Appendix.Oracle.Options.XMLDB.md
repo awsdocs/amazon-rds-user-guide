@@ -42,7 +42,3 @@ You can remove the XML DB option from a DB instance running version 11g\.
 To remove the XML DB option from a DB instance running version 11g, do one of the following: 
 + To remove the XMLDB option from multiple DB instances, remove the XMLDB option from the option group they belong to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
 + To remove the XMLDB option from a single DB instance, modify the DB instance and specify a different option group that doesn't include the XMLDB option\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
-
-## Related Topics<a name="Appendix.Oracle.Options.XMLDB.Related"></a>
-+ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

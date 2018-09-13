@@ -1,7 +1,6 @@
 # Using SSL to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
 
-You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, Amazon Aurora, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
-+ [Using SSL with Aurora DB Clusters](Aurora.Overview.md#Aurora.Overview.Security.SSL)
+You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
 + [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
@@ -35,9 +34,9 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [Canada \(Central\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ca-central-1.pem)
 
-[China \(Beijing\)](https://s3.amazonaws.com/rds-downloads/rds-cn-north-1-ca-certificate.pem)
+[China \(Beijing\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-north-1-ca-certificate.pem)
 
-[China \(Ningxia\)](https://s3.amazonaws.com/rds-downloads/rds-ca-cn-northwest-1.pem)
+[China \(Ningxia\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-northwest-1-ca-certificate.pem)
 
 [EU \(Frankfurt\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-central-1.pem)
 
@@ -57,4 +56,6 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [US West \(Oregon\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem)
 
-[ AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012; for CA\-2017, see following\)
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
+
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)
