@@ -1,14 +1,12 @@
 # Upgrading the Oracle DB Engine<a name="USER_UpgradeDBInstance.Oracle"></a>
 
 When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. Amazon RDS supports the following upgrades to an Oracle DB instance: 
-
 + **Major Version Upgrades** – from 11g to 12c\. 
-
 + **Minor Version Upgrades**  
 
 You must perform all upgrades manually, and an outage occurs while the upgrade takes place\. The time for the outage varies based on your engine version and the size of your DB instance\. 
 
-For information about what Oracle versions are available on Amazon RDS, see [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
+For information about what Oracle versions are available on Amazon RDS, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
@@ -23,14 +21,13 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby r
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
-Amazon RDS supports the following upgrades to an Oracle DB instance\. 
+Amazon RDS supports upgrades of Oracle DB instances running Oracle version 11\.2\.0\.4 to Oracle version 12\.1\.0\.2\.v5 and higher\. You must modify the DB instance manually to perform a major version upgrade\. Major version upgrades do not occur automatically\. 
 
-
-****  
-
-| Current Version | Upgrade Path | 
-| --- | --- | 
-|  11\.2\.0\.4\.v1, 11\.2\.0\.4\.v3 – 11\.2\.0\.4\.v14   |  Upgrade directly to 12\.1\.0\.2\.v10  | 
+**Note**  
+Major version upgrades are not supported for deprecated Oracle versions, such as Oracle version 11\.2\.0\.3 and 11\.2\.0\.2\.
+Major version downgrades are not supported\.
+A major version upgrade from 11g to 12c must upgrade to an Oracle PSU that was released in the same month or later\.  
+For example, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v11 is supported\. However, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Oracle version 12\.1\.0\.2\.v9 is not supported, because Oracle version 11\.2\.0\.4\.v14 was released in October 2017 while Oracle version 12\.1\.0\.2\.v9 was released in July 2017\. For information about the release date for each Oracle PSU, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\.
 
 ## Oracle Minor Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Minor"></a>
 
@@ -46,6 +43,9 @@ The following minor version upgrades are not supported\.
 | 12\.1\.0\.2\.v6 | 12\.1\.0\.2\.v7 | 
 | 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v7 | 
 | 12\.1\.0\.2\.v5 | 12\.1\.0\.2\.v6 | 
+
+**Note**  
+Minor version downgrades are not supported\.
 
 ## Oracle SE2 Upgrade Paths<a name="USER_UpgradeDBInstance.Oracle.SE2"></a>
 
@@ -94,23 +94,15 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 1. Restore the DB snapshot to create a new test DB instance\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
 1. Modify this new test DB instance to upgrade it to the new version, by using one of the following methods: 
-
    + [AWS Management Console](#USER_UpgradeDBInstance.Oracle.Console)
-
    + [CLI](#USER_UpgradeDBInstance.Oracle.CLI)
-
    + [API](#USER_UpgradeDBInstance.Oracle.API)
 
 1. Perform testing: 
-
    + Run as many of your quality assurance tests against the upgraded DB instance as needed to ensure that your database and application work correctly with the new version\. 
-
    + Implement any new tests needed to evaluate the impact of any compatibility issues that you identified in step 1\. 
-
    + Test all stored procedures, functions, and triggers\. 
-
    + Direct test versions of your applications to the upgraded DB instance\. Verify that the applications work correctly with the new version\. 
-
    + Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. You might need to choose a larger instance class to support the new version in production\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 1. If all tests pass, then perform the upgrade on your production DB instance\. We recommend that you don't allow write operations to the DB instance until you confirm that everything is working correctly\. 
@@ -122,19 +114,13 @@ To upgrade an Oracle DB instance by using the AWS Management Console, you follow
 ## CLI<a name="USER_UpgradeDBInstance.Oracle.CLI"></a>
 
 To upgrade an Oracle DB instance by using the AWS CLI, call the [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
-
 + `--db-instance-identifier` – the name of the DB instance\. 
-
 + `--engine-version` – the version number of the database engine to upgrade to\. 
-
 + `--allow-major-version-upgrade` – to upgrade major version\. 
-
 + `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.Oracle.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.Oracle.OGPG.PG)\. 
-
 + `--option-group-name` – the option group for the upgraded DB instance\. 
-
 + `--db-parameter-group-name` – the parameter group for the upgraded DB instance\. 
 
 **Example**  
@@ -165,19 +151,13 @@ aws rds modify-db-instance ^
 ## API<a name="USER_UpgradeDBInstance.Oracle.API"></a>
 
 To upgrade an Oracle DB instance by using the Amazon RDS API, call the [ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
-
 + `DBInstanceIdentifier` – the name of the DB instance\. 
-
 + `EngineVersion` – the version number of the database engine to upgrade to\. 
-
 + `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
 + `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to `true`\. To apply changes during the next maintenance window, set the value to `false`\. For more information, see [The Impact of Apply Immediately](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 You might also need to include the following parameters\. For more information, see [Option Group Considerations](#USER_UpgradeDBInstance.Oracle.OGPG.OG) and [Parameter Group Considerations](#USER_UpgradeDBInstance.Oracle.OGPG.PG)\. 
-
 + `OptionGroupName` – the option group for the upgraded DB instance\. 
-
 + `DBParameterGroupName` – the parameter group for the upgraded DB instance\. 
 
 **Example**  
@@ -203,9 +183,6 @@ The following code upgrades a DB instance\. These changes are applied during the
 ```
 
 ## Related Topics<a name="USER_UpgradeDBInstance.Oracle.Related"></a>
-
 + [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)
-
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
-
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)

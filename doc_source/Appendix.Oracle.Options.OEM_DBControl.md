@@ -1,19 +1,15 @@
 # Oracle Enterprise Manager Database Express<a name="Appendix.Oracle.Options.OEM_DBControl"></a>
 
 Amazon RDS supports Oracle Enterprise Manager \(OEM\) Database Express through the use of the OEM option\. Amazon RDS supports the following versions of OEM database: 
-
 + Oracle Enterprise Manager Database Express 12c
-
 + Oracle Enterprise Manager 11g Database Control
 
 OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager Database Express 12c](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-EAB971AC-3BF3-4370-B8DF-B72F777A5575.htm#CSDBI3444) and [Accessing Enterprise Manager 11g Database Control](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-0A67F8E8-E1A9-4D0E-8381-FEC4B9316841.htm#CSDBI3445) in the Oracle documentation\. 
 
 The following are some limitations to using OEM Database: 
-
 + OEM Database is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.m1\.small\. 
 
   For more information about DB instance classes, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
-
 + OEM 11g Database Control is not compatible with the following time zones: America/Argentina/Buenos\_Aires, America/Matamoros, America/Monterrey, America/Toronto, Asia/Ashgabat, Asia/Dhaka, Asia/Kathmandu, Asia/Kolkata, Asia/Ulaanbaatar, Atlantic/Cape\_Verde, Australia/Eucla, Pacific/Kiritimati\. 
 
   For more information about time zone support, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
@@ -55,9 +51,7 @@ After you add the OEM option, you don't need to restart your DB instance\. As so
 1. Add the **OEM** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [OEM Database Option Settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Using OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.Using"></a>
@@ -76,7 +70,7 @@ When you access either tool from you web browser, a login window appears that pr
 
 After you enable OEM Database, you can modify the Security Groups setting for the option\. 
 
-You can't modify the OEM port number after you have associated the option group with a a DB instance\. To change the OEM port number for a DB instance, do the following: 
+You can't modify the OEM port number after you have associated the option group with a DB instance\. To change the OEM port number for a DB instance, do the following: 
 
 1. Create a new option group\.
 
@@ -93,13 +87,9 @@ For more information about how to modify option settings, see [Modifying an Opti
 You can remove the OEM option from a DB instance\. After you remove the OEM option, you don't need to restart your DB instance\. 
 
 To remove the OEM option from a DB instance, do one of the following: 
-
 + Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
-
 + Modify the DB instance and specify a different option group that doesn't include the OEM option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Related Topics<a name="Appendix.Oracle.Options.OEM_DBControl.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

@@ -5,9 +5,7 @@ You can use Secure Sockets Layer \(SSL\) to encrypt connections between your cli
 When you create a SQL Server DB instance, Amazon RDS creates an SSL certificate for it\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
 There are 2 ways to use SSL to connect to your SQL Server DB instance: 
-
 + Force SSL for all connections — this happens transparently to the client, and the client doesn't have to do any work to use SSL\. 
-
 + Encrypt specific connections — this sets up an SSL connection from a specific client computer, and you must do work on the client to encrypt connections\. 
 
 ## Forcing Connections to Your DB Instance to Use SSL<a name="SQLServer.Concepts.General.SSL.Forcing"></a>
@@ -36,7 +34,7 @@ If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `r
 
 1. If you created a new parameter group, modify your DB instance to attach the new parameter group\. Modify the **DB Parameter Group** setting of the DB instance\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 
-1. Reboot your DB instance\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+1. Reboot your DB instance\. For more information, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 
 
 ## Encrypting Specific Connections<a name="SQLServer.Concepts.General.SSL.Client"></a>
 
@@ -49,7 +47,7 @@ All SQL Server instances created after August 5, 2014, use the DB instance endpo
 
 To encrypt connections from a client computer to an Amazon RDS DB instance running Microsoft SQL Server, you need a certificate on your client computer\. 
 
-To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions from [https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. You can download a certificate bundle that contains both the old and new root certificates from [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. For region\-specific intermediate certificates, and more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. 
+To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions from [https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. You can download a certificate bundle that contains both the old and new root certificates from [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. For region\-specific intermediate certificates, and more information, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\. 
 
 After you have downloaded the appropriate certificate, import the certificate into your Microsoft Windows operating system by following the procedure in the section following\. 
 
@@ -131,7 +129,5 @@ To enable SSL encryption for clients that connect using JDBC, you might need to 
    ```
 
 ## Related Topics<a name="TODO.Related"></a>
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-
-+ [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)
++ [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)

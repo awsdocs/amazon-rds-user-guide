@@ -60,7 +60,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-   1. Choose the Oracle DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+   1. Click the Oracle DB instance name to display its details\. 
 
    1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
@@ -98,13 +98,8 @@ Once you are done exploring the sample DB instance that you created, you should 
 1. Choose **Delete**\. 
 
 ## Related Topics<a name="CHAP_GettingStarted.Oracle.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)
-
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-
 + [Oracle on Amazon RDS](CHAP_Oracle.md)

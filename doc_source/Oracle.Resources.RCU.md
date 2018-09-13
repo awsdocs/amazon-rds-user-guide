@@ -3,44 +3,28 @@
 You can use Amazon RDS to host an Oracle DB instance that holds the schemas to support your Fusion Middleware components\. Before you can use Fusion Middleware components, you must create and populate schemas for them in your database\. You create and populate the schemas by using the Oracle Repository Creation Utility \(RCU\)\. 
 
 You can store the schemas for any Fusion Middleware components in your Amazon RDS DB instance\. The following is a list of schemas that have been verified to install correctly: 
-
 + Analytics \(ACTIVITIES\)
-
 + Audit Services \(IAU\)
-
 + Audit Services Append \(IAU\_APPEND\)
-
 + Audit Services Viewer \(IAU\_VIEWER\)
-
 + Discussions \(DISCUSSIONS\)
-
 + Metadata Services \(MDS\)
-
 + Oracle Business Intelligence \(BIPLATFORM\)
-
 + Oracle Platform Security Services \(OPSS\)
-
 + Portal and Services \(WEBCENTER\)
-
 + Portlet Producers \(PORTLET\)
-
 + Service Table \(STB\)
-
 + SOA Infrastructure \(SOAINFRA\)
-
 + User Messaging Service \(UCSUMS\)
-
 + WebLogic Services \(WLS\)
 
 ## Licensing and Versions<a name="Oracle.Resources.RCU.Versions"></a>
 
 Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\. You can use the RCU in the following configurations: 
-
 + RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
-
 + RCU 12c with Oracle database 11\.2\.0\.4\.v8 or later
 
-Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle Fusion Middleware Licensing Information User Manual ](http://docs.oracle.com/cd/E55108_01/doc.1213/e56762/toc.htm) in the Oracle documentation\. 
+Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle Fusion Middleware Licensing Information User Manual ](https://docs.oracle.com/cd/E55108_01/doc.62016/e56762/toc.htm) in the Oracle documentation\. 
 
 Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Editions \(SE, SE One, or SE Two\)\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\. 
 
@@ -57,13 +41,10 @@ Before you begin, you also need an Oracle DB instance\. For information about ho
 ## Recommendations<a name="Oracle.Resources.RCU.Recommendations"></a>
 
 The following are some recommendations for working with your DB instance in this scenario: 
-
 + We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
-
 + For additional security, Oracle recommends that you use Transparent Data Encryption \(TDE\) to encrypt your data at rest\. If you have an Enterprise Edition license that includes the Advanced Security Option, you can enable encryption at rest by using the TDE option\. For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\. 
 
   Amazon RDS also provides an encryption at rest option for all database editions\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. 
-
 + Configure your VPC Security Groups to allow communication between your application servers and your Amazon RDS DB instance\. The application servers that host the Fusion Middleware components can be on Amazon EC2 or on\-premises\. 
 
 ## Using the Oracle Repository Creation Utility<a name="Oracle.Resources.RCU.Installing"></a>
@@ -198,17 +179,11 @@ ${ORACLE_HOME}/oracle_common/bin/rcu \
 ## Known Issues<a name="Oracle.Resources.RCU.KnownIssues"></a>
 
 The following are some known issues for working with RCU, with some troubleshooting suggestions: 
-
 + Oracle Managed Files \(OMF\) — Amazon RDS uses OMF data files to simplify storage management\. You can customize tablespace attributes, such as size and extent management\. However, specifying a data file name when you run RCU causes tablespace code to fail with `ORA-20900`\. The RCU can be used with OMF in the following ways: 
-
   + In RCU 12\.2\.1\.0 and later, use the `-honorOMF` command\-line parameter\. 
-
   + In RCU 12\.1\.0\.3 and later, use multiple steps and edit the generated script\. For more information, see [Running RCU Using the Command Line in Multiple Steps](#Oracle.Resources.RCU.SilentMulti)\. 
-
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
-
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w3ab1c36c83c19c19"></a>
-
+## Related Topics<a name="w4aac30c83c19c19"></a>
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

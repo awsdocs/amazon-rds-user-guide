@@ -18,46 +18,42 @@ For users who don’t have full access with the `AmazonRDSFullAccess` policy, yo
 
 **To create a custom policy**
 
-1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In the left navigation pane, choose **Policies**\.
+1. In the navigation pane, choose **Policies**\.
 
 1. Choose **Create policy**\.
 
-1. On the **Create Policy** page, go to **Create Your Own Policy** and choose **Select**\.
+1. On the **Create Policy** page, choose the JSON tab\. 
 
-1. On the **Review Policy** page, set the following values:
+1. Copy and paste the following\.
 
-   + **Policy Name:** Type a name for the policy, for example: `PerformanceInsightsFullAccess`
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": "pi:*",
+               "Resource": "arn:aws:pi:*:*:metrics/rds/*"
+           }
+       ]
+   }
+   ```
 
-   + **Description:** \(Optional\) Type a short description for the policy\.
-
-   + **Policy Document: **Copy and paste the following:
-
-     ```
-     {
-         "Version": "2012-10-17",
-         "Statement": [
-             {
-                 "Effect": "Allow",
-                 "Action": "pi:*",
-                 "Resource": "arn:aws:pi:*:*:metrics/rds/*"
-             }
-         ]
-     }
-     ```
+1. Choose **Review policy**
 **Note**  
 Currently, when you enter this policy, the **Visual editor** tab displays a warning that the `pi` resource is not recognized\. You can ignore this warning\.
 
-   When the settings are as you want them, choose **Create Policy**\.
+1. Provide a name for the policy and optionally a description, and then choose **Create policy**\.
 
 You can now attach the policy to an IAM user or role\. The following procedure assumes that you already have an IAM user available for this purpose\.
 
 **To attach the policy to an IAM user**
 
-1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+1. Open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
-1. In the left navigation pane, choose **Users**\.
+1. In the navigation pane, choose **Users**\.
 
 1. Choose an existing user from the list\.
 **Important**  

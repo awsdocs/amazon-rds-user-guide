@@ -1,6 +1,6 @@
 # Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS<a name="USER_VPC"></a>
 
-There are two Amazon Elastic Compute Cloud \(EC2\) platforms that host Amazon RDS DB instances, *EC2\-VPC* and *EC2\-Classic*\. Amazon Virtual Private Cloud \(Amazon VPC\) lets you launch AWS resources, such as Amazon Relational Database Service \(Amazon RDS\) DB instances, into a virtual private cloud \(VPC\)\. 
+There are two Amazon Elastic Compute Cloud \(EC2\) platforms that host Amazon RDS DB instances, *EC2\-VPC* and *EC2\-Classic*\. Amazon Virtual Private Cloud \(Amazon VPC\) lets you launch AWS resources, such as Amazon RDS DB instances, into a virtual private cloud \(VPC\)\. 
 
 When you use an Amazon VPC, you have control over your virtual networking environment: you can select your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether your DB instance is running in an Amazon VPC or not: Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There is no additional cost to run your DB instance in Amazon VPC\. 
 
@@ -10,10 +10,49 @@ Accounts that support only the *EC2\-VPC* platform have a default VPC\. All new 
 
 Some legacy DB instances on the *EC2\-Classic* platform are not in a VPC\. The legacy *EC2\-Classic* platform does not have a default VPC, but as is true for either platform, you can create your own VPC and specify that a DB instance be located in that VPC\. 
 
-
+**Topics**
 + [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)
 + [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)
 + [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)
++ [Updating the VPC for a DB Instance](#USER_VPC.VPC2VPC)
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 
-This documentation only discusses VPC functionality relevant to Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/)\. 
+This documentation only discusses VPC functionality relevant to Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](http://docs.aws.amazon.com/vpc/latest/userguide/)\. 
+
+## Updating the VPC for a DB Instance<a name="USER_VPC.VPC2VPC"></a>
+
+You can use the AWS Management Console to easily move your DB instance to a different VPC\. 
+
+For details on how to modify a DB instance for your DB engine, see the topic in the table following that discusses your DB engine\. In the **Network & Security** section of the modify page, shown following, for **Subnet group**, enter the new subnet group\. The new subnet group must be a subnet group in a new VPC\.  
+
+![\[Modify DB Instance panel Subnet Group section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EC2-VPC.png)
+
+
+****  
+
+| Database Engine | Relevant Documentation | 
+| --- | --- | 
+| MariaDB | [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md) | 
+| Microsoft SQL Server | [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md) | 
+| MySQL | [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md) | 
+| Oracle | [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md) | 
+| PostgreSQL | [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md) | 
+
+### Moving a DB Instance Not in a VPC into a VPC<a name="USER_VPC.Non-VPC2VPC"></a>
+
+Some legacy DB instances on the EC2\-Classic platform are not in a VPC\. If your DB instance is not in a VPC, you can use the AWS Management Console to easily move your DB instance into a VPC\. Before you can move a DB instance not in a VPC, into a VPC, you must create the VPC\. 
+
+Follow these steps to create a VPC for your DB instance\. 
++ [Step 1: Create a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreatingVPC)
++ [Step 2: Add Subnets to the VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.AddingSubnets)
++  [Step 3: Create a DB Subnet Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateDBSubnetGroup)
++  [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)
+
+After you create the VPC, follow these steps to move your DB instance into the VPC\. 
++ [Updating the VPC for a DB Instance](#USER_VPC.VPC2VPC)
+
+The following are some limitations to moving your DB instance into the VPC\. 
++ Moving a Multi\-AZ DB instance not in a VPC into a VPC is not currently supported\.
++ Moving a DB instance with Read Replicas not in a VPC into a VPC is not currently supported\.
+
+If you move your DB instance into a VPC, and you are using a custom option group with your DB instance, then you need to change the option group that is associated with your DB instance\. Option groups are platform\-specific, and moving to a VPC is a change in platform\. To use a custom option group in this case, assign the default VPC option group to the DB instance, assign an option group that is used by other DB instances in the VPC you are moving to, or create a new option group and assign it to the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 

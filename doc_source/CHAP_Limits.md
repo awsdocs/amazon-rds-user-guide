@@ -2,7 +2,7 @@
 
 This topic describes the resource limits and naming constraints for Amazon RDS\.
 
-
+**Topics**
 + [Limits in Amazon RDS](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
 + [File Size Limits in Amazon RDS](#RDS_Limits.FileSize)
@@ -28,15 +28,15 @@ The following table lists the resources and their limits per region\.
 | Read replicas per master | 5 | 
 | Reserved instances | 40 | 
 | Rules per DB security group | 20 | 
-| Rules per VPC security goup | 50 inbound 50 outbound | 
+| Rules per VPC security group | 50 inbound 50 outbound | 
 | DB Security groups | 25 | 
 | VPC Security groups | 5 | 
 | Subnet groups | 50 | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
-| Total storage for all DB instances | 100 TB | 
+| Total storage for all DB instances | 100 TiB | 
 
-1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. Of those 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 can be Amazon Aurora, MySQL, MariaDB, PostgreSQL or Oracle under the "BYOL" model\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
+1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. Of those 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 can be MySQL, MariaDB, PostgreSQL, or Oracle under the "BYOL" model\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
 
 ## Naming Constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 
@@ -48,21 +48,17 @@ The following table describes naming constraints in Amazon RDS\.
 |  |  | 
 | --- |--- |
 | DB instance identifier |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
-|  Database name  |  Database name constraints differ for each database engine\. **MySQL, Amazon Aurora, and MariaDB** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **PostgreSQL** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **Oracle** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **SQL Server** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
-|  Master user name  |  Master user name constraints differ for each database engine\. **MySQL and Amazon Aurora** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **Oracle** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **SQL Server** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **PostgreSQL** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **MariaDB** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
-|  Master password  |  The password for the master database user can be any printable ASCII character except "/", """, or "@"\. Master password constraints differ for each database engine\. **MySQL, Amazon Aurora, and MariaDB** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **Oracle** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **SQL Server** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) **PostgreSQL** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
+|  Database name  |  Database name constraints differ for each database engine\.  **MySQL and MariaDB**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **Oracle**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **PostgreSQL**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **SQL Server** [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)    | 
+|  Master user name  |  Master user name constraints differ for each database engine\.  **MariaDB**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **MySQL**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **Oracle**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **PostgreSQL**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **SQL Server**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)    | 
+|  Master password  |  The password for the master database user can be any printable ASCII character except "/", """, or "@"\. Master password constraints differ for each database engine\.  **MySQL and MariaDB**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **Oracle**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **PostgreSQL**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  **SQL Server**  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)    | 
 | DB parameter group name |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 
 ## File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize"></a>
 
-### Aurora File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.Aurora"></a>
-
-With Amazon Aurora, the table size limit is only constrained by the size of the Aurora cluster volume, which has a maximum of 64 terabytes \(TB\)\. As a result, the maximum table size for a table in an Aurora database is 64 TB\.
-
 ### MySQL File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MySQL"></a>
 
-For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MySQL DB instances\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\. 
+For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MySQL DB instances\. For more information, see [DB instance storage](CHAP_Storage.md)\. 
 
 **Note**  
 Some existing DB instances have a lower limit\. For example, MySQL DB instances created prior to April 2014 have a file and table size limit of 2 TB\. This 2\-TB file size limit also applies to DB instances or Read Replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\. 
@@ -85,11 +81,9 @@ Use the following SQL command to determine if any of your tables are too large a
 ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\.
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
@@ -102,7 +96,7 @@ When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can i
 
 ### MariaDB File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
-For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MariaDB DB instances\. For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\. 
+For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MariaDB DB instances\. For more information, see [DB instance storage](CHAP_Storage.md)\. 
 
 There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [InnoDB File\-Per\-Table Mode](http://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\.
 
@@ -122,11 +116,9 @@ Use the following SQL command to determine if any of your tables are too large a
 ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\.
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.

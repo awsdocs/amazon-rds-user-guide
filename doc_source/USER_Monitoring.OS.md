@@ -3,34 +3,23 @@
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from CloudWatch Logs in a monitoring system of your choice\.
 
 The cost for using Enhanced Monitoring varies depends on several factors:
-
 + You are only charged for Enhanced Monitoring that exceeds the free tier provided by Amazon CloudWatch Logs\. 
 
   For more information about pricing, see [Amazon CloudWatch Pricing](https://aws.amazon.com/cloudwatch/pricing/)\. 
-
 + A smaller monitoring interval results in more frequent reporting of OS metrics and increases your monitoring cost\. 
-
 + Usage costs for Enhanced Monitoring are applied for each DB instance that Enhanced Monitoring is enabled for\. Monitoring a large number of DB instances is more expensive than monitoring only a few\.
-
 + DB instances that support a more compute\-intensive workload have more OS process activity to report and higher costs for Enhanced Monitoring\.
 
 ## Enhanced Monitoring Availability<a name="USER_Monitoring.OS.Availability"></a>
 
-+ Enhanced Monitoring is available for the following database engines:
+Enhanced Monitoring is available for the following database engines:
++ MariaDB
++ Microsoft SQL Server
++ MySQL version 5\.5 or later
++ Oracle
++ PostgreSQL
 
-  + Amazon Aurora
-
-  + MariaDB
-
-  + Microsoft SQL Server
-
-  + MySQL version 5\.5 or later
-
-  + Oracle
-
-  + PostgreSQL
-
-+ Enhanced monitoring is available for all DB instance classes except for `db.m1.small`\. 
+Enhanced Monitoring is available for all DB instance classes except for `db.m1.small`\. 
 
 ## Differences Between CloudWatch and Enhanced Monitoring Metrics<a name="USER_Monitoring.OS.CloudWatchComparison"></a>
 
@@ -38,7 +27,7 @@ CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB in
 
 ## Setting Up for and Enabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling"></a>
 
-### Before You Begin<a name="w3ab1c19c23c13b2"></a>
+### Before You Begin<a name="USER_Monitoring.OS.Enabling.Prerequisites"></a>
 
 Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring the required permissions using an AWS Identity and Access Management \(IAM\) role\. 
 
@@ -46,7 +35,7 @@ The first time that you enable Enhanced Monitoring in the console, you can selec
 
 You can also create the required role before you enable Enhanced Monitoring, and then specify your new role's name when you enable Enhanced Monitoring\. You must create this required role if you enable Enhanced Monitoring using the AWS CLI or the RDS API\.
 
-To create the appropriate IAM role to permit Amazon RDS to communicate with the Amazon CloudWatch Logs service on your behalf, take the following steps\.
+To create the appropriate IAM role to permit Amazon RDS to communicate with the Amazon CloudWatch Logs service on your behalf, take the following steps\.<a name="USER_Monitoring.OS.IAMRole"></a>
 
 **To create an IAM role for Amazon RDS Enhanced Monitoring**
 
@@ -54,37 +43,34 @@ To create the appropriate IAM role to permit Amazon RDS to communicate with the 
 
 1. In the navigation pane, choose **Roles**\.
 
-1. Choose **Create New Role**\.
+1. Choose **Create role**\.
 
-1. Choose the **AWS service** tab and then choose **RDS** from the list of services\.
+1. Choose the **AWS service** tab, and then choose **RDS** from the list of services\.
 
-1. Choose **RDS Role for Enhanced Monitoring**, and then choose **Next: Permissions**\.
+1. Choose **RDS \- Enhanced Monitoring**, and then choose **Next: Permissions**\.
 
 1. On the **Attached permissions policy** page, choose **AmazonRDSEnhancedMonitoringRole**, and then choose **Next: Review**\.
 
 1. For **Role Name**, type a name for your role, for example **emaccess**, and then choose **Create role**\.
 
-### Enabling and Disabling Enhanced Monitoring<a name="w3ab1c19c23c13b4"></a>
+### Enabling and Disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
 You can enable Enhanced Monitoring when you create a DB instance or Read Replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you do not need to reboot your DB instance for the change to take effect\. 
 
 You can enable Enhanced Monitoring in the RDS console when you do one of the following actions: 
-
-+ **Launch a DB Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
-
++ **Create a Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
 + **Create Read Replica** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
-
 + **Modify a DB Instance** – You can enable Enhanced Monitoring in the **Modify DB Instance** page\.
 
 To enable Enhanced Monitoring by using the RDS console, scroll to the **Monitoring** section and do the following: 
 
-1. Set the **Enable Enhanced Monitoring** property for your DB instance or Read Replica to **Yes**\.
+1. Choose **Enable enhanced monitoring** for your DB instance or Read Replica\.
 
 1. Set the **Monitoring Role** property to the IAM role that you created to permit Amazon RDS to communicate with Amazon CloudWatch Logs for you, or choose **Default** to have RDS create a role for you named `rds-monitoring-role`\.
 
 1. Set the **Granularity** property to the interval, in seconds, between points when metrics are collected for your DB instance or Read Replica\. The **Granularity** property can be set to one of the following values: `1`, `5`, `10`, `15`, `30`, or `60`\.
 
-To disable Enhanced Monitoring, set the **Enable Enhanced Monitoring** property to **No**\. 
+To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\. 
 
 ![\[Enable Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics3.png)
 
@@ -95,40 +81,33 @@ The fastest that the RDS console refreshes is every 5 seconds\. If you set the g
 
 ## Viewing Enhanced Monitoring<a name="USER_Monitoring.OS.Viewing"></a>
 
-You can view OS metrics reported by Enhanced Monitoring in the RDS console by choosing the **Enhanced Monitoring Dashboard** view for **Show Monitoring**\. Two views are available: **Dashboard** view, which shows graphs of the OS metrics, and **Process List** view, which shows the processes running on the DB instance and their related metrics including CPU percentage, memory usage, and so on\.
+You can view OS metrics reported by Enhanced Monitoring in the RDS console by choosing the **Enhanced monitoring** view from the **Monitoring** drop\-down\.
 
-Dashboard view is shown following\.
+The Enhanced Monitoring is shown following\.
 
 ![\[Dashboard view\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics1.png)
+
+If you want to see details for the processes running on your DB instance, choose **OS process list** for **Monitoring**\.
 
 Process List view is shown following\.
 
 ![\[Process list view\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics2.png)
 
 The Enhanced Monitoring metrics shown in the Process List view are organized as follows:
-
 + **RDS child processes** – Shows a summary of the RDS processes that support the DB instance, for example `aurora` for Amazon Aurora DB clusters and `mysqld` for MySQL DB instances\. Process threads appear nested beneath the parent process\. Process threads show CPU utilization only as other metrics are the same for all threads for the process\. The console displays a maximum of 100 processes and threads\. The results are a combination of the top CPU consuming and memory consuming processes and threads\. If there are more than 50 processes and more than 50 threads, the console displays the top 50 consumers in each category\. This display helps you identify which processes are having the greatest impact on performance\.
-
 + **RDS processes** – Shows a summary of the resources used by the RDS management agent, diagnostics monitoring processes, and other AWS processes that are required to support RDS DB instances\.
-
 + **OS processes** – Shows a summary of the kernel and system processes, which generally have minimal impact on performance\.
 
 The items listed for each process are:
-
 + **VIRT** – Displays the virtual size of the process\.
-
 + **RES** – Displays the actual physical memory being used by the process\.
-
-+ **CPU%** – Displays the percentage of the CPU bandwith consumed by the process\.
-
++ **CPU%** – Displays the percentage of the CPU bandwidth consumed by the process\.
 + **MEM%** – Displays the percentage of the total memory consumed by the process\.
 
 The monitoring data that is shown in the RDS console is retrieved from Amazon CloudWatch Logs\. You can also retrieve the metrics for a DB instance as a log stream from CloudWatch Logs\. For more information, see [Viewing Enhanced Monitoring by Using CloudWatch Logs](#USER_Monitoring.OS.CloudWatchLogs)\.
 
 Enhanced Monitoring metrics are not returned during the following: 
-
 + A failover of the DB instance\.
-
 + Changing the instance class of the DB instance \(scale compute\)\.
 
 Enhanced Monitoring metrics are returned during a reboot of a DB instance because only the database engine is rebooted\. Metrics for the operating system are still reported\.
@@ -149,20 +128,14 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w3ab1c19c23c17b6"></a>
+### Available OS Metrics<a name="w4aac19c13c19b7"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for Amazon Aurora, MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w3ab1c19c23c17b6b4"></a>
+#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w4aac19c13c19b7b5"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w3ab1c19c23c17b6b6"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w4aac19c13c19b7b9"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
-
-## Related Topics<a name="USER_Monitoring.related"></a>
-
-+ [Using Amazon RDS Event Notification](USER_Events.md)
-
-+ [Amazon RDS Database Log Files](USER_LogAccess.md)

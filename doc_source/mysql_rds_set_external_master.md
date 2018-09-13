@@ -2,6 +2,9 @@
 
 Configures a MySQL DB instance to be a Read Replica of an instance of MySQL running external to Amazon RDS\.
 
+**Note**  
+You can use the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure to configure an external master and delayed replication\.
+
 ## Syntax<a name="mysql_rds_set_external_master-syntax"></a>
 
 ```
@@ -19,10 +22,10 @@ CALL mysql.rds_set_external_master (
 ## Parameters<a name="mysql_rds_set_external_master-parameters"></a>
 
  *host\_name*   
-The host name or IP address of the MySQL instance running external to Amazon RDS that will become the replication master\.
+The host name or IP address of the MySQL instance running external to Amazon RDS to become the replication master\.
 
  *host\_port*   
-The port used by the MySQL instance running external to Amazon RDS to be configured as the replication master\. If your network configuration includes SSH port replication that converts the port number, specify the port number that is exposed by SSH\.
+The port used by the MySQL instance running external to Amazon RDS to be configured as the replication master\. If your network configuration includes Secure Shell \(SSH\) port replication that converts the port number, specify the port number that is exposed by SSH\.
 
  *replication\_user\_name*   
 The ID of a user with REPLICATION CLIENT and REPLICATION SLAVE permissions on the MySQL instance running external to Amazon RDS\. We recommend that you provide an account that is used solely for replication with the external instance\.
@@ -31,13 +34,14 @@ The ID of a user with REPLICATION CLIENT and REPLICATION SLAVE permissions on th
 The password of the user ID specified in `replication_user_name`\.
 
  *mysql\_binary\_log\_file\_name*   
-The name of the binary log on the replication master contains the replication information\.
+The name of the binary log on the replication master that contains the replication information\.
 
  *mysql\_binary\_log\_file\_location*   
-The location in the `mysql_binary_log_file_name` binary log at which replication will start reading the replication information\.
+The location in the `mysql_binary_log_file_name` binary log at which replication starts reading the replication information\.
 
  *ssl\_encryption*   
-This option is not currently implemented\.  The default is 0\.
+A value that specifies whether Secure Socket Layer \(SSL\) encryption is used on the replication connection\. 1 specifies to use SSL encryption, 0 specifies to not use encryption\. The default is 0\.  
+This parameter currently is only implemented for Amazon Aurora with MySQL compatibility\. On MySQL DB instances, only the default is allowed\.
 
 ## Usage Notes<a name="mysql_rds_set_external_master-usage-notes"></a>
 
@@ -47,34 +51,33 @@ This option is not currently implemented\.  The default is 0\.
 
 **To configure an external instance of MySQL as a replication master**
 
-1. Using the MySQL client of your choice, connect to the external instance of MySQL and create a user account to be used for replication\. The following is an example: 
+1. Using the MySQL client of your choice, connect to the external instance of MySQL and create a user account to be used for replication\. The following is an example\.
 
    ```
-   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'SomePassW0rd'
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password'
    ```
 
-1. On the external instance of MySQL, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. The following example grants `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the 'repl\_user' user for your domain:
+1. On the external instance of MySQL, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. The following example grants `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the 'repl\_user' user for your domain\.
 
    ```
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' 
-   IDENTIFIED BY 'SomePassW0rd'
+   IDENTIFIED BY 'password'
    ```
 
 For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
+To use encrypted replication, configure the master to use SSL connections\. Also, import the certificate authority certificate, client certificate, and client key into the DB instance or DB cluster using the [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md) procedure\.
+
 **Note**  
 We recommend that you use Read Replicas to manage replication between two Amazon RDS DB instances when possible, and only use this and other replication\-related stored procedures to enable more complex replication topologies between Amazon RDS DB instances\. These stored procedures are primarily offered to enable replication with MySQL instances running external to Amazon RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
-After calling `mysql.rds_set_external_master` to configure an Amazon RDS DB instance as a Read Replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the Read Replica configuration\.
+After calling `mysql.rds_set_external_master` to configure an Amazon RDS DB instance as a Read Replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the Read Replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the Read Replica configuration\.
 
 When `mysql.rds_set_external_master` is called, Amazon RDS records the time, user, and an action of "set master" in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 
 The `mysql.rds_set_external_master` procedure is available in these versions of Amazon RDS MySQL:
-
 + MySQL 5\.5
-
 + MySQL 5\.6
-
 + MySQL 5\.7
 
 ## Examples<a name="mysql_rds_set_external_master-examples"></a>
@@ -86,16 +89,14 @@ call mysql.rds_set_external_master(
   'Externaldb.some.com',
   3306,
   'repl_user'@'mydomain.com',
-  'SomePassW0rd',
+  'password',
   'mysql-bin-changelog.0777',
   120,
   0);
 ```
 
 ## Related Topics<a name="mysql_rds_set_external_master.related"></a>
-
 + [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-
 + [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
-
 + [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)
++ [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md)

@@ -1,4 +1,4 @@
-# Working with Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances"></a>
+# Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances"></a>
 
 Reserved DB instances let you reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and region\. 
 
@@ -7,9 +7,6 @@ The general process for working with reserved DB instances is: First get informa
 ## Overview of Reserved Instances<a name="USER_WorkingWithReservedDBInstances.Overview"></a>
 
 When you purchase a reserved instance in Amazon RDS, you purchase a commitment to getting a discounted rate, on a specific DB instance type, for the duration of the reserved instance\. To use an Amazon RDS reserved instance, you create a new DB instance just like you do for an on\-demand instance\. The new DB instance you create must match the specifications of the reserved instance\. If the specifications of the new DB instance matches an existing reserved instance for your account, you are billed at the discounted rate offered for the reserved instance; otherwise, the DB instance is billed at an on\-demand rate\. 
-
-**Note**  
-You can move a reserved DB instance from an EC2\-Classic \(non\-VPC\) instance into an Amazon Virtual Private Cloud \(Amazon VPC\) without additional charge\. 
 
 For more information about reserved DB instances, including pricing, see [Amazon RDS Reserved Instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
 
@@ -33,15 +30,9 @@ When you purchase a reserved instance, one of the things that you specify is the
 If you have a DB instance, and you need to scale it to larger capacity, your reserved instance is automatically applied to your scaled DB instance\. That is, your reserved instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved instances are available for DB instances with the same AWS Region, database engine, and instance family\. Reserved instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. 
 
 Size\-flexible reserved instances are available for the following database engines: 
-
-+ Amazon Aurora
-
 + MariaDB
-
 + MySQL
-
 + Oracle, Bring Your Own License
-
 + PostgreSQL
 
 You can compare usage for different reserved instance sizes by using normalized units\. For example, one unit of usage on two db\.m3\.large DB instances is equivalent to 8 normalized units of usage on one db\.m3\.small\. The following table shows the number of normalized units for each DB instance size\. 
@@ -60,9 +51,9 @@ You can compare usage for different reserved instance sizes by using normalized 
 | 4xlarge | 32 | 64 | 
 | 8xlarge | 64 | 128 | 
 | 10xlarge | 80 | 160 | 
-| 16xlarge | 132 | 264 | 
+| 16xlarge | 128 | 256 | 
 
-For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` db instances in your account in the same region, the billing benefit is applied in full to both instances\. 
+For example, if you purchase a `db.t2.medium` reserved DB instance, and you have two running `db.t2.small` DB instances in your account in the same region, the billing benefit is applied in full to both instances\. 
 
 ![\[Applying a reserved DB instance in full to smaller DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-instance-flex-full.png)
 
@@ -86,25 +77,23 @@ You can use the AWS Management Console to work with reserved instances as shown 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Reserved Instances**\. 
+1. In the navigation pane, choose **Reserved instances**\. 
 
 1. Choose **Purchase Reserved DB Instance**\.
 
-1. For **Product Description**, choose the DB engine and licensing type\.
+1. For **Product description**, choose the DB engine and licensing type\.
 
-1. For **DB Instance Class**, choose the DB instance class\.
+1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ Deployment**, choose whether or not you want a Multi\-AZ deployment\.
-**Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ Deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved instance, the cluster is automatically created as Multi\-AZ\. 
+1. For **Multi\-AZ deployment**, choose whether or not you want a Multi\-AZ deployment\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 
-1. For **Offering Type**, choose the offering type\. 
+1. For **Offering type**, choose the offering type\. 
 
    After you select the offering type, you can see the pricing information\. 
 **Important**  
-Choose **X** in the upper\-right corner of the page to avoid purchasing the reserved instance and incurring any charges\. 
+Choose **Cancel** to avoid purchasing the reserved instance and incurring any charges\. 
 
 After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following procedure\. 
 
@@ -112,23 +101,21 @@ After you have information about the available reserved DB instance offerings, y
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Navigation** pane, choose **Reserved Instances**\. 
+1. In the navigation pane, choose **Reserved instances**\. 
 
 1. Choose **Purchase Reserved DB Instance**\.
 
-1. For **Product Description**, choose the DB engine type\.
+1. For **Product description**, choose the DB engine and licensing type\.
 
-1. For **DB Instance Class**, choose the DB instance class\.
+1. For **DB instance class**, choose the DB instance class\.
 
-1. For **Multi\-AZ Deployment**, choose whether or not you want a Multi\-AZ deployment\. 
-**Note**  
-Reserved Amazon Aurora instances always have the **Multi\-AZ Deployment** option set to `No`\. When you create an Amazon Aurora DB cluster from your reserved instance, the cluster is automatically created as Multi\-AZ\. 
+1. For **Multi\-AZ deployment**, choose whether or not you want a Multi\-AZ deployment\.
 
 1. For **Term**, choose the length of time you want the DB instance reserved\.
 
-1. For **Offering Type**, choose the offering type\.
+1. For **Offering type**, choose the offering type\.
 
-1. \(Optional\.\) You can assign your own identifier to the reserved instances that you purchase to help you keep track of them\. For **Reserved Id**, type an identifier for your reserved DB instance\. 
+1. \(Optional\) You can assign your own identifier to the reserved instances that you purchase to help you keep track of them\. For **Reserved Id**, type an identifier for your reserved DB instance\. 
 
 1. After you select the offering type, you can see the pricing information, as shown following\.   
 ![\[Purchase reserved DB instance console step 1\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/reservedinstance.png)
@@ -148,7 +135,7 @@ After you have purchased reserved DB instances, you can get information about yo
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Navigation** pane, choose **Reserved Instances**\. 
+1. In the **Navigation** pane, choose **Reserved instances**\. 
 
    The reserved DB instances for your account appear\. You can choose any of the reserved DB instances in the list to see detailed information about that reserved DB instance in the detail pane at the bottom of the console\. 
 
@@ -181,9 +168,7 @@ After you have information about the available reserved DB instance offerings, y
 
 **Example Purchase a Reserved Instance**  
 To purchase a reserved DB instance, use the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html](http://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html) with the following parameters:   
-
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
-
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved instances that you purchase to help you keep track of them\.  
 The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
 For Linux, OS X, or Unix:  
@@ -283,9 +268,7 @@ After you have information about the available reserved DB instance offerings, y
 
 **Example Purchase a Reserved Instance**  
 To purchase a reserved DB instance, call the Amazon RDS API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) with the following parameters:   
-
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
-
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved instances that you purchase to help you keep track of them\.  
 The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
 
@@ -394,7 +377,3 @@ The API returns output similar to the following:
 40.   </ResponseMetadata>
 41. </DescribeReservedDBInstancesResponse>
 ```
-
-## Related Topics<a name="USER_WorkingWithReservedDBInstances.Related"></a>
-
-+ [How You Are Charged for Amazon RDS](Welcome.md#Welcome.Costs)

@@ -7,7 +7,7 @@ An *account administrator* \(or administrator user\) is a user with administrato
 
 When granting permissions, you decide who is getting the permissions, the resources they get permissions for, and the specific actions that you want to allow on those resources\. 
 
-
+**Topics**
 + [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)
 + [Understanding Resource Ownership](#UsingWithRDS.IAM.AccessControl.ResourceOwner)
 + [Managing Access to Resources](#UsingWithRDS.IAM.AccessControl.ManagingAccess)
@@ -30,7 +30,7 @@ These resources and subresources have unique Amazon Resource Names \(ARNs\) asso
 | DB option group | `arn:aws:rds:region:account-id:og:option-group-name` | 
 | DB parameter group | `arn:aws:rds:region:account-id:pg:parameter-group-name` | 
 | DB snapshot | `arn:aws:rds:region:account-id:snapshot:snapshot-name` | 
-| DB security group | `arn:aws:rds:region:account-id:secgrp:security-group-name` | 
+| DB security group | `arn:aws:rds:region:account-id:secgrp:security-group-name`   | 
 | DB subnet group | `arn:aws:rds:region:account-id:subgrp:subnet-group-name` | 
 | Event subscription | `arn:aws:rds:region:account-id:es:subscription-name` | 
 | Read Replica | `arn:aws:rds:region:account-id:db:db-instance-name` | 
@@ -41,11 +41,8 @@ Amazon RDS provides a set of operations to work with the Amazon RDS resources\. 
 ## Understanding Resource Ownership<a name="UsingWithRDS.IAM.AccessControl.ResourceOwner"></a>
 
 A *resource owner* is the AWS account that created a resource\. That is, the resource owner is the AWS account of the *principal entity* \(the root account, an IAM user, or an IAM role\) that authenticates the request that creates the resource\. The following examples illustrate how this works:
-
 + If you use the root account credentials of your AWS account to create an RDS resource, such as a DB instance, your AWS account is the owner of the RDS resource\.
-
 + If you create an IAM user in your AWS account and grant permissions to create RDS resources to that user, the user can create RDS resources\. However, your AWS account, to which the user belongs, owns the RDS resources\.
-
 + If you create an IAM role in your AWS account with permissions to create RDS resources, anyone who can assume the role can create RDS resources\. Your AWS account, to which the role belongs, owns the RDS resources\. 
 
 ## Managing Access to Resources<a name="UsingWithRDS.IAM.AccessControl.ManagingAccess"></a>
@@ -57,16 +54,14 @@ This section discusses using IAM in the context of Amazon RDS\. It doesn't provi
 
 Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM polices\) and policies attached to a resource are referred to as *resource\-based* policies\. Amazon RDS supports only identity\-based policies \(IAM policies\)\.
 
-
+**Topics**
 + [Identity\-Based Policies \(IAM Policies\)](#UsingWithRDS.IAM.AccessControl.ManagingAccess.IdentityBased)
 + [Resource\-Based Policies](#UsingWithRDS.IAM.AccessControl.ManagingAccess.ResourceBased)
 
 ### Identity\-Based Policies \(IAM Policies\)<a name="UsingWithRDS.IAM.AccessControl.ManagingAccess.IdentityBased"></a>
 
 You can attach policies to IAM identities\. For example, you can do the following: 
-
 + **Attach a permissions policy to a user or a group in your account** – An account administrator can use a permissions policy that is associated with a particular user to grant permissions for that user to create an Amazon RDS resource, such as a DB instance\. 
-
 + **Attach a permissions policy to a role \(grant cross\-account permissions\)** – You can attach an identity\-based permissions policy to an IAM role to grant cross\-account permissions\. For example, the administrator in Account A can create a role to grant cross\-account permissions to another AWS account \(for example, Account B\) or an AWS service as follows:
 
   1. Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in Account A\.
@@ -117,13 +112,9 @@ Other services, such as Amazon S3, also support resource\-based permissions poli
 For each Amazon RDS resource \(see [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)\), the service defines a set of API operations \(see [Actions](http://docs.aws.amazon.com/redshift/latest/APIReference/API_Operations.html)\)\. To grant permissions for these API operations, Amazon RDS defines a set of actions that you can specify in a policy\. Performing an API operation can require permissions for more than one action\. 
 
 The following are the basic policy elements:
-
 + **Resource** – In a policy, you use an Amazon Resource Name \(ARN\) to identify the resource to which the policy applies\. For more information, see [Amazon RDS Resources and Operations](#CreatingIAMPolicies-RDS)\. 
-
 + **Action** – You use action keywords to identify resource operations that you want to allow or deny\. For example, the `rds:DescribeDBInstances` permission allows the user permissions to perform the Amazon RDS `DescribeDBInstances` operation\. 
-
 + **Effect** – You specify the effect when the user requests the specific action—this can be either allow or deny\. If you don't explicitly grant access to \(allow\) a resource, access is implicitly denied\. You can also explicitly deny access to a resource, which you might do to make sure that a user cannot access it, even if a different policy grants access\.
-
 + **Principal** – In identity\-based policies \(IAM policies\), the user that the policy is attached to is the implicit principal\. For resource\-based policies, you specify the user, account, service, or other entity that you want to receive permissions \(applies to resource\-based policies only\)\. Amazon RDS doesn't support resource\-based policies\.
 
 To learn more about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.

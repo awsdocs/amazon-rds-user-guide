@@ -46,27 +46,18 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 ## CLI<a name="USER_CreateInstance.CLI"></a>
 
 To create a MySQL DB instance by using the AWS CLI, call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for MySQL DB Instances](#USER_CreateInstance.Settings)\. 
-
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--db-security-groups`
-
 + `--db-subnet-group`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--allocated-storage`
-
 + `--backup-retention-period`
 
 **Example**  
-The following example creates a MySQL db instance named mydbinstance\.  
+The following example creates a MySQL DB instance named mydbinstance\.  
 For Linux, OS X, or Unix:  
 
 ```
@@ -102,27 +93,18 @@ This command should produce output similar to the following:
 ## API<a name="USER_CreateInstance.API"></a>
 
 To create a MySQL DB instance by using the Amazon RDS API, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for MySQL DB Instances](#USER_CreateInstance.Settings)\. 
-
 + `AllocatedStorage`
-
 + `BackupRetentionPeriod`
-
 + `DBInstanceClass`
-
 + `DBInstanceIdentifier`
-
 + `DBSecurityGroups`
-
 + `DBSubnetGroup`
-
 + `Engine`
-
 + `MasterUsername`
-
 + `MasterUserPassword`
 
 **Example**  
-The following example creates a MySQL db instance named mydbinstance\.  
+The following example creates a MySQL DB instance named mydbinstance\.  
 
 ```
  1. https://rds.us-west-2.amazonaws.com/
@@ -154,7 +136,7 @@ The following table contains details about settings that you choose when you cre
 
 | Setting | Setting Description | 
 | --- | --- | 
-|  Allocated storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
+|  Allocated storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [DB instance storage](CHAP_Storage.md)\.   | 
 |  Auto minor version upgrade  |  **Enable auto minor version upgrade** to enable your DB instance to receive minor DB engine version upgrades automatically when they become available\.   | 
 |  Availability zone  |  The availability zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial DB instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
@@ -163,12 +145,12 @@ The following table contains details about settings that you choose when you cre
 |  Database name  |  The name for the database on your DB instance\. The name must contain 1 to 64 alpha\-numeric characters\. If you do not provide a name, Amazon RDS does not create a database on the DB instance you are creating\.  To create additional databases on your DB instance, connect to your DB instance and use the SQL command CREATE DATABASE\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\.   | 
 |  Database port  |  The port that you want to access the DB instance through\. MySQL installations default to port 3306\. If you use a DB security group with your DB instance, this must be the same port value you provided when creating the DB security group\.  The firewalls at some companies block connections to the default MySQL port\. If your company firewall blocks the default port, choose another port for your DB instance\.   | 
 |  DB engine version  |  The version of MySQL that you want to use\.  | 
-|  DB instance class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class equates to 1\.7 GB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
+|  DB instance class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class equates to 1\.7 GiB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
 |  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the region you chose\. You can add some intelligence to the name, such as including the region you chose, for example **mysql\-instance1**\.   | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
-|  IAM DB authentication  |  **Enable IAM DB authenticatin** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL and Amazon Aurora](UsingWithRDS.IAMDBAuth.md)\.   | 
+|  IAM DB authentication  |  **Enable IAM DB authentication** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL](UsingWithRDS.IAMDBAuth.md)\.   | 
 |  License model  |  MySQL has only one license model, **general\-public\-license** the general license agreement for MySQL\.   | 
 | **Log exports** |  Select the types of MySQL database log files to generate\. For more information, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)\.   | 
 |  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
@@ -183,11 +165,7 @@ The following table contains details about settings that you choose when you cre
 |  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateInstance.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)
-
 + [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)

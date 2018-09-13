@@ -77,9 +77,6 @@ The following example reads the file `rice.txt` from the directory `product_desc
 ```
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Misc.Related"></a>
-
 + [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-
 + [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-
 + [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)

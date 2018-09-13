@@ -52,7 +52,7 @@ The following example resizes a bigfile tablespace named `users2` to 200 MB:
 The following example adds an additional datafile to a smallfile tablespace named users2: 
 
 ```
-1. alter tablespace users3 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
+1. alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
 ```
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
@@ -83,7 +83,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_
 | --- | --- | --- | --- | --- | 
 | `tablespace_name` | varchar | — | required | The name of the default temporary tablespace\. | 
 
-The following example sets the default tepmorary tablespace to *temp01*: 
+The following example sets the default temporary tablespace to *temp01*: 
 
 ```
 1. exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
@@ -118,11 +118,9 @@ The following example disables distributed recovery:
 ## Setting the Database Time Zone<a name="Appendix.Oracle.CommonDBATasks.TimeZoneSupport"></a>
 
 There are two different ways that you can set the time zone of your Amazon RDS Oracle database: 
-
 + You can use the `Timezone` option\. 
 
   The `Timezone` option changes the time zone at the host level and impacts all date columns and values such as `SYSDATE`\. For more information about the `Timezone` option, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
-
 + You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_db_time_zone`\. 
 
   The `alter_db_time_zone` procedure changes the time zone for only certain data types, and doesn't change `SYSDATE`\. There are additional restrictions on setting the time zone listed in the [Oracle documentation](http://docs.oracle.com/cd/B19306_01/server.102/b14225/ch4datetime.htm#i1006705)\. 
@@ -134,7 +132,7 @@ The `alter_db_time_zone` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_tz` | varchar2 | — | required |  The new time zone as an named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
+| `p_new_tz` | varchar2 | — | required |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
 The following example changes the time zone to UTC plus 3 hours: 
 
@@ -148,9 +146,9 @@ The following example changes the time zone to the time zone of the Africa/Algie
 1. exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
 ```
 
-After you alter the time zone by using the `alter_db_time_zone` procedure, you must reboot the DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+After you alter the time zone by using the `alter_db_time_zone` procedure, you must reboot the DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance ](USER_RebootInstance.md)\. 
 
-## Working with Oracle External Tables<a name="Appendix.Oracle.CommonDBATasks.Extenral_Tables"></a>
+## Working with Oracle External Tables<a name="Appendix.Oracle.CommonDBATasks.External_Tables"></a>
 
 *Oracle external tables *are tables with data that is not in the database\. Instead, the data is in external files that the database can access\. By using external tables, you can access data without loading it into the database\. For more information about external tables, see [Managing External Tables](http://docs.oracle.com/database/121/ADMIN/tables.htm#ADMIN01507) in the Oracle documentation\. 
 
@@ -210,7 +208,7 @@ Oracle AWR includes several report generation scripts, such as awrrpt\.sql, that
 
 To use Oracle database links with Amazon RDS DB instances inside the same VPC or peered VPCs, the two DB instances should have a valid route between them\. Verify the valid route between the DB instances by using your VPC routing tables and network access control list \(ACL\)\. 
 
-The security group of each DB instance must allow ingress to and egress from the other DB instance\. The inbound and outbound rules can refer to security groups from the same VPC or a peered VPC\. For more information, see [Updating Your Security Groups to Reference Peered VPC Security Groups](http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/working-with-vpc-peering.html#vpc-peering-security-groups)\. 
+The security group of each DB instance must allow ingress to and egress from the other DB instance\. The inbound and outbound rules can refer to security groups from the same VPC or a peered VPC\. For more information, see [Updating Your Security Groups to Reference Peered VPC Security Groups](http://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html#vpc-peering-security-groups)\. 
 
 If you have configured a custom DNS server using the DHCP Option Sets in your VPC, your custom DNS server must be able to resolve the name of the database link target\. For more information, see [Setting Up a Custom DNS Server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\. 
 
@@ -349,9 +347,6 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_dataf
 | `p_rman_to_dbms_output` | boolean | `TRUE`, `FALSE` | `FALSE` | Optional | When `TRUE`, the RMAN output is sent to the `DBMS_OUTPUT` package in addition to a file in the `BDUMP` directory\. When using SQL\*Plus, execute `SET SERVEROUTPUT ON` to see the output\. When `FALSE`, the RMAN output is only sent to a file in the `BDUMP` directory\.  | 
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Database.Related"></a>
-
 + [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-
 + [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)
-
 + [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)

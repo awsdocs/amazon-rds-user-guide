@@ -46,24 +46,18 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 ## CLI<a name="USER_CreateMariaDBInstance.CLI"></a>
 
 To create a MariaDB DB instance by using the AWS CLI, call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for MariaDB DB Instances](#USER_CreateMariaDBInstance.Settings)\. 
-
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--db-security-groups`
-
 + `--db-subnet-group`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--allocated-storage`
-
 + `--backup-retention-period`
+
+**Note**  
+If you require a specific minor version of MariaDB, include the `--engine-version` parameter\.
 
 **Example**  
 The following command creates a MariaDB instance named *mydbinstance*\.  
@@ -72,7 +66,7 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds create-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --db-instance-class db.m1.small \
+3.     --db-instance-class db.m4.xlarge \
 4.     --engine mariadb \
 5.     --allocated-storage 20 \
 6.     --master-username masteruser \
@@ -84,42 +78,34 @@ For Windows:
 ```
 1. aws rds create-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --db-instance-class db.m1.small ^
+3.     --db-instance-class db.m4.xlarge ^
 4.     --engine mariadb ^
 5.     --allocated-storage 20 ^
 6.     --master-username masteruser ^
 7.     --master-user-password masteruserpassword ^
 8.     --backup-retention-period 3
 ```
-This command should produce output similar to the following:  
+This command should produce output that begins with information that is similar to the following:  
 
 ```
-1. DBINSTANCE  mydbinstance  db.m1.small  mariadb  20  sa  creating  3  ****  n  10.0.17
-2. SECGROUP  default  active
-3. PARAMGRP  default.mariadb10.0  in-sync
+1. DBINSTANCE 20 True 3 rds-ca-2015 False   arn:aws:rds:us-east-1:1234567890:db:mydbinstance db.m4.xlarge mydbinstance creating 0 **** mariadb 10.1.26 
 ```
 
 ## API<a name="USER_CreateMariaDBInstance.API"></a>
 
 To create a MariaDB DB instance by using the Amazon RDS API, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for MariaDB DB Instances](#USER_CreateMariaDBInstance.Settings)\. 
-
 + `AllocatedStorage`
-
 + `BackupRetentionPeriod`
-
 + `DBInstanceClass`
-
 + `DBInstanceIdentifier`
-
 + `DBSecurityGroups`
-
 + `DBSubnetGroup`
-
 + `Engine`
-
 + `MasterUsername`
-
 + `MasterUserPassword`
+
+**Note**  
+If you require a specific minor version of MariaDB, include the `EngineVersion` parameter\.
 
 **Example**  
 
@@ -128,7 +114,7 @@ To create a MariaDB DB instance by using the Amazon RDS API, call the [CreateDBI
  2.     ?Action=CreateDBInstance
  3.     &AllocatedStorage=20
  4.     &BackupRetentionPeriod=3
- 5.     &DBInstanceClass=db.m3.medium
+ 5.     &DBInstanceClass=db.m4.xlarge
  6.     &DBInstanceIdentifier=mydbinstance
  7.     &DBName=mydatabase
  8.     &DBSecurityGroups.member.1=mysecuritygroup
@@ -153,7 +139,7 @@ The following table contains details about settings that you choose when you cre
 
 | Setting | Setting Description | 
 | --- | --- | 
-|  Allocated storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
+|  Allocated storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [DB instance storage](CHAP_Storage.md)\.   | 
 |  Auto minor version upgrade  |  **Enable auto minor version upgrade** to enable your DB instance to receive minor DB engine version upgrades automatically when they become available\.   | 
 |  Availability zone  |  The availability zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial DB instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
@@ -181,11 +167,7 @@ The following table contains details about settings that you choose when you cre
 |  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateMariaDBInstance.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)
-
 + [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
++ [Deleting a DB Instance ](USER_DeleteInstance.md)

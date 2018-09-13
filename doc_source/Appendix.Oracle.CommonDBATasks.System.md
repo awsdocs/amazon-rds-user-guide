@@ -189,6 +189,33 @@ The following example grants the `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE
 
 Objects already granted to `PUBLIC` do not need to be re\-granted\. If you use the `grant_sys_object` procedure to re\-grant access, the procedure call succeeds\. 
 
+## Revoking SELECT or EXECUTE Privileges on SYS Objects<a name="Appendix.Oracle.CommonDBATasks.RevokePrivileges"></a>
+
+ You can revoke privileges on a single object by using the Amazon RDS procedure `rdsadmin.rdsadmin_util.revoke_sys_object`\. The procedure only revokes privileges that the master account already has via a role or direct grant\. 
+
+The `revoke_sys_object` procedure has the following parameters\. 
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `p_obj_name` | varchar2 | — | required |  The name of the object to revoke privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
+| `p_revokee` | varchar2 | — | required |  The name of the object to revoke privileges for\. The object can be a schema or a role\.   | 
+| `p_privilege` | varchar2 | null | required | — | 
+
+The following example revokes select privileges on an object named `V_$SESSION` from a user named `USER1`: 
+
+```
+1. begin
+2.     rdsadmin.rdsadmin_util.revoke_sys_object(
+3.         p_obj_name  => 'V_$SESSION',
+4.         p_revokee   => 'USER1',
+5.         p_privilege => 'SELECT');
+6. end;
+7. /
+```
+
 ## Granting Privileges to Non\-Master Users<a name="Appendix.Oracle.CommonDBATasks.PermissionsNonMasters"></a>
 
 You can grant select privileges for many objects in the `SYS` schema by using the `SELECT_CATALOG_ROLE` role\. The `SELECT_CATALOG_ROLE` role gives users `SELECT` privileges on data dictionary views\. The following example grants the role `SELECT_CATALOG_ROLE` to a user named `user1`\. 
@@ -224,7 +251,7 @@ The following example creates a non\-master user named `user1`, grants the `CREA
 
 You can use the Oracle procedure `dbms_scheduler.set_attribute` to modify DBMS\_SCHEDULER jobs\. For more information, see [DBMS\_SCHEDULER](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72235) and [SET\_ATTRIBUTE Procedure](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72399) in the Oracle documentation\. 
 
-When working with Amazon RDS DB instances, prepend the schema name `SYS` to the object name\. The following example sets the resource plan attribute for the monday window object\. 
+When working with Amazon RDS DB instances, prepend the schema name `SYS` to the object name\. The following example sets the resource plan attribute for the Monday window object\. 
 
 ```
 1. begin
@@ -372,33 +399,22 @@ Amazon RDS Oracle allows Domain Name Service \(DNS\) resolution from a custom DN
 After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\. 
 
 To set up a custom DNS server for your Oracle Amazon RDS DB instance, do the following: 
-
-+ From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)\. 
++ From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 **Note**  
 The `domain-name-servers` option accepts up to four values, but your Amazon RDS DB instance uses only the first value\. 
-
 + Ensure that your DNS server can resolve all lookup queries, including public DNS names, Amazon EC2 private DNS names, and customer\-specific DNS names\. If the outbound network traffic contains any DNS lookups that your DNS server can't handle, your DNS server must have appropriate upstream DNS providers configured\. 
-
 + Configure your DNS server to produce User Datagram Protocol \(UDP\) responses of 512 bytes or less\. 
-
 + Configure your DNS server to produce Transmission Control Protocol \(TCP\) responses of 1024 bytes or less\. 
-
 + Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall whitelisting to allow UDP and TCP inbound traffic on port 53\. 
 
-  For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) and [Adding and Removing Rules](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html#AddRemoveRules)\. 
-
+  For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 + Configure the VPC of your Amazon RDS DB instance to allow outbound traffic over port 53\. Your VPC must have a security group that contains outbound rules that allow UDP and TCP traffic on port 53\. 
 
-  For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) and [Adding and Removing Rules](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html#AddRemoveRules)\. 
-
+  For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](http://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 + The routing path between the Amazon RDS DB instance and the DNS server has to be configured correctly to allow DNS traffic\. 
-
-  + If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be setup between them\. For more information, see [What is VPC Peering?](http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/Welcome.html) 
+  + If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be setup between them\. For more information, see [What is VPC Peering?](http://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.System.Related"></a>
-
 + [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-
 + [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)
-
 + [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)

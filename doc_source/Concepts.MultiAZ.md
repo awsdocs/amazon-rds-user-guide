@@ -1,6 +1,6 @@
 # High Availability \(Multi\-AZ\)<a name="Concepts.MultiAZ"></a>
 
-Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Mirroring\. Amazon Aurora instances stores copies of the data in a DB cluster across multiple Availability Zones in a single AWS Region, regardless of whether the instances in the DB cluster span multiple Availability Zones\. For more information on Amazon Aurora, see [Amazon Aurora on Amazon RDS](CHAP_Aurora.md)\.
+Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Mirroring\. 
 
 In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
@@ -30,31 +30,19 @@ In the event of a planned or unplanned outage of your DB instance, Amazon RDS au
 The failover mechanism automatically changes the DNS record of the DB instance to point to the standby DB instance\. As a result, you need to re\-establish any existing connections to your DB instance\. Due to how the Java DNS caching mechanism works, you may need to reconfigure your JVM environment\. For more information on how to manage a Java application that caches DNS values in the case of a failover, see the [AWS SDK for Java](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-jvm-ttl.html)\. 
 
 Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention\. The primary DB instance switches over automatically to the standby replica if any of the following conditions occur: 
-
 + An Availability Zone outage 
-
 + The primary DB instance fails 
-
 + The DB instance's server type is changed 
-
 + The operating system of the DB instance is undergoing software patching 
-
 + A manual failover of the DB instance was initiated using **Reboot with failover**
 
 There are several ways to determine if your Multi\-AZ DB instance has failed over:
-
 +  DB event subscriptions can be setup to notify you via email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS Event Notification](USER_Events.md) 
-
 + You can view your DB events by using the Amazon RDS console or API actions\.
-
 +  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API actions\. 
 
 For information on how you can respond to failovers, reduce recovery time, and other best practices for Amazon RDS, see [Best Practices for Amazon RDS](CHAP_BestPractices.md)\.
 
 ## Related Topics<a name="Concepts.MultiAZ.Related"></a>
-
 + [Multi\-AZ Deployments for Microsoft SQL Server with Database Mirroring](USER_SQLServerMultiAZ.md)
-
-+ [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)
-
 + [Licensing Oracle Multi\-AZ Deployments](CHAP_Oracle.md#Oracle.Concepts.Licensing.MAZ)

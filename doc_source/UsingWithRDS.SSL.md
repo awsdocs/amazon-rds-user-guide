@@ -1,17 +1,10 @@
 # Using SSL to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
 
-You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, Amazon Aurora, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
-
-+ [Using SSL with Aurora DB Clusters](Aurora.Overview.md#Aurora.Overview.Security.SSL)
-
+You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
 + [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
-
 + [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
-
 + [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
-
 + [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
-
 + [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
 A root certificate that works for all regions can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. It is the trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\. 
@@ -33,13 +26,25 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [Asia Pacific \(Seoul\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-2.pem)
 
+[Asia Pacific \(Osaka\-Local\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-3.pem)
+
 [Asia Pacific \(Singapore\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-southeast-1.pem)
 
 [Asia Pacific \(Sydney\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-southeast-2.pem)
 
+[Canada \(Central\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ca-central-1.pem)
+
+[China \(Beijing\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-north-1-ca-certificate.pem)
+
+[China \(Ningxia\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-northwest-1-ca-certificate.pem)
+
 [EU \(Frankfurt\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-central-1.pem)
 
 [EU \(Ireland\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-1.pem)
+
+[EU \(London\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-2.pem)
+
+[EU \(Paris\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-west-3.pem)
 
 [South America \(São Paulo\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-sa-east-1.pem)
 
@@ -51,16 +56,6 @@ You might need to use an intermediate certificate to connect to your region\. Fo
 
 [US West \(Oregon\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem)
 
-[ China \(Beijing\)](https://s3.amazonaws.com/rds-downloads/rds-cn-north-1-ca-certificate.pem)
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
 
-[ AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012; for CA\-2017, see following\)
-
-### GovCloud \(US\) SSL Certificates 2017<a name="w3ab1c21c17c25c32"></a>
-
-To maintain connectivity, you need to update the CA\-2012 SSL certificates your client or application is using to connect to RDS before August 15, 2017, at 20:00 UTC\. Follow these steps:
-
-1. Download the new [AWS GovCloud Intermediate SSL certificate bundle](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-bundle-us-gov-west-1.pem)\.
-
-1. Use the new certificates you downloaded in the previous step to update your database client or application by following the steps on the download page\. This action is specific to the configuration of your client or application\.
-
-Use the Modify operation for your RDS instance on the AWS Management Console \(or the ModifyDBInstance API\) to change the Certificate Authority \(CA\) from rds\-ca\-2012 to rds\-ca\-2017, and then choose **Apply Immediately**\. This operation updates the SSL certificates on the RDS instance and initiates a reboot operation to have the new certificates take effect\. This reboot operation typically takes less than two minutes to complete\. In some cases, such as when a database has a large number of tables, a reboot can take longer\. For more information, see [Best Practices for Amazon RDS](CHAP_BestPractices.md)\. 
+[AWS GovCloud \(US\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)

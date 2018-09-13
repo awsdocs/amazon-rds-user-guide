@@ -13,11 +13,7 @@ CREATE TABLE [dbo].[Account]
 ```
 
 The Microsoft SQL Server DB engine supports Unicode by the built\-in NCHAR, NVARCHAR, and NTEXT data types\. For example, if you need CJK support, use these Unicode data types for character storage and override the default server collation when creating your databases and tables\. Here are several links from Microsoft covering collation and Unicode support for SQL Server:
-
 + [Working with Collations](http://msdn.microsoft.com/en-us/library/ms187582%28v=sql.105%29.aspx) 
-
 + [Collation and International Terminology](http://msdn.microsoft.com/en-us/library/ms143726%28v=sql.105%29) 
-
 + [Using SQL Server Collations](http://msdn.microsoft.com/en-us/library/ms144260%28v=sql.105%29.aspx) 
-
 + [International Considerations for Databases and Database Engine Applications](http://msdn.microsoft.com/en-us/library/ms190245%28v=sql.105%29.aspx)

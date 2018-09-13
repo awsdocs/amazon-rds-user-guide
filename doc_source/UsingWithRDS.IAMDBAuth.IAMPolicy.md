@@ -1,6 +1,6 @@
 # Creating and Using an IAM Policy for IAM Database Access<a name="UsingWithRDS.IAMDBAuth.IAMPolicy"></a>
 
-To allow an IAM user or role to connect to your DB instance or DB cluster, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
+To allow an IAM user or role to connect to your DB instance, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
 
 **Note**  
 To learn more about IAM policies, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
@@ -26,13 +26,11 @@ The following example policy allows an IAM user to connect to a DB instance usin
 
 **Important**  
 Don't confuse the `rds-db:` prefix with other Amazon RDS action prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\. 
+Currently, the IAM console displays an error for policies with the `rds-db:connect` action\. You can ignore this error\.
 
 The example policy includes a single statement with the following elements:
-
 + `Effect`—Specify `Allow` to grant access to the DB instance\. If you don't explicitly allow access, then access is denied by default\.
-
 + `Action`—Specify `rds-db:connect` to allow connection to the DB instance\.
-
 + `Resource`—Specify an Amazon Resource Name \(ARN\) that describes one database account in one DB instance\. The ARN format is as follows\.
 
   ```
@@ -40,11 +38,8 @@ The example policy includes a single statement with the following elements:
   ```
 
   In this format, the following are so:
-
   + `region` is the AWS Region for the Amazon RDS DB instance\. In the example policy, the AWS Region is `us-west-2`\.
-
   + `account-id` is the AWS account number for the DB instance\. In the example policy, the account number is `123456789012`\.
-
   + `dbi-resource-id` is the identifier for the DB instance\. This identifier is unique to an AWS Region and never changes\. In the example policy, the identifier is `db-12ABC34DEFG5HIJ6KLMNOP78QR`\.
 
     To find a DB instance resource ID in the AWS Management Console for Amazon RDS, choose the DB instance you want, and then choose **Instance Actions**, **See Details**\. The **Resource ID** is shown in the **Configuration Details** section\.
@@ -55,10 +50,9 @@ The example policy includes a single statement with the following elements:
     aws rds describe-db-instances \
         --query "DBInstances[*].[DBInstanceIdentifier,DbiResourceId]"
     ```
-
   + `db-user-name` is the name of the MySQL database account to associate with IAM authentication\. In the example policy, the database account is `jane_doe`\.
 
-You can construct other ARNs to support various access patterns\. The following policy allows access to two different database accounts in a DB instance:
+You can construct other ARNs to support various access patterns\. The following policy allows access to two different database accounts in a DB instance :
 
 ```
  1. {
@@ -78,35 +72,7 @@ You can construct other ARNs to support various access patterns\. The following 
 15. }
 ```
 
-The following IAM policy allows access to a DB cluster, rather than a DB instance\. The cluster identifier is `cluster-CO4FHMOYDKJ7CVBEJS2UWDQX7I`\.
-
-```
- 1. {
- 2.    "Version": "2012-10-17",
- 3.    "Statement": [
- 4.       {
- 5.          "Effect": "Allow",
- 6.          "Action": [
- 7.              "rds-db:connect"
- 8.          ],
- 9.          "Resource": [
-10.              "arn:aws:rds-db:us-west-2:123456789012:dbuser:cluster-CO4FHMOYDKJ7CVBEJS2UWDQX7I/jane_doe"
-11.          ]
-12.       }
-13.    ]
-14. }
-```
-
-To find a DB cluster resource ID in the AWS Management Console for Amazon RDS, choose the DB cluster you want and expand the selection, and then choose **Instance Actions**, **See Details**\. The **Resource ID** is shown in the **DB Cluster Details** section\.
-
-Alternatively, you can use the AWS CLI command to list the identifiers and resource IDs for all of your DB clusters in the current AWS Region, as shown following\.
-
-```
-aws rds describe-db-clusters \
-    --query "DBClusters[*].[DBClusterIdentifier,DbClusterResourceId]"
-```
-
-The following policy uses the "\*" character to match all of the DB instances and DB clusters for a particular AWS account and AWS Region\. However, the policy only grants access to DB instances or DB clusters that have a `jane_doe` database account\.
+The following policy uses the "\*" character to match all of the DB instances for a particular AWS account and AWS Region\. However, the policy only grants access to DB instances that have a `jane_doe` database account\.
 
 ```
  1. {

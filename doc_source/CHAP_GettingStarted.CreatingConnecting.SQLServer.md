@@ -140,13 +140,8 @@ You should create a final snapshot for any production DB instance that you delet
 1. Choose **Delete**\. 
 
 ## Related Topics<a name="CHAP_GettingStarted.SQLServer.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-
 + [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md)
-
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)

@@ -1,18 +1,16 @@
 # Setting Up for Amazon RDS<a name="CHAP_SettingUp"></a>
 
-This section describes considerations for setting up Amazon RDS for the first time\. If you already have an AWS account, you know your Amazon RDS requirements, and you prefer to use all the defaults for IAM and VPC security groups, you can skip ahead to [Getting Started](Welcome.md#Welcome.WhatsNext.GettingStarted)\. 
+Following, you can find how to set up Amazon Relational Database Service \(Amazon RDS\) for the first time\. If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting Started](Welcome.md#Welcome.WhatsNext.GettingStarted)\. 
 
-**About AWS Services**
-
-+ When you sign up for Amazon Web Services \(AWS\), your AWS account automatically has access to all services in AWS, including Amazon RDS\. However, you are charged only for the services that you use\.
-
+A couple things you should know about Amazon Web Services \(AWS\):
++ When you sign up for AWS, your AWS account automatically has access to all services in AWS, including Amazon RDS\. However, you are charged only for the services that you use\.
 + With Amazon RDS, you pay only for the RDS instances that are active\. The Amazon RDS DB instance that you create is live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for the instance until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. 
 
-
+**Topics**
 + [Sign Up for AWS](#CHAP_SettingUp.SignUp)
 + [Create an IAM User](#CHAP_SettingUp.IAM)
 + [Determine Requirements](#CHAP_SettingUp.Requirements)
-+ [Provide Access to the DB Instance in the VPC by Creating a Security Group](#CHAP_SettingUp.SecurityGroup)
++ [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](#CHAP_SettingUp.SecurityGroup)
 
 ## Sign Up for AWS<a name="CHAP_SettingUp.SignUp"></a>
 
@@ -32,35 +30,35 @@ This might be unavailable in your browser if you previously signed into the AWS 
 
 ## Create an IAM User<a name="CHAP_SettingUp.IAM"></a>
 
-After you create an AWS account, and you can successfully connect to the AWS console, you can create an IAM user to use instead of logging in with your AWS root account\. AWS recommends that you don't log in using your root account\. 
+After you create an AWS account and successfully connect to the AWS Management Console, you can create an AWS Identity and Access Management \(IAM\) user\. Instead of signing in with your AWS root account, we recommend that you use an IAM administrative user with Amazon RDS\. 
 
-You can also create access keys for your AWS account\. These can be used to access AWS through the command line interface \(CLI\) or API\. For more information, see [Managing Access Keys for Your AWS Account](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and [RDS API Reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)\.
+One way to do this is to create a new IAM user and grant it administrator permissions\. Alternatively, you can add an existing IAM user to an IAM group with Amazon RDS administrative permissions\. You can then access AWS from a special URL using the credentials for the IAM user\. 
 
-instead, we recommend that you use AWS Identity and Access Management \(IAM\) to create an administrative user for use with Amazon RDS\. One way to do this is to create a new IAM user and grant it administrator permissions\. Alternatively, you can add an existing IAM user to an IAM group with Amazon RDS administrative permissions\.You can then access AWS from a special URL using the credentials for the IAM user\. 
-
-If you signed up for AWS, but have not created an IAM user for yourself, you can create one using the IAM console\.
+If you signed up for AWS but haven't created an IAM user for yourself, you can create one using the IAM console\.
 
 **To create an IAM user for yourself and add the user to an Administrators group**
 
-1. Use your AWS account email address and password to sign in to the [AWS Management Console](https://console.aws.amazon.com/) as the *[AWS account root user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)*\.
+1. Use your AWS account email address and password to sign in as the *[AWS account root user](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html)* to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+**Note**  
+We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](http://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
 1. In the navigation pane of the console, choose **Users**, and then choose **Add user**\.
 
-1. For **User name**, type ** Administrator**\.
+1. For **User name**, type **Administrator**\.
 
-1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to select a new password the next time the user signs in\.
+1. Select the check box next to **AWS Management Console access**, select **Custom password**, and then type the new user's password in the text box\. You can optionally select **Require password reset** to force the user to create a new password the next time the user signs in\.
 
 1. Choose **Next: Permissions**\.
 
-1. On the **Set permissions for user** page, choose **Add user to group**\.
+1. On the **Set permissions** page, choose **Add user to group**\.
 
 1. Choose **Create group**\.
 
-1. In the **Create group** dialog box, type ** Administrators**\.
+1. In the **Create group** dialog box, for **Group name** type **Administrators**\.
 
-1. For **Filter**, choose **Job function**\.
+1. For **Filter policies**, select the check box for **AWS managed \- job function**\.
 
-1. In the policy list, select the check box for ** AdministratorAccess**\. Then choose **Create group**\.
+1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 
 1. Back in the list of groups, select the check box for your new group\. Choose **Refresh** if necessary to see the group in the list\.
 
@@ -68,15 +66,15 @@ If you signed up for AWS, but have not created an IAM user for yourself, you can
 
 You can use this same process to create more groups and users, and to give your users access to your AWS account resources\. To learn about using policies to restrict users' permissions to specific AWS resources, go to [Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) and [Example Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html)\.
 
-To sign in as this new IAM user, sign out of the AWS console, then use the following URL, where *your\_aws\_account\_id* is your AWS account number without the hyphens \(for example, if your AWS account number is `1234-5678-9012`, your AWS account ID is `123456789012`\):
+To sign in as the new IAM user, first sign out of the AWS Management Console\. Then use the following URL, where **your\_aws\_account\_id** is your AWS account number without the hyphens\. For example, if your AWS account number is `1234-5678-9012`, your AWS account ID is `123456789012`\.
 
 ```
 https://your_aws_account_id.signin.aws.amazon.com/console/
 ```
 
-Enter the IAM user name and password that you just created\. When you're signed in, the navigation bar displays "*your\_user\_name* @ *your\_aws\_account\_id*"\.
+Type the IAM user name and password that you just created\. When you're signed in, the navigation bar displays "*your\_user\_name* @ *your\_aws\_account\_id*"\.
 
-If you don't want the URL for your sign\-in page to contain your AWS account ID, you can create an account alias\. From the IAM dashboard, click **Customize** and enter an alias, such as your company name\. To sign in after you create an account alias, use the following URL:
+If you don't want the URL for your sign\-in page to contain your AWS account ID, you can create an account alias\. From the IAM dashboard, choose **Customize** and type an alias, such as your company name\. To sign in after you create an account alias, use the following URL\.
 
 ```
 https://your_account_alias.signin.aws.amazon.com/console/
@@ -84,104 +82,91 @@ https://your_account_alias.signin.aws.amazon.com/console/
 
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
 
+You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Managing Access Keys for Your AWS Account](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the* [Amazon RDS API Reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
+
 ## Determine Requirements<a name="CHAP_SettingUp.Requirements"></a>
 
-The basic building block of Amazon RDS is the DB instance\. This is where you create your databases\. A DB instance provides a network address called the **Endpoint**\. Your applications use the endpoint to connect to the DB instance\. When you create the DB instance, you specify details like storage, memory, database engine and version, network configuration, security, and maintenance periods\. Network access to a DB instance is controlled through a security group\. 
+The basic building block of Amazon RDS is the DB instance\. In a DB instance, you create your databases\. A DB instance provides a network address called an *endpoint*\. Your applications use this endpoint to connect to your DB instance\. When you create a DB instance, you specify details like storage, memory, database engine and version, network configuration, security, and maintenance periods\. You control network access to a DB instance through a security group\. 
 
-Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider\. 
-
-+ **Resource Requirements: **What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
-
-+ **VPC, Subnet & Security Group: **Your DB instance is most likely in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use: a default VPC, in a user\-defined VPC, or outside of a VPC\. 
+Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider: 
++ **Resource requirements **– What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
++ **VPC, subnet, and security group – **Your DB instance is most likely in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it: in a default VPC, in a user\-defined VPC, or outside of a VPC\. 
 **Note**  
-Some legacy account do not use a VPC\. If you are accessing a new region or you are a new RDS user \(after 2013\), you are most likely creating an DB instance inside a VPC\. 
+Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or you are a new RDS user \(after 2013\), you are most likely creating a DB instance inside a VPC\. 
 
-  For information on how to determine if your account has a default VPC in a particular region, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\.
+  For information on how to determine if your account has a default VPC in a particular AWS Region, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\.
 
-  The follow list describes the rules for each VPC option:
-
-  + **Default VPC** — If your AWS account has a default VPC in the region, that VPC is configured to support DB instances\. If you specify the default VPC when you create the DB instance:
-
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Note that you must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\. 
-
-    + You must specify the default DB subnet group\. If this is the first DB instance you have created in the region, Amazon RDS will create the default DB subnet group when it creates the DB instance\.
-
-  + **User\-defined VPC** — If you want to specify a user\-defined VPC when you create a DB instance:
-
-    + You must create a **VPC security group** that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Note that you must use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC Console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
-
+  The following list describes the rules for each VPC option:
+  + **Default VPC** – If your AWS account has a default VPC in the current AWS Region, that VPC is configured to support DB instances\. If you specify the default VPC when you create the DB instance, do the following:
+    + Create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\. 
+    + Specify the default DB subnet group\. If this is the first DB instance you have created in this AWS Region, Amazon RDS creates the default DB subnet group when it creates the DB instance\.
+  + **User\-defined VPC – **If you want to specify a user\-defined VPC when you create a DB instance, be aware of the following:
+    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Use the [Amazon EC2 API](http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC console to create VPC security groups\. For information, see [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
     + The VPC must meet certain requirements in order to host DB instances, such as having at least two subnets, each in a separate availability zone\. For information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
-
-    + You must specify a DB subnet group that defines which subnets in that VPC can be used by the DB instance\. For information, see the DB Subnet Group section in [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-
-  + **No VPC** — if your AWS account does not have a default VPC, and you do not specify a user\-defined VPC:
-
-    + You must create a **DB security group** that authorizes connections from the devices and Amazon RDS instances running the applications or utilities that will access the databases in the DB instance\. For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.
-
-+ **High Availability: **Do you need failover support? On Amazon RDS, a Multi\-AZ deployment creates a primary DB instance and a secondary standby DB instance in another availability zone for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a non\-Multi\-AZ deployment\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)\. 
-
-+ **IAM Policies: **Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
-
-+ **Open ports: **What TCP/IP port will your database be listening on? The firewall at some companies may block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB instance\. Note that once you create a DB instance that listens on a port you specify, you can change the port by modifying the DB instance\.
-
-+ **AWS Region: **What region do you want your database in? Having the database close in proximity to the application or web service could reduce network latency\.
-
-+ **DB Disk Subsystem: **What are your storage requirements? Amazon RDS provides three storage types: 
-
+    + Make sure to specify a DB subnet group that defines which subnets in that VPC can be used by the DB instance\. For information, see the DB subnet group section in [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
+  + **No VPC – **If your AWS account doesn't have a default VPC and you don't specify a user\-defined VPC, create a DB security group\. A *DB security group* authorizes connections from the devices and Amazon RDS instances running the applications or utilities to access the databases in the DB instance\. For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.
++ **High availability: **Do you need failover support? On Amazon RDS, a Multi\-AZ deployment creates a primary DB instance and a secondary standby DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a deployment that isn't Multi\-AZ\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)\. 
++ **IAM policies: **Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Authentication and Access Control for Amazon RDS](UsingWithRDS.IAM.md)\.
++ **Open ports: **What TCP/IP port does your database listen on? The firewall at some companies might block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB instance\. When you create a DB instance that listens on a port you specify, you can change the port by modifying the DB instance\.
++ **AWS Region: **What AWS Region do you want your database in? Having your database in close proximity to your application or web service can reduce network latency\.
++ **DB disk subsystem: **What are your storage requirements? Amazon RDS provides three storage types: 
   + Magnetic \(Standard Storage\)
-
   + General Purpose \(SSD\)
+  + Provisioned IOPS \(PIOPS\)
 
-  + Provisioned IOPS \(
+  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [DB instance storage](CHAP_Storage.md)\.
 
-  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [Storage for Amazon RDS](CHAP_Storage.md)\.
+When you have the information you need to create the security group and the DB instance, continue to the next step\.
 
-Once you have the information you need to create the security group and the DB instance, continue to the next step\.
-
-## Provide Access to the DB Instance in the VPC by Creating a Security Group<a name="CHAP_SettingUp.SecurityGroup"></a>
+## Provide Access to Your DB Instance in Your VPC by Creating a Security Group<a name="CHAP_SettingUp.SecurityGroup"></a>
 
 VPC security groups provide access to DB instances in a VPC\. They act as a firewall for the associated DB instance, controlling both inbound and outbound traffic at the instance level\. DB instances are created by default with a firewall and a default security group that protect the DB instance\. 
 
 Before you can connect to your DB instance, you must add rules to security group that enable you to connect\. Use your network and configuration information to create rules to allow access to your DB instance\.
 
 **Note**  
-If your legacy DB instance was created before March 2013 and is not in a VPC, It might not have associated security groups\. If your DB instance was created after this date, it might be inside a default VPC\. 
+If your legacy DB instance was created before March 2013 and isn't in a VPC, it might not have associated security groups\. If your DB instance was created after this date, it might be inside a default VPC\. 
 
-For example, if you have an application that accesses a database on your DB instance in a VPC, you must add a Custom TCP rule that specifies the port range and IP addresses that application will use to access the database\. If you have an application on an Amazon EC2 instance, you can use the VPC or EC2 security group you set up for the Amazon EC2 instance\.
+For example, suppose that you have an application that accesses a database on your DB instance in a VPC\. In this case, you must add a custom TCP rule that specifies the port range and IP addresses that your application uses to access the database\. If you have an application on an Amazon EC2 instance, you can use the VPC or EC2 security group that you set up for the Amazon EC2 instance\.
 
 **To create a VPC security group**
 
 1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\.
 
-1. In the top right corner of the AWS Management Console, select the region in which you want to create the VPC security group and the DB instance\. In the list of Amazon VPC resources for that region, it should show that you have at least one VPC and several Subnets\. If it does not, you do not have a default VPC in that region\.
+1. In the top right corner of the AWS Management Console, choose the AWS Region where you want to create your VPC security group and DB instance\. In the list of Amazon VPC resources for that AWS Region, you should see at least one VPC and several subnets\. If you don't, you don't have a default VPC in that AWS Region\.
 
 1. In the navigation pane, choose **Security Groups**\.
 
 1. Choose **Create Security Group**\.
 
-1. In the **Create Security Group** window, type the **Name tag**, **Group name**, and **Description** of your security group\. Select the **VPC** that you want to create your DB instance in\. Choose **Yes, Create**\.
+1. In the **Create Security Group** window, type **Name tag**, **Group name**, and **Description** values for your security group\. For **VPC**, choose the VPC that you want to create your DB instance in\. Choose **Yes, Create**\.
 
-1. The VPC security group you created should still be selected\. If not, locate it in the list, and choose it\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
+1. The VPC security group that you created should still be selected\. If not, locate it in the list, and choose it\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
 
-1. On the **Inbound Rules** tab, click **Edit**\. Select **Custom TCP Rule** from the **Type** list\. Type the port value you will use for your DB instance in the **Port Range** text box\. Then, select a security group name, or type the IP address range \(CIDR value\) from where you will access the instance, in the **Source** text box\.
+1. On the **Inbound Rules** tab, choose **Edit**\.
 
-1. If you need to add more IP addresses or different port ranges, click **Add another rule**\.
+   1. For **Type**, choose **Custom TCP Rule**\.
 
-1. If you need to, you can use the **Outbound Rules** tab to add rules for outbound traffic\. By default, all outbound traffic is allowed\.
+   1. For **Port Range**, type the port value to use for your DB instance\.
 
-You can use the VPC security group you just created as the security group for your DB instance when you create it\. If your DB instance is not going to be in a VPC, then see the topic [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md) to create a DB security group that you will use when you create your DB instance\.
+   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the instance\.
+
+1. Choose **Add another rule** if you need to add more IP addresses or different port ranges\.
+
+1. \(Optional\) Use the **Outbound Rules** tab to add rules for outbound traffic\. By default, all outbound traffic is allowed\.
+
+You can use the VPC security group that you just created as the security group for your DB instance when you create it\. If your DB instance isn't going to be in a VPC, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md) to create a DB security group to use when you create your DB instance\.
 
 **Note**  
-If you use a default VPC, a default subnet group spanning all of the VPC's subnets is created for you\. When you use the **Launch a DB Instance** wizard to create a DB instance, you can select the default VPC and use **default** for the **DB Subnet Group**\.
+If you use a default VPC, a default subnet group spanning all of the VPC's subnets is created for you\. When you use the Launch a DB Instance wizard to create a DB instance, you can select the default VPC and use **default** for **DB Subnet Group**\.
 
-Once you have completed the setup requirements, you can launch a DB instance using your requirements and security group\. For information on creating a DB instance, see the relevant documentation in the following table: 
+Once you have completed the setup requirements, you can launch a DB instance using your requirements and security group\. For information on creating a DB instance, see the relevant documentation in the following table\.
 
 
 ****  
 
-| Database Engine | Relevant Documentation | 
+| Database Engine | Documentation | 
 | --- | --- | 
-| Amazon Aurora | [Creating a DB Cluster and Connecting to a Database on an Amazon Aurora DB Instance](CHAP_GettingStarted.CreatingConnecting.Aurora.md) | 
 | MariaDB | [Creating a MariaDB DB Instance and Connecting to a Database on a MariaDB DB Instance](CHAP_GettingStarted.CreatingConnecting.MariaDB.md) | 
 | Microsoft SQL Server | [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md) | 
 | MySQL | [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md) | 

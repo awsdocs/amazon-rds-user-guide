@@ -12,7 +12,7 @@ You can retrieve events for your RDS resources through the AWS Management Consol
 
 1. In the navigation pane, choose **Events**\. The available events appear in a list\.
 
-1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the DB instance event type and containing the letters **pdx**\.  
+1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the DB instance event type and containing the characters **1318**\.  
 ![\[List DB events\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ListEvents.png)
 
 ## CLI<a name="USER_ListEvents.CLI"></a>
@@ -46,6 +46,4 @@ You can view all Amazon RDS instance events for the past 14 days by calling the 
 12.    &X-Amz-Signature=8e313cabcdbd9766c56a2886b5b298fd944e0b7cfa248953c82705fdd0374f27
 ```
 
-## Related Topics<a name="USER_ListEvents.related"></a>
-
-+  [Using Amazon RDS Event Notification](USER_Events.md) 
+## <a name="USER_ListEvents.related"></a>

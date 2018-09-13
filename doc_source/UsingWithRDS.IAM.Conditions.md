@@ -5,16 +5,12 @@ When you grant permissions in Amazon RDS, you can specify conditions that determ
 ## Overview<a name="UsingWithRDS.IAM.Conditions.Overview"></a>
 
 In Amazon RDS, you have the option to specify conditions when granting permissions using an IAM policy \(see [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl)\)\. For example, you can: 
-
 + Allow users to create a DB instance only if they specify a particular database engine\.
-
 + Allow users to modify RDS resources that are tagged with a particular tag name and tag value\.
 
 There are two ways to specify conditions in an IAM policy for Amazon RDS:
-
-+ [Using Condition Keys](http://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/UsingWithRDS.IAM.Conditions.html#UsingWithRDS.IAM.SpecifyingConditions)
-
-+ [Using Custom Tags](http://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/UsingWithRDS.IAM.Conditions.html#UsingWithRDS.IAM.SpecifyingCustomTags)
++ [Using Condition Keys](#UsingWithRDS.IAM.SpecifyingConditions)
++ [Using Custom Tags](#UsingWithRDS.IAM.SpecifyingCustomTags)
 
 ## Specifying Conditions: Using Condition Keys<a name="UsingWithRDS.IAM.SpecifyingConditions"></a>
 
@@ -37,7 +33,7 @@ For a list of all of the RDS condition key identifiers and the RDS actions and r
 
 Following are examples of how you can use condition keys in Amazon RDS IAM permissions policies\. 
 
-#### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w3ab1c21c13c17b7c16b4"></a>
+#### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w4aac22c13c17b7c16b4"></a>
 
 The following policy uses an RDS condition key and allows a user to create only DB instances that use the MySQL database engine and don't use MultiAZ\. The `Condition` element indicates the requirement that the database engine is MySQL\. 
 
@@ -64,7 +60,7 @@ The following policy uses an RDS condition key and allows a user to create only 
 20. }
 ```
 
-#### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w3ab1c21c13c17b7c16b6"></a>
+#### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w4aac22c13c17b7c16b6"></a>
 
 The following policy explicitly denies permission to create DB instances that use the DB instance classes `r3.8xlarge` and `m4.10xlarge`, which are the largest and most expensive instances\. This policy also prevents users from creating DB instances that use Provisioned IOPS, which incurs an additional cost\. 
 
@@ -155,7 +151,7 @@ Following are examples of how you can use custom tags in Amazon RDS IAM permissi
 **Note**  
 All examples use the us\-west\-2 region and contain fictitious account IDs\.
 
-#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w3ab1c21c13c17b9c26b6"></a>
+#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w4aac22c13c17b9c26b6"></a>
 
 The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on instances with either the `stage` tag set to `development` or `test`\. 
 
@@ -184,7 +180,7 @@ The following policy allows permission to perform the `ModifyDBInstance` and `Cr
 22. }
 ```
 
-#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w3ab1c21c13c17b9c26b8"></a>
+#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w4aac22c13c17b9c26b8"></a>
 
 The following policy explicitly denies permission to create a DB instance that uses DB parameter groups with specific tag values\. You might apply this policy if you require that a specific customer\-created DB parameter group always be used when creating DB instances\. Note that policies that use `Deny` are most often used to restrict access that was granted by a broader policy\.
 
@@ -209,7 +205,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16. }
 ```
 
-#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w3ab1c21c13c17b9c26c10"></a>
+#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w4aac22c13c17b9c26c10"></a>
 
 The following policy allows permission to call any API \(except to `AddTagsToResource` or `RemoveTagsFromResource`\) on a DB instance that has a DB instance name that is prefixed with the user's name and that has a tag called `stage` equal to `devo` or that has no tag called `stage`\.
 
@@ -236,11 +232,3 @@ The `Resource` line in the policy identifies a resource by its Amazon Resource N
    ]
 }
 ```
-
-## Related Topics<a name="w3ab1c21c13c17c11"></a>
-
-+ [Access Control](UsingWithRDS.IAM.md#UsingWithRDS.IAM.AccessControl)
-
-+ [Amazon RDS API Permissions: Actions, Resources, and Conditions Reference](UsingWithRDS.IAM.ResourcePermissions.md)
-
-+ [Security in Amazon RDS](UsingWithRDS.md)

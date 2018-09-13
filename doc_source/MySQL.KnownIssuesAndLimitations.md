@@ -16,14 +16,6 @@ innodb_buffer_pool_size = (536870912 * 4) * 8 = 17179869184
 
 For details on this MySQL 5\.7 bug, go to [https://bugs\.mysql\.com/bug\.php?id=79379](https://bugs.mysql.com/bug.php?id=79379) in the MySQL documentation\. 
 
-## MySQL Version 5\.5\.40 Asynchronous I/O Is Disabled<a name="MySQL.Concepts.KnownIssuesAndLimitations.AsyncIO"></a>
-
-You might observe reduced I/O performance if you have a MySQL DB instance that was created before April 23, 2014, and then upgraded to MySQL version 5\.5\.40 after October 17, 2014\. This reduced performance can be caused by an error that disables the `innodb_use_native_aio` parameter even if the corresponding DB parameter group enables the `innodb_use_native_aio` parameter\. 
-
-To resolve this error, we recommend that you upgrade your MySQL DB instance running version 5\.5\.40 to version 5\.5\.40a, which corrects this behavior\. For information on minor version upgrades, see [Upgrading the MySQL DB Engine](USER_UpgradeDBInstance.MySQL.md)\. 
-
-For more information on MySQL asynchronous I/O, go to [Asynchronous I/O on Linux](https://dev.mysql.com/doc/refman/5.7/en/innodb-linux-native-aio.html) in the MySQL documentation\. 
-
 ## Index Merge Optimization Returns Wrong Results<a name="MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization"></a>
 
 Queries that use index merge optimization might return wrong results due to a bug in the MySQL query optimizer that was introduced in MySQL 5\.5\.37\. When you issue a query against a table with multiple indexes the optimizer scans ranges of rows based on the multiple indexes, but does not merge the results together correctly\. For more information on the query optimizer bug, go to [http://bugs\.mysql\.com/bug\.php?id=72745](https://bugs.mysql.com/bug.php?id=72745) and [http://bugs\.mysql\.com/bug\.php?id=68194](https://bugs.mysql.com/bug.php?id=68194) in the MySQL bug database\. 
@@ -38,11 +30,8 @@ For example, consider a query on a table with two indexes where the search argum
 In this case, the search engine will search both indexes\. However, due to the bug, the merged results are incorrect\. 
 
 To resolve this issue, you can do one of the following: 
-
 + Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
 + Upgrade your MySQL DB instance to MySQL version 5\.6 or 5\.7\. For more information, see [Upgrading a MySQL DB Snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
-
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
@@ -87,7 +76,6 @@ We don't recommend allowing tables to grow to the maximum file size\. In general
 One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, go to [https://dev\.mysql\.com/doc/refman/5\.6/en/partitioning\.html](https://dev.mysql.com/doc/refman/5.6/en/partitioning.html) in the MySQL documentation\. 
 
 **To determine the file size of a table**
-
 + Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\.
 
   ```
@@ -98,11 +86,9 @@ One option that you can use for breaking a large table up into smaller tables is
   ```
 
 **To enable InnoDB file\-per\-table tablespaces**
-
 + To enable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `1` in the parameter group for the DB instance\. 
 
 **To disable InnoDB file\-per\-table tablespaces**
-
 + To disable InnoDB file\-per\-table tablespaces, set the *innodb\_file\_per\_table* parameter to `0` in the parameter group for the DB instance\.
 
 For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 

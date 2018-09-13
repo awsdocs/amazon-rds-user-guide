@@ -7,11 +7,8 @@ Most database security controls access at the object level\. Oracle Label Securi
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
 
 The following are prerequisites for using Oracle Label Security: 
-
 + Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
-
 + You must have a valid license for Oracle Enterprise Edition with Software Update License and Support\. 
-
 + Your Oracle license must include the Label Security option\. 
 
 ## Adding the Oracle Label Security Option<a name="Oracle.Options.OLS.Add"></a>
@@ -41,9 +38,7 @@ After you add the Label Security option, as soon as the option group is active, 
 If you add Label Security to an existing option group that is already attached to one or more DB instances, all the DB instances are restarted\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the Label Security option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Using Oracle Label Security<a name="Oracle.Options.OLS.Using"></a>
@@ -59,9 +54,7 @@ You can configure Label Security through the Oracle Enterprise Manager \(OEM\) C
 You can remove Oracle Label Security from a DB instance\. 
 
 To remove Label Security from a DB instance, do one of the following: 
-
 + To remove Label Security from multiple DB instances, remove the Label Security option from the option group they belong to\. This change affects all DB instances that use the option group\. When you remove Label Security from an option group that is attached to multiple DB instances, all the DB instances are restarted\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-
 + To remove Label Security from a single DB instance, modify the DB instance and specify a different option group that doesn't include the Label Security option\. You can specify the default \(empty\) option group, or a different custom option group\. When you remove the Label Security option, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Troubleshooting<a name="Oracle.Options.OLS.Troubleshooting"></a>
@@ -76,7 +69,5 @@ The following are issues you might encounter when you use Oracle Label Security\
 |  When you try to create a policy, you see an error message similar to the following: `insufficient authorization for the SYSDBA package`\.   |  A known issue with Oracle's Label Security feature prevents users with usernames of 16 or 24 characters from running Label Security commands\. You can create a new user with a different number of characters, grant LBAC\_DBA to the new user, log in as the new user, and run the OLS commands as the new user\. For additional information, please contact Oracle support\.   | 
 
 ## Related Topics<a name="Oracle.Options.OLS.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

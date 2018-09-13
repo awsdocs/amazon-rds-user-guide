@@ -5,7 +5,7 @@ The easiest way to create a MariaDB DB instance is to use the Amazon RDS console
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-
+**Topics**
 + [Creating a MariaDB Instance](#CHAP_GettingStarted.Creating.MariaDB)
 + [Connecting to a Database on a DB Instance Running the MariaDB Database Engine](#CHAP_GettingStarted.Connecting.MariaDB)
 + [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.MariaDB)
@@ -14,7 +14,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your MariaDB databases\.
 
-In this example, you create a DB instance running the MariaDB database engine called *mariadb\-instance1*, with a *db\.t2\.small* DB instance class, 20 GB of storage, and automated backups enabled with a retention period of one day\.
+In this example, you create a DB instance running the MariaDB database engine called *mariadb\-instance1*, with a *db\.t2\.small* DB instance class, 20 GiB of storage, and automated backups enabled with a retention period of one day\.
 
 **To create a MariaDB DB instance**
 
@@ -59,7 +59,7 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 
    1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-   1. Choose the MariaDB DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+   1. Click the MariaDB DB instance name to display its details\. 
 
    1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MariaDB DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
@@ -67,10 +67,10 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 1. Type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`*, the master user name you used for *`<mymasteruser>`*, and provide the master password you used when prompted for a password\.
 
    ```
-   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p <mymastepassword>
+   PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser>
    ```
 
-   You should see output similar to the following\.
+   After you enter the password for the user, you should see output similar to the following\.
 
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.

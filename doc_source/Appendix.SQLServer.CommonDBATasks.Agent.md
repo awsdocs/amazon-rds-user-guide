@@ -35,8 +35,16 @@ GO
 EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
 ```
 
-You cannot use the UI in SQL Server Management Console to delete a SQL Server Agent job\. To delete a SQL Server Agent job, run the following T\-SQL statement\. 
+To delete a SQL Server Agent job, run the following T\-SQL statement\. 
 
 ```
 EXEC msdb..sp_delete_job @job_name = '<job-name>'; 
 ```
+
+**Note**  
+Don't use the UI in SQL Server Management Console \(SSMS\) to delete a SQL Server Agent job\. If you do, you get an error message similar to the following:  
+
+```
+The EXECUTE permission was denied on the object 'xp_regread', database 'mssqlsystemresource', schema 'sys'.
+```
+This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process that RDS isn't authorized to do\. 

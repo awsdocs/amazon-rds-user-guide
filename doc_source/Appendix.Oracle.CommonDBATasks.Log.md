@@ -118,7 +118,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_logfile` to dr
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `grp` | positive | — | requried | The group number of the log\. | 
+| `grp` | positive | — | required | The group number of the log\. | 
 
 The following example drops the log with group number 3: 
 
@@ -282,7 +282,11 @@ The following example retains 24 hours of redo logs:
 4.         value => '24');
 5. end;
 6. /
+7. commit;
 ```
+
+**Note**  
+The commit is required for the change to take effect\.
 
 You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.show_configuration` to view how long archived redo logs are retained for your DB instance\.
 
@@ -312,6 +316,9 @@ Because the archived redo logs are retained on your DB instance, ensure that you
 Archived redo logs are only generated if the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero, so unless you explicitly set yours to zero, archived redo logs are generated for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 After the archived redo logs are removed from your DB instance, you can't download them again to your DB instance\. Amazon RDS retains the archived redo logs outside of your DB instance to support restoring your DB instance to a point in time\. Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period configured for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+
+**Note**  
+ If you are using JDBC on Linux to download archived redo logs, and you experience long latency times and connection resets, it could be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a non\-blocking random number generator\. 
 
 ## Accessing Transaction Logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
 
@@ -346,9 +353,6 @@ The following code grants and revokes the `DROP ANY DIRECTORY` privilege:
 ```
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Log.Related"></a>
-
 + [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-
 + [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-
 + [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)
