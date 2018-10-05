@@ -879,7 +879,7 @@ You can use a log analyzer such as [pgbadger](http://dalibo.github.io/pgbadger/)
 For example, the following command correctly formats an Amazon RDS PostgreSQL log file dated 2014\-02\-04 using *pgbadger*\.
 
 ```
-./pgbadger -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
+./pgbadger -f stderr -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
 ```
 
 ## Viewing the Contents of pg\_config<a name="Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig"></a>
