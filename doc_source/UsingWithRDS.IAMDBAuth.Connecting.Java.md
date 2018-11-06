@@ -400,7 +400,7 @@ public class IAMDatabaseAuthenticationTester {
      * This method clears the SSL properties.
      * @throws Exception
      */
-    private static void setSslProperties() throws Exception {
+    private static void clearSslProperties() throws Exception {
            System.clearProperty("javax.net.ssl.trustStore");
            System.clearProperty("javax.net.ssl.trustStoreType");
            System.clearProperty("javax.net.ssl.trustStorePassword"); 
