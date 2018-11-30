@@ -754,7 +754,7 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
 
 ## Working with PostGIS<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS"></a>
 
-PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, you can get a good general overview at [PostGIS Introduction](http://workshops.boundlessgeo.com/postgis-intro/introduction.html)\.
+PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, you can get a good general overview at [PostGIS Introduction](https://learn.boundlessgeo.com/series/postgis/intro-to-postgis)\.
 
 You need to perform a bit of setup before you can use the PostGIS extension\. The following list shows what you need to do; each step is described in greater detail later in this section\.
 + Connect to the DB instance using the master user name used to create the DB instance\.
