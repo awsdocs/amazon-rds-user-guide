@@ -188,7 +188,7 @@ For MySQL 5\.6 and earlier:
 GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
-For more information on SSL connections with MySQL, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/secure-connections.html)\. 
+For more information on SSL connections with MySQL, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/5.6/en/encrypted-connections.html)\. 
 
 ## Using memcached and Other Options with MySQL<a name="MySQL.Concepts.General.Options"></a>
 
