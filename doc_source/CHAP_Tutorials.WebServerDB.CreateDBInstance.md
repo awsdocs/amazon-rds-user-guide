@@ -11,9 +11,11 @@ Before you begin this step, you must have a VPC with both public and private sub
 
 1. In the top\-right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. This example uses the US West \(Oregon\) region\.
 
-1. Choose **Instances**\.
+1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB instance**\.
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
+
+1. Choose **Create database** to open the **Select engine** page\.
 
 1. On the **Select engine** page, shown following, choose **MySQL**, and then choose **Next**\.   
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
@@ -21,48 +23,34 @@ Before you begin this step, you must have a VPC with both public and private sub
 1. On the **Choose use case** page, choose **Dev/Test – MySQL**, and then choose **Next**\.
 
 1. On the **Specify DB details** page, shown following, set these values:
-
    + **License model:** Use the default value\.
-
    + **DB engine version:** Use the default value\.
-
    + **DB instance class:** `db.t2.small`
-
    + **Multi\-AZ deployment:** `No`
-
    + **Storage type:** `General Purpose (SSD)`
-
-   + **Allocated storage:** `20 GB`
-
+   + **Allocated storage:** `20 GiB`
    + **DB instance identifier:** `tutorial-db-instance`
-
    + **Master username:** `tutorial_user`
-
    + **Master password:** Choose a password\.
-
    + **Confirm password:** Retype the password\.  
 ![\[Specify DB details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_08.png)
 
 1. Choose **Next** and set the following values in the **Configure advanced settings** page:
-
    + **Virtual Private Cloud \(VPC\):** Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
 **Note**  
 The VPC must have subnets in different availability zones\.
-
-   + **Subnet group:** `The subnet group for the VPC`
-
+   + **Subnet group:** The DB subnet group for the VPC, such as the `tutorial-db-subnet-group` created in [Create a DB Subnet Group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)
    + **Public accessibility:** `No`
-
    + **Availability zone:** `No Preference`
+   + **VPC security groups:** Choose an existing VPC security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
 
-   + **VPC security groups:** Choose an existing security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
-
+     Remove other security groups, such as the default security group, by clicking the `X` associated with it\.
    + **Database name:** `sample`
 
    Leave the default settings for the other options\.  
 ![\[Configure Advanced Settings Panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_09.png)
 
-1. To create your Amazon RDS MySQL DB instance, choose **Launch DB instance**\.
+1. To create your Amazon RDS MySQL DB instance, choose **Create database**\.
 
 1. On the next page, choose **View DB instances details** to view your RDS MySQL DB instance\.
 
@@ -73,6 +61,6 @@ The VPC must have subnets in different availability zones\.
 
 To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 
 
-## Next Step<a name="w3ab1b9c37c17c11"></a>
+## Next Step<a name="w4aab9c33c23c11"></a>
 
 [Step 2: Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)

@@ -19,9 +19,9 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 1. In the navigation pane, choose **Instances**\. 
 
-1. Choose **Launch DB Instance**\. 
+1. Choose **Create database**\. 
 
-   The **Select Engine** page appears\.   
+   The **Select engine** page appears\.   
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch01.png)
 
 1. Choose the SQL Server icon, and then choose **Select** for the **SQL Server Express** edition\. 
@@ -42,7 +42,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
-1. Choose **Launch DB Instance**\. 
+1. Choose **Create database**\. 
 
 1. Choose **View Your DB Instances**\. 
 
@@ -140,13 +140,8 @@ You should create a final snapshot for any production DB instance that you delet
 1. Choose **Delete**\. 
 
 ## Related Topics<a name="CHAP_GettingStarted.SQLServer.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-
 + [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md)
-
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)

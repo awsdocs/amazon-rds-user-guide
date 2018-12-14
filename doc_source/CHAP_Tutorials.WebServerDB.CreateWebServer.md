@@ -20,11 +20,8 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
 
 1. On the **Configure Instance Details** page, shown following, set these values and leave the other values as their defaults:
-
    + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
-
    + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
-
    + **Auto\-assign Public IP:** Choose `Enable`\.  
 ![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)
 
@@ -61,14 +58,14 @@ Next you connect to your EC2 instance and install the web server\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
-1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html)\.
+1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html)\.
 
 1. To get the latest bug fixes and security updates, update the software on your EC2 instance by using the following command:
 **Note**  
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
 
    ```
-   [ec2-user ~]$ sudo yum update –y
+   [ec2-user ~]$ sudo yum update -y
    ```
 
 1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time:
@@ -76,6 +73,8 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    ```
    [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
    ```
+
+   For more information, see [Updating Instance Software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
 
 1. Start the web server with the command shown following:
 

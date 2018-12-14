@@ -1,10 +1,11 @@
-# Dropping a Microsoft SQL Server Database in a Multi\-AZ with Mirroring Deployment<a name="Appendix.SQLServer.CommonDBATasks.DropMirrorDB"></a>
+# Dropping a Microsoft SQL Server Database That Is Multi\-AZ<a name="Appendix.SQLServer.CommonDBATasks.DropMirrorDB"></a>
 
-You can drop a database on an Amazon RDS DB instance running Microsoft SQL Server in a Multi\-AZ deployment using Mirroring\. You can use the following commands: 
+You can drop a database on an Amazon RDS DB instance running Microsoft SQL Server in a Multi\-AZ deployment\. To drop the database, use the following command: 
 
 ```
-ALTER DATABASE <database_name> SET PARTNER OFF;
-GO
-DROP DATABASE <database_name>;
-GO
+--replace your-database-name with the name of the database you want to drop
+EXECUTE msdb.dbo.rds_drop_database  N’your-database-name’
 ```
+
+**Note**  
+After you use this procedure to drop the database, Amazon RDS drops all existing connections to the database and removes the database's backup history\.

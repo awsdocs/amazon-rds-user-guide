@@ -2,15 +2,15 @@
 
 Learn best practices for working with Amazon RDS\. As new best practices are identified, we will keep this section up to date\. 
 
-
+**Topics**
 + [Amazon RDS Basic Operational Guidelines](#CHAP_BestPractices.DiskPerformance)
 + [DB Instance RAM Recommendations](#CHAP_BestPractices.Performance.RAM)
 + [Amazon RDS Security Best Practices](#CHAP_BestPractices.Security)
 + [Using Enhanced Monitoring to Identify Operating System Issues](#CHAP_BestPractices.EnhancedMonitoring)
 + [Using Metrics to Identify Performance Issues](#CHAP_BestPractices.UsingMetrics)
-+ [Best Practices for Working with Amazon Aurora](#CHAP_BestPractices.Aurora)
 + [Best Practices for Working with MySQL Storage Engines](#CHAP_BestPractices.MySQLStorage)
 + [Best Practices for Working with MariaDB Storage Engines](#CHAP_BestPractices.MariaDB)
++ [Best Practices for Working with Oracle](#CHAP_BestPractices.Oracle)
 + [Best Practices for Working with PostgreSQL](#CHAP_BestPractices.PostgreSQL)
 + [Best Practices for Working with SQL Server](#CHAP_BestPractices.SQLServer)
 + [Working with DB Parameter Groups](#CHAP_BestPractices.DBParameterGroup)
@@ -19,70 +19,52 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 ## Amazon RDS Basic Operational Guidelines<a name="CHAP_BestPractices.DiskPerformance"></a>
 
 The following are basic operational guidelines that everyone should follow when working with Amazon RDS\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
-
-+ Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be setup to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
-
++ Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
 + Scale up your DB instance when you are approaching storage capacity limits\. You should have some buffer in storage and memory to accommodate unforeseen increases in demand from your applications\. 
-
 + Enable automatic backups and set the backup window to occur during the daily low in write IOPS\.
-
 + If your database workload requires more I/O than you have provisioned, recovery after a failover or database failure will be slow\. To increase the I/O capacity of a DB instance, do any or all of the following:
-
   + Migrate to a DB instance class with High I/O capacity\.
-
   + Convert from standard storage to either General Purpose or Provisioned IOPS storage, depending on how much of an increase you need\. For information on available storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
 
-    If you convert to Provisioned IOPS storage, make sure you also use a DB instance class that is optimized for Provisioned IOPS\. For information on Provisioned IOPS, see [Provisioned IOPS Storage](CHAP_Storage.md#USER_PIOPS)\.
-
+    If you convert to Provisioned IOPS storage, make sure you also use a DB instance class that is optimized for Provisioned IOPS\. For information on Provisioned IOPS, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
   + If you are already using Provisioned IOPS storage, provision additional throughput capacity\. 
-
 + If your client application is caching the Domain Name Service \(DNS\) data of your DB instances, set a time\-to\-live \(TTL\) value of less than 30 seconds\. Because the underlying IP address of a DB instance can change after a failover, caching the DNS data for an extended time can lead to connection failures if your application tries to connect to an IP address that no longer is in service\.
-
 + Test failover for your DB instance to understand how long the process takes for your use case and to ensure that the application that accesses your DB instance can automatically connect to the new DB instance after failover\.
 
 ## DB Instance RAM Recommendations<a name="CHAP_BestPractices.Performance.RAM"></a>
 
-An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\.
+An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
 
 ## Amazon RDS Security Best Practices<a name="CHAP_BestPractices.Security"></a>
 
 Use AWS IAM accounts to control access to Amazon RDS API actions, especially actions that create, modify, or delete RDS resources such as DB instances, security groups, option groups, or parameter groups, and actions that perform common administrative actions such as backing up and restoring DB instances, or configuring Provisioned IOPS storage\.
-
 + Assign an individual IAM account to each person who manages RDS resources\. Do not use AWS root credentials to manage Amazon RDS resources; you should create an IAM user for everyone, including yourself\.
-
 + Grant each user the minimum set of permissions required to perform his or her duties\.
-
 + Use IAM groups to effectively manage permissions for multiple users\.
-
 + Rotate your IAM credentials regularly\.
 
-For more information about IAM, go to [AWS Identity and Access Management](http://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
+For more information about IAM, go to [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
+
+Use the AWS Management Console, the AWS CLI, or the Amazon RDS API to change the password for your master user\. If you use another tool, such as a SQL client, to change the master user password, it might result in privileges being revoked for the user unintentionally\.
 
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
 
 Enhanced Monitoring is available for the following database engines:
-
-+ Amazon Aurora
-
 + MariaDB
-
 + Microsoft SQL Server
-
 + MySQL version 5\.5 or later
-
 + Oracle
-
 + PostgreSQL
 
-Enhanced monitoring is available for all DB instance classes except for `db.m1.small`\. Enhanced Monitoring is available in all regions except for AWS GovCloud \(US\)\. 
+Enhanced monitoring is available for all DB instance classes except for `db.m1.small`\. Enhanced Monitoring is available in all regions except for AWS GovCloud \(US\-West\)\. 
 
 ## Using Metrics to Identify Performance Issues<a name="CHAP_BestPractices.UsingMetrics"></a>
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w3ab1c13c15b4"></a>
+### Viewing Performance Metrics<a name="w4aac13c15b4"></a>
 
  You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
@@ -102,7 +84,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 **Note**  
  Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
- You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB Instance Metrics](CHAP_Monitoring.md#USER_Monitoring)\. 
+ You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\. 
 
 ****To set a CloudWatch alarm****
 
@@ -138,49 +120,34 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
  A DB instance has a number of different categories of metrics, and how to determine acceptable values depends on the metric\. 
 
 **CPU**
-
 +  CPU Utilization – Percentage of computer processing capacity used\. 
 
 **Memory**
-
-+ Freeable Memory – How much RAM is available on the DB instance, in megabytes\. The red line in the Monitoring tab metrics is marked at 75% for CPU, Memory and Storage Metrics\. If instance memory consumption frequently crosses that line, then this indcates that you should check your workload or upgrade your instance\. 
-
++ Freeable Memory – How much RAM is available on the DB instance, in megabytes\. The red line in the Monitoring tab metrics is marked at 75% for CPU, Memory and Storage Metrics\. If instance memory consumption frequently crosses that line, then this indicates that you should check your workload or upgrade your instance\. 
 +  Swap Usage – How much swap space is used by the DB instance, in megabytes\. 
 
 **Disk space**
-
 +  Free Storage Space – How much disk space is not currently being used by the DB instance, in megabytes\. 
 
 **Input/output operations**
-
 +  Read IOPS, Write IOPS – The average number of disk read or write operations per second\. 
-
 +  Read Latency, Write Latency – The average time for a read or write operation in milliseconds\. 
-
 +  Read Throughput, Write Throughput – The average number of megabytes read from or written to disk per second\. 
-
 +  Queue Depth – The number of I/O operations that are waiting to be written to or read from disk\. 
 
 **Network traffic**
-
 +  Network Receive Throughput, Network Transmit Throughput – The rate of network traffic to and from the DB instance in megabytes per second\. 
 
 **Database connections**
-
 +  DB Connections – The number of client sessions that are connected to the DB instance\. 
 
- For more detailed individual descriptions of the performance metrics available, see [Amazon RDS Dimensions and Metrics](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html)\. 
+ For more detailed individual descriptions of the performance metrics available, see [Amazon RDS Dimensions and Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html)\. 
 
  Generally speaking, acceptable values for performance metrics depend on what your baseline looks like and what your application is doing\. Investigate consistent or trending variances from your baseline\. Advice about specific types of metrics follows: 
-
 +  **High CPU or RAM consumption –** High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 
-
 +  **Disk space consumption – ** Investigate disk space consumption if space used is consistently at or above 85 percent of the total disk space\. See if it is possible to delete data from the instance or archive data to a different system to free up space\. 
-
 +  **Network traffic –** For network traffic, talk with your system administrator to understand what expected throughput is for your domain network and Internet connection\. Investigate network traffic if throughput is consistently lower than expected\. 
-
 +  **Database connections –** Consider constraining database connections if you see high numbers of user connections in conjunction with decreases in instance performance and response time\. The best number of user connections for your DB instance will vary based on your instance class and the complexity of the operations being performed\. You can determine the number of database connections by associating your DB instance with a parameter group where the *User Connections* parameter is set to other than 0 \(unlimited\)\. You can either use an existing parameter group or create a new one\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
-
 +  **IOPS metrics –** The expected values for IOPS metrics depend on disk specification and server configuration, so use your baseline to know what is typical\. Investigate if values are consistently different than your baseline\. For best IOPS performance, make sure your typical working set will fit into memory to minimize read and write operations\. 
 
  For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [ Tuning Queries ](#CHAP_BestPractices.TuningQueries)
@@ -213,17 +180,11 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  Go to [Query Optimizations](https://mariadb.com/kb/en/mariadb/query-optimizations/) in the MariaDB documentation for more information on writing queries for better performance\.
 
-## Best Practices for Working with Amazon Aurora<a name="CHAP_BestPractices.Aurora"></a>
-
-You have several different options for improving performance and stability in Amazon Aurora, depending on the database engine used by your Aurora DB cluster and DB instances\. For more information about best practices with Amazon Aurora, see [Best Practices with Amazon Aurora](Aurora.BestPractices.md)\.
-
 ## Best Practices for Working with MySQL Storage Engines<a name="CHAP_BestPractices.MySQLStorage"></a>
 
 On a MySQL DB instance, observe the following table creation limits:
-
-+ You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the instance is 200 GB or larger in size\.
-
-+ You’re limited to 1000 tables if you are either using standard storage, or using General Purpose storage and the instance is less than 200 GB in size\.
++ You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the DB instance is 200 GiB or larger in size\.
++ You’re limited to 1000 tables if you are either using standard storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
 
 We recommend these limits because having large numbers of tables significantly increases database recovery time after a failover or database crash\. If you need to create more tables than recommended, set the `innodb_file_per_table` parameter to 0\. For more information, see [Working with InnoDB Tablespaces to Improve Crash Recovery Times](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.Tables) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
@@ -243,6 +204,10 @@ In addition, Federated Storage Engine is currently not supported by Amazon RDS f
 
 The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated Backups with Unsupported MariaDB Storage Engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
 
+## Best Practices for Working with Oracle<a name="CHAP_BestPractices.Oracle"></a>
+
+For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html) and the video [ Running Oracle Databases on Amazon RDS](https://www.youtube.com/watch?reload=9&v=GMVKBjXjp20)\.
+
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 
 Two important areas where you can improve performance with PostgreSQL on Amazon RDS are when loading data into a DB instance and when using the PostgreSQL autovacuum feature\. The following sections cover some of the practices we recommend for these areas\.
@@ -252,21 +217,14 @@ Two important areas where you can improve performance with PostgreSQL on Amazon 
 When loading data into an Amazon RDS PostgreSQL DB instance, you should modify your DB instance settings and your DB parameter group values to allow for the most efficient importing of data into your DB instance\.
 
 Modify your DB instance settings to the following:
-
 + Disable DB instance backups \(set backup\_retention to 0\)
-
 + Disable Multi\-AZ
 
 Modify your DB parameter group to include the following settings\. You should test the parameter settings to find the most efficient settings for your DB instance:
-
 + Increase the value of the `maintenance_work_mem` parameter\. For more information about PostgreSQL resource consumption parameters, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/runtime-config-resource.html)\.
-
 + Increase the value of the `checkpoint_segments` and `checkpoint_timeout` parameters to reduce the number of writes to the wal log\.
-
 + Disable the `synchronous_commit` parameter \(do not turn off FSYNC\)\.
-
 + Disable the PostgreSQL autovacuum parameter\.
-
 + Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information see, [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/static/sql-createtable.html) 
 
 Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands with these settings\.
@@ -286,7 +244,7 @@ Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands wi
  Autovacuum should not be thought of as a high\-overhead operation that can be reduced to gain better performance\. On the contrary, tables that have a high velocity of updates and deletes will quickly deteriorate over time if autovacuum is not run\. 
 
 **Important**  
- Not running autovacuum can result in an eventual required outage to perform a much more intrusive vacuum operation\. When an Amazon RDS PostgreSQL DB instance becomes unavailable because of an over conservative use of autovacuum, the PostgreSQL database will shut down to protect itself\. At that point, Amazon RDS must perform a single\-user–mode full vacuum directly on the DB instance , which can result in a multi\-hour outage\.* *Thus, we strongly recommend that you do not turn off autovacuum, which is enabled by default\. 
+ Not running autovacuum can result in an eventual required outage to perform a much more intrusive vacuum operation\. When an Amazon RDS PostgreSQL DB instance becomes unavailable because of an over conservative use of autovacuum, the PostgreSQL database will shut down to protect itself\. At that point, Amazon RDS must perform a single\-user\-mode full vacuum directly on the DB instance , which can result in a multi\-hour outage\.* *Thus, we strongly recommend that you do not turn off autovacuum, which is enabled by default\. 
 
 The autovacuum parameters determine when and how hard autovacuum works\. The` autovacuum_vacuum_threshold` and `autovacuum_vacuum_scale_factor` parameters determine when autovacuum is run\. The `autovacuum_max_workers`, `autovacuum_nap_time`, `autovacuum_cost_limit`, and `autovacuum_cost_delay` parameters determine how hard autovacuum works\. For more information about autovacuum, when it runs, and what parameters are required, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/routine-vacuuming.html)\.
 
@@ -310,36 +268,26 @@ relname | n_dead_tup | last_vacuum | last_autovacuum
 ## Best Practices for Working with SQL Server<a name="CHAP_BestPractices.SQLServer"></a>
 
 Best practices for a Multi\-AZ deployment with a SQL Server DB instance include the following:
-
 + Use Amazon RDS DB events to monitor failovers\. For example, you can be notified by text message or email when a DB instance fails over\. For more information about Amazon RDS events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-
 + If your application caches DNS values, set time to live \(TTL\) to less than 30 seconds\. Setting TTL as so is a good practice in case there is a failover, where the IP address might change and the cached value might no longer be in service\.
-
 + We recommend that you *do not* enable the following modes because they turn off transaction logging, which is required for Multi\-AZ: 
-
   + Simple recover mode
-
   + Offline mode
-
   + Read\-only mode
-
 + Test to determine how long it takes for your DB instance to failover\. Failover time can vary due to the type of database, the instance class, and the storage type you use\. You should also test your application's ability to continue working if a failover occurs\.
-
 + To shorten failover time, you should do the following:
-
   + Ensure that you have sufficient Provisioned IOPS allocated for your workload\. Inadequate I/O can lengthen failover times\. Database recovery requires I/O\.
-
   + Use smaller transactions\. Database recovery relies on transactions, so if you can break up large transactions into multiple smaller transactions, your failover time should be shorter\.
-
 + Take into consideration that during a failover, there will be elevated latencies\. As part of the failover process, Amazon RDS automatically replicates your data to a new standby instance\. This replication means that new data is being committed to two different DB instances, so there might be some latency until the standby DB instance has caught up to the new primary DB instance\.
-
 + Deploy your applications in all Availability Zones\. If an Availability Zone does go down, your applications in the other Availability Zones will still be available\.
 
-When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS mirrors all SQL Server databases on your instance\. If you don't want particular databases to be mirrored, set up a separate DB instance that doesn't use Multi\-AZ for those databases\.
+When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS creates replicas for all SQL Server databases on your instance\. If you don't want specific databases to have secondary replicas, set up a separate DB instance that doesn't use Multi\-AZ for those databases\.
 
 ## Working with DB Parameter Groups<a name="CHAP_BestPractices.DBParameterGroup"></a>
 
-We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. For information about backing up your DB instance, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
+We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
+
+For information about backing up your DB instance, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Amazon RDS Best Practices Presentation Video<a name="CHAP_BestPractices.Presentation"></a>
 

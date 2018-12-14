@@ -2,7 +2,7 @@
 
  Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the date and time of the event, the source name and source type of the event, and a message associated with the event\.
 
-You can retrieve events for your RDS resources through the AWS Management Console, which shows events from the past 24 hours\. You can also retrieve events for your RDS resources by using the [describe\-events](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command, or the [DescribeEvents](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API action\. If you use the AWS CLI or the RDS API to view events, you can retrieve events for up to the past 14 days\. 
+You can retrieve events for your RDS resources through the AWS Management Console, which shows events from the past 24 hours\. You can also retrieve events for your RDS resources by using the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command, or the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API action\. If you use the AWS CLI or the RDS API to view events, you can retrieve events for up to the past 14 days\. 
 
 ## AWS Management Console<a name="USER_ListEvents.CON"></a>
 
@@ -19,7 +19,7 @@ You can retrieve events for your RDS resources through the AWS Management Consol
 
 **To view all Amazon RDS instance events for the past 7 days**
 
-You can view all Amazon RDS instance events for the past 7 days by calling the [describe\-events](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command and setting the `--duration` parameter to `10080`\. 
+You can view all Amazon RDS instance events for the past 7 days by calling the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command and setting the `--duration` parameter to `10080`\. 
 
 ```
 1. aws rds describe-events --duration 10080
@@ -29,7 +29,7 @@ You can view all Amazon RDS instance events for the past 7 days by calling the [
 
 **To view all Amazon RDS instance events for the past 14 days**
 
-You can view all Amazon RDS instance events for the past 14 days by calling the [DescribeEvents](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API action and setting the `Duration` parameter to `20160`\. 
+You can view all Amazon RDS instance events for the past 14 days by calling the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API action and setting the `Duration` parameter to `20160`\. 
 
 ```
  1. https://rds.us-west-2.amazonaws.com/

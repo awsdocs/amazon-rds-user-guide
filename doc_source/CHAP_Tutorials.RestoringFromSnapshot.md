@@ -15,19 +15,11 @@ For information about how to set up the needed VPC security groups for this scen
 Some settings on the restored DB instance are reset when the instance is restored, so you must retain the original resources to be able to restore the DB instance to its previous settings\. For example, when you restore a DB instance from a DB snapshot, the default DB parameter and a default security group are associated with the restored instance\. That association means that the default security group does not allow access to the DB instance, and no custom parameter settings are available in the default parameter group\. You need to retain the DB parameter group and security group associated with the DB instance that was used to create the DB snapshot\. 
 
 The following are required before you can restore a DB instance from a DB snapshot: 
-
 + You must have created a DB snapshot of a DB instance before you can restore a DB instance from that DB snapshot\. For more information about creating a DB snapshot, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\. 
-
 + You must retain the parameter group and security group associated with the DB instance you created the DB snapshot from\. 
-
-+ You must retain the VPC where the DB instance you made the DB snapshot from was located\. 
-
 +  You need to determine the correct option group for the restored DB instance: 
-
   + The option group associated with the DB snapshot that you restore from is associated with the restored DB instance once it is created\. For example, if the DB snapshot you restore from uses Oracle Transparent Data Encryption \(TDE\), the restored DB instance uses the same option group, which had the TDE option\. 
-
   + You cannot use the option group associated with the original DB instance if you attempt to restore that instance into a different VPC or into a different platform\. This restriction occurs because when an option group is assigned to a DB instance, it is also linked to the platform that the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. If a DB instance is in a VPC, the option group associated with the instance is linked to that VPC\. 
-
   +  If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. Note that with persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option when restoring a DB instance into a different VPC\. For more information about working with option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
 
 ## Restoring a DB Instance from a DB Snapshot<a name="CHAP_Tutorials.RestoringFromSnapshot.Steps"></a>
@@ -67,7 +59,7 @@ You can modify other settings on the restored DB instance\. For example, you can
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Select the DB instance created when you restored from the DB snapshot\. Then, choose **See details** from **Instance actions**\. Scroll to the **Connect** section\. The security group assigned to the DB instance might not allow access\. If there are no inbound rules, no permissions exist that allow inbound access\.   
+1. Click the name of the DB instance created when you restored from the DB snapshot to display its details\. Scroll to the **Connect** section\. The security group assigned to the DB instance might not allow access\. If there are no inbound rules, no permissions exist that allow inbound access\.   
 ![\[Restored snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring25.png)
 
 1. Choose **Instance actions**, and then choose **Modify**\. 
@@ -81,9 +73,8 @@ You can modify other settings on the restored DB instance\. For example, you can
 
 1. Choose **Modify DB Instance**\. 
 
-   After the instance status is available, select the DB instance, and choose **See details** from **Instance actions**\. Scroll to the **Details** section, and confirm that the new security group has been applied, making the DB instance authorized for access\.   
+   After the instance status is available, click the DB instance name to display its details\. Scroll to the **Details** section, and confirm that the new security group has been applied, making the DB instance authorized for access\.   
 ![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring4.png)
 
 ## Related Topics<a name="CHAP_Tutorials.RestoringFromSnapshot.Related"></a>
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)

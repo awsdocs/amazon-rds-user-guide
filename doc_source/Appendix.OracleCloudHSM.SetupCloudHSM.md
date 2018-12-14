@@ -6,11 +6,11 @@ Amazon RDS supports AWS CloudHSM Classic for Oracle DB instances in the followin
 
 ## Completing the AWS CloudHSM Classic Prerequisites<a name="prereq"></a>
 
-Follow the procedure in the [Setting Up AWS CloudHSM](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cloud-hsm-prereq.html) section in the *AWS CloudHSM Classic User Guide* to setup an AWS CloudHSM Classic environment\. 
+Follow the procedure in the [Setting Up AWS CloudHSM](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cloud-hsm-prereq.html) section in the *AWS CloudHSM Classic User Guide* to setup an AWS CloudHSM Classic environment\. 
 
 ## Installing the AWS CloudHSM Classic Command Line Interface Tools<a name="control_instance"></a>
 
-Follow the instructions in the [Setting Up the AWS CloudHSM CLI Tools](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-setup.html) section in the *AWS CloudHSM Classic User Guide* to install the AWS CloudHSM Classic command line interface tools on your AWS CloudHSM Classic control instance\. 
+Follow the instructions in the [Setting Up the AWS CloudHSM CLI Tools](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-setup.html) section in the *AWS CloudHSM Classic User Guide* to install the AWS CloudHSM Classic command line interface tools on your AWS CloudHSM Classic control instance\. 
 
 ## Configuring Your HSMs<a name="configure_hsms"></a>
 
@@ -23,9 +23,9 @@ Initializing an HSM sets the password for the HSM security officer account \(als
 
 To provision and initialize your HSMs using the AWS CloudHSM Classic CLI tools, perform the following steps from your control instance: 
 
-1. Following the instructions in [Creating Your HSMs with the CLI](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-create-hsm.html), provision the number of HSMs you need for your configuration\. When you provision your HSMs, make note of the ARN of each HSM because you will need these to initialize your HSMs and create your high\-availability partition group\. 
+1. Following the instructions in [Creating Your HSMs with the CLI](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-create-hsm.html), provision the number of HSMs you need for your configuration\. When you provision your HSMs, make note of the ARN of each HSM because you will need these to initialize your HSMs and create your high\-availability partition group\. 
 
-1. Following the instructions in [Initializing Your HSMs](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-initialize-hsm.html), initialize each of your HSMs\. 
+1. Following the instructions in [Initializing Your HSMs](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-initialize-hsm.html), initialize each of your HSMs\. 
 
 ## Creating Your High\-Availability Partition Group<a name="configure_hapg"></a>
 
@@ -33,10 +33,10 @@ After your HSMs are initialized, create an HA partition group with the initializ
 
 **To create and initialize an HA partition group**
 
-1. Following the instructions in the [Create the HA Partition Group](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-guide.html) section in the *AWS CloudHSM Classic User Guide*, create your HA partition group\. Save the HA partition group ARN returned from the `create-hapg` command for later use\. 
+1. Following the instructions in the [Create the HA Partition Group](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-guide.html) section in the *AWS CloudHSM Classic User Guide*, create your HA partition group\. Save the HA partition group ARN returned from the `create-hapg` command for later use\. 
 
    Save the partition password on your [Password Worksheet](password_worksheet.md)\. 
 
-1. Following the instructions in [Registering a Client with a High\-Availability Partition Group](http://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-client.html), create, register, and assign the clients to use with your HA partition group\. 
+1. Following the instructions in [Registering a Client with a High\-Availability Partition Group](https://docs.aws.amazon.com/cloudhsm/classic/userguide/cli-client.html), create, register, and assign the clients to use with your HA partition group\. 
 
 Repeat this process to add additional partitions if necessary\. One partition can support multiple Oracle databases\. 

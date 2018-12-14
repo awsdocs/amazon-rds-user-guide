@@ -5,7 +5,7 @@ The easiest way to create a DB instance is to use the AWS Management Console\. O
 **Important**  
 You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\.
 
-
+**Topics**
 + [Creating a MySQL DB Instance](#CHAP_GettingStarted.Creating.MySQL)
 + [Connecting to a Database on a DB Instance Running the MySQL Database Engine](#CHAP_GettingStarted.Connecting.MySQL)
 + [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.MySQL)
@@ -14,7 +14,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 The basic building block of Amazon RDS is the DB instance\. This is the environment in which you run your MySQL databases\. 
 
-In this example, you create a DB instance running the MySQL database engine called *mysql\-instance1*, with a *db\.m1\.small* DB instance class, 20 GB of storage, and automated backups enabled with a retention period of one day\.
+In this example, you create a DB instance running the MySQL database engine called *mysql\-instance1*, with a *db\.m1\.small* DB instance class, 20 GiB of storage, and automated backups enabled with a retention period of one day\.
 
 **To create a MySQL DB instance**
 
@@ -24,7 +24,9 @@ In this example, you create a DB instance running the MySQL database engine call
 
 1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB instance**\. The **Launch DB Instance Wizard** opens on the **Select engine** page\.   
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
+
+1. Choose **Create database**\. The **Select engine** page opens\.   
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
 
 1. Choose **MySQL**, and then choose **Next**\.
@@ -38,11 +40,11 @@ In this example, you create a DB instance running the MySQL database engine call
 
 1. Choose **Next**\.
 
-1.  On the **Configure advanced settings** page, provide additional information that RDS needs to launch the MySQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Launch DB Instance**\.  
+1.  On the **Configure advanced settings** page, provide additional information that RDS needs to launch the MySQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Create database**\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)
 
-1. Choose **Launch DB instance**\. 
+1. Choose **Create database**\. 
 
 1. Choose **View DB instance details**\. 
 
@@ -59,23 +61,23 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
 
    1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
 
-   1. Choose the MySQL DB instance and choose **See details** from **Instance actions** to display the details for the DB instance\. 
+   1. Click the MySQL DB instance name to display its details\. 
 
    1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
-1. Type the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL monitor\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and the master password you used for *<password>*\.
+1. Type the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL monitor\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and and provide the master password you used when prompted for a password\.
 
    ```
    PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
    ```
 
-   You should see output similar to the following\.
+   After you enter the password for the user, you should see output similar to the following\.
 
    ```
    Welcome to the MySQL monitor.  Commands end with ; or \g.
    Your MySQL connection id is 350
-   Server version: 5.6.27-log MySQL Community Server (GPL)
+   Server version: 5.6.40-log MySQL Community Server (GPL)
    
    Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
    
@@ -91,6 +93,8 @@ Once you have connected to the sample DB instance that you created, you should d
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the navigation pane, choose **Instances**\.
+
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
 1. Choose the DB instance you wish to delete\.
 

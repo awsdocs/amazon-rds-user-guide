@@ -1,10 +1,10 @@
 # Troubleshooting Applications on Amazon RDS<a name="APITroubleshooting"></a>
 
-
+**Topics**
 + [Retrieving Errors](#RetrievingErrors)
 + [Troubleshooting Tips](#TroubleshootingTipss)
 
-Amazon Relational Database Service; provides specific and descriptive errors to help you troubleshoot problems while interacting with the Amazon RDS API\. 
+Amazon RDS provides specific and descriptive errors to help you troubleshoot problems while interacting with the Amazon RDS API\. 
 
 ## Retrieving Errors<a name="RetrievingErrors"></a>
 
@@ -23,14 +23,11 @@ use XML::XPath;
 
 ## Troubleshooting Tips<a name="TroubleshootingTipss"></a>
 
- We recommend the following processes to diagnose and resolve problems with the Amazon Relational Database Service API\. 
-
-+ Verify that Amazon Relational Database Service is operating normally in the region you are targeting by visiting [http://status\.aws\.amazon\.com](http://status.aws.amazon.com/)\.
-
+ We recommend the following processes to diagnose and resolve problems with the Amazon RDS API\. 
++ Verify that Amazon RDS is operating normally in the AWS Region you are targeting by visiting [http://status\.aws\.amazon\.com](http://status.aws.amazon.com/)\.
 + Check the structure of your request
 
-  Each Amazon Relational Database Service operation has a reference page in the *Amazon RDS API Reference*\. Double\-check that you are using parameters correctly\. In order to give you ideas regarding what might be wrong, look at the sample requests or user scenarios to see if those examples are doing similar operations\.
-
+  Each Amazon RDS operation has a reference page in the *Amazon RDS API Reference*\. Double\-check that you are using parameters correctly\. In order to give you ideas regarding what might be wrong, look at the sample requests or user scenarios to see if those examples are doing similar operations\.
 + Check the forum
 
   Amazon RDS has a development community forum where you can search for solutions to problems others have experienced along the way\. To view the forum, go to 

@@ -51,9 +51,6 @@ To modify the retention period for dump files, use the `rds_set_configuration` p
 For security reasons, you cannot delete a specific trace or dump file on a SQL Server DB instance\. To delete all unused trace or dump files, set the retention period for the files to 0\. 
 
 ## Related Topics<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.Related"></a>
-
 + [Amazon RDS Database Log Files](USER_LogAccess.md)
-
 + [Microsoft SQL Server Database Log Files](USER_LogAccess.Concepts.SQLServer.md)
-
 + [Working with Microsoft SQL Server Logs](Appendix.SQLServer.CommonDBATasks.Logs.md)

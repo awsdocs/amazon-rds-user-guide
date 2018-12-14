@@ -10,34 +10,26 @@ CALL mysql.rds_skip_repl_error;
 
 ## Usage Notes<a name="mysql_rds_skip_repl_error-usage-notes"></a>
 
-The `mysql.rds_skip_repl_error` must be run by the master user\.
+The master user must run the `mysql.rds_skip_repl_error` procedure\.
 
-Run the MySQL `show slave status\G` command to determine if there are errors\. If a replication error is not critical, you can elect to use `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `show slave status\G` to determine the correct course of action for the next error\. For information about the values returned, go to [SHOW SLAVE STATUS Syntax](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) in the MySQL documentation\.
+To determine if there are errors, run the MySQL `show slave status\G` command\. If a replication error isn't critical, you can run `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `show slave status\G` to determine the correct course of action for the next error\. For information about the values returned, see [SHOW SLAVE STATUS Syntax](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) in the MySQL documentation\.
 
-For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL or MariaDB Read Replica Problem](USER_ReadRepl.md#USER_ReadRepl.Troubleshooting)\.
-
-The `mysql.rds_skip_repl_error` procedure is available in these versions of Amazon RDS MySQL:
-
-+ MySQL 5\.5
-
-+ MySQL 5\.6
-
-+ MySQL 5\.7
+For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
 **Important**  
-If you attempt to call `mysql.rds_skip_repl_error` and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
+If you try to call `mysql.rds_skip_repl_error`, you might encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`\. If you do, upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
 
-### Slave Down or Disabled Error<a name="w3ab1c32c81c17b7c14"></a>
+### Slave Down or Disabled Error<a name="w4aac28c86c35b7c11"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
 
 This error message appears because replication has stopped and could not be restarted\.
 
-If you need to skip a large number of errors, the replication lag can increase beyond the default retention period for binary log files\. In this case, you might encounter a fatal error due to binary log files being purged before they have been replayed on the replica\. This purge causes replication to stop, and you can no longer call the `mysql.rds_skip_repl_error` command to skip replication errors\. 
+If you need to skip a large number of errors, the replication lag can increase beyond the default retention period for binary log \(binlog\) files\. In this case, you might encounter a fatal error due to binlog files being purged before they have been replayed on the Read Replica\. This purge causes replication to stop, and you can no longer call the `mysql.rds_skip_repl_error` command to skip replication errors\. 
 
-You can mitigate this issue by increasing the number of hours that binary log files are retained on your replication master\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
+You can mitigate this issue by increasing the number of hours that binlog files are retained on your replication master\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
 
-To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) procedure and specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster\. The following example sets the retention period for binlog files to 48 hours:
+To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) procedure and specify a configuration parameter of `'binlog retention hours'` along with the number of hours to retain binlog files on the DB cluster\. The following example sets the retention period for binlog files to 48 hours\.
 
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);

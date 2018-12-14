@@ -40,7 +40,7 @@ CREATE TABLESPACE encrypt_ts ENCRYPTION USING 'AES256' DEFAULT STORAGE (ENCRYPT)
 
 Note that the previous commands for encrypting a tablespace are the same as the commands you would use with an Oracle installation not on Amazon RDS, and the ALTER TABLE syntax to encrypt a column is also the same as the commands you would use for an Oracle installation not on Amazon RDS\. 
 
- You should determine if your DB instance is associated with an option group that has the **TDE** option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API action [DescribeDBInstances](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
+ You should determine if your DB instance is associated with an option group that has the **TDE** option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API action [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
 
 To comply with several security standards, Amazon RDS is working to implement automatic periodic master key rotation\. 
 
@@ -61,7 +61,5 @@ The process for using Oracle Transparent Data Encryption \(TDE\) with Amazon RDS
 You can use Oracle Data Pump to import or export encrypted dump files\. Amazon RDS supports the password encryption mode \(ENCRYPTION\_MODE=PASSWORD\) for Oracle Data Pump\. Amazon RDS does not support transparent encryption mode \(ENCRYPTION\_MODE=TRANSPARENT\) for Oracle Data Pump\. For more information about using Oracle Data Pump with Amazon RDS, see [Oracle Data Pump](Oracle.Procedural.Importing.md#Oracle.Procedural.Importing.DataPump)\. 
 
 ## Related Topics<a name="Appendix.Oracle.Options.AdvSecurity.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

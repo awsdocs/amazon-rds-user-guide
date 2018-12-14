@@ -187,11 +187,8 @@ Microsoft SQL Server Management Studio is a graphical SQL Server client that is 
 SQL Server Management Studio is available only as a Windows\-based application\.
 
 SQL Server Management Studio includes the following tools, which are useful in importing data to a SQL Server DB instance: 
-
 + Generate and Publish Scripts Wizard
-
 + Import and Export Wizard
-
 + Bulk copy
 
 #### Generate and Publish Scripts Wizard<a name="ImportData.SQLServer.MgmtStudio.ScriptWizard"></a>
@@ -199,7 +196,7 @@ SQL Server Management Studio includes the following tools, which are useful in i
 The Generate and Publish Scripts Wizard creates a script that contains the schema of a database, the data itself, or both\. If you generate a script for a database in your local SQL Server deployment, you can then run the script to transfer the information that it contains to an Amazon RDS DB instance\. 
 
 **Note**  
-For databases of 1 GB or larger, it is more efficient to script only the database schema and then use the Import and Export Wizard or the bulk copy feature of SQL Server to transfer the data\. 
+For databases of 1 GiB or larger, it is more efficient to script only the database schema and then use the Import and Export Wizard or the bulk copy feature of SQL Server to transfer the data\. 
 
 For detailed information about the Generate and Publish Scripts Wizard, see the [Microsoft SQL Server documentation](http://msdn.microsoft.com/en-us/library/ms178078%28v=sql.105%29.aspx)\. 
 
@@ -217,11 +214,8 @@ The Import and Export Wizard works well for large datasets, but it might not be 
 For detailed information about the Import and Export Wizard, see the [ Microsoft SQL Server documentation](http://msdn.microsoft.com/en-us/library/ms140052%28v=sql.105%29.aspx)\. 
 
 In the wizard, on the **Choose a Destination** page, do the following: 
-
 + For **Server Name**, type the name of the endpoint for your DB instance\.
-
 + For the server authentication mode, choose **Use SQL Server Authentication**\.
-
 + For **User name** and **Password**, type the credentials for the master user that you created for the DB instance\.
 
 #### Bulk Copy<a name="ImportData.SQLServer.MgmtStudio.BulkCopy"></a>
@@ -240,15 +234,10 @@ bcp dbname.schema_name.table_name out C:\table_name.txt -n -S localhost -U usern
 ```
 
 The preceding code includes the following options:
-
 + `-n` specifies that the bulk copy will use the native data types of the data to be copied\.
-
 + `-S` specifies the SQL Server instance that the *bcp* utility will connect to\.
-
 + `-U` specifies the user name of the account that will log in to the SQL Server instance\.
-
 + `-P` specifies the password for the user specified by `-U`\.
-
 + `-b` specifies the number of rows per batch of imported data\.
 
 **Note**  
@@ -275,11 +264,8 @@ bcp store.dbo.customers in C:\customers.txt -n -S rds.ckz2kqd4qsn1.us-east-1.rds
 ## Exporting Data from SQL Server on Amazon RDS<a name="SQLServer.Procedural.Exporting"></a>
 
 You can choose one of the following options to export data from an Amazon RDS SQL DB instance : 
-
 + **Native database backup using a full backup file \(\.bak\)** – Using \.bak files to backup databases is heavily optimized, and is usually the fastest way to export data\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\. 
-
 + **SQL Server Import and Export Wizard** – For more information, see [SQL Server Import and Export Wizard](#SQLServer.Procedural.Exporting.SSIEW)\. 
-
 + **SQL Server Generate and Publish Scripts Wizard and bcp utility** – For more information, see [SQL Server Generate and Publish Scripts Wizard and bcp Utility](#SQLServer.Procedural.Exporting.SSGPSW)\. 
 
 ### SQL Server Import and Export Wizard<a name="SQLServer.Procedural.Exporting.SSIEW"></a>
@@ -373,17 +359,11 @@ The SQL Server Generate and Publish Scripts Wizard is available as part of Micro
    ```
 
    The preceding code includes the following options:
-
    + *table\_name* is the name of one of the tables that you’ve recreated in the target database and now want to populate with data\. 
-
    + *data\_file* is the full path and name of the data file to be created\.
-
    + `-n` specifies that the bulk copy will use the native data types of the data to be copied\.
-
    + `-S` specifies the SQL Server DB instance to export from\.
-
    + `-U` specifies the user name to use when connecting to the SQL Server DB instance\.
-
    + `-P` specifies the password for the user specified by `-U`\.
 
    The following shows an example command\. 
@@ -401,5 +381,4 @@ The SQL Server Generate and Publish Scripts Wizard is available as part of Micro
 1. Bulk import the data from the data files you created using the bcp utility, following the instructions at either [Import and Export Bulk Data by Using the bcp Utility](http://msdn.microsoft.com/en-us/library/aa337544%28v=sql.110%29.aspx) or [Import Bulk Data by Using BULK INSERT or OPENROWSET\(BULK\.\.\.\)](http://msdn.microsoft.com/en-us/library/ms175915%28v=sql.110%29.aspx) in the SQL Server documentation, depending on what you decided in step 11\. 
 
 ## Related Topics<a name="SQLServer.Procedural.Importing.Snapshots.Related"></a>
-
 + [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)

@@ -22,12 +22,10 @@ You can upgrade manual DB snapshots, which can be encrypted or not encrypted, fr
 
 ## AWS CLI<a name="USER_UpgradeDBSnapshot.MySQL.CLI"></a>
 
-To upgrade a DB snapshot to a new database engine version, use the AWS CLI [modify\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\. 
+To upgrade a DB snapshot to a new database engine version, use the AWS CLI [modify\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\. 
 
 **Parameters**
-
 + `--db-snapshot-identifier` – The identifier of the DB snapshot to upgrade\. The identifier must be a unique Amazon Resource Name \(ARN\)\. For more information, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\.
-
 + `--engine-version` – The engine version to upgrade the DB snapshot to\.
 
 **Example**  
@@ -48,10 +46,8 @@ For Windows:
 
 ## API<a name="USER_UpgradeDBSnapshot.MySQL.API"></a>
 
-To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBSnapshot.html) action\. 
-
+To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBSnapshot.html) action\. 
 + `DBSnapshotIdentifier` – The identifier of the DB snapshot to upgrade\. The identifier must be a unique Amazon Resource Name \(ARN\)\. For more information, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\. 
-
 + `EngineVersion` – The engine version to upgrade the DB snapshot to\. 
 
 **Example**  
@@ -71,7 +67,5 @@ To upgrade a DB snapshot to a new database engine version, call the Amazon RDS A
 ```
 
 ## Related Topics<a name="USER_UpgradeDBSnapshot.MySQL.Related"></a>
-
 + [Testing an Upgrade](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.UpgradeTesting)
-
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)

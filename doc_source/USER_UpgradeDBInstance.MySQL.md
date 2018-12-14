@@ -1,10 +1,22 @@
 # Upgrading the MySQL DB Engine<a name="USER_UpgradeDBInstance.MySQL"></a>
 
-When Amazon Relational Database Service \(Amazon RDS\) supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. 
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. In contrast, a minor version upgrade includes only changes that are backward\-compatible with existing applications\. 
+
+You must modify the DB instance manually to perform a major version upgrade\. Minor version upgrades occur automatically if you enable auto minor version upgrades on your DB instance\. In all other cases, you must modify the DB instance manually to perform a minor version upgrade\.
+
+**Topics**
++ [Overview of Upgrading](#USER_UpgradeDBInstance.MySQL.Overview)
++ [Major Version Upgrades for MySQL](#USER_UpgradeDBInstance.MySQL.Major)
++ [Testing an Upgrade](#USER_UpgradeDBInstance.MySQL.UpgradeTesting)
++ [Upgrading a MySQL DB Instance](#USER_UpgradeDBInstance.MySQL.Upgrading)
++ [Upgrading a MySQL Database with Reduced Downtime](#USER_UpgradeDBInstance.MySQL.ReducedDowntime)
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.MySQL.Overview"></a>
 
 Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken when the upgrade completes\. 
+
+**Note**  
+Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\. 
 
 After the upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the first DB snapshot taken to create a new DB instance\. 
 
@@ -17,21 +29,22 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 ## Major Version Upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Major"></a>
 
 Amazon RDS supports the following in\-place upgrades for major versions of the MySQL database engine:
-
 + MySQL 5\.5 to MySQL 5\.6
-
 + MySQL 5\.6 to MySQL 5\.7
++ MySQL 5\.7 to MySQL 8\.0
 
 **Note**  
-You can only create MySQL version 5\.7 DB instances with current generation DB instance classes and the M3 previous generation DB instance class\. If you want to upgrade a MySQL version 5\.6 DB instance running on a previous generation DB instance class \(other than M3\) to a MySQL version 5\.7 DB instance, you must first modify the DB instance to use a current generation DB instance class\. After the DB instance has been modified to use a current generation DB instance class, you can then modify the DB instance to use the MySQL version 5\.7 database engine\. For information on Amazon RDS DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+You can only create MySQL version 5\.7 and 8\.0 DB instances with latest\-generation and current\-generation DB instance classes, in addition to the db\.m3 previous\-generation DB instance class\. If you want to upgrade a MySQL version 5\.6 DB instance running on a previous\-generation DB instance class \(other than db\.m3\) to a MySQL version 5\.7 DB instance, you must first modify the DB instance to use a latest\-generation or current\-generation DB instance class\. After the DB instance has been modified to use a latest\-generation or current\-generation DB instance class, you can then modify the DB instance to use the MySQL version 5\.7 database engine\. For information on Amazon RDS DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
-Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon Relational Database Service \(Amazon RDS\) doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You should thoroughly test any upgrade before applying it to your production instances\. 
+Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You should thoroughly test any upgrade before applying it to your production instances\. 
 
-To perform a major version upgrade for a MySQL version 5\.5 DB instance on Amazon RDS to MySQL version 5\.6 or later, you should first perform any available OS updates\. After OS updates are complete, you must upgrade to each major version: 5\.5 to 5\.6, and then 5\.6 to 5\.7\. MySQL DB instances created before April 24, 2014, show an available OS update until the update has been applied\. For more information on OS updates, see [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)\. 
+To perform a major version upgrade for a MySQL version 5\.5 DB instance on Amazon RDS to MySQL version 5\.6 or later, you should first perform any available OS updates\. After OS updates are complete, you must upgrade to each major version: 5\.5 to 5\.6, then 5\.6 to 5\.7, and then 5\.7 to 8\.0\. MySQL DB instances created before April 24, 2014, show an available OS update until the update has been applied\. For more information on OS updates, see [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
 
 During a major version upgrade of MySQL, Amazon RDS runs the MySQL binary `mysql_upgrade` to upgrade tables, if required\. Also, Amazon RDS empties the `slow_log` and `general_log` tables during a major version upgrade\. To preserve log information, save the log contents before the major version upgrade\. 
 
-MySQL major version upgrades typically complete in about 10 minutes\. Some upgrades might take longer because of the DB instance class size or because the instance doesn't follow certain operational guidelines in [Best Practices for Amazon RDS](CHAP_BestPractices.md)\. If you upgrade a DB instance from the Amazon RDS console, the status of the DB instance indicates when the upgrade is complete\. If you upgrade using the AWS Command Line Interface \(AWS CLI\), use the [describe\-db\-instances](http://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and check the `Status` value\. 
+MySQL major version upgrades typically complete in about 10 minutes\. Some upgrades might take longer because of the DB instance class size or because the instance doesn't follow certain operational guidelines in [Best Practices for Amazon RDS](CHAP_BestPractices.md)\. If you upgrade a DB instance from the Amazon RDS console, the status of the DB instance indicates when the upgrade is complete\. If you upgrade using the AWS Command Line Interface \(AWS CLI\), use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and check the `Status` value\. 
+
+If you are using a custom parameter group, you must specify either a default parameter group for the new DB engine version or create your own custom parameter group for the new DB engine version\. Associating the new parameter group with the DB instance requires a customer\-initiated database reboot after the upgrade completes\. The DB instance's parameter group status shows `pending-reboot` if the DB instance needs to be rebooted to apply the parameter group changes\. A DB instance's parameter group status can be viewed in the AWS console or by using a "describe" call such as `describe-db-instances`\.
 
 ### Upgrades to MySQL Version 5\.7 Might Be Slow<a name="USER_UpgradeDBInstance.MySQL.DateTime57"></a>
 
@@ -58,12 +71,6 @@ SELECT DISTINCT CONCAT('ALTER TABLE `',
       AND (is_tables.ENGINE = 'InnoDB' AND syscolumns.MTYPE = 6);
 ```
 
-## Minor Version Upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Minor"></a>
-
-Minor version upgrades only occur automatically if a minor upgrade replaces an unsafe version, such as a minor upgrade that contains bug fixes for a previous version\. In all other cases, you must modify the DB instance manually to perform a minor version upgrade\.
-
-We don’t automatically upgrade an Amazon RDS DB instance until we post an announcement to the forums announcement page and send a customer e\-mail notification\. Even though upgrades take place during the instance maintenance window, we still schedule them at specific times through the year\. We schedule them so you can plan around them, because downtime is required to upgrade a DB engine version, even for Multi\-AZ instances\. 
-
 ## Testing an Upgrade<a name="USER_UpgradeDBInstance.MySQL.UpgradeTesting"></a>
 
 Before you perform a major version upgrade on your DB instance, you should thoroughly test your database, and all applications that access the database, for compatibility with the new version\. We recommend that you use the following procedure\. 
@@ -71,10 +78,9 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 **To test a major version upgrade**
 
 1. Review the upgrade documentation for the new version of the database engine to see if there are compatibility issues that might affect your database or applications: 
-
-   +  [MySQL 5\.5 Upgrade Documentation](http://dev.mysql.com/doc/refman/5.5/en/upgrading-from-previous-series.html) 
-
-   +  [MySQL 5\.6 Upgrade Documentation](http://dev.mysql.com/doc/refman/5.6/en/upgrading-from-previous-series.html) 
+   +  [Changes in MySQL 5\.6](http://dev.mysql.com/doc/refman/5.6/en/upgrading-from-previous-series.html) 
+   +  [Changes in MySQL 5\.7](http://dev.mysql.com/doc/refman/5.7/en/upgrading-from-previous-series.html) 
+   +  [Changes in MySQL 8\.0](http://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html) 
 
 1. If your DB instance is a member of a custom DB parameter group, you need to create a new DB parameter group with your existing settings that is compatible with the new major version\. Specify the new DB parameter group when you upgrade your test instance, so that your upgrade testing ensures that it works correctly\. For more information about creating a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
@@ -90,9 +96,13 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 
 1. If all tests pass, then perform the upgrade on your production DB instance\. We recommend that you do not allow write operations to the DB instance until you confirm that everything is working correctly\. 
 
+## Upgrading a MySQL DB Instance<a name="USER_UpgradeDBInstance.MySQL.Upgrading"></a>
+
+For information about manually or automatically upgrading a MySQL DB instance, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+
 ## Upgrading a MySQL Database with Reduced Downtime<a name="USER_UpgradeDBInstance.MySQL.ReducedDowntime"></a>
 
-If your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance and reduce the amount of downtime for your application\. This procedure shows an example of upgrading from MySQL version 5\.5 to MySQL version 5\.6\. 
+If your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance and reduce the amount of downtime for your application\. This procedure shows an example of upgrading from MySQL version 5\.5 to MySQL version 5\.6\. You can use the same general steps for upgrades to other major versions\. 
 
 **To upgrade an MySQL database while a DB instance is in use**
 
@@ -138,89 +148,3 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
    1. Choose **Promote Read Replica**\.
 
 1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 5\.6 DB instance, add Read Replicas, set up Multi\-AZ support, and so on\.
-
-## AWS Management Console<a name="USER_UpgradeDBInstance.MySQL.Console"></a>
-
-**To upgrade the engine version of a DB instance by using the AWS Management Console**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Instances**, and then choose the DB instance that you want to upgrade\. 
-
-1. Choose **Instance actions**, and then choose **Modify**\. 
-
-1. For **DB engine version**, choose the new version\.
-
-1. Choose **Continue**\.
-
-1. To upgrade immediately, select **Apply immediately**\. To delay the upgrade to the next maintenance window, choose **Apply during the next scheduled maintenance window**\. 
-
-1. Review the modification summary information\. To proceed with the upgrade, choose **Modify DB Instance**\. To cancel the upgrade, choose **Cancel** or **Back**\. 
-
-## CLI<a name="USER_UpgradeDBInstance.MySQL.CLI"></a>
-
-To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-
-+ `--db-instance-identifier` – the name of the db instance\. 
-
-+ `--engine-version` – the version number of the database engine to upgrade to\. 
-
-+ `--allow-major-version-upgrade` – to to upgrade major version\. 
-
-+ `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
-
-**Example**  
-For Linux, OS X, or Unix:  
-
-```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier <mydbinstance> \
-3.     --engine-version <new_version> \
-4.     --allow-major-version-upgrade \
-5.     --apply-immediately
-```
-For Windows:  
-
-```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier <mydbinstance> ^
-3.     --engine-version <new_version> ^
-4.     --allow-major-version-upgrade ^
-5.     --apply-immediately
-```
-
-## API<a name="USER_UpgradeDBInstance.MySQL.API"></a>
-
-To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-
-+ `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
-
-+ `EngineVersion` – the version number of the database engine to upgrade to\. 
-
-+ `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
-+ `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
-
-**Example**  
-
-```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=ModifyDBInstance
- 3.    &ApplyImmediately=false
- 4.    &DBInstanceIdentifier=mydbinstance
- 5.    &EngineVersion=new_version
- 6.    &SignatureMethod=HmacSHA256
- 7.    &SignatureVersion=4
- 8.    &Version=2013-09-09
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-east-1/rds/aws4_request
-11.    &X-Amz-Date=20131016T233051Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
-
-## Related Topics<a name="USER_UpgradeDBInstance.MySQL.Related"></a>
-
-+ [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)

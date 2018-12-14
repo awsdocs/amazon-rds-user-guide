@@ -4,7 +4,7 @@ This section describes the Amazon RDS\-specific implementations of some common D
 
 For information about working with MySQL log files on Amazon RDS, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
 
-
+**Topics**
 + [Killing a Session or Query](#Appendix.MySQL.CommonDBATasks.Kill)
 + [Skipping the Current Replication Error](#Appendix.MySQL.CommonDBATasks.SkipError)
 + [Working with InnoDB Tablespaces to Improve Crash Recovery Times](#Appendix.MySQL.CommonDBATasks.Tables)
@@ -68,7 +68,7 @@ MySQL processes each metadata file, which includes tablespaces, during the crash
 
 Since the `innodb_file_per_table` parameter resides in a parameter group, you can change the parameter value by editing the parameter group used by your DB instance without having to reboot the DB instance\. After the setting is changed, for example, from 1 \(create individual tables\) to 0 \(use shared tablespace\), new InnoDB tables will be added to the shared tablespace while existing tables continue to have individual tablespaces\. To move an InnoDB table to the shared tablespace, you must use the `ALTER TABLE` command\.
 
-### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w3ab1c32c73c13c12"></a>
+### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w4aac28c78c13c12"></a>
 
 You can move an InnoDB table's metadata from its own tablespace to the shared tablespace, which will rebuild the table metadata according to the `innodb_file_per_table` parameter setting\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 

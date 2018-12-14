@@ -1,12 +1,12 @@
 # Upgrading the PostgreSQL DB Engine<a name="USER_UpgradeDBInstance.PostgreSQL"></a>
 
-When Amazon Relational Database Service \(Amazon RDS\) supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. 
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. 
 
 Amazon RDS supports major and minor version upgrades for PostgreSQL DB instances\. 
 
-Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon Relational Database Service \(Amazon RDS\) doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You can initiate a major version upgrade manually by modifying your instance\. However, there are recommended steps to follow when performing a major version upgrade\. For details, see [Major Version Upgrades](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
+Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must manually modify your DB instance\. You can initiate a major version upgrade manually by modifying your instance\. However, there are recommended steps to follow when performing a major version upgrade\. For details, see [Major Version Upgrades](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
 
-You can initiate a minor version upgrade manually by modifying your instance, or select the **Auto Minor Version Upgrade** option when creating or modifying a DB instance to have your instance automatically upgraded once the new version is tested and approved by Amazon RDS\. 
+You can initiate a minor version upgrade manually by modifying your instance\. Alternatively, you can enable the auto minor version upgrades option when creating or modifying a DB instance\. Doing so means that your instance is automatically upgraded after the new version is tested and approved by Amazon RDS\. 
 
 AWS RDS does not automatically upgrade PostgreSQL extensions\. To upgrade an extension, you must use the ALTER EXTENSION UPDATE command\. For example, to upgrade PostGIS when you upgrade the PostgreSQL DB engine from 9\.4\.x to 9\.5\.x, you would run the following command: 
 
@@ -16,6 +16,12 @@ ALTER EXTENSION POSTGIS UPDATE TO '2.2.2'
 
 **Note**  
  If you are running the PostGIS extension in your Amazon RDS PostgreSQL instance, make sure and follow the [PostGIS upgrade instructions ](https://postgis.net/docs/postgis_installation.html#upgrading)before you upgrade PostgreSQL\. 
+
+**Topics**
++ [Overview of Upgrading](#USER_UpgradeDBInstance.PostgreSQL.Overview)
++ [Major Version Upgrades](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
++ [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
++ [Upgrading a PostgreSQL DB Instance Manually](#USER_UpgradeDBInstance.PostgreSQL.Upgrading)
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.PostgreSQL.Overview"></a>
 
@@ -33,12 +39,10 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must modify your DB instance manually to perform a major version upgrade\. You should thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. A best practice we recommend is to perform the major version upgrade on a restored instance that you create from a DB snapshot\.
 
 Amazon RDS supports an in\-place upgrade from the following:
-
 + A PostgreSQL 9\.3\.x DB instance to a PostgreSQL 9\.4\.x DB instance
-
 + A PostgreSQL 9\.4\.x DB instance to a PostgreSQL 9\.5\.x DB instance
-
 + A PostgreSQL 9\.5\.x DB instance to a PostgreSQL 9\.6\.x DB instance
++ A PostgreSQL 9\.6\.x DB instance to a PostgreSQL 10\.x DB instance
 
  Amazon RDS uses the `pg_upgrade` utility found at [http://www\.postgresql\.org/docs/9\.4/static/pgupgrade\.html](http://www.postgresql.org/docs/9.4/static/pgupgrade.html) to safely upgrade your instance\. 
 
@@ -118,96 +122,12 @@ The `public` and `template1` databases and the `public` schema in every database
 **Note**  
 After you have completed the upgrade, you should run the `ANALYZE` operation to refresh the `pg_statistic` table\.
 
-## Minor Version Upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
+## Automatic Minor Version Upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
 
-Minor version upgrades occur automatically if a minor upgrade has been tested and approved by Amazon RDS and you selected the **Auto Minor Version Upgrade** option\. In all other cases, you must modify the DB instance manually to perform a minor version upgrade\. If you select the **Auto Minor Version Upgrade** option when creating or modifying a DB instance, you can have your instance automatically upgraded after the new version is tested and approved by Amazon RDS\. 
+Minor version upgrades occur automatically if a minor upgrade has been tested and approved by Amazon RDS and you enable the **Auto minor version upgrade** option\. In all other cases, you must modify the DB instance manually to perform a minor version upgrade\. If you enable the **Auto minor version upgrade** option when creating or modifying a DB instance, you can have your instance automatically upgraded after the new version is tested and approved by Amazon RDS\. 
 
 If your PostgreSQL DB instance is using read replication, you must upgrade all of the Read Replicas before upgrading the source instance\. If the DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded, and the instance might not be available until the upgrade is complete\. 
 
-## AWS Management Console<a name="USER_UpgradeDBInstance.PostgreSQL.Console"></a>
+## Upgrading a PostgreSQL DB Instance Manually<a name="USER_UpgradeDBInstance.PostgreSQL.Upgrading"></a>
 
-**To apply a DB engine major version upgrade to a DB instance**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Instances**\. 
-
-1. Choose the check box for the DB instance that you want to upgrade\. 
-
-1. Choose **Instance Actions**, and then choose **Modify**\. 
-
-1. For **DB Engine Version**, choose the new version\.
-
-1. To upgrade immediately, select **Apply Immediately**\. To delay the upgrade to the next maintenance window, clear **Apply Immediately**\. 
-
-1. Choose **Continue**\. 
-
-1. Review the modification summary information\. To proceed with the upgrade, choose **Modify DB Instance**\. To cancel the upgrade, choose **Cancel** or **Back**\. 
-
-## CLI<a name="USER_UpgradeDBInstance.PostgreSQL.CLI"></a>
-
-To upgrade the engine version of a DB instance, use the AWS CLI [modify\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
-
-+ `--db-instance-identifier` – the name of the db instance\. 
-
-+ `--engine-version` – the version number of the database engine to upgrade to\. 
-
-+ `--allow-major-version-upgrade` – to to upgrade major version\. 
-
-+ `--no-apply-immediately` – apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
-
-**Example**  
-For Linux, OS X, or Unix:  
-
-```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier <mydbinstance> \
-3.     --engine-version <new_version> \
-4.     --allow-major-version-upgrade \
-5.     --apply-immediately
-```
-For Windows:  
-
-```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier <mydbinstance> ^
-3.     --engine-version <new_version> ^
-4.     --allow-major-version-upgrade ^
-5.     --apply-immediately
-```
-
-## API<a name="USER_UpgradeDBInstance.PostgreSQL.API"></a>
-
-To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html) action\. Specify the following parameters: 
-
-+ `DBInstanceIdentifier` – the name of the db instance, for example *mydbinstance*\. 
-
-+ `EngineVersion` – the version number of the database engine to upgrade to\. 
-
-+ `AllowMajorVersionUpgrade` – set to `true` to upgrade major version\. 
-
-+ `ApplyImmediately` – whether to apply changes immediately or during the next maintenance window\. To apply changes immediately, set the value to *true*\. To apply changes during the next maintenance window, set the value to *false*\. 
-
-**Example**  
-
-```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=ModifyDBInstance
- 3.    &ApplyImmediately=false
- 4.    &DBInstanceIdentifier=mydbinstance
- 5.    &EngineVersion=new_version
- 6.    &SignatureMethod=HmacSHA256
- 7.    &SignatureVersion=4
- 8.    &Version=2013-09-09
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-east-1/rds/aws4_request
-11.    &X-Amz-Date=20131016T233051Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
-
-## Related Topics<a name="USER_UpgradeDBInstance.PostgreSQL.Related"></a>
-
-+ [Amazon RDS Maintenance](USER_UpgradeDBInstance.Maintenance.md)
-
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
+For information about manually or automatically upgrading a PostgreSQL DB instance, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.

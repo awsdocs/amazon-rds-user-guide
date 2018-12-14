@@ -15,16 +15,21 @@ For an example that walks you through the process of creating and connecting to 
 
 1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Instances**\.
 
-1. Choose **Launch DB Instance** to start the **Launch DB Instance Wizard**\. 
+   If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
-    The wizard opens on the **Select engine** page\. The Oracle editions that are available vary by region\.   
+1. Choose **Create database** to open the **Select engine** page\.
+
+   The Oracle editions that are available vary by region\.  
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
 
 1. In the **Select engine** window, choose the **Select** button for the Oracle DB engine you want to use and then choose **Next**\. 
 
-1. The next step asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. When you choose **Production**, the failover option **Multi\-AZ deployment** and the **Provisioned IOPS** storage option will be preselected in the following step\. 
+1. The next step asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. When you choose **Production**, the following are preselected in a later step:
+   + **Multi\-AZ deployment** failover option 
+   + **Provisioned IOPS** storage option
+   + **Enable deletion protection** option
 
 1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
 
@@ -35,9 +40,9 @@ For an example that walks you through the process of creating and connecting to 
 
    On the **Configure advanced settings** page, provide additional information that RDS needs to launch the DB instance\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 
-1. Choose **Launch DB instance**\. 
+1. Choose **Create database**\. 
 
-1.  On the final page of the wizard, choose **View DB instance details**\. 
+1.  On the final page, choose **View DB instance details**\. 
 
 On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it could take several minutes for the new instance to be available\. 
 
@@ -45,24 +50,15 @@ On the RDS console, the details for the new DB instance appear\. The DB instance
 
 ## CLI<a name="USER_CreateOracleInstance.CLI"></a>
 
-To create an Oracle DB instance by using the AWS CLI, call the [create\-db\-instance](http://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
-
+To create an Oracle DB instance by using the AWS CLI, call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 + `--db-instance-identifier`
-
 + `--db-instance-class`
-
 + `--db-security-groups`
-
 + `--db-subnet-group`
-
 + `--engine`
-
 + `--master-user-name`
-
 + `--master-user-password`
-
 + `--allocated-storage`
-
 + `--backup-retention-period`
 
 **Example**  
@@ -105,24 +101,15 @@ This command should produce output similar to the following:
 
 ## API<a name="USER_CreateOracleInstance.API"></a>
 
-To create an Oracle DB instance by using the Amazon RDS API, call the [CreateDBInstance](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
-
+To create an Oracle DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 + `AllocatedStorage`
-
 + `BackupRetentionPeriod`
-
 + `DBInstanceClass`
-
 + `DBInstanceIdentifier`
-
 + `DBSecurityGroups`
-
 + `DBSubnetGroup`
-
 + `Engine`
-
 + `MasterUsername`
-
 + `MasterUserPassword`
 
 **Example**  
@@ -158,7 +145,7 @@ The following table contains details about settings that you choose when you cre
 
 | Setting | Setting Description | 
 | --- | --- | 
-|  Allocated storage  |  The amount of storage to allocate your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Storage for Amazon RDS](CHAP_Storage.md)\.   | 
+|  Allocated storage  |  The amount of storage to allocate your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [DB instance storage](CHAP_Storage.md)\.   | 
 |  Auto minor version upgrade  |  Amazon RDS does not support automatic minor version upgrades for DB instances running Oracle\. You must modify your DB instance manually to perform a minor version upgrade\.  Some options, such as Oracle Locator, Oracle Multimedia, and Oracle Spatial, require that you enable automatic minor version upgrades\. Upgrades for DB instances that use these options are installed during your scheduled maintenance window, and an outage occurs during the upgrade\. You can't disable automatic minor version upgrades at the same time as you modify the option group to remove such an option\.     | 
 |  Availability zone  |  The availability zone for your DB instance\. Use the default of **No Preference** unless you need to specify a particular Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
@@ -170,7 +157,8 @@ The following table contains details about settings that you choose when you cre
 |  DB engine version  |  The version of Oracle that you want to use\.  | 
 |  DB instance class  |  The DB instance class that you want to use\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.   | 
 |  DB instance identifier  |  The name for your DB instance\. The name must be unique for your account and region\. You can add some intelligence to the name, such as including the region and DB engine you chose, for example **oracle\-instance1**\.   | 
-|  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
+|  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) and [Modifying Oracle sqlnet\.ora Parameters](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.sqlnet)\.   | 
+| Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
 |  License model  |  The license model that you want to use\. Choose **license\-included** to use the general license agreement for Oracle\. Choose **bring\-your\-own\-license** to use your existing Oracle license\.  For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.   | 
@@ -183,14 +171,10 @@ The following table contains details about settings that you choose when you cre
 |  Storage type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
 |  Subnet group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
 |  Virtual Private Cloud \(VPC\)  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC\. If you are creating a DB instance on the previous E2\-Classic platform, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.   | 
-|  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
+|  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  When you choose **Create new VPC security group** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateOracleInstance.Related"></a>
-
 + [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)
-
 + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-
 + [Deleting a DB Instance](USER_DeleteInstance.md)

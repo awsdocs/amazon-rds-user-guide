@@ -8,7 +8,9 @@ For more information about viewing, downloading, and watching file\-based databa
 
 ## Accessing MySQL Error Logs<a name="USER_LogAccess.MySQL.Errorlog"></a>
 
-The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
+The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
+
+Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
 
 MySQL writes to the error log only on startup, shutdown, and when it encounters errors\. A DB instance can go hours or days without new entries being written to the error log\. If you see no recent entries, it's because the server did not encounter an error that would result in a log entry\.
 
@@ -17,27 +19,17 @@ MySQL writes to the error log only on startup, shutdown, and when it encounters 
 The MySQL slow query log and the general log can be written to a file or a database table by setting parameters in your DB parameter group\. For information about creating and modifying a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. You must set these parameters before you can view the slow query log or general log in the Amazon RDS console or by using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\.
 
 You can control MySQL logging by using the parameters in this list:
-
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
-
 + `general_log`: To create the general log, set to 1\. The default is 0\.
-
 + `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query execution time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose execution time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
-
 + `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. The default is 0\. Queries that do not use an index are logged even if their execution time is less than the value of the `long_query_time` parameter\.
-
 + `log_output option`: You can specify one of the following options for the `log_output` parameter\. 
-
   + **TABLE** \(default\)– Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\. 
-
   + **FILE**– Write both general and slow query logs to the file system\. Log files are rotated hourly\. 
-
   + **NONE**– Disable logging\.
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
-
 + When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
-
 + When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\. You can subscribe to the `low_free_storage` event to be notified when log tables are rotated to free up space\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
   When log tables are rotated, the current log table is copied to a backup log table and the entries in the current log table are removed\. If the backup log table already exists, then it is deleted before the current log table is copied to the backup\. You can query the backup log table if needed\. The backup log table for the `mysql.general_log` table is named `mysql.general_log_backup`\. The backup log table for the `mysql.slow_log` table is named `mysql.slow_log_backup`\.
@@ -46,12 +38,10 @@ When logging is enabled, Amazon RDS rotates table logs or deletes log files at r
 
   Table logs are rotated during a database version upgrade\.
 
-To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\.
+To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
-
 + [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
-
 + [The General Query Log](http://dev.mysql.com/doc/refman/5.6/en/query-log.html)
 
 ## Publishing MySQL Logs to CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs"></a>
@@ -60,37 +50,62 @@ You can configure your Amazon RDS MySQL DB instance to publish log data to a log
 
 Amazon RDS publishes each MySQL database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\. 
 
-**Note**  
-Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6 and 5\.7\.
+The error log is enabled by default\. The following table summarizes the requirements for the other MySQL logs\.
 
-**To publish MySQL DB logs to CloudWatch Logs from the console**
+
+| Log | Requirement | 
+| --- | --- | 
+|  Audit log  |  The DB instance must use a custom option group with the `MARIADB_AUDIT_PLUGIN` option\.  | 
+|  General log  |  The DB instance must use a custom parameter group with the parameter setting `general_log = 1` to enable the general log\.  | 
+|  Slow query log  |  The DB instance must use a custom parameter group with the parameter setting `slow_query_log = 1` to enable the slow query log\.  | 
+|  Log output  |  The DB instance must use a custom parameter group with the parameter setting `log_output = FILE` to write logs to the file system and publish them to CloudWatch Logs\.  | 
+
+**Note**  
+Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6, 5\.7, and 8\.0\.
+
+### AWS Management Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
+
+**To publish MySQL logs to CloudWatch Logs using the console**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. For **Instance Actions**, choose **Modify**\.
+1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\.
 
-1. Open the **Log exports** section, and then choose the logs you want to start publishing to CloudWatch Logs\. 
+1. For **Instance actions**, choose **Modify**\.
+
+1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
-### Publishing Logs to CloudWatch Logs with the CLI<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CLI"></a>
+### AWS CLI<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CLI"></a>
 
- You can publish a MySQL DB log with the AWS CLI\. You can call either the `modify-db-instance` or `create-db-instance` commands with the following parameters: 
+ You can publish MySQL logs with the AWS CLI\. You can call the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
++ `--db-instance-identifier`
++ `--cloudwatch-logs-export-configuration`
++ `--apply-immediately`
 
-+ `-- db-instance-identifier`
+You can also publish MySQL logs by calling the following AWS CLI commands: 
++ [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
++ [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)
++ [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html)
++ [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html)
 
-+ `-- cloudwatch-logs-export-configuration`
+Run one of these AWS CLI commands with the following options: 
++ `--db-instance-identifier`
++ `--enable-cloudwatch-logs-exports`
++ `--db-instance-class`
++ `--engine`
 
-+ `-- apply-immediately`
+Other options might be required depending on the AWS CLI command you run\.
 
 **Example**  
-The following command modifies an existing MySQL instance to publish log files to CloudWatch Logs\.  
+The following example modifies an existing MySQL DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `audit`, `error`, `general`, and `slowquery`\.  
 For Linux, OS X, or Unix:  
 
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' \
 4.     --apply-immediately
 ```
 For Windows:  
@@ -98,34 +113,57 @@ For Windows:
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' ^
 4.     --apply-immediately
 ```
 
 **Example**  
-The following command creates a MySQL instance to publish log files to CloudWatch Logs\.  
+The following example creates a MySQL DB instance and publishes log files to CloudWatch Logs\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `audit`, `error`, `general`, and `slowquery`\.  
 For Linux, OS X, or Unix:  
 
 ```
 1. aws rds create-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' \
-4.     --apply-immediately  \
+3.     --enable-cloudwatch-logs-exports '["audit","error","general","slowquery"]' \
+4.     --db-instance-class db.m4.large \
+5.     --engine MySQL
 ```
 For Windows:  
 
 ```
 1. aws rds create-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["error","general","audit","slowquery"]}' ^
-4.     --apply-immediately  ^
+3.     --enable-cloudwatch-logs-exports '["audit","error","general","slowquery"]' ^
+4.     --db-instance-class db.m4.large ^
+5.     --engine MySQL
 ```
+
+### RDS API<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.API"></a>
+
+You can publish MySQL logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
++ `DBInstanceIdentifier`
++ `CloudwatchLogsExportConfiguration`
++ `ApplyImmediately`
+
+You can also publish MySQL logs by calling the following RDS API actions: 
++ [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
++ [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
++ [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
++ [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
+
+Run one of these RDS API actions with the following parameters: 
++ `DBInstanceIdentifier`
++ `EnableCloudwatchLogsExports`
++ `Engine`
++ `DBInstanceClass`
+
+Other parameters might be required depending on the AWS CLI command you run\.
 
 ## Log File Size<a name="USER_LogAccess.MySQL.LogFileSize"></a>
 
 The MySQL slow query log, error log, and the general log file sizes are constrained to no more than 2 percent of the allocated storage space for a DB instance\. To maintain this threshold, logs are automatically rotated every hour and log files older than 24 hours are removed\. If the combined log file size exceeds the threshold after removing old log files, then the largest log files are deleted until the log file size no longer exceeds the threshold\.
 
-For MySQL version 5\.6\.20 and later, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
+For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
 
 ## Managing Table\-Based MySQL Logs<a name="Appendix.MySQL.CommonDBATasks.Logs"></a>
 
@@ -144,52 +182,48 @@ PROMPT> CALL mysql.rds_rotate_general_log;
 
 ## Binary Logging Format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
 
-MySQL on Amazon RDS supports both the *row\-based* and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the *MySQL Reference Manual*\.
+MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the MySQL documentation\.
+
+If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Important**  
-Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.
+Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
+Statement\-based replication can cause inconsistencies between the source DB instance and a Read Replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
 
 **To set the MySQL binary logging format**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Parameter Groups**\.
+1. In the navigation pane, choose **Parameter groups**\.
 
-1. For the `default.mysql5.6` or `default.mysql5.7` DB parameter group, choose the **Go to Details Page** icon\.
+1. Choose the parameter group used by the DB instance you want to modify\.
 
-1. Choose **Edit Parameters** to modify the parameters in the DB parameter group\.
+   You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
 
-1. Set the `binlog_format` parameter to the binary logging format of your choice \(**MIXED** or **ROW**\)\.
+   For more information on DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-1. Choose **Save Changes** to save the updates to the DB parameter group\.
+1. From **Parameter group actions**, choose **Edit**\.
+
+1. Set the `binlog_format` parameter to the binary logging format of your choice \(**ROW**, **STATEMENT**, or **MIXED**\)\.
+
+1. Choose **Save changes** to save the updates to the DB parameter group\.
 
 **Important**  
-Changing the `default.mysql5.6` or `default.mysql5.7` DB parameter group affects all MySQL version 5\.6 DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL 5\.6 or 5\.7 DB instances in an AWS Region, you need to create your own DB parameter group\. This parameter group identifies the different logging format and assigns that DB parameter group to the intended DB instances\.
-
-For more information on DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+Changing the `default.mysql5.6`, `default.mysql5.7`, or `default.mysql8.0` DB parameter group affects all MySQL version DB instances that use that parameter group\. If you want to specify different binary logging formats for different MySQL 5\.6, 5\.7, or 8\.0 DB instances in an AWS Region, you need to create your own DB parameter group\. This parameter group identifies the different logging format and assigns that DB parameter group to the intended DB instances\.
 
 ## Accessing MySQL Binary Logs<a name="USER_LogAccess.MySQL.Binarylog"></a>
 
 You can use the mysqlbinlog utility to download or stream binary logs from Amazon RDS instances running MySQL 5\.6 or later\. The binary log is downloaded to your local computer, where you can perform actions such as replaying the log using the mysql utility\. For more information about using the mysqlbinlog utility, go to [Using mysqlbinlog to Back Up Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog-backup.html)\.
 
  To run the mysqlbinlog utility against an Amazon RDS instance, use the following options: 
-
 +  Specify the `--read-from-remote-server` option\. 
-
 +  `--host`: Specify the DNS name from the endpoint of the instance\. 
-
 +  `--port`: Specify the port used by the instance\. 
-
 +  `--user`: Specify a MySQL user that has been granted the replication slave permission\. 
-
 +  `--password`: Specify the password for the user, or omit a password value so that the utility prompts you for a password\. 
-
 + To have the file downloaded in binary format, specify the `--raw` option\. 
-
 +  `--result-file`: Specify the local file to receive the raw output\. 
-
 + Specify the names of one or more binary log files\. To get a list of the available logs, use the SQL command SHOW BINARY LOGS\.
-
 + To stream the binary log files, specify the `--stop-never` option\. 
 
 For more information about mysqlbinlog options, go to [mysqlbinlog \- Utility for Processing Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog.html)\. 

@@ -10,7 +10,7 @@ For Tuning Advisor to be most effective, a workload should be as realistic as po
 
 There are two types of traces: client\-side and server\-side\. A client\-side trace is easier to set up and you can watch trace events being captured in real\-time in SQL Server Profiler\. A server\-side trace is more complex to set up and requires some Transact\-SQL scripting\. In addition, because the trace is written to a file on the Amazon RDS DB instance, storage space is consumed by the trace\. It is important to track of how much storage space a running server\-side trace uses because the DB instance could enter a storage\-full state and would no longer be available if it runs out of storage space\.
 
-For a client\-side trace, when a sufficient amount of trace data has been captured in the SQL Server Profiler, you can then generate the workload file by saving the trace to either a file on your local computer or in a database table on an DB instance that is available to your client computer\. The main disadvantage of using a client\-side trace is that the trace may not capture all queries when under heavy loads\. This could weaken the effectiveness of the analysis performed by the Database Engine Tuning Advisor\. If you need to run a trace under heavy loads and you want to ensure that it captures every query during a trace session, you should use a server\-side trace\.
+For a client\-side trace, when a sufficient amount of trace data has been captured in the SQL Server Profiler, you can then generate the workload file by saving the trace to either a file on your local computer or in a database table on a DB instance that is available to your client computer\. The main disadvantage of using a client\-side trace is that the trace may not capture all queries when under heavy loads\. This could weaken the effectiveness of the analysis performed by the Database Engine Tuning Advisor\. If you need to run a trace under heavy loads and you want to ensure that it captures every query during a trace session, you should use a server\-side trace\.
 
 For a server\-side trace, you must get the trace files on the DB instance into a suitable workload file or you can save the trace to a table on the DB instance after the trace completes\. You can use the SQL Server Profiler to save the trace to a file on your local computer or have the Tuning Advisor read from the trace table on the DB instance\.
 
@@ -46,7 +46,7 @@ IF (@rc = 0) BEGIN
    EXEC sp_trace_setevent @traceid, 10, 1, @on
    EXEC sp_trace_setevent @traceid, 10, 2, @on
    EXEC sp_trace_setevent @traceid, 10, 3, @on
-  …
+ . . .
    EXEC sp_trace_setfilter @traceid, 10, 0, 7, N'SQL Profiler'
    EXEC sp_trace_setstatus @traceid, 1
    END
@@ -65,7 +65,7 @@ IF @traceid IS NOT NULL BEGIN
 END
 ```
 
-You can save server\-side trace results to a database table and use the database table as the workload for the Tuning Advisor by using the fn\_trace\_gettable function\. The following commands load the results of all files named RDSTrace\.trc in the D:\\rdsdbdata\\Log directory, including all rollover files like RDSTrace\_1\.trc, into a table named RDSTrace in the current database:
+You can save server\-side trace results to a database table and use the database table as the workload for the Tuning Advisor by using the fn\_trace\_gettable function\. The following commands load the results of all files named RDSTrace\.trc in the D:\\rdsdbdata\\Log directory, including all rollover files like RDSTrace\_1\.trc, into a table named RDSTrace in the current database\.
 
 ```
 SELECT * INTO RDSTrace

@@ -38,4 +38,4 @@ The identifier of the HSM client\.
 *<partition\_password>*  
 The password for the member partitions\. Both HA partition groups must have the same partition password\.
 
-1. To restore the DB instance, use the AWS CLI [ restore\-db\-instance\-from\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) command\. For the parameter `tde-credential-arn`, specify the ARN of the new HA partition group in\. For the parameter `tde-credential-password`, specify the partition password for the HA partition group\. 
+1. To restore the DB instance, use the AWS CLI [ restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) command\. For the parameter `tde-credential-arn`, specify the ARN of the new HA partition group in\. For the parameter `tde-credential-password`, specify the partition password for the HA partition group\. 

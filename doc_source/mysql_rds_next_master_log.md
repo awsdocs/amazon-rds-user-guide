@@ -17,23 +17,15 @@ The index of the current master log file\. For example, if the current file is n
 
 ## Usage Notes<a name="mysql_rds_next_master_log-usage-notes"></a>
 
-The `mysql.rds_next_master_log` procedure must be run by the master user\. 
+The master user must run the `mysql.rds_next_master_log` procedure\. 
 
 **Warning**  
 Call `mysql.rds_next_master_log` only if replication fails after a failover of a Multi\-AZ DB instance that is the replication source, and the `Last_IO_Errno` field of `SHOW SLAVE STATUS` reports I/O error 1236\.  
 Calling `mysql.rds_next_master_log` may result in data loss in the Read Replica if transactions in the source instance were not written to the binary log on disk before the failover event occurred\. You can reduce the chance of this happening by configuring the source instance parameters sync\_binlog = 1 and innodb\_support\_xa = 1, although this may reduce performance\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
 
-The `mysql.rds_next_master_log` procedure is available in these versions of Amazon RDS MySQL:
-
-+ MySQL 5\.5
-
-+ MySQL 5\.6
-
-+ MySQL 5\.7
-
 ## Examples<a name="mysql_rds_next_master_log-examples"></a>
 
-Assume replication fails on an Amazon RDS Read Replica\. Running `SHOW SLAVE STATUS\G` on the replica returns the following result:
+Assume replication fails on an Amazon RDS Read Replica\. Running `SHOW SLAVE STATUS\G` on the Read Replica returns the following result:
 
 ```
 *************************** 1. row ***************************

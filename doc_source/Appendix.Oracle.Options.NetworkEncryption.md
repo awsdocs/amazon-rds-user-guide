@@ -5,7 +5,7 @@ Amazon RDS supports Oracle native network encryption \(NNE\)\. With native netwo
 A detailed discussion of Oracle native network encryption is beyond the scope of this guide, but you should understand the strengths and weaknesses of each algorithm and key before you decide on a solution for your deployment\. For information about the algorithms and keys that are available through Oracle native network encryption, see [Configuring Network Data Encryption](http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r2/prod/security/network_encrypt/ntwrkencrypt.htm) in the Oracle documentation\. For more information about AWS security, see the [AWS Security Center](http://aws.amazon.com/security)\. 
 
 **Note**  
-You can use Native Network Encryption or Secure Sockets Layer, but not both\. For more information, see [Oracle SSL](Appendix.Oracle.Options.SSL.md)\. 
+You can use Native Network Encryption or Secure Sockets Layer, but not both\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 
 ## NNE Option Settings<a name="Oracle.Options.NNE.Options"></a>
 
@@ -18,8 +18,8 @@ Amazon RDS supports the following settings for the NNE option\.
 | --- | --- | --- | --- | 
 | **SQLNET\.ENCRYPTION\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The encryption behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require traffic from the client to be encrypted\.  | 
 | **SQLNET\.CRYPTO\_CHECKSUM\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The data integrity behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require the client to perform a checksum\.  | 
-| **SQLNET\.ENCRYPTION\_TYPES\_SERVER** |  `RC4_256`,`AES256`, `AES192`,`3DES168`, `RC4_128`,`AES128`, `3DES112`,`RC4_56`, `DES`,`RC4_40`, `DES40`  |  `RC4_256`,`AES256`, `AES192`,`3DES168`, `RC4_128`,`AES128`, `3DES112`,`RC4_56`, `DES`,`RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance will use each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html)  | 
-| **SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_SERVER** |  `sha-1,md5`  | `sha-1,md5` |  The checksum algorithm\.   | 
+| **SQLNET\.ENCRYPTION\_TYPES\_SERVER** |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance will use each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html)  | 
+| **SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_SERVER** |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  The checksum algorithm\.  | 
 
 ## Adding the NNE Option<a name="Oracle.Options.NNE.Add"></a>
 
@@ -37,7 +37,7 @@ After you add the NNE option, as soon as the option group is active, NNE is acti
 
 1. For **Engine**, choose the Oracle edition that you want to use\. NNE is supported on all editions\. 
 
-1. For **Major engine version**, choose **11\.2** or **12\.1**\. 
+1. For **Major engine version**, choose **11\.2**, **12\.1**, or **12\.2**\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
@@ -46,9 +46,7 @@ After you add the NNE option, as soon as the option group is active, NNE is acti
 After you add the NNE option, you don't need to restart your DB instances\. As soon as the option group is active, NNE is active\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. After you add the NNE option, you don't need to restart your DB instance\. As soon as the option group is active, NNE is active\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Using NNE<a name="Oracle.Options.NNE.Using"></a>
@@ -77,13 +75,9 @@ After you enable NNE, you can modify settings for the option\. For more informat
 You can remove NNE from a DB instance\. 
 
 To remove NNE from a DB instance, do one of the following: 
-
 + To remove NNE from multiple DB instances, remove the NNE option from the option group they belong to\. This change affects all DB instances that use the option group\. After you remove the NNE option, you don't need to restart your DB instances\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-
 + To remove NNE from a single DB instance, modify the DB instance and specify a different option group that doesn't include the NNE option\. You can specify the default \(empty\) option group, or a different custom option group\. After you remove the NNE option, you don't need to restart your DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Related Topics<a name="Oracle.Options.NNE.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

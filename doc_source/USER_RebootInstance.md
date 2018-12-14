@@ -1,16 +1,14 @@
 # Rebooting a DB Instance<a name="USER_RebootInstance"></a>
 
-You might need to reboot your DB instance, usually for maintenance reasons\. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect\. 
+You might need to reboot your DB instance, usually for maintenance reasons\. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance , you must reboot the instance for the changes to take effect\. 
 
-Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\. If the Amazon RDS instance is configured for Multi\-AZ, the reboot can be conducted with a failover\. An Amazon RDS event is created when the reboot is completed\. 
+Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\. 
 
-If your DB instance is a Multi\-AZ deployment, you can force a failover from one availability zone to another when you reboot\. When you force a failover of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone, and updates the DNS record for the DB instance to point to the standby DB instance\. As a result, you need to clean up and re\-establish any existing connections to your DB instance\. Rebooting with failover is beneficial when you want to simulate a failure of a DB instance for testing, or restore operations to the original AZ after a failover occurs\. For more information, see [High Availability \(Multi\-AZ\)](Concepts.MultiAZ.md)\. 
-
-When you reboot the primary instance of an Amazon Aurora DB cluster, RDS also automatically reboots all of the Aurora Replicas in that DB cluster\. When you reboot the primary instance of an Aurora DB cluster, no failover occurs\. When you reboot an Aurora Replica, no failover occurs\. To failover an Aurora DB cluster, call the AWS CLI command [http://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html](http://docs.aws.amazon.com/cli/latest/reference/rds/failover-db-cluster.html), or the API action [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_FailoverDBCluster.html)\. 
+ If the Amazon RDS instance is configured for Multi\-AZ, the reboot can be conducted with a failover\. An Amazon RDS event is created when the reboot is completed\. If your DB instance is a Multi\-AZ deployment, you can force a failover from one availability zone to another when you reboot\. When you force a failover of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone, and updates the DNS record for the DB instance to point to the standby DB instance\. As a result, you need to clean up and re\-establish any existing connections to your DB instance\. Rebooting with failover is beneficial when you want to simulate a failure of a DB instance for testing, or restore operations to the original AZ after a failover occurs\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
 
 You can't reboot your DB instance if it is not in the "Available" state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
 
-The time required to reboot your DB instance depends on the crash recovery process of your specific database engine\. To improve the reboot time, we recommend that you reduce database activities as much as possible during the reboot process Reduce database activity reduces rollback activity for in\-transit transactions\. 
+The time required to reboot your DB instance depends on the crash recovery process of your specific database engine\. To improve the reboot time, we recommend that you reduce database activity as much as possible during the reboot process\. Reducing database activity reduces rollback activity for in\-transit transactions\. 
 
 ## AWS Management Console<a name="USER_RebootInstance.Console"></a>
 
@@ -20,7 +18,7 @@ The time required to reboot your DB instance depends on the crash recovery proce
 
 1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to reboot\. 
 
-1. Choose **Instance Actions** and then choose **Reboot**\. 
+1. Choose **Instance actions** and then choose **Reboot**\. 
 
    The **Reboot DB Instance** page appears\.
 
@@ -32,7 +30,7 @@ The time required to reboot your DB instance depends on the crash recovery proce
 
 ## CLI<a name="USER_RebootInstance.CLI"></a>
 
-To reboot a DB instance by using the AWS CLI, call the [http://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](http://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
+To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
 **Example Simple Reboot**  
 For Linux, OS X, or Unix:  
@@ -67,7 +65,7 @@ For Windows:
 
 ## API<a name="USER_RebootInstance.API"></a>
 
-To reboot a DB instance by using the Amazon RDS API, call the [http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 
+To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 
 
 **Example Simple Reboot**  
 

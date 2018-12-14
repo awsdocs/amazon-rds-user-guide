@@ -16,12 +16,9 @@ The following snapshot upgrades are currently supported\.
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
 
 Amazon RDS supports upgrading snapshots in all AWS Regions except the following:
-
 + EU \(Frankfurt\)
-
 + China \(Beijing\)
-
-+ AWS GovCloud \(US\)
++ AWS GovCloud \(US\-West\)
 
 ## AWS Management Console<a name="USER_UpgradeDBSnapshot.Oracle.Console"></a>
 
@@ -31,7 +28,7 @@ Amazon RDS supports upgrading snapshots in all AWS Regions except the following:
 
 1. In the navigation pane, choose **Snapshots**, and then select the DB snapshot that you want to upgrade\. 
 
-1. Choose **Snapshot actions**, and then choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\.
+1. Choose **Actions**, and then choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\.
 
 1. For **DB engine version**, choose the version to upgrade the snapshot to\. 
 
@@ -43,14 +40,11 @@ Amazon RDS supports upgrading snapshots in all AWS Regions except the following:
 
 ## CLI<a name="USER_UpgradeDBSnapshot.Oracle.CLI"></a>
 
-To upgrade an Oracle DB snapshot by using the AWS CLI, call the [modify\-db\-snapshot](http://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command with the following parameters: 
-
+To upgrade an Oracle DB snapshot by using the AWS CLI, call the [modify\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command with the following parameters: 
 + `--db-snapshot-identifier` – The name of the DB snapshot\. 
-
 + `--engine-version` – The version to upgrade the snapshot to\. 
 
 You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
-
 + `--option-group-name` – The option group for the upgraded DB snapshot\. 
 
 **Example**  
@@ -74,14 +68,11 @@ aws rds modify-db-snapshot ^
 
 ## API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>
 
-To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDBSnapshot](http://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) action with the following parameters: 
-
+To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) action with the following parameters: 
 + `DBSnapshotIdentifier` – The name of the DB snapshot\. 
-
 + `EngineVersion` – The version to upgrade the snapshot to\. 
 
 You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
-
 + `OptionGroupName` – The option group for the upgraded DB snapshot\. 
 
 **Example**  
@@ -104,9 +95,6 @@ The following example upgrades a DB snapshot\.
 ```
 
 ## Related Topics<a name="USER_UpgradeDBSnapshot.Oracle.Related"></a>
-
-+ [Appendix: Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)
-
++ [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)
 + [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
-
-+ [Updating the Operating System for a DB Instance or DB Cluster](USER_UpgradeDBInstance.OSUpgrades.md)
++ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

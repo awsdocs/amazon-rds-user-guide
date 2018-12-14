@@ -1,4 +1,4 @@
-# Appendix: Options for MariaDB Database Engine<a name="Appendix.MariaDB.Options"></a>
+# Options for MariaDB Database Engine<a name="Appendix.MariaDB.Options"></a>
 
 This appendix describes options, or additional features, that are available for Amazon RDS instances running the MariaDB DB engine\. To enable these options, you add them to a custom option group, and then associate the option group with your DB instance\. For more information about working with option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
 
@@ -27,6 +27,7 @@ Amazon RDS supports the following settings for the MariaDB Audit Plugin option\.
 | `SERVER_AUDIT_INCL_USERS` | Multiple comma\-separated values | None |  Include only activity from the specified users\. By default, activity is recorded for all users\. If a user is specified in both `SERVER_AUDIT_EXCL_USERS` and `SERVER_AUDIT_INCL_USERS`, then activity is recorded for the user\.   | 
 | `SERVER_AUDIT_EXCL_USERS` | Multiple comma\-separated values | None |  Exclude activity from the specified users\. By default, activity is recorded for all users\. If a user is specified in both `SERVER_AUDIT_EXCL_USERS` and `SERVER_AUDIT_INCL_USERS`, then activity is recorded for the user\.   The `rdsadmin` user queries the database every second to check the health of the database\. Depending on your other settings, this activity can possibly cause the size of your log file to grow very large, very quickly\. If you don't need to record this activity, add the `rdsadmin` user to the `SERVER_AUDIT_EXCL_USERS` list\.    `CONNECT` activity is always recorded for all users, even if the user is specified for this option setting\.    | 
 | `SERVER_AUDIT_LOGGING` | `ON` | `ON` |  Logging is active\. The only valid value is `ON`\. Amazon RDS does not support deactivating logging\. If you want to deactivate logging, remove the MariaDB Audit Plugin\. For more information, see [Removing the MariaDB Audit Plugin](#Appendix.MariaDB.Options.AuditPlugin.Remove)\.   | 
+| `SERVER_AUDIT_QUERY_LOG_LIMIT` | 0–2147483647 | 1024 |  The limit on the length of the query string in a record\.   | 
 
 ### Adding the MariaDB Audit Plugin<a name="Appendix.MariaDB.Options.AuditPlugin.Add"></a>
 
@@ -47,9 +48,7 @@ After you add the MariaDB Audit Plugin, you don't need to restart your DB instan
 1. Add the **MARIADB\_AUDIT\_PLUGIN** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Audit Plugin Option Settings](#Appendix.MariaDB.Options.AuditPlugin.Options)\. 
 
 1. Apply the option group to a new or existing DB instance\. 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 
 
 ### Viewing and Downloading the MariaDB Audit Plugin Log<a name="Appendix.MariaDB.Options.AuditPlugin.Log"></a>
@@ -62,10 +61,8 @@ After you enable the MariaDB Audit Plugin, you can modify settings for the plugi
 
 ### Removing the MariaDB Audit Plugin<a name="Appendix.MariaDB.Options.AuditPlugin.Remove"></a>
 
-Amazon RDS doesn't support turning off logging in the MariaDB Audit Plugin\. However, you can remove the plugin from a DB instance\. After you remove the MariaDB Audit Plugin, you need to restart your DB instance to stop auditing\. 
+Amazon RDS doesn't support turning off logging in the MariaDB Audit Plugin\. However, you can remove the plugin from a DB instance\. When you remove the MariaDB Audit Plugin, the DB instance is restarted automatically to stop auditing\. 
 
 To remove the MariaDB Audit Plugin from a DB instance, do one of the following: 
-
 + Remove the MariaDB Audit Plugin option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
-
 + Modify the DB instance and specify a different option group that doesn't include the plugin\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 

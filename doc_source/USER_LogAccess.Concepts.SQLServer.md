@@ -21,9 +21,6 @@ Log files are rotated each day and whenever your DB instance is restarted\. The 
 You can use the Amazon RDS stored procedure `rds_read_error_log` to view error logs and agent logs\. For more information, see [Using the rds\_read\_error\_log Procedure](Appendix.SQLServer.CommonDBATasks.Logs.md#Appendix.SQLServer.CommonDBATasks.Logs.SP)\. 
 
 ## Related Topics<a name="USER_LogAccess.Concepts.SQLServer.Related"></a>
-
 + [Using SQL Server Agent](Appendix.SQLServer.CommonDBATasks.Agent.md)
-
 + [Working with Microsoft SQL Server Logs](Appendix.SQLServer.CommonDBATasks.Logs.md)
-
 + [Working with Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md)

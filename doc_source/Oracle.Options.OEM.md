@@ -1,6 +1,6 @@
 # Oracle Enterprise Manager<a name="Oracle.Options.OEM"></a>
 
-Amazon RDS supports Oracle Enterprise Manager \(OEM\)\. OEM is Oracle's integrated enterprise information technology management product line\.  
+Amazon RDS supports Oracle Enterprise Manager \(OEM\)\. OEM is the Oracle product line for integrated management of enterprise information technology\.  
 
 Amazon RDS supports OEM through the following options\.
 

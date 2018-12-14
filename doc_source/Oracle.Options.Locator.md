@@ -6,29 +6,22 @@ Amazon RDS supports Oracle Locator through the use of the `LOCATOR` option\. Ora
 If you use Oracle Locator, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Locator for the following editions and versions of Oracle: 
-
-+ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.1\.0\.2\.v6 or later
-
-+ Oracle Standard Edition \(SE, SE1\) or Enterprise Edition, version 11\.2\.0\.4\.v10 or later
++ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.2\.0\.1, all versions
++ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.1\.0\.2\.v13 or later
++ Oracle Standard Edition \(SE, SE1\) or Enterprise Edition, version 11\.2\.0\.4\.v17 or later
 
 ## Prerequisites for Oracle Locator<a name="Oracle.Options.Locator.PreReqs"></a>
 
 The following are prerequisites for using Oracle Locator: 
-
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
-
 + Your DB instance must be of sufficient class\. Oracle Locator is not supported for the db\.m1\.small, db\.t2\.micro, or db\.t2\.small DB instance classes\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
-
 + Your DB instance must have Auto Minor Version Upgrade enabled\. Amazon RDS updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a CVSS score of 9\+ or other announced security vulnerabilities\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
-
-+ If your DB instance is version 11\.2\.0\.4\.v10 or later, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
++ If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 
 ## Best Practices for Oracle Locator<a name="Oracle.Options.Locator.BestPractces"></a>
 
 The following are best practices for using Oracle Locator: 
-
-+ For maximum security, use the `LOCATOR` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle SSL](Appendix.Oracle.Options.SSL.md)\. 
-
++ For maximum security, use the `LOCATOR` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 + Configure your DB instance to restrict access to your DB instance\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
 
 ## Adding the Oracle Locator Option<a name="Oracle.Options.Locator.Add"></a>
@@ -56,9 +49,7 @@ There is a brief outage while the `LOCATOR` option is added\. After you add the 
 1. Add the **LOCATOR** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Using Oracle Locator<a name="Oracle.Options.Locator.Using"></a>
@@ -77,15 +68,10 @@ You can remove the `LOCATOR` option from a DB instance\. There is a brief outage
  Removing the `LOCATOR` option can result in data loss if the DB instance is using data types that were enabled as part of the option\. Back up your data before proceeding\. For more information, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\. 
 
 To remove the `LOCATOR` option from a DB instance, do one of the following: 
-
 + Remove the `LOCATOR` option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-
 + Modify the DB instance and specify a different option group that doesn't include the `LOCATOR` option\. This change affects a single DB instance\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Related Topics<a name="Oracle.Options.Locator.Related"></a>
-
 + [Oracle Spatial](Oracle.Options.Spatial.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)

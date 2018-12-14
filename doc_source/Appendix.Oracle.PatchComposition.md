@@ -1,14 +1,28 @@
-# Appendix: Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
+# Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
 
-Amazon RDS incorporates bug fixes from Oracle via their quarterly Database Patch Set Updates \(PSU\)\. You can be confident that your DB instance is running a stable, common version of the database software that has been regression tested by both Oracle and Amazon\. We do not support applying one\-off patches to individual DB instances\. 
+Updates to your Amazon RDS for Oracle DB instances keep them current\. If you apply updates, you can be confident that your DB instance is running a stable, common version of the database software that has been regression\-tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\.
 
-The following table shows what Oracle PSUs are applied to the Oracle versions in Amazon RDS: 
+## Oracle Version 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.122"></a>
+
+For Amazon RDS for Oracle version 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\.
+
+The following RUs and RURs are applied to the Amazon RDS for Oracle version 12\.2\.0\.1: 
++ [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1)
+
+## Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
+
+For Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, Amazon RDS incorporates bug fixes from Oracle via their quarterly Database Patch Set Updates \(PSUs\)\. You can be confident that your DB instance is running a stable, common version of the database software that has been regression\-tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\. 
+
+To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, see the following table\. 
 
 
 ****  
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2018 October | [12\.1\.0\.2\.v14](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v14) | [11\.2\.0\.4\.v18](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v18) | 
+| 2018 July | [12\.1\.0\.2\.v13](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v13) | [11\.2\.0\.4\.v17](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v17) | 
+| 2018 April | [12\.1\.0\.2\.v12](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v12) | [11\.2\.0\.4\.v16](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v16) | 
 | 2018 January | [12\.1\.0\.2\.v11](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v11) | [11\.2\.0\.4\.v15](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v15) | 
 | 2017 October | [12\.1\.0\.2\.v10](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v10) | [11\.2\.0\.4\.v14](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v14) | 
 | 2017 July | [12\.1\.0\.2\.v9](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v9) | [11\.2\.0\.4\.v13](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v13) | 
@@ -24,6 +38,9 @@ The following table shows what Oracle PSUs are applied to the Oracle versions in
 | 2014 July | — | [11\.2\.0\.4\.v2](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v2)\(Deprecated\) | 
 | 2014 January | — | [11\.2\.0\.4\.v1](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v1) | 
 
-
+**Topics**
++ [Oracle Version 12\.2\.0\.1](#Appendix.Oracle.PatchComposition.122)
++ [Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4](#Appendix.Oracle.PatchComposition.121-112)
++ [Database Engine: 12\.2\.0\.1](Appendix.Oracle.RU-RUR.12.2.0.1.md)
 + [Database Engine: 12\.1\.0\.2](Appendix.Oracle.PatchComposition.12.1.0.2.md)
 + [Database Engine: 11\.2\.0\.4](Appendix.Oracle.PatchComposition.11.2.0.4.md)

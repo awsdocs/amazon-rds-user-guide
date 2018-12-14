@@ -37,7 +37,7 @@ There are two ways to shrink the tempdb database on your Amazon RDS DB instance\
 
 ### Using the rds\_shrink\_tempdbfile Procedure<a name="SQLServer.TempDB.Shrinking.Proc"></a>
 
-You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no down time for your DB instance\. 
+You can use the Amazon RDS procedure `msdb.dbo.rds_shrink_tempdbfile` to shrink the tempdb database\. You can only call `rds_shrink_tempdbfile` if you have `CONTROL` access to tempdb\. When you call `rds_shrink_tempdbfile`, there is no downtime for your DB instance\. 
 
 The `rds_shrink_tempdbfile` procedure has the following parameters\. 
 
@@ -77,16 +77,14 @@ The following example demonstrates setting the `SIZE` property to 1024 MB\.
 
 ## Considerations for Multi\-AZ Deployments<a name="SQLServer.TempDB.MAZ"></a>
 
-If your Amazon RDS DB instance is in a Multi\-AZ Deployment for Microsoft SQL Server with Database Mirroring, there are some things to consider\. 
+If your Amazon RDS DB instance is in a Multi\-AZ Deployment for Microsoft SQL Server with Database Mirroring or Always On, there are some things to consider\. 
 
 The tempdb database can't be replicated\. No data that you store on your primary instance is replicated to your secondary instance\. 
 
 If you modify any database options on the tempdb database, you can capture those changes on the secondary by using one of the following methods: 
-
 + First modify your DB instance and turn Multi\-AZ off, then modify tempdb, and finally turn Multi\-AZ back on\. This method doesn't involve any downtime\. 
 
   For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
-
 + First modify tempdb in the original primary instance, then fail over manually, and finally modify tempdb in the new primary instance\. This method involves downtime\. 
 
   For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 

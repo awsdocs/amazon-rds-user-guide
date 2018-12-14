@@ -21,7 +21,7 @@ Amazon RDS supports the following settings for the time zone option\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Time Zone** |  One of the available time zones\. For the full list, see [Available Time Zones](#Appendix.Oracle.Options.Timezone.Zones)\.   |  The new time zone for your DB instance\.   | 
+| `TIME_ZONE` |  One of the available time zones\. For the full list, see [Available Time Zones](#Appendix.Oracle.Options.Timezone.Zones)\.   |  The new time zone for your DB instance\.   | 
 
 ## Adding the Time Zone Option<a name="Appendix.Oracle.Options.Timezone.Add"></a>
 
@@ -43,7 +43,7 @@ When you add the time zone option, a brief outage occurs while your DB instance 
 
    1. For **Engine** choose the oracle edition for your DB instance\. 
 
-   1. For **Major engine version** choose **11\.2** or **12\.1** for your DB instance\. 
+   1. For **Major engine version** choose **11\.2**, **12\.1**, or **12\.2** for your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
@@ -54,14 +54,12 @@ If you add the time zone option to an existing option group that is already atta
    For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Time Zone Option Settings](#Appendix.Oracle.Options.Timezone.Options)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the time zone option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ### CLI<a name="Appendix.Oracle.Options.Timezone.CLI"></a>
 
-The following example uses the AWS CLI [add\-option\-to\-option\-group](http://docs.aws.amazon.com/cli/latest/reference/rds/add-option-to-option-group.html) command to add the `Timezone` option and the `TIME_ZONE` option setting to an option group called `myoptiongroup`\. The time zone is set to `Africa/Cairo`\. 
+The following example uses the AWS CLI [add\-option\-to\-option\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/add-option-to-option-group.html) command to add the `Timezone` option and the `TIME_ZONE` option setting to an option group called `myoptiongroup`\. The time zone is set to `Africa/Cairo`\. 
 
 For Linux, OS X, or Unix:
 
@@ -112,7 +110,5 @@ The following values can be used for the time zone option\.
 |  UTC  |  UTC  | 
 
 ## Related Topics<a name="Appendix.Oracle.Options.Timezone.Related"></a>
-
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-
 + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

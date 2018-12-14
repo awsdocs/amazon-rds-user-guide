@@ -4,7 +4,7 @@ This section describes the Amazon RDS implementations of some common DBA tasks f
 
 For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
-
+**Topics**
 + [Creating Roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL Database Access](#Appendix.PostgreSQL.CommonDBATasks.Access)
 + [Working with PostgreSQL Parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
@@ -16,10 +16,18 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 + [Using pgBadger for Log Analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
 + [Viewing the Contents of pg\_config](#Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig)
 + [Working with the orafce Extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
++ [Accessing External Data with the postgres\_fdw Extension](#postgresql-commondbatasks-fdw)
++ [Using a Custom DNS Server for Outbound Network Access](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)
 
 ## Creating Roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
- When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named postgres in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges on your DB instance and you should not assign this role to users unless they need the most access to the DB instance\.
+When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named `postgres` in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges for your DB instance\. You should not assign this role to users unless they need the most access to the DB instance\.
+
+The `rds_superuser` role can do the following:
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL Features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
++ Manage tablespaces, including creating and deleting them\. For more information, see the [Tablespaces](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
++ View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and kill their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
++ Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/9.4/static/sql-grant.html) section in the PostgreSQL documentation\.
 
 The following example shows how to create a user and then grant the user the `rds_superuser` role\. User\-defined roles, such as `rds_superuser`, have to be granted\.
 
@@ -32,27 +40,22 @@ GRANT ROLE
 
 ## Managing PostgreSQL Database Access<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>
 
-By default, when PostgreSQL database objects are created, they receive "public" access privileges\. You can revoke all privileges to a database and then explicitly add privileges back as you need them\.
+In Amazon RDS for PostgreSQL, you can manage which users have privileges to connect to which databases\. In other PostgreSQL environments, you sometimes perform this kind of management by modifying the `pg_hba.conf` file\. In Amazon RDS, you can use database grants instead\.
 
-As the master user, you can remove all privileges from a database using the following command format\.
+New databases in PostgreSQL are always created with a default set of privileges\. The default privileges allow `PUBLIC` \(all users\) to connect to the database and to create temporary tables while connected\. 
 
-```
-revoke all on database <database name> from public;  
-REVOKE
-```
-
-You can then add privileges back to a user\. For example, the following command grants connect access to a user named *mytestuser* to a database named *test*\. 
+To control which users are allowed to connect to a given database in Amazon RDS, first revoke the default `PUBLIC` privileges\. Then grant back the privileges on a more granular basis\. The following example code shows how\.
 
 ```
-grant connect on database test to mytestuser;   
-GRANT
+psql> revoke all on database <database-name> from public;
+psql> grant connect, temporary on database <database-name> to <user/role name>;
 ```
 
-On a local instance, you can specify database privileges in the pg\_hba\.conf file\. However, when using PostgreSQL with Amazon RDS it is better to restrict privileges at the PostgreSQL level\. Changes to the pg\_hba\.conf file require a server restart so you cannot edit the pg\_hba\.conf in Amazon RDS, but privilege changes at the PostgreSQL level occur immediately\.
+For more information about privileges in PostgreSQL databases, see the [https://www.postgresql.org/docs/current/static/sql-grant.html](https://www.postgresql.org/docs/current/static/sql-grant.html) command in the PostgreSQL documentation\.
 
 ## Working with PostgreSQL Parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
 
-PostgreSQL parameters that you would set for a local PostgreSQL instance in the *postgresql\.conf* file are maintained in the DB parameter group for your DB instance\. If you create a DB instance using the default parameter group, the parameter settings are in the parameter group called *default\.postgres9\.6*\.
+PostgreSQL parameters that you set for a local PostgreSQL instance in the *postgresql\.conf* file are maintained in the DB parameter group for your DB instance\. If you create a DB instance using the default parameter group, the parameter settings are in the parameter group called *default\.postgres9\.6*\.
 
  When you create a DB instance, the parameters in the associated DB parameter group are loaded\. You can modify parameter values by changing values in the parameter group\. You can also change parameter values, if you have the security privileges to do so, by using the ALTER DATABASE, ALTER ROLE, and SET commands\. You can't use the command line `postgres` command or the `env PGOPTIONS` command, because you have no access to the host\. 
 
@@ -80,161 +83,162 @@ PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or
 max_connections.
 ```
 
-There are two types of PostgreSQL parameters, static and dynamic\. Static parameters require that the DB instance be rebooted before they are applied\. Dynamic parameters can be applied immediately\. The following table shows parameters that you can modify for a PostgreSQL DB instance and each parameter's type\.
+There are two types of PostgreSQL parameters, static and dynamic\. Static parameters require that the DB instance be rebooted before they are applied\. Dynamic parameters can be applied immediately\. The following table shows parameters that you can modify for a PostgreSQL DB instance and each parameter's type\. 
 
 
 |  Parameter Name  |  Apply\_Type  |  Description  | 
 | --- | --- | --- | 
-|  `application_name` | Dynamic | Sets the application name to be reported in statistics and logs\. | 
-|  `array_nulls` | Dynamic | Enables input of NULL elements in arrays\. | 
-|  `authentication_timeout` | Dynamic | Sets the maximum allowed time to complete client authentication\. | 
-|  `autovacuum` | Dynamic | Starts the autovacuum subprocess\. | 
-|  `autovacuum_analyze_scale_factor` | Dynamic | Number of tuple inserts, updates, or deletes before analyze as a fraction of reltuples\. | 
-|  `autovacuum_analyze_threshold` | Dynamic | Minimum number of tuple inserts, updates, or deletes before analyze\. | 
-|  `autovacuum_naptime` | Dynamic | Time to sleep between autovacuum runs\. | 
-|  `autovacuum_vacuum_cost_delay` | Dynamic | Vacuum cost delay, in milliseconds, for autovacuum\. | 
-|  `autovacuum_vacuum_cost_limit` | Dynamic | Vacuum cost amount available before napping, for autovacuum\. | 
-|  `autovacuum_vacuum_scale_factor` | Dynamic | Number of tuple updates or deletes before vacuum as a fraction of reltuples\. | 
-|  `autovacuum_vacuum_threshold` | Dynamic | Minimum number of tuple updates or deletes before vacuum\. | 
-|  `backslash_quote` | Dynamic | Sets whether a backslash \(\\\) is allowed in string literals\. | 
-|  `bgwriter_delay` | Dynamic | Background writer sleep time between rounds\. | 
-|  `bgwriter_lru_maxpages` | Dynamic | Background writer maximum number of LRU pages to flush per round\. | 
-|  `bgwriter_lru_multiplier` | Dynamic | Multiple of the average buffer usage to free per round\. | 
-|  `bytea_output` | Dynamic | Sets the output format for bytea\. | 
-|  `check_function_bodies` | Dynamic | Checks function bodies during CREATE FUNCTION\. | 
-|  `checkpoint_completion_target` | Dynamic | Time spent flushing dirty buffers during checkpoint, as a fraction of the checkpoint interval\. | 
-|  `checkpoint_segments` | Dynamic | Sets the maximum distance in log segments between automatic WAL checkpoints\. | 
-|  `checkpoint_timeout` | Dynamic | Sets the maximum time between automatic WAL checkpoints\. | 
-|  `checkpoint_warning` | Dynamic | Enables warnings if checkpoint segments are filled more frequently than this\. | 
-|  `client_encoding` | Dynamic | Sets the client's character set encoding\. | 
-|  `client_min_messages` | Dynamic | Sets the message levels that are sent to the client\. | 
-|  `commit_delay` | Dynamic | Sets the delay in microseconds between transaction commit and flushing WAL to disk\. | 
-|  `commit_siblings` | Dynamic | Sets the minimum concurrent open transactions before performing commit\_delay\. | 
-|  `constraint_exclusion` | Dynamic | Enables the planner to use constraints to optimize queries\. | 
-|  `cpu_index_tuple_cost` | Dynamic | Sets the planner's estimate of the cost of processing each index entry during an index scan\. | 
-|  `cpu_operator_cost` | Dynamic | Sets the planner's estimate of the cost of processing each operator or function call\. | 
-|  `cpu_tuple_cost` | Dynamic | Sets the planner's estimate of the cost of processing each tuple \(row\)\. | 
-|  `cursor_tuple_fraction` | Dynamic | Sets the planner's estimate of the fraction of a cursor's rows that will be retrieved\. | 
-|  `datestyle` | Dynamic | Sets the display format for date and time values\. | 
-|  `deadlock_timeout` | Dynamic | Sets the time to wait on a lock before checking for deadlock\. | 
-|  `debug_pretty_print` | Dynamic | Indents parse and plan tree displays\. | 
-|  `debug_print_parse` | Dynamic | Logs each query's parse tree\. | 
-|  `debug_print_plan` | Dynamic | Logs each query's execution plan\. | 
-|  `debug_print_rewritten` | Dynamic | Logs each query's rewritten parse tree\. | 
-|  `default_statistics_target` | Dynamic | Sets the default statistics target\. | 
-|  `default_tablespace` | Dynamic | Sets the default tablespace to create tables and indexes in\. | 
-|  `default_transaction_deferrable` | Dynamic | Sets the default deferrable status of new transactions\. | 
-|  `default_transaction_isolation` | Dynamic | Sets the transaction isolation level of each new transaction\. | 
-|  `default_transaction_read_only` | Dynamic | Sets the default read\-only status of new transactions\. | 
-|  `default_with_oids` | Dynamic | Creates new tables with OIDs by default\. | 
-|  `effective_cache_size` | Dynamic | Sets the planner's assumption about the size of the disk cache\. | 
-|  `effective_io_concurrency` | Dynamic | Number of simultaneous requests that can be handled efficiently by the disk subsystem\. | 
-|  `enable_bitmapscan` | Dynamic | Enables the planner's use of bitmap\-scan plans\. | 
-|  `enable_hashagg` | Dynamic | Enables the planner's use of hashed aggregation plans\. | 
-|  `enable_hashjoin` | Dynamic | Enables the planner's use of hash join plans\. | 
-|  `enable_indexscan` | Dynamic | Enables the planner's use of index\-scan plans\. | 
-|  `enable_material` | Dynamic | Enables the planner's use of materialization\. | 
-|  `enable_mergejoin` | Dynamic | Enables the planner's use of merge join plans\. | 
-|  `enable_nestloop` | Dynamic | Enables the planner's use of nested\-loop join plans\. | 
-|  `enable_seqscan` | Dynamic | Enables the planner's use of sequential\-scan plans\. | 
-|  `enable_sort` | Dynamic | Enables the planner's use of explicit sort steps\. | 
-|  `enable_tidscan` | Dynamic | Enables the planner's use of TID scan plans\. | 
-|  `escape_string_warning` | Dynamic | Warns about backslash \(\\\) escapes in ordinary string literals\. | 
-|  `extra_float_digits` | Dynamic | Sets the number of digits displayed for floating\-point values\. | 
-|  `from_collapse_limit` | Dynamic | Sets the FROM\-list size beyond which subqueries are not collapsed\. | 
-|  `fsync` | Dynamic | Forces synchronization of updates to disk\. | 
-|  `full_page_writes` | Dynamic | Writes full pages to WAL when first modified after a checkpoint\. | 
-|  `geqo` | Dynamic | Enables genetic query optimization\. | 
-|  `geqo_effort` | Dynamic | GEQO: effort is used to set the default for other GEQO parameters\. | 
-|  `geqo_generations` | Dynamic | GEQO: number of iterations of the algorithm\. | 
-|  `geqo_pool_size` | Dynamic | GEQO: number of individuals in the population\. | 
-|  `geqo_seed` | Dynamic | GEQO: seed for random path selection\. | 
-|  `geqo_selection_bias` | Dynamic | GEQO: selective pressure within the population\. | 
-|  `geqo_threshold` | Dynamic | Sets the threshold of FROM items beyond which GEQO is used\. | 
-|  `gin_fuzzy_search_limit` | Dynamic | Sets the maximum allowed result for exact search by GIN\. | 
-|  `hot_standby_feedback` | Dynamic | Determines whether a hot standby sends feedback messages to the primary or upstream standby\. | 
-|  `intervalstyle` | Dynamic | Sets the display format for interval values\. | 
-|  `join_collapse_limit` | Dynamic | Sets the FROM\-list size beyond which JOIN constructs are not flattened\. | 
-|  `lc_messages` | Dynamic | Sets the language in which messages are displayed\. | 
-|  `lc_monetary` | Dynamic | Sets the locale for formatting monetary amounts\. | 
-|  `lc_numeric` | Dynamic | Sets the locale for formatting numbers\. | 
-|  `lc_time` | Dynamic | Sets the locale for formatting date and time values\. | 
-|  `log_autovacuum_min_duration` | Dynamic | Sets the minimum execution time above which autovacuum actions will be logged\. | 
-|  `log_checkpoints` | Dynamic | Logs each checkpoint\. | 
-|  `log_connections` | Dynamic | Logs each successful connection\. | 
-|  `log_disconnections` | Dynamic | Logs end of a session, including duration\. | 
-|  `log_duration` | Dynamic | Logs the duration of each completed SQL statement\. | 
-|  `log_error_verbosity` | Dynamic | Sets the verbosity of logged messages\. | 
-|  `log_executor_stats` | Dynamic | Writes executor performance statistics to the server log\. | 
-|  `log_filename` | Dynamic | Sets the file name pattern for log files\. | 
-|  `log_hostname` | Dynamic | Logs the host name in the connection logs\. | 
-|  `log_lock_waits` | Dynamic | Logs long lock waits\. | 
-|  `log_min_duration_statement` | Dynamic | Sets the minimum execution time above which statements will be logged\. | 
-|  `log_min_error_statement` | Dynamic | Causes all statements generating an error at or above this level to be logged\. | 
-|  `log_min_messages` | Dynamic | Sets the message levels that are logged\. | 
-|  `log_parser_stats` | Dynamic | Writes parser performance statistics to the server log\. | 
-|  `log_planner_stats` | Dynamic | Writes planner performance statistics to the server log\. | 
-|  `log_rotation_age` | Dynamic | Automatic log file rotation will occur after N minutes\. | 
-|  `log_rotation_size` | Dynamic | Automatic log file rotation will occur after N kilobytes\. | 
-|  `log_statement` | Dynamic | Sets the type of statements logged\. | 
-|  `log_statement_stats` | Dynamic | Writes cumulative performance statistics to the server log\. | 
-|  `log_temp_files` | Dynamic | Logs the use of temporary files larger than this number of kilobytes\. | 
-|  `maintenance_work_mem` | Dynamic | Sets the maximum memory to be used for maintenance operations\. | 
-|  `max_stack_depth` | Dynamic | Sets the maximum stack depth, in kilobytes\. | 
-|  `max_standby_archive_delay` | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing archived WAL data\. | 
-|  `max_standby_streaming_delay` | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data\. | 
-|  `quote_all_identifiers` | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
-|  `random_page_cost` | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. | 
-|  `rds.log_retention_period` | Dynamic | Amazon RDS will delete PostgreSQL logs that are older than N minutes\. | 
-|  `search_path` | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 
-|  `seq_page_cost` | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
-|  `session_replication_role` | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
-|  `sql_inheritance` | Dynamic | Causes subtables to be included by default in various commands\. | 
-|  `ssl_renegotiation_limit` | Dynamic | Sets the amount of traffic to send and receive before renegotiating the encryption keys\. | 
-|  `standard_conforming_strings` | Dynamic | Causes \.\.\. strings to treat backslashes literally\. | 
-|  `statement_timeout` | Dynamic | Sets the maximum allowed duration of any statement\. | 
-|  `synchronize_seqscans` | Dynamic | Enables synchronized sequential scans\. | 
-|  `synchronous_commit` | Dynamic | Sets the current transactions synchronization level\. | 
-|  `tcp_keepalives_count` | Dynamic | Maximum number of TCP keepalive retransmits\. | 
-|  `tcp_keepalives_idle` | Dynamic | Time between issuing TCP keepalives\. | 
-|  `tcp_keepalives_interval` | Dynamic | Time between TCP keepalive retransmits\. | 
-|  `temp_buffers` | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
-|  `temp_tablespaces` | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
-|  `timezone` | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
-|  `track_activities` | Dynamic | Collects information about executing commands\. | 
-|  `track_counts` | Dynamic | Collects statistics on database activity\. | 
-|  `track_functions` | Dynamic | Collects function\-level statistics on database activity\. | 
-|  `track_io_timing` | Dynamic | Collects timing statistics on database I/O activity\. | 
-|  `transaction_deferrable` | Dynamic | Indicates whether to defer a read\-only serializable transaction until it can be executed with no possible serialization failures\. | 
-|  `transaction_isolation` | Dynamic | Sets the current transactions isolation level\. | 
-|  `transaction_read_only` | Dynamic | Sets the current transactions read\-only status\. | 
-|  `transform_null_equals` | Dynamic | Treats expr=NULL as expr IS NULL\. | 
-|  `update_process_title` | Dynamic | Updates the process title to show the active SQL command\. | 
-|  `vacuum_cost_delay` | Dynamic | Vacuum cost delay in milliseconds\. | 
-|  `vacuum_cost_limit` | Dynamic | Vacuum cost amount available before napping\. | 
-|  `vacuum_cost_page_dirty` | Dynamic | Vacuum cost for a page dirtied by vacuum\. | 
-|  `vacuum_cost_page_hit` | Dynamic | Vacuum cost for a page found in the buffer cache\. | 
-|  `vacuum_cost_page_miss` | Dynamic | Vacuum cost for a page not found in the buffer cache\. | 
-|  `vacuum_defer_cleanup_age` | Dynamic | Number of transactions by which vacuum and hot cleanup should be deferred, if any\. | 
-|  `vacuum_freeze_min_age` | Dynamic | Minimum age at which vacuum should freeze a table row\. | 
-|  `vacuum_freeze_table_age` | Dynamic | Age at which vacuum should scan a whole table to freeze tuples\. | 
-|  `wal_writer_delay` | Dynamic | WAL writer sleep time between WAL flushes\. | 
-|  `work_mem` | Dynamic | Sets the maximum memory to be used for query workspaces\. | 
-|  `xmlbinary` | Dynamic | Sets how binary values are to be encoded in XML\. | 
-|  `xmloption` | Dynamic | Sets whether XML data in implicit parsing and serialization operations is to be considered as documents or content fragments\. | 
-|  `autovacuum_freeze_max_age` | Static | Age at which to autovacuum a table to prevent transaction ID wraparound\. | 
-|  `autovacuum_max_workers` | Static | Sets the maximum number of simultaneously running autovacuum worker processes\. | 
-|  `max_connections` | Static | Sets the maximum number of concurrent connections\. | 
-|  `max_files_per_process` | Static | Sets the maximum number of simultaneously open files for each server process\. | 
-|  `max_locks_per_transaction` | Static | Sets the maximum number of locks per transaction\. | 
-|  `max_pred_locks_per_transaction` | Static | Sets the maximum number of predicate locks per transaction\. | 
-|  `max_prepared_transactions` | Static | Sets the maximum number of simultaneously prepared transactions\. | 
-|  `shared_buffers` | Static | Sets the number of shared memory buffers used by the server\. | 
-|  `ssl` | Static | Enables SSL connections\. | 
-|  `track_activity_query_size` | Static | Sets the size reserved for pg\_stat\_activity\.current\_query, in bytes\. | 
-|  `wal_buffers` | Static | Sets the number of disk\-page buffers in shared memory for WAL\. | 
+|  `application_name`  | Dynamic | Sets the application name to be reported in statistics and logs\. | 
+|  `array_nulls`  | Dynamic | Enables input of NULL elements in arrays\. | 
+|  `authentication_timeout`  | Dynamic | Sets the maximum allowed time to complete client authentication\. | 
+|  `autovacuum`  | Dynamic | Starts the autovacuum subprocess\. | 
+|  `autovacuum_analyze_scale_factor`  | Dynamic | Number of tuple inserts, updates, or deletes before analyze as a fraction of reltuples\. | 
+|  `autovacuum_analyze_threshold`  | Dynamic | Minimum number of tuple inserts, updates, or deletes before analyze\. | 
+|  `autovacuum_naptime`  | Dynamic | Time to sleep between autovacuum runs\. | 
+|  `autovacuum_vacuum_cost_delay`  | Dynamic | Vacuum cost delay, in milliseconds, for autovacuum\. | 
+|  `autovacuum_vacuum_cost_limit`  | Dynamic | Vacuum cost amount available before napping, for autovacuum\. | 
+|  `autovacuum_vacuum_scale_factor`  | Dynamic | Number of tuple updates or deletes before vacuum as a fraction of reltuples\. | 
+|  `autovacuum_vacuum_threshold`  | Dynamic | Minimum number of tuple updates or deletes before vacuum\. | 
+|  `backslash_quote`  | Dynamic | Sets whether a backslash \(\\\) is allowed in string literals\. | 
+|  `bgwriter_delay`  | Dynamic | Background writer sleep time between rounds\. | 
+|  `bgwriter_lru_maxpages`  | Dynamic | Background writer maximum number of LRU pages to flush per round\. | 
+|  `bgwriter_lru_multiplier`  | Dynamic | Multiple of the average buffer usage to free per round\. | 
+|  `bytea_output`  | Dynamic | Sets the output format for bytes\. | 
+|  `check_function_bodies`  | Dynamic | Checks function bodies during CREATE FUNCTION\. | 
+|  `checkpoint_completion_target`  | Dynamic | Time spent flushing dirty buffers during checkpoint, as a fraction of the checkpoint interval\. | 
+|  `checkpoint_segments`  | Dynamic | Sets the maximum distance in log segments between automatic WAL checkpoints\. | 
+|  `checkpoint_timeout`  | Dynamic | Sets the maximum time between automatic WAL checkpoints\. | 
+|  `checkpoint_warning`  | Dynamic | Enables warnings if checkpoint segments are filled more frequently than this\. | 
+|  `client_encoding`  | Dynamic | Sets the client's character set encoding\. | 
+|  `client_min_messages`  | Dynamic | Sets the message levels that are sent to the client\. | 
+|  `commit_delay`  | Dynamic | Sets the delay in microseconds between transaction commit and flushing WAL to disk\. | 
+|  `commit_siblings`  | Dynamic | Sets the minimum concurrent open transactions before performing commit\_delay\. | 
+|  `constraint_exclusion`  | Dynamic | Enables the planner to use constraints to optimize queries\. | 
+|  `cpu_index_tuple_cost`  | Dynamic | Sets the planner's estimate of the cost of processing each index entry during an index scan\. | 
+|  `cpu_operator_cost`  | Dynamic | Sets the planner's estimate of the cost of processing each operator or function call\. | 
+|  `cpu_tuple_cost`  | Dynamic | Sets the planner's estimate of the cost of processing each tuple \(row\)\. | 
+|  `cursor_tuple_fraction`  | Dynamic | Sets the planner's estimate of the fraction of a cursor's rows that will be retrieved\. | 
+|  `datestyle`  | Dynamic | Sets the display format for date and time values\. | 
+|  `deadlock_timeout`  | Dynamic | Sets the time to wait on a lock before checking for deadlock\. | 
+|  `debug_pretty_print`  | Dynamic | Indents parse and plan tree displays\. | 
+|  `debug_print_parse`  | Dynamic | Logs each query's parse tree\. | 
+|  `debug_print_plan`  | Dynamic | Logs each query's execution plan\. | 
+|  `debug_print_rewritten`  | Dynamic | Logs each query's rewritten parse tree\. | 
+|  `default_statistics_target`  | Dynamic | Sets the default statistics target\. | 
+|  `default_tablespace`  | Dynamic | Sets the default tablespace to create tables and indexes in\. | 
+|  `default_transaction_deferrable`  | Dynamic | Sets the default deferrable status of new transactions\. | 
+|  `default_transaction_isolation`  | Dynamic | Sets the transaction isolation level of each new transaction\. | 
+|  `default_transaction_read_only`  | Dynamic | Sets the default read\-only status of new transactions\. | 
+|  `default_with_oids`  | Dynamic | Creates new tables with OIDs by default\. | 
+|  `effective_cache_size`  | Dynamic | Sets the planner's assumption about the size of the disk cache\. | 
+|  `effective_io_concurrency`  | Dynamic | Number of simultaneous requests that can be handled efficiently by the disk subsystem\. | 
+|  `enable_bitmapscan`  | Dynamic | Enables the planner's use of bitmap\-scan plans\. | 
+|  `enable_hashagg`  | Dynamic | Enables the planner's use of hashed aggregation plans\. | 
+|  `enable_hashjoin`  | Dynamic | Enables the planner's use of hash join plans\. | 
+|  `enable_indexscan`  | Dynamic | Enables the planner's use of index\-scan plans\. | 
+|  `enable_material`  | Dynamic | Enables the planner's use of materialization\. | 
+|  `enable_mergejoin`  | Dynamic | Enables the planner's use of merge join plans\. | 
+|  `enable_nestloop`  | Dynamic | Enables the planner's use of nested\-loop join plans\. | 
+|  `enable_seqscan`  | Dynamic | Enables the planner's use of sequential\-scan plans\. | 
+|  `enable_sort`  | Dynamic | Enables the planner's use of explicit sort steps\. | 
+|  `enable_tidscan`  | Dynamic | Enables the planner's use of TID scan plans\. | 
+|  `escape_string_warning`  | Dynamic | Warns about backslash \(\\\) escapes in ordinary string literals\. | 
+|  `extra_float_digits`  | Dynamic | Sets the number of digits displayed for floating\-point values\. | 
+|  `from_collapse_limit`  | Dynamic | Sets the FROM\-list size beyond which subqueries are not collapsed\. | 
+|  `fsync`  | Dynamic | Forces synchronization of updates to disk\. | 
+|  `full_page_writes`  | Dynamic | Writes full pages to WAL when first modified after a checkpoint\. | 
+|  `geqo`  | Dynamic | Enables genetic query optimization\. | 
+|  `geqo_effort`  | Dynamic | GEQO: effort is used to set the default for other GEQO parameters\. | 
+|  `geqo_generations`  | Dynamic | GEQO: number of iterations of the algorithm\. | 
+|  `geqo_pool_size`  | Dynamic | GEQO: number of individuals in the population\. | 
+|  `geqo_seed`  | Dynamic | GEQO: seed for random path selection\. | 
+|  `geqo_selection_bias`  | Dynamic | GEQO: selective pressure within the population\. | 
+|  `geqo_threshold`  | Dynamic | Sets the threshold of FROM items beyond which GEQO is used\. | 
+|  `gin_fuzzy_search_limit`  | Dynamic | Sets the maximum allowed result for exact search by GIN\. | 
+|  `hot_standby_feedback`  | Dynamic | Determines whether a hot standby sends feedback messages to the primary or upstream standby\. | 
+|  `intervalstyle`  | Dynamic | Sets the display format for interval values\. | 
+|  `join_collapse_limit`  | Dynamic | Sets the FROM\-list size beyond which JOIN constructs are not flattened\. | 
+|  `lc_messages`  | Dynamic | Sets the language in which messages are displayed\. | 
+|  `lc_monetary`  | Dynamic | Sets the locale for formatting monetary amounts\. | 
+|  `lc_numeric`  | Dynamic | Sets the locale for formatting numbers\. | 
+|  `lc_time`  | Dynamic | Sets the locale for formatting date and time values\. | 
+|  `log_autovacuum_min_duration`  | Dynamic | Sets the minimum execution time above which autovacuum actions will be logged\. | 
+|  `log_checkpoints`  | Dynamic | Logs each checkpoint\. | 
+|  `log_connections`  | Dynamic | Logs each successful connection\. | 
+|  `log_disconnections`  | Dynamic | Logs end of a session, including duration\. | 
+|  `log_duration`  | Dynamic | Logs the duration of each completed SQL statement\. | 
+|  `log_error_verbosity`  | Dynamic | Sets the verbosity of logged messages\. | 
+|  `log_executor_stats`  | Dynamic | Writes executor performance statistics to the server log\. | 
+|  `log_filename`  | Dynamic | Sets the file name pattern for log files\. | 
+|  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. | 
+|  `log_lock_waits`  | Dynamic | Logs long lock waits\. | 
+|  `log_min_duration_statement`  | Dynamic | Sets the minimum execution time above which statements will be logged\. | 
+|  `log_min_error_statement`  | Dynamic | Causes all statements generating an error at or above this level to be logged\. | 
+|  `log_min_messages`  | Dynamic | Sets the message levels that are logged\. | 
+|  `log_parser_stats`  | Dynamic | Writes parser performance statistics to the server log\. | 
+|  `log_planner_stats`  | Dynamic | Writes planner performance statistics to the server log\. | 
+|  `log_rotation_age`  | Dynamic | Automatic log file rotation will occur after N minutes\. | 
+|  `log_rotation_size`  | Dynamic | Automatic log file rotation will occur after N kilobytes\. | 
+|  `log_statement`  | Dynamic | Sets the type of statements logged\. | 
+|  `log_statement_stats`  | Dynamic | Writes cumulative performance statistics to the server log\. | 
+|  `log_temp_files`  | Dynamic | Logs the use of temporary files larger than this number of kilobytes\. | 
+|  `maintenance_work_mem`  | Dynamic | Sets the maximum memory to be used for maintenance operations\. | 
+|  `max_stack_depth`  | Dynamic | Sets the maximum stack depth, in kilobytes\. | 
+|  `max_standby_archive_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing archived WAL data\. | 
+|  `max_standby_streaming_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data\. | 
+|  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
+|  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. | 
+|  `rds.log_retention_period`  | Dynamic | Amazon RDS will delete PostgreSQL logs that are older than N minutes\. | 
+|  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 
+|  `seq_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
+|  `session_replication_role`  | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
+|  `sql_inheritance`  | Dynamic | Causes subtables to be included by default in various commands\. | 
+|  `ssl_renegotiation_limit`  | Dynamic | Sets the amount of traffic to send and receive before renegotiating the encryption keys\. | 
+|  `standard_conforming_strings`  | Dynamic | Causes \.\.\. strings to treat backslashes literally\. | 
+|  `statement_timeout`  | Dynamic | Sets the maximum allowed duration of any statement\. | 
+|  `synchronize_seqscans`  | Dynamic | Enables synchronized sequential scans\. | 
+|  `synchronous_commit`  | Dynamic | Sets the current transactions synchronization level\. | 
+|  `tcp_keepalives_count`  | Dynamic | Maximum number of TCP keepalive retransmits\. | 
+|  `tcp_keepalives_idle`  | Dynamic | Time between issuing TCP keepalives\. | 
+|  `tcp_keepalives_interval`  | Dynamic | Time between TCP keepalive retransmits\. | 
+|  `temp_buffers`  | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
+|  `temp_tablespaces`  | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
+|  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
+|  `track_activities`  | Dynamic | Collects information about executing commands\. | 
+|  `track_counts`  | Dynamic | Collects statistics on database activity\. | 
+|  `track_functions`  | Dynamic | Collects function\-level statistics on database activity\. | 
+|  `track_io_timing`  | Dynamic | Collects timing statistics on database I/O activity\. | 
+|  `transaction_deferrable`  | Dynamic | Indicates whether to defer a read\-only serializable transaction until it can be executed with no possible serialization failures\. | 
+|  `transaction_isolation`  | Dynamic | Sets the current transactions isolation level\. | 
+|  `transaction_read_only`  | Dynamic | Sets the current transactions read\-only status\. | 
+|  `transform_null_equals`  | Dynamic | Treats expr=NULL as expr IS NULL\. | 
+|  `update_process_title`  | Dynamic | Updates the process title to show the active SQL command\. | 
+|  `vacuum_cost_delay`  | Dynamic | Vacuum cost delay in milliseconds\. | 
+|  `vacuum_cost_limit`  | Dynamic | Vacuum cost amount available before napping\. | 
+|  `vacuum_cost_page_dirty`  | Dynamic | Vacuum cost for a page dirtied by vacuum\. | 
+|  `vacuum_cost_page_hit`  | Dynamic | Vacuum cost for a page found in the buffer cache\. | 
+|  `vacuum_cost_page_miss`  | Dynamic | Vacuum cost for a page not found in the buffer cache\. | 
+|  `vacuum_defer_cleanup_age`  | Dynamic | Number of transactions by which vacuum and hot cleanup should be deferred, if any\. | 
+|  `vacuum_freeze_min_age`  | Dynamic | Minimum age at which vacuum should freeze a table row\. | 
+|  `vacuum_freeze_table_age`  | Dynamic | Age at which vacuum should scan a whole table to freeze tuples\. | 
+|  `wal_writer_delay`  | Dynamic | WAL writer sleep time between WAL flushes\. | 
+|  `work_mem`  | Dynamic | Sets the maximum memory to be used for query workspaces\. | 
+|  `xmlbinary`  | Dynamic | Sets how binary values are to be encoded in XML\. | 
+|  `xmloption`  | Dynamic | Sets whether XML data in implicit parsing and serialization operations is to be considered as documents or content fragments\. | 
+|  `autovacuum_freeze_max_age`  | Static | Age at which to autovacuum a table to prevent transaction ID wraparound\. | 
+|  `autovacuum_max_workers`  | Static | Sets the maximum number of simultaneously running autovacuum worker processes\. | 
+|  `max_connections`  | Static | Sets the maximum number of concurrent connections\. | 
+|  `max_files_per_process`  | Static | Sets the maximum number of simultaneously open files for each server process\. | 
+|  `max_locks_per_transaction`  | Static | Sets the maximum number of locks per transaction\. | 
+|  `max_pred_locks_per_transaction`  | Static | Sets the maximum number of predicate locks per transaction\. | 
+|  `max_prepared_transactions`  | Static | Sets the maximum number of simultaneously prepared transactions\. | 
+|  `shared_buffers`  | Static | Sets the number of shared memory buffers used by the server\. | 
+|  `ssl`  | Static | Enables SSL connections\. | 
+| temp\_file\_limit | Static | Sets the maximum size in KB to which the temporary files can grow\. | 
+|  `track_activity_query_size`  | Static | Sets the size reserved for pg\_stat\_activity\.current\_query, in bytes\. | 
+|  `wal_buffers`  | Static | Sets the number of disk\-page buffers in shared memory for WAL\. | 
 
-Amazon RDS uses the default PostgreSQL units for all parameters\. The following table shows the PostgreSQL unit value for each parameter\.
+Amazon RDS uses the default PostgreSQL units for all parameters\. The following table shows the PostgreSQL default unit and value for each parameter\.
 
 
 |  Parameter Name  |  Unit  | 
@@ -250,9 +254,9 @@ Amazon RDS uses the default PostgreSQL units for all parameters\. The following 
 | `maintenance_work_mem` | KB | 
 | `max_stack_depth` | KB | 
 | `ssl_renegotiation_limit` | KB | 
-| `temp_file_limit` | KB | 
+| temp\_file\_limit | KB | 
 | `work_mem` | KB | 
-| `log_rotation_age` | min | 
+| `log_rotation_age` | minutes | 
 | `autovacuum_vacuum_cost_delay` | ms | 
 | `bgwriter_delay` | ms | 
 | `deadlock_timeout` | ms | 
@@ -283,7 +287,7 @@ We strongly recommend that you use the autovacuum feature for PostgreSQL databas
 
 For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog entry [Implement an Early Warning System for Transaction ID Wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
-
+**Topics**
 + [Maintenance Work Memory](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
 + [Determining if the Tables in Your Database Need Vacuuming](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming)
 + [Determining Which Tables Are Currently Eligible for Autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables)
@@ -298,9 +302,7 @@ For information on creating a process that warns you about transaction ID wrapar
 One of the most important parameters influencing autovacuum performance is the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter\. This parameter determines how much memory you allocate for autovacuum to use to scan a database table and to hold all the row IDs that are going to be vacuumed\. If you set the value of the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter too low, the vacuum process might have to scan the table multiple times to complete its work, possibly impacting performance\.
 
 When doing calculations to determine the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value, keep in mind two things:
-
 + The default unit is KB for this parameter\.
-
 + The [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter works in conjunction with the [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) parameter\. If you have many small tables, allocate more [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) and less [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM)\. If you have large tables \(say, larger than 100 GB\), allocate more memory and fewer workers\. You need to have enough memory allocated to succeed on your biggest table\. Each [https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS) can use the memory you allocate, so you should make sure the combination of workers and memory equal the total memory you want to allocate\.
 
  In general terms, for large hosts, set the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter to a value between one and two gigabytes\. For extremely large hosts, set the parameter to a value between two and four gigabytes\. The value you set for this parameter should depend on the workload\. Amazon RDS has updated its default for this parameter to be `GREATEST({DBInstanceClassMemory/63963136*1024},65536)`\. 
@@ -331,21 +333,15 @@ postgres   | 1693881061
 When the age of a database hits two billion, TransactionID \(XID\) wraparound occurs and the database will go into read only\. This query can be used to produce a metric and run a few times a day\. By default, autovacuum is set to keep the age of transactions to no more than 200,000,000 \([https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE)\)\.
 
 A sample monitoring strategy might look like this:
-
 + Autovacuum\_freeze\_max\_age is set to 200 million\.
-
 + If a table hits 500 million unvacuumed transactions, a low\-severity alarm is triggered\. This isn’t an unreasonable value, but it could indicate that autovacuum isn’t keeping up\.
-
 + If a table ages to one billion, this should be treated as an actionable alarm\. In general, you want to keep ages closer to autovacuum\_freeze\_max\_age for performance reasons\. Investigation using the following steps is recommended\.
-
 + If a table hits 1\.5 billion unvacuumed transactions, a high\-severity alarm is triggered\. Depending on how quickly your database uses XIDs, this alarm can indicate that the system is running out of time to run autovacuum and that you should consider immediate resolution\.
 
 If a table is constantly breaching these thresholds, you need further modify your autovacuum parameters\. By default, VACUUM \(which has cost\-based delays disabled\) is more aggressive than default autovacuum, but, also more intrusive to the system as a whole\.
 
 We have the following recommendations:
-
 + Be aware and enable a monitoring mechanism so that you are aware of the age of your oldest transactions\.
-
 + For busier tables, perform a manual vacuum freeze regularly during a maintenance window in addition to relying on autovacuum\. For information on performing a manual vacuum freeze, see [ Performing a Manual Vacuum Freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)\.
 
 ### Determining Which Tables Are Currently Eligible for Autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables"></a>
@@ -361,7 +357,7 @@ Vacuum threshold = vacuum base threshold + vacuum scale factor * number of tuple
 While you are connected to your database, run the following query to see a list of tables that autovacuum sees as eligible for vacuuming:
 
 ```
-WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
+  WITH vbt AS (SELECT setting AS autovacuum_vacuum_threshold FROM 
 pg_settings WHERE name = 'autovacuum_vacuum_threshold')
     , vsf AS (SELECT setting AS autovacuum_vacuum_scale_factor FROM 
 pg_settings WHERE name = 'autovacuum_vacuum_scale_factor')
@@ -378,7 +374,7 @@ SELECT
 autovacuum_freeze_max_age
     , (coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) 
 + coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-pg_table_size(c.oid)) as autovacuum_vacuum_tuples
+c.reltuples) as autovacuum_vacuum_tuples
     , n_dead_tup as dead_tuples
 FROM pg_class c join pg_namespace ns on ns.oid = c.relnamespace
 join pg_stat_all_tables stat on stat.relid = c.oid
@@ -396,7 +392,7 @@ autovacuum_freeze_max_age::float)
     or
     coalesce(cvbt.value::float, autovacuum_vacuum_threshold::float) + 
 coalesce(cvsf.value::float,autovacuum_vacuum_scale_factor::float) * 
-pg_table_size(c.oid) <= n_dead_tup
+c.reltuples <= n_dead_tup
    -- or 1 = 1
 )
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
@@ -406,41 +402,55 @@ ORDER BY age(relfrozenxid) DESC LIMIT 50;
 
 If you need to manually vacuum a table, you need to determine if autovacuum is currently running\. If it is, you might need to adjust parameters to make it run more efficiently, or terminate autovacuum so you can manually run VACUUM\.
 
-Use the following query to determine if autovacuum is running, and how long it has been running\. This query requires Amazon RDS PostgreSQL 9\.3\.12 or later, 9\.4\.7 or later, and 9\.5\.2\+ to have full visibility into rdsadmin processes currently running\.
+Use the following query to determine if autovacuum is running, how long it has been running, and if it is waiting on another session\. 
+
+If you are using Amazon RDS PostgreSQL 9\.6\+ or higher, use this query:
 
 ```
-SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
-AS xact_runtime, query
-FROM pg_stat_activity WHERE upper(query) like '%VACUUM%' ORDER BY 
-xact_start;
+SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query
+FROM pg_stat_activity 
+WHERE upper(query) like '%VACUUM%' 
+ORDER BY xact_start;
 ```
 
 After running the query, you should see output similar to the following\.
 
 ```
-datname | usename  |  pid  | waiting |      xact_runtime       | 
-query  --
- mydb    | rdsadmin | 16473 | f       | 33 days 16:32:11.600656 | 
- autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
- mydb    | rdsadmin | 22553 | f       | 14 days 09:15:34.073141 | 
- autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
- mydb    | rdsadmin | 41909 | f       | 3 days 02:43:54.203349  | 
- autovacuum: VACUUM ANALYZE public.mytable3
- mydb    | rdsadmin |   618 | f       | 00:00:00                | 
- SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
- AS xact_runtime, query+
-         |          |       |         |                         | 
-         FROM pg_stat_activity                                          
-         +
-         |          |       |         |                         | 
-         WHERE query like '%VACUUM%'                                    
-         +
-         |          |       |         |                         | 
-         ORDER BY xact_start;
-(4	rows)
+ datname | usename  |  pid  | state  | wait_event |      xact_runtime       | query  
+ --------+----------+-------+--------+------------+-------------------------+--------------------------------------------------------------------------------------------------------
+ mydb    | rdsadmin | 16473 | active |            | 33 days 16:32:11.600656 | autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
+ mydb    | rdsadmin | 22553 | active |            | 14 days 09:15:34.073141 | autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
+ mydb    | rdsadmin | 41909 | active |            | 3 days 02:43:54.203349  | autovacuum: VACUUM ANALYZE public.mytable3
+ mydb    | rdsadmin |   618 | active |            | 00:00:00                | SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query+
+         |          |       |        |            |                         | FROM pg_stat_activity                                                                                 +
+         |          |       |        |            |                         | WHERE query like '%VACUUM%'                                                                           +
+         |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
 ```
 
-Several issues can cause long running \(multiple days\) autovacuum session\. The most common issue is that your[https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value is set too low for the size of the table or rate of updates\. 
+If you are using a version less than Amazon RDS PostgreSQL 9\.6, but, 9\.3\.12 or later, 9\.4\.7 or later, or 9\.5\.2\+, use this query:
+
+```
+SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query
+FROM pg_stat_activity 
+WHERE upper(query) like '%VACUUM%' 
+ORDER BY xact_start;
+```
+
+After running the query, you should see output similar to the following\.
+
+```
+ datname | usename  |  pid  | waiting |       xact_runtime      | query  
+ --------+----------+-------+---------+-------------------------+----------------------------------------------------------------------------------------------
+ mydb    | rdsadmin | 16473 | f       | 33 days 16:32:11.600656 | autovacuum: VACUUM ANALYZE public.mytable1 (to prevent wraparound)
+ mydb    | rdsadmin | 22553 | f       | 14 days 09:15:34.073141 | autovacuum: VACUUM ANALYZE public.mytable2 (to prevent wraparound)
+ mydb    | rdsadmin | 41909 | f       | 3 days 02:43:54.203349  | autovacuum: VACUUM ANALYZE public.mytable3
+ mydb    | rdsadmin |   618 | f       | 00:00:00                | SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query+
+         |          |       |         |                         | FROM pg_stat_activity                                                                       +                 
+         |          |       |         |                         | WHERE query like '%VACUUM%'                                                                 +
+         |          |       |         |                         | ORDER BY xact_start;                                                                        +
+```
+
+Several issues can cause long running \(multiple days\) autovacuum session\. The most common issue is that your [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value is set too low for the size of the table or rate of updates\. 
 
 We recommend that you use the following formula to set the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter value\.
 
@@ -449,9 +459,7 @@ GREATEST({DBInstanceClassMemory/63963136*1024},65536)
 ```
 
 Short running autovacuum sessions can also indicate problems:
-
 + It can indicate that there aren't enough autovacuum\_max\_workers for your workload\. You will need to indicate the number of workers\.
-
 + It can indicate that there is an index corruption \(autovacuum will crash and restart on the same relation but make no progress\)\. You will need to run a manual vacuum freeze verbose \_\_\_table\_\_\_ to see the exact cause\.
 
 ### Performing a Manual Vacuum Freeze<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze"></a>
@@ -586,18 +594,13 @@ where name in (
 ```
 
 While these all affect autovacuum, some of the most important ones are:
-
 + [Maintenance\_Work\_mem](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE_WORK_MEM)
-
 + [Autovacuum\_freeze\_max\_age](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-FREEZE-MAX-AGE)
-
 + [Autovacuum\_max\_workers](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-MAX-WORKERS)
-
 + [Autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
-
 + [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
-#### Table\-Level Parameters<a name="w3ab1c36c41c15c21c10"></a>
+#### Table\-Level Parameters<a name="w4aac32c43c15c21c10"></a>
 
 Autovacuum related [storage parameters](https://www.postgresql.org/docs/current/static/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) can be set at a table level, which can be better than altering the behavior of the entire database\. For large tables, you might need to set aggressive settings and you might not want to make autovacuum behave that way for all tables\.
 
@@ -628,11 +631,8 @@ NOTE: PostgreSQL version 9\.4\.7 and later includes improved visibility of autov
 ## Audit Logging for a PostgreSQL DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
 There are several parameters you can set to log activity that occurs on your PostgreSQL DB instance\. These parameters include the following:
-
 +  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
-
 + The `rds.force_admin_logging_level` parameter logs actions by the RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
-
 + The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5000 will write activity to the log that takes more than 5 seconds and will show "vacuum skipped" messages\. For more information on this parameter, see [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
 
 ## Working with the pgaudit Extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
@@ -722,9 +722,9 @@ For information on viewing the logs, see [Amazon RDS Database Log Files](USER_Lo
 
 ## Working with the pg\_repack Extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 
-You can use the `pg_repack` extension to remove bloat from tables and indexes\. This extension is supported on Amazon RDS for PostgreSQL versions 9\.6\.3 and later\. For more information on the `pg_repack` extension, see the [Github project documentation](https://reorg.github.io/pg_repack/)\.
+You can use the `pg_repack` extension to remove bloat from tables and indexes\. This extension is supported on Amazon RDS for PostgreSQL versions 9\.6\.3 and later\. For more information on the `pg_repack` extension, see the [GitHub project documentation](https://reorg.github.io/pg_repack/)\.
 
-**To use the `pg_repack` extension**
+**To use the pg\_repack extension**
 
 1. Install the `pg_repack` extension on your Amazon RDS for PostgreSQL DB instance by running the following command\.
 
@@ -753,18 +753,13 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
 PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, you can get a good general overview at [PostGIS Introduction](http://workshops.boundlessgeo.com/postgis-intro/introduction.html)\.
 
 You need to perform a bit of setup before you can use the PostGIS extension\. The following list shows what you need to do; each step is described in greater detail later in this section\.
-
 + Connect to the DB instance using the master user name used to create the DB instance\.
-
 + Load the PostGIS extensions\.
-
 + Transfer ownership of the extensions to the`rds_superuser` role\.
-
 + Transfer ownership of the objects to the `rds_superuser` role\.
-
 + Test the extensions\.
 
-### Step 1: Connect to the DB Instance Using the Master Username Used to Create the DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
+### Step 1: Connect to the DB Instance Using the Master User Name Used to Create the DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
 First, you connect to the DB instance using the master user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
 
@@ -780,7 +775,7 @@ select current_user;
 
 ### Step 2: Load the PostGIS Extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions"></a>
 
-Use the CREATE EXTENSION statements to load the PostGIS extensions\. You must also load the `fuzzystrmatch` extension\. You can then use the `\dn` *psql* command to list the owners of the PostGIS schemas\.
+Use the CREATE EXTENSION statements to load the PostGIS extensions\. You must also load the `` extension\. You can then use the `\dn` *psql* command to list the owners of the PostGIS schemas\.
 
 ```
 create extension postgis;
@@ -934,7 +929,10 @@ ERROR:  permission denied for relation pg_config
 
 ## Working with the orafce Extension<a name="Appendix.PostgreSQL.CommonDBATasks.orafce"></a>
 
-The `orafce` extension provides functions that are common in commercial databases, and can make it easier for you to port a commercial database to PostgreSQL\. Amazon RDS for PostgreSQL versions 9\.6\.6 and later support this extension\. For more information about `orafce`, see the [orafce project on GitHub](https://github.com/orafce/orafce)\.
+The `orafce` extension provides functions that are common in commercial databases, and can make it easier for you to port a commercial database to PostgreSQL\. Amazon RDS for PostgreSQL versions 9\.6\.6 and later support this extension\. For more information about `orafce`, see the [orafce project on GitHub](https://github.com/orafce/orafce)\. 
+
+**Note**  
+Amazon RDS for PostgreSQL doesn't support the `utl_file` package that is part of the `orafce` extension\. This is because the `utl_file` schema functions provide read and write operations on operating\-system text files, which requires superuser access to the underlying host\.
 
 **To use the orafce extension**
 
@@ -955,3 +953,86 @@ If you want to enable `orafce` on a different database in the same instance, use
    ```
 **Note**  
 If you want to see the list of owners for the oracle schema, use the `\dn` psql command\.
+
+## Accessing External Data with the postgres\_fdw Extension<a name="postgresql-commondbatasks-fdw"></a>
+
+You can access data in a table on a remote database server with the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension\. If you set up a remote connection from your PostgreSQL DB instance, access is also available to your Read Replica\. 
+
+**To use postgres\_fdw to access a remote database server**
+
+1. Install the postgres\_fdw extension\.
+
+   ```
+   CREATE EXTENSION postgres_fdw;
+   ```
+
+1. Create a foreign data server using CREATE SERVER\.
+
+   ```
+   CREATE SERVER foreign_server
+   FOREIGN DATA WRAPPER postgres_fdw
+   OPTIONS (host 'xxx.xx.xxx.xx', port '5432', dbname 'foreign_db');
+   ```
+
+1. Create a user mapping to identify the role to be used on the remote server\.
+
+   ```
+   CREATE USER MAPPING FOR local_user
+   SERVER foreign_server
+   OPTIONS (user 'foreign_user', password 'password');
+   ```
+
+1. Create a table that maps to the table on the remote server\.
+
+   ```
+   CREATE FOREIGN TABLE foreign_table (
+           id integer NOT NULL,
+           data text)
+   SERVER foreign_server
+   OPTIONS (schema_name 'some_schema', table_name 'some_table');
+   ```
+
+## Using a Custom DNS Server for Outbound Network Access<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS"></a>
+
+Amazon RDS for PostgreSQL supports outbound network access on your DB instances and allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
+
+**Topics**
++ [Enabling Custom DNS Resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable)
++ [Disabling Custom DNS Resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable)
++ [Setting Up a Custom DNS Server](#Appendix.Oracle.CommonDBATasks.CustomDNS.Setup)
+
+### Enabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable"></a>
+
+To enable the DNS resolution in your customer VPC, you need to associate a custom DB parameter group to your RDS PostgreSQL instance, turn on the parameter **rds\.custom\_dns\_resolution** by setting it to 1, and restart the DB instance for the changes to take place\. 
+
+### Disabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable"></a>
+
+In order to disable the DNS resolution in your customer VPC, you need to turn off the parameter **rds\.custom\_dns\_resolution** of your custom DB parameter group by setting it to 0, then restart the DB instance for the changes to take place\. 
+
+### Setting Up a Custom DNS Server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS.Setup"></a>
+
+After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\. 
+
+To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance, do the following: 
+
+1. From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
+**Note**  
+The `domain-name-servers` option accepts up to four values, but your Amazon RDS DB instance uses only the first value\. 
+
+1. Ensure that your DNS server can resolve all lookup queries, including public DNS names, Amazon EC2 private DNS names, and customer\-specific DNS names\. If the outbound network traffic contains any DNS lookups that your DNS server can't handle, your DNS server must have appropriate upstream DNS providers configured\. 
+
+1. Configure your DNS server to produce User Datagram Protocol \(UDP\) responses of 512 bytes or less\. 
+
+1. Configure your DNS server to produce Transmission Control Protocol \(TCP\) responses of 1024 bytes or less\. 
+
+1. Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall whitelisting to allow UDP and TCP inbound traffic on port 53\. 
+
+   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
+
+1. Configure the VPC of your Amazon RDS DB instance to allow outbound traffic over port 53\. Your VPC must have a security group that contains outbound rules that allow UDP and TCP traffic on port 53\. 
+
+   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
+
+1. The routing path between the Amazon RDS DB instance and the DNS server has to be configured correctly to allow DNS traffic\. 
+
+   If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be setup between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
