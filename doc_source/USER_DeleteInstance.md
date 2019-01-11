@@ -34,9 +34,9 @@ You can delete a DB instance using the AWS Management Console, the AWS CLI, or t
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then choose the DB instance that you want to delete\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to delete\. 
 
-1. Choose **Instance actions**, and then choose **Delete**\. 
+1. For **Actions**, choose **Delete**\. 
 
 1. For **Create final Snapshot?**, choose **Yes** or **No**\. 
 

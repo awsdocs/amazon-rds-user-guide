@@ -16,7 +16,7 @@ In the following procedure, you create an Amazon VPC, a private subnet, and a se
 
 1. In the top\-right corner of the AWS Management Console, choose the AWS Region for your VPC\. This example uses the US West \(Oregon\) region\. 
 
-1. In the upper\-left corner, choose **VPC Dashboard** and then choose **Start VPC Wizard**\. 
+1. In the upper\-left corner, choose **VPC Dashboard**, and then choose **Start VPC Wizard**\. 
 
 1. On the page **Step 1: Select a VPC Configuration**, choose **VPC with Public and Private Subnets**, and then choose **Select**\. 
 
@@ -37,7 +37,7 @@ An Amazon RDS DB instance in a VPC requires at least two private subnets or at l
 
 1. In the upper\-left corner, choose **VPC Dashboard**, choose **Subnets**, and then choose **Create Subnet**\. 
 
-1. On the **Create Subnet** page, set these values:   
+1. On the **Create Subnet** page, set the following values\.   
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 
@@ -66,7 +66,7 @@ Both private subnets must use the same route table\. In the following procedure,
 
    1. Choose **Edit**\.
 
-   1. For **Change to**, select the route table that matches your first subnet\.
+   1. For **Change to**, choose the route table that matches your first subnet\.
 
    1. Choose **Save**\.
 
@@ -80,7 +80,7 @@ A security group acts as a virtual firewall for your DB instance to control inbo
 
 1. In the upper\-left corner, choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create Security Group**\. 
 
-1. On the page **Create Security Group**, set these values:  
+1. On the page **Create Security Group**, set the following values\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 
@@ -98,7 +98,7 @@ In the following procedure, you add rules to your security group to control inbo
 
 1. At the bottom of the console, choose the **Inbound Rules** tab, and then choose **Edit**\. 
 
-1. Set these values, as shown following:  
+1. Set these values, as shown following\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
 ![\[Inbound Rules information\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-InboundRules.png)
@@ -115,7 +115,7 @@ You can use Amazon RDS to host an Oracle DB instance\. In the following procedur
 
 1. In the top\-right corner of the AWS Management Console, choose the AWS Region for your DB instance\. Choose the same AWS Region as your VPC\. 
 
-1. Choose **Instances** and then choose **Launch DB instance**\. 
+1. Choose **Databases** and then choose **Create database**\. 
 
 1. On the page **Select engine**, choose **Oracle**, and then choose **Oracle Database Enterprise Edition**\.   
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
@@ -126,14 +126,14 @@ You can use Amazon RDS to host an Oracle DB instance\. In the following procedur
 **Note**  
 For a DB instance for development and testing, you can choose **Dev/Test**\.
 
-1. On the page **Specify DB details**, shown following, set these values:  
+1. On the page **Specify DB details**, shown following, set the following values\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
 ![\[Specify DB Details form\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-DB.png)
 
 1. Choose **Next**\.
 
-1. On the page **Configure advanced settings**, shown following, set these values:  
+1. On the page **Configure advanced settings**, shown following, set the following values\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 

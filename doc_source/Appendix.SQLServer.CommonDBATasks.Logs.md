@@ -28,8 +28,3 @@ The following example requests the current error log\.
 ```
 EXEC rdsadmin.dbo.rds_read_error_log @index = 0, @type = 1;
 ```
-
-## Related Topics<a name="Appendix.SQLServer.CommonDBATasks.Logs.Related"></a>
-+ [Amazon RDS Database Log Files](USER_LogAccess.md)
-+ [Microsoft SQL Server Database Log Files](USER_LogAccess.Concepts.SQLServer.md)
-+ [Working with Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md)

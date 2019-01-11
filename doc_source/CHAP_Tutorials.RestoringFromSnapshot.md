@@ -2,7 +2,7 @@
 
 A common scenario when working with Amazon RDS is to have a DB instance that you work with occasionally but that you don't need full time\. For example, you might have a quarterly customer survey that uses an Amazon Elastic Compute Cloud \(Amazon EC2\) instance to host a customer survey website and a DB instance that is used to store the survey results\. One way to save money on such a scenario is to take a DB snapshot of the DB instance after the survey is completed, delete the DB instance, and then restore the DB instance when you need to conduct the survey again\. 
 
-In the following illustration, you can see a possible scenario where an EC2 instance hosting a customer survey website is in the same Amazon Virtual Private Cloud \(Amazon VPC\) as a DB instance that retains the customer survey data\. Note that each instance has its own security group; the EC2 instance security group allows access from the Internet while the DB instance security group allows access only to and from the EC2 instance\. When the survey is done, the EC2 instance can be stopped and the DB instance can be deleted after a final DB snapshot is created\. When you need to conduct another survey, you can restart the EC2 instance and restore the DB instance from the DB snapshot\. 
+In the following illustration, you can see a possible scenario where an EC2 instance hosting a customer survey website is in the same Amazon Virtual Private Cloud \(Amazon VPC\) as a DB instance that retains the customer survey data\. Note that each instance has its own security group; the EC2 instance security group allows access from the internet while the DB instance security group allows access only to and from the EC2 instance\. When the survey is done, the EC2 instance can be stopped and the DB instance can be deleted after a final DB snapshot is created\. When you need to conduct another survey, you can restart the EC2 instance and restore the DB instance from the DB snapshot\. 
 
 ![\[Tutorial VPC use\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring1.png)
 
@@ -32,14 +32,14 @@ You can use the procedure following to restore from a snapshot in the AWS Manage
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Select the DB snapshot that you want to restore from\. 
+1. Choose the DB snapshot that you want to restore from\. 
 
-1. Choose **Snapshot Actions**, and then choose **Restore Snapshot**\.  
+1. For **Actions**, choose **Restore Snapshot**\.  
 ![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring2.png)
 
    The **Restore DB Instance** page appears\.
 
-1. For **DB Instance Identifier** under **Settings**, type the name you want to use for the restored DB instance\. If you are restoring from a DB instance that you deleted after you made the DB snapshot, you can use the name of that DB instance\.
+1. For **DB Instance Identifier** under **Settings**, enter the name that you want to use for the restored DB instance\. If you are restoring from a DB instance that you deleted after you made the DB snapshot, you can use the name of that DB instance\.
 
 1. Choose **Restore DB Instance**\.
 
@@ -57,24 +57,21 @@ You can modify other settings on the restored DB instance\. For example, you can
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance created when you restored from the DB snapshot to display its details\. Scroll to the **Connect** section\. The security group assigned to the DB instance might not allow access\. If there are no inbound rules, no permissions exist that allow inbound access\.   
+1. Choose the name of the DB instance created when you restored from the DB snapshot to display its details\. Choose the **Connectivity** tab\. The security group assigned to the DB instance might not allow access\. If there are no inbound rules, no permissions exist that allow inbound access\.   
 ![\[Restored snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring25.png)
 
-1. Choose **Instance actions**, and then choose **Modify**\. 
+1. Choose **Modify**\. 
 
-1. In the **Network & Security** section, select the security group that you want to use for your DB instance\. If you need to add rules to create a new security group to use with an EC2 instance, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1) for more information\. 
+1. In the **Network & Security** section, choose the security group that you want to use for your DB instance\. If you need to add rules to create a new security group to use with an EC2 instance, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1) for more information\. 
 
-   You can also remove a security group by clicking the `X` associated with it\.  
-![\[Select security group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring3.png)
+   You can also remove a security group by choosing the **X** associated with it\.  
+![\[Choose security group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring3.png)
 
 1. Choose **Continue**, and then choose **Apply immediately**\. 
 
 1. Choose **Modify DB Instance**\. 
 
-   After the instance status is available, click the DB instance name to display its details\. Scroll to the **Details** section, and confirm that the new security group has been applied, making the DB instance authorized for access\.   
-![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring4.png)
-
-## Related Topics<a name="CHAP_Tutorials.RestoringFromSnapshot.Related"></a>
-+ [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
+   After the instance status is available, choose the DB instance name to display its details\. Choose the **Connectivity** tab, and confirm that the new security group has been applied, making the DB instance authorized for access\.   
+![\[Console restore snapshot DB\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring4.png)

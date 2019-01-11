@@ -18,7 +18,7 @@ Use the following procedure to create a VPC with both public and private subnets
 
 1. In the top\-right corner of the AWS Management Console, choose the region to create your VPC in\. This example uses the US West \(Oregon\) region\.
 
-1. In the upper\-left corner, choose **VPC Dashboard**\. To begin creating a VPC, choose **Start VPC Wizard**\.
+1. In the upper\-left corner, choose **VPC Dashboard**\. To begin creating a VPC, choose **Launch VPC Wizard**\.
 
 1. On the **Step 1: Select a VPC Configuration** page, choose **VPC with Public and Private Subnets**, and then choose **Select**\.
 
@@ -52,9 +52,9 @@ You must have either two private subnets or two public subnets available to crea
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. To add the second private subnet to your VPC, choose **VPC Dashboard**, choose **Subnets**, and then choose **Create Subnet**\.
+1. To add the second private subnet to your VPC, choose **VPC Dashboard**, choose **Subnets**, and then choose **Create subnet**\.
 
-1. On the **Create Subnet** page, set these values: 
+1. On the **Create subnet** page, set these values: 
    + **Name tag:** `Tutorial private 2`
    + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
    + **Availability Zone:** `us-west-2b` 
@@ -62,7 +62,7 @@ You must have either two private subnets or two public subnets available to crea
 Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
    + **IPv4 CIDR block:** `10.0.2.0/24`
 
-1. When you're finished, choose **Yes, Create**\.
+1. When you're finished, choose **Create**\. Next, choose **Close** on the confirmation page\.
 
 1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, `Tutorial private 1`\. 
 
@@ -72,9 +72,7 @@ Choose an Availability Zone that is different from the one that you chose for th
 
 1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route Table** tab\. 
 
-1. If the current route table is not the same as the route table for the first private subnet, choose **Edit**\. For **Change to**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\.
-
-1. To save your selection, choose **Save**\. 
+1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route Table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
 
 ## Create a VPC Security Group for a Public Web Server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 
@@ -84,15 +82,16 @@ Next you create a security group for public access\. To connect to public instan
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create Security Group**\. 
+1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create security group**\. 
 
-1. On the **Create Security Group** page, set these values: 
-   + **Name tag:** `tutorial-securitygroup`
-   + **Group name:** `tutorial-securitygroup`
+1. On the **Create security group** page, set these values: 
+   + **Security group name:** `tutorial-securitygroup`
    + **Description:** `Tutorial Security Group`
    + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc` 
 
-1. To create the security group, choose **Yes, Create**\.
+1. To create the security group, choose **Create**\. Next, choose **Close** on the confirmation page\.
+
+   Note the security group ID because you will need it later in this tutorial\.
 
 **To add inbound rules to the security group**
 
@@ -106,19 +105,21 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
 
 1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose the `tutorial-securitygroup` security group that you created in the previous procedure\.
 
-1. Choose the **Inbound Rules** tab, and then choose **Edit**\.
+1. Under the list of security groups, choose the **Inbound Rules** tab, and then choose **Edit rules**\.
+
+1. On the **Edit inbound rules** page, choose **Add Rule**\.
 
 1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your EC2 instance\. If you do this, you can connect to your EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
-   + **Type:** `SSH (22)`
+   + **Type:** `SSH`
    + **Source:** The IP address or range from Step 1, for example: `203.0.113.25/32`\.
 
-1. Choose **Add another rule**\.
+1. Choose **Add rule**\.
 
 1. Set the following values for your new inbound rule to allow HTTP access to your web server\. 
-   + **Type:** `HTTP (80)`
+   + **Type:** `HTTP`
    + **Source:** `0.0.0.0/0`\.
 
-1. To save your settings, choose **Save**\.
+1. To save your settings, choose **Save rules**\. Next, choose **Close** on the confirmation page\.
 
 ## Create a VPC Security Group for a Private Amazon RDS DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
 
@@ -128,15 +129,14 @@ To keep your Amazon RDS DB instance private, create a second security group for 
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create Security Group**\.
+1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose **Create security group**\.
 
-1. On the **Create Security Group** page, set these values:
-   + **Name tag:** `tutorial-db-securitygroup`
-   + **Group name:** `tutorial-db-securitygroup`
+1. On the **Create security group** page, set these values:
+   + **Security group name:** `tutorial-db-securitygroup`
    + **Description:** `Tutorial DB Instance Security Group`
    + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
 
-1. To create the security group, choose **Yes, Create**\.
+1. To create the security group, choose **Create**\. Next, choose **Close** on the confirmation page\.
 
 **To add inbound rules to the security group**
 
@@ -144,13 +144,15 @@ To keep your Amazon RDS DB instance private, create a second security group for 
 
 1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose the `tutorial-db-securitygroup` security group that you created in the previous procedure\.
 
-1. Choose the **Inbound Rules** tab, and then choose **Edit**\.
+1. Under the list of security groups, choose the **Inbound Rules** tab, and then choose **Edit rules**\.
+
+1. On the **Edit inbound rules** page, choose **Add Rule**\.
 
 1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
-   + **Type:** `MySQL/Aurora (3306)`
+   + **Type:** `MySQL/Aurora`
    + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
 
-1. To save your settings, choose **Save**\.
+1. To save your settings, choose **Save rules**\. Next, choose **Close** on the confirmation page\.
 
 ## Create a DB Subnet Group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
 
@@ -169,8 +171,8 @@ A DB subnet group is a collection of subnets that you create in a VPC and that y
    + **Description:** `Tutorial DB Subnet Group`
    + **VPC:** `tutorial-vpc (vpc-identifier)` 
 
-1. In the **Add subnets** section, click the **Add all the subnets related to this VPC** link\. 
+1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.
 
 1. Choose **Create**\. 
 
-    Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\. 
+    Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\.

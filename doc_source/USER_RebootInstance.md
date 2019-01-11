@@ -4,9 +4,9 @@ You might need to reboot your DB instance, usually for maintenance reasons\. For
 
 Rebooting a DB instance restarts the database engine service\. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to *rebooting*\. 
 
- If the Amazon RDS instance is configured for Multi\-AZ, the reboot can be conducted with a failover\. An Amazon RDS event is created when the reboot is completed\. If your DB instance is a Multi\-AZ deployment, you can force a failover from one availability zone to another when you reboot\. When you force a failover of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone, and updates the DNS record for the DB instance to point to the standby DB instance\. As a result, you need to clean up and re\-establish any existing connections to your DB instance\. Rebooting with failover is beneficial when you want to simulate a failure of a DB instance for testing, or restore operations to the original AZ after a failover occurs\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
+ If the Amazon RDS instance is configured for Multi\-AZ, you can perform the reboot with a failover\. An Amazon RDS event is created when the reboot is completed\. If your DB instance is a Multi\-AZ deployment, you can force a failover from one Availability Zone \(AZ\) to another when you reboot\. When you force a failover of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone, and updates the DNS record for the DB instance to point to the standby DB instance\. As a result, you need to clean up and re\-establish any existing connections to your DB instance\. Rebooting with failover is beneficial when you want to simulate a failure of a DB instance for testing, or restore operations to the original AZ after a failover occurs\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
 
-You can't reboot your DB instance if it is not in the "Available" state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
+You can't reboot your DB instance if it is not in the available state\. Your database can be unavailable for several reasons, such as an in\-progress backup, a previously requested modification, or a maintenance\-window action\. 
 
 The time required to reboot your DB instance depends on the crash recovery process of your specific database engine\. To improve the reboot time, we recommend that you reduce database activity as much as possible during the reboot process\. Reducing database activity reduces rollback activity for in\-transit transactions\. 
 
@@ -16,13 +16,13 @@ The time required to reboot your DB instance depends on the crash recovery proce
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to reboot\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to reboot\. 
 
-1. Choose **Instance actions** and then choose **Reboot**\. 
+1. For **Actions**, choose **Reboot**\. 
 
    The **Reboot DB Instance** page appears\.
 
-1. \(Optional\) Select **Reboot with failover?** to force a failover from one AZ to another\. 
+1. \(Optional\) Choose **Reboot with failover?** to force a failover from one AZ to another\. 
 
 1. Choose **Reboot** to reboot your DB instance\. 
 

@@ -19,7 +19,3 @@ When working with a SQL Server DB instance, you can run scripts to modify a newl
 + [Using SQL Server Agent](Appendix.SQLServer.CommonDBATasks.Agent.md)
 + [Working with Microsoft SQL Server Logs](Appendix.SQLServer.CommonDBATasks.Logs.md)
 + [Working with Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md)
-+ [Related Topics](#Appendix.SQLServer.CommonDBATasks.Related)
-
-## Related Topics<a name="Appendix.SQLServer.CommonDBATasks.Related"></a>
-+ [Local Time Zone for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.TimeZone)

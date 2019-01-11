@@ -35,7 +35,7 @@ You can get the ARN of an RDS resource by using the AWS Management Console, AWS 
 
 ### AWS Management Console<a name="USER_Tagging.ARN.CON"></a>
 
-To get an ARN from the AWS Management Console, navigate to the resource you want an ARN for, and view the details for that resource\. For example, you can get the ARN for a DB instance from the DB instance details as shown following\. 
+To get an ARN from the AWS Management Console, navigate to the resource you want an ARN for, and view the details for that resource\. For example, you can get the ARN for a DB instance from the **Configuration** tab of the DB instance details, as shown following\. 
 
 ![\[DB instance ARN\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DB-instance-arn.png)
 

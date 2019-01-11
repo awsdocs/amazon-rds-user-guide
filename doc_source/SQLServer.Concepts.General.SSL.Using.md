@@ -18,15 +18,15 @@ If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `r
 
 **To force all connections to your DB instance to use SSL**
 
-1. Determine the parameter group that is attached to your DB instance\. 
+1. Determine the parameter group that is attached to your DB instance: 
 
    1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-   1. In the top right corner of the Amazon RDS console, select the region of your DB instance\. 
+   1. In the top right corner of the Amazon RDS console, choose the AWS Region of your DB instance\. 
 
-   1. In the navigation pane, choose **DB Instances**, and then select your DB instance\. 
+   1. In the navigation pane, choose **Databases**, and then choose the name of your DB instance to show its details\. 
 
-   1. Choose the **Details** tab\. Find the **Parameter Group** field in the **Configuration Details** section\.  
+   1. Choose the **Configuration** tab\. Find the **Parameter group** in the section\.  
 
 1. If necessary, create a new parameter group\. If your DB instance uses the default parameter group, you must create a new parameter group\. If your DB instance uses a nondefault parameter group, you can choose to edit the existing parameter group or to create a new parameter group\. If you edit an existing parameter group, the change affects all DB instances that use that parameter group\. 
 
@@ -129,7 +129,3 @@ To enable SSL encryption for clients that connect using JDBC, you might need to 
    ```
    select ENCRYPT_OPTION from SYS.DM_EXEC_CONNECTIONS where SESSION_ID = @@SPID
    ```
-
-## Related Topics<a name="TODO.Related"></a>
-+ [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-+ [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)

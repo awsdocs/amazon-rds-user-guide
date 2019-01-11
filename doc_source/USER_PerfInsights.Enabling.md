@@ -32,9 +32,9 @@ You can modify a DB instance to enable Performance Insights using the console\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Instances**\.
+1. Choose **Databases**\.
 
-1. Choose the DB instance that you want to modify, and choose **Modify** in **Instance actions**\.
+1. Choose the DB instance that you want to modify, and choose **Modify**\.
 
 1. In the **Performance Insights** section, choose **Enable Performance Insights**\.
 

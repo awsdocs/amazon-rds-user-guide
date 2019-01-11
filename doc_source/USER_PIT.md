@@ -16,19 +16,19 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Select the DB instance that you want to restore\.
+1. Choose the DB instance that you want to restore\.
 
-1. Choose **Instance actions**, and then choose **Restore to point in time**\.
+1. For **Actions**, choose **Restore to point in time**\.
 
    The **Launch DB Instance** window appears\.
 
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 
-   If you chose Custom, enter the date and time that you want to restore the instance to\.
+   If you chose **Custom**, enter the date and time that you want to restore the instance to\.
 
-1. Type the name of the restored DB instance in the **DB instance identifier** box, and complete the other options\.
+1. For **DB instance identifier**, enter the name of the restored DB instance, and then complete the other options\.
 
 1. Choose **Launch DB Instance**\.
 

@@ -46,7 +46,7 @@ Of course, this might not be possible or practical\. If you are unable to stop a
 
 If you plan to load data into a new DB instance that contains no data, you can skip this step\. Otherwise, creating a DB snapshot of your DB instance allows you to restore the DB instance to the point just before the load, if it becomes necessary\. As previously mentioned, when you initiate a DB snapshot, I/O operations to your database instance are suspended for a few minutes while the database is backed up\. 
 
-In the example below, we use the AWS CLI `create-db-snapshot` command to create a DB Snapshot of our AcmeRDS instance and give the DB snapshot the identifier "preload"\.
+In the example below, we use the AWS CLI `create-db-snapshot` command to create a DB snapshot of our AcmeRDS instance and give the DB snapshot the identifier "preload"\.
 
 For Linux, OS X, or Unix:
 
@@ -86,7 +86,7 @@ aws rds restore-db-instance-from-db-snapshot ^
     --db-snapshot-identifier preload
 ```
 
-To reuse the existing endpoint, we must first delete the database instance and then give the restored database the same identifier:
+To reuse the existing endpoint, we must first delete the database instance and then give the restored database the same identifier\.
 
 For Linux, OS X, or Unix:
 

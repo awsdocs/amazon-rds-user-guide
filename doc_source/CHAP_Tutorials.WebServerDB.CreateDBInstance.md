@@ -9,9 +9,9 @@ Before you begin this step, you must have a VPC with both public and private sub
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top\-right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. This example uses the US West \(Oregon\) region\.
+1. In the top\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. This example uses the US West \(Oregon\) region\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -38,13 +38,13 @@ Before you begin this step, you must have a VPC with both public and private sub
 1. Choose **Next** and set the following values in the **Configure advanced settings** page:
    + **Virtual Private Cloud \(VPC\):** Choose an existing VPC with both public and private subnets, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)
 **Note**  
-The VPC must have subnets in different availability zones\.
+The VPC must have subnets in different Availability Zones\.
    + **Subnet group:** The DB subnet group for the VPC, such as the `tutorial-db-subnet-group` created in [Create a DB Subnet Group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)
-   + **Public accessibility:** `No`
-   + **Availability zone:** `No Preference`
-   + **VPC security groups:** Choose an existing VPC security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)
+   + **Public accessibility:** **No**
+   + **Availability zone:** **No Preference**
+   + **VPC security groups:** Choose an existing VPC security group that is configured for private access, such as the `tutorial-db-securitygroup` created in [ Create a VPC Security Group for a Private Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)\.
 
-     Remove other security groups, such as the default security group, by clicking the `X` associated with it\.
+     Remove other security groups, such as the default security group, by choosing the **X** associated with each\.
    + **Database name:** `sample`
 
    Leave the default settings for the other options\.  
@@ -54,7 +54,7 @@ The VPC must have subnets in different availability zones\.
 
 1. On the next page, choose **View DB instances details** to view your RDS MySQL DB instance\.
 
-1. Wait for the **DB instance status** of your new DB instance to show as `available`\. Then scroll to the **Connect** section, shown following\.  
+1. Wait for the **DB instance status** of your new DB instance to show as **available**\. Then scroll to the **Connect** section, shown following\.  
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_10.png)
 
    Make note of the endpoint and port for your DB instance\. You will use this information to connect your web server to your RDS DB instance\.

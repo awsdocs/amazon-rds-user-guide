@@ -13,7 +13,7 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 1. In the top right corner of the AWS Management Console, select the AWS Region where you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -118,8 +118,3 @@ To create a PostgreSQL DB instance, use the Amazon RDS API[https://docs.aws.amaz
 19.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
 20.     &X-Amz-Signature=60d520ca0576c191b9eac8dbfe5617ebb6a6a9f3994d96437a102c0c2c80f88d
 ```
-
-## Related Topics<a name="USER_CreatePostgreSQLInstance.related"></a>
-+  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-+  [DB Instance Class](Concepts.DBInstanceClass.md) 
-+  [Deleting a DB Instance](USER_DeleteInstance.md) 

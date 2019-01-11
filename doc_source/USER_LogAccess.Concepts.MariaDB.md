@@ -44,7 +44,7 @@ For more information about the slow query and general logs, go to the following 
 + [Slow Query Log](http://mariadb.com/kb/en/mariadb/slow-query-log/)
 + [General Query Log](http://mariadb.com/kb/en/mariadb/general-query-log/)
 
-## Publishing MariaDB Logs to CloudWatch Logs<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs"></a>
+## Publishing MariaDB Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs"></a>
 
 You can configure your Amazon RDS MariaDB DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
@@ -66,20 +66,22 @@ The error log is enabled by default\. The following table summarizes the require
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
 
-1. For **Instance actions**, choose **Modify**\.
+1. Choose **Modify**\.
 
-1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
+1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
 ### AWS CLI<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.CLI"></a>
 
- You can publish a MariaDB logs with the AWS CLI\. You can call the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
+You can publish a MariaDB logs with the AWS CLI\. You can call the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier`
 + `--cloudwatch-logs-export-configuration`
-+ `--apply-immediately`
+
+**Note**  
+A change to the `--cloudwatch-logs-export-configuration` option is always applied to the DB instance immediately\. Therefore, the `--apply-immediately` and `--no-apply-immediately` options have no effect\.
 
 You can also publish MariaDB logs by calling the following AWS CLI commands: 
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
@@ -102,16 +104,14 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' \
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}'
 ```
 For Windows:  
 
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' ^
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}'
 ```
 
 **Example**  
@@ -140,7 +140,9 @@ For Windows:
 You can publish MariaDB logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
 + `DBInstanceIdentifier`
 + `CloudwatchLogsExportConfiguration`
-+ `ApplyImmediately`
+
+**Note**  
+A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
 You can also publish MariaDB logs by calling the following RDS API actions: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
@@ -191,13 +193,13 @@ Statement\-based replication can cause inconsistencies between the source DB ins
 
 1. In the navigation pane, choose **Parameter groups**\.
 
-1. Choose the parameter group used by the DB instance you want to modify\.
+1. Choose the parameter group that is used by the DB instance that you want to modify\.
 
    You can't modify a default parameter group\. If the DB instance is using a default parameter group, create a new parameter group and associate it with the DB instance\.
 
    For more information on DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-1. From **Parameter group actions**, choose **Edit**\.
+1. For **Parameter group actions**, choose **Edit**\.
 
 1. Set the `binlog_format` parameter to the binary logging format of your choice \(**ROW**, **STATEMENT**, or **MIXED**\)\.
 

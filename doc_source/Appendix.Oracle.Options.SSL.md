@@ -54,7 +54,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
    The path to your Oracle home directory depends on your installation\. The following example sets the `ORACLE_HOME` environment variable\.
 
    ```
-   prompt>export ORACLE_HOME=/home/user/app/user/product/12.1.0/dbhome_1 
+   prompt>export ORACLE_HOME=/home/user/app/user/product/12.1.0/dbhome_1
    ```
 
    For information about setting Oracle environment variables, see [SQL\*Plus Environment Variables](http://docs.oracle.com/database/121/SQPUG/ch_two.htm#SQPUG331) in the Oracle documentation, and also see the Oracle installation guide for your operating system\.

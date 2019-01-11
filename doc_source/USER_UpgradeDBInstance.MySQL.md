@@ -110,19 +110,19 @@ If your MySQL DB instance is currently in use with a production application, you
 
 1. Create a Read Replica of your MySQL 5\.5 DB instance\. This process creates an upgradable copy of your database\.
 
-   1. On the console, choose **Instances**, and then choose the DB instance that you want to upgrade\.
+   1. On the console, choose **Databases**, and then choose the DB instance that you want to upgrade\.
 
-   1. Choose **Instance actions**, and then choose **Create read replica**\.
+   1. For **Actions**, choose **Create read replica**\.
 
    1. Provide a value for **DB instance identifier** for your Read Replica and ensure that the **DB instance class** and other settings match your MySQL 5\.5 DB instance\.
 
    1. Choose **Create read replica**\.
 
-1. When the Read Replica has been created and **Status** shows **available**, upgrade the Read Replica to MySQL 5\.6\. 
+1. When the Read Replica has been created and **Status** shows **available**, upgrade the Read Replica to MySQL 5\.6:
 
-   1. On the console, choose **Instances**, and then choose the Read Replica that you just created\.
+   1. On the console, choose **Databases**, and then choose the Read Replica that you just created\.
 
-   1. Choose **Instance actions**, and then choose **Modify**\.
+   1. Choose **Modify**\.
 
    1. For **DB engine version**, choose the MySQL 5\.6 version to upgrade to, and then choose **Continue**\.
 
@@ -134,12 +134,12 @@ If your MySQL DB instance is currently in use with a production application, you
 
 1. Make your MySQL 5\.6 Read Replica a master DB instance\. 
 **Important**  
-When you promote your MySQL 5\.6 Read Replica to a standalone, single\-AZ DB instance, it will no longer be a replication slave to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 Read Replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
-In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you perform all necessary data definition language \(DDL\) operations, such as creating indexes, on the MySQL 5\.6 Read Replica\. This approach avoids negative effects on the performance of the MySQL 5\.6 Read Replica after it has been promoted\. To promote a Read Replica, use this procedure:
+When you promote your MySQL 5\.6 Read Replica to a standalone, single\-AZ DB instance, it no longer is a replication replica to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 Read Replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
+In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you perform all necessary data definition language \(DDL\) operations, such as creating indexes, on the MySQL 5\.6 Read Replica\. This approach avoids negative effects on the performance of the MySQL 5\.6 Read Replica after it has been promoted\. To promote a Read Replica, use the following procedure\.
 
-   1. On the console, choose **Instances**, and then choose the Read Replica that you just upgraded\.
+   1. On the console, choose **Databases**, and then choose the Read Replica that you just upgraded\.
 
-   1. Choose **Instance actions**, and then choose **Promote read replica**\.
+   1. Choose **Actions**, and then choose **Promote read replica**\.
 
    1. Choose **Yes** to enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 

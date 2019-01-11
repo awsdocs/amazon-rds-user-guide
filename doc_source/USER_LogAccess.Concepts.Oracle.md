@@ -143,9 +143,9 @@ Amazon RDS publishes each Oracle database log as a separate database stream in t
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then choose the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
 
-1. For **Instance actions**, choose **Modify**\.
+1. Choose **Modify**\.
 
 1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
@@ -156,7 +156,9 @@ Amazon RDS publishes each Oracle database log as a separate database stream in t
 To publish Oracle logs, you can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier`
 + `--cloudwatch-logs-export-configuration`
-+ `--apply-immediately`
+
+**Note**  
+A change to the `--cloudwatch-logs-export-configuration` option is always applied to the DB instance immediately\. Therefore, the `--apply-immediately` and `--no-apply-immediately` options have no effect\.
 
 You can also publish Oracle logs using the following commands: 
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
@@ -192,16 +194,14 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}' \
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
 ```
 For Windows:  
 
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}' ^
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
 ```
 
 **Example**  
@@ -211,16 +211,14 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}' \
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
 ```
 For Windows:  
 
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}' ^
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
 ```
 
 ### RDS API<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs.API"></a>
@@ -228,7 +226,9 @@ For Windows:
 You can publish Oracle DB logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
 + `DBInstanceIdentifier`
 + `CloudwatchLogsExportConfiguration`
-+ `ApplyImmediately`
+
+**Note**  
+A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
 You can also publish Oracle logs by calling the following RDS API operations: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)

@@ -4,20 +4,20 @@ Once Amazon RDS provisions your DB instance, you can use any standard MariaDB cl
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\.
 
-To find the endpoint for a MariaDB instance in the AWS Management Console:
+**To find the endpoint for a MariaDB instance in the AWS Management Console**
 
-1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
-1. Click the MariaDB DB instance name to display its details\. 
+1. Choose the MariaDB DB instance name to display its details\. 
 
-1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MariaDB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
 
 If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com:3306`, then you specify the following values in a MariaDB connection string:
 + For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`
 + For port, specify `3306`
 
-You can connect to an Amazon RDS MariaDB DB instance by using tools like the `mysql` command line utility\. For more information on using the `mysql` utility, go to [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is HeidiSQL; for more information, go to the [ Download HeidiSQL](http://www.heidisql.com/download.php) page\.
+You can connect to an Amazon RDS MariaDB DB instance by using tools like the `mysql` command line utility\. For more information on using the `mysql` utility, go to [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is HeidiSQL\. For more information, see the [ Download HeidiSQL](http://www.heidisql.com/download.php) page\.
 
 Two common causes of connection failures to a new DB instance are the following:
 + The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the MariaDB application or utility is running\. If the DB instance was created in an Amazon VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
@@ -33,7 +33,7 @@ To connect to a DB instance using the mysql utility, type the following command 
 mysql -h <endpoint> -P 3306 -u <mymasteruser>
 ```
 
-After you enter the password for the user, you will see output similar to the following\.
+After you enter the password for the user, you see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -59,7 +59,7 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
 1.  Download a root certificate that works for all regions from [here](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\.
 
-1. Type the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
+1. Enter the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
 
    ```
    mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem 
@@ -71,9 +71,9 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
    mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert 
    ```
 
-1. Type the master user password when prompted\.
+1. Enter the master user password when prompted\.
 
-You will see output similar to the following\.
+You should see output similar to the following\.
 
 ```
 Welcome to the MySQL monitor.  Commands end with ; or \g.

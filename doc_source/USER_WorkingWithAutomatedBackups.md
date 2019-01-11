@@ -56,15 +56,15 @@ In this example, you disable automated backups for a DB instance named *mydbinst
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
 
-1. Choose **Instance Actions**, and then choose **Modify**\. The **Modify DB Instance** window appears\.
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
-1. For **Backup Retention Period**, choose **0**\. 
-
-1. Select **Apply Immediately**\.
+1. For **Backup Retention Period**, choose **0 days**\. 
 
 1. Choose **Continue**\. 
+
+1. Choose **Apply Immediately**\.
 
 1. On the confirmation page, choose **Modify DB Instance** to save your changes and disable automated backups\. 
 
@@ -129,15 +129,15 @@ In this example, you enable automated backups for a DB instance named *mydbinsta
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
 
-1. Choose **Instance Actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
-1. For **Backup Retention Period**, choose a positive non\-zero value, for example 3\. 
-
-1. Select **Apply Immediately**\.
+1. For **Backup Retention Period**, choose a positive nonzero value, for example 3 days\. 
 
 1. Choose **Continue**\. 
+
+1. Choose **Apply Immediately**\.
 
 1. On the confirmation page, choose **Modify DB Instance** to save your changes and enable automated backups\. 
 
@@ -210,7 +210,7 @@ You can restore or remove retained automated backups using the AWS Management Co
 
 The system snapshots and transaction logs in a retained automated backup expire the same way that they expire for the source DB instance\. Because there are no new snapshots or logs created for this instance, the retained automated backups eventually expire completely\. Effectively, they live as long their last system snapshot would have done, based on the settings for retention period the source instance had when you deleted it\. Retained automated backups are removed by the system after their last system snapshot expires\.
 
-You can remove a retained automated backup in the same way that you can delete a DB instance\. You can remove retained automated backups using the console or the RDS API operation`DeleteDBInstanceAutomatedBackup`\. 
+You can remove a retained automated backup in the same way that you can delete a DB instance\. You can remove retained automated backups using the console or the RDS API operation `DeleteDBInstanceAutomatedBackup`\. 
 
 Final snapshots are independent of retained automated backups\. We strongly suggest that you take a final snapshot even if you retain automated backups, because the retained automated backups eventually expire\. The final snapshot doesn't expire\.
 

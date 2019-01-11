@@ -31,17 +31,17 @@ For information about promoting a Read Replica, see [Promoting a Read Replica to
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Select the DB instance you want to rename\.
+1. Choose the DB instance that you want to rename\.
 
-1. Choose **Instance actions**, and then choose **Modify**\. 
+1. Choose **Modify**\.
 
-1. In **Settings**, enter a new name in the **DB instance identifier** box\.
+1. In **Settings**, enter a new name for **DB instance identifier**\.
 
 1. Choose **Continue**\.
 
-1. To apply the changes immediately, select **Apply immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
+1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 
@@ -85,10 +85,3 @@ To rename a DB instance, call Amazon RDS API function [https://docs.aws.amazon.c
  9. 	&AWSAccessKeyId=<AWS Access Key ID>
 10. 	&Signature=<Signature>
 ```
-
-## Related Topics<a name="USER_RenameInstance.Related"></a>
-+ [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-+ [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-+ [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-+ [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-+ [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)

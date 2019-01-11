@@ -12,11 +12,11 @@ You can create a DB snapshot using the AWS Management Console, the AWS CLI, or t
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. In the list of DB instances, select the DB instance for which you want to take a snapshot\.
+1. In the list of DB instances, choose the DB instance for which you want to take a snapshot\.
 
-1. Choose **Instance actions**, and then choose **Take snapshot**\.
+1. For **Actions**, choose **Take snapshot**\.
 
    The **Take DB Snapshot** window appears\.
 
@@ -52,5 +52,5 @@ For Windows:
 ## API<a name="USER_CreateSnapshot.API"></a>
 
 When you create a DB snapshot using the Amazon RDS API, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. You can do this by using the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) command with the following parameters:
-+ DBInstanceIdentifier
-+ DBSnapshotIdentifier
++ `DBInstanceIdentifier`
++ `DBSnapshotIdentifier`

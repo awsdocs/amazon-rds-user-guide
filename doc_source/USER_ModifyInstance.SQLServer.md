@@ -8,19 +8,19 @@ After you modify your DB instance settings, you can apply the changes immediatel
 
 ## AWS Management Console<a name="USER_ModifyInstance.SQLServer.Console"></a>
 
-**To modify an SQL Server DB Instance**
+**To modify an SQL Server DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
 
-1. Choose **Instance Actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
 1. Change any of the settings that you want\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_ModifyInstance.SQLServer.Settings)\. 
 
-1. To apply the changes immediately, select **Apply Immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
-
 1. When all the changes are as you want them, choose **Continue**\. 
+
+1. To apply the changes immediately, choose **Apply Immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 

@@ -69,11 +69,11 @@ Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\.
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
 
-1. For **Instance actions**, choose **Modify**\.
+1. Choose **Modify**\.
 
-1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
+1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
@@ -82,7 +82,9 @@ Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.
  You can publish MySQL logs with the AWS CLI\. You can call the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier`
 + `--cloudwatch-logs-export-configuration`
-+ `--apply-immediately`
+
+**Note**  
+A change to the `--cloudwatch-logs-export-configuration` option is always applied to the DB instance immediately\. Therefore, the `--apply-immediately` and `--no-apply-immediately` options have no effect\.
 
 You can also publish MySQL logs by calling the following AWS CLI commands: 
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
@@ -105,16 +107,14 @@ For Linux, OS X, or Unix:
 ```
 1. aws rds modify-db-instance \
 2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' \
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}'
 ```
 For Windows:  
 
 ```
 1. aws rds modify-db-instance ^
 2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}' ^
-4.     --apply-immediately
+3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["audit","error","general","slowquery"]}'
 ```
 
 **Example**  
@@ -143,7 +143,9 @@ For Windows:
 You can publish MySQL logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
 + `DBInstanceIdentifier`
 + `CloudwatchLogsExportConfiguration`
-+ `ApplyImmediately`
+
+**Note**  
+A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
 You can also publish MySQL logs by calling the following RDS API actions: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)

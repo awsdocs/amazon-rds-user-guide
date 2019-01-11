@@ -5,19 +5,19 @@ The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB i
 **Important**  
 You must have an AWS account before you can create a DB instance\. If you don't have an AWS account, open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\. 
 
-In this topic you create a sample SQL Server DB instance\. You then connect to the DB instance and run a simple query\. Finally you delete the sample DB instance\. 
+In this topic, you create a sample SQL Server DB instance\. You then connect to the DB instance and run a simple query\. Finally you delete the sample DB instance\. 
 
 ## Creating a Sample SQL Server DB Instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
 
-In this procedure you use the AWS Management Console to create a sample DB instance\. Since you are only creating a sample DB instance, each setting is not fully explained\. For a full explanation of each setting, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
+In this procedure you use the AWS Management Console to create a sample DB instance\. Because you are only creating a sample DB instance, each setting is not fully explained\. For a full explanation of each setting, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
 
 **To create a DB instance running the Microsoft SQL Server DB engine**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the Amazon RDS console, choose the region in which you want to create the DB instance\. 
+1. In the upper\-right corner of the Amazon RDS console, choose the AW Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose **Create database**\. 
 
@@ -29,7 +29,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
    The **Specify DB Details** page appears\.   
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch02.png)
 
-1. On the **Specify DB Details** page, provide the information for your DB instance as shown in the following table:   
+1. On the **Specify DB Details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
@@ -38,7 +38,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
    The **Configure Advanced Settings** page appears\.   
 ![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch03.png)
 
-1. On the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table:   
+1. On the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
@@ -57,12 +57,12 @@ In this procedure you connect to your sample DB instance by using Microsoft SQL 
 
 1. Find the DNS name and port number for your DB Instance\. 
 
-   1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
-   1. Choose the row for your SQL Server DB instance to display the summary information for the instance\.   
+   1. Choose the name of your SQL Server DB instance to display the summary information for the DB instance\.   
 ![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
 
-   1. Copy the endpoint\. The **Endpoint** field has two parts separated by a colon \(:\)\. The part before the colon is the DNS name for the instance, the part following the colon is the port number\. Copy both parts\. 
+   1. On the **Connectivity** tab, copy the endpoint\. The **Endpoint** field has two parts separated by a colon \(:\)\. The part before the colon is the DNS name for the instance, and the part following the colon is the port number\. Copy both parts\. 
 
 1. Start SQL Server Management Studio\. 
 
@@ -73,11 +73,11 @@ In this procedure you connect to your sample DB instance by using Microsoft SQL 
 
    1. For **Server type**, choose **Database Engine**\. 
 
-   1. For **Server name**, type or paste the DNS name and port number of your sample DB Instance, separated by a comma\. 
+   1. For **Server name**, enter the DNS name and port number of your sample DB instance, separated by a comma\. 
 **Important**  
 Change the colon between the DNS name and port number to a comma\. 
 
-      For example, your server name should look like the following: 
+      For example, your server name should look like the following\.
 
       ```
       sample-instance.cg034hpkmmjt.us-east-1.rds.amazonaws.com,1433
@@ -85,9 +85,9 @@ Change the colon between the DNS name and port number to a comma\.
 
    1. For **Authentication**, choose **SQL Server Authentication**\. 
 
-   1. For **Login**, type the master user name you chose earlier for your sample DB instance\. 
+   1. For **Login**, enter the master user name that you chose earlier for your sample DB instance\. 
 
-   1. For **Password**, type the password you chose earlier for your sample DB instance\. 
+   1. For **Password**, enter the password that you chose earlier for your sample DB instance\. 
 
 1. Choose **Connect**\. 
 
@@ -112,7 +112,7 @@ In this procedure you continue the previous procedure and explore your sample DB
 
    1. In SSMS, on the **File** menu point to **New** and then choose **Query with Current Connection**\. 
 
-   1. Type the following SQL query: 
+   1. Enter the following SQL query\.
 
       ```
       select @@VERSION
@@ -129,19 +129,14 @@ Once you are done exploring the sample DB instance that you created, you should 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Instances** list, choose your sample DB instance\. 
+1. In the navigation pane, choose **Databases**\. 
 
-1. Choose **Instance Actions**, and then choose **Delete**\. 
+1. Choose your sample DB instance\. 
+
+1. For **Actions**, choose **Delete**\. 
 
 1. For **Create final Snapshot**, choose **No**\. 
 **Note**  
 You should create a final snapshot for any production DB instance that you delete\. 
 
 1. Choose **Delete**\. 
-
-## Related Topics<a name="CHAP_GettingStarted.SQLServer.Related"></a>
-+ [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-+ [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-+ [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md)
-+ [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-+ [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)

@@ -26,7 +26,7 @@ For a server\-side trace, you must get the trace files on the DB instance into a
 
 1. Start the client\-side trace and watch SQL queries in real\-time as they execute against your DB instance\.
 
-1. Select **Stop Trace** from the File menu when you have completed the trace\. Save the results as a file or as a trace table on you DB instance\.
+1. Select **Stop Trace** from the **File** menu when you have completed the trace\. Save the results as a file or as a trace table on you DB instance\.
 
 ## Running a Server\-Side Trace on a SQL Server DB Instance<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.ServerSide"></a>
 

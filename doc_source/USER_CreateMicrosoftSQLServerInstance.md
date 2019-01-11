@@ -13,9 +13,9 @@ For an example that walks you through the process of creating and connecting to 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the Amazon RDS console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -24,7 +24,7 @@ For an example that walks you through the process of creating and connecting to 
 1. Choose the **Microsoft SQL Server** icon\.   
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch01.png)
 
-1. Choose the SQL Server DB engine edition that you want to use\. The SQL Server editions that are available vary by region\. 
+1. Choose the SQL Server DB engine edition that you want to use\. The SQL Server editions that are available vary by AWS Region\. 
 
 1. For some editions, the **Use Case** step asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. If you choose **Production**, the following are all preselected in a later step:
    + **Multi\-AZ** failover option 
@@ -156,14 +156,14 @@ The following table contains details about settings that you choose when you cre
 |  Database Port  |  The port that you want to access the DB instance through\. SQL Server installations default to port 1433\. If you use a DB security group with your DB instance, this must be the same port value you provided when creating the DB security group\.     | 
 |  DB Engine Version  |  The version of Microsoft SQL Server that you want to use\.  | 
 |  DB Instance Class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class equates to 1\.7 GiB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\.   | 
-|  DB Instance Identifier  |  The name for your DB instance\. Name your DB instances in the same way that you would name your on\-premises servers\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the region you chose\. You can add some intelligence to the name, such as including the region and DB engine you chose, for example **sqlsv\-instance1**\.   | 
+|  DB Instance Identifier  |  The name for your DB instance\. Name your DB instances in the same way that you would name your on\-premises servers\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\. You can add some intelligence to the name, such as including the AWS Region and DB engine you chose, for example **sqlsv\-instance1**\.   | 
 |  DB Parameter Group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
 | Enable deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Enable Encryption  |  **Yes** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enable Enhanced Monitoring  |  **Yes** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
 |  License Model  |  The license model that you want to use\. Choose **license\-included** to use the general license agreement for Microsoft SQL Server\.    | 
 |  Maintenance Window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
-|  Master Username  |  The name that you use as the master user name to log on to your DB Instance with all database privileges\. The master user name is a SQL Server Authentication login that is a member of the `processadmin`, `public`, and `setupadmin` fixed server roles\.  For more information, see [Microsoft SQL Server Security](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles)\.   | 
+|  Master Username  |  The name that you use as the master user name to log on to your DB instance with all database privileges\. The master user name is a SQL Server Authentication login that is a member of the `processadmin`, `public`, and `setupadmin` fixed server roles\.  For more information, see [Microsoft SQL Server Security](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles)\.   | 
 |  Master User Password  |  The password for your master user account\. The password must contain from 8 to 128 printable ASCII characters \(excluding /,", a space, and @\)\.   | 
 |  Multi\-AZ Deployment  |  **Yes** to create a passive secondary replica of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.   | 
 |  Option Group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 

@@ -129,14 +129,20 @@ The following procedure shows you how to install and configure the APEX Listener
    1. passwd apexuser;
    ```
 
-1. Log in to `myapexhost.example.com` as `apexuser`, and download the APEX and APEX Listener installation files from Oracle: 
+1. Log in to `myapexhost.example.com` as `apexuser`, and download the APEX installation file from Oracle to your `/home/apexuser` directory: 
    + [http://www\.oracle\.com/technetwork/developer\-tools/apex/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex/downloads/index.html) 
-   + [http://www\.oracle\.com/technetwork/developer\-tools/apex\-listener/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex-listener/downloads/index.html) 
    + [Oracle Application Express Prior Release Archives](http://www.oracle.com/technetwork/developer-tools/apex/downloads/all-archives-099381.html) 
 
-1. Unzip the APEX file:  
-****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.APEX.html)
+1. Unzip the file in the `/home/apexuser` directory\.
+
+   ```
+   unzip apex_<version>.zip                    
+   ```
+
+   After you unzip the file, there is an `apex` directory in the `/home/apexuser` directory\.
+
+1. While you are still logged into `myapexhost.example.com` as `apexuser`, download the APEX Listener file from Oracle to your `/home/apexuser` directory:
+   + [http://www\.oracle\.com/technetwork/developer\-tools/apex\-listener/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex-listener/downloads/index.html) 
 
 1. Create a new directory and open the APEX Listener file:  
 ****    
@@ -162,7 +168,7 @@ The following procedure shows you how to install and configure the APEX Listener
    java -jar ords.war
    ```
 
-   The first time you start the APEX Listener, you are prompted to provide the location of the APEX Static resources\. This images folder is located in the /apex/images directory in the installation directory for APEX\. 
+   The first time you start the APEX Listener, you are prompted to provide the location of the APEX Static resources\. This images folder is located in the `/apex/images` directory in the installation directory for APEX\. 
 
 1. Return to the APEX administration window in your browser and choose **Administration**\. Next, choose **Application Express Internal Administration**\. When you are prompted for credentials, type the following information: 
    + **User name** – `admin` 

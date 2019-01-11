@@ -16,9 +16,9 @@ You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -71,7 +71,7 @@ In this example, you connect to a PostgreSQL DB instance using pgAdmin\.
 1. Choose the plugin icon and choose **PSQL Console**\. The *psql* command window opens for the default database you created\.   
 ![\[Postgres connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect03.png)
 
-1. Use the command window to enter SQL or *psql* commands\. Type `\q` to close the window\.
+1. Use the command window to enter SQL or *psql* commands\. Enter `\q` to close the window\.
 
 ### Using *psql* to Connect to a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.psql"></a>
 
@@ -103,13 +103,13 @@ Once you have connected to the sample DB instance that you created, you should d
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
 1. Choose the DB instance you wish to delete\.
 
-1. Choose **Instance actions**, and then choose **Delete**\.
+1. Choose **Actions**, and then choose **Delete**\.
 
 1. For **Create final snapshot?**, choose **No**, and select the acknowledgment\. 
 

@@ -30,7 +30,7 @@ If you need to migrate users and privileges, consider using a tool that generate
 
 ### To Set Replication Options<a name="MySQL.Procedural.Importing.Repl.Setup.Procedure"></a>
 
-1. Edit the my\.cnf file \(this file is usually under `/etc`\):
+1. Edit the my\.cnf file \(this file is usually under `/etc`\)\.
 
    ```
    sudo vi /etc/my.cnf
@@ -48,7 +48,7 @@ If you need to migrate users and privileges, consider using a tool that generate
 
    For more information, see [Setting the Replication Master Configuration](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-masterbaseconfig.html) in the MySQL documentation\.
 
-1. Restart the `mysql` service:
+1. Restart the `mysql` service\.
 
    ```
    sudo service mysqld restart
@@ -67,7 +67,7 @@ If you need to migrate users and privileges, consider using a tool that generate
    Use `chmod` if necessary to make sure that the directory where the backup file is being created is writeable\.
 **Important**  
 On Windows, run the command window as an administrator\.
-   + To produce SQL output, use the following command:
+   + To produce SQL output, use the following command\.
 
      For Linux, OS X, or Unix:
 
@@ -94,7 +94,7 @@ On Windows, run the command window as an administrator\.
          -u <local_user> ^
          -p <password>
      ```
-   + To produce delimited\-text output, use the following command:
+   + To produce delimited\-text output, use the following command\.
 
      For Linux, OS X, or Unix:
 
@@ -138,7 +138,7 @@ You must create any stored procedures, triggers, functions, or events manually i
 
      If you are using SQL format, you can get the master log file name and position in step 4 of the procedure at [Replicate Between Your External Database and New Amazon RDS DB Instance](#MySQL.Procedural.Importing.Start.Repl)\. If the external instance is MariaDB version 10\.0\.2 or greater, you can get the GTID in the next step\.
 
-1. If the external instance you are using is MariaDB version 10\.0\.2 or greater, you use GTID\-based replication\. Run `SHOW MASTER STATUS` on the external MariaDB instance to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance:
+1. If the external instance you are using is MariaDB version 10\.0\.2 or greater, you use GTID\-based replication\. Run `SHOW MASTER STATUS` on the external MariaDB instance to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance\.
 
    ```
    SELECT BINLOG_GTID_POS('<binary log file name>', <binary log file position>);
@@ -147,12 +147,12 @@ You must create any stored procedures, triggers, functions, or events manually i
    Note the GTID returned; you need it to configure replication\.
 
 1. Compress the copied data to reduce the amount of network resources needed to copy your data to the Amazon RDS DB instance\. Take note of the size of the backup file; you need this information when determining how large an Amazon EC2 instance to create\. When you are done, compress the backup file using GZIP or your preferred compression utility\. 
-   + To compress SQL output, use the following command:
+   + To compress SQL output, use the following command\.
 
      ```
      gzip backup.sql
      ```
-   + To compress delimited\-text output, use the following command:
+   + To compress delimited\-text output, use the following command\.
 
      ```
      tar -zcvf backup.tar.gz <target_directory>
@@ -215,9 +215,9 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
 1. Determine if Amazon RDS provisioned input/output operations per second \(IOPS\) is required to support the workloads\. Provisioned IOPS storage delivers fast throughput for online transaction processing \(OLTP\) workloads, which are I/O intensive\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
 
-1. Open the [Amazon RDS console](https://console.aws.amazon.com/rds/)\. In the upper\-right corner, select the AWS Region that contains your Amazon EC2 instance\.
+1. Open the [Amazon RDS console](https://console.aws.amazon.com/rds/)\. In the upper\-right corner, choose the AWS Region that contains your Amazon EC2 instance\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose **Create database**, and then go through the steps to select options for your DB instance:
 
@@ -238,7 +238,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
       In the **Settings** section, specify the requested database and user information\. Choose **Next** when you are done\.
 
-   1. In the **Network & Security** section of the **Configure advanced settings** page, select the same VPC and VPC security group as for your Amazon EC2 instance\. This approach ensures that your Amazon EC2 instance and your Amazon RDS instance are visible to each other over the network\. Set **Public accessibility** to `Yes`\. Your DB instance must be publicly accessible to set up replication with your source database as described later in this topic\. Accept the default values for all other boxes in this section\. 
+   1. In the **Network & Security** section of the **Configure advanced settings** page, choose the same VPC and VPC security group as for your Amazon EC2 instance\. This approach ensures that your Amazon EC2 instance and your Amazon RDS instance are visible to each other over the network\. Set **Public accessibility** to `Yes`\. Your DB instance must be publicly accessible to set up replication with your source database as described later in this topic\. Accept the default values for all other boxes in this section\. 
 
       In the **Database options** section, specify a database name\. Accept the default values for all other boxes in this section\.
 
@@ -263,30 +263,30 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
 
 1. At the `mysql` prompt, run the `source` command and pass it the name of your database dump file to load the data into the Amazon RDS DB instance\.
-   + For SQL format, use the following command:
+   + For SQL format, use the following command\.
 
      ```
      mysql> source backup.sql;
      ```
-   + For delimited\-text format, first create the database \(if it isn’t the default database you created when setting up the Amazon RDS DB instance\):
+   + For delimited\-text format, first create the database \(if it isn’t the default database you created when setting up the Amazon RDS DB instance\)\.
 
      ```
-     $ mysql> create database <database_name>;
+     mysql> create database <database_name>;
      $ mysql> use <database_name>;
      ```
 
-     Then create the tables:
+     Then create the tables\.
 
      ```
-     $ mysql> source <table1>.sql
+     mysql> source <table1>.sql
      $ mysql> source <table2>.sql
      etc…
      ```
 
-     Then import the data:
+     Then import the data\.
 
      ```
-     $ mysql> LOAD DATA LOCAL INFILE 'table1.txt' INTO TABLE table1 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '0x0d0a';
+     mysql> LOAD DATA LOCAL INFILE 'table1.txt' INTO TABLE table1 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '0x0d0a';
      $ mysql> LOAD DATA LOCAL INFILE 'table2.txt' INTO TABLE table2 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '0x0d0a';
      etc…
      ```
@@ -315,7 +315,7 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
 1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your source instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command:
+   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your source instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
    host <RDS_MySQL_DB_host_name>
@@ -323,19 +323,19 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint, for example `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 
-1. Using the client of your choice, connect to the source instance and create a user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example:
+1. Using the client of your choice, connect to the source instance and create a user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\.
 
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
    ```
 
-1. For the source instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command:
+1. For the source instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
 
    ```
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
    ```
 
-1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, look at the contents of that file:
+1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, look at the contents of that file\.
 
    ```
    cat backup.sql
@@ -355,14 +355,14 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
    If the external instance is MariaDB 10\.0\.2 or greater, you should already have the GTID from which to start replication from step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
 
-1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example:
+1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306,
        'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
    ```
 
-   If the external instance is MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example:
+   If the external instance is MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master_gtid ('<master_server_ip_address>', 3306, 'ReplicationUser', '<password>', '<GTID>', 0); 
@@ -370,7 +370,7 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
    The `master_server_ip_address` is the IP address of master MySQL instance\. An EC2 private DNS address is currently not supported\.
 
-1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication:
+1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\.
 
    ```
    CALL mysql.rds_start_replication;
@@ -390,7 +390,7 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
 
 1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-1. Verify that the Seconds\_Behind\_Master field in the [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the replication master:
+1. Verify that the Seconds\_Behind\_Master field in the [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the replication master\.
 
    ```
    SHOW SLAVE STATUS;
@@ -400,13 +400,13 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
 
 1. Update your application to use the Amazon RDS DB instance\. This update typically involves changing the connection settings to identify the host name and port of the Amazon RDS DB instance, the user account and password to connect with, and the database to use\.
 
-1. Stop replication for the Amazon RDS instance using the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) command:
+1. Stop replication for the Amazon RDS instance using the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) command\.
 
    ```
    CALL mysql.rds_stop_replication;
    ```
 
-1. Run the [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) command on your Amazon RDS DB instance to reset the replication configuration so this instance is no longer identified as a replica:
+1. Run the [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) command on your Amazon RDS DB instance to reset the replication configuration so this instance is no longer identified as a replica\.
 
    ```
    CALL mysql.rds_reset_external_master;

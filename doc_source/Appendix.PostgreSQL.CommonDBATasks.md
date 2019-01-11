@@ -18,6 +18,7 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 + [Working with the orafce Extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
 + [Accessing External Data with the postgres\_fdw Extension](#postgresql-commondbatasks-fdw)
 + [Using a Custom DNS Server for Outbound Network Access](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)
++ [Restricting Password Management](#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)
 
 ## Creating Roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
@@ -189,6 +190,7 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `quote_all_identifiers`  | Dynamic | Adds quotes \("\) to all identifiers when generating SQL fragments\. | 
 |  `random_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a non\-sequentially fetched disk page\. | 
 |  `rds.log_retention_period`  | Dynamic | Amazon RDS will delete PostgreSQL logs that are older than N minutes\. | 
+| rds\.restrict\_password\_commands | Static | Restricts who can manage passwords to users with the rds\_password role\. Set this parameter to 1 to enable password restriction\. The default is 0\.  | 
 |  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 
 |  `seq_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
 |  `session_replication_role`  | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
@@ -1035,4 +1037,31 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
 1. The routing path between the Amazon RDS DB instance and the DNS server has to be configured correctly to allow DNS traffic\. 
 
-   If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be setup between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
+   If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be set up between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
+
+## Restricting Password Management<a name="Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt"></a>
+
+You can restrict who can manage database user passwords to a special role\. By doing this, you can have more control over password management on the client side\.
+
+You enable restricted password management with the static parameter `rds.restrict_password_commands` and use a role called `rds_password`\. When the parameter `rds.restrict_password_commands` is set to 1, only users that are members of the `rds_password` role can run certain SQL commands\. The restricted SQL commands are commands that modify database user passwords and password expiration time\. 
+
+To use restricted password management, your DB instance must be running Amazon RDS for PostgreSQL 10\.6 or higher\. Because the `rds.restrict_password_commands` parameter is static, changing this parameter requires a database restart\.
+
+When a database has restricted password management enabled, if you try to run restricted SQL commands you get the following error: ERROR: must be a member of rds\_password to alter passwords\.
+
+Following are some examples of SQL commands that are restricted when restricted password management is enabled\.
+
+```
+postgres=> CREATE ROLE myrole WITH PASSWORD 'mypassword';
+postgres=> CREATE ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2020-01-01';
+postgres=> ALTER ROLE myrole WITH PASSWORD 'mypassword' VALID UNTIL '2020-01-01';
+postgres=> ALTER ROLE myrole WITH PASSWORD 'mypassword';
+postgres=> ALTER ROLE myrole VALID UNTIL '2020-01-01';
+postgres=> ALTER ROLE myrole RENAME TO myrole2;
+```
+
+Some `ALTER ROLE` commands that include `RENAME TO` might also be restricted\. They might be restricted because renaming a PostgreSQL role that has an MD5 password clears the password\. 
+
+The `rds_superuser` role has membership for the `rds_password` role by default, and you can't change this\. You can give other roles membership for the `rds_password` role by using the `GRANT` SQL command\. We recommend that you give membership to `rds_password` to only a few roles that you use solely for password management\. These roles require the `CREATEROLE` attribute to modify other roles\.
+
+Make sure that you verify password requirements such as expiration and needed complexity on the client side\. We recommend that you restrict password\-related changes by using your own client\-side utility\. This utility should have a role that is a member of `rds_password` and has the `CREATEROLE` role attribute\.

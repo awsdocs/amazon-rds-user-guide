@@ -13,15 +13,15 @@ For an example that walks you through the process of creating and connecting to 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
 1. Choose **Create database** to open the **Select engine** page\.
 
-   The Oracle editions that are available vary by region\.  
+   The Oracle editions that are available vary by AWS Region\.  
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
 
 1. In the **Select engine** window, choose the **Select** button for the Oracle DB engine you want to use and then choose **Next**\. 
@@ -156,7 +156,7 @@ The following table contains details about settings that you choose when you cre
 |  Database port  |  The port that you want to access the DB instance through\. Oracle installations default to port 1521\.   | 
 |  DB engine version  |  The version of Oracle that you want to use\.  | 
 |  DB instance class  |  The DB instance class that you want to use\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.   | 
-|  DB instance identifier  |  The name for your DB instance\. The name must be unique for your account and region\. You can add some intelligence to the name, such as including the region and DB engine you chose, for example **oracle\-instance1**\.   | 
+|  DB instance identifier  |  The name for your DB instance\. The name must be unique for your account and AWS Region\. You can add some intelligence to the name, such as including the AWS Region and DB engine you chose, for example **oracle\-instance1**\.   | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) and [Modifying Oracle sqlnet\.ora Parameters](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.sqlnet)\.   | 
 | Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 

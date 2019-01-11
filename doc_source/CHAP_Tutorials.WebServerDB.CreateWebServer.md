@@ -22,14 +22,14 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. On the **Configure Instance Details** page, shown following, set these values and leave the other values as their defaults:
    + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
    + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
-   + **Auto\-assign Public IP:** Choose `Enable`\.  
+   + **Auto\-assign Public IP:** Choose **Enable**\.  
 ![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)
 
 1. Choose **Next: Add Storage**\.
 
-1. On the **Add Storage** page, leave the default values and choose **Next: Add Tags**\.
+1. On the **Add Storage** page, keep the default values and choose **Next: Add Tags**\.
 
-1. On the **Add Tags** page, shown following, choose **Add Tag**, then type **Name** for **Key** and type **tutorial\-web\-server** for **Value**\.  
+1. On the **Add Tags** page, shown following, choose **Add Tag**, then enter **Name** for **Key** and enter **tutorial\-web\-server** for **Value**\.  
 ![\[Tag Instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_15.png)
 
 1. Choose **Next: Configure Security Group**\.
@@ -42,7 +42,7 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. On the **Review Instance Launch** page, shown following, verify your settings and then choose **Launch**\.  
 ![\[Review Instance Launch\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_17.png)
 
-1. On the **Select an existing key pair or create a new key pair** page, shown following, choose `Create a new key pair` and set **Key pair name** to `tutorial-key-pair`\. Choose **Download Key Pair**, and then save the key pair file on your local machine\. You use this key pair file to connect to your EC2 instance\.  
+1. On the **Select an existing key pair or create a new key pair** page, shown following, choose **Create a new key pair** and set **Key pair name** to `tutorial-key-pair`\. Choose **Download Key Pair**, and then save the key pair file on your local machine\. You use this key pair file to connect to your EC2 instance\.  
 ![\[Select an Existing Key Pair or Create a New Key Pair\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_18.png)
 
 1. To launch your EC2 instance, choose **Launch Instances**\. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-0288d65fd4470b6a9`\.  
@@ -68,7 +68,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    [ec2-user ~]$ sudo yum update -y
    ```
 
-1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time:
+1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time\.
 
    ```
    [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
@@ -76,7 +76,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    For more information, see [Updating Instance Software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
 
-1. Start the web server with the command shown following:
+1. Start the web server with the command shown following\.
 
    ```
    [ec2-user ~]$ sudo service httpd start
@@ -86,7 +86,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
-1. Configure the web server to start with each system boot using the **chkconfig** command:
+1. Configure the web server to start with each system boot using the `chkconfig` command\.
 
    ```
    [ec2-user ~]$ sudo chkconfig httpd on
@@ -96,45 +96,45 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 
 **To set file permissions for the Apache web server**
 
-1. Add the `www` group to your EC2 instance with the following command:
+1. Add the `www` group to your EC2 instance with the following command\.
 
    ```
    [ec2-user ~]$ sudo groupadd www
    ```
 
-1. Add the `ec2-user` user to the `www` group:
+1. Add the `ec2-user` user to the `www` group\.
 
    ```
    [ec2-user ~]$ sudo usermod -a -G www ec2-user
    ```
 
-1. To refresh your permissions and include the new `www` group, log out:
+1. To refresh your permissions and include the new `www` group, log out\.
 
    ```
    [ec2-user ~]$ exit
    ```
 
-1. Log back in again and verify that the `www` group exists with the `groups` command:
+1. Log back in again and verify that the `www` group exists with the `groups` command\.
 
    ```
    [ec2-user ~]$ groups
    ec2-user wheel www
    ```
 
-1. Change the group ownership of the `/var/www` directory and its contents to the `www` group:
+1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
 
    ```
    [ec2-user ~]$ sudo chown -R root:www /var/www
    ```
 
-1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future:
+1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.
 
    ```
    [ec2-user ~]$ sudo chmod 2775 /var/www
    [ec2-user ~]$ find /var/www -type d -exec sudo chmod 2775 {} +
    ```
 
-1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions:
+1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions\.
 
    ```
    [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +
@@ -146,7 +146,7 @@ Next, you add content to your Apache web server that connects to your Amazon RDS
 
 **To add content to the Apache web server that connects to your RDS DB instance**
 
-1. While still connected to your EC2 instance, change the directory to `/var/www` and create a new subdirectory named `inc`:
+1. While still connected to your EC2 instance, change the directory to `/var/www` and create a new subdirectory named `inc`\.
 
    ```
    [ec2-user ~]$ cd /var/www
@@ -178,7 +178,7 @@ Placing the user name and password information in a folder that is not part of t
 
 1. Save and close the `dbinfo.inc` file\.
 
-1. Change the directory to `/var/www/html`:
+1. Change the directory to `/var/www/html`\.
 
    ```
    [ec2-user ~]$ cd /var/www/html

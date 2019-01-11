@@ -10,7 +10,7 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 The next step is to establish a baseline for normal Amazon RDS performance in your environment, by measuring performance at various times and under different load conditions\. As you monitor Amazon RDS, you should consider storing historical monitoring data\. This stored data will give you a baseline to compare against with current performance data, identify normal performance patterns and performance anomalies, and devise methods to address issues\.
 
-For example, with Amazon RDS, you can monitor network throughput, I/O for read, write, and/or metadata operations, client connections, and burst credit balances for your DB instances\. When performance falls outside your established baseline, you might need change the instance class of your DB instance or the number of DB instances and Read Replicas that are available for clients in order to optimize your database availability for your workload\.
+For example, with Amazon RDS, you can monitor network throughput, I/O for read, write, and/or metadata operations, client connections, and burst credit balances for your DB instances\. When performance falls outside your established baseline, you might need to change the instance class of your DB instance or the number of DB instances and Read Replicas that are available for clients in order to optimize your database availability for your workload\.
 
 In general, acceptable values for performance metrics depend on what your baseline looks like and what your application is doing\. Investigate consistent or trending variances from your baseline\. Advice about specific types of metrics follows: 
 +  **High CPU or RAM consumption** – High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 
@@ -76,14 +76,14 @@ Metrics are grouped first by the service namespace, and then by the various dime
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. If necessary, change the region\. From the navigation bar, select the region where your AWS resources reside\. For more information, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html)\.
+1. If necessary, change the AWS Region\. From the navigation bar, choose the AWS Region where your AWS resources reside\. For more information, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html)\.
 
 1. In the navigation pane, choose **Metrics**\. Choose the **RDS** metric namespace\.  
 ![\[Choose metric namespace\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-01.png)
 
-1. Select a metric dimension, for example, **By Database Class**\.
+1. Choose a metric dimension, for example **By Database Class**\.
 
-1. To sort the metrics, use the column heading\. To graph a metric, select the check box next to the metric\. To filter by resource, choose the resource ID and then choose **Add to search**\. To filter by metric, choose the metric name and then choose **Add to search**\.  
+1. To sort the metrics, use the column heading\. To graph a metric, select the check box next to the metric\. To filter by resource, choose the resource ID, and then choose **Add to search**\. To filter by metric, choose the metric name, and then choose **Add to search**\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-03.png)
 
 **To view metrics using the AWS CLI**
@@ -100,9 +100,6 @@ The `AWS/RDS` namespace includes the following metrics\.
 
 | Metric | Description | 
 | --- | --- | 
-| AuroraGlobalDBReplicatedWriteIO |  Units: Bytes  | 
-| AuroraGlobalDBDataTransferBytes |  Units: Bytes  | 
-| AuroraGlobalDBReplicationLag |  Units: Milliseconds  | 
 | BinLogDiskUsage |  The amount of disk space occupied by binary logs on the master\. Applies to MySQL read replicas\. Units: Bytes  | 
 | BurstBalance |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.  Units: Percent  | 
 | CPUUtilization |  The percentage of CPU utilization\. Units: Percent  | 
@@ -110,6 +107,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | CPUCreditBalance |  \[T2 instances\] The number of earned CPU credits that an instance has accrued since it was launched or started\. For T2 Standard, the `CPUCreditBalance` also includes the number of launch credits that have been accrued\. Credits are accrued in the credit balance after they are earned, and removed from the credit balance when they are spent\. The credit balance has a maximum limit, determined by the instance size\. Once the limit is reached, any new credits that are earned are discarded\. For T2 Standard, launch credits do not count towards the limit\. The credits in the `CPUCreditBalance` are available for the instance to spend to burst beyond its baseline CPU utilization\. When an instance is running, credits in the `CPUCreditBalance` do not expire\. When the instance stops, the `CPUCreditBalance` does not persist, and all accrued credits are lost\. CPU credit metrics are available at a five\-minute frequency only\. Units: Credits \(vCPU\-minutes\)  | 
 | DatabaseConnections |  The number of database connections in use\. Units: Count  | 
 | DiskQueueDepth |  The number of outstanding IOs \(read/write requests\) waiting to access the disk\. Units: Count  | 
+|  `FailedSQLServerAgentJobsCount`  |  The number of failed SQL Server Agent jobs during the last minute\. Unit: Count/Minute  | 
 | FreeableMemory |  The amount of available random access memory\. Units: Bytes  | 
 | FreeStorageSpace |  The amount of available storage space\. Units: Bytes  | 
 | MaximumUsedTransactionIDs |  The maximum transaction ID that has been used\. Applies to PostgreSQL\. Units: Count  | 
@@ -146,7 +144,7 @@ Amazon RDS metrics data can be filtered by using any of the dimensions in the fo
 
 You can create a CloudWatch alarm that sends an Amazon SNS message when the alarm changes state\. An alarm watches a single metric over a time period you specify, and performs one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon SNS topic or Auto Scaling policy\.
 
-Alarms invoke actions for sustained state changes only\. CloudWatch alarms will not invoke actions simply because they are in a particular state, the state must have changed and been maintained for a specified number of periods\. The following procedures outlines how to create alarms for Amazon RDS\.
+Alarms invoke actions for sustained state changes only\. CloudWatch alarms will not invoke actions simply because they are in a particular state, the state must have changed and been maintained for a specified number of periods\. The following procedures show how to create alarms for Amazon RDS\.
 
 **To set alarms using the CloudWatch console**
 
@@ -154,11 +152,11 @@ Alarms invoke actions for sustained state changes only\. CloudWatch alarms will 
 
 1. Choose **Alarms** and then choose **Create Alarm**\. This launches the **Create Alarm Wizard**\. 
 
-1. Choose **RDS Metrics** and scroll through the Amazon RDS metrics to locate the metric you want to place an alarm on\. To display just the Amazon RDS metrics in this dialog box, search for the identifier of your resource\. Select the metric to create an alarm on and then choose **Next**\.
+1. Choose **RDS Metrics** and scroll through the Amazon RDS metrics to locate the metric you want to place an alarm on\. To display just the Amazon RDS metrics in this dialog box, search for the identifier of your resource\. Choose the metric to create an alarm on and then choose **Next**\.
 
-1. Fill in the **Name**, **Description**, **Whenever** values for the metric\. 
+1. Enter **Name**, **Description**, and **Whenever** values for the metric\. 
 
-1. If you want CloudWatch to send you an email when the alarm state is reached, in the **Whenever this alarm:** field, choose **State is ALARM**\. In the **Send notification to:** field, choose an existing SNS topic\. If you select **Create topic**, you can set the name and email addresses for a new email subscription list\. This list is saved and appears in the field for future alarms\. 
+1. If you want CloudWatch to send you an email when the alarm state is reached, for **Whenever this alarm:**, choose **State is ALARM**\. For **Send notification to:**, choose an existing SNS topic\. If you choose **Create topic**, you can set the name and email addresses for a new email subscription list\. This list is saved and appears in the field for future alarms\. 
 **Note**  
 If you use **Create topic** to create a new Amazon SNS topic, the email addresses must be verified before they receive notifications\. Emails are only sent when the alarm enters an alarm state\. If this alarm state change happens before the email addresses are verified, they do not receive a notification\.
 
@@ -180,7 +178,7 @@ You can export logs for Amazon RDS MariaDB \(all versions\) and Amazon RDS MySQL
 You must have a Service Linked Role before you enable log data publishing\. For more information about Service Linked Roles, see the following: [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
 
 For specific requirements for these engines, see the following:
-+ [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
++ [Publishing MariaDB Logs to Amazon CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 + [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
 
 ### Configuring CloudWatch Log Integration<a name="integrating_cloudwatchlogs.configure"></a>
@@ -205,15 +203,19 @@ This section provides details on how you can view metrics for your DB instance u
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Select the check box to the left of the DB you need information about\. For **Show Monitoring**, choose the option for how you want to view your metrics from these:
+1. Choose the name of the DB instance you need information about to show its details\.
+
+1. Choose the **Monitoring** tab\.
+
+1. For **Monitoring**, choose the option for how you want to view your metrics from these:
    + **CloudWatch** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
    + **Enhanced monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.
    + **OS Process list** – Shows details for each process running in the selected instance\.  
 ![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics0.png)
 **Tip**  
-You can select the time range of the metrics represented by the graphs with the time range drop\-down list\.  
+You can choose the time range of the metrics represented by the graphs with the time range list\.  
 You can choose any graph to bring up a more detailed view\. You can also apply metric\-specific filters to the data\. 
 
 #### Viewing DB Instance Metrics with the CLI or API<a name="USER_Monitoring.DB"></a>

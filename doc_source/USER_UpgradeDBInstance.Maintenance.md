@@ -6,20 +6,20 @@ Some maintenance items require that Amazon RDS take your DB instance offline for
 
 Deferred DB instance modifications that you have chosen not to apply immediately are applied during the maintenance window\. For example, you may choose to change the DB instance class or parameter group during the maintenance window\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
-You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated by the word **Available** or **Required** in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following: 
+You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated by the word **available** or **required** in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\. 
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailable.png)
 
-If an update is available, you can take one of the actions\. 
+If an update is available, you can take one of the actions: 
 + Defer the maintenance items\.
 + Apply the maintenance items immediately\.
 + Schedule the maintenance items to start during your next maintenance window\.
 + Take no action\.
 
 **Note**  
-Certain OS updates are marked as **Required**\. If you defer a required update, you receive a notice from Amazon RDS indicating when the update will be performed\. Other updates are marked as **Available**, and these you can defer indefinitely\.
+Certain OS updates are marked as **required**\. If you defer a required update, you get a notice from Amazon RDS indicating when the update will be performed\. Other updates are marked as **available**, and these you can defer indefinitely\.
 
-The maintenance window determines when pending operations start, but does not limit the total execution time of these operations\. Maintenance operations are not guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
+The maintenance window determines when pending operations start, but doesn't limit the total execution time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
 ## Applying Updates for a DB Instance<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
@@ -31,15 +31,15 @@ With Amazon RDS, you can choose when to apply maintenance operations\. You can d
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose Instances\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Select the check box for the DB instance that has a required update\. 
+1. Choose the DB instance that has a required update\. 
 
-1. Choose **Instance actions**********, and then choose one of the following:
+1. For **Actions**, choose one of the following:
    + **Upgrade now**
    + **Upgrade at next window**
 **Note**  
-If you choose **Upgrade at next window** and later want to delay the update, you can select **Defer upgrade**\.
+If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\.
 
 ### CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
@@ -109,7 +109,7 @@ To return a list of resources that have at least one pending update, call the Am
 
 ## Maintenance for Multi\-AZ Deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
 
-Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS will apply operating system updates by following these steps: 
+Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS applies operating system updates by following these steps: 
 
 1. Perform maintenance on the standby\.
 
@@ -149,9 +149,9 @@ For the purpose of this example, we assume that the DB instance named *mydbinsta
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then select the DB instance that you want to modify\. 
 
-1. Choose **Instance actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
 1. In the **Maintenance** section, update the maintenance window\.
 **Note**  

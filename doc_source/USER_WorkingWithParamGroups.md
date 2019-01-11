@@ -108,11 +108,11 @@ Include the following required parameters:
 
 ## Modifying Parameters in a DB Parameter Group<a name="USER_WorkingWithParamGroups.Modifying"></a>
 
-You can modify parameter values in a customer\-created DB parameter group; you cannot change the parameter values in a default DB parameter group\. Changes to parameters in a customer\-created DB parameter group are applied to all DB instances that are associated with the DB parameter group\. 
+You can modify parameter values in a customer\-created DB parameter group\. You can't change the parameter values in a default DB parameter group\. Changes to parameters in a customer\-created DB parameter group are applied to all DB instances that are associated with the DB parameter group\. 
 
 If you change a parameter value, when the change is applied is determined by the type of parameter\. Changes to dynamic parameters are applied immediately\. Changes to static parameters require that the DB instance associated with DB parameter group be rebooted before the change takes effect\. To determine the type of a parameter, list the parameters in a parameter group using one of the procedures shown in the section [Listing DB Parameter Groups](#USER_WorkingWithParamGroups.Listing)\.
 
-The RDS console shows the status of the DB parameter group associated with a DB instance\. For example, if the DB instance is not using the latest changes to its associated DB parameter group, the RDS console shows the DB parameter group with a status of **pending\-reboot**\. You would need to manually reboot the DB instance for the latest parameter changes to take effect for that DB instance\.
+The RDS console shows the status of the DB parameter group associated with a DB instance on the **Configuration** tab\. For example, if the DB instance is not using the latest changes to its associated DB parameter group, the RDS console shows the DB parameter group with a status of **pending\-reboot**\. You need to manually reboot the DB instance for the latest parameter changes to take effect for that DB instance\.
 
 ![\[Parameter change pending reboot scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/param-reboot.png)
 
@@ -124,13 +124,13 @@ The RDS console shows the status of the DB parameter group associated with a DB 
 
 1. In the navigation pane, choose **Parameter groups**\.
 
-1. In the list, select the parameter group you want to modify\.
+1. In the list, choose the parameter group that you want to modify\.
 
-1. Choose **Parameter group actions**, and then choose **Edit**\.
+1. For **Parameter group actions**, choose **Edit**\.
 
-1. Change the values of the parameters you want to modify\. You can scroll through the parameters using the arrow keys at the top right of the dialog box\. 
+1. Change the values of the parameters that you want to modify\. You can scroll through the parameters using the arrow keys at the top right of the dialog box\. 
 
-   Note that you cannot change values in a default parameter group\.
+   You can't change values in a default parameter group\.
 
 1. Choose **Save changes**\.
 
@@ -191,13 +191,13 @@ You can't copy a default parameter group\. However, you can create a new paramet
 
 1. In the navigation pane, choose **Parameter groups**\.
 
-1. In the list, select the custom parameter group you want to copy\.
+1. In the list, choose the custom parameter group that you want to copy\.
 
-1. Choose **Parameter group actions**, and then choose **Copy**\.
+1. For **Parameter group actions**, choose **Copy**\.
 
-1. In **New DB parameter group identifier**, type a name for the new parameter group\.
+1. In **New DB parameter group identifier**, enter a name for the new parameter group\.
 
-1. In **Description**, type a description for the new parameter group\.
+1. In **Description**, enter a description for the new parameter group\.
 
 1. Choose **Copy**\.
 
@@ -306,7 +306,7 @@ You can get a list of all parameters in a DB parameter group and their values\.
 
    The DB parameter groups appear in a list\.
 
-1. Click the name of the parameter group to see the its list of parameters\.
+1. Choose the name of the parameter group to see the its list of parameters\.
 
 ### CLI<a name="USER_WorkingWithParamGroups.Viewing.CLI"></a>
 
@@ -345,9 +345,9 @@ You can use the AWS Management Console to view the differences between two param
 
 1. In the navigation pane, choose **Parameter groups**\.
 
-1. In the list, select the two parameter groups you want to compare\.
+1. In the list, choose the two parameter groups that you want to compare\.
 
-1. Choose **Parameter group actions**, and then choose **Compare**\.
+1. For **Parameter group actions**, choose **Compare**\.
 
 ## DB Parameter Values<a name="USER_ParamValuesRef"></a>
 
@@ -356,11 +356,11 @@ The value for a DB parameter can be specified as:
 + A DB parameter formula
 + A DB parameter function
 + A character string constant
-+ A log expression \(the log function represents log base 2\), such as value=**\{log\(DBInstanceClassMemory/8187281418\)\*1000\}** 
++ A log expression \(the log function represents log base 2\), such as `value={log(DBInstanceClassMemory/8187281418)*1000}` 
 
 ### DB Parameter Formulas<a name="USER_ParamFormulas"></a>
 
-A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. Formulas can be specified for either a DB parameter value or as an argument to a DB parameter function\.
+A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
 #### Syntax<a name="w4aac15c65c63b7b4"></a>
 
@@ -470,13 +470,13 @@ These examples show using formulas and functions in the values for DB parameters
 **Warning**  
 Improperly setting parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying your DB parameter group\. You should try out parameter group changes on a test DB instances, created using point\-in\-time\-restores, before applying those parameter group changes to your production DB instances\. 
 
-You can specify the GREATEST function in an Oracle processes parameter to set the number of user processes to the larger of either 80 or DBInstanceClassMemory divided by 9868951\.
+You can specify the `GREATEST` function in an Oracle processes parameter to set the number of user processes to the larger of either 80 or `DBInstanceClassMemory` divided by 9,868,951\.
 
 ```
 GREATEST({DBInstanceClassMemory/9868951},80)
 ```
 
-You can specify the LEAST\(\) function in a MySQL max\_binlog\_cache\_size parameter value to set the maximum cache size a transaction can use in a MySQL instance to the lesser of 1MB or DBInstanceClass/256:
+You can specify the `LEAST()` function in a MySQL `max_binlog_cache_size` parameter value to set the maximum cache size a transaction can use in a MySQL instance to the lesser of 1 MB or `DBInstanceClass`/256\.
 
 ```
 LEAST({DBInstanceClassMemory/256},10485760)

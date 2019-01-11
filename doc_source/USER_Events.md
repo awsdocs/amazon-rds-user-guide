@@ -10,18 +10,18 @@
 + [Listing the Amazon RDS Event Notification Categories](#USER_Events.ListingCategories)
 + [Deleting an Amazon RDS Event Notification Subscription](#USER_Events.Deleting)
 
- Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon RDS event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS region, such as an email, a text message, or a call to an HTTP endpoint\. 
+ Amazon RDS uses the Amazon Simple Notification Service \(Amazon SNS\) to provide notification when an Amazon RDS event occurs\. These notifications can be in any notification form supported by Amazon SNS for an AWS Region, such as an email, a text message, or a call to an HTTP endpoint\. 
 
-Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance, DB snapshot,  DB parameter group, or DB security group\. For example, if you subscribe to the Backup category for a given DB instance, you will be notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a Configuration Change category for a DB security group, you will be notified when the DB security group is changed\. You will also receive notification when an event notification subscription changes\.
+Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance, DB snapshot,  DB parameter group, or DB security group\. For example, if you subscribe to the Backup category for a given DB instance, you are notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you are notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 
-Event notifications are sent to the addresses you provide when you create the subscription\. You may want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by setting the **Enabled** radio button to `No` in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the CLI or Amazon RDS API\. 
+Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\. 
 
 **Note**  
-Amazon RDS event notifications using SMS text messages are currently available for topic ARNs and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and Receiving SMS Notifications Using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg//SMSMessages.html)\.
+Amazon RDS event notifications using SMS text messages are currently available for topic Amazon Resource Names \(ARNs\) and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and Receiving SMS Notifications Using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg//SMSMessages.html)\.
 
-Amazon RDS uses the Amazon Resource Name \(ARN\) of an Amazon SNS topic to identify each subscription\. The Amazon RDS console will create the ARN for you when you create the subscription\. If you use the CLI or API, you have to create the ARN by using the Amazon SNS console or the Amazon SNS API when you create a subscription\.
+Amazon RDS uses the ARN of an Amazon SNS topic to identify each subscription\. The Amazon RDS console creates the ARN for you when you create the subscription\. If you use the CLI or API, you create the ARN by using the Amazon SNS console or the Amazon SNS API when you create a subscription\.
 
-Billing for Amazon RDS event notification is through the Amazon Simple Notification Service \(Amazon SNS\)\. Amazon SNS fees apply when using event notification; for more information on Amazon SNS billing, see [ Amazon Simple Notification Service Pricing](http://aws.amazon.com/sns/#pricing)\.
+Billing for Amazon RDS event notification is through the Amazon Simple Notification Service \(Amazon SNS\)\. Amazon SNS fees apply when using event notification\. For more information on Amazon SNS billing, see [ Amazon Simple Notification Service Pricing](http://aws.amazon.com/sns/#pricing)\.
 
 The process for subscribing to Amazon RDS event notification is as follows:
 
@@ -31,7 +31,7 @@ The process for subscribing to Amazon RDS event notification is as follows:
 
 1. When you have confirmed the subscription, the status of your subscription is updated in the Amazon RDS console's **My Event Subscriptions** section\.
 
-1. You will begin to receive event notifications\.
+1. You then begin to receive event notifications\.
 
 The following section lists all categories and events that you can be notified of\. It also provides information about subscribing to and working with Amazon RDS event subscriptions\.
 
@@ -40,8 +40,6 @@ The following section lists all categories and events that you can be notified o
  Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\. Each category applies to a source type, which can be a DB instance, DB snapshot, DB security group, or DB parameter group\.
 
 The following table shows the event category and a list of events when a DB instance is the source type\.
-
-**Categories and Events for the DB Instance Source Type**
 
 
 |  Category  | Amazon RDS Event ID |  Description  | 
@@ -85,6 +83,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0079 |  Enhanced Monitoring cannot be enabled without the enhanced monitoring IAM role\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS Enhanced Monitoring](USER_Monitoring.OS.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0080 |  Enhanced Monitoring was disabled due to an error making the configuration change\. It is likely that the enhanced monitoring IAM role is configured incorrectly\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS Enhanced Monitoring](USER_Monitoring.OS.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0081 |  The IAM role that you use to access your Amazon S3 bucket for SQL Server native backup and restore is configured incorrectly\. For more information, see [Setting Up for Native Backup and Restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
+|  failure  | RDS\-EVENT\-0082 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating Data from an External MySQL Database to an Amazon Aurora MySQL DB Cluster](url-aurora-user;AuroraMySQL.Migrating.ExtMySQL.html)\.   | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been exhausted\. To resolve this issue, you should allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
@@ -118,16 +117,12 @@ The following table shows the event category and a list of events when a DB inst
 
 The following table shows the event category and a list of events when a DB parameter group is the source type\.
 
-**Categories and Events for the DB Parameter Group Source Type**
-
 
 |  Category  | RDS Event ID |  Description  | 
 | --- | --- | --- | 
 |  configuration change  | RDS\-EVENT\-0037 |  The parameter group was modified\.  | 
 
 The following table shows the event category and a list of events when a DB security group is the source type\.
-
-**Categories and Events for the DB Security Group Source Type**
 
 
 |  Category  | RDS Event ID |  Description  | 
@@ -136,8 +131,6 @@ The following table shows the event category and a list of events when a DB secu
 |  failure  | RDS\-EVENT\-0039 |  The Amazon EC2 security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
 
 The following table shows the event category and a list of events when a DB snapshot is the source type\.
-
-**Categories and Events for the DB Snapshot Source Type**
 
 
 |  Category  | RDS Event ID |  Description  | 
@@ -152,11 +145,39 @@ The following table shows the event category and a list of events when a DB snap
 | creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
 | creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
 
+The following table shows the event category and a list of events when an Aurora DB cluster is the source type\.
+
+
+|  Category  | RDS Event ID |  Description  | 
+| --- | --- | --- | 
+|  failover  | RDS\-EVENT\-0069 |  A failover for the DB cluster has failed\.  | 
+|  failover  | RDS\-EVENT\-0070 |  A failover for the DB cluster has restarted\.  | 
+|  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
+|  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
+|  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
+|  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating Data from an External MySQL Database to an Amazon Aurora MySQL DB Cluster](url-aurora-user;AuroraMySQL.Migrating.ExtMySQL.html)\.   | 
+|  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
+|  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0149 |  A scaling point was not found\.  | 
+|  notification  | RDS\-EVENT\-0150 |  The DB cluster stopped\.  | 
+|  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
+|  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
+|  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
+|  notification  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
+
+The following table shows the event category and a list of events when an Aurora DB cluster snapshot is the source type\.
+
+
+|  Category  | RDS Event ID |  Description  | 
+| --- | --- | --- | 
+|  backup  | RDS\-EVENT\-0074 |  Creation of a manual DB cluster snapshot has started\.  | 
+|  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
+
 ## Subscribing to Amazon RDS Event Notification<a name="USER_Events.Subscribing"></a>
 
 You can create an Amazon RDS event notification subscription so you can be notified when an event occurs for a given DB instance, DB snapshot, DB security group, or DB parameter group\. The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API actions\. For information on creating an SNS topic and subscribing to it, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html)\.
 
-You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you will receive all the DB instance events for the specified source\. If you specify a **SourceType** but do not specify a **SourceIdentifier**, you will receive notice of the events for that source type for all your Amazon RDS sources\. If you do not specify either the **SourceType** nor the **SourceIdentifier**, you will be notified of events generated from all Amazon RDS sources belonging to your customer account\.
+You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you receive all the DB instance events for the specified source\. If you specify a **SourceType** but don't specify a **SourceIdentifier**, you receive notice of the events for that source type for all your Amazon RDS sources\. If you don't specify either the **SourceType** or the **SourceIdentifier**, you are notified of events generated from all Amazon RDS sources belonging to your customer account\.
 
 **Note**  
 Event notifications might take up to five minutes to be delivered\.
@@ -167,15 +188,15 @@ Event notifications might take up to five minutes to be delivered\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1.  In navigation pane, choose **Event Subscriptions**\. 
+1. In navigation pane, choose **Event subscriptions**\. 
 
-1.  In the **Event subscriptions** pane, choose **Create event subscription**\. 
+1. In the **Event subscriptions** pane, choose **Create event subscription**\. 
 
-1.  In the **Create event subscription** dialog box, do the following:
+1. In the **Create event subscription** dialog box, do the following:
 
-   1. Type a name for the event notification subscription for **Name**\.
+   1. For **Name**, enter a name for the event notification subscription\.
 
-   1. For **Send notifications to**, choose an existing Amazon SNS Amazon Resource Name \(ARN\) for an Amazon SNS topic, or choose **create topic** to enter the name of a topic and a list of recipients\.
+   1. For **Send notifications to**, choose an existing Amazon SNS ARN for an Amazon SNS topic, or choose **create topic** to enter the name of a topic and a list of recipients\.
 
    1. For **Source type**, choose a source type\.
 
@@ -298,7 +319,7 @@ After you have created a subscription, you can change the subscription name, sou
 
 1.  In the **Event subscriptions** pane, choose the subscription that you want to modify and choose **Edit**\. 
 
-1.  Make your changes to the subscription in either the **Target** or **Source** sections\.
+1.  Make your changes to the subscription in either the **Target** or **Source** section\.
 
 1. Choose **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Modify2.png)
@@ -410,7 +431,7 @@ All events for a resource type are grouped into categories\. To view the list of
 
 ### AWS Management Console<a name="USER_Events.ListingCategories.Console"></a>
 
- When you create or modify an event notification subscription, the event categories are displayed in the Amazon RDS console\. See the topic [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying) for more information\. 
+When you create or modify an event notification subscription, the event categories are displayed in the Amazon RDS console\. For more information, see [Modifying an Amazon RDS Event Notification Subscription](#USER_Events.Modifying)\. 
 
 ![\[List DB event notification categories\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Categories.png)
 

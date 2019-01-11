@@ -13,9 +13,9 @@ For an example that walks you through the process of creating and connecting to 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -155,14 +155,14 @@ The following table contains details about settings that you choose when you cre
 | Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  DB engine version  |  The version of MariaDB that you want to use\.  | 
 |  DB instance class  |  The configuration for your DB instance\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
-|  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the region you chose\. You can add some intelligence to the name, such as including the region you chose, for example **mariadb\-instance1**\.   | 
+|  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\. You can add some intelligence to the name, such as including the AWS Region you chose, for example **mariadb\-instance1**\.   | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
 |  License model  |  MariaDB has only one license model, **general\-public\-license** the general license agreement for MariaDB\.   | 
 | **Log exports** |  Select the types of MariaDB database log files to generate\. For more information, see [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)\.   | 
 |  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
-|  Master username  |  The name that you use as the master user name to log on to your DB Instance\.  For more information, and a list of the default privileges for the master user, see [MariaDB Security on Amazon RDS](CHAP_MariaDB.md#MariaDB.Concepts.UsersAndPrivileges)\.   | 
+|  Master username  |  The name that you use as the master user name to log on to your DB instance\.  For more information, and a list of the default privileges for the master user, see [MariaDB Security on Amazon RDS](CHAP_MariaDB.md#MariaDB.Concepts.UsersAndPrivileges)\.   | 
 |  Master password  |  The password for your master user account\. The password must contain from 8 to 41 printable ASCII characters \(excluding /,", a space, and @\)\.   | 
 |  Multi\-AZ deployment  |  **Create replica in different zone** to create a standby mirror of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.   | 
 |  Option group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 

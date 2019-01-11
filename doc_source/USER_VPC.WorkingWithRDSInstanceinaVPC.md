@@ -108,7 +108,7 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 1.  For **VPC**, choose the VPC that you created\. 
 
-1. In the **Add subnets** section, click the **Add all the subnets related to this VPC** link\.   
+1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.   
 ![\[Create DB Subnet Group button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC101.png)
 
 1. Choose **Create**\. 

@@ -10,11 +10,11 @@ You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](ht
 
 To find the endpoint for a MySQL DB instance in the AWS Management Console:
 
-1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
-1. Click the MySQL DB instance name to display its details\. 
+1. Choose the MySQL DB instance name to display its details\. 
 
-1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
 If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com` and the port value is `3306`, then you would specify the following values in a MySQL connection string:
@@ -59,7 +59,7 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
 1. A root certificate that works for all regions can be downloaded [here](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. 
 
-1. Type the following command at a command prompt to connect to a DB instance with SSL using the MySQL utility\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. 
+1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL utility\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. 
 
    ```
    mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p
@@ -111,9 +111,4 @@ You can retrieve the number of active connections to an Amazon RDS MySQL DB inst
 SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
 
-## Related Topics<a name="USER_ConnectToInstance.related"></a>
-+  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-+  [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md) 
-+  [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md) 
-+  [Deleting a DB Instance](USER_DeleteInstance.md) 
-+  [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md) 
+## <a name="USER_ConnectToInstance.related"></a>

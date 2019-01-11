@@ -15,9 +15,9 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the Amazon RDS console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose **Create database**\. 
 
@@ -31,7 +31,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
    The **Specify DB details** page appears\.   
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch-SE-02.png)
 
-1. On the **Specify DB details** page, provide the information for your DB instance as shown in the following table:   
+1. On the **Specify DB details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
@@ -39,7 +39,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
    The **Configure Advanced Settings** page appears\. 
 
-1. On the **Configure advanced settings** page, provide the information for your DB instance as shown in the following table:   
+1. On the **Configure advanced settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
@@ -58,14 +58,14 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
 
-   1. Open the RDS console and then choose **Instances** to display a list of your DB instances\. 
+   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
-   1. Click the Oracle DB instance name to display its details\. 
+   1. Choose the Oracle DB instance name to display its details\. 
 
-   1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
-1. Type the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. The value for `Host` is the endpoint for your DB instance, the value for `Port` is the port you assigned the DB instance, and the value for the Oracle `SID` is the name of the DB instance's database that you specified when you created the DB instance, not the name of the DB instance\. 
+1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. The value for `Host` is the endpoint for your DB instance, and the value for `Port` is the port you assigned the DB instance\. The value for the Oracle `SID` is the name of the DB instance's database that you specified when you created the DB instance, not the name of the DB instance\. 
 
    ```
    PROMPT>sqlplus 'mydbusr@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint) (PORT=1521))(CONNECT_DATA=(SID=ORCL)))'
@@ -87,19 +87,12 @@ Once you are done exploring the sample DB instance that you created, you should 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Choose the DB instance you want to delete\.
+1. Choose the DB instance that you want to delete\.
 
-1. For **Instance actions**, choose **Delete**\.
+1. For **Actions**, choose **Delete**\.
 
-1. For **Create final snapshot?**, choose **No**, and select the acknowledgment\.
+1. For **Create final snapshot?**, choose **No**, and choose the acknowledgment\.
 
 1. Choose **Delete**\. 
-
-## Related Topics<a name="CHAP_GettingStarted.Oracle.Related"></a>
-+ [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
-+ [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-+ [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)
-+ [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-+ [Oracle on Amazon RDS](CHAP_Oracle.md)

@@ -15,10 +15,7 @@ The following snapshot upgrades are currently supported\.
 | 11\.2\.0\.3 | 11\.2\.0\.4\.v11 | 
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
 
-Amazon RDS supports upgrading snapshots in all AWS Regions except the following:
-+ EU \(Frankfurt\)
-+ China \(Beijing\)
-+ AWS GovCloud \(US\-West\)
+Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
 ## AWS Management Console<a name="USER_UpgradeDBSnapshot.Oracle.Console"></a>
 
@@ -52,10 +49,10 @@ The following example upgrades a DB snapshot\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-snapshot \
-2.     --db-snapshot-identifier <mydbsnapshot> \
-3.     --engine-version <11.2.0.4.v12> \
-4.     --option-group-name <default:oracle-se1-11-2>
+aws rds modify-db-snapshot \
+    --db-snapshot-identifier <mydbsnapshot> \
+    --engine-version <11.2.0.4.v12> \
+    --option-group-name <default:oracle-se1-11-2>
 ```
 For Windows:  
 

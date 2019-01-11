@@ -10,7 +10,7 @@ Before you continue, you must verify that the option group that you created for 
 You can verify the connection between an Oracle DB instance and the HSM\. Connect to the Oracle DB instance and use the following command:
 
 ```
-$ select * from v$encryption_wallet;
+select * from v$encryption_wallet;
 ```
 
 If the HSM connection is working, the command should return a status of *OPEN*\. The output of the command is similar to the following example:

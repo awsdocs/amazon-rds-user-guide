@@ -20,11 +20,11 @@ You can find the endpoint for a DB instance using the Amazon RDS console or the 
 
 1. Find the DNS name and port number for your DB Instance\. 
 
-   1. Choose **Instances** to display a list of your DB instances\. 
+   1. Choose **Databases** to display a list of your DB instances\. 
 
-   1. Click the Oracle DB instance name to display its details\. 
+   1. Choose the Oracle DB instance name to display the instance details\. 
 
-   1. Scroll to the **Connect** section and copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
+   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
 ![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
 ### CLI<a name="USER_Endpoint.CLI"></a>
@@ -36,7 +36,7 @@ To find the endpoint of an Oracle DB instance by using the AWS CLI, call the [de
 ```
 1. aws rds describe-db-instances                                
 ```
-Search for `Endpoint` in the output to find the DNS name and port number for your DB instance\. The `Address` line in the output contains the DNS name\. The following is an example of the JSON endpoint output:  
+Search for `Endpoint` in the output to find the DNS name and port number for your DB instance\. The `Address` line in the output contains the DNS name\. The following is an example of the JSON endpoint output\.  
 
 ```
 "Endpoint": {
@@ -63,12 +63,12 @@ To connect to your DB instance, you need its DNS name and port number\. For info
 ![\[Oracle SQL Developer with add icon highlighted\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-plus.png)
 
 1. In the **New/Select Database Connection** dialog box, provide the information for your DB instance:
-   + For **Connection Name**, type a name that describes the connection, such as `Oracle-RDS`\.
-   + For **Username**, type the name of the database administrator for the DB instance\.
-   + For **Password**, type the password for the database administrator\.
-   + For **Hostname**, type or paste the DNS name of the DB instance\.
-   + For **Port**, type the port number\.
-   + For **SID**, type the Oracle database SID\.
+   + For **Connection Name**, enter a name that describes the connection, such as `Oracle-RDS`\.
+   + For **Username**, enter the name of the database administrator for the DB instance\.
+   + For **Password**, enter the password for the database administrator\.
+   + For **Hostname**, enter the DNS name of the DB instance\.
+   + For **Port**, enter the port number\.
+   + For **SID**, enter the Oracle database SID\.
 
    The completed dialog box should look similar to the following\.  
 ![\[Creating a new connection in Oracle SQL Developer\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-newcon.png)
@@ -77,13 +77,13 @@ To connect to your DB instance, you need its DNS name and port number\. For info
 
 1. You can now start creating your own databases and running queries against your DB instance and databases as usual\. To run a test query against your DB instance, do the following:
 
-   1. In the **Worksheet** tab for your connection, type the following SQL query:
+   1. In the **Worksheet** tab for your connection, enter the following SQL query\.
 
       ```
       SELECT NAME FROM V$DATABASE;                           
       ```
 
-   1. Click the **execute** icon to run the query\.  
+   1. Choose the **execute** icon to run the query\.  
 ![\[Running a query in Oracle SQL Developer using the execute icon\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-run.png)
 
       SQL Developer returns the database name\.  
@@ -107,7 +107,7 @@ For Windows:
 ```
 1. sqlplus user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))             
 ```
-You will see output similar to the following\.  
+You should see output similar to the following\.  
 
 ```
 SQL*Plus: Release 12.1.0.2.0 Production on Mon Aug 21 09:42:20 2017                
@@ -151,10 +151,7 @@ The following are issues you might encounter when you try to connect to your Ora
 |  Unable to connect to your DB instance\.   |  For a newly created DB instance, the DB instance has a status of **creating** until it is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB instance is available\.   | 
 |  Unable to connect to your DB instance\.   |  If you can't send or receive communications over the port that you specified when you created the DB instance, you can't connect to the DB instance\. Check with your network administrator to verify that the port you specified for your DB instance allows inbound and outbound communication\.   | 
 |  Unable to connect to your DB instance\.   |  The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the security group for the DB instance might not match\. The problem is most likely the egress or ingress rules on your firewall\. For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.  To walk through the process of setting up rules for your security group, see [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.   | 
-|  **Connect failed because target host or object does not exist – Oracle, Error: ORA\-12545 **   |  Make sure that you specified the server name and port number correctly\. For **Server name**, type or paste the DNS name from the console\.  For information about finding the DNS name and port number for a DB instance, see [Finding the Endpoint of Your DB Instance](#USER_Endpoint)\.  | 
+|  **Connect failed because target host or object does not exist – Oracle, Error: ORA\-12545 **   |  Make sure that you specified the server name and port number correctly\. For **Server name**, enter the DNS name from the console\.  For information about finding the DNS name and port number for a DB instance, see [Finding the Endpoint of Your DB Instance](#USER_Endpoint)\.  | 
 |  **Invalid username/password; logon denied – Oracle, Error: ORA\-01017**   |  You were able to reach the DB instance, but the connection was refused\. This is usually caused by providing an incorrect user name or password\. Verify the user name and password, and then retry\.   | 
 
-## Related Topics<a name="USER_ConnectToOracleInstance.related"></a>
-+ [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-+ [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
+## <a name="USER_ConnectToOracleInstance.related"></a>

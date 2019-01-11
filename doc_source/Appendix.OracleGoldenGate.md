@@ -88,8 +88,8 @@ prompt$ ./ggsci
 Create a GLOBALS parameter file using the EC2 command line shell\. Parameters that affect all GoldenGate processes are defined in the GLOBALS parameter file\. The following example creates the necessary file:
 
 ```
-prompt$ cd $GGHOME
-prompt$ vi GLOBALS
+$ cd $GGHOME
+$ vi GLOBALS
 CheckpointTable oggadm1.oggchkpt
 ```
 

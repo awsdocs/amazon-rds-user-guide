@@ -99,7 +99,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 ## Supported Storage Engines for MySQL on Amazon RDS<a name="MySQL.Concepts.Storage"></a>
 
-While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or later to use the InnoDB `memcached` interface\. For more information, see [MySQL `MEMCACHED` Support](Appendix.MySQL.Options.memcached.md)\. 
+While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or later to use the InnoDB `memcached` interface\. For more information, see [MySQL memcached Support](Appendix.MySQL.Options.memcached.md)\. 
 
 The Federated Storage Engine is currently not supported by Amazon RDS for MySQL\. 
 

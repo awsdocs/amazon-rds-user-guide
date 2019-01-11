@@ -69,12 +69,12 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | No | 
 | db\.x1\.16xlarge | 64 | 349 | 976 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | No | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | No | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | No | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 3,500 | Up to 10 Gbps | No | No | No | Yes9 | No | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | No | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | No | 
-| db\.r5\.large | 2 | 10 | 16 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | No | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.large | 2 | 10 | 16 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | Yes | Yes8 | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | Yes | Yes8 | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
@@ -112,7 +112,7 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 
 1. **Max\. Bandwidth \(Mbps\)** – The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\. 
 **Important**  
-For general purpose \(gp2\) storage, the maximum throughput is 1,280 Mbps \(160 MB/s\)\. For more information on estimating bandwidth for gp2 storage, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)
+General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the Amazon EC2 documentation\. For information on estimating bandwidth for gp2 storage, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
 
 1. **Network Performance** – The network speed relative to other DB instance classes\. 
 
@@ -226,7 +226,7 @@ Set the following options to the appropriate values for your DB instance class u
 
 When you modify or restore a DB instance, you can also set the CPU cores and the threads per CPU core to the default settings for the selected DB instance class\.
 
-When you view the details for a DB instance in the console, you can view the processor information for its DB instance class\. The following image shows a DB instance class with one CPU core and multiple threads per core enabled\.
+When you view the details for a DB instance in the console, you can view the processor information for its DB instance class on the **Configuration** tab\. The following image shows a DB instance class with one CPU core and multiple threads per core enabled\.
 
 ![\[View processor options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/vcpu-view.png)
 

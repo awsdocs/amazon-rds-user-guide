@@ -1,7 +1,7 @@
 # Amazon Relational Database Service User Guide
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -169,7 +169,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)
    + [Options for MySQL DB Instances](Appendix.MySQL.Options.md)
       + [MariaDB Audit Plugin Support](Appendix.MySQL.Options.AuditPlugin.md)
-      + [MySQL MEMCACHED Support](Appendix.MySQL.Options.memcached.md)
+      + [MySQL memcached Support](Appendix.MySQL.Options.memcached.md)
    + [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)
    + [Known Issues and Limitations for MySQL on Amazon RDS](MySQL.KnownIssuesAndLimitations.md)
    + [MySQL on Amazon RDS SQL Reference](Appendix.MySQL.SQLRef.md)

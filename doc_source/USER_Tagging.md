@@ -60,20 +60,20 @@ The process to tag an Amazon RDS resource is similar for all resources\. The fol
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 **Note**  
-To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
+To filter the list of DB instances in the **Databases** pane, enter a text string for **Filter databases**\. Only DB instances that contain the string appear\.
 
-1. Click on the name of the DB instance that you want to tag to show its details\. 
+1. Choose the name of the DB instance that you want to tag to show its details\. 
 
 1. In the details section, scroll down to the **Tags** section\. 
 
 1. Choose **Add**\. The **Add tags** window appears\.   
 ![\[Add tags window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSConsoleTagging5.png)
 
-1. Type a value for **Tag key** and **Value**\.
+1. Enter a value for **Tag key** and **Value**\.
 
-1. To add another tag, you can choose **Add another Tag** and type a value for its **Tag key** and **Value**\. 
+1. To add another tag, you can choose **Add another Tag** and enter a value for its **Tag key** and **Value**\. 
 
    Repeat this step as many times as necessary\.
 
@@ -83,11 +83,11 @@ To filter the list of DB instances in the **Instances** pane, type a text string
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 **Note**  
-To filter the list of DB instances in the **Instances** pane, type a text string in the **Filter instances** box\. Only DB instances that contain the string appear\.
+To filter the list of DB instances in the **Databases** pane, enter a text string in the **Filter databases** box\. Only DB instances that contain the string appear\.
 
-1. Click on the name of the DB instance to show its details\. 
+1. Choose the name of the DB instance to show its details\. 
 
 1. In the details section, scroll down to the **Tags** section\. 
 
@@ -137,5 +137,4 @@ The following table provides a list of the allowed XML tags and their characteri
 ****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 
-## Related Topics<a name="USER_Tagging.related"></a>
-+ [Authentication and Access Control](UsingWithRDS.IAM.md)
+## <a name="USER_Tagging.related"></a>

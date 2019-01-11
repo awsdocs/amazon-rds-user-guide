@@ -74,13 +74,13 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
-1.  In the left navigation pane, select **Instances**, and then select a DB instance\. 
+1.  In the navigation pane, choose **Databases**, and then choose a DB instance\. 
 
-1.  Select **Show Monitoring**\. The first eight performance metrics display\. The metrics default to showing information for the current day\. 
+1.  Choose **Show Monitoring**\. The first eight performance metrics display\. The metrics default to showing information for the current day\. 
 
-1.  Use the numbered buttons at top right to page through the additional metrics, or select **Show All** to see all metrics\. 
+1.  Use the numbered buttons at top right to page through the additional metrics, or choose **Show All** to see all metrics\. 
 
-1.  Select a performance metric to adjust the time range in order to see data for other than the current day\. You can change the **Statistic**, **Time Range**, and **Period** values to adjust the information displayed\. For example, to see the peak values for a metric for each day of the last two weeks, set **Statistic** to **Maximum**, **Time Range** to **Last 2 Weeks**, and **Period** to **Day**\. 
+1.  Choose a performance metric to adjust the time range in order to see data for other than the current day\. You can change the **Statistic**, **Time Range**, and **Period** values to adjust the information displayed\. For example, to see the peak values for a metric for each day of the last two weeks, set **Statistic** to **Maximum**, **Time Range** to **Last 2 Weeks**, and **Period** to **Day**\. 
 **Note**  
  Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
@@ -90,28 +90,28 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
-1.  In the left navigation pane, select **Instances**, and then select a DB instance\. 
+1.  In the navigation pane, choose **Databases**, and then choose a DB instance\. 
 
-1.  Select **Show Monitoring**, and then select a performance metric to bring up the expanded view\. 
+1.  Choose **Show Monitoring**, and then choose a performance metric to bring up the expanded view\. 
 
-1.  Select **Create Alarm**\. 
+1.  Choose **Create Alarm**\. 
 
-1. On the **Create Alarm** page, identify what email address should receive the alert by selecting a value in the **Send a notification to** box\. Select **create topic** to the right of that box to create a new alarm recipient if necessary\. 
+1. On the **Create Alarm** page, identify what email address should receive the alert by choosing a value for **Send a notification to**\. Choose **create topic** to the right of that box to create a new alarm recipient if necessary\. 
 
-1.  In the **Whenever** list, select the alarm statistic to set\. 
+1.  For **Whenever**, choose the alarm statistic to set\. 
 
-1.  In the **of** box, select the alarm metric\. 
+1.  For **of**, choose the alarm metric\. 
 
-1.  In the **Is** box and the unlabeled box to the right of it, set the alarm threshold, as shown following:   
+1. For **Is** and the unlabeled box to the right of it, set the alarm threshold, as shown following\.   
 ![\[Create Alarm dialog box\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CreateAlarm.png)
 
-1.  In the **For at least** box, enter the number of times that the specified threshold must be reached in order to trigger the alarm\. 
+1.  For **For at least**, enter the number of times that the specified threshold must be reached in order to trigger the alarm\. 
 
-1.  In the **consecutive period\(s\) of** box, select the period during which the threshold must have been reached in order to trigger the alarm\. 
+1.  For **consecutive period\(s\) of**, choose the period during which the threshold must have been reached in order to trigger the alarm\. 
 
-1.  In the **Name of alarm** box, enter a name for the alarm\. 
+1.  For **Name of alarm**, enter a name for the alarm\. 
 
-1.  Select **Create Alarm**\. 
+1.  Choose **Create Alarm**\. 
 
  The performance metrics page appears, and you can see the new alarm in the **CloudWatch Alarms** status bar\. If you don't see the status bar, refresh your page\. 
 

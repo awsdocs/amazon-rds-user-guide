@@ -10,15 +10,15 @@ You can have the changes apply immediately or have them applied during the DB in
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **DB Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
 
-1. Choose **Instance Actions**, and then choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB Instance** page appears\.
 
 1. Change any of the settings that you want\. For information about each setting, see [Settings for PostgreSQL DB Instances](#USER_ModifyInstance.Postgres.Settings)\. 
 
-1. To apply the changes immediately, select **Apply Immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
-
 1. When all the changes are as you want them, choose **Continue**\. 
+
+1. To apply the changes immediately, choose **Apply Immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 
@@ -65,7 +65,7 @@ The following code modifies `pgdbinstance` by setting the backup retention perio
 **Parameters**
 + `DBInstanceIdentifier`—the name of the DB instance
 + `BackupRetentionPeriod`—the number of days to retain automatic backups\.
-+ `AutoMinorVersionUpgrade`=`tgrue`—allow automatic minor version upgrades\. To disallow automatic minor version upgrades, set the value to `false`\.
++ `AutoMinorVersionUpgrade`=`true`—allow automatic minor version upgrades\. To disallow automatic minor version upgrades, set the value to `false`\.
 + `ApplyImmediately`=`false`—apply changes during the next maintenance window\. To apply changes immediately, set the value to `true`\.
 
 ```
@@ -109,6 +109,7 @@ The following table contains details about which settings you can modify, which 
 |  Enable Enhanced Monitoring  |  **Yes** to enable gathering metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | – | – | 
 |  IAM DB authentication  |  **Enable IAM DB authentication** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.   | – | – | 
 |  License Model  |  Select the PostgreSQL License\.   |  If **Apply Immediately** is set to true, the change occurs immediately\.  If **Apply Immediately** is set to false, the change occurs during the next maintenance window\.   |  An outage occurs during this change\.  | 
+|  Log exports  |  Select the types of PostgreSQL database log files to publish to Amazon CloudWatch Logs\.  For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.   |  The change occurs immediately\. This setting ignores the **Apply immediately** setting\.   |  –  | 
 |  Maintenance Window  |  The time range during which system maintenance occurs\. System maintenance includes upgrades, if applicable\. The maintenance window is a start time in Universal Coordinated Time \(UTC\), and a duration in hours\.  If you set the window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure any pending changes are applied\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   |  The change occurs immediately\. This setting ignores the **Apply Immediately** setting\.   |  If there are one or more pending actions that cause an outage, and the maintenance window is changed to include the current time, then those pending actions are applied immediately, and an outage occurs\.   | 
 |  Multi\-AZ Deployment  |  **Yes** to deploy your DB instance in multiple Availability Zones; otherwise, **No**\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   |  If **Apply Immediately** is set to true, the change occurs immediately\.  If **Apply Immediately** is set to false, the change occurs during the next maintenance window\.   |  –  | 
 |  New Master Password  |  The password for your master user\. The password must contain from 8 to 30 alphanumeric characters\.   |  The change is applied asynchronously, as soon as possible\. This setting ignores the **Apply Immediately** setting\.   |  –  | 

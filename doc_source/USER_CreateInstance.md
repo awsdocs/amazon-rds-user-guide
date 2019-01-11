@@ -13,9 +13,9 @@ For an example that walks you through the process of creating and connecting to 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the AWS Management Console, choose the region in which you want to create the DB instance\. 
+1. In the top right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
    If the navigation pane is closed, choose the menu icon at the top left to open it\.
 
@@ -151,7 +151,7 @@ The following table contains details about settings that you choose when you cre
 |  Database port  |  The port that you want to access the DB instance through\. MySQL installations default to port 3306\. If you use a DB security group with your DB instance, this must be the same port value you provided when creating the DB security group\.  The firewalls at some companies block connections to the default MySQL port\. If your company firewall blocks the default port, choose another port for your DB instance\.   | 
 |  DB engine version  |  The version of MySQL that you want to use\.  | 
 |  DB instance class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class equates to 1\.7 GiB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
-|  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the region you chose\. You can add some intelligence to the name, such as including the region you chose, for example **mysql\-instance1**\.   | 
+|  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\. You can add some intelligence to the name, such as including the AWS Region you chose, for example **mysql\-instance1**\.   | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
 | Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
@@ -161,7 +161,7 @@ The following table contains details about settings that you choose when you cre
 | **Log exports** |  Select the types of MySQL database log files to generate\. For more information, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)\.   | 
 |  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
 |  Master password  |  The password for your master user account\. The password must contain from 8 to 16 printable ASCII characters \(excluding /,", a space, and @\)\.   | 
-|  Master username  |  The name that you use as the master user name to log on to your DB Instance\.  For more information, and a list of the default privileges for the master user, see [MySQL Security on Amazon RDS](CHAP_MySQL.md#MySQL.Concepts.UsersAndPrivileges)\.   | 
+|  Master username  |  The name that you use as the master user name to log on to your DB instance\.  For more information, and a list of the default privileges for the master user, see [MySQL Security on Amazon RDS](CHAP_MySQL.md#MySQL.Concepts.UsersAndPrivileges)\.   | 
 |  Multi\-AZ deployment  |  **Create replica in different zone** to create a passive secondary replica of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.   | 
 |  Option group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
 |  Public accessibility  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 

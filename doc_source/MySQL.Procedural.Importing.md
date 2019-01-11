@@ -57,10 +57,10 @@ For more information about backing up your database with Percona XtraBackup, see
 
 To create a full backup of your MySQL database files that can be restored from Amazon S3, use the Percona XtraBackup utility \(`xtrabackup`\) to back up your database\. 
 
-For example, the following command creates a backup of a MySQL database and stores the files in the folder `/s3-restore/backup` folder\. 
+For example, the following command creates a backup of a MySQL database and stores the files in the folder `/on-premises/s3-restore/backup` folder\. 
 
 ```
-xtrabackup --user=<myuser> --password=<password> /s3-restore/backup
+xtrabackup --backup --user=<myuser> --password=<password> --target-dir=</on-premises/s3-restore/backup>
 ```
 
 If you want to compress your backup into a single file \(which can be split later, if needed\), you can save your backup in one of the following formats: 
@@ -71,25 +71,25 @@ If you want to compress your backup into a single file \(which can be split late
 The following command creates a backup of your MySQL database split into multiple Gzip files\. 
 
 ```
-xtrabackup --user=<myuser> --password=<password> --stream=tar \
-   /s3-restore/backup | gzip - | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.tar.gz
+xtrabackup --backup --user=<myuser> --password=<password> --stream=tar \
+   --target-dir=</on-premises/s3-restore/backup> | gzip - | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.tar.gz
 ```
 
 The following command creates a backup of your MySQL database split into multiple tar files\. 
 
 ```
-xtrabackup --user=<myuser> --password=<password> --stream=tar \
-   /s3-restore/backup | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.tar
+xtrabackup --backup --user=<myuser> --password=<password> --stream=tar \
+   --target-dir=</on-premises/s3-restore/backup> | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.tar
 ```
 
 The following command creates a backup of your MySQL database split into multiple xbstream files\. 
 
 ```
-xtrabackup --stream=xbstream --user=myuser --password=<password>  \
-   /s3-restore/backup | split -d --bytes=500MB \
-   - /s3-restore/backup/backup.xbstream
+xtrabackup --backup --user=<myuser> --password=<password> --stream=xbstream \
+   --target-dir=</on-premises/s3-restore/backup> | split -d --bytes=500MB \
+   - </on-premises/s3-restore/backup/backup>.xbstream
 ```
 
 ### Using Incremental Backups With Percona XtraBackup<a name="AuroraMySQL.Migrating.ExtMySQL.S3.Backup.Incr"></a>
@@ -186,7 +186,7 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
 1. In the top right corner of the Amazon RDS console, choose the AWS Region in which to create your DB instance\. Choose the same AWS Region as the Amazon S3 bucket that contains your database backup\. 
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Databases**\. 
 
 1. Choose **Restore from S3** to launch the wizard\. 
 
@@ -205,11 +205,11 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
    1. For **S3 bucket**, choose your Amazon S3 bucket\. 
 
-   1. \(Optional\) For **S3 folder path prefix**, type a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
+   1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
 
    1. For **Create a new role**, choose **Yes** to create a new IAM role in your account, or choose **No** to select an existing IAM role\. 
 
-   1. For **IAM role**, select an existing IAM role, or specify the name for a new IAM Role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a New Role**\. 
+   1. For **IAM role**, select an existing IAM role, or specify the name for a new IAM role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a New Role**\. 
 
 1. Choose **Next** to continue\. The **Specify DB Details** page appears\. 
 

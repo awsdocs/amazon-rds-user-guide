@@ -158,7 +158,7 @@ SQL Server 2017 includes many new features, such as the following:
 
 For the full list of SQL Server 2017 features, see [What's New in SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2017)  in the Microsoft documentation\. 
 
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 ### Microsoft SQL Server 2016 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2016"></a>
 
@@ -194,7 +194,7 @@ Amazon RDS supports the following versions of SQL Server 2014:
 
 In addition to supported features of SQL Server 2012, Amazon RDS supports the new query optimizer available in SQL Server 2014, and also the delayed durability feature\. 
 
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 SQL Server 2014 supports all the parameters from SQL Server 2012 and uses the same default values\. SQL Server 2014 includes one new parameter, backup checksum default\. For more information, see [How to enable the CHECKSUM option if backup utilities do not expose the option](https://support.microsoft.com/en-us/kb/2656988) in the Microsoft documentation\. 
 
@@ -232,7 +232,7 @@ In addition to supported features of SQL Server 2008 R2, Amazon RDS supports the
 + UTF\-16 Support
 + ALTER ANY SERVER ROLE server\-level permission
 
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 Some SQL Server parameters have changed in SQL Server 2012\. 
 + The following parameters have been removed from SQL Server 2012: `awe enabled`, `precompute rank`, and `sql mail xps`\. These parameters were not modifiable in SQL Server DB Instances and their removal should have no impact on your SQL Server use\. 
@@ -278,7 +278,7 @@ Amazon RDS supports the following SQL Server 2008 R2 features:
 + Database Mirroring or Always On
 + The ability to use an Amazon RDS SQL DB instance as a data source for Reporting, Analysis, and Integration Services that are running on a separate server\.
 
-For a list of unsupported features, see [Features Not Supported](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 ## Microsoft SQL Server Engine Version Management<a name="SQLServer.Concepts.General.Patching"></a>
 
@@ -298,7 +298,7 @@ To use CDC with your Amazon RDS DB instances, first enable or disable CDC at the
 
 You can use CDC and AWS Database Migration Service to enable ongoing replication from SQL Server DB instances\.  
 
-## Features Not Supported<a name="SQLServer.Concepts.General.FeatureNonSupport"></a>
+## Features Not Supported and Features with Limited Support<a name="SQLServer.Concepts.General.FeatureNonSupport"></a>
 
 The following Microsoft SQL Server features are not supported on Amazon RDS: 
 + Stretch database
@@ -308,7 +308,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Data Quality Services
 + Database Log Shipping
 + Database Mail
-+ Distributed Queries \(i\.e\., Linked Servers\)
 + Distribution Transaction Coordinator \(MSDTC\)
 + File tables
 + FILESTREAM support
@@ -324,6 +323,9 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Service Broker endpoints
 + T\-SQL endpoints \(all operations using CREATE ENDPOINT are unavailable\)
 + WCF Data Services
+
+The following Microsoft SQL Server features have limited support on Amazon RDS: 
++ Distributed Queries / Linked Servers\. For more information, see: [Implementing Linked Servers with Amazon RDS for Microsoft SQL Server](https://aws.amazon.com/blogs/database/implement-linked-servers-with-amazon-rds-for-microsoft-sql-server/)\.
 
 ## Multi\-AZ Deployments Using Microsoft SQL Server Mirroring or Always On<a name="SQLServer.Concepts.General.Mirroring"></a>
 

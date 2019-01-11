@@ -55,17 +55,17 @@ When creating a Read Replica, there are a few things to consider\. First, you mu
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\. 
+1. In the navigation pane, choose **Databases**\. 
 
-1. In the **Instances** pane, select the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica\. 
+1. Choose the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica\. 
 
-1. For **Instance actions**, choose **Create read replica**\. 
+1. For **Actions**, choose **Create read replica**\. 
 
-1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type as the source DB instance for the Read Replica\. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\. Creating your Read Replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
+1. Choose the instance specifications that you want to use\. We recommend that you use the same DB instance class and storage type as the source DB instance for the Read Replica\. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\. Creating your Read Replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 
-1. Choose the settings you want to use\. For **DB instance identifier**, type a name for the Read Replica\. Adjust other settings as needed\. 
+1. Choose the settings that you want to use\. For **DB instance identifier**, enter a name for the Read Replica\. Adjust other settings as needed\. 
 
-1. Choose the other settings you want to use\. 
+1. Choose the other settings that you want to use\. 
 
 1. Choose **Create read replica**\.
 
@@ -145,13 +145,13 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the Amazon RDS console, choose **Instances**\. 
+1. In the Amazon RDS console, choose **Databases**\. 
 
-   The **Instance** pane appears\. Each Read Replica shows **replica** in the **Replication role** column\. 
+   The **Databases** pane appears\. Each Read Replica shows **Replica** in the **Role** column\. 
 
-1. In the **Instances** pane, select the Read Replica that you want to promote\. 
+1. Choose the Read Replica that you want to promote\. 
 
-1. Choose **Instance actions**, and then choose **Promote read replica**\. 
+1. For **Actions**, choose **Promote read replica**\. 
 
 1. On the **Promote Read Replica** page, enter the backup retention period and the backup window for the new promoted DB instance\. 
 
@@ -214,17 +214,17 @@ You can create a Read Replica across regions using the AWS Management Console\.
 
 1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. In the **Instances** pane, choose the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica, and then choose **Create read replica** from **Instance actions**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+1. Choose the MySQL, MariaDB, or PostgreSQL DB instance that you want to use as the source for a Read Replica, and then choose **Create read replica** for **Actions**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
 1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type for the Read Replica\. 
 
 1. Choose the other settings you want to use: 
-   + For **DB instance identifier**, type a name for the Read Replica\.
+   + For **DB instance identifier**, enter a name for the Read Replica\.
    + In the **Network & Security** section, choose a value for **Designation region** and **Designation DB subnet group**\.
-   +  To create an encrypted Read Replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the KMS key identifier of the destination AWS Region\. 
-   + Choose the other settings you want to use\. 
+   +  To create an encrypted Read Replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the destination AWS Region\. 
+   + Choose the other settings that you want to use\. 
 
 1. Choose **Create read replica**\.
 

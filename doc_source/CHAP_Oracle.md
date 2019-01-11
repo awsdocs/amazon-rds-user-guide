@@ -186,7 +186,7 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |  [ standby\_db\_preserve\_states](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/STANDBY_DB_PRESERVE_STATES.html#GUID-8D332556-30B7-4C45-8557-50988DC2219E)  | NONE \(default\), SESSION, ALL | N | Controls whether user sessions and other internal states of the instance are retained when a readable physical standby database is converted to a primary database\.  | 
 |  [ uniform\_log\_timestamp\_format](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/UNIFORM_LOG_TIMESTAMP_FORMAT.html#GUID-041BC204-EA0E-4260-9726-D25C2C86A2F5)  | TRUE \(default\), FALSE | Y | Specifies that a uniform timestamp format be used in Oracle Database trace \(\.trc\) files and log files \(such as the alert log\)\. | 
 
-One parameter has a new default value for Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. The following table shows the new default value\. 
+The `compatible` parameter has a new default value for Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. The following table shows the new default value\. 
 
 
 ****  
@@ -194,6 +194,15 @@ One parameter has a new default value for Oracle 12c version 12\.2\.0\.1 on Amaz
 | Parameter Name | Oracle 12c Version 12\.2\.0\.1 Default Value | Oracle 12c Version 12\.1\.0\.2 Default Value | 
 | --- | --- | --- | 
 | [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9) | 12\.2\.0 | 12\.0\.0 | 
+
+The `optimizer_features_enable` parameter has a new value range for Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. For the old and new value ranges, see the following table\.
+
+
+****  
+
+| Parameter Name | 12c Version 12\.2\.0\.1 Range | 12c Version 12\.1\.0\.2 Range | 
+| --- | --- | --- | 
+|  [optimizer\_features\_enable](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OPTIMIZER_FEATURES_ENABLE.html#GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C)  |  8\.0\.0 to 12\.2\.0\.1  |  8\.0\.0 to 12\.1\.0\.2  | 
 
 The following parameters were removed in Oracle 12c Version 12\.2\.0\.1:
 + global\_context\_pool\_size

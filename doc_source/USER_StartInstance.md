@@ -10,9 +10,9 @@ When you start a DB instance that you previously stopped, the DB instance retain
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to start\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to start\. 
 
-1. Choose **Instance actions**, and then choose **Start**\. 
+1. Choose **Actions**, and then choose **Start**\. 
 
 ## CLI<a name="USER_StartInstance.CLI"></a>
 

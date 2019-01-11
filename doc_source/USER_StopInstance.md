@@ -11,11 +11,11 @@ You can stop and start DB instances that are running the following engines:
 
 Stopping and starting a DB instance is supported for all DB instance classes, and in all AWS Regions\. 
 
- You can stop and start a DB instance whether it is configured as single availability zone or multi\-availability zone, for database engines that support Multi\-AZ deployments\. You can't stop an Amazon RDS for SQL Server DB instance in a Multi\-AZ configuration\. 
+You can stop and start a DB instance whether it is configured for a single Availability Zone or for Multi\-AZ, for database engines that support Multi\-AZ deployments\. You can't stop an Amazon RDS for SQL Server DB instance in a Multi\-AZ configuration\. 
 
 When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
 
-You can stop a DB instance for up to seven days\. If you do not manually start your DB instance after seven days, your DB instance is automatically started\. 
+You can stop a DB instance for up to seven days\. If you don't manually start your DB instance after seven days, your DB instance is automatically started\. 
 
 ## Benefits<a name="USER_StopInstance.Benefits"></a>
 
@@ -51,11 +51,11 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to stop\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to stop\. 
 
-1. Choose **Instance actions**, and then choose **Stop**\. 
+1. Choose **Actions**, and then choose **Stop**\. 
 
-1. \(Optional\) In the **Stop DB Instance** window, choose **Yes** for **Create Snapshot?** and type the snapshot name in the **Snapshot name** box\. Choose **Yes** if you want to create a snapshot of the DB instance before stopping it\. 
+1. \(Optional\) In the **Stop DB Instance** window, choose **Yes** for **Create Snapshot?** and enter the snapshot name for **Snapshot name**\. Choose **Yes** if you want to create a snapshot of the DB instance before stopping it\. 
 
 1. Choose **Yes, Stop Now** to stop the DB instance, or choose **Cancel** to cancel the operation\.
 
@@ -75,7 +75,4 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https:
 To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) action with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
 
-## Related Topics<a name="USER_StopInstance.Related"></a>
-+ [Starting an Amazon RDS DB Instance That Was Previously Stopped](USER_StartInstance.md)
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
-+ [Rebooting a DB Instance](USER_RebootInstance.md)
+## <a name="USER_StopInstance.Related"></a>

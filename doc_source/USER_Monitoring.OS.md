@@ -2,6 +2,8 @@
 
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from CloudWatch Logs in a monitoring system of your choice\.
 
+By default, Enhanced Monitoring metrics are stored in the CloudWatch Logs for 30 days\. To modify the amount of time the metrics are stored in the CloudWatch Logs, change the retention for the `RDSOSMetrics` log group in the CloudWatch console\. For more information, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention) in the *Amazon CloudWatch Logs User Guide*\.
+
 The cost for using Enhanced Monitoring varies depends on several factors:
 + You are only charged for Enhanced Monitoring that exceeds the free tier provided by Amazon CloudWatch Logs\. 
 
@@ -60,8 +62,8 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 You can enable Enhanced Monitoring when you create a DB instance or Read Replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you do not need to reboot your DB instance for the change to take effect\. 
 
 You can enable Enhanced Monitoring in the RDS console when you do one of the following actions: 
-+ **Create a Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
-+ **Create Read Replica** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
++ **Create a DB Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
++ **Create a Read Replica** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
 + **Modify a DB Instance** – You can enable Enhanced Monitoring in the **Modify DB Instance** page\.
 
 To enable Enhanced Monitoring by using the RDS console, scroll to the **Monitoring** section and do the following: 
@@ -130,14 +132,14 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w4aac19c13c19b7"></a>
+### Available OS Metrics<a name="w4aac19c13c21b7"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w4aac19c13c19b7b5"></a>
+#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w4aac19c13c21b7b5"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w4aac19c13c19b7b9"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w4aac19c13c21b7b9"></a>
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

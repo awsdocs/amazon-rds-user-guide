@@ -22,13 +22,15 @@ You can view database log files for your DB engine by using the Amazon RDS conso
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
+
+1. Choose the **Logs & events** tab\.
 
 1. Scroll down to the **Logs** section\. 
 
-1. In the **Logs** section, choose the log you wish to view and then choose **View**\.
+1. In the **Logs** section, choose the log that you want to view, and then choose **View**\.
 
 ### AWS CLI<a name="USER_LogAccess.CLI"></a>
 
@@ -56,20 +58,22 @@ You can use the Amazon RDS console, AWS CLI or API to download a database log fi
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
+
+1. Choose the **Logs & events** tab\.
 
 1. Scroll down to the **Logs** section\. 
 
-1. In the **Logs** section, choose the button next to the log you want to download, and then choose **Download**\.
+1. In the **Logs** section, choose the button next to the log that you want to download, and then choose **Download**\.
 
-1. Open the context \(right\-click\) menu for the link provided, and then choose **Save Link As**\. Type the location where you want the log file to be saved, and then choose **Save**\.  
+1. Open the context \(right\-click\) menu for the link provided, and then choose **Save Link As**\. Enter the location where you want the log file to be saved, and then choose **Save**\.  
 ![\[viewing log file\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/log_download2.png)
 
 ### AWS CLI<a name="USER_LogAccess.Procedural.Downloading.CLI"></a>
 
-To download a database log file, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)\. By default, this command will download only the latest portion of a log file; however, you can download an entire file by specifying the parameter `--starting-token 0`\.
+To download a database log file, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html](https://docs.aws.amazon.com/cli/latest/reference/rds/download-db-log-file-portion.html)\. By default, this command downloads only the latest portion of a log file\. However, you can download an entire file by specifying the parameter `--starting-token 0`\.
 
 The following example shows how to download the entire contents of a log file called *log/ERROR\.4* and store it in a local file called *errorlog\.txt*\.
 
@@ -105,18 +109,20 @@ You can monitor the contents of a log file by using the Amazon RDS console\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. Click the name of the DB instance that has the log file that you want to view\.
+1. Choose the name of the DB instance that has the log file that you want to view\.
 
-1. In the **Logs** pane, choose a log file, and then choose **Watch**\.
+1. Choose the **Logs & events** tab\.
+
+1. In the **Logs** section, choose a log file, and then choose **Watch**\.
 
 ## Publishing Database Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Procedural.UploadtoCloudWatch"></a>
 
 In addition to viewing and downloading DB instance logs, you can publish logs to Amazon CloudWatch Logs\. CloudWatch Logs lets you perform real\-time analysis of the log data, store the data in highly durable storage,and manage the data with the CloudWatch Logs Agent\. AWS retains log data published to CloudWatch Logs for an indefinite time period unless you specify a retention period\. For more information, see [Change Log Data Retention in CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#SettingLogRetention)\. 
 
  For engine\-specific information, see the following:
-+ [Publishing MariaDB Logs to CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
++ [Publishing MariaDB Logs to Amazon CloudWatch Logs](USER_LogAccess.Concepts.MariaDB.md#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs)
 + [Publishing MySQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
 + [Publishing Oracle Logs to Amazon CloudWatch Logs](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Oracle.PublishtoCloudWatchLogs)
 + [Publishing PostgreSQL Logs to CloudWatch Logs](USER_LogAccess.Concepts.PostgreSQL.md#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)

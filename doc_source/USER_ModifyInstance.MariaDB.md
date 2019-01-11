@@ -12,17 +12,15 @@ After you modify your DB instance settings, you can apply the changes immediatel
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**, and then select the DB instance that you want to modify\. 
+1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
 
-1. Choose **Instance actions**, and then choose **Modify**\. The **Modify DB instance** page appears\.
+1. Choose **Modify**\. The **Modify DB instance** page appears\.
 
 1. Change any of the settings that you want\. For information about each setting, see [Settings for MariaDB DB Instances](#USER_ModifyInstance.MariaDB.Settings)\. 
 
-1. To apply the changes immediately, select **Apply immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
-
 1. When all the changes are as you want them, choose **Continue** and check the summary of modifications\. 
 
-1. To apply the changes immediately, select **Apply immediately**\. Selecting this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
+1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 
@@ -99,7 +97,7 @@ The following table contains details about which settings you can modify, which 
 |  DB parameter group  |  The parameter group that you want associated with the DB instance\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   |  The parameter group change occurs immediately\.   |  An outage doesn't occur during this change\. When you change the parameter group, changes to some parameters are applied to the DB instance immediately without a reboot\. Changes to other parameters are applied only after the DB instance is rebooted\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\.   | 
 | Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | – | – | 
 |  Enhanced monitoring  |  **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | – | – | 
-|  Log exports  |  Select the types of MariaDB database log files to generate\.  For more information, see [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)\.   |  If **Apply immediately** is set to true, the change occurs immediately\.  If **Apply immediately** is set to false, the change occurs during the next maintenance window\.   |  –  | 
+|  Log exports  |  Select the types of MariaDB database log files to publish to Amazon CloudWatch Logs\.  For more information, see [MariaDB Database Log Files](USER_LogAccess.Concepts.MariaDB.md)\.   |  The change occurs immediately\. This setting ignores the **Apply immediately** setting\.   |  –  | 
 |  Maintenance window  |  The time range during which system maintenance occurs\. System maintenance includes upgrades, if applicable\. The maintenance window is a start time in Universal Coordinated Time \(UTC\), and a duration in hours\.  If you set the window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure any pending changes are applied\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   |  The change occurs immediately\. This setting ignores the **Apply immediately** setting\.   |  If there are one or more pending actions that cause an outage, and the maintenance window is changed to include the current time, then those pending actions are applied immediately, and an outage occurs\.   | 
 |  Multi\-AZ deployment  |  **Yes** to deploy your DB instance in multiple Availability Zones; otherwise, **No**\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   |  If **Apply immediately** is set to true, the change occurs immediately\.  If **Apply immediately** is set to false, the change occurs during the next maintenance window\.   |  –  | 
 |  New master password  |  The password for your master user\. The password must contain from 8 to 41 alphanumeric characters\.   |  The change is applied asynchronously, as soon as possible\. This setting ignores the **Apply immediately** setting\.   |  –  | 

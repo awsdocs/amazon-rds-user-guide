@@ -6,6 +6,8 @@ Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions exc
 + US West \(N\. California\)
 + Asia Pacific \(Mumbai\)
 + South America \(São Paulo\)
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
 
 Amazon RDS uses Mixed Mode for Windows Authentication\. This approach means that the *master user *\(the name and password used to create your SQL Server DB instance\) uses SQL Authentication\. Because the master user account is a privileged credential, you should restrict access to this account\. 
 

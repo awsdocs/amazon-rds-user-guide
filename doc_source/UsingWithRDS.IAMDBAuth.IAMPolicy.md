@@ -42,7 +42,7 @@ The example policy includes a single statement with the following elements:
   + `account-id` is the AWS account number for the DB instance\. In the example policy, the account number is `1234567890`\.
   + `dbi-resource-id` is the identifier for the DB instance\. This identifier is unique to an AWS Region and never changes\. In the example policy, the identifier is `db-ABCDEFGHIJKL01234`\.
 
-    To find a DB instance resource ID in the AWS Management Console for Amazon RDS, choose the DB instance you want, and then choose **Instance Actions**, **See Details**\. The **Resource ID** is shown in the **Configuration Details** section\.
+    To find a DB instance resource ID in the AWS Management Console for Amazon RDS, choose the DB instance to see its details\. Then choose the **Configuration** tab\. The **Resource ID** is shown in the **Configuration Details** section\.
 
     Alternatively, you can use the AWS CLI command to list the identifiers and resource IDs for all of your DB instances in the current AWS Region, as shown following\.
 

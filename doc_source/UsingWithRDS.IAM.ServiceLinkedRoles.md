@@ -89,11 +89,11 @@ Before you can use IAM to delete a service\-linked role, you must first confirm 
 
 1. In the navigation pane of the IAM console, choose **Roles**\. Then choose the name \(not the check box\) of the AWSServiceRoleForRDS role\.
 
-1. On the **Summary** page for the selected role, choose the **Access Advisor** tab\.
+1. On the **Summary** page for the chosen role, choose the **Access Advisor** tab\.
 
 1. On the **Access Advisor** tab, review recent activity for the service\-linked role\.
 **Note**  
-If you are unsure whether Amazon RDS is using the AWSServiceRoleForRDS role, you can try to delete the role\. If the service is using the role, then the deletion fails and you can view the regions where the role is being used\. If the role is being used, then you must wait for the session to end before you can delete the role\. You cannot revoke the session for a service\-linked role\. 
+If you are unsure whether Amazon RDS is using the AWSServiceRoleForRDS role, you can try to delete the role\. If the service is using the role, then the deletion fails and you can view the AWS Regions where the role is being used\. If the role is being used, then you must wait for the session to end before you can delete the role\. You cannot revoke the session for a service\-linked role\. 
 
 If you want to remove the AWSServiceRoleForRDS role, you must first delete *all* of your DB instances \.
 
@@ -105,15 +105,15 @@ Use one of these procedures to delete each of your instances\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Instances**\.
+1. In the navigation pane, choose **Databases**\.
 
-1. In the **Instances** list, choose the instance that you want to delete\.
+1. Choose the instance that you want to delete\.
 
-1. Choose **Instance actions**, and then choose **Delete**\.
+1. For **Actions**, choose **Delete**\.
 
 1. If you are prompted for **Create final Snapshot?**, choose **Yes** or **No**\.
 
-1. If you chose **Yes** in the previous step, for **Final snapshot name** type the name of your final snapshot\.
+1. If you chose **Yes** in the previous step, for **Final snapshot name** enter the name of your final snapshot\.
 
 1. Choose **Delete**\.
 
