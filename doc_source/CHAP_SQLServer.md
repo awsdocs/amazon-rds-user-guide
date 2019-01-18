@@ -64,17 +64,17 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance have some
 
 The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
-The following are the DB instance classes supported for Microsoft SQL Server\. 
+The following list of DB instance classes supported for Microsoft SQL Server is provided here for your convenience\. For the most current list, see the RDS console: [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
 
 ****  
 
-| SQL Server Edition | 2017 and 2016 Support | 2014, 2012, and 2008 R2 Support | 
+| SQL Server Edition | 2017 and 2016 Support Range | 2014, 2012, and 2008 R2 Support Range | 
 | --- | --- | --- | 
-|  Enterprise Edition |  db\.m4\.xlarge–16xlarge db\.r4\.xlarge–16xlarge —  |  db\.m4\.xlarge–10xlarge db\.r4\.xlarge–8xlarge —  | 
-|  Standard Edition |  db\.m4\.large–16xlarge, except db\.m4\.10xlarge db\.r4\.large–16xlarge —  |  db\.m4\.large–4xlarge db\.r4\.large–8xlarge —  | 
-|  Web Edition  |  db\.m4\.large–4xlarge db\.r4\.large–2xlarge db\.t2\.small–medium  |  db\.m4\.large–4xlarge db\.r4\.large–2xlarge db\.t2\.small–medium  | 
-|  Express Edition  |  — — db\.t2\.micro–medium  |  db\.m1\.small–small — db\.t2\.micro–medium  | 
+|  Enterprise Edition |  `db.m4.xlarge`–`db.m4.16xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge`  |  `db.m4.xlarge`–`db.m4.10xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.m5.xlarge`–`db.m5.24xlarge` | 
+|  Standard Edition |  `db.m4.large`–`db.m4.16xlarge` `db.r4.large`–`db.r4.16xlarge` `db.m5.large`–`db.m5.24xlarge`  |  `db.m4.large`–`db.m4.10xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.m5.large`–`db.m5.24xlarge`  | 
+|  Web Edition  |  `db.t2.small`–`db.t2.medium` `db.m4.large`–`db.m4.4xlarge` `db.r4.large`–`db.r4.2xlarge` `db.m5.large`–`db.m5.4xlarge`  |  `db.t2.small`–`db.t2.medium` `db.m4.large`–`db.m4.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
+|  Express Edition  |  `db.t2.micro`–`db.t2.medium`  |  `db.t2.micro`–`db.t2.medium`  | 
 
 ## Microsoft SQL Server Security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
 

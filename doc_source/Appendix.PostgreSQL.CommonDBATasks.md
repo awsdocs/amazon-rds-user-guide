@@ -757,7 +757,7 @@ PostGIS is an extension to PostgreSQL for storing and managing spatial informati
 You need to perform a bit of setup before you can use the PostGIS extension\. The following list shows what you need to do; each step is described in greater detail later in this section\.
 + Connect to the DB instance using the master user name used to create the DB instance\.
 + Load the PostGIS extensions\.
-+ Transfer ownership of the extensions to the`rds_superuser` role\.
++ Transfer ownership of the extensions to the `rds_superuser` role\.
 + Transfer ownership of the objects to the `rds_superuser` role\.
 + Test the extensions\.
 

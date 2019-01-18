@@ -60,6 +60,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Copying a Snapshot](USER_CopySnapshot.md)
    + [Sharing a DB Snapshot](USER_ShareSnapshot.md)
    + [Restoring a DB Instance to a Specified Time](USER_PIT.md)
+   + [Deleting a Snapshot](USER_DeleteSnapshot.md)
    + [Tutorial: Restore a DB Instance from a DB Snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
 + [Monitoring Amazon RDS](CHAP_Monitoring.md)
    + [Overview of Monitoring Amazon RDS](MonitoringOverview.md)

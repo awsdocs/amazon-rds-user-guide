@@ -65,6 +65,32 @@ For another example, suppose that the **Average Active Sessions** chart is group
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_6.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
 
+In the **Top Load Items** table, you can view the following types of identifiers \(IDs\) that are associated with SQL statements:
++ **SQL ID** – An ID that the database uses to uniquely identify a SQL statement\.
+
+  For Oracle and SQL Server DB instances, you can use a SQL ID to find a specific SQL statement\.
++ **Support SQL ID** – A hash value of the SQL ID\. This value is only for referencing a SQL ID when you are working with AWS Support\. AWS Support does't have access to your actual SQL IDs and SQL text\.
++ **Digest ID** – An ID that the database uses to uniquely identify a SQL Digest\. A SQL Digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
+
+  For Amazon RDS MySQL and PostgreSQL DB instances, you can use a Digest ID to find a specific SQL Digest\.
+
+  For Oracle and SQL Server DB instances, the Digest ID is the same as the SQL ID, and the top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
++ **Support Digest ID** – A hash value of the Digest ID\. This value is only for referencing a Digest ID when you are working with AWS Support\. AWS Support does't have access to your actual Digest IDs and SQL text\.
+
+In the **Top Load Items** table, you can open a top statement to view its IDs\. The following image shows an open top statement\.
+
+![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-open.png)
+
+You can control the IDs that the **Top Load Items** table shows by choosing the **Preferences** icon\.
+
+![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences-icon.png)
+
+When you choose the **Preferences** icon, the **Preferences** window opens\.
+
+![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences.png)
+
+Enable the IDs that you want to have visible in the **Top Load Items** table, and choose **Save**\.
+
 ## Analyzing Database Load Using the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
 
 If the **Average Active Sessions** chart shows a bottleneck, you can find out where the load is coming from\. To do so, look at the top load items table below the **Average Active Sessions** chart\. Choose a particular item, like a SQL query or a user, to drill down into that item and see details about it\.
