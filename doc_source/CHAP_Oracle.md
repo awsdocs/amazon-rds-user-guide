@@ -102,12 +102,12 @@ The following are the DB instance classes supported for Oracle\.
 
 | Oracle Edition | Version 12\.2\.0\.1 Support | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
 | --- | --- | --- | --- | 
-|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t2\.micro–db\.t2\.large  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
 
 ### Deprecated DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
 
@@ -217,7 +217,7 @@ The following parameter is not supported in Oracle 12c Version 12\.2\.0\.1:
 
 #### Amazon RDS Security Changes for Oracle 12c Version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Security"></a>
 
-In Oracle 12c version 12\.2\.0\.1, direct grant of the privilege `ADMINISTER DATABASE TRICGGER` is required for the trigger owner\. During a major version upgrade to Oracle 12c version 12\.2\.0\.1, Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
+In Oracle 12c version 12\.2\.0\.1, direct grant of the privilege `ADMINISTER DATABASE TRICGGER` is required for the owners of database\-level triggers\. During a major version upgrade to Oracle 12c version 12\.2\.0\.1, Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
 
 ### Oracle 12c Version 12\.1\.0\.2 with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV1Overview"></a>
 
@@ -352,20 +352,7 @@ Oracle 12c version 12\.1\.0\.2 includes a number of new built\-in PL/SQL package
 |  [DBMS\_XSTREAM\_AUTH](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_xstrm_auth.htm)  | The DBMS\_XSTREAM\_AUTH package provides subprograms for granting privileges to and revoking privileges from XStream administrators\.  | 
 |  [UTL\_CALL\_STACK](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/u_call_stack.htm)  | The UTL\_CALL\_STACK package provides an interface to provide information about currently executing subprograms\.  | 
 
-#### Oracle 12c Version 12\.1\.0\.2 Features Not Supported<a name="Oracle.Concepts.FeatureSupport.12c.NotSupported"></a>
-
-The following features are not supported for Oracle 12c version 12\.1\.0\.2 on Amazon RDS:
-+ Automated Storage Management
-+ Data Guard / Active Data Guard
-+ Database Vault
-+ Multitenant Database
-+ Real Application Clusters \(RAC\)
-+ Real Application Testing
-+ Pure Unified Auditing Mode
-+ Mixed Unified Auditing Mode
-
-**Note**  
-Mixed Unified Auditing Mode is supported for version 12\.2\.0\.1 on Amazon RDS\.
+#### Oracle 12c Version 12\.1\.0\.2 Packages Not Supported<a name="Oracle.Concepts.FeatureSupport.12c.NotSupported"></a>
 
 Several Oracle 11g PL/SQL packages are not supported in Oracle 12c version 12\.1\.0\.2\. These packages include the following:
 + DBMS\_AUTO\_TASK\_IMMEDIATE
@@ -376,56 +363,90 @@ Several Oracle 11g PL/SQL packages are not supported in Oracle 12c version 12\.1
 + DBMS\_RLMGR
 + SDO\_NET\_MEM
 
-## Oracle 11g with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.11g"></a>
+## Oracle Database Feature Support<a name="Oracle.Concepts.FeatureSupport"></a>
 
-### Oracle 11g Supported Features<a name="Oracle.Concepts.FeatureSupport.11g.Supported"></a>
+Oracle Database supports a wide variety of features and capabilities, most of which are supported in Amazon RDS Oracle\. Some features may have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version\. 
 
-The following list shows the Oracle 11g features supported by Amazon RDS\. 
-+ Total Recall
-+ Flashback Table, Query and Transaction Query
-+ Virtual Private Database
-+ Fine\-Grained Auditing
-+ Comprehensive support for Microsoft \.NET, OLE DB, and ODBC
+**Note**  
+These lists are not exhaustive\.
+
+Amazon RDS Oracle supports the following Oracle Database features:
++ Advanced Compression
++ Application Express \(APEX\)
+
+  For more information, see [Oracle Application Express](Appendix.Oracle.Options.APEX.md)\.
 + Automatic Memory Management
 + Automatic Undo Management
-+ Advanced Compression
-+ Partitioning
-+ Star Query Optimization
-+ Summary Management \- Materialized View Query Rewrite
-+ Oracle Data Redaction
-+ Distributed Queries/Transactions
-+ Text
++ Automatic Workload Repository \(AWR\)
+
+  For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
++ Data Redaction
++ Database In\-Memory \(Version 12\.1 and later\)
++ Distributed Queries and Transactions
++ Edition\-Based Redefinition
+
+  For more information, see [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition)\.
++ Enterprise Manager Database Control \(11g\) and EM Express \(12c\)
+
+  For more information, see [Oracle Enterprise Manager](Oracle.Options.OEM.md)\.
++ Fine\-Grained Auditing
++ Flashback Table, Flashback Query, Flashback Transaction Query
++ Import/export \(legacy and Data Pump\) and SQL\*Loader
+
+  For more information, see [Importing Data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)\.
++ Java Virtual Machine \(JVM\)
+
+  For more information, see [Oracle Java Virtual Machine](oracle-options-java.md)\.
++ Label Security \(Version 12\.1 and later\)
+
+  For more information, see [Oracle Label Security](Oracle.Options.OLS.md)\.
++ Locator
+
+  For more information, see [Oracle Locator](Oracle.Options.Locator.md)\.
 + Materialized Views
-+ Import/Export and sqlldr Support
-+ Oracle Enterprise Manager Database Control
-+ Oracle XML DB \(without the XML DB Protocol Server\)
-+ Oracle Application Express
-+ Automatic Workload Repository for Enterprise Edition \(AWR\)\. For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)
-+ Datapump \(network only\)
-+ Native network encryption 
-+ Transparent data encryption \(Oracle TDE\), part of the Oracle Advanced Security feature 
++ Multimedia
 
-### Oracle 11g Features Not Supported<a name="Oracle.Concepts.FeatureSupport.11g.Unsupported"></a>
+  For more information, see [Oracle Multimedia](Oracle.Options.Multimedia.md)\.
++ Network encryption
 
-The following features are not supported for Oracle 11g on Amazon RDS:
-+ Real Application Clusters \(RAC\)
-+ Real Application Testing
-+ Data Guard / Active Data Guard
-+ Oracle Enterprise Manager Grid Control
-+ Automated Storage Management
+  For more information, see [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
++ Partitioning
++ Spatial and Graph
+
+  For more information, see [Oracle Spatial](Oracle.Options.Spatial.md)\.
++ Star Query Optimization
++ Streams and Advanced Queuing
++ Summary Management – Materialized View Query Rewrite
++ Text \(File and URL datastore types are not supported\)
++ Total Recall
++ Transparent Data Encryption \(TDE\)
+
+  For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\.
++ Unified Auditing, Mixed Mode \(Version 12\.2 and later\)
++ XML DB \(without the XML DB Protocol Server\)
+
+  For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
++ Virtual Private Database
+
+Amazon RDS Oracle does not support the following Oracle Database features:
++ Automatic Storage Management \(ASM\)
++ Data Guard and Active Data Guard
 + Database Vault
-+ Streams
-+ Oracle Label Security
-+ Oracle XML DB Protocol Server
++ Flashback Database
++ Multitenant
++ Oracle Enterprise Manager Cloud Control Management Repository
++ Real Application Clusters \(Oracle RAC\)
++ Real Application Testing
++ Unified Auditing, Pure Mode
 
-### Amazon RDS Parameters for Oracle 11g<a name="Oracle.Concepts.FeatureSupport.11g.Parameters"></a>
+## Oracle Database Parameter Support<a name="Oracle.Concepts.FeatureSupport.Parameters"></a>
 
 Parameters in Amazon RDS are managed using parameter groups\. See [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) for more information\. To view the supported parameters for a specific Oracle edition and version, you can run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
 
-For example, to view the supported parameters for Oracle Enterprise Edition, version 11g, run the following command:
+For example, to view the supported parameters for Oracle Enterprise Edition, version 12\.2, run the following command:
 
 ```
-aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee-11.2
+aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee-12.2
 ```
 
 ## Oracle Engine Version Management<a name="Oracle.Concepts.Patching"></a>

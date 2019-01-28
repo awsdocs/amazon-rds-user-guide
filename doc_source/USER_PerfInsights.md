@@ -10,7 +10,7 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 
 Amazon RDS Performance Insights is not supported for MySQL 5\.5 or MySQL 8\.0\.
 
-For information about using Amazon Aurora, see the [ Amazon Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
+For information about using Amazon Aurora, see the [Amazon Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
 
 **Note**  
 Performance Insights is not supported on db\.t2 DB instance classes\.
@@ -25,11 +25,12 @@ By combining `DB Load` with wait event data, you can get a complete picture of t
 + For information about all Oracle wait events, see [ Descriptions of Wait Events](https://docs.oracle.com/database/121/REFRN/GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2.htm#REFRN-GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2) in the Oracle documentation\.
 
 **Note**  
-For Oracle, background processes sometimes do work without an associated SQL statement\. In these cases, Performance Insights reports the type of background process \(for example, LGWR, ARC0, PMON, and so on\) concatenated with a colon and the wait class associated with that background process\. For example, when the archiver is performing I/O, the Performance Insights report for it is similar to `ARC1:System I/O`\. Occasionally, the background process type is missing as well, and Performance Insights only reports the wait class, for example `:System I/O`\.
+For Oracle, background processes sometimes do work without an associated SQL statement\. In these cases, Performance Insights reports the type of background process concatenated with a colon and the wait class associated with that background process\. Types of background process include LGWR, ARC0, PMON, and so on\.   
+For example, when the archiver is performing I/O, the Performance Insights report for it is similar to `ARC1:System I/O`\. Occasionally, the background process type is also missing, and Performance Insights only reports the wait class, for example `:System I/O`\.
 
 Session information is collected, aggregated, and displayed in the dashboard as the **Average Active Sessions** chart\. The **Average Active Sessions** chart displays the **Max CPU** value as a line, so you can see if active sessions are exceeding it or not\. The **Max CPU** value is determined by the number of **vCPU** \(virtual CPU\) cores for your DB instance\. 
 
-If you find that the load in the **Average Active Sessions** chart is often above the **Max CPU** line and the primary wait state is CPU, the system CPU is overloaded\. In these cases, you might want to throttle connections to the instance, tune any SQL queries with a high CPU load, or consider a larger instance class\. High and consistent instances of any wait state indicate that there might be bottlenecks or resource contention issues that you should resolve, even if the load doesn't cross the **Max CPU** line\.
+If the load in the **Average Active Sessions** chart is often above the **Max CPU** line and the primary wait state is CPU, the system CPU is overloaded\. In these cases, you might want to throttle connections to the instance, tune any SQL queries with a high CPU load, or consider a larger instance class\. High and consistent instances of any wait state indicate that there might be bottlenecks or resource contention issues to resolve, even if the load doesn't cross the **Max CPU** line\.
 
 You can find an overview of Performance Insights in the following video\.
 

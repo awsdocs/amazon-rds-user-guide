@@ -1513,8 +1513,12 @@ orange
 
 You can have up to 40 PostgreSQL DB instances\. The following is a list of limitations for PostgreSQL on Amazon RDS:
 + The maximum storage size for PostgreSQL DB instances is the following: 
-  + General Purpose \(SSD\) storage: 32 TiB \(16 TiB for db\.t2\.micro and db\.t2\.small instance classes\) 
-  + Provisioned IOPS storage: 32 TiB \(16 TiB for db\.t2\.micro and db\.t2\.small instance classes\) 
+  + General Purpose \(SSD\) storage: 32 TiB 
+
+    \(16 TiB for db\.t2\.micro, db\.t2\.small, db\.t3\.micro and db\.t3\.small instance classes\) 
+  + Provisioned IOPS storage: 32 TiB 
+
+    \(16 TiB for db\.t2\.micro, db\.t2\.small, db\.t3\.micro and db\.t3\.small instance classes\) 
   + Magnetic storage: 3 TiB 
 + The minimum storage size for PostgreSQL DB instances is the following: 
   + General Purpose \(SSD\) storage: 5 GiB 

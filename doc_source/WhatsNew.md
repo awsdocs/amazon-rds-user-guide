@@ -1,11 +1,15 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **December 19, 2018
++ **Latest documentation update: **January 25, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS for PostgreSQL supports db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running PostgreSQL that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | January 25, 2019 | 
+| [Amazon RDS for Oracle supports db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running Oracle that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | January 25, 2019 | 
+| [Amazon RDS Performance Insights supports viewing more SQL text for Amazon RDS PostgreSQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Amazon RDS PostgreSQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard\.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize) | January 24, 2019 | 
+| [Amazon RDS for Oracle supports a new version of SQLT](#WhatsNew) | Amazon RDS for Oracle now supports SQLT version 12\.2\.180725\. For more information, see [Oracle SQLT](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Options.SQLT.html)\. | January 22, 2019 | 
 | [Amazon RDS for PostgreSQL supports new minor versions](#WhatsNew) | Amazon RDS for PostgreSQL now supports the following new minor versions: 10\.6, 9\.6\.11, 9\.5\.15, 9\.4\.20, and 9\.3\.25\. For more information, see [Amazon RDS for PostgreSQL Versions and Extensions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)\. | December 19, 2018 | 
 | [Amazon RDS for PostgreSQL supports db\.r5 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running PostgreSQL that use the db\.r5 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | December 19, 2018 | 
 | [Amazon RDS for PostgreSQL now supports restricted password management](#WhatsNew) | Amazon RDS for PostgreSQL enables you to restrict who can manage user passwords and password expiration changes by using the parameter `rds.restrict_password_commands` and the role `rds_password`\. For more information, see [Restricting Password Management](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)\. | December 19, 2018 | 

@@ -14,10 +14,11 @@ Because configuration is automatic, RDS selects Mirroring or Always On based on 
 + SQL Server 2008 R2: Standard and Enterprise Editions
 
 Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the following exceptions:
-+ US West \(N\. California\): Neither Mirroring or Always On are supported here
++ US West \(N\. California\): Neither Mirroring nor Always On are supported here
 + Asia Pacific \(Sydney\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
 + Asia Pacific \(Tokyo\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
 + South America \(São Paulo\): Supported on all [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) except m1 or m2
++ EU \(Stockholm\): Neither Mirroring nor Always On are supported here
 
 ## Adding Multi\-AZ to a Microsoft SQL Server DB Instance<a name="USER_SQLServerMultiAZ.Adding"></a>
 

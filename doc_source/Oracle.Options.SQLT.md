@@ -11,6 +11,7 @@ Unlike Automatic Workload Repository or Statspack reports, SQLT works on individ
 Amazon RDS for Oracle currently supports the following versions of SQLT:
 + 12\.1\.160429
 + 12\.2\.180331
++ 12\.2\.180725
 
 To download SQLT and access instructions for using it:
 + Log in to your My Oracle Support account, and open the following documents:
@@ -66,7 +67,7 @@ Amazon RDS supports the following settings for the SQLT option\.
 | Option Setting | Valid Values | Default Value | Description | 
 | --- | --- | --- | --- | 
 |  `LICENSE_PACK`  |  `T`, `D`, `N`  |  `T`   |  The Oracle Management Packs that you want to access with SQLT\. Enter one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Options.SQLT.html)  Amazon RDS does not provide licenses for these Oracle Management Packs\. If you indicate that you want to use a pack that is not included in your DB instance, you can use SQLT with the DB instance\. However, SQLT can't access the pack, and the SQLT report doesn't include the data for the pack\. For example, if you specify `T`, but the DB instance doesn't include the Oracle Tuning Pack, SQLT works on the DB instance, but the report it generates doesn't contain data related to the Oracle Tuning Pack\.   | 
-|  `VERSION`  |  `2016-04-29.v1`, `2018-03-31.v1`  |  `2016-04-29.v1`   |  The version of SQLT that you want to install\.  | 
+|  `VERSION`  |  `2016-04-29.v1`, `2018-03-31.v1`, `2018-07-25.v1`  |  `2016-04-29.v1`   |  The version of SQLT that you want to install\.  | 
 
 ## Adding the SQLT Option<a name="Oracle.Options.SQLT.Add"></a>
 
@@ -185,9 +186,9 @@ Oracle does not recommend running SQLT with the `SYS` user or with users that ha
 
 ## Upgrading the SQLT Option<a name="Oracle.Options.SQLT.Upgrading"></a>
 
-With Amazon RDS for Oracle, you can upgrade the SQLT option from version 12\.1\.160429 to version 12\.2\.180331\. To upgrade the SQLT option, complete steps 1–3 in [Using SQLT](#Oracle.Options.SQLT.Using) for the new version of SQLT\. Also, if you granted privileges for the previous version of SQLT in step 7 of that section, grant the privileges again for the new SQLT version\. 
+With Amazon RDS for Oracle, you can upgrade the SQLT option from your existing version to a higher version\. To upgrade the SQLT option, complete steps 1–3 in [Using SQLT](#Oracle.Options.SQLT.Using) for the new version of SQLT\. Also, if you granted privileges for the previous version of SQLT in step 7 of that section, grant the privileges again for the new SQLT version\. 
 
-Upgrading the SQLT option results in the loss of the older SQLT version's metadata\. The older SQLT version's schema and related objects are dropped, and the newer version of SQLT is installed\. For more information about the changes in SQLT version 12\.2\.180331, see [Document 1614201\.1](https://support.oracle.com/epmos/faces/DocumentDisplay?parent=DOCUMENT&sourceId=215187.1&id=1614201.1) on the My Oracle Support site\.
+Upgrading the SQLT option results in the loss of the older SQLT version's metadata\. The older SQLT version's schema and related objects are dropped, and the newer version of SQLT is installed\. For more information about the changes in the latest SQLT version, see [Document 1614201\.1](https://support.oracle.com/epmos/faces/DocumentDisplay?parent=DOCUMENT&sourceId=215187.1&id=1614201.1) on the My Oracle Support site\.
 
 **Note**  
 Version downgrades are not supported\.

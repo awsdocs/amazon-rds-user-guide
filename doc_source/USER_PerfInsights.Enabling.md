@@ -2,7 +2,7 @@
 
 To use Performance Insights, you must enable it on your DB instance\.
 
-## AWS Management Console<a name="USER_PerfInsights.Enabling.Console"></a>
+## <a name="USER_PerfInsights.Enabling.Console"></a>
 
 You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.
 
@@ -50,7 +50,7 @@ You can modify a DB instance to enable Performance Insights using the console\.
 
 1. Choose **Modify instance**\.
 
-## CLI<a name="USER_PerfInsights.Enabling.CLI"></a>
+## AWS CLI<a name="USER_PerfInsights.Enabling.CLI"></a>
 
 When you create a new DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command, Performance Insights is enabled when you specify `--enable-performance-insights`\. 
 

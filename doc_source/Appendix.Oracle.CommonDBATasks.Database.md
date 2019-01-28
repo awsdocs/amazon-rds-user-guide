@@ -200,9 +200,9 @@ In this example, the data is populated in the `orders_xt.dmp` file in the DATA\_
 
 ## Working with Automatic Workload Repository \(AWR\)<a name="Appendix.Oracle.CommonDBATasks.AWR"></a>
 
-If you use Oracle Database Enterprise Edition and want to use Automatic Workload Repository \(AWR\), you can enable AWR by changing the `CONTROL_MANAGEMENT_PACK_ACCESS` parameter\. 
+If you use Oracle Database Enterprise Edition, have licensed the Diagnostics and Tuning packs, and want to use Automatic Workload Repository \(AWR\), you can enable AWR by changing the `CONTROL_MANAGEMENT_PACK_ACCESS` parameter\. 
 
-Oracle AWR includes several report generation scripts, such as awrrpt\.sql, that are installed on the host server\. You do not have direct access to the host, but you can copy the scripts from another installation of Oracle Database\. 
+AWR reports are typically generated using report generation scripts, such as awrrpt\.sql, installed on the database host server\. You do not have direct access to the host, but you can obtain copies of the scripts from another installation of Oracle Database\. Alternatively, reports can be generated using the DBMS\_WORKLOAD\_REPOSITORY package\. 
 
 ## Adjusting Database Links for Use with DB Instances in a VPC<a name="Appendix.Oracle.CommonDBATasks.DBLinks"></a>
 

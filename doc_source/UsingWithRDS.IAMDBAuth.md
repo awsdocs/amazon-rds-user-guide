@@ -20,10 +20,10 @@ IAM database authentication provides the following benefits:
 
 ## Availability for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available for the following database engines and instance classes:
-+ MySQL 5\.6, minor version 5\.6\.34 or higher\. All instance classes are supported, except for db\.t2\.micro, db\.t2\.small, and db\.m1\.small\. 
-+ MySQL 5\.7, minor version 5\.7\.16 or higher\. All instance classes are supported, except for db\.t2\.micro, db\.t2\.small, and db\.m1\.small\. 
-+ PostgreSQL versions 9\.5\.14, 9\.6\.9 or higher, and version 10\.4 or higher\.
+IAM database authentication is available for the following database engines and DB instance classes:
++ MySQL 5\.6, minor version 5\.6\.34 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.m1\.small\. 
++ MySQL 5\.7, minor version 5\.7\.16 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.m1\.small\. 
++ PostgreSQL versions 10\.6 or higher, 9\.6\.11 or higher, and 9\.5\.15 or higher\.
 
 **Note**  
 IAM database authentication is not supported for MySQL 5\.5 or MySQL 8\.0\.
@@ -41,6 +41,5 @@ We recommend the following when using the MySQL engine:
 
 ## PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
 
-When using IAM database authentication with PostgreSQL, note the following limitations:
+When using IAM database authentication with PostgreSQL, note the following limitation:
 + The maximum number of connections for your database instance may be limited depending on the instance type and your workload\.
-+ IAM database authentication is not supported with M5 instance types\.

@@ -23,7 +23,8 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.m2** – Previous\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
-+ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
++ **db\.t3** – Latest\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. 
++ **db\.t2** – Current\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
 
 ## Specifications for All Available DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
 
@@ -92,6 +93,13 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.m2\.4xlarge | 8 | 26 | 68\.4 | No | Yes | 1,000 | High | No | Yes8 | MySQL 5\.6, 5\.5 | Deprecated9 | PostgreSQL 9\.4, 9\.3 | 
 | db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | No | Yes8 | MySQL 5\.6, 5\.5 | Deprecated9 | PostgreSQL 9\.4, 9\.3 | 
 | db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | No | Yes8 | MySQL 5\.6, 5\.5 | Deprecated9 | PostgreSQL 9\.4, 9\.3 | 
+| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.xlarge | 4 | Variable | 16 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.large | 2 | Variable | 8 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.medium | 2 | Variable | 4 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.small | 2 | Variable | 2 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.micro | 2 | Variable | 1 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
