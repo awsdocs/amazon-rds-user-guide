@@ -39,6 +39,39 @@ The following section lists all categories and events that you can be notified o
 
  Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\. Each category applies to a source type, which can be a DB instance, DB snapshot, DB security group, or DB parameter group\.
 
+Messages received through SNS look like the following example.
+
+```
+{
+  "Records": [
+    {
+      "EventVersion": "1.0",
+      "EventSource": "aws:sns",
+      "EventSubscriptionArn": eventsubscriptionarn,
+      "Sns": {
+        "SignatureVersion": "1",
+        "Timestamp": "1970-01-01T00:00:00.000Z",
+        "Signature": "EXAMPLE",
+        "SigningCertUrl": "EXAMPLE",
+        "MessageId": "95df01b4-ee98-5cb9-9903-4c221d41eb5e",
+        "Message": "{\"Event Source\":\"db-instance\",\"Event Time\":\"1970-01-01 00:00:00.000\",\"Identifier Link\":\"https://console.aws.amazon.com/rds/home?region=eu-west-1#dbinstance:id=dbinstanceid\",\"Source ID\":\"dbinstanceid\",\"Event ID\":\"http://docs.amazonwebservices.com/AmazonRDS/latest/UserGuide/USER_Events.html#RDS-EVENT-0002\",\"Event Message\":\"Finished DB Instance backup\"}",
+        "MessageAttributes": {},
+        "Type": "Notification",
+        "UnsubscribeUrl": "EXAMPLE",
+        "TopicArn": topicarn,
+        "Subject": "RDS Notification Message"
+      }
+    }
+  ]
+}
+```
+
+When creating the subscription, an initial message is send, with the `Message` attribute having text instead of (escaped) json. This is an example of such a message:
+
+```
+This is a message to notify that RDS will attempt to send you event notifications of type db-instance to the topic topicarn
+```
+
 The following table shows the event category and a list of events when a DB instance is the source type\.
 
 
