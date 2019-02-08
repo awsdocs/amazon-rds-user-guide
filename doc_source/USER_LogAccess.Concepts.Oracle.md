@@ -122,7 +122,7 @@ The following example shows the current trace file retention period, and then se
 In addition to the periodic purge process, you can manually remove files from the `background_dump_dest`\. The following example shows how to purge all files older than five minutes\. 
 
 ```
-1. exec rdsadmin.manage_tracefiles.purge_tracefiles(5);
+exec rdsadmin.manage_tracefiles.purge_tracefiles(5);
 ```
 
 You can also purge all files that match a specific pattern \(if you do, don't include the file extension, such as \.trc\)\. The following example shows how to purge all files that start with `SCHPOC1_ora_5935`\. 
@@ -171,20 +171,20 @@ The following example creates an Oracle DB instance with CloudWatch Logs publish
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' \
-4.     --db-instance-class db.m1.small \
-5.     --engine oracle-se1
+aws rds create-db-instance \
+    --db-instance-identifier mydbinstance \
+    --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' \
+    --db-instance-class db.m1.small \
+    --engine oracle-se1
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' ^
-4.     --db-instance-class db.m1.small ^
-5.     --engine oracle-se1
+aws rds create-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' ^
+    --db-instance-class db.m1.small ^
+    --engine oracle-se1
 ```
 
 **Example**  
@@ -192,16 +192,16 @@ The following example modifies an existing Oracle DB instance to publish log fil
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
 ```
 
 **Example**  
@@ -209,16 +209,16 @@ The following example modifies an existing Oracle DB instance to disable publish
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
 ```
 
 ### RDS API<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs.API"></a>

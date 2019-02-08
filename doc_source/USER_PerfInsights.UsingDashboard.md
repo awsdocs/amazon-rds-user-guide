@@ -120,10 +120,13 @@ The last three roll\-up queries are the major contributors to CPU\. These are th
 
 By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 10,240 bytes for a SQL statement\. You can also copy or download the displayed SQL statement\.
 
+For Amazon RDS MySQL DB instances, you can view up to 1,024 bytes of SQL text\.
+
 For Amazon RDS PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 10,240 bytes\. For more information, see [Setting the SQL Text Limit for Amazon RDS PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
 **Note**  
-Currently, you can't view, copy, or download more than 500 bytes of SQL text for Amazon RDS MySQL and Oracle DB instances\.
+Currently, you can't view, copy, or download more than 500 bytes of SQL text for Amazon RDS Oracle DB instances\.  
+For Amazon RDS MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**
 

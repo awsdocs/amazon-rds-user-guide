@@ -7,7 +7,8 @@ Updates to your Amazon RDS for Oracle DB instances keep them current\. If you ap
 For Amazon RDS for Oracle version 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\.
 
 The following RUs and RURs are applied to the Amazon RDS for Oracle version 12\.2\.0\.1: 
-+ [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1)
++ [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) \(January 2019\)
++ [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1) \(October 2018\)
 
 ## Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
 
@@ -20,6 +21,7 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2019 January | [12\.1\.0\.2\.v15](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v15) | [11\.2\.0\.4\.v19](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v19) | 
 | 2018 October | [12\.1\.0\.2\.v14](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v14) | [11\.2\.0\.4\.v18](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v18) | 
 | 2018 July | [12\.1\.0\.2\.v13](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v13) | [11\.2\.0\.4\.v17](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v17) | 
 | 2018 April | [12\.1\.0\.2\.v12](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v12) | [11\.2\.0\.4\.v16](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v16) | 

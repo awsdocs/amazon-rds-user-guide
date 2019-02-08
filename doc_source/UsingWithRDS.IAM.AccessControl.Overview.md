@@ -75,30 +75,30 @@ You can attach policies to IAM identities\. For example, you can do the followin
 The following is an example policy that allows the user with the ID `123456789012` to create DB instances for your AWS account\. The policy requires that the name of the new DB instance begin with `test`\. The new DB instance must also use the MySQL database engine and the `db.t2.micro` DB instance class\. In addition, the new DB instance must use an option group and a DB parameter group that starts with `default`, and it must use the `default` subnet group\.
 
 ```
- 1. {
- 2.     "Version": "2012-10-17",
- 3.     "Statement": [
- 4.         {
- 5.             "Sid": "AllowCreateDBInstanceOnly",
- 6.             "Effect": "Allow",
- 7.             "Action": [
- 8.                 "rds:CreateDBInstance"
- 9.             ],
-10.             "Resource": [
-11.                 "arn:aws:rds:*:123456789012:db:test*",
-12.                 "arn:aws:rds:*:123456789012:og:default*",
-13.                 "arn:aws:rds:*:123456789012:pg:default*",
-14.                 "arn:aws:rds:*:123456789012:subgrp:default"
-15.             ],
-16.             "Condition": {
-17.                 "StringEquals": {
-18.                     "rds:DatabaseEngine": "mysql",
-19.                     "rds:DatabaseClass": "db.t2.micro"
-20.                 }
-21.             }
-22.         }
-23.     ]
-24. }
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowCreateDBInstanceOnly",
+            "Effect": "Allow",
+            "Action": [
+                "rds:CreateDBInstance"
+            ],
+            "Resource": [
+                "arn:aws:rds:*:123456789012:db:test*",
+                "arn:aws:rds:*:123456789012:og:default*",
+                "arn:aws:rds:*:123456789012:pg:default*",
+                "arn:aws:rds:*:123456789012:subgrp:default"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "rds:DatabaseEngine": "mysql",
+                    "rds:DatabaseClass": "db.t2.micro"
+                }
+            }
+        }
+    ]
+}
 ```
 
 For more information about using identity\-based policies with Amazon RDS, see [Using Identity\-Based Policies \(IAM Policies\) for Amazon RDS](UsingWithRDS.IAM.AccessControl.IdentityBased.md)\. For more information about users, groups, roles, and permissions, see [Identities \(Users, Groups, and Roles\)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the *IAM User Guide*\. 

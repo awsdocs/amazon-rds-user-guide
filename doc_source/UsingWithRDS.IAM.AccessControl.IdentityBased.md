@@ -13,30 +13,30 @@ The sections in this topic cover the following:
 The following is an example of an IAM policy:
 
 ```
- 1. {
- 2.     "Version": "2012-10-17",
- 3.     "Statement": [
- 4.         {
- 5.             "Sid": "AllowCreateDBInstanceOnly",
- 6.             "Effect": "Allow",
- 7.             "Action": [
- 8.                 "rds:CreateDBInstance"
- 9.             ],
-10.             "Resource": [
-11.                 "arn:aws:rds:*:123456789012:db:test*",
-12.                 "arn:aws:rds:*:123456789012:og:default*",
-13.                 "arn:aws:rds:*:123456789012:pg:default*",
-14.                 "arn:aws:rds:*:123456789012:subgrp:default"
-15.             ],
-16.             "Condition": {
-17.                 "StringEquals": {
-18.                     "rds:DatabaseEngine": "mysql",
-19.                     "rds:DatabaseClass": "db.t2.micro"
-20.                 }
-21.             }
-22.         }
-23.     ]
-24. }
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowCreateDBInstanceOnly",
+            "Effect": "Allow",
+            "Action": [
+                "rds:CreateDBInstance"
+            ],
+            "Resource": [
+                "arn:aws:rds:*:123456789012:db:test*",
+                "arn:aws:rds:*:123456789012:og:default*",
+                "arn:aws:rds:*:123456789012:pg:default*",
+                "arn:aws:rds:*:123456789012:subgrp:default"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "rds:DatabaseEngine": "mysql",
+                    "rds:DatabaseClass": "db.t2.micro"
+                }
+            }
+        }
+    ]
+}
 ```
 
 The policy includes a single statement that specifies the following permissions for the IAM user:
@@ -89,17 +89,17 @@ All examples use the US West \(Oregon\) Region \(`us-west-2`\) and contain ficti
 The following permissions policy grants permissions to a user to run all of the actions that begin with `Describe`\. These actions show information about an RDS resource, such as a DB instance\. The wildcard character \(\*\) in the `Resource` element indicates that the actions are allowed for all Amazon RDS resources owned by the account\. 
 
 ```
- 1. {
- 2.    "Version":"2012-10-17",
- 3.    "Statement":[
- 4.       {
- 5.          "Sid":"AllowRDSDescribe",
- 6.          "Effect":"Allow",
- 7.          "Action":"rds:Describe*",
- 8.          "Resource":"*"
- 9.       }
-10.    ]
-11. }
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Sid":"AllowRDSDescribe",
+         "Effect":"Allow",
+         "Action":"rds:Describe*",
+         "Resource":"*"
+      }
+   ]
+}
 ```
 
 ### Example 2: Allow a User to Create a DB Instance That Uses the Specified DB Parameter and Security Groups<a name="IAMPolicyExamples-RDS-create-db-instance"></a>
@@ -107,20 +107,20 @@ The following permissions policy grants permissions to a user to run all of the 
 The following permissions policy grants permissions to allow a user to only create a DB instance that must use the `mysql-production` DB parameter group and the `db-production` DB security group\. 
 
 ```
- 1. {
- 2.    "Version":"2012-10-17",
- 3.    "Statement":[
- 4.       {
- 5.          "Sid":"AllowMySQLProductionCreate",
- 6.          "Effect":"Allow",
- 7.          "Action":"rds:CreateDBInstance",
- 8.          "Resource":[
- 9.             "arn:aws:rds:us-west-2:123456789012:pg:mysql-production",
-10.             "arn:aws:rds:us-west-2:123456789012:secgrp:db-production"
-11.          ]
-12.       }
-13.    ]
-14. }
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Sid":"AllowMySQLProductionCreate",
+         "Effect":"Allow",
+         "Action":"rds:CreateDBInstance",
+         "Resource":[
+            "arn:aws:rds:us-west-2:123456789012:pg:mysql-production",
+            "arn:aws:rds:us-west-2:123456789012:secgrp:db-production"
+         ]
+      }
+   ]
+}
 ```
 
 ### Example 3: Prevent a User from Deleting a DB Instance<a name="IAMPolicyExamples-RDS-prevent-db-deletion"></a>
@@ -128,15 +128,15 @@ The following permissions policy grants permissions to allow a user to only crea
 The following permissions policy grants permissions to prevent a user from deleting a specific DB instance\. For example, you might want to deny the ability to delete your production instances to any user that is not an administrator\.
 
 ```
- 1. {
- 2.    "Version":"2012-10-17",
- 3.    "Statement":[
- 4.       {
- 5.          "Sid":"DenyDelete1",
- 6.          "Effect":"Deny",
- 7.          "Action":"rds:DeleteDBInstance",
- 8.          "Resource":"arn:aws:rds:us-west-2:123456789012:db:my-mysql-instance"
- 9.       }
-10.    ]
-11. }
+{
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Sid":"DenyDelete1",
+         "Effect":"Deny",
+         "Action":"rds:DeleteDBInstance",
+         "Resource":"arn:aws:rds:us-west-2:123456789012:db:my-mysql-instance"
+      }
+   ]
+}
 ```

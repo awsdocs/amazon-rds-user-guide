@@ -120,13 +120,13 @@ The following procedure shows you how to install and configure the APEX Listener
 1. Create a nonprivileged OS user to own the APEX Listener installation\. The following command creates a new user named *apexuser*\. 
 
    ```
-   1. useradd -d /home/apexuser apexuser
+   useradd -d /home/apexuser apexuser
    ```
 
    The following command assigns a password to the new user\. 
 
    ```
-   1. passwd apexuser;
+   passwd apexuser;
    ```
 
 1. Log in to `myapexhost.example.com` as `apexuser`, and download the APEX installation file from Oracle to your `/home/apexuser` directory: 

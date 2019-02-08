@@ -164,7 +164,7 @@ You can use the AWS CLI to work with reserved DB instances as shown in the follo
 To get information about available reserved DB instance offerings, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html)\.   
 
 ```
-1. aws rds describe-reserved-db-instances-offerings
+aws rds describe-reserved-db-instances-offerings
 ```
 This call returns output similar to the following:   
 
@@ -191,16 +191,16 @@ The following example purchases the reserved DB instance offering with ID *649fd
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds purchase-reserved-db-instances-offering \
-2.     --reserved-db-instances-offering-id 649fd0c8-cf6d-47a0-bfa6-060f8e75e95f \
-3.     --reserved-db-instance-id MyReservation
+aws rds purchase-reserved-db-instances-offering \
+    --reserved-db-instances-offering-id 649fd0c8-cf6d-47a0-bfa6-060f8e75e95f \
+    --reserved-db-instance-id MyReservation
 ```
 For Windows:  
 
 ```
-1. aws rds purchase-reserved-db-instances-offering ^
-2.     --reserved-db-instances-offering-id 649fd0c8-cf6d-47a0-bfa6-060f8e75e95f ^
-3.     --reserved-db-instance-id MyReservation
+aws rds purchase-reserved-db-instances-offering ^
+    --reserved-db-instances-offering-id 649fd0c8-cf6d-47a0-bfa6-060f8e75e95f ^
+    --reserved-db-instance-id MyReservation
 ```
 The command returns output similar to the following:   
 
@@ -215,7 +215,7 @@ After you have purchased reserved DB instances, you can get information about yo
 To get information about reserved DB instances for your AWS account, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html)\.   
 
 ```
-1. aws rds describe-reserved-db-instances
+aws rds describe-reserved-db-instances
 ```
 The command returns output similar to the following:   
 
@@ -232,16 +232,16 @@ You can use the RDS API to work with reserved DB instances as shown in the follo
 To get information about available reserved DB instance offerings, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html)\.   
 
 ```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=DescribeReservedDBInstancesOfferings
- 3.    &SignatureMethod=HmacSHA256
- 4.    &SignatureVersion=4
- 5.    &Version=2014-09-01
- 6.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 7.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140411/us-east-1/rds/aws4_request
- 8.    &X-Amz-Date=20140411T203327Z
- 9.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-10.    &X-Amz-Signature=545f04acffeb4b80d2e778526b1c9da79d0b3097151c24f28e83e851d65422e2
+https://rds.us-east-1.amazonaws.com/
+   ?Action=DescribeReservedDBInstancesOfferings
+   &SignatureMethod=HmacSHA256
+   &SignatureVersion=4
+   &Version=2014-09-01
+   &X-Amz-Algorithm=AWS4-HMAC-SHA256
+   &X-Amz-Credential=AKIADQKE4SARGYLE/20140411/us-east-1/rds/aws4_request
+   &X-Amz-Date=20140411T203327Z
+   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+   &X-Amz-Signature=545f04acffeb4b80d2e778526b1c9da79d0b3097151c24f28e83e851d65422e2
 ```
 This call returns output similar to the following:   
 
@@ -290,19 +290,19 @@ To purchase a reserved DB instance, call the Amazon RDS API action [https://docs
 The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
 
 ```
- 1. https://rds.us-east-1.amazonaws.com/
- 2.    ?Action=PurchaseReservedDBInstancesOffering
- 3.    &ReservedDBInstanceId=MyReservation
- 4.    &ReservedDBInstancesOfferingId=438012d3-4052-4cc7-b2e3-8d3372e0e706
- 5.    &DBInstanceCount=10
- 6.    &SignatureMethod=HmacSHA256
- 7.    &SignatureVersion=4
- 8.    &Version=2014-09-01
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140415/us-east-1/rds/aws4_request
-11.    &X-Amz-Date=20140415T232655Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=c2ac761e8c8f54a8c0727f5a87ad0a766fbb0024510b9aa34ea6d1f7df52fb11
+https://rds.us-east-1.amazonaws.com/
+   ?Action=PurchaseReservedDBInstancesOffering
+   &ReservedDBInstanceId=MyReservation
+   &ReservedDBInstancesOfferingId=438012d3-4052-4cc7-b2e3-8d3372e0e706
+   &DBInstanceCount=10
+   &SignatureMethod=HmacSHA256
+   &SignatureVersion=4
+   &Version=2014-09-01
+   &X-Amz-Algorithm=AWS4-HMAC-SHA256
+   &X-Amz-Credential=AKIADQKE4SARGYLE/20140415/us-east-1/rds/aws4_request
+   &X-Amz-Date=20140415T232655Z
+   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+   &X-Amz-Signature=c2ac761e8c8f54a8c0727f5a87ad0a766fbb0024510b9aa34ea6d1f7df52fb11
 ```
 This call returns output similar to the following:   
 
@@ -338,16 +338,16 @@ After you have purchased reserved DB instances, you can get information about yo
 To get information about reserved DB instances for your AWS account, call the Amazon RDS API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html)\.   
 
 ```
- 1. https://rds.us-west-2.amazonaws.com/
- 2.    ?Action=DescribeReservedDBInstances
- 3.    &SignatureMethod=HmacSHA256 
- 4.    &SignatureVersion=4
- 5.    &Version=2014-09-01
- 6.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 7.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140420/us-west-2/rds/aws4_request
- 8.    &X-Amz-Date=20140420T162211Z
- 9.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-10.    &X-Amz-Signature=3312d17a4c43bcd209bc22a0778dd23e73f8434254abbd7ac53b89ade3dae88e
+https://rds.us-west-2.amazonaws.com/
+   ?Action=DescribeReservedDBInstances
+   &SignatureMethod=HmacSHA256 
+   &SignatureVersion=4
+   &Version=2014-09-01
+   &X-Amz-Algorithm=AWS4-HMAC-SHA256
+   &X-Amz-Credential=AKIADQKE4SARGYLE/20140420/us-west-2/rds/aws4_request
+   &X-Amz-Date=20140420T162211Z
+   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+   &X-Amz-Signature=3312d17a4c43bcd209bc22a0778dd23e73f8434254abbd7ac53b89ade3dae88e
 ```
 The API returns output similar to the following:   
 

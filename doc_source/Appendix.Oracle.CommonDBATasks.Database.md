@@ -18,7 +18,7 @@ The database must be open for the name change to occur\. For more information ab
 The following example changes the global name of a database to `new_global_name`\.
 
 ```
-1. exec rdsadmin.rdsadmin_util.rename_global_name(p_new_global_name => 'new_global_name');
+exec rdsadmin.rdsadmin_util.rename_global_name(p_new_global_name => 'new_global_name');
 ```
 
 ## Creating and Sizing Tablespaces<a name="Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles"></a>
@@ -30,13 +30,13 @@ By default, tablespaces are created with auto\-extend enabled, and no maximum si
 The following example creates a tablespace named `users2` with a starting size of 1 gigabyte and a maximum size of 10 gigabytes: 
 
 ```
-1. create tablespace users2 datafile size 1G autoextend on maxsize 10G;
+create tablespace users2 datafile size 1G autoextend on maxsize 10G;
 ```
 
 The following example creates temporary tablespace named `temp01`:
 
 ```
-1. create temporary tablespace temp01;
+create temporary tablespace temp01;
 ```
 
 The Oracle `ALTER DATABASE` system privilege is not available on Amazon RDS\. We recommend that you don't use smallfile tablespaces, because you can only perform some operations, such as resizing existing datafiles, by using the `ALTER DATABASE` statement\. 
@@ -46,13 +46,13 @@ You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specif
 The following example resizes a bigfile tablespace named `users2` to 200 MB: 
 
 ```
-1. alter tablespace users2 resize 200M;
+alter tablespace users2 resize 200M;
 ```
 
 The following example adds an additional datafile to a smallfile tablespace named users2: 
 
 ```
-1. alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
+alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
 ```
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
@@ -69,7 +69,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_table
 The following example sets the default tablespace to *users2*: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2');
+exec rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2');
 ```
 
 ## Setting the Default Temporary Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace"></a>
@@ -86,7 +86,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_
 The following example sets the default temporary tablespace to *temp01*: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
+exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
 ```
 
 ## Checkpointing the Database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
@@ -96,7 +96,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.checkpoint` to chec
 The following example checkpoints the database: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.checkpoint;
+exec rdsadmin.rdsadmin_util.checkpoint;
 ```
 
 ## Setting Distributed Recovery<a name="Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery"></a>
@@ -106,13 +106,13 @@ You can use the Amazon RDS procedures `rdsadmin.rdsadmin_util.enable_distr_recov
 The following example enables distributed recovery: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.enable_distr_recovery;
+exec rdsadmin.rdsadmin_util.enable_distr_recovery;
 ```
 
 The following example disables distributed recovery: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.disable_distr_recovery;
+exec rdsadmin.rdsadmin_util.disable_distr_recovery;
 ```
 
 ## Setting the Database Time Zone<a name="Appendix.Oracle.CommonDBATasks.TimeZoneSupport"></a>
@@ -137,13 +137,13 @@ The `alter_db_time_zone` procedure has the following parameters\.
 The following example changes the time zone to UTC plus 3 hours: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => '+3:00');
+exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => '+3:00');
 ```
 
 The following example changes the time zone to the time zone of the Africa/Algiers region: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
+exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
 ```
 
 After you alter the time zone by using the `alter_db_time_zone` procedure, you must reboot the DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
@@ -223,13 +223,13 @@ You can set the default edition of an Amazon RDS Oracle DB instance using the Am
 The following example sets the default edition for the Amazon RDS Oracle DB instance to `RELEASE_V1`\. 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_default_edition('RELEASE_V1');
+exec rdsadmin.rdsadmin_util.alter_default_edition('RELEASE_V1');
 ```
 
 The following example sets the default edition for the Amazon RDS Oracle DB instance back to the Oracle default\. 
 
 ```
-1. exec rdsadmin.rdsadmin_util.alter_default_edition('ORA$BASE');
+exec rdsadmin.rdsadmin_util.alter_default_edition('ORA$BASE');
 ```
 
 For more information about Oracle edition\-based redefinition, see [About Editions and Edition\-Based Redefinition](https://docs.oracle.com/database/121/ADMIN/general.htm#ADMIN13167) in the Oracle documentation\.
@@ -258,20 +258,20 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_datab
 The following example validates the DB instance using the default values for the parameters:
 
 ```
-1. exec rdsadmin.rdsadmin_rman_util.validate_database;
+exec rdsadmin.rdsadmin_rman_util.validate_database;
 ```
 
 The following example validates the DB instance using the specified values for the parameters:
 
 ```
-1. BEGIN
-2.     rdsadmin.rdsadmin_rman_util.validate_database(
-3.         p_validation_type     => 'PHYSICAL+LOGICAL', 
-4.         p_parallel            => 4,  
-5.         p_section_size_mb     => 10,
-6.         p_rman_to_dbms_output => FALSE);
-7. END;
-8. /
+BEGIN
+    rdsadmin.rdsadmin_rman_util.validate_database(
+        p_validation_type     => 'PHYSICAL+LOGICAL', 
+        p_parallel            => 4,  
+        p_section_size_mb     => 10,
+        p_rman_to_dbms_output => FALSE);
+END;
+/
 ```
 
 When the `p_rman_to_dbms_output` parameter is set to `FALSE`, the RMAN output is written to a file in the `BDUMP` directory\.
@@ -279,13 +279,13 @@ When the `p_rman_to_dbms_output` parameter is set to `FALSE`, the RMAN output is
 To view the files in the `BDUMP` directory, run the following `SELECT` statement:
 
 ```
-1. SELECT * FROM table(rdsadmin.rds_file_util.listdir('BDUMP')) order by mtime;
+SELECT * FROM table(rdsadmin.rds_file_util.listdir('BDUMP')) order by mtime;
 ```
 
 To view the contents of a file in the `BDUMP` directory, run the following `SELECT` statement:
 
 ```
-1. SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','rds-rman-validate-nnn.txt'));
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','rds-rman-validate-nnn.txt'));
 ```
 
 Replace the file name with the name of the file you want to view\.

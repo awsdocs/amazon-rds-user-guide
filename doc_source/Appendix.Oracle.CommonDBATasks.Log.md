@@ -20,7 +20,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.force_logging` to s
 The following example puts the database in force logging mode\. 
 
 ```
-1. exec rdsadmin.rdsadmin_util.force_logging(p_enable => true);
+exec rdsadmin.rdsadmin_util.force_logging(p_enable => true);
 ```
 
 ## Setting Supplemental Logging<a name="Appendix.Oracle.CommonDBATasks.AddingSupplementalLogging"></a>
@@ -42,33 +42,33 @@ The `alter_supplemental_logging` procedure has the following parameters\.
 The following example enables supplemental logging: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.alter_supplemental_logging(
-3.         p_action => 'ADD');
-4. end;
-5. /
+begin
+    rdsadmin.rdsadmin_util.alter_supplemental_logging(
+        p_action => 'ADD');
+end;
+/
 ```
 
 The following example enables supplemental logging for all fixed\-length maximum size columns: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.alter_supplemental_logging(
-3.         p_action => 'ADD',
-4.         p_type   => 'ALL');
-5. end;
-6. /
+begin
+    rdsadmin.rdsadmin_util.alter_supplemental_logging(
+        p_action => 'ADD',
+        p_type   => 'ALL');
+end;
+/
 ```
 
 The following example enables supplemental logging for primary key columns: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.alter_supplemental_logging(
-3.         p_action => 'ADD',
-4.         p_type   => 'PRIMARY KEY');
-5. end;
-6. /
+begin
+    rdsadmin.rdsadmin_util.alter_supplemental_logging(
+        p_action => 'ADD',
+        p_type   => 'PRIMARY KEY');
+end;
+/
 ```
 
 ## Switching Online Log Files<a name="Appendix.Oracle.CommonDBATasks.SwitchingLogfiles"></a>
@@ -78,7 +78,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.switch_logfile` to 
 The following example switches log files\.
 
 ```
-1. exec rdsadmin.rdsadmin_util.switch_logfile;
+exec rdsadmin.rdsadmin_util.switch_logfile;
 ```
 
 ## Adding Online Redo Logs<a name="Appendix.Oracle.CommonDBATasks.RedoLogs"></a>
@@ -106,7 +106,7 @@ The `add_logfile` procedure has the following parameters\.
 The following command adds a 100 MB log file: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.add_logfile(p_size => '100M');
+exec rdsadmin.rdsadmin_util.add_logfile(p_size => '100M');
 ```
 
 ## Dropping Online Redo Logs<a name="Appendix.Oracle.CommonDBATasks.DroppingRedoLogs"></a>
@@ -123,20 +123,20 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_logfile` to dr
 The following example drops the log with group number 3: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
+exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
 ```
 
 You can only drop logs that have a status of unused or inactive\. The following example gets the statuses of the logs: 
 
 ```
-1. select GROUP#, STATUS from V$LOG;
-2. 
-3. GROUP#     STATUS
-4. ---------- ----------------
-5. 1          CURRENT
-6. 2          INACTIVE
-7. 3          INACTIVE
-8. 4          UNUSED
+select GROUP#, STATUS from V$LOG;
+
+GROUP#     STATUS
+---------- ----------------
+1          CURRENT
+2          INACTIVE
+3          INACTIVE
+4          UNUSED
 ```
 
 ## Resizing Online Redo Logs<a name="Appendix.Oracle.CommonDBATasks.ResizingRedoLogs"></a>
@@ -144,119 +144,119 @@ You can only drop logs that have a status of unused or inactive\. The following 
 An Amazon RDS DB instance running Oracle starts with four online redo logs, 128 MB each\. The following example shows how you can use Amazon RDS procedures to resize your logs from 128 MB each to 512 MB each\. 
 
 ```
-  1. /* Query V$LOG to see the logs.          */
-  2. /* You start with 4 logs of 128 MB each. */
-  3. 
-  4. select GROUP#, BYTES, STATUS from V$LOG;
-  5. 
-  6. GROUP#     BYTES      STATUS
-  7. ---------- ---------- ----------------
-  8. 1          134217728  INACTIVE
-  9. 2          134217728  CURRENT
- 10. 3          134217728  INACTIVE
- 11. 4          134217728  INACTIVE
- 12. 
- 13. 
- 14. /* Add four new logs that are each 512 MB */
- 15. 
- 16. exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
- 17. exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
- 18. exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
- 19. exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
- 20. 
- 21. 
- 22. /* Query V$LOG to see the logs. */ 
- 23. /* Now there are 8 logs.        */
- 24. 
- 25. select GROUP#, BYTES, STATUS from V$LOG;
- 26. 
- 27. GROUP#     BYTES      STATUS
- 28. ---------- ---------- ----------------
- 29. 1          134217728  INACTIVE
- 30. 2          134217728  CURRENT
- 31. 3          134217728  INACTIVE
- 32. 4          134217728  INACTIVE
- 33. 5          536870912  UNUSED
- 34. 6          536870912  UNUSED
- 35. 7          536870912  UNUSED
- 36. 8          536870912  UNUSED
- 37. 
- 38. 
- 39. /* Drop each inactive log using the group number. */
- 40. 
- 41. exec rdsadmin.rdsadmin_util.drop_logfile(grp => 1);
- 42. exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
- 43. exec rdsadmin.rdsadmin_util.drop_logfile(grp => 4);
- 44. 
- 45. 
- 46. /* Query V$LOG to see the logs. */ 
- 47. /* Now there are 5 logs.        */
- 48. 
- 49. select GROUP#, BYTES, STATUS from V$LOG;
- 50. 
- 51. GROUP#     BYTES      STATUS
- 52. ---------- ---------- ----------------
- 53. 2          134217728  CURRENT
- 54. 5          536870912  UNUSED
- 55. 6          536870912  UNUSED
- 56. 7          536870912  UNUSED
- 57. 8          536870912  UNUSED
- 58. 
- 59. 
- 60. /* Switch logs so that group 2 is no longer current. */
- 61. 
- 62. exec rdsadmin.rdsadmin_util.switch_logfile;
- 63. 
- 64. 
- 65. /* Query V$LOG to see the logs.        */ 
- 66. /* Now one of the new logs is current. */
- 67. 
- 68. SQL>select GROUP#, BYTES, STATUS from V$LOG;
- 69. 
- 70. GROUP#     BYTES      STATUS
- 71. ---------- ---------- ----------------
- 72. 2          134217728  ACTIVE
- 73. 5          536870912  CURRENT
- 74. 6          536870912  UNUSED
- 75. 7          536870912  UNUSED
- 76. 8          536870912  UNUSED
- 77. 
- 78. 
- 79. /* Issue a checkpoint to clear log 2. */
- 80. 
- 81. exec rdsadmin.rdsadmin_util.checkpoint;
- 82. 
- 83. 
- 84. /* Query V$LOG to see the logs.            */ 
- 85. /* Now the final original log is inactive. */
- 86. 
- 87. select GROUP#, BYTES, STATUS from V$LOG;
- 88. 
- 89. GROUP#     BYTES      STATUS
- 90. ---------- ---------- ----------------
- 91. 2          134217728  INACTIVE
- 92. 5          536870912  CURRENT
- 93. 6          536870912  UNUSED
- 94. 7          536870912  UNUSED
- 95. 8          536870912  UNUSED
- 96. 
- 97. 
- 98. # Drop the final inactive log.
- 99. 
-100. exec rdsadmin.rdsadmin_util.drop_logfile(grp => 2);
-101. 
-102. 
-103. /* Query V$LOG to see the logs.    */ 
-104. /* Now there are four 512 MB logs. */
-105. 
-106. select GROUP#, BYTES, STATUS from V$LOG;
-107. 
-108. GROUP#     BYTES      STATUS
-109. ---------- ---------- ----------------
-110. 5          536870912  CURRENT
-111. 6          536870912  UNUSED
-112. 7          536870912  UNUSED
-113. 8          536870912  UNUSED
+/* Query V$LOG to see the logs.          */
+/* You start with 4 logs of 128 MB each. */
+
+select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+1          134217728  INACTIVE
+2          134217728  CURRENT
+3          134217728  INACTIVE
+4          134217728  INACTIVE
+
+
+/* Add four new logs that are each 512 MB */
+
+exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+
+
+/* Query V$LOG to see the logs. */ 
+/* Now there are 8 logs.        */
+
+select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+1          134217728  INACTIVE
+2          134217728  CURRENT
+3          134217728  INACTIVE
+4          134217728  INACTIVE
+5          536870912  UNUSED
+6          536870912  UNUSED
+7          536870912  UNUSED
+8          536870912  UNUSED
+
+
+/* Drop each inactive log using the group number. */
+
+exec rdsadmin.rdsadmin_util.drop_logfile(grp => 1);
+exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
+exec rdsadmin.rdsadmin_util.drop_logfile(grp => 4);
+
+
+/* Query V$LOG to see the logs. */ 
+/* Now there are 5 logs.        */
+
+select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+2          134217728  CURRENT
+5          536870912  UNUSED
+6          536870912  UNUSED
+7          536870912  UNUSED
+8          536870912  UNUSED
+
+
+/* Switch logs so that group 2 is no longer current. */
+
+exec rdsadmin.rdsadmin_util.switch_logfile;
+
+
+/* Query V$LOG to see the logs.        */ 
+/* Now one of the new logs is current. */
+
+SQL>select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+2          134217728  ACTIVE
+5          536870912  CURRENT
+6          536870912  UNUSED
+7          536870912  UNUSED
+8          536870912  UNUSED
+
+
+/* Issue a checkpoint to clear log 2. */
+
+exec rdsadmin.rdsadmin_util.checkpoint;
+
+
+/* Query V$LOG to see the logs.            */ 
+/* Now the final original log is inactive. */
+
+select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+2          134217728  INACTIVE
+5          536870912  CURRENT
+6          536870912  UNUSED
+7          536870912  UNUSED
+8          536870912  UNUSED
+
+
+# Drop the final inactive log.
+
+exec rdsadmin.rdsadmin_util.drop_logfile(grp => 2);
+
+
+/* Query V$LOG to see the logs.    */ 
+/* Now there are four 512 MB logs. */
+
+select GROUP#, BYTES, STATUS from V$LOG;
+
+GROUP#     BYTES      STATUS
+---------- ---------- ----------------
+5          536870912  CURRENT
+6          536870912  UNUSED
+7          536870912  UNUSED
+8          536870912  UNUSED
 ```
 
 ## Retaining Archived Redo Logs<a name="Appendix.Oracle.CommonDBATasks.RetainRedoLogs"></a>
@@ -276,13 +276,13 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.set_configuration` 
 The following example retains 24 hours of redo logs: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.set_configuration(
-3.         name  => 'archivelog retention hours',
-4.         value => '24');
-5. end;
-6. /
-7. commit;
+begin
+    rdsadmin.rdsadmin_util.set_configuration(
+        name  => 'archivelog retention hours',
+        value => '24');
+end;
+/
+commit;
 ```
 
 **Note**  
@@ -308,9 +308,9 @@ DESCRIPTION:ArchiveLog expiration specifies the duration in hours before archive
 Because the archived redo logs are retained on your DB instance, ensure that your DB instance has enough allocated storage for the retained logs\. To determine how much space your DB instance has used in the last X hours, you can run the following query, replacing X with the number of hours: 
 
 ```
-1. select sum(BLOCKS * BLOCK_SIZE) bytes 
-2.   from V$ARCHIVED_LOG
-3.  where FIRST_TIME >= SYSDATE-(X/24) and DEST_ID=1;
+select sum(BLOCKS * BLOCK_SIZE) bytes 
+  from V$ARCHIVED_LOG
+ where FIRST_TIME >= SYSDATE-(X/24) and DEST_ID=1;
 ```
 
 Archived redo logs are only generated if the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero, so unless you explicitly set yours to zero, archived redo logs are generated for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
@@ -332,8 +332,8 @@ The following code creates directories that provide read\-only access to your on
 This code also revokes the `DROP ANY DIRECTORY` privilege\.
 
 ```
-1. exec rdsadmin.rdsadmin_master_util.create_archivelog_dir;
-2. exec rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
+exec rdsadmin.rdsadmin_master_util.create_archivelog_dir;
+exec rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
 ```
 
 After you create directory objects for your online and archived redo log files, you can read the files by using PL/SQL\. For more information about reading files from directory objects, see [Listing Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ListDirectories) and [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\. 
@@ -341,15 +341,15 @@ After you create directory objects for your online and archived redo log files, 
 The following code drops the directories for your online and archived redo log files: 
 
 ```
-1. exec rdsadmin.rdsadmin_master_util.drop_archivelog_dir;
-2. exec rdsadmin.rdsadmin_master_util.drop_onlinelog_dir;
+exec rdsadmin.rdsadmin_master_util.drop_archivelog_dir;
+exec rdsadmin.rdsadmin_master_util.drop_onlinelog_dir;
 ```
 
 The following code grants and revokes the `DROP ANY DIRECTORY` privilege:
 
 ```
-1. exec rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
-2. exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
+exec rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
+exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
 ```
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Log.Related"></a>

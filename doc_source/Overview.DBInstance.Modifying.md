@@ -20,7 +20,8 @@ If you don't choose to apply changes immediately, the changes are put into the p
 
 **Important**  
 If any of the pending modifications require downtime, choosing apply immediately can cause unexpected downtime\.   
-When you choose to apply a change immediately, any pending modifications are also applied immediately, instead of during the next maintenance window\. 
+When you choose to apply a change immediately, any pending modifications are also applied immediately, instead of during the next maintenance window\.   
+If you don't want a pending change to be applied in the next maintenance window, you can modify the DB instance to revert the change using the AWS CLI and specify the `--apply-immediately` option\.
 
 Changes to some database settings are applied immediately, even if you choose to defer your changes\. To see how the different database settings interact with the apply immediately setting, see the settings for your specific database engine\. 
 + [Settings for MariaDB DB Instances](USER_ModifyInstance.MariaDB.md#USER_ModifyInstance.MariaDB.Settings)

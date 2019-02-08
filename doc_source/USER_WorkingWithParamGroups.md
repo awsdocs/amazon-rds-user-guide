@@ -78,23 +78,23 @@ The output contains duplicates\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-parameter-group \
-2.     --db-parameter-group-name mydbparametergroup \
-3.     --db-parameter-group-family MySQL5.6 \
-4.     --description "My new parameter group"
+aws rds create-db-parameter-group \
+    --db-parameter-group-name mydbparametergroup \
+    --db-parameter-group-family MySQL5.6 \
+    --description "My new parameter group"
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-parameter-group ^
-2.     --db-parameter-group-name mydbparametergroup ^
-3.     --db-parameter-group-family MySQL5.6 ^
-4.     --description "My new parameter group"
+aws rds create-db-parameter-group ^
+    --db-parameter-group-name mydbparametergroup ^
+    --db-parameter-group-family MySQL5.6 ^
+    --description "My new parameter group"
 ```
 This command produces output similar to the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup  mysql5.6  My new parameter group					
+DBPARAMETERGROUP  mydbparametergroup  mysql5.6  My new parameter group
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Creating.API"></a>
@@ -149,23 +149,23 @@ Amazon RDS does not support passing multiple comma\-delimited parameter values f
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-parameter-group \
-2.     --db-parameter-group-name mydbparametergroup \
-3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" \
-4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+aws rds modify-db-parameter-group \
+    --db-parameter-group-name mydbparametergroup \
+    --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" \
+                 "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-parameter-group ^
-2.     --db-parameter-group-name mydbparametergroup ^
-3.     --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" ^
-4.                  "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
+aws rds modify-db-parameter-group ^
+    --db-parameter-group-name mydbparametergroup ^
+    --parameters "ParameterName=max_connections,ParameterValue=250,ApplyMethod=immediate" ^
+                 "ParameterName=max_allowed_packet,ParameterValue=1024,ApplyMethod=immediate"
 ```
 The command produces output like the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup
+DBPARAMETERGROUP  mydbparametergroup
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Modifying.API"></a>
@@ -214,18 +214,18 @@ The following example creates a new DB parameter group named `mygroup2` that is 
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds copy-db-parameter-group \
-2.     --source-db-parameter-group-identifier mygroup1 \
-3.     --target-db-parameter-group-identifier mygroup2 \
-4.     --target-db-parameter-group-description "DB parameter group 2"
+aws rds copy-db-parameter-group \
+    --source-db-parameter-group-identifier mygroup1 \
+    --target-db-parameter-group-identifier mygroup2 \
+    --target-db-parameter-group-description "DB parameter group 2"
 ```
 For Windows:  
 
 ```
-1. aws rds copy-db-parameter-group ^
-2.     --source-db-parameter-group-identifier mygroup1 ^
-3.     --target-db-parameter-group-identifier mygroup2 ^
-4.     --target-db-parameter-group-description "DB parameter group 2"
+aws rds copy-db-parameter-group ^
+    --source-db-parameter-group-identifier mygroup1 ^
+    --target-db-parameter-group-identifier mygroup2 ^
+    --target-db-parameter-group-description "DB parameter group 2"
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Copying.API"></a>
@@ -260,32 +260,32 @@ To list all DB parameter groups for an AWS account, use the AWS CLI [https://doc
 The following example lists all available DB parameter groups for an AWS account\.  
 
 ```
-1. aws rds describe-db-parameter-groups
+aws rds describe-db-parameter-groups
 ```
 The command returns a response like the following:  
 
 ```
-1. DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
-2. DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
-3. DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
+DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
+DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
+DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
 ```
 The following example describes the *mydbparamgroup1* parameter group\.  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-db-parameter-groups \
-2.     --db-parameter-group-name mydbparamgroup1
+aws rds describe-db-parameter-groups \
+    --db-parameter-group-name mydbparamgroup1
 ```
 For Windows:  
 
 ```
-1. aws rds describe-db-parameter-groups ^
-2.     --db-parameter-group-name mydbparamgroup1
+aws rds describe-db-parameter-groups ^
+    --db-parameter-group-name mydbparamgroup1
 ```
 The command returns a response like the following:  
 
 ```
-1. DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
 ```
 
 ### API<a name="USER_WorkingWithParamGroups.Listing.API"></a>
@@ -317,7 +317,7 @@ To view the parameter values for a DB parameter group, use the AWS CLI [https://
 The following example lists the parameters and parameter values for a DB parameter group named *mydbparametergroup\.*  
 
 ```
-1. aws rds describe-db-parameters --db-parameter-group-name mydbparametergroup
+aws rds describe-db-parameters --db-parameter-group-name mydbparametergroup
 ```
 The command returns a response like the following:  
 

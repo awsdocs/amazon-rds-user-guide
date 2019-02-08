@@ -18,19 +18,19 @@ The `create_directory` procedure has the following parameters\.
 The following example creates a new directory named `product_descriptions`: 
 
 ```
-1. exec rdsadmin.rdsadmin_util.create_directory(p_directory_name => 'product_descriptions');
+exec rdsadmin.rdsadmin_util.create_directory(p_directory_name => 'product_descriptions');
 ```
 
 You can list the directories by querying `DBA_DIRECTORIES`\. The system chooses the actual host pathname automatically\. The following example gets the directory path for the directory named `product_descriptions`: 
 
 ```
-1. select DIRECTORY_PATH 
-2.   from DBA_DIRECTORIES 
-3.  where DIRECTORY_NAME='product_descriptions';
-4.         
-5. DIRECTORY_PATH
-6. ----------------------------------------
-7. /rdsdbdata/userdirs/01
+select DIRECTORY_PATH 
+  from DBA_DIRECTORIES 
+ where DIRECTORY_NAME='product_descriptions';
+        
+DIRECTORY_PATH
+----------------------------------------
+/rdsdbdata/userdirs/01
 ```
 
 The master user name for the DB instance has read and write privileges in the new directory, and can grant access to other users\. Execute privileges are not available for directories on a DB instance\. Directories are created in your main data storage space and will consume space and I/O bandwidth\. 
@@ -51,8 +51,8 @@ You can use the Amazon RDS procedure `rdsadmin.rds_file_util.listdir` to list th
 The following example lists the files in the directory named `product_descriptions`: 
 
 ```
-1. select * from table
-2.     (rdsadmin.rds_file_util.listdir(p_directory => 'product_descriptions'));
+select * from table
+    (rdsadmin.rds_file_util.listdir(p_directory => 'product_descriptions'));
 ```
 
 ## Reading Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ReadingFiles"></a>
@@ -70,10 +70,10 @@ You can use the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file` to 
 The following example reads the file `rice.txt` from the directory `product_descriptions`: 
 
 ```
-1. select * from table
-2.     (rdsadmin.rds_file_util.read_text_file(
-3.         p_directory => 'product_descriptions',
-4.         p_filename  => 'rice.txt'));
+select * from table
+    (rdsadmin.rds_file_util.read_text_file(
+        p_directory => 'product_descriptions',
+        p_filename  => 'rice.txt'));
 ```
 
 ## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Misc.Related"></a>

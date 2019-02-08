@@ -1,11 +1,13 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **January 25, 2019
++ **Latest documentation update: **February 8, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS for Oracle January 2019 RU, RUR, and PSU](#WhatsNew) | Amazon RDS for Oracle has released database engine version 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 to support the January 2019 Release Update \(RU\) and Release Update Revision \(RUR\)\. Amazon RDS for Oracle has also released database engine versions 12\.1\.0\.2\.v15 and 11\.2\.0\.4\.v19 to support the January 2019 Oracle Database Patch Set Update \(PSU\)\. For more information, see [Oracle Database Engine Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)\. | February 8, 2019 | 
+| [Amazon RDS Performance Insights supports viewing more SQL text for Amazon RDS MySQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Amazon RDS MySQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard\.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize) | February 6, 2019 | 
 | [Amazon RDS for PostgreSQL supports db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running PostgreSQL that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | January 25, 2019 | 
 | [Amazon RDS for Oracle supports db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running Oracle that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | January 25, 2019 | 
 | [Amazon RDS Performance Insights supports viewing more SQL text for Amazon RDS PostgreSQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Amazon RDS PostgreSQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard\.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize) | January 24, 2019 | 

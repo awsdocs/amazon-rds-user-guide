@@ -1,6 +1,13 @@
 # Known Issues and Limitations for MySQL on Amazon RDS<a name="MySQL.KnownIssuesAndLimitations"></a>
 
-Known issues and limitations for working with MySQL on Amazon RDS are as follows\. 
+Known issues and limitations for working with MySQL on Amazon RDS are as follows\.
+
+**Topics**
++ [Inconsistent InnoDB Buffer Pool Size](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize)
++ [Index Merge Optimization Returns Wrong Results](#MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization)
++ [Log File Size](#MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize)
++ [MySQL Parameter Exceptions for Amazon RDS DB Instances](#MySQL.Concepts.ParameterNotes)
++ [MySQL File Size Limits](#MySQL.Concepts.Limits.FileSize)
 
 ## Inconsistent InnoDB Buffer Pool Size<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize"></a>
 
@@ -23,7 +30,7 @@ Queries that use index merge optimization might return wrong results due to a bu
 For example, consider a query on a table with two indexes where the search arguments reference the indexed columns\. 
 
 ```
-1. SELECT * FROM table1 
+1. SELECT * FROM table1
 2. WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
 ```
 
@@ -35,8 +42,8 @@ To resolve this issue, you can do one of the following:
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
-  1. SELECT * FROM table1 
-  2. USE INDEX covering_index 
+  1. SELECT * FROM table1
+  2. USE INDEX covering_index
   3. WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
   ```
 
@@ -79,8 +86,8 @@ One option that you can use for breaking a large table up into smaller tables is
 + Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\.
 
   ```
-  1. SELECT TABLE_SCHEMA, TABLE_NAME, 
-  2. round(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2) As "Approximate size (MB)" 
+  1. SELECT TABLE_SCHEMA, TABLE_NAME,
+  2. round(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2) As "Approximate size (MB)"
   3. FROM information_schema.TABLES
   4. WHERE TABLE_SCHEMA NOT IN ('mysql', 'information_schema', 'performance_schema');
   ```

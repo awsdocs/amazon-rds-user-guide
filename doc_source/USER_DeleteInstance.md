@@ -58,36 +58,36 @@ To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](ht
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds delete-db-instance \
-2.     --db-instance-identifier mydbinstance  \
-3.     --final-db-snapshot-identifier mydbinstancefinalsnapshot \
-4.     --delete-automated-backups
+aws rds delete-db-instance \
+    --db-instance-identifier mydbinstance  \
+    --final-db-snapshot-identifier mydbinstancefinalsnapshot \
+    --delete-automated-backups
 ```
 For Windows:  
 
 ```
-1. aws rds delete-db-instance ^
-2.     --db-instance-identifier mydbinstance  ^
-3.     --final-db-snapshot-identifier mydbinstancefinalsnapshot ^
-4.     --delete-automated-backups
+aws rds delete-db-instance ^
+    --db-instance-identifier mydbinstance  ^
+    --final-db-snapshot-identifier mydbinstancefinalsnapshot ^
+    --delete-automated-backups
 ```
 
 **Example With retained automated backups and no final snapshot**  
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds delete-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --skip-final-snapshot \
-4.     --no-delete-automated-backups
+aws rds delete-db-instance \
+    --db-instance-identifier mydbinstance \
+    --skip-final-snapshot \
+    --no-delete-automated-backups
 ```
 For Windows:  
 
 ```
-1. aws rds delete-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --skip-final-snapshot ^
-4.     --no-delete-automated-backups
+aws rds delete-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --skip-final-snapshot ^
+    --no-delete-automated-backups
 ```
 
 ### RDS API<a name="USER_DeleteInstance.API"></a>
@@ -99,35 +99,35 @@ To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.
 **Example With a final snapshot and no retained automated backups**  
 
 ```
- 1. https://rds.amazonaws.com/ 
- 2.     ?Action=DeleteDBInstance
- 3.     &DBInstanceIdentifier=mydbinstance
- 4.     &FinalDBSnapshotIdentifier=mydbinstancefinalsnapshot
- 5.     &DeleteAutomatedBackups=true
- 6.     &SignatureMethod=HmacSHA256
- 7.     &SignatureVersion=4
- 8.     &Version=2014-10-31
- 9.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.     &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
-11.     &X-Amz-Date=20140305T185838Z
-12.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.     &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
+https://rds.amazonaws.com/ 
+    ?Action=DeleteDBInstance
+    &DBInstanceIdentifier=mydbinstance
+    &FinalDBSnapshotIdentifier=mydbinstancefinalsnapshot
+    &DeleteAutomatedBackups=true
+    &SignatureMethod=HmacSHA256
+    &SignatureVersion=4
+    &Version=2014-10-31
+    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+    &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
+    &X-Amz-Date=20140305T185838Z
+    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+    &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
 ```
 
 **Example With retained automated backups and no final snapshot**  
 
 ```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=DeleteDBInstance
- 3.     &DBInstanceIdentifier=mydbinstance
- 4.     &SkipFinalSnapshot=true
- 5.     &DeleteAutomatedBackups=false
- 6.     &SignatureMethod=HmacSHA256
- 7.     &SignatureVersion=4
- 8.     &Version=2014-10-31
- 9.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.     &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
-11.     &X-Amz-Date=20140305T185838Z
-12.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.     &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
+https://rds.amazonaws.com/
+    ?Action=DeleteDBInstance
+    &DBInstanceIdentifier=mydbinstance
+    &SkipFinalSnapshot=true
+    &DeleteAutomatedBackups=false
+    &SignatureMethod=HmacSHA256
+    &SignatureVersion=4
+    &Version=2014-10-31
+    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+    &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
+    &X-Amz-Date=20140305T185838Z
+    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+    &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
 ```

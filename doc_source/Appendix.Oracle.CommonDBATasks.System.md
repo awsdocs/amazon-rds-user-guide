@@ -18,18 +18,18 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.disconnect` to disc
 The following example disconnects a session:
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.disconnect(
-3.         sid    => sid, 
-4.         serial => serial_number);
-5. end;
-6. /
+begin
+    rdsadmin.rdsadmin_util.disconnect(
+        sid    => sid, 
+        serial => serial_number);
+end;
+/
 ```
 
 To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`: 
 
 ```
-1. select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
+select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
 ```
 
 The database must be open to use this method\. For more information about disconnecting a session, see [ALTER SYSTEM](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_2014.htm#SQLRF53166) in the Oracle documentation\. 
@@ -50,18 +50,18 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kill` to kill a ses
 The following example kills a session:
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.kill(
-3.         sid    => sid, 
-4.         serial => serial_number);
-5. end;
-6. /
+begin
+    rdsadmin.rdsadmin_util.kill(
+        sid    => sid, 
+        serial => serial_number);
+end;
+/
 ```
 
 To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`: 
 
 ```
-1. select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
+select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
 ```
 
 You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. Specifying `PROCESS` as the enables you to kill the processes associated with a session\. You should only do this if killing the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
@@ -80,41 +80,41 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.restricted_session`
 The following example shows how to enable and disable restricted sessions\. 
 
 ```
- 1. /* Verify that the database is currently unrestricted. */
- 2. 
- 3. select LOGINS from V$INSTANCE;
- 4.  
- 5. LOGINS
- 6. -------
- 7. ALLOWED
- 8. 
- 9. 
-10. /* Enable restricted sessions */
-11. 
-12. exec rdsadmin.rdsadmin_util.restricted_session(p_enable => true);
-13.  
-14. 
-15. /* Verify that the database is now restricted. */
-16. 
-17. select LOGINS from V$INSTANCE;
-18.  
-19. LOGINS
-20. ----------
-21. RESTRICTED
-22.  
-23. 
-24. /* Disable restricted sessions */
-25. 
-26. exec rdsadmin.rdsadmin_util.restricted_session(p_enable => false);
-27.  
-28. 
-29. /* Verify that the database is now unrestricted again. */
-30. 
-31. select LOGINS from V$INSTANCE;
-32.  
-33. LOGINS
-34. -------
-35. ALLOWED
+/* Verify that the database is currently unrestricted. */
+
+select LOGINS from V$INSTANCE;
+ 
+LOGINS
+-------
+ALLOWED
+
+
+/* Enable restricted sessions */
+
+exec rdsadmin.rdsadmin_util.restricted_session(p_enable => true);
+ 
+
+/* Verify that the database is now restricted. */
+
+select LOGINS from V$INSTANCE;
+ 
+LOGINS
+----------
+RESTRICTED
+ 
+
+/* Disable restricted sessions */
+
+exec rdsadmin.rdsadmin_util.restricted_session(p_enable => false);
+ 
+
+/* Verify that the database is now unrestricted again. */
+
+select LOGINS from V$INSTANCE;
+ 
+LOGINS
+-------
+ALLOWED
 ```
 
 ## Flushing the Shared Pool<a name="Appendix.Oracle.CommonDBATasks.FlushingSharedPool"></a>
@@ -124,7 +124,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.flush_shared_pool` 
 The following example flushes the shared pool\.
 
 ```
-1. exec rdsadmin.rdsadmin_util.flush_shared_pool;
+exec rdsadmin.rdsadmin_util.flush_shared_pool;
 ```
 
 ## Flushing the Buffer Cache<a name="Appendix.Oracle.CommonDBATasks.FlushingBufferCache"></a>
@@ -134,7 +134,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.flush_buffer_cache`
 The following example flushes the buffer cache\.
 
 ```
-1. exec rdsadmin.rdsadmin_util.flush_buffer_cache;
+exec rdsadmin.rdsadmin_util.flush_buffer_cache;
 ```
 
 ## Granting SELECT or EXECUTE Privileges to SYS Objects<a name="Appendix.Oracle.CommonDBATasks.TransferPrivileges"></a>
@@ -156,26 +156,26 @@ The `grant_sys_object` procedure has the following parameters\.
 The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.grant_sys_object(
-3.         p_obj_name  => 'V_$SESSION',
-4.         p_grantee   => 'USER1',
-5.         p_privilege => 'SELECT');
-6. end;
-7. /
+begin
+    rdsadmin.rdsadmin_util.grant_sys_object(
+        p_obj_name  => 'V_$SESSION',
+        p_grantee   => 'USER1',
+        p_privilege => 'SELECT');
+end;
+/
 ```
 
 The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1` with the grant option: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.grant_sys_object(
-3.         p_obj_name     => 'V_$SESSION',
-4.         p_grantee      => 'USER1',
-5.         p_privilege    => 'SELECT',
-6.         p_grant_option => true);
-7. end;
-8. /
+begin
+    rdsadmin.rdsadmin_util.grant_sys_object(
+        p_obj_name     => 'V_$SESSION',
+        p_grantee      => 'USER1',
+        p_privilege    => 'SELECT',
+        p_grant_option => true);
+end;
+/
 ```
 
 To be able to grant privileges on an object, your account must have those privileges granted to it directly with the grant option, or via a role granted using `with admin option`\. In the most common case, you may want to grant `SELECT` on a DBA view that has been granted to the `SELECT_CATALOG_ROLE` role\. If that role isn't already directly granted to your user using `with admin option`, then you won't be able to transfer the privilege\. If you have the DBA privilege, then you can grant the role directly to another user\. 
@@ -183,8 +183,8 @@ To be able to grant privileges on an object, your account must have those privil
 The following example grants the `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` to `USER1`\. Since the `with admin option` is used, `USER1` can now grant access to SYS objects that have been granted to `SELECT_CATALOG_ROLE`\. 
 
 ```
-1. grant SELECT_CATALOG_ROLE to USER1 with admin option; 
-2. grant EXECUTE_CATALOG_ROLE to USER1 with admin option;
+grant SELECT_CATALOG_ROLE to USER1 with admin option; 
+grant EXECUTE_CATALOG_ROLE to USER1 with admin option;
 ```
 
 Objects already granted to `PUBLIC` do not need to be re\-granted\. If you use the `grant_sys_object` procedure to re\-grant access, the procedure call succeeds\. 
@@ -207,13 +207,13 @@ The `revoke_sys_object` procedure has the following parameters\.
 The following example revokes select privileges on an object named `V_$SESSION` from a user named `USER1`: 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_util.revoke_sys_object(
-3.         p_obj_name  => 'V_$SESSION',
-4.         p_revokee   => 'USER1',
-5.         p_privilege => 'SELECT');
-6. end;
-7. /
+begin
+    rdsadmin.rdsadmin_util.revoke_sys_object(
+        p_obj_name  => 'V_$SESSION',
+        p_revokee   => 'USER1',
+        p_privilege => 'SELECT');
+end;
+/
 ```
 
 ## Granting Privileges to Non\-Master Users<a name="Appendix.Oracle.CommonDBATasks.PermissionsNonMasters"></a>
@@ -221,30 +221,30 @@ The following example revokes select privileges on an object named `V_$SESSION` 
 You can grant select privileges for many objects in the `SYS` schema by using the `SELECT_CATALOG_ROLE` role\. The `SELECT_CATALOG_ROLE` role gives users `SELECT` privileges on data dictionary views\. The following example grants the role `SELECT_CATALOG_ROLE` to a user named `user1`\. 
 
 ```
-1. grant SELECT_CATALOG_ROLE to user1;
+grant SELECT_CATALOG_ROLE to user1;
 ```
 
 You can grant execute privileges for many objects in the `SYS` schema by using the `EXECUTE_CATALOG_ROLE` role\. The `EXECUTE_CATALOG_ROLE` role gives users `EXECUTE` privileges for packages and procedures in the data dictionary\. The following example grants the role `EXECUTE_CATALOG_ROLE` to a user named *user1*: 
 
 ```
-1. grant EXECUTE_CATALOG_ROLE to user1;
+grant EXECUTE_CATALOG_ROLE to user1;
 ```
 
 The following example gets the permissions that the roles `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` allow: 
 
 ```
-1.   select * 
-2.     from ROLE_TAB_PRIVS  
-3.    where ROLE in ('SELECT_CATALOG_ROLE','EXECUTE_CATALOG_ROLE') 
-4. order by ROLE, TABLE_NAME asc;
+  select * 
+    from ROLE_TAB_PRIVS  
+   where ROLE in ('SELECT_CATALOG_ROLE','EXECUTE_CATALOG_ROLE') 
+order by ROLE, TABLE_NAME asc;
 ```
 
 The following example creates a non\-master user named `user1`, grants the `CREATE SESSION` privilege, and grants the `SELECT` privilege on a database named *sh\.sales*: 
 
 ```
-1. create user user1 identified by password;
-2. grant CREATE SESSION to user1;
-3. grant SELECT on sh.sales TO user1;
+create user user1 identified by password;
+grant CREATE SESSION to user1;
+grant SELECT on sh.sales TO user1;
 ```
 
 ## Modifying DBMS\_SCHEDULER Jobs<a name="Appendix.Oracle.CommonDBATasks.ModifyScheduler"></a>
@@ -254,13 +254,13 @@ You can use the Oracle procedure `dbms_scheduler.set_attribute` to modify DBMS\_
 When working with Amazon RDS DB instances, prepend the schema name `SYS` to the object name\. The following example sets the resource plan attribute for the Monday window object\. 
 
 ```
-1. begin
-2.     dbms_scheduler.set_attribute(
-3.         name      => 'SYS.MONDAY_WINDOW',
-4.         attribute => 'RESOURCE_PLAN',
-5.         value     => 'resource_plan_1');
-6. end;
-7. /
+begin
+    dbms_scheduler.set_attribute(
+        name      => 'SYS.MONDAY_WINDOW',
+        attribute => 'RESOURCE_PLAN',
+        value     => 'resource_plan_1');
+end;
+/
 ```
 
 ## Creating Custom Functions to Verify Passwords<a name="Appendix.Oracle.CommonDBATasks.CustomPassword"></a>
@@ -301,60 +301,60 @@ There are restrictions on the name of your custom function\. Your custom functio
 The following example creates a function named `CUSTOM_PASSWORD_FUNCTION`\. The function requires that a password has at least 12 characters, 2 uppercase characters, 1 digit, and 1 special character, and that the password disallows the @ character\. 
 
 ```
- 1. begin
- 2.     rdsadmin.rdsadmin_password_verify.create_verify_function(
- 3.         p_verify_function_name => 'CUSTOM_PASSWORD_FUNCTION', 
- 4.         p_min_length           => 12, 
- 5.         p_min_uppercase        => 2, 
- 6.         p_min_digits           => 1, 
- 7.         p_min_special          => 1,
- 8.         p_disallow_at_sign     => true);
- 9. end;
-10. /
+begin
+    rdsadmin.rdsadmin_password_verify.create_verify_function(
+        p_verify_function_name => 'CUSTOM_PASSWORD_FUNCTION', 
+        p_min_length           => 12, 
+        p_min_uppercase        => 2, 
+        p_min_digits           => 1, 
+        p_min_special          => 1,
+        p_disallow_at_sign     => true);
+end;
+/
 ```
 
 To see the text of your verification function, query `DBA_SOURCE`\. The following example gets the text of a custom password function named `CUSTOM_PASSWORD_FUNCTION`\. 
 
 ```
-1. col text format a150
-2. 
-3.   select TEXT 
-4.     from DBA_SOURCE 
-5.    where OWNER = 'SYS' and NAME = 'CUSTOM_PASSWORD_FUNCTION' 
-6. order by LINE;
+col text format a150
+
+  select TEXT 
+    from DBA_SOURCE 
+   where OWNER = 'SYS' and NAME = 'CUSTOM_PASSWORD_FUNCTION' 
+order by LINE;
 ```
 
 To associate your verification function with a user profile, use `alter profile`\. The following example associates a verification function with the `DEFAULT` user profile\. 
 
 ```
-1. alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
+alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 ```
 
 To see what user profiles are associated with what verification functions, query `DBA_PROFILES`\. The following example gets the profiles that are associated with the custom verification function named `CUSTOM_PASSWORD_FUNCTION`\. 
 
 ```
-1. select * 
-2.   from DBA_PROFILES 
-3.  where RESOURCE = 'PASSWORD' and LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
-4. 
-5. 
-6. PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
-7. -------------------------  --------------------------------  --------  ------------------------
-8. DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PASSWORD_FUNCTION
+select * 
+  from DBA_PROFILES 
+ where RESOURCE = 'PASSWORD' and LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
+
+
+PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
+-------------------------  --------------------------------  --------  ------------------------
+DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PASSWORD_FUNCTION
 ```
 
 The following example gets all profiles and the password verification functions that they are associated with\. 
 
 ```
-1. select * 
-2.   from DBA_PROFILES 
-3.  where RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
-4. 
-5. 
-6. PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
-7. -------------------------  --------------------------------  --------  ------------------------
-8. DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PASSWORD_FUNCTION
-9. RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
+select * 
+  from DBA_PROFILES 
+ where RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
+
+
+PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
+-------------------------  --------------------------------  --------  ------------------------
+DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PASSWORD_FUNCTION
+RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 ```
 
 ### The `create_passthrough_verify_fcn` Procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
@@ -375,19 +375,19 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 The following example creates a password verification function that uses the logic from the function named `PASSWORD_LOGIC_EXTRA_STRONG`\. 
 
 ```
-1. begin
-2.     rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn(
-3.         p_verify_function_name => 'CUSTOM_PASSWORD_FUNCTION', 
-4.         p_target_owner         => 'TEST_USER',
-5.         p_target_function_name => 'PASSWORD_LOGIC_EXTRA_STRONG');
-6. end;
-7. /
+begin
+    rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn(
+        p_verify_function_name => 'CUSTOM_PASSWORD_FUNCTION', 
+        p_target_owner         => 'TEST_USER',
+        p_target_function_name => 'PASSWORD_LOGIC_EXTRA_STRONG');
+end;
+/
 ```
 
 To associate the verification function with a user profile, use `alter profile`\. The following example associates the verification function with the `DEFAULT` user profile\. 
 
 ```
-1. alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
+alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 ```
 
 ## Setting Up a Custom DNS Server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS"></a>

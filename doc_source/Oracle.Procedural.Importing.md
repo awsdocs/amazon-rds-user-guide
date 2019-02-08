@@ -268,18 +268,23 @@ One requirement for materialized views is to allow access from the target databa
 
    ```
    create user dblink_user identified by <password>       
-   default tablespace users       
-   temporary tablespace temp; grant create session to dblink_user; grant select 
-   any table to dblink_user; grant select any dictionary to dblink_user;
+      default tablespace users       
+      temporary tablespace temp; 
+      
+   grant create session to dblink_user; 
+   
+   grant select any table to dblink_user; 
+   
+   grant select any dictionary to dblink_user;
    ```
 
 1. Create a database link from the Amazon RDS target instance to the source instance using the newly created dblink\_user\. 
 
    ```
    create database link remote_site
-   connect to dblink_user identified by <password>
-   using '(description=(address=(protocol=tcp) (host=<myhost>) (port=<listener port>))          
-   (connect_data=(sid=<sourcedb sid>)))';
+      connect to dblink_user identified by <password>
+      using '(description=(address=(protocol=tcp) (host=<myhost>) 
+      (port=<listener port>)) (connect_data=(sid=<sourcedb sid>)))';
    ```
 
 1. Test the link:
@@ -292,14 +297,30 @@ One requirement for materialized views is to allow access from the target databa
 
    ```
    create table customer_0 tablespace users as select rownum id, o.* from 
-   all_objects o, all_objects x where rownum <= 1000000; alter table customer_0 
-   add constraint pk_customer_0 primary key (id) using index; create 
-   materialized view log on customer_0;
+      all_objects o, all_objects x where rownum <= 1000000; 
+      
+   alter table customer_0 add constraint pk_customer_0 primary key (id) using index;
+      
+   create materialized view log on customer_0;
    ```
 
 1. On the target Amazon RDS instance, create a materialized view\. 
 
    ```
-   CREATE MATERIALIZED VIEW customer_0    BUILD IMMEDIATE   REFRESH FAST    AS 
-   SELECT * FROM cust_dba.customer_0@remote_site;
+   CREATE MATERIALIZED VIEW customer_0 BUILD IMMEDIATE REFRESH FAST AS 
+      SELECT * FROM cust_dba.customer_0@remote_site;
    ```
+
+1. On the target Amazon RDS instance, refresh the materialized view\.
+
+   ```
+   exec DBMS_MV.REFRESH('CUSTOMER_0', 'f');
+   ```
+
+1. Drop the materialized view and include the PRESERVE TABLE clause to retain the materialized view container table and its contents\.
+
+   ```
+   DROP MATERIALIZED VIEW customer_0 PRESERVE TABLE;
+   ```
+
+   The retained table has the same name as the dropped materialized view\.

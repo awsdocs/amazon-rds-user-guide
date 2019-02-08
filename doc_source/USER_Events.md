@@ -17,7 +17,7 @@ Amazon RDS groups these events into categories that you can subscribe to so that
 Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\. 
 
 **Note**  
-Amazon RDS event notifications using SMS text messages are currently available for topic Amazon Resource Names \(ARNs\) and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and Receiving SMS Notifications Using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg//SMSMessages.html)\.
+Amazon RDS event notifications using SMS text messages are currently available for topic Amazon Resource Names \(ARNs\) and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and Receiving SMS Notifications Using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg//SMSMessages.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 Amazon RDS uses the ARN of an Amazon SNS topic to identify each subscription\. The Amazon RDS console creates the ARN for you when you create the subscription\. If you use the CLI or API, you create the ARN by using the Amazon SNS console or the Amazon SNS API when you create a subscription\.
 
@@ -32,6 +32,9 @@ The process for subscribing to Amazon RDS event notification is as follows:
 1. When you have confirmed the subscription, the status of your subscription is updated in the Amazon RDS console's **My Event Subscriptions** section\.
 
 1. You then begin to receive event notifications\.
+
+**Note**  
+When Amazon SNS sends a notification to a subscribed HTTP or HTTPS endpoint, the POST message sent to the endpoint has a message body that contains a JSON document\. For more information, see [Amazon SNS Message and JSON Formats](https://docs.aws.amazon.com/sns/latest/dg//sns-message-and-json-formats.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 The following section lists all categories and events that you can be notified of\. It also provides information about subscribing to and working with Amazon RDS event subscriptions\.
 
@@ -68,7 +71,7 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0067 |  An attempt to reset the master password for the DB instance has failed\.  | 
 |  configuration change  | RDS\-EVENT\-0078 |  The Enhanced Monitoring configuration has been changed\.  | 
 |  creation  | RDS\-EVENT\-0005 |  A DB instance is being created\.  | 
-|  deletion  | RDS\-EVENT\-0003 |  The DB instance is being deleted\.  | 
+|  deletion  | RDS\-EVENT\-0003 |  The DB instance has been deleted\.  | 
 |  failover  | RDS\-EVENT\-0034 |  Amazon RDS is not attempting a requested failover because a failover recently occurred on the DB instance\.  | 
 |  failover  | RDS\-EVENT\-0013 |  A Multi\-AZ failover that resulted in the promotion of a standby instance has started\.  | 
 |  failover  | RDS\-EVENT\-0015 |  A Multi\-AZ failover that resulted in the promotion of a standby instance is complete\. It may take several minutes for the DNS to transfer to the new primary DB instance\.  | 
@@ -175,7 +178,7 @@ The following table shows the event category and a list of events when an Aurora
 
 ## Subscribing to Amazon RDS Event Notification<a name="USER_Events.Subscribing"></a>
 
-You can create an Amazon RDS event notification subscription so you can be notified when an event occurs for a given DB instance, DB snapshot, DB security group, or DB parameter group\. The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API actions\. For information on creating an SNS topic and subscribing to it, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html)\.
+You can create an Amazon RDS event notification subscription so you can be notified when an event occurs for a given DB instance, DB snapshot, DB security group, or DB parameter group\. The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API actions\. For information on creating an SNS topic and subscribing to it, see [Getting Started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you receive all the DB instance events for the specified source\. If you specify a **SourceType** but don't specify a **SourceIdentifier**, you receive notice of the events for that source type for all your Amazon RDS sources\. If you don't specify either the **SourceType** or the **SourceIdentifier**, you are notified of events generated from all Amazon RDS sources belonging to your customer account\.
 
@@ -334,16 +337,16 @@ The following code enables `myeventsubscription`\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-event-subscription \
-2.     --subscription-name myeventsubscription \
-3.     --enabled
+aws rds modify-event-subscription \
+    --subscription-name myeventsubscription \
+    --enabled
 ```
 For Windows:  
 
 ```
-1. aws rds modify-event-subscription ^
-2.     --subscription-name myeventsubscription ^
-3.     --enabled
+aws rds modify-event-subscription ^
+    --subscription-name myeventsubscription ^
+    --enabled
 ```
 
 ### API<a name="USER_Events.Modifying.API"></a>
@@ -370,16 +373,16 @@ The following example adds the source identifier `mysqldb` to the `myrdseventsub
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds add-source-identifier-to-subscription \
-2.     --subscription-name myrdseventsubscription \
-3.     --source-identifier mysqldb
+aws rds add-source-identifier-to-subscription \
+    --subscription-name myrdseventsubscription \
+    --source-identifier mysqldb
 ```
 For Windows:  
 
 ```
-1. aws rds add-source-identifier-to-subscription ^
-2.     --subscription-name myrdseventsubscription ^
-3.     --source-identifier mysqldb
+aws rds add-source-identifier-to-subscription ^
+    --subscription-name myrdseventsubscription ^
+    --source-identifier mysqldb
 ```
 
 ### API<a name="USER_Events.AddingSource.API"></a>
@@ -407,16 +410,16 @@ The following example removes the source identifier `mysqldb` from the `myrdseve
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds remove-source-identifier-from-subscription \
-2.     --subscription-name myrdseventsubscription \
-3.     --source-identifier mysqldb
+aws rds remove-source-identifier-from-subscription \
+    --subscription-name myrdseventsubscription \
+    --source-identifier mysqldb
 ```
 For Windows:  
 
 ```
-1. aws rds remove-source-identifier-from-subscription ^
-2.     --subscription-name myrdseventsubscription ^
-3.     --source-identifier mysqldb
+aws rds remove-source-identifier-from-subscription ^
+    --subscription-name myrdseventsubscription ^
+    --source-identifier mysqldb
 ```
 
 ### API<a name="USER_Events.RemovingSource.API"></a>
@@ -442,7 +445,7 @@ To list the Amazon RDS event notification categories, use the AWS CLI [https://d
 **Example**  
 
 ```
-1. aws rds describe-event-categories
+aws rds describe-event-categories
 ```
 
 ### API<a name="USER_Events.ListingCategories.API"></a>
@@ -477,7 +480,7 @@ To delete an Amazon RDS event notification subscription, use the AWS CLI [https:
 The following example deletes the subscription `myrdssubscription`\.  
 
 ```
-1. delete-event-subscription --subscription-name myrdssubscription
+aws rds delete-event-subscription --subscription-name myrdssubscription
 ```
 
 ### API<a name="USER_Events.Deleting.API"></a>

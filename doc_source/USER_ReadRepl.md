@@ -94,16 +94,16 @@ aws rds create-db-instance-read-replica ^
 To create a Read Replica from a source MySQL, MariaDB, or PostgreSQL DB instance, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. 
 
 ```
- 1. https://rds.amazonaws.com/
- 2. 	?Action=CreateDBInstanceReadReplica
- 3. 	&DBInstanceIdentifier=myreadreplica
- 4. 	&SourceDBInstanceIdentifier=mydbinstance
- 5. 	&Version=2012-01-15						
- 6. 	&SignatureVersion=2
- 7. 	&SignatureMethod=HmacSHA256
- 8. 	&Timestamp=2012-01-20T22%3A06%3A23.624Z
- 9. 	&AWSAccessKeyId=<AWS Access Key ID>
-10. 	&Signature=<Signature>
+https://rds.amazonaws.com/
+	?Action=CreateDBInstanceReadReplica
+	&DBInstanceIdentifier=myreadreplica
+	&SourceDBInstanceIdentifier=mydbinstance
+	&Version=2012-01-15						
+	&SignatureVersion=2
+	&SignatureMethod=HmacSHA256
+	&Timestamp=2012-01-20T22%3A06%3A23.624Z
+	&AWSAccessKeyId=<AWS Access Key ID>
+	&Signature=<Signature>
 ```
 
 ## Promoting a Read Replica to Be a Standalone DB Instance<a name="USER_ReadRepl.Promote"></a>
@@ -182,15 +182,15 @@ aws rds promote-read-replica ^
 To promote a Read Replica to a DB instance, call [ `PromoteReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplica.html)\. 
 
 ```
-1. https://rds.amazonaws.com/
-2. 	?Action=PromoteReadReplica
-3. 	&DBInstanceIdentifier=myreadreplica
-4. 	&Version=2012-01-15						
-5. 	&SignatureVersion=2
-6. 	&SignatureMethod=HmacSHA256
-7. 	&Timestamp=2012-01-20T22%3A06%3A23.624Z
-8. 	&AWSAccessKeyId=<AWS Access Key ID>
-9. 	&Signature=<Signature>
+https://rds.amazonaws.com/
+	?Action=PromoteReadReplica
+	&DBInstanceIdentifier=myreadreplica
+	&Version=2012-01-15						
+	&SignatureVersion=2
+	&SignatureMethod=HmacSHA256
+	&Timestamp=2012-01-20T22%3A06%3A23.624Z
+	&AWSAccessKeyId=<AWS Access Key ID>
+	&Signature=<Signature>
 ```
 
 ## Creating a Read Replica in a Different AWS Region<a name="USER_ReadRepl.XRgn"></a>
@@ -250,18 +250,18 @@ The following code creates a Read Replica in the `us-west-2` region\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-instance-read-replica \
-2.     --db-instance-identifier DBInstanceIdentifier \
-3.     --region us-west-2 \
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier DBInstanceIdentifier \
+    --region us-west-2 \
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-instance-read-replica ^
-2.     --db-instance-identifier DBInstanceIdentifier ^
-3.     --region us-west-2 ^
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
+aws rds create-db-instance-read-replica ^
+    --db-instance-identifier DBInstanceIdentifier ^
+    --region us-west-2 ^
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
 ```
 
 The following code creates a Read Replica in a different AWS Region than the source DB instance\. The AWS Region where you call the `create-db-instance-read-replica` command is the destination AWS Region for the encrypted Read Replica\.
@@ -270,22 +270,22 @@ The following code creates a Read Replica in a different AWS Region than the sou
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-instance-read-replica \
-2.     --db-instance-identifier DBInstanceIdentifier \
-3.     --region us-west-2 \
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance \
-5.     --source-region us-east-1 \
-6.     --kms-key-id my-us-east-1-key
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier DBInstanceIdentifier \
+    --region us-west-2 \
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance \
+    --source-region us-east-1 \
+    --kms-key-id my-us-east-1-key
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-instance-read-replica ^
-2.     --db-instance-identifier DBInstanceIdentifier ^
-3.     --region us-west-2 ^
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance ^
-5.     --source-region us-east-1 ^	
-6.     --kms-key-id my-us-east-1-key
+aws rds create-db-instance-read-replica ^
+    --db-instance-identifier DBInstanceIdentifier ^
+    --region us-west-2 ^
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance ^
+    --source-region us-east-1 ^	
+    --kms-key-id my-us-east-1-key
 ```
 
 ### API<a name="USER_ReadRepl.XRgn.API"></a>
@@ -303,32 +303,32 @@ For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in 
 **Example**  
 
 ```
- 1. https://us-west-2.rds.amazonaws.com/
- 2.     ?Action=CreateDBInstanceReadReplica
- 3.     &KmsKeyId=my-us-east-1-key
- 4.     &PreSignedUrl=https%253A%252F%252Frds.us-west-2.amazonaws.com%252F
- 5.          %253FAction%253D CreateDBInstanceReadReplica
- 6.          %2526DestinationRegion%253Dus-east-1
- 7.          %2526KmsKeyId%253Dmy-us-east-1-key
- 8.          %2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%1234567890
- 9. 12%25253Adb%25253Amy-mysql-instance
-10.          %2526SignatureMethod%253DHmacSHA256
-11.          %2526SignatureVersion%253D4%2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%25253A123456789012%25253Ainstance%25253Amysql-instance1-instance-20161115
-12.          %2526Version%253D2014-10-31
-13.          %2526X-Amz-Algorithm%253DAWS4-HMAC-SHA256
-14.          %2526X-Amz-Credential%253DAKIADQKE4SARGYLE%252F20161117%252Fus-west-2%252Frds%252Faws4_request
-15.          %2526X-Amz-Date%253D20161117T215409Z
-16.          %2526X-Amz-Expires%253D3600
-17.          %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
-18.          %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
-19.     &DBInstanceIdentifier=myreadreplica
-20.     &SourceDBInstanceIdentifier=arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
-21.     &Version=2012-01-15						
-22.     &SignatureVersion=2
-23.     &SignatureMethod=HmacSHA256
-24.     &Timestamp=2012-01-20T22%3A06%3A23.624Z
-25.     &AWSAccessKeyId=<AWS Access Key ID>
-26.     &Signature=<Signature>
+https://us-west-2.rds.amazonaws.com/
+    ?Action=CreateDBInstanceReadReplica
+    &KmsKeyId=my-us-east-1-key
+    &PreSignedUrl=https%253A%252F%252Frds.us-west-2.amazonaws.com%252F
+         %253FAction%253D CreateDBInstanceReadReplica
+         %2526DestinationRegion%253Dus-east-1
+         %2526KmsKeyId%253Dmy-us-east-1-key
+         %2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%1234567890
+12%25253Adb%25253Amy-mysql-instance
+         %2526SignatureMethod%253DHmacSHA256
+         %2526SignatureVersion%253D4%2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%25253A123456789012%25253Ainstance%25253Amysql-instance1-instance-20161115
+         %2526Version%253D2014-10-31
+         %2526X-Amz-Algorithm%253DAWS4-HMAC-SHA256
+         %2526X-Amz-Credential%253DAKIADQKE4SARGYLE%252F20161117%252Fus-west-2%252Frds%252Faws4_request
+         %2526X-Amz-Date%253D20161117T215409Z
+         %2526X-Amz-Expires%253D3600
+         %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
+         %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
+    &DBInstanceIdentifier=myreadreplica
+    &SourceDBInstanceIdentifier=arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
+    &Version=2012-01-15						
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &Timestamp=2012-01-20T22%3A06%3A23.624Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 ### Cross\-Region Replication Considerations<a name="USER_ReadRepl.XRgn.Cnsdr"></a>
@@ -394,18 +394,18 @@ The following example creates a Read Replica in us\-west\-2 from a source DB ins
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-instance-read-replica \
-2.     --db-instance-identifier SimCoProd01Replica01 \
-3.     --region us-west-2
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier SimCoProd01Replica01 \
+    --region us-west-2
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-instance-read-replica ^
-2.     --db-instance-identifier SimCoProd01Replica01 ^
-3.     --region us-west-2
-4.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
+aws rds create-db-instance-read-replica ^
+    --db-instance-identifier SimCoProd01Replica01 ^
+    --region us-west-2
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
 ```
 
 **Example Create Cross\-Region Read Replica in a VPC**  
@@ -413,20 +413,20 @@ This example creates a Read Replica in us\-west\-2 from a source DB instance in 
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-instance-read-replica \
-2.     --db-instance-identifier SimCoProd01Replica01 \
-3.     --region us-west-2
-4.     --db-subnet-group-name my-us-west-2-subnet 
-5.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier SimCoProd01Replica01 \
+    --region us-west-2
+    --db-subnet-group-name my-us-west-2-subnet 
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-instance-read-replica ^
-2.     --db-instance-identifier SimCoProd01Replica01 ^
-3.     --region us-west-2
-4.     --db-subnet-group-name my-us-west-2-subnet 
-5.     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
+aws rds create-db-instance-read-replica ^
+    --db-instance-identifier SimCoProd01Replica01 ^
+    --region us-west-2
+    --db-subnet-group-name my-us-west-2-subnet 
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:SimcoProd01
 ```
 
 ## Monitoring Read Replication<a name="USER_ReadRepl.Monitoring"></a>

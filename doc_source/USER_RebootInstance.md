@@ -36,14 +36,14 @@ To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds reboot-db-instance \
-2.     --db-instance-identifier mydbinstance
+aws rds reboot-db-instance \
+    --db-instance-identifier mydbinstance
 ```
 For Windows:  
 
 ```
-1. aws rds reboot-db-instance ^
-2.     --db-instance-identifier mydbinstance
+aws rds reboot-db-instance ^
+    --db-instance-identifier mydbinstance
 ```
 
 **Example Reboot with Failover**  
@@ -51,16 +51,16 @@ To force a failover from one AZ to the other, use the `--force-failover` paramet
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds reboot-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --force-failover
+aws rds reboot-db-instance \
+    --db-instance-identifier mydbinstance \
+    --force-failover
 ```
 For Windows:  
 
 ```
-1. aws rds reboot-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --force-failover
+aws rds reboot-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --force-failover
 ```
 
 ## API<a name="USER_RebootInstance.API"></a>
@@ -70,29 +70,29 @@ To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.
 **Example Simple Reboot**  
 
 ```
-1. https://rds.amazonaws.com/
-2. 	?Action=RebootDBInstance
-3.     &DBInstanceIdentifier=mydbinstance
-4.     &Version=2014-10-31						
-5.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-6.     &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
-7.     &X-Amz-Date=20131016T233051Z
-8.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-9.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
+https://rds.amazonaws.com/
+	?Action=RebootDBInstance
+    &DBInstanceIdentifier=mydbinstance
+    &Version=2014-10-31						
+    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
+    &X-Amz-Date=20131016T233051Z
+    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
 ```
 
 **Example Reboot with Failover**  
 To force a failover from one AZ to the other, set the `ForceFailover` parameter to `true`\.   
 
 ```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=RebootDBInstance
- 3.     &DBInstanceIdentifier=mydbinstance
- 4.     &ForceFailover=true
- 5.     &Version=2014-10-31						
- 6.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 7.     &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
- 8.     &X-Amz-Date=20131016T233051Z
- 9.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-10.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
+https://rds.amazonaws.com/
+    ?Action=RebootDBInstance
+    &DBInstanceIdentifier=mydbinstance
+    &ForceFailover=true
+    &Version=2014-10-31						
+    &X-Amz-Algorithm=AWS4-HMAC-SHA256
+    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
+    &X-Amz-Date=20131016T233051Z
+    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
+    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
 ```

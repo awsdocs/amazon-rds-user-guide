@@ -49,18 +49,18 @@ To apply a pending update to a DB instance, use the [apply\-pending\-maintenance
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds apply-pending-maintenance-action \
-2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db \
-3.     --apply-action system-update \
-4.     --opt-in-type immediate
+aws rds apply-pending-maintenance-action \
+    --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db \
+    --apply-action system-update \
+    --opt-in-type immediate
 ```
 For Windows:  
 
 ```
-1. aws rds apply-pending-maintenance-action ^
-2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db ^
-3.     --apply-action system-update ^
-4.     --opt-in-type immediate
+aws rds apply-pending-maintenance-action ^
+    --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db ^
+    --apply-action system-update ^
+    --opt-in-type immediate
 ```
 
 To return a list of resources that have at least one pending update, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
@@ -69,14 +69,14 @@ To return a list of resources that have at least one pending update, use the [de
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-pending-maintenance-actions \
-2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
+aws rds describe-pending-maintenance-actions \
+    --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
 ```
 For Windows:  
 
 ```
-1. aws rds describe-pending-maintenance-actions ^
-2.     --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
+aws rds describe-pending-maintenance-actions ^
+    --resource-identifier arn:aws:rds:us-west-2:001234567890:db:mysql-db
 ```
 
 You can also return a list of resources for a DB instance by specifying the `--filters` parameter of the `describe-pending-maintenance-actions` AWS CLI command\. The format for the `--filters` command is `Name=filter-name,Value=resource-id,...`\.
@@ -91,14 +91,14 @@ For example, the following example returns the pending maintenance actions for t
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-pending-maintenance-actions \
-2. 	--filters Name=db-instance-id,Values=sample-instance1,sample-instance2
+aws rds describe-pending-maintenance-actions \
+	--filters Name=db-instance-id,Values=sample-instance1,sample-instance2
 ```
 For Windows:  
 
 ```
-1. aws rds describe-pending-maintenance-actions ^
-2. 	--filters Name=db-instance-id,Values=sample-instance1,sample-instance2
+aws rds describe-pending-maintenance-actions ^
+	--filters Name=db-instance-id,Values=sample-instance1,sample-instance2
 ```
 
 ### API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>

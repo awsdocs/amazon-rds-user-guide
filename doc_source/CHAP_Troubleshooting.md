@@ -32,24 +32,24 @@ You can test your connection to a DB instance using common Linux or Windows tool
 From a Linux or Unix terminal, you can test the connection by typing the following \(replace `<DB-instance-endpoint>` with the endpoint and `<port>` with the port of your DB instance\):
 
 ```
-1.   $nc -zv <DB-instance-endpoint> <port> 
+nc -zv <DB-instance-endpoint> <port> 
 ```
 
 For example, the following shows a sample command and the return value:
 
 ```
-1.   $nc -zv postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299
-2. 
-3.   Connection to postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
+nc -zv postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299
+
+  Connection to postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
 ```
 
 Windows users can use Telnet to test the connection to a DB instance\. Note that Telnet actions are not supported other than for testing the connection\. If a connection is successful, the action returns no message\. If a connection is not successful, you receive an error message such as the following:
 
 ```
-1.   C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
-2.   
-3.   Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
-4.   connection to the host, on port 819: Connect failed
+C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
+  
+  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
+  connection to the host, on port 819: Connect failed
 ```
 
 If Telnet actions return success, your security group is properly configured\.
@@ -117,13 +117,13 @@ If your DB instance runs out of storage space, it might no longer be available\.
 If your database instance runs out of storage, its status will change to *storage\-full*\. For example, a call to the `DescribeDBInstances` action for a DB instance that has used up its storage will output the following:
 
 ```
-1. aws rds describe-db-instances --db-instance-identifier mydbinstance
-2. 				
-3. DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
-4. storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
-5. us-east-1b  3
-6. 	SECGROUP  default  active
-7. 	PARAMGRP  default.mysql5.6  in-sync
+aws rds describe-db-instances --db-instance-identifier mydbinstance
+				
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
+storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
+us-east-1b  3
+	SECGROUP  default  active
+	PARAMGRP  default.mysql5.6  in-sync
 ```
 
 To recover from this scenario, add more storage space to your instance using the `ModifyDBInstance` action or the following AWS CLI command:
@@ -131,27 +131,27 @@ To recover from this scenario, add more storage space to your instance using the
 For Linux, OS X, or Unix:
 
 ```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --allocated-storage 60 \
-4.     --apply-immediately
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --allocated-storage 60 \
+    --apply-immediately
 ```
 
 For Windows:
 
 ```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --allocated-storage 60 ^
-4.     --apply-immediately
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --allocated-storage 60 ^
+    --apply-immediately
 ```
 
 ```
-1. DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
-2. storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
-3. us-east-1b  3  60
-4. 	SECGROUP  default  active
-5. 	PARAMGRP  default.mysql5.6  in-sync
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
+storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
+us-east-1b  3  60
+	SECGROUP  default  active
+	PARAMGRP  default.mysql5.6  in-sync
 ```
 
 Now, when you describe your DB instance, you will see that your DB instance will have *modifying* status, which indicates the storage is being scaled\.
@@ -171,7 +171,7 @@ modifying  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com
 Once storage scaling is complete, your DB instance status will change to *available*\.
 
 ```
-1. aws rds describe-db-instances --db-instance-identifier mydbinstance 
+aws rds describe-db-instances --db-instance-identifier mydbinstance 
 ```
 
 ```
@@ -185,7 +185,7 @@ us-east-1b  3
 Note that you can receive notifications when your storage space is exhausted using the `DescribeEvents` action\. For example, in this scenario, if you do a `DescribeEvents` call after these operations you will see the following output:
 
 ```
-1. aws rds describe-events --source-type db-instance --source-identifier mydbinstance 
+aws rds describe-events --source-type db-instance --source-identifier mydbinstance 
 ```
 
 ```
@@ -215,8 +215,8 @@ Queries that use index merge optimization might return wrong results due to a bu
 For example, consider a query on a table with two indexes where the search arguments reference the indexed columns\.
 
 ```
-1. SELECT * FROM table1 
-2.   WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
+SELECT * FROM table1 
+  WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
 ```
 
 In this case, the search engine searches both indexes\. However, due to the bug, the merged results are incorrect\.
@@ -227,9 +227,9 @@ To resolve this issue, you can do one of the following:
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
-  1. SELECT * FROM table1 
-  2.   USE INDEX covering_index 
-  3.   WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
+  SELECT * FROM table1 
+    USE INDEX covering_index 
+    WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
   ```
 
 For more information, go to [Index Merge Optimization](http://dev.mysql.com/doc/refman/5.6/en/index-merge-optimization.html)\.
@@ -253,23 +253,23 @@ You can reduce the lag between updates to a source DB instance and the subsequen
   For Linux, OS X, or Unix:
 
   ```
-  1. PROMPT> mysqldump \
-  2.     -h <endpoint> \
-  3.     --port=<port> \
-  4.     -u=<username> \
-  5.     -p <password> \
-  6.     database_name table1 table2 > /dev/null
+  PROMPT> mysqldump \
+      -h <endpoint> \
+      --port=<port> \
+      -u=<username> \
+      -p <password> \
+      database_name table1 table2 > /dev/null
   ```
 
   For Windows:
 
   ```
-  1. PROMPT> mysqldump ^
-  2.     -h <endpoint> ^
-  3.     --port=<port> ^
-  4.     -u=<username> ^
-  5.     -p <password> ^
-  6.     database_name table1 table2 > /dev/null
+  PROMPT> mysqldump ^
+      -h <endpoint> ^
+      --port=<port> ^
+      -u=<username> ^
+      -p <password> ^
+      database_name table1 table2 > /dev/null
   ```
 
 ### Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
@@ -301,7 +301,7 @@ If a replication error is fixed, the **Replication State** changes to **replicat
 When trying to create triggers in an RDS MySQL or MariaDB DB instance, you might receive the following error:
 
 ```
-1. "You do not have the SUPER privilege and binary logging is enabled" 
+"You do not have the SUPER privilege and binary logging is enabled" 
 ```
 
 To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS MySQL and MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
@@ -315,19 +315,19 @@ To create a new DB parameter group that allows you to create triggers in your RD
    For Linux, OS X, or Unix:
 
    ```
-   1. aws rds create-db-parameter-group \
-   2.     --db-parameter-group-name allow-triggers \
-   3.     --db-parameter-group-family mysql15.5 \
-   4.     --description "parameter group allowing triggers"
+   aws rds create-db-parameter-group \
+       --db-parameter-group-name allow-triggers \
+       --db-parameter-group-family mysql15.5 \
+       --description "parameter group allowing triggers"
    ```
 
    For Windows:
 
    ```
-   1. aws rds create-db-parameter-group ^
-   2.     --db-parameter-group-name allow-triggers ^
-   3.     --db-parameter-group-family mysql15.5 ^
-   4.     --description "parameter group allowing triggers"
+   aws rds create-db-parameter-group ^
+       --db-parameter-group-name allow-triggers ^
+       --db-parameter-group-family mysql15.5 ^
+       --description "parameter group allowing triggers"
    ```
 
 1. Modify the DB parameter group to allow triggers\.
@@ -335,17 +335,17 @@ To create a new DB parameter group that allows you to create triggers in your RD
    For Linux, OS X, or Unix:
 
    ```
-   1. aws rds modify-db-parameter-group \ 
-   2.     --db-parameter-group-name allow-triggers \
-   3.     --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
+   aws rds modify-db-parameter-group \ 
+       --db-parameter-group-name allow-triggers \
+       --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
    ```
 
    For Windows:
 
    ```
-   1. aws rds modify-db-parameter-group ^ 
-   2.     --db-parameter-group-name allow-triggers ^
-   3.     --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
+   aws rds modify-db-parameter-group ^ 
+       --db-parameter-group-name allow-triggers ^
+       --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
    ```
 
 1. Modify your DB instance to use the new DB parameter group\.
@@ -353,25 +353,25 @@ To create a new DB parameter group that allows you to create triggers in your RD
    For Linux, OS X, or Unix:
 
    ```
-   1. aws rds modify-db-instance \
-   2.     --db-instance-identifier mydbinstance \
-   3.     --db-parameter-group-name allow-triggers \
-   4.     --apply-immediately
+   aws rds modify-db-instance \
+       --db-instance-identifier mydbinstance \
+       --db-parameter-group-name allow-triggers \
+       --apply-immediately
    ```
 
    For Windows:
 
    ```
-   1. aws rds modify-db-instance ^
-   2.     --db-instance-identifier mydbinstance ^
-   3.     --db-parameter-group-name allow-triggers ^
-   4.     --apply-immediately
+   aws rds modify-db-instance ^
+       --db-instance-identifier mydbinstance ^
+       --db-parameter-group-name allow-triggers ^
+       --apply-immediately
    ```
 
 1. In order for the changes to take effect, manually reboot the DB instance\.
 
    ```
-   1. aws rds reboot-db-instance mydbinstance 
+   aws rds reboot-db-instance mydbinstance 
    ```
 
 ### Diagnosing and Resolving Point\-In\-Time Restore Failures<a name="CHAP_Troubleshooting.MySQL.PITR"></a>
@@ -381,9 +381,9 @@ To create a new DB parameter group that allows you to create triggers in your RD
 When attempting a Point\-In\-Time Restore \(PITR\) of your MySQL or MariaDB DB instance, you might encounter the following error:
 
 ```
-1. Database instance could not be restored because there has been incompatible database activity for restore 
-2. functionality. Common examples of incompatible activity include using temporary tables, in-memory tables, 
-3. or using MyISAM tables. In this case, use of Temporary table was detected.
+Database instance could not be restored because there has been incompatible database activity for restore 
+functionality. Common examples of incompatible activity include using temporary tables, in-memory tables, 
+or using MyISAM tables. In this case, use of Temporary table was detected.
 ```
 
 PITR relies on both backup snapshots and binlogs from MySQL or MariaDB to restore your DB instance to a particular time\. Temporary table information can be unreliable in binlogs and can cause a PITR failure\. If you use temporary tables in your MySQL or MariaDB DB instance, you can minimize the possibility of a PITR failure by performing more frequent backups\. A PITR failure is most probable in the time between a temporary table's creation and the next backup snapshot\.
@@ -430,9 +430,9 @@ To resolve this issue, set the following parameter values:
 The source database must retain archived redo logs\. The duration for log retention is specified in hours\. The duration should exceed any potential downtime of the source instance or any potential period of communication or networking issues for the source instance, so that Oracle GoldenGate can recover logs from the source instance as needed\. The absolute minimum value required is one \(1\) hour of logs retained\. If you don't have log retention enabled, or if the retention value is too small, you will receive the following message:
 
 ```
-1. 2014-03-06 06:17:27  ERROR   OGG-00446  error 2 (No such file or directory) 
-2. opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log 
-3. for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
+2014-03-06 06:17:27  ERROR   OGG-00446  error 2 (No such file or directory) 
+opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log 
+for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
 ```
 
 ## Cannot Connect to Amazon RDS SQL Server DB Instance<a name="CHAP_Troubleshooting.SQLServer.Connect"></a>

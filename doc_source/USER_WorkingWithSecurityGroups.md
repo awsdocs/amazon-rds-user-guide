@@ -58,16 +58,16 @@ To create a DB security group, use the AWS CLI command [https://docs.aws.amazon.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-security-group \
-2.     --db-security-group-name mydbsecuritygroup \
-3.     --db-security-group-description "My new security group"
+aws rds create-db-security-group \
+    --db-security-group-name mydbsecuritygroup \
+    --db-security-group-description "My new security group"
 ```
 For Windows:  
 
 ```
-1. aws rds create-db-security-group ^
-2.     --db-security-group-name mydbsecuritygroup ^
-3.     --db-security-group-description "My new security group"
+aws rds create-db-security-group ^
+    --db-security-group-name mydbsecuritygroup ^
+    --db-security-group-description "My new security group"
 ```
 
 A newly created DB security group doesn't provide access to a DB instance by default\. You must specify a range of IP addresses or an Amazon EC2 security group that can have access to the DB instance\. To specify IP addresses or an Amazon EC2 security group for a DB security group, see [Authorizing Network Access to a DB Security Group from an IP Range](#USER_WorkingWithSecurityGroups.Authorizing)\.
@@ -81,16 +81,16 @@ To create a DB security group, call the Amazon RDS function [https://docs.aws.am
 **Example**  
 
 ```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=CreateDBSecurityGroup
- 3.     &DBSecurityGroupName=mydbsecuritygroup
- 4.     &Description=My%20new%20db%20security%20group
- 5.     &Version=2012-01-15						
- 6.     &SignatureVersion=2
- 7.     &SignatureMethod=HmacSHA256
- 8.     &Timestamp=2012-01-20T22%3A06%3A23.624Z
- 9.     &AWSAccessKeyId=<AWS Access Key ID>
-10.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=CreateDBSecurityGroup
+    &DBSecurityGroupName=mydbsecuritygroup
+    &Description=My%20new%20db%20security%20group
+    &Version=2012-01-15						
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &Timestamp=2012-01-20T22%3A06%3A23.624Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 A newly created DB security group doesn't provide access to a DB instance by default\. You must specify a range of IP addresses or an Amazon EC2 security group that can have access to the DB instance\. To specify IP addresses or an Amazon EC2 security group for a DB security group, see [Authorizing Network Access to a DB Security Group from an IP Range](#USER_WorkingWithSecurityGroups.Authorizing)\.
@@ -116,7 +116,7 @@ To list all available DB security groups for an AWS account, Use the AWS CLI com
 **Example**  
 
 ```
-1. aws rds describe-db-security-groups
+aws rds describe-db-security-groups
 ```
 
 ### API<a name="USER_WorkingWithSecurityGroups.Listing.API"></a>
@@ -126,14 +126,14 @@ To list all available DB security groups for an AWS account, call [https://docs.
 **Example**  
 
 ```
-1. https://rds.amazonaws.com/
-2.     ?Action=DescribeDBSecurityGroups
-3.     &MaxRecords=100
-4.     &Version=2009-10-16
-5.     &SignatureVersion=2
-6.     &SignatureMethod=HmacSHA256
-7.     &AWSAccessKeyId=<AWS Access Key ID>
-8.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=DescribeDBSecurityGroups
+    &MaxRecords=100
+    &Version=2009-10-16
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 ## Viewing a DB Security Group<a name="USER_WorkingWithSecurityGroups.Viewing"></a>
@@ -158,14 +158,14 @@ To view the properties of a specific DB security group use the AWS CLI [https://
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-db-security-groups \
-2.     --db-security-group-name mydbsecuritygroup
+aws rds describe-db-security-groups \
+    --db-security-group-name mydbsecuritygroup
 ```
 For Windows:  
 
 ```
-1. aws rds describe-db-security-groups ^
-2.     --db-security-group-name mydbsecuritygroup
+aws rds describe-db-security-groups ^
+    --db-security-group-name mydbsecuritygroup
 ```
 
 ### API<a name="USER_WorkingWithSecurityGroups.Viewing.API"></a>
@@ -176,15 +176,15 @@ To view properties of a specific DB security group, call [https://docs.aws.amazo
 **Example**  
 
 ```
-1. https://rds.amazonaws.com/
-2.     ?Action=DescribeDBSecurityGroups
-3.     &DBSecurityGroupName=mydbsecuritygroup
-4.     &Version=2009-10-16
-5.     &SignatureVersion=2
-6.     &SignatureMethod=HmacSHA256
-7.     &Timestamp=2009-10-16T22%3A23%3A07.107Z
-8.     &AWSAccessKeyId=<AWS Access Key ID>
-9.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=DescribeDBSecurityGroups
+    &DBSecurityGroupName=mydbsecuritygroup
+    &Version=2009-10-16
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &Timestamp=2009-10-16T22%3A23%3A07.107Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 ## Associating a DB Security Group with a DB Instance<a name="USER_WorkingWithSecurityGroups.Associate"></a>
@@ -226,22 +226,22 @@ To configure a DB security group with an ingress rule for a CIDR IP range, use t
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds authorize-db-security-group-ingress \
-2.     --db-security-group-name mydbsecuritygroup \
-3.     --cidrip 192.168.1.10/27
+aws rds authorize-db-security-group-ingress \
+    --db-security-group-name mydbsecuritygroup \
+    --cidrip 192.168.1.10/27
 ```
 For Windows:  
 
 ```
-1. aws rds authorize-db-security-group-ingress ^
-2.     --db-security-group-name mydbsecuritygroup ^
-3.     --cidrip 192.168.1.10/27
+aws rds authorize-db-security-group-ingress ^
+    --db-security-group-name mydbsecuritygroup ^
+    --cidrip 192.168.1.10/27
 ```
 The command should produce output similar to the following\.  
 
 ```
-1. SECGROUP  mydbsecuritygroup  My new DBSecurityGroup
-2. IP-RANGE  192.168.1.10/27  authorizing
+SECGROUP  mydbsecuritygroup  My new DBSecurityGroup
+IP-RANGE  192.168.1.10/27  authorizing
 ```
 
 ### API<a name="USER_WorkingWithSecurityGroups.Authorizing.API"></a>
@@ -253,17 +253,17 @@ To configure a DB security group with an ingress rule for a CIDR IP range, call 
 **Example**  
 
 ```
- 1. https://rds.amazonaws.com/
- 2. 	?Action=AuthorizeDBSecurityGroupIngress
- 3. 	&CIDRIP=192.168.1.10%2F27
- 4. 	&DBSecurityGroupName=mydbsecuritygroup
- 5. 	&Version=2009-10-16
- 6. 	&Action=AuthorizeDBSecurityGroupIngress
- 7. 	&SignatureVersion=2
- 8. 	&SignatureMethod=HmacSHA256
- 9. 	&Timestamp=2009-10-22T17%3A10%3A50.274Z
-10. 	&AWSAccessKeyId=<AWS Access Key ID>
-11. 	&Signature=<Signature>
+https://rds.amazonaws.com/
+	?Action=AuthorizeDBSecurityGroupIngress
+	&CIDRIP=192.168.1.10%2F27
+	&DBSecurityGroupName=mydbsecuritygroup
+	&Version=2009-10-16
+	&Action=AuthorizeDBSecurityGroupIngress
+	&SignatureVersion=2
+	&SignatureMethod=HmacSHA256
+	&Timestamp=2009-10-22T17%3A10%3A50.274Z
+	&AWSAccessKeyId=<AWS Access Key ID>
+	&Signature=<Signature>
 ```
 
 ## Authorizing Network Access to a DB Instance from an Amazon EC2 Instance<a name="USER_WorkingWithSecurityGroups.AuthorizingEC2"></a>
@@ -298,25 +298,25 @@ To grant access to an Amazon EC2 security group, use the AWS CLI command [https:
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds authorize-db-security-group-ingress \
-2.     --db-security-group-name default  \
-3.     --ec2-security-group-name myec2group \
-4.     --ec2-security-group-owner-id 987654321021
+aws rds authorize-db-security-group-ingress \
+    --db-security-group-name default  \
+    --ec2-security-group-name myec2group \
+    --ec2-security-group-owner-id 987654321021
 ```
 For Windows:  
 
 ```
-1. aws rds authorize-db-security-group-ingress ^
-2.     --db-security-group-name default  ^
-3.     --ec2-security-group-name myec2group ^
-4.     --ec2-security-group-owner-id 987654321021
+aws rds authorize-db-security-group-ingress ^
+    --db-security-group-name default  ^
+    --ec2-security-group-name myec2group ^
+    --ec2-security-group-owner-id 987654321021
 ```
 The command should produce output similar to the following:  
 
 ```
-1. SECGROUP  Name     Description 
-2. SECGROUP  default  default
-3.       EC2-SECGROUP  myec2group  987654321021  authorizing
+SECGROUP  Name     Description 
+SECGROUP  default  default
+      EC2-SECGROUP  myec2group  987654321021  authorizing
 ```
 
 ### API<a name="USER_WorkingWithSecurityGroups.AuthorizingEC2.API"></a>
@@ -328,16 +328,16 @@ To authorize network access to an Amazon EC2 security group, call that Amazon RD
 **Example**  
 
 ```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=AuthorizeDBSecurityGroupIngress
- 3.     &EC2SecurityGroupOwnerId=987654321021
- 4.     &EC2Security­GroupName=myec2group
- 5.     &Version=2009-10-16
- 6.     &SignatureVersion=2
- 7.     &SignatureMethod=HmacSHA256
- 8.     &Timestamp=2009-10-22T17%3A10%3A50.274Z
- 9.     &AWSAccessKeyId=<AWS Access Key ID>
-10.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=AuthorizeDBSecurityGroupIngress
+    &EC2SecurityGroupOwnerId=987654321021
+    &EC2Security­GroupName=myec2group
+    &Version=2009-10-16
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &Timestamp=2009-10-22T17%3A10%3A50.274Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 ## Revoking Network Access to a DB Instance from an IP Range<a name="USER_WorkingWithSecurityGroups.Revoking"></a>
@@ -368,22 +368,22 @@ To revoke an ingress rule for a CIDR IP range on a DB security group, use the AW
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds revoke-db-security-group-ingress \ 
-2.     --db-security-group-name mydbsecuritygroup \
-3.     --cidrip 192.168.1.1/27
+aws rds revoke-db-security-group-ingress \ 
+    --db-security-group-name mydbsecuritygroup \
+    --cidrip 192.168.1.1/27
 ```
 For Windows:  
 
 ```
-1. aws rds revoke-db-security-group-ingress ^
-2.     --db-security-group-name mydbsecuritygroup ^
-3.     --cidrip 192.168.1.1/27
+aws rds revoke-db-security-group-ingress ^
+    --db-security-group-name mydbsecuritygroup ^
+    --cidrip 192.168.1.1/27
 ```
 The command should produce output similar to the following\.  
 
 ```
-1. SECGROUP  mydbsecuritygroup  My new DBSecurityGroup
-2.   IP-RANGE  192.168.1.1/27  revoking
+SECGROUP  mydbsecuritygroup  My new DBSecurityGroup
+  IP-RANGE  192.168.1.1/27  revoking
 ```
 
 ### API<a name="USER_WorkingWithSecurityGroups.Revoking.API"></a>
@@ -395,13 +395,13 @@ To revoke an ingress rule for a CIDR IP range on a DB security group, call the A
 **Example**  
 
 ```
-1. https://rds.amazonaws.com/
-2.     ?Action=RevokeDBSecurityGroupIngress
-3.     &DBSecurityGroupName=mydbsecuritygroup
-4.     &CIDRIP=192.168.1.10%2F27
-5.     &Version=2009-10-16
-6.     &SignatureVersion=2&SignatureMethod=HmacSHA256
-7.     &Timestamp=2009-10-22T22%3A32%3A12.515Z
-8.     &AWSAccessKeyId=<AWS Access Key ID>
-9.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=RevokeDBSecurityGroupIngress
+    &DBSecurityGroupName=mydbsecuritygroup
+    &CIDRIP=192.168.1.10%2F27
+    &Version=2009-10-16
+    &SignatureVersion=2&SignatureMethod=HmacSHA256
+    &Timestamp=2009-10-22T22%3A32%3A12.515Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```

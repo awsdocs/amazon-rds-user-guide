@@ -77,24 +77,24 @@ The following example immediately disabled automatic backups\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier mydbinstance \
-3.     --backup-retention-period 0 \
-4.     --apply-immediately
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --backup-retention-period 0 \
+    --apply-immediately
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier mydbinstance ^
-3.     --backup-retention-period 0 ^
-4.     --apply-immediately
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --backup-retention-period 0 ^
+    --apply-immediately
 ```
 
 To know when the modification is in effect, call `describe-db-instances` for the DB instance until the value for backup retention period is 0 and mydbinstance status is available\.
 
 ```
-1. aws rds describe-db-instances --db-instance-identifier mydbinstance
+aws rds describe-db-instances --db-instance-identifier mydbinstance
 ```
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Disabling.API"></a>
@@ -106,15 +106,15 @@ To disable automated backups immediately, call the [ModifyDBInstance](https://do
 **Example**  
 
 ```
-1. https://rds.amazonaws.com/
-2.     ?Action=ModifyDBInstance
-3.     &DBInstanceIdentifier=mydbinstance
-4.     &BackupRetentionPeriod=0
-5.     &SignatureVersion=2
-6.     &SignatureMethod=HmacSHA256
-7.     &Timestamp=2009-10-14T17%3A48%3A21.746Z
-8.     &AWSAccessKeyId=<AWS Access Key ID>
-9.     &Signature=<Signature>
+https://rds.amazonaws.com/
+    ?Action=ModifyDBInstance
+    &DBInstanceIdentifier=mydbinstance
+    &BackupRetentionPeriod=0
+    &SignatureVersion=2
+    &SignatureMethod=HmacSHA256
+    &Timestamp=2009-10-14T17%3A48%3A21.746Z
+    &AWSAccessKeyId=<AWS Access Key ID>
+    &Signature=<Signature>
 ```
 
 ## Enabling Automated Backups<a name="USER_WorkingWithAutomatedBackups.Enabling"></a>
@@ -156,18 +156,18 @@ Include the following parameters:
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds modify-db-instance \
-2.     --db-instance-identifier mydbinstance  \
-3.     --backup-retention-period 3 \
-4.     --apply-immediately
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance  \
+    --backup-retention-period 3 \
+    --apply-immediately
 ```
 For Windows:  
 
 ```
-1. aws rds modify-db-instance ^
-2.     --db-instance-identifier mydbinstance  ^
-3.     --backup-retention-period 3 ^
-4.     --apply-immediately
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance  ^
+    --backup-retention-period 3 ^
+    --apply-immediately
 ```
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Enabling.API"></a>
@@ -184,16 +184,16 @@ Include the following parameters:
 **Example**  
 
 ```
- 1. https://rds.amazonaws.com/
- 2.  ?Action=ModifyDBInstance
- 3.  &DBInstanceIdentifier=mydbinstance
- 4.  &BackupRetentionPeriod=3
- 5.  &ApplyImmediately=true
- 6.  &SignatureVersion=2
- 7.  &SignatureMethod=HmacSHA256
- 8.  &Timestamp=2009-10-14T17%3A48%3A21.746Z
- 9.  &AWSAccessKeyId=<AWS Access Key ID>
-10.  &Signature=<Signature>
+https://rds.amazonaws.com/
+ ?Action=ModifyDBInstance
+ &DBInstanceIdentifier=mydbinstance
+ &BackupRetentionPeriod=3
+ &ApplyImmediately=true
+ &SignatureVersion=2
+ &SignatureMethod=HmacSHA256
+ &Timestamp=2009-10-14T17%3A48%3A21.746Z
+ &AWSAccessKeyId=<AWS Access Key ID>
+ &Signature=<Signature>
 ```
 
 ## Retaining Automated Backups<a name="USER_WorkingWithAutomatedBackups.Retaining"></a>
