@@ -11,15 +11,21 @@ When you add the Amazon RDS APEX options to your DB instance, Amazon RDS install
 The APEX option uses storage on the DB instance class for your DB instance\.
 
 Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 12c version 12\.2 on Amazon RDS: 
++ Oracle APEX version 18\.2\.v1 – 146 MiB
++ Oracle APEX version 18\.1\.v1 – 145 MiB
 + Oracle APEX version 5\.1\.4\.v1 – 220 MiB
 
 Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 12c version 12\.1 on Amazon RDS: 
++ Oracle APEX version 18\.2\.v1 – 146 MiB
++ Oracle APEX version 18\.1\.v1 – 145 MiB
 + Oracle APEX version 5\.1\.4\.v1 – 220 MiB
 + Oracle APEX version 5\.1\.2\.v1 – 150 MiB
 + Oracle APEX version 5\.0\.4\.v1 – 140 MiB
 + Oracle APEX version 4\.2\.6\.v1 – 160 MiB
 
 Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 11g on Amazon RDS: 
++ Oracle APEX version 18\.2\.v1 – 146 MiB
++ Oracle APEX version 18\.1\.v1 – 145 MiB
 + Oracle APEX version 5\.1\.4\.v1 – 220 MiB
 + Oracle APEX version 5\.1\.2\.v1 – 150 MiB
 + Oracle APEX version 5\.0\.4\.v1 – 140 MiB

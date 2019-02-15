@@ -34,7 +34,7 @@ Two types of options, persistent and permanent, require special consideration wh
 
 Persistent options, such as the TDE option for Microsoft SQL Server transparent data encryption \(TDE\), cannot be removed from an option group while DB instances are associated with the option group\. You must disassociate all DB instances from the option group before a persistent option can be removed from the option group\. When you restore or perform a point\-in\-time restore from a DB snapshot, if the option group associated with that DB snapshot contains a persistent option, you can only associate the restored DB instance with that option group\. 
 
-Permanent options, such as the TDE option for Oracle Advanced Security TDE, can never be removed from an option group, and the option group cannot be disassociated from the DB instance\. When you restore or perform a point\-in\-time restore from a DB snapshot, if the option group associated with that DB snapshot contains a permanent option, you can only associate the restored DB instance with an option group with that permanent option\. 
+Permanent options, such as the TDE option for Oracle Advanced Security TDE, can never be removed from an option group\. You can change the option group of a DB instance that is using the permanent option, but the option group associated with the DB instance must include the same permanent option\. When you restore or perform a point\-in\-time restore from a DB snapshot, if the option group associated with that DB snapshot contains a permanent option, you can only associate the restored DB instance with an option group with that permanent option\.
 
 ### VPC and Platform Considerations<a name="Overview.OptionGroups.Platform"></a>
 
@@ -49,7 +49,6 @@ Option settings control the behavior of an option\. For example, the Oracle Adva
 Some options are mutually exclusive\. You can use one or the other, but not both at the same time\. The following options are mutually exclusive: 
 + [Oracle Enterprise Manager Database Express](Appendix.Oracle.Options.OEM_DBControl.md) and [Oracle Management Agent for Enterprise Manager Cloud Control](Oracle.Options.OEMAgent.md)\. 
 + [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
-+ [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md) and [Using AWS CloudHSM Classic to Store Amazon RDS Oracle TDE Keys](Appendix.OracleCloudHSM.md)\. 
 
 ## Creating an Option Group<a name="USER_WorkingWithOptionGroups.Create"></a>
 

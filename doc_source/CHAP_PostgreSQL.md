@@ -1447,7 +1447,7 @@ Tablespaces are supported in PostgreSQL on Amazon RDS for compatibility; since a
 
 ##### Autovacuum for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Autovacuum"></a>
 
-The PostgreSQL auto\-vacuum is an optional, but highly recommended, parameter that by default is turned on for new PostgreSQL DB instances\. Do not turn this parameter off\. For more information on using auto\-vacuum with Amazon RDS for PostgreSQL, see [Working with PostgreSQL Autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)\.
+The PostgreSQL autovacuum feature is turned on by default for new PostgreSQL DB instances\. Autovacuum is optional, but we highly recommend that you do not turn autovacuum off\. For more information on using autovacuum with Amazon RDS for PostgreSQL, see [Working with PostgreSQL Autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)\.
 
 ##### RAM Disk for the stats\_temp\_directory<a name="PostgreSQL.Concepts.General.FeatureSupport.RamDisk"></a>
 

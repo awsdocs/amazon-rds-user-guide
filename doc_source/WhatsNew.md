@@ -1,11 +1,13 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **February 8, 2019
++ **Latest documentation update: **February 12, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS for PostgreSQL now supports adaptive autovacuum parameter tuning](#WhatsNew) | Adaptive autovacuum parameter tuning with Amazon RDS for PostgreSQL helps prevent transaction ID wraparound by adjusting autovacuum parameter values automatically\. For more information, see [Reducing the Likelihood of Transaction ID Wraparound](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming)\.  | February 12, 2019 | 
+| [Amazon RDS for Oracle supports Oracle APEX versions 18\.1\.v1 and 18\.2\.v1](#WhatsNew) | Amazon RDS for Oracle now supports Oracle Application Express \(APEX\) versions 18\.1\.v1 and 18\.2\.v1\. For more information, see [Oracle Application Express](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.APEX.html)\. | February 11, 2019 | 
 | [Amazon RDS for Oracle January 2019 RU, RUR, and PSU](#WhatsNew) | Amazon RDS for Oracle has released database engine version 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 to support the January 2019 Release Update \(RU\) and Release Update Revision \(RUR\)\. Amazon RDS for Oracle has also released database engine versions 12\.1\.0\.2\.v15 and 11\.2\.0\.4\.v19 to support the January 2019 Oracle Database Patch Set Update \(PSU\)\. For more information, see [Oracle Database Engine Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)\. | February 8, 2019 | 
 | [Amazon RDS Performance Insights supports viewing more SQL text for Amazon RDS MySQL](#WhatsNew) | Amazon RDS Performance Insights now supports viewing more SQL text in the Performance Insights dashboard for Amazon RDS MySQL DB instances\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard\.](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.SQLTextSize) | February 6, 2019 | 
 | [Amazon RDS for PostgreSQL supports db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running PostgreSQL that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\.  | January 25, 2019 | 

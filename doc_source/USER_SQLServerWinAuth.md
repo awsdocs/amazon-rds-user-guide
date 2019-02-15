@@ -17,7 +17,9 @@ To set up Windows authentication for a SQL Server DB instance, do the following 
 
 1. Use the AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, either from the AWS console or AWS Directory Service API to create a AWS Managed Microsoft AD directory\. 
 
-1. If you use the AWS CLI or Amazon RDS API to create your SQL Server DB instance, you need to create an IAM role that uses the managed IAM policy AmazonRDSDirectoryServiceAccess\. The role allows Amazon RDS to make calls to your directory\. If you use the AWS console to create your SQL Server DB instance, AWS creates the IAM role for you\. 
+1. If you use the AWS CLI or Amazon RDS API to create your SQL Server DB instance, you need to create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy AmazonRDSDirectoryServiceAccess\. The role allows Amazon RDS to make calls to your directory\. If you use the AWS console to create your SQL Server DB instance, AWS creates the IAM role for you\. 
+
+   For the role to allow access, the AWS Security Token Service \(AWS STS\) endpoint must be activated in the AWS Region for your AWS account\. AWS STS endpoints are active by default in all AWS Regions, and you can use them without any further actions\. For more information, see [ Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the *IAM User Guide*\.
 
 1. Create and configure users and groups in the *AWS Managed Microsoft AD* directory using the Microsoft Active Directory tools\. For more information about creating users and groups in your Active Directory, see **Add Users and Groups \(Simple AD and AWS Managed Microsoft AD\)** in the AWS Directory Service documentation\.  [Add Users and Groups \(Simple AD and AWS Managed Microsoft AD\)](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/creating_ad_users_and_groups.html)\. 
 

@@ -2,6 +2,8 @@
 
 Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so that you can analyze and troubleshoot your database performance\. Amazon RDS Performance Insights is currently available for use with the following DB engines:
 + Amazon Aurora with MySQL compatibility version 1\.17\.3 and higher 1\.x versions
+
+  Aurora MySQL 1\.x versions are compatible with MySQL 5\.6, and Aurora MySQL 2\.x versions are compatible with MySQL 5\.7\. Currently, Amazon RDS Performance Insights does not support Aurora MySQL 2\.x versions\.
 + Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions
 + Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions
 + Amazon Aurora with PostgreSQL compatibility
@@ -12,8 +14,11 @@ Amazon RDS Performance Insights is not supported for MySQL 5\.5 or MySQL 8\.0\.
 
 For information about using Amazon Aurora, see the [Amazon Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
 
-**Note**  
-Performance Insights is not supported on db\.t2 DB instance classes\.
+Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes, with the following exceptions:
++ Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions support db\.t2\.medium and larger db\.t2 DB instance classes\.
++ Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions support db\.t2\.medium and larger db\.t2 DB instance classes\.
++ Amazon RDS PostgreSQL version 10 supports all db\.t2 and db\.t3 DB instance classes\.
++ Amazon RDS Oracle supports all db\.t2 and db\.t3 DB instance classes\.
 
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS MySQL, Amazon Aurora PostgreSQL, and Amazon RDS PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
 

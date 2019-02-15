@@ -116,7 +116,6 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0066 |  The SQL Server DB instance is re\-establishing its mirror\. Performance will be degraded until the mirror is reestablished\. A database was found with non\-FULL recovery model\. The recovery model was changed back to FULL and mirroring recovery was started\. \(<dbname>: <recovery model found>\[,…\]\)”  | 
 |  restoration  | RDS\-EVENT\-0008 |  The DB instance has been restored from a DB snapshot\.  | 
 |  restoration  | RDS\-EVENT\-0019 |  The DB instance has been restored from a point\-in\-time backup\.  | 
-|  security  | RDS\-EVENT\-0068 |  The CloudHSM Classic partition password was decrypted by the system\.  | 
 
 The following table shows the event category and a list of events when a DB parameter group is the source type\.
 

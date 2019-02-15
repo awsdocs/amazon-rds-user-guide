@@ -4,10 +4,7 @@ Amazon RDS supports Oracle Transparent Data Encryption \(TDE\), a feature of the
 
 Oracle Transparent Data Encryption is used in scenarios where you need to encrypt sensitive data in case data files and backups are obtained by a third party or when you need to address security\-related regulatory compliance issues\. 
 
-**Note**  
-You can use the TDE option or AWS CloudHSM Classic, but not both\. For more information, see [Using AWS CloudHSM Classic to Store Amazon RDS Oracle TDE Keys](Appendix.OracleCloudHSM.md)\. 
-
-The TDE option is a permanent option that cannot be removed from an option group, and that option group cannot be removed from a DB instance once it is associated with a DB instance\. You cannot disable TDE from a DB instance once that instance is associated with an option group with the Oracle TDE option\. 
+The TDE option is a permanent option that can't be removed from an option group\. You can't disable TDE from a DB instance once that instance is associated with an option group with the Oracle TDE option\. You can change the option group of a DB instance that is using the TDE option, but the option group associated with the DB instance must include the TDE option\. You can also modify an option group that includes the TDE option by adding or removing other options\. 
 
 A detailed explanation about Oracle Transparent Data Encryption is beyond the scope of this guide\. For information about using Oracle Transparent Data Encryption, see [Securing Stored Data Using Transparent Data Encryption](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asotrans.htm#BABFGJAG)\. For more information about Oracle Advanced Security, see [Oracle Advanced Security](http://www.oracle.com/technetwork/database/options/advanced-security/index.html) in the Oracle documentation\. For more information on AWS security, see the [AWS Security Center](http://aws.amazon.com/security)\. 
 

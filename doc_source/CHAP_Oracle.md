@@ -12,7 +12,7 @@ Amazon RDS also currently supports the following versions and editions that are 
 
 You can create DB instances and DB snapshots, point\-in\-time restores and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
 
-In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Oracle SQL Plus\. Amazon RDS does not allow direct host access to a DB instance via Telnet or Secure Shell \(SSH\)\. 
+To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Oracle SQL Plus\. Amazon RDS doesn't enable direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\. 
 
 When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts can't be used\. 
 
@@ -29,7 +29,7 @@ The following are the common management tasks you perform with an Amazon RDS Ora
 | --- | --- | 
 |  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Oracle](#Oracle.Concepts.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
 |  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
-|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account does not have a default VPC, and you want the DB instance in a VPC, you must create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
+|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option Groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
@@ -181,7 +181,7 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |  [ max\_idle\_time](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/MAX_IDLE_TIME.html#GUID-9E26A81D-D99E-4EA8-88DE-77AF68482A20)  | 0 \(default\) to the maximum integer\. The value of 0 indicates that there is no limit\. | Y | Specifies the maximum number of minutes that a session can be idle\. After that point, the session is automatically terminated\.  | 
 |  [ optimizer\_adaptive\_plans](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OPTIMIZER_ADAPTIVE_PLANS.html#GUID-58C3E867-36BA-449A-B452-4E90FE6DCF05)  | TRUE \(default\), FALSE | Y | Controls adaptive plans\. Adaptive plans are execution plans built with alternative choices that are decided at run time based on statistics collected as the query executes\. | 
 |  [ optimizer\_adaptive\_statistics](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OPTIMIZER_ADAPTIVE_STATISTICS.html#GUID-D52B4342-3887-4054-A65C-5AEA83F69E35)  | TRUE, FALSE \(default\) | Y | Controls adaptive statistics\. Some query shapes are too complex to rely on base table statistics alone, so the optimizer augments these statistics with adaptive statistics\. | 
-|  [ outbound\_dblink\_protocols](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OUTBOUND_DBLINK_PROTOCOLS.html#GUID-4E760A19-5791-4E2D-8792-016B7B6D10D6)  | ALL \(default\), NONE, TCP, TCPS, IPC | Y | Specifies the network protocols allowed for communicating for outbound database links in the database\. | 
+|  [ outbound\_dblink\_protocols](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OUTBOUND_DBLINK_PROTOCOLS.html#GUID-4E760A19-5791-4E2D-8792-016B7B6D10D6)  | ALL \(default\), NONE, TCP, TCPS, IPC | N | Specifies the network protocols allowed for communicating for outbound database links in the database\. | 
 |  [ resource\_manage\_goldengate](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/RESOURCE_MANAGE_GOLDENGATE.html#GUID-389AB551-F4EB-4294-BD52-5E5E41AFDA80)  | TRUE, FALSE \(default\) | Y | Determines whether Oracle GoldenGate apply processes in the database are resource managed\. | 
 |  [ standby\_db\_preserve\_states](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/STANDBY_DB_PRESERVE_STATES.html#GUID-8D332556-30B7-4C45-8557-50988DC2219E)  | NONE \(default\), SESSION, ALL | N | Controls whether user sessions and other internal states of the instance are retained when a readable physical standby database is converted to a primary database\.  | 
 |  [ uniform\_log\_timestamp\_format](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/UNIFORM_LOG_TIMESTAMP_FORMAT.html#GUID-041BC204-EA0E-4260-9726-D25C2C86A2F5)  | TRUE \(default\), FALSE | Y | Specifies that a uniform timestamp format be used in Oracle Database trace \(\.trc\) files and log files \(such as the alert log\)\. | 
@@ -365,7 +365,7 @@ Several Oracle 11g PL/SQL packages are not supported in Oracle 12c version 12\.1
 
 ## Oracle Database Feature Support<a name="Oracle.Concepts.FeatureSupport"></a>
 
-Oracle Database supports a wide variety of features and capabilities, most of which are supported in Amazon RDS Oracle\. Some features may have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version\. 
+Oracle Database supports a wide variety of features and capabilities, most of which are supported in Amazon RDS Oracle\. Some features might have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version you're using\. 
 
 **Note**  
 These lists are not exhaustive\.
@@ -381,7 +381,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 
   For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
 + Data Redaction
-+ Database In\-Memory \(Version 12\.1 and later\)
++ Database In\-Memory \(version 12\.1 and later\)
 + Distributed Queries and Transactions
 + Edition\-Based Redefinition
 
@@ -397,7 +397,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Java Virtual Machine \(JVM\)
 
   For more information, see [Oracle Java Virtual Machine](oracle-options-java.md)\.
-+ Label Security \(Version 12\.1 and later\)
++ Label Security \(version 12\.1 and later\)
 
   For more information, see [Oracle Label Security](Oracle.Options.OLS.md)\.
 + Locator
@@ -422,13 +422,13 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Transparent Data Encryption \(TDE\)
 
   For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\.
-+ Unified Auditing, Mixed Mode \(Version 12\.2 and later\)
++ Unified Auditing, Mixed Mode \(version 12\.2 and later\)
 + XML DB \(without the XML DB Protocol Server\)
 
   For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 + Virtual Private Database
 
-Amazon RDS Oracle does not support the following Oracle Database features:
+Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Automatic Storage Management \(ASM\)
 + Data Guard and Active Data Guard
 + Database Vault
@@ -441,9 +441,9 @@ Amazon RDS Oracle does not support the following Oracle Database features:
 
 ## Oracle Database Parameter Support<a name="Oracle.Concepts.FeatureSupport.Parameters"></a>
 
-Parameters in Amazon RDS are managed using parameter groups\. See [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) for more information\. To view the supported parameters for a specific Oracle edition and version, you can run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
+In Amazon RDS, you manage parameters using parameter groups\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle edition and version, you can run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
 
-For example, to view the supported parameters for Oracle Enterprise Edition, version 12\.2, run the following command:
+For example, to view the supported parameters for Oracle Enterprise Edition version 12\.2, run the following command:
 
 ```
 aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee-12.2

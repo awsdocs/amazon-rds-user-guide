@@ -150,7 +150,9 @@ To get the most performance out of your Amazon RDS database instance, choose a c
 
 For the full list of Amazon EC2 instance types that support EBS optimization, see [Instance types that support EBS optimization](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)\. 
 
-We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. Scaling higher than 6 TiB is not supported on the following previous generation instances\. 
+We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. 
+
+Scaling higher than 6 TiB is not supported on the following previous generation instances\. 
 + db\.m1\.small
 + db\.m1\.medium
 + db\.m1\.large
@@ -161,5 +163,9 @@ We encourage you to use the latest generation of instances to get the best perfo
 + db\.m3\.large
 + db\.m3\.xlarge
 + db\.m3\.2xlarge
+
+Scaling higher than 16 TiB is not supported on the following previous generation instances\.
++ db\.t2\.small
++ db\.t2\.micro
 
 For more information, see [Previous Generation DB Instances](https://aws.amazon.com/rds/previous-generation/)\. 
