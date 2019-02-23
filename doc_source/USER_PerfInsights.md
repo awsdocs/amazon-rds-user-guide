@@ -10,15 +10,11 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 + Amazon RDS PostgreSQL version 10
 + Amazon RDS Oracle \(all versions\)
 
-Amazon RDS Performance Insights is not supported for MySQL 5\.5 or MySQL 8\.0\.
-
 For information about using Amazon Aurora, see the [Amazon Aurora User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
 
-Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes, with the following exceptions:
-+ Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions support db\.t2\.medium and larger db\.t2 DB instance classes\.
-+ Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions support db\.t2\.medium and larger db\.t2 DB instance classes\.
-+ Amazon RDS PostgreSQL version 10 supports all db\.t2 and db\.t3 DB instance classes\.
-+ Amazon RDS Oracle supports all db\.t2 and db\.t3 DB instance classes\.
+**Note**  
+Amazon RDS Performance Insights is not supported for MySQL 5\.5 or MySQL 8\.0\.  
+For Amazon RDS MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.
 
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS MySQL, Amazon Aurora PostgreSQL, and Amazon RDS PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
 
@@ -48,4 +44,5 @@ You can find an overview of Performance Insights in the following video\.
 + [Additional User Interface Features](USER_PerfInsights.UIcontrols.md)
 + [Performance Insights API](USER_PerfInsights.API.md)
 + [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
++ [Performance Insights Counters](USER_PerfInsights_Counters.md)
 + [Logging Performance Insights Operations by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)

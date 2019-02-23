@@ -2,7 +2,10 @@
 
 You can encrypt your Amazon RDS DB instances and snapshots at rest by enabling the encryption option for your Amazon RDS DB instances\. Data that is encrypted at rest includes the underlying storage for a DB instances, its automated backups, Read Replicas, and snapshots\.
 
-Amazon RDS encrypted DB instances use the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your Amazon RDS DB instances\. Once your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You don't need to modify your database client applications to use encryption\. 
+Amazon RDS encrypted DB instances use the industry standard AES\-256 encryption algorithm to encrypt your data on the server that hosts your Amazon RDS DB instances\. Once your data is encrypted, Amazon RDS handles authentication of access and decryption of your data transparently with a minimal impact on performance\. You don't need to modify your database client applications to use encryption\.
+
+**Note**  
+For encrypted and unencrypted DB instances with cross\-region Read Replicas, data that is in transit between the source and the Read Replicas is encrypted\.
 
 **Topics**
 + [Overview of Encrypting Amazon RDS Resources](#Overview.Encryption.Overview)
@@ -20,8 +23,6 @@ Amazon RDS also supports encrypting an Oracle or SQL Server DB instance with Tra
 To manage the keys used for encrypting and decrypting your Amazon RDS resources, you use the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create encryption keys and define the policies that control how these keys can be used\. AWS KMS supports CloudTrail, so you can audit key usage to verify that keys are being used appropriately\. Your AWS KMS keys can be used in combination with Amazon RDS and supported AWS services such as Amazon Simple Storage Service \(Amazon S3\), Amazon Elastic Block Store \(Amazon EBS\), and Amazon Redshift\. For a list of services that support AWS KMS, go to [Supported Services](https://docs.aws.amazon.com/kms/latest/developerguide/services.html) in the *AWS Key Management Service Developer Guide*\.
 
 For an Amazon RDS encrypted DB instance, all logs, backups, and snapshots are encrypted\. A Read Replica of an Amazon RDS encrypted instance is also encrypted using the same key as the master instance when both are in the same region\. If the master and Read Replica are in different regions, you encrypt using the encryption key for that region\.
-
-For encrypted and unencrypted Amazon RDS DB instances with cross\-region Read Replicas, data sent between the source and the Read Replicas is encrypted\.
 
 ## Enabling Amazon RDS Encryption for a DB Instance<a name="Overview.Encryption.Enabling"></a>
 

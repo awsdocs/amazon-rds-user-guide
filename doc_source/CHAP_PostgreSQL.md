@@ -727,7 +727,7 @@ The following modules are supported as shown for PostgreSQL version 11\.
 | auto\_explain | Supported | 
 | decoder\_raw | Supported | 
 | ICU | Version 60\.2 supported | 
-| test\_decoder | Supported | 
+| test\_decoding | Supported | 
 | wal2json | Commit hash 01c5c1e | 
 
 ##### PostgreSQL Version 10\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x"></a>
@@ -808,7 +808,7 @@ The following modules are supported as shown for versions of PostgreSQL 10\.
 | auto\_explain | Supported | Supported | Supported | Supported | Supported | 
 | decoder\_raw | Supported | Supported | Supported | Supported | Supported | 
 | ICU | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | 
-| test\_decoder | Supported | Supported | Supported | Supported | Supported | 
+| test\_decoding | Supported | Supported | Supported | Supported | Supported | 
 | wal2json | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | 
 
 ##### PostgreSQL Version 9\.6\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x"></a>
@@ -883,7 +883,7 @@ The following modules are supported as shown for versions of PostgreSQL 9\.6\.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | auto\_explain | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | 
 | decoder\_raw | N/A | N/A | N/A | Supported | Supported | Supported | Supported | Supported | 
-| test\_decoder | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
+| test\_decoding | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
 | wal2json | N/A | N/a | Commit hash 2828409 | Commit hash 645ab69 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | 
 
 ##### PostgreSQL Version 9\.5\.x Extensions Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x"></a>
@@ -950,7 +950,7 @@ The following modules are supported as shown for versions of PostgreSQL 9\.5\.
 | Module | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.12 | 9\.5\.13 | 9\.5\.14 | 9\.5\.15 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | auto\_explain | N/A | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | 
-| test\_decoder | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
+| test\_decoding | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
 | wal2json | N/A | N/a | N/A | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | 
 
 ##### PostgreSQL Version 9\.4\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.94x"></a>
@@ -1015,7 +1015,7 @@ The following modules are supported as shown for versions of PostgreSQL 9\.4\.
 
 | Module | 9\.4\.7 | 9\.4\.9 | 9\.4\.11 | 9\.4\.12 | 9\.4\.14 | 9\.4\.17 | 
 | --- | --- | --- | --- | --- | --- | --- | 
-| test\_decoder | N/A | N/A | N/A | Supported | Supported | Supported | 
+| test\_decoding | N/A | N/A | N/A | Supported | Supported | Supported | 
 
 ##### PostgreSQL Version 9\.3\.x Extensions Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.93x"></a>
 

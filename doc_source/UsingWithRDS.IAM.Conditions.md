@@ -17,7 +17,7 @@ There are two ways to specify conditions in an IAM policy for Amazon RDS:
 AWS provides a set of predefined condition keys \(AWS\-wide condition keys\) for all AWS services that support IAM for access control\. For example, you can use the `aws:userid` condition key to require a specific AWS ID when requesting an action\. For more information and a list of the AWS\-wide condition keys, see [Available Keys for Conditions](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements.html#AvailableKeys) in the *IAM User Guide*\.
 
 **Note**  
-Condition keys are case sensitive\.
+Condition key names are not case\-sensitive\. Case\-sensitivity of condition key values depends on the condition operator that you use\. For more information, see [IAM JSON Policy Elements: Condition Operators](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) in the *IAM User Guide*\.
 
 In addition Amazon RDS also provides its own condition keys that you can include in `Condition` elements in an IAM permissions policy\. The following table shows the RDS condition keys that apply to RDS resources\. 
 

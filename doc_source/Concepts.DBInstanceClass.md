@@ -70,12 +70,12 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | No | 
 | db\.x1\.16xlarge | 64 | 349 | 976 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | No | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | Yes10 | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | Yes10 | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
-| db\.r5\.2xlarge | 8 | 38 | 64 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
-| db\.r5\.xlarge | 4 | 19 | 32 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
-| db\.r5\.large | 2 | 10 | 16 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | No | No | No | Yes9 | Yes10 | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 3,500 | Up to 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.r5\.2xlarge | 8 | 38 | 64 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.r5\.xlarge | 4 | 19 | 32 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.r5\.large | 2 | 10 | 16 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | Yes | Yes8 | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | Yes | Yes8 | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
@@ -94,12 +94,12 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | No | Yes8 | MySQL 5\.6, 5\.5 | Deprecated9 | PostgreSQL 9\.4, 9\.3 | 
 | db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | No | Yes8 | MySQL 5\.6, 5\.5 | Deprecated9 | PostgreSQL 9\.4, 9\.3 | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 8 | Variable | 32 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
-| db\.t3\.xlarge | 4 | Variable | 16 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
-| db\.t3\.large | 2 | Variable | 8 | Yes | Yes | 2,050 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
-| db\.t3\.medium | 2 | Variable | 4 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
-| db\.t3\.small | 2 | Variable | 2 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
-| db\.t3\.micro | 2 | Variable | 1 | Yes | Yes | 1,500 | Up to 5 Gigabit | No | No | No | Yes9 | Yes10 | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | Yes | Yes | 2,050 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.t3\.xlarge | 4 | Variable | 16 | Yes | Yes | 2,050 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.t3\.large | 2 | Variable | 8 | Yes | Yes | 2,050 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.t3\.medium | 2 | Variable | 4 | Yes | Yes | 1,500 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.t3\.small | 2 | Variable | 2 | Yes | Yes | 1,500 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
+| db\.t3\.micro | 2 | Variable | 1 | Yes | Yes | 1,500 | Up to 5 Gigabit | Yes | No | Yes | Yes9 | Yes10 | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
 | db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes9 | PostgreSQL 9\.6, 9\.5, 9\.4 | 
