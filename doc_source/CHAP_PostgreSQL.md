@@ -290,7 +290,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 
 #### PostgreSQL Version 9\.6\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9610"></a>
 
-PostgreSQL version 9\.6\.10 contains several bug fixes for issues in release 9\.6\.9\. For more information on the fixes in 9\.6\.10, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-6-10.html)\. 
+PostgreSQL version 9\.6\.10 contains several bug fixes for issues in release 9\.6\.9\. For more information on the fixes in 9\.6\.10, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.6/release-9-6-10.html)\. 
 
 This version includes the following changes: 
 + Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical Replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\. 
@@ -389,13 +389,13 @@ You can create a new PostgreSQL 9\.6\.1 database instance using the AWS Manageme
 
 #### PostgreSQL Version 9\.5\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9515"></a>
 
-PostgreSQL version 9\.5\.15 contains several bug fixes for issues in release 9\.5\.14\. For more information on the fixes in 9\.5\.15, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-5-15.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+PostgreSQL version 9\.5\.15 contains several bug fixes for issues in release 9\.5\.14\. For more information on the fixes in 9\.5\.15, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.5/release-9-5-15.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.5\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9514"></a>
 
-PostgreSQL version 9\.5\.14 contains several bug fixes for issues in release 9\.5\.13\. For more information on the fixes in 9\.5\.14, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-5-14.html)\. 
+PostgreSQL version 9\.5\.14 contains several bug fixes for issues in release 9\.5\.13\. For more information on the fixes in 9\.5\.14, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.5/release-9-5-14.html)\. 
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -493,13 +493,13 @@ RDS PostgreSQL version 9\.5\.2 includes the following new extensions:
 
 #### PostgreSQL Version 9\.4\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9420"></a>
 
-PostgreSQL version 9\.4\.20 contains several bug fixes for issues in release 9\.4\.19\. For more information on the fixes in 9\.4\.20, the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-4-20.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+PostgreSQL version 9\.4\.20 contains several bug fixes for issues in release 9\.4\.19\. For more information on the fixes in 9\.4\.20, the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.4/release-9-4-20.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.4\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9419"></a>
 
-PostgreSQL version 9\.4\.19 contains several bug fixes for issues in release 9\.4\.18\. For more information on the fixes in 9\.4\.19, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-4-19.html)\. 
+PostgreSQL version 9\.4\.19 contains several bug fixes for issues in release 9\.4\.18\. For more information on the fixes in 9\.4\.19, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.4/release-9-4-19.html)\. 
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -560,13 +560,13 @@ PostgreSQL version 9\.4\.7 includes improved visibility of autovacuum sessions b
 **Note**  
 Amazon RDS for PostgreSQL announced retirement of PostgreSQL 9\.3 in September 2018 and has stopped support for PostgreSQL version 9\.3\. We encourage you to upgrade to PostgreSQL 9\.4 or a higher version as early as possible\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-PostgreSQL version 9\.3\.25 contains several bug fixes for issues in release 9\.3\.24\. For more information on the fixes in 9\.3\.25, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-3-25.html)\.
+PostgreSQL version 9\.3\.25 contains several bug fixes for issues in release 9\.3\.24\. For more information on the fixes in 9\.3\.25, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.3/release-9-3-25.html)\.
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 9\.3\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9324"></a>
 
-PostgreSQL version 9\.3\.24 contains several bug fixes for issues in release 9\.3\.23\. For more information on the fixes in 9\.3\.24, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-3-24.html)\. 
+PostgreSQL version 9\.3\.24 contains several bug fixes for issues in release 9\.3\.23\. For more information on the fixes in 9\.3\.24, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/9.3/release-9-3-24.html)\. 
 
 **Note**  
 Amazon RDS for PostgreSQL has deprecated PostgreSQL version 9\.3\.x\.
