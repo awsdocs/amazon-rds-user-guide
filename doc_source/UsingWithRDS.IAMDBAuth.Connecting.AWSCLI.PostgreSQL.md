@@ -8,7 +8,7 @@ You can connect from the command line to an Amazon RDS for PostgreSQL DB instanc
 
 ## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken.PostgreSQL"></a>
 
-The authentication token consists of several hundred characters so it can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows how to use the AWS CLI to get a signed authentication token using the `generated-db-auth-token` command, and store it in a `PGPASSWORD` environment variable\.
+The authentication token consists of several hundred characters so it can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows how to use the AWS CLI to get a signed authentication token using the `generate-db-auth-token` command, and store it in a `PGPASSWORD` environment variable\.
 
 ```
 export RDSHOST="rdspostgres.cdgmuqiadpid.us-west-2.rds.amazonaws.com"
