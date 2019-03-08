@@ -1,11 +1,14 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **February 20, 2019
++ **Latest documentation update: **March 8, 2019
 + **Current API version: **2014\-10\-31
 
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [MySQL 8\.0\.13 and 5\.7\.24](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL versions 8\.0\.13 and 5\.7\.24\. For more information, see [ MySQL on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)\. | March 8, 2019 | 
+| [Amazon RDS Performance Insights is available for Amazon RDS for SQL Server](#WhatsNew) | Amazon RDS Performance Insights is now available for Amazon RDS for SQL Server\. For more information, see [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)\. | March 4, 2019 | 
+| [Amazon RDS for Oracle supports Amazon S3 integration](#WhatsNew) | You can now transfer files between an Amazon RDS for Oracle DB instance and an Amazon S3 bucket\. For more information, see [Integrating Amazon RDS for Oracle and Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-s3-integration.html)\. | February 26, 2019 | 
 | [Amazon RDS for MySQL and Amazon RDS for MariaDB support db\.t3 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL or MariaDB that use the db\.t3 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\. | February 20, 2019 | 
 | [Amazon RDS for MySQL and Amazon RDS for MariaDB support db\.r5 DB instance classes](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL or MariaDB that use the db\.r5 DB instance classes\. For more information, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)\. | February 20, 2019 | 
 | [Performance Insights counters for Amazon RDS MySQL and PostgreSQL](#WhatsNew) | You can now add performance counters to your Performance Insights charts for Amazon RDS MySQL and PostgreSQL DB instances\. For more information, see [ Performance Insights Dashboard Components](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.UsingDashboard.html#USER_PerfInsights.UsingDashboard.Components)\.  | February 19, 2019 | 

@@ -23,9 +23,9 @@ General Purpose SSD storage offers cost\-effective storage that is acceptable fo
 + MySQL, MariaDB, Oracle, and PostgreSQL DB instances: 20 GiB–32 TiB 
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
 
-Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, which means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS, and 3,000 IOPS for a 1\-TiB volume\. Volumes of 3\.34 TiB and greater have a baseline performance of 10,000 IOPS\. 
+Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
 
-Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time \(burst is not relevant for volumes above 1 TiB\)\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\. 
+Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\. 
 
 Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\. 
 
@@ -53,8 +53,9 @@ The following table lists several storage sizes\. For each storage size, it list
 |  500  |  1,500  |  3,600  |  3,600  | 
 |  750  |  2,250  |  7,200  |  2,400  | 
 |  1,000  |  3,000  |  Infinite  |  N/A  | 
-|  3,333  |  10,000  |  Infinite  |  N/A  | 
-|  10,000  |  10,000  |  Infinite  |  N/A  | 
+|  5,3341  |  16,000  |  N/A  |  N/A  | 
+
+1. The IOPS figure reaches its maximum value at a volume size of 5,334 GiB\.
 
 The burst duration of your storage depends on the size of the storage, the burst IOPS required, and the I/O credit balance when the burst begins\. This relationship is shown in the equation following\.
 

@@ -12,7 +12,7 @@ When you start a DB instance that you previously stopped, the DB instance retain
 
 1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to start\. 
 
-1. Choose **Actions**, and then choose **Start**\. 
+1. For **Actions**, choose **Start**\. 
 
 ## CLI<a name="USER_StartInstance.CLI"></a>
 

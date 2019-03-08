@@ -98,7 +98,7 @@ Once you have connected to the sample DB instance that you created, you should d
 
 1. Choose the DB instance you wish to delete\.
 
-1. Choose **Actions**, and then choose **Delete**\.
+1. For **Actions**, choose **Delete**\.
 
 1. For **Create final snapshot?**, choose **No**, and select the acknowledgment\. 
 

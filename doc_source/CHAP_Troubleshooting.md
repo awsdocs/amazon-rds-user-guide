@@ -1,6 +1,6 @@
-# Troubleshooting<a name="CHAP_Troubleshooting"></a>
+# Troubleshooting for Amazon RDS<a name="CHAP_Troubleshooting"></a>
 
-Use the following sections to help troubleshoot problems you have with Amazon RDS\. 
+Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Aurora\.
 
 **Topics**
 + [Cannot Connect to Amazon RDS DB Instance](#CHAP_Troubleshooting.Connecting)
@@ -15,6 +15,8 @@ Use the following sections to help troubleshoot problems you have with Amazon RD
 + [Cannot Connect to Amazon RDS SQL Server DB Instance](#CHAP_Troubleshooting.SQLServer.Connect)
 + [Cannot Connect to Amazon RDS PostgreSQL DB Instance](#CHAP_Troubleshooting.PostgreSQL.Connect)
 + [Cannot Set Backup Retention Period to 0](#CHAP_Troubleshooting.Backup.Retention)
+
+ For information about debugging problems using the Amazon RDS API, see [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)\. 
 
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
@@ -47,8 +49,8 @@ Windows users can use Telnet to test the connection to a DB instance\. Note that
 
 ```
 C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
-  
-  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open 
+
+  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open
   connection to the host, on port 819: Connect failed
 ```
 
@@ -118,9 +120,9 @@ If your database instance runs out of storage, its status will change to *storag
 
 ```
 aws rds describe-db-instances --db-instance-identifier mydbinstance
-				
-DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
-storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
+
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa
+storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306
 us-east-1b  3
 	SECGROUP  default  active
 	PARAMGRP  default.mysql5.6  in-sync
@@ -147,8 +149,8 @@ aws rds modify-db-instance ^
 ```
 
 ```
-DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
-storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa
+storage-full  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306
 us-east-1b  3  60
 	SECGROUP  default  active
 	PARAMGRP  default.mysql5.6  in-sync
@@ -161,8 +163,8 @@ Now, when you describe your DB instance, you will see that your DB instance will
 ```
 
 ```
-DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa  
-modifying  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  50  sa
+modifying  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com
 3306  us-east-1b  3  60
 	SECGROUP  default  active
 	PARAMGRP  default.mysql5.6  in-sync
@@ -175,8 +177,8 @@ aws rds describe-db-instances --db-instance-identifier mydbinstance
 ```
 
 ```
-DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  60  sa  
-available  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306  
+DBINSTANCE  mydbinstance  2009-12-22T23:06:11.915Z  db.m3.large  mysql5.6  60  sa
+available  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com  3306
 us-east-1b  3
 	SECGROUP  default  active
 	PARAMGRP  default.mysql5.6  in-sync
@@ -189,8 +191,8 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 ```
 
 ```
-2009-12-22T23:44:14.374Z  mydbinstance  Allocated storage has been exhausted db-instance  
-2009-12-23T00:14:02.737Z  mydbinstance  Applying modification to allocated storage db-instance  
+2009-12-22T23:44:14.374Z  mydbinstance  Allocated storage has been exhausted db-instance
+2009-12-23T00:14:02.737Z  mydbinstance  Applying modification to allocated storage db-instance
 2009-12-23T00:31:54.764Z  mydbinstance  Finished applying modification to allocated storage
 ```
 
@@ -215,7 +217,7 @@ Queries that use index merge optimization might return wrong results due to a bu
 For example, consider a query on a table with two indexes where the search arguments reference the indexed columns\.
 
 ```
-SELECT * FROM table1 
+SELECT * FROM table1
   WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
 ```
 
@@ -227,8 +229,8 @@ To resolve this issue, you can do one of the following:
 + If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
 
   ```
-  SELECT * FROM table1 
-    USE INDEX covering_index 
+  SELECT * FROM table1
+    USE INDEX covering_index
     WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
   ```
 
@@ -335,7 +337,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    For Linux, OS X, or Unix:
 
    ```
-   aws rds modify-db-parameter-group \ 
+   aws rds modify-db-parameter-group \
        --db-parameter-group-name allow-triggers \
        --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
    ```
@@ -343,7 +345,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    For Windows:
 
    ```
-   aws rds modify-db-parameter-group ^ 
+   aws rds modify-db-parameter-group ^
        --db-parameter-group-name allow-triggers ^
        --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
    ```
@@ -381,8 +383,8 @@ To create a new DB parameter group that allows you to create triggers in your RD
 When attempting a Point\-In\-Time Restore \(PITR\) of your MySQL or MariaDB DB instance, you might encounter the following error:
 
 ```
-Database instance could not be restored because there has been incompatible database activity for restore 
-functionality. Common examples of incompatible activity include using temporary tables, in-memory tables, 
+Database instance could not be restored because there has been incompatible database activity for restore
+functionality. Common examples of incompatible activity include using temporary tables, in-memory tables,
 or using MyISAM tables. In this case, use of Temporary table was detected.
 ```
 
@@ -430,8 +432,8 @@ To resolve this issue, set the following parameter values:
 The source database must retain archived redo logs\. The duration for log retention is specified in hours\. The duration should exceed any potential downtime of the source instance or any potential period of communication or networking issues for the source instance, so that Oracle GoldenGate can recover logs from the source instance as needed\. The absolute minimum value required is one \(1\) hour of logs retained\. If you don't have log retention enabled, or if the retention value is too small, you will receive the following message:
 
 ```
-2014-03-06 06:17:27  ERROR   OGG-00446  error 2 (No such file or directory) 
-opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log 
+2014-03-06 06:17:27  ERROR   OGG-00446  error 2 (No such file or directory)
+opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log
 for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
 ```
 

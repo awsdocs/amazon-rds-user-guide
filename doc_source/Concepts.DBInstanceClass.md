@@ -68,7 +68,7 @@ The following table provides details of the Amazon RDS DB instance classes\. The
 | db\.x1e\.xlarge | 4 | 12 | 122 | Yes | Yes | 500 | Up to 10 Gbps | No | No | No | Yes9 | No | 
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | No | No | No | Yes9 | No | 
-| db\.x1\.16xlarge | 64 | 349 | 976 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | No | 
+| db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | No | No | No | Yes9 | No | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | Yes | No | Yes | Yes9 | Yes10 | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | Yes | No | Yes | Yes9 | Yes10 | 

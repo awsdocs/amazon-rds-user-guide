@@ -25,7 +25,7 @@ Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
 1. In the navigation pane, choose **Snapshots**, and then select the DB snapshot that you want to upgrade\. 
 
-1. Choose **Actions**, and then choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\.
+1. For **Actions**, choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\.
 
 1. For **DB engine version**, choose the version to upgrade the snapshot to\. 
 

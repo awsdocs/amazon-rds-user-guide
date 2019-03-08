@@ -135,7 +135,7 @@ For Amazon RDS MySQL DB instances, you can view up to 1,024 bytes of SQL text\.
 For Amazon RDS PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 10,240 bytes\. For more information, see [Setting the SQL Text Limit for Amazon RDS PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
 **Note**  
-Currently, you can't view, copy, or download more than 500 bytes of SQL text for Amazon RDS Oracle DB instances\.  
+Currently, you can't view, copy, or download more than 500 bytes of SQL text for Amazon RDS Oracle or SQL Server DB instances\.  
 For Amazon RDS MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**

@@ -139,7 +139,7 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
 
    1. On the console, choose **Databases**, and then choose the Read Replica that you just upgraded\.
 
-   1. Choose **Actions**, and then choose **Promote read replica**\.
+   1. For **Actions**, choose **Promote read replica**\.
 
    1. Choose **Yes** to enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 

@@ -91,7 +91,7 @@ This procedure copies an encrypted or unencrypted DB snapshot, in the same AWS R
 
 1. Select the DB snapshot that you want to copy\.
 
-1. Choose **Actions**, and then choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
+1. For **Actions**, choose **Copy Snapshot**\. The **Make Copy of DB Snapshot** page appears\.   
 ![\[Copy a DB snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/DBSnapshotCopy1.png)
 
 1. \(Optional\) To copy the DB snapshot to a different AWS Region, for **Destination Region**, choose the new AWS Region\. 

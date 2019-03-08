@@ -53,7 +53,7 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 
 1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to stop\. 
 
-1. Choose **Actions**, and then choose **Stop**\. 
+1. For **Actions**, choose **Stop**\. 
 
 1. \(Optional\) In the **Stop DB Instance** window, choose **Yes** for **Create Snapshot?** and enter the snapshot name for **Snapshot name**\. Choose **Yes** if you want to create a snapshot of the DB instance before stopping it\. 
 

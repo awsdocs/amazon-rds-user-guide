@@ -16,7 +16,7 @@ The following steps show how to set up query logging:
 
    ```
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  received SIGHUP, reloading configuration files
-   2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_min_duration_statement" changed to "1"
+   2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_statement" changed to "all"
    ```
 
    Additional information is written to the postgres\.log file when you execute a query\. The following example shows the type of information written to the file after a query:

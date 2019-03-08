@@ -140,6 +140,8 @@ If you want to create an instance in the Database Preview Environment with the A
 
 Amazon RDS supports DB instances running several editions of PostgreSQL\. Use this section to see how to work with PostgreSQL on Amazon RDS\. You should also be aware of the limits for PostgreSQL DB instances\.
 
+You can specify any currently supported PostgreSQL version when creating a new DB instance\. You can specify the major version \(such as PostgreSQL 10\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
+
 For information about importing PostgreSQL data into a DB instance, see [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)\.
 
 **Topics**
@@ -265,7 +267,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 
 #### PostgreSQL Version 10\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version101"></a>
 
-PostgreSQL version 10\.1 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.1, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-1.html) and the [PostgreSQL 10 commmunity announcement](https://www.postgresql.org/about/news/1786/)\.
+PostgreSQL version 10\.1 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.1, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-1.html) and the [PostgreSQL 10 community announcement](https://www.postgresql.org/about/news/1786/)\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -328,7 +330,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 PostgreSQL version 9\.6\.6 contains several bug fixes for issues in release 9\.6\.5\. For more information on the fixes in 9\.6\.6, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-6.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 This version includes the following features: 
-+ Supports the `orafce` extension, version 3\.6\.1\. This extension contains functions that are native to commercial databases, and can be helpful if you are porting a commercial database to PostgreSQL\.For more information about using `orafce` with Amazon RDS, see [Working with the orafce Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.orafce)\.
++ Supports the `orafce` extension, version 3\.6\.1\. This extension contains functions that are native to commercial databases, and can be helpful if you are porting a commercial database to PostgreSQL\. For more information about using `orafce` with Amazon RDS, see [Working with the orafce Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.orafce)\.
 + Supports the `prefix` extension, version 1\.2\.6\. This extension provides an operator for text prefix searches\. For more information about `prefix`, see the [prefix project on GitHub](https://github.com/dimitri/prefix)\.
 + Supports version 2\.3\.4 of PostGIS, version 2\.4\.2 of pgrouting, and an updated version of wal2json\.
 

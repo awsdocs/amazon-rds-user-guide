@@ -1,10 +1,12 @@
 # Troubleshooting Applications on Amazon RDS<a name="APITroubleshooting"></a>
 
+Amazon RDS provides specific and descriptive errors to help you troubleshoot problems while interacting with the Amazon RDS API\.
+
 **Topics**
 + [Retrieving Errors](#RetrievingErrors)
 + [Troubleshooting Tips](#TroubleshootingTipss)
 
-Amazon RDS provides specific and descriptive errors to help you troubleshoot problems while interacting with the Amazon RDS API\. 
+ For information about troubleshooting for Amazon RDS DB instances, see [Troubleshooting for Amazon RDS](CHAP_Troubleshooting.md)\. 
 
 ## Retrieving Errors<a name="RetrievingErrors"></a>
 

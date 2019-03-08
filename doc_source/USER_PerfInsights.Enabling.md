@@ -2,7 +2,7 @@
 
 To use Performance Insights, you must enable it on your DB instance\.
 
-## <a name="USER_PerfInsights.Enabling.Console"></a>
+## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
 You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.
 

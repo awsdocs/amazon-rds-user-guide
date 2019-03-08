@@ -11,6 +11,7 @@ Amazon RDS supports the following options for Oracle DB instances\.
 
 | Option | Option ID | 
 | --- | --- | 
+|  [Amazon S3 Integration](oracle-s3-integration.md)  |  `S3_INTEGRATION`  | 
 |  [Oracle Application Express](Appendix.Oracle.Options.APEX.md)  |  `APEX` `APEX-DEV`  | 
 |  [Oracle Enterprise Manager](Oracle.Options.OEM.md)  |  `OEM` `OEM_AGENT`  | 
 |  [Oracle Java Virtual Machine](oracle-options-java.md)  |  `JVM`  | 
