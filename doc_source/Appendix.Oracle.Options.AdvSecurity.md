@@ -8,6 +8,9 @@ The TDE option is a permanent option that can't be removed from an option group\
 
 A detailed explanation about Oracle Transparent Data Encryption is beyond the scope of this guide\. For information about using Oracle Transparent Data Encryption, see [Securing Stored Data Using Transparent Data Encryption](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asotrans.htm#BABFGJAG)\. For more information about Oracle Advanced Security, see [Oracle Advanced Security](http://www.oracle.com/technetwork/database/options/advanced-security/index.html) in the Oracle documentation\. For more information on AWS security, see the [AWS Security Center](http://aws.amazon.com/security)\. 
 
+**Note**  
+You can't share a DB snapshot that uses this option\. For more information about sharing DB snapshots, see [Sharing a DB Snapshot](USER_ShareSnapshot.md)\.
+
 ## TDE Encryption Modes<a name="Appendix.Oracle.Options.AdvSecurity.Modes"></a>
 
 Oracle Transparent Data Encryption supports two encryption modes: TDE tablespace encryption and TDE column encryption\. TDE tablespace encryption is used to encrypt entire application tables\. TDE column encryption is used to encrypt individual data elements that contain sensitive data\. You can also apply a hybrid encryption solution that uses both TDE tablespace and column encryption\. 

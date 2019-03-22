@@ -1,6 +1,6 @@
 # Working with MariaDB Read Replicas<a name="USER_MariaDB.Replication.ReadReplicas"></a>
 
-This section contains specific information about working with Read Replicas on Amazon RDS MariaDB\. For general information about Read Replicas and instructions for using them, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
+This section contains specific information about working with Read Replicas on Amazon RDS MariaDB\. For general information about Read Replicas and instructions for using them, see [Working with Read Replicas](USER_ReadRepl.md)\.
 
 **Topics**
 + [Read Replica Configuration with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Configuration)

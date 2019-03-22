@@ -1,6 +1,6 @@
 # Working with PostgreSQL Read Replicas<a name="USER_PostgreSQL.Replication.ReadReplicas"></a>
 
-You usually use Read Replicas to configure replication between Amazon RDS DB instances\. For general information about Read Replicas, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\. 
+You usually use Read Replicas to configure replication between Amazon RDS DB instances\. For general information about Read Replicas, see [Working with Read Replicas](USER_ReadRepl.md)\. 
 
 This section contains specific information about working with Read Replicas on PostgreSQL\.
 

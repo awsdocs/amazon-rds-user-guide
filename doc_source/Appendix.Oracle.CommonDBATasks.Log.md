@@ -4,6 +4,16 @@ This section describes how you can perform common DBA tasks related to logging o
 
 For more information, see [Oracle Database Log Files](USER_LogAccess.Concepts.Oracle.md)\. 
 
+**Topics**
++ [Setting Force Logging](#Appendix.Oracle.CommonDBATasks.SettingForceLogging)
++ [Setting Supplemental Logging](#Appendix.Oracle.CommonDBATasks.AddingSupplementalLogging)
++ [Switching Online Log Files](#Appendix.Oracle.CommonDBATasks.SwitchingLogfiles)
++ [Adding Online Redo Logs](#Appendix.Oracle.CommonDBATasks.RedoLogs)
++ [Dropping Online Redo Logs](#Appendix.Oracle.CommonDBATasks.DroppingRedoLogs)
++ [Resizing Online Redo Logs](#Appendix.Oracle.CommonDBATasks.ResizingRedoLogs)
++ [Retaining Archived Redo Logs](#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)
++ [Accessing Transaction Logs](#Appendix.Oracle.CommonDBATasks.Log.Download)
+
 ## Setting Force Logging<a name="Appendix.Oracle.CommonDBATasks.SettingForceLogging"></a>
 
 In force logging mode, Oracle logs all changes to the database except changes in temporary tablespaces and temporary segments \(`NOLOGGING` clauses are ignored\)\. For more information, see [Specifying FORCE LOGGING Mode](https://docs.oracle.com/cd/E11882_01/server.112/e25494/create.htm#ADMIN11096) in the Oracle documentation\. 
@@ -15,7 +25,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.force_logging` to s
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_enable` | boolean | true | optional |  Set to `true` to put the database in force logging mode, `false` to remove the database from force logging mode\.   | 
+| `p_enable` | boolean | true | Optional |  Set to `true` to put the database in force logging mode, `false` to remove the database from force logging mode\.   | 
 
 The following example puts the database in force logging mode\. 
 
@@ -36,10 +46,10 @@ The `alter_supplemental_logging` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_action` | varchar2 | — | required |  `'ADD'` to add supplemental logging, `'DROP'` to drop supplemental logging\.   | 
-| `p_type` | varchar2 | null | optional |  The type of supplemental logging\. Valid values are `'ALL'`, `'FOREIGN KEY'`, `'PRIMARY KEY'`, or `'UNIQUE'`\.   | 
+| `p_action` | varchar2 | — | Required |  `'ADD'` to add supplemental logging, `'DROP'` to drop supplemental logging\.   | 
+| `p_type` | varchar2 | null | Optional |  The type of supplemental logging\. Valid values are `'ALL'`, `'FOREIGN KEY'`, `'PRIMARY KEY'`, or `'UNIQUE'`\.   | 
 
-The following example enables supplemental logging: 
+The following example enables supplemental logging\.
 
 ```
 begin
@@ -49,7 +59,7 @@ end;
 /
 ```
 
-The following example enables supplemental logging for all fixed\-length maximum size columns: 
+The following example enables supplemental logging for all fixed\-length maximum size columns\. 
 
 ```
 begin
@@ -60,7 +70,7 @@ end;
 /
 ```
 
-The following example enables supplemental logging for primary key columns: 
+The following example enables supplemental logging for primary key columns\. 
 
 ```
 begin
@@ -92,7 +102,7 @@ For any version of Oracle, the `add_logfile` procedure has the following paramet
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `bytes` | positive | null | optional | The size of the log file in bytes\. | 
+| `bytes` | positive | null | Optional | The size of the log file in bytes\. | 
 
 The `add_logfile` procedure has the following parameters\. 
 
@@ -101,9 +111,9 @@ The `add_logfile` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_size` | varchar2 | — | required |  The size of the log file\. You can specify the size in kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+| `p_size` | varchar2 | — | Required |  The size of the log file\. You can specify the size in kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
-The following command adds a 100 MB log file: 
+The following command adds a 100 MB log file\.
 
 ```
 exec rdsadmin.rdsadmin_util.add_logfile(p_size => '100M');
@@ -118,15 +128,15 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_logfile` to dr
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `grp` | positive | — | required | The group number of the log\. | 
+| `grp` | positive | — | Required | The group number of the log\. | 
 
-The following example drops the log with group number 3: 
+The following example drops the log with group number 3\. 
 
 ```
 exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
 ```
 
-You can only drop logs that have a status of unused or inactive\. The following example gets the statuses of the logs: 
+You can only drop logs that have a status of unused or inactive\. The following example gets the statuses of the logs\.
 
 ```
 select GROUP#, STATUS from V$LOG;
@@ -270,10 +280,10 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.set_configuration` 
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `name` | varchar | — | required | The name of the configuration to update\. | 
-| `value` | varchar | — | required | The value for the configuration\. | 
+| `name` | varchar | — | Required | The name of the configuration to update\. | 
+| `value` | varchar | — | Required | The value for the configuration\. | 
 
-The following example retains 24 hours of redo logs: 
+The following example retains 24 hours of redo logs\. 
 
 ```
 begin
@@ -290,14 +300,14 @@ The commit is required for the change to take effect\.
 
 You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.show_configuration` to view how long archived redo logs are retained for your DB instance\.
 
-The following example shows the log retention time:
+The following example shows the log retention time\.
 
 ```
 set serveroutput on
 exec rdsadmin.rdsadmin_util.show_configuration;
 ```
 
-The output shows the current setting for `archivelog retention hours`\. The following output shows that archived redo logs are retained for 48 hours:
+The output shows the current setting for `archivelog retention hours`\. The following output shows that archived redo logs are retained for 48 hours\.
 
 ```
 NAME:archivelog retention hours
@@ -305,7 +315,7 @@ VALUE:48
 DESCRIPTION:ArchiveLog expiration specifies the duration in hours before archive/redo log files are automatically deleted.
 ```
 
-Because the archived redo logs are retained on your DB instance, ensure that your DB instance has enough allocated storage for the retained logs\. To determine how much space your DB instance has used in the last X hours, you can run the following query, replacing X with the number of hours: 
+Because the archived redo logs are retained on your DB instance, ensure that your DB instance has enough allocated storage for the retained logs\. To determine how much space your DB instance has used in the last X hours, you can run the following query, replacing X with the number of hours\. 
 
 ```
 select sum(BLOCKS * BLOCK_SIZE) bytes 
@@ -318,7 +328,7 @@ Archived redo logs are only generated if the backup retention period of your DB 
 After the archived redo logs are removed from your DB instance, you can't download them again to your DB instance\. Amazon RDS retains the archived redo logs outside of your DB instance to support restoring your DB instance to a point in time\. Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period configured for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 **Note**  
- If you are using JDBC on Linux to download archived redo logs, and you experience long latency times and connection resets, it could be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a non\-blocking random number generator\. 
+In some cases, you might using JDBC on Linux to download archived redo logs and experience long latency times and connection resets\. In such cases, the issues might be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a nonblocking random number generator\. 
 
 ## Accessing Transaction Logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
 
@@ -338,21 +348,16 @@ exec rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
 
 After you create directory objects for your online and archived redo log files, you can read the files by using PL/SQL\. For more information about reading files from directory objects, see [Listing Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ListDirectories) and [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\. 
 
-The following code drops the directories for your online and archived redo log files: 
+The following code drops the directories for your online and archived redo log files\. 
 
 ```
 exec rdsadmin.rdsadmin_master_util.drop_archivelog_dir;
 exec rdsadmin.rdsadmin_master_util.drop_onlinelog_dir;
 ```
 
-The following code grants and revokes the `DROP ANY DIRECTORY` privilege:
+The following code grants and revokes the `DROP ANY DIRECTORY` privilege\.
 
 ```
 exec rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
 exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
 ```
-
-## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Log.Related"></a>
-+ [Common DBA System Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.System.md)
-+ [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-+ [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)

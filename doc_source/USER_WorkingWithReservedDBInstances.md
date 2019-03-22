@@ -27,7 +27,7 @@ If you are using consolidated billing, all the accounts in the organization are 
 
 ### Size\-Flexible Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances.SizeFlexible"></a>
 
-When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.m4\.large can apply to a db\.m4\.xlarge, but not to a db\.m5\.large, because db\.m4 and db\.m5 are different instance class types\. Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\.
 

@@ -98,6 +98,8 @@ To communicate with entities over a TLS secured connection, Oracle requires a wa
    SSL_CIPHER_SUITES = (SSL_RSA_WITH_AES_256_CBC_SHA) 
    SSL_SERVER_DN_MATCH = ON
    ```
+**Note**  
+You can set `SSL_VERSION` to a higher value if your DB instance supports it\.
 
 1. Run the following commands to create the Oracle wallet\.
 
@@ -110,7 +112,14 @@ To communicate with entities over a TLS secured connection, Oracle requires a wa
 
 ## Connecting to an Oracle DB Instance Using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
 
-After you configure SQL\*Plus to use SSL as described previously, you can connect to the Oracle DB instance with the SSL option\. For example, you can connect using SQL\*Plus and a *<net\_service\_name>* in a tnsnames\.ora file\.
+After you configure SQL\*Plus to use SSL as described previously, you can connect to the Oracle DB instance with the SSL option\. Optionally, you can first export the `TNS_ADMIN` value that points to the directory that contains the tnsames\.ora and sqlnet\.ora files\. Doing so ensures that SQL\*Plus can find these files consistently\. The following example exports the `TNS_ADMIN` value\.
+
+```
+  
+export TNS_ADMIN = ${ORACLE_HOME}/network/admin
+```
+
+Connect to the DB instance\. For example, you can connect using SQL\*Plus and a *<net\_service\_name>* in a tnsnames\.ora file\.
 
 ```
 sqlplus <mydbuser>@<net_service_name>
@@ -157,6 +166,14 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
    ```
    keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2015-root.der                    
    ```
+
+1. Confirm that the key store was created successfully\.
+
+   ```
+   keytool -list -v -keystore clientkeystore.jks                        
+   ```
+
+   Enter the keystore password when you are prompted for it\.
 
 The following code example shows how to set up the SSL connection using JDBC\.
 

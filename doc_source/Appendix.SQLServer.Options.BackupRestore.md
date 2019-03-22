@@ -1,6 +1,6 @@
-# Microsoft SQL Server Native Backup and Restore Support<a name="Appendix.SQLServer.Options.BackupRestore"></a>
+# Support for Native Backup and Restore in Microsoft SQL Server<a name="Appendix.SQLServer.Options.BackupRestore"></a>
 
-Amazon RDS supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. You can import and export SQL Server databases in a single, easily portable file\. You can create a full backup of your on\-premises database, store it on Amazon Simple Storage Service \(Amazon S3\), and then restore the backup file onto an existing Amazon RDS DB instance running SQL Server\. You can back up an Amazon RDS SQL Server database, store it on Amazon S3, and then restore the backup file onto an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\. 
+Amazon RDS supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. Using this feature, you can create a full backup of your on\-premises database and store the backup files on Amazon Simple Storage Service \(Amazon S3\)\. You can then restore to an existing Amazon RDS DB instance running SQL Server\. You can also back up an RDS SQL Server database, store it on S3, and restore it in other locations\. You can restore it to an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\. 
 
 ## Native Backup and Restore Option Settings<a name="Appendix.SQLServer.Options.BackupRestore.Options"></a>
 
@@ -31,13 +31,13 @@ After you add the Native Backup and Restore option, you don't need to restart yo
 
 1. Add the **SQLSERVER\_BACKUP\_RESTORE** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
-   1. For **IAM Role**, select an existing IAM role\. Alternatively, you can choose to have a new IAM role created for you by choosing **Create a New Role**\. 
+   1. For **IAM Role**, choose an existing IAM role\. Alternatively, you can choose to have a new IAM role created for you by choosing **Create a New Role**\. 
 
-   1. For **Select S3 Bucket**, select an existing bucket\. Alternatively, you can choose to have a new Amazon S3 bucket created for you by choosing **Create a New S3 Bucket**\. 
+   1. For **Select S3 Bucket**, choose an existing bucket\. Alternatively, you can choose to have a new Amazon S3 bucket created for you by choosing **Create a New S3 Bucket**\. 
 
-   1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. If you choose **Yes**, for **Master Key** you must also choose an encryption key\. For more information about encryption keys, see [ Getting Started ](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
+   1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. If you choose **Yes**, for **Master Key** you must also choose an encryption key\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
 
-1. Apply the option group to a new or existing DB instance\. 
+1. Apply the option group to a new or existing DB instance:
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 
@@ -50,5 +50,5 @@ After you enable the Native Backup and Restore option, you can modify the settin
 You can turn off the native backup and restore feature by removing the option from your DB instance\. After you remove the Native Backup and Restore option, you don't need to restart your DB instance\. 
 
 To remove the Native Backup and Restore option from a DB instance, do one of the following: 
-+ Remove the Native Backup and Restore option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
++ Remove the Native Backup and Restore option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
 + Modify the DB instance and specify a different option group that doesn't include the Native Backup and Restore option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 

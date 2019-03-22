@@ -1,4 +1,4 @@
-# DB instance storage<a name="CHAP_Storage"></a>
+# DB Instance Storage<a name="CHAP_Storage"></a>
 
 DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\.  
 

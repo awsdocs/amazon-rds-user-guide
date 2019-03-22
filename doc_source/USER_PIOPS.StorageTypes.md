@@ -47,7 +47,7 @@ When you increase **Allocated Storage**, it must be by at least 10 percent\. If 
 
 To increase the storage for a DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
++ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
 
 ### API<a name="w4aac15c73b9c15b5"></a>
 
@@ -55,7 +55,7 @@ To increase storage for a DB instance, use the Amazon RDS API [https://docs.aws.
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
 + `ApplyImmediately` – Set this option to `True` if you want to initiate conversion immediately\. If this option is `False` \(the default\), the scaling is applied during the next maintenance window\. An immediate outage occurs when the conversion is applied\.
 
-   For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
+   For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
 
 ## Changing Your Storage Type<a name="USER_PIOPS.Modify"></a>
 
@@ -88,7 +88,7 @@ To filter the list of DB instances, for **Filter databases** enter a text string
 
 1. To apply the changes to the DB instance immediately, choose **Apply immediately** in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\.
 
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 
@@ -133,7 +133,7 @@ To filter the list of DB instances, for **Filter databases** enter a text string
 
 1. To apply the changes to the DB instance immediately, choose **Apply immediately** in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\.
 
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB instance storage](CHAP_Storage.md)\.
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 

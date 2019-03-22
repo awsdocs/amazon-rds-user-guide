@@ -83,7 +83,7 @@ In the **Top Load Items** table, you can view the following types of identifiers
 + **Support SQL ID** – A hash value of the SQL ID\. This value is only for referencing a SQL ID when you are working with AWS Support\. AWS Support doesn't have access to your actual SQL IDs and SQL text\.
 + **Digest ID** – An ID that the database uses to uniquely identify a SQL Digest\. A SQL Digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
 
-  For Amazon RDS MySQL and PostgreSQL DB instances, you can use a Digest ID to find a specific SQL Digest\.
+  For Amazon RDS MariaDB, MySQL, and PostgreSQL DB instances, you can use a Digest ID to find a specific SQL Digest\.
 
   For Oracle and SQL Server DB instances, the Digest ID is the same as the SQL ID\. The top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
 + **Support Digest ID** – A hash value of the Digest ID\. This value is only for referencing a Digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual Digest IDs and SQL text\.
@@ -130,13 +130,16 @@ The last three roll\-up queries are the major contributors to CPU\. These are th
 
 By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 10,240 bytes for a SQL statement\. You can also copy or download the displayed SQL statement\.
 
-For Amazon RDS MySQL DB instances, you can view up to 1,024 bytes of SQL text\.
+For Amazon RDS for MySQL and MariaDB DB instances, you can view up to 1,024 bytes of SQL text\.
 
 For Amazon RDS PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 10,240 bytes\. For more information, see [Setting the SQL Text Limit for Amazon RDS PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
+**Important**  
+Currently, you can only view and download more SQL text with the AWS Management Console\. The AWS Performance Insights CLI and API can return a maximum of 500 bytes of text\.
+
 **Note**  
 Currently, you can't view, copy, or download more than 500 bytes of SQL text for Amazon RDS Oracle or SQL Server DB instances\.  
-For Amazon RDS MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
+For Amazon RDS for MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**
 

@@ -23,14 +23,14 @@ Amazon RDS creates a master user account for your DB instance as part of the cre
 This guide covers non\-Aurora Amazon RDS database engines\. For information about using Amazon Aurora, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.
 
 **Topics**
-+ [DB Instance Class](Concepts.DBInstanceClass.md)
++ [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)
 + [DB Instance Status](Overview.DBInstance.Status.md)
 + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
-+ [DB instance storage](CHAP_Storage.md)
++ [DB Instance Storage](CHAP_Storage.md)
 + [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)
 + [Amazon RDS DB Instance Lifecycle](CHAP_CommonTasks.md)
 + [Tagging Amazon RDS Resources](USER_Tagging.md)
-+ [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)
++ [Working with Read Replicas](USER_ReadRepl.md)
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)
 + [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)
 + [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)

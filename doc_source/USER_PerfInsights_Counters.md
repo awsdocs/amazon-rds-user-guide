@@ -4,7 +4,7 @@ With counter metrics, you can customize the Performance Insights dashboard to in
 
 **Topics**
 + [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
-+ [Performance Insights Counters for Amazon RDS MySQL](#USER_PerfInsights_Counters.MySQL)
++ [Performance Insights Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
 + [Performance Insights Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
 
 ## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
@@ -76,15 +76,15 @@ The following operating system counters are available with Performance Insights 
 | tx | network | 
 | numVCPUs | general | 
 
-## Performance Insights Counters for Amazon RDS MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
+## Performance Insights Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
 
-The following database counters are available with Performance Insights for Amazon RDS MySQL\.
+The following database counters are available with Performance Insights for Amazon RDS MariaDB and MySQL\.
 
 **Topics**
-+ [Native Counters for Amazon RDS MySQL](#USER_PerfInsights_Counters.MySQL.Native)
-+ [Non\-Native Counters for Amazon RDS MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
++ [Native Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.Native)
++ [Non\-Native Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
 
-### Native Counters for Amazon RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
+### Native Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
 You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
@@ -129,7 +129,7 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Innodb\_buffer\_pool\_reads | Cache | Pages per second | 
 | Qcache\_hits | Cache | Queries | 
 
-### Non\-Native Counters for Amazon RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
+### Non\-Native Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 

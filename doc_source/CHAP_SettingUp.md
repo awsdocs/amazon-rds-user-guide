@@ -91,7 +91,7 @@ You can also create access keys for your AWS account\. These access keys can be 
 The basic building block of Amazon RDS is the DB instance\. In a DB instance, you create your databases\. A DB instance provides a network address called an *endpoint*\. Your applications use this endpoint to connect to your DB instance\. When you create a DB instance, you specify details like storage, memory, database engine and version, network configuration, security, and maintenance periods\. You control network access to a DB instance through a security group\. 
 
 Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider: 
-+ **Resource requirements **– What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
++ **Resource requirements **– What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 + **VPC, subnet, and security group – **Your DB instance is most likely in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it: in a default VPC, in a user\-defined VPC, or outside of a VPC\. 
 **Note**  
 Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or you are a new RDS user \(after 2013\), you are most likely creating a DB instance inside a VPC\. 
@@ -116,7 +116,7 @@ Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or 
   + General Purpose \(SSD\)
   + Provisioned IOPS \(PIOPS\)
 
-  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [DB instance storage](CHAP_Storage.md)\.
+  Magnetic storage offers cost\-effective storage that is ideal for applications with light or burst I/O requirements\. General purpose, SSD\-backed storage, also called *gp2*, can provide faster access than disk\-based storage\. Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, which are sensitive to storage performance and consistency in random access I/O throughput\. For more information on Amazon RDS storage, see [DB Instance Storage](CHAP_Storage.md)\.
 
 When you have the information you need to create the security group and the DB instance, continue to the next step\.
 

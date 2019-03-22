@@ -19,4 +19,4 @@ If you are configuring replication to import data from an instance of MySQL runn
 
 If you are configuring replication to export data to an instance of MySQL external to Amazon RDS, you call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the Read Replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 
-You can also call `mysql.rds_start_replication` on the Read Replica to restart any replication process that you previously stopped by calling [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
+You can also call `mysql.rds_start_replication` on the Read Replica to restart any replication process that you previously stopped by calling [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.

@@ -211,7 +211,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
 ### To Create an Amazon RDS MySQL or MariaDB DB Instance and Import Your Data<a name="MySQL.Procedural.Importing.Create.RDS.Database.Procedure"></a>
 
-1. Determine which DB instance class and what amount of storage space is required to support the expected workload for this Amazon RDS DB instance\. This process should include deciding what is sufficient space and processing capacity for your data load procedures, and also what is required to handle the production workload\. You can estimate this based on the size and resources of the source MySQL or MariaDB database\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
+1. Determine which DB instance class and what amount of storage space is required to support the expected workload for this Amazon RDS DB instance\. This process should include deciding what is sufficient space and processing capacity for your data load procedures, and also what is required to handle the production workload\. You can estimate this based on the size and resources of the source MySQL or MariaDB database\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
 1. Determine if Amazon RDS provisioned input/output operations per second \(IOPS\) is required to support the workloads\. Provisioned IOPS storage delivers fast throughput for online transaction processing \(OLTP\) workloads, which are I/O intensive\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
 
@@ -412,7 +412,7 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
    CALL mysql.rds_reset_external_master;
    ```
 
-1. Enable additional Amazon RDS features such as Multi\-AZ support and Read Replicas\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) and [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
+1. Enable additional Amazon RDS features such as Multi\-AZ support and Read Replicas\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) and [Working with Read Replicas](USER_ReadRepl.md)\.
 
 **Note**  
  If you no longer need the Amazon RDS instance used in this procedure, you should delete the RDS instance to reduce your Amazon AWS resource usage\. To delete an RDS instance, see [Deleting a DB Instance](USER_DeleteInstance.md)\. 

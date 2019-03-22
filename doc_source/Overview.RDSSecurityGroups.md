@@ -137,35 +137,40 @@ After you delete a DB VPC security group, your DB instances in your VPC continue
 Older versions of AWS CloudFormation templates can contain instructions to create a DB VPC security group\. Because DB VPC security groups are not yet fully deprecated, they can still be created\. Make sure that any AWS CloudFormation templates that you use to provision a DB instance with security settings don't also create a DB VPC security group\. Don't use AWS CloudFormation templates that create an RDS `DBSecurityGroup` with an `EC2VpcId` as shown in the following example\.
 
 ```
-"DbSecurityByEC2SecurityGroup" : {
-   Type" : "AWS::RDS::DBSecurityGroup",
-   "Properties" : {
-      "GroupDescription" : "Ingress for Amazon EC2 security group",
-      "EC2VpcId" : { "MyVPC" },
-      "DBSecurityGroupIngress" : [ {
-         "EC2SecurityGroupId" : "sg-b0ff1111",
-         "EC2SecurityGroupOwnerId" : "111122223333"
-      }, {
-         "EC2SecurityGroupId" : "sg-ffd722222",
-         "EC2SecurityGroupOwnerId" : "111122223333"
-      } ]
-   }
+{
+  "DbSecurityByEC2SecurityGroup" : {
+    "Type" : "AWS::RDS::DBSecurityGroup",
+    "Properties" : {
+       "GroupDescription" : "Ingress for Amazon EC2 security group",
+       "EC2VpcId" : "MyVPC",
+       "DBSecurityGroupIngress" : [ {
+          "EC2SecurityGroupId" : "sg-b0ff1111",
+          "EC2SecurityGroupOwnerId" : "111122223333"
+       }, {
+          "EC2SecurityGroupId" : "sg-ffd722222",
+          "EC2SecurityGroupOwnerId" : "111122223333"
+       } ]
+    }
+  }
 }
 ```
 
 Instead, add security information for your RDS DB instances in a VPC using VPC security groups, as shown in the following example\.
 
 ```
-"DBInstance" : {
-  "Type": "AWS::RDS::DBInstance",
-  "Properties": {
-    "DBName"            : { "Ref" : "DBName" },
-    "Engine"            : "MySQL",
-    "MultiAZ"           : { "Ref": "MultiAZDatabase" },
-    "MasterUsername"    : { "Ref" : "<master_username>" },
-    "DBInstanceClass"   : { "Ref" : "DBClass" },
-    "AllocatedStorage"  : { "Ref" : "DBAllocatedStorage" },
-    "MasterUserPassword": { "Ref" : "<master_password>" },
-    "VPCSecurityGroups" : [ { "Fn::GetAtt": [ "VPCSecurityGroup", "GroupId" ] } ]
+{
+  "DBInstance" : {
+    "Type": "AWS::RDS::DBInstance",
+    "Properties": {
+      "DBName"            : { "Ref" : "DBName" },
+      "Engine"            : "MySQL",
+      "MultiAZ"           : { "Ref": "MultiAZDatabase" },
+      "MasterUsername"    : { "Ref" : "<master_username>" },
+      "DBInstanceClass"   : { "Ref" : "DBClass" },
+      "AllocatedStorage"  : { "Ref" : "DBAllocatedStorage" },
+      "MasterUserPassword": { "Ref" : "<master_password>" },
+      "VPCSecurityGroups" : [ { "Fn::GetAtt": [ "VPCSecurityGroup", "GroupId" ] } ]
+    }
+  }
 }
 ```

@@ -4,7 +4,7 @@ Amazon RDS supports Oracle Enterprise Manager \(OEM\) Database Express through t
 + Oracle Enterprise Manager Database Express 12c
 + Oracle Enterprise Manager 11g Database Control
 
-OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager Database Express 12c](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-EAB971AC-3BF3-4370-B8DF-B72F777A5575.htm#CSDBI3444) and [Accessing Enterprise Manager 11g Database Control](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-0A67F8E8-E1A9-4D0E-8381-FEC4B9316841.htm#CSDBI3445) in the Oracle documentation\. 
+OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager Database Express 12c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-12c.html) and [Accessing Enterprise Manager 11g Database Control](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-0A67F8E8-E1A9-4D0E-8381-FEC4B9316841.htm#CSDBI3445) in the Oracle documentation\. 
 
 The following are some limitations to using OEM Database: 
 + OEM Database is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.m1\.small\. 

@@ -4,6 +4,9 @@ You can use the time zone option to change the system time zone used by your Ora
 
 The time zone option differs from the `rdsadmin_util.alter_db_time_zone` command\. The `alter_db_time_zone` command changes the time zone only for certain data types\. The time zone option changes the time zone for all date columns and values\. For more information about `alter_db_time_zone`, see [Setting the Database Time Zone](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)\. 
 
+**Note**  
+You can't share a DB snapshot that uses this option\. For more information about sharing DB snapshots, see [Sharing a DB Snapshot](USER_ShareSnapshot.md)\.
+
 ## Prerequisites for Time Zone<a name="Appendix.Oracle.Options.Timezone.PreReqs"></a>
 
 The time zone option is a permanent and persistent option\. You can't remove the option from an option group after you add it\. You can't remove the option group from a DB instance after you add it\. You can't modify the time zone setting of the option to a different time zone\. 

@@ -9,14 +9,12 @@ The following are common DBA tasks for DB instances running Oracle:
 + [Database Tasks](Appendix.Oracle.CommonDBATasks.Database.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
++ [RMAN Tasks](Appendix.Oracle.CommonDBATasks.RMAN.md)  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Log Tasks](Appendix.Oracle.CommonDBATasks.Log.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Miscellaneous Tasks](Appendix.Oracle.CommonDBATasks.Misc.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
-
-## Related Topics<a name="Appendix.Oracle.CommonDBATasks.Related"></a>
-+ [Oracle Database Log Files](USER_LogAccess.Concepts.Oracle.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)
-+ [Tools and Third\-Party Software for Oracle DB Instances](Oracle.Resources.md)

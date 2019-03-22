@@ -93,7 +93,7 @@ For the BYOL model, you can migrate from any Standard Edition \(SE, SE1, or SE2\
 
 ## DB Instance Class Support for Oracle<a name="Oracle.Concepts.InstanceClasses"></a>
 
-The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
+The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
 
 The following are the DB instance classes supported for Oracle\. 
 
@@ -102,9 +102,9 @@ The following are the DB instance classes supported for Oracle\.
 
 | Oracle Edition | Version 12\.2\.0\.1 Support | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
 | --- | --- | --- | --- | 
-|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
 |  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
 |  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
 |  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
@@ -217,7 +217,7 @@ The following parameter is not supported in Oracle 12c Version 12\.2\.0\.1:
 
 #### Amazon RDS Security Changes for Oracle 12c Version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Security"></a>
 
-In Oracle 12c version 12\.2\.0\.1, direct grant of the privilege `ADMINISTER DATABASE TRICGGER` is required for the owners of database\-level triggers\. During a major version upgrade to Oracle 12c version 12\.2\.0\.1, Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
+In Oracle 12c version 12\.2\.0\.1, direct grant of the privilege `ADMINISTER DATABASE TRIGGER` is required for the owners of database\-level triggers\. During a major version upgrade to Oracle 12c version 12\.2\.0\.1, Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
 
 ### Oracle 12c Version 12\.1\.0\.2 with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV1Overview"></a>
 
@@ -380,6 +380,9 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Automatic Workload Repository \(AWR\)
 
   For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
++ Active Data Guard with Maximum Performance within the same AWS Region
+
+  For more information, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
 + Data Redaction
 + Database In\-Memory \(version 12\.1 and later\)
 + Distributed Queries and Transactions
@@ -430,7 +433,6 @@ Amazon RDS Oracle supports the following Oracle Database features:
 
 Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Automatic Storage Management \(ASM\)
-+ Data Guard and Active Data Guard
 + Database Vault
 + Flashback Database
 + Multitenant
@@ -472,7 +474,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.2 according to th
 | Date | Information | 
 | --- | --- | 
 |  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.2\.   | 
-|  April 15, 2019  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  December 18, 2019  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ### Deprecation of Oracle 11\.2\.0\.3<a name="Oracle.Concepts.Deprecate.11203"></a>
 
@@ -488,7 +490,7 @@ Amazon RDS is deprecating support for Oracle version 11\.2\.0\.3 according to th
 | Date | Information | 
 | --- | --- | 
 |  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.3\.   | 
-|  March 15, 2019  |  Any 11\.2\.0\.3 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  December 18, 2019  |  Any 11\.2\.0\.3 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ### Deprecation of Oracle 12\.1\.0\.1<a name="Oracle.Concepts.Deprecate.12101"></a>
 
@@ -504,7 +506,7 @@ Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to th
 | Date | Information | 
 | --- | --- | 
 |  February 15, 2017  |  You can no longer create DB instances that use Oracle version 12\.1\.0\.1\.   | 
-|  June 1, 2019  |  Any 12\.1\.0\.1 snapshots are upgraded to 12\.1\.0\.2\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+|  December 18, 2019  |  Any 12\.1\.0\.1 snapshots are upgraded to 12\.1\.0\.2\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
 
 ## Using Huge Pages with an Oracle DB Instance<a name="Oracle.Concepts.HugePages"></a>
 
@@ -534,7 +536,7 @@ Huge pages are not enabled by default for the following DB instance classes\.
 |  db\.r3  |  db\.r3\.large, db\.r3\.xlarge, db\.r3\.2xlarge, db\.r3\.4xlarge, db\.r3\.8xlarge  | 
 |  db\.t2  |  db\.t2\.micro, db\.t2\.small, db\.t2\.medium, db\.t2\.large  | 
 
-For more information about DB instance classes, see [Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
+For more information about DB instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 
 To enable huge pages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use huge pages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 

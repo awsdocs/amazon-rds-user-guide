@@ -33,7 +33,7 @@ Following are the supported versions and approximate storage requirements for Or
 + Oracle APEX version 4\.1\.1\.v1 – 130 MiB
 
 **Note**  
-Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
+Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
 ## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 

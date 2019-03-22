@@ -9,23 +9,23 @@ Amazon RDS supports TDE for the following SQL Server versions and editions:
 + SQL Server 2012 Enterprise Edition
 + SQL Server 2008 R2 Enterprise Edition
 
-To enable transparent data encryption for a DB instance that is running SQL Server, specify the **TDE** option in an Amazon RDS option group that is associated with that DB instance\. 
+To enable transparent data encryption for an RDS SQL Server DB instance, specify the TDE option in an RDS option group that is associated with that DB instance\. 
 
 Transparent data encryption for SQL Server provides encryption key management by using a two\-tier key architecture\. A certificate, which is generated from the database master key, is used to protect the data encryption keys\. The database encryption key performs the actual encryption and decryption of data on the user database\. Amazon RDS backs up and manages the database master key and the TDE certificate\. To comply with several security standards, Amazon RDS is working to implement automatic periodic master key rotation\. 
 
-Transparent data encryption is used in scenarios where you need to encrypt sensitive data in case data files and backups are obtained by a third party or when you need to address security\-related regulatory compliance issues\. Note that you cannot encrypt the system databases for SQL Server, such as the Model or Master databases\. 
+Transparent data encryption is used in scenarios where you need to encrypt sensitive data\. For example, you might want to provide data files and backups to a third party, or address security\-related regulatory compliance issues\. You can't encrypt the system databases for SQL Server, such as the Model or Master databases\. 
 
  A detailed discussion of transparent data encryption is beyond the scope of this guide, but you should understand the security strengths and weaknesses of each encryption algorithm and key\. For information about transparent data encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) on the Microsoft website\.
 
- You should determine if your DB instance is already associated with an option group that has the **TDE** option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API action [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
+ You should determine if your DB instance is already associated with an option group that has the TDE option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
 
  The process for enabling transparent data encryption on a SQL Server DB instance is as follows: 
 
-1.  If the DB instance is not associated with an option group that has the **TDE** option enabled, you must either create an option group and add the **TDE** option or modify the associated option group to add the **TDE** option\. For information about creating or modifying an option group, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+1.  If the DB instance isn't associated with an option group that has TDE enabled, you have two choices\. You can create an option group and add the TDE option, or you can modify the associated option group to add it\. For information about creating or modifying an option group, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
-1.  Associate the DB instance with the option group with the **TDE** option\. For information about associating a DB instance with an option group, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+1.  Associate the DB instance with the option group with the TDE option\. For information about associating a DB instance with an option group, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
 
- When the **TDE** option is added to an option group, Amazon RDS generates a certificate that is used in the encryption process\. You can then use the certificate to run SQL statements that will encrypt data in a database on the DB instance\. The following example uses the RDS\-created certificate called `RDSTDECertificateName` to encrypt a database called `customerDatabase`\. 
+ When the TDE option is added to an option group, Amazon RDS generates a certificate that is used in the encryption process\. You can then use the certificate to run SQL statements that encrypt data in a database on the DB instance\. The following example uses the RDS\-created certificate called `RDSTDECertificateName` to encrypt a database called `customerDatabase`\. 
 
 ```
  1. ---------- Enabling TDE -------------
@@ -58,15 +58,15 @@ Transparent data encryption is used in scenarios where you need to encrypt sensi
 28. GO
 ```
 
- The time it takes to encrypt a SQL Server database using TDE depends on several factors, including the size of the DB instance, whether PIOPS is enabled for the instance, the amount of data, and other factors\. 
+ The time that it takes to encrypt a SQL Server database using TDE depends on several factors\. These include the size of the DB instance, whether PIOPS is enabled for the instance, the amount of data, and other factors\. 
 
-The **TDE** option is a persistent option than cannot be removed from an option group unless all DB instances and backups are disassociated from the option group\. Once you add the **TDE** option to an option group, the option group can only be associated with DB instances that use TDE\. For more information about persistent options in an option group, see [Option Groups Overview](USER_WorkingWithOptionGroups.md#Overview.OptionGroups)\. 
+The TDE option is a persistent option that you can't remove from an option group unless all DB instances and backups are disassociated from the option group\. After you add the TDE option to an option group, the option group can only be associated with DB instances that use TDE\. For more information about persistent options in an option group, see [Option Groups Overview](USER_WorkingWithOptionGroups.md#Overview.OptionGroups)\. 
 
- Because the **TDE**  option is a persistent option, you can have a conflict between the option group and an associated DB instance\. You can have a conflict between the option group and an associated DB instance in the following situations: 
-+ The current option group has the **TDE** option, and you replace it with an option group that does not have the **TDE** option\. 
+Because the TDE option is a persistent option, you can have a conflict between the option group and an associated DB instance\. You can have a conflict between the option group and an associated DB instance in the following situations: 
++ The current option group has the TDE option, and you replace it with an option group that does not have the TDE option\. 
 + You restore from a DB snapshot to a new DB instance that does not have an option group that contains the TDE option\. For more information about this scenario, see [Option Group Considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
 
- To disable TDE for a DB instance, first ensure that there are no encrypted objects left on the DB instance by either unencrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you will not be allowed to disable TDE for the DB instance\. When you use the AWS Management Console to remove the **TDE** option from an option group, the console indicates that it is processing, and an event is created indicating an error if the option group is associated with an encrypted DB instance or DB snapshot\.
+ To disable TDE for a DB instance, first ensure that there are no encrypted objects left on the DB instance by either unencrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you can't disable TDE for the DB instance\. When you use the console to remove the TDE option from an option group, the console indicates that it is processing\. In addition, an error event is created if the option group is associated with an encrypted DB instance or DB snapshot\.
 
 The following example removes the TDE encryption from a database called `customerDatabase`\. 
 
@@ -96,12 +96,4 @@ The following example removes the TDE encryption from a database called `custome
 23. GO
 ```
 
-When all objects are unencrypted, you can modify the DB instance to be associated with an option group without the **TDE** option or you can remove the **TDE** option from the option group\. 
-
-## Performance Considerations<a name="w4aac26c85c13c45"></a>
-
-The performance of a SQL Server DB instance can be impacted by using transparent data encryption\. 
-
-Performance for unencrypted databases can also be degraded if the databases are on a DB instance that has at least one encrypted database\. As a result, we recommend that you keep encrypted and unencrypted databases on separate DB instances\.
-
-Because of the nature of encryption, the database size and the size of the transaction log is larger than for an unencrypted database\. You could run over your allocation of free backup space\. The nature of TDE will cause an unavoidable performance hit\. If you need high performance and TDE, measure the impact and make sure it meets your needs\. There is less of an impact on performance if you use Provisioned IOPS and at least an M3\.Large DB instance class\. 
+When all objects are unencrypted, you can modify the DB instance to be associated with an option group without the TDE option or you can remove the TDE option from the option group\. 

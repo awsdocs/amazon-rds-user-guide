@@ -152,7 +152,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [ Tuning Queries ](#CHAP_BestPractices.TuningQueries)
 
- If your queries are tuned and an issue persists, consider upgrading your Amazon RDS [DB Instance Class](Concepts.DBInstanceClass.md) to one with more of the resource \(CPU, RAM, disk space, network bandwidth, I/O capacity\) that is related to the issue you are experiencing\. 
+ If your queries are tuned and an issue persists, consider upgrading your Amazon RDS [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) to one with more of the resource \(CPU, RAM, disk space, network bandwidth, I/O capacity\) that is related to the issue you are experiencing\. 
 
 ### Tuning Queries<a name="CHAP_BestPractices.TuningQueries"></a>
 

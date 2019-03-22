@@ -21,7 +21,7 @@ The master user must run the `mysql.rds_next_master_log` procedure\.
 
 **Warning**  
 Call `mysql.rds_next_master_log` only if replication fails after a failover of a Multi\-AZ DB instance that is the replication source, and the `Last_IO_Errno` field of `SHOW SLAVE STATUS` reports I/O error 1236\.  
-Calling `mysql.rds_next_master_log` may result in data loss in the Read Replica if transactions in the source instance were not written to the binary log on disk before the failover event occurred\. You can reduce the chance of this happening by configuring the source instance parameters sync\_binlog = 1 and innodb\_support\_xa = 1, although this may reduce performance\. For more information, see [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md)\.
+Calling `mysql.rds_next_master_log` may result in data loss in the Read Replica if transactions in the source instance were not written to the binary log on disk before the failover event occurred\. You can reduce the chance of this happening by configuring the source instance parameters sync\_binlog = 1 and innodb\_support\_xa = 1, although this may reduce performance\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
 
 ## Examples<a name="mysql_rds_next_master_log-examples"></a>
 

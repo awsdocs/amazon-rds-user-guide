@@ -93,7 +93,7 @@ mysql >
 
 ## Maximum MariaDB Connections<a name="USER_ConnectToMariaDBInstance.max_connections"></a>
 
-The maximum number of connections allowed to an Amazon RDS MariaDB DB instance is based on the amount of memory available for the DB instance class of the DB instance\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
+The maximum number of connections allowed to an Amazon RDS MariaDB DB instance is based on the amount of memory available for the DB instance class of the DB instance\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
 The connection limit for a DB instance is set by default to the maximum for the DB instance class for the DB instance\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed using the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 

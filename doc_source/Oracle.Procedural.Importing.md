@@ -32,6 +32,15 @@ For compatibility considerations when migrating between versions of Oracle Datab
 
 When you import data with Oracle Data Pump, you must transfer the dump file that contains the data from the source database to the target database\. You can transfer the dump file using an Amazon S3 bucket or by using a database link between the two databases\.
 
+The following are best practices for using Oracle Data Pump to import data into an Amazon RDS for Oracle DB instance:
++ Perform imports in `schema` or `table` mode to import specific schemas and objects\.
++ Limit the schemas you import to those required by your application\.
++ Do not import in `full` mode\.
+
+  Because Amazon RDS for Oracle does not allow access to `SYS` or `SYSDBA` administrative users, importing in `full` mode, or importing schemas for Oracle\-maintained components, might damage the Oracle data dictionary and affect the stability of your database\.
++ When loading large amounts of data, transfer the dump file to the target Amazon RDS for Oracle DB instance, take a DB snapshot of your instance, and then test the import to verify that it succeeds\. If database components are invalidated, you can delete the DB instance and re\-create it from the DB snapshot\. The restored DB instance includes any dump files staged on the DB instance when you took the DB snapshot\.
++ Do not import dump files that were created using the Oracle Data Pump export parameters `TRANSPORT_TABLESPACES`, `TRANSPORTABLE`, or `TRANSPORT_FULL_CHECK`\. Amazon RDS for Oracle DB instances do not support importing these dump files\.
+
 **Topics**
 + [Importing Data with Oracle Data Pump and an Amazon S3 Bucket](#Oracle.Procedural.Importing.DataPump.S3)
 + [Importing Data with Oracle Data Pump and a Database Link](#Oracle.Procedural.Importing.DataPump.DBLink)

@@ -7,6 +7,10 @@ Amazon RDS supports Oracle UTL\_MAIL through the use of the UTL\_MAIL option and
 
 The following are some limitations to using UTL\_MAIL: 
 + UTL\_MAIL does not support Transport Layer Security \(TLS\) and therefore emails are not encrypted\. 
+
+  To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [ Provisioning Oracle Wallets and Accessing SSL/TLS\-Based Endpoints on Amazon RDS for Oracle](https://d1.awsstatic.com/whitepapers/provisioning-oracle-wallets-on-amazon-rds.pdf)\.
+
+  The specific certificates that are required for your wallet vary by service\. For AWS services, these can typically be found in the [Amazon Trust Services Repository](https://www.amazontrust.com/repository/)\.
 + UTL\_MAIL does not support authentication with SMTP servers\. 
 + You can only send a single attachment in an email\. 
 + You can't send attachments larger than 32 K\. 

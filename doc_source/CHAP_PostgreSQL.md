@@ -30,12 +30,12 @@ The following are the common management tasks you perform with an Amazon RDS for
 | Task Area | Relevant Documentation | 
 | --- | --- | 
 |  **Setting up Amazon RDS for first\-time use** There are prerequisites you must complete before you create your DB instance\. For example, DB instances are created by default with a firewall that prevents access to it\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.   |  [Setting Up for Amazon RDS](CHAP_SettingUp.md)  | 
-|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)  | 
+|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)  | 
 |  **Finding supported PostgreSQL versions** Amazon RDS supports several versions of PostgreSQL\.   |  [Supported PostgreSQL Database Versions](#PostgreSQL.Concepts.General.DBVersions)  | 
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read only Read Replicas \(master/standby\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas of MariaDB, MySQL, and PostgreSQL DB Instances](USER_ReadRepl.md) [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
+|  **Setting up read only Read Replicas \(master/standby\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas](USER_ReadRepl.md) [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
 |  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you need to create a DB security group\. If your DB instance is on the *EC2\-VPC* platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
@@ -53,7 +53,7 @@ When you create a DB instance in Amazon RDS, you know that the PostgreSQL versio
 DB instances in the Database Preview Environment are similar to DB instances in a production environment\. However, keep in mind several important factors:
 + All DB instances are deleted 60 days after you create them, along with any backups and snapshots\.
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\. 
++ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
 + You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS Database Preview Environment Forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
 + You can't copy a snapshot of a DB instance to a production environment\.
@@ -153,6 +153,7 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 Amazon RDS supports the following PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL Version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)
 + [PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version11)
 + [PostgreSQL Version 10\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version106)
 + [PostgreSQL Version 10\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version105)
@@ -198,6 +199,36 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL Version 9\.3\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9316)
 + [PostgreSQL Version 9\.3\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9314)
 + [PostgreSQL Version 9\.3\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9312)
+
+#### PostgreSQL Version 11\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version111"></a>
+
+PostgreSQL version 11\.1 contains several improvements that were announced in [PostgreSQL 11\.1 Released\!](https://www.postgresql.org/about/news/1905/) This version includes SQL stored procedures that enable embedded transactions within a procedure\. This version also includes major improvements to partitioning and parallelism and many useful performance improvements\. For example, by using a non\-null constant for a column default, you can now use an ALTER TABLE command to add a column without causing a table rewrite\.
+
+**Note**  
+Upgrading from an older DB instance to PostgreSQL 11\.1 is not yet supported\.
+
+PostgreSQL version 11\.1 contains several bug fixes for issues in release 11\. For complete details, see the [PostgreSQL Release 11\.1 documentation](https://www.postgresql.org/docs/11/release-11-1.html)\. Some changes in this version include the following:
++ Partitioning – Partitioning improvements include support for hash partitioning, enabling creation of a default partition, and dynamic row movement to another partition based on the key column update\.
++ Performance – Performance improvements include parallelism while creating indexes, materialized views, hash joins, and sequential scans to make the operations perform better\.
++ Stored procedures – SQL stored procedures now added support embedded transactions\.
++ Support for Just\-In\-Time \(JIT\) capability – RDS PostgreSQL 11 instances are created with JIT capability, speeding evaluation of expressions\. To enable this feature, set `jit` to ON\. 
++ Segment size – The write\-ahead logging \(WAL\) segment size has been changed from 16 MB to 64 MB\.
++ Autovacuum improvements – To provide valuable logging, the parameter `rds.force_autovacuum_logging` is ON by default in conjunction with the `log_autovacuum_min_duration` parameter set to 10 seconds\. To increase autovacuum effectiveness, the values for the `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` parameters are computed based on host memory capacity to provide larger default values\.
++ Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 12 hours\. Any session that has been idle more than 12 hours is terminated\.
++ Performance metrics – The `pg_stat_statements` module is included in `shared_preload_libraries` by default\. This avoids having to reboot the instance immediately after creation\. However, this functionality still requires you to run the statement `CREATE EXTENSION pg_stat_statements;`\. Also, `track_io_timing` is enabled by default to add more granular data to `pg_stat_statements`\.
++ The tsearch2 module is no longer supported – If your application uses `tsearch2` functions, update it to use the equivalent functions provided by the core PostgreSQL engine\. For more information about the tsearch2 module, see [PostgreSQL tsearch2](https://www.postgresql.org/docs/9.6/static/tsearch2.html)\.
++ The chkpass module is no longer supported – For more information about the `chkpass` module, see [PostgreSQL chkpass](https://www.postgresql.org/docs/10/chkpass.html)\.
++ Extension updates for RDS PostgreSQL 11\.1 include the following: 
+  + `pgaudit` is updated to 1\.3\.0\.
+  + `pg_hint_plan` is updated to 1\.3\.2\.
+  + `pglogical` is updated to 2\.2\.1\.
+  + `plcoffee` is updated to 2\.3\.8\.
+  + `plv8` is updated to 2\.3\.8\.
+  + `PostGIS` is updated to 2\.5\.1\.
+  + `prefix` is updated to 1\.2\.8\.
+  + `wal2json` is updated to hash 9e962bad\.
+
+For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
 #### PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version11"></a>
 
@@ -296,7 +327,7 @@ PostgreSQL version 9\.6\.10 contains several bug fixes for issues in release 9\.
 
 This version includes the following changes: 
 + Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical Replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\. 
-+ Support for the `pg_similarty` extension version 2\.2\.0\.
++ Support for the `pg_similarity` extension version 2\.2\.0\.
 + An update for the `wal2json` extension to version 01c5c1e\.
 + An update for the `pg_hint_plan` extension to version 1\.2\.3\.
 
@@ -466,7 +497,7 @@ PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support even
 
 PostgreSQL version 9\.5\.2 contains several fixes to issues found in previous versions\. For more information on the features in 9\.5\.2, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-PostgreSQL version 9\.5\.2 doesn't support the db\.m1 or db\.m2 DB instance classes\. If you need to upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2 to one of these instance classes, you need to scale compute\. To do that, you need a comparable db\.t2 or db\.m3 DB instance class before you can upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2\. For more information on DB instance classes, see [DB Instance Class](Concepts.DBInstanceClass.md)\.
+PostgreSQL version 9\.5\.2 doesn't support the db\.m1 or db\.m2 DB instance classes\. If you need to upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2 to one of these instance classes, you need to scale compute\. To do that, you need a comparable db\.t2 or db\.m3 DB instance class before you can upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
 Native PostgreSQL version 9\.5\.2 introduced the command ALTER USER WITH BYPASSRLS\. 
 
@@ -635,7 +666,7 @@ Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 PostgreSQL supports many PostgreSQL extensions and modules\. Extensions and modules expand on the functionality provided by the PostgreSQL engine\. The following sections show the extensions and modules supported by Amazon RDS for the major PostgreSQL versions\.
 
 **Topics**
-+ [PostgreSQL Version 11 Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x)
++ [PostgreSQL Version 11\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x)
 + [PostgreSQL Version 10\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)
 + [PostgreSQL Version 9\.6\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x)
 + [PostgreSQL Version 9\.5\.x Extensions Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x)
@@ -653,19 +684,18 @@ SHOW rds.extensions;
 **Note**  
 Parameters added in a minor version release might display inaccurately when using the `rds.extensions` parameter in `psql`\. 
 
-##### PostgreSQL Version 11 Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x"></a>
+##### PostgreSQL Version 11\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x"></a>
 
-The following tables show PostgreSQL extensions and modules for PostgreSQL version 11 that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/static/extend-extensions.html)\. 
+The following tables show PostgreSQL extensions and modules for PostgreSQL version 11\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/static/extend-extensions.html)\. 
 
 
-| Extension | Version 11 | 
+| Extension | Version 11\.1 | 
 | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 
 | [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 
 | [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 
 | [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 
-| [chkpass](http://www.postgresql.org/docs/10/static/chkpass.html) | 1\.0 | 
 | [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 
 | [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 
 | [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 
@@ -677,16 +707,16 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 
 | [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 
-| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.1\.1 | 
+| [ip4r](http://www.postgresql.org/ftp/projects/pgFoundry/ip4r/) | 2\.3 | 
 | [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 
 | log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 
 | libprotobuf | 1\.3\.0 | 
 | [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 
 | [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.2\.0 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.3\.0 | 
 | [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 
 | [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.1 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 
 | [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.3 | 
 | pg\_similarity | 1\.0 | 
@@ -695,42 +725,41 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 
 | [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 
 | pageinspect | 1\.6 | 
-| pglogical | 2\.2\.0 | 
+| pglogical | 2\.2\.1 | 
 | [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.5\.2 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.6\.1 | 
 | [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 
-| plcoffee | 2\.1\.0 | 
-| plls | 2\.1\.0 | 
+| plcoffee | 2\.3\.8 | 
+| plls | 2\.3\.8 | 
 | [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 
 | [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 
 | [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 
-| [plv8](https://github.com/plv8) | 2\.1\.2 | 
-| [PostGIS](http://www.postgis.net/) | 2\.5\.0 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.0 | 
+| [plv8](https://github.com/plv8) | 2\.3\.8 | 
+| [PostGIS](http://www.postgis.net/) | 2\.5\.1 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.1 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.5\.0 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 
-| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.10\.2 | 
-|  [ prefix](http://pgfoundry.org/projects/prefix) | 1\.2\.0 | 
+| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.11 | 
+|  [ prefix](http://pgfoundry.org/projects/prefix) | 1\.2\.8 | 
 | [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 
 | [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 
 | [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 
 | [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 
 |  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 
 
-The following modules are supported as shown for PostgreSQL version 11\.
+The following modules are supported as shown for PostgreSQL version 11\.x\.
 
 
-| Module | Version 11 | 
+| Module | Version 11\.1 | 
 | --- | --- | 
 | amcheck | Supported | 
 | auto\_explain | Supported | 
 | decoder\_raw | Supported | 
 | ICU | Version 60\.2 supported | 
 | test\_decoding | Supported | 
-| wal2json | Commit hash 01c5c1e | 
+| wal2json | Commit hash 9e962bad | 
 
 ##### PostgreSQL Version 10\.x Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x"></a>
 
@@ -1090,33 +1119,34 @@ Before you can use the PostGIS extension, you must create it by running the foll
 The following table shows the PostGIS component versions that ship with the Amazon RDS for PostgreSQL versions\.
 
 
-| Version | PostGIS | GEOS | GDAL | PROJ | 
+| PostgreSQL | PostGIS | GEOS | GDAL | PROJ | 
 | --- | --- | --- | --- | --- | 
-| 9\.3\.12 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  GDAL 1\.11\.4, released 2016/01/25  |  Rel\. 4\.9\.2, 08 September 2015  | 
-| 9\.3\.14 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.3\.16 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.3\.17 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.4\.7 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 1\.11\.4, released 2016/01/25  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.4\.9 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.4\.11 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.4\.12 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.5\.2 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 2\.0\.2, released 2016/01/26  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.5\.4 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 2\.0\.3, released 2016/07/01  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.5\.6 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.5\.7 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.6\.1 |  2\.3\.0 r15146  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  GDAL 2\.1\.1, released 2016/07/07  | Rel\. 4\.9\.2, 08 September 2015 | 
-| 9\.6\.2 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.6\.3 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  GDAL 2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, 15 August 2016 | 
-| 9\.6\.8 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, 15 August 2016 | 
-| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, 15 August 2016 | 
-| 10\.3 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, 15 August 2016 | 
-| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, 15 August 2016  | 
-| 10\.5  | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, 15 August 2016  | 
-| 10\.6 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | GDAL 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, 15 August 2016  | 
+| 9\.3\.12 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.4, released 2016/01/25  |  Rel\. 4\.9\.2, September 8th, 2015  | 
+| 9\.3\.14 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.3\.16 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.3\.17 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.4\.7 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.4, released 2016/01/25  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.4\.9 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.4\.11 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.4\.12 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.2 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.0\.2, released 2016/01/26  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.4 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.0\.3, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.6 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.5\.7 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.1 |  2\.3\.0 r15146  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.1\.1, released 2016/07/07  | Rel\. 4\.9\.2, September 8th, 2016 | 
+| 9\.6\.2 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.3 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.8 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 10\.3 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.5  | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.6 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
+| 11\.1 | 2\.5\.1 r17027 | 3\.7\.0\-CAPI\-1\.11\.0 673b9939 | 2\.3\.1, released 2018/06/22 | Rel\. 5\.2\.0, September 15th, 2018 | 
 
 **Note**  
 PostgreSQL 10\.5 added support for the `libprotobuf` extension version 1\.3\.0 to the PostGIS component\. 

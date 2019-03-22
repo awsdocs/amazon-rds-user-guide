@@ -13,7 +13,87 @@ The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 ## Prerequisites for Amazon RDS Oracle Integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
-To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS must have access to an Amazon S3 bucket\. 
+To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\.
+
+### Console<a name="oracle-s3-integration.preparing.console"></a>
+
+**To create an IAM policy to allow Amazon RDS access to an Amazon S3 bucket**
+
+1. Open the [IAM Management Console](https://console.aws.amazon.com/iam/home?#home)\.
+
+1. In the navigation pane, choose **Policies**\.
+
+1. Choose **Create policy**\.
+
+1. On the **Visual editor** tab, choose **Choose a service**, and then choose **S3**\.
+
+1. For **Actions**, choose **Expand all**, and then choose the bucket permissions and object permissions needed for the IAM policy\.
+
+   Include the appropriate actions in the policy based on the type of access required:
+   + `GetObject` – Required to transfer files from an Amazon S3 bucket to Amazon RDS\.
+   + `ListBucket` – Required to transfer files from an Amazon S3 bucket to Amazon RDS\.
+   + `PutObject` – Required to transfer files from Amazon RDS to an Amazon S3 bucket\.
+
+   *Object permissions* are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for Object Operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
+
+1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
+
+1. In the **Add ARN\(s\)** dialog box, provide the details about your resource, and choose **Add**\.
+
+   Specify the Amazon S3 bucket to allow access to\. For instance, if you want to allow Amazon RDS to access the Amazon S3 bucket named `example-bucket`, then set the Amazon Resource Name \(ARN\) value to `arn:aws:s3:::example-bucket`\.
+
+1. If the **object** resource is listed, choose **Add ARN** for **object**\.
+
+1. In the **Add ARN\(s\)** dialog box, provide the details about your resource\.
+
+   For the Amazon S3 bucket, specify the Amazon S3 bucket to allow access to\. For the object, you can choose **Any** to grant permissions to any object in the bucket\.
+**Note**  
+You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing Access Permissions to Your Amazon S3 Resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
+
+1. \(Optional\) Choose **Add additional permissions** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
+**Note**  
+You can repeat this to add corresponding bucket permission statements to your policy for each Amazon S3 bucket that you want Amazon RDS to access\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
+
+1. Choose **Review policy**\.
+
+1. For **Name**, enter a name for your IAM policy, for example `rds-s3-integration-policy`\. You use this name when you create an IAM role to associate with your DB instance\. You can also add an optional **Description** value\.
+
+1. Choose **Create policy**\.
+
+**To create an IAM role to allow Amazon RDS access to an Amazon S3 bucket**
+
+1. In the navigation pane, choose **Roles**\.
+
+1. Choose **Create role**\.
+
+1. For **AWS service**, choose **RDS**\.
+
+1. For **Select your use case**, choose **RDS – Add Role to Database**\.
+
+1. Choose **Next: Permissions**\.
+
+1. For **Search** under **Attach permissions policies**, enter the name of the IAM policy you created, and choose the policy when it appears in the list\.
+
+1. Choose **Next: Tags** and then **Next: Review**\.
+
+1. Set **Role name** to a name for your IAM role, for example `rds-s3-integration-role`\. You can also add an optional **Role description** value\.
+
+1. Choose **Create Role**\.
+
+**To associate your IAM role with your DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose the Oracle DB instance name to display its details\.
+
+1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the role to add under **Add IAM roles to this instance**\.
+
+1. For **Feature**, choose **S3\_INTEGRATION**\.  
+![\[Add S3_INTEGRATION role\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ora-s3-integration-role.png)
+
+1. Choose **Add role**\.
+
+### AWS CLI<a name="oracle-s3-integration.preparing.cli"></a>
 
 **To grant Amazon RDS access to an Amazon S3 bucket**
 
@@ -79,7 +159,7 @@ To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS mu
 
 1. After the policy is created, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step\.
 
-1. Create a role that Amazon RDS can assume on your behalf to access your Amazon S3 buckets\.
+1. Create an IAM role that Amazon RDS can assume on your behalf to access your Amazon S3 buckets\.
 
    The following AWS CLI command creates the `rds-s3-integration-role` for this purpose\.  
 **Example**  
@@ -174,19 +254,6 @@ To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS mu
 
    Replace `your-role-arn` with the role ARN that you noted in a previous step\. `S3_INTEGRATION` must be specified for the `--feature-name` option\.
 
-   You can also add the role to the Oracle DB instance using the AWS Management Console:
-
-   1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-   1. Choose the Oracle DB instance name to display its details\.
-
-   1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the role to add under **Add IAM roles to this instance**\.
-
-   1. Under **Feature**, choose **S3\_INTEGRATION**\.  
-![\[Add S3_INTEGRATION role\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ora-s3-integration-role.png)
-
-   1. Choose **Add role**\.
-
 ## Adding the Amazon S3 Integration Option<a name="oracle-s3-integration.preparing.option-group"></a>
 
 To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
@@ -255,7 +322,9 @@ You can use Amazon RDS procedures to upload files from an Oracle DB instance to 
 
 ### Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket<a name="oracle-s3-integration.using.upload"></a>
 
-To upload files from an Oracle DB instance to an Amazon S3 bucket, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3`\. The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parameters\.
+To upload files from an Oracle DB instance to an Amazon S3 bucket, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3`\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. For more information about performing RMAN backups, see [Common DBA Recovery Manager \(RMAN\) Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
+
+The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parameters\.
 
 
 ****  

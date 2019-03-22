@@ -2,6 +2,19 @@
 
 This section describes how you can perform common DBA tasks related to the system on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
+**Topics**
++ [Disconnecting a Session](#Appendix.Oracle.CommonDBATasks.DisconnectingSession)
++ [Killing a Session](#Appendix.Oracle.CommonDBATasks.KillingSession)
++ [Enabling and Disabling Restricted Sessions](#Appendix.Oracle.CommonDBATasks.RestrictedSession)
++ [Flushing the Shared Pool](#Appendix.Oracle.CommonDBATasks.FlushingSharedPool)
++ [Flushing the Buffer Cache](#Appendix.Oracle.CommonDBATasks.FlushingBufferCache)
++ [Granting SELECT or EXECUTE Privileges to SYS Objects](#Appendix.Oracle.CommonDBATasks.TransferPrivileges)
++ [Revoking SELECT or EXECUTE Privileges on SYS Objects](#Appendix.Oracle.CommonDBATasks.RevokePrivileges)
++ [Granting Privileges to Non\-Master Users](#Appendix.Oracle.CommonDBATasks.PermissionsNonMasters)
++ [Modifying DBMS\_SCHEDULER Jobs](#Appendix.Oracle.CommonDBATasks.ModifyScheduler)
++ [Creating Custom Functions to Verify Passwords](#Appendix.Oracle.CommonDBATasks.CustomPassword)
++ [Setting Up a Custom DNS Server](#Appendix.Oracle.CommonDBATasks.CustomDNS)
+
 ## Disconnecting a Session<a name="Appendix.Oracle.CommonDBATasks.DisconnectingSession"></a>
 
 You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.disconnect` to disconnect the current session by ending the dedicated server process\. The `disconnect` procedure has the following parameters\. 
@@ -11,11 +24,11 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.disconnect` to disc
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `sid` | number | — | required | The session identifier\. | 
-| `serial` | number | — | required | The serial number of the session\. | 
-| `method` | varchar | 'IMMEDIATE' | optional | Valid values are `'IMMEDIATE'` or `'POST_TRANSACTION'`\. | 
+| `sid` | number | — | Required | The session identifier\. | 
+| `serial` | number | — | Required | The serial number of the session\. | 
+| `method` | varchar | 'IMMEDIATE' | Optional | Valid values are `'IMMEDIATE'` or `'POST_TRANSACTION'`\. | 
 
-The following example disconnects a session:
+The following example disconnects a session\.
 
 ```
 begin
@@ -26,7 +39,7 @@ end;
 /
 ```
 
-To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`: 
+To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`\.
 
 ```
 select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
@@ -43,9 +56,9 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kill` to kill a ses
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `sid` | number | — | required | The session identifier\. | 
-| `serial` | number | — | required | The serial number of the session\. | 
-| `method` | varchar | null | optional |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
+| `sid` | number | — | Required | The session identifier\. | 
+| `serial` | number | — | Required | The serial number of the session\. | 
+| `method` | varchar | null | Optional |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
 
 The following example kills a session:
 
@@ -58,13 +71,13 @@ end;
 /
 ```
 
-To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`: 
+To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`\.
 
 ```
 select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
 ```
 
-You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. Specifying `PROCESS` as the enables you to kill the processes associated with a session\. You should only do this if killing the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
+You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. Specifying `PROCESS` as the `method` value enables you to kill the processes associated with a session\. You should only do this if killing the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
 
 ## Enabling and Disabling Restricted Sessions<a name="Appendix.Oracle.CommonDBATasks.RestrictedSession"></a>
 
@@ -75,7 +88,7 @@ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.restricted_session`
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_enable` | boolean | true | optional |  Set to `true` to enable restricted sessions, `false` to disable restricted sessions\.   | 
+| `p_enable` | boolean | true | Optional |  Set to `true` to enable restricted sessions, `false` to disable restricted sessions\.   | 
 
 The following example shows how to enable and disable restricted sessions\. 
 
@@ -139,7 +152,7 @@ exec rdsadmin.rdsadmin_util.flush_buffer_cache;
 
 ## Granting SELECT or EXECUTE Privileges to SYS Objects<a name="Appendix.Oracle.CommonDBATasks.TransferPrivileges"></a>
 
-Usually you transfer privileges by using roles, which can contain many objects\. You can grant privileges to a single object by using the Amazon RDS procedure `rdsadmin.rdsadmin_util.grant_sys_object`\. The procedure only grants privileges that the master account already has via a role or direct grant\. 
+Usually you transfer privileges by using roles, which can contain many objects\. You can grant privileges to a single object by using the Amazon RDS procedure `rdsadmin.rdsadmin_util.grant_sys_object`\. The procedure only grants privileges that the master account already has through a role or direct grant\. 
 
 The `grant_sys_object` procedure has the following parameters\. 
 
@@ -148,12 +161,12 @@ The `grant_sys_object` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_obj_name` | varchar2 | — | required |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
-| `p_grantee` | varchar2 | — | required |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
-| `p_privilege` | varchar2 | null | required | — | 
-| `p_grant_option` | boolean | false | optional |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for Oracle versions 11\.2\.0\.4\.v8 and later, and 12\.1\.0\.2\.v4 and later\.   | 
+| `p_obj_name` | varchar2 | — | Required |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in uppercase, so we recommend that you try that first\.   | 
+| `p_grantee` | varchar2 | — | Required |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
+| `p_privilege` | varchar2 | null | Required | — | 
+| `p_grant_option` | boolean | false | Optional |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for Oracle versions 11\.2\.0\.4\.v8 and later, and 12\.1\.0\.2\.v4 and later\.   | 
 
-The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`: 
+The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`\.
 
 ```
 begin
@@ -165,7 +178,7 @@ end;
 /
 ```
 
-The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1` with the grant option: 
+The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1` with the grant option\.
 
 ```
 begin
@@ -178,7 +191,7 @@ end;
 /
 ```
 
-To be able to grant privileges on an object, your account must have those privileges granted to it directly with the grant option, or via a role granted using `with admin option`\. In the most common case, you may want to grant `SELECT` on a DBA view that has been granted to the `SELECT_CATALOG_ROLE` role\. If that role isn't already directly granted to your user using `with admin option`, then you won't be able to transfer the privilege\. If you have the DBA privilege, then you can grant the role directly to another user\. 
+To be able to grant privileges on an object, your account must have those privileges granted to it directly with the grant option, or via a role granted using `with admin option`\. In the most common case, you may want to grant `SELECT` on a DBA view that has been granted to the `SELECT_CATALOG_ROLE` role\. If that role isn't already directly granted to your user using `with admin option`, then you can't transfer the privilege\. If you have the DBA privilege, then you can grant the role directly to another user\. 
 
 The following example grants the `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` to `USER1`\. Since the `with admin option` is used, `USER1` can now grant access to SYS objects that have been granted to `SELECT_CATALOG_ROLE`\. 
 
@@ -200,11 +213,11 @@ The `revoke_sys_object` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_obj_name` | varchar2 | — | required |  The name of the object to revoke privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
-| `p_revokee` | varchar2 | — | required |  The name of the object to revoke privileges for\. The object can be a schema or a role\.   | 
-| `p_privilege` | varchar2 | null | required | — | 
+| `p_obj_name` | varchar2 | — | Required |  The name of the object to revoke privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
+| `p_revokee` | varchar2 | — | Required |  The name of the object to revoke privileges for\. The object can be a schema or a role\.   | 
+| `p_privilege` | varchar2 | null | Required | — | 
 
-The following example revokes select privileges on an object named `V_$SESSION` from a user named `USER1`: 
+The following example revokes select privileges on an object named `V_$SESSION` from a user named `USER1`\.
 
 ```
 begin
@@ -224,13 +237,13 @@ You can grant select privileges for many objects in the `SYS` schema by using th
 grant SELECT_CATALOG_ROLE to user1;
 ```
 
-You can grant execute privileges for many objects in the `SYS` schema by using the `EXECUTE_CATALOG_ROLE` role\. The `EXECUTE_CATALOG_ROLE` role gives users `EXECUTE` privileges for packages and procedures in the data dictionary\. The following example grants the role `EXECUTE_CATALOG_ROLE` to a user named *user1*: 
+You can grant execute privileges for many objects in the `SYS` schema by using the `EXECUTE_CATALOG_ROLE` role\. The `EXECUTE_CATALOG_ROLE` role gives users `EXECUTE` privileges for packages and procedures in the data dictionary\. The following example grants the role `EXECUTE_CATALOG_ROLE` to a user named *user1*\. 
 
 ```
 grant EXECUTE_CATALOG_ROLE to user1;
 ```
 
-The following example gets the permissions that the roles `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` allow: 
+The following example gets the permissions that the roles `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` allow\. 
 
 ```
   select * 
@@ -239,7 +252,7 @@ The following example gets the permissions that the roles `SELECT_CATALOG_ROLE` 
 order by ROLE, TABLE_NAME asc;
 ```
 
-The following example creates a non\-master user named `user1`, grants the `CREATE SESSION` privilege, and grants the `SELECT` privilege on a database named *sh\.sales*: 
+The following example creates a non\-master user named `user1`, grants the `CREATE SESSION` privilege, and grants the `SELECT` privilege on a database named *sh\.sales*\.
 
 ```
 create user user1 identified by password;
@@ -278,25 +291,25 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_verify_function_name` | varchar2 | — | required |  The name for your custom function\. This function is created for you in the SYS schema\. You assign this function to user profiles\.   | 
-| `p_min_length` | number | 8 | optional | The minimum number of characters required\. | 
-| `p_max_length` | number | 256 | optional | The maximum number of characters allowed\. | 
-| `p_min_letters` | number | 1 | optional | The minimum number of letters required\. | 
-| `p_min_uppercase` | number | 0 | optional | The minimum number of uppercase letters required\. | 
-| `p_min_lowercase` | number | 0 | optional | The minimum number of lowercase letters required\. | 
-| `p_min_digits` | number | 1 | optional | The minimum number of digits required\. | 
-| `p_min_special` | number | 0 | optional | The minimum number of special characters required\. | 
-| `p_min_different_chars` | number | 3 | optional | The minimum number of distinct characters required\. | 
-| `p_disallow_username` | boolean | true | optional | Set to `true` to disallow the username in the password\. | 
-| `p_disallow_reverse` | boolean | true | optional | Set to `true` to disallow the reverse of the username in the password\. | 
-| `p_disallow_db_name` | boolean | true | optional | Set to `true` to disallow the database or server name in the password\. | 
-| `p_disallow_simple_strings` | boolean | true | optional | Set to `true` to disallow simple strings as the password\. | 
-| `p_disallow_whitespace` | boolean | false | optional | Set to `true` to disallow white space characters in the password\. | 
-| `p_disallow_at_sign` | boolean | false | optional | Set to `true` to disallow the @ character in the password\. | 
+| `p_verify_function_name` | varchar2 | — | Required |  The name for your custom function\. This function is created for you in the SYS schema\. You assign this function to user profiles\.   | 
+| `p_min_length` | number | 8 | Optional | The minimum number of characters required\. | 
+| `p_max_length` | number | 256 | Optional | The maximum number of characters allowed\. | 
+| `p_min_letters` | number | 1 | Optional | The minimum number of letters required\. | 
+| `p_min_uppercase` | number | 0 | Optional | The minimum number of uppercase letters required\. | 
+| `p_min_lowercase` | number | 0 | Optional | The minimum number of lowercase letters required\. | 
+| `p_min_digits` | number | 1 | Optional | The minimum number of digits required\. | 
+| `p_min_special` | number | 0 | Optional | The minimum number of special characters required\. | 
+| `p_min_different_chars` | number | 3 | Optional | The minimum number of distinct characters required\. | 
+| `p_disallow_username` | boolean | true | Optional | Set to `true` to disallow the username in the password\. | 
+| `p_disallow_reverse` | boolean | true | Optional | Set to `true` to disallow the reverse of the username in the password\. | 
+| `p_disallow_db_name` | boolean | true | Optional | Set to `true` to disallow the database or server name in the password\. | 
+| `p_disallow_simple_strings` | boolean | true | Optional | Set to `true` to disallow simple strings as the password\. | 
+| `p_disallow_whitespace` | boolean | false | Optional | Set to `true` to disallow white space characters in the password\. | 
+| `p_disallow_at_sign` | boolean | false | Optional | Set to `true` to disallow the @ character in the password\. | 
 
 You can create multiple password verification functions\.
 
-There are restrictions on the name of your custom function\. Your custom function can't have the same name as an existing system object, the name can be no more than 30 characters long, and the name must include one of the following strings: `PASSWORD`, `VERIFY`, `COMPLEXITY`, `ENFORCE`, or `STRENGTH`\. 
+There are restrictions on the name of your custom function\. Your custom function can't have the same name as an existing system object\. The name can be no more than 30 characters long\. Also, the name must include one of the following strings: `PASSWORD`, `VERIFY`, `COMPLEXITY`, `ENFORCE`, or `STRENGTH`\. 
 
 The following example creates a function named `CUSTOM_PASSWORD_FUNCTION`\. The function requires that a password has at least 12 characters, 2 uppercase characters, 1 digit, and 1 special character, and that the password disallows the @ character\. 
 
@@ -368,9 +381,9 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_verify_function_name` | varchar2 | — | required |  The name for your custom verification function\. This is a wrapper function that is created for you in the SYS schema, and it doesn't contain any verification logic\. You assign this function to user profiles\.   | 
-| `p_target_owner` | varchar2 | — | required | The schema owner for your custom verification function\. | 
-| `p_target_function_name` | varchar2 | — | required |  The name of your existing custom function that contains the verification logic\. Your custom function must return a boolean\. Your function should return `true` if the password is valid and `false` if the password is invalid\.   | 
+| `p_verify_function_name` | varchar2 | — | Required |  The name for your custom verification function\. This is a wrapper function that is created for you in the SYS schema, and it doesn't contain any verification logic\. You assign this function to user profiles\.   | 
+| `p_target_owner` | varchar2 | — | Required | The schema owner for your custom verification function\. | 
+| `p_target_function_name` | varchar2 | — | Required |  The name of your existing custom function that contains the verification logic\. Your custom function must return a boolean\. Your function should return `true` if the password is valid and `false` if the password is invalid\.   | 
 
 The following example creates a password verification function that uses the logic from the function named `PASSWORD_LOGIC_EXTRA_STRONG`\. 
 
@@ -412,9 +425,4 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 + The routing path between the Amazon RDS DB instance and the DNS server has to be configured correctly to allow DNS traffic\. 
-  + If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be setup between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
-
-## Related Topics<a name="Appendix.Oracle.CommonDBATasks.System.Related"></a>
-+ [Common DBA Database Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Database.md)
-+ [Common DBA Log Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Log.md)
-+ [Common DBA Miscellaneous Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.Misc.md)
+  + If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be set up between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
