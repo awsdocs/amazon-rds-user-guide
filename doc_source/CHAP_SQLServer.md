@@ -2,7 +2,7 @@
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is shown following\. For the full list of supported versions, editions, and RDS engine versions, see [Version and Feature Support on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport)\. 
 + SQL Server 2017 RTM \(CU\) 14\.00\.3035\.2\.v1, released per [KB4293805](https://support.microsoft.com/en-us/help/4293805) on 14 August 2018 \. 
-+ SQL Server 2016 SP2 \(CU2 \+ Security Update\) 13\.00\.5201\.2\.v1, released per [KB4458621](https://support.microsoft.com/en-us/help/3177312/sql-server-2016-build-versions) on 21 August 2018 \. 
++ SQL Server 2016 SP2 CU3 13\.00\.5216\.0, released per [KB4458871](https://support.microsoft.com/en-us/help/4458871/cumulative-update-3-for-sql-server-2016-sp2) on 21 September 2018\. 
 + SQL Server 2014 SP2 CU10 12\.00\.5571\.0, released per [KB4052725](https://support.microsoft.com/en-us/help/2936603/sql-server-2014-build-versions) on 16 January 2018\. 
 + SQL Server 2012 SP4 GDR 11\.00\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on 12 January 2017\. 
 + SQL Server 2008 R2 SP3 GDR 10\.50\.6560\.0, released per [KB4057113](https://support.microsoft.com/en-us/help/4057113/security-update-for-vulnerabilities-in-sql-server) on 6 January 2018\. Not available in US East \(Ohio\), Canada \(Central\), and EU \(London\) 
