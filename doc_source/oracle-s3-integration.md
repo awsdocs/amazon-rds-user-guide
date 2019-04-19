@@ -15,6 +15,9 @@ The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\.
 
+**Note**  
+To add a role to a DB instance, the status of the DB instance must be `available`\.
+
 ### Console<a name="oracle-s3-integration.preparing.console"></a>
 
 **To create an IAM policy to allow Amazon RDS access to an Amazon S3 bucket**

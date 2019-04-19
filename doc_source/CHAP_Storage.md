@@ -4,10 +4,10 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
 
 ## Amazon RDS Storage Types<a name="Concepts.Storage"></a>
 
-Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 32 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.
+Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 32 TiB of storage\. You can create Oracle RDS DB instances with up to 64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.
 
 The following list briefly describes the three storage types: 
-+ **General Purpose SSD** – General Purpose SSD , also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
++ **General Purpose SSD** – General Purpose SSD, also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
 
   For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD Storage](#Concepts.Storage.GeneralSSD)\. 
 + **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\.  
@@ -20,8 +20,9 @@ Several factors can affect the performance of Amazon EBS volumes, such as instan
 ## General Purpose SSD Storage<a name="Concepts.Storage.GeneralSSD"></a>
 
 General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances: 
-+ MySQL, MariaDB, Oracle, and PostgreSQL DB instances: 20 GiB–32 TiB 
++ MySQL, MariaDB, and PostgreSQL DB instances: 20 GiB–32 TiB 
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
++ Oracle instances: 20 GiB\- 64 TiB
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
 
@@ -161,12 +162,35 @@ Scaling higher than 6 TiB is not supported on the following previous generation 
 + db\.m2\.xlarge
 + db\.m2\.2xlarge
 + db\.m2\.4xlarge
-+ db\.m3\.large
-+ db\.m3\.xlarge
-+ db\.m3\.2xlarge
++ db\.m3\.large \(deprecated\)
++ db\.m3\.xlarge \(deprecated\)
++ db\.m3\.2xlarge \(deprecated\)
 
 Scaling higher than 16 TiB is not supported on the following previous generation instances\.
 + db\.t2\.small
 + db\.t2\.micro
 
-For more information, see [Previous Generation DB Instances](https://aws.amazon.com/rds/previous-generation/)\. 
+Scaling higher than 32 TiB is not supported on the following previous generation instances\.
++ db\.t2\.medium
++ db\.t3\.medium
++ db\.c1\.medium
++ db\.c1\.xlarge
++ db\.cc2\.8xlarge
++ db\.g2\.2xlarge
++ db\.g2\.8xlarge
++ db\.cg1\.4xlarge
++ db\.m2\.xlarge
++ db\.m2\.2xlarge
++ db\.m2\.4xlarge
++ db\.cr1\.8xlarge
++ db\.i2\.xlarge
++ db\.i2\.2xlarge
++ db\.i2\.4xlarge
++ db\.i2\.8xlarge
++ db\.hi1\.4xlarge
++ db\.hs1\.8xlarge
++ db\.t1\.micro
++ db\.m3\.medium
++ db\.m3\.large
++ db\.m3\.xlarge
++ db\.m3\.2xlarge

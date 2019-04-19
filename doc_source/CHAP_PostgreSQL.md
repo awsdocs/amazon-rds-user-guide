@@ -15,7 +15,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
 + [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
-+ [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)
++ [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)
 + [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
 + [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
@@ -42,7 +42,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Connecting to your PostgreSQL DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as pgadmin III\.   |  [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md) [Using SSL with a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL)  | 
 |  **Backing up and restoring your DB instance** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)  | 
 |  **Monitoring the activity and performance of your DB instance** You can monitor a PostgreSQL DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
-|  **Upgrading the PostgreSQL database version** You can do both major and minor version upgrades for your PostgreSQL DB instance\.   |  [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching) [Major Version Upgrades](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)  | 
+|  **Upgrading the PostgreSQL database version** You can do both major and minor version upgrades for your PostgreSQL DB instance\.   |  [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching) [Major Version Upgrades for PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)  | 
 |  **Working with log files** You can access the log files for your PostgreSQL DB instance\.   |  [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)  | 
 |  **Understanding the best practices for PostgreSQL DB instances** Find some of the best practices for working with PostgreSQL on Amazon RDS\.   |  [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)  | 
 
@@ -203,9 +203,6 @@ Amazon RDS supports the following PostgreSQL versions\.
 #### PostgreSQL Version 11\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version111"></a>
 
 PostgreSQL version 11\.1 contains several improvements that were announced in [PostgreSQL 11\.1 Released\!](https://www.postgresql.org/about/news/1905/) This version includes SQL stored procedures that enable embedded transactions within a procedure\. This version also includes major improvements to partitioning and parallelism and many useful performance improvements\. For example, by using a non\-null constant for a column default, you can now use an ALTER TABLE command to add a column without causing a table rewrite\.
-
-**Note**  
-Upgrading from an older DB instance to PostgreSQL 11\.1 is not yet supported\.
 
 PostgreSQL version 11\.1 contains several bug fixes for issues in release 11\. For complete details, see the [PostgreSQL Release 11\.1 documentation](https://www.postgresql.org/docs/11/release-11-1.html)\. Some changes in this version include the following:
 + Partitioning – Partitioning improvements include support for hash partitioning, enabling creation of a default partition, and dynamic row movement to another partition based on the key column update\.
@@ -1051,7 +1048,7 @@ The following modules are supported as shown for versions of PostgreSQL 9\.4\.
 ##### PostgreSQL Version 9\.3\.x Extensions Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.93x"></a>
 
 **Note**  
-Amazon RDS for PostgreSQL has deprecated PostgreSQL version 9\.3\.x\. We strongly recommend that you upgrade to a major version, preferably version 9\.6\.x or 10\.x\. See [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)\.
+Amazon RDS for PostgreSQL has deprecated PostgreSQL version 9\.3\.x\. We strongly recommend that you upgrade to a major version, preferably version 9\.6\.x or 10\.x\. See [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 The following table shows PostgreSQL extensions for PostgreSQL version 9\.3\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
@@ -1357,9 +1354,11 @@ Beginning with PostgreSQL version 10\.4, RDS supports the publication and subscr
 
 1. The AWS user account requires the **rds\_superuser** role to perform logical replication for the PostgreSQL database on Amazon RDS\.
 
-1. Set the `rds.logical_replication` parameter to 1\. 
+1. Set the `rds.logical_replication` static parameter to 1\. 
 
 1. Modify the inbound rules of the security group for the publisher instance \(production\) to allow the subscriber instance \(replica\) to connect\. This is usually done by including the IP address of the subscriber in the security group\.
+
+1. Restart the DB instance for the changes to the static parameter `rds.logical_replication` to take effect\. 
 
 For more information on PostgreSQL logical replication, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/static/logical-replication.html)\. 
 
@@ -1566,7 +1565,7 @@ There are two types of upgrades you can manage for your PostgreSQL DB instance:
   For more information about OS updates, see [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\.
 +  Database Engine Upgrades – When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. Amazon RDS supports both major and minor version upgrades for PostgreSQL DB instances\. 
 
-  For more information about PostgreSQL DB engine upgrades, see [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)\.
+  For more information about PostgreSQL DB engine upgrades, see [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\.
 
 #### Using SSL with a PostgreSQL DB Instance<a name="PostgreSQL.Concepts.General.SSL"></a>
 

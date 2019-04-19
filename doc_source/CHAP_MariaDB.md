@@ -143,7 +143,9 @@ The following MariaDB features are not supported on Amazon RDS:
 + Authentication plugin – Unix Socket
 + AWS Key Management encryption plugin
 + Delayed replication
-+ Encryption at rest for XtraDB and InnoDB
++ Native MariaDB encryption at rest for XtraDB, InnoDB, and Aria\.
+
+  You can enable encryption at rest for a MariaDB DB instance by following the instructions in [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 + HandlerSocket
 + JSON table type
 + MariaDB ColumnStore

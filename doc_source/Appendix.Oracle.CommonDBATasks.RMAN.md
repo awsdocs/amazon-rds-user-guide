@@ -473,7 +473,7 @@ The following example performs an incremental backup of the DB instance using th
 
 ```
 BEGIN
-    rdsadmin.rdsadmin_rman_util.backup_database_incrmental(
+    rdsadmin.rdsadmin_rman_util.backup_database_incremental(
         p_owner               => 'MYDBADMIN', 
         p_directory_name      => 'MYDIRECTORY',
         p_level               => 1,
@@ -520,7 +520,7 @@ The following example performs a tablespace backup using the specified values fo
 
 ```
 BEGIN
-    rdsadmin.rdsadmin_rman_util.backup_database_incrmental(
+    rdsadmin.rdsadmin_rman_util.backup_database_incremental(
         p_owner               => 'MYDBADMIN', 
         p_directory_name      => 'MYDIRECTORY',
         p_tablespace          => MYTABLESPACE,

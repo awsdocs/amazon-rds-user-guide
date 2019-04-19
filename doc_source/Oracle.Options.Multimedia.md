@@ -42,7 +42,7 @@ There is a brief outage while the `MULTIMEDIA` option is added\. After you add t
 
    1. For **Engine**, choose **oracle\-ee**\. 
 
-   1. For **Major engine version**, choose **11\.2** or **12\.1** for your DB instance\. 
+   1. For **Major engine version**, choose the version of your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

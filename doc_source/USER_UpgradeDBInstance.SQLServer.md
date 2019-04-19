@@ -33,7 +33,7 @@ During a minor or major version upgrade of SQL Server, the **Free Storage Space*
 
 Amazon RDS currently supports the following major version upgrades to a Microsoft SQL Server DB instance\. 
 
-You can upgrade your existing DB instance to SQL Server 2017 from any version except SQL Server 2008\. To upgrade from SQL Server 2008, first upgrade to one of the other versions first\.
+You can upgrade your existing DB instance to SQL Server 2017 from any version except SQL Server 2008\. To upgrade from SQL Server 2008, first upgrade to one of the other versions\.
 
 
 ****  

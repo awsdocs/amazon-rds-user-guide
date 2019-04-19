@@ -122,4 +122,4 @@ The following table contains details about which settings you can modify, which 
 ## Related Topics<a name="USER_ModifyInstance.Postgres.RelatedTopics"></a>
 + [[Rebooting a DB Instance](USER_RebootInstance.md)](USER_RebootInstance.md) 
 + [[Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)](USER_ConnectToPostgreSQLInstance.md)
-+ [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)
++ [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)

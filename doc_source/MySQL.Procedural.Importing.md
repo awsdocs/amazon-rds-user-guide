@@ -6,7 +6,7 @@ You can find the supported scenario in the following diagram\.
 
 ![\[MySQL importing backup files from S3 architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-bak-file.png)
 
-Importing backup files from Amazon S3 is supported for MySQL version 5\.6\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
+Importing backup files from Amazon S3 is supported for MySQL version 5\.6 and 5\.7\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
 
 We recommend that you import your database to Amazon RDS by using backup files if your database can be offline while the backup file is created, copied, and restored\. If your on\-premises database can't be offline, you can use binlog replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 
@@ -16,7 +16,7 @@ The following are some limitations and recommendations for importing backup file
 + You can only import your data to a new DB instance, not an existing DB instance\. 
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
-+ You can't import a MySQL 5\.5, 5\.7, or 8\.0 database\. 
++ You can't import a MySQL 5\.5 or 8\.0 database\. 
 + You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore databases larger than 6 TB in size\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
@@ -41,13 +41,14 @@ If you already have an Amazon S3 bucket, you can use that\. If you don't have an
 
 Use the Percona XtraBackup tool to create your backup\. For more information, see [Creating Your Database Backup](#MySQL.Procedural.Importing.Backup)\. 
 
-If you already have an IAM role, you can use that\. If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you in your account by the wizard when you restore the database by using the AWS Management Console\. If you want to create a new IAM role manually, or attach trust and permissions policies to an existing IAM role, see [Creating an IAM Role Manually](#MySQL.Procedural.Importing.Enabling.IAM)\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console)\. 
+If you already have an IAM role, you can use that\. If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you in your account by the wizard when you restore the database by using the AWS Management Console\. If you want to create a new IAM role manually, or attach trust and permissions policies to an existing IAM role, see [Creating an IAM Role Manually](#MySQL.Procedural.Importing.Enabling.IAM)\. If you want to have a new IAM role created for you, follow the procedure in [Console](#MySQL.Procedural.Importing.Console)\. 
 
 ## Creating Your Database Backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
-Use the Percona XtraBackup software to create your backup\. For MySQL 5\.6, Amazon RDS supports backup files created with Percona XtraBackup version 2\.3\. 
+Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
 
-We recommend that if you don't already have Percona XtraBackup installed, you use the latest version of the software available\. You can download Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
+**Note**  
+For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.
 
 You can create a full backup of your MySQL database files using Percona XtraBackup\. Alternatively, if you already use Percona XtraBackup to back up your MySQL database files, you can upload your existing full and incremental backup directories and files\. 
 
@@ -110,11 +111,11 @@ Amazon RDS supports incremental backups created using Percona XtraBackup\. For m
 
 ## Creating an IAM Role Manually<a name="MySQL.Procedural.Importing.Enabling.IAM"></a>
 
-If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console)\. 
+If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [Console](#MySQL.Procedural.Importing.Console)\. 
 
 To manually create a new IAM role for importing your database from Amazon S3, create a role to delegate permissions from Amazon RDS to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. To import your backup files from Amazon S3, use trust and permissions policies similar to the examples following\. For more information about creating the role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
-Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [AWS Management Console](#MySQL.Procedural.Importing.Console) 
+Alternatively, you can choose to have a new IAM role created for you by the wizard when you restore the database by using the AWS Management Console\. If you want to have a new IAM role created for you, follow the procedure in [Console](#MySQL.Procedural.Importing.Console) 
 
 The trust and permissions policies require that you provide an Amazon Resource Name \(ARN\)\. For more information about ARN formatting, see [Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
 
@@ -178,7 +179,11 @@ The trust and permissions policies require that you provide an Amazon Resource N
 ```
 If you include a file name prefix, include the asterisk \(\*\) after the prefix\. If you don't want to specify a prefix, specify only an asterisk\. 
 
-## AWS Management Console<a name="MySQL.Procedural.Importing.Console"></a>
+## Importing Data From Amazon S3 to a New MySQL DB Instance<a name="MySQL.Procedural.Importing.PerformingImport"></a>
+
+You can import data from Amazon S3 to a new MySQL DB instance using the AWS Management Console, AWS CLI, or RDS API\.
+
+### Console<a name="MySQL.Procedural.Importing.Console"></a>
 
 **To import data from Amazon S3 to a new MySQL DB instance**
 
@@ -192,7 +197,7 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
    The wizard opens on the **Select engine** page\. 
 
-1. On the **Select engine** page, choose the MySQL icon, and then choose **Next**\. 
+1. On the **Select engine** page, choose **MySQL**, and then choose **Next**\. 
 
    The **Specify source backup details** page appears\.   
 ![\[The page where you specify the details for your source database backup\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mys-s3-ingestion.png)
@@ -209,9 +214,9 @@ If you include a file name prefix, include the asterisk \(\*\) after the prefix\
 
    1. For **Create a new role**, choose **Yes** to create a new IAM role in your account, or choose **No** to select an existing IAM role\. 
 
-   1. For **IAM role**, select an existing IAM role, or specify the name for a new IAM role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a New Role**\. 
+   1. For **IAM role**, select an existing IAM role, or for **IAM role name**, specify the name for a new IAM role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a new role**\. 
 
-1. Choose **Next** to continue\. The **Specify DB Details** page appears\. 
+1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
 
    On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
 **Note**  
@@ -223,7 +228,7 @@ Be sure to allocate enough memory for your new DB instance so that the restore c
 
 1. Choose **Create database**\. 
 
-## CLI<a name="MySQL.Procedural.Importing.CLI"></a>
+### AWS CLI<a name="MySQL.Procedural.Importing.CLI"></a>
 
 To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, call the [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) command with the parameters following\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
 
@@ -275,10 +280,6 @@ For Windows:
 12. --source-engine-version 5.6.40
 ```
 
-## API<a name="MySQL.Procedural.Importing.API"></a>
+### RDS API<a name="MySQL.Procedural.Importing.API"></a>
 
 To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) action\. 
-
-## Related Topics<a name="MySQL.Procedural.Importing.Related"></a>
-+ [Importing Data into a MySQL DB InstanceImporting Data into a MySQL DB Instance](MySQL.Procedural.Importing.Other.md)
-+ [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)

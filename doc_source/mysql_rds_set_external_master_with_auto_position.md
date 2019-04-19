@@ -80,7 +80,7 @@ When run on a MySQL DB instance, the following example configures the DB instanc
 call mysql.rds_set_external_master_with_auto_position(
   'Externaldb.some.com',
   3306,
-  'repl_user'@'mydomain.com',
+  'repl_user',
   'SomePassW0rd',
   0,
   3600);

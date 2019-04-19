@@ -7,6 +7,15 @@ You can use Oracle JVM with the following Oracle Database versions:
 + Oracle 12c, 12\.1\.0\.2\.v13 or later
 + Oracle 11g, 11\.2\.0\.4\.v17 or later
 
+Java implementation in Amazon RDS has a limited set of permissions\. The master user is granted the `RDS_JAVA_ADMIN` role, which grants a subset of the privileges granted by the `JAVA_ADMIN` role\. To list the privileges granted to the `RDS_JAVA_ADMIN` role, run the following query on your DB instance:
+
+```
+SELECT * FROM dba_java_policy 
+   WHERE grantee IN ('RDS_JAVA_ADMIN', 'PUBLIC') 
+   AND enabled = 'ENABLED' 
+   ORDER BY type_name, name, grantee;
+```
+
 ## Prerequisites for Oracle JVM<a name="oracle-options-java.prerequisites"></a>
 
 The following are prerequisites for using Oracle Java:
@@ -37,7 +46,7 @@ There is a brief outage while the `JVM` option is added\. After you add the opti
 
 1. Determine the option group that you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group with the following settings: 
    + For **Engine**, choose the DB engine used by the DB instance \(**oracle\-ee**, **oracle\-se**, **oracle\-se1**, or **oracle\-se2**\)\. 
-   + For **Major engine version**, choose **11\.2** or **12\.1** for your DB instance\. 
+   + For **Major engine version**, choose the version of your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

@@ -90,7 +90,7 @@ When run on a MySQL DB instance, the following example configures the DB instanc
 call mysql.rds_set_external_master_with_delay(
   'Externaldb.some.com',
   3306,
-  'repl_user'@'mydomain.com',
+  'repl_user',
   'SomePassW0rd',
   'mysql-bin-changelog.000777',
   120,

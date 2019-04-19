@@ -15,7 +15,7 @@ You can specify a Multi\-AZ deployment using the CLI as well\. Use the AWS CLI [
 
 The RDS console shows the Availability Zone of the standby replica \(called the secondary AZ\), or you can use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to find the secondary AZ\.
 
-DB instances using Multi\-AZ deployments may have increased write and commit latency compared to a Single\-AZ deployment, due to the synchronous data replication that occurs\. You may have a change in latency if your deployment fails over to the standby replica, although AWS is engineered with low\-latency network connectivity between Availability Zones\. For production workloads, we recommend that you use Provisioned IOPS and DB instance classes \(m1\.large and larger\) that are optimized for Provisioned IOPS for fast, consistent performance\.
+DB instances using Multi\-AZ deployments may have increased write and commit latency compared to a Single\-AZ deployment, due to the synchronous data replication that occurs\. You may have a change in latency if your deployment fails over to the standby replica, although AWS is engineered with low\-latency network connectivity between Availability Zones\. For production workloads, we recommend that you use Provisioned IOPS and DB instance classes that are optimized for Provisioned IOPS for fast, consistent performance\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
 ## Modifying a DB Instance to Be a Multi\-AZ Deployment<a name="Concepts.MultiAZ.Migrating"></a>
 
@@ -28,6 +28,9 @@ Once the modification is complete, Amazon RDS triggers an event \(RDS\-EVENT\-00
 In the event of a planned or unplanned outage of your DB instance, Amazon RDS automatically switches to a standby replica in another Availability Zone if you have enabled Multi\-AZ\. The time it takes for the failover to complete depends on the database activity and other conditions at the time the primary DB instance became unavailable\. Failover times are typically 60\-120 seconds\. However, large transactions or a lengthy recovery process can increase failover time\. When the failover is complete, it can take additional time for the RDS console UI to reflect the new Availability Zone\.
 
 The failover mechanism automatically changes the DNS record of the DB instance to point to the standby DB instance\. As a result, you need to re\-establish any existing connections to your DB instance\. Due to how the Java DNS caching mechanism works, you may need to reconfigure your JVM environment\. For more information on how to manage a Java application that caches DNS values in the case of a failover, see the [AWS SDK for Java](https://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-jvm-ttl.html)\. 
+
+**Note**  
+You can force a failover manually when you reboot a DB instance\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
 Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention\. The primary DB instance switches over automatically to the standby replica if any of the following conditions occur: 
 + An Availability Zone outage 

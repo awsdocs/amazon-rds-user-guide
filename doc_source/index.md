@@ -255,7 +255,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
    + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
    + [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
-   + [Upgrading the PostgreSQL DB Engine](USER_UpgradeDBInstance.PostgreSQL.md)
+   + [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
    + [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)
    + [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
    + [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)

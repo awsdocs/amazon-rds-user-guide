@@ -176,9 +176,9 @@ The following parameters are required:
   The file can have any extension, but `.bak` is traditional\. 
 
 **The following parameters are optional: **
-+ `@kms_master_key_arn` – The key to encrypt the backup \(KMS customer master key ARN\)\. 
++ `@kms_master_key_arn` – The key to encrypt the backup \(KMS customer master key ARN\)\. If you don't specify an AWS KMS key identifier, then Amazon RDS uses your default encryption key for your new DB instance\. AWS KMS creates your default encryption key for Amazon RDS for your AWS account\. Your AWS account has a different default encryption key for each AWS Region\. 
 
-  For more information about encryption keys, see [ Getting Started ](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
+  For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\. 
 + `@overwrite_S3_backup_file` – Defaults to `0`
   + `0` – Don't overwrite the existing file\. Return an error instead if the file already exists\. 
   + `1` – Overwrite an existing file that has the specified name, even if it isn't a backup file\. 

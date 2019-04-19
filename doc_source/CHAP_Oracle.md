@@ -109,7 +109,15 @@ The following are the DB instance classes supported for Oracle\.
 |  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
 |  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
 
-### Deprecated DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
+### Deprecated db\.m3 and db\.r3 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedM3R3"></a>
+
+ The db\.m3 and db\.r3 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 30, 2019, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
+
+If you have DB instances that use db\.m3 and db\.r3 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+
+If you have DB snapshots of DB instances that were using db\.m3 or db\.r3 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
+
+### Deprecated db\.m1 and db\.m2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
 
  The db\.m1 and db\.m2 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 12, 2018, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
 
@@ -176,7 +184,7 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |  [ inmemory\_expressions\_usage](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/INMEMORY_EXPRESSIONS_USAGE.html#GUID-9B926459-CA8A-4843-B9A1-4DE6F630EB45)  | STATIC\_ONLY, DYNAMIC\_ONLY,ENABLE \(default\), DISABLE | Y | Controls which In\-Memory Expressions \(IM expressions\) are populated into the In\-Memory Column Store \(IM column store\) and are available for queries\. | 
 |  [ inmemory\_virtual\_columns](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/INMEMORY_VIRTUAL_COLUMNS.html#GUID-1B066B16-4F22-4D9D-9D82-AF7B786DB97E)  | ENABLE, MANUAL \(default\), DISABLE | Y | Controls which In\-Memory Expressions \(IM expressions\) are populated into the In\-Memory Column Store \(IM column store\) and are available for queries\. | 
 |  [ instance\_abort\_delay\_time](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/INSTANCE_ABORT_DELAY_TIME.html#GUID-F15A6EC9-1F4F-4DB7-9981-FFC1F181559F)  | 0 \(default\) and higher | Y | Specifies how much time to delay an internal initiated instance abort \(in seconds\), such as when a fatal process dies or an unrecoverable instance error occurs\. | 
-|  [ istance\_mode](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/INSTANCE_MODE.html#GUID-77461EFC-0925-4511-AD4C-426CF842B4FD)  | READ\-WRITE \(default\), READ\-ONLY, READ\-MOSTLY | N | Indicates whether the instance is read\-write, read\-only, or read\-mostly\. | 
+|  [ instance\_mode](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/INSTANCE_MODE.html#GUID-77461EFC-0925-4511-AD4C-426CF842B4FD)  | READ\-WRITE \(default\), READ\-ONLY, READ\-MOSTLY | N | Indicates whether the instance is read\-write, read\-only, or read\-mostly\. | 
 |  [ long\_module\_action](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/LONG_MODULE_ACTION.html#GUID-DA943655-E516-44A3-8D11-A86E5EF5F585)  | TRUE \(default\), FALSE | Y | Enables the use of longer lengths for modules and actions\. | 
 |  [ max\_idle\_time](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/MAX_IDLE_TIME.html#GUID-9E26A81D-D99E-4EA8-88DE-77AF68482A20)  | 0 \(default\) to the maximum integer\. The value of 0 indicates that there is no limit\. | Y | Specifies the maximum number of minutes that a session can be idle\. After that point, the session is automatically terminated\.  | 
 |  [ optimizer\_adaptive\_plans](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OPTIMIZER_ADAPTIVE_PLANS.html#GUID-58C3E867-36BA-449A-B452-4E90FE6DCF05)  | TRUE \(default\), FALSE | Y | Controls adaptive plans\. Adaptive plans are execution plans built with alternative choices that are decided at run time based on statistics collected as the query executes\. | 
@@ -594,14 +602,82 @@ Note the following about working with outbound network access:
 + To use `utl_http` on DB instances running Oracle 11g, you must install the XMLDB option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 + Outbound network access with `utl_http`, `utl_tcp`, and `utl_smtp` is supported only for Oracle DB instances in a VPC\. To determine whether or not your DB instance is in a VPC, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. To move a DB instance not in a VPC into a VPC, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 + To use SMTP with the UTL\_MAIL option, see [Oracle UTL\_MAIL](Oracle.Options.UTLMAIL.md)\.
-+ To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [ Provisioning Oracle Wallets and Accessing SSL/TLS\-Based Endpoints on Amazon RDS for Oracle](https://d1.awsstatic.com/whitepapers/provisioning-oracle-wallets-on-amazon-rds.pdf)\.
-
-  The specific certificates that are required for your wallet vary by service\. For AWS services, these can typically be found in the [Amazon Trust Services Repository](https://www.amazontrust.com/repository/)\.
 + The Domain Name Server \(DNS\) name of the remote host can be any of the following: 
   + Publicly resolvable\.
   + The endpoint of an Amazon RDS DB instance\.
   + Resolvable through a custom DNS server\. For more information, see [Setting Up a Custom DNS Server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\. 
   + The private DNS name of an Amazon EC2 instance in the same VPC or a peered VPC\. In this case, make sure that the name is resolvable through a custom DNS server\. Alternatively, to use the DNS provided by Amazon, you can enable the `enableDnsSupport` attribute in the VPC settings and enable DNS resolution support for the VPC peering connection\. For more information, see [DNS Support in Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support) and [Modifying Your VPC Peering Connection](https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html#modify-peering-connections)\. 
+
+To connect securely to remote SSL/TLS resources, you can create and upload customized Oracle wallets\. By using the Amazon S3 integration with Amazon RDS for Oracle feature, you can download a wallet from Amazon S3 into Oracle DB instances\. For information about Amazon S3 integration for Oracle, see [Amazon S3 Integration](oracle-s3-integration.md)\.
+
+The following example creates a wallet for accessing [ https://status\.aws\.amazon\.com/robots\.txt](https://status.aws.amazon.com/robots.txt) over `utl_http`\.
+
+1. Obtain the certificate for `Amazon Root CA 1` from the [ Amazon Trust Services Repository](https://www.amazontrust.com/repository/)\.
+
+1. Create a new wallet and add the following certificate:
+
+   ```
+   orapki wallet create -wallet . -auto_login_only 
+   orapki wallet add -wallet . -trusted_cert -cert AmazonRootCA1.pem.pem -
+   auto_login_only orapki wallet display -wallet .
+   ```
+
+1. Upload the wallet to your Amazon S3 bucket\.
+
+1. Complete the prerequisites for Amazon S3 integration with Oracle, and add the `S3_INTEGRATION` option to your Oracle DB instance\. Ensure that the IAM role for the option has access to the Amazon S3 bucket you are using\.
+
+   For more information, see [Amazon S3 Integration](oracle-s3-integration.md)\.
+
+1. Connect to the DB instance, and create a directory in the database to hold the wallet\. The following example creates a directory called `SSL_WALLET`:
+
+   ```
+   exec rdsadmin.rdsadmin_util.create_directory('SSL_WALLET');                        
+   ```
+
+1. Download the wallet from your Amazon S3 bucket to the Oracle DB instance\.
+
+   The following example downloads a wallet to the DB instance directory `SSL_WALLET`:
+
+   ```
+   SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
+         p_bucket_name    =>  'bucket_name', 
+         p_s3_prefix      =>  'wallet_name', 
+         p_directory_name =>  'SSL_WALLET') 
+      AS TASK_ID FROM DUAL;
+   ```
+
+   Replace *bucket\_name* with the name of the bucket you are using, and replace *wallet\_name* with the name of the wallet\.
+
+1. Set this wallet for `utl_http` transactions by running the following procedure:
+
+   ```
+   DECLARE
+   	l_wallet_path all_directories.directory_path%type;
+   BEGIN
+   	select directory_path into l_wallet_path from all_directories
+   	where upper(directory_name)='SSL_WALLET';
+    	
+    	utl_http.set_wallet('file:/' || l_wallet_path);
+   END;
+   ```
+
+1. Access the URL from above over SSL/TLS\.
+
+   ```
+   SELECT utl_http.request('https://status.aws.amazon.com/robots.txt') AS ROBOTS_TXT FROM DUAL;
+   
+   ROBOTS_TXT
+   --------------------------------------------------------------------------------
+   User-agent: *
+   Allow: /
+   ```
+
+**Note**  
+The specific certificates that are required for your wallet vary by service\. For AWS services, the certificates can typically be found in the [Amazon Trust Services Repository](https://www.amazontrust.com/repository/)\.
+
+You can use a similar setup to send emails through UTL\_SMTP over SSL/TLS \(including [ Amazon Simple Email Service](https://aws.amazon.com/ses/)\)\.
+
+You can establish database links between Oracle DB instances over an SSL/TLS endpoint if the Oracle SSL option is configured for each instance\. No further configuration is required\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 
 ## Using OEM, APEX, TDE, and Other Options<a name="Oracle.Concepts.General.Options"></a>
 

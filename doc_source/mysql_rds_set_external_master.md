@@ -64,8 +64,6 @@ This parameter currently is only implemented for Amazon Aurora with MySQL compat
    IDENTIFIED BY 'password'
    ```
 
-For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
-
 To use encrypted replication, configure the master to use SSL connections\. Also, import the certificate authority certificate, client certificate, and client key into the DB instance or DB cluster using the [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md) procedure\.
 
 **Note**  
@@ -83,7 +81,7 @@ When run on a MySQL DB instance, the following example configures the DB instanc
 call mysql.rds_set_external_master(
   'Externaldb.some.com',
   3306,
-  'repl_user'@'mydomain.com',
+  'repl_user',
   'password',
   'mysql-bin-changelog.0777',
   120,

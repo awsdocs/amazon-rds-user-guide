@@ -61,7 +61,7 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
 
    1. For **Engine**, choose the Oracle edition that you want to use\. The APEX options are supported on all editions\. 
 
-   1. For **Major engine version**, choose **11\.2** or **12\.1**\. 
+   1. For **Major engine version**, choose the version of your DB instance\. 
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 

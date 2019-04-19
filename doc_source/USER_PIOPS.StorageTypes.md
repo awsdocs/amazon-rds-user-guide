@@ -106,7 +106,7 @@ To change the type of storage for a DB instance, use the Amazon RDS API [https:/
 
 ## Modifying Provisioned IOPS SSD storage settings<a name="User_PIOPS.Increase"></a>
 
-You can modify the settings for a DB instance that uses Provisioned IOPS SSD Storage by using the AWS Management Console, the Amazon RDS API, or the AWS CLI\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose between 1,000 IOPS and 100 GiB of storage up to 40,000 IOPS and 32 TiB \(32768 GiB\) of storage, depending on your database engine\. 
+You can modify the settings for a DB instance that uses Provisioned IOPS SSD Storage by using the AWS Management Console, the Amazon RDS API, or the AWS CLI\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose between 1,000 IOPS and 100 GiB of storage up to 80,000 IOPS and 64 TiB \(64000 GiB\) of storage, depending on your database engine and instance type\. 
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
 

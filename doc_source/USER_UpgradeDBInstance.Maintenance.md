@@ -1,17 +1,25 @@
 # Maintaining a DB Instance<a name="USER_UpgradeDBInstance.Maintenance"></a>
 
-Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB instance's underlying operating system \(OS\) or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
+Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB instance's underlying hardware, underlying operating system \(OS\), or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
 
 Some maintenance items require that Amazon RDS take your DB instance offline for a short time\. Maintenance items that require a resource to be offline include required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
 
 Deferred DB instance modifications that you have chosen not to apply immediately are applied during the maintenance window\. For example, you may choose to change the DB instance class or parameter group during the maintenance window\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
-You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated by the word **available** or **required** in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\. 
+You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\. 
 
 ![\[Offline patch available\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailable.png)
 
+If no maintenance update is available for a DB instance, the column value is **none** for it\.
+
+If a maintenance update is available for a DB instance, the following column values are possible:
++ **required** – The maintenance action will be applied to the resource and can't be deferred\.
++ **available** – The maintenance action is available, but it will not be applied to the resource automatically\. You can apply it manually\.
++ **next window** – The maintenance action will be applied to the resource during the next maintenance window\.
++ **In progress** – The maintenance action is in the process of being applied to the resource\.
+
 If an update is available, you can take one of the actions: 
-+ Defer the maintenance items\.
++ If the maintenance value is **next window**, defer the maintenance items by choosing **defer upgrade** from **Actions**\.
 + Apply the maintenance items immediately\.
 + Schedule the maintenance items to start during your next maintenance window\.
 + Take no action\.
@@ -19,13 +27,17 @@ If an update is available, you can take one of the actions:
 **Note**  
 Certain OS updates are marked as **required**\. If you defer a required update, you get a notice from Amazon RDS indicating when the update will be performed\. Other updates are marked as **available**, and these you can defer indefinitely\.
 
+To take an action, choose the DB instance to show its details, then choose **Maintenance & backups**\. The pending maintenance items appear\.
+
+![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailabledetails.png)
+
 The maintenance window determines when pending operations start, but doesn't limit the total execution time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
 ## Applying Updates for a DB Instance<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
 With Amazon RDS, you can choose when to apply maintenance operations\. You can decide when Amazon RDS applies updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 
-### AWS Management Console<a name="USER_UpgradeDBInstance.OSUpgrades.Console"></a>
+### Console<a name="USER_UpgradeDBInstance.OSUpgrades.Console"></a>
 
 **To manage an update for a DB instance**
 
@@ -41,7 +53,7 @@ With Amazon RDS, you can choose when to apply maintenance operations\. You can d
 **Note**  
 If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\.
 
-### CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
+### AWS CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
 To apply a pending update to a DB instance, use the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command\.
 
@@ -101,7 +113,7 @@ aws rds describe-pending-maintenance-actions ^
 	--filters Name=db-instance-id,Values=sample-instance1,sample-instance2
 ```
 
-### API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
+### RDS API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
 
 To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) action\.
 
@@ -143,7 +155,7 @@ In the following example, you adjust the preferred maintenance window for a DB i
 
 For the purpose of this example, we assume that the DB instance named *mydbinstance* exists and has a preferred maintenance window of "Sun:05:00\-Sun:06:00" UTC\. 
 
-### AWS Management Console<a name="AdjustingTheMaintenanceWindow.CON"></a>
+### Console<a name="AdjustingTheMaintenanceWindow.CON"></a>
 
 **To adjust the preferred maintenance window**
 
@@ -167,7 +179,7 @@ The maintenance window and the backup window for the DB instance cannot overlap\
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-### CLI<a name="AdjustingTheMaintenanceWindow.CLI"></a>
+### AWS CLI<a name="AdjustingTheMaintenanceWindow.CLI"></a>
 
 To adjust the preferred maintenance window, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters:
 + `--db-instance-identifier`
@@ -190,7 +202,7 @@ aws rds modify-db-instance ^
 --preferred-maintenance-window Tue:04:00-Tue:04:30
 ```
 
-### API<a name="AdjustingTheMaintenanceWindow.API"></a>
+### RDS API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
 To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters:
 + `DBInstanceIdentifier = mydbinstance`

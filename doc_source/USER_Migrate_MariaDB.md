@@ -2,13 +2,12 @@
 
 You can migrate an Amazon RDS MySQL DB snapshot to a new DB instance running MariaDB 10\.1 using the AWS Management Console, AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6\. To learn how to create an RDS MySQL DB snapshot, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\.
 
-After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associated with the default DB parameter group and option group\. After you restore the DB snapshot, you can associate a custom DB parameter group for the new DB instance\. However, a MariaDB parameter group has a different set of configurable system variables\. For information about the differences between MySQL and MariaDB system variables, see [ System Variable Differences Between MariaDB 10\.0 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-100-and-mysql-56/)\. To learn about DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To learn about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
+After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associated with the default DB parameter group and option group\. After you restore the DB snapshot, you can associate a custom DB parameter group for the new DB instance\. However, a MariaDB parameter group has a different set of configurable system variables\. For information about the differences between MySQL and MariaDB system variables, see [ System Variable Differences Between MariaDB 10\.1 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-101-and-mysql-56/)\. To learn about DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To learn about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
 
 ## Incompatibilities Between MariaDB and MySQL<a name="USER_Migrate_MariaDB.Incompatibilities"></a>
 
 Incompatibilities between MySQL and MariaDB include the following:
 + You can't migrate a DB snapshot created with MySQL 5\.5 to MariaDB 10\.1\.
-+ You can't migrate a DB snapshot created with MySQL 5\.6\.40 or higher 5\.6 version to MariaDB\.
 + You can't migrate a DB snapshot created with MySQL 5\.7 to MariaDB\.
 + You can't migrate a DB snapshot created with MySQL 8\.0 to MariaDB\.
 + You can't migrate an encrypted snapshot\.
@@ -121,9 +120,3 @@ To migrate data from a MySQL DB snapshot to a MariaDB DB instance, call the Amaz
 12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
 13.    &X-Amz-Signature=78ac761e8c8f54a8c0727f4e67ad0a766fbb0024510b9aa34ea6d1f7df52fe92
 ```
-
-## Related Topics<a name="USER_Migrate_MariaDB.related"></a>
-+  [Creating a DB Snapshot](USER_CreateSnapshot.md) 
-+  [ System Variable Differences Between MariaDB 10\.0 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-100-and-mysql-56/) 
-+  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) 
-+  [Working with Option Groups](USER_WorkingWithOptionGroups.md) 

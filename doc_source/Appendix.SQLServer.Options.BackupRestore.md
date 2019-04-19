@@ -31,11 +31,19 @@ After you add the Native Backup and Restore option, you don't need to restart yo
 
 1. Add the **SQLSERVER\_BACKUP\_RESTORE** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
-   1. For **IAM Role**, choose an existing IAM role\. Alternatively, you can choose to have a new IAM role created for you by choosing **Create a New Role**\. 
+   Choose one of the following:
 
-   1. For **Select S3 Bucket**, choose an existing bucket\. Alternatively, you can choose to have a new Amazon S3 bucket created for you by choosing **Create a New S3 Bucket**\. 
+   1. **To use an existing role and Amazon S3 settings:**
 
-   1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. If you choose **Yes**, for **Master Key** you must also choose an encryption key\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
+      For **IAM Role**, choose an existing IAM role\. When you reuse an existing IAM role, RDS uses the Amazon S3 settings you previously configured for this role\. 
+
+   1. **To configure a new role and Amazon S3 settings:** 
+      + For **IAM Role**, choose **Create a New Role**\. 
+      + For **Select S3 Bucket**, you can either create one or use one you already have\. To create a new bucket, choose **Create a New S3 Bucket**\. To use an existing bucket, choose it from the list\. 
+      + For **S3 folder path prefix \(optional\)**, specify a a prefix to use for the files stored in your Amazon S3 bucket\. It can include a fild path, but it doesn't have to\. If you provide an entry, RDS attaches the prefix to all backup files, and uses the prefix during a restore to identify related files and to ignore irrelevant files \. If you are using the bucket for other purposes, you can use the prefix to limit native backup and restore so that RDS can access only a particular folder and its subfolders\. Using a prefix also allows you to focus on a subset of the files in a folder, by prefixing the file names\. 
+
+        If you leave the prefix blank, then RDS doesn't prefix your backup files, and doesn't use a prefix to identify files during a restore\. However, during a multi\-file restore, RDS attempts to restore every file in every folder of this bucket\. For example, if you want to use restore a database from multiple files, but you also want the bucket to contain other files unrelated to the backup, then you should specify a path prefix\. That way, RDS restores all the relevant files, and ignores the irrelevant files\. 
+      + For **Enable Encryption**, choose **Yes** to encrypt the backup file\. If you choose **Yes**, for **Master Key** you must also choose an encryption key\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the AWS Key Management Service \(AWS KMS\) documentation\. 
 
 1. Apply the option group to a new or existing DB instance:
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 

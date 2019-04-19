@@ -299,7 +299,7 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 | `p_min_lowercase` | number | 0 | Optional | The minimum number of lowercase letters required\. | 
 | `p_min_digits` | number | 1 | Optional | The minimum number of digits required\. | 
 | `p_min_special` | number | 0 | Optional | The minimum number of special characters required\. | 
-| `p_min_different_chars` | number | 3 | Optional | The minimum number of distinct characters required\. | 
+| `p_min_different_chars` | number | 3 | Optional | The minimum number of different characters required between the old and new password\. | 
 | `p_disallow_username` | boolean | true | Optional | Set to `true` to disallow the username in the password\. | 
 | `p_disallow_reverse` | boolean | true | Optional | Set to `true` to disallow the reverse of the username in the password\. | 
 | `p_disallow_db_name` | boolean | true | Optional | Set to `true` to disallow the database or server name in the password\. | 

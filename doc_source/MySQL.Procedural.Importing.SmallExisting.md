@@ -49,7 +49,7 @@ sudo mysqldump -u localuser \
     --single-transaction \
     --compress \
     --order-by-primary  \
-    -plocalpassword | mysql -u rdsuser
+    -plocalpassword | mysql -u rdsuser \
         --port=3306 \
         --host=myinstance.123456789012.us-east-1.rds.amazonaws.com \
         -prdspassword

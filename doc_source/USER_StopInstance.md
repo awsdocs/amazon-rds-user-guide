@@ -2,6 +2,9 @@
 
 If you use a DB instance intermittently, for temporary testing, or for a daily development activity, you can stop your Amazon RDS DB instance temporarily to save money\. While your DB instance is stopped, you are charged for provisioned storage \(including Provisioned IOPS\) and backup storage \(including manual snapshots and automated backups within your specified retention window\), but not for DB instance hours\. For more information, see [Billing FAQs](http://aws.amazon.com/rds/faqs/#billing)\. 
 
+**Note**  
+In some cases, a large amount of time is required to stop a DB instance\. If you want to stop your DB instance and restart it immediately, you can reboot the DB instance\. For information about rebooting a DB instance, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
+
 You can stop and start DB instances that are running the following engines: 
 + MariaDB
 + Microsoft SQL Server

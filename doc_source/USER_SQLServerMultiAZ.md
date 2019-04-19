@@ -7,8 +7,8 @@ Amazon RDS supports Multi\-AZ deployments for Microsoft SQL Server by using eith
 When you set up SQL Server Multi\-AZ, RDS automatically configures all databases on the instance to use Mirroring or Always On\. Amazon RDS handles the primary, the witness, and the secondary DB instance for you\. 
 
 Because configuration is automatic, RDS selects Mirroring or Always On based on the version of SQL Server that you deploy\. Amazon RDS supports Multi\-AZ with Mirroring or Always On for the following SQL Server versions and editions, with the noted exceptions:
-+ SQL Server 2017: Standard and Enterprise Editions \(Always On not yet supported\)
-+ SQL Server 2016: Standard and Enterprise Editions \(Always On only in 13\.00\.5216\.0 or later\)
++ SQL Server 2017: Standard and Enterprise Editions \(Always On is supported in Enterprise Edition 14\.00\.3049\.1 or later\.\)
++ SQL Server 2016: Standard and Enterprise Editions \(Always On is supported in Enterprise Edition 13\.00\.5216\.0 or later\.\) 
 + SQL Server 2014: Standard and Enterprise Editions
 + SQL Server 2012: Standard and Enterprise Editions
 + SQL Server 2008 R2: Standard and Enterprise Editions
@@ -123,6 +123,6 @@ You can also view the Availability Zone of the secondary using the AWS CLI comma
 
 ## Migrating from Mirroring to Always On<a name="USER_SQLServerMultiAZ.Migration"></a>
 
-To migrate from Mirroring to Always On, first check your version\. If you are using a DB instance with a version prior to 13\.00\.5216\.0, modify the instance to patch it to 13\.00\.5216\.0\.
+To migrate from Mirroring to Always On, first check your version\. If you are using a DB instance with a version prior to Enterprise Edition 13\.00\.5216\.0, modify the instance to patch it to 13\.00\.5216\.0 or later\. 
 
 To upgrade to Always On, modify the instance to remove Multi\-AZ, and then modify it again to add Multi\-AZ\. This converts your instance to use AlwaysOn\. 
