@@ -16,7 +16,7 @@ For information about using Amazon Aurora, see the [Amazon Aurora User Guide](ht
 
 **Note**  
 Amazon RDS Performance Insights is not supported for MariaDB 10\.0, MariaDB 10\.1, MariaDB 10\.3, MySQL 5\.5, or MySQL 8\.0\.  
-For Amazon RDS MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.
+On Aurora MySQL, Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes\.
 
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS for MariaDB, Amazon RDS for MySQL, Amazon RDS for Oracle, Amazon RDS for SQL Server, Amazon Aurora PostgreSQL, and Amazon RDS for PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
 
