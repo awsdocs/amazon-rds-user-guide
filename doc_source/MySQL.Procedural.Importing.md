@@ -45,7 +45,7 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 
 ## Creating Your Database Backup<a name="MySQL.Procedural.Importing.Backup"></a>
 
-Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/XtraBackup/LATEST/)\. 
+Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
 
 **Note**  
 For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.

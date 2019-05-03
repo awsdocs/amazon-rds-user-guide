@@ -47,7 +47,7 @@ The following table shows the event category and a list of events when a DB inst
 
 |  Category  | Amazon RDS Event ID |  Description  | 
 | --- | --- | --- | 
-|  availability  | RDS\-EVENT\-0006 |  The DB instance is restarting due to a previous controlled shutdown, or a recovery\. The DB instance will be unavailable until the restart completes\.  | 
+|  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
 |  availability  | RDS\-EVENT\-0004 |  The DB instance is undergoing a controlled shutdown\.  | 
 |  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
 |  backup  | RDS\-EVENT\-0001 |  A backup of the DB instance has started\.   | 

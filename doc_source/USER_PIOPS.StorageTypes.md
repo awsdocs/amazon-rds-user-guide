@@ -61,7 +61,7 @@ To increase storage for a DB instance, use the Amazon RDS API [https://docs.aws.
 
 You can change the type of storage for your DB instance by using the AWS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. 
 
-When you convert from one storage type to another, an outage occurs while the data for that DB instance is migrated to a new volume\. The duration of the migration depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned \(if any\)\. The typical migration time is a few minutes\. The DB instance is available for use during the migration\. 
+When you convert from one storage type to another, you might experience an outage at the beginning of the conversion process\. To learn the factors that might cause an outage in this case, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. The duration of the migration depends on several factors such as database load, storage size, storage type, and amount of IOPS provisioned \(if any\)\. The typical migration time is a few minutes\. The DB instance is available for use during the migration\.
 
 However, when you are migrating to or from magnetic storage, the migration time can take up to several days in some cases\. During the migration to or from magnetic storage, the DB instance is available for use, but might experience performance degradation\. 
 

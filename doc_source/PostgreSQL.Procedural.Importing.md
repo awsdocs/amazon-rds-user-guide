@@ -32,6 +32,11 @@ Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands wi
 **Note**  
 The PostgreSQL command `pg_dumpall` requires super\_user permissions that are not granted when you create a DB instance, so it cannot be used for importing data\.
 
+**Topics**
++ [Importing a PostgreSQL Database from an Amazon EC2 Instance](#PostgreSQL.Procedural.Importing.EC2)
++ [Using the \\copy Command to Import Data to a Table on a PostgreSQL DB Instance](#PostgreSQL.Procedural.Importing.Copy)
++ [Importing Amazon S3 Data into an RDS PostgreSQL DB Instance](USER_PostgreSQL.S3Import.md)
+
 ## Importing a PostgreSQL Database from an Amazon EC2 Instance<a name="PostgreSQL.Procedural.Importing.EC2"></a>
 
 If you have data in a PostgreSQL server on an Amazon EC2 instance and want to move it to a PostgreSQL DB instance, you can use the following process\. The following list shows the steps to take\. Each step is discussed in more detail in the following sections\.

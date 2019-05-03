@@ -41,7 +41,7 @@ When your storage requires more than the base performance I/O level, it uses I/O
 Suppose that your storage uses all of its I/O credit balance\. If so, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\. 
 
 **Note**  
-Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage](USER_PIOPS.StorageTypes.md)\. 
+Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage](USER_PIOPS.StorageTypes.md#USER_PIOPS.StorageTypes.title)\. 
 
 The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
 

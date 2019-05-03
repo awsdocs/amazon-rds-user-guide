@@ -4,7 +4,7 @@ Amazon RDS provides newer versions of each supported database engine so you can 
 
 There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a *major engine version upgrade* can introduce changes that are not compatible with existing applications\. In contrast, a *minor version upgrade* includes only changes that are backward\-compatible with existing applications\.
 
-The version numbering sequence is specific for each database engine\. For example, Amazon RDS MySQL 5\.7 and 8\.0 are major engine versions and upgrading from any 5\.7 version to any 8\.0 version is a major version upgrade\. Amazon RDS MySQL version 5\.7\.22 and 5\.7\.23 are minor versions and upgrading from 5\.7\.22 to 5\.7\.23 is a minor version upgrade\.
+The version numbering sequence is specific to each database engine\. For example, Amazon RDS MySQL 5\.7 and 8\.0 are major engine versions and upgrading from any 5\.7 version to any 8\.0 version is a major version upgrade\. Amazon RDS MySQL version 5\.7\.22 and 5\.7\.23 are minor versions and upgrading from 5\.7\.22 to 5\.7\.23 is a minor version upgrade\.
 
 For more information about major and minor version upgrades for a specific DB engine, see the following documentation for your DB engine: 
 + [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)

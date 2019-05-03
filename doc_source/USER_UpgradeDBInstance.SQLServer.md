@@ -17,6 +17,7 @@ For information about what SQL Server versions are available on Amazon RDS, see 
 + [Option and Parameter Group Considerations](#USER_UpgradeDBInstance.SQLServer.OGPG)
 + [Testing an Upgrade](#USER_UpgradeDBInstance.SQLServer.UpgradeTesting)
 + [Upgrading a SQL Server DB Instance](#USER_UpgradeDBInstance.SQLServer.Upgrading)
++ [Upgrading Deprecated DB Instances Before Support Ends](#USER_UpgradeDBInstance.SQLServer.DeprecatedVersions)
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.SQLServer.Overview"></a>
 
@@ -40,9 +41,10 @@ You can upgrade your existing DB instance to SQL Server 2017 from any version ex
 
 | Current Version | Supported Upgrade Versions | 
 | --- | --- | 
-|  SQL Server 2014  |  SQL Server 2017 SQL Server 2016  | 
+|  SQL Server 2016  |  SQL Server 2017  | 
+| SQL Server 2014 |  SQL Server 2017 SQL Server 2016  | 
 |  SQL Server 2012  |  SQL Server 2017 SQL Server 2016 SQL Server 2014  | 
-|  SQL Server 2008 R2  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
+|  SQL Server 2008 R2 \(Deprecated\)  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
 
 ### Database Compatibility Level<a name="USER_UpgradeDBInstance.SQLServer.Major.Compatibility"></a>
 
@@ -58,7 +60,7 @@ You can change the compatibility level of a database by using the ALTER DATABASE
 
 ## Multi\-AZ and In\-Memory Optimization Considerations<a name="USER_UpgradeDBInstance.SQLServer.MAZ"></a>
 
-Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring or Always On\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\. 
+Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\. 
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. Amazon RDS does rolling upgrades\. You have an outage only for the duration of a failover\. 
 
@@ -110,4 +112,15 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 
 ## Upgrading a SQL Server DB Instance<a name="USER_UpgradeDBInstance.SQLServer.Upgrading"></a>
 
-For information about manually or automatically upgrading a SQL Server DB instance, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+For information about manually or automatically upgrading a SQL Server DB instance, see the following:
++ [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)
++ [Best practices for upgrading SQL Server 2008 R2 to SQL Server 2016 on Amazon RDS for SQL Server](https://aws.amazon.com/blogs/database/best-practices-for-upgrading-sql-server-2008-r2-to-sql-server-2016-on-amazon-rds-for-sql-server/)
+
+**Important**  
+If you have any snapshots that are encrypted using KMS, we recommend that you initiate an upgrade before support ends\. 
+
+## Upgrading Deprecated DB Instances Before Support Ends<a name="USER_UpgradeDBInstance.SQLServer.DeprecatedVersions"></a>
+
+After a major version is deprecated, you can’t install it on new DB instances\. RDS will try to automatically upgrade all existing DB instances\. 
+
+If you need to restore a deprecated DB instance, you can do a point\-in\-time restore \(PITR\) or restore a snapshot\. Doing this gives you temporary access a DB instance that uses the version that is being deprecated\. However, after a major version is fully deprecated, these DB instances will also be automatically upgraded to a supported version\. 

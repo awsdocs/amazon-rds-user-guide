@@ -75,9 +75,9 @@ To allow access to the DB instance from the appropriate clients, ensure that you
    prompt>mkdir $ORACLE_HOME/ssl_wallet 
    ```
 
-1. Download the RDS CA certificates file from [https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem) and then put the file in the ssl\_wallet directory\.
+1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
 
-   The RDS CA certificates file for AWS GovCloud \(US\-West\) is available at [https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-ca\-2012\-us\-gov\-west\-1\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem)\.
+   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\.
 
 1. In the `$ORACLE_HOME/network/admin` directory, modify or create the tnsnames\.ora file and include the following entry\.
 
@@ -109,6 +109,8 @@ You can set `SSL_VERSION` to a higher value if your DB instance supports it\.
    prompt>orapki wallet add -wallet $ORACLE_HOME/ssl_wallet -trusted_cert -cert
          $ORACLE_HOME/ssl_wallet/rds-ca-2015-root.pem -auto_login_only
    ```
+
+   Replace the file name with the one you downloaded\.
 
 ## Connecting to an Oracle DB Instance Using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
 
@@ -153,13 +155,17 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 
 **To trust the Amazon RDS root CA certificate**
 
-1.  Download the Amazon RDS root CA certificate from [https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. 
+1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
+
+   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\.
 
 1.  Convert the certificate to \.der format using the following command\.
 
    ```
    openssl x509 -outform der -in rds-ca-2015-root.pem -out rds-ca-2015-root.der                    
    ```
+
+   Replace the file name with the one you downloaded\.
 
 1.  Import the certificate into the keystore using the following command\. 
 

@@ -258,6 +258,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
    + [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)
    + [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
+      + [Importing Amazon S3 Data into an RDS PostgreSQL DB Instance](USER_PostgreSQL.S3Import.md)
    + [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
 + [Limits for Amazon RDS](CHAP_Limits.md)
 + [Troubleshooting for Amazon RDS](CHAP_Troubleshooting.md)

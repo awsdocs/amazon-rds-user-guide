@@ -33,6 +33,9 @@ The general process for adding the MariaDB Audit Plugin to a DB instance is the 
 
 After you add the MariaDB Audit Plugin, you don't need to restart your DB instance\. As soon as the option group is active, auditing begins immediately\. 
 
+**Important**  
+Adding the MariaDB Audit Plugin to a DB instance might cause an outage\. We recommend adding the MariaDB Audit Plugin during a maintenance window or during a time of low database workload\.
+
 **To add the MariaDB Audit Plugin**
 
 1. Determine the option group you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group\. Choose **mysql** for **Engine**, and choose **5\.6** or **5\.7** for **Major engine version**\. For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 

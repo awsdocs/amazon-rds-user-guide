@@ -6,7 +6,7 @@ To rename a Microsoft SQL Server database instance that uses Multi\-AZ, use the 
 
 1. Rename the database by running `rdsadmin.dbo.rds_modify_db_name`\.
 
-1. Then, turn on Multi\-AZ Mirroring or Always On for the DB instance, to return it to its original state\.
+1. Then, turn on Multi\-AZ Mirroring or Always On Availability Groups for the DB instance, to return it to its original state\.
 
 For more information, see [Adding Multi\-AZ to a Microsoft SQL Server DB Instance](USER_SQLServerMultiAZ.md#USER_SQLServerMultiAZ.Adding)\. 
 

@@ -42,14 +42,14 @@ If your MySQL DB instance uses a nontransactional engine such as MyISAM, you nee
 
 ## Configuring Delayed Replication with MySQL<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication"></a>
 
-You can use delayed replication as a strategy for disaster recovery\. With delayed replication, you specify the minimum amount of time, in seconds, to delay replication from the master to the Read Replica\. In the event of a disaster, such as a table deleted unintentionally, you complete the following steps to recover from the disaster quickly:
+You can use delayed replication as a strategy for disaster recovery\. With delayed replication, you specify the minimum amount of time, in seconds, to delay replication from the source to the Read Replica\. In the event of a disaster, such as a table deleted unintentionally, you complete the following steps to recover from the disaster quickly:
 + Stop replication to the Read Replica before the change that caused the disaster is sent to it\.
 
   Use the [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) stored procedure to stop replication\.
 + Start replication and specify that replication stops automatically at a log file location\.
 
   You specify a location just before the disaster using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\.
-+ Promote the Read Replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
++ Promote the Read Replica to be the new source DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
 On Amazon RDS MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and later\. On Amazon RDS MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and later\. Delayed replication is not supported on Amazon RDS MySQL 8\.0\.
@@ -119,11 +119,11 @@ After stopping replication to the Read Replica, you can start replication and th
 
 Replication stops automatically when the stop point is reached\. The following RDS event is generated: `Replication has been stopped since the replica reached the stop point specified by the rds_start_replication_until stored procedure`\.
 
-After replication is stopped, in a disaster recovery scenario, you can [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote) promote the Read Replica to be the new master DB instance\. For information about promoting the Read Replica, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+After replication is stopped, in a disaster recovery scenario, you can [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote) promote the Read Replica to be the new source DB instance\. For information about promoting the Read Replica, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 ## Read Replica Updates with MySQL<a name="USER_MySQL.Replication.ReadReplicas.Updates"></a>
 
-Read Replicas are designed to support read queries, but you might need occasional updates\. For example, you might need to add an index to speed the specific types of queries accessing the replica\. You can enable updates by setting the `read_only` parameter to **0** in the DB parameter group for the Read Replica\. 
+Read Replicas are designed to support read queries, but you might need occasional updates\. For example, you might need to add an index to optimize the specific types of queries accessing the replica\. You can enable updates by setting the `read_only` parameter to `0` in the DB parameter group for the Read Replica\. Be careful when disabling read\-only on a Read Replica because it can cause problems if the Read Replica becomes incompatible with the source DB instance\. Change the value of the `read_only` parameter back to `1` as soon as possible\. 
 
 ## Multi\-AZ Read Replica Deployments with MySQL<a name="USER_MySQL.Replication.ReadReplicas.MultiAZ"></a>
 
@@ -137,7 +137,7 @@ For MySQL Read Replicas, you can monitor replication lag in Amazon CloudWatch by
 
 Common causes for replication lag for MySQL are the following: 
 + A network outage\.
-+ Writing to tables with indexes on a Read Replica\. If the `read_only` parameter is not set to 0 on the Read Replica, it can break replication\.
++ Writing to tables that have different indexes on a Read Replica\. If the `read_only` parameter is set to `0` on the Read Replica, replication can break if the Read Replica becomes incompatible with the source DB instance\. After you've performed maintenance tasks on the Read Replica, we recommend that you set the `read_only` parameter back to `1`\.
 + Using a nontransactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MySQL\.
 
 When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, then replication is currently not active\. `ReplicaLag` = \-1 is equivalent to `Seconds_Behind_Master` = `NULL`\. 
@@ -146,7 +146,7 @@ When the `ReplicaLag` metric reaches 0, the replica has caught up to the source 
 
 You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
-If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS terminates replication between the master DB instance and all Read Replicas\. It does so to prevent increased storage requirements on the master DB instance and long failover times\. The Read Replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the Read Replica are deleted from the master DB instance after replication is terminated\. You can create a new Read Replica for the master DB instance to reestablish replication\. 
+If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS terminates replication between the source DB instance and all Read Replicas\. It does so to prevent increased storage requirements on the source DB instance and long failover times\. The Read Replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the Read Replica are deleted from the source DB instance after replication is terminated\. You can create a new Read Replica for the source DB instance to reestablish replication\. 
 
 ## Deleting Read Replicas with MySQL<a name="USER_MySQL.Replication.ReadReplicas.Delete"></a>
 
@@ -169,7 +169,7 @@ You can review the details of the associated error thrown by the MySQL engine by
 One common issue that can cause replication errors is when the value for the `max_allowed_packet` parameter for a Read Replica is less than the `max_allowed_packet` parameter for the source DB instance\. The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group that is used to specify the maximum size of DML code that can be executed on the database\. In some cases, the `max_allowed_packet` parameter value in the DB parameter group associated with a source DB instance is smaller than the `max_allowed_packet` parameter value in the DB parameter group associated with the source's Read Replica\. In these cases, the replication process can throw an error \(Packet bigger than 'max\_allowed\_packet' bytes\) and stop replication\. You can fix the error by having the source and Read Replica use DB parameter groups with the same `max_allowed_packet` parameter values\. 
 
 Other common situations that can cause replication errors include the following:
-+ Writing to tables on a Read Replica\. If you are creating indexes on a Read Replica, you need to have the `read_only` parameter set to **0** to create the indexes\. If you are writing to tables on the Read Replica, it might break replication\. 
++ Writing to tables on a Read Replica\. If you are creating indexes on a Read Replica that are different from the indexes on the source DB instance, you must have the `read_only` parameter set to `0` to create the indexes\. If you are writing to tables on the Read Replica, it might break replication if the read replica becomes incompatible with the source DB instance\. After you've performed maintenance tasks on the Read Replica, we recommend that you set the `read_only` parameter back to `1`\.
 +  Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MySQL\.
 +  Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html)\. 
 

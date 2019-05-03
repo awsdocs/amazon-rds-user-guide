@@ -432,7 +432,7 @@ You can also see the status of a Read Replica using the AWS CLI `describe-db-ins
 The status of a Read Replica can be one of the following: 
 + ****replicating**—**The Read Replica is replicating successfully\.
 + ****error**—**An error has occurred with the replication\. Check the **Replication Error** field in the Amazon RDS console or the event log to determine the exact error\. For more information about troubleshooting a replication error, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
-+ ****terminated**—**Replication is terminated\. This occurs if replication is stopped for more than 30 consecutive days, either manually or due to a replication error\. In this case, Amazon RDS terminates replication between the master DB instance and all Read Replicas\. Amazon RDS does this to prevent increased storage requirements on the master DB instance and long failover times\. 
++ ****terminated**—**Replication is terminated\. This occurs if replication is stopped for more than 30 consecutive days, either manually or due to a replication error\. In this case, Amazon RDS terminates replication between the source DB instance and all Read Replicas\. Amazon RDS does this to prevent increased storage requirements on the source DB instance and long failover times\. 
 
   Broken replication can affect storage because the logs can grow in size and number due to the high volume of errors messages being written to the log\. Broken replication can also affect failure recovery due to the time Amazon RDS requires to maintain and process the large number of logs during recovery\.
 + ****stopped** \(MySQL or MariaDB only\)—**Replication has stopped because of a customer initiated request\.

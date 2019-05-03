@@ -22,6 +22,8 @@ If your application is on the Microsoft Windows platform and requires a PKCS7 fi
 
 You might need to use an intermediate certificate to connect to your region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) region using SSL\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following list:
 
+[Asia Pacific \(Hong Kong\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-east-1.pem)
+
 [Asia Pacific \(Mumbai\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-south-1.pem)
 
 [Asia Pacific \(Tokyo\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-1.pem)

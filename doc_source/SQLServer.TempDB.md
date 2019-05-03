@@ -77,7 +77,7 @@ The following example demonstrates setting the `SIZE` property to 1024 MB\.
 
 ## Considerations for Multi\-AZ Deployments<a name="SQLServer.TempDB.MAZ"></a>
 
-If your Amazon RDS DB instance is in a Multi\-AZ Deployment for Microsoft SQL Server with Database Mirroring or Always On, there are some things to consider\. 
+If your Amazon RDS DB instance is in a Multi\-AZ Deployment for Microsoft SQL Server with Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\), there are some things to consider\. 
 
 The tempdb database can't be replicated\. No data that you store on your primary instance is replicated to your secondary instance\. 
 

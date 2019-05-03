@@ -14,6 +14,8 @@ This section describes how you can perform common DBA tasks related to databases
 + [Working with Automatic Workload Repository \(AWR\)](#Appendix.Oracle.CommonDBATasks.AWR)
 + [Adjusting Database Links for Use with DB Instances in a VPC](#Appendix.Oracle.CommonDBATasks.DBLinks)
 + [Setting the Default Edition for a DB Instance](#Appendix.Oracle.CommonDBATasks.DefaultEdition)
++ [Enabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.EnablingAuditing)
++ [Disabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.DisablingAuditing)
 
 ## Changing the Global Name of a Database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
@@ -246,3 +248,61 @@ exec rdsadmin.rdsadmin_util.alter_default_edition('ORA$BASE');
 ```
 
 For more information about Oracle edition\-based redefinition, see [About Editions and Edition\-Based Redefinition](https://docs.oracle.com/database/121/ADMIN/general.htm#ADMIN13167) in the Oracle documentation\.
+
+## Enabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.EnablingAuditing"></a>
+
+You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table` to enable auditing on the database audit trail table `SYS.AUD$`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
+
+Enabling auditing is supported for Oracle DB instances running the following versions:
++ 11\.2\.0\.4\.v18 and later 11\.2 versions
++ 12\.1\.0\.2\.v14 and later 12\.1 versions
++ All 12\.2 and later versions
+
+The `audit_all_sys_aud_table` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `p_by_access` | boolean | true | Optional | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
+
+The following query returns the current audit configuration for `SYS.AUD$` for a database:
+
+```
+select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
+```
+
+The following commands enable audit of `ALL` on `SYS.AUD$` `BY ACCESS`\.
+
+```
+exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table;
+
+exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => true);
+```
+
+The following command enables audit of `ALL` on `SYS.AUD$` `BY SESSION`\.
+
+```
+exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => false);                           
+```
+
+For more information, see [AUDIT \(Traditional Auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/AUDIT-Traditional-Auditing.html#GUID-ADF45B07-547A-4096-8144-50241FA2D8DD) in the Oracle documentation\. 
+
+## Disabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.DisablingAuditing"></a>
+
+You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table` to disable auditing on the database audit trail table `SYS.AUD$`\. This procedure takes no parameters\. 
+
+The following query returns the current audit configuration for `SYS.AUD$` for a database:
+
+```
+select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
+```
+
+The following commands disables audit of `ALL` on `SYS.AUD$`\.
+
+```
+exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;                      
+```
+
+For more information, see [NOAUDIT \(Traditional Auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/NOAUDIT-Traditional-Auditing.html#GUID-9D8EAF18-4AB3-4C04-8BF7-37BD0E15434D) in the Oracle documentation\. 

@@ -1,6 +1,6 @@
 # High Availability \(Multi\-AZ\) for Amazon RDS<a name="Concepts.MultiAZ"></a>
 
-Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Mirroring\. 
+Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Database Mirroring \(DBM\)\. 
 
 In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
