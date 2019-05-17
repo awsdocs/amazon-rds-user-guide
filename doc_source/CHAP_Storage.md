@@ -1,10 +1,10 @@
-# DB Instance Storage<a name="CHAP_Storage"></a>
+# Amazon RDS DB Instance Storage<a name="CHAP_Storage"></a>
 
 DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon Elastic Block Store \(Amazon EBS\) volumes for database and log storage\. Depending on the amount of storage requested, Amazon RDS automatically stripes across multiple Amazon EBS volumes to enhance performance\.  
 
 ## Amazon RDS Storage Types<a name="Concepts.Storage"></a>
 
-Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 32 TiB of storage\. You can create Oracle RDS DB instances with up to 64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.
+Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 32 TiB of storage\. You can create Oracle RDS DB instances with up to  64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
 
 The following list briefly describes the three storage types: 
 + **General Purpose SSD** – General Purpose SSD, also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
@@ -22,7 +22,7 @@ Several factors can affect the performance of Amazon EBS volumes, such as instan
 General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances: 
 + MySQL, MariaDB, and PostgreSQL DB instances: 20 GiB–32 TiB 
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
-+ Oracle instances: 20 GiB\- 64 TiB
++ Oracle instances: 20 GiB\-  64 TiB 
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
 
@@ -41,7 +41,7 @@ When your storage requires more than the base performance I/O level, it uses I/O
 Suppose that your storage uses all of its I/O credit balance\. If so, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\. 
 
 **Note**  
-Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage](USER_PIOPS.StorageTypes.md#USER_PIOPS.StorageTypes.title)\. 
+Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage for Amazon RDS DB Instances](USER_PIOPS.StorageTypes.md#USER_PIOPS.StorageTypes.title)\. 
 
 The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
 
@@ -87,6 +87,8 @@ Your database workload might not be able to achieve 100 percent of the IOPS that
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+
+\* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on m5 instance types\. Other instance families guarantee performance up to 32,000 IOPS\. 
 
 ### Combining Provisioned IOPS Storage with Multi\-AZ deployments, or Read Replicas<a name="Overview.ProvisionedIOPS-support"></a>
 

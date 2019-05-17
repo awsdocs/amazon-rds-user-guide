@@ -1,4 +1,4 @@
-# Working with Storage<a name="USER_PIOPS.StorageTypes"></a>
+# Working with Storage for Amazon RDS DB Instances<a name="USER_PIOPS.StorageTypes"></a>
 
 To specify how you want your data stored in Amazon RDS, you select a storage type and provide a storage size when you create or modify a DB instance\. Later, you can increase the amount or change the type of storage by modifying the DB instance\. For more information about which storage type to use for your workload, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
 
@@ -13,9 +13,9 @@ If you need space for additional data, you can scale up the storage of an existi
 
 We recommend that you create an Amazon CloudWatch alarm to monitor the amount of free storage for your DB instance so you can respond when necessary\. For more information on setting CloudWatch alarms, see [Using Amazon RDS Event Notification](USER_Events.md)\. 
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is `storage-optimization`\. The DB instance is fully operational after a storage modification\. However, you can't make further storage modifications for either six \(6\) hours or while the DB instance status is `storage-optimization`, whichever is longer\. 
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **Storage\-optimization**\. The DB instance is fully operational after a storage modification\. However, you can't make further storage modifications for either six \(6\) hours or while the DB instance status is **Storage\-optimization**, whichever is longer\. 
 
-If you have a SQL Server DB instance and haven't modified the storage configuration since November 2017, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the `storage-optimization` state\. Performance might be degraded during storage optimization\. 
+If you have a SQL Server DB instance and haven't modified the storage configuration since November 2017, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the **Storage\-optimization** state\. Performance might be degraded during storage optimization\. 
 
 **Note**  
 You can't reduce the amount of storage for a DB instance after it has been allocated\.
@@ -47,7 +47,7 @@ When you increase **Allocated Storage**, it must be by at least 10 percent\. If 
 
 To increase the storage for a DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Set the following parameters:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
++ `--apply-immediately` – Use `--apply-immediately` to initiate conversion immediately, or `--no-apply-immediately` \(the default\) to apply the conversion during the next maintenance window\. An immediate outage occurs when the conversion is applied\. For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
 
 ### API<a name="w4aac15c73b9c15b5"></a>
 
@@ -55,7 +55,7 @@ To increase storage for a DB instance, use the Amazon RDS API [https://docs.aws.
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
 + `ApplyImmediately` – Set this option to `True` if you want to initiate conversion immediately\. If this option is `False` \(the default\), the scaling is applied during the next maintenance window\. An immediate outage occurs when the conversion is applied\.
 
-   For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
+   For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
 
 ## Changing Your Storage Type<a name="USER_PIOPS.Modify"></a>
 
@@ -88,7 +88,7 @@ To filter the list of DB instances, for **Filter databases** enter a text string
 
 1. To apply the changes to the DB instance immediately, choose **Apply immediately** in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\.
 
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 
@@ -106,7 +106,7 @@ To change the type of storage for a DB instance, use the Amazon RDS API [https:/
 
 ## Modifying Provisioned IOPS SSD storage settings<a name="User_PIOPS.Increase"></a>
 
-You can modify the settings for a DB instance that uses Provisioned IOPS SSD Storage by using the AWS Management Console, the Amazon RDS API, or the AWS CLI\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose between 1,000 IOPS and 100 GiB of storage up to 80,000 IOPS and 64 TiB \(64000 GiB\) of storage, depending on your database engine and instance type\. 
+You can modify the settings for a DB instance that uses Provisioned IOPS SSD Storage by using the AWS Management Console, the Amazon RDS API, or the AWS CLI\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. Choose the amount of provisioned IOPS and storage depending on your database engine and instance type\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
 
@@ -133,7 +133,7 @@ To filter the list of DB instances, for **Filter databases** enter a text string
 
 1. To apply the changes to the DB instance immediately, choose **Apply immediately** in the **Scheduling of modifications** section\. Alternatively, you can choose **Apply during the next scheduled maintenance window**\.
 
-   An immediate outage occurs when the storage type changes\. For more information about storage, see [DB Instance Storage](CHAP_Storage.md)\.
+   An immediate outage occurs when the storage type changes\. For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
 
 1. Review the parameters to be changed, and choose **Modify DB instance** to complete the modification\.
 

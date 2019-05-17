@@ -20,7 +20,10 @@ Your Amazon RDS backup storage for each region is composed of the automated back
 
 For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
-If you chose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a DB instance, all automated backups are deleted with the DB instance\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your DB instance, you can use that to recover your DB instance\. Or you can use a previously created manual snapshot\. Manual snapshots are not deleted\. 
+If you chose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a DB instance, all automated backups are deleted with the DB instance\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your DB instance, you can use that to recover your DB instance\. Or you can use a previously created manual snapshot\. Manual snapshots are not deleted\. You can have up to 100 manual snapshots per region\.
+
+**Note**  
+Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Backup Window<a name="USER_WorkingWithAutomatedBackups.BackupWindow"></a>
 

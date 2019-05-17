@@ -13,8 +13,10 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. Choose **EC2 Dashboard**, and then choose **Launch Instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
-1. Choose the **Amazon Linux** Amazon Machine Image \(AMI\), as shown following\.  
+1. Choose the **Amazon Linux AMI**, as shown following\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
+**Important**  
+Don't choose **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
 
 1. Choose the `t2.small` instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
@@ -58,7 +60,7 @@ Next you connect to your EC2 instance and install the web server\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
-1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html)\.
+1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
 
 1. To get the latest bug fixes and security updates, update the software on your EC2 instance by using the following command:
 **Note**  
@@ -72,6 +74,12 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    ```
    [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
+   ```
+**Note**  
+If you receive the error `No package package-name available`, then your instance was not launched with the Amazon Linux AMI \(perhaps you are using the Amazon Linux 2 AMI instead\)\. You can view your version of Amazon Linux with the following command\.  
+
+   ```
+   cat /etc/system-release
    ```
 
    For more information, see [Updating Instance Software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
@@ -161,14 +169,14 @@ Next, you add content to your Apache web server that connects to your Amazon RDS
    [ec2-user ~]$ nano dbinfo.inc
    ```
 
-1. Add the following contents to the `dbinfo.inc` file, where *endpoint* is the endpoint of your RDS MySQL DB instance, without the port, and *master password* is the master password for your RDS MySQL DB instance\.
+1. Add the following contents to the `dbinfo.inc` file, where *db\_instance\_endpoint* is the endpoint of your RDS MySQL DB instance, without the port, and *master password* is the master password for your RDS MySQL DB instance\.
 **Note**  
 Placing the user name and password information in a folder that is not part of the document root for your web server reduces the possibility of your security information being exposed\.
 
    ```
    <?php
    
-   define('DB_SERVER', 'endpoint');
+   define('DB_SERVER', 'db_instance_endpoint');
    define('DB_USERNAME', 'tutorial_user');
    define('DB_PASSWORD', 'master password');
    define('DB_DATABASE', 'sample');
@@ -209,12 +217,12 @@ Placing the user name and password information in a folder that is not part of t
    
      $database = mysqli_select_db($connection, DB_DATABASE);
    
-     /* Ensure that the Employees table exists. */
-     VerifyEmployeesTable($connection, DB_DATABASE); 
+     /* Ensure that the EMPLOYEES table exists. */
+     VerifyEmployeesTable($connection, DB_DATABASE);
    
-     /* If input fields are populated, add a row to the Employees table. */
-     $employee_name = htmlentities($_POST['Name']);
-     $employee_address = htmlentities($_POST['Address']);
+     /* If input fields are populated, add a row to the EMPLOYEES table. */
+     $employee_name = htmlentities($_POST['NAME']);
+     $employee_address = htmlentities($_POST['ADDRESS']);
    
      if (strlen($employee_name) || strlen($employee_address)) {
        AddEmployee($connection, $employee_name, $employee_address);
@@ -225,15 +233,15 @@ Placing the user name and password information in a folder that is not part of t
    <form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
      <table border="0">
        <tr>
-         <td>Name</td>
-         <td>Address</td>
+         <td>NAME</td>
+         <td>ADDRESS</td>
        </tr>
        <tr>
          <td>
-           <input type="text" name="Name" maxlength="45" size="30" />
+           <input type="text" name="NAME" maxlength="45" size="30" />
          </td>
          <td>
-           <input type="text" name="Address" maxlength="90" size="60" />
+           <input type="text" name="ADDRESS" maxlength="90" size="60" />
          </td>
          <td>
            <input type="submit" value="Add Data" />
@@ -246,13 +254,13 @@ Placing the user name and password information in a folder that is not part of t
    <table border="1" cellpadding="2" cellspacing="2">
      <tr>
        <td>ID</td>
-       <td>Name</td>
-       <td>Address</td>
+       <td>NAME</td>
+       <td>ADDRESS</td>
      </tr>
    
    <?php
    
-   $result = mysqli_query($connection, "SELECT * FROM Employees"); 
+   $result = mysqli_query($connection, "SELECT * FROM EMPLOYEES");
    
    while($query_data = mysqli_fetch_row($result)) {
      echo "<tr>";
@@ -284,22 +292,20 @@ Placing the user name and password information in a folder that is not part of t
       $n = mysqli_real_escape_string($connection, $name);
       $a = mysqli_real_escape_string($connection, $address);
    
-      $query = "INSERT INTO `Employees` (`Name`, `Address`) VALUES ('$n', '$a');";
+      $query = "INSERT INTO EMPLOYEES (NAME, ADDRESS) VALUES ('$n', '$a');";
    
       if(!mysqli_query($connection, $query)) echo("<p>Error adding employee data.</p>");
    }
    
    /* Check whether the table exists and, if not, create it. */
    function VerifyEmployeesTable($connection, $dbName) {
-     if(!TableExists("Employees", $connection, $dbName)) 
-     { 
-        $query = "CREATE TABLE `Employees` (
-            `ID` int(11) NOT NULL AUTO_INCREMENT,
-            `Name` varchar(45) DEFAULT NULL,
-            `Address` varchar(90) DEFAULT NULL,
-            PRIMARY KEY (`ID`),
-            UNIQUE KEY `ID_UNIQUE` (`ID`)
-          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+     if(!TableExists("EMPLOYEES", $connection, $dbName))
+     {
+        $query = "CREATE TABLE EMPLOYEES (
+            ID int(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            NAME VARCHAR(45),
+            ADDRESS VARCHAR(90)
+          )";
    
         if(!mysqli_query($connection, $query)) echo("<p>Error creating table.</p>");
      }
@@ -310,7 +316,7 @@ Placing the user name and password information in a folder that is not part of t
      $t = mysqli_real_escape_string($connection, $tableName);
      $d = mysqli_real_escape_string($connection, $dbName);
    
-     $checktable = mysqli_query($connection, 
+     $checktable = mysqli_query($connection,
          "SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
    
      if(mysqli_num_rows($checktable) > 0) return true;

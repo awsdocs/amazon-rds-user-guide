@@ -19,7 +19,7 @@ The following table lists the resources and their limits per region\.
 | Clusters | 40 | 
 | Cluster parameter groups | 50 | 
 | Cross\-region snapshots copy requests | 5 | 
-| DB Instances 1 | 40 | 
+| DB Instances | 40 | 
 | Event subscriptions | 20 | 
 | Manual snapshots | 100 | 
 | Manual cluster snapshots | 100 | 
@@ -36,7 +36,9 @@ The following table lists the resources and their limits per region\.
 | Tags per resource | 50 | 
 | Total storage for all DB instances | 100 TiB | 
 
-1\. By default, you can have up to a total of 40 Amazon RDS DB instances\. Of those 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 can be MySQL, MariaDB, PostgreSQL, or Oracle under the "BYOL" model\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.
+**Note**  
+By default, you can have up to a total of 40 Amazon RDS DB instances\. Of those 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 can be MySQL, MariaDB, PostgreSQL, or Oracle under the "BYOL" model\. If your application requires more DB instances, you can request additional DB instances via this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.  
+Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Naming Constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 
@@ -60,7 +62,7 @@ File size limits apply to Amazon RDS DB instances\.
 
 ### MySQL File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MySQL"></a>
 
-For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MySQL DB instances\. For more information, see [DB Instance Storage](CHAP_Storage.md)\. 
+For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MySQL DB instances\. For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\. 
 
 **Note**  
 Some existing DB instances have a lower limit\. For example, MySQL DB instances created prior to April 2014 have a file and table size limit of 2 TB\. This 2\-TB file size limit also applies to DB instances or Read Replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\. 
@@ -98,7 +100,7 @@ When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can i
 
 ### MariaDB File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
-For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MariaDB DB instances\. For more information, see [DB Instance Storage](CHAP_Storage.md)\. 
+For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MariaDB DB instances\. For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\. 
 
 There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [InnoDB File\-Per\-Table Mode](http://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\.
 

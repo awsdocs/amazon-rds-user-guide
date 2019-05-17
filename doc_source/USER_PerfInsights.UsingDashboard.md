@@ -81,12 +81,12 @@ In the **Top Load Items** table, you can view the following types of identifiers
 
   For Oracle and SQL Server DB instances, you can use a SQL ID to find a specific SQL statement\.
 + **Support SQL ID** – A hash value of the SQL ID\. This value is only for referencing a SQL ID when you are working with AWS Support\. AWS Support doesn't have access to your actual SQL IDs and SQL text\.
-+ **Digest ID** – An ID that the database uses to uniquely identify a SQL Digest\. A SQL Digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
++ **Digest ID** – An ID that the database uses to uniquely identify a SQL digest\. A SQL digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
 
-  For Amazon RDS MariaDB, MySQL, and PostgreSQL DB instances, you can use a Digest ID to find a specific SQL Digest\.
+  For Amazon RDS for MariaDB, MySQL, and PostgreSQL DB instances, you can use a digest ID to find a specific SQL digest\.
 
-  For Oracle and SQL Server DB instances, the Digest ID is the same as the SQL ID\. The top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
-+ **Support Digest ID** – A hash value of the Digest ID\. This value is only for referencing a Digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual Digest IDs and SQL text\.
+  For Oracle and SQL Server DB instances, the digest ID is the same as the SQL ID\. The top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
++ **Support Digest ID** – A hash value of the digest ID\. This value is only for referencing a digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual digest IDs and SQL text\.
 
 In the **Top Load Items** table, you can open a top statement to view its IDs\. The following image shows an open top statement\.
 

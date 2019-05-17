@@ -308,7 +308,7 @@ The table following displays the planned schedule of deprecations for major engi
 
 | Date | Information | 
 | --- | --- | 
-| June 1, 2019 |  The Amazon RDS team is planning to deprecate Amazon RDS support for Microsoft SQL Server 2008 R2\. Starting June 1, 2019, we will begin migrating any remaining instances of Microsoft SQL Server 2008 R2 to SQL Server 2016 \(latest minor version available\)\.  To avoid being automatically upgraded from Microsoft SQL Server 2008 R2, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
+| June 1, 2019 |  The Amazon RDS team is planning to deprecate Amazon RDS support for Microsoft SQL Server 2008 R2\. Starting June 1, 2019, we will begin migrating any remaining instances of Microsoft SQL Server 2008 R2 to SQL Server 2012 \(latest minor version available\)\.  To avoid being automatically upgraded from Microsoft SQL Server 2008 R2, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
 | April 25, 2019 | Before the end of April 2019, you will no longer be able to create new Amazon RDS for SQL Server database instances using Microsoft SQL Server 2008R2\. | 
 
 ## Change Data Capture Support for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.CDC"></a>

@@ -434,6 +434,8 @@ Amazon RDS Oracle supports the following Oracle Database features:
 
   For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\.
 + Unified Auditing, Mixed Mode \(version 12\.2 and later\)
+
+  For more information, see [ Mixed Mode Auditing](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/introduction-to-auditing.html#GUID-4A3AEFC3-5422-4320-A048-8219EC96EAC1) in the Oracle documentation\.
 + XML DB \(without the XML DB Protocol Server\)
 
   For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.

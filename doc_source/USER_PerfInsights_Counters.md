@@ -1,10 +1,11 @@
 # Performance Insights Counters<a name="USER_PerfInsights_Counters"></a>
 
-With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
+With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
 **Topics**
 + [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
-+ [Performance Insights Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
++ [Performance Insights Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
++ [Performance Insights Counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
 + [Performance Insights Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
 
 ## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
@@ -76,15 +77,15 @@ The following operating system counters are available with Performance Insights 
 | tx | network | 
 | numVCPUs | general | 
 
-## Performance Insights Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
+## Performance Insights Counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
 
-The following database counters are available with Performance Insights for Amazon RDS MariaDB and MySQL\.
+The following database counters are available with Performance Insights for Amazon RDS for MariaDB and MySQL\.
 
 **Topics**
-+ [Native Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.Native)
-+ [Non\-Native Counters for Amazon RDS MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
++ [Native Counters for RDS MariaDB and RDS MySQL](#USER_PerfInsights_Counters.MySQL.Native)
++ [Non\-Native Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
 
-### Native Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
+### Native Counters for RDS MariaDB and RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
 You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
@@ -127,9 +128,11 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Innodb\_buffer\_pool\_pages\_total | Cache | Pages | 
 | Innodb\_buffer\_pool\_read\_requests | Cache | Pages per second | 
 | Innodb\_buffer\_pool\_reads | Cache | Pages per second | 
+| Opened\_tables | Cache | Tables | 
+| Opened\_table\_definitions | Cache | Tables | 
 | Qcache\_hits | Cache | Queries | 
 
-### Non\-Native Counters for Amazon RDS MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
+### Non\-Native Counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 
@@ -146,6 +149,43 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_deadlocks | Locks | The total number of deadlocks\. | SELECT COUNT AS innodb\_deadlocks FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_deadlocks' | 
 | innodb\_lock\_timeouts | Locks | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
 | innodb\_row\_lock\_waits | Locks | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
+
+## Performance Insights Counters for Amazon RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle"></a>
+
+The following database counters are available with Performance Insights for RDS Oracle\.
+
+### Native Counters for RDS Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
+
+You can find definitions for these native metrics in [Statistics Descriptions](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/statistics-descriptions-2.html#GUID-2FBC1B7E-9123-41DD-8178-96176260A639) in the Oracle documentation\.
+
+**Note**  
+For the `CPU used by this session` counter metric, the unit has been transformed from the native centiseconds to active sessions to make the value easier to use\. For example, CPU send in the DB Load chart represents the demand for CPU\. The counter metric `CPU used by this session` represents the amount of CPU used by Oracle sessions\. You can compare CPU send to the `CPU used by this session` counter metric\. When demand for CPU is higher than CPU used, sessions are waiting for CPU time\.
+
+
+| Counter | Type | Unit | 
+| --- | --- | --- | 
+| CPU used by this session | User | Active sessions\. In this case, the unit has been transformed from the native centiseconds to active sessions to make the value easier to use\. | 
+| SQL\*Net roundtrips to/from client | User | Roundtrips per second | 
+| Bytes received via SQL\*Net from client | User | Bytes per second | 
+| User commits | User | Commits per second | 
+| Logons cumulative | User | Logons per second | 
+| User calls | User | Calls per second | 
+| Bytes sent via SQL\*Net to client | User | Bytes per second | 
+| User rollbacks | User | Rollbacks per second | 
+| Redo size | Redo | Bytes per second | 
+| Parse count \(total\) | SQL | Parses per second | 
+| Parse count \(hard\) | SQL | Parses per second | 
+| Table scan rows gotten | SQL | Rows per second | 
+| Sorts \(memory\) | SQL | Sorts per second | 
+| Sorts \(disk\) | SQL | Sorts per second | 
+| Sorts \(rows\) | SQL | Sorts per second | 
+| Physical read bytes | Cache | Bytes per second | 
+| DB block gets | Cache | Blocks per second | 
+| DBWR checkpoints | Cache | Checkpoints per minute | 
+| Physical reads | Cache | Reads per second | 
+| Consistent gets from cache | Cache | Gets per second | 
+| DB block gets from cache | Cache | Gets per second | 
+| Consistent gets | Cache | Gets per second | 
 
 ## Performance Insights Counters for Amazon RDS PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL"></a>
 
@@ -170,7 +210,6 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | checkpoints\_req | Checkpoint | Checkpoints per minute | 
 | checkpoints\_timed | Checkpoint | Checkpoints per minute | 
 | maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute  | 
-| time\_since\_checkpoint | Checkpoint | Seconds | 
 | deadlocks | Concurrency | Deadlocks per minute | 
 | blk\_read\_time | IO | Milliseconds | 
 | blks\_read | IO | Blocks per second | 

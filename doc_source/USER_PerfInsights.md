@@ -1,24 +1,25 @@
 # Using Amazon RDS Performance Insights<a name="USER_PerfInsights"></a>
 
 Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so that you can analyze and troubleshoot your database performance\. Amazon RDS Performance Insights is currently available for use with the following DB engines:
-+ Amazon Aurora with MySQL compatibility version 2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\)
++ Amazon Aurora with MySQL compatibility version 2\.04\.2 only \(compatible with MySQL 5\.7\)
 + Amazon Aurora with MySQL compatibility version 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)
-+ Amazon RDS MariaDB version 10\.2\.21 and higher 10\.2 versions
-+ Amazon RDS MySQL version 5\.7\.22 and higher 5\.7 versions
-+ Amazon RDS MySQL version 5\.6\.41 and higher 5\.6 versions
-+ Amazon RDS SQL Server \(all versions except SQL Server 2008\)
 + Amazon Aurora with PostgreSQL compatibility
-+ Amazon RDS PostgreSQL version 10
-+ Amazon RDS Oracle \(all versions\)
++ Amazon RDS for MariaDB version 10\.2\.21 and higher 10\.2 versions
++ Amazon RDS for MySQL version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions
++ Amazon RDS for Microsoft SQL Server \(all versions except SQL Server 2008\)
++ Amazon RDS for PostgreSQL version 10
++ Amazon RDS for Oracle \(all versions\)
 
 **Important**  
 For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.
 
 **Note**  
-Amazon RDS Performance Insights is not supported for MariaDB 10\.0, MariaDB 10\.1, MariaDB 10\.3, MySQL 5\.5, or MySQL 8\.0\.  
-For Amazon RDS MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.
+Amazon RDS Performance Insights is not supported for MariaDB version 10\.0, 10\.1, or 10\.3, or for MySQL version 5\.5 or 8\.0\.  
+For Amazon RDS for MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.
 
-Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. Performance Insights is on by default in the console create wizard for the Amazon Aurora MySQL, Amazon RDS for MariaDB, Amazon RDS for MySQL, Amazon RDS for Oracle, Amazon RDS for SQL Server, Amazon Aurora PostgreSQL, and Amazon RDS for PostgreSQL DB engines\. If you have more than one database on the DB instance, performance data for all of the databases is aggregated for the DB instance\. 
+Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\.
+
+Performance Insights is on by default in the console create wizard for all DB engines that work with Amazon RDS\. If you have more than one database on a DB instance, performance data for all of the databases is aggregated for the DB instance\. 
 
 The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response from it\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing that query\. 
 
@@ -34,7 +35,7 @@ For example, when the archiver is performing I/O, the Performance Insights repor
 
 Session information is collected, aggregated, and displayed in the dashboard as the **Average Active Sessions** chart\. The **Average Active Sessions** chart displays the **Max CPU** value as a line, so you can see if active sessions are exceeding it or not\. The **Max CPU** value is determined by the number of **vCPU** \(virtual CPU\) cores for your DB instance\. 
 
-If the load in the **Average Active Sessions** chart is often above the **Max CPU** line and the primary wait state is CPU, the system CPU is overloaded\. In these cases, you might want to throttle connections to the instance, tune any SQL queries with a high CPU load, or consider a larger instance class\. High and consistent instances of any wait state indicate that there might be bottlenecks or resource contention issues to resolve, even if the load doesn't cross the **Max CPU** line\.
+If the load in the **Average Active Sessions** chart is often above the **Max CPU** line and the primary wait state is CPU, the system CPU is overloaded\. In these cases, you might want to throttle connections to the instance, tune any SQL queries with a high CPU load, or consider a larger instance class\. High and consistent instances of any wait state indicate that there might be bottlenecks or resource contention issues to resolve\. This can be true even if the load doesn't cross the **Max CPU** line\.
 
 You can find an overview of Performance Insights in the following video\.
 

@@ -35,8 +35,8 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read only Read Replicas \(master/standby\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas](USER_ReadRepl.md) [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
-|  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you need to create a DB security group\. If your DB instance is on the *EC2\-VPC* platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)  | 
+|  **Setting up read\-only Read Replicas \(masters and standbys\)** PostgreSQL on Amazon RDS supports Read Replicas in both the same AWS Region and in a different AWS Region from the master instance\.  |  [Working with Read Replicas](USER_ReadRepl.md) [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a Read Replica in a Different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
+|  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. If your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
 |  **Connecting to your PostgreSQL DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as pgadmin III\.   |  [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md) [Using SSL with a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL)  | 
@@ -211,7 +211,7 @@ PostgreSQL version 11\.2 contains several bug fixes for issues in release 11\.1\
 
 This version also includes the following changes:
 + A new [pgTAP](https://pgtap.org/) extension version 1\.0\.
-+ Support for Amazon S3 import\. For more information, see [Importing Amazon S3 Data into an RDS PostgreSQL DB Instance](USER_PostgreSQL.S3Import.md)\.
++ Support for Amazon S3 import\. For more information, see [Importing Amazon S3 Data into an RDS for PostgreSQL DB Instance](PostgreSQL.Procedural.Importing.md#USER_PostgreSQL.S3Import)\.
 + Multiple major version upgrade is available to PostgreSQL 11\.2 from certain previous PostgreSQL versions\. For more information, see [Major Version Upgrades for PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
@@ -259,7 +259,7 @@ For information on the Database Preview Environment, see [Working with the Datab
 PostgreSQL version 10\.7 contains several bug fixes for issues in release 10\.6\. For more information on the fixes in 10\.7, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-7.html)\.
 
 This version also includes the following changes:
-+ Support for Amazon S3 import\. For more information, see [Importing Amazon S3 Data into an RDS PostgreSQL DB Instance](USER_PostgreSQL.S3Import.md)\.
++ Support for Amazon S3 import\. For more information, see [Importing Amazon S3 Data into an RDS for PostgreSQL DB Instance](PostgreSQL.Procedural.Importing.md#USER_PostgreSQL.S3Import)\.
 + Multiple major version upgrade is available to PostgreSQL 10\.7 from certain previous PostgreSQL versions\. For more information, see [Major Version Upgrades for PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
@@ -1169,9 +1169,9 @@ The following table shows the PostGIS component versions that ship with the Amaz
 | PostgreSQL | PostGIS | GEOS | GDAL | PROJ | 
 | --- | --- | --- | --- | --- | 
 | 9\.3\.12 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.4, released 2016/01/25  |  Rel\. 4\.9\.2, September 8th, 2015  | 
-| 9\.3\.14 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
-| 9\.3\.16 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
-| 9\.3\.17 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.3\.14 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  |  Rel\. 4\.9\.2, September 8th, 2015  | 
+| 9\.3\.16 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  |  Rel\. 4\.9\.2, September 8th, 2015  | 
+| 9\.3\.17 | 2\.1\.8 r13780 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 |  1\.11\.5, released 2016/07/01  |  Rel\. 4\.9\.2, September 8th, 2015  | 
 | 9\.4\.7 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.4, released 2016/01/25  | Rel\. 4\.9\.2, September 8th, 2015 | 
 | 9\.4\.9 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
 | 9\.4\.11 |  2\.1\.8 r13780  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  1\.11\.5, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
