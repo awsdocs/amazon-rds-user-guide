@@ -27,19 +27,22 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1.  In the navigation pane, choose **Security Groups**\. 
 
-1. Select or create a security group for which you want to allow access to members of another security group\. In the scenario above, this would be the security group you will use for your DB instances\. Choose the **Inbound Rules** tab, and then choose **Edit rule**\.
+1. Select or create a security group to associate with your DB instances, to which you will allow access from members of another security group\. Choose the **Inbound Rules** tab, and then choose **Edit rules**\.
 
 1. On the **Edit inbound rules** page, choose **Add Rule**\.
 
-1. From **Type**, choose one of the **All ICMP** options\. In the **Source** box, start typing the ID of the security group; this provides you with a list of security groups\. Select the security group with members that you want to have access to the resources protected by this security group\. In the scenario above, this would be the security group you will use for your EC2 instance\.
+1. For **Type**, select the entry corresponding to the port you used when you created your DB instance, such as **MYSQL/Aurora**. If you configured your DB instance to use a non-default port, select **Custom TCP Rule** and enter the port manually\.
 
-1. Repeat the steps for the TCP protocol by creating a rule with **All TCP** as the **Type** and your security group in the **Source** box\. If you intend to use the UDP protocol, create a rule with **All UDP** as the **Type** and your security group in the **Source** box\. 
+1. In the **Source** box, enter the ID of the security group that you would like to grant access to the DB instance\. In the scenario above, this would be the security group you will use for your EC2 instance\.
 
-1. Create a custom TCP rule that permits access via the port you used when you created your DB instance, such as port 3306 for MySQL\. Enter your security group or an IP address you will use in the **Source** box\.
+1. Repeat the previous steps for any additional security groups that need to be granted access to the DB instance\.
 
 1. Choose **Save** when you are done\.
 
 ![\[adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-vpc-add-sg-rule.png)
+
+**Note**  
+ Some database types such as MS SQL may have additional protocol/port requirements to enable all of their features. Consult the documentation and repeat the above steps for any additional rules required\.
 
 ## A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC<a name="USER_VPC.Scenario3"></a>
 
