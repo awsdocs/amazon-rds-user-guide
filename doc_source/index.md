@@ -138,6 +138,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Support for Native Backup and Restore in Microsoft SQL Server](Appendix.SQLServer.Options.BackupRestore.md)
       + [Microsoft SQL Server Transparent Data Encryption Support](Appendix.SQLServer.Options.TDE.md)
          + [Microsoft SQL Server Performance Considerations](Appendix.SQLServer.Options.TDE.Perf.md)
+      + [SQL Server Audit](Appendix.SQLServer.Options.Audit.md)
    + [Common DBA Tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)
       + [Accessing the tempdb Database on Microsoft SQL Server DB Instances on Amazon RDS](SQLServer.TempDB.md)
       + [Analyzing Your Database Workload on an Amazon RDS DB Instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)

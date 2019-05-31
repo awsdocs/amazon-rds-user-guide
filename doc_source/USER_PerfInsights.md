@@ -1,7 +1,7 @@
 # Using Amazon RDS Performance Insights<a name="USER_PerfInsights"></a>
 
 Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so that you can analyze and troubleshoot your database performance\. Amazon RDS Performance Insights is currently available for use with the following DB engines:
-+ Amazon Aurora with MySQL compatibility version 2\.04\.2 only \(compatible with MySQL 5\.7\)
++ Amazon Aurora with MySQL compatibility version 2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\)
 + Amazon Aurora with MySQL compatibility version 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)
 + Amazon Aurora with PostgreSQL compatibility
 + Amazon RDS for MariaDB version 10\.2\.21 and higher 10\.2 versions

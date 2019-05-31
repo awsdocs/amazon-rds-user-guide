@@ -44,6 +44,10 @@ For more information about the slow query and general logs, go to the following 
 + [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
 + [The General Query Log](http://dev.mysql.com/doc/refman/5.6/en/query-log.html)
 
+## Accessing the MySQL Audit Log<a name="USER_LogAccess.MySQL.Auditlog"></a>
+
+To access the audit log, the DB instance must use a custom option group with the `MARIADB_AUDIT_PLUGIN` option\. For more information, see [MariaDB Audit Plugin Support](Appendix.MySQL.Options.AuditPlugin.md)\.
+
 ## Publishing MySQL Logs to CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs"></a>
 
 You can configure your Amazon RDS MySQL DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 

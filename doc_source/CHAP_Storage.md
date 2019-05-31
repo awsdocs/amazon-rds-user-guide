@@ -4,7 +4,7 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
 
 ## Amazon RDS Storage Types<a name="Concepts.Storage"></a>
 
-Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 32 TiB of storage\. You can create Oracle RDS DB instances with up to  64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
+Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 64 TiB of storage\. You can create Oracle RDS DB instances with up to  64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
 
 The following list briefly describes the three storage types: 
 + **General Purpose SSD** – General Purpose SSD, also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
@@ -20,7 +20,7 @@ Several factors can affect the performance of Amazon EBS volumes, such as instan
 ## General Purpose SSD Storage<a name="Concepts.Storage.GeneralSSD"></a>
 
 General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances: 
-+ MySQL, MariaDB, and PostgreSQL DB instances: 20 GiB–32 TiB 
++ MariaDB, MySQL and PostgreSQL database instances: 20 GiB–64 TiB
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
 + Oracle instances: 20 GiB\-  64 TiB 
 
@@ -45,6 +45,9 @@ Storage conversions between magnetic storage and General Purpose SSD storage can
 
 The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
 
+**Note**  
+The IOPS figure reaches its maximum value at a volume storage size of 5,334 GiB\.
+
 
 |  **Storage size \(GiB\)**  |  **Base Performance \(IOPS\)**  | **Maximum Burst Duration at 3,000 IOPS \(Seconds\)**  | **Seconds to Fill Empty I/O Credit Balance**  | 
 | --- | --- | --- | --- | 
@@ -54,9 +57,7 @@ The following table lists several storage sizes\. For each storage size, it list
 |  500  |  1,500  |  3,600  |  3,600  | 
 |  750  |  2,250  |  7,200  |  2,400  | 
 |  1,000  |  3,000  |  Infinite  |  N/A  | 
-|  5,3341  |  16,000  |  N/A  |  N/A  | 
-
-1. The IOPS figure reaches its maximum value at a volume size of 5,334 GiB\.
+|  5,334 |  16,000  |  N/A  |  N/A  | 
 
 The burst duration of your storage depends on the size of the storage, the burst IOPS required, and the I/O credit balance when the burst begins\. This relationship is shown in the equation following\.
 
@@ -154,45 +155,84 @@ To get the most performance out of your Amazon RDS database instance, choose a c
 
 For the full list of Amazon EC2 instance types that support EBS optimization, see [Instance types that support EBS optimization](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)\. 
 
-We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. 
+We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. The following table shows the maximum storage that each DB instance class can scale to for each database engine\. All values are in tebibytes \(TiB\)\.
 
-Scaling higher than 6 TiB is not supported on the following previous generation instances\. 
-+ db\.m1\.small
-+ db\.m1\.medium
-+ db\.m1\.large
-+ db\.m1\.xlarge
-+ db\.m2\.xlarge
-+ db\.m2\.2xlarge
-+ db\.m2\.4xlarge
-+ db\.m3\.large \(deprecated\)
-+ db\.m3\.xlarge \(deprecated\)
-+ db\.m3\.2xlarge \(deprecated\)
 
-Scaling higher than 16 TiB is not supported on the following previous generation instances\.
-+ db\.t2\.small
-+ db\.t2\.micro
+****  
 
-Scaling higher than 32 TiB is not supported on the following previous generation instances\.
-+ db\.t2\.medium
-+ db\.t3\.medium
-+ db\.c1\.medium
-+ db\.c1\.xlarge
-+ db\.cc2\.8xlarge
-+ db\.g2\.2xlarge
-+ db\.g2\.8xlarge
-+ db\.cg1\.4xlarge
-+ db\.m2\.xlarge
-+ db\.m2\.2xlarge
-+ db\.m2\.4xlarge
-+ db\.cr1\.8xlarge
-+ db\.i2\.xlarge
-+ db\.i2\.2xlarge
-+ db\.i2\.4xlarge
-+ db\.i2\.8xlarge
-+ db\.hi1\.4xlarge
-+ db\.hs1\.8xlarge
-+ db\.t1\.micro
-+ db\.m3\.medium
-+ db\.m3\.large
-+ db\.m3\.xlarge
-+ db\.m3\.2xlarge
+| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| --- | --- | --- | --- | --- | --- | 
+| db\.m5 – Latest Generation Standard Instance Classes | 
+| db\.m5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.large | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4 – Current Generation Standard Instance Classes | 
+| db\.m4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4\.10xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m4\.large | 64 | 16 | 64 | 64 | 64 | 
+| db\.m3 – Previous Generation Standard Instance Classes | 
+| db\.m3\.2xlarge | 6 | 16 | 6 | 6 | 6 | 
+| db\.m3\.xlarge | 6 | 16 | 6 | 6 | 6 | 
+| db\.m3\.large | 6 | 16 | 6 | 6 | 6 | 
+| db\.m3\.medium | 32 | 16 | 32 | 32 | 32 | 
+| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5\.24xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.12xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.4xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.2xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.large | 16 |  | 16 | 64 | 64 | 
+| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r4\.large | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3\.large | 64 | 16 | 64 | 64 | 64 | 
+| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3\.2xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.t3\.xlarge | 16 |  | 16 | 64 | 64 | 
+| db\.t3\.large | 16 |  | 16 | 64 | 64 | 
+| db\.t3\.medium | 16 |  | 16 | 32 | 32 | 
+| db\.t3\.small | 16 |  | 16 | 32 | 16 | 
+| db\.t3\.micro | 16 |  | 16 | 32 | 16 | 
+| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.t2\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.t2\.large | 64 | 16 | 64 | 64 | 64 | 
+| db\.t2\.medium | 32 | 16 | 32 | 32 | 32 | 
+| db\.t2\.small | 16 | 16 | 16 | 16 | 16 | 
+| db\.t2\.micro | 16 | 16 | 16 | 16 | 16 | 
+| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
+| db\.x1e\.32xlarge |  | 16 |  | 64 |  | 
+| db\.x1e\.16xlarge |  | 16 |  | 64 |  | 
+| db\.x1e\.8xlarge |  | 16 |  | 64 |  | 
+| db\.x1e\.4xlarge |  | 16 |  | 64 |  | 
+| db\.x1e\.2xlarge |  | 16 |  | 64 |  | 
+| db\.x1e\.xlarge |  | 16 |  | 64 |  | 
+| db\.x1 – Current Generation Memory Optimized Instance Classes | 
+| db\.x1\.32xlarge |  | 16 |  | 64 |  | 
+| db\.x1\.16xlarge |  | 16 |  | 64 |  | 
+
+For Oracle, scaling up to 80,000 IOPS is only supported on the following instance classes\.
++ db\.m5\.24xlarge
++ db\.r5\.24xlarge
++ db\.x1\.32xlarge
++ db\.x1e\.32xlarge 
+
+For more details on all instance classes supported, see [Previous Generation DB Instances](https://aws.amazon.com/rds/previous-generation/)\.

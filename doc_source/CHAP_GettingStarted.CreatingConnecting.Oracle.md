@@ -52,7 +52,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 ## Connecting to Your Sample Oracle DB Instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. In this procedure you connect to your sample DB instance by using the Oracle *sqlplus* command line utility\. To download a stand\-alone version of this utility, see [SQL\*Plus User's Guide and Reference](http://download.oracle.com/docs/cd/B19306_01/server.102/b14357/ape.htm)\. 
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure you connect to your sample DB instance by using the Oracle *sqlplus* command line utility\. To download a stand\-alone version of this utility, see [SQL\*Plus User's Guide and Reference](http://download.oracle.com/docs/cd/B19306_01/server.102/b14357/ape.htm)\. 
 
 **To connect to a DB Instance using SQL\*Plus**
 
@@ -78,6 +78,8 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
        					
    SQL>
    ```
+
+For more information about connecting to an Oracle DB instance, see [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)\.
 
 ## Deleting Your Sample DB Instance<a name="CHAP_GettingStarted.Deleting.Oracle"></a>
 

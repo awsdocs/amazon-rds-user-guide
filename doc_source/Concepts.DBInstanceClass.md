@@ -278,7 +278,7 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.r3\.2xlarge  |  8  |  4  |  2  |  1, 2, 3, 4  |  1, 2  | 
 |  db\.r3\.4xlarge  |  16  |  8  |  2  |  1, 2, 3, 4, 5, 6, 7, 8  |  1, 2  | 
 |  db\.r3\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
-|  db\.r5\.large  |  2  |  1  |  2  |  1  |  1  | 
+|  db\.r5\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.r5\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
 |  db\.r5\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
 |  db\.r5\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 

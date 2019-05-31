@@ -16,6 +16,9 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [Working with DB Parameter Groups](#CHAP_BestPractices.DBParameterGroup)
 + [Amazon RDS Best Practices Presentation Video](#CHAP_BestPractices.Presentation)
 
+**Note**  
+For common recommendations for Amazon RDS, see [Using Amazon RDS Recommendations](USER_Recommendations.md)\.
+
 ## Amazon RDS Basic Operational Guidelines<a name="CHAP_BestPractices.DiskPerformance"></a>
 
 The following are basic operational guidelines that everyone should follow when working with Amazon RDS\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
@@ -64,7 +67,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w4aac13c15b4"></a>
+### Viewing Performance Metrics<a name="w4aac13c17b4"></a>
 
  You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 

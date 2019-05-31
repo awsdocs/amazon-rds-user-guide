@@ -89,7 +89,7 @@ These prechecks are mandatory\. You can't choose to skip them\. The prechecks pr
 + They enable you to avoid unplanned downtime during the upgrade\.
 + If there are incompatibilities, the prechecks enable you to learn about them\. You can then prepare your database for the upgrade to 8\.0 by eliminating the incompatibilities\.
 
-The prechecks include both prechecks that are included with MySQL and prechecks that were created specifically for Amazon RDS\. For information about the prechecks provided by MySQL, see [Upgrade Checker Utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
+The prechecks include include some that are included with MySQL and some that were created specifically for Amazon RDS\. For information about the prechecks provided by MySQL, see [Upgrade Checker Utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
 
 The prechecks run before the DB instance is stopped for the upgrade, meaning that they don't cause any downtime when they run\. If the prechecks find an incompatibility, Amazon RDS automatically cancels the upgrade before the DB instance is stopped\. Amazon RDS also generates an event for the incompatibility\. For more information about Amazon RDS events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 

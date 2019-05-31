@@ -530,8 +530,9 @@ You can use huge pages with the following versions and editions of Oracle:
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
-+ For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually if the instance class is in the db\.t2, db\.r3, or db\.m4 family and it has at least 14 GiB of memory\.
-+ For DB instance classes not mentioned in the table below, if the instance class has less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\.
++ For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
++ For DB instance classes not mentioned in the table below, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`, and `use_large_pages` evaluates to `FALSE`\.
++ For DB instance classes not mentioned in the table below, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\. You can disable huge pages manually by setting `use_large_pages` to `FALSE`\.
 + For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, and `use_large_pages` evaluates to `ONLY`\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
@@ -541,9 +542,11 @@ Huge pages are not enabled by default for the following DB instance classes\.
 
 | DB Instance Class Family | DB Instance Classes with Huge Pages Not Enabled by Default | 
 | --- | --- | 
+|  db\.m5  |  db\.m5\.large  | 
 |  db\.m4  |  db\.m4\.large, db\.m4\.xlarge, db\.m4\.2xlarge, db\.m4\.4xlarge, db\.m4\.10xlarge  | 
 |  db\.m3  |  db\.m3\.medium, db\.m3\.large, db\.m3\.xlarge, db\.m3\.2xlarge  | 
 |  db\.r3  |  db\.r3\.large, db\.r3\.xlarge, db\.r3\.2xlarge, db\.r3\.4xlarge, db\.r3\.8xlarge  | 
+|  db\.t3  |  db\.t3\.micro, db\.t3\.small, db\.t3\.medium, db\.t3\.large  | 
 |  db\.t2  |  db\.t2\.micro, db\.t2\.small, db\.t2\.medium, db\.t2\.large  | 
 
 For more information about DB instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
@@ -742,3 +745,7 @@ After you enable extended data types, you can't perform a point\-in\-time restor
 1. Reboot the DB instance for the parameter change to take effect\.
 
    For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
+
+## Public Synonyms<a name="Oracle.Concepts.PublicSynonyms"></a>
+
+You can create public synonyms referencing objects in your own schemas\. Don't create or modify public synonyms for Oracle\-maintained schemas, including `SYS`, `SYSTEM`, and `RDSADMIN`\. Doing so might result in invalidation of core database components and affect the availability of your DB instance\.

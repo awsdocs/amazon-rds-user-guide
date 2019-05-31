@@ -53,7 +53,7 @@ In this example, you create a DB instance running the MySQL database engine call
 
 ## Connecting to a Database on a DB Instance Running the MySQL Database Engine<a name="CHAP_GettingStarted.Connecting.MySQL"></a>
 
-Once Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a MySQL DB instance using MySQL monitor commands\. One GUI\-based application you can use to connect is MySQL Workbench; for more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For more information on using MySQL, go to the [MySQL documentation](http://dev.mysql.com/doc/)\.
+Once Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a MySQL DB instance using MySQL monitor commands\. One GUI\-based application you can use to connect is MySQL Workbench; for more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For more information on using MySQL, go to the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
 
  **To connect to a database on a DB instance using MySQL monitor** 
 
@@ -66,7 +66,11 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
    1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
-1. Enter the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL monitor\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
+1. Download a SQL client that you can use to connect to the DB instance\.
+
+   You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- The MySQL Command Line Tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+
+1. Connect to the a database on a MySQL DB instance\. For example, enter the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL client\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
 
    ```
    PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
@@ -83,6 +87,12 @@ Once Amazon RDS provisions your DB instance, you can use any standard SQL client
    
    mysql>
    ```
+
+If you can't connect to your MySQL DB instance, two common causes of connection failures to a new DB instance are:
++ The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
++ The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
+
+For more information about connecting to a MySQL DB instance, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\.
 
 ## Deleting a DB Instance<a name="CHAP_GettingStarted.Deleting.MySQL"></a>
 

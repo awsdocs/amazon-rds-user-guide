@@ -1,6 +1,6 @@
 # Using Amazon RDS Recommendations<a name="USER_Recommendations"></a>
 
-Amazon RDS provides automated recommendations for database resources\. These recommendations provide best practice guidance by analyzing DB instance configuration, usage, and performance data\.
+Amazon RDS provides automated recommendations for database resources, such as DB instances, Read Replicas, and DB parameter groups\. These recommendations provide best practice guidance by analyzing DB instance configuration, usage, and performance data\.
 
 You can find examples of these recommendations in the following table\.
 
@@ -15,11 +15,13 @@ You can find examples of these recommendations in the following table\.
 |  Enhanced Monitoring disabled  |  Your DB instance doesn't have Enhanced Monitoring enabled\.  |  We recommend enabling Enhanced Monitoring\. Enhanced Monitoring provides real\-time operating system metrics for monitoring and troubleshooting\.  |  [Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Encryption disabled  |  Your DB instance doesn't have encryption enabled\.  |  We recommend enabling encryption\. You can encrypt your existing Amazon RDS DB instances by restoring from an encrypted snapshot\.  |  [Encrypting Amazon RDS Resources](Overview.Encryption.md)  | 
 |  Previous generation DB instance class in use  |  Your DB instance is running on a previous\-generation DB instance class\.  |  Previous\-generation DB instance classes have been replaced by DB instance classes with better price, better performance, or both\. We recommend running your DB instance on a later generation DB instance class\.  |  [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)  | 
+|  Huge pages not used for an Oracle DB instance  |  The `use_large_pages` parameter is not set to `ONLY` in the DB parameter group used by your DB instance\.  |  For increased database scalability, we recommend setting `use_large_pages` to `ONLY` in the DB parameter group used by your DB instance\.  |  [Using Huge Pages with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.HugePages)  | 
+|  Nondefault custom memory parameters  |  Your DB parameter group sets memory parameters that diverge too much from the default values\.  |  Settings that diverge too much from the default values can cause poor performance and errors\. We recommend setting custom memory parameters to their default values in the DB parameter group used by the DB instance\.  |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
+|  Change buffering enabled for a MySQL DB instance  |  Your DB parameter group has change buffering enabled\.  |  Change buffering allows a MySQL DB instance to defer some writes necessary to maintain secondary indexes\. This configuration can improve performance slightly, but it can create a large delay in crash recovery\. During crash recovery, the secondary index must be brought up to date\. So, the benefits of change buffering are outweighed by the potentially very long crash recovery events\. We recommend disabling change buffering\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 1: Parameters related to performance](https://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-1-parameters-related-to-performance/) on the AWS Database Blog  | 
+|  Query cache enabled for a MySQL DB instance  |  Your DB parameter group has query cache parameter enabled\.  |  The query cache can cause the DB instance to appear to stall when changes require the cache to be purged\. Most workloads don't benefit from a query cache\. The query cache was removed from MySQL version 8\.0\. We recommend that you disable the query cache parameter\.  |  [ Best practices for configuring parameters for Amazon RDS for MySQL, part 1: Parameters related to performance](https://aws.amazon.com/blogs/database/best-practices-for-configuring-parameters-for-amazon-rds-for-mysql-part-1-parameters-related-to-performance/) on the AWS Database Blog  | 
+|  Logging to table  |  Your DB parameter group sets logging output to `TABLE`\.  |  Setting logging output to `TABLE` uses more storage than setting this parameter to `FILE`\. To avoid reaching the storage limit, we recommend setting the logging output parameter to `FILE`\.  |  [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)  | 
 
-Amazon RDS generates recommendations periodically across all accounts and resources\.
-
-**Topics**
-+ [Responding to Amazon RDS Recommendations](#USER_Recommendations.Responding)
+Amazon RDS generates recommendations for a resource when the resource is created or modified\. Amazon RDS also periodically scans your resources and generates recommendations\.
 
 ## Responding to Amazon RDS Recommendations<a name="USER_Recommendations.Responding"></a>
 
@@ -38,8 +40,8 @@ You can find recommendations in the AWS Management Console\. You can perform the
 1. On the **Recommendations** page, choose one of the following:
    + **Active** – Shows the current recommendations that you can apply, dismiss, or schedule\.
    + **Dismissed** – Shows the recommendations that have been dismissed\. When you choose **Dismissed**, you can apply these dismissed recommendations\.
-   + **Applied** – Shows the recommendations that are currently applied\.
    + **Scheduled** – Shows the recommendations that are scheduled but not yet applied\. These recommendations will be applied in the next scheduled maintenance window\.
+   + **Applied** – Shows the recommendations that are currently applied\.
 
    From any list of recommendations, you can open a section to view the recommendations in that section\.  
 ![\[Take action on recommendations in the console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/recommendations-active.png)
@@ -53,10 +55,12 @@ You can find recommendations in the AWS Management Console\. You can perform the
 
    1. Choose **Active** and open one or more sections to view the recommendations in them\.
 
-   1. Choose one or more recommendations and choose **Apply now** \(to apply them immediately\), **Apply in next maintenance window**, or **Dismiss**\.
+   1. Choose one or more recommendations and choose **Apply now** \(to apply them immediately\), **Schedule** \(to apply them in next maintenance window\), or **Dismiss**\.
 
-      If the **Apply now** button appears for a recommendation but is unavailable \(grayed out\), the DB instance is not available\. You can apply recommendations immediately only if the DB instance status is **available**\. For example, you can't apply recommendations immediately to the DB instance if its status is **modifying**\. In this case, wait for the DB instance to be available and apply the recommendation\.
+      If the **Apply now** button appears for a recommendation but is unavailable \(grayed out\), the DB instance is not available\. You can apply recommendations immediately only if the DB instance status is **available**\. For example, you can't apply recommendations immediately to the DB instance if its status is **modifying**\. In this case, wait for the DB instance to be available and then apply the recommendation\.
 
-      If the **Active** button doesn't appear for a recommendation, you can't apply the recommendation using the **Recommendations** page\. You can modify the DB instance to apply the recommendation manually\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+      If the **Active** button doesn't appear for a recommendation, you can't apply the recommendation using the **Recommendations** page\. You can modify the DB instance to apply the recommendation manually\.
+
+      For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 **Note**  
 When you choose **Apply now**, a brief DB instance outage might result\.

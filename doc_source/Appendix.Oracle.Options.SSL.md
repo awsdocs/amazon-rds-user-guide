@@ -77,7 +77,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
 
 1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
 
-   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 1. In the `$ORACLE_HOME/network/admin` directory, modify or create the tnsnames\.ora file and include the following entry\.
 
@@ -157,7 +157,7 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 
 1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
 
-   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance ](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 1.  Convert the certificate to \.der format using the following command\.
 

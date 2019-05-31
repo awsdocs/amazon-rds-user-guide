@@ -170,7 +170,7 @@ To back up your database, you call the `rds_backup_database` stored procedure\.
 You can't back up a database during the maintenance window, or when Amazon RDS is taking a snapshot\. 
 
 The following parameters are required: 
-+ >`@source_db_name` – The name of the database to back up
++ `@source_db_name` – The name of the database to back up
 + `@s3_arn_to_backup_to` – The bucket to use for the backup, plus the name of the file \(Amazon S3 bucket \+ key ARN\)\. 
 
   The file can have any extension, but `.bak` is traditional\. 
