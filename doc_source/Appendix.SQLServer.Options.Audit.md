@@ -169,7 +169,7 @@ Typically, when you create a new option, the AWS Management Console creates the 
 
 You can use the examples in this section to create the trust and permissions policies you need\.
 
-The following example shows a trust policy for SQL Server Audit\. The policy uses the *service principle* `rds.amazonaws.com` to allow RDS to write to the S3 bucket\. A *service principal* is an identifier that is used to grant permissions to a service\. Anytime you allow access to `rds.amazonaws.com` in this way, you are allowing RDS to perform an action on your behalf\. For more information about service principals, see [AWS JSON Policy Elements: Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)\.
+The following example shows a trust policy for SQL Server Audit\. The policy uses the *service principal* `rds.amazonaws.com` to allow RDS to write to the S3 bucket\. A *service principal* is an identifier that is used to grant permissions to a service\. Anytime you allow access to `rds.amazonaws.com` in this way, you are allowing RDS to perform an action on your behalf\. For more information about service principals, see [AWS JSON Policy Elements: Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)\.
 
 ```
 {
