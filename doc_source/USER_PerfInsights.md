@@ -10,12 +10,14 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 + Amazon RDS for PostgreSQL version 10
 + Amazon RDS for Oracle \(all versions\)
 
-**Important**  
-For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.
-
 **Note**  
 Amazon RDS Performance Insights is not supported for MariaDB version 10\.0, 10\.1, or 10\.3, or for MySQL version 5\.5 or 8\.0\.  
-For Amazon RDS for MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.
+For Amazon RDS for MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  
+On Aurora MySQL, Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes\.  
+Performance Insights is not supported for Aurora MySQL DB clusters enabled for parallel query\.
+
+**Important**  
+This guide describes using Amazon RDS Performance Insights with non\-Aurora DB engines\. For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.
 
 Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\.
 

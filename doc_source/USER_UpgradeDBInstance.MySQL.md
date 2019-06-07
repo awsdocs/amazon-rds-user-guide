@@ -83,17 +83,40 @@ SELECT DISTINCT CONCAT('ALTER TABLE `',
 
 ### Prechecks for Upgrades from MySQL 5\.7 to 8\.0<a name="USER_UpgradeDBInstance.MySQL.57to80Prechecks"></a>
 
-MySQL 8\.0 includes a number of incompatibilities with MySQL 5\.7\. These incompatibilities can cause problems during an upgrade from MySQL 5\.7 to MySQL 8\.0\. So, some preparation might be required on your database for the upgrade to be successful\. When you start an upgrade from MySQL 5\.7 to 8\.0, Amazon RDS runs prechecks automatically to detect these incompatibilities\. For information about upgrading to MySQL 8\.0, see [Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/upgrading.html)\.
+MySQL 8\.0 includes a number of incompatibilities with MySQL 5\.7\. These incompatibilities can cause problems during an upgrade from MySQL 5\.7 to MySQL 8\.0\. So, some preparation might be required on your database for the upgrade to be successful\. The following is a general list of these incompatibilities:
++ There must be no tables that use obsolete data types or functions\.
++ There must be no orphan \*\.frm files\.
++ Triggers must not have a missing or empty definer or an invalid creation context\.
++ There must be no partitioned table that uses a storage engine that does not have native partitioning support\.
++ There must be no keyword or reserved word violations\. Some keywords might be reserved in MySQL 8\.0 that were not reserved previously\.
+
+  For more information, see [Keywords and Reserved Words](https://dev.mysql.com/doc/refman/8.0/en/keywords.html) in the MySQL documentation\.
++ There must be no tables in the MySQL 5\.7 `mysql` system database that have the same name as a table used by the MySQL 8\.0 data dictionary\.
++ There must be no obsolete SQL modes defined in your `sql_mode` system variable setting\.
++ There must be no tables or stored procedures with individual `ENUM` or `SET` column elements that exceed 255 characters or 1020 bytes in length\.
++ Before upgrading to MySQL 8\.0\.13 or higher, there must be no table partitions that reside in shared InnoDB tablespaces\.
++ There must be no queries and stored program definitions from MySQL 8\.0\.12 or lower that use `ASC` or `DESC` qualifiers for `GROUP BY` clauses\.
++ Your MySQL 5\.7 installation must not use features that are not supported in MySQL 8\.0\.
+
+  For more information, see [ Features Removed in MySQL 8\.0](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals) in the MySQL documentation\.
++ There must be no foreign key constraint names longer than 64 characters\.
++ For improved Unicode support, consider converting objects that use the `utf8mb3` charset to use the `utf8mb4` charset\. The `utf8mb3` character set is deprecated\. Also, consider using `utf8mb4` for character set references instead of `utf8`, because currently `utf8` is an alias for the `utf8mb3` charset\.
+
+  For more information, see [ The utf8mb3 Character Set \(3\-Byte UTF\-8 Unicode Encoding\)](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb3.html) in the MySQL documentation\.
+
+When you start an upgrade from MySQL 5\.7 to 8\.0, Amazon RDS runs prechecks automatically to detect these incompatibilities\. For information about upgrading to MySQL 8\.0, see [Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/upgrading.html) in the MySQL documentation\.
 
 These prechecks are mandatory\. You can't choose to skip them\. The prechecks provide the following benefits:
 + They enable you to avoid unplanned downtime during the upgrade\.
-+ If there are incompatibilities, the prechecks enable you to learn about them\. You can then prepare your database for the upgrade to 8\.0 by eliminating the incompatibilities\.
++ If there are incompatibilities, Amazon RDS prevents the upgrade and provides a log for you to learn about them\. You can then use the log to prepare your database for the upgrade to MySQL 8\.0 by eliminating the incompatibilities\. For detailed information about removing incompatibilities, see [ Preparing Your Installation for Upgrade](https://dev.mysql.com/doc/refman/8.0/en/upgrade-prerequisites.html) in the MySQL documentation and [ Upgrading to MySQL 8\.0? Here is what you need to know…](https://mysqlserverteam.com/upgrading-to-mysql-8-0-here-is-what-you-need-to-know/) on the MySQL Server Blog\.
 
-The prechecks include include some that are included with MySQL and some that were created specifically for Amazon RDS\. For information about the prechecks provided by MySQL, see [Upgrade Checker Utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
+The prechecks include some that are included with MySQL and some that were created specifically by the Amazon RDS team\. For information about the prechecks provided by MySQL, see [Upgrade Checker Utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-upgrade.html)\.
 
 The prechecks run before the DB instance is stopped for the upgrade, meaning that they don't cause any downtime when they run\. If the prechecks find an incompatibility, Amazon RDS automatically cancels the upgrade before the DB instance is stopped\. Amazon RDS also generates an event for the incompatibility\. For more information about Amazon RDS events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
 Amazon RDS records detailed information about each incompatibility in the log file `PrePatchCompatibility.log`\. In most cases, the log entry includes a link to the MySQL documentation for correcting the incompatibility\. For more information about viewing log files, see [Viewing and Listing Database Log Files](USER_LogAccess.md#USER_LogAccess.Procedural.Viewing)\.
+
+Due to the nature of the prechecks, they analyze the objects in your database\. This analysis results in resource consumption and increases the time for the upgrade to complete\.
 
 **Note**  
 Amazon RDS runs prechecks only for an upgrade from MySQL 5\.7 to MySQL 8\.0\. They aren't run for upgrades to releases lower than MySQL 8\.0\. For example, prechecks aren't run for an upgrade from MySQL 5\.6 to MySQL 5\.7\.

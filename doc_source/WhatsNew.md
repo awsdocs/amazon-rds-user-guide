@@ -1,11 +1,12 @@
 # Document History<a name="WhatsNew"></a>
-+ **Latest documentation update: **May 22, 2019
-+ **Current API version: **2014\-10\-31
+
+**Current API version: **2014\-10\-31
 
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS adds support native restores of SQL Server databases up to 16 TB](#WhatsNew) | You can now do native restores of up to 16 TB from SQL Server to Amazon RDS\. For more information, see [Amazon RDS for SQL Server: Limitations and Recommendations](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html#SQLServer.Procedural.Importing.Native.Limitations)\. | June 4, 2019 | 
 | [Amazon RDS adds support for Microsoft SQL Server Audit](#WhatsNew) | Using Amazon RDS for Microsoft SQL Server, you can audit server and database level events using SQL Server Audit, and view the results on your DB instance or send the audit log files directly to Amazon S3\. For more information, see [SQL Server Audit](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.SQLServer.Options.Audit.html)\. | May 23, 2019 | 
 | [Improvements to Amazon RDS recommendations](#WhatsNew) | Amazon RDS has improved its automated recommendations for database resources\. For example, Amazon RDS now provides recommendations for database parameters\. For more information, see [Using Amazon RDS Recommendations](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Recommendations.html)\. | May 22, 2019 | 
 | [Support for more databases per DB instance for Amazon RDS SQL Server](#WhatsNew) | You can create up to 30 databases on each of your DB instances running Microsoft SQL Server\. For more information, see [Limits for Microsoft SQL Server DB Instances](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | May 21, 2019 | 

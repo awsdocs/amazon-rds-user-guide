@@ -188,12 +188,12 @@ The following are DB engine considerations for DB instance classes:
 | db\.r5\.xlarge | Yes | No | Yes | Yes | Yes | 
 | db\.r5\.large | Yes | No | Yes | Yes | Yes | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
-| db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
+| db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
 | db\.r3\.8xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r3\.4xlarge | Yes | Yes | Yes | Yes | Yes | 

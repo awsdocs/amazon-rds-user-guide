@@ -66,7 +66,16 @@ The general process for adding the Management Agent option to a DB instance is t
 
 After you add the Management Agent option, you don't need to restart your DB instance\. As soon as the option group is active, the OEM Agent is active\. 
 
-### AWS Management Console<a name="Oracle.Options.OEMAgent.Add.Console"></a>
+If your OMS host is using an untrusted third\-party certificate, Amazon RDS returns the following error\.
+
+```
+You successfully installed the OEM_AGENT option. Your OMS host is using an untrusted third party certificate. 
+Configure your OMS host with the trusted certificates from your third party.
+```
+
+If this error is returned, the Management Agent option isn't enabled until the problem is corrected\. For information about correcting the problem, see the My Oracle Support document [2202569\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2202569.1)\.
+
+### Console<a name="Oracle.Options.OEMAgent.Add.Console"></a>
 
 **To add the Management Agent option to a DB instance**
 
