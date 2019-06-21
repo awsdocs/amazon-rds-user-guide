@@ -46,7 +46,7 @@ The following example returns a list of log files for a DB instance named `my-db
 
 ### API<a name="USER_LogAccess.API"></a>
 
-To list the available database log files for a DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeDBLogFiles.html) action\.
+To list the available database log files for a DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) action\.
 
 ## Downloading a Database Log File<a name="USER_LogAccess.Procedural.Downloading"></a>
 
@@ -97,7 +97,7 @@ For Windows:
 
 ### RDS API<a name="USER_LogAccess.Procedural.Downloading.API"></a>
 
-To download a database log file, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DownloadDBLogFilePortion.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DownloadDBLogFilePortion.html) action\.
+To download a database log file, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DownloadDBLogFilePortion.html) action\.
 
 ## Watching a Database Log File<a name="USER_LogAccess.Procedural.Watching"></a>
 

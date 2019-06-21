@@ -52,7 +52,7 @@ You can specify that tags are copied to DB snapshots for the following actions:
 **Note**  
 If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API action\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. Once you have created your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API action\) you can then add tags as described later in this topic\.
 
-## AWS Management Console<a name="USER_Tagging.CON"></a>
+## Console<a name="USER_Tagging.CON"></a>
 
 The process to tag an Amazon RDS resource is similar for all resources\. The following procedure shows how to tag an Amazon RDS DB instance\. 
 
@@ -96,7 +96,7 @@ To filter the list of DB instances in the **Databases** pane, enter a text strin
 
 1. Choose **Delete**, and then choose **Delete** in the **Delete tags** window\. 
 
-## CLI<a name="USER_Tagging.CLI"></a>
+## AWS CLI<a name="USER_Tagging.CLI"></a>
 
 You can add, list, or remove tags for a DB instance using the AWS CLI\.
 + To add one or more tags to an Amazon RDS resource, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html](https://docs.aws.amazon.com/cli/latest/reference/rds/add-tags-to-resource.html)\.
@@ -105,12 +105,12 @@ You can add, list, or remove tags for a DB instance using the AWS CLI\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
-## API<a name="USER_Tagging.API"></a>
+## RDS API<a name="USER_Tagging.API"></a>
 
 You can add, list, or remove tags for a DB instance using the Amazon RDS API\.
-+ To add a tag to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_AddTagsToResource.html) operation\.
-+ To list tags that are assigned to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ListTagsForResource.html)\.
-+ To remove tags from an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_RemoveTagsFromResource.html) operation\.
++ To add a tag to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddTagsToResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddTagsToResource.html) operation\.
++ To list tags that are assigned to an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ListTagsForResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ListTagsForResource.html)\.
++ To remove tags from an Amazon RDS resource, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveTagsFromResource.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RemoveTagsFromResource.html) operation\.
 
 To learn more about how to construct the required ARN, see [Constructing an ARN for Amazon RDS](USER_Tagging.ARN.md#USER_Tagging.ARN.Constructing)\.
 
@@ -136,5 +136,3 @@ The following table provides a list of the allowed XML tags and their characteri
 
 ****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-
-## <a name="USER_Tagging.related"></a>

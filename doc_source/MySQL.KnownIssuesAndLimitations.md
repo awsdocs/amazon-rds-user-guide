@@ -8,6 +8,7 @@ Known issues and limitations for working with MySQL on Amazon RDS are as follows
 + [Log File Size](#MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize)
 + [MySQL Parameter Exceptions for Amazon RDS DB Instances](#MySQL.Concepts.ParameterNotes)
 + [MySQL File Size Limits](#MySQL.Concepts.Limits.FileSize)
++ [MySQL Keyring Plugin Not Supported](#MySQL.Concepts.Limits.KeyRing)
 
 ## Inconsistent InnoDB Buffer Pool Size<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize"></a>
 
@@ -105,3 +106,7 @@ When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can i
 ```
 ALTER TABLE table_name ENGINE=InnoDB;
 ```
+
+## MySQL Keyring Plugin Not Supported<a name="MySQL.Concepts.Limits.KeyRing"></a>
+
+Currently, Amazon RDS for MySQL does not support the MySQL `keyring_aws` Amazon Web Services Keyring Plugin\.

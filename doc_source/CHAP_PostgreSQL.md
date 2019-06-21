@@ -764,7 +764,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 
 | [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 1\.3\.2 | 
 | [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 
-| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.3 | 1\.4\.3 | 
+| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.3 | 1\.4\.4 | 
 | pg\_similarity | 1\.0 | 1\.0 | 
 | [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 
 | [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 

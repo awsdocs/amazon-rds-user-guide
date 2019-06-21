@@ -46,7 +46,7 @@ For Windows:
 
 ## API<a name="USER_UpgradeDBSnapshot.MySQL.API"></a>
 
-To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBSnapshot.html) action\. 
+To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) action\. 
 + `DBSnapshotIdentifier` – The identifier of the DB snapshot to upgrade\. The identifier must be a unique Amazon Resource Name \(ARN\)\. For more information, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\. 
 + `EngineVersion` – The engine version to upgrade the DB snapshot to\. 
 

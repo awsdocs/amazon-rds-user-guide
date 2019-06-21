@@ -40,6 +40,66 @@ The following table shows the TLS option settings that are supported for differe
 |  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
+## Adding the SSL Option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
+
+To use SSL, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `SSL` option\.
+
+### Console<a name="Appendix.Oracle.Options.SSL.OptionGroup.Console"></a>
+
+**To add the SSL option to an option group**
+
+1. Create a new option group or identify an existing option group to which you can add the `SSL` option\.
+
+   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+
+1. Add the `SSL` option to the option group\.
+
+   For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+
+1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
+
+   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+
+   For information about modifying an Oracle DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
+### AWS CLI<a name="Appendix.Oracle.Options.SSL.OptionGroup.CLI"></a>
+
+**To add the SSL option to an option group**
+
+1. Create a new option group or identify an existing option group to which you can add the `SSL` option\.
+
+   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+
+1. Add the `SSL` option to the option group\.
+
+   Specify the following option settings:
+   + `Port` – The SSL port number
+   + `VpcSecurityGroupMemberships` – The VPC security group for which the option is enabled
+   + `SQLNET.SSL_VERSION` – The TLS version that client can use to connect to the DB instance
+
+   For example, the following AWS CLI command adds the `SSL` option to an option group named `ora-option-group`\.  
+**Example**  
+
+   For Linux, OS X, or Unix:
+
+   ```
+   aws rds add-option-to-option-group --option-group-name ora-option-group \
+     --options 'OptionName=SSL,Port=2484,VpcSecurityGroupMemberships="sg-68184619",OptionSettings=[{Name=SQLNET.SSL_VERSION,Value=1.0}]'
+   ```
+
+   For Windows:
+
+   ```
+   aws rds add-option-to-option-group --option-group-name ora-option-group ^
+     --options 'OptionName=SSL,Port=2484,VpcSecurityGroupMemberships="sg-68184619",OptionSettings=[{Name=SQLNET.SSL_VERSION,Value=1.0}]'
+   ```
+
+1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
+
+   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+
+   For information about modifying an Oracle DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
 ## Configuring SQL\*Plus to Use SSL with an Oracle DB Instance<a name="Appendix.Oracle.Options.SSL.ClientConfiguration"></a>
 
 You must configure SQL\*Plus before connecting to an Oracle DB instance that uses the Oracle SSL option\.

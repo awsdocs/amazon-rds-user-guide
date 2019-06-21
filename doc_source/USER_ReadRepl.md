@@ -134,7 +134,7 @@ The following steps show the general process for promoting a Read Replica to a D
 
 1. For MySQL and MariaDB only: If you need to make changes to the MySQL or MariaDB Read Replica, you must set the `read_only` parameter to `0` in the DB parameter group for the Read Replica\. You can then perform all needed DDL operations, such as creating indexes, on the Read Replica\. Actions taken on the Read Replica don't affect the performance of the source DB instance\.
 
-1. Promote the Read Replica by using the **Promote Read Replica** option on the Amazon RDS console, the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html), or the [ `PromoteReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_PromoteReadReplica.html) Amazon RDS API operation\.
+1. Promote the Read Replica by using the **Promote Read Replica** option on the Amazon RDS console, the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html), or the [ `PromoteReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplica.html) Amazon RDS API operation\.
 **Note**  
 The promotion process takes a few minutes to complete\. When you promote a Read Replica, replication is stopped and the Read Replica is rebooted\. When the reboot is complete, the Read Replica is available as a new DB instance\.
 
