@@ -67,7 +67,8 @@ For example, you might use this feature for a new mobile gaming application that
 
 With storage autoscaling enabled, when RDS detects that you are running out of free database space it automatically scales up your storage\. RDS starts a storage modification for an autoscale\-enabled DB instance when these factors apply:
 + Free available space is less than 10 percent of the allocated storage\.
-+ The low\-storage condition lasts at least five minutes\. 
++ The low\-storage condition lasts at least five minutes\.
++ Six hours have passed since the last allocated storage modification\.
 
 Currently, the additional storage is at least 5 GiB in size and at most 10 percent of the currently allocated storage\. You can't modify the allocated storage to a value greater than the maximum allocated storage for autoscale\-enabled instances\.
 
