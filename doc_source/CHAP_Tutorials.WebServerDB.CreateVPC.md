@@ -1,12 +1,12 @@
-# Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
+# Tutorial: Create an Amazon VPC for Use with a DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
 
-A common scenario includes an Amazon RDS DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
+A common scenario includes a DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
 
 The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)\. 
 
 ![\[VPC and EC2 security group Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
-Because your Amazon RDS DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public Internet\. The Amazon RDS DB instance is hosted in a private subnet\. The web server is able to connect to the Amazon RDS DB instance because it is hosted within the same VPC, but the Amazon RDS DB instance is not available to the public Internet, providing greater security\. 
+Because your DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public Internet\. The DB instance is hosted in a private subnet\. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance is not available to the public Internet, providing greater security\. 
 
 ## Create a VPC with Private and Public Subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets"></a>
 
@@ -34,9 +34,9 @@ Use the following procedure to create a VPC with both public and private subnets
    + **Private subnet name:** `Tutorial Private 1` 
    + **Instance type:** `t2.small`
 **Important**  
-If you do not see the **Instance type** box in the console, click **Use a NAT instance instead**\. This link is on the right\.
+If you don't see the **Instance type** box in the console, choose **Use a NAT instance instead**\. This link is on the right\.
 **Note**  
-If the t2\.small instance type is not listed, you can select a different instance type\.
+If the t2\.small instance type is not listed, you can choose a different instance type\.
    + **Key pair name:** `No key pair`
    + **Service endpoints:** Skip this field\.
    + **Enable DNS hostnames:** `Yes`
@@ -46,7 +46,7 @@ If the t2\.small instance type is not listed, you can select a different instanc
 
 ## Create Additional Subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets"></a>
 
-You must have either two private subnets or two public subnets available to create an Amazon RDS DB subnet group for an RDS DB instance to use in a VPC\. Because the RDS DB instance for this tutorial is private, add a second private subnet to the VPC\. 
+You must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC\. Because the DB instance for this tutorial is private, add a second private subnet to the VPC\. 
 
 **To create an additional subnet**
 
@@ -91,11 +91,11 @@ Next you create a security group for public access\. To connect to public instan
 
 1. To create the security group, choose **Create**\. Next, choose **Close** on the confirmation page\.
 
-   Note the security group ID because you will need it later in this tutorial\.
+   Note the security group ID because you need it later in this tutorial\.
 
 **To add inbound rules to the security group**
 
-1. Determine the IP address that you will use to connect to instances in your VPC\. To determine your public IP address, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
+1. Determine the IP address to use to connect to instances in your VPC\. To determine your public IP address, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
    If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
@@ -121,9 +121,9 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
 
 1. To save your settings, choose **Save rules**\. Next, choose **Close** on the confirmation page\.
 
-## Create a VPC Security Group for a Private Amazon RDS DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
+## Create a VPC Security Group for a Private DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
 
-To keep your Amazon RDS DB instance private, create a second security group for private access\. To connect to private instances in your VPC, you add inbound rules to your VPC security group that allow traffic from your web server only\. 
+To keep your DB instance private, create a second security group for private access\. To connect to private instances in your VPC, you add inbound rules to your VPC security group that allow traffic from your web server only\. 
 
 **To create a VPC security group**
 

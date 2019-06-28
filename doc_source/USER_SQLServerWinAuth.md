@@ -214,4 +214,4 @@ You can restore a DB snapshot or do a point\-in\-time restore for a SQL Server D
 
 ## Related Topics<a name="USER_SQLServerWinAuth.related"></a>
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)
-+ [Configuring Security in Amazon RDS](UsingWithRDS.md)
++ [Security in Amazon RDS](UsingWithRDS.md)

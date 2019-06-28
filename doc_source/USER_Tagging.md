@@ -16,7 +16,7 @@ All Amazon RDS resources can be tagged
 + DB security groups
 + DB subnet groups
 
-For information on managing access to tagged resources with IAM policies, see [Authentication and Access Control](UsingWithRDS.IAM.md)\. 
+For information on managing access to tagged resources with IAM policies, see [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)\. 
 
 ## Overview of Amazon RDS Resource Tags<a name="Overview.Tagging"></a>
 

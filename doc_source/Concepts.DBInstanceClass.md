@@ -176,10 +176,10 @@ The following are DB engine considerations for DB instance classes:
 | db\.m4\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.large | Yes | Yes | Yes | Yes | Yes | 
 | db\.m3 – Previous Generation Standard Instance Classes | 
-| db\.m3\.2xlarge | No | Yes | Yes | Yes | Yes | 
-| db\.m3\.xlarge | No | Yes | Yes | Yes | Yes | 
-| db\.m3\.large | No | Yes | Yes | Yes | Yes | 
-| db\.m3\.medium | No | Yes | Yes | Yes | Yes | 
+| db\.m3\.2xlarge | No | Yes | Yes | Deprecated | Yes | 
+| db\.m3\.xlarge | No | Yes | Yes | Deprecated | Yes | 
+| db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
+| db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
 | db\.m1 – Previous Generation Standard Instance Classes | 
 | db\.m1\.xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | db\.m1\.large | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
@@ -220,11 +220,11 @@ The following are DB engine considerations for DB instance classes:
 | db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
-| db\.r3\.8xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r3\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r3\.xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r3\.large | Yes | Yes | Yes | Yes | Yes | 
+| db\.r3\.8xlarge | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m2 – Previous Generation Memory Optimized Instance Classes | 
 | db\.m2\.4xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 

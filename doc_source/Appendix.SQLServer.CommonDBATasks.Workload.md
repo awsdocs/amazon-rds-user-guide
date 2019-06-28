@@ -20,7 +20,7 @@ For a server\-side trace, you must get the trace files on the DB instance into a
 
 1. Start SQL Server Profiler\. It is installed in the Performance Tools folder of your SQL Server instance folder\. You must load or define a trace definition template to start a client\-side trace\.
 
-1. In the SQL Server Profiler File menu, click **New Trace**\. In the **Connect to Server** dialog box, enter the DB instance endpoint, port, master user name, and password of the database you would like to run a trace on\.
+1. In the SQL Server Profiler File menu, choose **New Trace**\. In the **Connect to Server** dialog box, enter the DB instance endpoint, port, master user name, and password of the database you would like to run a trace on\.
 
 1. In the **Trace Properties** dialog box, enter a trace name and choose a trace definition template\. A default template, TSQL\_Replay, ships with the application\. You can edit this template to define your trace\. Edit events and event information under the **Events Selection** tab of the **Trace Properties** dialog box\. For more information about trace definition templates and using the SQL Server Profiler to specify a client\-side trace see the documentation in [MSDN](http://msdn.microsoft.com/en-us/library/ms173494%28v=sql.105%29.aspx)\.
 

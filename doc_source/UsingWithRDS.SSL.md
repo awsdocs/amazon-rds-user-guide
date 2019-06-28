@@ -7,20 +7,20 @@ You can use SSL from your application to encrypt a connection to a DB instance r
 + [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
 + [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
-A root certificate that works for all regions can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. It is the trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\. You can download a root certificate for the AWS GovCloud regions at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-GovCloud\-Root\-CA\-2017\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-GovCloud-Root-CA-2017.pem)\.
+A root certificate that works for all AWS Regions can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2015\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. It is the trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\. You can download a root certificate for the AWS GovCloud Regions at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-GovCloud\-Root\-CA\-2017\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-GovCloud-Root-CA-2017.pem)\.
 
 **Note**  
 All certificates are only available for download using SSL connections\.
 
 A certificate bundle that contains both the intermediate and root certificates can be downloaded at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
 
-A certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud regions can be downloaded at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 
+A certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud Regions can be downloaded at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 
 
-If your application is on the Microsoft Windows platform and requires a PKCS7 file, you can download the PKCS7 certificate bundle that contains both the intermediate and root certificates at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.p7b](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.p7b)\. 
+If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.p7b](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.p7b)\. 
 
 ## Intermediate Certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
 
-You might need to use an intermediate certificate to connect to your region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) region using SSL\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following list:
+You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following list:
 
 [Asia Pacific \(Hong Kong\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-east-1.pem)
 

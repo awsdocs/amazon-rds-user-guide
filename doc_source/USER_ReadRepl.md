@@ -423,7 +423,7 @@ aws rds create-db-instance-read-replica ^
 
 ## Monitoring Read Replication<a name="USER_ReadRepl.Monitoring"></a>
 
-You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica in the **Availability and durability** section of the Read Replica details\. To view the details for a Read Replica, click the name of the Read Replica in the list of instances in the Amazon RDS console\.
+You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica in the **Availability and durability** section of the Read Replica details\. To view the details for a Read Replica, choose the name of the Read Replica in the list of instances in the Amazon RDS console\.
 
 ![\[Read Replica status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ReadReplicaStatus.png)
 

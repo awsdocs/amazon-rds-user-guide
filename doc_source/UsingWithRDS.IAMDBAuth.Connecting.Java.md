@@ -1,6 +1,6 @@
 # Connecting to Your DB Instance Using the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
-You can connect from the command line to an Amazon RDS DB instance with the AWS SDK for Java as described following\.
+You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Java as described following\.
 
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)

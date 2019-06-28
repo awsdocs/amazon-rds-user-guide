@@ -54,7 +54,7 @@ Incompatibilities between MySQL and MariaDB include the following:
      + Its first character must be a letter\.
      + It cannot end with a hyphen or contain two consecutive hyphens\.
      + It must be unique for all DB instances for your AWS account, within an AWS Region\.
-   + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your MariaDB DB instance by selecting your VPC identifier, for example `vpc-a464d1c1`\. For more information about VPC, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md) \.
+   + **Virtual Private Cloud \(VPC\)**: If you have an existing VPC, then you can use that VPC with your MariaDB DB instance by selecting your VPC identifier, for example `vpc-a464d1c1`\. For more information about VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md) \.
 
      Otherwise, you can choose to have Amazon RDS create a VPC for you by selecting Create a new VPC\. 
 

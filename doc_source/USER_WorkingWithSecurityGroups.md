@@ -15,7 +15,7 @@ Otherwise, if you are on the EC2\-Classic platform, you use DB security groups t
 
 **Note**  
 To determine which platform you are on, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\.  
-If you are on the EC2\-VPC platform, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
+If you are on the EC2\-VPC platform, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 **Topics**
 + [Creating a DB Security Group](#USER_WorkingWithSecurityGroups.Creating)
@@ -38,7 +38,7 @@ To create a DB security group, you need to provide a name and a description\.
 
 1. Choose **Security Groups** in the navigation pane on the left side of the window\.
 **Note**  
-If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 1. Choose **Create DB Security Group**\.
 

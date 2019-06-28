@@ -5,7 +5,6 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 **Topics**
 + [Amazon RDS Basic Operational Guidelines](#CHAP_BestPractices.DiskPerformance)
 + [DB Instance RAM Recommendations](#CHAP_BestPractices.Performance.RAM)
-+ [Amazon RDS Security Best Practices](#CHAP_BestPractices.Security)
 + [Using Enhanced Monitoring to Identify Operating System Issues](#CHAP_BestPractices.EnhancedMonitoring)
 + [Using Metrics to Identify Performance Issues](#CHAP_BestPractices.UsingMetrics)
 + [Best Practices for Working with MySQL Storage Engines](#CHAP_BestPractices.MySQLStorage)
@@ -38,18 +37,6 @@ The following are basic operational guidelines that everyone should follow when 
 
 An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
 
-## Amazon RDS Security Best Practices<a name="CHAP_BestPractices.Security"></a>
-
-Use AWS IAM accounts to control access to Amazon RDS API actions, especially actions that create, modify, or delete RDS resources such as DB instances, security groups, option groups, or parameter groups, and actions that perform common administrative actions such as backing up and restoring DB instances, or configuring Provisioned IOPS storage\.
-+ Assign an individual IAM account to each person who manages RDS resources\. Do not use AWS root credentials to manage Amazon RDS resources; you should create an IAM user for everyone, including yourself\.
-+ Grant each user the minimum set of permissions required to perform his or her duties\.
-+ Use IAM groups to effectively manage permissions for multiple users\.
-+ Rotate your IAM credentials regularly\.
-
-For more information about IAM, go to [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
-
-Use the AWS Management Console, the AWS CLI, or the Amazon RDS API to change the password for your master user\. If you use another tool, such as a SQL client, to change the master user password, it might result in privileges being revoked for the user unintentionally\.
-
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
@@ -67,7 +54,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w4aac13c17b4"></a>
+### Viewing Performance Metrics<a name="w5aac13c15b4"></a>
 
  You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 

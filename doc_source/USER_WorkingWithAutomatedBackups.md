@@ -14,6 +14,9 @@ The first snapshot of a DB instance contains the data for the full DB instance\.
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a Snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB Snapshot](USER_ShareSnapshot.md)\.
 
+**Note**  
+You can also use AWS Backup to manage backups of Amazon RDS DB instances\. Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+
 ## Backup Storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
 Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Your backup storage is equivalent to the sum of the database storage for all instances in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. 
@@ -21,9 +24,6 @@ Your Amazon RDS backup storage for each region is composed of the automated back
 For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
 If you chose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a DB instance, all automated backups are deleted with the DB instance\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your DB instance, you can use that to recover your DB instance\. Or you can use a previously created manual snapshot\. Manual snapshots are not deleted\. You can have up to 100 manual snapshots per region\.
-
-**Note**  
-Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Backup Window<a name="USER_WorkingWithAutomatedBackups.BackupWindow"></a>
 

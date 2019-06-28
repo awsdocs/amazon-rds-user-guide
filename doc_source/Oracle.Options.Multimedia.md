@@ -22,7 +22,7 @@ The following are prerequisites for using Oracle Multimedia:
 
 The following are best practices for using Oracle Multimedia: 
 + For maximum security, use the `MULTIMEDIA` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
-+ Configure your DB instance to restrict access to your DB instance\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
++ Configure your DB instance to restrict access to your DB instance\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
 
 ## Adding the Oracle Multimedia Option<a name="Oracle.Options.Multimedia.Add"></a>
 

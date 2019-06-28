@@ -6,31 +6,23 @@ Oracle APEX consists of two main components:
 + A *repository* that stores the metadata for APEX applications and components\. The repository consists of tables, indexes, and other objects that are installed in your Amazon RDS DB instance\. 
 + A *listener* that manages HTTP communications with Oracle APEX clients\. The listener accepts incoming connections from web browsers, forwards them to the Amazon RDS DB instance for processing, and then sends results from the repository back to the browsers\. The APEX Listener was renamed Oracle Rest Data Services \(ORDS\) in Oracle 12c\. 
 
-When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. You must install the Oracle APEX Listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
+When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. Install the Oracle APEX Listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
 
-The APEX option uses storage on the DB instance class for your DB instance\.
+The APEX option uses storage on the DB instance class for your DB instance\. Following are the supported versions and approximate storage requirements for Oracle APEX\.
 
-Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 12c version 12\.2 on Amazon RDS: 
-+ Oracle APEX version 18\.2\.v1 – 146 MiB
-+ Oracle APEX version 18\.1\.v1 – 145 MiB
-+ Oracle APEX version 5\.1\.4\.v1 – 220 MiB
 
-Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 12c version 12\.1 on Amazon RDS: 
-+ Oracle APEX version 18\.2\.v1 – 146 MiB
-+ Oracle APEX version 18\.1\.v1 – 145 MiB
-+ Oracle APEX version 5\.1\.4\.v1 – 220 MiB
-+ Oracle APEX version 5\.1\.2\.v1 – 150 MiB
-+ Oracle APEX version 5\.0\.4\.v1 – 140 MiB
-+ Oracle APEX version 4\.2\.6\.v1 – 160 MiB
+****  
 
-Following are the supported versions and approximate storage requirements for Oracle APEX for Oracle 11g on Amazon RDS: 
-+ Oracle APEX version 18\.2\.v1 – 146 MiB
-+ Oracle APEX version 18\.1\.v1 – 145 MiB
-+ Oracle APEX version 5\.1\.4\.v1 – 220 MiB
-+ Oracle APEX version 5\.1\.2\.v1 – 150 MiB
-+ Oracle APEX version 5\.0\.4\.v1 – 140 MiB
-+ Oracle APEX version 4\.2\.6\.v1 – 160 MiB
-+ Oracle APEX version 4\.1\.1\.v1 – 130 MiB
+| APEX Version | Storage Requirements | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
+| --- | --- | --- | --- | --- | 
+|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 18\.1\.v1  |  145 MiB  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  Not Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  Not Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  Not Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  Not Supported  |  Not Supported  |  Supported  | 
 
 **Note**  
 Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
@@ -38,8 +30,8 @@ Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by 
 ## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 
 The following are prerequisites for using Oracle APEX and APEX Listener: 
-+ You must have SQL\*Plus to perform administrative tasks on your DB instance\. 
-+ You must have the following software installed on the host computer that acts as the Oracle APEX Listener: 
++ Have SQL\*Plus on your DB instance to perform administrative tasks\. 
++ Have the following software installed on the host computer that acts as the Oracle APEX Listener: 
   + The Java Runtime Environment \(JRE\)\.
   + Oracle Net Services, to enable the Oracle APEX Listener to connect to your Amazon RDS instance\. 
 
@@ -71,7 +63,7 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
 
    For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.1\.1\.v1 is the default for 11g, and version 4\.2\.6\.v1 is the default for 12c\. 
 **Important**  
-If you add the APEX options to an existing option group that is already attached to one or more DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
+If you add the APEX options to an existing option group that is already attached to one or more DB instances, a brief outage occurs\. During this outage, all the DB instances are automatically restarted\. 
 
    For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
@@ -90,7 +82,7 @@ After the Amazon RDS APEX options are installed, you must change the password fo
 
 ## Configuring RESTful Services for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ConfigureRESTful"></a>
 
-To configure RESTful services in APEX \(not needed for APEX 4\.1\.1\.V1\), use SQL\*Plus to connect to your DB instance as the master user, and then run the `rdsadmin.rdsadmin_run_apex_rest_config` stored procedure\. When you run the stored procedure, you provide passwords for the following users:
+To configure RESTful services in APEX \(not needed for APEX 4\.1\.1\.V1\), use SQL\*Plus to connect to your DB instance as the master user\. After you do this, run the `rdsadmin.rdsadmin_run_apex_rest_config` stored procedure\. When you run the stored procedure, you provide passwords for the following users:
 + `APEX_LISTENER`
 + `APEX_REST_PUBLIC_USER`
 
@@ -115,7 +107,7 @@ You are now ready to install and configure a listener for use with Oracle APEX\.
 **Note**  
 Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as an APEX Listener\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\. 
 
-You must install the APEX Listener on a separate host such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
+Install the APEX Listener on a separate host such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
 
 The following procedure shows you how to install and configure the APEX Listener\. We assume that the name of your host is `myapexhost.example.com`, and that your host is running Linux\. 
 
@@ -150,15 +142,17 @@ The following procedure shows you how to install and configure the APEX Listener
 1. While you are still logged into `myapexhost.example.com` as `apexuser`, download the APEX Listener file from Oracle to your `/home/apexuser` directory:
    + [http://www\.oracle\.com/technetwork/developer\-tools/apex\-listener/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex-listener/downloads/index.html) 
 
-1. Create a new directory and open the APEX Listener file:  
+1. Create a new directory based on the following APEX Listener types and open the APEX Listener file\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.APEX.html)
 
-1. While you are still in the directory from the previous step, run the listener program\.   
+   For more information, see [About Choosing a Web Listener](https://docs.oracle.com/database/apex-5.1/HTMIG/choosing-web-listener.htm#HTMIG29321) in the Oracle documentation\.
+
+1. While you are still in the directory from the previous step, run the listener program that you chose\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.APEX.html)
 
-1. You must set a password for the APEX `admin` user\. To do this, use SQL\*Plus to connect to your DB instance as the master user, and then issue the following commands: 
+1. Set a password for the APEX `admin` user\. To do this, use SQL\*Plus to connect to your DB instance as the master user, and then issue the following commands\.
 
    ```
    1. EXEC rdsadmin.rdsadmin_util.grant_apex_admin_role;
@@ -168,7 +162,7 @@ The following procedure shows you how to install and configure the APEX Listener
 
    Replace `master` with your master user name\. When the `apxchpwd.sql` script prompts you, type a new `admin` password\. 
 
-1. For ORDS, start the APEX Listener\. Run the following code: 
+1. For ORDS, start the APEX Listener\. Run the following code\.
 
    ```
    java -jar ords.war
@@ -198,7 +192,7 @@ After you upgrade your version of APEX, the APEX schema for the previous version
 
 If you upgrade the APEX version and RESTful services were not configured in the previous APEX version, we recommend that you configure RESTful services\. For more information, see [ Configuring RESTful Services for Oracle APEX](#Appendix.Oracle.Options.APEX.ConfigureRESTful)\.
 
-If you are planning to do a major version upgrade of your DB instance, and you are using an APEX version that is not compatible with your target database version, you can upgrade your version of APEX before you upgrade your DB instance\. Upgrading APEX first can reduce the amount of time it takes to upgrade your DB instance\. 
+In some cases when you plan to do a major version upgrade of your DB instance, you might find that you're using an APEX version that isn't compatible with your target database version\. In these cases, you can upgrade your version of APEX before you upgrade your DB instance\. Upgrading APEX first can reduce the amount of time that it takes to upgrade your DB instance\. 
 
 **Note**  
 After upgrading APEX, install and configure a listener for use with the upgraded version\. For instructions, see [Installing and Configuring the APEX Listener](#Appendix.Oracle.Options.APEX.Listener)\.

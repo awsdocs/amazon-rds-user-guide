@@ -171,11 +171,11 @@ The following table contains details about settings that you choose when you cre
 |  Storage Type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
 |  Subnet Group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
 |  Time Zone  |  The time zone for your DB instance\. If you don't choose a time zone, your DB instance uses the default time zone\.  For more information, see [Local Time Zone for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.TimeZone)\.   | 
-|  VPC  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC shown\. If you are creating a DB instance on the previous E2\-Classic platform that does not use a VPC, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud \(VPCs\) and Amazon RDS](USER_VPC.md)\.   | 
+|  VPC  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC shown\. If you are creating a DB instance on the previous E2\-Classic platform that does not use a VPC, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.   | 
 |  VPC Security Group  |  If you are a new customer to AWS, choose the default VPC\. Otherwise, choose the VPC security group you previously created\.  When you choose **Create new VPC security group** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
 
 ## Related Topics<a name="USER_CreateMicrosoftSQLServerInstance.Related"></a>
-+ [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
++ [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)
 + [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md)
 + [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
 + [Deleting a DB Instance](USER_DeleteInstance.md)
