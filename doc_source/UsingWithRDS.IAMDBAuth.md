@@ -21,8 +21,8 @@ IAM database authentication provides the following benefits:
 ## Availability for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
 IAM database authentication is available for the following database engines and DB instance classes:
-+ MySQL 5\.6, minor version 5\.6\.34 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.m1\.small\. 
-+ MySQL 5\.7, minor version 5\.7\.16 or higher\. All DB instance classes are supported, except for db\.t2\.small and db\.m1\.small\. 
++ MySQL 5\.6, minor version 5\.6\.34 or higher\. All DB instance classes are supported, except for db\.m1\.small\. 
++ MySQL 5\.7, minor version 5\.7\.16 or higher\. All DB instance classes are supported, except for db\.m1\.small\. 
 + PostgreSQL versions 10\.6 or higher, 9\.6\.11 or higher, and 9\.5\.15 or higher\.
 
 **Note**  

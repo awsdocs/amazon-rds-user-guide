@@ -70,6 +70,12 @@ Make sure there is not a space between the `-p` option and the entered password\
 
 1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MariaDB database to the VPC security group for the Amazon RDS MariaDB DB instance\. For more information on modifying a VPC security group, go to [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
+   The IP address can change when the following conditions are met:
+   + You are using a public IP address for communication between the external master instance and the DB instance\.
+   + The external master instance was stopped and restarted\.
+
+   If these conditions are met, verify the IP address before adding it\.
+
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS MariaDB DB instance, so that it can communicate with your external MariaDB instance\. To find the IP address of the Amazon RDS MariaDB DB instance, use the `host` command: 
 
    ```

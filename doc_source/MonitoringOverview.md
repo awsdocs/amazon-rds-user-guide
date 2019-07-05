@@ -111,8 +111,8 @@ The `AWS/RDS` namespace includes the following metrics\.
 | FreeableMemory |  The amount of available random access memory\. Units: Bytes  | 
 | FreeStorageSpace |  The amount of available storage space\. Units: Bytes  | 
 | MaximumUsedTransactionIDs |  The maximum transaction ID that has been used\. Applies to PostgreSQL\. Units: Count  | 
-| NetworkReceiveThroughput |  The incoming \(Receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
-| NetworkTransmitThroughput |  The outgoing \(Transmit\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/second  | 
+| NetworkReceiveThroughput |  The incoming \(Receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/Second  | 
+| NetworkTransmitThroughput |  The outgoing \(Transmit\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/Second  | 
 | OldestReplicationSlotLag |  The lagging size of the replica lagging the most in terms of WAL data received\. Applies to PostgreSQL\. Units: Megabytes  | 
 | ReadIOPS |  The average number of disk read I/O operations per second\. Units: Count/Second  | 
 | ReadLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
@@ -121,7 +121,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | ReplicationSlotDiskUsage |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Megabytes  | 
 | SwapUsage |  The amount of swap space used on the DB instance\. This metric is not available for SQL Server\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
-| TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/second  | 
+| TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/Second  | 
 | WriteIOPS |  The average number of disk write I/O operations per second\. Units: Count/Second  | 
 | WriteLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | WriteThroughput |  The average number of bytes written to disk per second\. Units: Bytes/Second  | 

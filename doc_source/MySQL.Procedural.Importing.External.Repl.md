@@ -94,6 +94,12 @@ Make sure that there isn't a space between the `-p` option and the entered passw
 
 1. In the AWS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
+   The IP address can change when the following conditions are met:
+   + You are using a public IP address for communication between the external master instance and the DB instance\.
+   + The external master instance was stopped and restarted\.
+
+   If these conditions are met, verify the IP address before adding it\.
+
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
@@ -208,6 +214,12 @@ Make sure that there is not a space between the `-p` option and the entered pass
    For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
 
 1. In the AWS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+
+   The IP address can change when the following conditions are met:
+   + You are using a public IP address for communication between the external master instance and the DB instance\.
+   + The external master instance was stopped and restarted\.
+
+   If these conditions are met, verify the IP address before adding it\.
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
