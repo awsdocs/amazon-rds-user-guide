@@ -533,7 +533,7 @@ To control whether huge pages are enabled for a DB instance automatically, you c
 + For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
 + For DB instance classes not mentioned in the table below, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`, and `use_large_pages` evaluates to `FALSE`\.
 + For DB instance classes not mentioned in the table below, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\. You can disable huge pages manually by setting `use_large_pages` to `FALSE`\.
-+ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, and `use_large_pages` evaluates to `ONLY`\.
++ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, `use_large_pages` evaluates to `ONLY`, and huge pages can't be disabled\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
 
@@ -592,10 +592,10 @@ Consider another example with following parameters values set in a parameter gro
 6. use_large_pages         = FALSE
 ```
 
-The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory and a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on both the db\.r4 instance and the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instance class, both with less than 100 GiB of memory\. The parameter group is also used by a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on the db\.r4 instance, the db\.r5 instance, and the db\.r3 instance\.
 
 **Note**  
-If this parameter group is used by a db\.r4 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
+If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
 
 After huge pages are active on your DB instance, you can view huge pages information by enabling enhanced monitoring\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. 
 

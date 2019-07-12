@@ -121,7 +121,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | ReplicationSlotDiskUsage |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Megabytes  | 
 | SwapUsage |  The amount of swap space used on the DB instance\. This metric is not available for SQL Server\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
-| TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Megabytes/Second  | 
+| TransactionLogsGeneration |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Bytes/Second  | 
 | WriteIOPS |  The average number of disk write I/O operations per second\. Units: Count/Second  | 
 | WriteLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | WriteThroughput |  The average number of bytes written to disk per second\. Units: Bytes/Second  | 

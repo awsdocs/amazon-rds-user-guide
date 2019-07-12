@@ -36,7 +36,7 @@ To create a DB security group, you need to provide a name and a description\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Security Groups** in the navigation pane on the left side of the window\.
+1. From the navigation pane, choose **Security Groups**\. 
 **Note**  
 If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
@@ -105,9 +105,11 @@ You can list which DB security groups have been created for your AWS account\.
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Security Groups** in the navigation pane on the left side of the window\.
+1. From the navigation pane, choose **Security Groups**\. 
 
    The available DB security groups appear in the **DB Security Groups** list\.
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 ### CLI<a name="USER_WorkingWithSecurityGroups.Listing.CLI"></a>
 
@@ -146,7 +148,9 @@ You can view detailed information about your DB security group to see what IP ra
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose **Security Groups** in the navigation pane on the left side of the window\.
+1. From the navigation pane, choose **Security Groups**\. 
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 1. Select the details icon for the DB security group you want to view\. The detailed information for the DB security group is displayed\. 
 
@@ -208,7 +212,9 @@ In following example, you configure a DB security group with an ingress rule for
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Select **Security Groups** from the navigation pane on the left side of the console window\. 
+1. From the navigation pane, choose **Security Groups**\. 
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 1. Select the details icon for the DB security group you want to authorize\.
 
@@ -283,6 +289,8 @@ You can't authorize an Amazon EC2 security group that is in a different AWS Regi
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. From the navigation pane, choose **Security Groups**\.
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 1. Select the details icon for the DB security group you want to grant access\.
 
@@ -353,6 +361,8 @@ In this example, you revoke an ingress rule for a CIDR IP range on a DB security
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. From the navigation pane, choose **Security Groups**\. 
+**Note**  
+If you are on the EC2\-VPC platform, the **Security Groups** option does not appear in the navigation pane\. In this case, you must use VPC security groups instead of DB security groups\. For more information about using a VPC, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 
 1. Select the details icon for the DB security group that has the ingress rule you want to revoke\.
 

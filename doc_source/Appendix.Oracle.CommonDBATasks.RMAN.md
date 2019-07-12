@@ -520,7 +520,7 @@ The following example performs a tablespace backup using the specified values fo
 
 ```
 BEGIN
-    rdsadmin.rdsadmin_rman_util.backup_database_incremental(
+    rdsadmin.rdsadmin_rman_util.backup_tablespace(
         p_owner               => 'MYDBADMIN', 
         p_directory_name      => 'MYDIRECTORY',
         p_tablespace          => MYTABLESPACE,

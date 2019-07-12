@@ -114,7 +114,7 @@ Provisioned IOPS SSD storage provides a way to reserve I/O capacity by specifyin
 Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The following are some limitations for magnetic storage: 
 + Doesn't allow you to scale storage when using the SQL Server database engine\.
 + Doesn't support elastic volumes\.
-+ Limited to a maximum size of 4 TiB\.
++ Limited to a maximum size of 3 TiB\.
 + Limited to a maximum of 1,000 IOPS\.
 
 ## Monitoring storage performance<a name="Concepts.Storage.Metrics"></a>
