@@ -318,6 +318,9 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 You can use Amazon RDS procedures to upload files from an Oracle DB instance to an Amazon S3 bucket\. You can also use Amazon RDS procedures to download files from an Amazon S3 bucket to an Oracle DB instance\. 
 
+**Note**  
+These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\.
+
 **Topics**
 + [Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket](#oracle-s3-integration.using.upload)
 + [Downloading Files from an Amazon S3 Bucket to an Oracle DB Instance](#oracle-s3-integration.using.download)
@@ -396,7 +399,7 @@ To download files from an Amazon S3 bucket to an Oracle DB instance, use the Ama
 | --- | --- | --- | --- | --- | 
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
-|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  optional  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all files in the specified Amazon S3 bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\.   | 
+|  `p_s3_prefix`  |  VARCHAR2  |  ''  |  optional  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
 
 The following example downloads all of the files in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\.
 

@@ -11,7 +11,6 @@ Because configuration is automatic, RDS selects DBM or Always On AGs based on th
 + SQL Server 2016: Standard and Enterprise Editions \(Always On AGs are supported in Enterprise Edition 13\.00\.5216\.0 or later\.\) 
 + SQL Server 2014: Standard and Enterprise Editions
 + SQL Server 2012: Standard and Enterprise Editions
-+ SQL Server 2008 R2: Standard and Enterprise Editions
 
 Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the following exceptions:
 + US West \(N\. California\): Neither DBM nor Always On AGs are supported here
@@ -48,7 +47,10 @@ The following are some notes about working with Multi\-AZ deployments for Micros
 + Failover times are affected by the time it takes to complete the recovery process\. Large transactions increase the failover time\. 
 
 The following are some recommendations for working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
-+ For databases used in production or preproduction, we recommend Multi\-AZ deployments for high availability, Provisioned IOPS for fast, consistent performance, and instance classes \(m3\.large and larger, m4\.large and larger\) that are optimized for Provisioned IOPS\. 
++ For databases used in production or preproduction, we recommend the following options:
+  + Multi\-AZ deployments for high availability
+  + "Provisioned IOPS" for fast, consistent performance
+  + “Memory optimized” rather than "General purpose"
 + You can't select the Availability Zone \(AZ\) for the secondary instance, so when you deploy application hosts, take this into account\. Your database might fail over to another AZ, and the application hosts might not be in the same AZ as the database\. For this reason, we recommend that you balance your application hosts across all AZs in the given AWS Region\. 
 + For best performance, don't enable Database Mirroring or Always On AGs during a large data load operation\. If you want your data load to be as fast as possible, finish loading data before you convert your DB instance to a Multi\-AZ deployment\. 
 + Applications that access the SQL Server databases should have exception handling that catches connection errors\. The following code sample shows a try/catch block that catches a communication error\. 

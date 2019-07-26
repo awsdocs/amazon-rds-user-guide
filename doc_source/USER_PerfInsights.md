@@ -7,7 +7,7 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 + Amazon RDS for MariaDB version 10\.2\.21 and higher 10\.2 versions
 + Amazon RDS for MySQL version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions
 + Amazon RDS for Microsoft SQL Server \(all versions except SQL Server 2008\)
-+ Amazon RDS for PostgreSQL version 10
++ Amazon RDS for PostgreSQL version 10 and 11
 + Amazon RDS for Oracle \(all versions\)
 
 **Note**  

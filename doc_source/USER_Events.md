@@ -161,7 +161,15 @@ The following table shows the event category and a list of events when an Aurora
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
 |  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0149 |  A scaling point was not found\.  | 
+|  notification  | RDS\-EVENT\-0141 |  Scaling initiated for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0142 |  Scaling completed for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0143 |  Scaling failed for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0144 |  Automatic pause initiated for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0145 |  The Aurora Serverless DB cluster paused\.  | 
+|  notification  | RDS\-EVENT\-0146 |  Pause cancelled for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0147 |  Resume initiated for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0148 |  Resume completed for the Aurora Serverless DB cluster\.  | 
+|  notification  | RDS\-EVENT\-0149 |  Seamless scaling completed with the force option for the Aurora Serverless DB cluster\. Connections might have been interrupted as required\.  | 
 |  notification  | RDS\-EVENT\-0150 |  The DB cluster stopped\.  | 
 |  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 

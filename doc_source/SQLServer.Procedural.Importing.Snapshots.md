@@ -23,11 +23,15 @@ Amazon RDS for Microsoft SQL Server does not support importing data into the `ms
 
    If the target database is already populated with data, we recommend that you take a snapshot of the database before you import the data\. If something goes wrong with the data import or you want to discard the changes, you can restore the database to its previous state by using the snapshot\. For information about database snapshots, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\. 
 **Note**  
-When you take a database snapshot, I/O operations to the database are suspended for about 10 seconds while the backup is in progress\. 
+When you take a database snapshot, I/O operations to the database are suspended for a moment \(milliseconds\) while the backup is in progress\. 
 
 1. Disable automated backups on the target database\. 
 
-   Disabling automated backups on the target DB instance will improve performance while you are importing your data because Amazon RDS doesn't log transactions when automatic backups are disabled\. However, there are some things to consider\. Because automated backups are required to perform a point\-in\-time recovery, you won't be able to restore the database to a specific point in time while you are importing data\. Additionally, any automated backups that were created on the DB instance are erased\. You can still use previous snapshots to recover the database, and any snapshots that you have taken will remain available\. For information about automated backups, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\. 
+   Disabling automated backups on the target DB instance will improve performance while you are importing your data because Amazon RDS doesn't log transactions when automatic backups are disabled\. However, there are some things to consider\. Because automated backups are required to perform a point\-in\-time recovery, you won't be able to restore the database to a specific point in time while you are importing data\. Additionally, any automated backups that were created on the DB instance are erased unless you choose to retain them\. 
+
+   Choosing to retain the automated backups can help protect you against accidental deletion of data\. Amazon RDS also saves the database instance properties along with each automated backup to make it easy to recover\. Using this option lets you can restore a deleted database instance to a specified point in time within the backup retention period even after deleting it\. Automated backups are automatically deleted at the end of the specified backup window, just as they are for an active database instance\. 
+
+   You can also use previous snapshots to recover the database, and any snapshots that you have taken will remain available\. For information about automated backups, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\. 
 
 1. Disable foreign key constraints, if applicable\. 
 

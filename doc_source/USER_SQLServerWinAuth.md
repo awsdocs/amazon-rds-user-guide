@@ -116,6 +116,8 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 
 If you use the AWS console to create your SQL Server DB instance, you can skip this step\. If you used the AWS CLI or Amazon RDS API to create your SQL Server DB instance, you must create an IAM role that uses the managed IAM policy **AmazonRDSDirectoryServiceAccess**\. This role allows Amazon RDS to make calls to the AWS Directory Service for you\. 
 
+If you are using a custom policy for joining a domain, rather than using the AWS\-managed `AmazonRDSDirectoryServiceAccess` policy, you must allow the "ds:GetAuthorizedApplicationDetails" action\. This is effective starting July 2019, due to a change in AWS Directory Service's API\.
+
  The following IAM policy, **AmazonRDSDirectoryServiceAccess,** provides access to AWS Directory Service: 
 
 ```
@@ -126,7 +128,8 @@ If you use the AWS console to create your SQL Server DB instance, you can skip t
       "Action": [
             "ds:DescribeDirectories", 
             "ds:AuthorizeApplication", 
-            "ds:UnauthorizeApplication"
+            "ds:UnauthorizeApplication",
+            "ds:GetAuthorizedApplicationDetails"
         ],
       "Effect": "Allow",
       "Resource": "*"

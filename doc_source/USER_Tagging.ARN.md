@@ -18,16 +18,14 @@ The following table shows the format that you should use when constructing an AR
 | Resource Type | ARN Format | 
 | --- | --- | 
 | DB instance  |  arn:aws:rds:*<region>*:*<account>*:db:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:db:my-mysql-instance-1</pre>  | 
-| DB cluster |  arn:aws:rds:*<region>*:*<account>*:cluster:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:cluster:my-aurora-cluster-1</pre>  | 
 | Event subscription  |  arn:aws:rds:*<region>*:*<account>*:es:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:es:my-subscription</pre>  | 
 | DB option group  |  arn:aws:rds:*<region>*:*<account>*:og:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:og:my-og</pre>  | 
 | DB parameter group  |  arn:aws:rds:*<region>*:*<account>*:pg:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:pg:my-param-enable-logs</pre>  | 
-| DB cluster parameter group  |  arn:aws:rds:*<region>*:*<account>*:cluster\-pg:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:cluster-pg:my-cluster-param-timezone</pre>  | 
 | Reserved DB instance  |  arn:aws:rds:*<region>*:*<account>*:ri:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:ri:my-reserved-postgresql</pre>  | 
 | DB security group  |  arn:aws:rds:*<region>*:*<account>*:secgrp:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:secgrp:my-public</pre>  | 
-| DB snapshot  |  arn:aws:rds:*<region>*:*<account>*:snapshot:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:snapshot:my-mysql-snap-20130507</pre>  | 
-| DB cluster snapshot  |  arn:aws:rds:*<region>*:*<account>*:cluster\-snapshot:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:cluster-snapshot:my-aurora-snap-20160809</pre>  | 
-| DB subnet group  |  arn:aws:rds:*<region>*:*<account>*:subgrp:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:subgrp:my-subnet-10</pre>  | 
+| Automated DB snapshot |  arn:aws:rds:*<region>*:*<account>*:snapshot:rds:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:snapshot:rds:my-mysql-db-2019-07-22-07-23</pre>  | 
+| Manual DB snapshot |  arn:aws:rds:*<region>*:*<account>*:snapshot:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:snapshot:my-mysql-db-snap</pre>  | 
+| DB subnet group |  arn:aws:rds:*<region>*:*<account>*:subgrp:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:subgrp:my-subnet-10</pre>  | 
 
 ## Getting an Existing ARN<a name="USER_Tagging.ARN.Getting"></a>
 

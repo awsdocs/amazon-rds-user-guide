@@ -7,7 +7,6 @@ Amazon RDS supports TDE for the following SQL Server versions and editions:
 + SQL Server 2016 Enterprise Edition
 + SQL Server 2014 Enterprise Edition
 + SQL Server 2012 Enterprise Edition
-+ SQL Server 2008 R2 Enterprise Edition
 
 To enable transparent data encryption for an RDS SQL Server DB instance, specify the TDE option in an RDS option group that is associated with that DB instance\. 
 

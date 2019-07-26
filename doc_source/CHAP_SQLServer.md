@@ -5,7 +5,7 @@ Amazon RDS supports DB instances running several versions and editions of Micros
 + SQL Server 2016 SP2 \(CU3\) 13\.00\.5216\.0, released per [KB4466404](https://support.microsoft.com/en-us/help/4483666/on-demand-hotfix-update-package-for-sql-server-2017-cu13) on September 20, 2018\.
 + SQL Server 2014 SP2 CU10 12\.00\.5571\.0, released per [KB4052725](https://support.microsoft.com/en-us/help/2936603/sql-server-2014-build-versions) on January 16, 2018\.
 + SQL Server 2012 SP4 GDR 11\.00\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on January 12, 2017\.
-+ SQL Server 2008 R2 SP3 GDR 10\.50\.6560\.0, released per [KB4057113](https://support.microsoft.com/en-us/help/4057113/security-update-for-vulnerabilities-in-sql-server) on January 6, 2018\. This release isn't available in the US East \(Ohio\), Canada \(Central\), and EU \(London\) AWS Regions\. **DEPRECATED\! Avoid installing this version\. Upgrade existing instances before June 1, 2019, to avoid automatic upgrade\.**
++ SQL Server 2008: It is no longer possible to provision new instances in any region\. Amazon RDS is actively migrating existing instances off this version\. 
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
 
@@ -90,7 +90,7 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 ****  
 
-| SQL Server Edition | 2017 and 2016 Support Range | 2014, 2012, and 2008 R2 Support Range | 
+| SQL Server Edition | 2017 and 2016 Support Range | 2014 and 2012 Support Range | 
 | --- | --- | --- | 
 |  Enterprise Edition |  `db.m4.xlarge`–`db.m4.16xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge`  |  `db.m4.xlarge`–`db.m4.10xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.m5.xlarge`–`db.m5.24xlarge` | 
 |  Standard Edition |  `db.m4.large`–`db.m4.16xlarge` `db.r4.large`–`db.r4.16xlarge` `db.m5.large`–`db.m5.24xlarge`  |  `db.m4.large`–`db.m4.10xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.m5.large`–`db.m5.24xlarge`  | 
@@ -139,8 +139,10 @@ AWS Services in Scope have been fully assessed by a third\-party auditor and res
 You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under an executed Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. 
 
 Amazon RDS for SQL Server supports HIPAA for the following versions and editions: 
-+ SQL Server 2017, 2016, 2014, and 2012: Enterprise, Standard, and Web Editions
-+ SQL Server 2008 R2: Enterprise Edition
++ SQL Server 2017 Enterprise, Standard, and Web Editions
++ SQL Server 2016 Enterprise, Standard, and Web Editions
++ SQL Server 2014 Enterprise, Standard, and Web Editions
++ SQL Server 2012 Enterprise, Standard, and Web Editions
 
 To enable HIPAA support on your DB instance, set up the following three components\. 
 
@@ -266,48 +268,9 @@ Some SQL Server parameters have changed in SQL Server 2012\.
 
 ### Microsoft SQL Server 2008 R2 Deprecated on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2008"></a>
 
-**Warning**  
-On June 1, 2019, we will begin upgrading all existing instances that are still using SQL Server 2008 R2 to the latest minor version of SQL Server 2012\. For more information, see [Microsoft SQL Server Engine Version Management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)\. 
-
-Amazon RDS supports the following versions of SQL Server 2008 R2, until the upgrade of all instances is complete: 
-+ SQL Server 2008 R2 SP3 GDR 10\.50\.6560\.0, released per [KB4057113](https://support.microsoft.com/en-us/help/4057113/security-update-for-vulnerabilities-in-sql-server) on January 6, 2018\. This version isn't available in US East \(Ohio\), Canada \(Central\), and EU \(London\) AWS Regions\. 
-
-  RDS API `EngineVersion` and CLI `engine-version`: `10.50.6560.0.v1`
-+ Version 10\.50\.6529\.0, SP3 QFE, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\)\. 
-
-  RDS API `EngineVersion` and CLI `engine-version`: `10.50.6529.0.v1`
-+ Version 10\.50\.6000\.34, SP3, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\)\. 
-
-  RDS API `EngineVersion` and CLI `engine-version`: `10.50.6000.34.v1`
-+ Version 10\.50\.2789\.0, SP1, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\)\. 
-
-  RDS API `EngineVersion` and CLI `engine-version`: `10.50.2789.0.v1`
+We are upgrading all existing instances that are still using SQL Server 2008 R2 to the latest minor version of SQL Server 2012\. For more information, see [Microsoft SQL Server Engine Version Management in Amazon RDS](#SQLServer.Concepts.General.Version-Management)\. 
 
 For more information about SQL Server 2008 R2, see [Features Supported by the Editions of SQL Server 2008 R2](https://msdn.microsoft.com/en-us/library/cc645993%28v=sql.105%29.aspx) in the Microsoft documentation\. 
-
-Amazon RDS supports the following SQL Server 2008 R2 features:
-+ Core database engine features
-+ SQL Server development tools:
-  + Visual Studio integration
-  + IntelliSense
-+ SQL Server management tools:
-  + SQL Server Management Studio \(SMS\)
-  + sqlcmd
-  + SQL Server Profiler \(client side traces, workaround available for server side\)
-  + SQL Server Migration Assistant \(SSMA\)
-  + Database Engine Tuning Advisor
-  + SQL Server Agent
-+ Safe CLR
-+ Full\-text search \(except semantic search\)
-+ SSL
-+ Transparent Data Encryption \(Enterprise Edition only\)
-+ Spatial and location features
-+ Service Broker is supported; Service Broker endpoints aren't supported
-+ Change Tracking
-+ Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\) 
-+ The ability to use an Amazon RDS SQL DB instance as a data source for Reporting, Analysis, and Integration Services that are running on a separate server\.
-
-For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 ## Microsoft SQL Server Engine Version Management in Amazon RDS<a name="SQLServer.Concepts.General.Version-Management"></a>
 
@@ -329,7 +292,7 @@ The table following displays the planned schedule of deprecations for major engi
 
 | Date | Information | 
 | --- | --- | 
-| June 1, 2019 |  The Amazon RDS team is planning to deprecate Amazon RDS support for Microsoft SQL Server 2008 R2\. Starting June 1, 2019, we will begin migrating any remaining instances of Microsoft SQL Server 2008 R2 to SQL Server 2012 \(latest minor version available\)\.  To avoid being automatically upgraded from Microsoft SQL Server 2008 R2, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
+| July 12, 2019 |  The Amazon RDS team deprecated support for Microsoft SQL Server 2008 R2 in June 2019\. Remaining instances of Microsoft SQL Server 2008 R2 are migrating to SQL Server 2012 \(latest minor version available\)\.  To avoid an automatic upgrade from Microsoft SQL Server 2008 R2, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
 | April 25, 2019 | Before the end of April 2019, you will no longer be able to create new Amazon RDS for SQL Server database instances using Microsoft SQL Server 2008R2\. | 
 
 ## Change Data Capture Support for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.CDC"></a>

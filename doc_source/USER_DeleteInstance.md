@@ -38,9 +38,9 @@ You can delete a DB instance using the AWS Management Console, the AWS CLI, or t
 
 1. For **Actions**, choose **Delete**\. 
 
-1. For **Create final Snapshot?**, choose **Yes** or **No**\. 
+1. To create a final DB snapshot for the DB instance, enable **Create final snapshot?**\. 
 
-1. If you chose **Yes** in the previous step, for **Final snapshot name** enter the name of your final DB snapshot\. 
+1. If you enabled **Create final snapshot?** in the previous step, for **Final snapshot name** enter the name of your final DB snapshot\. 
 
 1. To retain automated backups, choose **Retain automated backups**\.
 
