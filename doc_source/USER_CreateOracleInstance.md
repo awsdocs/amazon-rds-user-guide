@@ -3,11 +3,73 @@
  The basic building block of Amazon RDS is the DB instance\. This is the environment in which you run your Oracle databases\. 
 
 **Important**  
-You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\. 
+Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
 
 For an example that walks you through the process of creating and connecting to a sample DB instance, see [Creating an Oracle DB Instance and Connecting to a Database on an Oracle DB Instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md)\. 
 
-## AWS Management Console<a name="USER_CreateOracleInstance.CON"></a>
+**Note**  
+If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+
+## New Console<a name="USER_CreateOracleInstance.CON"></a>
+
+You can create a DB instance running Oracle with the AWS Management Console with **Easy create** enabled or disabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+
+**Note**  
+For this example, **Easy create** is not enabled\. For information about creating an Oracle DB instance with **Easy create** enabled, see [Creating an Oracle DB Instance and Connecting to a Database on an Oracle DB Instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md)\.
+
+**To create an Oracle DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose **Create database**\.
+
+   The Oracle editions that are available vary by AWS Region\.  
+![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
+
+1. In **Engine options**, choose **Oracle**\. 
+
+1. For **Edition**, choose the Oracle DB engine edition that you want to use\. The Oracle editions that are available vary by AWS Region\.
+
+1. For **Version**, choose the Oracle version\.
+
+1. The next step asks if you are planning to use the DB instance that you are creating for production\. If you are, choose **Production**\. When you choose **Production**, the following are preselected in a later step:
+   + **Multi\-AZ deployment** failover option
+   + **Provisioned IOPS** storage option
+   + **Enable deletion protection** option
+
+1. To enter your master password, do the following:
+
+   1. In the **Settings** section, open **Credential Settings**\.
+
+   1. Clear the **Auto generate a password** check box\.
+
+   1. \(Optional\) Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\.
+
+   By default, the new DB instance uses an automatically generated password for the master user\.
+
+1. For the remaining sections, specify your DB instance settings\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
+
+1. Choose **Create database**\. 
+
+   If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
+
+   To view the master user name and password for the DB instance, choose **View credential details**\.  
+![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+
+   To connect to the DB instance as the master user, use the user name and password that appear\.
+**Important**  
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
+1. For **Databases**, choose the name of the new Oracle DB instance\.
+
+   On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it can take several minutes for the new instance to be available\.   
+![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
+
+## Current Console<a name="USER_CreateOracleInstance.CurrentCON"></a>
 
 **To launch an Oracle DB instance**
 
@@ -22,7 +84,7 @@ For an example that walks you through the process of creating and connecting to 
 1. Choose **Create database** to open the **Select engine** page\.
 
    The Oracle editions that are available vary by AWS Region\.  
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleLaunchEE.png)
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-OracleLaunchEE.png)
 
 1. In the **Select engine** window, choose the **Select** button for the Oracle DB engine you want to use and then choose **Next**\. 
 
@@ -34,7 +96,7 @@ For an example that walks you through the process of creating and connecting to 
 1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
 
    On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\.   
-![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch02.png)
+![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Oracle-Launch02.png)
 
 1. Choose **Next** to continue\. The **Configure advanced settings** page appears\. 
 
@@ -46,9 +108,9 @@ For an example that walks you through the process of creating and connecting to 
 
 On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it could take several minutes for the new instance to be available\. 
 
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
+![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Oracle-Launch05.png)
 
-## CLI<a name="USER_CreateOracleInstance.CLI"></a>
+## AWS CLI<a name="USER_CreateOracleInstance.CLI"></a>
 
 To create an Oracle DB instance by using the AWS CLI, call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 + `--db-instance-identifier`
@@ -99,9 +161,9 @@ This command should produce output similar to the following:
 3. PARAMGRP  default.oracle-se1-11.2  in-sync
 ```
 
-## API<a name="USER_CreateOracleInstance.API"></a>
+## RDS API<a name="USER_CreateOracleInstance.API"></a>
 
-To create an Oracle DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
+To create an Oracle DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the parameters below\. For information about each setting, see [Settings for Oracle DB Instances](#USER_CreateOracleInstance.Settings)\. 
 + `AllocatedStorage`
 + `BackupRetentionPeriod`
 + `DBInstanceClass`
@@ -167,7 +229,7 @@ The following table contains details about settings that you choose when you cre
 |  Master password  |  The password for your master user account\. The password must contain from 8 to 30 printable ASCII characters \(excluding /,", and @\)\.   | 
 |  Multi\-AZ deployment  |  **Create replica in different zone** to create a standby replica of your DB instance in another availability zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Option group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
-|  Public accessibility  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
+|  Publicly accessible  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
 |  Storage autoscaling  |  **Enable storage autoscaling** to enable Amazon RDS to automatically increase storage when needed to avoid having your DB instance run out of storage space\. **Maximum storage threshold** to set the upper limit for Amazon RDS to automatically increase storage to for your DB instance\. For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.   | 
 |  Storage type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
 |  Subnet group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 

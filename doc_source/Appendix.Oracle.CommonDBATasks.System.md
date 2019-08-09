@@ -346,9 +346,7 @@ alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 To see what user profiles are associated with what verification functions, query `DBA_PROFILES`\. The following example gets the profiles that are associated with the custom verification function named `CUSTOM_PASSWORD_FUNCTION`\. 
 
 ```
-select * 
-  from DBA_PROFILES 
- where RESOURCE = 'PASSWORD' and LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
+select * from DBA_PROFILES where RESOURCE_NAME = 'PASSWORD' and LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
 
 
 PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
@@ -359,9 +357,7 @@ DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PA
 The following example gets all profiles and the password verification functions that they are associated with\. 
 
 ```
-select * 
-  from DBA_PROFILES 
- where RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
+select * from DBA_PROFILES where RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
 
 
 PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT

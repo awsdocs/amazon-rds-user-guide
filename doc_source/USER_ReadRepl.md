@@ -204,7 +204,7 @@ With Amazon RDS, you can create a MariaDB, MySQL, or PostgreSQL Read Replica in 
 + Scale read operations into an AWS Region closer to your users\.
 + Make it easier to migrate from a data center in one AWS Region to a data center in another AWS Region\.
 
-Creating a MariaDB, MySQL, or PostgreSQL Read Replica in a different AWS Region than the source instance is similar to creating a replica in the same AWS Region\. To create a Read Replica across regions, you can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API action\.
+Creating a MariaDB, MySQL, or PostgreSQL Read Replica in a different AWS Region than the source instance is similar to creating a replica in the same AWS Region\. To create a Read Replica across regions, you can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API operation\.
 
  To create an encrypted Read Replica in a different AWS Region than the source DB instance, the source DB instance must be encrypted\. 
 

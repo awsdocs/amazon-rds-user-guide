@@ -115,9 +115,9 @@ aws rds describe-pending-maintenance-actions ^
 
 ### RDS API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
 
-To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) action\.
+To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) operation\.
 
-To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) action\.
+To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) operation\.
 
 ## Maintenance for Multi\-AZ Deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
 
@@ -204,7 +204,7 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
-To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters:
+To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
 + `DBInstanceIdentifier = mydbinstance`
 + `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
 

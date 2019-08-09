@@ -16,7 +16,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts can't be used\. 
 
-Before creating a DB instance, you should complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
+Before creating a DB instance, complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
 
 ## Common Management Tasks for Oracle on Amazon RDS<a name="Oracle.Concepts.General"></a>
 
@@ -45,7 +45,7 @@ There are also advanced tasks and optional features for working with Oracle DB i
 
 ## Oracle Licensing<a name="Oracle.Concepts.Licensing"></a>
 
-There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Oracle.html), the Amazon RDS API [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action, or the AWS CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
+There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Oracle.html), the Amazon RDS API [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation, or the AWS CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
 
 ### License Included<a name="Oracle.Concepts.Licensing.LicenseIncluded"></a>
 
@@ -103,11 +103,25 @@ The following are the DB instance classes supported for Oracle\.
 | Oracle Edition | Version 12\.2\.0\.1 Support | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
 | --- | --- | --- | --- | 
 |  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+
+**Note**  
+We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
+
+### Deprecation of db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
+
+The db\.t2 DB instance classes are on a deprecation path for Amazon RDS for Oracle\. The db\.t2 DB instance classes will be replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on September 15, 2019, Amazon RDS for Oracle will disable all new creates of the db\.t2 DB instance classes\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
+
+If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
+If you have DB snapshots of DB instances that were using db\.t2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
+
+**Note**  
+The db\.t3 DB instance classes have hyper\-threading enabled by default\. When DB instances running the db\.t2 DB instance class are migrated, the number of vCPUs is set automatically to the default number of the comparable db\.t3 DB instance class\. To learn more about the vCPU management features available on Amazon RDS for Oracle, and the default settings for each db\.t3 DB instance class, see [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
 ### Deprecated db\.m3 and db\.r3 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedM3R3"></a>
 

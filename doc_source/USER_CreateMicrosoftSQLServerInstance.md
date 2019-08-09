@@ -3,11 +3,77 @@
 The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB instance is similar to your on\-premises Microsoft SQL Server\. After you create your SQL Server DB instance, you can add one or more custom databases to it\. 
 
 **Important**  
-You must complete the tasks in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section before you can create or connect to a DB instance\. 
+Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
 
 For an example that walks you through the process of creating and connecting to a sample DB instance, see [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)\. 
 
-## AWS Management Console<a name="USER_CreateMicrosoftSQLServerInstance.CON"></a>
+**Note**  
+If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+
+## New Console<a name="USER_CreateMicrosoftSQLServerInstance.CON"></a>
+
+You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+
+**Note**  
+For this example, **Easy create** is not enabled\. For information about creating a Microsoft SQL Server DB instance with **Easy create** enabled, see [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)\.
+
+**To create a SQL Server DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\. 
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose **Create database**\.
+
+1. In **Database settings**, turn the **Easy create** option off\.
+
+1. In **Engine options**, choose **Microsoft SQL Server**\.   
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch01.png)
+
+1. For **Edition**, choose the SQL Server DB engine edition that you want to use\. The SQL Server editions that are available vary by AWS Region\.
+
+1. For **Version**, choose the SQL server version\.
+
+1. In **Templates**, choose the template that matches your use case\. If you choose **Production**, the following are preselected in a later step:
+   + **Multi\-AZ** failover option
+   + **Provisioned IOPS** storage option
+   + **Enable deletion protection** option
+
+   We recommend these features for any production environment\. 
+**Note**  
+Template choices vary by edition\.
+
+1. To enter your master password, do the following:
+
+   1. In the **Settings** section, open **Credential Settings**\.
+
+   1. Clear the **Auto generate a password** check box\.
+
+   1. \(Optional\) Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\.
+
+   By default, the new DB instance uses an automatically generated password for the master user\.
+
+1. For the remaining sections, specify your DB instance settings\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\. 
+
+1. Choose **Create database**\. 
+
+   If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
+
+   To view the master user name and password for the DB instance, choose **View credential details**\.  
+![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+
+   To connect to the DB instance as the master user, use the user name and password that appear\.
+**Important**  
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
+
+1. For **Databases**, choose the name of the new SQL Server DB instance\.
+
+   On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it can take several minutes for the new instance to be available\.   
+![\[My DB instances details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch05.png)
+
+## Current Console<a name="USER_CreateMicrosoftSQLServerInstance.CurrentCON"></a>
 
 **To launch a SQL Server DB instance**
 
@@ -22,7 +88,7 @@ For an example that walks you through the process of creating and connecting to 
 1. Choose **Create database** to open the **Select engine** page\.
 
 1. Choose the **Microsoft SQL Server** icon\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch01.png)
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-SQLSvr-Launch01.png)
 
 1. Choose the SQL Server DB engine edition that you want to use\. The SQL Server editions that are available vary by AWS Region\. 
 
@@ -36,12 +102,12 @@ For an example that walks you through the process of creating and connecting to 
 1. Choose **Next** to continue\. The **Specify DB Details** page appears\. 
 
    On the **Specify DB Details** page, specify your DB instance information\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\.   
-![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch02.png)
+![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-SQLSvr-Launch02.png)
 
 1. Choose **Next** to continue\. The **Configure Advanced Settings** page appears\. 
 
    On the **Configure Advanced Settings** page, provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\.   
-![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch03.png)
+![\[Additional Configuration panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-SQLSvr-Launch03.png)
 
 1. Choose **Launch DB Instance**\. 
 
@@ -49,9 +115,9 @@ For an example that walks you through the process of creating and connecting to 
 
 On the RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\. 
 
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch05.png)
+![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-SQLSvr-Launch05.png)
 
-## CLI<a name="USER_CreateMicrosoftSQLServerInstance.CLI"></a>
+## AWS CLI<a name="USER_CreateMicrosoftSQLServerInstance.CLI"></a>
 
 To create a Microsoft SQL Server DB instance by using the AWS CLI, call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\. 
 + `--db-instance-identifier`
@@ -101,9 +167,9 @@ This command should produce output similar to the following:
 3. PARAMGRP  default.sqlserver-se-10.5  in-sync
 ```
 
-## API<a name="USER_CreateMicrosoftSQLServerInstance.API"></a>
+## RDS API<a name="USER_CreateMicrosoftSQLServerInstance.API"></a>
 
-To create a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action with the parameters below\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\. 
+To create a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the parameters below\. For information about each setting, see [Settings for Microsoft SQL Server DB Instances](#USER_CreateMicrosoftSQLServerInstance.Settings)\. 
 + `AllocatedStorage`
 + `BackupRetentionPeriod`
 + `DBInstanceClass`
@@ -152,8 +218,9 @@ The following table contains details about settings that you choose when you cre
 |  Availability Zone  |  The availability zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
 |  Backup Retention Period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial DB instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
 |  Backup Window  |  The time period during which Amazon RDS automatically takes a backup of your DB instance\. Unless you have a specific time that you want to have your database backup, use the default of **No Preference**\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
+|  Collation  |  Select a server\-level collation for your DB instance\.  For more information, see [](Appendix.SQLServer.CommonDBATasks.Collation.md#Appendix.SQLServer.CommonDBATasks.Collation.Server)\.   | 
 |  Copy Tags To Snapshots  |  Select this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
-|  Collation  |  Select a server\-level collation for your DB instance\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
+|  Collation  |  Select a server\-level collation for your DB instance\.  For more information, see [Collations and Character Sets for Microsoft SQL ServerServer\-Level Collation for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)\.   | 
 |  Database Port  |  The port that you want to access the DB instance through\. SQL Server installations default to port 1433\. If you use a DB security group with your DB instance, this must be the same port value you provided when creating the DB security group\.     | 
 |  DB Engine Version  |  The version of Microsoft SQL Server that you want to use\.  | 
 |  DB Instance Class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class equates to 1\.7 GiB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\.   | 
@@ -168,7 +235,7 @@ The following table contains details about settings that you choose when you cre
 |  Master User Password  |  The password for your master user account\. The password must contain from 8 to 128 printable ASCII characters \(excluding /,", a space, and @\)\.   | 
 |  Multi\-AZ Deployment  |  **Yes** to create a passive secondary replica of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.   | 
 |  Option Group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
-|  Publicly Accessible  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
+|  Publicly accessible  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
 |  Storage Type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
 |  Subnet Group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
 |  Time Zone  |  The time zone for your DB instance\. If you don't choose a time zone, your DB instance uses the default time zone\.  For more information, see [Local Time Zone for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.TimeZone)\.   | 

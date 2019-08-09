@@ -398,7 +398,7 @@ SECGROUP  mydbsecuritygroup  My new DBSecurityGroup
 
 ### API<a name="USER_WorkingWithSecurityGroups.Revoking.API"></a>
 
-To revoke an ingress rule for a CIDR IP range on a DB security group, call the Amazon RDS API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RevokeDBSecurityGroupIngress.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RevokeDBSecurityGroupIngress.html)`RevokeDBSecurityGroupIngress` with the following parameters:
+To revoke an ingress rule for a CIDR IP range on a DB security group, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RevokeDBSecurityGroupIngress.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RevokeDBSecurityGroupIngress.html)`RevokeDBSecurityGroupIngress` with the following parameters:
 + `DBSecurityGroupName = mydbsecuritygroup`
 + `CIDRIP = 192.168.1.10/27`
 

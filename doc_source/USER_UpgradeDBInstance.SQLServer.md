@@ -100,9 +100,9 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 1. Restore the DB snapshot to create a new test DB instance\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
 1. Modify this new test DB instance to upgrade it to the new version, by using one of the following methods: 
-   + [Upgrading the Engine Version of a DB Instance Using the Console](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.Console)
-   + [Upgrading the Engine Version of a DB Instance Using the AWS CLI](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.CLI)
-   + [Upgrading the Engine Version of a DB Instance Using the RDS API](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.API)
+   + [Console](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.Console)
+   + [AWS CLI](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.CLI)
+   + [RDS API](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.API)
 
 1. Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. 
 

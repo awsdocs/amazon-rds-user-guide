@@ -65,7 +65,7 @@ For Windows:
 
 ### API<a name="USER_Tagging.ARN.API"></a>
 
-To get an ARN for a particular RDS resource, you can call the following RDS API actions and use the ARN properties shown following\.
+To get an ARN for a particular RDS resource, you can call the following RDS API operations and use the ARN properties shown following\.
 
 
 ****  

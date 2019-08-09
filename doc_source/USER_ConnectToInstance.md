@@ -1,12 +1,12 @@
 # Connecting to a DB Instance Running the MySQL Database Engine<a name="USER_ConnectToInstance"></a>
 
- Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. Once Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
+ Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
 
 To authenticate to your RDS DB instance, you can use one of the authentication methods for MySQL and IAM database authentication\.
 + To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication Method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
 + To learn how to authenticate to MySQL using IAM database authentication, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
-You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to list the details of an Amazon RDS DB instance, including its endpoint\. 
+You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list the details of an Amazon RDS DB instance, including its endpoint\. 
 
 To find the endpoint for a MySQL DB instance in the AWS Management Console:
 
@@ -14,7 +14,7 @@ To find the endpoint for a MySQL DB instance in the AWS Management Console:
 
 1. Choose the MySQL DB instance name to display its details\. 
 
-1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQLConnect1.png)
 
 If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com` and the port value is `3306`, then you would specify the following values in a MySQL connection string:

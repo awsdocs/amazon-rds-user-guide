@@ -27,7 +27,7 @@ To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http
 
 ## API<a name="USER_StartInstance.API"></a>
 
-To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) action with the following parameters: 
+To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
 
 **Example**  

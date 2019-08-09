@@ -81,7 +81,7 @@ There are several reasons you would get this error; it could be because your acc
 
 ## Resetting the DB Instance Owner Role Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 
-You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\.
+You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\.
 
 For more information about modifying a SQL Server DB instance, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
 
@@ -110,7 +110,7 @@ When you change a static parameter in a DB parameter group, the change will not 
 
 If you change a parameter in a DB parameter group but you don't see the changes take effect, you most likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately; when you change a static parameter, the change won't take effect until you reboot the DB instance associated with the parameter group\. 
 
-You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API action \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+You can reboot a DB instance using the RDS console or explicitly calling the `RebootDbInstance` API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Amazon RDS DB Instance Running Out of Storage<a name="CHAP_Troubleshooting.Storage"></a>
 
@@ -198,11 +198,16 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 
 ## Amazon RDS Insufficient DB Instance Capacity<a name="CHAP_Troubleshooting.Capacity"></a>
 
-If you get an `InsufficientDBInstanceCapacity` error when you try to modify a DB instance class, it might be because the DB instance is on the EC2\-Classic platform and is therefore not in a VPC\. Some DB instance classes require a VPC\. For example, if you are on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon Elastic Compute Cloud instance types that are only available in a VPC, see [Instance Types Available Only in a VPC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\.
+The `InsufficientDBInstanceCapacity` error is returned when you try to create or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
++ The specific DB instance class is not available in the requested Availability Zone\. You can try one of the following to solve the problem:
+  + Retry the request with a different DB instance class\.
+  + Retry the request with a different Availability Zone\.
+  + Retry the request without specifying an explicit Availability Zone\.
 
-To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\.
+  For information about troubleshooting instance capacity issues for Amazon EC2, see [Insufficient Instance Capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity) in the *Amazon Elastic Compute Cloud User Guide*\.
++ The DB instance is on the EC2\-Classic platform and therefore is not in a VPC\. Some DB instance classes require a VPC\. For example, if you are on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon EC2 instance types that are only available in a VPC, see [Instance Types Available in EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\. To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\.
 
-For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. For information about troubleshooting instance capacity issues for Amazon EC2, see [Troubleshooting Instance Capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-capacity.html) in the *Amazon Elastic Compute Cloud User Guide*\.
+For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Amazon RDS MySQL and MariaDB Issues<a name="CHAP_Troubleshooting.MySQL"></a>
 

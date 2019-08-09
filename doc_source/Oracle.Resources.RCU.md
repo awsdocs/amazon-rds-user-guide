@@ -35,7 +35,7 @@ Amazon RDS supports Oracle database version upgrades as needed\. For more inform
 
 ## Before You Begin<a name="Oracle.Resources.RCU.BeforeYouBegin"></a>
 
-Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Fusion Middleware components, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating an Amazon VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
+Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Fusion Middleware components, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating a VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
 
 Before you begin, you also need an Oracle DB instance\. For information about how to create an Oracle DB instance for use with Fusion Middleware metadata, see [Creating an Oracle DB Instance](Oracle.Resources.Shared.md#Oracle.Resources.Shared.Database.RDS)\. 
 

@@ -15,7 +15,7 @@ To get Windows Authentication using an on\-premises or self\-hosted Microsoft Ac
 
 To set up Windows authentication for a SQL Server DB instance, do the following steps \(explained in greater detail in this section\): 
 
-1. Use the AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, either from the AWS console or AWS Directory Service API to create a AWS Managed Microsoft AD directory\. 
+1. Use the AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, either from the AWS console or AWS Directory Service API to create an AWS Managed Microsoft AD directory\. 
 
 1. If you use the AWS CLI or Amazon RDS API to create your SQL Server DB instance, you need to create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy AmazonRDSDirectoryServiceAccess\. The role allows Amazon RDS to make calls to your directory\. If you use the AWS console to create your SQL Server DB instance, AWS creates the IAM role for you\. 
 
@@ -49,9 +49,9 @@ You use AWS Directory Service for Microsoft Active Directory, also called **AWS 
 
 ### Step 1: Create a Directory Using the AWS Directory Service for Microsoft Active Directory<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
 
-AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create a AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC; this redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
+AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC; this redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
 
- When you create a *AWS Managed Microsoft AD* directory, AWS Directory Service performs the following tasks on your behalf: 
+ When you create an *AWS Managed Microsoft AD* directory, AWS Directory Service performs the following tasks on your behalf: 
 +  Sets up a Microsoft Active Directory within the VPC\. 
 +  Creates a directory administrator account with the user name Admin and the specified password\. You use this account to manage your directory\. 
 **Note**  
@@ -74,18 +74,24 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 +  View DNS event logs 
 +  View security event logs 
 
-**To create a directory with AWS Directory Service for Microsoft Active Directory**
+**To create a directory with AWS Managed Microsoft AD**
 
-1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservicev2/) navigation pane, select **Directories** and choose** Set up Directory**\. 
+1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservicev2/) navigation pane, select **Directories** and choose **Set up directory**\. 
 
-1.  Choose **Create AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option currently supported for use with Amazon RDS\. 
+1. Choose **AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option currently supported for use with Amazon RDS\. 
 
-1.  Provide the following information:   
-**Directory DNS**  
+1. Choose **Next**\.
+
+1. On the **Enter directory information** page, provide the following information:   
+**Edition**  
+ Choose the edition that meets your requirements\.  
+**Directory DNS name**  
  The fully qualified name for the directory, such as corp\.example\.com\.   
-**NetBIOS name**  
- The short name for the directory, such as CORP\.   
-**Administrator password**  
+**Directory NetBIOS name**  
+ An optional short name for the directory, such as `CORP`\.   
+**Directory description**  
+ An optional description for the directory\.   
+**Admin password**  
  The password for the directory administrator\. The directory creation process creates an administrator account with the user name Admin and this password\.   
  The directory administrator password and cannot include the word "admin\." The password is case\-sensitive and must be between 8 and 64 characters in length, inclusive\. It must also contain at least one character from three of the following four categories:   
    +  Lowercase letters \(a\-z\) 
@@ -93,22 +99,24 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
    +  Numbers \(0\-9\) 
    +  Non\-alphanumeric characters \(\~\!@\#$%^&\*\_\-\+=`\|\\\(\)\{\}\[\]:;"'<>,\.?/\)   
 **Confirm password**  
- Retype the administrator password\.   
-**Description**  
- An optional description for the directory\. 
+ Retype the administrator password\. 
 
-1.  Provide the following information in the **VPC Details** section and choose** Next Step**\.   
+1. Choose **Next**\.
+
+1. On the **Choose VPC and subnets** page, provide the following information:  
 **VPC**  
- The VPC for the directory\. Note that the SQL Server DB instance must be created in this same VPC\.   
+ Select the VPC for the directory\. The SQL Server DB instance must be created in this same VPC\.   
 **Subnets**  
  Select the subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
 
-1.  Review the directory information and make any necessary changes\. When the information is correct, choose **Create AWS Managed Microsoft AD**\.   
-![\[graphic of Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
+1. Choose **Next**\.
+
+1.  Review the directory information\. If changes are needed, choose **Previous**\. When the information is correct, choose **Create directory**\.   
+![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
 
  It takes several minutes for the directory to be created\. When it has been successfully created, the **Status** value changes to **Active**\. 
 
- To see information about your directory, select the directory in the directory listing\. Note the Directory ID; you will need this value when you create or modify your SQL Server DB instance\. 
+ To see information about your directory, choose the directory ID in the directory listing\. Make a note of the `Directory ID`\. You will need this value when you create or modify your SQL Server DB instance\. 
 
 ![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
@@ -185,11 +193,11 @@ CREATE LOGIN [<user or group>] FROM WINDOWS WITH DEFAULT_DATABASE = [master],
  You can use the AWS console, AWS CLI, or the Amazon RDS API to manage your DB instance and its relationship with your domain, such as moving the DB instance into, out of, or between domains\. 
 
  For example, using the Amazon RDS API, you can do the following: 
-+  To re\-attempt a domain join for a failed membership, use the *ModifyDBInstance* API action and specify the current membership's directory ID\. 
-+  To update the IAM role name for membership, use the *ModifyDBInstance* API action and specify the current membership's directory ID and the new IAM role\. 
-+  To remove a DB instance from a domain, use the *ModifyDBInstance* API action and specify 'none' as the domain parameter\. 
-+  To move a DB instance from one domain to another, use the *ModifyDBInstance* API action and specify the domain identifier of the new domain as the domain parameter\. 
-+  To list membership for each DB instance, use the *DescribeDBInstances* API action\. 
++  To re\-attempt a domain join for a failed membership, use the *ModifyDBInstance* API operation and specify the current membership's directory ID\. 
++  To update the IAM role name for membership, use the *ModifyDBInstance* API operation and specify the current membership's directory ID and the new IAM role\. 
++  To remove a DB instance from a domain, use the *ModifyDBInstance* API operation and specify 'none' as the domain parameter\. 
++  To move a DB instance from one domain to another, use the *ModifyDBInstance* API operation and specify the domain identifier of the new domain as the domain parameter\. 
++  To list membership for each DB instance, use the *DescribeDBInstances* API operation\. 
 
 ### Understanding Domain Membership<a name="USER_SQLServerWinAuth.Understanding"></a>
 

@@ -53,7 +53,7 @@ aws rds modify-db-instance ^
 
 ## API<a name="USER_ModifyInstance.SQLServer.API"></a>
 
-To modify a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\. Specify the DB instance identifier, and the parameters for the settings that you want to modify\. For information about each parameter, see [Settings for Microsoft SQL Server DB Instances](#USER_ModifyInstance.SQLServer.Settings)\. 
+To modify a Microsoft SQL Server DB instance by using the Amazon RDS API, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\. Specify the DB instance identifier, and the parameters for the settings that you want to modify\. For information about each parameter, see [Settings for Microsoft SQL Server DB Instances](#USER_ModifyInstance.SQLServer.Settings)\. 
 
 **Example**  
 The following code modifies `mydbinstance` by setting the backup retention period to 1 week \(7 days\) and enabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.   

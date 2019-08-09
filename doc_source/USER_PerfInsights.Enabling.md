@@ -108,9 +108,9 @@ aws rds modify-db-instance ^
 
 ## API<a name="USER_PerfInsights.Enabling.API"></a>
 
-When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action Amazon RDS API action, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
+When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation Amazon RDS API operation, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
 
-You can also specify the `EnablePerformanceInsights` value using the following API actions:
+You can also specify the `EnablePerformanceInsights` value using the following API operations:
 +  [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 
 +  [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
 +  [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) 

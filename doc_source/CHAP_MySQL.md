@@ -150,7 +150,7 @@ Security for Amazon RDS MySQL DB instances is managed at three levels:
 + `update`
 
 **Note**  
-Although it is possible to delete the master user on the DB instance, it is not recommended\. To recreate the master user, use the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API action or the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and specify a new master user password with the appropriate parameter\. If the master user does not exist in the instance, the master user is created with the specified password\. 
+Although it is possible to delete the master user on the DB instance, it is not recommended\. To recreate the master user, use the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation or the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and specify a new master user password with the appropriate parameter\. If the master user does not exist in the instance, the master user is created with the specified password\. 
 
 To provide management services for each DB instance, the `rdsadmin` user is created when the DB instance is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account will result in an error\. 
 
@@ -176,7 +176,7 @@ MySQL provides the `validate_password` plugin for improved security\. The plugin
 
 After installing and enabling the `password_validate` plugin, reset existing passwords to comply with your new validation policies\.
 
-Amazon RDS doesn't validate passwords\. The MySQL DB instance performs password validation\. If you set a user password with the AWS Management Console, the `modify-db-instance` AWS CLI command, or the `ModifyDBInstance` RDS API action, the change can succeed even if the new password doesn't satisfy your password policies\. However, a new password is set in the MySQL DB instance only if it satisfies the password policies\. In this case, Amazon RDS records the following event\.
+Amazon RDS doesn't validate passwords\. The MySQL DB instance performs password validation\. If you set a user password with the AWS Management Console, the `modify-db-instance` AWS CLI command, or the `ModifyDBInstance` RDS API operation, the change can succeed even if the new password doesn't satisfy your password policies\. However, a new password is set in the MySQL DB instance only if it satisfies the password policies\. In this case, Amazon RDS records the following event\.
 
 ```
 "RDS-EVENT-0067" - An attempt to reset the master password for the DB instance has failed.            

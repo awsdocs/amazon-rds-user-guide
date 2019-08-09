@@ -1,6 +1,6 @@
 # Connecting to a DB Instance Running the PostgreSQL Database Engine<a name="USER_ConnectToPostgreSQLInstance"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. To list the details of an Amazon RDS DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action\. You need the following information to connect:
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. To list the details of an Amazon RDS DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. You need the following information to connect:
 + The host or host name for the DB instance, for example: 
 
   ```
@@ -16,6 +16,15 @@ Following are two ways to connect to a PostgreSQL DB instance\. The first exampl
 You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance\. 
 
 **To connect to a PostgreSQL DB instance using pgAdmin**
+
+1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
+
+   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+
+   1. Choose the PostgreSQL DB instance name to display its details\. 
+
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to a PostgreSQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-endpoint.png)
 
 1. Install pgAdmin from [http://www\.pgadmin\.org/](http://www.pgadmin.org/)\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\.
 

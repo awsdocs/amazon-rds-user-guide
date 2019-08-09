@@ -24,6 +24,7 @@ The following are some limitations to using native backup and restore:
 + You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.   
 + Native backups of databases larger than 1 TB are not supported\. 
++ Native restores of differential backups are not currently supported\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 
 + You can't do a native backup during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in full recovery model\.
@@ -209,6 +210,9 @@ The following parameters are required:
 
 The differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want to take a differential backup, and a snapshot exists, make another full backup before proceeding with the differential\. 
 
+**Note**  
+Restoring differential backups isn't currently supported\.
+
 You can look for the last full backup or snapshot using the following sample SQL: 
 
 ```
@@ -224,7 +228,7 @@ order by backup_start_date desc;
 
 ### Restoring a Database<a name="SQLServer.Procedural.Importing.Native.Using.Restore"></a>
 
-To restore your database, you call the `rds_restore_database` stored procedure\. 
+To restore your database, you call the `rds_restore_database` stored procedure\. Every time you use native restore, you create an initial snapshot of the restored database\.
 
 The following parameters are required: 
 + `@restore_db_name` – The name of the database to restore\. 

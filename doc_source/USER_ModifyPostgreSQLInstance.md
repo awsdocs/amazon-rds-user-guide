@@ -57,7 +57,7 @@ aws rds modify-db-instance ^
 
 ## API<a name="USER_ModifyPostgreSQLInstance.API"></a>
 
-To modify a PostgreSQL DB instance, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\.
+To modify a PostgreSQL DB instance, use the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\.
 
 **Example**  
 The following code modifies `pgdbinstance` by setting the backup retention period to 1 week \(7 days\) and disabling automatic minor version upgrades\. These changes are applied during the next maintenance window\.  

@@ -18,7 +18,7 @@ The following are some limitations and recommendations for importing backup file
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
 + You can't import a MySQL 5\.5 or 8\.0 database\. 
 + You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
-+ You can't restore databases larger than 6 TB in size\. 
++ You can't restore databases larger than the maximum database size supported by Amazon RDS for MySQL\. For more information about storage limits, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD) and [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
 + Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and then change the instance class later\. For more information about instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
@@ -282,4 +282,4 @@ For Windows:
 
 ### RDS API<a name="MySQL.Procedural.Importing.API"></a>
 
-To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) action\. 
+To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) operation\. 

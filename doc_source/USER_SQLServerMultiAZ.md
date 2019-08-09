@@ -121,7 +121,7 @@ You can determine the location of the secondary replica by using the AWS Managem
 
 ![\[Single AZ Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-MultiAZ.png)
 
-You can also view the Availability Zone of the secondary using the AWS CLI command `describe-db-instances` or RDS API action `DescribeDBInstances`\. The output shows the secondary AZ where the standby mirror is located\. 
+You can also view the Availability Zone of the secondary using the AWS CLI command `describe-db-instances` or RDS API operation `DescribeDBInstances`\. The output shows the secondary AZ where the standby mirror is located\. 
 
 ## Migrating from Database Mirroring to Always On Availability Groups<a name="USER_SQLServerMultiAZ.Migration"></a>
 

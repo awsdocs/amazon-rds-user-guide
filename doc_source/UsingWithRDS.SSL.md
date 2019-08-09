@@ -52,6 +52,8 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 
 [EU \(Stockholm\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-eu-north-1.pem)
 
+[Middle East \(Bahrain\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-me-south-1.pem)
+
 [South America \(São Paulo\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-sa-east-1.pem)
 
 [US East \(N\. Virginia\)](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-east-1.pem)

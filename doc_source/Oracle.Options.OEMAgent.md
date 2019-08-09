@@ -18,14 +18,15 @@ The following are some limitations to using Management Agent:
 
 The following are prerequisites for using Management Agent: 
 + An Amazon RDS DB instance running Oracle version 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
-+ At least 3\.3 GiB of storage space for OEM 13c2\. 
-+ At least 3 GiB of storage space for OEM 13c1\. 
++ At least 3\.3 GiB of storage space for OEM 13c Release 3\. 
++ At least 3\.3 GiB of storage space for OEM 13c Release 2\. 
++ At least 3 GiB of storage space for OEM 13c Release 1\. 
 + At least 2 GiB of storage space for OEM 12c\. 
 + An Oracle Management Service \(OMS\), configured to connect to your Amazon RDS DB instance\. 
-  + For OMS 13c2 with Oracle patch 25163555 applied, use OEM Agent 13\.2\.0\.0\.v2 or later\.
+  + For OMS 13c Release 2 with Oracle patch 25163555 applied, use OEM Agent 13\.2\.0\.0\.v2 or later\.
 
     Use OMSPatcher to apply the patch\.
-  + For unpatched OMS 13c2, use OEM Agent 13\.2\.0\.0\.v1\.
+  + For unpatched OMS 13c Release 2, use OEM Agent 13\.2\.0\.0\.v1\.
 + In most cases, you need to configure your VPC to allow connections from OMS to your DB instance\. If you are not familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
 
 Additional configuration is required to allow your OMS host and your Amazon RDS DB instance to communicate\. You must also do the following: 
@@ -47,7 +48,7 @@ All of the settings are required\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) |  13\.2\.0\.0\.v2 13\.2\.0\.0\.v1 13\.1\.0\.0\.v1 12\.1\.0\.5\.v1 12\.1\.0\.4\.v1  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) region, only versions 13\.2\.0\.0\.v1 and 13\.2\.0\.0\.v2 are available\.   | 
+| **Version** \(`AGENT_VERSION`\) |  13\.3\.0\.0\.v1 13\.2\.0\.0\.v2 13\.2\.0\.0\.v1 13\.1\.0\.0\.v1 12\.1\.0\.5\.v1 12\.1\.0\.4\.v1  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
 | **Port** \(`AGENT_PORT`\) | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
 | **Security Groups** | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
 | **OMS\_HOST** |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 

@@ -234,7 +234,7 @@ The following example deletes the expired archived redo logs from the control fi
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.crosscheck_archivelog(
-        p_delete_expired      => 4,  
+        p_delete_expired      => FALSE,  
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -274,7 +274,7 @@ The following example backs up all archived redo logs for the DB instance\.
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_archivelog_all(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_parallel            => 4,  
         p_rman_to_dbms_output => FALSE);
@@ -311,7 +311,7 @@ The following example backs up archived redo logs in the date range for the DB i
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_archivelog_date(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_from_date           => '03/01/2019 00:00:00',
         p_to_date             => '03/02/2019 00:00:00',
@@ -350,7 +350,7 @@ The following example backs up archived redo logs in the SCN range for the DB in
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_archivelog_scn(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_from_scn            => 1533835,
         p_to_scn              => 1892447,
@@ -389,7 +389,7 @@ The following example backs up archived redo logs in the sequence number range f
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_archivelog_sequence(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_from_sequence       => 11160,
         p_to_sequence         => 11160,
@@ -426,7 +426,7 @@ The following example performs a full backup of the DB instance using the specif
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_database_full(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_parallel            => 4,  
         p_section_size_mb     => 10,
@@ -474,7 +474,7 @@ The following example performs an incremental backup of the DB instance using th
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_database_incremental(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
         p_level               => 1,
         p_parallel            => 4,  
@@ -521,9 +521,9 @@ The following example performs a tablespace backup using the specified values fo
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.backup_tablespace(
-        p_owner               => 'MYDBADMIN', 
+        p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
-        p_tablespace          => MYTABLESPACE,
+        p_tablespace_name     => MYTABLESPACE,
         p_parallel            => 4,  
         p_section_size_mb     => 10,
         p_rman_to_dbms_output => FALSE);

@@ -60,11 +60,13 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 10,000 | 20 Gbps | 
 | db\.m5\.12xlarge | 48 | 173 | 192 | Yes | Yes | 7,000 | 10 Gbps | 
-| db\.m5\.4xlarge | 16 | 61 | 64 | Yes | Yes | 3,500 | Up to 10 Gigabit | 
-| db\.m5\.2xlarge | 8 | 31 | 32 | Yes | Yes | 3,500 | Up to 10 Gigabit | 
-| db\.m5\.xlarge | 4 | 15 | 16 | Yes | Yes | 3,500 | Up to 10 Gigabit | 
-| db\.m5\.large | 2 | 10 | 8 | Yes | Yes | 3,500 | Up to 10 Gigabit | 
+| db\.m5\.8xlarge | 32 | 131 | 128 | Yes | Yes | 5,000 | 10 Gbps | 
+| db\.m5\.4xlarge | 16 | 61 | 64 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.m5\.2xlarge | 8 | 31 | 32 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.m5\.xlarge | 4 | 15 | 16 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.m5\.large | 2 | 10 | 8 | Yes | Yes | 3,500 | Up to 10 Gbps | 
 | db\.m4 – Current Generation Standard Instance Classes | 
 | db\.m4\.16xlarge | 64 | 188 | 256 | Yes | Yes | 10,000 | 25 Gbps | 
 | db\.m4\.10xlarge | 40 | 124\.5 | 160 | Yes | Yes | 4,000 | 10 Gbps | 
@@ -104,7 +106,9 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 10,000 | 20 Gbps | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 7,000 | 10 Gbps | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | Yes | Yes | 5,000 | 10 Gbps | 
 | db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 3,500 | Up to 10 Gbps | 
 | db\.r5\.2xlarge | 8 | 38 | 64 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | 
 | db\.r5\.xlarge | 4 | 19 | 32 | Yes | Yes | Up to 3,500 | Up to 10 Gbps | 
@@ -129,12 +133,12 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | 
 | **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 8 | Variable | 32 | Yes | Yes | 2,050 | Up to 5 Gigabit | 
-| db\.t3\.xlarge | 4 | Variable | 16 | Yes | Yes | 2,050 | Up to 5 Gigabit | 
-| db\.t3\.large | 2 | Variable | 8 | Yes | Yes | 2,050 | Up to 5 Gigabit | 
-| db\.t3\.medium | 2 | Variable | 4 | Yes | Yes | 1,500 | Up to 5 Gigabit | 
-| db\.t3\.small | 2 | Variable | 2 | Yes | Yes | 1,500 | Up to 5 Gigabit | 
-| db\.t3\.micro | 2 | Variable | 1 | Yes | Yes | 1,500 | Up to 5 Gigabit | 
+| db\.t3\.2xlarge | 8 | Variable | 32 | Yes | Yes | 2,050 | Up to 5 Gbps | 
+| db\.t3\.xlarge | 4 | Variable | 16 | Yes | Yes | 2,050 | Up to 5 Gbps | 
+| db\.t3\.large | 2 | Variable | 8 | Yes | Yes | 2,050 | Up to 5 Gbps | 
+| db\.t3\.medium | 2 | Variable | 4 | Yes | Yes | 1,500 | Up to 5 Gbps | 
+| db\.t3\.small | 2 | Variable | 2 | Yes | Yes | 1,500 | Up to 5 Gbps | 
+| db\.t3\.micro | 2 | Variable | 1 | Yes | Yes | 1,500 | Up to 5 Gbps | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | 
 | db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | 
@@ -163,7 +167,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
+| db\.m5\.16xlarge | No | No | No | Yes | No | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
+| db\.m5\.8xlarge | No | No | No | Yes | No | 
 | db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -207,7 +213,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | No | Yes | Yes | Yes | 
+| db\.r5\.16xlarge | No | No | No | Yes | No | 
 | db\.r5\.12xlarge | Yes | No | Yes | Yes | Yes | 
+| db\.r5\.8xlarge | No | No | No | Yes | No | 
 | db\.r5\.4xlarge | Yes | No | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | No | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | No | Yes | Yes | Yes | 
@@ -296,7 +304,9 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.m5\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
 |  db\.m5\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
 |  db\.m5\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 
+|  db\.m5\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
 |  db\.m5\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
+|  db\.m5\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.m5\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.m4\.10xlarge  |  40  |  20  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20  |  1, 2  | 
 |  db\.m4\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
@@ -309,7 +319,9 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.r5\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
 |  db\.r5\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
 |  db\.r5\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 
+|  db\.r5\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
 |  db\.r5\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
+|  db\.r5\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.r5\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.r4\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.r4\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 
@@ -553,7 +565,7 @@ aws rds modify-db-instance ^
 
 #### API<a name="USER_ConfigureProcessor.API"></a>
 
-You can set the processor features for a DB instance when you call one of the following Amazon RDS API actions:
+You can set the processor features for a DB instance when you call one of the following Amazon RDS API operations:
 + [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)
 + [RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
@@ -570,7 +582,7 @@ ProcessFeatures "Name=coreCount,Value=<value>" "Name=threadsPerCore,Value=<value
 
 Specify the number of CPU cores with the `coreCount` feature name, and specify whether multiple threads per core are enabled with the `threadsPerCore` feature name\. 
 
-You can view the valid processor values for a particular instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) action and specifying the instance class for the `DBInstanceClass` parameter\.
+You can view the valid processor values for a particular instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation and specifying the instance class for the `DBInstanceClass` parameter\.
 
 In addition, you can use the following actions for DB instance class processor information:
 + [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) – Shows the processor information for the specified DB instance\.

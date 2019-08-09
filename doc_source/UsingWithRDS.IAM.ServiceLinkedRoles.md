@@ -16,32 +16,86 @@ The AWSServiceRoleForRDS service\-linked role trusts the following services to a
 + `rds.amazonaws.com`
 
 The role permissions policy allows Amazon RDS to complete the following actions on the specified resources:
-+ Actions on `ec2`:
-  + `AssignPrivateIpAddresses`
-  + `AuthorizeSecurityGroupIngress`
-  + `CreateNetworkInterface`
-  + `CreateSecurityGroup`
-  + `DeleteNetworkInterface`
-  + `DeleteSecurityGroup`
-  + `DescribeAvailabilityZones`
-  + `DescribeInternetGateways`
-  + `DescribeSecurityGroups`
-  + `DescribeSubnets`
-  + `DescribeVpcAttribute`
-  + `DescribeVpcs`
-  + `ModifyNetworkInterfaceAttribute`
-  + `RevokeSecurityGroupIngress`
-  + `UnassignPrivateIpAddresses`
-+ Actions on `sns`:
-  + `ListTopic`
-  + `Publish`
-+ Actions on `cloudwatch`:
-  + `PutMetricData`
-  + `GetMetricData`
-  + `CreateLogStream`
-  + `PullLogEvents`
-  + `DescribeLogStreams`
-  + `CreateLogGroup`
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AuthorizeSecurityGroupIngress",
+                "ec2:CreateNetworkInterface",
+                "ec2:CreateSecurityGroup",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DeleteSecurityGroup",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeInternetGateways",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute",
+                "ec2:DescribeVpcs",
+                "ec2:ModifyNetworkInterfaceAttribute",
+                "ec2:ModifyVpcEndpoint",
+                "ec2:RevokeSecurityGroupIngress",
+                "ec2:CreateVpcEndpoint",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DeleteVpcEndpoints",
+                "ec2:AssignPrivateIpAddresses",
+                "ec2:UnassignPrivateIpAddresses"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sns:Publish"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/aws/rds/*",
+                "arn:aws:logs:*:*:log-group:/aws/docdb/*",
+                "arn:aws:logs:*:*:log-group:/aws/neptune/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+            ],
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/aws/rds/*:log-stream:*",
+                "arn:aws:logs:*:*:log-group:/aws/docdb/*:log-stream:*",
+                "arn:aws:logs:*:*:log-group:/aws/neptune/*:log-stream:*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:CreateStream",
+                "kinesis:PutRecord",
+                "kinesis:PutRecords",
+                "kinesis:DescribeStream",
+                "kinesis:SplitShard",
+                "kinesis:MergeShards",
+                "kinesis:DeleteStream",
+                "kinesis:UpdateShardCount"
+            ],
+            "Resource": [
+                "arn:aws:kinesis:*:*:stream/aws-rds-das-*"
+            ]
+        }
+    ]
+}
+```
 
 **Note**  
 You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. If you encounter the following error message:  

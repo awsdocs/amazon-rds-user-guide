@@ -102,7 +102,7 @@ aws rds describe-db-instances --db-instance-identifier mydbinstance
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Disabling.API"></a>
 
-To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
+To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier = mydbinstance`
 + `BackupRetentionPeriod = 0`
 

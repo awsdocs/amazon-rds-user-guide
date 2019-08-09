@@ -23,7 +23,7 @@ For major version upgrades, you must manually modify the DB engine version throu
 
 To manually upgrade the engine version of a DB instance, you can use the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### Upgrading the Engine Version of a DB Instance Using the Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
+### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
 
 **To upgrade the engine version of a DB instance by using the console**
 
@@ -43,7 +43,7 @@ To manually upgrade the engine version of a DB instance, you can use the AWS Man
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-### Upgrading the Engine Version of a DB Instance Using the AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
+### AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
 + `--db-instance-identifier` – the name of the DB instance\. 
@@ -73,7 +73,7 @@ For Windows:
 5.     --no-apply-immediately
 ```
 
-### Upgrading the Engine Version of a DB Instance Using the RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
+### RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\. Specify the following parameters: 
 + `DBInstanceIdentifier` – the name of the DB instance, for example *`mydbinstance`*\. 
@@ -83,7 +83,7 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 
 ## Automatically Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades"></a>
 
-A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 5\.7 with the minor engine versions 5\.7\.22 and 5\.7\.23 within it\. 
+A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 9\.6 with the minor engine versions 9\.6\.11 and 9\.6\.12 within it\. 
 
 If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.

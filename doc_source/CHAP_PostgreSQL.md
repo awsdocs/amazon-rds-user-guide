@@ -134,7 +134,7 @@ Use the following procedure to create a DB instance in the preview environment\.
 **Note**  
 If you want to create an instance in the Database Preview Environment with the API or CLI the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
 
-1. Continue with the procedure as described in [Create a PostgreSQL DB Instance](USER_CreatePostgreSQLInstance.md#USER_CreatePostgreSQLInstance.CON)\.
+1. Continue with the procedure as described in [New Console](USER_CreatePostgreSQLInstance.md#USER_CreatePostgreSQLInstance.CON)\.
 
 ## Amazon RDS for PostgreSQL Versions and Extensions<a name="PostgreSQL.Concepts"></a>
 
@@ -153,6 +153,7 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 Amazon RDS supports the following PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version12)
 + [PostgreSQL Version 11\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version114)
 + [PostgreSQL Version 11\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version112)
 + [PostgreSQL Version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)
@@ -209,6 +210,14 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL Version 9\.3\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9316)
 + [PostgreSQL Version 9\.3\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9314)
 + [PostgreSQL Version 9\.3\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9312)
+
+#### PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version12"></a>
+
+PostgreSQL version 12 Beta 2 contains several improvements that are described in both of the following links:
++ [ PostgreSQL 12 Beta 1 Released\!](https://www.postgresql.org/about/news/1943/)
++ [ PostgreSQL 11\.4, 10\.9, 9\.6\.14, 9\.5\.18, 9\.4\.23, and 12 Beta 2 Released\!](https://www.postgresql.org/about/news/1949/)\.
+
+For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
 #### PostgreSQL Version 11\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version114"></a>
 

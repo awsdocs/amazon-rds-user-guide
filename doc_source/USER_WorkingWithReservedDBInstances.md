@@ -284,7 +284,7 @@ This call returns output similar to the following:
 After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following example\. 
 
 **Example Purchase a Reserved DB Instance**  
-To purchase a reserved DB instance, call the Amazon RDS API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) with the following parameters:   
+To purchase a reserved DB instance, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) with the following parameters:   
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
 The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
@@ -335,7 +335,7 @@ This call returns output similar to the following:
 After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following example\. 
 
 **Example Get Your Reserved DB Instances**  
-To get information about reserved DB instances for your AWS account, call the Amazon RDS API action [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html)\.   
+To get information about reserved DB instances for your AWS account, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html)\.   
 
 ```
 https://rds.us-west-2.amazonaws.com/

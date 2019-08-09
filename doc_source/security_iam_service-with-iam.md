@@ -62,13 +62,13 @@ To specify all DB instances that belong to a specific account, use the wildcard 
 "Resource": "arn:aws:ec2:us-east-1:123456789012:db:*"
 ```
 
-Some RDS API actions, such as those for creating resources, cannot be performed on a specific resource\. In those cases, you must use the wildcard \(\*\)\.
+Some RDS API operations, such as those for creating resources, cannot be performed on a specific resource\. In those cases, you must use the wildcard \(\*\)\.
 
 ```
 "Resource": "*"
 ```
 
-Many Amazon RDS API actions involve multiple resources\. For example, `CreateDBInstance` creates a DB instance\. You can specify that an IAM user must use a specific security group and parameter group when creating a DB instance\. To specify multiple resources in a single statement, separate the ARNs with commas\. 
+Many Amazon RDS API operations involve multiple resources\. For example, `CreateDBInstance` creates a DB instance\. You can specify that an IAM user must use a specific security group and parameter group when creating a DB instance\. To specify multiple resources in a single statement, separate the ARNs with commas\. 
 
 ```
 "Resource": [
@@ -90,7 +90,7 @@ Amazon RDS defines its own set of condition keys and also supports using some gl
 
 
 
- All RDS API actions support the `aws:RequestedRegion` condition key\. 
+ All RDS API operations support the `aws:RequestedRegion` condition key\. 
 
 To see a list of Amazon RDS condition keys, see [Condition Keys for Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions)\.
 

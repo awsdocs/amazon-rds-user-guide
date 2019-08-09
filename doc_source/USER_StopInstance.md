@@ -75,7 +75,7 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https:
 
 ## API<a name="USER_StopInstance.API"></a>
 
-To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) action with the following parameter: 
+To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
 
 ## <a name="USER_StopInstance.Related"></a>

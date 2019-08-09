@@ -65,7 +65,7 @@ aws rds modify-db-snapshot ^
 
 ## API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>
 
-To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) action with the following parameters: 
+To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) operation with the following parameters: 
 + `DBSnapshotIdentifier` – The name of the DB snapshot\. 
 + `EngineVersion` – The version to upgrade the snapshot to\. 
 

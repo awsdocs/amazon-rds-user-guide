@@ -18,10 +18,10 @@ In this procedure you connect to your sample DB instance by using Microsoft SQL 
 
    1. Open the RDS console and choose **Databases** to display a list of your DB instances\. 
 
-   1. Choose the name of your SQL Server DB instance to display its details\.   
-![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
+   1. Choose the SQL Server DB instance name to display its details\. 
 
-   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port used by the DB instance\. 
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
 
 1. Start SQL Server Management Studio\. 
 

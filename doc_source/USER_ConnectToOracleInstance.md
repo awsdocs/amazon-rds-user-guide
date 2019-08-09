@@ -24,7 +24,7 @@ You can find the endpoint for a DB instance using the Amazon RDS console or the 
 
    1. Choose the Oracle DB instance name to display the instance details\. 
 
-   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
 ![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
 ### CLI<a name="USER_Endpoint.CLI"></a>

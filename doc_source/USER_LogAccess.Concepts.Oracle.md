@@ -236,7 +236,7 @@ You can also publish Oracle logs by calling the following RDS API operations:
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-Run one of these RDS API actions with the following parameters: 
+Run one of these RDS API operations with the following parameters: 
 + `DBInstanceIdentifier`
 + `EnableCloudwatchLogsExports`
 + `Engine`

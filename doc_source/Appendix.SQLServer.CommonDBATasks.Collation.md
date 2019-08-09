@@ -3,14 +3,36 @@
 SQL Server supports collations at multiple levels\. You set the default server collation when you create the DB instance\. You can override the collation in the database, table, or column level\.
 
 **Topics**
-+ [Server Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Server)
-+ [Database, Table, and Column Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column)
++ [Server\-Level Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Server)
++ [Database\-Level Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column)
 
-## Server Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Server"></a>
+## Server\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Server"></a>
 
-When you create a Microsoft SQL Server DB instance, you can set the default server collation that you want to use\. The server collation is applied by default to all databases and database objects\. Currently, the only supported collation is SQL\_Latin1\_General\_CP1\_CI\_AS\. 
+When you create a Microsoft SQL Server DB instance, you can set the server collation that you want to use\. If you don't choose a different collation, the server\-level collation defaults to SQL\_Latin1\_General\_CP1\_CI\_AS\. The server collation is applied by default to all databases and database objects\. 
 
-## Database, Table, and Column Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column"></a>
+Currently, Amazon RDS supports the following server collations:
+
+
+| Collation | Description | 
+| --- | --- | 
+|  Chinese\_PRC\_CI\_AS  |  Chinese\-PRC, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|      Chinese\_Taiwan\_Stroke\_CI\_AS   |      Chinese\-Taiwan\-Stroke, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive   | 
+|  French\_CI\_AS  |  French, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Hebrew\_BIN  |  Hebrew, binary sort  | 
+|  Japanese\_CI\_AS  |  Japanese, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Korean\_Wansung\_CI\_AS  |  Korean\-Wansung, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Latin1\_General\_BIN  |  Latin1\-General, binary sort  | 
+|  Latin1\_General\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Latin1\_General\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Modern\_Spanish\_CI\_AS  |  Modern\-Spanish, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  SQL\_Latin1\_General\_CP1\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 54 on Code Page 1252 for non\-Unicode Data  | 
+|  **SQL\_Latin1\_General\_CP1\_CI\_AS \(default\)**  | Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 52 on Code Page 1252 for non\-Unicode Data | 
+|  SQL\_Latin1\_General\_CP1\_CS\_AS  |  Latin1\-General, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 51 on Code Page 1252 for non\-Unicode Data  | 
+|  SQL\_Latin1\_General\_CP437\_CI\_AI  | Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 34 on Code Page 437 for non\-Unicode Data | 
+|  SQL\_Latin1\_General\_CP850\_BIN2  |  Latin1\-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non\-Unicode Data  | 
+|  SQL\_Latin1\_General\_CP850\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 42 on Code Page 850 for non\-Unicode Data  | 
+
+## Database\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column"></a>
 
 You can change the default collation at the database, table, or column level by overriding the collation when creating a new database or database object\. For example, if your default server collation is SQL\_Latin1\_General\_CP1\_CI\_AS, you can change it to Mohawk\_100\_CI\_AS for Mohawk collation support\. Even arguments in a query can be type\-cast to use a different collation if necessary\.
 

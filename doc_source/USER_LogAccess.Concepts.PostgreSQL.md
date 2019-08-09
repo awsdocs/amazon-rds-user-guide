@@ -158,12 +158,12 @@ You can publish PostgreSQL logs with the RDS API\. You can call the [https://doc
 **Note**  
 A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
-You can also publish PostgreSQL logs by calling the following RDS API actions: 
+You can also publish PostgreSQL logs by calling the following RDS API operations: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-Run one of these RDS API actions with the following parameters: 
+Run one of these RDS API operations with the following parameters: 
 + `DBInstanceIdentifier`
 + `EnableCloudwatchLogsExports`
 + `Engine`
