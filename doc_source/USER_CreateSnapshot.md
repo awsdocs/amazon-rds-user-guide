@@ -37,8 +37,8 @@ In this example, you create a DB snapshot called *mydbsnapshot* for a DB instanc
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds create-db-snapshot /
-2.     --db-instance-identifier mydbinstance /
+1. aws rds create-db-snapshot \
+2.     --db-instance-identifier mydbinstance \
 3.     --db-snapshot-identifier mydbsnapshot
 ```
 For Windows:  
