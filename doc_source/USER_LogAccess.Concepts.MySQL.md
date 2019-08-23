@@ -67,7 +67,7 @@ The error log is enabled by default\. The following table summarizes the require
 **Note**  
 Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6, 5\.7, and 8\.0\.
 
-### AWS Management Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish MySQL logs to CloudWatch Logs using the console**
 

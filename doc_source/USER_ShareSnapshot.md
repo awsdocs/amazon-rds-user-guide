@@ -133,7 +133,7 @@ For details on updating a key policy, see [Key Policies](https://docs.aws.amazon
 
 You can share a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### AWS Management Console<a name="USER_ShareSnapshot.Console"></a>
+### Console<a name="USER_ShareSnapshot.Console"></a>
 
 Using the Amazon RDS console, you can share a manual DB snapshot with up to 20 AWS accounts\. You can also use the console to stop sharing a manual snapshot with one or more accounts\.
 
@@ -197,7 +197,7 @@ aws rds modify-db-snapshot-attribute \
 --values-to-remove '["444455556666 "]'
 ```
 
-### API<a name="USER_ShareSnapshot.API"></a>
+### RDS API<a name="USER_ShareSnapshot.API"></a>
 
 You can also share a manual DB snapshot with other AWS accounts by using the Amazon RDS API\. To do so, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html) operation\. Specify `restore` for `AttributeName`, and use the `ValuesToAdd` parameter to add a list of the IDs for the AWS accounts that are authorized to restore the manual snapshot\. 
 

@@ -25,7 +25,7 @@ If you delete the old master DB instance, you are responsible for deleting any u
 
 For information about promoting a Read Replica, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
-## AWS Management Console<a name="USER_RenameInstance.CON"></a>
+## Console<a name="USER_RenameInstance.CON"></a>
 
 **To rename a DB instance**
 
@@ -47,7 +47,7 @@ For information about promoting a Read Replica, see [Promoting a Read Replica to
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-## CLI<a name="USER_RenameInstance.CLI"></a>
+## AWS CLI<a name="USER_RenameInstance.CLI"></a>
 
 To rename a DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Provide the current `--db-instance-identifier` value and `--new-db-instance-identifier` parameter with the new name of the DB instance\. 
 
@@ -67,7 +67,7 @@ For Windows:
 3.     --new-db-instance-identifier NewDBInstanceIdentifier
 ```
 
-## API<a name="USER_RenameInstance.API"></a>
+## RDS API<a name="USER_RenameInstance.API"></a>
 
 To rename a DB instance, call Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) with the following parameters:
 + `DBInstanceIdentifier` = existing name for the instance

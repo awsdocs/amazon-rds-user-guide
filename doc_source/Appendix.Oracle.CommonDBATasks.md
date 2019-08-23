@@ -9,10 +9,13 @@ The following are common DBA tasks for DB instances running Oracle:
 + [Database Tasks](Appendix.Oracle.CommonDBATasks.Database.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
++ [Log Tasks](Appendix.Oracle.CommonDBATasks.Log.md)  
+****    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [RMAN Tasks](Appendix.Oracle.CommonDBATasks.RMAN.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
-+ [Log Tasks](Appendix.Oracle.CommonDBATasks.Log.md)  
++ [Oracle Scheduler Tasks](Appendix.Oracle.CommonDBATasks.Scheduler.md)  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Miscellaneous Tasks](Appendix.Oracle.CommonDBATasks.Misc.md)  

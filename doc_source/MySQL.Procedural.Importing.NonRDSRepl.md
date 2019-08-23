@@ -221,9 +221,9 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database**, and then go through the steps to select options for your DB instance:
+1. Choose **Create database**, and then go through the steps to choose options for your DB instance:
 
-   1. Make sure the **Easy create** option is off\.
+   1. Make sure that **Standard Create** is chosen\.
 
    1. In the **Engine options** section, choose **MySQL** or **MariaDB**, as appropriate\.
 

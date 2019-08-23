@@ -72,7 +72,7 @@ Following are the log types that can be published to CloudWatch Logs for Amazon 
 
 After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your Amazon CloudWatch Logs, open [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-### AWS Management Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish PostgreSQL logs to CloudWatch Logs using the console**
 

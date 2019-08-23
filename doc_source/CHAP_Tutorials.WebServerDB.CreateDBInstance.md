@@ -6,7 +6,7 @@ In this step, you create an Amazon RDS MySQL DB instance that maintains the data
 Before you begin this step, you must have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Complete the steps in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets), [Create Additional Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets), [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), and [ Create a VPC Security Group for a Private DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)\. 
 
 **Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
 
 ## New Console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.Console"></a>
 
@@ -20,7 +20,7 @@ A new console interface is available for database creation\. Choose either the *
 
 1. Choose **Create database**\.
 
-1. On the **Create database** page, shown following, make sure the **Easy create** option is off, and then choose **MySQL**\.   
+1. On the **Create database** page, shown following, make sure that the **Standard Create** option is chosen, and then choose **MySQL**\.   
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
 
 1. In the **Templates** section, choose **Dev/Test**\.
@@ -53,7 +53,7 @@ The VPC must have subnets in different Availability Zones\.
    + **Database port** – **3306**  
 ![\[Connectivity section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_Connectivity.png)
 
-1. Open the **Additional configuration** section, and enter **sample** for **Additional database name**\. Keep the default settings for the other options\.
+1. Open the **Additional configuration** section, and enter **sample** for **Initial database name**\. Keep the default settings for the other options\.
 
 1. To create your Amazon RDS MySQL DB instance, choose **Create database**\.
 
@@ -68,7 +68,7 @@ The VPC must have subnets in different Availability Zones\.
 
 To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your RDS MySQL DB instance\. 
 
-## Current Console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.CurrentConsole"></a>
+## Original Console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.CurrentConsole"></a>
 
 **To launch a MySQL DB instance**
 

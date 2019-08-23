@@ -36,7 +36,7 @@ For a Read Replica to receive and apply changes from the source, it should have 
 The following are limitations for Oracle Read Replicas: 
 + You must have an Active Data Guard license\.
 + Oracle Read Replicas are only available on the Oracle Enterprise Edition \(EE\) engine\.
-+ Oracle Read Replicas are only available for Oracle version 12\.1\.0\.2\.v10 and higher 12\.1 versions, and for all 12\.2 versions\.
++ Oracle Read Replicas are available for Oracle version 12\.1\.0\.2\.v10 and higher 12\.1 versions, for all 12\.2 versions, and for all 18 versions\.
 + Oracle Read Replicas are only available for DB instances on the EC2\-VPC platform\.
 + Oracle Read Replicas are only available for DB instances running on DB instance classes with two or more vCPUs\.
 + Amazon RDS for Oracle doesn't intervene to mitigate high replica lag between a source DB instance and its Read Replicas\. Ensure that the source DB instance and its Read Replicas are sized properly, in terms of compute and storage, to suit their operational load\.

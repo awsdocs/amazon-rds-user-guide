@@ -16,7 +16,7 @@ You can view database log files for your DB engine by using the Amazon RDS conso
 **Note**  
  If you can't view the list of log files for an existing Oracle DB instance, reboot the instance to view the list\. 
 
-### AWS Management Console<a name="USER_LogAccess.CON"></a>
+### Console<a name="USER_LogAccess.CON"></a>
 
 **To view a database log file**
 
@@ -44,7 +44,7 @@ The following example returns a list of log files for a DB instance named `my-db
 1. aws rds describe-db-log-files --db-instance-identifier my-db-instance
 ```
 
-### API<a name="USER_LogAccess.API"></a>
+### RDS API<a name="USER_LogAccess.API"></a>
 
 To list the available database log files for a DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) action\.
 
@@ -52,7 +52,7 @@ To list the available database log files for a DB instance, use the Amazon RDS A
 
 You can use the Amazon RDS console, AWS CLI or API to download a database log file\. 
 
-### AWS Management Console<a name="USER_LogAccess.Procedural.Downloading.CON"></a>
+### Console<a name="USER_LogAccess.Procedural.Downloading.CON"></a>
 
 **To download a database log file**
 
@@ -103,7 +103,7 @@ To download a database log file, use the Amazon RDS API [https://docs.aws.amazon
 
 You can monitor the contents of a log file by using the Amazon RDS console\.
 
-### AWS Management Console<a name="USER_LogAccess.Procedural.Watching.CON"></a>
+### Console<a name="USER_LogAccess.Procedural.Watching.CON"></a>
 
 **To watch a database log file**
 

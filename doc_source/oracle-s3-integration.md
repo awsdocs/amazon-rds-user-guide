@@ -13,7 +13,7 @@ The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 ## Prerequisites for Amazon RDS Oracle Integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
-To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\.
+To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\. The Amazon VPC used by your DB instance doesn't need to provide access to the Amazon S3 endpoints\.
 
 **Note**  
 To add a role to a DB instance, the status of the DB instance must be `available`\.
@@ -319,7 +319,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 You can use Amazon RDS procedures to upload files from an Oracle DB instance to an Amazon S3 bucket\. You can also use Amazon RDS procedures to download files from an Amazon S3 bucket to an Oracle DB instance\. 
 
 **Note**  
-These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\.
+These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\. The upload and download operations are processed serially\.
 
 **Topics**
 + [Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket](#oracle-s3-integration.using.upload)

@@ -92,7 +92,7 @@ When you create a DB instance in a VPC, you must select a DB subnet group\. Amaz
 
 In this step, you create a DB subnet group and add the subnets you created for your VPC\. 
 
-#### AWS Management Console<a name="USER_VPC.CreateDBSubnetGroup.CON"></a>
+#### Console<a name="USER_VPC.CreateDBSubnetGroup.CON"></a>
 
 **To create a DB subnet group**
 

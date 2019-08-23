@@ -139,7 +139,7 @@ The RDS console shows the status of the DB parameter group associated with a DB 
 
 1. Choose **Save changes**\.
 
-### CLI<a name="USER_WorkingWithParamGroups.Modifying.CLI"></a>
+### AWS CLI<a name="USER_WorkingWithParamGroups.Modifying.CLI"></a>
 
 To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) command with the following required parameters:
 + `--db-parameter-group-name`
@@ -206,7 +206,7 @@ You can't copy a default parameter group\. However, you can create a new paramet
 
 1. Choose **Copy**\.
 
-### CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
+### AWS CLI<a name="USER_WorkingWithParamGroups.Copying.CLI"></a>
 
 To copy a DB parameter group, use the AWS CLI [ `copy-db-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command with the following required parameters:
 + `--source-db-parameter-group-identifier`
@@ -257,7 +257,7 @@ Default parameter groups are automatically created from a default parameter temp
 
    The DB parameter groups appear in a list\.
 
-### CLI<a name="USER_WorkingWithParamGroups.Listing.CLI"></a>
+### AWS CLI<a name="USER_WorkingWithParamGroups.Listing.CLI"></a>
 
 To list all DB parameter groups for an AWS account, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameter-groups.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameter-groups.html) command\.
 
@@ -313,7 +313,7 @@ You can get a list of all parameters in a DB parameter group and their values\.
 
 1. Choose the name of the parameter group to see its list of parameters\.
 
-### CLI<a name="USER_WorkingWithParamGroups.Viewing.CLI"></a>
+### AWS CLI<a name="USER_WorkingWithParamGroups.Viewing.CLI"></a>
 
 To view the parameter values for a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command with the following required parameter\.
 + `--db-parameter-group-name`

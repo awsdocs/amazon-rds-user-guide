@@ -9,7 +9,7 @@ This section describes how you can perform miscellaneous DBA tasks on your Amazo
 
 ## Creating New Directories in the Main Data Storage Space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.create_directory` to create directories\. You can create up to 10,000 directories, all located in your main data storage space\. 
+To create directories, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.create_directory`\. You can create up to 10,000 directories, all located in your main data storage space\. 
 
 The `create_directory` procedure has the following parameters\. 
 
@@ -18,7 +18,7 @@ The `create_directory` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-|  `p_directory_name`  |  varchar2  |  —  |  Required  |  The name of the new directory\.  | 
+|  `p_directory_name`  |  varchar2  |  —  |  Yes  |  The name of the new directory\.  | 
 
 The following example creates a new directory named **product\_descriptions**\. 
 
@@ -44,14 +44,14 @@ You can drop a directory that you created by using the Oracle `drop directory` c
 
 ## Listing Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ListDirectories"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rds_file_util.listdir` to list the files in a directory\. The `listdir` procedure has the following parameters\. 
+To list the files in a directory, use the Amazon RDS procedure `rdsadmin.rds_file_util.listdir`\. The `listdir` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-|  `p_directory`  |  varchar2  |  —  |  Required  |  The name of the directory to list\.  | 
+|  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory to list\.  | 
 
 The following example lists the files in the directory named `product_descriptions`\. 
 
@@ -62,15 +62,15 @@ select * from table
 
 ## Reading Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ReadingFiles"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file` to read a text file\. The `read_text_file` procedure has the following parameters\. 
+To read a text file, use the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`\. The `read_text_file` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-|  `p_directory`  |  varchar2  |  —  |  Required  |  The name of the directory that contains the file\.  | 
-|  `p_filename`  |  varchar2  |  —  |  Required  |  The name of the file to read\.  | 
+|  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory that contains the file\.  | 
+|  `p_filename`  |  varchar2  |  —  |  Yes  |  The name of the file to read\.  | 
 
 The following example reads the file `rice.txt` from the directory `product_descriptions`\. 
 

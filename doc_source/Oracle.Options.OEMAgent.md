@@ -13,20 +13,30 @@ The following are some limitations to using Management Agent:
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
 + Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the OEM\_AGENT option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 + Because operating system access on the alert log isn't granted to the user running the OEM\_AGENT on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
++ TCPS connectivity between the Management Agent and the DB instance isn't supported\.
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
 
 The following are prerequisites for using Management Agent: 
-+ An Amazon RDS DB instance running Oracle version 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
++ An Amazon RDS DB instance running Oracle version 18\.0\.0\.0, 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
 + At least 3\.3 GiB of storage space for OEM 13c Release 3\. 
 + At least 3\.3 GiB of storage space for OEM 13c Release 2\. 
 + At least 3 GiB of storage space for OEM 13c Release 1\. 
 + At least 2 GiB of storage space for OEM 12c\. 
 + An Oracle Management Service \(OMS\), configured to connect to your Amazon RDS DB instance\. 
+
+  For an Amazon RDS DB instance running Oracle version 18\.0\.0\.0 or higher, meet the following requirements:
+  + For OMS 13c2, apply the Enterprise Manager 13\.2 Master Bundle Patch List, which includes plugins 13\.2\.1, 13\.2\.2, 13\.2\.3, 13\.2\.4 \(Oracle Doc ID 2219797\.1\)\.
+  + For OMS 13c2, apply the OMS PSU System Patch 28970534\.
+  + For OMS 13c2, apply the OMS\-Side Plugin System 13\.2\.2\.0\.190131 Patch 29201709\.
+
+  For an Amazon RDS DB instance running Oracle version 12\.2\.0\.1 or lower, meet the following requirements:
   + For OMS 13c Release 2 with Oracle patch 25163555 applied, use OEM Agent 13\.2\.0\.0\.v2 or later\.
 
     Use OMSPatcher to apply the patch\.
   + For unpatched OMS 13c Release 2, use OEM Agent 13\.2\.0\.0\.v1\.
+
+  Use OMSPatcher to apply patches\.
 + In most cases, you need to configure your VPC to allow connections from OMS to your DB instance\. If you are not familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
 
 Additional configuration is required to allow your OMS host and your Amazon RDS DB instance to communicate\. You must also do the following: 
@@ -64,6 +74,8 @@ The general process for adding the Management Agent option to a DB instance is t
 1. Add the option to the option group\.
 
 1. Associate the option group with the DB instance\.
+
+If you encounter errors, you can check [My Oracle Support](https://support.oracle.com/) documents for information about resolving specific problems\.
 
 After you add the Management Agent option, you don't need to restart your DB instance\. As soon as the option group is active, the OEM Agent is active\. 
 

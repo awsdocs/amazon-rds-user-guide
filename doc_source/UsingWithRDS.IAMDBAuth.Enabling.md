@@ -4,7 +4,7 @@ By default, IAM database authentication is disabled on DB instances\. You can en
 
 IAM authentication for PostgreSQL DB instances requires that the SSL value be 1\. You can't enable IAM authentication for a PostgreSQL DB instance if the SSL value is 0\. You can't change the SSL value to 0 if IAM authentication is enabled for a PostgreSQL DB instance\. 
 
-## AWS Management Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
+## Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
 
 To create a new DB instance with IAM authentication by using the console, see either [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md) or [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\.
 

@@ -6,15 +6,15 @@
 Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
 
 **Note**  
-If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+If you are using the console, a new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
 
 ## New Console<a name="USER_CreatePostgreSQLInstance.CON"></a>
 
 **To launch a PostgreSQL DB instance**
 
-You can create a DB instance running PostgreSQL with the AWS Management Console with **Easy create** enabled or disabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create a DB instance running PostgreSQL with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 **Note**  
-For this example, **Easy create** is not enabled\. For information about creating a PostgreSQL DB instance with **Easy create** enabled, see [Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md)\.
+For this example, **Standard Create** is enabled, and **Easy Create** isn't enabled\. For information about creating a PostgreSQL DB instance with **Easy Create** enabled, see [Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md)\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -24,12 +24,12 @@ For this example, **Easy create** is not enabled\. For information about creatin
 
 1. Choose **Create database**\.
 
-1. In **Database settings**, turn the **Easy create** option off\.
+1. In **Choose a database creation method**, choose **Standard Create**\.
 
 1. In **Engine options**, choose **PostgreSQL**\.  
 ![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch01a.png)
 
-1. In **Templates**, choose the template that matches your use case\. If you choose **Production**, the following are preselected in a later step:
+1. In **Templates**, choose the template that matches your use case\. If you choose **Production**, the following are also chosen in a later step:
    + **Multi\-AZ** failover option 
    + **Provisioned IOPS** storage option
    + **Enable deletion protection** option
@@ -64,13 +64,13 @@ You can't view the master user password again\. If you don't record it, you migh
    On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it can take several minutes for the new instance to be available\.   
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch06.png)
 
-## Current Console<a name="USER_CreatePostgreSQLInstance.CurrentCON"></a>
+## Original Console<a name="USER_CreatePostgreSQLInstance.CurrentCON"></a>
 
 **To launch a PostgreSQL DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top right corner of the AWS Management Console, select the AWS Region where you want to create the DB instance\. 
+1. In the top\-right corner of the AWS Management Console, choose the AWS Region where you want to create the DB instance\. 
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -81,7 +81,7 @@ You can't view the master user password again\. If you don't record it, you migh
 
 1. On the **Select engine** page, choose the PostgreSQL icon, and then choose **Next**\.
 
-1. Next, the **Use case** page asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. If you choose this option, the following are preselected in a later step:
+1. Next, the **Use case** page asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. If you choose this option, the following are also chosen in a later step:
    + **Multi\-AZ** failover option 
    + **Provisioned IOPS** storage option
    + **Enable deletion protection** option
@@ -188,29 +188,32 @@ The following table contains details about settings that you choose when you cre
 | Setting | Setting Description | 
 | --- | --- | 
 |  Allocated storage  |  The amount of storage to allocate for your DB instance \(in gigabytes\)\. In some cases, allocating a higher amount of storage for your DB instance than the size of your database can improve I/O performance\.  For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.   | 
-|  Auto minor version upgrade  |  Choose **Enable auto minor version upgrade** to enable your DB instance to receive preferred minor DB engine version upgrades automatically when they become available\. Amazon RDS performs automatic minor version upgrades in the maintenance window\.  | 
-|  Availability zone  |  The availability zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
-|  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any non\-trivial DB instance, you should set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
-|  Backup window  |  The time period during which Amazon RDS automatically takes a backup of your DB instance\. Unless you have a specific time that you want to have your database backup, use the default of **No Preference**\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
-|  Copy Tags To Snapshots  |  Select this option to copy any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
-|  Database name  |  The name for the database on your DB instance\. The name must contain 1 to 64 alpha\-numeric characters\. If you do not provide a name, Amazon RDS does not create a database on the DB instance you are creating\.   | 
-|  Database port  |  The port that you want to access the DB instance through\. PostgreSQL installations default to port 3306\. If you use a DB security group with your DB instance, this must be the same port value you provided when creating the DB security group\.  The firewalls at some companies block connections to the default PostgreSQL port\. If your company firewall blocks the default port, choose another port for your DB instance\.   | 
-| Deletion protection | Enable deletion protection to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
+|  Auto minor version upgrade  |  **Enable auto minor version upgrade** to enable your DB instance to receive preferred minor DB engine version upgrades automatically when they become available\. Amazon RDS performs automatic minor version upgrades in the maintenance window\.  | 
+|  Availability zone  |  The Availability Zone for your DB instance\. Use the default value of **No Preference** unless you want to specify an Availability Zone\.  For more information, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.   | 
+|  Backup retention period  |  The number of days that you want automatic backups of your DB instance to be retained\. For any nontrivial DB instance, set this value to **1** or greater\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
+|  Backup window  |  The time period during which Amazon RDS automatically takes a backup of your DB instance\. Unless you have a specific time that you want to have your database backed up, use the default of **No Preference**\.  For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.   | 
+|  Copy tags To snapshots  |  This option copies any DB instance tags to a DB snapshot when you create a snapshot\.  For more information, see [Tagging Amazon RDS Resources](USER_Tagging.md)\.   | 
+|  Database name  |  The name for the database on your DB instance\. The name must contain 1 to 64 alphanumeric characters\. If you don't provide a name, Amazon RDS doesn't create a database on the DB instance you are creating\.   | 
+|  Database port  |  The port that you want to access the DB instance through\. PostgreSQL installations default to port 3306\. If you use a DB security group with your DB instance, this port value must be the same one you provided when creating the DB security group\.  The firewalls at some companies block connections to the default PostgreSQL port\. If your company firewall blocks the default port, enter another port for your DB instance\.   | 
 |  DB engine version  |  The version of PostgreSQL that you want to use\.  | 
-|  DB instance class  |  The configuration for your DB instance\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, and this improves performance\.  For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
+|  DB instance class  |  The configuration for your DB instance\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory, the system can avoid writing to disk, and this improves performance\.  For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.   | 
 |  DB instance identifier  |  The name for your DB instance\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\. You can add some intelligence to the name, such as including the AWS Region you chose, for example **postgresql\-instance1**\.   | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.   | 
+| Deletion protection |  **Enable deletion protection** to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
-|  Enhanced monitoring  |  **Enable enhanced monitoring** to gather metrics in real time for the operating system that your DB instance runs on\.  For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
-|  License model  |  PostgreSQL has only one license model, **general\-public\-license** the general license agreement for PostgreSQL\.   | 
-| **Log exports** |  Select the types of PostgreSQL database log files to generate\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.   | 
-|  Maintenance window  |  The 30 minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
-|  Master username  |  The name that you use as the master user name to log on to your DB instance\.   | 
+|  Enhanced Monitoring  |  **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB instance runs on\.   For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 
+|  IAM DB authentication  |  **Enable IAM DB authentication** to enable IAM database authentication for this DB instance\.  For more information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.   | 
+|  License model  |  PostgreSQL has only one license model, **general\-public\-license**, the general license agreement for PostgreSQL\.   | 
+| **Log exports** |  The types of PostgreSQL database log files to generate\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.   | 
+|  Maintenance window  |  The 30\-minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\.  For more information, see [The Amazon RDS Maintenance Window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.   | 
 |  Master password  |  The password for your master user account\. The password must contain from 8 to 41 printable ASCII characters \(excluding /,", a space, and @\)\.   | 
-|  Multi\-AZ deployment  |  **Create replica in different zone** to create a standby mirror of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **No**\.  For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.   | 
+|  Master username  |  The name that you use as the master user name to log on to your DB instance\.   | 
+|  Multi\-AZ deployment  |  **Create a standby instance** to create a passive secondary replica of your DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ for production workloads to maintain high availability\. For development and testing, you can choose **Do not create a standby instance**\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.   | 
 |  Option group  |  An option group for your DB instance\. You can choose the default option group or you can create a custom option group\.  For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.   | 
-|  Publicly accessible  |  **Yes** to give your DB instance a public IP address\. This means that it is accessible outside the VPC \(the DB instance also needs to be in a public subnet in the VPC\)\. Choose **No** if you want the DB instance to only be accessible from inside the VPC\.  For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
+| Performance Insights |  **Enable Performance Insights** to monitor your DB instance load so that you can analyze and troubleshoot your database performance\. Choose a retention period to determine how much rolling data history to keep\. The default of seven days is in the free tier\. Long\-term retention \(two years\) is priced per vCPU per month\. Choose a master key to use to protect the key used to encrypt this database volume\. Choose from the master keys in your account, or enter the key from a different account\. For more information, see [Using Amazon RDS Performance Insights](USER_PerfInsights.md)\.  | 
+|  Publicly accessible  |  **Yes** to give the DB instance a public IP address, meaning that it's accessible outside the VPC\. To be publicly accessible, the DB instance also has to be in a public subnet in the VPC\. **No** to make the DB instance accessible only from inside the VPC\. For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.   | 
+|  Storage autoscaling  |  **Enable storage autoscaling** to enable Amazon RDS to automatically increase storage when needed to avoid having your DB instance run out of storage space\. Use **Maximum storage threshold** to set the upper limit for Amazon RDS to automatically increase storage for your DB instance\. The default is 1,000 GiB\. For more information, see [Managing Capacity Automatically with Amazon RDS Storage Autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.   | 
 |  Storage type  |  The storage type for your DB instance\.  For more information, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.   | 
-|  Subnet group  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the previous E2\-Classic platform and you want your DB instance in a specific VPC, choose the DB subnet group you created for that VPC\.   | 
-|  Virtual Private Cloud \(VPC\)  |  This setting depends on the platform you are on\. If you are a new customer to AWS, choose the default VPC shown\. If you are creating a DB instance on the previous E2\-Classic platform that does not use a VPC, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.   | 
-|  VPC security groups  |  If you are a new customer to AWS, choose **Create new VPC security group**\. Otherwise, choose **Select existing VPC security groups**, and select security groups you previously created\.  When you choose **Create new VPC security group** in the RDS console, a new security group is created with an inbound rule that allows access to the DB instance from the IP address detected in your browser\. For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.   | 
+|  Subnet group  |  This setting depends on the platform that you are on\. If you are a new customer to AWS, keep the subnet group set to **default**, which is the default DB subnet group that was created for your account\. If you are creating a DB instance on the earlier E2\-Classic platform, you might want your DB instance in a specific VPC\. In this case, choose the DB subnet group that you created for that VPC\.   | 
+|  Virtual Private Cloud \(VPC\)  |  This setting depends on the platform that you are on\. If you are a new customer to AWS, choose the default VPC shown\. If you are creating a DB instance on the earlier E2\-Classic platform that doesn't use a VPC, choose **Not in VPC**\.  For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.   | 
+|  VPC security groups  | If you are a new customer to AWS, Create new to create a new VPC security group\. Otherwise, Choose existing, then choose from security groups that you previously created\.When you choose **Create new** in the RDS console, a new security group is created\. This new security group has an inbound rule that allows access to the DB instance from the IP address detected in your browser\.For more information, see [Working with DB Security Groups \(EC2\-Classic Platform\)](USER_WorkingWithSecurityGroups.md)\.  | 

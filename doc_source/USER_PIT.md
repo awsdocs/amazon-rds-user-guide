@@ -10,7 +10,7 @@ Some actions, such as changing the recovery model of a SQL Server database, can 
 
 You can restore a DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-## AWS Management Console<a name="USER_PIT.CON"></a>
+## Console<a name="USER_PIT.CON"></a>
 
 **To restore a DB instance to a specified time**
 
@@ -32,7 +32,7 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 
 1. Choose **Launch DB Instance**\.
 
-## CLI<a name="USER_PIT.CLI"></a>
+## AWS CLI<a name="USER_PIT.CLI"></a>
 
 To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\.
 
@@ -54,7 +54,7 @@ For Windows:
 4.     --restore-time 2017-10-14T23:45:00.000Z
 ```
 
-## API<a name="USER_PIT.API"></a>
+## RDS API<a name="USER_PIT.API"></a>
 
 To restore a DB instance to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) operation with the following parameters:
 + `SourceDBInstanceIdentifier`

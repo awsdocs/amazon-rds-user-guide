@@ -362,7 +362,7 @@ When you modify a DB instance to configure the number of CPU cores or threads pe
 
 You can set the CPU cores and the threads per CPU core for a DB instance class using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-#### AWS Management Console<a name="USER_ConfigureProcessor.Console"></a>
+#### Console<a name="USER_ConfigureProcessor.Console"></a>
 
 When you are creating, modifying, or restoring a DB instance, you set the DB instance class in the AWS Management Console\. The **Instance specifications** section shows options for the processor\. The following image shows the processor features options\.
 
@@ -380,7 +380,7 @@ When you view the details for a DB instance in the console, you can view the pro
 
 For Oracle DB instances, the processor information only appears for Bring Your Own License \(BYOL\) DB instances\.
 
-#### CLI<a name="USER_ConfigureProcessor.CLI"></a>
+#### AWS CLI<a name="USER_ConfigureProcessor.CLI"></a>
 
 You can set the processor features for a DB instance when you run one of the following AWS CLI commands:
 + [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
@@ -563,7 +563,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-#### API<a name="USER_ConfigureProcessor.API"></a>
+#### RDS API<a name="USER_ConfigureProcessor.API"></a>
 
 You can set the processor features for a DB instance when you call one of the following Amazon RDS API operations:
 + [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)

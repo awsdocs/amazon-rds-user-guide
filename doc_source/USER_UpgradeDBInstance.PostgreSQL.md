@@ -144,6 +144,23 @@ After you have completed the major version upgrade, consider testing your applic
 
 ## Automatic Minor Version Upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>
 
-If you enable the **Auto minor version upgrade** option when creating or modifying a DB instance, you can have your instance automatically upgraded\. After a minor upgrade has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically\. For more information, see [Automatically Upgrading the Minor Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. To manually perform a minor version upgrade, see [Manually Upgrading the Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
+If you enable the **Auto minor version upgrade** option when creating or modifying a DB instance, you can have your DB instance automatically upgraded\.
+
+For each RDS for PostgreSQL major version, one minor version is designated by RDS as the automatic upgrade version\. After a minor version has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically during your maintenance window\. RDS doesn't automatically set newer released minor versions as the automatic upgrade version\. Before RDS designates a newer automatic upgrade version, several criteria are considered, such as the following:
++ Known security issues
++ Bugs in the PostgreSQL community version
++ Overall fleet stability since the minor version was released
+
+You can use the following AWS CLI command and script to determine the current automatic upgrade minor versions\. 
+
+```
+aws rds describe-db-engine-versions --engine postgres | grep -A 1 AutoUpgrade| grep -A 2 true |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
+```
+
+A PostgreSQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
++ The DB instance has the **Auto minor version upgrade** option enabled\.
++ The DB instance is running a minor DB engine version that is less than the current automatic upgrade minor version\.
+
+For more information, see [Automatically Upgrading the Minor Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. For more information about manually performing a minor version upgrade, see [Manually Upgrading the Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
 If your PostgreSQL DB instance is using read replication, you must upgrade all of the read replicas before upgrading the source instance\. If the DB instance is in a Multi\-AZ deployment, both the writer and standby replicas are upgraded, and the instance might not be available until the upgrade is complete\. 

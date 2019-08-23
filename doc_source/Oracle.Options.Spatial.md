@@ -6,6 +6,7 @@ Amazon RDS supports Oracle Spatial through the use of the `SPATIAL` option\. Ora
 If you use Oracle Spatial, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Spatial for the following editions and versions of Oracle: 
++ Oracle Enterprise Edition, version 18\.0\.0\.0, all versions
 + Oracle Enterprise Edition, version 12\.2\.0\.1, all versions
 + Oracle Enterprise Edition, version 12\.1\.0\.2\.v13 or later
 + Oracle Enterprise Edition, version 11\.2\.0\.4\.v17 or later

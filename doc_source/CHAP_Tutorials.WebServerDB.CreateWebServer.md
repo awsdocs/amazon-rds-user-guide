@@ -132,7 +132,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo chgrp www /var/www
+   [ec2-user ~]$ sudo chgrp -R www /var/www
    ```
 
 1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.

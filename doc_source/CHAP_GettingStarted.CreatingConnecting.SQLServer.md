@@ -12,18 +12,18 @@ In this topic, you create a sample SQL Server DB instance\. You then connect to 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your Microsoft SQL Server databases\.
 
 **Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Current Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
 
 ### New Console<a name="CHAP_GettingStarted.Creating.SQLServer.Console"></a>
 
-You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-For this example, you use **Easy create** to create a DB instance running the Microsoft SQL Server database engine with a db\.t2\.micro DB instance class\.
+For this example, you use **Easy Create** to create a DB instance running the Microsoft SQL Server database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating a Microsoft SQL Server DB instance with **Easy create** not enabled, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
+For information about creating a Microsoft SQL Server DB instance with **Easy Create** not enabled, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
 
-**To create a Microsoft SQL Server DB instance with Easy create enabled**
+**To create a Microsoft SQL Server DB instance with Easy Create enabled**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -31,8 +31,8 @@ For information about creating a Microsoft SQL Server DB instance with **Easy cr
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and ensure that **Easy create** is turned on\.   
-![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
+1. Choose **Create database** and make sure that **Easy Create** is chosen\.   
+![\[Easy Create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
 
 1. In **Configuration**, choose **Microsoft SQL Server**\.
 
@@ -65,7 +65,7 @@ You can't view the master user password again\. If you don't record it, you migh
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch05.png)
 
-### Current Console<a name="CHAP_GettingStarted.Creating.SQLServer.CurrentConsole"></a>
+### Original Console<a name="CHAP_GettingStarted.Creating.SQLServer.CurrentConsole"></a>
 
 In this procedure you use the AWS Management Console to create a sample DB instance\. Because you are only creating a sample DB instance, each setting is not fully explained\. For a full explanation of each setting, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
 

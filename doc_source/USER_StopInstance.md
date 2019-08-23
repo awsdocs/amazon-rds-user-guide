@@ -48,7 +48,7 @@ When you stop a DB instance it retains its DNS endpoint\. If you stop a DB insta
 **Note**  
 You should always connect to a DB instance using the DNS endpoint, not the IP address\.
 
-## AWS Management Console<a name="USER_StopInstance.CON"></a>
+## Console<a name="USER_StopInstance.CON"></a>
 
 **To stop a DB instance**
 
@@ -62,7 +62,7 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 
 1. Choose **Yes, Stop Now** to stop the DB instance, or choose **Cancel** to cancel the operation\.
 
-## CLI<a name="USER_StopInstance.CLI"></a>
+## AWS CLI<a name="USER_StopInstance.CLI"></a>
 
 To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier` – the name of the DB instance\. 
@@ -73,7 +73,7 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https:
 1. stop-db-instance --db-instance-identifier mydbinstance
 ```
 
-## API<a name="USER_StopInstance.API"></a>
+## RDS API<a name="USER_StopInstance.API"></a>
 
 To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 

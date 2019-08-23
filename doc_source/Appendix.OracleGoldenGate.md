@@ -6,7 +6,7 @@ The following are important points to know when working with GoldenGate on Amazo
 + You are responsible for setting up and managing GoldenGate for use with Amazon RDS\. 
 + You are responsible for managing GoldenGate licensing \(bring\-your\-own\-license\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 + Amazon RDS supports GoldenGate for Oracle Database Standard Edition Two \(SE2\), Standard Edition One \(SE1\), Standard Edition \(SE\), and Enterprise Edition \(EE\)\. 
-+ Amazon RDS supports GoldenGate for database version 11\.2\.0\.4, 12\.1\.0\.2, or 12\.2\.0\.1\. 
++ Amazon RDS supports GoldenGate for database version 11\.2\.0\.4, 12\.1\.0\.2, 12\.2\.0\.1, and 18\.0\.0\.0\. 
 + Amazon RDS supports GoldenGate version 11\.2\.1 and later, including 12\.1, 12\.2, and 12\.3\. 
 + Amazon RDS supports migration and replication across Oracle databases using GoldenGate\. We do not support nor prevent customers from migrating or replicating across heterogeneous databases\. 
 + You can use GoldenGate on Amazon RDS Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. To maintain the integrity of replicated data, you should configure encryption on the GoldenGate hub using EBS encrypted volumes or trail file encryption\. You should also configure encryption for data sent between the GoldenGate hub and the source and target database instances\. Amazon RDS Oracle DB instances support encryption with [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) or [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
@@ -370,7 +370,7 @@ This section explains the most common issues when using GoldenGate with Amazon R
 
 **Topics**
 + [Log Retention](#Appendix.OracleGoldenGate.Troubleshooting.Logs)
-+ [GoldenGate appears to be properly configured but replication is not working](#w5aac30c95c11c19c10)
++ [GoldenGate appears to be properly configured but replication is not working](#w5aac30c97c11c19c10)
 
 ### Log Retention<a name="Appendix.OracleGoldenGate.Troubleshooting.Logs"></a>
 
@@ -382,7 +382,7 @@ opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log
 for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
 ```
 
-### GoldenGate appears to be properly configured but replication is not working<a name="w5aac30c95c11c19c10"></a>
+### GoldenGate appears to be properly configured but replication is not working<a name="w5aac30c97c11c19c10"></a>
 
 For pre\-existing tables, GoldenGate needs to be told which SCN it should work from\. Take the following steps to fix this issue:
 + Launch the GoldenGate command line interface \(ggsci\)\. Log into the source database\. The following example shows the format for logging in:

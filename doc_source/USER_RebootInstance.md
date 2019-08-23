@@ -16,7 +16,7 @@ You can't reboot your DB instance if it is not in the available state\. Your dat
 
 The time required to reboot your DB instance depends on the crash recovery process of your specific database engine\. To improve the reboot time, we recommend that you reduce database activity as much as possible during the reboot process\. Reducing database activity reduces rollback activity for in\-transit transactions\. 
 
-## AWS Management Console<a name="USER_RebootInstance.Console"></a>
+## Console<a name="USER_RebootInstance.Console"></a>
 
 **To reboot a DB instance**
 
@@ -34,7 +34,7 @@ The time required to reboot your DB instance depends on the crash recovery proce
 
    Alternatively, choose **Cancel**\. 
 
-## CLI<a name="USER_RebootInstance.CLI"></a>
+## AWS CLI<a name="USER_RebootInstance.CLI"></a>
 
 To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
@@ -69,7 +69,7 @@ aws rds reboot-db-instance ^
     --force-failover
 ```
 
-## API<a name="USER_RebootInstance.API"></a>
+## RDS API<a name="USER_RebootInstance.API"></a>
 
 To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 
 

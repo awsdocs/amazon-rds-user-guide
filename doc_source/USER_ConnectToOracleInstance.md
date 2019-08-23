@@ -10,7 +10,7 @@ Each Amazon RDS DB instance has an endpoint, and each endpoint has the DNS name 
 
 You can find the endpoint for a DB instance using the Amazon RDS console or the AWS CLI\.
 
-### AWS Management Console<a name="USER_Endpoint.Console"></a>
+### Console<a name="USER_Endpoint.Console"></a>
 
 **To find the endpoint using the console**
 
@@ -27,7 +27,7 @@ You can find the endpoint for a DB instance using the Amazon RDS console or the 
    1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
 ![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
-### CLI<a name="USER_Endpoint.CLI"></a>
+### AWS CLI<a name="USER_Endpoint.CLI"></a>
 
 To find the endpoint of an Oracle DB instance by using the AWS CLI, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command\. 
 

@@ -8,7 +8,7 @@ Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5\.1 to MySQL 5\.5\
 
 You can upgrade manual DB snapshots, which can be encrypted or not encrypted, from MySQL 5\.1 to MySQL 5\.5 within the same AWS Region\. You can't upgrade automated DB snapshots that are created during the automated backup process\.
 
-### AWS Management Console<a name="USER_UpgradeDBSnapshot.MySQL.Console"></a>
+### Console<a name="USER_UpgradeDBSnapshot.MySQL.Console"></a>
 
 **To upgrade a DB snapshot**
 
@@ -44,7 +44,7 @@ For Windows:
 3.     --engine-version <new_version>
 ```
 
-## API<a name="USER_UpgradeDBSnapshot.MySQL.API"></a>
+## RDS API<a name="USER_UpgradeDBSnapshot.MySQL.API"></a>
 
 To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) operation\. 
 + `DBSnapshotIdentifier` – The identifier of the DB snapshot to upgrade\. The identifier must be a unique Amazon Resource Name \(ARN\)\. For more information, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\. 

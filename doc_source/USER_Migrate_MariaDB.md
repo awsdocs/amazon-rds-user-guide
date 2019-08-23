@@ -23,7 +23,7 @@ Incompatibilities between MySQL and MariaDB include the following:
 + If your RDS master user account uses the SHA\-256 password hash, the password has to be reset using the RDS [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, [ ModifyDBInstance ](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, or the AWS Management Console\. For information about modifying a MariaDB DB instance, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 
 + MariaDB doesn't support the Memcached plugin; however, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached Plugin Internals](https://dev.mysql.com/doc/refman/5.6/en/innodb-memcached-internals.html)\.
 
-## AWS Management Console<a name="USER_Migrate_MariaDB.CON"></a>
+## Console<a name="USER_Migrate_MariaDB.CON"></a>
 
 **To migrate a MySQL DB snapshot to a MariaDB DB instance**
 
@@ -74,7 +74,7 @@ Incompatibilities between MySQL and MariaDB include the following:
 
 1. Choose **Migrate**\.
 
-## CLI<a name="USER_Migrate_MariaDB.CLI"></a>
+## AWS CLI<a name="USER_Migrate_MariaDB.CLI"></a>
 
 To migrate data from a MySQL DB snapshot to a MariaDB DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) command with the following parameters:
 + \-\-db\-instance\-identifier – Name of the DB instance to create from the DB snapshot\.

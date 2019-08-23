@@ -7,7 +7,7 @@ This section describes how you can perform common DBA tasks related to databases
 + [Creating and Sizing Tablespaces](#Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles)
 + [Setting the Default Tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace)
 + [Setting the Default Temporary Tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace)
-+ [Checkpointing the Database](#Appendix.Oracle.CommonDBATasks.CheckpointingDatabase)
++ [Checkpointing a Database](#Appendix.Oracle.CommonDBATasks.CheckpointingDatabase)
 + [Setting Distributed Recovery](#Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery)
 + [Setting the Database Time Zone](#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)
 + [Working with Oracle External Tables](#Appendix.Oracle.CommonDBATasks.External_Tables)
@@ -19,14 +19,14 @@ This section describes how you can perform common DBA tasks related to databases
 
 ## Changing the Global Name of a Database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.rename_global_name` to change the global name of a database\. The `rename_global_name` procedure has the following parameters\. 
+To change the global name of a database, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.rename_global_name`\. The `rename_global_name` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_global_name` | varchar2 | — | Required | The new global name for the database\. | 
+| `p_new_global_name` | varchar2 | — | Yes | The new global name for the database\. | 
 
 The database must be open for the name change to occur\. For more information about changing the global name of a database, see [ALTER DATABASE](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_1004.htm#SQLRF52547) in the Oracle documentation\. 
 
@@ -72,14 +72,14 @@ alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsiz
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_tablespace` to set the default tablespace\. The `alter_default_tablespace` procedure has the following parameters\. 
+To set the default tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_tablespace`\. The `alter_default_tablespace` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Required | The name of the default tablespace\. | 
+| `tablespace_name` | varchar | — | Yes | The name of the default tablespace\. | 
 
 The following example sets the default tablespace to *users2*: 
 
@@ -89,14 +89,14 @@ exec rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2'
 
 ## Setting the Default Temporary Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_tablespace` to set the default temporary tablespace\. The `alter_default_temp_tablespace` procedure has the following parameters\. 
+To set the default temporary tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_tablespace`\. The `alter_default_temp_tablespace` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Required | The name of the default temporary tablespace\. | 
+| `tablespace_name` | varchar | — | Yes | The name of the default temporary tablespace\. | 
 
 The following example sets the default temporary tablespace to *temp01*\. 
 
@@ -104,9 +104,9 @@ The following example sets the default temporary tablespace to *temp01*\.
 exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
 ```
 
-## Checkpointing the Database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
+## Checkpointing a Database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.checkpoint` to checkpoint the database\. The `checkpoint` procedure has no parameters\. 
+To checkpoint the database, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.checkpoint`\. The `checkpoint` procedure has no parameters\. 
 
 The following example checkpoints the database\.
 
@@ -116,7 +116,7 @@ exec rdsadmin.rdsadmin_util.checkpoint;
 
 ## Setting Distributed Recovery<a name="Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery"></a>
 
-You can use the Amazon RDS procedures `rdsadmin.rdsadmin_util.enable_distr_recovery` and `disable_distr_recovery` to set distributed recovery\. The procedures have no parameters\. 
+To set distributed recovery, use the Amazon RDS procedures `rdsadmin.rdsadmin_util.enable_distr_recovery` and `disable_distr_recovery`\. The procedures have no parameters\. 
 
 The following example enables distributed recovery\.
 
@@ -147,7 +147,7 @@ The `alter_db_time_zone` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_tz` | varchar2 | — | Required |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
+| `p_new_tz` | varchar2 | — | Yes |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
 The following example changes the time zone to UTC plus 3 hours\. 
 
@@ -251,12 +251,13 @@ For more information about Oracle edition\-based redefinition, see [About Editio
 
 ## Enabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.EnablingAuditing"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table` to enable auditing on the database audit trail table `SYS.AUD$`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
+To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
 
 Enabling auditing is supported for Oracle DB instances running the following versions:
 + 11\.2\.0\.4\.v18 and later 11\.2 versions
 + 12\.1\.0\.2\.v14 and later 12\.1 versions
-+ All 12\.2 and later versions
++ All 12\.2\.0\.1 versions
++ All 18\.0\.0\.0 versions
 
 The `audit_all_sys_aud_table` procedure has the following parameters\.
 
@@ -265,9 +266,9 @@ The `audit_all_sys_aud_table` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_by_access` | boolean | true | Optional | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
+| `p_by_access` | boolean | true | No | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
 
-The following query returns the current audit configuration for `SYS.AUD$` for a database:
+The following query returns the current audit configuration for `SYS.AUD$` for a database\.
 
 ```
 select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
@@ -291,7 +292,7 @@ For more information, see [AUDIT \(Traditional Auditing\)](https://docs.oracle.c
 
 ## Disabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.DisablingAuditing"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table` to disable auditing on the database audit trail table `SYS.AUD$`\. This procedure takes no parameters\. 
+To disable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table`\. This procedure takes no parameters\. 
 
 The following query returns the current audit configuration for `SYS.AUD$` for a database:
 

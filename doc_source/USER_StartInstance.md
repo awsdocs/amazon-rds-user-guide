@@ -4,7 +4,7 @@ You can stop your Amazon RDS DB instance temporarily to save money\. After you s
 
 When you start a DB instance that you previously stopped, the DB instance retains the ID, Domain Name Server \(DNS\) endpoint, parameter group, security group, and option group\. When you start a stopped instance, you are charged a full instance hour\. 
 
-## AWS Management Console<a name="USER_StartInstance.CON"></a>
+## Console<a name="USER_StartInstance.CON"></a>
 
 **To start a DB instance**
 
@@ -14,7 +14,7 @@ When you start a DB instance that you previously stopped, the DB instance retain
 
 1. For **Actions**, choose **Start**\. 
 
-## CLI<a name="USER_StartInstance.CLI"></a>
+## AWS CLI<a name="USER_StartInstance.CLI"></a>
 
 To start a DB instance by using the AWS CLI, call the [start\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier` – the name of the DB instance\. 
@@ -25,7 +25,7 @@ To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http
 1. start-db-instance --db-instance-identifier mydbinstance
 ```
 
-## API<a name="USER_StartInstance.API"></a>
+## RDS API<a name="USER_StartInstance.API"></a>
 
 To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 

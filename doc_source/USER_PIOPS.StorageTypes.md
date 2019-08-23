@@ -20,7 +20,7 @@ However, a special case is if you have a SQL Server DB instance and haven't modi
 **Note**  
 You can't reduce the amount of storage for a DB instance after storage has been allocated\.
 
-### AWS Management Console<a name="USER_PIOPS.ModifyingExisting.console"></a>
+### Console<a name="USER_PIOPS.ModifyingExisting.console"></a>
 
 **To increase storage for a DB instance**
 
@@ -43,7 +43,7 @@ When you increase **Allocated Storage**, it must be by at least 10 percent\. If 
 
 1. When the settings are as you want them, choose **Modify DB instance**\.
 
-### CLI<a name="USER_PIOPS.ModifyingExisting.cli"></a>
+### AWS CLI<a name="USER_PIOPS.ModifyingExisting.cli"></a>
 
 To increase the storage for a DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Set the following parameters:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
@@ -69,7 +69,7 @@ With storage autoscaling enabled, when RDS detects that you are running out of f
 + Free available space is less than 10 percent of the allocated storage\.
 + The low\-storage condition lasts at least five minutes\. 
 
-Currently, the additional storage is at least 5 GiB in size and at most 10 percent of the currently allocated storage\. You can't modify the allocated storage to a value greater than the maximum allocated storage for autoscale\-enabled instances\.
+Currently, the additional storage is at least 5 GiB in size and at most 10 percent of the currently allocated storage\. You can't set the maximum storage threshold to a value greater than the maximum allocated storage for autoscale\-enabled instances\.
 
 If you start a storage scaling operation at the same time that Amazon RDS starts an autoscale operation, your storage modification takes precedence\. In this case, the autoscale operation is canceled\. 
 
@@ -82,7 +82,7 @@ When you create a new Amazon RDS DB instance, you can choose whether to enable s
 **Note**  
  When you clone an Amazon RDS DB instance that has storage autoscaling enabled, that setting isn't automatically inherited by the cloned instance\. The new DB instance has the same amount of allocated storage as the original instance\. You can turn storage autoscaling on again for the new instance if the cloned instance continues to increase its storage requirements\. 
 
-#### AWS Management Console<a name="USER_PIOPS.EnablingAutoscaling.console"></a>
+#### Console<a name="USER_PIOPS.EnablingAutoscaling.console"></a>
 
 **To enable storage autoscaling for a new DB instance**
 
@@ -122,7 +122,7 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 You can turn storage autoscaling on for an existing Amazon RDS DB instance\. You can also change the upper limit on the storage that RDS can allocate for the DB instance\. 
 
-#### AWS Management Console<a name="USER_PIOPS.ModifyingAutoscaling.console"></a>
+#### Console<a name="USER_PIOPS.ModifyingAutoscaling.console"></a>
 
 **To change the storage autoscaling settings for a DB instance**
 
@@ -164,7 +164,7 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
  If you no longer need Amazon RDS to automatically increase the storage for an RDS DB instance, you can turn off storage autoscaling\. After you do, you can still manually increase the amount of storage for your DB instance\. 
 
-#### AWS Management Console<a name="USER_PIOPS.DisablingAutoscaling.console"></a>
+#### Console<a name="USER_PIOPS.DisablingAutoscaling.console"></a>
 
 **To turn off storage autoscaling for a DB instance**
 
@@ -202,7 +202,7 @@ You can modify the settings for a DB instance that uses Provisioned IOPS SSD sto
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
 
-### AWS Management Console<a name="User_PIOPS.Increase.con"></a>
+### Console<a name="User_PIOPS.Increase.con"></a>
 
 **To change the Provisioned IOPS settings for a DB instance**
 

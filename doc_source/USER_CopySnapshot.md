@@ -79,7 +79,7 @@ After the DB snapshot copy has been created in the new AWS Region, the DB snapsh
 
 You can copy a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### AWS Management Console<a name="USER_CopySnapshot.CON"></a>
+### Console<a name="USER_CopySnapshot.CON"></a>
 
 This procedure copies an encrypted or unencrypted DB snapshot, in the same AWS Region or across regions, by using the AWS Management Console\. 
 
@@ -115,7 +115,7 @@ The destination AWS Region must have the same database engine version available 
 
 1. Choose **Copy Snapshot**\.
 
-### CLI<a name="USER_CopySnapshot.CLI"></a>
+### AWS CLI<a name="USER_CopySnapshot.CLI"></a>
 
 You can copy a DB snapshot by using the AWS CLI command [copy\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-snapshot.html)\. If you are copying the snapshot to a new AWS Region, run the command in the new AWS Region\. 
 
@@ -198,7 +198,7 @@ aws rds copy-db-snapshot ^
     --option-group-name	custom-option-group-name
 ```
 
-### API<a name="USER_CopySnapshot.API"></a>
+### RDS API<a name="USER_CopySnapshot.API"></a>
 
 You can copy a DB snapshot by using the Amazon RDS API operation [CopyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyDBSnapshot.html)\. If you are copying the snapshot to a new AWS Region, perform the action in the new AWS Region\. 
 

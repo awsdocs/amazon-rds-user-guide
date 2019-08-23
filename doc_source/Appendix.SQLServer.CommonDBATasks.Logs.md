@@ -14,7 +14,7 @@ Only log/ERROR, as the most recent log, is being actively updated\. You can choo
 
 ## Archiving Log Files<a name="Appendix.SQLServer.CommonDBATasks.Logs.Archive"></a>
 
-The Amazon RDS console shows logs for the past week through the current day\. You can download and archive logs to keep them for reference past that time\. One way to archive logs is to load them into an Amazon S3 instance\. For instructions on how to set up an Amazon S3 instance and upload a file, see [Amazon S3 Basics](https://docs.aws.amazon.com/AmazonS3/latest/gsg/AmazonS3Basics.html) in the *Amazon Simple Storage Service Getting Started Guide* and click **Get Started**\. 
+The Amazon RDS console shows logs for the past week through the current day\. You can download and archive logs to keep them for reference past that time\. One way to archive logs is to load them into an Amazon S3 bucket\. For instructions on how to set up an Amazon S3 bucket and upload a file, see [Amazon S3 Basics](https://docs.aws.amazon.com/AmazonS3/latest/gsg/AmazonS3Basics.html) in the *Amazon Simple Storage Service Getting Started Guide* and click **Get Started**\. 
 
 ## Using the rds\_read\_error\_log Procedure<a name="Appendix.SQLServer.CommonDBATasks.Logs.SP"></a>
 

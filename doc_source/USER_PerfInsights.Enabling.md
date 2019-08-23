@@ -106,7 +106,7 @@ aws rds modify-db-instance ^
     --performance-insights-retention-period 731
 ```
 
-## API<a name="USER_PerfInsights.Enabling.API"></a>
+## RDS API<a name="USER_PerfInsights.Enabling.API"></a>
 
 When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation Amazon RDS API operation, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
 

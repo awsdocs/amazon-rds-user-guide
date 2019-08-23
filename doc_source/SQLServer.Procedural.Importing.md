@@ -228,7 +228,7 @@ order by backup_start_date desc;
 
 ### Restoring a Database<a name="SQLServer.Procedural.Importing.Native.Using.Restore"></a>
 
-To restore your database, you call the `rds_restore_database` stored procedure\. Every time you use native restore, you create an initial snapshot of the restored database\.
+To restore your database, you call the `rds_restore_database` stored procedure\. Every time you use native restore, Amazon RDS creates an initial snapshot of the restored database\.
 
 The following parameters are required: 
 + `@restore_db_name` – The name of the database to restore\. 

@@ -116,7 +116,6 @@ The following server\-level permissions are not available on SQL Server DB insta
 + ALTER ANY CREDENTIAL
 + ALTER ANY EVENT NOTIFICATION
 + ALTER ANY EVENT SESSION
-+ ALTER ANY SERVER AUDIT
 + ALTER RESOURCES
 + ALTER SETTINGS \(you can use the DB parameter group API operations to modify parameters; for more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\) 
 + AUTHENTICATE SERVER

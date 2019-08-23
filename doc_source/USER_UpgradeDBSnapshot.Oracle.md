@@ -17,7 +17,7 @@ The following snapshot upgrades are currently supported\.
 
 Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
-## AWS Management Console<a name="USER_UpgradeDBSnapshot.Oracle.Console"></a>
+## Console<a name="USER_UpgradeDBSnapshot.Oracle.Console"></a>
 
 **To upgrade an Oracle DB snapshot**
 
@@ -35,7 +35,7 @@ Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
    Alternatively, choose **Cancel** to cancel your changes\. 
 
-## CLI<a name="USER_UpgradeDBSnapshot.Oracle.CLI"></a>
+## AWS CLI<a name="USER_UpgradeDBSnapshot.Oracle.CLI"></a>
 
 To upgrade an Oracle DB snapshot by using the AWS CLI, call the [modify\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command with the following parameters: 
 + `--db-snapshot-identifier` – The name of the DB snapshot\. 
@@ -63,7 +63,7 @@ aws rds modify-db-snapshot ^
     --option-group-name <default:oracle-se1-11-2>
 ```
 
-## API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>
+## RDS API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>
 
 To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) operation with the following parameters: 
 + `DBSnapshotIdentifier` – The name of the DB snapshot\. 

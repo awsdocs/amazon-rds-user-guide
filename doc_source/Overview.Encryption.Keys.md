@@ -7,4 +7,4 @@ You can't delete, revoke, or rotate default keys provisioned by AWS KMS\. You ca
 You can view audit logs of every action taken with a customer\-managed key by using [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
 **Important**  
-If you disable the key for an encrypted DB instance, you can't read from or write to that DB instance\. When RDS encounters a DB instance encrypted by a key that RDS doesn't have access to, RDS puts the DB instance into a terminal state\. In this state, the DB instance is no longer available and the current state of the database can't be recovered\. To restore the DB instance, you must re\-enable access to the encryption key for RDS, and then restore the DB instance from a backup\.
+When RDS encounters a DB instance encrypted by a key that RDS doesn't have access to, RDS puts the DB instance into a terminal state\. In this state, the DB instance is no longer available and the current state of the database can't be recovered\. To restore the DB instance, you must re\-enable access to the encryption key for RDS, and then restore the DB instance from a backup\.

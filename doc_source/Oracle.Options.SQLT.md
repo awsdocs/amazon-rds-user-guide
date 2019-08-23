@@ -9,9 +9,9 @@ SQLT is an Oracle utility that produces a report\. The report includes object st
 Unlike Automatic Workload Repository or Statspack reports, SQLT works on individual SQL statements\. SQLT is a collection of SQL, PL/SQL, and SQL\*Plus files that collect, store, and display performance data\. 
 
 Amazon RDS for Oracle currently supports the following versions of SQLT:
-+ 12\.1\.160429
-+ 12\.2\.180331
 + 12\.2\.180725
++ 12\.2\.180331
++ 12\.1\.160429
 
 To download SQLT and access instructions for using it:
 + Log in to your My Oracle Support account, and open the following documents:
@@ -22,6 +22,7 @@ To download SQLT and access instructions for using it:
 + For interpreting the Main report: [Document 1922234\.1](https://support.oracle.com/epmos/faces/DocumentDisplay?parent=DOCUMENT&sourceId=215187.1&id=1922234.1)
 
  You can use SQLT with any edition of the following Oracle Database versions: 
++ Oracle 18c, 18\.0\.0\.0
 + Oracle 12c, 12\.2\.0\.1
 + Oracle 12c, 12\.1\.0\.2
 + Oracle 11g, 11\.2\.0\.4

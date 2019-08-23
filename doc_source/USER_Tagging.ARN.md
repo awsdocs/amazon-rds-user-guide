@@ -31,7 +31,7 @@ The following table shows the format that you should use when constructing an AR
 
 You can get the ARN of an RDS resource by using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 
-### AWS Management Console<a name="USER_Tagging.ARN.CON"></a>
+### Console<a name="USER_Tagging.ARN.CON"></a>
 
 To get an ARN from the AWS Management Console, navigate to the resource you want an ARN for, and view the details for that resource\. For example, you can get the ARN for a DB instance from the **Configuration** tab of the DB instance details, as shown following\. 
 
@@ -63,7 +63,7 @@ For Windows:
 3. --region us-west-2
 ```
 
-### API<a name="USER_Tagging.ARN.API"></a>
+### RDS API<a name="USER_Tagging.ARN.API"></a>
 
 To get an ARN for a particular RDS resource, you can call the following RDS API operations and use the ARN properties shown following\.
 
