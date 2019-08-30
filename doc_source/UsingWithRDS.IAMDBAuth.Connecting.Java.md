@@ -230,7 +230,7 @@ public class CreateRDSAuthTokenManually {
 
 The following code example shows how to generate an authentication token, and then use it to connect to an instance running MySQL\. 
 
-To run this code example, you need the [AWS SDK for Java](aws.amazon.com/sdk-for-java), found on the AWS site\. In addition, you need the following:
+To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/sdk-for-java/), found on the AWS site\. In addition, you need the following:
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.
 + An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
 + Modify the values of the following variables as needed:

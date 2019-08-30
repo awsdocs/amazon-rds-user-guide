@@ -131,6 +131,9 @@ You can create a Read Replica from either single\-AZ or Multi\-AZ DB instance de
 
 You can create a Read Replica as a Multi\-AZ DB instance\. Amazon RDS creates a standby of your replica in another Availability Zone for failover support for the replica\. Creating your Read Replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 
+**Note**  
+To create a Read Replica as a Multi\-AZ DB instance, the DB instance must be MySQL 5\.6 or later\.
+
 ## Monitoring MySQL Read Replicas<a name="USER_MySQL.Replication.ReadReplicas.Monitor"></a>
 
 For MySQL Read Replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW SLAVE STATUS` command\. 

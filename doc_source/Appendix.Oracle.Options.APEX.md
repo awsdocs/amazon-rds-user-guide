@@ -100,7 +100,7 @@ The following command runs the stored procedure\.
 ## Installing and Configuring a Listener for Use with Oracle APEX<a name="Appendix.Oracle.Options.APEX.Listener"></a>
 
 You are now ready to install and configure a listener for use with Oracle APEX\. You can use one of these products for this purpose: 
-+ For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\)\.
++ For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\.
 + For APEX version 4\.1\.1, use Oracle APEX Listener version 1\.1\.4\.
 + Oracle HTTP Server and `mod_plsql`\.
 
@@ -177,8 +177,13 @@ While you are still in the directory from the previous procedure, install and ru
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_PROCEDURES', 'master_user', 'SELECT', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TAB_COLUMNS', 'master_user', 'SELECT', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TABLES', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'master_user', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'master_user', 'SELECT', true);      
+   exec rdsadmin.rdsadmin_util.grant_sys_object('WPIUTL', 'master_user', 'EXECUTE', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_SESSION', 'master_user', 'EXECUTE', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_UTILITY', 'master_user', 'EXECUTE', true);
    ```
+**Note**  
+These commands apply to ORDS version 19\.1 and 19\.2\.
 
 1. Install the ORDS schema using the downloaded ords\.war file\.
 

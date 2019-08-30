@@ -20,6 +20,7 @@ The following are some limitations and recommendations for importing backup file
 + You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore databases larger than the maximum database size supported by Amazon RDS for MySQL\. For more information about storage limits, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD) and [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
++ You can't restore from an encrypted backup in the Amazon S3 bucket\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
 + Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and then change the instance class later\. For more information about instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 + Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If a backup file exceeds 5 TB, then you must split the backup file into smaller files\. 
