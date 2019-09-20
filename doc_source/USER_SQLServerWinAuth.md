@@ -49,7 +49,7 @@ You use AWS Directory Service for Microsoft Active Directory, also called **AWS 
 
 ### Step 1: Create a Directory Using the AWS Directory Service for Microsoft Active Directory<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
 
-AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC; this redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
+AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in two subnets in two different Availability Zones within a VPC\. This redundancy helps ensure that your directory remains accessible even if a failure occurs\.
 
  When you create an *AWS Managed Microsoft AD* directory, AWS Directory Service performs the following tasks on your behalf: 
 +  Sets up a Microsoft Active Directory within the VPC\. 

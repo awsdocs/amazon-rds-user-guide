@@ -27,11 +27,11 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1.  In the navigation pane, choose **Security Groups**\. 
 
-1. Select or create a security group for which you want to allow access to members of another security group\. In the scenario preceding, this is the security group that you use for your DB instances\. Choose the **Inbound Rules** tab, and then choose **Edit rule**\.
+1. Choose or create a security group for which you want to allow access to members of another security group\. In the scenario preceding, this is the security group that you use for your DB instances\. Choose the **Inbound Rules** tab, and then choose **Edit rule**\.
 
 1. On the **Edit inbound rules** page, choose **Add Rule**\.
 
-1. From **Type**, choose one of the **All ICMP** options\. In the **Source** box, start typing the ID of the security group; this provides you with a list of security groups\. Select the security group with members that you want to have access to the resources protected by this security group\. In the scenario preceding, this is the security group that you use for your EC2 instance\.
+1. From **Type**, choose one of the **All ICMP** options\. In the **Source** box, start typing the ID of the security group; this provides you with a list of security groups\. Choose the security group with members that you want to have access to the resources protected by this security group\. In the scenario preceding, this is the security group that you use for your EC2 instance\.
 
 1. Repeat the steps for the TCP protocol by creating a rule with **All TCP** as the **Type** and your security group in the **Source** box\. If you intend to use the UDP protocol, create a rule with **All UDP** as the **Type** and your security group in the **Source** box\. 
 
@@ -71,7 +71,7 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 
 1.  In **Actions**, choose **Enable ClassicLink**\. In the confirmation dialog box, choose **Yes, Enable**\. 
 
-1.  On the EC2 console, select the EC2 instance you want to connect to the DB instance in the VPC\. 
+1.  On the EC2 console, choose the EC2 instance you want to connect to the DB instance in the VPC\. 
 
 1.  In **Actions**, choose **ClassicLink**, and then choose **Link to VPC**\. 
 

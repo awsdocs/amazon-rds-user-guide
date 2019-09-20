@@ -32,6 +32,8 @@ If the Read Replica is running in a VPC, configure VPC ACL rules in addition to 
 + ACL ingress rule allowing TCP traffic to ports 1024\-65535 from the IP address of the source MySQL DB instance\.
 + ACL egress rule: allowing outbound TCP traffic to the port and IP address of the source MySQL DB instance\.
 
+We recommend setting the `max_allowed_packet` parameter to the maximum size to avoid replication errors\.
+
 ## Prepare the Replication Source<a name="MySQL.Procedural.Exporting.NonRDSRepl.PrepareSource"></a>
 
 Prepare the MySQL DB instance as the replication source\.
@@ -53,6 +55,8 @@ Ensure that the backup retention period is set long enough that no binary logs a
 Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs are not purged during the export\. For more information, see [Accessing MySQL Binary Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
 
 To further ensure that the binary logs of the source instance are not purged, create an Amazon RDS Read Replica from the source instance\. For more information, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. After the Amazon RDS Read Replica has been created, call the `mysql.rds_stop_replication` stored procedure to stop the replication process\. The source instance will no longer purge its binary log files, so they will be available for the replication process\.
+
+We recommend setting both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. For information about setting parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Copy the Database<a name="MySQL.Procedural.Exporting.NonRDSRepl.CopyData"></a>
 

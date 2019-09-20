@@ -113,13 +113,24 @@ Data Pump jobs are started asynchronously\. For information about monitoring a D
 
 #### Step 3: Upload the Dump File to Your Amazon S3 Bucket<a name="Oracle.Procedural.Importing.DataPump.Step3"></a>
 
-Use Amazon S3 to upload the dump file to the Amazon S3 bucket\. 
+Upload the dump file to the Amazon S3 bucket\. 
 
-For instructions, see [Add an Object to a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+Use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` to copy the dump file to the Amazon S3 bucket\. The following example uploads all of the files from the `DATA_PUMP_DIR` directory to an Amazon S3 bucket named `mys3bucket`\.
+
+```
+SELECT rdsadmin.rdsadmin_s3_tasks.upload_to_s3(
+      p_bucket_name    =>  'mys3bucket',       
+      p_directory_name =>  'DATA_PUMP_DIR') 
+   AS TASK_ID FROM DUAL;
+```
+
+The `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\.
+
+For more information, see [Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket](oracle-s3-integration.md#oracle-s3-integration.using.upload)\.
 
 #### Step 4: Copy the Exported Dump File from the Amazon S3 Bucket to the Target DB Instance<a name="Oracle.Procedural.Importing.DataPump.Step4"></a>
 
-Use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3` to copy the dump file from the Amazon S3 bucket to the target DB instance\. The following example downloads all of the files from an Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR `directory\.
+Use SQL Plus or Oracle SQL Developer to connect to the Amazon RDS target Oracle DB instance\. Next, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3` to copy the dump file from the Amazon S3 bucket to the target DB instance\. The following example downloads all of the files from an Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\.
 
 ```
 SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(

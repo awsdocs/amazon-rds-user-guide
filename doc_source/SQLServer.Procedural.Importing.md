@@ -157,7 +157,7 @@ After you have enabled and configured native backup and restore, you can start u
 
 Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your Amazon S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name`\. Amazon S3 doesn't require an account number or region in ARNs\. If you also provide an optional AWS KMS encryption key, the format your ARN is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
 
-There are stored procedures for backing up your database, restoring your database, canceling tasks that are in progress, and tracking the status of the backup and restore tasks\. For instructions on how to call each stored procedure, see the following subsections: 
+There are stored procedures for backing up your database \(`rds_backup_database`\), restoring your database \(`rds_restore_database`\), canceling tasks that are in progress \(`rds_cancel_task`\), and tracking the status of the backup and restore tasks \(`rds_task_status`\)\. For instructions on how to call each stored procedure, see the following subsections: 
 + [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)
 + [Restoring a Database](#SQLServer.Procedural.Importing.Native.Using.Restore)
 + [Canceling a Task](#SQLServer.Procedural.Importing.Native.Using.Cancel)

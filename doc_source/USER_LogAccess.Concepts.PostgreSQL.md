@@ -84,6 +84,8 @@ After you complete the configuration, Amazon RDS publishes the log events to log
 
 1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
 
+   The **Log exports** section is only available for PostgreSQL versions that support publishing to CloudWatch Logs\. 
+
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
 ### AWS CLI<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CLI"></a>

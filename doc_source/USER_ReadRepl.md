@@ -25,7 +25,7 @@ Deploying one or more Read Replicas for a given source DB instance might make se
 
 By default, a Read Replica is created with the same storage type as the source DB instance\. However, you can create a Read Replica that has a different storage type from the source DB instance based on the options listed in the following table\. 
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
+<a name="rds-read-replica-storage-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
 
 Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new Read Replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB, MySQL, and PostgreSQL, you can create a Read Replica from an existing Read Replica\. For example, from **ReadReplica1**, you can create a new Read Replica, such as **ReadReplica2**\. For Oracle, you can't create a Read Replica from an existing Read Replica\. 
 

@@ -21,7 +21,9 @@ Use the following sections to help troubleshoot problems you have with DB instan
 ## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
 When you cannot connect to a DB instance, the following are common causes:
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group are not in sync\. The problem is most likely the ingress rules in your security group\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
++ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group aren't in sync\. The problem is most likely the ingress rules in your security group\.
+
+  By default, DB instances don't allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
 
   For more information about setting up a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
@@ -445,7 +447,11 @@ for sequence 1306Not able to establish initial position for begin time 2014-03-0
 ## Cannot Connect to Amazon RDS SQL Server DB Instance<a name="CHAP_Troubleshooting.SQLServer.Connect"></a>
 
 When you have problems connecting to a DB instance using SQL Server Management Studio, the following are some common causes: 
-+ The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the instance's security group are not in sync\. If you use your DB instance’s endpoint and port with Microsoft SQL Server Management Studio and cannot connect, the problem is most likely the egress or ingress rules on your firewall\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
++ The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the instance's security group are not in sync\. If you use your DB instance’s endpoint and port with Microsoft SQL Server Management Studio and cannot connect, the problem is most likely the inbound or outbound rules on your firewall\.
+
+  To grant access, you can create your own security group with specific inbound and outbound rules for your situation\. You can also modify an existing security group\. A common issue is incorrect IP address ranges in inbound rules\. Add or edit an inbound rule in the security group: for **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\.
+
+  For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
 + The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
 + Your DB instance is still being created and is not yet available\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\.
 

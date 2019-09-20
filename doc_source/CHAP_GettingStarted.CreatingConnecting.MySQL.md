@@ -52,6 +52,11 @@ For information about creating a MySQL DB instance with **Easy Create** not enab
 
    To enter your master password, disable **Auto generate a password**, and then enter the same password in **Master password** and **Confirm password**\.
 
+1. \(Optional\) Open **View default settings for Easy create**\.  
+![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
+
+   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it is created to change the setting\.
+
 1. Choose **Create database**\.
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
@@ -91,14 +96,14 @@ In this example, you create a DB instance running the MySQL database engine call
 
 1. On the **Specify DB Details** page, specify your DB instance information\. The following table shows settings for an example DB instance\. When the settings are as you want them, choose **Next**\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)  
+<a name="rds-mysql-original-console-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)  
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-MySQL-Launch02.png)
 
 1. Choose **Next**\.
 
 1.  On the **Configure advanced settings** page, provide additional information that RDS needs to launch the MySQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Create database**\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)
+<a name="rds-mysql-original-console-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)
 
 1. Choose **Create database**\. 
 

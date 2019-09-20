@@ -4,11 +4,15 @@ Multi\-AZ deployments provide increased availability, data durability, and fault
 
 Amazon RDS supports Multi\-AZ deployments for Microsoft SQL Server by using either SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. Amazon RDS monitors and maintains the health of your Multi\-AZ deployment\. If problems occur, RDS automatically repairs unhealthy DB instances, reestablishes synchronization, and initiates failovers\. Failover only occurs if the standby and primary are fully in sync\. You don't have to manage anything\.
 
-When you set up SQL Server Multi\-AZ, RDS automatically configures all databases on the instance to use DBM or AGs\. Amazon RDS handles the primary, the witness, and the secondary DB instance for you\. 
+When you set up SQL Server Multi\-AZ, RDS automatically configures all databases on the instance to use DBM or AGs\. Amazon RDS handles the primary, the witness, and the secondary DB instance for you\. Because configuration is automatic, RDS selects DBM or Always On AGs based on the version of SQL Server that you deploy\.
 
-Because configuration is automatic, RDS selects DBM or Always On AGs based on the version of SQL Server that you deploy\. Amazon RDS supports Multi\-AZ with DBM or AGs for the following SQL Server versions and editions, with the noted exceptions:
-+ SQL Server 2017: Standard and Enterprise Editions \(Always On AGs are supported in Enterprise Edition 14\.00\.3049\.1 or later\.\)
-+ SQL Server 2016: Standard and Enterprise Editions \(Always On AGs are supported in Enterprise Edition 13\.00\.5216\.0 or later\.\) 
+Amazon RDS supports Multi\-AZ with Always On AGs for the following SQL Server versions and editions:
++ SQL Server 2017: Enterprise Edition 14\.00\.3049\.1 or later 
++ SQL Server 2016: Enterprise Edition 13\.00\.5216\.0 or later
+
+Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and editions, except for the versions of Enterprise Edition noted previously:
++ SQL Server 2017: Standard and Enterprise Editions
++ SQL Server 2016: Standard and Enterprise Editions 
 + SQL Server 2014: Standard and Enterprise Editions
 + SQL Server 2012: Standard and Enterprise Editions
 
@@ -35,7 +39,7 @@ The following are some restrictions when working with Multi\-AZ deployments for 
 + You can only restore Multi\-AZ DB instances that are backed up using the full recovery model\.
 
 The following are some notes about working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
-+ Amazon RDS exposes the Always On AGs[availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover?view=sql-server-2017#AGlisteners)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\. 
++ Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover?view=sql-server-2017#AGlisteners)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\. 
 + Amazon RDS supports [availability group multisubnet failovers](https://docs.microsoft.com/en-us/sql/database-engine/listeners-client-connectivity-application-failover?view=sql-server-2014#SupportAgMultiSubnetFailover)\. 
 + To use SQL Server Multi\-AZ with a SQL Server DB instance in a VPC, first create a DB subnet group that has subnets in at least two distinct Availability Zones\. Then assign the DB subnet group to the primary replica of the SQL Server DB instance\. 
 + When a DB instance is modified to be a Multi\-AZ deployment, during the modification it has a status of **modifying**\. Amazon RDS creates the standby, and makes a backup of the primary DB instance\. After the process is complete, the status of the primary DB instance becomes **available**\. 

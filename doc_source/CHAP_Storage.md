@@ -87,7 +87,7 @@ Your database workload might not be able to achieve 100 percent of the IOPS that
 
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+<a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
 \* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on m5 instance types\. Other instance families guarantee performance up to 32,000 IOPS\. 
 

@@ -95,7 +95,10 @@ exec rdsadmin.rdsadmin_util.switch_logfile;
 
 An Amazon RDS DB instance running Oracle starts with four online redo logs, 128 MB each\. To add additional redo logs, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.add_logfile`\. 
 
-For any version of Oracle, the `add_logfile` procedure has the following parameters\. 
+The `add_logfile` procedure has the following parameters\. 
+
+**Note**  
+The parameters are mutually exclusive\.
 
 
 ****  
@@ -103,14 +106,6 @@ For any version of Oracle, the `add_logfile` procedure has the following paramet
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 | `bytes` | positive | null | No | The size of the log file in bytes\. | 
-
-The `add_logfile` procedure has the following parameters\. 
-
-
-****  
-
-| Parameter Name | Data Type | Default | Required | Description | 
-| --- | --- | --- | --- | --- | 
 | `p_size` | varchar2 | — | Yes |  The size of the log file\. You can specify the size in kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The following command adds a 100 MB log file\.
@@ -232,7 +227,7 @@ GROUP#     BYTES      STATUS
 8          536870912  UNUSED
 
 
-/* Issue a checkpoint to clear log 2. */
+/* If the status of log 2 is still "ACTIVE", issue a checkpoint to clear it to "INACTIVE".  */
 
 exec rdsadmin.rdsadmin_util.checkpoint;
 

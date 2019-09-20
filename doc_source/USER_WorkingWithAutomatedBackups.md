@@ -5,7 +5,7 @@ Amazon RDS creates and saves automated backups of your DB instance\. Amazon RDS 
 Amazon RDS creates automated backups of your DB instance during the backup window of your DB instance\. Amazon RDS saves the automated backups of your DB instance according to the backup retention period that you specify\. If necessary, you can recover your database to any point in time during the backup retention period\. 
 
 Automated backups follow these rules:
-+ Your DB instance must be in the `ACTIVE` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `ACTIVE`, for example `STORAGE_FULL`\.
++ Your DB instance must be in the `AVAILABLE` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `AVAILABLE`, for example `STORAGE_FULL`\.
 + Automated backups and automated snapshots don't occur while a copy is executing in the same region for the same DB instance\.
 
 You can also back up your DB instance manually, by manually creating a DB snapshot\. For more information about creating a DB snapshot, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\. 

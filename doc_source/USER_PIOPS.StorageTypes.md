@@ -68,13 +68,14 @@ If your workload is cyclical or unpredictable, you can enable storage autoscalin
 
 For example, you might use this feature for a new mobile gaming application that users are adopting rapidly\. In this case, a rapidly increasing workload might exceed the available database storage\. To avoid having to manually scale up database storage, you can use Amazon RDS storage autoscaling\. 
 
-With storage autoscaling enabled, when Amazon RDS detects that you are running out of free database space it automatically scales up your storage\. Amazon RDS starts a storage modification for an autoscale\-enabled DB instance when these factors apply:
+With storage autoscaling enabled, when Amazon RDS detects that you are running out of free database space it automatically scales up your storage\. Amazon RDS starts a storage modification for an autoscaling\-enabled DB instance when these factors apply:
 + Free available space is less than 10 percent of the allocated storage\.
 + The low\-storage condition lasts at least five minutes\. 
 
-Currently, the additional storage is at least 5 GiB in size and at most 10 percent of the currently allocated storage\. You can't set the maximum storage threshold to a value greater than the maximum allocated storage for autoscale\-enabled instances\.
+The additional storage is in increments of whichever is greater, 5 GiB or 12% of currently allocated storage\. The maximum storage threshold is the limit to which the DB instance can be scaled\. You can't set the maximum storage threshold for autoscaling\-enabled instances to a value greater than the maximum allocated storage\.
 
-If you start a storage scaling operation at the same time that Amazon RDS starts an autoscale operation, your storage modification takes precedence\. In this case, the autoscale operation is canceled\. 
+**Note**  
+If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 
  Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\. 
 
@@ -97,7 +98,7 @@ When you create a new Amazon RDS DB instance, you can choose whether to enable s
 
 1.  Choose **Create database**\. On the **Select engine** page, choose your database engine and specify your DB instance information as described in [Getting Started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
-1. In the **Storage Autoscaling** section, set the **Maximum Storage Limit** value for the DB instance\. 
+1. In the **Storage autoscaling** section, set the **Maximum storage threshold** value for the DB instance\. 
 
 1. Specify the rest of your DB instance information as described in [Getting Started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
@@ -177,7 +178,7 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 1. Choose the DB instance that you want to modify and choose **Modify**\. The **Modify DB instance** page appears\. 
 
-1.  Set the storage limit in the autoscaling section to equal the provisioned storage\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+1.  Clear the **Enable storage autoscaling** check box in the **Storage autoscaling** section\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 1.  When all the changes are as you want them, choose **Continue** and check the modifications\. 
 

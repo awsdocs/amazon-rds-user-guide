@@ -49,6 +49,11 @@ For information about creating an Oracle DB instance with **Easy Create** not en
 
    To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
 
+1. \(Optional\) Open **View default settings for Easy create**\.  
+![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
+
+   You can examine the default settings that are used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+
 1. Choose **Create database**\.
 
    If you used an automatically generated password, the **View credential details** button appears on the **Databases** page\.
@@ -91,7 +96,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 1. On the **Specify DB details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
+<a name="rds-oracle-creating-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
 1. Choose **Next** to continue\. 
 
@@ -99,7 +104,7 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 1. On the **Configure advanced settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
+<a name="rds-oracle-creating-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
 1. Choose **Create database**\. 
 

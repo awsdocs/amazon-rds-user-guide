@@ -327,7 +327,7 @@ Custom tag identifiers are case\-sensitive\.
 
 The following table lists the RDS tag identifiers that you can use in a `Condition` element\. 
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_id-based-policy-examples.html)
+<a name="rds-iam-condition-tag-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_id-based-policy-examples.html)
 
 The syntax for a custom tag condition is as follows:
 

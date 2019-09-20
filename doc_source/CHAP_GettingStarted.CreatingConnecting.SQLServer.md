@@ -49,6 +49,11 @@ For information about creating a Microsoft SQL Server DB instance with **Easy Cr
 
    To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
 
+1. \(Optional\) Open **View default settings for Easy create**\.  
+![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
+
+   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+
 1. Choose **Create database**\.
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
@@ -89,11 +94,11 @@ Before your begin, you must have an AWS account before you can create a DB insta
 
 1. On the **Instance specifications** page on the **Specify DB Details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Settings** card at the bottom of the **Specify DB Details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
    Choose **Next** to continue\. 
 
@@ -101,39 +106,39 @@ Before your begin, you must have an AWS account before you can create a DB insta
 
    On the **Network & Security** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-network-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Microsoft SQL Server Windows Authentication** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-windows-authentication-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Database Options** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-database-options-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Encryption** card on the **Configure Advanced Settings** provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-encryption-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Backup** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-backup-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Monitoring** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-monitoring-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Performance Insights** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-performance-insights-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Maintenance** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-maintenance-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. On the **Deletion protection** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
+<a name="rds-sql-server-creating-deletion-protection-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
 
 1. Choose **Create database** to confirm your choices and create the DB instance\. 
 

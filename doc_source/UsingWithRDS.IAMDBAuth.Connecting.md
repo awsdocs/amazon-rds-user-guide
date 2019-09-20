@@ -11,6 +11,6 @@ After you have a signed IAM authentication token, you can connect to an Amazon R
 For more information, see [Use IAM authentication to connect with SQL Workbench/J to Amazon Aurora MySQL or Amazon RDS for MySQL](https://aws.amazon.com/blogs/database/use-iam-authentication-to-connect-with-sql-workbenchj-to-amazon-aurora-mysql-or-amazon-rds-for-mysql/)\.
 
 **Topics**
-+ [Connecting to Your DB Instance from the Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
-+ [Connecting to Your DB Instance from the Command Line: AWS CLI and psql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.md)
-+ [Connecting to Your DB Instance Using the AWS SDK for Java](UsingWithRDS.IAMDBAuth.Connecting.Java.md)
++ [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
++ [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and psql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.md)
++ [Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Java](UsingWithRDS.IAMDBAuth.Connecting.Java.md)

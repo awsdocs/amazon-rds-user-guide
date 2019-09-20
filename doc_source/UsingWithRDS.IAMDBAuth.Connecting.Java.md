@@ -1,4 +1,4 @@
-# Connecting to Your DB Instance Using the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
+# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
 You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Java as described following\.
 
@@ -238,7 +238,9 @@ To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/
   + `RDS_INSTANCE_PORT` – The port number used for connecting to your PostgreSQL DB instance\.
   + `REGION_NAME` – The AWS Region where the DB instance is running\.
   + `DB_USER` – The database account that you want to access\.
-  + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
+  + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\.
+
+    To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 

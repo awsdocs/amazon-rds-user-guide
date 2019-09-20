@@ -102,6 +102,4 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the AWS CLI, set the `--auto-minor-version-upgrade|--no-auto-minor-version-upgrade` option\.
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
-You can get an Amazon RDS event notification when a new minor engine version upgrade is available for one of your databases\. To get notifications, subscribe to Amazon RDS event notification through the Amazon Simple Notification Service \(Amazon SNS\)\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.

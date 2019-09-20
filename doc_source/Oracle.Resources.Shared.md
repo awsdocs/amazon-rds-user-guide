@@ -22,7 +22,7 @@ In the following procedure, you create a virtual private cloud \(VPC\) based on 
 
 1. On the page **Step 2: VPC with Public and Private Subnets**, shown following, set the following values\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
+<a name="rds-oracle-vpc-settings-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
 ![\[VPC with Public and Private Subnets Wizard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-VPC.png)
 
 1. Choose **Create VPC**\. 
@@ -39,7 +39,7 @@ An Amazon RDS DB instance in a VPC requires at least two private subnets or at l
 
 1. On the **Create Subnet** page, set the following values\.   
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
+<a name="rds-oracle-subnet-settings-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 
 1. Choose **Yes, Create**\.
 
@@ -82,7 +82,7 @@ A security group acts as a virtual firewall for your DB instance to control inbo
 
 1. On the page **Create Security Group**, set the following values\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
+<a name="rds-oracle-security-group-settings-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)
 
 1. Choose **Yes, Create**\.
 
@@ -100,7 +100,7 @@ In the following procedure, you add rules to your security group to control inbo
 
 1. Set these values, as shown following\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
+<a name="rds-oracle-inbound-rules-settings-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Resources.Shared.html)  
 ![\[Inbound Rules information\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Siebel-InboundRules.png)
 
 1. Choose **Save**\.

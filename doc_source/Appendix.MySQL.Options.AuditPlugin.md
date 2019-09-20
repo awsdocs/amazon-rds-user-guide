@@ -9,7 +9,7 @@ MySQL 5\.7\.16 and later 5\.7 versions
 
 ## Audit Plugin Option Settings<a name="Appendix.MySQL.Options.AuditPlugin.Options"></a>
 
-Amazon RDS supports the following settings for the MariaDB Audit Plugin option\. 
+Amazon RDS supports the following settings for the MariaDB Audit Plugin option\.
 
 
 ****  
