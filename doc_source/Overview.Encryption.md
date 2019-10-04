@@ -44,7 +44,7 @@ You can use the ARN of a key from another account to encrypt a DB instance\. Or 
 
 ## Availability of Amazon RDS Encryption<a name="Overview.Encryption.Availability"></a>
 
-Amazon RDS encryption is currently available for all database engines and storage types\. Amazon RDS encryption is not currently available in the China \(Beijing\) Region\.
+Amazon RDS encryption is currently available for all database engines and storage types\.
 
 Amazon RDS encryption is available for most DB instance classes\. The following table lists DB instance classes that *do not support* Amazon RDS encryption:
 

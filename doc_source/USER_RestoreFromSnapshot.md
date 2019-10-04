@@ -13,7 +13,14 @@ We recommend that you retain the parameter group for any DB snapshots you create
 
 ## Security Group Considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
-When you restore a DB instance, the default security group is associated with the restored instance\. As soon as the restore is complete and your new DB instance is available, you must associate any custom security groups used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
+When you restore a DB instance, the default security group is associated with the restored instance by default\.
+
+**Note**  
+If you're using the AWS CLI, you can specify a custom security group to associate with the instance by including the `--vpc-security-group-ids` option in the `restore-db-instance-from-db-snapshot` command\.
+If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBInstanceFromDBSnapshot` action\.
+The Amazon RDS console has no option for associating a custom security group while restoring\.
+
+As soon as the restore is complete and your new DB instance is available, you can associate any custom security groups used by the snapshot you restored from\. You apply these changes by using the Amazon RDS console's **Modify** command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\.
 
 ## Option Group Considerations<a name="USER_RestoreFromSnapshot.Options"></a>
 

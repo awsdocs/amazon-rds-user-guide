@@ -25,6 +25,7 @@ The following are some limitations to using native backup and restore:
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.   
 + Native backups of databases larger than 1 TB are not supported\. 
 + Native restores of differential backups are not currently supported\.
++ You can't restore from more than 10 backup files at the same time\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 
 + You can't do a native backup during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in full recovery model\.
@@ -41,7 +42,7 @@ To set up for native backup and restore, you need three components:
 
 1. An Amazon S3 bucket to store your backup files\. 
 
-   You need to have an S3 bucket to use for your backup files and then upload backups you want to migrate to RDS\. If you already have an Amazon S3 bucket, you can use that\. If you don't, you can [ create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/CreatingaBucket.html)\. Alternatively, you can choose to have a new bucket created for you when you add the `SQLSERVER_BACKUP_RESTORE` option by using the AWS Management Console\. 
+   You must have an S3 bucket to use for your backup files and then upload backups you want to migrate to RDS\. If you already have an Amazon S3 bucket, you can use that\. If you don't, you can [ create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/CreatingaBucket.html)\. Alternatively, you can choose to have a new bucket created for you when you add the `SQLSERVER_BACKUP_RESTORE` option by using the AWS Management Console\. 
 
    For information on using S3, see the *Amazon Simple Storage Service Getting Started Guide *for a simple introduction\. For more depth, see the *Amazon Simple Storage Service Console User Guide*\.
 
@@ -232,7 +233,7 @@ To restore your database, you call the `rds_restore_database` stored procedure\.
 
 The following parameters are required: 
 + `@restore_db_name` – The name of the database to restore\. 
-+ `@s3_arn_to_restore_from` – The Amazon S3 ARN prefix of the backup files used to restore database from\. For a single file backup, provide the entire name\. To restore from a multiple file backup, provide the prefix the files have in common, then suffix that with an asterisk \(`*`\)\. Following are examples\.
++ `@s3_arn_to_restore_from` – The Amazon S3 ARN prefix of the backup files used to restore database from\. For a single file backup, provide the entire name\. To restore from a multiple file backup, provide the prefix the files have in common, then suffix that with an asterisk \(`*`\)\.
 
   The following example shows single file restore\.  
 **Example**  
@@ -325,6 +326,8 @@ The `rds_task_status` stored procedure returns the following columns\.
 | `last_updated` |  The date and time that the task status was last updated\. The status is updated after every 5% of progress\.   | 
 | `created_at` |  The date and time that the task was created\.   | 
 | `overwrite_S3_backup_file` |  The value of the `@overwrite_S3_backup_file` parameter specified when calling a backup task\. For more information, see [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)\.   | 
+| filepath | Not applicable to Native Backup and Restore tasks | 
+| overwrite\_file | Not applicable to Native Backup and Restore tasks | 
 
 ## Compressing Backup Files<a name="SQLServer.Procedural.Importing.Native.Compression"></a>
 
@@ -362,7 +365,7 @@ The following are issues you might encounter when you use native backup and rest
 |  `Please specify a bucket that is in the same region as RDS instance`  |  You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. You can use Amazon S3 replication to copy the backup file to the correct region\.  For more information, see [Cross\-Region Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the Amazon S3 documentation\.   | 
 |  `The specified bucket does not exist`   |  Verify that you have provided the correct ARN for your bucket and file, in the correct format\.  For more information, see [Using Native Backup and Restore](#SQLServer.Procedural.Importing.Native.Using)\.   | 
 |  `User <ARN> is not authorized to perform <kms action> on resource <ARN>`   |  You requested an encrypted operation, but didn't provide correct AWS KMS permissions\. Verify that you have the correct permissions, or add them\.  For more information, see [Setting Up for Native Backup and Restore](#SQLServer.Procedural.Importing.Native.Enabling)\.   | 
-| The Restore task is unable to restore from more than n backup file\(s\)\. Please reduce the number of files matched and try again\. | Reduce the number of files you're trying to restore from\. You can make each individual file larger if necessary\.  | 
+| The Restore task is unable to restore from more than 10 backup file\(s\)\. Please reduce the number of files matched and try again\. | Reduce the number of files you're trying to restore from\. You can make each individual file larger if necessary\.  | 
 
 ## Related Topics<a name="SQLServer.Procedural.Importing.Native.Related"></a>
 + [Importing and Exporting SQL Server Data Using Other Methods](SQLServer.Procedural.Importing.Snapshots.md)

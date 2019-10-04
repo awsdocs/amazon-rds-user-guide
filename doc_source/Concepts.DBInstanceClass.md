@@ -247,12 +247,12 @@ The following are DB engine considerations for DB instance classes:
 | db\.t3\.small | Yes | No | Yes | Yes | Yes | 
 | db\.t3\.micro | Yes | No | Yes | Yes | Yes | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
-| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Yes | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.t2\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.t2\.medium | Yes | Yes | Yes | Yes | Yes | 
-| db\.t2\.small | Yes | Yes | Yes | Yes | Yes | 
-| db\.t2\.micro | Yes | Yes | Yes | Yes | Yes | 
+| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5, 9\.4 | 
+| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5, 9\.4 | 
+| db\.t2\.large | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.t2\.medium | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.t2\.small | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.t2\.micro | Yes | Yes | Yes | Deprecated | Yes | 
 
 ## Changing Your DB Instance Class<a name="Concepts.DBInstanceClass.Changing"></a>
 

@@ -41,7 +41,7 @@ mysql --host=hostName --port=portNumber --ssl-ca=[full path]rds-combined-ca-bund
 The parameters are as follows:
 + `--host` – The host name of the DB instance that you want to access\.
 + `--port` – The port number used for connecting to your DB instance\.
-+ `--ssl-ca` – The SSL certificate file that contains the public key\. For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
++ `--ssl-ca` – The SSL certificate file that contains the public key\. For more information, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection\.
 + `--user` – The database account that you want to access\.
 + `--password` – A signed IAM authentication token\.

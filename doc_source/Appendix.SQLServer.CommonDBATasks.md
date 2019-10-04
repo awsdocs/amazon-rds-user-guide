@@ -10,7 +10,7 @@ When working with a SQL Server DB instance, you can run scripts to modify a newl
 + [Analyzing Your Database Workload on an Amazon RDS DB Instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)
 + [Collations and Character Sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
 + [Determining a Recovery Model for Your Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
-+ [Dropping a Microsoft SQL Server Database That Is Multi\-AZ](Appendix.SQLServer.CommonDBATasks.DropMirrorDB.md)
++ [Dropping a Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DropMirrorDB.md)
 + [Using Change Data Capture](Appendix.SQLServer.CommonDBATasks.CDC.md)
 + [Renaming a Microsoft SQL Server Database in a Multi\-AZ Deployment](Appendix.SQLServer.CommonDBATasks.RenamingDB.md)
 + [Resetting the `db_owner` Role Password](Appendix.SQLServer.CommonDBATasks.ResetPassword.md)

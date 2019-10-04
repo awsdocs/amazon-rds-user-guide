@@ -46,9 +46,9 @@ The following calculations are supported for the metrics:
 + Minimum – The minimum value for the metric over a period of time\. Append `.min` to the metric name\.
 + Maximum – The maximum value for the metric over a period of time\. Append `.max` to the metric name\.
 + Sum – The sum of the metric values over a period of time\. Append `.sum` to the metric name\.
-+ Sample count – The number of times the mertric was collected over a period of time\. Append `.sample_count` to the metric name\.
++ Sample count – The number of times the metric was collected over a period of time\. Append `.sample_count` to the metric name\.
 
-For example, assume that a metric is collected for 300 seconds \(5 minutes\), and that the metric is collected one time each minute\. The values for each minute are 1, 2, 3, 4, and 5\. In this case, the following calclulations are returned:
+For example, assume that a metric is collected for 300 seconds \(5 minutes\), and that the metric is collected one time each minute\. The values for each minute are 1, 2, 3, 4, and 5\. In this case, the following calculations are returned:
 + Average – 3
 + Minimum – 1
 + Maximum – 5

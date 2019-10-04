@@ -9,7 +9,7 @@ To specify how you want your data stored in Amazon RDS, choose a storage type an
 
 ## Increasing DB Instance Storage Capacity<a name="USER_PIOPS.ModifyingExisting"></a>
 
-If you need space for additional data, you can scale up the storage of an existing DB instance\. To do so, you can use the Amazon RDS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. If you are using General Purpose SSD or Provisioned IOPS SSD storage, you can increase your storage to a maximum of 16 TiB\.
+If you need space for additional data, you can scale up the storage of an existing DB instance\. To do so, you can use the Amazon RDS Management Console, the Amazon RDS API, or the AWS Command Line Interface \(AWS CLI\)\. For information about storage limits, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
 
 **Note**  
 Scaling storage for Amazon RDS for Microsoft SQL Server DB instances is supported only for General Purpose SSD or Provisioned IOPS SSD storage types\.

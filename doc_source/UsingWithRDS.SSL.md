@@ -1,14 +1,17 @@
-# Using SSL to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
+# Using SSL/TLS to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
 
-You can use SSL from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL\. To learn how to implement SSL for your DB instance, use the link following that corresponds to your DB engine: 
+You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB instance, use the link following that corresponds to your DB engine: 
 + [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
 + [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
 + [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
+**Important**  
+For information about rotating your certificate, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\.
+
 **Note**  
-All certificates are only available for download using SSL connections\.
+All certificates are only available for download using SSL/TLS connections\.
 
 To get a root certificate that works for all AWS Regions, download from one of these locations:
 + [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem) \(CA\-2019\)
@@ -26,7 +29,7 @@ If your application is on Microsoft Windows and requires a PKCS7 file, you can d
 
 ## Intermediate Certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
 
-You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.
+You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL/TLS\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.
 
 
 | **AWS Region** | **CA\-2019** | **CA\-2015** | 

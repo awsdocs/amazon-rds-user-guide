@@ -49,7 +49,7 @@ All SQL Server instances created after August 5, 2014, use the DB instance endpo
 
 To encrypt connections from a client computer to an Amazon RDS DB instance running Microsoft SQL Server, you need a certificate on your client computer\. 
 
-To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions\. You can also download a certificate bundle that contains both the old and new root certificate\. In addition, you can download region\-specific intermediate certificates\. For more information about downloading certificates, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions\. You can also download a certificate bundle that contains both the old and new root certificate\. In addition, you can download region\-specific intermediate certificates\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 After you have downloaded the appropriate certificate, import the certificate into your Microsoft Windows operating system by following the procedure in the section following\. 
 

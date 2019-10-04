@@ -39,7 +39,7 @@ Change the colon between the DNS name and port number to a comma\.
       For example, your server name should look like the following\.
 
       ```
-      sample-instance.cg034hpkmmjt.us-east-1.rds.amazonaws.com,1433
+      database-2.cg034hpkfake.us-east-1.rds.amazonaws.com,1433
       ```
 
    1. For **Authentication**, choose **SQL Server Authentication**\. 

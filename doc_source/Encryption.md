@@ -5,4 +5,5 @@ You can enable encryption for database resources\. You can also encrypt connecti
 **Topics**
 + [Encrypting Amazon RDS Resources](Overview.Encryption.md)
 + [Key Management](Overview.Encryption.Keys.md)
-+ [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)
++ [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)
++ [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)
