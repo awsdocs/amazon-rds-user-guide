@@ -40,7 +40,7 @@ To set up Kerberos authentication for an Oracle DB instance, complete the follow
 
 1. Use the Amazon RDS master user credentials to connect to the Oracle DB instance\. Create the user in Oracle to be identified externally\. Externally identified users can log in to the Oracle DB instance using Kerberos authentication\.
 
-To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust\. For more information on setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/setup_trust.html) in the *AWS Directory Service Administration Guide*\.
+To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a two\-way forest trust\. For more information on setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 **Topics**
 + [Setting Up Kerberos Authentication for Oracle DB Instances](oracle-kerberos-setting-up.md)

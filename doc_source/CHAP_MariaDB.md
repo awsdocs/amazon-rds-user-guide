@@ -219,7 +219,7 @@ Amazon RDS supports Secure Sockets Layer \(SSL\) connections with DB instances r
 
 Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
-The public key is stored at [https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
+For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 MariaDB uses yaSSL for secure connections in the following versions:
 + MariaDB version 10\.1\.26 and earlier 10\.1 versions

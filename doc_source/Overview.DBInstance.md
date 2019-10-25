@@ -5,9 +5,17 @@ A *DB instance* is an isolated database environment running in the cloud\. It is
 **Note**  
 Amazon RDS supports access to databases using any standard SQL client application\. Amazon RDS does not allow direct host access\. 
 
-You can have up to 40 Amazon RDS DB instances\. Of these 40, up to 10 can be Oracle or SQL Server DB instances under the "License Included" model\. All 40 DB instances can be used for MySQL, MariaDB, or PostgreSQL\. You can also have 40 DB instances for SQL Server or Oracle under the "BYOL" licensing model\. If your application requires more DB instances, you can request additional DB instances using the form at https://console\.aws\.amazon\.com/support/home\#/case/create?issueType=service\-limit\-increase&limitType=service\-code\-rds\-instances\. 
+You can have up to 40 Amazon RDS DB instances:
++ 10 for each SQL Server edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model
++ 40 for MySQL, MariaDB, or PostgreSQL
++ 40 for Oracle under the "bring\-your\-own\-license" \(BYOL\) licensing model
 
-Each DB instance has a DB instance identifier\. This customer\-supplied name uniquely identifies the DB instance when interacting with the Amazon RDS API and AWS CLI commands\. The DB instance identifier must be unique for that customer in an AWS Region\. 
+**Note**  
+If your application requires more DB instances, you can request additional DB instances using the form at https://console\.aws\.amazon\.com/support/home\#/case/create?issueType=service\-limit\-increase&limitType=service\-code\-rds\-instances\.
+
+Each DB instance has a DB instance identifier\. This customer\-supplied name uniquely identifies the DB instance when interacting with the Amazon RDS API and AWS CLI commands\. The DB instance identifier must be unique for that customer in an AWS Region\.
+
+The identifier is used as part of the DNS hostname allocated to your instance by RDS\. For example, if you specify `db1` as the DB instance identifier, then RDS will automatically allocate a DNS endpoint for your instance, such as `db1.123456789012.us-east-1.rds.amazonaws.com`, where `123456789012` is the fixed identifier for a specific region for your account\.
 
 Each DB instance supports a database engine\. Amazon RDS currently supports MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server, and Amazon Aurora database engines\. 
 

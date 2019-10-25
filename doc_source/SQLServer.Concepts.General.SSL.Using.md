@@ -14,7 +14,7 @@ For information about Transport Layer Security \(TLS\) support for SQL Server, s
 
 You can force all connections to your DB instance to use SSL\. If you force connections to use SSL, it happens transparently to the client, and the client doesn't have to do any work to use SSL\. 
 
-If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `false`\. Set the `rds.force_ssl` parameter to `true` to force connections to use SSL\. The `rds.force_ssl` parameter is static, so after you change the value, you must reboot your DB instance for the change to take effect\. 
+If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0 (off)`\. Set the `rds.force_ssl` parameter to `1 (on)` to force connections to use SSL\. The `rds.force_ssl` parameter is static, so after you change the value, you must reboot your DB instance for the change to take effect\. 
 
 **To force all connections to your DB instance to use SSL**
 

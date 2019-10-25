@@ -2,7 +2,7 @@
 
 Amazon RDS supports change data capture \(CDC\) for your DB instances running Microsoft SQL Server\. CDC captures changes that are made to the data in your tables\. It stores metadata about each change, which you can access later\. For more information about how CDC works, see [Change Data Capture](https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/track-data-changes-sql-server#Capture) in the Microsoft documentation\. 
 
-Before you use CDC with your Amazon RDS DB instances, enable it in the database by running `msdb.dbo.rds_cdc_enable_db`\. After CDC is enabled, any user who is `db_owner` of that database can enable or disable CDC on tables in that database\.
+Before you use CDC with your Amazon RDS DB instances, enable it in the database by running `msdb.dbo.rds_cdc_enable_db`\. You must have master user privileges to enable CDC in the Amazon RDS DB instance\. After CDC is enabled, any user who is `db_owner` of that database can enable or disable CDC on tables in that database\.
 
 **Important**  
 During restores, CDC will be disabled\. All of the related metadata is automatically removed from the database\. This applies to snapshot restores, point\-in\-time restores, and SQL Server Native restores from S3\. After performing one of these types of restores, you can re\-enable CDC and re\-specify tables to track\.

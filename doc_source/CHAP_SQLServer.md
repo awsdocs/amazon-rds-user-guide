@@ -11,7 +11,7 @@ For information about licensing for SQL Server, see [Licensing Microsoft SQL Ser
 
 With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running SQL Server can be used inside a VPC\. You can also use SSL to connect to a DB instance running SQL Server, and you can use TDE to encrypt data at rest\. Amazon RDS currently supports Multi\-AZ deployments for SQL Server using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\) as a high\-availability, failover solution\. 
 
-In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
+In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, the master user is assigned to the *db\_owner* role for all user databases on that instance, and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
 
 Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting Up for Amazon RDS](CHAP_SettingUp.md)\. 
 
@@ -58,7 +58,8 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 
    If the point\-in\-time restore or snapshot restore fails, you see events and messages similar to the following:
   +  Database instance put into incompatible\-restore\. The instance has 76 databases, but after conversion it would only support 75\. 
-+ Some ports are reserved for Amazon RDS, and you can't use them when you create a DB instance\. 
++ Some ports are reserved for Amazon RDS, and you can't use them when you create a DB instance\.
++ Client connections from IP addresses within the range 169\.254\.0\.0/16 are not permitted\. This is the Automatic Private IP Addressing Range \(APIPA\), which is used for local\-link addressing\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\. 
 + The maximum storage size for SQL Server DB instances is the following: 
@@ -68,8 +69,8 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 
   If you have a scenario that requires a larger amount of storage, you can use sharding across multiple DB instances to get around the limit\. This approach requires data\-dependent routing logic in applications that connect to the sharded system\. You can use an existing sharding framework, or you can write custom code to enable sharding\. If you use an existing framework, the framework can't install any components on the same server as the DB instance\. 
 + The minimum storage size for SQL Server DB instances is the following: 
-  + General Purpose \(SSD\) storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
-  + Provisioned IOPS storage – 200 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
+  + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express editions 
+  + Provisioned IOPS storage – 20 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
   + Magnetic storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
 + Amazon RDS doesn't support running these services on the same server as your Amazon RDS DB instance:
   + SQL Server Analysis Services
@@ -346,7 +347,7 @@ For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_
 
 ## Using Transparent Data Encryption to Encrypt Data at Rest<a name="SQLServer.Concepts.General.Options"></a>
 
-Amazon RDS supports Microsoft SQL Server Transparent Data Encryption \(TDE\), which transparently encrypts stored data\. Amazon RDS uses option groups to enable and configure these features\. For more information about the TDE option, see [Microsoft SQL Server Transparent Data Encryption Support](Appendix.SQLServer.Options.TDE.md)\. 
+Amazon RDS supports Microsoft SQL Server Transparent Data Encryption \(TDE\), which transparently encrypts stored data\. Amazon RDS uses option groups to enable and configure these features\. For more information about the TDE option, see [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)\. 
 
 ## Local Time Zone for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.TimeZone"></a>
 

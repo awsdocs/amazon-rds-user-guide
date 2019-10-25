@@ -6,7 +6,7 @@ You can specify any currently supported Oracle version when creating a new DB in
 
 ## Oracle Versions 18\.0\.0 and 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.180-122"></a>
 
-For Amazon RDS for Oracle versions 18\.0\.0\.0 and 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\.
+For Amazon RDS for Oracle versions 18\.0\.0\.0 and 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 
 To find what RUs and RURs are applied to Amazon RDS for Oracle versions 18\.0\.0\.0 and 12\.1\.0\.2, see the following table\. 
 

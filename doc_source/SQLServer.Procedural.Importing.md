@@ -26,6 +26,7 @@ The following are some limitations to using native backup and restore:
 + Native backups of databases larger than 1 TB are not supported\. 
 + Native restores of differential backups are not currently supported\.
 + You can't restore from more than 10 backup files at the same time\.
++ You can run up to two backup or restore tasks at the same time\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 
 + You can't do a native backup during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in full recovery model\.
@@ -54,7 +55,7 @@ To set up for native backup and restore, you need three components:
 
 1. The `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance\.
 
-   To enable native backup and restore on your DB instance, you add the `SQLSERVER_BACKUP_RESTORE` option to an option group on your DB instance\. For more information and instructions, see [Support for Native Backup and Restore in Microsoft SQL Server](Appendix.SQLServer.Options.BackupRestore.md)\. 
+   To enable native backup and restore on your DB instance, you add the `SQLSERVER_BACKUP_RESTORE` option to an option group on your DB instance\. For more information and instructions, see [Support for Native Backup and Restore in SQL Server](Appendix.SQLServer.Options.BackupRestore.md)\. 
 
 ### Manually Creating an IAM Role for Native Backup and Restore<a name="SQLServer.Procedural.Importing.Native.Enabling.IAM"></a>
 
@@ -181,7 +182,7 @@ The following parameters are required:
 + `@kms_master_key_arn` – The key to encrypt the backup \(KMS customer master key ARN\)\. If you don't specify an AWS KMS key identifier, then Amazon RDS uses your default encryption key for your new DB instance\. AWS KMS creates your default encryption key for Amazon RDS for your AWS account\. Your AWS account has a different default encryption key for each AWS Region\. 
 
   For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\. 
-+ `@overwrite_S3_backup_file` – Defaults to `0`
++ `@overwrite_s3_backup_file` – Defaults to `0`
   + `0` – Don't overwrite the existing file\. Return an error instead if the file already exists\. 
   + `1` – Overwrite an existing file that has the specified name, even if it isn't a backup file\. 
 + `@type` – Defaults to `FULL`, not case sensitive
@@ -194,7 +195,7 @@ The following parameters are required:
 1. exec msdb.dbo.rds_backup_database 
 2.         @source_db_name='database_name', 
 3.         @s3_arn_to_backup_to='arn:aws:s3:::bucket_name/file_name_and_extension',
-4.         @overwrite_S3_backup_file=1,
+4.         @overwrite_s3_backup_file=1,
 5.         @type='differential';
 ```
 
@@ -205,7 +206,7 @@ The following parameters are required:
 2.         @source_db_name='database_name',
 3.         @s3_arn_to_backup_to='arn:aws:s3:::bucket_name/file_name_and_extension',
 4.         @kms_master_key_arn='arn:aws:kms:region:account-id:key/key-id',
-5.         @overwrite_S3_backup_file=1,
+5.         @overwrite_s3_backup_file=1,
 6.         @type='FULL';
 ```
 
@@ -325,7 +326,7 @@ The `rds_task_status` stored procedure returns the following columns\.
 | `task_info` |  Additional information about the task\.  If an error occurs while backing up or restoring a database, this column contains information about the error\. For a list of possible errors, and mitigation strategies, see [Troubleshooting](#SQLServer.Procedural.Importing.Native.Troubleshooting)\.   | 
 | `last_updated` |  The date and time that the task status was last updated\. The status is updated after every 5% of progress\.   | 
 | `created_at` |  The date and time that the task was created\.   | 
-| `overwrite_S3_backup_file` |  The value of the `@overwrite_S3_backup_file` parameter specified when calling a backup task\. For more information, see [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)\.   | 
+| `overwrite_s3_backup_file` |  The value of the `@overwrite_s3_backup_file` parameter specified when calling a backup task\. For more information, see [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)\.   | 
 | filepath | Not applicable to Native Backup and Restore tasks | 
 | overwrite\_file | Not applicable to Native Backup and Restore tasks | 
 

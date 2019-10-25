@@ -11,7 +11,7 @@ We encourage you to test the steps listed following in a development or staging 
 
 Before you update your DB instances to use the new CA certificate, make sure that you update your clients or applications connecting to your RDS databases\.
 
-Any new RDS DB instances created after November 1, 2019 use the new certificates by default\. If you want to temporarily modify new DB instances manually to use the old \(rds\-ca\-2015\) certificates, you can do so using the AWS Management Console or the AWS CLI\. Any DB instances created prior to November 1, 2019 use the rds\-ca\-2015 certificates until you update them to the rds\-ca\-2019 certificates\.
+Any new RDS DB instances created after January 14, 2020 will use the new certificates by default\. If you want to temporarily modify new DB instances manually to use the old \(rds\-ca\-2015\) certificates, you can do so using the AWS Management Console or the AWS CLI\. Any DB instances created prior to January 14, 2020 use the rds\-ca\-2015 certificates until you update them to the rds\-ca\-2019 certificates\.
 
 **Topics**
 + [Updating Your CA Certificate](#UsingWithRDS.SSL-certificate-rotation-updating)
@@ -26,6 +26,8 @@ Complete the following steps to update your CA certificate\.
 1. Download the new SSL/TLS certificate from [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 1. Update your database applications to use the new SSL/TLS certificate\.
+
+   The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
 **Note**  
 The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\.
 

@@ -82,11 +82,7 @@ mysqldump -h RDS instance endpoint \
     --triggers \
     --databases  database database2 \
     --compress  \
-    --compact | mysql \
-        -h MySQL host \
-        -u master user \
-        -p password \
-        --port 3306
+    --port 3306
 ```
 
 For Windows:
@@ -101,11 +97,7 @@ mysqldump -h RDS instance endpoint ^
     --triggers ^
     --databases  database database2 ^
     --compress  ^
-    --compact | mysql ^
-        -h MySQL host ^
-        -u master user ^
-        -p password ^
-        --port 3306
+    --port 3306
 ```
 
 The following example shows how to run `mysqldump` on a client and write the dump to a file\.

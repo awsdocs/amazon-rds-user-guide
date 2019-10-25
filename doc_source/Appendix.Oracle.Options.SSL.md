@@ -257,7 +257,7 @@ public class OracleSslConnectionTest {
     private static final String DB_SID = "<oracle-sid>";
     private static final String DB_USER = "<user name>";
     private static final String DB_PASSWORD = "<password>";
-    // This key store has only the prod root ca: https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem
+    // This key store has only the prod root ca.
     private static final String KEY_STORE_FILE_PATH = "<file-path-to-keystore>";
     private static final String KEY_STORE_PASS = "<keystore-password>";
  

@@ -38,6 +38,9 @@ The following is the general process for adding the `SPATIAL` option to a DB ins
 
 There is a brief outage while the `SPATIAL` option is added\. After you add the option, you don't need to restart your DB instance\. As soon as the option group is active, Oracle Spatial is available\. 
 
+**Note**  
+During this outage, password verification functions are disabled briefly\. You can also can expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
+
 **To add the `SPATIAL` option to a DB instance**
 
 1. Determine the option group that you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group with the following settings: 

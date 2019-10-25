@@ -61,7 +61,9 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
 **To connect to a DB instance with SSL using the MySQL client**
 
-1. A root certificate that works for all regions can be downloaded [here](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem)\. 
+1. Download a root certificate that works for all AWS Regions\.
+
+   For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL client\. For the \-h parameter, substitute the DNS name for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. 
 

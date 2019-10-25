@@ -2,11 +2,13 @@
 
 You use AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to set up Kerberos authentication for an Oracle DB instance\. To set up Kerberos authentication, complete the following steps:
 + [Step 1: Create a Directory Using the AWS Managed Microsoft AD](#oracle-kerberos-setting-up.create-directory)
-+ [Step 2: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)
-+ [Step 3: Create and Configure Users](#oracle-kerberos-setting-up.create-users)
-+ [Step 4: Configure VPC Peering](#oracle-kerberos-setting-up.vpc-peering)
-+ [Step 5: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)
-+ [Step 6: Create Kerberos Authentication Oracle Logins](#oracle-kerberos-setting-up.create-logins)
++ [Step 2: Create a Forest Trust](#oracle-kerberos-setting-up.create-forest-trust)
++ [Step 3: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)
++ [Step 4: Create and Configure Users](#oracle-kerberos-setting-up.create-users)
++ [Step 5: Configure VPC Peering](#oracle-kerberos-setting-up.vpc-peering)
++ [Step 6: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)
++ [Step 7: Create Kerberos Authentication Oracle Logins](#oracle-kerberos-setting-up.create-logins)
++ [Step 8: Configure an Oracle Client](#oracle-kerberos-setting-up.configure-oracle-client)
 
 ## Step 1: Create a Directory Using the AWS Managed Microsoft AD<a name="oracle-kerberos-setting-up.create-directory"></a>
 
@@ -80,7 +82,13 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 
 ![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
-## Step 2: Create an IAM Role for Use by Amazon RDS<a name="oracle-kerberos-setting-up.CreateIAMRole"></a>
+## Step 2: Create a Forest Trust<a name="oracle-kerberos-setting-up.create-forest-trust"></a>
+
+If you plan to use AWS Managed Microsoft AD only, move on to [Step 3: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)\.
+
+To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a two\-way forest trust\. For more information about setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
+
+## Step 3: Create an IAM Role for Use by Amazon RDS<a name="oracle-kerberos-setting-up.CreateIAMRole"></a>
 
 You must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service for you\. When you create the role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
 
@@ -126,15 +134,15 @@ The role must also have the following IAM role policy\.
 }
 ```
 
-## Step 3: Create and Configure Users<a name="oracle-kerberos-setting-up.create-users"></a>
+## Step 4: Create and Configure Users<a name="oracle-kerberos-setting-up.create-users"></a>
 
  You can create users with the Active Directory Users and Computers tool, which is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. In this case, *users* are individual people or entities that have access to your directory\. 
 
 To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance that is a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a User](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
 
-## Step 4: Configure VPC Peering<a name="oracle-kerberos-setting-up.vpc-peering"></a>
+## Step 5: Configure VPC Peering<a name="oracle-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)\.
+If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 6: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)\.
 
 If the same AWS account owns both VPCs, follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html)\. Specifically, complete the following steps:
 
@@ -158,7 +166,7 @@ If different AWS accounts own the VPCs, complete the following steps:
 
 1. While logged into the AWS Directory Service console using the account for the DB instance, make a note of the **Directory ID** value for the directory\.
 
-## Step 5: Create or Modify an Oracle DB Instance<a name="oracle-kerberos-setting-up.create-modify"></a>
+## Step 6: Create or Modify an Oracle DB Instance<a name="oracle-kerberos-setting-up.create-modify"></a>
 
 Create or modify an Oracle DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 + Create a new Oracle DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
@@ -207,7 +215,7 @@ aws rds modify-db-instance ^
 **Important**  
 If you modify a DB instance to enable Kerberos authentication, reboot the DB instance after making the change\.
 
-## Step 6: Create Kerberos Authentication Oracle Logins<a name="oracle-kerberos-setting-up.create-logins"></a>
+## Step 7: Create Kerberos Authentication Oracle Logins<a name="oracle-kerberos-setting-up.create-logins"></a>
 
  Use the Amazon RDS master user credentials to connect to the Oracle DB instance as you do any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision Oracle logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard Oracle permissions to these logins\. 
 
@@ -219,3 +227,57 @@ GRANT CREATE SESSION TO "KRBUSER@CORP.EXAMPLE.COM";
 ```
 
  Replace `KRBUSER@CORP.EXAMPLE.COM `with the user name and domain name\. Users \(both humans and applications\) from your domain can now connect to the RDS Oracle instance from a domain joined client machine using Kerberos authentication\. 
+
+## Step 8: Configure an Oracle Client<a name="oracle-kerberos-setting-up.configure-oracle-client"></a>
+
+To configure an Oracle client, meet the following requirements:
++ Create a krb5\.conf file \(or equivalent\) to point to the domain\. Configure the Oracle client to use this krb5\.conf file\.
++ Verify that traffic can flow between the client host and AWS Directory Service over DNS port 53 and Kerberos ports \(88 and 464 for managed AWS Directory Service\) over TCP/UDP\.
++ Verify that traffic can flow between the client host and the DB instance over the database port\.
+
+The following is sample krb5\.conf content for AWS Managed Microsoft AD:
+
+```
+[libdefaults]
+ default_realm = EXAMPLE.COM
+ default_ccache_name = /tmp/kerbcache
+[realms]
+ EXAMPLE.COM = {
+  kdc = example.com
+  admin_server = example.com
+ }
+[domain_realm]
+ .example.com = EXAMPLE.COM
+ example.com = EXAMPLE.COM
+```
+
+The following is sample krb5\.conf content for on\-premise Microsoft AD:
+
+```
+[libdefaults]
+ default_realm = EXAMPLE.COM
+ default_ccache_name = /tmp/kerbcache
+[realms]
+ EXAMPLE.COM = {
+  kdc = example.com
+  admin_server = example.com
+ }
+ ONPREM.COM = {
+  kdc = onprem.com
+  admin_server = onprem.com
+ }
+[domain_realm]
+ .example.com = EXAMPLE.COM
+ example.com = EXAMPLE.COM
+ .onprem.com = ONPREM.COM
+ onprem.com = ONPREM.COM
+```
+
+The following is sample sqlnet\.ora content for a SQL\*Plus configuration:
+
+```
+SQLNET.AUTHENTICATION_SERVICES=(KERBEROS5PRE,KERBEROS5)
+SQLNET.KERBEROS5_CONF=path_to_krb5.conf_file
+```
+
+For an example of a SQL Developer configuration, see [Document 1609359\.1](https://support.oracle.com/epmos/faces/DocumentDisplay?id=1609359.1) from Oracle Support\.

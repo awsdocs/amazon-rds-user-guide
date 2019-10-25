@@ -20,7 +20,7 @@ If you're using the AWS CLI, you can specify a custom security group to associat
 If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBInstanceFromDBSnapshot` action\.
 The Amazon RDS console has no option for associating a custom security group while restoring\.
 
-As soon as the restore is complete and your new DB instance is available, you can associate any custom security groups used by the snapshot you restored from\. You apply these changes by using the Amazon RDS console's **Modify** command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\.
+As soon as the restore is complete and your new DB instance is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB instance with the RDS console, the AWS CLI `modify-db-instance` command, or the `ModifyDBInstance` Amazon RDS API operation\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Option Group Considerations<a name="USER_RestoreFromSnapshot.Options"></a>
 

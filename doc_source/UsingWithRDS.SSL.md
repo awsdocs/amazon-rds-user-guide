@@ -54,16 +54,6 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 | US West \(N\. California\) | [rds\-ca\-2019\-us\-west\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-1.pem) | [rds\-ca\-2015\-us\-west\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-1.pem) | 
 | US West \(Oregon\) | [rds\-ca\-2019\-us\-west\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-2.pem) | [rds\-ca\-2015\-us\-west\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-us-west-2.pem) | 
 
-You can download the intermediate certificate for the China \(Beijing\) Region or China \(Ningxia\) Region from the following locations:
-
-[China \(Beijing\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-ca-2019-cn-north-1.pem) \(2019\)
-
-[China \(Beijing\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-north-1-ca-certificate.pem) \(2014\)
-
-[China \(Ningxia\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-ca-2019-cn-northwest-1.pem) \(2019\)
-
-[China \(Ningxia\)](https://s3.cn-north-1.amazonaws.com.cn/rds-downloads/rds-cn-northwest-1-ca-certificate.pem) \(2017\)
-
 ## AWS GovCloud \(US\) Certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>
 
 You can download a root certificate for the AWS GovCloud \(US\) Regions at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-GovCloud\-Root\-CA\-2017\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-GovCloud-Root-CA-2017.pem)\.

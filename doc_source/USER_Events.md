@@ -16,6 +16,9 @@ Amazon RDS groups these events into categories that you can subscribe to so that
 
 Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\. 
 
+**Important**  
+Amazon RDS doesn't guarantee the order of events sent in an event stream\. The event order is subject to change\.
+
 **Note**  
 Amazon RDS event notifications using SMS text messages are currently available for topic Amazon Resource Names \(ARNs\) and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and Receiving SMS Notifications Using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg//SMSMessages.html) in the *Amazon Simple Notification Service Developer Guide*\.
 

@@ -21,7 +21,7 @@ SELECT * FROM dba_java_policy
 
 The following are prerequisites for using Oracle Java:
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.m1\.small, db\.t2\.micro, or db\.t2\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
++ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t2\.micro, db\.t2\.small, db\.t3\.micro, or db\.t3\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
 + If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 
@@ -42,6 +42,9 @@ The following is the general process for adding the `JVM` option to a DB instanc
 1. Associate the option group with the DB instance\.
 
 There is a brief outage while the `JVM` option is added\. After you add the option, you don't need to restart your DB instance\. As soon as the option group is active, Oracle Java is available\. 
+
+**Note**  
+During this outage, password verification functions are disabled briefly\. You can also can expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
 
 **To add the JVM option to a DB instance**
 

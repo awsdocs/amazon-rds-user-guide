@@ -48,9 +48,9 @@ Additional configuration is required to allow your OMS host and your Amazon RDS 
   + If your OMS is hosted on an Amazon Elastic Compute Cloud \(Amazon EC2\) instance in a private VPC, you can set up VPC peering to connect from OMS to Management Agent\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in a Different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\. 
   + If your OMS is hosted on\-premises, you can set up a VPN connection to allow access from OMS to Management Agent\. For more information, see [A DB Instance in a VPC Accessed by a Client Application Through the Internet](USER_VPC.Scenarios.md#USER_VPC.Scenario4) or [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html)\. 
 
-## Management Agent Option Settings<a name="Oracle.Options.OEMAgent.Options"></a>
+## Option Settings for Management Agent<a name="Oracle.Options.OEMAgent.Options"></a>
 
-Amazon RDS supports the following settings for the Management Agent option\. When adding the `OEM_AGENT` option, all of the settings are required\. 
+Amazon RDS supports the following settings for the Management Agent option\.  
 
 **Note**  
 All of the settings are required\.
@@ -102,7 +102,7 @@ If this error is returned, the Management Agent option isn't enabled until the p
 
    For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the **OEM\_AGENT** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Management Agent Option Settings](#Oracle.Options.OEMAgent.Options)\. 
+1. Add the **OEM\_AGENT** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Option Settings for Management Agent](#Oracle.Options.OEMAgent.Options)\. 
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
@@ -132,11 +132,11 @@ aws rds add-option-to-option-group ^
 
 ## Using the Management Agent<a name="Oracle.Options.OEMAgent.Using"></a>
 
-After you enable the Management Agent option, use the following procedure to begin using it\. 
+After you enable the Management Agent option, take the following steps to begin using it\. 
 
 **To use the Management Agent**
 
-1. Unlock and reset the DBSNMP account credential, by running the following code on your target database on your DB instance, and using your master user account\. 
+1. Unlock and reset the DBSNMP account credential\. Do this by running the following code on your target database on your DB instance and using your master user account\. 
 
    ```
    1. ALTER USER dbsnmp IDENTIFIED BY new_password ACCOUNT UNLOCK;
@@ -150,24 +150,24 @@ After you enable the Management Agent option, use the following procedure to beg
 
    1. For **Target Type**, choose **Database Instance**\.
 
-   1. For **Monitoring Agent**, choose the agent with the same identifier as your Amazon RDS DB instance identifier\. 
+   1. For **Monitoring Agent**, choose the agent with the identifier that is the same as your RDS DB instance identifier\. 
 
    1. Choose **Add Manually**\.
 
-   1. Enter the endpoint for the Amazon RDS DB instance, or select it from the from the host name list\. Ensure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
+   1. Enter the endpoint for the Amazon RDS DB instance, or choose it from the host name list\. Make sure that the specified host name matches the endpoint of the Amazon RDS DB instance\.
 
       For information about finding the endpoint for your Amazon RDS DB instance, see [Finding the Endpoint of Your DB Instance](USER_ConnectToOracleInstance.md#USER_Endpoint)\.
 
    1. Specify the following database properties: 
-      + For **Target name**, type a name\. 
-      + For **Database system name**, type a name\. 
-      + For **Monitor username**, type `dbsnmp`\. 
-      + For **Monitor password**, type the password from Step 1\. 
-      + For **Role**, type **normal**\. 
-      + For **Oracle home path**, type **/oracle**\. 
+      + For **Target name**, enter a name\. 
+      + For **Database system name**, enter a name\. 
+      + For **Monitor username**, enter **dbsnmp**\. 
+      + For **Monitor password**, enter the password from step 1\. 
+      + For **Role**, enter **normal**\. 
+      + For **Oracle home path**, enter **/oracle**\. 
       + For **Listener Machine name**, the agent identifier already appears\. 
-      + For **Port**, type the database port\. The RDS default port is 1521\. 
-      + For **Database name**, type the name of your database\. 
+      + For **Port**, enter the database port\. The RDS default port is 1521\. 
+      + For **Database name**, enter the name of your database\. 
 
    1. Choose **Test Connection**\. 
 
@@ -175,16 +175,103 @@ After you enable the Management Agent option, use the following procedure to beg
 
 ## Modifying Management Agent Settings<a name="Oracle.Options.OEMAgent.ModifySettings"></a>
 
-After you enable the Management Agent, you can modify settings for the option\. For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [Management Agent Option Settings](#Oracle.Options.OEMAgent.Options)\. 
+After you enable the Management Agent, you can modify settings for the option\. For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [Option Settings for Management Agent](#Oracle.Options.OEMAgent.Options)\. 
+
+## Performing Database Tasks with the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks"></a>
+
+You can use Amazon RDS procedures to run certain EMCTL commands on the Management Agent\. By running these procedures, you can do the tasks listed following\.
+
+**Topics**
++ [Getting the Management Agent's Status](#Oracle.Options.OEMAgent.DBTasks.GetAgentStatus)
++ [Restarting the Management Agent](#Oracle.Options.OEMAgent.DBTasks.RestartAgent)
++ [Listing the Targets Monitored by the Management Agent](#Oracle.Options.OEMAgent.DBTasks.ListTargets)
++ [Clearing the Management Agent's State](#Oracle.Options.OEMAgent.DBTasks.ClearState)
++ [Having the Management Agent Upload Its OMS](#Oracle.Options.OEMAgent.DBTasks.ForceUploadOMS)
++ [Pinging the OMS](#Oracle.Options.OEMAgent.DBTasks.PingOMS)
++ [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)
+
+### Getting the Management Agent's Status<a name="Oracle.Options.OEMAgent.DBTasks.GetAgentStatus"></a>
+
+To get the Management Agent's status, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent`\. This procedure is equivalent to the `emctl status agent` command\.
+
+The following procedure gets the Management Agent's status,
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent() as TASK_ID from DUAL;                
+```
+
+### Restarting the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.RestartAgent"></a>
+
+To restart the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent`\. This procedure is equivalent to running the `emctl stop agent` and `emctl start agent` commands\.
+
+The following procedure restarts the Management Agent\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.restart_oem_agent() as TASK_ID from DUAL;                
+```
+
+### Listing the Targets Monitored by the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.ListTargets"></a>
+
+To list the targets monitored by the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent`\. This procedure is equivalent to running the `emctl config agent listtargets` command\.
+
+The following procedure lists the targets monitored by the Management Agent\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent() as TASK_ID from DUAL;                
+```
+
+### Clearing the Management Agent's State<a name="Oracle.Options.OEMAgent.DBTasks.ClearState"></a>
+
+To clear the Management Agent's state, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.clearstate_oem_agent`\. This procedure is equivalent to running the `emctl clearstate agent` command\.
+
+The following procedure clears the Management Agent's state\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.clearstate_oem_agent() as TASK_ID from DUAL;                
+```
+
+### Having the Management Agent Upload Its OMS<a name="Oracle.Options.OEMAgent.DBTasks.ForceUploadOMS"></a>
+
+To have the Management Agent upload the Oracle Management Server \(OMS\) associated with it, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.upload_oem_agent`\. This procedure is equivalent to running the `emclt upload agent` command\.
+
+If you run the following procedure, the Management Agent uploads its associated OMS\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.upload_oem_agent() as TASK_ID from DUAL;              
+```
+
+### Pinging the OMS<a name="Oracle.Options.OEMAgent.DBTasks.PingOMS"></a>
+
+To ping the Management Agent's OMS, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.ping_oms_oem_agent`\. This procedure is equivalent to running the `emctl pingOMS` command\.
+
+The following procedure pings the Management Agent's OMS\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.ping_oms_oem_agent() as TASK_ID from DUAL;          
+```
+
+### Viewing the Status of an Ongoing Task<a name="Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus"></a>
+
+You can view the status of an ongoing task in a bdump file\. The bdump files are located in the `/rdsdbdata/log/trace` directory\. Each bdump file name is in the following format\.
+
+```
+dbtask-task-id.log                 
+```
+
+When you want to monitor a task, replace `task-id` with the ID of the task that you want to monitor\.
+
+To view the contents of bdump files, run the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`\. The following query returns the contents of the `dbtask-1546988886389-2444.log` bdump file\. 
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-1546988886389-2444.log'));           
+```
+
+For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 ## Removing the Management Agent Option<a name="Oracle.Options.OEMAgent.Remove"></a>
 
 You can remove the OEM Agent from a DB instance\. After you remove the OEM Agent, you don't need to restart your DB instance\. 
 
 To remove the OEM Agent from a DB instance, do one of the following: 
-+ Remove the OEM Agent option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
++ Remove the OEM Agent option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
 + Modify the DB instance and specify a different option group that doesn't include the OEM Agent option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
-
-## Related Topics<a name="Oracle.Options.OEMAgent.Related"></a>
-+ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

@@ -16,9 +16,12 @@ Scaling storage for Amazon RDS for Microsoft SQL Server DB instances is supporte
 
 To monitor the amount of free storage for your DB instance so you can respond when necessary, we recommend that you create an Amazon CloudWatch alarm\. For more information on setting CloudWatch alarms, see [Using Amazon RDS Event Notification](USER_Events.md)\. 
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **Storage\-optimization**\. The DB instance is fully operational after a storage modification\. However, you can't make further storage modifications either for six hours or while the DB instance status is `storage-optimization`, whichever is longer\. 
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
 
-However, a special case is if you have a SQL Server DB instance and haven't modified the storage configuration since November 2017\. In this case, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the `Storage-optimization` state\. Performance might be degraded during storage optimization\. 
+**Note**  
+You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.
+
+However, a special case is if you have a SQL Server DB instance and haven't modified the storage configuration since November 2017\. In this case, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the `storage-optimization` state\. Performance might be degraded during storage optimization\. 
 
 **Note**  
 You can't reduce the amount of storage for a DB instance after storage has been allocated\.

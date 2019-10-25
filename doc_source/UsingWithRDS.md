@@ -25,6 +25,7 @@ For more information on managing access to Amazon RDS resources and your databas
 **Topics**
 + [Data Protection in Amazon RDS](DataDurability.md)
 + [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)
++ [Kerberos Authentication](kerberos-authentication.md)
 + [Logging and Monitoring in Amazon RDS](Overview.LoggingAndMonitoring.md)
 + [Compliance Validation for Amazon RDS](RDS-compliance.md)
 + [Resilience in Amazon RDS](disaster-recovery-resiliency.md)
