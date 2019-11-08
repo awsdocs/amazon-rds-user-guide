@@ -32,6 +32,7 @@ The following are some limitations to using native backup and restore:
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in full recovery model\.
 + Calling the RDS procedures for native backup and restore within a transaction is not supported\.
 + Native backup files are encrypted with the specified AWS Key Management Service key using the "Encryption\-Only" crypto mode\. When you are restoring encrypted backup files, be aware that they were encrypted with the "Encryption\-Only" crypto mode\.
++ You can't restore a database that contains a FILESTREAM filegroup\.
 
 If your database can be offline while the backup file is created, copied, and restored, we recommend that you use native backup and restore to migrate it to RDS\. If your on\-premises database can't be offline, we recommend that you use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [ What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 

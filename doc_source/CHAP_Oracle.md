@@ -1,6 +1,7 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Oracle Database\. You can use the following versions and editions: 
++ Oracle 19c, Version 19\.0\.0\.0
 + Oracle 18c, Version 18\.0\.0\.0
 + Oracle 12c, Version 12\.2\.0\.1
 + Oracle 12c, Version 12\.1\.0\.2
@@ -101,14 +102,14 @@ The following are the DB instance classes supported for Oracle\.
 
 ****  
 
-| Oracle Edition | Version 18\.0\.0\.0 Support | Version 12\.2\.0\.1 Support | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
-| --- | --- | --- | --- | --- | 
-|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
-|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+| Oracle Edition | 19c, 18c, and 12c Version 12\.2\.0\.1 Support | 12c Version 12\.1\.0\.2 Support | 11g Version 11\.2\.0\.4 Support | 
+| --- | --- | --- | --- | 
+|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 
 **Note**  
 We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
@@ -165,11 +166,45 @@ For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.
 **Note**  
 You can't use both SSL and Oracle native network encryption \(NNE\) on the same DB instance\. Before you can use SSL encryption, you must disable any other connection encryption\. 
 
+## Oracle 19c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.19c"></a>
+
+Amazon RDS supports Oracle version 19c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
+
+Oracle 19c version 19\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 19c](https://docs.oracle.com/en/database/oracle/oracle-database/19/index.html) documentation\. For a complete list of features supported by each Oracle 19c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+
+### Amazon RDS Parameter Changes for Oracle 19c Version 19\.0\.0\.0<a name="Oracle.Concepts.FeatureSupport.19c.Parameters"></a>
+
+Oracle 19c version 19\.0\.0\.0 includes several new parameters and parameters with new ranges and new default values\.
+
+The following table shows the new Amazon RDS parameters for Oracle 19c version 19\.0\.0\.0\.
+
+
+****  
+
+| Name | Values | Modifiable | Description | 
+| --- | --- | --- | --- | 
+|  [ lob\_signature\_enable](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/lob_signature_enable.html#GUID-62997AB5-1084-4C9A-8258-8CB695C7A1D6)  | TRUE, FALSE \(default\) | Y | Enables or disables the LOB locator signature feature\. | 
+|  [ max\_datapump\_parallel\_per\_job](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/MAX_DATAPUMP_PARALLEL_PER_JOB.html#GUID-33B1F962-B8C3-4DCE-BE68-66FC5D34ECA3)  | 1 to 1024, or AUTO | Y | Specifies the maximum number of parallel processes allowed for each Oracle Data Pump job\. | 
+
+The `compatible` parameter has a new maximum value for Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. The following table shows the new default value\. 
+
+
+****  
+
+| Parameter Name | Oracle 19c Version 19\.0\.0\.0 Maximum Value | Oracle 18c Version 18\.0\.0\.0 Maximum Value | 
+| --- | --- | --- | 
+| [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9) | 19\.0\.0 | 18\.0\.0 | 
+
+The following parameters were removed in Oracle 19c Version 19\.0\.0\.0:
++ exafusion\_enabled
++ max\_connections
++ o7\_dictionary\_access
+
 ## Oracle 18c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
 
 Amazon RDS supports Oracle version 18c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
 
-Oracle 18c version 18\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 18c version 18\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 18c](https://docs.oracle.com/en/database/oracle/oracle-database/18/index.html)\. For a complete list of features supported by each Oracle 12c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/18/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+Oracle 18c version 18\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 18c version 18\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 18c](https://docs.oracle.com/en/database/oracle/oracle-database/18/index.html)\. For a complete list of features supported by each Oracle 18c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/18/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
 
 ### Amazon RDS Parameter Changes for Oracle 18c Version 18\.0\.0\.0<a name="Oracle.Concepts.FeatureSupport.18c.Parameters"></a>
 
@@ -469,7 +504,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Star Query Optimization
 + Streams and Advanced Queuing
 + Summary Management – Materialized View Query Rewrite
-+ Text \(File and URL datastore types are not supported\)
++ Text \(File and URL data store types are not supported\)
 + Total Recall
 + Transparent Data Encryption \(TDE\)
 
@@ -564,6 +599,7 @@ Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to th
 Amazon RDS for Oracle supports Linux kernel huge pages for increased database scalability\. The use of huge pages results in smaller page tables and less CPU time spent on memory management, increasing the performance of large database instances\. For more information, see [Overview of HugePages](https://docs.oracle.com/database/121/UNXAR/appi_vlm.htm#UNXAR400) in the Oracle documentation\. 
 
 You can use huge pages with the following versions and editions of Oracle: 
++ 19\.0\.0\.0, all editions
 + 18\.0\.0\.0, all editions
 + 12\.2\.0\.1, all editions
 + 12\.1\.0\.2, all editions

@@ -16,6 +16,6 @@ If your instance doesn't use Multi\-AZ , you don't need to change any settings b
 **Example: **In the following example, the `rdsadmin.dbo.rds_modify_db_name` stored procedure renames a database from **MOO** to **ZAR**\. This is similar to running the statement `DDL ALTER DATABASE [MOO] MODIFY NAME = [ZAR]`\. 
 
 ```
-EXEC rdsadmin.dbo.rds_modify_db_name N’MOO’, N’ZAR’
+EXEC rdsadmin.dbo.rds_modify_db_name N'MOO', N'ZAR'
 GO
 ```

@@ -2,9 +2,7 @@
 
 With Amazon RDS, you can copy automated or manual DB snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
 
-You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy a snapshot across AWS accounts\. 
-
-Copying an automated snapshot to another AWS account is a two\-step process: You first create a manual snapshot from the automated snapshot, and then you copy the manual snapshot to the other account\. 
+You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy shared snapshots\. 
 
 ## Limitations<a name="USER_CopySnapshot.Limitations"></a>
 
@@ -40,7 +38,7 @@ When you copy a snapshot to an AWS Region that is different from the source snap
 An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
 
 **Important**  
-Copying incremental snapshots across multiple AWS accounts is not supported\. If you set up snapshot copies from one AWS account to another AWS account, all of the copies are full snapshots, even within the same region\.
+For shared snapshots, copying incremental snapshots is not supported\. For shared snapshots, all of the copies are full snapshots, even within the same region\.
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 

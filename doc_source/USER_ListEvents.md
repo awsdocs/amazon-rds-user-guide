@@ -38,7 +38,7 @@ You can view all Amazon RDS instance events for the past 14 days by calling the 
  4.    &MaxRecords=100
  5.    &SignatureMethod=HmacSHA256
  6.    &SignatureVersion=4
- 7.    &Version=2014-09-01
+ 7.    &Version=2014-10-31
  8.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
  9.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140421/us-west-2/rds/aws4_request
 10.    &X-Amz-Date=20140421T194733Z

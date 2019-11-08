@@ -353,6 +353,8 @@ You can use the AWS Management Console to view the differences between two param
 1. In the list, choose the two parameter groups that you want to compare\.
 
 1. For **Parameter group actions**, choose **Compare**\.
+**Note**  
+If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
 
 ## DB Parameter Values<a name="USER_ParamValuesRef"></a>
 
@@ -367,7 +369,7 @@ You can specify the value for a DB parameter as any of the following:
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="w7aac15c71c69b7b4"></a>
+#### Syntax<a name="w15aac15c71c69b7b4"></a>
 
 ```
 {FormulaVariable}

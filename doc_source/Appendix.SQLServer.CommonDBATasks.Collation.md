@@ -35,6 +35,11 @@ Currently, Amazon RDS supports the following server collations:
 |  SQL\_Latin1\_General\_CP850\_BIN2  |  Latin1\-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non\-Unicode Data  | 
 |  SQL\_Latin1\_General\_CP850\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 42 on Code Page 850 for non\-Unicode Data  | 
 
+To choose the collation:
++ If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then choose the collation from the **Collation** menu under **Database options**\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
++ If you're using the AWS CLI, use the `--character-set-name` option with the `create-db-instance` command\. For more information, see [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\.
++ If you're using the Amazon RDS API, use the `CharacterSetName` parameter with the `CreateDBInstance` operation\. For more information, see [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
+
 ## Database\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column"></a>
 
 You can change the default collation at the database, table, or column level by overriding the collation when creating a new database or database object\. For example, if your default server collation is SQL\_Latin1\_General\_CP1\_CI\_AS, you can change it to Mohawk\_100\_CI\_AS for Mohawk collation support\. Even arguments in a query can be type\-cast to use a different collation if necessary\.

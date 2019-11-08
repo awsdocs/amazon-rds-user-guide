@@ -6,6 +6,20 @@ Amazon RDS supports Oracle Enterprise Manager \(OEM\) Management Agent through t
 
 Management Agent is a software component that monitors targets running on hosts and communicates that information to the middle\-tier Oracle Management Service \(OMS\)\. For more information, see [Overview of Oracle Enterprise Manager Cloud Control 12c](http://docs.oracle.com/cd/E24628_01/doc.121/e25353/overview.htm) and [Overview of Oracle Enterprise Manager Cloud Control 13c](http://docs.oracle.com/cd/E63000_01/EMCON/overview.htm#EMCON109) in the Oracle documentation\. 
 
+Following are the supported Oracle versions for each Management Agent version\.
+
+
+****  
+
+| Management Agent Version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
+| --- | --- | --- | --- | --- | --- | 
+|  13\.3\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  13\.2\.0\.0\.v2  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  13\.2\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  13\.1\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  12\.1\.0\.5\.v1  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  12\.1\.0\.4\.v1  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+
 The following are some limitations to using Management Agent: 
 + Administrative tasks such as job execution and database patching, that require host credentials, are not supported\. 
 + Host metrics and the process list are not guaranteed to reflect the actual system state\. 
@@ -18,11 +32,12 @@ The following are some limitations to using Management Agent:
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
 
 The following are prerequisites for using Management Agent: 
-+ An Amazon RDS DB instance running Oracle version 18\.0\.0\.0, 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
++ An Amazon RDS DB instance running Oracle version 19\.0\.0\.0, 18\.0\.0\.0, 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
 + At least 3\.3 GiB of storage space for OEM 13c Release 3\. 
 + At least 3\.3 GiB of storage space for OEM 13c Release 2\. 
 + At least 3 GiB of storage space for OEM 13c Release 1\. 
 + At least 2 GiB of storage space for OEM 12c\. 
++ For Oracle version 19\.0\.0\.0, the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
 + An Oracle Management Service \(OMS\), configured to connect to your Amazon RDS DB instance\. 
 
   For an Amazon RDS DB instance running Oracle version 18\.0\.0\.0 or higher, meet the following requirements:

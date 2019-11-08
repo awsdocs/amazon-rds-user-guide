@@ -260,6 +260,7 @@ Enabling auditing is supported for Oracle DB instances running the following ver
 + 12\.1\.0\.2\.v14 and later 12\.1 versions
 + All 12\.2\.0\.1 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 The `audit_all_sys_aud_table` procedure has the following parameters\.
 

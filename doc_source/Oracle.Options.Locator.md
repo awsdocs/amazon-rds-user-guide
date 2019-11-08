@@ -6,6 +6,7 @@ Amazon RDS supports Oracle Locator through the use of the `LOCATOR` option\. Ora
 If you use Oracle Locator, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Locator for the following editions and versions of Oracle: 
++ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 19\.0\.0\.0, all versions
 + Oracle Standard Edition \(SE2\) or Enterprise Edition, version 18\.0\.0\.0, all versions
 + Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.2\.0\.1, all versions
 + Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.1\.0\.2\.v13 or later
@@ -15,7 +16,7 @@ Amazon RDS supports Oracle Locator for the following editions and versions of Or
 
 The following are prerequisites for using Oracle Locator: 
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of sufficient class\. Oracle Locator is not supported for the db\.m1\.small, db\.t2\.micro, or db\.t2\.small DB instance classes\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
++ Your DB instance must be of sufficient class\. Oracle Locator is not supported for the db\.m1\.small, db\.t2\.micro, db\.t2\.small, db\.t3\.micro, or db\.t3\.small DB instance classes\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
 + If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 

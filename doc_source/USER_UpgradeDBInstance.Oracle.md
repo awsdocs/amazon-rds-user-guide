@@ -43,9 +43,10 @@ Amazon RDS supports the following major version upgrades\.
 
 | Current Version | Upgrade Supported | 
 | --- | --- | 
-|  12\.2\.0\.1  |  18\.0\.0\.0  | 
-|  12\.1\.0\.2  |  18\.0\.0\.0 12\.2\.0\.1  | 
-|  11\.2\.0\.4  |  18\.0\.0\.0 12\.2\.0\.1 12\.1\.0\.2\.v5 and higher 12\.1 versions  | 
+|  18\.0\.0\.0  |  19\.0\.0\.0  | 
+|  12\.2\.0\.1  |  19\.0\.0\.0 18\.0\.0\.0  | 
+|  12\.1\.0\.2  |  19\.0\.0\.0 18\.0\.0\.0 12\.2\.0\.1  | 
+|  11\.2\.0\.4  |  19\.0\.0\.0 18\.0\.0\.0 12\.2\.0\.1 12\.1\.0\.2\.v5 and higher 12\.1 versions  | 
 
 To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\.
 

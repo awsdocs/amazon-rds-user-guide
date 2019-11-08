@@ -36,7 +36,7 @@ The general process for adding the OEM option to a DB instance is the following:
 
 1. Associate the option group with the DB instance\.
 
-When you add the OEM option for an Oracle 18c or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you add the OEM option, you don't need to restart your DB instance\. As soon as the option group is active, the OEM Database is active\. When you add the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
+When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you add the OEM option, you don't need to restart your DB instance\. As soon as the option group is active, the OEM Database is active\. When you add the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
 
 **To add the OEM option to a DB instance**
 
@@ -50,11 +50,11 @@ When you add the OEM option for an Oracle 18c or Oracle 12c DB instance, a brief
 
 1. Add the OEM option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [OEM Database Option Settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
 **Note**  
-If you add the OEM option to an existing option group that is already attached to one or more Oracle 18c or Oracle 12c DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
+If you add the OEM option to an existing option group that is already attached to one or more Oracle 19c, Oracle 18c, or Oracle 12c DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the OEM option for an Oracle 18c or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
 ## Using OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.Using"></a>
 
@@ -86,7 +86,7 @@ For more information about how to modify option settings, see [Modifying an Opti
 
 ## Removing the OEM Database Option<a name="Appendix.Oracle.Options.OEM_DBControl.Remove"></a>
 
-You can remove the OEM option from a DB instance\. When you remove the OEM option for an Oracle 18c or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you remove the OEM option, you don't need to restart your DB instance\. When you remove the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
+You can remove the OEM option from a DB instance\. When you remove the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you remove the OEM option, you don't need to restart your DB instance\. When you remove the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
 
 To remove the OEM option from a DB instance, do one of the following: 
 + Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 

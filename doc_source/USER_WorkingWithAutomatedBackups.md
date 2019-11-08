@@ -252,7 +252,7 @@ For example, suppose that your total allocated storage of running instances is 1
 ### Limitations and Recommendations<a name="USER_WorkingWithAutomatedBackups-Retaining-LimitationsAndRecommendations"></a>
 
 The following limitations apply to retained automated backups:
-+ The maximum number of retained automated backups in one region is 20\. It's not included in the DB instances limit\. You can have 20 running DB instances and an additional 20 retained automated backups at the same time\.
++ The maximum number of retained automated backups in one AWS Region is 40\. It's not included in the DB instances limit\. You can have 40 running DB instances and an additional 40 retained automated backups at the same time\.
 + Retained automated backups don't contain information about parameters or option groups\. 
 + You can restore a deleted instance to a point in time that is within the retention period at the time of delete\. 
 + A retained automated backup can't be modified because it consists of system backups, transaction logs, and the DB instance properties that existed at the time you deleted the source instance\. 

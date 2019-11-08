@@ -48,7 +48,8 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 **Edition**  
  Choose the edition that meets your requirements\.  
 **Directory DNS name**  
- The fully qualified name for the directory, such as **corp\.example\.com**\.   
+The fully qualified name for the directory, such as **corp\.example\.com**\.   
+The fully qualified domain name of the AWS Managed Microsoft AD must not be longer than 61 characters\.  
 **Directory NetBIOS name**  
  An optional short name for the directory, such as `CORP`\.   
 **Directory description**  
@@ -101,7 +102,7 @@ Optionally, you can create policies with the required permissions instead of usi
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect:" "Allow"
+      "Effect:" "Allow",
       "Principal": {
         "Service": [
           "rds.amazonaws.com",

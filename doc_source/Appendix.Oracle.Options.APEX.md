@@ -13,16 +13,16 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 ****  
 
-| APEX Version | Storage Requirements | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
-| --- | --- | --- | --- | --- | --- | 
-|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 18\.1\.v1  |  145 MiB  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  Not Supported  |  Not Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  Not Supported  |  Not Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  Not Supported  |  Not Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  Not Supported  |  Not Supported  |  Not Supported  |  Supported  | 
+| APEX Version | Storage Requirements | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
+| --- | --- | --- | --- | --- | --- | --- | 
+|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 18\.1\.v1  |  145 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
+|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  Not supported  |  Not supported  |  Not supported  |  Not supported  |  Supported  | 
 
 **Note**  
 Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.

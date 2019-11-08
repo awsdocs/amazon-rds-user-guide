@@ -103,7 +103,7 @@ The following example cancels a SQL statement in a session\.
 begin
     rdsadmin.rdsadmin_util.cancel(
         sid    => sid, 
-        serial => serial_number),
+        serial => serial_number,
         sql_id => sql_id);
 end;
 /
@@ -200,7 +200,7 @@ The `grant_sys_object` procedure has the following parameters\.
 | `p_obj_name` | varchar2 | — | Yes |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in uppercase, so we recommend that you try that first\.   | 
 | `p_grantee` | varchar2 | — | Yes |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
 | `p_privilege` | varchar2 | null | Yes | — | 
-| `p_grant_option` | boolean | false | No |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for Oracle versions 11\.2\.0\.4\.v8 and later, 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, and all 18\.0\.0\.0 versions\.   | 
+| `p_grant_option` | boolean | false | No |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for Oracle versions 11\.2\.0\.4\.v8 and later, 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.   | 
 
 The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`\.
 
@@ -302,7 +302,7 @@ You can create a custom password verification function in two ways\. If you want
 
 ### The create\_verify\_function Procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Standard"></a>
 
-The `create_verify_function` procedure is supported for Oracle version 11\.2\.0\.4\.v9 and later, Oracle version 12\.1\.0\.2\.v5 and later, all 12\.2\.0\.1 versions, and all 18\.0\.0\.0 versions\.
+The `create_verify_function` procedure is supported for Oracle version 11\.2\.0\.4\.v9 and later, Oracle version 12\.1\.0\.2\.v5 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure has the following parameters\. 
 
@@ -388,7 +388,7 @@ RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 
 ### The create\_passthrough\_verify\_fcn Procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
 
-The `create_passthrough_verify_fcn` procedure is supported for Oracle version 11\.2\.0\.4\.v11 and later, Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, and all 18\.0\.0\.0 versions\.
+The `create_passthrough_verify_fcn` procedure is supported for Oracle version 11\.2\.0\.4\.v11 and later, Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn`\. The `create_passthrough_verify_fcn` procedure has the following parameters\. 
 

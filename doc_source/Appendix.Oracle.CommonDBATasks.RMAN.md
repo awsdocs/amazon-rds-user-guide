@@ -184,6 +184,7 @@ These procedures are supported for the following Amazon RDS for Oracle DB engine
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 To determine whether block change tracking is enabled for your DB instance, run the following query\.
 
@@ -230,6 +231,7 @@ This procedure is supported for the following Amazon RDS for Oracle DB engine ve
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 The following example deletes the expired archived redo logs from the control file\.
 
@@ -251,6 +253,7 @@ The procedures for backing up archived redo logs are supported for the following
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 **Topics**
 + [Backing Up All Archived Redo Logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All)
@@ -424,6 +427,7 @@ This procedure is supported for the following Amazon RDS for Oracle DB engine ve
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 The following example performs a full backup of the DB instance using the specified values for the parameters\.
 
@@ -464,6 +468,7 @@ This procedure is supported for the following Amazon RDS for Oracle DB engine ve
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 This procedure also uses the following additional parameter\.
 
@@ -521,6 +526,7 @@ This procedure is supported for the following Amazon RDS for Oracle DB engine ve
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 The following example performs a tablespace backup using the specified values for the parameters\.
 

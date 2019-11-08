@@ -193,7 +193,8 @@ You can create an Amazon RDS event notification subscription so you can be notif
 You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you receive all the DB instance events for the specified source\. If you specify a **SourceType** but don't specify a **SourceIdentifier**, you receive notice of the events for that source type for all your Amazon RDS sources\. If you don't specify either the **SourceType** or the **SourceIdentifier**, you are notified of events generated from all Amazon RDS sources belonging to your customer account\.
 
 **Note**  
-Event notifications might take up to five minutes to be delivered\.
+Event notifications might take up to five minutes to be delivered\.  
+Amazon RDS event notification is only available for unencrypted SNS topics\. If you specify an encrypted SNS topic, event notifications aren't sent for the topic\.
 
 ### Console<a name="USER_Events.Subscribing.Console"></a>
 
@@ -295,7 +296,7 @@ https://rds.us-east-1.amazonaws.com/
    &MaxRecords=100
    &SignatureMethod=HmacSHA256
    &SignatureVersion=4
-   &Version=2014-09-01
+   &Version=2014-10-31
    &X-Amz-Algorithm=AWS4-HMAC-SHA256
    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
    &X-Amz-Date=20140428T161907Z
@@ -310,7 +311,7 @@ https://rds.us-east-1.amazonaws.com/
    &SignatureMethod=HmacSHA256
    &SignatureVersion=4
    &SubscriptionName=myfirsteventsubscription
-   &Version=2014-09-01
+   &Version=2014-10-31
    &X-Amz-Algorithm=AWS4-HMAC-SHA256
    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
    &X-Amz-Date=20140428T161907Z

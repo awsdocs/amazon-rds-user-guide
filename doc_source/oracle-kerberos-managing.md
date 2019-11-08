@@ -23,3 +23,22 @@ A request to enable Kerberos authentication can fail because of a network connec
 
 **Note**  
 Only Kerberos authentication with Amazon RDS for Oracle sends traffic to the domain's DNS servers\. All other DNS requests are treated as outbound network access on your DB instances running Oracle\. For more information about outbound network access with Amazon RDS for Oracle, see [Setting Up a Custom DNS Server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\.
+
+## Force\-Rotating Kerberos Keys<a name="oracle-kerberos-managing.rotation"></a>
+
+A secret key is shared between AWS Managed Microsoft AD and Amazon RDS for Oracle DB instance\. This key is rotated automatically every 45 days\. You can use the following Amazon RDS procedure to force the of rotation this key:
+
+```
+SELECT rdsadmin.rdsadmin_kerberos_auth_tasks.rotate_kerberos_keytab AS TASK_ID FROM DUAL;    			
+```
+
+**Note**  
+In a Read Replica configuration, this procedure is available only on the source DB instance and not on the Read Replica\.
+
+You can view the status of an ongoing task in a bdump file\. The bdump files are located in the `/rdsdbdata/log/trace` directory\. Each bdump file name is in the following format\.
+
+```
+dbtask-task-id.log               			
+```
+
+Replace *task\-id* with the identifier of the task that you want to monitor\.

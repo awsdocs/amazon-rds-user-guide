@@ -187,10 +187,10 @@ The following are DB engine considerations for DB instance classes:
 | db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
 | db\.m1 – Previous Generation Standard Instance Classes | 
-| db\.m1\.xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| db\.m1\.large | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| db\.m1\.medium | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| db\.m1\.small | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m1\.large | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m1\.medium | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m1\.small | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
 | db\.z1d\.12xlarge | No | No | No | Yes | No | 
@@ -235,9 +235,9 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m2 – Previous Generation Memory Optimized Instance Classes | 
-| db\.m2\.4xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| db\.m2\.2xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| db\.m2\.xlarge | No | Yes | MySQL 5\.6, 5\.5 | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
+| db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | Yes | No | Yes | Yes | Yes | 
