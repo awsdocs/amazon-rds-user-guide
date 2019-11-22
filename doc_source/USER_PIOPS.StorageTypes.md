@@ -14,7 +14,7 @@ If you need space for additional data, you can scale up the storage of an existi
 **Note**  
 Scaling storage for Amazon RDS for Microsoft SQL Server DB instances is supported only for General Purpose SSD or Provisioned IOPS SSD storage types\.
 
-To monitor the amount of free storage for your DB instance so you can respond when necessary, we recommend that you create an Amazon CloudWatch alarm\. For more information on setting CloudWatch alarms, see [Using Amazon RDS Event Notification](USER_Events.md)\. 
+To monitor the amount of free storage for your DB instance so you can respond when necessary, we recommend that you create an Amazon CloudWatch alarm\. For more information on setting CloudWatch alarms, see [Using CloudWatch Alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html)\.
 
 In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
 
@@ -67,20 +67,23 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 ## Managing Capacity Automatically with Amazon RDS Storage Autoscaling<a name="USER_PIOPS.Autoscaling"></a>
 
-If your workload is cyclical or unpredictable, you can enable storage autoscaling for an Amazon RDS DB instance\. To do so, you can use the Amazon RDS console, the Amazon RDS API, or the AWS CLI\. 
+If your workload is unpredictable, you can enable storage autoscaling for an Amazon RDS DB instance\. To do so, you can use the Amazon RDS console, the Amazon RDS API, or the AWS CLI\. 
 
 For example, you might use this feature for a new mobile gaming application that users are adopting rapidly\. In this case, a rapidly increasing workload might exceed the available database storage\. To avoid having to manually scale up database storage, you can use Amazon RDS storage autoscaling\. 
 
 With storage autoscaling enabled, when Amazon RDS detects that you are running out of free database space it automatically scales up your storage\. Amazon RDS starts a storage modification for an autoscaling\-enabled DB instance when these factors apply:
 + Free available space is less than 10 percent of the allocated storage\.
-+ The low\-storage condition lasts at least five minutes\. 
++ The low\-storage condition lasts at least five minutes\.
 
-The additional storage is in increments of whichever is greater, 5 GiB or 12% of currently allocated storage\. The maximum storage threshold is the limit to which the DB instance can be scaled\. You can't set the maximum storage threshold for autoscaling\-enabled instances to a value greater than the maximum allocated storage\.
+The additional storage is in increments of whichever is greater, 5 GiB or 12% of currently allocated storage\. The maximum storage threshold is the limit to which the DB instance can be autoscaled\. You can't set the maximum storage threshold for autoscaling\-enabled instances to a value greater than the maximum allocated storage\.
+
+For example, SQL Server Standard Edition on db\.m5\.xlarge has a default allocated storage for the instance of 20 GiB \(the minimum\) and a maximum allocated storage of 16,384 GiB\. The default maximum storage threshold for autoscaling is 1,000 GiB\. If you use this default, the instance doesn't autoscale above 1,000 GiB\. This is true even though the maximum allocated storage for the instance is 16,384 GiB\.
 
 **Note**  
+Autoscaling doesn't occur if the maximum storage threshold would be exceeded by the storage increment\.
 If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 
- Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\. 
+Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\.
 
 ### Enabling Storage Autoscaling for a New DB Instance<a name="USER_PIOPS.EnablingAutoscaling"></a>
 
@@ -143,9 +146,9 @@ You can turn storage autoscaling on for an existing Amazon RDS DB instance\. You
 
 1.  When all the changes are as you want them, choose **Continue** and check your modifications\. 
 
-1. Choose **Apply immediately** to apply the changes immediately\. Choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\. Choosing **Apply immediately** can cause an outage in some cases\. For more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\.
+1.  On the confirmation page, review your changes\. If they're correct, choose **Modify DB Instance** to save your changes\. If they aren't correct, choose **Back** to edit your changes or **Cancel** to cancel your changes\.
 
-1.  On the confirmation page, review your changes\. If they're correct, choose **Modify DB Instance** to save your changes\. If they aren't correct, choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
+   Changing the storage autoscaling limit occurs immediately\. This setting ignores the **Apply immediately** setting\.
 
 #### AWS CLI<a name="USER_PIOPS.ModifyingAutoscaling.cli"></a>
 
@@ -183,11 +186,11 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 1.  Clear the **Enable storage autoscaling** check box in the **Storage autoscaling** section\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
-1.  When all the changes are as you want them, choose **Continue** and check the modifications\. 
+1.  When all the changes are as you want them, choose **Continue** and check the modifications\.
 
-1. Choose **Apply immediately** to apply the changes immediately\. Choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\. Choosing **Apply immediately** can cause an outage in some cases; for more information, see [Using the Apply Immediately Parameter](Overview.DBInstance.Modifying.md#USER_ModifyInstance.ApplyImmediately)\. 
+1. On the confirmation page, review your changes\. If they're correct, choose **Modify DB Instance** to save your changes\. If they aren't correct, choose **Back** to edit your changes or **Cancel** to cancel your changes\.
 
-1.  On the confirmation page, review your changes\. If they're correct, choose **Modify DB Instance** to save your changes\. If they aren't correct, choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
+Changing the storage autoscaling limit occurs immediately\. This setting ignores the **Apply immediately** setting\.
 
 #### AWS CLI<a name="USER_PIOPS.DisablingAutoscaling.cli"></a>
 
@@ -208,6 +211,11 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 You can modify the settings for a DB instance that uses Provisioned IOPS SSD storage by using the Amazon RDS console, AWS CLI, or Amazon RDS API\. Specify the storage type, allocated storage, and the amount of Provisioned IOPS that you require\. You can choose from a range between 1,000 IOPS and 100 GiB of storage up to 80,000 IOPS and 64 TiB \(64,000 GiB\) of storage\. The range depends on your database engine and instance type\. 
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
+
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
+
+**Note**  
+You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.
 
 ### Console<a name="User_PIOPS.Increase.con"></a>
 

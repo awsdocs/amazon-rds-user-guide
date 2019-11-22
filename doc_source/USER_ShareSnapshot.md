@@ -20,6 +20,8 @@ The following limitations apply when sharing manual snapshots with other AWS acc
   The following table lists permanent and persistent options and their related DB engines\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
 
+For Oracle DB instances, you can copy shared DB snapshots that have the options `Timezone` or `OLS` \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
+
 ## Sharing an Encrypted Snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
 
 You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. To do this, you must take the following steps:

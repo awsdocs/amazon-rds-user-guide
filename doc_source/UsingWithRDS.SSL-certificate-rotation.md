@@ -16,6 +16,7 @@ Any new RDS DB instances created after January 14, 2020 will use the new certifi
 **Topics**
 + [Updating Your CA Certificate](#UsingWithRDS.SSL-certificate-rotation-updating)
 + [Reverting an Update of a CA Certificate](#UsingWithRDS.SSL-certificate-rotation-reverting)
++ [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)
 
 ## Updating Your CA Certificate<a name="UsingWithRDS.SSL-certificate-rotation-updating"></a>
 
@@ -28,6 +29,15 @@ Complete the following steps to update your CA certificate\.
 1. Update your database applications to use the new SSL/TLS certificate\.
 
    The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
+
+   For information about checking for SSL/TLS connections and updating applications for each DB engine, see the following topics:
+   + [Updating Applications to Connect to MariaDB DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mariadb.md)
+   + [Updating Applications to Connect to Microsoft SQL Server DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-sqlserver.md)
+   + [Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mysql.md)
+   + [Updating Applications to Connect to Oracle DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
+
+   For a sample script that updates a trust store for a Linux operating system, see [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 **Note**  
 The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\.
 
@@ -55,7 +65,9 @@ You can use the AWS Management Console or the AWS CLI to change the CA certifica
 
 1. Choose **Continue** and check the summary of modifications\. 
 
-1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option causes an outage\.
+1. To apply the changes immediately, choose **Apply immediately**\.
+**Important**  
+Choosing this option causes an outage\.
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 **Important**  
@@ -71,7 +83,8 @@ To use the AWS CLI to change the CA from **rds\-ca\-2015** to **rds\-ca\-2019** 
 When you schedule this operation, make sure that you have updated your client\-side trust store beforehand\.
 
 **Example**  
-The following code modifies `mydbinstance` by setting the CA certificate to `rds-ca-2019`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\. Choosing this option causes an outage\.   
+The following code modifies `mydbinstance` by setting the CA certificate to `rds-ca-2019`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\.   
+Using the `--apply-immediately` option causes an outage\.
 For Linux, OS X, or Unix:  
 
 ```
@@ -111,7 +124,9 @@ You can use the AWS Management Console or the AWS CLI to revert to a previous CA
 
 1. Choose **Continue** and check the summary of modifications\. 
 
-1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option causes an outage\.
+1. To apply the changes immediately, choose **Apply immediately**\.
+**Important**  
+Choosing this option causes an outage\.
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 **Important**  
@@ -127,7 +142,8 @@ To revert to a previous CA certificate for a DB instance, call the [modify\-db\-
 When you schedule this operation, make sure that you have updated your client\-side trust store beforehand\.
 
 **Example**  
-The following code modifies `mydbinstance` by setting the CA certificate to `rds-ca-2015`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\. Choosing this option causes an outage\.   
+The following code modifies `mydbinstance` by setting the CA certificate to `rds-ca-2015`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\.   
+Using the `--apply-immediately` option causes an outage\.
 For Linux, OS X, or Unix:  
 
 ```
@@ -143,4 +159,34 @@ aws rds modify-db-instance ^
     --db-instance-identifier mydbinstance ^
     --ca-certificate-identifier rds-ca-2015 ^
     --no-apply-immediately
+```
+
+## Sample Script for Importing Certificates Into Your Trust Store<a name="UsingWithRDS.SSL-certificate-rotation-sample-script"></a>
+
+The following is a sample shell script that imports the certificate bundle into a trust store on a Linux operating system\.
+
+```
+mydir=/tmp/certs
+truststore=${mydir}/rds-truststore.jks
+storepassword=changeit
+
+curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
+split -p "-----BEGIN CERTIFICATE-----" ${mydir}/rds-combined-ca-bundle.pem rds-ca-
+
+for CERT in rds-ca-*; do
+  alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*CN=//; print')
+  echo "Importing $alias"
+  keytool -import -file ${CERT} -alias "${alias}" -storepass ${storepassword} -keystore ${truststore} -noprompt
+  rm $CERT
+done
+
+rm ${mydir}/rds-combined-ca-bundle.pem
+
+echo "Trust store content is: "
+
+keytool -list -v -keystore "$truststore" -storepass ${storepassword} | grep Alias | cut -d " " -f3- | while read alias 
+do
+   expiry=`keytool -list -v -keystore "$truststore" -storepass ${storepassword} -alias "${alias}" | grep Valid | perl -ne 'if(/until: (.*?)\n/) { print "$1\n"; }'`
+   echo " Certificate ${alias} expires in '$expiry'" 
+done
 ```

@@ -14,6 +14,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Common Management Tasks for PostgreSQL on Amazon RDS](#CHAP_PostgreSQL.CommonTasks)
 + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
++ [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
 + [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
 + [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Upgrading a PostgreSQL DB Snapshot](USER_UpgradeDBSnapshot.PostgreSQL.md)
@@ -1708,7 +1709,7 @@ The PostgreSQL autovacuum feature is turned on by default for new PostgreSQL DB 
 
 The Amazon RDS for PostgreSQL parameter, `rds.pg_stat_ramdisk_size`, can be used to specify the system memory allocated to a RAM disk for storing the PostgreSQL `stats_temp_directory`\. The RAM disk parameter is available for all PostgreSQL versions on Amazon RDS\. 
 
-Under certain workloads, setting this parameter can improve performance and decrease IO requirements\. For more information about the `stats_temp_directory`, see [ the PostgreSQL documentation\.](https://www.postgresql.org/docs/current/static/runtime-config-statistics.html#GUC-STATS-TEMP-DIRECTORY)
+Under certain workloads, setting this parameter can improve performance and decrease IO requirements\. For more information about the `stats_temp_directory`, see [ the PostgreSQL documentation\.](https://www.postgresql.org/docs/current/static/runtime-config-statistics.html#GUC-STATS-TEMP-DIRECTORY)\.
 
 To enable a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdisk_size` parameter to a non\-zero value in the parameter group used by your DB instance\. The parameter value is in MB\. You must reboot the DB instance before the change takes effect\.
 
@@ -1785,6 +1786,8 @@ There are two types of upgrades you can manage for your PostgreSQL DB instance:
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. 
 
+For general information about SSL support and PostgreSQL databases, see [SSL Support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the Client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
+
 **Topics**
 + [Requiring an SSL Connection to a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL.Requiring)
 + [Determining the SSL Connection Status](#PostgreSQL.Concepts.General.SSL.Status)
@@ -1799,11 +1802,15 @@ SSL support is available in all AWS regions for PostgreSQL\. Amazon RDS creates 
 
 1. Import the certificate into your operating system\.
 
-1. Connect to your PostgreSQL DB instance over SSL by appending `sslmode=verify-full` to your connection string\. When you use `sslmode=verify-full`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
+1. Connect to your PostgreSQL DB instance over SSL\.
 
-   Use the `sslrootcert` parameter to reference the certificate, for example, `sslrootcert=rds-ssl-ca-cert.pem`\.
+   When you connect using SSL, your client can choose whether to verify the certificate chain\. If your connection parameters specify `sslmode=verify-ca` or `sslmode=verify-full`, then your client requires the RDS CA certificates to be in their trust store or referenced in the connection URL\. This requirement is to verify the certificate chain that signs your database certificate\.
 
-The following is an example of using the `psql` program to connect to a PostgreSQL DB instance :
+   When a client, such as psql or JDBC, is configured with SSL support, the client first tries to connect to the database with SSL by default\. If the client can't connect with SSL, it reverts to connecting without SSL\. The default `sslmode` mode used is different between libpq\-based clients \(such as psql\) and JDBC\. The libpq\-based clients default to `prefer`, and JDBC clients default to `verify-full`\.
+
+   Use the `sslrootcert` parameter to reference the certificate, for example `sslrootcert=rds-ssl-ca-cert.pem`\.
+
+The following is an example of using psql to connect to a PostgreSQL DB instance\.
 
 ```
 $ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
@@ -1873,3 +1880,5 @@ $ psql postgres -h SOMEHOST.amazonaws.com -p 8192 -U someuser
 psql: FATAL: no pg_hba.conf entry for host "host.ip", user "someuser", database "postgres", SSL off
 $
 ```
+
+For information about the `sslmode` option, see [Database Connection Control Functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.

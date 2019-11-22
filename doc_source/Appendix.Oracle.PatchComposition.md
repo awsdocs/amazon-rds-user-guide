@@ -8,13 +8,14 @@ You can specify any currently supported Oracle version when creating a new DB in
 
 For Amazon RDS for Oracle versions 19\.0\.0\.0, 18\.0\.0\.0, and 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 
-To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0, 18\.0\.0\.0, and 12\.1\.0\.2, see the following table\. 
+To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0, 18\.0\.0\.0, and 12\.2\.0\.1, see the following table\. 
 
 
 ****  
 
 | RU and RUR | Version 19\.0\.0\.0 | Version 18\.0\.0\.0 | Version 12\.2\.0\.1 | 
 | --- | --- | --- | --- | 
+| 2019 October | — | [18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-10.rur-2019-10.r1) | [12\.2\.0\.1\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-10.rur-2019-10.r1) | 
 | 2019 July | [19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2019-07.rur-2019-07.r1) | [18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1) | [12\.2\.0\.1\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-07.rur-2019-07.r1) | 
 | 2019 April | — | — | [12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-04.rur-2019-04.r1) | 
 | 2019 January | — | — | [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) | 
@@ -31,6 +32,7 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2019 October | [12\.1\.0\.2\.v18](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v18) | [11\.2\.0\.4\.v22](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v22) | 
 | 2019 July | [12\.1\.0\.2\.v17](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v17) | [11\.2\.0\.4\.v21](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v21) | 
 | 2019 April | [12\.1\.0\.2\.v16](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v16) | [11\.2\.0\.4\.v20](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v20) | 
 | 2019 January | [12\.1\.0\.2\.v15](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v15) | [11\.2\.0\.4\.v19](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v19) | 

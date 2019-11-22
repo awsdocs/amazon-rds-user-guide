@@ -13,7 +13,9 @@ Following are the supported Oracle versions for each Management Agent version\.
 
 | Management Agent Version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
 | --- | --- | --- | --- | --- | --- | 
+|  13\.3\.0\.0\.v2  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  13\.3\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  13\.2\.0\.0\.v3  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  13\.2\.0\.0\.v2  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  13\.2\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  13\.1\.0\.0\.v1  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
@@ -27,7 +29,6 @@ The following are some limitations to using Management Agent:
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
 + Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the OEM\_AGENT option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 + Because operating system access on the alert log isn't granted to the user running the OEM\_AGENT on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
-+ TCPS connectivity between the Management Agent and the DB instance isn't supported\.
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
 
@@ -53,6 +54,9 @@ The following are prerequisites for using Management Agent:
 
   Use OMSPatcher to apply patches\.
 + In most cases, you need to configure your VPC to allow connections from OMS to your DB instance\. If you are not familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
++ If you are using Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`, and you want to use TCPS connectivity, follow the instructions in [Configuring Third Party CA Certificates for Communication With Target Databases](https://docs.oracle.com/cd/E73210_01/EMSEC/GUID-8337AD48-1A32-4CD5-84F3-256FAE93D043.htm#EMSEC15996) in the Oracle documentation\. Also, update the JDK on your OMS by following the instructions in the Oracle document with the Oracle Doc ID 2241358\.1\. Doing so ensures that OMS supports all the cipher suites that the database supports\.
+**Note**  
+TCPS connectivity between the Management Agent and the DB instance is only supported for Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`\.
 
 Additional configuration is required to allow your OMS host and your Amazon RDS DB instance to communicate\. You must also do the following: 
 + To connect from the Management Agent to your OMS, if your OMS is behind a firewall, you must add the IP addresses of your DB instances to your OMS\. 
@@ -75,7 +79,7 @@ All of the settings are required\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) |  13\.3\.0\.0\.v1 13\.2\.0\.0\.v2 13\.2\.0\.0\.v1 13\.1\.0\.0\.v1 12\.1\.0\.5\.v1 12\.1\.0\.4\.v1  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
+| **Version** \(`AGENT_VERSION`\) |  13\.3\.0\.0\.v2 13\.3\.0\.0\.v1 13\.2\.0\.0\.v3 13\.2\.0\.0\.v2 13\.2\.0\.0\.v1 13\.1\.0\.0\.v1 12\.1\.0\.5\.v1 12\.1\.0\.4\.v1  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
 | **Port** \(`AGENT_PORT`\) | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
 | **Security Groups** | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
 | **OMS\_HOST** |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 

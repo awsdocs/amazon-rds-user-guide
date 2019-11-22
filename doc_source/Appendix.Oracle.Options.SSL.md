@@ -20,7 +20,7 @@ You cannot use both SSL and Oracle native network encryption \(NNE\) on the same
 
 ## TLS Versions for the Oracle SSL Option<a name="Appendix.Oracle.Options.SSL.TLS"></a>
 
-Amazon RDS for Oracle supports Transport Layer Security \(TLS\) versions 1\.0 and 1\.2\. To use the Oracle SSL option, you must use the `SQLNET.SSL_VERSION` option setting\. Following are the allowed values for this option setting:
+Amazon RDS for Oracle supports Transport Layer Security \(TLS\) versions 1\.0 and 1\.2\. To use the Oracle SSL option, use the `SQLNET.SSL_VERSION` option setting\. The following values are allowed for this option setting:
 + `"1.0"` – Clients can connect to the DB instance using TLS 1\.0 only\.
 + `"1.2"` – Clients can connect to the DB instance using TLS 1\.2 only\.
 + `"1.2 or 1.0"` – Clients can connect to the DB instance using either TLS 1\.2 or 1\.0\.
@@ -34,13 +34,36 @@ The following table shows the TLS option settings that are supported for differe
 
 ****  
 
-| Oracle Engine Version | SQLNET\.SSL\_VERSION="1\.0" | SQLNET\.SSL\_VERSION="1\.2" | SQLNET\.SSL\_VERSION="1\.2 or 1\.0" | 
+| Oracle Engine Version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
+| --- | --- | --- | --- | 
+|  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
+|  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
+|  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
+|  11\.2\.0\.4 \(Oracle EE\)  |  Supported  |  Supported for 11\.2\.0\.4\.v8 and later  |  Supported for 11\.2\.0\.4\.v8 and later  | 
+|  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
+|  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
+
+## Cipher Suites for the Oracle SSL Option<a name="Appendix.Oracle.Options.SSL.CipherSuites"></a>
+
+Amazon RDS for Oracle supports multiple SSL cipher suites\. By default, the Oracle SSL option is configured to use the `SSL_RSA_WITH_AES_256_CBC_SHA` cipher suite\. To specify a different cipher suite to use over SSL connections, use the `SQLNET.CIPHER_SUITE` option setting\. Following are the allowed values for this option setting:
++ `"SSL_RSA_WITH_AES_256_CBC_SHA"` – The default setting, which is compatible with TLS 1\.0 and TLS 1\.2
++ `"SSL_RSA_WITH_AES_256_CBC_SHA256"` – Only compatible with TLS 1\.2
++ `"SSL_RSA_WITH_AES_256_GCM_SHA384"` – Only compatible with TLS 1\.2
+
+For existing Oracle SSL options, `SQLNET.CIPHER_SUITE` is set to `"SSL_RSA_WITH_AES_256_CBC_SHA"` automatically\. You can change the setting if necessary\.
+
+The following table shows the cipher suite option settings that are supported for different Oracle engine versions and editions\.
+
+
+****  
+
+| Oracle Engine Version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
 | --- | --- | --- | --- | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  11\.2\.0\.4 \(Oracle EE\)  |  Supported  |  Supported for 11\.2\.0\.4\.v8 and higher  |  Supported for 11\.2\.0\.4\.v8 and higher  | 
+|  11\.2\.0\.4 \(Oracle EE\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
@@ -139,7 +162,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
    prompt>mkdir $ORACLE_HOME/ssl_wallet 
    ```
 
-1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
+1. Download the root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
 
    For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
@@ -171,7 +194,7 @@ You can set `SSL_VERSION` to a higher value if your DB instance supports it\.
    prompt>orapki wallet create -wallet $ORACLE_HOME/ssl_wallet -auto_login_only   
    
    prompt>orapki wallet add -wallet $ORACLE_HOME/ssl_wallet -trusted_cert -cert
-         $ORACLE_HOME/ssl_wallet/rds-ca-2015-root.pem -auto_login_only
+         $ORACLE_HOME/ssl_wallet/rds-ca-2019-root.pem -auto_login_only
    ```
 
    Replace the file name with the one you downloaded\.
@@ -219,14 +242,14 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 
 **To trust the Amazon RDS root CA certificate**
 
-1. Download the root certificate that works for all regions and put the file in the ssl\_wallet directory\.
+1. Download the root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
 
    For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 1.  Convert the certificate to \.der format using the following command\.
 
    ```
-   openssl x509 -outform der -in rds-ca-2015-root.pem -out rds-ca-2015-root.der                    
+   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                    
    ```
 
    Replace the file name with the one you downloaded\.
@@ -234,7 +257,7 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 1.  Import the certificate into the keystore using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2015-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
    ```
 
 1. Confirm that the key store was created successfully\.

@@ -209,6 +209,13 @@ You can retain automated backups for RDS instances running MySQL, MariaDB, Postg
 
 You can restore or remove retained automated backups using the AWS Management Console, RDS API, and AWS CLI\.
 
+**Topics**
++ [Retention Period](#USER_WorkingWithAutomatedBackups-Retaining-RetentionPeriods)
++ [Restoration](#USER_WorkingWithAutomatedBackups-Retaining-Restoration)
++ [Retention Costs](#USER_WorkingWithAutomatedBackups-Retaining-RetentionCosts)
++ [Limitations and Recommendations](#USER_WorkingWithAutomatedBackups-Retaining-LimitationsAndRecommendations)
++ [Deleting Retained Automated Backups](#USER_WorkingWithAutomatedBackups-Deleting)
+
 ### Retention Period<a name="USER_WorkingWithAutomatedBackups-Retaining-RetentionPeriods"></a>
 
 The system snapshots and transaction logs in a retained automated backup expire the same way that they expire for the source DB instance\. Because there are no new snapshots or logs created for this instance, the retained automated backups eventually expire completely\. Effectively, they live as long their last system snapshot would have done, based on the settings for retention period the source instance had when you deleted it\. Retained automated backups are removed by the system after their last system snapshot expires\.
@@ -256,6 +263,60 @@ The following limitations apply to retained automated backups:
 + Retained automated backups don't contain information about parameters or option groups\. 
 + You can restore a deleted instance to a point in time that is within the retention period at the time of delete\. 
 + A retained automated backup can't be modified because it consists of system backups, transaction logs, and the DB instance properties that existed at the time you deleted the source instance\. 
+
+### Deleting Retained Automated Backups<a name="USER_WorkingWithAutomatedBackups-Deleting"></a>
+
+You can delete retained automated backups when they are no longer needed\.
+
+#### Console<a name="USER_WorkingWithAutomatedBackups-Deleting.CON"></a>
+
+**To delete a retained automated backup**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Automated backups**\.
+
+1. Choose **Retained**\.  
+![\[Retained tab for automated backups\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/retained-automated-backup-delete.png)
+
+1. Choose the retained automated backup that you want to delete\.
+
+1. For **Actions**, choose **Delete**\.
+
+1. On the confirmation page, enter **delete me** and choose **Delete**\. 
+
+#### AWS CLI<a name="USER_WorkingWithAutomatedBackups-Deleting.CLI"></a>
+
+You can delete a retained automated backup by using the AWS CLI command [delete\-db\-instance\-automated\-backup](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backup.html)\. 
+
+The following options are used to delete a retained automated backup: 
++ `--dbi-resource-id` – The resource identifier for the source DB instance\. 
+
+  You can find the resource identifier for the source DB instance of a retained automated backup by running the AWS CLI command [describe\-db\-instance\-automated\-backups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instance-automated-backups.html)\.
+
+**Example**  
+The following example deletes the retained automated backup with source DB instance resource identifier `db-123ABCEXAMPLE`\.   
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds delete-db-instance-automated-backup \
+2.     --dbi-resource-id db-123ABCEXAMPLE
+```
+For Windows:  
+
+```
+1. aws rds delete-db-instance-automated-backup ^
+2.     --dbi-resource-id db-123ABCEXAMPLE
+```
+
+#### RDS API<a name="USER_WorkingWithAutomatedBackups-Deleting.API"></a>
+
+You can delete a retained automated backup by using the Amazon RDS API operation [DeleteDBInstanceAutomatedBackup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html)\. 
+
+The following parameters are used to delete a retained automated backup: 
++ `DbiResourceId` – The resource identifier for the source DB instance\. 
+
+  You can find the resource identifier for the source DB instance of a retained automated backup using the Amazon RDS API operation [DescribeDBInstanceAutomatedBackups](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html)\.
 
 ## Automated Backups with Unsupported MySQL Storage Engines<a name="Overview.BackupDeviceRestrictions"></a>
 

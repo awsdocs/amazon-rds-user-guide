@@ -1,6 +1,8 @@
 # Options for the Microsoft SQL Server Database Engine<a name="Appendix.SQLServer.Options"></a>
 
-In this section, you can find descriptions for options, or additional features, that are available for Amazon RDS instances running the Microsoft SQL Server DB engine\. To enable these options, you add them to an option group, and then associate the option group with your DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
+In this section, you can find descriptions for options that are available for Amazon RDS instances running the Microsoft SQL Server DB engine\. To enable these options, you add them to an option group, and then associate the option group with your DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
+
+If you are looking for optional features that aren't added through RDS option groups—such as SSL, Windows Authentication, and S3 integration, see [Additional Features for Microsoft SQL Server on Amazon RDS](User.SQLServer.AdditionalFeatures.md)\.
 
 Amazon RDS supports the following options for Microsoft SQL Server DB instances\. 
 

@@ -111,7 +111,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | DatabaseConnections |  The number of database connections in use\. Units: Count  | 
 | DiskQueueDepth |  The number of outstanding IOs \(read/write requests\) waiting to access the disk\. Units: Count  | 
 |  `FailedSQLServerAgentJobsCount`  |  The number of failed SQL Server Agent jobs during the last minute\. Unit: Count/Minute  | 
-| FreeableMemory |  The amount of available random access memory\. Units: Bytes  | 
+| FreeableMemory |  The amount of available random access memory\.  For MariaDB, MySQL, Oracle, and PostgreSQL DB instances, this metric reports the value of the `MemAvailable` field of /proc/meminfo\.   Units: Bytes  | 
 | FreeStorageSpace |  The amount of available storage space\. Units: Bytes  | 
 | MaximumUsedTransactionIDs |  The maximum transaction ID that has been used\. Applies to PostgreSQL\. Units: Count  | 
 | NetworkReceiveThroughput |  The incoming \(Receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/Second  | 

@@ -23,10 +23,6 @@ To get a certificate bundle that contains both the intermediate and root certifi
 
 If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.p7b](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.p7b)\. 
 
-**Topics**
-+ [Intermediate Certificates](#UsingWithRDS.SSL.IntermediateCertificates)
-+ [AWS GovCloud \(US\) Certificates](#UsingWithRDS.SSL.GovCloudCertificates)
-
 ## Intermediate Certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
 
 You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL/TLS\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.

@@ -20,6 +20,8 @@ When you stop a DB instance, the DB instance performs a normal shutdown and stop
 
 You can stop a DB instance for up to seven days\. If you don't manually start your DB instance after seven days, your DB instance is automatically started\. 
 
+Stopping a DB instance removes pending actions, except for pending actions for the DB instance's option group or DB parameter group\.
+
 ## Benefits<a name="USER_StopInstance.Benefits"></a>
 
 Stopping and starting a DB instance is faster than creating a DB snapshot, and then restoring the snapshot\. 
@@ -77,5 +79,3 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https:
 
 To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
-
-## <a name="USER_StopInstance.Related"></a>

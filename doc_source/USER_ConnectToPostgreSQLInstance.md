@@ -56,7 +56,7 @@ You can use a local instance of the psql command line utility to connect to a Po
 
 Use one of the following formats to connect to a PostgreSQL DB instance on Amazon RDS\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\.
 
-If this is the first time you are connecting to this instance, your `dbname` will most likely be `postgres`.
+If this is the first time you are connecting to this DB instance, try using the default database name **postgres** for the `--dbname` option\. 
 
 For Unix, use the following format\.
 
@@ -102,4 +102,4 @@ If you can't connect to the DB instance, the most common error is `Could not con
 
 By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default DB security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. For more information about Amazon RDS security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
 
-If you have an error like `FATAL:  database "some-name" does not exist` when connecting, try using `dbname=postgres` as the database name.
+If you receive an error like `FATAL: database some-name does not exist` when connecting, try using the default database name **postgres** for the `--dbname` option\. 

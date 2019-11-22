@@ -18,6 +18,7 @@ This section describes how you can perform common DBA tasks related to databases
 + [Disabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.DisablingAuditing)
 + [Cleaning Up Interrupted Online Index Builds](#Appendix.Oracle.CommonDBATasks.CleanupIndex)
 + [Skipping Corrupt Blocks](#Appendix.Oracle.CommonDBATasks.SkippingCorruptBlocks)
++ [Resizing the Temporary Tablespace in a Read Replica](#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
 ## Changing the Global Name of a Database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
@@ -444,3 +445,47 @@ Complete the following steps to skip corrupt blocks during index and table scans
    exec rdsadmin.rdsadmin_dbms_repair.drop_repair_table;
    exec rdsadmin.rdsadmin_dbms_repair.drop_orphan_keys_table;
    ```
+
+## Resizing the Temporary Tablespace in a Read Replica<a name="Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica"></a>
+
+By default, Oracle tablespaces are created with auto\-extend enabled and no maximum size\. Because of these default settings, tablespaces can grow too large in some cases\. We recommend that you specify an appropriate maximum size on permanent and temporary tablespaces, and that you carefully monitor space usage\. 
+
+To resize the temporary space in a Read Replica for an Oracle DB instance, use either the `rdsadmin.rdsadmin_util.resize_temp_tablespace` or the `rdsadmin.rdsadmin_util.resize_tempfile` Amazon RDS procedure\.
+
+The `resize_temp_tablespace` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `temp_tbs` | varchar2 | — | Yes | The name of the tempoarary tablespace to resize\. | 
+| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+
+The `resize_tempfile` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `file_id` | binary\_integer | — | Yes | The file identifier of the tempoarary tablespace to resize\. | 
+| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+
+The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a Read Replica\.
+
+```
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');        
+```
+
+```
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');        
+```
+
+The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a Read Replica\.
+
+```
+exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');        
+```
+
+For more information about Read Replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.

@@ -5,6 +5,7 @@ With counter metrics, you can customize the Performance Insights dashboard to in
 **Topics**
 + [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
 + [Performance Insights Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
++ [Performance Insights Counters for Amazon RDS for Microsoft SQL Server](#USER_PerfInsights_Counters.SQLServer)
 + [Performance Insights Counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
 + [Performance Insights Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
 
@@ -150,11 +151,43 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_lock\_timeouts | Locks | db\.Locks\.innodb\_lock\_timeouts | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
 | innodb\_row\_lock\_waits | Locks | db\.Locks\.innodb\_row\_lock\_waits | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
 
+## Performance Insights Counters for Amazon RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer"></a>
+
+The following database counters are available with Performance Insights for RDS for Microsoft SQL Server\.
+
+### Native Counters for RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer.Native"></a>
+
+You can find definitions for these native metrics in [Use SQL Server Objects](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/use-sql-server-objects?view=sql-server-2017) in the Microsoft SQL Server documentation\.
+
+
+| Counter | Type | Unit | Metric | 
+| --- | --- | --- | --- | 
+| Forwarded Records | [Access Methods](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-access-methods-object?view=sql-server-2017) | Records per second | db\.Access Methods\.Forwarded Records | 
+| Page Splits | [Access Methods](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-access-methods-object?view=sql-server-2017) | Splits per second | db\.Access Methods\.Page Splits | 
+| Buffer cache hit ratio | [Buffer Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-buffer-manager-object?view=sql-server-2017) | Ratio | db\.Buffer Manager\.Buffer cache hit ratio | 
+| Page life expectancy | [Buffer Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-buffer-manager-object?view=sql-server-2017) | Expectancy in seconds | db\.Buffer Manager\.Page life expectancy | 
+| Page lookups | [Buffer Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-buffer-manager-object?view=sql-server-2017) | Lookups per second | db\.Buffer Manager\.Page lookups | 
+| Page reads | [Buffer Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-buffer-manager-object?view=sql-server-2017) | Reads per second | db\.Buffer Manager\.Page reads | 
+| Page writes | [Buffer Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-buffer-manager-object?view=sql-server-2017) | Writes per second | db\.Buffer Manager\.Page writes | 
+| Active Transactions | [Databases](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object?view=sql-server-2017) | Transactions | db\.Databases\.Active Transactions \(\_Total\) | 
+| Log Bytes Flushed | [Databases](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object?view=sql-server-2017) | Bytes flushed per second | db\.Databases\.Log Bytes Flushed \(\_Total\) | 
+| Log Flush Waits | [Databases](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object?view=sql-server-2017) | Waits per second | db\.Databases\.Log Flush Waits \(\_Total\) | 
+| Log Flushes | [Databases](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object?view=sql-server-2017) | Flushes per second | db\.Databases\.Log Flushes \(\_Total\) | 
+| Write Transactions | [Databases](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object?view=sql-server-2017) | Transactions per second | db\.Databases\.Write Transactions \(\_Total\) | 
+| Processes blocked | [General Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-general-statistics-object?view=sql-server-2017) | Processes blocked | db\.General Statistics\.Processes blocked | 
+| User Connections | [General Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-general-statistics-object?view=sql-server-2017) | Connections | db\.General Statistics\.User Connections | 
+| Latch Waits | [Latches](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-latches-object?view=sql-server-2017) | Waits per second | db\.Latches\.Latch Waits | 
+| Number of Deadlocks | [Locks](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-locks-object?view=sql-server-2017) | Deadlocks per second | db\.Locks\.Number of Deadlocks \(\_Total\) | 
+| Memory Grants Pending | [Memory Manager](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-memory-manager-object?view=sql-server-2017) | Memory grants | db\.Memory Manager\.Memory Grants Pending | 
+| Batch Requests | [SQL Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-sql-statistics-object?view=sql-server-2017) | Requests per second | db\.SQL Statistics\.Batch Requests | 
+| SQL Compilations | [SQL Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-sql-statistics-object?view=sql-server-2017) | Compilations per second | db\.SQL Statistics\.SQL Compilations | 
+| SQL Re\-Compilations | [SQL Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-sql-statistics-object?view=sql-server-2017) | Re\-compilations per second | db\.SQL Statistics\.SQL Re\-Compilations | 
+
 ## Performance Insights Counters for Amazon RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle"></a>
 
-The following database counters are available with Performance Insights for RDS Oracle\.
+The following database counters are available with Performance Insights for RDS for Oracle\.
 
-### Native Counters for RDS Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
+### Native Counters for RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
 
 You can find definitions for these native metrics in [Statistics Descriptions](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/statistics-descriptions-2.html#GUID-2FBC1B7E-9123-41DD-8178-96176260A639) in the Oracle documentation\.
 

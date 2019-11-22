@@ -1,6 +1,7 @@
 # Database Engine: 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.11.2.0.4"></a>
 
 The following versions are available for database engine 11\.2\.0\.4:
++ [Version 11\.2\.0\.4\.v22](#Appendix.Oracle.PatchComposition.11.2.0.4.v22)
 + [Version 11\.2\.0\.4\.v21](#Appendix.Oracle.PatchComposition.11.2.0.4.v21)
 + [Version 11\.2\.0\.4\.v20](#Appendix.Oracle.PatchComposition.11.2.0.4.v20)
 + [Version 11\.2\.0\.4\.v19](#Appendix.Oracle.PatchComposition.11.2.0.4.v19)
@@ -23,6 +24,33 @@ The following versions are available for database engine 11\.2\.0\.4:
 + [Version 11\.2\.0\.4\.v2 \(Deprecated\)](#Appendix.Oracle.PatchComposition.11.2.0.4.v2)
 + [Version 11\.2\.0\.4\.v1](#Appendix.Oracle.PatchComposition.11.2.0.4.v1)
 
+## Version 11\.2\.0\.4\.v22<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v22"></a>
+
+Version 11\.2\.0\.4\.v22 adds support for the following:
++ Patch 29913194: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.191015
++ Patch 30132974: OJVM PATCH SET UPDATE 11\.2\.0\.4\.191015
++ Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
++ Patch 29997959: DSTV34 OJVM \(TZDATA2019B\)
++ Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
++ Patch 19440386: FAILED TO RAISE ORA\-1 FOR PK UPDATE WHEN CONSTRAINT=IMMEDIATE
++ Patch 19277336: INTEGRATED REPLICAT INVALIDATES DEPENDENT PACKAGES RESULTING IN AN ORA\-4068
++ Patch 24286409: MERGE REQUEST ON TOP OF DATABASE PSU 11\.2\.0\.4\.6 FOR BUGS 20647412 21534893
++ Patch 24010393: MERGE REQUEST ON TOP OF DATABASE PSU 11\.2\.0\.4\.6 FOR BUGS 12897813 21281961
++ Patch 19306797: HEARTBEAT REDO IS NOT GENERATED NON\-RAC HOSTS WHEN SUPPLIMENTAL LOGGING ENABLED
++ Patch 19563715: LOGMINER DOES NOT MAKE PROGRESS WHEN 4GB OR MORE MEMORY IS USED IN GOLDENGATE
++ Patch 20425790: LOGMINER PATCHES SHOULD TRANSPARENTLY FUNCTION IN A NON\-PARITIONING ENABLED DB
++ Patch 17031322: 46719: OCIXMLDBREWRITEXML RETURNED BIND VARIABLES ARE NOT WHITESPACE PRESERVING
++ Patch 30303921: MERGE REQUEST ON TOP OF DATABASE PSU 11\.2\.0\.4\.190416 FOR BUGS 29879564 14312810
++ Patch 30293609: MERGE REQUEST ON TOP OF DATABASE PSU 11\.2\.0\.4\.190416 FOR BUGS 29600521 23262847
++ Patch 26744595: LGSB:APPLY ABORTS W/ ORA\-26786 \(ROW\-EXISTS\) COLLISION WITH HCC\(PR\)\-NO HCC\(SB\)
++ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
+
+### Oracle patch 29913194, released October 2019<a name="w15aac30d111c23b6b7"></a>
+
+Bugs fixed:
+
+ 17184721, 21174504, 20169408, 21538558, 16091637, 18092127, 17381384 15979965, 20671094, 16731148, 16314254, 18441944, 13837378, 17835048 17291347, 23105538, 28254374, 13558557, 21656630, 21842740, 17008068 18382302, 17201159, 17853498, 25427662, 21197626, 17246576, 20717359 18356166, 18681862, 18440047, 20569094, 20031873, 16875449, 20387265 19788842, 17296856, 21330264, 14010183, 17648596, 17025461, 18886413 17551063, 24719736, 17258582, 17267114, 21063322, 22507210, 17912217 17889583, 18202441, 17040764, 17478145, 16524926, 25655390, 19358317 22730454, 22148226, 18747196, 26544823, 18641419, 17036973, 18948177 17811789, 16542886, 14285317, 18009564, 17359610, 16618694, 8322815 16832076, 18247991, 16692232, 22507234, 28022101, 17570240, 13871092 24624166, 26631046, 24348685, 19429927, 17848897, 17441661, 14034426 17465741, 20273319, 19207156, 16596890, 17437634, 20506706, 18510194 21343897, 28849751, 18339044, 21453153, 17951233, 21795111, 22321741 18430495, 21787056, 22380919, 20506715, 19692824, 19469538, 17811429 17903598, 19721304, 11786053, 29511611, 18230522, 19554106, 19458377 21281607, 17612828, 6599380, 18029658, 22092979, 19516448, 17040527 22321756, 17811438, 18641461, 18682983, 14657740, 25635149, 21502702 13364795, 19490948, 21387964, 17346671, 17588480, 22351572, 18235390 26474853, 18849970, 17982832, 17889549, 19309466, 16472716, 23008056 20627866, 24908321, 20134113, 25775213, 20596234, 18331850, 18641451 17019356, 20882568, 17344412, 19461270, 21179898, 17546761, 24842886 17231779, 14521849, 18203835, 18203838, 18964939, 18203837, 17313525 22195457, 18139690, 16837842, 14106803, 22296366, 17842825, 22657942 21352646, 16360112, 22594718, 20657441, 22195441, 17389192, 26198926 14565184, 19781326, 17019345, 17205719, 18740837, 18440095, 14764829 14354737, 22195448, 17019086, 13944971, 16571443, 21868720, 17186905 17080436, 18673342, 28501075, 22905130, 17027426, 19972569, 27374796 19972568, 16833845, 19972566, 20144308, 17282229, 19972564, 16870214 16410570, 21629064, 19615136, 21354456, 26039623, 19871910, 17390431 18762750, 23007241, 25248384, 16613964, 18098207, 17957017, 17484762 18471685, 19730508, 18264060, 21538485, 17323222, 17754782, 17600719 18317531, 17852463, 17596908, 17655634, 18166013, 16228604, 20074391 27053456, 24790914, 19972570, 26482376, 20856766, 18090142, 19891090 18996843, 16042673, 19854503, 17835627, 22901797, 20334344, 17393683 20861693, 18000422, 17551709, 26575788, 23315889, 20506699, 19006849 18277454, 18456514, 17258090, 19174430, 20657411, 17174582, 25654936 17242746, 27097854, 16399083, 17824637, 21132297, 17762296, 22465352 22168163, 28612674, 18604692, 17397545, 16450169, 12364061, 20067212 19373893, 18856999, 19211724, 19463893, 19463897, 27351628, 21343775 17853456, 18373438, 18673304, 20004021, 28000269, 26030218, 21668627 16194160, 17477958, 23140259, 16538760, 12982566, 24570598, 20828947 27255377, 18259031, 20296213, 21425496, 28855981, 18293054, 17610798 19699191, 23065323, 17311728, 18135678, 18774543, 23294548, 16785708 10136473, 22551446, 19777862, 24560906, 17786518, 18315328, 25879984 18334586, 12747740, 22250006, 18096714, 19032867, 21641760, 17390160 18899974, 17232014, 20598042, 16354467, 26245237, 26679352, 17484731 18673325, 16422541, 18155762, 19827973, 14015842, 22683225, 17726838 18554871, 23177648, 18051556, 20803583, 18282562, 17922254, 15990359 21972320, 16855292, 16668584, 21343838, 20299015, 29483672, 17446237 18043064, 18093615, 17694209, 23713236, 17288409, 18308268, 20475845 17274537, 13955826, 16934803, 18841764, 17634921, 17501491, 16315398 23725036, 22683212, 17006183, 13829543, 18191164, 26746894, 22809871 17655240, 28819280, 19393542, 18384391, 29633753, 21538567, 17695685 16198143, 21847223, 28199085, 25823754, 17892268, 20142975, 19584068 17165204, 25165496, 27072923, 18604493, 18508861, 21756699, 18554763 16901385, 21532755, 18189036, 17443671, 17385178, 14829250, 17936109 20476175, 20925795, 20509482, 17478514, 27441326, 16850630, 13951456 16595641, 14054676, 15861775, 21142837, 16912439, 17299889, 17297939 23003979, 16833527, 18619917, 17798953, 17630484, 19697993, 17816865 25914276, 18607546, 17571306, 21286665, 16898135, 17341326, 16819962 26910644, 17851160, 17586955, 20558005, 19049453, 21051840, 17587063 16956380, 18328509, 25042823, 14735792, 25423453, 14133975, 29033139 19718981, 18061914, 18522509, 16233738, 17518652, 21051833, 18765602 20294666, 23194294, 20860659, 18272672, 20324049, 18199537, 17332800 13609098, 22502493, 18384537, 14338435, 17945983, 27710072, 16392068 21067387, 17752995, 21097043, 21051862, 16863422, 17237521, 25505382 29483723, 18244962, 19544839, 28357401, 19433930, 24433711, 24717859 17156148, 18973907, 23026585, 17449815, 17877323, 18180390, 17088068 17037130, 20004087, 21422580, 19466309, 11733603, 25505371, 18610915 21051858, 18084625, 29027694, 18674024, 26243698, 21051852, 18091059 18306996, 16306373, 25369547, 19930276, 17787259, 19915271, 18193833 20631274, 20513399, 16344544, 26439748, 25879656, 14692762, 18614015 22782647, 17346091, 18413820, 19297917, 18228645, 17721717, 13960236 18685892, 18436307, 11883252, 19888853, 21756677, 17891943, 19475971 22353199, 16384983, 19121551, 27825893, 25634317, 12816846, 17982555 17761775, 17227073, 13936038, 22243719, 17265217, 25505394, 17071721 16721594, 18262334, 21756661, 17891946, 15913355, 17672719, 17602269 17239687, 17042658, 25555252, 17238511, 21059919, 17811456, 17284817 17752121, 20879889, 28806384, 21380789, 19601762, 17394950, 17011832 28305362, 16579084, 22195465, 16875230, 14602788, 28790634, 18325460 27567477, 30275351, 26569225, 24476265, 24476274, 12611721, 18674465 16903536, 17006570, 19689979, 28076295, 16043574, 18783224, 22836801 14705949, 24662775, 16494615, 21526048, 17392698, 19197175, 16069901 17811447, 29200700, 27870645, 28876684, 17308789, 24835538, 22195477 17865671, 17343514, 19013183, 17325413, 18316692, 16180763, 30275359 17348614, 14368995, 21983325, 17393915, 16285691, 19788303, 19211433 20331945, 17883081, 17705023, 24316947, 17614227, 23571055, 19578350 22195485, 14084247, 24975421, 26078387, 23115139, 13645875, 23328639 16777840, 19727057, 21698350, 14852021, 18744139, 18674047, 17716305 19285025, 18482502, 17622427, 19289642, 27534509, 25947799, 22195492 14458214, 20869721, 21172913, 17767676, 18723434, 25505407, 17786278 19258504, 17082983, 17365043, 21351877, 13498382, 18331812, 16065166 25489607, 16685417, 21566639, 18031668, 22893153, 17551674, 16943711 19272701, 21517440, 25897615, 17649265, 13866822, 18094246, 24528741 17783588, 14245531, 17082359, 18280813, 26007010, 20448824, 23330119 16268425, 19487147, 25600421, 18018515, 17302277, 17215560, 24411921 19271443, 25764020, 14176370, 17016369, 20777150, 16756406, 23330124 22977256, 20441797, 19769489, 28100487, 17545847, 25093656, 18260550 13853126, 17227277, 17551699, 23536835, 30237239, 25957038, 24652769 20725343, 19207117, 9756271, 17495022, 18868646, 17614134, 26667023 17546973, 19680952, 18704244, 26667015, 17050888, 18273830, 18828868 17360606, 16992075, 24563422, 17375354, 12905058, 18362222, 21429602 17254374, 27086138, 28364007, 26667032, 17571039, 17468141, 18436647 17570606, 17235750, 21168487, 17279227, 16220077, 16929165 
+
 ## Version 11\.2\.0\.4\.v21<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v21"></a>
 
 Version 11\.2\.0\.4\.v21 adds support for the following:
@@ -33,7 +61,7 @@ Version 11\.2\.0\.4\.v21 adds support for the following:
 + Patch 30018733: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 29497421, released July 2019<a name="w15aac30d107c23b6b7"></a>
+### Oracle patch 29497421, released July 2019<a name="w15aac30d111c23b8b7"></a>
 
 Bugs fixed:
 
@@ -49,7 +77,7 @@ Version 11\.2\.0\.4\.v20 adds support for the following:
 + Patch 29638593: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 22768427, released April 2019<a name="w15aac30d107c23b8b7"></a>
+### Oracle patch 22768427, released April 2019<a name="w15aac30d111c23c10b7"></a>
 
 Bugs fixed:
 
@@ -64,7 +92,7 @@ Version 11\.2\.0\.4\.v19 adds support for the following:
 + Patch 27015468: DSTv32 for OJVM \(TZDATA2018E\)
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 
-### Oracle patch 28729262, released January 2019<a name="w15aac30d107c23c10b7"></a>
+### Oracle patch 28729262, released January 2019<a name="w15aac30d111c23c12b7"></a>
 
 Bugs fixed:
 
@@ -80,7 +108,7 @@ Version 11\.2\.0\.4\.v18 adds support for the following:
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patches 27659043 and 19692824 are now included in the Database Patch Set Update
 
-### Oracle patch 28204707, released October 2018<a name="w15aac30d107c23c12b7"></a>
+### Oracle patch 28204707, released October 2018<a name="w15aac30d111c23c14b7"></a>
 
 Bugs fixed:
 
@@ -97,7 +125,7 @@ Version 11\.2\.0\.4\.v17 adds support for the following:
 + Patch 27659043: MES Bundle 405
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
 
-### Oracle patch 27734982, released July 2018<a name="w15aac30d107c23c14b7"></a>
+### Oracle patch 27734982, released July 2018<a name="w15aac30d111c23c16b7"></a>
 
 Bugs fixed:
 
@@ -116,7 +144,7 @@ Version 11\.2\.0\.4\.v16 adds support for the following:
 + Adds support for the `DBMS_ADVANCED_REWRITE` package
 + Fixed a bug where `DBA_LOCKS` and associated views available in new DB instances of 11\.2\.0\.4\.v15 were not created in upgrades to 11\.2\.0\.4\.v15\. Views are now created in new and upgraded DB instances of 11\.2\.0\.4\.v16 and later\.
 
-### Oracle patch 27338049, released April 2018<a name="w15aac30d107c23c16b7"></a>
+### Oracle patch 27338049, released April 2018<a name="w15aac30d111c23c18b7"></a>
 
 Bugs fixed:
 
@@ -134,7 +162,7 @@ Version 11\.2\.0\.4\.v15 adds support for the following:
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
 + Adds support for `DBA_LOCKS` and associated views
 
-### Oracle patch 26925576, released January 2018<a name="w15aac30d107c23c18b7"></a>
+### Oracle patch 26925576, released January 2018<a name="w15aac30d111c23c20b7"></a>
 
 Bugs fixed:
 
@@ -148,7 +176,7 @@ Version 11\.2\.0\.4\.v14 adds support for the following:
 + RSA Micro\-Edition Suite Bundle \(patch 26963526\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
 
-### Oracle patch 26392168, released October 2017<a name="w15aac30d107c23c20b7"></a>
+### Oracle patch 26392168, released October 2017<a name="w15aac30d111c23c22b7"></a>
 
 Bugs fixed:
 
@@ -164,7 +192,7 @@ Version 11\.2\.0\.4\.v13 adds support for the following:
 + Adds support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
 + Adds support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
-### Oracle patch 26609445, released July 2017<a name="w15aac30d107c23c22b7"></a>
+### Oracle patch 26609445, released July 2017<a name="w15aac30d111c23c24b7"></a>
 
 Bugs fixed:
 
@@ -180,7 +208,7 @@ Version 11\.2\.0\.4\.v12 adds support for the following:
 + Adds support for the `DBMS_CHANGE_NOTIFICATION` package
 + Adds support for `XSTREAM` packages and views \(may require additional licensing\)
 
-### Oracle patch 24732075, released April 2017<a name="w15aac30d107c23c24b7"></a>
+### Oracle patch 24732075, released April 2017<a name="w15aac30d111c23c26b7"></a>
 
 Bugs fixed:
 
@@ -193,7 +221,7 @@ Version 11\.2\.0\.4\.v11 adds support for the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 
-### Oracle patch 24918033, released January 2017<a name="w15aac30d107c23c26b6"></a>
+### Oracle patch 24918033, released January 2017<a name="w15aac30d111c23c28b6"></a>
 
 Bugs fixed:
 
@@ -206,7 +234,7 @@ Version 11\.2\.0\.4\.v10 adds support for the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w15aac30d107c23c28b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w15aac30d111c23c30b6"></a>
 
 Bugs fixed:
 
@@ -222,7 +250,7 @@ Version 11\.2\.0\.4\.v9 adds support for the following:
 + Added the ability to create custom password verify functions\. For more information, see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w15aac30d107c23c30b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w15aac30d111c23c32b6"></a>
 
 Bugs fixed:
 
@@ -238,7 +266,7 @@ Version 11\.2\.0\.4\.v8 adds support for the following:
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w15aac30d107c23c32b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w15aac30d111c23c34b6"></a>
 
 Bugs fixed:
 
@@ -252,7 +280,7 @@ Version 11\.2\.0\.4\.v7 adds support for the following:
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database 
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w15aac30d107c23c34b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w15aac30d111c23c36b6"></a>
 
 Bugs fixed:
 
@@ -269,7 +297,7 @@ Version 11\.2\.0\.4\.v5 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.8 \(21352635\)
 +  Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w15aac30d107c23c38b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w15aac30d111c23c40b6"></a>
 
 Bugs fixed:
 
@@ -283,7 +311,7 @@ Version 11\.2\.0\.4\.v4 adds support for the following:
 +  Provides access to DBMS\_REPAIR through RDSADMIN\.RDSADMIN\_DBMS\_REPAIR 
 + Grants ALTER DATABASE LINK, ALTER PUBLIC DATABASE LINK, EXEMPT ACCESS POLICY, EXEMPT IDENTITY POLICY, and EXEMPT REDACTION POLICY to master user 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w15aac30d107c23c40b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w15aac30d111c23c42b6"></a>
 
 Bugs fixed:
 
@@ -295,7 +323,7 @@ Version 11\.2\.0\.4\.v3 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.4 \(19121551\)
 + Latest DST file \(DSTv23 – patch 19396455, released Oct 2014\)\. This patch is incorporated by default in new instances only\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w15aac30d107c23c42b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w15aac30d111c23c44b6"></a>
 
 Bugs fixed:
 
@@ -313,7 +341,7 @@ Version 11\.2\.0\.4\.v2 adds support for the following:
 + Installs schema objects to support XA Transactions, allowing transactions to be managed by an external transaction manager 
 + Permits truncation of temporary SYS and SYSTEM objects, allowing tools like LogMiner to function correctly 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w15aac30d107c23c44b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w15aac30d111c23c46b6"></a>
 
 Bugs fixed:
 
@@ -325,7 +353,7 @@ Version 11\.2\.0\.4\.v1 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.1
 + [Creating New Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w15aac30d107c23c46b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w15aac30d111c23c48b6"></a>
 
 Bugs fixed:
 

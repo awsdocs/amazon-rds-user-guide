@@ -1,8 +1,8 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is shown following\. For the full list of supported versions, editions, and RDS engine versions, see [Version and Feature Support on Amazon RDS](#SQLServer.Concepts.General.FeatureSupport)\. 
-+ SQL Server 2017 RTM \(CU13\) 14\.00\.3049\.1, released per [KB4466404](https://support.microsoft.com/en-us/help/4483666/on-demand-hotfix-update-package-for-sql-server-2017-cu13) on January 01, 2019\.
-+ SQL Server 2016 SP2 \(CU3\) 13\.00\.5216\.0, released per [KB4466404](https://support.microsoft.com/en-us/help/4483666/on-demand-hotfix-update-package-for-sql-server-2017-cu13) on September 20, 2018\.
++ SQL Server 2017 RTM CU13 14\.00\.3049\.1, released per [KB4466404](https://support.microsoft.com/en-us/help/4483666/on-demand-hotfix-update-package-for-sql-server-2017-cu13) on January 01, 2019\.
++ SQL Server 2016 SP2 CU8 13\.00\.5426\.0, released per [KB4505830](https://support.microsoft.com/en-us/help/4505830/cumulative-update-8-for-sql-server-2016-sp2) on July 31, 2019\.
 + SQL Server 2014 SP2 CU10 12\.00\.5571\.0, released per [KB4052725](https://support.microsoft.com/en-us/help/2936603/sql-server-2014-build-versions) on January 16, 2018\.
 + SQL Server 2012 SP4 GDR 11\.00\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on January 12, 2017\.
 + SQL Server 2008: It is no longer possible to provision new instances in any region\. Amazon RDS is actively migrating existing instances off this version\. 
@@ -60,6 +60,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   +  Database instance put into incompatible\-restore\. The instance has 76 databases, but after conversion it would only support 75\. 
 + Some ports are reserved for Amazon RDS, and you can't use them when you create a DB instance\.
 + Client connections from IP addresses within the range 169\.254\.0\.0/16 are not permitted\. This is the Automatic Private IP Addressing Range \(APIPA\), which is used for local\-link addressing\.
++ SQL Server Standard Edition will use only a subset of the available processors if the DB instance has more processors than the software limits \(24 cores, 4 sockets, and 128GB RAM\)\. Examples of this are the db\.m5\.24xlarge and db\.r5\.24xlarge instance classes\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\. 
 + The maximum storage size for SQL Server DB instances is the following: 
@@ -93,10 +94,10 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 | SQL Server Edition | 2017 and 2016 Support Range | 2014 and 2012 Support Range | 
 | --- | --- | --- | 
-|  Enterprise Edition |  `db.m4.xlarge`–`db.m4.16xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge`  |  `db.m4.xlarge`–`db.m4.10xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.m5.xlarge`–`db.m5.24xlarge` | 
-|  Standard Edition |  `db.m4.large`–`db.m4.16xlarge` `db.r4.large`–`db.r4.16xlarge` `db.m5.large`–`db.m5.24xlarge`  |  `db.m4.large`–`db.m4.10xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.m5.large`–`db.m5.24xlarge`  | 
-|  Web Edition  |  `db.t2.small`–`db.t2.medium` `db.m4.large`–`db.m4.4xlarge` `db.r4.large`–`db.r4.2xlarge` `db.m5.large`–`db.m5.4xlarge`  |  `db.t2.small`–`db.t2.medium` `db.m4.large`–`db.m4.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
-|  Express Edition  |  `db.t2.micro`–`db.t2.medium`  |  `db.t2.micro`–`db.t2.medium`  | 
+|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge`   |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge`   | 
+|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge`   |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge`   | 
+|  Web Edition  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
+|  Express Edition  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  | 
 
 ## Microsoft SQL Server Security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
 
@@ -113,7 +114,6 @@ The following server\-level roles are not currently available in Amazon RDS:
 + sysadmin
 
 The following server\-level permissions are not available on SQL Server DB instances: 
-+ ADMINISTER BULK OPERATIONS
 + ALTER ANY CREDENTIAL
 + ALTER ANY EVENT NOTIFICATION
 + ALTER ANY EVENT SESSION
@@ -184,17 +184,17 @@ SQL Server 2017 includes many new features, such as the following:
 + GraphDB
 + Resumable index rebuilds
 
-For the full list of SQL Server 2017 features, see [What's New in SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2017)  in the Microsoft documentation\. 
+For the full list of SQL Server 2017 features, see [What's New in SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2017) in the Microsoft documentation\.
 
 For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
 ### Microsoft SQL Server 2016 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2016"></a>
 
 Amazon RDS supports the following versions of SQL Server 2016: 
-+ SQL Server 2016 SP2 \(CU3\) 13\.00\.5216\.0, for all editions and all AWS Regions\.
++ SQL Server 2016, SP2 CU8 13\.00\.5426\.0, for all editions and all AWS Regions
 
-  RDS API `EngineVersion` and CLI `engine-version`: `13.00.5216.0.v1`
-+ SQL Server 2016 SP1 CU7 13\.00\.4466\.4 , for all editions and all AWS Regions\.\. 
+  RDS API `EngineVersion` and CLI `engine-version`: `13.00.5426.0.v1`
++ SQL Server 2016, SP1 CU7 13\.00\.4466\.4, for all editions and all AWS Regions
 
   RDS API `EngineVersion` and CLI `engine-version`: `13.00.4466.4.v1`
 + Version 13\.00\.4451\.0, SP1 CU5, for all editions, and all AWS Regions
@@ -206,6 +206,15 @@ Amazon RDS supports the following versions of SQL Server 2016:
 + Version 13\.00\.2164\.0, RTM CU2, for all editions, and all AWS Regions
 
   RDS API `EngineVersion` and CLI `engine-version`: `13.00.2164.0.v1`
+
+Amazon RDS supports the following features of SQL Server 2016:
++ Always Encrypted
++ JSON Support
++ Operational Analytics
++ Query Store
++ Temporal Tables
+
+For the full list of SQL Server 2016 features, see [What's New in SQL Server 2016](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2016) in the Microsoft documentation\.
 
 ### Microsoft SQL Server 2014 Support on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2014"></a>
 
@@ -315,7 +324,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Stretch database
 + Backing up to Microsoft Azure Blob Storage
 + Buffer pool extension
-+ BULK INSERT and OPENROWSET\(BULK\.\.\.\) features
 + Data Quality Services
 + Database Log Shipping
 + Database Mail
