@@ -258,7 +258,7 @@ This version also includes the following changes:
 
 #### PostgreSQL Version 11\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version114"></a>
 
-This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PosgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and [security fix CVE\-2019\-10164](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-10164)\. 
+This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PosgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and the security fix CVE\-2019\-10164\. 
 
 With this release, the `pg_hint_plan` extension has been updated to version 1\.3\.4\.
 

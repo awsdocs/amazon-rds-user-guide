@@ -4,9 +4,9 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 
 *Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB instance\. However, before you perform a major version upgrade, we recommend that you test the upgrade by following the steps described in [Testing an Upgrade](#USER_UpgradeDBInstance.SQLServer.UpgradeTesting)\. 
 
-In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Alternatively, you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\.
+In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\.
 
-You can confirm whether the minor version upgrade will be automatic by using the `describe-db-engine-versions` AWS CLI command\. For example:
+Amazon RDS on SQL Server doesn't support automatic minor version upgrades\. You can confirm this by using the `describe-db-engine-versions` AWS CLI command\. For example:
 
 ```
 aws rds describe-db-engine-versions --engine sqlserver-se --engine-version 14.00.3049.1.v1

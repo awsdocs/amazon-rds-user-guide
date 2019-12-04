@@ -84,7 +84,7 @@ The following are several examples that use the AWS CLI for Performance Insights
 
 ### Retrieving Counter Metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
 
-The following image shows two counter metrics charts in the AWS Management Console\.
+The following screenshot shows two counter metrics charts in the AWS Management Console\.
 
 ![\[Counter Metrics charts.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-counters-charts.png)
 

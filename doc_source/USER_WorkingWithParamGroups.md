@@ -369,7 +369,7 @@ You can specify the value for a DB parameter as any of the following:
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="w15aac15c71c69b7b4"></a>
+#### Syntax<a name="w31aac15c71c69b7b4"></a>
 
 ```
 {FormulaVariable}

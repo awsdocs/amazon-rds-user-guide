@@ -201,15 +201,15 @@ The following are DB engine considerations for DB instance classes:
 | db\.z1d\.large | No | No | No | Yes | No | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.x1e – Latest Generation Memory Optimized Instance Classes | 
-| db\.x1e\.32xlarge | No | No | No | Yes | No | 
-| db\.x1e\.16xlarge | No | No | No | Yes | No | 
-| db\.x1e\.8xlarge | No | No | No | Yes | No | 
-| db\.x1e\.4xlarge | No | No | No | Yes | No | 
-| db\.x1e\.2xlarge | No | No | No | Yes | No | 
-| db\.x1e\.xlarge | No | No | No | Yes | No | 
+| db\.x1e\.32xlarge | No | Yes | No | Yes | No | 
+| db\.x1e\.16xlarge | No | Yes | No | Yes | No | 
+| db\.x1e\.8xlarge | No | Yes | No | Yes | No | 
+| db\.x1e\.4xlarge | No | Yes | No | Yes | No | 
+| db\.x1e\.2xlarge | No | Yes | No | Yes | No | 
+| db\.x1e\.xlarge | No | Yes | No | Yes | No | 
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
-| db\.x1\.32xlarge | No | No | No | Yes | No | 
-| db\.x1\.16xlarge | No | No | No | Yes | No | 
+| db\.x1\.32xlarge | No | Yes | No | Yes | No | 
+| db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 

@@ -183,12 +183,12 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.m3\.medium | 32 | 16 | 32 | 32 | 32 | 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.12xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.4xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.2xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.large | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.24xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.12xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.4xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.large | 16 | 16 | 16 | 64 | 64 | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -204,12 +204,12 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.r3\.large | 64 | 16 | 64 | 64 | 64 | 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.large | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.medium | 16 |  | 16 | 32 | 32 | 
-| db\.t3\.small | 16 |  | 16 | 32 | 16 | 
-| db\.t3\.micro | 16 |  | 16 | 32 | 16 | 
+| db\.t3\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.large | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.medium | 16 | 16 | 16 | 32 | 32 | 
+| db\.t3\.small | 16 | 16 | 16 | 32 | 16 | 
+| db\.t3\.micro | 16 | 16 | 16 | 32 | 16 | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.t2\.xlarge | 64 | 16 | 64 | 64 | 64 | 

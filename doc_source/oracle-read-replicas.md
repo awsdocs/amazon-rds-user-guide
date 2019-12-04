@@ -38,13 +38,28 @@ The following are limitations for Oracle Read Replicas:
 + Oracle Read Replicas are only available on the Oracle Enterprise Edition \(EE\) engine\.
 + Oracle Read Replicas are available for Oracle version 12\.1\.0\.2\.v10 and higher 12\.1 versions, for all 12\.2 versions, for all 18 versions, and for all 19 versions\.
 + Oracle Read Replicas are only available for DB instances on the EC2\-VPC platform\.
-+ Oracle Read Replicas are only available for DB instances running on DB instance classes with two or more vCPUs\.
++ Oracle Read Replicas are only available for DB instances running on DB instance classes with two or more vCPUs\. A source DB instance can't use the db\.t3\.micro instance class\.
 + Amazon RDS for Oracle doesn't intervene to mitigate high replica lag between a source DB instance and its Read Replicas\. Ensure that the source DB instance and its Read Replicas are sized properly, in terms of compute and storage, to suit their operational load\.
-+ Amazon RDS for Oracle Read Replicas must belong to the same option group as the source database\. Modifications to the source option group or source option group membership propagate to Read Replicas\. These changes are applied to the Read Replicas immediately after they are applied to the source DB instance, regardless of the Read Replica's maintenance window\.
++ An Oracle Read Replica that is in the same AWS Region as its source DB instance must belong to the same option group as the source DB instance\. Modifications to the source option group or source option group membership propagate to Read Replicas\. These changes are applied to the Read Replicas immediately after they are applied to the source DB instance, regardless of the Read Replica's maintenance window\.
 
   For more information about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
-+ You can't create cross\-region Read Replicas\.
-+ Currently, Oracle Read Replicas are not supported in the EU \(Stockholm\) and China \(Ningxia\) regions\.
++ If a DB instance is a source for one or more cross\-region Read Replicas, it retains its redo logs until they are applied on all cross\-region Read Replicas\. The redo logs might result in increased storage consumption\. 
++ When you create an Oracle cross\-region Read Replica, Amazon RDS creates a dedicated option group for it\.
+
+  You can't remove an Oracle cross\-region Read Replica from its dedicated option group\. No other DB instances can use the dedicated option group for an Oracle cross\-region Read Replica\.
+
+  Only the following nonreplicated options can be added to or removed from a dedicated option group:
+  + NATIVE\_NETWORK\_ENCRYPTION
+  + OEM
+  + OEM\_AGENT
+  + S3\_INTEGRATION
+  + SSL
+
+  To add other options to an Oracle cross\-region Read Replica, add them to the source DB instance's option group\. The option is also installed on all of the source DB instance's Read Replicas\. For licensed options, you must ensure that there are sufficient licenses for the Read Replicas\.
+
+  When you promote an Oracle cross\-region Read Replica, the promoted Read Replica behaves the same as other Oracle DB instances, including the management of its options\. You can promote a Read Replica explicitly or implicitly by deleting its source DB instance\.
+
+  For more information about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
 
 ## Troubleshooting an Oracle Read Replica Problem<a name="oracle-read-replicas.troubleshooting"></a>
 

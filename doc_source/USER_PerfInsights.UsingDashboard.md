@@ -6,6 +6,7 @@ The Performance Insights dashboard contains database performance information to 
 + [Opening the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.Opening)
 + [Performance Insights Dashboard Components](#USER_PerfInsights.UsingDashboard.Components)
 + [Analyzing Database Load Using the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad)
++ [Analyzing Statistics for Running Queries](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics)
 + [Viewing More SQL Text in the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.SQLTextSize)
 
 ## Opening the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.Opening"></a>
@@ -23,7 +24,7 @@ To see the Performance Insights dashboard, use the following procedure\.
    For DB instances with Performance Insights enabled, you can also reach the dashboard by choosing the **Sessions** item in the list of DB instances\. Under **Current activity**, the **Sessions** item shows the database load in average active sessions over the last five minutes\. The bar graphically shows the load\. When the bar is empty, the DB instance is idle\. As the load increases, the bar fills with blue\. When the load passes the number of virtual CPUs \(vCPUs\) on the DB instance class, the bar turns red, indicating a potential bottleneck\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0a.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
 
-   The following image shows the dashboard for a DB instance\.  
+   The following screenshot shows the dashboard for a DB instance\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0b.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
 
 By default, the Performance Insights dashboard shows data for the last 60 minutes\. You can modify it to display data for the last 5 minutes, 60 minutes, 5 hours, 24 hours, or 1 week\. You can also show all of the data available\.
@@ -48,7 +49,7 @@ The dashboard is divided into three parts:
 
 ### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 
- The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. You can choose which performance counters to display by selecting the gear icon in the upper\-right corner of the chart\. 
+ The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. Choose which performance counters to display by selecting the gear icon in the upper\-right corner of the chart\. 
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/aurora_perf_insights_counters.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
 
@@ -88,7 +89,7 @@ In the **Top Load Items** table, you can view the following types of identifiers
   For Oracle and SQL Server DB instances, the digest ID is the same as the SQL ID\. The top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
 + **Support Digest ID** – A hash value of the digest ID\. This value is only for referencing a digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual digest IDs and SQL text\.
 
-In the **Top Load Items** table, you can open a top statement to view its IDs\. The following image shows an open top statement\.
+In the **Top Load Items** table, you can open a top statement to view its IDs\. The following screenshot shows an open top statement\.
 
 ![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-open.png)
 
@@ -125,6 +126,53 @@ The first four roll\-up queries in the **SQL** tab of the top load items table c
 The last three roll\-up queries are the major contributors to CPU\. These are the queries to investigate if CPU load is an issue\.
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_7.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+
+## Analyzing Statistics for Running Queries<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics"></a>
+
+In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top Load Items** section\. To view these statistics, view top SQL\. Performance Insights collects statistics only for the most common queries, and these usually match the top queries by load shown in the Performance Insights dashboard\.
+
+**Topics**
++ [Statistics for Amazon RDS for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle)
++ [Analyzing Oracle Metrics for SQL Statements That Are Running](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel)
+
+### Statistics for Amazon RDS for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle"></a>
+
+The following SQL statistics are available for Oracle DB instances\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\.stats\.executions\_per\_sec | Number of executions per second | 
+| db\.sql\.stats\.elapsed\_time\_per\_sec | Average active executions \(AAE\) | 
+| db\.sql\.stats\.rows\_processed\_per\_sec | Rows processed per second | 
+| db\.sql\.stats\.buffer\_gets\_per\_sec | Buffer gets per second | 
+| db\.sql\.stats\.physical\_read\_requests\_per\_sec | Physical reads per second | 
+| db\.sql\.stats\.physical\_write\_requests\_per\_sec | Physical writes per second | 
+| db\.sql\.stats\.total\_sharable\_mem\_per\_sec | Total shareable memory per second \(in bytes\)  | 
+| db\.sql\.stats\.cpu\_time\_per\_sec | CPU time per second \(in ms\) | 
+
+The following metrics provide per call statistics for a SQL statement\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\.stats\.elapsed\_time\_per\_exec | Elapsed time per executions \(in ms\)  | 
+| db\.sql\.stats\.rows\_processed\_per\_exec | Rows processed per execution | 
+| db\.sql\.stats\.buffer\_gets\_per\_exec | Buffer gets per execution | 
+| db\.sql\.stats\.physical\_read\_requests\_per\_exec | Physical reads per execution | 
+| db\.sql\.stats\.physical\_write\_requests\_per\_exec | Physical writes per execution | 
+| db\.sql\.stats\.total\_sharable\_mem\_per\_exec | Total shareable memory per execution \(in bytes\) | 
+| db\.sql\.stats\.cpu\_time\_per\_exec | CPU time per execution \(in ms\) | 
+
+### Analyzing Oracle Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel"></a>
+
+Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab and expanding the query\.
+
+![\[Viewing metrics for running queries.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_sql.png)
+
+Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
+
+![\[Preferences for metrics for running queries for Oracle DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_oracle.png)
 
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
