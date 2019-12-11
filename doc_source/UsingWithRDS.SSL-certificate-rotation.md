@@ -171,7 +171,8 @@ truststore=${mydir}/rds-truststore.jks
 storepassword=changeit
 
 curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
-split -p "-----BEGIN CERTIFICATE-----" ${mydir}/rds-combined-ca-bundle.pem rds-ca-
+csplit -s -f 'rds-ca-' ${mydir}/rds-combined-ca-bundle.pem '/-----BEGIN CERTIFICATE-----/' {*}
+rm rds-ca-00
 
 for CERT in rds-ca-*; do
   alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*CN=//; print')
