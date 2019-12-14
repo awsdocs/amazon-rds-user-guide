@@ -192,7 +192,7 @@ Amazon RDS creates an SSL certificate and installs the certificate on the DB ins
 
 An SSL certificate created by Amazon RDS is the trusted root entity and should work in most cases but might fail if your application does not accept certificate chains\. If your application does not accept certificate chains, you might need to use an intermediate certificate to connect to your region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL\. 
 
-For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. For more information about using SSL with MySQL, see [Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mysql.md)\.
 
 MySQL uses yaSSL for secure connections in the following versions:
 + MySQL version 5\.7\.19 and earlier 5\.7 versions

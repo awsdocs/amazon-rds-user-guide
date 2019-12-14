@@ -174,17 +174,27 @@ For Linux, OS X, or Unix:
 aws rds create-db-instance \
     --db-instance-identifier mydbinstance \
     --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' \
-    --db-instance-class db.m1.small \
-    --engine oracle-se1
+    --db-instance-class db.m5.large \
+    --allocated-storage 20 \
+    --engine oracle-ee \
+    --engine-version 12.1.0.2.v18 \
+    --license-model bring-your-own-license \
+    --master-username myadmin \
+    --master-user-password mypassword
 ```
 For Windows:  
 
 ```
 aws rds create-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' ^
-    --db-instance-class db.m1.small ^
-    --engine oracle-se1
+    --enable-cloudwatch-logs-exports trace alert audit listener ^
+    --db-instance-class db.m5.large ^
+    --allocated-storage 20 ^
+    --engine oracle-ee ^
+    --engine-version 12.1.0.2.v18 ^
+    --license-model bring-your-own-license ^
+    --master-username myadmin ^
+    --master-user-password mypassword
 ```
 
 **Example**  
@@ -201,7 +211,7 @@ For Windows:
 ```
 aws rds modify-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
+    --cloudwatch-logs-export-configuration EnableLogTypes=\"trace\",\"alert\",\"audit\",\"listener\"
 ```
 
 **Example**  
@@ -218,7 +228,7 @@ For Windows:
 ```
 aws rds modify-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --cloudwatch-logs-export-configuration '{"DisableLogTypes":["audit","listener"]}'
+    --cloudwatch-logs-export-configuration DisableLogTypes=\"audit\",\"listener\"
 ```
 
 ### RDS API<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs.API"></a>

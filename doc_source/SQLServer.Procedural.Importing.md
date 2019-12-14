@@ -21,16 +21,18 @@ Using native \.bak files to back up and restore databases is usually the fastest
 ## Limitations and Recommendations<a name="SQLServer.Procedural.Importing.Native.Limitations"></a>
 
 The following are some limitations to using native backup and restore: 
-+ You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
-+ We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.   
-+ Native backups of databases larger than 1 TB are not supported\. 
++ You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\.
++ We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
++ Native backups of databases larger than 1 TB aren't supported\. 
 + You can't restore from more than 10 backup files at the same time\.
 + You can run up to two backup or restore tasks at the same time\.
++ Native log backup isn’t supported\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 
 + You can't do a native backup during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in the full recovery model\.
 + Restoring from differential backups on Multi\-AZ instances isn't supported\.
 + Calling the RDS procedures for native backup and restore within a transaction isn't supported\.
++ Use a symmetric AWS KMS customer master key \(CMK\) to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 + Native backup files are encrypted with the specified AWS KMS key using the "Encryption\-Only" crypto mode\. When you are restoring encrypted backup files, be aware that they were encrypted with the "Encryption\-Only" crypto mode\.
 + You can't restore a database that contains a FILESTREAM file group\.
 
@@ -52,17 +54,17 @@ To set up for native backup and restore, you need three components:
 
    If you already have an IAM role, you can use that\. If you don't have an IAM role, you can create a new one manually\. Alternatively, you can choose to have a new IAM role created for you when you add the `SQLSERVER_BACKUP_RESTORE` option by using the AWS Management Console\. 
 
-   If you want to create a new IAM role manually, take the approach discussed in the next section\. Also, if you want to attach trust and permissions policies to an existing IAM role, take the approach discussed in the next section\. 
+   If you want to create a new IAM role manually, take the approach discussed in the next section\. Also, if you want to attach trust and permissions policies to an existing IAM role, take the approach discussed in the next section\.
 
 1. The `SQLSERVER_BACKUP_RESTORE` option added to an option group on your DB instance\.
 
-   To enable native backup and restore on your DB instance, you add the `SQLSERVER_BACKUP_RESTORE` option to an option group on your DB instance\. For more information and instructions, see [Support for Native Backup and Restore in SQL Server](Appendix.SQLServer.Options.BackupRestore.md)\. 
+   To enable native backup and restore on your DB instance, you add the `SQLSERVER_BACKUP_RESTORE` option to an option group on your DB instance\. For more information and instructions, see [Support for Native Backup and Restore in SQL Server](Appendix.SQLServer.Options.BackupRestore.md)\.
 
 ### Manually Creating an IAM Role for Native Backup and Restore<a name="SQLServer.Procedural.Importing.Native.Enabling.IAM"></a>
 
 If you want to manually create a new IAM role to use with native backup and restore, you can do so\. In this case, you create a role to delegate permissions from the Amazon RDS service to your Amazon S3 bucket\. When you create an IAM role, you attach trust and permissions policies\. The trust policy allows RDS to assume this role\. The permission policy defines the actions this Role can do\. For more information about creating the role, see [ Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\. 
 
-For the native backup and restore feature, use trust and permissions policies similar to the examples in this section\. In following example, we use the service principle name `rds.amazon.aws.com` as an alias for all service accounts\. In the other examples, we specify an Amazon Resource Name \(ARN\) to identify another account, user, or role that we're granting access to in the trust policy\. 
+For the native backup and restore feature, use trust and permissions policies similar to the examples in this section\. In following example, we use the service principle name `rds.amazonaws.com` as an alias for all service accounts\. In the other examples, we specify an Amazon Resource Name \(ARN\) to identify another account, user, or role that we're granting access to in the trust policy\.
 
 **Example Trust Policy for Native Backup and Restore**  
 
@@ -112,7 +114,8 @@ The following example uses an ARN to specify a resource\. For more information o
 ```
 
 **Example Permissions Policy for Native Backup and Restore with Encryption Support**  
-If you want to encrypt your backup files, include an encryption key in your permissions policy\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*  
+If you want to encrypt your backup files, include an encryption key in your permissions policy\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide*\.  
+You must use a symmetric AWS KMS customer master key \(CMK\) to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 
 ```
  1. {
@@ -158,7 +161,9 @@ If you want to encrypt your backup files, include an encryption key in your perm
 
 After you have enabled and configured native backup and restore, you can start using it\. First, you connect to your Microsoft SQL Server database, and then you call an Amazon RDS stored procedure to do the work\. For instructions on connecting to your database, see [Connecting to a DB Instance Running the Microsoft SQL Server Database Engine](USER_ConnectToMicrosoftSQLServerInstance.md)\. 
 
-Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your Amazon S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name.extension`\. Amazon S3 doesn't require an account number or AWS Region in ARNs\. If you also provide an optional AWS KMS encryption key, the format your ARN is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
+Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your Amazon S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name.extension`\. Amazon S3 doesn't require an account number or AWS Region in ARNs\.
+
+If you also provide an optional AWS KMS encryption key, the format for the ARN of the key is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. You must use a symmetric AWS KMS customer master key \(CMK\) to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\. 
 
 For instructions on how to call each stored procedure, see the following topics:
 + [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)
@@ -189,14 +194,14 @@ exec msdb.dbo.rds_backup_database
 
 The following parameters are required:
 + `@source_db_name` – The name of the database to back up\.
-+ `@s3_arn_to_backup_to` – The ARN indicating the Amazon S3 bucket to use for the backup, plus the name of the backup file\. 
++ `@s3_arn_to_backup_to` – The ARN indicating the Amazon S3 bucket to use for the backup, plus the name of the backup file\.
 
   The file can have any extension, but `.bak` is usually used\. 
 
 The following parameters are optional:
-+ `@kms_master_key_arn` – The ARN for the KMS customer master key to use to encrypt the item\.
++ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\. Amazon RDS doesn't support asymmetric CMKs\.
 
-  If you don't specify a KMS key identifier, then Amazon RDS uses the default encryption key for your new DB instance\. AWS KMS creates the default encryption key for your AWS account\. Your AWS account has a different default encryption key for each AWS Region\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
+  If you don't specify a KMS key identifier, then RDS uses the default encryption key\. Your AWS account has a different default encryption key for each AWS Region\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
 + `@overwrite_s3_backup_file` – A value that indicates whether to overwrite an existing backup file\. 
   + `0` – Doesn't overwrite an existing file\. Setting this to 0 returns an error if the file already exists\. This value is the default\.
   + `1` – Overwrites an existing file that has the specified name, even if it isn't a backup file\.
@@ -259,7 +264,7 @@ exec msdb.dbo.rds_restore_database
 
 The following parameters are required:
 + `@restore_db_name` – The name of the database to restore\.
-+ `@s3_arn_to_restore_from` – The ARN indicating the Amazon S3 prefix and names of the backup files used to restore the database\. 
++ `@s3_arn_to_restore_from` – The ARN indicating the Amazon S3 prefix and names of the backup files used to restore the database\.
   + For a single\-file backup, provide the entire file name\.
   + For a multiple\-file backup, provide the prefix that the files have in common, then suffix that with an asterisk \(`*`\)\.
 
@@ -268,7 +273,7 @@ The following parameters are required:
 The following parameter is required for differential restores, but optional for full restores:
 + `@with_norecovery` – The recovery clause to use for the restore operation\.
   + Set it to `0` to restore with RECOVERY\. In this case, the database is online after the restore\.
-  + Set it to `1` to restore with NORECOVERY\. In this case, the database remains in the RESTORING state after restore task completion\. With this approach, you can do later differential restores\.
+  + Set it to `1` to restore with NORECOVERY\. In this case, the database remains in the RESTORING state after restore task completion\. With this approach, you can do later differential restores\. 
 
   For DIFFERENTIAL restores, specify `0` or `1`\. For `FULL` restores, this value defaults to `0`\.
 
@@ -314,7 +319,7 @@ exec msdb.dbo.rds_restore_database
 exec msdb.dbo.rds_restore_database 	
 @restore_db_name='mydatabase', 
 @s3_arn_to_restore_from='arn:aws:s3:::aws_example_bucket/backup1.bak',
-@type='FULL';
+[@type='DIFFERENTIAL|FULL'];
 ```
 
 ```
@@ -579,7 +584,7 @@ Compressing your backup files is supported for the following database editions:
 + Microsoft SQL Server Enterprise Edition 
 + Microsoft SQL Server Standard Edition 
 
-To turn on compression for your backup files, run the following code: 
+To turn on compression for your backup files, run the following code:
 
 ```
 1. exec rdsadmin..rds_set_configuration 'S3 backup compression', 'true'; 
@@ -601,7 +606,7 @@ The following are issues you might encounter when you use native backup and rest
 | Issue | Troubleshooting Suggestions | 
 | --- | --- | 
 |  `Access Denied`   |  The backup or restore process is unable to access the backup file\. This is usually caused by issues like the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)  | 
-|  `BACKUP DATABASE WITH COMPRESSION isn't supported on <edition_name> Edition`   |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\.  For more information, see [Compressing Backup Files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
+|  `BACKUP DATABASE WITH COMPRESSION isn't supported on <edition_name> Edition`   |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\. For more information, see [Compressing Backup Files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
 |  `Key <ARN> does not exist`   |  You attempted to restore an encrypted backup, but didn't provide a valid encryption key\. Check your encryption key and retry\.  For more information, see [Restoring a Database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.   | 
 |  `Please reissue task with correct type and overwrite property`   |  If you attempt to back up your database and provide the name of a file that already exists, but set the overwrite property to false, the save operation fails\. To fix this error, either provide the name of a file that doesn't already exist, or set the overwrite property to true\.  For more information, see [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)\.  It's also possible that you intended to restore your database, but called the `rds_backup_database` stored procedure accidentally\. In that case, call the `rds_restore_database` stored procedure instead\.  For more information, see [Restoring a Database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.  If you intended to restore your database and called the `rds_restore_database` stored procedure, make sure that you provided the name of a valid backup file\.  For more information, see [Using Native Backup and Restore](#SQLServer.Procedural.Importing.Native.Using)\.   | 
 |  `Please specify a bucket that is in the same region as RDS instance`  |  You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. You can use Amazon S3 replication to copy the backup file to the correct AWS Region\.  For more information, see [Cross\-Region Replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the Amazon S3 documentation\.   | 

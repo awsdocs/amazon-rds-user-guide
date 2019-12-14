@@ -15,9 +15,9 @@ Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the f
 + Asia Pacific \(Sydney\)
 + Asia Pacific \(Tokyo\)
 + Canada \(Central\)
-+ EU \(Frankfurt\)
-+ EU \(Ireland\)
-+ EU \(London\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
 + South America \(São Paulo\)
 
 **Topics**

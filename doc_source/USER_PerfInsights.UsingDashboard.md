@@ -190,7 +190,7 @@ Currently, you can only view and download more SQL text with the AWS Management 
 
 **Note**  
 Currently, you can't view, copy, or download more than 500 bytes of SQL text for SQL Server DB instances\.  
-For Amazon RDS for MySQL DB instances, viewing more SQL text is not supported in the EU \(Stockholm\) region\.
+For Amazon RDS for MySQL DB instances, viewing more SQL text is not supported in the Europe \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**
 

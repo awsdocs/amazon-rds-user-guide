@@ -228,7 +228,7 @@ Amazon RDS supports the following versions of SQL Server 2014:
 + Version 12\.00\.5000\.0, SP2, for all editions and all AWS Regions 
 
   RDS API `EngineVersion` and CLI `engine-version`: `12.00.5000.0.v1`
-+ Version 12\.00\.4422\.0, SP1 CU2, for all editions except Enterprise Edition, and all AWS Regions except Canada \(Central\), and EU \(London\) 
++ Version 12\.00\.4422\.0, SP1 CU2, for all editions except Enterprise Edition, and all AWS Regions except Canada \(Central\), and Europe \(London\) 
 
   RDS API `EngineVersion` and CLI `engine-version`: `12.00.4422.0.v1`
 
@@ -250,7 +250,7 @@ Amazon RDS supports the following versions of SQL Server 2012:
 + Version 11\.00\.6020\.0, SP3, for all editions and all AWS Regions 
 
   RDS API `EngineVersion` and CLI `engine-version`: `11.00.6020.0.v1`
-+ Version 11\.00\.5058\.0, SP2, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and EU \(London\) 
++ Version 11\.00\.5058\.0, SP2, for all editions, and all AWS Regions except US East \(Ohio\), Canada \(Central\), and Europe \(London\) 
 
   RDS API `EngineVersion` and CLI `engine-version`: `11.00.5058.0.v1`
 

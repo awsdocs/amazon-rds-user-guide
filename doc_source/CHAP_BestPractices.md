@@ -35,7 +35,9 @@ The following are basic operational guidelines that everyone should follow when 
 
 ## DB Instance RAM Recommendations<a name="CHAP_BestPractices.Performance.RAM"></a>
 
-An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
+An Amazon RDS performance best practice is to allocate enough RAM so that your *working set* resides almost completely in memory\. The working set is the data and indexes that are frequently in use on your instance\. The more you use the DB instance, the more the working set will grow\.
+
+To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
 
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
@@ -54,11 +56,11 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w31aac13c15b4"></a>
+### Viewing Performance Metrics<a name="CHAP_BestPractices.UsingMetrics.ViewingMetrics"></a>
 
- You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
+You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
- In order to troubleshoot performance issues, it’s important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\. 
+To troubleshoot performance issues, it’s important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\.
 
 **To view performance metrics**
 

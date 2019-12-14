@@ -352,6 +352,8 @@ All of the considerations for performing replication within an AWS Region apply 
 + Within an AWS Region, all cross\-region Read Replicas created from the same source DB instance must either be in the same Amazon VPC or be outside of a VPC\. For cross\-region Read Replicas, any of the create Read Replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\. 
 + You can create a cross\-region Read Replica in a VPC from a source DB instance that is in a VPC in another AWS Region\. You can also create a cross\-region Read Replica in a VPC from a source DB instance that is not in a VPC\. You can also create a cross\-region Read Replica that is not in a VPC from a source DB instance that is in a VPC\.
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-region Read Replica instances\. 
++ The Read Replica uses the default DB parameter group for the specified DB engine\.
++ The Read Replica uses the default security group\.
 + For Oracle DB instances, when the source for a cross\-region Read Replica is deleted, the Read Replica is promoted\. For MariaDB, MySQL, and PostgreSQL DB instances, when the source for a cross\-region Read Replica is deleted, the replication status of the Read Replica is set to `terminated`\. However, the Read Replica isn't promoted\.
 
 ### Cross\-Region Replication Costs<a name="USER_ReadRepl.XRgn.Costs"></a>

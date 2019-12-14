@@ -147,9 +147,6 @@ To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli
 
 The following example modifies the` max_connections` and `max_allowed_packet` values in the DB parameter group named *mydbparametergroup*\.
 
-**Note**  
-Amazon RDS does not support passing multiple comma\-delimited parameter values for a single parameter\. 
-
 **Example**  
 For Linux, OS X, or Unix:  
 
@@ -369,7 +366,7 @@ You can specify the value for a DB parameter as any of the following:
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="w31aac15c71c69b7b4"></a>
+#### Syntax<a name="w37aac15c71c69b7b4"></a>
 
 ```
 {FormulaVariable}

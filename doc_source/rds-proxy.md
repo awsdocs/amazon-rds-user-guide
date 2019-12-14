@@ -776,7 +776,7 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
 | This is preview documentation for Amazon RDS Proxy\. It is subject to change\. | 
 
  The following limitations apply to RDS Proxy during the public preview: 
-+   The public preview is available only in these AWS Regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Asia Pacific \(Tokyo\), and EU \(Ireland\)\. 
++   The public preview is available only in these AWS Regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Asia Pacific \(Tokyo\), and Europe \(Ireland\)\. 
 +  You can have up to 20 proxies for each AWS account ID\. 
 +  In an Aurora cluster, all of the connections in the connection pool are handled by the Aurora primary instance\. To perform load balancing for read\-intensive workloads, you still use the reader endpoint directly for the Aurora cluster\. 
 +  Currently, RDS Proxy is only available for the MySQL engine family\. This engine family includes RDS MySQL 5\.6 and 5\.7, and Aurora versions 1 and 2\. Proxy support for PostgreSQL databases isn't available in the public preview\. 

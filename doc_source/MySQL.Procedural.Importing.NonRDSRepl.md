@@ -186,7 +186,7 @@ Be sure to copy sensitive data using a secure network transfer protocol\.
 
    ```
    sudo yum update -y
-   sudo yum install mysql-server -y
+   sudo yum install mysql -y
    ```
 
    For more information, see [Connect to Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon Elastic Compute Cloud User Guide for Linux*\.
