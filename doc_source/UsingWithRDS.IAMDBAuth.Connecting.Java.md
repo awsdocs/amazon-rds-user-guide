@@ -1,6 +1,6 @@
-# Connecting to Your DB Instance Using the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
+# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
-You can connect from the command line to an Amazon RDS DB instance with the AWS SDK for Java as described following\.
+You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Java as described following\.
 
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
@@ -230,15 +230,17 @@ public class CreateRDSAuthTokenManually {
 
 The following code example shows how to generate an authentication token, and then use it to connect to an instance running MySQL\. 
 
-To run this code example, you need the [AWS SDK for Java](aws.amazon.com/sdk-for-java), found on the AWS site\. In addition, you need the following:
+To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/sdk-for-java/), found on the AWS site\. In addition, you need the following:
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.
-+ An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
++ An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
 + Modify the values of the following variables as needed:
   + `RDS_INSTANCE_HOSTNAME` – The host name of the DB instance that you want to access\.
   + `RDS_INSTANCE_PORT` – The port number used for connecting to your PostgreSQL DB instance\.
   + `REGION_NAME` – The AWS Region where the DB instance is running\.
   + `DB_USER` – The database account that you want to access\.
-  + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\. To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
+  + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\.
+
+    To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 

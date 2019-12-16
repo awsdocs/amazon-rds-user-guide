@@ -10,7 +10,10 @@ Each Amazon RDS DB instance has an endpoint, and each endpoint has the DNS name 
 
 You can find the endpoint for a DB instance using the Amazon RDS console or the AWS CLI\.
 
-### AWS Management Console<a name="USER_Endpoint.Console"></a>
+**Note**  
+If you are using Kerberos authentication, see [Connecting to Oracle with Kerberos Authentication](oracle-kerberos-connecting.md)\.
+
+### Console<a name="USER_Endpoint.Console"></a>
 
 **To find the endpoint using the console**
 
@@ -24,10 +27,10 @@ You can find the endpoint for a DB instance using the Amazon RDS console or the 
 
    1. Choose the Oracle DB instance name to display the instance details\. 
 
-   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
 ![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
-### CLI<a name="USER_Endpoint.CLI"></a>
+### AWS CLI<a name="USER_Endpoint.CLI"></a>
 
 To find the endpoint of an Oracle DB instance by using the AWS CLI, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command\. 
 
@@ -73,7 +76,7 @@ To connect to your DB instance, you need its DNS name and port number\. For info
    The completed dialog box should look similar to the following\.  
 ![\[Creating a new connection in Oracle SQL Developer\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle-sqldev-newcon.png)
 
-1. Click **Connect**\.
+1. Choose **Connect**\.
 
 1. You can now start creating your own databases and running queries against your DB instance and databases as usual\. To run a test query against your DB instance, do the following:
 
@@ -123,7 +126,7 @@ The shorter format connection string \(Easy connect or EZCONNECT\), such as `sql
 
 ## Security Group Considerations<a name="USER_ConnectToOracleInstance.Security"></a>
 
-For you to connect to your DB instance, it must be associated with a security group that contains the IP addresses and network configuration that you use to access the DB instance\. You might have associated your DB instance with an appropriate security group when you created it\. If you assigned a default, non\-configured security group when you created the DB instance, the DB instance firewall prevents connections\. 
+For you to connect to your DB instance, it must be associated with a security group that contains the IP addresses and network configuration that you use to access the DB instance\. You might have associated your DB instance with an appropriate security group when you created it\. If you assigned a default, nonconfigured security group when you created the DB instance, the DB instance firewall prevents connections\.
 
 If you need to create a new security group to enable access, the type of security group that you create depends on which Amazon EC2 platform your DB instance is on\. To determine your platform, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the *EC2\-Classic* platform, you create a DB security group; if your DB instance is on the *VPC* platform, you create a VPC security group\. For information about creating a new security group, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\. 
 
@@ -150,7 +153,7 @@ The following are issues you might encounter when you try to connect to your Ora
 | --- | --- | 
 |  Unable to connect to your DB instance\.   |  For a newly created DB instance, the DB instance has a status of **creating** until it is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new DB instance is available\.   | 
 |  Unable to connect to your DB instance\.   |  If you can't send or receive communications over the port that you specified when you created the DB instance, you can't connect to the DB instance\. Check with your network administrator to verify that the port you specified for your DB instance allows inbound and outbound communication\.   | 
-|  Unable to connect to your DB instance\.   |  The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the security group for the DB instance might not match\. The problem is most likely the egress or ingress rules on your firewall\. For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.  To walk through the process of setting up rules for your security group, see [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.   | 
+|  Unable to connect to your DB instance\.   |  The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the security group for the DB instance might not match\. The problem is most likely the inbound or outbound rules on your firewall\. You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\. For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.  To walk through the process of setting up rules for your security group, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.   | 
 |  **Connect failed because target host or object does not exist – Oracle, Error: ORA\-12545 **   |  Make sure that you specified the server name and port number correctly\. For **Server name**, enter the DNS name from the console\.  For information about finding the DNS name and port number for a DB instance, see [Finding the Endpoint of Your DB Instance](#USER_Endpoint)\.  | 
 |  **Invalid username/password; logon denied – Oracle, Error: ORA\-01017**   |  You were able to reach the DB instance, but the connection was refused\. This is usually caused by providing an incorrect user name or password\. Verify the user name and password, and then retry\.   | 
 

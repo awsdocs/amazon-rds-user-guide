@@ -7,7 +7,7 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 + Amazon RDS for MariaDB version 10\.2\.21 and higher 10\.2 versions
 + Amazon RDS for MySQL version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions
 + Amazon RDS for Microsoft SQL Server \(all versions except SQL Server 2008\)
-+ Amazon RDS for PostgreSQL version 10
++ Amazon RDS for PostgreSQL version 10 and 11
 + Amazon RDS for Oracle \(all versions\)
 
 **Note**  
@@ -25,7 +25,7 @@ Performance Insights is on by default in the console create wizard for all DB en
 
 The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response from it\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing that query\. 
 
-By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. Wait events vary by DB engine: 
+By combining `DB Load` with wait event data, you can get a complete picture of the state for an active session\. A *wait event* is a condition that causes the execution of a SQL statement to wait for a specific event to happen before it can continue\. For example, SQL statement execution might wait until a locked resource is unlocked\. Wait events vary by DB engine: 
 + For information about all MariaDB and MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
 + For information about all PostgreSQL wait events, see [PostgreSQL Wait Events](https://www.postgresql.org/docs/10/static/monitoring-stats.html#WAIT-EVENT-TABLE) in the PostgreSQL documentation\.
 + For information about all Oracle wait events, see [ Descriptions of Wait Events](https://docs.oracle.com/database/121/REFRN/GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2.htm#REFRN-GUID-2FDDFAA4-24D0-4B80-A157-A907AF5C68E2) in the Oracle documentation\.

@@ -16,7 +16,7 @@ All Amazon RDS resources can be tagged
 + DB security groups
 + DB subnet groups
 
-For information on managing access to tagged resources with IAM policies, see [Authentication and Access Control](UsingWithRDS.IAM.md)\. 
+For information on managing access to tagged resources with IAM policies, see [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)\. 
 
 ## Overview of Amazon RDS Resource Tags<a name="Overview.Tagging"></a>
 
@@ -24,7 +24,7 @@ An Amazon RDS tag is a name\-value pair that you define and associate with an Am
 
 Use tags to organize your AWS bill to reflect your own cost structure\. To do this, sign up to get your AWS account bill with tag key values included\. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values\. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services\. For more information, see [Cost Allocation and Tagging](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in *About AWS Billing and Cost Management*\.
 
-Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 10 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
+Each Amazon RDS resource has a tag set, which contains all the tags that are assigned to that Amazon RDS resource\. A tag set can contain as many as 50 tags, or it can be empty\. If you add a tag to an Amazon RDS resource that has the same key as an existing tag on resource, the new value overwrites the old value\. 
 
 AWS does not apply any semantic meaning to your tags; tags are interpreted strictly as character strings\. Amazon RDS can set tags on a DB instance or other Amazon RDS resources, depending on the settings that you use when you create the resource\. For example, Amazon RDS might add a tag indicating that a DB instance is for production or for testing\.
 + The tag key is the required name of the tag\. The string value can be from 1 to 128 Unicode characters in length and cannot be prefixed with "aws:" or "rds:"\. The string can contain only the set of Unicode letters, digits, white\-space, '\_', '\.', ':', '/', '=', '\+', '\-', '@' \(Java regex: "^\(\[\\\\p\{L\}\\\\p\{Z\}\\\\p\{N\}\_\.:/=\+\\\\\-\]\*\)$"\)\.
@@ -50,7 +50,7 @@ You can specify that tags are copied to DB snapshots for the following actions:
 + Copying a DB snapshot\.
 
 **Note**  
-If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API action\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. Once you have created your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API action\) you can then add tags as described later in this topic\.
+If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. Once you have created your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API operation\) you can then add tags as described later in this topic\.
 
 ## Console<a name="USER_Tagging.CON"></a>
 
@@ -135,4 +135,4 @@ The following table provides a list of the allowed XML tags and their characteri
 
 
 ****  
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+<a name="user-tag-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)

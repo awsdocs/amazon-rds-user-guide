@@ -1,6 +1,6 @@
 # Connecting to a DB Instance Running the PostgreSQL Database Engine<a name="USER_ConnectToPostgreSQLInstance"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. To list the details of an Amazon RDS DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action\. You need the following information to connect:
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. To list the details of an Amazon RDS DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. You need the following information to connect:
 + The host or host name for the DB instance, for example: 
 
   ```
@@ -16,6 +16,15 @@ Following are two ways to connect to a PostgreSQL DB instance\. The first exampl
 You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance\. 
 
 **To connect to a PostgreSQL DB instance using pgAdmin**
+
+1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
+
+   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+
+   1. Choose the PostgreSQL DB instance name to display its details\. 
+
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Connect to a PostgreSQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-endpoint.png)
 
 1. Install pgAdmin from [http://www\.pgadmin\.org/](http://www.pgadmin.org/)\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\.
 
@@ -46,6 +55,8 @@ You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance
 You can use a local instance of the psql command line utility to connect to a PostgreSQL DB instance\. You need either PostgreSQL or the psql client installed on your client computer\. To connect to your PostgreSQL DB instance using psql, you need to provide host information and access credentials\.
 
 Use one of the following formats to connect to a PostgreSQL DB instance on Amazon RDS\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\.
+
+If this is the first time you are connecting to this DB instance, try using the default database name **postgres** for the `--dbname` option\. 
 
 For Unix, use the following format\.
 
@@ -83,6 +94,12 @@ If you can't connect to the DB instance, the most common error is `Could not con
 + Check that the security group assigned to the DB instance has rules to allow access through any firewall your connection might go through\. For example, if the DB instance was created using the default port of 5432, your company might have firewall rules blocking connections to that port from company devices\.
 
   To fix this failure, modify the DB instance to use a different port\. Also, make sure that the security group applied to the DB instance allows connections to the new port\.
-+ Check whether the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\. For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\. Alternatively, if the DB instance was created outside of a VPC, it must have a database security group that authorizes those connections\.
++ Check whether the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\. For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\.
+
+  You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
+
+  Alternatively, if the DB instance was created outside of a VPC, it must have a database security group that authorizes those connections\.
 
 By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default DB security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. For more information about Amazon RDS security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
+
+If you receive an error like `FATAL: database some-name does not exist` when connecting, try using the default database name **postgres** for the `--dbname` option\. 

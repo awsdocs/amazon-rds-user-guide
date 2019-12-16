@@ -9,6 +9,9 @@ Performance Insights automatically publishes metrics to Amazon CloudWatch\. The 
 |  DBLoadCPU  |  The number of active sessions where the wait event type is CPU\. In Performance Insights, this data is queried as `db.load.avg`, filtered by the wait event type `CPU`\.  | 
 |  DBLoadNonCPU  |  The number of active sessions where the wait event type is not CPU\.  | 
 
+**Note**  
+These metrics are published to CloudWatch only if there is load on the DB instance\.
+
 You can examine these metrics using the CloudWatch console, the AWS CLI, or the CloudWatch API\.
 
 For example, you can get the statistics for the `DBLoad` metric by running the [get\-metric\-statistics](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) command\.

@@ -18,7 +18,10 @@ You can stop and start a DB instance whether it is configured for a single Avail
 
 When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
 
-You can stop a DB instance for up to seven days\. If you don't manually start your DB instance after seven days, your DB instance is automatically started\. 
+Stopping a DB instance removes pending actions, except for pending actions for the DB instance's option group or DB parameter group\.
+
+**Important**  
+You can stop a DB instance for up to seven days\. If you don't manually start your DB instance after seven days, your DB instance is automatically started so that it doesn't fall behind any required maintenance updates\.
 
 ## Benefits<a name="USER_StopInstance.Benefits"></a>
 
@@ -48,7 +51,7 @@ When you stop a DB instance it retains its DNS endpoint\. If you stop a DB insta
 **Note**  
 You should always connect to a DB instance using the DNS endpoint, not the IP address\.
 
-## AWS Management Console<a name="USER_StopInstance.CON"></a>
+## Console<a name="USER_StopInstance.CON"></a>
 
 **To stop a DB instance**
 
@@ -62,7 +65,7 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 
 1. Choose **Yes, Stop Now** to stop the DB instance, or choose **Cancel** to cancel the operation\.
 
-## CLI<a name="USER_StopInstance.CLI"></a>
+## AWS CLI<a name="USER_StopInstance.CLI"></a>
 
 To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier` – the name of the DB instance\. 
@@ -73,9 +76,7 @@ To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https:
 1. stop-db-instance --db-instance-identifier mydbinstance
 ```
 
-## API<a name="USER_StopInstance.API"></a>
+## RDS API<a name="USER_StopInstance.API"></a>
 
-To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) action with the following parameter: 
+To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
-
-## <a name="USER_StopInstance.Related"></a>

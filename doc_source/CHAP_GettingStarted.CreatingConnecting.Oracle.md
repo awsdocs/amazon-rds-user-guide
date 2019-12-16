@@ -5,9 +5,72 @@ The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB i
 **Important**  
 You must have an AWS account before you can create a DB instance\. If you don't have an AWS account, open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\. 
 
-In this topic you create a sample Oracle DB instance\. You then connect to the DB instance and run a simple query\. Finally you delete the sample DB instance\. 
+In this topic, you create a sample Oracle DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\. 
 
 ## Creating a Sample Oracle DB Instance<a name="CHAP_GettingStarted.Creating.Oracle"></a>
+
+The basic building block of Amazon RDS is the DB instance\. This environment is where you run your Oracle databases\.
+
+**Note**  
+A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+
+### New Console<a name="CHAP_GettingStarted.Creating.Oracle.Console"></a>
+
+You can create a DB instance running Oracle with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+
+For this example, you use **Easy Create** to create a DB instance running the Oracle database engine with a db\.t2\.micro DB instance class\.
+
+**Note**  
+For information about creating an Oracle DB instance with **Easy Create** not enabled, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+
+**To create an Oracle DB instance with Easy Create enabled**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region in which you want to create the DB instance\. 
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose **Create database** and ensure that **Easy Create** is chosen\.   
+![\[Easy Create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
+
+1. In **Configuration**, choose **Oracle**\.
+
+1. For **DB instance size**, choose **Free tier**\. If **Free tier** isn't available, choose **Dev/Test**\.
+
+1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name\.
+
+1. For **Master username**, enter a name for the master user, or leave the default name\.
+
+   The **Create database** page should look similar to the following image\.  
+![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-oracle.png)
+
+1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** check box is chosen\.
+
+   To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
+
+1. \(Optional\) Open **View default settings for Easy create**\.  
+![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
+
+   You can examine the default settings that are used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+
+1. Choose **Create database**\.
+
+   If you used an automatically generated password, the **View credential details** button appears on the **Databases** page\.
+
+   To view the master user name and password for the DB instance, choose **View credential details**\.  
+![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+
+   To connect to the DB instance as the master user, use the user name and password that appear\.
+**Important**  
+>You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
+1. For **Databases**, choose the name of the new Oracle DB instance\.
+
+   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
+![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
+
+### Original Console<a name="CHAP_GettingStarted.Creating.Oracle.CurrentConsole"></a>
 
 In this procedure you use the AWS Management Console to create a sample DB instance\. Since you are only creating a sample DB instance, each setting is not fully explained\. For a full explanation of each setting, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
 
@@ -22,18 +85,18 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 1. Choose **Create database**\. 
 
    The **Select engine** page appears\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch01.png)
+![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Oracle-Launch01.png)
 
 1. Choose the Oracle icon, and then choose **Select** for the **Oracle Standard Edition Two** edition\. 
 
 1. The **Choose use case** page asks if you are planning to use the DB instance you are creating for production\. Choose **Dev/Test** and then choose **Next**\. 
 
    The **Specify DB details** page appears\.   
-![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch-SE-02.png)
+![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Oracle-Launch-SE-02.png)
 
 1. On the **Specify DB details** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
+<a name="rds-oracle-creating-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
 1. Choose **Next** to continue\. 
 
@@ -41,14 +104,14 @@ In this procedure you use the AWS Management Console to create a sample DB insta
 
 1. On the **Configure advanced settings** page, provide the information for your DB instance as shown in the following table\.  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
+<a name="rds-oracle-creating-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)
 
 1. Choose **Create database**\. 
 
 1. Choose **View DB instance details**\. 
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch-SE-05.png)
+![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Oracle-Launch-SE-05.png)
 
 ## Connecting to Your Sample Oracle DB Instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 
@@ -62,7 +125,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    1. Choose the Oracle DB instance name to display its details\. 
 
-   1. On the **Connectivity** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
 1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. The value for `Host` is the endpoint for your DB instance, and the value for `Port` is the port you assigned the DB instance\. The value for the Oracle `SID` is the name of the DB instance's database that you specified when you created the DB instance, not the name of the DB instance\. 
@@ -83,7 +146,7 @@ For more information about connecting to an Oracle DB instance, see [Connecting 
 
 ## Deleting Your Sample DB Instance<a name="CHAP_GettingStarted.Deleting.Oracle"></a>
 
-Once you are done exploring the sample DB instance that you created, you should delete the DB instance so that you are no longer charged for it\. 
+After you are done exploring the sample DB instance that you created, you should delete the DB instance so that you are no longer charged for it\. 
 
 **To delete a DB instance with no final DB snapshot**
 

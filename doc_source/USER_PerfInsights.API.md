@@ -4,6 +4,16 @@ The Amazon RDS Performance Insights API provides visibility into the performance
 
 Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you can analyze and troubleshoot database performance\. One way to view Performance Insights data is in the AWS Management Console\. Performance Insights also provides a public API so that you can query your own data\. The API can be used to offload data into a database, add Performance Insights data to existing monitoring dashboards, or to build monitoring tools\. To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling Performance Insights](USER_PerfInsights.Enabling.md)\.
 
+The Performance Insights API provides the following operations\.
+
+
+****  
+
+|  Performance Insights Operation  |  AWS CLI Command  |  Description  | 
+| --- | --- | --- | 
+|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html](https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html)  |  Retrieves the top N dimension keys for a metric for a specific time period\.  | 
+|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)  |  Retrieves Performance Insights metrics for a set of data sources, over a time period\. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group\.  | 
+
 For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com//performance-insights/latest/APIReference/Welcome.html)\.
 
 ## AWS CLI for Performance Insights<a name="USER_PerfInsights.API.CLI"></a>
@@ -25,6 +35,25 @@ For example, the AWS Management Console uses `GetResourceMetrics` in two places 
 ![\[Counter Metrics and Database Load charts\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-charts.png)
 
 All the metrics returned by `GetResourceMetrics` are standard time\-series metrics with one exception\. The exception is `db.load`, which is the core metric in Performance Insights\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
+
+**Note**  
+`GetResourceMetrics` can also return the `db.sampleload` metric, but the `db.load` metric is appropriate in most cases\.
+
+For information about the counter metrics returned by `GetResourceMetrics`, see [Performance Insights Counters](USER_PerfInsights_Counters.md)\.
+
+The following calculations are supported for the metrics:
++ Average – The average value for the metric over a period of time\. Append `.avg` to the metric name\.
++ Minimum – The minimum value for the metric over a period of time\. Append `.min` to the metric name\.
++ Maximum – The maximum value for the metric over a period of time\. Append `.max` to the metric name\.
++ Sum – The sum of the metric values over a period of time\. Append `.sum` to the metric name\.
++ Sample count – The number of times the metric was collected over a period of time\. Append `.sample_count` to the metric name\.
+
+For example, assume that a metric is collected for 300 seconds \(5 minutes\), and that the metric is collected one time each minute\. The values for each minute are 1, 2, 3, 4, and 5\. In this case, the following calculations are returned:
++ Average – 3
++ Minimum – 1
++ Maximum – 5
++ Sum – 15
++ Sample count – 5
 
 For information about using the `get-resource-metrics` AWS CLI command, see [ `get-resource-metrics`](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)\.
 
@@ -55,7 +84,7 @@ The following are several examples that use the AWS CLI for Performance Insights
 
 ### Retrieving Counter Metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
 
-The following image shows two counter metrics charts in the AWS Management Console\.
+The following screenshot shows two counter metrics charts in the AWS Management Console\.
 
 ![\[Counter Metrics charts.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-counters-charts.png)
 
@@ -70,8 +99,8 @@ aws pi get-resource-metrics \
    --start-time 2018-10-30T00:00:00Z \
    --end-time   2018-10-30T01:00:00Z \
    --period-in-seconds 60 \
-   --metric-queries '[{"Metric": "sys.cpu.user.avg"  },
-                      {"Metric": "sys.cpu.system.avg"}]'
+   --metric-queries '[{"Metric": "os.cpuUtilization.user.avg"  },
+                      {"Metric": "os.cpuUtilization.idle.avg"}]'
 ```
 
 For Windows:
@@ -83,8 +112,8 @@ aws pi get-resource-metrics ^
    --start-time 2018-10-30T00:00:00Z ^
    --end-time   2018-10-30T01:00:00Z ^
    --period-in-seconds 60 ^
-   --metric-queries '[{"Metric": "sys.cpu.user.avg"  },
-                      {"Metric": "sys.cpu.system.avg"}]'
+   --metric-queries '[{"Metric": "os.cpuUtilization.user.avg"  },
+                      {"Metric": "os.cpuUtilization.idle.avg"}]'
 ```
 
 You can also make a command easier to read by specifying a file for the `--metrics-query` option\. The following example uses a file called query\.json for the option\. The file has the following contents\.
@@ -92,10 +121,10 @@ You can also make a command easier to read by specifying a file for the `--metri
 ```
 [
     {
-        "Metric": "sys.cpu.user.avg"
+        "Metric": "os.cpuUtilization.user.avg"
     },
     {
-        "Metric": "sys.cpu.system.avg"
+        "Metric": "os.cpuUtilization.idle.avg"
     }
 ]
 ```
@@ -147,7 +176,7 @@ The response looks similar to the following\.
     "MetricList": [
         { //A list of key/datapoints 
             "Key": {
-                "Metric": "sys.cpu.user.avg" //Metric1
+                "Metric": "os.cpuUtilization.user.avg" //Metric1
             },
             "DataPoints": [
                 //Each list of datapoints has the same timestamps and same number of items
@@ -163,12 +192,12 @@ The response looks similar to the following\.
                     "Timestamp": 1540857780.0, //Minute 3
                     "Value": 10.0
                 }
-                //... 60 datapoints for the sys.cpu.user.avg metric
+                //... 60 datapoints for the os.cpuUtilization.user.avg metric
             ]
         },
         {
             "Key": {
-                "Metric": "sys.cpu.system.avg" //Metric2
+                "Metric": "os.cpuUtilization.idle.avg" //Metric2
             },
             "DataPoints": [
                 {
@@ -179,7 +208,7 @@ The response looks similar to the following\.
                     "Timestamp": 1540857720.0, //Minute2
                     "Value": 13.5
                 },
-                //... 60 datapoints for the sys.cpu.system.avg metric 
+                //... 60 datapoints for the os.cpuUtilization.idle.avg metric 
             ]
         }
     ] //end of MetricList

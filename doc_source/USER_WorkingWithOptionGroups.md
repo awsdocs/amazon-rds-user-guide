@@ -36,6 +36,8 @@ Persistent options can't be removed from an option group while DB instances are 
 
 Permanent options, such as the TDE option for Oracle Advanced Security TDE, can never be removed from an option group\. You can change the option group of a DB instance that is using the permanent option\. However, the option group associated with the DB instance must include the same permanent option\. In some cases, you might restore or perform a point\-in\-time restore from a DB snapshot\. In these cases, if the option group associated with that DB snapshot contains a permanent option, you can only associate the restored DB instance with an option group with that permanent option\.
 
+For Oracle DB instances, you can copy shared DB snapshots that have the options `Timezone` or `OLS` \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
+
 ### VPC and Platform Considerations<a name="Overview.OptionGroups.Platform"></a>
 
 When an option group is assigned to a DB instance, it is linked to the platform that the DB instance is on\. That platform can either be a VPC supported by the Amazon VPC service, or EC2\-Classic \(non\-VPC\) supported by the Amazon EC2 service\. For details on these two platforms, see [Amazon EC2 and Amazon Virtual Private Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html)\. 
@@ -117,7 +119,7 @@ aws rds create-option-group ^
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.Create.API"></a>
 
-To create an option group, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) action\. Include the following parameters:
+To create an option group, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateOptionGroup.html) operation\. Include the following parameters:
 + `OptionGroupName`
 + `EngineName`
 + `MajorEngineVersion`
@@ -155,7 +157,7 @@ aws rds copy-option-group ^
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.Copy.API"></a>
 
-To copy an option group, call the Amazon RDS API [CopyOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyOptionGroup.html) action\. Include the following required parameters\.
+To copy an option group, call the Amazon RDS API [CopyOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CopyOptionGroup.html) operation\. Include the following required parameters\.
 + `SourceOptionGroupIdentifier`
 + `TargetOptionGroupIdentifier`
 + `TargetOptionGroupDescription`
@@ -283,7 +285,7 @@ OPTIONSETTINGS  SHA1,MD5   STATIC  STRING  SHA1,MD5  Specifies list of checksumm
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.AddOptions.API"></a>
 
-To add an option to an option group using the Amazon RDS API, call the [ModifyOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) action with the option that you want to add\. To enable the new option immediately on all associated DB instances, include the `ApplyImmediately` parameter and set it to `true`\. By default, the option is enabled for each associated DB instance during its next maintenance window\. Include the following required parameter:
+To add an option to an option group using the Amazon RDS API, call the [ModifyOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) operation with the option that you want to add\. To enable the new option immediately on all associated DB instances, include the `ApplyImmediately` parameter and set it to `true`\. By default, the option is enabled for each associated DB instance during its next maintenance window\. Include the following required parameter:
 + `OptionGroupName`
 
 ## Listing the Options and Option Settings for an Option Group<a name="USER_WorkingWithOptionGroups.ListOption"></a>
@@ -298,7 +300,9 @@ You can use the AWS Management Console to list all of the options and option set
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Option groups**\. The **Options** column in the table shows the options and option settings in the option group\.
+1. In the navigation pane, choose **Option groups**\.
+
+1. Choose the name of the option group to display its details\. The options and option settings in the option group are listed\.
 
 ### AWS CLI<a name="USER_WorkingWithOptionGroups.ListOption.CLI"></a>
 
@@ -320,7 +324,7 @@ aws rds describe-option-groups --option-group-name testoptiongroup
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.ListOption.API"></a>
 
-To list the options and option settings for an option group, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html) action\. Specify the name of the option group whose options and settings you want to view\. If you don't specify an option group name, all option groups are described\. 
+To list the options and option settings for an option group, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html) operation\. Specify the name of the option group whose options and settings you want to view\. If you don't specify an option group name, all option groups are described\. 
 
 ## Modifying an Option Setting<a name="USER_WorkingWithOptionGroups.ModifyOption"></a>
 
@@ -543,5 +547,5 @@ aws rds delete-option-group ^
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.Delete.API"></a>
 
-To delete an option group, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) action\. Include the following parameter:
+To delete an option group, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteOptionGroup.html) operation\. Include the following parameter:
 + `OptionGroupName`

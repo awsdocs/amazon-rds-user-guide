@@ -16,7 +16,7 @@ When you create a new DB instance, Performance Insights is enabled when you choo
 
 To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB Instance](CHAP_CommonTasks.Create.md)\.
 
-The following image shows the **Performance Insights** section\.
+The following screenshot shows the **Performance Insights** section\.
 
 ![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_enabling.png)
 
@@ -106,11 +106,11 @@ aws rds modify-db-instance ^
     --performance-insights-retention-period 731
 ```
 
-## API<a name="USER_PerfInsights.Enabling.API"></a>
+## RDS API<a name="USER_PerfInsights.Enabling.API"></a>
 
-When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) action Amazon RDS API action, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
+When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation Amazon RDS API operation, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
 
-You can also specify the `EnablePerformanceInsights` value using the following API actions:
+You can also specify the `EnablePerformanceInsights` value using the following API operations:
 +  [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 
 +  [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
 +  [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) 
@@ -120,11 +120,8 @@ When you enable Performance Insights, you can optionally specify the amount of t
 ## Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL<a name="USER_PerfInsights.EnableMySQL"></a>
 
 For Amazon RDS for MariaDB or MySQL, Performance Insights provides more detailed information when the Performance Schema feature is enabled\. The Performance Schema is enabled automatically when you create an Amazon RDS for MariaDB or MySQL DB instance with Performance Insights enabled\. When you create the DB instance with Performance Insights enabled, the following subset of Performance Schema parameters is set to the specified values automatically:
-+ `performance_schema=1`
-+ `performance-schema-consumer-events-waits-current=ON`
-+ `performance-schema-instrument='wait/%=ON'`
-+ `performance-schema-consumer-global-instrumentation=ON`
-+ `performance-schema-consumer-thread-instrumentation=ON`
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Enabling.html)
 
 Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then unset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 

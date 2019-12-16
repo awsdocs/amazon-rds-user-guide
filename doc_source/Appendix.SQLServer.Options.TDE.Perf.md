@@ -1,4 +1,4 @@
-# Microsoft SQL Server Performance Considerations<a name="Appendix.SQLServer.Options.TDE.Perf"></a>
+# SQL Server Performance Considerations<a name="Appendix.SQLServer.Options.TDE.Perf"></a>
 
 The performance of a SQL Server DB instance can be impacted by using transparent data encryption\. 
 

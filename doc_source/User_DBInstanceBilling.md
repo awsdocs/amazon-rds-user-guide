@@ -17,5 +17,5 @@ Amazon RDS provides the following purchasing options to enable you to optimize y
 For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 
 **Topics**
-+ [On\-Demand DB Instances](USER_OnDemandDBInstances.md)
-+ [Reserved DB Instances](USER_WorkingWithReservedDBInstances.md)
++ [On\-Demand DB Instances for Amazon RDS](USER_OnDemandDBInstances.md)
++ [Reserved DB Instances for Amazon RDS](USER_WorkingWithReservedDBInstances.md)

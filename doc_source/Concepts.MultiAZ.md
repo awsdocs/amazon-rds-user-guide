@@ -9,11 +9,9 @@ The high\-availability feature is not a scaling solution for read\-only scenario
 
 ![\[High Availability Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
 
-Using the RDS console, you can create a Multi\-AZ deployment by simply specifying Multi\-AZ when creating a DB instance\. You can also use the console to convert existing DB instances to Multi\-AZ deployments by modifying the DB instance and specifying the Multi\-AZ option\. The RDS console shows the Availability Zone of the standby replica, called the secondary AZ\.
+Using the RDS console, you can create a Multi\-AZ deployment by simply specifying Multi\-AZ when creating a DB instance\. You can use the console to convert existing DB instances to Multi\-AZ deployments by modifying the DB instance and specifying the Multi\-AZ option\. You can also specify a Multi\-AZ deployment with the AWS CLI or Amazon RDS API\. Use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) or [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) or [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\.
 
-You can specify a Multi\-AZ deployment using the CLI as well\. Use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to show the Availability Zone of the standby replica \(called the secondary AZ\)\. 
-
-The RDS console shows the Availability Zone of the standby replica \(called the secondary AZ\), or you can use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) action to find the secondary AZ\.
+The RDS console shows the Availability Zone of the standby replica \(called the secondary AZ\)\. You can also use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command or the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) API operation to find the secondary AZ\.
 
 DB instances using Multi\-AZ deployments may have increased write and commit latency compared to a Single\-AZ deployment, due to the synchronous data replication that occurs\. You may have a change in latency if your deployment fails over to the standby replica, although AWS is engineered with low\-latency network connectivity between Availability Zones\. For production workloads, we recommend that you use Provisioned IOPS and DB instance classes that are optimized for Provisioned IOPS for fast, consistent performance\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
@@ -41,8 +39,8 @@ Amazon RDS handles failovers automatically so you can resume database operations
 
 There are several ways to determine if your Multi\-AZ DB instance has failed over:
 +  DB event subscriptions can be setup to notify you via email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS Event Notification](USER_Events.md) 
-+ You can view your DB events by using the Amazon RDS console or API actions\.
-+  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API actions\. 
++ You can view your DB events by using the Amazon RDS console or API operations\.
++  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API operations\. 
 
 For information on how you can respond to failovers, reduce recovery time, and other best practices for Amazon RDS, see [Best Practices for Amazon RDS](CHAP_BestPractices.md)\.
 

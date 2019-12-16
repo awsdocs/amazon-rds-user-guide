@@ -3,7 +3,7 @@
 To allow an IAM user or role to connect to your DB instance, you must create an IAM policy\. After that, you attach the policy to an IAM user or role\.
 
 **Note**  
-To learn more about IAM policies, see [Authentication and Access Control](UsingWithRDS.IAM.md)\.
+To learn more about IAM policies, see [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)\.
 
 The following example policy allows an IAM user to connect to a DB instance using IAM database authentication\.
 
@@ -24,8 +24,11 @@ The following example policy allows an IAM user to connect to a DB instance usin
 14. }
 ```
 
+**Important**  
+An IAM administrator user can access DB instances without explicit permissions in an IAM policy\. The example in [Create an IAM User](CHAP_SettingUp.md#CHAP_SettingUp.IAM) creates an IAM administrator user\. If you want to restrict administrator access to DB instances, you can create an IAM role with the appropriate, lesser privileged permissions and assign it to the administrator\. 
+
 **Note**  
-Don't confuse the `rds-db:` prefix with other Amazon RDS action prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\.   
+Don't confuse the `rds-db:` prefix with other RDS API operation prefixes that begin with `rds:`\. You use the `rds-db:` prefix and the `rds-db:connect` action only for IAM database authentication\. They aren't valid in any other context\.   
 Currently, the IAM console displays an error for policies with the `rds-db:connect` action\. You can ignore this error\.
 
 The example policy includes a single statement with the following elements:

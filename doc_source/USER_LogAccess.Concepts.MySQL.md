@@ -67,7 +67,7 @@ The error log is enabled by default\. The following table summarizes the require
 **Note**  
 Publishing log files to CloudWatch Logs is only supported for MySQL versions 5\.6, 5\.7, and 8\.0\.
 
-### AWS Management Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.MySQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish MySQL logs to CloudWatch Logs using the console**
 
@@ -151,13 +151,13 @@ You can publish MySQL logs with the RDS API\. You can call the [https://docs.aws
 **Note**  
 A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
-You can also publish MySQL logs by calling the following RDS API actions: 
+You can also publish MySQL logs by calling the following RDS API operations: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-Run one of these RDS API actions with the following parameters: 
+Run one of these RDS API operations with the following parameters: 
 + `DBInstanceIdentifier`
 + `EnableCloudwatchLogsExports`
 + `Engine`

@@ -38,7 +38,7 @@ The general process for adding the time zone option to a DB instance is the foll
 
 When you add the time zone option, a brief outage occurs while your DB instance is automatically restarted\. 
 
-### AWS Management Console<a name="Appendix.Oracle.Options.Timezone.Console"></a>
+### Console<a name="Appendix.Oracle.Options.Timezone.Console"></a>
 
 **To add the time zone option to a DB instance**
 
@@ -60,7 +60,7 @@ If you add the time zone option to an existing option group that is already atta
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the time zone option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
 
-### CLI<a name="Appendix.Oracle.Options.Timezone.CLI"></a>
+### AWS CLI<a name="Appendix.Oracle.Options.Timezone.CLI"></a>
 
 The following example uses the AWS CLI [add\-option\-to\-option\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/add-option-to-option-group.html) command to add the `Timezone` option and the `TIME_ZONE` option setting to an option group called `myoptiongroup`\. The time zone is set to `Africa/Cairo`\. 
 

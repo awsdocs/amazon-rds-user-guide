@@ -5,7 +5,7 @@ Amazon RDS creates and saves automated backups of your DB instance\. Amazon RDS 
 Amazon RDS creates automated backups of your DB instance during the backup window of your DB instance\. Amazon RDS saves the automated backups of your DB instance according to the backup retention period that you specify\. If necessary, you can recover your database to any point in time during the backup retention period\. 
 
 Automated backups follow these rules:
-+ Your DB instance must be in the `ACTIVE` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `ACTIVE`, for example `STORAGE_FULL`\.
++ Your DB instance must be in the `AVAILABLE` state for automated backups to occur\. Automated backups don't occur while your DB instance is in a state other than `AVAILABLE`, for example `STORAGE_FULL`\.
 + Automated backups and automated snapshots don't occur while a copy is executing in the same region for the same DB instance\.
 
 You can also back up your DB instance manually, by manually creating a DB snapshot\. For more information about creating a DB snapshot, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\. 
@@ -14,6 +14,9 @@ The first snapshot of a DB instance contains the data for the full DB instance\.
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a Snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB Snapshot](USER_ShareSnapshot.md)\.
 
+**Note**  
+You can also use AWS Backup to manage backups of Amazon RDS DB instances\. Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+
 ## Backup Storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
 Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Your backup storage is equivalent to the sum of the database storage for all instances in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. 
@@ -21,9 +24,6 @@ Your Amazon RDS backup storage for each region is composed of the automated back
 For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
 If you chose to retain automated backups when you delete a DB instance, the automated backups are saved for the full retention period\. If you don't choose **Retain automated backups** when you delete a DB instance, all automated backups are deleted with the DB instance\. After they are deleted, the automated backups can't be recovered\. If you choose to have Amazon RDS create a final DB snapshot before it deletes your DB instance, you can use that to recover your DB instance\. Or you can use a previously created manual snapshot\. Manual snapshots are not deleted\. You can have up to 100 manual snapshots per region\.
-
-**Note**  
-Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Backup Window<a name="USER_WorkingWithAutomatedBackups.BackupWindow"></a>
 
@@ -102,7 +102,7 @@ aws rds describe-db-instances --db-instance-identifier mydbinstance
 
 ### RDS API<a name="USER_WorkingWithAutomatedBackups.Disabling.API"></a>
 
-To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
+To disable automated backups immediately, call the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier = mydbinstance`
 + `BackupRetentionPeriod = 0`
 
@@ -209,6 +209,13 @@ You can retain automated backups for RDS instances running MySQL, MariaDB, Postg
 
 You can restore or remove retained automated backups using the AWS Management Console, RDS API, and AWS CLI\.
 
+**Topics**
++ [Retention Period](#USER_WorkingWithAutomatedBackups-Retaining-RetentionPeriods)
++ [Restoration](#USER_WorkingWithAutomatedBackups-Retaining-Restoration)
++ [Retention Costs](#USER_WorkingWithAutomatedBackups-Retaining-RetentionCosts)
++ [Limitations and Recommendations](#USER_WorkingWithAutomatedBackups-Retaining-LimitationsAndRecommendations)
++ [Deleting Retained Automated Backups](#USER_WorkingWithAutomatedBackups-Deleting)
+
 ### Retention Period<a name="USER_WorkingWithAutomatedBackups-Retaining-RetentionPeriods"></a>
 
 The system snapshots and transaction logs in a retained automated backup expire the same way that they expire for the source DB instance\. Because there are no new snapshots or logs created for this instance, the retained automated backups eventually expire completely\. Effectively, they live as long their last system snapshot would have done, based on the settings for retention period the source instance had when you deleted it\. Retained automated backups are removed by the system after their last system snapshot expires\.
@@ -252,10 +259,64 @@ For example, suppose that your total allocated storage of running instances is 1
 ### Limitations and Recommendations<a name="USER_WorkingWithAutomatedBackups-Retaining-LimitationsAndRecommendations"></a>
 
 The following limitations apply to retained automated backups:
-+ The maximum number of retained automated backups in one region is 20\. It's not included in the DB instances limit\. You can have 20 running DB instances and an additional 20 retained automated backups at the same time\.
++ The maximum number of retained automated backups in one AWS Region is 40\. It's not included in the DB instances limit\. You can have 40 running DB instances and an additional 40 retained automated backups at the same time\.
 + Retained automated backups don't contain information about parameters or option groups\. 
 + You can restore a deleted instance to a point in time that is within the retention period at the time of delete\. 
 + A retained automated backup can't be modified because it consists of system backups, transaction logs, and the DB instance properties that existed at the time you deleted the source instance\. 
+
+### Deleting Retained Automated Backups<a name="USER_WorkingWithAutomatedBackups-Deleting"></a>
+
+You can delete retained automated backups when they are no longer needed\.
+
+#### Console<a name="USER_WorkingWithAutomatedBackups-Deleting.CON"></a>
+
+**To delete a retained automated backup**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Automated backups**\.
+
+1. Choose **Retained**\.  
+![\[Retained tab for automated backups\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/retained-automated-backup-delete.png)
+
+1. Choose the retained automated backup that you want to delete\.
+
+1. For **Actions**, choose **Delete**\.
+
+1. On the confirmation page, enter **delete me** and choose **Delete**\. 
+
+#### AWS CLI<a name="USER_WorkingWithAutomatedBackups-Deleting.CLI"></a>
+
+You can delete a retained automated backup by using the AWS CLI command [delete\-db\-instance\-automated\-backup](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backup.html)\. 
+
+The following options are used to delete a retained automated backup: 
++ `--dbi-resource-id` – The resource identifier for the source DB instance\. 
+
+  You can find the resource identifier for the source DB instance of a retained automated backup by running the AWS CLI command [describe\-db\-instance\-automated\-backups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instance-automated-backups.html)\.
+
+**Example**  
+The following example deletes the retained automated backup with source DB instance resource identifier `db-123ABCEXAMPLE`\.   
+For Linux, OS X, or Unix:  
+
+```
+1. aws rds delete-db-instance-automated-backup \
+2.     --dbi-resource-id db-123ABCEXAMPLE
+```
+For Windows:  
+
+```
+1. aws rds delete-db-instance-automated-backup ^
+2.     --dbi-resource-id db-123ABCEXAMPLE
+```
+
+#### RDS API<a name="USER_WorkingWithAutomatedBackups-Deleting.API"></a>
+
+You can delete a retained automated backup by using the Amazon RDS API operation [DeleteDBInstanceAutomatedBackup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html)\. 
+
+The following parameters are used to delete a retained automated backup: 
++ `DbiResourceId` – The resource identifier for the source DB instance\. 
+
+  You can find the resource identifier for the source DB instance of a retained automated backup using the Amazon RDS API operation [DescribeDBInstanceAutomatedBackups](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html)\.
 
 ## Automated Backups with Unsupported MySQL Storage Engines<a name="Overview.BackupDeviceRestrictions"></a>
 

@@ -6,6 +6,9 @@ RDS uploads the completed audit logs to your S3 bucket, using the IAM role that 
 
 For more information, see [SQL Server Audit \(Database Engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the Microsoft SQL Server documentation\.
 
+**Note**  
+SQL Server Audit is supported in all regions, except for Asia Pacific \(Hong Kong\)\.
+
 **Topics**
 + [Support for SQL Server Audit](#Appendix.SQLServer.Options.Audit.Support)
 + [Adding SQL Server Audit to the DB Instance Options](#Appendix.SQLServer.Options.Audit.Adding)
@@ -17,9 +20,9 @@ For more information, see [SQL Server Audit \(Database Engine\)](https://docs.mi
 
 ## Support for SQL Server Audit<a name="Appendix.SQLServer.Options.Audit.Support"></a>
 
-In Amazon RDS, starting with SQL Server 2012, all editions of SQL Server support server\-level audits, and the Enterprise edition also supports database\-level audits\. Starting with SQL Server SQL Server 2016 \(13\.x\) SP1, all editions support both server\- and database\-level audits\. For more information, see [SQL Server Audit \(Database Engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the Microsoft SQL Server documentation\.
+In Amazon RDS, starting with SQL Server 2012, all editions of SQL Server support server\-level audits, and the Enterprise edition also supports database\-level audits\. Starting with SQL Server 2016 \(13\.x\) SP1, all editions support both server\-level and database\-level audits\. For more information, see [SQL Server Audit \(Database Engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the SQL Server documentation\.
 
-RDS supports configurating the following option settings for SQL Server Audit: 
+RDS supports configuring the following option settings for SQL Server Audit\. 
 
 
 | Option Setting | Valid Values | Description | 
@@ -128,7 +131,7 @@ SELECT   *
 
 ## Using SQL Server Audit with Multi\-AZ Instances<a name="Appendix.SQLServer.Options.Audit.Multi-AZ"></a>
 
-For Multi\-AZ instances, the process for sending audit log files toAmazon S3 is similar to the process for Single\-AZ instances\. However, there are some important differences: 
+For Multi\-AZ instances, the process for sending audit log files to Amazon S3 is similar to the process for Single\-AZ instances\. However, there are some important differences: 
 + Database audit specification objects are replicated to all nodes\.
 + Server audits and server audit specifications aren't replicated to secondary nodes\. Instead, you have to create or modify them manually\.
 

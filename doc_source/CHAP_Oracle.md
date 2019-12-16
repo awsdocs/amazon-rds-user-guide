@@ -1,6 +1,8 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Oracle Database\. You can use the following versions and editions: 
++ Oracle 19c, Version 19\.0\.0\.0
++ Oracle 18c, Version 18\.0\.0\.0
 + Oracle 12c, Version 12\.2\.0\.1
 + Oracle 12c, Version 12\.1\.0\.2
 + Oracle 11g, Version 11\.2\.0\.4
@@ -16,7 +18,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts can't be used\. 
 
-Before creating a DB instance, you should complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
+Before creating a DB instance, complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
 
 ## Common Management Tasks for Oracle on Amazon RDS<a name="Oracle.Concepts.General"></a>
 
@@ -29,7 +31,7 @@ The following are the common management tasks you perform with an Amazon RDS Ora
 | --- | --- | 
 |  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Oracle](#Oracle.Concepts.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
 |  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
-|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
+|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option Groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
@@ -45,7 +47,7 @@ There are also advanced tasks and optional features for working with Oracle DB i
 
 ## Oracle Licensing<a name="Oracle.Concepts.Licensing"></a>
 
-There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Oracle.html), the Amazon RDS API [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action, or the AWS CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
+There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Oracle.html), the Amazon RDS API [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation, or the AWS CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
 
 ### License Included<a name="Oracle.Concepts.Licensing.LicenseIncluded"></a>
 
@@ -100,14 +102,28 @@ The following are the DB instance classes supported for Oracle\.
 
 ****  
 
-| Oracle Edition | Version 12\.2\.0\.1 Support | Version 12\.1\.0\.2 Support | Version 11\.2\.0\.4 Support | 
+| Oracle Edition | 19c, 18c, and 12c Version 12\.2\.0\.1 Support | 12c Version 12\.1\.0\.2 Support | 11g Version 11\.2\.0\.4 Support | 
 | --- | --- | --- | --- | 
-|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.small–db\.t3\.2xlarge db\.t2\.small–db\.t2\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
-|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.r5\.large–db\.r5\.4xlarge db\.r3\.large–db\.r3\.4xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.large  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.m3\.medium–db\.m3\.2xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.8xlarge db\.r3\.large–db\.r3\.8xlarge db\.t3\.micro–db\.t3\.2xlarge db\.t2\.micro–db\.t2\.2xlarge  | 
+|  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+
+**Note**  
+We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
+
+### Deprecation of db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
+
+The db\.t2 DB instance classes are on a deprecation path for Amazon RDS for Oracle\. The db\.t2 DB instance classes will be replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on September 15, 2019, Amazon RDS for Oracle will disable all new creates of the db\.t2 DB instance classes\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
+
+If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+
+If you have DB snapshots of DB instances that were using db\.t2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
+
+**Note**  
+The db\.t3 DB instance classes have hyper\-threading enabled by default\. When DB instances running the db\.t2 DB instance class are migrated, the number of vCPUs is set automatically to the default number of the comparable db\.t3 DB instance class\. To learn more about the vCPU management features available on Amazon RDS for Oracle, and the default settings for each db\.t3 DB instance class, see [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
 ### Deprecated db\.m3 and db\.r3 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedM3R3"></a>
 
@@ -150,6 +166,76 @@ For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.
 **Note**  
 You can't use both SSL and Oracle native network encryption \(NNE\) on the same DB instance\. Before you can use SSL encryption, you must disable any other connection encryption\. 
 
+## Oracle 19c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.19c"></a>
+
+Amazon RDS supports Oracle version 19c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
+
+Oracle 19c version 19\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 19c](https://docs.oracle.com/en/database/oracle/oracle-database/19/index.html) documentation\. For a complete list of features supported by each Oracle 19c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+
+### Amazon RDS Parameter Changes for Oracle 19c Version 19\.0\.0\.0<a name="Oracle.Concepts.FeatureSupport.19c.Parameters"></a>
+
+Oracle 19c version 19\.0\.0\.0 includes several new parameters and parameters with new ranges and new default values\.
+
+The following table shows the new Amazon RDS parameters for Oracle 19c version 19\.0\.0\.0\.
+
+
+****  
+
+| Name | Values | Modifiable | Description | 
+| --- | --- | --- | --- | 
+|  [ lob\_signature\_enable](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/lob_signature_enable.html#GUID-62997AB5-1084-4C9A-8258-8CB695C7A1D6)  | TRUE, FALSE \(default\) | Y | Enables or disables the LOB locator signature feature\. | 
+|  [ max\_datapump\_parallel\_per\_job](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/MAX_DATAPUMP_PARALLEL_PER_JOB.html#GUID-33B1F962-B8C3-4DCE-BE68-66FC5D34ECA3)  | 1 to 1024, or AUTO | Y | Specifies the maximum number of parallel processes allowed for each Oracle Data Pump job\. | 
+
+The `compatible` parameter has a new maximum value for Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. The following table shows the new default value\. 
+
+
+****  
+
+| Parameter Name | Oracle 19c Version 19\.0\.0\.0 Maximum Value | Oracle 18c Version 18\.0\.0\.0 Maximum Value | 
+| --- | --- | --- | 
+| [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9) | 19\.0\.0 | 18\.0\.0 | 
+
+The following parameters were removed in Oracle 19c Version 19\.0\.0\.0:
++ exafusion\_enabled
++ max\_connections
++ o7\_dictionary\_access
+
+## Oracle 18c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
+
+Amazon RDS supports Oracle version 18c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
+
+Oracle 18c version 18\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 18c version 18\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 18c](https://docs.oracle.com/en/database/oracle/oracle-database/18/index.html)\. For a complete list of features supported by each Oracle 18c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/18/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+
+### Amazon RDS Parameter Changes for Oracle 18c Version 18\.0\.0\.0<a name="Oracle.Concepts.FeatureSupport.18c.Parameters"></a>
+
+Oracle 18c version 18\.0\.0\.0 includes several new parameters and parameters with new ranges and new default values\.
+
+The following table shows the new Amazon RDS parameters for Oracle 18c version 18\.0\.0\.0\.
+
+
+****  
+
+| Name | Values | Modifiable | Description | 
+| --- | --- | --- | --- | 
+|  [ adg\_account\_info\_tracking](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/ADG_ACCOUNT_INFO_TRACKING.html#GUID-D8CBA7A5-A027-4366-8146-1F141FC7B111)  | LOCAL \(default\), GLOBAL | N | Controls login attempts of users on Active Data Guard Standby databases\. It extends the control of user account security information\. | 
+|  [ inmemory\_optimized\_arithmetic](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/INMEMORY_OPTIMIZED_ARITHMETIC.html#GUID-7321D23C-A75B-4830-9375-99E5B06E06EB)  | ENABLE, DISABLE \(default\) | Y | Encodes the `NUMBER` data type in in\-memory tables compressed with `QUERY LOW` as a fixed\-width native integer scaled by a common exponent\. | 
+|  [ optimizer\_ignore\_hints](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/OPTIMIZER_IGNORE_HINTS.html#GUID-D62CA6D8-D0D8-4A20-93EA-EEB4B3144347)  | TRUE, FALSE \(default\) | Y | Specifies whether embedded hints are ignored\. | 
+|  [ optimizer\_ignore\_parallel\_hints](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/OPTIMIZER_IGNORE_PARALLEL_HINTS.html#GUID-C590B465-AE71-4B47-92BB-D9DD51326DAC)  | TRUE, FALSE \(default\) | Y | Specifies that embedded parallel hints are ignored\. | 
+|  [ parallel\_min\_degree](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/PARALLEL_MIN_DEGREE.html#GUID-C18B401F-9989-486B-AB58-4B4E01394585)  | 1 \(default\) and higher or CPU | Y | Controls the minimum degree of parallelism computed by automatic degree of parallelism\. | 
+
+The `compatible` parameter has a new default value for Oracle 18c version 18\.0\.0\.0 on Amazon RDS\. The following table shows the new default value\. 
+
+
+****  
+
+| Parameter Name | Oracle 18c Version 18\.0\.0\.0 Default Value | Oracle 12c Version 12\.2\.0\.1 Default Value | 
+| --- | --- | --- | 
+| [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/18/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9) | 18\.0\.0 | 12\.2\.0 | 
+
+The following parameters were removed in Oracle 18c Version 18\.0\.0\.0:
++ standby\_archive\_dest
++ utl\_file\_dir
+
 ## Oracle 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
 
 Amazon RDS supports Oracle version 12c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\. Oracle version 12c includes two major versions:
@@ -159,8 +245,6 @@ Amazon RDS supports Oracle version 12c, which includes Oracle Enterprise Edition
 ### Oracle 12c Version 12\.2\.0\.1 with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV2Overview"></a>
 
 Oracle 12c version 12\.2\.0\.1 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. For a complete list of the changes, see the [Oracle 12c version 12\.2 documentation](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/index.html)\. For a complete list of features supported by each Oracle 12c edition, see [ Permitted Features, Options, and Management Packs by Oracle Database Offering](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
-
-Oracle 12c version 12\.1\.0\.2 includes sixteen new parameters that impact your Amazon RDS DB instance, and also 18 new system privileges, several no longer supported packages, and several new option group settings\. For provide more information on these changes, see the following sections\. 
 
 #### Amazon RDS Parameter Changes for Oracle 12c Version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Parameters"></a>
 
@@ -292,14 +376,6 @@ One parameter has a new default value for Oracle 12c on Amazon RDS\. The followi
 | --- | --- | --- | 
 |  job\_queue\_processes  |  50  |  1000  | 
 
-Parameters in Amazon RDS are managed using parameter groups\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle edition and version, run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
-
-For example, to view the supported parameters for Oracle Enterprise Edition 12c, version 12\.1\.0\.2, run the following command\.
-
-```
-aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee-12.1
-```
-
 #### Amazon RDS System Privileges for Oracle 12c Version 12\.1\.0\.2<a name="Oracle.Concepts.FeatureSupport.12c.Privileges"></a>
 
 Several new system privileges have been granted to the system account for Oracle 12c version 12\.1\.0\.2\. These new system privileges include the following:
@@ -428,7 +504,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Star Query Optimization
 + Streams and Advanced Queuing
 + Summary Management – Materialized View Query Rewrite
-+ Text \(File and URL datastore types are not supported\)
++ Text \(File and URL data store types are not supported\)
 + Total Recall
 + Transparent Data Encryption \(TDE\)
 
@@ -523,6 +599,8 @@ Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to th
 Amazon RDS for Oracle supports Linux kernel huge pages for increased database scalability\. The use of huge pages results in smaller page tables and less CPU time spent on memory management, increasing the performance of large database instances\. For more information, see [Overview of HugePages](https://docs.oracle.com/database/121/UNXAR/appi_vlm.htm#UNXAR400) in the Oracle documentation\. 
 
 You can use huge pages with the following versions and editions of Oracle: 
++ 19\.0\.0\.0, all editions
++ 18\.0\.0\.0, all editions
 + 12\.2\.0\.1, all editions
 + 12\.1\.0\.2, all editions
 + 11\.2\.0\.4, all editions
@@ -533,7 +611,7 @@ To control whether huge pages are enabled for a DB instance automatically, you c
 + For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
 + For DB instance classes not mentioned in the table below, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`, and `use_large_pages` evaluates to `FALSE`\.
 + For DB instance classes not mentioned in the table below, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\. You can disable huge pages manually by setting `use_large_pages` to `FALSE`\.
-+ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, and `use_large_pages` evaluates to `ONLY`\.
++ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, `use_large_pages` evaluates to `ONLY`, and huge pages can't be disabled\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
 
@@ -592,10 +670,10 @@ Consider another example with following parameters values set in a parameter gro
 6. use_large_pages         = FALSE
 ```
 
-The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory and a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on both the db\.r4 instance and the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instance class, both with less than 100 GiB of memory\. The parameter group is also used by a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, huge pages are disabled on the db\.r4 instance, the db\.r5 instance, and the db\.r3 instance\.
 
 **Note**  
-If this parameter group is used by a db\.r4 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
+If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
 
 After huge pages are active on your DB instance, you can view huge pages information by enabling enhanced monitoring\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. 
 

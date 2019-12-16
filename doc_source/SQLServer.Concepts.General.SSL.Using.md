@@ -14,7 +14,7 @@ For information about Transport Layer Security \(TLS\) support for SQL Server, s
 
 You can force all connections to your DB instance to use SSL\. If you force connections to use SSL, it happens transparently to the client, and the client doesn't have to do any work to use SSL\. 
 
-If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `false`\. Set the `rds.force_ssl` parameter to `true` to force connections to use SSL\. The `rds.force_ssl` parameter is static, so after you change the value, you must reboot your DB instance for the change to take effect\. 
+If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to `0 (off)`\. Set the `rds.force_ssl` parameter to `1 (on)` to force connections to use SSL\. The `rds.force_ssl` parameter is static, so after you change the value, you must reboot your DB instance for the change to take effect\. 
 
 **To force all connections to your DB instance to use SSL**
 
@@ -49,7 +49,7 @@ All SQL Server instances created after August 5, 2014, use the DB instance endpo
 
 To encrypt connections from a client computer to an Amazon RDS DB instance running Microsoft SQL Server, you need a certificate on your client computer\. 
 
-To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions\. You can also download a certificate bundle that contains both the old and new root certificate\. In addition, you can download region\-specific intermediate certificates\. For more information about downloading certificates, see [Using SSL to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+To obtain that certificate, download the certificate to your client computer\. You can download a root certificate that works for all regions\. You can also download a certificate bundle that contains both the old and new root certificate\. In addition, you can download region\-specific intermediate certificates\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
 After you have downloaded the appropriate certificate, import the certificate into your Microsoft Windows operating system by following the procedure in the section following\. 
 

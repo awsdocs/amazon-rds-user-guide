@@ -19,7 +19,7 @@ If a maintenance update is available for a DB instance, the following column val
 + **In progress** – The maintenance action is in the process of being applied to the resource\.
 
 If an update is available, you can take one of the actions: 
-+ If the maintenance value is **next window**, defer the maintenance items by choosing **defer upgrade** from **Actions**\.
++ If the maintenance value is **next window**, defer the maintenance items by choosing **Defer upgrade** from **Actions**\. You can't defer a maintenance action if it has already started\.
 + Apply the maintenance items immediately\.
 + Schedule the maintenance items to start during your next maintenance window\.
 + Take no action\.
@@ -51,7 +51,7 @@ With Amazon RDS, you can choose when to apply maintenance operations\. You can d
    + **Upgrade now**
    + **Upgrade at next window**
 **Note**  
-If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\.
+If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\. You can't defer a maintenance action if it has already started\.
 
 ### AWS CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
@@ -74,6 +74,9 @@ aws rds apply-pending-maintenance-action ^
     --apply-action system-update ^
     --opt-in-type immediate
 ```
+
+**Note**  
+You can defer a maintenance action by specifying `undo-opt-in` for `--opt-in-type`\. You can't specify `undo-opt-in` for `--opt-in-type` if the maintenance action has already started\.
 
 To return a list of resources that have at least one pending update, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
 
@@ -115,9 +118,9 @@ aws rds describe-pending-maintenance-actions ^
 
 ### RDS API<a name="USER_UpgradeDBInstance.OSUpgrades.API"></a>
 
-To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) action\.
+To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ApplyPendingMaintenanceAction.html) operation\.
 
-To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) action\.
+To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) operation\.
 
 ## Maintenance for Multi\-AZ Deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
 
@@ -204,7 +207,7 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
-To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters:
+To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
 + `DBInstanceIdentifier = mydbinstance`
 + `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
 

@@ -72,7 +72,7 @@ Following are the log types that can be published to CloudWatch Logs for Amazon 
 
 After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your Amazon CloudWatch Logs, open [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-### AWS Management Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish PostgreSQL logs to CloudWatch Logs using the console**
 
@@ -83,6 +83,8 @@ After you complete the configuration, Amazon RDS publishes the log events to log
 1. Select the DB instance that you want to modify, and then choose **Modify**\.
 
 1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
+
+   The **Log exports** section is only available for PostgreSQL versions that support publishing to CloudWatch Logs\. 
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
@@ -158,12 +160,12 @@ You can publish PostgreSQL logs with the RDS API\. You can call the [https://doc
 **Note**  
 A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
-You can also publish PostgreSQL logs by calling the following RDS API actions: 
+You can also publish PostgreSQL logs by calling the following RDS API operations: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-Run one of these RDS API actions with the following parameters: 
+Run one of these RDS API operations with the following parameters: 
 + `DBInstanceIdentifier`
 + `EnableCloudwatchLogsExports`
 + `Engine`

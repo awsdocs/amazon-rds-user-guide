@@ -4,14 +4,22 @@ Updates to your Amazon RDS for Oracle DB instances keep them current\. If you ap
 
 You can specify any currently supported Oracle version when creating a new DB instance\. You can specify the major version \(such as Oracle 12\.1\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
-## Oracle Version 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.122"></a>
+## Oracle Versions 19\.0\.0, 18\.0\.0, and 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.180-122"></a>
 
-For Amazon RDS for Oracle version 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\.
+For Amazon RDS for Oracle versions 19\.0\.0\.0, 18\.0\.0\.0, and 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 
-The following RUs and RURs are applied to the Amazon RDS for Oracle version 12\.2\.0\.1: 
-+ [12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-04.rur-2019-04.r1) \(April 2019\)
-+ [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) \(January 2019\)
-+ [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1) \(October 2018\)
+To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0, 18\.0\.0\.0, and 12\.2\.0\.1, see the following table\. 
+
+
+****  
+
+| RU and RUR | Version 19\.0\.0\.0 | Version 18\.0\.0\.0 | Version 12\.2\.0\.1 | 
+| --- | --- | --- | --- | 
+| 2019 October | — | [18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-10.rur-2019-10.r1) | [12\.2\.0\.1\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-10.rur-2019-10.r1) | 
+| 2019 July | [19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2019-07.rur-2019-07.r1) | [18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1) | [12\.2\.0\.1\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-07.rur-2019-07.r1) | 
+| 2019 April | — | — | [12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-04.rur-2019-04.r1) | 
+| 2019 January | — | — | [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) | 
+| 2018 October | — | — | [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1) | 
 
 ## Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
 
@@ -24,6 +32,8 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
+| 2019 October | [12\.1\.0\.2\.v18](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v18) | [11\.2\.0\.4\.v22](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v22) | 
+| 2019 July | [12\.1\.0\.2\.v17](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v17) | [11\.2\.0\.4\.v21](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v21) | 
 | 2019 April | [12\.1\.0\.2\.v16](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v16) | [11\.2\.0\.4\.v20](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v20) | 
 | 2019 January | [12\.1\.0\.2\.v15](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v15) | [11\.2\.0\.4\.v19](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v19) | 
 | 2018 October | [12\.1\.0\.2\.v14](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v14) | [11\.2\.0\.4\.v18](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v18) | 
@@ -45,8 +55,10 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 | 2014 January | — | [11\.2\.0\.4\.v1](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v1) | 
 
 **Topics**
-+ [Oracle Version 12\.2\.0\.1](#Appendix.Oracle.PatchComposition.122)
++ [Oracle Versions 19\.0\.0, 18\.0\.0, and 12\.2\.0\.1](#Appendix.Oracle.PatchComposition.180-122)
 + [Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4](#Appendix.Oracle.PatchComposition.121-112)
++ [Database Engine: 19\.0\.0\.0](Appendix.Oracle.RU-RUR.19.0.0.0.md)
++ [Database Engine: 18\.0\.0\.0](Appendix.Oracle.RU-RUR.18.0.0.0.md)
 + [Database Engine: 12\.2\.0\.1](Appendix.Oracle.RU-RUR.12.2.0.1.md)
 + [Database Engine: 12\.1\.0\.2](Appendix.Oracle.PatchComposition.12.1.0.2.md)
 + [Database Engine: 11\.2\.0\.4](Appendix.Oracle.PatchComposition.11.2.0.4.md)

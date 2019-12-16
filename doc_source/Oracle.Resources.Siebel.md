@@ -17,7 +17,7 @@ Amazon RDS supports database version upgrades\. For more information, see [Upgra
 
 ## Before You Begin<a name="Oracle.Resources.Siebel.BeforeYouBegin"></a>
 
-Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Siebel Enterprise Server, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with Siebel CRM, see [Creating an Amazon VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
+Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Siebel Enterprise Server, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with Siebel CRM, see [Creating a VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
 
 Before you begin, you also need an Oracle DB instance\. For information about how to create an Oracle DB instance for use with Siebel CRM, see [Creating an Oracle DB Instance](Oracle.Resources.Shared.md#Oracle.Resources.Shared.Database.RDS)\. 
 
@@ -75,9 +75,9 @@ In addition to your Siebel Database, you can also use Amazon Web Services to sup
 
 | Siebel CRM Component | Amazon AWS Support | 
 | --- | --- | 
-| Siebel Enterprise\(with one or more Siebel Servers\) |  You can host your Siebel Servers on Amazon Elastic Compute Cloud \(Amazon EC2\) instances\. You can use Amazon EC2 to launch as many or as few virtual servers as you need\. Using Amazon EC2, you can scale up or down easily to handle changes in requirements\. For more information, see [What Is Amazon EC2?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)  You can put your servers in the same VPC with your DB instance and use the VPC security group to access the database\. For more information, see [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
+| Siebel Enterprise\(with one or more Siebel Servers\) |  You can host your Siebel Servers on Amazon Elastic Compute Cloud \(Amazon EC2\) instances\. You can use Amazon EC2 to launch as many or as few virtual servers as you need\. Using Amazon EC2, you can scale up or down easily to handle changes in requirements\. For more information, see [What Is Amazon EC2?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)  You can put your servers in the same VPC with your DB instance and use the VPC security group to access the database\. For more information, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
 | Web Servers\(with Siebel Web Server Extensions\) |  You can install multiple Web Servers on multiple EC2 instances\. You can then use Elastic Load Balancing to distribute incoming traffic among the instances\. For more information, see [What Is Elastic Load Balancing?](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/elastic-load-balancing.html)   | 
-| Siebel Gateway Name Server |  You can host your Siebel Gateway Name Server on an EC2 instance\. You can then put your server in the same VPC with the DB instance and use the VPC security group to access the database\. For more information, see [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
+| Siebel Gateway Name Server |  You can host your Siebel Gateway Name Server on an EC2 instance\. You can then put your server in the same VPC with the DB instance and use the VPC security group to access the database\. For more information, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
 
-## Related Topics<a name="w4aac30c95c19c19"></a>
+## Related Topics<a name="w37aac32d107c19c19"></a>
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)

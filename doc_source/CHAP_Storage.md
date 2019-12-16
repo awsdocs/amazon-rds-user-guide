@@ -7,7 +7,7 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
 Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 64 TiB of storage\. You can create Oracle RDS DB instances with up to  64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
 
 The following list briefly describes the three storage types: 
-+ **General Purpose SSD** – General Purpose SSD, also called gp2, volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
++ **General Purpose SSD** – General Purpose SSD volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
 
   For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD Storage](#Concepts.Storage.GeneralSSD)\. 
 + **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\.  
@@ -28,7 +28,7 @@ Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB\
 
 Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\. 
 
-Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\. 
+Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\. 
 
 ### I/O Credits and Burst Performance<a name="CHAP_Storage.IO.Credits"></a>
 
@@ -41,7 +41,7 @@ When your storage requires more than the base performance I/O level, it uses I/O
 Suppose that your storage uses all of its I/O credit balance\. If so, its maximum performance remains at the base performance level until I/O demand drops below the base level and unused I/O credits are added to the I/O credit balance\. \(The *base performance level* is the rate at which your storage earns I/O credits\.\) The more storage, the greater the base performance is and the faster it replenishes the I/O credit balance\. 
 
 **Note**  
-Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage for Amazon RDS DB Instances](USER_PIOPS.StorageTypes.md#USER_PIOPS.StorageTypes.title)\. 
+Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with Storage for Amazon RDS DB Instances](USER_PIOPS.StorageTypes.md)\. 
 
 The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
 
@@ -87,7 +87,7 @@ Your database workload might not be able to achieve 100 percent of the IOPS that
 
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+<a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
 \* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on m5 instance types\. Other instance families guarantee performance up to 32,000 IOPS\. 
 
@@ -114,7 +114,7 @@ Provisioned IOPS SSD storage provides a way to reserve I/O capacity by specifyin
 Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The following are some limitations for magnetic storage: 
 + Doesn't allow you to scale storage when using the SQL Server database engine\.
 + Doesn't support elastic volumes\.
-+ Limited to a maximum size of 4 TiB\.
++ Limited to a maximum size of 3 TiB\.
 + Limited to a maximum of 1,000 IOPS\.
 
 ## Monitoring storage performance<a name="Concepts.Storage.Metrics"></a>
@@ -183,12 +183,12 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.m3\.medium | 32 | 16 | 32 | 32 | 32 | 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.12xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.4xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.2xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.r5\.large | 16 |  | 16 | 64 | 64 | 
+| db\.r5\.24xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.12xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.4xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.large | 16 | 16 | 16 | 64 | 64 | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -204,12 +204,12 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.r3\.large | 64 | 16 | 64 | 64 | 64 | 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.xlarge | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.large | 16 |  | 16 | 64 | 64 | 
-| db\.t3\.medium | 16 |  | 16 | 32 | 32 | 
-| db\.t3\.small | 16 |  | 16 | 32 | 16 | 
-| db\.t3\.micro | 16 |  | 16 | 32 | 16 | 
+| db\.t3\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.large | 16 | 16 | 16 | 64 | 64 | 
+| db\.t3\.medium | 16 | 16 | 16 | 32 | 32 | 
+| db\.t3\.small | 16 | 16 | 16 | 32 | 16 | 
+| db\.t3\.micro | 16 | 16 | 16 | 32 | 16 | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
 | db\.t2\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.t2\.xlarge | 64 | 16 | 64 | 64 | 64 | 

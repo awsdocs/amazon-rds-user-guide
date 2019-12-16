@@ -1,6 +1,6 @@
 # Restoring a DB Instance to a Specified Time<a name="USER_PIT"></a>
 
-You can restore a DB instance to a specific point in time, creating a new DB instance \. When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` action after the DB instance is available\.
+You can restore a DB instance to a specific point in time, creating a new DB instance\. When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` operation after the DB instance is available\.
 
 RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To determine the latest restorable time for a DB instance, use the AWS CLI [ describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. In the AWS Management Console, this property is visible as the **Latest restore time** for the DB instance\. You can restore to any point in time during your backup retention period\.
 
@@ -10,7 +10,7 @@ Some actions, such as changing the recovery model of a SQL Server database, can 
 
 You can restore a DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-## AWS Management Console<a name="USER_PIT.CON"></a>
+## Console<a name="USER_PIT.CON"></a>
 
 **To restore a DB instance to a specified time**
 
@@ -32,7 +32,7 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 
 1. Choose **Launch DB Instance**\.
 
-## CLI<a name="USER_PIT.CLI"></a>
+## AWS CLI<a name="USER_PIT.CLI"></a>
 
 To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\.
 
@@ -54,9 +54,9 @@ For Windows:
 4.     --restore-time 2017-10-14T23:45:00.000Z
 ```
 
-## API<a name="USER_PIT.API"></a>
+## RDS API<a name="USER_PIT.API"></a>
 
-To restore a DB instance to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) action with the following parameters:
+To restore a DB instance to a specified time, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) operation with the following parameters:
 + `SourceDBInstanceIdentifier`
 + `TargetDBInstanceIdentifier`
 + `RestoreTime`

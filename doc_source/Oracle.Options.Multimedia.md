@@ -6,23 +6,27 @@ Amazon RDS supports Oracle Multimedia through the use of the `MULTIMEDIA` option
 If you use Oracle Multimedia, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Multimedia for the following editions and versions of Oracle: 
-+ Oracle Enterprise Edition, version 12\.2\.0\.1, all versions
-+ Oracle Enterprise Edition, version 12\.1\.0\.2\.v13 or later
-+ Oracle Enterprise Edition, version 11\.2\.0\.4\.v17 or later
++ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 18\.0\.0\.0, all versions
++ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.2\.0\.1, all versions
++ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.1\.0\.2\.v13 or later
++ Oracle Standard Edition \(SE and SE1\) or Oracle Enterprise Edition, version 11\.2\.0\.4\.v17 or later
+
+**Note**  
+Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multimedia isn't supported for Oracle 19c DB instances\. For more information, see [Desupport of Oracle Multimedia](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/behavior-changes-deprecated-desupport-oracle-database.html#GUID-BABC1C60-EA07-4EBE-8C67-B69B59E4F742) in the Oracle documentation\.
 
 ## Prerequisites for Oracle Multimedia<a name="Oracle.Options.Multimedia.PreReqs"></a>
 
 The following are prerequisites for using Oracle Multimedia: 
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
 + Your DB instance must be of sufficient class\. Oracle Multimedia is not supported for the db\.m1\.small, db\.t2\.micro, or db\.t2\.small DB instance classes\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
-+ Your DB instance must have Auto Minor Version Upgrade enabled\. Amazon RDS updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a CVSS score of 9\+ or other announced security vulnerabilities\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
++ Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
 + If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 
 ## Best Practices for Oracle Multimedia<a name="Oracle.Options.Multimedia.BestPractces"></a>
 
 The following are best practices for using Oracle Multimedia: 
 + For maximum security, use the `MULTIMEDIA` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
-+ Configure your DB instance to restrict access to your DB instance\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
++ Configure your DB instance to restrict access to your DB instance\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
 
 ## Adding the Oracle Multimedia Option<a name="Oracle.Options.Multimedia.Add"></a>
 
@@ -35,6 +39,9 @@ The following is the general process for adding the `MULTIMEDIA` option to a DB 
 1. Associate the option group with the DB instance\.
 
 There is a brief outage while the `MULTIMEDIA` option is added\. After you add the option, you don't need to restart your DB instance\. As soon as the option group is active, Oracle Multimedia is available\. 
+
+**Note**  
+During this outage, password verification functions are disabled briefly\. You can also can expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
 
 **To add the `MULTIMEDIA` option to a DB instance**
 

@@ -2,7 +2,7 @@
 
 Amazon RDS supports change data capture \(CDC\) for your DB instances running Microsoft SQL Server\. CDC captures changes that are made to the data in your tables\. It stores metadata about each change, which you can access later\. For more information about how CDC works, see [Change Data Capture](https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/track-data-changes-sql-server#Capture) in the Microsoft documentation\. 
 
-Before you use CDC with your Amazon RDS DB instances, enable it in the database by running `msdb.dbo.rds_cdc_enable_db`\. After CDC is enabled, any user who is `db_owner` of that database can enable or disable CDC on tables in that database\.
+Before you use CDC with your Amazon RDS DB instances, enable it in the database by running `msdb.dbo.rds_cdc_enable_db`\. You must have master user privileges to enable CDC in the Amazon RDS DB instance\. After CDC is enabled, any user who is `db_owner` of that database can enable or disable CDC on tables in that database\.
 
 **Important**  
 During restores, CDC will be disabled\. All of the related metadata is automatically removed from the database\. This applies to snapshot restores, point\-in\-time restores, and SQL Server Native restores from S3\. After performing one of these types of restores, you can re\-enable CDC and re\-specify tables to track\.
@@ -66,7 +66,7 @@ For more information on CDC tables, functions, and stored procedures in SQL Serv
 
 When you enable CDC, SQL Server creates the CDC jobs\. Database owners \(`db_owner`\) can view, create, modify, and delete the CDC jobs\. However, the RDS system account owns them\. Therefore, the jobs aren’t visible from native views, procedures, or in SQL Server Management Studio\.
 
-To control behavior of CDC in a database, use native SQL Server procedures such as [sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql) and [sp\_cdc\_start\_job ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-start-job-transact-sql)\. To change CDC job parameters, like `maxtrans` and `maxscans`, you can use [sp\_cdc\_change\_jobs\. ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-help-jobs-transact-sql)\.
+To control behavior of CDC in a database, use native SQL Server procedures such as [sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql) and [sp\_cdc\_start\_job ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-start-job-transact-sql)\. To change CDC job parameters, like `maxtrans` and `maxscans`, you can use [sp\_cdc\_change\_jobs\. ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-change-job-transact-sql)\.
 
 To get more information regarding the CDC jobs, you can query the following dynamic management views: 
 + sys\.dm\_cdc\_errors

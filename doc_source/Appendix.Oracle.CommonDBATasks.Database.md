@@ -7,7 +7,7 @@ This section describes how you can perform common DBA tasks related to databases
 + [Creating and Sizing Tablespaces](#Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles)
 + [Setting the Default Tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace)
 + [Setting the Default Temporary Tablespace](#Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace)
-+ [Checkpointing the Database](#Appendix.Oracle.CommonDBATasks.CheckpointingDatabase)
++ [Checkpointing a Database](#Appendix.Oracle.CommonDBATasks.CheckpointingDatabase)
 + [Setting Distributed Recovery](#Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery)
 + [Setting the Database Time Zone](#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)
 + [Working with Oracle External Tables](#Appendix.Oracle.CommonDBATasks.External_Tables)
@@ -16,17 +16,20 @@ This section describes how you can perform common DBA tasks related to databases
 + [Setting the Default Edition for a DB Instance](#Appendix.Oracle.CommonDBATasks.DefaultEdition)
 + [Enabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.EnablingAuditing)
 + [Disabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.DisablingAuditing)
++ [Cleaning Up Interrupted Online Index Builds](#Appendix.Oracle.CommonDBATasks.CleanupIndex)
++ [Skipping Corrupt Blocks](#Appendix.Oracle.CommonDBATasks.SkippingCorruptBlocks)
++ [Resizing the Temporary Tablespace in a Read Replica](#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
 ## Changing the Global Name of a Database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.rename_global_name` to change the global name of a database\. The `rename_global_name` procedure has the following parameters\. 
+To change the global name of a database, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.rename_global_name`\. The `rename_global_name` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_global_name` | varchar2 | — | Required | The new global name for the database\. | 
+| `p_new_global_name` | varchar2 | — | Yes | The new global name for the database\. | 
 
 The database must be open for the name change to occur\. For more information about changing the global name of a database, see [ALTER DATABASE](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_1004.htm#SQLRF52547) in the Oracle documentation\. 
 
@@ -72,14 +75,14 @@ alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsiz
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_tablespace` to set the default tablespace\. The `alter_default_tablespace` procedure has the following parameters\. 
+To set the default tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_tablespace`\. The `alter_default_tablespace` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Required | The name of the default tablespace\. | 
+| `tablespace_name` | varchar | — | Yes | The name of the default tablespace\. | 
 
 The following example sets the default tablespace to *users2*: 
 
@@ -89,14 +92,14 @@ exec rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2'
 
 ## Setting the Default Temporary Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_tablespace` to set the default temporary tablespace\. The `alter_default_temp_tablespace` procedure has the following parameters\. 
+To set the default temporary tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_default_temp_tablespace`\. The `alter_default_temp_tablespace` procedure has the following parameters\. 
 
 
 ****  
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Required | The name of the default temporary tablespace\. | 
+| `tablespace_name` | varchar | — | Yes | The name of the default temporary tablespace\. | 
 
 The following example sets the default temporary tablespace to *temp01*\. 
 
@@ -104,9 +107,9 @@ The following example sets the default temporary tablespace to *temp01*\.
 exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
 ```
 
-## Checkpointing the Database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
+## Checkpointing a Database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.checkpoint` to checkpoint the database\. The `checkpoint` procedure has no parameters\. 
+To checkpoint the database, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.checkpoint`\. The `checkpoint` procedure has no parameters\. 
 
 The following example checkpoints the database\.
 
@@ -116,7 +119,7 @@ exec rdsadmin.rdsadmin_util.checkpoint;
 
 ## Setting Distributed Recovery<a name="Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery"></a>
 
-You can use the Amazon RDS procedures `rdsadmin.rdsadmin_util.enable_distr_recovery` and `disable_distr_recovery` to set distributed recovery\. The procedures have no parameters\. 
+To set distributed recovery, use the Amazon RDS procedures `rdsadmin.rdsadmin_util.enable_distr_recovery` and `disable_distr_recovery`\. The procedures have no parameters\. 
 
 The following example enables distributed recovery\.
 
@@ -147,7 +150,7 @@ The `alter_db_time_zone` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_tz` | varchar2 | — | Required |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
+| `p_new_tz` | varchar2 | — | Yes |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
 The following example changes the time zone to UTC plus 3 hours\. 
 
@@ -251,12 +254,14 @@ For more information about Oracle edition\-based redefinition, see [About Editio
 
 ## Enabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.EnablingAuditing"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table` to enable auditing on the database audit trail table `SYS.AUD$`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
+To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
 
 Enabling auditing is supported for Oracle DB instances running the following versions:
 + 11\.2\.0\.4\.v18 and later 11\.2 versions
 + 12\.1\.0\.2\.v14 and later 12\.1 versions
-+ All 12\.2 and later versions
++ All 12\.2\.0\.1 versions
++ All 18\.0\.0\.0 versions
++ All 19\.0\.0\.0 versions
 
 The `audit_all_sys_aud_table` procedure has the following parameters\.
 
@@ -265,9 +270,9 @@ The `audit_all_sys_aud_table` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_by_access` | boolean | true | Optional | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
+| `p_by_access` | boolean | true | No | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
 
-The following query returns the current audit configuration for `SYS.AUD$` for a database:
+The following query returns the current audit configuration for `SYS.AUD$` for a database\.
 
 ```
 select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
@@ -291,7 +296,7 @@ For more information, see [AUDIT \(Traditional Auditing\)](https://docs.oracle.c
 
 ## Disabling Auditing for the SYS\.AUD$ Table<a name="Appendix.Oracle.CommonDBATasks.DisablingAuditing"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table` to disable auditing on the database audit trail table `SYS.AUD$`\. This procedure takes no parameters\. 
+To disable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table`\. This procedure takes no parameters\. 
 
 The following query returns the current audit configuration for `SYS.AUD$` for a database:
 
@@ -306,3 +311,181 @@ exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;
 ```
 
 For more information, see [NOAUDIT \(Traditional Auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/NOAUDIT-Traditional-Auditing.html#GUID-9D8EAF18-4AB3-4C04-8BF7-37BD0E15434D) in the Oracle documentation\. 
+
+## Cleaning Up Interrupted Online Index Builds<a name="Appendix.Oracle.CommonDBATasks.CleanupIndex"></a>
+
+To clean up failed online index builds, use the Amazon RDS procedure `rdsadmin.rdsadmin_dbms_repair.online_index_clean`\. 
+
+The `online_index_clean` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `object_id` | binary\_integer | `ALL_INDEX_ID` | No | The object ID of the index\. Typically, you can use the object ID from the ORA\-08104 error text\. | 
+| `wait_for_lock` | binary\_integer | `rdsadmin.rdsadmin_dbms_repair.lock_wait` | No | Specify `rdsadmin.rdsadmin_dbms_repair.lock_wait`, the default, to try to get a lock on the underlying object and retry until an internal limit is reached if the lock fails\. Specify `rdsadmin.rdsadmin_dbms_repair.lock_nowait` to try to get a lock on the underlying object but not retry if the lock fails\. | 
+
+The following example cleans up a failed online index build:
+
+```
+declare
+  is_clean boolean;
+begin
+  is_clean := rdsadmin.rdsadmin_dbms_repair.online_index_clean(
+    object_id     => 1234567890, 
+    wait_for_lock => rdsadmin.rdsadmin_dbms_repair.lock_nowait
+  );
+end;
+ /
+```
+
+For more information, see [ONLINE\_INDEX\_CLEAN Function](https://docs.oracle.com/database/121/ARPLS/d_repair.htm#ARPLS67555) in the Oracle documentation\. 
+
+## Skipping Corrupt Blocks<a name="Appendix.Oracle.CommonDBATasks.SkippingCorruptBlocks"></a>
+
+To skip corrupt blocks during index and tables scans, use the `rdsadmin.rdsadmin_dbms_repair` package\.
+
+The following procedures wrap the functionality of the `sys.dbms_repair.admin_table` procedure and take no parameters:
++ `rdsadmin.rdsadmin_dbms_repair.create_repair_table`
++ `rdsadmin.rdsadmin_dbms_repair.create_orphan_keys_table`
++ `rdsadmin.rdsadmin_dbms_repair.drop_repair_table`
++ `rdsadmin.rdsadmin_dbms_repair.drop_orphan_keys_table`
++ `rdsadmin.rdsadmin_dbms_repair.purge_repair_table`
++ `rdsadmin.rdsadmin_dbms_repair.purge_orphan_keys_table`
+
+These procedures take no parameters\.
+
+The following procedures take the same parameters as their counterparts in the `DBMS_REPAIR` package for Oracle databases:
++ `rdsadmin.rdsadmin_dbms_repair.check_object`
++ `rdsadmin.rdsadmin_dbms_repair.dump_orphan_keys`
++ `rdsadmin.rdsadmin_dbms_repair.fix_corrupt_blocks`
++ `rdsadmin.rdsadmin_dbms_repair.rebuild_freelists`
++ `rdsadmin.rdsadmin_dbms_repair.segment_fix_status`
++ `rdsadmin.rdsadmin_dbms_repair.skip_corrupt_blocks`
+
+Each procedure takes the same parameters as the corresponding procedure in the `DBMS_REPAIR` package for Oracle databases\. For more information about the parameters for these procedures, see [DBMS\_REPAIR](https://docs.oracle.com/database/121/ARPLS/d_repair.htm#ARPLS044) in the Oracle documentation\.
+
+Complete the following steps to skip corrupt blocks during index and table scans\.
+
+1. Run the following procedures to create repair tables if the don't already exist\.
+
+   ```
+   exec rdsadmin.rdsadmin_dbms_repair.create_repair_table;
+   exec rdsadmin.rdsadmin_dbms_repair.create_orphan_keys_table;
+   ```
+
+1. Run the following procedures to check for existing records and purge them if appropriate\.
+
+   ```
+   select count(*) from SYS.REPAIR_TABLE;
+   select count(*) from SYS.ORPHAN_KEY_TABLE;
+   select count(*) from SYS.DBA_REPAIR_TABLE;
+   select count(*) from SYS.DBA_ORPHAN_KEY_TABLE;
+   
+   exec rdsadmin.rdsadmin_dbms_repair.purge_repair_table;
+   exec rdsadmin.rdsadmin_dbms_repair.purge_orphan_keys_table;
+   ```
+
+1. Run the following procedure to check for corrupt blocks\.
+
+   ```
+   set serveroutput on
+   declare v_num_corrupt int;
+   begin
+     v_num_corrupt := 0;
+     rdsadmin.rdsadmin_dbms_repair.check_object (
+       schema_name => '&corruptionOwner',
+       object_name => '&corruptionTable',
+       corrupt_count =>  v_num_corrupt
+     );
+   dbms_output.put_line('number corrupt: '||to_char(v_num_corrupt));
+   end;
+   /
+   
+   col corrupt_description format a30
+   col repair_description format a30
+   select object_name, block_id, corrupt_type, marked_corrupt, corrupt_description, repair_description from sys.repair_table;
+   
+   select skip_corrupt from dba_tables where owner = '&corruptionOwner' and table_name = '&corruptionTable';
+   ```
+
+1. Run the following procedure to enable corruption skipping for affected tables\.
+
+   ```
+   begin
+     rdsadmin.rdsadmin_dbms_repair.skip_corrupt_blocks (
+       schema_name => '&corruptionOwner',
+       object_name => '&corruptionTable',
+       object_type => rdsadmin.rdsadmin_dbms_repair.table_object,
+       flags => rdsadmin.rdsadmin_dbms_repair.skip_flag);
+   end;
+   /
+   select skip_corrupt from dba_tables where owner = '&corruptionOwner' and table_name = '&corruptionTable';
+   ```
+
+1. Run the following procedure to disable corruption skipping\.
+
+   ```
+   begin
+     rdsadmin.rdsadmin_dbms_repair.skip_corrupt_blocks (
+       schema_name => '&corruptionOwner',
+       object_name => '&corruptionTable',
+       object_type => rdsadmin.rdsadmin_dbms_repair.table_object,
+       flags => rdsadmin.rdsadmin_dbms_repair.noskip_flag);
+   end;
+   /
+   
+   select skip_corrupt from dba_tables where owner = '&corruptionOwner' and table_name = '&corruptionTable';
+   ```
+
+1. Run the following procedures to drop the repair tables\.
+
+   ```
+   exec rdsadmin.rdsadmin_dbms_repair.drop_repair_table;
+   exec rdsadmin.rdsadmin_dbms_repair.drop_orphan_keys_table;
+   ```
+
+## Resizing the Temporary Tablespace in a Read Replica<a name="Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica"></a>
+
+By default, Oracle tablespaces are created with auto\-extend enabled and no maximum size\. Because of these default settings, tablespaces can grow too large in some cases\. We recommend that you specify an appropriate maximum size on permanent and temporary tablespaces, and that you carefully monitor space usage\. 
+
+To resize the temporary space in a Read Replica for an Oracle DB instance, use either the `rdsadmin.rdsadmin_util.resize_temp_tablespace` or the `rdsadmin.rdsadmin_util.resize_tempfile` Amazon RDS procedure\.
+
+The `resize_temp_tablespace` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `temp_tbs` | varchar2 | — | Yes | The name of the tempoarary tablespace to resize\. | 
+| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+
+The `resize_tempfile` procedure has the following parameters\.
+
+
+****  
+
+| Parameter Name | Data Type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+| `file_id` | binary\_integer | — | Yes | The file identifier of the tempoarary tablespace to resize\. | 
+| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+
+The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a Read Replica\.
+
+```
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');        
+```
+
+```
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');        
+```
+
+The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a Read Replica\.
+
+```
+exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');        
+```
+
+For more information about Read Replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.

@@ -1,7 +1,8 @@
 # Upgrading the Oracle DB Engine<a name="USER_UpgradeDBInstance.Oracle"></a>
 
 When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. Amazon RDS supports the following upgrades to an Oracle DB instance: 
-+ **Major Version Upgrades** – from 11g to 12c\. 
++ Major Version Upgrades 
++ Minor Version Upgrades 
 
 In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. In contrast, a minor version upgrade includes only changes that are backward\-compatible with existing applications\. 
 
@@ -35,10 +36,17 @@ If your DB instance is in a Multi\-AZ deployment, and operating system updates a
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
-Amazon RDS supports the following major version upgrades:
-+ Oracle DB instances running Oracle version 12\.1\.0\.2 to Oracle version 12\.2\.0\.1
-+ Oracle DB instances running Oracle version 11\.2\.0\.4 to Oracle version 12\.2\.0\.1
-+ Oracle DB instances running Oracle version 11\.2\.0\.4 to Oracle version 12\.1\.0\.2\.v5 and higher
+Amazon RDS supports the following major version upgrades\.
+
+
+****  
+
+| Current Version | Upgrade Supported | 
+| --- | --- | 
+|  18\.0\.0\.0  |  19\.0\.0\.0  | 
+|  12\.2\.0\.1  |  19\.0\.0\.0 18\.0\.0\.0  | 
+|  12\.1\.0\.2  |  19\.0\.0\.0 18\.0\.0\.0 12\.2\.0\.1  | 
+|  11\.2\.0\.4  |  19\.0\.0\.0 18\.0\.0\.0 12\.2\.0\.1 12\.1\.0\.2\.v5 and higher 12\.1 versions  | 
 
 To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\.
 
@@ -60,7 +68,13 @@ For example, a major version upgrade from Oracle version 11\.2\.0\.4\.v14 to Ora
 
 ## Oracle Minor Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Minor"></a>
 
-A minor version upgrade applies an Oracle PSU in a major version\. 
+A minor version upgrade applies an Oracle Database Patch Set Update \(PSU\) or Release Update \(RU\) in a major version\. 
+
+An Amazon RDS for Oracle DB instance is scheduled to be upgraded automatically during its next maintenance window when it meets the following conditions:
++ The DB instance has the **Auto minor version upgrade** option enabled\.
++ The DB instance is not running the latest minor DB engine version\.
+
+The DB instance is upgraded to the latest quarterly PSU or RU four to six weeks after it is made available by Amazon RDS for Oracle\. For more information about PSUs and RUs, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
 The following minor version upgrades aren't supported\. 
 
@@ -124,9 +138,9 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 1. Restore the DB snapshot to create a new test DB instance\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
 1. Modify this new test DB instance to upgrade it to the new version, by using one of the following methods: 
-   + [Upgrading the Engine Version of a DB Instance Using the Console](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.Console)
-   + [Upgrading the Engine Version of a DB Instance Using the AWS CLI](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.CLI)
-   + [Upgrading the Engine Version of a DB Instance Using the RDS API](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.API)
+   + [Console](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.Console)
+   + [AWS CLI](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.CLI)
+   + [RDS API](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual.API)
 
 1. Perform testing: 
    + Run as many of your quality assurance tests against the upgraded DB instance as needed to ensure that your database and application work correctly with the new version\. 

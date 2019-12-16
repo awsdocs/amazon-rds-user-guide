@@ -60,7 +60,7 @@ The error log is enabled by default\. The following table summarizes the require
 |  Slow query log  |  The DB instance must use a custom parameter group with the parameter setting `slow_query_log = 1` to enable the slow query log\.  | 
 |  Log output  |  The DB instance must use a custom parameter group with the parameter setting `log_output = FILE` to write logs to the file system and publish them to CloudWatch Logs\.  | 
 
-### AWS Management Console<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish MariaDB logs to CloudWatch Logs from the console**
 
@@ -137,20 +137,20 @@ For Windows:
 
 ### RDS API<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs.API"></a>
 
-You can publish MariaDB logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
+You can publish MariaDB logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier`
 + `CloudwatchLogsExportConfiguration`
 
 **Note**  
 A change to the `CloudwatchLogsExportConfiguration` parameter is always applied to the DB instance immediately\. Therefore, the `ApplyImmediately` parameter has no effect\.
 
-You can also publish MariaDB logs by calling the following RDS API actions: 
+You can also publish MariaDB logs by calling the following RDS API operations: 
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-Run one of these RDS API actions with the following parameters: 
+Run one of these RDS API operations with the following parameters: 
 + `DBInstanceIdentifier`
 + `EnableCloudwatchLogsExports`
 + `Engine`

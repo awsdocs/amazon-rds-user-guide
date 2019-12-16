@@ -90,7 +90,7 @@ If you receive the error `No package package-name available`, then your instance
    [ec2-user ~]$ sudo service httpd start
    ```
 
-   You can test that your web server is properly installed and started by entering the public DNS name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. If you don't see the Apache test page, then verify that your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with an Amazon RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+   You can test that your web server is properly installed and started by entering the public DNS name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. If you don't see the Apache test page, then verify that your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
@@ -132,7 +132,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo chown -R root:www /var/www
+   [ec2-user ~]$ sudo chgrp -R www /var/www
    ```
 
 1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.

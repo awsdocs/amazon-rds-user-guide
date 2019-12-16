@@ -35,7 +35,7 @@ Amazon RDS supports Oracle database version upgrades as needed\. For more inform
 
 ## Before You Begin<a name="Oracle.Resources.RCU.BeforeYouBegin"></a>
 
-Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Fusion Middleware components, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating an Amazon VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
+Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Fusion Middleware components, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating a VPC for Use with an Oracle Database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
 
 Before you begin, you also need an Oracle DB instance\. For information about how to create an Oracle DB instance for use with Fusion Middleware metadata, see [Creating an Oracle DB Instance](Oracle.Resources.Shared.md#Oracle.Resources.Shared.Database.RDS)\. 
 
@@ -186,5 +186,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w4aac30c95c15c19"></a>
+## Related Topics<a name="w37aac32d107c15c19"></a>
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

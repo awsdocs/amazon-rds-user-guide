@@ -1,4 +1,4 @@
-# On\-Demand DB Instances<a name="USER_OnDemandDBInstances"></a>
+# On\-Demand DB Instances for Amazon RDS<a name="USER_OnDemandDBInstances"></a>
 
 Amazon RDS on\-demand DB instances are billed based on the class of the DB instance \(for example, db\.t2\.small or db\.m4\.large\)\. Partial DB instance hours consumed are billed as full hours\. For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 

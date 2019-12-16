@@ -159,14 +159,14 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w4aac19c13c21b7"></a>
+### Available OS Metrics<a name="w37aac19c13c21b7"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
-#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w4aac19c13c21b7b5"></a>
+#### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="w37aac19c13c21b7b5"></a>
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
+<a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w4aac19c13c21b7b9"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w37aac19c13c21b7b9"></a>
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
+<a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

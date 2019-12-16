@@ -3,6 +3,8 @@
 Amazon RDS supports Oracle Java Virtual Machine \(JVM\) through the use of the `JVM` option\. Oracle Java provides a SQL schema and functions that facilitate Oracle Java features in an Oracle database\. For more information, see [ Introduction to Java in Oracle Database](https://docs.oracle.com/database/121/JJDEV/chone.htm) in the Oracle documentation\.
 
 You can use Oracle JVM with the following Oracle Database versions:
++ Oracle 19c, 19\.0\.0\.0, all versions
++ Oracle 18c, 18\.0\.0\.0, all versions
 + Oracle 12c, 12\.2\.0\.1, all versions
 + Oracle 12c, 12\.1\.0\.2\.v13 or later
 + Oracle 11g, 11\.2\.0\.4\.v17 or later
@@ -20,15 +22,15 @@ SELECT * FROM dba_java_policy
 
 The following are prerequisites for using Oracle Java:
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.m1\.small, db\.t2\.micro, or db\.t2\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
-+ Your DB instance must have the **Auto minor version upgrade** option enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\)\. In particular, it does so in cases where there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\.0 or greater or other announced security vulnerabilities\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\.
++ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t2\.micro, db\.t2\.small, db\.t3\.micro, or db\.t3\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
++ Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
 + If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 
 ## Best Practices for Oracle JVM<a name="oracle-options-java.best-practices"></a>
 
 The following are best practices for using Oracle Java: 
 + For maximum security, use the `JVM` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
-+ Configure your DB instance to restrict network access\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with an Amazon RDS DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
++ Configure your DB instance to restrict network access\. For more information, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md) and [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
 
 ## Adding the Oracle JVM Option<a name="oracle-options-java.add"></a>
 
@@ -41,6 +43,9 @@ The following is the general process for adding the `JVM` option to a DB instanc
 1. Associate the option group with the DB instance\.
 
 There is a brief outage while the `JVM` option is added\. After you add the option, you don't need to restart your DB instance\. As soon as the option group is active, Oracle Java is available\. 
+
+**Note**  
+During this outage, password verification functions are disabled briefly\. You can also can expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
 
 **To add the JVM option to a DB instance**
 

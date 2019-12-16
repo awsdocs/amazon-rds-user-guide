@@ -1,4 +1,4 @@
-# Connecting to Your DB Instance from the Command Line: AWS CLI and psql Client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL"></a>
+# Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and psql Client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL"></a>
 
 You can connect from the command line to an Amazon RDS for PostgreSQL DB instance with the AWS CLI and psql command line tool as described following\.
 

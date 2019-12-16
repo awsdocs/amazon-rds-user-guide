@@ -5,9 +5,11 @@ To delete a DB instance, you must do the following:
 + Enable or disable the option to take a final DB snapshot of the instance
 + Enable or disable the option to retain automated backups
 
-You can only delete instances that don't have deletion protection enabled\. When you create or modify a DB instance, you have the option to enable deletion protection so that users can't delete the DB instance\. Deletion protection is disabled by default for you when you use AWS CLI and API commands\. Deletion protection is enabled for you when you use the AWS Management Console to create a production DB instance\. However, Amazon RDS enforces deletion protection when you use the console, the CLI, or the API to delete a DB instance\. To delete a DB instance that has deletion protection enabled, first modify the instance and disable deletion protection\.
-
 If the DB instance that you want to delete has a Read Replica, you should either promote the Read Replica or delete it\. For more information, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
+
+## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
+
+You can only delete instances that don't have deletion protection enabled\. When you create or modify a DB instance, you have the option to enable deletion protection so that users can't delete the DB instance\. Deletion protection is disabled by default for you when you use AWS CLI and API commands\. Deletion protection is enabled for you when you use the AWS Management Console to create a production DB instance\. However, Amazon RDS enforces deletion protection when you use the console, the CLI, or the API to delete a DB instance\. To delete a DB instance that has deletion protection enabled, first modify the instance and disable deletion protection\.
 
 ## Creating a Final Snapshot and Retaining Automated Backups<a name="USER_DeleteInstance.Snapshot"></a>
 
@@ -19,7 +21,7 @@ When you delete a DB instance, you can choose whether to create a final snapshot
 |  | With Final Snapshot | Without Final Snapshot | Retain Automated Backups | 
 | --- | --- | --- | --- | 
 |  How to choose  |  To be able to restore your deleted DB instance at a later time, create a final DB snapshot\.   |  To delete a DB instance quickly, you can skip creating a final DB snapshot\.   If you skip the snapshot, to restore your DB instance you need one of the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)  | Instead of creating a snapshot, you can choose to enable Retain automated backups when you delete a DB instance\. These backups are still subject to the retention period of the DB instance and age out the same way systems snapshots do\. | 
-|  Automated backups  |  All automated backups are deleted and can't be recovered, unless you enable **Retain automated backups**\.  |  All automated backups are deleted and can't be recovered, unless you choose to retain automated backups when you delete the DB instance\.  | Automated backups are retained for a set period of time, regardless of whether you chose to create a final snapshot\. They are retained for retention period that was set on the DB instance at the time you deleted it\. | 
+|  Automated backups  |  All automated backups are deleted and can't be recovered, unless you enable **Retain automated backups**\.  |  All automated backups are deleted and can't be recovered, unless you choose to retain automated backups when you delete the DB instance\.  |  Automated backups are retained for a set period of time, regardless of whether you chose to create a final snapshot\. They are retained for the retention period that was set on the DB instance at the time that you deleted it\. To delete a retained automated backup, follow the instructions in [Deleting Retained Automated Backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups-Deleting)\.  | 
 |  Manual snapshots  |  Earlier manual snapshots aren't deleted\.   |  Earlier manual snapshots aren't deleted\.   |  No snapshots are deleted\.   | 
 
 You can't create a final snapshot of your DB instance if it has the status `creating`, `failed`, `incompatible-restore`, or `incompatible-network`\. For more information about DB instance statuses, see [DB Instance Status](Overview.DBInstance.Status.md)\. 
@@ -38,9 +40,9 @@ You can delete a DB instance using the AWS Management Console, the AWS CLI, or t
 
 1. For **Actions**, choose **Delete**\. 
 
-1. For **Create final Snapshot?**, choose **Yes** or **No**\. 
+1. To create a final DB snapshot for the DB instance, enable **Create final snapshot?**\. 
 
-1. If you chose **Yes** in the previous step, for **Final snapshot name** enter the name of your final DB snapshot\. 
+1. If you enabled **Create final snapshot?** in the previous step, for **Final snapshot name** enter the name of your final DB snapshot\. 
 
 1. To retain automated backups, choose **Retain automated backups**\.
 
@@ -92,7 +94,7 @@ aws rds delete-db-instance ^
 
 ### RDS API<a name="USER_DeleteInstance.API"></a>
 
-To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) action with the following parameters: 
+To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) operation with the following parameters: 
 + `DBInstanceIdentifier`
 + `FinalDBSnapshotIdentifier` or `SkipFinalSnapshot`
 

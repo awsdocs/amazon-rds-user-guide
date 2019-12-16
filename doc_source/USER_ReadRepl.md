@@ -25,7 +25,7 @@ Deploying one or more Read Replicas for a given source DB instance might make se
 
 By default, a Read Replica is created with the same storage type as the source DB instance\. However, you can create a Read Replica that has a different storage type from the source DB instance based on the options listed in the following table\. 
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
+<a name="rds-read-replica-storage-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
 
 Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new Read Replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB, MySQL, and PostgreSQL, you can create a Read Replica from an existing Read Replica\. For example, from **ReadReplica1**, you can create a new Read Replica, such as **ReadReplica2**\. For Oracle, you can't create a Read Replica from an existing Read Replica\. 
 
@@ -37,7 +37,7 @@ Because Amazon RDS DB engines implement replication differently, there are sever
 | Feature or Behavior | MySQL and MariaDB | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | 
 |  What is the replication method?   |  Logical replication\.  |  Physical replication\.  |  Physical replication\.  | 
-|  How are transaction logs purged?  |  Amazon RDS MySQL and MariaDB keep any binary logs that haven't been applied\.  |  Amazon RDS for Oracle keeps a minimum of two hours of transaction logs on the source DB instance\. Logs are purged from the source after two hours or after the `archivelog retention hours` setting has passed, whichever is longer\. Logs are purged from the Read Replica after the `archivelog retention hours` setting has passed only if they have been successfully applied to the database\.  For information about setting the `archivelog retention hours`, see [Retaining Archived Redo Logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\.  |  PostgreSQL has a parameter, `wal_keep_segments`, that dictates how many write ahead log \(WAL\) files are kept to provide data to the Read Replicas\. The parameter value specifies the number of logs to keep\.   | 
+|  How are transaction logs purged?  |  RDS MySQL and RDS MariaDB keep any binary logs that haven't been applied\.  |  If a source DB instance has no cross\-region Read Replicas, Amazon RDS for Oracle keeps a minimum of two hours of transaction logs on the source DB instance\. Logs are purged from the source DB instance after two hours or after the archive log retention hours setting has passed, whichever is longer\. Logs are purged from the Read Replica after the archive log retention hours setting has passed only if they have been successfully applied to the database\.  In some cases, a source DB instance might have one or more cross\-region Read Replicas\. If so, Amazon RDS for Oracle keeps the transaction logs on the source DB instance until they have been transmitted and applied to all cross\-region Read Replicas\. For information about setting `archivelog retention hours`, see [Retaining Archived Redo Logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\.  |  PostgreSQL has the parameter `wal_keep_segments` that dictates how many write ahead log \(WAL\) files are kept to provide data to the Read Replicas\. The parameter value specifies the number of logs to keep\.   | 
 |  Can a replica be made writable?  |  Yes\. You can enable the MySQL or MariaDB Read Replica to be writable\.   |  No\. An Oracle Read Replica is a physical copy, and Oracle doesn't allow for writes in a Read Replica\. You can promote the Read Replica to make it writable\. The promoted Read Replica has the replicated data to the point when the request was made to promote it\.   |  No\. A PostgreSQL Read Replica is a physical copy, and PostgreSQL doesn't allow for a Read Replica to be made writable\.   | 
 |  Can backups be performed on the replica?  |  Yes\. You can enable automatic backups on a MySQL or MariaDB Read Replica\.   |  No\. You can't create manual snapshots of Amazon RDS for Oracle Read Replicas or enable automatic backups for them\.   |  Yes, you can create a manual snapshot of a PostgreSQL Read Replica, but you can't enable automatic backups\.   | 
 |  Can you use parallel replication?  |  Yes\. MySQL version 5\.6 and later and all supported MariaDB versions allow for parallel replication threads\.   |  Yes\. Redo log data is always transmitted in parallel from the source database to all of its Read Replicas\.  |  No\. PostgreSQL has a single process handling replication\.  | 
@@ -49,6 +49,9 @@ Because Amazon RDS DB engines implement replication differently, there are sever
 When you create a Read Replica, Amazon RDS takes a DB snapshot of your source DB instance and begins replication\. As a result, you experience a brief I/O suspension on your source DB instance while the DB snapshot occurs\. The I/O suspension typically lasts about one minute\. You can avoid the I/O suspension if the source DB instance is a Multi\-AZ deployment, because in that case the snapshot is taken from the secondary DB instance\. An active, long\-running transaction can slow the process of creating the Read Replica\. We recommend that you wait for long\-running transactions to complete before creating a Read Replica\. If you create multiple Read Replicas in parallel from the same source DB instance, Amazon RDS takes only one snapshot at the start of the first create action\. 
 
 When creating a Read Replica, there are a few things to consider\. First, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a Read Replica that is the source DB instance for another Read Replica\. For MySQL DB instances, automatic backups are supported only for Read Replicas running MySQL 5\.6 and later, but not for MySQL versions 5\.5\. To enable automatic backups on an Amazon RDS MySQL version 5\.6 and later Read Replica, first create the Read Replica, then modify the Read Replica to enable automatic backups\. 
+
+**Note**  
+Within an AWS Region, all Read Replicas must be created in the same Amazon VPC as the source DB instance, even if VPC peering is configured in the AWS Region\. 
 
 ### Console<a name="USER_ReadRepl.Create.Console"></a>
 
@@ -196,34 +199,34 @@ https://rds.amazonaws.com/
 
 ## Creating a Read Replica in a Different AWS Region<a name="USER_ReadRepl.XRgn"></a>
 
-With Amazon RDS, you can create a MariaDB, MySQL, or PostgreSQL Read Replica in a different AWS Region than the source DB instance\. You create a Read Replica to do the following:
+With Amazon RDS, you can create a MariaDB, MySQL, Oracle, or PostgreSQL Read Replica in a different AWS Region than the source DB instance\. You create a Read Replica to do the following:
 + Improve your disaster recovery capabilities\.
 + Scale read operations into an AWS Region closer to your users\.
 + Make it easier to migrate from a data center in one AWS Region to a data center in another AWS Region\.
 
-Creating a MariaDB, MySQL, or PostgreSQL Read Replica in a different AWS Region than the source instance is similar to creating a replica in the same AWS Region\. To create a Read Replica across regions, you can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API action\.
+Creating a Read Replica in a different AWS Region than the source instance is similar to creating a replica in the same AWS Region\. To create a Read Replica across AWS Regions, you can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API operation\.
 
  To create an encrypted Read Replica in a different AWS Region than the source DB instance, the source DB instance must be encrypted\. 
 
-Following, you can find information on how to create a Read Replica from a source MariaDB, MySQL, or PostgreSQL DB instance in a different AWS Region\.
+Following, you can find information on how to create a Read Replica from a source MariaDB, MySQL, Oracle, or PostgreSQL DB instance in a different AWS Region\.
 
 ### Console<a name="USER_ReadRepl.XRgn.CON"></a>
 
-You can create a Read Replica across regions using the AWS Management Console\.
+You can create a Read Replica across AWS Regions using the AWS Management Console\.
 
-**To create a Read Replica across regions with the console**
+**To create a Read Replica across AWS Regions with the console**
 
 1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the MariaDB, MySQL, or PostgreSQL DB instance that you want to use as the source for a Read Replica, and then choose **Create read replica** for **Actions**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+1. Choose the MariaDB, MySQL, Oracle, or PostgreSQL DB instance that you want to use as the source for a Read Replica\. For **Actions**, choose **Create read replica**\. To create an encrypted Read Replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
 1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type for the Read Replica\. 
 
 1. Choose the other settings you want to use: 
    + For **DB instance identifier**, enter a name for the Read Replica\.
-   + In the **Network & Security** section, choose a value for **Designation region** and **Designation DB subnet group**\.
+   + In the **Network & Security** section, choose a value for **Destination region** and **Destination DB subnet group**\.
    +  To create an encrypted Read Replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the destination AWS Region\. 
    + Choose the other settings that you want to use\. 
 
@@ -231,9 +234,9 @@ You can create a Read Replica across regions using the AWS Management Console\.
 
 ### AWS CLI<a name="USER_ReadRepl.XRgn.CLI"></a>
 
- To create a Read Replica from a source MySQL, MariaDB, or PostgreSQL DB instance in a different AWS Region, you can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command\. In this case, you use [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) from the AWS Region where you want the Read Replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\. 
+ To create a Read Replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command\. In this case, you use [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) from the AWS Region where you want the Read Replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\. 
 
-For example, if your source DB instance is in the US East \(N\. Virginia\) region, the ARN looks similar to the following\.
+For example, if your source DB instance is in the US East \(N\. Virginia\) Region, the ARN looks similar to the following\.
 
 `arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance`
 
@@ -291,11 +294,11 @@ aws rds create-db-instance-read-replica ^
 
 ### RDS API<a name="USER_ReadRepl.XRgn.API"></a>
 
- To create a Read Replica from a source MySQL, MariaDB, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API function [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the Read Replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\. 
+ To create a Read Replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API function [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the Read Replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\. 
 
  To create an encrypted Read Replica in a different AWS Region than the source DB instance, you can use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) action from the destination AWS Region\. To create an encrypted Read Replica in another AWS Region, you must specify a value for `PreSignedURL`\. `PreSignedURL` should contain a request for the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) action to call in the source AWS Region where the Read Replica is created in\. To learn more about `PreSignedUrl`, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. 
 
-For example, if your source DB instance is in the US East \(N\. Virginia\) region, the ARN looks similar to the following\.
+For example, if your source DB instance is in the US East \(N\. Virginia\) Region, the ARN looks similar to the following\.
 
 `arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance`
 
@@ -334,21 +337,30 @@ https://us-west-2.rds.amazonaws.com/
 
 ### Cross\-Region Replication Considerations<a name="USER_ReadRepl.XRgn.Cnsdr"></a>
 
-All of the considerations for performing replication within an AWS Region apply to cross\-region replication\. The following extra considerations apply when replicating between regions: 
-+ You can only replicate between regions when using Amazon RDS DB instances of MariaDB, PostgreSQL \(versions 9\.4\.7 and 9\.5\.2 and later\), or MySQL 5\.6 and later\.
-+ A source DB instance can have cross\-region Read Replicas in multiple regions\. 
+All of the considerations for performing replication within an AWS Region apply to cross\-region replication\. The following extra considerations apply when replicating between AWS Regions: 
++ You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
+  + MariaDB \(all versions\)\.
+  + MySQL version 5\.6 and later\.
+  + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, all versions of 12\.2, and all versions of 18\.0\.
+
+    An an Active Data Guard license is required\. For information about limitations for Oracle cross\-region Read Replicas, see [Read Replica Limitations with Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
+  + PostgreSQL version 9\.4\.7 and later 9\.4 versions, and version 9\.5\.2 and later 9\.5 versions\.
++ A source DB instance can have cross\-region Read Replicas in multiple AWS Regions\. 
 + You can only create a cross\-region Amazon RDS Read Replica from a source Amazon RDS DB instance that is not a Read Replica of another Amazon RDS DB instance\.
-+ You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) region\.
++ You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) Region\.
 + You can expect to see a higher level of lag time for any Read Replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + Within an AWS Region, all cross\-region Read Replicas created from the same source DB instance must either be in the same Amazon VPC or be outside of a VPC\. For cross\-region Read Replicas, any of the create Read Replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\. 
-+ You can create a cross\-region Read Replica in a VPC from a source DB instance that is in a VPC in another region\. You can also create a cross\-region Read Replica in a VPC from a source DB instance that is not in a VPC\. You can also create a cross\-region Read Replica that is not in a VPC from a source DB instance that is in a VPC\.
++ You can create a cross\-region Read Replica in a VPC from a source DB instance that is in a VPC in another AWS Region\. You can also create a cross\-region Read Replica in a VPC from a source DB instance that is not in a VPC\. You can also create a cross\-region Read Replica that is not in a VPC from a source DB instance that is in a VPC\.
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-region Read Replica instances\. 
++ The Read Replica uses the default DB parameter group for the specified DB engine\.
++ The Read Replica uses the default security group\.
++ For Oracle DB instances, when the source for a cross\-region Read Replica is deleted, the Read Replica is promoted\. For MariaDB, MySQL, and PostgreSQL DB instances, when the source for a cross\-region Read Replica is deleted, the replication status of the Read Replica is set to `terminated`\. However, the Read Replica isn't promoted\.
 
 ### Cross\-Region Replication Costs<a name="USER_ReadRepl.XRgn.Costs"></a>
 
 The data transferred for cross\-region replication incurs Amazon RDS data transfer charges\. These cross\-region replication actions generate charges for the data transferred out of the source AWS Region:
-+ When you create a Read Replica, Amazon RDS takes a snapshot of the source instance and transfers the snapshot to the Read Replica region\.
-+ For each data modification made in the source databases, Amazon RDS transfers data from the source AWS Region to the Read Replica region\.
++ When you create a Read Replica, Amazon RDS takes a snapshot of the source instance and transfers the snapshot to the Read Replica AWS Region\.
++ For each data modification made in the source databases, Amazon RDS transfers data from the source AWS Region to the Read Replica AWS Region\.
 
 For more information about data transfer pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
@@ -363,7 +375,7 @@ In this example, you are only charged for the data transferred from `source-inst
 
 ### How Amazon RDS Does Cross\-Region Replication<a name="USER_ReadRepl.XRgn.Process"></a>
 
-Amazon RDS uses the following process to create a cross\-region Read Replica\. Depending on the regions involved and the amount of data in the databases, this process can take hours to complete\. You can use this information to determine how far the process has proceeded when you create a cross\-region Read Replica:
+Amazon RDS uses the following process to create a cross\-region Read Replica\. Depending on the AWS Regions involved and the amount of data in the databases, this process can take hours to complete\. You can use this information to determine how far the process has proceeded when you create a cross\-region Read Replica:
 
 1. Amazon RDS begins configuring the source DB instance as a replication source and sets the status to *modifying*\.
 
@@ -423,7 +435,7 @@ aws rds create-db-instance-read-replica ^
 
 ## Monitoring Read Replication<a name="USER_ReadRepl.Monitoring"></a>
 
-You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica in the **Availability and durability** section of the Read Replica details\. To view the details for a Read Replica, click the name of the Read Replica in the list of instances in the Amazon RDS console\.
+You can monitor the status of a Read Replica in several ways\. The Amazon RDS console shows the status of a Read Replica in the **Availability and durability** section of the Read Replica details\. To view the details for a Read Replica, choose the name of the Read Replica in the list of instances in the Amazon RDS console\.
 
 ![\[Read Replica status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ReadReplicaStatus.png)
 
@@ -432,10 +444,10 @@ You can also see the status of a Read Replica using the AWS CLI `describe-db-ins
 The status of a Read Replica can be one of the following: 
 + ****replicating**—**The Read Replica is replicating successfully\.
 + ****error**—**An error has occurred with the replication\. Check the **Replication Error** field in the Amazon RDS console or the event log to determine the exact error\. For more information about troubleshooting a replication error, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
-+ ****terminated**—**Replication is terminated\. This occurs if replication is stopped for more than 30 consecutive days, either manually or due to a replication error\. In this case, Amazon RDS terminates replication between the source DB instance and all Read Replicas\. Amazon RDS does this to prevent increased storage requirements on the source DB instance and long failover times\. 
++ ****terminated** \(MariaDB, MySQL, or PostgreSQL only\)—**Replication is terminated\. This occurs if replication is stopped for more than 30 consecutive days, either manually or due to a replication error\. In this case, Amazon RDS terminates replication between the source DB instance and all Read Replicas\. Amazon RDS does this to prevent increased storage requirements on the source DB instance and long failover times\.
 
   Broken replication can affect storage because the logs can grow in size and number due to the high volume of errors messages being written to the log\. Broken replication can also affect failure recovery due to the time Amazon RDS requires to maintain and process the large number of logs during recovery\.
-+ ****stopped** \(MySQL or MariaDB only\)—**Replication has stopped because of a customer initiated request\.
++ ****stopped** \(MariaDB or MySQL only\)—**Replication has stopped because of a customer initiated request\.
 + ****replication stop point set** \(MySQL only\)—**A customer initiated stop point was set using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure and the replication is in progress\.
 + ****replication stop point reached** \(MySQL only\)—**A customer initiated stop point was set using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure and replication is stopped because the stop point was reached\.
 

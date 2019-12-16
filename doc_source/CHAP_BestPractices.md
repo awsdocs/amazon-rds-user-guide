@@ -5,7 +5,6 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 **Topics**
 + [Amazon RDS Basic Operational Guidelines](#CHAP_BestPractices.DiskPerformance)
 + [DB Instance RAM Recommendations](#CHAP_BestPractices.Performance.RAM)
-+ [Amazon RDS Security Best Practices](#CHAP_BestPractices.Security)
 + [Using Enhanced Monitoring to Identify Operating System Issues](#CHAP_BestPractices.EnhancedMonitoring)
 + [Using Metrics to Identify Performance Issues](#CHAP_BestPractices.UsingMetrics)
 + [Best Practices for Working with MySQL Storage Engines](#CHAP_BestPractices.MySQLStorage)
@@ -36,19 +35,9 @@ The following are basic operational guidelines that everyone should follow when 
 
 ## DB Instance RAM Recommendations<a name="CHAP_BestPractices.Performance.RAM"></a>
 
-An Amazon RDS performance best practice is to allocate enough RAM so that your working set resides almost completely in memory\. To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
+An Amazon RDS performance best practice is to allocate enough RAM so that your *working set* resides almost completely in memory\. The working set is the data and indexes that are frequently in use on your instance\. The more you use the DB instance, the more the working set will grow\.
 
-## Amazon RDS Security Best Practices<a name="CHAP_BestPractices.Security"></a>
-
-Use AWS IAM accounts to control access to Amazon RDS API actions, especially actions that create, modify, or delete RDS resources such as DB instances, security groups, option groups, or parameter groups, and actions that perform common administrative actions such as backing up and restoring DB instances, or configuring Provisioned IOPS storage\.
-+ Assign an individual IAM account to each person who manages RDS resources\. Do not use AWS root credentials to manage Amazon RDS resources; you should create an IAM user for everyone, including yourself\.
-+ Grant each user the minimum set of permissions required to perform his or her duties\.
-+ Use IAM groups to effectively manage permissions for multiple users\.
-+ Rotate your IAM credentials regularly\.
-
-For more information about IAM, go to [AWS Identity and Access Management](https://docs.aws.amazon.com/IAM/latest/UserGuide/Welcome.html)\. For information on IAM best practices, go to [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/IAMBestPractices.html)\. 
-
-Use the AWS Management Console, the AWS CLI, or the Amazon RDS API to change the password for your master user\. If you use another tool, such as a SQL client, to change the master user password, it might result in privileges being revoked for the user unintentionally\.
+To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.
 
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
@@ -67,11 +56,11 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
 
-### Viewing Performance Metrics<a name="w4aac13c17b4"></a>
+### Viewing Performance Metrics<a name="CHAP_BestPractices.UsingMetrics.ViewingMetrics"></a>
 
- You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
+You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
- In order to troubleshoot performance issues, it’s important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\. 
+To troubleshoot performance issues, it’s important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\.
 
 **To view performance metrics**
 
@@ -79,9 +68,9 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 1.  In the navigation pane, choose **Databases**, and then choose a DB instance\. 
 
-1.  Choose **Show Monitoring**\. The first eight performance metrics display\. The metrics default to showing information for the current day\. 
+1.  Choose **Monitoring**\. The first eight performance metrics display\. The metrics default to showing information for the current day\. 
 
-1.  Use the numbered buttons at top right to page through the additional metrics, or choose **Show All** to see all metrics\. 
+1.  Use the numbered buttons at top right to page through the additional metrics, or choose adjust the settings to see more metrics\. 
 
 1.  Choose a performance metric to adjust the time range in order to see data for other than the current day\. You can change the **Statistic**, **Time Range**, and **Period** values to adjust the information displayed\. For example, to see the peak values for a metric for each day of the last two weeks, set **Statistic** to **Maximum**, **Time Range** to **Last 2 Weeks**, and **Period** to **Day**\. 
 **Note**  
@@ -91,32 +80,30 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 ****To set a CloudWatch alarm****
 
-1.  Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 
-1.  In the navigation pane, choose **Databases**, and then choose a DB instance\. 
+1. In the navigation pane, choose **Databases**, and then choose a DB instance\. 
 
-1.  Choose **Show Monitoring**, and then choose a performance metric to bring up the expanded view\. 
+1. Choose **Logs & events**\.
 
-1.  Choose **Create Alarm**\. 
-
-1. On the **Create Alarm** page, identify what email address should receive the alert by choosing a value for **Send a notification to**\. Choose **create topic** to the right of that box to create a new alarm recipient if necessary\. 
-
-1.  For **Whenever**, choose the alarm statistic to set\. 
-
-1.  For **of**, choose the alarm metric\. 
-
-1. For **Is** and the unlabeled box to the right of it, set the alarm threshold, as shown following\.   
+1. In the **CloudWatch alarms** section, choose **Create alarm**\.  
 ![\[Create Alarm dialog box\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CreateAlarm.png)
 
-1.  For **For at least**, enter the number of times that the specified threshold must be reached in order to trigger the alarm\. 
+1. For **Send notifications**, choose **Yes**, and for **Send notifications to**, choose **New email or SMS topic**\.
 
-1.  For **consecutive period\(s\) of**, choose the period during which the threshold must have been reached in order to trigger the alarm\. 
+1. For **Topic name**, enter a name for the notification, and for **With these recipients**, enter a comma\-separated list of email addresses and phone numbers\.
 
-1.  For **Name of alarm**, enter a name for the alarm\. 
+1. For **Metric**, choose the alarm statistic and metric to set\. 
 
-1.  Choose **Create Alarm**\. 
+1. For **Threshold**, specify whether the metric must be greater than, less than, or equal to the threshold, and specify the threshold value\. 
 
- The performance metrics page appears, and you can see the new alarm in the **CloudWatch Alarms** status bar\. If you don't see the status bar, refresh your page\. 
+1. For **Evaluation period**, choose the evaluation period for the alarm, and for **consecutive period\(s\) of**, choose the period during which the threshold must have been reached in order to trigger the alarm\.
+
+1. For **Name of alarm**, enter a name for the alarm\.
+
+1. Choose **Create Alarm**\.
+
+The alarm appears in the **CloudWatch alarms** section\.
 
 ### Evaluating Performance Metrics<a name="CHAP_BestPractices.EvaluatingMetrics"></a>
 
@@ -193,7 +180,7 @@ We recommend these limits because having large numbers of tables significantly i
 
 For MySQL DB instances that use version 5\.7 or later, you can exceed these table creation limits due to improvements in InnoDB crash recovery\. However, we still recommend that you take caution due to the potential performance impact of creating very large numbers of tables\.
 
-On a MySQL DB instance, avoid tables in your database growing too large\. Provisioned storage limits restrict the maximum size of a MySQL table file to 16 TB\. Instead, partition your large tables so that file sizes are well under the 16 TB limit\. This approach can also improve performance and recovery time\. For more information, see [MySQL File Size Limits](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)\.
+On a MySQL DB instance, avoid tables in your database growing too large\. Although the general storage limit is 64 TiB, provisioned storage limits restrict the maximum size of a MySQL table file to 16 TiB\. Partition your large tables so that file sizes are well under the 16 TiB limit\. This approach can also improve performance and recovery time\. For more information, see [MySQL File Size Limits](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)\.
 
 The Point\-In\-Time Restore and snapshot restore features of Amazon RDS for MySQL require a crash\-recoverable storage engine and are supported for the InnoDB storage engine only\. Although MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, the MyISAM storage engine does not support reliable crash recovery and might prevent a Point\-In\-Time Restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MySQL is restarted after a crash\. 
 
@@ -256,7 +243,7 @@ The autovacuum parameters determine when and how hard autovacuum works\. The` au
 ```
 PROMPT> select relname, n_dead_tup, last_vacuum, last_autovacuum from 
 pg_catalog.pg_stat_all_tables
-where n_dead_tup > 0 and relname =  ’table1' order by n_dead_tup desc;
+where n_dead_tup > 0 and relname =  'table1' order by n_dead_tup desc;
 ```
 
 The results of the query will resemble the following:

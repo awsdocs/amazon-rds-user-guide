@@ -13,7 +13,14 @@ We recommend that you retain the parameter group for any DB snapshots you create
 
 ## Security Group Considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
-When you restore a DB instance, the default security group is associated with the restored instance\. As soon as the restore is complete and your new DB instance is available, you must associate any custom security groups used by the instance you restored from\. You must apply these changes by using the RDS console's *Modify* command, the `ModifyDBInstance` Amazon RDS API, or the AWS CLI `modify-db-instance` command\. 
+When you restore a DB instance, the default security group is associated with the restored instance by default\.
+
+**Note**  
+If you're using the AWS CLI, you can specify a custom security group to associate with the instance by including the `--vpc-security-group-ids` option in the `restore-db-instance-from-db-snapshot` command\.
+If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBInstanceFromDBSnapshot` action\.
+The Amazon RDS console has no option for associating a custom security group while restoring\.
+
+As soon as the restore is complete and your new DB instance is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB instance with the RDS console, the AWS CLI `modify-db-instance` command, or the `ModifyDBInstance` Amazon RDS API operation\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Option Group Considerations<a name="USER_RestoreFromSnapshot.Options"></a>
 
@@ -42,7 +49,7 @@ You can upgrade a DB snapshot while it is still a DB snapshot, before you restor
 
 You can restore a DB instance from a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### AWS Management Console<a name="USER_RestoreFromSnapshot.CON"></a>
+### Console<a name="USER_RestoreFromSnapshot.CON"></a>
 
 **To restore a DB instance from a DB snapshot**
 
@@ -66,7 +73,7 @@ You can restore a DB instance from a DB snapshot using the AWS Management Consol
 
    1. Select the security group that you want to use for your DB instances\. If necessary, add rules to link the security group to a security group for an EC2 instance\. For more information, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
 
-### CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
+### AWS CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 
 To restore a DB instance from a DB snapshot, use the AWS CLI command [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)\. 
 
@@ -95,7 +102,7 @@ This command returns output similar to the following:
 
 After the DB instance has been restored, you must add the DB instance to the security group used by the DB instance used to create the DB snapshot if you want the same functionality as that of the previous DB instance\.
 
-### API<a name="USER_RestoreFromSnapshot.API"></a>
+### RDS API<a name="USER_RestoreFromSnapshot.API"></a>
 
 To restore a DB instance from a DB snapshot, call the Amazon RDS API function [RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) with the following parameters: 
 + `DBInstanceIdentifier` 

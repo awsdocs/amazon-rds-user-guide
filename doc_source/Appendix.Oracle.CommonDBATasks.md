@@ -5,16 +5,21 @@ Following, you can find a description for the Amazon RDS–specific implementati
 The following are common DBA tasks for DB instances running Oracle:
 + [System Tasks](Appendix.Oracle.CommonDBATasks.System.md)  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
+<a name="dba-tasks-oracle-system-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Database Tasks](Appendix.Oracle.CommonDBATasks.Database.md)  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
-+ [RMAN Tasks](Appendix.Oracle.CommonDBATasks.RMAN.md)  
-****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
+<a name="dba-tasks-oracle-database-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Log Tasks](Appendix.Oracle.CommonDBATasks.Log.md)  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
+<a name="dba-tasks-oracle-log-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
++ [RMAN Tasks](Appendix.Oracle.CommonDBATasks.RMAN.md)  
+****    
+<a name="dba-tasks-oracle-rman-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
++ [Oracle Scheduler Tasks](Appendix.Oracle.CommonDBATasks.Scheduler.md)  
+****    
+<a name="dba-tasks-oracle-scheduler-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 + [Miscellaneous Tasks](Appendix.Oracle.CommonDBATasks.Misc.md)  
 ****    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
+<a name="dba-tasks-oracle-misc-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
+
+You can also use Amazon RDS procedures for Amazon S3 integration with Oracle and for running OEM Management Agent database tasks\. For more information, see [Amazon S3 Integration](oracle-s3-integration.md) and [Performing Database Tasks with the Management Agent](Oracle.Options.OEMAgent.md#Oracle.Options.OEMAgent.DBTasks)\.

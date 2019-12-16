@@ -23,7 +23,7 @@ For major version upgrades, you must manually modify the DB engine version throu
 
 To manually upgrade the engine version of a DB instance, you can use the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### Upgrading the Engine Version of a DB Instance Using the Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
+### Console<a name="USER_UpgradeDBInstance.Upgrading.Manual.Console"></a>
 
 **To upgrade the engine version of a DB instance by using the console**
 
@@ -43,7 +43,7 @@ To manually upgrade the engine version of a DB instance, you can use the AWS Man
 
    Alternatively, choose **Back** to edit your changes, or choose **Cancel** to cancel your changes\. 
 
-### Upgrading the Engine Version of a DB Instance Using the AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
+### AWS CLI<a name="USER_UpgradeDBInstance.Upgrading.Manual.CLI"></a>
 
 To upgrade the engine version of a DB instance, use the CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the following parameters: 
 + `--db-instance-identifier` – the name of the DB instance\. 
@@ -73,7 +73,7 @@ For Windows:
 5.     --no-apply-immediately
 ```
 
-### Upgrading the Engine Version of a DB Instance Using the RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
+### RDS API<a name="USER_UpgradeDBInstance.Upgrading.Manual.API"></a>
 
 To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action\. Specify the following parameters: 
 + `DBInstanceIdentifier` – the name of the DB instance, for example *`mydbinstance`*\. 
@@ -83,7 +83,7 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 
 ## Automatically Upgrading the Minor Engine Version<a name="USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades"></a>
 
-A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 5\.7 with the minor engine versions 5\.7\.22 and 5\.7\.23 within it\. 
+A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 9\.6 with the minor engine versions 9\.6\.11 and 9\.6\.12 within it\. 
 
 If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.
@@ -102,6 +102,27 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the AWS CLI, set the `--auto-minor-version-upgrade|--no-auto-minor-version-upgrade` option\.
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
-You can get an Amazon RDS event notification when a new minor engine version upgrade is available for one of your databases\. To get notifications, subscribe to Amazon RDS event notification through the Amazon Simple Notification Service \(Amazon SNS\)\. For more information, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
+
+A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
+
+**Note**  
+If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you upgrade the extension\. 
+
+To upgrade an extension, use the following command\. 
+
+```
+ALTER EXTENSION extension_name UPDATE TO 'new_version';
+```
+
+To list your currently installed extensions, use the PostgreSQL [pg\_extension](https://www.postgresql.org/docs/current/catalog-pg-extension.html) catalog in the following command:
+
+```
+SELECT * FROM pg_extension;
+```
+
+To view a list of the specific extension versions that are available for your installation, use the PostgreSQL [ pg\_available\_extension\_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) view in the following command: 
+
+```
+SELECT * FROM pg_available_extension_versions;
+```
