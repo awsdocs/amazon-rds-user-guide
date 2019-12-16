@@ -74,6 +74,7 @@ For example, you might use this feature for a new mobile gaming application that
 With storage autoscaling enabled, when Amazon RDS detects that you are running out of free database space it automatically scales up your storage\. Amazon RDS starts a storage modification for an autoscaling\-enabled DB instance when these factors apply:
 + Free available space is less than 10 percent of the allocated storage\.
 + The low\-storage condition lasts at least five minutes\.
++ At least six hours have passed since the last storage modification\.
 
 The additional storage is in increments of whichever is greater, 5 GiB or 12% of currently allocated storage\. The maximum storage threshold is the limit to which the DB instance can be autoscaled\. You can't set the maximum storage threshold for autoscaling\-enabled instances to a value greater than the maximum allocated storage\.
 
