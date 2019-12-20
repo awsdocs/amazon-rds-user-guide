@@ -344,7 +344,7 @@ All of the considerations for performing replication within an AWS Region apply 
   + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, all versions of 12\.2, and all versions of 18\.0\.
 
     An an Active Data Guard license is required\. For information about limitations for Oracle cross\-region Read Replicas, see [Read Replica Limitations with Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
-  + PostgreSQL version 9\.4\.7 and later 9\.4 versions, and version 9\.5\.2 and later 9\.5 versions\.
+  + PostgreSQL version 9\.4\.7 and later\.
 + A source DB instance can have cross\-region Read Replicas in multiple AWS Regions\. 
 + You can only create a cross\-region Amazon RDS Read Replica from a source Amazon RDS DB instance that is not a Read Replica of another Amazon RDS DB instance\.
 + You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) Region\.

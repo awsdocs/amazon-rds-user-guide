@@ -279,7 +279,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy "{\"Id\":\"$PREFIX-
     **Advanced configuration**: 
    +  **Enable enhanced logging**\. You can enable this setting to troubleshoot proxy compatibility or performance issues\. When this setting is enabled, RDS Proxy includes detailed information about SQL statements in its logs\. This information helps you to debug issues involving SQL behavior or the performance and scalability of the proxy connections\. The debug information includes the text of SQL statements that you submit through the proxy\. Thus, only enable this setting when needed for debugging, and only when you have security measures in place to safeguard any sensitive information that appears in the logs\. 
 
-1.  Select **RDS Proxy is now available in internal Preview** to acknowledge the terms and conditions for the preview\. 
+1.  Select **RDS Proxy is now available in Preview** to acknowledge the terms and conditions for the preview\. 
 
 1.  Choose **Create Proxy**\. 
 

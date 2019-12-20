@@ -44,7 +44,7 @@ The following example shows a CloudTrail log entry that demonstrates the `Create
     "eventSource": "rds.amazonaws.com",
     "eventName": "CreateDBInstance",
     "awsRegion": "us-east-1",
-    "sourceIPAddress": "72.21.198.65",
+    "sourceIPAddress": "192.0.2.0",
     "userAgent": "aws-cli/1.15.42 Python/3.6.1 Darwin/17.7.0 botocore/1.10.42",
     "requestParameters": {
         "enableCloudwatchLogsExports": [

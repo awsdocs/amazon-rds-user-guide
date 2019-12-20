@@ -26,7 +26,7 @@ The following are some limitations to using native backup and restore:
 + Native backups of databases larger than 1 TB aren't supported\. 
 + You can't restore from more than 10 backup files at the same time\.
 + You can run up to two backup or restore tasks at the same time\.
-+ Native log backup isn’t supported\.
++ You can't perform native log backups from SQL Server on Amazon RDS\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 
 + You can't do a native backup during the maintenance window, or any time Amazon RDS is in the process of taking a snapshot of the database\. 
 + On Multi\-AZ DB instances, you can only natively restore databases that are backed up in the full recovery model\.
@@ -510,7 +510,7 @@ The following parameter is required:
 
 ### Tracking the Status of Tasks<a name="SQLServer.Procedural.Importing.Native.Tracking"></a>
 
-To track the status of your backup and restore tasks, call the `rds_task_status` stored procedure\. If you don't provide any parameters, the stored procedure returns the status of all tasks\. The status for tasks is updated approximately every two minutes\.
+To track the status of your backup and restore tasks, call the `rds_task_status` stored procedure\. If you don't provide any parameters, the stored procedure returns the status of all tasks\. The status for tasks is updated approximately every two minutes\. Task history is retained for 36 days\.
 
 #### Usage<a name="SQLServer.Procedural.Importing.Native.Tracking.Syntax"></a>
 

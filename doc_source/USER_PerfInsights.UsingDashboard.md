@@ -179,18 +179,15 @@ Choose which statistics to display by choosing the gear icon in the upper\-right
 By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can copy the displayed SQL statement\. To view more than 4,096 bytes, choose **Download full SQL** to view the SQL text up to the DB engine limit\.
 
 The limit for SQL text depends on the DB engine\. The following limits apply:
++ Amazon RDS for Microsoft SQL Server – 4,096 characters
 + Amazon RDS for MySQL and MariaDB – 1,024 bytes
 + Amazon RDS for Oracle – 1,000 bytes
-+ Amazon RDS PostgreSQL – Set by the `track_activity_query_size` DB instance parameter
++ Amazon RDS for PostgreSQL – Set by the `track_activity_query_size` DB instance parameter
 
-For Amazon RDS PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 102,400 bytes\. You can use the AWS Management Console to download SQL text up to the limit you set with this parameter\. For more information, see [Setting the SQL Text Limit for Amazon RDS PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
+For Amazon RDS for PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 102,400 bytes\. You can use the AWS Management Console to download SQL text up to the limit you set with this parameter\. For more information, see [Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
 **Important**  
 Currently, you can only view and download more SQL text with the AWS Management Console\. The AWS Performance Insights CLI and API can return a maximum of 500 bytes of text\.
-
-**Note**  
-Currently, you can't view, copy, or download more than 500 bytes of SQL text for SQL Server DB instances\.  
-For Amazon RDS for MySQL DB instances, viewing more SQL text is not supported in the Europe \(Stockholm\) region\.
 
 **To view more SQL text in the Performance Insights dashboard**
 
@@ -212,17 +209,17 @@ For Amazon RDS for MySQL DB instances, viewing more SQL text is not supported in
 **Note**  
 To copy or download the SQL statement, disable pop\-up blockers\. 
 
-### Setting the SQL Text Limit for Amazon RDS PostgreSQL DB Instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
+### Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
 
-For Amazon RDS PostgreSQL DB instances, you can control the limit for the SQL text that can be shown on the Performance Insights dashboard\. 
+For Amazon RDS for PostgreSQL DB instances, you can control the limit for the SQL text that can be shown on the Performance Insights dashboard\. 
 
 To do so, modify the `track_activity_query_size` DB instance parameter\. The default setting for the `track_activity_query_size` parameter is 1,024 bytes\. 
 
 You can increase the number of bytes to increase the SQL text size visible in the Performance Insights dashboard\. The limit for the parameter is 10,240 bytes\. For more information about the `track_activity_query_size` DB instance parameter, see [Run\-time Statistics](https://www.postgresql.org/docs/current/runtime-config-statistics.html) in the PostgreSQL documentation\.
 
-To modify the parameter, change the parameter setting in the parameter group that is associated with the Amazon RDS PostgreSQL DB instance\.
+To modify the parameter, change the parameter setting in the parameter group that is associated with the Amazon RDS for PostgreSQL DB instance\.
 
-If the Amazon RDS PostgreSQL DB instance is using the default parameter group, complete the following steps:
+If the Amazon RDS for PostgreSQL DB instance is using the default parameter group, complete the following steps:
 
 1. Create a new DB instance parameter group for the appropriate DB engine and DB engine version\.
 

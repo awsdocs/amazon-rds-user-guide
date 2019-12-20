@@ -27,7 +27,7 @@ Creating an Oracle Read Replica doesn't require an outage for the master DB inst
 
 You can create up to five Read Replicas from one source DB instance\. Before you create a Read Replica, make sure that the setting of the `max_string_size` parameter is same on the source DB instance and the Read Replica\. You can do this by associating them with the same parameter group\. If you have different parameters groups for the source and the Read Replica, you can do this by setting `max_string_size` to the same value\.
 
-The Oracle DB engine version of the source DB instance and all of its Read Replicas must be the same\. Amazon RDS upgrades the Read Replicas immediately after upgrading the source DB instance, regardless of a Read Replica's maintenance window\. For more information about upgrading the DB engine version, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\.
+The Oracle DB engine version of the source DB instance and all of its Read Replicas must be the same\. Amazon RDS upgrades the Read Replicas immediately after upgrading the source DB instance, regardless of a Read Replica's maintenance window\. For major version upgrades of cross\-region Read Replicas, Amazon RDS automatically generates an option group for the target version, copies all options and option settings from the original option group to the new option group, and associates the upgraded cross\-region Read Replica with the new option group\. For more information about upgrading the DB engine version, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\.
 
 For a Read Replica to receive and apply changes from the source, it should have sufficient compute and storage resources\. If a Read Replica reaches compute, network, or storage resource capacity, the Read Replica stops receiving or applying changes from its source\. You can modify the storage and CPU resources of a Read Replica independently from its source and other Read Replicas\. 
 
@@ -52,7 +52,6 @@ The following are limitations for Oracle Read Replicas:
   + NATIVE\_NETWORK\_ENCRYPTION
   + OEM
   + OEM\_AGENT
-  + S3\_INTEGRATION
   + SSL
 
   To add other options to an Oracle cross\-region Read Replica, add them to the source DB instance's option group\. The option is also installed on all of the source DB instance's Read Replicas\. For licensed options, you must ensure that there are sufficient licenses for the Read Replicas\.

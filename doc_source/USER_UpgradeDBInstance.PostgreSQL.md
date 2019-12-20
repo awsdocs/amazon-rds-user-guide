@@ -126,8 +126,6 @@ To list all databases for an instance, use the following query\.
 
    We recommend that you either promote your read replicas, or delete and recreate them after the source instance has upgraded to a different major version\. For more information, see [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)\.
 
-1. **Perform a VACUUM** – To reduce downtime, perform a `VACUUM` operation before upgrading your DB instance\. If you don't perform a `VACUUM` operation, the upgrade process can take much longer\. This occurs because the `pg_upgrade` utility vacuums each database when you upgrade to a different major version\.
-
 1. **Perform a backup** – We recommend that you perform a backup before performing the major version upgrade so that you have a known restore point for your database\. If your backup retention period is greater than 0, the upgrade process creates DB snapshots of your DB instance before and after upgrading\. To change your backup retention period, see [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)\. To perform a backup manually, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\.
 
 1. **Update certain extensions before the major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. The extensions to be updated include:

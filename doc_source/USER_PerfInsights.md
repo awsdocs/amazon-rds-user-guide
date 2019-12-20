@@ -51,4 +51,4 @@ You can find an overview of Performance Insights in the following video\.
 + [Performance Insights API](USER_PerfInsights.API.md)
 + [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
 + [Performance Insights Counters](USER_PerfInsights_Counters.md)
-+ [Logging Performance Insights Operations by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)
++ [Logging Performance Insights Calls by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)

@@ -93,19 +93,26 @@ The following table shows the event category and a list of events when a DB inst
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been exhausted\. To resolve this issue, you should allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring)\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
+| maintenance | RDS\-EVENT\-0047 | Patching of the DB instance has completed\. | 
 |  maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
 | notification | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
-| notification | RDS\-EVENT\-0047 | Patching of the DB instance has completed\. | 
 | notification | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
 | notification | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [ Supported Storage Engines for MySQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.Storage.html)\. | 
 | notification | RDS\-EVENT\-0055 | The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of tables on your DB instance\.    For information about recommended best practices, see [Amazon RDS Basic Operational Guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
 | notification | RDS\-EVENT\-0056 | The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of databases on your DB instance\.    For information about recommended best practices, see [Amazon RDS Basic Operational Guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
 | notification | RDS\-EVENT\-0064 | The TDE key has been rotated\. For information about recommended best practices, see [Amazon RDS Basic Operational Guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
 | notification | RDS\-EVENT\-0084 |  You attempted to convert a DB instance to Multi\-AZ, but it contains in\-memory file groups that are not supported for Multi\-AZ\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.   | 
-| notification | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limits for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
 | notification | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 
 | notification | RDS\-EVENT\-0088 |  The DB instance has been started\.  | 
 | notification | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
+| notification | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limits for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
+| notification | RDS\-EVENT\-0158 |  DB instance is in a state that can't be upgraded\.  | 
+| notification | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
+| notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
+| notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
+| notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
+| notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
+| notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
 | read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\.  For information on troubleshooting Read Replica errors, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.   | 
 | read replica | RDS\-EVENT\-0046 | The Read Replica has resumed replication\. This message appears when you first create a Read Replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the Read Replica was terminated\.  | 

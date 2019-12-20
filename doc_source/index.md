@@ -73,7 +73,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Performance Insights API](USER_PerfInsights.API.md)
       + [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
       + [Performance Insights Counters](USER_PerfInsights_Counters.md)
-      + [Logging Performance Insights Operations by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)
+      + [Logging Performance Insights Calls by Using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)
    + [Using Amazon RDS Recommendations](USER_Recommendations.md)
    + [Using Amazon RDS Event Notification](USER_Events.md)
    + [Viewing Amazon RDS Events](USER_ListEvents.md)

@@ -7,7 +7,7 @@ With counter metrics, you can customize the Performance Insights dashboard to in
 + [Performance Insights Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
 + [Performance Insights Counters for Amazon RDS for Microsoft SQL Server](#USER_PerfInsights_Counters.SQLServer)
 + [Performance Insights Counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
-+ [Performance Insights Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
++ [Performance Insights Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
 
 ## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
 
@@ -220,15 +220,15 @@ For the `CPU used by this session` counter metric, the unit has been transformed
 | DB block gets from cache | Cache | Gets per second | db\.Cache\.db block gets from cache | 
 | Consistent gets | Cache | Gets per second | db\.Cache\.consistent gets | 
 
-## Performance Insights Counters for Amazon RDS PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL"></a>
+## Performance Insights Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL"></a>
 
-The following database counters are available with Performance Insights for Amazon RDS PostgreSQL\.
+The following database counters are available with Performance Insights for Amazon RDS for PostgreSQL\.
 
 **Topics**
-+ [Native Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.Native)
-+ [Non\-Native Counters for Amazon RDS PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.NonNative)
++ [Native Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.Native)
++ [Non\-Native Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.NonNative)
 
-### Native Counters for Amazon RDS PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.Native"></a>
+### Native Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.Native"></a>
 
 You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
 
@@ -265,7 +265,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 
-### Non\-Native Counters for Amazon RDS PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.NonNative"></a>
+### Non\-Native Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 

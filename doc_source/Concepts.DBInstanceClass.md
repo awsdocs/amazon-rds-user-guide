@@ -120,9 +120,9 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | Yes | Yes | 3,500 | Up to 10 Gbps | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,750 | Up to 10 Gbps | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 875 | Up to 10 Gbps | 
-| db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 437 | Up to 10 Gbps | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,700 | Up to 10 Gbps | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 850 | Up to 10 Gbps | 
+| db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 425 | Up to 10 Gbps | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | 
