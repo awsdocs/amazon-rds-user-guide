@@ -412,9 +412,9 @@ This response has 11 entries in the `MetricList` \(1 total, 10 top tokenized SQL
 For tokenized SQL, there are three entries in each dimensions list:
 + `db.sql_tokenized.statement` – The tokenized SQL statement\.
 + `db.sql_tokenized.db_id ` – Either the native database ID used to refer to the SQL, or a synthetic ID that Performance Insights generates for you if the native database ID isn't available\. This example returns the `pi-2372568224` synthetic ID\.
-+ `db.sql_tokenized.statement` – The ID of the query inside Performance Insights\.
++ `db.sql_tokenized.id` – The ID of the query inside Performance Insights\.
 
-  In the AWS Management Console, this ID is called the Support ID\. It's named this because the ID is data that AWS Support can examine to help you troubleshoot an issue with your database\. AWS takes the security and privacy of your data extremely seriously, and almost all data is stored encrypted with your AWS KMS key\. Therefore, nobody inside AWS can look at this data\. In the example preceding, both the `tokenized_statement` and the `tokenized.db_id` are stored encrypted\. If you have an issue with your database, AWS Support can help you by referencing the Support ID\.
+  In the AWS Management Console, this ID is called the Support ID\. It's named this because the ID is data that AWS Support can examine to help you troubleshoot an issue with your database\. AWS takes the security and privacy of your data extremely seriously, and almost all data is stored encrypted with your AWS KMS key\. Therefore, nobody inside AWS can look at this data\. In the example preceding, both the `tokenized.statement` and the `tokenized.db_id` are stored encrypted\. If you have an issue with your database, AWS Support can help you by referencing the Support ID\.
 
 When querying, it might be convenient to specify a `Group` in `GroupBy`\. However, for finer\-grained control over the data that's returned, specify the list of dimensions\. For example, if all that is needed is the `db.sql_tokenized.statement`, then a `Dimensions` attribute can be added to the query\.json file\.
 

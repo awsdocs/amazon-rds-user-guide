@@ -86,14 +86,14 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 **Edition**  
  Choose the edition that meets your requirements\.  
 **Directory DNS name**  
- The fully qualified name for the directory, such as corp\.example\.com\.   
+ The fully qualified name for the directory, such as `corp.example.com`\. Names longer than 47 characters aren't supported by SQL Server\.  
 **Directory NetBIOS name**  
  An optional short name for the directory, such as `CORP`\.   
 **Directory description**  
  An optional description for the directory\.   
 **Admin password**  
  The password for the directory administrator\. The directory creation process creates an administrator account with the user name Admin and this password\.   
- The directory administrator password and cannot include the word "admin\." The password is case\-sensitive and must be between 8 and 64 characters in length, inclusive\. It must also contain at least one character from three of the following four categories:   
+ The directory administrator password can't include the word `admin`\. The password is case\-sensitive and must be 8–64 characters in length\. It must also contain at least one character from three of the following four categories:   
    +  Lowercase letters \(a\-z\) 
    +  Uppercase letters \(A\-Z\) 
    +  Numbers \(0\-9\) 

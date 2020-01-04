@@ -30,6 +30,9 @@ The following are some limitations and recommendations for importing backup file
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
 + Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local Time Zone for MySQL DB Instances](CHAP_MySQL.md#MySQL.Concepts.LocalTimeZone)\. 
 + Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 5\.7 to version 5\.6, and you can't migrate from version 5\.6\.39 to version 5\.6\.37\.
++ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
+
+  The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
 
 ## Overview of Setting Up to Import Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Enabling"></a>
 

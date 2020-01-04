@@ -51,7 +51,8 @@ With Amazon RDS, you can choose when to apply maintenance operations\. You can d
    + **Upgrade now**
    + **Upgrade at next window**
 **Note**  
-If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\. You can't defer a maintenance action if it has already started\.
+If you choose **Upgrade at next window** and later want to delay the update, you can choose **Defer upgrade**\. You can't defer a maintenance action if it has already started\.  
+To cancel a maintenance action, modify the DB instance and disable **Auto minor version upgrade**\.
 
 ### AWS CLI<a name="USER_UpgradeDBInstance.OSUpgrades.CLI"></a>
 
@@ -76,7 +77,8 @@ aws rds apply-pending-maintenance-action ^
 ```
 
 **Note**  
-You can defer a maintenance action by specifying `undo-opt-in` for `--opt-in-type`\. You can't specify `undo-opt-in` for `--opt-in-type` if the maintenance action has already started\.
+To defer a maintenance action, specify `undo-opt-in` for `--opt-in-type`\. You can't specify `undo-opt-in` for `--opt-in-type` if the maintenance action has already started\.  
+To cancel a maintenance action, run the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and specify `--no-auto-minor-version-upgrade`\.
 
 To return a list of resources that have at least one pending update, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
 

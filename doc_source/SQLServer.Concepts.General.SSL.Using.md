@@ -67,8 +67,6 @@ You can use the following procedure to import your certificate into the Microsof
 
 1. In the **Add or Remove Snap\-ins** dialog box, for **Available snap\-ins**, select **Certificates**, and then choose **Add**\. 
 
-1. In the MMC console, on the **File** menu, choose **Add/Remove Snap\-in**\. 
-
 1. In the **Certificates snap\-in** dialog box, choose **Computer account**, and then choose **Next**\. 
 
 1. In the **Select computer** dialog box, choose **Finish**\. 
@@ -87,7 +85,7 @@ You can use the following procedure to import your certificate into the Microsof
 
 1. On the fourth page of the Certificate Import Wizard, choose **Finish**\. A dialog box appears indicating that the import was successful\. 
 
-1. In the MMC console, expand **Certificates**, expand **Trusted Root Certification Authorities**, and then choose **Certificates**\. Locate the certificate to confirm it exists, as shown following\.   
+1. In the MMC console, expand **Certificates**, expand **Trusted Root Certification Authorities**, and then choose **Certificates**\. Locate the certificate to confirm it exists, as shown here\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds_sql_ssl_cert.png)
 
 1. Restart your computer\.

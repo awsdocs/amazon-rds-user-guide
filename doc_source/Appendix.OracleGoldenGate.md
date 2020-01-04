@@ -387,7 +387,7 @@ This section explains the most common issues when using GoldenGate with Amazon R
 
 **Topics**
 + [Log Retention](#Appendix.OracleGoldenGate.Troubleshooting.Logs)
-+ [GoldenGate appears to be properly configured but replication is not working](#w37aac32d107c11c19c10)
++ [GoldenGate appears to be properly configured but replication is not working](#w39aac32d107c11c19c10)
 
 ### Log Retention<a name="Appendix.OracleGoldenGate.Troubleshooting.Logs"></a>
 
@@ -399,7 +399,7 @@ opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log
 for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
 ```
 
-### GoldenGate appears to be properly configured but replication is not working<a name="w37aac32d107c11c19c10"></a>
+### GoldenGate appears to be properly configured but replication is not working<a name="w39aac32d107c11c19c10"></a>
 
 For pre\-existing tables, GoldenGate needs to be told which SCN it should work from\. Take the following steps to fix this issue:
 + Launch the GoldenGate command line interface \(ggsci\)\. Log into the source database\. The following example shows the format for logging in:

@@ -4,7 +4,7 @@ You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Micro
 
 **Topics**
 + [Step 1: Create a Directory Using the AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)
-+ [Step 2: Create an IAM Role for Use by Amazon RDS](#postgresql-kerberos-setting-up.CreateIAMRole)
++ [Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)
 + [Step 3: Create and Configure Users](#postgresql-kerberos-setting-up.create-users)
 + [Step 4: Configure VPC Peering](#postgresql-kerberos-setting-up.vpc-peering)
 + [Step 5: Create or Modify a PostgreSQL DB Instance](#postgresql-kerberos-setting-up.create-modify)
@@ -84,7 +84,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
-## Step 2: Create an IAM Role for Use by Amazon RDS<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
+## Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
 For RDS to call AWS Directory Service for you, you must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
 

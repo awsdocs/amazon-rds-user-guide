@@ -4,6 +4,8 @@ You can use Kerberos authentication to authenticate users when they connect to y
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 
+Kerberos provides a different authentication method than AWS Identity and Access Management \(IAM\)\. A database can use either Kerberos or IAM authentication but not both\. For more information about IAM authentication, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
+
 Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the following AWS Regions: 
 + US East \(Ohio\)
 + US East \(N\. Virginia\)
@@ -32,7 +34,7 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
 
 1. Use AWS Managed Microsoft AD to create an AWS Managed Microsoft AD directory\. You can use the AWS Management Console, the AWS CLI, or the AWS Directory Service API to create the directory\.
 
-1. Create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. The role allows Amazon RDS to make calls to your directory\.
+1. Create a role that provides Amazon RDS access to make calls to your AWS Managed Microsoft AD directory\. To do so create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. 
 
    For the IAM role to allow access, the AWS Security Token Service \(AWS STS\) endpoint must be activated in the correct AWS Region for your AWS account\. AWS STS endpoints are active by default in all AWS Regions, and you can use them without any further actions\. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate) in the *IAM User Guide*\.
 

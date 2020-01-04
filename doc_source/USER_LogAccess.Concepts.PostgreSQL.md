@@ -68,7 +68,7 @@ Publishing log files to CloudWatch Logs is only supported for PostgreSQL version
 
 Following are the log types that can be published to CloudWatch Logs for Amazon RDS for PostgreSQL\. 
 + Postgresql log
-+ Upgrade log
++ Upgrade log \(not available for Aurora PostgreSQL\)
 
 After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your Amazon CloudWatch Logs, open [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 

@@ -1,41 +1,43 @@
-# Limits for Amazon RDS<a name="CHAP_Limits"></a>
+# Quotas for Amazon RDS<a name="CHAP_Limits"></a>
 
-This topic describes the resource limits and naming constraints for Amazon RDS\.
+Following, you can find a description of the resource quotas and naming constraints for Amazon RDS\.
 
 **Topics**
-+ [Limits in Amazon RDS](#RDS_Limits.Limits)
++ [Quotas in Amazon RDS](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
 + [File Size Limits in Amazon RDS](#RDS_Limits.FileSize)
 
-## Limits in Amazon RDS<a name="RDS_Limits.Limits"></a>
+## Quotas in Amazon RDS<a name="RDS_Limits.Limits"></a>
 
-Each AWS account has limits, for each AWS Region, on the number of Amazon RDS resources that can be created\. Once a limit for a resource has been reached, additional calls to create that resource fail with an exception\.
+Each AWS account has quotas, for each AWS Region, on the number of Amazon RDS resources that can be created\. After a quota for a resource has been reached, additional calls to create that resource fail with an exception\.
 
-The following table lists the resources and their limits per region\.
+The following table lists the resources and their quotas per AWS Region\.
 
 
-| Resource | Default Limit | 
+| Resource | Default Quota | 
 | --- | --- | 
+| Authorizations per DB security group | 20 | 
 | Cross\-region snapshots copy requests | 5 | 
-| DB Instances | 40 | 
+| DB instances | 40 | 
+| DB security groups | 25 | 
+| DB subnet groups | 50 | 
 | Event subscriptions | 20 | 
+| IAM roles per DB instance | 5 | 
 | Manual snapshots | 100 | 
 | Option groups | 20 | 
 | Parameter groups | 50 | 
 | Read replicas per master | 5 | 
-| Reserved instances | 40 | 
-| Rules per DB security group | 20 | 
-| Rules per VPC security group | 50 inbound 50 outbound | 
-| DB Security groups | 25 | 
-| VPC Security groups | 5 | 
-| Subnet groups | 50 | 
+| Reserved DB instances | 40 | 
+| Rules per security group | 20 | 
+| Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
-| Total storage for all DB instances | 100 TiB | 
+| Total storage for all DB instances | 100 TB | 
+| VPC security groups | 5 | 
 
 **Note**  
-By default, you can have up to a total of 40 DB instances\. Of those 40, you can have up to 10 instances of each SQL Server DB edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model\. All 40 can be MySQL, MariaDB, or PostgreSQL\. All 40 can be Oracle under the "bring\-your\-own\-license" \(BYOL\) model\.  If your application requires more DB instances, you can request additional DB instances using this request form [Request RDS DB instance limit](https://aws.amazon.com/contact-us/request-to-increase-the-amazon-rds-db-instance-limit/)\.  
-Backups managed by AWS Backup are considered manual snapshots for the manual snapshot limit\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.Of those 40 DB instances, you can have up to 10 instances of each SQL Server DB edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model\. All 40 can be MySQL, MariaDB, or PostgreSQL\. All 40 can be Oracle under the "bring\-your\-own\-license" \(BYOL\) model\.  If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a Quota Increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
+Backups managed by AWS Backup are considered manual snapshots for the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Naming Constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 
