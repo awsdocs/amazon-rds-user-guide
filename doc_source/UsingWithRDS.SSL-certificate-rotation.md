@@ -18,6 +18,7 @@ Any new RDS DB instances created after January 14, 2020 will use the new certifi
 + [Updating Your CA Certificate by Applying DB Instance Maintenance](#UsingWithRDS.SSL-certificate-rotation-maintenance)
 + [Reverting an Update of a CA Certificate](#UsingWithRDS.SSL-certificate-rotation-reverting)
 + [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)
++ [Checking Which CA Certificate Your DB Instance Is Using Right Now](#UsingWithRDS.SSL-certificate-check)
 
 ## Updating Your CA Certificate by Modifying Your DB Instance<a name="UsingWithRDS.SSL-certificate-rotation-updating"></a>
 
@@ -285,4 +286,67 @@ do
    expiry=`keytool -list -v -keystore "$truststore" -storepass ${storepassword} -alias "${alias}" | grep Valid | perl -ne 'if(/until: (.*?)\n/) { print "$1\n"; }'`
    echo " Certificate ${alias} expires in '$expiry'" 
 done
+```
+
+## Checking Which CA Certificate Your DB Instance Is Using Right Now<a name="UsingWithRDS.SSL-certificate-check"></a>
+
+To show the certificate your RDS instance is using right now, run the following command (Linux):
+```
+echo "" | openssl s_client -starttls postgres -connect mydbinstance.xxxxxxxxx.us-west-2.rds.amazonaws.com:5432 -showcerts | grep  '^ *[0-9]* *s:' 
+```
+
+### Common outputs:
+* The list of the certificates in the chain:
+```
+ 0 s:/CN=mydbinstance.xxxxxxxxx.us-west-2.rds.amazonaws.com/OU=RDS/O=Amazon.com/L=Seattle/ST=Washington/C=US
+ 1 s:/C=US/ST=Washington/L=Seattle/O=Amazon Web Services, Inc./OU=Amazon RDS/CN=Amazon RDS us-west-2 2019 CA
+ 2 s:/C=US/L=Seattle/ST=Washington/O=Amazon Web Services, Inc./OU=Amazon RDS/CN=Amazon RDS Root 2019 CA
+```
+* An error message if the last certificate is not in openssl's trust store:
+```
+verify error:num=19:self signed certificate in certificate chain
+```
+* An error message if openssl could not find the endpoint's address:
+```
+ # 140113259165504:error:2008F002:BIO routines:BIO_lookup_ex:system lib:crypto/bio/b_addr.c:724:Name or service not known
+connect:errno=22
+```
+* An error message after 2 minutes if the endpoint is behind a firewall:
+```
+139791314818880:error:0200206E:system library:connect:Connection timed out:crypto/bio/b_sock2.c:110:
+139791314818880:error:2008A067:BIO routines:BIO_connect:connect error:crypto/bio/b_sock2.c:111:
+connect:errno=110
+```
+* An error message if the wrong endpoint or port was specified:
+```
+140371227047744:error:0200206F:system library:connect:Connection refused:crypto/bio/b_sock2.c:110:
+140371227047744:error:2008A067:BIO routines:BIO_connect:connect error:crypto/bio/b_sock2.c:111:
+connect:errno=111
+```
+or
+```
+socket: Bad file descriptor
+connect:errno=9
+```
+* No output:
+    If an endpoint doesn't have a certificate, the command will succeed, but there will be no encryption.  Run the command again without the 'grep' to see if that's the case:
+```
+openssl s_client -starttls postgres -connect mydbinstance.xxxxxxxxx.us-west-2.rds.amazonaws.com:5432 -showcerts < /dev/null
+CONNECTED(00000005)
+---
+no peer certificate available
+---
+No client certificate CA names sent
+---
+SSL handshake has read 1 bytes and written 8 bytes
+Verification: OK
+---
+New, (NONE), Cipher is (NONE)
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
 ```
