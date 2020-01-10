@@ -95,7 +95,7 @@ The PostgreSQL extensions supported in the Database Preview Environment are list
 |  hstore  |  1\.5  | 
 |  hstore\_plper  |  1\.0  | 
 |  intagg  |  1\.1  | 
-|  antarray  |  1\.2  | 
+|  intarray  |  1\.2  | 
 |  isn  |  1\.2  | 
 |  log\_fdw  |  1\.0  | 
 |  ltree  |  1\.1  | 
