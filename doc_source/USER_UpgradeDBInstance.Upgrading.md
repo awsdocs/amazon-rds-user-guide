@@ -103,26 +103,3 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
-
-A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. To update an extension after an engine upgrade, use the `ALTER EXTENSION UPDATE` command\. 
-
-**Note**  
-If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you upgrade the extension\. 
-
-To upgrade an extension, use the following command\. 
-
-```
-ALTER EXTENSION extension_name UPDATE TO 'new_version';
-```
-
-To list your currently installed extensions, use the PostgreSQL [pg\_extension](https://www.postgresql.org/docs/current/catalog-pg-extension.html) catalog in the following command:
-
-```
-SELECT * FROM pg_extension;
-```
-
-To view a list of the specific extension versions that are available for your installation, use the PostgreSQL [ pg\_available\_extension\_versions](https://www.postgresql.org/docs/current/view-pg-available-extension-versions.html) view in the following command: 
-
-```
-SELECT * FROM pg_available_extension_versions;
-```

@@ -7,7 +7,9 @@ Keeping all of your credentials in the same directory can save you time and effo
 Amazon RDS supports Kerberos authentication for Oracle DB instances in the following AWS Regions: 
 + US East \(Ohio\)
 + US East \(N\. Virginia\)
++ US West \(N\. California\)
 + US West \(Oregon\)
++ Asia Pacific \(Mumbai\)
 + Asia Pacific \(Seoul\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)
@@ -16,6 +18,8 @@ Amazon RDS supports Kerberos authentication for Oracle DB instances in the follo
 + Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
++ Europe \(Stockholm\)
++ South America \(São Paulo\)
 
 **Note**  
 Kerberos authentication isn't supported for DB instance classes that are deprecated for Oracle DB instances\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.

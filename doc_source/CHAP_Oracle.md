@@ -114,9 +114,9 @@ The following are the DB instance classes supported for Oracle\.
 **Note**  
 We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
-### Deprecation of db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
+### Deprecated db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
 
-The db\.t2 DB instance classes are on a deprecation path for Amazon RDS for Oracle\. The db\.t2 DB instance classes will be replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on September 15, 2019, Amazon RDS for Oracle will disable all new creates of the db\.t2 DB instance classes\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
+The db\.t2 DB instance classes are deprecated for Amazon RDS for Oracle\. The db\.t2 DB instance classes have been replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
 
 If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
 

@@ -15,7 +15,7 @@ To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0
 
 | RU and RUR | Version 19\.0\.0\.0 | Version 18\.0\.0\.0 | Version 12\.2\.0\.1 | 
 | --- | --- | --- | --- | 
-| 2019 October | — | [18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-10.rur-2019-10.r1) | [12\.2\.0\.1\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-10.rur-2019-10.r1) | 
+| 2019 October | [19\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2019-10.rur-2019-10.r1) | [18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-10.rur-2019-10.r1) | [12\.2\.0\.1\.ru\-2019\-10\.rur\-2019\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-10.rur-2019-10.r1) | 
 | 2019 July | [19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2019-07.rur-2019-07.r1) | [18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1) | [12\.2\.0\.1\.ru\-2019\-07\.rur\-2019\-07\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-07.rur-2019-07.r1) | 
 | 2019 April | — | — | [12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-04.rur-2019-04.r1) | 
 | 2019 January | — | — | [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) | 

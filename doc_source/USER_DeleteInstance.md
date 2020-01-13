@@ -13,25 +13,23 @@ You can only delete instances that don't have deletion protection enabled\. When
 
 ## Creating a Final Snapshot and Retaining Automated Backups<a name="USER_DeleteInstance.Snapshot"></a>
 
-When you delete a DB instance, you can choose whether to create a final snapshot of the DB instance\. You can also choose to retain automated backups after the DB instance is deleted\. To be able to restore the DB instance later, create a final snapshot, retain automated backups, or both\.
+When you delete a DB instance, you can choose whether to create a final snapshot of the DB instance\. You can also choose to retain automated backups after the DB instance is deleted, up to the retention period set on your DB instance\. To be able to restore the DB instance later, create a final snapshot, retain automated backups, or both\.
 
 When you delete a DB instance, you have the following choices:
 + Create a final DB snapshot\.
 
-  To be able to restore your deleted DB instance later with a final DB snapshot, create a final DB snapshot\.
+  To be able to restore your deleted DB instance later, create a final DB snapshot\.
 
   To delete a DB instance quickly, you can skip creating a final DB snapshot\. 
 **Important**  
-If you skip the final DB snapshot, to restore your DB instance you need one of the following:  
+If you skip the final DB snapshot, to restore your DB instance you will need to do one of the following:  
 Use an earlier manual snapshot of the DB instance to restore the DB instance to that DB snapshot's point in time\. 
-Retain automated backups\. You can use those to restore your DB instance during your retention period, but not after your retention period has expired\.
+Retain automated backups\. You can use those to restore your DB instance during your retention period, but not after your retention period has ended\.
 
   You can't create a final DB snapshot of your DB instance if it has the status `creating`, `failed`, `incompatible-restore`, or `incompatible-network`\. For more information about DB instance statuses, see [DB Instance Status](Overview.DBInstance.Status.md)\. 
 + Retain automated backups\.
 
-  You can choose to retain automated backups when you delete a DB instance\. These backups are still subject to the retention period of the DB instance and age out the same way systems snapshots do\.
-
-  When you choose to retain automated backups, your automated backups are retained for a set period of time\. This set retention period occurs regardless of whether you chose to create a final DB snapshot\. Your automated backups are retained for the retention period that was set on the DB instance at the time that you deleted it\.
+  You can choose to retain automated backups when you delete a DB instance\. Your automated backups are retained for the retention period that is set on the DB instance at the time that you delete it\. This set retention period occurs whether or not you choose to create a final DB snapshot\.
 
   To delete a retained automated backup, follow the instructions in [Deleting Retained Automated Backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups-Deleting)\.
 

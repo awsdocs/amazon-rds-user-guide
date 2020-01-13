@@ -40,7 +40,7 @@ Complete the following steps to update your CA certificate by modifying your DB 
 
    For a sample script that updates a trust store for a Linux operating system, see [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 **Note**  
-The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\.
+The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\. If you are using the AWS Database Migration Service to migrate a database to a DB instance, we recommend using the certificate bundle to ensure connectivity during the migration\.
 
 1. Modify the DB instance to change the CA from **rds\-ca\-2015** to **rds\-ca\-2019**\.
 **Important**  

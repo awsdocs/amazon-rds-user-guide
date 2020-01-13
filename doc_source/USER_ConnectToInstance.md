@@ -122,6 +122,8 @@ mysql>
    The window looks similar to the following:  
 ![\[MySQL Workbench Connection window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mysql-workbench-connect.png)
 
+   You can use the features of MySQL Workbench to customize connections\. For example, you can use the **SSL** tab to configure SSL connections\. For information about using MySQL Workbench, see the [MySQL Workbench documentation](https://dev.mysql.com/doc/workbench/en/)\.
+
 1. Optionally, choose **Test Connection** to confirm that the connection to the DB instance is successful\.
 
 1. Choose **Close**\.
@@ -131,8 +133,6 @@ mysql>
 1. From **Stored Connection**, choose your connection\.
 
 1. Choose **OK**\.
-
-For information about using MySQL Workbench, see the [MySQL Workbench documentation](https://dev.mysql.com/doc/workbench/en/)\.
 
 ## Maximum MySQL connections<a name="USER_ConnectToInstance.max_connections"></a>
 

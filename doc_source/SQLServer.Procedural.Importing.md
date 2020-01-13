@@ -199,9 +199,11 @@ The following parameters are required:
   The file can have any extension, but `.bak` is usually used\. 
 
 The following parameters are optional:
-+ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\. Amazon RDS doesn't support asymmetric CMKs\.
++ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\. 
 
-  If you don't specify a KMS key identifier, then RDS uses the default encryption key\. Your AWS account has a different default encryption key for each AWS Region\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
+  You can't use the default encryption key\. If you use the default key, the database won't be backed up\. If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
+
+  Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 + `@overwrite_s3_backup_file` – A value that indicates whether to overwrite an existing backup file\. 
   + `0` – Doesn't overwrite an existing file\. Setting this to 0 returns an error if the file already exists\. This value is the default\.
   + `1` – Overwrites an existing file that has the specified name, even if it isn't a backup file\.

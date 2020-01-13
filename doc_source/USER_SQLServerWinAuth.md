@@ -112,13 +112,13 @@ When you launch an AWS Directory Service for Microsoft Active Directory, AWS cre
 1. Choose **Next**\.
 
 1.  Review the directory information\. If changes are needed, choose **Previous**\. When the information is correct, choose **Create directory**\.   
-![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
+![\[Review and create page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
 
  It takes several minutes for the directory to be created\. When it has been successfully created, the **Status** value changes to **Active**\. 
 
  To see information about your directory, choose the directory ID in the directory listing\. Make a note of the **Directory ID**\. You will need this value when you create or modify your SQL Server DB instance\. 
 
-![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
+![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
 ### Step 2: Create the IAM role for Use by Amazon RDS<a name="USER_SQLServerWinAuth.SettingUp.CreateIAMRole"></a>
 
@@ -165,11 +165,11 @@ To create users and groups in an AWS Directory Service directory, you must be co
  Windows Authentication is only supported for SQL Server DB instances in a VPC, and the DB instance must be in the same VPC as the directory\. 
 
  Several parameters are required for the DB instance to be able to use the domain directory you created: 
-+  For the **Directory** parameter, you must enter the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
++  For the **Directory** parameter, you must choose the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
 +  Use the same VPC that was used when you created the directory\. 
-+  Use a security group that allows egress within the VPC so the DB instance can communicate with the directory\. 
++  Make sure that the VPC security group has an outbound rule that lets the DB instance communicate with the directory\.
 
-![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth1.png)
+![\[Microsoft SQL Server Windows Authentication directory\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth1.png)
 
 ### Step 5: Create Windows Authentication SQL Server Logins<a name="USER_SQLServerWinAuth.CreateLogins"></a>
 

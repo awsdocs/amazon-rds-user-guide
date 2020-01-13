@@ -144,34 +144,56 @@ The following code example shows how to set up the SSL connection that validates
 
 ```
 public class MySQLSSLTest {
-
-        private static final String DB_USER = "user name";
+     
+        private static final String DB_USER = "username";
         private static final String DB_PASSWORD = "password";
         // This key store has only the prod root ca.
         private static final String KEY_STORE_FILE_PATH = "file-path-to-keystore";
         private static final String KEY_STORE_PASS = "keystore-password";
-        
-    public static void test(String[] args) throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-        
-        
-        System.setProperty("javax.net.ssl.trustStore", KEY_STORE_FILE_PATH);
-        System.setProperty("javax.net.ssl.trustStorePassword", KEY_STORE_PASS);
-        
-        Properties properties = new Properties();
-        properties.setProperty("sslMode", "VERIFY_IDENTITY");
-        properties.put("user", DB_USER);
-        properties.put("password", DB_PASSWORD);
-        
-
-        Connection connection = DriverManager.getConnection("jdbc:mysql://jagdeeps-ssl-test.cni62e2e7kwh.us-east-1.rds.amazonaws.com:3306",properties);
-        Statement stmt=connection.createStatement();
-        
-        ResultSet rs=stmt.executeQuery("SELECT 1 from dual");
-
-        return;
+            
+        public static void test(String[] args) throws Exception {
+            Class.forName("com.mysql.jdbc.Driver");
+                    
+            System.setProperty("javax.net.ssl.trustStore", KEY_STORE_FILE_PATH);
+            System.setProperty("javax.net.ssl.trustStorePassword", KEY_STORE_PASS);
+            
+            Properties properties = new Properties();
+            properties.setProperty("sslMode", "VERIFY_IDENTITY");
+            properties.put("user", DB_USER);
+            properties.put("password", DB_PASSWORD);
+            
+     
+            Connection connection = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://mydatabase.123456789012.us-east-1.rds.amazonaws.com:3306",properties);
+                stmt = connection.createStatement();
+                rs=stmt.executeQuery("SELECT 1 from dual");
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                    }
+                }
+                if (stmt != null) {
+                   try {
+                        stmt.close();
+                    } catch (SQLException e) {
+                   }
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return;
+        }
     }
-}
 ```
 
 **Important**  
