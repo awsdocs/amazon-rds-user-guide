@@ -67,7 +67,7 @@ The following limitations exist for Amazon RDS encrypted DB instance:
 + DB instances that are encrypted can't be modified to disable encryption\.
 + You can't have an encrypted Read Replica of an unencrypted DB instance or an unencrypted Read Replica of an encrypted DB instance\.
 + Encrypted Read Replicas must be encrypted with the same key as the source DB instance\.
-+ You can't restore an unencrypted backup or snapshot to an encrypted DB instance\.
++ You can restore an unencrypted backup or snapshot to an encrypted DB instance\.
 + To copy an encrypted snapshot from one AWS Region to another, you must specify the KMS key identifier of the destination AWS Region\. This is because KMS encryption keys are specific to the AWS Region that they are created in\.
 
    The source snapshot remains encrypted throughout the copy process\. AWS Key Management Service uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\.
