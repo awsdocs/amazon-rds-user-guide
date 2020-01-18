@@ -7,7 +7,7 @@ Known issues and limitations for working with MySQL on Amazon RDS are as follows
 + [Index Merge Optimization Returns Wrong Results](#MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization)
 + [Log File Size](#MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize)
 + [MySQL Parameter Exceptions for Amazon RDS DB Instances](#MySQL.Concepts.ParameterNotes)
-+ [MySQL File Size Limits](#MySQL.Concepts.Limits.FileSize)
++ [MySQL File Size Limits in Amazon RDS](#MySQL.Concepts.Limits.FileSize)
 + [MySQL Keyring Plugin Not Supported](#MySQL.Concepts.Limits.KeyRing)
 
 ## Inconsistent InnoDB Buffer Pool Size<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize"></a>
@@ -75,7 +75,7 @@ Read Replicas should always use the same `lower_case_table_names` parameter valu
 
 You can set the `long_query_time` parameter to a floating point value which allows you to log slow queries to the MySQL slow query log with microsecond resolution\. You can set a value such as 0\.1 seconds, which would be 100 milliseconds, to help when debugging slow transactions that take less than one second\. 
 
-## MySQL File Size Limits<a name="MySQL.Concepts.Limits.FileSize"></a>
+## MySQL File Size Limits in Amazon RDS<a name="MySQL.Concepts.Limits.FileSize"></a>
 
 For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MySQL DB instances\. 
 

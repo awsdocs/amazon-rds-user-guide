@@ -291,7 +291,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Setting Up Kerberos Authentication for PostgreSQL DB Instances](postgresql-kerberos-setting-up.md)
       + [Managing a DB Instance in a Domain](postgresql-kerberos-managing.md)
       + [Connecting to PostgreSQL with Kerberos Authentication](postgresql-kerberos-connecting.md)
-+ [Quotas for Amazon RDS](CHAP_Limits.md)
++ [Quotas and Constraints for Amazon RDS](CHAP_Limits.md)
 + [Troubleshooting for Amazon RDS](CHAP_Troubleshooting.md)
 + [Amazon RDS Application Programming Interface (API) Reference](ProgrammingGuide.md)
    + [Using the Query API](Using_the_Query_API.md)

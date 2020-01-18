@@ -23,6 +23,9 @@ To get a certificate bundle that contains both the intermediate and root certifi
 
 If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.p7b](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.p7b)\. 
 
+**Note**  
+Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
+
 ## Intermediate Certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
 
 You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL/TLS\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.
@@ -52,14 +55,18 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 
 ## AWS GovCloud \(US\) Certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>
 
-You can download a root certificate for the AWS GovCloud \(US\-West\) Region at [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-GovCloud\-Root\-CA\-2017\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-GovCloud-Root-CA-2017.pem)\.
+You can download the root certificate for an AWS GovCloud \(US\) Region from the following list:
 
-To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 
+[AWS GovCloud \(US\-East\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-east-1-2017-root.pem) \(Root CA\-2017\)
+
+[AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-west-1-2017-root.pem) \(Root CA\-2017\)
 
 You can download the intermediate certificate for an AWS GovCloud \(US\) Region from the following list:
 
-[AWS GovCloud \(US\-East\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-east-1.pem) \(CA\-2017\)
+[AWS GovCloud \(US\-East\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-east-1-intermediate.pem) \(CA\-2017\)
 
 [AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
 
 [AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)
+
+To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 

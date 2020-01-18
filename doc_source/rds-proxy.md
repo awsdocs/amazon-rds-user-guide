@@ -63,11 +63,45 @@
 
 ### RDS Proxy Security<a name="rds-proxy-security"></a>
 
- RDS Proxy uses the existing RDS security mechanisms such as Transport Layer Security \(TLS\) and AWS Identity and Access Management \(IAM\)\. For general information about those security features, see [Security in Amazon RDS](UsingWithRDS.md)\. If you aren't familiar with how RDS and Aurora work with authentication, authorization, and other areas of security, consult those resources first\. 
+ RDS Proxy uses the existing RDS security mechanisms such as Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) and AWS Identity and Access Management \(IAM\)\. For general information about those security features, see [Security in Amazon RDS](UsingWithRDS.md)\. If you aren't familiar with how RDS and Aurora work with authentication, authorization, and other areas of security, consult those resources first\. 
 
  RDS Proxy can act as an additional layer of security between client applications and the underlying database\. For example, you can connect to the proxy using TLS 1\.2, even if the underlying DB instance only supports TLS 1\.0 or 1\.1\. You can connect to the proxy using an IAM role, even if the proxy connects to the database using the native user/password authentication method\. By using this technique, you can enforce strong authentication requirements for database applications without a costly migration effort for the DB instances themselves\. 
 
  You store the database credentials used by RDS Proxy in AWS Secrets Manager\. Each database user for the RDS DB instance or Aurora DB cluster accessed by a proxy must have a corresponding secret in Secrets Manager\. You can also set up IAM authentication for users of RDS Proxy\. By doing so, you can enforce IAM authentication for database access even if the databases still use native password authentication\. These security features are a preferable alternative to embedding database credentials in your application code\. 
+
+#### Using TLS/SSL with RDS Proxy<a name="rds-proxy-security.tls"></a>
+
+ You can connect to RDS Proxy using the TLS/SSL protocol\. 
+
+**Note**  
+RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your TLS/SSL certificate, you don't need to update applications that use RDS Proxy connections\.
+
+ RDS Proxy can ensure that your session uses TLS/SSL between your client and the RDS Proxy endpoint\. To have RDS Proxy do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to a RDS Proxy database\. 
+
+ RDS Proxy supports TLS protocol version 1\.0, 1\.1, and 1\.2\. However, you don't need to configure RDS Proxy database for TLS\. In particular, don't use the `REQUIRE` clause on your database user privileges for SSL\. Doing so prevents that user from connecting\. 
+
+ By default, client programs establish an encrypted connection with RDS Proxy, with further control available through the `--ssl-mode` option\. From the client side, RDS Proxy supports all SSL modes\. 
+
+ For the client, the SSL modes are the following: 
+
+**PREFERRED**  
+ SSL is the first choice, but it isn't required\. 
+
+**DISABLED**  
+ No SSL is allowed\. 
+
+**REQUIRED**  
+ Enforce SSL\. 
+
+**VERIFY\_CA**  
+ Enforce SSL and verify the certificate authority \(CA\)\. 
+
+**VERIFY\_IDENTITY**  
+ Enforce SSL and verify the CA and CA hostname\. 
+
+When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+
+ RDS Proxy uses wildcard certificates\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
 ### Failover<a name="rds-proxy-failover"></a>
 

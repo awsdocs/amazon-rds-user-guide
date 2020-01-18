@@ -168,6 +168,41 @@ While MariaDB supports multiple storage engines with varying capabilities, not a
 
 Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
+## MariaDB File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
+
+For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MariaDB DB instances\. For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\. 
+
+There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [InnoDB File\-Per\-Table Mode](http://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\.
+
+We don't recommend allowing tables to grow to the maximum file size\. In general, a better practice is to partition data into smaller tables, which can improve performance and recovery times\.
+
+One option that you can use for breaking a large table up into smaller tables is partitioning\. *Partitioning* distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, see [Chapter 19: Partitioning](https://dev.mysql.com/doc/refman/5.6/en/partitioning.html) in the MySQL documentation\.
+
+**To determine the file size of a table**
+
+Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\. To update table statistics, issue an `ANALYZE TABLE` command on each table\. For more information, see [ANALYZE TABLE](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html) in the MySQL documentation\.
+
+```
+1. SELECT TABLE_SCHEMA, TABLE_NAME, 
+2.     round(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2) As "Approximate size (MB)", DATA_FREE 
+3.     FROM information_schema.TABLES
+4.     WHERE TABLE_SCHEMA NOT IN ('mysql', 'information_schema', 'performance_schema');
+```
+
+**To enable InnoDB file\-per\-table tablespaces**
++ To enable InnoDB file\-per\-table tablespaces, set the `innodb_file_per_table` parameter to `1` in the parameter group for the DB instance\.
+
+**To disable InnoDB file\-per\-table tablespaces**
++ To disable InnoDB file\-per\-table tablespaces, set the `innodb_file_per_table` parameter to `0` in the parameter group for the DB instance\.
+
+For information on updating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can issue an `ALTER TABLE` command\. You can use this command to move a table from the global tablespace to its own tablespace\. Or you can move a table from its own tablespace to the global tablespace\. Following is an example\.
+
+```
+1. ALTER TABLE table_name ENGINE=InnoDB, ALGORITHM=COPY; 
+```
+
 ## MariaDB Security on Amazon RDS<a name="MariaDB.Concepts.UsersAndPrivileges"></a>
 
 Security for Amazon RDS MariaDB DB instances is managed at three levels:

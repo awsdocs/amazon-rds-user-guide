@@ -13,6 +13,9 @@ Before you update your DB instances to use the new CA certificate, make sure tha
 
 Any new RDS DB instances created after January 14, 2020 will use the new certificates by default\. If you want to temporarily modify new DB instances manually to use the old \(rds\-ca\-2015\) certificates, you can do so using the AWS Management Console or the AWS CLI\. Any DB instances created prior to January 14, 2020 use the rds\-ca\-2015 certificates until you update them to the rds\-ca\-2019 certificates\.
 
+**Note**  
+Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your SSL/TLS certificate, you don't need to update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
+
 **Topics**
 + [Updating Your CA Certificate by Modifying Your DB Instance](#UsingWithRDS.SSL-certificate-rotation-updating)
 + [Updating Your CA Certificate by Applying DB Instance Maintenance](#UsingWithRDS.SSL-certificate-rotation-maintenance)
@@ -259,6 +262,14 @@ aws rds modify-db-instance ^
 
 ## Sample Script for Importing Certificates Into Your Trust Store<a name="UsingWithRDS.SSL-certificate-rotation-sample-script"></a>
 
+The following are sample shell scripts that import the certificate bundle into a trust store\.
+
+**Topics**
++ [Sample Script for Importing Certificates on Linux](#UsingWithRDS.SSL-certificate-rotation-sample-script.linux)
++ [Sample Script for Importing Certificates on macOS](#UsingWithRDS.SSL-certificate-rotation-sample-script.macos)
+
+### Sample Script for Importing Certificates on Linux<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.linux"></a>
+
 The following is a sample shell script that imports the certificate bundle into a trust store on a Linux operating system\.
 
 ```
@@ -268,6 +279,36 @@ storepassword=changeit
 
 curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
 awk 'split_after == 1 {n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1}{print > "rds-ca-" n ".pem"}' < ${mydir}/rds-combined-ca-bundle.pem
+
+for CERT in rds-ca-*; do
+  alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*CN=//; print')
+  echo "Importing $alias"
+  keytool -import -file ${CERT} -alias "${alias}" -storepass ${storepassword} -keystore ${truststore} -noprompt
+  rm $CERT
+done
+
+rm ${mydir}/rds-combined-ca-bundle.pem
+
+echo "Trust store content is: "
+
+keytool -list -v -keystore "$truststore" -storepass ${storepassword} | grep Alias | cut -d " " -f3- | while read alias 
+do
+   expiry=`keytool -list -v -keystore "$truststore" -storepass ${storepassword} -alias "${alias}" | grep Valid | perl -ne 'if(/until: (.*?)\n/) { print "$1\n"; }'`
+   echo " Certificate ${alias} expires in '$expiry'" 
+done
+```
+
+### Sample Script for Importing Certificates on macOS<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.macos"></a>
+
+The following is a sample shell script that imports the certificate bundle into a trust store on macOS\.
+
+```
+mydir=/tmp/certs
+truststore=${mydir}/rds-truststore.jks
+storepassword=changeit
+
+curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
+split -p "-----BEGIN CERTIFICATE-----" ${mydir}/rds-combined-ca-bundle.pem rds-ca-
 
 for CERT in rds-ca-*; do
   alias=$(openssl x509 -noout -text -in $CERT | perl -ne 'next unless /Subject:/; s/.*CN=//; print')

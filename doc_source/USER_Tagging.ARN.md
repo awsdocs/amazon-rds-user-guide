@@ -51,16 +51,28 @@ For example, the following AWS CLI command gets the ARN for a DB instance\.
 For Linux, OS X, or Unix:  
 
 ```
-1. aws rds describe-db-instances \
-2. --db-instance-identifier DBInstanceIdentifier \
-3. --region us-west-2
+aws rds describe-db-instances \
+--db-instance-identifier DBInstanceIdentifier \
+--region us-west-2 \
+--query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}'
 ```
 For Windows:  
 
 ```
-1. aws rds describe-db-instances ^
-2. --db-instance-identifier DBInstanceIdentifier ^
-3. --region us-west-2
+aws rds describe-db-instances ^
+--db-instance-identifier DBInstanceIdentifier ^
+--region us-west-2 ^
+--query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}'
+```
+The output of that command is like the following:  
+
+```
+[
+    {
+        "DBInstanceArn": "arn:aws:rds:us-west-2:account_id:db:instance_id", 
+        "DBInstanceIdentifier": "instance_id"
+    }
+]
 ```
 
 ### RDS API<a name="USER_Tagging.ARN.API"></a>
