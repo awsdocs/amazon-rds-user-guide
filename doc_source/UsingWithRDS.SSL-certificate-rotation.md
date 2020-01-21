@@ -306,6 +306,7 @@ The following is a sample shell script that imports the certificate bundle into 
 mydir=/tmp/certs
 truststore=${mydir}/rds-truststore.jks
 storepassword=changeit
+mkdir ${mydir}
 
 curl -sS "https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem" > ${mydir}/rds-combined-ca-bundle.pem
 split -p "-----BEGIN CERTIFICATE-----" ${mydir}/rds-combined-ca-bundle.pem rds-ca-
