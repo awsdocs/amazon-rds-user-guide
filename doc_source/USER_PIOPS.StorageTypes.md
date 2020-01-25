@@ -38,10 +38,10 @@ You can't reduce the amount of storage for a DB instance after storage has been 
 
 1. Choose **Modify**\.
 
-1. Enter a new value for **Allocated Storage**\. It must be greater than the current value\.   
+1. Enter a new value for **Allocated storage**\. It must be greater than the current value\.   
 ![\[Modify the amount of storage for a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/scale-gs2.png)
 **Note**  
-When you increase **Allocated Storage**, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you see an error\.
+When you increase the allocated storage, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
 
 1. Choose **Continue** to move to the next screen\.
 

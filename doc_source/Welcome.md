@@ -1,6 +1,6 @@
 # What Is Amazon Relational Database Service \(Amazon RDS\)?<a name="Welcome"></a>
 
-Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud\. It provides cost\-efficient, resizeable capacity for an industry\-standard relational database and manages common database administration tasks\. 
+Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud\. It provides cost\-efficient, resizable capacity for an industry\-standard relational database and manages common database administration tasks\.
 
 **Note**  
 This guide covers Amazon RDS database engines other than Amazon Aurora\. For information about using Amazon Aurora, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.  

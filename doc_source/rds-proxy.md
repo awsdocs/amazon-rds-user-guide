@@ -74,7 +74,7 @@
  You can connect to RDS Proxy using the TLS/SSL protocol\. 
 
 **Note**  
-RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your TLS/SSL certificate, you don't need to update applications that use RDS Proxy connections\.
+ RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your TLS/SSL certificate, you don't need to update applications that use RDS Proxy connections\. 
 
  RDS Proxy can ensure that your session uses TLS/SSL between your client and the RDS Proxy endpoint\. To have RDS Proxy do so, specify the requirement on the client side with the `--ssl-mode` parameter\. SSL session variables are not set for SSL connections to a RDS Proxy database\. 
 
@@ -99,7 +99,7 @@ RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you ar
 **VERIFY\_IDENTITY**  
  Enforce SSL and verify the CA and CA hostname\. 
 
-When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+ When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  RDS Proxy uses wildcard certificates\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
@@ -822,6 +822,7 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
 +  Your RDS Proxy must be in the same VPC as the database\. Although the database can be publicly accessible, the proxy can't be\. 
 +  Currently, proxies don't track any changes to the associated RDS or Aurora DB instances\. Those changes include operations such as host replacements, instance renames, port changes, and scaling instances up or down\. Proxies also don't track changes to Aurora clusters such as adding or removing DB instances\. 
 +  Not all logic is implemented to pin sessions to database connections based on SQL statements and functions\. For the most current pinning behavior, see [Pinning](#rds-proxy-pinning)\. 
++  Proxies don't support compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
 
 ## Command\-Line Examples for RDS Proxy<a name="rds-proxy.examples"></a>
 

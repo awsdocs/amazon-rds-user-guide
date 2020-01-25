@@ -7,7 +7,7 @@ With IAM database authentication, you don't need to assign database passwords to
 To use IAM authentication with PostgreSQL, connect to the DB instance, create database users, and then grant them the `rds_iam` role as shown in the following example\.
 
 ```
-CREATE USER db_userx WITH LOGIN; 
+CREATE USER db_userx; 
 GRANT rds_iam TO db_userx;
 ```
 

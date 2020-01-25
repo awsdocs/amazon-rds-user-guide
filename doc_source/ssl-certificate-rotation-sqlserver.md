@@ -56,7 +56,7 @@ For more information about SQL Server Management Studio, see [Use SQL Server Man
 
 ### sqlcmd<a name="ssl-certificate-rotation-sqlserver.determining-client.sqlcmd"></a>
 
-The following example with the `sqlcmd` client shows how to check a script's MySQL connection to determine whether successful connections require a valid certificate\. For more information, see [Connecting with sqlcmd](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/connecting-with-sqlcmd?view=sql-server-ver15) in the Microsoft SQL Server documentation\.
+The following example with the `sqlcmd` client shows how to check a script's SQL Server connection to determine whether successful connections require a valid certificate\. For more information, see [Connecting with sqlcmd](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/connecting-with-sqlcmd?view=sql-server-ver15) in the Microsoft SQL Server documentation\.
 
 When using `sqlcmd`, an SSL connection requires verification against the server certificate if you use the `-N` command argument to encrypt connections, as in the following example\.
 

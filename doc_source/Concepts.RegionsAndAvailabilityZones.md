@@ -12,7 +12,7 @@ Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that i
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
-## <a name="w40aac15c39c17"></a>
+## <a name="w50aac15c39c17"></a>
 
 Amazon RDS supports the endpoints listed in the following table\. 
 

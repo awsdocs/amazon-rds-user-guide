@@ -4,6 +4,9 @@ As of September 19, 2019, Amazon RDS has published new Certificate Authority \(C
 
 This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB instances\. 
 
+**Important**  
+When you change the certificate for an Amazon RDS for Oracle DB instance, only the database listener is restarted\. The DB instance isn't restarted\. Existing database connections are unaffected, but new connections will encounter errors for a brief period while the listener is restarted\.
+
 **Note**  
 For client applications that use SSL/TLS to connect to your DB instances, you must update your client application trust stores to include the new CA certificates\. 
 

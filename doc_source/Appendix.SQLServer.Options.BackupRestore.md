@@ -20,6 +20,8 @@ The general process for adding the native backup and restore option to a DB inst
 
 After you add the native backup and restore option, you don't need to restart your DB instance\. As soon as the option group is active, you can begin backing up and restoring immediately\.
 
+### Console<a name="Add.Native.Backup.Restore.Console"></a>
+
 **To add the native backup and restore option**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
@@ -28,7 +30,7 @@ After you add the native backup and restore option, you don't need to restart yo
 
 1. Create a new option group or use an existing option group\. For information on how to create a custom DB option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
-   To use an existing option group, skip to the next step\. 
+   To use an existing option group, skip to the next step\.
 
 1. Add the **SQLSERVER\_BACKUP\_RESTORE** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
@@ -55,6 +57,63 @@ After you add the native backup and restore option, you don't need to restart yo
 1. Apply the option group to a new or existing DB instance:
    + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
    + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+
+### CLI<a name="Add.Native.Backup.Restore.CLI"></a>
+
+This procedure makes the following assumptions:
++ You're adding the SQLSERVER\_BACKUP\_RESTORE option to an option group that already exists\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
++ You're associating the option with an IAM role that already exists and has access to an S3 bucket to store the backups\.
++ You're applying the option group to a DB instance that already exists\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+
+**To add the native backup and restore option**
+
+1. Add the `SQLSERVER_BACKUP_RESTORE` option to the option group\.  
+**Example**  
+
+   For Linux, OS X, or Unix:
+
+   ```
+   aws rds add-option-to-option-group \
+   	--option-group-name mybackupgroup \
+   	--options "[{"OptionName": "SQLSERVER_BACKUP_RESTORE", \
+   	"OptionSettings": [{"Name": "IAM_ROLE_ARN", \
+   	"Value": "arn:aws:iam::account-id:role/role-name"}]}]" \
+   	--apply-immediately
+   ```
+
+   For Windows:
+
+   ```
+   aws rds add-option-to-option-group ^
+   	--option-group-name mybackupgroup ^
+   	--options "[{\"OptionName\": \"SQLSERVER_BACKUP_RESTORE\", ^
+   	\"OptionSettings\": [{\"Name\": \"IAM_ROLE_ARN\", ^
+   	\"Value\": \"arn:aws:iam::account-id:role/role-name"}]}]" ^
+   	--apply-immediately
+   ```
+**Note**  
+When using the Windows command prompt, you must escape double quotes \("\) in JSON code by prefixing them with a backslash \(\\\)\.
+
+1. Apply the option group to the DB instance\.  
+**Example**  
+
+   For Linux, OS X, or Unix:
+
+   ```
+   aws rds modify-db-instance \
+   	--db-instance-identifier mydbinstance \
+   	--option-group-name mybackupgroup \
+   	--apply-immediately
+   ```
+
+   For Windows:
+
+   ```
+   aws rds modify-db-instance ^
+   	--db-instance-identifier mydbinstance ^
+   	--option-group-name mybackupgroup ^
+   	--apply-immediately
+   ```
 
 ## Modifying Native Backup and Restore Option Settings<a name="Appendix.SQLServer.Options.BackupRestore.ModifySettings"></a>
 

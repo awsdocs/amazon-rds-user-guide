@@ -170,7 +170,7 @@ The following procedure shows an example of upgrading from MySQL version 5\.5 to
 
    1. Choose **Create read replica**\.
 
-1. When the Read Replica has been created and **Status** shows **available**, upgrade the Read Replica to MySQL 5\.6:
+1. When the Read Replica has been created and **Status** shows **Available**, upgrade the Read Replica to MySQL 5\.6:
 
    1. On the console, choose **Databases**, and then choose the Read Replica that you just created\.
 
@@ -182,7 +182,7 @@ The following procedure shows an example of upgrading from MySQL version 5\.5 to
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows `available`, verify that the upgraded Read Replica is up\-to\-date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the Read Replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded Read Replica is up\-to\-date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the Read Replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
 
 1. Make your MySQL 5\.6 Read Replica a master DB instance\. 
 **Important**  
@@ -191,11 +191,11 @@ In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you
 
    1. On the console, choose **Databases**, and then choose the Read Replica that you just upgraded\.
 
-   1. For **Actions**, choose **Promote read replica**\.
+   1. For **Actions**, choose **Promote**\.
 
    1. Choose **Yes** to enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 
-      Choose **Continue**\.
+   1. Choose **Continue**\.
 
    1. Choose **Promote Read Replica**\.
 

@@ -63,10 +63,9 @@ For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon
 
 ## Version and Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
-### MariaDB 10\.3 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-3"></a>
+For information about supported versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\.
 
-Amazon RDS supports the following versions of MariaDB 10\.3: 
-+ 10\.3\.8 \(supported in all AWS Regions\)
+### MariaDB 10\.3 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-3"></a>
 
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.3 or later: 
 + **Oracle compatibility** – PL/SQL compatibility parser, sequences, INTERSECT and EXCEPT to complement UNION, new TYPE OF and ROW TYPE OF declarations, and invisible columns
@@ -79,11 +78,6 @@ For a list of all MariaDB 10\.3 features and their documentation, see [Changes &
 For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
 ### MariaDB 10\.2 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-2"></a>
-
-Amazon RDS supports the following versions of MariaDB 10\.2: 
-+ 10\.2\.15 \(supported in all AWS Regions\)
-+ 10\.2\.12 \(supported in all AWS Regions\)
-+ 10\.2\.11 \(supported in all AWS Regions\)
 
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.2 or later: 
 + ALTER USER
@@ -104,14 +98,6 @@ For a list of unsupported features, see [Features Not Supported](#MariaDB.Concep
 
 ### MariaDB 10\.1 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-1"></a>
 
-Amazon RDS supports the following versions of MariaDB 10\.1: 
-+ 10\.1\.34 \(supported in all AWS Regions\)
-+ 10\.1\.31 \(supported in all AWS Regions\)
-+ 10\.1\.26 \(supported in all AWS Regions\)
-+ 10\.1\.23 \(supported in all AWS Regions\)
-+ 10\.1\.19 \(supported in all AWS Regions\)
-+ 10\.1\.14 \(supported in all AWS Regions except us\-east\-2\)
-
 Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.1 or later: 
 + Optimistic in\-order parallel replication
 + Page Compression
@@ -122,15 +108,6 @@ For a list of all MariaDB 10\.1 features and their documentation, see [Changes &
 For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
 ### MariaDB 10\.0 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-0"></a>
-
-Amazon RDS supports the following versions of MariaDB 10\.0: 
-+ 10\.0\.35 \(supported in all AWS Regions\)
-+ 10\.0\.34 \(supported in all AWS Regions\)
-+ 10\.0\.32 \(supported in all AWS Regions\)
-+ 10\.0\.31 \(supported in all AWS Regions\)
-+ 10\.0\.28 \(supported in all AWS Regions\)
-+ 10\.0\.24 \(supported in all AWS Regions\)
-+ 10\.0\.17 \(supported in all AWS Regions except us\-east\-2, ca\-central\-1, eu\-west\-2\)
 
 For a list of all MariaDB 10\.0 features and their documentation, see [Changes & Improvements in MariaDB 10\.0](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-100/) and [Release Notes \- MariaDB 10\.0 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-100-series/) on the MariaDB website\. 
 

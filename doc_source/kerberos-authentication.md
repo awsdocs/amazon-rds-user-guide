@@ -8,5 +8,6 @@ You can enable your database users to authenticate against DB instances in two w
 
 Currently, RDS supports Kerberos authentication for Microsoft SQL Server, Oracle, and PostgreSQL DB instances\. For information about Kerberos authentication with a specific engine, see the following:
 + [Using Windows Authentication with a Microsoft SQL Server DB Instance](USER_SQLServerWinAuth.md)
++ [Using Kerberos Authentication for MySQL](mysql-kerberos.md)
 + [Using Kerberos Authentication with Amazon RDS for Oracle](oracle-kerberos.md)
 + [Using Kerberos Authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)

@@ -51,5 +51,3 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
    When you create or modify the DB instance, provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory\. Also provide the name of the IAM role that you created\. You can locate the DB instance in the same VPC as the directory or in a different VPC\.
 
 1. Use the RDS master user credentials to connect to the PostgreSQL DB instance\. Create the user in PostgreSQL to be identified externally\. Externally identified users can log in to the PostgreSQL DB instance using Kerberos authentication\.
-
-To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust\. For more information on setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/setup_trust.html) in the *AWS Directory Service Administration Guide*\.

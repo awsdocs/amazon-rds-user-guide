@@ -200,6 +200,9 @@ After you enable the Management Agent, you can modify settings for the option\. 
 
 You can use Amazon RDS procedures to run certain EMCTL commands on the Management Agent\. By running these procedures, you can do the tasks listed following\.
 
+**Note**  
+Tasks are executed asynchronously\.
+
 **Topics**
 + [Getting the Management Agent's Status](#Oracle.Options.OEMAgent.DBTasks.GetAgentStatus)
 + [Restarting the Management Agent](#Oracle.Options.OEMAgent.DBTasks.RestartAgent)
@@ -213,11 +216,19 @@ You can use Amazon RDS procedures to run certain EMCTL commands on the Managemen
 
 To get the Management Agent's status, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent`\. This procedure is equivalent to the `emctl status agent` command\.
 
-The following procedure gets the Management Agent's status,
+The following procedure creates a task to get the Management Agent's status and returns the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent() as TASK_ID from DUAL;                
 ```
+
+You can view the result by displaying the task's output file\.
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));                
+```
+
+Replace *`task-id`* with the task ID returned by the procedure\.
 
 ### Restarting the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.RestartAgent"></a>
 

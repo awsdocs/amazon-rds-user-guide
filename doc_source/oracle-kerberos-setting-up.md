@@ -12,76 +12,71 @@ You use AWS Directory Service for Microsoft Active Directory, also called AWS Ma
 
 ## Step 1: Create a Directory Using the AWS Managed Microsoft AD<a name="oracle-kerberos-setting-up.create-directory"></a>
 
-AWS Directory Service creates a fully managed Microsoft Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers on your behalf\. The directory servers are created in different subnets in a VPC\. This redundancy helps ensure that your directory remains accessible even if a failure occurs\. 
+ AWS Directory Service creates a fully managed Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and Domain Name System \(DNS\) servers on your behalf\. The directory servers are created in different subnets in a VPC\. This redundancy helps make sure that your directory remains accessible even if a failure occurs\. 
 
  When you create an AWS Managed Microsoft AD directory, AWS Directory Service performs the following tasks on your behalf: 
-+  Sets up a Microsoft Active Directory within your VPC\. 
-+  Creates a directory administrator account with the user name `Admin` and the specified password\. You use this account to manage your directory\. 
++  Sets up an Active Directory within the VPC\. 
++  Creates a directory administrator account with the user name Admin and the specified password\. You use this account to manage your directory\. 
 **Note**  
-Make sure to save this password\. AWS Directory Service doesn't store this password, and it can't be retrieved or reset\.
-+ Creates a security group for the directory controllers\.
+ Be sure to save this password\. AWS Directory Service doesn't store it\. You can reset it, but you can't retrieve it\. 
++  Creates a security group for the directory controllers\. 
 
-When you launch an AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all of your directory’s objects\. This OU, which has the NetBIOS name that you entered when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
+ When you launch an AWS Managed Microsoft AD, AWS creates an Organizational Unit \(OU\) that contains all of your directory's objects\. This OU has the NetBIOS name that you typed when you created your directory and is located in the domain root\. The domain root is owned and managed by AWS\. 
 
- The `admin` account that was created with your AWS Managed Microsoft AD directory has permissions for the most common administrative activities for your OU: 
-+  Create, update, or delete users
+ The Admin account that was created with your AWS Managed Microsoft AD directory has permissions for the most common administrative activities for your OU: 
++  Create, update, or delete users 
 +  Add resources to your domain such as file or print servers, and then assign permissions for those resources to users in your OU 
 +  Create additional OUs and containers 
 +  Delegate authority 
 +  Restore deleted objects from the Active Directory Recycle Bin 
 +  Run AD and DNS Windows PowerShell modules on the Active Directory Web Service 
 
- The `admin` account also has rights to perform the following domain\-wide activities: 
+ The Admin account also has rights to perform the following domain\-wide activities: 
 +  Manage DNS configurations \(add, remove, or update records, zones, and forwarders\) 
 +  View DNS event logs 
 +  View security event logs 
 
 **To create a directory with AWS Managed Microsoft AD**
 
-1.  In the [AWS Directory Service console](https://console.aws.amazon.com/directoryservicev2/) navigation pane, choose **Directories**, and then choose **Set up directory**\. 
+1. Sign in to the AWS Management Console and open the AWS Directory Service console at [https://console\.aws\.amazon\.com/directoryservicev2/](https://console.aws.amazon.com/directoryservicev2/)\.
 
-1. Choose **AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option currently supported for use with Amazon RDS\. 
+1.  In the navigation pane, choose **Directories** and choose **Set up Directory**\. 
 
-1. Choose **Next**\.
+1.  Choose **AWS Managed Microsoft AD**\. AWS Managed Microsoft AD is the only option that you can currently use with Amazon RDS\. 
 
-1. On the **Enter directory information** page, provide the following information:   
-**Edition**  
- Choose the edition that meets your requirements\.  
+1.  Enter the following information:   
 **Directory DNS name**  
-The fully qualified name for the directory, such as **corp\.example\.com**\.   
-The fully qualified domain name of the AWS Managed Microsoft AD must not be longer than 61 characters\.  
+ The fully qualified name for the directory, such as **corp\.example\.com**\.   
 **Directory NetBIOS name**  
- An optional short name for the directory, such as `CORP`\.   
+ The short name for the directory, such as **CORP**\.   
 **Directory description**  
- An optional description for the directory\.   
+ \(Optional\) A description for the directory\.   
 **Admin password**  
- The password for the directory administrator\. The directory creation process creates an administrator account with the user name `Admin` and this password\.   
- The directory administrator password can't include the word "admin\." The password is case\-sensitive and must be 8–64 characters in length\. It must also contain at least one character from three of the following four categories:   
+ The password for the directory administrator\. The directory creation process creates an administrator account with the user name Admin and this password\.   
+ The directory administrator password and can't include the word "admin\." The password is case\-sensitive and must be 8–64 characters in length\. It must also contain at least one character from three of the following four categories:   
    +  Lowercase letters \(a–z\) 
    +  Uppercase letters \(A–Z\) 
    +  Numbers \(0–9\) 
-   +  Nonalphanumeric characters \(\~\!@\#$%^&\*\_\-\+=`\|\\\(\)\{\}\[\]:;"'<>,\.?/\)   
+   +  Non\-alphanumeric characters \(\~\!@\#$%^&\*\_\-\+=`\|\\\(\)\{\}\[\]:;"'<>,\.?/\)   
 **Confirm password**  
- Retype the administrator password\. 
+ The administrator password retyped\. 
 
 1. Choose **Next**\.
 
-1. On the **Choose VPC and subnets** page, provide the following information:  
+1.  Enter the following information in the **Networking** section and then choose **Next**:   
 **VPC**  
- Choose the VPC for the directory\. The Oracle DB instance can be created in this same VPC or in a different VPC\.   
+ The VPC for the directory\. Create the Oracle DB instance in this same VPC\.   
 **Subnets**  
- Choose the subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
+ Subnets for the directory servers\. The two subnets must be in different Availability Zones\. 
 
-1. Choose **Next**\.
-
-1.  Review the directory information\. If changes are needed, choose **Previous** and make the changes\. When the information is correct, choose **Create directory**\.   
-![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
+1.  Review the directory information and make any necessary changes\. When the information is correct, choose **Create directory**\.   
+![\[Directory details page during creation\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth2.png)
 
  It takes several minutes for the directory to be created\. When it has been successfully created, the **Status** value changes to **Active**\. 
 
- To see information about your directory, choose the directory ID in the directory listing\. Make a note of the `Directory ID` value\. You need this value when you create or modify your Oracle DB instance\. 
+ To see information about your directory, choose the directory name in the directory listing\. Note the **Directory ID** value because you need this value when you create or modify your Oracle DB instance\. 
 
-![\[graphic of details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
+![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
 ## Step 2: Create a Forest Trust<a name="oracle-kerberos-setting-up.create-forest-trust"></a>
 
@@ -91,31 +86,9 @@ To get Kerberos authentication using an on\-premises or self\-hosted Microsoft A
 
 ## Step 3: Create an IAM Role for Use by Amazon RDS<a name="oracle-kerberos-setting-up.CreateIAMRole"></a>
 
-You must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service for you\. When you create the role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+ Create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to AWS Directory Service for you\. 
 
-For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\.
-
-Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the role must have the following IAM trust policy\.
-
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect:" "Allow",
-      "Principal": {
-        "Service": [
-          "rds.amazonaws.com",
-          "directoryservice.rds.amazonaws.com"
-        ]
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-```
-
-The role must also have the following IAM role policy\.
+ The following IAM policy, `AmazonRDSDirectoryServiceAccess`, provides access to AWS Directory Service\. 
 
 ```
 {
@@ -123,17 +96,19 @@ The role must also have the following IAM role policy\.
   "Statement": [
     {
       "Action": [
-        "ds:DescribeDirectories",
-        "ds:AuthorizeApplication",
-        "ds:UnauthorizeApplication",
-        "ds:GetAuthorizedApplicationDetails"
-      ],
-    "Effect": "Allow",
-    "Resource": "*"
+            "ds:DescribeDirectories",
+            "ds:AuthorizeApplication",
+            "ds:UnauthorizeApplication",
+            "ds:GetAuthorizedApplicationDetails"
+        ],
+      "Effect": "Allow",
+      "Resource": "*"
     }
   ]
 }
 ```
+
+ Create an IAM role using this policy\. For more information about creating IAM roles, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. For the service, choose **RDS**, and for the use case, choose **RDS \- Directory Service**\. 
 
 ## Step 4: Create and Configure Users<a name="oracle-kerberos-setting-up.create-users"></a>
 

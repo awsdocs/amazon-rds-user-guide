@@ -342,6 +342,8 @@ The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parame
 |  `p_s3_prefix`  |  VARCHAR2  |  –  |  required  |  An Amazon S3 file name prefix that files are uploaded to\. An empty prefix uploads all files to the top level in the specified Amazon S3 bucket and doesn't add a prefix to the file names\.  For example, if the prefix is `folder_1/oradb`, files are uploaded to `folder_1`\. In this case, the `oradb` prefix is added to each file\.   | 
 |  `p_prefix`  |  VARCHAR2  |  –  |  required  |  A file name prefix that file names must match to be uploaded\. An empty prefix uploads all files in the specified directory\.   | 
 
+The return value for the `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure is a task ID\.
+
 The following example uploads all of the files in the `DATA_PUMP_DIR` directory to the Amazon S3 bucket named `mys3bucket`\.
 
 ```
@@ -388,6 +390,17 @@ SELECT rdsadmin.rdsadmin_s3_tasks.upload_to_s3(
 
 In each example, the `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\.
 
+You can view the result by displaying the task's output file\.
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));                
+```
+
+Replace *`task-id`* with the task ID returned by the procedure\.
+
+**Note**  
+Tasks are executed asynchronously\.
+
 ### Downloading Files from an Amazon S3 Bucket to an Oracle DB Instance<a name="oracle-s3-integration.using.download"></a>
 
 To download files from an Amazon S3 bucket to an Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. The `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure has the following parameters\.
@@ -400,6 +413,8 @@ To download files from an Amazon S3 bucket to an Oracle DB instance, use the Ama
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
 |  `p_s3_prefix`  |  VARCHAR2  |  ''  |  optional  |  A file name prefix that file names must match to be downloaded\. An empty prefix downloads all of the top level files in the specified Amazon S3 bucket, but not the files in folders in the bucket\.  The procedure downloads Amazon S3 objects only from the first level folder that matches the prefix\. Nested directory structures matching the specified prefix are not downloaded\. For example, suppose that an Amazon S3 bucket has the folder structure `folder_1/folder_2/folder_3`\. Suppose also that you specify the `'folder_1/folder_2/'` prefix\. In this case, only the files in `folder_2` are downloaded, not the files in `folder_1` or `folder_3`\. If, instead, you specify the `'folder_1/folder_2'` prefix, all files in `folder_1` that match the `'folder_2'` prefix are downloaded, and no files in `folder_2` are downloaded\.  | 
+
+The return value for the `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure is a task ID\.
 
 The following example downloads all of the files in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\.
 
@@ -420,8 +435,6 @@ SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
    AS TASK_ID FROM DUAL;
 ```
 
-In each example, the `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\.
-
 The following example downloads all of the files in the folder `myfolder/` in the Amazon S3 bucket named `mys3bucket` to the `DATA_PUMP_DIR` directory\. Use the prefix parameter setting to specify the Amazon S3 folder\.
 
 ```
@@ -434,7 +447,16 @@ SELECT rdsadmin.rdsadmin_s3_tasks.download_from_s3(
 
 In each example, the `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\.
 
+You can view the result by displaying the task's output file\.
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));                
+```
+
+Replace *`task-id`* with the task ID returned by the procedure\.
+
 **Note**  
+Tasks are executed asynchronously\.  
 You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a directory\. For more information, see [FREMOVE Procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
 
 ### Monitoring the Status of a File Transfer<a name="oracle-s3-integration.using.task-status"></a>
@@ -448,6 +470,9 @@ dbtask-task-id.log
 ```
 
 Replace `task-id` with the ID of the task that you want to monitor\.
+
+**Note**  
+Tasks are executed asynchronously\.
 
 You can use the `rdsadmin.rds_file_util.read_text_file` stored procedure to view the contents of bdump files\. For example, the following query returns the contents of the `dbtask-1546988886389-2444.log` bdump file\.
 

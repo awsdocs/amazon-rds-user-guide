@@ -27,6 +27,6 @@ The following diagram shows the configuration when the tutorial is complete\.
 
 ![\[VPC and EC2 security group Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
-## Next Step<a name="w40aab9c31c25"></a>
+## Next Step<a name="w50aab9c31c25"></a>
 
 [Step 2: Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)

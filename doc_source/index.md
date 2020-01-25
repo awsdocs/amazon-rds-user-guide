@@ -1,7 +1,7 @@
 # Amazon Relational Database Service User Guide
 
 -----
-*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -59,6 +59,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
    + [Copying a Snapshot](USER_CopySnapshot.md)
    + [Sharing a DB Snapshot](USER_ShareSnapshot.md)
+   + [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)
    + [Restoring a DB Instance to a Specified Time](USER_PIT.md)
    + [Deleting a Snapshot](USER_DeleteSnapshot.md)
    + [Tutorial: Restore a DB Instance from a DB Snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
@@ -192,6 +193,7 @@ Amazon's trademarks and trade dress may not be used in
       + [MariaDB Audit Plugin Support](Appendix.MySQL.Options.AuditPlugin.md)
       + [MySQL memcached Support](Appendix.MySQL.Options.memcached.md)
    + [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)
+   + [Using Kerberos Authentication for MySQL](mysql-kerberos.md)
    + [Known Issues and Limitations for MySQL on Amazon RDS](MySQL.KnownIssuesAndLimitations.md)
    + [MySQL on Amazon RDS SQL Reference](Appendix.MySQL.SQLRef.md)
       + [mysql.rds_set_master_auto_position](mysql_rds_set_master_auto_position.md)
