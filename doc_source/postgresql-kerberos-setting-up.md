@@ -164,7 +164,7 @@ If different AWS accounts own the VPCs, complete the following steps:
 
 ## Step 5: Create or Modify a PostgreSQL DB Instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
 
-Next, create or modify a PostgreSQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
+Create or modify a PostgreSQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 + Create a new PostgreSQL DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
   For instructions, see [ Creating a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html)\. 
@@ -180,9 +180,13 @@ Next, create or modify a PostgreSQL DB instance for use with your directory\. Yo
 
 Kerberos authentication is only supported for PostgreSQL DB instances in a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows egress within the directory's VPC so the DB instance can communicate with the directory\.
 
-When you use the console, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose the directory or choose **Create a new Directory**\.
+When you use the console to create a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
 
-![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-authentication.png)
+![\[Kerberos authentication setting when creating a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-authentication.png)
+
+When you use the console to modify or restore a DB instance, choose the directory in the **Kerberos authentication** section, or choose **Create a new directory**\.
+
+![\[Kerberos authentication setting when modifying or restoring a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-auth-modify-restore.png)
 
 When you use the AWS CLI, the following parameters are required for the DB instance to be able to use the directory that you created:
 + For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\.

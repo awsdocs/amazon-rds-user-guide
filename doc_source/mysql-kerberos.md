@@ -126,13 +126,29 @@
 
 ### Step 4: Create or Modify a MySQL DB Instance<a name="mysql-kerberos-setting-up.create-modify"></a>
 
- Create or modify a MySQL DB instance for use with the directory\. You can do this in one of the following ways: 
-+  Create a new MySQL DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstgance.html) RDS API operation\. 
-+  Modify an existing MySQL DB instance using the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\. 
-+  Restore a MySQL DB instance from a DB snapshot using the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command or the [RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\. 
-+  Restore a MySQL DB instance to a point in time using the [restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command or the [RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\. 
+Create or modify a MySQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
++ Create a new MySQL DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
- Kerberos authentication is only supported for MySQL DB instances in a VPC, and the DB instance must be in the same VPC as the directory\. The DB instance must use a security group that allows egress within the VPC so that the DB instance can communicate with the directory\. 
+  For instructions, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\.
++ Modify an existing MySQL DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
+
+  For instructions, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\.
++ Restore a MySQL DB instance from a DB snapshot using the console, the [ restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\.
+
+  For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
++ Restore a MySQL DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\.
+
+  For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\.
+
+Kerberos authentication is only supported for MySQL DB instances in a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows egress within the directory's VPC so the DB instance can communicate with the directory\.
+
+When you use the console to create a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
+
+![\[Kerberos authentication setting when creating a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-authentication.png)
+
+When you use the console to modify or restore a DB instance, choose the directory in the **Kerberos authentication** section, or choose **Create a new directory**\.
+
+![\[Kerberos authentication setting when modifying or restoring a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-auth-modify-restore.png)
 
  Use the CLI or RDS API to associate a DB instance with a directory\. The following parameters are required for the DB instance to be able to use the domain directory you created: 
 +  For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
@@ -158,10 +174,8 @@ aws rds modify-db-instance ^
     --domain-iam-role-name role-name
 ```
 
-**Note**  
- For Kerberos authentication for RDS, you can't use the console to associate a DB instance for use with a directory\. 
-
-![\[\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-auth.png)
+**Important**  
+If you modify a DB instance to enable Kerberos authentication, reboot the DB instance after making the change\.
 
 ### Step 5: Create Kerberos Authentication MySQL Logins<a name="mysql-kerberos-setting-up.create-logins"></a>
 

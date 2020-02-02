@@ -107,12 +107,6 @@ The following table shows the event category and a list of events when a DB inst
 | notification | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
 | notification | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limits for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
 | notification | RDS\-EVENT\-0158 |  DB instance is in a state that can't be upgraded\.  | 
-| notification | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
-| notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
-| notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
-| notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
-| notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
-| notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
 | read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\.  For information on troubleshooting Read Replica errors, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.   | 
 | read replica | RDS\-EVENT\-0046 | The Read Replica has resumed replication\. This message appears when you first create a Read Replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the Read Replica was terminated\.  | 
@@ -148,14 +142,17 @@ The following table shows the event category and a list of events when a DB snap
 |  Category  | RDS Event ID |  Description  | 
 | --- | --- | --- | 
 |  creation  | RDS\-EVENT\-0040 |  A manual DB snapshot is being created\.  | 
-|  deletion  | RDS\-EVENT\-0041 |  A DB snapshot has been deleted\.  | 
 |  creation  | RDS\-EVENT\-0042 |  A manual DB snapshot has been created\.  | 
-|  restoration  | RDS\-EVENT\-0043 |  A DB instance is being restored from a DB snapshot\.  | 
+| creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
+| creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
+|  deletion  | RDS\-EVENT\-0041 |  A DB snapshot has been deleted\.  | 
 |  notification  | RDS\-EVENT\-0059 |  Started the copy of the cross region DB snapshot \[DB snapshot name\] from source region \[region name\]\.  | 
 |  notification  | RDS\-EVENT\-0060 |  Finished the copy of the cross region DB snapshot \[DB snapshot name\] from source region \[region name\] in \[time\] minutes\.  | 
 |  notification  | RDS\-EVENT\-0061 |  The copy of a cross region DB snapshot failed\.  | 
-| creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
-| creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
+| notification | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
+| notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
+| notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
+|  restoration  | RDS\-EVENT\-0043 |  A DB instance is being restored from a DB snapshot\.  | 
 
 The following table shows the event category and a list of events when an Aurora DB cluster is the source type\.
 
@@ -192,6 +189,9 @@ The following table shows the event category and a list of events when an Aurora
 | --- | --- | --- | 
 |  backup  | RDS\-EVENT\-0074 |  Creation of a manual DB cluster snapshot has started\.  | 
 |  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
+| notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
+| notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
+| notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
 
 ## Subscribing to Amazon RDS Event Notification<a name="USER_Events.Subscribing"></a>
 

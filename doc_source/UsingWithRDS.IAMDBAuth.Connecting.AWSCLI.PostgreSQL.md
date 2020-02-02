@@ -43,7 +43,7 @@ The parameters are as follows:
 + `dbname` – The database that you want to access\.
 + `user` – The database account that you want to access\.
 
-The following example shows using the command to connect\. The example uses the environment variables that were set when the token was generated in the previous section\.
+The following example shows using psql to connect\. In the example psql uses the environment variable `PGPASSWORD` that was set when the token was generated in the previous section\.
 
 ```
 psql "host=$RDSHOST port=5432 sslmode=verify-full sslrootcert=/sample_dir/rds-combined-ca-bundle.pem dbname=DBName user=jane_doe"

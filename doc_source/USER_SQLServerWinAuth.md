@@ -156,20 +156,55 @@ To create users and groups in an AWS Directory Service directory, you must be co
 
 ### Step 4: Create or Modify a SQL Server DB Instance<a name="USER_SQLServerWinAuth.SettingUp.CreateModify"></a>
 
- Next, you create or modify a Microsoft SQL Server DB instance for use with the directory\. You can do this in one of the following ways: 
-+  Create a new SQL Server DB instance\.
-+  Modify an existing SQL Server DB instance\.
-+  Restore a SQL Server DB instance from a DB snapshot\.
-+  Restore a SQL Server DB instance from a point\-in\-time restore \(PITR\)\.
+Create or modify a SQL Server DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
++ Create a new SQL Server DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
- Windows Authentication is only supported for SQL Server DB instances in a VPC, and the DB instance must be in the same VPC as the directory\. 
+  For instructions, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
++ Modify an existing SQL Server DB instance using the console, the [ modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 
- Several parameters are required for the DB instance to be able to use the domain directory you created: 
-+  For the **Directory** parameter, you must choose the domain identifier \("d\-\*" identifier\) generated when you created the directory\. 
-+  Use the same VPC that was used when you created the directory\. 
+  For instructions, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
++ Restore a SQL Server DB instance from a DB snapshot using the console, the [ restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\.
+
+  For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
++ Restore a SQL Server DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\.
+
+  For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\.
+
+ Windows Authentication is only supported for SQL Server DB instances in a VPC, and the DB instance must be in the same VPC as the directory\.
+
+ Several parameters are required for the DB instance to be able to use the domain directory you created:
++  For the **Directory** parameter, you must choose the domain identifier \("d\-\*" identifier\) generated when you created the directory\.
++  Use the same VPC that was used when you created the directory\.
 +  Make sure that the VPC security group has an outbound rule that lets the DB instance communicate with the directory\.
 
 ![\[Microsoft SQL Server Windows Authentication directory\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth1.png)
+
+When you use the AWS CLI, the following parameters are required for the DB instance to be able to use the directory that you created:
++ For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\.
++ For the `--domain-iam-role-name` parameter, use the role you created that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\.
+
+For example, the following CLI command modifies a DB instance to use a directory\.
+
+For Linux, OS X, or Unix:
+
+```
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --domain d-ID \
+    --domain-iam-role-name role-name
+```
+
+For Windows:
+
+```
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --domain d-ID ^
+    --domain-iam-role-name role-name
+```
+
+**Important**  
+If you modify a DB instance to enable Kerberos authentication, reboot the DB instance after making the change\.
 
 ### Step 5: Create Windows Authentication SQL Server Logins<a name="USER_SQLServerWinAuth.CreateLogins"></a>
 

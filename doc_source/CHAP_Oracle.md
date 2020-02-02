@@ -464,7 +464,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Automatic Workload Repository \(AWR\)
 
   For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
-+ Active Data Guard with Maximum Performance within the same AWS Region
++ Active Data Guard with Maximum Performance in the same AWS Region or across AWS Regions
 
   For more information, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
 + Data Redaction
