@@ -132,8 +132,72 @@ The last three roll\-up queries are the major contributors to CPU\. These are th
 In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top Load Items** section\. To view these statistics, view top SQL\. Performance Insights collects statistics only for the most common queries, and these usually match the top queries by load shown in the Performance Insights dashboard\.
 
 **Topics**
++ [Statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL)
 + [Statistics for Amazon RDS for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle)
-+ [Analyzing Oracle Metrics for SQL Statements That Are Running](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel)
+
+### Statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
+
+Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. This table is managed by the database and doesn't have an eviction policy\. If the table becomes full, new SQL queries aren't tracked\. To address this issue, Performance Insights automatically truncates the table when it's nearly full\.
+
+Performance Insights automatically trucates the table only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want Performance Insights to truncate the table automatically, then unset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\. The following message is shown in the AWS Management Console when the table is full:
+
+```
+Performance Insights is unable to collect SQL Digest statistics on new queries because the table events_statements_summary_by_digest is full. 
+Please truncate events_statements_summary_by_digest table to clear the issue. Check the User Guide for more details.
+```
+
+The following SQL statistics are available for MariaDB and MySQL DB instances\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\_tokenized\.stats\.count\_star\_per\_sec | Calls per second | 
+| db\.sql\_tokenized\.stats\.sum\_timer\_wait\_per\_sec | Average active executions per second \(AAE\) | 
+| db\.sql\_tokenized\.stats\.sum\_select\_full\_join\_per\_sec | Select full join per second | 
+| db\.sql\_tokenized\.stats\.sum\_select\_range\_check\_per\_sec | Select range check per second | 
+| db\.sql\_tokenized\.stats\.sum\_select\_scan\_per\_sec | Select scan per second | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_merge\_passes\_per\_sec | Sort merge passes per second | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_scan\_per\_sec | Sort scans per second | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_range\_per\_sec | Sort ranges per second | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_rows\_per\_sec | Sort rows per second | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_affected\_per\_sec | Rows affected per second | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_examined\_per\_sec | Rows examined per second | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_sent\_per\_sec | Rows sent per second | 
+| db\.sql\_tokenized\.stats\.sum\_created\_tmp\_disk\_tables\_per\_sec | Created temporary disk tables per second | 
+| db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_sec | Created temporary tables per second | 
+| db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_sec | Lock time per second \(in ms\) | 
+
+The following metrics provide per call statistics for a SQL statement\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\_tokenized\.stats\.sum\_timer\_wait\_per\_call | Average latency per call \(in ms\)  | 
+| db\.sql\_tokenized\.stats\.sum\_select\_full\_join\_per\_call | Select full joins per call | 
+| db\.sql\_tokenized\.stats\.sum\_select\_range\_check\_per\_call | Select range check per call | 
+| db\.sql\_tokenized\.stats\.sum\_select\_scan\_per\_call | Select scans per call | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_merge\_passes\_per\_call | Sort merge passes per call | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_scan\_per\_call | Sort scans per call | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_range\_per\_call | Sort ranges per call | 
+| db\.sql\_tokenized\.stats\.sum\_sort\_rows\_per\_call | Sort rows per call | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_affected\_per\_call | Rows affected per call | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_examined\_per\_call | Rows examined per call | 
+| db\.sql\_tokenized\.stats\.sum\_rows\_sent\_per\_call | Rows sent per call | 
+| db\.sql\_tokenized\.stats\.sum\_created\_tmp\_disk\_tables\_per\_call | Created temporary disk tables per call | 
+| db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_call | Created temporary tables per call | 
+| db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_call | Lock time per call \(in ms\) | 
+
+#### Analyzing MariaDB and MySQL Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevelMariaDBMySQL"></a>
+
+Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab and expanding the query\.
+
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_digest.png)
+
+Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
+
+The following screenshot shows the preferences for MariaDB and MySQL DB instances\.
+
+![\[Preferences for metrics for running queries for MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_ams.png)
 
 ### Statistics for Amazon RDS for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle"></a>
 
@@ -164,15 +228,17 @@ The following metrics provide per call statistics for a SQL statement\.
 | db\.sql\.stats\.total\_sharable\_mem\_per\_exec | Total shareable memory per execution \(in bytes\) | 
 | db\.sql\.stats\.cpu\_time\_per\_exec | CPU time per execution \(in ms\) | 
 
-### Analyzing Oracle Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel"></a>
+#### Analyzing Oracle Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel"></a>
 
 Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab and expanding the query\.
 
-![\[Viewing metrics for running queries.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_sql.png)
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_sql.png)
 
 Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
 
-![\[Preferences for metrics for running queries for Oracle DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_oracle.png)
+The following screenshot shows the preferences for Oracle DB instances\.
+
+![\[Preferences for metrics for running queries for Oracle DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_oracle.png)
 
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 

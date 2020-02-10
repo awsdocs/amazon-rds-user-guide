@@ -1,6 +1,6 @@
 # Oracle Management Agent for Enterprise Manager Cloud Control<a name="Oracle.Options.OEMAgent"></a>
 
-Amazon RDS supports Oracle Enterprise Manager \(OEM\) Management Agent through the use of the OEM\_AGENT option\. Amazon RDS supports Management Agent for the following versions of OEM: 
+Amazon RDS supports Oracle Enterprise Manager \(OEM\) Management Agent through the use of the `OEM_AGENT` option\. Amazon RDS supports Management Agent for the following versions of OEM: 
 + Oracle Enterprise Manager Cloud Control for 13c
 + Oracle Enterprise Manager Cloud Control for 12c
 
@@ -27,8 +27,8 @@ The following are some limitations to using Management Agent:
 + Host metrics and the process list are not guaranteed to reflect the actual system state\. 
 + Autodiscovery is not supported\. You must manually add database targets\. 
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
-+ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the OEM\_AGENT option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
-+ Because operating system access on the alert log isn't granted to the user running the OEM\_AGENT on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
++ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
++ Because operating system access on the alert log isn't granted to the user running the `OEM_AGENT` on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
 
@@ -71,20 +71,20 @@ Additional configuration is required to allow your OMS host and your Amazon RDS 
 
 Amazon RDS supports the following settings for the Management Agent option\.  
 
-**Note**  
-All of the settings are required\.
-
 
 ****  
 
-| Option Setting | Valid Values | Description | 
-| --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) |  13\.3\.0\.0\.v2 13\.3\.0\.0\.v1 13\.2\.0\.0\.v3 13\.2\.0\.0\.v2 13\.2\.0\.0\.v1 13\.1\.0\.0\.v1 12\.1\.0\.5\.v1 12\.1\.0\.4\.v1  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
-| **Port** \(`AGENT_PORT`\) | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
-| **Security Groups** | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
-| **OMS\_HOST** |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 
-| **OMS\_PORT** | An integer value |  The HTTPS upload port on the OMS Host that listens for the Management Agent\.  To determine the HTTPS upload port, connect to the OMS host, and run the following command \(which requires the `SYSMAN` password\): emctl status oms \-details  The AWS CLI option name is `OMS_PORT`\.  | 
-| **AGENT\_REGISTRATION\_PASSWORD** | A string value |  The password that the Management Agent uses to authenticate itself with the OMS\. We recommend that you create a persistent password in your OMS before enabling the OEM\_AGENT option\. With a persistent password you can share a single Management Agent option group among multiple Amazon RDS databases\.  The AWS CLI option name is `AGENT_REGISTRATION_PASSWORD`\.  | 
+| Option Setting | Required | Valid Values | Description | 
+| --- | --- | --- | --- | 
+| **Version** \(`AGENT_VERSION`\) | Yes |  `13.3.0.0.v2` `13.3.0.0.v1` `13.2.0.0.v3` `13.2.0.0.v2` `13.2.0.0.v1` `13.1.0.0.v1` `12.1.0.5.v1` `12.1.0.4.v1`  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
+| **Port** \(`AGENT_PORT`\) | Yes | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
+| **Security Groups** | Yes | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
+| **OMS\_HOST** | Yes |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 
+| **OMS\_PORT** | Yes | An integer value |  The HTTPS upload port on the OMS Host that listens for the Management Agent\.  To determine the HTTPS upload port, connect to the OMS host, and run the following command \(which requires the `SYSMAN` password\): emctl status oms \-details  The AWS CLI option name is `OMS_PORT`\.  | 
+| **AGENT\_REGISTRATION\_PASSWORD** | Yes | A string value |  The password that the Management Agent uses to authenticate itself with the OMS\. We recommend that you create a persistent password in your OMS before enabling the `OEM_AGENT` option\. With a persistent password you can share a single Management Agent option group among multiple Amazon RDS databases\.  The AWS CLI option name is `AGENT_REGISTRATION_PASSWORD`\.  | 
+| **ALLOW\_TLS\_ONLY** | No | `true`, `false` \(default\) |  A value that configures the OEM Agent to support only the `TLSv1` protocol while the agent listens as a server\. This setting is only supported for 12\.1 agent versions\. Later agent versions only support Transport Layer Security \(TLS\) by default\.   | 
+| **MINIMUM\_TLS\_VERSION** | No | `TLSv1` \(default\), `TLSv1.2` |  A value that specifies the minimum TLS version supported by the OEM Agent while the agent listens as a server\. This setting is only supported for agent versions 13\.1\.0\.0\.v1 and higher\. Earlier agent versions only support the `TLSv1` setting\.   | 
+| **TLS\_CIPHER\_SUITE** | No |  `TLS_RSA_WITH_AES_128_CBC_SHA` \(Default supported by all agent versions\) `TLS_RSA_WITH_AES_128_CBC_SHA256` \(Requires version 13\.1\.0\.0\.v1 or above\) `TLS_RSA_WITH_AES_256_CBC_SHA` \(Requires version 13\.2\.0\.0\.v3 or above\) `TLS_RSA_WITH_AES_256_CBC_SHA256` \(Requires version 13\.2\.0\.0\.v3 or above\)  |  A value that specifies the TLS cipher suite used by the OEM Agent while the agent listens as a server\.   | 
 
 ## Adding the Management Agent Option<a name="Oracle.Options.OEMAgent.Add"></a>
 

@@ -5,7 +5,7 @@ If your application connects to an RDS DB instance using Secure Socket Layer \(S
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using SSL/TLS\. We provide these new CA certificates as an AWS security best practice\. For information about the new certificates and the supported AWS Regions, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
-The current CA certificates expire on March 5, 2020\. Therefore, we strongly recommend completing this change as soon as possible \(and no later than February 5, 2020\), to avoid disruption on the expiration date\. If the change is not completed, your applications will fail to connect to your RDS DB instances using SSL/TLS after March 5, 2020\. 
+The current CA certificates expire on March 5, 2020\. Therefore, we strongly recommend completing this change as soon as possible, to avoid disruption on the expiration date\. If the change is not completed, your applications will fail to connect to your RDS DB instances using SSL/TLS after March 5, 2020\. 
 
 We encourage you to test the steps listed following in a development or staging environment before taking them for your production environments\. 
 
@@ -155,7 +155,7 @@ Use the AWS Management Console to change the CA certificate for a single DB inst
 
 1. Choose **Maintenance & backups**\.
 
-   If your DB instance is using the old CA certificate, the **Pending maintenance** section shows an action with the description **Rotation of CA certificate**\. This pending maintenance action is scheduled by default for your maintenance window and before February 5, 2020\. However, you can apply the rotation immediately by choosing the pending maintenance action and choosing **Apply now**\.
+   If your DB instance is using the old CA certificate, the **Pending maintenance** section shows an action with the description **Rotation of CA certificate**\. This pending maintenance action is scheduled by default for your maintenance window\. However, you can apply the rotation immediately by choosing the pending maintenance action and choosing **Apply now**\.
 **Important**  
 When your CA certificate is rotated, the operation reboots your DB instance\.  
 ![\[Maintenance of DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-maintenance.png)

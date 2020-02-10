@@ -2,7 +2,7 @@
 
 Performance Insights is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in Performance Insights\. CloudTrail captures all API calls for Performance Insights as events\. This capture includes calls from the Amazon RDS console and from code calls to the Performance Insights API operations\. 
 
-If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Performance Insights\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the data collected by CloudTrail, you can determine certain information\. This information includes the request that was made to Performance Insights, the IP address from which the request was made, who made the request, when it was made, and additional details\. 
+If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Performance Insights\. If you don't configure a trail, you can still view the most recent events in the CloudTrail console in **Event history**\. Using the data collected by CloudTrail, you can determine certain information\. This information includes the request that was made to Performance Insights, the IP address the request was made from, who made the request, and when it was made\. It also includes additional details\. 
 
 To learn more about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 

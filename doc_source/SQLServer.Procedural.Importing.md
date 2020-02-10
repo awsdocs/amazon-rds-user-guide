@@ -25,6 +25,7 @@ The following are some limitations to using native backup and restore:
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
 + Native backups of databases larger than 1 TB aren't supported\. 
 + You can't restore from more than 10 backup files at the same time\.
++ Differential and log restores aren't supported for databases with files that have their file\_guid \(unique identifier\) set to `NULL`\.
 + You can run up to two backup or restore tasks at the same time\.
 + You can't perform native log backups from SQL Server on Amazon RDS\.
 + RDS supports native restores of databases up to 16 TB\. Native restores of databases on SQL Server Express are limited by the MSSQL edition to 10 GB or less\. 

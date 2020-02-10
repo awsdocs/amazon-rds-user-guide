@@ -54,7 +54,7 @@ For Linux, OS X, or Unix:
 aws rds describe-db-instances \
 --db-instance-identifier DBInstanceIdentifier \
 --region us-west-2 \
---query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}'
+--query "*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}"
 ```
 For Windows:  
 
@@ -62,7 +62,7 @@ For Windows:
 aws rds describe-db-instances ^
 --db-instance-identifier DBInstanceIdentifier ^
 --region us-west-2 ^
---query '*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}'
+--query "*[].{DBInstanceIdentifier:DBInstanceIdentifier,DBInstanceArn:DBInstanceArn}"
 ```
 The output of that command is like the following:  
 

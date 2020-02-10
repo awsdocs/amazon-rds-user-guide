@@ -350,9 +350,9 @@ You can set your local time zone to one of the values listed in the following ta
 | Alaskan Standard Time | \(UTC–09:00\) | Alaska |  | 
 | Arabian Standard Time | \(UTC\+04:00\) | Abu Dhabi, Muscat |  | 
 | Atlantic Standard Time | \(UTC–04:00\) | Atlantic Time \(Canada\) |  | 
-| AUS Central Standard Time | \(UTC\+09:30\) | Darwin |  | 
+| AUS Central Standard Time | \(UTC\+09:30\) | Darwin | This time zone doesn't observe daylight saving time\. | 
 | AUS Eastern Standard Time | \(UTC\+10:00\) | Canberra, Melbourne, Sydney |  | 
-| Belarus Standard Time | \(UTC\+03:00\) | Minsk |  This time zone does not observe daylight savings time\.   | 
+| Belarus Standard Time | \(UTC\+03:00\) | Minsk | This time zone doesn't observe daylight saving time\. | 
 | Canada Central Standard Time | \(UTC–06:00\) | Saskatchewan |  | 
 | Cape Verde Standard Time | \(UTC–01:00\) | Cabo Verde Is\. |  | 
 | Cen\. Australia Standard Time | \(UTC\+09:30\) | Adelaide |  | 
@@ -365,15 +365,15 @@ You can set your local time zone to one of the values listed in the following ta
 | Central Standard Time | \(UTC–06:00\) | Central Time \(US and Canada\) |  | 
 | Central Standard Time \(Mexico\) | \(UTC–06:00\) | Guadalajara, Mexico City, Monterrey |  | 
 | China Standard Time | \(UTC\+08:00\) | Beijing, Chongqing, Hong Kong, Urumqi |  | 
-| E\. Africa Standard Time | \(UTC\+03:00\) | Nairobi |  This time zone does not observe daylight savings time\.   | 
+| E\. Africa Standard Time | \(UTC\+03:00\) | Nairobi | This time zone doesn't observe daylight saving time\. | 
 | E\. Australia Standard Time | \(UTC\+10:00\) | Brisbane |  | 
 | E\. Europe Standard Time | \(UTC\+02:00\) | Chisinau |  | 
 | E\. South America Standard Time | \(UTC–03:00\) | Brasilia |  | 
 | Eastern Standard Time | \(UTC–05:00\) | Eastern Time \(US and Canada\) |  | 
 | Georgian Standard Time | \(UTC\+04:00\) | Tbilisi |  | 
-| GMT Standard Time | \(UTC\) | Dublin, Edinburgh, Lisbon, London |  This time zone is not the same as Greenwich Mean Time\. This time zone does observe daylight savings time\.   | 
+| GMT Standard Time | \(UTC\) | Dublin, Edinburgh, Lisbon, London |  This time zone isn't the same as Greenwich Mean Time\. This time zone does observe daylight saving time\. | 
 | Greenland Standard Time | \(UTC–03:00\) | Greenland |  | 
-| Greenwich Standard Time | \(UTC\) | Monrovia, Reykjavik |  This time zone does not observe daylight savings time\.   | 
+| Greenwich Standard Time | \(UTC\) | Monrovia, Reykjavik | This time zone doesn't observe daylight saving time\. | 
 | GTB Standard Time | \(UTC\+02:00\) | Athens, Bucharest |  | 
 | Hawaiian Standard Time | \(UTC–10:00\) | Hawaii |  | 
 | India Standard Time | \(UTC\+05:30\) | Chennai, Kolkata, Mumbai, New Delhi |  | 
@@ -382,19 +382,19 @@ You can set your local time zone to one of the values listed in the following ta
 | Middle East Standard Time | \(UTC\+02:00\) | Beirut |  | 
 | Mountain Standard Time | \(UTC–07:00\) | Mountain Time \(US and Canada\) |  | 
 | Mountain Standard Time \(Mexico\) | \(UTC–07:00\) | Chihuahua, La Paz, Mazatlan |  | 
-| US Mountain Standard Time | \(UTC–07:00\) | Arizona | This time zone does not observe daylight savings time\. | 
+| US Mountain Standard Time | \(UTC–07:00\) | Arizona | This time zone doesn't observe daylight saving time\. | 
 | New Zealand Standard Time | \(UTC\+12:00\) | Auckland, Wellington |  | 
 | Newfoundland Standard Time | \(UTC–03:30\) | Newfoundland |  | 
 | Pacific SA Standard Time | \(UTC–03:00\) | Santiago |  | 
 | Pacific Standard Time | \(UTC–08:00\) | Pacific Time \(US and Canada\) |  | 
 | Pacific Standard Time \(Mexico\) | \(UTC–08:00\) | Baja California |  | 
-| Russian Standard Time | \(UTC\+03:00\) | Moscow, St\. Petersburg, Volgograd |  This time zone does not observe daylight savings time\.   | 
-| SA Pacific Standard Time | \(UTC–05:00\) | Bogota, Lima, Quito, Rio Branco |  This time zone does not observe daylight savings time\.   | 
+| Russian Standard Time | \(UTC\+03:00\) | Moscow, St\. Petersburg, Volgograd | This time zone doesn't observe daylight saving time\. | 
+| SA Pacific Standard Time | \(UTC–05:00\) | Bogota, Lima, Quito, Rio Branco |  This time zone doesn't observe daylight saving time\. | 
 | SE Asia Standard Time | \(UTC\+07:00\) | Bangkok, Hanoi, Jakarta |  | 
 | Singapore Standard Time | \(UTC\+08:00\) | Kuala Lumpur, Singapore |  | 
 | Tokyo Standard Time | \(UTC\+09:00\) | Osaka, Sapporo, Tokyo |  | 
 | US Eastern Standard Time | \(UTC–05:00\) | Indiana \(East\) |  | 
-| UTC | UTC | Coordinated Universal Time |  This time zone does not observe daylight savings time\.   | 
+| UTC | UTC | Coordinated Universal Time | This time zone doesn't observe daylight saving time\. | 
 | UTC–02 | \(UTC–02:00\) | Coordinated Universal Time–02 |  | 
 | UTC–08 | \(UTC–08:00\) | Coordinated Universal Time–08 |  | 
 | UTC–09 | \(UTC–09:00\) | Coordinated Universal Time–09 |  | 
