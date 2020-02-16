@@ -34,7 +34,7 @@ If you want to force SSL, use the `rds.force_ssl` parameter\. By default, the `r
 
 1. Edit your new or existing parameter group to set the `rds.force_ssl` parameter to `true`\. To edit the parameter group, follow the instructions in [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
-1. If you created a new parameter group, modify your DB instance to attach the new parameter group\. Modify the **DB Parameter Group** setting of the DB instance\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+1. If you created a new parameter group, modify your DB instance to attach the new parameter group\. Modify the **DB Parameter Group** setting of the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 1. Reboot your DB instance\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
 

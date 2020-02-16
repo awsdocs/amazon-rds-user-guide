@@ -164,7 +164,9 @@ We encourage you to use the latest generation of instances to get the best perfo
 | --- | --- | --- | --- | --- | --- | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.m5\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -184,7 +186,9 @@ We encourage you to use the latest generation of instances to get the best perfo
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.16xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.r5\.12xlarge | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.8xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.r5\.4xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.r5\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.r5\.xlarge | 16 | 16 | 16 | 64 | 64 | 

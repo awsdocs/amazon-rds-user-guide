@@ -27,7 +27,7 @@ The following are some limitations to using Management Agent:
 + Host metrics and the process list are not guaranteed to reflect the actual system state\. 
 + Autodiscovery is not supported\. You must manually add database targets\. 
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
-+ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
++ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 + Because operating system access on the alert log isn't granted to the user running the `OEM_AGENT` on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
@@ -125,7 +125,7 @@ If this error is returned, the Management Agent option isn't enabled until the p
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### AWS CLI<a name="Oracle.Options.OEMAgent.Add.CLI"></a>
 
@@ -304,4 +304,4 @@ You can remove the OEM Agent from a DB instance\. After you remove the OEM Agent
 
 To remove the OEM Agent from a DB instance, do one of the following: 
 + Remove the OEM Agent option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ Modify the DB instance and specify a different option group that doesn't include the OEM Agent option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
++ Modify the DB instance and specify a different option group that doesn't include the OEM Agent option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 

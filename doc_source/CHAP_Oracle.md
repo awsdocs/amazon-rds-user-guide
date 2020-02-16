@@ -47,7 +47,7 @@ There are also advanced tasks and optional features for working with Oracle DB i
 
 ## Oracle Licensing<a name="Oracle.Concepts.Licensing"></a>
 
-There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyInstance.Oracle.html), the Amazon RDS API [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation, or the AWS CLI [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. 
+There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### License Included<a name="Oracle.Concepts.Licensing.LicenseIncluded"></a>
 
@@ -118,7 +118,7 @@ We encourage all bring\-your\-own\-license customers to consult their licensing 
 
 The db\.t2 DB instance classes are deprecated for Amazon RDS for Oracle\. The db\.t2 DB instance classes have been replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
 
-If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 If you have DB snapshots of DB instances that were using db\.t2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
 
@@ -129,7 +129,7 @@ The db\.t3 DB instance classes have hyper\-threading enabled by default\. When D
 
  The db\.m3 and db\.r3 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 30, 2019, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
 
-If you have DB instances that use db\.m3 and db\.r3 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+If you have DB instances that use db\.m3 and db\.r3 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 If you have DB snapshots of DB instances that were using db\.m3 or db\.r3 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
@@ -137,7 +137,7 @@ If you have DB snapshots of DB instances that were using db\.m3 or db\.r3 DB ins
 
  The db\.m1 and db\.m2 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 12, 2018, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
 
-If you have DB instances that use db\.m1 and db\.m2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+If you have DB instances that use db\.m1 and db\.m2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 If you have DB snapshots of DB instances that were using db\.m1 or db\.m2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
@@ -467,7 +467,15 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Active Data Guard with Maximum Performance in the same AWS Region or across AWS Regions
 
   For more information, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
++ Continuous Query Notification \(version 12\.1\.0\.2\.v7 and later\)
+
+  For more information, see [ Using Continuous Query Notification \(CQN\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/adfns/cqn.html#GUID-373BAF72-3E63-42FE-8BEA-8A2AEFBF1C35) in the Oracle documentation\.
 + Data Redaction
++ Database Change Notification \(version 11\.2\.0\.4\.v11 and later 11g versions\)
+
+  For more information, see [ Database Change Notification](https://docs.oracle.com/cd/E11882_01/java.112/e16548/dbchgnf.htm#JJDBC28815) in the Oracle documentation\.
+**Note**  
+This feature changes to Continuous Query Notification in version 12\.1 and later\.
 + Database In\-Memory \(version 12\.1 and later\)
 + Distributed Queries and Transactions
 + Edition\-Based Redefinition
@@ -818,7 +826,7 @@ After you enable extended data types, you can't perform a point\-in\-time restor
 
 1. Modify the DB instance to associate it with the parameter group with `MAX_STRING_SIZE` set to `EXTENDED`\.
 
-   For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+   For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. Reboot the DB instance for the parameter change to take effect\.
 

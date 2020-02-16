@@ -135,7 +135,7 @@ To create a DB subnet group for the AWS Cloud, you specify at least two subnets\
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md) or [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new DB instance\.
 

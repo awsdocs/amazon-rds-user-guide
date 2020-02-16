@@ -45,7 +45,7 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 **To create an IAM role for Amazon RDS Enhanced Monitoring**
 
-1. Open the [IAM Console](https://console.aws.amazon.com//iam/home?#home) at [https://console\.aws\.amazon\.com](https://console.aws.amazon.com/)\.
+1. Open the [IAM Console](https://console.aws.amazon.com/iam/home?#home) at [https://console\.aws\.amazon\.com](https://console.aws.amazon.com/)\.
 
 1. In the navigation pane, choose **Roles**\.
 

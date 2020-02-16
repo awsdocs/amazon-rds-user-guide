@@ -58,7 +58,7 @@ After you add the SQL Server Audit option, you don't need to restart your DB ins
 
 1. Apply the option group to a new or existing DB instance\. Choose one of the following:
    + If you are creating a new DB instance, apply the option group when you launch the instance\. 
-   + On an existing DB instance, apply the option group by modifying the instance and then attaching the new option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+   + On an existing DB instance, apply the option group by modifying the instance and then attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### Modifying the SQL Server Audit Option<a name="Appendix.SQLServer.Options.Audit.Modifying"></a>
 
@@ -74,7 +74,7 @@ You can turn off the SQL Server Audit feature by disabling audits and then delet
 
 1. Delete the SQL Server Audit option from the DB instance\. Choose one of the following: 
    + Delete the SQL Server Audit option from the option group that the DB instance uses\. This change affects all DB instances that use the same option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\.
-   + Modify the DB instance, and then choose an option group without the SQL Server Audit option\. This change affects only the DB instance that you modify\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\.
+   + Modify the DB instance, and then choose an option group without the SQL Server Audit option\. This change affects only the DB instance that you modify\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. After you delete the SQL Server Audit option from the DB instance, you don't need to restart the instance\. Remove unneeded audit files from your S3 bucket\.
 

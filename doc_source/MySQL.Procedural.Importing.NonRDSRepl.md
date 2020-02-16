@@ -266,7 +266,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
 1. Review the default configuration options for the Amazon RDS DB instance\. In the RDS console navigation pane, choose **Parameter groups**, and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group doesn't have the configuration options that you want, find a different one that does or create a new parameter group\. For more information on creating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
-   If you decide to use a different parameter group than the default, associate it with your Amazon RDS DB instance\. For more information, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md) or [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\.
+   If you decide to use a different parameter group than the default, associate it with your Amazon RDS DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. Connect to the new Amazon RDS DB instance as the master user, and create the users required to support the administrators, applications, and services that need to access the instance\. The host name for the Amazon RDS DB instance is the **Endpoint** value for this instance without including the port number, for example `mysampledb.claxc2oy9ak1.us-west-2.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 

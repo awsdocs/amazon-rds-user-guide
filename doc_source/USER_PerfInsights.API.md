@@ -14,7 +14,7 @@ The Performance Insights API provides the following operations\.
 |  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html](https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html)  |  Retrieves the top N dimension keys for a metric for a specific time period\.  | 
 |  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)  |  Retrieves Performance Insights metrics for a set of data sources, over a time period\. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group\.  | 
 
-For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com//performance-insights/latest/APIReference/Welcome.html)\.
+For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
 
 ## AWS CLI for Performance Insights<a name="USER_PerfInsights.API.CLI"></a>
 
@@ -260,7 +260,7 @@ aws pi get-resource-metrics ^
    --metric-queries file://query.json
 ```
 
-The example specifies the metric of `db.load.avg` and a `GroupBy` of the top seven wait events\. For details about valid values for this example, see [DimensionGroup](https://docs.aws.amazon.com//performance-insights/latest/APIReference/API_DimensionGroup.html) in the *Performance Insights API Reference\.*
+The example specifies the metric of `db.load.avg` and a `GroupBy` of the top seven wait events\. For details about valid values for this example, see [DimensionGroup](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DimensionGroup.html) in the *Performance Insights API Reference\.*
 
 The response looks similar to the following\.
 
@@ -367,7 +367,7 @@ aws pi get-resource-metrics ^
 
 This example queries over 24 hours, with a one hour period\-in\-seconds\.
 
-The example specifies the metric of `db.load.avg` and a `GroupBy` of the top seven wait events\. For details about valid values for this example, see [DimensionGroup](https://docs.aws.amazon.com//performance-insights/latest/APIReference/API_DimensionGroup.html) in the *Performance Insights API Reference\.*
+The example specifies the metric of `db.load.avg` and a `GroupBy` of the top seven wait events\. For details about valid values for this example, see [DimensionGroup](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DimensionGroup.html) in the *Performance Insights API Reference\.*
 
 The response looks similar to the following\.
 

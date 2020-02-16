@@ -22,8 +22,8 @@ SELECT * FROM dba_java_policy
 
 The following are prerequisites for using Oracle Java:
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t2\.micro, db\.t2\.small, db\.t3\.micro, or db\.t3\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
-+ Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Settings for Oracle DB Instances](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.Settings)\. 
++ Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
++ Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 + If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 
 ## Best Practices for Oracle JVM<a name="oracle-options-java.best-practices"></a>
@@ -59,7 +59,7 @@ During this outage, password verification functions are disabled briefly\. You c
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
-   + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+   + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. Grant the required permissions to users\.
 
@@ -89,4 +89,4 @@ You can remove the `JVM` option from a DB instance\. There is a brief outage whi
 
 To remove the `JVM` option from a DB instance, do one of the following: 
 + Remove the `JVM` option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ Modify the DB instance and specify a different option group that doesn't include the `JVM` option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
++ Modify the DB instance and specify a different option group that doesn't include the `JVM` option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 

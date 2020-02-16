@@ -1,6 +1,6 @@
 # Setting Up for Amazon RDS<a name="CHAP_SettingUp"></a>
 
-Following, you can find how to set up Amazon Relational Database Service \(Amazon RDS\) for the first time\. If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting Started](Welcome.md#Welcome.WhatsNext.GettingStarted)\. 
+Complete the tasks in this section to set up Amazon Relational Database Service \(Amazon RDS\) for the first time\. If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting Started](Welcome.md#Welcome.WhatsNext.GettingStarted)\. 
 
 A couple things you should know about Amazon Web Services \(AWS\):
 + When you sign up for AWS, your AWS account automatically has access to all services in AWS, including Amazon RDS\. However, you are charged only for the services that you use\.

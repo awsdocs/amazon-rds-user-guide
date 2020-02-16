@@ -43,10 +43,10 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
 1. If you plan to locate the directory and the DB instance in different virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud VPC Peering*\.
 
 1. Create or modify a PostgreSQL DB instance either from the console, CLI, or RDS API using one of the following methods:
-   + [ Creating a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreatePostgreSQLInstance.html) 
-   + [ Modifying a DB Instance Running the PostgreSQL Database Engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ModifyPostgreSQLInstance.html) 
-   + [ Restoring from a DB Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) 
-   + [ Restoring a DB Instance to a Specified Time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) 
+   +  [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md) 
+   +  [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md) 
+   +  [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md) 
+   +  [Restoring a DB Instance to a Specified Time](USER_PIT.md) 
 
    When you create or modify the DB instance, provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory\. Also provide the name of the IAM role that you created\. You can locate the DB instance in the same VPC as the directory or in a different VPC\.
 

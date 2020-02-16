@@ -7,7 +7,7 @@ Amazon RDS support for Kerberos and Active Directory provides the benefits of si
 You can enable your database users to authenticate against DB instances in two ways\. They can use credentials stored either in AWS Directory Service for Microsoft Active Directory or in your on\-premises Active Directory\.
 
 Currently, RDS supports Kerberos authentication for Microsoft SQL Server, Oracle, and PostgreSQL DB instances\. For information about Kerberos authentication with a specific engine, see the following:
-+ [Using Windows Authentication with a Microsoft SQL Server DB Instance](USER_SQLServerWinAuth.md)
++ [Using Windows Authentication with an Amazon RDS for SQL Server DB Instance](USER_SQLServerWinAuth.md)
 + [Using Kerberos Authentication for MySQL](mysql-kerberos.md)
 + [Using Kerberos Authentication with Amazon RDS for Oracle](oracle-kerberos.md)
 + [Using Kerberos Authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)

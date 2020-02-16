@@ -27,7 +27,11 @@ Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the follow
 
 When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Specify DB Details** page\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
 
-When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Modify DB Instance** page\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Modify DB Instance** page\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+
+**Note**  
+If your DB instance is running Database Mirroring \(DBM\)—not Always On Availability Groups \(AGs\)—you might need to disable in\-memory optimization before you add Multi\-AZ\. Disable in\-memory optimization with DBM before you add Multi\-AZ if your DB instance runs SQL Server 2014, 2016, or 2017 Enterprise Edition and has in\-memory optimization enabled\.   
+If your DB instance is running AGs, it doesn't require this step\. 
 
 ## Microsoft SQL Server Multi\-AZ Deployment Notes and Recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 

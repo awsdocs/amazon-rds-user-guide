@@ -127,10 +127,10 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 #### Amazon RDS API<a name="USER_PIOPS.EnablingAutoscaling.api"></a>
 
-To enable storage autoscaling for a new DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_CreateDBInstance.html)\. Set the following parameter: 
+To enable storage autoscaling for a new DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. Set the following parameter:
 +  `MaxAllocatedStorage` – Turns on Amazon RDS storage autoscaling and sets the upper limit on storage size, in gibibytes\. 
 
- To verify that Amazon RDS storage autoscaling is available for your DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeValidDbInstanceModifications.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeValidDbInstanceModifications.html) operation for an existing instance, or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeOrderableDBInstanceOptions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeOrderableDBInstanceOptions.html) operation before creating an instance\. Check the following field in the return value: 
+ To verify that Amazon RDS storage autoscaling is available for your DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDbInstanceModifications.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDbInstanceModifications.html) operation for an existing instance, or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation before creating an instance\. Check the following field in the return value: 
 +  `SupportsStorageAutoscaling` – Indicates whether the DB instance supports storage autoscaling\. 
 
 For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
@@ -169,10 +169,10 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 #### Amazon RDS API<a name="USER_PIOPS.ModifyingAutoscaling.api"></a>
 
- To change the storage autoscaling settings for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html)\. Set the following parameter: 
+ To change the storage autoscaling settings for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameter: 
 +  `MaxAllocatedStorage` – Sets the upper limit on storage size, in gibibytes\. 
 
- To verify that Amazon RDS storage autoscaling is available for your DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeValidDbInstanceModifications.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeValidDbInstanceModifications.html) operation for an existing instance, or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeOrderableDBInstanceOptions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_DescribeOrderableDBInstanceOptions.html) operation before creating an instance\. Check the following field in the return value: 
+ To verify that Amazon RDS storage autoscaling is available for your DB instance, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDbInstanceModifications.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDbInstanceModifications.html) operation for an existing instance, or the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation before creating an instance\. Check the following field in the return value: 
 +  `SupportsStorageAutoscaling` – Indicates whether the DB instance supports storage autoscaling\. 
 
 For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.
@@ -208,7 +208,7 @@ For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_St
 
 #### Amazon RDS API<a name="USER_PIOPS.DisablingAutoscaling.api"></a>
 
- To turn off storage autoscaling for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference//API_ModifyDBInstance.html)\. Set the following parameter:
+ To turn off storage autoscaling for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameter:
 +  `MaxAllocatedStorage` – Specify a value equal to the `AllocatedStorage` setting to prevent further Amazon RDS storage autoscaling for the specified DB instance\. 
 
 For more information about storage, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\.

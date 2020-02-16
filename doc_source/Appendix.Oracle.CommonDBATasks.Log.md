@@ -318,9 +318,9 @@ select sum(BLOCKS * BLOCK_SIZE) bytes
  where FIRST_TIME >= SYSDATE-(X/24) and DEST_ID=1;
 ```
 
-Archived redo logs are only generated if the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero, so unless you explicitly set yours to zero, archived redo logs are generated for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+Archived redo logs are only generated if the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero, so unless you explicitly set yours to zero, archived redo logs are generated for your DB instance\. 
 
-After the archived redo logs are removed from your DB instance, you can't download them again to your DB instance\. Amazon RDS retains the archived redo logs outside of your DB instance to support restoring your DB instance to a point in time\. Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period configured for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+After the archived redo logs are removed from your DB instance, you can't download them again to your DB instance\. Amazon RDS retains the archived redo logs outside of your DB instance to support restoring your DB instance to a point in time\. Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period configured for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 **Note**  
 In some cases, you might using JDBC on Linux to download archived redo logs and experience long latency times and connection resets\. In such cases, the issues might be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a nonblocking random number generator\. 

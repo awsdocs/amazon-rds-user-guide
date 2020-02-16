@@ -64,7 +64,7 @@ For this example, **Standard Create** is enabled, and **Easy Create** isn't enab
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new Oracle DB instance\.
 
@@ -222,7 +222,7 @@ The following table contains details about settings that you choose when you cre
 |  DB engine version  |  The version of Oracle that you want to use\.  | 
 |  DB instance class  |  The DB instance class that you want to use\.  For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.   | 
 |  DB instance identifier  |  The name for your DB instance\. The name must be unique for your account and AWS Region\. You can add some intelligence to the name, such as including the AWS Region and DB engine you chose, for example **oracle\-instance1**\.   | 
-|  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) and [Modifying Oracle sqlnet\.ora Parameters](USER_ModifyInstance.Oracle.md#USER_ModifyInstance.Oracle.sqlnet)\.   | 
+|  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.   | 
 | Deletion protection |  **Enable deletion protection** to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\.  For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.   | 
 |  Enhanced Monitoring  |  **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB instance runs on\.   For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.   | 

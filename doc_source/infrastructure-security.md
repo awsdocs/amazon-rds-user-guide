@@ -6,8 +6,6 @@ You use AWS published API calls to access Amazon RDS through the network\. Clien
 
 Additionally, requests must be signed by using an access key ID and a secret access key that is associated with an IAM principal\. Or you can use the [AWS Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html) \(AWS STS\) to generate temporary security credentials to sign requests\.
 
-You can call these API operations from any network location\. However, Amazon RDS also supports resource\-based access policies, which can include restrictions based on the source IP address\. In addition, you can use Amazon RDS policies to control access from specific Amazon VPC endpoints or specific VPCs\. Effectively, this isolates network access to a given Amazon RDS resource from only the specific VPC within the AWS network\.
-
 In addition, Amazon RDS offers features to help support infrastructure security\.
 
 ## Security Groups<a name="infrastructure-security.security-groups"></a>

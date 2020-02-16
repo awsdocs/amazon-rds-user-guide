@@ -66,7 +66,7 @@ For information about creating a MySQL DB instance with **Easy Create** not enab
 
    You can use the username and password that appears to connect to the DB instance as the master user\.
 **Important**  
-You won't be able to view master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)\.
+You won't be able to view master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 1. In the **Databases** list, choose the name of the new MySQL DB instance\.
 

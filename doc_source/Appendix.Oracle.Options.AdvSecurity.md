@@ -50,7 +50,7 @@ The process for using Oracle Transparent Data Encryption \(TDE\) with Amazon RDS
 
 1.  If the DB instance is not associated with an option group that has the **TDE** option enabled, you must either create an option group and add the **TDE** option or modify the associated option group to add the **TDE** option\. For information about creating or modifying an option group, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
-1.  Associate the DB instance with the option group with the **TDE** option\. For information about associating a DB instance with an option group, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+1.  Associate the DB instance with the option group with the **TDE** option\. For information about associating a DB instance with an option group, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Removing the TDE Option<a name="Appendix.Oracle.Options.AdvSecurity.Remove"></a>
 

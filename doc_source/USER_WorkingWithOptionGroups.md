@@ -172,6 +172,9 @@ Option group changes must be applied immediately in two cases:
 
 In these cases, choose the **Apply Immediately** option in the console\. Or you can include the `--apply-immediately` option when using the AWS CLI or set the `ApplyImmediately` parameter to `true` when using the Amazon RDS API\. Options that don't include port values can be applied immediately, or can be applied during the next maintenance window for the DB instance\. 
 
+**Note**  
+If you specify a security group as a value for an option in an option group, you manage the security group by modifying the option group\. You can't change or remove this security group by modifying a DB instance\. Also, the security group doesn't appear in the DB instance details in the AWS Management Console or in the output for the AWS CLI command `describe-db-instances`\.
+
 ### Console<a name="USER_WorkingWithOptionGroups.AddOption.Console"></a>
 
 You can use the AWS Management Console to add an option to an option group\. 
@@ -187,7 +190,7 @@ You can use the AWS Management Console to add an option to an option group\.
 
 1. In the **Add option** window, do the following: 
 
-   1. Choose the option that you want to add\. You might need to provide additional values, depending on the option that you select\. For example, when you choose the `OEM` option, you must also type a port value and specify a DB security group\.
+   1. Choose the option that you want to add\. You might need to provide additional values, depending on the option that you select\. For example, when you choose the `OEM` option, you must also type a port value and specify a security group\.
 
    1. To enable the option on all associated DB instances as soon as you add it, for **Apply Immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is enabled for each associated DB instance during its next maintenance window\.   
 ![\[Console option group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-addoption2.png)
@@ -335,6 +338,9 @@ Option group changes must be applied immediately in two cases:
 + When you add or remove an option group with an option that includes a port value\. 
 
 In these cases, choose the **Apply Immediately** option in the console\. Or you can include the `--apply-immediately` option when using the AWS CLI or set the `ApplyImmediately` parameter to `true` when using the RDS API\. Options that don't include port values can be applied immediately, or can be applied during the next maintenance window for the DB instance\. 
+
+**Note**  
+If you specify a security group as a value for an option in an option group, you manage the security group by modifying the option group\. You can't change or remove this security group by modifying a DB instance\. Also, the security group doesn't appear in the DB instance details in the AWS Management Console or in the output for the AWS CLI command `describe-db-instances`\.
 
 ### Console<a name="USER_WorkingWithOptionGroups.ModifyOption.Console"></a>
 

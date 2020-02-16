@@ -45,10 +45,10 @@ You can use either of two procedures to allow access to any file in the `backgro
 1. exec rdsadmin.manage_tracefiles.refresh_tracefile_listing;
 ```
 
-After the view is refreshed, use the following view to access the results\.
+After the view is refreshed, query the following view to access the results\.
 
 ```
-1. rdsadmin.tracefile_listing
+1. SELECT * FROM rdsadmin.tracefile_listing;
 ```
 
 An alternative to the previous process is to use `FROM table` to stream nontable data in a table\-like format to list database directory contents\.
@@ -90,10 +90,9 @@ For example, you can use the `rdsadmin.tracefile_listing` view mentioned precedi
 The following example creates an external table in the current schema with the location set to the file provided\. You can retrieve the contents into a local file using a SQL query\. 
 
 ```
-1. # eg: send the contents of the tracefile to a local file:
-2. sqlplus user/password@TNS alias << EOF > /tmp/tracefile.txt
-3. select * from tracefile_table;
-4. EOF
+1. spool /tmp/tracefile.txt
+2. select * from tracefile_table;
+3. spool off;
 ```
 
 ### Purging Trace Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Purging"></a>

@@ -22,7 +22,7 @@ The process for enabling transparent data encryption on a SQL Server DB instance
 
 1.  If the DB instance isn't associated with an option group that has TDE enabled, you have two choices\. You can create an option group and add the TDE option, or you can modify the associated option group to add it\. For information about creating or modifying an option group, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
-1.  Associate the DB instance with the option group with the TDE option\. For information about associating a DB instance with an option group, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+1.  Associate the DB instance with the option group with the TDE option\. For information about associating a DB instance with an option group, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 When the TDE option is added to an option group, Amazon RDS generates a certificate that is used in the encryption process\. You can then use the certificate to run SQL statements that encrypt data in a database on the DB instance\. The following example uses the RDS\-created certificate called `RDSTDECertificateName` to encrypt a database called `customerDatabase`\. 
 

@@ -130,7 +130,7 @@ If the same AWS account owns both VPCs, follow the instructions in [What is VPC 
 
 If different AWS accounts own the VPCs, complete the following steps:
 
-1. Configure VPC peering by following the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud VPC Peering*\. Specifically, complete the following steps:
+1. Configure VPC peering by following the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in *Amazon Virtual Private Cloud VPC Peering*\. Specifically, complete the following steps:
 
    1. Set up appropriate VPC routing rules to ensure the network traffic can flow both ways\.
 
@@ -150,7 +150,7 @@ Create or modify an Oracle DB instance for use with your directory\. You can use
   For instructions, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
 + Modify an existing Oracle DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 
-  For instructions, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+  For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 + Restore an Oracle DB instance from a DB snapshot using the console, the [ restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\.
 
   For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.

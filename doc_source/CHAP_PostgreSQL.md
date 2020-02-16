@@ -15,7 +15,6 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
 + [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
-+ [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
 + [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Upgrading a PostgreSQL DB Snapshot](USER_UpgradeDBSnapshot.PostgreSQL.md)
 + [Working with PostgreSQL Read Replicas](USER_PostgreSQL.Replication.ReadReplicas.md)
@@ -156,72 +155,22 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 Amazon RDS supports the following PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL 12 Versions](#PostgreSQL.Concepts.General.version12)
++ [PostgreSQL 11 Versions](#PostgreSQL.Concepts.General.version11)
++ [PostgreSQL 10 Versions](#PostgreSQL.Concepts.General.version10)
++ [PostgreSQL 9\.6 Versions](#PostgreSQL.Concepts.General.version96)
++ [PostgreSQL 9\.5 Versions](#PostgreSQL.Concepts.General.version95)
++ [PostgreSQL 9\.4 Versions](#PostgreSQL.Concepts.General.version94)
++ [PostgreSQL 9\.3 Versions](#PostgreSQL.Concepts.General.version93)
+
+#### PostgreSQL 12 Versions<a name="PostgreSQL.Concepts.General.version12"></a>
+
+**Topics**
 + [PostgreSQL Version 12\.0 in the Database Preview Environment](#PostgreSQL.Concepts.General.version120)
 + [PostgreSQL Version 12 Beta 3 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version12beta3)
-+ [PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version12)
-+ [PostgreSQL Version 11\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version115)
-+ [PostgreSQL Version 11\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version114)
-+ [PostgreSQL Version 11\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version112)
-+ [PostgreSQL Version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)
-+ [PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version11)
-+ [PostgreSQL Version 10\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version1010)
-+ [PostgreSQL Version 10\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version109)
-+ [PostgreSQL Version 10\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version107)
-+ [PostgreSQL Version 10\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version106)
-+ [PostgreSQL Version 10\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version105)
-+ [PostgreSQL Version 10\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version104)
-+ [PostgreSQL Version 10\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version103)
-+ [PostgreSQL Version 10\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version101)
-+ [PostgreSQL Version 9\.6\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9615)
-+ [PostgreSQL Version 9\.6\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9614)
-+ [PostgreSQL Version 9\.6\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9612)
-+ [PostgreSQL Version 9\.6\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version9611)
-+ [PostgreSQL Version 9\.6\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version9610)
-+ [PostgreSQL Version 9\.6\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version969)
-+ [PostgreSQL Version 9\.6\.8 on Amazon RDS](#PostgreSQL.Concepts.General.version968)
-+ [PostgreSQL Version 9\.6\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version966)
-+ [PostgreSQL Version 9\.6\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version965)
-+ [PostgreSQL Version 9\.6\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version963)
-+ [PostgreSQL Version 9\.6\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version962)
-+ [PostgreSQL Version 9\.6\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version961)
-+ [PostgreSQL Version 9\.5\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9519)
-+ [PostgreSQL Version 9\.5\.18 on Amazon RDS](#PostgreSQL.Concepts.General.version9518)
-+ [PostgreSQL Version 9\.5\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9516)
-+ [PostgreSQL Version 9\.5\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9515)
-+ [PostgreSQL Version 9\.5\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9514)
-+ [PostgreSQL Version 9\.5\.13 on Amazon RDS](#PostgreSQL.Concepts.General.version9513)
-+ [PostgreSQL Version 9\.5\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9512)
-+ [PostgreSQL Version 9\.5\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version9510)
-+ [PostgreSQL Version 9\.5\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version959)
-+ [PostgreSQL Version 9\.5\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version957)
-+ [PostgreSQL Version 9\.5\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version956)
-+ [PostgreSQL Version 9\.5\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version954)
-+ [PostgreSQL Version 9\.5\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version952)
-+ [PostgreSQL Version 9\.4\.24 on Amazon RDS](#PostgreSQL.Concepts.General.version9424)
-+ [PostgreSQL Version 9\.4\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9423)
-+ [PostgreSQL Version 9\.4\.21 on Amazon RDS](#PostgreSQL.Concepts.General.version9421)
-+ [PostgreSQL Version 9\.4\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9420)
-+ [PostgreSQL Version 9\.4\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9419)
-+ [PostgreSQL Version 9\.4\.18 on Amazon RDS](#PostgreSQL.Concepts.General.version9418)
-+ [PostgreSQL Version 9\.4\.17 on Amazon RDS](#PostgreSQL.Concepts.General.version9417)
-+ [PostgreSQL Version 9\.4\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9415)
-+ [PostgreSQL Version 9\.4\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9414)
-+ [PostgreSQL Version 9\.4\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9412)
-+ [PostgreSQL Version 9\.4\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version9411)
-+ [PostgreSQL Version 9\.4\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version949)
-+ [PostgreSQL Version 9\.4\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version947)
-+ [PostgreSQL Version 9\.3\.25 on Amazon RDS](#PostgreSQL.Concepts.General.version9325)
-+ [PostgreSQL Version 9\.3\.24 on Amazon RDS](#PostgreSQL.Concepts.General.version9324)
-+ [PostgreSQL Version 9\.3\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9323)
-+ [PostgreSQL Version 9\.3\.22 on Amazon RDS](#PostgreSQL.Concepts.General.version9322)
-+ [PostgreSQL Version 9\.3\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9320)
-+ [PostgreSQL Version 9\.3\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9319)
-+ [PostgreSQL Version 9\.3\.17 on Amazon RDS](#PostgreSQL.Concepts.General.version9317)
-+ [PostgreSQL Version 9\.3\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9316)
-+ [PostgreSQL Version 9\.3\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9314)
-+ [PostgreSQL Version 9\.3\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9312)
++ [PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version12beta2)
 
-#### PostgreSQL Version 12\.0 in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version120"></a>
+##### PostgreSQL Version 12\.0 in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version120"></a>
 
 PostgreSQL version 12\.0 is now available in the Amazon RDS Database Preview Environment\. PostgreSQL version 12\.0 contains several improvements that are described in the following PostgreSQL documentation:
 + [ PostgreSQL 12 Released\!](https://www.postgresql.org/about/news/1976/)
@@ -233,13 +182,13 @@ For information on the Database Preview Environment, see [Working with the Datab
 
 PostgreSQL version 12\.0 supports the `aws_s3` extension and you can now set `pg_prewarm` as `shared_preload_values`\. For information on extensions supported in this version, see [PostgreSQL Version 12\.x Extensions and Modules Supported on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x)\.
 
-#### PostgreSQL Version 12 Beta 3 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version12beta3"></a>
+##### PostgreSQL Version 12 Beta 3 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version12beta3"></a>
 
 PostgreSQL version 12 Beta 3 contains several improvements that are described in [ PostgreSQL 12 Beta 3 Released\!](https://www.postgresql.org/about/news/1960/)
 
 For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. For information on extensions supported in this version, see [PostgreSQL Version 12\.x Extensions and Modules Supported on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x)\.
 
-#### PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version12"></a>
+##### PostgreSQL Version 12 Beta 2 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version12beta2"></a>
 
 PostgreSQL version 12 Beta 2 contains several improvements that are described in the following links:
 + [ PostgreSQL 12 Beta 1 Released\!](https://www.postgresql.org/about/news/1943/)
@@ -247,7 +196,29 @@ PostgreSQL version 12 Beta 2 contains several improvements that are described in
 
 For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
-#### PostgreSQL Version 11\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version115"></a>
+#### PostgreSQL 11 Versions<a name="PostgreSQL.Concepts.General.version11"></a>
+
+**Topics**
++ [PostgreSQL Version 11\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version116)
++ [PostgreSQL Version 11\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version115)
++ [PostgreSQL Version 11\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version114)
++ [PostgreSQL Version 11\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version112)
++ [PostgreSQL Version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)
++ [PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version110)
+
+##### PostgreSQL Version 11\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version116"></a>
+
+PostgreSQL version 11\.6 contains several bug fixes for issues in release 11\.5\. For more information on the fixes in PostgreSQL 11\.6, see the [PostgreSQL documentation](https://www.postgresql.org/docs/11/release-11-6.html)\. 
+
+This version also includes the following changes:
+
+1. Upgraded the `pgTAP` extension to version 1\.1\.0\.
+
+1. Added the `plprofiler` extension\.
+
+1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+
+##### PostgreSQL Version 11\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version115"></a>
 
 PostgreSQL version 11\.5 contains several bug fixes for issues in release 11\.4\. For more information on the fixes in PostgreSQL 11\.5, see the [PostgreSQL documentation](https://www.postgresql.org/docs/11/release-11-5.html)\. 
 
@@ -256,15 +227,15 @@ This version also includes the following changes:
 + The extension `aws_s3` has been updated to support virtual\-hosted style requests\. For more information, see [Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\. 
 + The `PostGIS` extension is updated to version 2\.5\.2\.
 
-#### PostgreSQL Version 11\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version114"></a>
+##### PostgreSQL Version 11\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version114"></a>
 
-This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PosgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and the security fix CVE\-2019\-10164\. 
+This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PostgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and the security fix CVE\-2019\-10164\. 
 
 With this release, the `pg_hint_plan` extension has been updated to version 1\.3\.4\.
 
 For more information on the fixes in PostgreSQL 11\.4, see the [PostgreSQL documentation](https://www.postgresql.org/docs/11/release-11-4.html)\.
 
-#### PostgreSQL Version 11\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version112"></a>
+##### PostgreSQL Version 11\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version112"></a>
 
 PostgreSQL version 11\.2 contains several bug fixes for issues in release 11\.1\. For more information on the fixes in PostgreSQL 11\.2, see the [PostgreSQL documentation](https://www.postgresql.org/docs/11/release-11-2.html)\.
 
@@ -277,7 +248,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 11\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version111"></a>
+##### PostgreSQL Version 11\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version111"></a>
 
 PostgreSQL version 11\.1 contains several improvements that were announced in [PostgreSQL 11\.1 Released\!](https://www.postgresql.org/about/news/1905/) This version includes SQL stored procedures that enable embedded transactions within a procedure\. This version also includes major improvements to partitioning and parallelism and many useful performance improvements\. For example, by using a non\-null constant for a column default, you can now use an ALTER TABLE command to add a column without causing a table rewrite\.
 
@@ -304,7 +275,7 @@ PostgreSQL version 11\.1 contains several bug fixes for issues in release 11\. F
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version11"></a>
+##### PostgreSQL Version 11 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version110"></a>
 
 **Note**  
 PostgreSQL Version 11 on Amazon RDS has been released in the production environment\. It is no longer supported in the Database Preview Environment\.
@@ -313,7 +284,28 @@ PostgreSQL version 11 contains several improvements that are described in [Postg
 
 For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
-#### PostgreSQL Version 10\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version1010"></a>
+#### PostgreSQL 10 Versions<a name="PostgreSQL.Concepts.General.version10"></a>
+
+**Topics**
++ [PostgreSQL Version 10\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version1011)
++ [PostgreSQL Version 10\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version1010)
++ [PostgreSQL Version 10\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version109)
++ [PostgreSQL Version 10\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version107)
++ [PostgreSQL Version 10\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version106)
++ [PostgreSQL Version 10\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version105)
++ [PostgreSQL Version 10\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version104)
++ [PostgreSQL Version 10\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version103)
++ [PostgreSQL Version 10\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version101)
+
+##### PostgreSQL Version 10\.11 on Amazon RDS<a name="PostgreSQL.Concepts.General.version1011"></a>
+
+PostgreSQL version 10\.11 contains several bug fixes for issues in release 10\.10\. For more information on the fixes in PostgreSQL 10\.11, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-11.html)\. Changes in this version include the following:
+
+1. Added the `plprofiler` extension\.
+
+1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+
+##### PostgreSQL Version 10\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version1010"></a>
 
 PostgreSQL version 10\.10 contains several bug fixes for issues in release 10\.9\. For more information on the fixes in PostgreSQL 10\.10, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-10.html)\. Changes in this version include the following:
 
@@ -321,15 +313,15 @@ PostgreSQL version 10\.10 contains several bug fixes for issues in release 10\.9
 
 1. The `PostGIS` extension is updated to version 2\.5\.2\.
 
-#### PostgreSQL Version 10\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version109"></a>
+##### PostgreSQL Version 10\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version109"></a>
 
-This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PosgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and [security fix CVE\-2019\-10164](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-10164)\. 
+This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PostgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and [security fix CVE\-2019\-10164](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-10164)\. 
 
 With this release, the `pg_hint_plan` extension has been updated to version 1\.3\.3\.
 
 For more information on the fixes in PostgreSQL 10\.9, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-9.html)\.
 
-#### PostgreSQL Version 10\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version107"></a>
+##### PostgreSQL Version 10\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version107"></a>
 
 PostgreSQL version 10\.7 contains several bug fixes for issues in release 10\.6\. For more information on the fixes in 10\.7, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-7.html)\.
 
@@ -339,7 +331,7 @@ This version also includes the following changes:
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 10\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version106"></a>
+##### PostgreSQL Version 10\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version106"></a>
 
 PostgreSQL version 10\.6 contains several bug fixes for issues in release 10\.5\. For more information on the fixes in PostgreSQL 10\.6, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-6.html)\.
 
@@ -354,7 +346,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 **Note**  
 Amazon RDS for PostgreSQL has announced the removal of the `tsearch2` extension in the next major release\. We encourage customers still using pre\-8\.3 text search to migrate to the equivalent built\-in features\. For more information about migrating, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/textsearch-migration.html)\. 
 
-#### PostgreSQL Version 10\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version105"></a>
+##### PostgreSQL Version 10\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version105"></a>
 
 PostgreSQL version 10\.5 contains several bug fixes for issues in release 10\.4\. For more information on the fixes in 10\.5, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-5.html)\.
 
@@ -370,7 +362,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 10\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version104"></a>
+##### PostgreSQL Version 10\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version104"></a>
 
 PostgreSQL version 10\.4 contains several bug fixes for issues in release 10\.3\. For more information on the fixes in 10\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-4.html)\.
 
@@ -389,7 +381,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 **Note**  
 The `tsearch2` extension is to be removed in the next major release\. We encourage customers still using pre\-8\.3 text search to migrate to the equivalent built\-in features\. For more information about migrating, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/textsearch-migration.html)\.
 
-#### PostgreSQL Version 10\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version103"></a>
+##### PostgreSQL Version 10\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version103"></a>
 
 PostgreSQL version 10\.3 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.3, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-3.html)\.
 
@@ -399,7 +391,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 10\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version101"></a>
+##### PostgreSQL Version 10\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version101"></a>
 
 PostgreSQL version 10\.1 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.1, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-1.html) and the [PostgreSQL 10 community announcement](https://www.postgresql.org/about/news/1786/)\.
 
@@ -416,13 +408,36 @@ PostgreSQL version 10\.1 includes the following changes:
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9615"></a>
+#### PostgreSQL 9\.6 Versions<a name="PostgreSQL.Concepts.General.version96"></a>
+
+**Topics**
++ [PostgreSQL Version 9\.6\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9616)
++ [PostgreSQL Version 9\.6\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9615)
++ [PostgreSQL Version 9\.6\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9614)
++ [PostgreSQL Version 9\.6\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9612)
++ [PostgreSQL Version 9\.6\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version9611)
++ [PostgreSQL Version 9\.6\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version9610)
++ [PostgreSQL Version 9\.6\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version969)
++ [PostgreSQL Version 9\.6\.8 on Amazon RDS](#PostgreSQL.Concepts.General.version968)
++ [PostgreSQL Version 9\.6\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version966)
++ [PostgreSQL Version 9\.6\.5 on Amazon RDS](#PostgreSQL.Concepts.General.version965)
++ [PostgreSQL Version 9\.6\.3 on Amazon RDS](#PostgreSQL.Concepts.General.version963)
++ [PostgreSQL Version 9\.6\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version962)
++ [PostgreSQL Version 9\.6\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version961)
+
+##### PostgreSQL Version 9\.6\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9616"></a>
+
+PostgreSQL version 9\.6\.16 contains several bug fixes for issues in release 9\.6\.15\. For more information on the fixes in PostgreSQL 9\.6\.16, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\. Changes in this version include the following:
+
+1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+
+##### PostgreSQL Version 9\.6\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9615"></a>
 
 PostgreSQL version 9\.6\.15 contains several bug fixes for issues in release 9\.6\.14\. For more information on the fixes in PostgreSQL 9\.6\.15, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/release-9-6-15.html)\. 
 
 The `PostGIS` extension is updated to version 2\.5\.2\.
 
-#### PostgreSQL Version 9\.6\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9614"></a>
+##### PostgreSQL Version 9\.6\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9614"></a>
 
 This release contains bug fixes and improvements done by the PostgreSQL community\. 
 
@@ -430,13 +445,13 @@ With this release, the `pg_hint_plan` extension has been updated to version 1\.2
 
 For more information on the fixes in PostgreSQL 9\.6\.14, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/release-9-6-14.html)\.
 
-#### PostgreSQL Version 9\.6\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9612"></a>
+##### PostgreSQL Version 9\.6\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9612"></a>
 
 PostgreSQL version 9\.6\.12 contains several bug fixes for issues in release 9\.6\.11\. For more information on the fixes in 9\.6\.12, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/release-9-6-12.html)\. 
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.6\.11 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9611"></a>
+##### PostgreSQL Version 9\.6\.11 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9611"></a>
 
 PostgreSQL version 9\.6\.11 contains several bug fixes for issues in release 9\.6\.10\. For more information on the fixes in PostgreSQL 9\.6\.11, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-11.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -444,7 +459,7 @@ With this version, the logical decoding plugin `wal2json` has been updated to co
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9610"></a>
+##### PostgreSQL Version 9\.6\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9610"></a>
 
 PostgreSQL version 9\.6\.10 contains several bug fixes for issues in release 9\.6\.9\. For more information on the fixes in 9\.6\.10, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-6-10.html)\. 
 
@@ -458,7 +473,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version969"></a>
+##### PostgreSQL Version 9\.6\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version969"></a>
 
 PostgreSQL version 9\.6\.9 contains several bug fixes for issues in release 9\.6\.8\. For more information on the fixes in 9\.6\.9, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-9.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -473,13 +488,13 @@ This version includes the following changes:
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.8 on Amazon RDS<a name="PostgreSQL.Concepts.General.version968"></a>
+##### PostgreSQL Version 9\.6\.8 on Amazon RDS<a name="PostgreSQL.Concepts.General.version968"></a>
 
 PostgreSQL version 9\.6\.8 contains several bug fixes for issues in release 9\.6\.6\. For more information on the fixes in 9\.6\.8, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-8.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version966"></a>
+##### PostgreSQL Version 9\.6\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version966"></a>
 
 PostgreSQL version 9\.6\.6 contains several bug fixes for issues in release 9\.6\.5\. For more information on the fixes in 9\.6\.6, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-6.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -490,7 +505,7 @@ This version includes the following features:
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version965"></a>
+##### PostgreSQL Version 9\.6\.5 on Amazon RDS<a name="PostgreSQL.Concepts.General.version965"></a>
 
 PostgreSQL version 9\.6\.5 contains several bug fixes for issues in release 9\.6\.4\. For more information on the fixes in 9\.6\.5, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-5.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -498,7 +513,7 @@ This version also includes support for the [pgrouting](http://pgrouting.org/) an
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.6\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version963"></a>
+##### PostgreSQL Version 9\.6\.3 on Amazon RDS<a name="PostgreSQL.Concepts.General.version963"></a>
 
 PostgreSQL version 9\.6\.3 contains several new features and bug fixes\. This version includes the following features: 
 + Supports the extension `pg_repack` version 1\.4\.0\. You can use this extension to remove bloat from tables and indexes\. For more information on using `pg_repack` with Amazon RDS, see [Working with the pg\_repack Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pg_repack)\.
@@ -512,7 +527,7 @@ PostgreSQL version 9\.6\.3 contains several new features and bug fixes\. This ve
 
   For more information on using `auto_explain`, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/auto-explain.html)\. 
 
-#### PostgreSQL Version 9\.6\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version962"></a>
+##### PostgreSQL Version 9\.6\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version962"></a>
 
 PostgreSQL version 9\.6\.2 contains several new features and bug fixes\. The new version also includes the following extension versions: 
 + PostGIS version 2\.3\.2
@@ -525,7 +540,7 @@ PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. Fo
 
  For more information on the fixes in 9\.6\.2, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-2.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.6\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version961"></a>
+##### PostgreSQL Version 9\.6\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version961"></a>
 
 PostgreSQL version 9\.6\.1 contains several new features and improvements\. For more information about the fixes and improvements in PostgreSQL 9\.6\.1, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/release-9-6-1.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. For information about performing parallel queries and phrase searching using Amazon RDS for PostgreSQL 9\.6\.1, see the [AWS Database Blog](https://aws.amazon.com/blogs/database/performing-parallel-queries-and-phrase-searching-with-amazon-rds-for-postgresql-9-6-1/)\.
 
@@ -543,13 +558,37 @@ PostgreSQL version 9\.6\.1 includes the following changes:
 
 You can create a new PostgreSQL 9\.6\.1 database instance using the AWS Management Console, AWS CLI, or RDS API\. You can also upgrade an existing PostgreSQL 9\.5 instance to version 9\.6\.1 using major version upgrade\. If you want to upgrade a DB instance from version 9\.3 or 9\.4 to 9\.6, you must perform a point\-and\-click upgrade to the next major version first\. Each upgrade operation involves a short period of unavailability for your DB instance\.
 
-#### PostgreSQL Version 9\.5\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9519"></a>
+#### PostgreSQL 9\.5 Versions<a name="PostgreSQL.Concepts.General.version95"></a>
+
+**Topics**
++ [PostgreSQL Version 9\.5\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9520)
++ [PostgreSQL Version 9\.5\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9519)
++ [PostgreSQL Version 9\.5\.18 on Amazon RDS](#PostgreSQL.Concepts.General.version9518)
++ [PostgreSQL Version 9\.5\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9516)
++ [PostgreSQL Version 9\.5\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9515)
++ [PostgreSQL Version 9\.5\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9514)
++ [PostgreSQL Version 9\.5\.13 on Amazon RDS](#PostgreSQL.Concepts.General.version9513)
++ [PostgreSQL Version 9\.5\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9512)
++ [PostgreSQL Version 9\.5\.10 on Amazon RDS](#PostgreSQL.Concepts.General.version9510)
++ [PostgreSQL Version 9\.5\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version959)
++ [PostgreSQL Version 9\.5\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version957)
++ [PostgreSQL Version 9\.5\.6 on Amazon RDS](#PostgreSQL.Concepts.General.version956)
++ [PostgreSQL Version 9\.5\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version954)
++ [PostgreSQL Version 9\.5\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version952)
+
+##### PostgreSQL Version 9\.5\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9520"></a>
+
+PostgreSQL version 9\.5\.20 contains several bug fixes for issues in release 9\.6\.19\. For more information on the fixes in PostgreSQL 9\.5\.20, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.5/release-9-5-20.html)\. Changes in this version include the following:
+
+1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+
+##### PostgreSQL Version 9\.5\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9519"></a>
 
 PostgreSQL version 9\.5\.19 contains several bug fixes for issues in release 9\.6\.18\. For more information on the fixes in PostgreSQL 9\.5\.19, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.5/release-9-5-19.html)\. 
 
 The `PostGIS` extension is updated to version 2\.5\.2\.
 
-#### PostgreSQL Version 9\.5\.18 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9518"></a>
+##### PostgreSQL Version 9\.5\.18 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9518"></a>
 
 This release contains bug fixes and improvements done by the PostgreSQL community\. 
 
@@ -557,19 +596,19 @@ With this release, the `pg_hint_plan` extension has been updated to version 1\.1
 
 For more information on the fixes in PostgreSQL 9\.5\.18, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.5/release-9-5-18.html)\.
 
-#### PostgreSQL Version 9\.5\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9516"></a>
+##### PostgreSQL Version 9\.5\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9516"></a>
 
 PostgreSQL version 9\.5\.16 contains several bug fixes for issues in release 9\.5\.15\. For more information on the fixes in 9\.5\.16, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/release-9-5-16.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.5\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9515"></a>
+##### PostgreSQL Version 9\.5\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9515"></a>
 
 PostgreSQL version 9\.5\.15 contains several bug fixes for issues in release 9\.5\.14\. For more information on the fixes in 9\.5\.15, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-5-15.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.5\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9514"></a>
+##### PostgreSQL Version 9\.5\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9514"></a>
 
 PostgreSQL version 9\.5\.14 contains several bug fixes for issues in release 9\.5\.13\. For more information on the fixes in 9\.5\.14, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-5-14.html)\. 
 
@@ -577,7 +616,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.5\.13 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9513"></a>
+##### PostgreSQL Version 9\.5\.13 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9513"></a>
 
 PostgreSQL version 9\.5\.13 contains several bug fixes for issues in release 9\.5\.12\. For more information on the fixes in 9\.5\.13, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-13.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -588,21 +627,21 @@ This version includes the following extension updates:
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.5\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9512"></a>
+##### PostgreSQL Version 9\.5\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9512"></a>
 
 PostgreSQL version 9\.5\.12 contains several bug fixes for issues in release 9\.5\.10 For more information on the fixes in 9\.5\.12, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-12.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.5\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9510"></a>
+##### PostgreSQL Version 9\.5\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9510"></a>
 
 PostgreSQL version 9\.5\.10 contains several bug fixes for issues in version 9\.5\.9\. For more information on the fixes in 9\.5\.10, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-10.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.5\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version959"></a>
+##### PostgreSQL Version 9\.5\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version959"></a>
 
 PostgreSQL version 9\.5\.9 contains several bug fixes for issues in version 9\.5\.8\. For more information on the fixes in 9\.5\.9, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-9.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.5\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version957"></a>
+##### PostgreSQL Version 9\.5\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version957"></a>
 
 PostgreSQL version 9\.5\.7 contains several new features and bug fixes\. This version includes the following features: 
 + Supports the extension `pgaudit` version 1\.0\.5\. This extension provides detailed session and object audit logging\. For more information on using `pgaudit` with Amazon RDS, see [Working with the pgaudit Extension](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.pgaudit)\.
@@ -615,7 +654,7 @@ PostgreSQL version 9\.5\.7 contains several new features and bug fixes\. This ve
 
   For more information on using `auto_explain`, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/auto-explain.html)\. 
 
-#### PostgreSQL Version 9\.5\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version956"></a>
+##### PostgreSQL Version 9\.5\.6 on Amazon RDS<a name="PostgreSQL.Concepts.General.version956"></a>
 
 PostgreSQL version 9\.5\.6 contains several new features and bug fixes\. The new version also includes the following extension versions: 
 + PostGIS version 2\.2\.5
@@ -626,7 +665,7 @@ PostgreSQL version 9\.5\.6 on Amazon RDS also supports altering enum values\. Fo
 
  For more information on the fixes in 9\.5\.6, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-6.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.5\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version954"></a>
+##### PostgreSQL Version 9\.5\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version954"></a>
 
 PostgreSQL version 9\.5\.4 contains several fixes to issue found in previous versions\. For more information on the fixes in 9\.5\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-4.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -636,7 +675,7 @@ Beginning with PostgreSQL version 9\.5\.4 for Amazon RDS, the command ALTER USER
 
 PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. You can use the master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event Triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
 
-#### PostgreSQL Version 9\.5\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version952"></a>
+##### PostgreSQL Version 9\.5\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version952"></a>
 
 PostgreSQL version 9\.5\.2 contains several fixes to issues found in previous versions\. For more information on the features in 9\.5\.2, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
@@ -667,29 +706,53 @@ RDS PostgreSQL version 9\.5\.2 includes the following new extensions:
 + [tsm\_system\_rows](http://www.postgresql.org/docs/current/static/tsm-system-rows.html) – Provides the table sampling method `SYSTEM_ROWS`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\.
 + [tsm\_system\_time](http://www.postgresql.org/docs/current/static/tsm-system-time.html) – Provides the table sampling method `SYSTEM_TIME`, which can be used in the `TABLESAMPLE` clause of a `SELECT` command\. 
 
-#### PostgreSQL Version 9\.4\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9424"></a>
+#### PostgreSQL 9\.4 Versions<a name="PostgreSQL.Concepts.General.version94"></a>
+
+**Topics**
++ [PostgreSQL Version 9\.4\.25 on Amazon RDS](#PostgreSQL.Concepts.General.version9425)
++ [PostgreSQL Version 9\.4\.24 on Amazon RDS](#PostgreSQL.Concepts.General.version9424)
++ [PostgreSQL Version 9\.4\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9423)
++ [PostgreSQL Version 9\.4\.21 on Amazon RDS](#PostgreSQL.Concepts.General.version9421)
++ [PostgreSQL Version 9\.4\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9420)
++ [PostgreSQL Version 9\.4\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9419)
++ [PostgreSQL Version 9\.4\.18 on Amazon RDS](#PostgreSQL.Concepts.General.version9418)
++ [PostgreSQL Version 9\.4\.17 on Amazon RDS](#PostgreSQL.Concepts.General.version9417)
++ [PostgreSQL Version 9\.4\.15 on Amazon RDS](#PostgreSQL.Concepts.General.version9415)
++ [PostgreSQL Version 9\.4\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9414)
++ [PostgreSQL Version 9\.4\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9412)
++ [PostgreSQL Version 9\.4\.11 on Amazon RDS](#PostgreSQL.Concepts.General.version9411)
++ [PostgreSQL Version 9\.4\.9 on Amazon RDS](#PostgreSQL.Concepts.General.version949)
++ [PostgreSQL Version 9\.4\.7 on Amazon RDS](#PostgreSQL.Concepts.General.version947)
+
+##### PostgreSQL Version 9\.4\.25 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9425"></a>
+
+PostgreSQL version 9\.4\.25 contains several bug fixes for issues in release 9\.4\.24\. For more information on the fixes in PostgreSQL 9\.4\.25, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.4/release-9-4-25.html)\. Changes in this version include the following:
+
+1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+
+##### PostgreSQL Version 9\.4\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9424"></a>
 
 PostgreSQL version 9\.4\.24 contains several bug fixes for issues in release 9\.4\.23\. For more information on the fixes in PostgreSQL 9\.4\.24, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.4/release-9-4-24.html)\. 
 
 The `PostGIS` extension is updated to version 2\.5\.2\.
 
-#### PostgreSQL Version 9\.4\.23 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9423"></a>
+##### PostgreSQL Version 9\.4\.23 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9423"></a>
 
 This release contains bug fixes and improvements done by the PostgreSQL community\. For more information on the fixes in PostgreSQL 9\.4\.23, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.4/release-9-4-23.html)\.
 
-#### PostgreSQL Version 9\.4\.21 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9421"></a>
+##### PostgreSQL Version 9\.4\.21 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9421"></a>
 
 PostgreSQL version 9\.4\.21 contains several bug fixes for issues in release 9\.4\.20\. For more information on the fixes in 9\.4\.21, the [PostgreSQL documentation](http://www.postgresql.org/docs/current/release-9-4-21.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.4\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9420"></a>
+##### PostgreSQL Version 9\.4\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9420"></a>
 
 PostgreSQL version 9\.4\.20 contains several bug fixes for issues in release 9\.4\.19\. For more information on the fixes in 9\.4\.20, the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-4-20.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.4\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9419"></a>
+##### PostgreSQL Version 9\.4\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9419"></a>
 
 PostgreSQL version 9\.4\.19 contains several bug fixes for issues in release 9\.4\.18\. For more information on the fixes in 9\.4\.19, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-4-19.html)\. 
 
@@ -697,33 +760,33 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.4\.18 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9418"></a>
+##### PostgreSQL Version 9\.4\.18 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9418"></a>
 
 PostgreSQL version 9\.4\.18 contains several bug fixes for issues in release 9\.4\.17\. For more information on the fixes in 9\.4\.18, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-18.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 The `plv8` extension has been updated to version 2\.1\.2\. For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.4\.17 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9417"></a>
+##### PostgreSQL Version 9\.4\.17 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9417"></a>
 
 PostgreSQL version 9\.4\.17 contains several bug fixes for issues in release 9\.4\.15\. For more information on the fixes in 9\.4\.17, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-17.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.4\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9415"></a>
+##### PostgreSQL Version 9\.4\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9415"></a>
 
 PostgreSQL version 9\.4\.15 contains several bug fixes for issues in release 9\.4\.14\. For more information on the fixes in 9\.4\.15, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-4-15.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.4\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9414"></a>
+##### PostgreSQL Version 9\.4\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9414"></a>
 
 PostgreSQL version 9\.4\.14 contains several bug fixes for issues in release 9\.4\.12\. For more information on the fixes in 9\.4\.14, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-4-14.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.4\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9412"></a>
+##### PostgreSQL Version 9\.4\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9412"></a>
 
 PostgreSQL version 9\.4\.12 contains several fixes to issue found in previous versions\.
 
  For more information on the fixes in 9\.4\.12, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-12.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-#### PostgreSQL Version 9\.4\.11 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9411"></a>
+##### PostgreSQL Version 9\.4\.11 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9411"></a>
 
 PostgreSQL version 9\.4\.11 contains several fixes to issue found in previous versions\.
 
@@ -733,7 +796,7 @@ Beginning with PostgreSQL version 9\.4, PostgreSQL supports the streaming of WAL
 
 PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. The master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event Triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
 
-#### PostgreSQL Version 9\.4\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version949"></a>
+##### PostgreSQL Version 9\.4\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version949"></a>
 
 PostgreSQL version 9\.4\.9 contains several fixes to issue found in previous versions\. For more information on the fixes in 9\.4\.9, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-9.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
@@ -741,22 +804,36 @@ Beginning with PostgreSQL version 9\.4, PostgreSQL supports the streaming of WAL
 
 PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. The master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event Triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
 
-#### PostgreSQL Version 9\.4\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version947"></a>
+##### PostgreSQL Version 9\.4\.7 on Amazon RDS<a name="PostgreSQL.Concepts.General.version947"></a>
 
 PostgreSQL version 9\.4\.7 contains several fixes to issue found in previous versions\. For more information on the fixes in 9\.4\.7, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-7.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
 PostgreSQL version 9\.4\.7 includes improved visibility of autovacuum sessions by allowing the rds\_superuser account to view autovacuum sessions in pg\_stat\_activity\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
 
-#### PostgreSQL Version 9\.3\.25 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9325"></a>
+#### PostgreSQL 9\.3 Versions<a name="PostgreSQL.Concepts.General.version93"></a>
 
 **Note**  
 Amazon RDS for PostgreSQL announced retirement of PostgreSQL 9\.3 in September 2018 and has stopped support for PostgreSQL version 9\.3\. We encourage you to upgrade to PostgreSQL 9\.4 or a higher version as early as possible\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
+
+**Topics**
++ [PostgreSQL Version 9\.3\.25 on Amazon RDS](#PostgreSQL.Concepts.General.version9325)
++ [PostgreSQL Version 9\.3\.24 on Amazon RDS](#PostgreSQL.Concepts.General.version9324)
++ [PostgreSQL Version 9\.3\.23 on Amazon RDS](#PostgreSQL.Concepts.General.version9323)
++ [PostgreSQL Version 9\.3\.22 on Amazon RDS](#PostgreSQL.Concepts.General.version9322)
++ [PostgreSQL Version 9\.3\.20 on Amazon RDS](#PostgreSQL.Concepts.General.version9320)
++ [PostgreSQL Version 9\.3\.19 on Amazon RDS](#PostgreSQL.Concepts.General.version9319)
++ [PostgreSQL Version 9\.3\.17 on Amazon RDS](#PostgreSQL.Concepts.General.version9317)
++ [PostgreSQL Version 9\.3\.16 on Amazon RDS](#PostgreSQL.Concepts.General.version9316)
++ [PostgreSQL Version 9\.3\.14 on Amazon RDS](#PostgreSQL.Concepts.General.version9314)
++ [PostgreSQL Version 9\.3\.12 on Amazon RDS](#PostgreSQL.Concepts.General.version9312)
+
+##### PostgreSQL Version 9\.3\.25 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9325"></a>
 
 PostgreSQL version 9\.3\.25 contains several bug fixes for issues in release 9\.3\.24\. For more information on the fixes in 9\.3\.25, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-3-25.html)\.
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.3\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9324"></a>
+##### PostgreSQL Version 9\.3\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9324"></a>
 
 PostgreSQL version 9\.3\.24 contains several bug fixes for issues in release 9\.3\.23\. For more information on the fixes in 9\.3\.24, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-3-24.html)\. 
 
@@ -767,7 +844,7 @@ For information on upgrading the engine version for your PostgreSQL DB instance,
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.3\.23 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9323"></a>
+##### PostgreSQL Version 9\.3\.23 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9323"></a>
 
 PostgreSQL version 9\.3\.23 contains several bug fixes for issues in release 9\.3\.22\. For more information on the fixes in 9\.3\.23, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-23.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -776,33 +853,33 @@ The `plv8` extension has been updated to version 2\.1\.2\. For the complete list
 **Note**  
 Amazon RDS for PostgreSQL has announced version 9\.3\.x is scheduled for retirement in September, 2018\. We encourage you to upgrade your 9\.3\.x databases to the latest version at your earliest convenience\. 
 
-#### PostgreSQL Version 9\.3\.22 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9322"></a>
+##### PostgreSQL Version 9\.3\.22 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9322"></a>
 
 PostgreSQL version 9\.3\.22 contains several bug fixes for issues in release 9\.3\.20\. For more information on the fixes in 9\.3\.22, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-22.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL Features and Extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
 
-#### PostgreSQL Version 9\.3\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9320"></a>
+##### PostgreSQL Version 9\.3\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9320"></a>
 
 PostgreSQL version 9\.3\.20 contains several bug fixes for issues in version 9\.3\.19\. For more information on the fixes in 9\.3\.20, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-20.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.3\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9319"></a>
+##### PostgreSQL Version 9\.3\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9319"></a>
 
 PostgreSQL version 9\.3\.19 contains several bug fixes for issues in version 9\.3\.18\. For more information on the fixes in 9\.3\.19, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-19.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
-#### PostgreSQL Version 9\.3\.17 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9317"></a>
+##### PostgreSQL Version 9\.3\.17 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9317"></a>
 
 PostgreSQL version 9\.3\.17 contains several fixes for bugs found in previous versions\. This version contains the same extension components as version 9\.3\.16\. For a list of fixes in version 9\.3\.17, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-17.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-#### PostgreSQL Version 9\.3\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9316"></a>
+##### PostgreSQL Version 9\.3\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9316"></a>
 
 PostgreSQL version 9\.3\.16 contains several fixes for bugs found in previous versions\. This version contains the same extension components as version 9\.3\.14\. For a list of fixes in version 9\.3\.16, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-16.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-#### PostgreSQL Version 9\.3\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9314"></a>
+##### PostgreSQL Version 9\.3\.14 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9314"></a>
 
 PostgreSQL version 9\.3\.14 contains several fixes for bugs found in previous versions\. For a list of fixes in version 9\.3\.14, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/release-9-3-14.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-#### PostgreSQL Version 9\.3\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9312"></a>
+##### PostgreSQL Version 9\.3\.12 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9312"></a>
 
 PostgreSQL version 9\.3\.12 contains several fixes for bugs found in previous versions\. For a list of fixes in version 9\.3\.12, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-3-12.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
@@ -909,67 +986,68 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 11\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/static/extend-extensions.html)\. 
 
 
-| Extension | Version 11\.1 | Version 11\.2 | Version 11\.4 | Version 11\.5 | 
-| --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
-| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| libprotobuf | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
-| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 1\.3\.2 | 1\.3\.4 | 1\.3\.4 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
-| pg\_similarity | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| pg\_transport | N/A | N/A | N/A | 1\.0 | 
-| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| pageinspect | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
-| pglogical | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 
-| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 
-| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-|  [pgTAP](https://pgtap.org/)  | N/A | 1\.0 | 1\.0 | 1\.0 | 
-| plcoffee | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
-| plls | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
-| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
-| [PostGIS](http://www.postgis.net/) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.2 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 
-|  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 
-| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| Extension | Version 11\.1 | Version 11\.2 | Version 11\.4 | Version 11\.5 | Version 11\.6 | 
+| --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
+| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| libprotobuf | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
+| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 1\.3\.2 | 1\.3\.4 | 1\.3\.4 | 1\.3\.4 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
+| pg\_similarity | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| pg\_transport | N/A | N/A | N/A | 1\.0 | 1\.0 | 
+| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| pageinspect | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
+| pglogical | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 
+| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 
+| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+|  [pgTAP](https://pgtap.org/)  | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.1\.0 | 
+| plcoffee | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
+| plls | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
+| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plprofiler](https://github.com/bigsql/plprofiler) | N/A | N/A | N/A | N/A | 4\.1 | 
+| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
+| [PostGIS](http://www.postgis.net/) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 
+|  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 
+| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
 The following modules are supported as shown for PostgreSQL version 11\.x\.
 
@@ -988,67 +1066,68 @@ The following modules are supported as shown for PostgreSQL version 11\.x\.
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 10 that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
 
-| Extension | 10\.1 | 10\.3 | 10\.4 | 10\.5 | 10\.6 | 10\.7 | 10\.9 | 10\.10 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| [chkpass](http://www.postgresql.org/docs/10/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.0 | 2\.0 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 
-| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| libprotobuf | N/A | N/A | N/A | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
-| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.1 | 1\.3\.1 | 1\.3\.1 | 1\.3\.3 | 1\.3\.3 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 
-| pg\_similarity | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| pageinspect | N/A | N/A | N/A | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
-| pglogical | N/A | N/A | N/A | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 
-| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
-| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| plcoffee | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| plls | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| [PostGIS](http://www.postgis.net/) | 2\.4\.2 | 2\.4\.2 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.5\.2 | 
-| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 
-|  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
-| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| Extension | 10\.1 | 10\.3 | 10\.4 | 10\.5 | 10\.6 | 10\.7 | 10\.9 | 10\.10 | 10\.11 | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [chkpass](http://www.postgresql.org/docs/10/static/chkpass.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.0 | 2\.0 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 
+| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| libprotobuf | N/A | N/A | N/A | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
+| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.1 | 1\.3\.1 | 1\.3\.1 | 1\.3\.3 | 1\.3\.3 | 1\.3\.3 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 
+| pg\_similarity | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| pageinspect | N/A | N/A | N/A | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
+| pglogical | N/A | N/A | N/A | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 2\.2\.0 | 
+| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| plcoffee | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
+| plls | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
+| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plprofiler](https://github.com/bigsql/plprofiler) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 4\.1 | 
+| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
+| [PostGIS](http://www.postgis.net/) | 2\.4\.2 | 2\.4\.2 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.5\.2 | 2\.5\.2 | 
+| [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 2\.10\.2 | 
+|  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
 The `tsearch2` extension is deprecated in version 10\. The PostgreSQL team plans to remove `tsearch2` from the next major release of PostgreSQL\.
 

@@ -6,11 +6,16 @@ This topic can help you to determine whether your applications require certifica
 
 **Note**  
 Some applications are configured to connect to MariaDB only if they can successfully verify the certificate on the server\.   
-For such applications, you must update your client application trust stores to include the new CA certificates\. 
+For such applications, you must update your client application trust stores to include the new CA certificates\.   
+For MariaDB 10\.0 and 10\.1 versions only, certificate verification is strictly enforced when SSL is enabled and SSL mode is set to `preferred`\. You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the following behavior applies:  
+For MariaDB version 10\.2 and higher, the connection falls back to not using SSL and still connects successfully\.  
+Because MariaDB 10\.2 and higher versions use the OpenSSL protocol, an expired server certificate doesn't prevent successful connections, unless `required` SSL mode is specified\.
+For MariaDB 10\.0 and 10\.1 versions, an error is returned\.  
+Because MariaDB 10\.0 and 10\.1 versions use the yaSSL protocol, certificate verification is strictly enforced, and an error is returned\.
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For information about using SSL/TLS with MariaDB DB instances, see [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
+For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MariaDB DB instances, see [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
 
 **Topics**
 + [Determining Whether a Client Requires Certificate Verification in Order to Connect](#ssl-certificate-rotation-mariadb.determining)

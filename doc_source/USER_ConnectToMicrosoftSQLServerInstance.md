@@ -138,7 +138,7 @@ To connect to your DB instance, your DB instance must be associated with a secur
 
 If you need to create a new security group to enable access, the type of security group that you create will depend on what Amazon EC2 platform your DB instance is on\. To determine your platform, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the *EC2\-Classic* platform, you create a DB security group; if your DB instance is on the *VPC* platform, you create a VPC security group\. For instructions on creating a new security group, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\. 
 
-After you have created the new security group, you modify your DB instance to associate it with the security group\. For more information, see [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)\. 
+After you have created the new security group, you modify your DB instance to associate it with the security group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 You can enhance security by using SSL to encrypt connections to your DB instance\. For more information, see [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)\. 
 

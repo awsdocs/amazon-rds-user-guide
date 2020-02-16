@@ -26,13 +26,17 @@ For information about what Oracle versions are available on Amazon RDS, see [Ora
 Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
 
 **Note**  
-Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. If no operating system updates are required, the primary and standby DB instances are upgraded at the same time, and you experience an outage until the upgrade is complete\. 
 
 If your DB instance is in a Multi\-AZ deployment, and operating system updates are required, the operating system updates are applied when you request the database upgrade\. In this case, the operating system is updated on the standby DB instance, and the standby DB instance is upgraded\. After that upgrade completes, the primary DB instance fails over to the standby DB instance, and the operating system is updated on the new standby DB instance \(the former primary DB instance\), and that database is upgraded\.
+
+**Note**  
+We don't recommend upgrading databases running on micro DB instances because they have limited CPU resources and the upgrade process can take hours to complete\.   
+You can upgrade micro DB instances with small amounts of storage \(10–20 GiB\) by copying your data using Data Pump\. Before you migrate your production DB instances, we recommend that you test by copying data using Data Pump\. 
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 

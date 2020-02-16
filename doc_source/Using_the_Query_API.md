@@ -10,7 +10,7 @@ Each Query request must include some common parameters to handle authentication 
 
 Some operations take lists of parameters\. These lists are specified using the `param.n` notation\. Values of *n* are integers starting from 1\. 
 
-For information about Amazon RDS regions and endpoints, go to [Amazon Relational Database Service \(RDS\)](https://docs.aws.amazon.com//general/latest/gr/rande.html#rds_region) in the Regions and Endpoints section of the *Amazon Web Services General Reference*\.
+For information about Amazon RDS regions and endpoints, go to [Amazon Relational Database Service \(RDS\)](https://docs.aws.amazon.com/general/latest/gr/rande.html#rds_region) in the Regions and Endpoints section of the *Amazon Web Services General Reference*\.
 
 ## Query Request Authentication<a name="query-authentication"></a>
 

@@ -49,7 +49,7 @@ After you add the MariaDB Audit Plugin, you don't need to restart your DB instan
 
 1. Apply the option group to a new or existing DB instance\. 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the DB instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### Viewing and Downloading the MariaDB Audit Plugin Log<a name="Appendix.MariaDB.Options.AuditPlugin.Log"></a>
 
@@ -65,4 +65,4 @@ Amazon RDS doesn't support turning off logging in the MariaDB Audit Plugin\. How
 
 To remove the MariaDB Audit Plugin from a DB instance, do one of the following: 
 + Remove the MariaDB Audit Plugin option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
-+ Modify the DB instance and specify a different option group that doesn't include the plugin\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 
++ Modify the DB instance and specify a different option group that doesn't include the plugin\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 

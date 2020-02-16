@@ -20,7 +20,7 @@ Incompatibilities between MySQL and MariaDB include the following:
   WHERE (User, Host) = ('master_user_name', %);
   FLUSH PRIVILEGES;
   ```
-+ If your RDS master user account uses the SHA\-256 password hash, the password has to be reset using the RDS [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, [ ModifyDBInstance ](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, or the AWS Management Console\. For information about modifying a MariaDB DB instance, see [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)\. 
++ If your RDS master user account uses the SHA\-256 password hash, the password has to be reset using the RDS [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, [ ModifyDBInstance ](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, or the AWS Management Console\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 + MariaDB doesn't support the Memcached plugin; however, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached Plugin Internals](https://dev.mysql.com/doc/refman/5.6/en/innodb-memcached-internals.html)\.
 
 ## Console<a name="USER_Migrate_MariaDB.CON"></a>

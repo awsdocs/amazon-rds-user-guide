@@ -1,25 +1,38 @@
 # PostgreSQL Database Log Files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
 
-RDS PostgreSQL generates query and error logs\. We write auto\-vacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error Reporting and Logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
+Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error Reporting and Logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
 
-You can set the retention period for system logs using the `rds.log_retention_period` parameter in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1440 would retain logs for one day\. The default value is 4320 \(three days\)\. The maximum value is 10080 \(seven days\)\. Note that your instance must have enough allocated storage to contain the retained log files\. 
+To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-You can enable query logging for your PostgreSQL DB instance by setting two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. The `log_statement` parameter controls which SQL statements are logged\. We recommend setting this parameter to *all* to log all statements when debugging issues in your DB instance\. The default value is *none*\. Alternatively, you can set this value to *ddl* to log all data definition language \(DDL\) statements \(CREATE, ALTER, DROP, and so on\) or to *mod* to log all DDL and data modification language \(DML\) statements \(INSERT, UPDATE, DELETE, and so on\)\.
+**Topics**
++ [Setting the Log Retention Period](#USER_LogAccess.PostgreSQL.log_retention_period)
++ [Using Query Logging](#USER_LogAccess.PostgreSQL.Query_Logging)
++ [Publishing PostgreSQL Logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)
 
-The `log_min_duration_statement` parameter sets the limit in milliseconds of a statement to be logged\. All SQL statements that run longer than the parameter setting are logged\. This parameter is disabled and set to minus 1 \(\-1\) by default\. Enabling this parameter can help you find unoptimized queries\. 
+## Setting the Log Retention Period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
 
-If you are new to setting parameters in a DB parameter group and associating that parameter group with a DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)
+To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
-The following steps show how to set up query logging:
+To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL Logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
-1. Set the `log_statement` parameter to *all*\. The following example shows the information that is written to the postgres\.log file:
+## Using Query Logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
+
+To enable query logging for your PostgreSQL DB instance, set two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. 
+
+The `log_statement` parameter controls which SQL statements are logged\. We recommend that you set this parameter to `all` to log all statements when you debug issues in your DB instance\. The default value is `none`\. To log all data definition language \(DDL\) statements \(CREATE, ALTER, DROP, and so on\), set this value to `ddl`\. To log all DDL and data modification language \(DML\) statements \(INSERT, UPDATE, DELETE, and so on\), set this value to `mod`\.
+
+The `log_min_duration_statement` parameter sets the limit in milliseconds of a statement to be logged\. All SQL statements that run longer than the parameter setting are logged\. This parameter is disabled and set to \-1 by default\. Enabling this parameter can help you find unoptimized queries\. 
+
+To set up query logging, take the following steps:
+
+1. Set the `log_statement` parameter to `all`\. The following example shows the information that is written to the `postgres.log` file\.
 
    ```
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  received SIGHUP, reloading configuration files
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_statement" changed to "all"
    ```
 
-   Additional information is written to the postgres\.log file when you execute a query\. The following example shows the type of information written to the file after a query:
+   Additional information is written to the postgres\.log file when you run a query\. The following example shows the type of information written to the file after a query\.
 
    ```
    2013-11-05 16:41:07 UTC::@:[2955]:LOG:  checkpoint starting: time
@@ -35,14 +48,14 @@ The following steps show how to set up query logging:
    2013-11-05 16:45:
    ```
 
-1. Set the `log_min_duration_statement` parameter\. The following example shows the information that is written to the postgres\.log file when the parameter is set to *1*:
+1. Set the `log_min_duration_statement` parameter\. The following example shows the information that is written to the `postgres.log` file when the parameter is set to `1`\.
 
    ```
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  received SIGHUP, reloading configuration files
    2013-11-05 16:48:56 UTC::@:[2952]:LOG:  parameter "log_min_duration_statement" changed to "1"
    ```
 
-   Additional information is written to the postgres\.log file when you execute a query that exceeds the duration parameter setting\. The following example shows the type of information written to the file after a query:
+   Additional information is written to the `postgres.log` file when you run a query that exceeds the duration parameter setting\. The following example shows the type of information written to the file after a query\.
 
    ```
    2013-11-05 16:51:10 UTC:[local]:master@postgres:[9193]:LOG:  statement: SELECT c2.relname, i.indisprimary, i.indisunique, i.indisclustered, i.indisvalid, pg_catalog.pg_get_indexdef(i.indexrelid, 0, true),
@@ -61,16 +74,18 @@ The following steps show how to set up query logging:
 
 ## Publishing PostgreSQL Logs to CloudWatch Logs<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs"></a>
 
-You can configure your Amazon RDS for PostgreSQL DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
+To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. 
+
+To work with CloudWatch Logs, configure your RDS for PostgreSQL DB instance to publish log data to a log group\.
 
 **Note**  
-Publishing log files to CloudWatch Logs is only supported for PostgreSQL versions 9\.6\.6 and above and 10\.4 and above\.
+Publishing log files to CloudWatch Logs is supported only for PostgreSQL versions 9\.6\.6 and later and 10\.4 and later\.
 
-Following are the log types that can be published to CloudWatch Logs for Amazon RDS for PostgreSQL\. 
+You can publish the following log types to CloudWatch Logs for RDS for PostgreSQL: 
 + Postgresql log
 + Upgrade log \(not available for Aurora PostgreSQL\)
 
-After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your Amazon CloudWatch Logs, open [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
+After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your logs, open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
 ### Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
 
@@ -80,11 +95,11 @@ After you complete the configuration, Amazon RDS publishes the log events to log
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Select the DB instance that you want to modify, and then choose **Modify**\.
+1. Choose the DB instance that you want to modify, and then choose **Modify**\.
 
-1. In the **Log exports** section, choose the logs you want to start publishing to CloudWatch Logs\.
+1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
-   The **Log exports** section is only available for PostgreSQL versions that support publishing to CloudWatch Logs\. 
+   The **Log exports** section is available only for PostgreSQL versions that support publishing to CloudWatch Logs\. 
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
@@ -97,22 +112,20 @@ You can publish PostgreSQL logs with the AWS CLI\. You can call the [https://doc
 **Note**  
 A change to the `--cloudwatch-logs-export-configuration` option is always applied to the DB instance immediately\. Therefore, the `--apply-immediately` and `--no-apply-immediately` options have no effect\.
 
-You can also publish PostgreSQL logs by calling the following AWS CLI commands: 
+You can also publish PostgreSQL logs by calling the following CLI commands: 
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html)
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html)
 
-Run one of these AWS CLI commands with the following options: 
+Run one of these CLI commands with the following options: 
 + `--db-instance-identifier`
 + `--enable-cloudwatch-logs-exports`
 + `--db-instance-class`
 + `--engine`
 
-Other options might be required depending on the AWS CLI command you run\.
+Other options might be required depending on the CLI command you run\.
 
-**Modify an instance to publish logs to CloudWatch Logs**
-
-**Example**  
+**Example Modify an instance to publish logs to CloudWatch Logs**  
 The following example modifies an existing PostgreSQL DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `postgresql` and `upgrade`\.  
 For Linux, OS X, or Unix:  
 
@@ -129,8 +142,7 @@ For Windows:
 3.     --cloudwatch-logs-export-configuration '{"EnableLogTypes":["postgresql","upgrade"]}'
 ```
 
-**Example**  
-**Create an instance to publish logs to CloudWatch Logs**  
+**Example Create an instance to publish logs to CloudWatch Logs**  
 The following example creates a PostgreSQL DB instance and publishes log files to CloudWatch Logs\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `postgresql` and `upgrade`\.  
 For Linux, OS X, or Unix:  
 
@@ -171,4 +183,4 @@ Run one of these RDS API operations with the following parameters:
 + `Engine`
 + `DBInstanceClass`
 
-Other parameters might be required depending on the action you run\.
+Other parameters might be required depending on the operation that you run\.

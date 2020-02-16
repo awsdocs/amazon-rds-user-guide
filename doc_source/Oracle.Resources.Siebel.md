@@ -37,13 +37,13 @@ You can add features to your DB instance through the use of options in DB option
 
 If you want to collect performance statistics on your Siebel Database, you can add the Oracle Statspack feature\. For more information, see [Oracle Statspack](Appendix.Oracle.Options.Statspack.md)\. 
 
-Some option changes are applied immediately, and some option changes are applied during the next maintenance window for the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. After you create a customized option group, modify your DB instance to attach it\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+Some option changes are applied immediately, and some option changes are applied during the next maintenance window for the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. After you create a customized option group, modify your DB instance to attach it\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### Performance Tuning with Parameters<a name="Oracle.Resources.Siebel.Parameters"></a>
 
 You manage your DB engine configuration through the use of parameters in a DB parameter group\. When you created your Oracle DB instance, you used the default DB parameter group\. If you want to customize your database configuration, you can create a new parameter group for your DB instance\. 
 
-When you change a parameter, depending on the type of the parameter, the changes are applied either immediately or after you manually reboot the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. After you create a customized parameter group, modify your DB instance to attach it\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+When you change a parameter, depending on the type of the parameter, the changes are applied either immediately or after you manually reboot the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. After you create a customized parameter group, modify your DB instance to attach it\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 To optimize your Oracle DB instance for Siebel CRM, you can customize certain parameters\. The following table shows some recommended parameter settings\. For more information about performance tuning Siebel CRM, see [Siebel CRM Performance Tuning Guide](https://docs.oracle.com/cd/E63029_01/books/PerformTun/toc.htm)\.  
 

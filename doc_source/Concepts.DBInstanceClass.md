@@ -164,6 +164,11 @@ The following are DB engine considerations for DB instance classes:
   + PostgreSQL 10\.4 and higher 10 versions
   + PostgreSQL 11\.1 and higher 11 versions
 
+  The specific instance classes db\.m5\.8xlarge, db\.m5\.16xlarge, db\.r5\.8xlarge, and db\.r5\.16xlarge are only supported in the following versions:
+  + PostgreSQL 9\.6\.15 and higher 9\.6 versions
+  + PostgreSQL 10\.11 and higher 10 versions
+  + PostgreSQL 11\.5 and higher 11 versions
+
 
 ****  
 
@@ -172,9 +177,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.16xlarge | No | Yes | No | Yes | No | 
+| db\.m5\.16xlarge | No | Yes | No | Yes | Yes | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.8xlarge | No | Yes | No | Yes | No | 
+| db\.m5\.8xlarge | No | Yes | No | Yes | Yes | 
 | db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -218,9 +223,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.16xlarge | No | Yes | No | Yes | No | 
+| db\.r5\.16xlarge | No | Yes | No | Yes | Yes | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | No | Yes | No | Yes | No | 
+| db\.r5\.8xlarge | No | Yes | No | Yes | Yes | 
 | db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -261,12 +266,7 @@ The following are DB engine considerations for DB instance classes:
 
 ## Changing Your DB Instance Class<a name="Concepts.DBInstanceClass.Changing"></a>
 
-You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions for your specific database engine\. 
-+ [Modifying a DB Instance Running the MariaDB Database Engine](USER_ModifyInstance.MariaDB.md)
-+ [Modifying a DB Instance Running the Microsoft SQL Server Database Engine](USER_ModifyInstance.SQLServer.md)
-+ [Modifying a DB Instance Running the MySQL Database Engine](USER_ModifyInstance.MySQL.md)
-+ [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
-+ [Modifying a DB Instance Running the PostgreSQL Database Engine](USER_ModifyPostgreSQLInstance.md)
+You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions in [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 Some instance classes require that your DB instance is in a VPC\. If your current DB instance isn't in a VPC, and you want to use an instance class that requires one, first move your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 

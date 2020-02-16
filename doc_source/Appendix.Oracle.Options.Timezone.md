@@ -58,7 +58,7 @@ If you add the time zone option to an existing option group that is already atta
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the time zone option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the time zone option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### AWS CLI<a name="Appendix.Oracle.Options.Timezone.CLI"></a>
 

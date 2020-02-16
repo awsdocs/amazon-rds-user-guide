@@ -67,6 +67,28 @@ The following table shows the cipher suite option settings that are supported fo
 |  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
+## FIPS Support<a name="Appendix.Oracle.Options.SSL.FIPS"></a>
+
+Amazon RDS for Oracle enables you to use the Federal Information Processing Standard \(FIPS\) standard for 140\-2\. FIPS 140\-2 is a United States government standard that defines cryptographic module security requirements\. You enable the FIPS standard by setting the setting `FIPS.SSLFIPS_140` to `TRUE` for the Oracle SSL option\. When FIPS 140\-2 is configured for SSL, the cryptographic libraries are designed to encrypt data between the client and the Oracle DB instance\. 
+
+You can enable the FIPS setting with the following Oracle database versions and editions: 
++ 19\.0\.0\.0: All versions, all editions including Standard Edition Two
++ 18\.0\.0\.0: All versions, all editions including Standard Edition Two
++ 12\.2\.0\.1: All versions, all editions including Standard Edition Two
++ 12\.1\.0\.2: Version 2 and later, all editions including Standard Edition Two
+
+Clients must use the cipher suite that is FIPS compliant\. When establishing a connection, the client and Oracle DB instance negotiate which cipher suite to use when transmitting messages back and forth\. The following table shows the FIPS compliant SSL cipher suites for each TLS version\. 
+
+
+****  
+
+| SQLNET\.SSL\_VERSION | Supported Cipher Suites | 
+| --- | --- | 
+|  1\.0  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA  | 
+|  1\.2  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384  | 
+
+For more information, see [Oracle Database FIPS 140\-2 Settings](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/oracle-database-fips-140-settings.html#GUID-DDBEB3F9-B216-44BB-8C18-43B5E468CBBB) in the Oracle documentation\.
+
 ## Adding the SSL Option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
 
 To use SSL, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `SSL` option\.
@@ -81,13 +103,15 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Add the `SSL` option to the option group\.
 
+   If you want to use only FIPS\-verified cipher suites for SSL connections, set the option `FIPS.SSLFIPS_140` to `TRUE`\. For information about the FIPS standard, see [FIPS Support](#Appendix.Oracle.Options.SSL.FIPS)\.
+
    For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
    For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+   For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ### AWS CLI<a name="Appendix.Oracle.Options.SSL.OptionGroup.CLI"></a>
 
@@ -125,7 +149,7 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
    For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\.
+   For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Configuring SQL\*Plus to Use SSL with an Oracle DB Instance<a name="Appendix.Oracle.Options.SSL.ClientConfiguration"></a>
 

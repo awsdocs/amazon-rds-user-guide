@@ -69,7 +69,7 @@ If you add the APEX options to an existing option group that is already attached
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the APEX options to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the APEX options to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Unlocking the Public User Account<a name="Appendix.Oracle.Options.APEX.PublicUser"></a>
 
@@ -348,6 +348,6 @@ You can remove the Amazon RDS APEX options from a DB instance\. To remove the AP
   For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
 + To remove the APEX options from a single DB instance, modify the DB instance and specify a different option group that doesn't include the APEX options\. You can specify the default \(empty\) option group, or a different custom option group\. When you remove the APEX options, a brief outage occurs while your DB instance is automatically restarted\. 
 
-  For more information, see [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)\. 
+  For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 When you remove the APEX options from a DB instance, the APEX schema is removed from your database\. 

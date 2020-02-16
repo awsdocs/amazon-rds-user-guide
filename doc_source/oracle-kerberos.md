@@ -36,7 +36,7 @@ To set up Kerberos authentication for an Oracle DB instance, complete the follow
 
 1. Create or modify an Oracle DB instance either from the console, CLI, or RDS API using one of the following methods:
    + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-   + [Modifying a DB Instance Running the Oracle Database Engine](USER_ModifyInstance.Oracle.md)
+   + [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)
    + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
    + [Restoring a DB Instance to a Specified Time](USER_PIT.md)
 

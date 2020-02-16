@@ -65,4 +65,4 @@ This example generates output similar to the following\.
 		}
 ```
 
-For more information about CloudWatch, see [What is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring//WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\. 
+For more information about CloudWatch, see [What is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\. 

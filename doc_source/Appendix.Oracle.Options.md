@@ -19,6 +19,7 @@ Amazon RDS supports the following options for Oracle DB instances\.
 |  [Oracle Locator](Oracle.Options.Locator.md)  |  `LOCATOR`  | 
 |  [Oracle Multimedia](Oracle.Options.Multimedia.md)  |  `MULTIMEDIA`  | 
 |  [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)  |  `NATIVE_NETWORK_ENCRYPTION`  | 
+|  [Oracle OLAP](Oracle.Options.OLAP.md)  |  `OLAP`  | 
 |  [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)  |  `SSL`  | 
 |  [Oracle Spatial](Oracle.Options.Spatial.md)  |  `SPATIAL`  | 
 |  [Oracle SQLT](Oracle.Options.SQLT.md)  |  `SQLT`  | 
