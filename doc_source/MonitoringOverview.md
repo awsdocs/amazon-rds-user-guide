@@ -32,8 +32,8 @@ You can use the following automated monitoring tools to watch Amazon RDS and rep
 
 In addition, Amazon RDS integrates with Amazon CloudWatch for additional monitoring capabilities:
 + **Amazon CloudWatch Metrics** – Amazon RDS automatically sends metrics to CloudWatch every minute for each active database\. You are not charged additionally for Amazon RDS metrics in CloudWatch\. For more information, see [Viewing DB Instance Metrics](#USER_Monitoring)\.
-+ ** Amazon CloudWatch Alarms** – You can watch a single Amazon RDS metric over a specific time period, and perform one or more actions based on the value of the metric relative to a threshold you set\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)
-+ **Amazon CloudWatch Logs** – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/) 
++ ** Amazon CloudWatch Alarms** – You can watch a single Amazon RDS metric over a specific time period, and perform one or more actions based on the value of the metric relative to a threshold you set\. For more information, see [Monitoring with Amazon CloudWatch](#monitoring-cloudwatch)\.
++ **Amazon CloudWatch Logs** – Most DB engines enable you to monitor, store, and access your database log files in CloudWatch Logs\. For more information, see [Amazon CloudWatch Logs User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/)\.
 
 ### Manual Monitoring Tools<a name="monitoring_manual_tools"></a>
 
@@ -57,10 +57,10 @@ Another important part of monitoring Amazon RDS involves manually monitoring tho
   + Service health status
 
   In addition, you can use CloudWatch to do the following: 
-  + Create [customized dashboards](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about
-  + Graph metric data to troubleshoot issues and discover trends
-  + Search and browse all your AWS resource metrics
-  + Create and edit alarms to be notified of problems
+  + Create [customized dashboards](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CloudWatch_Dashboards.html) to monitor the services you care about\.
+  + Graph metric data to troubleshoot issues and discover trends\.
+  + Search and browse all your AWS resource metrics\.
+  + Create and edit alarms to be notified of problems\.
 
 ## Monitoring with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
@@ -79,7 +79,7 @@ Metrics are grouped first by the service namespace, and then by the various dime
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-1. If necessary, change the AWS Region\. From the navigation bar, choose the AWS Region where your AWS resources reside\. For more information, see [Regions and Endpoints](http://docs.aws.amazon.com/general/latest/gr/rande.html)\.
+1. If necessary, change the AWS Region\. From the navigation bar, choose the AWS Region where your AWS resources reside\. For more information, see [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)\.
 
 1. In the navigation pane, choose **Metrics**\. Choose the **RDS** metric namespace\.  
 ![\[Choose metric namespace\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-01.png)

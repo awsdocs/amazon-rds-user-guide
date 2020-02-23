@@ -1795,7 +1795,7 @@ To enable a RAM disk for your `stats_temp_directory`, set the `rds.pg_stat_ramdi
 For example, the following AWS CLI command sets the RAM disk parameter to 256 MB\.
 
 ```
-postgres=>aws rds modify-db-parameter-group \
+aws rds modify-db-parameter-group \
     --db-parameter-group-name pg-95-ramdisk-testing \
     --parameters "ParameterName=rds.pg_stat_ramdisk_size, ParameterValue=256, ApplyMethod=pending-reboot"
 ```

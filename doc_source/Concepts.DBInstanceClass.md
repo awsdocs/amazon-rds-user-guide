@@ -164,11 +164,6 @@ The following are DB engine considerations for DB instance classes:
   + PostgreSQL 10\.4 and higher 10 versions
   + PostgreSQL 11\.1 and higher 11 versions
 
-  The specific instance classes db\.m5\.8xlarge, db\.m5\.16xlarge, db\.r5\.8xlarge, and db\.r5\.16xlarge are only supported in the following versions:
-  + PostgreSQL 9\.6\.15 and higher 9\.6 versions
-  + PostgreSQL 10\.11 and higher 10 versions
-  + PostgreSQL 11\.5 and higher 11 versions
-
 
 ****  
 
@@ -177,9 +172,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.16xlarge | No | Yes | No | Yes | Yes | 
+| db\.m5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.8xlarge | No | Yes | No | Yes | Yes | 
+| db\.m5\.8xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -203,12 +198,12 @@ The following are DB engine considerations for DB instance classes:
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
-| db\.z1d\.12xlarge | No | No | No | Yes | No | 
-| db\.z1d\.6xlarge | No | No | No | Yes | No | 
-| db\.z1d\.3xlarge | No | No | No | Yes | No | 
-| db\.z1d\.2xlarge | No | No | No | Yes | No | 
-| db\.z1d\.xlarge | No | No | No | Yes | No | 
-| db\.z1d\.large | No | No | No | Yes | No | 
+| db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.3xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.large | No | Yes | No | Yes | No | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.x1e – Latest Generation Memory Optimized Instance Classes | 
 | db\.x1e\.32xlarge | No | Yes | No | Yes | No | 
@@ -223,9 +218,9 @@ The following are DB engine considerations for DB instance classes:
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.16xlarge | No | Yes | No | Yes | Yes | 
+| db\.r5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | No | Yes | No | Yes | Yes | 
+| db\.r5\.8xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
