@@ -1,8 +1,12 @@
 # Oracle Native Network Encryption<a name="Appendix.Oracle.Options.NetworkEncryption"></a>
 
-Amazon RDS supports Oracle native network encryption \(NNE\)\. With native network encryption, you can encrypt data as it moves to and from a DB instance\. Amazon RDS supports NNE for all editions of Oracle\. 
+Amazon RDS supports Oracle native network encryption \(NNE\)\. With native network encryption, you can encrypt data as it moves to and from a DB instance\. Amazon RDS supports NNE for all editions of Oracle\.
 
-A detailed discussion of Oracle native network encryption is beyond the scope of this guide, but you should understand the strengths and weaknesses of each algorithm and key before you decide on a solution for your deployment\. For information about the algorithms and keys that are available through Oracle native network encryption, see [Configuring Network Data Encryption](http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r2/prod/security/network_encrypt/ntwrkencrypt.htm) in the Oracle documentation\. For more information about AWS security, see the [AWS Security Center](http://aws.amazon.com/security)\. 
+A detailed discussion of Oracle native network encryption is beyond the scope of this guide, but you should understand the strengths and weaknesses of each algorithm and key before you decide on a solution for your deployment\. For information about the algorithms and keys that are available through Oracle native network encryption, see [Configuring Network Data Encryption](http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r2/prod/security/network_encrypt/ntwrkencrypt.htm) in the Oracle documentation\. For more information about AWS security, see the [AWS Security Center](http://aws.amazon.com/security)\.
+
+**Warning**  
+
+Users and administrators should be aware that unlike [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) (which uses certificates), Oracle's native network encryption only protects against sniffing of data but does not protect against Man In The Middle (MITM) attacks. This is due to the fact the certificates are not used and thus there is no way to verify if the DB instance the client is connecting to matches the one they requested. Users and administrators should consider additional network controls and should also review existing security research on MITM attacks against NNE (see the "Oracle 11g Anti-hacker's Cookbook" (2012) by Adrian Neagu and research by Laszlo Toth).
 
 **Note**  
 You can use Native Network Encryption or Secure Sockets Layer, but not both\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
