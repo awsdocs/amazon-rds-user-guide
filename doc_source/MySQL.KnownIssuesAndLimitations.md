@@ -80,7 +80,7 @@ You can set the `long_query_time` parameter to a floating point value which allo
 For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MySQL DB instances\. 
 
 **Note**  
-Some existing DB instances have a lower limit\. For example, MySQL DB instances created prior to April 2014 have a file and table size limit of 2 TB\. This 2 TB file size limit also applies to DB instances or Read Replicas created from DB snapshots taken prior to April 2014, regardless of when the DB instance was created\. 
+Some existing DB instances have a lower limit\. For example, MySQL DB instances created before April 2014 have a file and table size limit of 2 TB\. This 2 TB file size limit also applies to DB instances or Read Replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\.
 
 There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [InnoDB File\-Per\-Table Mode](https://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\. 
 

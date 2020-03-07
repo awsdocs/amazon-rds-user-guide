@@ -1,6 +1,6 @@
 # Key Management<a name="Overview.Encryption.Keys"></a>
 
-You can manage keys used for Amazon RDS encrypted DB instances using the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/) in the IAM console\. If you want full control over a key, then you must create a customer\-managed key\.
+You can manage keys used for Amazon RDS encrypted DB instances using the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/) in the [AWS KMS console](https://console.aws.amazon.com/kms)\. If you want full control over a key, then you must create a customer\-managed key\.
 
 You can't delete, revoke, or rotate default keys provisioned by AWS KMS\. You can't share a snapshot that has been encrypted using the default AWS KMS encryption key of the AWS account that shared the snapshot\.
 

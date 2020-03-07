@@ -3,7 +3,7 @@
 Use the following sections to help troubleshoot problems you have with DB instances in Amazon RDS and Aurora\.
 
 **Topics**
-+ [Cannot Connect to Amazon RDS DB Instance](#CHAP_Troubleshooting.Connecting)
++ [Can't Connect to Amazon RDS DB Instance](#CHAP_Troubleshooting.Connecting)
 + [Amazon RDS Security Issues](#CHAP_Troubleshooting.Security)
 + [Resetting the DB Instance Owner Role Password](#CHAP_Troubleshooting.ResetPassword)
 + [Amazon RDS DB Instance Outage or Reboot](#CHAP_Troubleshooting.Reboots)
@@ -11,55 +11,65 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB Instance Running Out of Storage](#CHAP_Troubleshooting.Storage)
 + [Amazon RDS Insufficient DB Instance Capacity](#CHAP_Troubleshooting.Capacity)
 + [Amazon RDS MySQL and MariaDB Issues](#CHAP_Troubleshooting.MySQL)
-+ [Amazon RDS Oracle GoldenGate Issues](#CHAP_Troubleshooting.Oracle.GoldenGate)
-+ [Cannot Connect to Amazon RDS SQL Server DB Instance](#CHAP_Troubleshooting.SQLServer.Connect)
-+ [Cannot Connect to Amazon RDS PostgreSQL DB Instance](#CHAP_Troubleshooting.PostgreSQL.Connect)
-+ [Cannot Set Backup Retention Period to 0](#CHAP_Troubleshooting.Backup.Retention)
++ [Can't Set Backup Retention Period to 0](#CHAP_Troubleshooting.Backup.Retention)
 
  For information about debugging problems using the Amazon RDS API, see [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)\. 
 
-## Cannot Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
+## Can't Connect to Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting"></a>
 
-When you cannot connect to a DB instance, the following are common causes:
-+ The access rules enforced by your local firewall and the ingress IP addresses that you authorized to access your DB instance in the instance's security group aren't in sync\. The problem is most likely the ingress rules in your security group\.
+When you can't connect to a DB instance, the following are common causes:
++ **Inbound rules** – The access rules enforced by your local firewall and the IP addresses authorized to access your DB instance might not match\. The problem is most likely the inbound rules in your security group\.
 
-  By default, DB instances don't allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. If necessary, add rules to the security group associated with the VPC that allow traffic related to the source in and out of the DB instance\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
+  By default, DB instances don't allow access\. Access is granted through a security group associated with the VPC that allows traffic into and out of the DB instance\. If necessary, add inbound and outbound rules for your particular situation to the security group\. You can specify an IP address, a range of IP addresses, or another VPC security group\.
+**Note**  
+When adding a new inbound rule, you can choose **My IP** for **Source** to allow access to the DB instance from the IP address detected in your browser\.
 
-  For more information about setting up a security group, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
-+ The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
-+ Your DB instance is still being created and is not yet available\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\. 
+  For more information about setting up security groups, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+**Note**  
+Client connections from IP addresses within the range 169\.254\.0\.0/16 aren't permitted\. This is the Automatic Private IP Addressing Range \(APIPA\), which is used for local\-link addressing\.
++ **Public accessibility** – To connect to your DB instance from outside of the VPC, such as by using a client application, the instance must have a public IP address assigned to it\.
 
-### Testing a Connection to an Amazon RDS DB Instance<a name="CHAP_Troubleshooting.Connecting.Test"></a>
+  To make the instance publicly accessible, modify it and choose **Yes** under **Public accessibility**\. For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.
++ **Port** – The port that you specified when you created the DB instance can't be used to send or receive communications due to your local firewall restrictions\. To determine if your network allows the specified port to be used for inbound and outbound communication, check with your network administrator\.
++ **Availability** – For a newly created DB instance, the DB instance has a status of `creating` until the DB instance is ready to use\. When the state changes to `available`, you can connect to the DB instance\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\.
 
-You can test your connection to a DB instance using common Linux or Windows tools\. 
+For engine\-specific connection issues, see the following topics:
++  [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)
++ [Troubleshooting Connections to Your Oracle DB Instance](USER_ConnectToOracleInstance.md#USER_ConnectToOracleInstance.Troubleshooting)
++ [Troubleshooting Connections to Your PostgreSQL Instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)
++ [Maximum MySQL and MariaDB Connections](#USER_ConnectToInstance.max_connections)
 
-From a Linux or Unix terminal, you can test the connection by typing the following \(replace `<DB-instance-endpoint>` with the endpoint and `<port>` with the port of your DB instance\):
+### Testing a Connection to a DB Instance<a name="CHAP_Troubleshooting.Connecting.Test"></a>
+
+You can test your connection to a DB instance using common Linux or Microsoft Windows tools\. 
+
+From a Linux or Unix terminal, you can test the connection by entering the following \(replace `DB-instance-endpoint` with the endpoint and `port` with the port of your DB instance\)\.
 
 ```
-nc -zv <DB-instance-endpoint> <port> 
+nc -zv DB-instance-endpoint port 
 ```
 
-For example, the following shows a sample command and the return value:
+For example, the following shows a sample command and the return value\.
 
 ```
-nc -zv postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299
+nc -zv postgresql1.c6c8mn7fake0.us-west-2.rds.amazonaws.com 8299
 
-  Connection to postgresql1.c6c8mn7tsdgv0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
+  Connection to postgresql1.c6c8mn7fake0.us-west-2.rds.amazonaws.com 8299 port [tcp/vvr-data] succeeded!
 ```
 
-Windows users can use Telnet to test the connection to a DB instance\. Note that Telnet actions are not supported other than for testing the connection\. If a connection is successful, the action returns no message\. If a connection is not successful, you receive an error message such as the following:
+Windows users can use Telnet to test the connection to a DB instance\. Telnet actions aren't supported other than for testing the connection\. If a connection is successful, the action returns no message\. If a connection isn't successful, you receive an error message such as the following\.
 
 ```
-C:\>telnet sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com 819
+C:\>telnet sg-postgresql1.c6c8mntfake0.us-west-2.rds.amazonaws.com 819
 
-  Connecting To sg-postgresql1.c6c8mntzhgv0.us-west-2.rds.amazonaws.com...Could not open
+  Connecting To sg-postgresql1.c6c8mntfake0.us-west-2.rds.amazonaws.com...Could not open
   connection to the host, on port 819: Connect failed
 ```
 
 If Telnet actions return success, your security group is properly configured\.
 
 **Note**  
-Amazon RDS does not accept internet control message protocol \(ICMP\) traffic, including ping\.
+Amazon RDS doesn't accept internet control message protocol \(ICMP\) traffic, including ping\.
 
 ### Troubleshooting Connection Authentication<a name="CHAP_Troubleshooting.Connecting.Authorization"></a>
 
@@ -69,52 +79,52 @@ For more information about modifying a DB instance, see [Modifying an Amazon RDS
 
 ## Amazon RDS Security Issues<a name="CHAP_Troubleshooting.Security"></a>
 
-To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create IAM users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
+To avoid security issues, never use your master AWS user name and password for a user account\. Best practice is to use your master AWS account to create AWS Identity and Access Management \(IAM\) users and assign those to DB user accounts\. You can also use your master account to create other user accounts, if necessary\.
 
 For more information on creating IAM users, see [Create an IAM User](CHAP_SettingUp.md#CHAP_SettingUp.IAM)\.
 
 ### Error Message "Failed to retrieve account attributes, certain console functions may be impaired\."<a name="CHAP_Troubleshooting.Security.AccountAttributes"></a>
 
-There are several reasons you would get this error; it could be because your account is missing permissions, or your account has not been properly set up\. If your account is new, you may not have waited for the account to be ready\. If this is an existing account, you could lack permissions in your access policies to perform certain actions such as creating a DB instance\. To fix the issue, your IAM administrator needs to provide the necessary roles to your account\. For more information, see [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\. 
+You can get this error for several reasons\. It might be because your account is missing permissions, or your account hasn't been properly set up\. If your account is new, you might not have waited for the account to be ready\. If this is an existing account, you might lack permissions in your access policies to perform certain actions such as creating a DB instance\. To fix the issue, your IAM administrator needs to provide the necessary roles to your account\. For more information, see [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
 ## Resetting the DB Instance Owner Role Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 
-You can reset the assigned permissions for your DB instance by resetting the master password\. For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance, access databases using the modified password for the `db_owner`, and restore privileges for the `db_owner` role that may have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation\.
+You can reset the assigned permissions for your DB instance by resetting the master password\. 
+
+For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance\. By changing the DB instance password, you can also access databases using the modified password for `db_owner`, and restore privileges for the `db_owner` role that might have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\.
 
 For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Amazon RDS DB Instance Outage or Reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
- A DB instance outage can occur when a DB instance is rebooted, when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you manually reboot your DB instance or when you change a DB instance setting that requires a reboot before it can take effect\.   
+A DB instance outage can occur when a DB instance is rebooted\. It can also occur when the DB instance is put into a state that prevents access to it, and when the database is restarted\. A reboot can occur when you either manually reboot your DB instance or change a DB instance setting that requires a reboot before it can take effect\.
 
-When you modify a setting for a DB instance, you can determine when the change is applied by using the **Apply Immediately** setting\.
+ A DB instance reboot occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately or it can occur during the DB instance's maintenance window\.
+
+ A DB instance reboot occurs immediately when one of the following occurs:
++ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0 and set **Apply Immediately** to `true`\. 
++ You change the DB instance class, and **Apply Immediately** is set to `true`\. 
++ You change the storage type from **Magnetic \(Standard\)** to **General Purpose \(SSD**\) or **Provisioned IOPS \(SSD\)**, or from **Provisioned IOPS \(SSD\)** or **General Purpose \(SSD\)** to **Magnetic \(Standard\)**\. 
+
+A DB instance reboot occurs during the maintenance window when one of the following occurs:
++ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0, and **Apply Immediately** is set to `false`\. 
++ You change the DB instance class, and **Apply Immediately** is set to `false`\.
+
+When you change a static parameter in a DB parameter group, the change doesn't take effect until the DB instance associated with the parameter group is rebooted\. The change requires a manual reboot\. The DB instance isn't automatically rebooted during the maintenance window\.
 
 To see a table that shows DB instance actions and the effect that setting the **Apply Immediately** value has, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
- A DB instance reboot only occurs when you change a setting that requires a reboot, or when you manually cause a reboot\. A reboot can occur immediately if you change a setting and request that the change take effect immediately or it can occur during the DB instance's maintenance window\. 
-
- A DB instance reboot occurs immediately when one of the following occurs: 
-+ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0 and set **Apply Immediately** to *true*\. 
-+ You change the DB instance class, and **Apply Immediately** is set to *true*\. 
-+ You change the storage type from **Magnetic \(Standard\)** to **General Purpose \(SSD**\) or **Provisioned IOPS \(SSD\)**, or from **Provisioned IOPS \(SSD\)** or **General Purpose \(SSD\)** to **Magnetic \(Standard\)**\. from standard to PIOPS\. 
-
-A DB instance reboot occurs during the maintenance window when one of the following occurs:
-+ You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0, and **Apply Immediately** is set to *false*\. 
-+ You change the DB instance class, and **Apply Immediately** is set to *false*\.
-
-When you change a static parameter in a DB parameter group, the change will not take effect until the DB instance associated with the parameter group is rebooted\. The change requires a manual reboot; the DB instance will not automatically be rebooted during the maintenance window\.
-
 ## Amazon RDS DB Parameter Changes Not Taking Effect<a name="CHAP_Troubleshooting.Parameters"></a>
 
-If you change a parameter in a DB parameter group but you don't see the changes take effect, you most likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately; when you change a static parameter, the change won't take effect until you reboot the DB instance associated with the parameter group\. 
+In some cases, you might change a parameter in a DB parameter group but don't see the changes take effect\. If so, you likely need to reboot the DB instance associated with the DB parameter group\. When you change a dynamic parameter, the change takes effect immediately\. When you change a static parameter, the change doesn't take effect until you reboot the DB instance associated with the parameter group\.
 
-You can reboot a DB instance using the RDS console or explicitly calling the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+You can reboot a DB instance using the RDS console or explicitly calling the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) API operation \(without failover, if the DB instance is in a Multi\-AZ deployment\)\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call\. An example of this might be calling `ModifyDBInstance` to change the DB instance class\. For more information, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
 ## Amazon RDS DB Instance Running Out of Storage<a name="CHAP_Troubleshooting.Storage"></a>
 
-If your DB instance runs out of storage space, it might no longer be available\. We highly recommend that you constantly monitor the `FreeStorageSpace` metric published in CloudWatch to ensure that your DB instance has enough free storage space\.
+If your DB instance runs out of storage space, it might no longer be available\. We highly recommend that you constantly monitor the `FreeStorageSpace` metric published in CloudWatch to make sure that your DB instance has enough free storage space\.
 
-If your database instance runs out of storage, its status will change to *storage\-full*\. For example, a call to the `DescribeDBInstances` action for a DB instance that has used up its storage will output the following:
+If your database instance runs out of storage, its status changes to `storage-full`\. For example, a call to the `DescribeDBInstances` API operation for a DB instance that has used up its storage outputs the following\.
 
 ```
 aws rds describe-db-instances --db-instance-identifier mydbinstance
@@ -126,7 +136,7 @@ us-east-1b  3
 	PARAMGRP  default.mysql5.6  in-sync
 ```
 
-To recover from this scenario, add more storage space to your instance using the `ModifyDBInstance` action or the following AWS CLI command:
+To recover from this scenario, add more storage space to your instance using the `ModifyDBInstance` API operation or the following AWS CLI command\.
 
 For Linux, OS X, or Unix:
 
@@ -154,7 +164,7 @@ us-east-1b  3  60
 	PARAMGRP  default.mysql5.6  in-sync
 ```
 
-Now, when you describe your DB instance, you will see that your DB instance will have *modifying* status, which indicates the storage is being scaled\.
+Now, when you describe your DB instance, you see that your DB instance has `modifying` status, which indicates the storage is being scaled\.
 
 ```
 1. aws rds describe-db-instances --db-instance-identifier mydbinstance 
@@ -168,7 +178,7 @@ modifying  mydbinstance.clla4j4jgyph.us-east-1.rds.amazonaws.com
 	PARAMGRP  default.mysql5.6  in-sync
 ```
 
-Once storage scaling is complete, your DB instance status will change to *available*\.
+After storage scaling is complete, your DB instance status changes to `available`\.
 
 ```
 aws rds describe-db-instances --db-instance-identifier mydbinstance 
@@ -182,7 +192,7 @@ us-east-1b  3
 	PARAMGRP  default.mysql5.6  in-sync
 ```
 
-Note that you can receive notifications when your storage space is exhausted using the `DescribeEvents` action\. For example, in this scenario, if you do a `DescribeEvents` call after these operations you will see the following output:
+You can receive notifications when your storage space is exhausted using the `DescribeEvents` operation\. For example, in this scenario, if you make a `DescribeEvents` call after these operations you see the following output\.
 
 ```
 aws rds describe-events --source-type db-instance --source-identifier mydbinstance 
@@ -196,64 +206,65 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 
 ## Amazon RDS Insufficient DB Instance Capacity<a name="CHAP_Troubleshooting.Capacity"></a>
 
-The `InsufficientDBInstanceCapacity` error is returned when you try to create or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
-+ The specific DB instance class is not available in the requested Availability Zone\. You can try one of the following to solve the problem:
+The `InsufficientDBInstanceCapacity` error can be returned when you try to create or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
++ The specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
   + Retry the request with a different DB instance class\.
   + Retry the request with a different Availability Zone\.
   + Retry the request without specifying an explicit Availability Zone\.
 
   For information about troubleshooting instance capacity issues for Amazon EC2, see [Insufficient Instance Capacity](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/troubleshooting-launch.html#troubleshooting-launch-capacity) in the *Amazon Elastic Compute Cloud User Guide*\.
-+ The DB instance is on the EC2\-Classic platform and therefore is not in a VPC\. Some DB instance classes require a VPC\. For example, if you are on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon EC2 instance types that are only available in a VPC, see [Instance Types Available in EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\. To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\.
++ The DB instance is on the EC2\-Classic platform and therefore isn't in a VPC\. Some DB instance classes require a VPC\. For example, if you're on the EC2\-Classic platform and try to increase capacity by switching to a DB instance class that requires a VPC, this error results\. For information about Amazon EC2 instance types that are only available in a VPC, see [Instance Types Available in EC2\-Classic](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-classic-platform.html#ec2-classic-instance-types) in the *Amazon Elastic Compute Cloud User Guide*\. To correct the problem, you can move the DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\.
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Amazon RDS MySQL and MariaDB Issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
-You can diagnose and correct problems with MySQL and MariaDB DB instances\.
+You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
-### Index Merge Optimization Returns Wrong Results<a name="CHAP_Troubleshooting.MySQL.IndexMergeOptimization"></a>
+**Topics**
++ [Maximum MySQL and MariaDB Connections](#USER_ConnectToInstance.max_connections)
++ [Diagnosing and Resolving Lag Between Read Replicas](#CHAP_Troubleshooting.MySQL.ReplicaLag)
++ [Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)
++ [Creating Triggers with Binary Logging Enabled Requires SUPER Privilege](#CHAP_Troubleshooting.MySQL.CreatingTriggers)
++ [Diagnosing and Resolving Point\-In\-Time Restore Failures](#CHAP_Troubleshooting.MySQL.PITR)
++ [Slave Down or Disabled Error](#CHAP_Troubleshooting.MySQL.SlaveDown)
++ [Read Replica Create Fails or Replication Breaks With Fatal Error 1236](#CHAP_Troubleshooting.MySQL.ReadReplicas)
 
-This issue applies only to MySQL DB instances\.
+### Maximum MySQL and MariaDB Connections<a name="USER_ConnectToInstance.max_connections"></a>
 
-Queries that use index merge optimization might return wrong results due to a bug in the MySQL query optimizer that was introduced in MySQL 5\.5\.37\. When you issue a query against a table with multiple indexes the optimizer scans ranges of rows based on the multiple indexes, but does not merge the results together correctly\. For more information on the query optimizer bug, go to [http://bugs\.mysql\.com/bug\.php?id=72745](http://bugs.mysql.com/bug.php?id=72745) and [http://bugs\.mysql\.com/bug\.php?id=68194](http://bugs.mysql.com/bug.php?id=68194) in the MySQL bug database\.
+The maximum number of connections allowed to an RDS MySQL or MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
 
-For example, consider a query on a table with two indexes where the search arguments reference the indexed columns\.
+The connection limit for a DB instance is set by default to the maximum for the DB instance class\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed\. Use the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Maximum Number of Database Connections](CHAP_Limits.md#RDS_Limits.MaxConnections) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+
+You can retrieve the maximum number of connections allowed for a MySQL or MariaDB DB instance by running the following query\.
 
 ```
-SELECT * FROM table1
-  WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
+SELECT @@max_connections;
 ```
 
-In this case, the search engine searches both indexes\. However, due to the bug, the merged results are incorrect\.
+You can retrieve the number of active connections to a MySQL or MariaDB DB instance by running the following query\.
 
-To resolve this issue, you can do one of the following: 
-+ Set the `optimizer_switch` parameter to `index_merge=off` in the DB parameter group for your MySQL DB instance\. For information on setting DB parameter group parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-+ Upgrade your MySQL DB instance to MySQL version 5\.6, 5\.7, or 8\.0\. For more information, see [Upgrading a MySQL DB Snapshot](USER_UpgradeDBSnapshot.MySQL.md)\. 
-+ If you cannot upgrade your instance or change the `optimizer_switch` parameter, you can work around the bug by explicitly identifying an index for the query, for example: 
-
-  ```
-  SELECT * FROM table1
-    USE INDEX covering_index
-    WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
-  ```
-
-For more information, go to [Index Merge Optimization](http://dev.mysql.com/doc/refman/5.6/en/index-merge-optimization.html)\.
+```
+SHOW STATUS WHERE `variable_name` = 'Threads_connected';
+```
 
 ### Diagnosing and Resolving Lag Between Read Replicas<a name="CHAP_Troubleshooting.MySQL.ReplicaLag"></a>
 
-After you create a MySQL or MariaDB Read Replica and the Read Replica is available, Amazon RDS first replicates the changes made to the source DB instance from the time the create Read Replica operation was initiated\. During this phase, the replication lag time for the Read Replica will be greater than 0\. You can monitor this lag time in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\.
+After you create a MySQL or MariaDB Read Replica and the replica is available, Amazon RDS first replicates the changes made to the source DB instance from the time the Read Replica create operation started\. During this phase, the replication lag time for the Read Replica is greater than 0\. You can monitor this lag time in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\.
 
-The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL or MariaDB `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html)\. When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)\. A `ReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value cannot be determined or is `NULL`\.
+The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the MySQL or MariaDB `SHOW SLAVE STATUS` command\. For more information, see [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html)\. When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, replication might not be active\. To troubleshoot a replication error, see [Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure](#CHAP_Troubleshooting.MySQL.RR)\. A `ReplicaLag` value of \-1 can also mean that the `Seconds_Behind_Master` value can't be determined or is `NULL`\.
 
 The `ReplicaLag` metric returns \-1 during a network outage or when a patch is applied during the maintenance window\. In this case, wait for network connectivity to be restored or for the maintenance window to end before you check the `ReplicaLag` metric again\.
 
-Because the MySQL and MariaDB read replication technology is asynchronous, you can expect occasional increases for the `BinLogDiskUsage` metric on the source DB instance and for the `ReplicaLag` metric on the Read Replica\. For example, a high volume of write operations to the source DB instance can occur in parallel, while write operations to the Read Replica are serialized using a single I/O thread, can lead to a lag between the source instance and Read Replica\. For more information about Read Replicas and MySQL, go to [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html) in the MySQL documentation\. For more information about Read Replicas and MariaDB, go to [Replication Overview](http://mariadb.com/kb/en/mariadb/replication-overview/) in the MariaDB documentation\.
+The MySQL and MariaDB read replication technology is asynchronous\. Thus, you can expect occasional increases for the `BinLogDiskUsage` metric on the source DB instance and for the `ReplicaLag` metric on the Read Replica\. For example, consider a situation where a high volume of write operations to the source DB instance occur in parallel\. At the same time, write operations to the Read Replica are serialized using a single I/O thread\. Such a situation can lead to a lag between the source instance and Read Replica\. 
+
+For more information about Read Replicas and MySQL, see [Replication Implementation Details](http://dev.mysql.com/doc/refman/5.5/en/replication-implementation-details.html) in the MySQL documentation\. For more information about Read Replicas and MariaDB, see [Replication Overview](http://mariadb.com/kb/en/mariadb/replication-overview/) in the MariaDB documentation\.
 
 You can reduce the lag between updates to a source DB instance and the subsequent updates to the Read Replica by doing the following:
 + Set the DB instance class of the Read Replica to have a storage size comparable to that of the source DB instance\.
-+ Ensure that parameter settings in the DB parameter groups used by the source DB instance and the Read Replica are compatible\. For more information and an example, see the discussion of the `max_allowed_packet` parameter in the next section\.
++ Make sure that parameter settings in the DB parameter groups used by the source DB instance and the Read Replica are compatible\. For more information and an example, see the discussion of the `max_allowed_packet` parameter in the next section\.
 + Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html)\.
-+ Warm the buffer pool on the Read Replica for InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\. If you have a small set of tables that are being updated often, and you are using the InnoDB or XtraDB table schema, then dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool, which can reduce replica lag\. The following shows an example\.
++ Warm the buffer pool on the Read Replica for InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\. For example, suppose that you have a small set of tables that are being updated often and you're using the InnoDB or XtraDB table schema\. In this case, dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool\. This approach can reduce replica lag\. The following shows an example\.
 
   For Linux, OS X, or Unix:
 
@@ -279,31 +290,31 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and Resolving a MySQL or MariaDB Read Replication Failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your Read Replicas and updates the **Replication State** field of the Read Replica instance to **Error** if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the Read Replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, review the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/5.7/en/server-error-reference.html)\. If a MariaDB error message is returned, review the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
+Amazon RDS monitors the replication status of your Read Replicas and updates the **Replication State** field of the Read Replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the Read Replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS Event Notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/5.7/en/server-error-reference.html)\. If a MariaDB error message is returned, check the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a Read Replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
 
-  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group that is used to specify the maximum size of data manipulation language \(DML\) that can be executed on the database\. If the `max_allowed_packet` parameter value for the source DB instance is smaller than the `max_allowed_packet` parameter value for the Read Replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and Read Replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
-+ Writing to tables on a Read Replica\. If you are creating indexes on a Read Replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you are writing to tables on the Read Replica, it can break replication\.
-+ Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\.
+  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. If the `max_allowed_packet` value for the source DB instance is smaller than the `max_allowed_packet` value for the Read Replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and Read Replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
++ Writing to tables on a Read Replica\. If you're creating indexes on a Read Replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you're writing to tables on the Read Replica, it can break replication\.
++ Using a nontransactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\.
 
   You can convert a MyISAM table to InnoDB with the following command:
 
   `alter table <schema>.<table_name> engine=innodb;`
-+ Using unsafe non\-deterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html)\. 
++ Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of Safe and Unsafe Statements in Binary Logging](http://dev.mysql.com/doc/refman/5.5/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\. 
 
 The following steps can help resolve your replication error: 
 + If you encounter a logical error and you can safely skip the error, follow the steps described in [Skipping the Current Replication Error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Your MySQL or MariaDB DB instance must be running a version that includes the `mysql_rds_skip_repl_error` procedure\. For more information, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
-+ If you encounter a binlog position issue, you can change the slave replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command in order to change the slave replay position\. For version information, see [mysql\.rds\_next\_master\_log](mysql_rds_next_master_log.md)\.
++ If you encounter a binary log \(binlog\) position issue, you can change the replica replay position with the `mysql_rds_next_master_log` command\. Your MySQL or MariaDB DB instance must be running a version that supports the `mysql_rds_next_master_log` command to change the replica replay position\. For version information, see [mysql\.rds\_next\_master\_log](mysql_rds_next_master_log.md)\.
 + If you encounter a temporary performance issue due to high DML load, you can set the `innodb_flush_log_at_trx_commit` parameter to 2 in the DB parameter group on the Read Replica\. Doing this can help the Read Replica catch up, though it temporarily reduces atomicity, consistency, isolation, and durability \(ACID\)\.
-+ You can delete the Read Replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old Read Replica\.
++ You can delete the Read Replica and create an instance using the same DB instance identifier\. If you do this, the endpoint remains the same as that of your old Read Replica\.
 
 If a replication error is fixed, the **Replication State** changes to **replicating**\. For more information, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
 ### Creating Triggers with Binary Logging Enabled Requires SUPER Privilege<a name="CHAP_Troubleshooting.MySQL.CreatingTriggers"></a>
 
-When trying to create triggers in an RDS MySQL or MariaDB DB instance, you might receive the following error:
+When trying to create triggers in an RDS MySQL or MariaDB DB instance, you might receive the following error\.
 
 ```
 "You do not have the SUPER privilege and binary logging is enabled" 
@@ -373,7 +384,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
        --apply-immediately
    ```
 
-1. In order for the changes to take effect, manually reboot the DB instance\.
+1. For the changes to take effect, manually reboot the DB instance\.
 
    ```
    aws rds reboot-db-instance mydbinstance 
@@ -383,7 +394,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
 
 **Restoring a DB Instance That Includes Temporary Tables**
 
-When attempting a Point\-In\-Time Restore \(PITR\) of your MySQL or MariaDB DB instance, you might encounter the following error:
+When attempting a point\-in\-time restore \(PITR\) of your MySQL or MariaDB DB instance, you might encounter the following error\.
 
 ```
 Database instance could not be restored because there has been incompatible database activity for restore
@@ -391,11 +402,11 @@ functionality. Common examples of incompatible activity include using temporary 
 or using MyISAM tables. In this case, use of Temporary table was detected.
 ```
 
-PITR relies on both backup snapshots and binlogs from MySQL or MariaDB to restore your DB instance to a particular time\. Temporary table information can be unreliable in binlogs and can cause a PITR failure\. If you use temporary tables in your MySQL or MariaDB DB instance, you can minimize the possibility of a PITR failure by performing more frequent backups\. A PITR failure is most probable in the time between a temporary table's creation and the next backup snapshot\.
+PITR relies on both backup snapshots and binary logs \(binlogs\) from MySQL or MariaDB to restore your DB instance to a particular time\. Temporary table information can be unreliable in binlogs and can cause a PITR failure\. If you use temporary tables in your MySQL or MariaDB DB instance, you can minimize the possibility of a PITR failure by performing more frequent backups\. A PITR failure is most probable in the time between a temporary table's creation and the next backup snapshot\.
 
 **Restoring a DB Instance That Includes In\-Memory Tables**
 
-You might encounter a problem when restoring a database that has in\-memory tables\. In\-memory tables are purged during a restart\. As a result, your in\-memory tables might be empty after a reboot\. We recommend that when you use in\-memory tables, you architect your solution to handle empty tables in the event of a restart\. If you are using in\-memory tables with replicated DB instances, you might need to recreate the Read Replicas after a restart if a Read Replica reboots and is unable to restore data from an empty in\-memory table\.
+You might encounter a problem when restoring a database that has in\-memory tables\. In\-memory tables are purged during a restart\. As a result, your in\-memory tables might be empty after a reboot\. We recommend that when you use in\-memory tables, you architect your solution to handle empty tables in the event of a restart\. If you're using in\-memory tables with replicated DB instances, you might need to recreate the Read Replicas after a restart\. This might be necessary if a Read Replica reboots and can't restore data from an empty in\-memory table\.
 
 For more information about backups and PITR, see [Working With Backups](USER_WorkingWithAutomatedBackups.md) and [Restoring a DB Instance to a Specified Time](USER_PIT.md)\.
 
@@ -403,13 +414,13 @@ For more information about backups and PITR, see [Working With Backups](USER_Wor
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
 
-This error message appears because replication has stopped and could not be restarted\.
+This error message appears because replication is stopped and can't be restarted\.
 
 If you need to skip a large number of errors, the replication lag can increase beyond the default retention period for binary log files\. In this case, you might encounter a fatal error due to binary log files being purged before they have been replayed on the replica\. This purge causes replication to stop, and you can no longer call the `mysql.rds_skip_repl_error` command to skip replication errors\. 
 
 You can mitigate this issue by increasing the number of hours that binary log files are retained on your replication master\. After you have increased the binlog retention time, you can restart replication and call the `mysql.rds_skip_repl_error` command as needed\.
 
-To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) procedure and specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours:
+To set the binlog retention time, use the [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md) procedure\. Specify a configuration parameter of 'binlog retention hours' along with the number of hours to retain binlog files on the DB cluster, up to 720 \(30 days\)\. The following example sets the retention period for binlog files to 48 hours\.
 
 ```
 CALL mysql.rds_set_configuration('binlog retention hours', 48);
@@ -418,49 +429,18 @@ CALL mysql.rds_set_configuration('binlog retention hours', 48);
 ### Read Replica Create Fails or Replication Breaks With Fatal Error 1236<a name="CHAP_Troubleshooting.MySQL.ReadReplicas"></a>
 
 After changing default parameter values for a MySQL or MariaDB DB instance, you might encounter one of the following problems:
-+ You are unable to create a Read Replica for the DB instance\.
++ You can't create a Read Replica for the DB instance\.
 + Replication fails with `fatal error 1236`\.
 
-Some default parameter values for MySQL or MariaDB DB instances help to ensure the database is ACID compliant and Read Replicas are crash\-safe by making sure that each commit is fully synchronized by writing the transaction to the binary log before it is committed\. Changing these parameters from their default values to improve performance can cause replication to fail when a transaction has not been written to the binary log\.
+Some default parameter values for MySQL and MariaDB DB instances help to make sure that the database is ACID compliant and Read Replicas are crash\-safe\. They do this by making sure that each commit is fully synchronized by writing the transaction to the binary log before it's committed\. Changing these parameters from their default values to improve performance can cause replication to fail when a transaction hasn't been written to the binary log\.
 
 To resolve this issue, set the following parameter values:
 + `sync-binlog = 1`
 + `innodb_support_xa = 1`
 + `innodb_flush_log_at_trx_commit = 1`
 
-## Amazon RDS Oracle GoldenGate Issues<a name="CHAP_Troubleshooting.Oracle.GoldenGate"></a>
+## Can't Set Backup Retention Period to 0<a name="CHAP_Troubleshooting.Backup.Retention"></a>
 
-### Retaining Logs for Sufficient Time<a name="CHAP_Troubleshooting.Oracle.GoldenGate.Logs"></a>
+There are several reasons why you might need to set the backup retention period to 0\. For example, you can disable automatic backups immediately by setting the retention period to 0\. 
 
-The source database must retain archived redo logs\. The duration for log retention is specified in hours\. The duration should exceed any potential downtime of the source instance or any potential period of communication or networking issues for the source instance, so that Oracle GoldenGate can recover logs from the source instance as needed\. The absolute minimum value required is one \(1\) hour of logs retained\. If you don't have log retention enabled, or if the retention value is too small, you will receive the following message:
-
-```
-2014-03-06 06:17:27  ERROR   OGG-00446  error 2 (No such file or directory)
-opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log
-for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
-```
-
-## Cannot Connect to Amazon RDS SQL Server DB Instance<a name="CHAP_Troubleshooting.SQLServer.Connect"></a>
-
-When you have problems connecting to a DB instance using SQL Server Management Studio, the following are some common causes: 
-+ The access rules enforced by your local firewall and the IP addresses you authorized to access your DB instance in the instance's security group are not in sync\. If you use your DB instance’s endpoint and port with Microsoft SQL Server Management Studio and cannot connect, the problem is most likely the inbound or outbound rules on your firewall\.
-
-  To grant access, you can create your own security group with specific inbound and outbound rules for your situation\. You can also modify an existing security group\. A common issue is incorrect IP address ranges in inbound rules\. Add or edit an inbound rule in the security group: for **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\.
-
-  For more information about security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
-+ The port you specified when you created the DB instance cannot be used to send or receive communications due to your local firewall restrictions\. In this case, check with your network administrator to determine if your network allows the specified port to be used for inbound and outbound communication\.
-+ Your DB instance is still being created and is not yet available\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\.
-
-If you can send and receive communications through the port you specified, check for the following SQL Server errors:
-+ **Could not open a connection to SQL Server \- Microsoft SQL Server, Error: 53** – You must include the port number when you specify the server name when using Microsoft SQL Server Management Studio\. For example, the server name for a DB instance \(including the port number\) might be: **sqlsvr\-pdz\.c6c8mdfntzgv0\.region\.rds\.amazonaws\.com,1433**\.
-+ **No connection could be made because the target machine actively refused it \- Microsoft SQL Server, Error: 10061** – In this case, you reached the DB instance but the connection was refused\. This error is often caused by an incorrect user name or password\.
-
-## Cannot Connect to Amazon RDS PostgreSQL DB Instance<a name="CHAP_Troubleshooting.PostgreSQL.Connect"></a>
-
-The most common problem when attempting to connect to a PostgreSQL DB instance is that the security group assigned to the DB instance has incorrect access rules\. By default, DB instances do not allow access; access is granted through a security group\. To grant access, you must create your own security group with specific ingress and egress rules for your situation\. For more information about creating a security group for your DB instance, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\. 
-
-The most common error is `could not connect to server: Connection timed out`\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through your local firewall\.
-
-## Cannot Set Backup Retention Period to 0<a name="CHAP_Troubleshooting.Backup.Retention"></a>
-
- There are several reasons why you may need to set the backup retention period to 0\. For example, you can disable automatic backups immediately by setting the retention period to 0\. If you set the value to 0 and receive a message saying that the retention period must be between 1 and 35, check to make sure you haven't setup a read replica for the instance\. Read replicas require backups for managing read replica logs, thus, you can't set the retention period of 0\. 
+In some cases, you might set the value to 0 and receive a message saying that the retention period must be between 1 and 35\. In these cases, check to make sure that you haven't set up a Read Replica for the instance\. Read replicas require backups for managing Read Replica logs, and therefore you can't set a retention period of 0\.

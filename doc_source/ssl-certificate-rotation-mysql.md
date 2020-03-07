@@ -5,8 +5,21 @@ As of September 19, 2019, Amazon RDS has published new Certificate Authority \(C
 This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB instances\. If they do, you can further check whether those applications require certificate verification to connect\. 
 
 **Note**  
-Some applications are configured to connect to MySQL DB instances only if they can successfully verify the certificate on the server\.   
-For such applications, you must update your client application trust stores to include the new CA certificates\. 
+Some applications are configured to connect to MySQL DB instances only if they can successfully verify the certificate on the server\. For such applications, you must update your client application trust stores to include the new CA certificates\.   
+You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the following behavior applies:  
+For newer MySQL minor versions, the connection falls back to not using SSL and still connects successfully\.  
+Because these later versions use the OpenSSL protocol, an expired server certificate doesn't prevent successful connections unless the `required` SSL mode is specified\.  
+The following MySQL minor versions use the OpenSSL protocol:  
+All MySQL 8\.0 versions
+MySQL 5\.7\.21 and later MySQL 5\.7 versions
+MySQL 5\.6\.39 and later MySQL 5\.6 versions
+MySQL 5\.5\.59 and later MySQL 5\.5 versions
+For older MySQL minor versions, an error is returned\.  
+Because these older versions use the yaSSL protocol, certificate verification is strictly enforced and the connection is unsuccessful\.  
+The following MySQL minor versions use the yaSSL protocol:  
+MySQL 5\.7\.19 and earlier MySQL 5\.7 versions
+MySQL 5\.6\.37 and earlier MySQL 5\.6 versions
+MySQL 5\.5\.57 and earlier MySQL 5\.5 versions
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 

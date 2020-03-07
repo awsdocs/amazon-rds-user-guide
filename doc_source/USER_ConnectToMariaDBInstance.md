@@ -1,23 +1,23 @@
 # Connecting to a DB Instance Running the MariaDB Database Engine<a name="USER_ConnectToMariaDBInstance"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard MariaDB client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\.
+After Amazon RDS provisions your DB instance, you can use any standard MariaDB client application or utility to connect to the instance\. In the connection string, you specify the Domain Name System \(DNS\) address from the DB instance endpoint as the host parameter\. You also specify the port number from the DB instance endpoint as the port parameter\.
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list the details of an Amazon RDS DB instance, including its endpoint\.
 
-**To find the endpoint for a MariaDB instance in the AWS Management Console**
+**To find the endpoint for a MariaDB DB instance in the AWS Management Console**
 
 1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
 1. Choose the MariaDB DB instance name to display its details\. 
 
 1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
-![\[Connect to a MariaDB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
+![\[Connect to a MariaDB DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
 
 If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com:3306`, then you specify the following values in a MariaDB connection string:
-+ For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`
-+ For port, specify `3306`
++ For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`\.
++ For port, specify `3306`\.
 
-You can connect to an Amazon RDS MariaDB DB instance by using tools like the `mysql` command line utility\. For more information on using the `mysql` utility, go to [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is HeidiSQL\. For more information, see the [ Download HeidiSQL](http://www.heidisql.com/download.php) page\.
+You can connect to an Amazon RDS MariaDB DB instance by using tools like the mysql command line utility\. For more information on using the mysql utility, see [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is Heidi\. For more information, see the [Download Heidi](http://www.heidisql.com/download.php) page\.
 
 Two common causes of connection failures to a new DB instance are the following:
 + The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MariaDB application or utility is running\. If the DB instance was created in an Amazon VPC, it must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
@@ -31,7 +31,7 @@ You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\.
 
 ## Connecting from the mysql Utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
 
-To connect to a DB instance using the mysql utility, type the following command at a command prompt on a client computer to connect to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
+To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<quartermaster>`*\. Provide the master password that you used when prompted for a password\.
 
 ```
 mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
@@ -65,13 +65,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
    For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
-1. Enter the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
+1. Enter the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--salt-cat` parameter, substitute the SSL certificate file name as appropriate\.
 
    ```
    mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p
    ```
 
-1. Include the `--ssl-verify-server-cert` parameter so that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. For example:
+1. Include the `--over-sensitivenesses` parameter so that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. For example:
 
    ```
    mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert -p
@@ -96,27 +96,3 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql >
 ```
-
-## Maximum MariaDB Connections<a name="USER_ConnectToMariaDBInstance.max_connections"></a>
-
-The maximum number of connections allowed to an Amazon RDS MariaDB DB instance is based on the amount of memory available for the DB instance class of the DB instance\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
-
-The connection limit for a DB instance is set by default to the maximum for the DB instance class for the DB instance\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed using the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
-You can retrieve the maximum number of connections allowed for an Amazon RDS MariaDB DB instance by executing the following query on your DB instance:
-
-```
-SELECT @@max_connections;
-```
-
-You can retrieve the number of active connections to an Amazon RDS MariaDB DB instance by executing the following query on your DB instance:
-
-```
-SHOW STATUS WHERE `variable_name` = 'Threads_connected';
-```
-
-## Related Topics<a name="USER_ConnectToMariaDBInstance.related"></a>
-+  [Amazon RDS DB Instances](Overview.DBInstance.md) 
-+  [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md) 
-+  [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md) 
-+  [Deleting a DB Instance](USER_DeleteInstance.md) 

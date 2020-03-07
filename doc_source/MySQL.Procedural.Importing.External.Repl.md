@@ -11,7 +11,7 @@ You can set up replication between an Amazon RDS MySQL or MariaDB DB instance an
 
 You can configure replication using the binary log file position of replicated transactions\. On Amazon RDS MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can also configure replication using global transaction identifiers \(GTIDs\)\.
 
-The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS database\.
+The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, make sure that you use the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS database\.
 
 To set the binary logging format for a MySQL or MariaDB database, update the `binlog_format` parameter\. If your DB instance uses the default DB instance parameter group, create a new DB parameter group to modify `binlog_format` settings\. We recommend that you use the default setting for `binlog_format`, which is `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your DB instance for the change to take effect\.
 
@@ -100,7 +100,7 @@ Make sure that there isn't a space between the `-p` option and the entered passw
 
    If these conditions are met, verify the IP address before adding it\.
 
-   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
+   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
    host <RDS_MySQL_DB_host_name>
@@ -120,7 +120,7 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>'; 
    ```
 
-1. Make the Amazon RDS DB instance the replica\. To do so, connect to the Amazon RDS DB instance as the master user and identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
+1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
 
    ```
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306, 'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
@@ -221,7 +221,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
 
    If these conditions are met, verify the IP address before adding it\.
 
-   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
+   You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
    host <RDS_MySQL_DB_host_name>
@@ -241,7 +241,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>'; 
    ```
 
-1. Make the Amazon RDS DB instance the replica\. To do so, connect to the Amazon RDS DB instance as the master user and identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md) command\. The following is an example\.
+1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md) command\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master_with_auto_position ('mymasterserver.mydomain.com', 3306, 'repl_user', '<password>', 0, 0);

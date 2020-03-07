@@ -1,20 +1,20 @@
 # Connecting to a DB Instance Running the Microsoft SQL Server Database Engine<a name="USER_ConnectToMicrosoftSQLServerInstance"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this topic you connect to your DB instance by using either Microsoft SQL Server Management Studio \(SSMS\) or SQL Workbench/J\. 
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this topic, you connect to your DB instance by using either Microsoft SQL Server Management Studio \(SSMS\) or SQL Workbench/J\. 
 
 For an example that walks you through the process of creating and connecting to a sample DB instance, see [Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance](CHAP_GettingStarted.CreatingConnecting.SQLServer.md)\. 
 
 ## Connecting to Your DB Instance with Microsoft SQL Server Management Studio<a name="USER_ConnectToMicrosoftSQLServerInstance.SSMS"></a>
 
-In this procedure you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\. To download a stand\-alone version of this utility, see [Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) in the Microsoft documentation\. 
+In this procedure, you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\. To download a standalone version of this utility, see [Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) in the Microsoft documentation\.
 
-**To connect to a DB Instance using SSMS**
+**To connect to a DB instance using SSMS**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region of your DB instance\. 
 
-1. Find the DNS name and port number for your DB instance: 
+1. Find the Domain Name System \(DNS\) name and port number for your DB instance: 
 
    1. Open the RDS console and choose **Databases** to display a list of your DB instances\. 
 
@@ -39,7 +39,7 @@ Change the colon between the DNS name and port number to a comma\.
       For example, your server name should look like the following\.
 
       ```
-      database-2.cg034hpkfake.us-east-1.rds.amazonaws.com,1433
+      database-2.cg034itsfake.us-east-1.rds.amazonaws.com,1433
       ```
 
    1. For **Authentication**, choose **SQL Server Authentication**\. 
@@ -50,7 +50,7 @@ Change the colon between the DNS name and port number to a comma\.
 
 1. Choose **Connect**\. 
 
-   After a few moments, SSMS connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting the Connection to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
+   After a few moments, SSMS connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting Connections to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
 1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(master, model, msdb, and tempdb\)\. To explore the system databases, do the following: 
 
@@ -88,7 +88,7 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
 
 1. Find the DNS name and port number for your DB instance: 
 
-   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+   1. Open the RDS console, then choose **Databases** to display a list of your DB instances\. 
 
    1. Choose the name of your SQL Server DB instance to display its details\.   
 ![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
@@ -115,7 +115,7 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
 1. Choose the save icon in the dialog toolbar, as shown following\.  
 ![\[Save the profile\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/save_example.png)
 
-1. Choose **OK**\. After a few moments, SQL Workbench/J connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting the Connection to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
+1. Choose **OK**\. After a few moments, SQL Workbench/J connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting Connections to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
 1. In the query pane, enter the following SQL query\.
 
@@ -134,20 +134,20 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
 
 ## Security Group Considerations<a name="USER_ConnectToMicrosoftSQLServerInstance.Security"></a>
 
-To connect to your DB instance, your DB instance must be associated with a security group that contains the IP addresses and network configuration that you use to access the DB instance\. You may have associated your DB instance with an appropriate security group when you created your DB instance\. If you assigned a default, non\-configured security group when you created your DB instance, your DB instance firewall prevents connections\. 
+To connect to your DB instance, your DB instance must be associated with a security group\. This security group contains the IP addresses and network configuration that you use to access the DB instance\. You might have associated your DB instance with an appropriate security group when you created your DB instance\. If you assigned a default, no\-configured security group when you created your DB instance, your DB instance firewall prevents connections\.
 
-If you need to create a new security group to enable access, the type of security group that you create will depend on what Amazon EC2 platform your DB instance is on\. To determine your platform, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the *EC2\-Classic* platform, you create a DB security group; if your DB instance is on the *VPC* platform, you create a VPC security group\. For instructions on creating a new security group, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\. 
+In some cases, you might need to create a new security group to enable access\. If so, the type of security group to create depends on what Amazon EC2 platform your DB instance is on\. To determine your platform, see [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md)\. In general, if your DB instance is on the EC2\-Classic platform, you create a DB security group\. If your DB instance is on the VPC platform, you create a VPC security group\.
 
-After you have created the new security group, you modify your DB instance to associate it with the security group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+For instructions on creating a new security group, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\. For a topic that walks you through the process of setting up rules for your VPC security group, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\.
+
+After you have created the new security group, modify your DB instance to associate it with the security group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 You can enhance security by using SSL to encrypt connections to your DB instance\. For more information, see [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)\. 
 
-## Troubleshooting the Connection to Your SQL Server DB Instance<a name="USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting"></a>
+## Troubleshooting Connections to Your SQL Server DB Instance<a name="USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting"></a>
 
-The following are issues you might encounter when you attempt to connect to your SQL Server DB instance\. 
+The following table shows error messages that you might encounter when you attempt to connect to your SQL Server DB instance\. For more information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
 
 ****  
 <a name="rds-sql-server-connection-troubleshooting-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToMicrosoftSQLServerInstance.html)
-
-## <a name="USER_ConnectToMicrosoftSQLServerInstance.related"></a>

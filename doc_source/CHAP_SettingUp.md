@@ -155,7 +155,7 @@ For example, suppose that you have an application that accesses a database on yo
 
    1. For **Port Range**, type the port value to use for your DB instance\.
 
-   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the instance\.
+   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the instance\. If you choose **My IP**, this allows access to the DB instance from the IP address detected in your browser\.
 
 1. Choose **Add another rule** if you need to add more IP addresses or different port ranges\.
 

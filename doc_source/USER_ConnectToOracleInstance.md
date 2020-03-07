@@ -142,7 +142,7 @@ You might consider using shared server processes when a high number of user sess
 
 For more information about dedicated and shared server processes, see [About Dedicated and Shared Server Processes](https://docs.oracle.com/database/121/ADMIN/manproc.htm#ADMIN11166) in the Oracle documentation\. For more information about configuring shared server processes on an Amazon RDS Oracle DB instance, see [How do I configure Amazon RDS for Oracle Database to work with shared servers?](https://aws.amazon.com/premiumsupport/knowledge-center/oracle-db-shared/) in the Knowledge Center\.
 
-## Troubleshooting the Connection to Your Oracle DB Instance<a name="USER_ConnectToOracleInstance.Troubleshooting"></a>
+## Troubleshooting Connections to Your Oracle DB Instance<a name="USER_ConnectToOracleInstance.Troubleshooting"></a>
 
 The following are issues you might encounter when you try to connect to your Oracle DB instance\. 
 

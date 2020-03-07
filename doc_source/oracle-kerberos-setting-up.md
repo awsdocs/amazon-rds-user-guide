@@ -2,7 +2,7 @@
 
 You use AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to set up Kerberos authentication for an Oracle DB instance\. To set up Kerberos authentication, complete the following steps:
 + [Step 1: Create a Directory Using the AWS Managed Microsoft AD](#oracle-kerberos-setting-up.create-directory)
-+ [Step 2: Create a Forest Trust](#oracle-kerberos-setting-up.create-forest-trust)
++ [Step 2: Create a Trust](#oracle-kerberos-setting-up.create-forest-trust)
 + [Step 3: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)
 + [Step 4: Create and Configure Users](#oracle-kerberos-setting-up.create-users)
 + [Step 5: Configure VPC Peering](#oracle-kerberos-setting-up.vpc-peering)
@@ -78,11 +78,11 @@ You use AWS Directory Service for Microsoft Active Directory, also called AWS Ma
 
 ![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
-## Step 2: Create a Forest Trust<a name="oracle-kerberos-setting-up.create-forest-trust"></a>
+## Step 2: Create a Trust<a name="oracle-kerberos-setting-up.create-forest-trust"></a>
 
 If you plan to use AWS Managed Microsoft AD only, move on to [Step 3: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)\.
 
-To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a two\-way forest trust\. For more information about setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
+To get Kerberos authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust or external trust\. The trust can be one\-way or two\-way\. For more information about setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
 ## Step 3: Create an IAM Role for Use by Amazon RDS<a name="oracle-kerberos-setting-up.CreateIAMRole"></a>
 

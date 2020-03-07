@@ -37,8 +37,9 @@ If your DB instance is running AGs, it doesn't require this step\.
 
 The following are some restrictions when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
 + Cross\-region Multi\-AZ is not currently supported\. 
-+ You can't configure the secondary to accept database read activity\. 
-+ Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\. 
++ You can't configure the secondary DB instance to accept database read activity\. 
++ Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\.
++ Multi\-AZ with Always On Availability Groups \(AGs\) doesn't support Kerberos authentication for the availability group listener\. This is because the listener has no Service Principal Name \(SPN\)\.
 + You can't rename a database on a SQL Server DB instance that is in a SQL Server Multi\-AZ deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ for the DB instance, then rename the database\. Finally, turn Multi\-AZ back on for the DB instance\. 
 + You can only restore Multi\-AZ DB instances that are backed up using the full recovery model\.
 

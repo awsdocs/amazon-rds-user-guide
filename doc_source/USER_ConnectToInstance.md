@@ -133,23 +133,3 @@ mysql>
 1. From **Stored Connection**, choose your connection\.
 
 1. Choose **OK**\.
-
-## Maximum MySQL connections<a name="USER_ConnectToInstance.max_connections"></a>
-
-The maximum number of connections allowed to an Amazon RDS MySQL DB instance is based on the amount of memory available for the DB instance class of the DB instance\. A DB instance class with more memory available will result in a larger amount of connections available\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
-
-The connection limit for a DB instance is set by default to the maximum for the DB instance class for the DB instance\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed using the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
-You can retrieve the maximum number of connections allowed for an Amazon RDS MySQL DB instance by executing the following query on your DB instance:
-
-```
-SELECT @@max_connections;
-```
-
-You can retrieve the number of active connections to an Amazon RDS MySQL DB instance by executing the following query on your DB instance:
-
-```
-SHOW STATUS WHERE `variable_name` = 'Threads_connected';
-```
-
-## <a name="USER_ConnectToInstance.related"></a>

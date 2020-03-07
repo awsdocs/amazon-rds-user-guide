@@ -43,7 +43,7 @@ You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance
 
 1. Choose **Save**\. 
 
-   If you have any problems connecting, see [Troubleshooting Connection Issues](#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
+   If you have any problems connecting, see [Troubleshooting Connections to Your PostgreSQL Instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
 
 1. To access a database in the pgAdmin browser, expand **Servers**, the DB instance, and **Databases**\. Choose the DB instance's database name\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect02.png)
@@ -86,7 +86,7 @@ For example, the following command connects to a database called `mypgdb` on a P
 psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=mypgdb 
 ```
 
-## Troubleshooting Connection Issues<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
+## Troubleshooting Connections to Your PostgreSQL Instance<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
 
 If you can't connect to the DB instance, the most common error is `Could not connect to server: Connection timed out.` If you receive this error, do the following:
 + Check that the host name used is the DB instance endpoint and that the port number used is correct\.
@@ -96,7 +96,7 @@ If you can't connect to the DB instance, the most common error is `Could not con
   To fix this failure, modify the DB instance to use a different port\. Also, make sure that the security group applied to the DB instance allows connections to the new port\.
 + Check whether the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\. For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\.
 
-  You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
+  You can add or edit an inbound rule in the security group\. For **Source**, choosing **My IP** allows access to the DB instance from the IP address detected in your browser\. For more information, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
   Alternatively, if the DB instance was created outside of a VPC, it must have a database security group that authorizes those connections\.
 

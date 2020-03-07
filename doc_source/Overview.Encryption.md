@@ -11,7 +11,7 @@ For encrypted and unencrypted DB instances, data that is in transit between the 
 + [Overview of Encrypting Amazon RDS Resources](#Overview.Encryption.Overview)
 + [Enabling Amazon RDS Encryption for a DB Instance](#Overview.Encryption.Enabling)
 + [Availability of Amazon RDS Encryption](#Overview.Encryption.Availability)
-+ [Limitations of Amazon RDS Encrypted DB Instance](#Overview.Encryption.Limitations)
++ [Limitations of Amazon RDS Encrypted DB Instances](#Overview.Encryption.Limitations)
 
 ## Overview of Encrypting Amazon RDS Resources<a name="Overview.Encryption.Overview"></a>
 
@@ -58,9 +58,9 @@ Amazon RDS encryption is available for most DB instance classes\. The following 
 **Note**  
 Encryption at rest is not available for DB instances running SQL Server Express Edition\.   
 
-## Limitations of Amazon RDS Encrypted DB Instance<a name="Overview.Encryption.Limitations"></a>
+## Limitations of Amazon RDS Encrypted DB Instances<a name="Overview.Encryption.Limitations"></a>
 
-The following limitations exist for Amazon RDS encrypted DB instance:
+The following limitations exist for Amazon RDS encrypted DB instances:
 + You can only enable encryption for an Amazon RDS DB instance when you create it, not after the DB instance is created\.
 
   However, because you can encrypt a copy of an unencrypted DB snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a Snapshot](USER_CopySnapshot.md)\.
@@ -70,4 +70,4 @@ The following limitations exist for Amazon RDS encrypted DB instance:
 + You can't restore an unencrypted backup or snapshot to an encrypted DB instance\.
 + To copy an encrypted snapshot from one AWS Region to another, you must specify the KMS key identifier of the destination AWS Region\. This is because KMS encryption keys are specific to the AWS Region that they are created in\.
 
-   The source snapshot remains encrypted throughout the copy process\. AWS Key Management Service uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\.
+  The source snapshot remains encrypted throughout the copy process\. AWS Key Management Service uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\.

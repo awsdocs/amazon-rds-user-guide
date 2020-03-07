@@ -1,6 +1,6 @@
 # Using Kerberos Authentication with Amazon RDS for PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos authentication to authenticate users when they connect to your Amazon RDS DB instance running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Kerberos authentication\. When users authenticate with a PostgreSQL DB instance joined to the trusting domain, authentication requests are forwarded to the directory that you create with AWS Directory Service\.
+You can use Kerberos authentication to authenticate users when they connect to your DB instance running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Kerberos authentication\. When users authenticate with a PostgreSQL DB instance joined to the trusting domain, authentication requests are forwarded to the directory that you create with AWS Directory Service\.
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 
@@ -20,7 +20,10 @@ Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the f
 + Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
++ Europe \(Stockholm\)
 + South America \(São Paulo\)
++ China \(Beijing\)
++ China \(Ningxia\)
 
 **Topics**
 + [Overview of Kerberos Authentication for PostgreSQL DB Instances](#postgresql-kerberos-overview)
@@ -34,17 +37,17 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
 
 1. Use AWS Managed Microsoft AD to create an AWS Managed Microsoft AD directory\. You can use the AWS Management Console, the AWS CLI, or the AWS Directory Service API to create the directory\.
 
-1. Create a role that provides Amazon RDS access to make calls to your AWS Managed Microsoft AD directory\. To do so create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. 
+1. Create a role that provides Amazon RDS access to make calls to your AWS Managed Microsoft AD directory\. To do so, create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. 
 
    For the IAM role to allow access, the AWS Security Token Service \(AWS STS\) endpoint must be activated in the correct AWS Region for your AWS account\. AWS STS endpoints are active by default in all AWS Regions, and you can use them without any further actions\. For more information, see [Activating and Deactivating AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-activate-deactivate) in the *IAM User Guide*\.
 
-1. Create and configure users in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users in your Microsoft Active Directory, see [Manage Users and Groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
+1. Create and configure users in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users in your Active Directory, see [Manage Users and Groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
 
-1. If you plan to locate the directory and the DB instance in different virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud VPC Peering*\.
+1. If you plan to locate the directory and the DB instance in different virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\.
 
 1. Create or modify a PostgreSQL DB instance either from the console, CLI, or RDS API using one of the following methods:
-   +  [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md) 
-   +  [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md) 
+   +   [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md) 
+   +   [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md) 
    +  [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md) 
    +  [Restoring a DB Instance to a Specified Time](USER_PIT.md) 
 

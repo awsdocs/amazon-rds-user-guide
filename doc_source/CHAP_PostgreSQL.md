@@ -256,7 +256,7 @@ PostgreSQL version 11\.1 contains several bug fixes for issues in release 11\. F
 + Partitioning – Partitioning improvements include support for hash partitioning, enabling creation of a default partition, and dynamic row movement to another partition based on the key column update\.
 + Performance – Performance improvements include parallelism while creating indexes, materialized views, hash joins, and sequential scans to make the operations perform better\.
 + Stored procedures – SQL stored procedures now added support embedded transactions\.
-+ Support for Just\-In\-Time \(JIT\) capability – RDS PostgreSQL 11 instances are created with JIT capability, speeding evaluation of expressions\. To enable this feature, set `jit` to ON\. 
++ Support for Just\-In\-Time \(JIT\) capability – RDS PostgreSQL 11 instances are created with JIT capability, speeding evaluation of expressions\. To enable JIT capability, set the `jit` parameter to 1 in the PostgreSQL parameter group for the database\. 
 + Segment size – The write\-ahead logging \(WAL\) segment size has been changed from 16 MB to 64 MB\.
 + Autovacuum improvements – To provide valuable logging, the parameter `rds.force_autovacuum_logging` is ON by default in conjunction with the `log_autovacuum_min_duration` parameter set to 10 seconds\. To increase autovacuum effectiveness, the values for the `autovacuum_max_workers` and `autovacuum_vacuum_cost_limit` parameters are computed based on host memory capacity to provide larger default values\.
 + Improved transaction timeout – The parameter `idle_in_transaction_session_timeout` is set to 12 hours\. Any session that has been idle more than 12 hours is terminated\.

@@ -5,6 +5,7 @@ Following, you can find a description of the resource quotas and naming constrai
 **Topics**
 + [Quotas in Amazon RDS](#RDS_Limits.Limits)
 + [Naming Constraints in Amazon RDS](#RDS_Limits.Constraints)
++ [Maximum Number of Database Connections](#RDS_Limits.MaxConnections)
 + [File Size Limits in Amazon RDS](#RDS_Limits.FileSize)
 
 ## Quotas in Amazon RDS<a name="RDS_Limits.Limits"></a>
@@ -56,6 +57,17 @@ The following table describes naming constraints in Amazon RDS\.
 |  Master password  |  The password for the master database user can include any printable ASCII character except `/`, `"`, `@`, or a space\. Master password length constraints differ for each database engine\. For more information, see the available settings when creating each DB instance\.  | 
 | DB parameter group name |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
 |  DB subnet group name  |  These names have these constraints: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)  | 
+
+## Maximum Number of Database Connections<a name="RDS_Limits.MaxConnections"></a>
+
+The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is set in the parameter group associated with the DB instance, except for Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Managment Studio \(SSMS\)\.
+
+**Note**  
+For Oracle, you set the maximum number of user processes and user and system sessions\.
+
+
+**Maximum Database Connections**  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 
 ## File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize"></a>
 

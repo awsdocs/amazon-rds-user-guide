@@ -3,20 +3,20 @@
 You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Microsoft AD\) to set up Kerberos authentication for a PostgreSQL DB instance\. To set up Kerberos authentication, take the following steps\. 
 
 **Topics**
-+ [Step 1: Create a Directory Using the AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)
++ [Step 1: Create a Directory Using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)
 + [Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)
 + [Step 3: Create and Configure Users](#postgresql-kerberos-setting-up.create-users)
 + [Step 4: Configure VPC Peering](#postgresql-kerberos-setting-up.vpc-peering)
-+ [Step 5: Create or Modify a PostgreSQL DB Instance](#postgresql-kerberos-setting-up.create-modify)
++ [Step 5: Create or Modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)
 + [Step 6: Create Kerberos Authentication PostgreSQL Logins](#postgresql-kerberos-setting-up.create-logins)
 + [Step 7: Configure a PostgreSQL Client](#postgresql-kerberos-setting-up.configure-client)
 
-## Step 1: Create a Directory Using the AWS Managed Microsoft AD<a name="postgresql-kerberos-setting-up.create-directory"></a>
+## Step 1: Create a Directory Using AWS Managed Microsoft AD<a name="postgresql-kerberos-setting-up.create-directory"></a>
 
-AWS Directory Service creates a fully managed Microsoft Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers for you\. The directory servers are created in different subnets in a VPC\. This redundancy helps make sure that your directory remains accessible even if a failure occurs\. 
+AWS Directory Service creates a fully managed Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and DNS servers for you\. The directory servers are created in different subnets in a VPC\. This redundancy helps make sure that your directory remains accessible even if a failure occurs\. 
 
  When you create an AWS Managed Microsoft AD directory, AWS Directory Service performs the following tasks on your behalf: 
-+  Sets up a Microsoft Active Directory within your VPC\. 
++  Sets up an Active Directory within your VPC\. 
 +  Creates a directory administrator account with the user name `Admin` and the specified password\. You use this account to manage your directory\. 
 **Important**  
 Make sure to save this password\. AWS Directory Service doesn't store this password, and it can't be retrieved or reset\.
@@ -86,7 +86,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ## Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For RDS to call AWS Directory Service for you, you must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+For Amazon RDS to call AWS Directory Service for you, you must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
 
 For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\.
 
@@ -138,9 +138,9 @@ To create users in an AWS Directory Service directory, you must be connected to 
 
 ## Step 4: Configure VPC Peering<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or Modify a PostgreSQL DB Instance](#postgresql-kerberos-setting-up.create-modify)\. If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. 
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or Modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)\. If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. 
 
-If the same AWS account owns both VPCs, follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC VPC Peering *guide\. Specifically, complete the following steps:
+If the same AWS account owns both VPCs, follow the instructions in [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\. Specifically, complete the following steps:
 
 1. Set up appropriate VPC routing rules to make sure that the network traffic can flow both ways\.
 
@@ -150,7 +150,7 @@ If the same AWS account owns both VPCs, follow the instructions in [What is VPC 
 
 If different AWS accounts own the VPCs, complete the following steps:
 
-1. Configure VPC peering by following the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) Specifically, complete the following steps:
+1. Configure VPC peering by following the instructions in [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) Specifically, complete the following steps:
 
    1. Set up appropriate VPC routing rules to make sure that the network traffic can flow both ways\.
 
@@ -162,23 +162,15 @@ If different AWS accounts own the VPCs, complete the following steps:
 
 1. While logged into the AWS Directory Service console using the account for the DB instance, make a note of the **Directory ID** value for the directory\.
 
-## Step 5: Create or Modify a PostgreSQL DB Instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
+## Step 5: Create or Modify a PostgreSQL DB instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
 
 Create or modify a PostgreSQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
-+ Create a new PostgreSQL DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
++   Create a new PostgreSQL DB instance using the console, the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\. For instructions, see [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\. 
++   Modify an existing PostgreSQL DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\. For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++   Restore a PostgreSQL DB instance from a DB snapshot using the console, the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\. For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
++   Restore a PostgreSQL DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\. For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 
 
-  For instructions, see [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\. 
-+ Modify an existing PostgreSQL DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
-
-  For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
-+ Restore a PostgreSQL DB instance from a DB snapshot using the console, the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\.
-
-  For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
-+ Restore a PostgreSQL DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\.
-
-  For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 
-
-Kerberos authentication is only supported for PostgreSQL DB instances in a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows egress within the directory's VPC so the DB instance can communicate with the directory\.
+Kerberos authentication is only supported for PostgreSQL DB instancesin a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows egress within the directory's VPC so the DB instance can communicate with the directory\.
 
 When you use the console to create a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
 
@@ -194,22 +186,8 @@ When you use the AWS CLI, the following parameters are required for the DB insta
 
 For example, the following CLI command modifies a DB instance to use a directory\.
 
-For Linux, OS X, or Unix:
-
 ```
-aws rds modify-db-instance \
-    --db-instance-identifier mydbinstance \
-    --domain d-Directory-ID \
-    --domain-iam-role-name role-name
-```
-
-For Windows:
-
-```
-aws rds modify-db-instance ^
-    --db-instance-identifier mydbinstance ^
-    --domain d-Directory-ID ^
-    --domain-iam-role-name role-name
+aws rds modify-db-instance --db-instance-identifier mydbinstance --domain d-Directory-ID --domain-iam-role-name role-name 
 ```
 
 **Important**  
@@ -219,7 +197,7 @@ If you modify a DB instance to enable Kerberos authentication, reboot the DB ins
 
 Next, use the RDS master user credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
 
-To allow a Microsoft Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\.
+To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\.
 
 ```
 CREATE USER "username@CORP.EXAMPLE.COM" WITH LOGIN; 

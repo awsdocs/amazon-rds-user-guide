@@ -190,7 +190,7 @@ Also, make sure you have SSMS installed\. If you can also connect to SQL Server 
 
    After a few moments, SSMS connects to your DB instance\. 
 
-   If you can't connect to your DB instance, see [Troubleshooting the Connection to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
+   If you can't connect to your DB instance, see [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
 ## Exploring Your Sample SQL Server DB Instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
 

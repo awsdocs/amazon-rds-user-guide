@@ -354,7 +354,7 @@ All of the considerations for performing replication within an AWS Region apply 
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-region Read Replica instances\. 
 + The Read Replica uses the default DB parameter group for the specified DB engine\.
 + The Read Replica uses the default security group\.
-+ For Oracle DB instances, when the source for a cross\-region Read Replica is deleted, the Read Replica is promoted\. For MariaDB, MySQL, and PostgreSQL DB instances, when the source for a cross\-region Read Replica is deleted, the replication status of the Read Replica is set to `terminated`\. However, the Read Replica isn't promoted\.
++ For MariaDB, MySQL, and Oracle DB instances, when the source for a cross\-region Read Replica is deleted, the Read Replica is promoted\. For PostgreSQL DB instances, when the source for a cross\-region Read Replica is deleted, the replication status of the Read Replica is set to `terminated`\. However, the Read Replica isn't promoted\.
 
 ### Cross\-Region Replication Costs<a name="USER_ReadRepl.XRgn.Costs"></a>
 

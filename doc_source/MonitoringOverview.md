@@ -64,7 +64,9 @@ Another important part of monitoring Amazon RDS involves manually monitoring tho
 
 ## Monitoring with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
-You can monitor DB instances using Amazon CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. These statistics are recorded for a period of two weeks, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon RDS metric data is automatically sent to CloudWatch in 1\-minute periods\. For more information about CloudWatch, see [What Are Amazon CloudWatch, Amazon CloudWatch Events, and Amazon CloudWatch Logs?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+You can monitor DB instances using Amazon CloudWatch, which collects and processes raw data from Amazon RDS into readable, near real\-time metrics\. By default, Amazon RDS metric data is automatically sent to CloudWatch in 1\-minute periods\. For more information about CloudWatch, see [ What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+
+Data points with a period of 60 seconds \(1 minute\) are available for 15 days, so that you can access historical information and gain a better perspective on how your web application or service is performing\. For more information about CloudWatch metrics retention, see [Metrics Retention](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#metrics-retention) in the *Amazon CloudWatch User Guide*\.
 
 **Note**  
 If you are using Amazon RDS Performance Insights, additional metrics are available\. For more information, see [Performance Insights Metrics Published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)\.

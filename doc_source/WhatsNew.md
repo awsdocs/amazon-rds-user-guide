@@ -6,6 +6,8 @@ The following table describes important changes in each release of the *Amazon R
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for MySQL 5\.6\.46](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL version 5\.6\.46\. For more information, see [MySQL on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)\. | February 28, 2020 | 
+| [Amazon RDS Performance Insights is available for Amazon RDS for MariaDB 10\.3](#WhatsNew) | Amazon RDS Performance Insights is now available for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions\. For more information, see [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)\. | February 26, 2020 | 
 | [Support for MySQL 5\.7\.28](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL version 5\.7\.28\. For more information, see [MySQL on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)\. | February 20, 2020 | 
 | [Support for MariaDB 10\.3\.20](#WhatsNew) | You can now create Amazon RDS DB instances running MariaDB version 10\.3\.20\. For more information, see [MariaDB on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)\. | February 20, 2020 | 
 | [Amazon RDS for Oracle January 2020 RU, RUR, and PSU](#WhatsNew) | Amazon RDS for Oracle has released database engine updates for January 2020\. For more information, see [Oracle Database Engine Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)\. | February 20, 2020 | 

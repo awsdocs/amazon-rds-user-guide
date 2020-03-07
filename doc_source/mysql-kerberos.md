@@ -241,6 +241,7 @@ To connect to MySQL with Kerberos authentication, take the following steps:
 ## Kerberos Authentication MySQL Limitations<a name="mysql-kerberos.limitations"></a>
 
  The following limitations apply to Kerberos authentication for MySQL: 
++  A Managed Active Directory that has been shared with you isn't supported\. 
 +  Kerberos authentication is supported for the following Amazon RDS for MySQL versions: 
   + Amazon RDS for MySQL version 8\.0\.13 and higher 8\.0 versions
   + Amazon RDS for MySQL version 5\.7\.24 and higher 5\.7 versions
@@ -252,4 +253,3 @@ To connect to MySQL with Kerberos authentication, take the following steps:
 +  To delete a DB instance with this feature enabled, first disable the feature\. To do this, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
 
    If you use the CLI or RDS API to delete a DB instance with this feature enabled, expect a delay\. 
-+  A Managed Active Directory that is cross\-account isn't supported\. 
