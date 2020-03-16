@@ -54,7 +54,7 @@ Amazon RDS supports the following major version upgrades\.
 
 To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\.
 
-In some cases, your current Oracle DB instance might be running on a DB instance class that isn't supported for the version to which you are upgrading\. In such a case, you must migrate the DB instance to a supported DB instance class before you upgrade\. For more information about the supported DB instance classes for each version and edition of Amazon RDS Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+In some cases, your current Oracle DB instance might be running on a DB instance class that isn't supported for the version to which you are upgrading\. In such a case, you must migrate the DB instance to a supported DB instance class before you upgrade\. For more information about the supported DB instance classes for each version and edition of Amazon RDS Oracle, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 Before you perform a major version upgrade, Oracle recommends that you gather optimizer statistics on the DB instance that you are upgrading\. Gathering optimizer statistics can reduce DB instance downtime during the upgrade\. To gather optimizer statistics, connect to the DB instance as the master user, and run the `DBMS_STATS.GATHER_DICTIONARY_STATS` procedure, as in the following example\.
 
@@ -151,7 +151,7 @@ Before you perform a major version upgrade on your DB instance, you should thoro
    + Implement any new tests needed to evaluate the impact of any compatibility issues that you identified in step 1\. 
    + Test all stored procedures, functions, and triggers\. 
    + Direct test versions of your applications to the upgraded DB instance\. Verify that the applications work correctly with the new version\. 
-   + Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. You might need to choose a larger instance class to support the new version in production\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
+   + Evaluate the storage used by the upgraded instance to determine if the upgrade requires additional storage\. You might need to choose a larger instance class to support the new version in production\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 
 1. If all tests pass, then perform the upgrade on your production DB instance\. We recommend that you don't allow write operations to the DB instance until you confirm that everything is working correctly\. 
 

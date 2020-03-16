@@ -142,7 +142,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 
  For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [ Tuning Queries ](#CHAP_BestPractices.TuningQueries)
 
- If your queries are tuned and an issue persists, consider upgrading your Amazon RDS [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) to one with more of the resource \(CPU, RAM, disk space, network bandwidth, I/O capacity\) that is related to the issue you are experiencing\. 
+ If your queries are tuned and an issue persists, consider upgrading your Amazon RDS [DB Instance Classes](Concepts.DBInstanceClass.md) to one with more of the resource \(CPU, RAM, disk space, network bandwidth, I/O capacity\) that is related to the issue you are experiencing\. 
 
 ### Tuning Queries<a name="CHAP_BestPractices.TuningQueries"></a>
 
@@ -279,7 +279,7 @@ When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS
 
 We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
 
-For information about backing up your DB instance, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
+For information about backing up your DB instance, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Amazon RDS Best Practices Presentation Video<a name="CHAP_BestPractices.Presentation"></a>
 

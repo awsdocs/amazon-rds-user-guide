@@ -1,9 +1,10 @@
-# Monitoring Amazon RDS<a name="CHAP_Monitoring"></a>
+# Monitoring an Amazon RDS DB Instance<a name="CHAP_Monitoring"></a>
 
 This section shows you how to monitor Amazon RDS\. 
 
 **Topics**
 + [Overview of Monitoring Amazon RDS](MonitoringOverview.md)
++ [DB Instance Status](Overview.DBInstance.Status.md)
 + [Enhanced Monitoring](USER_Monitoring.OS.md)
 + [Using Amazon RDS Performance Insights](USER_PerfInsights.md)
 + [Using Amazon RDS Recommendations](USER_Recommendations.md)

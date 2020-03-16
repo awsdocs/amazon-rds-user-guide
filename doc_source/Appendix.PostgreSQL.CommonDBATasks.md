@@ -70,7 +70,7 @@ order by name;
 
 For an explanation of the output values, see the [http://www.postgresql.org/docs/9.3/static/view-pg-settings.html](http://www.postgresql.org/docs/9.3/static/view-pg-settings.html) topic in the PostgreSQL documentation\.
 
- If you set the memory settings too large for `max_connections`, `shared_buffers`, or `effective_cache_size`, you will prevent the PostgreSQL instance from starting up\. Some parameters use units that you might not be familiar with; for example, `shared_buffers` sets the number of 8\-KB shared memory buffers used by the server\. 
+ If you set the memory settings too large for `max_connections` or `shared_buffers`, you will prevent the PostgreSQL instance from starting up\. Some parameters use units that you might not be familiar with; for example, `shared_buffers` sets the number of 8\-KB shared memory buffers used by the server\. 
 
 The following error is written to the *postgres\.log* file when the instance is attempting to start up, but incorrect parameter settings are preventing it from starting\.
 
@@ -1037,17 +1037,20 @@ Amazon RDS for PostgreSQL supports outbound network access on your DB instances 
 
 ### Enabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable"></a>
 
-To enable the DNS resolution in your customer VPC, you need to associate a custom DB parameter group to your RDS PostgreSQL instance, turn on the parameter **rds\.custom\_dns\_resolution** by setting it to 1, and restart the DB instance for the changes to take place\. 
+To enable DNS resolution in your customer VPC, associate a custom DB parameter group to your RDS PostgreSQL instance, turn on the `rds.custom_dns_resolution` parameter by setting it to 1, and then restart the DB instance for the changes to take place\. 
 
 ### Disabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable"></a>
 
-In order to disable the DNS resolution in your customer VPC, you need to turn off the parameter **rds\.custom\_dns\_resolution** of your custom DB parameter group by setting it to 0, then restart the DB instance for the changes to take place\. 
+To disable DNS resolution in your customer VPC, turn off the `rds.custom_dns_resolution` parameter of your custom DB parameter group by setting it to 0, then restart the DB instance for the changes to take place\.
 
 ### Setting Up a Custom DNS Server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS.Setup"></a>
 
-After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\. 
+After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\.
 
-To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance, do the following: 
+**Note**  
+If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with Private Hosted Zones](Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
+
+**To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance**
 
 1. From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 **Note**  

@@ -25,7 +25,7 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 |  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  Not supported  |  Not supported  |  Not supported  |  Not supported  |  Supported  | 
 
 **Note**  
-Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 ## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 

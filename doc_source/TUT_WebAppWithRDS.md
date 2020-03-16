@@ -17,7 +17,7 @@ Before you begin this tutorial, you must have a VPC with both public and private
 
 1. [Create a DB Subnet Group](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup)
 
-In the tutorial that follows, you specify the VPC, subnets, and security groups when you create the DB instance\. You also specify them when you create the EC2 instance that will host your web server\. The VPC, subnets, and security groups are required for the DB instance and the web server to communicate\. After the VPC is set up, this tutorial shows you how to you create the DB instance and install the web server\. You connect your web server to your RDS DB instance in the VPC using the DB instance endpoint\.
+In the tutorial that follows, you specify the VPC, subnets, and security groups when you create the DB instance\. You also specify them when you create the EC2 instance that will host your web server\. The VPC, subnets, and security groups are required for the DB instance and the web server to communicate\. After the VPC is set up, this tutorial shows you how to create the DB instance and install the web server\. You connect your web server to your RDS DB instance in the VPC using the DB instance endpoint\.
 
 In this tutorial, you perform the following procedures:
 + [Step 1: Create an RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)

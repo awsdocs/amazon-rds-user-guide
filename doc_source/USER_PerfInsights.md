@@ -5,13 +5,13 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance load so tha
 + Amazon Aurora with MySQL compatibility version 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)
 + Amazon Aurora with PostgreSQL compatibility
 + Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, and version 10\.2\.21 and higher 10\.2 versions
-+ Amazon RDS for MySQL version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions
++ Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions, version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions
 + Amazon RDS for Microsoft SQL Server \(all versions except SQL Server 2008\)
 + Amazon RDS for PostgreSQL version 10 and 11
 + Amazon RDS for Oracle \(all versions\)
 
 **Note**  
-Amazon RDS Performance Insights is not supported for MariaDB version 10\.0 or 10\.1, or for MySQL version 5\.5 or 8\.0\.  
+Amazon RDS Performance Insights is not supported for MariaDB version 10\.0 or 10\.1, or for MySQL version 5\.5\.  
 For Amazon RDS for MariaDB and MySQL, Performance Insights is not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  
 On Aurora MySQL, Performance Insights is not supported on db\.t2 or db\.t3 DB instance classes\.  
 Performance Insights is not supported for Aurora MySQL DB clusters enabled for parallel query\.

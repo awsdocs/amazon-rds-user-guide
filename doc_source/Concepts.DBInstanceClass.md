@@ -1,4 +1,4 @@
-# Choosing the DB Instance Class<a name="Concepts.DBInstanceClass"></a>
+# DB Instance Classes<a name="Concepts.DBInstanceClass"></a>
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
 

@@ -144,4 +144,4 @@ On the Amazon RDS Read Replica, call the `mysql.rds_start_replication` stored pr
 
 ## Related Topics<a name="MySQL.Procedural.Exporting.Related"></a>
 + [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)
-+ [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)
++ [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)

@@ -1,4 +1,4 @@
-# Backing Up and Restoring Amazon RDS DB Instances<a name="CHAP_CommonTasks.BackupRestore"></a>
+# Backing Up and Restoring an Amazon RDS DB Instance<a name="CHAP_CommonTasks.BackupRestore"></a>
 
 This section shows how to back up and restore a DB instance\. 
 

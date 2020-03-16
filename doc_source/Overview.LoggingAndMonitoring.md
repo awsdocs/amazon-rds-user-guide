@@ -32,4 +32,4 @@ Trusted Advisor has the following Amazon RDS\-related checks:
 + Amazon RDS Multi\-AZ
 For more information on these checks, see [Trusted Advisor Best Practices \(Checks\)](https://aws.amazon.com/premiumsupport/trustedadvisor/best-practices/)\.
 
-For more information about monitoring Amazon RDS, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\.
+For more information about monitoring Amazon RDS, see [Monitoring an Amazon RDS DB Instance](CHAP_Monitoring.md)\.

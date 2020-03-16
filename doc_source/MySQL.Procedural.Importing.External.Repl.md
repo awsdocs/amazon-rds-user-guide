@@ -25,7 +25,7 @@ Use the procedure in this topic to configure replication in all cases except whe
 Follow these guidelines when you set up an external replication master and a replica on Amazon RDS: 
 + Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 + Maintain the binary logs \(binlogs\) on your master instance until you have verified that they have been applied to the replica\. This maintenance makes sure that you can restore your master instance in the event of a failure\.
-+ Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups makes sure that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and point\-in\-time restore, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
++ Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups makes sure that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and point\-in\-time restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 **To configure binary log file replication with an external master instance**
 

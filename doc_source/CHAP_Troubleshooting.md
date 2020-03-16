@@ -232,7 +232,7 @@ You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
 ### Maximum MySQL and MariaDB Connections<a name="USER_ConnectToInstance.max_connections"></a>
 
-The maximum number of connections allowed to an RDS MySQL or MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+The maximum number of connections allowed to an RDS MySQL or MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 The connection limit for a DB instance is set by default to the maximum for the DB instance class\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed\. Use the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Maximum Number of Database Connections](CHAP_Limits.md#RDS_Limits.MaxConnections) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 

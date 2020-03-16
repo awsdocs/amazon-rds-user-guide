@@ -27,7 +27,7 @@ The basic building block of Amazon RDS is the DB instance\. A *DB instance* is a
 
  Each DB instance runs a *DB engine*\. Amazon RDS currently supports the MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server DB engines\. Each DB engine has its own supported features, and each version of a DB engine may include specific features\. Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\. 
 
- The computation and memory capacity of a DB instance is determined by its *DB instance class*\. You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
+ The computation and memory capacity of a DB instance is determined by its *DB instance class*\. You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 
 **Note**  
 For pricing information on DB instance classes, see the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
@@ -59,7 +59,7 @@ For more information about security groups, see [Security in Amazon RDS](UsingWi
 
 ## Monitoring an Amazon RDS DB Instance<a name="Welcome.Monitoring"></a>
 
- There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring Amazon RDS](CHAP_Monitoring.md)\. 
+ There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring an Amazon RDS DB Instance](CHAP_Monitoring.md)\. 
 
 ## How to Work with Amazon RDS<a name="Welcome.Interfaces"></a>
 

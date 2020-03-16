@@ -32,7 +32,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 | Task Area | Relevant Documentation | 
 | --- | --- | 
 |  **Setting up Amazon RDS for first\-time use** There are prerequisites you must complete before you create your DB instance\. For example, DB instances are created by default with a firewall that prevents access to it\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.   |  [Setting Up for Amazon RDS](CHAP_SettingUp.md)  | 
-|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)  | 
+|  **Understanding Amazon RDS DB instances** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Classes](Concepts.DBInstanceClass.md) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage) [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)  | 
 |  **Finding supported PostgreSQL versions** Amazon RDS supports several versions of PostgreSQL\.   |  [Supported PostgreSQL Database Versions](#PostgreSQL.Concepts.General.DBVersions)  | 
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
@@ -42,7 +42,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
 |  **Connecting to your PostgreSQL DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as pgadmin III\.   |  [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md) [Using SSL with a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.SSL)  | 
-|  **Backing up and restoring your DB instance** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)  | 
+|  **Backing up and restoring your DB instance** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)  | 
 |  **Monitoring the activity and performance of your DB instance** You can monitor a PostgreSQL DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
 |  **Upgrading the PostgreSQL database version** You can do both major and minor version upgrades for your PostgreSQL DB instance\.   |  [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching) [Major Version Upgrades for PostgreSQL](USER_UpgradeDBInstance.PostgreSQL.md#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)  | 
 |  **Working with log files** You can access the log files for your PostgreSQL DB instance\.   |  [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)  | 
@@ -55,7 +55,7 @@ When you create a DB instance in Amazon RDS, you know that the PostgreSQL versio
 DB instances in the Database Preview Environment are similar to DB instances in a production environment\. However, keep in mind several important factors:
 + All DB instances are deleted 60 days after you create them, along with any backups and snapshots\.
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
++ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 + You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS Database Preview Environment Forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
 + You can't copy a snapshot of a DB instance to a production environment\.
@@ -679,7 +679,7 @@ PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support even
 
 PostgreSQL version 9\.5\.2 contains several fixes to issues found in previous versions\. For more information on the features in 9\.5\.2, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
-PostgreSQL version 9\.5\.2 doesn't support the db\.m1 or db\.m2 DB instance classes\. If you need to upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2 to one of these instance classes, you need to scale compute\. To do that, you need a comparable db\.t2 or db\.m3 DB instance class before you can upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2\. For more information on DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+PostgreSQL version 9\.5\.2 doesn't support the db\.m1 or db\.m2 DB instance classes\. If you need to upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2 to one of these instance classes, you need to scale compute\. To do that, you need a comparable db\.t2 or db\.m3 DB instance class before you can upgrade a DB instance running PostgreSQL version 9\.4 to version 9\.5\.2\. For more information on DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 Native PostgreSQL version 9\.5\.2 introduced the command ALTER USER WITH BYPASSRLS\. 
 
@@ -990,64 +990,64 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | --- | --- | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
-| [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [btree\_gist](http://www.postgresql.org/docs/10/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
-| [citext ](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [cube ](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ bloom](https://www.postgresql.org/docs/11/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/11/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [btree\_gist](http://www.postgresql.org/docs/11/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [citext ](http://www.postgresql.org/docs/11/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [cube ](http://www.postgresql.org/docs/11/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dblink](http://www.postgresql.org/docs/11/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/11/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/11/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/11/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/11/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/11/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/11/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/11/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/11/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
-| [isn ](http://www.postgresql.org/docs/10/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [isn ](http://www.postgresql.org/docs/11/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | libprotobuf | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
-| [ltree ](http://www.postgresql.org/docs/10/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ltree ](http://www.postgresql.org/docs/11/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [orafce](https://github.com/orafce/orafce) | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 
 | [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 1\.3\.0 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/10/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/10/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/11/static/pgbuffercache.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/11/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 1\.3\.2 | 1\.3\.4 | 1\.3\.4 | 1\.3\.4 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/11/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
 | pg\_similarity | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/11/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 | pg\_transport | N/A | N/A | N/A | 1\.0 | 1\.0 | 
-| [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pgcrypto](http://www.postgresql.org/docs/10/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [pg\_trgm](http://www.postgresql.org/docs/11/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
+| [ pg\_visibility](https://www.postgresql.org/docs/11/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgcrypto](http://www.postgresql.org/docs/11/static/pgcrypto.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | pageinspect | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
 | pglogical | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 2\.2\.1 | 
-| [pgrowlocks](http://www.postgresql.org/docs/10/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [pgrowlocks](http://www.postgresql.org/docs/11/static/pgrowlocks.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [pgrouting](http://docs.pgrouting.org/2.3/en/doc/index.html) | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 2\.6\.1 | 
-| [pgstattuple](http://www.postgresql.org/docs/10/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [pgstattuple](http://www.postgresql.org/docs/11/static/pgstattuple.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 |  [pgTAP](https://pgtap.org/)  | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.1\.0 | 
 | plcoffee | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
 | plls | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
-| [ plperl](https://www.postgresql.org/docs/10/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ plpgsql](https://www.postgresql.org/docs/10/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plperl](https://www.postgresql.org/docs/11/static/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ plpgsql](https://www.postgresql.org/docs/11/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plprofiler](https://github.com/bigsql/plprofiler) | N/A | N/A | N/A | N/A | 4\.1 | 
-| [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ pltcl](https://www.postgresql.org/docs/11/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
 | [PostGIS](http://www.postgis.net/) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 
 | [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 2\.5\.0 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/11/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 
 |  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 
-| [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [sslinfo](http://www.postgresql.org/docs/11/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/11/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-|  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/11/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/11/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+|  [unaccent ](http://www.postgresql.org/docs/11/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/11/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 
 The following modules are supported as shown for PostgreSQL version 11\.x\.
 

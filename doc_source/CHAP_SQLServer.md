@@ -90,7 +90,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 
 ## DB Instance Class Support for Microsoft SQL Server<a name="SQLServer.Concepts.General.InstanceClasses"></a>
 
-The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
+The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 
 The following list of DB instance classes supported for Microsoft SQL Server is provided here for your convenience\. For the most current list, see the RDS console: [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\. 
 

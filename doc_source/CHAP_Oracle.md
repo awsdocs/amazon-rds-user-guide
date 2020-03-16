@@ -36,7 +36,7 @@ The following are the common management tasks you perform with an Amazon RDS Ora
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option Groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
 |  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL Plus\.   |  [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)  | 
-|  **Backup and Restore** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)  | 
+|  **Backup and Restore** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)  | 
 |  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
 |  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md)  | 
 
@@ -95,7 +95,7 @@ For the BYOL model, you can migrate from any Standard Edition \(SE, SE1, or SE2\
 
 ## DB Instance Class Support for Oracle<a name="Oracle.Concepts.InstanceClasses"></a>
 
-The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\. 
+The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 
 The following are the DB instance classes supported for Oracle\. 
 
@@ -112,7 +112,7 @@ The following are the DB instance classes supported for Oracle\.
 |  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 
 **Note**  
-We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
+We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [DB Instance Classes](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
 ### Deprecated db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
 

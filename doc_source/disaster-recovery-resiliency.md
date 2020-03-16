@@ -14,7 +14,7 @@ Amazon RDS creates automated backups of your DB instance during the backup windo
 
 You can create a DB instance by restoring from this DB snapshot as a disaster recovery solution if the source DB instance fails\.
 
-For more information, see [Backing Up and Restoring Amazon RDS DB Instances](CHAP_CommonTasks.BackupRestore.md)\.
+For more information, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 ## Replication<a name="disaster-recovery-resiliency.replication"></a>
 

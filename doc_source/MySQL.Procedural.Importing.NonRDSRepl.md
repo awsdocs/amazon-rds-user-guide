@@ -213,7 +213,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
 ****
 
-1. Determine which DB instance class and what amount of storage space is required to support the expected workload for this Amazon RDS DB instance\. As part of this process, decide what is sufficient space and processing capacity for your data load procedures, and also what is required to handle the production workload\. You can estimate this based on the size and resources of the source MySQL or MariaDB database\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+1. Determine which DB instance class and what amount of storage space is required to support the expected workload for this Amazon RDS DB instance\. As part of this process, decide what is sufficient space and processing capacity for your data load procedures, and also what is required to handle the production workload\. You can estimate this based on the size and resources of the source MySQL or MariaDB database\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 1. Determine if Amazon RDS provisioned input/output operations per second \(IOPS\) is required to support the workloads\. Provisioned IOPS storage delivers fast throughput for online transaction processing \(OLTP\) workloads, which are I/O intensive\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
 

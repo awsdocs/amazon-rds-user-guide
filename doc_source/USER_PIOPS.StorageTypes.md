@@ -219,7 +219,7 @@ You can modify the settings for a DB instance that uses Provisioned IOPS SSD sto
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage IOPS for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
 
 **Note**  
 You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.

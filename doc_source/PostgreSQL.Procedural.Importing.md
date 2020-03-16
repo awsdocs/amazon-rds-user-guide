@@ -739,7 +739,7 @@ PostgreSQL transportable databases are available in RDS for PostgreSQL versions 
 ### Limitations for Using PostgreSQL Transportable Databases<a name="PostgreSQL.TransportableDB.Limits"></a>
 
 Transportable databases have the following limitations:
-+ **Read Replicas ** – You can't transportable databases on read replicas or parent instances of read replicas\.
++ **Read Replicas ** – You can't use transportable databases on read replicas or parent instances of read replicas\.
 + **Unsupported Column Types** – You can't use the `reg` data types in any database tables that you plan to transport with this method\. These types depend on system catalog object IDs \(OIDs\), which often change during transport\.
 + **Tablespaces** – All source database objects must be in the default `pg_default` tablespace\. 
 + **Compatibility** – Both the source and destination DB instances must run the same major version of PostgreSQL\. 

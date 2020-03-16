@@ -27,7 +27,7 @@ The following are some limitations to using Management Agent:
 + Host metrics and the process list are not guaranteed to reflect the actual system state\. 
 + Autodiscovery is not supported\. You must manually add database targets\. 
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
-+ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 + Because operating system access on the alert log isn't granted to the user running the `OEM_AGENT` on the Amazon RDS host, it isn't possible to collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
 
 ## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>

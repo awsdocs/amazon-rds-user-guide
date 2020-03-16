@@ -780,7 +780,8 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
  You can monitor RDS Proxy using Amazon CloudWatch\. CloudWatch collects and processes raw data from the proxies into readable, near real\-time metrics\. To find these metrics in the CloudWatch console, choose **Metrics**, then choose **RDS**, and choose **Per\-Proxy Metrics**\. 
 
 **Note**  
- RDS publishes these metrics for each underlying EC2 instance associated with the proxy\. A single proxy might be served by more than one EC2 instance\. Use CloudWatch statistics to aggregate the values for a proxy across all the associated instances\. 
+ RDS publishes these metrics for each underlying EC2 instance associated with the proxy\. A single proxy might be served by more than one EC2 instance\. Use CloudWatch statistics to aggregate the values for a proxy across all the associated instances\.   
+ Some of these metrics might not be visible until after the first successful connection by a proxy\. 
 
  All RDS Proxy metrics are in the group `proxy`, with a dimension of `ProxyName`\. 
 
@@ -789,18 +790,19 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
 | --- | --- | --- | 
 |   `ClientConnectionsReceived`   |   1 minute and above   |   The number of client connection requests received\. The most useful statistic for this metric is Sum\.   | 
 |  ClientConnectionsSetupSucceeded  |   1 minute and above   |   The number of client connections successfully established with any authentication mechanism with or without TLS\. The most useful statistic for this metric is Sum\.   | 
-|  ClientConnectionsSetupFailedAuth  |   1 minute and above   |   The number of client connection attempts which failed due to bad authentication or TLS misconfiguration\. The most useful statistic for this metric is Sum\.   | 
+|  ClientConnectionsSetupFailedAuth  |   1 minute and above   |   The number of client connection attempts that failed due to bad authentication or TLS misconfiguration\. The most useful statistic for this metric is Sum\.   | 
 |  ClientConnectionsClosed  |   1 minute and above   |   The number of client connections closed\. The most useful statistic for this metric is Sum\.   | 
 |  ClientConnections  |   1 minute   |   The current number of client connections\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
 |  QueryRequests  |   1 minute and above   |   The number of queries received\. Note: Multi\-statement query is counted as one query\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnectionRequests  |   1 minute and above   |   The number of requests to create a database connection\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnectionsSetupSucceeded  |   1 minute and above   |   The number of database connections successfully established with or without TLS\. The most useful statistic for this metric is Sum\.   | 
-|  DatabaseConnectionsSetupFailed  |   1 minute and above   |   The number of database connection requests which failed\. The most useful statistic for this metric is Sum\.   | 
+|  DatabaseConnectionsSetupFailed  |   1 minute and above   |   The number of database connection requests that failed\. The most useful statistic for this metric is Sum\.   | 
 |  MaxDatabaseConnectionsAllowed  |   1 minute   |   The maximum number of database connections allowed\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnections  |   1 minute   |   The current number of database connections\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnectionsCurrentlyBorrowed  |   1 minute   |   The current number of database connections in the borrow state\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnectionsCurrentlySessionPinned  |   1 minute   |   The current number of database connections currently pinned due to session state\-altering operations in client requests\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
 |  DatabaseConnectionsCurrentlyInTransaction  |   1 minute   |   The current number of database connections in transaction\. This is reported every minute\. The most useful statistic for this metric is Sum\.   | 
+|  TargetGroupWriterAvailableDuration  |   1 minute   |   The number of seconds over a minute duration for which the target group had a writer\. This is reported every minute\. The most useful statistic for this metric is Average\.   | 
 
 ## Limitations for RDS Proxy<a name="rds-proxy.limitations"></a>
 
@@ -819,7 +821,7 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
 +  You can't use RDS Proxy with Aurora multi\-master clusters\. 
 +  You can use RDS Proxy with Amazon RDS MySQL and Aurora MySQL\. You can't use it with self\-managed MySQL databases in EC2 instances\. 
 +  Currently, all proxies listen on port 3306\. 
-+  Your RDS Proxy must be in the same VPC as the database\. Although the database can be publicly accessible, the proxy can't be\. 
++  Your RDS Proxy must be in the same VPC as the database\. You can't use a VPC with dedicated tenancy\. Although the database can be publicly accessible, the proxy can't be\. 
 +  Currently, proxies don't track any changes to the associated RDS or Aurora DB instances\. Those changes include operations such as host replacements, instance renames, port changes, and scaling instances up or down\. Proxies also don't track changes to Aurora clusters such as adding or removing DB instances\. 
 +  Not all logic is implemented to pin sessions to database connections based on SQL statements and functions\. For the most current pinning behavior, see [Pinning](#rds-proxy-pinning)\. 
 +  Proxies don't support compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 

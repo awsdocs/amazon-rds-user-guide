@@ -63,7 +63,7 @@ Amazon RDS on AWS Outposts supports the following DB instance classes:
   + db\.r5\.xlarge
   + db\.r5\.large
 
-Only General Purpose SSD storage is supported for RDS on Outposts DB instances\. For more information about DB instance classes, see [Choosing the DB Instance Class](Concepts.DBInstanceClass.md)\.
+Only General Purpose SSD storage is supported for RDS on Outposts DB instances\. For more information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
 
 ## Creating DB Instances for Amazon RDS on AWS Outposts<a name="rds-on-outposts.creating"></a>
 

@@ -1,6 +1,6 @@
 # Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.PostgreSQL"></a>
 
-The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called west2\-postgres1, with a db\.m1\.small DB instance class, 10 GiB of storage, and automated backups enabled with a retention period of one day\.
+The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 GiB of storage\.
 
 **Important**  
 Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
@@ -132,7 +132,7 @@ In this example, you connect to a PostgreSQL DB instance using pgAdmin\.
 
 1. Choose **Add Server** from the **File** menu\.
 
-1. In the **New Server Registration** dialog box, enter the DB instance endpoint \(for example, `mypostgresql.c6c8dntfzzhgv0.us-west-2.rds.amazonaws.com`\) in the **Host** box\. Don't include the colon or port number as shown on the Amazon RDS console \(`mypostgresql.c6c8dntfzzhgv0.us-west-2.rds.amazonaws.com:5432`\)\. 
+1. In the **New Server Registration** dialog box, enter the DB instance endpoint \(for example, `database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com`\) in the **Host** box\. Don't include the colon or port number as shown on the Amazon RDS console \(`database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com:5432`\)\. 
 
    Enter the port you assigned to the DB instance for **Port**\. Enter the user name and user password that you entered when you created the DB instance for **Username** and **Password**\.   
 ![\[Postgres connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect01.png)
@@ -154,13 +154,13 @@ If your client computer has PostgreSQL installed, you can use a local instance o
 The following format is used to connect to a PostgreSQL DB instance on Amazon RDS\.
 
 ```
-psql --host=<DB instance endpoint> --port=<port> --username=<master user name> --password --dbname=<database name> 
+psql --host=DB_instance_endpoint --port=port --username=master_user_name --password --dbname=database_name
 ```
 
  For example, the following command connects to a database called `mypgdb` on a PostgreSQL DB instance called `mypostgresql` using fictitious credentials\.
 
 ```
-psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=mypgdb 
+psql --host=database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=postgres
 ```
 
 ### Troubleshooting Connection Issues<a name="CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting"></a>
