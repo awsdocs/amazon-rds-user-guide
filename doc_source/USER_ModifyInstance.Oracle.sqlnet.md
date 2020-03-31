@@ -53,7 +53,7 @@ To view the all of the sqlnet\.ora parameters for an Oracle DB instance, call th
 
 **Example**  
 The following code lists all of the sqlnet\.ora parameters for `mydbinstance`\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds download-db-log-file-portion \

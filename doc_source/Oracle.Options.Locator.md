@@ -39,7 +39,7 @@ The following is the general process for adding the `LOCATOR` option to a DB ins
 If Oracle Java Virtual Machine \(JVM\) is *not* installed on the DB instance, there is a brief outage while the `LOCATOR` option is added\. There is no outage if Oracle Java Virtual Machine \(JVM\) is already installed on the DB instance\. After you add the option, you don't need to restart your DB instance\. As soon as the option group is active, Oracle OLAP is available\. 
 
 **Note**  
-During this outage, password verification functions are disabled briefly\. You can also can expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
+During this outage, password verification functions are disabled briefly\. You can also expect to see events related to password verification functions during the outage\. Password verification functions are enabled again before the Oracle DB instance is available\.
 
 **To add the `LOCATOR` option to a DB instance**
 
@@ -54,7 +54,7 @@ During this outage, password verification functions are disabled briefly\. You c
 1. Add the **LOCATOR** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Using Oracle Locator<a name="Oracle.Options.Locator.Using"></a>

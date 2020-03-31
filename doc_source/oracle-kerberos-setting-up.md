@@ -86,9 +86,37 @@ To get Kerberos authentication using an on\-premises or self\-hosted Microsoft A
 
 ## Step 3: Create an IAM Role for Use by Amazon RDS<a name="oracle-kerberos-setting-up.CreateIAMRole"></a>
 
- Create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to AWS Directory Service for you\. 
+For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to the AWS Directory Service\.
 
- The following IAM policy, `AmazonRDSDirectoryServiceAccess`, provides access to AWS Directory Service\. 
+When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+
+For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
+
+**Note**  
+The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for RDS for Oracle\.
+
+Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+          "directoryservice.rds.amazonaws.com",
+          "rds.amazonaws.com"
+        ]
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+The role must also have the following IAM role policy\.
 
 ```
 {
@@ -96,19 +124,17 @@ To get Kerberos authentication using an on\-premises or self\-hosted Microsoft A
   "Statement": [
     {
       "Action": [
-            "ds:DescribeDirectories",
-            "ds:AuthorizeApplication",
-            "ds:UnauthorizeApplication",
-            "ds:GetAuthorizedApplicationDetails"
-        ],
-      "Effect": "Allow",
-      "Resource": "*"
+        "ds:DescribeDirectories",
+        "ds:AuthorizeApplication",
+        "ds:UnauthorizeApplication",
+        "ds:GetAuthorizedApplicationDetails"
+      ],
+    "Effect": "Allow",
+    "Resource": "*"
     }
   ]
 }
 ```
-
- Create an IAM role using this policy\. For more information about creating IAM roles, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\. For the service, choose **RDS**, and for the use case, choose **RDS \- Directory Service**\. 
 
 ## Step 4: Create and Configure Users<a name="oracle-kerberos-setting-up.create-users"></a>
 
@@ -147,7 +173,7 @@ If different AWS accounts own the VPCs, complete the following steps:
 Create or modify an Oracle DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 + Create a new Oracle DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
-  For instructions, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+  For instructions, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 + Modify an existing Oracle DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 
   For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
@@ -174,7 +200,7 @@ When you use the AWS CLI, the following parameters are required for the DB insta
 
 For example, the following CLI command modifies a DB instance to use a directory\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \

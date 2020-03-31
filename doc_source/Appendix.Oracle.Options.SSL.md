@@ -77,7 +77,7 @@ You can enable the FIPS setting with the following Oracle database versions and 
 + 12\.2\.0\.1: All versions, all editions including Standard Edition Two
 + 12\.1\.0\.2: Version 2 and later, all editions including Standard Edition Two
 
-Clients must use the cipher suite that is FIPS compliant\. When establishing a connection, the client and Oracle DB instance negotiate which cipher suite to use when transmitting messages back and forth\. The following table shows the FIPS compliant SSL cipher suites for each TLS version\. 
+Clients must use the cipher suite that is FIPS\-compliant\. When establishing a connection, the client and Oracle DB instance negotiate which cipher suite to use when transmitting messages back and forth\. The following table shows the FIPS\-compliant SSL cipher suites for each TLS version\. 
 
 
 ****  
@@ -109,7 +109,7 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
    For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
@@ -131,7 +131,7 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
    For example, the following AWS CLI command adds the `SSL` option to an option group named `ora-option-group`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds add-option-to-option-group --option-group-name ora-option-group \
@@ -147,7 +147,7 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
    For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 

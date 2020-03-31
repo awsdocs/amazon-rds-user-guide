@@ -45,7 +45,7 @@ Bugs fixed:
 ## Version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1<a name="Appendix.Oracle.RU-RUR.19.0.0.0.ru-2019-07.rur-2019-07.r1"></a>
 
 Version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 adds support for the following: 
-+ Patch 29834717: Database Release Update : 19\.4\.0\.0\.190716
++ Patch 29834717: Database Release Update: 19\.4\.0\.0\.190716
 + Patch 29774421: OJVM RELEASE UPDATE: 19\.4\.0\.0\.190716
 + Patch 28852325: RDBMS \- DSTV33 UPDATE \- TZDATA2018G
 + Patch 28852334: DSTV33 UPDATE \- TZDATA2018G \- NEED OJVM FIX

@@ -48,7 +48,7 @@ To get an ARN from the AWS CLI for a particular RDS resource, you use the `descr
 For example, the following AWS CLI command gets the ARN for a DB instance\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-db-instances \

@@ -198,8 +198,8 @@ The following are DB engine considerations for DB instance classes:
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
-| db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
-| db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.12xlarge | No | No | No | Yes | No | 
+| db\.z1d\.6xlarge | No | No | No | Yes | No | 
 | db\.z1d\.3xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.xlarge | No | Yes | No | Yes | No | 
@@ -352,7 +352,7 @@ You can use AWS CloudTrail to monitor and audit changes to the process configura
 ### Setting the CPU Cores and Threads per CPU Core for a DB Instance Class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
 
 You can configure the number of CPU cores and threads per core for the DB instance class when you perform the following operations:
-+ [Creating an Amazon RDS DB Instance](CHAP_CommonTasks.Create.md)
++ [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)
 + [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)
 + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
 + [Restoring a DB Instance to a Specified Time](USER_PIT.md)
@@ -411,7 +411,7 @@ The following are examples that configure the processor:
 
 **Example**  
 The following example modifies `mydbinstance` by setting the number of CPU cores to 4\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -430,7 +430,7 @@ aws rds modify-db-instance ^
 
 **Example**  
 The following example modifies `mydbinstance` by setting the number of CPU cores to `4` and disabling multiple threads per core\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -510,7 +510,7 @@ In addition, you can run the following commands for DB instance class processor 
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default processor values for it\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -529,7 +529,7 @@ aws rds modify-db-instance ^
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default number of CPU cores for it\. The threads per core setting isn't changed\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -548,7 +548,7 @@ aws rds modify-db-instance ^
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default number of threads per core for it\. The number of CPU cores setting isn't changed\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

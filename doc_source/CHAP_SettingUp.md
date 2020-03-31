@@ -133,7 +133,7 @@ Before you can connect to your DB instance, you must add rules to security group
 **Note**  
 If your legacy DB instance was created before March 2013 and isn't in a VPC, it might not have associated security groups\. If your DB instance was created after this date, it might be inside a default VPC\. 
 
-For example, suppose that you have an application that accesses a database on your DB instance in a VPC\. In this case, you must add a custom TCP rule that specifies the port range and IP addresses that your application uses to access the database\. If you have an application on an Amazon EC2 instance, you can use the VPC or EC2 security group that you set up for the Amazon EC2 instance\.
+For example, suppose that you have an application that accesses a database on your DB instance in a VPC\. In this case, you must add a custom TCP rule that specifies the port range and IP addresses that your application uses to access the database\. If you have an application on an Amazon EC2 instance, you can use the security group that you set up for the Amazon EC2 instance\.
 
 **To create a VPC security group**
 

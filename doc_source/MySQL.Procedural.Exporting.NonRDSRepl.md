@@ -26,7 +26,7 @@ Follow the directions in the MySQL documentation to prepare the instance of MySQ
 
 Configure an egress rule for the external instance to operate as a Read Replica during the export\. The egress rule will allow the MySQL Read Replica to connect to the MySQL DB instance during replication\. Specify an egress rule that allows TCP connections to the port and IP address of the source Amazon RDS MySQL DB instance\.
 
-If the Read Replica is running in an Amazon EC2 instance in an Amazon VPC, specify the egress rules in a VPC security group\. If the Read Replica is running in an Amazon EC2 instance that is not in a VPC, specify the egress rule in an Amazon EC2 security group\. If the Read Replica is installed on\-premises, specify the egress rule in a firewall\.
+If the Read Replica is running in an Amazon EC2 instance in an Amazon VPC, specify the egress rules in a VPC security group\. If the Read Replica is running in an Amazon EC2 instance that is not in a VPC, specify the egress rule in an EC2\-Classic security group\. If the Read Replica is installed on\-premises, specify the egress rule in a firewall\.
 
 If the Read Replica is running in a VPC, configure VPC ACL rules in addition to the security group egress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
 + ACL ingress rule allowing TCP traffic to ports 1024\-65535 from the IP address of the source MySQL DB instance\.
@@ -70,7 +70,7 @@ Use the `mysqldump` utility to create a snapshot, which copies the data from Ama
 
 The following example shows how to run `mysqldump` on a client, and then pipe the dump into the `mysql` client utility, which loads the data into the external MySQL instance\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 mysqldump -h RDS instance endpoint \
@@ -102,7 +102,7 @@ mysqldump -h RDS instance endpoint ^
 
 The following example shows how to run `mysqldump` on a client and write the dump to a file\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 mysqldump -h RDS instance endpoint \

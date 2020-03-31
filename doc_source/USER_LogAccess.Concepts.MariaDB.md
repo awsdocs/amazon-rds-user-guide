@@ -99,7 +99,7 @@ Other options might be required depending on the AWS CLI command you run\.
 
 **Example**  
 The following example modifies an existing MariaDB DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `audit`, `error`, `general`, and `slowquery`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-instance \
@@ -116,7 +116,7 @@ For Windows:
 
 **Example**  
 The following command creates a MariaDB DB instance and publishes log files to CloudWatch Logs\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `audit`, `error`, `general`, and `slowquery`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-instance \
@@ -222,7 +222,7 @@ For more information about mysqlbinlog options, go to [mysqlbinlog Options](http
 
  The following is an example: 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 mysqlbinlog \

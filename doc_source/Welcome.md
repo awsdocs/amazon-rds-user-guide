@@ -50,11 +50,6 @@ You can run your DB instance in several Availability Zones, an option called a M
 
 A *security group *controls the access to a DB instance\. It does so by allowing access to IP address ranges or Amazon EC2 instances that you specify\. 
 
-Amazon RDS uses DB security groups, VPC security groups, and EC2 security groups\. In simple terms, you can look at it like this:
-+ A DB security group controls access to a DB instance that is not in a VPC\.
-+ A VPC security group controls access to a DB instance inside a VPC\.
-+ An EC2 security group controls access to an EC2 instance and can be used with a DB instance\.
-
 For more information about security groups, see [Security in Amazon RDS](UsingWithRDS.md)\.
 
 ## Monitoring an Amazon RDS DB Instance<a name="Welcome.Monitoring"></a>

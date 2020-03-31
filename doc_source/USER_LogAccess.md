@@ -78,7 +78,7 @@ To download a database log file, use the AWS CLI command [https://docs.aws.amazo
 The following example shows how to download the entire contents of a log file called *log/ERROR\.4* and store it in a local file called *errorlog\.txt*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds download-db-log-file-portion \

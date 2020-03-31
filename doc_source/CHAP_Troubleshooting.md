@@ -138,7 +138,7 @@ us-east-1b  3
 
 To recover from this scenario, add more storage space to your instance using the `ModifyDBInstance` API operation or the following AWS CLI command\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \
@@ -266,7 +266,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 + Disable the query cache\. For tables that are modified often, using the query cache can increase replica lag because the cache is locked and refreshed often\. If this is the case, you might see less replica lag if you disable the query cache\. You can disable the query cache by setting the `query_cache_type parameter` to 0 in the DB parameter group for the DB instance\. For more information on the query cache, see [Query Cache Configuration](http://dev.mysql.com/doc/refman/5.6/en/query-cache-configuration.html)\.
 + Warm the buffer pool on the Read Replica for InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\. For example, suppose that you have a small set of tables that are being updated often and you're using the InnoDB or XtraDB table schema\. In this case, dump those tables on the Read Replica\. Doing this causes the database engine to scan through the rows of those tables from the disk and then cache them in the buffer pool\. This approach can reduce replica lag\. The following shows an example\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   PROMPT> mysqldump \
@@ -328,7 +328,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
 
 1. Create a new parameter group\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds create-db-parameter-group \
@@ -348,7 +348,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
 
 1. Modify the DB parameter group to allow triggers\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds modify-db-parameter-group \
@@ -366,7 +366,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
 
 1. Modify your DB instance to use the new DB parameter group\.
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds modify-db-instance \

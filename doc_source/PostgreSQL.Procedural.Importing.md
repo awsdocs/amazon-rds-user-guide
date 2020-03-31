@@ -80,7 +80,7 @@ You can use the same connection you used to execute the pg\_dump command to conn
 
 The following example uses *psql* and a dump file named mydb2dump\.sql to create a database called mydb2 on a PostgreSQL DB instance called mypginstance:
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 psql \
@@ -123,7 +123,7 @@ target-db=> \copy source-table from 'source-table.csv' with DELIMITER ',';
 
 You can also run the following command from your client computer command prompt\. This example uses *source\-table* as the source table name, *source\-table\.csv* as the \.csv file, and *target\-db* as the target database:
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 $psql target-db \
@@ -248,7 +248,7 @@ To do this, create an IAM policy that provides access to the Amazon S3 bucket\. 
 After you create the policy, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-policy \
@@ -301,7 +301,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
    The following example shows using the AWS CLI command to create a role named `rds-s3-import-role`\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-role \
@@ -344,7 +344,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
    The following AWS CLI command attaches the policy created earlier to the role named `rds-s3-import-role` Replace `your-policy-arn` with the policy ARN that you noted in an earlier step\.   
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam attach-role-policy \
@@ -382,7 +382,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
 + Use the following command to add the role to the PostgreSQL DB instance named `my-db-instance`\. Replace *`your-role-arn`* with the role ARN that you noted in a previous step\. Use `s3Import` for the value of the `--feature-name` option\.   
 **Example**  
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds add-role-to-db-instance \

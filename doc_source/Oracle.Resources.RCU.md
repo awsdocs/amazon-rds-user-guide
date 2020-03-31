@@ -60,7 +60,7 @@ You can run the RCU in silent mode by using the command\-line parameter `-silent
 
 **Example**  
 The following example creates and populates schemas for the SOA Infrastructure component \(and its dependencies\) in a single step\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 export ORACLE_HOME=/u01/app/oracle/product/12.2.1.0/fmw
@@ -103,7 +103,7 @@ You can run the RCU in silent mode by using the command\-line parameter `-silent
 
 **Example**  
 The following example creates schema scripts for the SOA Infrastructure component \(and its dependencies\)\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 export ORACLE_HOME=/u01/app/oracle/product/12.2.1.0/fmw
@@ -131,7 +131,7 @@ ${ORACLE_HOME}/oracle_common/bin/rcu \
 ```
 Now you can edit the generated script, connect to your Oracle DB instance, and run the script\. The generated script is named `script_systemLoad.sql`\. For information about connecting to your Oracle DB instance, see [Connecting to Your Sample Oracle DB Instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md#CHAP_GettingStarted.Connecting.Oracle)\.   
 The following example populates the schemas for the SOA Infrastructure component \(and its dependencies\)\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 export JAVA_HOME=/usr/java/jdk1.8.0_65
@@ -164,7 +164,7 @@ To use the RCU graphical user interface, you can run RCU in interactive mode\. T
 
 **Example**  
 The following example starts RCU in interactive mode and pre\-populates the connection information\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 export ORACLE_HOME=/u01/app/oracle/product/12.2.1.0/fmw
@@ -186,5 +186,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w50aac31d107c15c19"></a>
+## Related Topics<a name="w50aac31d103c15c19"></a>
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

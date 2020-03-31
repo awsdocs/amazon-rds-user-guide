@@ -322,7 +322,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy "{\"Id\":\"$PREFIX-
  To create a DB instance, use the AWS CLI command [ `create-db-proxy`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-proxy.html)\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-proxy \
@@ -822,7 +822,6 @@ $ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-ident
 +  You can use RDS Proxy with Amazon RDS MySQL and Aurora MySQL\. You can't use it with self\-managed MySQL databases in EC2 instances\. 
 +  Currently, all proxies listen on port 3306\. 
 +  Your RDS Proxy must be in the same VPC as the database\. You can't use a VPC with dedicated tenancy\. Although the database can be publicly accessible, the proxy can't be\. 
-+  Currently, proxies don't track any changes to the associated RDS or Aurora DB instances\. Those changes include operations such as host replacements, instance renames, port changes, and scaling instances up or down\. Proxies also don't track changes to Aurora clusters such as adding or removing DB instances\. 
 +  Not all logic is implemented to pin sessions to database connections based on SQL statements and functions\. For the most current pinning behavior, see [Pinning](#rds-proxy-pinning)\. 
 +  Proxies don't support compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
 

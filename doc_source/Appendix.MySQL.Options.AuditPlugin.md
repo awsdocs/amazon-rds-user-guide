@@ -43,7 +43,7 @@ Adding the MariaDB Audit Plugin to a DB instance might cause an outage\. We reco
 1. Add the **MARIADB\_AUDIT\_PLUGIN** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Audit Plugin Option Settings](#Appendix.MySQL.Options.AuditPlugin.Options)\. 
 
 1. Apply the option group to a new or existing DB instance\. 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Viewing and Downloading the MariaDB Audit Plugin Log<a name="Appendix.MySQL.Options.AuditPlugin.Log"></a>

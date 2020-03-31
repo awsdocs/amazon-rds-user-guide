@@ -90,7 +90,7 @@ The following screenshot shows two counter metrics charts in the AWS Management 
 
 The following example shows how to gather the same data that the AWS Management Console uses to generate the two counter metric charts\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws pi get-resource-metrics \
@@ -131,7 +131,7 @@ You can also make a command easier to read by specifying a file for the `--metri
 
 Run the following command to use the file\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws pi get-resource-metrics \
@@ -236,7 +236,7 @@ The following example is the same query that the AWS Management Console uses to 
 
 Run the following command\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws pi get-resource-metrics \
@@ -341,7 +341,7 @@ The command in this example is the similar to the command in [Retrieving the DB 
 
 The following example uses `db.sql_tokenized`\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws pi get-resource-metrics \
@@ -449,7 +449,7 @@ The corresponding API query in this example is similar to the command in [Retrie
 ]
 ```
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws pi get-resource-metrics \

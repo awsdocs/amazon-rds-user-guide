@@ -110,7 +110,7 @@ You can repeat this to add corresponding bucket permission statements to your po
    The following AWS CLI command creates an IAM policy named `rds-s3-integration-policy` with these options\. It grants access to a bucket named `your-s3-bucket-arn`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-policy \
@@ -167,7 +167,7 @@ You can repeat this to add corresponding bucket permission statements to your po
    The following AWS CLI command creates the `rds-s3-integration-role` for this purpose\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-role \
@@ -214,7 +214,7 @@ You can repeat this to add corresponding bucket permission statements to your po
    The following AWS CLI command attaches the policy to the role named `rds-s3-integration-role`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam attach-role-policy \
@@ -237,7 +237,7 @@ You can repeat this to add corresponding bucket permission statements to your po
    The following AWS CLI command adds the role to an Oracle DB instance named `mydbinstance`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds add-role-to-db-instance \
@@ -275,7 +275,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
    For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
@@ -292,7 +292,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
    For example, the following AWS CLI command adds the `S3_INTEGRATION` option to an option group named **myoptiongroup**\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds add-option-to-option-group \
@@ -310,7 +310,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
    For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 

@@ -25,12 +25,7 @@ For an Amazon RDS encrypted DB instance, all logs, backups, and snapshots are en
 
 ## Enabling Amazon RDS Encryption for a DB Instance<a name="Overview.Encryption.Enabling"></a>
 
-To enable encryption for a new DB instance, choose **Enable encryption** on the Amazon RDS console\. For information on creating a DB instance, see one of the following topics:
-+ [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)
-+ [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
-+ [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)
-+ [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
-+ [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)
+To enable encryption for a new DB instance, choose **Enable encryption** on the Amazon RDS console\. For information on creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 If you use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an encrypted DB instance, set the `--storage-encrypted` parameter to true\. If you use the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API operation, set the `StorageEncrypted` parameter to true\.
 

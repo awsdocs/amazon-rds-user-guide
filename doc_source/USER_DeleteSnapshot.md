@@ -38,7 +38,7 @@ The following options are used to delete a DB snapshot\.
 
 **Example**  
 The following code deletes the `mydbsnapshot` DB snapshot\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds delete-db-snapshot \

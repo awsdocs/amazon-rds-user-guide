@@ -49,7 +49,7 @@ Follow these guidelines when you set up an external replication master and a rep
 
 1. Copy the database from the external instance to the Amazon RDS DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    mysqldump --databases <database_name> \
@@ -170,7 +170,7 @@ GTID\-based replication is only supported on Amazon RDS MySQL version 5\.7\.23 a
 
 1. Copy the database from the external instance to the Amazon RDS DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    mysqldump --databases <database_name> \

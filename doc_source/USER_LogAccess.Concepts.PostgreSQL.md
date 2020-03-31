@@ -127,7 +127,7 @@ Other options might be required depending on the CLI command you run\.
 
 **Example Modify an instance to publish logs to CloudWatch Logs**  
 The following example modifies an existing PostgreSQL DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `postgresql` and `upgrade`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-instance \
@@ -144,7 +144,7 @@ For Windows:
 
 **Example Create an instance to publish logs to CloudWatch Logs**  
 The following example creates a PostgreSQL DB instance and publishes log files to CloudWatch Logs\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `postgresql` and `upgrade`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-instance \

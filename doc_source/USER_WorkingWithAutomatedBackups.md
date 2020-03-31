@@ -77,7 +77,7 @@ To disable automated backups immediately, use the [modify\-db\-instance](https:/
 
 **Example**  
 The following example immediately disabled automatic backups\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -156,7 +156,7 @@ Include the following parameters:
 + `--apply-immediately` or `--no-apply-immediately`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -296,7 +296,7 @@ The following options are used to delete a retained automated backup:
 
 **Example**  
 The following example deletes the retained automated backup with source DB instance resource identifier `db-123ABCEXAMPLE`\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds delete-db-instance-automated-backup \

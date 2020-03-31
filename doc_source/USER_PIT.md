@@ -37,7 +37,7 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-instance-to-point-in-time \

@@ -167,7 +167,7 @@ You can also publish Oracle logs using the following commands:
 
 **Example**  
 The following example creates an Oracle DB instance with CloudWatch Logs publishing enabled\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `alert`, `audit`, `listener`, and `trace`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance \
@@ -198,7 +198,7 @@ aws rds create-db-instance ^
 
 **Example**  
 The following example modifies an existing Oracle DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings with any combination of `alert`, `audit`, `listener`, and `trace`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -215,7 +215,7 @@ aws rds modify-db-instance ^
 
 **Example**  
 The following example modifies an existing Oracle DB instance to disable publishing audit and listener log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `DisableLogTypes`, and its value is an array of strings with any combination of `alert`, `audit`, `listener`, and `trace`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

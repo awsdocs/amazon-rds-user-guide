@@ -4,7 +4,7 @@ A common scenario includes a DB instance in an Amazon VPC, that shares data with
 
 The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)\. 
 
-![\[VPC and EC2 security group Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
+![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
 Because your DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public Internet\. The DB instance is hosted in a private subnet\. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance is not available to the public Internet, providing greater security\. 
 

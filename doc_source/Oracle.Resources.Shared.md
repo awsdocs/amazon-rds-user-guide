@@ -109,7 +109,7 @@ In the following procedure, you add rules to your security group to control inbo
 
 You can use Amazon RDS to host an Oracle DB instance\. When you create the new DB instance, specify the VPC and security group you created previously using the instructions in [Creating a VPC for Use with an Oracle Database](#Oracle.Resources.Shared.VPC)\. Also, choose **No** for **Publicly accessible**\. 
 
-For information about creating an Oracle DB instance, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 ## Additional Amazon RDS Interfaces<a name="Oracle.Resources.Shared.CLIAPI"></a>
 
@@ -117,7 +117,7 @@ In the preceding procedures, we use the AWS Management Console to perform tasks\
 
 For more information, see [AWS Command Line Interface Reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
 
-## Related Topics<a name="w50aac31d107b7c15"></a>
+## Related Topics<a name="w50aac31d103b7c15"></a>
 + [Setting Up for Amazon RDS](CHAP_SettingUp.md)
 + [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
 + [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)

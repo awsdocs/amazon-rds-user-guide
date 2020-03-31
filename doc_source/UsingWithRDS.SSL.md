@@ -57,16 +57,16 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 
 You can download the root certificate for an AWS GovCloud \(US\) Region from the following list:
 
-[AWS GovCloud \(US\-East\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-east-1-2017-root.pem) \(Root CA\-2017\)
+[AWS GovCloud \(US\-East\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-east-1-2017-root.pem) \(Root CA\-2017\)
 
-[AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-west-1-2017-root.pem) \(Root CA\-2017\)
+[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-west-1-2017-root.pem) \(Root CA\-2017\)
 
 You can download the intermediate certificate for an AWS GovCloud \(US\) Region from the following list:
 
-[AWS GovCloud \(US\-East\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-east-1-intermediate.pem) \(CA\-2017\)
+[AWS GovCloud \(US\-East\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-east-1-intermediate.pem) \(CA\-2017\)
 
-[AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
+[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
 
-[AWS GovCloud \(US\-West\)](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)
+[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)
 
-To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://s3\-us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3-us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 
+To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://s3\.us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 

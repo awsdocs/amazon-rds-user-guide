@@ -59,7 +59,7 @@ For example, to specify the `dbtest` DB instance in your statement, use the foll
 To specify all DB instances that belong to a specific account, use the wildcard \(\*\):
 
 ```
-"Resource": "arn:aws:ec2:us-east-1:123456789012:db:*"
+"Resource": "arn:aws:rds:us-east-1:123456789012:db:*"
 ```
 
 Some RDS API operations, such as those for creating resources, cannot be performed on a specific resource\. In those cases, you must use the wildcard \(\*\)\.

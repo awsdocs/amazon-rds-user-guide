@@ -12,7 +12,7 @@ Amazon RDS also currently supports the following versions and editions that are 
 + Oracle 11g, Version 11\.2\.0\.3 \([Deprecation of Oracle 11\.2\.0\.3](#Oracle.Concepts.Deprecate.11203)\) 
 + Oracle 11g, Version 11\.2\.0\.2 \([Deprecation of Oracle 11\.2\.0\.2](#Oracle.Concepts.Deprecate.11202)\) 
 
-You can create DB instances and DB snapshots, point\-in\-time restores and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
+You can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Oracle SQL Plus\. Amazon RDS doesn't enable direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\. 
 
@@ -32,7 +32,7 @@ The following are the common management tasks you perform with an Amazon RDS Ora
 |  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Oracle](#Oracle.Concepts.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
 |  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
 |  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
-|  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
+|  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. Also, generally, if your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Option Groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
 |  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL Plus\.   |  [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)  | 
@@ -61,13 +61,77 @@ The License Included model is supported on Amazon RDS for the following Oracle d
 
 In the Bring Your Own License model, you can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle Software in the Cloud Computing Environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\. 
 
-In this model, you continue to use your active Oracle support account, and you contact Oracle directly for Oracle Database service requests\. If you have an AWS Support account with case support, you can contact AWS Support for Amazon RDS issues\. Amazon Web Services and Oracle have a multi\-vendor support process for cases which require assistance from both organizations\. 
+In this model, you continue to use your active Oracle support account, and you contact Oracle directly for Oracle Database service requests\. If you have an AWS Support account with case support, you can contact AWS Support for Amazon RDS issues\. Amazon Web Services and Oracle have a multi\-vendor support process for cases that require assistance from both organizations\. 
 
 The Bring Your Own License model is supported on Amazon RDS for the following Oracle database editions:
 + Oracle Database Enterprise Edition \(EE\)
 + Oracle Database Standard Edition \(SE\)
 + Oracle Database Standard Edition One \(SE1\)
 + Oracle Database Standard Edition Two \(SE2\)
+
+#### Integrating with AWS License Manager<a name="oracle-lms-integration"></a>
+
+If you use the Bring Your Own License model, [ AWS License Manager](https://aws.amazon.com/license-manager/) integration with Amazon RDS for Oracle makes it easier to monitor your Oracle license usage within your organization\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
+
+**Note**  
+RDS for Oracle integration with License Manager isn't supported in the Asia Pacific \(Osaka\-Local\) Region\.
+
+The following table shows the product information filters for RDS for Oracle\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Oracle.html)
+
+You can create a license configuration to track license usage of your Oracle DB instances\. After the license configuration is created, RDS for Oracle resources matching the product information filter are associated automatically with the license configuration\. Discovery of Oracle DB instances can take up to 24 hours\.
+
+##### Console<a name="oracle-lms-integration.console"></a>
+
+**To create a license configuration to track the license usage of your Oracle DB instances**
+
+1. Go to [https://console\.aws\.amazon\.com/license\-manager/](https://console.aws.amazon.com/license-manager/)\.
+
+1. Create a license configuration\.
+
+   For instructions, see [Create a License Configuration](https://docs.aws.amazon.com/license-manager/latest/userguide/create-license-configuration.html) in the *AWS License Manager User Guide*\.
+
+   Add a rule for an **RDS Product Information Filter** in the **Product Information** panel\.
+
+   For more information, see [ProductInformation](https://docs.aws.amazon.com/license-manager/latest/APIReference/API_ProductInformation.html) in the *AWS License Manager API Reference*\.
+
+##### AWS CLI<a name="oracle-lms-integration.cli"></a>
+
+To create a license configuration to track the license usage of your Oracle DB instances by using the AWS CLI, call the [create\-license\-configuration](https://docs.aws.amazon.com/cli/latest/reference/license-manager/create-license-configuration.html) command\. You can use the `--cli-input-json` or `--cli-input-yaml` parameters to \] pass the parameters to the command\.
+
+**Example**  
+The following code creates a license configuration for Oracle Enterprise Edition\.   
+
+```
+aws license-manager create-license-configuration —cli-input-json file://rds-oracle-ee.json
+```
+The following is the sample `rds-oracle-ee.json` file used in the example\.  
+
+```
+{
+    "Name": "rds-oracle-ee",
+    "Description": "RDS Oracle Enterprise Edition",
+    "LicenseCountingType": "vCPU",
+    "LicenseCountHardLimit": false,
+    "ProductInformationList": [
+        {
+            "ResourceType": "RDS",
+            "ProductInformationFilterList": [
+                {
+                    "ProductInformationFilterName": "Engine Edition",
+                    "ProductInformationFilterValue": ["oracle-ee"],
+                    "ProductInformationFilterComparator": "EQUALS"
+                }
+            ]
+        }
+    ]
+}
+```
+
+For more information about product information, see [Automated Discovery of Resource Inventory](https://docs.aws.amazon.com/license-manager/latest/userguide/automated-discovery.html) in the *AWS License Manager User Guide*\.
+
+For more information about the `--cli-input` parameter, see [Generating AWS CLI Skeleton and Input Parameters from a JSON or YAML Input File](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-skeleton.html) in the *AWS CLI User Guide*\.
 
 ### Licensing Oracle Multi\-AZ Deployments<a name="Oracle.Concepts.Licensing.MAZ"></a>
 
@@ -112,7 +176,7 @@ The following are the DB instance classes supported for Oracle\.
 |  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 
 **Note**  
-We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB Instance classes supported by Amazon RDS for Oracle, see [DB Instance Classes](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
+We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB instance classes supported by Amazon RDS for Oracle, see [DB Instance Classes](Concepts.DBInstanceClass.md) and [Configuring the Processor for a DB Instance Class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
 ### Deprecated db\.t2 DB Instance Classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
 
@@ -159,7 +223,7 @@ Amazon RDS Oracle supports SSL/TLS encrypted connections and also the Oracle Nat
 
 Secure Sockets Layer \(SSL\) is an industry standard protocol used for securing network connections between client and server\. After SSL version 3\.0, the name was changed to Transport Layer Security \(TLS\), but it is still often referred to as SSL and we refer to the protocol as SSL\. Amazon RDS supports SSL encryption for Oracle DB instances\. Using SSL, you can encrypt a connection between your application client and your Oracle DB instance\. SSL support is available in all AWS regions for Oracle\. 
 
-You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections which allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and an Oracle client\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\. 
+You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections\. Doing this allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and an Oracle client\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\. 
 
 For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 
@@ -352,7 +416,7 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |  [unified\_audit\_sga\_queue\_size](http://docs.oracle.com/database/121/REFRN/GUID-060707DF-8431-4866-8B9F-4F450472D95E.htm#REFRN10343)  | 1 MB \- 30 MB | Y | Specifies the size of the system global area \(SGA\) queue for unified auditing\.  | 
 |  [use\_dedicated\_broker](http://docs.oracle.com/database/121/REFRN/GUID-643239D0-FABF-43C0-9791-BED46CB8FE07.htm#REFRN10341)  |  TRUE, FALSE  | N | Determines how dedicated servers are spawned\.  | 
 
-Several parameter have new value ranges for Oracle 12c version 12\.1\.0\.2 on Amazon RDS\. For the old and new value ranges, see the following table\.
+Several parameters have new value ranges for Oracle 12c version 12\.1\.0\.2 on Amazon RDS\. For the old and new value ranges, see the following table\.
 
 
 ****  
@@ -414,7 +478,7 @@ Oracle 12c version 12\.1\.0\.2 includes a number of new built\-in PL/SQL package
 |  [DBMS\_APP\_CONT](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_app_cont.htm)  | The DBMS\_APP\_CONT package provides an interface to determine if the in\-flight transaction on a now unavailable session committed or not, and if the last call on that session completed or not\.  | 
 |  [DBMS\_AUTO\_REPORT](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_auto_report.htm#sthref1284)  | The DBMS\_AUTO\_REPORT package provides an interface to view SQL Monitoring and Real\-time Automatic Database Diagnostic Monitor \(ADDM\) data that has been captured into Automatic Workload Repository \(AWR\)\.  | 
 |  [DBMS\_GOLDENGATE\_AUTH](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_goldengate_auth.htm)  | The DBMS\_GOLDENGATE\_AUTH package provides subprograms for granting privileges to and revoking privileges from GoldenGate administrators\.  | 
-|  [DBMS\_HEAT\_MAP](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_heat_map.htm)  | The DBMS\_HEAT\_MAP package provides an interface to externalize heatmaps at various levels of storage including block, extent, segment, object and tablespace\.  | 
+|  [DBMS\_HEAT\_MAP](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_heat_map.htm)  | The DBMS\_HEAT\_MAP package provides an interface to externalize heatmaps at various levels of storage including block, extent, segment, object, and tablespace\.  | 
 |  [DBMS\_ILM](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_ilm.htm)  | The DBMS\_ILM package provides an interface for implementing Information Lifecycle Management \(ILM\) strategies using Automatic Data Optimization \(ADO\) policies\.  | 
 |  [DBMS\_ILM\_ADMIN](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_ilm_admin.htm)  | The DBMS\_ILM\_ADMIN package provides an interface to customize Automatic Data Optimization \(ADO\) policy execution\.  | 
 |  [DBMS\_PART](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_part.htm)  | The DBMS\_PART package provides an interface for maintenance and management operations on partitioned objects\.  | 
@@ -425,7 +489,7 @@ Oracle 12c version 12\.1\.0\.2 includes a number of new built\-in PL/SQL package
 |  [DBMS\_SQL\_TRANSLATOR](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_sql_trans.htm)  | The DBMS\_SQL\_TRANSLATOR package provides an interface for creating, configuring, and using SQL translation profiles\.  | 
 |  [DBMS\_SQL\_MONITOR](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_sql_monitor.htm)  | The DBMS\_SQL\_MONITOR package provides information about real\-time SQL Monitoring and real\-time Database Operation Monitoring\.  | 
 |  [DBMS\_SYNC\_REFRESH](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_sync_refresh.htm)  | The DBMS\_SYNC\_REFRESH package provides an interface to perform a synchronous refresh of materialized views\.  | 
-|  [DBMS\_TSDP\_MANAGE](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_tsdp_manage.htm)  | The DBMS\_TSDP\_MANAGE package provides an interface to import and manage sensitive columns and sensitive column types in the database, and is used in conjunction with the [DBMS\_TSDP\_PROTECT](http://docs.oracle.com/database/121/ARPLS/d_tsdp_protect.htm#BHAFHBHI) package with regard to transparent sensitive data protection \(TSDP\) policies\. DBMS\_TSDP\_MANAGE is available with the Enterprise Edition only\.  | 
+|  [DBMS\_TSDP\_MANAGE](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_tsdp_manage.htm)  | The DBMS\_TSDP\_MANAGE package provides an interface to import and manage sensitive columns and sensitive column types in the database\. DBMS\_TSDP\_MANAGE is used with the [DBMS\_TSDP\_PROTECT](http://docs.oracle.com/database/121/ARPLS/d_tsdp_protect.htm#BHAFHBHI) package for transparent sensitive data protection \(TSDP\) policies\. DBMS\_TSDP\_MANAGE is available with the Enterprise Edition only\.  | 
 |  [DBMS\_TSDP\_PROTECT](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_tsdp_protect.htm)  | The DBMS\_TSDP\_PROTECT package provides an interface to configure transparent sensitive data protection \(TSDP\) policies in conjunction with the [DBMS\_TSDP\_MANAGE](http://docs.oracle.com/database/121/ARPLS/d_tsdp_manage.htm#CACCBHBC) package\. DBMS\_TSDP\_PROTECT is available with the Enterprise Edition only\.  | 
 |  [DBMS\_XDB\_CONFIG](http://docs.oracle.com/database/121/ARPLS/d_xdb_config.htm#ARPLS73564)  | The DBMS\_XDB\_CONFIG package provides an interface for configuring Oracle XML DB and its repository\.  | 
 | [DBMS\_XDB\_CONSTANTS](http://docs.oracle.com/database/121/ARPLS/d_xdb_constants.htm#ARPLS73572) | The DBMS\_XDB\_CONSTANTS package provides an interface to commonly used constants\. Oracle recommends using constants instead of dynamic strings to avoid typographical errors\.  | 
@@ -547,7 +611,7 @@ aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee
 
 ## Oracle Engine Version Management<a name="Oracle.Concepts.Patching"></a>
 
-DB Engine Version Management is a feature of Amazon RDS that enables you to control when and how the database engine software running your DB instances is patched and upgraded\. This feature gives you the flexibility to maintain compatibility with database engine patch versions, test new patch versions to ensure they work effectively with your application before deploying in production, and perform version upgrades on your own terms and timelines\. 
+DB Engine Version Management is a feature of Amazon RDS that enables you to control when and how the database engine software running your DB instances is patched and upgraded\. With this feature, you get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work effectively with your application before deploying them in production\. In addition, you can perform version upgrades on your own terms and timelines\. 
 
 **Note**  
 Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB Engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
@@ -616,10 +680,10 @@ You can use huge pages with the following versions and editions of Oracle:
  The `use_large_pages` parameter controls whether huge pages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
 
 To control whether huge pages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
-+ For the DB instance classes mentioned in the table below, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
-+ For DB instance classes not mentioned in the table below, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`, and `use_large_pages` evaluates to `FALSE`\.
-+ For DB instance classes not mentioned in the table below, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default, and `use_large_pages` evaluates to `ONLY`\. You can disable huge pages manually by setting `use_large_pages` to `FALSE`\.
-+ For DB instance classes not mentioned in the table below, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`, `use_large_pages` evaluates to `ONLY`, and huge pages can't be disabled\.
++ For the DB instance classes mentioned in the table following, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable huge pages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
++ For DB instance classes not mentioned in the table following, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`\. Also, `use_large_pages` evaluates to `FALSE`\.
++ For DB instance classes not mentioned in the table following, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default\. Also, `use_large_pages` evaluates to `ONLY`\. You can disable huge pages manually by setting `use_large_pages` to `FALSE`\.
++ For DB instance classes not mentioned in the table following, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`\. Also, `use_large_pages` evaluates to `ONLY` and huge pages can't be disabled\.
 
 Huge pages are not enabled by default for the following DB instance classes\. 
 
@@ -801,7 +865,7 @@ When the DB instance status is `incompatible-parameters` because of the `MAX_STR
 
 1. Create a new Amazon RDS Oracle DB instance, and associate the parameter group with `MAX_STRING_SIZE` set to `EXTENDED` with the DB instance\.
 
-   For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\.
+   For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 ### Enabling Extended Data Types for an Existing DB Instance<a name="Oracle.Concepts.ExtendedDataTypes.ModifyDBInstance"></a>
 

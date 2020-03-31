@@ -22,7 +22,7 @@ The following versions are available for Oracle database engine 12\.2\.0\.2:
 ## Version 12\.2\.0\.1\.ru\-2020\-01\.rur\-2020\-01\.r1<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-01.rur-2020-01.r1"></a>
 
 Version 12\.2\.0\.1\.ru\-2020\-01\.rur\-2020\-01\.r1 adds support for the following: 
-+ Patch 30593149: Database Jan 2020 Release Update : 12\.2\.0\.1\.200114
++ Patch 30593149: Database Jan 2020 Release Update: 12\.2\.0\.1\.200114
 + Patch 30502018: OJVM RELEASE UPDATE 12\.2\.0\.1\.200114
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
 + Patch 29997959: DSTv34 for OJVM \(TZDATA2019G\)
@@ -72,7 +72,7 @@ Bugs fixed:
 ## Version 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-04.rur-2019-04.r1"></a>
 
 Version 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 adds support for the following: 
-+ Patch 29314339: Database Apr 2019 Release Update : 12\.2\.0\.1\.190416
++ Patch 29314339: Database Apr 2019 Release Update: 12\.2\.0\.1\.190416
 + Patch 29249637: OJVM RELEASE UPDATE: 12\.2\.0\.1\.190416
 + Patch 28852325: DSTv33 for RDBMS \(TZDATA2018G\)
 + Patch 28852334: DSTv33 for OJVM \(TZDATA2018G\)
@@ -89,7 +89,7 @@ Bugs fixed:
 ## Version 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1"></a>
 
 Version 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 adds support for the following: 
-+ Patch 28822515: Database Jan 2019 Release Update : 12\.2\.0\.1\.190115
++ Patch 28822515: Database Jan 2019 Release Update: 12\.2\.0\.1\.190115
 + Patch 28790651: OJVM RELEASE UPDATE: 12\.2\.0\.1\.190115
 + Patch 28125601: DSTv32 for RDBMS \(TZDATA2018E\)
 + Patch 28127287: DSTv32 for OJVM \(TZDATA2018E\)

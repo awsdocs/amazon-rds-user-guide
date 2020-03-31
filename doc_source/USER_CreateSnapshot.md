@@ -2,7 +2,9 @@
 
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. Creating this DB snapshot on a Single\-AZ DB instance results in a brief I/O suspension that can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. Multi\-AZ DB instances are not affected by this I/O suspension since the backup is taken on the standby\. 
 
-When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\. 
+When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
+
+Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
 You can create a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -34,7 +36,7 @@ When you create a DB snapshot using the AWS CLI, you need to identify which DB i
 In this example, you create a DB snapshot called *mydbsnapshot* for a DB instance called *mydbinstance*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds create-db-snapshot \

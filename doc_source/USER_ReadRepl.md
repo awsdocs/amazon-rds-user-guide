@@ -78,7 +78,7 @@ Within an AWS Region, all Read Replicas must be created in the same Amazon VPC a
 To create a Read Replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance-read-replica \
@@ -168,7 +168,7 @@ The promotion process takes a few minutes to complete\. When you promote a Read 
 To promote a Read Replica to a DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html) command\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds promote-read-replica \
@@ -251,7 +251,7 @@ For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in 
 The following code creates a Read Replica in the `us-west-2` Region\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance-read-replica \
@@ -271,7 +271,7 @@ aws rds create-db-instance-read-replica ^
 The following code creates a Read Replica in a different AWS Region than the source DB instance\. The AWS Region where you call the `create-db-instance-read-replica` command is the destination AWS Region for the encrypted Read Replica\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance-read-replica \
@@ -395,7 +395,7 @@ Amazon RDS uses the following process to create a cross\-region Read Replica\. D
 
 **Example Create a Cross\-Region Read Replica Outside of Any VPC**  
 The following example creates a Read Replica in us\-west\-2 from a source DB instance in us\-east\-1\. The Read Replica is created outside of a VPC:  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance-read-replica \
@@ -414,7 +414,7 @@ aws rds create-db-instance-read-replica ^
 
 **Example Create Cross\-Region Read Replica in a VPC**  
 This example creates a Read Replica in us\-west\-2 from a source DB instance in us\-east\-1\. The Read Replica is created in the VPC associated with the specified DB subnet group:  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance-read-replica \

@@ -5,7 +5,7 @@ This section describes how you can perform common DBA tasks related to the syste
 **Topics**
 + [Disconnecting a Session](#Appendix.Oracle.CommonDBATasks.DisconnectingSession)
 + [Killing a Session](#Appendix.Oracle.CommonDBATasks.KillingSession)
-+ [Cancelling a SQL Statement in a Session](#Appendix.Oracle.CommonDBATasks.CancellingSQL)
++ [Canceling a SQL Statement in a Session](#Appendix.Oracle.CommonDBATasks.CancellingSQL)
 + [Enabling and Disabling Restricted Sessions](#Appendix.Oracle.CommonDBATasks.RestrictedSession)
 + [Flushing the Shared Pool](#Appendix.Oracle.CommonDBATasks.FlushingSharedPool)
 + [Flushing the Buffer Cache](#Appendix.Oracle.CommonDBATasks.FlushingBufferCache)
@@ -79,7 +79,7 @@ select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
 
 You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. By specifying `PROCESS` as the `method` value, you can kill the processes associated with a session\. Do this only if killing the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
 
-## Cancelling a SQL Statement in a Session<a name="Appendix.Oracle.CommonDBATasks.CancellingSQL"></a>
+## Canceling a SQL Statement in a Session<a name="Appendix.Oracle.CommonDBATasks.CancellingSQL"></a>
 
 To cancel a SQL statement in a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.cancel`\.
 

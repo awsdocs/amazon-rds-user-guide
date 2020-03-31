@@ -80,7 +80,7 @@ To restore a DB instance from a DB snapshot, use the AWS CLI command [restore\-d
 In this example, you restore from a previously created DB snapshot named *mydbsnapshot*\. You restore to a new DB instance named *mynewdbinstance*\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-instance-from-db-snapshot \

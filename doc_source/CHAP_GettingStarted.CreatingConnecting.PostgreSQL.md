@@ -1,6 +1,6 @@
 # Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.PostgreSQL"></a>
 
-The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 GiB of storage\.
+The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance, such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 GiB of storage\.
 
 **Important**  
 Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
@@ -14,17 +14,14 @@ Before you can create or connect to a DB instance, you must complete the tasks i
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your PostgreSQL databases\.
 
-**Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
-
-### New Console<a name="CHAP_GettingStarted.Creating.PostgreSQL.Console"></a>
+### Console<a name="CHAP_GettingStarted.Creating.PostgreSQL.Console"></a>
 
 You can create a DB instance running PostgreSQL with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 In this example, you use **Easy Create** to create a DB instance running the PostgreSQL database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating a PostgreSQL DB instance with **Easy Create** not enabled, see [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\.
+For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 **To create a PostgreSQL DB instance with Easy Create enabled**
 
@@ -73,38 +70,6 @@ You can't view the master user password again\. If you don't record it, you migh
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch06.png)
 
-### Original Console<a name="CHAP_GettingStarted.Creating.PostgreSQL.CurrentConsole"></a>
-
-**To create a DB Instance Running the PostgreSQL DB Engine**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the top right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. 
-
-1. In the navigation pane, choose **Databases**\.
-
-   If the navigation pane is closed, choose the menu icon at the top left to open it\.
-
-1. Choose **Create database** to open the **Select engine** page\.   
-![\[Engine selection\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Postgres-Launch01a.png)
-
-1. On the **Select engine** page, choose the PostgreSQL icon, and then choose **Next**\.
-
-1. Next, the **Use case** page asks if you are planning to use the DB instance you are creating for production\. If you are, choose **Production**\. If you choose this option, the failover option **Multi\-AZ** and the **Provisioned IOPS** storage options are preselected in the following step\. Choose **Next** when you are finished\.
-
-1. On the **Specify DB Details** page, specify your DB instance information\. Choose **Next** when you are finished\.  
-****    
-<a name="rds-postgresql-original-console-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)
-
-1.  On the **Configure Advanced Settings** page, provide additional information that RDS needs to launch the PostgreSQL DB instance\. The table shows settings for an example DB instance\. Specify your DB instance information, then choose **Create database**\.  
-****    
-<a name="rds-postgresql-original-console-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)
-
-1. On the final page, choose **Create database**\. 
-
-1. On the Amazon RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **creating** until the DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and store allocated, it could take several minutes for the new instance to be available\.   
-![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Postgres-Launch06.png)
-
 ## Connecting to a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL"></a>
 
 After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. The security group that you assigned to the DB instance when you created it must allow access to the DB instance\. If you have difficulty connecting to the DB instance, the problem is most often with the access rules you set up in the security group you assigned to the DB instance\.
@@ -117,7 +82,7 @@ In this example, you connect to a PostgreSQL DB instance using pgAdmin\.
 
 **To connect to a PostgreSQL DB instance using pgAdmin**
 
-1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
+1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
    1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
@@ -135,15 +100,15 @@ In this example, you connect to a PostgreSQL DB instance using pgAdmin\.
 1. In the **New Server Registration** dialog box, enter the DB instance endpoint \(for example, `database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com`\) in the **Host** box\. Don't include the colon or port number as shown on the Amazon RDS console \(`database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com:5432`\)\. 
 
    Enter the port you assigned to the DB instance for **Port**\. Enter the user name and user password that you entered when you created the DB instance for **Username** and **Password**\.   
-![\[Postgres connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect01.png)
+![\[PostgreSQL connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect01.png)
 
 1. Choose **OK**\. 
 
 1. In the Object browser, expand **Server Groups**\. Choose the server \(the DB instance\) you created, and then choose the database name\.   
-![\[Postgres connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect02.png)
+![\[PostgreSQL connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect02.png)
 
 1. Choose the plugin icon and choose **PSQL Console**\. The psql command window opens for the default database you created\.   
-![\[Postgres connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect03.png)
+![\[PostgreSQL connect\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect03.png)
 
 1. Use the command window to enter SQL or psql commands\. Enter `\q` to close the window\.
 

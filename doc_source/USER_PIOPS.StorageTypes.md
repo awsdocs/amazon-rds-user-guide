@@ -85,16 +85,18 @@ The maximum storage threshold is the limit to which the DB instance can be autos
 
 For example, SQL Server Standard Edition on db\.m5\.xlarge has a default allocated storage for the instance of 20 GiB \(the minimum\) and a maximum allocated storage of 16,384 GiB\. The default maximum storage threshold for autoscaling is 1,000 GiB\. If you use this default, the instance doesn't autoscale above 1,000 GiB\. This is true even though the maximum allocated storage for the instance is 16,384 GiB\.
 
-**Note**  
-Autoscaling doesn't occur if the maximum storage threshold would be exceeded by the storage increment\.  
-Autoscaling can't completely prevent storage\-full situations for large data loads, because further storage modifications can't be made until six hours after storage optimization has completed on the instance\. If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.  
-If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
+The following limitations apply to storage autoscaling:
++ Autoscaling doesn't occur if the maximum storage threshold would be exceeded by the storage increment\.
++ Autoscaling can't completely prevent storage\-full situations for large data loads, because further storage modifications can't be made until six hours after storage optimization has completed on the instance\. If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.
++ If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
++ Autoscaling can't be used with magnetic storage\.
++ Autoscaling can't be used with the following previous\-generation instance classes that have less than 6 TiB of orderable storage: db\.m3\.large, db\.m3\.xlarge, and db\.m3\.2xlarge\.
 
 Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\.
 
 ### Enabling Storage Autoscaling for a New DB Instance<a name="USER_PIOPS.EnablingAutoscaling"></a>
 
-When you create a new Amazon RDS DB instance, you can choose whether to enable storage autoscaling\. You can also set an upper limit on the storage that Amazon RDS can allocate for the DB instance\. 
+When you create a new Amazon RDS DB instance, you can choose whether to enable storage autoscaling\. You can also set an upper limit on the storage that Amazon RDS can allocate for the DB instance\.
 
 **Note**  
 When you clone an Amazon RDS DB instance that has storage autoscaling enabled, that setting isn't automatically inherited by the cloned instance\. The new DB instance has the same amount of allocated storage as the original instance\. You can turn storage autoscaling on again for the new instance if the cloned instance continues to increase its storage requirements\.

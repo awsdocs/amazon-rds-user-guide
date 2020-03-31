@@ -24,6 +24,7 @@ The following are some limitations and recommendations for importing backup file
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
 + Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and then change the instance class later\. For more information about instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 + Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If a backup file exceeds 5 TB, then you must split the backup file into smaller files\. 
++ When you restore the database, the backup is copied and then extracted on your DB instance\. Therefore, provision storage space for your DB instance that is equal to or greater than the sum of the backup size, plus the original database's size on disk\.
 + Amazon RDS limits the number of files uploaded to an Amazon S3 bucket to 1 million\. If the backup data for your database, including all full and incremental backups, exceeds 1 million files, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\. 
 + User accounts are not imported automatically\. Save your user accounts from your source database and add them to your new DB instance later\. 
 + Functions are not imported automatically\. Save your functions from your source database and add them to your new DB instance later\. 
@@ -222,19 +223,19 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
 1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
 
-   On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
+   On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 **Note**  
 Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
 
 1. Choose **Next** to continue\. The **Configure advanced settings** page appears\. 
 
-   Provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
+   Provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 
 1. Choose **Create database**\. 
 
 ### AWS CLI<a name="MySQL.Procedural.Importing.CLI"></a>
 
-To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, call the [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) command with the parameters following\. For information about each setting, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\. 
+To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, call the [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) command with the parameters following\. For information about each setting, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 
 **Note**  
 Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
@@ -242,7 +243,7 @@ Be sure to allocate enough memory for your new DB instance so that the restore c
 + `--db-instance-identifier`
 + `--db-instance-class`
 + `--engine`
-+ `--master-user-name`
++ `--master-username`
 + `--master-user-password`
 + `--s3-bucket-name`
 + `--s3-ingestion-role-arn`
@@ -251,7 +252,7 @@ Be sure to allocate enough memory for your new DB instance so that the restore c
 + `--source-engine-version`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
  1. aws rds restore-db-instance-from-s3 \  
@@ -259,7 +260,7 @@ For Linux, OS X, or Unix:
  3. --db-instance-identifier myidentifier \
  4. --db-instance-class db.m4.large \
  5. --engine mysql \
- 6. --master-user-name masterawsuser \
+ 6. --master-username masterawsuser \
  7. --master-user-password masteruserpassword \
  8. --s3-bucket-name mybucket \
  9. --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename \
@@ -275,7 +276,7 @@ For Windows:
  3. --db-instance-identifier myidentifier ^
  4. --db-instance-class db.m4.large ^
  5. --engine mysql ^
- 6. --master-user-name masterawsuser ^
+ 6. --master-username masterawsuser ^
  7. --master-user-password masteruserpassword ^
  8. --s3-bucket-name mybucket ^
  9. --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename ^

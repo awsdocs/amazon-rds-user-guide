@@ -190,7 +190,7 @@ To purchase a reserved DB instance, use the AWS CLI command [https://docs.aws.am
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
 The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds purchase-reserved-db-instances-offering \

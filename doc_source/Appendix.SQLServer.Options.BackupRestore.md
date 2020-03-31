@@ -55,7 +55,7 @@ After you add the native backup and restore option, you don't need to restart yo
 1. Choose **Add option**\.
 
 1. Apply the option group to a new or existing DB instance:
-   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
+   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### CLI<a name="Add.Native.Backup.Restore.CLI"></a>
@@ -70,15 +70,14 @@ This procedure makes the following assumptions:
 1. Add the `SQLSERVER_BACKUP_RESTORE` option to the option group\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds add-option-to-option-group \
+   	--apply-immediately \
    	--option-group-name mybackupgroup \
-   	--options "[{"OptionName": "SQLSERVER_BACKUP_RESTORE", \
-   	"OptionSettings": [{"Name": "IAM_ROLE_ARN", \
-   	"Value": "arn:aws:iam::account-id:role/role-name"}]}]" \
-   	--apply-immediately
+   	--options "OptionName=SQLSERVER_BACKUP_RESTORE, \
+   	  OptionSettings=[{Name=IAM_ROLE_ARN,Value=arn:aws:iam::account-id:role/role-name}]"
    ```
 
    For Windows:
@@ -97,7 +96,7 @@ When using the Windows command prompt, you must escape double quotes \("\) in JS
 1. Apply the option group to the DB instance\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws rds modify-db-instance \

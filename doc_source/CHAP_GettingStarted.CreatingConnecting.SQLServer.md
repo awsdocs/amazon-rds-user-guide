@@ -5,23 +5,20 @@ The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB i
 **Important**  
 You must have an AWS account before you can create a DB instance\. If you don't have an AWS account, open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\. 
 
-In this topic, you create a sample SQL Server DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\. 
+In this topic, you create a sample SQL Server DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\.
 
 ## Creating a Sample SQL Server DB Instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
 
-The basic building block of Amazon RDS is the DB instance\. This environment is where you run your Microsoft SQL Server databases\.
+The DB instance is where you run your Microsoft SQL Server databases\.
 
-**Note**  
-A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
+### Console<a name="CHAP_GettingStarted.Creating.SQLServer.Console"></a>
 
-### New Console<a name="CHAP_GettingStarted.Creating.SQLServer.Console"></a>
-
-You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy Create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
 For this example, you use **Easy Create** to create a DB instance running the Microsoft SQL Server database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating a Microsoft SQL Server DB instance with **Easy Create** not enabled, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
+For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 **To create a Microsoft SQL Server DB instance with Easy Create enabled**
 
@@ -70,95 +67,19 @@ You can't view the master user password again\. If you don't record it, you migh
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch05.png)
 
-### Original Console<a name="CHAP_GettingStarted.Creating.SQLServer.CurrentConsole"></a>
-
-In this procedure you use the AWS Management Console to create a sample DB instance\. Because you are only creating a sample DB instance, each setting is not fully explained\. For a full explanation of each setting, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
-
-Before your begin, you must have an AWS account before you can create a DB instance\. If you don't have an AWS account, open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\. 
-
-**To create a DB instance running the Microsoft SQL Server DB engine**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB instance\. 
-
-1. Locate the **Create database** card below the **Resources** card\. If you don't see it, scroll down or choose **Databases** from the navigation pane at left\.
-
-   Choose **Create database**\.
-
-1. On the **Select engine** page, choose **Microsoft SQL Server**\. 
-
-1. At the bottom of the page, check the box for **Only enable options eligible for RDS Free Usage Tier**\. Doing this simplifies the setup process\. For more information, see [Amazon RDS Free Tier](https://aws.amazon.com/rds/free/)\. 
-
-1. Choose for the **SQL Server Express Edition**\. This is the only SQL Server option that is eligible for RDS free Usage Tier\. 
-
-1. On the **Instance specifications** page on the **Specify DB Details** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Settings** card at the bottom of the **Specify DB Details** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-advanced-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-   Choose **Next** to continue\. 
-
-1. The **Configure Advanced Settings** page appears\.
-
-   On the **Network & Security** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-network-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Microsoft SQL Server Windows Authentication** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-windows-authentication-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Database Options** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-database-options-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Encryption** card on the **Configure Advanced Settings** provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-encryption-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Backup** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-backup-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Monitoring** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-monitoring-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Performance Insights** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-performance-insights-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Maintenance** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-maintenance-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. On the **Deletion protection** card on the **Configure Advanced Settings** page, provide the information for your DB instance as shown in the following table\.  
-****    
-<a name="rds-sql-server-creating-deletion-protection-parameter-guidance"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.SQLServer.html)
-
-1. Choose **Create database** to confirm your choices and create the DB instance\. 
-
-1. After you create the database, choose **View Your DB Instances**\. 
-
-   On the RDS console, the new DB instance appears in the list of DB instances\. The DB instance has a status of **Creating** until the DB instance is ready to use\. When the state changes to **Available**, you can connect to the DB instance\. 
-
 ## Connecting to Your Sample SQL Server DB Instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
 
-In this procedure you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\. 
+In this procedure, you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
 Before you begin, your database should have a status of **Available**\. If it has a status of **Creating** or **Backup\-up**, wait until it's **Available**\. The status updates without requiring you to refresh the page\. This process can take up to 20 minutes\. 
 
 Also, make sure you have SSMS installed\. If you can also connect to SQL Server on RDS by using a different tools, such as an add\-in for your development environment or some other database tool\. However, this tutorial only covers using SSMS\. To download a stand\-alone version of this SSMS, see [Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) in the Microsoft documentation\. 
 
-**To connect to a DB Instance using SSMS**
+**To connect to a DB instance using SSMS**
 
-1. Find the DNS name and port number for your DB Instance\. 
+1. Find the DNS name and port number for your DB instance\. 
 
-   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+   1. Open the RDS console, and then choose **Databases** to display a list of your DB instances\. 
 
    1. Hover your mouse cursor over the name **sample\-instance**, which is blue\. When you do this, the mouse cursor changes into a selection icon \(for example, a pointing hand\)\. Also, the DB instance name, becomes underlined\. 
 
@@ -188,15 +109,15 @@ Also, make sure you have SSMS installed\. If you can also connect to SQL Server 
 
 1. Choose **Connect**\. 
 
-   After a few moments, SSMS connects to your DB instance\. 
+   After a few moments, SSMS connects to your DB instance\.
 
-   If you can't connect to your DB instance, see [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
+   If you can't connect to your DB instance, see [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\.
 
 ## Exploring Your Sample SQL Server DB Instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
 
-In this procedure you continue the previous procedure and explore your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\. 
+In this procedure, you continue the previous procedure and explore your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
-**To explore a DB Instance using SSMS**
+**To explore a DB instance using SSMS**
 
 1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(master, model, msdb, and tempdb\)\. To explore the system databases, do the following: 
 

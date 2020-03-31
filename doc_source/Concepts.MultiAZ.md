@@ -17,7 +17,11 @@ DB instances using Multi\-AZ deployments can have increased write and commit lat
 
 ## Modifying a DB Instance to Be a Multi\-AZ Deployment<a name="Concepts.MultiAZ.Migrating"></a>
 
-If you have a DB instance in a Single\-AZ deployment and modify it to a Multi\-AZ deployment \(for engines other than SQL Server or Amazon Aurora\), Amazon RDS takes several steps\. First, Amazon RDS takes a snapshot of the primary DB instance from your deployment and then restores the snapshot into another Availability Zone\. Amazon RDS then sets up synchronous replication between your primary DB instance and the new instance\. This action avoids downtime when you convert from Single\-AZ to Multi\-AZ, but you can experience a significant performance impact when first converting to Multi\-AZ\. This impact is more noticeable for large and write\-intensive DB instances\.
+If you have a DB instance in a Single\-AZ deployment and modify it to a Multi\-AZ deployment \(for engines other than Amazon Aurora\), Amazon RDS takes several steps\. First, Amazon RDS takes a snapshot of the primary DB instance from your deployment and then restores the snapshot into another Availability Zone\. Amazon RDS then sets up synchronous replication between your primary DB instance and the new instance\. 
+
+**Important**  
+This action avoids downtime when you convert from Single\-AZ to Multi\-AZ, but you can experience a performance impact during and after converting to Multi\-AZ\. This impact can be significant for large write\-intensive DB instances\.  
+To enable Multi\-AZ for a DB instance, RDS takes a snapshot of the primary DB instance's EBS volume and restores it on the newly created standby replica, and then synchronizes both volumes\. New volumes created from existing EBS snapshots load lazily in the background\. This capability permits large volumes to be restored from a snapshot quickly, but there is the possibility of added latency during and after the modification is complete\. For more information, see [ Restoring an Amazon EBS Volume from a Snapshot](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html) in the Amazon EC2 documentation\. 
 
 After the modification is complete, Amazon RDS triggers an event \(RDS\-EVENT\-0025\) that indicates the process is complete\. You can monitor Amazon RDS events; for more information about events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 

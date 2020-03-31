@@ -12,7 +12,6 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 
 **Topics**
 + [Common Management Tasks for PostgreSQL on Amazon RDS](#CHAP_PostgreSQL.CommonTasks)
-+ [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
 + [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
 + [Upgrading the PostgreSQL DB Engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
@@ -134,9 +133,9 @@ Use the following procedure to create a DB instance in the preview environment\.
 
    You also can navigate directly to the [Database Preview Environment](https://us-east-2.console.aws.amazon.com/rds-preview/home?region=us-east-2#)\.
 **Note**  
-If you want to create an instance in the Database Preview Environment with the API or CLI the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
+If you want to create an instance in the Database Preview Environment with the API or CLI, the endpoint is `rds-preview.us-east-2.amazonaws.com`\.
 
-1. Continue with the procedure as described in [New Console](USER_CreatePostgreSQLInstance.md#USER_CreatePostgreSQLInstance.CON)\.
+1. Continue with the procedure as described in [Console](USER_CreateDBInstance.md#USER_CreateDBInstance.CON)\.
 
 ## Amazon RDS for PostgreSQL Versions and Extensions<a name="PostgreSQL.Concepts"></a>
 

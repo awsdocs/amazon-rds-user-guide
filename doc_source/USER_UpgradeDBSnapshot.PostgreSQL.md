@@ -42,7 +42,7 @@ To upgrade a DB snapshot to a new database engine version, use the AWS CLI [modi
 + `--engine-version` – The engine version to upgrade the DB snapshot to\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-snapshot \

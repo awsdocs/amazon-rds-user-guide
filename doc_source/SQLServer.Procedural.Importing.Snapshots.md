@@ -11,7 +11,7 @@ Amazon RDS for Microsoft SQL Server does not support importing data into the `ms
 
 **To import data into a SQL Server DB instance by using a snapshot**
 
-1. Create a DB instance\. For more information, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\. 
+1. Create a DB instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 1. Stop applications from accessing the destination DB instance\. 
 

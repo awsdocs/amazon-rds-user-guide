@@ -6,7 +6,7 @@ IAM authentication for PostgreSQL DB instances requires that the SSL value be 1\
 
 ## Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
 
-To create a new DB instance with IAM authentication by using the console, see either [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md) or [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\.
+To create a new DB instance with IAM authentication by using the console, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 Each creation workflow has a **Configure Advanced Settings** page, where you can enable IAM DB authentication\. In that page's **Database Options** section, choose **Yes** for **Enable IAM DB Authentication**\.
 

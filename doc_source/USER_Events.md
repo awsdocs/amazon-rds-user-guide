@@ -37,7 +37,8 @@ The process for subscribing to Amazon RDS event notification is as follows:
 1. You then begin to receive event notifications\.
 
 **Note**  
-When Amazon SNS sends a notification to a subscribed HTTP or HTTPS endpoint, the POST message sent to the endpoint has a message body that contains a JSON document\. For more information, see [Amazon SNS Message and JSON Formats](https://docs.aws.amazon.com/sns/latest/dg/sns-message-and-json-formats.html) in the *Amazon Simple Notification Service Developer Guide*\.
+When Amazon SNS sends a notification to a subscribed HTTP or HTTPS endpoint, the POST message sent to the endpoint has a message body that contains a JSON document\. For more information, see [Amazon SNS Message and JSON Formats](https://docs.aws.amazon.com/sns/latest/dg/sns-message-and-json-formats.html) in the *Amazon Simple Notification Service Developer Guide*\.  
+You can use AWS Lambda to process event notifications from a DB instance\. For more information, see [Using AWS Lambda with Amazon RDS](https://docs.aws.amazon.com/lambda/latest/dg/services-rds.html) in the *AWS Lambda Developer Guide*\.
 
 The following section lists all categories and events that you can be notified of\. It also provides information about subscribing to and working with Amazon RDS event subscriptions\.
 
@@ -134,7 +135,7 @@ The following table shows the event category and a list of events when a DB secu
 |  Category  | RDS Event ID |  Description  | 
 | --- | --- | --- | 
 |  configuration change  | RDS\-EVENT\-0038 |  The security group has been modified\.  | 
-|  failure  | RDS\-EVENT\-0039 |  The Amazon EC2 security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
+|  failure  | RDS\-EVENT\-0039 |  The security group owned by \[user\] does not exist; authorization for the security group has been revoked\.  | 
 
 The following table shows the event category and a list of events when a DB snapshot is the source type\.
 
@@ -192,6 +193,11 @@ The following table shows the event category and a list of events when an Aurora
 | notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
 | notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
 | notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
+| backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
+| backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
+| creation | RDS\-EVENT\-0170 |  DB cluster created\.  | 
+| deletion | RDS\-EVENT\-0171 |  DB cluster deleted\.  | 
+| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## Subscribing to Amazon RDS Event Notification<a name="USER_Events.Subscribing"></a>
 
@@ -238,7 +244,7 @@ To subscribe to RDS event notification, use the AWS CLI [https://docs.aws.amazon
 + `--sns-topic-arn`
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-event-subscription \
@@ -352,7 +358,7 @@ To modify an Amazon RDS event notification subscription, use the AWS CLI [https:
 
 **Example**  
 The following code enables `myeventsubscription`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-event-subscription \
@@ -388,7 +394,7 @@ To add a source identifier to an Amazon RDS event notification subscription, use
 
 **Example**  
 The following example adds the source identifier `mysqldb` to the `myrdseventsubscription` subscription\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-source-identifier-to-subscription \
@@ -425,7 +431,7 @@ To remove a source identifier from an Amazon RDS event notification subscription
 
 **Example**  
 The following example removes the source identifier `mysqldb` from the `myrdseventsubscription` subscription\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds remove-source-identifier-from-subscription \

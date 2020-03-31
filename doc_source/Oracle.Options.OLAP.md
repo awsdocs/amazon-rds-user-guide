@@ -49,7 +49,7 @@ If Oracle Java Virtual Machine \(JVM\) is *not* installed on the DB instance, th
 1. Add the **OLAP** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
+   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Using Oracle OLAP<a name="Oracle.Options.OLAP.Using"></a>

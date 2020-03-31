@@ -1,6 +1,6 @@
 # Connecting to a DB Instance Running the MySQL Database Engine<a name="USER_ConnectToInstance"></a>
 
- Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
+ Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
 
 To authenticate to your RDS DB instance, you can use one of the authentication methods for MySQL and IAM database authentication\.
 + To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication Method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
@@ -23,16 +23,9 @@ If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.
 
 You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- The MySQL Command Line Tool](http://dev.mysql.com/doc/refman/5.6/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL client\), see [Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
 
-Two common causes of connection failures to a new DB instance are:
-+ The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
-
-  You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\.
-
-  If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
-+ The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
-
 You can use SSL encryption on connections to an Amazon RDS MySQL DB instance\. For information, see [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
 
+**Note**  
 For information on connecting to a MariaDB DB instance, see [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)\.
 
 ## Connecting from the MySQL Client<a name="USER_ConnectToInstance.CLI"></a>
@@ -133,3 +126,15 @@ mysql>
 1. From **Stored Connection**, choose your connection\.
 
 1. Choose **OK**\.
+
+## Troubleshooting Connections to Your MySQL DB Instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
+
+Two common causes of connection failures to a new DB instance are:
++ The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
+
+  You can add or edit an inbound rule in the security group\. For **Source**, choose **My IP**\. This allows access to the DB instance from the IP address detected in your browser\.
+
+  If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
++ The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
+
+For more information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

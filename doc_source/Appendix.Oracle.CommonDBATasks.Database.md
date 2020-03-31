@@ -304,7 +304,7 @@ The following query returns the current audit configuration for `SYS.AUD$` for a
 select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
 ```
 
-The following commands disables audit of `ALL` on `SYS.AUD$`\.
+The following command disables audit of `ALL` on `SYS.AUD$`\.
 
 ```
 exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;                      
@@ -368,7 +368,7 @@ Each procedure takes the same parameters as the corresponding procedure in the `
 
 Complete the following steps to skip corrupt blocks during index and table scans\.
 
-1. Run the following procedures to create repair tables if the don't already exist\.
+1. Run the following procedures to create repair tables if they don't already exist\.
 
    ```
    exec rdsadmin.rdsadmin_dbms_repair.create_repair_table;
@@ -459,7 +459,7 @@ The `resize_temp_tablespace` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `temp_tbs` | varchar2 | — | Yes | The name of the tempoarary tablespace to resize\. | 
+| `temp_tbs` | varchar2 | — | Yes | The name of the temporary tablespace to resize\. | 
 | `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The `resize_tempfile` procedure has the following parameters\.
@@ -469,7 +469,7 @@ The `resize_tempfile` procedure has the following parameters\.
 
 | Parameter Name | Data Type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `file_id` | binary\_integer | — | Yes | The file identifier of the tempoarary tablespace to resize\. | 
+| `file_id` | binary\_integer | — | Yes | The file identifier of the temporary tablespace to resize\. | 
 | `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a Read Replica\.

@@ -141,7 +141,7 @@ The following options are used to copy a DB snapshot\. Not all options are requi
 
 **Example From Unencrypted, To Same Region**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-snapshot \
@@ -160,7 +160,7 @@ aws rds copy-db-snapshot ^
 
 **Example From Unencrypted, Across Regions**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the AWS Region in which the command is run\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-snapshot \
@@ -177,7 +177,7 @@ aws rds copy-db-snapshot ^
 
 **Example From Encrypted, Across Regions**  
 The following code example copies an encrypted DB snapshot from the us\-west\-2 region in the us\-east\-1 region\. Run the command in the us\-east\-1 region\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-snapshot \

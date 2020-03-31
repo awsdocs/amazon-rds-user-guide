@@ -86,9 +86,14 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ## Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon RDS to call AWS Directory Service for you, you must create an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. This role allows Amazon RDS to make calls to the AWS Directory Service\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to the AWS Directory Service\.
 
-For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html)\.
+When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+
+For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
+
+**Note**  
+The IAM role used for Windows Authentication for RDS for Microsoft SQL Server can't be used for Amazon RDS for PostgreSQL\.
 
 Optionally, you can create policies with the required permissions instead of using the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. In this case, the IAM role must have the following IAM trust policy\.
 
@@ -97,11 +102,12 @@ Optionally, you can create policies with the required permissions instead of usi
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect:" "Allow"
+      "Sid": "",
+      "Effect": "Allow",
       "Principal": {
         "Service": [
-          "rds.amazonaws.com",
-          "directoryservice.rds.amazonaws.com"
+          "directoryservice.rds.amazonaws.com",
+          "rds.amazonaws.com"
         ]
       },
       "Action": "sts:AssumeRole"
@@ -165,7 +171,7 @@ If different AWS accounts own the VPCs, complete the following steps:
 ## Step 5: Create or Modify a PostgreSQL DB instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
 
 Create or modify a PostgreSQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
-+   Create a new PostgreSQL DB instance using the console, the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\. For instructions, see [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md)\. 
++   Create a new PostgreSQL DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\. For instructions, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 +   Modify an existing PostgreSQL DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\. For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 +   Restore a PostgreSQL DB instance from a DB snapshot using the console, the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\. For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 +   Restore a PostgreSQL DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\. For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 

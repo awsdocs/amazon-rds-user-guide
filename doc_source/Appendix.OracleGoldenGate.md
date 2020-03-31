@@ -118,7 +118,7 @@ Make sure that the source database has the `compatible` parameter set to 11\.2\.
 
 You can use the following Amazon RDS CLI commands to create a new parameter group and set the `compatible` parameter\. Make sure that you associate the new parameter group with the source DB instance\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-parameter-group \

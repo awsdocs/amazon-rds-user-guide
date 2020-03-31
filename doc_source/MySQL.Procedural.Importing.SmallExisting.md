@@ -41,7 +41,7 @@ You must create any stored procedures, triggers, functions, or events manually i
 
 The following example copies the `world` sample database on the local host to an Amazon RDS MySQL DB instance\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 sudo mysqldump -u localuser \

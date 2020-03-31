@@ -97,7 +97,7 @@ To create an option group, use the AWS CLI [https://docs.aws.amazon.com/cli/late
 
 **Example**  
 The following example creates an option group named `testoptiongroup`, which is associated with the Oracle Enterprise Edition DB engine\. The description is enclosed in quotation marks\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
        
@@ -138,7 +138,7 @@ To copy an option group, use the AWS CLI [copy\-option\-group](https://docs.aws.
 
 **Example**  
 The following example creates an option group named `new-local-option-group`, which is a local copy of the option group `my-remote-option-group`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-option-group \
@@ -204,7 +204,7 @@ To add an option to an option group, run the AWS CLI [add\-option\-to\-option\-g
 
 **Example**  
 The following example adds the Oracle Enterprise Manager Database Control \(OEM\) option to an option group named `testoptiongroup` and immediately enables it\. Even if you use the default security group, you must specify that security group\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-option-to-option-group \
@@ -230,7 +230,7 @@ DBSECURITYGROUPMEMBERSHIPS   default authorized
 
 **Example**  
 The following example adds the Oracle OEM option to an option group\. It also specifies a custom port and a pair of Amazon EC2 VPC security groups to use for that port\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-option-to-option-group \
@@ -257,7 +257,7 @@ VPCSECURITYGROUPMEMBERSHIPS     active  sg-test2
 
 **Example**  
 The following example adds the Oracle option NATIVE\_NETWORK\_ENCRYPTION to an option group and specifies the option settings\. If no option settings are specified, default values are used\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-option-to-option-group \
@@ -366,7 +366,7 @@ To modify an option setting, use the AWS CLI [https://docs.aws.amazon.com/cli/la
 
 **Example**  
 The following example modifies the port that the Oracle Enterprise Manager Database Control \(OEM\) uses in an option group named `testoptiongroup` and immediately applies the change\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-option-to-option-group \
@@ -392,7 +392,7 @@ DBSECURITYGROUPMEMBERSHIPS   default  authorized
 
 **Example**  
 The following example modifies the Oracle option NATIVE\_NETWORK\_ENCRYPTION and changes the option settings\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds add-option-to-option-group \
@@ -456,7 +456,7 @@ To remove an option from an option group, use the AWS CLI [ `remove-option-from-
 
 **Example**  
 The following example removes the Oracle Enterprise Manager Database Control \(OEM\) option from an option group named `testoptiongroup` and immediately applies the change\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
   
@@ -537,7 +537,7 @@ To delete an option group, use the AWS CLI [https://docs.aws.amazon.com/cli/late
 
 **Example**  
 The following example deletes an option group named `testoptiongroup`\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
        

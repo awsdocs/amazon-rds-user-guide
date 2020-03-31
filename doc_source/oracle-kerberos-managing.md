@@ -26,7 +26,7 @@ Only Kerberos authentication with Amazon RDS for Oracle sends traffic to the dom
 
 ## Force\-Rotating Kerberos Keys<a name="oracle-kerberos-managing.rotation"></a>
 
-A secret key is shared between AWS Managed Microsoft AD and Amazon RDS for Oracle DB instance\. This key is rotated automatically every 45 days\. You can use the following Amazon RDS procedure to force the of rotation this key:
+A secret key is shared between AWS Managed Microsoft AD and Amazon RDS for Oracle DB instance\. This key is rotated automatically every 45 days\. You can use the following Amazon RDS procedure to force the rotation of this key\.
 
 ```
 SELECT rdsadmin.rdsadmin_kerberos_auth_tasks.rotate_kerberos_keytab AS TASK_ID FROM DUAL;    			

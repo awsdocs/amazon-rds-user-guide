@@ -90,7 +90,7 @@ The following code modifies `mydbinstance` by setting the CA certificate to `rds
 By default, this operation reboots your DB instance\. If you don't want to reboot your DB instance during this operation, you can use the `modify-db-instance` CLI command and specify the `--no-certificate-rotation-restart` option\.  
 This option will not rotate the certificate until the next time the database restarts, either for planned or unplanned maintenance\. This option is only recommended if you do not use SSL/TLS\.  
 Use `--apply-immediately` to apply the update immediately\. By default, this operation is scheduled to run during your next maintenance window\.
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -296,7 +296,7 @@ When you schedule this operation, make sure that you have updated your client\-s
 The following code example modifies `mydbinstance` by setting the CA certificate to `rds-ca-2015`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\.   
 When the `--certificate-rotation-restart` option is specified, using the `--apply-immediately` option causes an outage\. The `--certificate-rotation-restart` option, the default, specifies that the DB instance is restarted when the certificate is rotated\.  
 The `--no-certificate-rotation-restart` option, specifies that the DB instance is not restarted when the certificate is rotated\. Use the `--no-certificate-rotation-restart` option only if you are not using SSL/TLS to connect to the DB instance\.
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

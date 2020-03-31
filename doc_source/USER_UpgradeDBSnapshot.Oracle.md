@@ -46,7 +46,7 @@ You might also need to include the following parameter\. The same option group c
 
 **Example**  
 The following example upgrades a DB snapshot\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-snapshot \

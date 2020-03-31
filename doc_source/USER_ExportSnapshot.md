@@ -228,7 +228,7 @@ To export a DB snapshot to Amazon S3 using the AWS CLI, use the [start\-export\-
 In the following examples, the snapshot export task is named *my\_snapshot\_export*, which exports a snapshot to an S3 bucket named *my\_export\_bucket*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds start-export-task \

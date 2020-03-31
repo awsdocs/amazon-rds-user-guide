@@ -122,9 +122,7 @@ To create a DB subnet group for the AWS Cloud, you specify at least two subnets\
 
 1. For the remaining sections, specify your DB instance settings\.
 
-   For information about each setting when creating a MySQL DB instance, see [Settings for MySQL DB Instances](USER_CreateInstance.md#USER_CreateInstance.Settings)\.
-
-   For information about each setting when creating a PostgreSQL DB instance, see [Settings for PostgreSQL DB Instances](USER_CreatePostgreSQLInstance.md#USER_CreatePostgreSQLInstance.Settings)\.
+   For information about each setting when creating a DB instance, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 1. Choose **Create database**\. 
 

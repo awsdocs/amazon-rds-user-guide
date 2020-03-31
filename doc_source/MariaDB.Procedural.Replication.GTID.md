@@ -27,7 +27,7 @@ To start replication between an external master instance and a MariaDB DB instan
 **Note**  
 Make sure there is not a space between the `-p` option and the entered password\. 
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    mysqldump \

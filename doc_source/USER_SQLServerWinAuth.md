@@ -188,7 +188,7 @@ If a different AWS account owns the directory, you must share the directory\.
 Create or modify a SQL Server DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 + Create a new SQL Server DB instance using the console, the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
-  For instructions, see [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md)\.
+  For instructions, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 + Modify an existing SQL Server DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 
   For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
@@ -213,7 +213,7 @@ When you use the AWS CLI, the following parameters are required for the DB insta
 
 For example, the following CLI command modifies a DB instance to use a directory\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \

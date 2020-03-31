@@ -82,7 +82,7 @@ To migrate data from a MySQL DB snapshot to a MariaDB DB instance, use the AWS C
 + \-\-engine – The database engine to use for the new instance\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds restore-db-instance-from-db-snapshot \

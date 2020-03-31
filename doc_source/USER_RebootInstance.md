@@ -39,7 +39,7 @@ The time required to reboot your DB instance depends on the crash recovery proce
 To reboot a DB instance by using the AWS CLI, call the [https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/reboot-db-instance.html) command\. 
 
 **Example Simple Reboot**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds reboot-db-instance \
@@ -54,7 +54,7 @@ aws rds reboot-db-instance ^
 
 **Example Reboot with Failover**  
 To force a failover from one AZ to the other, use the `--force-failover` parameter\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds reboot-db-instance \

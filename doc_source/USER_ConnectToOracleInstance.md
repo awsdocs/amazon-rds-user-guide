@@ -100,7 +100,7 @@ To connect to your DB instance, you need its DNS name and port number\. For info
 
 **Example To connect to an Oracle DB instance using SQL\*Plus**  
 In the following examples, substitute the user name of your DB instance administrator\. Also, substitute the DNS name for your DB instance, and then include the port number and the Oracle SID\. The SID value is the name of the DB instance's database that you specified when you created the DB instance, and not the name of the DB instance\.   
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. sqlplus 'user_name@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dns_name)(PORT=port))(CONNECT_DATA=(SID=database_name)))'                  
@@ -157,4 +157,4 @@ The following are issues you might encounter when you try to connect to your Ora
 |  **Connect failed because target host or object does not exist – Oracle, Error: ORA\-12545 **   |  Make sure that you specified the server name and port number correctly\. For **Server name**, enter the DNS name from the console\.  For information about finding the DNS name and port number for a DB instance, see [Finding the Endpoint of Your DB Instance](#USER_Endpoint)\.  | 
 |  **Invalid username/password; logon denied – Oracle, Error: ORA\-01017**   |  You were able to reach the DB instance, but the connection was refused\. This is usually caused by providing an incorrect user name or password\. Verify the user name and password, and then retry\.   | 
 
-## <a name="USER_ConnectToOracleInstance.related"></a>
+For more information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

@@ -69,7 +69,7 @@ To delete a DB instance by using the AWS CLI, call the [delete\-db\-instance](ht
 + `--final-db-snapshot-identifier` or `--skip-final-snapshot`
 
 **Example With a final snapshot and no retained automated backups**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds delete-db-instance \
@@ -87,7 +87,7 @@ aws rds delete-db-instance ^
 ```
 
 **Example With retained automated backups and no final snapshot**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds delete-db-instance \

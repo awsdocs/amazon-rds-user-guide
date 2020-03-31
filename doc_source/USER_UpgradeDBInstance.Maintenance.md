@@ -59,7 +59,7 @@ To cancel a maintenance action, modify the DB instance and disable **Auto minor 
 To apply a pending update to a DB instance, use the [apply\-pending\-maintenance\-action](https://docs.aws.amazon.com/cli/latest/reference/rds/apply-pending-maintenance-action.html) AWS CLI command\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds apply-pending-maintenance-action \
@@ -83,7 +83,7 @@ To cancel a maintenance action, run the [modify\-db\-instance](https://docs.aws.
 To return a list of resources that have at least one pending update, use the [describe\-pending\-maintenance\-actions](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-pending-maintenance-actions.html) AWS CLI command\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-pending-maintenance-actions \
@@ -105,7 +105,7 @@ The following are the accepted values for the `Name` parameter of a filter:
 For example, the following example returns the pending maintenance actions for the `sample-instance1` and `sample-instance2` DB instances\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-pending-maintenance-actions \
@@ -192,7 +192,7 @@ To adjust the preferred maintenance window, use the AWS CLI [https://docs.aws.am
 
 **Example**  
 The following code example sets the maintenance window to Tuesdays from 4:00\-4:30AM UTC\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

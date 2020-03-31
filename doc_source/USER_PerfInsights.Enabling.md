@@ -14,7 +14,7 @@ You can use the console to enable Performance Insights when you create a new DB 
 
 When you create a new DB instance, Performance Insights is enabled when you choose **Enable Performance Insights** in the **Performance Insights** section\.
 
-To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB Instance](CHAP_CommonTasks.Create.md)\.
+To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 The following screenshot shows the **Performance Insights** section\.
 
@@ -68,7 +68,7 @@ The following procedure describes how to enable Performance Insights for a DB in
 
   The following example enables Performance Insights for `sample-db-instance`\.
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds modify-db-instance \
@@ -88,7 +88,7 @@ When you enable Performance Insights, you can optionally specify the amount of t
 
 The following example enables Performance Insights for `sample-db-instance` and specifies that Performance Insights data is retained for two years\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \

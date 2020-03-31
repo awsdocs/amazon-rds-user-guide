@@ -68,7 +68,7 @@ MySQL processes each metadata file, which includes tablespaces, during the crash
 
 Since the `innodb_file_per_table` parameter resides in a parameter group, you can change the parameter value by editing the parameter group used by your DB instance without having to reboot the DB instance\. After the setting is changed, for example, from 1 \(create individual tables\) to 0 \(use shared tablespace\), new InnoDB tables will be added to the shared tablespace while existing tables continue to have individual tablespaces\. To move an InnoDB table to the shared tablespace, you must use the `ALTER TABLE` command\.
 
-### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w50aac29c79c13c12"></a>
+### Migrating Multiple Tablespaces to the Shared Tablespace<a name="w50aac29c75c13c12"></a>
 
 You can move an InnoDB table's metadata from its own tablespace to the shared tablespace, which will rebuild the table metadata according to the `innodb_file_per_table` parameter setting\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
@@ -128,14 +128,14 @@ Where *procedure\-name* is one of the procedures in the table\.
 
 | Procedure | Description | 
 | --- | --- | 
-| `rds_enable_gsh_collector` |   Enables GoSH to take default snapshots at intervals specified by `rds_set_gsh_collector`\.   | 
-| `rds_set_gsh_collector` |   Specifies the interval, in minutes, between snapshots\. Default value is 5\.   | 
-| `rds_disable_gsh_collector` |   Disables snapshots\.   | 
-| `rds_collect_global_status_history` |   Takes a snapshot on demand\.   | 
-| `rds_enable_gsh_rotation` |   Enables rotation of the contents of the `mysql.rds_global_status_history` table to `mysql.rds_global_status_history_old` at intervals specified by `rds_set_gsh_rotation`\.   | 
-| `rds_set_gsh_rotation` |   Specifies the interval, in days, between table rotations\. Default value is 7\.   | 
-| `rds_disable_gsh_rotation` |   Disables table rotation\.   | 
-| `rds_rotate_global_status_history` |   Rotates the contents of the `mysql.rds_global_status_history` table to `mysql.rds_global_status_history_old` on demand\.   | 
+| `mysql.rds_enable_gsh_collector` |   Enables GoSH to take default snapshots at intervals specified by `rds_set_gsh_collector`\.   | 
+| `mysql.rds_set_gsh_collector` |   Specifies the interval, in minutes, between snapshots\. Default value is 5\.   | 
+| `mysql.rds_disable_gsh_collector` |   Disables snapshots\.   | 
+| `mysql.rds_collect_global_status_history` |   Takes a snapshot on demand\.   | 
+| `mysql.rds_enable_gsh_rotation` |   Enables rotation of the contents of the `mysql.rds_global_status_history` table to `mysql.rds_global_status_history_old` at intervals specified by `rds_set_gsh_rotation`\.   | 
+| `mysql.rds_set_gsh_rotation` |   Specifies the interval, in days, between table rotations\. Default value is 7\.   | 
+| `mysql.rds_disable_gsh_rotation` |   Disables table rotation\.   | 
+| `mysql.rds_rotate_global_status_history` |   Rotates the contents of the `mysql.rds_global_status_history` table to `mysql.rds_global_status_history_old` on demand\.   | 
 
 When GoSH is running, you can query the tables that it writes to\. For example, to query the hit ratio of the Innodb buffer pool, you would issue the following query: 
 

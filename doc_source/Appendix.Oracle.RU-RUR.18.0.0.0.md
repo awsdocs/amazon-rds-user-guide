@@ -8,7 +8,7 @@ The following versions are available for Oracle database engine 18\.0\.0\.0:
 ## Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-01.rur-2020-01.r1"></a>
 
 Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1 adds support for the following: 
-+ Patch 30480385: Database Release Update : 18\.9\.0\.0\.200114
++ Patch 30480385: Database Release Update: 18\.9\.0\.0\.200114
 + Patch 30501926: OJVM RELEASE UPDATE: 18\.9\.0\.0\.200114
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019B\)
 + Patch 29997959: DSTv34 for OJVM \(TZDATA2019G\)
@@ -43,7 +43,7 @@ Bugs fixed:
 ## Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1"></a>
 
 Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 adds support for the following: 
-+ Patch 29757256: Database Release Update : 18\.7\.0\.0\.190716
++ Patch 29757256: Database Release Update: 18\.7\.0\.0\.190716
 + Patch 29774410: OJVM RELEASE UPDATE: 18\.7\.0\.0\.190716
 + Patch 27539475: "ORA\-3816 \- MISSING MESSAGE INFORMATION FOR 3816 ERROR\."
 + Patch 29213893: "DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE"

@@ -80,7 +80,7 @@ aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroup
 The output contains duplicates\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-parameter-group \
@@ -146,7 +146,7 @@ To modify a DB parameter group, use the AWS CLI [https://docs.aws.amazon.com/cli
 The following example modifies the` max_connections` and `max_allowed_packet` values in the DB parameter group named *mydbparametergroup*\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-parameter-group \
@@ -211,7 +211,7 @@ To copy a DB parameter group, use the AWS CLI [ `copy-db-parameter-group`](https
 The following example creates a new DB parameter group named `mygroup2` that is a copy of the DB parameter group `mygroup1`\.
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-db-parameter-group \
@@ -270,7 +270,7 @@ DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MyS
 DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
 ```
 The following example describes the *mydbparamgroup1* parameter group\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds describe-db-parameter-groups \

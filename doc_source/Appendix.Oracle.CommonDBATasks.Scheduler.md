@@ -102,7 +102,7 @@ END;
 
 ## Modifying the Repeat Interval for Jobs of NAMED Type<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Modifying_Named"></a>
 
-Some Oracle Scheduler jobs use a schedule name instead of an interval\. For these type of jobs, you must create a new named schedule in the master user schema\. Use the standard Oracle `sys.dbms_scheduler.create_schedule` procedure to do this\. Also, use the `rdsadmin.rdsadmin_dbms_scheduler.set_attribute procedure` to assign the new named schedule to the job\. 
+Some Oracle Scheduler jobs use a schedule name instead of an interval\. For this type of jobs, you must create a new named schedule in the master user schema\. Use the standard Oracle `sys.dbms_scheduler.create_schedule` procedure to do this\. Also, use the `rdsadmin.rdsadmin_dbms_scheduler.set_attribute procedure` to assign the new named schedule to the job\. 
 
 This procedure uses the following common parameter for Oracle Scheduler tasks:
 + `name`

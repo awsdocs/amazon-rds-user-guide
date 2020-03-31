@@ -48,7 +48,7 @@ After you add the MariaDB Audit Plugin, you don't need to restart your DB instan
 1. Add the **MARIADB\_AUDIT\_PLUGIN** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Audit Plugin Option Settings](#Appendix.MariaDB.Options.AuditPlugin.Options)\. 
 
 1. Apply the option group to a new or existing DB instance\. 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the DB instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### Viewing and Downloading the MariaDB Audit Plugin Log<a name="Appendix.MariaDB.Options.AuditPlugin.Log"></a>

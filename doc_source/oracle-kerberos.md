@@ -35,7 +35,7 @@ To set up Kerberos authentication for an Oracle DB instance, complete the follow
 1. Create and configure users in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users in your Microsoft Active Directory, see [Manage Users and Groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
 
 1. Create or modify an Oracle DB instance either from the console, CLI, or RDS API using one of the following methods:
-   + [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)
+   + [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)
    + [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)
    + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
    + [Restoring a DB Instance to a Specified Time](USER_PIT.md)

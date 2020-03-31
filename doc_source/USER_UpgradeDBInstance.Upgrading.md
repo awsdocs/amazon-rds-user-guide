@@ -54,7 +54,7 @@ To upgrade the engine version of a DB instance, use the CLI [modify\-db\-instanc
 + `--no-apply-immediately` – to apply changes during the next maintenance window\. To apply changes immediately, use `--apply-immediately`\. 
 
 **Example**  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 1. aws rds modify-db-instance \
@@ -90,7 +90,7 @@ If you want Amazon RDS to upgrade the DB engine version of a database automatica
 + The database has auto minor version upgrade enabled\.
 
 You can control whether auto minor version upgrade is enabled for a DB instance when you perform the following tasks:
-+ [Creating a DB instance](CHAP_CommonTasks.Create.md)
++ [Creating a DB instance](USER_CreateDBInstance.md)
 + [Modifying a DB instance](Overview.DBInstance.Modifying.md)
 + [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)
 + [Restoring a DB instance from a snapshot](USER_RestoreFromSnapshot.md)

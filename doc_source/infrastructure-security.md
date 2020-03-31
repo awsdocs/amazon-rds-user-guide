@@ -10,7 +10,7 @@ In addition, Amazon RDS offers features to help support infrastructure security\
 
 ## Security Groups<a name="infrastructure-security.security-groups"></a>
 
-Security groups control the access that traffic has in and out of a DB instance\. By default, network access is turned off to a DB instance\. You can specify rules in a security group that allow access from an IP address range, port, or Amazon EC2 security group\. After ingress rules are configured, the same rules apply to all DB instances that are associated with that security group\.
+Security groups control the access that traffic has in and out of a DB instance\. By default, network access is turned off to a DB instance\. You can specify rules in a security group that allow access from an IP address range, port, or security group\. After ingress rules are configured, the same rules apply to all DB instances that are associated with that security group\.
 
 For more information, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
 

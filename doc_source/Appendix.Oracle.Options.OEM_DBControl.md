@@ -53,7 +53,7 @@ When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB inst
 If you add the OEM option to an existing option group that is already attached to one or more Oracle 19c, Oracle 18c, or Oracle 12c DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 **Note**  
@@ -69,7 +69,7 @@ You can access either OEM Database Control or OEM Database Express from your web
 1. https://mydb.f9rbfa893tft.us-east-1.rds.amazonaws.com:1158/em
 ```
 
-When you access either tool from you web browser, a login window appears that prompts you for a user name and password\. Type the master user name and master password for your DB instance\. You are now ready to manage your Oracle databases\. 
+When you access either tool from your web browser, a login window appears that prompts you for a user name and password\. Type the master user name and master password for your DB instance\. You are now ready to manage your Oracle databases\. 
 
 ## Modifying OEM Database Settings<a name="Appendix.Oracle.Options.OEM_DBControl.ModifySettings"></a>
 

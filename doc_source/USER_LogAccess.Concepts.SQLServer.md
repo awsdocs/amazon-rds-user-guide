@@ -69,7 +69,7 @@ You can also publish SQL Server logs using the following commands:
 
 **Example**  
 The following example creates an SQL Server DB instance with CloudWatch Logs publishing enabled\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings that can include `error`, `agent`, or both\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance \
@@ -91,7 +91,7 @@ When using the Windows command prompt, you must escape double quotes \("\) in JS
 
 **Example**  
 The following example modifies an existing SQL Server DB instance to publish log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `EnableLogTypes`, and its value is an array of strings that can include `error`, `agent`, or both\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \
@@ -109,7 +109,7 @@ When using the Windows command prompt, you must escape double quotes \("\) in JS
 
 **Example**  
 The following example modifies an existing SQL Server DB instance to disable publishing agent log files to CloudWatch Logs\. The `--cloudwatch-logs-export-configuration` value is a JSON object\. The key for this object is `DisableLogTypes`, and its value is an array of strings that can include `error`, `agent`, or both\.  
-For Linux, OS X, or Unix:  
+For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-instance \

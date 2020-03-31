@@ -24,7 +24,7 @@ General Purpose SSD storage offers cost\-effective storage that is acceptable fo
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
 + Oracle instances: 20 GiB\-  64 TiB 
 
-Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
+Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
 
 Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O Credits and Burst Performance](#CHAP_Storage.IO.Credits)\. 
 
@@ -113,6 +113,7 @@ Provisioned IOPS SSD storage provides a way to reserve I/O capacity by specifyin
 
 Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS SSD for any new storage needs\. The following are some limitations for magnetic storage: 
 + Doesn't allow you to scale storage when using the SQL Server database engine\.
++ Doesn't support storage autoscaling\.
 + Doesn't support elastic volumes\.
 + Limited to a maximum size of 3 TiB\.
 + Limited to a maximum of 1,000 IOPS\.
@@ -185,14 +186,14 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.m3\.medium | 32 | 16 | 32 | 32 | 32 | 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.16xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.12xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.8xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.4xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.r5\.large | 16 | 16 | 16 | 64 | 64 | 
+| db\.r5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
+| db\.r5\.large | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4 – Current Generation Memory Optimized Instance Classes | 
 | db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 

@@ -90,7 +90,7 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
    The following AWS CLI command creates an IAM policy named `rds-s3-integration-policy` with these options\. It grants access to a bucket named `your-s3-bucket-arn`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-policy \
@@ -179,7 +179,7 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
    The following AWS CLI command creates the `rds-s3-integration-role` for this purpose\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam create-role \
@@ -238,7 +238,7 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
    The following AWS CLI command attaches the policy to the role named `rds-s3-integration-role`\.  
 **Example**  
 
-   For Linux, OS X, or Unix:
+   For Linux, macOS, or Unix:
 
    ```
    aws iam attach-role-policy \
@@ -284,7 +284,7 @@ To add an IAM role to a DB instance, the status of the DB instance must be **ava
 + The following AWS CLI command adds your IAM role to an RDS SQL Server DB instance named `mydbinstance`\.  
 **Example**  
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds add-role-to-db-instance \
@@ -483,7 +483,7 @@ To remove an IAM role from a DB instance, the status of the DB instance must be 
 + The following AWS CLI command removes the IAM role from a RDS SQL Server DB instance named `mydbinstance`\.  
 **Example**  
 
-  For Linux, OS X, or Unix:
+  For Linux, macOS, or Unix:
 
   ```
   aws rds remove-role-from-db-instance \

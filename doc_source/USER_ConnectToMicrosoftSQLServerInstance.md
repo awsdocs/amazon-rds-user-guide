@@ -21,7 +21,7 @@ In this procedure, you connect to your sample DB instance by using Microsoft SQL
    1. Choose the SQL Server DB instance name to display its details\. 
 
    1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
-![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
+![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
 
 1. Start SQL Server Management Studio\. 
 
@@ -32,7 +32,7 @@ In this procedure, you connect to your sample DB instance by using Microsoft SQL
 
    1. For **Server type**, choose **Database Engine**\. 
 
-   1. For **Server name**, enter the DNS name and port number of your DB Instance, separated by a comma\. 
+   1. For **Server name**, enter the DNS name and port number of your DB instance, separated by a comma\. 
 **Important**  
 Change the colon between the DNS name and port number to a comma\. 
 
@@ -91,7 +91,7 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
    1. Open the RDS console, then choose **Databases** to display a list of your DB instances\. 
 
    1. Choose the name of your SQL Server DB instance to display its details\.   
-![\[Locate DB Instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
+![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
 
    1. On the **Connectivity** tab, copy the endpoint\. Also, note the port used by the DB instance\. 
 

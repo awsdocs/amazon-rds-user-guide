@@ -126,15 +126,6 @@ In this step, you create a DB instance and use the VPC name, the DB subnet group
 **Note**  
 If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. For information on updating the DNS information for a VPC instance, see [Updating DNS Support for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html)\. 
 
-For details on how to create a DB instance for your DB engine, see the topic following that discusses your DB engine\. For each engine, when prompted in the **Network & Security** section, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\. 
+For details on how to create a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
-
-****  
-
-| Database Engine | Relevant Documentation | 
-| --- | --- | 
-| MariaDB | [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md) | 
-| Microsoft SQL Server | [Creating a DB Instance Running the Microsoft SQL Server Database Engine](USER_CreateMicrosoftSQLServerInstance.md) | 
-| MySQL | [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md) | 
-| Oracle | [Creating a DB Instance Running the Oracle Database Engine](USER_CreateOracleInstance.md) | 
-| PostgreSQL | [Creating a DB Instance Running the PostgreSQL Database Engine](USER_CreatePostgreSQLInstance.md) | 
+When prompted in the **Network & Security** section, enter the VPC name, the DB subnet group, and the VPC security group you created in the previous steps\.

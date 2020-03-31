@@ -48,7 +48,7 @@ If you plan to load data into a new DB instance that contains no data, you can s
 
 In the example below, we use the AWS CLI `create-db-snapshot` command to create a DB snapshot of our AcmeRDS instance and give the DB snapshot the identifier "preload"\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds create-db-snapshot \
@@ -70,7 +70,7 @@ Keep in mind that restoring a database from a DB snapshot creates a new DB insta
 
 For example, to create a DB instance for dry runs or other testing, you would give the DB instance its own identifier\. In the example, "AcmeRDS\-2" is the identifier and we would connect to the database instance using the endpoint associated with AcmeRDS\-2\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds restore-db-instance-from-db-snapshot \
@@ -88,7 +88,7 @@ aws rds restore-db-instance-from-db-snapshot ^
 
 To reuse the existing endpoint, we must first delete the database instance and then give the restored database the same identifier\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds delete-db-instance \
@@ -127,7 +127,7 @@ DB instances have automated backups enabled by default \(with a one day retentio
 
 Use the AWS CLI `modify-db-instance` command to set the backup retention to zero and apply the change immediately\. Setting the retention period to zero requires a DB instance restart, so wait until the restart has completed before proceeding\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \
@@ -147,7 +147,7 @@ aws rds modify-db-instance ^
 
 You can check the status of your DB instance with the AWS CLI `describe-db-instances` command\. The example displays the status of the AcmeRDS database instance and includes the \-\-headers option to show column headings\. 
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds describe-db-instances \
@@ -169,7 +169,7 @@ When the Status column shows that the database is available, you're ready to pro
 
 Use the mysqlimport utility to load the flat files into Amazon RDS\. In the example we tell mysqlimport to load all of the files named "sales" with an extension starting with "part\_"\. This is a convenient way to load all of the files created in the "split" example\. Use the \-\-compress option to minimize network traffic\. The \-\-fields\-terminated\-by=',' option is used for CSV files and the \-\-local option specifies that the incoming data is located on the client\. Without the \-\-local option, the Amazon RDS DB instance looks for the data on the database host, so always specify the \-\-local option\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 mysqlimport --local \
@@ -199,7 +199,7 @@ After the load is finished, re\-enable Amazon RDS automated backups by setting t
 
 In the example, we use the AWS CLI modify\-db\-instance command to enable automated backups for the AcmeRDS DB instance and set the retention period to 1 day\.
 
-For Linux, OS X, or Unix:
+For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-instance \

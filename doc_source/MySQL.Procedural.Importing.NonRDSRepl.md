@@ -69,7 +69,7 @@ If you need to migrate users and privileges, consider using a tool that generate
 On Windows, run the command window as an administrator\.
    + To produce SQL output, use the following command\.
 
-     For Linux, OS X, or Unix:
+     For Linux, macOS, or Unix:
 
      ```
      sudo mysqldump \
@@ -96,7 +96,7 @@ On Windows, run the command window as an administrator\.
      ```
    + To produce delimited\-text output, use the following command\.
 
-     For Linux, OS X, or Unix:
+     For Linux, macOS, or Unix:
 
      ```
      sudo mysqldump \
@@ -262,7 +262,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
       Your new DB instance appears in the **Databases** list with the status **Creating**\. Wait for the **Status** of your new DB instance to show as **Available**\.
 
-   Don't configure multiple Availability Zones, backup retention, or Read Replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way you want them for the production instance\. For a detailed walkthrough of creating an Amazon RDS MySQL DB instance, see [Creating a DB Instance Running the MySQL Database Engine](USER_CreateInstance.md)\. For a detailed walkthrough of creating an Amazon RDS MariaDB DB instance, see [Creating a DB Instance Running the MariaDB Database Engine](USER_CreateMariaDBInstance.md)\.
+   Don't configure multiple Availability Zones, backup retention, or Read Replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way you want them for the production instance\. For a detailed walkthrough of creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 1. Review the default configuration options for the Amazon RDS DB instance\. In the RDS console navigation pane, choose **Parameter groups**, and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group doesn't have the configuration options that you want, find a different one that does or create a new parameter group\. For more information on creating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
