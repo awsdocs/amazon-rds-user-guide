@@ -275,7 +275,7 @@ To connect to MySQL with Kerberos authentication, take the following steps:
 +  The domain name length can't be longer than 61 characters\. 
 +  You can't enable Kerberos authentication and IAM authentication at the same time\. Choose one authentication method or the other for your MySQL DB instance\. 
 +  Don't modify the DB instance port after enabling the feature\. 
-+  Don't use Kerberos authentication with Read Replicas\. 
++  Don't use Kerberos authentication with read replicas\. 
 +  To delete a DB instance with this feature enabled, first disable the feature\. To do this, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
 
    If you use the CLI or RDS API to delete a DB instance with this feature enabled, expect a delay\. 

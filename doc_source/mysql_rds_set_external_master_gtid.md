@@ -26,7 +26,7 @@ String\. The host name or IP address of the MariaDB instance running external to
 Integer\. The port used by the MariaDB instance running external to Amazon RDS to be configured as the replication master\. If your network configuration includes SSH port replication that converts the port number, specify the port number that is exposed by SSH\.
 
  *replication\_user\_name*   
-String\. The ID of a user with REPLICATION SLAVE permissions in the MariaDB DB instance to be configured as the Read Replica\.
+String\. The ID of a user with REPLICATION SLAVE permissions in the MariaDB DB instance to be configured as the read replica\.
 
  *replication\_user\_password*   
 String\. The password of the user ID specified in `replication_user_name`\.
@@ -51,7 +51,7 @@ The `mysql.rds_set_external_master_gtid` procedure must be run by the master use
 **Warning**  
 Do not use `mysql.rds_set_external_master_gtid` to manage replication between two Amazon RDS DB instances\. Use it only when replicating with a MariaDB instance running external to RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with Read Replicas](USER_ReadRepl.md)\.
 
-After calling `mysql.rds_set_external_master_gtid` to configure an Amazon RDS DB instance as a Read Replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the Read Replica configuration\.
+After calling `mysql.rds_set_external_master_gtid` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the read replica configuration\.
 
 When `mysql.rds_set_external_master_gtid` is called, Amazon RDS records the time, user, and an action of "set master" in the `mysql.rds_history` and `mysql.rds_replication_status` tables\.
 

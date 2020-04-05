@@ -33,7 +33,7 @@ SELECT rdsadmin.rdsadmin_kerberos_auth_tasks.rotate_kerberos_keytab AS TASK_ID F
 ```
 
 **Note**  
-In a Read Replica configuration, this procedure is available only on the source DB instance and not on the Read Replica\.
+In a read replica configuration, this procedure is available only on the source DB instance and not on the read replica\.
 
 The `SELECT` statement returns the ID of the task in a `VARCHAR2` data type\. You can view the status of an ongoing task in a bdump file\. The bdump files are located in the `/rdsdbdata/log/trace` directory\. Each bdump file name is in the following format\.
 

@@ -24,7 +24,8 @@ The following are some limitations to using native backup and restore:
 + You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\.
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
 + Native backups of RDS databases larger than 1 TB aren't supported\. 
-+ You can't restore from more than 10 backup files at the same time\.
++ You can't back up to or restore from more than 10 backup files at the same time\.
++ A differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want a differential backup, but a snapshot exists, then do another full backup before proceeding with the differential backup\.
 + Differential and log restores aren't supported for databases with files that have their file\_guid \(unique identifier\) set to `NULL`\.
 + You can run up to two backup or restore tasks at the same time\.
 + You can't perform native log backups from SQL Server on Amazon RDS\.
@@ -190,7 +191,8 @@ exec msdb.dbo.rds_backup_database
 	@s3_arn_to_backup_to='arn:aws:s3:::bucket_name/file_name.extension',
 	[@kms_master_key_arn='arn:aws:kms:region:account-id:key/key-id'],	
 	[@overwrite_s3_backup_file=0|1],
-	[@type='DIFFERENTIAL|FULL'];
+	[@type='DIFFERENTIAL|FULL'],
+	[@number_of_files=n];
 ```
 
 The following parameters are required:
@@ -200,19 +202,43 @@ The following parameters are required:
   The file can have any extension, but `.bak` is usually used\. 
 
 The following parameters are optional:
-+ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\. 
++ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\.
+  + You can't use the default encryption key\. If you use the default key, the database won't be backed up\.
+  +  If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
+  + Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
++ `@overwrite_s3_backup_file` – A value that indicates whether to overwrite an existing backup file\.
+  + `0` – Doesn't overwrite an existing file\. This value is the default\.
 
-  You can't use the default encryption key\. If you use the default key, the database won't be backed up\. If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
-
-  Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
-+ `@overwrite_s3_backup_file` – A value that indicates whether to overwrite an existing backup file\. 
-  + `0` – Doesn't overwrite an existing file\. Setting this to 0 returns an error if the file already exists\. This value is the default\.
+    Setting `@overwrite_s3_backup_file` to 0 returns an error if the file already exists\.
   + `1` – Overwrites an existing file that has the specified name, even if it isn't a backup file\.
 + `@type` – The type of backup\.
   + `DIFFERENTIAL` – Makes a differential backup\.
   + `FULL` – Makes a full backup\. This value is the default\.
 
-A differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want a differential backup, but a snapshot exists, then do another full backup before proceeding with the differential backup\.
+  A differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want a differential backup, but a snapshot exists, then do another full backup before proceeding with the differential backup\.
+
+  You can look for the last full backup or snapshot using the following example SQL query:
+
+  ```
+  select top 1 
+  database_name
+  , 	backup_start_date
+  , 	backup_finish_date 
+  from    msdb.dbo.backupset 
+  where   database_name='mydatabase'
+  and     type = 'D' 
+  order by backup_start_date desc;
+  ```
++ `@number_of_files` – The number of files into which the backup will be divided \(chunked\)\. The maximum number is 10\.
+  + Multifile backup is supported for both full and differential backups\.
+  + If you enter a value of 1 or omit the parameter, a single backup file is created\.
+
+  Provide the prefix that the files have in common, then suffix that with an asterisk \(`*`\)\. The asterisk can be anywhere in the *file\_name* part of the S3 ARN\. The asterisk is replaced by a series of alphanumeric strings in the generated files, starting with `1-of-number_of_files`\.
+
+  For example, if the file names in the S3 ARN are `backup*.bak` and you set `@number_of_files=4`, the backup files generated are `backup1-of-4.bak`, `backup2-of-4.bak`, `backup3-of-4.bak`, and `backup4-of-4.bak`\.
+  + If any of the file names already exists, and `@overwrite_s3_backup_file` is 0, an error is returned\.
+  + Multifile backups can only have one asterisk in the *file\_name* part of the S3 ARN\.
+  + Single\-file backups can have any number of asterisks in the *file\_name* part of the S3 ARN\. Asterisks aren't removed from the generated file name\.
 
 #### Examples<a name="SQLServer.Procedural.Importing.Native.Backup.Examples"></a>
 
@@ -237,17 +263,53 @@ exec msdb.dbo.rds_backup_database
 @type='FULL';
 ```
 
-You can look for the last full backup or snapshot using the following example SQL\.
+**Example of Multifile Backup**  
 
 ```
-select top 1 
-database_name
-, 	backup_start_date
-, 	backup_finish_date 
-from    msdb.dbo.backupset 
-where   database_name='mydatabase'
-and     type = 'D' 
-order by backup_start_date desc;
+exec msdb.dbo.rds_backup_database 
+@source_db_name='mydatabase',
+@s3_arn_to_backup_to='arn:aws:s3:::aws_example_bucket/backup*.bak',
+@number_of_files=4;
+```
+
+**Example of Multifile Differential Backup**  
+
+```
+exec msdb.dbo.rds_backup_database 
+@source_db_name='mydatabase',
+@s3_arn_to_backup_to='arn:aws:s3:::aws_example_bucket/backup*.bak',
+@type='DIFFERENTIAL',
+@number_of_files=4;
+```
+
+**Example of Multifile Backup with Encryption**  
+
+```
+exec msdb.dbo.rds_backup_database 
+@source_db_name='mydatabase',
+@s3_arn_to_backup_to='arn:aws:s3:::aws_example_bucket/backup*.bak',
+@kms_master_key_arn='arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE',
+@number_of_files=4;
+```
+
+**Example of Multifile Backup with S3 Overwrite**  
+
+```
+exec msdb.dbo.rds_backup_database 
+@source_db_name='mydatabase',
+@s3_arn_to_backup_to='arn:aws:s3:::aws_example_bucket/backup*.bak',
+@overwrite_s3_backup_file=1,
+@number_of_files=4;
+```
+
+**Example of Single\-File Backup with the @number\_of\_files Parameter**  
+This example generates a backup file named `backup*.bak`\.  
+
+```
+exec msdb.dbo.rds_backup_database 
+@source_db_name='mydatabase',
+@s3_arn_to_backup_to='arn:aws:s3:::aws_example_bucket/backup*.bak',
+@number_of_files=1;
 ```
 
 ### Restoring a Database<a name="SQLServer.Procedural.Importing.Native.Using.Restore"></a>
@@ -269,16 +331,15 @@ The following parameters are required:
 + `@restore_db_name` – The name of the database to restore\.
 + `@s3_arn_to_restore_from` – The ARN indicating the Amazon S3 prefix and names of the backup files used to restore the database\.
   + For a single\-file backup, provide the entire file name\.
-  + For a multiple\-file backup, provide the prefix that the files have in common, then suffix that with an asterisk \(`*`\)\.
-
-  If `@s3_arn_to_restore_from` is empty, the following error message is returned: S3 ARN prefix cannot be empty\.
+  + For a multifile backup, provide the prefix that the files have in common, then suffix that with an asterisk \(`*`\)\.
+  + If `@s3_arn_to_restore_from` is empty, the following error message is returned: S3 ARN prefix cannot be empty\.
 
 The following parameter is required for differential restores, but optional for full restores:
 + `@with_norecovery` – The recovery clause to use for the restore operation\.
   + Set it to `0` to restore with RECOVERY\. In this case, the database is online after the restore\.
-  + Set it to `1` to restore with NORECOVERY\. In this case, the database remains in the RESTORING state after restore task completion\. With this approach, you can do later differential restores\. 
-
-  For DIFFERENTIAL restores, specify `0` or `1`\. For `FULL` restores, this value defaults to `0`\.
+  + Set it to `1` to restore with NORECOVERY\. In this case, the database remains in the RESTORING state after restore task completion\. With this approach, you can do later differential restores\.
+  + For DIFFERENTIAL restores, specify `0` or `1`\.
+  + For `FULL` restores, this value defaults to `0`\.
 
 The following parameters are optional:
 + `@kms_master_key_arn` – If you encrypted the backup file, the KMS key to use to decrypt the file\.

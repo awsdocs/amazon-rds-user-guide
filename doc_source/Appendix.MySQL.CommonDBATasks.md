@@ -33,10 +33,10 @@ CALL mysql.rds_kill_query(99);
 
 ## Skipping the Current Replication Error<a name="Appendix.MySQL.CommonDBATasks.SkipError"></a>
 
-Amazon RDS provides a mechanism for you to skip an error on your Read Replicas if the error is causing your Read Replica to hang and the error doesn’t affect the integrity of your data\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
+Amazon RDS provides a mechanism for you to skip an error on your read replicas if the error is causing your read replica to hang and the error doesn’t affect the integrity of your data\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
 **Note**  
- You should first verify that the error can be safely skipped\. In a MySQL utility, connect to the Read Replica and run the following MySQL command:   
+ You should first verify that the error can be safely skipped\. In a MySQL utility, connect to the read replica and run the following MySQL command:   
 
 ```
 SHOW SLAVE STATUS\G 
@@ -49,7 +49,7 @@ For information about the values returned, go to [SHOW SLAVE STATUS Syntax](http
 CALL mysql.rds_skip_repl_error; 
 ```
 
-This command has no effect if you run it on the source DB instance, or on a Read Replica that has not encountered a replication error\. 
+This command has no effect if you run it on the source DB instance, or on a read replica that has not encountered a replication error\. 
 
 For more information, such as the versions of MySQL that support `mysql.rds_skip_repl_error`, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\. 
 
@@ -89,23 +89,23 @@ WHERE SPACE <> 0 AND LEFT(NAME, INSTR((NAME), '/') - 1) NOT IN ('mysql','');
 **Note**  
 This query is supported on MySQL 5\.6 and later\.
 
-Rebuilding a MySQL table to move the table's metadata to the shared tablespace requires additional storage space temporarily to rebuild the table, so the DB instance must have storage space available\. During rebuilding, the table is locked and inaccessible to queries\. For small tables or tables not frequently accessed, this may not be an issue; for large tables or tables frequently accessed in a heavily concurrent environment, you can rebuild tables on a Read Replica\. 
+Rebuilding a MySQL table to move the table's metadata to the shared tablespace requires additional storage space temporarily to rebuild the table, so the DB instance must have storage space available\. During rebuilding, the table is locked and inaccessible to queries\. For small tables or tables not frequently accessed, this might not be an issue\. For large tables or tables frequently accessed in a heavily concurrent environment, you can rebuild tables on a read replica\. 
 
-You can create a Read Replica and migrate table metadata to the shared tablespace on the Read Replica\. While the ALTER TABLE statement blocks access on the Read Replica, the source DB instance is not affected\. The source DB instance will continue to generate its binary logs while the Read Replica lags during the table rebuilding process\. Because the rebuilding requires additional storage space and the replay log file can become large, you should create a Read Replica with storage allocated that is larger than the source DB instance\.
+You can create a read replica and migrate table metadata to the shared tablespace on the read replica\. While the ALTER TABLE statement blocks access on the read replica, the source DB instance is not affected\. The source DB instance will continue to generate its binary logs while the read replica lags during the table rebuilding process\. Because the rebuilding requires additional storage space and the replay log file can become large, you should create a read replica with storage allocated that is larger than the source DB instance\.
 
-The following steps should be followed to create a Read Replica and rebuild InnoDB tables to use the shared tablespace:
+To create a read replica and rebuild InnoDB tables to use the shared tablespace, take the following steps:
 
-1. Ensure that backup retention is enabled on the source DB instance so that binary logging is enabled 
+1. Make sure that backup retention is enabled on the source DB instance so that binary logging is enabled\. 
 
-1. Use the AWS Console or AWS CLI to create a Read Replica for the source DB instance\. Since the creation of a Read Replica involves many of the same processes as crash recovery, the creation process may take some time if there are a large number of InnoDB tablespaces\. Allocate more storage space on the Read Replica than is currently used on the source DB instance\.
+1. Use the AWS Management Console or AWS CLI to create a read replica for the source DB instance\. Because the creation of a read replica involves many of the same processes as crash recovery, the creation process can take some time if there is a large number of InnoDB tablespaces\. Allocate more storage space on the read replica than is currently used on the source DB instance\.
 
-1. When the Read Replica has been created, create a parameter group with the parameter settings `read_only = 0` and `innodb_file_per_table = 0`, and then associate the parameter group with the Read Replica\. 
+1. When the read replica has been created, create a parameter group with the parameter settings `read_only = 0` and `innodb_file_per_table = 0`\. Then associate the parameter group with the read replica\. 
 
-1. Issue ALTER TABLE <name> ENGINE = InnoDB against all tables you want migrated on the replica\. 
+1. Issue ALTER TABLE <name> ENGINE = InnoDB for all tables that you want migrated on the replica\.
 
-1. When all of your ALTER TABLE statements have completed on the Read Replica, verify that the Read Replica is connected to the source DB instance and that the two instances are in\-sync\. 
+1. When all of your ALTER TABLE statements have completed on the read replica, verify that the read replica is connected to the source DB instance and that the two instances are in sync\. 
 
-1. When ready, use the AWS Console or AWS CLI to promote the Read Replica to be the master instance\. Make sure that the parameter group used for the new master has the innodb\_file\_per\_table parameter set to 0\. Change the name of the new master, and point any applications to the new master instance\. 
+1. Use the console or CLI to promote the read replica to be the instance\. Make sure that the parameter group used for the new master has the `innodb_file_per_table` parameter set to 0\. Change the name of the new master, and point any applications to the new master instance\. 
 
 ## Managing the Global Status History<a name="Appendix.MySQL.CommonDBATasks.GoSH"></a>
 

@@ -739,15 +739,15 @@ PostgreSQL transportable databases are available in RDS for PostgreSQL versions 
 ### Limitations for Using PostgreSQL Transportable Databases<a name="PostgreSQL.TransportableDB.Limits"></a>
 
 Transportable databases have the following limitations:
-+ **Read Replicas ** – You can't use transportable databases on read replicas or parent instances of read replicas\.
-+ **Unsupported Column Types** – You can't use the `reg` data types in any database tables that you plan to transport with this method\. These types depend on system catalog object IDs \(OIDs\), which often change during transport\.
++ **Read replicas ** – You can't use transportable databases on read replicas or parent instances of read replicas\.
++ **Unsupported column types** – You can't use the `reg` data types in any database tables that you plan to transport with this method\. These types depend on system catalog object IDs \(OIDs\), which often change during transport\.
 + **Tablespaces** – All source database objects must be in the default `pg_default` tablespace\. 
 + **Compatibility** – Both the source and destination DB instances must run the same major version of PostgreSQL\. 
 
   Before transport begins, the `transport.import_from_server` function compares the source and destination DB instances to ensure database compatibility\. This includes verifying PostgreSQL major version compatibility\. Also, the function verifies that the destination DB instance likely has enough space to receive the source database\. The function performs several additional checks to make sure that the transport is smooth\.
 + **Extensions** – The only extension that you can install on the source DB instance during transport is `pg_transport`\.
 + **Roles and ACLs** – The source database's access privileges and ownership information aren't carried over to the destination database\. All database objects are created and owned by the local destination user of the transport\.
-+ **Concurrent Transports** – You can run up to 32 total transports at the same time on a DB instance, including both imports and exports\. To define the worker processes used for each transport, use the `pg_transport.work_mem` and `pg_transport.num_workers` parameters\. To accommodate concurrent transports, you might need to increase the `max_worker_processes` parameter quite a bit\. For more information, see [ Configuration Parameters for the pg\_transport Extension](#PostgreSQL.TransportableDB.Parameters)\.
++ **Concurrent transports** – You can run up to 32 total transports at the same time on a DB instance, including both imports and exports\. To define the worker processes used for each transport, use the `pg_transport.work_mem` and `pg_transport.num_workers` parameters\. To accommodate concurrent transports, you might need to increase the `max_worker_processes` parameter quite a bit\. For more information, see [ Configuration Parameters for the pg\_transport Extension](#PostgreSQL.TransportableDB.Parameters)\.
 
 ### Setting Up to Transport PostgreSQL Databases<a name="PostgreSQL.TransportableDB.Setup"></a>
 

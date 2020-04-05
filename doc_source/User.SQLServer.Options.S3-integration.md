@@ -18,6 +18,8 @@ The following limitations apply:
 + [Transferring Files Between RDS SQL Server and an S3 Bucket](#Appendix.SQLServer.Options.S3-integration.using)
 + [Disabling RDS SQL Server Integration with S3](#Appendix.SQLServer.Options.S3-integration.disabling)
 
+For more information on working with files in Amazon S3, see [Getting Started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg)\.
+
 ## Prerequisites for Integrating RDS SQL Server with S3<a name="Appendix.SQLServer.Options.S3-integration.preparing"></a>
 
 Before you begin, find or create the S3 bucket that you want to use\. Also, add permissions so that the RDS DB instance can access the S3 bucket\. To configure this access, you create both an IAM policy and an IAM role\.

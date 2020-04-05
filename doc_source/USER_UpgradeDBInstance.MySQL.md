@@ -22,7 +22,7 @@ After the upgrade is complete, you can't revert to the previous version of the d
 
 You control when to upgrade your DB instance to a new version supported by Amazon RDS\. This level of control helps you maintain compatibility with specific database versions and test new versions with your application before deploying in production\. When you are ready, you can perform version upgrades at the times that best fit your schedule\. 
 
-If your DB instance is using read replication, upgrade all of the Read Replicas before upgrading the source instance\. 
+If your DB instance is using read replication, upgrade all of the read replicas before upgrading the source instance\. 
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you experience an outage until the upgrade is complete\. The time for the outage varies based on the size of your DB instance\. 
 
@@ -160,19 +160,19 @@ The following procedure shows an example of upgrading from MySQL version 5\.5 to
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Create a Read Replica of your MySQL 5\.5 DB instance\. This process creates an upgradable copy of your database\.
+1. Create a read replica of your MySQL 5\.5 DB instance\. This process creates an upgradable copy of your database\.
 
    1. On the console, choose **Databases**, and then choose the DB instance that you want to upgrade\.
 
    1. For **Actions**, choose **Create read replica**\.
 
-   1. Provide a value for **DB instance identifier** for your Read Replica and ensure that the **DB instance class** and other settings match your MySQL 5\.5 DB instance\.
+   1. Provide a value for **DB instance identifier** for your read replica and ensure that the **DB instance class** and other settings match your MySQL 5\.5 DB instance\.
 
    1. Choose **Create read replica**\.
 
-1. When the Read Replica has been created and **Status** shows **Available**, upgrade the Read Replica to MySQL 5\.6:
+1. When the read replica has been created and **Status** shows **Available**, upgrade the read replica to MySQL 5\.6:
 
-   1. On the console, choose **Databases**, and then choose the Read Replica that you just created\.
+   1. On the console, choose **Databases**, and then choose the read replica that you just created\.
 
    1. Choose **Modify**\.
 
@@ -182,21 +182,21 @@ The following procedure shows an example of upgrading from MySQL version 5\.5 to
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded Read Replica is up\-to\-date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the Read Replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
 
-1. Make your MySQL 5\.6 Read Replica a master DB instance\. 
+1. Make your MySQL 5\.6 read replica a master DB instance\. 
 **Important**  
-When you promote your MySQL 5\.6 Read Replica to a standalone, single\-AZ DB instance, it no longer is a replication replica to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 Read Replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
-In addition, we recommend that before promoting your MySQL 5\.6 Read Replica you perform all necessary data definition language \(DDL\) operations on your MySQL 5\.6 Read Replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 5\.6 Read Replica after it has been promoted\. To promote a Read Replica, use the following procedure\.
+When you promote your MySQL 5\.6 read replica to a standalone, single\-AZ DB instance, it no longer is a replication replica to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 read replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
+In addition, we recommend that before promoting your MySQL 5\.6 read replica you perform all necessary data definition language \(DDL\) operations on your MySQL 5\.6 read replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 5\.6 read replica after it has been promoted\. To promote a read replica, use the following procedure\.
 
-   1. On the console, choose **Databases**, and then choose the Read Replica that you just upgraded\.
+   1. On the console, choose **Databases**, and then choose the read replica that you just upgraded\.
 
    1. For **Actions**, choose **Promote**\.
 
-   1. Choose **Yes** to enable automated backups for the Read Replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
+   1. Choose **Yes** to enable automated backups for the read replica instance\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 
    1. Choose **Continue**\.
 
    1. Choose **Promote Read Replica**\.
 
-1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 5\.6 DB instance, add Read Replicas, set up Multi\-AZ support, and so on\.
+1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 5\.6 DB instance, add read replicas, set up Multi\-AZ support, and so on\.

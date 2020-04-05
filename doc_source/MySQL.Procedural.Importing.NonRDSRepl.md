@@ -262,7 +262,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 
       Your new DB instance appears in the **Databases** list with the status **Creating**\. Wait for the **Status** of your new DB instance to show as **Available**\.
 
-   Don't configure multiple Availability Zones, backup retention, or Read Replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way you want them for the production instance\. For a detailed walkthrough of creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   Don't configure multiple Availability Zones, backup retention, or read replicas until after you have imported the database backup\. When that import is done, you can set Multi\-AZ and backup retention the way you want them for the production instance\. For a detailed walkthrough of creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
 1. Review the default configuration options for the Amazon RDS DB instance\. In the RDS console navigation pane, choose **Parameter groups**, and then choose the magnifying glass icon next to the **default\.mysqlx\.x** or **default\.mariadbx\.x** parameter group\. If this parameter group doesn't have the configuration options that you want, find a different one that does or create a new parameter group\. For more information on creating a parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
@@ -430,7 +430,7 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
    CALL mysql.rds_reset_external_master;
    ```
 
-1. Enable additional Amazon RDS features such as Multi\-AZ support and Read Replicas\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) and [Working with Read Replicas](USER_ReadRepl.md)\.
+1. Enable additional Amazon RDS features such as Multi\-AZ support and read replicas\. For more information, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) and [Working with Read Replicas](USER_ReadRepl.md)\.
 
 **Note**  
  If you no longer need the Amazon RDS instance used in this procedure, you should delete the RDS instance to reduce your Amazon AWS resource usage\. To delete an RDS instance, see [Deleting a DB Instance](USER_DeleteInstance.md)\. 

@@ -24,11 +24,11 @@ Connect to the instance as the master user, and create the users required to sup
 
 Follow the directions in the MySQL documentation to prepare the instance of MySQL running external to Amazon RDS as a replica\. For more information, see [Setting the Replication Slave Configuration](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-slavebaseconfig.html)\.
 
-Configure an egress rule for the external instance to operate as a Read Replica during the export\. The egress rule will allow the MySQL Read Replica to connect to the MySQL DB instance during replication\. Specify an egress rule that allows TCP connections to the port and IP address of the source Amazon RDS MySQL DB instance\.
+Configure an egress rule for the external instance to operate as a read replica during the export\. The egress rule will allow the MySQL read replica to connect to the MySQL DB instance during replication\. Specify an egress rule that allows TCP connections to the port and IP address of the source Amazon RDS MySQL DB instance\.
 
-If the Read Replica is running in an Amazon EC2 instance in an Amazon VPC, specify the egress rules in a VPC security group\. If the Read Replica is running in an Amazon EC2 instance that is not in a VPC, specify the egress rule in an EC2\-Classic security group\. If the Read Replica is installed on\-premises, specify the egress rule in a firewall\.
+If the read replica is running in an Amazon EC2 instance in an Amazon VPC, specify the egress rules in a VPC security group\. If the read replica is running in an Amazon EC2 instance that is not in a VPC, specify the egress rule in an EC2\-Classic security group\. If the read replica is installed on\-premises, specify the egress rule in a firewall\.
 
-If the Read Replica is running in a VPC, configure VPC ACL rules in addition to the security group egress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
+If the read replica is running in a VPC, configure VPC ACL rules in addition to the security group egress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
 + ACL ingress rule allowing TCP traffic to ports 1024\-65535 from the IP address of the source MySQL DB instance\.
 + ACL egress rule: allowing outbound TCP traffic to the port and IP address of the source MySQL DB instance\.
 
@@ -42,19 +42,19 @@ Ensure your client computer has enough disk space available to save the binary l
 
 Create a replication account by following the directions in [Creating a User For Replication](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-repuser.html)\.
 
-Configure ingress rules on the system running the replication source MySQL DB instance that will allow the external MySQL Read Replica to connect during replication\. Specify an ingress rule that allows TCP connections to the port used by the Amazon RDS instance from the IP address of the MySQL Read Replica running external to Amazon RDS\.
+Configure ingress rules on the system running the replication source MySQL DB instance that will allow the external MySQL read replica to connect during replication\. Specify an ingress rule that allows TCP connections to the port used by the Amazon RDS instance from the IP address of the MySQL read replica running external to Amazon RDS\.
 
 If the Amazon RDS instance is running in a VPC, specify the ingress rules in a VPC security group\. If the Amazon RDS instance is not running in an in a VPC, specify the ingress rules in a database security group\.
 
 If the Amazon RDS instance is running in a VPC, configure VPC ACL rules in addition to the security group ingress rule\. For more information about Amazon VPC network ACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)\.
-+ ACL ingress rule: allow TCP connections to the port used by the Amazon RDS instance from the IP address of the external MySQL Read Replica\.
-+ ACL egress rule: allow TCP connections from ports 1024\-65535 to the IP address of the external MySQL Read Replica\.
++ ACL ingress rule: allow TCP connections to the port used by the Amazon RDS instance from the IP address of the external MySQL read replica\.
++ ACL egress rule: allow TCP connections from ports 1024\-65535 to the IP address of the external MySQL read replica\.
 
 Ensure that the backup retention period is set long enough that no binary logs are purged during the export\. If any of the logs are purged before the export is complete, you must restart replication from the beginning\. For more information about setting the backup retention period, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 
 Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs are not purged during the export\. For more information, see [Accessing MySQL Binary Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
 
-To further ensure that the binary logs of the source instance are not purged, create an Amazon RDS Read Replica from the source instance\. For more information, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. After the Amazon RDS Read Replica has been created, call the `mysql.rds_stop_replication` stored procedure to stop the replication process\. The source instance will no longer purge its binary log files, so they will be available for the replication process\.
+To further ensure that the binary logs of the source instance are not purged, create an Amazon RDS read replica from the source instance\. For more information, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. After the Amazon RDS read replica has been created, call the `mysql.rds_stop_replication` stored procedure to stop the replication process\. The source instance will no longer purge its binary log files, so they will be available for the replication process\.
 
 We recommend setting both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. For information about setting parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
@@ -130,17 +130,17 @@ mysqldump -h RDS instance endpoint ^
 
 ## Complete the Export<a name="MySQL.Procedural.Exporting.NonRDSRepl.CompleteExp"></a>
 
-After you have loaded the `mysqldump` files to create the databases on the MySQL instance running external to Amazon RDS, start replication from the source MySQL DB instance to export all source changes that have occurred after you stopped replication from the Amazon RDS Read Replica\.
+After you have loaded the `mysqldump` files to create the databases on the MySQL instance running external to Amazon RDS, start replication from the source MySQL DB instance to export all source changes that have occurred after you stopped replication from the Amazon RDS read replica\.
 
-Use the MySQL `CHANGE MASTER` statement to configure the external MySQL instance\. Specify the ID and password of the user granted REPLICATION SLAVE permissions\. Specify the `master_host`, `master_port`, `relay_master_log_file` and `exec_master_log_pos` values you got from the Mysql `SHOW SLAVE STATUS` statement you ran on the RDS Read Replica\. For more information, see [Setting the Master Configuration on the Slave](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-slaveinit.html)\.
+Use the MySQL `CHANGE MASTER` statement to configure the external MySQL instance\. Specify the ID and password of the user granted REPLICATION SLAVE permissions\. Specify the `master_host`, `master_port`, `relay_master_log_file` and `exec_master_log_pos` values you got from the Mysql `SHOW SLAVE STATUS` statement you ran on the RDS read replica\. For more information, see [Setting the Master Configuration on the Slave](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-slaveinit.html)\.
 
 Use the MySQL `START SLAVE` command to initiate replication from the source MySQL DB instance and the MySQL replica\.
 
-Run the MySQL `SHOW SLAVE STATUS` command on the Amazon RDS instance to verify that it is operating as a Read Replica\. For more information about interpreting the results, see [SHOW SLAVE STATUS Syntax](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html)\.
+Run the MySQL `SHOW SLAVE STATUS` command on the Amazon RDS instance to verify that it is operating as a read replica\. For more information about interpreting the results, see [SHOW SLAVE STATUS Syntax](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html)\.
 
 After replication on the MySQL instance has caught up with the Amazon RDS source, use the MySQL `STOP SLAVE` command to terminate replication from the source MySQL DB instance\.
 
-On the Amazon RDS Read Replica, call the `mysql.rds_start_replication` stored procedure\. This will allow Amazon RDS to start purging the binary log files from the source MySQL DB instance\.
+On the Amazon RDS read replica, call the `mysql.rds_start_replication` stored procedure\. This will allow Amazon RDS to start purging the binary log files from the source MySQL DB instance\.
 
 ## Related Topics<a name="MySQL.Procedural.Exporting.Related"></a>
 + [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)

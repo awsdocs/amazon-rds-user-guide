@@ -47,13 +47,15 @@ For each DB instance that you run in a VPC, you should reserve at least one addr
 
 One common Amazon RDS scenario is to have a VPC in which you have an EC2 instance with a public\-facing web application and a DB instance with a database that is not publicly accessible\. For example, you can create a VPC that has a public subnet and a private subnet\. Amazon EC2 instances that function as web servers can be deployed in the public subnet, and the DB instances are deployed in the private subnet\. In such a deployment, only the web servers have access to the DB instances\. For an illustration of this scenario, see [A DB Instance in a VPC Accessed by an EC2 Instance in the Same VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario1)\. 
 
-When you launch a DB instance inside a VPC, you can designate whether the DB instance you create has a DNS that resolves to a public IP address by using the *Public accessibility* parameter\. This parameter lets you designate whether there is public access to the DB instance\. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance does not permit it\. 
+When you launch a DB instance inside a VPC, the DB instance has a private IP address for traffic inside the VPC\. This private IP address isn't publicly accessible\. You can use the *Public accessibility* option to designate whether the DB instance also has a public IP address in addition to the private IP address\. If the DB instance is designated as publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance's VPC, and to the public IP address from outside of the DB instance's VPC\. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn't permit it\.
 
-You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* parameter\. This parameter is modified just like any other DB instance parameter\. For more information, see the modifying section for your DB engine\.
+You can modify a DB instance to turn on or off public accessibility by modifying the *Public accessibility* option\. This parameter is modified just like any other DB instance parameter\. For more information, see the modifying section for your DB engine\.
 
 The following illustration shows the **Public accessibility** option in the **Network & Security** section\. 
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/VPC-example4.png)
+
+For information about modifying a DB instance to set the **Public accessibility** option, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Creating a DB Instance in a VPC<a name="USER_VPC.InstanceInVPC"></a>
 

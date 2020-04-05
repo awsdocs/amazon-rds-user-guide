@@ -1,6 +1,6 @@
 # mysql\.rds\_set\_source\_delay<a name="mysql_rds_set_source_delay"></a>
 
-Sets the minimum number of seconds to delay replication from the master to the current Read Replica\. Use this procedure when you are connected to a Read Replica to delay replication from its master\.
+Sets the minimum number of seconds to delay replication from the master to the current read replica\. Use this procedure when you are connected to a read replica to delay replication from its master\.
 
 ## Syntax<a name="mysql_rds_set_source_delay-syntax"></a>
 
@@ -20,7 +20,7 @@ The limit for this parameter is one day \(86400 seconds\)\.
 
 The master user must run the `mysql.rds_set_source_delay` procedure\.
 
-For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure or the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. To roll forward changes to a delayed Read Replica to the time just before a disaster, you can run the `mysql.rds_set_source_delay` procedure\. After the `mysql.rds_start_replication_until` or `mysql.rds_start_replication_until_gtid` procedure stops replication, you can promote the Read Replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure or the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. To roll forward changes to a delayed read replica to the time just before a disaster, you can run the `mysql.rds_set_source_delay` procedure\. After the `mysql.rds_start_replication_until` or `mysql.rds_start_replication_until_gtid` procedure stops replication, you can promote the read replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](mysql_rds_skip_transaction_with_gtid.md) stored procedure\. For more information on GTID\-based replication, see [Using GTID\-Based Replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
 
@@ -30,7 +30,7 @@ The `mysql.rds_set_source_delay` procedure is available in these versions of Ama
 
 ## Examples<a name="mysql_rds_set_source_delay-examples"></a>
 
-To delay replication from the master to the current Read Replica for at least one hour \(3,600 seconds\), you can call `mysql.rds_set_source_delay` with the following parameter:
+To delay replication from the master to the current read replica for at least one hour \(3,600 seconds\), you can call `mysql.rds_set_source_delay` with the following parameter:
 
 ```
 CALL mysql.rds_set_source_delay(3600);

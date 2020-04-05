@@ -27,7 +27,7 @@ MySQL uses two different types of transactions for binlog replication:
 
 In a replication configuration, GTIDs are unique across all DB instances\. GTIDs simplify replication configuration because when you use them, you don't have to refer to log file positions\. GTIDs also make it easier to track replicated transactions and determine whether masters and replicas are consistent\.
 
-You can use GTID\-based replication to replicate data with Amazon RDS MySQL Read Replicas or with an external MySQL database\. For RDS MySQL Read Replicas, you can configure GTID\-based replication when you are creating new Read Replicas, or you can convert existing Read Replicas to use GTID\-based replication\.
+You can use GTID\-based replication to replicate data with Amazon RDS MySQL read replicas or with an external MySQL database\. For RDS MySQL read replicas, you can configure GTID\-based replication when you are creating new read replicas, or you can convert existing read replicas to use GTID\-based replication\.
 
 You can also use GTID\-based replication in a delayed replication configuration with RDS MySQL \. For more information, see [Configuring Delayed Replication with MySQL](USER_MySQL.Replication.ReadReplicas.md#USER_MySQL.Replication.ReadReplicas.DelayReplication)\.
 
@@ -43,7 +43,7 @@ Use the following parameters to configure GTID\-based replication\.
 |  `gtid_mode`  |  `OFF`, `OFF_PERMISSIVE`, `ON_PERMISSIVE`, `ON`  |  `OFF` specifies that new transactions are anonymous transactions \(that is, don't have GTIDs\), and a transaction must be anonymous to be replicated\.  `OFF_PERMISSIVE` specifies that new transactions are anonymous transactions, but all transactions can be replicated\.  `ON_PERMISSIVE` specifies that new transactions are GTID transactions, but all transactions can be replicated\.  `ON` specifies that new transactions are GTID transactions, and a transaction must be a GTID transaction to be replicated\.   | 
 |  `enforce_gtid_consistency`  |  `OFF`, `ON`, `WARN`  |  `OFF` allows transactions to violate GTID consistency\.  `ON` prevents transactions from violating GTID consistency\.  `WARN` allows transactions to violate GTID consistency but generates a warning when a violation occurs\.   | 
 
-For GTID\-based replication, use these settings for the parameter group for your DB instance or Read Replica: 
+For GTID\-based replication, use these settings for the parameter group for your DB instance or read replica: 
 + `ON` and `ON_PERMISSIVE` apply only to outgoing replication from an RDS DB instance or Aurora MySQL cluster\. Both of these values cause your RDS DB instance or Aurora DB cluster to use GTIDs for transactions that are replicated to an external database\. `ON` requires that the external database also use GTID\-based replication\. `ON_PERMISSIVE` makes GTID\-based replication optional on the external database\. 
 + `OFF_PERMISSIVE`, if set, means that your RDS DB instances or Aurora DB cluster can accept incoming replication from an external database\. It can do this whether the external database uses GTID\-based replication or not\. 
 +  `OFF`, if set, means that your RDS DB instances or Aurora DB cluster only accept incoming replication from external databases that don't use GTID\-based replication\. 
@@ -55,9 +55,9 @@ In the AWS Management Console, the `gtid_mode` parameter appears as `gtid-mode`\
 
 ## Configuring GTID\-Based Replication for New Read Replicas<a name="mysql-replication-gtid.configuring-new-read-replicas"></a>
 
-When GTID\-based replication is enabled for an RDS MySQL DB instance, GTID\-based replication is configured automatically for Read Replicas of the DB instance\.
+When GTID\-based replication is enabled for an RDS MySQL DB instance, GTID\-based replication is configured automatically for read replicas of the DB instance\.
 
-**To enable GTID\-based replication for new Read Replicas**
+**To enable GTID\-based replication for new read replicas**
 
 1. Make sure that the parameter group associated with the DB instance has the following parameter settings:
    + `gtid_mode` – `ON` or `ON_PERMISSIVE`
@@ -67,41 +67,41 @@ When GTID\-based replication is enabled for an RDS MySQL DB instance, GTID\-base
 
 1. If you changed the parameter group of the DB instance, reboot the DB instance\. For more information on how to do so, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
-1.  Create one or more Read Replicas of the DB instance\. For more information on how to do so, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. 
+1.  Create one or more read replicas of the DB instance\. For more information on how to do so, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\. 
 
-Amazon RDS attempts to establish GTID\-based replication between the MySQL DB instance and the Read Replicas using the `MASTER_AUTO_POSITION`\. If the attempt fails, Amazon RDS uses log file positions for replication with the Read Replicas\. For more information about the `MASTER_AUTO_POSITION`, see [ GTID Auto\-Positioning](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-auto-positioning.html) in the MySQL documentation\.
+Amazon RDS attempts to establish GTID\-based replication between the MySQL DB instance and the read replicas using the `MASTER_AUTO_POSITION`\. If the attempt fails, Amazon RDS uses log file positions for replication with the read replicas\. For more information about the `MASTER_AUTO_POSITION`, see [ GTID Auto\-Positioning](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-auto-positioning.html) in the MySQL documentation\.
 
 ## Configuring GTID\-Based Replication for Existing Read Replicas<a name="mysql-replication-gtid.configuring-existing-read-replicas"></a>
 
-For an existing RDS MySQL DB instance with Read Replicas that doesn't use GTID\-based replication, you can configure GTID\-based replication between the DB instance and the Read Replicas\.
+For an existing RDS MySQL DB instance with read replicas that doesn't use GTID\-based replication, you can configure GTID\-based replication between the DB instance and the read replicas\.
 
-**To enable GTID\-based replication for existing Read Replicas**
+**To enable GTID\-based replication for existing read replicas**
 
-1. If the DB instance or any Read Replica is using RDS MySQL version 5\.7\.22 or lower, upgrade the DB instance or Read Replica\. Upgrade to RDS MySQL version 5\.7\.23 or a later MySQL 5\.7 version\.
+1. If the DB instance or any read replica is using RDS MySQL version 5\.7\.22 or lower, upgrade the DB instance or read replica\. Upgrade to RDS MySQL version 5\.7\.23 or a later MySQL 5\.7 version\.
 
    For more information, see [Upgrading the MySQL DB Engine](USER_UpgradeDBInstance.MySQL.md)\.
 
-1. \(Optional\) Reset the GTID parameters and test the behavior of the DB instance and Read Replicas:
+1. \(Optional\) Reset the GTID parameters and test the behavior of the DB instance and read replicas:
 
-   1. Make sure that the parameter group associated with the DB instance and each Read Replica has the `enforce_gtid_consistency` parameter set to `WARN`\.
+   1. Make sure that the parameter group associated with the DB instance and each read replica has the `enforce_gtid_consistency` parameter set to `WARN`\.
 
       For more information about setting configuration parameters using parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-   1. If you changed the parameter group of the DB instance, reboot the DB instance\. If you changed the parameter group for a Read Replica, reboot the Read Replica\.
+   1. If you changed the parameter group of the DB instance, reboot the DB instance\. If you changed the parameter group for a read replica, reboot the read replica\.
 
       For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
-   1. Run your DB instance and Read Replicas with your normal workload and monitor the log files\.
+   1. Run your DB instance and read replicas with your normal workload and monitor the log files\.
 
       If you see warnings about GTID\-incompatible transactions, adjust your application so that it only uses GTID\-compatible features\. Make sure that the DB instance is not generating any warnings about GTID\-incompatible transactions before proceeding to the next step\.
 
-1. Reset the GTID parameters for GTID\-based replication that allows anonymous transactions until the Read Replicas have processed all of them\.
+1. Reset the GTID parameters for GTID\-based replication that allows anonymous transactions until the read replicas have processed all of them\.
 
-   1. Make sure that the parameter group associated with the DB instance and each Read Replica has the following parameter settings:
+   1. Make sure that the parameter group associated with the DB instance and each read replica has the following parameter settings:
       + `gtid_mode` – `ON_PERMISSIVE`
       + `enforce_gtid_consistency` – `ON`
 
-   1. If you changed the parameter group of the DB instance, reboot the DB instance\. If you changed the parameter group for a Read Replica, reboot the Read Replica\.
+   1. If you changed the parameter group of the DB instance, reboot the DB instance\. If you changed the parameter group for a read replica, reboot the read replica\.
 
 1. Wait for all of your anonymous transactions to be replicated\. To check that these are replicated, do the following:
 
@@ -113,7 +113,7 @@ For an existing RDS MySQL DB instance with Read Replicas that doesn't use GTID\-
 
       Note the values in the `File` and `Position` columns\.
 
-   1. On each Read Replica, use the file and position information from its master in the previous step to run the following query\.
+   1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
 
       ```
       SELECT MASTER_POS_WAIT(file, position);
@@ -125,17 +125,17 @@ For an existing RDS MySQL DB instance with Read Replicas that doesn't use GTID\-
       SELECT MASTER_POS_WAIT(mysql-bin-changelog.000031, 107);
       ```
 
-      If the Read Replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. Proceed to the next step when the query returns for all Read Replicas\.
+      If the read replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. Proceed to the next step when the query returns for all read replicas\.
 
 1. Reset the GTID parameters for GTID\-based replication only\.
 
-   1. Make sure that the parameter group associated with the DB instance and each Read Replica has the following parameter settings:
+   1. Make sure that the parameter group associated with the DB instance and each read replica has the following parameter settings:
       + `gtid_mode` – `ON`
       + `enforce_gtid_consistency` – `ON`
 
-   1. Reboot the DB instance and each Read Replica\.
+   1. Reboot the DB instance and each read replica\.
 
-1. On each Read Replica, run the following procedure\.
+1. On each read replica, run the following procedure\.
 
    ```
    CALL mysql.rds_set_master_auto_position(1);
@@ -143,11 +143,11 @@ For an existing RDS MySQL DB instance with Read Replicas that doesn't use GTID\-
 
 ## Disabling GTID\-Based Replication for an RDS MySQL DB Instance with Read Replicas<a name="mysql-replication-gtid.disabling"></a>
 
-You can disable GTID\-based replication for an RDS MySQL DB instance with Read Replicas\. 
+You can disable GTID\-based replication for an RDS MySQL DB instance with read replicas\. 
 
-**To disable GTID\-based replication for an RDS MySQL DB instance with Read Replicas**
+**To disable GTID\-based replication for an RDS MySQL DB instance with read replicas**
 
-1. On each Read Replica, run the following procedure\.
+1. On each read replica, run the following procedure\.
 
    ```
    CALL mysql.rds_set_master_auto_position(0);
@@ -155,19 +155,19 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with Read R
 
 1. Reset the `gtid_mode` to `ON_PERMISSIVE`\.
 
-   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each Read Replica has `gtid_mode` set to `ON_PERMISSIVE`\.
+   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each read replica has `gtid_mode` set to `ON_PERMISSIVE`\.
 
       For more information about setting configuration parameters using parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 
-   1. Reboot the RDS MySQL DB instance and each Read Replica\. For more information about rebooting, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
+   1. Reboot the RDS MySQL DB instance and each read replica\. For more information about rebooting, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
 1. Reset the `gtid_mode` to `OFF_PERMISSIVE`:
 
-   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each Read Replica has `gtid_mode` set to `OFF_PERMISSIVE`\.
+   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each read replica has `gtid_mode` set to `OFF_PERMISSIVE`\.
 
-   1. Reboot the RDS MySQL DB instance and each Read Replica\.
+   1. Reboot the RDS MySQL DB instance and each read replica\.
 
-1. Wait for all of the GTID transactions to be applied on all of the Read Replicas\. To check that these are applied, do the following:
+1. Wait for all of the GTID transactions to be applied on all of the read replicas\. To check that these are applied, do the following:
 
    Wait for all of the GTID transactions to be applied on the Aurora primary instance\. To check that these are applied, do the following:
 
@@ -184,7 +184,7 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with Read R
 
       Note the file and position in your output\.
 
-   1. On each Read Replica, use the file and position information from its master in the previous step to run the following query\.
+   1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
 
       ```
       SELECT MASTER_POS_WAIT(file, position);
@@ -196,12 +196,12 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with Read R
       SELECT MASTER_POS_WAIT(mysql-bin-changelog.000031, 107);
       ```
 
-      If the Read Replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. When the query returns for all Read Replicas, go to the next step\. 
+      If the read replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. When the query returns for all read replicas, go to the next step\. 
 
 1. Reset the GTID parameters to disable GTID\-based replication:
 
-   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each Read Replica has the following parameter settings:
+   1. Make sure that the parameter group associated with the RDS MySQL DB instance and each read replica has the following parameter settings:
       + `gtid_mode` – `OFF`
       + `enforce_gtid_consistency` – `OFF`
 
-   1. Reboot the RDS MySQL DB instance and each Read Replica\.
+   1. Reboot the RDS MySQL DB instance and each read replica\.

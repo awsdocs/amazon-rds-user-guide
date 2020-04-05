@@ -108,11 +108,11 @@ The following table shows the event category and a list of events when a DB inst
 | notification | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
 | notification | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limits for Microsoft SQL Server DB Instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
 | notification | RDS\-EVENT\-0158 |  DB instance is in a state that can't be upgraded\.  | 
-| read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\.  For information on troubleshooting Read Replica errors, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.   | 
-| read replica | RDS\-EVENT\-0046 | The Read Replica has resumed replication\. This message appears when you first create a Read Replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
-|  read replica  | RDS\-EVENT\-0057 |  Replication on the Read Replica was terminated\.  | 
-|  read replica  | RDS\-EVENT\-0062 |  Replication on the Read Replica was manually stopped\.  | 
-|  read replica  | RDS\-EVENT\-0063 |  Replication on the Read Replica was reset\.  | 
+| read replica | RDS\-EVENT\-0045 | An error has occurred in the read replication process\. For more information, see the event message\.  For information on troubleshooting read replica errors, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.   | 
+| read replica | RDS\-EVENT\-0046 | The read replica has resumed replication\. This message appears when you first create a read replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
+|  read replica  | RDS\-EVENT\-0057 |  Replication on the read replica was terminated\.  | 
+|  read replica  | RDS\-EVENT\-0062 |  Replication on the read replica was manually stopped\.  | 
+|  read replica  | RDS\-EVENT\-0063 |  Replication on the read replica was reset\.  | 
 |  recovery  | RDS\-EVENT\-0020 |  Recovery of the DB instance has started\. Recovery time will vary with the amount of data to be recovered\.  | 
 |  recovery  | RDS\-EVENT\-0021 |  Recovery of the DB instance is complete\.  | 
 |  recovery  | RDS\-EVENT\-0023 |  A manual backup has been requested but Amazon RDS is currently in the process of creating a DB snapshot\. Submit the request again after Amazon RDS has completed the DB snapshot\.  | 

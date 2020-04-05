@@ -5,7 +5,7 @@ Amazon RDS provides high availability and failover support for DB instances usin
 In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
 
 **Note**  
-The high\-availability feature is not a scaling solution for read\-only scenarios; you cannot use a standby replica to serve read traffic\. To service read\-only traffic, you should use a Read Replica\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
+The high\-availability feature is not a scaling solution for read\-only scenarios; you cannot use a standby replica to serve read traffic\. To service read\-only traffic, you should use a read replica\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
 
 ![\[High Availability Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
 

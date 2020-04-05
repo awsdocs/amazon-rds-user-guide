@@ -963,6 +963,7 @@ aws rds describe-db-cluster-parameters --region $REGION \
 |   `ERROR 2003 (HY000): Can't connect to MySQL server on 'proxy_endpoint' (110)`   |   The proxy endpoint exists, but couldn't establish a connection to the RDS DB instance or Aurora DB cluster\. This error typically occurs after a timeout period\. Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 |   `ERROR 2005 (HY000): Unknown MySQL server host 'proxy_endpoint' (0)`   |   The proxy endpoint doesn't exist\. This error typically occurs immediately\. Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 |   `ERROR 2013 (HY000): Lost connection to MySQL server at 'reading initial communication packet', system error: 2`   |   The proxy couldn't log into the database using the credentials from the Secrets Manager secrets\. Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
+|   `ERROR 1045 (28000): Access denied for user 'DB_USER'@'%' (using password: YES)`   |   Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 
 ### CloudWatch Logs<a name="rds-proxy-logs"></a>
 

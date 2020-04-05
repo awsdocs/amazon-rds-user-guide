@@ -18,7 +18,7 @@ For more information, see [Backing Up and Restoring an Amazon RDS DB Instance](C
 
 ## Replication<a name="disaster-recovery-resiliency.replication"></a>
 
-Amazon RDS uses the MariaDB, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a Read Replica from a source DB instance\. Updates made to the source DB instance are asynchronously copied to the Read Replica\. You can reduce the load on your source DB instance by routing read queries from your applications to the Read Replica\. Using Read Replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\. You can promote a Read Replica to a standalone instance as a disaster recovery solution if the source DB instance fails\. For some DB engines, Amazon RDS also supports other replication options\.
+Amazon RDS uses the MariaDB, MySQL, Oracle, and PostgreSQL DB engines' built\-in replication functionality to create a special type of DB instance called a read replica from a source DB instance\. Updates made to the source DB instance are asynchronously copied to the read replica\. You can reduce the load on your source DB instance by routing read queries from your applications to the read replica\. Using read replicas, you can elastically scale out beyond the capacity constraints of a single DB instance for read\-heavy database workloads\. You can promote a read replica to a standalone instance as a disaster recovery solution if the source DB instance fails\. For some DB engines, Amazon RDS also supports other replication options\.
 
 For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
 

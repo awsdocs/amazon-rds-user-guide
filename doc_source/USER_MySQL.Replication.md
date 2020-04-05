@@ -1,6 +1,6 @@
-# Working with MySQL Replication<a name="USER_MySQL.Replication"></a>
+# Working with MySQL Replication in Amazon RDS<a name="USER_MySQL.Replication"></a>
 
-You usually use Read Replicas to configure replication between Amazon RDS DB instances\. For general information about Read Replicas, see [Working with Read Replicas](USER_ReadRepl.md)\. For specific information about working with Read Replicas on Amazon RDS MySQL, see [Working with MySQL Read Replicas](USER_MySQL.Replication.ReadReplicas.md)\. 
+You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with Read Replicas](USER_ReadRepl.md)\. For specific information about working with read replicas on Amazon RDS MySQL, see [Working with MySQL Read Replicas](USER_MySQL.Replication.ReadReplicas.md)\. 
 
 You can use global transaction identifiers \(GTIDs\) for replication with Amazon RDS MySQL\. For more information, see [Using GTID\-Based Replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
 

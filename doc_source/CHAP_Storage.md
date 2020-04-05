@@ -4,7 +4,7 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
 
 ## Amazon RDS Storage Types<a name="Concepts.Storage"></a>
 
-Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, and PostgreSQL RDS DB instances with up to 64 TiB of storage\. You can create Oracle RDS DB instances with up to  64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
+Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\. 
 
 The following list briefly describes the three storage types: 
 + **General Purpose SSD** – General Purpose SSD volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\. 
@@ -20,9 +20,8 @@ Several factors can affect the performance of Amazon EBS volumes, such as instan
 ## General Purpose SSD Storage<a name="Concepts.Storage.GeneralSSD"></a>
 
 General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances: 
-+ MariaDB, MySQL and PostgreSQL database instances: 20 GiB–64 TiB
-+ SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB 
-+ Oracle instances: 20 GiB\-  64 TiB 
++ MariaDB, MySQL, Oracle, and PostgreSQL database instances: 20 GiB–64 TiB
++ SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
 
@@ -91,11 +90,11 @@ The following table shows the range of Provisioned IOPS and storage size range f
 
 \* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on m5 instance types\. Other instance families guarantee performance up to 32,000 IOPS\. 
 
-### Combining Provisioned IOPS Storage with Multi\-AZ deployments, or Read Replicas<a name="Overview.ProvisionedIOPS-support"></a>
+### Combining Provisioned IOPS Storage with Multi\-AZ deployments or Read Replicas<a name="Overview.ProvisionedIOPS-support"></a>
 
 For production OLTP use cases, we recommend that you use Multi\-AZ deployments for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance\.
 
-You can also use Provisioned IOPS SSD storage with Read Replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a Read Replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for Read Replicas with a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your Read Replicas performance in this case might differ from that of a configuration where both the master DB instance and the Read Replicas use Provisioned IOPS SSD storage\. 
+You can also use Provisioned IOPS SSD storage with read replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a read replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for read replicas with a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your read replica's performance in this case might differ from that of a configuration where both the master DB instance and the read replicas use Provisioned IOPS SSD storage\. 
 
 ### Provisioned IOPS Storage Costs<a name="Overview.ProvisionedIOPS-cost"></a>
 

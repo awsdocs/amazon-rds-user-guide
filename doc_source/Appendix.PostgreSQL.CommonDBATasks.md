@@ -990,7 +990,7 @@ If you want to see the list of owners for the oracle schema, use the `\dn` psql 
 
 ## Accessing External Data with the postgres\_fdw Extension<a name="postgresql-commondbatasks-fdw"></a>
 
-You can access data in a table on a remote database server with the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension\. If you set up a remote connection from your PostgreSQL DB instance, access is also available to your Read Replica\. 
+You can access data in a table on a remote database server with the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension\. If you set up a remote connection from your PostgreSQL DB instance, access is also available to your read replica\. 
 
 **To use postgres\_fdw to access a remote database server**
 

@@ -185,7 +185,7 @@ If you plan to use replication, the binary logging format is important because i
 
 **Important**  
 Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
-Statement\-based replication can cause inconsistencies between the source DB instance and a Read Replica\. For more information, see [ Unsafe Statements for Statement\-based Replication](https://mariadb.com/kb/en/library/unsafe-statements-for-statement-based-replication/) in the MariaDB documentation\.
+Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Unsafe Statements for Statement\-based Replication](https://mariadb.com/kb/en/library/unsafe-statements-for-statement-based-replication/) in the MariaDB documentation\.
 
 **To set the MariaDB binary logging format**
 

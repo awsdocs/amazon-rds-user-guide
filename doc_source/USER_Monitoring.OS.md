@@ -35,7 +35,7 @@ To set up for and enable Enhanced Monitoring, take the steps listed following\.
 
 Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring the required permissions using an AWS Identity and Access Management \(IAM\) role\. 
 
-The first time that you enable Enhanced Monitoring in the console, you can select the **Default** option for the **Monitoring Role** property to have RDS create the required IAM role\. RDS then automatically creates a role named `rds-monitoring-role` for you, and uses it for the specified DB instance or Read Replica\.
+The first time that you enable Enhanced Monitoring in the console, you can select the **Default** option for the **Monitoring Role** property to have RDS create the required IAM role\. RDS then automatically creates a role named `rds-monitoring-role` for you, and uses it for the specified DB instance or read replica\.
 
 You can also create the required role before you enable Enhanced Monitoring, and then specify your new role's name when you enable Enhanced Monitoring\. You must create this required role if you enable Enhanced Monitoring using the AWS CLI or the RDS API\.
 
@@ -63,22 +63,26 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 ### Enabling and Disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
-You can enable Enhanced Monitoring when you create a DB instance or Read Replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you don't need to reboot your DB instance for the change to take effect\. 
+You can enable and disable Enhanced Monitoring using the AWS Management Console, AWS CLI, or RDS API\.
+
+#### Console<a name="USER_Monitoring.OS.Enabling.Procedure.Console"></a>
+
+You can enable Enhanced Monitoring when you create a DB instance or read replica, or when you modify a DB instance\. If you modify a DB instance to enable Enhanced Monitoring, you don't need to reboot your DB instance for the change to take effect\. 
 
 You can enable Enhanced Monitoring in the RDS console when you do one of the following actions: 
-+ **Create a DB Instance** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
-+ **Create a Read Replica** – You can enable Enhanced Monitoring in the **Configure Advanced Settings** page\.
-+ **Modify a DB Instance** – You can enable Enhanced Monitoring in the **Modify DB Instance** page\.
++ **Create a DB instance** – You can enable Enhanced Monitoring in the **Monitoring** section under **Additional configuration**\.
++ **Create a read replica** – You can enable Enhanced Monitoring in the **Monitoring** section\.
++ **Modify a DB instance** – You can enable Enhanced Monitoring in the **Monitoring** section\.
 
 To enable Enhanced Monitoring by using the RDS console, scroll to the **Monitoring** section and do the following: 
 
-1. Choose **Enable enhanced monitoring** for your DB instance or Read Replica\.
+1. Choose **Enable enhanced monitoring** for your DB instance or read replica\.
 
 1. Set the **Monitoring Role** property to the IAM role that you created to permit Amazon RDS to communicate with Amazon CloudWatch Logs for you, or choose **Default** to have RDS create a role for you named `rds-monitoring-role`\.
 
-1. Set the **Granularity** property to the interval, in seconds, between points when metrics are collected for your DB instance or Read Replica\. The **Granularity** property can be set to one of the following values: `1`, `5`, `10`, `15`, `30`, or `60`\.
+1. Set the **Granularity** property to the interval, in seconds, between points when metrics are collected for your DB instance or read replica\. The **Granularity** property can be set to one of the following values: `1`, `5`, `10`, `15`, `30`, or `60`\.
 
-To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\. 
+To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\.
 
 ![\[Enable Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics3.png)
 
@@ -86,6 +90,47 @@ Enabling Enhanced Monitoring doesn't require your DB instance to restart\.
 
 **Note**  
 The fastest that the RDS console refreshes is every 5 seconds\. If you set the granularity to 1 second in the RDS console, you still see updated metrics only every 5 seconds\. You can retrieve 1\-second metric updates by using CloudWatch Logs\.
+
+#### AWS CLI<a name="USER_Monitoring.OS.Enabling.Procedure.CLI"></a>
+
+To enable Enhanced Monitoring using the AWS CLI, in the following commands, set the `--monitoring-interval` option to a value other than `0` and set the `--monitoring-role-arn` option to the role you created in [Before You Begin](#USER_Monitoring.OS.Enabling.Prerequisites)\.
++ [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
++ [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)
++ [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)
+
+The `--monitoring-interval` option specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values for the option are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
+
+To disable Enhanced Monitoring using the AWS CLI, set the `--monitoring-interval` option to `0` in the these commands\.
+
+**Example**  
+The following example enables Enhanced Monitoring for a DB instance:  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-instance \
+    --db-instance-identifier mydbinstance \
+    --monitoring-interval 30 \
+    --monitoring-role-arn arn:aws:iam::123456789012:role/emaccess
+```
+For Windows:  
+
+```
+aws rds modify-db-instance ^
+    --db-instance-identifier mydbinstance ^
+    --monitoring-interval 30 ^
+    --monitoring-role-arn arn:aws:iam::123456789012:role/emaccess
+```
+
+#### RDS API<a name="USER_Monitoring.OS.Enabling.Procedure.API"></a>
+
+To enable Enhanced Monitoring using the RDS API, in the following operations, set the `MonitoringInterval` parameter to a value other than `0` and set the `MonitoringRoleArn` parameter to the role you created in [Before You Begin](#USER_Monitoring.OS.Enabling.Prerequisites)\.
++ [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
++ [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)
++ [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)
+
+The `MonitoringInterval` parameter specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values for the parameter are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
+
+To disable Enhanced Monitoring using the RDS API, set the `MonitoringInterval` parameter to `0` in the these operations\.
 
 ## Viewing Enhanced Monitoring<a name="USER_Monitoring.OS.Viewing"></a>
 

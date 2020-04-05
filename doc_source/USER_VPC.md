@@ -42,6 +42,6 @@ After you create the VPC, follow these steps to move your DB instance into the V
 
 The following are some limitations to moving your DB instance into the VPC\. 
 + Moving a Multi\-AZ DB instance not in a VPC into a VPC is not currently supported\.
-+ Moving a DB instance with Read Replicas not in a VPC into a VPC is not currently supported\.
++ Moving a DB instance with read replicas not in a VPC into a VPC is not currently supported\.
 
 If you move your DB instance into a VPC, and you are using a custom option group with your DB instance, then you need to change the option group that is associated with your DB instance\. Option groups are platform\-specific, and moving to a VPC is a change in platform\. To use a custom option group in this case, assign the default VPC option group to the DB instance, assign an option group that is used by other DB instances in the VPC you are moving to, or create a new option group and assign it to the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 

@@ -26,7 +26,7 @@ The following are basic operational guidelines that everyone should follow when 
 + Enable automatic backups and set the backup window to occur during the daily low in write IOPS\.
 + If your database workload requires more I/O than you have provisioned, recovery after a failover or database failure will be slow\. To increase the I/O capacity of a DB instance, do any or all of the following:
   + Migrate to a DB instance class with High I/O capacity\.
-  + Convert from standard storage to either General Purpose or Provisioned IOPS storage, depending on how much of an increase you need\. For information on available storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
+  + Convert from magnetic storage to either General Purpose or Provisioned IOPS storage, depending on how much of an increase you need\. For information on available storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
 
     If you convert to Provisioned IOPS storage, make sure you also use a DB instance class that is optimized for Provisioned IOPS\. For information on Provisioned IOPS, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
   + If you are already using Provisioned IOPS storage, provision additional throughput capacity\. 
@@ -174,7 +174,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 
 On a MySQL DB instance, observe the following table creation limits:
 + You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the DB instance is 200 GiB or larger in size\.
-+ You’re limited to 1000 tables if you are either using standard storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
++ You’re limited to 1000 tables if you are either using magnetic storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
 
 We recommend these limits because having large numbers of tables significantly increases database recovery time after a failover or database crash\. If you need to create more tables than recommended, set the `innodb_file_per_table` parameter to 0\. For more information, see [Working with InnoDB Tablespaces to Improve Crash Recovery Times](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.Tables) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 

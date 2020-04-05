@@ -85,14 +85,16 @@ To upgrade the engine version of a DB instance, use the [ ModifyDBInstance](http
 
 A *minor engine version* is an update to a DB engine version within a major engine version\. For example, a major engine version might be 9\.6 with the minor engine versions 9\.6\.11 and 9\.6\.12 within it\. 
 
-If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. When a minor engine version is designated as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
+If you want Amazon RDS to upgrade the DB engine version of a database automatically, you can enable auto minor version upgrades for the database\. 
+
+When Amazon RDS designates a minor engine version as the preferred minor engine version, each database that meets both of the following conditions is upgraded to the minor engine version automatically:
 + The database is running a minor version of the DB engine that is lower than the preferred minor engine version\.
 + The database has auto minor version upgrade enabled\.
 
 You can control whether auto minor version upgrade is enabled for a DB instance when you perform the following tasks:
 + [Creating a DB instance](USER_CreateDBInstance.md)
 + [Modifying a DB instance](Overview.DBInstance.Modifying.md)
-+ [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)
++ [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)
 + [Restoring a DB instance from a snapshot](USER_RestoreFromSnapshot.md)
 + [Restoring a DB instance to a specific time](USER_PIT.md)
 + [Importing a DB instance from Amazon S3](MySQL.Procedural.Importing.md) \(for a MySQL backup on Amazon S3\)

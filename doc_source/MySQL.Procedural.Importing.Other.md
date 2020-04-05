@@ -13,7 +13,7 @@ Find techniques to import data into an Amazon RDS for MySQL DB instance in the f
 | --- | --- | --- | --- | --- | --- | 
 | Existing MySQL database on premises or on Amazon EC2 | Any | One time | Some | Create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file to a new Amazon RDS DB instance running MySQL\. | [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md) | 
 | Any existing database | Any | One time or ongoing | Minimal | Use AWS Database Migration Service to migrate the database with minimal downtime and, for many database DB engines, continue ongoing replication\. | [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) in the AWS Database Migration Service User Guide | 
-| Existing Amazon RDS MySQL DB instance | Any | One time | Minimal | Create a Read Replica, and then promote the Read Replica\. | [Working with Read Replicas](USER_ReadRepl.md) | 
+| Existing Amazon RDS MySQL DB instance | Any | One time | Minimal | Create a read replica, and then promote the read replica\. | [Working with Read Replicas](USER_ReadRepl.md) | 
 | Existing MySQL or MariaDB database | Small | One time | Some | Copy the data directly to your Amazon RDS MySQL DB instance using a command\-line utility\. | [Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.SmallExisting.md) | 
 | Data not stored in an existing database | Medium | One time | Some | Create flat files and import them using the mysqlimport utility\. | [Importing Data From Any Source to a MySQL or MariaDB DB Instance](MySQL.Procedural.Importing.AnySource.md) | 
 | Existing MySQL or MariaDB database on premises or on Amazon EC2 | Any | Ongoing | Minimal | Configure replication with an existing MySQL database as the replication source\. | [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md) or [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md) | 
@@ -53,7 +53,7 @@ Whenever possible, disable binary logging during large data loads to avoid the r
 
 After the load, set the backup retention period back to an appropriate \(no zero\) value\. 
 
-You can't set the backup retention period to zero if the DB instance is a source DB instance for Read Replicas\.
+You can't set the backup retention period to zero if the DB instance is a source DB instance for read replicas\.
 
 ### InnoDB<a name="MySQL.Procedural.Importing.Advanced.InnoDB"></a>
 
@@ -109,7 +109,7 @@ Here are some additional tips to reduce load times:
 + Load in parallel unless already near a resource limit\. Use partitioned tables when appropriate\. 
 + Use multi\-value inserts when loading with SQL to minimize statement execution overhead\. When using mysqldump, this is done automatically\.
 + Reduce InnoDB log IO innodb\_flush\_log\_at\_trx\_commit=0 
-+ If you are loading data into a DB instance that does not have Read Replicas, set the sync\_binlog parameter to 0 while loading data\. When data loading is complete, set the sync\_binlog parameter to back to 1\.
++ If you are loading data into a DB instance that does not have read replicas, set the sync\_binlog parameter to 0 while loading data\. When data loading is complete, set the sync\_binlog parameter to back to 1\.
 + Load data before converting the DB instance to a Multi\-AZ deployment\. However, if the DB instance already uses a Multi\-AZ deployment, switching to a Single\-AZ deployment for data loading is not recommended, because doing so only provides marginal improvements\.
 
 **Note**  

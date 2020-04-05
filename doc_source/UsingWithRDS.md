@@ -18,7 +18,7 @@ You can manage access to your Amazon RDS resources and your databases on a DB in
 + Use the security features of your DB engine to control who can log in to the databases on a DB instance\. These features work just as if the database was on your local network\. 
 
 **Note**  
-You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon RDS manages\. These include creating backups, replicating data between a master and a Read Replica, and other processes\.
+You only have to configure security for your use cases\. You don't have to configure security access for processes that Amazon RDS manages\. These include creating backups, replicating data between a master and a read replica, and other processes\.
 
 For more information on managing access to Amazon RDS resources and your databases on a DB instance, see the following topics\.
 

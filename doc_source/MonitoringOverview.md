@@ -10,7 +10,7 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 The next step is to establish a baseline for normal Amazon RDS performance in your environment, by measuring performance at various times and under different load conditions\. As you monitor Amazon RDS, you should consider storing historical monitoring data\. This stored data will give you a baseline to compare against with current performance data, identify normal performance patterns and performance anomalies, and devise methods to address issues\.
 
-For example, with Amazon RDS, you can monitor network throughput, I/O for read, write, and/or metadata operations, client connections, and burst credit balances for your DB instances\. When performance falls outside your established baseline, you might need to change the instance class of your DB instance or the number of DB instances and Read Replicas that are available for clients in order to optimize your database availability for your workload\.
+For example, with Amazon RDS, you can monitor network throughput, I/O for read, write, and/or metadata operations, client connections, and burst credit balances for your DB instances\. When performance falls outside your established baseline, you might need to change the instance class of your DB instance or the number of DB instances and read replicas that are available for clients in order to optimize your database availability for your workload\.
 
 In general, acceptable values for performance metrics depend on what your baseline looks like and what your application is doing\. Investigate consistent or trending variances from your baseline\. Advice about specific types of metrics follows: 
 +  **High CPU or RAM consumption** – High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 
@@ -122,7 +122,7 @@ The `AWS/RDS` namespace includes the following metrics\.
 | ReadIOPS |  The average number of disk read I/O operations per second\. Units: Count/Second  | 
 | ReadLatency |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | ReadThroughput |  The average number of bytes read from disk per second\. Units: Bytes/Second  | 
-| ReplicaLag |  The amount of time a Read Replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, and PostgreSQL Read Replicas\. Units: Seconds  | 
+| ReplicaLag |  The amount of time a read replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, Oracle, PostgreSQL, and SQL Server read replicas\. Units: Seconds  | 
 | ReplicationSlotDiskUsage |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Megabytes  | 
 | SwapUsage |  The amount of swap space used on the DB instance\. This metric is not available for SQL Server\. Units: Bytes  | 
 | TransactionLogsDiskUsage |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 

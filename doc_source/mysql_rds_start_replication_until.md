@@ -23,7 +23,7 @@ The location in the `replication_log_file` binary log at which replication will 
 
 The master user must run the `mysql.rds_start_replication_until` procedure\.
 
-You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed Read Replica to the time just before a disaster\. After this procedure stops replication, you can promote the Read Replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 You can configure delayed replication using the following stored procedures:
 + [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md)

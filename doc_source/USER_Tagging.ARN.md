@@ -1,6 +1,6 @@
 # Working with Amazon Resource Names \(ARNs\) in Amazon RDS<a name="USER_Tagging.ARN"></a>
 
-Resources created in Amazon Web Services are each uniquely identified with an Amazon Resource Name \(ARN\)\. For certain Amazon RDS operations, you must uniquely identify an Amazon RDS resource by specifying its ARN\. For example, when you create an RDS DB instance Read Replica, you must supply the ARN for the source DB instance\. 
+Resources created in Amazon Web Services are each uniquely identified with an Amazon Resource Name \(ARN\)\. For certain Amazon RDS operations, you must uniquely identify an Amazon RDS resource by specifying its ARN\. For example, when you create an RDS DB instance read replica, you must supply the ARN for the source DB instance\. 
 
 ## Constructing an ARN for Amazon RDS<a name="USER_Tagging.ARN.Constructing"></a>
 

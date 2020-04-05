@@ -450,7 +450,7 @@ Complete the following steps to skip corrupt blocks during index and table scans
 
 By default, Oracle tablespaces are created with auto\-extend enabled and no maximum size\. Because of these default settings, tablespaces can grow too large in some cases\. We recommend that you specify an appropriate maximum size on permanent and temporary tablespaces, and that you carefully monitor space usage\. 
 
-To resize the temporary space in a Read Replica for an Oracle DB instance, use either the `rdsadmin.rdsadmin_util.resize_temp_tablespace` or the `rdsadmin.rdsadmin_util.resize_tempfile` Amazon RDS procedure\.
+To resize the temporary space in a read replica for an Oracle DB instance, use either the `rdsadmin.rdsadmin_util.resize_temp_tablespace` or the `rdsadmin.rdsadmin_util.resize_tempfile` Amazon RDS procedure\.
 
 The `resize_temp_tablespace` procedure has the following parameters\.
 
@@ -472,7 +472,7 @@ The `resize_tempfile` procedure has the following parameters\.
 | `file_id` | binary\_integer | — | Yes | The file identifier of the temporary tablespace to resize\. | 
 | `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
-The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a Read Replica\.
+The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a read replica\.
 
 ```
 exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');        
@@ -482,10 +482,10 @@ exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');
 exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');        
 ```
 
-The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a Read Replica\.
+The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a read replica\.
 
 ```
 exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');        
 ```
 
-For more information about Read Replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
+For more information about read replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.

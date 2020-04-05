@@ -194,7 +194,7 @@ If you plan to use replication, the binary logging format is important because i
 
 **Important**  
 Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
-Statement\-based replication can cause inconsistencies between the source DB instance and a Read Replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
+Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
 
 **To set the MySQL binary logging format**
 

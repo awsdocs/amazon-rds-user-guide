@@ -5,7 +5,7 @@ To delete a DB instance, you must do the following:
 + Enable or disable the option to take a final DB snapshot of the instance
 + Enable or disable the option to retain automated backups
 
-If the DB instance that you want to delete has a Read Replica, you should either promote the Read Replica or delete it\. For more information, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
+If the DB instance that you want to delete has a read replica, you should either promote the read replica or delete it\. For more information, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
 ## Deletion Protection<a name="USER_DeleteInstance.DeletionProtection"></a>
 

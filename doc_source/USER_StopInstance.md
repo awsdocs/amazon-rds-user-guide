@@ -32,7 +32,7 @@ When you stop a DB instance it retains its ID, Domain Name Server \(DNS\) endpoi
 ## Limitations<a name="USER_StopInstance.Limitations"></a>
 
 The following are some limitations to stopping and starting a DB instance: 
-+ You can't stop a DB instance that has a Read Replica, or that is a Read Replica\.
++ You can't stop a DB instance that has a read replica, or that is a read replica\.
 + You can't stop an Amazon RDS for SQL Server DB instance in a Multi\-AZ configuration\.
 + You can't modify a stopped DB instance\.
 + You can't delete an option group that is associated with a stopped DB instance\.
