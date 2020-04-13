@@ -6,9 +6,6 @@ RDS uploads the completed audit logs to your S3 bucket, using the IAM role that 
 
 For more information, see [SQL Server Audit \(Database Engine\)](https://docs.microsoft.com/sql/relational-databases/security/auditing/sql-server-audit-database-engine) in the Microsoft SQL Server documentation\.
 
-**Note**  
-SQL Server Audit is supported in all regions, except for Asia Pacific \(Hong Kong\)\.
-
 **Topics**
 + [Support for SQL Server Audit](#Appendix.SQLServer.Options.Audit.Support)
 + [Adding SQL Server Audit to the DB Instance Options](#Appendix.SQLServer.Options.Audit.Adding)

@@ -38,7 +38,12 @@ The following table lists the resources and their quotas per AWS Region\.
 | VPC security groups | 5 | 
 
 **Note**  
-By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\. Of those 40 DB instances, you can have up to 10 instances of each SQL Server DB edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model\. All 40 can be MySQL, MariaDB, or PostgreSQL\. All 40 can be Oracle under the "bring\-your\-own\-license" \(BYOL\) model\.   
+By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  
+The following limitations apply to the Amazon RDS DB instances:  
+10 for each SQL Server edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model
+10 for Oracle under the "license\-included" model
+40 for MySQL, MariaDB, or PostgreSQL
+40 for Oracle under the "bring\-your\-own\-license" \(BYOL\) licensing model
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a Quota Increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
 Backups managed by AWS Backup are considered manual snapshots for the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 

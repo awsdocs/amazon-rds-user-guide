@@ -1,6 +1,7 @@
 # MariaDB on Amazon RDS<a name="CHAP_MariaDB"></a>
 
 Amazon RDS supports DB instances running several versions of MariaDB\. You can use the following major versions: 
++ MariaDB 10\.4
 + MariaDB 10\.3
 + MariaDB 10\.2
 + MariaDB 10\.1
@@ -52,6 +53,7 @@ Amazon RDS currently supports the following versions of MariaDB:
 
 | Major Version | Minor Version | 
 | --- | --- | 
+| MariaDB 10\.4 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.3 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.2 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
@@ -61,9 +63,30 @@ You can specify any currently supported MariaDB version when creating a new DB i
 
 For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](https://aws.amazon.com/rds/faqs/)\.
 
-## Version and Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
+## MariaDB Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
-For information about supported versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\.
+In the following sections, find MariaDB feature support on Amazon RDS for MariaDB major versions:
+
+**Topics**
++ [MariaDB 10\.4 Support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-4)
++ [MariaDB 10\.3 Support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-3)
++ [MariaDB 10\.2 Support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-2)
++ [MariaDB 10\.1 Support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-1)
++ [MariaDB 10\.0 Support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-0)
+
+For information about supported minor versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS Versions](#MariaDB.Concepts.VersionMgmt)\.
+
+### MariaDB 10\.4 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-4"></a>
+
+Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.4 or later: 
++ **User account security enhancements** – [Password expiration](https://mariadb.com/kb/en/user-password-expiry/) and [account locking](https://mariadb.com/kb/en/account-locking/) improvements
++ **Optimizer enhancements** – [Optimizer Trace feature](https://mariadb.com/kb/en/optimizer-trace-overview/)
++ **InnoDB enhancements ** – [Instant DROP COLUMN support](https://mariadb.com/kb/en/alter-table/#drop-column) and instant `VARCHAR` extension for `ROW_FORMAT=DYNAMIC` and `ROW_FORMAT=COMPACT` 
++ **New parameters** – Including [tcp\_nodedelay](https://mariadb.com/kb/en/server-system-variables/#tcp_nodelay), [tls\_version](https://mariadb.com/kb/en/ssltls-system-variables/#tls_version), and [gtid\_cleanup\_batch\_size](https://mariadb.com/kb/en/gtid/#gtid_cleanup_batch_size)
+
+For a list of all MariaDB 10\.4 features and their documentation, see [Changes and Improvements in MariaDB 10\.4](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-104/) and [Release Notes \- MariaDB 10\.4 Series](https://mariadb.com/kb/en/library/release-notes-mariadb-104-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features Not Supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
 ### MariaDB 10\.3 Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-3"></a>
 
@@ -238,6 +261,7 @@ MariaDB uses yaSSL for secure connections in the following versions:
 + MariaDB version 10\.0\.32 and earlier 10\.0 versions
 
 MariaDB uses OpenSSL for secure connections in the following versions:
++ MariaDB 10\.4 versions
 + MariaDB 10\.3 versions
 + MariaDB 10\.2 versions
 + MariaDB version 10\.1\.31 and later 10\.1 versions
@@ -250,6 +274,7 @@ Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 
 
 | MariaDB Version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
+|  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.2  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.1  |  Supported  |  Supported for 10\.1\.31 and later 10\.1 versions  |  Supported for 10\.1\.31 and later 10\.1 versions  | 

@@ -123,7 +123,7 @@ For Amazon RDS for MariaDB or MySQL, Performance Insights provides more detailed
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Enabling.html)
 
-Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then unset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
+Performance Schema is enabled automatically only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want the Performance Schema parameters to be set automatically, then reset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
 
 When you change the value of the `performance_schema` parameter, a DB instance reboot is required\. If you're creating a new DB instance with Performance Insights enabled, the `performance_schema` parameter is set to 1 \(enabled\) by default\.
 

@@ -178,7 +178,7 @@ For instructions on how to call each stored procedure, see the following topics:
 
 ### Backing Up a Database<a name="SQLServer.Procedural.Importing.Native.Using.Backup"></a>
 
-To back up your database, call the `rds_backup_database` stored procedure\.
+To back up your database, use the `rds_backup_database` stored procedure\.
 
 **Note**  
 You can't back up a database during the maintenance window, or while Amazon RDS is taking a snapshot\. 

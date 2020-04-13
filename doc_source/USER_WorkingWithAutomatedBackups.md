@@ -19,7 +19,7 @@ You can also use AWS Backup to manage backups of Amazon RDS DB instances\. Backu
 
 ## Backup Storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
-Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Your backup storage is equivalent to the sum of the database storage for all instances in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. 
+Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Total backup storage space equals the sum of the storage for all backups in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. 
 
 For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 

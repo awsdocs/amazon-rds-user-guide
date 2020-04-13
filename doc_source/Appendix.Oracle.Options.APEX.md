@@ -15,6 +15,7 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 | APEX Version | Storage Requirements | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
 | --- | --- | --- | --- | --- | --- | --- | 
+|  Oracle APEX version 19\.2\.v1  |  149 MiB  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  Oracle APEX version 19\.1\.v1  |  148 MiB  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  Oracle APEX version 18\.2\.v1  |  146 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  Oracle APEX version 18\.1\.v1  |  145 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 

@@ -6,3 +6,6 @@ After you create an Amazon RDS DB instance, you can use any standard SQL client 
 + [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)
 + [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)
 + [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)
+
+You can also use Amazon RDS Proxy to manage connections to MySQL and PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. 
++ [Managing Connections with Amazon RDS Proxy \(Preview\)](rds-proxy.md)

@@ -58,9 +58,8 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 
 ****  
 
-|  |  |  |  |  |  |  |  | 
-| --- |--- |--- |--- |--- |--- |--- |--- |
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
+| Instance Class | vCPU | ECU | Memory \(GiB\) | VPC Only | EBS Optimized | Max\. Bandwidth \(Mbps\) | Network Performance | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -87,7 +86,6 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.m1\.large | 2 | 2 | 7\.5 | No | Yes | 450 | Moderate | 
 | db\.m1\.medium | 1 | 1 | 3\.75 | No | No | — | Moderate | 
 | db\.m1\.small | 1 | 1 | 1\.7 | No | No | — | Very Low | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
 | db\.z1d\.12xlarge | 48 | 271 | 384 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.z1d\.6xlarge | 24 | 134 | 192 | Yes | Yes | 7,000 | 10 Gbps | 
@@ -95,7 +93,6 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.z1d\.2xlarge | 8 | 53 | 64 | Yes | Yes | 2,333 | Up to 10 Gbps | 
 | db\.z1d\.xlarge\* | 4 | 28 | 32 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
 | db\.z1d\.large\* | 2 | 15 | 16 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.x1e – Latest Generation Memory Optimized Instance Classes | 
 | db\.x1e\.32xlarge | 128 | 340 | 3,904 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1e\.16xlarge | 64 | 179 | 1,952 | Yes | Yes | 7,000 | 10 Gbps | 
@@ -106,7 +103,6 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -129,12 +125,10 @@ In the following table, you can find details about the Amazon RDS DB instance cl
 | db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | No | Yes | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | No | No | — | Moderate | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.m2 – Previous Generation Memory Optimized Instance Classes | 
 | db\.m2\.4xlarge | 8 | 26 | 68\.4 | No | Yes | 1,000 | High | 
 | db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | 
 | db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | 
-| **Instance Class** | **vCPU** | **ECU** | **Memory \(GiB\)** | **VPC Only** | **EBS Optimized** | **Max\. Bandwidth \(Mbps\)** | **Network Performance** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge\* | 8 | Variable | 32 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.xlarge\* | 4 | Variable | 16 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
@@ -167,9 +161,8 @@ The following are DB engine considerations for DB instance classes:
 
 ****  
 
-|  |  |  |  |  |  | 
-| --- |--- |--- |--- |--- |--- |
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
+| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| --- | --- | --- | --- | --- | --- | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -196,7 +189,6 @@ The following are DB engine considerations for DB instance classes:
 | db\.m1\.large | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | db\.m1\.medium | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
 | db\.z1d\.12xlarge | No | No | No | Yes | No | 
 | db\.z1d\.6xlarge | No | No | No | Yes | No | 
@@ -204,7 +196,6 @@ The following are DB engine considerations for DB instance classes:
 | db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.large | No | Yes | No | Yes | No | 
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.x1e – Latest Generation Memory Optimized Instance Classes | 
 | db\.x1e\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.16xlarge | No | Yes | No | Yes | No | 
@@ -215,7 +206,6 @@ The following are DB engine considerations for DB instance classes:
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -238,12 +228,10 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.m2 – Previous Generation Memory Optimized Instance Classes | 
 | db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4, 9\.3 | 
-| **Instance Class** | **MariaDB** | **Microsoft SQL Server** | **MySQL** | **Oracle** | **PostgreSQL** | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | Yes | 

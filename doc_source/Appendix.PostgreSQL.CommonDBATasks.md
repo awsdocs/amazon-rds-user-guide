@@ -1048,7 +1048,7 @@ To disable DNS resolution in your customer VPC, turn off the `rds.custom_dns_res
 After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\.
 
 **Note**  
-If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with Private Hosted Zones](Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
+If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with Private Hosted Zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
 
 **To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance**
 

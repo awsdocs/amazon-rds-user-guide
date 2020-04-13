@@ -87,10 +87,79 @@ You can't modify the OEM port number after you have associated the option group 
 
 For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [OEM Database Option Settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
 
+## Performing Database Tasks with OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks"></a>
+
+You can use Amazon RDS procedures to run certain OEM Database Express tasks\. By running these procedures, you can do the tasks listed following\.
+
+**Note**  
+OEM Database Express tasks run asynchronously\.
+
+**Topics**
++ [Switching the Website Front End for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)
++ [Switching the Website Front End for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)
+
+### Switching the Website Front End for OEM Database Express to Adobe Flash<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash"></a>
+
+**Note**  
+This task is only available on Oracle DB instances running version 19c or later\.
+
+Starting with Oracle 19c, Oracle has deprecated the former OEM Database Express user interface, which was based on Adobe Flash\. Instead, OEM Database Express now uses an interface built with Oracle JET\. If you experience difficulties with the new interface, you can switch back to the deprecated Flash\-based interface\. Difficulties you might experience with the new interface include being stuck on a `Loading` screen after logging in to OEM Database Express\. You might also miss certain features that were present in the Flash\-based version of OEM Database Express\.
+
+To switch the OEM Database Express website front end to Adobe Flash, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash`\. This procedure is equivalent to the `execemx emx` SQL command\.
+
+Security best practices discourage the use of Adobe Flash\. Although you can revert to the Flash\-based OEM Database Express, we recommend the use of the JET\-based OEM Database Express websites if possible\. If you revert to using Adobe Flash and want to switch back to using Oracle JET, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. After an Oracle database upgrade, a newer version of Oracle JET might resolve JET\-related issues in OEM Database Express\. For more information about switching to Oracle JET, see [Switching the Website Front End for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)\.
+
+**Note**  
+Running this task from the source DB instance for a read replica also causes the read replica to switch its OEM Database Express website front ends to Adobe Flash\.
+
+The following procedure invocation creates a task to switch the OEM Database Express website to Adobe Flash and returns the ID of the task\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash() as TASK_ID from DUAL;
+```
+
+You can view the result by displaying the task's output file\.
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));
+```
+
+Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
+
+You can also view the contents of the task's output file in the AWS Management Console by searching the log entries in the **Logs & events** section for the `task-id`\.
+
+### Switching the Website Front End for OEM Database Express to Oracle JET<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET"></a>
+
+**Note**  
+This task is only available on Oracle DB instances running version 19c or later\.
+
+To switch the OEM Database Express website front end to Oracle JET, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet`\. This procedure is equivalent to the `execemx omx` SQL command\.
+
+By default, the OEM Database Express websites for Oracle DB instances running 19c or later use Oracle JET\. If you used the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash` procedure to switch the OEM Database Express website front end to Adobe Flash, you can switch back to Oracle JET\. To do this, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. For more information about switching to Adobe Flash, see [Switching the Website Front End for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)\.
+
+**Note**  
+Running this task from the source DB instance for a read replica also causes the read replica to switch its OEM Database Express website front ends to Oracle JET\.
+
+The following procedure invocation creates a task to switch the OEM Database Express website to Oracle JET and returns the ID of the task\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet() as TASK_ID from DUAL;
+```
+
+You can view the result by displaying the task's output file\.
+
+```
+SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));
+```
+
+Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
+
+You can also view the contents of the task's output file in the AWS Management Console by searching the log entries in the **Logs & events** section for the `task-id`\.
+
 ## Removing the OEM Database Option<a name="Appendix.Oracle.Options.OEM_DBControl.Remove"></a>
 
 You can remove the OEM option from a DB instance\. When you remove the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you remove the OEM option, you don't need to restart your DB instance\. When you remove the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
 
 To remove the OEM option from a DB instance, do one of the following: 
-+ Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption) 
++ Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
 + Modify the DB instance and specify a different option group that doesn't include the OEM option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 

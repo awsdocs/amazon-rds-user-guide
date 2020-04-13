@@ -1,6 +1,6 @@
 # Integrating an Amazon RDS for SQL Server DB Instance with Amazon S3<a name="User.SQLServer.Options.S3-integration"></a>
 
-You can transfer files between a DB instance running Amazon RDS for SQL Server and an Amazon S3 bucket\. By doing this, you can use Amazon S3 with SQL Server features such as BULK INSERT\. For example, you can download \.csv, \.xml, \.txt, and other files from Amazon S3 to the DB instance host and import the data from `D:\S3\`into the database\. All files are stored in `D:\S3\` on the DB instance\.
+You can transfer files between a DB instance running Amazon RDS for SQL Server and an Amazon S3 bucket\. By doing this, you can use Amazon S3 with SQL Server features such as BULK INSERT\. For example, you can download \.csv, \.xml, \.txt, and other files from Amazon S3 to the DB instance host and import the data from `D:\S3\` into the database\. All files are stored in `D:\S3\` on the DB instance\.
 
 The following limitations apply:
 + The S3 integration feature is not supported on Multi\-AZ instances\.

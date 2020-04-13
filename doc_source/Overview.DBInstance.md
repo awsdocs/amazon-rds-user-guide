@@ -5,13 +5,14 @@ A *DB instance* is an isolated database environment running in the cloud\. It is
 **Note**  
 Amazon RDS supports access to databases using any standard SQL client application\. Amazon RDS does not allow direct host access\. 
 
-You can have up to 40 Amazon RDS DB instances:
+You can have up to 40 Amazon RDS DB instances, with the following limitations:
 + 10 for each SQL Server edition \(Enterprise, Standard, Web, and Express\) under the "license\-included" model
++ 10 for Oracle under the "license\-included" model
 + 40 for MySQL, MariaDB, or PostgreSQL
 + 40 for Oracle under the "bring\-your\-own\-license" \(BYOL\) licensing model
 
 **Note**  
-If your application requires more DB instances, you can request additional DB instances using the form at https://console\.aws\.amazon\.com/support/home\#/case/create?issueType=service\-limit\-increase&limitType=service\-code\-rds\-instances\.
+If your application requires more DB instances, you can request additional DB instances by using [this form](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-rds-instances)\.
 
 Each DB instance has a DB instance identifier\. This customer\-supplied name uniquely identifies the DB instance when interacting with the Amazon RDS API and AWS CLI commands\. The DB instance identifier must be unique for that customer in an AWS Region\.
 
