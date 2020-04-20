@@ -121,6 +121,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)
          + [SQL Server Performance Considerations](Appendix.SQLServer.Options.TDE.Perf.md)
       + [SQL Server Audit](Appendix.SQLServer.Options.Audit.md)
+      + [Support for SQL Server Analysis Services in SQL Server](Appendix.SQLServer.Options.SSAS.md)
    + [Common DBA Tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)
       + [Accessing the tempdb Database on Microsoft SQL Server DB Instances on Amazon RDS](SQLServer.TempDB.md)
       + [Analyzing Your Database Workload on an Amazon RDS DB Instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)

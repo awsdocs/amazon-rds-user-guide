@@ -34,10 +34,10 @@ The following are some limitations to using Management Agent:
 
 The following are prerequisites for using Management Agent: 
 + An Amazon RDS DB instance running Oracle version 19\.0\.0\.0, 18\.0\.0\.0, 12\.2\.0\.1, 12\.1\.0\.2, or 11\.2\.0\.4\. 
-+ At least 3\.3 GiB of storage space for OEM 13c Release 3\. 
-+ At least 3\.3 GiB of storage space for OEM 13c Release 2\. 
-+ At least 3 GiB of storage space for OEM 13c Release 1\. 
-+ At least 2 GiB of storage space for OEM 12c\. 
++ At least 8\.5 GiB of storage space for OEM 13c Release 3\. 
++ At least 5\.5 GiB of storage space for OEM 13c Release 2\. 
++ At least 4\.5 GiB of storage space for OEM 13c Release 1\. 
++ At least 2\.5 GiB of storage space for OEM 12c\. 
 + For Oracle version 19\.0\.0\.0, the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
 + An Oracle Management Service \(OMS\), configured to connect to your Amazon RDS DB instance\. 
 

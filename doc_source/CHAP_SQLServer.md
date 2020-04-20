@@ -1,7 +1,7 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
-Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. The most recent supported version of each major version is shown here\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server Versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\. 
-+ SQL Server 2017 CU16 14\.00\.3223\.3, released per [KB4508218](https://support.microsoft.com/en-us/help/4508218/cumulative-update-16-for-sql-server-2017) on August 01, 2019\.
+Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server Versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
++ SQL Server 2017 CU16 14\.00\.3223\.3, released per [KB4508218](https://support.microsoft.com/en-us/help/4508218/cumulative-update-16-for-sql-server-2017) on August 1, 2019\.
 + SQL Server 2016 SP2 CU8 13\.00\.5426\.0, released per [KB4505830](https://support.microsoft.com/en-us/help/4505830/cumulative-update-8-for-sql-server-2016-sp2) on July 31, 2019\.
 + SQL Server 2014 SP3 CU3 12\.00\.6293\.0, released per [KB4505422](https://support.microsoft.com/en-us/help/4505422/security-update-for-sql-server-2014-sp3-cu3) on July 09, 2019\.
 + SQL Server 2012 SP4 GDR 11\.0\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on January 12, 2018\.
@@ -9,7 +9,7 @@ Amazon RDS supports DB instances running several versions and editions of Micros
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
 
-With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running SQL Server can be used inside a VPC\. You can also use SSL to connect to a DB instance running SQL Server, and you can use TDE to encrypt data at rest\. Amazon RDS currently supports Multi\-AZ deployments for SQL Server using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\) as a high\-availability, failover solution\. 
+With Amazon RDS, you can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running SQL Server can be used inside a VPC\. You can also use Secure Sockets Layer \(SSL\) to connect to a DB instance running SQL Server, and you can use transparent data encryption \(TDE\) to encrypt data at rest\. Amazon RDS currently supports Multi\-AZ deployments for SQL Server using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\) as a high\-availability, failover solution\. 
 
 To deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\. Amazon RDS does not allow direct host access to a DB instance via Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, the master user is assigned to the *db\_owner* role for all user databases on that instance, and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
 
@@ -74,13 +74,12 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + Provisioned IOPS storage – 20 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
   + Magnetic storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
 + Amazon RDS doesn't support running these services on the same server as your Amazon RDS DB instance:
-  + SQL Server Analysis Services
   + SQL Server Integration Services
   + SQL Server Reporting Services
   + Data Quality Services
   + Master Data Services
 
-  To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Reporting, Analysis, Integration, or Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\. 
+  To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Reporting, Integration, or Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\.
 + Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of DROP DATABASE might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the DROP DATABASE command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the DROP DATABASE command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\. 
 + For SQL Server, you create your databases after you create your DB instance\. Database names follow the usual SQL Server naming rules with the following differences:
   + Database names can't start with `rdsadmin`\.

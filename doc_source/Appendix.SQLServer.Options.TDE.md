@@ -16,7 +16,7 @@ Transparent data encryption is used in scenarios where you need to encrypt sensi
 
 A detailed discussion of transparent data encryption is beyond the scope of this guide, but you should understand the security strengths and weaknesses of each encryption algorithm and key\. For information about transparent data encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) on the Microsoft website\.
 
-You should determine if your DB instance is already associated with an option group that has the TDE option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
+Determine if your DB instance is already associated with an option group that has the TDE option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
 
 The process for enabling transparent data encryption on a SQL Server DB instance is as follows: 
 
@@ -65,7 +65,7 @@ Because the TDE option is a persistent option, you can have a conflict between 
 + The current option group has the TDE option, and you replace it with an option group that does not have the TDE option\. 
 + You restore from a DB snapshot to a new DB instance that does not have an option group that contains the TDE option\. For more information about this scenario, see [Option Group Considerations](USER_CopySnapshot.md#USER_CopySnapshot.Options)\. 
 
-To disable TDE for a DB instance, first ensure that there are no encrypted objects left on the DB instance by either unencrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you can't disable TDE for the DB instance\. When you use the console to remove the TDE option from an option group, the console indicates that it is processing\. In addition, an error event is created if the option group is associated with an encrypted DB instance or DB snapshot\.
+To disable TDE for a DB instance, first make sure that there are no encrypted objects left on the DB instance by either decrypting the objects or by dropping them\. If any encrypted objects exist on the DB instance, you can't disable TDE for the DB instance\. When you use the console to remove the TDE option from an option group, the console indicates that it is processing\. In addition, an error event is created if the option group is associated with an encrypted DB instance or DB snapshot\.
 
 The following example removes the TDE encryption from a database called `customerDatabase`\. 
 
@@ -95,4 +95,4 @@ The following example removes the TDE encryption from a database called `custome
 23. GO
 ```
 
-When all objects are unencrypted, you can modify the DB instance to be associated with an option group without the TDE option or you can remove the TDE option from the option group\. 
+When all objects are decrypted, you can have two options\. You can modify the DB instance to be associated with an option group without the TDE option\. Or you can remove the TDE option from the option group\. 

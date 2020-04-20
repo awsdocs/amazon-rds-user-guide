@@ -97,7 +97,7 @@ Replace `schema_1` with the name of your schema in this step and in the followin
 
  Use SQL Plus or Oracle SQL Developer to connect to the source Oracle instance with an administrative user\. If the source database is an Amazon RDS Oracle DB instance, connect with the Amazon RDS master user\. Next, use the Oracle Data Pump utility to create a dump file\. 
 
-The following script creates a dump file named *sample\.dmp* in the DATA\_PUMP\_DIR directory\. 
+The following script creates a dump file named *sample\.dmp* in the DATA\_PUMP\_DIR directory that contains the `SCHEMA_1` schema\. Replace `SCHEMA_1` with the name of the schema you want to export\. 
 
 ```
 DECLARE
@@ -113,7 +113,7 @@ END;
 ```
 
 **Note**  
-Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\.
+Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\. You can view the contents of the export log by using the `rdsadmin.rds_file_util.read_text_file` procedure\. For more information, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 #### Step 3: Upload the Dump File to Your Amazon S3 Bucket<a name="Oracle.Procedural.Importing.DataPumpS3.Step3"></a>
 
@@ -165,6 +165,9 @@ DBMS_DATAPUMP.START_JOB(hdnl);
 END;
 /
 ```
+
+**Note**  
+Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\. You can view the contents of the import log by using the `rdsadmin.rds_file_util.read_text_file` procedure\. For more information, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 You can verify the data import by viewing the user's tables on the DB instance\. For example, the following query returns the number of tables for `SCHEMA_1`\. 
 
@@ -276,7 +279,7 @@ END;
 ```
 
 **Note**  
-Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\.
+Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\. You can view the contents of the export log by using the `rdsadmin.rds_file_util.read_text_file` procedure\. For more information, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 #### Step 4: Create a Database Link to the Target DB Instance<a name="Oracle.Procedural.Importing.DataPumpDBLink.Step4"></a>
 
@@ -328,6 +331,9 @@ DBMS_DATAPUMP.START_JOB(hdnl);
 END;
 /
 ```
+
+**Note**  
+Data Pump jobs are started asynchronously\. For information about monitoring a Data Pump job, see [ Monitoring Job Status](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-E365D74E-12CD-495C-BA23-5A55F679C7E7) in the Oracle documentation\. You can view the contents of the import log by using the `rdsadmin.rds_file_util.read_text_file` procedure\. For more information, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
 
 You can verify the data import by viewing the user's tables on the DB instance\. For example, the following query returns the number of tables for `schema_1`\. 
 

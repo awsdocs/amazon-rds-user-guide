@@ -2,6 +2,9 @@
 
 Amazon cloud computing resources are hosted in multiple locations world\-wide\. These locations are composed of AWS Regions and Availability Zones\. Each *AWS Region* is a separate geographic area\. Each AWS Region has multiple, isolated locations known as *Availability Zones*\. Amazon RDS provides you the ability to place resources, such as instances, and data in multiple locations\. Resources aren't replicated across AWS Regions unless you do so specifically\.
 
+**Note**  
+For information about finding the Availability Zones for an AWS Region, see [Describing Your Regions, Availability Zones, and Local Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#using-regions-availability-zones-describe) in the Amazon EC2 documentation\.
+
 Amazon operates state\-of\-the\-art, highly\-available data centers\. Although rare, failures can occur that affect the availability of instances that are in the same location\. If you host all your instances in a single location that is affected by such a failure, none of your instances would be available\.
 
 ![\[Single AZ Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Con-AZ.png)
@@ -12,7 +15,7 @@ Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that i
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
-## <a name="w51aab5c38c17"></a>
+## <a name="w51aab5c38c19"></a>
 
 Amazon RDS supports the endpoints listed in the following table\. 
 

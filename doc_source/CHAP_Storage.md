@@ -94,7 +94,7 @@ The following table shows the range of Provisioned IOPS and storage size range f
 
 For production OLTP use cases, we recommend that you use Multi\-AZ deployments for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance\.
 
-You can also use Provisioned IOPS SSD storage with read replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a read replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for read replicas ith a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your read replica's performance in this case might differ from that of a configuration where both the master DB instance and the read replicas use Provisioned IOPS SSD storage\.
+You can also use Provisioned IOPS SSD storage with read replicas for MySQL, MariaDB or PostgreSQL\. The type of storage for a read replica is independent of that on the master DB instance\. For example, you might use General Purpose SSD for read replicas with a master DB instance that uses Provisioned IOPS SSD storage to reduce costs\. However, your read replica's performance in this case might differ from that of a configuration where both the master DB instance and the read replicas use Provisioned IOPS SSD storage\.
 
 ### Provisioned IOPS Storage Costs<a name="Overview.ProvisionedIOPS-cost"></a>
 

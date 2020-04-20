@@ -122,12 +122,12 @@ Amazon RDS supports using temporary credentials\.
 
 ### Service\-Linked Roles<a name="security_iam_service-with-iam-roles-service-linked"></a>
 
-[Service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role) allow AWS services to access resources in other services to complete an action on your behalf\. Service\-linked roles appear in your IAM account and are owned by the service\. An IAM administrator can view but not edit the permissions for service\-linked roles\.
+[Service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role) allow AWS services to access resources in other services to complete an action on your behalf\. Service\-linked roles appear in the Roles list in the IAM Management Console and are owned by the service\. An IAM administrator can view but not edit the permissions for service\-linked roles\.
 
 Amazon RDS supports service\-linked roles\. For details about creating or managing Amazon RDS service\-linked roles, see [Using Service\-Linked Roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
 
 ### Service Roles<a name="security_iam_service-with-iam-roles-service"></a>
 
-This feature allows a service to assume a [service role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-role) on your behalf\. This role allows the service to access resources in other services to complete an action on your behalf\. Service roles appear in your IAM account and are owned by the account\. This means that an IAM administrator can change the permissions for this role\. However, doing so might break the functionality of the service\.
+This feature allows a service to assume a [service role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-role) on your behalf\. This role allows the service to access resources in other services to complete an action on your behalf\. Service roles appear in the Roles list in the IAM Management Console and are owned by your account\. This means that an IAM administrator can change the permissions for this role\. However, doing so might break the functionality of the service\.
 
-Amazon RDS supports service roles\. 
+Amazon RDS supports service roles\.

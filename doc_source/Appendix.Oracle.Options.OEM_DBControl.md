@@ -23,7 +23,7 @@ Amazon RDS supports the following settings for the OEM option\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| **Port** | An integer value |  The port on the DB instance that listens for OEM Database\. The default for OEM Database Express is 5500\. The default for OEM 11g Database Control is 1158\.   | 
+| **Port** | An integer value |  The port on the DB instance that listens for OEM Database\. The default for OEM Database Express is 5500\. The default for OEM 11g Database Control is 1158\.  For OEM 11g Database Control, set the port to 1158 or to a value in the 5500 to 5519 range\.  | 
 | **Security Groups** | — |  A security group that has access to **Port**\.   | 
 
 ## Adding the OEM Database Option<a name="Appendix.Oracle.Options.OEM_DBControl.Add"></a>

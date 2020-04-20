@@ -346,7 +346,7 @@ All of the considerations for performing replication within an AWS Region apply 
   + MySQL version 5\.6 and later\.
   + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, all versions of 12\.2, and all versions of 18\.0\.
 
-    An an Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Read Replica Limitations with Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
+    An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Read Replica Limitations with Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
   + PostgreSQL version 9\.4\.7 and later\.
 + A source DB instance can have cross\-Region read replicas in multiple AWS Regions\.
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.

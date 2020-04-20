@@ -27,6 +27,14 @@ The following steps show you how to work with Oracle Statspack on Amazon RDS:
    ALTER USER perfstat IDENTIFIED BY <new_password> ACCOUNT UNLOCK;
    ```
 
+1. Starting with Oracle 19c, you must explicitly grant the `CREATE JOB` privilege to the PERFSTAT user\. You can skip this step if you are using Oracle 18c or lower\. 
+
+   Use the following command to grant the `CREATE JOB` privilege to the PERFSTAT user:
+
+   ```
+   GRANT CREATE JOB TO perfstat;
+   ```
+
 1. After you have logged on using the PERFSTAT account, you can either manually create a Statspack snapshot or create a job that will take a Statspack snapshot after a given time interval\. For example, the following job creates a Statspack snapshot every hour:  
 
    ```

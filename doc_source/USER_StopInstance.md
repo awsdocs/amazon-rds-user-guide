@@ -16,6 +16,9 @@ Stopping and starting a DB instance is supported for all DB instance classes, an
 
 You can stop and start a DB instance whether it is configured for a single Availability Zone or for Multi\-AZ, for database engines that support Multi\-AZ deployments\. You can't stop an Amazon RDS for SQL Server DB instance in a Multi\-AZ configuration\. 
 
+**Note**  
+For a Multi\-AZ deployment, a large amount of time might be required to stop a DB instance\. If you have at least one backup after a previous failover, then you can speed up the stop DB instance operation by performing a reboot with failover operation before stopping the DB instance\.
+
 When you stop a DB instance, the DB instance performs a normal shutdown and stops running\. The status of the DB instance changes to `stopping` and then `stopped`\. Any storage volumes remain attached to the DB instance, and their data is kept\. Any data stored in the RAM of the DB instance is deleted\. 
 
 Stopping a DB instance removes pending actions, except for pending actions for the DB instance's option group or DB parameter group\.

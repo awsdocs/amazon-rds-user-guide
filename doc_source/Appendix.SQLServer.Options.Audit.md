@@ -24,7 +24,7 @@ RDS supports configuring the following option settings for SQL Server Audit\.
 
 | Option Setting | Valid Values | Description | 
 | --- | --- | --- | 
-| IAM\_ROLE\_ARN | A valid Amazon Resource Name \(ARN\) in the format arn:aws:iam::account\-id:role/role\-name\. | The ARN of the IAM role that grants access to the S3 bucket where you want to store your audit logs\. For more information, see [ AWS Identity and Access Management \(IAM\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)\. | 
+| IAM\_ROLE\_ARN | A valid Amazon Resource Name \(ARN\) in the format arn:aws:iam::account\-id:role/role\-name\. | The ARN of the IAM role that grants access to the S3 bucket where you want to store your audit logs\. For more information, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam) in the AWS General Reference\. | 
 | S3\_BUCKET\_ARN | A valid ARN in the format arn:aws:s3:::bucket\-name or arn:aws:s3:::bucket\-name/key\-prefix | The ARN for the S3 bucket where you want to store your audit logs\. | 
 | ENABLE\_COMPRESSION | true or false | Controls audit log compression\. By default, compression is enabled \(set to true\)\. | 
 | RETENTION\_TIME | 0 to 840 | The retention time \(in hours\) that SQL Server audit records are kept on your RDS instance\. By default, retention is disabled\. | 
@@ -165,7 +165,7 @@ The schema is composed of the following elements:
 
 ## Manually Creating an IAM Role for SQL Server Audit<a name="Appendix.SQLServer.Options.Audit.IAM"></a>
 
-Typically, when you create a new option, the AWS Management Console creates the IAM role and the IAM trust policy for you\. However, you can manually create a new IAM role to use with SQL Server Audits, so that you can customize it with any additional requirements you might have\. To do this, you create an IAM role and delegate permissions so that the Amazon RDS service can use your Amazon S3 bucket\. When you create this IAM role, you attach trust and permissions policies\. The trust policy allows Amazon RDS to assume this role\. The permission policy defines the actions that this role can do\. For more information, see [ Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *AWS Identity and Access Management User Guide*\. 
+Typically, when you create a new option, the AWS Management Console creates the IAM role and the IAM trust policy for you\. However, you can manually create a new IAM role to use with SQL Server Audits, so that you can customize it with any additional requirements you might have\. To do this, you create an IAM role and delegate permissions so that the Amazon RDS service can use your Amazon S3 bucket\. When you create this IAM role, you attach trust and permissions policies\. The trust policy allows Amazon RDS to assume this role\. The permission policy defines the actions that this role can do\. For more information, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *AWS Identity and Access Management User Guide*\. 
 
 You can use the examples in this section to create the trust and permissions policies you need\.
 

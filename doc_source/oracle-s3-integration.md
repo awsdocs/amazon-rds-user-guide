@@ -319,7 +319,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 You can use Amazon RDS procedures to upload files from an Oracle DB instance to an Amazon S3 bucket\. You can also use Amazon RDS procedures to download files from an Amazon S3 bucket to an Oracle DB instance\. 
 
 **Note**  
-These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\. The upload and download operations are processed serially\.
+These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\.
 
 **Topics**
 + [Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket](#oracle-s3-integration.using.upload)

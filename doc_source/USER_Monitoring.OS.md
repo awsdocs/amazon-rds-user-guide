@@ -158,7 +158,7 @@ If the DB instance is a Multi\-AZ deployment, you can view the OS metrics for th
 For more information about Multi\-AZ deployments, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
 
 **Note**  
-Currently, viewing OS metrics for a Multi\-AZ standby replica is not supported for MariaDB, Microsoft SQL Server, or PostgreSQL DB instances\.
+Currently, viewing OS metrics for a Multi\-AZ standby replica is not supported for MariaDB or Microsoft SQL Server DB instances\.
 
 If you want to see details for the processes running on your DB instance, choose **OS process list** for **Monitoring**\.
 

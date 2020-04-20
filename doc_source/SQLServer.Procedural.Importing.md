@@ -361,7 +361,7 @@ exec msdb.dbo.rds_restore_database
 @s3_arn_to_restore_from='arn:aws:s3:::aws_example_bucket/backup1.bak';
 ```
 
-**Example of Multiple\-File Restore**  
+**Example of Multifile Restore**  
 To avoid errors when restoring multiple files, make sure that all the backup files have the same prefix, and that no other files use that prefix\.   
 
 ```
