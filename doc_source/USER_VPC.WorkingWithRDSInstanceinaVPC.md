@@ -2,7 +2,7 @@
 
 Unless you are working with a legacy DB instance, your DB instance is in a virtual private cloud \(VPC\)\. A VPC is a virtual network that is logically isolated from other virtual networks in the AWS Cloud\. Amazon VPC lets you launch AWS resources, such as an Amazon RDS DB instance or Amazon EC2 instance, into a VPC\. The VPC can either be a default VPC that comes with your account or one that you create\. All VPCs are associated with your AWS account\. 
 
-Your default VPC has three subnets you can use to isolate resources inside the VPC\. The default VPC also has an Internet Gateway that can be used to provide access to resources inside the VPC from outside the VPC\. 
+Your default VPC has three subnets you can use to isolate resources inside the VPC\. The default VPC also has an internet gateway that can be used to provide access to resources inside the VPC from outside the VPC\. 
 
 For a list of scenarios involving Amazon RDS DB instances in a VPC  and outside of a VPC, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)\. 
 
@@ -20,6 +20,8 @@ To learn how to work with DB instances inside a VPC, see the following:
 
 Here are some tips on working with a DB instance in a VPC:
 + Your VPC must have at least two subnets\. These subnets must be in two different Availability Zones in the AWS Region where you want to deploy your DB instance\. A subnet is a segment of a VPC's IP address range that you can specify and that lets you group instances based on your security and operational needs\. 
+**Note**  
+The DB subnet group for a Local Zone can have only one subnet\.
 + If you want your DB instance in the VPC to be publicly accessible, you must enable the VPC attributes *DNS hostnames* and *DNS resolution*\. 
 + Your VPC must have a DB subnet group that you create \(for more information, see the next section\)\. You create a DB subnet group by specifying the subnets you created\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet to assign to your DB instance\.
 + Your VPC must have a VPC security group that allows access to the DB instance\. 
@@ -38,10 +40,13 @@ Subnets are segments of a VPC's IP address range that you designate to group you
 
 Each DB subnet group should have subnets in at least two Availability Zones in a given AWS Region\. When creating a DB instance in a VPC, you must choose a DB subnet group\. Amazon RDS uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet to associate with your DB instance\. If the primary DB instance of a Multi\-AZ deployment fails, Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one of the other Availability Zones\. 
 
+**Note**  
+The DB subnet group for a Local Zone can have only one subnet\.
+
 When Amazon RDS creates a DB instance in a VPC, it assigns a network interface to your DB instance by using an IP address from your DB subnet group\. However, we strongly recommend that you use the DNS name to connect to your DB instance because the underlying IP address changes during failover\. 
 
 **Note**  
-For each DB instance that you run in a VPC, you should reserve at least one address in each subnet in the DB subnet group for use by Amazon RDS for recovery actions\. 
+For each DB instance that you run in a VPC, make sure to reserve at least one address in each subnet in the DB subnet group for use by Amazon RDS for recovery actions\. 
 
 ## Hiding a DB Instance in a VPC from the Internet<a name="USER_VPC.Hiding"></a>
 
@@ -87,14 +92,14 @@ For instructions on how to create subnets in a VPC, see [Create a VPC with Priva
 
  A DB subnet group is a collection of subnets \(typically private\) that you create for a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when you create DB instances using the CLI or API\. If you use the console, you can just choose the VPC and subnets you want to use\. Each DB subnet group must have at least one subnet in at least two Availability Zones in the AWS Region\. 
 
+ For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an internet gateway\. For more information about internet gateways for subnets, see [ Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
+
 **Note**  
- For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an Internet gateway\. For more information about Internet gateways for subnets, go to [ Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
+The DB subnet group for a Local Zone can have only one subnet\.
 
-When you create a DB instance in a VPC, you must choose a DB subnet group\. Amazon RDS then uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet\. Amazon RDS creates and associates an Elastic Network Interface to your DB instance with that IP address\. For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in an AWS Region allows Amazon RDS to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\. 
+When you create a DB instance in a VPC, make sure to choose a DB subnet group\. Amazon RDS then uses that DB subnet group and your preferred Availability Zone to choose a subnet and an IP address within that subnet\. Amazon RDS creates and associates an Elastic Network Interface to your DB instance with that IP address\. For Multi\-AZ deployments, defining a subnet for two or more Availability Zones in an AWS Region allows Amazon RDS to create a new standby in another Availability Zone should the need arise\. You need to do this even for Single\-AZ deployments, just in case you want to convert them to Multi\-AZ deployments at some point\. 
 
-In this step, you create a DB subnet group and add the subnets you created for your VPC\. 
-
-#### Console<a name="USER_VPC.CreateDBSubnetGroup.CON"></a>
+In this step, you create a DB subnet group and add the subnets that you created for your VPC\. 
 
 **To create a DB subnet group**
 
@@ -110,8 +115,10 @@ In this step, you create a DB subnet group and add the subnets you created for y
 
 1.  For **VPC**, choose the VPC that you created\. 
 
-1. In the **Add subnets** section, choose **Add all the subnets related to this VPC**\.   
+1. In the **Add subnets** section, choose ** Add all the subnets related to this VPC**\.  
 ![\[Create DB Subnet Group button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC101.png)
+**Note**  
+If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose the **Availability Zone group**, **Availability Zones**, and **Subnets**\.
 
 1. Choose **Create**\. 
 

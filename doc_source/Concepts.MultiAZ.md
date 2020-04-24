@@ -2,7 +2,7 @@
 
 Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for MariaDB, MySQL, Oracle, and PostgreSQL DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\.
 
-In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 **Note**  
 The high\-availability feature is not a scaling solution for read\-only scenarios; you cannot use a standby replica to serve read traffic\. To service read\-only traffic, you should use a read replica\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
@@ -18,6 +18,8 @@ DB instances using Multi\-AZ deployments can have increased write and commit lat
 ## Modifying a DB Instance to Be a Multi\-AZ Deployment<a name="Concepts.MultiAZ.Migrating"></a>
 
 If you have a DB instance in a Single\-AZ deployment and modify it to a Multi\-AZ deployment \(for engines other than Amazon Aurora\), Amazon RDS takes several steps\. First, Amazon RDS takes a snapshot of the primary DB instance from your deployment and then restores the snapshot into another Availability Zone\. Amazon RDS then sets up synchronous replication between your primary DB instance and the new instance\. 
+
+For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 **Important**  
 This action avoids downtime when you convert from Single\-AZ to Multi\-AZ, but you can experience a performance impact during and after converting to Multi\-AZ\. This impact can be significant for large write\-intensive DB instances\.  

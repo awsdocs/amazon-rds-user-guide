@@ -186,7 +186,7 @@ To import data stored in an Amazon S3 bucket to a PostgreSQL database table, fol
    1. Get the following information to identify the Amazon S3 file that you want to import:
       + Bucket name – A *bucket* is a container for Amazon S3 objects or files\.
       + File path – The file path locates the file in the Amazon S3 bucket\.
-      + AWS Region – The AWS Region is the location of the Amazon S3 bucket\. For example, if the S3 bucket is in the US East \(N\. Virginia\) Region, use `us-east-1`\. For a listing of AWS Region names and associated values, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+      + AWS Region – The AWS Region is the location of the Amazon S3 bucket\. For example, if the S3 bucket is in the US East \(N\. Virginia\) Region, use `us-east-1`\. For a listing of AWS Region names and associated values, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\.
 
       To find how to get this information, see [View an Object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
 
@@ -609,7 +609,7 @@ A required text string containing arguments for the PostgreSQL `COPY` command\. 
 An `aws_commons._s3_uri_1` composite type containing the following information about the S3 object:  
 + `bucket` – The name of the Amazon S3 bucket containing the file\.
 + `file_path` – The Amazon S3 path of the file\.
-+ `region` – The AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
++ `region` – The AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\.
 
  *credentials*   
 An `aws_commons._aws_credentials_1` composite type containing the following credentials to use for the import operation:  
@@ -658,7 +658,7 @@ A text string containing the name of the Amazon S3 bucket that contains the file
 A text string containing the Amazon S3 path of the file\. 
 
 *region*  
-A text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+A text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 *access\_key*  
 A text string containing the access key to use for the import operation\. The default is NULL\.
@@ -692,7 +692,7 @@ A required text string containing the Amazon S3 bucket name for the file\.
 A required text string containing the Amazon S3 path of the file\.
 
 *region*  
-A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)\.
+A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 #### aws\_commons\.create\_aws\_credentials<a name="USER_PostgreSQL.S3Import.create_aws_credentials"></a>
 

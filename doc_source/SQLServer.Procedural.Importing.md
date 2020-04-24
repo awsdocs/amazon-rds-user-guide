@@ -25,7 +25,7 @@ The following are some limitations to using native backup and restore:
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
 + Native backups of RDS databases larger than 1 TB aren't supported\. 
 + You can't back up to or restore from more than 10 backup files at the same time\.
-+ A differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want a differential backup, but a snapshot exists, then do another full backup before proceeding with the differential backup\.
++ A differential backup is based on the last full backup\. For differential backups to work, you can't take a snapshot between the last full backup and the differential backup\. If you want a differential backup, but a manual or automated snapshot exists, then do another full backup before proceeding with the differential backup\.
 + Differential and log restores aren't supported for databases with files that have their file\_guid \(unique identifier\) set to `NULL`\.
 + You can run up to two backup or restore tasks at the same time\.
 + You can't perform native log backups from SQL Server on Amazon RDS\.

@@ -57,6 +57,12 @@ The License Included model is supported on Amazon RDS for the following Oracle d
 + Oracle Database Standard Edition One \(SE1\)
 + Oracle Database Standard Edition Two \(SE2\)
 
+**Note**  
+The Oracle Database SE1 License Included model isn't supported in the following opt\-in AWS Regions:  
+Asia Pacific \(Hong Kong\)
+Middle East \(Bahrain\)
+Africa \(Cape Town\)
+
 ### Bring Your Own License \(BYOL\)<a name="Oracle.Concepts.Licensing.BYOL"></a>
 
 In the Bring Your Own License model, you can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle Software in the Cloud Computing Environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\. 

@@ -33,6 +33,7 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 
 | **AWS Region** | **CA\-2019** | **CA\-2015** | 
 | --- | --- | --- | 
+| Africa \(Cape Town\) | [rds\-ca\-2019\-af\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-af-south-1.pem) | No certificate available | 
 | Asia Pacific \(Hong Kong\) | [rds\-ca\-2019\-ap\-east\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-east-1.pem) | No certificate available | 
 | Asia Pacific \(Mumbai\) | [rds\-ca\-2019\-ap\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-south-1.pem) | [rds\-ca\-2015\-ap\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-south-1.pem) | 
 | Asia Pacific \(Tokyo\) | [rds\-ca\-2019\-ap\-northeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-1.pem) | [rds\-ca\-2015\-ap\-northeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2015-ap-northeast-1.pem) | 

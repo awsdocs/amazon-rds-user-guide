@@ -18,7 +18,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Amazon RDS DB Instances](Overview.DBInstance.md)
    + [DB Instance Classes](Concepts.DBInstanceClass.md)
    + [Amazon RDS DB Instance Storage](CHAP_Storage.md)
-   + [Regions and Availability Zones](Concepts.RegionsAndAvailabilityZones.md)
+   + [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)
    + [High Availability (Multi-AZ) for Amazon RDS](Concepts.MultiAZ.md)
    + [DB Instance Billing for Amazon RDS](User_DBInstanceBilling.md)
       + [On-Demand DB Instances for Amazon RDS](USER_OnDemandDBInstances.md)

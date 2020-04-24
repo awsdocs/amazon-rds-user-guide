@@ -27,6 +27,6 @@ The following diagram shows the configuration when the tutorial is complete\.
 
 ![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
-## Next Step<a name="w51aab9c29c25"></a>
+## Next Step<a name="w53aab9c29c25"></a>
 
 [Step 2: Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)
