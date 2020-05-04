@@ -32,6 +32,31 @@ Client connections from IP addresses within the range 169\.254\.0\.0/16 aren't p
   To make the instance publicly accessible, modify it and choose **Yes** under **Public accessibility**\. For more information, see [Hiding a DB Instance in a VPC from the Internet](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.Hiding)\.
 + **Port** – The port that you specified when you created the DB instance can't be used to send or receive communications due to your local firewall restrictions\. To determine if your network allows the specified port to be used for inbound and outbound communication, check with your network administrator\.
 + **Availability** – For a newly created DB instance, the DB instance has a status of `creating` until the DB instance is ready to use\. When the state changes to `available`, you can connect to the DB instance\. Depending on the size of your DB instance, it can take up to 20 minutes before an instance is available\.
++ **Internet gateway** – For a DB instance to be publicly accessible, the subnets in its DB subnet group must have an internet gateway\.
+
+**To configure an internet gateway for a subnet**
+
+  1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+  1. In the navigation pane, choose **Databases**, and then choose the name of the DB instance\.
+
+  1. In the **Connectivity & security** tab, write down the values of the VPC ID under **VPC** and the subnet ID under **Subnets**\.
+
+  1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+  1. In the navigation pane, choose **Internet Gateways**\. Verify that there is an internet gateway attached to your VPC\. Otherwise, choose **Create Internet Gateway** to create an internet gateway\. Select the internet gateway, and then choose **Attach to VPC** and follow the directions to attach it to your VPC\.
+
+  1. In the navigation pane, choose **Subnets**, and then select your subnet\.
+
+  1. On the **Route Table** tab, verify that there is a route with `0.0.0.0/0` as the destination and the internet gateway for your VPC as the target\. If you're connecting to your instance using its IPv6 address, verify that there is a route for all IPv6 traffic \(`::/0`\) that points to the internet gateway\. Otherwise, do the following:
+
+     1. Choose the ID of the route table \(rtb\-*xxxxxxxx*\) to navigate to the route table\.
+
+     1. On the **Routes** tab, choose **Edit routes**\. Choose **Add route**, use `0.0.0.0/0` as the destination and the internet gateway as the target\. For IPv6, choose **Add route**, use `::/0` as the destination and the internet gateway as the target\.
+
+     1. Choose **Save routes**\.
+
+  For more information, see [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.
 
 For engine\-specific connection issues, see the following topics:
 +  [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)

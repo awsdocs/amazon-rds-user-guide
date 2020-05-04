@@ -185,17 +185,17 @@ You can use the AWS Management Console to add an option to an option group\.
 
 1. In the navigation pane, choose **Option groups**\.
 
-1. Select the option group that you want to modify, and then choose **Add 0ption**\.   
+1. Choose the option group that you want to modify, and then choose **Add option**\.   
 ![\[Console option group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-addoption1.png)
 
 1. In the **Add option** window, do the following: 
 
    1. Choose the option that you want to add\. You might need to provide additional values, depending on the option that you select\. For example, when you choose the `OEM` option, you must also type a port value and specify a security group\.
 
-   1. To enable the option on all associated DB instances as soon as you add it, for **Apply Immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is enabled for each associated DB instance during its next maintenance window\.   
+   1. To enable the option on all associated DB instances as soon as you add it, for **Apply Immediately**, choose **Yes**\. If you choose **No** \(the default\), the option is enabled for each associated DB instance during its next maintenance window\.  
 ![\[Console option group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/optiongroup-addoption2.png)
 
-1. When the settings are as you want them, choose **Add Option**\. 
+1. When the settings are as you want them, choose **Add option**\.
 
 ### AWS CLI<a name="USER_WorkingWithOptionGroups.AddOptions.CLI"></a>
 

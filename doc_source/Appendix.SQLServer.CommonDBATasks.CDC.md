@@ -46,7 +46,7 @@ After CDC is enabled on the database, you can start tracking specific tables\. Y
 15. ;
 ```
 
-To view the CDC configuration for your tables, run [sys\.sp\_cdc\_help\_change\_data\_capture](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-help-change-data-capture-transact-sql)\. 
+To view the CDC configuration for your tables, run [sys\.sp\_cdc\_help\_change\_data\_capture](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-help-change-data-capture-transact-sql)\.
 
 ```
 1. --View CDC configuration
@@ -66,7 +66,7 @@ For more information on CDC tables, functions, and stored procedures in SQL Serv
 
 When you enable CDC, SQL Server creates the CDC jobs\. Database owners \(`db_owner`\) can view, create, modify, and delete the CDC jobs\. However, the RDS system account owns them\. Therefore, the jobs aren’t visible from native views, procedures, or in SQL Server Management Studio\.
 
-To control behavior of CDC in a database, use native SQL Server procedures such as [sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql) and [sp\_cdc\_start\_job ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-start-job-transact-sql)\. To change CDC job parameters, like `maxtrans` and `maxscans`, you can use [sp\_cdc\_change\_jobs\. ](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-change-job-transact-sql)\.
+To control behavior of CDC in a database, use native SQL Server procedures such as [sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql) and [sp\_cdc\_start\_job](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-start-job-transact-sql)\. To change CDC job parameters, like `maxtrans` and `maxscans`, you can use [sp\_cdc\_change\_job\.](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-change-job-transact-sql)\.
 
 To get more information regarding the CDC jobs, you can query the following dynamic management views: 
 + sys\.dm\_cdc\_errors
@@ -99,4 +99,4 @@ To set the configuration on the secondary, run `rdsadmin.dbo.rds_set_configurati
 exec rdsadmin..rds_set_configuration 'cdc_capture_maxtrans' , 1000
 ```
 
-To set the CDC job parameters on the principal, use [sys\.sp\_cdc\_change\_jobs](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-help-jobs-transact-sql) instead\. 
+To set the CDC job parameters on the principal, use [sys\.sp\_cdc\_change\_job](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-change-job-transact-sql) instead\.

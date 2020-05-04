@@ -296,7 +296,7 @@ Before you deploy projects, make sure of the following:
 
 ## Monitoring the Status of a Deployment Task<a name="Appendix.SQLServer.Options.SSAS.Monitor"></a>
 
-To track the status of your deployment \(or download\) task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSAS\. The second parameter accepts a task ID\. Set the second parameter to `0` to get results for all tasks\. 
+To track the status of your deployment \(or download\) task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSAS\. The second parameter accepts a task ID\. 
 
 To see a list of all tasks, set the first parameter to `NULL` and the second parameter to `0`, as shown in the following example\.
 

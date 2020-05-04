@@ -212,9 +212,10 @@ Creating a read replica in a different AWS Region from the source instance is si
 To create an encrypted read replica in a different AWS Region than the source DB instance, the source DB instance must be encrypted\.
 
 Cross\-Region read replicas aren't supported in the following opt\-in AWS Regions:
-+ Asia Pacific \(Hong Kong\)
-+ Middle East \(Bahrain\)
 + Africa \(Cape Town\)
++ Asia Pacific \(Hong Kong\)
++ Europe \(Milan\)
++ Middle East \(Bahrain\)
 
 The following procedures show how to create a read replica from a source MariaDB, MySQL, Oracle, or PostgreSQL DB instance in a different AWS Region\.
 

@@ -59,9 +59,10 @@ The License Included model is supported on Amazon RDS for the following Oracle d
 
 **Note**  
 The Oracle Database SE1 License Included model isn't supported in the following opt\-in AWS Regions:  
-Asia Pacific \(Hong Kong\)
-Middle East \(Bahrain\)
 Africa \(Cape Town\)
+Asia Pacific \(Hong Kong\)
+Europe \(Milan\)
+Middle East \(Bahrain\)
 
 ### Bring Your Own License \(BYOL\)<a name="Oracle.Concepts.Licensing.BYOL"></a>
 

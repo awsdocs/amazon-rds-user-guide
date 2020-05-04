@@ -1,11 +1,11 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server Versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
-+ SQL Server 2017 CU16 14\.00\.3223\.3, released per [KB4508218](https://support.microsoft.com/en-us/help/4508218/cumulative-update-16-for-sql-server-2017) on August 1, 2019\.
-+ SQL Server 2016 SP2 CU8 13\.00\.5426\.0, released per [KB4505830](https://support.microsoft.com/en-us/help/4505830/cumulative-update-8-for-sql-server-2016-sp2) on July 31, 2019\.
-+ SQL Server 2014 SP3 CU3 12\.00\.6293\.0, released per [KB4505422](https://support.microsoft.com/en-us/help/4505422/security-update-for-sql-server-2014-sp3-cu3) on July 09, 2019\.
-+ SQL Server 2012 SP4 GDR 11\.0\.7462\.6, released per [KB4057116](https://support.microsoft.com/en-us/help/4057116/security-update-for-vulnerabilities-in-sql-server) on January 12, 2018\.
-+ SQL Server 2008: It is no longer possible to provision new instances in any region\. Amazon RDS is actively migrating existing instances off this version\. 
++ SQL Server 2017 CU19 14\.00\.3281\.6, released per [KB4535007](https://support.microsoft.com/en-us/help/4535007/cumulative-update-19-for-sql-server-2017) on April 15, 2020\.
++ SQL Server 2016 SP2 CU11 13\.00\.5598\.27, released per [KB4527378](https://support.microsoft.com/en-us/help/4527378/cumulative-update-11-for-sql-server-2016-sp2) on December 9, 2019\.
++ SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
++ SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
++ SQL Server 2008: It's no longer possible to provision new instances in any region\. Amazon RDS is actively migrating existing instances off this version\.
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
 
@@ -176,10 +176,10 @@ The following table shows the supported versions for all editions and all AWS Re
 
 | Major Version | Minor Version | RDS API `EngineVersion` and CLI `engine-version` | 
 | --- | --- | --- | 
-| SQL Server 2017 |  14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 14\.00\.3049\.1 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
-| SQL Server 2016 |  13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 Security Update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
-| SQL Server 2014 |  12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\) 12\.00\.5546\.0 \(SP2 CU5\) 12\.00\.5000\.0 \(SP2\)  |  `12.00.6293.0.v1` `12.00.5571.0.v1` `12.00.5546.0.v1` `12.00.5000.0.v1`  | 
-| SQL Server 2012 |  11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\) 11\.00\.6020\.0 \(SP3\) 11\.00\.5058\.0 \(SP2\), except US East \(Ohio\), Canada \(Central\), and Europe \(London\)  |  `11.00.7462.6.v1` `11.00.6594.0.v1` `11.00.6020.0.v1` `11.00.5058.0.v1`  | 
+| SQL Server 2017 |  14\.00\.3281\.6 \(CU19\) 14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 14\.00\.3049\.1 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3281.6.v1` `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
+| SQL Server 2016 |  13\.00\.5598\.27 \(SP2 CU11\) 13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 Security Update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5598.27.v1` `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
+| SQL Server 2014 |  12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\) 12\.00\.5546\.0 \(SP2 CU5\) 12\.00\.5000\.0 \(SP2\)  |  `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1` `12.00.5546.0.v1` `12.00.5000.0.v1`  | 
+| SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\) 11\.00\.6020\.0 \(SP3\) 11\.00\.5058\.0 \(SP2\), except US East \(Ohio\), Canada \(Central\), and Europe \(London\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1` `11.00.6020.0.v1` `11.00.5058.0.v1`  | 
 
 ## Version Management in Amazon RDS<a name="SQLServer.Concepts.General.Version-Management"></a>
 
@@ -285,24 +285,25 @@ You can use CDC and AWS Database Migration Service to enable ongoing replication
 ## Features Not Supported and Features with Limited Support<a name="SQLServer.Concepts.General.FeatureNonSupport"></a>
 
 The following Microsoft SQL Server features are not supported on Amazon RDS: 
-+ Stretch database
 + Backing up to Microsoft Azure Blob Storage
 + Buffer pool extension
 + Data Quality Services
 + Database Log Shipping
 + Database Mail
 + Distribution Transaction Coordinator \(MSDTC\)
-+ File tables
++ Extended stored procedures, including xp\_cmdshell
 + FILESTREAM support
++ File tables
++ Machine Learning and R Services \(requires OS access to install it\)
 + Maintenance Plans
 + Performance Data Collector
 + Policy\-Based Management
 + PolyBase
-+ Machine Learning and R Services \(requires OS access to install it\)
 + Replication
 + Resource Governor
 + Server\-level triggers
 + Service Broker endpoints
++ Stretch database
 + T\-SQL endpoints \(all operations using CREATE ENDPOINT are unavailable\)
 + WCF Data Services
 

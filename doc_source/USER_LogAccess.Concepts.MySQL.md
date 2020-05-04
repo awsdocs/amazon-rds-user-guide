@@ -6,6 +6,16 @@ You can monitor the MySQL logs directly through the Amazon RDS console, Amazon R
 
 For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
 
+**Topics**
++ [Accessing MySQL Error Logs](#USER_LogAccess.MySQL.Errorlog)
++ [Accessing the MySQL Slow Query and General Logs](#USER_LogAccess.MySQL.Generallog)
++ [Accessing the MySQL Audit Log](#USER_LogAccess.MySQL.Auditlog)
++ [Publishing MySQL Logs to CloudWatch Logs](#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
++ [Log File Size](#USER_LogAccess.MySQL.LogFileSize)
++ [Managing Table\-Based MySQL Logs](#Appendix.MySQL.CommonDBATasks.Logs)
++ [Binary Logging Format](#USER_LogAccess.MySQL.BinaryFormat)
++ [Accessing MySQL Binary Logs](#USER_LogAccess.MySQL.Binarylog)
+
 ## Accessing MySQL Error Logs<a name="USER_LogAccess.MySQL.Errorlog"></a>
 
 The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.

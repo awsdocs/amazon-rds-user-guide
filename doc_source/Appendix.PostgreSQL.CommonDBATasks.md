@@ -68,7 +68,7 @@ from pg_settings
 order by name;
 ```
 
-For an explanation of the output values, see the [http://www.postgresql.org/docs/9.3/static/view-pg-settings.html](http://www.postgresql.org/docs/9.3/static/view-pg-settings.html) topic in the PostgreSQL documentation\.
+For an explanation of the output values, see the [https://www.postgresql.org/docs/current/view-pg-settings.html](https://www.postgresql.org/docs/current/view-pg-settings.html) topic in the PostgreSQL documentation\.
 
  If you set the memory settings too large for `max_connections` or `shared_buffers`, you will prevent the PostgreSQL instance from starting up\. Some parameters use units that you might not be familiar with; for example, `shared_buffers` sets the number of 8\-KB shared memory buffers used by the server\. 
 
@@ -457,7 +457,7 @@ After running the query, you should see output similar to the following\.
          |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
 ```
 
-If you are using a version less than Amazon RDS PostgreSQL 9\.6, but, 9\.3\.12 or later, 9\.4\.7 or later, or 9\.5\.2\+, use this query:
+If you are using a version less than Amazon RDS PostgreSQL 9\.6, but 9\.4\.7 or later, or 9\.5\.2 or later, use the following query\.
 
 ```
 SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query
@@ -502,7 +502,7 @@ The following steps are a guideline, and there are several variations to the pro
 
 1. Open two sessions to the database containing the table you want to vacuum\. For the second session, use "screen" or another utility that maintains the session if your connection is dropped\.
 
-1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.3\.12 or later, 9\.4\.7 or later, or 9\.5\.2 or later to have full visibility into the running rdsadmin processes\.
+1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.4\.7 or later, or 9\.5\.2 or later, to have full visibility into the running rdsadmin processes\.
 
    Run the following query to get the PID of the autovacuum session\.
 
@@ -573,9 +573,9 @@ When the index is corrupted and autovacuum is attempting to run against the tabl
 
 1. Open two sessions to the database containing the table you want to vacuum\. For the second session, use "screen" or another utility that maintains the session if your connection is dropped\.
 
-1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.3\.12 or later, 9\.4\.7 or later, or 9\.5\.2 or later to have full visibility into the running rdsadmin processes\.
+1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.4\.7 or later, or 9\.5\.2 or later, to have full visibility into the running rdsadmin processes\.
 
-   Run the following query to get the PID of the autovacuum session:
+   Run the following query to get the PID of the autovacuum session\.
 
    ```
    SELECT datname, usename, pid, waiting, current_timestamp - xact_start 

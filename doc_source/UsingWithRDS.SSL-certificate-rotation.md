@@ -1,11 +1,8 @@
 # Rotating Your SSL/TLS Certificate<a name="UsingWithRDS.SSL-certificate-rotation"></a>
 
-**Note**  
-If your application connects to an RDS DB instance using Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\), you must take the following steps *before March 5, 2020\.* Doing this means you can avoid interruption of connectivity between your applications and your RDS DB instances\.
+As of March 5, 2020, Amazon RDS CA\-2015 certificates have expired\. If you use or plan to use Secure Sockets Layer \(SSL\) or Transport Layer Security \(TLS\) with certificate verification to connect to your RDS DB instances, you require Amazon RDS CA\-2019 certificates, which are enabled by default for new DB instances\. If you currently do not use SSL/TLS with certificate verification, you might still have expired CA\-2015 certificates and must update them to CA\-2019 certificates if you plan to use SSL/TLS with certificate verification to connect to your RDS databases\. 
 
-The current CA certificates expire on March 5, 2020\. New application connections using SSL/TLS with certificate verification will fail after March 5, 2020\.
-
-Before you update your DB instances to use the new CA certificate, make sure that you update your clients or applications connecting to your RDS databases\.
+Follow these instructions to complete your updates\. Before you update your DB instances to use the new CA certificate, make sure that you update your clients or applications connecting to your RDS databases\.
 
 Amazon RDS provides new CA certificates as an AWS security best practice\. For information about the new certificates and the supported AWS Regions, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 
@@ -16,8 +13,6 @@ Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If
 + [Updating Your CA Certificate by Modifying Your DB Instance](#UsingWithRDS.SSL-certificate-rotation-updating)
 + [Updating Your CA Certificate by Applying DB Instance Maintenance](#UsingWithRDS.SSL-certificate-rotation-maintenance)
 + [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)
-+ [Reverting an Update of a CA Certificate](#UsingWithRDS.SSL-certificate-rotation-reverting)
-+ [Overriding the Default CA Certificate for New DB Instances](#UsingWithRDS.SSL-certificate-rotation-overriding-default)
 
 ## Updating Your CA Certificate by Modifying Your DB Instance<a name="UsingWithRDS.SSL-certificate-rotation-updating"></a>
 
@@ -146,13 +141,10 @@ Use the AWS Management Console to change the CA certificate for multiple DB inst
 
 1. In the navigation pane, choose **Databases**\.
 
-   If you have at least one DB instance that is using the old CA certificate, the following banner appears at the top of the page\.  
-![\[Certificate rotation banner\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-banner.png)
-
    In the navigation pane, there is a **Certificate update** option that shows the total number of affected DB instances\.  
 ![\[Certificate rotation navigation pane option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-certupdate.png)
 
-   Either choose **View pending maintenance actions** in the banner, or choose **Certificate update** in the navigation pane\.
+   Choose **Certificate update** in the navigation pane\.
 
    The **Update your Amazon RDS SSL/TLS certificates** page appears\.  
 ![\[Update CA certificate for multiple DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-update-multiple.png)
@@ -251,86 +243,4 @@ do
    expiry=`keytool -list -v -keystore "$truststore" -storepass ${storepassword} -alias "${alias}" | grep Valid | perl -ne 'if(/until: (.*?)\n/) { print "$1\n"; }'`
    echo " Certificate ${alias} expires in '$expiry'" 
 done
-```
-
-## Reverting an Update of a CA Certificate<a name="UsingWithRDS.SSL-certificate-rotation-reverting"></a>
-
-You can use the AWS Management Console or the AWS CLI to revert to a previous CA certificate for a DB instance\. After March 5, 2020, reverting an update to the new certificates will be ineffective\.
-
-### Console<a name="UsingWithRDS.SSL-certificate-rotation-reverting.Console"></a>
-
-**To revert to a previous CA certificate for a DB instance**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\. 
-
-1. Choose **Modify**\.  
-![\[Modify DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-modify.png)
-
-   The **Modify DB Instance** page appears\.
-
-1. In the **Network & Security** section, choose **rds\-ca\-2015**\.  
-![\[Choose CA certificate\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-ca-choice.png)
-
-1. Choose **Continue** and check the summary of modifications\. 
-
-1. To apply the changes immediately, choose **Apply immediately**\.
-**Important**  
-Choosing this option will restart your database immediately\.
-
-1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
-**Important**  
-When you schedule this operation, make sure that you have updated your client\-side trust store beforehand\.
-
-   Or choose **Back** to edit your changes or **Cancel** to cancel your changes\. 
-
-### AWS CLI<a name="UsingWithRDS.SSL-certificate-rotation-reverting.CLI"></a>
-
-To revert to a previous CA certificate for a DB instance, call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command\. Specify the DB instance identifier and the `--ca-certificate-identifier` option\. 
-
-**Important**  
-When you schedule this operation, make sure that you have updated your client\-side trust store beforehand\.
-
-**Example**  
-The following code example modifies `mydbinstance` by setting the CA certificate to `rds-ca-2015`\. The changes are applied during the next maintenance window by using `--no-apply-immediately`\. Use `--apply-immediately` to apply the changes immediately\.   
-When the `--certificate-rotation-restart` option is specified, using the `--apply-immediately` option causes an outage\. The `--certificate-rotation-restart` option, the default, specifies that the DB instance is restarted when the certificate is rotated\.  
-The `--no-certificate-rotation-restart` option, specifies that the DB instance is not restarted when the certificate is rotated\. Use the `--no-certificate-rotation-restart` option only if you are not using SSL/TLS to connect to the DB instance\.
-For Linux, macOS, or Unix:  
-
-```
-aws rds modify-db-instance \
-    --db-instance-identifier mydbinstance \
-    --ca-certificate-identifier rds-ca-2015 \
-    --no-apply-immediately
-```
-For Windows:  
-
-```
-aws rds modify-db-instance ^
-    --db-instance-identifier mydbinstance ^
-    --ca-certificate-identifier rds-ca-2015 ^
-    --no-apply-immediately
-```
-
-## Overriding the Default CA Certificate for New DB Instances<a name="UsingWithRDS.SSL-certificate-rotation-overriding-default"></a>
-
-Any new RDS DB instances created after January 14, 2020, will use the new certificates by default\. If you want to temporarily modify new DB instances manually to use the old \(rds\-ca\-2015\) certificates, you can do so using the AWS Management Console or AWS CLI\. Any DB instances created before January 14, 2020, use the rds\-ca\-2015 certificates until you update them to the rds\-ca\-2019 certificates\.
-
-To override the system\-default CA certificate for new DB instances temporarily, or to remove the override, use the [modify\-certificates](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-certificates.html) command\. 
-
-By using this command, you can specify an RDS\-approved SSL/TLS certificate for new DB instances that is different from the default certificate provided by RDS\. You can also use this operation to remove the override, so that new DB instances use the default certificate provided by RDS\.
-
-You might need to override the default certificate in the following situations:
-+ You already migrated your applications to support the latest CA certificate, but the new CA certificate is not yet the RDS default CA certificate for the specified AWS Region\.
-+ RDS has already moved to a new default CA certificate for the specified AWS Region, but you're still in the process of supporting the new CA certificate\. In this case, you temporarily need additional time to finish your application changes\. 
-
-**Note**  
-You can't use the RDS console to override the default CA certificate, or to remove the override\.
-
-**Example**  
-The following code example sets the default CA certificate to `rds-ca-2019`\. The changes are applied immediately\.   
-
-```
-aws rds modify-certificates --certificate-identifier rds-ca-2019
 ```

@@ -11,7 +11,7 @@ To rename a Microsoft SQL Server database instance that uses Multi\-AZ, use the 
 For more information, see [Adding Multi\-AZ to a Microsoft SQL Server DB Instance](USER_SQLServerMultiAZ.md#USER_SQLServerMultiAZ.Adding)\. 
 
 **Note**  
-If your instance doesn't use Multi\-AZ , you don't need to change any settings before or after running `rdsadmin.dbo.rds_modify_db_name` \. 
+If your instance doesn't use Multi\-AZ, you don't need to change any settings before or after running `rdsadmin.dbo.rds_modify_db_name`\.
 
 **Example: **In the following example, the `rdsadmin.dbo.rds_modify_db_name` stored procedure renames a database from **MOO** to **ZAR**\. This is similar to running the statement `DDL ALTER DATABASE [MOO] MODIFY NAME = [ZAR]`\. 
 

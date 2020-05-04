@@ -223,22 +223,22 @@ After the load operation completes, return your DB instance and DB parameters to
 
 ### Working with the fsync and full\_page\_writes database parameters<a name="CHAP_BestPractices.PostgreSQL.fsync"></a>
 
- In PostgreSQL 9\.4\.1 on Amazon RDS, the `fsync` and` full_page_writes` database parameters are not modifiable\. Disabling the `fsync` and` full_page_writes` database parameters can lead to data corruption, so we have enabled them for you\. We recommend that customers with other 9\.3 DB engine versions of PostgreSQL not disable the `fsync` and` full_page_writes` parameters\. 
+ In PostgreSQL 9\.4\.1 on Amazon RDS, the `fsync` and` full_page_writes` database parameters are not modifiable\. Disabling the `fsync` and` full_page_writes` database parameters can lead to data corruption, so we have enabled them for you\. 
 
 ### Working with the PostgreSQL Autovacuum Feature<a name="CHAP_BestPractices.PostgreSQL.Autovacuum"></a>
 
  The autovacuum feature for PostgreSQL databases is a feature that we strongly recommend you use to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the execution of the VACUUM and ANALYZE command; using autovacuum is required by PostgreSQL, not imposed by Amazon RDS, and its use is critical to good performance\. The feature is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related configuration parameters are appropriately set by default\. 
 
- Your database administrator needs to know and understand this maintenance operation\. For the PostgreSQL documentation on autovacuum, see [http://www\.postgresql\.org/docs/current/static/routine\-vacuuming\.html\#AUTOVACUUM](http://www.postgresql.org/docs/current/static/routine-vacuuming.html#AUTOVACUUM)\. 
+ Your database administrator needs to know and understand this maintenance operation\. For the PostgreSQL documentation on autovacuum, see [ Routine Vacuuming](http://www.postgresql.org/docs/current/static/routine-vacuuming.html#AUTOVACUUM)\. 
 
- Autovacuum is not a “resource free” operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to [transaction ID wraparound](http://www.postgresql.org/docs/9.3/static/routine-vacuuming.html)\. 
+ Autovacuum is not a “resource free” operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to transaction ID wraparound\. For more information, see [Preventing Transaction ID Wraparound Failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\.
 
  Autovacuum should not be thought of as a high\-overhead operation that can be reduced to gain better performance\. On the contrary, tables that have a high velocity of updates and deletes will quickly deteriorate over time if autovacuum is not run\. 
 
 **Important**  
  Not running autovacuum can result in an eventual required outage to perform a much more intrusive vacuum operation\. When an Amazon RDS PostgreSQL DB instance becomes unavailable because of an over conservative use of autovacuum, the PostgreSQL database will shut down to protect itself\. At that point, Amazon RDS must perform a single\-user\-mode full vacuum directly on the DB instance , which can result in a multi\-hour outage\.* *Thus, we strongly recommend that you do not turn off autovacuum, which is enabled by default\. 
 
-The autovacuum parameters determine when and how hard autovacuum works\. The` autovacuum_vacuum_threshold` and `autovacuum_vacuum_scale_factor` parameters determine when autovacuum is run\. The `autovacuum_max_workers`, `autovacuum_nap_time`, `autovacuum_cost_limit`, and `autovacuum_cost_delay` parameters determine how hard autovacuum works\. For more information about autovacuum, when it runs, and what parameters are required, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.3/static/routine-vacuuming.html)\.
+The autovacuum parameters determine when and how hard autovacuum works\. The` autovacuum_vacuum_threshold` and `autovacuum_vacuum_scale_factor` parameters determine when autovacuum is run\. The `autovacuum_max_workers`, `autovacuum_nap_time`, `autovacuum_cost_limit`, and `autovacuum_cost_delay` parameters determine how hard autovacuum works\. For more information about autovacuum, when it runs, and what parameters are required, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/routine-vacuuming.html)\.
 
  The following query shows the number of "dead" tuples in a table named table1 : 
 

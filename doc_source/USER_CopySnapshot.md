@@ -45,9 +45,10 @@ For shared snapshots, copying incremental snapshots is not supported\. For share
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
 Cross\-Region snapshot copy isn't supported in the following opt\-in AWS Regions:
-+ Asia Pacific \(Hong Kong\)
-+ Middle East \(Bahrain\)
 + Africa \(Cape Town\)
++ Asia Pacific \(Hong Kong\)
++ Europe \(Milan\)
++ Middle East \(Bahrain\)
 
 **Note**  
 When you copy a source snapshot that is a snapshot copy, the copy isn't incremental because the snapshot copy doesn't include the required metadata for incremental copies\.

@@ -1,6 +1,6 @@
 # Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates<a name="ssl-certificate-rotation-postgresql"></a>
 
-As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. The previous CA certificates expire on March 5, 2020\. Following, you can find information about updating your applications to use the new certificates\. If your application connects to an RDS DB instance using SSL/TLS, you must take the following steps before **March 5, 2020**\. Doing this means you can avoid interruption of connectivity between your applications and your RDS DB instances\.
+As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
 This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB instances\. If they do, you can further check whether those applications require certificate verification to connect\. 
 
@@ -40,7 +40,7 @@ Only rows using SSL/TLS connections are displayed with information about the con
 
 This query displays only the current connections at the time of the query\. The absence of results doesn't indicate that no applications are using SSL connections\. Other SSL connections might be established at a different time\.
 
-If you are using RDS PostgreSQL version 9\.3 or 9\.4 and `rds.force_ssl` is not set to `1` \(on\), then to determine whether your applications are connecting with SSL, you must enable the `log_connections` parameter\. This parameter logs SSL connection information when a client connects\. The following is an example of an SSL connection entry in the error log\.
+If you are using RDS PostgreSQL version 9\.4 and `rds.force_ssl` is not set to `1` \(on\), then to determine whether your applications are connecting with SSL, you must enable the `log_connections` parameter\. This parameter logs SSL connection information when a client connects\. The following is an example of an SSL connection entry in the error log\.
 
 ```
 2018-04-19 10:19:20 UTC:123.45.67.8(6789):[unknown]@[unknown]:[17196]:LOG: connection received: host=123.45.67.8 port=12345

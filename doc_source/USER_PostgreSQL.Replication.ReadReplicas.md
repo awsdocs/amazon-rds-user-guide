@@ -13,7 +13,7 @@ This section contains specific information about working with read replicas on P
 
 ## Read Replica Configuration with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Configuration"></a>
 
-Amazon RDS PostgreSQL 9\.3\.5 and later uses PostgreSQL native streaming replication to create a read\-only copy of a source \(a "master" in PostgreSQL terms\) DB instance\. This read replica \(a "standby" in PostgreSQL terms\) DB instance is an asynchronously created physical replication of the master DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data between the source DB instance and the read replica where PostgreSQL asynchronously streams database changes as they are made\. 
+Amazon RDS PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source \(a "master" in PostgreSQL terms\) DB instance\. This read replica \(a "standby" in PostgreSQL terms\) DB instance is an asynchronously created physical replication of the master DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data between the source DB instance and the read replica where PostgreSQL asynchronously streams database changes as they are made\. 
 
 PostgreSQL uses a "replication" role to perform streaming replication\. The role is privileged, but can't be used to modify any data\. PostgreSQL uses a single process for handling replication\. 
 

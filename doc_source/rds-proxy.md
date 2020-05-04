@@ -174,6 +174,7 @@ The following limitations apply to RDS Proxy during the public preview:
 + You can't use RDS Proxy with Aurora Serverless clusters\. 
 +  You can't use RDS Proxy with Aurora multi\-master clusters\. 
 +  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
++  You can't use proxy with custom DNS\. 
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 
 The following RDS Proxy limitations apply to MySQL: 

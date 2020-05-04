@@ -1,6 +1,6 @@
 # Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates<a name="ssl-certificate-rotation-mysql"></a>
 
-As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. The previous CA certificates expire on March 5, 2020\. Following, you can find information about updating your applications to use the new certificates\. If your application connects to an RDS DB instance using SSL/TLS, you must take the following steps before **March 5, 2020**\. Doing this means you can avoid interruption of connectivity between your applications and your RDS DB instances\.
+As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
 This topic can help you to determine whether any client applications use SSL/TLS to connect to your DB instances\. If they do, you can further check whether those applications require certificate verification to connect\. 
 
@@ -73,6 +73,9 @@ properties.setProperty("sslMode", "VERIFY_IDENTITY");
 properties.put("user", DB_USER);
 properties.put("password", DB_PASSWORD);
 ```
+
+**Note**  
+If you use either the MySQL Java Connector v5\.1\.38 or later, or the MySQL Java Connector v8\.0\.9 or later to connect to your databases, even if you haven't explicitly configured your applications to use SSL/TLS when connecting to your databases, these client drivers default to using SSL/TLS\. In addition, when using SSL/TLS, they perform partial certificate verification and fail to connect if the database server certificate is expired\.
 
 ### MySQL<a name="ssl-certificate-rotation-mysql.determining-client.mysql"></a>
 

@@ -16,8 +16,7 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
    + For **Host**, type the endpoint\. For example, use the format *PostgreSQL\-endpoint*\.*AWS\-Region*\.rds\.amazonaws\.com\.
    + For **Port**, type the assigned port\.
    + For **Maintenance database**, type the name of the initial database to which the client will connect\.
-   + For **Username**, type the user name that you entered when you created the DB instance\. 
-   + For **Password**, type the password that you entered when you created the DB instance\. 
+   + For **Username**, type the user name that you entered for Kerberos authentication in [Step 6: Create Kerberos Authentication PostgreSQL Logins](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
 
 1. Choose **Save**\.
 
