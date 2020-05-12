@@ -103,7 +103,7 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <RDS_MySQL_DB_host_name>
+   host <db_instance_endpoint>
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
@@ -224,7 +224,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <RDS_MySQL_DB_host_name>
+   host <db_instance_endpoint>
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.

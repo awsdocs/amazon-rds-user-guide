@@ -1,6 +1,8 @@
 # Using Kerberos Authentication with Amazon RDS for PostgreSQL<a name="postgresql-kerberos"></a>
 
-You can use Kerberos authentication to authenticate users when they connect to your DB instance running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Kerberos authentication\. When users authenticate with a PostgreSQL DB instance joined to the trusting domain, authentication requests are forwarded to the directory that you create with AWS Directory Service\.
+You can use Kerberos authentication to authenticate users when they connect to your DB instance running PostgreSQL\. In this case, your DB instance works with AWS Directory Service for Microsoft Active Directory to enable Kerberos authentication\. AWS Directory Service for Microsoft Active Directory is also called AWS Managed Microsoft AD\. 
+
+You create an AWS Managed Microsoft AD directory to store user credentials\. You then provide to your PostgreSQL DB instance the Active Directory's domain and other information\. When users authenticate with the PostgreSQL DB instance, authentication requests are forwarded to the AWS Managed Microsoft AD directory\. 
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 

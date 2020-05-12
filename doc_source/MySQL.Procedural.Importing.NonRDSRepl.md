@@ -336,7 +336,7 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your source instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <RDS_MySQL_DB_host_name>
+   host <db_instance_endpoint>
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint, for example `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.

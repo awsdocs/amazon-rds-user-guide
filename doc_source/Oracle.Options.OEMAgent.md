@@ -207,6 +207,7 @@ Tasks are executed asynchronously\.
 + [Getting the Management Agent's Status](#Oracle.Options.OEMAgent.DBTasks.GetAgentStatus)
 + [Restarting the Management Agent](#Oracle.Options.OEMAgent.DBTasks.RestartAgent)
 + [Listing the Targets Monitored by the Management Agent](#Oracle.Options.OEMAgent.DBTasks.ListTargets)
++ [Listing the Collection Threads Monitored by the Management Agent](#Oracle.Options.OEMAgent.DBTasks.ListCollectionThreads)
 + [Clearing the Management Agent's State](#Oracle.Options.OEMAgent.DBTasks.ClearState)
 + [Having the Management Agent Upload Its OMS](#Oracle.Options.OEMAgent.DBTasks.ForceUploadOMS)
 + [Pinging the OMS](#Oracle.Options.OEMAgent.DBTasks.PingOMS)
@@ -222,63 +223,79 @@ The following procedure creates a task to get the Management Agent's status and 
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent() as TASK_ID from DUAL;                
 ```
 
-You can view the result by displaying the task's output file\.
-
-```
-SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));                
-```
-
-Replace *`task-id`* with the task ID returned by the procedure\.
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
 
 ### Restarting the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.RestartAgent"></a>
 
 To restart the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent`\. This procedure is equivalent to running the `emctl stop agent` and `emctl start agent` commands\.
 
-The following procedure restarts the Management Agent\.
+The following procedure creates a task to restart the Management Agent and returns the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.restart_oem_agent() as TASK_ID from DUAL;                
 ```
 
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
+
 ### Listing the Targets Monitored by the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.ListTargets"></a>
 
 To list the targets monitored by the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent`\. This procedure is equivalent to running the `emctl config agent listtargets` command\.
 
-The following procedure lists the targets monitored by the Management Agent\.
+The following procedure creates a task to list the targets monitored by the Management Agent and returns the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent() as TASK_ID from DUAL;                
 ```
 
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
+
+### Listing the Collection Threads Monitored by the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.ListCollectionThreads"></a>
+
+To list of all the running, ready, and scheduled collection threads monitored by the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.list_clxn_threads_oem_agent`\. This procedure is equivalent to the `emctl status agent scheduler` command\.
+
+The following procedure creates a task to list the collection threads and returns the ID of the task\.
+
+```
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.list_clxn_threads_oem_agent() as TASK_ID from DUAL;                
+```
+
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
+
 ### Clearing the Management Agent's State<a name="Oracle.Options.OEMAgent.DBTasks.ClearState"></a>
 
 To clear the Management Agent's state, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.clearstate_oem_agent`\. This procedure is equivalent to running the `emctl clearstate agent` command\.
 
-The following procedure clears the Management Agent's state\.
+The following procedure creates a task that clears the Management Agent's state and returns the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.clearstate_oem_agent() as TASK_ID from DUAL;                
 ```
 
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
+
 ### Having the Management Agent Upload Its OMS<a name="Oracle.Options.OEMAgent.DBTasks.ForceUploadOMS"></a>
 
 To have the Management Agent upload the Oracle Management Server \(OMS\) associated with it, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.upload_oem_agent`\. This procedure is equivalent to running the `emclt upload agent` command\.
 
-If you run the following procedure, the Management Agent uploads its associated OMS\.
+The following procedure creates a task that has the Management Agent upload its associated OMS and return the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.upload_oem_agent() as TASK_ID from DUAL;              
 ```
 
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
+
 ### Pinging the OMS<a name="Oracle.Options.OEMAgent.DBTasks.PingOMS"></a>
 
 To ping the Management Agent's OMS, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.ping_oms_oem_agent`\. This procedure is equivalent to running the `emctl pingOMS` command\.
 
-The following procedure pings the Management Agent's OMS\.
+The following procedure creates a task that pings the Management Agent's OMS and returns the ID of the task\.
 
 ```
 SELECT rdsadmin.rdsadmin_oem_agent_tasks.ping_oms_oem_agent() as TASK_ID from DUAL;          
 ```
+
+To view the result by displaying the task's output file, see [Viewing the Status of an Ongoing Task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
 
 ### Viewing the Status of an Ongoing Task<a name="Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus"></a>
 

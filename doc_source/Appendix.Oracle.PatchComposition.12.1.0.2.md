@@ -39,7 +39,7 @@ Version 12\.1\.0\.2\.v19 adds support for the following:
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 + PreUpgrade Jar: preupgrade\_12\.1\.0\.2\.0\_18\_crlf\.zip
 
-### Oracle patch 29918340, released January 2020<a name="w53aac31d107c21b6b7"></a>
+### Oracle patch 29918340, released January 2020<a name="w54aac31d107c21b6b7"></a>
 
 Bugs fixed:
 
@@ -235,7 +235,7 @@ Version 12\.1\.0\.2\.v18 adds support for the following:
 + PreUpgrade Jar: preupgrade\_12\.1\.0\.2\.0\_18\_crlf\.zip
 + Adds support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)\.
 
-### Oracle patch 29918340, released October 2019<a name="w53aac31d107c21b8b7"></a>
+### Oracle patch 29918340, released October 2019<a name="w54aac31d107c21b8b7"></a>
 
 Bugs fixed:
 
@@ -419,7 +419,7 @@ Version 12\.1\.0\.2\.v17 adds support for the following:
 + Patch 20033733: PART :IMC:HIT ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 29494060, released July 2019<a name="w53aac31d107c21c10b7"></a>
+### Oracle patch 29494060, released July 2019<a name="w54aac31d107c21c10b7"></a>
 
 Bugs fixed:
 
@@ -592,7 +592,7 @@ Version 12\.1\.0\.2\.v16 adds support for the following:
 + Patch 20033733: PART :IMC:HIT ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 22785785, released April 2019<a name="w53aac31d107c21c12b7"></a>
+### Oracle patch 22785785, released April 2019<a name="w54aac31d107c21c12b7"></a>
 
 Bugs fixed:
 
@@ -752,7 +752,7 @@ Version 12\.1\.0\.2\.v15 adds support for the following:
 + Patch 29125200: JSON bundle patch
 + Patch 20033733: KGL heap size patch
 
-### Oracle patch 28729169, released January 2019<a name="w53aac31d107c21c14b7"></a>
+### Oracle patch 28729169, released January 2019<a name="w54aac31d107c21c14b7"></a>
 
 Bugs fixed:
 
@@ -903,7 +903,7 @@ Version 12\.1\.0\.2\.v14 adds support for the following:
 + Patch 28697469: JSON Database Patch
 + Patch 20033733: KGL heap size patch
 
-### Oracle patch 28259833, released October 2018<a name="w53aac31d107c21c16b7"></a>
+### Oracle patch 28259833, released October 2018<a name="w54aac31d107c21c16b7"></a>
 
 Bugs fixed:
 
@@ -1047,7 +1047,7 @@ Version 12\.1\.0\.2\.v13 adds support for the following:
 + Patch 28307069: JSON Database Patch
 + Patch 20033733: KGL heap size patch
 
-### Oracle patch 27547329, released July 2018<a name="w53aac31d107c21c18b7"></a>
+### Oracle patch 27547329, released July 2018<a name="w54aac31d107c21c18b7"></a>
 
 Bugs fixed:
 
@@ -1182,7 +1182,7 @@ Version 12\.1\.0\.2\.v12 adds support for the following:
 + Patch 27666699: JSON Database Patch
 + Patch 20033733: PART :IMC:HIT ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 
-### Oracle patch 27338041, released April 2018<a name="w53aac31d107c21c20b7"></a>
+### Oracle patch 27338041, released April 2018<a name="w54aac31d107c21c20b7"></a>
 
 Bugs fixed:
 
@@ -1310,7 +1310,7 @@ Version 12\.1\.0\.2\.v11 adds support for the following:
 + Patch 27315904: JSON Database Patch
 + Patch 20033733: ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 
-### Oracle patch 26925311, released January 2018<a name="w53aac31d107c21c22b7"></a>
+### Oracle patch 26925311, released January 2018<a name="w54aac31d107c21c22b7"></a>
 
 Bugs fixed:
 
@@ -1429,7 +1429,7 @@ Version 12\.1\.0\.2\.v10 adds support for the following:
 + KGL heap size patch \(patch 20033733\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
 
-### Oracle patch 26713565, released October 2017<a name="w53aac31d107c21c24b7"></a>
+### Oracle patch 26713565, released October 2017<a name="w54aac31d107c21c24b7"></a>
 
 Bugs fixed:
 
@@ -1543,7 +1543,7 @@ Version 12\.1\.0\.2\.v9 adds support for the following:
 + Adds support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
 + Adds support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
-### Oracle patch 26609783, released July 2017<a name="w53aac31d107c21c26b7"></a>
+### Oracle patch 26609783, released July 2017<a name="w54aac31d107c21c26b7"></a>
 
 Bugs fixed:
 
@@ -1648,7 +1648,7 @@ Version 12\.1\.0\.2\.v8 adds support for the following:
 + Adds support for the `DBMS_CHANGE_NOTIFICATION` package
 + Adds support for `XSTREAM` packages and views \(may require additional licensing\)
 
-### Oracle patch 25171037, released April 2017<a name="w53aac31d107c21c28b7"></a>
+### Oracle patch 25171037, released April 2017<a name="w54aac31d107c21c28b7"></a>
 
 Bugs fixed:
 
@@ -1741,7 +1741,7 @@ Version 12\.1\.0\.2\.v7 adds support for the following:
 + JSON bundle patch \(patch 25089615 for 12\.1\.0\.2\)
 + KGL heap size patch \(patch 20033733 for 12\.1\.0\.2\)
 
-### Oracle patch 24917069, released January 2017<a name="w53aac31d107c21c30b6"></a>
+### Oracle patch 24917069, released January 2017<a name="w54aac31d107c21c30b6"></a>
 
 Bugs fixed:
 
@@ -1836,7 +1836,7 @@ Version 12\.1\.0\.2\.v6 adds support for the following:
 + Fixed a bug that caused 12c upgrade scripts to drop customer directories
 + Made DIAG log directory available to customers
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.161018 \(patch 24006101, released October 2016\)<a name="w53aac31d107c21c32b6"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.161018 \(patch 24006101, released October 2016\)<a name="w54aac31d107c21c32b6"></a>
 
 Bugs fixed:
 
@@ -1914,7 +1914,7 @@ Version 12\.1\.0\.2\.v5 adds support for the following:
 + Added the ability to create custom password verify functions\. For more information, see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160719 \(patch 23054246, released July 2016\)<a name="w53aac31d107c21c34b6"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160719 \(patch 23054246, released July 2016\)<a name="w54aac31d107c21c34b6"></a>
 
 Bugs fixed:
 
@@ -1983,7 +1983,7 @@ Version 12\.1\.0\.2\.v4 adds support for the following:
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160419 \(patch 22291127, released April 2016\)<a name="w53aac31d107c21c36b6"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160419 \(patch 22291127, released April 2016\)<a name="w54aac31d107c21c36b6"></a>
 
 Bugs fixed:
 
@@ -2041,7 +2041,7 @@ Version 12\.1\.0\.2\.v3 adds support for the following:
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database\.
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects\.
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160119 \(patch 21948354, released January 2016\)<a name="w53aac31d107c21c38b6"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160119 \(patch 21948354, released January 2016\)<a name="w54aac31d107c21c38b6"></a>
 
 Bugs fixed:
 
@@ -2089,7 +2089,7 @@ Version 12\.1\.0\.2\.v2 adds support for the following:
 + Oracle PSU 12\.1\.0\.2\.5 \(21359755\)
 + Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.5 \(patch 21359755, released October 2015\)<a name="w53aac31d107c21c40b6"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.5 \(patch 21359755, released October 2015\)<a name="w54aac31d107c21c40b6"></a>
 
 Bugs fixed:
 
@@ -2137,7 +2137,7 @@ Version 12\.1\.0\.2\.v1 adds support for the following:
 **Note**  
 Version 12\.1\.0\.2\.v1 supports Enterprise Edition only\.
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.3 \(patch 20299023, released April 2015\)<a name="w53aac31d107c21c42b8"></a>
+### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.3 \(patch 20299023, released April 2015\)<a name="w54aac31d107c21c42b8"></a>
 
 Bugs fixed:
 

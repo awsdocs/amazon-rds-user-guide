@@ -160,7 +160,6 @@ Amazon RDS supports the following PostgreSQL versions\.
 + [PostgreSQL 9\.6 Versions](#PostgreSQL.Concepts.General.version96)
 + [PostgreSQL 9\.5 Versions](#PostgreSQL.Concepts.General.version95)
 + [PostgreSQL 9\.4 Versions](#PostgreSQL.Concepts.General.version94)
-+ [PostgreSQL 9\.3 Versions \- Deprecated](#PostgreSQL.Concepts.General.version93)
 
 #### PostgreSQL 12 Versions<a name="PostgreSQL.Concepts.General.version12"></a>
 
@@ -806,11 +805,6 @@ PostgreSQL versions 9\.4\.9 and later and version 9\.5\.4 and later support even
 PostgreSQL version 9\.4\.7 contains several fixes to issue found in previous versions\. For more information on the fixes in 9\.4\.7, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/release-9-4-7.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\.
 
 PostgreSQL version 9\.4\.7 includes improved visibility of autovacuum sessions by allowing the rds\_superuser account to view autovacuum sessions in pg\_stat\_activity\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
-
-#### PostgreSQL 9\.3 Versions \- Deprecated<a name="PostgreSQL.Concepts.General.version93"></a>
-
-**Note**  
-Amazon RDS for PostgreSQL versions 9\.3\.x are deprecated\. Amazon RDS for PostgreSQL announced retirement of PostgreSQL 9\.3 in September 2018 and stopped support for all versions\. 
 
 ### Supported PostgreSQL Features and Extensions<a name="PostgreSQL.Concepts.General.FeaturesExtensions"></a>
 

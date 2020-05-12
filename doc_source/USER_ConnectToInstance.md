@@ -25,6 +25,8 @@ You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL
 
 You can use SSL encryption on connections to an Amazon RDS MySQL DB instance\. For information, see [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
 
+You can also connect to a DB instance from a web server\. For more information, see [Tutorial: Create a Web Server and an Amazon RDS Database](TUT_WebAppWithRDS.md)\.
+
 **Note**  
 For information on connecting to a MariaDB DB instance, see [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)\.
 

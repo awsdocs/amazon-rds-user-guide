@@ -122,6 +122,7 @@ Amazon's trademarks and trade dress may not be used in
          + [SQL Server Performance Considerations](Appendix.SQLServer.Options.TDE.Perf.md)
       + [SQL Server Audit](Appendix.SQLServer.Options.Audit.md)
       + [Support for SQL Server Analysis Services in SQL Server](Appendix.SQLServer.Options.SSAS.md)
+      + [Support for Microsoft Distributed Transaction Coordinator in SQL Server](Appendix.SQLServer.Options.MSDTC.md)
    + [Common DBA Tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)
       + [Accessing the tempdb Database on Microsoft SQL Server DB Instances on Amazon RDS](SQLServer.TempDB.md)
       + [Analyzing Your Database Workload on an Amazon RDS DB Instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)
@@ -294,4 +295,4 @@ Amazon's trademarks and trade dress may not be used in
    + [Using the Query API](Using_the_Query_API.md)
    + [Troubleshooting Applications on Amazon RDS](APITroubleshooting.md)
 + [Document History](WhatsNew.md)
-+ [AWS Glossary](glossary.md)
++ [AWS glossary](glossary.md)

@@ -115,7 +115,7 @@ In this step, you create a DB subnet group and add the subnets that you created 
 
 1.  For **VPC**, choose the VPC that you created\. 
 
-1. In the **Add subnets** section, choose ** Add all the subnets related to this VPC**\.  
+1. In the **Add subnets** section, choose the Availability Zones that include the subnets from **Availability Zones**, and then choose the subnets from **Subnets**\.  
 ![\[Create DB Subnet Group button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSVPC101.png)
 **Note**  
 If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose the **Availability Zone group**, **Availability Zones**, and **Subnets**\.

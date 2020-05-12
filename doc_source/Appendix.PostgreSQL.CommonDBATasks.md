@@ -324,9 +324,7 @@ Adaptive autovacuum parameter tuning is enabled by default for RDS PostgreSQL in
 
 Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an Early Warning System for Transaction ID Wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
-With adaptive autovacuum parameter tuning enabled, RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the greater of the following values: 
-+ 500,000,000 
-+ The autovacuum parameter `autovacuum_freeze_max_age`
+With adaptive autovacuum parameter tuning enabled, RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
 
 RDS continues to adjust parameters for autovacuum if a table continues to trend toward transaction ID wraparound\. Each of these adjustments dedicates more resources to autovacuum to avoid wraparound\. RDS updates the following autovacuum\-related parameters: 
 + [autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
@@ -507,7 +505,7 @@ The following steps are a guideline, and there are several variations to the pro
    Run the following query to get the PID of the autovacuum session\.
 
    ```
-   SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
+   SELECT datname, usename, pid, current_timestamp - xact_start 
    AS xact_runtime, query
    FROM pg_stat_activity WHERE upper(query) LIKE '%VACUUM%' ORDER BY 
    xact_start;
@@ -578,7 +576,7 @@ When the index is corrupted and autovacuum is attempting to run against the tabl
    Run the following query to get the PID of the autovacuum session\.
 
    ```
-   SELECT datname, usename, pid, waiting, current_timestamp - xact_start 
+   SELECT datname, usename, pid, current_timestamp - xact_start 
    AS xact_runtime, query
    FROM pg_stat_activity WHERE upper(query) like '%VACUUM%' ORDER BY 
    xact_start;

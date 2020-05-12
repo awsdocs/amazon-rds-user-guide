@@ -42,7 +42,7 @@ There are also advanced administrative tasks for working with SQL Server DB inst
 
 ## Limits for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.FeatureSupport.Limits"></a>
 
-The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some limitations that you should be aware of: 
+The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some limitations that you should be aware of:
 + The maximum number of databases supported on a DB instance depends on the instance class type and the availability mode—Single\-AZ, Multi\-AZ Database Mirroring \(DBM\), or Multi\-AZ Availability Groups \(AGs\)\. The Microsoft SQL Server system databases don't count toward this limit\. 
 
   The following table shows the maximum number of supported databases for each instance class type and availability mode\. Use this table to help you decide if you can move from one instance class type to another, or from one availability mode to another\. If your source DB instance has more databases than the target instance class type or availability mode can support, modifying the DB instance fails\. You can see the status of your request in the **Events** pane\.     
@@ -62,7 +62,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 + Client connections from IP addresses within the range 169\.254\.0\.0/16 are not permitted\. This is the Automatic Private IP Addressing Range \(APIPA\), which is used for local\-link addressing\.
 + SQL Server Standard Edition will use only a subset of the available processors if the DB instance has more processors than the software limits \(24 cores, 4 sockets, and 128GB RAM\)\. Examples of this are the db\.m5\.24xlarge and db\.r5\.24xlarge instance classes\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
-+ You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\. 
++ You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\.
 + The maximum storage size for SQL Server DB instances is the following: 
   + General Purpose \(SSD\) storage – 16 TiB for all editions 
   + Provisioned IOPS storage – 16 TiB for all editions 
@@ -290,7 +290,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Data Quality Services
 + Database Log Shipping
 + Database Mail
-+ Distribution Transaction Coordinator \(MSDTC\)
 + Extended stored procedures, including xp\_cmdshell
 + FILESTREAM support
 + File tables
@@ -330,7 +329,7 @@ You set the time zone when you first create your DB instance\. You can create yo
 
 If your DB instance is part of a Multi\-AZ deployment \(using SQL Server DBM or AGs\), then when you fail over, your time zone remains the local time zone that you set\. For more information, see [Multi\-AZ Deployments Using Microsoft SQL Server Database Mirroring or Always On Availability Groups ](#SQLServer.Concepts.General.Mirroring)\. 
 
-When you request a point\-in\-time restore, you specify the time to restore to in UTC\. During the restore process, the time is translated to the time zone of the DB instance\. For more information, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 
+When you request a point\-in\-time restore, you specify the time to restore to\. The time is shown in your local time zone\. For more information, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 
 
 The following are limitations to setting the local time zone on your DB instance:
 + You can't modify the time zone of an existing SQL Server DB instance\. 

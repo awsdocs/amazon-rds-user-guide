@@ -415,7 +415,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_label`
 + `p_parallel`
 + `p_section_size_mb`
-+ `p_include_archived_logs`
++ `p_include_archive_logs`
 + `p_optimize`
 + `p_compress`
 + `p_rman_to_dbms_output`
@@ -455,7 +455,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_label`
 + `p_parallel`
 + `p_section_size_mb`
-+ `p_include_archived_logs`
++ `p_include_archive_logs`
 + `p_include_controlfile`
 + `p_optimize`
 + `p_compress`
@@ -504,7 +504,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_label`
 + `p_parallel`
 + `p_section_size_mb`
-+ `p_include_archived_logs`
++ `p_include_archive_logs`
 + `p_include_controlfile`
 + `p_optimize`
 + `p_compress`

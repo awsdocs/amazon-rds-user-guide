@@ -197,7 +197,7 @@ Choose which statistics to display by choosing the gear icon in the upper\-right
 
 The following screenshot shows the preferences for MariaDB and MySQL DB instances\.
 
-![\[Preferences for metrics for running queries for MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_ams.png)
+![\[Preferences for metrics for running queries for MariaDB and MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_ams.png)
 
 ### Statistics for Amazon RDS for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle"></a>
 

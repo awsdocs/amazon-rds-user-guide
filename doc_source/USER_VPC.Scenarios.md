@@ -86,7 +86,7 @@ To access a DB instance in a VPC from a client application through the internet,
 
 The following diagram shows this scenario\. 
 
-![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/GS-VPC network.png)
+![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/GS-VPC-network.png)
 
 We recommend the following configuration:
 + A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.

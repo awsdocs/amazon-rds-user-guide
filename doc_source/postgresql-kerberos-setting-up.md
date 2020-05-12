@@ -7,7 +7,7 @@ You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Micro
 + [Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)
 + [Step 3: Create and Configure Users](#postgresql-kerberos-setting-up.create-users)
 + [Step 4: Configure VPC Peering](#postgresql-kerberos-setting-up.vpc-peering)
-+ [Step 5: Create or Modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)
++ [Step 5: Create or Modify a PostgreSQL DB Instance](#postgresql-kerberos-setting-up.create-modify)
 + [Step 6: Create Kerberos Authentication PostgreSQL Logins](#postgresql-kerberos-setting-up.create-logins)
 + [Step 7: Configure a PostgreSQL Client](#postgresql-kerberos-setting-up.configure-client)
 
@@ -86,9 +86,9 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ## Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to the AWS Directory Service\.
+For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to AWS Directory Service\.
 
-When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, you must create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
+When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. When you create this IAM role, choose `Directory Service`, and attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to it\.
 
 For more information about creating IAM roles for a service, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
@@ -144,7 +144,7 @@ To create users in an AWS Directory Service directory, you must be connected to 
 
 ## Step 4: Configure VPC Peering<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or Modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)\. If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. 
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [ Step 5: Create or Modify a PostgreSQL DB Instance ](#postgresql-kerberos-setting-up.create-modify)\. If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. 
 
 If the same AWS account owns both VPCs, follow the instructions in [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\. Specifically, complete the following steps:
 
@@ -168,7 +168,7 @@ If different AWS accounts own the VPCs, complete the following steps:
 
 1. While logged into the AWS Directory Service console using the account for the DB instance, make a note of the **Directory ID** value for the directory\.
 
-## Step 5: Create or Modify a PostgreSQL DB instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
+## Step 5: Create or Modify a PostgreSQL DB Instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
 
 Create or modify a PostgreSQL DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 +   Create a new PostgreSQL DB instance using the console, the [ create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\. For instructions, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
@@ -214,9 +214,25 @@ GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
 
 ## Step 7: Configure a PostgreSQL Client<a name="postgresql-kerberos-setting-up.configure-client"></a>
 
-To configure a PostgreSQL client, meet the following requirements:
+To configure a PostgreSQL client, take the following steps:
 + Create a krb5\.conf file \(or equivalent\) to point to the domain\. 
 + Verify that traffic can flow between the client host and AWS Directory Service\. Use a network utility such as Netcat for the following:
   + Verify traffic over DNS for port 53\.
   + Verify traffic over TCP/UDP for port 53 and for Kerberos, which includes ports 88 and 464 for AWS Directory Service\.
 + Verify that traffic can flow between the client host and the DB instance over the database port\. For example, use psql to connect and access the database\.
+
+The following is sample krb5\.conf content for AWS Managed Microsoft AD\.
+
+```
+[libdefaults]
+ default_realm = EXAMPLE.COM
+ default_ccache_name = /tmp/kerbcache
+[realms]
+ EXAMPLE.COM = {
+  kdc = example.com
+  admin_server = example.com
+ }
+[domain_realm]
+ .example.com = EXAMPLE.COM
+ example.com = EXAMPLE.COM
+```

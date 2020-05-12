@@ -10,13 +10,13 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
 
 1. On the **Dashboard** tab, choose **Add New Server**\.
 
-1. In the **Create \- Server** dialog box, type a name on the **General** tab to identify the server in pgAdmin\.
+1. In the **Create \- Server** dialog box, enter a name on the **General** tab to identify the server in pgAdmin\.
 
-1. On the **Connection** tab, type the following information from your RDS for PostgreSQL database:
-   + For **Host**, type the endpoint\. For example, use the format *PostgreSQL\-endpoint*\.*AWS\-Region*\.rds\.amazonaws\.com\.
-   + For **Port**, type the assigned port\.
-   + For **Maintenance database**, type the name of the initial database to which the client will connect\.
-   + For **Username**, type the user name that you entered for Kerberos authentication in [Step 6: Create Kerberos Authentication PostgreSQL Logins](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
+1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database:
+   + For **Host**, enter the endpoint\. Use a format such as `PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com`\.
+   + For **Port**, enter the assigned port\.
+   + For **Maintenance database**, enter the name of the initial database to which the client will connect\.
+   + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 6: Create Kerberos Authentication PostgreSQL Logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
 
 1. Choose **Save**\.
 
@@ -43,7 +43,7 @@ To use psql to connect to PostgreSQL with Kerberos authentication, take the foll
    % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com" >> /etc/hosts
    ```
 
-1. Use the following psql command to log in to a PostgreSQL DB instance that is integrated with Microsoft Active Directory\.
+1. Use the following psql command to log in to a PostgreSQL DB instance that is integrated with Active Directory\.
 
    ```
    psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-instance-endpoint.AWS-Region.rds.amazonaws.com postgres

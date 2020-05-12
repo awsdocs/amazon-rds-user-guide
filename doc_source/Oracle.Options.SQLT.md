@@ -187,7 +187,7 @@ You can't download SQLT 12\.1\.160429 from the My Oracle Support site\. Oracle h
 1.  \(Optional\) To enable application users to diagnose SQL statements with SQLT, grant `SQLT_USER_ROLE` to each application user with the following statement: 
 
    ```
-   GRANT ROLE SQLT_USER_ROLE TO application_user_name;                
+   GRANT SQLT_USER_ROLE TO application_user_name;                
    ```
 **Note**  
 Oracle does not recommend running SQLT with the `SYS` user or with users that have the `DBA` role\. It is a best practice to run SQLT diagnostics using the application user's account, by granting `SQLT_USER_ROLE` to the application user\.
