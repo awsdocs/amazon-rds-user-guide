@@ -10,7 +10,7 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 
 1. Sign in to the AWS Management Console and open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
-1. Choose **EC2 Dashboard**, and then choose **Launch Instance**, as shown following\.  
+1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
 1. Choose the **Amazon Linux AMI**, as shown following\.  
@@ -22,7 +22,7 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
 
 1. On the **Configure Instance Details** page, shown following, set these values and leave the other values as their defaults:
-   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `tutorial-vpc` \(vpc\-*identifier*\) created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
+   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
    + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
    + **Auto\-assign Public IP:** Choose **Enable**\.  
 ![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)

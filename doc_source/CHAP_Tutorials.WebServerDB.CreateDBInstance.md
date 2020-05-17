@@ -34,8 +34,8 @@ A new console interface is available for database creation\. Choose either the *
 ![\[Settings sections\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_Settings.png)
 
 1. In the **DB instance size** section, set these values:
-   + **DB instance performance type** – **Burstable**
-   + **DB instance class** – **db\.t2\.small**  
+   + **Burstable classes \(includes t classes\)**
+   + **db\.t2\.small**  
 ![\[DB instance size section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_DB_instance_size.png)
 
 1. In the **Storage** and **Availability & durability** sections, use the default values\.

@@ -1,6 +1,6 @@
 # Dropping a Microsoft SQL Server Database<a name="Appendix.SQLServer.CommonDBATasks.DropMirrorDB"></a>
 
-You can drop a database on an Amazon RDS DB instance running Microsoft SQL Server in a Single\-AZ or Multi\-AZ deployment\. To drop the database, use the following command: 
+You can drop a database on an Amazon RDS DB instance running Microsoft SQL Server in a Single\-AZ or Multi\-AZ deployment\. To drop the database, use the following command:
 
 ```
 --replace your-database-name with the name of the database you want to drop

@@ -73,14 +73,12 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express editions 
   + Provisioned IOPS storage – 20 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
   + Magnetic storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
-+ Amazon RDS doesn't support running these services on the same server as your Amazon RDS DB instance:
-  + SQL Server Integration Services
-  + SQL Server Reporting Services
++ Amazon RDS doesn't support running these services on the same server as your RDS DB instance:
   + Data Quality Services
   + Master Data Services
 
-  To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Reporting, Integration, or Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\.
-+ Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of DROP DATABASE might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the DROP DATABASE command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the DROP DATABASE command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\. 
+  To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\.
++ Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of DROP DATABASE might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the DROP DATABASE command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the DROP DATABASE command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\.
 + For SQL Server, you create your databases after you create your DB instance\. Database names follow the usual SQL Server naming rules with the following differences:
   + Database names can't start with `rdsadmin`\.
   + They can't start or end with a space or a tab\.

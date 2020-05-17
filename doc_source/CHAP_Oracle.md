@@ -534,7 +534,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
 + Automatic Undo Management
 + Automatic Workload Repository \(AWR\)
 
-  For more information, see [Working with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
+  For more information, see [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
 + Active Data Guard with Maximum Performance in the same AWS Region or across AWS Regions
 
   For more information, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.

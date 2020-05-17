@@ -87,39 +87,31 @@ Next you create a security group for public access\. To connect to public instan
 1. On the **Create security group** page, set these values: 
    + **Security group name:** `tutorial-securitygroup`
    + **Description:** `Tutorial Security Group`
-   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc` 
+   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (tutorial-vpc)` 
 
-1. To create the security group, choose **Create**\. Next, choose **Close** on the confirmation page\.
+1. Add inbound rules to the security group\.
 
-   Note the security group ID because you need it later in this tutorial\.
+   1. Determine the IP address to use to connect to instances in your VPC\. To determine your public IP address, in a different browser window or tab, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
 
-**To add inbound rules to the security group**
-
-1. Determine the IP address to use to connect to instances in your VPC\. To determine your public IP address, you can use the service at [https://checkip\.amazonaws\.com](https://checkip.amazonaws.com)\. An example of an IP address is `203.0.113.25/32`\.
-
-   If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
+      If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
 If you use `0.0.0.0/0`, you enable all IP addresses to access your public instances\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your instances\.
 
-1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+   1. In the **Inbound rules** section, choose **Add rule**\.
 
-1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose the `tutorial-securitygroup` security group that you created in the previous procedure\.
+   1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your EC2 instance\. If you do this, you can connect to your EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
+      + **Type:** `SSH`
+      + **Source:** The IP address or range from Step a, for example: `203.0.113.25/32`\.
 
-1. Under the list of security groups, choose the **Inbound Rules** tab, and then choose **Edit rules**\.
+   1. Choose **Add rule**\.
 
-1. On the **Edit inbound rules** page, choose **Add Rule**\.
+   1. Set the following values for your new inbound rule to allow HTTP access to your web server\. 
+      + **Type:** `HTTP`
+      + **Source:** `0.0.0.0/0`\.
 
-1. Set the following values for your new inbound rule to allow Secure Shell \(SSH\) access to your EC2 instance\. If you do this, you can connect to your EC2 instance to install the web server and other utilities, and to upload content for your web server\. 
-   + **Type:** `SSH`
-   + **Source:** The IP address or range from Step 1, for example: `203.0.113.25/32`\.
+1. To create the security group, choose **Create security group**\. Next, choose **Close** on the confirmation page\.
 
-1. Choose **Add rule**\.
-
-1. Set the following values for your new inbound rule to allow HTTP access to your web server\. 
-   + **Type:** `HTTP`
-   + **Source:** `0.0.0.0/0`\.
-
-1. To save your settings, choose **Save rules**\. Next, choose **Close** on the confirmation page\.
+   Note the security group ID because you need it later in this tutorial\.
 
 ## Create a VPC Security Group for a Private DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
 
@@ -134,25 +126,17 @@ To keep your DB instance private, create a second security group for private acc
 1. On the **Create security group** page, set these values:
    + **Security group name:** `tutorial-db-securitygroup`
    + **Description:** `Tutorial DB Instance Security Group`
-   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
+   + **VPC:** Choose the VPC that you created earlier, for example: `vpc-identifier (tutorial-vpc)`
 
-1. To create the security group, choose **Create**\. Next, choose **Close** on the confirmation page\.
+1. Add inbound rules to the security group\.
 
-**To add inbound rules to the security group**
+   1. In the **Inbound rules** section, choose **Add rule**\.
 
-1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+   1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
+      + **Type:** `MySQL/Aurora`
+      + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
 
-1. Choose **VPC Dashboard**, choose **Security Groups**, and then choose the `tutorial-db-securitygroup` security group that you created in the previous procedure\.
-
-1. Under the list of security groups, choose the **Inbound Rules** tab, and then choose **Edit rules**\.
-
-1. On the **Edit inbound rules** page, choose **Add Rule**\.
-
-1. Set the following values for your new inbound rule to allow MySQL traffic on port 3306 from your EC2 instance\. If you do this, you can connect from your web server to your DB instance to store and retrieve data from your web application to your database\. 
-   + **Type:** `MySQL/Aurora`
-   + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
-
-1. To save your settings, choose **Save rules**\. Next, choose **Close** on the confirmation page\.
+1. To create the security group, choose **Create security group**\. Next, choose **Close** on the confirmation page\.
 
 ## Create a DB Subnet Group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
 
@@ -161,6 +145,8 @@ A DB subnet group is a collection of subnets that you create in a VPC and that y
 **To create a DB subnet group**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+**Note**  
+Make sure you connect to the Amazon RDS console, not to the Amazon VPC console\.
 
 1. In the navigation pane, choose **Subnet groups**\.
 
@@ -171,7 +157,9 @@ A DB subnet group is a collection of subnets that you create in a VPC and that y
    + **Description:** `Tutorial DB Subnet Group`
    + **VPC:** `tutorial-vpc (vpc-identifier)` 
 
-1. In the **Add subnets** section, choose the Availability Zones that include the subnets from **Availability Zones**, and then choose the subnets from **Subnets**\.
+1. In the **Add subnets** section, choose the **Availability Zones** and **Subnets**\.
+
+   For this tutorial, choose `us-west-2a` and `us-west-2b` for the **Availability Zones**\. Next, choose all of the subnets for **Subnets**\.
 **Note**  
 If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose the **Availability Zone group**, **Availability Zones**, and **Subnets**\.
 

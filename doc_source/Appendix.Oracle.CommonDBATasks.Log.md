@@ -1,6 +1,6 @@
 # Common DBA Log Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Log"></a>
 
-This section describes how you can perform common DBA tasks related to logging on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
+Following, you can find how to perform certain common DBA tasks related to logging on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
 For more information, see [Oracle Database Log Files](USER_LogAccess.Concepts.Oracle.md)\. 
 

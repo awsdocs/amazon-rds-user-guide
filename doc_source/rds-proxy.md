@@ -168,7 +168,19 @@ In some cases, RDS Proxy might detect a database request that makes it impractic
 | This is preview documentation for Amazon RDS Proxy\. It is subject to change\. | 
 
 The following limitations apply to RDS Proxy during the public preview: 
-+   The public preview is available only in these AWS Regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Asia Pacific \(Tokyo\), and Europe \(Ireland\)\. 
++   The public preview is available only in these AWS Regions: 
+  + US East \(N\. Virginia\) Region
+  + US East \(Ohio\) Region
+  + US West \(N\. California\) Region
+  + US West \(Oregon\) Region
+  + Asia Pacific \(Mumbai\) Region
+  + Asia Pacific \(Seoul\) Region
+  + Asia Pacific \(Singapore\) Region
+  + Asia Pacific \(Sydney\) Region
+  + Asia Pacific \(Tokyo\) Region
+  + Europe \(Frankfurt\) Region
+  + Europe \(Ireland\) Region
+  + Europe \(London\) Region
 +  You can have up to 20 proxies for each AWS account ID\. 
 +  In an Aurora cluster, all of the connections in the connection pool are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you still use the reader endpoint directly for the Aurora cluster\. 
 + You can't use RDS Proxy with Aurora Serverless clusters\. 
@@ -524,6 +536,8 @@ For PostgreSQL, if you use JDBC we recommend that you set the connection paramet
 ### Connecting to a Proxy Using IAM Authentication<a name="rds-proxy-connecting-iam"></a>
 
  Follow the same general procedure as for connecting to an RDS DB instance or Aurora cluster using IAM authentication\. Instead of the instance, cluster, or reader endpoint, specify the proxy endpoint\. For details, see [Connecting to Your DB Instance Using IAM Authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\.
+
+You must use Transport Layer Security \(TLS\) / Secure Sockets Layer \(SSL\) when connecting to a proxy using IAM authentication\.
 
 You can grant a specific user access to the proxy by modifying the IAM policy\. For example:
 

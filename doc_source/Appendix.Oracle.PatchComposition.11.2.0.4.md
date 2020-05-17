@@ -1,6 +1,7 @@
 # Database Engine: 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.11.2.0.4"></a>
 
 The following versions are available for database engine 11\.2\.0\.4:
++ [Version 11\.2\.0\.4\.v24](#Appendix.Oracle.PatchComposition.11.2.0.4.v24)
 + [Version 11\.2\.0\.4\.v23](#Appendix.Oracle.PatchComposition.11.2.0.4.v23)
 + [Version 11\.2\.0\.4\.v22](#Appendix.Oracle.PatchComposition.11.2.0.4.v22)
 + [Version 11\.2\.0\.4\.v21](#Appendix.Oracle.PatchComposition.11.2.0.4.v21)
@@ -25,6 +26,163 @@ The following versions are available for database engine 11\.2\.0\.4:
 + [Version 11\.2\.0\.4\.v2 \(Deprecated\)](#Appendix.Oracle.PatchComposition.11.2.0.4.v2)
 + [Version 11\.2\.0\.4\.v1](#Appendix.Oracle.PatchComposition.11.2.0.4.v1)
 
+## Version 11\.2\.0\.4\.v24<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24"></a>
+
+Version 11\.2\.0\.4\.v24 adds support for the following:
++ Patch 30670774: Database PSU 11\.2\.0\.4\.200414
++ Patch 30805543: Oracle JVM Component Database PSU 11\.2\.0\.4\.200414
++ Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
++ Patch 29997959: DSTV34 OJVM \(TZDATA2019B\)
++ Patch 31192454: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
++ Patch 22188219: "L1 VALIDATION" WAIT EVENT USED TO BACK OFF WHEN HW ENQUEUE CANNOT BE ACQUIRED
++ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
++ Adds support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
++ Adds support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package\.
+
+### Combined Patches for Version 11\.2\.0\.4, Released April 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24-Bugs-Fixed"></a>
+
+Bugs fixed:
+
+```
+                    18619917, 19309466, 28876684, 28855981, 18189036, 19781326, 13609098
+                    16285691, 16756406, 18430495, 17323222, 29483723, 19915271, 19516448
+                    14458214, 23713236, 23140259, 29434301, 22502493, 18272672, 16410570
+                    16494615, 19174430, 21352646, 16901385, 16596890, 22243719, 18996843
+                    21387964, 20334344, 17174582, 22250006, 17798953, 14015842, 18031668
+                    15955387, 21534893, 16832076, 16065166, 16579084, 25427662, 21179898
+                    11786053, 15990359, 24589081, 17982832, 18685892, 20142975, 24835538
+                    16315398, 20861693, 17037130, 17284817, 17891946, 17279227, 17588480
+                    17291347, 16731148, 21097043, 24528741, 22321741, 17165204, 26245237
+                    17891943, 17359610, 17265217, 17465741, 29621961, 22551446, 18191164
+                    16721594, 18614015, 27825893, 18440095, 19769489, 20596234, 18482502
+                    16043574, 17360606, 20936905, 22321756, 19211724, 17392698, 19463893
+                    29033139, 17477958, 17040764, 18362222, 19463897, 24624166, 17853456
+                    14521849, 17816865, 19692824, 21868720, 17951233, 25505407, 17040527
+                    31022191, 24975421, 19888853, 18009564, 20882568, 20803583, 23026585
+                    18604692, 17622427, 16903536, 29483771, 17865671, 17883081, 16228604
+                    17325413, 17082359, 12747740, 22168163, 16091637, 20569094, 17468141
+                    30365745, 29962939, 19469538, 29633753, 20598042, 16042673, 23302839
+                    17437634, 28734355, 19049453, 20387265, 16941434, 16833527, 21343775
+                    17297939, 16069901, 14285317, 22380919, 18436647, 23065323, 21983325
+                    17853498, 24790914, 23571055, 16542886, 21286665, 17365043, 17752995
+                    25914276, 17296856, 18783224, 22353199, 22083366, 28305362, 21419850
+                    16180763, 23294548, 26679352, 13960236, 25328093, 25423453, 18339044
+                    17282229, 25600421, 18856999, 18259031, 28806384, 21354456, 23725036
+                    18471685, 30237239, 17258090, 16344544, 17903598, 17011832, 18135678
+                    18704244, 17786518, 19718981, 25655390, 17242746, 20250147, 19197175
+                    17390431, 17835627, 17672719, 17393915, 21566639, 18765602, 21425496
+                    26544823, 22228324, 29962927, 18682983, 30179644, 25165496, 12816846
+                    18774543, 18747196, 17824637, 19429927, 21429602, 16524926, 17343514
+                    19271443, 17019345, 18681862, 17186905, 23330119, 17811438, 26474853
+                    17215560, 16875449, 21380789, 17184721, 18508861, 19466309, 23330124
+                    17811429, 17019356, 25654936, 17754782, 17752121, 22809871, 17201159
+                    18308268, 19777862, 16198143, 29027694, 18828868, 17586955, 28076295
+                    26654363, 22977256, 16692232, 27374796, 21142837, 20869721, 17649265
+                    25879656, 17847764, 21756699, 19697993, 28364007, 17787259, 23628685
+                    30252098, 23007241, 27351628, 18094246, 20031873, 17375354, 21698350
+                    26513067, 21538567, 22683212, 16450169, 17478145, 17311728, 17648596
+                    17308789, 22836801, 21756677, 18674047, 14084247, 19788303, 22683225
+                    27534509, 16833845, 18948177, 17205719, 21756661, 20004021, 17922254
+                    13837378, 18084625, 17912217, 11883252, 24842886, 12982566, 26203182
+                    14176370, 14764829, 21847223, 16875230, 28079127, 22568797, 17237521
+                    29511611, 25635149, 16934803, 17848897, 20441797, 20175161, 16613964
+                    18334586, 17288409, 17341326, 17449815, 15913355, 16399083, 18740837
+                    20294666, 14565184, 21517440, 17614134, 19854503, 14245531, 16194160
+                    18325460, 15979965, 30562923, 20671094, 27870645, 25093656, 18247991
+                    16912439, 30562936, 24433711, 19930276, 22092979, 20506715, 23003979
+                    20506706, 13871092, 19272701, 17397545, 16785708, 19461270, 21051862
+                    13829543, 16220077, 17008068, 18061914, 20448824, 30275359, 18674024
+                    19689979, 24411921, 30275351, 17596908, 17036973, 22175564, 17612828
+                    20725343, 28199085, 23194294, 17630484, 21051858, 20017509, 21051852
+                    17767676, 17232014, 22893153, 12611721, 25555252, 18356166, 17071721
+                    19315668, 25764020, 16863422, 21051840, 17267114, 17820741, 18043064
+                    21538558, 26243698, 20324049, 30305880, 16392068, 18744139, 24348685
+                    26746894, 18628388, 27072923, 14010183, 16595641, 17080436, 17332800
+                    20777150, 21453153, 20299015, 18413820, 18264060, 16819962, 22465352
+                    21351877, 21051833, 18673342, 30562907, 30562909, 29200700, 27441326
+                    16571443, 18328509, 27567477, 18674465, 16422541, 18306996, 19359219
+                    21424824, 17443671, 17478514, 21067387, 16268425, 17381384, 18723434
+                    17235750, 23328639, 22195448, 24570598, 21172913, 17655240, 18384391
+                    16992075, 22195441, 17025461, 30562891, 16472716, 19289642, 21502702
+                    22195457, 20475845, 22148226, 26030218, 18331850, 17945983, 13498382
+                    24652769, 18673304, 17610798, 19891090, 25369547, 18456514, 8322815
+                    22657942, 17313525, 17050888, 18317531, 19835133, 17495022, 11733603
+                    18798250, 19285025, 18260550, 17390160, 18316692, 19458377, 14368995
+                    17551063, 21343838, 12905058, 14735792, 28612674, 16855292, 23315889
+                    13364795, 18235390, 18293054, 18673325, 19393542, 30215130, 14657740
+                    17532729, 17393683, 17389192, 17783588, 17852463, 19358317, 17441661
+                    14034426, 28254374, 20631274, 19207117, 26569225, 17518652, 24662775
+                    19475971, 18282562, 19896336, 17348614, 19827973, 17346671, 31022281
+                    19791273, 24476274, 22296366, 13853126, 18273830, 17570606, 13558557
+                    26007010, 16685417, 18180390, 14692762, 18159793, 17027426, 24476265
+                    23177648, 17851160, 16870214, 18202441, 17227073, 20657411, 19006849
+                    22606521, 20506699, 28000269, 23536835, 17761775, 20382309, 16306373
+                    17801017, 19680952, 16850630, 17694209, 26667015, 17877323, 18230522
+                    24563422, 17446237, 17889549, 17551674, 16233738, 22730454, 17571039
+                    26667023, 19972570, 18849970, 21532755, 20860659, 22905130, 21168487
+                    17016369, 21263635, 17231779, 21343897, 17717883, 27710072, 18522509
+                    23209741, 17484731, 21972320, 19972569, 19972568, 17716305, 21059919
+                    19972566, 19972564, 26667032, 17394950, 20657441, 17551699, 17006570
+                    18051556, 12364061, 18029658, 17546973, 18262334, 19699191, 17227277
+                    18018515, 16943711, 17982555, 20828947, 18098207, 18436307, 19584068
+                    16898135, 13936038, 19601762, 31010960, 14054676, 25505394, 18228645
+                    19013183, 25042823, 17721717, 17239687, 25248384, 25634317, 20134113
+                    20273319, 28501075, 21063322, 17344412, 22507210, 16354467, 21795111
+                    25505371, 16777840, 25879984, 17811456, 19730508, 17385178, 18166013
+                    17484762, 10136473, 6599380, 20717359, 20296213, 27097854, 13955826
+                    18193833, 17545847, 16837842, 18964939, 19871910, 25505382, 17811447
+                    18554763, 21132297, 25957038, 20004087, 17889583, 19544839, 26631046
+                    22507234, 24719736, 18868646, 17042658, 20627866, 14106803, 13951456
+                    18139690, 18277454, 13680635, 25823754, 18554871, 18515268, 20169408
+                    24908321, 17274537, 17602269, 26575788, 19032867, 17762296, 14829250
+                    16929165, 14602788, 28849751, 21794615, 18899974, 29944660, 18441944
+                    17811789, 20074391, 14852021, 17705023, 13645875, 24316947, 16668584
+                    17786278, 25947799, 20879889, 19578350, 28022101, 22594718, 16384983
+                    26439748, 17957017, 19121551, 17570240, 19788842, 18382302, 27086138
+                    21330264, 21197626, 14338435, 13944971, 21656630, 18886413, 17156148
+                    17936109, 20509482, 27255377, 24717859, 18762750, 21526048, 24560906
+                    18096714, 17238511, 26078387, 27053456, 20144308, 25364628, 18244962
+                    19433930, 20476175, 19297917, 21174504, 18280813, 28819280, 17614227
+                    28357401, 21911701, 17006183, 25809524, 18092127, 19727057, 17695685
+                    26039623, 22820579, 20856766, 15861775, 17258582, 21668627, 19487147
+                    20925795, 28100487, 26482376, 19554106, 22760679, 21629064, 18199537
+                    18091059, 17299889, 21538485, 17546761, 26336977, 25775213, 18155762
+                    30803210, 16956380, 19207156, 14705949, 23105538, 26198926, 19258504
+                    16314254, 17246576, 17655634, 17890099, 16989630, 20067212, 19721304
+                    25077278, 19490948, 18203835, 18203838, 18973907, 18203837, 29483672
+                    19615136, 17587063, 18000422, 18641451, 18090142, 21641760, 17019086
+                    30559616, 19373893, 18373438, 21820934, 18641461, 17346091, 21422580
+                    22351572, 18604493, 23008056, 22901797, 18610915, 17892268, 17501491
+                    20907061, 14354737, 17835048, 21787056, 22195485, 22782647, 17082983
+                    18641419, 16618694, 14133975, 22195492, 18331812, 18093615, 24385983
+                    25897615, 20513399, 21281607, 13866822, 18841764, 17600719, 17842825
+                    20558005, 17088068, 9756271, 22195465, 18440047, 19211433, 21515534
+                    20331945, 22686674, 18384537, 18607546, 17254374, 18315328, 23115139
+                    28790634, 21394225, 16360112, 22195477, 17726838, 18510194, 17571306
+                    24766121, 17302277, 21842740, 17551709, 26910644, 17634921, 25489607
+                    16538760, 18933818, 19176885, 17201047, 25649873, 25067795, 28502128
+                    27952577, 14774730, 27461842, 19153980, 21911849, 23727132, 18166577
+                    27000663, 24448240, 17056813, 21811517, 19909862, 25494379, 22675136
+                    24534298, 19895326, 22253904, 17804361, 19231857, 27642235, 26023002
+                    17528315, 19058059, 30534664, 29992392, 19554117, 19007266, 28915933
+                    30855121, 30160639, 17285560, 29254615, 22670385, 18458318, 19187988
+                    23265914, 19699946, 19006757, 19374518, 29774367, 19223010, 29448234
+                    25076732, 22118835, 26637592, 19852360, 20408829, 21047766, 21566944
+                    28730253, 16799735, 17432124, 18759211, 19396455, 20875898, 22037014
+                    22873635, 23614158, 24701840, 25881255, 27015449, 28125601, 28852325
+                    29997937, 29997959, 26354017, 21893235, 18125929, 19601228, 12668795
+                    20524085, 19403858, 18086801, 16854386, 21612959, 20563314, 18705484
+                    16674686, 20425790, 20390564, 19032777, 21275255, 17783445, 19943771
+                    18973548, 18411336, 18673090, 19768226, 21047407, 17030189, 18856106
+                    19693090, 21227138, 18492302, 19831647, 12897813, 19563300, 20914870
+                    19587324, 13254780, 18676416, 21834568, 19794897, 26744595, 17208934
+                    17031322, 19060015, 19277336, 19455741, 21764119, 17785870, 20631846
+                    22185234, 20023340, 20647412, 19440386, 21281961, 25885148, 17722535
+                    20926021, 20686773, 17621643, 18662619, 19563715, 19442102, 21516611
+                    14312810, 20672075, 21897746, 2990912, 23262847, 19644859, 19175543
+                    17644091, 20394750, 19306797, 18819257, 22188219
+```
+
 ## Version 11\.2\.0\.4\.v23<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v23"></a>
 
 Version 11\.2\.0\.4\.v23 adds support for the following:
@@ -46,7 +204,7 @@ Version 11\.2\.0\.4\.v23 adds support for the following:
 + Patch 26744595: LGSB:APPLY ABORTS W/ ORA\-26786 \(ROW\-EXISTS\) COLLISION WITH HCC\(PR\)\-NO HCC\(SB\)
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 30298532, released January 2020<a name="w54aac31d107c23b6b7"></a>
+### Oracle patch 30298532, released January 2020<a name="w54aac31d107c19b8b7"></a>
 
 Bugs fixed:
 
@@ -186,7 +344,7 @@ Version 11\.2\.0\.4\.v22 adds support for the following:
 + Patch 26744595: LGSB:APPLY ABORTS W/ ORA\-26786 \(ROW\-EXISTS\) COLLISION WITH HCC\(PR\)\-NO HCC\(SB\)
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 29913194, released October 2019<a name="w54aac31d107c23b8b7"></a>
+### Oracle patch 29913194, released October 2019<a name="w54aac31d107c19c10b7"></a>
 
 Bugs fixed:
 
@@ -308,7 +466,7 @@ Version 11\.2\.0\.4\.v21 adds support for the following:
 + Patch 30018733: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 29497421, released July 2019<a name="w54aac31d107c23c10b7"></a>
+### Oracle patch 29497421, released July 2019<a name="w54aac31d107c19c12b7"></a>
 
 Bugs fixed:
 
@@ -428,7 +586,7 @@ Version 11\.2\.0\.4\.v20 adds support for the following:
 + Patch 29638593: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle patch 22768427, released April 2019<a name="w54aac31d107c23c12b7"></a>
+### Oracle patch 22768427, released April 2019<a name="w54aac31d107c19c14b7"></a>
 
 Bugs fixed:
 
@@ -542,7 +700,7 @@ Version 11\.2\.0\.4\.v19 adds support for the following:
 + Patch 27015468: DSTv32 for OJVM \(TZDATA2018E\)
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 
-### Oracle patch 28729262, released January 2019<a name="w54aac31d107c23c14b7"></a>
+### Oracle patch 28729262, released January 2019<a name="w54aac31d107c19c16b7"></a>
 
 Bugs fixed:
 
@@ -653,7 +811,7 @@ Version 11\.2\.0\.4\.v18 adds support for the following:
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patches 27659043 and 19692824 are now included in the Database Patch Set Update
 
-### Oracle patch 28204707, released October 2018<a name="w54aac31d107c23c16b7"></a>
+### Oracle patch 28204707, released October 2018<a name="w54aac31d107c19c18b7"></a>
 
 Bugs fixed:
 
@@ -763,7 +921,7 @@ Version 11\.2\.0\.4\.v17 adds support for the following:
 + Patch 27659043: MES Bundle 405
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
 
-### Oracle patch 27734982, released July 2018<a name="w54aac31d107c23c18b7"></a>
+### Oracle patch 27734982, released July 2018<a name="w54aac31d107c19c20b7"></a>
 
 Bugs fixed:
 
@@ -867,7 +1025,7 @@ Version 11\.2\.0\.4\.v16 adds support for the following:
 + Adds support for the `DBMS_ADVANCED_REWRITE` package
 + Fixed a bug where `DBA_LOCKS` and associated views available in new DB instances of 11\.2\.0\.4\.v15 were not created in upgrades to 11\.2\.0\.4\.v15\. Views are now created in new and upgraded DB instances of 11\.2\.0\.4\.v16 and later\.
 
-### Oracle patch 27338049, released April 2018<a name="w54aac31d107c23c20b7"></a>
+### Oracle patch 27338049, released April 2018<a name="w54aac31d107c19c22b7"></a>
 
 Bugs fixed:
 
@@ -969,7 +1127,7 @@ Version 11\.2\.0\.4\.v15 adds support for the following:
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
 + Adds support for `DBA_LOCKS` and associated views
 
-### Oracle patch 26925576, released January 2018<a name="w54aac31d107c23c22b7"></a>
+### Oracle patch 26925576, released January 2018<a name="w54aac31d107c19c24b7"></a>
 
 Bugs fixed:
 
@@ -1065,7 +1223,7 @@ Version 11\.2\.0\.4\.v14 adds support for the following:
 + RSA Micro\-Edition Suite Bundle \(patch 26963526\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
 
-### Oracle patch 26392168, released October 2017<a name="w54aac31d107c23c24b7"></a>
+### Oracle patch 26392168, released October 2017<a name="w54aac31d107c19c26b7"></a>
 
 Bugs fixed:
 
@@ -1159,7 +1317,7 @@ Version 11\.2\.0\.4\.v13 adds support for the following:
 + Adds support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
 + Adds support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
-### Oracle patch 26609445, released July 2017<a name="w54aac31d107c23c26b7"></a>
+### Oracle patch 26609445, released July 2017<a name="w54aac31d107c19c28b7"></a>
 
 Bugs fixed:
 
@@ -1248,7 +1406,7 @@ Version 11\.2\.0\.4\.v12 adds support for the following:
 + Adds support for the `DBMS_CHANGE_NOTIFICATION` package
 + Adds support for `XSTREAM` packages and views \(may require additional licensing\)
 
-### Oracle patch 24732075, released April 2017<a name="w54aac31d107c23c28b7"></a>
+### Oracle patch 24732075, released April 2017<a name="w54aac31d107c19c30b7"></a>
 
 Bugs fixed:
 
@@ -1330,7 +1488,7 @@ Version 11\.2\.0\.4\.v11 adds support for the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 
-### Oracle patch 24918033, released January 2017<a name="w54aac31d107c23c30b6"></a>
+### Oracle patch 24918033, released January 2017<a name="w54aac31d107c19c32b6"></a>
 
 Bugs fixed:
 
@@ -1416,7 +1574,7 @@ Version 11\.2\.0\.4\.v10 adds support for the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w54aac31d107c23c32b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w54aac31d107c19c34b6"></a>
 
 Bugs fixed:
 
@@ -1499,7 +1657,7 @@ Version 11\.2\.0\.4\.v9 adds support for the following:
 + Added the ability to create custom password verify functions\. For more information, see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w54aac31d107c23c34b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w54aac31d107c19c36b6"></a>
 
 Bugs fixed:
 
@@ -1582,7 +1740,7 @@ Version 11\.2\.0\.4\.v8 adds support for the following:
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w54aac31d107c23c36b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w54aac31d107c19c38b6"></a>
 
 Bugs fixed:
 
@@ -1662,7 +1820,7 @@ Version 11\.2\.0\.4\.v7 adds support for the following:
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database 
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w54aac31d107c23c38b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w54aac31d107c19c40b6"></a>
 
 Bugs fixed:
 
@@ -1741,7 +1899,7 @@ Version 11\.2\.0\.4\.v5 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.8 \(21352635\)
 +  Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w54aac31d107c23c42b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w54aac31d107c19c44b6"></a>
 
 Bugs fixed:
 
@@ -1813,7 +1971,7 @@ Version 11\.2\.0\.4\.v4 adds support for the following:
 +  Provides access to DBMS\_REPAIR through RDSADMIN\.RDSADMIN\_DBMS\_REPAIR 
 + Grants ALTER DATABASE LINK, ALTER PUBLIC DATABASE LINK, EXEMPT ACCESS POLICY, EXEMPT IDENTITY POLICY, and EXEMPT REDACTION POLICY to master user 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w54aac31d107c23c44b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w54aac31d107c19c46b6"></a>
 
 Bugs fixed:
 
@@ -1879,7 +2037,7 @@ Version 11\.2\.0\.4\.v3 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.4 \(19121551\)
 + Latest DST file \(DSTv23 – patch 19396455, released Oct 2014\)\. This patch is incorporated by default in new instances only\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w54aac31d107c23c46b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w54aac31d107c19c48b6"></a>
 
 Bugs fixed:
 
@@ -1930,7 +2088,7 @@ Version 11\.2\.0\.4\.v2 adds support for the following:
 + Installs schema objects to support XA Transactions, allowing transactions to be managed by an external transaction manager 
 + Permits truncation of temporary SYS and SYSTEM objects, allowing tools like LogMiner to function correctly 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w54aac31d107c23c48b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w54aac31d107c19c50b6"></a>
 
 Bugs fixed:
 
@@ -1963,7 +2121,7 @@ Version 11\.2\.0\.4\.v1 adds support for the following:
 + Oracle PSU 11\.2\.0\.4\.1
 + [Creating New Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w54aac31d107c23c50b6"></a>
+### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w54aac31d107c19c52b6"></a>
 
 Bugs fixed:
 

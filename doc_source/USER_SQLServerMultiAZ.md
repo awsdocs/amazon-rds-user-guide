@@ -36,7 +36,7 @@ If your DB instance is running AGs, it doesn't require this step\.
 ## Microsoft SQL Server Multi\-AZ Deployment Notes and Recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 
 The following are some restrictions when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
-+ Cross\-region Multi\-AZ is not currently supported\. 
++ Cross\-Region Multi\-AZ isn't supported\.
 + You can't configure the secondary DB instance to accept database read activity\. 
 + Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\.
 + Multi\-AZ with Always On Availability Groups \(AGs\) doesn't support Kerberos authentication for the availability group listener\. This is because the listener has no Service Principal Name \(SPN\)\.
@@ -49,7 +49,7 @@ The following are some notes about working with Multi\-AZ deployments for Micros
 + To use SQL Server Multi\-AZ with a SQL Server DB instance in a VPC, first create a DB subnet group that has subnets in at least two distinct Availability Zones\. Then assign the DB subnet group to the primary replica of the SQL Server DB instance\. 
 + When a DB instance is modified to be a Multi\-AZ deployment, during the modification it has a status of **modifying**\. Amazon RDS creates the standby, and makes a backup of the primary DB instance\. After the process is complete, the status of the primary DB instance becomes **available**\. 
 + Multi\-AZ deployments maintain all databases on the same node\. If a database on the primary host fails over, all your SQL Server databases fail over as one atomic unit to your standby host\. Amazon RDS provisions a new healthy host, and replaces the unhealthy host\. 
-+ Multi\-AZ with DBM or AGs supports a single standby replica\. 
++ Multi\-AZ with DBM or AGs supports a single standby replica\.
 + Users, logins, and permissions are automatically replicated for you on the secondary\. You don’t need to recreate them\. User\-defined server roles \(a SQL Server 2012 feature\) are only replicated in Multi\-AZ instances for AGs instances\. 
 + If you have SQL Server Agent jobs, recreate them on the secondary\. You do so because these jobs are stored in the msdb database, and you can't replicate this database by using Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. Create the jobs first in the original primary, then fail over, and create the same jobs in the new primary\. 
 + You might observe elevated latencies compared to a standard DB instance deployment \(in a single Availability Zone\) because of the synchronous data replication\. 

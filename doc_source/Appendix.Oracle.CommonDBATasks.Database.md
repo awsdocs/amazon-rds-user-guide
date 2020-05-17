@@ -1,6 +1,6 @@
 # Common DBA Database Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Database"></a>
 
-This section describes how you can perform common DBA tasks related to databases on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
+Following, you can find how to perform certain common DBA tasks related to databases on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. Amazon RDS also restricts access to some system procedures and tables that require advanced privileges\. 
 
 **Topics**
 + [Changing the Global Name of a Database](#Appendix.Oracle.CommonDBATasks.RenamingGlobalName)
@@ -11,7 +11,7 @@ This section describes how you can perform common DBA tasks related to databases
 + [Setting Distributed Recovery](#Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery)
 + [Setting the Database Time Zone](#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)
 + [Working with Oracle External Tables](#Appendix.Oracle.CommonDBATasks.External_Tables)
-+ [Working with Automatic Workload Repository \(AWR\)](#Appendix.Oracle.CommonDBATasks.AWR)
++ [Generating Performance Reports with Automatic Workload Repository \(AWR\)](#Appendix.Oracle.CommonDBATasks.AWR)
 + [Adjusting Database Links for Use with DB Instances in a VPC](#Appendix.Oracle.CommonDBATasks.DBLinks)
 + [Setting the Default Edition for a DB Instance](#Appendix.Oracle.CommonDBATasks.DefaultEdition)
 + [Enabling Auditing for the SYS\.AUD$ Table](#Appendix.Oracle.CommonDBATasks.EnablingAuditing)
@@ -19,6 +19,7 @@ This section describes how you can perform common DBA tasks related to databases
 + [Cleaning Up Interrupted Online Index Builds](#Appendix.Oracle.CommonDBATasks.CleanupIndex)
 + [Skipping Corrupt Blocks](#Appendix.Oracle.CommonDBATasks.SkippingCorruptBlocks)
 + [Resizing the Temporary Tablespace in a Read Replica](#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
++ [Purging the Recycle Bin](#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
 
 ## Changing the Global Name of a Database<a name="Appendix.Oracle.CommonDBATasks.RenamingGlobalName"></a>
 
@@ -216,15 +217,125 @@ CREATE TABLE orders_xt
 
 In this example, the data is populated in the `orders_xt.dmp` file in the DATA\_PUMP\_DIR directory\.
 
-## Working with Automatic Workload Repository \(AWR\)<a name="Appendix.Oracle.CommonDBATasks.AWR"></a>
+## Generating Performance Reports with Automatic Workload Repository \(AWR\)<a name="Appendix.Oracle.CommonDBATasks.AWR"></a>
 
-If you use Oracle Database Enterprise Edition and have licensed the Diagnostics and Tuning packs, you can use Automatic Workload Repository \(AWR\)\. To enable AWR, change the `CONTROL_MANAGEMENT_PACK_ACCESS` parameter\. 
+To gather performance data and generate reports, Oracle recommends Automatic Workload Repository \(AWR\)\. AWR requires Oracle Database Enterprise Edition and a license for the Diagnostics and Tuning packs\. To enable AWR, set the `CONTROL_MANAGEMENT_PACK_ACCESS` initialization parameter to either `DIAGNOSTIC` or `DIAGNOSTIC+TUNING`\.  
 
-AWR reports are typically generated using report generation scripts, such as awrrpt\.sql, installed on the database host server\. You don't have direct access to the host, but you can obtain copies of the scripts from another installation of Oracle Database\. Alternatively, you can generate reports using the DBMS\_WORKLOAD\_REPOSITORY package\. 
+### Working with AWR Reports in RDS<a name="Appendix.Oracle.CommonDBATasks.AWRTechniques"></a>
+
+To generate AWR reports, you can run scripts such as `awrrpt.sql`\. These scripts are installed on the database host server\. In Amazon RDS, you don't have direct access to the host\. However, you can get copies of SQL scripts from another installation of Oracle Database\. 
+
+You can also use AWR by running procedures in the `SYS.DBMS_WORKLOAD_REPOSITORY` PL/SQL package\. You can use this package to manage baselines and snapshots, and also to display ASH and AWR reports\. For example, to generate an AWR report in text format run the `DBMS_WORKLOAD_REPOSITORY.AWR_REPORT_TEXT` procedure\. However, you can't reach these AWR reports from the AWS Management Console\. 
+
+When working with AWR, we recommend using the `rdsadmin.rdsadmin_diagnostic_util` procedures\. You can use these procedures to generate the following:
++ AWR reports
++ Active Session History \(ASH\) reports
++ Automatic Database Diagnostic Monitor \(ADDM\) reports
++ Oracle Data Pump Export dump files of AWR data
+
+The `rdsadmin_diagnostic_util` procedures save the reports to the DB instance file system\. You can access these reports from the console\. You can also access reports using the `rdsadmin.rds_file_util` procedures, and you can access reports that are copied to Amazon S3 using the S3 Integration option\. For more information, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) and [Amazon S3 Integration](oracle-s3-integration.md)\. 
+
+You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RDS for Oracle DB engine versions:
++ 11\.2\.0\.4\.v24 or higher 11\.2 versions
++ 12\.1\.0\.2\.v20 or higher 12\.1 versions
++ 12\.2\.0\.2\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
++ 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 18c versions
++ 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 19c versions
+
+### Common Parameters for the Diagnostic Utility Package<a name="Appendix.Oracle.CommonDBATasks.CommonAWRParam"></a>
+
+You typically use the following parameters when managing AWR and ADDM with the rdsadmin\_diagnostic\_util package\.
+
+<a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Database.html)
+
+You typically use the following parameters when managing ASH with the rdsadmin\_diagnostic\_util package\.
+
+<a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Database.html)
+
+### Generating an AWR Report<a name="Appendix.Oracle.CommonDBATasks.GenAWRReport"></a>
+
+To generate an AWR report, use the `rdsadmin.rdsadmin_diagnostic_util.awr_report` procedure\.
+
+The following example generates a AWR report for the snapshot range 101–106\. The output text file is named `awrrpt_101_106.txt`\. You can access this report from the AWS Management Console\. 
+
+```
+exec rdsadmin.rdsadmin_diagnostic_util.awr_report(101,106,'TEXT');
+```
+
+The following example generates an HTML report for the snapshot range 63–65\. The output HTML file is named `awrrpt_63_65.html`\. The procedure writes the report to the nondefault database directory named `AWR_RPT_DUMP`\.
+
+```
+exec rdsadmin.rdsadmin_diagnostic_util.awr_report(63,65,'HTML','AWR_RPT_DUMP');
+```
+
+### Extracting AWR Data into a Dump File<a name="Appendix.Oracle.CommonDBATasks.ExtractAWR"></a>
+
+To extract AWR data into a dump file, use the `rdsadmin.rdsadmin_diagnostic_util.awr_extract` procedure\. 
+
+The following example extracts the snapshot range 101–106\. The output dump file is named `awrextract_101_106.dmp`\. You can access this file through the console\.
+
+```
+exec rdsadmin.rdsadmin_diagnotic_util.awr_extract(101,106);
+```
+
+The following example extracts the snapshot range 63–65\. The output dump file is named `awrextract_63_65.dmp`\. The file is stored in the nondefault database directory named `AWR_RPT_DUMP`\.
+
+```
+exec rdsadmin.rdsadmin_diagnostic_util.awr_extract(63,65,'AWR_RPT_DUMP');
+```
+
+### Generating an ADDM Report<a name="Appendix.Oracle.CommonDBATasks.ADDM"></a>
+
+To generate an ADDM report, use the `rdsadmin.rdsadmin_diagnostic_util.addm_report` procedure\. 
+
+The following example generates an ADDM report for the snapshot range 101–106\. The output text file is named `addmrpt_101_106.txt`\. You can access the report through the console\.
+
+```
+exec rdsadmin.rdsadmin_diagnostic_util.addm_report(101,106);
+```
+
+The following example generates an ADDM report for the snapshot range 63–65\. The output text file is named `addmrpt_63_65.txt`\. The file is stored in the nondefault database directory named `ADDM_RPT_DUMP`\.
+
+```
+exec rdsadmin.rdsadmin_diagnostic_util.addm_report(63,65,'ADDM_RPT_DUMP');
+```
+
+### Generating an ASH Report<a name="Appendix.Oracle.CommonDBATasks.ASH"></a>
+
+To generate an ASH report, use the `rdsadmin.rdsadmin_diagnostic_util.ash_report` procedure\. 
+
+The following example generates an ASH report that includes the data from 14 minutes ago until the current time\. The name of the output file uses the format `ashrptbegin_timeend_time.txt`, where `begin_time` and `end_time` use the format `YYYYMMDDHH24MISS`\. You can access the file through the console\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_diagnostic_util.ash_report(
+        begin_time     =>     SYSDATE-14/1440,
+        end_time       =>     SYSDATE,
+        report_type    =>     'TEXT');
+END;
+/
+```
+
+The following example generates an ASH report that includes the data from November 18, 2019, at 6:07 PM through November 18, 2019, at 6:15 PM\. The name of the output HTML report is `ashrpt_20190918180700_20190918181500.html`\. The report is stored in the nondefault database directory named `AWR_RPT_DUMP`\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_diagnostic_util.ash_report(
+        begin_time     =>    TO_DATE('2019-09-18 18:07:00', 'YYYY-MM-DD HH24:MI:SS'),
+        end_time       =>    TO_DATE('2019-09-18 18:15:00', 'YYYY-MM-DD HH24:MI:SS'),
+        report_type    =>    'html',
+        dump_directory =>    'AWR_RPT_DUMP');
+END;
+/
+```
+
+### Accessing AWR Reports from the Console or CLI<a name="Appendix.Oracle.CommonDBATasks.AWRConsole"></a>
+
+To access AWR reports or export dump files, you can use the AWS Management Console or AWS CLI\. For more information, see [Downloading a Database Log File](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\. 
 
 ## Adjusting Database Links for Use with DB Instances in a VPC<a name="Appendix.Oracle.CommonDBATasks.DBLinks"></a>
 
-To use Oracle database links with Amazon RDS DB instances inside the same VPC or peered VPCs, the two DB instances should have a valid route between them\. Verify the valid route between the DB instances by using your VPC routing tables and network access control list \(ACL\)\. 
+To use Oracle database links with Amazon RDS DB instances inside the same virtual private cloud \(VPC\) or peered VPCs, the two DB instances should have a valid route between them\. Verify the valid route between the DB instances by using your VPC routing tables and network access control list \(ACL\)\. 
 
 The security group of each DB instance must allow ingress to and egress from the other DB instance\. The inbound and outbound rules can refer to security groups from the same VPC or a peered VPC\. For more information, see [Updating Your Security Groups to Reference Peered VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html#vpc-peering-security-groups)\. 
 
@@ -489,3 +600,15 @@ exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
 ```
 
 For more information about read replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
+
+## Purging the Recycle Bin<a name="Appendix.Oracle.CommonDBATasks.PurgeRecycleBin"></a>
+
+When you drop a table, your Oracle database doesn't immediately remove its storage space\. The database renames the table and places it and any associated objects in a recycle bin\. Purging the recycle bin removes these items and releases their storage space\. 
+
+To purge the entire recycle bin, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.purge_dba_recyclebin`\. However, this procedure can't purge the recycle bin of `SYS` and `RDSADMIN` objects\. If you need to purge these objects, contact AWS Support\. 
+
+The following example purges the entire recycle bin\.
+
+```
+exec rdsadmin.rdsadmin_util.purge_dba_recyclebin;
+```

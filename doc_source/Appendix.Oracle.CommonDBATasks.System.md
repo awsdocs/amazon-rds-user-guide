@@ -1,6 +1,6 @@
 # Common DBA System Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.System"></a>
 
-This section describes how you can perform common DBA tasks related to the system on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
+Following, you can find how to perform certain common DBA tasks related to the system on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
 **Topics**
 + [Disconnecting a Session](#Appendix.Oracle.CommonDBATasks.DisconnectingSession)
@@ -427,8 +427,8 @@ Amazon RDS Oracle allows Domain Name Service \(DNS\) resolution from a custom DN
 
 After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\. 
 
-To set up a custom DNS server for your Oracle Amazon RDS DB instance, do the following: 
-+ From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
+To set up a custom DNS server for your Amazon RDS for Oracle DB instance, do the following: 
++ From the DHCP options set attached to your virtual private cloud \(VPC\), set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 **Note**  
 The `domain-name-servers` option accepts up to four values, but your Amazon RDS DB instance uses only the first value\. 
 + Ensure that your DNS server can resolve all lookup queries, including public DNS names, Amazon EC2 private DNS names, and customer\-specific DNS names\. If the outbound network traffic contains any DNS lookups that your DNS server can't handle, your DNS server must have appropriate upstream DNS providers configured\. 

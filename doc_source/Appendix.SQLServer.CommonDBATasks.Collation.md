@@ -16,7 +16,8 @@ Currently, Amazon RDS supports the following server collations:
 | Collation | Description | 
 | --- | --- | 
 |  Chinese\_PRC\_CI\_AS  |  Chinese\-PRC, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
-|      Chinese\_Taiwan\_Stroke\_CI\_AS   |      Chinese\-Taiwan\-Stroke, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive   | 
+|      Chinese\_Taiwan\_Stroke\_CI\_AS  |      Chinese\-Taiwan\-Stroke, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive   | 
+|  Finnish\_Swedish\_CI\_AS  |  Finnish, Swedish, and Swedish \(Finland\), case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  French\_CI\_AS  |  French, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Hebrew\_BIN  |  Hebrew, binary sort  | 
 |  Japanese\_CI\_AS  |  Japanese, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 

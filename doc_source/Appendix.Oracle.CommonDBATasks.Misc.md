@@ -1,6 +1,6 @@
 # Common DBA Miscellaneous Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
 
-This section describes how you can perform miscellaneous DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
+Following, you can find how to perform miscellaneous DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
 **Topics**
 + [Creating New Directories in the Main Data Storage Space](#Appendix.Oracle.CommonDBATasks.NewDirectories)

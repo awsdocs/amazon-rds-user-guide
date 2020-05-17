@@ -322,13 +322,13 @@ The `rds_fn_task_status` function returns the following information\.
 | `duration (mins)` | The amount of time spent on the task, in minutes\. | 
 | `lifecycle` |  The status of the task\. Possible statuses are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.SQLServer.Options.SSAS.html)  | 
 | `task_info` | Additional information about the task\. If an error occurs during processing, this column contains information about the error\.  | 
-| `last_updated ` | The date and time that the task status was last updated\.  | 
-| `created_at ` | The date and time that the task was created\. | 
+| `last_updated` | The date and time that the task status was last updated\.  | 
+| `created_at` | The date and time that the task was created\. | 
 | `S3_object_arn` |  Not applicable to SSAS tasks\.  | 
-| `overwrite_S3_backup_file ` | Not applicable to SSAS tasks\. | 
+| `overwrite_S3_backup_file` | Not applicable to SSAS tasks\. | 
 | `KMS_master_key_arn` |  Not applicable to SSAS tasks\.  | 
 | `filepath` |  Not applicable to SSAS tasks\.  | 
-| `overwrite_file ` |  Not applicable to SSAS tasks\.  | 
+| `overwrite_file` |  Not applicable to SSAS tasks\.  | 
 | `task_metadata` | Metadata associated with the SSAS task\. | 
 
 ## Using SSAS on Amazon RDS<a name="Appendix.SQLServer.Options.SSAS.Use"></a>
