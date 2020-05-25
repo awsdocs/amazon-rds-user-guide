@@ -2,7 +2,7 @@
 
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a DB instance by restoring from this DB snapshot\. When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
 
-You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from Magnetic \(Standard\) storage, the migration process is the slowest\. That's because Magnetic storage doesn't have the IOPS capability of Provisioned IOPS or General Purpose \(SSD\) storage\.
+You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from magnetic storage, the migration process is the slowest\. That's because magnetic storage doesn't have the IOPS capability of Provisioned IOPS or General Purpose \(SSD\) storage\.
 
 **Note**  
 You can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\.

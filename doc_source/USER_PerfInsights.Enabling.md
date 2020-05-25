@@ -2,6 +2,8 @@
 
 To use Performance Insights, you must enable it on your DB instance\.
 
+The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
+
 ## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
 You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.
@@ -132,4 +134,4 @@ When you change the value of the `performance_schema` parameter, a DB instance r
 
 Without the Performance Schema enabled, Performance Insights displays database load broken down by the list state of the MySQL process\. With Performance Schema enabled, Performance Insights displays database load broken down by detailed wait events\.
 
-For more information, see [Using the Performance Insights Dashboard](USER_PerfInsights.UsingDashboard.md)\.
+For more information about the dashboard, see [Using the Performance Insights Dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.

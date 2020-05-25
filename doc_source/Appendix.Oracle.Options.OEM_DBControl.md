@@ -36,7 +36,7 @@ The general process for adding the OEM option to a DB instance is the following:
 
 1. Associate the option group with the DB instance\.
 
-When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you add the OEM option, you don't need to restart your DB instance\. As soon as the option group is active, the OEM Database is active\. When you add the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
+When you add the OEM option for an Oracle 11g DB instance, no outage occurs, so you don't need to restart your DB instance\. However, when you add the OEM option for an Oracle 12c, Oracle 18c, or Oracle 19c DB instance, a brief outage occurs while your DB instance is automatically restarted\. 
 
 **To add the OEM option to a DB instance**
 

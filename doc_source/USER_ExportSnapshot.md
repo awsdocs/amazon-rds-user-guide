@@ -2,9 +2,12 @@
 
 You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
 
-When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\. 
+When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
-You can export all types of DB snapshots including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\. 
+You can export all types of DB snapshots including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
+
+**Note**  
+Exporting snapshots from DB instances that use magnetic storage isn't supported\.
 
 Exporting snapshots is supported in the following AWS Regions:
 + US East \(N\. Virginia\)
@@ -16,25 +19,14 @@ Exporting snapshots is supported in the following AWS Regions:
 **Note**  
 You can copy a snapshot from an AWS Region where S3 export isn't supported to one where it is supported, then export the copy\. The S3 bucket must be in the same AWS Region as the copy\.
 
-The following lists show the engine versions that are supported for exporting snapshot data to Amazon S3\.
+The following table shows the engine versions that are supported for exporting snapshot data to Amazon S3\.
 
-**MariaDB**
-+ 10\.0\.32 and higher
-+ 10\.1\.26 and higher
-+ 10\.2\.12 and higher
-+ 10\.3
 
-**MySQL**
-+ 5\.6\.40 and higher
-+ 5\.7\.24 and higher
-+ 8\.0\.13 and higher
+****  
 
-**PostgreSQL**
-+ 9\.4\.21 and higher
-+ 9\.5\.16 and higher
-+ 9\.6\.12 and higher
-+ 10\.7 and higher
-+ 11\.2 and higher
+| MariaDB | MySQL | PostgreSQL | 
+| --- | --- | --- | 
+|  10\.3 10\.2\.12 and higher 10\.1\.26 and higher 10\.0\.32 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  11\.2 and higher 10\.7 and higher 9\.6\.12 and higher 9\.5\.16 and higher 9\.4\.21 and higher  | 
 
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS Versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)

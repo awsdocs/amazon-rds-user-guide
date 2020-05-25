@@ -5,7 +5,7 @@ Amazon RDS supports DB instances running several versions and editions of Micros
 + SQL Server 2016 SP2 CU11 13\.00\.5598\.27, released per [KB4527378](https://support.microsoft.com/en-us/help/4527378/cumulative-update-11-for-sql-server-2016-sp2) on December 9, 2019\.
 + SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
 + SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
-+ SQL Server 2008: It's no longer possible to provision new instances in any region\. Amazon RDS is actively migrating existing instances off this version\.
++ SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
 
 For information about licensing for SQL Server, see [Licensing Microsoft SQL Server on Amazon RDS](SQLServer.Concepts.General.Licensing.md)\. For information about SQL Server builds, see this Microsoft support article about [the latest SQL Server builds](https://support.microsoft.com/en-us/help/957826)\.
 

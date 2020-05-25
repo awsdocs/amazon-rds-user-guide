@@ -1,16 +1,13 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
-Amazon RDS supports DB instances running several versions and editions of Oracle Database\. You can use the following versions and editions: 
+Amazon RDS supports DB instances that run the following versions and editions of Oracle Database: 
 + Oracle 19c, Version 19\.0\.0\.0
 + Oracle 18c, Version 18\.0\.0\.0
 + Oracle 12c, Version 12\.2\.0\.1
 + Oracle 12c, Version 12\.1\.0\.2
-+ Oracle 11g, Version 11\.2\.0\.4
 
-Amazon RDS also currently supports the following versions and editions that are on deprecation paths, because Oracle no longer provides patches for them: 
-+ Oracle 12c, Version 12\.1\.0\.1 \([Deprecation of Oracle 12\.1\.0\.1](#Oracle.Concepts.Deprecate.12101)\) 
-+ Oracle 11g, Version 11\.2\.0\.3 \([Deprecation of Oracle 11\.2\.0\.3](#Oracle.Concepts.Deprecate.11203)\) 
-+ Oracle 11g, Version 11\.2\.0\.2 \([Deprecation of Oracle 11\.2\.0\.2](#Oracle.Concepts.Deprecate.11202)\) 
+**Note**  
+Amazon RDS also currently supports Oracle 11g, Version 11\.2\.0\.4 \([Deprecation of Oracle 11\.2\.0\.4](#Oracle.Concepts.Deprecate.11204)\)\. This version is on a deprecation path because Oracle will no longer provides patches for 11\.2\.0\.4 after the end\-of\-support date\.
 
 You can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
 
@@ -610,7 +607,7 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 
 In Amazon RDS, you manage parameters using parameter groups\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle edition and version, you can run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
 
-For example, to view the supported parameters for Oracle Enterprise Edition version 12\.2, run the following command:
+For example, to view the supported parameters for Oracle Enterprise Edition version 12\.2, run the following command\.
 
 ```
 aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee-12.2
@@ -618,60 +615,27 @@ aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee
 
 ## Oracle Engine Version Management<a name="Oracle.Concepts.Patching"></a>
 
-DB Engine Version Management is a feature of Amazon RDS that enables you to control when and how the database engine software running your DB instances is patched and upgraded\. With this feature, you get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work effectively with your application before deploying them in production\. In addition, you can perform version upgrades on your own terms and timelines\. 
+With DB engine version management, you can control when and how the database engine software running your DB instances is patched and upgraded\. With this feature, you get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work effectively with your application before deploying them in production\. In addition, you can perform version upgrades on your own terms and timelines\. 
 
 **Note**  
-Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB Engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
+Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
 Currently, you perform all Oracle database upgrades manually\. For more information about upgrading an Oracle DB instance, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\. 
 
-### Deprecation of Oracle 11\.2\.0\.2<a name="Oracle.Concepts.Deprecate.11202"></a>
+### Deprecation of Oracle 11\.2\.0\.4<a name="Oracle.Concepts.Deprecate.11204"></a>
 
-In 2017, Amazon RDS is deprecating support for Oracle version 11\.2\.0\.2\. Oracle is no longer providing patches for this version\. Therefore, to provide the best experience for AWS customers, we are deprecating this version\. 
+Oracle Corporation intends to deprecate support for Oracle Database version 11\.2\.0\.4 on December 31, 2020\. On October 31, 2020, Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 SE1 using the License Included model\. On December 31, 2020, Amazon RDS plans to deprecate support for 11\.2\.0\.4 on all editions that use the Bring Your Own License model \(BYOL\)\.  
 
-There are no longer any production DB instances running Oracle version 11\.2\.0\.2\. You might still have a snapshot of an 11\.2\.0\.2 DB instance\. 
-
-Amazon RDS is deprecating support for Oracle version 11\.2\.0\.2 according to the following schedule\. 
+Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the following schedule, which includes upgrade recommendations\. 
 
 
-****  
-
-| Date | Information | 
-| --- | --- | 
-|  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.2\.   | 
-|  December 18, 2019  |  Any 11\.2\.0\.2 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
-
-### Deprecation of Oracle 11\.2\.0\.3<a name="Oracle.Concepts.Deprecate.11203"></a>
-
-In 2017, Amazon RDS is deprecating support for Oracle version 11\.2\.0\.3\. Oracle is no longer providing patches for this version\. Therefore, to provide the best experience for AWS customers, we are deprecating this version\. 
-
-There are no longer any production DB instances running Oracle version 11\.2\.0\.3\. You might still have a snapshot of an 11\.2\.0\.3 DB instance\.   
-
-Amazon RDS is deprecating support for Oracle version 11\.2\.0\.3 according to the following schedule\. 
-
-
-****  
-
-| Date | Information | 
-| --- | --- | 
-|  August 4, 2016  |  You can no longer create DB instances that use Oracle version 11\.2\.0\.3\.   | 
-|  December 18, 2019  |  Any 11\.2\.0\.3 snapshots are upgraded to 11\.2\.0\.4\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
-
-### Deprecation of Oracle 12\.1\.0\.1<a name="Oracle.Concepts.Deprecate.12101"></a>
-
-In 2017, Amazon RDS is deprecating support for Oracle version 12\.1\.0\.1\. Oracle is no longer providing patches for this version\. Therefore, to provide the best experience for AWS customers, we are deprecating this version\. 
-
-There are no longer any production DB instances running Oracle version 12\.1\.0\.1\. You might still have a snapshot of a 12\.1\.0\.1 DB instance\. 
-
-Amazon RDS will deprecate support for Oracle version 12\.1\.0\.1 according to the following schedule\. 
-
-
-****  
-
-| Date | Information | 
-| --- | --- | 
-|  February 15, 2017  |  You can no longer create DB instances that use Oracle version 12\.1\.0\.1\.   | 
-|  December 18, 2019  |  Any 12\.1\.0\.1 snapshots are upgraded to 12\.1\.0\.2\.  You can upgrade your snapshots yourself prior to this date\. For more information, see [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.   | 
+| Action or Recommendation | 11\.2\.0\.4 on SE1 with License Included | 11\.2\.0\.4 on EE, SE, and SE1 with BYOL | 
+| --- | --- | --- | 
+|  We recommend that you upgrade 11\.2\.0\.4 DB instances manually to the version of your choice\.   |  Now–October 31, 2020  |  Now–December 31, 2020  | 
+|  We recommend that you upgrade 11\.2\.0\.4 snapshots manually to the version of your choice\.  |  August 1–January 31, 2021  |  October 1, 2020–March 31, 2021  | 
+|  You can no longer create new instances with Amazon RDS for Oracle with the listed version\.  |  August 1, 2020  |  October 1, 2020  | 
+|  Amazon RDS for Oracle starts automatic upgrades of your DB instances to version 19c\.  |  November 1, 2020  |  January 1, 2021  | 
+|  Amazon RDS for Oracle starts automatic upgrades to version 19c for any DB instances restored from snapshots\.  |  November 1, 2020–January 31, 2021  |  January 1–March 31, 2021  | 
 
 ## Using Huge Pages with an Oracle DB Instance<a name="Oracle.Concepts.HugePages"></a>
 
@@ -713,6 +677,9 @@ To enable huge pages for new or existing DB instances manually, set the `use_lar
 You can also set the `sga_target`, `sga_max_size`, and `pga_aggregate_target` parameters\. When you set system global area \(SGA\) and program global area \(PGA\) memory parameters, add the values together\. Subtract this total from your available instance memory \(`DBInstanceClassMemory`\) to determine the free memory beyond the huge pages allocation\. You must leave free memory of at least 2 GiB, or 10 percent of the total available instance memory, whichever is smaller\. 
 
 After you configure your parameters, you must reboot your DB instance for the changes to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+
+**Note**  
+The Oracle DB instance defers changes to SGA\-related initialization parameters until you reboot the instance without failover\. In the Amazon RDS console, choose **Reboot** but *do not* choose **Reboot with failover**\. In the AWS CLI, call the `reboot-db-instance` command with the `--no-force-failover` parameter\. The DB instance does not process the SGA\-related parameters during failover or during other maintenance operations that cause the instance to restart\.
 
 The following is a sample parameter configuration for huge pages that enables huge pages manually\. You should set the values to meet your needs\. 
 

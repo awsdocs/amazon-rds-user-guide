@@ -204,7 +204,7 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 
 1. Choose the log stream that you want to view from the list of log streams\.
 
-### Available OS Metrics<a name="w54aac21c17c21b7"></a>
+### Available OS Metrics<a name="USER_Monitoring-Available-OS-Metrics"></a>
 
 The following tables list the OS metrics available using Amazon CloudWatch Logs\.
 
