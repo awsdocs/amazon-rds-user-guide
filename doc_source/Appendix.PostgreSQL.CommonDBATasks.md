@@ -764,6 +764,12 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
    CREATE EXTENSION pg_repack;           
    ```
 
+1. Add permissions to prevent repack.log write  permission errors since RDS uses a pseudo superuser
+```
+ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT INSERT ON TABLES TO PUBLIC;
+ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT USAGE, SELECT ON SEQUENCES TO PUBLIC;
+```
+
 1. Use the pg\_repack client utility to connect to a database\. Use a database role that has *rds\_superuser* privileges to connect to the database\. In the following connection example, the *rds\_test* role has *rds\_superuser* privileges, and the database endpoint used is *rds\-test\-instance\.cw7jjfgdr4on8\.us\-west\-2\.rds\.amazonaws\.com*\.
 
    ```
