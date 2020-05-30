@@ -13,6 +13,7 @@ Some DB engines offer additional features that make it easier to manage data and
 |  `Microsoft SQL Server`  |  [Options for the Microsoft SQL Server Database Engine](Appendix.SQLServer.Options.md)  | 
 |  `MySQL`  |  [Options for MySQL DB Instances](Appendix.MySQL.Options.md)  | 
 |  `Oracle`  |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
+|  `PostgreSQL`  |  PostgreSQL does not use options and option groups\. PostgreSQL uses extensions and modules to provide additional features\. For more information, see [Supported PostgreSQL Features and Extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeaturesExtensions)\.  | 
 
 ## Option Groups Overview<a name="Overview.OptionGroups"></a>
 

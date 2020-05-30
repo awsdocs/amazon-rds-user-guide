@@ -178,6 +178,7 @@ The following limitations apply to RDS Proxy during the public preview:
   + Asia Pacific \(Singapore\) Region
   + Asia Pacific \(Sydney\) Region
   + Asia Pacific \(Tokyo\) Region
+  + Canada \(Central\) Region
   + Europe \(Frankfurt\) Region
   + Europe \(Ireland\) Region
   + Europe \(London\) Region
@@ -410,20 +411,12 @@ aws rds create-db-proxy ^
     [--tags comma_separated_list]
 ```
 
- To create the required information and associations for the proxy, you also use the [ `create-db-proxy-target-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-proxy-target-group.html) and [ `register-db-proxy-targets`](https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html) commands: 
-
-```
-aws rds create-db-proxy-target-group
-    --name target_group_name
-    --db-proxy-name proxy_name
-    --connection-pool-defaults ConnectionPoolConfiguration
-    --tags comma_separated_list
-```
+ To create the required information and associations for the proxy, you also use the [https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html](https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html) command\. Currently, all proxies have a single target group named `default`\. Aurora creates this target group automatically for each proxy\. 
 
 ```
 aws rds register-db-proxy-targets
     --db-proxy-name value
-    [--target-group-name target_group_name]
+    [--target-group-name default]
     [--db-instance-identifiers space_separated_list]  # rds db instances, or
     [--db-cluster-identifiers cluster_id]        # rds db cluster (all instances), or
     [--db-cluster-endpoint endpoint_name]          # rds db cluster endpoint (all instances)
@@ -433,7 +426,7 @@ aws rds register-db-proxy-targets
 
  To create an RDS Proxy, you call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBProxy.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBProxy.html)\. You pass a parameter with the [AuthConfig](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AuthConfig.html) data structure\. 
 
- You also create the associated target group by calling the function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBProxyTargetGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBProxyTargetGroup.html)\. Then you associate an RDS DB instance or Aurora DB cluster with the target group by calling the function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RegisterDBProxyTargets.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RegisterDBProxyTargets.html)\. 
+ Currently, all proxies have a single target group named `default`\. Aurora creates this target group automatically for each proxy\. You associate an RDS DB instance or Aurora DB cluster with the target group by calling the function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RegisterDBProxyTargets.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RegisterDBProxyTargets.html)\. 
 
 ### Viewing an RDS Proxy<a name="rds-proxy-viewing"></a>
 

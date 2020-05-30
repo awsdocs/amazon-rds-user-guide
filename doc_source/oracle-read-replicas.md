@@ -59,6 +59,8 @@ The following are limitations for Oracle read replicas:
   When you promote an Oracle cross\-Region read replica, the promoted read replica behaves the same as other Oracle DB instances, including the management of its options\. You can promote a read replica explicitly or implicitly by deleting its source DB instance\.
 
   For more information about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
++ A login trigger on a primary instance must permit access to the `RDS_DATAGUARD` user and to any user whose `AUTHENTICATED_ENTITY` is `RDS_DATAGUARD` or `rdsdb`\. Also, the trigger must not set the current schema for the `RDS_DATAGUARD` user\.
++ To avoid blocking connections from the Data Guard broker process, don't enable restricted sessions\. For more information about restricted sessions, see [Enabling and Disabling Restricted Sessions](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.RestrictedSession)\.
 
 ## Troubleshooting an Oracle Read Replica Problem<a name="oracle-read-replicas.troubleshooting"></a>
 

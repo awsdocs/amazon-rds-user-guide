@@ -358,7 +358,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    ```
    aws rds create-db-parameter-group \
        --db-parameter-group-name allow-triggers \
-       --db-parameter-group-family mysql15.5 \
+       --db-parameter-group-family mysql5.5 \
        --description "parameter group allowing triggers"
    ```
 
@@ -367,7 +367,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    ```
    aws rds create-db-parameter-group ^
        --db-parameter-group-name allow-triggers ^
-       --db-parameter-group-family mysql15.5 ^
+       --db-parameter-group-family mysql5.5 ^
        --description "parameter group allowing triggers"
    ```
 
@@ -378,7 +378,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    ```
    aws rds modify-db-parameter-group \
        --db-parameter-group-name allow-triggers \
-       --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
+       --parameters "ParameterName=log_bin_trust_function_creators, ParameterValue=true, ApplyMethod=pending-reboot"
    ```
 
    For Windows:
@@ -386,7 +386,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
    ```
    aws rds modify-db-parameter-group ^
        --db-parameter-group-name allow-triggers ^
-       --parameters "name=log_bin_trust_function_creators,value=true, method=pending-reboot"
+       --parameters "ParameterName=log_bin_trust_function_creators, ParameterValue=true, ApplyMethod=pending-reboot"
    ```
 
 1. Modify your DB instance to use the new DB parameter group\.
@@ -412,7 +412,7 @@ To create a new DB parameter group that allows you to create triggers in your RD
 1. For the changes to take effect, manually reboot the DB instance\.
 
    ```
-   aws rds reboot-db-instance mydbinstance 
+   aws rds reboot-db-instance --db-instance-identifier mydbinstance
    ```
 
 ### Diagnosing and Resolving Point\-In\-Time Restore Failures<a name="CHAP_Troubleshooting.MySQL.PITR"></a>

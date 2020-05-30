@@ -4,7 +4,6 @@ You can use Microsoft Windows Authentication to authenticate users when they con
 
 Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions except the following:
 + Middle East \(Bahrain\)
-+ China
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 

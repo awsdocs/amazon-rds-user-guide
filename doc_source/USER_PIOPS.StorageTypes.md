@@ -79,11 +79,14 @@ With storage autoscaling enabled, when Amazon RDS detects that you are running o
 The additional storage is in increments of whichever of the following is greater:
 + 5 GiB
 + 10 percent of currently allocated storage
-+ Storage growth prediction based on the `FreeStorageSpace` metrics change in the past hour\. For more information on metrics, see [ Monitoring with Amazon CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MonitoringOverview.html#monitoring-cloudwatch)\.
++ Storage growth prediction for 7 hours based on the `FreeStorageSpace` metrics change in the past hour\. For more information on metrics, see [Monitoring with Amazon CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MonitoringOverview.html#monitoring-cloudwatch)\.
 
 The maximum storage threshold is the limit to which the DB instance can be autoscaled\. You can't set the maximum storage threshold for autoscaling\-enabled instances to a value greater than the maximum allocated storage\.
 
 For example, SQL Server Standard Edition on db\.m5\.xlarge has a default allocated storage for the instance of 20 GiB \(the minimum\) and a maximum allocated storage of 16,384 GiB\. The default maximum storage threshold for autoscaling is 1,000 GiB\. If you use this default, the instance doesn't autoscale above 1,000 GiB\. This is true even though the maximum allocated storage for the instance is 16,384 GiB\.
+
+**Note**  
+We recommend that you carefully choose the maximum storage threshold based on usage patterns and customer needs\. If there are any aberrations in the usage patterns, the maximum storage threshold can prevent scaling storage to an unexpectedly high value when autoscaling predicts a very high threshold\. After a DB instance has been autoscaled, its allocated storage can't be reduced\.
 
 The following limitations apply to storage autoscaling:
 + Autoscaling doesn't occur if the maximum storage threshold would be exceeded by the storage increment\.

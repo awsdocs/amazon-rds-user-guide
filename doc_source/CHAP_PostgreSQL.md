@@ -289,8 +289,6 @@ PostgreSQL version 10\.11 contains several bug fixes for issues in release 10\.1
 
 1. Added the `plprofiler` extension\.
 
-1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
-
 ##### PostgreSQL Version 10\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version1010"></a>
 
 PostgreSQL version 10\.10 contains several bug fixes for issues in release 10\.9\. For more information on the fixes in PostgreSQL 10\.10, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-10.html)\. Changes in this version include the following:
@@ -418,9 +416,7 @@ PostgreSQL version 9\.6\.17 contains several bug fixes for issues in release 9\.
 
 ##### PostgreSQL Version 9\.6\.16 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9616"></a>
 
-PostgreSQL version 9\.6\.16 contains several bug fixes for issues in release 9\.6\.15\. For more information on the fixes in PostgreSQL 9\.6\.16, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\. Changes in this version include the following:
-
-1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+PostgreSQL version 9\.6\.16 contains several bug fixes for issues in release 9\.6\.15\. For more information on the fixes in PostgreSQL 9\.6\.16, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/release-9-6-16.html)\. 
 
 ##### PostgreSQL Version 9\.6\.15 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9615"></a>
 
@@ -574,9 +570,7 @@ PostgreSQL version 9\.5\.21 contains several bug fixes for issues in release 9\.
 
 ##### PostgreSQL Version 9\.5\.20 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9520"></a>
 
-PostgreSQL version 9\.5\.20 contains several bug fixes for issues in release 9\.6\.19\. For more information on the fixes in PostgreSQL 9\.5\.20, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.5/release-9-5-20.html)\. Changes in this version include the following:
-
-1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+PostgreSQL version 9\.5\.20 contains several bug fixes for issues in release 9\.6\.19\. For more information on the fixes in PostgreSQL 9\.5\.20, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.5/release-9-5-20.html)\. 
 
 ##### PostgreSQL Version 9\.5\.19 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9519"></a>
 
@@ -722,9 +716,7 @@ RDS PostgreSQL version 9\.5\.2 includes the following new extensions:
 
 ##### PostgreSQL Version 9\.4\.25 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9425"></a>
 
-PostgreSQL version 9\.4\.25 contains several bug fixes for issues in release 9\.4\.24\. For more information on the fixes in PostgreSQL 9\.4\.25, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.4/release-9-4-25.html)\. Changes in this version include the following:
-
-1. Added to `shared_preload_libraries` support for `pg_prewarm` to start automatically\.
+PostgreSQL version 9\.4\.25 contains several bug fixes for issues in release 9\.4\.24\. For more information on the fixes in PostgreSQL 9\.4\.25, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.4/release-9-4-25.html)\.
 
 ##### PostgreSQL Version 9\.4\.24 on Amazon RDS<a name="PostgreSQL.Concepts.General.version9424"></a>
 
