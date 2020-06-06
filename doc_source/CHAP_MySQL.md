@@ -214,7 +214,7 @@ Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\
 | --- | --- | --- | --- | 
 |  MySQL 8\.0  |  Supported  |  Supported  |  Supported  | 
 |  MySQL 5\.7  |  Supported  |  Supported  |  Supported for MySQL 5\.7\.21 and later  | 
-|  MySQL 5\.6  |  Supported  |  Not supported  |  Not supported  | 
+|  MySQL 5\.6  |  Supported  |  Supported for MySQL 5\.6\.46 and later  |  Supported for MySQL 5\.6\.46 and later  | 
 |  MySQL 5\.5  |  Supported  |  Not supported  |  Not supported  | 
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\. 

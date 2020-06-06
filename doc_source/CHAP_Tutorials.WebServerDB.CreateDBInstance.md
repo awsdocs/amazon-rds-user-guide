@@ -1,9 +1,9 @@
-# Step 1: Create an RDS DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance"></a>
+# Create a DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance"></a>
 
-In this step, you create an Amazon RDS MySQL DB instance that maintains the data used by a web application\. 
+In this step, you create an Amazon RDS for MySQL DB instance that maintains the data used by a web application\. 
 
 **Important**  
-Before you begin this step, you must have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Complete the steps in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets), [Create Additional Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets), [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), and [ Create a VPC Security Group for a Private DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)\. 
+Before you begin this step, make sure that you have a VPC with both public and private subnets, and corresponding security groups\. If you don't have these, see [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Complete the steps in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets), [Create Additional Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets), [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), and [ Create a VPC Security Group for a Private DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB)\. 
 
 **Note**  
 A new console interface is available for database creation\. Choose either the **New Console** or the **Original Console** instructions based on the console that you are using\. The **New Console** instructions are open by default\.
@@ -14,7 +14,7 @@ A new console interface is available for database creation\. Choose either the *
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the upper\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. This example uses the US West \(Oregon\) Region\.
+1. In the upper\-right corner of the AWS Management Console, choose the AWS Region where you want to create the DB instance\. This example uses the US West \(Oregon\) Region\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -55,7 +55,7 @@ The VPC must have subnets in different Availability Zones\.
 
 1. Open the **Additional configuration** section, and enter **sample** for **Initial database name**\. Keep the default settings for the other options\.
 
-1. To create your Amazon RDS MySQL DB instance, choose **Create database**\.
+1. Choose **Create database** to create your RDS MySQL DB instance\.
 
    Your new DB instance appears in the **Databases** list with the status **Creating**\.
 
@@ -64,9 +64,11 @@ The VPC must have subnets in different Availability Zones\.
 1. In the **Connectivity & security** section, view the **Endpoint** and **Port** of the DB instance\.  
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_Endpoint_Port.png)
 
-   Note the endpoint and port for your DB instance\. You use this information to connect your web server to your RDS DB instance\.
+   Note the endpoint and port for your DB instance\. You use this information to connect your web server to your DB instance\.
 
-To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your RDS MySQL DB instance\. 
+   To make sure that your DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your DB instance\. 
+
+1. Complete [Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)\.
 
 ## Original Console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.CurrentConsole"></a>
 
@@ -74,7 +76,7 @@ To make sure your RDS MySQL DB instance is as secure as possible, verify that so
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the top\-right corner of the AWS Management Console, choose the AWS Region in which you want to create the DB instance\. This example uses the US West \(Oregon\) region\.
+1. In the top\-right corner of the AWS Management Console, choose the AWS Region where you want to create the DB instance\. This example uses the US West \(Oregon\) Region\.
 
 1. In the navigation pane, choose **Databases**\.
 
@@ -112,16 +114,18 @@ The VPC must have subnets in different Availability Zones\.
      Remove other security groups, such as the default security group, by choosing the **X** associated with each\.
    + **Database name:** `sample`
 
-   Leave the default settings for the other options\.  
+   Keep the default settings for the other options\.  
 ![\[Configure Advanced Settings Panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Tutorial_WebServer_09.png)
 
-1. To create your Amazon RDS MySQL DB instance, choose **Create database**\.
+1. Choose **Create database** to create your RDS MySQL DB instance\.
 
-1. On the next page, choose **View DB instances details** to view your RDS MySQL DB instance\.
+1. On the next page, choose **View DB instances details** to view your DB instance\.
 
 1. Wait for the **DB instance status** of your new DB instance to show as **available**\. Then scroll to the **Connect** section, shown following\.  
 ![\[DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Tutorial_WebServer_10.png)
 
-   Make note of the endpoint and port for your DB instance\. You will use this information to connect your web server to your RDS DB instance\.
+   Note the endpoint and port for your DB instance\. You use this information to connect your web server to your DB instance\.
 
-To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 
+   To make sure that your DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your DB instance\. 
+
+1. Complete [Create an EC2 Instance and Install a Web Server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)\.

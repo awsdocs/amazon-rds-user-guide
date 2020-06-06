@@ -88,6 +88,9 @@ Before you export DB snapshot data to Amazon S3, give the snapshot export tasks 
 
 To do this, create an IAM policy that provides access to the bucket\. Then create an IAM role and attach the policy to the role\. You later assign the IAM role to your snapshot export task\.
 
+**Important**  
+If you plan to use the AWS Management Console to export your snapshot, you can choose to create the IAM policy and the role automatically when you export the snapshot\. For instructions, see [Exporting a Snapshot to an Amazon S3 Bucket](#USER_ExportSnapshot.Exporting)\.
+
 **To give DB snapshot tasks access to Amazon S3**
 
 1. Create an IAM policy\. This policy provides the bucket and object permissions that allow your snapshot export task to access Amazon S3\. 
@@ -202,7 +205,9 @@ You can export a DB snapshot to Amazon S3 using the AWS Management Console, the 
 
    To assign the exported data to a folder path in the S3 bucket, enter the optional path for **S3 prefix**\.
 
-1. For **IAM role**, choose a role that grants you write access to your chosen S3 bucket\. If you created a role by following the steps in [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
+1. For **IAM role**, either choose a role that grants you write access to your chosen S3 bucket, or create a new role\. 
+   + If you created a role by following the steps in [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
+   + If you didn't create a role that grants you write access to your chosen S3 bucket, choose **Create a new role** to create the role automatically\. Next, enter a name for the role in **IAM role name**\.
 
 1. For **Master key**, enter the ARN for the key to use for encrypting the exported data\.
 

@@ -2,7 +2,7 @@
 
 Oracle GoldenGate \(GoldenGate\) is used to collect, replicate, and manage transactional data between databases\. It is a log\-based change data capture \(CDC\) and replication software package used with Oracle databases for online transaction processing \(OLTP\) systems\. GoldenGate creates trail files that contain the most recent changed data from the source database and then pushes these files to the target database\. You can use GoldenGate with Amazon RDS for Active\-Active database replication, zero\-downtime migration and upgrades, disaster recovery, data protection, and in\-region and cross\-region replication\. 
 
-The following are important points to know when working with GoldenGate on Amazon RDS: 
+When working with GoldenGate on Amazon RDS, consider the following: 
 + You are responsible for setting up and managing GoldenGate for use with Amazon RDS\. 
 + You are responsible for managing GoldenGate licensing \(bring\-your\-own\-license\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 + Amazon RDS supports GoldenGate for Oracle Database Standard Edition Two \(SE2\), Standard Edition One \(SE1\), Standard Edition \(SE\), and Enterprise Edition \(EE\)\. 
@@ -114,9 +114,11 @@ Once you have completed these steps, the GoldenGate hub is ready for use\. Next,
 
 1. Add a TNS alias for the source database to the `tnsnames.ora` file on the GoldenGate hub\.
 
-Make sure that the source database has the `compatible` parameter set to 11\.2\.0\.4 or later\. If you use an Oracle database on an Amazon RDS DB instance as the source, make sure that you have a parameter group with `compatible` set to 11\.2\.0\.4 or later associated with the DB instance\. If you change the `compatible` parameter in a parameter group associated with the DB instance, the change requires an instance reboot\. 
+### Set COMPATIBLE on the Source DB<a name="Appendix.OracleGoldenGate.Source.Compatible"></a>
 
-You can use the following Amazon RDS CLI commands to create a new parameter group and set the `compatible` parameter\. Make sure that you associate the new parameter group with the source DB instance\.
+Make sure that the source database has the `COMPATIBLE` initialization parameter set to 11\.2\.0\.4 or later\. If you use an Oracle database on an Amazon RDS DB instance as the source, make sure that you have a parameter group with `COMPATIBLE` set to 11\.2\.0\.4 or later associated with the DB instance\. If you change the `COMPATIBLE` parameter in a parameter group associated with the DB instance, the change requires an instance reboot\. 
+
+Use the following Amazon RDS CLI commands to create a new parameter group and set the `COMPATIBLE` parameter\. Make sure that you associate the new parameter group with the source DB instance\.
 
 For Linux, macOS, or Unix:
 
@@ -160,11 +162,15 @@ aws rds reboot-db-instance ^
     --db-instance-identifier example-test
 ```
 
-Always retain the parameter group with the `compatible` parameter\. If you restore an instance from a DB snapshot, make sure to modify the restored instance to use the parameter group that has a matching or greater `compatible` parameter value\. Do this modification as soon as possible after the restore action\. It requires a reboot of the instance\.
+Always retain the parameter group with the `COMPATIBLE` parameter\. If you restore an instance from a DB snapshot, modify the restored instance to use the parameter group that has a matching or greater `COMPATIBLE` parameter value\. Do this modification as soon as possible after the restore action\. It requires a reboot of the instance\.
+
+### Enable Supplemental Logging on the Source DB<a name="Appendix.OracleGoldenGate.Source.Logging"></a>
 
 The `ENABLE_GOLDENGATE_REPLICATION` parameter, when set to *True*, turns on supplemental logging for the source database and configures the required GoldenGate permissions\. If your source database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with `ENABLE_GOLDENGATE_REPLICATION` set to *true*\. For more information about `ENABLE_GOLDENGATE_REPLICATION`, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\.
 
-The source database must also retain archived redo logs\. For example, the following command sets the retention period for archived redo logs to 24 hours\.
+### Set the Log Retention Period on the Source DB<a name="Appendix.OracleGoldenGate.Source.Retention"></a>
+
+The source database must also retain archived redo logs\. For example, set the retention period for archived redo logs to 24 hours\.
 
 ```
 exec rdsadmin.rdsadmin_util.set_configuration('archivelog retention hours',24); 
@@ -180,12 +186,14 @@ opening redo log /rdsdbdata/db/GGTEST3_A/onlinelog/o1_mf_2_9k4bp1n6_.log
 for sequence 1306Not able to establish initial position for begin time 2014-03-06 06:16:55.
 ```
 
-Because these logs are retained on your DB instance, you need to ensure that you have enough storage available on your instance to accommodate the log files\. To see how much space you have used in the last "X" hours, use the following query, replacing "X" with the number of hours\.
+The logs are retained on your DB instance\. Ensure that you have sufficient storage on your instance for the files\. To see how much space you have used in the last *X* hours, use the following query, replacing *X* with the number of hours\.
 
 ```
 select sum(blocks * block_size) bytes from v$archived_log 
    where next_time>=sysdate-X/24 and dest_id=1;
 ```
+
+### Create a User Account on the Source<a name="Appendix.OracleGoldenGate.Source.Account"></a>
 
 GoldenGate runs as a database user and requires the appropriate database privileges to access the redo and archive logs for the source database\. To provide these, create a GoldenGate user account on the source database\. For more information about the permissions for a GoldenGate user account, see the sections 4, section 4\.4, and table 4\.1 in the [Oracle documentation](http://docs.oracle.com/cd/E35209_01/doc.1121/e35957.pdf)\.
 
@@ -197,7 +205,9 @@ CREATE USER oggadm1  IDENTIFIED BY "XXXXXX"  
    default tablespace ADMINISTRATOR temporary tablespace TEMP;
 ```
 
-Finally, grant the necessary privileges to the GoldenGate user account\. The following statements grant privileges to a user named *oggadm1*\.
+### Grant Account Privileges on the Source DB<a name="Appendix.OracleGoldenGate.Source.Privileges"></a>
+
+Grant the necessary privileges to the GoldenGate user account using the SQL command `grant` and the `rdsadmin.rdsadmin_util` procedure `grant_sys_object`\. The following statements grant privileges to a user named *oggadm1*\.
 
 ```
 grant create session, alter session to oggadm1;
@@ -206,30 +216,42 @@ grant select any dictionary to oggadm1;
 grant flashback any table to oggadm1;
 grant select any table to oggadm1;
 grant select_catalog_role to <RDS instance master username> with admin option;
-exec RDSADMIN.RDSADMIN_UTIL.GRANT_SYS_OBJECT ('DBA_CLUSTERS', 'OGGADM1');
+exec rdsadmin.rdsadmin_util.grant_sys_object ('DBA_CLUSTERS', 'OGGADM1');
 grant execute on dbms_flashback to oggadm1;
 grant select on SYS.v_$database to oggadm1;
 grant alter any table to oggadm1;
-
-EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
-   privilege_type=>'capture',
-   grant_select_privileges=>true, 
-   do_grants=>TRUE);
 ```
 
-Add the following entry to `$ORACLE_HOME/network/admin/tnsnames.ora` in the Oracle Home to be used by the `EXTRACT` process\. For more information on the `tnsname.ora` file, see the [Oracle documentation](http://docs.oracle.com/cd/B28359_01/network.111/b28317/tnsnames.htm#NETRF007)\.
+Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `DBMS_GOLDENGATE_AUTH` or `RDSADMIN_DBMS_GOLDENGATE_AUTH`, depends on the Oracle DB engine version\.
++ For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
+
+  ```
+  EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+     privilege_type=>'capture',
+     grant_select_privileges=>true, 
+     do_grants=>TRUE);
+  ```
++ For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
+
+  ```
+  EXEC RDSADMIN_DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+     privilege_type=>'capture',
+     grant_select_privileges=>true, 
+     do_grants=>TRUE);
+  ```
+
+### Add a TNS Alias for the Source DB<a name="Appendix.OracleGoldenGate.Source.TNS"></a>
+
+Add the following entry to `$ORACLE_HOME/network/admin/tnsnames.ora` in the Oracle Home to be used by the `EXTRACT` process\. For more information on the `tnsnames.ora` file, see the [Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-tns-ora-file.html#GUID-7F967CE5-5498-427C-9390-4A5C6767ADAA)\.
 
 ```
 OGGSOURCE=
-(DESCRIPTION= 
- (ENABLE=BROKEN)
-(ADDRESS_LIST= 
-   (ADDRESS=(PROTOCOL=TCP)(HOST=goldengate-source.abcdef12345.us-west-2.rds.amazonaws.com)(PORT=8200))
-)
-(CONNECT_DATA=
-   (SID=ORCL)
-)
-)
+   (DESCRIPTION= 
+        (ENABLE=BROKEN)
+        (ADDRESS_LIST= 
+            (ADDRESS=(PROTOCOL=TCP)(HOST=goldengate-source.abcdef12345.us-west-2.rds.amazonaws.com)(PORT=8200)))
+        (CONNECT_DATA=(SID=ORCL))
+    )
 ```
 
 ## Setting Up a Target Database for Use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Target"></a>
@@ -238,13 +260,15 @@ The following tasks set up a target DB instance for use with GoldenGate:
 
 1. Set the `compatible` parameter to 11\.2\.0\.4 or later
 
-1.  Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. If your target database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the ENABLE\_GOLDENGATE\_REPLICATION parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346) \. 
+1.  Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. If your target database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\. 
 
 1. Create and manage a GoldenGate user account on the target database
 
 1. Grant the necessary privileges to the GoldenGate user
 
 1. Add a TNS alias for the target database to tnsnames\.ora on the GoldenGate hub\.
+
+### Create a User Account on the Target DB<a name="Appendix.OracleGoldenGate.Target.User"></a>
 
  GoldenGate runs as a database user and requires the appropriate database privileges\. To make sure it has these, create a GoldenGate user account on the target database\.
 
@@ -260,19 +284,21 @@ alter user oggadm1 quota unlimited on ADMINISTRATOR;
 alter user oggadm1 quota unlimited on ADMINISTRATOR_IDX;
 ```
 
-Finally, grant the necessary privileges to the GoldenGate user account\. The following statements grant privileges to a user named *oggadm1*:
+### Grant Account Privileges on the Target DB<a name="Appendix.OracleGoldenGate.Target.Privileges"></a>
+
+Grant necessary privileges to the GoldenGate user account on the target DB\. In the following example, you grant privileges to *oggadm1*\.
 
 ```
 grant create session        to oggadm1;
 grant alter session         to oggadm1;
-grant CREATE CLUSTER        to oggadm1;
-grant CREATE INDEXTYPE      to oggadm1;
-grant CREATE OPERATOR       to oggadm1;
-grant CREATE PROCEDURE      to oggadm1;
-grant CREATE SEQUENCE       to oggadm1;
-grant CREATE TABLE          to oggadm1;
-grant CREATE TRIGGER        to oggadm1;
-grant CREATE TYPE           to oggadm1;
+grant create cluster        to oggadm1;
+grant create indextype      to oggadm1;
+grant create operator       to oggadm1;
+grant create procedure      to oggadm1;
+grant create sequence       to oggadm1;
+grant create table          to oggadm1;
+grant create trigger        to oggadm1;
+grant create type           to oggadm1;
 grant select any dictionary to oggadm1;
 grant create any table      to oggadm1;
 grant alter any table       to oggadm1;
@@ -281,25 +307,38 @@ grant select any table      to oggadm1;
 grant insert any table      to oggadm1;
 grant update any table      to oggadm1;
 grant delete any table      to oggadm1;
-
-EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE 
-   (grantee=>'OGGADM1',privilege_type=>'apply',
-   grant_select_privileges=>true, do_grants=>TRUE);
 ```
 
-Add the following entry to `$ORACLE_HOME/network/admin/tnsnames.ora` in the Oracle Home to be used by the `REPLICAT` process\. For more information on the `tnsname.ora` file, see the [Oracle documentation](http://docs.oracle.com/cd/B28359_01/network.111/b28317/tnsnames.htm#NETRF007)\.
+Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `DBMS_GOLDENGATE_AUTH` or `RDSADMIN_DBMS_GOLDENGATE_AUTH`, depends on the Oracle DB engine version\.
++ For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
+
+  ```
+  EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+     privilege_type=>'capture',
+     grant_select_privileges=>true, 
+     do_grants=>TRUE);
+  ```
++ For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
+
+  ```
+  EXEC RDSADMIN_DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+     privilege_type=>'capture',
+     grant_select_privileges=>true, 
+     do_grants=>TRUE);
+  ```
+
+### Add a TNS Alias for the Target DB<a name="Appendix.OracleGoldenGate.Target.TNS"></a>
+
+Add the following entry to `$ORACLE_HOME/network/admin/tnsnames.ora` in the Oracle Home to be used by the `REPLICAT` process\. For more information on the `tnsname.ora` file, see the [Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-tns-ora-file.html#GUID-7F967CE5-5498-427C-9390-4A5C6767ADAA)\.
 
 ```
 OGGTARGET=
-(DESCRIPTION= 
- (ENABLE=BROKEN)
-(ADDRESS_LIST= 
-   (ADDRESS=(PROTOCOL=TCP)(HOST=goldengate-target.abcdef12345.us-west-2.rds.amazonaws.com)(PORT=8200))
-)
-(CONNECT_DATA=
-   (SID=ORCL)
-)
-)
+    (DESCRIPTION= 
+        (ENABLE=BROKEN)
+        (ADDRESS_LIST= 
+            (ADDRESS=(PROTOCOL=TCP)(HOST=goldengate-target.abcdef12345.us-west-2.rds.amazonaws.com)(PORT=8200)))
+        (CONNECT_DATA=(SID=ORCL))
+    )
 ```
 
 ## Working with the EXTRACT and REPLICAT Utilities of GoldenGate<a name="Appendix.OracleGoldenGate.ExtractReplicat"></a>

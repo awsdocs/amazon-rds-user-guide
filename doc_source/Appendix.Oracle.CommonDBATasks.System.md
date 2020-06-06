@@ -320,7 +320,7 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 | `p_min_digits` | number | 1 | No | The minimum number of digits required\. | 
 | `p_min_special` | number | 0 | No | The minimum number of special characters required\. | 
 | `p_min_different_chars` | number | 3 | No | The minimum number of different characters required between the old and new password\. | 
-| `p_disallow_username` | boolean | true | No | Set to `true` to disallow the username in the password\. | 
+| `p_disallow_username` | boolean | true | No | Set to `true` to disallow the user name in the password\. | 
 | `p_disallow_reverse` | boolean | true | No | Set to `true` to disallow the reverse of the user name in the password\. | 
 | `p_disallow_db_name` | boolean | true | No | Set to `true` to disallow the database or server name in the password\. | 
 | `p_disallow_simple_strings` | boolean | true | No | Set to `true` to disallow simple strings as the password\. | 
@@ -434,7 +434,7 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 + Ensure that your DNS server can resolve all lookup queries, including public DNS names, Amazon EC2 private DNS names, and customer\-specific DNS names\. If the outbound network traffic contains any DNS lookups that your DNS server can't handle, your DNS server must have appropriate upstream DNS providers configured\. 
 + Configure your DNS server to produce User Datagram Protocol \(UDP\) responses of 512 bytes or less\. 
 + Configure your DNS server to produce Transmission Control Protocol \(TCP\) responses of 1024 bytes or less\. 
-+ Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall whitelisting to allow UDP and TCP inbound traffic on port 53\. 
++ Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall allow\-listing \(whitelisting\) to allow UDP and TCP inbound traffic on port 53\.  
 
   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 + Configure the VPC of your Amazon RDS DB instance to allow outbound traffic over port 53\. Your VPC must have a security group that contains outbound rules that allow UDP and TCP traffic on port 53\. 

@@ -1,10 +1,10 @@
-# Step 2: Create an EC2 Instance and Install a Web Server<a name="CHAP_Tutorials.WebServerDB.CreateWebServer"></a>
+# Create an EC2 Instance and Install a Web Server<a name="CHAP_Tutorials.WebServerDB.CreateWebServer"></a>
 
-In this step you create a web server to connect to the Amazon RDS DB instance that you created in [Step 1: Create an RDS DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\. 
+In this step, you create a web server to connect to the Amazon RDS DB instance that you created in [Create a DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\. 
 
 ## Launch an EC2 Instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.LaunchEC2"></a>
 
-First you create an Amazon EC2 instance in the public subnet of your VPC\. 
+First, you create an Amazon EC2 instance in the public subnet of your VPC\. 
 
 **To launch an EC2 instance**
 
@@ -18,10 +18,10 @@ First you create an Amazon EC2 instance in the public subnet of your VPC\.
 **Important**  
 Don't choose **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
 
-1. Choose the `t2.small` instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
+1. Choose the **t2\.small** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
 
-1. On the **Configure Instance Details** page, shown following, set these values and leave the other values as their defaults:
+1. On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
    + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
    + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
    + **Auto\-assign Public IP:** Choose **Enable**\.  
@@ -36,7 +36,7 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 
 1. Choose **Next: Configure Security Group**\.
 
-1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**, and then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. The security group must include inbound rules for SSH and HTTP access\.   
+1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**\. Then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.   
 ![\[Configure Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_16.png)
 
 1. Choose **Review and Launch**\.
@@ -50,19 +50,19 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 1. To launch your EC2 instance, choose **Launch Instances**\. On the **Launch Status** page, shown following, note the identifier for your new EC2 instance, for example: `i-0288d65fd4470b6a9`\.  
 ![\[Launch Status\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_19.png)
 
-1. To find your instance, choose **View Instances**\.
+1. Choose **View Instances** to find your instance\. 
 
-1. Wait until **Instance Status** for your instance reads as `running` before continuing\. 
+1. Wait until **Instance Status** for your instance reads as **running** before continuing\. 
 
 ## Install an Apache Web Server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 
-Next you connect to your EC2 instance and install the web server\.
+Next, you connect to your EC2 instance and install the web server\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
-1. To connect to the EC2 instance that you created earlier, follow the steps in [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
+1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
 
-1. To get the latest bug fixes and security updates, update the software on your EC2 instance by using the following command:
+1. Get the latest bug fixes and security updates by updating the software on your EC2 instance\. To do this, use the following command\.
 **Note**  
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
 
@@ -70,13 +70,13 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    [ec2-user ~]$ sudo yum update -y
    ```
 
-1. After the updates complete, install the Apache web server with the PHP software package using the **yum install** command, which installs multiple software packages and related dependencies at the same time\.
+1. After the updates complete, install the Apache web server with the PHP software package using the `yum install` command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
    [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
    ```
-**Note**  
-If you receive the error `No package package-name available`, then your instance was not launched with the Amazon Linux AMI \(perhaps you are using the Amazon Linux 2 AMI instead\)\. You can view your version of Amazon Linux with the following command\.  
+
+   If you get the error message `No package package-name available`, then your instance was not launched with the Amazon Linux AMI\. You might be using the Amazon Linux 2 AMI instead\. You can view your version of Amazon Linux with the following command\.
 
    ```
    cat /etc/system-release
@@ -90,7 +90,9 @@ If you receive the error `No package package-name available`, then your instance
    [ec2-user ~]$ sudo service httpd start
    ```
 
-   You can test that your web server is properly installed and started by entering the public DNS name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. If you don't see the Apache test page, then verify that your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+   You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
+
+   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
@@ -100,26 +102,26 @@ The Apache test page appears only when there is no content in the document root 
    [ec2-user ~]$ sudo chkconfig httpd on
    ```
 
-To allow `ec2-user` to manage files in the default root directory for your Apache web server, you need to modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance, and then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
+To allow `ec2-user` to manage files in the default root directory for your Apache web server, modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance\. Then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
 
 **To set file permissions for the Apache web server**
 
 1. Add the `www` group to your EC2 instance with the following command\.
 
    ```
-   [ec2-user ~]$ sudo groupadd www
+   [ec2-user ~]$ sudo groupadd www                
    ```
 
 1. Add the `ec2-user` user to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo usermod -a -G www ec2-user
+   [ec2-user ~]$ sudo usermod -a -G www ec2-user                
    ```
 
-1. To refresh your permissions and include the new `www` group, log out\.
+1. Log out to refresh your permissions and include the new `www` group\.
 
    ```
-   [ec2-user ~]$ exit
+   [ec2-user ~]$ exit                
    ```
 
 1. Log back in again and verify that the `www` group exists with the `groups` command\.
@@ -132,7 +134,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo chgrp -R www /var/www
+   [ec2-user ~]$ sudo chgrp -R www /var/www                
    ```
 
 1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.
@@ -145,14 +147,14 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions\.
 
    ```
-   [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +
+   [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +                
    ```
 
-## Connect your Apache web server to your RDS DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
+## Connect Your Apache Web Server to Your DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
 
 Next, you add content to your Apache web server that connects to your Amazon RDS DB instance\.
 
-**To add content to the Apache web server that connects to your RDS DB instance**
+**To add content to the Apache web server that connects to your DB instance**
 
 1. While still connected to your EC2 instance, change the directory to `/var/www` and create a new subdirectory named `inc`\.
 
@@ -169,9 +171,9 @@ Next, you add content to your Apache web server that connects to your Amazon RDS
    [ec2-user ~]$ nano dbinfo.inc
    ```
 
-1. Add the following contents to the `dbinfo.inc` file, where *db\_instance\_endpoint* is the endpoint of your RDS MySQL DB instance, without the port, and *master password* is the master password for your RDS MySQL DB instance\.
+1. Add the following contents to the `dbinfo.inc` file\. Here, *db\_instance\_endpoint* is your DB instance endpoint, without the port, and *master password* is the master password for your DB instance\.
 **Note**  
-Placing the user name and password information in a folder that is not part of the document root for your web server reduces the possibility of your security information being exposed\.
+We recommend placing the user name and password information in a folder that isn't part of the document root for your web server\. Doing this reduces the possibility of your security information being exposed\.
 
    ```
    <?php
@@ -201,7 +203,7 @@ Placing the user name and password information in a folder that is not part of t
 
 1. Add the following contents to the `SamplePage.php` file:
 **Note**  
-Placing the user name and password information in a folder that is not part of the document root for your web server reduces the possibility of your security information being exposed\.
+We recommend placing the user name and password information in a folder that isn't part of the document root for your web server\. Doing this reduces the possibility of your security information being exposed\.
 
    ```
    <?php include "../inc/dbinfo.inc"; ?>
@@ -328,8 +330,8 @@ Placing the user name and password information in a folder that is not part of t
 
 1. Save and close the `SamplePage.php` file\.
 
-1. Verify that your web server successfully connects to your RDS MySQL DB instance by opening a web browser and browsing to `http://EC2 instance endpoint/SamplePage.php`, for example: `http://ec2-55-122-41-31.us-west-2.compute.amazonaws.com/SamplePage.php`\.
+1. Verify that your web server successfully connects to your DB instance by opening a web browser and browsing to `http://EC2 instance endpoint/SamplePage.php`, for example: `http://ec2-55-122-41-31.us-west-2.compute.amazonaws.com/SamplePage.php`\.
 
-You can use `SamplePage.php` to add data to your RDS MySQL DB instance\. The data that you add is then displayed on the page\. 
+You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. 
 
-To make sure your RDS MySQL DB instance is as secure as possible, verify that sources outside of the VPC cannot connect to your RDS MySQL DB instance\. 
+To make sure that your DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your DB instance\. 

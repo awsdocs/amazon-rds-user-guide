@@ -136,13 +136,16 @@ exec rdsadmin.rdsadmin_util.disable_distr_recovery;
 
 ## Setting the Database Time Zone<a name="Appendix.Oracle.CommonDBATasks.TimeZoneSupport"></a>
 
-There are two different ways that you can set the time zone of your Amazon RDS Oracle database: 
-+ You can use the `Timezone` option\. 
+You can set the time zone of your Amazon RDS Oracle database in the following ways: 
++ The `Timezone` option
 
-  The `Timezone` option changes the time zone at the host level and impacts all date columns and values such as `SYSDATE`\. For more information about the `Timezone` option, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
-+ You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_db_time_zone`\. 
+  The `Timezone` option changes the time zone at the host level and affects all date columns and values such as `SYSDATE`\. For more information, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
++ The Amazon RDS procedure `rdsadmin.rdsadmin_util.alter_db_time_zone`
 
   The `alter_db_time_zone` procedure changes the time zone for only certain data types, and doesn't change `SYSDATE`\. There are additional restrictions on setting the time zone listed in the [Oracle documentation](http://docs.oracle.com/cd/B19306_01/server.102/b14225/ch4datetime.htm#i1006705)\. 
+
+**Note**  
+You can also set the default time zone for Oracle Scheduler\. For more information, see [Setting the Time Zone for Oracle Scheduler Jobs](Appendix.Oracle.CommonDBATasks.Scheduler.md#Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone)\.
 
 The `alter_db_time_zone` procedure has the following parameters\. 
 
@@ -153,19 +156,19 @@ The `alter_db_time_zone` procedure has the following parameters\.
 | --- | --- | --- | --- | --- | 
 | `p_new_tz` | varchar2 | — | Yes |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
-The following example changes the time zone to UTC plus 3 hours\. 
+The following example changes the time zone to UTC plus three hours\. 
 
 ```
 exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => '+3:00');
 ```
 
-The following example changes the time zone to the time zone of the Africa/Algiers region\.
+The following example changes the time zone to the Africa/Algiers time zone\. 
 
 ```
 exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
 ```
 
-After you alter the time zone by using the `alter_db_time_zone` procedure, you must reboot the DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\. 
+After you alter the time zone by using the `alter_db_time_zone` procedure, reboot your DB instance for the change to take effect\. For more information, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
 ## Working with Oracle External Tables<a name="Appendix.Oracle.CommonDBATasks.External_Tables"></a>
 

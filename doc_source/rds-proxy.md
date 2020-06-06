@@ -183,6 +183,7 @@ The following limitations apply to RDS Proxy during the public preview:
   + Europe \(Ireland\) Region
   + Europe \(London\) Region
 +  You can have up to 20 proxies for each AWS account ID\. 
++  Each proxy can have up to 200 associated Secrets Manager secrets\. Thus, each proxy can connect to with up to 200 different user accounts at any given time\. 
 +  In an Aurora cluster, all of the connections in the connection pool are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you still use the reader endpoint directly for the Aurora cluster\. 
 + You can't use RDS Proxy with Aurora Serverless clusters\. 
 +  You can't use RDS Proxy with Aurora multi\-master clusters\. 

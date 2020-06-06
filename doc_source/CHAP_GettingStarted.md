@@ -13,4 +13,4 @@ Creating a DB instance and connecting to a database on a DB instance is slightly
 + [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md)
 + [Creating an Oracle DB Instance and Connecting to a Database on an Oracle DB Instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md)
 + [Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md)
-+ [Tutorial: Create a Web Server and an Amazon RDS Database](TUT_WebAppWithRDS.md)
++ [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md)
