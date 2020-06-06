@@ -122,7 +122,7 @@ For an existing RDS MySQL DB instance with read replicas that doesn't use GTID\-
       For example, if the file name is `mysql-bin-changelog.000031` and the position is `107`, run the following statement\.
 
       ```
-      SELECT MASTER_POS_WAIT(mysql-bin-changelog.000031, 107);
+      SELECT MASTER_POS_WAIT('mysql-bin-changelog.000031', 107);
       ```
 
       If the read replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. Proceed to the next step when the query returns for all read replicas\.
@@ -193,7 +193,7 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with read r
       For example, if the file name is `mysql-bin-changelog.000031` and the position is `107`, run the following statement\.
 
       ```
-      SELECT MASTER_POS_WAIT(mysql-bin-changelog.000031, 107);
+      SELECT MASTER_POS_WAIT('mysql-bin-changelog.000031', 107);
       ```
 
       If the read replica is past the specified position, the query returns immediately\. Otherwise, the function waits\. When the query returns for all read replicas, go to the next step\. 
