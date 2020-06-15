@@ -4,6 +4,25 @@
 
  Keeping all of your credentials in the same directory can save you time and effort\. With this approach, you have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\. 
 
+Amazon RDS supports Kerberos authentication for MySQL DB instances in the following AWS Regions:
++ US East \(Ohio\)
++ US East \(N\. Virginia\)
++ US West \(N\. California\)
++ US West \(Oregon\)
++ Asia Pacific \(Mumbai\)
++ Asia Pacific \(Seoul\)
++ Asia Pacific \(Singapore\)
++ Asia Pacific \(Sydney\)
++ Asia Pacific \(Tokyo\)
++ Canada \(Central\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
++ Europe \(Stockholm\)
++ South America \(São Paulo\)
++ China \(Beijing\)
++ China \(Ningxia\)
+
  To set up Kerberos authentication for a MySQL DB instance, complete the following general steps, described in more detail later: 
 
 1.  Use AWS Managed Microsoft AD to create an AWS Managed Microsoft AD directory\. You can use the AWS Management Console, the AWS CLI, or the AWS Directory Service API to create the directory\. For details about doing so, see [Create Your AWS Managed Microsoft AD Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_create_directory.html) in the *AWS Directory Service Administration Guide*\. 

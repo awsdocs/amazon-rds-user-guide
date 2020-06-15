@@ -13,7 +13,7 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [Best Practices for Working with PostgreSQL](#CHAP_BestPractices.PostgreSQL)
 + [Best Practices for Working with SQL Server](#CHAP_BestPractices.SQLServer)
 + [Working with DB Parameter Groups](#CHAP_BestPractices.DBParameterGroup)
-+ [Amazon RDS Best Practices Presentation Video](#CHAP_BestPractices.Presentation)
++ [Amazon RDS New Features and Best Practices Presentation Video](#CHAP_BestPractices.Presentation)
 
 **Note**  
 For common recommendations for Amazon RDS, see [Using Amazon RDS Recommendations](USER_Recommendations.md)\.
@@ -196,7 +196,11 @@ The point\-in\-time restore and snapshot restore features of Amazon RDS for Mari
 
 ## Best Practices for Working with Oracle<a name="CHAP_BestPractices.Oracle"></a>
 
-For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html) and the video [ Running Oracle Databases on Amazon RDS](https://www.youtube.com/watch?reload=9&v=GMVKBjXjp20)\.
+For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html)\.
+
+The 2018 AWS re:Invent conference included a presentation on best practices for working with Oracle on Amazon RDS\. A video of the presentation is available here:
+
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/j2wqT0EPDbw/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/j2wqT0EPDbw)
 
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 
@@ -275,14 +279,20 @@ Best practices for a Multi\-AZ deployment with a SQL Server DB instance include 
 
 When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS creates replicas for all SQL Server databases on your instance\. If you don't want specific databases to have secondary replicas, set up a separate DB instance that doesn't use Multi\-AZ for those databases\.
 
+### Amazon RDS SQL Server Best Practices Video<a name="CHAP_BestPractices.SQLServer.Presentation"></a>
+
+The 2019 AWS re:Invent conference included a presentation on new features and best practices for working with SQL Server on Amazon RDS\. A video of the presentation is available here:
+
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/R4Vj88iqu5s/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/R4Vj88iqu5s)
+
 ## Working with DB Parameter Groups<a name="CHAP_BestPractices.DBParameterGroup"></a>
 
 We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
 
 For information about backing up your DB instance, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
-## Amazon RDS Best Practices Presentation Video<a name="CHAP_BestPractices.Presentation"></a>
+## Amazon RDS New Features and Best Practices Presentation Video<a name="CHAP_BestPractices.Presentation"></a>
 
-The 2016 AWS Summit conference in Chicago included a presentation on best practices for creating and configuring a secure, highly available database instance using Amazon RDS\. A video of the presentation is available here: 
+The 2019 AWS re:Invent conference included a presentation on new Amazon RDS features and best practices for monitoring, analyzing, and tuning database performance using RDS\. A video of the presentation is available here:
 
-[![AWS Videos](http://img.youtube.com/vi/http://www.youtube.com/embed/9-7azhB27So/0.jpg)](http://www.youtube.com/watch?v=http://www.youtube.com/embed/9-7azhB27So)
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/KhxEQQOiqus/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/KhxEQQOiqus)

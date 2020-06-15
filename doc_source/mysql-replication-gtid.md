@@ -43,15 +43,15 @@ Use the following parameters to configure GTID\-based replication\.
 |  `gtid_mode`  |  `OFF`, `OFF_PERMISSIVE`, `ON_PERMISSIVE`, `ON`  |  `OFF` specifies that new transactions are anonymous transactions \(that is, don't have GTIDs\), and a transaction must be anonymous to be replicated\.  `OFF_PERMISSIVE` specifies that new transactions are anonymous transactions, but all transactions can be replicated\.  `ON_PERMISSIVE` specifies that new transactions are GTID transactions, but all transactions can be replicated\.  `ON` specifies that new transactions are GTID transactions, and a transaction must be a GTID transaction to be replicated\.   | 
 |  `enforce_gtid_consistency`  |  `OFF`, `ON`, `WARN`  |  `OFF` allows transactions to violate GTID consistency\.  `ON` prevents transactions from violating GTID consistency\.  `WARN` allows transactions to violate GTID consistency but generates a warning when a violation occurs\.   | 
 
+**Note**  
+In the AWS Management Console, the `gtid_mode` parameter appears as `gtid-mode`\.
+
 For GTID\-based replication, use these settings for the parameter group for your DB instance or read replica: 
 + `ON` and `ON_PERMISSIVE` apply only to outgoing replication from an RDS DB instance or Aurora MySQL cluster\. Both of these values cause your RDS DB instance or Aurora DB cluster to use GTIDs for transactions that are replicated to an external database\. `ON` requires that the external database also use GTID\-based replication\. `ON_PERMISSIVE` makes GTID\-based replication optional on the external database\. 
 + `OFF_PERMISSIVE`, if set, means that your RDS DB instances or Aurora DB cluster can accept incoming replication from an external database\. It can do this whether the external database uses GTID\-based replication or not\. 
 +  `OFF`, if set, means that your RDS DB instances or Aurora DB cluster only accept incoming replication from external databases that don't use GTID\-based replication\. 
 
 For more information about parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
-
-**Note**  
-In the AWS Management Console, the `gtid_mode` parameter appears as `gtid-mode`\.
 
 ## Configuring GTID\-Based Replication for New Read Replicas<a name="mysql-replication-gtid.configuring-new-read-replicas"></a>
 
@@ -116,7 +116,7 @@ For an existing RDS MySQL DB instance with read replicas that doesn't use GTID\-
    1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
 
       ```
-      SELECT MASTER_POS_WAIT(file, position);
+      SELECT MASTER_POS_WAIT('file', position);
       ```
 
       For example, if the file name is `mysql-bin-changelog.000031` and the position is `107`, run the following statement\.
@@ -187,7 +187,7 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with read r
    1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
 
       ```
-      SELECT MASTER_POS_WAIT(file, position);
+      SELECT MASTER_POS_WAIT('file', position);
       ```
 
       For example, if the file name is `mysql-bin-changelog.000031` and the position is `107`, run the following statement\.
