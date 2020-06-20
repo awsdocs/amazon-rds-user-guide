@@ -453,7 +453,7 @@ You can also see the status of a read replica using the AWS CLI `describe-db-ins
 
 The status of a read replica can be one of the following:
 + ****replicating**** – The read replica is replicating successfully\.
-+ ****replication degraded** \(SQL Server only\) – **Replicas are receiving data from the master instance, but one or more databases might be not getting updates\. This can occur, for example, when a replica is in the process of setting up newly created databases\.
++ ****replication degraded** \(SQL Server only\) – **Replicas are receiving data from the primary instance, but one or more databases might be not getting updates\. This can occur, for example, when a replica is in the process of setting up newly created databases\.
 
   The status doesn't transition from `replication degraded` to `error`, unless an error occurs during the degraded state\.
 + ****error**** – An error has occurred with the replication\. Check the **Replication Error** field in the Amazon RDS console or the event log to determine the exact error\. For more information about troubleshooting a replication error, see [Troubleshooting a MySQL Read Replica Problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.

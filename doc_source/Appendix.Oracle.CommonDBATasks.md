@@ -18,7 +18,10 @@ The following are common DBA tasks for DB instances running Oracle:
 + [Oracle Scheduler Tasks](Appendix.Oracle.CommonDBATasks.Scheduler.md)  
 ****    
 <a name="dba-tasks-oracle-scheduler-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
-+ [Miscellaneous Tasks](Appendix.Oracle.CommonDBATasks.Misc.md)  
++ [Diagnostic Tasks](Appendix.Oracle.CommonDBATasks.Diagnostics.md)  
+****    
+<a name="dba-tasks-oracle-diagnostic-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
++ [Other Tasks](Appendix.Oracle.CommonDBATasks.Misc.md)  
 ****    
 <a name="dba-tasks-oracle-misc-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.html)
 

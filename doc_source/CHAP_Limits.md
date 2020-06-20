@@ -79,3 +79,4 @@ For Oracle, you set the maximum number of user processes and user and system ses
 File size limits apply to certain Amazon RDS DB instances\. For more information, see the following engine\-specific limits:
 + [MariaDB File Size Limits in Amazon RDS](CHAP_MariaDB.md#RDS_Limits.FileSize.MariaDB)
 + [MySQL File Size Limits in Amazon RDS](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)
++ [Oracle File Size Limits in Amazon RDS](CHAP_Oracle.md#Oracle.Concepts.file-size-limits)

@@ -27,7 +27,7 @@ In the following procedure, you create a virtual private cloud \(VPC\) based on 
 
 1. Choose **Create VPC**\. 
 
-An Amazon RDS DB instance in a VPC requires at least two private subnets or at least two public subnets, to support Multi\-AZ deployment\. For more information about working with multiple Availability Zones, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\. Because your database is private, add a second private subnet to your VPC\. 
+An Amazon RDS DB instance in a VPC requires at least two private subnets or at least two public subnets, to support Multi\-AZ deployment\. For more information about working with multiple Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. Because your database is private, add a second private subnet to your VPC\. 
 
 **To create an additional subnet**
 
@@ -117,7 +117,7 @@ In the preceding procedures, we use the AWS Management Console to perform tasks\
 
 For more information, see [AWS Command Line Interface Reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
 
-## Related Topics<a name="w69aac31d101b7c15"></a>
+## Related Topics<a name="w69aac31d103b7c15"></a>
 + [Setting Up for Amazon RDS](CHAP_SettingUp.md)
 + [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
 + [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)

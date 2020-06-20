@@ -42,7 +42,7 @@ Before you begin, you also need an Oracle DB instance\. For information about ho
 ## Recommendations<a name="Oracle.Resources.RCU.Recommendations"></a>
 
 The following are some recommendations for working with your DB instance in this scenario: 
-+ We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [  Regions, Availability Zones, and Local Zones  ](Concepts.RegionsAndAvailabilityZones.md)\. 
++ We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 + For additional security, Oracle recommends that you use Transparent Data Encryption \(TDE\) to encrypt your data at rest\. If you have an Enterprise Edition license that includes the Advanced Security Option, you can enable encryption at rest by using the TDE option\. For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\. 
 
   Amazon RDS also provides an encryption at rest option for all database editions\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. 
@@ -186,5 +186,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related Topics<a name="w69aac31d101c15c19"></a>
+## Related Topics<a name="w69aac31d103c15c19"></a>
 + [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)

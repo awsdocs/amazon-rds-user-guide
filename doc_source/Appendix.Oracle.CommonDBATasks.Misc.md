@@ -1,4 +1,4 @@
-# Common DBA Miscellaneous Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
+# Other Common DBA Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
 
 Following, you can find how to perform miscellaneous DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 

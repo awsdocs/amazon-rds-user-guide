@@ -209,6 +209,18 @@ If you have DB instances that use db\.m1 and db\.m2 DB instance classes, Amazon 
 
 If you have DB snapshots of DB instances that were using db\.m1 or db\.m2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
 
+## Oracle File Size Limits in Amazon RDS<a name="Oracle.Concepts.file-size-limits"></a>
+
+The maximum file size on Amazon RDS Oracle DB instances is 16 TiB\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following:
+
+```
+ORA-01237: cannot extend datafile 6
+ORA-01110: data file 6: '/rdsdbdata/db/mydir/datafile/myfile.dbf'
+ORA-27059: could not reduce file size
+Linux-x86_64 Error: 27: File too large
+Additional information: 2
+```
+
 ## Oracle Security<a name="Oracle.Concepts.RestrictedDBAPrivileges"></a>
 
 The Oracle database engine uses role\-based security\. A role is a collection of privileges that can be granted to or revoked from a user\. A predefined role, named *DBA*, normally allows all administrative privileges on an Oracle database engine\. The following privileges are not available for the DBA role on an Amazon RDS DB instance using the Oracle engine: 
