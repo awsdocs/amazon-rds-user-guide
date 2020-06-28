@@ -1,16 +1,16 @@
 # Working with Microsoft SQL Server Logs<a name="Appendix.SQLServer.CommonDBATasks.Logs"></a>
 
-You can use the Amazon RDS console to view, watch, and download SQL Server Agent logs and Microsoft SQL Server error logs\. 
+You can use the Amazon RDS console to view, watch, and download SQL Server Agent logs and Microsoft SQL Server error logs\.
 
 ## Watching Log Files<a name="Appendix.SQLServer.CommonDBATasks.Logs.Watch"></a>
 
-If you view a log in the Amazon RDS console, you can see its contents as they exist at that moment\. Watching a log in the console opens it in a dynamic state so that you can see updates to it in near real time\. 
+If you view a log in the Amazon RDS console, you can see its contents as they exist at that moment\. Watching a log in the console opens it in a dynamic state so that you can see updates to it in near\-real time\.
 
-Only the latest log is active for watching\. For example, suppose you have the logs shown following: 
+Only the latest log is active for watching\. For example, suppose you have the following logs shown:
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/logs.png)
 
-Only log/ERROR, as the most recent log, is being actively updated\. You can choose to watch others, but they are static and will not update\. 
+Only log/ERROR, as the most recent log, is being actively updated\. You can choose to watch others, but they are static and will not update\.
 
 ## Archiving Log Files<a name="Appendix.SQLServer.CommonDBATasks.Logs.Archive"></a>
 

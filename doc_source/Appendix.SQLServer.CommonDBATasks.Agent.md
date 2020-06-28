@@ -12,11 +12,11 @@ When you create a SQL Server DB instance, the master user name is enrolled in th
 
 1. Create another server\-level login by using the `CREATE LOGIN` command\. 
 
-1. Create a user in msdb using `CREATE USER` command, and then link this user to the login that you created in the previous step\. 
+1. Create a user in msdb using `CREATE USER` command, and then link this user to the login that you created in the previous step\.
 
-1. Add the user to the SQLAgentUserRole using the `sp_addrolemember` system stored procedure\. 
+1. Add the user to the SQLAgentUserRole using the `sp_addrolemember` system stored procedure\.
 
-For example, suppose your master user name is **myawsmaster** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\. You would log in using the master user name and run the following commands\. 
+For example, suppose your master user name is **admin** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\. You would log in using the master user name and run the following commands\.
 
 ```
 --Initially set context to master database
@@ -35,10 +35,10 @@ GO
 EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
 ```
 
-To delete a SQL Server Agent job, run the following T\-SQL statement\. 
+To delete a SQL Server Agent job, run the following T\-SQL statement\.
 
 ```
-EXEC msdb..sp_delete_job @job_name = '<job-name>'; 
+EXEC msdb..sp_delete_job @job_name = '<job-name>';
 ```
 
 **Note**  
@@ -47,4 +47,4 @@ Don't use the UI in SQL Server Management Console \(SSMS\) to delete a SQL Serve
 ```
 The EXECUTE permission was denied on the object 'xp_regread', database 'mssqlsystemresource', schema 'sys'.
 ```
-This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process that RDS isn't authorized to do\. 
+This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process that RDS isn't authorized to do\.

@@ -52,7 +52,7 @@ Change the colon between the DNS name and port number to a comma\.
 
    After a few moments, SSMS connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting Connections to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
-1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(master, model, msdb, and tempdb\)\. To explore the system databases, do the following: 
+1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(`master`, `model`, `msdb`, and `tempdb`\)\. To explore the system databases, do the following: 
 
    1. In SSMS, on the **View** menu, choose **Object Explorer**\.
 

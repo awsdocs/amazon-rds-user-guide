@@ -2,41 +2,63 @@
 
 When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. Amazon RDS supports the following upgrades to an Oracle DB instance: 
 + Major Version Upgrades 
+
+  In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. You must modify the DB instance manually to perform a major version upgrade\.
 + Minor Version Upgrades 
 
-In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. In contrast, a minor version upgrade includes only changes that are backward\-compatible with existing applications\. 
+  A minor version upgrade includes only changes that are backward\-compatible with existing applications\. If you enable auto minor version upgrades on your DB instance, minor version upgrades occur automatically\. In all other cases, you must modify the DB instance manually\.
 
-You must modify the DB instance manually to perform a major version upgrade\. Minor version upgrades occur automatically if you enable auto minor version upgrades on your DB instance\. In all other cases, you must modify the DB instance manually to perform a minor version upgrade\.
-
-An outage occurs while the upgrade takes place\. The time for the outage varies based on your engine version and the size of your DB instance\. 
+When you update the DB engine, an outage occurs\. The time for the outage depends on your engine version and instance size\. 
 
 For information about what Oracle versions are available on Amazon RDS, see [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
-**Topics**
-+ [Overview of Upgrading](#USER_UpgradeDBInstance.Oracle.Overview)
-+ [Major Version Upgrades](#USER_UpgradeDBInstance.Oracle.Major)
-+ [Oracle Minor Version Upgrades](#USER_UpgradeDBInstance.Oracle.Minor)
-+ [Oracle SE2 Upgrade Paths](#USER_UpgradeDBInstance.Oracle.SE2)
-+ [Option and Parameter Group Considerations](#USER_UpgradeDBInstance.Oracle.OGPG)
-+ [Testing an Upgrade](#USER_UpgradeDBInstance.Oracle.UpgradeTesting)
-+ [Upgrading an Oracle DB Instance](#USER_UpgradeDBInstance.Oracle.Upgrading)
+## Overview of Oracle DB Engine Upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
-## Overview of Upgrading<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
+If the backup retention period for your DB instance is greater than 0, Amazon RDS takes the following DB snapshots during the upgrade:
 
-Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
+1. A snapshot of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\.
+
+1. A snapshot of the DB instance after the upgrade completes\.
 
 **Note**  
-Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+To change your backup retention period, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
-After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
+After an upgrade completes, you can't revert to the previous version of the DB engine\. However, you create a new DB instance by restoring the DB snapshot taken before the upgrade\.
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. If no operating system updates are required, the primary and standby DB instances are upgraded at the same time, and you experience an outage until the upgrade is complete\. 
+### Oracle Upgrades in a Multi\-AZ Deployment<a name="USER_UpgradeDBInstance.Oracle.Overview.multi-az"></a>
 
-If your DB instance is in a Multi\-AZ deployment, and operating system updates are required, the operating system updates are applied when you request the database upgrade\. In this case, the operating system is updated on the standby DB instance, and the standby DB instance is upgraded\. After that upgrade completes, the primary DB instance fails over to the standby DB instance, and the operating system is updated on the new standby DB instance \(the former primary DB instance\), and that database is upgraded\.
+If your DB instance is in a Multi\-AZ deployment, Amazon RDS upgrades both the primary and standby replicas\. If no operating system updates are required, the primary and standby upgrades occur simultaneously\. The instances are not available until the upgrade completes\.
 
-**Note**  
-We don't recommend upgrading databases running on micro DB instances because they have limited CPU resources and the upgrade process can take hours to complete\.   
-You can upgrade micro DB instances with small amounts of storage \(10–20 GiB\) by copying your data using Data Pump\. Before you migrate your production DB instances, we recommend that you test by copying data using Data Pump\. 
+If operating system updates are required in a Multi\-AZ deployment, Amazon RDS applies the updates when you request the DB upgrade\. Amazon RDS performs the following steps:
+
+1. Updates the operating system on the standby DB instance
+
+1. Upgrades the standby DB instance
+
+1. Fails over the primary instance to the standby DB instance
+
+1. Upgrades the operating system on the new standby DB instance, which was formerly the primary instance
+
+1. Upgrades the new standby DB instance
+
+### Oracle Upgrades of Read Replicas<a name="USER_UpgradeDBInstance.Oracle.Overview.read-replicas"></a>
+
+The Oracle DB engine version of the source DB instance and all of its read replicas must be the same\. Amazon RDS performs the upgrade in the following stages:
+
+1. Upgrades the source DB instance\. The read replicas are available during this stage\.
+
+1. Upgrades the read replicas in parallel, regardless of the replica maintenance windows\. The source DB is available during this stage\.
+
+For major version upgrades of cross\-Region read replicas, Amazon RDS performs additional actions:
++ Generates an option group for the target version automatically
++ Copies all options and option settings from the original option group to the new option group
++ Associates the upgraded cross\-Region read replica with the new option group
+
+### Oracle Upgrades of Micro DB Instances<a name="USER_UpgradeDBInstance.Oracle.Overview.micro-db"></a>
+
+We don't recommend upgrading databases running on micro DB instances\. Because these instances have limited CPU, the upgrade can take hours to complete\.
+
+You can upgrade micro DB instances with small amounts of storage \(10–20 GiB\) by copying your data using Data Pump\. Before you migrate your production DB instances, we recommend that you test by copying data using Data Pump\.
 
 ## Major Version Upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 

@@ -112,7 +112,7 @@ The Amazon RDS console might display metrics in units that are different from th
 
 | Metric | Console Name | Description | 
 | --- | --- | --- | 
-| BinLogDiskUsage |   **Binary Log Disk Usage \(MB\)**   |  The amount of disk space occupied by binary logs on the master\. Applies to MySQL read replicas\. Units: Bytes  | 
+| BinLogDiskUsage |   **Binary Log Disk Usage \(MB\)**   |  The amount of disk space occupied by binary logs on the primary\. Applies to MySQL read replicas\. Units: Bytes  | 
 | BurstBalance |   **Burst Balance \(Percent\)**   |  The percent of General Purpose SSD \(gp2\) burst\-bucket I/O credits available\.  Units: Percent  | 
 | CPUUtilization |   **CPU Utilization \(Percent\)**   |  The percentage of CPU utilization\. Units: Percent  | 
 | CPUCreditUsage |   **CPU Credit Usage \(Count\)**   |  \(T2 instances\) The number of CPU credits spent by the instance for CPU utilization\. One CPU credit equals one vCPU running at 100 percent utilization for one minute or an equivalent combination of vCPUs, utilization, and time\. For example, you might have one vCPU running at 50 percent utilization for two minutes or two vCPUs running at 25 percent utilization for two minutes\. CPU credit metrics are available at a five\-minute frequency only\. If you specify a period greater than five minutes, use the `Sum` statistic instead of the `Average` statistic\. Units: Credits \(vCPU\-minutes\)  | 

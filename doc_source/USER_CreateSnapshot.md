@@ -4,6 +4,9 @@ Amazon RDS creates a storage volume snapshot of your DB instance, backing up the
 
 When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
+**Note**  
+For PostgreSQL DB instances, data in unlogged tables might not be restored from snapshots\. For more information, see [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\.
+
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
 You can create a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.

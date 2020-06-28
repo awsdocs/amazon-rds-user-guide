@@ -54,11 +54,12 @@ When you create a DB instance in Amazon RDS, you know that the PostgreSQL versio
 DB instances in the Database Preview Environment are similar to DB instances in a production environment\. However, keep in mind several important factors:
 + All DB instances are deleted 60 days after you create them, along with any backups and snapshots\.
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
-+ You can only create M4, T2, and R4 instance types\. For more information about RDS instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
-+ You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS Database Preview Environment Forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
++ You can only create M5, T3, and R5 instance types\. For more information about RDS instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
++ You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS Database Preview Environment Forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
 + You can't copy a snapshot of a DB instance to a production environment\.
-+ Some Amazon RDS features aren't available in the preview environment, as described following\.
++ You can use both single\-AZ and multi\-AZ deployments\.
++ You can use standard PostgreSQL dump and load functions to export databases from or import databases to the Database Preview Environment\.
 
 **Topics**
 + [Features Not Supported in the Preview Environment](#preview-environment-exclusions)
@@ -79,37 +80,47 @@ The PostgreSQL extensions supported in the Database Preview Environment are list
 
 | Extension | Version | 
 | --- | --- | 
-|  amcheck  |  1\.1  | 
+|  amcheck  |  1\.2  | 
+| aws\_commons | 1\.0 | 
+| aws\_s3 | 1\.0 | 
 |  bloom  |  1\.0  | 
 |  btree\_gin  |  1\.3  | 
 |  btree\_gist  |  1\.5  | 
-|  citext  |  1\.5  | 
+|  citext  |  1\.6  | 
 |  cube  |  1\.4  | 
 |  dblink  |  1\.2  | 
 |  dict\_int  |  1\.0  | 
 |  dict\_xsyn  |  1\.0  | 
 |  earthdistance  |  1\.1  | 
 |  fuzzystrmatch  |  1\.1  | 
-|  hstore  |  1\.5  | 
+|  hstore  |  1\.7  | 
 |  hstore\_plper  |  1\.0  | 
 |  intagg  |  1\.1  | 
-|  intarray  |  1\.2  | 
+|  intarray  |  1\.3  | 
+| ip4r | 2\.4 | 
 |  isn  |  1\.2  | 
-|  log\_fdw  |  1\.0  | 
-|  ltree  |  1\.1  | 
+| jsonb\_plperl | 1\.0 | 
+|  ltree  |  1\.2  | 
+| pageinspect | 1\.8 | 
 |  pg\_buffercache  |  1\.3  | 
 |  pg\_freespacemap  |  1\.2  | 
 |  pg\_prewarm  |  1\.2  | 
-|  pg\_stat\_statements  |  1\.5  | 
-|  pg\_trgm  |  1\.4  | 
+| pg\_similarity | 1\.0  | 
+|  pg\_stat\_statements  |  1\.8  | 
+| pg\_transport | 1\.0 | 
+|  pg\_trgm  |  1\.5  | 
 |  pg\_visibility  |  1\.2  | 
 |  pgcrypto  |  1\.3  | 
+| pgrouting | 3\.0\.0 | 
 |  pgrowlocks  |  1\.2  | 
 |  pgstattuple  |  1\.5  | 
+| pgtap | 1\.1\.0 | 
 |  plperl  |  1\.0  | 
 |  plpgsql  |  1\.0  | 
+| plprofiler | 4\.1 | 
 |  pltcl  |  1\.0  | 
 |  postgres\_fdw  |  1\.0  | 
+| prefix | 1\.2\.0 | 
 |  sslinfo  |  1\.2  | 
 |  tablefunc  |  1\.0  | 
 |  test\_parser  |  1\.0  | 
@@ -154,12 +165,21 @@ For information about importing PostgreSQL data into a DB instance, see [Importi
 Amazon RDS supports the following PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL 13 Versions](#PostgreSQL.Concepts.General.version13)
 + [PostgreSQL 12 Versions](#PostgreSQL.Concepts.General.version12)
 + [PostgreSQL 11 Versions](#PostgreSQL.Concepts.General.version11)
 + [PostgreSQL 10 Versions](#PostgreSQL.Concepts.General.version10)
 + [PostgreSQL 9\.6 Versions](#PostgreSQL.Concepts.General.version96)
 + [PostgreSQL 9\.5 Versions](#PostgreSQL.Concepts.General.version95)
 + [PostgreSQL 9\.4 Versions](#PostgreSQL.Concepts.General.version94)
+
+#### PostgreSQL 13 Versions<a name="PostgreSQL.Concepts.General.version13"></a>
+
+##### PostgreSQL Version 13 Beta 1 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version13beta1"></a>
+
+PostgreSQL version 13 Beta 1 contains several improvements that are described in [PostgreSQL 13 Beta 1 Released](https://www.postgresql.org/about/news/2040/)\. 
+
+For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
 #### PostgreSQL 12 Versions<a name="PostgreSQL.Concepts.General.version12"></a>
 

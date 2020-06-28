@@ -81,7 +81,7 @@ For information about each setting, see [Settings for DB Instances](#USER_Create
 + `--db-security-groups`
 + `--db-subnet-group`
 + `--engine`
-+ `--master-user-name`
++ `--master-username`
 + `--master-user-password`
 + `--allocated-storage`
 + `--backup-retention-period`
@@ -97,7 +97,7 @@ For Linux, macOS, or Unix:
  5.     --db-instance-class db.m1.large \
  6.     --db-security-groups mydbsecuritygroup \
  7.     --db-subnet-group mydbsubnetgroup \
- 8.     --master-user-name masterawsuser \
+ 8.     --master-username masterawsuser \
  9.     --master-user-password masteruserpassword \
 10.     --backup-retention-period 3
 ```
@@ -111,7 +111,7 @@ For Windows:
  5.     --db-instance-class db.m1.large ^
  6.     --db-security-groups mydbsecuritygroup ^
  7.     --db-subnet-group mydbsubnetgroup ^
- 8.     --master-user-name masterawsuser ^ 
+ 8.     --master-username masterawsuser ^ 
  9.     --master-user-password masteruserpassword ^
 10.     --backup-retention-period 3
 ```

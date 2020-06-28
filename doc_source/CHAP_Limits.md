@@ -65,7 +65,7 @@ The following table describes naming constraints in Amazon RDS\.
 
 ## Maximum Number of Database Connections<a name="RDS_Limits.MaxConnections"></a>
 
-The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is set in the parameter group associated with the DB instance, except for Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Managment Studio \(SSMS\)\.
+The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is set in the parameter group associated with the DB instance, except for Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Management Studio \(SSMS\)\.
 
 **Note**  
 For Oracle, you set the maximum number of user processes and user and system sessions\.
@@ -73,6 +73,9 @@ For Oracle, you set the maximum number of user processes and user and system ses
 
 **Maximum Database Connections**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
+
+**Note**  
+You might see fewer than the maximum number of DB connections\. This is to avoid potential out\-of\-memory issues\.
 
 ## File Size Limits in Amazon RDS<a name="RDS_Limits.FileSize"></a>
 

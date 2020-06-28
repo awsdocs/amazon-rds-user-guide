@@ -284,9 +284,9 @@ You can monitor DB snapshot exports using the AWS Management Console, the AWS CL
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. To monitor the list of snapshot exports, choose the **Exports in Amazon S3** tab\.
+1. To view the list of snapshot exports, choose the **Exports in Amazon S3** tab\.
 
-1. To view information about a specific snapshot export, choose the export task\. 
+1. To view information about a specific snapshot export, choose the export task\.
 
 ### AWS CLI<a name="USER_ExportSnapshot.MonitorCLI"></a>
 
@@ -353,6 +353,8 @@ To display information about a specific snapshot export, include the `--export-t
 ### RDS API<a name="USER_ExportSnapshot.MonitorAPI"></a>
 
 To display information about DB snapshot exports using the Amazon RDS API, use the [DescribeExportTasks](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeExportTasks.html) operation\.
+
+To track completion of the export workflow or to trigger another workflow, you can subscribe to Amazon Simple Notification Service topics\. For more information on Amazon SNS, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
 ## Canceling a Snapshot Export Task<a name="USER_ExportSnapshot.Canceling"></a>
 

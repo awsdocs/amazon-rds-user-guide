@@ -198,7 +198,7 @@ If you use an existing instance, it must already have an Active Directory domain
       --engine-version 14.00.3223.3.v1 \
       --allocated-storage 100 \
       --master-user-password secret123 \
-      --master-username master \
+      --master-username admin \
       --storage-type gp2 \
       --license-model li \
       --domain-iam-role-name my-directory-iam-role \
@@ -216,7 +216,7 @@ If you use an existing instance, it must already have an Active Directory domain
       --engine-version 14.00.3223.3.v1 ^
       --allocated-storage 100 ^
       --master-user-password secret123 ^
-      --master-username master ^
+      --master-username admin ^
       --storage-type gp2 ^
       --license-model li ^
       --domain-iam-role-name my-directory-iam-role ^

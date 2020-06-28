@@ -117,7 +117,7 @@ The following example uses an ARN to specify a resource\. For more information o
 
 **Example Permissions Policy for Native Backup and Restore with Encryption Support**  
 If you want to encrypt your backup files, include an encryption key in your permissions policy\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide*\.  
-You must use a symmetric AWS KMS customer master key \(CMK\) to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
+You must use a symmetric AWS KMS CMK to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 
 ```
  1. {
@@ -165,7 +165,7 @@ After you have enabled and configured native backup and restore, you can start u
 
 Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your Amazon S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name.extension`\. Amazon S3 doesn't require an account number or AWS Region in ARNs\.
 
-If you also provide an optional AWS KMS encryption key, the format for the ARN of the key is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. You must use a symmetric AWS KMS customer master key \(CMK\) to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\. 
+If you also provide an optional AWS KMS encryption key, the format for the ARN of the key is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. You must use a symmetric AWS KMS CMK to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\. 
 
 For instructions on how to call each stored procedure, see the following topics:
 + [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)
@@ -202,7 +202,7 @@ The following parameters are required:
   The file can have any extension, but `.bak` is usually used\. 
 
 The following parameters are optional:
-+ `@kms_master_key_arn` – The ARN for the symmetric KMS customer master key \(CMK\) to use to encrypt the item\.
++ `@kms_master_key_arn` – The ARN for the symmetric KMS CMK to use to encrypt the item\.
   + You can't use the default encryption key\. If you use the default key, the database won't be backed up\.
   +  If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
   + Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
@@ -636,7 +636,7 @@ The `rds_task_status` stored procedure returns the following columns\.
 | `created_at` |  The date and time that the task was created\.   | 
 | S3\_object\_arn | The ARN indicating the Amazon S3 prefix and the name of the file that is being backed up or restored\. | 
 | `overwrite_s3_backup_file` |  The value of the `@overwrite_s3_backup_file` parameter specified when calling a backup task\. For more information, see [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)\.   | 
-| KMS\_master\_key\_arn | The ARN for the KMS customer master key used for encryption \(for backup\) and decryption \(for restore\)\. | 
+| KMS\_master\_key\_arn | The ARN for the KMS CMK used for encryption \(for backup\) and decryption \(for restore\)\. | 
 | filepath | Not applicable to native backup and restore tasks\. | 
 | overwrite\_file | Not applicable to native backup and restore tasks\. | 
 

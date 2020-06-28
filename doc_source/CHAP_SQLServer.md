@@ -78,7 +78,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + Master Data Services
 
   To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\.
-+ Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of DROP DATABASE might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the DROP DATABASE command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the DROP DATABASE command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\.
++ Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of `DROP DATABASE` might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the `DROP DATABASE` command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the `DROP DATABASE` command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\.
 + For SQL Server, you create your databases after you create your DB instance\. Database names follow the usual SQL Server naming rules with the following differences:
   + Database names can't start with `rdsadmin`\.
   + They can't start or end with a space or a tab\.
@@ -258,7 +258,7 @@ For a list of unsupported features, see [Features Not Supported and Features wit
 
 Some SQL Server parameters have changed in SQL Server 2012\.
 + The following parameters have been removed from SQL Server 2012: `awe enabled`, `precompute rank`, and `sql mail xps`\. These parameters were not modifiable in SQL Server DB Instances and their removal should have no impact on your SQL Server use\. 
-+ A new `contained database authentication` parameter in SQL Server 2012 supports partially contained databases\. When you enable this parameter and then create a partially contained database, an authorized user's user name and password is stored within the partially contained database instead of in the master database\. For more information about partially contained databases, see [Contained Databases](http://msdn.microsoft.com/en-us/library/ff929071.aspx) in the Microsoft documentation\. 
++ A new `contained database authentication` parameter in SQL Server 2012 supports partially contained databases\. When you enable this parameter and then create a partially contained database, an authorized user's user name and password is stored within the partially contained database instead of in the primary database\. For more information about partially contained databases, see [Contained Databases](http://msdn.microsoft.com/en-us/library/ff929071.aspx) in the Microsoft documentation\. 
 
 ### Microsoft SQL Server 2008 R2 Deprecated on Amazon RDS<a name="SQLServer.Concepts.General.FeatureSupport.2008"></a>
 

@@ -219,7 +219,7 @@ Modify your DB parameter group to include the following settings\. You should te
 + Increase the value of the `checkpoint_segments` and `checkpoint_timeout` parameters to reduce the number of writes to the wal log\.
 + Disable the `synchronous_commit` parameter \(do not turn off FSYNC\)\.
 + Disable the PostgreSQL autovacuum parameter\.
-+ Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information see, [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/static/sql-createtable.html) 
++ Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information, see [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/static/sql-createtable.html)\.
 
 Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands with these settings\.
 

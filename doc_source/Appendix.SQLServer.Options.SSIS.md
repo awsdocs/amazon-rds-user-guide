@@ -308,7 +308,7 @@ You can associate the SSIS option group and parameter group with a new or existi
       --engine-version 13.00.5426.0.v1 \
       --allocated-storage 100 \
       --master-user-password secret123 \
-      --master-username master \
+      --master-username admin \
       --storage-type gp2 \
       --license-model li \
       --domain-iam-role-name my-directory-iam-role \
@@ -327,7 +327,7 @@ You can associate the SSIS option group and parameter group with a new or existi
       --engine-version 13.00.5426.0.v1 ^
       --allocated-storage 100 ^
       --master-user-password secret123 ^
-      --master-username master ^
+      --master-username admin ^
       --storage-type gp2 ^
       --license-model li ^
       --domain-iam-role-name my-directory-iam-role ^
@@ -364,7 +364,7 @@ You can associate the SSIS option group and parameter group with a new or existi
 
 To download SSIS project \(\.ispac\) files to your host for deployment, use S3 file integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB Instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
-## Master User Permissions on SSISDB<a name="SSIS.Permissions"></a>
+## Administrative Permissions on SSISDB<a name="SSIS.Permissions"></a>
 
 When the instance is created or modified with the SSIS option, the result is an SSISDB database with the ssis\_admin and ssis\_logreader roles granted to the master user\. The master user has the following privileges in SSISDB:
 + alter on ssis\_admin role
@@ -422,7 +422,7 @@ GO
 
 On RDS, you can't deploy SSIS projects directly by using SQL Server Management Studio \(SSMS\) or SSIS procedures\. To download project files from Amazon S3 and then deploy them, use RDS stored procedures\.
 
-To run the stored procedures, log in as the master user or any other user that you granted execution permissions for the stored procedures\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
+To run the stored procedures, log in as any user that you granted execution permissions for the stored procedures\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
 
 **To deploy the SSIS project**
 

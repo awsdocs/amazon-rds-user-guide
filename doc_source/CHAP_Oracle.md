@@ -231,7 +231,7 @@ The Oracle database engine uses role\-based security\. A role is a collection of
 + Grant any privilege
 + Grant any role
 
-When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts can't be used\. 
+When you create a DB instance, the master user account that you use to create the instance gets DBA privileges \(with some limitations\)\. Use the master user account for any administrative tasks such as creating additional user accounts in the database\. You can't use the `SYS` user, `SYSTEM` user, and other Oracle\-supplied administrative accounts\. 
 
 Amazon RDS Oracle supports SSL/TLS encrypted connections and also the Oracle Native Network Encryption \(NNE\) option to encrypt connections between your application and your Oracle DB instance\. For more information about using SSL with Oracle on Amazon RDS, see [Using SSL with an Oracle DB Instance](#Oracle.Concepts.SSL)\. For more information about the Oracle Native Network Encryption option, see [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 

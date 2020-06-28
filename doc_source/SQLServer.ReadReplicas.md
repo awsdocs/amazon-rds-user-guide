@@ -13,11 +13,11 @@ In this section, you can find specific information about working with read repli
 
 Before a DB instance can serve as a source instance for replication, you must enable automatic backups on the source DB instance\. To do so, you set the backup retention period to a value other than 0\. The source DB instance must be a Multi\-AZ deployment with Always On Availability Groups \(AGs\)\. Setting this type of deployment also enforces that automatic backups are enabled\.
 
-Creating a SQL Server read replica doesn't require an outage for the master DB instance\. Amazon RDS sets the necessary parameters and permissions for the source DB instance and the read replica without any service interruption\. A snapshot is taken of the source DB instance, and this snapshot becomes the read replica\. No outage occurs when you delete a read replica\. 
+Creating a SQL Server read replica doesn't require an outage for the primary DB instance\. Amazon RDS sets the necessary parameters and permissions for the source DB instance and the read replica without any service interruption\. A snapshot is taken of the source DB instance, and this snapshot becomes the read replica\. No outage occurs when you delete a read replica\. 
 
 You can create up to five read replicas from one source DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\.
 
-The SQL Server DB engine version of the source DB instance and all of its read replicas must be the same\. Amazon RDS upgrades the master immediately after upgrading the read replicas, regardless of the maintenance window\. For more information about upgrading the DB engine version, see [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)\.
+The SQL Server DB engine version of the source DB instance and all of its read replicas must be the same\. Amazon RDS upgrades the primary immediately after upgrading the read replicas, regardless of the maintenance window\. For more information about upgrading the DB engine version, see [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)\.
 
 For a read replica to receive and apply changes from the source, it should have sufficient compute and storage resources\. If a read replica reaches compute, network, or storage resource capacity, the read replica stops receiving or applying changes from its source\. You can modify the storage and CPU resources of a read replica independently from its source and other read replicas\. 
 

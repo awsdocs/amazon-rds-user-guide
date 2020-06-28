@@ -329,7 +329,7 @@ If you use an existing domain\-joined DB instance, it must already have an Activ
       --engine-version 13.00.5426.0.v1 \
       --allocated-storage 100 \
       --master-user-password secret123 \
-      --master-username master \
+      --master-username admin \
       --storage-type gp2 \
       --license-model li \
       --domain-iam-role-name my-directory-iam-role \
@@ -348,7 +348,7 @@ If you use an existing domain\-joined DB instance, it must already have an Activ
       --engine-version 13.00.5426.0.v1 ^
       --allocated-storage 100 ^
       --master-user-password secret123 ^
-      --master-username master ^
+      --master-username admin ^
       --storage-type gp2 ^
       --license-model li ^
       --domain-iam-role-name my-directory-iam-role ^

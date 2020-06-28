@@ -188,7 +188,7 @@ exec rdsadmin.rdsadmin_util.flush_buffer_cache;
 
 ## Granting SELECT or EXECUTE Privileges to SYS Objects<a name="Appendix.Oracle.CommonDBATasks.TransferPrivileges"></a>
 
-Usually you transfer privileges by using roles, which can contain many objects\. To grant privileges to a single object, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.grant_sys_object`\. The procedure grants only privileges that the master account already has through a role or direct grant\. 
+Usually you transfer privileges by using roles, which can contain many objects\. To grant privileges to a single object, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.grant_sys_object`\. The procedure grants only privileges that the master user has already been granted through a role or direct grant\. 
 
 The `grant_sys_object` procedure has the following parameters\. 
 
@@ -240,7 +240,7 @@ Objects already granted to `PUBLIC` do not need to be re\-granted\. If you use t
 
 ## Revoking SELECT or EXECUTE Privileges on SYS Objects<a name="Appendix.Oracle.CommonDBATasks.RevokePrivileges"></a>
 
-To revoke privileges on a single object, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.revoke_sys_object`\. The procedure only revokes privileges that the master account already has by using a role or direct grant\. 
+To revoke privileges on a single object, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.revoke_sys_object`\. The procedure only revokes privileges that the master account has already been granted through a role or direct grant\. 
 
 The `revoke_sys_object` procedure has the following parameters\. 
 

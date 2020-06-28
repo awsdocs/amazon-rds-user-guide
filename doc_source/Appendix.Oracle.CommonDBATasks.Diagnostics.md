@@ -6,9 +6,6 @@ The Automatic Diagnostic Repository Command Interpreter \(ADRCI\) utility is an 
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to ADRCI\. To perform diagnostic tasks for your Oracle instance, instead use the Amazon RDS package `rdsadmin.rdsadmin_adrci_util`\.
 
-**Note**  
-The Amazon RDS ADRCI feature is available in all AWS regions except China \(Beijing\) and China \(Ningxia\)\.
-
 By using the functions in `rdsadmin_adrci_util`, you can list and package problems and incidents, and also show trace files\. All functions return a task ID\. This ID forms part of the name of log file that contains the ADRCI output, as in `dbtask-task_id.log`\. The log file resides in the BDUMP directory\.
 
 ## Common Parameters for Diagnostic Procedures<a name="Appendix.Oracle.CommonDBATasks.CommonDiagParameters"></a>

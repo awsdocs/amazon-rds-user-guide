@@ -1,9 +1,7 @@
 # Amazon RDS on AWS Outposts \(Preview\)<a name="rds-on-outposts"></a>
 
-
-|  | 
-| --- |
-| This is prerelease documentation for a service in preview release\. It is subject to change\. | 
+****  
+***This is prerelease documentation for a service in preview release\. It is subject to change\.***
 
 By using AWS Outposts, you can work with the same AWS hardware infrastructure, services, APIs, and tools to build and run your applications on premises as in the cloud\. AWS Outposts is ideal for workloads that need low latency access to on\-premises applications or systems and for workloads that need to store and process data locally\. For more information about AWS Outposts, see [AWS Outposts](https://aws.amazon.com/outposts/)\.
 
