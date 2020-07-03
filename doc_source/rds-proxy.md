@@ -297,14 +297,6 @@ aws secretsmanager create-secret \
           "Service": "rds.amazonaws.com"
         },
         "Action": "sts:AssumeRole"
-      },
-      {
-        "Sid": "",
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "rds.amazonaws.com"
-        },
-        "Action": "sts:AssumeRole"
       }
     ]
   }
