@@ -1,6 +1,6 @@
-# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Python \(Boto 3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
+# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Python \(Boto3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
 
-You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto 3\) as described following\.
+You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
 
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
@@ -51,7 +51,7 @@ token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername
 
 The following code example shows how to generate an authentication token, and then use it to connect to a DB instance running PostgreSQL\. 
 
-To run this code example, you need the [AWS SDK for Python \(Boto 3\)](http://aws.amazon.com/sdk-for-python/), found on the AWS site\.
+To run this code example, you need the [AWS SDK for Python \(Boto3\)](http://aws.amazon.com/sdk-for-python/), found on the AWS site\.
 
 Modify the values of the following variables as needed:
 + `ENDPOINT` – The endpoint of the DB instance that you want to access

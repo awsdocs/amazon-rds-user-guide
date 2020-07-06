@@ -1,4 +1,4 @@
-# Performance Insights API<a name="USER_PerfInsights.API"></a>
+# Retrieving Data with the Performance Insights API<a name="USER_PerfInsights.API"></a>
 
 The Amazon RDS Performance Insights API provides visibility into the performance of your RDS instance, when Performance Insights is enabled for supported engine types\. Amazon CloudWatch Logs provides the authoritative source for vended monitoring metrics for AWS services\. Performance Insights offers a domain\-specific view of database load measured as average active sessions and provided to API consumers as a two\-dimensional time\-series dataset\. The time dimension of the data provides database load data for each time point in the queried time range\. Each time point decomposes overall load in relation to the requested dimensions, such as `SQL`, `Wait-event`, `User`, or `Host`, measured at that time point\.
 
@@ -39,7 +39,7 @@ All the metrics returned by `GetResourceMetrics` are standard time\-series metri
 **Note**  
 `GetResourceMetrics` can also return the `db.sampleload` metric, but the `db.load` metric is appropriate in most cases\.
 
-For information about the counter metrics returned by `GetResourceMetrics`, see [Performance Insights Counters](USER_PerfInsights_Counters.md)\.
+For information about the counter metrics returned by `GetResourceMetrics`, see [Customizing the Performance Insights Dashboard](USER_PerfInsights_Counters.md)\.
 
 The following calculations are supported for the metrics:
 + Average – The average value for the metric over a period of time\. Append `.avg` to the metric name\.
@@ -215,9 +215,9 @@ The response looks similar to the following\.
 } //end of response
 ```
 
-The response has an `Identifier`, `AlignedStartTime` and `AlignedEndTime`\. B the `--period-in-seconds` value was `60`, the start and end times have been aligned to the minute\. If the `--period-in-seconds` was `3600`, the start and end times would have been aligned to the hour\.
+The response has an `Identifier`, `AlignedStartTime`, and `AlignedEndTime`\. B the `--period-in-seconds` value was `60`, the start and end times have been aligned to the minute\. If the `--period-in-seconds` was `3600`, the start and end times would have been aligned to the hour\.
 
-The `MetricList` in the response has a number of entries, each with a `Key` and a `DataPoints` entry\. Each `DataPoint` has a `Timestamp` and a `Value`\. Each `Datapoints` list has 60 data points because the queries are for per\-minute data over an hour, with `Timestamp1/Minute1`, `Timestamp2/Minute2`, and so on up to `Timestamp60/Minute60`\. 
+The `MetricList` in the response has a number of entries, each with a `Key` and a `DataPoints` entry\. Each `DataPoint` has a `Timestamp` and a `Value`\. Each `Datapoints` list has 60 data points because the queries are for per\-minute data over an hour, with `Timestamp1/Minute1`, `Timestamp2/Minute2`, and so on, up to `Timestamp60/Minute60`\. 
 
 Because the query is for two different counter metrics, there are two elements in the response `MetricList`\.
 

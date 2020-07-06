@@ -1,4 +1,4 @@
-# Performance Insights Counters<a name="USER_PerfInsights_Counters"></a>
+# Customizing the Performance Insights Dashboard<a name="USER_PerfInsights_Counters"></a>
 
 With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
@@ -118,11 +118,11 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Aborted\_connects | Users | Connections | db\.Users\.Aborted\_connects | 
 | Threads\_created | Users | Connections | db\.Users\.Threads\_created | 
 | Threads\_running | Users | Connections | db\.Users\.Threads\_running | 
-| Innodb\_data\_writes | IO | Operations per second | db\.IO\.Innodb\_data\_writes | 
-| Innodb\_dblwr\_writes | IO | Operations per second | db\.IO\.Innodb\_dblwr\_writes | 
-| Innodb\_log\_write\_requests | IO | Operations per second | db\.IO\.Innodb\_log\_write\_requests | 
-| Innodb\_log\_writes | IO | Operations per second | db\.IO\.Innodb\_log\_writes | 
-| Innodb\_pages\_written | IO | Pages per second | db\.IO\.Innodb\_pages\_written | 
+| Innodb\_data\_writes | I/O | Operations per second | db\.IO\.Innodb\_data\_writes | 
+| Innodb\_dblwr\_writes | I/O | Operations per second | db\.IO\.Innodb\_dblwr\_writes | 
+| Innodb\_log\_write\_requests | I/O | Operations per second | db\.IO\.Innodb\_log\_write\_requests | 
+| Innodb\_log\_writes | I/O | Operations per second | db\.IO\.Innodb\_log\_writes | 
+| Innodb\_pages\_written | I/O | Pages per second | db\.IO\.Innodb\_pages\_written | 
 | Created\_tmp\_disk\_tables | Temp | Tables per second | db\.Temp\.Created\_tmp\_disk\_tables | 
 | Created\_tmp\_tables | Temp | Tables per second | db\.Temp\.Created\_tmp\_tables | 
 | Innodb\_buffer\_pool\_pages\_data | Cache | Pages | db\.Cache\.Innodb\_buffer\_pool\_pages\_data | 
@@ -144,7 +144,7 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_buffer\_pool\_hit\_rate | Cache | db\.Cache\.innodb\_buffer\_pool\_hit\_rate | The percentage of reads that InnoDB could satisfy from the buffer pool\. | 100 \* innodb\_buffer\_pool\_read\_requests / \(innodb\_buffer\_pool\_read\_requests \+ innodb\_buffer\_pool\_reads\) | 
 | innodb\_buffer\_pool\_usage | Cache | db\.Cache\.innodb\_buffer\_pool\_usage |  The percentage of the InnoDB buffer pool that contains data \(pages\)\.  When using compressed tables, this value can vary\. For more information, see the information about `Innodb_buffer_pool_pages_data` and `Innodb_buffer_pool_pages_total` in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.   | Innodb\_buffer\_pool\_pages\_data / Innodb\_buffer\_pool\_pages\_total \* 100\.0 | 
 | query\_cache\_hit\_rate | Cache | db\.Cache\.query\_cache\_hit\_rate | MySQL result set cache \(query cache\) hit ratio\. | Qcache\_hits / \(QCache\_hits \+ Com\_select\) \* 100 | 
-| innodb\_datafile\_writes\_to\_disk | IO | db\.IO\.innodb\_datafile\_writes\_to\_disk | The number of InnoDB data file writes to disk, excluding double write and redo logging write operations\. | Innodb\_data\_writes \- Innodb\_log\_writes \- Innodb\_dblwr\_writes | 
+| innodb\_datafile\_writes\_to\_disk | I/O | db\.IO\.innodb\_datafile\_writes\_to\_disk | The number of InnoDB data file writes to disk, excluding double write and redo logging write operations\. | Innodb\_data\_writes \- Innodb\_log\_writes \- Innodb\_dblwr\_writes | 
 | innodb\_rows\_changed | SQL | db\.SQL\.innodb\_rows\_changed | The total InnoDB row operations\. | db\.SQL\.Innodb\_rows\_inserted \+ db\.SQL\.Innodb\_rows\_deleted \+ db\.SQL\.Innodb\_rows\_updated | 
 | active\_transactions | Transactions | db\.Transactions\.active\_transactions | The total active transactions\. | SELECT COUNT\(1\) AS active\_transactions FROM INFORMATION\_SCHEMA\.INNODB\_TRX | 
 | innodb\_deadlocks | Locks | db\.Locks\.innodb\_deadlocks | The total number of deadlocks\. | SELECT COUNT AS innodb\_deadlocks FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_deadlocks' | 
@@ -244,11 +244,11 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | checkpoints\_timed | Checkpoint | Checkpoints per minute | db\.Checkpoint\.checkpoints\_timed | 
 | maxwritten\_clean | Checkpoint | Bgwriter clean stops per minute  | db\.Checkpoint\.maxwritten\_clean | 
 | deadlocks | Concurrency | Deadlocks per minute | db\.Concurrency\.deadlocks | 
-| blk\_read\_time | IO | Milliseconds | db\.IO\.blk\_read\_time | 
-| blks\_read | IO | Blocks per second | db\.IO\.blks\_read | 
-| buffers\_backend | IO | Blocks per second | db\.IO\.buffers\_backend | 
-| buffers\_backend\_fsync | IO | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
-| buffers\_clean | IO | Blocks per second | db\.IO\.buffers\_clean | 
+| blk\_read\_time | I/O | Milliseconds | db\.IO\.blk\_read\_time | 
+| blks\_read | I/O | Blocks per second | db\.IO\.blks\_read | 
+| buffers\_backend | I/O | Blocks per second | db\.IO\.buffers\_backend | 
+| buffers\_backend\_fsync | I/O | Blocks per second | db\.IO\.buffers\_backend\_fsync | 
+| buffers\_clean | I/O | Blocks per second | db\.IO\.buffers\_clean | 
 | tup\_deleted | SQL | Tuples per second | db\.SQL\.tup\_deleted | 
 | tup\_fetched | SQL | Tuples per second | db\.SQL\.tup\_fetched | 
 | tup\_inserted | SQL | Tuples per second | db\.SQL\.tup\_inserted | 
@@ -262,7 +262,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | xact\_commit | Transactions | Commits per second | db\.Transactions\.xact\_commit | 
 | xact\_rollback | Transactions | Rollbacks per second | db\.Transactions\.xact\_rollback | 
 | numbackends | User | Connections | db\.User\.numbackends | 
-| archived\_count | WAL | Files per minute | db\.WAL\.archived\_count | 
+| archived\_count | Write\-ahead log \(WAL\) | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 
 ### Non\-Native Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.NonNative"></a>
@@ -274,4 +274,4 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | --- | --- | --- | --- | --- | 
 | checkpoint\_sync\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_sync\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk\. | checkpoint\_sync\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
 | checkpoint\_write\_latency | Checkpoint | db\.Checkpoint\.checkpoint\_write\_latency | The total amount of time that has been spent in the portion of checkpoint processing where files are written to disk\. | checkpoint\_write\_time / \(checkpoints\_timed \+ checkpoints\_req\) | 
-| read\_latency | IO | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 
+| read\_latency | I/O | db\.IO\.read\_latency | The time spent reading data file blocks by backends in this instance\. | blk\_read\_time / blks\_read | 

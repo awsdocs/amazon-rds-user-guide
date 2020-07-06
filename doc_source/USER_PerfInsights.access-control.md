@@ -1,4 +1,4 @@
-# Access Control for Performance Insights<a name="USER_PerfInsights.access-control"></a>
+# Accessing Performance Insights<a name="USER_PerfInsights.access-control"></a>
 
 To access Performance Insights, you must have the appropriate permissions from AWS Identity and Access Management \(IAM\)\. There are two options available for granting access:
 
@@ -41,9 +41,7 @@ For users who don’t have full access with the `AmazonRDSFullAccess` policy, yo
    }
    ```
 
-1. Choose **Review policy**
-**Note**  
-Currently, when you enter this policy, the **Visual editor** tab displays a warning that the `pi` resource is not recognized\. You can ignore this warning\.
+1. Choose **Review policy**\.
 
 1. Provide a name for the policy and optionally a description, and then choose **Create policy**\.
 
@@ -57,12 +55,12 @@ You can now attach the policy to an IAM user or role\. The following procedure a
 
 1. Choose an existing user from the list\.
 **Important**  
-To use Performance Insights, the user must have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing Access Using Policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
+To use Performance Insights, make sure that you have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing Access Using Policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
 
 1. On the **Summary** page, choose **Add permissions**\.
 
 1. Choose **Attach existing policies directly**\. For **Search**, type the first few characters of your policy name, as shown following\.  
-![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_attach_iam_policy.png)![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Choose a Policy\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_attach_iam_policy.png)
 
 1. Choose your policy, and then choose **Next: Review**\.
 

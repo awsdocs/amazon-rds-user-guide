@@ -1,13 +1,6 @@
-# Using the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
+# Monitoring with the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
 
 The Performance Insights dashboard contains database performance information to help you analyze and troubleshoot performance issues\. On the main dashboard page, you can view information about the database load\. You can also drill into details for a particular wait state, SQL query, host, or user\.
-
-**Topics**
-+ [Opening the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.Opening)
-+ [Performance Insights Dashboard Components](#USER_PerfInsights.UsingDashboard.Components)
-+ [Analyzing Database Load Using the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad)
-+ [Analyzing Statistics for Running Queries](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics)
-+ [Viewing More SQL Text in the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.SQLTextSize)
 
 ## Opening the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.Opening"></a>
 
@@ -22,86 +15,102 @@ To see the Performance Insights dashboard, use the following procedure\.
 1. Choose a DB instance\. The Performance Insights dashboard is displayed for that DB instance\.
 
    For DB instances with Performance Insights enabled, you can also reach the dashboard by choosing the **Sessions** item in the list of DB instances\. Under **Current activity**, the **Sessions** item shows the database load in average active sessions over the last five minutes\. The bar graphically shows the load\. When the bar is empty, the DB instance is idle\. As the load increases, the bar fills with blue\. When the load passes the number of virtual CPUs \(vCPUs\) on the DB instance class, the bar turns red, indicating a potential bottleneck\.  
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0a.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0a.png)
 
-   The following screenshot shows the dashboard for a DB instance\.  
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0b.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+   The following screenshot shows the dashboard for a DB instance\. By default, the Performance Insights dashboard shows data for the last hour\.  
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0b.png)
 
-By default, the Performance Insights dashboard shows data for the last 60 minutes\. You can modify it to display data for the last 5 minutes, 60 minutes, 5 hours, 24 hours, or 1 week\. You can also show all of the data available\.
+1. \(Optional\) Choose a different time interval by selecting a button in the upper right\. For example, to change the interval to 5 hours, select **5h**\.  
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_0c.png)
 
-The Performance Insight dashboard automatically refreshes with new data\. The refresh rate depends on the amount of data displayed: 
-+ 5 minutes refreshes every 5 seconds\.
-+ 1 hour and 5 hours both refresh every minute\.
-+ 24 hours refreshes every 5 minutes\.
-+ 1 week refreshes every hour\.
+   In the following screenshot, the DB load interval is 5 hours\.  
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_1.png)
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_1.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+1. \(Optional\) To refresh your data automatically, enable **Auto refresh**\.  
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_1b.png)
+
+   The Performance Insight dashboard automatically refreshes with new data\. The refresh rate depends on the amount of data displayed: 
+   + 5 minutes refreshes every 5 seconds\.
+   + 1 hour refreshes every minute\.
+   + 5 hours refreshes every minute\.
+   + 24 hours refreshes every 5 minutes\.
+   + 1 week refreshes every hour\.
 
 ## Performance Insights Dashboard Components<a name="USER_PerfInsights.UsingDashboard.Components"></a>
 
 The dashboard is divided into three parts:
 
-1. **Counter Metrics chart** – Shows data for specific performance counter metrics\.
+1. **Counter Metrics** – Shows data for specific performance counter metrics\.
 
-1. **Average Active Sessions chart** – Shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\.
+1. **DB Load Chart** – Shows how the DB load compares to DB instance capacity as represented by the **Max vCPU** line\.
 
-1.  **Top load items table** – Shows the top items contributing to database load\.
+1.  **Top *items*** – Shows the top waits, SQL, hosts, and users contributing to DB load\.
 
 ### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 
- The **Counter Metrics** chart displays data for performance counters\. The default metrics shown are `blks_read.avg` and `xact_commit.avg`\. Choose which performance counters to display by selecting the gear icon in the upper\-right corner of the chart\. 
+ The **Counter Metrics** chart displays data for performance counters\. The default metrics depend on the DB engine\.
++ MySQL and MariaDB – `db.SQL.Innodb_rows_read.avg`
++ Oracle – `db.User.user calls.avg`
++ Microsoft SQL Server – `db.Databases.Active Transactions(_Total).avg`
++ PostgreSQL – `db.Transactions.xact_commit.avg`
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/aurora_perf_insights_counters.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Counter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/oracle_perf_insights_counters.png)
 
-For more information, see [Performance Insights Counters](USER_PerfInsights_Counters.md)\.
+Change the performance counters by choosing **Manage Metrics**\. You can select multiple **OS metrics** or **Database metrics**, as shown in the following screenshot\. To see details for any metric, hover over the metric name\.
+
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_select_metrics.png)
+
+For more information, see [Customizing the Performance Insights Dashboard](USER_PerfInsights_Counters.md)\.
 
 ### Average Active Sessions Chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
 
-The **Average Active Sessions** chart shows how the database load compares to DB instance capacity as represented by the **Max CPU** line\. By default, load is shown as active sessions grouped by wait states\. You can also choose instead to display load as active sessions grouped by SQL queries, hosts, or users\.
+The **DB Load Chart** shows how the database load compares to DB instance capacity as represented by the **Max vCPU** line\. By default, load is shown as active sessions grouped by wait states in a bar graph\. 
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_2.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Database load\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_2.png)
 
-To see details for any item for the selected time period in the legend, hover over that item on the **Average Active Sessions** chart\.
+You can choose to display load as active sessions grouped by waits, SQL, users, or hosts\. You can also choose a line graph\.
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_3.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_2b.png)
+
+To see details about a DB load item such as a SQL statement, hover over the item name\.
+
+![\[Database load item details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_2c.png)
+
+To see details for any item for the selected time period in the legend, hover over that item\.
+
+![\[Time period details for DB load\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_3.png)
 
 ### Top Load Items Table<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable"></a>
 
-The **Top Load Items** table shows the top items contributing to database load\. By default, the top SQL queries that are contributing to the database load are shown\. Queries are displayed as digests of multiple actual queries that are structurally similar but that possibly have different parameters\. You can choose to display top wait states, hosts, or users instead\.
+The **Top Load Items** table shows the top items contributing to database load\. By default, the console displays top SQL queries that are contributing to the database load, along with relevant statistics for each statement\. You can choose to display top waits, hosts, or users instead\.
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[Top SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4.png)
 
-The percentage of the database load associated with each top load item is illustrated in the **DB Load by Waits** column\. This column reflects the load for that item by whatever grouping is currently selected in the **Average Active Sessions** chart\. Take the case where the **Average Active Sessions** chart is grouping by hosts and you are looking at SQL queries in the top load items table\. In this case, the **DB Load by Waits** bar reflects the load that query represents on the related host\. Here it's colored\-coded to map to the representation of that host in the **Average Active Sessions** chart\.
+To see the components of a query, select the query, and then choose the \+\. A *SQL digest* is a composite of multiple actual queries that are structurally similar but that possibly have different literal values\. In the following screenshot, the selected query is a digest\.
 
-For another example, suppose that the **Average Active Sessions** chart is grouping by wait states and you are looking at SQL queries in the top load items table\. In this case, the **DB Load by Waits** bar is sized, segmented, and color\-coded to show how much of a given wait state that query is contributing to\. It also shows what wait states are affecting that query\.
+![\[Selected SQL digest\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4b.png)
 
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_6.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+In **Top sql**, the **Load by waits \(AAS\)** column illustrates the percentage of the database load associated with each top load item\. This column reflects the load for that item by whatever grouping is currently selected in the **DB Load Chart**\. For example, you might group the **DB Load Chart** chart by wait states\. You examine SQL queries in the top load items table\. In this case, the **DB Load by Waits** bar is sized, segmented, and color\-coded to show how much of a given wait state that query is contributing to\. It also shows which wait states are affecting the selected query\.
 
-In the **Top Load Items** table, you can view the following types of identifiers \(IDs\) that are associated with SQL statements:
-+ **SQL ID** – An ID that the database uses to uniquely identify a SQL statement\.
+![\[DB load by waits\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_6.png)
 
-  For Oracle and SQL Server DB instances, you can use a SQL ID to find a specific SQL statement\.
+In the **Top sql** table, you can open a statement to view its information\. The information appears in the bottom pane\.
+
+![\[Top SQL table with literal query selected\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-open.png)
+
+In the **Top sql** tab, you can view the following types of identifiers \(IDs\) that are associated with SQL statements:
 + **Support SQL ID** – A hash value of the SQL ID\. This value is only for referencing a SQL ID when you are working with AWS Support\. AWS Support doesn't have access to your actual SQL IDs and SQL text\.
-+ **Digest ID** – An ID that the database uses to uniquely identify a SQL digest\. A SQL digest can contain one or more SQL statements with literals removed and white space standardized\. The literals are replaced with question marks \(?\)\.
-
-  For Amazon RDS for MariaDB, MySQL, and PostgreSQL DB instances, you can use a digest ID to find a specific SQL digest\.
-
-  For Oracle and SQL Server DB instances, the digest ID is the same as the SQL ID\. The top row in the **Top Load Items** table is the actual SQL statement, including the literals\.
 + **Support Digest ID** – A hash value of the digest ID\. This value is only for referencing a digest ID when you are working with AWS Support\. AWS Support doesn't have access to your actual digest IDs and SQL text\.
 
-In the **Top Load Items** table, you can open a top statement to view its IDs\. The following screenshot shows an open top statement\.
+You can control the statistics displayed in the **Top sql** tab by choosing the **Preferences** icon\.
 
-![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-open.png)
-
-You can control the IDs that the **Top Load Items** table shows by choosing the **Preferences** icon\.
-
-![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences-icon.png)
+![\[Statistics preferences\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences-icon.png)
 
 When you choose the **Preferences** icon, the **Preferences** window opens\.
 
-![\[SQL IDs\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences.png)
+![\[Preferences window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-ids-preferences.png)
 
-Enable the IDs that you want to have visible in the **Top Load Items** table, and choose **Save**\.
+Enable the statistics that you want to have visible in the **Top sql** tab, use your mouse to scroll to the bottom of the window, and then choose **Continue**\.
 
 ## Analyzing Database Load Using the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
 
@@ -119,21 +128,13 @@ Your typical workflow for diagnosing performance issues is as follows:
 
 1. Choose one of these digest queries in the **SQL** tab to expand it and see the child queries that it is composed of\.
 
-For example, in the dashboard following, **IO:XactSync** waits are a frequent issue\. **CPU** wait is less, but it still contributes to load\. 
+For example, in the dashboard following, **log file sync** waits account for most of the DB load\. The **LGWR all worker groups** wait is also high\. The **Top sql** chart shows what is causing the **log file sync** waits: frequent `COMMIT` statements\. In this case, committing less frequently will reduce DB load\.
 
-The first four roll\-up queries in the **SQL** tab of the top load items table correlate strongly to the first state\. Thus, those are the ones to drill into and examine the child queries of\. You do so to determine how they are contributing to the performance issue\. 
-
-The last three roll\-up queries are the major contributors to CPU\. These are the queries to investigate if CPU load is an issue\.
-
-![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_7.png)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
+![\[log file sync errors\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_7.png)
 
 ## Analyzing Statistics for Running Queries<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics"></a>
 
-In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top Load Items** section\. To view these statistics, view top SQL\. Performance Insights collects statistics only for the most common queries, and these usually match the top queries by load shown in the Performance Insights dashboard\.
-
-**Topics**
-+ [Statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL)
-+ [Statistics for Amazon RDS for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle)
+In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top *load\_items*** section\. To view these statistics, view top SQL\. Performance Insights collects statistics only for the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\.
 
 ### Statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
@@ -240,9 +241,91 @@ The following screenshot shows the preferences for Oracle DB instances\.
 
 ![\[Preferences for metrics for running queries for Oracle DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_oracle.png)
 
+The following screenshot shows the statistics for a SQL statement\.
+
+![\[Statistics for a SQL statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_stats_oracle.png)
+
+## Accessing Execution Plans<a name="USER_PerfInsights.UsingDashboard.AccessPlans"></a>
+
+An *execution plan*, also called an *explain plan* or simply *plan*, is a sequence of steps that access data\. For example, a plan for joining tables `t1` and `t2` might loop through all rows in `t1` and compare each row to a row in `t2`\. In a relational database, an *optimizer* is built\-in code that determines the most efficient plan\.
+
+### Execution Plans in Performance Insights<a name="USER_PerfInsights.UsingDashboard.AccessPlans.About"></a>
+
+Performance Insights collects execution plans automatically\. To diagnose SQL performance problems, examine the captured plans for high\-resource queries\. The plans show how the DB engine has parsed and run queries\.
+
+The plan feature of Performance Insights enables you to do the following:
++ Discover the cause of a performance degradation by comparing different plans for the same query\. For example, after you drop an index, a query that previously ran fast might run slowly\. The plan might show that the DB engine uses a full table scan instead of a more efficient index scan\.
++ Compare the differences between plans for different DB engines\. For example, you can see whether the plan for a query on MySQL is different from the plan on PostgreSQL\.
++ Improve performance by focusing on a specific section of a plan\. For example, the plan may show a query is missing a join condition, causing the DB to join all rows of two tables\.
++ Make a change to improve performance, and then confirm that the plan changed and wait events decreased\. For example, if you added an index, you can check whether the index made the query run faster\.
+
+The following DB engines support the automatic plan capture feature:
++ Amazon Aurora with PostgreSQL compatibility
++ Amazon RDS for PostgreSQL
++ Amazon RDS for MySQL
++ Amazon RDS for MariaDB
+
+**Note**  
+Automatic plan capture is available in all AWS regions except China \(Beijing\), China \(Ningxia\), and Middle East \(Bahrain\)\.
+
+#### Execution Plan Collection<a name="USER_PerfInsights.UsingDashboard.AccessPlans.About.Sampling"></a>
+
+Every five minutes, Performance Insights identifies the most resource\-intensive queries and collects their plans\. Thus, you don't need to manually collect and manage a huge number of plans\. Instead, you can use the **Top SQL** tab to focus on the plans for the most problematic queries\. 
+
+**Note**  
+Performance Insights doesn't collect plans for queries whose text exceeds the maximum collectable query text limit\. For more information, see [Viewing More SQL Text in the Performance Insights Dashboard](#USER_PerfInsights.UsingDashboard.SQLTextSize)\.
+
+The retention period for execution plans is the same as for all your Performance Insights data\. The default is seven days in the free tier or two years for the long retention tier\.
+
+#### Digest Queries<a name="USER_PerfInsights.UsingDashboard.AccessPlans.About.Digest"></a>
+
+The **Top SQL** tab shows digest queries by default\. A digest query doesn't itself have a plan, but all queries that use literal values have plans\. For example, a digest query might include the text `WHERE `email`=?`\. The digest might contain two queries, one with the text `WHERE email=user1@example.com` and another with `WHERE email=user2@example.com`\. Each of these literal queries might include multiple plans\.
+
+If you select a digest query, the console shows all plans for child statements of the selected digest\. Thus, you don't need to look through all the child statements to find the plan\. You might see plans that aren’t in the displayed list of top 10 child statements\. The console shows plans for all child queries for which plans have been collected, regardless of whether the queries are in the top 10\.
+
+### Accessing Execution Plans with the Console<a name="USER_PerfInsights.UsingDashboard.AccessPlans.Console"></a>
+
+You can access execution plans in the Performance Insights dashboard\.
+
+**To access execution plans using the console**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Performance Insights**\.
+
+1. Choose a DB instance\. The Performance Insights dashboard is displayed for that DB instance\.
+
+1. In the **Top SQL** tab, select a SQL statement\. 
+
+   In the following example, the `UPDATE` statement is a digest\. The plan ID begins with 419\.  
+![\[Select a digest plan\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_select_digest_plan.png)
+
+1. Choose **Execution plans \(at digest level\)**\.
+
+   The list shows all plans for this digest statement and their related SQL IDs\.  
+![\[List all plans for a digest statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_digest_plans.png)
+
+1. In Top SQL, select a statement with literal values\.  
+![\[Select a query with literal values (not a digest query)\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-select-query-literals.png)
+
+   The SQL Information section shows the SQL details\.  
+![\[Examine the SQL information section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-details.png)
+
+1. Choose **Execution plans**\. 
+
+   By default, the console displays the plan in native rather than structured \(JSON\) format, as in the following example\.  
+![\[Choose Execution plans\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-info-plans.png)
+
+1. Choose **Execution plans**\. 
+
+   You see a list that shows all collected plans for this specified SQL ID\. In the following example, only one plan exists for this SQL ID, so the list contains only one plan\.  
+![\[Choose Execution plans\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-sql-info-plans.png)
+
+1. \(Optional\) Choose **Copy** or **Download** to access the plan\.
+
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
-By default, each row in the **Top Load Items** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can copy the displayed SQL statement\. To view more than 4,096 bytes, choose **Download full SQL** to view the SQL text up to the DB engine limit\.
+By default, each row in the **Top sql** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can copy the displayed SQL statement\. To view more than 4,096 bytes, choose **Download**\.
 
 The limit for SQL text depends on the DB engine\. The following limits apply:
 + Amazon RDS for Microsoft SQL Server – 4,096 characters
@@ -266,12 +349,12 @@ Currently, you can only view and download more SQL text with the AWS Management 
    SQL statements with text larger than 500 bytes look similar to the following image\.  
 ![\[SQL statements with large text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-large-text-1.png)
 
-1. Open a SQL statement to view more of the SQL text\.  
-![\[Viewing more SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-large-text-2.png)
+1. Examine the SQL information section to view more of the SQL text\.  
+![\[SQL information section shows more of the SQL text\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-large-text-2.png)
 
    The Performance Insights dashboard can display up to 4,096 bytes for each SQL statement\.
 
-1. \(Optional\) Choose **Copy snippet** to copy the displayed SQL statement, or choose **Download full SQL** to download the SQL statement to view the SQL text up to the DB engine limit\.
+1. \(Optional\) Choose **Copy** to copy the displayed SQL statement, or choose **Download** to download the SQL statement to view the SQL text up to the DB engine limit\.
 **Note**  
 To copy or download the SQL statement, disable pop\-up blockers\. 
 
@@ -294,3 +377,16 @@ If the Amazon RDS for PostgreSQL DB instance is using the default parameter grou
 1. Associate the new parameter group with the DB instance\.
 
 For information about setting a DB instance parameter, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+## Zooming In on the DB Load Chart<a name="USER_PerfInsights.UIcontrols"></a>
+
+You can use other features of the Performance Insights user interface to help analyze performance data\.
+
+**Click\-and\-Drag Zoom In**  
+In the Performance Insights interface, you can choose a small portion of the load chart and zoom in on the detail\.
+
+![\[Zoom in\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_zoom_in.png)
+
+To zoom in on a portion of the load chart, choose the start time and drag to the end of the time period you want\. When you do this, the selected area is highlighted\. When you release the mouse, the load chart zooms in on the selected AWS Region, and the **Top *items*** table is recalculated\.
+
+![\[Zoom in\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_zoom_in_b.png)

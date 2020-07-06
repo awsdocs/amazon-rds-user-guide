@@ -5,7 +5,9 @@ You can transfer files between a DB instance running Amazon RDS for SQL Server a
 The following limitations apply:
 + Files in the `D:\S3` folder are deleted on the standby replica after a failover on Multi\-AZ instances\. For more information, see [Multi\-AZ Limitations for S3 Integration](#S3-MAZ)\.
 + The DB instance and the S3 bucket must be in the same AWS Region\.
-+ S3 integration tasks are run sequentially and share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\.
++ If you run more than one S3 integration task at a time, the tasks run sequentially, not in parallel\.
+**Note**  
+S3 integration tasks share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. Therefore, two running native backup and restore tasks will block any S3 integration tasks\.
 + You must re\-enable the S3 integration feature on restored instances\. It isn't propagated from the source instance to the restored instance\. Files in D:\\S3 will be cleaned up on a restored instance\.
 + Downloading to the DB instance is limited to 100 files\. In other words, there can't be more than 100 files in `D:\S3\`\.
 + Only files without file extensions or with the following file extensions are supported for download: \.xml, \.txt, \.fmt, \.lst, \.dat, \.csv, \.info, \.bcp, and \.tbl\.

@@ -28,6 +28,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Manual snapshots | 100 | 
 | Option groups | 20 | 
 | Parameter groups | 50 | 
+| Proxies | 20 | 
 | Read replicas per master | 5 | 
 | Reserved DB instances | 40 | 
 | Rules per security group | 20 | 
