@@ -34,13 +34,15 @@ To set up Kerberos authentication for an Oracle DB instance, complete the follow
 
 1. Create and configure users in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users in your Microsoft Active Directory, see [Manage Users and Groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
 
+1. If you plan to locate the directory and the DB instance in different AWS accounts or virtual private clouds \(VPCs\), configure VPC peering\. For more information, see [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\.
+
 1. Create or modify an Oracle DB instance either from the console, CLI, or RDS API using one of the following methods:
    + [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)
    + [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)
    + [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
    + [Restoring a DB Instance to a Specified Time](USER_PIT.md)
 
-   When you create or modify the DB instance, provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory and the name of the role you created\. You can locate the DB instance in the same Amazon Virtual Private Cloud \(VPC\) as the directory or in a different VPC\.
+   When you create or modify the DB instance, provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory and the name of the role you created\. You can locate the DB instance in the same Amazon Virtual Private Cloud \(VPC\) as the directory or in a different AWS account or VPC\.
 
 1. Use the Amazon RDS master user credentials to connect to the Oracle DB instance\. Create the user in Oracle to be identified externally\. Externally identified users can log in to the Oracle DB instance using Kerberos authentication\.
 

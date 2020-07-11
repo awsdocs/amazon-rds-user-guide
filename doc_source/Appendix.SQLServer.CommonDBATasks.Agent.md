@@ -47,4 +47,4 @@ Don't use the UI in SQL Server Management Console \(SSMS\) to delete a SQL Serve
 ```
 The EXECUTE permission was denied on the object 'xp_regread', database 'mssqlsystemresource', schema 'sys'.
 ```
-This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process that RDS isn't authorized to do\.
+This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process \(`xp_regread`\) that RDS isn't authorized to do\.

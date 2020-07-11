@@ -14,18 +14,18 @@ In this procedure, you connect to your sample DB instance by using Microsoft SQL
 
 1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region of your DB instance\. 
 
-1. Find the Domain Name System \(DNS\) name and port number for your DB instance: 
+1. Find the Domain Name System \(DNS\) name and port number for your DB instance:
 
-   1. Open the RDS console and choose **Databases** to display a list of your DB instances\. 
+   1. Open the RDS console and choose **Databases** to display a list of your DB instances\.
 
-   1. Choose the SQL Server DB instance name to display its details\. 
+   1. Choose the SQL Server DB instance name to display its details\.
 
-   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.  
 ![\[Locate DB instance endpoint and port\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Endpoint.png)
 
 1. Start SQL Server Management Studio\. 
 
-   The **Connect to Server** dialog box appears\.   
+   The **Connect to Server** dialog box appears\.  
 ![\[Connect to Server dialog\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/RDSMSFTSQLConnect01.png)
 
 1. Provide the information for your DB instance:
@@ -52,18 +52,18 @@ Change the colon between the DNS name and port number to a comma\.
 
    After a few moments, SSMS connects to your DB instance\. If you can't connect to your DB instance, see [Security Group Considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting Connections to Your SQL Server DB Instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
-1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(`master`, `model`, `msdb`, and `tempdb`\)\. To explore the system databases, do the following: 
+1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(`master`, `model`, `msdb`, and `tempdb`\)\. To explore the system databases, do the following:
 
    1. In SSMS, on the **View** menu, choose **Object Explorer**\.
 
-   1. Expand your DB instance, expand **Databases**, and then expand **System Databases** as shown following\.   
+   1. Expand your DB instance, expand **Databases**, and then expand **System Databases**\.  
 ![\[Object Explorer displaying the system databases\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-SSMS-SystemDBs.png)
 
-1. Your SQL Server DB instance also comes with a database named `rdsadmin`\. Amazon RDS uses this database to store the objects that it uses to manage your database\. The `rdsadmin` database also includes stored procedures that you can run to perform advanced tasks\. For more information, see [Common DBA Tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)\. 
+1. Your SQL Server DB instance also comes with a database named `rdsadmin`\. Amazon RDS uses this database to store the objects that it uses to manage your database\. The `rdsadmin` database also includes stored procedures that you can run to perform advanced tasks\. For more information, see [Common DBA Tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)\.
 
-1. You can now start creating your own databases and running queries against your DB instance and databases as usual\. To run a test query against your DB instance, do the following: 
+1. You can now start creating your own databases and running queries against your DB instance and databases as usual\. To run a test query against your DB instance, do the following:
 
-   1. In SSMS, on the **File** menu point to **New** and then choose **Query with Current Connection**\. 
+   1. In SSMS, on the **File** menu point to **New** and then choose **Query with Current Connection**\.
 
    1. Enter the following SQL query\.
 
@@ -71,7 +71,7 @@ Change the colon between the DNS name and port number to a comma\.
       select @@VERSION
       ```
 
-   1. Run the query\. SSMS returns the SQL Server version of your Amazon RDS DB instance\.   
+   1. Run the query\. SSMS returns the SQL Server version of your Amazon RDS DB instance\.  
 ![\[SQL Query Window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Query.png)
 
 ## Connecting to Your DB Instance with SQL Workbench/J<a name="USER_ConnectToMicrosoftSQLServerInstance.JDBC"></a>

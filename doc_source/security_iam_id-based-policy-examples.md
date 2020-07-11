@@ -228,7 +228,7 @@ The following permissions policy grants permissions to prevent a user from delet
 
 Following are examples of how you can use condition keys in Amazon RDS IAM permissions policies\. 
 
-### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w87aac36c34c43c31b4"></a>
+### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w91aac36c34c43c31b4"></a>
 
 The following policy uses an RDS condition key and allows a user to create only DB instances that use the MySQL database engine and don't use MultiAZ\. The `Condition` element indicates the requirement that the database engine is MySQL\. 
 
@@ -255,7 +255,7 @@ The following policy uses an RDS condition key and allows a user to create only 
 20. }
 ```
 
-### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w87aac36c34c43c31b6"></a>
+### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w91aac36c34c43c31b6"></a>
 
 The following policy explicitly denies permission to create DB instances that use the DB instance classes `r3.8xlarge` and `m4.10xlarge`, which are the largest and most expensive DB instance classes\. This policy also prevents users from creating DB instances that use Provisioned IOPS, which incurs an additional cost\. 
 
@@ -294,7 +294,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 30. }
 ```
 
-### Example 3: Limit the Set of Tag Keys and Values That Can Be Used to Tag a Resource<a name="w87aac36c34c43c31b8"></a>
+### Example 3: Limit the Set of Tag Keys and Values That Can Be Used to Tag a Resource<a name="w91aac36c34c43c31b8"></a>
 
 The following policy uses an RDS condition key and allows the addition of a tag with the key `stage` to be added to a resource with the values `test`, `qa`, and `production`\.
 
@@ -368,7 +368,7 @@ Following are examples of how you can use custom tags in Amazon RDS IAM permissi
 **Note**  
 All examples use the us\-west\-2 region and contain fictitious account IDs\.
 
-#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w87aac36c34c43c33c28b6"></a>
+#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w91aac36c34c43c33c28b6"></a>
 
 The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on DB instances with either the `stage` tag set to `development` or `test`\. 
 
@@ -397,7 +397,7 @@ The following policy allows permission to perform the `ModifyDBInstance` and `Cr
 22. }
 ```
 
-#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w87aac36c34c43c33c28b8"></a>
+#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w91aac36c34c43c33c28b8"></a>
 
 The following policy explicitly denies permission to create a DB instance that uses DB parameter groups with specific tag values\. You might apply this policy if you require that a specific customer\-created DB parameter group always be used when creating DB instances\. Policies that use `Deny` are most often used to restrict access that was granted by a broader policy\.
 
@@ -422,7 +422,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16. }
 ```
 
-#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w87aac36c34c43c33c28c10"></a>
+#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w91aac36c34c43c33c28c10"></a>
 
 The following policy allows permission to call any API \(except to `AddTagsToResource` or `RemoveTagsFromResource`\) on a DB instance that has a DB instance name that is prefixed with the user's name and that has a tag called `stage` equal to `devo` or that has no tag called `stage`\.
 

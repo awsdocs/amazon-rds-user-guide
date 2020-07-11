@@ -30,6 +30,7 @@ For more information on managing access to Amazon RDS resources and your databas
 + [Compliance Validation for Amazon RDS](RDS-compliance.md)
 + [Resilience in Amazon RDS](disaster-recovery-resiliency.md)
 + [Infrastructure Security in Amazon RDS](infrastructure-security.md)
++ [Amazon RDS and Interface VPC Endpoints \(AWS PrivateLink\)](vpc-interface-endpoints.md)
 + [Security Best Practices for Amazon RDS](CHAP_BestPractices.Security.md)
 + [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)
 + [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)

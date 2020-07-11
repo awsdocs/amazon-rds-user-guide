@@ -185,10 +185,10 @@ The following are DB engine considerations for DB instance classes:
 | db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
 | db\.m1 – Previous Generation Standard Instance Classes | 
-| db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
-| db\.m1\.large | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
-| db\.m1\.medium | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
-| db\.m1\.small | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
+| db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
+| db\.m1\.large | No | Yes | Deprecated | Deprecated | Deprecated | 
+| db\.m1\.medium | No | Yes | Deprecated | Deprecated | Deprecated | 
+| db\.m1\.small | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
 | db\.z1d\.12xlarge | No | No | No | Yes | No | 
 | db\.z1d\.6xlarge | No | No | No | Yes | No | 
@@ -229,9 +229,9 @@ The following are DB engine considerations for DB instance classes:
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.m2 – Previous Generation Memory Optimized Instance Classes | 
-| db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
-| db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
-| db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | PostgreSQL 9\.4 | 
+| db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
+| db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
+| db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -240,8 +240,8 @@ The following are DB engine considerations for DB instance classes:
 | db\.t3\.small | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.micro | Yes | No | Yes | Yes | Yes | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
-| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5, 9\.4 | 
-| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5, 9\.4 | 
+| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
+| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
 | db\.t2\.large | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.t2\.medium | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.t2\.small | Yes | Yes | Yes | Deprecated | Yes | 

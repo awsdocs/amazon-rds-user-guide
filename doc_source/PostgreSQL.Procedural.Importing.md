@@ -21,9 +21,9 @@ Modify your DB parameter group to include the following settings\. You should on
 | Parameter | Recommended Value When Importing | Description | 
 | --- | --- | --- | 
 |  `maintenance_work_mem`  |  524288, 1048576, 2097152 or 4194304 \(in KB\)\. These settings are comparable to 512 MB, 1 GB, 2 GB, and 4 GB\.  |  The value for this setting depends on the size of your host\. This parameter is used during CREATE INDEX statements and each parallel command can use this much memory\. Calculate the best value so that you don't set this value so high that you run out of memory\.  | 
-|  `checkpoint_segments`  |   256  |  The value for this setting consumes more disk space, but gives you less contention on your WAL logs\. For PostgreSQL versions 9\.5\.x and 9\.6\.x, this value would be `max_wal_size`\.  | 
+|  `checkpoint_segments`  |   256  |  The value for this setting consumes more disk space, but gives you less contention on a write ahead log \(WAL\)\. For PostgreSQL versions 9\.5\.x and 9\.6\.x, this value is `max_wal_size`\.  | 
 |  `checkpoint_timeout`  |   1800  |  The value for this setting allows for less frequent WAL rotation\.  | 
-|  `synchronous_commit`  |  Off  |  Disable this setting to speed up writes\. Turning this parameter off can increase the risk of data loss in the event of a server crash \(do not turn off FSYNC\)  | 
+|  `synchronous_commit`  |  Off  |  Disable this setting to speed up writes\. Turning this parameter off can increase the risk of data loss in the event of a server crash \(do not turn off FSYNC\)\.  | 
 |  `wal_buffers`  |   8192  |  This is value is in 8 KB units\. This again helps your WAL generation speed  | 
 |  `autovacuum`  |  Off  |  Disable the PostgreSQL auto vacuum parameter while you are loading data so that it doesn’t use resources  | 
 

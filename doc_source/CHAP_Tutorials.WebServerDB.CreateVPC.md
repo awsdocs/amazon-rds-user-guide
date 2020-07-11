@@ -67,15 +67,17 @@ Choose an Availability Zone that is different from the one that you chose for th
 
 1. When you're finished, choose **Create**\. Next, choose **Close** on the confirmation page\.
 
-1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, `Tutorial private 1`\. 
+1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, complete the following steps:
 
-1. Below the list of subnets, choose the **Route Table** tab, and note the value for **Route Table**—for example: `rtb-98b613fd`\. 
+   1. Choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, `Tutorial private 1`\. 
 
-1. In the list of subnets, deselect the first private subnet\.
+   1. Below the list of subnets, choose the **Route Table** tab, and note the value for **Route Table**—for example: `rtb-98b613fd`\. 
 
-1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route Table** tab\. 
+   1. In the list of subnets, deselect the first private subnet\.
 
-1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route Table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
+   1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route Table** tab\. 
+
+   1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route Table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
 
 ## Create a VPC Security Group for a Public Web Server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 

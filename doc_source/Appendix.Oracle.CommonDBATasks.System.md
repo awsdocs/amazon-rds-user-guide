@@ -192,6 +192,9 @@ Usually you transfer privileges by using roles, which can contain many objects\.
 
 The `grant_sys_object` procedure has the following parameters\. 
 
+**Important**  
+For all parameter values, use uppercase unless you created the user with a case\-sensitive identifier\. For example, if you run `CREATE USER myuser` or `CREATE USER MYUSER`, the data dictionary stores `MYUSER`\. However, if you use double quotes in `CREATE USER "MyUser"`, the data dictionary stores `MyUser`\.
+
 
 ****  
 

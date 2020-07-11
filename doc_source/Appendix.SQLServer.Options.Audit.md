@@ -29,6 +29,8 @@ RDS supports configuring the following option settings for SQL Server Audit\.
 | ENABLE\_COMPRESSION | true or false | Controls audit log compression\. By default, compression is enabled \(set to true\)\. | 
 | RETENTION\_TIME | 0 to 840 | The retention time \(in hours\) that SQL Server audit records are kept on your RDS instance\. By default, retention is disabled\. | 
 
+RDS supports SQL Server Audit in all AWS Regions except Middle East \(Bahrain\)\.
+
 ## Adding SQL Server Audit to the DB Instance Options<a name="Appendix.SQLServer.Options.Audit.Adding"></a>
 
 Enabling SQL Server Audit requires two steps: enabling the option on the DB instance, and enabling the feature inside SQL Server\. The process for adding the SQL Server Audit option to a DB instance is as follows: 

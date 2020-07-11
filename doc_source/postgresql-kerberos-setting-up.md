@@ -6,7 +6,7 @@ You use AWS Directory Service for Microsoft Active Directory \(AWS Managed Micro
 + [Step 1: Create a Directory Using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)
 + [Step 2: Create an IAM Role for Amazon RDS to Access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)
 + [Step 3: Create and Configure Users](#postgresql-kerberos-setting-up.create-users)
-+ [Step 4: Configure VPC Peering](#postgresql-kerberos-setting-up.vpc-peering)
++ [Step 4: Enable Cross\-VPC Traffic Between the Directory and the DB Instance](#postgresql-kerberos-setting-up.vpc-peering)
 + [Step 5: Create or Modify a PostgreSQL DB Instance](#postgresql-kerberos-setting-up.create-modify)
 + [Step 6: Create Kerberos Authentication PostgreSQL Logins](#postgresql-kerberos-setting-up.create-logins)
 + [Step 7: Configure a PostgreSQL Client](#postgresql-kerberos-setting-up.configure-client)
@@ -142,31 +142,31 @@ The role must also have the following IAM role policy\.
 
 To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance\. Also, this EC2 instance must be a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a User](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
 
-## Step 4: Configure VPC Peering<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
+## Step 4: Enable Cross\-VPC Traffic Between the Directory and the DB Instance<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [ Step 5: Create or Modify a PostgreSQL DB Instance ](#postgresql-kerberos-setting-up.create-modify)\. If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. 
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [ Step 5: Create or Modify a PostgreSQL DB Instance ](#postgresql-kerberos-setting-up.create-modify)\.
 
-If the same AWS account owns both VPCs, follow the instructions in [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon VPC Peering Guide*\. Specifically, complete the following steps:
+If you plan to locate the directory and the DB instance in different VPCs, configure cross\-VPC traffic using VPC peering or [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html)\.
 
-1. Set up appropriate VPC routing rules to make sure that the network traffic can flow both ways\.
+The following procedure enables traffic between VPCs using VPC peering\. Follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud Peering Guide*\.
 
-1. Ensure the DB instance's security group can receive ingress traffic from this security group\.
+**To enable cross\-VPC traffic using VPC peering**
+
+1. Set up appropriate VPC routing rules to ensure that network traffic can flow both ways\.
+
+1. Ensure that the DB instance's security group can receive inbound traffic from the directory's security group\.
 
 1. Ensure that there is no network access control list \(ACL\) rule to block traffic\.
 
-If different AWS accounts own the VPCs, complete the following steps:
+If a different AWS account owns the directory, you must share the directory\.
 
-1. Configure VPC peering by following the instructions in [What Is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) Specifically, complete the following steps:
+**To share the directory between AWS accounts**
 
-   1. Set up appropriate VPC routing rules to make sure that the network traffic can flow both ways\.
+1. Start sharing the directory with the AWS account that the DB instance will be created in by following the instructions in [Tutorial: Sharing Your AWS Managed Microsoft AD Directory for Seamless EC2 Domain\-Join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
 
-   1. Make sure that there is no ACL rule to block traffic\.
+1. Sign in to the AWS Directory Service console using the account for the DB instance, and ensure that the domain has the `SHARED` status before proceeding\.
 
-1. Start sharing the directory with the AWS account where you plan to create the DB instance\. To do this, follow the instructions in [Tutorial: Sharing Your AWS Managed Microsoft AD Directory for Seamless EC2 Domain\-Join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
-
-1. Sign in to the AWS Directory Service console using the account for the DB instance, and make sure that the domain has the `SHARED` status before proceeding\.
-
-1. While logged into the AWS Directory Service console using the account for the DB instance, make a note of the **Directory ID** value for the directory\.
+1. While signed into the AWS Directory Service console using the account for the DB instance, note the **Directory ID** value\. You use this directory ID to join the DB instance to the domain\.
 
 ## Step 5: Create or Modify a PostgreSQL DB Instance<a name="postgresql-kerberos-setting-up.create-modify"></a>
 

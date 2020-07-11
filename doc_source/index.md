@@ -284,6 +284,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Compliance Validation for Amazon RDS](RDS-compliance.md)
    + [Resilience in Amazon RDS](disaster-recovery-resiliency.md)
    + [Infrastructure Security in Amazon RDS](infrastructure-security.md)
+   + [Amazon RDS and Interface VPC Endpoints (AWS PrivateLink)](vpc-interface-endpoints.md)
    + [Security Best Practices for Amazon RDS](CHAP_BestPractices.Security.md)
    + [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)
       + [Working with DB Security Groups (EC2-Classic Platform)](USER_WorkingWithSecurityGroups.md)

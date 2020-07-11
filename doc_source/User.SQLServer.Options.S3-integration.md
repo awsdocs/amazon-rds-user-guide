@@ -10,7 +10,7 @@ The following limitations apply:
 S3 integration tasks share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. Therefore, two running native backup and restore tasks will block any S3 integration tasks\.
 + You must re\-enable the S3 integration feature on restored instances\. It isn't propagated from the source instance to the restored instance\. Files in D:\\S3 will be cleaned up on a restored instance\.
 + Downloading to the DB instance is limited to 100 files\. In other words, there can't be more than 100 files in `D:\S3\`\.
-+ Only files without file extensions or with the following file extensions are supported for download: \.xml, \.txt, \.fmt, \.lst, \.dat, \.csv, \.info, \.bcp, and \.tbl\.
++ Only files without file extensions or with the following file extensions are supported for download: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
 + The S3 bucket must have the same owner as the related AWS Identity and Access Management \(IAM\) role\. Also, the bucket can't be open to the public\.
 + File size for uploads is limited to 50 GB per file\.
 
@@ -330,7 +330,7 @@ To download files from an S3 bucket to an RDS SQL Server DB instance, use the Am
 |  `@rds_file_path`  |  NVARCHAR  |  –  |  Optional  |  The file path for the RDS instance\. If not specified, the file path is `D:\S3\<filename in s3>`\. RDS supports absolute paths and relative paths\. If you want to create a subfolder, include it in the file path\.  | 
 |  `@overwrite_file`  |  INT  |  0  |  Optional  | Overwrite the existing file:  0 = Don't overwrite 1 = Overwrite | 
 
-You can download files without a file extension and files with the following file extensions: xml, \.txt, \.fmt, \.lst, \.dat, \.csv, \.info, \.bcp, and \.tbl\.
+You can download files without a file extension and files with the following file extensions: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
 
 The following example shows the stored procedure to download files from S3\. 
 

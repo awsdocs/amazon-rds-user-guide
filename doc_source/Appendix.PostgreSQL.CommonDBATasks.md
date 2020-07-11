@@ -318,7 +318,7 @@ In general terms, for large hosts set the [https://www.postgresql.org/docs/curre
 
 ### Reducing the Likelihood of Transaction ID Wraparound<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming"></a>
 
-In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, Amazon RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL versions 9\.4 and newer\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
+In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, Amazon RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
 
 Adaptive autovacuum parameter tuning is enabled by default for RDS PostgreSQL instances with the dynamic parameter `rds.adaptive_autovacuum` set to ON\. We strongly recommend that you keep this enabled\. However, to turn off adaptive autovacuum parameter tuning, set the `rds.adaptive_autovacuum` parameter to 0 or OFF\. 
 
@@ -455,7 +455,7 @@ After running the query, you should see output similar to the following\.
          |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
 ```
 
-If you are using a version less than Amazon RDS PostgreSQL 9\.6, but 9\.4\.7 or later, or 9\.5\.2 or later, use the following query\.
+If you are using an Amazon RDS for PostgreSQL version less than 9\.6, use the following query\.
 
 ```
 SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query
@@ -500,7 +500,7 @@ The following steps are a guideline, and there are several variations to the pro
 
 1. Open two sessions to the database containing the table you want to vacuum\. For the second session, use "screen" or another utility that maintains the session if your connection is dropped\.
 
-1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.4\.7 or later, or 9\.5\.2 or later, to have full visibility into the running rdsadmin processes\.
+1. In session one, get the PID of the autovacuum session running on the table\. 
 
    Run the following query to get the PID of the autovacuum session\.
 
@@ -571,7 +571,7 @@ When the index is corrupted and autovacuum is attempting to run against the tabl
 
 1. Open two sessions to the database containing the table you want to vacuum\. For the second session, use "screen" or another utility that maintains the session if your connection is dropped\.
 
-1. In session one, get the PID of the autovacuum session running on the table\. This action requires that you are running Amazon RDS PostgreSQL 9\.4\.7 or later, or 9\.5\.2 or later, to have full visibility into the running rdsadmin processes\.
+1. In session one, get the PID of the autovacuum session running on the table\.
 
    Run the following query to get the PID of the autovacuum session\.
 
@@ -653,12 +653,12 @@ Doing this disables the cost\-based autovacuum delay for this table at the expen
 
 ### Autovacuum Logging<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging"></a>
 
-By default, the *postgresql\.log* doesn't contain information about the autovacuum process\. If you are using PostgreSQL 9\.4\.5 or later, you can see output in the PostgreSQL error log from the autovacuum worker operations by setting the `rds.force_autovacuum_logging_level` parameter\. Allowed values are `disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal,` and `panic`\. The default value is `disabled` because the other allowable values can add significant amount of information to your logs\.
+By default, the *postgresql\.log* doesn't contain information about the autovacuum process\. You can see output in the PostgreSQL error log from the autovacuum worker operations by setting the `rds.force_autovacuum_logging_level` parameter\. Allowed values are `disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal,` and `panic`\. The default value is `disabled` because the other allowable values can add significant amount of information to your logs\.
 
 We recommend that you set the value of the `rds.force_autovacuum_logging_level` parameter to `log` and that you set the `log_autovacuum_min_duration` parameter to a value from 1,000 to 5,000 milliseconds\. If you set this value to 5,000, Amazon RDS writes any activity to the log that takes more than five seconds\. It also shows "vacuum skipped" messages when application locking is causing autovacuum to intentionally skip tables\. If you are troubleshooting a problem and need more detail, you can use a different logging level value, such as `debug1` or `debug3`\. Use these debug parameters for a short period of time because these settings produce extremely verbose content written to the error log file\. For more information about these debug settings, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN)\.
 
 **Note**  
-PostgreSQL version 9\.4\.7 and later includes improved visibility of autovacuum sessions by allowing the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
+PostgreSQL allows the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
 
 ## Audit Logging for a PostgreSQL DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 

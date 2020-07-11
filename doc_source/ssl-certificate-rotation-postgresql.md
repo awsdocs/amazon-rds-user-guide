@@ -40,15 +40,6 @@ Only rows using SSL/TLS connections are displayed with information about the con
 
 This query displays only the current connections at the time of the query\. The absence of results doesn't indicate that no applications are using SSL connections\. Other SSL connections might be established at a different time\.
 
-If you are using RDS PostgreSQL version 9\.4 and `rds.force_ssl` is not set to `1` \(on\), then to determine whether your applications are connecting with SSL, you must enable the `log_connections` parameter\. This parameter logs SSL connection information when a client connects\. The following is an example of an SSL connection entry in the error log\.
-
-```
-2018-04-19 10:19:20 UTC:123.45.67.8(6789):[unknown]@[unknown]:[17196]:LOG: connection received: host=123.45.67.8 port=12345
-2018-04-19 10:19:20 UTC:123.45.67.8(6789):test_user@Test_DB:[17196]:LOG: connection authorized: user=test_user database=Test_DB SSL enabled (protocol=xxxx, cipher=xxxx, compression=off)
-```
-
-For more information about viewing the error log, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
-
 ## Determining Whether a Client Requires Certificate Verification in Order to Connect<a name="ssl-certificate-rotation-postgresql.determining-client"></a>
 
 When a client, such as psql or JDBC, is configured with SSL support, the client first tries to connect to the database with SSL by default\. If the client can't connect with SSL, it reverts to connecting without SSL\. The default `sslmode` mode used is different between libpq\-based clients \(such as psql\) and JDBC\. The libpq\-based clients default to `prefer`, where JDBC clients default to `verify-full`\. The certificate on the server is verified only when `sslrootcert` is provided with `sslmode` set to `require`, `verify-ca`, or `verify-full`\. An error is thrown if the certificate is invalid\.

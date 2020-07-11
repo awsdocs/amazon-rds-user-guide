@@ -5,7 +5,7 @@ You use AWS Directory Service for Microsoft Active Directory, also called AWS Ma
 + [Step 2: Create a Trust](#oracle-kerberos-setting-up.create-forest-trust)
 + [Step 3: Create an IAM Role for Use by Amazon RDS](#oracle-kerberos-setting-up.CreateIAMRole)
 + [Step 4: Create and Configure Users](#oracle-kerberos-setting-up.create-users)
-+ [Step 5: Configure VPC Peering](#oracle-kerberos-setting-up.vpc-peering)
++ [Step 5: Enable Cross\-VPC Traffic Between the Directory and the DB Instance](#oracle-kerberos-setting-up.vpc-peering)
 + [Step 6: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)
 + [Step 7: Create Kerberos Authentication Oracle Logins](#oracle-kerberos-setting-up.create-logins)
 + [Step 8: Configure an Oracle Client](#oracle-kerberos-setting-up.configure-oracle-client)
@@ -142,31 +142,31 @@ The role must also have the following IAM role policy\.
 
 To create users in an AWS Directory Service directory, you must be connected to a Windows\-based Amazon EC2 instance that is a member of the AWS Directory Service directory\. At the same time, you must be logged in as a user that has privileges to create users\. For more information, see [Create a User](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_create_user.html) in the *AWS Directory Service Administration Guide*\.
 
-## Step 5: Configure VPC Peering<a name="oracle-kerberos-setting-up.vpc-peering"></a>
+## Step 5: Enable Cross\-VPC Traffic Between the Directory and the DB Instance<a name="oracle-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate the directory and the DB instance in different VPCs, configure VPC peering by following the instructions in this step\. If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 6: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)\.
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 6: Create or Modify an Oracle DB Instance](#oracle-kerberos-setting-up.create-modify)\.
 
-If the same AWS account owns both VPCs, follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html)\. Specifically, complete the following steps:
+If you plan to locate the directory and the DB instance in different VPCs, configure cross\-VPC traffic using VPC peering or [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html)\.
 
-1. Set up appropriate VPC routing rules to ensure the network traffic can flow both ways\.
+The following procedure enables traffic between VPCs using VPC peering\. Follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud Peering Guide*\.
 
-1. Ensure the DB instance's security group can receive ingress traffic from this security group\.
+**To enable cross\-VPC traffic using VPC peering**
+
+1. Set up appropriate VPC routing rules to ensure that network traffic can flow both ways\.
+
+1. Ensure that the DB instance's security group can receive inbound traffic from the directory's security group\.
 
 1. Ensure that there is no network access control list \(ACL\) rule to block traffic\.
 
-If different AWS accounts own the VPCs, complete the following steps:
+If a different AWS account owns the directory, you must share the directory\.
 
-1. Configure VPC peering by following the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in *Amazon Virtual Private Cloud VPC Peering*\. Specifically, complete the following steps:
+**To share the directory between AWS accounts**
 
-   1. Set up appropriate VPC routing rules to ensure the network traffic can flow both ways\.
+1. Start sharing the directory with the AWS account that the DB instance will be created in by following the instructions in [Tutorial: Sharing Your AWS Managed Microsoft AD Directory for Seamless EC2 Domain\-Join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
 
-   1. Ensure that there is no ACL rule to block traffic\.
+1. Sign in to the AWS Directory Service console using the account for the DB instance, and ensure that the domain has the `SHARED` status before proceeding\.
 
-1. Initiate sharing of the directory with the AWS account that the DB instance will be created in by following the instructions in [Tutorial: Sharing Your AWS Managed Microsoft AD Directory for Seamless EC2 Domain\-Join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
-
-1. Log in to the AWS Directory Service console using the account for the DB instance, and ensure that the domain has the `SHARED` status before proceeding\.
-
-1. While logged into the AWS Directory Service console using the account for the DB instance, make a note of the **Directory ID** value for the directory\.
+1. While signed into the AWS Directory Service console using the account for the DB instance, note the **Directory ID** value\. You use this directory ID to join the DB instance to the domain\.
 
 ## Step 6: Create or Modify an Oracle DB Instance<a name="oracle-kerberos-setting-up.create-modify"></a>
 

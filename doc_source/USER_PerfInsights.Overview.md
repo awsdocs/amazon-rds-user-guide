@@ -28,18 +28,18 @@ You can find an overview of Performance Insights in the following video\.
 
 ## Supported DB Engines for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
 
-Following, you can find the DB engines that support Performance Insights\. All engines support the plan capture feature unless otherwise noted\.
+Following, you can find the DB engines that support Performance Insights\. 
 
 
 |  DB Engine  | Supported DB Engine Versions | 
 | --- | --- | 
-|  Amazon Aurora with MySQL compatibility  |  2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\), and 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)\. Not supported on db\.t2 or db\.t3 DB instance classes\. Not supported for DB clusters enabled for parallel query\. The automatic plan capture feature is not supported\.  | 
+|  Amazon Aurora with MySQL compatibility  |  2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\), and 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)\. Not supported on db\.t2 or db\.t3 DB instance classes\. Not supported for DB clusters enabled for parallel query\.   | 
 |  Amazon Aurora with PostgreSQL compatibility  |  All versions\.  | 
 |  Amazon RDS for MariaDB  |  10\.4\.8 and higher 10\.4 versions, 10\.3\.13 and higher 10\.3 versions, and 10\.2\.21 and higher 10\.2 versions\. Not supported for MariaDB version 10\.0 or 10\.1\. Not supported for MariaDB version 10\.3\.13 DB instances in the Europe \(Frankfurt\) and Europe \(Stockholm\) AWS Regions\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
 |  Amazon RDS for MySQL  |  8\.0\.17 and higher 8\.0 versions, version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions\. Not supported for version 5\.5\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
-|  Amazon RDS for Microsoft SQL Server  |  All versions except SQL Server 2008\. The automatic plan capture feature is not supported\.  | 
+|  Amazon RDS for Microsoft SQL Server  |  All versions except SQL Server 2008\.   | 
 |  Amazon RDS for PostgreSQL  |  Version 10, 11, and 12\.  | 
-|  Amazon RDS for Oracle  |  All versions\. The automatic plan capture feature is not supported\.  | 
+|  Amazon RDS for Oracle  |  All versions\.   | 
 
 **Note**  
 Amazon RDS Performance Insights is not supported in the Middle East \(Bahrain\) Region\.

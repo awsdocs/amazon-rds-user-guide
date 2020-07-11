@@ -2,7 +2,7 @@
 
 When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades for PostgreSQL DB instances: major version upgrades and minor version upgrades\. 
 
-*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB instance\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [Major Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
+*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB instance\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [ Choosing a Major Version Upgrade for PostgreSQL ](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. For more details, see [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually Upgrading the Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
@@ -10,7 +10,8 @@ If your PostgreSQL DB instance is using read replicas, you must upgrade all of t
 
 **Topics**
 + [Overview of Upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
-+ [Major Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
++ [Choosing a Major Version Upgrade for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
++ [How to Perform a Major Version Upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)
 + [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
 + [Upgrading PostgreSQL Extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)
 
@@ -27,13 +28,11 @@ If your DB instance is in a Multi\-AZ deployment, both the primary writer DB ins
 
 After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
 
-## Major Version Upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
+## Choosing a Major Version Upgrade for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
 Major version upgrades can contain database changes that are not backward\-compatible with previous versions of the database\. This functionality can cause your existing applications to stop working correctly\. 
 
 As a result, Amazon RDS doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB instance manually\. Make sure that you thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. When you do a PostgreSQL major version upgrade, we recommend that you follow the steps described in [How to Perform a Major Version Upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)\. 
-
-### Choosing from Multiple Major Versions<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Multi"></a>
 
 You can upgrade a PostgreSQL database to its next major version\. From some PostgreSQL database versions, you can skip to a higher major version when upgrading\. The following table lists the source PostgreSQL database versions and the associated target major versions available for upgrading\.
 
@@ -46,10 +45,10 @@ The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or lat
 
 | Current Source Version | Preferred Upgrade Targets | Newest Upgrade Target | 
 | --- | --- | --- | 
-| 9\.3\.x |  [9\.4\.25](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9425), [9\.5\.20](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9520)  | [9\.5\.22](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9522) | 
-| 9\.3\.23 | [9\.4\.25](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9425), [9\.5\.13 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9513), [9\.6\.9 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version969) | [9\.6\.9 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version969) | 
-| 9\.3\.24 |  [9\.4\.25](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9425), [9\.5\.14 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9514), [9\.6\.10 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9610)  | [9\.6\.10 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9610) | 
-| 9\.3\.25 | [9\.4\.25](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9425), [9\.5\.15 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9515) | [9\.5\.15 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9515) | 
+| 9\.3\.x | [9\.5\.20](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9520)  | [9\.5\.22](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9522) | 
+| 9\.3\.23 | [9\.5\.13 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9513), [9\.6\.9 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version969) | [9\.6\.9 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version969) | 
+| 9\.3\.24 | [9\.5\.14 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9514), [9\.6\.10 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9610)  | [9\.6\.10 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9610) | 
+| 9\.3\.25 | [9\.5\.15 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9515) | [9\.5\.15 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9515) | 
 | 9\.4\.7 | [9\.5\.20](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9520), [9\.6\.11 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9611) | [9\.6\.11 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9611) | 
 | 9\.4\.9, 9\.4\.11, 9\.4\.12, 9\.4\.14, 9\.4\.15, 9\.4\.17, 9\.4\.18, 9\.4\.19  | [9\.5\.20](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9520)  | [9\.5\.22](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9522) | 
 | 9\.4\.20 | [9\.5\.20](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version9520), [11\.1 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version111) | [11\.1 ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.version111) | 
@@ -86,13 +85,15 @@ export ENDPOINT=https://rds.AWS-Region.amazonaws.com
 aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query '[].ValidUpgradeTarget[?IsMajorVersionUpgrade==true].{EngineVersion:EngineVersion}' --engine-version DB-current-version
 ```
 
-### How to Perform a Major Version Upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>
+## How to Perform a Major Version Upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>
 
 We recommend the following process when upgrading an Amazon RDS PostgreSQL DB instance:
 
 1. **Have a version\-compatible parameter group ready** – If you are using a custom parameter group, you have two options\. You can specify a default parameter group for the new DB engine version\. Or you can create your own custom parameter group for the new DB engine version\. 
 
    If you associate a new parameter group with a DB instance, reboot the database after the upgrade completes\. If the instance needs to be rebooted to apply the parameter group changes, the instance's parameter group status shows `pending-reboot`\. You can view an instance's parameter group status in the console or by using a describe command, such as [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\.
+
+1. **Check for unsupported DB instance classes** – Check that your database's instance class is compatible with the PostgreSQL version you are upgrading to\. For more information, see [Supported DB Engines for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support)\.
 
 1. **Check for unsupported usage:**
    + **Prepared transactions** – Commit or roll back all open prepared transactions before attempting an upgrade\. 
@@ -101,26 +102,6 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
      ```
      SELECT count(*) FROM pg_catalog.pg_prepared_xacts;
-     ```
-   + **The line data type ** – If you are upgrading an RDS PostgreSQL 9\.3 instance, remove all uses of the `line` data type before attempting an upgrade\. The `line` data type wasn't fully implemented in PostgreSQL until version 9\.4\. 
-
-     To verify that there are no uses of the `line` data type, use the following query on each database to be upgraded\. 
-
-     ```
-     SELECT count(*) FROM pg_catalog.pg_class c, pg_catalog.pg_namespace n, pg_catalog.pg_attribute a 
-       WHERE c.oid = a.attrelid 
-           AND NOT a.attisdropped
-           AND a.atttypid = 'pg_catalog.line'::pg_catalog.regtype 
-           AND c.relnamespace = n.oid 
-           AND n.nspname !~ '^pg_temp_' 
-           AND n.nspname !~ '^pg_toast_temp_' 
-           AND n.nspname NOT IN ('pg_catalog', 'information_schema');
-     ```
-**Note**  
-To list all databases for an instance, use the following query\.  
-
-     ```
-     SELECT d.datname FROM pg_catalog.pg_database d WHERE d.datallowconn = true;
      ```
    + **Reg\* data types** – Remove all uses of the *reg\** data types before attempting an upgrade\. Except for `regtype` and `regclass`, you can't upgrade the *reg\** data types\. The pg\_upgrade utility can't persist this data type, which is used by Amazon RDS to do the upgrade\. 
 

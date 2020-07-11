@@ -353,7 +353,7 @@ All of the considerations for performing replication within an AWS Region apply 
   + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, all versions of 12\.2, and all versions of 18\.0\.
 
     An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Read Replica Limitations with Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
-  + PostgreSQL version 9\.4\.7 and later\.
+  + PostgreSQL \(all versions\)\.
 + A source DB instance can have cross\-Region read replicas in multiple AWS Regions\.
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.
 + You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) Region\.
@@ -496,6 +496,6 @@ For PostgreSQL, the `ReplicaLag` metric returns the value of the following query
 SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS slave_lag
 ```
 
-PostgreSQL versions 9\.4\.7 and 9\.5\.2 and later use physical replication slots to manage write ahead log \(WAL\) retention on the source instance\. For each cross\-Region read replica instance, Amazon RDS creates a physical replication slot and associates it with the instance\. Two Amazon CloudWatch metrics, `Oldest Replication Slot Lag` and `Transaction Logs Disk Usage`, show how far behind the most lagging replica is in terms of WAL data received and how much storage is being used for WAL data\. The `Transaction Logs Disk Usage` value can substantially increase when a cross\-Region read replica is lagging significantly\.
+PostgreSQL versions 9\.5\.2 and later use physical replication slots to manage write ahead log \(WAL\) retention on the source instance\. For each cross\-Region read replica instance, Amazon RDS creates a physical replication slot and associates it with the instance\. Two Amazon CloudWatch metrics, `Oldest Replication Slot Lag` and `Transaction Logs Disk Usage`, show how far behind the most lagging replica is in terms of WAL data received and how much storage is being used for WAL data\. The `Transaction Logs Disk Usage` value can substantially increase when a cross\-Region read replica is lagging significantly\.
 
 For more information about monitoring a DB instance with CloudWatch, see [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)\.

@@ -225,10 +225,6 @@ Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands wi
 
 After the load operation completes, return your DB instance and DB parameters to their normal settings\.
 
-### Working with the fsync and full\_page\_writes database parameters<a name="CHAP_BestPractices.PostgreSQL.fsync"></a>
-
- In PostgreSQL 9\.4\.1 on Amazon RDS, the `fsync` and` full_page_writes` database parameters are not modifiable\. Disabling the `fsync` and` full_page_writes` database parameters can lead to data corruption, so we have enabled them for you\. 
-
 ### Working with the PostgreSQL Autovacuum Feature<a name="CHAP_BestPractices.PostgreSQL.Autovacuum"></a>
 
  The autovacuum feature for PostgreSQL databases is a feature that we strongly recommend you use to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the execution of the VACUUM and ANALYZE command; using autovacuum is required by PostgreSQL, not imposed by Amazon RDS, and its use is critical to good performance\. The feature is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related configuration parameters are appropriately set by default\. 

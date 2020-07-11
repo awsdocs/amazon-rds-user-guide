@@ -60,7 +60,19 @@ An alternative to the previous process is to use `FROM table` to stream nontable
 The following query shows the text of a log file\.
 
 ```
-1. SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','alert_xxx.log'));
+1. SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','alert_dbname.log.date'));
+```
+
+On a read replica, get the name of the BDUMP directory by querying `V$DATABASE.DB_UNIQUE_NAME`\. If the unique name is `DATABASE_B`, then the BDUMP directory is `BDUMP_B`\. The following example queries the BDUMP name on a replica and then uses this name to query the contents of `alert_DATABASE.log.2020-06-23`\.
+
+```
+1. SELECT 'BDUMP' || (SELECT regexp_replace(DB_UNIQUE_NAME,'.*(_[A-Z])', '\1') FROM V$DATABASE) AS BDUMP_VARIABLE FROM DUAL;
+2. 
+3. BDUMP_VARIABLE
+4. --------------
+5. BDUMP_B
+6. 
+7. SELECT TEXT FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP_B','alert_DATABASE.log.2020-06-23'));
 ```
 
 ### Generating Trace Files and Tracing a Session<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Generating"></a>
