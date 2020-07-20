@@ -94,7 +94,7 @@ For Linux, macOS, or Unix:
  2.     --engine sqlserver-se \
  3.     --db-instance-identifier mymsftsqlserver \
  4.     --allocated-storage 250 \
- 5.     --db-instance-class db.m1.large \
+ 5.     --db-instance-class db.t3.large \
  6.     --db-security-groups mydbsecuritygroup \
  7.     --db-subnet-group mydbsubnetgroup \
  8.     --master-username masterawsuser \
@@ -108,7 +108,7 @@ For Windows:
  2.     --engine sqlserver-se ^
  3.     --db-instance-identifier mydbinstance ^
  4.     --allocated-storage 250 ^
- 5.     --db-instance-class db.m1.large ^
+ 5.     --db-instance-class db.t3.large ^
  6.     --db-security-groups mydbsecuritygroup ^
  7.     --db-subnet-group mydbsubnetgroup ^
  8.     --master-username masterawsuser ^ 
@@ -118,7 +118,7 @@ For Windows:
 This command produces output similar to the following\.   
 
 ```
-1. DBINSTANCE  mydbinstance  db.m1.large  sqlserver-se  250  sa  creating  3  ****  n  10.50.2789
+1. DBINSTANCE  mydbinstance  db.t3.large  sqlserver-se  250  sa  creating  3  ****  n  10.50.2789
 2. SECGROUP  default  active
 3. PARAMGRP  default.sqlserver-se-10.5  in-sync
 ```
@@ -145,7 +145,7 @@ For information about each setting, see [Settings for DB Instances](#USER_Create
  2.     ?Action=CreateDBInstance
  3.     &AllocatedStorage=250
  4.     &BackupRetentionPeriod=3
- 5.     &DBInstanceClass=db.m1.large
+ 5.     &DBInstanceClass=db.t3.large
  6.     &DBInstanceIdentifier=mydbinstance
  7.     &DBSecurityGroups.member.1=mysecuritygroup
  8.     &DBSubnetGroup=mydbsubnetgroup
@@ -184,7 +184,7 @@ You can create a DB instance using the console, the [ `create-db-instance`](http
 |  Database port  |  The port that you want to access the DB instance through\. The default port is shown\. If you use a DB security group with your DB instance, this port value must be the same one that you provided when creating the DB security group\.  The firewalls at some companies block connections to the default MariaDB, MySQL, and PostgreSQL ports\. If your company firewall blocks the default port, enter another port for your DB instance\.   |  **CLI option:** `--port` **RDS API parameter:** `Port`  | All | 
 |  Database authentication  |  The database authentication option that you want to use\. Choose **Password authentication** to authenticate database users with database passwords only\. Choose **Password and IAM DB authentication** to authenticate database users with database passwords and user credentials through IAM users and roles\. For more information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. This option is only supported for MySQL and PostgreSQL\. Choose **Password and Kerberos authentication** to authenticate database users with database passwords and Kerberos authentication through an AWS Managed Microsoft AD created with AWS Directory Service\. Next, choose the directory or choose **Create a new Directory**\. For more information, see one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  ***IAM:*** **CLI option:** `--enable-iam-database-authentication` `--no-enable-iam-database-authentication` **RDS API parameter:** `EnableIAMDatabaseAuthentication` ***Kerberos:*** **CLI option:** `--domain` `--domain-iam-role-name` **RDS API parameter:** `Domain` `DomainIAMRoleName`  |  MySQL Oracle PostgreSQL  | 
 |  DB engine version  |  The version of database engine that you want to use\.  |  **CLI option:** `--engine-version` **RDS API parameter:** `EngineVersion`  | All | 
-|  DB instance class  |  The configuration for your DB instance\. For example, a **db\.m1\.small** instance class has 1\.7 GiB memory, 1 ECU \(1 virtual core with 1 ECU\), 64\-bit platform, and moderate I/O capacity\.  If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, which improves performance\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.   |  **CLI option:** `--db-instance-class` **RDS API parameter:** `DBInstanceClass`  | All | 
+|  DB instance class  |  The configuration for your DB instance\. For example, a **db\.t3\.small** instance class has 2 GiB memory, 2 vCPUs, 1 virtual core, a variable ECU, and a moderate I/O capacity\. If possible, choose an instance class large enough that a typical query working set can be held in memory\. When working sets are held in memory the system can avoid writing to disk, which improves performance\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.   |  **CLI option:** `--db-instance-class` **RDS API parameter:** `DBInstanceClass`  | All | 
 |  DB instance identifier  |  The name for your DB instance\. Name your DB instances in the same way that you name your on\-premises servers\. Your DB instance identifier can contain up to 63 alphanumeric characters, and must be unique for your account in the AWS Region you chose\. You can add some intelligence to the name, such as including the AWS Region and DB engine you chose, for example **sqlsrvr\-instance1**\.  |  **CLI option:** `--db-instance-identifier` **RDS API parameter:** `DBInstanceIdentifier`  | All | 
 |  DB parameter group  |  A parameter group for your DB instance\. You can choose the default parameter group or you can create a custom parameter group\.  For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.  |  **CLI option:** `--db-parameter-group-name` **RDS API parameter:** `DBParameterGroupName`  | All | 
 | Deletion protection |  **Enable deletion protection** to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB Instance](USER_DeleteInstance.md)\.  |  **CLI option:** `--deletion-protection` `--no-deletion-protection` **RDS API parameter:** `DeletionProtection`  | All | 
