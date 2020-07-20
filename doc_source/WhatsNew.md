@@ -6,6 +6,7 @@ The following table describes important changes in each release of the *Amazon R
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [RDS supports Oracle Spatial on SE2](#WhatsNew) | You can use Oracle Spatial in Standard Edition 2 \(SE2\) for all versions of 12\.2, 18c, and 19c\. For more information, see [Oracle Spatial](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Options.Spatial.html)\. | July 9, 2020 | 
 | [Amazon RDS supports AWS PrivateLink](#WhatsNew) | Amazon RDS now supports creating Amazon VPC endpoints for Amazon RDS API calls to keep traffic between applications and Amazon RDS in the AWS network\. For more information, see [ Amazon RDS and Interface VPC Endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/vpc-interface-endpoints.html)\. | July 9, 2020 | 
 | [Amazon RDS for PostgreSQL versions 9\.4\.x are deprecated](#WhatsNew) | Amazon RDS for PostgreSQL no longer supports versions 9\.4\.x\. For supported versions, see [ Supported PostgreSQL Database Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions)\. | July 8, 2020 | 
 | [Support for MariaDB 10\.3\.23 and 10\.4\.13](#WhatsNew) | You can now create Amazon RDS DB instances running MariaDB version 10\.3\.23 and 10\.4\.13\. For more information, see [MariaDB on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)\. | July 6, 2020 | 

@@ -7,48 +7,48 @@ Amazon RDS supports DB instances that run the following versions and editions of
 + Oracle 12c, Version 12\.1\.0\.2
 
 **Note**  
-Amazon RDS also currently supports Oracle 11g, Version 11\.2\.0\.4 \([Deprecation of Oracle 11\.2\.0\.4](#Oracle.Concepts.Deprecate.11204)\)\. This version is on a deprecation path because Oracle will no longer provides patches for 11\.2\.0\.4 after the end\-of\-support date\.
+Amazon RDS also currently supports Oracle 11g, Version 11\.2\.0\.4\. This version is on a deprecation path because Oracle will no longer provide patches for 11\.2\.0\.4 after the end\-of\-support date\. For more information, see [Deprecation of Oracle 11\.2\.0\.4](#Oracle.Concepts.Deprecate.11204)\.
 
-You can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. DB instances running Oracle can be used inside a VPC\. You can also enable various options to add additional features to your Oracle DB instance\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
+You can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. You can use DB instances running Oracle inside a VPC\. You can also add features to your Oracle DB instance by enabling various options\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
 
-To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application such as Oracle SQL Plus\. Amazon RDS doesn't enable direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\. 
+To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. You can access databases on a DB instance using any standard SQL client application such as Oracle SQL\*Plus\. However, you can't access the host directly by using Telnet or Secure Shell \(SSH\)\. 
 
-When you create a DB instance, the master account that you use to create the instance gets DBA user privileges \(with some limitations\)\. Use this account for any administrative tasks such as creating additional user accounts in the database\. The SYS user, SYSTEM user, and other administrative accounts can't be used\. 
+When you create a DB instance using your master account, the account gets DBA privileges, with some limitations\. Use this account for administrative tasks such as creating additional database accounts\. You can't use SYS, SYSTEM, or other Oracle\-supplied administrative accounts\. 
 
 Before creating a DB instance, complete the steps in the [Setting Up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
 
 ## Common Management Tasks for Oracle on Amazon RDS<a name="Oracle.Concepts.General"></a>
 
-The following are the common management tasks you perform with an Amazon RDS Oracle DB instance, with links to relevant documentation for each task\. 
+Following are the common management tasks you perform with an Amazon RDS Oracle DB instance, with links to relevant documentation for each task\. 
 
 
 ****  
 
 | Task Area | Relevant Documentation | 
 | --- | --- | 
-|  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Oracle](#Oracle.Concepts.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
+|  **Instance Classes, Storage, and PIOPS** If you are creating a production instance, learn how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Oracle](#Oracle.Concepts.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
 |  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
-|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
-|  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. Also, generally, if your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
+|  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account doesn't have a default VPC, and you want the DB instance in a VPC, create the VPC and subnet groups before you create the instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
+|  **Security Groups** By default, DB instances use a firewall that prevents access\. Make sure you create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on which Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.  In general, if your DB instance is on the EC2\-Classic platform, you should create a DB security group\. Also, if your instance is on the EC2\-VPC platform, you should create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
-|  **Option Groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
-|  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL Plus\.   |  [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)  | 
+|  **Option Groups** If your DB instance will require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
+|  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL\*Plus\.   |  [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)  | 
 |  **Backup and Restore** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)  | 
 |  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
 |  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Amazon RDS Database Log Files](USER_LogAccess.md)  | 
 
-There are also advanced tasks and optional features for working with Oracle DB instances\. For more information, see the following documentation: 
+There are also advanced tasks and optional features for working with Oracle DB instances\. For more information, see the following documentation\.
 + For information on common DBA tasks for Oracle on Amazon RDS, see [Common DBA Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.md)\.
 + For information on Oracle GoldenGate support, see [Using Oracle GoldenGate with Amazon RDS](Appendix.OracleGoldenGate.md)\. 
 + For information on Siebel Customer Relationship Management \(CRM\) support, see [Installing a Siebel Database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)\. 
 
 ## Oracle Licensing<a name="Oracle.Concepts.Licensing"></a>
 
-There are two licensing options available for Amazon RDS for Oracle: License Included and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+Amazon RDS for Oracle has two licensing options: License Included \(LI\) and Bring Your Own License \(BYOL\)\. After you create an Oracle DB instance on Amazon RDS, you can change the licensing model by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
 
 ### License Included<a name="Oracle.Concepts.Licensing.LicenseIncluded"></a>
 
-In the License Included model, you don't need to purchase Oracle licenses separately\. AWS holds the license for the Oracle database software\. In this model, if you have an AWS Support account with case support, you contact AWS Support for both Amazon RDS and Oracle Database service requests\. 
+In the License Included model, you don't need to purchase Oracle licenses separately\. AWS holds the license for the Oracle database software\. In this model, if you have an AWS Support account with case support, contact AWS Support for both Amazon RDS and Oracle Database service requests\. 
 
 The License Included model is supported on Amazon RDS for the following Oracle database editions: 
 + Oracle Database Standard Edition One \(SE1\)
@@ -63,7 +63,7 @@ Middle East \(Bahrain\)
 
 ### Bring Your Own License \(BYOL\)<a name="Oracle.Concepts.Licensing.BYOL"></a>
 
-In the Bring Your Own License model, you can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle Software in the Cloud Computing Environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\. 
+In the BYOL model, you can use your existing Oracle Database licenses to run Oracle deployments on Amazon RDS\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition you wish to run\. You must also follow Oracle's policies for licensing Oracle Database software in the cloud computing environment\. For more information on Oracle's licensing policy for Amazon EC2, see [ Licensing Oracle Software in the Cloud Computing Environment](http://www.oracle.com/us/corporate/pricing/cloud-licensing-070579.pdf)\. 
 
 In this model, you continue to use your active Oracle support account, and you contact Oracle directly for Oracle Database service requests\. If you have an AWS Support account with case support, you can contact AWS Support for Amazon RDS issues\. Amazon Web Services and Oracle have a multi\-vendor support process for cases that require assistance from both organizations\. 
 
@@ -75,7 +75,7 @@ The Bring Your Own License model is supported on Amazon RDS for the following Or
 
 #### Integrating with AWS License Manager<a name="oracle-lms-integration"></a>
 
-If you use the Bring Your Own License model, [ AWS License Manager](https://aws.amazon.com/license-manager/) integration with Amazon RDS for Oracle makes it easier to monitor your Oracle license usage within your organization\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
+To make it easier to monitor Oracle license usage in the BYOL model, [ AWS License Manager](https://aws.amazon.com/license-manager/) integrates with Amazon RDS for Oracle\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
 
 **Note**  
 RDS for Oracle integration with License Manager isn't supported in the Asia Pacific \(Osaka\-Local\) Region\.
@@ -84,7 +84,7 @@ The following table shows the product information filters for RDS for Oracle\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Oracle.html)
 
-You can create a license configuration to track license usage of your Oracle DB instances\. After the license configuration is created, RDS for Oracle resources matching the product information filter are associated automatically with the license configuration\. Discovery of Oracle DB instances can take up to 24 hours\.
+To track license usage of your Oracle DB instances, you can create a license configuration\. In this case, RDS for Oracle resources that match the product information filter are automatically associated with the license configuration\. Discovery of Oracle DB instances can take up to 24 hours\.
 
 ##### Console<a name="oracle-lms-integration.console"></a>
 
@@ -102,7 +102,7 @@ You can create a license configuration to track license usage of your Oracle DB 
 
 ##### AWS CLI<a name="oracle-lms-integration.cli"></a>
 
-To create a license configuration to track the license usage of your Oracle DB instances by using the AWS CLI, call the [create\-license\-configuration](https://docs.aws.amazon.com/cli/latest/reference/license-manager/create-license-configuration.html) command\. You can use the `--cli-input-json` or `--cli-input-yaml` parameters to \] pass the parameters to the command\.
+To create a license configuration by using the AWS CLI, call the [create\-license\-configuration](https://docs.aws.amazon.com/cli/latest/reference/license-manager/create-license-configuration.html) command\. Use the `--cli-input-json` or `--cli-input-yaml` parameters to pass the parameters to the command\.
 
 **Example**  
 The following code creates a license configuration for Oracle Enterprise Edition\.   

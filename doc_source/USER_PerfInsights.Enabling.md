@@ -1,6 +1,6 @@
 # Enabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
 
-To use Performance Insights, you must enable it on your DB instance\.
+To use Performance Insights, you must enable it on your DB instance\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
 

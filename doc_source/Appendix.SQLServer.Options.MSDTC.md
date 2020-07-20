@@ -245,8 +245,8 @@ The following example creates a parameter group for SQL Server Standard Edition 
 Modify the `in-doubt xact resolution` parameter in the parameter group that corresponds to the SQL Server edition and version of your DB instance\.
 
 For MSDTC, set the `in-doubt xact resolution` parameter to one of the following:
-+ `1` – Presume commit\. Any MSDTC in\-doubt transactions are presumed to have committed\.
-+ `2` – Presume abort\. Any MSDTC in\-doubt transactions are presumed to have aborted\.
++ `1` – `Presume commit`\. Any MSDTC in\-doubt transactions are presumed to have committed\.
++ `2` – `Presume abort`\. Any MSDTC in\-doubt transactions are presumed to have stopped\.
 
 For more information, see [in\-doubt xact resolution Server Configuration Option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/in-doubt-xact-resolution-server-configuration-option) in the Microsoft documentation\.
 
@@ -429,7 +429,7 @@ To stop a transaction tracing session, run the following statement\.
 ```
 exec msdb.dbo.rds_msdtc_transaction_tracing 'STOP'
 ```
-This statement stops the active transaction tracing session and saves the transaction trace data into the log directory on the RDS DB instance\. The first row of the output contains the overall execution result, and the following lines indicate details of the operation\.  
+This statement stops the active transaction tracing session and saves the transaction trace data into the log directory on the RDS DB instance\. The first row of the output contains the overall result, and the following lines indicate details of the operation\.  
 The following is an example of a successful tracing session stop\.  
 
 ```

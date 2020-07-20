@@ -11,6 +11,9 @@ S3 integration tasks share the same queue as native backup and restore tasks\. A
 + You must re\-enable the S3 integration feature on restored instances\. It isn't propagated from the source instance to the restored instance\. Files in D:\\S3 will be cleaned up on a restored instance\.
 + Downloading to the DB instance is limited to 100 files\. In other words, there can't be more than 100 files in `D:\S3\`\.
 + Only files without file extensions or with the following file extensions are supported for download: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
+**Note**  
+Files with the \.ispac file extension are supported for download when SQL Server Integration Services is enabled\. For more information on enabling SSIS, see [SQL Server Integration Services](Appendix.SQLServer.Options.SSIS.md)\.  
+Files with the following file extensions are supported for download when SQL Server Analysis Services is enabled: \.abf, \.asdatabase, \.configsettings, \.deploymentoptions, \.deploymenttargets, and \.xmla\. For more information on enabling SSAS, see [SQL Server Analysis Services](Appendix.SQLServer.Options.SSAS.md)\.
 + The S3 bucket must have the same owner as the related AWS Identity and Access Management \(IAM\) role\. Also, the bucket can't be open to the public\.
 + File size for uploads is limited to 50 GB per file\.
 
@@ -331,6 +334,10 @@ To download files from an S3 bucket to an RDS SQL Server DB instance, use the Am
 |  `@overwrite_file`  |  INT  |  0  |  Optional  | Overwrite the existing file:  0 = Don't overwrite 1 = Overwrite | 
 
 You can download files without a file extension and files with the following file extensions: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
+
+**Note**  
+Files with the \.ispac file extension are supported for download when SQL Server Integration Services is enabled\. For more information on enabling SSIS, see [SQL Server Integration Services](Appendix.SQLServer.Options.SSIS.md)\.  
+Files with the following file extensions are supported for download when SQL Server Analysis Services is enabled: \.abf, \.asdatabase, \.configsettings, \.deploymentoptions, \.deploymenttargets, and \.xmla\. For more information on enabling SSAS, see [SQL Server Analysis Services](Appendix.SQLServer.Options.SSAS.md)\.
 
 The following example shows the stored procedure to download files from S3\. 
 

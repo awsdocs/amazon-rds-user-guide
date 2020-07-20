@@ -24,7 +24,7 @@ Following are the supported Oracle versions for each Management Agent version\.
 
 The following are some limitations to using Management Agent: 
 + Administrative tasks such as job execution and database patching, that require host credentials, are not supported\. 
-+ Host metrics and the process list are not guaranteed to reflect the actual system state\. 
++ Host metrics and the process list are not guaranteed to reflect the actual system state\. Thus, you shouldn't use OEM to monitor the root file system or mount point file system\. For more information about monitoring the operating system, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
 + Autodiscovery is not supported\. You must manually add database targets\. 
 + OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
 + Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 

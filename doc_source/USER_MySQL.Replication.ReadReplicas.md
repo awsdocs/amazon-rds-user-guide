@@ -28,6 +28,8 @@ To enable automatic backups on a read replica for Amazon RDS MySQL version 5\.6 
 
 You can run multiple read replica create or delete actions at the same time that reference the same source DB instance\. To do this, stay within the limit of five read replicas for each source instance\. 
 
+A read replica of a MySQL DB instance can't use a lower DB engine version than its source DB instance\.
+
 ### Preparing MySQL DB Instances That Use MyISAM<a name="USER_MySQL.Replication.ReadReplicas.Configuration-MyISAM-Instances"></a>
 
 If your MySQL DB instance uses a nontransactional engine such as MyISAM, you need to perform the following steps to successfully set up your read replica\. These steps are required to make sure that the read replica has a consistent copy of your data\. These steps are not required if all of your tables use a transactional engine such as InnoDB\. 

@@ -2,6 +2,9 @@
 
 Configures a MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\.
 
+**Important**  
+To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
 **Note**  
 You can use the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure to configure an external master and delayed replication\.
 

@@ -332,6 +332,6 @@ We recommend placing the user name and password information in a folder that isn
 
 1. Verify that your web server successfully connects to your DB instance by opening a web browser and browsing to `http://EC2 instance endpoint/SamplePage.php`, for example: `http://ec2-55-122-41-31.us-west-2.compute.amazonaws.com/SamplePage.php`\.
 
-You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. 
+You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. To verify that the data was inserted into the table, you can install MySQL on the Amazon EC2 instance, connect to the DB instance, and query the table\. 
 
 To make sure that your DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your DB instance\. 

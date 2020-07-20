@@ -46,7 +46,7 @@ If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the 
   + On Multi\-AZ instances, files created by SSIS in the `D:\S3` folder are deleted after a failover\. For more information, see [Multi\-AZ Limitations for S3 Integration](User.SQLServer.Options.S3-integration.md#S3-MAZ)\.
   + Upload the files created by SSIS in the `D:\S3` folder to your Amazon S3 bucket to make them durable\.
 + Import Column and Export Column transformations and the Script component on the Data Flow Task aren't supported\.
-+ You can't enable dump on SSIS package execution, and you can't add data taps on SSIS packages\.
++ You can't enable dump on running SSIS packages, and you can't add data taps on SSIS packages\.
 + The SSIS Scale Out feature isn't supported\.
 + You can’t deploy projects directly\. We provide RDS stored procedures to do this\. For more information, see [Deploying an SSIS Project](#SSIS.Deploy)\.
 + Build SSIS project \(\.ispac\) files with the `DoNotSavePasswords` protection mode for deploying on RDS\.
@@ -422,7 +422,7 @@ GO
 
 On RDS, you can't deploy SSIS projects directly by using SQL Server Management Studio \(SSMS\) or SSIS procedures\. To download project files from Amazon S3 and then deploy them, use RDS stored procedures\.
 
-To run the stored procedures, log in as any user that you granted execution permissions for the stored procedures\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
+To run the stored procedures, log in as any user that you granted permissions for running the stored procedures\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
 
 **To deploy the SSIS project**
 

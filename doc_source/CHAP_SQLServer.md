@@ -78,7 +78,7 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + Master Data Services
 
   To use these features, we recommend that you install SQL Server on an Amazon EC2 instance, or use an on\-premises SQL Server instance\. In these cases, the EC2 or SQL Server instance acts as the Master Data Services server for your SQL Server DB instance on Amazon RDS\. You can install SQL Server on an Amazon EC2 instance with Amazon EBS storage, pursuant to Microsoft licensing policies\.
-+ Because of limitations in Microsoft SQL Server, restoring to a point in time before successful execution of `DROP DATABASE` might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the `DROP DATABASE` command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the `DROP DATABASE` command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\.
++ Because of limitations in Microsoft SQL Server, restoring to a point in time before successfully running `DROP DATABASE` might not reflect the state of that database at that point in time\. For example, the dropped database is typically restored to its state up to 5 minutes before the `DROP DATABASE` command was issued\. This type of restore means that you can't restore the transactions made during those few minutes on your dropped database\. To work around this, you can reissue the `DROP DATABASE` command after the restore operation is completed\. Dropping a database removes the transaction logs for that database\.
 + For SQL Server, you create your databases after you create your DB instance\. Database names follow the usual SQL Server naming rules with the following differences:
   + Database names can't start with `rdsadmin`\.
   + They can't start or end with a space or a tab\.
@@ -138,7 +138,7 @@ AWS Services in Scope have been fully assessed by a third\-party auditor and res
 
 ### HIPAA Support for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.HIPAA"></a>
 
-You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under an executed Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. 
+You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\.
 
 Amazon RDS for SQL Server supports HIPAA for the following versions and editions: 
 + SQL Server 2017 Enterprise, Standard, and Web Editions
@@ -190,7 +190,7 @@ Amazon RDS includes flexible version management that enables you to control when
 
 Amazon RDS periodically aggregates official Microsoft SQL Server database patches into a DB instance engine version that's specific to Amazon RDS\. For more information about the Microsoft SQL Server patches in each engine version, see [Version and Feature Support on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)\.
 
-Currently, you manually execute all engine upgrades on your DB instance\. For more information, see [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)\. 
+Currently, you manually perform all engine upgrades on your DB instance\. For more information, see [Upgrading the Microsoft SQL Server DB Engine](USER_UpgradeDBInstance.SQLServer.md)\. 
 
 ### Deprecation Schedule for Major Engine Versions of Microsoft SQL Server on Amazon RDS<a name="SQLServer.Concepts.General.Deprecated-Versions"></a>
 

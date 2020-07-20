@@ -35,6 +35,5 @@ When the `gtid` parameter specifies a transaction that has already been executed
 The following example initiates replication and replicates changes until it reaches GTID `3E11FA47-71CA-11E1-9E33-C80AA9429562:23`\.
 
 ```
-call mysql.rds_start_replication_until_gtid(
-  '3E11FA47-71CA-11E1-9E33-C80AA9429562:23');
+call mysql.rds_start_replication_until_gtid('3E11FA47-71CA-11E1-9E33-C80AA9429562:23');
 ```

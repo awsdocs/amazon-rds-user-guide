@@ -131,7 +131,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 **Database connections**
 +  DB Connections – The number of client sessions that are connected to the DB instance\. 
 
- For more detailed individual descriptions of the performance metrics available, see [Amazon RDS Dimensions and Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/rds-metricscollected.html)\. 
+ For more detailed individual descriptions of the performance metrics available, see [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)\. 
 
  Generally speaking, acceptable values for performance metrics depend on what your baseline looks like and what your application is doing\. Investigate consistent or trending variances from your baseline\. Advice about specific types of metrics follows: 
 +  **High CPU or RAM consumption –** High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 

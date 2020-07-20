@@ -123,8 +123,8 @@ SQL Workbench/J uses JDBC to connect to your DB instance\. You also need the JDB
    select @@VERSION
    ```
 
-1. Choose the execute icon in the toolbar, as shown following\.  
-![\[Execute the query\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/execute_example.png)
+1. Choose the `Execute` icon in the toolbar, as shown following\.  
+![\[Run the query\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/execute_example.png)
 
    The query returns the version information for your DB instance, similar to the following\.
 

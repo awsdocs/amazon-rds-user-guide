@@ -27,8 +27,6 @@
 
  RDS Proxy handles the network traffic between the client application and the database\. It does so in an active way first by understanding the database protocol\. It then adjusts its behavior based on the SQL operations from your application and the result sets from the database\. 
 
- RDS Proxy handles the network traffic between the client application and the database\. It does so in an active way first by understanding the database protocol\. It then adjusts its behavior based on the SQL operations from your application and the result sets from the database\. 
-
  RDS Proxy reduces the memory and CPU overhead for connection management on your database\. The database needs less memory and CPU resources when applications open many simultaneous connections\. It also doesn't require logic in your applications to close and reopen connections that stay idle for a long time\. Similarly, it requires less application logic to reestablish connections in case of a database problem\. 
 
  The infrastructure for RDS Proxy is highly available and deployed over multiple Availability Zones \(AZs\)\. The computation, memory, and storage for RDS Proxy are independent of your RDS DB instances and Aurora DB clusters\. This separation helps lower overhead on your database servers, so that they can devote their resources to serving database workloads\. The RDS Proxy compute resources are serverless, automatically scaling based on your database workload\. 

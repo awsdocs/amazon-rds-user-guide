@@ -230,7 +230,7 @@ The following parameters are used to copy a DB snapshot\. Not all parameters are
 
   You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API\. You can specify the source Region option instead of this parameter when you copy an encrypted DB snapshot from another AWS Region by using the AWS CLI\. 
 
-  The presigned URL must be a valid request for the `CopyDBSnapshot` API operation that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied\. The presigned URL request must contain the following parameter values: 
+  The presigned URL must be a valid request for the `CopyDBSnapshot` API operation that can be run in the source AWS Region containing the encrypted DB snapshot to be copied\. The presigned URL request must contain the following parameter values: 
   + `DestinationRegion` \- The AWS Region that the encrypted DB snapshot will be copied to\. This AWS Region is the same one where the `CopyDBSnapshot` action is called that contains this presigned URL\. 
 
     For example, if you copy an encrypted DB snapshot from the us\-west\-2 Region to the us\-east\-1 Region, then you call the `CopyDBSnapshot` action in the us\-east\-1 Region and provide a presigned URL that contains a call to the `CopyDBSnapshot` action in the us\-west\-2 Region\. For this example, the `DestinationRegion` in the presigned URL must be set to the us\-east\-1 Region\. 

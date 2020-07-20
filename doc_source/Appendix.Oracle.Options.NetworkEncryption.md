@@ -11,6 +11,9 @@ You can use Native Network Encryption or Secure Sockets Layer, but not both\. Fo
 
 Amazon RDS supports the following settings for the NNE option\. 
 
+**Note**  
+When you use commas to separate values for an option setting, don't put a space after the comma\.
+
 
 ****  
 
@@ -18,8 +21,8 @@ Amazon RDS supports the following settings for the NNE option\.
 | --- | --- | --- | --- | 
 | **SQLNET\.ENCRYPTION\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The encryption behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require traffic from the client to be encrypted\.  | 
 | **SQLNET\.CRYPTO\_CHECKSUM\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The data integrity behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require the client to perform a checksum\.  | 
-| **SQLNET\.ENCRYPTION\_TYPES\_SERVER** |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance will use each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html)  | 
-| **SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_SERVER** |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  The checksum algorithm\.  | 
+| **SQLNET\.ENCRYPTION\_TYPES\_SERVER** |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance uses each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) You can specify either one value or a comma\-separated list of values\. If you a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\.  | 
+| **SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_SERVER** |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  A list of checksum algorithms\. You can specify either one value or a comma\-separated list of values\. If you use a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\.  | 
 
 ## Adding the NNE Option<a name="Oracle.Options.NNE.Add"></a>
 

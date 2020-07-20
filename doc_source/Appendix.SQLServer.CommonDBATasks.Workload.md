@@ -4,7 +4,7 @@ The Database Engine Tuning Advisor is a client application provided by Microsoft
 
 This section shows how to capture a workload for Tuning Advisor to analyze\. This is the preferred process for capturing a workload because Amazon RDS restricts host access to the SQL Server instance\. The full documentation on Tuning Advisor can be found on [MSDN](http://msdn.microsoft.com/en-us/library/ms173494%28v=sql.105%29.aspx)\.
 
-To use Tuning Advisor, you must provide what is called a workload to the advisor\. A workload is a set of Transact\-SQL statements that execute against a database or databases that you want to tune\. Database Engine Tuning Advisor uses trace files, trace tables, Transact\-SQL scripts, or XML files as workload input when tuning databases\. When working with Amazon RDS, a workload can be a file on a client computer or a database table on an Amazon RDS SQL Server DB accessible to your client computer\. The file or the table must contain queries against the databases you want to tune in a format suitable for replay\.
+To use Tuning Advisor, you must provide what is called a workload to the advisor\. A workload is a set of Transact\-SQL statements that run against a database or databases that you want to tune\. Database Engine Tuning Advisor uses trace files, trace tables, Transact\-SQL scripts, or XML files as workload input when tuning databases\. When working with Amazon RDS, a workload can be a file on a client computer or a database table on an Amazon RDS SQL Server DB accessible to your client computer\. The file or the table must contain queries against the databases you want to tune in a format suitable for replay\.
 
 For Tuning Advisor to be most effective, a workload should be as realistic as possible\. You can generate a workload file or table by performing a trace against your DB instance\. While a trace is running, you can either simulate a load on your DB instance or run your applications with a normal load\.
 
@@ -24,7 +24,7 @@ For a server\-side trace, you must get the trace files on the DB instance into a
 
 1. In the **Trace Properties** dialog box, enter a trace name and choose a trace definition template\. A default template, TSQL\_Replay, ships with the application\. You can edit this template to define your trace\. Edit events and event information under the **Events Selection** tab of the **Trace Properties** dialog box\. For more information about trace definition templates and using the SQL Server Profiler to specify a client\-side trace see the documentation in [MSDN](http://msdn.microsoft.com/en-us/library/ms173494%28v=sql.105%29.aspx)\.
 
-1. Start the client\-side trace and watch SQL queries in real\-time as they execute against your DB instance\.
+1. Start the client\-side trace and watch SQL queries in real\-time as they run against your DB instance\.
 
 1. Select **Stop Trace** from the **File** menu when you have completed the trace\. Save the results as a file or as a trace table on you DB instance\.
 

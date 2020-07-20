@@ -352,11 +352,11 @@ The SQL Server Generate and Publish Scripts wizard is available as part of Micro
 
 1. If you have scripted the entire database, review the CREATE DATABASE statement in the script\. Make sure that the database is being created in the location and with the parameters that you want\. For more information, see [CREATE DATABASE](http://msdn.microsoft.com/en-us/library/ms176061%28v=sql.110%29.aspx) in the SQL Server documentation\. 
 
-1. If you are creating database users in the script, check to see if server logins exist on the target DB instance for those users\. If not, create logins for those users; the scripted commands to create the database users fail otherwise\. For more information, see [Create a Login](http://msdn.microsoft.com/en-us/library/aa337562%28v=sql.110%29.aspx) in the SQL Server documentation\. 
+1. If you are creating database users in the script, check to see if server logins exist on the target DB instance for those users\. If not, create logins for those users; the scripted commands to create the database users fail otherwise\. For more information, see [Create a Login](http://msdn.microsoft.com/en-us/library/aa337562%28v=sql.110%29.aspx) in the SQL Server documentation\.
 
-1. Choose **\!Execute** on the SQL Editor menu to execute the script file and create the database objects\. When the script finishes, verify that all database objects exist as expected\. 
+1. Choose **\!Execute** on the SQL Editor menu to run the script file and create the database objects\. When the script finishes, verify that all database objects exist as expected\.
 
-1. Use the bcp utility to export data from the RDS SQL Server DB instance into files\. Open a command prompt and type the following command\. 
+1. Use the bcp utility to export data from the RDS SQL Server DB instance into files\. Open a command prompt and type the following command\.
 
    ```
    bcp database_name.schema_name.table_name out data_file -n -S aws_rds_sql_endpoint -U username -P password
