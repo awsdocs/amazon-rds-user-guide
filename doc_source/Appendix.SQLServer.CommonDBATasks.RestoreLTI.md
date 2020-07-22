@@ -6,13 +6,13 @@ You can restore from a snapshot of Standard Edition to either Standard Edition o
 
 You can restore from a snapshot of Enterprise Edition to either Standard Edition or Enterprise Edition\. 
 
-**To restore from a SQL Server snapshot after Amazon RDS has created a final snapshot of your instance:**
+**To restore from a SQL Server snapshot after Amazon RDS has created a final snapshot of your instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the snapshot of your SQL Server DB instance\. Amazon RDS creates a final snapshot of your DB instance\. The name of the terminated instance snapshot is in the format '<name of instance>\-final\-snapshot'\. For example, if your DB instance name is **mytest\.cdxgahslksma\.us\-east\-1\.rds\.com**, the final snapshot is called** mytest\-final\-snapshot** and is located in the same AWS Region as the original DB instance\. 
+1. Choose the snapshot of your SQL Server DB instance\. Amazon RDS creates a final snapshot of your DB instance\. The name of the terminated instance snapshot is in the format `instance_name-final-snapshot`\. For example, if your DB instance name is **mytest\.cdxgahslksma\.us\-east\-1\.rds\.com**, the final snapshot is called** mytest\-final\-snapshot** and is located in the same AWS Region as the original DB instance\. 
 
 1. For **Actions**, choose **Restore Snapshot**\.
 

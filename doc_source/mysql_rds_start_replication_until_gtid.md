@@ -21,14 +21,14 @@ The master user must run the `mysql.rds_start_replication_until_gtid` procedure\
 
 For Amazon RDS MySQL 5\.7, this procedure is supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. This procedure is not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.
 
-You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 You can configure delayed replication using the following stored procedures:
 + [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md)
 + [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md)
 + [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md)
 
-When the `gtid` parameter specifies a transaction that has already been executed by the replica, replication is stopped immediately\.
+When the `gtid` parameter specifies a transaction that has already been run by the replica, replication is stopped immediately\.
 
 ## Examples<a name="mysql_rds_start_replication_until_gtid-examples"></a>
 

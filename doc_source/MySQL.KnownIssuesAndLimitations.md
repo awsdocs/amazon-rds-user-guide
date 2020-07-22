@@ -48,7 +48,7 @@ To resolve this issue, you can do one of the following:
   3. WHERE indexed_col1 = 'value1' AND indexed_col2 = 'value2';
   ```
 
-For more information, go to [Index Merge Optimization](https://dev.mysql.com/doc/refman/5.6/en/index-merge-optimization.html)\. 
+For more information, go to [Index Merge Optimization](https://dev.mysql.com/doc/refman/8.0/en/index-merge-optimization.html)\. 
 
 ## Log File Size<a name="MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize"></a>
 
@@ -66,7 +66,7 @@ Because Amazon RDS uses a case\-sensitive file system, setting the value of the 
 
 The `lower_case_table_names` parameter should be set as part of a custom DB parameter group before creating a DB instance\. You should avoid changing the `lower_case_table_names` parameter for existing database instances because doing so could cause inconsistencies with point\-in\-time recovery backups and read replica DB instances\. 
 
-Read replicas should always use the same `lower_case_table_names` parameter value as the master DB instance\. 
+Read replicas should always use the same `lower_case_table_names` parameter value as the source DB instance\. 
 
 ### long\_query\_time<a name="MySQL.Concepts.ParameterNotes.long_query_time"></a>
 
@@ -79,11 +79,11 @@ For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constra
 **Note**  
 Some existing DB instances have a lower limit\. For example, MySQL DB instances created before April 2014 have a file and table size limit of 2 TB\. This 2 TB file size limit also applies to DB instances or read replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\.
 
-There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [InnoDB File\-Per\-Table Mode](https://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\. 
+There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, go to [File\-Per\-Table Tablespaces](https://dev.mysql.com/doc/refman/8.0/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\. 
 
 We don't recommend allowing tables to grow to the maximum file size\. In general, a better practice is to partition data into smaller tables, which can improve performance and recovery times\. 
 
-One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, go to [https://dev\.mysql\.com/doc/refman/5\.6/en/partitioning\.html](https://dev.mysql.com/doc/refman/5.6/en/partitioning.html) in the MySQL documentation\. 
+One option that you can use for breaking a large table up into smaller tables is partitioning\. Partitioning distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, go to [Partitioning](https://dev.mysql.com/doc/refman/8.0/en/partitioning.html) in the MySQL documentation\. 
 
 **To determine the file size of a table**
 + Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\.

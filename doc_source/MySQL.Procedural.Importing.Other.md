@@ -45,7 +45,7 @@ Large transactions incur a 3X penalty for IOPS and disk consumption with binary 
 
 Because of this, there must be at least three times as much free disk space available to load the data compared to loading with binary logging disabled\. For example, 10 GiB of data loaded as a single transaction consumes at least 30 GiB disk space during the load\. It consumes 10 GiB for the table \+ 10 GiB for the binary log cache \+ 10 GiB for the binary log itself\. The cache file remains on disk until the session that created it terminates or the session fills its binary log cache again during another transaction\. The binary log must remain on disk until backed up, so it might be some time before the extra 20 GiB is freed\. 
 
-If the data was loaded using LOAD DATA LOCAL INFILE, yet another copy of the data is created if the database has to be recovered from a backup made before the load\. During recovery, MySQL extracts the data from the binary log into a flat file\. MySQL then executes LOAD DATA LOCAL INFILE, just as in the original transaction\. However, this time the input file is local to the database server\. Continuing with the example preceding, recovery fails unless there is at least 40 GiB free disk space available\.
+If the data was loaded using LOAD DATA LOCAL INFILE, yet another copy of the data is created if the database has to be recovered from a backup made before the load\. During recovery, MySQL extracts the data from the binary log into a flat file\. MySQL then runs LOAD DATA LOCAL INFILE, just as in the original transaction\. However, this time the input file is local to the database server\. Continuing with the example preceding, recovery fails unless there is at least 40 GiB free disk space available\.
 
 #### Disable Binary Logging<a name="MySQL.Procedural.Importing.AnySource.Advanced.Disable"></a>
 
@@ -107,7 +107,7 @@ Here are some additional tips to reduce load times:
 + Load data in PK order\. This is particularly helpful for InnoDB tables, where load times can be reduced by 75–80 percent and data file size cut in half\. 
 + Disable foreign key constraints foreign\_key\_checks=0\. For flat files loaded with LOAD DATA LOCAL INFILE, this is required in many cases\. For any load, disabling FK checks provides significant performance gains\. Just be sure to enable the constraints and verify the data after the load\. 
 + Load in parallel unless already near a resource limit\. Use partitioned tables when appropriate\. 
-+ Use multi\-value inserts when loading with SQL to minimize statement execution overhead\. When using mysqldump, this is done automatically\.
++ Use multi\-value inserts when loading with SQL to minimize overhead when running statements\. When using mysqldump, this is done automatically\.
 + Reduce InnoDB log IO innodb\_flush\_log\_at\_trx\_commit=0 
 + If you are loading data into a DB instance that does not have read replicas, set the sync\_binlog parameter to 0 while loading data\. When data loading is complete, set the sync\_binlog parameter to back to 1\.
 + Load data before converting the DB instance to a Multi\-AZ deployment\. However, if the DB instance already uses a Multi\-AZ deployment, switching to a Single\-AZ deployment for data loading is not recommended, because doing so only provides marginal improvements\.

@@ -32,7 +32,7 @@ The following system stored procedures are supported for Amazon RDS DB instances
 + [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md)
 + [mysql\.rds\_show\_configuration](mysql_rds_show_configuration.md)
 
-**Terminating a session or query** 
+**Ending a session or query** 
 + [mysql\.rds\_kill](mysql_rds_kill.md)
 + [mysql\.rds\_kill\_query](mysql_rds_kill_query.md)
 

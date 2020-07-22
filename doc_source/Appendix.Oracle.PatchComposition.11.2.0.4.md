@@ -28,16 +28,15 @@ The following versions are available for database engine 11\.2\.0\.4:
 
 ## Version 11\.2\.0\.4\.v24<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24"></a>
 
-Version 11\.2\.0\.4\.v24 adds support for the following:
+Version 11\.2\.0\.4\.v24 includes the following:
 + Patch 30670774: Database PSU 11\.2\.0\.4\.200414
 + Patch 30805543: Oracle JVM Component Database PSU 11\.2\.0\.4\.200414
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
 + Patch 29997959: DSTV34 OJVM \(TZDATA2019B\)
 + Patch 31192454: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 22188219: "L1 VALIDATION" WAIT EVENT USED TO BACK OFF WHEN HW ENQUEUE CANNOT BE ACQUIRED
-+ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
-+ Adds support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
-+ Adds support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package\.
++ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAupport for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
++ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
 ### Combined Patches for Version 11\.2\.0\.4, Released April 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24-Bugs-Fixed"></a>
 
@@ -185,7 +184,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v23<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v23"></a>
 
-Version 11\.2\.0\.4\.v23 adds support for the following:
+Version 11\.2\.0\.4\.v23 includes the following:
 + Patch 30298532: Database Patch Set Update: 11\.2\.0\.4\.200114
 + Patch 30503372: OJVM PATCH SET UPDATE 11\.2\.0\.4\.200114
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
@@ -325,7 +324,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v22<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v22"></a>
 
-Version 11\.2\.0\.4\.v22 adds support for the following:
+Version 11\.2\.0\.4\.v22 includes the following:
 + Patch 29913194: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.191015
 + Patch 30132974: OJVM PATCH SET UPDATE 11\.2\.0\.4\.191015
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
@@ -458,7 +457,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v21<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v21"></a>
 
-Version 11\.2\.0\.4\.v21 adds support for the following:
+Version 11\.2\.0\.4\.v21 includes the following:
 + Patch 29497421: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.190716
 + Patch 29610422: OJVM PATCH SET UPDATE 11\.2\.0\.4\.190716
 + Patch 28852325: DSTv33 for RDBMS \(TZDATA2018G\)
@@ -578,7 +577,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v20<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v20"></a>
 
-Version 11\.2\.0\.4\.v20 adds support for the following:
+Version 11\.2\.0\.4\.v20 includes the following:
 + Patch 29141056: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.190416
 + Patch 29251270: OJVM PATCH SET UPDATE 11\.2\.0\.4\.190416
 + Patch 28852325: DSTv33 for RDBMS \(TZDATA2018G\)
@@ -693,7 +692,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v19<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v19"></a>
 
-Version 11\.2\.0\.4\.v19 adds support for the following:
+Version 11\.2\.0\.4\.v19 includes the following:
 + Patch 28729262: Oracle Database Patch Set Update 11\.2\.0\.4\.190115
 + Patch 28790660: Oracle JVM Patch Set Update 11\.2\.0\.4\.190115
 + Patch 28125601: DSTv32 for RDBMS \(TZDATA2018E\)
@@ -803,7 +802,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v18<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v18"></a>
 
-Version 11\.2\.0\.4\.v18 adds support for the following:
+Version 11\.2\.0\.4\.v18 includes the following:
 + Patch 28204707: Oracle Database Patch Set Update 11\.2\.0\.4\.181016
 + Patch 28440700: Oracle JVM Patch Set Update 11\.2\.0\.4\.181016
 + Patch 28125601: DSTv32 for RDBMS \(TZDATA2018E\)
@@ -912,7 +911,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v17<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v17"></a>
 
-Version 11\.2\.0\.4\.v17 adds support for the following:
+Version 11\.2\.0\.4\.v17 includes the following:
 + Patch 27734982: Oracle Database Patch Set Update 11\.2\.0\.4\.180717
 + Patch 27923163: Oracle JVM Patch Set Update 11\.2\.0\.4\.180717
 + Patch 28125601: DSTv32 for RDBMS \(TZDATA2018E\)
@@ -1014,7 +1013,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v16<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v16"></a>
 
-Version 11\.2\.0\.4\.v16 adds support for the following:
+Version 11\.2\.0\.4\.v16 includes the following:
 + Patch 27338049: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.180417
 + Patch 27475598: OJVM PATCH SET UPDATE 11\.2\.0\.4\.180417
 + Patch 27015449: RDBMS \- PROACTIVE DSTV31 UPDATE \- TZDATA2017C
@@ -1022,7 +1021,7 @@ Version 11\.2\.0\.4\.v16 adds support for the following:
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 27659043: MES 405 BUNDLE ON TOP OF RDBMS 11\.2\.0\.4\.180116 PSU
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
-+ Adds support for the `DBMS_ADVANCED_REWRITE` package
++ Support for the `DBMS_ADVANCED_REWRITE` package
 + Fixed a bug where `DBA_LOCKS` and associated views available in new DB instances of 11\.2\.0\.4\.v15 were not created in upgrades to 11\.2\.0\.4\.v15\. Views are now created in new and upgraded DB instances of 11\.2\.0\.4\.v16 and later\.
 
 ### Oracle patch 27338049, released April 2018<a name="w91aac31d107c19c22b7"></a>
@@ -1117,7 +1116,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v15<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v15"></a>
 
-Version 11\.2\.0\.4\.v15 adds support for the following:
+Version 11\.2\.0\.4\.v15 includes the following:
 + Patch 26925576: DATABASE PATCH SET UPDATE 11\.2\.0\.4\.180116
 + Patch 26925532: OJVM PATCH SET UPDATE 11\.2\.0\.4\.180116
 + Patch 27015449: RDBMS \- PROACTIVE DSTV31 UPDATE \- TZDATA2017C
@@ -1125,7 +1124,7 @@ Version 11\.2\.0\.4\.v15 adds support for the following:
 + Patch 27216420: Oracle GoldenGate – Oracle RDBMS Server Recommended Patches
 + Patch 27244661: MES 405 BUNDLE ON TOP OF RDBMS 11\.2\.0\.4\.180116 PSU
 + Patch 19692824: DBCONTROL is not coming up on OEL 7
-+ Adds support for `DBA_LOCKS` and associated views
++ Support for `DBA_LOCKS` and associated views
 
 ### Oracle patch 26925576, released January 2018<a name="w91aac31d107c19c24b7"></a>
 
@@ -1217,7 +1216,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v14<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v14"></a>
 
-Version 11\.2\.0\.4\.v14 adds support for the following:
+Version 11\.2\.0\.4\.v14 includes the following:
 + Oracle October 2017 PSU, a combination of database PSU \(patch 26392168\) \+ OJVM component PSU \(patch 26635834\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 26950781\)
 + RSA Micro\-Edition Suite Bundle \(patch 26963526\)
@@ -1309,13 +1308,13 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v13<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v13"></a>
 
-Version 11\.2\.0\.4\.v13 adds support for the following:
+Version 11\.2\.0\.4\.v13 includes the following:
 + Oracle July 2017 PSU, a combination of database PSU \(patch 26609445\) \+ OJVM component PSU \(patch 26027154\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 26554712\)
 + RSA Micro\-Edition Suite Bundle \(patch 26770426\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
-+ Adds support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
-+ Adds support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
++ Support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
++ Support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
 ### Oracle patch 26609445, released July 2017<a name="w91aac31d107c19c28b7"></a>
 
@@ -1398,13 +1397,13 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v12<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v12"></a>
 
-Version 11\.2\.0\.4\.v12 adds support for the following: 
+Version 11\.2\.0\.4\.v12 includes the following: 
 + Oracle patch 25440428, a combination of database PSU \(patch 24732075\) \+ OJVM component PSU \(patch 25434033\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 25734992\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 + Timezone file DSTv28 \(patch 24701840\)
-+ Adds support for the `DBMS_CHANGE_NOTIFICATION` package
-+ Adds support for `XSTREAM` packages and views \(may require additional licensing\)
++ Support for the `DBMS_CHANGE_NOTIFICATION` package
++ Support for `XSTREAM` packages and views \(may require additional licensing\)
 
 ### Oracle patch 24732075, released April 2017<a name="w91aac31d107c19c30b7"></a>
 
@@ -1483,7 +1482,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v11<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v11"></a>
 
-Version 11\.2\.0\.4\.v11 adds support for the following: 
+Version 11\.2\.0\.4\.v11 includes the following: 
 + Oracle patch 24918033, a combination of database PSU \(patch 24006111\) \+ OJVM component PSU \(patch 24917954\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
@@ -1569,7 +1568,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v10<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v10"></a>
 
-Version 11\.2\.0\.4\.v10 adds support for the following: 
+Version 11\.2\.0\.4\.v10 includes the following: 
 + Oracle patch 24436313, a combination of database PSU \(patch 24006111\) \+ OJVM component PSU \(patch 24315821\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
@@ -1649,7 +1648,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v9<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v9"></a>
 
-Version 11\.2\.0\.4\.v9 adds support for the following: 
+Version 11\.2\.0\.4\.v9 includes the following: 
 + Oracle patch 23615392, a combination of database PSU \(patch 23054359\) \+ OJVM component PSU \(patch 23177551\)
 + Timezone file DSTv26 \(patch 22873635 for 11\.2\.0\.4\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24320398 for 11\.2\.0\.4\.160719\)
@@ -1732,7 +1731,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v8<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v8"></a>
 
-Version 11\.2\.0\.4\.v8 adds support for the following: 
+Version 11\.2\.0\.4\.v8 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.160419 \(22502456\)
 + Timezone file DSTv25 \(patch 22037014\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 22576728\)
@@ -1814,7 +1813,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v7<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v7"></a>
 
-Version 11\.2\.0\.4\.v7 adds support for the following: 
+Version 11\.2\.0\.4\.v7 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.160119 \(21948347\)
 + Timezone file DSTv25 \- patch 22037014 for 11\.2\.0\.4 and 12\.1\.0\.2 \(12\.1\.0\.1 includes DSTv24, patch 20875898 \(unchanged from 12\.1\.0\.1\.v3\), as a backport of DSTv25 was unavailable at build time\)
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database 
@@ -1890,12 +1889,12 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v6<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v6"></a>
 
-Version 11\.2\.0\.4\.v6 adds support for the following: 
+Version 11\.2\.0\.4\.v6 includes the following: 
 + Enable SSL encryption for Standard Edition and Standard Edition One
 
 ## Version 11\.2\.0\.4\.v5<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v5"></a>
 
-Version 11\.2\.0\.4\.v5 adds support for the following: 
+Version 11\.2\.0\.4\.v5 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.8 \(21352635\)
 +  Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
@@ -1965,7 +1964,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v4<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v4"></a>
 
-Version 11\.2\.0\.4\.v4 adds support for the following: 
+Version 11\.2\.0\.4\.v4 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.6 \(20299013\)
 + Installs additional Oracle Text knowledge bases from Oracle Database\. Examples media \(English and French\)
 +  Provides access to DBMS\_REPAIR through RDSADMIN\.RDSADMIN\_DBMS\_REPAIR 
@@ -2033,7 +2032,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v3<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v3"></a>
 
-Version 11\.2\.0\.4\.v3 adds support for the following: 
+Version 11\.2\.0\.4\.v3 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.4 \(19121551\)
 + Latest DST file \(DSTv23 – patch 19396455, released Oct 2014\)\. This patch is incorporated by default in new instances only\. 
 
@@ -2078,7 +2077,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v2 \(Deprecated\)<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v2"></a>
 
-Version 11\.2\.0\.4\.v2 adds support for the following: 
+Version 11\.2\.0\.4\.v2 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.3 \(18522509\) 
 + User access to DBMS\_TRANSACTION package to clean\-up failed distributed transactions 
 + Latest DST file \(DSTv22 – patch 18759211, released June 2014\)\. This patch is incorporated by default only in new Oracle DB instances\. 
@@ -2117,7 +2116,7 @@ Bugs fixed:
 
 ## Version 11\.2\.0\.4\.v1<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v1"></a>
 
-Version 11\.2\.0\.4\.v1 adds support for the following: 
+Version 11\.2\.0\.4\.v1 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.1
 + [Creating New Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)
 

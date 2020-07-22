@@ -118,7 +118,7 @@
 
  Without RDS Proxy, a failover involves a brief outage\. During the outage, you can't perform write operations on that database\. Any existing database connections are disrupted and your application must reopen them\. The database becomes available for new connections and write operations when a read\-only DB instance is promoted to take the place of the one that's unavailable\. 
 
- During DB failovers, RDS Proxy continues to accept connections at the same IP address and automatically directs connections to the new master\. Clients connecting through RDS Proxy are not susceptible to the following: 
+ During DB failovers, RDS Proxy continues to accept connections at the same IP address and automatically directs connections to the new primary DB instance\. Clients connecting through RDS Proxy are not susceptible to the following: 
 +  Domain Name System \(DNS\) propagation delays on failover\. 
 +  Local DNS caching\. 
 +  Connection timeouts\. 
@@ -217,11 +217,11 @@
 
  For each proxy that you create, you first use the Secrets Manager service to store sets of user name and password credentials\. You create a separate Secrets Manager secret for each database user account that the proxy connects to on the RDS DB instance or Aurora DB cluster\. 
 
- In Secrets Manager, you create these secrets with the `username` and `password` fields\. Doing so allows the proxy to connect to the corresponding database users on whichever RDS DB instances or Aurora DB clusters that you associate with the proxy\. To do this, you can use the setting **Credentials for other database**, **Credentials for RDS database**, or **Other type of secrets**\. 
+ In Secrets Manager, you create these secrets with values for the `username` and `password` fields\. Doing so allows the proxy to connect to the corresponding database users on whichever RDS DB instances or Aurora DB clusters that you associate with the proxy\. To do this, you can use the setting **Credentials for other database**, **Credentials for RDS database**, or **Other type of secrets**\. Fill in the appropriate values for the **User name** and **Password** fields, and placeholder values for any other required fields\. The proxy ignores other fields such as **Host** and **Port** if they're present in the secret\. Those details are automatically supplied by the proxy\. 
 
- The proxy ignores other fields such as `host` and `port` if they're present in the secret\. Those details are automatically supplied by the proxy\. If you choose **Credentials for other database**, that option prompts you for the user name and password, but not the other connection details, which you specify in the settings for the proxy itself\. If you choose **Other type of secrets**, you create the secret with keys named `username` and `password`\. 
+ You can also choose **Other type of secrets**\. In this case, you create the secret with keys named `username` and `password`\. 
 
- Because the secrets aren't tied to a specific database server, you can reuse a secret across multiple proxies if you use the same credentials across multiple database servers\. For example, you might use the same credentials across a group of development and test servers\. 
+ Because the secrets used by your proxy aren't tied to a specific database server, you can reuse a secret across multiple proxies if you use the same credentials across multiple database servers\. For example, you might use the same credentials across a group of development and test servers\. 
 
  To connect through the proxy as a specific user, make sure that the password associated with a secret matches the database password for that user\. If there's a mismatch, you can update the associated secret in Secrets Manager\. In this case, you can still connect to other accounts where the secret credentials and the database passwords do match\. 
 

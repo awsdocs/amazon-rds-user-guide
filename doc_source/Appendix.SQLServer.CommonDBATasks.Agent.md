@@ -38,7 +38,7 @@ EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
 To delete a SQL Server Agent job, run the following T\-SQL statement\.
 
 ```
-EXEC msdb..sp_delete_job @job_name = '<job-name>';
+EXEC msdb..sp_delete_job @job_name = 'job_name';
 ```
 
 **Note**  

@@ -154,11 +154,11 @@ Although it is possible to delete the master user on the DB instance, it is not 
 
 To provide management services for each DB instance, the `rdsadmin` user is created when the DB instance is created\. Attempting to drop, rename, change the password, or change privileges for the `rdsadmin` account will result in an error\. 
 
-To allow management of the DB instance, the standard `kill` and `kill_query` commands have been restricted\. The Amazon RDS commands `rds_kill` and `rds_kill_query` are provided to allow you to terminate user sessions or queries on DB instances\. 
+To allow management of the DB instance, the standard `kill` and `kill_query` commands have been restricted\. The Amazon RDS commands `rds_kill` and `rds_kill_query` are provided to allow you to end user sessions or queries on DB instances\. 
 
 ## Using the Password Validation Plugin<a name="MySQL.Concepts.PasswordValidationPlugin"></a>
 
-MySQL provides the `validate_password` plugin for improved security\. The plugin enforces password policies using parameters in the DB parameter group for your MySQL DB instance\. The plugin is supported for DB instances running MySQL version 5\.6, 5\.7, and 8\.0\. For more information about the `validate_password` plugin, see [The Password Validation Plugin](https://dev.mysql.com/doc/refman/5.7/en/validate-password.html) in the MySQL documentation\.
+MySQL provides the `validate_password` plugin for improved security\. The plugin enforces password policies using parameters in the DB parameter group for your MySQL DB instance\. The plugin is supported for DB instances running MySQL version 5\.6, 5\.7, and 8\.0\. For more information about the `validate_password` plugin, see [The Password Validation Plugin](https://dev.mysql.com/doc/refman/8.0/en/validate-password.html) in the MySQL documentation\.
 
 **To enable the validate\_password plugin for a MySQL DB instance**
 
@@ -170,7 +170,7 @@ MySQL provides the `validate_password` plugin for improved security\. The plugin
 
 1. Configure the parameters for the plugin in the DB parameter group used by the DB instance\.
 
-   For more information about the parameters, see [Password Validation Plugin Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html) in the MySQL documentation\.
+   For more information about the parameters, see [Password Validation Plugin Options and Variables](https://dev.mysql.com/doc/refman/8.0/en/validate-password-options-variables.html) in the MySQL documentation\.
 
    For more information about modifying DB instance parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
@@ -247,7 +247,7 @@ For MySQL 5\.6 and earlier, use the following statement\.
 GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
-For more information on SSL connections with MySQL, see the [ Using Encrypted Connections](https://dev.mysql.com/doc/refman/5.6/en/encrypted-connections.html) in the MySQL documentation\.
+For more information on SSL connections with MySQL, see the [ Using Encrypted Connections](https://dev.mysql.com/doc/refman/8.0/en/encrypted-connections.html) in the MySQL documentation\.
 
 ## Using memcached and Other Options with MySQL<a name="MySQL.Concepts.General.Options"></a>
 
@@ -255,7 +255,7 @@ Most Amazon RDS DB engines support option groups that allow you to select additi
 
 ## InnoDB Cache Warming<a name="MySQL.Concepts.InnoDBCacheWarming"></a>
 
-InnoDB cache warming can provide performance gains for your MySQL DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. The file that stores the saved buffer pool information only stores metadata for the pages that are in the buffer pool, and not the pages themselves\. As a result, the file does not require much storage space\. The file size is about 0\.2 percent of the cache size\. For example, for a 64 GiB cache, the cache warming file size is 128 MiB\. For more information on InnoDB cache warming, see [Saving and Restoring the Buffer Pool State](https://dev.mysql.com/doc/refman/5.6/en/innodb-preload-buffer-pool.html) in the MySQL documentation\. 
+InnoDB cache warming can provide performance gains for your MySQL DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. The file that stores the saved buffer pool information only stores metadata for the pages that are in the buffer pool, and not the pages themselves\. As a result, the file does not require much storage space\. The file size is about 0\.2 percent of the cache size\. For example, for a 64 GiB cache, the cache warming file size is 128 MiB\. For more information on InnoDB cache warming, see [Saving and Restoring the Buffer Pool State](https://dev.mysql.com/doc/refman/8.0/en/innodb-preload-buffer-pool.html) in the MySQL documentation\. 
 
 MySQL on Amazon RDS supports InnoDB cache warming for MySQL version 5\.6 and later\. To enable InnoDB cache warming, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group will affect all MySQL DB instances that use that parameter group\. To enable InnoDB cache warming for specific MySQL DB instances, you might need to create a new parameter group for those instances\. For information on parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
@@ -270,7 +270,7 @@ You can create an event to dump the buffer pool automatically and on a regular i
 2. ON SCHEDULE EVERY 1 HOUR 
 3. DO CALL mysql.rds_innodb_buffer_pool_dump_now();
 ```
-For more information on MySQL events, see [Event Syntax](https://dev.mysql.com/doc/refman/5.6/en/events-syntax.html) in the MySQL documentation\. 
+For more information on MySQL events, see [Event Syntax](https://dev.mysql.com/doc/refman/8.0/en/events-syntax.html) in the MySQL documentation\. 
 
 ### Dumping and Loading the Buffer Pool on Demand<a name="MySQL.Concepts.InnoDBCacheWarming.OnDemand"></a>
 
@@ -289,7 +289,7 @@ After you set the local time zone, all new connections to the database reflect t
 
 You can set a different local time zone for a DB instance and one or more of its read replicas\. To do this, use a different parameter group for the DB instance and the replica or replicas and set the `time_zone` parameter in each parameter group to a different local time zone\. 
 
-If you are replicating across AWS Regions, then the replication master DB instance and the read replica use different parameter groups \(parameter groups are unique to an AWS Region\)\. To use the same local time zone for each instance, you must set the `time_zone` parameter in the instance's and read replica's parameter groups\. 
+If you are replicating across AWS Regions, then the source DB instance and the read replica use different parameter groups \(parameter groups are unique to an AWS Region\)\. To use the same local time zone for each instance, you must set the `time_zone` parameter in the instance's and read replica's parameter groups\. 
 
 When you restore a DB instance from a DB snapshot, the local time zone is set to UTC\. You can update the time zone to your local time zone after the restore is complete\. If you restore a DB instance to a point in time, then the local time zone for the restored DB instance is the time zone setting from the parameter group of the restored DB instance\. 
 

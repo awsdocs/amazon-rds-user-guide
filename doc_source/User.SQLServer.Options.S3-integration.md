@@ -8,7 +8,7 @@ The following limitations apply:
 + If you run more than one S3 integration task at a time, the tasks run sequentially, not in parallel\.
 **Note**  
 S3 integration tasks share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. Therefore, two running native backup and restore tasks will block any S3 integration tasks\.
-+ You must re\-enable the S3 integration feature on restored instances\. It isn't propagated from the source instance to the restored instance\. Files in D:\\S3 will be cleaned up on a restored instance\.
++ You must re\-enable the S3 integration feature on restored instances\. S3 integration isn't propagated from the source instance to the restored instance\. Files in D:\\S3 are deleted on a restored instance\.
 + Downloading to the DB instance is limited to 100 files\. In other words, there can't be more than 100 files in `D:\S3\`\.
 + Only files without file extensions or with the following file extensions are supported for download: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
 **Note**  
@@ -322,7 +322,7 @@ Some of the stored procedures require that you provide an Amazon Resource Name \
 
 S3 integration tasks run sequentially and share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. It can take up to five minutes for the task to begin processing\.
 
-### Downloading Files from an Amazon S3 Bucket to an SQL Server DB Instance<a name="Appendix.SQLServer.Options.S3-integration.using.download"></a>
+### Downloading Files from an Amazon S3 Bucket to a SQL Server DB Instance<a name="Appendix.SQLServer.Options.S3-integration.using.download"></a>
 
 To download files from an S3 bucket to an RDS SQL Server DB instance, use the Amazon RDS stored procedure `msdb.dbo.rds_download_from_s3` with the following parameters\.
 
@@ -350,7 +350,7 @@ exec msdb.dbo.rds_download_from_s3
 
 The example `rds_download_from_s3` operation creates a folder named `seed_data` in `D:\S3\`, if the folder doesn't exist yet\. Then the example downloads the source file `bulk_data.csv` from S3 to a new file named `data.csv` on the DB instance\. If the file previously existed, it's overwritten because the `@overwrite_file` parameter is set to `1`\.
 
-### Uploading Files from an SQL Server DB Instance to an Amazon S3 Bucket<a name="Appendix.SQLServer.Options.S3-integration.using.upload"></a>
+### Uploading Files from a SQL Server DB Instance to an Amazon S3 Bucket<a name="Appendix.SQLServer.Options.S3-integration.using.upload"></a>
 
 To upload files from an RDS SQL Server DB instance to an S3 bucket, use the Amazon RDS stored procedure `msdb.dbo.rds_upload_to_s3` with the following parameters\.
 

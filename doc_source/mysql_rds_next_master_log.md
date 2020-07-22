@@ -1,6 +1,6 @@
 # mysql\.rds\_next\_master\_log<a name="mysql_rds_next_master_log"></a>
 
-Changes the replication master log position to the start of the next binary log on the master\. Use this procedure only if you are receiving replication I/O error 1236 on a read replica\.
+Changes the source database instance log position to the start of the next binary log on the source database instance\. Use this procedure only if you are receiving replication I/O error 1236 on a read replica\.
 
 ## Syntax<a name="mysql_rds_next_master_log-syntax"></a>
 

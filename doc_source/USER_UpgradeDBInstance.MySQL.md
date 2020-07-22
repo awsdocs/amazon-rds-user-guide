@@ -1,14 +1,19 @@
 # Upgrading the MySQL DB Engine<a name="USER_UpgradeDBInstance.MySQL"></a>
 
-When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a major engine version upgrade can introduce changes that are not compatible with existing applications\. In contrast, a minor version upgrade includes only changes that are backward\-compatible with existing applications\. 
+When Amazon RDS supports a new version of a database engine, you can upgrade your DB instances to the new version\. There are two kinds of upgrades for MySQL DB instances: major version upgrades and minor version upgrades\. 
 
-To perform a major version upgrade, modify the DB instance manually\. Minor version upgrades occur automatically if you enable auto minor version upgrades on your DB instance\. In all other cases, modify the DB instance manually to perform a minor version upgrade\.
+*Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB instance\. However, before you perform a major version upgrade, we recommend that you follow the instructions in [Major Version Upgrades for MySQL](#USER_UpgradeDBInstance.MySQL.Major)\. 
+
+In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. For information about performing an upgrade, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
+
+If your MySQL DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the writer and standby replicas are upgraded\. Your DB instance might not be available until the upgrade is complete\. 
 
 **Topics**
 + [Overview of Upgrading](#USER_UpgradeDBInstance.MySQL.Overview)
 + [Major Version Upgrades for MySQL](#USER_UpgradeDBInstance.MySQL.Major)
 + [Testing an Upgrade](#USER_UpgradeDBInstance.MySQL.UpgradeTesting)
 + [Upgrading a MySQL DB Instance](#USER_UpgradeDBInstance.MySQL.Upgrading)
++ [Automatic Minor Version Upgrades for MySQL](#USER_UpgradeDBInstance.MySQL.Minor)
 + [Upgrading a MySQL Database with Reduced Downtime](#USER_UpgradeDBInstance.MySQL.ReducedDowntime)
 
 ## Overview of Upgrading<a name="USER_UpgradeDBInstance.MySQL.Overview"></a>
@@ -150,6 +155,76 @@ Before you perform a major version upgrade on your DB instance, thoroughly test 
 
 For information about manually or automatically upgrading a MySQL DB instance, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
 
+## Automatic Minor Version Upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Minor"></a>
+
+If you enable the **Auto minor version upgrade** option when creating or modifying a DB instance, you can have your DB instance automatically upgraded\.
+
+For some RDS for MySQL major versions in some AWS Regions, one minor version is designated by RDS as the automatic upgrade version\. After a minor version has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically during your maintenance window\. RDS doesn't automatically set newer released minor versions as the automatic upgrade version\. Before RDS designates a newer automatic upgrade version, several criteria are considered, such as the following:
++ Known security issues
++ Bugs in the MySQL community version
++ Overall fleet stability since the minor version was released
+
+You can use the following AWS CLI command and script to determine the current automatic minor upgrade target version for a specified MySQL minor version in a specific AWS Region\. 
+
+```
+aws rds describe-db-engine-versions --output=table --engine mysql --engine-version minor-version --region region
+```
+
+For example, the following AWS CLI command determines the automatic minor upgrade target for MySQL minor version 5\.7\.19 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+
+```
+aws rds describe-db-engine-versions --output=table --engine mysql --engine-version 5.7.19 --region us-east-2
+```
+
+Your output is similar to the following\.
+
+```
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|                                                                                 DescribeDBEngineVersions                                                                                 |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+||                                                                                    DBEngineVersions                                                                                    ||
+|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
+||   DBEngineDescription   | DBEngineVersionDescription  | DBParameterGroupFamily  | Engine  | EngineVersion  |  Status    | SupportsLogExportsToCloudwatchLogs   |  SupportsReadReplica  ||
+|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
+||  MySQL Community Edition|  mysql 5.7.19               |  mysql5.7               |  mysql  |  5.7.19        |  available |  True                                |  True                 ||
+|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
+|||                                                                                  ExportableLogTypes                                                                                  |||
+||+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+||
+|||  audit                                                                                                                                                                               |||
+|||  error                                                                                                                                                                               |||
+|||  general                                                                                                                                                                             |||
+|||  slowquery                                                                                                                                                                           |||
+||+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+||
+|||                                                                                  ValidUpgradeTarget                                                                                  |||
+||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
+|||          AutoUpgrade          |           Description            |       Engine        |            EngineVersion            |                 IsMajorVersionUpgrade                 |||
+||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
+|||  False                        |  MySQL 5.7.21                    |  mysql              |  5.7.21                             |  False                                                |||
+|||  False                        |  MySQL 5.7.22                    |  mysql              |  5.7.22                             |  False                                                |||
+|||  False                        |                                  |  mysql              |  5.7.23                             |  False                                                |||
+|||  False                        |  MySQL 5.7.24                    |  mysql              |  5.7.24                             |  False                                                |||
+|||  False                        |  MySQL 5.7.25                    |  mysql              |  5.7.25                             |  False                                                |||
+|||  True                         |  MySQL 5.7.26                    |  mysql              |  5.7.26                             |  False                                                |||
+|||  False                        |  MySQL 5.7.28                    |  mysql              |  5.7.28                             |  False                                                |||
+|||  False                        |  MySQL 5.7.30                    |  mysql              |  5.7.30                             |  False                                                |||
+|||  False                        |  MySQL 8.0.11                    |  mysql              |  8.0.11                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.13                    |  mysql              |  8.0.13                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.15                    |  mysql              |  8.0.15                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.16                    |  mysql              |  8.0.16                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.17                    |  mysql              |  8.0.17                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.19                    |  mysql              |  8.0.19                             |  True                                                 |||
+|||  False                        |  MySQL 8.0.20                    |  mysql              |  8.0.20                             |  True                                                 |||
+||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
+```
+
+In this example, the `AutoUpgrade` value is `True` for MySQL version 5\.7\.26\. So, the automatic minor upgrade target is MySQL version 5\.7\.26, which highlighted in the output\.
+
+A MySQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
++ The DB instance has the **Auto minor version upgrade** option enabled\.
++ The DB instance is running a minor DB engine version that is less than the current automatic upgrade minor version\.
+
+For more information, see [Automatically Upgrading the Minor Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. 
+
 ## Upgrading a MySQL Database with Reduced Downtime<a name="USER_UpgradeDBInstance.MySQL.ReducedDowntime"></a>
 
 If your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance\. This procedure can reduce the amount of downtime for your application\. 
@@ -182,9 +257,9 @@ The following procedure shows an example of upgrading from MySQL version 5\.5 to
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the master MySQL 5\.5 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.5 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
 
-1. Make your MySQL 5\.6 read replica a master DB instance\. 
+1. Make your MySQL 5\.6 read replica a standalone DB instance\. 
 **Important**  
 When you promote your MySQL 5\.6 read replica to a standalone, single\-AZ DB instance, it no longer is a replication replica to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 read replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
 In addition, we recommend that before promoting your MySQL 5\.6 read replica you perform all necessary data definition language \(DDL\) operations on your MySQL 5\.6 read replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 5\.6 read replica after it has been promoted\. To promote a read replica, use the following procedure\.

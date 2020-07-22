@@ -20,21 +20,21 @@ CALL mysql.rds_set_external_master_gtid(
 ## Parameters<a name="mysql_rds_set_external_master_gtid-parameters"></a>
 
  *host\_name*   
-String\. The host name or IP address of the MariaDB instance running external to Amazon RDS that will become the replication master\.
+String\. The host name or IP address of the MariaDB instance running external to Amazon RDS that will become the source instance\.
 
  *host\_port*   
-Integer\. The port used by the MariaDB instance running external to Amazon RDS to be configured as the replication master\. If your network configuration includes SSH port replication that converts the port number, specify the port number that is exposed by SSH\.
+Integer\. The port used by the MariaDB instance running external to Amazon RDS to be configured as the source instance\. If your network configuration includes SSH port replication that converts the port number, specify the port number that is exposed by SSH\.
 
  *replication\_user\_name*   
-String\. The ID of a user with REPLICATION SLAVE permissions in the MariaDB DB instance to be configured as the read replica\.
+String\. The ID of a user with `REPLICATION SLAVE` permissions in the MariaDB DB instance to be configured as the read replica\.
 
  *replication\_user\_password*   
 String\. The password of the user ID specified in `replication_user_name`\.
 
  *gtid*   
-String\. The global transaction ID on the master that replication should start from\.  
-You can use `@@gtid_current_pos` to get the current GTID if the replication master has been locked while you are configuring replication, so the binary log doesn't change between the points when you get the GTID and when replication starts\.  
-Otherwise, if you are using `mysqldump` version 10\.0\.13 or greater to populate the slave instance prior to starting replication, you can get the GTID position in the output by using the `--master-data` or `--dump-slave` options\. If you are not using `mysqldump` version 10\.0\.13 or greater, you can run the `SHOW MASTER STATUS` or use those same `mysqldump` options to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance:  
+String\. The global transaction ID on the source instance that replication should start from\.  
+You can use `@@gtid_current_pos` to get the current GTID if the source instance has been locked while you are configuring replication, so the binary log doesn't change between the points when you get the GTID and when replication starts\.  
+Otherwise, if you are using `mysqldump` version 10\.0\.13 or greater to populate the replica instance prior to starting replication, you can get the GTID position in the output by using the `--master-data` or `--dump-slave` options\. If you are not using `mysqldump` version 10\.0\.13 or greater, you can run the `SHOW MASTER STATUS` or use those same `mysqldump` options to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance:  
 
 ```
 SELECT BINLOG_GTID_POS('<binary log file name>', <binary log file position>);
@@ -46,7 +46,7 @@ Integer\. This option is not currently implemented\.  The default is 0\.
 
 ## Usage Notes<a name="mysql_rds_set_external_master_gtid-usage-notes"></a>
 
-The `mysql.rds_set_external_master_gtid` procedure must be run by the master user\. It must be run on the MariaDB DB instance that you are configuring as the replication slave of a MariaDB instance running external to Amazon RDS\. Before running `mysql.rds_set_external_master_gtid`, you must have configured the instance of MariaDB running external to Amazon RDS as a replication master\. For more information, see [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)\.
+The `mysql.rds_set_external_master_gtid` procedure must be run by the master user\. It must be run on the MariaDB DB instance that you are configuring as the replica of a MariaDB instance running external to Amazon RDS\. Before running `mysql.rds_set_external_master_gtid`, you must have configured the instance of MariaDB running external to Amazon RDS as a source instance\. For more information, see [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)\.
 
 **Warning**  
 Do not use `mysql.rds_set_external_master_gtid` to manage replication between two Amazon RDS DB instances\. Use it only when replicating with a MariaDB instance running external to RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with Read Replicas](USER_ReadRepl.md)\.
@@ -57,13 +57,8 @@ When `mysql.rds_set_external_master_gtid` is called, Amazon RDS records the time
 
 ## Examples<a name="mysql_rds_set_external_master_gtid-examples"></a>
 
-When run on a MariaDB DB instance, the following example configures it as the replication slave of an instance of MariaDB running external to Amazon RDS\.
+When run on a MariaDB DB instance, the following example configures it as the replica of an instance of MariaDB running external to Amazon RDS\.
 
 ```
 call mysql.rds_set_external_master_gtid ('Sourcedb.some.com',3306,'ReplicationUser','SomePassW0rd','0-123-456',0); 
 ```
-
-## Related Topics<a name="mysql_rds_set_external_master_gtid.related"></a>
-+ [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md)
-+ [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)
-+ [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md)

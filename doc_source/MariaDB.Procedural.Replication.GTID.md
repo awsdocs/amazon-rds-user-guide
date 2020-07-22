@@ -1,14 +1,14 @@
 # Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
 
-You can set up GTID\-based replication from an external MariaDB instance of version 10\.0\.24 or greater into an Amazon RDS MariaDB DB instance\. Be sure to follow these guidelines when you set up an external replication master and a replica on Amazon RDS:
+You can set up GTID\-based replication from an external MariaDB instance of version 10\.0\.24 or greater into an Amazon RDS MariaDB DB instance\. Be sure to follow these guidelines when you set up an external source instance and a replica on Amazon RDS:
 + Monitor failover events for the Amazon RDS MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-+ Maintain the binlogs on your master instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your master instance in the event of a failure\.
-+ Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and Point\-In\-Time Restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
++ Maintain the binlogs on your source instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your source instance in the event of a failure\.
++ Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your source instance and replica\. For information on backups and Point\-In\-Time Restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 **Note**  
 The permissions required to start replication on an Amazon RDS MariaDB DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS MariaDB database\. 
 
-To start replication between an external master instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. <a name="MariaDB.Procedural.Importing.External.Repl.Procedure"></a>
+To start replication between an external source instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. <a name="MariaDB.Procedural.Importing.External.Repl.Procedure"></a>
 
 **To Start Replication**
 
@@ -71,8 +71,8 @@ Make sure there is not a space between the `-p` option and the entered password\
 1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MariaDB database to the VPC security group for the Amazon RDS MariaDB DB instance\. For more information on modifying a VPC security group, go to [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    The IP address can change when the following conditions are met:
-   + You are using a public IP address for communication between the external master instance and the DB instance\.
-   + The external master instance was stopped and restarted\.
+   + You are using a public IP address for communication between the external source instance and the DB instance\.
+   + The external source instance was stopped and restarted\.
 
    If these conditions are met, verify the IP address before adding it\.
 
@@ -98,7 +98,7 @@ Make sure there is not a space between the `-p` option and the entered password\
       IDENTIFIED BY '<password>';
    ```
 
-1. Make the Amazon RDS MariaDB DB instance the replica\. Connect to the Amazon RDS MariaDB DB instance as the master user and identify the external MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in Step 2\. The following is an example: 
+1. Make the Amazon RDS MariaDB DB instance the replica\. Connect to the Amazon RDS MariaDB DB instance as the master user and identify the external MariaDB database as the replication source instance by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in Step 2\. The following is an example: 
 
    ```
    CALL mysql.rds_set_external_master_gtid ('mymasterserver.mydomain.com', 3306,

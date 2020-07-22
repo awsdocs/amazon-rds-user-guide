@@ -4,14 +4,14 @@ Microsoft SQL Server Reporting Services \(SSRS\) is a server\-based application 
 
 Amazon RDS for SQL Server supports running SSRS directly on RDS DB instances\. You can enable SSRS for existing or new DB instances\.
 
-## Limitations and Recommendations<a name="Appendix.SQLServer.Options.SSRS.Limitations"></a>
+## Limitations and Recommendations<a name="SSRS.Limitations"></a>
 
 The following limitations and recommendations apply to running SSRS on RDS for SQL Server:
 + SSRS is supported for SQL Server Standard and Enterprise Editions, version 14\.00\.3223\.3\.v1 and later\.
 + Instances must use AWS Managed Microsoft AD for SSRS web portal and web server authentication\.
 + Importing and restoring report server databases from other instances of SSRS isn't supported\.
 
-  Make sure to use the databases that are created when the `SSRS` option is added to the RDS DB instance\. For more information, see [Report Server Databases](#Appendix.SQLServer.Options.SSRS.DBs)\.
+  Make sure to use the databases that are created when the `SSRS` option is added to the RDS DB instance\. For more information, see [Report Server Databases](#SSRS.DBs)\.
 + You can't configure SSRS to listen on the default SSL port \(443\)\. The allowed values are 1150–49511, except 1234, 1434, 3260, 3343, 3389, and 47001\.
 + Subscriptions through email or a Microsoft Windows file share aren't supported\.
 + Using Reporting Services Configuration Manager isn't supported\.
@@ -20,7 +20,7 @@ The following limitations and recommendations apply to running SSRS on RDS for S
 + System administrator and system user roles aren't granted\.
 + You can't edit system\-level role assignments through the web portal\.
 
-## Enabling SSRS<a name="Appendix.SQLServer.Options.SSRS.Enabling"></a>
+## Enabling SSRS<a name="SSRS.Enabling"></a>
 
 Use the following process to enable SSRS on your DB instance:
 
@@ -32,7 +32,7 @@ Use the following process to enable SSRS on your DB instance:
 
 1. Allow inbound access to the virtual private cloud \(VPC\) security group for the SSRS listener port\.
 
-### Creating an Option Group for SSRS<a name="Appendix.SQLServer.Options.SSRS.OptionGroup"></a>
+### Creating an Option Group for SSRS<a name="SSRS.OptionGroup"></a>
 
 To work with SSRS, create an option group that corresponds to the SQL Server engine and version of the DB instance that you plan to use\. To do this, use the AWS Management Console or the AWS CLI\. 
 
@@ -110,7 +110,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
 
 1. Under **Option settings**, do the following:
 
-   1. Enter the port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and Recommendations](#Appendix.SQLServer.Options.SSRS.Limitations)\.
+   1. Enter the port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and Recommendations](#SSRS.Limitations)\.
 
    1. Enter a value for **Max memory**\.
 
@@ -128,7 +128,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
 
 1. Create a JSON file, for example `ssrs-option.json`, with the following parameters:
    + `OptionGroupName` – The name of option group that you created or chose previously \(`ssrs-se-2017` in the following example\)\.
-   + `Port` – The port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and Recommendations](#Appendix.SQLServer.Options.SSRS.Limitations)\.
+   + `Port` – The port for the SSRS service to listen on\. The default is 8443\. For a list of allowed values, see [Limitations and Recommendations](#SSRS.Limitations)\.
    + `VpcSecurityGroupMemberships` – VPC security group memberships for your RDS DB instance\.
    + `MAX_MEMORY` – The upper threshold above which no new memory allocation requests are granted to report server applications\. The number is a percentage of the total memory of the DB instance\. The allowed values are 10–80\.
 
@@ -165,7 +165,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSRS` option to 
        --apply-immediately
    ```
 
-### Associating Your Option Group with Your DB Instance<a name="Appendix.SQLServer.Options.SSRS.Apply"></a>
+### Associating Your Option Group with Your DB Instance<a name="SSRS.Apply"></a>
 
 Use the AWS Management Console or the AWS CLI to associate your option group with your DB instance\.
 
@@ -243,15 +243,15 @@ You can associate your option group with a new or existing DB instance\.
       --apply-immediately
   ```
 
-### Allowing Inbound Access to Your VPC Security Group<a name="Appendix.SQLServer.Options.SSRS.Inbound"></a>
+### Allowing Inbound Access to Your VPC Security Group<a name="SSRS.Inbound"></a>
 
 To allow inbound access to the VPC security group associated with your DB instance, create an inbound rule for the specified SSRS listener port\. For more information about setting up security groups, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
-## Report Server Databases<a name="Appendix.SQLServer.Options.SSRS.DBs"></a>
+## Report Server Databases<a name="SSRS.DBs"></a>
 
 When your DB instance is associated with the SSRS option, two new databases are created on your DB instance: rdsadmin\_ReportServer and rdsadmin\_ReportServerTempDB\. These databases act as the ReportServer and ReportServerTempDB databases\. SSRS stores its data in the ReportServer database and caches its data in the ReportServerTempDB database\. RDS owns and manages these databases, so database operations on them such as ALTER and DROP aren't permitted\.
 
-## Accessing the SSRS Web Portal<a name="Appendix.SQLServer.Options.SSRS.Access"></a>
+## Accessing the SSRS Web Portal<a name="SSRS.Access"></a>
 
 Use the following process to access the SSRS web portal:
 
@@ -261,13 +261,13 @@ Use the following process to access the SSRS web portal:
 
 1. Access the web portal using a browser and the domain user credentials\.
 
-### Enabling SSL on RDS<a name="Appendix.SQLServer.Options.SSRS.Access.SSL"></a>
+### Enabling SSL on RDS<a name="SSRS.Access.SSL"></a>
 
 SSRS uses the HTTPS SSL protocol for its connections\. To work with this protocol, import an SSL certificate into the Microsoft Windows operating system on your client computer\.
 
 For more information on SSL certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. For more information about using SSL with SQL Server, see [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)\.
 
-### Granting Access to Domain Users<a name="Appendix.SQLServer.Options.SSRS.Access.Grant"></a>
+### Granting Access to Domain Users<a name="SSRS.Access.Grant"></a>
 
 In a new SSRS activation, there are no role assignments in SSRS\. To give a domain user or user group access to the web portal, RDS provides a stored procedure\.
 
@@ -288,7 +288,7 @@ The domain user or user group is granted the `RDS_SSRS_ROLE` system role\. This 
 
 The item\-level role of `Content Manager` on the root folder is also granted\.
 
-### Accessing the Web Portal<a name="Appendix.SQLServer.Options.SSRS.Access"></a>
+### Accessing the Web Portal<a name="SSRS.Access"></a>
 
 After the `SSRS_GRANT_PORTAL_PERMISSION` task finishes successfully, you have access to the portal using a web browser\. The web portal URL has the following format\.
 
@@ -312,7 +312,7 @@ In this format, the following applies:
 
 1. Log in with the credentials for a domain user that you granted access with the `SSRS_GRANT_PORTAL_PERMISSION` task\.
 
-## Revoking System\-Level Permissions<a name="Appendix.SQLServer.Options.SSRS.Access.Revoke"></a>
+## Revoking System\-Level Permissions<a name="SSRS.Access.Revoke"></a>
 
 The `RDS_SSRS_ROLE` system role doesn't have sufficient permissions to delete system\-level role assignments\. To remove a user or user group from `RDS_SSRS_ROLE`, use the same stored procedure that you used to grant the role but use the `SSRS_REVOKE_PORTAL_PERMISSION` task type\.
 
@@ -327,7 +327,7 @@ The `RDS_SSRS_ROLE` system role doesn't have sufficient permissions to delete sy
 
 Doing this deletes the user from the `RDS_SSRS_ROLE` system role\. It also deletes the user from the `Content Manager` item\-level role if the user has it\.
 
-## Monitoring the Status of a Task<a name="Appendix.SQLServer.Options.SSRS.Monitor"></a>
+## Monitoring the Status of a Task<a name="SSRS.Monitor"></a>
 
 To track the status of your granting or revoking task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSRS\. The second parameter accepts a task ID\. 
 
@@ -364,13 +364,13 @@ The `rds_fn_task_status` function returns the following information\.
 | `overwrite_file` |  Not applicable to SSRS tasks\.  | 
 | `task_metadata` | Metadata associated with the SSRS task\. | 
 
-## Disabling SSRS<a name="Appendix.SQLServer.Options.SSRS.Disable"></a>
+## Disabling SSRS<a name="SSRS.Disable"></a>
 
-To disable SSRS, remove the `SSRS` option from its option group\. Removing the option doesn't delete the SSRS databases\. For more information, see [Deleting the SSRS Databases](#Appendix.SQLServer.Options.SSRS.Delete)\.
+To disable SSRS, remove the `SSRS` option from its option group\. Removing the option doesn't delete the SSRS databases\. For more information, see [Deleting the SSRS Databases](#SSRS.Drop)\.
 
 You can re\-enable SSRS by adding back the `SSRS` option\. If you have also deleted the SSRS databases, re\-enabling SSRS on the same DB instance creates new report server databases\.
 
-### Console<a name="Options.SSRS.Disable.Console"></a>
+### Console<a name="SSRS.Disable.Console"></a>
 
 **To remove the SSRS option from its option group**
 
@@ -388,7 +388,7 @@ You can re\-enable SSRS by adding back the `SSRS` option\. If you have also dele
 
 1. Choose **Delete**\.
 
-### CLI<a name="Options.SSRS.Disable.CLI"></a>
+### CLI<a name="SSRS.Disable.CLI"></a>
 
 **To remove the SSRS option from its option group**
 + Run one of the following commands\.  
@@ -412,7 +412,7 @@ You can re\-enable SSRS by adding back the `SSRS` option\. If you have also dele
       --apply-immediately
   ```
 
-## Deleting the SSRS Databases<a name="Appendix.SQLServer.Options.SSRS.Delete"></a>
+## Deleting the SSRS Databases<a name="SSRS.Drop"></a>
 
 Removing the `SSRS` option doesn't delete the report server databases\. To delete them, use the following stored procedure\. 
 

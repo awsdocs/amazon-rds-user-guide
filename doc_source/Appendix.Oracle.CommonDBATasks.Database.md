@@ -49,13 +49,13 @@ By default, tablespaces are created with auto\-extend enabled, and no maximum si
 The following example creates a tablespace named `users2` with a starting size of 1 gigabyte and a maximum size of 10 gigabytes: 
 
 ```
-create tablespace users2 datafile size 1G autoextend on maxsize 10G;
+CREATE TABLESPACE users2 DATAFILE SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
 ```
 
 The following example creates temporary tablespace named `temp01`:
 
 ```
-create temporary tablespace temp01;
+CREATE TEMPORARY TABLESPACE temp01;
 ```
 
  We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a datafile to a smallfile tablespace\. 
@@ -65,13 +65,13 @@ You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specif
 The following example resizes a bigfile tablespace named `users2` to 200 MB\.
 
 ```
-alter tablespace users2 resize 200M;
+ALTER TABLESPACE users2 RESIZE 200M;
 ```
 
 The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
 
 ```
-alter tablespace users2 add datafile size 100000M autoextend on next 250m maxsize UNLIMITED;
+ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
 ```
 
 ## Setting the Default Tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
@@ -403,7 +403,7 @@ exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => true);
 The following command enables audit of `ALL` on `SYS.AUD$` `BY SESSION`\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => false);                           
+exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => false);
 ```
 
 For more information, see [AUDIT \(Traditional Auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/AUDIT-Traditional-Auditing.html#GUID-ADF45B07-547A-4096-8144-50241FA2D8DD) in the Oracle documentation\. 
@@ -415,13 +415,13 @@ To disable auditing on the database audit trail table `SYS.AUD$`, use the Amazon
 The following query returns the current audit configuration for `SYS.AUD$` for a database:
 
 ```
-select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';                     
+select * from dba_obj_audit_opts where owner='SYS' and object_name='AUD$';
 ```
 
 The following command disables audit of `ALL` on `SYS.AUD$`\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;                      
+exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;
 ```
 
 For more information, see [NOAUDIT \(Traditional Auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/NOAUDIT-Traditional-Auditing.html#GUID-9D8EAF18-4AB3-4C04-8BF7-37BD0E15434D) in the Oracle documentation\. 
@@ -599,17 +599,17 @@ The `resize_tempfile` procedure has the following parameters\.
 The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a read replica\.
 
 ```
-exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');        
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');
 ```
 
 ```
-exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');        
+exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');
 ```
 
 The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a read replica\.
 
 ```
-exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');        
+exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
 ```
 
 For more information about read replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.

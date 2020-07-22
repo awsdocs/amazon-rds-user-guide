@@ -17,7 +17,7 @@ You can also use AWS Backup to manage backups of Amazon RDS DB instances and Aur
 
 ## Backup Storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
-Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Total backup storage space equals the sum of the storage for all backups in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. 
+Your Amazon RDS backup storage for each region is composed of the automated backups and manual DB snapshots for that region\. Total backup storage space equals the sum of the storage for all backups in that region\. Moving a DB snapshot to another region increases the backup storage in the destination region\. Backups are stored in Amazon S3\.
 
 For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
 
@@ -320,7 +320,7 @@ The following parameters are used to delete a retained automated backup:
 
 For the MySQL DB engine, automated backups are only supported for the InnoDB storage engine\. Use of these features with other MySQL storage engines, including MyISAM, can lead to unreliable behavior while restoring from backups\. Specifically, since storage engines like MyISAM don't support reliable crash recovery, your tables can be corrupted in the event of a crash\. For this reason, we encourage you to use the InnoDB storage engine\. 
 + To convert existing MyISAM tables to InnoDB tables, you can use the `ALTER TABLE` command, for example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
-+ If you choose to use MyISAM, you can attempt to manually repair tables that become damaged after a crash by using the `REPAIR` command\. For more information, see [REPAIR TABLE Syntax](http://dev.mysql.com/doc/refman/5.5/en/repair-table.html) in the MySQL documentation\. However, as noted in the MySQL documentation, there is a good chance that you might not be able to recover all your data\. 
++ If you choose to use MyISAM, you can attempt to manually repair tables that become damaged after a crash by using the `REPAIR` command\. For more information, see [REPAIR TABLE Statement](https://dev.mysql.com/doc/refman/8.0/en/repair-table.html) in the MySQL documentation\. However, as noted in the MySQL documentation, there is a good chance that you might not be able to recover all your data\. 
 + If you want to take a snapshot of your MyISAM tables before restoring, follow these steps: 
 
   1. Stop all activity to your MyISAM tables \(that is, close all sessions\)\. 

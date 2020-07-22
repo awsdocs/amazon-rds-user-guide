@@ -14,7 +14,7 @@ replication_log_file
 ## Parameters<a name="mysql_rds_start_replication_until-parameters"></a>
 
  *replication\_log\_file*   
-The name of the binary log on the replication master contains the replication information\.
+The name of the binary log on the source database instance contains the replication information\.
 
  *replication\_stop\_point *   
 The location in the `replication_log_file` binary log at which replication will stop\.
@@ -23,14 +23,14 @@ The location in the `replication_log_file` binary log at which replication will 
 
 The master user must run the `mysql.rds_start_replication_until` procedure\.
 
-You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new master DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
+You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 You can configure delayed replication using the following stored procedures:
 + [mysql\.rds\_set\_configuration](mysql_rds_set_configuration.md)
 + [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md)
 + [mysql\.rds\_set\_source\_delay](mysql_rds_set_source_delay.md)
 
-The file name specified for the `replication_log_file` parameter must match the master binlog file name\.
+The file name specified for the `replication_log_file` parameter must match the source database instance binlog file name\.
 
 When the `replication_stop_point ` parameter specifies a stop location that is in the past, replication is stopped immediately\.
 

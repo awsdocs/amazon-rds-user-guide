@@ -189,8 +189,8 @@ for sequence 1306Not able to establish initial position for begin time 2014-03-0
 The logs are retained on your DB instance\. Ensure that you have sufficient storage on your instance for the files\. To see how much space you have used in the last *X* hours, use the following query, replacing *X* with the number of hours\.
 
 ```
-select sum(blocks * block_size) bytes from v$archived_log 
-   where next_time>=sysdate-X/24 and dest_id=1;
+SELECT SUM(BLOCKS * BLOCK_SIZE) BYTES FROM V$ARCHIVED_LOG 
+   WHERE NEXT_TIME>=SYSDATE-X/24 AND DEST_ID=1;
 ```
 
 ### Create a User Account on the Source<a name="Appendix.OracleGoldenGate.Source.Account"></a>
@@ -200,9 +200,9 @@ GoldenGate runs as a database user and requires the appropriate database privile
 The following statements create a user account named *oggadm1*\. 
 
 ```
-CREATE tablespace administrator;
-CREATE USER oggadm1  IDENTIFIED BY "XXXXXX"  
-   default tablespace ADMINISTRATOR temporary tablespace TEMP;
+CREATE TABLESPACE administrator;
+CREATE USER oggadm1  IDENTIFIED BY "password"  
+   DEFAULT TABLESPACE ADMINISTRATOR TEMPORARY TABLESPACE TEMP;
 ```
 
 ### Grant Account Privileges on the Source DB<a name="Appendix.OracleGoldenGate.Source.Privileges"></a>
@@ -210,23 +210,23 @@ CREATE USER oggadm1  IDENTIFIED BY "XXXXXX"  
 Grant the necessary privileges to the GoldenGate user account using the SQL command `grant` and the `rdsadmin.rdsadmin_util` procedure `grant_sys_object`\. The following statements grant privileges to a user named *oggadm1*\.
 
 ```
-grant create session, alter session to oggadm1;
-grant resource to oggadm1;
-grant select any dictionary to oggadm1;
-grant flashback any table to oggadm1;
-grant select any table to oggadm1;
-grant select_catalog_role to <RDS instance master username> with admin option;
+GRANT CREATE SESSION, ALTER SESSION TO oggadm1;
+GRANT RESOURCE TO oggadm1;
+GRANT SELECT ANY DICTIONARY TO oggadm1;
+GRANT FLASHBACK ANY TABLE TO oggadm1;
+GRANT SELECT ANY TABLE TO oggadm1;
+GRANT SELECT_CATALOG_ROLE TO rds_master_user_name WITH ADMIN OPTION;
 exec rdsadmin.rdsadmin_util.grant_sys_object ('DBA_CLUSTERS', 'OGGADM1');
-grant execute on dbms_flashback to oggadm1;
-grant select on SYS.v_$database to oggadm1;
-grant alter any table to oggadm1;
+GRANT EXECUTE ON DBMS_FLASHBACK TO oggadm1;
+GRANT SELECT ON SYS.V_$DATABASE TO oggadm1;
+GRANT ALTER ANY TABLE TO oggadm1;
 ```
 
-Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `DBMS_GOLDENGATE_AUTH` or `RDSADMIN_DBMS_GOLDENGATE_AUTH`, depends on the Oracle DB engine version\.
+Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `dbms_goldengate_auth` or `rdsadmin_dbms_goldengate_auth`, depends on the Oracle DB engine version\.
 + For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
 
   ```
-  EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+  exec dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
      privilege_type=>'capture',
      grant_select_privileges=>true, 
      do_grants=>TRUE);
@@ -234,11 +234,13 @@ Finally, grant the privileges needed by a user account to be a GoldenGate admini
 + For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
 
   ```
-  EXEC RDSADMIN_DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+  exec rdsadmin.rdsadmin_dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
      privilege_type=>'capture',
      grant_select_privileges=>true, 
      do_grants=>TRUE);
   ```
+
+  To revoke privileges, use the procedure `revoke_admin_privilege` in the same package\.
 
 ### Add a TNS Alias for the Source DB<a name="Appendix.OracleGoldenGate.Source.TNS"></a>
 
@@ -260,7 +262,7 @@ The following tasks set up a target DB instance for use with GoldenGate:
 
 1. Set the `compatible` parameter to 11\.2\.0\.4 or later
 
-1.  Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. If your target database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\. 
+1.  Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to `TRUE`\. If your target database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to `TRUE`\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\. 
 
 1. Create and manage a GoldenGate user account on the target database
 
@@ -275,13 +277,13 @@ The following tasks set up a target DB instance for use with GoldenGate:
 The following statements create a user named *oggadm1*: 
 
 ```
-create tablespace administrator;
-create tablespace administrator_idx;
-CREATE USER oggadm1  IDENTIFIED BY "XXXXXX" 
-   default tablespace ADMINISTRATOR 
-   temporary tablespace TEMP;
-alter user oggadm1 quota unlimited on ADMINISTRATOR;
-alter user oggadm1 quota unlimited on ADMINISTRATOR_IDX;
+CREATE TABLESPACE administrator;
+CREATE TABLESPACE administrator_idx;
+CREATE USER oggadm1  IDENTIFIED BY "password" 
+   DEFAULT TABLESPACE administrator 
+   TEMPORARY TABLESPACE temp;
+ALTER USER oggadm1 QUOTA UNLIMITED ON administrator;
+ALTER USER oggadm1 QUOTA UNLIMITED ON administrator_idx;
 ```
 
 ### Grant Account Privileges on the Target DB<a name="Appendix.OracleGoldenGate.Target.Privileges"></a>
@@ -289,31 +291,31 @@ alter user oggadm1 quota unlimited on ADMINISTRATOR_IDX;
 Grant necessary privileges to the GoldenGate user account on the target DB\. In the following example, you grant privileges to *oggadm1*\.
 
 ```
-grant create session        to oggadm1;
-grant alter session         to oggadm1;
-grant create cluster        to oggadm1;
-grant create indextype      to oggadm1;
-grant create operator       to oggadm1;
-grant create procedure      to oggadm1;
-grant create sequence       to oggadm1;
-grant create table          to oggadm1;
-grant create trigger        to oggadm1;
-grant create type           to oggadm1;
-grant select any dictionary to oggadm1;
-grant create any table      to oggadm1;
-grant alter any table       to oggadm1;
-grant lock any table        to oggadm1;
-grant select any table      to oggadm1;
-grant insert any table      to oggadm1;
-grant update any table      to oggadm1;
-grant delete any table      to oggadm1;
+GRANT CREATE SESSION        TO oggadm1;
+GRANT ALTER SESSION         TO oggadm1;
+GRANT CREATE CLUSTER        TO oggadm1;
+GRANT CREATE INDEXTYPE      TO oggadm1;
+GRANT CREATE OPERATOR       TO oggadm1;
+GRANT CREATE PROCEDURE      TO oggadm1;
+GRANT CREATE SEQUENCE       TO oggadm1;
+GRANT CREATE TABLE          TO oggadm1;
+GRANT CREATE TRIGGER        TO oggadm1;
+GRANT CREATE TYPE           TO oggadm1;
+GRANT SELECT ANY DICTIONARY TO oggadm1;
+GRANT CREATE ANY TABLE      TO oggadm1;
+GRANT ALTER ANY TABLE       TO oggadm1;
+GRANT LOCK ANY TABLE        TO oggadm1;
+GRANT SELECT ANY TABLE      TO oggadm1;
+GRANT INSERT ANY TABLE      TO oggadm1;
+GRANT UPDATE ANY TABLE      TO oggadm1;
+GRANT DELETE ANY TABLE      TO oggadm1;
 ```
 
-Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `DBMS_GOLDENGATE_AUTH` or `RDSADMIN_DBMS_GOLDENGATE_AUTH`, depends on the Oracle DB engine version\.
+Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `dbms_goldengate_auth` or `rdsadmin_dbms_goldengate_auth`, depends on the Oracle DB engine version\.
 + For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
 
   ```
-  EXEC DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+  exec dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
      privilege_type=>'capture',
      grant_select_privileges=>true, 
      do_grants=>TRUE);
@@ -321,11 +323,13 @@ Finally, grant the privileges needed by a user account to be a GoldenGate admini
 + For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
 
   ```
-  EXEC RDSADMIN_DBMS_GOLDENGATE_AUTH.GRANT_ADMIN_PRIVILEGE (grantee=>'OGGADM1',
+  exec rdsadmin.rdsadmin_dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
      privilege_type=>'capture',
      grant_select_privileges=>true, 
      do_grants=>TRUE);
   ```
+
+  To revoke privileges, use the procedure `revoke_admin_privilege` in the same package\.
 
 ### Add a TNS Alias for the Target DB<a name="Appendix.OracleGoldenGate.Target.TNS"></a>
 
@@ -371,7 +375,7 @@ The following tasks enable and start the `EXTRACT` utility:
 1. On the GoldenGate hub, launch the GoldenGate command line interface \(*ggsci*\)\. Log into the source database\. The following example shows the format for logging in:
 
    ```
-    dblogin userid <user>@<db tnsname> 
+   dblogin userid <user>@<db tnsname> 
    ```
 
 1. Add a checkpoint table for the database:
@@ -435,7 +439,7 @@ The following tasks enable and start the `REPLICAT` utility:
 1. Launch the GoldenGate command line interface \(ggsci\)\. Log into the target database\. The following example shows the format for logging in\.
 
    ```
-    dblogin userid <user>@<db tnsname>  
+   dblogin userid <user>@<db tnsname>  
    ```
 
 1. Using the *ggsci* command line, add a checkpoint table\. The user indicated should be the GoldenGate user account, not the target table schema owner\. The following example creates a checkpoint table named *gg\_checkpoint*\.

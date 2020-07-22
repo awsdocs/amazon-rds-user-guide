@@ -9,7 +9,7 @@ In this procedure, you transfer a copy of your database data to an Amazon EC2 in
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_1.png)
 
 **Note**  
-We don't recommend that you use this procedure with source MySQL databases from MySQL versions earlier than version 5\.1, due to potential replication issues\. For more information, see [Replication Compatibility Between MySQL Versions](http://dev.mysql.com/doc/refman/5.6/en/replication-compatibility.html) in the MySQL documentation\.
+We don't recommend that you use this procedure with source MySQL databases from MySQL versions earlier than version 5\.1, due to potential replication issues\. For more information, see [Replication Compatibility Between MySQL Versions](https://dev.mysql.com/doc/refman/8.0/en/replication-compatibility.html) in the MySQL documentation\.
 
 ## Create a Copy of Your Existing Database<a name="MySQL.Procedural.Importing.Copy.Database"></a>
 
@@ -19,9 +19,9 @@ The first step in the process of migrating a large amount of data to an Amazon R
 
 You can use the `mysqldump` utility to create a database backup in either SQL or delimited\-text format\. You should do a test run with each format in a nonproduction environment to see which method minimizes the amount of time that `mysqldump` runs\.
 
-You should also weigh `mysqldump` performance against the benefit offered by using the delimited\-text format for loading\. A backup using delimited\-text format creates a tab\-separated text file for each table being dumped\. You can load these files in parallel using the `LOAD DATA LOCAL INFILE` command to reduce the amount of time required to import your database\. For more information about choosing a `mysqldump` format and then loading the data, see [Using mysqldump For Backups](http://dev.mysql.com/doc/mysql-backup-excerpt/5.6/en/using-mysqldump.html) in the MySQL documentation\.
+You should also weigh `mysqldump` performance against the benefit offered by using the delimited\-text format for loading\. A backup using delimited\-text format creates a tab\-separated text file for each table being dumped\. You can load these files in parallel using the `LOAD DATA LOCAL INFILE` command to reduce the amount of time required to import your database\. For more information about choosing a `mysqldump` format and then loading the data, see [ Using mysqldump For Backups](https://dev.mysql.com/doc/mysql-backup-excerpt/8.0/en/using-mysqldump.html) in the MySQL documentation\.
 
-Before you start the backup operation, you must set the replication options on the MySQL or MariaDB database that you are copying to Amazon RDS\. The replication options include enabling binary logging and setting a unique server ID\. Setting these options causes your server to start logging database transactions and prepares it to be a replication master later in this process\.
+Before you start the backup operation, you must set the replication options on the MySQL or MariaDB database that you are copying to Amazon RDS\. The replication options include enabling binary logging and setting a unique server ID\. Setting these options causes your server to start logging database transactions and prepares it to be a source replication instance later in this process\.
 
 **Note**  
 Your database needs to be stopped to set the replication options and be in read\-only mode while the backup copy is created, so you need to schedule a maintenance window for these operations\.
@@ -36,7 +36,7 @@ If you need to migrate users and privileges, consider using a tool that generate
    sudo vi /etc/my.cnf
    ```
 
-   Add the `log_bin` and `server_id` options to the `[mysqld]` section\. The `log_bin` option provides a file name identifier for binary log files\. The `server_id` option provides a unique identifier for the server in master\-replica relationships\.
+   Add the `log_bin` and `server_id` options to the `[mysqld]` section\. The `log_bin` option provides a file name identifier for binary log files\. The `server_id` option provides a unique identifier for the server in source\-replica relationships\.
 
    The following example shows the updated `[mysqld]` section of a my\.cnf file:
 
@@ -46,7 +46,7 @@ If you need to migrate users and privileges, consider using a tool that generate
    server-id=1
    ```
 
-   For more information, see [Setting the Replication Master Configuration](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-masterbaseconfig.html) in the MySQL documentation\.
+   For more information, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)\.
 
 1. Restart the `mysql` service\.
 
@@ -58,11 +58,11 @@ If you need to migrate users and privileges, consider using a tool that generate
 
 1. Create a backup of your data using the `mysqldump` utility, specifying either SQL or delimited\-text format\.
 
-   You must specify `--master-data=2` in order to create a backup file that can be used to start replication between servers\. For more information, see the [mysqldump](http://dev.mysql.com/doc/refman/5.6/en/mysqldump.html#option_mysqldump_master-data) documentation\.
+   You must specify `--master-data=2` in order to create a backup file that can be used to start replication between servers\. For more information, see the [ mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_master-data) documentation\.
 
    To improve performance and ensure data integrity, use the `--order-by-primary` and `--single-transaction` options of `mysqldump`\.
 
-   To avoid including the MySQL system database in the backup, do not use the `--all-databases` option with `mysqldump`\. For more information, see [Creating a Dump Snapshot Using mysqldump](http://dev.mysql.com/doc/refman/5.6/en/replication-howto-mysqldump.html) in the MySQL documentation\.
+   To avoid including the MySQL system database in the backup, do not use the `--all-databases` option with `mysqldump`\. For more information, see [ Creating a Data Snapshot Using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
 
    Use `chmod` if necessary to make sure that the directory where the backup file is being created is writeable\.
 **Important**  
@@ -73,26 +73,26 @@ On Windows, run the command window as an administrator\.
 
      ```
      sudo mysqldump \
-         --databases <database_name> \
+         --databases database_name \
          --master-data=2  \
          --single-transaction \
          --order-by-primary \
          -r backup.sql \
-         -u <local_user> \
-         -p <password>
+         -u local_user \
+         -p password
      ```
 
      For Windows:
 
      ```
      mysqldump ^
-         --databases <database_name> ^
+         --databases database_name ^
          --master-data=2  ^
          --single-transaction ^
          --order-by-primary ^
          -r backup.sql ^
-         -u <local_user> ^
-         -p <password>
+         -u local_user ^
+         -p password
      ```
    + To produce delimited\-text output, use the following command\.
 
@@ -100,35 +100,35 @@ On Windows, run the command window as an administrator\.
 
      ```
      sudo mysqldump \
-         --tab=<target_directory> \
+         --tab=target_directory \
          --fields-terminated-by ',' \
          --fields-enclosed-by '"' \
          --lines-terminated-by 0x0d0a \
-         <database_name> \
+         database_name \
          --master-data=2 \
          --single-transaction \
          --order-by-primary \
-         -p <password>
+         -p password
      ```
 
      For Windows:
 
      ```
      mysqldump ^
-         --tab=<target_directory> ^
+         --tab=target_directory ^
          --fields-terminated-by ',' ^
          --fields-enclosed-by '"' ^
          --lines-terminated-by 0x0d0a ^
-         <database_name> ^
+         database_name ^
          --master-data=2 ^
          --single-transaction ^
          --order-by-primary ^
-         -p <password>
+         -p password
      ```
 **Note**  
 You must create any stored procedures, triggers, functions, or events manually in your Amazon RDS database\. If you have any of these objects in the database that you are copying, exclude them when you run `mysqldump` by including the following arguments with your `mysqldump` command: `--routines=0 --triggers=0 --events=0`\.
 
-     When using the delimited\-text format, a CHANGE MASTER TO comment is returned when you run `mysqldump`\. This comment contains the master log file name and position\. If the external instance is other than MariaDB version 10\.0\.2 or greater, note the values for MASTER\_LOG\_FILE and MASTER\_LOG\_POS; you need these values when setting up replication\.
+     When using the delimited\-text format, a `CHANGE MASTER TO` comment is returned when you run `mysqldump`\. This comment contains the master log file name and position\. If the external instance is other than MariaDB version 10\.0\.2 or greater, note the values for `MASTER_LOG_FILE` and `MASTER_LOG_POS`\. You need these values when setting up replication\.
 
      ```
      -- Position to start replication or point-in-time recovery from
@@ -141,7 +141,7 @@ You must create any stored procedures, triggers, functions, or events manually i
 1. If the external instance you are using is MariaDB version 10\.0\.2 or greater, you use GTID\-based replication\. Run `SHOW MASTER STATUS` on the external MariaDB instance to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance\.
 
    ```
-   SELECT BINLOG_GTID_POS('<binary log file name>', <binary log file position>);
+   SELECT BINLOG_GTID_POS('binary log file name', binary log file position);
    ```
 
    Note the GTID returned; you need it to configure replication\.
@@ -155,7 +155,7 @@ You must create any stored procedures, triggers, functions, or events manually i
    + To compress delimited\-text output, use the following command\.
 
      ```
-     tar -zcvf backup.tar.gz <target_directory>
+     tar -zcvf backup.tar.gz target_directory
      ```
 
 ## Create an Amazon EC2 Instance and Copy the Compressed Database<a name="MySQL.Procedural.Importing.Import.Database"></a>
@@ -177,7 +177,7 @@ Older AWS accounts can also launch instances in Amazon EC2\-Classic mode\. In th
 1. Copy your compressed database backup file from your local system to your Amazon EC2 instance\. Use `chmod` if necessary to make sure you have write permission for the target directory of the Amazon EC2 instance\. You can use `scp` or an SSH client to copy the file\. The following is an example:
 
    ```
-   $ scp -r -i <key pair>.pem backup.sql.gz ec2-user@<EC2 DNS>:/<target_directory>/backup.sql.gz
+   $ scp -r -i key pair.pem backup.sql.gz ec2-user@EC2 DNS:/target_directory/backup.sql.gz
    ```
 **Important**  
 Be sure to copy sensitive data using a secure network transfer protocol\.
@@ -275,7 +275,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
 1. Connect to your Amazon RDS DB instance as a remote host from your Amazon EC2 instance using the `mysql` command\. The following is an example\.
 
    ```
-   mysql -h <host_name> -P 3306 -u <db_master_user> -p
+   mysql -h host_name -P 3306 -u db_master_user -p
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
@@ -289,15 +289,15 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
    + For delimited\-text format, first create the database \(if it isn’t the default database you created when setting up the Amazon RDS DB instance\)\.
 
      ```
-     mysql> create database <database_name>;
-     $ mysql> use <database_name>;
+     mysql> create database database_name;
+     $ mysql> use database_name;
      ```
 
      Then create the tables\.
 
      ```
-     mysql> source <table1>.sql
-     $ mysql> source <table2>.sql
+     mysql> source table1.sql
+     $ mysql> source table2.sql
      etc…
      ```
 
@@ -329,14 +329,14 @@ The permissions required to start replication on an Amazon RDS DB instance are r
 
 ### To Start Replication<a name="MySQL.Procedural.Importing.Start.Repl.Procedure"></a>
 
-Earlier, you enabled binary logging and set a unique server ID for your source database\. Now you can set up your Amazon RDS DB instance as a replica with your live database as the replication master\.
+Earlier, you enabled binary logging and set a unique server ID for your source database\. Now you can set up your Amazon RDS DB instance as a replica with your live database as the source replication instance\.
 
 1. In the Amazon RDS Management Console, add the IP address of the server that hosts the source database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance, so that it can communicate with your source instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <db_instance_endpoint>
+   host db_instance_endpoint
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint, for example `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
@@ -344,13 +344,13 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 1. Using the client of your choice, connect to the source instance and create a user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\.
 
    ```
-   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
 1. For the source instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
 
    ```
-   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
 1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, look at the contents of that file\.
@@ -359,7 +359,7 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    cat backup.sql
    ```
 
-   The file includes a CHANGE MASTER TO comment that contains the master log file name and position\. This comment is included in the backup file when you use the `--master-data` option with `mysqldump`\. Note the values for MASTER\_LOG\_FILE and MASTER\_LOG\_POS\.
+   The file includes a `CHANGE MASTER TO` comment that contains the master log file name and position\. This comment is included in the backup file when you use the `--master-data` option with `mysqldump`\. Note the values for `MASTER_LOG_FILE` and `MASTER_LOG_POS`\.
 
    ```
    --
@@ -373,20 +373,20 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
    If the external instance is MariaDB 10\.0\.2 or greater, you should already have the GTID from which to start replication from step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
 
-1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
+1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
 
    ```
-   CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306,
-       'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
+   CALL mysql.rds_set_external_master ('myserver.mydomain.com', 3306,
+       'repl_user', 'password', 'mysql-bin-changelog.000031', 107, 0);
    ```
 
-   If the external instance is MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the replication master by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example\.
+   If the external instance is MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To Create a Backup Copy of Your Existing Database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example\.
 
    ```
-   CALL mysql.rds_set_external_master_gtid ('<master_server_ip_address>', 3306, 'ReplicationUser', '<password>', '<GTID>', 0); 
+   CALL mysql.rds_set_external_master_gtid ('source_server_ip_address', 3306, 'ReplicationUser', 'password', 'GTID', 0); 
    ```
 
-   The `master_server_ip_address` is the IP address of master MySQL instance\. An EC2 private DNS address is currently not supported\.
+   The `source_server_ip_address` is the IP address of source replication instance\. An EC2 private DNS address is currently not supported\.
 
 1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\.
 
@@ -394,13 +394,13 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    CALL mysql.rds_start_replication;
    ```
 
-1. On the Amazon RDS DB instance, run the [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) command to determine when the replica is up\-to\-date with the replication master\. The results of the SHOW SLAVE STATUS command include the Seconds\_Behind\_Master field\. When the Seconds\_Behind\_Master field returns 0, then the replica is up\-to\-date with the master\.
+1. On the Amazon RDS DB instance, run the [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html) command to determine when the replica is up\-to\-date with the source replication instance\. The results of the `SHOW SLAVE STATUS` command include the `Seconds_Behind_Master` field\. When the `Seconds_Behind_Master` field returns 0, then the replica is up\-to\-date with the source replication instance\.
 
 1. After the Amazon RDS DB instance is up\-to\-date, enable automated backups so you can restore that database if needed\. You can enable or modify automated backups for your Amazon RDS DB instance using the [Amazon RDS Management Console](https://console.aws.amazon.com/rds/)\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
 
 ## Redirect Your Live Application to Your Amazon RDS Instance<a name="MySQL.Procedural.Importing.Redirect.App"></a>
 
-After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the replication master, you can now update your live application to use the Amazon RDS instance\.
+After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the source replication instance, you can now update your live application to use the Amazon RDS instance\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_6.png)
 
@@ -408,7 +408,7 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the repli
 
 1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-1. Verify that the Seconds\_Behind\_Master field in the [SHOW SLAVE STATUS](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the replication master\.
+1. Verify that the `Seconds_Behind_Master` field in the [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the source replication instance\.
 
    ```
    SHOW SLAVE STATUS;

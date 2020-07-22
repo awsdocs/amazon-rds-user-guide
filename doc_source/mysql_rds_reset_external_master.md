@@ -2,6 +2,9 @@
 
 Reconfigures a MySQL DB instance to no longer be a read replica of an instance of MySQL running external to Amazon RDS\.
 
+**Important**  
+To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
 ## Syntax<a name="mysql_rds_reset_external_master-syntax"></a>
 
 ```

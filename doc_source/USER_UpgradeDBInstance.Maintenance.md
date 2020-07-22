@@ -31,7 +31,7 @@ To take an action, choose the DB instance to show its details, then choose **Mai
 
 ![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailabledetails.png)
 
-The maintenance window determines when pending operations start, but doesn't limit the total execution time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
+The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
 
 ## Applying Updates for a DB Instance<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 

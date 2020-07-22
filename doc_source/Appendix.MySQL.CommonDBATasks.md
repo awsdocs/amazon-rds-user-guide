@@ -5,27 +5,27 @@ This section describes the Amazon RDS\-specific implementations of some common D
 For information about working with MySQL log files on Amazon RDS, see [MySQL Database Log Files](USER_LogAccess.Concepts.MySQL.md)
 
 **Topics**
-+ [Killing a Session or Query](#Appendix.MySQL.CommonDBATasks.Kill)
++ [Ending a Session or Query](#Appendix.MySQL.CommonDBATasks.End)
 + [Skipping the Current Replication Error](#Appendix.MySQL.CommonDBATasks.SkipError)
 + [Working with InnoDB Tablespaces to Improve Crash Recovery Times](#Appendix.MySQL.CommonDBATasks.Tables)
 + [Managing the Global Status History](#Appendix.MySQL.CommonDBATasks.GoSH)
 
-## Killing a Session or Query<a name="Appendix.MySQL.CommonDBATasks.Kill"></a>
+## Ending a Session or Query<a name="Appendix.MySQL.CommonDBATasks.End"></a>
 
-You can terminate user sessions or queries on DB instances by using the `rds_kill` and `rds_kill_query` commands\. First connect to your MySQL database instance, then issue the appropriate command as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
+You can end user sessions or queries on DB instances by using the `rds_kill` and `rds_kill_query` commands\. First connect to your MySQL DB instance, then issue the appropriate command as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
 ```
 CALL mysql.rds_kill(thread-ID)
 CALL mysql.rds_kill_query(thread-ID)
 ```
 
-For example, to kill the session that is running on thread 99, you would type the following: 
+For example, to end the session that is running on thread 99, you would type the following: 
 
 ```
 CALL mysql.rds_kill(99); 
 ```
 
-To kill the query that is running on thread 99, you would type the following: 
+To end the query that is running on thread 99, you would type the following: 
 
 ```
 CALL mysql.rds_kill_query(99); 
@@ -33,7 +33,7 @@ CALL mysql.rds_kill_query(99);
 
 ## Skipping the Current Replication Error<a name="Appendix.MySQL.CommonDBATasks.SkipError"></a>
 
-Amazon RDS provides a mechanism for you to skip an error on your read replicas if the error is causing your read replica to hang and the error doesn’t affect the integrity of your data\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
+Amazon RDS provides a mechanism for you to skip an error on your read replicas if the error is causing your read replica to stop responding and the error doesn’t affect the integrity of your data\. First connect to your MySQL DB instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
 **Note**  
  You should first verify that the error can be safely skipped\. In a MySQL utility, connect to the read replica and run the following MySQL command:   
@@ -41,7 +41,7 @@ Amazon RDS provides a mechanism for you to skip an error on your read replicas i
 ```
 SHOW SLAVE STATUS\G 
 ```
-For information about the values returned, go to [SHOW SLAVE STATUS Syntax](http://dev.mysql.com/doc/refman/5.6/en/show-slave-status.html) in the MySQL documentation\.
+For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\.
 
  To skip the error, you can issue the following command: 
 
@@ -70,7 +70,7 @@ Since the `innodb_file_per_table` parameter resides in a parameter group, you ca
 
 ### Migrating Multiple Tablespaces to the Shared Tablespace<a name="Appendix.MySQL.CommonDBATasks.MigrateMultiTbs"></a>
 
-You can move an InnoDB table's metadata from its own tablespace to the shared tablespace, which will rebuild the table metadata according to the `innodb_file_per_table` parameter setting\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
+You can move an InnoDB table's metadata from its own tablespace to the shared tablespace, which will rebuild the table metadata according to the `innodb_file_per_table` parameter setting\. First connect to your MySQL DB instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. 
 
 ```
 ALTER TABLE table_name ENGINE = InnoDB, ALGORITHM=COPY; 
@@ -101,11 +101,15 @@ To create a read replica and rebuild InnoDB tables to use the shared tablespace,
 
 1. When the read replica has been created, create a parameter group with the parameter settings `read_only = 0` and `innodb_file_per_table = 0`\. Then associate the parameter group with the read replica\. 
 
-1. Issue ALTER TABLE <name> ENGINE = InnoDB for all tables that you want migrated on the replica\.
+1. Issue the following SQL statement for all tables that you want migrated on the replica:
 
-1. When all of your ALTER TABLE statements have completed on the read replica, verify that the read replica is connected to the source DB instance and that the two instances are in sync\. 
+   ```
+   ALTER TABLE name ENGINE = InnoDB
+   ```
 
-1. Use the console or CLI to promote the read replica to be the instance\. Make sure that the parameter group used for the new master has the `innodb_file_per_table` parameter set to 0\. Change the name of the new master, and point any applications to the new master instance\. 
+1. When all of your `ALTER TABLE` statements have completed on the read replica, verify that the read replica is connected to the source DB instance and that the two instances are in sync\. 
+
+1. Use the console or CLI to promote the read replica to be the instance\. Make sure that the parameter group used for the new standalone DB instance has the `innodb_file_per_table` parameter set to 0\. Change the name of the new standalone DB instance, and point any applications to the new standalone DB instance\. 
 
 ## Managing the Global Status History<a name="Appendix.MySQL.CommonDBATasks.GoSH"></a>
 
@@ -115,7 +119,7 @@ To allow for monitoring of these values over time, Amazon RDS provides a set of 
 
 To enable GoSH, you first enable the event scheduler from a DB parameter group by setting the parameter event\_scheduler to ON\. For information about creating and modifying a DB parameter group, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 
-You can then use the procedures in the following table to enable and configure GoSH\. First connect to your MySQL database instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. For each procedure, type the following: 
+You can then use the procedures in the following table to enable and configure GoSH\. First connect to your MySQL DB instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. For each procedure, type the following: 
 
 ```
 CALL procedure-name; 

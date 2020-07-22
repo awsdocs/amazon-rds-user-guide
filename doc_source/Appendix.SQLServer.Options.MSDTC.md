@@ -393,7 +393,7 @@ In Amazon RDS for SQL Server, you run distributed transactions in the same way a
   + ODP\.NET supports `System.Transactions`\. A local transaction is created for the first connection opened in the `TransactionsScope` scope to Oracle Database 11g release 1 \(version 11\.1\) and later\. When a second connection is opened, this transaction is automatically promoted to a distributed transaction\. For more information about distributed transaction support in ODP\.NET, see [Microsoft Distributed Transaction Coordinator Integration](https://docs.oracle.com/en/database/oracle/oracle-data-access-components/18.3/ntmts/using-mts-with-oracledb.html) in the Microsoft documentation\.
 + Using the `BEGIN DISTRIBUTED TRANSACTION` statement\. For more information, see [BEGIN DISTRIBUTED TRANSACTION \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/begin-distributed-transaction-transact-sql) in the Microsoft documentation\.
 
-## Using Transaction Tracing<a name="Appendix.SQLServer.Options.MSDTC.Tracing"></a>
+## Using Transaction Tracing<a name="MSDTC.Tracing"></a>
 
 RDS supports controlling MSDTC transaction traces and downloading them from the RDS DB instance for troubleshooting\. You can control transaction tracing sessions by running the following RDS stored procedure\.
 

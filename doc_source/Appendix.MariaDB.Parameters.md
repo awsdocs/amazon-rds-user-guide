@@ -51,7 +51,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 + validate\_password\_policy
 + validate\_password\_special\_char\_count
 
-For more information on MySQL 5\.6 parameters, go to the [MySQL 5\.6 documentation](http://dev.mysql.com/doc/refman/5.6/en/index.html)\.
+For more information on MySQL parameters, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/)\.
 
 The MariaDB\-specific DB parameter groups also contain the following parameters that are applicable to MariaDB only\. Acceptable ranges for the modifiable parameters are the same as specified in the MariaDB documentation except where noted\. Amazon RDS MariaDB parameters are set to the default values of the storage engine you have selected\.
 + aria\_block\_size

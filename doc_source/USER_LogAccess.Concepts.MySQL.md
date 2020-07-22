@@ -31,8 +31,8 @@ The MySQL slow query log and the general log can be written to a file or a datab
 You can control MySQL logging by using the parameters in this list:
 + `slow_query_log`: To create the slow query log, set to 1\. The default is 0\.
 + `general_log`: To create the general log, set to 1\. The default is 0\.
-+ `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query execution time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose execution time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
-+ `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. The default is 0\. Queries that do not use an index are logged even if their execution time is less than the value of the `long_query_time` parameter\.
++ `long_query_time`: To prevent fast\-running queries from being logged in the slow query log, specify a value for the shortest query run time to be logged, in seconds\. The default is 10 seconds; the minimum is 0\. If log\_output = FILE, you can specify a floating point value that goes to microsecond resolution\. If log\_output = TABLE, you must specify an integer value with second resolution\. Only queries whose run time exceeds the `long_query_time` value are logged\. For example, setting `long_query_time` to 0\.1 prevents any query that runs for less than 100 milliseconds from being logged\.
++ `log_queries_not_using_indexes`: To log all queries that do not use an index to the slow query log, set to 1\. The default is 0\. Queries that do not use an index are logged even if their run time is less than the value of the `long_query_time` parameter\.
 + `log_output option`: You can specify one of the following options for the `log_output` parameter\. 
   + **TABLE** \(default\) – Write general queries to the `mysql.general_log` table, and slow queries to the `mysql.slow_log` table\. 
   + **FILE** – Write both general and slow query logs to the file system\. Log files are rotated hourly\. 
@@ -51,8 +51,8 @@ When logging is enabled, Amazon RDS rotates table logs or deletes log files at r
 To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
-+ [The Slow Query Log](http://dev.mysql.com/doc/refman/5.6/en/slow-query-log.html)
-+ [The General Query Log](http://dev.mysql.com/doc/refman/5.6/en/query-log.html)
++ [The Slow Query Log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html)
++ [The General Query Log](https://dev.mysql.com/doc/refman/8.0/en/query-log.html)
 
 ## Accessing the MySQL Audit Log<a name="USER_LogAccess.MySQL.Auditlog"></a>
 
@@ -198,13 +198,13 @@ PROMPT> CALL mysql.rds_rotate_general_log;
 
 ## Binary Logging Format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
 
-MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\.  For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](http://dev.mysql.com/doc/refman/5.6/en/binary-log-formats.html) in the MySQL documentation\.
+MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\.  For DB instances running MySQL versions 5\.1 and 5\.5, only mixed binary logging is supported\. For details on the different MySQL binary log formats, see [Binary Logging Formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
 
-If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
+If you plan to use replication, the binary logging format is important because it determines the record of data changes that is recorded in the source and sent to the replication targets\. For information about the advantages and disadvantages of different binary logging formats for replication, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Important**  
 Setting the binary logging format to row\-based can result in very large binary log files\. Large binary log files reduce the amount of storage available for a DB instance and can increase the amount of time to perform a restore operation of a DB instance\.  
-Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/5.6/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
+Statement\-based replication can cause inconsistencies between the source DB instance and a read replica\. For more information, see [ Determination of Safe and Unsafe Statements in Binary Logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html) in the MySQL documentation\.
 
 **To set the MySQL binary logging format**
 
@@ -229,7 +229,7 @@ Changing a DB parameter group affects all DB instances that use that parameter g
 
 ## Accessing MySQL Binary Logs<a name="USER_LogAccess.MySQL.Binarylog"></a>
 
-You can use the mysqlbinlog utility to download or stream binary logs from Amazon RDS instances running MySQL 5\.6 or later\. The binary log is downloaded to your local computer, where you can perform actions such as replaying the log using the mysql utility\. For more information about using the mysqlbinlog utility, go to [Using mysqlbinlog to Back Up Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog-backup.html)\.
+You can use the mysqlbinlog utility to download or stream binary logs from Amazon RDS instances running MySQL 5\.6 or later\. The binary log is downloaded to your local computer, where you can perform actions such as replaying the log using the mysql utility\. For more information about using the mysqlbinlog utility, go to [Using mysqlbinlog to Back Up Binary Log Files](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog-backup.html)\.
 
  To run the mysqlbinlog utility against an Amazon RDS instance, use the following options: 
 +  Specify the `--read-from-remote-server` option\. 
@@ -242,7 +242,7 @@ You can use the mysqlbinlog utility to download or stream binary logs from Amazo
 + Specify the names of one or more binary log files\. To get a list of the available logs, use the SQL command SHOW BINARY LOGS\.
 + To stream the binary log files, specify the `--stop-never` option\. 
 
-For more information about mysqlbinlog options, go to [mysqlbinlog \- Utility for Processing Binary Log Files](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog.html)\. 
+For more information about mysqlbinlog options, go to [mysqlbinlog \- Utility for Processing Binary Log Files](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)\. 
 
 For example, see the following\. 
 

@@ -25,7 +25,7 @@ MySQL uses two different types of transactions for binlog replication:
 + *GTID transactions* – Transactions that are identified by a GTID\.
 + *Anonymous transactions* – Transactions that don't have a GTID assigned\.
 
-In a replication configuration, GTIDs are unique across all DB instances\. GTIDs simplify replication configuration because when you use them, you don't have to refer to log file positions\. GTIDs also make it easier to track replicated transactions and determine whether masters and replicas are consistent\.
+In a replication configuration, GTIDs are unique across all DB instances\. GTIDs simplify replication configuration because when you use them, you don't have to refer to log file positions\. GTIDs also make it easier to track replicated transactions and determine whether the source instance and replicas are consistent\.
 
 You can use GTID\-based replication to replicate data with Amazon RDS MySQL read replicas or with an external MySQL database\. For RDS MySQL read replicas, you can configure GTID\-based replication when you are creating new read replicas, or you can convert existing read replicas to use GTID\-based replication\.
 
@@ -105,7 +105,7 @@ For an existing RDS MySQL DB instance with read replicas that doesn't use GTID\-
 
 1. Wait for all of your anonymous transactions to be replicated\. To check that these are replicated, do the following:
 
-   1. Run the following statement on your primary DB instance\.
+   1. Run the following statement on your source DB instance\.
 
       ```
       SHOW MASTER STATUS;
@@ -113,7 +113,7 @@ For an existing RDS MySQL DB instance with read replicas that doesn't use GTID\-
 
       Note the values in the `File` and `Position` columns\.
 
-   1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
+   1. On each read replica, use the file and position information from its source instance in the previous step to run the following query\.
 
       ```
       SELECT MASTER_POS_WAIT('file', position);
@@ -184,7 +184,7 @@ You can disable GTID\-based replication for an RDS MySQL DB instance with read r
 
       Note the file and position in your output\.
 
-   1. On each read replica, use the file and position information from its master in the previous step to run the following query\.
+   1. On each read replica, use the file and position information from its source instance in the previous step to run the following query\.
 
       ```
       SELECT MASTER_POS_WAIT('file', position);

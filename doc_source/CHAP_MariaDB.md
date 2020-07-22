@@ -13,7 +13,7 @@ You first use the Amazon RDS management tools or interfaces to create an Amazon 
 
 MariaDB is available in all of the AWS Regions\. For more information about AWS Regions, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-You can use Amazon RDS for MariaDB databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under an executed Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS Services in Scope by Compliance Program](https://aws.amazon.com/compliance/services-in-scope/)\. 
+You can use Amazon RDS for MariaDB databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS Services in Scope by Compliance Program](https://aws.amazon.com/compliance/services-in-scope/)\. 
 
 Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting Up for Amazon RDS](CHAP_SettingUp.md)\. 
 
@@ -32,7 +32,7 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you access your DB instance from an Amazon EC2 instance\.   In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
 |  **Importing and Exporting Data** Establish procedures for importing or exporting data\.   |  [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)  | 
-|  **Replication** You can offload read traffic from your primary MariaDB DB instance by creating read replicas\.   |  [Working with Read Replicas](USER_ReadRepl.md)  | 
+|  **Replication** You can offload read traffic from your source MariaDB DB instance by creating read replicas\.   |  [Working with Read Replicas](USER_ReadRepl.md)  | 
 |  **Connecting to Your DB Instance** Connect to your DB instance using a standard SQL client application\.   |  [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)  | 
 |  **Backup and Restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working With Backups](USER_WorkingWithAutomatedBackups.md)  | 
 |  **Monitoring** Monitor your RDS MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MariaDB DB instance\.   |  [Viewing DB Instance Metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS Events](USER_ListEvents.md)  | 
@@ -172,15 +172,15 @@ Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
 For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MariaDB DB instances\. For more information, see [Amazon RDS DB Instance Storage](CHAP_Storage.md)\. 
 
-There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [InnoDB File\-Per\-Table Mode](http://dev.mysql.com/doc/refman/5.6/en/innodb-multiple-tablespaces.html) in the MySQL documentation\.
+There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [File\-Per\-Table Tablespaces](https://dev.mysql.com/doc/refman/5.7/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\.
 
 We don't recommend allowing tables to grow to the maximum file size\. In general, a better practice is to partition data into smaller tables, which can improve performance and recovery times\.
 
-One option that you can use for breaking a large table up into smaller tables is partitioning\. *Partitioning* distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, see [Chapter 19: Partitioning](https://dev.mysql.com/doc/refman/5.6/en/partitioning.html) in the MySQL documentation\.
+One option that you can use for breaking a large table up into smaller tables is partitioning\. *Partitioning* distributes portions of your large table into separate files based on rules that you specify\. For example, if you store transactions by date, you can create partitioning rules that distribute older transactions into separate files using partitioning\. Then periodically, you can archive the historical transaction data that doesn't need to be readily available to your application\. For more information, see [Partitioning](https://dev.mysql.com/doc/refman/5.7/en/partitioning.html) in the MySQL documentation\.
 
 **To determine the file size of a table**
 
-Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\. To update table statistics, issue an `ANALYZE TABLE` command on each table\. For more information, see [ANALYZE TABLE](https://dev.mysql.com/doc/refman/5.6/en/analyze-table.html) in the MySQL documentation\.
+Use the following SQL command to determine if any of your tables are too large and are candidates for partitioning\. To update table statistics, issue an `ANALYZE TABLE` command on each table\. For more information, see [ANALYZE TABLE Statement](https://dev.mysql.com/doc/refman/5.7/en/analyze-table.html) in the MySQL documentation\.
 
 ```
 1. SELECT TABLE_SCHEMA, TABLE_NAME, 
@@ -246,7 +246,7 @@ Although you can delete the master user on a DB instance, we don't recommend doi
 
 To provide management services for each DB instance, the `rdsadmin` user is created when the DB instance is created\. Attempting to drop, rename, change the password for, or change privileges for the `rdsadmin` account results in an error\.
 
-To allow management of the DB instance, the standard `kill` and `kill_query` commands have been restricted\. The Amazon RDS commands `mysql.rds_kill`, `mysql.rds_kill_query`, and `mysql.rds_kill_query_id` are provided for use in MariaDB and also MySQL so that you can terminate user sessions or queries on DB instances\. 
+To allow management of the DB instance, the standard `kill` and `kill_query` commands have been restricted\. The Amazon RDS commands `mysql.rds_kill`, `mysql.rds_kill_query`, and `mysql.rds_kill_query_id` are provided for use in MariaDB and also MySQL so that you can end user sessions or queries on DB instances\. 
 
 ## Using SSL with a MariaDB DB Instance<a name="MariaDB.Concepts.SSLSupport"></a>
 
@@ -344,7 +344,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 
 ## Common DBA Tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 
-Killing sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in an Amazon RDS MySQL DB instance, as described in [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
+Ending sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in an Amazon RDS MySQL DB instance, as described in [Common DBA Tasks for MySQL DB Instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
 
 ## Local Time Zone for MariaDB DB Instances<a name="MariaDB.Concepts.LocalTimeZone"></a>
 
@@ -356,7 +356,7 @@ After you set the local time zone, all new connections to the database reflect t
 
 You can set a different local time zone for a DB instance and one or more of its read replicas\. To do this, use a different parameter group for the DB instance and the replica or replicas and set the `time_zone` parameter in each parameter group to a different local time zone\.
 
-If you are replicating across AWS Regions, then the replication master DB instance and the read replica use different parameter groups \(parameter groups are unique to an AWS Region\)\. To use the same local time zone for each instance, you must set the `time_zone` parameter in the instance's and read replica's parameter groups\.
+If you are replicating across AWS Regions, then the source DB instance and the read replica use different parameter groups \(parameter groups are unique to an AWS Region\)\. To use the same local time zone for each instance, you must set the `time_zone` parameter in the instance's and read replica's parameter groups\.
 
 When you restore a DB instance from a DB snapshot, the local time zone is set to UTC\. You can update the time zone to your local time zone after the restore is complete\. If you restore a DB instance to a point in time, then the local time zone for the restored DB instance is the time zone setting from the parameter group of the restored DB instance\.
 

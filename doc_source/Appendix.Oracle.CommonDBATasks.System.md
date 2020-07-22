@@ -4,7 +4,7 @@ Following, you can find how to perform certain common DBA tasks related to the s
 
 **Topics**
 + [Disconnecting a Session](#Appendix.Oracle.CommonDBATasks.DisconnectingSession)
-+ [Killing a Session](#Appendix.Oracle.CommonDBATasks.KillingSession)
++ [Terminating a Session](#Appendix.Oracle.CommonDBATasks.KillingSession)
 + [Canceling a SQL Statement in a Session](#Appendix.Oracle.CommonDBATasks.CancellingSQL)
 + [Enabling and Disabling Restricted Sessions](#Appendix.Oracle.CommonDBATasks.RestrictedSession)
 + [Flushing the Shared Pool](#Appendix.Oracle.CommonDBATasks.FlushingSharedPool)
@@ -47,9 +47,9 @@ select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
 
 The database must be open to use this method\. For more information about disconnecting a session, see [ALTER SYSTEM](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_2014.htm#SQLRF53166) in the Oracle documentation\. 
 
-## Killing a Session<a name="Appendix.Oracle.CommonDBATasks.KillingSession"></a>
+## Terminating a Session<a name="Appendix.Oracle.CommonDBATasks.KillingSession"></a>
 
-To kill a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kill`\. The `kill` procedure has the following parameters\. 
+To terminate a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kill`\. The `kill` procedure has the following parameters\.
 
 
 ****  
@@ -60,7 +60,7 @@ To kill a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kill`\. 
 | `serial` | number | — | Yes | The serial number of the session\. | 
 | `method` | varchar | null | No |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
 
-The following example kills a session\.
+The following example terminates a session\.
 
 ```
 begin
@@ -74,10 +74,10 @@ end;
 To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`\.
 
 ```
-select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
+SELECT SID, SERIAL#, STATUS FROM V$SESSION WHERE USERNAME = 'AWSUSER';
 ```
 
-You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. By specifying `PROCESS` as the `method` value, you can kill the processes associated with a session\. Do this only if killing the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
+You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` parameter\. By specifying `PROCESS` as the `method` value, you can terminate the processes associated with a session\. Do this only if terminating the session using `IMMEDIATE` as the `method` value was unsuccessful\. 
 
 ## Canceling a SQL Statement in a Session<a name="Appendix.Oracle.CommonDBATasks.CancellingSQL"></a>
 
@@ -131,7 +131,7 @@ The following example shows how to enable and disable restricted sessions\.
 ```
 /* Verify that the database is currently unrestricted. */
 
-select LOGINS from V$INSTANCE;
+SELECT LOGINS FROM V$INSTANCE;
  
 LOGINS
 -------
@@ -145,7 +145,7 @@ exec rdsadmin.rdsadmin_util.restricted_session(p_enable => true);
 
 /* Verify that the database is now restricted. */
 
-select LOGINS from V$INSTANCE;
+SELECT LOGINS FROM V$INSTANCE;
  
 LOGINS
 ----------
@@ -159,7 +159,7 @@ exec rdsadmin.rdsadmin_util.restricted_session(p_enable => false);
 
 /* Verify that the database is now unrestricted again. */
 
-select LOGINS from V$INSTANCE;
+SELECT LOGINS FROM V$INSTANCE;
  
 LOGINS
 -------
@@ -235,8 +235,8 @@ To be able to grant privileges on an object, your account must have those privil
 The following example grants the `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` to `USER1`\. Since the `with admin option` is used, `USER1` can now grant access to SYS objects that have been granted to `SELECT_CATALOG_ROLE`\. 
 
 ```
-grant SELECT_CATALOG_ROLE to USER1 with admin option; 
-grant EXECUTE_CATALOG_ROLE to USER1 with admin option;
+GRANT SELECT_CATALOG_ROLE TO USER1 WITH ADMIN OPTION; 
+GRANT EXECUTE_CATALOG_ROLE to USER1 WITH ADMIN OPTION;
 ```
 
 Objects already granted to `PUBLIC` do not need to be re\-granted\. If you use the `grant_sys_object` procedure to re\-grant access, the procedure call succeeds\. 
@@ -273,30 +273,30 @@ end;
 You can grant select privileges for many objects in the `SYS` schema by using the `SELECT_CATALOG_ROLE` role\. The `SELECT_CATALOG_ROLE` role gives users `SELECT` privileges on data dictionary views\. The following example grants the role `SELECT_CATALOG_ROLE` to a user named `user1`\. 
 
 ```
-grant SELECT_CATALOG_ROLE to user1;
+GRANT SELECT_CATALOG_ROLE TO user1;
 ```
 
-You can grant execute privileges for many objects in the `SYS` schema by using the `EXECUTE_CATALOG_ROLE` role\. The `EXECUTE_CATALOG_ROLE` role gives users `EXECUTE` privileges for packages and procedures in the data dictionary\. The following example grants the role `EXECUTE_CATALOG_ROLE` to a user named *user1*\. 
+You can grant `EXECUTE` privileges for many objects in the `SYS` schema by using the `EXECUTE_CATALOG_ROLE` role\. The `EXECUTE_CATALOG_ROLE` role gives users `EXECUTE` privileges for packages and procedures in the data dictionary\. The following example grants the role `EXECUTE_CATALOG_ROLE` to a user named *user1*\. 
 
 ```
-grant EXECUTE_CATALOG_ROLE to user1;
+GRANT EXECUTE_CATALOG_ROLE TO user1;
 ```
 
 The following example gets the permissions that the roles `SELECT_CATALOG_ROLE` and `EXECUTE_CATALOG_ROLE` allow\. 
 
 ```
-  select * 
-    from ROLE_TAB_PRIVS  
-   where ROLE in ('SELECT_CATALOG_ROLE','EXECUTE_CATALOG_ROLE') 
-order by ROLE, TABLE_NAME asc;
+  SELECT * 
+    FROM ROLE_TAB_PRIVS  
+   WHERE ROLE IN ('SELECT_CATALOG_ROLE','EXECUTE_CATALOG_ROLE') 
+ORDER BY ROLE, TABLE_NAME ASC;
 ```
 
 The following example creates a non\-master user named `user1`, grants the `CREATE SESSION` privilege, and grants the `SELECT` privilege on a database named *sh\.sales*\.
 
 ```
-create user user1 identified by password;
-grant CREATE SESSION to user1;
-grant SELECT on sh.sales TO user1;
+CREATE USER user1 IDENTIFIED BY PASSWORD;
+GRANT CREATE SESSION TO user1;
+GRANT SELECT ON sh.sales TO user1;
 ```
 
 ## Creating Custom Functions to Verify Passwords<a name="Appendix.Oracle.CommonDBATasks.CustomPassword"></a>
@@ -352,24 +352,25 @@ end;
 To see the text of your verification function, query `DBA_SOURCE`\. The following example gets the text of a custom password function named `CUSTOM_PASSWORD_FUNCTION`\. 
 
 ```
-col text format a150
+COL TEXT FORMAT a150
 
-  select TEXT 
-    from DBA_SOURCE 
-   where OWNER = 'SYS' and NAME = 'CUSTOM_PASSWORD_FUNCTION' 
-order by LINE;
+  SELECT TEXT 
+    FROM DBA_SOURCE 
+   WHERE OWNER = 'SYS' 
+     AND NAME = 'CUSTOM_PASSWORD_FUNCTION' 
+ORDER BY LINE;
 ```
 
 To associate your verification function with a user profile, use `alter profile`\. The following example associates a verification function with the `DEFAULT` user profile\. 
 
 ```
-alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
+ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 ```
 
 To see what user profiles are associated with what verification functions, query `DBA_PROFILES`\. The following example gets the profiles that are associated with the custom verification function named `CUSTOM_PASSWORD_FUNCTION`\. 
 
 ```
-select * from DBA_PROFILES where RESOURCE_NAME = 'PASSWORD' and LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
+SELECT * FROM DBA_PROFILES WHERE RESOURCE_NAME = 'PASSWORD' AND LIMIT = 'CUSTOM_PASSWORD_FUNCTION';
 
 
 PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
@@ -380,7 +381,7 @@ DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PA
 The following example gets all profiles and the password verification functions that they are associated with\. 
 
 ```
-select * from DBA_PROFILES where RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
+SELECT * FROM DBA_PROFILES WHERE RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
 
 
 PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
@@ -419,7 +420,7 @@ end;
 To associate the verification function with a user profile, use `alter profile`\. The following example associates the verification function with the `DEFAULT` user profile\. 
 
 ```
-alter profile DEFAULT limit PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
+ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 ```
 
 ## Setting Up a Custom DNS Server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS"></a>
@@ -437,7 +438,7 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 + Ensure that your DNS server can resolve all lookup queries, including public DNS names, Amazon EC2 private DNS names, and customer\-specific DNS names\. If the outbound network traffic contains any DNS lookups that your DNS server can't handle, your DNS server must have appropriate upstream DNS providers configured\. 
 + Configure your DNS server to produce User Datagram Protocol \(UDP\) responses of 512 bytes or less\. 
 + Configure your DNS server to produce Transmission Control Protocol \(TCP\) responses of 1024 bytes or less\. 
-+ Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall allow\-listing \(whitelisting\) to allow UDP and TCP inbound traffic on port 53\.  
++ Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that permit UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall allow\-listing to permit UDP and TCP inbound traffic on port 53\.
 
   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 + Configure the VPC of your Amazon RDS DB instance to allow outbound traffic over port 53\. Your VPC must have a security group that contains outbound rules that allow UDP and TCP traffic on port 53\. 

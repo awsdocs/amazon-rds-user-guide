@@ -21,25 +21,25 @@ The `create_directory` procedure has the following parameters\.
 | --- | --- | --- | --- | --- | 
 |  `p_directory_name`  |  varchar2  |  —  |  Yes  |  The name of the new directory\.  | 
 
-The following example creates a new directory named **product\_descriptions**\. 
+The following example creates a new directory named `PRODUCT_DESCRIPTIONS`\. 
 
 ```
 exec rdsadmin.rdsadmin_util.create_directory(p_directory_name => 'product_descriptions');
 ```
 
-You can list the directories by querying `DBA_DIRECTORIES`\. The system chooses the actual host pathname automatically\. The following example gets the directory path for the directory named `product_descriptions`: 
+The data dictionary stores the directory name in uppercase\. You can list the directories by querying `DBA_DIRECTORIES`\. The system chooses the actual host pathname automatically\. The following example gets the directory path for the directory named `PRODUCT_DESCRIPTIONS`: 
 
 ```
-select DIRECTORY_PATH 
-  from DBA_DIRECTORIES 
- where DIRECTORY_NAME='product_descriptions';
+SELECT DIRECTORY_PATH 
+  FROM DBA_DIRECTORIES 
+ WHERE DIRECTORY_NAME='PRODUCT_DESCRIPTIONS';
         
 DIRECTORY_PATH
 ----------------------------------------
 /rdsdbdata/userdirs/01
 ```
 
-The master user name for the DB instance has read and write privileges in the new directory, and can grant access to other users\. Execute privileges are not available for directories on a DB instance\. Directories are created in your main data storage space and will consume space and I/O bandwidth\. 
+The master user name for the DB instance has read and write privileges in the new directory, and can grant access to other users\. `EXECUTE` privileges are not available for directories on a DB instance\. Directories are created in your main data storage space and will consume space and I/O bandwidth\. 
 
 You can drop a directory that you created by using the Oracle `drop directory` command\. Dropping a directory doesn't remove its contents\. Because the `create_directory()` method can reuse pathnames, files in dropped directories can appear in a newly created directory\. Before you drop a directory, you should use `UTL_FILE.FREMOVE` to remove files from the directory\. For more information, see [FREMOVE Procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\. 
 
@@ -54,11 +54,10 @@ To list the files in a directory, use the Amazon RDS procedure `rdsadmin.rds_fil
 | --- | --- | --- | --- | --- | 
 |  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory to list\.  | 
 
-The following example lists the files in the directory named `product_descriptions`\. 
+The following example lists the files in the directory named `PRODUCT_DESCRIPTIONS`\. 
 
 ```
-select * from table
-    (rdsadmin.rds_file_util.listdir(p_directory => 'product_descriptions'));
+SELECT * FROM TABLE(rdsadmin.rds_file_util.listdir(p_directory => 'PRODUCT_DESCRIPTIONS'));
 ```
 
 ## Reading Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ReadingFiles"></a>
@@ -73,12 +72,25 @@ To read a text file, use the Amazon RDS procedure `rdsadmin.rds_file_util.read_t
 |  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory that contains the file\.  | 
 |  `p_filename`  |  varchar2  |  —  |  Yes  |  The name of the file to read\.  | 
 
-The following example reads the file `rice.txt` from the directory `product_descriptions`\. 
+The following example creates the file `rice.txt` in the directory `PRODUCT_DESCRIPTIONS`\. 
 
 ```
-select * from table
+declare
+  fh sys.utl_file.file_type;
+begin
+  fh := utl_file.fopen(location=>'PRODUCT_DESCRIPTIONS', filename=>'rice.txt', open_mode=>'w');
+  utl_file.put(file=>fh, buffer=>'AnyCompany brown rice, 15 lbs');
+  utl_file.fclose(file=>fh);
+end;
+/
+```
+
+The following example reads the file `rice.txt` from the directory `PRODUCT_DESCRIPTIONS`\. 
+
+```
+SELECT * FROM TABLE
     (rdsadmin.rds_file_util.read_text_file(
-        p_directory => 'product_descriptions',
+        p_directory => 'PRODUCT_DESCRIPTIONS',
         p_filename  => 'rice.txt'));
 ```
 

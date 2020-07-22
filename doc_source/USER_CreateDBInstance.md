@@ -120,7 +120,7 @@ This command produces output similar to the following\.
 ```
 1. DBINSTANCE  mydbinstance  db.t3.large  sqlserver-se  250  sa  creating  3  ****  n  10.50.2789
 2. SECGROUP  default  active
-3. PARAMGRP  default.sqlserver-se-10.5  in-sync
+3. PARAMGRP  default.sqlserver-se-14  in-sync
 ```
 
 ## RDS API<a name="USER_CreateDBInstance.API"></a>

@@ -1,6 +1,6 @@
 # Importing Data From Any Source to a MySQL or MariaDB DB Instance<a name="MySQL.Procedural.Importing.AnySource"></a>
 
-If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- A Data Import Program](http://dev.mysql.com/doc/refman/5.6/en/mysqlimport.html) in the MySQL documentation\.
+If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- A Data Import Program](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html) in the MySQL documentation\.
 
 We also recommend creating DB snapshots of the target Amazon RDS DB instance before and after the data load\. Amazon RDS DB snapshots are complete backups of your DB instance that can be used to restore your DB instance to a known state\. When you initiate a DB snapshot, I/O operations to your database instance are momentarily suspended while your database is backed up\. 
 

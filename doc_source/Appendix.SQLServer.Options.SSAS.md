@@ -6,7 +6,7 @@ Amazon RDS for SQL Server supports running SQL Server Analysis Services \(SSAS\)
 + SQL Server 2017: Standard and Enterprise editions, version 14\.00\.3223\.3\.v1 and later
 + SQL Server 2016: Standard and Enterprise editions, version 13\.00\.5426\.0\.v1 and later
 
-## Limitations<a name="Appendix.SQLServer.Options.SSAS.Limitations"></a>
+## Limitations<a name="SSAS.Limitations"></a>
 
 The following limitations apply to running SSAS on RDS for SQL Server:
 + Tabular is the only supported mode for SSAS\.
@@ -14,12 +14,12 @@ The following limitations apply to running SSAS on RDS for SQL Server:
 + Instances must use AWS Directory Service for Microsoft Active Directory for SSAS authentication\.
 + Users aren't given SSAS server administrator access, but they can be granted database\-level administrator access\.
 + The only supported port for accessing SSAS is 2383\.
-+ You can't deploy projects directly\. We provide an RDS stored procedure to do this\. For more information, see [Deploying SSAS Projects on Amazon RDS](#Appendix.SQLServer.Options.SSAS.Deploy)\. 
++ You can't deploy projects directly\. We provide an RDS stored procedure to do this\. For more information, see [Deploying SSAS Projects on Amazon RDS](#SSAS.Deploy)\. 
 + Processing during deployment isn't supported\.
 + Using \.xmla files for deployment isn't supported\.
 + SSAS project input files and database backup output files can only be in the `D:\S3` folder on the DB instance\.
 
-## Enabling SSAS<a name="Appendix.SQLServer.Options.SSAS.Enabling"></a>
+## Enabling SSAS<a name="SSAS.Enabling"></a>
 
 Use the following process to enable SSAS for your DB instance:
 
@@ -33,14 +33,14 @@ Use the following process to enable SSAS for your DB instance:
 
 1. Enable Amazon S3 integration\.
 
-### Creating the Option Group for SSAS<a name="Appendix.SQLServer.Options.SSAS.OptionGroup"></a>
+### Creating the Option Group for SSAS<a name="SSAS.OptionGroup"></a>
 
 Use the AWS Management Console or the AWS CLI to create an option group that corresponds to the SQL Server engine and version of the DB instance that you plan to use\.
 
 **Note**  
 You can also use an existing option group if it's for the correct SQL Server engine and version\.
 
-#### Console<a name="OptionGroup.SSAS.Console"></a>
+#### Console<a name="SSAS.OptionGroup.Console"></a>
 
 The following console procedure creates an option group for SQL Server Standard Edition 2017\.
 
@@ -64,7 +64,7 @@ The following console procedure creates an option group for SQL Server Standard 
 
 1. Choose **Create**\.
 
-#### CLI<a name="OptionGroup.SSAS.CLI"></a>
+#### CLI<a name="SSAS.OptionGroup.CLI"></a>
 
 The following CLI example creates an option group for SQL Server Standard Edition 2017\.
 
@@ -92,11 +92,11 @@ The following CLI example creates an option group for SQL Server Standard Editio
       --option-group-description "SSAS option group for SQL Server SE 2017"
   ```
 
-### Adding the SSAS Option to the Option Group<a name="Appendix.SQLServer.Options.SSAS.Add"></a>
+### Adding the SSAS Option to the Option Group<a name="SSAS.Add"></a>
 
 Next, use the AWS Management Console or the AWS CLI to add the `SSAS` option to the option group\.
 
-#### Console<a name="Options.SSAS.Add.Console"></a>
+#### Console<a name="SSAS.Add.Console"></a>
 
 **To add the SSAS option**
 
@@ -122,7 +122,7 @@ The port for accessing SSAS, 2383, is prepopulated\.
 
 1. Choose **Add option**\.
 
-#### CLI<a name="Options.SSAS.Add.CLI"></a>
+#### CLI<a name="SSAS.Add.CLI"></a>
 
 **To add the SSAS option**
 
@@ -165,11 +165,11 @@ The port for accessing SSAS, 2383, is prepopulated\.
        --apply-immediately
    ```
 
-### Associating the Option Group with Your DB Instance<a name="Appendix.SQLServer.Options.SSAS.Apply"></a>
+### Associating the Option Group with Your DB Instance<a name="SSAS.Apply"></a>
 
 You can use the AWS Management Console or the AWS CLI to associate the option group with your DB instance\.
 
-#### Console<a name="Apply.SSAS.Console"></a>
+#### Console<a name="SSAS.Apply.Console"></a>
 
 Associate your option group with a new or existing DB instance:
 + For a new DB instance, associate the option group with the DB instance when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
@@ -177,7 +177,7 @@ Associate your option group with a new or existing DB instance:
 **Note**  
 If you use an existing instance, it must already have an Active Directory domain and IAM role associated with it\. If you create a new instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB Instance](USER_SQLServerWinAuth.md)\.
 
-#### CLI<a name="Apply.SSAS.CLI"></a>
+#### CLI<a name="SSAS.Apply.CLI"></a>
 
 You can associate your option group with a new or existing DB instance\.
 
@@ -246,15 +246,15 @@ If you use an existing instance, it must already have an Active Directory domain
       --apply-immediately
   ```
 
-### Allowing Inbound Access to Your VPC Security Group<a name="Appendix.SQLServer.Options.SSAS.InboundRule"></a>
+### Allowing Inbound Access to Your VPC Security Group<a name="SSAS.InboundRule"></a>
 
 Create an inbound rule for the specified SSAS listener port in the VPC security group associated with your DB instance\. For more information about setting up security groups, see [Provide Access to Your DB Instance in Your VPC by Creating a Security Group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
-### Enabling S3 Integration<a name="Appendix.SQLServer.Options.SSAS.EnableS3"></a>
+### Enabling S3 Integration<a name="SSAS.EnableS3"></a>
 
 To download model configuration files to your host for deployment, use S3 integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB Instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
-## Deploying SSAS Projects on Amazon RDS<a name="Appendix.SQLServer.Options.SSAS.Deploy"></a>
+## Deploying SSAS Projects on Amazon RDS<a name="SSAS.Deploy"></a>
 
 On RDS, you can't deploy SSAS projects directly by using SQL Server Management Studio \(SSMS\)\. To deploy projects, use an RDS stored procedure\.
 
@@ -268,7 +268,7 @@ Before you deploy projects, make sure of the following:
 
 **To deploy an SSAS project on RDS**
 
-1. Download the `.asdatabase` \(SSAS model\) file from your S3 bucket to your DB instance, as shown in the following example\. For more information on the download parameters, see [Downloading Files from an Amazon S3 Bucket to an SQL Server DB Instance](User.SQLServer.Options.S3-integration.md#Appendix.SQLServer.Options.S3-integration.using.download)\.
+1. Download the `.asdatabase` \(SSAS model\) file from your S3 bucket to your DB instance, as shown in the following example\. For more information on the download parameters, see [Downloading Files from an Amazon S3 Bucket to a SQL Server DB Instance](User.SQLServer.Options.S3-integration.md#Appendix.SQLServer.Options.S3-integration.using.download)\.
 
    ```
    exec msdb.dbo.rds_download_from_s3 
@@ -294,7 +294,7 @@ Before you deploy projects, make sure of the following:
    @file_path='D:\S3\myssasproject.asdatabase';
    ```
 
-## Monitoring the Status of a Deployment Task<a name="Appendix.SQLServer.Options.SSAS.Monitor"></a>
+## Monitoring the Status of a Deployment Task<a name="SSAS.Monitor"></a>
 
 To track the status of your deployment \(or download\) task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSAS\. The second parameter accepts a task ID\. 
 
@@ -331,7 +331,7 @@ The `rds_fn_task_status` function returns the following information\.
 | `overwrite_file` |  Not applicable to SSAS tasks\.  | 
 | `task_metadata` | Metadata associated with the SSAS task\. | 
 
-## Using SSAS on Amazon RDS<a name="Appendix.SQLServer.Options.SSAS.Use"></a>
+## Using SSAS on Amazon RDS<a name="SSAS.Use"></a>
 
 After deploying the SSAS project, you can directly process the OLAP database on SSMS\.
 
@@ -349,7 +349,7 @@ After deploying the SSAS project, you can directly process the OLAP database on 
 
    Depending on the size of the input data, the processing operation might take several minutes to complete\.
 
-### Adding a Domain User as a Database Administrator<a name="Appendix.SQLServer.Options.SSAS.admin"></a>
+### Adding a Domain User as a Database Administrator<a name="SSAS.admin"></a>
 
 You can add a domain user as an SSAS database administrator in the following ways:
 + A database administrator can use SSMS to create a role with `admin` privileges, then add users to that role\.
@@ -369,14 +369,14 @@ You can add a domain user as an SSAS database administrator in the following way
   + `@ssas_role_name` – The SSAS database administrator role name\. If the role doesn't already exist, it's created\.
   + `@ssas_role_member` – The SSAS database user that you're adding to the administrator role\.
 
-## Backing Up an SSAS Database<a name="Appendix.SQLServer.Options.SSAS.Backup"></a>
+## Backing Up an SSAS Database<a name="SSAS.Backup"></a>
 
 You can create SSAS database backup files only in the `D:\S3` folder on the DB instance\. To move the backup files to your S3 bucket, use Amazon S3\.
 
 You can back up an SSAS database as follows:
 + A domain user with the `admin` role for a particular database can use SSMS to back up the database to the `D:\S3` folder\.
 
-  For more information, see [Adding a Domain User as a Database Administrator](#Appendix.SQLServer.Options.SSAS.admin)\.
+  For more information, see [Adding a Domain User as a Database Administrator](#SSAS.admin)\.
 + You can use the following stored procedure\.
 
   ```
@@ -399,7 +399,7 @@ You can back up an SSAS database as follows:
 **Note**  
 The stored procedure for backup doesn't support encryption\.
 
-## Restoring an SSAS Database<a name="Appendix.SQLServer.Options.SSAS.Restore"></a>
+## Restoring an SSAS Database<a name="SSAS.Restore"></a>
 
 Use the following stored procedure to restore an SSAS database from a backup\.
 
@@ -418,7 +418,7 @@ The following parameters are required:
 **Note**  
 You can't restore a database if there is an existing SSAS database with the same name\. The stored procedure for restoring doesn't support encrypted backup files\.
 
-### Restoring a DB Instance to a Specified Time<a name="Appendix.SQLServer.Options.SSAS.PITR"></a>
+### Restoring a DB Instance to a Specified Time<a name="SSAS.PITR"></a>
 
 Point\-in\-time recovery \(PITR\) doesn't apply to SSAS databases\. If you do PITR, only the SSAS data in the last snapshot before the requested time is available on the restored instance\.
 
@@ -435,14 +435,14 @@ Point\-in\-time recovery \(PITR\) doesn't apply to SSAS databases\. If you do PI
 **Note**  
 You can also reprocess the SSAS project to restore the databases\.
 
-## Disabling SSAS<a name="Appendix.SQLServer.Options.SSAS.Disable"></a>
+## Disabling SSAS<a name="SSAS.Disable"></a>
 
 To disable SSAS, remove the `SSAS` option from its option group\. Before you remove the `SSAS` option, delete your SSAS databases\.
 
 **Important**  
 We highly recommend that you back up your SSAS databases before deleting them and removing the `SSAS` option\.
 
-### Console<a name="Options.SSAS.Disable.Console"></a>
+### Console<a name="SSAS.Disable.Console"></a>
 
 **To remove the SSAS option from its option group**
 
@@ -460,7 +460,7 @@ We highly recommend that you back up your SSAS databases before deleting them an
 
 1. Choose **Delete**\.
 
-### CLI<a name="Options.SSAS.Disable.CLI"></a>
+### CLI<a name="SSAS.Disable.CLI"></a>
 
 **To remove the SSAS option from its option group**
 + Use one of the following commands\.  

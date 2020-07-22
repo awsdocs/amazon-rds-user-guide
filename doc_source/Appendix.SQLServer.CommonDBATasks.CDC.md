@@ -7,16 +7,16 @@ Before you use CDC with your Amazon RDS DB instances, enable it in the database 
 **Important**  
 During restores, CDC will be disabled\. All of the related metadata is automatically removed from the database\. This applies to snapshot restores, point\-in\-time restores, and SQL Server Native restores from S3\. After performing one of these types of restores, you can re\-enable CDC and re\-specify tables to track\.
 
-```
-1. --Enable CDC for RDS DB Instance
-2. exec msdb.dbo.rds_cdc_enable_db '<database name>'
-```
-
-To disable CDC, `msdb.dbo.rds_cdc_disable_db` run \. 
+To enable CDC for a DB instance, run the `msdb.dbo.rds_cdc_enable_db` stored procedure\.
 
 ```
-1. --Disable CDC for RDS DB Instance
-2. exec msdb.dbo.rds_cdc_disable_db '<database name>'
+1. exec msdb.dbo.rds_cdc_enable_db 'database_name'
+```
+
+To disable CDC for a DB instance, run the `msdb.dbo.rds_cdc_disable_db` stored procedure\.
+
+```
+1. exec msdb.dbo.rds_cdc_disable_db 'database_name'
 ```
 
 **Topics**
@@ -31,18 +31,18 @@ After CDC is enabled on the database, you can start tracking specific tables\. Y
 ```
  1. --Begin tracking a table
  2. exec sys.sp_cdc_enable_table   
- 3.    @source_schema           = N'<source_schema>'
- 4. ,  @source_name             = N'<source_name>'
- 5. ,  @role_name               = N'<role name>'
+ 3.    @source_schema           = N'source_schema'
+ 4. ,  @source_name             = N'source_name'
+ 5. ,  @role_name               = N'role_name'
  6. 
  7. --The following parameters are optional:
  8.  
- 9. --, @capture_instance       = '<capture_instance>'
-10. --, @supports_net_changes   = <supports_net_changes>
-11. --, @index_name             = '<index_name>'
-12. --, @captured_column_list   = '<captured_column_list>'
-13. --, @filegroup_name         = '<filegroup_name>'
-14. --, @allow_partition_switch = '<allow_partition_switch>'
+ 9. --, @capture_instance       = 'capture_instance'
+10. --, @supports_net_changes   = supports_net_changes
+11. --, @index_name             = 'index_name'
+12. --, @captured_column_list   = 'captured_column_list'
+13. --, @filegroup_name         = 'filegroup_name'
+14. --, @allow_partition_switch = 'allow_partition_switch'
 15. ;
 ```
 
@@ -53,7 +53,7 @@ To view the CDC configuration for your tables, run [sys\.sp\_cdc\_help\_change\_
 2. exec sys.sp_cdc_help_change_data_capture 
 3. 
 4. --The following parameters are optional and must be used together.
-5. --  '<schema name>', '<table name>'
+5. --  'schema_name', 'table_name'
 6. ;
 ```
 
@@ -83,7 +83,7 @@ Although this process runs quickly, it's still possible that the CDC jobs might 
 + Before you change the CDC job configuration, convert the Multi\-AZ instance to Single\-AZ\.
 + Manually transfer the parameters whenever you change them on the principal\.
 
-To view and define the CDC parameters that are used to recreate the CDC jobs after a failover, use `rds_show_configuration` and `rds_set_configuration`\. 
+To view and define the CDC parameters that are used to recreate the CDC jobs after a failover, use `rds_show_configuration` and `rds_set_configuration`\.
 
 The following example returns the value set for cdc\_capture\_maxtrans\. For any parameter that is set to RDS\_DEFAULT, RDS automatically configures the value\.
 

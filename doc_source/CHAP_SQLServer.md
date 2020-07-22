@@ -319,13 +319,21 @@ For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_
 
 Amazon RDS supports Microsoft SQL Server Transparent Data Encryption \(TDE\), which transparently encrypts stored data\. Amazon RDS uses option groups to enable and configure these features\. For more information about the TDE option, see [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)\. 
 
+## Functions and Stored Procedures for Amazon RDS for Microsoft SQL Server<a name="SQLServer.Concepts.General.StoredProcedures"></a>
+
+The following table lists Amazon RDS functions and stored procedures that help automate SQL Server tasks\.
+
+
+**SQL Server Functions and Stored Procedures**  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)
+
 ## Local Time Zone for Microsoft SQL Server DB Instances<a name="SQLServer.Concepts.General.TimeZone"></a>
 
-The time zone of an Amazon RDS DB instance running Microsoft SQL Server is set by default\. The current default is Universal Coordinated Time \(UTC\)\. You can set the time zone of your DB instance to a local time zone instead, to match the time zone of your applications\. 
+The time zone of an Amazon RDS DB instance running Microsoft SQL Server is set by default\. The current default is Universal Coordinated Time \(UTC\)\. You can set the time zone of your DB instance to a local time zone instead, to match the time zone of your applications\.
 
-You set the time zone when you first create your DB instance\. You can create your DB instance by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html), the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html.html) action, or the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\. 
+You set the time zone when you first create your DB instance\. You can create your DB instance by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html), the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html.html) action, or the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\.
 
-If your DB instance is part of a Multi\-AZ deployment \(using SQL Server DBM or AGs\), then when you fail over, your time zone remains the local time zone that you set\. For more information, see [Multi\-AZ Deployments Using Microsoft SQL Server Database Mirroring or Always On Availability Groups ](#SQLServer.Concepts.General.Mirroring)\. 
+If your DB instance is part of a Multi\-AZ deployment \(using SQL Server DBM or AGs\), then when you fail over, your time zone remains the local time zone that you set\. For more information, see [Multi\-AZ Deployments Using Microsoft SQL Server Database Mirroring or Always On Availability Groups ](#SQLServer.Concepts.General.Mirroring)\.
 
 When you request a point\-in\-time restore, you specify the time to restore to\. The time is shown in your local time zone\. For more information, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 
 

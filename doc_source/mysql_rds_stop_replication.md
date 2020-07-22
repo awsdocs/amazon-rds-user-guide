@@ -1,6 +1,6 @@
 # mysql\.rds\_stop\_replication<a name="mysql_rds_stop_replication"></a>
 
-Terminates replication from a MySQL DB instance\.
+Stops replication from a MySQL DB instance\.
 
 ## Syntax<a name="mysql_rds_stop_replication-syntax"></a>
 

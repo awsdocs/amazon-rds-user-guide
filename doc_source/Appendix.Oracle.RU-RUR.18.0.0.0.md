@@ -8,7 +8,7 @@ The following versions are available for Oracle database engine 18\.0\.0\.0:
 
 ## Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-04.rur-2020-04.r1"></a>
 
-Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 adds support for the following:
+Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 includes the following:
 + Patch 30872794: Database Release Update 18\.10\.0\.0\.200414
 + Patch 30805598: Oracle JVM Release Update 18\.10\.0\.0\.200414
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019B\)
@@ -16,8 +16,8 @@ Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 adds support for the follow
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_9\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
-+ Adds support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
-+ Adds support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package\.
++ Support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
++ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
 ### Combined Patches for Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1, Released April 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-04.rur-2020-04.r1.Bugs-Fixed"></a>
 
@@ -262,7 +262,7 @@ Bugs fixed:
 
 ## Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-01.rur-2020-01.r1"></a>
 
-Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1 adds support for the following: 
+Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1 includes the following: 
 + Patch 30480385: Database Release Update: 18\.9\.0\.0\.200114
 + Patch 30501926: OJVM RELEASE UPDATE: 18\.9\.0\.0\.200114
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019B\)
@@ -466,7 +466,7 @@ Bugs fixed:
 
 ## Version 18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-10.rur-2019-10.r1"></a>
 
-Version 18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1 adds support for the following: 
+Version 18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1 includes the following: 
 + Patch 30112122: DATABASE OCT 2019 RELEASE UPDATE 18\.0\.0\.0\.191015
 + Patch 30133625: OJVM RELEASE UPDATE 12\.2\.0\.1\.191015
 + Patch 29997937: DSTv34 for RDBMS \(TZDATA2019G\)
@@ -474,7 +474,7 @@ Version 18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1 adds support for the follow
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_8\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
-+ Adds support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)\.
++ Support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
 ### Oracle Release Update 18\.8\.0\.0\.0, Released October 2019<a name="Appendix.Oracle-RU-18.0.0.0.191015-Bugs-Fixed"></a>
 
@@ -648,7 +648,7 @@ Bugs fixed:
 
 ## Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1"></a>
 
-Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 adds support for the following: 
+Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 includes the following: 
 + Patch 29757256: Database Release Update: 18\.7\.0\.0\.190716
 + Patch 29774410: OJVM RELEASE UPDATE: 18\.7\.0\.0\.190716
 + Patch 27539475: "ORA\-3816 \- MISSING MESSAGE INFORMATION FOR 3816 ERROR\."

@@ -4,8 +4,8 @@ You can set up replication between an Amazon RDS MySQL or MariaDB DB instance an
 
 **Topics**
 + [Before You Begin](#MySQL.Procedural.Importing.External.Repl.BeforeYouBegin)
-+ [Configuring Binary Log File Position Replication with an External Master Instance](#MySQL.Procedural.Importing.External.Repl.Procedure)
-+ [Configuring GTID\-Based Replication with an External Master Instance](#MySQL.Procedural.Importing.External.Repl.GTIDProcedure)
++ [Configuring Binary Log File Position Replication with an External Source Instance](#MySQL.Procedural.Importing.External.Repl.Procedure)
++ [Configuring GTID\-Based Replication with an External Source Instance](#MySQL.Procedural.Importing.External.Repl.GTIDProcedure)
 
 ## Before You Begin<a name="MySQL.Procedural.Importing.External.Repl.BeforeYouBegin"></a>
 
@@ -15,19 +15,19 @@ The permissions required to start replication on an Amazon RDS DB instance are r
 
 To set the binary logging format for a MySQL or MariaDB database, update the `binlog_format` parameter\. If your DB instance uses the default DB instance parameter group, create a new DB parameter group to modify `binlog_format` settings\. We recommend that you use the default setting for `binlog_format`, which is `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your DB instance for the change to take effect\.
 
-For information about setting the `binlog_format` parameter, see [Binary Logging Format](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.BinaryFormat)\. For information about the implications of different MySQL replication types, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/5.6/en/replication-sbr-rbr.html) in the MySQL documentation\.
+For information about setting the `binlog_format` parameter, see [Binary Logging Format](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.BinaryFormat)\. For information about the implications of different MySQL replication types, see [Advantages and Disadvantages of Statement\-Based and Row\-Based Replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Note**  
 Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
 
-## Configuring Binary Log File Position Replication with an External Master Instance<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
+## Configuring Binary Log File Position Replication with an External Source Instance<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
 
-Follow these guidelines when you set up an external replication master and a replica on Amazon RDS: 
+Follow these guidelines when you set up an external source instance and a replica on Amazon RDS: 
 + Monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
-+ Maintain the binary logs \(binlogs\) on your master instance until you have verified that they have been applied to the replica\. This maintenance makes sure that you can restore your master instance in the event of a failure\.
-+ Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups makes sure that you can restore your replica to a particular point in time if you need to re\-synchronize your master and replica\. For information on backups and point\-in\-time restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
++ Maintain the binary logs \(binlogs\) on your source instance until you have verified that they have been applied to the replica\. This maintenance makes sure that you can restore your source instance in the event of a failure\.
++ Turn on automated backups on your Amazon RDS DB instance\. Turning on automated backups makes sure that you can restore your replica to a particular point in time if you need to re\-synchronize your source instance and replica\. For information on backups and point\-in\-time restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
-**To configure binary log file replication with an external master instance**
+**To configure binary log file replication with an external source instance**
 
 1. Make the source MySQL or MariaDB instance read\-only\.
 
@@ -52,31 +52,31 @@ Follow these guidelines when you set up an external replication master and a rep
    For Linux, macOS, or Unix:
 
    ```
-   mysqldump --databases <database_name> \
+   mysqldump --databases database_name \
        --single-transaction \
        --compress \
        --order-by-primary \
-       -u <local_user> \
-       -p<local_password> | mysql \
+       -u local_user \
+       -plocal_password | mysql \
            --host=hostname \
            --port=3306 \
-           -u <RDS_user_name> \
-           -p<RDS_password>
+           -u RDS_user_name \
+           -pRDS_password
    ```
 
    For Windows:
 
    ```
-   mysqldump --databases <database_name> ^
+   mysqldump --databases database_name ^
        --single-transaction ^
        --compress ^
        --order-by-primary ^
-       -u <local_user> ^
-       -p<local_password> | mysql ^
+       -u local_user ^
+       -plocal_password | mysql ^
            --host=hostname ^
            --port=3306 ^
-           -u <RDS_user_name> ^
-           -p<RDS_password>
+           -u RDS_user_name ^
+           -pRDS_password
    ```
 **Note**  
 Make sure that there isn't a space between the `-p` option and the entered password\. 
@@ -90,20 +90,20 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    mysql> UNLOCK TABLES;
    ```
 
-   For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
+   For more information on making backups for use with replication, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html)\.
 
 1. In the AWS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    The IP address can change when the following conditions are met:
-   + You are using a public IP address for communication between the external master instance and the DB instance\.
-   + The external master instance was stopped and restarted\.
+   + You are using a public IP address for communication between the external source instance and the DB instance\.
+   + The external source instance was stopped and restarted\.
 
    If these conditions are met, verify the IP address before adding it\.
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <db_instance_endpoint>
+   host db_instance_endpoint
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
@@ -111,19 +111,19 @@ Make sure that there isn't a space between the `-p` option and the entered passw
 1. Using the client of your choice, connect to the external instance and create a user to use for replication\. Use this account solely for replication\. and restrict it to your domain to improve security\. The following is an example\. 
 
    ```
-   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
 1. For the external instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
 
    ```
-   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>'; 
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password'; 
    ```
 
-1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
+1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the source instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 
 
    ```
-   CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306, 'repl_user', '<password>', 'mysql-bin-changelog.000031', 107, 0);
+   CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 'mysql-bin-changelog.000031', 107, 0);
    ```
 **Note**  
 On Amazon RDS MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
@@ -134,14 +134,14 @@ On Amazon RDS MySQL, you can choose to use delayed replication by running the [m
    CALL mysql.rds_start_replication;
    ```
 
-## Configuring GTID\-Based Replication with an External Master Instance<a name="MySQL.Procedural.Importing.External.Repl.GTIDProcedure"></a>
+## Configuring GTID\-Based Replication with an External Source Instance<a name="MySQL.Procedural.Importing.External.Repl.GTIDProcedure"></a>
 
-When you set up an external replication master and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
+When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
 
 **Important**  
 GTID\-based replication is only supported on Amazon RDS MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. GTID\-based replication is not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.
 
-**To configure GTID\-based replication with an external master instance**
+**To configure GTID\-based replication with an external source instance**
 
 1. Prepare for GTID\-based replication:
 
@@ -151,7 +151,7 @@ GTID\-based replication is only supported on Amazon RDS MySQL version 5\.7\.23 a
 
       `enforce_gtid_consistency` – `ON`
 
-      For more information, see [ Replication with Global Transaction Identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation or [ Global Transaction ID](https://mariadb.com/kb/en/library/gtid/) in the MariaDB documentation\.
+      For more information, see [ Replication with Global Transaction Identifiers](https://dev.mysql.com/doc/refman/8.0/en/replication-gtids.html) in the MySQL documentation or [ Global Transaction ID](https://mariadb.com/kb/en/library/gtid/) in the MariaDB documentation\.
 
    1. Make sure that the parameter group associated with the DB instance has the following parameter settings:
       + `gtid_mode` – `ON`, `ON_PERMISSIVE`, or `OFF_PERMISSIVE`
@@ -173,31 +173,31 @@ GTID\-based replication is only supported on Amazon RDS MySQL version 5\.7\.23 a
    For Linux, macOS, or Unix:
 
    ```
-   mysqldump --databases <database_name> \
+   mysqldump --databases database_name \
        --single-transaction \
        --compress \
        --order-by-primary \
-       -u <local_user> \
-       -p<local_password> | mysql \
+       -u local_user \
+       -plocal_password | mysql \
            --host=hostname \
            --port=3306 \
-           -u <RDS_user_name> \
-           -p<RDS_password>
+           -u RDS_user_name \
+           -pRDS_password
    ```
 
    For Windows:
 
    ```
-   mysqldump --databases <database_name> ^
+   mysqldump --databases database_name ^
        --single-transaction ^
        --compress ^
        --order-by-primary ^
-       -u <local_user> ^
-       -p<local_password> | mysql ^
+       -u local_user ^
+       -plocal_password | mysql ^
            --host=hostname ^
            --port=3306 ^
-           -u <RDS_user_name> ^
-           -p<RDS_password>
+           -u RDS_user_name ^
+           -pRDS_password
    ```
 **Note**  
 Make sure that there is not a space between the `-p` option and the entered password\. 
@@ -211,20 +211,20 @@ Make sure that there is not a space between the `-p` option and the entered pass
    mysql> UNLOCK TABLES;
    ```
 
-   For more information on making backups for use with replication, see [Backing Up a Master or Slave by Making It Read Only](http://dev.mysql.com/doc/refman/5.6/en/replication-solutions-backups-read-only.html) in the MySQL documentation\.
+   For more information on making backups for use with replication, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/replication-solutions-backups-read-only.html)\.
 
 1. In the AWS Management Console, add the IP address of the server that hosts the external database to the VPC security group for the Amazon RDS DB instance\. For more information on modifying a VPC security group, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    The IP address can change when the following conditions are met:
-   + You are using a public IP address for communication between the external master instance and the DB instance\.
-   + The external master instance was stopped and restarted\.
+   + You are using a public IP address for communication between the external source instance and the DB instance\.
+   + The external source instance was stopped and restarted\.
 
    If these conditions are met, verify the IP address before adding it\.
 
    You might also need to configure your local network to permit connections from the IP address of your Amazon RDS DB instance\. You do this so that your local network can communicate with your external MySQL or MariaDB instance\. To find the IP address of the Amazon RDS DB instance, use the `host` command\.
 
    ```
-   host <db_instance_endpoint>
+   host db_instance_endpoint
    ```
 
    The host name is the DNS name from the Amazon RDS DB instance endpoint\.
@@ -232,19 +232,19 @@ Make sure that there is not a space between the `-p` option and the entered pass
 1. Using the client of your choice, connect to the external instance and create a user to use for replication\. Use this account solely for replication\. and restrict it to your domain to improve security\. The following is an example\. 
 
    ```
-   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>';
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
 1. For the external instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
 
    ```
-   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY '<password>'; 
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password'; 
    ```
 
-1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the replication master by using the [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md) command\. The following is an example\.
+1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the replication pimrary instance by using the [mysql\.rds\_set\_external\_master\_with\_auto\_position](mysql_rds_set_external_master_with_auto_position.md) command\. The following is an example\.
 
    ```
-   CALL mysql.rds_set_external_master_with_auto_position ('mymasterserver.mydomain.com', 3306, 'repl_user', '<password>', 0, 0);
+   CALL mysql.rds_set_external_master_with_auto_position ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 0, 0);
    ```
 **Note**  
 On Amazon RDS MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.

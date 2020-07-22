@@ -150,7 +150,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 
  MySQL Query Tuning 
 
- Go to [Optimizing SELECT Statements](http://dev.mysql.com/doc/refman/5.5/en/select-optimization.html) in the MySQL documentation for more information on writing queries for better performance\. You can also go to [MySQL Performance Tuning and Optimization Resources](http://www.mysql.com/why-mysql/performance/) for additional query tuning resources\. 
+ Go to [Optimizing SELECT Statements](https://dev.mysql.com/doc/refman/8.0/en/select-optimization.html) in the MySQL documentation for more information on writing queries for better performance\. You can also go to [MySQL Performance Tuning and Optimization Resources](http://www.mysql.com/why-mysql/performance/) for additional query tuning resources\. 
 
  Oracle Query Tuning 
 

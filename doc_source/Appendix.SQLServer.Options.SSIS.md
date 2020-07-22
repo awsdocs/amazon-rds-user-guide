@@ -12,7 +12,7 @@ Amazon RDS for SQL Server supports running SSIS directly on an RDS DB instance\.
 
 The following limitations and recommendations apply to running SSIS on RDS for SQL Server:
 + The DB instance must use AWS Managed Microsoft AD for SSIS authentication\.
-+ The DB instance must have an associated parameter group with the `clr enabled` parameter set to 1\. For more information, see [Modifying the Parameter for SSIS](#ModifyParam.SSIS)\.
++ The DB instance must have an associated parameter group with the `clr enabled` parameter set to 1\. For more information, see [Modifying the Parameter for SSIS](#SSIS.ModifyParam)\.
 **Note**  
 If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the common language runtime \(CLR\) on your DB instance\.
 + The following control flow tasks are supported:
@@ -77,7 +77,7 @@ If a database with the name SSISDB or a reserved SSIS login already exists on th
 
 To work with SSIS, create an option group or modify an option group that corresponds to the SQL Server edition and version of the DB instance that you plan to use\. To do this, use the AWS Management Console or the AWS CLI\.
 
-#### Console<a name="OptionGroup.SSIS.Console"></a>
+#### Console<a name="SSIS.OptionGroup.Console"></a>
 
 The following procedure creates an option group for SQL Server Standard Edition 2016\.
 
@@ -101,7 +101,7 @@ The following procedure creates an option group for SQL Server Standard Edition 
 
 1. Choose **Create**\.
 
-#### CLI<a name="OptionGroup.SSIS.CLI"></a>
+#### CLI<a name="SSIS.OptionGroup.CLI"></a>
 
 The following procedure creates an option group for SQL Server Standard Edition 2016\.
 
@@ -133,7 +133,7 @@ The following procedure creates an option group for SQL Server Standard Edition 
 
 Next, use the AWS Management Console or the AWS CLI to add the `SSIS` option to your option group\.
 
-#### Console<a name="Options.SSIS.Add.Console"></a>
+#### Console<a name="SSIS.Add.Console"></a>
 
 **To add the SSIS option**
 
@@ -151,7 +151,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSIS` option to 
 
 1. Choose **Add option**\.
 
-#### CLI<a name="Options.SSIS.Add.CLI"></a>
+#### CLI<a name="SSIS.Add.CLI"></a>
 
 **To add the SSIS option**
 + Add the `SSIS` option to the option group\.  
@@ -179,7 +179,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSIS` option to 
 
 Create or modify a parameter group for the `clr enabled` parameter that corresponds to the SQL Server edition and version of the DB instance that you plan to use for SSIS\.
 
-#### Console<a name="CreateParamGroup.SSIS.Console"></a>
+#### Console<a name="SSIS.CreateParamGroup.Console"></a>
 
 The following procedure creates a parameter group for SQL Server Standard Edition 2016\.
 
@@ -201,7 +201,7 @@ The following procedure creates a parameter group for SQL Server Standard Editio
 
 1. Choose **Create**\.
 
-#### CLI<a name="CreateParamGroup.SSIS.CLI"></a>
+#### CLI<a name="SSIS.CreateParamGroup.CLI"></a>
 
 The following procedure creates a parameter group for SQL Server Standard Edition 2016\.
 
@@ -227,11 +227,11 @@ The following procedure creates a parameter group for SQL Server Standard Editio
       --description "clr enabled parameter group"
   ```
 
-### Modifying the Parameter for SSIS<a name="ModifyParam.SSIS"></a>
+### Modifying the Parameter for SSIS<a name="SSIS.ModifyParam"></a>
 
 Modify the `clr enabled` parameter in the parameter group that corresponds to the SQL Server edition and version of your DB instance\. For SSIS, set the `clr enabled` parameter to 1\.
 
-#### Console<a name="ModifyParam.SSIS.Console"></a>
+#### Console<a name="SSIS.ModifyParam.Console"></a>
 
 The following procedure modifies the parameter group that you created for SQL Server Standard Edition 2016\.
 
@@ -253,7 +253,7 @@ The following procedure modifies the parameter group that you created for SQL Se
 
 1. Choose **Save changes**\.
 
-#### CLI<a name="ModifyParam.SSIS.CLI"></a>
+#### CLI<a name="SSIS.ModifyParam.CLI"></a>
 
 The following procedure modifies the parameter group that you created for SQL Server Standard Edition 2016\.
 
@@ -447,7 +447,7 @@ To run the stored procedures, log in as any user that you granted permissions fo
    @file_path='D:\S3\ssisproject.ispac;
    ```
 
-## Monitoring the Status of a Deployment Task<a name="Appendix.SQLServer.Options.SSIS.Monitor"></a>
+## Monitoring the Status of a Deployment Task<a name="SSIS.Monitor"></a>
 
 To track the status of your deployment task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSIS\. The second parameter accepts a task ID\. 
 
@@ -634,7 +634,7 @@ You can revoke access to the SSIS subsystem and delete the SSIS proxy using the 
    GO
    ```
 
-## Disabling SSIS<a name="Appendix.SQLServer.Options.SSIS.Disable"></a>
+## Disabling SSIS<a name="SSIS.Disable"></a>
 
 To disable SSIS, remove the `SSIS` option from its option group\.
 
@@ -642,7 +642,7 @@ To disable SSIS, remove the `SSIS` option from its option group\.
 Removing the option doesn't delete the SSISDB database, so you can safely remove the option without losing the SSIS projects\.  
 You can re\-enable the `SSIS` option after removal to reuse the SSIS projects that were previously deployed to the SSIS catalog\.
 
-### Console<a name="Options.SSIS.Disable.Console"></a>
+### Console<a name="SSIS.Disable.Console"></a>
 
 The following procedure removes the `SSIS` option\.
 
@@ -662,7 +662,7 @@ The following procedure removes the `SSIS` option\.
 
 1. Choose **Delete**\.
 
-### CLI<a name="Options.SSIS.Disable.CLI"></a>
+### CLI<a name="SSIS.Disable.CLI"></a>
 
 The following procedure removes the `SSIS` option\.
 
@@ -688,7 +688,7 @@ The following procedure removes the `SSIS` option\.
       --apply-immediately
   ```
 
-## Dropping the SSISDB Database<a name="Appendix.SQLServer.Options.SSIS.Delete"></a>
+## Dropping the SSISDB Database<a name="SSIS.Drop"></a>
 
 After removing the SSIS option, the SSISDB database isn't deleted\. To drop the SSISDB database, use the `rds_drop_ssis_database` stored procedure after removing the SSIS option\.
 
