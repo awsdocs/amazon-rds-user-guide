@@ -6,11 +6,10 @@ For more information about instance class pricing, see [Amazon RDS Pricing](http
 
 **Topics**
 + [DB Instance Class Types](#Concepts.DBInstanceClass.Types)
-+ [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)
-+ [Hardware Specifications for All Available DB Instance Classes](#Concepts.DBInstanceClass.Summary)
-+ [Supported DB Engines for All Available DB Instance Classes](#Concepts.DBInstanceClass.Support)
++ [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.Support)
 + [Changing Your DB Instance Class](#Concepts.DBInstanceClass.Changing)
 + [Configuring the Processor for a DB Instance Class](#USER_ConfigureProcessor)
++ [Hardware Specifications for DB Instance Classes](#Concepts.DBInstanceClass.Summary)
 
 ## DB Instance Class Types<a name="Concepts.DBInstanceClass.Types"></a>
 
@@ -38,117 +37,9 @@ The following are the Burstable Performance DB instance classes available:
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.m5, db\.r5, db\.t3\) are throttled on combined read plus write workload\.
 
-## Terminology for DB Instance Class Hardware Specifications<a name="Concepts.DBInstanceClass.Terminology"></a>
+For DB instance class hardware specifications, see [Hardware Specifications for DB Instance Classes ](#Concepts.DBInstanceClass.Summary)\.
 
-The following terminology is used to describe hardware specifications for DB instance classes:
-+ **vCPU** – The number of virtual central processing units \(CPUs\)\. A *virtual CPU *is a unit of capacity that you can use to compare DB instance classes\. Instead of purchasing or leasing a particular processor to use for several months or years, you are renting capacity by the hour\. Our goal is to make a consistent and specific amount of CPU capacity available, within the limits of the actual underlying hardware\. 
-+ **ECU** – The relative measure of the integer processing power of an Amazon EC2 instance\. To make it easy for developers to compare CPU capacity between different instance classes, we have defined an Amazon EC2 Compute Unit\. The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units\. One ECU currently provides CPU capacity equivalent to a 1\.0–1\.2 GHz 2007 Opteron or 2007 Xeon processor\. 
-+ **Memory \(GiB\)** – The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
-+ **VPC Only** – The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
-+ **EBS\-Optimized** – The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
-+ **Max\. Bandwidth \(Mbps\)** – The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\. 
-**Important**  
-General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.* For information on estimating bandwidth for gp2 storage, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
-+ **Network Performance** – The network speed relative to other DB instance classes\. 
-
-## Hardware Specifications for All Available DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
-
-In the following table, you can find details about the Amazon RDS DB instance classes\. For a more detailed explanation of the table column terminology, see [Terminology for DB Instance Class Hardware Specifications](#Concepts.DBInstanceClass.Terminology)\. For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB Engines for All Available DB Instance Classes](#Concepts.DBInstanceClass.Support)\. 
-
-
-****  
-
-| Instance Class | vCPU | ECU | Memory \(GiB\) | VPC Only | EBS Optimized | Max\. Bandwidth \(Mbps\) | Network Performance | 
-| --- | --- | --- | --- | --- | --- | --- | --- | 
-| db\.m5 – Latest Generation Standard Instance Classes | 
-| db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
-| db\.m5\.12xlarge | 48 | 173 | 192 | Yes | Yes | 9,500 | 10 Gbps | 
-| db\.m5\.8xlarge | 32 | 131 | 128 | Yes | Yes | 6,800 | 10 Gbps | 
-| db\.m5\.4xlarge | 16 | 61 | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
-| db\.m5\.2xlarge\* | 8 | 31 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m5\.xlarge\* | 4 | 15 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m5\.large\* | 2 | 10 | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m4 – Current Generation Standard Instance Classes | 
-| db\.m4\.16xlarge | 64 | 188 | 256 | Yes | Yes | 10,000 | 25 Gbps | 
-| db\.m4\.10xlarge | 40 | 124\.5 | 160 | Yes | Yes | 4,000 | 10 Gbps | 
-| db\.m4\.4xlarge | 16 | 53\.5 | 64 | Yes | Yes | 2,000 | High | 
-| db\.m4\.2xlarge | 8 | 25\.5 | 32 | Yes | Yes | 1,000 | High | 
-| db\.m4\.xlarge | 4 | 13 | 16 | Yes | Yes | 750 | High | 
-| db\.m4\.large | 2 | 6\.5 | 8 | Yes | Yes | 450 | Moderate | 
-| db\.m3 – Previous Generation Standard Instance Classes | 
-| db\.m3\.2xlarge | 8 | 26 | 30 | No | Yes | 1,000 | High | 
-| db\.m3\.xlarge | 4 | 13 | 15 | No | Yes | 500 | High | 
-| db\.m3\.large | 2 | 6\.5 | 7\.5 | No | No | — | Moderate | 
-| db\.m3\.medium | 1 | 3 | 3\.75 | No | No | — | Moderate | 
-| db\.m1 – Previous Generation Standard Instance Classes | 
-| db\.m1\.xlarge | 4 | 4 | 15 | No | Yes | 450 | High | 
-| db\.m1\.large | 2 | 2 | 7\.5 | No | Yes | 450 | Moderate | 
-| db\.m1\.medium | 1 | 1 | 3\.75 | No | No | — | Moderate | 
-| db\.m1\.small | 1 | 1 | 1\.7 | No | No | — | Very Low | 
-| db\.z1d – Latest Generation Memory Optimized Instance Classes | 
-| db\.z1d\.12xlarge | 48 | 271 | 384 | Yes | Yes | 14,000 | 25 Gbps | 
-| db\.z1d\.6xlarge | 24 | 134 | 192 | Yes | Yes | 7,000 | 10 Gbps | 
-| db\.z1d\.3xlarge | 12 | 75 | 96 | Yes | Yes | 3,500 | Up to 10 Gbps | 
-| db\.z1d\.2xlarge | 8 | 53 | 64 | Yes | Yes | 2,333 | Up to 10 Gbps | 
-| db\.z1d\.xlarge\* | 4 | 28 | 32 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
-| db\.z1d\.large\* | 2 | 15 | 16 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
-| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
-| db\.x1e\.32xlarge | 128 | 340 | 3,904 | Yes | Yes | 14,000 | 25 Gbps | 
-| db\.x1e\.16xlarge | 64 | 179 | 1,952 | Yes | Yes | 7,000 | 10 Gbps | 
-| db\.x1e\.8xlarge | 32 | 91 | 976 | Yes | Yes | 3,500 | Up to 10 Gbps | 
-| db\.x1e\.4xlarge | 16 | 47 | 488 | Yes | Yes | 1,750 | Up to 10 Gbps | 
-| db\.x1e\.2xlarge | 8 | 23 | 244 | Yes | Yes | 1,000 | Up to 10 Gbps | 
-| db\.x1e\.xlarge | 4 | 12 | 122 | Yes | Yes | 500 | Up to 10 Gbps | 
-| db\.x1 – Current Generation Memory Optimized Instance Classes | 
-| db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
-| db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
-| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
-| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
-| db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
-| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 9,500 | 10 Gbps | 
-| db\.r5\.8xlarge | 32 | 132 | 256 | Yes | Yes | 6,800 | 10 Gbps | 
-| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 4,750 | Up to 10 Gbps | 
-| db\.r5\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.r5\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.r5\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.r4 – Current Generation Memory Optimized Instance Classes | 
-| db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | 
-| db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | 
-| db\.r4\.4xlarge | 16 | 53 | 122 | Yes | Yes | 3,500 | Up to 10 Gbps | 
-| db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,700 | Up to 10 Gbps | 
-| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 850 | Up to 10 Gbps | 
-| db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 425 | Up to 10 Gbps | 
-| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
-| db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | 
-| db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | 
-| db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | 
-| db\.r3\.xlarge | 4 | 13 | 30\.5 | No | Yes | 500 | Moderate | 
-| db\.r3\.large | 2 | 6\.5 | 15\.25 | No | No | — | Moderate | 
-| db\.m2 – Previous Generation Memory Optimized Instance Classes | 
-| db\.m2\.4xlarge | 8 | 26 | 68\.4 | No | Yes | 1,000 | High | 
-| db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | 
-| db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | 
-| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
-| db\.t3\.2xlarge\* | 8 | Variable | 32 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
-| db\.t3\.xlarge\* | 4 | Variable | 16 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
-| db\.t3\.large\* | 2 | Variable | 8 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
-| db\.t3\.medium\* | 2 | Variable | 4 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
-| db\.t3\.small\* | 2 | Variable | 2 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
-| db\.t3\.micro\* | 2 | Variable | 1 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
-| db\.t2 – Current Generation Burstable Performance Instance Classes | 
-| db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | 
-| db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | 
-| db\.t2\.large | 2 | Variable | 8 | Yes | No | — | Moderate | 
-| db\.t2\.medium | 2 | Variable | 4 | Yes | No | — | Moderate | 
-| db\.t2\.small | 1 | Variable | 2 | Yes | No | — | Low | 
-| db\.t2\.micro | 1 | Variable | 1 | Yes | No | — | Low | 
-
-\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
-
-## Supported DB Engines for All Available DB Instance Classes<a name="Concepts.DBInstanceClass.Support"></a>
-
-In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. For DB instance class specifications, see [Hardware Specifications for All Available DB Instance Classes](#Concepts.DBInstanceClass.Summary)\. 
+## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.Support"></a>
 
 The following are DB engine considerations for DB instance classes:
 + **Microsoft SQL Server** – Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
@@ -157,6 +48,8 @@ The following are DB engine considerations for DB instance classes:
   + PostgreSQL 9\.6\.9 and higher 9\.6 versions
   + PostgreSQL 10\.4 and higher 10 versions
   + PostgreSQL 11\.1 and higher 11 versions
+
+In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
 
 
 ****  
@@ -576,3 +469,124 @@ In addition, you can use the following actions for DB instance class processor i
 + [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) – Shows the processor information for the specified DB instance\.
 + [DescribeDBSnapshots](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshots.html) – Shows the processor information for the specified DB snapshot\.
 + [DescribeValidDBInstanceModifications](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDBInstanceModifications.html) – Shows the valid modifications to the processor for the specified DB instance\.
+
+## Hardware Specifications for DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
+
+The following terminology is used to describe hardware specifications for DB instance classes:
+
+**vCPU**  
+The number of virtual central processing units \(CPUs\)\. A *virtual CPU *is a unit of capacity that you can use to compare DB instance classes\. Instead of purchasing or leasing a particular processor to use for several months or years, you are renting capacity by the hour\. Our goal is to make a consistent and specific amount of CPU capacity available, within the limits of the actual underlying hardware\.
+
+**ECU**  
+The relative measure of the integer processing power of an Amazon EC2 instance\. To make it easy for developers to compare CPU capacity between different instance classes, we have defined an Amazon EC2 Compute Unit\. The amount of CPU that is allocated to a particular instance is expressed in terms of these EC2 Compute Units\. One ECU currently provides CPU capacity equivalent to a 1\.0–1\.2 GHz 2007 Opteron or 2007 Xeon processor\.
+
+**Memory \(GiB\)**  
+The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
+
+**VPC Only**  
+The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+
+**EBS\-Optimized**  
+The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
+
+**Max\. Bandwidth \(Mbps\)**  
+The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
+General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.* For information on estimating bandwidth for gp2 storage, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
+
+**Network Performance**  
+The network speed relative to other DB instance classes\.
+
+In the following table, you can find hardware details about the Amazon RDS DB instance classes \. 
+
+For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.Support)\. 
+
+
+****  
+
+| Instance Class | vCPU | ECU | Memory \(GiB\) | VPC Only | EBS Optimized | Max\. Bandwidth \(Mbps\) | Network Performance | 
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| db\.m5 – Latest Generation Standard Instance Classes | 
+| db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
+| db\.m5\.12xlarge | 48 | 173 | 192 | Yes | Yes | 9,500 | 10 Gbps | 
+| db\.m5\.8xlarge | 32 | 131 | 128 | Yes | Yes | 6,800 | 10 Gbps | 
+| db\.m5\.4xlarge | 16 | 61 | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.m5\.2xlarge\* | 8 | 31 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m5\.xlarge\* | 4 | 15 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m5\.large\* | 2 | 10 | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m4 – Current Generation Standard Instance Classes | 
+| db\.m4\.16xlarge | 64 | 188 | 256 | Yes | Yes | 10,000 | 25 Gbps | 
+| db\.m4\.10xlarge | 40 | 124\.5 | 160 | Yes | Yes | 4,000 | 10 Gbps | 
+| db\.m4\.4xlarge | 16 | 53\.5 | 64 | Yes | Yes | 2,000 | High | 
+| db\.m4\.2xlarge | 8 | 25\.5 | 32 | Yes | Yes | 1,000 | High | 
+| db\.m4\.xlarge | 4 | 13 | 16 | Yes | Yes | 750 | High | 
+| db\.m4\.large | 2 | 6\.5 | 8 | Yes | Yes | 450 | Moderate | 
+| db\.m3 – Previous Generation Standard Instance Classes | 
+| db\.m3\.2xlarge | 8 | 26 | 30 | No | Yes | 1,000 | High | 
+| db\.m3\.xlarge | 4 | 13 | 15 | No | Yes | 500 | High | 
+| db\.m3\.large | 2 | 6\.5 | 7\.5 | No | No | — | Moderate | 
+| db\.m3\.medium | 1 | 3 | 3\.75 | No | No | — | Moderate | 
+| db\.m1 – Previous Generation Standard Instance Classes | 
+| db\.m1\.xlarge | 4 | 4 | 15 | No | Yes | 450 | High | 
+| db\.m1\.large | 2 | 2 | 7\.5 | No | Yes | 450 | Moderate | 
+| db\.m1\.medium | 1 | 1 | 3\.75 | No | No | — | Moderate | 
+| db\.m1\.small | 1 | 1 | 1\.7 | No | No | — | Very Low | 
+| db\.z1d – Latest Generation Memory Optimized Instance Classes | 
+| db\.z1d\.12xlarge | 48 | 271 | 384 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.z1d\.6xlarge | 24 | 134 | 192 | Yes | Yes | 7,000 | 10 Gbps | 
+| db\.z1d\.3xlarge | 12 | 75 | 96 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.z1d\.2xlarge | 8 | 53 | 64 | Yes | Yes | 2,333 | Up to 10 Gbps | 
+| db\.z1d\.xlarge\* | 4 | 28 | 32 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
+| db\.z1d\.large\* | 2 | 15 | 16 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
+| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
+| db\.x1e\.32xlarge | 128 | 340 | 3,904 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.x1e\.16xlarge | 64 | 179 | 1,952 | Yes | Yes | 7,000 | 10 Gbps | 
+| db\.x1e\.8xlarge | 32 | 91 | 976 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.x1e\.4xlarge | 16 | 47 | 488 | Yes | Yes | 1,750 | Up to 10 Gbps | 
+| db\.x1e\.2xlarge | 8 | 23 | 244 | Yes | Yes | 1,000 | Up to 10 Gbps | 
+| db\.x1e\.xlarge | 4 | 12 | 122 | Yes | Yes | 500 | Up to 10 Gbps | 
+| db\.x1 – Current Generation Memory Optimized Instance Classes | 
+| db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
+| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
+| db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 9,500 | 10 Gbps | 
+| db\.r5\.8xlarge | 32 | 132 | 256 | Yes | Yes | 6,800 | 10 Gbps | 
+| db\.r5\.4xlarge | 16 | 71 | 128 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.r5\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | 
+| db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | 
+| db\.r4\.4xlarge | 16 | 53 | 122 | Yes | Yes | 3,500 | Up to 10 Gbps | 
+| db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,700 | Up to 10 Gbps | 
+| db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 850 | Up to 10 Gbps | 
+| db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 425 | Up to 10 Gbps | 
+| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | 
+| db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | 
+| db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | 
+| db\.r3\.xlarge | 4 | 13 | 30\.5 | No | Yes | 500 | Moderate | 
+| db\.r3\.large | 2 | 6\.5 | 15\.25 | No | No | — | Moderate | 
+| db\.m2 – Previous Generation Memory Optimized Instance Classes | 
+| db\.m2\.4xlarge | 8 | 26 | 68\.4 | No | Yes | 1,000 | High | 
+| db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | 
+| db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | 
+| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3\.2xlarge\* | 8 | Variable | 32 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.xlarge\* | 4 | Variable | 16 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.large\* | 2 | Variable | 8 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
+| db\.t3\.medium\* | 2 | Variable | 4 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
+| db\.t3\.small\* | 2 | Variable | 2 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
+| db\.t3\.micro\* | 2 | Variable | 1 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
+| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | 
+| db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | 
+| db\.t2\.large | 2 | Variable | 8 | Yes | No | — | Moderate | 
+| db\.t2\.medium | 2 | Variable | 4 | Yes | No | — | Moderate | 
+| db\.t2\.small | 1 | Variable | 2 | Yes | No | — | Low | 
+| db\.t2\.micro | 1 | Variable | 1 | Yes | No | — | Low | 
+
+\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*

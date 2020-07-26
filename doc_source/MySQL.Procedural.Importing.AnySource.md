@@ -145,25 +145,13 @@ aws rds modify-db-instance ^
     --backup-retention-period 0
 ```
 
-You can check the status of your DB instance with the AWS CLI `describe-db-instances` command\. The example displays the status of the AcmeRDS database instance and includes the \-\-headers option to show column headings\. 
-
-For Linux, macOS, or Unix:
+You can check the status of your DB instance with the AWS CLI `describe-db-instances` command\. The example displays the DB instance status of the AcmeRDS DB instance\. 
 
 ```
-aws rds describe-db-instances \
-    --db-instance-identifier AcmeRDS \
-    --headers
+aws rds describe-db-instances --db-instance-identifier AcmeRDS --query "*[].{DBInstanceStatus:DBInstanceStatus}"
 ```
 
-For Windows:
-
-```
-aws rds describe-db-instances ^
-    --db-instance-identifier AcmeRDS ^
-    --headers
-```
-
-When the Status column shows that the database is available, you're ready to proceed\. 
+When the DB instance status is `available`, you're ready to proceed\. 
 
 ## Step 5: Load the Data<a name="MySQL.Procedural.Importing.AnySource.Step5"></a>
 

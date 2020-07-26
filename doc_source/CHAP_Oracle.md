@@ -145,7 +145,7 @@ If you use the Bring Your Own License model, you must have a license for both th
 
 ## Migrating Between Oracle Editions<a name="Oracle.Concepts.EditionsMigrating"></a>
 
-For the BYOL model, you can migrate from any Standard Edition \(SE, SE1, or SE2\) to Enterprise Edition \(EE\), assuming you have an unused Oracle license appropriate for the edition and class of DB instance you plan to run\. You can't migrate from Enterprise Edition to other editions\.
+For the BYOL model, you can migrate from any Standard Edition \(SE, SE1, or SE2\) to Enterprise Edition \(EE\), assuming you have an unused Oracle license appropriate for the edition and class of DB instance that you plan to run\. You can't migrate from Enterprise Edition to other editions\.
 
 **To change the edition and retain your data**
 
@@ -211,7 +211,7 @@ If you have DB snapshots of DB instances that were using db\.m1 or db\.m2 DB ins
 
 ## Oracle File Size Limits in Amazon RDS<a name="Oracle.Concepts.file-size-limits"></a>
 
-The maximum file size on Amazon RDS Oracle DB instances is 16 TiB\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following:
+The maximum file size on Amazon RDS Oracle DB instances is 16 TiB\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following\.
 
 ```
 ORA-01237: cannot extend datafile 6
@@ -223,13 +223,13 @@ Additional information: 2
 
 ## Oracle Security<a name="Oracle.Concepts.RestrictedDBAPrivileges"></a>
 
-The Oracle database engine uses role\-based security\. A role is a collection of privileges that can be granted to or revoked from a user\. A predefined role, named *DBA*, normally allows all administrative privileges on an Oracle database engine\. The following privileges are not available for the DBA role on an Amazon RDS DB instance using the Oracle engine: 
-+ Alter database
-+ Alter system
-+ Create any directory
-+ Drop any directory
-+ Grant any privilege
-+ Grant any role
+The Oracle database engine uses role\-based security\. A role is a collection of privileges that can be granted to or revoked from a user\. A predefined role, named `DBA`, normally allows all administrative privileges on an Oracle database\. The following privileges are not available for the DBA role on an Amazon RDS DB instance using the Oracle engine: 
++ `ALTER DATABASE`
++ `ALTER SYSTEM`
++ `CREATE ANY DIRECTORY`
++ `DROP ANY DIRECTORY`
++ `GRANT ANY PRIVILEGE`
++ `GRANT ANY ROLE`
 
 When you create a DB instance, the master user account that you use to create the instance gets DBA privileges \(with some limitations\)\. Use the master user account for any administrative tasks such as creating additional user accounts in the database\. You can't use the `SYS` user, `SYSTEM` user, and other Oracle\-supplied administrative accounts\. 
 
@@ -237,7 +237,7 @@ Amazon RDS Oracle supports SSL/TLS encrypted connections and also the Oracle Nat
 
 ## Using SSL with an Oracle DB Instance<a name="Oracle.Concepts.SSL"></a>
 
-Secure Sockets Layer \(SSL\) is an industry standard protocol used for securing network connections between client and server\. After SSL version 3\.0, the name was changed to Transport Layer Security \(TLS\), but it is still often referred to as SSL and we refer to the protocol as SSL\. Amazon RDS supports SSL encryption for Oracle DB instances\. Using SSL, you can encrypt a connection between your application client and your Oracle DB instance\. SSL support is available in all AWS regions for Oracle\. 
+Secure Sockets Layer \(SSL\) is an industry\-standard protocol for securing network connections between client and server\. After SSL version 3\.0, the name was changed to Transport Layer Security \(TLS\), but it is still often referred to as SSL and we refer to the protocol as SSL\. Amazon RDS supports SSL encryption for Oracle DB instances\. Using SSL, you can encrypt a connection between your application client and your Oracle DB instance\. SSL support is available in all AWS regions for Oracle\. 
 
 You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections\. Doing this allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and an Oracle client\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\. 
 
@@ -529,7 +529,7 @@ Several Oracle 11g PL/SQL packages are not supported in Oracle 12c version 12\.1
 
 ## Oracle Database Feature Support<a name="Oracle.Concepts.FeatureSupport"></a>
 
-Oracle Database supports a wide variety of features and capabilities, most of which are supported in Amazon RDS Oracle\. Some features might have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version you're using\. 
+Amazon RDS Oracle supports most of the features and capabilities of Oracle Database\. Some features might have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version you're using\. 
 
 **Note**  
 These lists are not exhaustive\.
@@ -617,7 +617,7 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 
 ## Oracle Database Parameter Support<a name="Oracle.Concepts.FeatureSupport.Parameters"></a>
 
-In Amazon RDS, you manage parameters using parameter groups\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle edition and version, you can run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
+In Amazon RDS, you manage parameters using parameter groups\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle edition and version, run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
 
 For example, to view the supported parameters for Oracle Enterprise Edition version 12\.2, run the following command\.
 
@@ -682,7 +682,7 @@ Huge pages are not enabled by default for the following DB instance classes\.
 |  db\.t3  |  db\.t3\.micro, db\.t3\.small, db\.t3\.medium, db\.t3\.large  | 
 |  db\.t2  |  db\.t2\.micro, db\.t2\.small, db\.t2\.medium, db\.t2\.large  | 
 
-For more information about DB instance classes, see [Hardware Specifications for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
+For more information about DB instance classes, see [Hardware Specifications for DB Instance Classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 
 To enable huge pages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use huge pages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. 
 

@@ -43,7 +43,7 @@ Some SYS\-owned Oracle Scheduler jobs can interfere with normal database operati
 
 ## Setting the Time Zone for Oracle Scheduler Jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone"></a>
 
-To modify the time zone for Oracle Scheduler, you can use the Oracle procedure `dbms_scheduler.set_scheduler_attribute`\. For more information about the `dbms_scheduler` package, see [DBMS\_SCHEDULER](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/DBMS_SCHEDULER.html#GUID-A24DEB5D-2EAF-4C0B-8715-30DC947B3F87) and [SET\_SCHEDULER\_ATTRIBUTE](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/DBMS_SCHEDULER.html#GUID-2AB97BF7-7154-4E6C-933F-B2659B18A907) in the Oracle documentation\.
+To modify the time zone for Oracle Scheduler, you can use the Oracle procedure `dbms_scheduler.set_scheduler_attribute`\. For more information about the `dbms_scheduler` package, see [DBMS\_SCHEDULER](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/DBMS_SCHEDULER.html) and [SET\_SCHEDULER\_ATTRIBUTE](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/DBMS_SCHEDULER.html#GUID-2AB97BF7-7154-4E6C-933F-B2659B18A907) in the Oracle documentation\.
 
 **To modify the current time zone setting**
 

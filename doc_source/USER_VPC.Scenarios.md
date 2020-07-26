@@ -31,13 +31,15 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1. On the **Edit inbound rules** page, choose **Add Rule**\.
 
-1. From **Type**, choose one of the **All ICMP** options\. In the **Source** box, start typing the ID of the security group; this provides you with a list of security groups\. Choose the security group with members that you want to have access to the resources protected by this security group\. In the scenario preceding, this is the security group that you use for your EC2 instance\.
+1. From **Type**, choose the entry that corresponds to the port you used when you created your DB instance, such as **MYSQL/Aurora**\.
 
-1. Repeat the steps for the TCP protocol by creating a rule with **All TCP** as the **Type** and your security group in the **Source** box\. If you intend to use the UDP protocol, create a rule with **All UDP** as the **Type** and your security group in the **Source** box\. 
+1. In the **Source** box, start typing the ID of the security group, which lists the matching security groups\. Choose the security group with members that you want to have access to the resources protected by this security group\. In the scenario preceding, this is the security group that you use for your EC2 instance\.
 
-1. Create a custom TCP rule that permits access via the port you used when you created your DB instance, such as port 3306 for MySQL\. Enter your security group or an IP address to use in the **Source** box\.
+1. If required, repeat the steps for the TCP protocol by creating a rule with **All TCP** as the **Type** and your security group in the **Source** box\. If you intend to use the UDP protocol, create a rule with **All UDP** as the **Type** and your security group in the **Source** box\.
 
 1. Choose **Save** when you are done\.
+
+The following screen shows several inbound rules\.
 
 ![\[adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-vpc-add-sg-rule.png)
 

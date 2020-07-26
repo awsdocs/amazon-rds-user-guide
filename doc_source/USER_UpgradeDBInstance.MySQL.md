@@ -217,7 +217,7 @@ Your output is similar to the following\.
 ||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
 ```
 
-In this example, the `AutoUpgrade` value is `True` for MySQL version 5\.7\.26\. So, the automatic minor upgrade target is MySQL version 5\.7\.26, which highlighted in the output\.
+In this example, the `AutoUpgrade` value is `True` for MySQL version 5\.7\.26\. So, the automatic minor upgrade target is MySQL version 5\.7\.26, which is highlighted in the output\.
 
 A MySQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The DB instance has the **Auto minor version upgrade** option enabled\.

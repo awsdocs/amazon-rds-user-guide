@@ -119,7 +119,7 @@ The policy includes a single statement that specifies the following permissions 
   + The option group for the new DB instance must begin with `default`\.
   + The DB parameter group for the new DB instance must begin with `default`\.
   + The subnet group for the new DB instance must be the `default` subnet group\.
-+ The `Condition` element specifies that the DB engine must be MySQL and the DB instance class must be `db.t2.micro`\. The `Condition` element specifies the conditions when a policy should take effect\. You can add additional permissions or restrictions by using the `Condition` element\. For more information about specifying conditions, see [Condition Keys](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions)\. This example specifies the `rds:DatabaseEngine` and `rds:DatabaseClass` conditions\. For information about the valid condition values for `rds:DatabaseEngine`, see the list under the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. For information about the valid condition values for `rds:DatabaseClass`, see [Supported DB Engines for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support) \. 
++ The `Condition` element specifies that the DB engine must be MySQL and the DB instance class must be `db.t2.micro`\. The `Condition` element specifies the conditions when a policy should take effect\. You can add additional permissions or restrictions by using the `Condition` element\. For more information about specifying conditions, see [Condition Keys](security_iam_service-with-iam.md#UsingWithRDS.IAM.Conditions)\. This example specifies the `rds:DatabaseEngine` and `rds:DatabaseClass` conditions\. For information about the valid condition values for `rds:DatabaseEngine`, see the list under the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\. For information about the valid condition values for `rds:DatabaseClass`, see [Supported DB Engines for DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support) \. 
 
 The policy doesn't specify the `Principal` element because in an identity\-based policy you don't specify the principal who gets the permission\. When you attach policy to a user, the user is the implicit principal\. When you attach a permission policy to an IAM role, the principal identified in the role's trust policy gets the permissions\.
 
@@ -246,7 +246,7 @@ You can explicitly deny access to a resource\. Deny policies take precedence ove
 
 Following are examples of how you can use condition keys in Amazon RDS IAM permissions policies\. 
 
-### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w91aac36c34c43c33b4"></a>
+### Example 1: Grant Permission to Create a DB Instance that Uses a Specific DB Engine and Isn't MultiAZ<a name="w92aac36c34c43c33b4"></a>
 
 The following policy uses an RDS condition key and allows a user to create only DB instances that use the MySQL database engine and don't use MultiAZ\. The `Condition` element indicates the requirement that the database engine is MySQL\. 
 
@@ -273,7 +273,7 @@ The following policy uses an RDS condition key and allows a user to create only 
 20. }
 ```
 
-### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w91aac36c34c43c33b6"></a>
+### Example 2: Explicitly Deny Permission to Create DB Instances for Certain DB Instance Classes and Create DB Instances that Use Provisioned IOPS<a name="w92aac36c34c43c33b6"></a>
 
 The following policy explicitly denies permission to create DB instances that use the DB instance classes `r3.8xlarge` and `m4.10xlarge`, which are the largest and most expensive DB instance classes\. This policy also prevents users from creating DB instances that use Provisioned IOPS, which incurs an additional cost\. 
 
@@ -312,7 +312,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 30. }
 ```
 
-### Example 3: Limit the Set of Tag Keys and Values That Can Be Used to Tag a Resource<a name="w91aac36c34c43c33b8"></a>
+### Example 3: Limit the Set of Tag Keys and Values That Can Be Used to Tag a Resource<a name="w92aac36c34c43c33b8"></a>
 
 The following policy uses an RDS condition key and allows the addition of a tag with the key `stage` to be added to a resource with the values `test`, `qa`, and `production`\.
 
@@ -386,7 +386,7 @@ Following are examples of how you can use custom tags in Amazon RDS IAM permissi
 **Note**  
 All examples use the us\-west\-2 region and contain fictitious account IDs\.
 
-#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w91aac36c34c43c35c28b6"></a>
+#### Example 1: Grant Permission for Actions on a Resource with a Specific Tag with Two Different Values<a name="w92aac36c34c43c35c28b6"></a>
 
 The following policy allows permission to perform the `ModifyDBInstance` and `CreateDBSnapshot` APIs on DB instances with either the `stage` tag set to `development` or `test`\. 
 
@@ -415,7 +415,7 @@ The following policy allows permission to perform the `ModifyDBInstance` and `Cr
 22. }
 ```
 
-#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w91aac36c34c43c35c28b8"></a>
+#### Example 2: Explicitly Deny Permission to Create a DB Instance that Uses Specified DB Parameter Groups<a name="w92aac36c34c43c35c28b8"></a>
 
 The following policy explicitly denies permission to create a DB instance that uses DB parameter groups with specific tag values\. You might apply this policy if you require that a specific customer\-created DB parameter group always be used when creating DB instances\. Policies that use `Deny` are most often used to restrict access that was granted by a broader policy\.
 
@@ -440,7 +440,7 @@ Explicitly denying permission supersedes any other permissions granted\. This en
 16. }
 ```
 
-#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w91aac36c34c43c35c28c10"></a>
+#### Example 3: Grant Permission for Actions on a DB Instance with an Instance Name that is Prefixed with a User Name<a name="w92aac36c34c43c35c28c10"></a>
 
 The following policy allows permission to call any API \(except to `AddTagsToResource` or `RemoveTagsFromResource`\) on a DB instance that has a DB instance name that is prefixed with the user's name and that has a tag called `stage` equal to `devo` or that has no tag called `stage`\.
 

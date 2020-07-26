@@ -42,7 +42,8 @@ SELECT BINLOG_GTID_POS('<binary log file name>', <binary log file position>);
 For more information about the MariaDB implementation of GTIDs, go to [Global Transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
 
  *ssl\_encryption*   
-Integer\. This option is not currently implemented\.  The default is 0\.
+A value that specifies whether Secure Socket Layer \(SSL\) encryption is used on the replication connection\. 1 specifies to use SSL encryption, 0 specifies to not use encryption\. The default is 0\.  
+The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set to 0, which means that the connection is encrypted, but the certificates aren't verified\.
 
 ## Usage Notes<a name="mysql_rds_set_external_master_gtid-usage-notes"></a>
 

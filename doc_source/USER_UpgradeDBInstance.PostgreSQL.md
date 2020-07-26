@@ -93,7 +93,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
    If you associate a new parameter group with a DB instance, reboot the database after the upgrade completes\. If the instance needs to be rebooted to apply the parameter group changes, the instance's parameter group status shows `pending-reboot`\. You can view an instance's parameter group status in the console or by using a describe command, such as [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\.
 
-1. **Check for unsupported DB instance classes** – Check that your database's instance class is compatible with the PostgreSQL version you are upgrading to\. For more information, see [Supported DB Engines for All Available DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support)\.
+1. **Check for unsupported DB instance classes** – Check that your database's instance class is compatible with the PostgreSQL version you are upgrading to\. For more information, see [Supported DB Engines for DB Instance Classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support)\.
 
 1. **Check for unsupported usage:**
    + **Prepared transactions** – Commit or roll back all open prepared transactions before attempting an upgrade\. 

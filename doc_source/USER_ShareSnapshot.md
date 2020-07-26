@@ -5,7 +5,7 @@ Using Amazon RDS, you can share a manual DB snapshot in the following ways:
 + Sharing an unencrypted manual DB snapshot enables authorized AWS accounts to directly restore a DB instance from the snapshot instead of taking a copy of it and restoring from that\. However, you can't restore a DB instance from a DB snapshot that is both shared and encrypted\. Instead, you can make a copy of the DB snapshot and restore the DB instance from the copy\.
 
 **Note**  
-To share an automated DB snapshot, create a manual DB snapshot by copying the automated snapshot, and then share that copy\.
+To share an automated DB snapshot, create a manual DB snapshot by copying the automated snapshot, and then share that copy\. This process also applies to AWS Backup–generated resources\.
 
 For more information on copying a snapshot, see [Copying a Snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB snapshot, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
 

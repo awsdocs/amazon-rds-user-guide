@@ -94,7 +94,7 @@ Your output is similar to the following\.
 ||+-----------------------------+----------------------------------------+-----------------------+------------------------------------+-----------------------------------------------------+||
 ```
 
-In this example, the `AutoUpgrade` value is `True` for MariaDB version 10\.2\.21\. So, the automatic minor upgrade target is MariaDB version 10\.2\.21, which highlighted in the output\.
+In this example, the `AutoUpgrade` value is `True` for MariaDB version 10\.2\.21\. So, the automatic minor upgrade target is MariaDB version 10\.2\.21, which is highlighted in the output\.
 
 A MariaDB DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The DB instance has the **Auto minor version upgrade** option enabled\.
