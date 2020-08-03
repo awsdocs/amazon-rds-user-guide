@@ -2,6 +2,11 @@
 
 You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
 
+The following are prerequisites for connecting to your DB instance using IAM authentication:
++ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
+
 **Topics**
 + [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
 + [Connecting to a DB Instance](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)

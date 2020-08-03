@@ -627,18 +627,18 @@ aws rds describe-engine-default-parameters --db-parameter-group-family oracle-ee
 
 ## Oracle Engine Version Management<a name="Oracle.Concepts.Patching"></a>
 
-With DB engine version management, you can control when and how the database engine software running your DB instances is patched and upgraded\. With this feature, you get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work effectively with your application before deploying them in production\. In addition, you can perform version upgrades on your own terms and timelines\. 
+With DB engine version management, you can control when and how the database engine software running your DB instances is patched and upgraded\. With this feature, you get the flexibility to maintain compatibility with database engine patch versions\. You can also test new patch versions to ensure they work effectively with your application before deploying them in production\. In addition, you can perform version upgrades on your own terms and timelines\.
 
 **Note**  
 Amazon RDS periodically aggregates official Oracle database patches using an Amazon RDS\-specific DB engine version\. To see a list of which Oracle patches are contained in an Amazon RDS Oracle\-specific engine version, go to [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)\. 
 
-Currently, you perform all Oracle database upgrades manually\. For more information about upgrading an Oracle DB instance, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\. 
+If you enable auto minor version upgrades on your DB instance, they occur automatically\. You must perform major upgrades manually, with the exception of the automatic upgrade of 11\.2\.0\.4\. For more information about upgrading an Oracle DB instance, see [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)\.
 
 ### Deprecation of Oracle 11\.2\.0\.4<a name="Oracle.Concepts.Deprecate.11204"></a>
 
 Oracle Corporation intends to deprecate support for Oracle Database version 11\.2\.0\.4 on December 31, 2020\. On October 31, 2020, Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 SE1 using the License Included model\. On December 31, 2020, Amazon RDS plans to deprecate support for 11\.2\.0\.4 on all editions that use the Bring Your Own License model \(BYOL\)\.  
 
-Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the following schedule, which includes upgrade recommendations\. 
+Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the following schedule, which includes upgrade recommendations\. For more information, see [Preparing for the Automatic Upgrade of Oracle 11g SE1](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)\.
 
 
 | Action or Recommendation | 11\.2\.0\.4 on SE1 with License Included | 11\.2\.0\.4 on EE, SE, and SE1 with BYOL | 

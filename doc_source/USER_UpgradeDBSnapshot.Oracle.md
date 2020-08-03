@@ -1,8 +1,8 @@
 # Upgrading an Oracle DB Snapshot<a name="USER_UpgradeDBSnapshot.Oracle"></a>
 
-If you have existing manual DB snapshots, you might want to upgrade a snapshot to a later version of the Oracle database engine\. 
+If you have existing manual DB snapshots, you can upgrade them to a later version of the Oracle database engine\. 
 
-When Oracle stops providing patches for a version, and therefore Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle Engine Version Management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. 
+When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle Engine Version Management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn about upgrading snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE Using Snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
 
 The following snapshot upgrades are currently supported\. 
 
@@ -11,7 +11,8 @@ The following snapshot upgrades are currently supported\.
 
 | Current Snapshot Version | Supported Snapshot Upgrade | 
 | --- | --- | 
-| 12\.1\.0\.1 | 12\.1\.0\.2\.v8 | 
+|  12\.1\.0\.1  |  12\.1\.0\.2\.v8  | 
+|  11\.2\.0\.4  |  12\.1\.0\.2, 12\.2\.0\.1, 18c, and 19c, but only if the minor version is not a downgrade  | 
 | 11\.2\.0\.3 | 11\.2\.0\.4\.v11 | 
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
 
@@ -90,8 +91,3 @@ The following example upgrades a DB snapshot\.
 12.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
 13.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
 ```
-
-## Related Topics<a name="USER_UpgradeDBSnapshot.Oracle.Related"></a>
-+ [Oracle Database Engine Release Notes](Appendix.Oracle.PatchComposition.md)
-+ [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
-+ [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)

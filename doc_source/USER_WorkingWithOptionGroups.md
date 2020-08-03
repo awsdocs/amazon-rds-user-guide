@@ -25,6 +25,8 @@ Amazon RDS provides an empty default option group for each new DB instance\. You
 
 1. Associate the option group with the DB instance\.
 
+   To associate an option group with a DB instance, modify the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+
 Both DB instances and DB snapshots can be associated with an option group\. In some cases, you might restore from a DB snapshot or perform a point\-in\-time restore for a DB instance\. In these cases, the option group associated with the DB snapshot or DB instance is, by default, associated with the restored DB instance\. You can associate a different option group with a restored DB instance\. However, the new option group must contain any persistent or permanent options that were included in the original option group\. Persistent and permanent options are described following\.
 
 Options require additional memory to run on a DB instance\. Thus, you might need to launch a larger instance to use them, depending on your current use of your DB instance\. For example, Oracle Enterprise Manager Database Control uses about 300 MB of RAM\. If you enable this option for a small DB instance, you might encounter performance problems or out\-of\-memory errors\.

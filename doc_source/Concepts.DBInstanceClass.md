@@ -16,6 +16,10 @@ For more information about instance class pricing, see [Amazon RDS Pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance Type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
++ Preview **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. 
+**Note**  
+Graviton2 DB instance classes are now available in preview release\.  
+Don't use the db\.m6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS Service Terms](https://aws.amazon.com/service-terms/)\.
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
@@ -25,6 +29,10 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.z1d** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
 + **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
 + **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
++ Preview **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
+**Note**  
+Graviton2 DB instance classes are now available in preview release\.  
+Don't use the db\.r6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS Service Terms](https://aws.amazon.com/service-terms/)\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
@@ -42,12 +50,22 @@ For DB instance class hardware specifications, see [Hardware Specifications for 
 ## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.Support"></a>
 
 The following are DB engine considerations for DB instance classes:
-+ **Microsoft SQL Server** – Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
-+ **Oracle** – Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
-+ **PostgreSQL** – The db\.m5, db\.r5, and db\.t3 DB instance classes are supported for the following Amazon RDS PostgreSQL versions:
-  + PostgreSQL 9\.6\.9 and higher 9\.6 versions
-  + PostgreSQL 10\.4 and higher 10 versions
-  + PostgreSQL 11\.1 and higher 11 versions
+
+**Microsoft SQL Server**  
+Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
+
+**MySQL**  
+The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS MySQL versions 8\.0\.17 and higher\.
+
+**Oracle**  
+Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
+
+**PostgreSQL**  
+The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.  
+The db\.m5, db\.r5, and db\.t3 DB instance classes are supported for the following Amazon RDS PostgreSQL versions:  
++ PostgreSQL 9\.6\.9 and higher 9\.6 versions
++ PostgreSQL 10\.4 and higher 10 versions
++ PostgreSQL 11\.1 and higher 11 versions
 
 In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
 
@@ -56,6 +74,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
+| Preview db\.m6g – Newest Generation Standard Instance Classes | 
+| db\.m6g\.16xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.12xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.8xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.4xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.2xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.xlarge | No | No | Preview | No | Preview | 
+| db\.m6g\.large | No | No | Preview | No | Preview | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -99,6 +125,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
+| Preview db\.r6g – Newest Generation Memory Optimized Instance Classes | 
+| db\.r6g\.16xlarge | No | No | Preview | No | Preview | 
+| db\.r6g\.12xlarge | No | No | Preview | No | Preview | 
+| db\.r6g\.4xlarge | No | No | Preview | No | Preview | 
+| db\.r6g\.2xlarge | No | No | Preview | No | Preview | 
+| db\.r6g\.xlarge | No | No | Preview | No | Preview | 
+| db\.r6g\.large | No | No | Preview | No | Preview | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -505,6 +538,14 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 
 | Instance Class | vCPU | ECU | Memory \(GiB\) | VPC Only | EBS Optimized | Max\. Bandwidth \(Mbps\) | Network Performance | 
 | --- | --- | --- | --- | --- | --- | --- | --- | 
+| Preview db\.m6g – Newest Generation Standard Instance Classes | 
+| db\.m6g\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m6g\.12xlarge | 48 | – | 192 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.m6g\.8xlarge | 32 | – | 128 | Yes | Yes | 9,500 | 12 Gbps | 
+| db\.m6g\.4xlarge | 16 | – | 64 | Yes | Yes | 6,800 | Up to 10 Gbps | 
+| db\.m6g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m6g\.large\* | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -548,6 +589,13 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.x1 – Current Generation Memory Optimized Instance Classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
+| Preview db\.r6g – Newest Generation Memory Optimized Instance Classes | 
+| db\.r6g\.16xlarge | 64 | – | 512 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r6g\.12xlarge | 48 | – | 384 | Yes | Yes | 13,500 | 20 Gbps | 
+| db\.r6g\.4xlarge | 16 | – | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r6g\.large\* | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 

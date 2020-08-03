@@ -10,6 +10,7 @@ If your PostgreSQL DB instance is using read replicas, you must upgrade all of t
 
 **Topics**
 + [Overview of Upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
++ [PostgreSQL Version Numbers](#USER_UpgradeDBInstance.PostgreSQL.VersionID)
 + [Choosing a Major Version Upgrade for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)
 + [How to Perform a Major Version Upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)
 + [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)
@@ -27,6 +28,16 @@ Amazon RDS takes DB snapshots during the upgrade process only if you have set th
 If your DB instance is in a Multi\-AZ deployment, both the primary writer DB instance and standby DB instances are upgraded\. The writer and standby DB instances are upgraded at the same time\. You experience an outage until the upgrade is complete\. 
 
 After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
+
+## PostgreSQL Version Numbers<a name="USER_UpgradeDBInstance.PostgreSQL.VersionID"></a>
+
+The version numbering sequence for the PostgreSQL database engine is as follows: 
++ For PostgreSQL versions 10 and later, the engine version number is in the form *major\.minor*\. The major version number is the integer part of the version number\. The minor version number is the fractional part of the version number\. 
+
+  A major version upgrade increases the integer part of the version number, such as upgrading from 10\.*minor* to 11\.*minor*\.
++ For PostgreSQL versions earlier than 10, the engine version number is in the form *major\.major\.minor*\. The major engine version number is both the integer and the first fractional part of the version number\. For example, 9\.6 is a major version\. The minor version number is the third part of the version number\. For example, for version 9\.6\.12, the 12 is the minor version number\.
+
+  A major version upgrade increases the major part of the version number\. For example, an upgrade from *9\.6*\.12 to *10*\.11 is a major version upgrade, where *9\.6* and *10* are the major version numbers\.
 
 ## Choosing a Major Version Upgrade for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion"></a>
 
@@ -82,7 +93,7 @@ To get a list of all valid upgrade targets for a current source version, use the
 export REGION=AWS-Region                         
 export ENDPOINT=https://rds.AWS-Region.amazonaws.com
 
-aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query '[].ValidUpgradeTarget[?IsMajorVersionUpgrade==true].{EngineVersion:EngineVersion}' --engine-version DB-current-version
+aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query '*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}' --engine-version DB-current-version
 ```
 
 ## How to Perform a Major Version Upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>
@@ -127,7 +138,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
 1. **Perform a backup** – We recommend that you perform a backup before performing the major version upgrade so that you have a known restore point for your database\. If your backup retention period is greater than 0, the upgrade process creates DB snapshots of your DB instance before and after upgrading\. To change your backup retention period, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. To perform a backup manually, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\.
 
-1. **Upgrade certain extensions before the major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. The extensions to be updated include:
+1. **Upgrade certain extensions before the major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. The extensions to update include:
    + `address_standardizer`
    + `address_standardizer_data_us`
    + `postGIS`
@@ -145,6 +156,22 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 1. **Drop certain extensions before the major version upgrade** – An upgrade that skips a major version to version 11\.x doesn't support updating the `pgRouting` extension\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. It's safe to drop the `pgRouting` extension and then reinstall it to a compatible version after the upgrade\. For the extension versions you can update to, see [PostgreSQL Extensions and Modules Supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.
 
    The `tsearch2` and `chkpass` extensions are no longer supported for PostgreSQL versions 11 or later\. If you are upgrading to version 11\.x, drop the `tsearch2`, and `chkpass` extensions before the upgrade\.
+
+1. **Drop unknown data types** – Drop `unknown` data types depending on the target version\.
+
+   PostgreSQL version 10 stopped supporting the `unknown` data type\. If a version 9\.6 database uses the `unknown` data type, an upgrade to a version 10 shows an error message such as the following: 
+
+   ```
+   Database instance is in a state that cannot be upgraded: PreUpgrade checks failed: 
+   The instance could not be upgraded because the 'unknown' data type is used in user tables. 
+   Please remove all usages of the 'unknown' data type and try again."
+   ```
+
+   To find the `unknown` data type in your database so you can remove the offending column or change it to a supported data type, use the following SQL:
+
+   ```
+   SELECT DISTINCT data_type FROM information_schema.columns WHERE data_type ILIKE 'unknown';
+   ```
 
 1. **Perform an upgrade dry run** – We highly recommend testing a major version upgrade on a duplicate of your production database before attempting the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or do a point\-in\-time restore of your database to its latest restorable time\. For more information, see [Restoring from a Snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. For details on performing the upgrade, see [Manually Upgrading the Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
@@ -199,6 +226,9 @@ You can use the following AWS CLI command and script to determine the current au
 aws rds describe-db-engine-versions --engine postgres | grep -A 1 AutoUpgrade| grep -A 2 true |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
 ```
 
+**Note**  
+If no results are returned, there is no automatic minor version upgrade available and scheduled\.
+
 A PostgreSQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The DB instance has the **Auto minor version upgrade** option enabled\.
 + The DB instance is running a minor DB engine version that is less than the current automatic upgrade minor version\.
@@ -206,11 +236,11 @@ A PostgreSQL DB instance is automatically upgraded during your maintenance windo
 For more information, see [Automatically Upgrading the Minor Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. 
 
 **Note**  
-A PostgreSQL upgrade doesn't upgrade any PostgreSQL extensions\. To upgrade extensions, see [Upgrading PostgreSQL Extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. 
+A PostgreSQL upgrade doesn't upgrade PostgreSQL extensions\. To upgrade extensions, see [Upgrading PostgreSQL Extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. 
 
 ## Upgrading PostgreSQL Extensions<a name="USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades"></a>
 
-A PostgreSQL engine upgrade doesn't upgrade any PostgreSQL extensions\. To update an extension after a minor version upgrade, use the `ALTER EXTENSION UPDATE` command\. 
+A PostgreSQL engine upgrade doesn't upgrade most PostgreSQL extensions\. To update an extension after a version upgrade, use the `ALTER EXTENSION UPDATE` command\. 
 
 **Note**  
 If you are running the `PostGIS` extension in your Amazon RDS PostgreSQL DB instance, make sure that you follow the [PostGIS upgrade instructions](https://postgis.net/docs/postgis_installation.html#upgrading) in the PostGIS documentation before you update the extension\. 

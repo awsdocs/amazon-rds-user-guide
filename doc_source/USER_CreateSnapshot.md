@@ -9,6 +9,8 @@ For PostgreSQL DB instances, data in unlogged tables might not be restored from 
 
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
+For very long\-term backups of MariaDB, MySQL, and PostgreSQL data, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)\.
+
 You can create a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="USER_CreateSnapshot.CON"></a>

@@ -1,6 +1,10 @@
 # Working with DB Parameter Groups<a name="USER_WorkingWithParamGroups"></a>
 
- You manage your DB engine configuration by associating your DB instances with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances\. You can define your own parameter groups with customized settings\. Then you can modify your DB instances to use your own parameter groups\. 
+ You manage your DB engine configuration by associating your DB instances with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances\. 
+
+**Important**  
+You can define your own parameter groups with customized settings\. Then you can modify your DB instances to use your own parameter groups\.  
+For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
  A *DB parameter group* acts as a container for engine configuration values that are applied to one or more DB instances\. 
 

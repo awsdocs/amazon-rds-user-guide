@@ -423,7 +423,7 @@ The `tsearch2` extension is to be removed in the next major release\. We encoura
 
 PostgreSQL version 10\.3 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.3, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-3.html)\.
 
-Version 2\.1\.0 of PL/v8 is now available\. If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately take advantage of the new extension but the catalog metadata doesn't reflect this fact\. For the steps to synchronize your catalog metadata with the new version of PL/v8, see [Upgrade PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8)\.
+Version 2\.1\.0 of PL/v8 is now available\. If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately take advantage of the new extension but the catalog metadata doesn't reflect this fact\. For the steps to synchronize your catalog metadata with the new version of PL/v8, see [Upgrading PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8)\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)\. 
 
@@ -440,7 +440,7 @@ PostgreSQL version 10\.1 includes the following changes:
 + **Parallel queries** – When you create a new PostgreSQL 10\.1 instance, parallel queries are enabled for the `default.postgres10` parameter group\. The parameter [max\_parallel\_workers\_per\_gather](https://www.postgresql.org/docs/10/static/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) is set to 2 by default, but you can modify it to support your specific workload requirements\.
 + **Support for the International Components for Unicode \(ICU\)** – You can use the ICU library to provide explicitly versioned collations\. Amazon RDS for PostgreSQL 10\.1 is compiled with ICU version 60\.2\. For more information about ICU implementation in PostgreSQL, see [Collation Support](https://www.postgresql.org/docs/10/static/collation.html)\.
 + **Huge pages** – Huge pages is a feature of the Linux kernel that uses multiple page size capabilities of modern hardware architectures\. Amazon RDS for PostgreSQL supports huge pages with a global configuration parameter\. When you create a new PostgreSQL 10\.1 instance with RDS, the `huge_pages` parameter is set to `"on"` for the` default.postgres10` parameter group\. You can modify this setting to support your specific workload requirements\. 
-+ **PL/v8 update** – PL/v8 is a procedural language that allows you to write functions in JavaScript that you can then call from SQL\. This release of PostgreSQL supports version 2\.1\.0 of PL/v8\.
++ **PL/v8 update** – PL/v8 is a procedural language that you can use to write functions in JavaScript that you can then call from SQL\. This release of PostgreSQL supports version 2\.1\.0 of PL/v8\.
 + **Renaming of xlog and location** – In PostgreSQL version 10 the abbreviation "xlog" has changed to "wal", and the term "location" has changed to "lsn"\. For more information, see [ https://www\.postgresql\.org/docs/10/static/release\-10\.html\#id\-1\.11\.6\.8\.4](https://www.postgresql.org/docs/10/static/release-10.html#id-1.11.6.8.4)\. 
 + **tsearch2 module** – Amazon RDS continues to provide the `tsearch2` module in PostgreSQL version 10, but is to remove it in the next major version release\. If your application uses tsearch2 functions update it to use the equivalent functions the core engine provides\. For more information about using `tsearch2`, see [tsearch2 module](https://www.postgresql.org/docs/9.6/static/tsearch2.html)\.
 
@@ -778,7 +778,7 @@ Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 
 **Topics**
 + [PostgreSQL Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
-+ [Upgrade PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8)
++ [Upgrading PL/v8](#PostgreSQL.Concepts.General.UpgradingPLv8)
 + [Supported PostgreSQL Features](#PostgreSQL.Concepts.General.FeatureSupport)
 + [Limits for PostgreSQL DB Instances](#PostgreSQL.Concepts.General.Limits)
 + [Upgrading a PostgreSQL DB Instance](#PostgreSQL.Concepts.General.Patching)
@@ -1300,19 +1300,19 @@ The following example shows how to use the `log_fdw` extension\.
    (7 rows)
    ```
 
-#### Upgrade PL/v8<a name="PostgreSQL.Concepts.General.UpgradingPLv8"></a>
+#### Upgrading PL/v8<a name="PostgreSQL.Concepts.General.UpgradingPLv8"></a>
 
-If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately take advantage of the new extension but the catalog metadata doesn't reflect this fact\. The following steps synchronize your catalog metadata with the new version of PL/v8\. These steps are optional but we highly recommended you complete them to avoid metadata mismatch warnings\.
+If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately take advantage of the new extension\. Take the following steps to synchronize your catalog metadata with the new version of PL/v8\. These steps are optional, but we highly recommended that you complete them to avoid metadata mismatch warnings\.
 
-1. Verify that you need to update\.
+**To synchronize your catalog metadata with a new version of PL/v8**
 
-   Run the following command while connected to your instance\.
+1. Verify that you need to update\. To do this, run the following command while connected to your instance\.
 
    `select * from pg_available_extensions where name in ('plv8','plls','plcoffee');`
 
-   If your results contain values for an installed version that is a lower number than the default version, you should continue with this procedure to update your extensions\. 
+   If your results contain values for an installed version that is a lower number than the default version, continue with this procedure to update your extensions\. 
 
-   For example, the following result set indicates you should update:
+   For example, the following result set indicates that you should update\.
 
    ```
    name    | default_version | installed_version |                     comment
@@ -1323,17 +1323,13 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately 
    (3 rows)
    ```
 
-1. Take a snapshot of your instance\.
-
-   The upgrade drops all your PL/v8 functions\. Take a snapshot of your instance as a precaution\. You can continue with the following steps while the snapshot is being created\.
+1. Take a snapshot of your instance as a precaution, because the upgrade drops all your PL/v8 functions\. You can continue with the following steps while the snapshot is being created\.
 
    For steps to create a snapshot see, [Creating a DB Snapshot](USER_CreateSnapshot.md)
 
-1. Get a count of the functions you need to drop and recreate\.
+1. Get a count of the number of PL/v8 functions in your DB instance so you can validate that they are all in place after the upgrade\. 
 
-   Obtain the count of the number of PL/v8 functions in your instance so you can validate that they are all in place after the upgrade\. 
-
-   The following code returns the number of functions written in PL/v8, plcoffee, or plls:
+   The following code returns the number of functions written in PL/v8, plcoffee, or plls\.
 
    ```
    select proname, nspname, lanname 
@@ -1349,13 +1345,13 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately 
 
    `./pg_dump -Fc --schema-only -U master postgres > /tmp/test.dmp`
 
-   This example uses the following flags:
+   This example uses the following options:
    + \-FC "format custom"
    + \-\-schema\-only "will only dump commands necessary to create schema \(functions in our case\)"
    + \-U "rds master username"
    + database "the database name in our instance"
 
-   For more information on pg\_dump see, [pg\_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html )\.
+   For more information on pg\_dump, see the [pg\_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html ) page in the PostgreSQL documentation\.
 
 1. Extract the "CREATE FUNCTION" DDL statement that is present in the dump file\.
 
@@ -1375,7 +1371,7 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately 
 
 1. Create the extensions\.
 
-   The following code creates the PL/v8, plcoffee, and plls extensions:
+   The following code creates the PL/v8, plcoffee, and plls extensions\.
 
    `create extension plv8;`
 
@@ -1385,13 +1381,13 @@ If you use PL/v8 and upgrade PostgreSQL to a new PL/v8 version, you immediately 
 
 1. Create the functions using the dump file and "driver" file\.
 
-   The following code re\-creates the functions that you extracted previously\.
+   The following code recreates the functions that you extracted previously\.
 
    `./pg_restore -U master -d postgres -Fc -L /tmp/function_list /tmp/test.dmp`
 
 1. Verify your functions count\.
 
-   Validate that your functions have all been re\-creating by re\-running the following code:
+   Validate that your functions have all been recreated by running the following code statement\.
 
    `select * from pg_available_extensions where name in ('plv8','plls','plcoffee'); `
 **Note**  

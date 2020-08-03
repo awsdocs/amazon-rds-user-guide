@@ -12,6 +12,11 @@ For more information, see the following blog posts:
 + [Use IAM authentication to connect with SQL Workbench/J to Amazon Aurora MySQL or Amazon RDS for MySQL](https://aws.amazon.com/blogs/database/use-iam-authentication-to-connect-with-sql-workbenchj-to-amazon-aurora-mysql-or-amazon-rds-for-mysql/)
 + [Using IAM authentication to connect with pgAdmin Amazon Aurora PostgreSQL or Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/using-iam-authentication-to-connect-with-pgadmin-amazon-aurora-postgresql-or-amazon-rds-for-postgresql/)
 
+The following are prerequisites for connecting to your DB instance using IAM authentication:
++ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
+
 **Topics**
 + [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
 + [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and psql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.md)

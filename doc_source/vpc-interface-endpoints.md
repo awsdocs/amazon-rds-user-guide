@@ -37,6 +37,8 @@ Amazon RDS currently supports VPC endpoints in the following AWS Regions:
 + Europe \(Stockholm\)
 + Middle East \(Bahrain\)
 + South America \(São Paulo\)
++ China \(Beijing\)
++ China \(Ningxia\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 

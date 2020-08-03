@@ -13,20 +13,18 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 ****  
 
-| APEX Version | Storage Requirements | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
-| --- | --- | --- | --- | --- | --- | --- | 
-|  Oracle APEX version 19\.2\.v1  |  149 MiB  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 18\.1\.v1  |  145 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  Not supported  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
-|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  Not supported  |  Not supported  |  Not supported  |  Not supported  |  Supported  | 
-
-**Note**  
-Oracle APEX 5 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
+| APEX Version | Storage Requirements | Supported Oracle Database Versions | Notes | 
+| --- | --- | --- | --- | 
+|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All  |  APEX version 20\.1\.v1 includes patch 30990551\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre> Oracle APEX version 20\.1\.v1 is not currently available in the China \(Beijing\) and China \(Ningxia\) Regions\.  | 
+|  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All  |  | 
+|  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All  |  | 
+|  Oracle APEX version 18\.2\.v1  |  146 MiB  |  All except 19c  |  | 
+|  Oracle APEX version 18\.1\.v1  |  145 MiB  | All except 19c |  | 
+|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  All except 19c \(see Notes\)  |  Oracle APEX 5\.1\.4 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.  | 
+|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  12\.1 and 11g only \(see Notes\)  |  Oracle APEX 5\.1\.2 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.  | 
+|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  12\.1 and 11g only \(see Notes\)  |  Oracle APEX 5\.0\.4 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.  | 
+|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  12\.1 and 11g only  |  | 
+|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  11g only  |  | 
 
 ## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 
@@ -184,35 +182,40 @@ While you are still in the directory from the previous procedure, install and ru
    exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_UTILITY', 'master_user', 'EXECUTE', true);
    ```
 **Note**  
-These commands apply to ORDS version 19\.1 and 19\.2\.
+These commands apply to ORDS version 19\.1 and later\.
 
 1. Install the ORDS schema using the downloaded ords\.war file\.
 
    ```
-   java -jar ords.war setup
+   java -jar ords.war install advanced
    ```
 
-   The program prompts you for the following information\. The default values are in brackets\. 
-   + The location to store configuration data
+   The program prompts you for the following information\. The default values are in brackets\. For more information, see [Introduction to Oracle REST Data Services](https://docs.oracle.com/en/database/oracle/oracle-rest-data-services/20.2/aelig/installing-REST-data-services.html#GUID-6F7B4E61-B730-4E73-80B8-F53299123730) in the Oracle documentation\.
+   + Enter the location to store configuration data:
 
-     Enter `/home/apexuser/ORDS`\.
-   + The name of the database server \[localhost\]: *DB\_instance\_endpoint*
+     Enter `/home/apexuser/ORDS`\. This is the location of the ORDS configuration files\.
+   + Specify the database connection type to use\. Enter number for \[1\] Basic \[2\] TNS \[3\] Custom URL \[1\]:
+
+     Choose the desired connection type\.
+   + Enter the name of the database server \[localhost\]: *DB\_instance\_endpoint*
 
      Choose the default or enter the correct value\.
-   + The database listen port \[1521\]: *DB\_instance\_port*
+   + Enter the database listener port \[1521\]: *DB\_instance\_port*
 
      Choose the default or enter the correct value\.
-   + Database service name or database SID \[1\] 
+   + Enter 1 to specify the database service name, or 2 to specify the database SID \[1\]:
 
-     Choose `1` to specify the database service name, or choose `2` to specify the database SID\. 
+     Choose `2` to specify the database SID\. 
    + Database SID \[xe\]
 
      Choose the default or enter the correct value\.
-   + Verify or install Oracle REST Data Services schema or skip this step \[1\]
+   + Enter 1 if you want to verify/install Oracle REST Data Services schema or 2 to skip this step \[1\]:
 
-     Choose `1`\.
-   + Enter the database password for ORDS\_PUBLIC\_USER, and then confirm the password\.
-   + Log in with administrator privileges to verify the Oracle REST Data Services schema\.
+     Choose `1`\. This step creates the Oracle REST Data Services proxy user named ORDS\_PUBLIC\_USER\.
+   + Enter the database password for ORDS\_PUBLIC\_USER:
+
+     Enter the password, and then confirm it\.
+   + Requires to login with administrator privileges to verify Oracle REST Data Services schema\.
 
      Enter the administrator user name: *master\_user*
 
@@ -226,26 +229,38 @@ These commands apply to ORDS version 19\.1 and 19\.2\.
      Enter the default tablespace for ORDS\_PUBLIC\_USER \[USERS\]\.
 
      Enter the temporary tablespace for ORDS\_PUBLIC\_USER \[TEMP\]\.
-   + Enter 1 if you want to use PL/SQL Gateway or 2 to skip this step\.
-
-     If you're using Oracle Application Express or migrating from mod\_plsql, you must enter 1 \[1\]\.
+   + Enter 1 if you want to use PL/SQL Gateway or 2 to skip this step\. If you're using Oracle Application Express or migrating from mod\_plsql, you must enter 1 \[1\]\.
 
      Choose the default\.
-   + PL/SQL Gateway database user name \[APEX\_PUBLIC\_USER\]
+   + Enter the PL/SQL Gateway database user name \[APEX\_PUBLIC\_USER\]
 
      Choose the default\.
-   + Database password for APEX\_PUBLIC\_USER
+   + Enter the database password for APEX\_PUBLIC\_USER:
 
-     Enter the password\.
-   + Specify passwords for Application Express RESTful Services database users \(APEX\_LISTENER, APEX\_REST\_PUBLIC\_USER\) or skip this step \[1\]
+     Enter the password, and then confirm it\.
+   + Enter 1 to specify passwords for Application Express RESTful Services database users \(APEX\_LISTENER, APEX\_REST\_PUBLIC\_USER\) or 2 to skip this step \[1\]:
 
      Choose `2` for APEX 4\.1\.1\.V1; choose `1` for all other APEX versions\.
    + \[Not needed for APEX 4\.1\.1\.v1\] Database password for APEX\_LISTENER
 
-     Enter the password \(if required\)\.
+     Enter the password \(if required\), and then confirm it\.
    + \[Not needed for APEX 4\.1\.1\.v1\] Database password for APEX\_REST\_PUBLIC\_USER
 
-     Enter the password \(if required\)\.
+     Enter the password \(if required\), and then confirm it\.
+   + Enter a number to select a feature to enable:
+
+     Enter `1` to enable all features: SQL Developer Web, REST Enabled SQL, and Database API\.
+   + Enter 1 if you wish to start in standalone mode or 2 to exit \[1\]:
+
+     Enter `1`\.
+   + Enter the APEX static resources location:
+
+     If you specified the default directory in [Installing and Configuring a Listener for Use with Oracle APEX](#Appendix.Oracle.Options.APEX.Listener), enter `/home/apexuser/apex/images`\. Otherwise, enter `unzip_path/apex/images`, where *unzip\_path* is the directory where you unzipped the file\.
+   + Enter 1 if using HTTP or 2 if using HTTPS \[1\]:
+
+     If you enter `1`, specify the HTTP port\. If you enter `2`, specify the HTTPS port and the SSL host name\. The HTTPS option prompts you to specify how you will provide the certificate:
+     + Enter `1` to use the self\-signed certificate\.
+     + Enter `2` to provide your own certificate\. If you enter `2`, specify the path for the SSL certificate and the path for the SSL certificate private key\.
 
 After you install ORDS, configure it by following the instructions in [To configure your listener](#APEXconfigurelistener)\.
 
@@ -258,7 +273,7 @@ After you install ORDS, configure it by following the instructions in [To config
    ```
    language="bash">mkdir /home/apexuser/apexlistener
    cd /home/apexuser/apexlistener 
-   unzip ../apex_listener.<version>.zip
+   unzip ../apex_listener.version.zip
    ```
 
 1. Run the following code\.

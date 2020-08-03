@@ -19,6 +19,8 @@ If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.
 
 You can connect to an Amazon RDS MariaDB DB instance by using tools like the mysql command line utility\. For more information on using the mysql utility, see [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is Heidi\. For more information, see the [Download Heidi](http://www.heidisql.com/download.php) page\.
 
+To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+
 You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\. For information, see [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
 
 ## Connecting from the mysql Utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>

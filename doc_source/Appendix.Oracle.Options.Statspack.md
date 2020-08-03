@@ -3,7 +3,7 @@
 The Oracle Statspack option installs and enables the Oracle Statspack performance statistics feature\. Oracle Statspack is a collection of SQL, PL/SQL, and SQL\*Plus scripts that collect, store, and display performance data\. For information about using Oracle Statspack, see [Oracle Statspack](http://docs.oracle.com/cd/E13160_01/wli/docs10gr3/dbtuning/statsApdx.html) in the Oracle documentation\.
 
 **Note**  
-Oracle Statspack is no longer supported by Oracle and has been replaced by the more advanced Automatic Workload Repository \(AWR\)\. AWR is available only for Oracle Enterprise Edition customers who have purchased the Diagnostics Pack\. Oracle Statspack can be used with any Oracle DB engine on Amazon RDS\. 
+Oracle Statspack is no longer supported by Oracle and has been replaced by the more advanced Automatic Workload Repository \(AWR\)\. AWR is available only for Oracle Enterprise Edition customers who have purchased the Diagnostics Pack\. You can use Oracle Statspack with any Oracle DB engine on Amazon RDS\. You can't run Oracle Statspack on Amazon RDS read replicas\. 
 
 ## Setting Up Oracle Statspack<a name="Appendix.Oracle.Options.Statspack.setting-up"></a>
 
