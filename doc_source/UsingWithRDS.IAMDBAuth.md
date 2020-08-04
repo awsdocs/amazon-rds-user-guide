@@ -44,4 +44,4 @@ We recommend the following when using the MySQL engine:
 
 When using IAM database authentication with PostgreSQL, note the following limitations:
 + The maximum number of connections per second for your database instance may be limited depending on the instance type and your workload\.
-+ Users can only authenticate using either IAM Database Authentication or standard database authentication, but not both\.
++ Users can only be configured to authenticate using either IAM Database Authentication or standard database authentication, but not both\.
