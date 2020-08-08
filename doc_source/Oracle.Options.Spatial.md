@@ -20,9 +20,6 @@ Amazon RDS supports Oracle Spatial only in Oracle Enterprise Edition \(EE\) and 
 |  12\.1\.0\.2\.v13 or later  |  Yes  |  No  | 
 |  11\.2\.0\.4\.v17 or later  |  Yes  |  N/A  | 
 
-**Note**  
-Oracle Spatial for SE2 is available in all AWS regions except China \(Beijing\) and China \(Ningxia\)\.
-
 ## Prerequisites for Oracle Spatial<a name="Oracle.Options.Spatial.PreReqs"></a>
 
 The following are prerequisites for using Oracle Spatial: 

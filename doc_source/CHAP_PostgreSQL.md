@@ -1444,7 +1444,7 @@ PostgreSQL logical replication and logical decoding on Amazon RDS are enabled wi
 
 1. Reboot the DB instance for the static `rds.logical_replication` parameter to take effect\.
 
-1. Create a logical replication slot as explained in the next section\. This process requires that you specify a decoding plugin\. Currently we support the `test_decoding` output plugin that ships with PostgreSQL\.
+1. Create a logical replication slot as explained in the next section\. This process requires that you specify a decoding plugin\. Currently we support the `test_decoding` and `wal2json` output plugins that ship with PostgreSQL\.
 
 For more information on PostgreSQL logical decoding, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/logicaldecoding-explanation.html)\.
 
@@ -1655,7 +1655,7 @@ The following is an example of using psql to connect to a PostgreSQL DB instance
 
 ```
 $ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
-    "dbname=testpg user=testuser sslrootcert=rds-ca-2015-root.pem sslmode=verify-full"
+    "dbname=testpg user=testuser sslrootcert=rds-ca-2019-root.pem sslmode=verify-full"
 ```
 
 ##### Requiring an SSL Connection to a PostgreSQL DB Instance<a name="PostgreSQL.Concepts.General.SSL.Requiring"></a>

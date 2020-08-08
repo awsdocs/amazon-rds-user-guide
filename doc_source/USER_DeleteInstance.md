@@ -41,9 +41,9 @@ Retain automated backups\. You can use those to restore your DB instance during 
 **Note**  
 Regardless of your choice, earlier manual DB snapshots aren't deleted\.
 
-## Deleting a DB Instance by Using the Console, CLI, and API<a name="USER_DeleteInstance.Deleting"></a>
+## Deleting a DB Instance<a name="USER_DeleteInstance.Deleting"></a>
 
-You can delete a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\.
+You can delete a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\. The time required to delete a DB instance can vary depending on the backup retention period \(that is, how many backups to delete\), how much data is deleted, and whether a final snapshot is taken\.
 
 **Note**  
 You can't delete a DB instance when deletion protection is enabled for it\. For more information, see [Deletion Protection](#USER_DeleteInstance.DeletionProtection)\.  

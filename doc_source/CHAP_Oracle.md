@@ -644,10 +644,10 @@ Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the foll
 | Action or Recommendation | 11\.2\.0\.4 on SE1 with License Included | 11\.2\.0\.4 on EE, SE, and SE1 with BYOL | 
 | --- | --- | --- | 
 |  We recommend that you upgrade 11\.2\.0\.4 DB instances manually to the version of your choice\.   |  Now–October 31, 2020  |  Now–December 31, 2020  | 
-|  We recommend that you upgrade 11\.2\.0\.4 snapshots manually to the version of your choice\.  |  August 1–January 31, 2021  |  October 1, 2020–March 31, 2021  | 
-|  You can no longer create new instances with Amazon RDS for Oracle with the listed version\.  |  August 1, 2020  |  October 1, 2020  | 
+|  We recommend that you upgrade 11\.2\.0\.4 snapshots manually to the version of your choice\.  |  September 1, 2020  |  October 1, 2020  | 
+|  You can no longer create new instances with Amazon RDS for Oracle with the listed version\.  |  September 1, 2020  |  October 1, 2020  | 
 |  Amazon RDS for Oracle starts automatic upgrades of your DB instances to version 19c\.  |  November 1, 2020  |  January 1, 2021  | 
-|  Amazon RDS for Oracle starts automatic upgrades to version 19c for any DB instances restored from snapshots\.  |  November 1, 2020–January 31, 2021  |  January 1–March 31, 2021  | 
+|  Amazon RDS for Oracle starts automatic upgrades to version 19c for any DB instances restored from snapshots\.  |  November 1, 2020  |  January 1, 2021  | 
 
 ## Using Huge Pages with an Oracle DB Instance<a name="Oracle.Concepts.HugePages"></a>
 

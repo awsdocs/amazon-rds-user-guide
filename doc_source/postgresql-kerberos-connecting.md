@@ -14,9 +14,13 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
 
 1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database:
    + For **Host**, enter the endpoint\. Use a format such as `PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com`\.
+
+     If you're using an on\-premises Microsoft Active Directory, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
+
+     For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com.`
    + For **Port**, enter the assigned port\.
    + For **Maintenance database**, enter the name of the initial database to which the client will connect\.
-   + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 6: Create Kerberos Authentication PostgreSQL Logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
+   + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 7: Create Kerberos Authentication PostgreSQL Logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
 
 1. Choose **Save**\.
 
@@ -43,8 +47,22 @@ To use psql to connect to PostgreSQL with Kerberos authentication, take the foll
    % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com" >> /etc/hosts
    ```
 
+   If you're using an on\-premises Microsoft Active Directory, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\.
+
+   For example, suppose that the domain name for your AWS Managed Active Directory is `corp.example.com`\. Then use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com` for the endpoint and put it in the `/etc/hosts` file\.
+
+   ```
+   % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.corp.example.com" >> /etc/hosts
+   ```
+
 1. Use the following psql command to log in to a PostgreSQL DB instance that is integrated with Active Directory\.
 
    ```
    psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-instance-endpoint.AWS-Region.rds.amazonaws.com postgres
+   ```
+
+   If you're using an on\-premises Active Directory and the domain name from the previous step, use the following psql command instead to log in to the PostgreSQL DB cluster\.
+
+   ```
+   psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-instance-endpoint.AWS-Region.corp.example.com postgres
    ```

@@ -198,9 +198,9 @@ The point\-in\-time restore and snapshot restore features of Amazon RDS for Mari
 
 For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html)\.
 
-The 2018 AWS re:Invent conference included a presentation on best practices for working with Oracle on Amazon RDS\. A video of the presentation is available here:
+A 2020 AWS virtual workshop included a presentation on running production Oracle databases on Amazon RDS\. A video of the presentation is available here:
 
-[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/j2wqT0EPDbw/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/j2wqT0EPDbw)
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/vpSWZx4-M-M/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/vpSWZx4-M-M)
 
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 

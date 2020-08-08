@@ -278,7 +278,7 @@ To extract AWR data into a dump file, use the `rdsadmin.rdsadmin_diagnostic_util
 The following example extracts the snapshot range 101–106\. The output dump file is named `awrextract_101_106.dmp`\. You can access this file through the console\.
 
 ```
-exec rdsadmin.rdsadmin_diagnotic_util.awr_extract(101,106);
+exec rdsadmin.rdsadmin_diagnostic_util.awr_extract(101,106);
 ```
 
 The following example extracts the snapshot range 63–65\. The output dump file is named `awrextract_63_65.dmp`\. The file is stored in the nondefault database directory named `AWR_RPT_DUMP`\.

@@ -24,7 +24,7 @@ You should also weigh `mysqldump` performance against the benefit offered by usi
 Before you start the backup operation, you must set the replication options on the MySQL or MariaDB database that you are copying to Amazon RDS\. The replication options include enabling binary logging and setting a unique server ID\. Setting these options causes your server to start logging database transactions and prepares it to be a source replication instance later in this process\.
 
 **Note**  
-Your database needs to be stopped to set the replication options and be in read\-only mode while the backup copy is created, so you need to schedule a maintenance window for these operations\.
+Use the `--single-transaction` option with `mysqldump` because it dumps a consistent state of the database\. To ensure a valid dump file, don't run data definition language \(DDL\) statements while `mysqldump` is running\. You can schedule a maintenance window for these operations\.
 Exclude the following schemas from the dump file: `sys`, `performance_schema`, and `information_schema`\. The `mysqldump` utility excludes these schemas by default\.
 If you need to migrate users and privileges, consider using a tool that generates the data control language \(DCL\) for recreating them, such as the [pt\-show\-grants](https://www.percona.com/doc/percona-toolkit/LATEST/pt-show-grants.html) utility\.
 

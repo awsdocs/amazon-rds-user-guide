@@ -908,6 +908,8 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 +  If you use `SET` statements to perform identical initialization for each client connection, you can do so while preserving transaction\-level multiplexing\. In this case, you move the statements that set up the initial session state into the initialization query used by a proxy\. This property is a string containing one or more SQL statements, separated by semicolons\. 
 
    For example, you can define an initialization query for a proxy that sets certain configuration parameters\. Then, RDS Proxy applies those settings whenever it sets up a new connection for that proxy\. You can remove the corresponding `SET` statements from your application code, so that they don't interfere with transaction\-level multiplexing\. 
+**Important**  
+ For proxies associated with MySQL databases, don't set the configuration parameter `sql_auto_is_null` to `true` or a nonzero value in the initialization query\. Doing so might cause incorrect application behavior\. 
 
  The proxy pins the session to the current connection in the following situations where multiplexing might cause unexpected behavior: 
 +  Any statement with a text size greater than 16 KB causes the proxy to pin the session\. 
