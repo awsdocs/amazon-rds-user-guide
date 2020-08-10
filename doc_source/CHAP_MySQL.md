@@ -73,9 +73,9 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 aws rds describe-db-engine-versions --default-only --engine mysql --engine-version 5.7 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
 ```
 
-With Amazon RDS, you control when to upgrade your MySQL instance to a new version supported by Amazon RDS\. You can maintain compatibility with specific MySQL versions, test new versions with your application before deploying in production, and perform version upgrades at times that best fit your schedule\.
+With Amazon RDS, you control when to upgrade your MySQL instance to a new major version supported by Amazon RDS \(i\.e\. going from version 5\.5 to 5\.6 or version 5\.7 to 8\.0\)\. You can maintain compatibility with specific MySQL versions, test new versions with your application before deploying in production, and perform major version upgrades at times that best fit your schedule\.
 
-Unless you specify otherwise, your DB instance will automatically be upgraded to new MySQL minor versions as they are supported by Amazon RDS\. This patching occurs during your scheduled maintenance window\. You can modify a DB instance to turn off automatic minor version upgrades\. 
+But unless you specify otherwise, your DB instance will automatically be upgraded to new MySQL minor versions as they are supported by Amazon RDS \(i\.e\. going from version 5\.5\.15 to 5\.5\.16\)\. This patching occurs during your scheduled maintenance window\. If you want, you can modify a DB instance to turn off automatic minor version upgrades\. 
 
 If you opt out of automatically scheduled upgrades, you can manually upgrade to a supported minor version release by following the same procedure as you would for a major version update\. For information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\. 
 
