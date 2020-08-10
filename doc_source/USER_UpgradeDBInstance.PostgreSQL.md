@@ -6,7 +6,7 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. For more details, see [Automatic Minor Version Upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually Upgrading the Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
-If your PostgreSQL DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the writer and standby replicas are upgraded\. Your DB instance might not be available until the upgrade is complete\. 
+If your PostgreSQL DB instance is using read replicas, you must first upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, then the writer and any standby replicas will be upgraded simultaneously\. That means your primary writer and also all standby replicas will be busy doing the upgrade process\. For this reason, your DB instance might not be available until the upgrade is complete\. 
 
 **Topics**
 + [Overview of Upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
@@ -20,7 +20,7 @@ If your PostgreSQL DB instance is using read replicas, you must upgrade all of t
 
 To safely upgrade your DB instances, Amazon RDS uses the pg\_upgrade utility described in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\. 
 
-Amazon RDS takes two DB snapshots during the upgrade process if your backup retention period is greater than 0\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
+If your backup retention period is set to greater than 0, Amazon RDS will take two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
 
 **Note**  
 Amazon RDS takes DB snapshots during the upgrade process only if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
