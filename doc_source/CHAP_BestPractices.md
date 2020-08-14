@@ -23,15 +23,15 @@ For common recommendations for Amazon RDS, see [Using Amazon RDS Recommendations
 The following are basic operational guidelines that everyone should follow when working with Amazon RDS\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
 + Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
 + Scale up your DB instance when you are approaching storage capacity limits\. You should have some buffer in storage and memory to accommodate unforeseen increases in demand from your applications\. 
-+ Enable automatic backups and set the backup window to occur during the daily low in write IOPS\.
++ Enable automatic backups and set the backup window to occur during the daily low in write IOPS\. That's when a backup is least disruptive to your database usage.
 + If your database workload requires more I/O than you have provisioned, recovery after a failover or database failure will be slow\. To increase the I/O capacity of a DB instance, do any or all of the following:
-  + Migrate to a DB instance class with High I/O capacity\.
+  + Migrate to a different DB instance class with high I/O capacity\.
   + Convert from magnetic storage to either General Purpose or Provisioned IOPS storage, depending on how much of an increase you need\. For information on available storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.
 
     If you convert to Provisioned IOPS storage, make sure you also use a DB instance class that is optimized for Provisioned IOPS\. For information on Provisioned IOPS, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\.
   + If you are already using Provisioned IOPS storage, provision additional throughput capacity\. 
 + If your client application is caching the Domain Name Service \(DNS\) data of your DB instances, set a time\-to\-live \(TTL\) value of less than 30 seconds\. Because the underlying IP address of a DB instance can change after a failover, caching the DNS data for an extended time can lead to connection failures if your application tries to connect to an IP address that no longer is in service\.
-+ Test failover for your DB instance to understand how long the process takes for your use case and to ensure that the application that accesses your DB instance can automatically connect to the new DB instance after failover\.
++ Test failover for your DB instance to understand how long the process takes for your particular use case and to ensure that the application that accesses your DB instance can automatically connect to the new DB instance after failover occurs\.
 
 ## DB Instance RAM Recommendations<a name="CHAP_BestPractices.Performance.RAM"></a>
 
@@ -41,7 +41,7 @@ To tell if your working set is almost all in memory, check the ReadIOPS metric \
 
 ## Using Enhanced Monitoring to Identify Operating System Issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
-Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
+When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
 
 Enhanced Monitoring is available for the following database engines:
 + MariaDB
@@ -198,9 +198,9 @@ The point\-in\-time restore and snapshot restore features of Amazon RDS for Mari
 
 For information about best practices for working with Amazon RDS for Oracle, see [ Best Practices for Running Oracle Database on Amazon Web Services](https://docs.aws.amazon.com/aws-technical-content/latest/oracle-database-aws-best-practices/introduction.html)\.
 
-A 2020 AWS virtual workshop included a presentation on running production Oracle databases on Amazon RDS\. A video of the presentation is available here:
+The 2018 AWS re:Invent conference included a presentation on best practices for working with Oracle on Amazon RDS\. A video of the presentation is available here:
 
-[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/vpSWZx4-M-M/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/vpSWZx4-M-M)
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/j2wqT0EPDbw/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/j2wqT0EPDbw)
 
 ## Best Practices for Working with PostgreSQL<a name="CHAP_BestPractices.PostgreSQL"></a>
 
