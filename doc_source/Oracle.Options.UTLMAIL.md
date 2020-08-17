@@ -83,9 +83,9 @@ To remove UTL\_MAIL from a DB instance, do one of the following:
 ## Troubleshooting<a name="Oracle.Options.UTLMAIL.Troubleshooting"></a>
 
 The following are issues you might encounter when you use UTL\_MAIL with Amazon RDS\. 
-+ Throttling\. SMTP port \(25\) is throttled based on the elastic network interface owner's policies\. If you can successfully send email by using UTL\_MAIL, and you see the error `ORA-29278: SMTP transient error: 421 Service not available`, you are possibly being throttled\. If you experience throttling with email delivery, we recommend that you implement a backoff algorithm\. For more information about backoff algorithms, see [Error Retries and Exponential Backoff in AWS](http://docs.aws.amazon.com/general/latest/gr/api-retries.html) and [How to handle a "Throttling – Maximum sending rate exceeded" error](https://aws.amazon.com/blogs/ses/how-to-handle-a-throttling-maximum-sending-rate-exceeded-error/)\. 
++ Throttling\. SMTP port \(25\) is throttled based on the elastic network interface owner's policies\. If you can successfully send email by using UTL\_MAIL, and you see the error `ORA-29278: SMTP transient error: 421 Service not available`, you are possibly being throttled\. If you experience throttling with email delivery, we recommend that you implement a backoff algorithm\. For more information about backoff algorithms, see [Error Retries and Exponential Backoff in AWS](https://docs.aws.amazon.com/gr/api-retries.html) and [How to handle a "Throttling – Maximum sending rate exceeded" error](http://aws.amazon.com/blogs/ses/how-to-handle-a-throttling-maximum-sending-rate-exceeded-error/)\. 
 
-  You can request that this throttle be removed\. For more information, see [How do I remove the throttle on port 25 from my EC2 instance?](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-port-25-throttle/)\.
+  You can request that this throttle be removed\. For more information, see [How do I remove the throttle on port 25 from my EC2 instance?](http://aws.amazon.com/premiumsupport/knowledge-center/ec2-port-25-throttle/)\.
 
 ## Related Topics<a name="Oracle.Options.UTLMAIL.Related"></a>
 + [Working with Option Groups](USER_WorkingWithOptionGroups.md)

@@ -13,7 +13,7 @@ You can view whether a maintenance update is available for your DB instance by u
 If no maintenance update is available for a DB instance, the column value is **none** for it\.
 
 If a maintenance update is available for a DB instance, the following column values are possible:
-+ **required** – The maintenance action will be applied to the resource and can't be deferred\.
++ **required** – The maintenance action will be applied to the resource and can't be deferred indefinitely\.
 + **available** – The maintenance action is available, but it will not be applied to the resource automatically\. You can apply it manually\.
 + **next window** – The maintenance action will be applied to the resource during the next maintenance window\.
 + **In progress** – The maintenance action is in the process of being applied to the resource\.

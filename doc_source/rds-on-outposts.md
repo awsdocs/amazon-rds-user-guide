@@ -1,6 +1,6 @@
 # Working with Amazon RDS on AWS Outposts<a name="rds-on-outposts"></a>
 
-Amazon RDS on AWS Outposts extends Amazon RDS for MySQL and PostgreSQL databases to AWS Outposts environments\. AWS Outposts uses the same hardware as in public AWS Regions to bring AWS services, infrastructure, and operation models on\-premises\. With RDS on Outposts, you can provision managed DB instances close to the business applications that must run on\-premises\. For more information about AWS Outposts, see [AWS Outposts](https://aws.amazon.com/outposts/)\.
+Amazon RDS on AWS Outposts extends Amazon RDS for MySQL and PostgreSQL databases to AWS Outposts environments\. AWS Outposts uses the same hardware as in public AWS Regions to bring AWS services, infrastructure, and operation models on\-premises\. With RDS on Outposts, you can provision managed DB instances close to the business applications that must run on\-premises\. For more information about AWS Outposts, see [AWS Outposts](http://aws.amazon.com/outposts/)\.
 
 You use the same AWS Management Console, AWS CLI, and RDS API to provision and manage on\-premises RDS on Outposts DB instances as you do for RDS DB instances running in the AWS Cloud\. RDS on Outposts automates tasks, such as database provisioning, operating system and database patching, backup, and long\-term archival in Amazon S3\.
 
@@ -21,7 +21,7 @@ When network connectivity to the AWS Region isn't available, your DB instance co
 ## Prerequisites for Amazon RDS on AWS Outposts<a name="rds-on-outposts.prerequisites"></a>
 
 The following are prerequisites for using Amazon RDS on AWS Outposts:
-+ Install AWS Outposts in your on\-premises data center\. For more information about AWS Outposts, see [AWS Outposts](https://aws.amazon.com/outposts/)\.
++ Install AWS Outposts in your on\-premises data center\. For more information about AWS Outposts, see [AWS Outposts](http://aws.amazon.com/outposts/)\.
 + Make sure that you have at least one subnet available for RDS on Outposts\. You can use the same subnet for other workloads\.
 + Make sure that you have a reliable network connection between your Outpost and an AWS Region\.
 

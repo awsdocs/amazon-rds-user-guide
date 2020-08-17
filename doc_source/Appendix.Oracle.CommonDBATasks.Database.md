@@ -241,7 +241,7 @@ The `rdsadmin_diagnostic_util` procedures save the reports to the DB instance fi
 You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RDS for Oracle DB engine versions:
 + 11\.2\.0\.4\.v24 or higher 11\.2 versions
 + 12\.1\.0\.2\.v20 or higher 12\.1 versions
-+ 12\.2\.0\.2\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
++ 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
 + 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 18c versions
 + 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 19c versions
 
@@ -612,7 +612,7 @@ The following example resizes a temporary tablespace based on the tempfile with 
 exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
 ```
 
-For more information about read replicas for Oracle DB instances, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
+For more information about read replicas for Oracle DB instances, see [Working with Oracle Replicas for Amazon RDS](oracle-read-replicas.md)\.
 
 ## Purging the Recycle Bin<a name="Appendix.Oracle.CommonDBATasks.PurgeRecycleBin"></a>
 

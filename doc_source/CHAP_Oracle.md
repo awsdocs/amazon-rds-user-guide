@@ -384,7 +384,7 @@ The following parameters were removed in Oracle 12c Version 12\.2\.0\.1:
 + parallel\_degree\_level
 + use\_indirect\_data\_buffers
 
-The following parameter is not supported in Oracle 12c Version 12\.2\.0\.1:
+The following parameter is not supported in Oracle 12c Version 12\.2\.0\.1 and later:
 + sec\_case\_sensitive\_logon
 
 #### Amazon RDS Security Changes for Oracle 12c Version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Security"></a>
@@ -546,7 +546,7 @@ Amazon RDS Oracle supports the following Oracle Database features:
   For more information, see [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR)\.
 + Active Data Guard with Maximum Performance in the same AWS Region or across AWS Regions
 
-  For more information, see [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)\.
+  For more information, see [Working with Oracle Replicas for Amazon RDS](oracle-read-replicas.md)\.
 + Continuous Query Notification \(version 12\.1\.0\.2\.v7 and later\)
 
   For more information, see [ Using Continuous Query Notification \(CQN\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/adfns/cqn.html#GUID-373BAF72-3E63-42FE-8BEA-8A2AEFBF1C35) in the Oracle documentation\.
@@ -759,8 +759,8 @@ The following example creates a wallet for accessing [ https://status\.aws\.amaz
 
    ```
    orapki wallet create -wallet . -auto_login_only 
-   orapki wallet add -wallet . -trusted_cert -cert AmazonRootCA1.pem.pem -
-   auto_login_only orapki wallet display -wallet .
+   orapki wallet add -wallet . -trusted_cert -cert AmazonRootCA1.pem -auto_login_only 
+   orapki wallet display -wallet .
    ```
 
 1. Upload the wallet to your Amazon S3 bucket\.
@@ -772,7 +772,7 @@ The following example creates a wallet for accessing [ https://status\.aws\.amaz
 1. Connect to the DB instance, and create a directory in the database to hold the wallet\. The following example creates a directory called `SSL_WALLET`:
 
    ```
-   exec rdsadmin.rdsadmin_util.create_directory('SSL_WALLET');                        
+   exec rdsadmin.rdsadmin_util.create_directory('SSL_WALLET');                    
    ```
 
 1. Download the wallet from your Amazon S3 bucket to the Oracle DB instance\.

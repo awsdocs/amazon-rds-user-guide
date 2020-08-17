@@ -2,11 +2,18 @@
 
 Amazon RDS supports Oracle Application Express \(APEX\) through the use of the `APEX` and `APEX-DEV` options\. Oracle APEX can be deployed as a run\-time environment or as a full development environment for web\-based applications\. Using Oracle APEX, developers can build applications entirely within the web browser\. For more information, see [Oracle Application Express](https://apex.oracle.com/) in the Oracle documentation\. 
 
-Oracle APEX consists of two main components:
+Oracle APEX consists of the following main components:
 + A *repository* that stores the metadata for APEX applications and components\. The repository consists of tables, indexes, and other objects that are installed in your Amazon RDS DB instance\. 
-+ A *listener* that manages HTTP communications with Oracle APEX clients\. The listener accepts incoming connections from web browsers, forwards them to the Amazon RDS DB instance for processing, and then sends results from the repository back to the browsers\. The APEX Listener was renamed Oracle Rest Data Services \(ORDS\) in Oracle 12c\. 
++ A *listener* that manages HTTP communications with Oracle APEX clients\. The listener accepts incoming connections from web browsers, forwards them to the Amazon RDS DB instance for processing, and then sends results from the repository back to the browsers\. Amazon RDS for Oracle supports the following types of listeners:
+  + For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\. We recommend that you use the latest supported version of Oracle APEX and ORDS\. The documentation describes older versions for backwards compatibility only\.
+  + For APEX version 4\.1\.1, you can use Oracle APEX Listener version 1\.1\.4\.
+  + Oracle HTTP Server and `mod_plsql`\.
+**Note**  
+Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as a listener for APEX\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\. 
 
-When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. Install the Oracle APEX Listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
+  For more information about these listener types, see [About Choosing a Web Listener](https://docs.oracle.com/database/apex-5.1/HTMIG/choosing-web-listener.htm#HTMIG29321) in the Oracle documentation\.
+
+When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. Install your listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\.
 
 The APEX option uses storage on the DB instance class for your DB instance\. Following are the supported versions and approximate storage requirements for Oracle APEX\.
 
@@ -26,13 +33,13 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 |  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  12\.1 and 11g only  |  | 
 |  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  11g only  |  | 
 
-## Prerequisites for Oracle APEX and APEX Listener<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
+## Prerequisites for Oracle APEX and ORDS<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 
-The following are prerequisites for using Oracle APEX and APEX Listener: 
-+ Have SQL\*Plus on your DB instance to perform administrative tasks\. 
-+ Have the following software installed on the host computer that acts as the Oracle APEX Listener: 
-  + The Java Runtime Environment \(JRE\)\.
-  + Oracle Net Services, to enable the Oracle APEX Listener to connect to your Amazon RDS instance\. 
+To use Oracle APEX and ORDS, make sure you have the following: 
++ The Java Runtime Environment \(JRE\)
++ An Oracle client installation that includes the following:
+  + SQL\*Plus or SQL Developer for administration tasks
+  + Oracle Net Services for configuring connections to your Oracle instance
 
 ## Adding the Amazon RDS APEX Options<a name="Appendix.Oracle.Options.APEX.Add"></a>
 
@@ -96,23 +103,17 @@ The following command runs the stored procedure\.
 1. exec rdsadmin.rdsadmin_run_apex_rest_config('apex_listener_password', 'apex_rest_public_user_password');
 ```
 
-## Installing and Configuring a Listener for Use with Oracle APEX<a name="Appendix.Oracle.Options.APEX.Listener"></a>
+## Setting Up ORDS for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ORDS"></a>
 
-You are now ready to install and configure a listener for use with Oracle APEX\. You can use one of these products for this purpose: 
-+ For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\.
-+ For APEX version 4\.1\.1, use Oracle APEX Listener version 1\.1\.4\.
-+ Oracle HTTP Server and `mod_plsql`\.
+You are now ready to install and configure Oracle Rest Data Services \(ORDS\) for use with Oracle APEX\. For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\. 
 
-For more information about these listener types, see [About Choosing a Web Listener](https://docs.oracle.com/database/apex-5.1/HTMIG/choosing-web-listener.htm#HTMIG29321) in the Oracle documentation\.
+Install the listener on a separate host such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. For the examples in this section, we assume that the name of your host is `myapexhost.example.com`, and that your host is running Linux\.
 
-**Note**  
-Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as a listener for APEX\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\. 
+### Preparing to Install ORDS<a name="Appendix.Oracle.Options.APEX.ORDS.ords-setup"></a>
 
-Install the listener on a separate host such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. 
+Before you can install ORDS, you need to create a nonprivileged OS user, and then download and unzip the APEX installation file\.
 
-The following procedures show you how to install and configure either ORDS or the APEX Listener\. We assume that the name of your host is `myapexhost.example.com`, and that your host is running Linux\. 
-
-**To set up for listener installation**
+**To prepare for ORDS installation**
 
 1. Log in to `myapexhost.example.com` as `root`\. 
 
@@ -135,32 +136,29 @@ The following procedures show you how to install and configure either ORDS or th
 1. Unzip the file in the `/home/apexuser` directory\.
 
    ```
-   unzip apex_<version>.zip                    
+   unzip apex_<version>.zip                
    ```
 
    After you unzip the file, there is an `apex` directory in the `/home/apexuser` directory\.
 
-1. While you are still logged into `myapexhost.example.com` as `apexuser`, download the APEX Listener file from Oracle to your `/home/apexuser` directory: [http://www\.oracle\.com/technetwork/developer\-tools/apex\-listener/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex-listener/downloads/index.html) 
+1. While you are still logged into `myapexhost.example.com` as `apexuser`, download the Oracle REST Data Services file from Oracle to your `/home/apexuser` directory: [http://www\.oracle\.com/technetwork/developer\-tools/apex\-listener/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex-listener/downloads/index.html)\.
 
-While you are still in the directory from the previous procedure, install and run the listener program that you chose, as described in one of the procedures following:
-+ [To install and configure ORDS for use with Oracle APEX](#APEXORDSlistener)
-+ [To install APEX Listener for use with Oracle APEX](#APEXlistener)
+### Installing and Configuring ORDS<a name="Appendix.Oracle.Options.APEX.ORDS.ords-install"></a>
+
+Before you can use APEX, you need to download the ords\.war file, use Java to install ORDS, and then start the listener\.
 
 **To install and configure ORDS for use with Oracle APEX**
 
-1. Create a new directory based on ORDS and open the listener file\.
-
-   Run the following code:
+1. Create a new directory based on ORDS, and then unzip the listener file\.
 
    ```
    mkdir /home/apexuser/ORDS
-   cd /home/apexuser/ORDS 
-   unzip ../ords.<version>.zip
+   cd /home/apexuser/ORDS
    ```
 
 1. Download the file ords\.*version\.number*\.zip from [Oracle REST Data Services](http://www.oracle.com/technetwork/developer-tools/rest-data-services/downloads/index.html)\.
 
-1. Unzip the file in the `/home/apexuser/ORDS` directory\.
+1. Unzip the file into the `/home/apexuser/ORDS` directory\.
 
 1. Grant the master user the required privileges to install ORDS\.
 
@@ -176,7 +174,7 @@ While you are still in the directory from the previous procedure, install and ru
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_PROCEDURES', 'master_user', 'SELECT', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TAB_COLUMNS', 'master_user', 'SELECT', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TABLES', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'master_user', 'SELECT', true);      
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'master_user', 'SELECT', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('WPIUTL', 'master_user', 'EXECUTE', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_SESSION', 'master_user', 'EXECUTE', true);
    exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_UTILITY', 'master_user', 'EXECUTE', true);
@@ -255,23 +253,94 @@ These commands apply to ORDS version 19\.1 and later\.
      Enter `1`\.
    + Enter the APEX static resources location:
 
-     If you specified the default directory in [Installing and Configuring a Listener for Use with Oracle APEX](#Appendix.Oracle.Options.APEX.Listener), enter `/home/apexuser/apex/images`\. Otherwise, enter `unzip_path/apex/images`, where *unzip\_path* is the directory where you unzipped the file\.
+     If you unzipped APEX installation files into `/home/apexuser`, enter `/home/apexuser/apex/images`\. Otherwise, enter `unzip_path/apex/images`, where *unzip\_path* is the directory where you unzipped the file\.
    + Enter 1 if using HTTP or 2 if using HTTPS \[1\]:
 
      If you enter `1`, specify the HTTP port\. If you enter `2`, specify the HTTPS port and the SSL host name\. The HTTPS option prompts you to specify how you will provide the certificate:
      + Enter `1` to use the self\-signed certificate\.
      + Enter `2` to provide your own certificate\. If you enter `2`, specify the path for the SSL certificate and the path for the SSL certificate private key\.
 
-After you install ORDS, configure it by following the instructions in [To configure your listener](#APEXconfigurelistener)\.
+1. Set a password for the APEX `admin` user\. To do this, use SQL\*Plus to connect to your DB instance as the master user, and then run the following commands\.
 
-**To install APEX Listener for use with Oracle APEX**
+   ```
+   1. EXEC rdsadmin.rdsadmin_util.grant_apex_admin_role;
+   2. grant APEX_ADMINISTRATOR_ROLE to master;
+   3. @/home/apexuser/apex/apxchpwd.sql
+   ```
 
-1. Create a new directory based on the Apex Listener and open the listener file\.
+   Replace `master` with your master user name\. When the `apxchpwd.sql` script prompts you, enter a new `admin` password\. 
+
+1. Start the ORDS listener\. Run the following code\.
+
+   ```
+   java -jar ords.war
+   ```
+
+   The first time you start ORDS, you are prompted to provide the location of the APEX Static resources\. This images folder is located in the `/apex/images` directory in the installation directory for APEX\. 
+
+1. Return to the APEX administration window in your browser and choose **Administration**\. Next, choose **Application Express Internal Administration**\. When you are prompted for credentials, enter the following information: 
+   + **User name** – `admin` 
+   + **Password** – the password you set using the `apxchpwd.sql` script 
+
+   Choose **Login**, and then set a new password for the `admin` user\. 
+
+Your listener is now ready for use\.
+
+## Setting Up Oracle APEX Listener<a name="Appendix.Oracle.Options.APEX.Listener"></a>
+
+**Note**  
+Oracle APEX Listener is deprecated\. 
+
+Amazon RDS for Oracle continues to support APEX version 4\.1\.1 and Oracle APEX Listener version 1\.1\.4\. We recommend that you use the latest supported versions of Oracle APEX and ORDS\.
+
+Install Oracle APEX Listener on a separate host such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\. We assume that the name of your host is `myapexhost.example.com`, and that your host is running Linux\.
+
+### Preparing to Install Oracle APEX Listener<a name="Appendix.Oracle.Options.APEX.Listener.preparing"></a>
+
+Before you can install Oracle APEX Listener, you need to create a nonprivileged OS user, and then download and unzip the APEX installation file\.
+
+**To prepare for Oracle APEX Listener installation**
+
+1. Log in to `myapexhost.example.com` as `root`\. 
+
+1. Create a nonprivileged OS user to own the listener installation\. The following command creates a new user named *apexuser*\. 
+
+   ```
+   useradd -d /home/apexuser apexuser
+   ```
+
+   The following command assigns a password to the new user\. 
+
+   ```
+   passwd apexuser;
+   ```
+
+1. Log in to `myapexhost.example.com` as `apexuser`, and download the APEX installation file from Oracle to your `/home/apexuser` directory: 
+   + [http://www\.oracle\.com/technetwork/developer\-tools/apex/downloads/index\.html](http://www.oracle.com/technetwork/developer-tools/apex/downloads/index.html) 
+   + [Oracle Application Express Prior Release Archives](http://www.oracle.com/technetwork/developer-tools/apex/downloads/all-archives-099381.html) 
+
+1. Unzip the file in the `/home/apexuser` directory\.
+
+   ```
+   unzip apex_<version>.zip                
+   ```
+
+   After you unzip the file, there is an `apex` directory in the `/home/apexuser` directory\.
+
+1. While you are still logged into `myapexhost.example.com` as `apexuser`, download the Oracle APEX Listener file from Oracle to your `/home/apexuser` directory\.
+
+### Installing and Configuring Oracle APEX Listener<a name="Appendix.Oracle.Options.APEX.Listener.installing"></a>
+
+Before you can use APEX, you need to download the apex\.war file, use Java to install Oracle APEX Listener, and then start the listener\.
+
+**To install and configure Oracle APEX Listener**
+
+1. Create a new directory based on Oracle APEX Listener and open the listener file\.
 
    Run the following code:
 
    ```
-   language="bash">mkdir /home/apexuser/apexlistener
+   mkdir /home/apexuser/apexlistener
    cd /home/apexuser/apexlistener 
    unzip ../apex_listener.version.zip
    ```
@@ -295,7 +364,7 @@ After you install ORDS, configure it by following the instructions in [To config
    Database is not yet configured
    ```
 
-1. Leave the APEX Listener running so that you can use Oracle Application Express\. When you have finished this configuration procedure, you can run the listener in the background\. 
+1. Leave Oracle APEX Listener running so that you can use Oracle Application Express\. When you have finished this configuration procedure, you can run the listener in the background\. 
 
 1. From your web browser, go to the URL provided by the APEX Listener program\. The Oracle Application Express Listener administration window appears\. Enter the following information: 
    + **Username** – `APEX_PUBLIC_USER`
@@ -307,10 +376,6 @@ After you install ORDS, configure it by following the instructions in [To config
 
 1. Choose **Apply**\. The APEX administration window appears\. 
 
-After you install the APEX Listener, configure it as described following\.
-
-**To configure your listener**
-
 1. Set a password for the APEX `admin` user\. To do this, use SQL\*Plus to connect to your DB instance as the master user, and then run the following commands\.
 
    ```
@@ -320,14 +385,6 @@ After you install the APEX Listener, configure it as described following\.
    ```
 
    Replace `master` with your master user name\. When the `apxchpwd.sql` script prompts you, enter a new `admin` password\. 
-
-1. For ORDS, start the APEX Listener\. Run the following code\.
-
-   ```
-   java -jar ords.war
-   ```
-
-   The first time you start the APEX Listener, you are prompted to provide the location of the APEX Static resources\. This images folder is located in the `/apex/images` directory in the installation directory for APEX\. 
 
 1. Return to the APEX administration window in your browser and choose **Administration**\. Next, choose **Application Express Internal Administration**\. When you are prompted for credentials, enter the following information: 
    + **User name** – `admin` 
@@ -354,7 +411,7 @@ If you upgrade the APEX version and RESTful services were not configured in the 
 In some cases when you plan to do a major version upgrade of your DB instance, you might find that you're using an APEX version that isn't compatible with your target database version\. In these cases, you can upgrade your version of APEX before you upgrade your DB instance\. Upgrading APEX first can reduce the amount of time that it takes to upgrade your DB instance\. 
 
 **Note**  
-After upgrading APEX, install and configure a listener for use with the upgraded version\. For instructions, see [Installing and Configuring a Listener for Use with Oracle APEX](#Appendix.Oracle.Options.APEX.Listener)\.
+After upgrading APEX, install and configure a listener for use with the upgraded version\. For instructions, see [Setting Up Oracle APEX Listener](#Appendix.Oracle.Options.APEX.Listener)\.
 
 ## Removing the APEX Option<a name="Appendix.Oracle.Options.APEX.Remove"></a>
 

@@ -10,7 +10,7 @@ For more information about minor version support, see [MySQL on Amazon RDS Versi
 
 You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\. 
 
-Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\-West\) Region\. For more information on supported compliance standards, see [AWS Cloud Compliance](https://aws.amazon.com/compliance/)\. 
+Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\-West\) Region\. For more information on supported compliance standards, see [AWS Cloud Compliance](http://aws.amazon.com/compliance/)\. 
 
 For information about the features in each version of MySQL, see [The Main Features of MySQL](https://dev.mysql.com/doc/refman/8.0/en/features.html) in the MySQL documentation\.
 
@@ -73,9 +73,9 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 aws rds describe-db-engine-versions --default-only --engine mysql --engine-version 5.7 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
 ```
 
-With Amazon RDS, you control when to upgrade your MySQL instance to a new major version supported by Amazon RDS \(i\.e\. going from version 5\.5 to 5\.6 or version 5\.7 to 8\.0\)\. You can maintain compatibility with specific MySQL versions, test new versions with your application before deploying in production, and perform major version upgrades at times that best fit your schedule\.
+With Amazon RDS, you control when to upgrade your MySQL instance to a new major version supported by Amazon RDS\. You can maintain compatibility with specific MySQL versions, test new versions with your application before deploying in production, and perform major version upgrades at times that best fit your schedule\.
 
-But unless you specify otherwise, your DB instance will automatically be upgraded to new MySQL minor versions as they are supported by Amazon RDS \(i\.e\. going from version 5\.5\.15 to 5\.5\.16\)\. This patching occurs during your scheduled maintenance window\. If you want, you can modify a DB instance to turn off automatic minor version upgrades\. 
+When automatic minor version upgrade is enabled, your DB instance will be upgraded automatically to new MySQL minor versions as they are supported by Amazon RDS\. This patching occurs during your scheduled maintenance window\. You can modify a DB instance to enable or disable automatic minor version upgrades\. 
 
 If you opt out of automatically scheduled upgrades, you can manually upgrade to a supported minor version release by following the same procedure as you would for a major version update\. For information, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\. 
 
@@ -83,7 +83,7 @@ Amazon RDS currently supports the major version upgrades from MySQL version 5\.5
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
-For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](https://aws.amazon.com/rds/faqs/)\.
+For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
 
 ## MySQL Features Not Supported By Amazon RDS<a name="MySQL.Concepts.Features"></a>
 

@@ -19,7 +19,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | --- | --- | 
 | Authorizations per DB security group | 20 | 
 | Burst balance \(for instances <1 TiB\) | 3000 IOPS | 
-| Cross\-region snapshots copy requests | 5 | 
+| Cross\-region snapshot copy requests | 5 | 
 | DB instances | 40 | 
 | DB security groups | 25 | 
 | DB subnet groups | 50 | 
@@ -29,7 +29,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Option groups | 20 | 
 | Parameter groups | 50 | 
 | Proxies | 20 | 
-| Read replicas per master | 5 | 
+| Read replicas per primary | 5 | 
 | Reserved DB instances | 40 | 
 | Rules per security group | 20 | 
 | Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 

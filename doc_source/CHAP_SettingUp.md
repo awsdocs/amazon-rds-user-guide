@@ -88,7 +88,7 @@ https://your_account_alias.signin.aws.amazon.com/console/
 
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
 
-You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Managing Access Keys for Your AWS Account](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the* [Amazon RDS API Reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
+You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the* [Amazon RDS API Reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
 
 ## Determine Requirements<a name="CHAP_SettingUp.Requirements"></a>
 

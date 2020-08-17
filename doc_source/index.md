@@ -202,7 +202,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
    + [Upgrading an Oracle DB Snapshot](USER_UpgradeDBSnapshot.Oracle.md)
    + [Importing Data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)
-   + [Working with Oracle Read Replicas for Amazon RDS](oracle-read-replicas.md)
+   + [Working with Oracle Replicas for Amazon RDS](oracle-read-replicas.md)
    + [Oracle Character Sets Supported in Amazon RDS](Appendix.OracleCharacterSets.md)
    + [Options for Oracle DB Instances](Appendix.Oracle.Options.md)
       + [Amazon S3 Integration](oracle-s3-integration.md)

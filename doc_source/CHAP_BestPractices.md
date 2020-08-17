@@ -23,7 +23,7 @@ For common recommendations for Amazon RDS, see [Using Amazon RDS Recommendations
 The following are basic operational guidelines that everyone should follow when working with Amazon RDS\. Note that the Amazon RDS Service Level Agreement requires that you follow these guidelines:
 + Monitor your memory, CPU, and storage usage\. Amazon CloudWatch can be set up to notify you when usage patterns change or when you approach the capacity of your deployment, so that you can maintain system performance and availability\.
 + Scale up your DB instance when you are approaching storage capacity limits\. You should have some buffer in storage and memory to accommodate unforeseen increases in demand from your applications\. 
-+ Enable automatic backups and set the backup window to occur during the daily low in write IOPS\. That's when a backup is least disruptive to your database usage.
++ Enable automatic backups and set the backup window to occur during the daily low in write IOPS\. That's when a backup is least disruptive to your database usage\.
 + If your database workload requires more I/O than you have provisioned, recovery after a failover or database failure will be slow\. To increase the I/O capacity of a DB instance, do any or all of the following:
   + Migrate to a different DB instance class with high I/O capacity\.
   + Convert from magnetic storage to either General Purpose or Provisioned IOPS storage, depending on how much of an increase you need\. For information on available storage types, see [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)\.

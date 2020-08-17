@@ -13,7 +13,7 @@ You first use the Amazon RDS management tools or interfaces to create an Amazon 
 
 MariaDB is available in all of the AWS Regions\. For more information about AWS Regions, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-You can use Amazon RDS for MariaDB databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\. AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS Services in Scope by Compliance Program](https://aws.amazon.com/compliance/services-in-scope/)\. 
+You can use Amazon RDS for MariaDB databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA Compliance](http://aws.amazon.com/compliance/hipaa-compliance/)\. AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS Services in Scope by Compliance Program](http://aws.amazon.com/compliance/services-in-scope/)\. 
 
 Before creating your first DB instance, you should complete the steps in the setting up section of this guide\. For more information, see [Setting Up for Amazon RDS](CHAP_SettingUp.md)\. 
 
@@ -73,7 +73,7 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.3 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
 ```
 
-For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](https://aws.amazon.com/rds/faqs/)\.
+For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
 
 ## MariaDB Feature Support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
