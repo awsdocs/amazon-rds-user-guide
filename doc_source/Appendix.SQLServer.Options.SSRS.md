@@ -312,6 +312,16 @@ In this format, the following applies:
 
 1. Log in with the credentials for a domain user that you granted access with the `SSRS_GRANT_PORTAL_PERMISSION` task\.
 
+## Deploying Reports to SSRS<a name="SSRS.Deploy"></a>
+
+After you have access to the web portal, you can deploy reports to it\. You can use the Upload tool in the web portal to upload reports, or deploy directly from [SQL Server Data Tools \(SSDT\)](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt)\. When deploying from SSDT, ensure the following:
++ The user who launched SSDT has access to the SSRS web portal\.
++ The `TargetServerURL` value in the SSRS project properties is set to the HTTPS endpoint of the RDS DB instance suffixed with `ReportServer`, for example:
+
+  ```
+  https://myssrsinstance.cg034itsfake.us-east-1.rds.amazonaws.com:8443/ReportServer
+  ```
+
 ## Revoking System\-Level Permissions<a name="SSRS.Access.Revoke"></a>
 
 The `RDS_SSRS_ROLE` system role doesn't have sufficient permissions to delete system\-level role assignments\. To remove a user or user group from `RDS_SSRS_ROLE`, use the same stored procedure that you used to grant the role but use the `SSRS_REVOKE_PORTAL_PERMISSION` task type\.

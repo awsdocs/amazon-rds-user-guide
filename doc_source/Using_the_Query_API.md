@@ -1,6 +1,8 @@
 # Using the Query API<a name="Using_the_Query_API"></a>
 
-The following sections discuss the parameters and request authentication used with the Query API\.
+The following sections briefly discuss the parameters and request authentication used with the Query API\.
+
+For general information about how the Query API works, see [Query Requests](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html) in the *Amazon EC2 API Reference\.*
 
 ## Query Parameters<a name="query-parameters"></a>
 

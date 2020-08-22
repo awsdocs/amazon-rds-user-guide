@@ -56,7 +56,8 @@ When you create a read replica, Amazon RDS takes a DB snapshot of your source DB
 When creating a read replica, there are a few things to consider\. First, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. For MySQL DB instances, automatic backups are supported only for read replicas running MySQL 5\.6 and later, but not for MySQL versions 5\.5\. To enable automatic backups on an Amazon RDS MySQL version 5\.6 and later read replica, first create the read replica, then modify the read replica to enable automatic backups\.
 
 **Note**  
-Within an AWS Region, all read replicas must be created in the same virtual private cloud \(VPC\) based on Amazon VPC as the source DB instance\. This requirement applies even if VPC peering is configured in the AWS Region\.
+Within an AWS Region, all read replicas must be created in the same virtual private cloud \(VPC\) based on Amazon VPC as the source DB instance\. This requirement applies even if VPC peering is configured in the AWS Region\.  
+You can't create a read replica in a different AWS account from the source DB instance\.
 
 ### Console<a name="USER_ReadRepl.Create.Console"></a>
 

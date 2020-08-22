@@ -208,7 +208,7 @@ exec rdsadmin.rdsadmin_rman_util.disable_block_change_tracking;
 
 You can crosscheck archived redo logs using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.crosscheck_archivelog`\.
 
-You can use this procedure to crosscheck the archived redo logs registered in the control file and optionally delete the expired logs\. Each time an RMAN backup is performed, a record is made in the control file\. Over time, these records increase the size of the control file\. It is best practice to flush old, expired records periodically\.
+You can use this procedure to crosscheck the archived redo logs registered in the control file and optionally delete the expired logs records\. When RMAN makes a backup, it creates a record in the control file\. Over time, these records increase the size of the control file\. We recommend that you remove expired records periodically\.
 
 **Note**  
 Standard Amazon RDS backups don't use RMAN and therefore don't create records in the control file\.
@@ -224,7 +224,7 @@ This procedure also uses the following additional parameter\.
 
 | Parameter Name | Data Type | Valid Values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_delete_expired` | boolean | `TRUE`, `FALSE` | `TRUE` | No | When `TRUE`, delete expired archived redo logs from the control file\. When `FALSE`, retain the expired archived redo logs in the control file\.  | 
+| `p_delete_expired` | boolean | `TRUE`, `FALSE` | `TRUE` | No | When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.  | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
 + 11\.2\.0\.4\.v19 or higher 11\.2 versions
@@ -233,12 +233,23 @@ This procedure is supported for the following Amazon RDS for Oracle DB engine ve
 + All 18\.0\.0\.0 versions
 + All 19\.0\.0\.0 versions
 
-The following example deletes the expired archived redo logs from the control file\.
+The following example marks archived redo log records in the control file as expired, but does not delete the records\.
 
 ```
 BEGIN
     rdsadmin.rdsadmin_rman_util.crosscheck_archivelog(
         p_delete_expired      => FALSE,  
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+The following example deletes expired archived redo log records from the control file\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.crosscheck_archivelog(
+        p_delete_expired      => TRUE,  
         p_rman_to_dbms_output => FALSE);
 END;
 /

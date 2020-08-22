@@ -79,10 +79,10 @@ For a more detailed description of how baseline performance and I/O credit balan
 
 For a production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS \(input/output operations per second\) storage\. Provisioned IOPS storage is a storage type that delivers predictable performance, and consistently low latency\. Provisioned IOPS storage is optimized for online transaction processing \(OLTP\) workloads that have consistent performance requirements\. Provisioned IOPS helps performance tuning of these workloads\. 
 
-When you create a DB instance, you specify an IOPS rate and the size of the volume\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
-
 **Note**  
-Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\.  
+Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors That Affect Storage Performance](#CHAP_Storage.Other.Factors)\.
+
+When you create a DB instance, you specify the IOPS rate and the size of the volume\. The ratio of IOPS to allocated storage \(in GiB\) must be at least 0\.5\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
 
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 

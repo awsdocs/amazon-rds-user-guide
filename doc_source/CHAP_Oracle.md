@@ -597,7 +597,7 @@ This feature changes to Continuous Query Notification in version 12\.1 and later
 + Transparent Data Encryption \(TDE\)
 
   For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\.
-+ Unified Auditing, Mixed Mode \(version 12\.2 and later\)
++ Unified Auditing, Mixed Mode \(version 12\.1 and later\)
 
   For more information, see [ Mixed Mode Auditing](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/introduction-to-auditing.html#GUID-4A3AEFC3-5422-4320-A048-8219EC96EAC1) in the Oracle documentation\.
 + XML DB \(without the XML DB Protocol Server\)
@@ -614,6 +614,10 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Real Application Clusters \(Oracle RAC\)
 + Real Application Testing
 + Unified Auditing, Pure Mode
++ Workspace Manager \(WMSYS\) schema
+
+**Warning**  
+In general, Amazon RDS doesn't prevent you from creating schemas for unsupported features\. However, if you create schemas for Oracle features and components that require SYS privileges, you can damage the data dictionary and affect the availability of your instance\. Use only supported features and schemas that are available in [Options for Oracle DB Instances](Appendix.Oracle.Options.md)\.
 
 ## Oracle Database Parameter Support<a name="Oracle.Concepts.FeatureSupport.Parameters"></a>
 

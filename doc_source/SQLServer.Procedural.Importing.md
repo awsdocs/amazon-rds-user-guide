@@ -169,6 +169,9 @@ Some of the stored procedures require that you provide an Amazon Resource Name \
 
 If you also provide an optional AWS KMS encryption key, the format for the ARN of the key is `arn:aws:kms:region:account-id:key/key-id`\. For more information, see [ Amazon Resource Names \(ARNs\) and AWS Service Namespaces](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. You must use a symmetric AWS KMS CMK to encrypt your backups\. Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\. 
 
+**Note**  
+Whether or not you use a KMS key, the native backup and restore tasks enable server\-side Advanced Encryption Standard \(AES\) 256\-bit encryption by default for files uploaded to S3\.
+
 For instructions on how to call each stored procedure, see the following topics:
 + [Backing Up a Database](#SQLServer.Procedural.Importing.Native.Using.Backup)
 + [Restoring a Database](#SQLServer.Procedural.Importing.Native.Using.Restore)
@@ -207,6 +210,7 @@ The following parameters are optional:
 + `@kms_master_key_arn` – The ARN for the symmetric KMS CMK to use to encrypt the item\.
   + You can't use the default encryption key\. If you use the default key, the database won't be backed up\.
   +  If you don't specify a KMS key identifier, the backup file won't be encrypted\. For more information, see [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)\.
+  + When you specify a KMS key, client\-side encryption is used\.
   + Amazon RDS doesn't support asymmetric CMKs\. For more information, see [Using Symmetric and Asymmetric Keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.
 + `@overwrite_s3_backup_file` – A value that indicates whether to overwrite an existing backup file\.
   + `0` – Doesn't overwrite an existing file\. This value is the default\.
@@ -345,6 +349,8 @@ The following parameter is required for differential restores, but optional for 
 
 The following parameters are optional:
 + `@kms_master_key_arn` – If you encrypted the backup file, the KMS key to use to decrypt the file\.
+
+  When you specify a KMS key, client\-side encryption is used\.
 + `@type` – The type of restore\. Valid types are `DIFFERENTIAL` and `FULL`\. The default value is `FULL`\.
 
 **Note**  

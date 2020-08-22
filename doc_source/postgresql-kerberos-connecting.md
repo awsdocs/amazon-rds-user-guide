@@ -15,7 +15,7 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
 1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database:
    + For **Host**, enter the endpoint\. Use a format such as `PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com`\.
 
-     If you're using an on\-premises Microsoft Active Directory, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
+     If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
 
      For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com.`
    + For **Port**, enter the assigned port\.
@@ -47,7 +47,7 @@ To use psql to connect to PostgreSQL with Kerberos authentication, take the foll
    % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com" >> /etc/hosts
    ```
 
-   If you're using an on\-premises Microsoft Active Directory, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\.
+   If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\.
 
    For example, suppose that the domain name for your AWS Managed Active Directory is `corp.example.com`\. Then use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com` for the endpoint and put it in the `/etc/hosts` file\.
 
@@ -55,14 +55,14 @@ To use psql to connect to PostgreSQL with Kerberos authentication, take the foll
    % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.corp.example.com" >> /etc/hosts
    ```
 
-1. Use the following psql command to log in to a PostgreSQL DB instance that is integrated with Active Directory\.
+1. Use the following psql command to log in to a PostgreSQL DB instance that is integrated with Active Directory\. 
 
    ```
-   psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-instance-endpoint.AWS-Region.rds.amazonaws.com postgres
+   psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com postgres
    ```
 
-   If you're using an on\-premises Active Directory and the domain name from the previous step, use the following psql command instead to log in to the PostgreSQL DB cluster\.
+   To log in to the PostgreSQL DB cluster from a Windows client using an on\-premises Active Directory, use the following psql command with the domain name from the previous step \(`corp.example.com`\):
 
    ```
-   psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-instance-endpoint.AWS-Region.corp.example.com postgres
+   psql -U username@CORP.EXAMPLE.COM -p 5432 -h PostgreSQL-endpoint.AWS-Region.corp.example.com postgres
    ```

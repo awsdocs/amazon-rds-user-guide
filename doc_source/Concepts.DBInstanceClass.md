@@ -84,9 +84,9 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6g\.large | No | No | Preview | No | Preview | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.8xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.m5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -134,9 +134,9 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6g\.large | No | No | Preview | No | Preview | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.16xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | No | Yes | No | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.r5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -258,9 +258,11 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.z1d\.6xlarge  |  24  |  12  |  2  |  2, 4, 6, 8, 10, 12  |  1, 2  | 
 |  db\.z1d\.12xlarge  |  48  |  24  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 
+Currently, you can configure the number of CPU cores and threads per core only when the following conditions are met:
++ You are configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)
++ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
+
 **Note**  
-Currently, you can configure the number of CPU cores and threads per core only for Oracle DB instances\. For information about the DB instance classes supported by different Oracle database editions, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.  
-For Oracle DB instances, configuring the number of CPU cores and threads per core is only supported with the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.  
 You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Logging Amazon RDS API Calls with AWS CloudTrail](logging-using-cloudtrail.md)\.
 
 ### Setting the CPU Cores and Threads per CPU Core for a DB Instance Class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
@@ -365,7 +367,7 @@ aws rds modify-db-instance ^
 You can view the valid processor values for a particular DB instance class by running the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command and specifying the instance class for the `--db-instance-class` option\. For example, the output for the following command shows the processor options for the db\.r3\.large instance class\.  
 
 ```
-aws rds describe-orderable-db-instance-options --engine oracle-ee --db-instance-class db.r3.large           
+aws rds describe-orderable-db-instance-options --engine oracle-ee --db-instance-class db.r3.large
 ```
 Following is sample output for the command in JSON format\.  
 
@@ -419,6 +421,11 @@ In addition, you can run the following commands for DB instance class processor 
 + [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) – Shows the processor information for the specified DB instance\.
 + [describe\-db\-snapshots](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-snapshots.html) – Shows the processor information for the specified DB snapshot\.
 + [describe\-valid\-db\-instance\-modifications](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html) – Shows the valid modifications to the processor for the specified DB instance\.
+In the output of the preceding commands, the values for the processor features are not null only if the following conditions are met:  
++ You are using an Oracle DB instance\.
++ Your Oracle DB instance supports changing processor values\.
++ The current CPU core and thread settings are set to nondefault values\.
+If the preceding conditions aren't met, you can get the instance type using [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\. You can get the processor information for this instance type by running the EC2 operation [describe\-instance\-types](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-types.html)\.
 
 ##### Returning to Default Processor Settings for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example4"></a>
 
@@ -486,22 +493,27 @@ You can set the processor features for a DB instance when you call one of the fo
 + [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html)
 + [RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
-To configure the processor features of a DB instance class for a DB instance by using the Amazon RDS API, include the `ProcessFeatures` parameter in the call\. 
+To configure the processor features of a DB instance class for a DB instance by using the Amazon RDS API, include the `ProcessFeatures` parameter in the call\.
 
 The parameter has the following syntax\.
 
 ```
-ProcessFeatures "Name=coreCount,Value=<value>" "Name=threadsPerCore,Value=<value>"            
+ProcessFeatures "Name=coreCount,Value=<value>" "Name=threadsPerCore,Value=<value>"
 ```
 
 Specify the number of CPU cores with the `coreCount` feature name, and specify whether multiple threads per core are enabled with the `threadsPerCore` feature name\. 
 
-You can view the valid processor values for a particular instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation and specifying the instance class for the `DBInstanceClass` parameter\.
-
-In addition, you can use the following actions for DB instance class processor information:
+You can view the valid processor values for a particular instance class by running the [DescribeOrderableDBInstanceOptions](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOrderableDBInstanceOptions.html) operation and specifying the instance class for the `DBInstanceClass` parameter\. You can also use the following operations:
 + [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) – Shows the processor information for the specified DB instance\.
 + [DescribeDBSnapshots](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSnapshots.html) – Shows the processor information for the specified DB snapshot\.
 + [DescribeValidDBInstanceModifications](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeValidDBInstanceModifications.html) – Shows the valid modifications to the processor for the specified DB instance\.
+
+In the output of the preceding operations, the values for the processor features are not null only if the following conditions are met:
++ You are using an Oracle DB instance\.
++ Your Oracle DB instance supports changing processor values\.
++ The current CPU core and thread settings are set to nondefault values\.
+
+If the preceding conditions aren't met, you can get the instance type using [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. You can get the processor information for this instance type by running the EC2 operation [DescribeInstanceTypes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceTypes.html)\.
 
 ## Hardware Specifications for DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
 

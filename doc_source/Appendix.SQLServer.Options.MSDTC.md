@@ -398,7 +398,7 @@ In Amazon RDS for SQL Server, you run distributed transactions in the same way a
 RDS supports controlling MSDTC transaction traces and downloading them from the RDS DB instance for troubleshooting\. You can control transaction tracing sessions by running the following RDS stored procedure\.
 
 ```
-exec msdb.dbo.rds_msdtc_transaction_tracing 'trace_action'
+exec msdb.dbo.rds_msdtc_transaction_tracing 'trace_action',
 [@traceall='0|1'],
 [@traceaborted='0|1'],
 [@tracelong='0|1'];
@@ -416,7 +416,7 @@ The following parameters are optional:
 To start a new transaction tracing session, run the following example statement\.  
 
 ```
-exec msdb.dbo.rds_msdtc_transaction_tracing 'START'
+exec msdb.dbo.rds_msdtc_transaction_tracing 'START',
 @traceall='0',
 @traceaborted='1',
 @tracelong='1';
