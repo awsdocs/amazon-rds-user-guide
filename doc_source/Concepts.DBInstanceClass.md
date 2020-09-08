@@ -649,4 +649,4 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.t2\.small | 1 | Variable | 2 | Yes | No | — | Low | 
 | db\.t2\.micro | 1 | Variable | 1 | Yes | No | — | Low | 
 
-\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
+\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*

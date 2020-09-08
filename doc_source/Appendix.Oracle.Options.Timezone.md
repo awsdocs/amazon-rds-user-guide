@@ -1,8 +1,8 @@
 # Oracle Time Zone<a name="Appendix.Oracle.Options.Timezone"></a>
 
-You can use the time zone option to change the system time zone used by your Oracle DB instance\. For example, you might change the time zone of a DB instance to be compatible with an on\-premises environment, or a legacy application\. The time zone option changes the time zone at the host level\. Changing the time zone impacts all date columns and values, including `SYSDATE` and `SYSTIMESTAMP`\. 
+You can use the time zone option to change the system time zone used by your Oracle DB instance\. For example, you might change the time zone of a DB instance to be compatible with an on\-premises environment, or a legacy application\. The time zone option changes the time zone at the host level\. Changing the time zone impacts all date columns and values, including `SYSDATE` and `SYSTIMESTAMP`\.
 
-The time zone option differs from the `rdsadmin_util.alter_db_time_zone` command\. The `alter_db_time_zone` command changes the time zone only for certain data types\. The time zone option changes the time zone for all date columns and values\. For more information about `alter_db_time_zone`, see [Setting the Database Time Zone](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)\. 
+The time zone option differs from the `rdsadmin_util.alter_db_time_zone` command\. The `alter_db_time_zone` command changes the time zone only for certain data types\. The time zone option changes the time zone for all date columns and values\. For more information about `alter_db_time_zone`, see [Setting the Database Time Zone](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)\. For more information about upgrade considerations, see [Time Zone Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.DST)\.
 
 ## Prerequisites for Time Zone<a name="Appendix.Oracle.Options.Timezone.PreReqs"></a>
 

@@ -286,7 +286,7 @@ public class IAMDatabaseAuthenticationTester {
     private static final String DB_USER = "jane_doe";
     private static final String JDBC_URL = "jdbc:mysql://" + RDS_INSTANCE_HOSTNAME + ":" + RDS_INSTANCE_PORT;
 
-    private static final String SSL_CERTIFICATE = "rds-ca-2015-us-west-2.pem";
+    private static final String SSL_CERTIFICATE = "rds-ca-2019-us-west-2.pem";
 
     private static final String KEY_STORE_TYPE = "JKS";
     private static final String KEY_STORE_PROVIDER = "SUN";

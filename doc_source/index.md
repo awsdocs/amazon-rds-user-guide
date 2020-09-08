@@ -132,6 +132,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Collations and Character Sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
       + [Determining a Recovery Model for Your Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
       + [Determining the Last Failover Time](Appendix.SQLServer.CommonDBATasks.LastFailover.md)
+      + [Disabling Fast Inserts During Bulk Loading](Appendix.SQLServer.CommonDBATasks.DisableFastInserts.md)
       + [Dropping a Microsoft SQL Server Database](Appendix.SQLServer.CommonDBATasks.DropMirrorDB.md)
       + [Renaming a Microsoft SQL Server Database in a Multi-AZ Deployment](Appendix.SQLServer.CommonDBATasks.RenamingDB.md)
       + [Resetting the db_owner Role Password](Appendix.SQLServer.CommonDBATasks.ResetPassword.md)

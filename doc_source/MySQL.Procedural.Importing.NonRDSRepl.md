@@ -286,7 +286,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
      ```
      mysql> source backup.sql;
      ```
-   + For delimited\-text format, first create the database \(if it isn’t the default database you created when setting up the Amazon RDS DB instance\)\.
+   + For delimited\-text format, first create the database \(if it isn't the default database you created when setting up the Amazon RDS DB instance\)\.
 
      ```
      mysql> create database database_name;
@@ -298,7 +298,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
      ```
      mysql> source table1.sql
      $ mysql> source table2.sql
-     etc…
+     etc...
      ```
 
      Then import the data\.
@@ -306,7 +306,7 @@ By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as
      ```
      mysql> LOAD DATA LOCAL INFILE 'table1.txt' INTO TABLE table1 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '0x0d0a';
      $ mysql> LOAD DATA LOCAL INFILE 'table2.txt' INTO TABLE table2 FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '0x0d0a';
-     etc…
+     etc...
      ```
 
      To improve performance, you can perform these operations in parallel from multiple connections so that all of your tables get created and then loaded at the same time\.

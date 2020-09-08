@@ -1,8 +1,9 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server Versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
-+ SQL Server 2017 CU19 14\.00\.3281\.6, released per [KB4535007](https://support.microsoft.com/en-us/help/4535007/cumulative-update-19-for-sql-server-2017) on April 15, 2020\.
-+ SQL Server 2016 SP2 CU11 13\.00\.5598\.27, released per [KB4527378](https://support.microsoft.com/en-us/help/4527378/cumulative-update-11-for-sql-server-2016-sp2) on December 9, 2019\.
++ SQL Server 2019 CU5 15\.00\.4043\.16, released per [KB4552255](https://support.microsoft.com/en-us/help/4552255/cumulative-update-5-for-sql-server-2019) on June 22, 2020\.
++ SQL Server 2017 CU20 14\.00\.3294\.2, released per [KB4541283](https://support.microsoft.com/en-us/help/4541283/cumulative-update-20-for-sql-server-2017) on June 16, 2020\.
++ SQL Server 2016 SP2 CU13 13\.00\.5820\.21, released per [KB4549825](https://support.microsoft.com/en-us/help/4549825/cumulative-update-13-for-sql-server-2016-sp2) on June 16, 2020\.
 + SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
 + SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
@@ -25,7 +26,7 @@ The following are the common management tasks you perform with an Amazon RDS SQL
 | Task Area | Relevant Documentation | 
 | --- | --- | 
 |  **Instance Classes, Storage, and PIOPS** If you are creating a DB instance for production purposes, you should understand how instance classes, storage types, and Provisioned IOPS work in Amazon RDS\.   |  [DB Instance Class Support for Microsoft SQL Server](#SQLServer.Concepts.General.InstanceClasses) [Amazon RDS Storage Types](CHAP_Storage.md#Concepts.Storage)   | 
-|  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. Multi\-AZ deployments for SQL Server are implemented using SQL Server’s native DBM or AGs technology\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) [Multi\-AZ Deployments Using Microsoft SQL Server Database Mirroring or Always On Availability Groups ](#SQLServer.Concepts.General.Mirroring)  | 
+|  **Multi\-AZ Deployments** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. Multi\-AZ deployments for SQL Server are implemented using SQL Server's native DBM or AGs technology\.   |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) [Multi\-AZ Deployments Using Microsoft SQL Server Database Mirroring or Always On Availability Groups ](#SQLServer.Concepts.General.Mirroring)  | 
 |  **Amazon Virtual Private Cloud \(VPC\)** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. If your account does not have a default VPC, and you want the DB instance in a VPC, you must create the VPC and subnet groups before you create the DB instance\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Working with a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Security Groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\. The security group you create depends on what Amazon EC2 platform your DB instance is on, and whether you will access your DB instance from an Amazon EC2 instance\.   In general, if your DB instance is on the *EC2\-Classic* platform, you will need to create a DB security group; if your DB instance is on the *EC2\-VPC* platform, you will need to create a VPC security group\.   |  [Determining Whether You Are Using the EC2\-VPC or EC2\-Classic Platform](USER_VPC.FindDefaultVPC.md) [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)   | 
 |  **Parameter Groups** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
@@ -94,12 +95,12 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 ****  
 
-| SQL Server Edition | 2017 and 2016 Support Range | 2014 and 2012 Support Range | 
-| --- | --- | --- | 
-|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Web Edition  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
-|  Express Edition  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  | 
+| SQL Server Edition | 2019 Support Range | 2017 and 2016 Support Range | 2014 and 2012 Support Range | 
+| --- | --- | --- | --- | 
+|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Web Edition  |  `db.t3.small`–`db.t3.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
+|  Express Edition  |  `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  | 
 
 ## Microsoft SQL Server Security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
 
@@ -174,8 +175,9 @@ The following table shows the supported versions for all editions and all AWS Re
 
 | Major Version | Minor Version | RDS API `EngineVersion` and CLI `engine-version` | 
 | --- | --- | --- | 
-| SQL Server 2017 |  14\.00\.3281\.6 \(CU19\) 14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 14\.00\.3049\.1 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3281.6.v1` `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
-| SQL Server 2016 |  13\.00\.5598\.27 \(SP2 CU11\) 13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 Security Update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5598.27.v1` `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
+| SQL Server 2019 |  15\.00\.4043\.16 \(CU5\)  |  `15.00.4043.16.v1`  | 
+| SQL Server 2017 |  14\.00\.3294\.2 \(CU20\) 14\.00\.3281\.6 \(CU19\) 14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 14\.00\.3049\.1 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3294.2.v1` `14.00.3281.6.v1` `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
+| SQL Server 2016 |  13\.00\.5820\.21 \(SP2 CU13\) 13\.00\.5598\.27 \(SP2 CU11\) 13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 Security Update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5820.21.v1` `13.00.5598.27.v1` `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
 | SQL Server 2014 |  12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\) 12\.00\.5546\.0 \(SP2 CU5\) 12\.00\.5000\.0 \(SP2\)  |  `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1` `12.00.5546.0.v1` `12.00.5000.0.v1`  | 
 | SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\) 11\.00\.6020\.0 \(SP3\) 11\.00\.5058\.0 \(SP2\), except US East \(Ohio\), Canada \(Central\), and Europe \(London\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1` `11.00.6020.0.v1` `11.00.5058.0.v1`  | 
 
@@ -206,6 +208,29 @@ The table following displays the planned schedule of deprecations for major engi
 
 The supported SQL Server versions on Amazon RDS include the following features\.
 
+### Microsoft SQL Server 2019 Features<a name="SQLServer.Concepts.General.FeatureSupport.2019"></a>
+
+SQL Server 2019 includes many new features, such as the following: 
++ Accelerated database recovery \(ADR\) – Reduces crash recovery time after a restart or a long\-running transaction rollback\.
++ Intelligent Query Processing \(IQP\):
+  + Row mode memory grant feedback – Corrects excessive grants automatically, that would otherwise result in wasted memory and reduced concurrency\.
+  + Batch mode on rowstore – Enables batch mode execution for analytic workloads without requiring columnstore indexes\.
+  + Table variable deferred compilation – Improves plan quality and overall performance for queries that reference table variables\.
++ Intelligent performance:
+  + `OPTIMIZE_FOR_SEQUENTIAL_KEY` index option – Improves throughput for high\-concurrency inserts into indexes\.
+  + Improved indirect checkpoint scalability – Helps databases with heavy DML workloads\.
+  + Concurrent Page Free Space \(PFS\) updates – Enables handling as a shared latch rather than an exclusive latch\.
++ Monitoring improvements:
+  + `WAIT_ON_SYNC_STATISTICS_REFRESH` wait type – Shows accumulated instance\-level time spent on synchronous statistics refresh operations\.
+  + Database\-scoped configurations – Include `LIGHTWEIGHT_QUERY_PROFILING` and `LAST_QUERY_PLAN_STATS`\.
+  + Dynamic management functions \(DMFs\) – Include `sys.dm_exec_query_plan_stats` and `sys.dm_db_page_info`\.
++ Verbose truncation warnings – The data truncation error message defaults to include table and column names and the truncated value\.
++ Resumable online index creation – In SQL Server 2017, only resumable online index rebuild is supported\.
+
+For the full list of SQL Server 2019 features, see [What's new in SQL Server 2019 \(15\.x\)](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-ver15) in the Microsoft documentation\.
+
+For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
+
 ### Microsoft SQL Server 2017 Features<a name="SQLServer.Concepts.General.FeatureSupport.2017"></a>
 
 SQL Server 2017 includes many new features, such as the following: 
@@ -214,7 +239,7 @@ SQL Server 2017 includes many new features, such as the following:
 + GraphDB
 + Resumable index rebuilds
 
-For the full list of SQL Server 2017 features, see [What's New in SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2017) in the Microsoft documentation\.
+For the full list of SQL Server 2017 features, see [What's new in SQL Server 2017](https://docs.microsoft.com/en-us/sql/sql-server/what-s-new-in-sql-server-2017) in the Microsoft documentation\.
 
 For a list of unsupported features, see [Features Not Supported and Features with Limited Support](#SQLServer.Concepts.General.FeatureNonSupport)\. 
 
@@ -273,6 +298,7 @@ Amazon RDS supports change data capture \(CDC\) for your DB instances running Mi
 Amazon RDS supports CDC for the following SQL Server editions and versions:
 + Microsoft SQL Server Enterprise Edition \(All versions\) 
 + Microsoft SQL Server Standard Edition: 
+  + 2019
   + 2017
   + 2016 version 13\.00\.4422\.0 SP1 CU2 and later
 

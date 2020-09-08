@@ -43,15 +43,6 @@ To tell if your working set is almost all in memory, check the ReadIOPS metric \
 
 When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
 
-Enhanced Monitoring is available for the following database engines:
-+ MariaDB
-+ Microsoft SQL Server
-+ MySQL version 5\.5 or later
-+ Oracle
-+ PostgreSQL
-
-Enhanced monitoring is available for all DB instance classes except for `db.m1.small`\. Enhanced Monitoring is available in all regions except for AWS GovCloud \(US\-West\)\. 
-
 ## Using Metrics to Identify Performance Issues<a name="CHAP_BestPractices.UsingMetrics"></a>
 
  To identify performance issues caused by insufficient resources and other common bottlenecks, you can monitor the metrics available for your Amazon RDS DB instance\. 
@@ -60,7 +51,7 @@ Enhanced monitoring is available for all DB instance classes except for `db.m1.s
 
 You should monitor performance metrics on a regular basis to see the average, maximum, and minimum values for a variety of time ranges\. If you do so, you can identify when performance is degraded\. You can also set Amazon CloudWatch alarms for particular metric thresholds so you are alerted if they are reached\. 
 
-To troubleshoot performance issues, it’s important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\.
+To troubleshoot performance issues, it's important to understand the baseline performance of the system\. When you set up a new DB instance and get it running with a typical workload, you should capture the average, maximum, and minimum values of all of the performance metrics at a number of different intervals \(for example, one hour, 24 hours, one week, two weeks\) to get an idea of what is normal\. It helps to get comparisons for both peak and off\-peak hours of operation\. You can then use this information to identify when performance is dropping below standard levels\.
 
 **To view performance metrics**
 
@@ -174,7 +165,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 
 On a MySQL DB instance, observe the following table creation limits:
 + You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the DB instance is 200 GiB or larger in size\.
-+ You’re limited to 1000 tables if you are either using magnetic storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
++ You're limited to 1000 tables if you are either using magnetic storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
 
 We recommend these limits because having large numbers of tables significantly increases database recovery time after a failover or database crash\. If you need to create more tables than recommended, set the `innodb_file_per_table` parameter to 0\. For more information, see [Working with InnoDB Tablespaces to Improve Crash Recovery Times](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.Tables) and [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
 

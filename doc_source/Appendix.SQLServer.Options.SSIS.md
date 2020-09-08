@@ -48,7 +48,7 @@ If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the 
 + Import Column and Export Column transformations and the Script component on the Data Flow Task aren't supported\.
 + You can't enable dump on running SSIS packages, and you can't add data taps on SSIS packages\.
 + The SSIS Scale Out feature isn't supported\.
-+ You can’t deploy projects directly\. We provide RDS stored procedures to do this\. For more information, see [Deploying an SSIS Project](#SSIS.Deploy)\.
++ You can't deploy projects directly\. We provide RDS stored procedures to do this\. For more information, see [Deploying an SSIS Project](#SSIS.Deploy)\.
 + Build SSIS project \(\.ispac\) files with the `DoNotSavePasswords` protection mode for deploying on RDS\.
 + SSIS isn't supported on Always On instances with read replicas\.
 + You can't back up the SSISDB database that is associated with the `SSIS` option\.

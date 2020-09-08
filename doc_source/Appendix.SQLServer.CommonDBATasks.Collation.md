@@ -8,7 +8,10 @@ SQL Server supports collations at multiple levels\. You set the default server c
 
 ## Server\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Server"></a>
 
-When you create a Microsoft SQL Server DB instance, you can set the server collation that you want to use\. If you don't choose a different collation, the server\-level collation defaults to SQL\_Latin1\_General\_CP1\_CI\_AS\. The server collation is applied by default to all databases and database objects\. 
+When you create a Microsoft SQL Server DB instance, you can set the server collation that you want to use\. If you don't choose a different collation, the server\-level collation defaults to SQL\_Latin1\_General\_CP1\_CI\_AS\. The server collation is applied by default to all databases and database objects\.
+
+**Note**  
+You can't change the collation when you restore from a DB snapshot\.
 
 Currently, Amazon RDS supports the following server collations:
 

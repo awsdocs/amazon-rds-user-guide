@@ -113,7 +113,7 @@ The following diagram shows this scenario\.
 To connect your DB instance and your EC2 instance over the public internet, do the following:
 + Ensure that the EC2 instance is in a public subnet in the VPC\.
 + Ensure that the RDS DB instance was marked as publicly accessible\.
-+ A note about network ACLs here\. A network ACL is like a firewall for your entire subnet\. Therefore, all instances in that subnet are subject to network ACL rules\. By default, network ACLs allow all traffic and you generally don’t need to worry about them, unless you particularly want to add rules as an extra layer of security\. A security group, on the other hand, is associated with individual instances, and you do need to worry about security group rules\.
++ A note about network ACLs here\. A network ACL is like a firewall for your entire subnet\. Therefore, all instances in that subnet are subject to network ACL rules\. By default, network ACLs allow all traffic and you generally don't need to worry about them, unless you particularly want to add rules as an extra layer of security\. A security group, on the other hand, is associated with individual instances, and you do need to worry about security group rules\.
 + Add the necessary ingress rules to the DB security group for the RDS DB instance\.
 
   An ingress rule specifies a network port and a CIDR/IP range\. For example, you can add an ingress rule that allows port 3306 to connect to a MySQL RDS DB instance, and a CIDR/IP range of `203.0.113.25/32`\. For more information, see [Authorizing Network Access to a DB Security Group from an IP Range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.

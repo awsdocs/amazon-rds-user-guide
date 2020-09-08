@@ -11,7 +11,7 @@ Amazon RDS supports the following Microsoft SQL Server editions:
 + Express
 
 **Note**  
-Licensing for SQL Server Web Edition supports only public and internet\-accessible webpages, websites, web applications, and web services\. This level of support is required for compliance with Microsoft’s usage rights\. For more information, see [AWS Service Terms](http://aws.amazon.com/serviceterms)\. 
+Licensing for SQL Server Web Edition supports only public and internet\-accessible webpages, websites, web applications, and web services\. This level of support is required for compliance with Microsoft's usage rights\. For more information, see [AWS Service Terms](http://aws.amazon.com/serviceterms)\. 
 
 Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. There are no additional licensing requirements for Multi\-AZ deployments\. For more information, see [Multi\-AZ Deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\. 
 

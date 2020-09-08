@@ -55,7 +55,7 @@ AWS Directory Service creates a fully managed, Microsoft Active Directory in the
 Be sure to save this password\. AWS Directory Service doesn't store this password, and you can't retrieve or reset it\.
 + Creates a security group for the directory controllers\.
 
-When you launch an AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all your directory’s objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
+When you launch an AWS Directory Service for Microsoft Active Directory, AWS creates an Organizational Unit \(OU\) that contains all your directory's objects\. This OU, which has the NetBIOS name that you typed when you created your directory, is located in the domain root\. The domain root is owned and managed by AWS\. 
 
  The *admin* account that was created with your AWS Managed Microsoft AD directory has permissions for the most common administrative activities for your OU: 
 + Create, update, or delete users, groups, and computers\. 
@@ -242,7 +242,7 @@ CREATE LOGIN [<user or group>] FROM WINDOWS WITH DEFAULT_DATABASE = [master],
    DEFAULT_LANGUAGE = [us_english];
 ```
 
-Specify users or groups using the pre–Windows 2000 login name in the format `domainName\login_name`\. You can't use a User Principle Name \(UPN\) in the format *`login_name`*`@`*`DomainName`*\. For more information about CREATE LOGIN, see [https://msdn\.microsoft\.com/en\-us/library/ms189751\.aspx](https://msdn.microsoft.com/en-us/library/ms189751.aspx) in the Microsoft Developer Network documentation\.
+Specify users or groups using the pre\-Windows 2000 login name in the format `domainName\login_name`\. You can't use a User Principle Name \(UPN\) in the format *`login_name`*`@`*`DomainName`*\. For more information about CREATE LOGIN, see [https://msdn\.microsoft\.com/en\-us/library/ms189751\.aspx](https://msdn.microsoft.com/en-us/library/ms189751.aspx) in the Microsoft Developer Network documentation\.
 
 Users \(both humans and applications\) from your domain can now connect to the RDS SQL Server instance from a domain\-joined client machine using Windows authentication\.
 

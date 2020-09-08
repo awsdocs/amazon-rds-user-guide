@@ -88,7 +88,7 @@ The following table shows the range of Provisioned IOPS and storage size range f
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
-\* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, r5, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\. For more information on DB instance IOPS performance, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\.
+\* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, r5, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\. For more information on DB instance IOPS performance, see [Amazon EBS\-Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\.
 
 ### Combining Provisioned IOPS Storage with Multi\-AZ deployments or Read Replicas<a name="Overview.ProvisionedIOPS-support"></a>
 
@@ -124,7 +124,7 @@ Amazon RDS provides several metrics that you can use to determine how your DB in
 The following metrics are useful for monitoring storage for your DB instance: 
 +  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\. 
 +  **Latency** – The elapsed time between the submission of an I/O request and its completion\. This metric is reported as the average latency for a given time interval\. Amazon RDS reports read and write latency separately on 1\-minute intervals in units of seconds\. Typical values for latency are in the millisecond \(ms\)\. For example, Amazon RDS reports 2 ms as 0\.002 seconds\. 
-+  **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel’s maximum bandwidth\. 
++  **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel's maximum bandwidth\. 
 +  **Queue Depth** – The number of I/O requests in the queue waiting to be serviced\. These are I/O requests that have been submitted by the application but have not been sent to the device because the device is busy servicing other I/O requests\. Time spent waiting in the queue is a component of latency and service time \(not available as a metric\)\. This metric is reported as the average queue depth for a given time interval\. Amazon RDS reports queue depth in 1\-minute intervals\. Typical values for queue depth range from zero to several hundred\. 
 
 Measured IOPS values are independent of the size of the individual I/O operation\. This means that when you measure I/O performance, you should look at the throughput of the instance, not simply the number of I/O operations\. 
@@ -147,7 +147,7 @@ In some cases your database or application design results in concurrency issues,
 + Queue depth is consistently less than 1 because your application is not driving enough I/O operations\.
 + You experience query contention in the database even though some I/O capacity is unused\.
 
-If there isn’t at least one system resource that is at or near a limit, and adding threads doesn’t increase the database transaction rate, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, you should seek the advice of a database performance tuning expert\. 
+If there isn't at least one system resource that is at or near a limit, and adding threads doesn't increase the database transaction rate, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, you should seek the advice of a database performance tuning expert\. 
 
 **DB instance class**
 

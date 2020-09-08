@@ -2,7 +2,7 @@
 
 Amazon RDS uses AWS Identity and Access Management \(IAM\)[ service\-linked roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role)\. A service\-linked role is a unique type of IAM role that is linked directly to Amazon RDS\. Service\-linked roles are predefined by Amazon RDS and include all the permissions that the service requires to call other AWS services on your behalf\. 
 
-A service\-linked role makes using Amazon RDS easier because you don’t have to manually add the necessary permissions\. Amazon RDS defines the permissions of its service\-linked roles, and unless defined otherwise, only Amazon RDS can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy cannot be attached to any other IAM entity\.
+A service\-linked role makes using Amazon RDS easier because you don't have to manually add the necessary permissions\. Amazon RDS defines the permissions of its service\-linked roles, and unless defined otherwise, only Amazon RDS can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy cannot be attached to any other IAM entity\.
 
 You can delete the roles only after first deleting their related resources\. This protects your Amazon RDS resources because you can't inadvertently remove permission to access the resources\.
 
@@ -131,7 +131,7 @@ Amazon RDS does not allow you to edit the AWSServiceRoleForRDS service\-linked r
 
 ## Deleting a Service\-Linked Role for Amazon RDS<a name="delete-service-linked-role"></a>
 
-If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don’t have an unused entity that is not actively monitored or maintained\. However, you must delete all of your DB instances before you can delete the service\-linked role\.
+If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don't have an unused entity that is not actively monitored or maintained\. However, you must delete all of your DB instances before you can delete the service\-linked role\.
 
 ### Cleaning Up a Service\-Linked Role<a name="service-linked-role-review-before-delete"></a>
 

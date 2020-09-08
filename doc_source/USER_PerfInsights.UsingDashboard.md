@@ -247,18 +247,14 @@ The following screenshot shows the statistics for a SQL statement\.
 
 ## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
-By default, each row in the **Top sql** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The Performance Insights dashboard can display up to 4,096 bytes for a SQL statement\. You can copy the displayed SQL statement\. To view more than 4,096 bytes, choose **Download**\.
-
-The limit for SQL text depends on the DB engine\. The following limits apply:
+By default, each row in the **Top sql** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The dashboard displays text up to the following per\-engine limits:
 + Amazon RDS for Microsoft SQL Server – 4,096 characters
 + Amazon RDS for MySQL and MariaDB – 1,024 bytes
 + Amazon RDS for Oracle – 1,000 bytes
-+ Amazon RDS for PostgreSQL – Set by the `track_activity_query_size` DB instance parameter
 
-For Amazon RDS for PostgreSQL DB instances, you can control the limit of the SQL text size by setting the `track_activity_query_size` DB instance parameter, up to 102,400 bytes\. You can use the AWS Management Console to download SQL text up to the limit you set with this parameter\. For more information, see [Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
+You can copy the text that is displayed on the dashboard, or choose **Download**\.
 
-**Important**  
-Currently, you can only view and download more SQL text with the AWS Management Console\. The AWS Performance Insights CLI and API can return a maximum of 500 bytes of text\.
+Amazon RDS for PostgreSQL handles text differently\. Using the Performance Insights dashboard, you can view and download up to 500 bytes\. To access more than 500 bytes, set the size limit with the DB instance parameter `track_activity_query_size`\. The maximum value is 102,400 bytes\. To view or download text over 500 bytes, use the AWS Management Console, not the Performance Insights CLI or API\. For more information, see [Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
 **To view more SQL text in the Performance Insights dashboard**
 

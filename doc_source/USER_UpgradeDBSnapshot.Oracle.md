@@ -2,7 +2,7 @@
 
 If you have existing manual DB snapshots, you can upgrade them to a later version of the Oracle database engine\. 
 
-When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle Engine Version Management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn about upgrading snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE Using Snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
+When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle Engine Version Management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn how to upgrade snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE Using Snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
 
 The following snapshot upgrades are currently supported\. 
 
@@ -12,7 +12,7 @@ The following snapshot upgrades are currently supported\.
 | Current Snapshot Version | Supported Snapshot Upgrade | 
 | --- | --- | 
 |  12\.1\.0\.1  |  12\.1\.0\.2\.v8  | 
-|  11\.2\.0\.4  |  12\.1\.0\.2, 12\.2\.0\.1, 18c, and 19c, but only if the minor version is not a downgrade  | 
+|  11\.2\.0\.4  |  12\.1\.0\.2, 12\.2\.0\.1, 18c, and 19c when the following conditions are met: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.Oracle.html)  | 
 | 11\.2\.0\.3 | 11\.2\.0\.4\.v11 | 
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
 
@@ -24,17 +24,19 @@ Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Snapshots**, and then select the DB snapshot that you want to upgrade\. 
+1. In the navigation pane, choose **Snapshots**, and then select the DB snapshot that you want to upgrade\.
 
-1. For **Actions**, choose **Modify Snapshot**\. The **Modify DB Snapshot** page appears\.
+1. For **Actions**, choose **Upgrade snapshot**\. The **Upgrade snapshot** page appears\.
 
-1. For **DB engine version**, choose the version to upgrade the snapshot to\. 
+1. Choose the **New engine version** to upgrade the snapshot to\.
 
 1. \(Optional\) For **Option group**, choose the option group for the upgraded DB snapshot\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
 
-1. Choose **Modify Snapshot** to save your changes\. 
+1. Choose **Save changes** to save your changes\.
 
-   Alternatively, choose **Cancel** to cancel your changes\. 
+   During the upgrade process, all snapshot actions are disabled for this DB snapshot\. Also, the DB snapshot status changes from **available** to **upgrading**, and then changes to **active** upon completion\. If the DB snapshot can't be upgraded because of snapshot corruption issues, the status changes to **unavailable**\. You can't recover the snapshot from this state\. 
+**Note**  
+If the DB snapshot upgrade fails, the snapshot is rolled back to the original state with the original version\.
 
 ## AWS CLI<a name="USER_UpgradeDBSnapshot.Oracle.CLI"></a>
 

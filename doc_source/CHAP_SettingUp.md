@@ -178,3 +178,6 @@ Once you have completed the setup requirements, you can launch a DB instance usi
 | MySQL | [Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance](CHAP_GettingStarted.CreatingConnecting.MySQL.md) | 
 | Oracle | [Creating an Oracle DB Instance and Connecting to a Database on an Oracle DB Instance](CHAP_GettingStarted.CreatingConnecting.Oracle.md) | 
 | PostgreSQL | [Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance](CHAP_GettingStarted.CreatingConnecting.PostgreSQL.md) | 
+
+**Note**  
+If you can't connect to a DB instance after you create it, see the troubleshooting information in [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

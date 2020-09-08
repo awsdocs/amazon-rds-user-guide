@@ -108,7 +108,7 @@ To create a license configuration by using the AWS CLI, call the [create\-licens
 The following code creates a license configuration for Oracle Enterprise Edition\.   
 
 ```
-aws license-manager create-license-configuration —cli-input-json file://rds-oracle-ee.json
+aws license-manager create-license-configuration -cli-input-json file://rds-oracle-ee.json
 ```
 The following is the sample `rds-oracle-ee.json` file used in the example\.  
 

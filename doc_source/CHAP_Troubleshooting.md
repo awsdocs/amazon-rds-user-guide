@@ -5,7 +5,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 **Topics**
 + [Can't Connect to Amazon RDS DB Instance](#CHAP_Troubleshooting.Connecting)
 + [Amazon RDS Security Issues](#CHAP_Troubleshooting.Security)
-+ [Resetting the DB Instance Owner Role Password](#CHAP_Troubleshooting.ResetPassword)
++ [Resetting the DB Instance Owner Password](#CHAP_Troubleshooting.ResetPassword)
 + [Amazon RDS DB Instance Outage or Reboot](#CHAP_Troubleshooting.Reboots)
 + [Amazon RDS DB Parameter Changes Not Taking Effect](#CHAP_Troubleshooting.Parameters)
 + [Amazon RDS DB Instance Running Out of Storage](#CHAP_Troubleshooting.Storage)
@@ -112,13 +112,11 @@ For more information on creating IAM users, see [Create an IAM User](CHAP_Settin
 
 You can get this error for several reasons\. It might be because your account is missing permissions, or your account hasn't been properly set up\. If your account is new, you might not have waited for the account to be ready\. If this is an existing account, you might lack permissions in your access policies to perform certain actions such as creating a DB instance\. To fix the issue, your IAM administrator needs to provide the necessary roles to your account\. For more information, see [the IAM documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/)\.
 
-## Resetting the DB Instance Owner Role Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
+## Resetting the DB Instance Owner Password<a name="CHAP_Troubleshooting.ResetPassword"></a>
 
-You can reset the assigned permissions for your DB instance by resetting the master password\. 
+If you get locked out of your DB instance, you can log in as the master user\. Then you can reset the credentials for other administrative users or roles\. If you can't log in as the master user, the AWS account owner can reset the master user password\. For details of which administrative accounts or roles you might need to reset, see [Master User Account Privileges](UsingWithRDS.MasterAccounts.md)\.
 
-For example, if you lock yourself out of the `db_owner` role on your SQL Server database, you can reset the `db_owner` role password by modifying the DB instance master password\. By changing the DB instance password, you can regain access to the DB instance\. By changing the DB instance password, you can also access databases using the modified password for `db_owner`, and restore privileges for the `db_owner` role that might have been accidentally revoked\. You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\.
-
-For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+You can change the DB instance password by using the Amazon RDS console, the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), or by using the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
 
 ## Amazon RDS DB Instance Outage or Reboot<a name="CHAP_Troubleshooting.Reboots"></a>
 
@@ -129,7 +127,7 @@ A DB instance outage can occur when a DB instance is rebooted\. It can also occu
  A DB instance reboot occurs immediately when one of the following occurs:
 + You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0 and set **Apply Immediately** to `true`\. 
 + You change the DB instance class, and **Apply Immediately** is set to `true`\. 
-+ You change the storage type from **Magnetic \(Standard\)** to **General Purpose \(SSD**\) or **Provisioned IOPS \(SSD\)**, or from **Provisioned IOPS \(SSD\)** or **General Purpose \(SSD\)** to **Magnetic \(Standard\)**\. 
++ You change the storage type from **Magnetic \(Standard\)** to **General Purpose \(SSD**\) or **Provisioned IOPS \(SSD\)**, or from **Provisioned IOPS \(SSD\)** or **General Purpose \(SSD\)** to **Magnetic \(Standard\)**\.
 
 A DB instance reboot occurs during the maintenance window when one of the following occurs:
 + You change the backup retention period for a DB instance from 0 to a nonzero value or from a nonzero value to 0, and **Apply Immediately** is set to `false`\. 

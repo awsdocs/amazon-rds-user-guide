@@ -4,7 +4,7 @@ In the following section, you can find how you can perform Oracle Recovery Manag
 
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to perform RMAN backups of your Amazon RDS for Oracle database to disk\. The `rdsadmin.rdsadmin_rman_util` package supports full and incremental database file backups, tablespace backups, and archive log backups\. 
 
-RMAN backups consume storage space on the Amazon RDS DB instance host\. When you perform a backup, you specify an Oracle directory object as a parameter in the procedure call\. The backup files are placed in the specified directory\. You can use default directories, such as `DATA_PUMP_DIR`, or create a new directory\. For more information, see [Creating New Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)\.
+RMAN backups consume storage space on the Amazon RDS DB instance host\. When you perform a backup, you specify an Oracle directory object as a parameter in the procedure call\. The backup files are placed in the specified directory\. You can use default directories, such as `DATA_PUMP_DIR`, or create a new directory\. For more information, see [Creating and Dropping Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)\.
 
 After an RMAN backup has finished, you can copy the backup files off the Amazon RDS for Oracle DB instance host\. You might do this for the purpose of restoring to a non\-RDS host or for long\-term storage of backups\. For example, you can copy the backup files to an Amazon S3 bucket\. For more information, see using [Amazon S3 Integration](oracle-s3-integration.md)\.
 

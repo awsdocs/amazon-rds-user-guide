@@ -175,7 +175,7 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
 You can have up to five concurrent DB snapshot export tasks in progress per account\. 
 
 **Note**  
-Exporting RDS Snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **STARTING**\. When the task switches to exporting data to Amazon S3, progress displays as **IN\_PROGRESS**\.   
+Exporting RDS snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **Starting**\. When the task switches to exporting data to Amazon S3, progress displays as **In progress**\.  
 The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column will take longer because the export uses a slower single threaded process\. 
 
 You can export a DB snapshot to Amazon S3 using the AWS Management Console, the AWS CLI, or the RDS API\.

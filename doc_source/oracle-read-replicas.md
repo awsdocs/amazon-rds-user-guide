@@ -171,9 +171,9 @@ https://rds.amazonaws.com/
 
 ## Modifying the Oracle Replica Mode<a name="oracle-read-replicas.changing-replica-mode"></a>
 
-To change the replica mode of an existing replica, use either the AWS CLI or RDS API\. When you change to mounted mode, the replica disconnects all active connections\. When you change to read\-only mode, Amazon RDS initializes Active Data Guard\.
+To change the replica mode of an existing replica database, use either the AWS CLI or RDS API\. When you change the replica mode to mounted, the replica disconnects all active connections\. When you change the mode to read\-only, Amazon RDS initializes Active Data Guard\.
 
-The change operation can take a few minutes\. During the operation, the DB instance status changes to **modifying**\. For more information about status changes, see [DB Instance Status](Overview.DBInstance.Status.md)\.
+The operation to change the replica mode can take a few minutes\. During the operation, the DB instance status changes to **modifying**\. For more information about status changes, see [DB Instance Status](Overview.DBInstance.Status.md)\.
 
 ### AWS CLI<a name="oracle-read-replicas.changing-replica-mode.cli"></a>
 
@@ -183,21 +183,17 @@ To change a read replica to mounted mode, set `--replica-mode` to `mounted` in t
 For Linux, macOS, or Unix:  
 
 ```
-aws rds create-db-instance-read-replica \
+aws rds modify-db-instance \
     --db-instance-identifier myreadreplica \
-    --source-db-instance-identifier mysourcedb \
     --replica-mode mode
 ```
 For Windows:  
 
 ```
-aws rds create-db-instance-read-replica ^
+aws rds modify-db-instance ^
     --db-instance-identifier myreadreplica ^
-    --source-db-instance-identifier mysourcedb ^
     --replica-mode mode
 ```
-
-To place a read replica into a mounted state, set `--replica-mode` to `mounted` in the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. To place a mounted replica in read\-only mode, set `--replica-mode` to `read-only`\.
 
 ### RDS API<a name="oracle-read-replicas.changing-replica-mode.api"></a>
 
@@ -205,7 +201,7 @@ To change a read\-only replica to mounted mode, set `ReplicaMode=mounted` in [Mo
 
 ```
 https://rds.amazonaws.com/
-	?Action=CreateDBInstanceReadReplica
+	?Action=ModifyDBInstance
 	&DBInstanceIdentifier=myreadreplica
 	&SourceDBInstanceIdentifier=mysourcedb
 	&Version=2012-01-15

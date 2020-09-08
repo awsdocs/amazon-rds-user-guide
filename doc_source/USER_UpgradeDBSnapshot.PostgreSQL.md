@@ -25,9 +25,9 @@ You can't upgrade automated DB snapshots that are created during the automated b
 
 1. For **Actions**, choose **Upgrade snapshot**\. The **Upgrade snapshot** page appears\. 
 
-1. Choose the **New engine version** to upgrade to\. 
+1. Choose the **New engine version** to upgrade to\.
 
-1. Choose **Save changes** to upgrade the snapshot\. 
+1. Choose **Save changes** to upgrade the snapshot\.
 
    During the upgrade process, all snapshot actions are disabled for this DB snapshot\. Also, the DB snapshot status changes from **available** to **upgrading**, and then changes to **active** upon completion\. If the DB snapshot can't be upgraded because of snapshot corruption issues, the status changes to **unavailable**\. You can't recover the snapshot from this state\. 
 **Note**  

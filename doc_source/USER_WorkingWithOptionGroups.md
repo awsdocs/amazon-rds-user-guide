@@ -432,7 +432,7 @@ To modify an option setting, use the Amazon RDS API [https://docs.aws.amazon.com
 
 Some options can be removed from an option group, and some cannot\. A persistent option cannot be removed from an option group until all DB instances associated with that option group are disassociated\. A permanent option can never be removed from an option group\. For more information about what options are removable, see the documentation for your specific engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
 
-If you remove all options from an option group, Amazon RDS doesn't delete the option group\. DB instances that are associated with the empty option group continue to be associated with it; they just won’t have any active options\. Alternatively, to remove all options from a DB instance, you can associate the DB instance with the default \(empty\) option group\. 
+If you remove all options from an option group, Amazon RDS doesn't delete the option group\. DB instances that are associated with the empty option group continue to be associated with it; they just won't have any active options\. Alternatively, to remove all options from a DB instance, you can associate the DB instance with the default \(empty\) option group\. 
 
 ### Console<a name="USER_WorkingWithOptionGroups.RemoveOption.Console"></a>
 

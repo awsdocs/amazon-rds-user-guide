@@ -267,17 +267,9 @@ FLUSH PRIVILEGES;
 
  To create a database user that you can connect to using Kerberos authentication, use an `IDENTIFIED WITH` clause on the `CREATE USER` statement\. For instructions, see [Step 5: Create Kerberos Authentication MySQL Logins](#mysql-kerberos-setting-up.create-logins)\. 
 
-To connect to MySQL with Kerberos authentication, take the following steps:
+To avoid errors, use the MariaDB `mysql` client\. You can download MariaDB software at [https://downloads\.mariadb\.org/](https://downloads.mariadb.org/)\.
 
-1. At a command prompt, run the following command\.
-
-   ```
-   kinit username                
-   ```
-
-   Replace *`username`* with the user name and, at the prompt, enter the password stored in the Microsoft Active Directory for the user\.
-
-1. Connect to one of the endpoints associated with your MySQL DB instance\. Follow the general procedures in [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. When you're prompted for the password, enter the Kerberos password associated with that user name\.
+At a command prompt, connect to one of the endpoints associated with your MySQL DB instance\. Follow the general procedures in [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. When you're prompted for the password, enter the Kerberos password associated with that user name\.
 
 ## Restoring a MySQL DB instance and Adding It to a Domain<a name="mysql-kerberos-restoring"></a>
 

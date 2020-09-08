@@ -142,6 +142,6 @@ If you have any snapshots that are encrypted using KMS, we recommend that you in
 
 ## Upgrading Deprecated DB Instances Before Support Ends<a name="USER_UpgradeDBInstance.SQLServer.DeprecatedVersions"></a>
 
-After a major version is deprecated, you can’t install it on new DB instances\. RDS will try to automatically upgrade all existing DB instances\. 
+After a major version is deprecated, you can't install it on new DB instances\. RDS will try to automatically upgrade all existing DB instances\. 
 
 If you need to restore a deprecated DB instance, you can do a point\-in\-time restore \(PITR\) or restore a snapshot\. Doing this gives you temporary access a DB instance that uses the version that is being deprecated\. However, after a major version is fully deprecated, these DB instances will also be automatically upgraded to a supported version\. 

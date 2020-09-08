@@ -745,7 +745,7 @@ The database logs should contain an entry similar to the following\.
 
 ```
 ...
-2017-06-12 19:09:49 UTC:…:rds_test@postgres:[11701]:LOG: AUDIT:
+2017-06-12 19:09:49 UTC:...:rds_test@postgres:[11701]:LOG: AUDIT:
 OBJECT,1,1,READ,SELECT,TABLE,public.t1,select * from t1;
 ...
 ```

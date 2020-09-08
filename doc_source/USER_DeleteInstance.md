@@ -18,7 +18,7 @@ You can only delete instances that don't have deletion protection enabled\. When
 
 When you delete a DB instance, you can choose to do one or both of the following:
 + Create a final DB snapshot\.
-  + To be able to restore your deleted DB instance later, create a final DB snapshot\. The final snapshot is retained, along with with any manual snapshots that were taken\.
+  + To be able to restore your deleted DB instance later, create a final DB snapshot\. The final snapshot is retained, along with any manual snapshots that were taken\.
   + To delete a DB instance quickly, you can skip creating a final DB snapshot\.
 **Note**  
 You can't create a final DB snapshot of your DB instance if it has the status `creating`, `failed`, `incompatible-restore`, or `incompatible-network`\. For more information, see [DB Instance Status](Overview.DBInstance.Status.md)\.

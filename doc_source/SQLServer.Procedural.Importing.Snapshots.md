@@ -363,7 +363,7 @@ The SQL Server Generate and Publish Scripts wizard is available as part of Micro
    ```
 
    The preceding code includes the following options:
-   + *table\_name* is the name of one of the tables that you’ve recreated in the target database and now want to populate with data\. 
+   + *table\_name* is the name of one of the tables that you've recreated in the target database and now want to populate with data\. 
    + *data\_file* is the full path and name of the data file to be created\.
    + `-n` specifies that the bulk copy uses the native data types of the data to be copied\.
    + `-S` specifies the SQL Server DB instance to export from\.

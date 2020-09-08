@@ -37,11 +37,21 @@ Follow these steps to create a VPC for your DB instance\.
 +  [Step 3: Create a DB Subnet Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateDBSubnetGroup)
 +  [Step 4: Create a VPC Security Group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)
 
+Each DB subnet group must include at least the Availability Zones in which the DB instance is located\.
+
 After you create the VPC, follow these steps to move your DB instance into the VPC\. 
 + [Updating the VPC for a DB Instance](#USER_VPC.VPC2VPC)
 
-The following are some limitations to moving your DB instance into the VPC\. 
-+ Moving a Multi\-AZ DB instance not in a VPC into a VPC is not currently supported\.
-+ Moving a DB instance with read replicas not in a VPC into a VPC is not currently supported\.
+We highly recommend that you create a backup of your DB instance immediately before the migration\. Doing so ensures that you can restore the data if the migration fails\. For more information, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
 
-If you move your DB instance into a VPC, and you are using a custom option group with your DB instance, then you need to change the option group that is associated with your DB instance\. Option groups are platform\-specific, and moving to a VPC is a change in platform\. To use a custom option group in this case, assign the default VPC option group to the DB instance, assign an option group that is used by other DB instances in the VPC you are moving to, or create a new option group and assign it to the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
+The following are some limitations to moving your DB instance into the VPC\. 
++ **Previous generation DB instance classes** – Previous generation DB instance classes might not be supported on the VPC platform\. When moving a DB instance to a VPC, choose a db\.m3 or db\.r3 DB instance class\. After you move the DB instance to a VPC, you can scale the DB instance to use a later DB instance class\. For a full list of VPC supported instance classes, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/)\. 
++ **Multi\-AZ** – Moving a Multi\-AZ DB instance not in a VPC into a VPC is not currently supported\. To move your DB instance to a VPC, first modify the DB instance so that it is a single\-AZ deployment\. Change the **Multi\-AZ deployment** setting to **No**\. After you move the DB instance to a VPC, modify it again to make it a Multi\-AZ deployment\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ **Read replicas** – Moving a DB instance with read replicas not in a VPC into a VPC is not currently supported\. To move your DB instance to a VPC, first delete all of its read replicas\. After you move the DB instance to a VPC, recreate the read replicas\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
++ **Option groups** – If you move your DB instance to a VPC, and the DB instance is using a custom option group, change the option group that is associated with your DB instance\. Option groups are platform\-specific, and moving to a VPC is a change in platform\. To use a custom option group in this case, assign the default VPC option group to the DB instance, assign an option group that is used by other DB instances in the VPC you are moving to, or create a new option group and assign it to the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
+
+#### Alternatives for Moving a DB Instance Not in a VPC into a VPC with Minimal Downtime<a name="USER_VPC.Non-VPC2VPC.Minimal-Downtime"></a>
+
+Using the following alternatives, you can move a DB instance not in a VPC into a VPC with minimal downtime\. These alternatives cause minimum disruption to the source DB instance and allow it to serve user traffic during the migration\. However, the time required to migrate to a VPC will vary based on the database size and the live workload characteristics\. 
++ **AWS Database Migration Service \(AWS DMS\)** – AWS DMS enables the live migration of data while keeping the source DB instance fully operational, but it replicates only a limited set of DDL statements\. AWS DMS doesn't propagate items such as indexes, users, privileges, stored procedures, and other database changes not directly related to table data\. In addition, AWS DMS doesn't automatically use RDS snapshots for the initial DB instance creation, which can increase migration time\. For more information, see [AWS Database Migration Service](https://aws.amazon.com/dms/)\. 
++ **DB snapshot restore or point\-in\-time recovery** – You can move a DB instance to a VPC by restoring a snapshot of the DB instance or by restoring a DB instance to a point in time\. For more information, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md) and [Restoring a DB Instance to a Specified Time](USER_PIT.md)\. 

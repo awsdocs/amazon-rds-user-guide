@@ -14,7 +14,7 @@ In addition, `AmazonRDSFullAccess` contains all the permissions needed for using
 
 ## Using a Custom IAM Policy<a name="USER_PerfInsights.access-control.custom-policy"></a>
 
-For users who don’t have full access with the `AmazonRDSFullAccess` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
+For users who don't have full access with the `AmazonRDSFullAccess` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
 
 **To create a custom policy**
 

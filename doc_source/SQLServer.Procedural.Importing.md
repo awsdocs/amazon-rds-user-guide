@@ -356,7 +356,7 @@ The following parameters are optional:
 **Note**  
 For differential restores, either the database must be in the RESTORING state or a task must already exist that restores with NORECOVERY\.  
 You can't restore later differential backups while the database is online\.  
-You can’t submit a restore task for a database that already has a pending restore task with RECOVERY\.  
+You can't submit a restore task for a database that already has a pending restore task with RECOVERY\.  
 Full restores with NORECOVERY and differential restores aren't supported on Multi\-AZ instances\.
 
 #### Examples<a name="SQLServer.Procedural.Importing.Native.Restore.Examples"></a>
@@ -474,7 +474,7 @@ The following parameters are optional:
 **Note**  
 For log restores, either the database must be in a state of restoring or a task must already exist that restores with NORECOVERY\.  
 You can't restore log backups while the database is online\.  
-You can’t submit a log restore task on a database that already has a pending restore task with RECOVERY\.  
+You can't submit a log restore task on a database that already has a pending restore task with RECOVERY\.  
 Log restores aren't supported on Multi\-AZ instances\.
 
 #### Examples<a name="SQLServer.Procedural.Importing.Native.Restore.Log.Examples"></a>
@@ -557,7 +557,7 @@ exec msdb.dbo.rds_drop_database @db_name='database_name';
 ```
 
 **Note**  
-You can’t submit a DROP database request for a database that already has a pending restore or finish restore task\.  
+You can't submit a DROP database request for a database that already has a pending restore or finish restore task\.  
 To drop the database, use the master login\. Or use the user login that most recently restored the database or log with NORECOVERY\.
 
 #### Snapshot Restore and Point\-in\-Time Recovery Behavior for Partially Restored Databases<a name="SQLServer.Procedural.Importing.Native.Snapshot.Restore"></a>
