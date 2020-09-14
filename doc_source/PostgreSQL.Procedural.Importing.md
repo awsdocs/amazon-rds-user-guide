@@ -560,8 +560,6 @@ psql=> SELECT aws_s3.table_import_from_s3(
 + [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)
 + [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri)
 + [aws\_commons\.create\_aws\_credentials](#USER_PostgreSQL.S3Import.create_aws_credentials)
-+ [Syntax](#USER_PostgreSQL.S3Import.create_aws_credentials-syntax)
-+ [Parameters](#USER_PostgreSQL.S3Import.create_aws_credentials-parameters)
 
 #### aws\_s3\.table\_import\_from\_s3<a name="aws_s3.table_import_from_s3"></a>
 
@@ -698,7 +696,7 @@ A required text string containing the AWS Region that the file is in\. For a lis
 
 Sets an access key and secret key in an `aws_commons._aws_credentials_1` structure\. Use the results of the `aws_commons.create_aws_credentials` function in the `credentials` parameter of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
-#### Syntax<a name="USER_PostgreSQL.S3Import.create_aws_credentials-syntax"></a>
+##### Syntax<a name="USER_PostgreSQL.S3Import.create_aws_credentials-syntax"></a>
 
 ```
 aws_commons.create_aws_credentials(
@@ -708,7 +706,7 @@ aws_commons.create_aws_credentials(
 )
 ```
 
-#### Parameters<a name="USER_PostgreSQL.S3Import.create_aws_credentials-parameters"></a>
+##### Parameters<a name="USER_PostgreSQL.S3Import.create_aws_credentials-parameters"></a>
 
 *access\_key*  
 A required text string containing the access key to use for importing an Amazon S3 file\. The default is NULL\.

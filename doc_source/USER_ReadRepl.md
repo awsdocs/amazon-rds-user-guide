@@ -13,11 +13,11 @@ The Oracle DB engine supports replica databases in mounted mode\. A mounted repl
 In some cases, a read replica resides in a different AWS Region from its primary DB instance\. In these cases, Amazon RDS sets up a secure communications channel between the primary DB instance and the read replica\. Amazon RDS establishes any AWS security configurations needed to enable the secure channel, such as adding security group entries\.
 
 Read replicas are supported by the MariaDB, MySQL, Oracle, PostgreSQL, and Microsoft SQL Server engines\. In this section, you can find general information about using read replicas with all of these engines\. For information about using read replicas with a specific engine, see the following sections:
-+ [Working with MySQL Read Replicas](USER_MySQL.Replication.ReadReplicas.md)
 + [Working with MariaDB Read Replicas](USER_MariaDB.Replication.ReadReplicas.md)
++ [Working with Read Replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
++ [Working with MySQL Read Replicas](USER_MySQL.Replication.ReadReplicas.md)
 + [Working with Oracle Replicas for Amazon RDS](oracle-read-replicas.md)
 + [Working with PostgreSQL Read Replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
-+ [Working with Read Replicas for Microsoft SQL Server in Amazon RDS](SQLServer.ReadReplicas.md)
 
 ## Overview of Amazon RDS Read Replicas<a name="USER_ReadRepl.Overview"></a>
 
@@ -32,6 +32,8 @@ By default, a read replica is created with the same storage type as the source D
 <a name="rds-read-replica-storage-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html)
 
 Amazon RDS doesn't support circular replication\. You can't configure a DB instance to serve as a replication source for an existing DB instance\. You can only create a new read replica from an existing DB instance\. For example, if **MyDBInstance** replicates to **ReadReplica1**, you can't configure **ReadReplica1** to replicate back to **MyDBInstance**\. For MariaDB and MySQL you can create a read replica from an existing read replica\. For example, from **ReadReplica1**, you can create a new read replica, such as **ReadReplica2**\. For Oracle, PostgreSQL, and SQL Server, you can't create a read replica from an existing read replica\.
+
+If you no longer need read replicas, you can explicitly delete them using the same mechanisms for deleting a DB instance\. If you delete a source DB instance without deleting its read replicas in the same AWS Region, each read replica is promoted to a standalone DB instance\. For information about deleting a DB instance, see [Deleting a DB Instance](USER_DeleteInstance.md)\. For information about read replica promotion, see [Promoting a Read Replica to Be a Standalone DB Instance](#USER_ReadRepl.Promote)\. If you have cross\-Region read replicas, see [Cross\-Region Replication Considerations](#USER_ReadRepl.XRgn.Cnsdr) for considerations related to deleting the source for a cross\-Region read replica\.
 
 ### Differences Between Read Replicas for Different DB Engines<a name="USER_ReadRepl.Overview.Differences"></a>
 
@@ -241,7 +243,7 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 1. Choose the other settings that you want to use:
    + For **DB instance identifier**, enter a name for the read replica\.
    + In the **Network & Security** section, choose a value for **Destination region** and **Destination DB subnet group**\.
-   + To create an encrypted read replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the destination AWS Region\.
+   + To create an encrypted read replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\) of the destination AWS Region\.
    + Choose the other settings that you want to use\.
 
 1. Choose **Create read replica**\.
@@ -260,7 +262,7 @@ For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in 
 +  `--source-region` — The AWS Region that the encrypted read replica is created in\. If `source-region` is not specified, you must specify a `pre-signed-url` value\. A `pre-signed-url` is an URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region that the read replica is created from\. To learn more about `pre-signed-url`, see [ `CreateDBInstanceReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
 +  `--source-db-instance-identifier` — The DB instance identifier for the encrypted read replica that is created\. This identifier must be in the ARN format for the source AWS Region\. The AWS Region specified in `source-db-instance-identifier` must match the AWS Region specified as `source-region`\.
 +  `--db-instance-identifier` — The identifier for the encrypted read replica in the destination AWS Region\.
-+  `--kms-key-id` — The AWS KMS key identifier for the key to use to encrypt the read replica in the destination AWS Region\.
++  `--kms-key-id` — The AWS KMS key identifier for the customer master key \(CMK\) to use to encrypt the read replica in the destination AWS Region\.
 
 The following code creates a read replica in the `us-west-2` Region\.
 

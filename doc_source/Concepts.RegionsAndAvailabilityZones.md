@@ -37,6 +37,9 @@ When you create a DB instance, you can choose a subnet in a Local Zone\. Local Z
 
 A Local Zone is represented by an AWS Region code followed by an identifier that indicates the location, for example `us-west-2-lax-1a`\.
 
+**Note**  
+A Local Zone can't be included in a Multi\-AZ deployment\.
+
 **To use a Local Zone**
 
 1. Enable the Local Zone in the Amazon EC2 console\.

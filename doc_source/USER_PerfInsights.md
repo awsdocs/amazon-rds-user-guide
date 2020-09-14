@@ -4,7 +4,7 @@ Performance Insights expands on existing Amazon RDS monitoring features to illus
 
 **Topics**
 + [Overview of Performance Insights](USER_PerfInsights.Overview.md)
-+ [Enabling Performance Insights](USER_PerfInsights.Enabling.md)
++ [Enabling and Disabling Performance Insights](USER_PerfInsights.Enabling.md)
 + [Accessing Performance Insights](USER_PerfInsights.access-control.md)
 + [Monitoring with the Performance Insights Dashboard](USER_PerfInsights.UsingDashboard.md)
 + [Customizing the Performance Insights Dashboard](USER_PerfInsights_Counters.md)

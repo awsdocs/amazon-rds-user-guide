@@ -20,6 +20,8 @@ Amazon RDS supports Kerberos authentication for Oracle DB instances in the follo
 + Europe \(London\)
 + Europe \(Stockholm\)
 + South America \(São Paulo\)
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
 
 **Note**  
 Kerberos authentication isn't supported for DB instance classes that are deprecated for Oracle DB instances\. For more information, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.

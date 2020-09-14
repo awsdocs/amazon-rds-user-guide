@@ -263,7 +263,7 @@ Currently, you can configure the number of CPU cores and threads per core only w
 + Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
 
 **Note**  
-You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Logging Amazon RDS API Calls with AWS CloudTrail](logging-using-cloudtrail.md)\.
+You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS ](logging-using-cloudtrail.md)\.
 
 ### Setting the CPU Cores and Threads per CPU Core for a DB Instance Class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
 

@@ -1,16 +1,16 @@
-# Enabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
+# Enabling and Disabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
 
-To use Performance Insights, you must enable it on your DB instance\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
+To use Performance Insights, enable it on your DB instance\. If needed, you can disable it later\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
 
 ## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
-You can use the console to enable Performance Insights when you create a new DB instance\. You can also modify a DB instance to enable Performance Insights\.
+In the console, you can enable or disable Performance Insights when you create or modify a new DB instance\.
 
-### Enabling Performance Insights with the Console When Creating a DB Instance<a name="USER_PerfInsights.Console.Creating"></a>
+### Enabling or Disabling Performance Insights When Creating an Instance<a name="USER_PerfInsights.Console.Creating"></a>
 
-When you create a new DB instance, Performance Insights is enabled when you choose **Enable Performance Insights** in the **Performance Insights** section\.
+When you create a new DB instance, enable Performance Insights by choosing **Enable Performance Insights** in the **Performance Insights** section\. Or choose **Disable Performance Insights**\.
 
 To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
 
@@ -18,27 +18,27 @@ The following screenshot shows the **Performance Insights** section\.
 
 ![\[Enable Performance Insights during DB instance creation with console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_enabling.png)
 
-You have the following options when you choose **Enable Performance Insights**:
+If you choose **Enable Performance Insights**, you have the following options:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-+ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
++ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
-### Enabling Performance Insights with the Console When Modifying a DB Instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
+### Enabling or Disabling Performance Insights When Modifying an Instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
 
-You can modify a DB instance to enable Performance Insights using the console\.
+In the console, you can modify a DB instance to enable or disable Performance Insights using the console\.
 
-**To enable Performance Insights for a DB instance using the console**
+**To enable or disable Performance Insights for a DB instance using the console**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. Choose **Databases**\.
 
-1. Choose the DB instance that you want to modify, and choose **Modify**\.
+1. Choose a DB instance, and choose **Modify**\.
 
-1. In the **Performance Insights** section, choose **Enable Performance Insights**\.
+1. In the **Performance Insights** section, choose either **Enable Performance Insights** or **Disable Performance Insights**\.
 
-   You have the following options when you choose **Enable Performance Insights**:
+   If you choose **Enable Performance Insights**, you have the following options:
    + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) key\. Performance Insights encrypts all potentially sensitive data using your AWS KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
 
@@ -50,19 +50,19 @@ You can modify a DB instance to enable Performance Insights using the console\.
 
 ## AWS CLI<a name="USER_PerfInsights.Enabling.CLI"></a>
 
-When you create a new DB instance using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command, Performance Insights is enabled when you specify `--enable-performance-insights`\. 
+When you use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command, enable Performance Insights by specifying `--enable-performance-insights`\. Or disable Performance Insights by specifying `--no-enable-performance-insights`\.
 
-You can also specify the `--enable-performance-insights` value using the following AWS CLI commands:
+You can also specify these values using the following AWS CLI commands:
 +  [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) 
 +  [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) 
 +  [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) 
 
-The following procedure describes how to enable Performance Insights for a DB instance using the AWS CLI\.
+The following procedure describes how to enable or disable Performance Insights for a DB instance using the AWS CLI\.
 
-**To enable Performance Insights for a DB instance using the AWS CLI**
+**To enable or disable Performance Insights for a DB instance using the AWS CLI**
 + Call the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command and supply the following values:
   + `--db-instance-identifier` – The name of the DB instance\.
-  + `--enable-performance-insights`
+  + `--enable-performance-insights` to enable or `--no-enable-performance-insights` to disable
 
   The following example enables Performance Insights for `sample-db-instance`\.
 
@@ -106,7 +106,7 @@ aws rds modify-db-instance ^
 
 ## RDS API<a name="USER_PerfInsights.Enabling.API"></a>
 
-When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation Amazon RDS API operation, Performance Insights is enabled when you set `EnablePerformanceInsights` to `True`\. 
+When you create a new DB instance using the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation Amazon RDS API operation, enable Performance Insights by setting `EnablePerformanceInsights` to `True`\. To disable Performance Insights, set `EnablePerformanceInsights` to `False`\.
 
 You can also specify the `EnablePerformanceInsights` value using the following API operations:
 +  [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 

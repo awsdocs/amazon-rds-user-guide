@@ -21,4 +21,5 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 + [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and mysql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.md)
 + [Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and psql Client](UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.PostgreSQL.md)
 + [Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Python \(Boto3\)](UsingWithRDS.IAMDBAuth.Connecting.Python.md)
++ [Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for \.NET](UsingWithRDS.IAMDBAuth.Connecting.NET.md)
 + [Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Java](UsingWithRDS.IAMDBAuth.Connecting.Java.md)

@@ -26,24 +26,24 @@ For Oracle DB instances, you can copy shared DB snapshots that have the `Timezon
 
 You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. To do this, you must take the following steps:
 
-1. Share the AWS Key Management Service \(AWS KMS\) encryption key that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
+1. Share the AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
 
-   You can share AWS KMS encryption keys with another AWS account by adding the other account to the KMS key policy\. For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing Access to an AWS KMS Encryption Key](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
+   You can share AWS KMS CMKs with another AWS account by adding the other account to the AWS KMS key policy\. For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing Access to an AWS KMS Customer Master Key \(CMK\)](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
 
 1. Use the AWS Management Console, AWS CLI, or Amazon RDS API to share the encrypted snapshot with the other accounts\.
 
 These restrictions apply to sharing encrypted snapshots:
 + You can't share encrypted snapshots as public\.
 + You can't share Oracle or Microsoft SQL Server snapshots that are encrypted using Transparent Data Encryption \(TDE\)\.
-+ You can't share a snapshot that has been encrypted using the default AWS KMS encryption key of the AWS account that shared the snapshot\. 
++ You can't share a snapshot that has been encrypted using the default AWS KMS CMK of the AWS account that shared the snapshot\. 
 
-### Allowing Access to an AWS KMS Encryption Key<a name="USER_ShareSnapshot.Encrypted.KeyPolicy"></a>
+### Allowing Access to an AWS KMS Customer Master Key \(CMK\)<a name="USER_ShareSnapshot.Encrypted.KeyPolicy"></a>
 
-For another AWS account to copy an encrypted DB snapshot shared from your account, the account that you share your snapshot with must have access to the KMS key that encrypted the snapshot\. To allow another AWS account access to an AWS KMS key, update the key policy for the KMS key with the ARN of the AWS account that you are sharing to as a `Principal` in the KMS key policy, and then allow the `kms:CreateGrant` action\.
+For another AWS account to copy an encrypted DB snapshot shared from your account, the account that you share your snapshot with must have access to the AWS KMS customer master key \(CMK\) that encrypted the snapshot\. To allow another AWS account access to an AWS KMS CMK, update the key policy for the AWS KMS CMK with the ARN of the AWS account that you are sharing to as a `Principal` in the AWS KMS key policy, and then allow the `kms:CreateGrant` action\.
 
-After you have given an AWS account access to your KMS encryption key, to copy your encrypted snapshot, that AWS account must create an AWS Identity and Access Management \(IAM\) user if it doesn't already have one\. In addition, that AWS account must also attach an IAM policy to that IAM user that allows the IAM user to copy an encrypted DB snapshot using your KMS key\. The account must be an IAM user and cannot be a root AWS account identity due to KMS security restrictions\. 
+After you have given an AWS account access to your AWS KMS CMK, to copy your encrypted snapshot, that AWS account must create an AWS Identity and Access Management \(IAM\) user if it doesn't already have one\. In addition, that AWS account must also attach an IAM policy to that IAM user that allows the IAM user to copy an encrypted DB snapshot using your AWS KMS CMK\. The account must be an IAM user and cannot be a root AWS account identity due to AWS KMS security restrictions\. 
 
-In the following key policy example, user `111122223333` is the owner of the KMS encryption key, and user `444455556666` is the account that the key is being shared with\. This updated key policy gives the AWS account access to the KMS key by including the ARN for the root AWS account identity for user `444455556666` as a `Principal` for the policy, and by allowing the `kms:CreateGrant` action\. 
+In the following key policy example, user `111122223333` is the owner of the AWS KMS CMK, and user `444455556666` is the account that the key is being shared with\. This updated key policy gives the AWS account access to the AWS KMS CMK by including the ARN for the root AWS account identity for user `444455556666` as a `Principal` for the policy, and by allowing the `kms:CreateGrant` action\. 
 
 ```
 {
@@ -88,9 +88,9 @@ In the following key policy example, user `111122223333` is the owner of the KMS
 
 #### Creating an IAM Policy to Enable Copying of the Encrypted Snapshot<a name="USER_ShareSnapshot.Encrypted.KeyPolicy.IAM"></a>
 
-Once the external AWS account has access to your KMS key, the owner of that AWS account can create a policy that allows an IAM user created for that account to copy an encrypted snapshot encrypted with that KMS key\.
+Once the external AWS account has access to your AWS KMS customer master key \(CMK\), the owner of that AWS account can create a policy that allows an IAM user created for that account to copy an encrypted snapshot encrypted with that AWS KMS CMK\.
 
-The following example shows a policy that can be attached to an IAM user for AWS account `444455556666` that enables the IAM user to copy a shared snapshot from AWS account `111122223333` that has been encrypted with the KMS key `c989c1dd-a3f2-4a5d-8d96-e793d082ab26` in the `us-west-2` region\.
+The following example shows a policy that can be attached to an IAM user for AWS account `444455556666` that enables the IAM user to copy a shared snapshot from AWS account `111122223333` that has been encrypted with the AWS KMS CMK `c989c1dd-a3f2-4a5d-8d96-e793d082ab26` in the `us-west-2` region\.
 
 ```
 {

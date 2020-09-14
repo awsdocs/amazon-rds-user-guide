@@ -262,7 +262,7 @@ aws secretsmanager create-secret \
 
 1.  Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html)\. Include the **Add Role to Database** step\. 
 
-1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created\. For the `kms:Decrypt` action, substitute the ARN of the default KMS key or your own KMS key, depending on which one you used to encrypt the Secrets Manager secrets\. 
+1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS customer master key \(CMK\) or your own AWS KMS CMK, depending on which one you used to encrypt the Secrets Manager secrets\. 
 
    ```
    {
@@ -596,7 +596,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
  You can grant a specific user access to the proxy by modifying the IAM policy\. An example follows\. 
 
 ```
-"Resource": "arn:aws:rds-db:us-east-2:1234567890:dbuser:db-ABCDEFGHIJKL01234/db_user”
+"Resource": "arn:aws:rds-db:us-east-2:1234567890:dbuser:prx-ABCDEFGHIJKL01234/db_user”
 ```
 
 ### Considerations for Connecting to a Proxy with PostgreSQL<a name="rds-proxy-connecting-postgresql"></a>

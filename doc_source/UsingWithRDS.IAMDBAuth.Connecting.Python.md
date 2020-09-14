@@ -13,7 +13,7 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 
 ## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken"></a>
 
-You can call the `generate_db_auth_token` method to obtain a signed token\. Provide the DB instance endpoint, port, user name, AWS Region, and DB engine to generate the token for connecting to a DB Instance with IAM credentials\. The following code example illustrates how to do this with a PostgreSQL database\.
+You can call the `generate_db_auth_token` method to obtain a signed token\. Provide the DB instance endpoint, port, user name, AWS Region, and DB engine to generate the token for connecting to a DB instance with IAM credentials\.
 
 This code generates an IAM authentication token for a MySQL DB instance\.
 
@@ -54,7 +54,7 @@ token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername
 
 ## Connecting to a DB Instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
 
-The following code example shows how to generate an authentication token, and then use it to connect to a DB instance running PostgreSQL\. 
+The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
 
 To run this code example, you need the [AWS SDK for Python \(Boto3\)](http://aws.amazon.com/sdk-for-python/), found on the AWS site\.
 

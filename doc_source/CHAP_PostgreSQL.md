@@ -174,6 +174,33 @@ Amazon RDS supports the following PostgreSQL versions\.
 
 #### PostgreSQL 13 Versions<a name="PostgreSQL.Concepts.General.version13"></a>
 
+**Topics**
++ [PostgreSQL Version 13 Beta 3 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version13beta3)
++ [PostgreSQL Version 13 Beta 1 on Amazon RDS in the Database Preview Environment](#PostgreSQL.Concepts.General.version13beta1)
+
+##### PostgreSQL Version 13 Beta 3 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version13beta3"></a>
+
+PostgreSQL version 13 Beta 3 contains several improvements that are described in [PostgreSQL 12\.4, 11\.9, 10\.14, 9\.6\.19, 9\.5\.23, and 13 Beta 3 Released\!](https://www.postgresql.org/about/news/2060/) 
+
+For information on the Database Preview Environment, see [Working with the Database Preview Environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
+
+This version also adds the following extensions:
++ address\_standardizer
++ address\_standardizer\_data\_us
++ log\_fdw
++ pgaudit
++ plcoffee
++ plls
++ plv8
++ PostGIS
++ postgis\_raster
++ postgis\_tiger\_geocoder
++ postgis\_topology
++ postgresql\-hll
++ rdkit
+
+For information on extensions and modules, see [PostgreSQL Version 13 Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)\.
+
 ##### PostgreSQL Version 13 Beta 1 on Amazon RDS in the Database Preview Environment<a name="PostgreSQL.Concepts.General.version13beta1"></a>
 
 PostgreSQL version 13 Beta 1 contains several improvements that are described in [PostgreSQL 13 Beta 1 Released](https://www.postgresql.org/about/news/2040/)\. 
@@ -789,6 +816,7 @@ Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 PostgreSQL supports many PostgreSQL extensions and modules\. Extensions and modules expand on the functionality provided by the PostgreSQL engine\. The following sections show the extensions and modules supported by Amazon RDS for the major PostgreSQL versions\.
 
 **Topics**
++ [PostgreSQL Version 13 Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)
 + [PostgreSQL Version 12 Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x)
 + [PostgreSQL Version 11\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x)
 + [PostgreSQL Version 10\.x Extensions and Modules Supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)
@@ -805,6 +833,74 @@ SHOW rds.extensions;
 
 **Note**  
 Parameters added in a minor version release might display inaccurately when using the `rds.extensions` parameter in `psql`\. 
+
+##### PostgreSQL Version 13 Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x"></a>
+
+The following table shows PostgreSQL extensions and modules for PostgreSQL version 13 that are currently supported on Amazon RDS\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/13/extend-extensions.html)\. 
+
+
+| Extensions and Modules | Version 13 Beta 3 | 
+| --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
+| [amcheck](https://www.postgresql.org/docs/current/amcheck.html) module | 1\.2 | 
+| aws\_commons —see [ Importing Data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import) | 1\.0 | 
+| aws\_s3 —see [ Importing Data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)  | 1\.0 | 
+| [ bloom](https://www.postgresql.org/docs/current/bloom.html) | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/current/btree-gin.html) | 1\.3 | 
+| [btree\_gist](http://www.postgresql.org/docs/current/btree-gist.html) | 1\.5 | 
+| [citext ](http://www.postgresql.org/docs/current/citext.html) | 1\.6 | 
+| [cube ](http://www.postgresql.org/docs/current/cube.html) | 1\.4 | 
+| [ dblink](http://www.postgresql.org/docs/current/dblink.html) | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/current/dict-int.html) | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/current/dict-xsyn.html) | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/current/earthdistance.html) | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/current/fuzzystrmatch.html) | 1\.1 | 
+| [hstore](http://www.postgresql.org/docs/current/hstore.html) | 1\.7 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/current/hstore.html) | 1\.0 | 
+| [ intagg](http://www.postgresql.org/docs/current/intagg.html) | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/current/intarray.html) | 1\.3 | 
+| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 
+| [isn ](http://www.postgresql.org/docs/current/isn.html) | 1\.2 | 
+| jsonb\_plperl | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw Extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.2 | 
+| [ltree ](http://www.postgresql.org/docs/current/ltree.html) | 1\.2 | 
+| [pageinspect](https://www.postgresql.org/docs/current/pageinspect.html) | 1\.8 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/current/pgbuffercache.html) | 1\.3 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/pgfreespacemap.html) | 1\.2 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html) | 1\.2 | 
+| [pg\_similarity](https://github.com/eulerto/pg_similarity) | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/current/pgstatstatements.html) | 1\.8 | 
+| pg\_transport — see [Transporting PostgreSQL Databases Between DB Instances ](PostgreSQL.Procedural.Importing.md#PostgreSQL.TransportableDB)  | 1\.0 | 
+| [pg\_trgm](http://www.postgresql.org/docs/current/pgtrgm.html) | 1\.5 | 
+| [pg\_visibility](https://www.postgresql.org/docs/current/pgvisibility.html) | 1\.2 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.5 | 
+| [pgcrypto](http://www.postgresql.org/docs/current/pgcrypto.html) | 1\.3 | 
+| [pgrouting](http://docs.pgrouting.org/latest/en/index.html) | 3\.0\.0 | 
+| [pgrowlocks](http://www.postgresql.org/docs/current/pgrowlocks.html) | 1\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/current/pgstattuple.html) | 1\.5 | 
+| [pgTAP](https://pgtap.org/)  | 1\.1\.0 | 
+| plcoffee | 2\.3\.15 | 
+| plls | 2\.3\.15 | 
+| [plperl](https://www.postgresql.org/docs/current/plperl.html) | 1\.0 | 
+| [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html) | 1\.0 | 
+| plprofiler | 4\.1 | 
+| [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html) | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.3\.15 | 
+| [PostGIS](http://www.postgis.net/) | 3\.0\.2 | 
+| postgis\_raster | 3\.0\.2 | 
+| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.2 | 
+| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.2 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/current/postgres-fdw.html) | 1\.0 | 
+| [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 
+| rdkit | 3\.8 | 
+| [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 
+| [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 
+| [tsm\_system\_rows](https://www.postgresql.org/docs/current/tsm-system-rows.html) | 1\.0 | 
+| [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html) | 1\.0 | 
+| [unaccent](http://www.postgresql.org/docs/current/unaccent.html) | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/current/uuid-ossp.html) | 1\.1 | 
 
 ##### PostgreSQL Version 12 Extensions and Modules Supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x"></a>
 

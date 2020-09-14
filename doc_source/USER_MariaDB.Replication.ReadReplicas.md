@@ -8,7 +8,6 @@ This section contains specific information about working with read replicas on A
 + [Multi\-AZ Read Replica Deployments with MariaDB](#USER_MariaDB.Replication.ReadReplicas.MultiAZ)
 + [Monitoring MariaDB Read Replicas](#USER_MariaDB.Replication.ReadReplicas.Monitor)
 + [Starting and Stopping Replication with MariaDB Read Replicas](#USER_MariaDB.Replication.ReadReplicas.StartStop)
-+ [Deleting Read Replicas with MariaDB](#USER_MariaDB.Replication.ReadReplicas.Delete)
 + [Troubleshooting a MariaDB Read Replica Problem](#USER_ReadRepl.Troubleshooting.MariaDB)
 
 ## Read Replica Configuration with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Configuration"></a>
@@ -51,10 +50,6 @@ When the `ReplicaLag` metric reaches 0, the replica has caught up to the source 
 You can stop and restart the replication process on an Amazon RDS DB instance by calling the system stored procedures [mysql\.rds\_stop\_replication](mysql_rds_stop_replication.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md)\. You can do this when replicating between two Amazon RDS instances for long\-running operations such as creating large indexes\. You also need to stop and start replication when importing or exporting databases\. For more information, see [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md) and [Exporting Data from a MySQL DB Instance by Using Replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\. 
 
 If replication is stopped for more than 30 consecutive days, either manually or due to a replication error, Amazon RDS ends replication between the source DB instance and all read replicas\. It does so to prevent increased storage requirements on the source DB instance and long failover times\. The read replica DB instance is still available\. However, replication can't be resumed because the binary logs required by the read replica are deleted from the source DB instance after replication is ended\. You can create a new read replica for the source DB instance to reestablish replication\. 
-
-## Deleting Read Replicas with MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.Delete"></a>
-
-You must explicitly delete read replicas, using the same mechanisms for deleting a DB instance\. If you delete the source DB instance without deleting the replicas, each replica is promoted to a standalone DB instance\. 
 
 ## Troubleshooting a MariaDB Read Replica Problem<a name="USER_ReadRepl.Troubleshooting.MariaDB"></a>
 

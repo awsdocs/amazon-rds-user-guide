@@ -138,7 +138,7 @@ For information about manually or automatically upgrading a SQL Server DB instan
 + [Best practices for upgrading SQL Server 2008 R2 to SQL Server 2016 on Amazon RDS for SQL Server](https://aws.amazon.com/blogs/database/best-practices-for-upgrading-sql-server-2008-r2-to-sql-server-2016-on-amazon-rds-for-sql-server/)
 
 **Important**  
-If you have any snapshots that are encrypted using KMS, we recommend that you initiate an upgrade before support ends\. 
+If you have any snapshots that are encrypted using AWS KMS, we recommend that you initiate an upgrade before support ends\. 
 
 ## Upgrading Deprecated DB Instances Before Support Ends<a name="USER_UpgradeDBInstance.SQLServer.DeprecatedVersions"></a>
 

@@ -20,9 +20,9 @@ When creating or modifying an Oracle replica, you can place it in either of the 
 + Read\-only\. This is the default\. Active Data Guard transmits and applies changes from the source database to all read replica databases\.
 
   You can create up to five read replicas from one source DB instance\. For general information about read replicas that applies to all DB engines, see [Working with Read Replicas](USER_ReadRepl.md)\. For information about Oracle Data Guard, see [Oracle Data Guard Concepts and Administration](https://docs.oracle.com/en/database/oracle/oracle-database/19/sbydb/oracle-data-guard-concepts.html#GUID-F78703FB-BD74-4F20-9971-8B37ACC40A65) in the Oracle documentation\.
-+ Mounted\. In this case, replication doesn't use Active Data Guard\.
++ Mounted\. In this case, replication uses Oracle Data Guard, but the replica database doesn't accept user connections\. The primary use for mounted replicas is cross\-Region disaster recovery\.
 
-  Because the replica database doesn't accept user connections, it can't serve a read\-only workload\. The mounted replica deletes archived redo log files after it applies them, regardless of the archived log retention policy\. The primary use for mounted replicas is cross\-Region disaster recovery\.
+  A mounted replica can't serve a read\-only workload\. The mounted replica deletes archived redo log files after it applies them, regardless of the archived log retention policy\.
 
 You can create a combination of mounted and read\-only DB replicas for the same source DB instance\. You can change a read\-only replica to mounted mode, or change a mounted replica to read\-only mode\. In either case, the Oracle database preserves the archived log retention setting\.
 

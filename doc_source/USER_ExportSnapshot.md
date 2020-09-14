@@ -58,7 +58,7 @@ The following procedure provides a high\-level view of how to export DB snapshot
 
    1. Identify the S3 bucket where the snapshot is to be exported to\. The S3 bucket must be in the same AWS Region as the snapshot\. For more information, see [Identifying the Amazon S3 Bucket to Export to](#USER_ExportSnapshot.SetupBucket)\.
 
-   1. Create an AWS Key Management Service \(AWS KMS\) key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+   1. Create an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) for the server\-side encryption\. The AWS KMS CMK is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
 
    1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing Access to an Amazon S3 Bucket Using an IAM Role](#USER_ExportSnapshot.SetupIAMRole)\. 
 
@@ -303,47 +303,47 @@ The following example shows how to display current information about all of your
  3. {
  4.     "ExportTasks": [
  5.         {
- 6.             "Status": "CANCELED", 
- 7.             "TaskEndTime": "2019-11-01T17:36:46.961Z", 
- 8.             "S3Prefix": "something", 
- 9.             "ExportTime": "2019-10-24T20:23:48.364Z", 
-10.             "S3Bucket": "awsexamplebucket", 
-11.             "PercentProgress": 0, 
-12.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/K7MDENG/bPxRfiCYEXAMPLEKEY", 
-13.             "ExportTaskIdentifier": "anewtest", 
-14.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3", 
-15.             "TotalExtractedDataInGB": 0, 
-16.             "TaskStartTime": "2019-10-25T19:10:58.885Z", 
+ 6.             "Status": "CANCELED",
+ 7.             "TaskEndTime": "2019-11-01T17:36:46.961Z",
+ 8.             "S3Prefix": "something",
+ 9.             "ExportTime": "2019-10-24T20:23:48.364Z",
+10.             "S3Bucket": "examplebucket",
+11.             "PercentProgress": 0,
+12.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/K7MDENG/bPxRfiCYEXAMPLEKEY",
+13.             "ExportTaskIdentifier": "anewtest",
+14.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3",
+15.             "TotalExtractedDataInGB": 0,
+16.             "TaskStartTime": "2019-10-25T19:10:58.885Z",
 17.             "SourceArn": "arn:aws:rds:AWS_Region:123456789012:snapshot:parameter-groups-test"
 18.         },
 19. {
-20.             "Status": "COMPLETE", 
-21.             "TaskEndTime": "2019-10-31T21:37:28.312Z", 
-22.             "WarningMessage": "{\"skippedTables\":[],\"skippedObjectives\":[],\"general\":[{\"reason\":\"FAILED_TO_EXTRACT_TABLES_LIST_FOR_DATABASE\"}]}", 
-23.             "S3Prefix": "", 
-24.             "ExportTime": "2019-10-31T06:44:53.452Z", 
-25.             "S3Bucket": "awsexamplebucket1", 
-26.             "PercentProgress": 100, 
-27.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/2Zp9Utk/h3yCo8nvbEXAMPLEKEY", 
+20.             "Status": "COMPLETE",
+21.             "TaskEndTime": "2019-10-31T21:37:28.312Z",
+22.             "WarningMessage": "{\"skippedTables\":[],\"skippedObjectives\":[],\"general\":[{\"reason\":\"FAILED_TO_EXTRACT_TABLES_LIST_FOR_DATABASE\"}]}",
+23.             "S3Prefix": "",
+24.             "ExportTime": "2019-10-31T06:44:53.452Z",
+25.             "S3Bucket": "examplebucket1",
+26.             "PercentProgress": 100,
+27.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/2Zp9Utk/h3yCo8nvbEXAMPLEKEY",
 28.             "ExportTaskIdentifier": "thursday-events-test", 
-29.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3", 
-30.             "TotalExtractedDataInGB": 263, 
-31.             "TaskStartTime": "2019-10-31T20:58:06.998Z", 
+29.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3",
+30.             "TotalExtractedDataInGB": 263,
+31.             "TaskStartTime": "2019-10-31T20:58:06.998Z",
 32.             "SourceArn": "arn:aws:rds:AWS_Region:123456789012:snapshot:rds:example-1-2019-10-31-06-44"
 33.         },
 34.         {
-35.             "Status": "FAILED", 
-36.             "TaskEndTime": "2019-10-31T02:12:36.409Z", 
-37.             "FailureCause": "The S3 bucket edgcuc-export isn't located in the current AWS Region. Please, review your S3 bucket name and retry the export.", 
-38.             "S3Prefix": "", 
-39.             "ExportTime": "2019-10-30T06:45:04.526Z", 
-40.             "S3Bucket": "awsexamplebucket2", 
-41.             "PercentProgress": 0, 
-42.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/2Zp9Utk/h3yCo8nvbEXAMPLEKEY", 
-43.             "ExportTaskIdentifier": "wednesday-afternoon-test", 
-44.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3", 
-45.             "TotalExtractedDataInGB": 0, 
-46.             "TaskStartTime": "2019-10-30T22:43:40.034Z", 
+35.             "Status": "FAILED",
+36.             "TaskEndTime": "2019-10-31T02:12:36.409Z",
+37.             "FailureCause": "The S3 bucket edgcuc-export isn't located in the current AWS Region. Please, review your S3 bucket name and retry the export.",
+38.             "S3Prefix": "",
+39.             "ExportTime": "2019-10-30T06:45:04.526Z",
+40.             "S3Bucket": "examplebucket2",
+41.             "PercentProgress": 0,
+42.             "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/2Zp9Utk/h3yCo8nvbEXAMPLEKEY",
+43.             "ExportTaskIdentifier": "wednesday-afternoon-test",
+44.             "IamRoleArn": "arn:aws:iam::123456789012:role/export-to-s3",
+45.             "TotalExtractedDataInGB": 0,
+46.             "TaskStartTime": "2019-10-30T22:43:40.034Z",
 47.             "SourceArn": "arn:aws:rds:AWS_Region:123456789012:snapshot:rds:example-1-2019-10-30-06-45"
 48.         }
 49.     ]
@@ -392,7 +392,7 @@ To cancel a snapshot export task using the AWS CLI, use the [cancel\-export\-tas
  3.     "Status": "CANCELING", 
  4.     "S3Prefix": "", 
  5.     "ExportTime": "2019-08-12T01:23:53.109Z", 
- 6.     "S3Bucket": "awsexamplebucket", 
+ 6.     "S3Bucket": "examplebucket", 
  7.     "PercentProgress": 0, 
  8.     "KmsKeyId": "arn:aws:kms:AWS_Region:123456789012:key/K7MDENG/bPxRfiCYEXAMPLEKEY", 
  9.     "ExportTaskIdentifier": "my_export", 

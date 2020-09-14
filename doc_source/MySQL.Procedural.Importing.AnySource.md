@@ -119,7 +119,7 @@ The example takes a final DB snapshot of the database instance before deleting i
 **Warning**  
 Do not disable automated backups if you need the ability to perform point\-in\-time recovery\.
 
-Disabling automated backups erases all existing backups, so point\-in\-time recovery is not possible after automated backups have been disabled\. Disabling automated backups is a performance optimization and is not required for data loads\. DB snapshots are not affected by disabling automated backups\. All existing DB snapshots are still available for restore\.
+Disabling automated backups erases all existing backups, so point\-in\-time recovery is not possible after automated backups have been disabled\. Disabling automated backups is a performance optimization and is not required for data loads\. Manual DB snapshots are not affected by disabling automated backups\. All existing manual DB snapshots are still available for restore\.
 
 Disabling automated backups reduces load time by about 25 percent and reduce the amount of storage space required during the load\. If you plan to load data into a new DB instance that contains no data, disabling backups is an easy way to speed up the load and avoid using the additional storage needed for backups\. However, if you plan to load into a DB instance that already contains data, weigh the benefits of disabling backups against the impact of losing the ability to perform point\-in\-time\-recovery\. 
 
