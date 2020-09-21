@@ -61,11 +61,7 @@ The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Ama
 Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 
 **PostgreSQL**  
-The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.  
-The db\.m5, db\.r5, and db\.t3 DB instance classes are supported for the following Amazon RDS PostgreSQL versions:  
-+ PostgreSQL 9\.6\.9 and higher 9\.6 versions
-+ PostgreSQL 10\.4 and higher 10 versions
-+ PostgreSQL 11\.1 and higher 11 versions
+The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.
 
 In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
 
@@ -75,13 +71,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | Preview db\.m6g – Newest Generation Standard Instance Classes | 
-| db\.m6g\.16xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.12xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.8xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.4xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.2xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.xlarge | No | No | Preview | No | Preview | 
-| db\.m6g\.large | No | No | Preview | No | Preview | 
+| db\.m6g\.16xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.12xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.8xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.4xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.2xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.m6g\.large | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
 | db\.m5 – Latest Generation Standard Instance Classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -126,12 +122,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | Preview db\.r6g – Newest Generation Memory Optimized Instance Classes | 
-| db\.r6g\.16xlarge | No | No | Preview | No | Preview | 
-| db\.r6g\.12xlarge | No | No | Preview | No | Preview | 
-| db\.r6g\.4xlarge | No | No | Preview | No | Preview | 
-| db\.r6g\.2xlarge | No | No | Preview | No | Preview | 
-| db\.r6g\.xlarge | No | No | Preview | No | Preview | 
-| db\.r6g\.large | No | No | Preview | No | Preview | 
+| db\.r6g\.16xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.r6g\.12xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.r6g\.4xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.r6g\.2xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.r6g\.xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
+| db\.r6g\.large | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 

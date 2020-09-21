@@ -1,22 +1,22 @@
 # Importing and Exporting SQL Server Databases<a name="SQLServer.Procedural.Importing"></a>
 
-Amazon RDS supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. When you use RDS, you access files stored in Amazon S3 rather than using the local file system on the database server\. 
+Amazon RDS supports native backup and restore for Microsoft SQL Server databases using full backup files \(\.bak files\)\. When you use RDS, you access files stored in Amazon S3 rather than using the local file system on the database server\.
 
-For example, you can create a full backup from your local server, store it on S3, and then restore it onto an existing Amazon RDS DB instance\. You can also make backups from RDS, store them on S3, and then restore them wherever you want\. 
+For example, you can create a full backup from your local server, store it on S3, and then restore it onto an existing Amazon RDS DB instance\. You can also make backups from RDS, store them on S3, and then restore them wherever you want\.
 
-Native backup and restore is available in all AWS Regions, and for both Single\-AZ and Multi\-AZ DB instances\. Native backup and restore is available for all editions of Microsoft SQL Server supported on Amazon RDS\. 
+Native backup and restore is available in all AWS Regions for Single\-AZ and Multi\-AZ DB instances, including Multi\-AZ DB instances with read replicas\. Native backup and restore is available for all editions of Microsoft SQL Server supported on Amazon RDS\.
 
 The following diagram shows the supported scenarios\.
 
 ![\[Native Backup and Restore Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-bak-files.png)
 
-Using native \.bak files to back up and restore databases is usually the fastest way to back up and restore databases\. There are many additional advantages to using native backup and restore\. For example, you can do the following: 
+Using native \.bak files to back up and restore databases is usually the fastest way to back up and restore databases\. There are many additional advantages to using native backup and restore\. For example, you can do the following:
 + Migrate databases to or from Amazon RDS\.
 + Move databases between RDS SQL Server DB instances\.
 + Migrate data, schemas, stored procedures, triggers, and other database code inside \.bak files\.
 + Backup and restore single databases, instead of entire DB instances\.
 + Create copies of databases for development, testing, training, and demonstrations\.
-+ Store and transfer backup files with Amazon S3, for an added layer of protection for disaster recovery\. 
++ Store and transfer backup files with Amazon S3, for an added layer of protection for disaster recovery\.
 
 ## Limitations and Recommendations<a name="SQLServer.Procedural.Importing.Native.Limitations"></a>
 
@@ -357,7 +357,8 @@ The following parameters are optional:
 For differential restores, either the database must be in the RESTORING state or a task must already exist that restores with NORECOVERY\.  
 You can't restore later differential backups while the database is online\.  
 You can't submit a restore task for a database that already has a pending restore task with RECOVERY\.  
-Full restores with NORECOVERY and differential restores aren't supported on Multi\-AZ instances\.
+Full restores with NORECOVERY and differential restores aren't supported on Multi\-AZ instances\.  
+Restoring a database on a Multi\-AZ instance with read replicas is similar to restoring a database on a Multi\-AZ instance\. You don't have to take any additional actions to restore a database on a replica\.
 
 #### Examples<a name="SQLServer.Procedural.Importing.Native.Restore.Examples"></a>
 

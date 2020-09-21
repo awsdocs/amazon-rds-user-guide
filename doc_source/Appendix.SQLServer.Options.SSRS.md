@@ -4,10 +4,13 @@ Microsoft SQL Server Reporting Services \(SSRS\) is a server\-based application 
 
 Amazon RDS for SQL Server supports running SSRS directly on RDS DB instances\. You can enable SSRS for existing or new DB instances\.
 
+RDS supports SSRS for SQL Server Standard and Enterprise Editions on the following versions:
++ SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
++ SQL Server 2016, version 13\.00\.5820\.21\.v1 and later
+
 ## Limitations and Recommendations<a name="SSRS.Limitations"></a>
 
 The following limitations and recommendations apply to running SSRS on RDS for SQL Server:
-+ SSRS is supported for SQL Server Standard and Enterprise Editions, version 14\.00\.3223\.3\.v1 and later\.
 + Instances must use AWS Managed Microsoft AD for SSRS web portal and web server authentication\.
 + Importing and restoring report server databases from other instances of SSRS isn't supported\.
 

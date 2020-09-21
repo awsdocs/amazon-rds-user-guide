@@ -52,6 +52,8 @@ The example policy includes a single statement with the following elements:
     ```
     aws rds describe-db-instances --query "DBInstances[*].[DBInstanceIdentifier,DbiResourceId]"
     ```
+**Note**  
+If you are connecting to a database through RDS Proxy, specify the proxy resource ID, such as `prx-ABCDEFGHIJKL01234`\. For information about using IAM database authentication with RDS Proxy, see [Connecting to a Proxy Using IAM Authentication](rds-proxy.md#rds-proxy-connecting-iam)\.
   + `db-user-name` is the name of the database account to associate with IAM authentication\. In the example policy, the database account is `db_user`\.
 
 You can construct other ARNs to support various access patterns\. The following policy allows access to two different database accounts in a DB instance\.

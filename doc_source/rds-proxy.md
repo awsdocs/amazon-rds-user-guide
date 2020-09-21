@@ -179,6 +179,7 @@
 +  You can't use RDS Proxy with Aurora clusters that are part of an Aurora global database\. 
 +  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
 +  You can't use RDS Proxy with a VPC that has dedicated tenancy\. 
++  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting Up AWS Identity and Access Management \(IAM\) Policies](#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
 +  You can't use RDS Proxy with custom DNS\. 
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
@@ -298,13 +299,6 @@ aws secretsmanager create-secret \
    {
      "Version": "2012-10-17",
      "Statement": [
-       {
-         "Effect": "Allow",
-         "Principal": {
-           "Service": "rds.amazonaws.com"
-         },
-         "Action": "sts:AssumeRole"
-       },
        {
          "Sid": "",
          "Effect": "Allow",
@@ -582,15 +576,18 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
 ### Connecting to a Proxy Using IAM Authentication<a name="rds-proxy-connecting-iam"></a>
 
- Follow the same general procedure as for connecting to an RDS DB instance or Aurora cluster using IAM authentication\. For general information about using IAM with RDS and Aurora, see [Security in Amazon RDS](UsingWithRDS.md)\. 
+ When you use IAM authentication with RDS Proxy, set up your database users to authenticate with regular user names and passwords\. The IAM authentication applies to RDS Proxy retrieving the user name and password credentials from Secrets Manager\. The connection from RDS Proxy to the underlying database doesn't go through IAM\. 
+
+ To connect to RDS Proxy using IAM authentication, follow the same general procedure as for connecting to an RDS DB instance or Aurora cluster using IAM authentication\. For general information about using IAM with RDS and Aurora, see [Security in Amazon RDS](UsingWithRDS.md)\. 
 
  The major differences in IAM usage for RDS Proxy include the following: 
++  You don't configure each individual database user with an authorization plugin\. The database users still have regular user names and passwords within the database\. You set up Secrets Manager secrets containing these user names and passwords, and authorize RDS Proxy to retrieve the credentials from Secrets Manager\. 
+**Important**  
+ The IAM authentication applies to the connection between your client program and the proxy\. The proxy then authenticates to the database using the user name and password credentials retrieved from Secrets Manager\. When you use IAM for the connection to a proxy, make sure that the underlying RDS DB instance or Aurora DB cluster doesn't have IAM enabled\. 
 +  Instead of the instance, cluster, or reader endpoint, you specify the proxy endpoint\. For details about the proxy endpoint, see [Connecting to Your DB Instance Using IAM Authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\. 
 +  In the direct DB IAM auth case, you selectively pick database users and configure them to be identified with a special auth plugin\. You can then connect to those users using IAM auth\. 
 
    In the proxy use case, you need to provide the proxy with Secrets that contain some user's username and password \(native auth\)\. You then connect to the proxy using IAM auth \(by generating an auth token with the proxy endpoint, not the database endpoint\) and using a username which matches one of the usernames for the secrets you previously provided\. 
-+  You don't configure each individual database user with an authorization plugin\. The database users still have regular user names and passwords within the database\. You set up Secrets Manager secrets containing these user names and passwords, and authorize RDS Proxy to retrieve the credentials from Secrets Manager\. 
-+  The IAM authentication applies to the connection between your client program and the proxy\. The proxy then authenticates to the database using the user name and password credentials retrieved from Secrets Manager\. When you use IAM for the connection to a proxy, make sure that the underlying RDS DB instance or Aurora DB cluster doesn't have IAM enabled\. 
 +  Make sure that you use Transport Layer Security \(TLS\) / Secure Sockets Layer \(SSL\) when connecting to a proxy using IAM authentication\. 
 
  You can grant a specific user access to the proxy by modifying the IAM policy\. An example follows\. 

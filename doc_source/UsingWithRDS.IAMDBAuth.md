@@ -11,8 +11,8 @@ IAM database authentication provides the following benefits:
 
 **Topics**
 + [Availability for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.Availability)
-+ [MySQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
-+ [PostgreSQL Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.LimitsPostgreSQL)
++ [Limitations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.Limitations)
++ [MySQL Recommendations for IAM Database Authentication](#UsingWithRDS.IAMDBAuth.ConnectionsPerSecond)
 + [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
@@ -29,25 +29,20 @@ IAM database authentication is available for the following database engines and 
 **Note**  
 IAM database authentication is not supported for MySQL 5\.5\.
 
-## MySQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Limitations"></a>
 
-When using IAM database authentication with MySQL, the following limitations apply:
-+ Currently, IAM DB authentication doesn't support global condition context keys\.
+When using IAM database authentication, the following limitations apply:
++ The maximum number of connections per second for your DB instance might be limited depending on its DB instance class and your workload\.
++ Currently, IAM database authentication doesn't support global condition context keys\.
 
   For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
-+ The maximum number of connections per second for your DB instance might be limited depending on its DB instance class and your workload\.
++ Currently, IAM database authentication isn't supported for CNAMEs\.
 
-We recommend the following when using the MySQL engine:
+## MySQL Recommendations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.ConnectionsPerSecond"></a>
+
+We recommend the following when using the MySQL DB engine:
 + Use IAM database authentication as a mechanism for temporary, personal access to databases\.
 + Use IAM database authentication only for workloads that can be easily retried\.
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
   The database engines that work with Amazon RDS don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.  For information about the maximum total connections for MySQL, see [Maximum MySQL and MariaDB Connections](CHAP_Troubleshooting.md#USER_ConnectToInstance.max_connections)\.   
-
-## PostgreSQL Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.LimitsPostgreSQL"></a>
-
-When using IAM database authentication with PostgreSQL, the following limitations apply:
-+ The maximum number of connections per second for your DB instance might be limited depending on its DB instance class and your workload\.
-+ Currently, IAM DB authentication doesn't support global condition context keys\.
-
-  For more information about global condition context keys, see [ AWS Global Condition Context Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.

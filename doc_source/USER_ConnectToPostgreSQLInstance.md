@@ -64,7 +64,7 @@ For Unix, use the following format\.
 psql \
    --host=<DB instance endpoint> \
    --port=<port> \
-   --username=<master user name> \
+   --username=<master username> \
    --password \
    --dbname=<database name>
 ```
@@ -75,7 +75,7 @@ For Windows, use the following format\.
 psql ^
    --host=<DB instance endpoint> ^
    --port=<port> ^
-   --username=<master user name> ^
+   --username=<master username> ^
    --password ^
    --dbname=<database name>
 ```

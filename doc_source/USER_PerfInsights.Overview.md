@@ -2,9 +2,18 @@
 
 By default, Performance Insights is enabled in the console create wizard for Amazon RDS engines\. If you have more than one database on a DB instance, Performance Insights aggregates performance data\.
 
-## Active Sessions<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
+**Topics**
++ [DB Load](#USER_PerfInsights.Overview.ActiveSessions)
++ [Maximum CPU](#USER_PerfInsights.Overview.MaxCPU)
++ [Supported DB Engines for Performance Insights](#USER_PerfInsights.Overview.Engines)
 
-The central metric for Performance Insights is `DB Load`, which represents the average number of active sessions for the DB engine\. The `DB Load` metric is collected every second\. An *active session* is a connection that has submitted work to the DB engine and is waiting for a response\. For example, if you submit a SQL query to the DB engine, the database session is active while the DB engine is processing the query\. 
+## DB Load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
+
+The central metric for Performance Insights is `DB Load`\. The DB load represents the average number of active sessions \(AAS\) for the DB engine\. An active session is a connection that has submitted work to the DB engine and is waiting for a response\. For example, if you submit a SQL query to the DB engine, the database session is active while the engine is processing the query\. The `DB Load` metric is collected every second\.
+
+The `DB Load` metric has subcomponents called dimensions\. You can think of dimensions as categories for the different characteristics of the `DB Load` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
+
+### Wait Events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
 A *wait event* causes a SQL statement to wait for a specific event to happen before it can continue running\. For example, a SQL statement might wait until a locked resource is unlocked\. By combining `DB Load` with wait events, you can get a complete picture of the session state\. Wait events vary by DB engine: 
 + For information about all MariaDB and MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
@@ -15,6 +24,12 @@ A *wait event* causes a SQL statement to wait for a specific event to happen bef
 **Note**  
 For Oracle, background processes sometimes do work without an associated SQL statement\. In these cases, Performance Insights reports the type of background process concatenated with a colon and the wait class associated with that background process\. Types of background process include LGWR, ARC0, PMON, and so on\.   
 For example, when the archiver is performing I/O, the Performance Insights report for it is similar to `ARC1:System I/O`\. Occasionally, the background process type is also missing, and Performance Insights only reports the wait class, for example `:System I/O`\. 
+
+### Top SQL<a name="USER_PerfInsights.Overview.ActiveSessions.top-sql"></a>
+
+Whereas wait events show bottlenecks, top SQL shows which queries are contributing the most to DB load\. For example, many queries might be currently running on the database, but a single query might consume 99% of the DB load\. In this case, the high load might indicate a problem with the query\. 
+
+By default, the Performance Insights console displays top SQL queries that are contributing to the database load\. The console also shows relevant statistics for each statement\. To diagnose performance problems for a specific statement, you can examine its execution plan\.
 
 ## Maximum CPU<a name="USER_PerfInsights.Overview.MaxCPU"></a>
 
@@ -33,7 +48,7 @@ Following, you can find the DB engines that support Performance Insights\.
 
 |  DB Engine  | Supported DB Engine Versions | 
 | --- | --- | 
-|  Amazon Aurora with MySQL compatibility  |  2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\), and 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)\. Not supported on db\.t2 or db\.t3 DB instance classes\. Not supported for DB clusters enabled for parallel query\.   | 
+|  Amazon Aurora with MySQL compatibility  |  2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\), and 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)\. Not supported on db\.t2 or db\.t3 DB instance classes\. For DB clusters enabled for parallel query, the minimum Aurora MySQL versions are 2\.09\.0 and 1\.23\.0\.   | 
 |  Amazon Aurora with PostgreSQL compatibility  |  All versions\.  | 
 |  Amazon RDS for MariaDB  |  10\.4\.8 and higher 10\.4 versions, 10\.3\.13 and higher 10\.3 versions, and 10\.2\.21 and higher 10\.2 versions\. Not supported for MariaDB version 10\.0 or 10\.1\. Not supported for MariaDB version 10\.3\.13 DB instances in the Europe \(Frankfurt\) and Europe \(Stockholm\) AWS Regions\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
 |  Amazon RDS for MySQL  |  8\.0\.17 and higher 8\.0 versions, version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions\. Not supported for version 5\.5\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, db\.t3\.small, all db\.m6g instance classes, and all db\.r6g instance classes\.  | 

@@ -25,6 +25,9 @@ You can copy snapshots shared to you by other AWS accounts\. If you are copying 
 
 You can copy a shared DB snapshot across Regions, provided that the snapshot is unencrypted\. However, if the shared DB snapshot is encrypted, you can only copy it in the same AWS Region\.
 
+**Note**  
+Copying shared incremental snapshots in the same AWS Region is supported when they're unencrypted, or encrypted using the same AWS KMS key as the initial full snapshot\. If you use a different KMS key to encrypt subsequent snapshots when copying them, those shared snapshots are full snapshots\.
+
 ## Handling Encryption<a name="USER_CopySnapshot.Encryption"></a>
 
 You can copy a snapshot that has been encrypted using an AWS KMS customer master key \(CMK\)\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same AWS KMS CMK as the original snapshot, or you can specify a different AWS KMS CMK\. If you copy an encrypted snapshot across Regions, you can't use the same AWS KMS CMK for the copy as used for the source snapshot, because AWS KMS CMKs are Region\-specific\. Instead, you must specify a AWS KMS CMK valid in the destination AWS Region\.
@@ -39,8 +42,8 @@ When you copy a snapshot to an AWS Region that is different from the source snap
 
 An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
 
-**Important**  
-For shared snapshots, copying incremental snapshots is not supported\. For shared snapshots, all of the copies are full snapshots, even within the same Region\.
+**Note**  
+For shared snapshots, copying incremental snapshots across AWS Regions is only supported when they’re unencrypted\.
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 

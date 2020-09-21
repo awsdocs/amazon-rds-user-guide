@@ -27,7 +27,7 @@ When you create a DB instance, the master user system account that you create is
 The `rds_superuser` role can do the following:
 + Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL Features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
 + Manage tablespaces, including creating and deleting them\. For more information, see the [Tablespaces](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
-+ View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and kill their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
++ View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and stop their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
 + Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/9.4/static/sql-grant.html) section in the PostgreSQL documentation\.
 
 The following example shows how to create a user and then grant the user the `rds_superuser` role\. User\-defined roles, such as `rds_superuser`, have to be granted\.
@@ -163,7 +163,7 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `lc_monetary`  | Dynamic | Sets the locale for formatting monetary amounts\. | 
 |  `lc_numeric`  | Dynamic | Sets the locale for formatting numbers\. | 
 |  `lc_time`  | Dynamic | Sets the locale for formatting date and time values\. | 
-|  `log_autovacuum_min_duration`  | Dynamic | Sets the minimum execution time above which autovacuum actions will be logged\. | 
+|  `log_autovacuum_min_duration`  | Dynamic | Sets the minimum running time above which autovacuum actions will be logged\. | 
 |  `log_checkpoints`  | Dynamic | Logs each checkpoint\. | 
 |  `log_connections`  | Dynamic | Logs each successful connection\. | 
 |  `log_disconnections`  | Dynamic | Logs end of a session, including duration\. | 
@@ -173,7 +173,7 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `log_filename`  | Dynamic | Sets the file name pattern for log files\. | 
 |  `log_hostname`  | Dynamic | Logs the host name in the connection logs\. | 
 |  `log_lock_waits`  | Dynamic | Logs long lock waits\. | 
-|  `log_min_duration_statement`  | Dynamic | Sets the minimum execution time above which statements will be logged\. | 
+|  `log_min_duration_statement`  | Dynamic | Sets the minimum running time above which statements will be logged\. | 
 |  `log_min_error_statement`  | Dynamic | Causes all statements generating an error at or above this level to be logged\. | 
 |  `log_min_messages`  | Dynamic | Sets the message levels that are logged\. | 
 |  `log_parser_stats`  | Dynamic | Writes parser performance statistics to the server log\. | 
@@ -209,11 +209,11 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `temp_buffers`  | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
 |  `temp_tablespaces`  | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
 |  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
-|  `track_activities`  | Dynamic | Collects information about executing commands\. | 
+|  `track_activities`  | Dynamic | Collects information about running commands\. | 
 |  `track_counts`  | Dynamic | Collects statistics on database activity\. | 
 |  `track_functions`  | Dynamic | Collects function\-level statistics on database activity\. | 
 |  `track_io_timing`  | Dynamic | Collects timing statistics on database I/O activity\. | 
-|  `transaction_deferrable`  | Dynamic | Indicates whether to defer a read\-only serializable transaction until it can be executed with no possible serialization failures\. | 
+|  `transaction_deferrable`  | Dynamic | Indicates whether to defer a read\-only serializable transaction until it can be started with no possible serialization failures\. | 
 |  `transaction_isolation`  | Dynamic | Sets the current transactions isolation level\. | 
 |  `transaction_read_only`  | Dynamic | Sets the current transactions read\-only status\. | 
 |  `transform_null_equals`  | Dynamic | Treats expr=NULL as expr IS NULL\. | 
@@ -288,7 +288,7 @@ Amazon RDS uses the default PostgreSQL units for all parameters\. The following 
 
 ## Working with PostgreSQL Autovacuum on Amazon RDS<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum"></a>
 
-We strongly recommend that you use the autovacuum feature for PostgreSQL databases to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the execution of the VACUUM and the ANALYZE commands\. Autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples\. Autovacuum then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
+We strongly recommend that you use the autovacuum feature for PostgreSQL databases to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. Autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples\. Autovacuum then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
 
 Autovacuum is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related autovacuum configuration parameters are appropriately set by default\. Because our defaults are somewhat generic, you can benefit from tuning parameters to your specific workload\. The following section can help you perform the needed autovacuum tuning\.
 
@@ -658,7 +658,7 @@ By default, the *postgresql\.log* doesn't contain information about the autovacu
 We recommend that you set the value of the `rds.force_autovacuum_logging_level` parameter to `log` and that you set the `log_autovacuum_min_duration` parameter to a value from 1,000 to 5,000 milliseconds\. If you set this value to 5,000, Amazon RDS writes any activity to the log that takes more than five seconds\. It also shows "vacuum skipped" messages when application locking is causing autovacuum to intentionally skip tables\. If you are troubleshooting a problem and need more detail, you can use a different logging level value, such as `debug1` or `debug3`\. Use these debug parameters for a short period of time because these settings produce extremely verbose content written to the error log file\. For more information about these debug settings, see the [ PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN)\.
 
 **Note**  
-PostgreSQL allows the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and terminate an autovacuum session that is blocking a command from running, or executing slower than a manually issued vacuum command\.
+PostgreSQL allows the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and end an autovacuum session that is blocking a command from running, or running slower than a manually issued vacuum command\.
 
 ## Audit Logging for a PostgreSQL DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
@@ -795,7 +795,7 @@ You need to perform a bit of setup before you can use the PostGIS extension\. Th
 
 First, you connect to the DB instance using the master user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
 
-The following example uses SELECT to show you the current user; in this case, the current user should be the master username you chose when creating the DB instance\.
+The following example uses SELECT to show you the current user; in this case, the current user should be the master user name you chose when creating the DB instance\.
 
 ```
 select current_user;
@@ -859,7 +859,7 @@ Use the following function to transfer ownership of the PostGIS objects to the `
 CREATE FUNCTION exec(text) returns text language plpgsql volatile AS $f$ BEGIN EXECUTE $1; RETURN $1; END; $f$;      
 ```
 
-Next, run this query to run the exec function that in turn executes the statements and alters the permissions\.
+Next, run this query to run the exec function that in turn runs the statements and alters the permissions\.
 
 ```
 SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' || quote_ident(s.relname) || ' OWNER TO rds_superuser;')
@@ -970,7 +970,7 @@ Amazon RDS for PostgreSQL doesn't support the `utl_file` package that is part of
 
 1. Connect to the DB instance with the master user name that you used to create the DB instance\.
 **Note**  
-If you want to enable `orafce` on a different database in the same instance, use the `/c dbname` psql command to change from the master database after initiating the connection\.
+If you want to enable `orafce` on a different database in the same instance, use the `/c dbname` psql command to change from the primary database after initiating the connection\.
 
 1. Enable the orafce extension with the `CREATE EXTENSION` statement\.
 
@@ -1060,7 +1060,7 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
 1. Configure your DNS server to produce Transmission Control Protocol \(TCP\) responses of 1024 bytes or less\. 
 
-1. Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall whitelisting to allow UDP and TCP inbound traffic on port 53\. 
+1. Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall settings to allow UDP and TCP inbound traffic on port 53\. 
 
    For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 

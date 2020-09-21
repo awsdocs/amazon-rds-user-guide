@@ -59,7 +59,7 @@ You must have either two private subnets or two public subnets available to crea
 
 1. On the **Create subnet** page, set these values: 
    + **Name tag:** `Tutorial private 2`
-   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-identifier (10.0.0.0/16) | tutorial-vpc`
+   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-identifier tutorial-vpc`
    + **Availability Zone:** `us-west-2b` 
 **Note**  
 Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
@@ -114,7 +114,7 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
       + **Type:** `HTTP`
       + **Source:** `0.0.0.0/0`\.
 
-1. To create the security group, choose **Create security group**\. Next, choose **Close** on the confirmation page\.
+1. To create the security group, choose **Create security group**\.
 
    Note the security group ID because you need it later in this tutorial\.
 
@@ -141,7 +141,7 @@ To keep your DB instance private, create a second security group for private acc
       + **Type:** `MySQL/Aurora`
       + **Source:** The identifier of the `tutorial-securitygroup` security group that you created previously in this tutorial, for example: `sg-9edd5cfb`\.
 
-1. To create the security group, choose **Create security group**\. Next, choose **Close** on the confirmation page\.
+1. To create the security group, choose **Create security group**\.
 
 ## Create a DB Subnet Group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
 
@@ -164,10 +164,13 @@ Make sure you connect to the Amazon RDS console, not to the Amazon VPC console\.
 
 1. In the **Add subnets** section, choose the **Availability Zones** and **Subnets**\.
 
-   For this tutorial, choose `us-west-2a` and `us-west-2b` for the **Availability Zones**\. Next, choose all of the subnets for **Subnets**\.
+   For this tutorial, choose `us-west-2a` and `us-west-2b` for the **Availability Zones**\. Next, for **Subnets**, choose the subnets for IPv4 CIDR block 10\.0\.0\.0/24, 10\.0\.1\.0/24, and 10\.0\.2\.0/24\.
 **Note**  
 If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose the **Availability Zone group**, **Availability Zones**, and **Subnets**\.
 
 1. Choose **Create**\. 
 
     Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\.
+
+**Note**  
+If you created this VPC to complete [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md) \.

@@ -52,11 +52,18 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 
 1. Choose **View Instances** to find your instance\. 
 
-1. Wait until **Instance Status** for your instance reads as **running** before continuing\. 
+1. Wait until **Instance Status** for your instance reads as **Running** before continuing\. 
 
 ## Install an Apache Web Server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 
 Next, you connect to your EC2 instance and install the web server\.
+
+**Note**  
+This tutorial is designed to work with a MySQL version 5\.6 DB instance\. If you are using a MySQL 8\.0 DB instance instead, you must set the following parameters to the values specified in a customer\-created DB parameter group:  
+`character_set_server` – `utf8`
+`collation_server` – `utf8_general_ci`
+The default settings for these parameters cause the database connection to fail\. Other parameter settings might also correct the problem\. For more information about setting parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.  
+After you reset the parameters, modify your DB instance to use the DB parameter group, and reboot the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md) and [Rebooting a DB Instance](USER_RebootInstance.md)\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 

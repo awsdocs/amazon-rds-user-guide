@@ -13,13 +13,13 @@ This section contains specific information about working with read replicas on P
 
 ## Read Replica Configuration with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Configuration"></a>
 
-Amazon RDS PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source \(a "master" in PostgreSQL terms\) DB instance\. This read replica \(a "standby" in PostgreSQL terms\) DB instance is an asynchronously created physical replication of the master DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data between the source DB instance and the read replica where PostgreSQL asynchronously streams database changes as they are made\. 
+Amazon RDS PostgreSQL uses PostgreSQL native streaming replication to create a read\-only copy of a source DB instance\. This read replica \(a "standby" in PostgreSQL terms\) DB instance is an asynchronously created physical replication of the source DB instance\. It's created by a special connection that transmits write ahead log \(WAL\) data between the source DB instance and the read replica where PostgreSQL asynchronously streams database changes as they are made\. 
 
 PostgreSQL uses a "replication" role to perform streaming replication\. The role is privileged, but can't be used to modify any data\. PostgreSQL uses a single process for handling replication\. 
 
 Before a DB instance can serve as a source DB instance, you must enable automatic backups on the source DB instance by setting the backup retention period to a value other than 0\. 
 
-Creating a PostgreSQL read replica doesn't require an outage for the master DB instance\. Amazon RDS sets the necessary parameters and permissions for the source DB instance and the read replica without any service interruption\. A snapshot is taken of the source DB instance, and this snapshot becomes the read replica\. No outage occurs when you delete a read replica\. 
+Creating a PostgreSQL read replica doesn't require an outage for the source DB instance\. Amazon RDS sets the necessary parameters and permissions for the source DB instance and the read replica without any service interruption\. A snapshot is taken of the source DB instance, and this snapshot becomes the read replica\. No outage occurs when you delete a read replica\. 
 
 You can create up to five read replicas from one source DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
@@ -35,7 +35,7 @@ If you use the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgre
 
 ## Monitoring PostgreSQL Read Replicas<a name="USER_PostgreSQL.Replication.ReadReplicas.Monitor"></a>
 
-For PostgreSQL read replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. The `ReplicaLag` metric reports the value of `SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS slave_lag`\. 
+For PostgreSQL read replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. The `ReplicaLag` metric reports the value of `SELECT extract(epoch from now() - pg_last_xact_replay_timestamp()) AS replica_lag`\. 
 
 ## Read Replica Limitations with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Limitations"></a>
 
@@ -50,7 +50,7 @@ The following are limitations for PostgreSQL read replicas:
 In several situations, a PostgreSQL source DB instance can unintentionally break replication with a read replica\. These situations include the following: 
 + The `max_wal_senders` parameter is set too low to provide enough data to the number of read replicas\. This situation causes replication to stop\. 
 + The PostgreSQL parameter `wal_keep_segments` dictates how many WAL files are kept to provide data to the read replicas\. The parameter value specifies the number of logs to keep\. If you set the parameter value too low, you can cause a read replica to fall so far behind that streaming replication stops\. In this case, Amazon RDS reports a replication error and begins recovery on the read replica by replaying the source DB instance's archived WAL logs\. This recovery process continues until the read replica has caught up enough to continue streaming replication\. For more information, see [Troubleshooting a PostgreSQL Read Replica Problem](#USER_ReadRepl.TroubleshootingPostgreSQL)\. 
-+ A PostgreSQL read replica requires a reboot if the source DB instance endpoint changes\. 
++ A PostgreSQL read replica requires a reboot if the IP address of the source DB instance endpoint changes\.
 
 When the WAL stream that provides data to a read replica is broken, PostgreSQL switches into recovery mode to restore the read replica by using archived WAL files\. When this process is complete, PostgreSQL attempts to re\-establish streaming replication\. 
 

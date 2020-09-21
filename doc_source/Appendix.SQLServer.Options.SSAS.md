@@ -2,9 +2,11 @@
 
 Microsoft SQL Server Analysis Services \(SSAS\) is part of the Microsoft Business Intelligence \(MSBI\) suite\. SSAS is an online analytical processing \(OLAP\) and data mining tool that is installed within SQL Server\. You use SSAS to analyze data to help make business decisions\. SSAS differs from the SQL Server relational database because SSAS is optimized for queries and calculations common in a business intelligence environment\. For more information on SSAS, see the Microsoft [Analysis Services documentation](https://docs.microsoft.com/en-us/analysis-services)\.
 
-Amazon RDS for SQL Server supports running SQL Server Analysis Services \(SSAS\) in Tabular mode\. You can enable SSAS on existing or new DB instances\. It's installed on the same DB instance as your database engine\. RDS supports the following SQL Server editions and versions:
-+ SQL Server 2017: Standard and Enterprise editions, version 14\.00\.3223\.3\.v1 and later
-+ SQL Server 2016: Standard and Enterprise editions, version 13\.00\.5426\.0\.v1 and later
+Amazon RDS for SQL Server supports running SQL Server Analysis Services \(SSAS\) in Tabular mode\. You can enable SSAS on existing or new DB instances\. It's installed on the same DB instance as your database engine\.
+
+RDS supports SSAS for SQL Server Standard and Enterprise Editions on the following versions:
++ SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
++ SQL Server 2016, version 13\.00\.5426\.0\.v1 and later
 
 ## Limitations<a name="SSAS.Limitations"></a>
 

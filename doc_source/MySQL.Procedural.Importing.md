@@ -1,14 +1,16 @@
 # Restoring a Backup into an Amazon RDS MySQL DB Instance<a name="MySQL.Procedural.Importing"></a>
 
-Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
+Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your database, store it on Amazon S3, and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
+
+The scenario described in this section restores a backup of an on\-premises database\. You can use this technique for databases in other locations, such as Amazon EC2 or non\-AWS cloud services, as long as the database is accessible\.
 
 You can find the supported scenario in the following diagram\.
 
 ![\[MySQL importing backup files from S3 architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-bak-file.png)
 
-Importing backup files from Amazon S3 is supported for MySQL version 5\.6 and 5\.7\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
+Importing backup files from Amazon S3 is supported for MySQL version 5\.6, 5\.7, and 8\.0\. Importing backup files from Amazon S3 is available in all AWS Regions\. 
 
-We recommend that you import your database to Amazon RDS by using backup files if your database can be offline while the backup file is created, copied, and restored\. If your on\-premises database can't be offline, you can use binlog replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
+We recommend that you import your database to Amazon RDS by using backup files if your on\-premises database can be offline while the backup file is created, copied, and restored\. If your database can't be offline, you can use binary log \(binlog\) replication to update your database after you have migrated to Amazon RDS through Amazon S3 as explained in this topic\. For more information, see [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\. You can also use the AWS Database Migration Service to migrate your database to Amazon RDS\. For more information, see [What Is AWS Database Migration Service?](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) 
 
 ## Limitations and Recommendations for Importing Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Limitations"></a>
 
@@ -16,16 +18,16 @@ The following are some limitations and recommendations for importing backup file
 + You can only import your data to a new DB instance, not an existing DB instance\. 
 + You must use Percona XtraBackup to create the backup of your on\-premises database\.
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
-+ You can't import a MySQL 5\.5 or 8\.0 database\. 
-+ You can't import an on\-premises MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
++ You can't import a MySQL 5\.5 database\. 
++ You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. Similarly, you can't import a MySQL 5\.7 database to an Amazon RDS MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore databases larger than the maximum database size supported by Amazon RDS for MySQL\. For more information about storage limits, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD) and [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
 + You can't restore from an encrypted backup in the Amazon S3 bucket\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
-+ Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and then change the instance class later\. For more information about instance classes, see [Hardware Specifications for DB Instance Classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
++ Importing from Amazon S3 is not supported on the db\.t2\.micro DB instance class\. However, you can restore to a different DB instance class, and change the DB instance class later\. For more information about instance classes, see [Hardware Specifications for DB Instance Classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 + Amazon S3 limits the size of a file uploaded to an Amazon S3 bucket to 5 TB\. If a backup file exceeds 5 TB, then you must split the backup file into smaller files\. 
 + When you restore the database, the backup is copied and then extracted on your DB instance\. Therefore, provision storage space for your DB instance that is equal to or greater than the sum of the backup size, plus the original database's size on disk\.
-+ Amazon RDS limits the number of files uploaded to an Amazon S3 bucket to 1 million\. If the backup data for your database, including all full and incremental backups, exceeds 1 million files, use a tarball \(\.tar\.gz\) file to store full and incremental backup files in the Amazon S3 bucket\. 
++ Amazon RDS limits the number of files uploaded to an Amazon S3 bucket to 1 million\. If the backup data for your database, including all full and incremental backups, exceeds 1 million files, use a Gzip \(\.gz\), tar \(\.tar\.gz\), or Percona xbstream \(\.xbstream\) file to store full and incremental backup files in the Amazon S3 bucket\. Percona XtraBackup 8\.0 only supports Percona xbstream for compression\. 
 + User accounts are not imported automatically\. Save your user accounts from your source database and add them to your new DB instance later\. 
 + Functions are not imported automatically\. Save your functions from your source database and add them to your new DB instance later\. 
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
@@ -53,7 +55,8 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
 
 **Note**  
-For MySQL 5\.7 migration, you must use Percona XtraBackup 2\.4\. For earlier MySQL versions, use Percona XtraBackup 2\.3 or 2\.4\.
+For MySQL 8\.0 migration, you must use Percona XtraBackup 8\.0\. Percona XtraBackup 8\.0\.12 and higher versions support migration of all versions of MySQL\. If you are migrating to Amazon RDS MySQL 8\.0\.20 or higher, you must use Percona XtraBackup 8\.0\.12 or higher\.  
+For MySQL 5\.7 migrations, you can also use Percona XtraBackup 2\.4\. For migrations of earlier MySQL versions, you can also use Percona XtraBackup 2\.3 or 2\.4\.
 
 You can create a full backup of your MySQL database files using Percona XtraBackup\. Alternatively, if you already use Percona XtraBackup to back up your MySQL database files, you can upload your existing full and incremental backup directories and files\. 
 
@@ -73,6 +76,9 @@ If you want to compress your backup into a single file \(which can be split late
 + Gzip \(\.gz\)
 + tar \(\.tar\)
 + Percona xbstream \(\.xbstream\)
+
+**Note**  
+Percona XtraBackup 8\.0 only supports Percona xbstream for compression\.
 
 The following command creates a backup of your MySQL database split into multiple Gzip files\. 
 

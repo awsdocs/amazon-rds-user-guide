@@ -76,7 +76,7 @@ pg_restore -v -h [endpoint of instance] -U [master username] -d [new database na
 
 ### Step 3: Use psql to Create the Database on the DB Instance and Load Data<a name="PostgreSQL.Procedural.Importing.EC2.Step3"></a>
 
-You can use the same connection you used to execute the pg\_dump command to connect to the target DB instance and recreate the database\. Using *psql*, you can use the master user name and master password to create the database on the DB instance
+You can use the same connection you used to run the pg\_dump command to connect to the target DB instance and recreate the database\. Using *psql*, you can use the master user name and master password to create the database on the DB instance
 
 The following example uses *psql* and a dump file named mydb2dump\.sql to create a database called mydb2 on a PostgreSQL DB instance called mypginstance:
 
