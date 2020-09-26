@@ -8,6 +8,8 @@ The following diagram shows this scenario\. For information about other scenario
 
 Because your DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public Internet\. The DB instance is hosted in a private subnet\. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance is not available to the public Internet, providing greater security\. 
 
+This tutorial describes configuring a VPC for Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\. 
+
 **Note**  
 For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md)\.
 

@@ -2,7 +2,7 @@
 
 You can use Microsoft Windows Authentication to authenticate users when they connect to your Amazon RDS for Microsoft SQL Server DB instance\. The DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Windows Authentication\. When users authenticate with a SQL Server DB instance joined to the trusting domain, authentication requests are forwarded to the domain directory that you create with AWS Directory Service\. 
 
-Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions except Middle East \(Bahrain\)\.
+Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions\.
 
 Amazon RDS uses mixed mode for Windows Authentication\. This approach means that the *master user* \(the name and password used to create your SQL Server DB instance\) uses SQL Authentication\. Because the master user account is a privileged credential, you should restrict access to this account\.
 

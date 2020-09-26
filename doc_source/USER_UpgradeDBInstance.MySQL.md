@@ -6,7 +6,7 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. For information about performing an upgrade, see [Upgrading a DB Instance Engine Version](USER_UpgradeDBInstance.Upgrading.md)\.
 
-If your MySQL DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the writer and standby replicas are upgraded\. Your DB instance might not be available until the upgrade is complete\. 
+If your MySQL DB instance is using read replicas, you must upgrade all of the read replicas before upgrading the source instance\. If your DB instance is in a Multi\-AZ deployment, both the primary and standby replicas are upgraded\. Your DB instance will not be available until the upgrade is complete\. 
 
 **Topics**
 + [Overview of Upgrading](#USER_UpgradeDBInstance.MySQL.Overview)

@@ -255,6 +255,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Upgrading a PostgreSQL DB Snapshot](USER_UpgradeDBSnapshot.PostgreSQL.md)
    + [Working with PostgreSQL Read Replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
    + [Importing Data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
+   + [Exporting Data from an RDS for PostgreSQL DB Instance to Amazon S3](postgresql-s3-export.md)
    + [Common DBA Tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
    + [Using Kerberos Authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)
       + [Setting Up Kerberos Authentication for PostgreSQL DB Instances](postgresql-kerberos-setting-up.md)

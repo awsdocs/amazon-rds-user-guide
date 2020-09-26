@@ -20,7 +20,6 @@ The following are some limitations and recommendations for importing backup file
 + You can't migrate from a source database that has tables defined outside of the default MySQL data directory\. 
 + You can't import a MySQL 5\.5 database\. 
 + You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. Similarly, you can't import a MySQL 5\.7 database to an Amazon RDS MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
-+ You can't restore databases larger than the maximum database size supported by Amazon RDS for MySQL\. For more information about storage limits, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD) and [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
 + You can't restore from an encrypted backup in the Amazon S3 bucket\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
@@ -36,6 +35,11 @@ The following are some limitations and recommendations for importing backup file
 + The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
 
   The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
++ The maximum size of the restored database is the maximum database size supported minus the size of the backup\. So, if the maximum database size supported is 64 TiB, and the size of the backup is 30 TiB, then the maximum size of the restored database is 34 TiB, as in the following example: 
+
+  `64 TiB - 30 TiB = 34 TiB`
+
+  For information about the maximum database size supported by Amazon RDS for MySQL, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD) and [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. 
 
 ## Overview of Setting Up to Import Backup Files from Amazon S3 to Amazon RDS<a name="MySQL.Procedural.Importing.Enabling"></a>
 

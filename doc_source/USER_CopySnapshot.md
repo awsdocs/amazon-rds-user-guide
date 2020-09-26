@@ -43,7 +43,7 @@ When you copy a snapshot to an AWS Region that is different from the source snap
 An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
 
 **Note**  
-For shared snapshots, copying incremental snapshots across AWS Regions is only supported when they’re unencrypted\.
+For shared snapshots, copying incremental snapshots across AWS Regions is only supported when they're unencrypted\.
 
 Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 

@@ -6,7 +6,7 @@ AWS PrivateLink enables you to privately access Amazon RDS API operations withou
 
 Each interface endpoint is represented by one or more elastic network interfaces in your subnets\. For more information on elastic network interfaces, see [Elastic network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the *Amazon EC2 User Guide\.* 
 
-For more information, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. 
+For more information about VPC endpoints, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. For more information about RDS API operations, see [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\.
 
 ## Considerations for Amazon RDS VPC Endpoints<a name="vpc-endpoint-considerations"></a>
 
@@ -37,6 +37,8 @@ Amazon RDS currently supports VPC endpoints in the following AWS Regions:
 + Europe \(Stockholm\)
 + Middle East \(Bahrain\)
 + South America \(São Paulo\)
++ China \(Beijing\)
++ China \(Ningxia\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
@@ -46,7 +48,7 @@ You can create a VPC endpoint for the Amazon RDS API using either the Amazon VPC
 
 Create a VPC endpoint for Amazon RDS using the service name `com.amazonaws.region.rds`\.
 
-If you enable private DNS for the endpoint, you can make API requests to Amazon RDS using its default DNS name for the Region, for example `rds.us-east-1.amazonaws.com`\.
+Excluding AWS Regions in China, if you enable private DNS for the endpoint, you can make API requests to Amazon RDS with the VPC endpoint using its default DNS name for the AWS Region, for example `rds.us-east-1.amazonaws.com`\. For the China \(Beijing\) and China \(Ningxia\) AWS Regions, you can make API requests with the VPC endpoint using `rds-api.cn-north-1.amazonaws.com.cn` and `rds-api.cn-northwest-1.amazonaws.com.cn`, respectively\. 
 
 For more information, see [Accessing a service through an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#access-service-though-endpoint) in the *Amazon VPC User Guide*\.
 

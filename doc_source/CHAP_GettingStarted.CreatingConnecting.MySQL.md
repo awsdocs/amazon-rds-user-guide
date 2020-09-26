@@ -87,7 +87,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 1. Download a SQL client that you can use to connect to the DB instance\.
 
-   You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql — The MySQL Command\-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+   You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- The MySQL Command\-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 
 1. Connect to the a database on a MySQL DB instance\. For example, enter the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL client\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
 

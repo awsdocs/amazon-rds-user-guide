@@ -19,7 +19,7 @@ For more information about addressing replication errors with Amazon RDS, see [T
 **Important**  
 If you try to call `mysql.rds_skip_repl_error`, you might encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`\. If you do, upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
 
-### Replication Stopped Error<a name="w121aac29c87c39b7c11"></a>
+### Replication Stopped Error<a name="w125aac29c87c39b7c11"></a>
 
 When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
 
