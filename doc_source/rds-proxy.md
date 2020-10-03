@@ -184,16 +184,16 @@
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 
- The following RDS Proxy limitations apply to MySQL: 
-+  The MySQL engine family includes RDS MySQL 5\.6 and 5\.7, and Aurora MySQL versions 1 and 2\. 
+ The following RDS Proxy prerequisites and limitations apply to MySQL: 
++  For RDS MySQL, RDS Proxy supports MySQL 5\.6 and 5\.7\. For Aurora MySQL, RDS Proxy supports version 1 \(compatible with MySQL 5\.6\) and version 2 \(compatible with MySQL 5\.7\)\. 
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
 +  You can't use RDS Proxy with RDS MySQL 8\.0\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\. 
 +  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
 +  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding Pinning](#rds-proxy-pinning)\. 
 
- The following RDS Proxy limitations apply to PostgreSQL: 
-+  The RDS PostgreSQL engine family includes version 10\.10 and higher minor versions and version 11\.5 and higher minor versions\. 
+ The following RDS Proxy prerequisites and limitations apply to PostgreSQL: 
++  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\. 
 +  Currently, all proxies listen on port 5432 for PostgreSQL\. 
 +  Query cancellation isn't supported for PostgreSQL\. 
 +  The results of the PostgreSQL function [lastval\(\)](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\. 
@@ -593,7 +593,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
  You can grant a specific user access to the proxy by modifying the IAM policy\. An example follows\. 
 
 ```
-"Resource": "arn:aws:rds-db:us-east-2:1234567890:dbuser:prx-ABCDEFGHIJKL01234/db_user”
+"Resource": "arn:aws:rds-db:us-east-2:1234567890:dbuser:prx-ABCDEFGHIJKL01234/db_user"
 ```
 
 ### Considerations for Connecting to a Proxy with PostgreSQL<a name="rds-proxy-connecting-postgresql"></a>
@@ -616,7 +616,7 @@ When connecting through an RDS proxy, the startup message can include the follow
 
  For PostgreSQL, if you use JDBC we recommend the following to avoid pinning:
 + Set the JDBC connection parameter `assumeMinServerVersion` to at least `9.0` to avoid pinning\. Doing this prevents the JDBC driver from performing an extra round trip during connection startup when it runs `SET extra_float_digits = 3`\. 
-+ Set the JDBC connection parameter `ApplicationName` to `any/your-application-name` to avoid pinning\. Doing this prevents the JDBC driver from performing an extra round trip during connection startup when it runs `SET application_name = ”PostgreSQL JDBC Driver“`\. Note the JDBC parameter is `ApplicationName` but the PostgreSQL `StartupMessage` parameter is `application_name`\.
++ Set the JDBC connection parameter `ApplicationName` to `any/your-application-name` to avoid pinning\. Doing this prevents the JDBC driver from performing an extra round trip during connection startup when it runs `SET application_name = "PostgreSQL JDBC Driver"`\. Note the JDBC parameter is `ApplicationName` but the PostgreSQL `StartupMessage` parameter is `application_name`\.
 + Set the JDBC connection parameter `preferQueryMode` to `extendedForPrepared` to avoid pinning\. The `extendedForPrepared` ensures that the extended mode is used only for prepared statements\. 
 
   The default for the `preferQueryMode` parameter is `extended`, which uses the extended mode for all queries\. The extended mode uses a series of `Prepare`, `Bind`, `Execute`, and `Sync` requests and corresponding responses\. This type of series causes connection pinning in an RDS proxy\. 

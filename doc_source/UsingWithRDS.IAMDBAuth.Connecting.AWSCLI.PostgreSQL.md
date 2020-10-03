@@ -21,10 +21,10 @@ export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 5
 ```
 
 In the example, the parameters to the `generate-db-auth-token` command are as follows:
-+ `--hostname` – The host name of the DB instance that you want to access\.
-+ `--port` – The port number used for connecting to your DB instance\.
-+ `--region` – The AWS Region where the DB instance is running\. 
-+ `--username` – The database account that you want to access\.
++ `--hostname` – The host name of the DB instance that you want to access
++ `--port` – The port number used for connecting to your DB instance
++ `--region` – The AWS Region where the DB instance is running
++ `--username` – The database account that you want to access
 
 The first several characters of the generated token look like the following\.
 
@@ -41,13 +41,17 @@ psql "host=hostName port=portNumber sslmode=verify-full sslrootcert=certificateF
 ```
 
 The parameters are as follows:
-+ `host` – The host name of the DB instance that you want to access\.
-+ `port` – The port number used for connecting to your DB instance\.
-+ `sslmode` – The SSL mode to use\. When you use `sslmode=verify-full`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
-+ `sslrootcert` – The SSL certificate file that contains the public key\. For more information, see [ Using SSL with a PostgreSQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.SSL)\. 
-+ `dbname` – The database that you want to access\.
-+ `user` – The database account that you want to access\.
-+ `password` – A signed IAM authentication token\.
++ `host` – The host name of the DB instance that you want to access
++ `port` – The port number used for connecting to your DB instance
++ `sslmode` – The SSL mode to use
+
+  When you use `sslmode=verify-full`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
++ `sslrootcert` – The SSL certificate file that contains the public key
+
+  For more information, see [ Using SSL with a PostgreSQL DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.SSL)\. 
++ `dbname` – The database that you want to access
++ `user` – The database account that you want to access
++ `password` – A signed IAM authentication token
 
 The following example shows using psql to connect\. In the example psql uses the environment variable `PGPASSWORD` that was set when the token was generated in the previous section\.
 

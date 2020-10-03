@@ -59,7 +59,7 @@ The following are some recommendations for working with Multi\-AZ deployments fo
 + For databases used in production or preproduction, we recommend the following options:
   + Multi\-AZ deployments for high availability
   + "Provisioned IOPS" for fast, consistent performance
-  + “Memory optimized” rather than "General purpose"
+  + "Memory optimized" rather than "General purpose"
 + You can't select the Availability Zone \(AZ\) for the secondary instance, so when you deploy application hosts, take this into account\. Your database might fail over to another AZ, and the application hosts might not be in the same AZ as the database\. For this reason, we recommend that you balance your application hosts across all AZs in the given AWS Region\. 
 + For best performance, don't enable Database Mirroring or Always On AGs during a large data load operation\. If you want your data load to be as fast as possible, finish loading data before you convert your DB instance to a Multi\-AZ deployment\. 
 + Applications that access the SQL Server databases should have exception handling that catches connection errors\. The following code sample shows a try/catch block that catches a communication error\. 

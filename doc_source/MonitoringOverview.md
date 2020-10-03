@@ -175,7 +175,7 @@ If you use **Create topic** to create a new Amazon SNS topic, the email addresse
 1. Preview the alarm that you're about to create in the **Alarm Preview** area, and then choose **Create Alarm**\. 
 
 **To set an alarm using the AWS CLI**
-+ Call [https://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html](https://docs.aws.amazon.com/cli/latest/reference/put-metric-alarm.html)\. For more information, see *[AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)*\.
++ Call [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-alarm.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-alarm.html)\. For more information, see *[AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/)*\.
 
 **To set an alarm using the CloudWatch API**
 + Call [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html)\. For more information, see *[Amazon CloudWatch API Reference](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/)* 

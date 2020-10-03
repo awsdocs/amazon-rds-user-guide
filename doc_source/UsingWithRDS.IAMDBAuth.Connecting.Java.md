@@ -30,7 +30,7 @@ public class GenerateRDSAuthToken {
     public static void main(String[] args) {
 
 	    String region = "us-west-2";
-	    String hostname = "rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com";
+	    String hostname = "rdsmysql.123456789012.us-west-2.rds.amazonaws.com";
 	    String port = "3306";
 	    String username = "jane_doe";
 	
@@ -98,13 +98,13 @@ public class CreateRDSAuthTokenManually {
     public static void main(String[] args) throws Exception {
 
         String region = "us-west-2";
-        String instanceName = "rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com";
+        String instanceName = "rdsmysql.123456789012.us-west-2.rds.amazonaws.com";
         String port = "3306";
         String username = "jane_doe";
 	
         Date now = new Date();
         String date = new SimpleDateFormat("yyyyMMdd").format(now);
-        String dateTimeStamp = new SimpleDateFormat("yyyyMMdd'T'HHmmssZ").format(now);
+        String dateTimeStamp = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'").format(now);
         DefaultAWSCredentialsProviderChain creds = new DefaultAWSCredentialsProviderChain();
 	    String awsAccessKey = creds.getCredentials().getAWSAccessKeyId();
 	    String awsSecretKey = creds.getCredentials().getAWSSecretKey();
@@ -280,7 +280,7 @@ public class IAMDatabaseAuthenticationTester {
     private static final String AWS_SECRET_KEY = creds.getCredentials().getAWSSecretKey();
 
     //Configuration parameters for the generation of the IAM Database Authentication token
-    private static final String RDS_INSTANCE_HOSTNAME = "rdsmysql.cdgmuqiadpid.us-west-2.rds.amazonaws.com";
+    private static final String RDS_INSTANCE_HOSTNAME = "rdsmysql.123456789012.us-west-2.rds.amazonaws.com";
     private static final int RDS_INSTANCE_PORT = 3306;
     private static final String REGION_NAME = "us-west-2";
     private static final String DB_USER = "jane_doe";

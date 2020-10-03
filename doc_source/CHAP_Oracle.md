@@ -211,7 +211,7 @@ If you have DB snapshots of DB instances that were using db\.m1 or db\.m2 DB ins
 
 ## Oracle File Size Limits in Amazon RDS<a name="Oracle.Concepts.file-size-limits"></a>
 
-The maximum file size on Amazon RDS Oracle DB instances is 16 TiB\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following\.
+The maximum file size on Amazon RDS Oracle DB instances is 16 TiB \(tebibytes\)\. If you try to resize a data file in a bigfile tablespace to a value over the limit, you receive an error such as the following\.
 
 ```
 ORA-01237: cannot extend datafile 6
@@ -439,15 +439,15 @@ Several parameters have new value ranges for Oracle 12c version 12\.1\.0\.2 on A
 
 | Parameter Name | 12c Version 12\.1\.0\.2 Range | 11g Range | 
 | --- | --- | --- | 
-|  [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)  |  os \| db \[, extended\] \| xml \[, extended\]  |  os \| db \[, extended\] \| xml \[, extended\] \| true \| false  | 
-|  [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)  |  For DB instances upgraded from Oracle 11g, automatically set to 12\.0\.0 on Amazon RDS unless a lower value is explicitly provided during the upgrade \(as low as 11\.2\.0\)  For new Oracle 12c version 12\.1\.0\.2 DB instances, starts with 12\.0\.0 on Amazon RDS |  Starts with 11\.2\.0 on Amazon RDS | 
-|  [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)  |  PERMITTED \| PREFERRED \| ALWAYS \| IGNORE \| FORCE  |  PERMITTED \| ALWAYS \| IGNORE \| FORCE  | 
-|  [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)  |  1\-100  |  1\-36  | 
+|  [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)  |  os \| db \[, extended\] \| xml \[, extended\]  | os \| db \[, extended\] \| xml \[, extended\] \| true \| false | 
+|  [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)  | Following are the requirements for COMPATIBLE:[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Oracle.html)If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to 12\.0\.0\. | Starts with 11\.2\.0 on Amazon RDS | 
+|  [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)  | PERMITTED \| PREFERRED \| ALWAYS \| IGNORE \| FORCE | PERMITTED \| ALWAYS \| IGNORE \| FORCE | 
+|  [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)  | 1\-100 | 1\-36 | 
 |  [optimizer\_features\_enable](http://docs.oracle.com/database/121/REFRN/GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C.htm#REFRN10141)  |  8\.0\.0 to 12\.1\.0\.2  |  8\.0\.0 to 11\.2\.0\.4  | 
 |  [parallel\_degree\_policy](http://docs.oracle.com/database/121/REFRN/GUID-BF09265F-8545-40D4-BD29-E58D5F02B0E5.htm#REFRN10310)  |  MANUAL,LIMITED,AUTO,ADAPTIVE  |  MANUAL,LIMITED,AUTO  | 
 |  [parallel\_min\_server](http://docs.oracle.com/database/121/REFRN/GUID-1D7EC131-7B5B-40E5-A0F8-ABC7B4C5B0E8.htm#REFRN10160)  |  0 to parallel\_max\_servers  |  CPU\_COUNT \* PARALLEL\_THREADS\_PER\_CPU \* 2 to parallel\_max\_servers  | 
 
-One parameter has a new default value for Oracle 12c on Amazon RDS\. The following table shows the new default value\. 
+One parameter has a new default value for Oracle 12c on Amazon RDS\. The following table shows the new default value\.
 
 
 ****  

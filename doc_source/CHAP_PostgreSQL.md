@@ -985,7 +985,7 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 The following table shows PostgreSQL extensions and modules for PostgreSQL version 12 that are currently supported on Amazon RDS\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/12/extend-extensions.html)\. 
 
 
-| Extensions and Modules | Version 12\.2 | Version 12\.3 | Version 12\.4 | 
+| Extensions and Modules | 12\.2 | 12\.3 | 12\.4 | 
 | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
@@ -1060,7 +1060,7 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 The following tables show PostgreSQL extensions and modules for PostgreSQL version 11\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension or module is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging Related Objects into an Extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
 
 
-| Extension | Version 11\.1 | Version 11\.2 | Version 11\.4 | Version 11\.5 | Version 11\.6 | Version 11\.7 | Version 11\.8 | Version 11\.9 | 
+| Extension | 11\.1 | 11\.2 | 11\.4 | 11\.5 | 11\.6 | 11\.7 | 11\.8 | 11\.9 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
@@ -1093,7 +1093,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | pg\_proctab | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 0\.0\.9 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
 | pg\_similarity | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/11/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/11/static/pgstatstatements.html) | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
 | pg\_transport | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [pg\_trgm](http://www.postgresql.org/docs/11/static/pgtrgm.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [ pg\_visibility](https://www.postgresql.org/docs/11/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
@@ -1129,7 +1129,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 The following modules are supported as shown for PostgreSQL version 11\.x\.
 
 
-| Module | Version 11\.1 | Version 11\.2 | Version 11\.4 | Version 11\.5 | Version 11\.6 | Version 11\.7 | Version 11\.8 | Version 11\.9 | 
+| Module | 11\.1 | 11\.2 | 11\.4 | 11\.5 | 11\.6 | 11\.7 | 11\.8 | 11\.9 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | amcheck | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
 | auto\_explain | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
@@ -1176,7 +1176,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [pg\_prewarm](https://www.postgresql.org/docs/10/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 
 | pg\_similarity | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/10/static/pgstatstatements.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
 | pg\_transport | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [pg\_trgm](http://www.postgresql.org/docs/10/static/pgtrgm.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | [pg\_visibility](https://www.postgresql.org/docs/10/static/pgvisibility.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
@@ -1213,7 +1213,7 @@ The `tsearch2` extension is deprecated in version 10\. The PostgreSQL team plans
 The following modules are supported as shown for versions of PostgreSQL 10\.
 
 
-| Module | Version 10\.1 | 10\.3 | 10\.4 | 10\.5 | 10\.6 | 10\.7 | 10\.9 | 10\.10 | 10\.11 | 10\.12 | 10\.13 | 10\.14 | 
+| Module | 10\.1 | 10\.3 | 10\.4 | 10\.5 | 10\.6 | 10\.7 | 10\.9 | 10\.10 | 10\.11 | 10\.12 | 10\.13 | 10\.14 | 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | amcheck | Not supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
 | auto\_explain | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 

@@ -222,7 +222,7 @@ After the load operation completes, return your DB instance and DB parameters to
 
  Your database administrator needs to know and understand this maintenance operation\. For the PostgreSQL documentation on autovacuum, see [ Routine Vacuuming](http://www.postgresql.org/docs/current/static/routine-vacuuming.html#AUTOVACUUM)\. 
 
- Autovacuum is not a “resource free” operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to transaction ID wraparound\. For more information, see [Preventing Transaction ID Wraparound Failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\.
+ Autovacuum is not a "resource free" operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to transaction ID wraparound\. For more information, see [Preventing Transaction ID Wraparound Failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\.
 
  Autovacuum should not be thought of as a high\-overhead operation that can be reduced to gain better performance\. On the contrary, tables that have a high velocity of updates and deletes will quickly deteriorate over time if autovacuum is not run\. 
 

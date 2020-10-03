@@ -23,9 +23,9 @@ You only have to configure security for your use cases\. You don't have to confi
 For more information on managing access to Amazon RDS resources and your databases on a DB instance, see the following topics\.
 
 **Topics**
++ [Database Authentication with Amazon RDS](database-authentication.md)
 + [Data Protection in Amazon RDS](DataDurability.md)
 + [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)
-+ [Kerberos Authentication](kerberos-authentication.md)
 + [Logging and Monitoring in Amazon RDS](Overview.LoggingAndMonitoring.md)
 + [Compliance Validation for Amazon RDS](RDS-compliance.md)
 + [Resilience in Amazon RDS](disaster-recovery-resiliency.md)

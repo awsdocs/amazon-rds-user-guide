@@ -99,7 +99,7 @@ To do this, use the following procedure\.
    The following AWS CLI command creates an IAM policy named `rds-s3-export-policy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Warning**  
 We recommend that you set up your database within a private VPC that has endpoint policies configured for accessing specific buckets\. For more information, see [ Using Endpoint Policies for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html#vpc-endpoints-policies-s3) in the Amazon VPC User Guide\.  
-We strongly recommend that you do not create a policy with all\-resource access\. This access can pose a threat for data security\. If you create a policy that gives `S3:PutObject` access to all resources using `"Resource":”*”`, then a user with export privileges can export data to all buckets in your account\. In addition, the user can export data to *any publicly writable bucket within your AWS Region*\. 
+We strongly recommend that you do not create a policy with all\-resource access\. This access can pose a threat for data security\. If you create a policy that gives `S3:PutObject` access to all resources using `"Resource":"*"`, then a user with export privileges can export data to all buckets in your account\. In addition, the user can export data to *any publicly writable bucket within your AWS Region*\. 
 
    After you create the policy, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\. 
 

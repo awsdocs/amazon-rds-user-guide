@@ -44,7 +44,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS Resources](Overview.Encryption.md)  | 
 |  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
 |  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
-|  Kerberos authentication  |  No  |  —  |  [Kerberos Authentication](kerberos-authentication.md)  | 
+|  Kerberos authentication  |  No  |  —  |  [Kerberos Authentication](database-authentication.md#kerberos-authentication)  | 
 |  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS Resources](USER_Tagging.md)  | 
 |  Option groups  |  No  |  —  |  [Working with Option Groups](USER_WorkingWithOptionGroups.md)  | 
 |  Modifying the maintenance window  |  Yes  |  —  |  [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)  | 

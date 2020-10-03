@@ -5,7 +5,7 @@ You can authenticate to your DB instance using AWS Identity and Access Managemen
 An *authentication token* is a unique string of characters that Amazon RDS generates on request\. Authentication tokens are generated using AWS Signature Version 4\. Each token has a lifetime of 15 minutes\. You don't need to store user credentials in the database, because authentication is managed externally using IAM\. You can also still use standard database authentication\.
 
 IAM database authentication provides the following benefits:
-+ Network traffic to and from the database is encrypted using Secure Sockets Layer \(SSL\)\.
++ Network traffic to and from the database is encrypted using Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\)\. For more information about using SSL/TLS with Amazon RDS, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
 + You can use IAM to centrally manage access to your database resources, instead of managing access individually on each DB instance\.
 + For applications running on Amazon EC2, you can use profile credentials specific to your EC2 instance to access your database instead of a password, for greater security\.
 
@@ -20,14 +20,15 @@ IAM database authentication provides the following benefits:
 
 ## Availability for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Availability"></a>
 
-IAM database authentication is available for the following database engines and DB instance classes:
-+ MySQL 5\.6, minor version 5\.6\.34 or higher\. 
-+ MySQL 5\.7, minor version 5\.7\.16 or higher\. 
-+ MySQL 8\.0, minor version 8\.0\.16 or higher\. 
-+ PostgreSQL versions 10\.6 or higher, 9\.6\.11 or higher, and 9\.5\.15 or higher\.
-
-**Note**  
-IAM database authentication is not supported for MySQL 5\.5\.
+IAM database authentication is available for the following database engines:
++ MySQL 8\.0, minor version 8\.0\.16 or higher
++ MySQL 5\.7, minor version 5\.7\.16 or higher
++ MySQL 5\.6, minor version 5\.6\.34 or higher
++ PostgreSQL 12, all minor versions
++ PostgreSQL 11, all minor versions
++ PostgreSQL 10, minor version 10\.6 or higher
++ PostgreSQL 9\.6, minor version 9\.6\.11 or higher
++ PostgreSQL 9\.5, minor version 9\.5\.15 or higher
 
 ## Limitations for IAM Database Authentication<a name="UsingWithRDS.IAMDBAuth.Limitations"></a>
 
