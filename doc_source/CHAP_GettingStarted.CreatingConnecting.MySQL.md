@@ -1,16 +1,16 @@
-# Creating a MySQL DB Instance and Connecting to a Database on a MySQL DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.MySQL"></a>
+# Creating a MySQL DB instance and connecting to a database on a MySQL DB instance<a name="CHAP_GettingStarted.CreatingConnecting.MySQL"></a>
 
 The easiest way to create a DB instance is to use the AWS Management Console\. After you have created the DB instance, you can use standard MySQL utilities such as MySQL Workbench to connect to a database on the DB instance\.
 
 **Important**  
-Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
+Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
 **Topics**
-+ [Creating a MySQL DB Instance](#CHAP_GettingStarted.Creating.MySQL)
-+ [Connecting to a Database on a DB Instance Running the MySQL Database Engine](#CHAP_GettingStarted.Connecting.MySQL)
-+ [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.MySQL)
++ [Creating a MySQL DB instance](#CHAP_GettingStarted.Creating.MySQL)
++ [Connecting to a database on a DB instance running the MySQL database engine](#CHAP_GettingStarted.Connecting.MySQL)
++ [Deleting a DB instance](#CHAP_GettingStarted.Deleting.MySQL)
 
-## Creating a MySQL DB Instance<a name="CHAP_GettingStarted.Creating.MySQL"></a>
+## Creating a MySQL DB instance<a name="CHAP_GettingStarted.Creating.MySQL"></a>
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your MySQL databases\.
 
@@ -21,7 +21,7 @@ You can create a DB instance running MySQL with the AWS Management Console with 
 In this example, you use **Easy Create** to create a DB instance running the MySQL database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 **To create a MySQL DB instance with Easy Create enabled**
 
@@ -63,16 +63,16 @@ For information about creating DB instances with **Easy Create** not enabled, se
 
    You can use the username and password that appears to connect to the DB instance as the master user\.
 **Important**  
-You won't be able to view master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+You won't be able to view master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. In the **Databases** list, choose the name of the new MySQL DB instance\.
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch06.png)
 
-## Connecting to a Database on a DB Instance Running the MySQL Database Engine<a name="CHAP_GettingStarted.Connecting.MySQL"></a>
+## Connecting to a database on a DB instance running the MySQL database engine<a name="CHAP_GettingStarted.Connecting.MySQL"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a MySQL DB instance using MySQL monitor commands\. One GUI\-based application you can use to connect is MySQL Workbench; for more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For more information on using MySQL, go to the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a MySQL DB instance using MySQL monitor commands\. One GUI\-based application you can use to connect is MySQL Workbench; for more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For more information on using MySQL, go to the [MySQL documentation](http://dev.mysql.com/doc/)\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\.
 
  **To connect to a database on a DB instance using MySQL monitor** 
 
@@ -87,7 +87,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 1. Download a SQL client that you can use to connect to the DB instance\.
 
-   You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- The MySQL Command\-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
+   You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [ Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\.
 
 1. Connect to the a database on a MySQL DB instance\. For example, enter the following command at a command prompt on a client computer to connect to a database on a MySQL DB instance using the MySQL client\. Substitute the DNS name for your DB instance for *<endpoint>*, the master user name you used for *<mymasteruser>*, and provide the master password you used when prompted for a password\.
 
@@ -111,9 +111,9 @@ If you can't connect to your MySQL DB instance, two common causes of connection 
 + The DB instance was created using a security group that does not authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 
-For more information about connecting to a MySQL DB instance, see [Connecting to a DB Instance Running the MySQL Database Engine](USER_ConnectToInstance.md)\. For information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+For more information about connecting to a MySQL DB instance, see [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)\. For information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-## Deleting a DB Instance<a name="CHAP_GettingStarted.Deleting.MySQL"></a>
+## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.MySQL"></a>
 
 After you have connected to the sample DB instance that you created, you should delete the DB instance so you are no longer charged for it\. 
 

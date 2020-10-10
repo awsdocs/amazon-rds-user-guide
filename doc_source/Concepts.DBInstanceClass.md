@@ -1,25 +1,25 @@
-# DB Instance Classes<a name="Concepts.DBInstanceClass"></a>
+# DB instance classes<a name="Concepts.DBInstanceClass"></a>
 
 The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance\. The DB instance class you need depends on your processing power and memory requirements\. 
 
-For more information about instance class pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about instance class pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 
 **Topics**
-+ [DB Instance Class Types](#Concepts.DBInstanceClass.Types)
-+ [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.Support)
-+ [Changing Your DB Instance Class](#Concepts.DBInstanceClass.Changing)
-+ [Configuring the Processor for a DB Instance Class](#USER_ConfigureProcessor)
-+ [Hardware Specifications for DB Instance Classes](#Concepts.DBInstanceClass.Summary)
++ [DB instance class types](#Concepts.DBInstanceClass.Types)
++ [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)
++ [Changing your DB instance class](#Concepts.DBInstanceClass.Changing)
++ [Configuring the processor for a DB instance class](#USER_ConfigureProcessor)
++ [Hardware specifications for DB instance classes](#Concepts.DBInstanceClass.Summary)
 
-## DB Instance Class Types<a name="Concepts.DBInstanceClass.Types"></a>
+## DB instance class types<a name="Concepts.DBInstanceClass.Types"></a>
 
-Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance Type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
+Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
 + Preview **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. 
 **Note**  
 Graviton2 DB instance classes are now available in preview release\.  
-Don't use the db\.m6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS Service Terms](https://aws.amazon.com/service-terms/)\.
+Don't use the db\.m6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS service terms](https://aws.amazon.com/service-terms/)\.
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
@@ -32,7 +32,7 @@ The following are the Memory Optimized DB instance classes available:
 + Preview **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 **Note**  
 Graviton2 DB instance classes are now available in preview release\.  
-Don't use the db\.r6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS Service Terms](https://aws.amazon.com/service-terms/)\.
+Don't use the db\.r6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS service terms](https://aws.amazon.com/service-terms/)\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
@@ -45,20 +45,20 @@ The following are the Burstable Performance DB instance classes available:
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.m5, db\.r5, db\.t3\) are throttled on combined read plus write workload\.
 
-For DB instance class hardware specifications, see [Hardware Specifications for DB Instance Classes ](#Concepts.DBInstanceClass.Summary)\.
+For DB instance class hardware specifications, see [Hardware specifications for DB instance classes ](#Concepts.DBInstanceClass.Summary)\.
 
-## Supported DB Engines for DB Instance Classes<a name="Concepts.DBInstanceClass.Support"></a>
+## Supported DB engines for DB instance classes<a name="Concepts.DBInstanceClass.Support"></a>
 
 The following are DB engine considerations for DB instance classes:
 
 **Microsoft SQL Server**  
-Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB Instance Class Support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
+Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
 
 **MySQL**  
 The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS MySQL versions 8\.0\.17 and higher\.
 
 **Oracle**  
-Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
+Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 
 **PostgreSQL**  
 The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.
@@ -68,7 +68,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 ****  
 
-| Instance Class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
+| Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | Preview db\.m6g – Newest Generation Standard Instance Classes | 
 | db\.m6g\.16xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
@@ -105,8 +105,8 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m1\.medium | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.z1d – Latest Generation Memory Optimized Instance Classes | 
-| db\.z1d\.12xlarge | No | No | No | Yes | No | 
-| db\.z1d\.6xlarge | No | No | No | Yes | No | 
+| db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
+| db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.3xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.xlarge | No | Yes | No | Yes | No | 
@@ -169,13 +169,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.t2\.small | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.t2\.micro | Yes | Yes | Yes | Deprecated | Yes | 
 
-## Changing Your DB Instance Class<a name="Concepts.DBInstanceClass.Changing"></a>
+## Changing your DB instance class<a name="Concepts.DBInstanceClass.Changing"></a>
 
-You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions in [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions in [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-Some instance classes require that your DB instance is in a VPC\. If your current DB instance isn't in a VPC, and you want to use an instance class that requires one, first move your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+Some instance classes require that your DB instance is in a VPC\. If your current DB instance isn't in a VPC, and you want to use an instance class that requires one, first move your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 
-## Configuring the Processor for a DB Instance Class<a name="USER_ConfigureProcessor"></a>
+## Configuring the processor for a DB instance class<a name="USER_ConfigureProcessor"></a>
 
 Amazon RDS DB instance classes support Intel Hyper\-Threading Technology, which enables multiple threads to run concurrently on a single Intel Xeon CPU core\. Each thread is represented as a virtual CPU \(vCPU\) on the DB instance\. A DB instance has a default number of CPU cores, which varies according to DB instance type\. For example, a db\.m4\.xlarge DB instance type has two CPU cores and two threads per core by default—four vCPUs in total\.
 
@@ -183,11 +183,11 @@ Amazon RDS DB instance classes support Intel Hyper\-Threading Technology, which 
 Each vCPU is a hyperthread of an Intel Xeon CPU core\.
 
 **Topics**
-+ [Overview of Configuring the Processor](#USER_ConfigureProcessor.Overview)
-+ [CPU Cores and Threads Per CPU Core Per DB Instance Class](#USER_ConfigureProcessor.CPUOptionsDBInstanceClass)
-+ [Setting the CPU Cores and Threads per CPU Core for a DB Instance Class](#USER_ConfigureProcessor.SettingCPUOptions)
++ [Overview of configuring the processor](#USER_ConfigureProcessor.Overview)
++ [CPU cores and threads per CPU core per DB instance class](#USER_ConfigureProcessor.CPUOptionsDBInstanceClass)
++ [Setting the CPU cores and threads per CPU core for a DB instance class](#USER_ConfigureProcessor.SettingCPUOptions)
 
-### Overview of Configuring the Processor<a name="USER_ConfigureProcessor.Overview"></a>
+### Overview of configuring the processor<a name="USER_ConfigureProcessor.Overview"></a>
 
 In most cases, you can find a DB instance class that has a combination of memory and number of vCPUs to suit your workloads\. However, you can also specify the following processor features to optimize your DB instance for specific workloads or business needs:
 + **Number of CPU cores** – You can customize the number of CPU cores for the DB instance\. You might do this to potentially optimize the licensing costs of your software with a DB instance that has sufficient amounts of RAM for memory\-intensive workloads but fewer CPU cores\.
@@ -201,14 +201,14 @@ If you modify the DB instance class for a DB instance with nondefault processor 
 
 There is no additional or reduced charge for specifying processor features on an Amazon RDS DB instance\. You're charged the same as for DB instances that are launched with default CPU configurations\.
 
-### CPU Cores and Threads Per CPU Core Per DB Instance Class<a name="USER_ConfigureProcessor.CPUOptionsDBInstanceClass"></a>
+### CPU cores and threads per CPU core per DB instance class<a name="USER_ConfigureProcessor.CPUOptionsDBInstanceClass"></a>
 
 In the following table, you can find the DB instance classes that support setting a number of CPU cores and CPU threads per core\. You can also find the default value and the valid values for the number of CPU cores and CPU threads per core for each DB instance class\.
 
 
 ****  
 
-| DB Instance Class | Default vCPUs | Default CPU Cores | Default Threads per Core | Valid Number of CPU Cores | Valid Number of Threads per Core | 
+| DB instance class | Default vCPUs | Default CPU cores | Default threads per core | Valid number of CPU cores | Valid number of threads per core | 
 | --- | --- | --- | --- | --- | --- | 
 |  db\.m5\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.m5\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
@@ -255,19 +255,19 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.z1d\.12xlarge  |  48  |  24  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 
 Currently, you can configure the number of CPU cores and threads per core only when the following conditions are met:
-+ You are configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)
-+ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
++ You are configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)
++ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
 
 **Note**  
 You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS ](logging-using-cloudtrail.md)\.
 
-### Setting the CPU Cores and Threads per CPU Core for a DB Instance Class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
+### Setting the CPU cores and threads per CPU core for a DB instance class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
 
 You can configure the number of CPU cores and threads per core for the DB instance class when you perform the following operations:
-+ [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)
-+ [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)
-+ [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)
-+ [Restoring a DB Instance to a Specified Time](USER_PIT.md)
++ [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)
++ [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)
++ [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
++ [Restoring a DB instance to a specified time](USER_PIT.md)
 
 **Note**  
 When you modify a DB instance to configure the number of CPU cores or threads per core, there is a brief DB instance outage\.
@@ -312,14 +312,14 @@ The option has the following syntax\.
 The following are examples that configure the processor:
 
 **Topics**
-+ [Setting the Number of CPU Cores for a DB Instance](#USER_ConfigureProcessor.CLI.Example1)
-+ [Setting the Number of CPU Cores and Disabling Multiple Threads for a DB Instance](#USER_ConfigureProcessor.CLI.Example2)
-+ [Viewing the Valid Processor Values for a DB Instance Class](#USER_ConfigureProcessor.CLI.Example3)
-+ [Returning to Default Processor Settings for a DB Instance](#USER_ConfigureProcessor.CLI.Example4)
-+ [Returning to the Default Number of CPU Cores for a DB Instance](#USER_ConfigureProcessor.CLI.Example5)
-+ [Returning to the Default Number of Threads Per Core for a DB Instance](#USER_ConfigureProcessor.CLI.Example6)
++ [Setting the number of CPU cores for a DB instance](#USER_ConfigureProcessor.CLI.Example1)
++ [Setting the number of CPU cores and disabling multiple threads for a DB instance](#USER_ConfigureProcessor.CLI.Example2)
++ [Viewing the valid processor values for a DB instance class](#USER_ConfigureProcessor.CLI.Example3)
++ [Returning to default processor settings for a DB instance](#USER_ConfigureProcessor.CLI.Example4)
++ [Returning to the default number of CPU cores for a DB instance](#USER_ConfigureProcessor.CLI.Example5)
++ [Returning to the default number of threads per core for a DB instance](#USER_ConfigureProcessor.CLI.Example6)
 
-##### Setting the Number of CPU Cores for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example1"></a>
+##### Setting the number of CPU cores for a DB instance<a name="USER_ConfigureProcessor.CLI.Example1"></a>
 
 **Example**  
 The following example modifies `mydbinstance` by setting the number of CPU cores to 4\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
@@ -338,7 +338,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-##### Setting the Number of CPU Cores and Disabling Multiple Threads for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example2"></a>
+##### Setting the number of CPU cores and disabling multiple threads for a DB instance<a name="USER_ConfigureProcessor.CLI.Example2"></a>
 
 **Example**  
 The following example modifies `mydbinstance` by setting the number of CPU cores to `4` and disabling multiple threads per core\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.  
@@ -357,7 +357,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-##### Viewing the Valid Processor Values for a DB Instance Class<a name="USER_ConfigureProcessor.CLI.Example3"></a>
+##### Viewing the valid processor values for a DB instance class<a name="USER_ConfigureProcessor.CLI.Example3"></a>
 
 **Example**  
 You can view the valid processor values for a particular DB instance class by running the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command and specifying the instance class for the `--db-instance-class` option\. For example, the output for the following command shows the processor options for the db\.r3\.large instance class\.  
@@ -423,7 +423,7 @@ In the output of the preceding commands, the values for the processor features a
 + The current CPU core and thread settings are set to nondefault values\.
 If the preceding conditions aren't met, you can get the instance type using [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\. You can get the processor information for this instance type by running the EC2 operation [describe\-instance\-types](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-types.html)\.
 
-##### Returning to Default Processor Settings for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example4"></a>
+##### Returning to default processor settings for a DB instance<a name="USER_ConfigureProcessor.CLI.Example4"></a>
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default processor values for it\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
@@ -442,7 +442,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-##### Returning to the Default Number of CPU Cores for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example5"></a>
+##### Returning to the default number of CPU cores for a DB instance<a name="USER_ConfigureProcessor.CLI.Example5"></a>
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default number of CPU cores for it\. The threads per core setting isn't changed\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.   
@@ -461,7 +461,7 @@ aws rds modify-db-instance ^
     --apply-immediately
 ```
 
-##### Returning to the Default Number of Threads Per Core for a DB Instance<a name="USER_ConfigureProcessor.CLI.Example6"></a>
+##### Returning to the default number of threads per core for a DB instance<a name="USER_ConfigureProcessor.CLI.Example6"></a>
 
 **Example**  
 The following example modifies `mydbinstance` by returning its DB instance class to the default number of threads per core for it\. The number of CPU cores setting isn't changed\. The changes are applied immediately by using `--apply-immediately`\. If you want to apply the changes during the next scheduled maintenance window, omit the `--apply-immediately` option\.  
@@ -511,7 +511,7 @@ In the output of the preceding operations, the values for the processor features
 
 If the preceding conditions aren't met, you can get the instance type using [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. You can get the processor information for this instance type by running the EC2 operation [DescribeInstanceTypes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstanceTypes.html)\.
 
-## Hardware Specifications for DB Instance Classes<a name="Concepts.DBInstanceClass.Summary"></a>
+## Hardware specifications for DB instance classes<a name="Concepts.DBInstanceClass.Summary"></a>
 
 The following terminology is used to describe hardware specifications for DB instance classes:
 
@@ -525,26 +525,26 @@ The relative measure of the integer processing power of an Amazon EC2 instance\.
 The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
 
 **VPC Only**  
-The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB Instance Not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
 
 **EBS\-Optimized**  
-The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
+The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
 
 **Max\. Bandwidth \(Mbps\)**  
 The maximum bandwidth in megabits per second\. Divide by 8 to get the expected throughput in megabytes per second\.   
-General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.* For information on estimating bandwidth for gp2 storage, see [General Purpose SSD Storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
+General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughput limit of 250 MiB/s in most cases\. However, the throughput limit can vary depending on volume size\. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon EC2 User Guide for Linux Instances\.* For information on estimating bandwidth for gp2 storage, see [General Purpose SSD storage](CHAP_Storage.md#Concepts.Storage.GeneralSSD)\.
 
 **Network Performance**  
 The network speed relative to other DB instance classes\.
 
 In the following table, you can find hardware details about the Amazon RDS DB instance classes \. 
 
-For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB Engines for DB Instance Classes](#Concepts.DBInstanceClass.Support)\. 
+For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)\. 
 
 
 ****  
 
-| Instance Class | vCPU | ECU | Memory \(GiB\) | VPC Only | EBS Optimized | Max\. Bandwidth \(Mbps\) | Network Performance | 
+| Instance class | vCPU | ECU | Memory \(GiB\) | VPC only | EBS optimized | Max\. bandwidth \(mbps\) | Network performance | 
 | --- | --- | --- | --- | --- | --- | --- | --- | 
 | Preview db\.m6g – Newest Generation Standard Instance Classes | 
 | db\.m6g\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
@@ -645,4 +645,4 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.t2\.small | 1 | Variable | 2 | Yes | No | — | Low | 
 | db\.t2\.micro | 1 | Variable | 1 | Yes | No | — | Low | 
 
-\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-Optimized Instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
+\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*

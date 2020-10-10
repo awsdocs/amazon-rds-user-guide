@@ -1,4 +1,4 @@
-# MySQL on Amazon RDS SQL Reference<a name="Appendix.MySQL.SQLRef"></a>
+# MySQL on Amazon RDS SQL reference<a name="Appendix.MySQL.SQLRef"></a>
 
 This appendix describes system stored procedures that are available for Amazon RDS instances running the MySQL DB engine\.
 
@@ -50,7 +50,7 @@ The following system stored procedures are supported for Amazon RDS DB instances
 + [mysql\.rds\_disable\_gsh\_rotation](mysql_rds_disable_gsh_rotation.md)
 + [mysql\.rds\_rotate\_global\_status\_history](mysql_rds_rotate_global_status_history.md)
 
-## SQL Reference Conventions<a name="RDS_SQL_reference_conventions"></a>
+## SQL reference conventions<a name="RDS_SQL_reference_conventions"></a>
 
 Following, you can find explanations for the conventions that are used to describe the syntax of the system stored procedures and tables described in the SQL reference section\. 
 

@@ -1,12 +1,12 @@
-# Collations and Character Sets for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation"></a>
+# Collations and character sets for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation"></a>
 
 SQL Server supports collations at multiple levels\. You set the default server collation when you create the DB instance\. You can override the collation in the database, table, or column level\.
 
 **Topics**
-+ [Server\-Level Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Server)
-+ [Database\-Level Collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column)
++ [Server\-level collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Server)
++ [Database\-level collation for Microsoft SQL Server](#Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column)
 
-## Server\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Server"></a>
+## Server\-level collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Server"></a>
 
 When you create a Microsoft SQL Server DB instance, you can set the server collation that you want to use\. If you don't choose a different collation, the server\-level collation defaults to SQL\_Latin1\_General\_CP1\_CI\_AS\. The server collation is applied by default to all databases and database objects\.
 
@@ -41,11 +41,11 @@ Currently, Amazon RDS supports the following server collations:
 |  SQL\_Latin1\_General\_CP850\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 42 on Code Page 850 for non\-Unicode Data  | 
 
 To choose the collation:
-+ If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then choose the collation from the **Collation** menu under **Database options**\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
++ If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then choose the collation from the **Collation** menu under **Database options**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
 + If you're using the AWS CLI, use the `--character-set-name` option with the `create-db-instance` command\. For more information, see [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\.
 + If you're using the Amazon RDS API, use the `CharacterSetName` parameter with the `CreateDBInstance` operation\. For more information, see [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
 
-## Database\-Level Collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column"></a>
+## Database\-level collation for Microsoft SQL Server<a name="Appendix.SQLServer.CommonDBATasks.Collation.Database-Table-Column"></a>
 
 You can change the default collation at the database, table, or column level by overriding the collation when creating a new database or database object\. For example, if your default server collation is SQL\_Latin1\_General\_CP1\_CI\_AS, you can change it to Mohawk\_100\_CI\_AS for Mohawk collation support\. Even arguments in a query can be type\-cast to use a different collation if necessary\.
 
@@ -60,7 +60,7 @@ CREATE TABLE [dbo].[Account]
 ```
 
 The Microsoft SQL Server DB engine supports Unicode by the built\-in NCHAR, NVARCHAR, and NTEXT data types\. For example, if you need CJK support, use these Unicode data types for character storage and override the default server collation when creating your databases and tables\. Here are several links from Microsoft covering collation and Unicode support for SQL Server:
-+ [Working with Collations](http://msdn.microsoft.com/en-us/library/ms187582%28v=sql.105%29.aspx) 
-+ [Collation and International Terminology](http://msdn.microsoft.com/en-us/library/ms143726%28v=sql.105%29) 
-+ [Using SQL Server Collations](http://msdn.microsoft.com/en-us/library/ms144260%28v=sql.105%29.aspx) 
-+ [International Considerations for Databases and Database Engine Applications](http://msdn.microsoft.com/en-us/library/ms190245%28v=sql.105%29.aspx)
++ [Working with collations](http://msdn.microsoft.com/en-us/library/ms187582%28v=sql.105%29.aspx) 
++ [Collation and international terminology](http://msdn.microsoft.com/en-us/library/ms143726%28v=sql.105%29) 
++ [Using SQL Server collations](http://msdn.microsoft.com/en-us/library/ms144260%28v=sql.105%29.aspx) 
++ [International considerations for databases and database engine applications](http://msdn.microsoft.com/en-us/library/ms190245%28v=sql.105%29.aspx)

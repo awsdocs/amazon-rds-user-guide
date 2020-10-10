@@ -4,29 +4,29 @@ Amazon RDS supports Oracle Enterprise Manager \(OEM\) Database Express through t
 + Oracle Enterprise Manager Database Express for Oracle 19c, Oracle 18c, and Oracle 12c
 + Oracle Enterprise Manager 11g Database Control for Oracle 11g
 
-OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager Database Express 18c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-18c.html), [Accessing Enterprise Manager Database Express 12c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-12c.html), and [Accessing Enterprise Manager 11g Database Control](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-0A67F8E8-E1A9-4D0E-8381-FEC4B9316841.htm#CSDBI3445) in the Oracle documentation\. 
+OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager database Express 18c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-18c.html), [Accessing Enterprise Manager database Express 12c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-12c.html), and [Accessing Enterprise Manager 11g database control](https://docs.oracle.com/cloud/latest/dbcs_dbaas/CSDBI/GUID-0A67F8E8-E1A9-4D0E-8381-FEC4B9316841.htm#CSDBI3445) in the Oracle documentation\. 
 
 The following are some limitations to using OEM Database: 
 + OEM Database is not supported on the db\.t3\.micro or db\.t3\.small DB instance classes\. 
 
-  For more information about DB instance classes, see [DB Instance Class Support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
+  For more information about DB instance classes, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 + OEM 11g Database Control is not compatible with the following time zones: America/Argentina/Buenos\_Aires, America/Matamoros, America/Monterrey, America/Toronto, Asia/Ashgabat, Asia/Dhaka, Asia/Kathmandu, Asia/Kolkata, Asia/Ulaanbaatar, Atlantic/Cape\_Verde, Australia/Eucla, Pacific/Kiritimati\. 
 
-  For more information about time zone support, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md)\. 
+  For more information about time zone support, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md)\. 
 
-## OEM Database Option Settings<a name="Appendix.Oracle.Options.OEM_DBControl.Options"></a>
+## OEM Database option settings<a name="Appendix.Oracle.Options.OEM_DBControl.Options"></a>
 
 Amazon RDS supports the following settings for the OEM option\. 
 
 
 ****  
 
-| Option Setting | Valid Values | Description | 
+| Option setting | Valid values | Description | 
 | --- | --- | --- | 
 | **Port** | An integer value |  The port on the DB instance that listens for OEM Database\. The default for OEM Database Express is 5500\. The default for OEM 11g Database Control is 1158\.  For OEM 11g Database Control, set the port to 1158 or to a value in the 5500 to 5519 range\.  | 
 | **Security Groups** | — |  A security group that has access to **Port**\.   | 
 
-## Adding the OEM Database Option<a name="Appendix.Oracle.Options.OEM_DBControl.Add"></a>
+## Adding the OEM Database option<a name="Appendix.Oracle.Options.OEM_DBControl.Add"></a>
 
 The general process for adding the OEM option to a DB instance is the following: 
 
@@ -46,18 +46,18 @@ When you add the OEM option for an Oracle 11g DB instance, no outage occurs, so 
 
    1. For **Major engine version** choose the version of your DB instance\. 
 
-   For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+   For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the OEM option to the option group, and configure the option settings\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [OEM Database Option Settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
+1. Add the OEM option to the option group, and configure the option settings\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [OEM Database option settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
 **Note**  
 If you add the OEM option to an existing option group that is already attached to one or more Oracle 19c, Oracle 18c, or Oracle 12c DB instances, a brief outage occurs while all the DB instances are automatically restarted\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 **Note**  
-You can also use the AWS CLI to add the OEM option\. For examples, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+You can also use the AWS CLI to add the OEM option\. For examples, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
 ## Using OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.Using"></a>
 
@@ -71,7 +71,7 @@ You can access either OEM Database Control or OEM Database Express from your web
 
 When you access either tool from your web browser, a login window appears that prompts you for a user name and password\. Type the master user name and master password for your DB instance\. You are now ready to manage your Oracle databases\. 
 
-## Modifying OEM Database Settings<a name="Appendix.Oracle.Options.OEM_DBControl.ModifySettings"></a>
+## Modifying OEM Database settings<a name="Appendix.Oracle.Options.OEM_DBControl.ModifySettings"></a>
 
 After you enable OEM Database, you can modify the Security Groups setting for the option\. 
 
@@ -85,9 +85,9 @@ You can't modify the OEM port number after you have associated the option group 
 
 1. Add the new option group to the DB instance\.
 
-For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [OEM Database Option Settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
+For more information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [OEM Database option settings](#Appendix.Oracle.Options.OEM_DBControl.Options)\. 
 
-## Performing Database Tasks with OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks"></a>
+## Using OEM Database<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks"></a>
 
 You can use Amazon RDS procedures to run certain OEM Database Express tasks\. By running these procedures, you can do the tasks listed following\.
 
@@ -95,10 +95,10 @@ You can use Amazon RDS procedures to run certain OEM Database Express tasks\. By
 OEM Database Express tasks run asynchronously\.
 
 **Topics**
-+ [Switching the Website Front End for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)
-+ [Switching the Website Front End for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)
++ [Switching the website front end for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)
++ [Switching the website front end for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)
 
-### Switching the Website Front End for OEM Database Express to Adobe Flash<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash"></a>
+### Switching the website front end for OEM Database Express to Adobe Flash<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash"></a>
 
 **Note**  
 This task is only available on Oracle DB instances running version 19c or later\.
@@ -107,7 +107,7 @@ Starting with Oracle 19c, Oracle has deprecated the former OEM Database Express 
 
 To switch the OEM Database Express website front end to Adobe Flash, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash`\. This procedure is equivalent to the `execemx emx` SQL command\.
 
-Security best practices discourage the use of Adobe Flash\. Although you can revert to the Flash\-based OEM Database Express, we recommend the use of the JET\-based OEM Database Express websites if possible\. If you revert to using Adobe Flash and want to switch back to using Oracle JET, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. After an Oracle database upgrade, a newer version of Oracle JET might resolve JET\-related issues in OEM Database Express\. For more information about switching to Oracle JET, see [Switching the Website Front End for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)\.
+Security best practices discourage the use of Adobe Flash\. Although you can revert to the Flash\-based OEM Database Express, we recommend the use of the JET\-based OEM Database Express websites if possible\. If you revert to using Adobe Flash and want to switch back to using Oracle JET, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. After an Oracle database upgrade, a newer version of Oracle JET might resolve JET\-related issues in OEM Database Express\. For more information about switching to Oracle JET, see [Switching the website front end for OEM Database Express to Oracle JET](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET)\.
 
 **Note**  
 Running this task from the source DB instance for a read replica also causes the read replica to switch its OEM Database Express website front ends to Adobe Flash\.
@@ -124,18 +124,18 @@ You can view the result by displaying the task's output file\.
 SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));
 ```
 
-Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
+Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
 
 You can also view the contents of the task's output file in the AWS Management Console by searching the log entries in the **Logs & events** section for the `task-id`\.
 
-### Switching the Website Front End for OEM Database Express to Oracle JET<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET"></a>
+### Switching the website front end for OEM Database Express to Oracle JET<a name="Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToOracleJET"></a>
 
 **Note**  
 This task is only available on Oracle DB instances running version 19c or later\.
 
 To switch the OEM Database Express website front end to Oracle JET, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet`\. This procedure is equivalent to the `execemx omx` SQL command\.
 
-By default, the OEM Database Express websites for Oracle DB instances running 19c or later use Oracle JET\. If you used the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash` procedure to switch the OEM Database Express website front end to Adobe Flash, you can switch back to Oracle JET\. To do this, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. For more information about switching to Adobe Flash, see [Switching the Website Front End for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)\.
+By default, the OEM Database Express websites for Oracle DB instances running 19c or later use Oracle JET\. If you used the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_flash` procedure to switch the OEM Database Express website front end to Adobe Flash, you can switch back to Oracle JET\. To do this, use the `rdsadmin.rdsadmin_oem_tasks.em_express_frontend_to_jet` procedure\. For more information about switching to Adobe Flash, see [Switching the website front end for OEM Database Express to Adobe Flash](#Appendix.Oracle.Options.OEM_DBControl.DBTasks.FrontEndToFlash)\.
 
 **Note**  
 Running this task from the source DB instance for a read replica also causes the read replica to switch its OEM Database Express website front ends to Oracle JET\.
@@ -152,14 +152,14 @@ You can view the result by displaying the task's output file\.
 SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-task-id.log'));
 ```
 
-Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading Files in a DB Instance Directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
+Replace *`task-id`* with the task ID returned by the procedure\. For more information about the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`, see [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) 
 
 You can also view the contents of the task's output file in the AWS Management Console by searching the log entries in the **Logs & events** section for the `task-id`\.
 
-## Removing the OEM Database Option<a name="Appendix.Oracle.Options.OEM_DBControl.Remove"></a>
+## Removing the OEM Database option<a name="Appendix.Oracle.Options.OEM_DBControl.Remove"></a>
 
 You can remove the OEM option from a DB instance\. When you remove the OEM option for an Oracle 19c, Oracle 18c, or Oracle 12c DB instance, a brief outage occurs while your DB instance is automatically restarted\. So, after you remove the OEM option, you don't need to restart your DB instance\. When you remove the OEM option for an Oracle 11g DB instance, there is not outage, and you don't need to restart your DB instance\. 
 
 To remove the OEM option from a DB instance, do one of the following: 
-+ Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ Modify the DB instance and specify a different option group that doesn't include the OEM option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ Remove the OEM option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ Modify the DB instance and specify a different option group that doesn't include the OEM option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 

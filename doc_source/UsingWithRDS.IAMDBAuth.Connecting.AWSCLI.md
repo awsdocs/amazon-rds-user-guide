@@ -1,17 +1,17 @@
-# Connecting to Your DB Instance Using IAM Authentication from the Command Line: AWS CLI and mysql Client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI"></a>
+# Connecting to your DB instance using IAM authentication from the command line: AWS CLI and mysql client<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI"></a>
 
 You can connect from the command line to an Amazon RDS DB instance with the AWS CLI and `mysql` command line tool as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
-+ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
-+ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
-+ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 **Topics**
-+ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
-+ [Connecting to a DB Instance](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
++ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
++ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect)
 
-## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken"></a>
+## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken"></a>
 
 The following example shows how to get a signed authentication token using the AWS CLI\.
 
@@ -35,7 +35,7 @@ The first several characters of the token look like the following\.
 rdsmysql.123456789012.us-west-2.rds.amazonaws.com:3306/?Action=connect&DBUser=jane_doe&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=900...
 ```
 
-## Connecting to a DB Instance<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect"></a>
+## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect"></a>
 
 The general format for connecting is shown following\.
 
@@ -48,7 +48,7 @@ The parameters are as follows:
 + `--port` – The port number used for connecting to your DB instance
 + `--ssl-ca` – The SSL certificate file that contains the public key
 
-  For more information, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection
 + `--user` – The database account that you want to access
 + `--password` – A signed IAM authentication token

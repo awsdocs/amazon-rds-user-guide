@@ -1,14 +1,14 @@
-# Oracle Character Sets Supported in Amazon RDS<a name="Appendix.OracleCharacterSets"></a>
+# Oracle character sets supported in Amazon RDS<a name="Appendix.OracleCharacterSets"></a>
 
 Amazon RDS for Oracle supports two types of character sets: the DB character set and national character set\. 
 
-## DB Character Set<a name="Appendix.OracleCharacterSets.db-character-set"></a>
+## DB character set<a name="Appendix.OracleCharacterSets.db-character-set"></a>
 
 The Oracle database character set is used in the `CHAR`, `VARCHAR2`, and `CLOB` data types\. The database also uses this character set for metadata such as table names, column names, and SQL statements\. The Oracle database character set is typically referred to as the DB character set\. 
 
 You set the character set when you create a DB instance\. You can't change the DB character set after you create the database\.
 
-### Supported DB Character Sets<a name="Appendix.OracleCharacterSets.db-character-set.supported"></a>
+### Supported DB character sets<a name="Appendix.OracleCharacterSets.db-character-set.supported"></a>
 
 The following table lists the Oracle DB character sets that are supported in Amazon RDS\. You can use a value from this table with the `--character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `CharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. 
 
@@ -51,11 +51,11 @@ The following table lists the Oracle DB character sets that are supported in Ama
 |  ZHT16MSWIN950  |  Microsoft Windows Code Page 950 Traditional Chinese  | 
 |  ZHT32EUC  |  EUC 32\-bit Traditional Chinese  | 
 
-### NLS\_LANG Environment Variable<a name="Appendix.OracleCharacterSets.db-character-set.nls_lang"></a>
+### NLS\_LANG environment variable<a name="Appendix.OracleCharacterSets.db-character-set.nls_lang"></a>
 
-A locale is a set of information addressing linguistic and cultural requirements that corresponds to a given language and country\. Setting the NLS\_LANG environment variable in your client’s environment is the simplest way to specify locale behavior for Oracle\. This variable sets the language and territory used by the client application and the database server\. It also indicates the client's character set, which corresponds to the character set for data entered or displayed by a client application\. For more information on NLS\_LANG and character sets, see [What is a Character Set or Code Page?](http://www.oracle.com/technetwork/database/database-technologies/globalization/nls-lang-099431.html#_Toc110410570) in the Oracle documentation\.
+A locale is a set of information addressing linguistic and cultural requirements that corresponds to a given language and country\. Setting the NLS\_LANG environment variable in your client's environment is the simplest way to specify locale behavior for Oracle\. This variable sets the language and territory used by the client application and the database server\. It also indicates the client's character set, which corresponds to the character set for data entered or displayed by a client application\. For more information on NLS\_LANG and character sets, see [What is a character set or code page?](http://www.oracle.com/technetwork/database/database-technologies/globalization/nls-lang-099431.html#_Toc110410570) in the Oracle documentation\.
 
-### NLS Initialization Parameters<a name="Appendix.OracleCharacterSets.db-character-set.nls_parameters"></a>
+### NLS initialization parameters<a name="Appendix.OracleCharacterSets.db-character-set.nls_parameters"></a>
 
 You can also set the following National Language Support \(NLS\) initialization parameters at the instance level for an Oracle DB instance in Amazon RDS:
 + NLS\_DATE\_FORMAT
@@ -66,7 +66,7 @@ You can also set the following National Language Support \(NLS\) initialization 
 + NLS\_TIMESTAMP\_FORMAT
 + NLS\_TIMESTAMP\_TZ\_FORMAT
 
-For information about modifying instance parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+For information about modifying instance parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 You can set other NLS initialization parameters in your SQL client\. For example, the following statement sets the NLS\_LANGUAGE initialization parameter to GERMAN in a SQL client that is connected to an Oracle DB instance:
 
@@ -74,9 +74,9 @@ You can set other NLS initialization parameters in your SQL client\. For example
 ALTER SESSION SET NLS_LANGUAGE=GERMAN;
 ```
 
-For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)\.
+For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
-## National Character Set<a name="Appendix.OracleCharacterSets.nchar-character-set"></a>
+## National character set<a name="Appendix.OracleCharacterSets.nchar-character-set"></a>
 
 The national character set is used in the `NCHAR`, `NVARCHAR2`, and `NCLOB` data types\. The national character set is typically referred to as the NCHAR character set\. Unlike the DB character set, the NCHAR character set doesn't affect database metadata\.
 
@@ -86,4 +86,4 @@ The NCHAR character set supports the following character sets:
 
 You can specify either of these values with the `--nchar-character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `NcharCharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. You can't change the national character set after you create the database\.
 
-For more information about Unicode in Oracle databases, see [Supporting Multilingual Databases with Unicode](https://docs.oracle.com/en/database/oracle/oracle-database/19/nlspg/supporting-multilingual-databases-with-unicode.html) in the Oracle documentation\.
+For more information about Unicode in Oracle databases, see [Supporting multilingual databases with unicode](https://docs.oracle.com/en/database/oracle/oracle-database/19/nlspg/supporting-multilingual-databases-with-unicode.html) in the Oracle documentation\.

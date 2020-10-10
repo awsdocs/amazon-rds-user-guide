@@ -12,7 +12,7 @@ In RDS, starting with SQL Server 2012 \(version 11\.00\.5058\.0\.v1 and later\),
 
 The following limitations apply to using MSDTC on RDS for SQL Server:
 + MSDTC isn't supported on instances using SQL Server Database Mirroring\. For more information, see [Transactions \- availability groups and database mirroring](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/transactions-always-on-availability-and-database-mirroring?view=sql-server-ver15#non-support-for-distributed-transactions)\.
-+ The `in-doubt xact resolution` parameter must be set to 1 or 2\. For more information, see [Modifying the Parameter for MSDTC](#ModifyParam.MSDTC)\.
++ The `in-doubt xact resolution` parameter must be set to 1 or 2\. For more information, see [Modifying the parameter for MSDTC](#ModifyParam.MSDTC)\.
 + MSDTC requires all host names participating in distributed transactions to be resolvable using their computer names\. RDS automatically maintains this functionality for domain\-joined instances\. However, for standalone instances make sure to configure the DNS server manually\.
 + Distributed transactions that depend on client dynamic link libraries \(DLLs\) on RDS instances aren't supported\.
 
@@ -30,7 +30,7 @@ Use the following process to enable MSDTC for your DB instance:
 
 1. Associate the option group and parameter group with the DB instance\.
 
-### Creating the Option Group for MSDTC<a name="Appendix.SQLServer.Options.MSDTC.OptionGroup"></a>
+### Creating the option group for MSDTC<a name="Appendix.SQLServer.Options.MSDTC.OptionGroup"></a>
 
 Use the AWS Management Console or the AWS CLI to create an option group that corresponds to the SQL Server engine and version of your DB instance\.
 
@@ -89,14 +89,14 @@ The following example creates an option group for SQL Server Standard Edition 20
       --option-group-description "MSDTC option group for SQL Server SE 2016"
   ```
 
-### Adding the MSDTC Option to the Option Group<a name="Appendix.SQLServer.Options.MSDTC.Add"></a>
+### Adding the MSDTC option to the option group<a name="Appendix.SQLServer.Options.MSDTC.Add"></a>
 
 Next, use the AWS Management Console or the AWS CLI to add the `MSDTC` option to the option group\.
 
 The following option settings are required:
 + **Port** – The port that you use to access MSDTC\. Allowed values are 1150–49151 except for 1234, 1434, 3260, 3343, 3389, and 47001\. The default value is 5000\.
 
-  Make sure that the port you want to use is enabled in your firewall rules\. Also, make sure as needed that this port is enabled in the inbound and outbound rules for the security group associated with your DB instance\. For more information, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. 
+  Make sure that the port you want to use is enabled in your firewall rules\. Also, make sure as needed that this port is enabled in the inbound and outbound rules for the security group associated with your DB instance\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\. 
 + **Security groups** – The VPC or DB security group memberships for your RDS DB instance\.
 + **Authentication type** – The authentication mode between hosts\. The following authentication types are supported:
   + Mutual – The RDS instances are mutually authenticated to each other using integrated authentication\. If this option is selected, all instances associated with this option group must be domain\-joined\.
@@ -106,10 +106,10 @@ The following option settings are required:
 The following option settings are optional:
 + **Enable inbound connections** – Whether to allow inbound MSDTC connections to instances associated with this option group\.
 + **Enable outbound connections** – Whether to allow outbound MSDTC connections from instances associated with this option group\.
-+ **Enable XA** – Whether to allow XA transactions\. For more information on the XA protocol, see [XA Specification](https://publications.opengroup.org/c193)\.
++ **Enable XA** – Whether to allow XA transactions\. For more information on the XA protocol, see [XA specification](https://publications.opengroup.org/c193)\.
 **Note**  
 Using custom XA dynamic link libraries isn't supported\.
-+ **Enable SNA LU** – Whether to allow the SNA LU protocol to be used for distributed transactions\. For more information on SNA LU protocol support, see [Managing IBM CICS LU 6\.2 Transactions](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms685136(v=vs.85)) in the Microsoft documentation\.
++ **Enable SNA LU** – Whether to allow the SNA LU protocol to be used for distributed transactions\. For more information on SNA LU protocol support, see [Managing IBM CICS LU 6\.2 transactions](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms685136(v=vs.85)) in the Microsoft documentation\.
 
 #### Console<a name="Options.MSDTC.Add.Console"></a>
 
@@ -188,7 +188,7 @@ Using custom XA dynamic link libraries isn't supported\.
 
    No reboot is required\.
 
-### Creating the Parameter Group for MSDTC<a name="MSDTC.CreateParamGroup"></a>
+### Creating the parameter group for MSDTC<a name="MSDTC.CreateParamGroup"></a>
 
 Create or modify a parameter group for the `in-doubt xact resolution` parameter that corresponds to the SQL Server edition and version of your DB instance\.
 
@@ -240,7 +240,7 @@ The following example creates a parameter group for SQL Server Standard Edition 
       --description "in-doubt xact resolution"
   ```
 
-### Modifying the Parameter for MSDTC<a name="ModifyParam.MSDTC"></a>
+### Modifying the parameter for MSDTC<a name="ModifyParam.MSDTC"></a>
 
 Modify the `in-doubt xact resolution` parameter in the parameter group that corresponds to the SQL Server edition and version of your DB instance\.
 
@@ -248,7 +248,7 @@ For MSDTC, set the `in-doubt xact resolution` parameter to one of the following:
 + `1` – `Presume commit`\. Any MSDTC in\-doubt transactions are presumed to have committed\.
 + `2` – `Presume abort`\. Any MSDTC in\-doubt transactions are presumed to have stopped\.
 
-For more information, see [in\-doubt xact resolution Server Configuration Option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/in-doubt-xact-resolution-server-configuration-option) in the Microsoft documentation\.
+For more information, see [in\-doubt xact resolution server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/in-doubt-xact-resolution-server-configuration-option) in the Microsoft documentation\.
 
 #### Console<a name="ModifyParam.MSDTC.Console"></a>
 
@@ -296,24 +296,24 @@ The following example modifies the parameter group that you created for SQL Serv
       --parameters "ParameterName='in-doubt xact resolution',ParameterValue=1,ApplyMethod=immediate"
   ```
 
-### Associating the Option Group and Parameter Group with the DB Instance<a name="MSDTC.Apply"></a>
+### Associating the option group and parameter group with the DB instance<a name="MSDTC.Apply"></a>
 
 You can use the AWS Management Console or the AWS CLI to associate the MSDTC option group and parameter group with the DB instance\.
 
 #### Console<a name="MSDTC.Apply.Console"></a>
 
 You can associate the MSDTC option group and parameter group with a new or existing DB instance\.
-+ For a new DB instance, associate them when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
-+ For an existing DB instance, associate them by modifying the instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
++ For a new DB instance, associate them when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ For an existing DB instance, associate them by modifying the instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 **Note**  
-If you use an domain\-joined existing DB instance, it must already have an Active Directory domain and AWS Identity and Access Management \(IAM\) role associated with it\. If you create a new domain\-joined instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB Instance](USER_SQLServerWinAuth.md)\.
+If you use an domain\-joined existing DB instance, it must already have an Active Directory domain and AWS Identity and Access Management \(IAM\) role associated with it\. If you create a new domain\-joined instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)\.
 
 #### CLI<a name="MSDTC.Apply.CLI"></a>
 
 You can associate the MSDTC option group and parameter group with a new or existing DB instance\.
 
 **Note**  
-If you use an existing domain\-joined DB instance, it must already have an Active Directory domain and IAM role associated with it\. If you create a new domain\-joined instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB Instance](USER_SQLServerWinAuth.md)\.
+If you use an existing domain\-joined DB instance, it must already have an Active Directory domain and IAM role associated with it\. If you create a new domain\-joined instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)\.
 
 **To create a DB instance with the MSDTC option group and parameter group**
 + Specify the same DB engine type and major version as you used when creating the option group\.  
@@ -381,19 +381,19 @@ If you use an existing domain\-joined DB instance, it must already have an Activ
       --apply-immediately
   ```
 
-## Using Distributed Transactions<a name="Appendix.SQLServer.Options.MSDTC.Using"></a>
+## Using distributed transactions<a name="Appendix.SQLServer.Options.MSDTC.Using"></a>
 
 In Amazon RDS for SQL Server, you run distributed transactions in the same way as distributed transactions running on\-premises:
 + Using \.NET framework `System.Transactions` promotable transactions, which optimizes distributed transactions by deferring their creation until they're needed\.
 
-  In this case, promotion is automatic and doesn't require you to make any intervention\. If there's only one resource manager within the transaction, no promotion is performed\. For more information about implicit transaction scopes, see [Implementing an Implicit Transaction using Transaction Scope](https://docs.microsoft.com/en-us/dotnet/framework/data/transactions/implementing-an-implicit-transaction-using-transaction-scope) in the Microsoft documentation\.
+  In this case, promotion is automatic and doesn't require you to make any intervention\. If there's only one resource manager within the transaction, no promotion is performed\. For more information about implicit transaction scopes, see [Implementing an implicit transaction using transaction scope](https://docs.microsoft.com/en-us/dotnet/framework/data/transactions/implementing-an-implicit-transaction-using-transaction-scope) in the Microsoft documentation\.
 
   Promotable transactions are supported with these \.NET implementations: 
-  + Starting with ADO\.NET 2\.0, `System.Data.SqlClient` supports promotable transactions with SQL Server\. For more information, see [System\.Transactions Integration with SQL Server](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/system-transactions-integration-with-sql-server) in the Microsoft documentation\.
-  + ODP\.NET supports `System.Transactions`\. A local transaction is created for the first connection opened in the `TransactionsScope` scope to Oracle Database 11g release 1 \(version 11\.1\) and later\. When a second connection is opened, this transaction is automatically promoted to a distributed transaction\. For more information about distributed transaction support in ODP\.NET, see [Microsoft Distributed Transaction Coordinator Integration](https://docs.oracle.com/en/database/oracle/oracle-data-access-components/18.3/ntmts/using-mts-with-oracledb.html) in the Microsoft documentation\.
+  + Starting with ADO\.NET 2\.0, `System.Data.SqlClient` supports promotable transactions with SQL Server\. For more information, see [System\.Transactions integration with SQL Server](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/system-transactions-integration-with-sql-server) in the Microsoft documentation\.
+  + ODP\.NET supports `System.Transactions`\. A local transaction is created for the first connection opened in the `TransactionsScope` scope to Oracle Database 11g release 1 \(version 11\.1\) and later\. When a second connection is opened, this transaction is automatically promoted to a distributed transaction\. For more information about distributed transaction support in ODP\.NET, see [Microsoft Distributed Transaction Coordinator integration](https://docs.oracle.com/en/database/oracle/oracle-data-access-components/18.3/ntmts/using-mts-with-oracledb.html) in the Microsoft documentation\.
 + Using the `BEGIN DISTRIBUTED TRANSACTION` statement\. For more information, see [BEGIN DISTRIBUTED TRANSACTION \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/begin-distributed-transaction-transact-sql) in the Microsoft documentation\.
 
-## Using Transaction Tracing<a name="MSDTC.Tracing"></a>
+## Using transaction tracing<a name="MSDTC.Tracing"></a>
 
 RDS supports controlling MSDTC transaction traces and downloading them from the RDS DB instance for troubleshooting\. You can control transaction tracing sessions by running the following RDS stored procedure\.
 
@@ -412,7 +412,7 @@ The following parameters are optional:
 + `@traceaborted` – Set to 1 to trace canceled distributed transactions\. The default is 0\.
 + `@tracelong` – Set to 1 to trace long\-running distributed transactions\. The default is 0\.
 
-**Example of START Tracing Action**  
+**Example of START tracing action**  
 To start a new transaction tracing session, run the following example statement\.  
 
 ```
@@ -423,7 +423,7 @@ exec msdb.dbo.rds_msdtc_transaction_tracing 'START',
 ```
 Only one transaction tracing session can be active at one time\. If a new tracing session `START` command is issued while a tracing session is active, an error is returned and the active tracing session remains unchanged\.
 
-**Example of STOP Tracing Action**  
+**Example of STOP tracing action**  
 To stop a transaction tracing session, run the following statement\.  
 
 ```
@@ -450,10 +450,10 @@ Logfile D:\rdsdbdata\MSDTC\Trace\dtctrace.log:
 Processing completed   Buffers: 1, Events: 3, EventsLost: 0 :: Format Errors: 0, Unknowns: 3
 Event traces dumped to d:\rdsdbdata\Log\msdtc_<timestamp>.log
 ```
-You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.  
+You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Amazon RDS database log files](USER_LogAccess.md)\.  
 The trace session logs remain on the instance for 35 days\. Any older trace session logs are automatically deleted\.
 
-**Example of STATUS Tracing Action**  
+**Example of STATUS tracing action**  
 To trace the status of a transaction tracing session, run the following statement\.  
 
 ```
@@ -474,9 +474,9 @@ The first line indicates the overall result of the operation: `OK` or `ERROR` wi
   + `Stopped` if no tracing session is running\.
 + The tracing session flags can be `True` or `False` depending on how they were set in the `START` command\.
 
-## Modifying the MSDTC Option<a name="Appendix.SQLServer.Options.MSDTC.Modify"></a>
+## Modifying the MSDTC option<a name="Appendix.SQLServer.Options.MSDTC.Modify"></a>
 
-After you enable the `MSDTC` option, you can modify its settings\. For information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\.
+After you enable the `MSDTC` option, you can modify its settings\. For information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\.
 
 **Note**  
 Some changes to MSDTC option settings require the MSDTC service to be restarted\. This requirement can affect running distributed transactions\.
@@ -530,9 +530,9 @@ To disable MSDTC, remove the `MSDTC` option from its option group\.
 ## Troubleshooting MSDTC for RDS SQL Server<a name="Appendix.SQLServer.Options.MSDTC.Troubleshooting"></a>
 
 In some cases, you might have trouble establishing a connection between MSDTC running on a client computer and the MSDTC service running on an RDS SQL Server DB instance\. If so, make sure of the following:
-+ The inbound rules for the security group associated with the DB instance are configured correctly\. For more information, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
++ The inbound rules for the security group associated with the DB instance are configured correctly\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 + Your client computer is configured correctly\.
-+ The MSDTC firewall rules on your client compter are enabled\.
++ The MSDTC firewall rules on your client computer are enabled\.
 
 **To configure the client computer**
 

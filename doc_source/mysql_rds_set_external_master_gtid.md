@@ -39,18 +39,18 @@ Otherwise, if you are using `mysqldump` version 10\.0\.13 or greater to populate
 ```
 SELECT BINLOG_GTID_POS('<binary log file name>', <binary log file position>);
 ```
-For more information about the MariaDB implementation of GTIDs, go to [Global Transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
+For more information about the MariaDB implementation of GTIDs, go to [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
 
  *ssl\_encryption*   
 A value that specifies whether Secure Socket Layer \(SSL\) encryption is used on the replication connection\. 1 specifies to use SSL encryption, 0 specifies to not use encryption\. The default is 0\.  
 The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set to 0, which means that the connection is encrypted, but the certificates aren't verified\.
 
-## Usage Notes<a name="mysql_rds_set_external_master_gtid-usage-notes"></a>
+## Usage notes<a name="mysql_rds_set_external_master_gtid-usage-notes"></a>
 
-The `mysql.rds_set_external_master_gtid` procedure must be run by the master user\. It must be run on the MariaDB DB instance that you are configuring as the replica of a MariaDB instance running external to Amazon RDS\. Before running `mysql.rds_set_external_master_gtid`, you must have configured the instance of MariaDB running external to Amazon RDS as a source instance\. For more information, see [Importing Data into a MariaDB DB Instance](MariaDB.Procedural.Importing.md)\.
+The `mysql.rds_set_external_master_gtid` procedure must be run by the master user\. It must be run on the MariaDB DB instance that you are configuring as the replica of a MariaDB instance running external to Amazon RDS\. Before running `mysql.rds_set_external_master_gtid`, you must have configured the instance of MariaDB running external to Amazon RDS as a source instance\. For more information, see [Importing data into a MariaDB DB instance](MariaDB.Procedural.Importing.md)\.
 
 **Warning**  
-Do not use `mysql.rds_set_external_master_gtid` to manage replication between two Amazon RDS DB instances\. Use it only when replicating with a MariaDB instance running external to RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with Read Replicas](USER_ReadRepl.md)\.
+Do not use `mysql.rds_set_external_master_gtid` to manage replication between two Amazon RDS DB instances\. Use it only when replicating with a MariaDB instance running external to RDS\. For information about managing replication between Amazon RDS DB instances, see [Working with read replicas](USER_ReadRepl.md)\.
 
 After calling `mysql.rds_set_external_master_gtid` to configure an Amazon RDS DB instance as a read replica, you can call [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) on the replica to start the replication process\. You can call [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) to remove the read replica configuration\.
 

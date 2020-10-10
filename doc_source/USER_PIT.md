@@ -1,4 +1,4 @@
-# Restoring a DB Instance to a Specified Time<a name="USER_PIT"></a>
+# Restoring a DB instance to a specified time<a name="USER_PIT"></a>
 
 You can restore a DB instance to a specific point in time, creating a new DB instance\. When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` operation after the DB instance is available\.
 

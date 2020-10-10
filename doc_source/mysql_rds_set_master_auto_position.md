@@ -17,7 +17,7 @@ A value that indicates whether to use log file position replication or GTID\-bas
 + `0` – Use the replication method based on binary log file position\. The default is `0`\.
 + `1` – Use the GTID\-based replication method\.
 
-## Usage Notes<a name="mysql_rds_set_master_auto_position-usage-notes"></a>
+## Usage notes<a name="mysql_rds_set_master_auto_position-usage-notes"></a>
 
 The master user must run the `mysql.rds_set_master_auto_position` procedure\.
 

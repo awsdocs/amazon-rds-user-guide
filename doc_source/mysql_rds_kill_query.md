@@ -13,9 +13,9 @@ CALL mysql.rds_kill_query(queryID);
  *queryID*   
 The identity of the query to be ended\.
 
-## Usage Notes<a name="mysql_rds_kill_query-usage-notes"></a>
+## Usage notes<a name="mysql_rds_kill_query-usage-notes"></a>
 
-To stop a query running against the MySQL server, use the `mysql_rds_kill_query` procedure and pass in the ID of that query\. To obtain the query ID, query the MySQL [INFORMATION\_SCHEMA PROCESSLIST Table](https://dev.mysql.com/doc/refman/8.0/en/processlist-table.html)\. The connection to the MySQL server is retained\. 
+To stop a query running against the MySQL server, use the `mysql_rds_kill_query` procedure and pass in the ID of that query\. To obtain the query ID, query the MySQL [INFORMATION\_SCHEMA PROCESSLIST table](https://dev.mysql.com/doc/refman/8.0/en/processlist-table.html)\. The connection to the MySQL server is retained\. 
 
 ## Examples<a name="mysql_rds_kill_query-examples"></a>
 

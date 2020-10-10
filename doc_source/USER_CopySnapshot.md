@@ -1,4 +1,4 @@
-# Copying a Snapshot<a name="USER_CopySnapshot"></a>
+# Copying a snapshot<a name="USER_CopySnapshot"></a>
 
 With Amazon RDS, you can copy automated or manual DB snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
 
@@ -13,13 +13,13 @@ The following are some limitations when you copy snapshots:
 + You can have up to five snapshot copy requests in progress to a single destination Region per account\.
 + Depending on the Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. If there is a large number of cross\-Region snapshot copy requests from a given source AWS Region, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
 
-## Snapshot Retention<a name="USER_CopySnapshot.Retention"></a>
+## Snapshot retention<a name="USER_CopySnapshot.Retention"></a>
 
 Amazon RDS deletes automated snapshots at the end of their retention period, when you disable automated snapshots for a DB instance, or when you delete a DB instance\. If you want to keep an automated snapshot for a longer period, copy it to create a manual snapshot, which is retained until you delete it\. Amazon RDS storage costs might apply to manual snapshots if they exceed your default storage space\. 
 
-For more information about backup storage costs, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about backup storage costs, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 
-## Copying Shared Snapshots<a name="USER_CopySnapshot.Shared"></a>
+## Copying shared snapshots<a name="USER_CopySnapshot.Shared"></a>
 
 You can copy snapshots shared to you by other AWS accounts\. If you are copying an encrypted snapshot that has been shared from another AWS account, you must have access to the AWS KMS customer master key \(CMK\) that was used to encrypt the snapshot\. 
 
@@ -28,24 +28,26 @@ You can copy a shared DB snapshot across Regions, provided that the snapshot is 
 **Note**  
 Copying shared incremental snapshots in the same AWS Region is supported when they're unencrypted, or encrypted using the same AWS KMS key as the initial full snapshot\. If you use a different KMS key to encrypt subsequent snapshots when copying them, those shared snapshots are full snapshots\.
 
-## Handling Encryption<a name="USER_CopySnapshot.Encryption"></a>
+## Handling encryption<a name="USER_CopySnapshot.Encryption"></a>
 
 You can copy a snapshot that has been encrypted using an AWS KMS customer master key \(CMK\)\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same AWS KMS CMK as the original snapshot, or you can specify a different AWS KMS CMK\. If you copy an encrypted snapshot across Regions, you can't use the same AWS KMS CMK for the copy as used for the source snapshot, because AWS KMS CMKs are Region\-specific\. Instead, you must specify a AWS KMS CMK valid in the destination AWS Region\.
 
-The source snapshot remains encrypted throughout the copy process\. For more information, see [Limitations of Amazon RDS Encrypted DB Instances](Overview.Encryption.md#Overview.Encryption.Limitations)\.
+The source snapshot remains encrypted throughout the copy process\. For more information, see [Limitations of Amazon RDS encrypted DB instances](Overview.Encryption.md#Overview.Encryption.Limitations)\.
 
 You can also encrypt a copy of an unencrypted snapshot\. This way, you can quickly add encryption to a previously unencrypted DB instance\. That is, you can create a snapshot of your DB instance when you are ready to encrypt it, and then create a copy of that snapshot and specify a AWS KMS CMK to encrypt that snapshot copy\. You can then restore an encrypted DB instance from the encrypted snapshot\.
 
-## Copying Snapshots Across AWS Regions<a name="USER_CopySnapshot.AcrossRegions"></a>
+## Incremental snapshot copying<a name="USER_CopySnapshot.Incremental"></a>
 
-When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the first copy is a full snapshot copy, even if you copy an incremental snapshot\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\. After the first snapshot copy, you can copy incremental snapshots of the same DB instance to the same destination Region within the same AWS account\.
-
-An incremental snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
+An *incremental* snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\. Incremental snapshot copying across AWS Regions is supported for both unencrypted and encrypted snapshots\.
 
 **Note**  
-For shared snapshots, copying incremental snapshots across AWS Regions is only supported when they're unencrypted\.
+When you copy a source snapshot that is a snapshot copy, the new copy isn't incremental because the source snapshot copy doesn't include the required metadata for incremental copies\.
 
-Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\. 
+Whether a snapshot copy is incremental is determined by the most recently completed snapshot copy\. If the most recent snapshot copy was deleted, the next copy is a full copy, not an incremental copy\. If a copy is still pending when you start a another copy, the second copy starts only after the first copy finishes\.
+
+## Copying snapshots across AWS Regions<a name="USER_CopySnapshot.AcrossRegions"></a>
+
+Depending on the AWS Regions involved and the amount of data to be copied, a cross\-Region snapshot copy can take hours to complete\. In some cases, there might be a large number of cross\-Region snapshot copy requests from a given source AWS Region\. In these cases, Amazon RDS might put new cross\-Region copy requests from that source AWS Region into a queue until some in\-progress copies complete\. No progress information is displayed about copy requests while they are in the queue\. Progress information is displayed when the copy starts\.
 
 Cross\-Region snapshot copy isn't supported in the following opt\-in AWS Regions:
 + Africa \(Cape Town\)
@@ -53,22 +55,29 @@ Cross\-Region snapshot copy isn't supported in the following opt\-in AWS Regions
 + Europe \(Milan\)
 + Middle East \(Bahrain\)
 
-**Note**  
-When you copy a source snapshot that is a snapshot copy, the copy isn't incremental because the snapshot copy doesn't include the required metadata for incremental copies\.
+When you copy a snapshot to an AWS Region that is different from the source snapshot's AWS Region, the first copy is a full snapshot copy, even if you copy an incremental snapshot\. A full snapshot copy contains all of the data and metadata required to restore the DB instance\. After the first snapshot copy, you can copy incremental snapshots of the same DB instance to the same destination Region within the same AWS account\. For more information on incremental snapshots, see [Incremental snapshot copying](#USER_CopySnapshot.Incremental)\.
 
-## Option Group Considerations<a name="USER_CopySnapshot.Options"></a>
+When you copy a snapshot across Regions or accounts, the copy is an incremental copy if the following conditions are met:
++ The snapshot was copied to the destination Region or account previously\.
++ The most recent snapshot copy still exists in the destination Region or account\.
++ All copies of the snapshot in the destination Region or account are either unencrypted or were encrypted using the same CMK\.
+
+**Note**  
+For shared snapshots, copying incremental snapshots across AWS Regions is only supported when they're unencrypted\.
+
+## Option group considerations<a name="USER_CopySnapshot.Options"></a>
 
 Option groups are specific to the AWS Region that they are created in, and you can't use an option group from one AWS Region in another AWS Region\. 
 
-When you copy a snapshot across Regions, you can specify a new option group for the snapshot\. We recommend that you prepare the new option group before you copy the snapshot\. In the destination AWS Region, create an option group with the same settings as the original DB instance \. If one already exists in the new AWS Region, you can use that one\. 
+When you copy a snapshot across Regions, you can specify a new option group for the snapshot\. We recommend that you prepare the new option group before you copy the snapshot\. In the destination AWS Region, create an option group with the same settings as the original DB instance\. If one already exists in the new AWS Region, you can use that one\.
 
-If you copy a snapshot and you don't specify a new option group for the snapshot, when you restore it the DB instance gets the default option group\. To give the new DB instance the same options as the original, you must do the following: 
+If you copy a snapshot and you don't specify a new option group for the snapshot, when you restore it the DB instance gets the default option group\. To give the new DB instance the same options as the original, you must do the following:
 
-1. In the destination AWS Region, create an option group with the same settings as the original DB instance \. If one already exists in the new AWS Region, you can use that one\. 
+1. In the destination AWS Region, create an option group with the same settings as the original DB instance \. If one already exists in the new AWS Region, you can use that one\.
 
-1. After you restore the snapshot in the destination AWS Region, modify the new DB instance and add the new or existing option group from the previous step\. 
+1. After you restore the snapshot in the destination AWS Region, modify the new DB instance and add the new or existing option group from the previous step\.
 
-## Parameter Group Considerations<a name="USER_CopySnapshot.Parameters"></a>
+## Parameter group considerations<a name="USER_CopySnapshot.Parameters"></a>
 
 When you copy a snapshot across Regions, the copy doesn't include the parameter group used by the original DB instance \. When you restore a snapshot to create a new DB instance , that DB instance gets the default parameter group for the AWS Region it is created in\. To give the new DB instance the same parameters as the original, you must do the following: 
 
@@ -76,13 +85,13 @@ When you copy a snapshot across Regions, the copy doesn't include the parameter 
 
 1. After you restore the snapshot in the destination AWS Region, modify the new DB instance and add the new or existing parameter group from the previous step\. 
 
-## Copying a DB Snapshot<a name="USER_CopyDBSnapshot"></a>
+## Copying a DB snapshot<a name="USER_CopyDBSnapshot"></a>
 
-Use the procedures in this topic to copy a DB snapshot\. For an overview of copying a snapshot, see [Copying a Snapshot](#USER_CopySnapshot) 
+Use the procedures in this topic to copy a DB snapshot\. For an overview of copying a snapshot, see [Copying a snapshot](#USER_CopySnapshot) 
 
 For each AWS account, you can copy up to five DB snapshots at a time from one AWS Region to another\. If you copy a DB snapshot to another AWS Region, you create a manual DB snapshot that is retained in that AWS Region\. Copying a DB snapshot out of the source AWS Region incurs Amazon RDS data transfer charges\. 
 
-For more information about data transfer pricing, see [Amazon RDS Pricing](https://aws.amazon.com/rds/pricing/)\. 
+For more information about data transfer pricing, see [Amazon RDS pricing](https://aws.amazon.com/rds/pricing/)\. 
 
 After the DB snapshot copy has been created in the new AWS Region, the DB snapshot copy behaves the same as all other DB snapshots in that AWS Region\. 
 
@@ -113,7 +122,7 @@ The destination AWS Region must have the same database engine version available 
 
    Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a non\-default option group\. 
 
-   If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across Regions\. For more information, see [Option Group Considerations](#USER_CopySnapshot.Options)\.
+   If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across Regions\. For more information, see [Option group considerations](#USER_CopySnapshot.Options)\.
 
 1. \(Optional\) Select **Copy Tags** to copy tags and values from the snapshot to the copy of the snapshot\. 
 
@@ -140,7 +149,7 @@ The following options are used to copy a DB snapshot\. Not all options are requi
 
   Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a non\-default option group\. 
 
-  If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across Regions\. For more information, see [Option Group Considerations](#USER_CopySnapshot.Options)\.
+  If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across Regions\. For more information, see [Option group considerations](#USER_CopySnapshot.Options)\.
 + `--kms-key-id` – The AWS KMS key identifier for an encrypted DB snapshot\. The AWS KMS key identifier is the Amazon Resource Name \(ARN\), key identifier, or key alias for the AWS KMS CMK\. 
   + If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new AWS KMS CMK\. If you don't specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same AWS KMS CMK as the source DB snapshot\. 
   + If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter\. 
@@ -148,7 +157,7 @@ The following options are used to copy a DB snapshot\. Not all options are requi
   + If you copy an encrypted snapshot to a different AWS Region, then you must specify a AWS KMS CMK for the destination AWS Region\. AWS KMS CMKs are specific to the AWS Region that they are created in, and you cannot use encryption keys from one AWS Region in another AWS Region\. 
 + `--source-region` – The ID of the AWS Region of the source DB snapshot\. If you copy an encrypted snapshot to a different AWS Region, then you must specify this option\. 
 
-**Example From Unencrypted, To Same Region**  
+**Example From unencrypted, to same Region**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
 For Linux, macOS, or Unix:  
 
@@ -167,7 +176,7 @@ aws rds copy-db-snapshot ^
     --copy-tags
 ```
 
-**Example From Unencrypted, Across Regions**  
+**Example From unencrypted, across Regions**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the AWS Region in which the command is run\.   
 For Linux, macOS, or Unix:  
 
@@ -184,7 +193,7 @@ aws rds copy-db-snapshot ^
     --target-db-snapshot-identifier mydbsnapshotcopy
 ```
 
-**Example From Encrypted, Across Regions**  
+**Example From encrypted, across Regions**  
 The following code example copies an encrypted DB snapshot from the us\-west\-2 Region in the us\-east\-1 Region\. Run the command in the us\-east\-1 Region\.   
 For Linux, macOS, or Unix:  
 
@@ -223,7 +232,7 @@ The following parameters are used to copy a DB snapshot\. Not all parameters are
 
   Specify this parameter if you are copying a snapshot from one AWS Region to another, and your DB instance uses a non\-default option group\. 
 
-  If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this parameter when copying across Regions\. For more information, see [Option Group Considerations](#USER_CopySnapshot.Options)\.
+  If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this parameter when copying across Regions\. For more information, see [Option group considerations](#USER_CopySnapshot.Options)\.
 + `KmsKeyId` – The AWS KMS key identifier for an encrypted DB snapshot\. The AWS KMS key identifier is the Amazon Resource Name \(ARN\), key identifier, or key alias for the AWS KMS CMK\. 
   + If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new AWS KMS CMK\. If you don't specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same AWS KMS CMK as the source DB snapshot\. 
   + If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter\. 
@@ -241,10 +250,10 @@ The following parameters are used to copy a DB snapshot\. Not all parameters are
   + `SourceDBSnapshotIdentifier` \- The DB snapshot identifier for the encrypted snapshot to be copied\. This identifier must be in the Amazon Resource Name \(ARN\) format for the source AWS Region\. For example, if you are copying an encrypted DB snapshot from the us\-west\-2 Region, then your `SourceDBSnapshotIdentifier` looks like the following example: `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`\. 
 
   For more information on Signature Version 4 signed requests, see the following:
-  + [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the Amazon Simple Storage Service API Reference
-  + [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the AWS General Reference
+  + [Authenticating requests: Using query parameters \(AWS signature version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the Amazon Simple Storage Service API Reference
+  + [Signature version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the AWS General Reference
 
-**Example From Unencrypted, To Same Region**  
+**Example From unencrypted, to same Region**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
 
 ```
@@ -263,7 +272,7 @@ https://rds.us-west-1.amazonaws.com/
 	&X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
 ```
 
-**Example From Unencrypted, Across Regions**  
+**Example From unencrypted, across Regions**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the us\-west\-1 Region\.   
 
 ```
@@ -281,7 +290,7 @@ https://rds.us-west-1.amazonaws.com/
 	&X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
 ```
 
-**Example From Encrypted, Across Regions**  
+**Example From encrypted, across Regions**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the us\-east\-1 Region\.   
 
 ```

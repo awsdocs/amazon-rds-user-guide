@@ -1,11 +1,11 @@
-# Viewing Amazon RDS Events<a name="USER_ListEvents"></a>
+# Viewing Amazon RDS events<a name="USER_ListEvents"></a>
 
  Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the date and time of the event, the source name and source type of the event, and a message associated with the event\.
 
 You can retrieve events for your RDS resources through the AWS Management Console, which shows events from the past 24 hours\. You can also retrieve events for your RDS resources by using the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command, or the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API operation\. If you use the AWS CLI or the RDS API to view events, you can retrieve events for up to the past 14 days\. 
 
 **Note**  
-If you need to store events for longer periods of time, you can send Amazon RDS events to CloudWatch Events\. For more information, see [Getting CloudWatch Events and Amazon EventBridge Events for Amazon RDS](rds-cloud-watch-events.md)
+If you need to store events for longer periods of time, you can send Amazon RDS events to CloudWatch Events\. For more information, see [Getting CloudWatch Events and Amazon EventBridge events for Amazon RDS](rds-cloud-watch-events.md)
 
 ## Console<a name="USER_ListEvents.CON"></a>
 

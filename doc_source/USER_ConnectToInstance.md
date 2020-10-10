@@ -1,10 +1,10 @@
-# Connecting to a DB Instance Running the MySQL Database Engine<a name="USER_ConnectToInstance"></a>
+# Connecting to a DB instance running the MySQL database engine<a name="USER_ConnectToInstance"></a>
 
- Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
+ Before you can connect to a DB instance running the MySQL database engine, you must create a DB instance\. For information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. After Amazon RDS provisions your DB instance, you can use any standard MySQL client application or utility to connect to the instance\. In the connection string, you specify the DNS address from the DB instance endpoint as the host parameter, and specify the port number from the DB instance endpoint as the port parameter\. 
 
 To authenticate to your RDS DB instance, you can use one of the authentication methods for MySQL and IAM database authentication\.
-+ To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication Method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
-+ To learn how to authenticate to MySQL using IAM database authentication, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
++ To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
++ To learn how to authenticate to MySQL using IAM database authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list the details of an Amazon RDS DB instance, including its endpoint\. 
 
@@ -21,18 +21,18 @@ If an endpoint value is `mysql–instance1.123456789012.us-east-1.rds.amazonaws.
 + For host or host name, specify `mysql–instance1.123456789012.us-east-1.rds.amazonaws.com`
 + For port, specify `3306`
 
-You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- The MySQL Command\-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL client\), see [Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
+You can connect to an Amazon RDS MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, go to [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, go to the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
 
-To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-You can use SSL encryption on connections to an Amazon RDS MySQL DB instance\. For information, see [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
+You can use SSL encryption on connections to an Amazon RDS MySQL DB instance\. For information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\. If you are using IAM database authentication, you must use an SSL connection\. For information, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
 
-You can also connect to a DB instance from a web server\. For more information, see [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md)\.
+You can also connect to a DB instance from a web server\. For more information, see [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)\.
 
 **Note**  
-For information on connecting to a MariaDB DB instance, see [Connecting to a DB Instance Running the MariaDB Database Engine](USER_ConnectToMariaDBInstance.md)\.
+For information on connecting to a MariaDB DB instance, see [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)\.
 
-## Connecting from the MySQL Client<a name="USER_ConnectToInstance.CLI"></a>
+## Connecting from the MySQL client<a name="USER_ConnectToInstance.CLI"></a>
 
 To connect to a DB instance using the MySQL client, type the following command at a command prompt to connect to a DB instance using the MySQL client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the username of a valid database user, such as the master user\. Enter the master user password when prompted\. 
 
@@ -54,13 +54,13 @@ mysql>
 
 ## Connecting with SSL<a name="USER_ConnectToInstanceSSL.CLI"></a>
 
-Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication\. To connect to your DB instance using IAM database authentication, see [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. To connect to your DB instance using native password authentication, you can follow these steps: 
+Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication\. To connect to your DB instance using IAM database authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. To connect to your DB instance using native password authentication, you can follow these steps: 
 
 **To connect to a DB instance with SSL using the MySQL client**
 
 1. Download a root certificate that works for all AWS Regions\.
 
-   For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the username of a valid database user, such as the master user\. Enter the master user password when prompted\.
 
@@ -131,7 +131,7 @@ mysql>
 
 1. Choose **OK**\.
 
-## Troubleshooting Connections to Your MySQL DB Instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
+## Troubleshooting connections to your MySQL DB instance<a name="USER_ConnectToInstance.Troubleshooting"></a>
 
 Two common causes of connection failures to a new DB instance are:
 + The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MySQL application or utility is running\. If the DB instance was created in a VPC, it must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
@@ -141,4 +141,4 @@ Two common causes of connection failures to a new DB instance are:
   If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 
-For more information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+For more information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

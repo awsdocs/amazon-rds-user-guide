@@ -17,7 +17,7 @@ gtid_to_skip
  *gtid\_to\_skip*   
 The GTID of the replication transaction to skip\.
 
-## Usage Notes<a name="mysql_rds_skip_transaction_with_gtid-usage-notes"></a>
+## Usage notes<a name="mysql_rds_skip_transaction_with_gtid-usage-notes"></a>
 
 The master user must run the `mysql.rds_skip_transaction_with_gtid` procedure\.
 

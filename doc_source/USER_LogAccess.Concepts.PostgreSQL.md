@@ -1,21 +1,21 @@
-# PostgreSQL Database Log Files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
+# PostgreSQL database log files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
 
-Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error Reporting and Logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
+Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
 
-To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Topics**
-+ [Setting the Log Retention Period](#USER_LogAccess.PostgreSQL.log_retention_period)
-+ [Using Query Logging](#USER_LogAccess.PostgreSQL.Query_Logging)
-+ [Publishing PostgreSQL Logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)
++ [Setting the log retention period](#USER_LogAccess.PostgreSQL.log_retention_period)
++ [Using query logging](#USER_LogAccess.PostgreSQL.Query_Logging)
++ [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)
 
-## Setting the Log Retention Period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
+## Setting the log retention period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
 
 To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL Logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)\.  
+To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
-## Using Query Logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
+## Using query logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
 
 To enable query logging for your PostgreSQL DB instance, set two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. 
 
@@ -72,7 +72,7 @@ To set up query logging, take the following steps:
    2013-11-05 16:51:18 UTC:[local]:master@postgres:[9193]:LOG:  duration: 3.469 ms
    ```
 
-## Publishing PostgreSQL Logs to CloudWatch Logs<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs"></a>
+## Publishing PostgreSQL logs to CloudWatch Logs<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs"></a>
 
 To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. 
 

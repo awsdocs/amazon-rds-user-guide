@@ -1,20 +1,20 @@
-# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
+# Connecting to your DB instance using IAM authentication and the AWS SDK for Java<a name="UsingWithRDS.IAMDBAuth.Connecting.Java"></a>
 
-You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Java as described following\.
+You can connect to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Java as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
-+ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
-+ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
-+ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 **Topics**
-+ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
-+ [Manually Constructing an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2)
-+ [Connecting to a DB Instance](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect)
++ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)
++ [Manually constructing an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2)
++ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect)
 
-## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken"></a>
+## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken"></a>
 
-If you are writing programs using the AWS SDK for Java, you can get a signed authentication token using the `RdsIamAuthTokenGenerator` class\. Using this class requires that you provide AWS credentials\. To do this, you create an instance of the `DefaultAWSCredentialsProviderChain` class\. `DefaultAWSCredentialsProviderChain` uses the first AWS access key and secret key that it finds in the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\. For more information about AWS access keys, see [Managing Access Keys for IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
+If you are writing programs using the AWS SDK for Java, you can get a signed authentication token using the `RdsIamAuthTokenGenerator` class\. Using this class requires that you provide AWS credentials\. To do this, you create an instance of the `DefaultAWSCredentialsProviderChain` class\. `DefaultAWSCredentialsProviderChain` uses the first AWS access key and secret key that it finds in the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\. For more information about AWS access keys, see [Managing access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)\.
 
 After you create an instance of `RdsIamAuthTokenGenerator`, you can call the `getAuthToken` method to obtain a signed token\. Provide the AWS Region, host name, port number, and user name\. The following code example illustrates how to do this\.
 
@@ -57,9 +57,9 @@ public class GenerateRDSAuthToken {
 }
 ```
 
-## Manually Constructing an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2"></a>
+## Manually constructing an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken2"></a>
 
-In Java, the easiest way to generate an authentication token is to use `RdsIamAuthTokenGenerator`\. This class creates an authentication token for you, and then signs it using AWS signature version 4\. For more information, see [Signature Version 4 Signing Process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference\.*
+In Java, the easiest way to generate an authentication token is to use `RdsIamAuthTokenGenerator`\. This class creates an authentication token for you, and then signs it using AWS signature version 4\. For more information, see [Signature version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference\.*
 
 However, you can also construct and sign an authentication token manually, as shown in the following code example\.
 
@@ -231,13 +231,13 @@ public class CreateRDSAuthTokenManually {
 }
 ```
 
-## Connecting to a DB Instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect"></a>
+## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken.Connect"></a>
 
 The following code example shows how to generate an authentication token, and then use it to connect to an instance running MySQL\. 
 
 To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/sdk-for-java/), found on the AWS site\. In addition, you need the following:
 + MySQL Connector/J\. This code example was tested with `mysql-connector-java-5.1.33-bin.jar`\.
-+ An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
++ An intermediate certificate for Amazon RDS that is specific to an AWS Region\. \(For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.\) At runtime, the class loader looks for the certificate in the same directory as this Java code example, so that the class loader can find it\.
 + Modify the values of the following variables as needed:
   + `RDS_INSTANCE_HOSTNAME` – The host name of the DB instance that you want to access\.
   + `RDS_INSTANCE_PORT` – The port number used for connecting to your PostgreSQL DB instance\.
@@ -245,7 +245,7 @@ To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/
   + `DB_USER` – The database account that you want to access\.
   + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\.
 
-    To download a certificate for your AWS Region, see [Intermediate Certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
+    To download a certificate for your AWS Region, see [Intermediate certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 

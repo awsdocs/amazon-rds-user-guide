@@ -1,4 +1,4 @@
-# Encrypting Amazon RDS Resources<a name="Overview.Encryption"></a>
+# Encrypting Amazon RDS resources<a name="Overview.Encryption"></a>
 
 You can encrypt your Amazon RDS DB instances and snapshots at rest by enabling the encryption option for your Amazon RDS DB instances\. Data that is encrypted at rest includes the underlying storage for DB instances, its automated backups, read replicas, and snapshots\.
 
@@ -8,24 +8,24 @@ Amazon RDS encrypted DB instances use the industry standard AES\-256 encryption 
 For encrypted and unencrypted DB instances, data that is in transit between the source and the read replicas is encrypted, even when replicating across AWS Regions\.
 
 **Topics**
-+ [Overview of Encrypting Amazon RDS Resources](#Overview.Encryption.Overview)
-+ [Enabling Amazon RDS Encryption for a DB Instance](#Overview.Encryption.Enabling)
-+ [Availability of Amazon RDS Encryption](#Overview.Encryption.Availability)
-+ [Limitations of Amazon RDS Encrypted DB Instances](#Overview.Encryption.Limitations)
++ [Overview of encrypting Amazon RDS resources](#Overview.Encryption.Overview)
++ [Enabling Amazon RDS encryption for a DB instance](#Overview.Encryption.Enabling)
++ [Availability of Amazon RDS encryption](#Overview.Encryption.Availability)
++ [Limitations of Amazon RDS encrypted DB instances](#Overview.Encryption.Limitations)
 
-## Overview of Encrypting Amazon RDS Resources<a name="Overview.Encryption.Overview"></a>
+## Overview of encrypting Amazon RDS resources<a name="Overview.Encryption.Overview"></a>
 
 Amazon RDS encrypted DB instances provide an additional layer of data protection by securing your data from unauthorized access to the underlying storage\. You can use Amazon RDS encryption to increase data protection of your applications deployed in the cloud, and to fulfill compliance requirements for data\-at\-rest encryption\.
 
 Amazon RDS also supports encrypting an Oracle or SQL Server DB instance with Transparent Data Encryption \(TDE\)\. TDE can be used with encryption at rest, although using TDE and encryption at rest simultaneously might slightly affect the performance of your database\. You must manage different keys for each encryption method\. For more information on TDE, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md) or [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)\.
 
-To manage the customer master keys \(CMKs\) used for encrypting and decrypting your Amazon RDS resources, you use the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create CMKs and define the policies that control how these CMKs can be used\. AWS KMS supports CloudTrail, so you can audit CMK usage to verify that CMKs are being used appropriately\. You can use your AWS KMS CMKs with Amazon RDS and supported AWS services such as Amazon S3, Amazon EBS, and Amazon Redshift\. For a list of services that support AWS KMS, see [Supported Services](https://docs.aws.amazon.com/kms/latest/developerguide/services.html) in the *AWS Key Management Service Developer Guide*\.
+To manage the customer master keys \(CMKs\) used for encrypting and decrypting your Amazon RDS resources, you use the [AWS Key Management Service \(AWS KMS\)](https://docs.aws.amazon.com/kms/latest/developerguide/)\. AWS KMS combines secure, highly available hardware and software to provide a key management system scaled for the cloud\. Using AWS KMS, you can create CMKs and define the policies that control how these CMKs can be used\. AWS KMS supports CloudTrail, so you can audit CMK usage to verify that CMKs are being used appropriately\. You can use your AWS KMS CMKs with Amazon RDS and supported AWS services such as Amazon S3, Amazon EBS, and Amazon Redshift\. For a list of services that support AWS KMS, see [Supported services](https://docs.aws.amazon.com/kms/latest/developerguide/services.html) in the *AWS Key Management Service Developer Guide*\.
 
 For an Amazon RDS encrypted DB instance, all logs, backups, and snapshots are encrypted\. A read replica of an Amazon RDS encrypted instance is also encrypted using the same CMK as the primary DB instance when both are in the same AWS Region\. If the primary DB instance and read replica are in different AWS Regions, you encrypt using the CMK for that AWS Region\.
 
-## Enabling Amazon RDS Encryption for a DB Instance<a name="Overview.Encryption.Enabling"></a>
+## Enabling Amazon RDS encryption for a DB instance<a name="Overview.Encryption.Enabling"></a>
 
-To enable encryption for a new DB instance, choose **Enable encryption** on the Amazon RDS console\. For information on creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+To enable encryption for a new DB instance, choose **Enable encryption** on the Amazon RDS console\. For information on creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 If you use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command to create an encrypted DB instance, set the `--storage-encrypted` parameter to true\. If you use the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) API operation, set the `StorageEncrypted` parameter to true\.
 
@@ -37,14 +37,14 @@ If you use the AWS CLI `create-db-instance` command to create an encrypted DB in
 
 You can use the ARN of a CMK from another account to encrypt a DB instance\. Or you might create a DB instance with the same AWS account that owns the AWS KMS CMK used to encrypt that new DB instance\. In this case, the AWS KMS key identifier that you pass can be the AWS KMS CMK alias instead of the CMK's ARN\.
 
-## Availability of Amazon RDS Encryption<a name="Overview.Encryption.Availability"></a>
+## Availability of Amazon RDS encryption<a name="Overview.Encryption.Availability"></a>
 
 Amazon RDS encryption is currently available for all database engines and storage types\.
 
 Amazon RDS encryption is available for most DB instance classes\. The following table lists DB instance classes that *do not support* Amazon RDS encryption:
 
 
-| Instance Type | Instance Class | 
+| Instance type | Instance class | 
 | --- | --- | 
 | General Purpose \(M1\) |  db\.m1\.small db\.m1\.medium db\.m1\.large db\.m1\.xlarge  | 
 | Memory Optimized \(M2\) |  db\.m2\.xlarge db\.m2\.2xlarge db\.m2\.4xlarge  | 
@@ -53,16 +53,16 @@ Amazon RDS encryption is available for most DB instance classes\. The following 
 **Note**  
 Encryption at rest is not available for DB instances running SQL Server Express Edition\.   
 
-## Limitations of Amazon RDS Encrypted DB Instances<a name="Overview.Encryption.Limitations"></a>
+## Limitations of Amazon RDS encrypted DB instances<a name="Overview.Encryption.Limitations"></a>
 
 The following limitations exist for Amazon RDS encrypted DB instances:
 + You can only enable encryption for an Amazon RDS DB instance when you create it, not after the DB instance is created\.
 
-  However, because you can encrypt a copy of an unencrypted DB snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a Snapshot](USER_CopySnapshot.md)\.
+  However, because you can encrypt a copy of an unencrypted DB snapshot, you can effectively add encryption to an unencrypted DB instance\. That is, you can create a snapshot of your DB instance, and then create an encrypted copy of that snapshot\. You can then restore a DB instance from the encrypted snapshot, and thus you have an encrypted copy of your original DB instance\. For more information, see [Copying a snapshot](USER_CopySnapshot.md)\.
 + DB instances that are encrypted can't be modified to disable encryption\.
 + You can't have an encrypted read replica of an unencrypted DB instance or an unencrypted read replica of an encrypted DB instance\.
 + Encrypted read replicas must be encrypted with the same CMK as the source DB instance when both are in the same AWS Region\.
 + You can't restore an unencrypted backup or snapshot to an encrypted DB instance\.
 + To copy an encrypted snapshot from one AWS Region to another, you must specify the AWS KMS key identifier of the destination AWS Region\. This is because AWS KMS CMKs are specific to the AWS Region that they are created in\.
 
-  The source snapshot remains encrypted throughout the copy process\. AWS KMS uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope Encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\.
+  The source snapshot remains encrypted throughout the copy process\. AWS KMS uses envelope encryption to protect data during the copy process\. For more information about envelope encryption, see [ Envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping)\.

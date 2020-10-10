@@ -1,31 +1,31 @@
-# Common DBA Tasks for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks"></a>
+# Common DBA tasks for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks"></a>
 
 This section describes the Amazon RDS implementations of some common DBA tasks for DB instances running the PostgreSQL database engine\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
 
-For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
+For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
 **Topics**
-+ [Creating Roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
-+ [Managing PostgreSQL Database Access](#Appendix.PostgreSQL.CommonDBATasks.Access)
-+ [Working with PostgreSQL Parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
-+ [Working with PostgreSQL Autovacuum on Amazon RDS](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)
-+ [Audit Logging for a PostgreSQL DB Instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
-+ [Working with the pgaudit Extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
-+ [Working with the pg\_repack Extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
++ [Creating roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
++ [Managing PostgreSQL database access](#Appendix.PostgreSQL.CommonDBATasks.Access)
++ [Working with PostgreSQL parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
++ [Working with PostgreSQL autovacuum on Amazon RDS](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum)
++ [Audit logging for a PostgreSQL DB instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
++ [Working with the pgaudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
++ [Working with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
 + [Working with PostGIS](#Appendix.PostgreSQL.CommonDBATasks.PostGIS)
-+ [Using pgBadger for Log Analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
-+ [Viewing the Contents of pg\_config](#Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig)
-+ [Working with the orafce Extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
-+ [Accessing External Data with the postgres\_fdw Extension](#postgresql-commondbatasks-fdw)
-+ [Using a Custom DNS Server for Outbound Network Access](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)
-+ [Restricting Password Management](#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)
++ [Using pgBadger for log analysis with PostgreSQL](#Appendix.PostgreSQL.CommonDBATasks.Badger)
++ [Viewing the contents of pg\_config](#Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig)
++ [Working with the orafce extension](#Appendix.PostgreSQL.CommonDBATasks.orafce)
++ [Accessing external data with the postgres\_fdw extension](#postgresql-commondbatasks-fdw)
++ [Using a custom DNS server for outbound network access](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)
++ [Restricting password management](#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)
 
-## Creating Roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
+## Creating roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
 When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named `postgres` in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges for your DB instance\. You should not assign this role to users unless they need the most access to the DB instance\.
 
 The `rds_superuser` role can do the following:
-+ Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL Features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
 + Manage tablespaces, including creating and deleting them\. For more information, see the [Tablespaces](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
 + View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and stop their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
 + Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/9.4/static/sql-grant.html) section in the PostgreSQL documentation\.
@@ -39,7 +39,7 @@ grant rds_superuser to testuser;
 GRANT ROLE
 ```
 
-## Managing PostgreSQL Database Access<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>
+## Managing PostgreSQL database access<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>
 
 In Amazon RDS for PostgreSQL, you can manage which users have privileges to connect to which databases\. In other PostgreSQL environments, you sometimes perform this kind of management by modifying the `pg_hba.conf` file\. In Amazon RDS, you can use database grants instead\.
 
@@ -54,7 +54,7 @@ psql> grant connect, temporary on database <database-name> to <user/role name>;
 
 For more information about privileges in PostgreSQL databases, see the [https://www.postgresql.org/docs/current/static/sql-grant.html](https://www.postgresql.org/docs/current/static/sql-grant.html) command in the PostgreSQL documentation\.
 
-## Working with PostgreSQL Parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
+## Working with PostgreSQL parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
 
 PostgreSQL parameters that you set for a local PostgreSQL instance in the *postgresql\.conf* file are maintained in the DB parameter group for your DB instance\. If you create a DB instance using the default parameter group, the parameter settings are in the parameter group called *default\.postgres9\.6*\.
 
@@ -87,7 +87,7 @@ max_connections.
 There are two types of PostgreSQL parameters, static and dynamic\. Static parameters require that the DB instance be rebooted before they are applied\. Dynamic parameters can be applied immediately\. The following table shows parameters that you can modify for a PostgreSQL DB instance and each parameter's type\. 
 
 
-|  Parameter Name  |  Apply\_Type  |  Description  | 
+|  Parameter name  |  Apply\_Type  |  Description  | 
 | --- | --- | --- | 
 |  `application_name`  | Dynamic | Sets the application name to be reported in statistics and logs\. | 
 |  `array_nulls`  | Dynamic | Enables input of NULL elements in arrays\. | 
@@ -246,7 +246,7 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 Amazon RDS uses the default PostgreSQL units for all parameters\. The following table shows the PostgreSQL default unit and value for each parameter\.
 
 
-|  Parameter Name  |  Unit  | 
+|  Parameter name  |  Unit  | 
 | --- | --- | 
 | `effective_cache_size` | 8 KB | 
 | `segment_size` | 8 KB | 
@@ -286,25 +286,25 @@ Amazon RDS uses the default PostgreSQL units for all parameters\. The following 
 | `tcp_keepalives_interval` | s | 
 | `wal_receiver_status_interval` | s | 
 
-## Working with PostgreSQL Autovacuum on Amazon RDS<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum"></a>
+## Working with PostgreSQL autovacuum on Amazon RDS<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum"></a>
 
 We strongly recommend that you use the autovacuum feature for PostgreSQL databases to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. Autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples\. Autovacuum then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
 
 Autovacuum is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related autovacuum configuration parameters are appropriately set by default\. Because our defaults are somewhat generic, you can benefit from tuning parameters to your specific workload\. The following section can help you perform the needed autovacuum tuning\.
 
 **Topics**
-+ [Allocating Memory for Autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
-+ [Reducing the Likelihood of Transaction ID Wraparound](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming)
-+ [Determining if the Tables in Your Database Need Vacuuming](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming)
-+ [Determining Which Tables Are Currently Eligible for Autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables)
-+ [Determining if Autovacuum Is Currently Running and For How Long](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AutovacuumRunning)
-+ [Performing a Manual Vacuum Freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)
-+ [Reindexing a Table When Autovacuum Is Running](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Reindexing)
-+ [Other Parameters That Affect Autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.OtherParms)
-+ [Setting Table\-Level Autovacuum Parameters](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters)
-+ [Autovacuum Logging](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging)
++ [Allocating memory for autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
++ [Reducing the likelihood of transaction ID wraparound](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming)
++ [Determining if the tables in your database need vacuuming](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming)
++ [Determining which tables are currently eligible for autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables)
++ [Determining if autovacuum is currently running and for how long](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AutovacuumRunning)
++ [Performing a manual vacuum freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)
++ [Reindexing a table when autovacuum is running](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Reindexing)
++ [Other parameters that affect autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.OtherParms)
++ [Setting table\-level autovacuum parameters](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters)
++ [Autovacuum logging](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging)
 
-### Allocating Memory for Autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory"></a>
+### Allocating memory for autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory"></a>
 
 One of the most important parameters influencing autovacuum performance is the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter\. This parameter determines how much memory that you allocate for autovacuum to use to scan a database table and to hold all the row IDs that are going to be vacuumed\. If you set the value of the [https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter too low, the vacuum process might have to scan the table multiple times to complete its work\. Such multiple scans can have a negative impact on performance\.
 
@@ -316,13 +316,13 @@ In general terms, for large hosts set the [https://www.postgresql.org/docs/curre
 
  `GREATEST({DBInstanceClassMemory/63963136*1024},65536)`\. 
 
-### Reducing the Likelihood of Transaction ID Wraparound<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming"></a>
+### Reducing the likelihood of transaction ID wraparound<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming"></a>
 
 In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, Amazon RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
 
 Adaptive autovacuum parameter tuning is enabled by default for RDS PostgreSQL instances with the dynamic parameter `rds.adaptive_autovacuum` set to ON\. We strongly recommend that you keep this enabled\. However, to turn off adaptive autovacuum parameter tuning, set the `rds.adaptive_autovacuum` parameter to 0 or OFF\. 
 
-Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an Early Warning System for Transaction ID Wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
+Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
 With adaptive autovacuum parameter tuning enabled, RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
 
@@ -336,7 +336,7 @@ RDS modifies these parameters only if the new value makes autovacuum more aggres
 
 Whenever RDS modifies any of these autovacuum parameters, it generates an event for the affected DB instance that is visible on the AWS Management Console \([https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\) and through the RDS API\. After the `MaximumUsedTransactionIDs` CloudWatch metric returns below the threshold, RDS resets the autovacuum related parameters in memory back to the values specified in the parameter group and generates another event corresponding to this change\.
 
-### Determining if the Tables in Your Database Need Vacuuming<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming"></a>
+### Determining if the tables in your database need vacuuming<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming"></a>
 
 You can use the following query to show the number of unvacuumed transactions in a database\. The `datfrozenxid` column of a database's `pg_database` row is a lower bound on the normal transaction IDs appearing in that database\. This column is the minimum of the per\-table `relfrozenxid` values within the database\. 
 
@@ -369,10 +369,10 @@ If a table is constantly breaching these thresholds, you need to modify your aut
 We recommend the following:
 + Be aware and enable a monitoring mechanism so that you are aware of the age of your oldest transactions\.
 
-  For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog post [Implement an Early Warning System for Transaction ID Wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
-+ For busier tables, perform a manual vacuum freeze regularly during a maintenance window, in addition to relying on autovacuum\. For information on performing a manual vacuum freeze, see [ Performing a Manual Vacuum Freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)\.
+  For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
++ For busier tables, perform a manual vacuum freeze regularly during a maintenance window, in addition to relying on autovacuum\. For information on performing a manual vacuum freeze, see [ Performing a manual vacuum freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)\.
 
-### Determining Which Tables Are Currently Eligible for Autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables"></a>
+### Determining which tables are currently eligible for autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables"></a>
 
 Often, it is one or two tables in need of vacuuming\. Tables whose `relfrozenxid` value is greater than the number of transactions in `autovacuum_freeze_max_age` are always targeted by autovacuum\. Otherwise, if the number of tuples made obsolete since the last VACUUM exceeds the "vacuum threshold", the table is vacuumed\.
 
@@ -426,7 +426,7 @@ c.reltuples <= n_dead_tup
 ORDER BY age(relfrozenxid) DESC LIMIT 50;
 ```
 
-### Determining if Autovacuum Is Currently Running and For How Long<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AutovacuumRunning"></a>
+### Determining if autovacuum is currently running and for how long<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AutovacuumRunning"></a>
 
 If you need to manually vacuum a table, you need to determine if autovacuum is currently running\. If it is, you might need to adjust parameters to make it run more efficiently, or terminate autovacuum so you can manually run VACUUM\.
 
@@ -490,7 +490,7 @@ Short running autovacuum sessions can also indicate problems:
 + It can indicate that there aren't enough `autovacuum_max_workers` for your workload\. In this case, you need to indicate the number of workers\.
 + It can indicate that there is an index corruption \(autovacuum crashes and restart on the same relation but make no progress\)\. In this case, run a manual vacuum freeze verbose \_\_\_table\_\_\_ to see the exact cause\.
 
-### Performing a Manual Vacuum Freeze<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze"></a>
+### Performing a manual vacuum freeze<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze"></a>
 
 You might want to perform a manual vacuum on a table that has a vacuum process already running\. This is useful if you have identified a table with an age approaching 2 billion transactions \(or above any threshold you are monitoring\)\.
 
@@ -554,7 +554,7 @@ The following steps are a guideline, and there are several variations to the pro
 
 1. At this point, your session begins\. It's important to note that autovacuum restarts immediately because this table is probably the highest on its list of work\. Initiate your `vacuum freeze verbose` command in session 2 and then terminate the autovacuum process in session 1\.
 
-### Reindexing a Table When Autovacuum Is Running<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Reindexing"></a>
+### Reindexing a table when autovacuum is running<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Reindexing"></a>
 
 If an index has become corrupt, autovacuum continues to process the table and fails\. If you attempt a manual vacuum in this situation, you will receive an error message similar to the following:
 
@@ -600,7 +600,7 @@ When the index is corrupted and autovacuum is attempting to run against the tabl
 
 1. At this point, your session begins\. It's important to note that autovacuum restarts immediately because this table is probably the highest on its list of work\. Initiate your command in session 2 and then terminate the autovacuum process in session 1\.
 
-### Other Parameters That Affect Autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.OtherParms"></a>
+### Other parameters that affect autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.OtherParms"></a>
 
 The following query shows the values of some of the parameters that directly affect autovacuum and its behavior\. The [autovacuum parameters](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html) are described fully in the PostgreSQL documentation\.
 
@@ -631,7 +631,7 @@ While these all affect autovacuum, some of the most important ones are:
 + [autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
 + [ Autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 
-### Setting Table\-Level Autovacuum Parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters"></a>
+### Setting table\-level autovacuum parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.TableParameters"></a>
 
 Autovacuum\-related [storage parameters](https://www.postgresql.org/docs/current/static/sql-createtable.html#SQL-CREATETABLE-STORAGE-PARAMETERS) can be set at a table level, which can be better than altering the behavior of the entire database\. For large tables, you might need to set aggressive settings and you might not want to make autovacuum behave that way for all tables\.
 
@@ -651,7 +651,7 @@ ALTER TABLE mytable set (autovacuum_vacuum_cost_delay=0);
 
 Doing this disables the cost\-based autovacuum delay for this table at the expense of more resource usage on your system\. Normally, autovacuum pauses for autovacuum\_vacuum\_cost\_delay each time autovacuum\_cost\_limit is reached\. You can find more details in the PostgreSQL documentation about [cost\-based vacuuming](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-VACUUM-COST)\.
 
-### Autovacuum Logging<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging"></a>
+### Autovacuum logging<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.Logging"></a>
 
 By default, the *postgresql\.log* doesn't contain information about the autovacuum process\. You can see output in the PostgreSQL error log from the autovacuum worker operations by setting the `rds.force_autovacuum_logging_level` parameter\. Allowed values are `disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal,` and `panic`\. The default value is `disabled` because the other allowable values can add significant amount of information to your logs\.
 
@@ -660,14 +660,14 @@ We recommend that you set the value of the `rds.force_autovacuum_logging_level` 
 **Note**  
 PostgreSQL allows the `rds_superuser` account to view autovacuum sessions in `pg_stat_activity`\. For example, you can identify and end an autovacuum session that is blocking a command from running, or running slower than a manually issued vacuum command\.
 
-## Audit Logging for a PostgreSQL DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
+## Audit logging for a PostgreSQL DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
 There are several parameters you can set to log activity that occurs on your PostgreSQL DB instance\. These parameters include the following:
-+  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL Database Log Files](USER_LogAccess.Concepts.PostgreSQL.md)\.
++  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 + The `rds.force_admin_logging_level` parameter logs actions by the RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
-+ The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5,000 writes activity to the log that takes more than 5 seconds and shows "vacuum skipped" messages\. For more information on this parameter, see [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
++ The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5,000 writes activity to the log that takes more than 5 seconds and shows "vacuum skipped" messages\. For more information on this parameter, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
 
-## Working with the pgaudit Extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
+## Working with the pgaudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
 
 The `pgaudit` extension provides detailed session and object audit logging for Amazon RDS for PostgreSQL version 9\.6\.3 and later and version 9\.5\.7 version and later\. You can enable session auditing or object auditing using this extension\. 
 
@@ -750,9 +750,9 @@ OBJECT,1,1,READ,SELECT,TABLE,public.t1,select * from t1;
 ...
 ```
 
-For information on viewing the logs, see [Amazon RDS Database Log Files](USER_LogAccess.md)\.
+For information on viewing the logs, see [Amazon RDS database log files](USER_LogAccess.md)\.
 
-## Working with the pg\_repack Extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
+## Working with the pg\_repack extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 
 You can use the `pg_repack` extension to remove bloat from tables and indexes\. This extension is supported on Amazon RDS for PostgreSQL versions 9\.6\.3 and later\. For more information on the `pg_repack` extension, see the [GitHub project documentation](https://reorg.github.io/pg_repack/)\.
 
@@ -791,7 +791,7 @@ You need to perform a bit of setup before you can use the PostGIS extension\. Th
 + Transfer ownership of the objects to the `rds_superuser` role\.
 + Test the extensions\.
 
-### Step 1: Connect to the DB Instance Using the Master User Name Used to Create the DB Instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
+### Step 1: Connect to the DB instance using the master user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
 First, you connect to the DB instance using the master user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
 
@@ -805,7 +805,7 @@ select current_user;
  (1 row)
 ```
 
-### Step 2: Load the PostGIS Extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions"></a>
+### Step 2: Load the PostGIS extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions"></a>
 
 Use the CREATE EXTENSION statements to load the PostGIS extensions\. You must also load the `` extension\. You can then use the `\dn` *psql* command to list the owners of the PostGIS schemas\.
 
@@ -829,7 +829,7 @@ CREATE EXTENSION
 (4 rows)
 ```
 
-### Step 3: Transfer Ownership of the Extensions to the rds\_superuser Role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership"></a>
+### Step 3: Transfer ownership of the extensions to the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership"></a>
 
 Use the ALTER SCHEMA statements to transfer ownership of the schemas to the `rds_superuser` role\.
 
@@ -851,7 +851,7 @@ tiger_data    | rds_superuser
 (4 rows)
 ```
 
-### Step 4: Transfer Ownership of the Objects to the rds\_superuser Role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects"></a>
+### Step 4: Transfer ownership of the objects to the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects"></a>
 
 Use the following function to transfer ownership of the PostGIS objects to the `rds_superuser` role\. Run the following statement from the psql prompt to create the function\.
 
@@ -871,7 +871,7 @@ SELECT exec('ALTER TABLE ' || quote_ident(s.nspname) || '.' || quote_ident(s.rel
 s;
 ```
 
-### Step 5: Test the Extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Test"></a>
+### Step 5: Test the extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Test"></a>
 
 Add `tiger` to your search path using the following command\.
 
@@ -900,7 +900,7 @@ select topology.createtopology('my_new_topo',26986,0.5);
 (1 row)
 ```
 
-## Using pgBadger for Log Analysis with PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Badger"></a>
+## Using pgBadger for log analysis with PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Badger"></a>
 
 You can use a log analyzer such as [pgbadger](http://dalibo.github.io/pgbadger/) to analyze PostgreSQL logs\. The *pgbadger* documentation states that the %l pattern \(log line for session/process\) should be a part of the prefix\. However, if you provide the current rds log\_line\_prefix as a parameter to *pgbadger* it should still produce a report\. 
 
@@ -910,7 +910,7 @@ For example, the following command correctly formats an Amazon RDS PostgreSQL lo
 ./pgbadger -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
 ```
 
-## Viewing the Contents of pg\_config<a name="Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig"></a>
+## Viewing the contents of pg\_config<a name="Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig"></a>
 
 In PostgreSQL version 9\.6\.1, you can see the compile\-time configuration parameters of the currently installed version of PostgreSQL using the new view pg\_config\. You can use the view by calling the pg\_config function as shown in the following sample\.
 
@@ -959,7 +959,7 @@ select * from pg_config;
 ERROR:  permission denied for relation pg_config
 ```
 
-## Working with the orafce Extension<a name="Appendix.PostgreSQL.CommonDBATasks.orafce"></a>
+## Working with the orafce extension<a name="Appendix.PostgreSQL.CommonDBATasks.orafce"></a>
 
 The `orafce` extension provides functions that are common in commercial databases, and can make it easier for you to port a commercial database to PostgreSQL\. Amazon RDS for PostgreSQL versions 9\.6\.6 and later support this extension\. For more information about `orafce`, see the [orafce project on GitHub](https://github.com/orafce/orafce)\. 
 
@@ -986,7 +986,7 @@ If you want to enable `orafce` on a different database in the same instance, use
 **Note**  
 If you want to see the list of owners for the oracle schema, use the `\dn` psql command\.
 
-## Accessing External Data with the postgres\_fdw Extension<a name="postgresql-commondbatasks-fdw"></a>
+## Accessing external data with the postgres\_fdw extension<a name="postgresql-commondbatasks-fdw"></a>
 
 You can access data in a table on a remote database server with the [postgres\_fdw](https://www.postgresql.org/docs/10/static/postgres-fdw.html) extension\. If you set up a remote connection from your PostgreSQL DB instance, access is also available to your read replica\. 
 
@@ -1024,33 +1024,33 @@ You can access data in a table on a remote database server with the [postgres\_f
    OPTIONS (schema_name 'some_schema', table_name 'some_table');
    ```
 
-## Using a Custom DNS Server for Outbound Network Access<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS"></a>
+## Using a custom DNS server for outbound network access<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS"></a>
 
 Amazon RDS for PostgreSQL supports outbound network access on your DB instances and allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
 
 **Topics**
-+ [Enabling Custom DNS Resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable)
-+ [Disabling Custom DNS Resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable)
-+ [Setting Up a Custom DNS Server](#Appendix.Oracle.CommonDBATasks.CustomDNS.Setup)
++ [Enabling custom DNS resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable)
++ [Disabling custom DNS resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable)
++ [Setting up a custom DNS server](#Appendix.Oracle.CommonDBATasks.CustomDNS.Setup)
 
-### Enabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable"></a>
+### Enabling custom DNS resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable"></a>
 
 To enable DNS resolution in your customer VPC, associate a custom DB parameter group to your RDS PostgreSQL instance, turn on the `rds.custom_dns_resolution` parameter by setting it to 1, and then restart the DB instance for the changes to take place\. 
 
-### Disabling Custom DNS Resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable"></a>
+### Disabling custom DNS resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable"></a>
 
 To disable DNS resolution in your customer VPC, turn off the `rds.custom_dns_resolution` parameter of your custom DB parameter group by setting it to 0, then restart the DB instance for the changes to take place\.
 
-### Setting Up a Custom DNS Server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS.Setup"></a>
+### Setting up a custom DNS server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS.Setup"></a>
 
 After you set up your custom DNS name server, it takes up to 30 minutes to propagate the changes to your DB instance\. After the changes are propagated to your DB instance, all outbound network traffic requiring a DNS lookup queries your DNS server over port 53\.
 
 **Note**  
-If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with Private Hosted Zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
+If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
 
 **To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance**
 
-1. From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP Options Sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
+1. From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP options sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 **Note**  
 The `domain-name-servers` option accepts up to four values, but your Amazon RDS DB instance uses only the first value\. 
 
@@ -1062,17 +1062,17 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
 1. Configure your DNS server to allow inbound traffic from your Amazon RDS DB instances over port 53\. If your DNS server is in an Amazon VPC, the VPC must have a security group that contains inbound rules that allow UDP and TCP traffic on port 53\. If your DNS server is not in an Amazon VPC, it must have appropriate firewall settings to allow UDP and TCP inbound traffic on port 53\. 
 
-   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
+   For more information, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and removing rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 
 1. Configure the VPC of your Amazon RDS DB instance to allow outbound traffic over port 53\. Your VPC must have a security group that contains outbound rules that allow UDP and TCP traffic on port 53\. 
 
-   For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and Removing Rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
+   For more information, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) and [Adding and removing rules](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#AddRemoveRules)\. 
 
 1. The routing path between the Amazon RDS DB instance and the DNS server has to be configured correctly to allow DNS traffic\. 
 
-   If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be set up between them\. For more information, see [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
+   If the Amazon RDS DB instance and the DNS server are not in the same VPC, a peering connection has to be set up between them\. For more information, see [What is VPC peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) 
 
-## Restricting Password Management<a name="Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt"></a>
+## Restricting password management<a name="Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt"></a>
 
 You can restrict who can manage database user passwords to a special role\. By doing this, you can have more control over password management on the client side\.
 

@@ -1,8 +1,8 @@
-# Working with Trace and Dump Files<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles"></a>
+# Working with trace and dump files<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles"></a>
 
 This section describes working with trace files and dump files for your Amazon RDS DB instances running Microsoft SQL Server\. 
 
-## Generating a Trace SQL Query<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.TraceSQLQuery"></a>
+## Generating a trace SQL query<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.TraceSQLQuery"></a>
 
 ```
 1. declare @rc int 
@@ -14,19 +14,19 @@ This section describes working with trace files and dump files for your Amazon R
 7. exec @rc = sp_trace_create @TraceID output,  0, N'D:\rdsdbdata\log\rdstest', @maxfilesize, NULL
 ```
 
-## Viewing an Open Trace<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.ViewOpenTrace"></a>
+## Viewing an open trace<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.ViewOpenTrace"></a>
 
 ```
 1. select * from ::fn_trace_getinfo(default)
 ```
 
-## Viewing Trace Contents<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.ViewTraceContents"></a>
+## Viewing trace contents<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.ViewTraceContents"></a>
 
 ```
 1. select * from ::fn_trace_gettable('D:\rdsdbdata\log\rdstest.trc', default)
 ```
 
-## Setting the Retention Period for Trace and Dump Files<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles"></a>
+## Setting the retention period for trace and dump files<a name="Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles"></a>
 
 Trace and dump files can accumulate and consume disk space\. By default, Amazon RDS purges trace and dump files that are older than seven days\. 
 

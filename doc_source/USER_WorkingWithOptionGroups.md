@@ -1,4 +1,4 @@
-# Working with Option Groups<a name="USER_WorkingWithOptionGroups"></a>
+# Working with option groups<a name="USER_WorkingWithOptionGroups"></a>
 
 Some DB engines offer additional features that make it easier to manage data and databases, and to provide additional security for your database\. Amazon RDS uses option groups to enable and configure these features\. An *option group* can specify features, called options, that are available for a particular Amazon RDS DB instance\. Options can have settings that specify how the option works\. When you associate a DB instance with an option group, the specified options and option settings are enabled for that DB instance\. 
 
@@ -7,15 +7,15 @@ Some DB engines offer additional features that make it easier to manage data and
 
 ****  
 
-| Database Engine | Relevant Documentation | 
+| Database engine | Relevant documentation | 
 | --- | --- | 
-|  `MariaDB`  |  [Options for MariaDB Database Engine](Appendix.MariaDB.Options.md)  | 
-|  `Microsoft SQL Server`  |  [Options for the Microsoft SQL Server Database Engine](Appendix.SQLServer.Options.md)  | 
-|  `MySQL`  |  [Options for MySQL DB Instances](Appendix.MySQL.Options.md)  | 
-|  `Oracle`  |  [Options for Oracle DB Instances](Appendix.Oracle.Options.md)  | 
-|  `PostgreSQL`  |  PostgreSQL does not use options and option groups\. PostgreSQL uses extensions and modules to provide additional features\. For more information, see [Supported PostgreSQL Features and Extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeaturesExtensions)\.  | 
+|  `MariaDB`  |  [Options for MariaDB database engine](Appendix.MariaDB.Options.md)  | 
+|  `Microsoft SQL Server`  |  [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)  | 
+|  `MySQL`  |  [Options for MySQL DB instances](Appendix.MySQL.Options.md)  | 
+|  `Oracle`  |  [Options for Oracle DB instances](Appendix.Oracle.Options.md)  | 
+|  `PostgreSQL`  |  PostgreSQL does not use options and option groups\. PostgreSQL uses extensions and modules to provide additional features\. For more information, see [Supported PostgreSQL features and extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeaturesExtensions)\.  | 
 
-## Option Groups Overview<a name="Overview.OptionGroups"></a>
+## Option groups overview<a name="Overview.OptionGroups"></a>
 
 Amazon RDS provides an empty default option group for each new DB instance\. You cannot modify this default option group, but any new option group that you create derives its settings from the default option group\. To apply an option to a DB instance, you must do the following: 
 
@@ -25,13 +25,13 @@ Amazon RDS provides an empty default option group for each new DB instance\. You
 
 1. Associate the option group with the DB instance\.
 
-   To associate an option group with a DB instance, modify the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+   To associate an option group with a DB instance, modify the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 Both DB instances and DB snapshots can be associated with an option group\. In some cases, you might restore from a DB snapshot or perform a point\-in\-time restore for a DB instance\. In these cases, the option group associated with the DB snapshot or DB instance is, by default, associated with the restored DB instance\. You can associate a different option group with a restored DB instance\. However, the new option group must contain any persistent or permanent options that were included in the original option group\. Persistent and permanent options are described following\.
 
 Options require additional memory to run on a DB instance\. Thus, you might need to launch a larger instance to use them, depending on your current use of your DB instance\. For example, Oracle Enterprise Manager Database Control uses about 300 MB of RAM\. If you enable this option for a small DB instance, you might encounter performance problems or out\-of\-memory errors\.
 
-### Persistent and Permanent Options<a name="Overview.OptionGroups.Permanent"></a>
+### Persistent and permanent options<a name="Overview.OptionGroups.Permanent"></a>
 
 Two types of options, persistent and permanent, require special consideration when you add them to an option group\. 
 
@@ -39,9 +39,9 @@ Persistent options can't be removed from an option group while DB instances are 
 
 Permanent options, such as the TDE option for Oracle Advanced Security TDE, can never be removed from an option group\. You can change the option group of a DB instance that is using the permanent option\. However, the option group associated with the DB instance must include the same permanent option\. In some cases, you might restore or perform a point\-in\-time restore from a DB snapshot\. In these cases, if the option group associated with that DB snapshot contains a permanent option, you can only associate the restored DB instance with an option group with that permanent option\.
 
-For Oracle DB instances, you can copy shared DB snapshots that have the options `Timezone` or `OLS` \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
+For Oracle DB instances, you can copy shared DB snapshots that have the options `Timezone` or `OLS` \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
 
-### VPC and Platform Considerations<a name="Overview.OptionGroups.Platform"></a>
+### VPC and platform considerations<a name="Overview.OptionGroups.Platform"></a>
 
 When an option group is assigned to a DB instance, it is linked to the platform that the DB instance is on\. That platform can either be a VPC supported by the Amazon VPC service, or EC2\-Classic \(non\-VPC\) supported by the Amazon EC2 service\. For details on these two platforms, see [Amazon EC2 and Amazon Virtual Private Cloud](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html)\. 
 
@@ -54,17 +54,17 @@ With persistent or permanent options, such as Oracle TDE, you must create a new 
 
 Option settings control the behavior of an option\. For example, the Oracle Advanced Security option `NATIVE_NETWORK_ENCRYPTION` has a setting that you can use to specify the encryption algorithm for network traffic to and from the DB instance\. Some options settings are optimized for use with Amazon RDS and cannot be changed\.
 
-### Mutually Exclusive Options<a name="Overview.OptionGroups.Exclusive"></a>
+### Mutually exclusive options<a name="Overview.OptionGroups.Exclusive"></a>
 
 Some options are mutually exclusive\. You can use one or the other, but not both at the same time\. The following options are mutually exclusive: 
 + [Oracle Enterprise Manager Database Express](Appendix.Oracle.Options.OEM_DBControl.md) and [Oracle Management Agent for Enterprise Manager Cloud Control](Oracle.Options.OEMAgent.md)\. 
-+ [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
++ [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 
-## Creating an Option Group<a name="USER_WorkingWithOptionGroups.Create"></a>
+## Creating an option group<a name="USER_WorkingWithOptionGroups.Create"></a>
 
-You can create a new option group that derives its settings from the default option group, and then add one or more options to the new option group\. Alternatively, if you already have an existing option group, you can copy that option group with all of its options to a new option group\. For more information, see [Making a Copy of an Option Group](#USER_WorkingWithOptionGroups.Copy)\. 
+You can create a new option group that derives its settings from the default option group, and then add one or more options to the new option group\. Alternatively, if you already have an existing option group, you can copy that option group with all of its options to a new option group\. For more information, see [Copying an option group](#USER_WorkingWithOptionGroups.Copy)\. 
 
-After you create a new option group, it has no options\. To learn how to add options to the option group, see [Adding an Option to an Option Group](#USER_WorkingWithOptionGroups.AddOption)\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
+After you create a new option group, it has no options\. To learn how to add options to the option group, see [Adding an option to an option group](#USER_WorkingWithOptionGroups.AddOption)\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 ### Console<a name="USER_WorkingWithOptionGroups.Create.Console"></a>
 
@@ -128,34 +128,37 @@ To create an option group, call the Amazon RDS API [https://docs.aws.amazon.com/
 + `MajorEngineVersion`
 + `OptionGroupDescription`
 
-## Making a Copy of an Option Group<a name="USER_WorkingWithOptionGroups.Copy"></a>
+## Copying an option group<a name="USER_WorkingWithOptionGroups.Copy"></a>
 
-You can use the AWS CLI or the Amazon RDS API to make a copy of an option group\. Copying an option group is convenient when you have an existing option group and you want to include most of its custom parameters and values in a new option group\. You can also make a copy of an option group that you use in production and then modify the copy to test other option settings\.
+You can use the AWS CLI or the Amazon RDS API copy an option group\. Copying an option group is convenient when you have an existing option group and you want to include most of its custom parameters and values in a new option group\. You can also make a copy of an option group that you use in production and then modify the copy to test other option settings\.
+
+**Note**  
+Currently, you can't copy an option group to a different AWS Region\.
 
 ### AWS CLI<a name="USER_WorkingWithOptionGroups.Copy.CLI"></a>
 
-To copy an option group, use the AWS CLI [copy\-option\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-option-group.html) command\. Include the following required parameters:
+To copy an option group, use the AWS CLI [copy\-option\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-option-group.html) command\. Include the following required options:
 + `--source-option-group-identifier`
 + `--target-option-group-identifier`
 + `--target-option-group-description`
 
 **Example**  
-The following example creates an option group named `new-local-option-group`, which is a local copy of the option group `my-remote-option-group`\.  
+The following example creates an option group named `new-option-group`, which is a local copy of the option group `my-option-group`\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds copy-option-group \
-    --source-option-group-identifier arn:aws:rds:us-west-2:123456789012:og:my-remote-option-group \
-    --target-option-group-identifier new-local-option-group \
-    --target-option-group-description "Option group 2"
+    --source-option-group-identifier my-option-group \
+    --target-option-group-identifier new-option-group \
+    --target-option-group-description "My new option group"
 ```
 For Windows:  
 
 ```
 aws rds copy-option-group ^
-    --source-option-group-identifier arn:aws:rds:us-west-2:123456789012:og:my-remote-option-group ^
-    --target-option-group-identifier new-local-option-group ^
-    --target-option-group-description "Option group 2"
+    --source-option-group-identifier my-option-group ^
+    --target-option-group-identifier new-option-group ^
+    --target-option-group-description "My new option group"
 ```
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.Copy.API"></a>
@@ -165,9 +168,9 @@ To copy an option group, call the Amazon RDS API [CopyOptionGroup](https://docs.
 + `TargetOptionGroupIdentifier`
 + `TargetOptionGroupDescription`
 
-## Adding an Option to an Option Group<a name="USER_WorkingWithOptionGroups.AddOption"></a>
+## Adding an option to an option group<a name="USER_WorkingWithOptionGroups.AddOption"></a>
 
-You can add an option to an existing option group\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific DB engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
+You can add an option to an existing option group\. After you have added the options you want, you can then associate the option group with a DB instance so that the options become available on the DB instance\. For information about associating an option group with a DB instance, see the documentation for your specific DB engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 Option group changes must be applied immediately in two cases: 
 + When you add an option that adds or updates a port value, such as the `OEM` option\. 
@@ -294,7 +297,7 @@ OPTIONSETTINGS  SHA1,MD5   STATIC  STRING  SHA1,MD5  Specifies list of checksumm
 To add an option to an option group using the Amazon RDS API, call the [ModifyOptionGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) operation with the option that you want to add\. To enable the new option immediately on all associated DB instances, include the `ApplyImmediately` parameter and set it to `true`\. By default, the option is enabled for each associated DB instance during its next maintenance window\. Include the following required parameter:
 + `OptionGroupName`
 
-## Listing the Options and Option Settings for an Option Group<a name="USER_WorkingWithOptionGroups.ListOption"></a>
+## Listing the options and option settings for an option group<a name="USER_WorkingWithOptionGroups.ListOption"></a>
 
  You can list all the options and option settings for an option group\. 
 
@@ -332,9 +335,9 @@ aws rds describe-option-groups --option-group-name testoptiongroup
 
 To list the options and option settings for an option group, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeOptionGroups.html) operation\. Specify the name of the option group whose options and settings you want to view\. If you don't specify an option group name, all option groups are described\. 
 
-## Modifying an Option Setting<a name="USER_WorkingWithOptionGroups.ModifyOption"></a>
+## Modifying an option setting<a name="USER_WorkingWithOptionGroups.ModifyOption"></a>
 
-After you have added an option that has modifiable option settings, you can modify the settings at any time\. If you change options or option settings in an option group, those changes are applied to all DB instances that are associated with that option group\. For more information on what settings are available for the various options, see the documentation for your specific engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
+After you have added an option that has modifiable option settings, you can modify the settings at any time\. If you change options or option settings in an option group, those changes are applied to all DB instances that are associated with that option group\. For more information on what settings are available for the various options, see the documentation for your specific engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 Option group changes must be applied immediately in two cases: 
 + When you add an option that adds or updates a port value, such as the `OEM` option\. 
@@ -428,9 +431,9 @@ OPTIONSETTINGS  ACCEPTED,REJECTED,REQUESTED,REQUIRED  STATIC  STRING  REQUESTED 
 
 To modify an option setting, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) command with the option group and option that you want to modify\. By default, the option is enabled for each associated DB instance during its next maintenance window\. To apply the change immediately to all associated DB instances, include the `ApplyImmediately` parameter and set it to `true`\.
 
-## Removing an Option from an Option Group<a name="USER_WorkingWithOptionGroups.RemoveOption"></a>
+## Removing an option from an option group<a name="USER_WorkingWithOptionGroups.RemoveOption"></a>
 
-Some options can be removed from an option group, and some cannot\. A persistent option cannot be removed from an option group until all DB instances associated with that option group are disassociated\. A permanent option can never be removed from an option group\. For more information about what options are removable, see the documentation for your specific engine listed at [Working with Option Groups](#USER_WorkingWithOptionGroups)\. 
+Some options can be removed from an option group, and some cannot\. A persistent option cannot be removed from an option group until all DB instances associated with that option group are disassociated\. A permanent option can never be removed from an option group\. For more information about what options are removable, see the documentation for your specific engine listed at [Working with option groups](#USER_WorkingWithOptionGroups)\. 
 
 If you remove all options from an option group, Amazon RDS doesn't delete the option group\. DB instances that are associated with the empty option group continue to be associated with it; they just won't have any active options\. Alternatively, to remove all options from a DB instance, you can associate the DB instance with the default \(empty\) option group\. 
 
@@ -490,7 +493,7 @@ Include the following parameters:
 + `OptionGroupName`
 + `OptionsToRemove.OptionName`
 
-## Deleting an Option Group<a name="USER_WorkingWithOptionGroups.Delete"></a>
+## Deleting an option group<a name="USER_WorkingWithOptionGroups.Delete"></a>
 
 You can delete an option group that is not associated with any Amazon RDS resource\. An option group can be associated with a DB instance, a manual DB snapshot, or an automated DB snapshot\.
 
@@ -510,7 +513,7 @@ An error occurred (InvalidOptionGroupStateFault) when calling the DeleteOptionGr
 
 1. Check the **Associated Instances and Snapshots** section for the associated Amazon RDS resources\.
 
-If a DB instance is associated with the option group, modify the DB instance to use a different option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+If a DB instance is associated with the option group, modify the DB instance to use a different option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 If a manual DB snapshot is associated with the option group, modify the DB snapshot to use a different option group using the AWS CLI [ `modify-db-snapshot`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\.
 

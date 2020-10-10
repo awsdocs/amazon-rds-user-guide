@@ -6,13 +6,13 @@ To access Performance Insights, you must have the appropriate permissions from A
 
 1. Create a custom IAM policy and attach it to an IAM user or role\.
 
-## AmazonRDSFullAccess Managed Policy<a name="USER_PerfInsights.access-control.managed-policy"></a>
+## AmazonRDSFullAccess managed policy<a name="USER_PerfInsights.access-control.managed-policy"></a>
 
 `AmazonRDSFullAccess` is an AWS\-managed policy that grants access to all of the Amazon RDS API operations\. The policy also grants access to related services that are used by the Amazon RDS console—for example, event notifications using Amazon SNS\.
 
 In addition, `AmazonRDSFullAccess` contains all the permissions needed for using Performance Insights\. If you attach this policy to an IAM user or role, the recipient can use Performance Insights\. along with other console features\.
 
-## Using a Custom IAM Policy<a name="USER_PerfInsights.access-control.custom-policy"></a>
+## Using a custom IAM policy<a name="USER_PerfInsights.access-control.custom-policy"></a>
 
 For users who don't have full access with the `AmazonRDSFullAccess` policy, you can grant access to Performance Insights by creating or modifying a user\-managed IAM policy\. When you attach the policy to an IAM user or role, the recipient can use Performance Insights\.
 
@@ -55,7 +55,7 @@ You can now attach the policy to an IAM user or role\. The following procedure a
 
 1. Choose an existing user from the list\.
 **Important**  
-To use Performance Insights, make sure that you have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing Access Using Policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
+To use Performance Insights, make sure that you have access to Amazon RDS in addition to the custom policy\. For example, the `AmazonRDSReadOnlyAccess` predefined policy provides read\-only access to Amazon RDS\. For more information, see [Managing access using policies](UsingWithRDS.IAM.md#security_iam_access-manage)\.
 
 1. On the **Summary** page, choose **Add permissions**\.
 

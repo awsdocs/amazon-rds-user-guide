@@ -8,7 +8,7 @@ The number of hours that binary logs are retained\.
 CALL mysql.rds_show_configuration;
 ```
 
-## Usage Notes<a name="mysql_rds_show_configuration-usage-notes"></a>
+## Usage notes<a name="mysql_rds_show_configuration-usage-notes"></a>
 
 To verify the number of hours that Amazon RDS retains binary logs, use the `mysql.rds_show_configuration` stored procedure\.
 

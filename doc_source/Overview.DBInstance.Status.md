@@ -1,14 +1,14 @@
-# DB Instance Status<a name="Overview.DBInstance.Status"></a>
+# DB instance status<a name="Overview.DBInstance.Status"></a>
 
 The status of a DB instance indicates the health of the DB instance\. You can view the status of a DB instance by using the Amazon RDS console, the AWS CLI command [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html), or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\. 
 
 **Note**  
-Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying Updates for a DB Instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+Amazon RDS also uses another status called *maintenance status*, which is shown in the **Maintenance** column of the Amazon RDS console\. This value indicates the status of any maintenance patches that need to be applied to a DB instance\. Maintenance status is independent of DB instance status\. For more information on *maintenance status*, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
 
 Find the possible status values for DB instances in the following table, which also shows how you are billed for each status\. It shows if you will be billed for the DB instance and storage, billed only for storage, or not billed\. For all DB instance statuses, you are always billed for backup usage\.
 
 
-| DB Instance Status | Billed  | Description | 
+| DB instance status | Billed  | Description | 
 | --- | --- | --- | 
 |  **available**  | Billed |  The DB instance is healthy and available\.  | 
 |  **backing\-up**  | Billed |  The DB instance is currently being backed up\.  | 

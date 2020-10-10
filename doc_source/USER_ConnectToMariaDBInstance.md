@@ -1,4 +1,4 @@
-# Connecting to a DB Instance Running the MariaDB Database Engine<a name="USER_ConnectToMariaDBInstance"></a>
+# Connecting to a DB instance running the MariaDB database engine<a name="USER_ConnectToMariaDBInstance"></a>
 
 After Amazon RDS provisions your DB instance, you can use any standard MariaDB client application or utility to connect to the instance\. In the connection string, you specify the Domain Name System \(DNS\) address from the DB instance endpoint as the host parameter\. You also specify the port number from the DB instance endpoint as the port parameter\.
 
@@ -17,13 +17,13 @@ If an endpoint value is `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.
 + For host or host name, specify `mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com`\.
 + For port, specify `3306`\.
 
-You can connect to an Amazon RDS MariaDB DB instance by using tools like the mysql command line utility\. For more information on using the mysql utility, see [mysql Command\-line Client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is Heidi\. For more information, see the [Download Heidi](http://www.heidisql.com/download.php) page\.
+You can connect to an Amazon RDS MariaDB DB instance by using tools like the mysql command line utility\. For more information on using the mysql utility, see [mysql command\-line client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application you can use to connect is Heidi\. For more information, see the [Download heidi](http://www.heidisql.com/download.php) page\.
 
-To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
-You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\. For information, see [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
+You can use SSL encryption on connections to an Amazon RDS MariaDB DB instance\. For information, see [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)\.
 
-## Connecting from the mysql Utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
+## Connecting from the mysql utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
 
 To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<quartermaster>`*\. Provide the master password that you used when prompted for a password\.
 
@@ -57,7 +57,7 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 
 1. Download a root certificate that works for all AWS Regions\.
 
-   For information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. Enter the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
 
@@ -91,7 +91,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql >
 ```
 
-## Troubleshooting Connections to Your MariaDB DB Instance<a name="USER_ConnectToMariaDBInstance.Troubleshooting"></a>
+## Troubleshooting connections to your MariaDB DB instance<a name="USER_ConnectToMariaDBInstance.Troubleshooting"></a>
 
 Two common causes of connection failures to a new DB instance are the following:
 + The DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the MariaDB application or utility is running\. If the DB instance was created in an Amazon VPC, it must have a VPC security group that authorizes the connections\. For more information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
@@ -101,4 +101,4 @@ Two common causes of connection failures to a new DB instance are the following:
   If the DB instance was created outside of a VPC, it must have a DB security group that authorizes the connections\.
 + The DB instance was created using the default port of 3306, and your company has firewall rules blocking connections to that port from devices in your company network\. To fix this failure, recreate the instance with a different port\.
 
-For more information on connection issues, see [Can't Connect to Amazon RDS DB Instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+For more information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.

@@ -1,4 +1,4 @@
-# Database Engine: 12\.1\.0\.2<a name="Appendix.Oracle.PatchComposition.12.1.0.2"></a>
+# Database engine: 12\.1\.0\.2<a name="Appendix.Oracle.PatchComposition.12.1.0.2"></a>
 
 The following versions are available for database engine 12\.1\.0\.2:
 + [Version 12\.1\.0\.2\.v21](#Appendix.Oracle.PatchComposition.12.1.0.2.v21)
@@ -42,7 +42,7 @@ Version 12\.1\.0\.2\.v21 includes the following:
 + Patch 23262847: Oracle GoldenGate \- MALFORMED REDO CAUSED OGG REPLICATION ABEND
 + PreUpgrade Jar: preupgrade\_12\.1\.0\.2\.0\_18\_crlf\.zip
 
-### Combined Patches for Version 12\.1\.0\.2\.v21, Released July 2020<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v21.Bugs-Fixed"></a>
+### Combined patches for version 12\.1\.0\.2\.v21, released July 2020<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v21.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -278,10 +278,10 @@ Version 12\.1\.0\.2\.v20 includes the following:
 + Patch 20033733: PART :IMC:HIT ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 + PreUpgrade Jar: preupgrade\_12\.1\.0\.2\.0\_18\_crlf\.zipn
-+ Support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
-+ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
++ Support for [Purging the recycle bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
++ Support for [Generating performance reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
-### Combined Patches for Version 12\.1\.0\.2, Released April 2020<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v20-Bugs-Fixed"></a>
+### Combined patches for version 12\.1\.0\.2, released April 2020<a name="Appendix.Oracle.PatchComposition.12.1.0.2.v20-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -704,7 +704,7 @@ Version 12\.1\.0\.2\.v18 includes the following:
 + Patch 20033733: PART :IMC:HIT ORA 600 \[KGL\-HEAP\-SIZE\-EXCEEDED\]
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 + PreUpgrade Jar: preupgrade\_12\.1\.0\.2\.0\_18\_crlf\.zip
-+ Support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
++ Support for [Resizing the temporary tablespace in a read replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
 ### Oracle patch 29918340, released October 2019<a name="w127aac31d107c17c12b7"></a>
 
@@ -2011,8 +2011,8 @@ Version 12\.1\.0\.2\.v9 includes the following:
 + JSON bundle patch \(patch 26083365\)
 + KGL heap size patch \(patch 20033733 for 12\.1\.0\.2\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
-+ Support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
-+ Support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
++ Support for [Validating DB instance files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
++ Support for [Setting the default edition for a DB instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
 ### Oracle patch 26609783, released July 2017<a name="w127aac31d107c17c30b7"></a>
 
@@ -2307,7 +2307,7 @@ Version 12\.1\.0\.2\.v6 includes the following:
 + Fixed a bug that caused 12c upgrade scripts to drop customer directories
 + Made DIAG log directory available to customers
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.161018 \(patch 24006101, released October 2016\)<a name="w127aac31d107c17c36b6"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.161018 \(patch 24006101, released October 2016\)<a name="w127aac31d107c17c36b6"></a>
 
 Bugs fixed:
 
@@ -2382,10 +2382,10 @@ Version 12\.1\.0\.2\.v5 includes the following:
 + Timezone file DSTv26 \(patch 22873635 for 12\.1\.0\.2\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 17969866 for 12\.1\.0\.2\)
 + Oracle Forms patch 18307021 for 12\.1\.0\.2
-+ Ability to create custom password verify functions \(see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\)
++ Ability to create custom password verify functions \(see [Creating custom functions to verify passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\)
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160719 \(patch 23054246, released July 2016\)<a name="w127aac31d107c17c38b6"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.160719 \(patch 23054246, released July 2016\)<a name="w127aac31d107c17c38b6"></a>
 
 Bugs fixed:
 
@@ -2454,7 +2454,7 @@ Version 12\.1\.0\.2\.v4 includes the following:
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160419 \(patch 22291127, released April 2016\)<a name="w127aac31d107c17c40b6"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.160419 \(patch 22291127, released April 2016\)<a name="w127aac31d107c17c40b6"></a>
 
 Bugs fixed:
 
@@ -2512,7 +2512,7 @@ Version 12\.1\.0\.2\.v3 includes the following:
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database\.
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects\.
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.160119 \(patch 21948354, released January 2016\)<a name="w127aac31d107c17c42b6"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.160119 \(patch 21948354, released January 2016\)<a name="w127aac31d107c17c42b6"></a>
 
 Bugs fixed:
 
@@ -2560,7 +2560,7 @@ Version 12\.1\.0\.2\.v2 includes the following:
 + Oracle PSU 12\.1\.0\.2\.5 \(21359755\)
 + Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.5 \(patch 21359755, released October 2015\)<a name="w127aac31d107c17c44b6"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.5 \(patch 21359755, released October 2015\)<a name="w127aac31d107c17c44b6"></a>
 
 Bugs fixed:
 
@@ -2608,7 +2608,7 @@ Version 12\.1\.0\.2\.v1 includes the following:
 **Note**  
 Version 12\.1\.0\.2\.v1 supports Enterprise Edition only\.
 
-### Baseline: Oracle Database Patch Set Update 12\.1\.0\.2\.3 \(patch 20299023, released April 2015\)<a name="w127aac31d107c17c46b8"></a>
+### Baseline: Oracle database patch set update 12\.1\.0\.2\.3 \(patch 20299023, released April 2015\)<a name="w127aac31d107c17c46b8"></a>
 
 Bugs fixed:
 
@@ -2638,6 +2638,6 @@ Bugs fixed:
                     19597583, 19155797, 19393542, 19050649, 19028800
 ```
 
-## Related Topics<a name="Appendix.Oracle.PatchComposition.12.1.0.2.Related"></a>
-+ [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
+## Related topics<a name="Appendix.Oracle.PatchComposition.12.1.0.2.Related"></a>
++ [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
 + [Oracle on Amazon RDS](CHAP_Oracle.md)

@@ -13,9 +13,9 @@ CALL mysql.rds_kill_query_id(queryID);
  *queryID*   
 Integer\. The identity of the query to be ended\.
 
-## Usage Notes<a name="mysql_rds_kill_query_id-usage-notes"></a>
+## Usage notes<a name="mysql_rds_kill_query_id-usage-notes"></a>
 
-To stop a query running against the MariaDB server, use the `mysql.rds_kill_query_id` procedure and pass in the ID of that query\. To obtain the query ID, query the MariaDB [Information Schema PROCESSLIST Table](http://mariadb.com/kb/en/mariadb/information-schema-processlist-table/), as shown following:
+To stop a query running against the MariaDB server, use the `mysql.rds_kill_query_id` procedure and pass in the ID of that query\. To obtain the query ID, query the MariaDB [Information schema PROCESSLIST table](http://mariadb.com/kb/en/mariadb/information-schema-processlist-table/), as shown following:
 
 ```
 SELECT USER, HOST, COMMAND, TIME, STATE, INFO, QUERY_ID FROM 
@@ -24,7 +24,7 @@ SELECT USER, HOST, COMMAND, TIME, STATE, INFO, QUERY_ID FROM
 
 The connection to the MariaDB server is retained\.
 
-## Related Topics<a name="mysql_rds_kill_query_id.related"></a>
+## Related topics<a name="mysql_rds_kill_query_id.related"></a>
 + [mysql\.rds\_kill](mysql_rds_kill.md)
 + [mysql\.rds\_kill\_query](mysql_rds_kill_query.md)
 

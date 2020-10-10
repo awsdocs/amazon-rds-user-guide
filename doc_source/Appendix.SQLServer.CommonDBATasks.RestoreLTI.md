@@ -1,4 +1,4 @@
-# Restoring License\-Terminated DB Instances<a name="Appendix.SQLServer.CommonDBATasks.RestoreLTI"></a>
+# Restoring license\-terminated DB instances<a name="Appendix.SQLServer.CommonDBATasks.RestoreLTI"></a>
 
 Microsoft has requested that some Amazon RDS customers who did not report their Microsoft License Mobility information terminate their DB instance\. Amazon RDS takes snapshots of these DB instances, and you can restore from the snapshot to a new DB instance that has the License Included model\. 
 
@@ -26,4 +26,4 @@ You can restore from a snapshot of Enterprise Edition to either Standard Edition
 
 1. Choose **Restore DB Instance**\.
 
-For more information about restoring from a snapshot, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\. 
+For more information about restoring from a snapshot, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\. 

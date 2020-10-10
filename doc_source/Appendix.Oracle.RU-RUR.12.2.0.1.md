@@ -1,4 +1,4 @@
-# Database Engine: 12\.2\.0\.1<a name="Appendix.Oracle.RU-RUR.12.2.0.1"></a>
+# Database engine: 12\.2\.0\.1<a name="Appendix.Oracle.RU-RUR.12.2.0.1"></a>
 
 For Oracle 12c version 12\.2\.0\.1, Oracle changed the way it releases Oracle Database updates\. Instead of Patch Set Updates \(PSUs\), Oracle supplies Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. RUs contain optimizer changes, feature additions, and security fixes\. RURs only contain security fixes for the two preceding quarterly patch cycles\. With this new system, you have more control over the features that you install with each update\.
 
@@ -31,7 +31,7 @@ Version 12\.2\.0\.1\.ru\-2020\-07\.rur\-2020\-07\.r1 includes the following:
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_23\_lf\.zip
 
-### Combined Patches for Version 12\.2\.0\.1\.ru\-2020\-07\.rur\-2020\-07\.r1, Released July 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-07.rur-2020-07.r1.Bugs-Fixed"></a>
+### Combined patches for version 12\.2\.0\.1\.ru\-2020\-07\.rur\-2020\-07\.r1, released July 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-07.rur-2020-07.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -329,10 +329,10 @@ Version 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 includes the following:
 + Patch 29997959: DSTv34 for OJVM \(TZDATA2019G\)
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_23\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
-+ Support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
-+ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
++ Support for [Purging the recycle bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
++ Support for [Generating performance reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
-### Combined Patches for Version 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1, Released April 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-04.rur-2020-04.r1.Bugs-Fixed"></a>
+### Combined patches for version 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1, released April 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-04.rur-2020-04.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -608,7 +608,7 @@ Version 12\.2\.0\.1\.ru\-2020\-01\.rur\-2020\-01\.r1 includes the following:
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_23\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 
-### Oracle Release Update 12\.2\.0\.1\.200114, Released January 2020<a name="Appendix.Oracle-RU-12.2.0.1.191015-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.200114, released January 2020<a name="Appendix.Oracle-RU-12.2.0.1.191015-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -858,9 +858,9 @@ Version 12\.2\.0\.1\.ru\-2019\-10\.rur\-2019\-10\.r1 includes the following:
 + Patch 29997959: DSTv34 for OJVM \(TZDATA2019G\)
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_23\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
-+ Support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
++ Support for [Resizing the temporary tablespace in a read replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
-### Oracle Release Update 12\.2\.0\.1\.191015, Released October 2019<a name="Appendix.Oracle-RU-12.2.0.1.191015-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.191015, released October 2019<a name="Appendix.Oracle-RU-12.2.0.1.191015-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -1085,7 +1085,7 @@ Version 12\.2\.0\.1\.ru\-2019\-07\.rur\-2019\-07\.r1 includes the following:
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle Release Update 12\.2\.0\.1\.190716, Released July 2019<a name="Appendix.Oracle-RU-12.2.0.1.190716-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.190716, released July 2019<a name="Appendix.Oracle-RU-12.2.0.1.190716-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -1291,9 +1291,9 @@ Version 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 includes the following:
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_21\_lf\.zip
 + Patch 28423598: GOLDENGATE AUTH CAUSES ACTIVE DG TO BE UNUSABLE UNTIL BOUNCE
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
-+ Support for the package `rdsadmin_dbms_goldengate_auth`, which provides `GRANT` privileges needed by a GoldenGate administrator account \(see [Grant Account Privileges on the Source DB](Appendix.OracleGoldenGate.md#Appendix.OracleGoldenGate.Source.Privileges)\)
++ Support for the package `rdsadmin_dbms_goldengate_auth`, which provides `GRANT` privileges needed by a GoldenGate administrator account \(see [Grant account privileges on the source DB](Appendix.OracleGoldenGate.md#Appendix.OracleGoldenGate.Source.Privileges)\)
 
-### Oracle Release Update 12\.2\.0\.1\.190416, Released April 2019<a name="Appendix.Oracle-RU-12.2.0.1.190115-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.190416, released April 2019<a name="Appendix.Oracle-RU-12.2.0.1.190115-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -1481,7 +1481,7 @@ Version 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 includes the following:
 + Patch 28127287: DSTv32 for OJVM \(TZDATA2018E\)
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_19\_lf\.zip
 
-### Oracle Release Update 12\.2\.0\.1\.190115, Released January 2019<a name="Appendix.Oracle-RU-12.2.0.1.190115-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.190115, released January 2019<a name="Appendix.Oracle-RU-12.2.0.1.190115-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -1646,7 +1646,7 @@ Bugs fixed:
 Version 12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1 includes the following: 
 + October 2018 Release Update: 12\.2\.0\.1\.181016 \(28662603\)
 
-### Oracle Release Update 12\.2\.0\.1\.181016, Released October 2018<a name="Appendix.Oracle-RU12.2.0.1.181016-Bugs-Fixed"></a>
+### Oracle release update 12\.2\.0\.1\.181016, released October 2018<a name="Appendix.Oracle-RU12.2.0.1.181016-Bugs-Fixed"></a>
 
 Bugs fixed:
 

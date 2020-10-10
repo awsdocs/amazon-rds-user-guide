@@ -1,39 +1,39 @@
-# Common DBA Recovery Manager \(RMAN\) Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.RMAN"></a>
+# Common DBA Recovery Manager \(RMAN\) tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.RMAN"></a>
 
 In the following section, you can find how you can perform Oracle Recovery Manager \(RMAN\) DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. 
 
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to perform RMAN backups of your Amazon RDS for Oracle database to disk\. The `rdsadmin.rdsadmin_rman_util` package supports full and incremental database file backups, tablespace backups, and archive log backups\. 
 
-RMAN backups consume storage space on the Amazon RDS DB instance host\. When you perform a backup, you specify an Oracle directory object as a parameter in the procedure call\. The backup files are placed in the specified directory\. You can use default directories, such as `DATA_PUMP_DIR`, or create a new directory\. For more information, see [Creating and Dropping Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)\.
+RMAN backups consume storage space on the Amazon RDS DB instance host\. When you perform a backup, you specify an Oracle directory object as a parameter in the procedure call\. The backup files are placed in the specified directory\. You can use default directories, such as `DATA_PUMP_DIR`, or create a new directory\. For more information, see [Creating and dropping directories in the main data storage space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)\.
 
-After an RMAN backup has finished, you can copy the backup files off the Amazon RDS for Oracle DB instance host\. You might do this for the purpose of restoring to a non\-RDS host or for long\-term storage of backups\. For example, you can copy the backup files to an Amazon S3 bucket\. For more information, see using [Amazon S3 Integration](oracle-s3-integration.md)\.
+After an RMAN backup has finished, you can copy the backup files off the Amazon RDS for Oracle DB instance host\. You might do this for the purpose of restoring to a non\-RDS host or for long\-term storage of backups\. For example, you can copy the backup files to an Amazon S3 bucket\. For more information, see using [Amazon S3 integration](oracle-s3-integration.md)\.
 
-The backup files for RMAN backups remain on the Amazon RDS DB instance host until you remove them manually\. You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a directory\. For more information, see [FREMOVE Procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
+The backup files for RMAN backups remain on the Amazon RDS DB instance host until you remove them manually\. You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a directory\. For more information, see [FREMOVE procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
 
-When backing up archived redo logs or performing a full or incremental backup that includes archived redo logs, redo log retention must be set to a nonzero value\. For more information, see [Retaining Archived Redo Logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. 
+When backing up archived redo logs or performing a full or incremental backup that includes archived redo logs, redo log retention must be set to a nonzero value\. For more information, see [Retaining archived redo logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. 
 
 **Note**  
-For backing up and restoring to another Amazon RDS for Oracle DB instance, you can continue to use the Amazon RDS backup and restore features\. For more information, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)  
+For backing up and restoring to another Amazon RDS for Oracle DB instance, you can continue to use the Amazon RDS backup and restore features\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)  
 Currently, RMAN restore isn't supported for Amazon RDS for Oracle DB instances\.
 
 **Topics**
-+ [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)
-+ [Validating DB Instance Files](#Appendix.Oracle.CommonDBATasks.ValidateDBFiles)
-+ [Enabling and Disabling Block Change Tracking](#Appendix.Oracle.CommonDBATasks.BlockChangeTracking)
-+ [Crosschecking Archived Redo Logs](#Appendix.Oracle.CommonDBATasks.Crosscheck)
-+ [Backing Up Archived Redo Logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs)
-+ [Performing a Full Database Backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseFull)
-+ [Performing an Incremental Database Backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseIncremental)
-+ [Performing a Tablespace Backup](#Appendix.Oracle.CommonDBATasks.BackupTablespace)
++ [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)
++ [Validating DB instance files](#Appendix.Oracle.CommonDBATasks.ValidateDBFiles)
++ [Enabling and disabling block change tracking](#Appendix.Oracle.CommonDBATasks.BlockChangeTracking)
++ [Crosschecking archived redo logs](#Appendix.Oracle.CommonDBATasks.Crosscheck)
++ [Backing up archived redo logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs)
++ [Performing a full database backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseFull)
++ [Performing an incremental database backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseIncremental)
++ [Performing a tablespace backup](#Appendix.Oracle.CommonDBATasks.BackupTablespace)
 
-## Common Parameters for RMAN Procedures<a name="Appendix.Oracle.CommonDBATasks.CommonParameters"></a>
+## Common parameters for RMAN procedures<a name="Appendix.Oracle.CommonDBATasks.CommonParameters"></a>
 
 You can use procedures in the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to perform tasks with RMAN\. Several parameters are common to the procedures in the package\. The package has the following common parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_owner` | varchar2 | A valid owner of the directory specified in `p_directory_name`\. | — | Yes |  The owner of the directory to contain the backup files\.  | 
 | `p_directory_name` | varchar2 | A valid database directory name\. | – | Yes |  The name of the directory to contain the backup files\.  | 
@@ -47,20 +47,20 @@ You can use procedures in the Amazon RDS package `rdsadmin.rdsadmin_rman_util` t
 | `p_section_size_mb` | number | A valid integer | `NULL` | No | The section size in megabytes \(MB\)\. Validates in parallel by dividing each file into the specified section size\. When `NULL`, the parameter is ignored\. | 
 | `p_validation_type` | varchar2 | `'PHYSICAL'`, `'PHYSICAL+LOGICAL'` | `'PHYSICAL'` | No | The level of corruption detection\. Specify `'PHYSICAL'` to check for physical corruption\. An example of physical corruption is a block with a mismatch in the header and footer\. Specify `'PHYSICAL+LOGICAL'` to check for logical inconsistencies in addition to physical corruption\. An example of logical corruption is a corrupt block\.  | 
 
-## Validating DB Instance Files<a name="Appendix.Oracle.CommonDBATasks.ValidateDBFiles"></a>
+## Validating DB instance files<a name="Appendix.Oracle.CommonDBATasks.ValidateDBFiles"></a>
 
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to validate Amazon RDS for Oracle DB instance files, such as data files, tablespaces, control files, or server parameter files \(SPFILEs\)\.
 
-For more information about RMAN validation, see [ Validating Database Files and Backups](https://docs.oracle.com/database/121/BRADV/rcmvalid.htm#BRADV90063) and [ VALIDATE](https://docs.oracle.com/database/121/RCMRF/rcmsynta2025.htm#RCMRF162) in the Oracle documentation\.
+For more information about RMAN validation, see [ Validating database files and backups](https://docs.oracle.com/database/121/BRADV/rcmvalid.htm#BRADV90063) and [ VALIDATE](https://docs.oracle.com/database/121/RCMRF/rcmsynta2025.htm#RCMRF162) in the Oracle documentation\.
 
 **Topics**
-+ [Validating a DB Instance](#Appendix.Oracle.CommonDBATasks.ValidateDB)
-+ [Validating a Tablespace](#Appendix.Oracle.CommonDBATasks.ValidateTablespace)
-+ [Validating a Control File](#Appendix.Oracle.CommonDBATasks.ValidateControlFile)
++ [Validating a DB instance](#Appendix.Oracle.CommonDBATasks.ValidateDB)
++ [Validating a tablespace](#Appendix.Oracle.CommonDBATasks.ValidateTablespace)
++ [Validating a control file](#Appendix.Oracle.CommonDBATasks.ValidateControlFile)
 + [Validating an SPFILE](#Appendix.Oracle.CommonDBATasks.ValidateSpfile)
-+ [Validating a Data File](#Appendix.Oracle.CommonDBATasks.ValidateDataFile)
++ [Validating a data file](#Appendix.Oracle.CommonDBATasks.ValidateDataFile)
 
-### Validating a DB Instance<a name="Appendix.Oracle.CommonDBATasks.ValidateDB"></a>
+### Validating a DB instance<a name="Appendix.Oracle.CommonDBATasks.ValidateDB"></a>
 
 To validate all of the relevant files used by an Amazon RDS Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_database`\. 
 
@@ -70,7 +70,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_section_size_mb`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 The following example validates the DB instance using the default values for the parameters\.
 
@@ -107,7 +107,7 @@ SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','rds-rman-v
 
 Replace the file name with the name of the file you want to view\.
 
-### Validating a Tablespace<a name="Appendix.Oracle.CommonDBATasks.ValidateTablespace"></a>
+### Validating a tablespace<a name="Appendix.Oracle.CommonDBATasks.ValidateTablespace"></a>
 
 To validate the files associated with a tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_tablespace`\. 
 
@@ -117,18 +117,18 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_section_size_mb`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameter\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_tablespace_name` | varchar2 | A valid tablespace name | — | Yes | The name of the tablespace\. | 
 
-### Validating a Control File<a name="Appendix.Oracle.CommonDBATasks.ValidateControlFile"></a>
+### Validating a control file<a name="Appendix.Oracle.CommonDBATasks.ValidateControlFile"></a>
 
 To validate only the control file used by an Amazon RDS Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_current_controlfile`\. 
 
@@ -136,7 +136,7 @@ This procedure uses the following common parameter for RMAN tasks:
 + `p_validation_type`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 ### Validating an SPFILE<a name="Appendix.Oracle.CommonDBATasks.ValidateSpfile"></a>
 
@@ -146,9 +146,9 @@ This procedure uses the following common parameter for RMAN tasks:
 + `p_validation_type`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
-### Validating a Data File<a name="Appendix.Oracle.CommonDBATasks.ValidateDataFile"></a>
+### Validating a data file<a name="Appendix.Oracle.CommonDBATasks.ValidateDataFile"></a>
 
 To validate a data file, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.validate_datafile`\. 
 
@@ -158,20 +158,20 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_section_size_mb`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_datafile` | varchar2 | A valid datafile ID number or a valid datafile name including complete path | — | Yes | The datafile ID number \(from `v$datafile.file#`\) or the full datafile name including the path \(from `v$datafile.name`\)\. | 
 | `p_from_block` | number | A valid integer | `NULL` | No | The number of the block where the validation starts within the data file\. When this is `NULL`, `1` is used\. | 
 | `p_to_block` | number | A valid integer | `NULL` | No | The number of the block where the validation ends within the data file\. When this is `NULL`, the maximum block in the data file is used\. | 
 
-## Enabling and Disabling Block Change Tracking<a name="Appendix.Oracle.CommonDBATasks.BlockChangeTracking"></a>
+## Enabling and disabling block change tracking<a name="Appendix.Oracle.CommonDBATasks.BlockChangeTracking"></a>
 
 You can enable block change tracking for a DB instance using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.enable_block_change_tracking`\.
 
@@ -204,7 +204,7 @@ The following example disables block change tracking for a DB instance\.
 exec rdsadmin.rdsadmin_rman_util.disable_block_change_tracking;
 ```
 
-## Crosschecking Archived Redo Logs<a name="Appendix.Oracle.CommonDBATasks.Crosscheck"></a>
+## Crosschecking archived redo logs<a name="Appendix.Oracle.CommonDBATasks.Crosscheck"></a>
 
 You can crosscheck archived redo logs using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.crosscheck_archivelog`\.
 
@@ -215,14 +215,14 @@ Standard Amazon RDS backups don't use RMAN and therefore don't create records in
 
 This procedure uses the common parameter `p_rman_to_dbms_output` for RMAN tasks\.
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameter\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_delete_expired` | boolean | `TRUE`, `FALSE` | `TRUE` | No | When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.  | 
 
@@ -255,7 +255,7 @@ END;
 /
 ```
 
-## Backing Up Archived Redo Logs<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs"></a>
+## Backing up archived redo logs<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs"></a>
 
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to back up archived redo logs for an Amazon RDS Oracle DB instance\.
 
@@ -267,12 +267,12 @@ The procedures for backing up archived redo logs are supported for the following
 + All 19\.0\.0\.0 versions
 
 **Topics**
-+ [Backing Up All Archived Redo Logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All)
-+ [Backing Up an Archived Redo Log from a Date Range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Date)
-+ [Backing Up an Archived Redo Log from an SCN Range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.SCN)
-+ [Backing Up an Archived Redo Log from a Sequence Number Range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Sequence)
++ [Backing up all archived redo logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All)
++ [Backing up an archived redo log from a date range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Date)
++ [Backing up an archived redo log from an SCN range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.SCN)
++ [Backing up an archived redo log from a sequence number range](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Sequence)
 
-### Backing Up All Archived Redo Logs<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All"></a>
+### Backing up all archived redo logs<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All"></a>
 
 To back up all of the archived redo logs for an Amazon RDS Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_archivelog_all`\. 
 
@@ -284,7 +284,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 The following example backs up all archived redo logs for the DB instance\.
 
@@ -299,7 +299,7 @@ END;
 /
 ```
 
-### Backing Up an Archived Redo Log from a Date Range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Date"></a>
+### Backing up an archived redo log from a date range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Date"></a>
 
 To back up specific archived redo logs for an Amazon RDS Oracle DB instance by specifying a date range, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_archivelog_date`\. The date range specifies which archived redo logs to back up\. 
 
@@ -311,14 +311,14 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_from_date` | date | A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_date`\. | — | Yes |  The starting date for the archived log backups\.  | 
 | `p_to_date` | date | A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_date`\. | — | Yes |  The ending date for the archived log backups\.  | 
@@ -338,7 +338,7 @@ END;
 /
 ```
 
-### Backing Up an Archived Redo Log from an SCN Range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.SCN"></a>
+### Backing up an archived redo log from an SCN range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.SCN"></a>
 
 To back up specific archived redo logs for an Amazon RDS Oracle DB instance by specifying a system change number \(SCN\) range, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_archivelog_scn`\. The SCN range specifies which archived redo logs to back up\. 
 
@@ -350,14 +350,14 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_from_scn` | number | An SCN of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_scn`\. | — | Yes |  The starting SCN for the archived log backups\.  | 
 | `p_to_scn` | number | An SCN of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_scn`\. | — | Yes |  The ending SCN for the archived log backups\.  | 
@@ -377,7 +377,7 @@ END;
 /
 ```
 
-### Backing Up an Archived Redo Log from a Sequence Number Range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Sequence"></a>
+### Backing up an archived redo log from a sequence number range<a name="Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.Sequence"></a>
 
 To back up specific archived redo logs for an Amazon RDS Oracle DB instance by specifying a sequence number range, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_archivelog_sequence`\. The sequence number range specifies which archived redo logs to back up\. 
 
@@ -389,14 +389,14 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_from_sequence` | number | A sequence number an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_sequence`\. | — | Yes |  The starting sequence number for the archived log backups\.  | 
 | `p_to_sequence` | number | A sequence number of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_sequence`\. | — | Yes |  The ending sequence number for the archived log backups\.  | 
@@ -416,7 +416,7 @@ END;
 /
 ```
 
-## Performing a Full Database Backup<a name="Appendix.Oracle.CommonDBATasks.BackupDatabaseFull"></a>
+## Performing a full database backup<a name="Appendix.Oracle.CommonDBATasks.BackupDatabaseFull"></a>
 
 You can perform a backup of all blocks of data files included in the backup using Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_database_full`\.
 
@@ -431,7 +431,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
 + 11\.2\.0\.4\.v19 or higher 11\.2 versions
@@ -454,11 +454,11 @@ END;
 /
 ```
 
-## Performing an Incremental Database Backup<a name="Appendix.Oracle.CommonDBATasks.BackupDatabaseIncremental"></a>
+## Performing an incremental database backup<a name="Appendix.Oracle.CommonDBATasks.BackupDatabaseIncremental"></a>
 
 You can perform an incremental backup of your DB instance using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_database_incremental`\.
 
-For more information about incremental backups, see [Incremental Backups](https://docs.oracle.com/database/121/RCMRF/rcmsynta006.htm#GUID-73642FF2-43C5-48B2-9969-99001C52EB50__BGBHABHH) in the Oracle documentation\.
+For more information about incremental backups, see [Incremental backups](https://docs.oracle.com/database/121/RCMRF/rcmsynta006.htm#GUID-73642FF2-43C5-48B2-9969-99001C52EB50__BGBHABHH) in the Oracle documentation\.
 
 This procedure uses the following common parameters for RMAN tasks:
 + `p_owner`
@@ -472,7 +472,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
 + 11\.2\.0\.4\.v19 or higher 11\.2 versions
@@ -486,7 +486,7 @@ This procedure also uses the following additional parameter\.
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_level` | number | `0`, `1` | `0` | No |  Specify `0` to enable a full incremental backup\. Specify `1` to enable a non\-cumulative incremental backup\.  | 
 
@@ -505,7 +505,7 @@ END;
 /
 ```
 
-## Performing a Tablespace Backup<a name="Appendix.Oracle.CommonDBATasks.BackupTablespace"></a>
+## Performing a tablespace backup<a name="Appendix.Oracle.CommonDBATasks.BackupTablespace"></a>
 
 You can perform a DB instance tablespace using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_tablespace`\.
 
@@ -521,14 +521,14 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_compress`
 + `p_rman_to_dbms_output`
 
-For more information, see [Common Parameters for RMAN Procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure also uses the following additional parameter\.
 
 
 ****  
 
-| Parameter Name | Data Type | Valid Values | Default | Required | Description | 
+| Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
 | `p_tablespace_name` | varchar2 | A valid tablespace name\. | — | Yes |  The name of the tablespace to back up\.  | 
 

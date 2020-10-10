@@ -15,13 +15,13 @@ curr_master_log
  *curr\_master\_log*   
 The index of the current master log file\. For example, if the current file is named `mysql-bin-changelog.012345`, then the index is 12345\. To determine the current master log file name, run the `SHOW SLAVE STATUS` command and view the `Master_Log_File` field\.
 
-## Usage Notes<a name="mysql_rds_next_master_log-usage-notes"></a>
+## Usage notes<a name="mysql_rds_next_master_log-usage-notes"></a>
 
 The master user must run the `mysql.rds_next_master_log` procedure\. 
 
 **Warning**  
 Call `mysql.rds_next_master_log` only if replication fails after a failover of a Multi\-AZ DB instance that is the replication source, and the `Last_IO_Errno` field of `SHOW SLAVE STATUS` reports I/O error 1236\.  
-Calling `mysql.rds_next_master_log` may result in data loss in the read replica if transactions in the source instance were not written to the binary log on disk before the failover event occurred\. You can reduce the chance of this happening by configuring the source instance parameters sync\_binlog = 1 and innodb\_support\_xa = 1, although this may reduce performance\. For more information, see [Working with Read Replicas](USER_ReadRepl.md)\.
+Calling `mysql.rds_next_master_log` may result in data loss in the read replica if transactions in the source instance were not written to the binary log on disk before the failover event occurred\. You can reduce the chance of this happening by configuring the source instance parameters sync\_binlog = 1 and innodb\_support\_xa = 1, although this may reduce performance\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
 
 ## Examples<a name="mysql_rds_next_master_log-examples"></a>
 

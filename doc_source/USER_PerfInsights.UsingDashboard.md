@@ -1,8 +1,8 @@
-# Monitoring with the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
+# Monitoring with the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
 
 The Performance Insights dashboard contains database performance information to help you analyze and troubleshoot performance issues\. On the main dashboard page, you can view information about the database load\. You can also drill into details for a particular wait state, SQL query, host, or user\.
 
-## Opening the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.Opening"></a>
+## Opening the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.Opening"></a>
 
 To see the Performance Insights dashboard, use the following procedure\.
 
@@ -36,7 +36,7 @@ To see the Performance Insights dashboard, use the following procedure\.
    + 24 hours refreshes every 5 minutes\.
    + 1 week refreshes every hour\.
 
-## Performance Insights Dashboard Components<a name="USER_PerfInsights.UsingDashboard.Components"></a>
+## Performance Insights dashboard components<a name="USER_PerfInsights.UsingDashboard.Components"></a>
 
 The dashboard is divided into three parts:
 
@@ -46,7 +46,7 @@ The dashboard is divided into three parts:
 
 1.  **Top *items*** – Shows the top waits, SQL, hosts, and users contributing to DB load\.
 
-### Counter Metrics Chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
+### Counter Metrics chart<a name="USER_PerfInsights.UsingDashboard.Components.Countermetrics"></a>
 
  The **Counter Metrics** chart displays data for performance counters\. The default metrics depend on the DB engine\.
 + MySQL and MariaDB – `db.SQL.Innodb_rows_read.avg`
@@ -60,11 +60,11 @@ Change the performance counters by choosing **Manage Metrics**\. You can select 
 
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_select_metrics.png)
 
-For more information, see [Customizing the Performance Insights Dashboard](USER_PerfInsights_Counters.md)\.
+For more information, see [Customizing the Performance Insights dashboard](USER_PerfInsights_Counters.md)\.
 
-### Average Active Sessions Chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
+### Average Active Sessions chart<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions"></a>
 
-The **DB Load Chart** shows how the database load compares to DB instance capacity as represented by the **Max vCPU** line\. By default, load is shown as active sessions grouped by wait states in a bar graph\. 
+The **Database Load** chart shows how the database load compares to DB instance capacity as represented by the **Max vCPU** line\. By default, load is shown as active sessions grouped by wait states in a bar graph\. 
 
 ![\[Database load\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_2.png)
 
@@ -80,9 +80,9 @@ To see details for any item for the selected time period in the legend, hover ov
 
 ![\[Time period details for DB load\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_3.png)
 
-### Top Load Items Table<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable"></a>
+### Top load table<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable"></a>
 
-The **Top Load Items** table shows the top items contributing to database load\. By default, the console displays top SQL queries that are contributing to the database load, along with relevant statistics for each statement\. You can choose to display top waits, hosts, or users instead\.
+The Top load table shows the top items contributing to database load\. By default, the console displays top SQL queries that are contributing to the database load, along with relevant statistics for each statement\. You can choose to display top waits, hosts, or users instead\.
 
 ![\[Top SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4.png)
 
@@ -112,7 +112,7 @@ When you choose the **Preferences** icon, the **Preferences** window opens\.
 
 Enable the statistics that you want to have visible in the **Top sql** tab, use your mouse to scroll to the bottom of the window, and then choose **Continue**\.
 
-## Analyzing Database Load Using the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
+## Analyzing DB load using the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad"></a>
 
 If the **Average Active Sessions** chart shows a bottleneck, you can find out where the load is coming from\. To do so, look at the top load items table below the **Average Active Sessions** chart\. Choose a particular item, like a SQL query or a user, to drill down into that item and see details about it\.
 
@@ -132,9 +132,9 @@ For example, in the dashboard following, **log file sync** waits account for mos
 
 ![\[log file sync errors\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_7.png)
 
-## Analyzing Statistics for Running Queries<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics"></a>
+## Analyzing statistics for running queries<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics"></a>
 
-In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top *load\_items*** section\. To view these statistics, view top SQL\. Performance Insights collects statistics only for the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\.
+In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top SQL** section\. Performance Insights collects statistics only for the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\.
 
 ### Statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
@@ -188,7 +188,7 @@ The following metrics provide per call statistics for a SQL statement\.
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_call | Created temporary tables per call | 
 | db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_call | Lock time per call \(in ms\) | 
 
-#### Analyzing MariaDB and MySQL Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevelMariaDBMySQL"></a>
+#### Analyzing MariaDB and MySQL Metrics for running SQL statements<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevelMariaDBMySQL"></a>
 
 Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab and expanding the query\.
 
@@ -229,7 +229,7 @@ The following metrics provide per call statistics for a SQL statement\.
 | db\.sql\.stats\.total\_sharable\_mem\_per\_exec | Total shareable memory per execution \(in bytes\) | 
 | db\.sql\.stats\.cpu\_time\_per\_exec | CPU time per execution \(in ms\) | 
 
-#### Analyzing Oracle Metrics for SQL Statements That Are Running<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel"></a>
+#### Analyzing Oracle metrics for running SQL statements<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingSQLLevel"></a>
 
 Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab and expanding the query\.
 
@@ -245,7 +245,7 @@ The following screenshot shows the statistics for a SQL statement\.
 
 ![\[Statistics for a SQL statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_stats_oracle.png)
 
-## Viewing More SQL Text in the Performance Insights Dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
+## Viewing more SQL text in the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 
 By default, each row in the **Top sql** table shows 500 bytes of SQL text for each SQL statement\. When a SQL statement is larger than 500 bytes, you can view more of the SQL statement by opening the statement in the Performance Insights dashboard\. The dashboard displays text up to the following per\-engine limits:
 + Amazon RDS for Microsoft SQL Server – 4,096 characters
@@ -254,7 +254,7 @@ By default, each row in the **Top sql** table shows 500 bytes of SQL text for ea
 
 You can copy the text that is displayed on the dashboard, or choose **Download**\.
 
-Amazon RDS for PostgreSQL handles text differently\. Using the Performance Insights dashboard, you can view and download up to 500 bytes\. To access more than 500 bytes, set the size limit with the DB instance parameter `track_activity_query_size`\. The maximum value is 102,400 bytes\. To view or download text over 500 bytes, use the AWS Management Console, not the Performance Insights CLI or API\. For more information, see [Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
+Amazon RDS for PostgreSQL handles text differently\. Using the Performance Insights dashboard, you can view and download up to 500 bytes\. To access more than 500 bytes, set the size limit with the DB instance parameter `track_activity_query_size`\. The maximum value is 102,400 bytes\. To view or download text over 500 bytes, use the AWS Management Console, not the Performance Insights CLI or API\. For more information, see [Setting the SQL text limit for Amazon RDS for PostgreSQL DB instances](#USER_PerfInsights.UsingDashboard.SQLTextLimit)\.
 
 **To view more SQL text in the Performance Insights dashboard**
 
@@ -276,7 +276,7 @@ Amazon RDS for PostgreSQL handles text differently\. Using the Performance Insig
 **Note**  
 To copy or download the SQL statement, disable pop\-up blockers\. 
 
-### Setting the SQL Text Limit for Amazon RDS for PostgreSQL DB Instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
+### Setting the SQL text limit for Amazon RDS for PostgreSQL DB instances<a name="USER_PerfInsights.UsingDashboard.SQLTextLimit"></a>
 
 For Amazon RDS for PostgreSQL DB instances, you can control the limit for the SQL text that can be shown on the Performance Insights dashboard\. 
 
@@ -294,9 +294,9 @@ If the Amazon RDS for PostgreSQL DB instance is using the default parameter grou
 
 1. Associate the new parameter group with the DB instance\.
 
-For information about setting a DB instance parameter, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+For information about setting a DB instance parameter, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
-## Zooming In on the DB Load Chart<a name="USER_PerfInsights.UIcontrols"></a>
+## Zooming In on the DB Load chart<a name="USER_PerfInsights.UIcontrols"></a>
 
 You can use other features of the Performance Insights user interface to help analyze performance data\.
 

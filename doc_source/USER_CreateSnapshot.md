@@ -1,15 +1,15 @@
-# Creating a DB Snapshot<a name="USER_CreateSnapshot"></a>
+# Creating a DB snapshot<a name="USER_CreateSnapshot"></a>
 
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. Creating this DB snapshot on a Single\-AZ DB instance results in a brief I/O suspension that can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\. 
 
 When you create a DB snapshot, you need to identify which DB instance you are going to back up, and then give your DB snapshot a name so you can restore from it later\. The amount of time it takes to create a snapshot varies with the size your databases\. Since the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects the amount of time it takes to create the snapshot\.
 
 **Note**  
-For PostgreSQL DB instances, data in unlogged tables might not be restored from snapshots\. For more information, see [Best Practices for Working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\.
+For PostgreSQL DB instances, data in unlogged tables might not be restored from snapshots\. For more information, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\.
 
 Unlike automated backups, manual snapshots aren't subject to the backup retention period\. Snapshots don't expire\.
 
-For very long\-term backups of MariaDB, MySQL, and PostgreSQL data, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)\.
+For very long\-term backups of MariaDB, MySQL, and PostgreSQL data, we recommend exporting snapshot data to Amazon S3\. If the major version of your DB engine is no longer supported, you can't restore to that version from a snapshot\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
 
 You can create a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 

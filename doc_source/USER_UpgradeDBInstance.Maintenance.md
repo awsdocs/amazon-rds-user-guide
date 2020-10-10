@@ -1,10 +1,10 @@
-# Maintaining a DB Instance<a name="USER_UpgradeDBInstance.Maintenance"></a>
+# Maintaining a DB instance<a name="USER_UpgradeDBInstance.Maintenance"></a>
 
 Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintenance most often involves updates to the DB instance's underlying hardware, underlying operating system \(OS\), or database engine version\. Updates to the operating system most often occur for security issues and should be done as soon as possible\. 
 
 Some maintenance items require that Amazon RDS take your DB instance offline for a short time\. Maintenance items that require a resource to be offline include required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
 
-Deferred DB instance modifications that you have chosen not to apply immediately are applied during the maintenance window\. For example, you may choose to change the DB instance class or parameter group during the maintenance window\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+Deferred DB instance modifications that you have chosen not to apply immediately are applied during the maintenance window\. For example, you may choose to change the DB instance class or parameter group during the maintenance window\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\. 
 
@@ -31,9 +31,9 @@ To take an action, choose the DB instance to show its details, then choose **Mai
 
 ![\[Pending maintenance items\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/offlinepatchavailabledetails.png)
 
-The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS Maintenance Window](#Concepts.DBMaintenance)\. 
+The maintenance window determines when pending operations start, but doesn't limit the total run time of these operations\. Maintenance operations aren't guaranteed to finish before the maintenance window ends, and can continue beyond the specified end time\. For more information, see [The Amazon RDS maintenance window](#Concepts.DBMaintenance)\. 
 
-## Applying Updates for a DB Instance<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
+## Applying updates for a DB instance<a name="USER_UpgradeDBInstance.OSUpgrades"></a>
 
 With Amazon RDS, you can choose when to apply maintenance operations\. You can decide when Amazon RDS applies updates by using the RDS console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 
@@ -124,7 +124,7 @@ To apply an update to a DB instance, call the Amazon RDS API [https://docs.aws.a
 
 To return a list of resources that have at least one pending update, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribePendingMaintenanceActions.html) operation\.
 
-## Maintenance for Multi\-AZ Deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
+## Maintenance for Multi\-AZ deployments<a name="USER_UpgradeDBInstance.Maintenance.Multi-AZ"></a>
 
 Running a DB instance as a Multi\-AZ deployment can further reduce the impact of a maintenance event, because Amazon RDS applies operating system updates by following these steps: 
 
@@ -136,9 +136,9 @@ Running a DB instance as a Multi\-AZ deployment can further reduce the impact of
 
 When you modify the database engine for your DB instance in a Multi\-AZ deployment, then Amazon RDS upgrades both the primary and secondary DB instances at the same time\. In this case, the database engine for the entire Multi\-AZ deployment is shut down during the upgrade\. 
 
-For more information on Multi\-AZ deployments, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
+For more information on Multi\-AZ deployments, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
 
-## The Amazon RDS Maintenance Window<a name="Concepts.DBMaintenance"></a>
+## The Amazon RDS maintenance window<a name="Concepts.DBMaintenance"></a>
 
 Every DB instance has a weekly maintenance window during which any system changes are applied\. You can think of the maintenance window as an opportunity to control when modifications and software patching occur, in the event either are requested or required\. If a maintenance event is scheduled for a given week, it is initiated during the 30\-minute maintenance window you identify\. Most maintenance events also complete during the 30\-minute maintenance window, although larger maintenance events may take more than 30 minutes to complete\. 
 
@@ -152,7 +152,7 @@ Following, you can find the time blocks for each region from which default maint
 ****  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html)
 
-## Adjusting the Preferred DB Instance Maintenance Window<a name="AdjustingTheMaintenanceWindow"></a>
+## Adjusting the preferred DB instance maintenance window<a name="AdjustingTheMaintenanceWindow"></a>
 
 The maintenance window should fall at the time of lowest usage and thus might need modification from time to time\. Your DB instance will only be unavailable during this time if the system changes, such as a change in DB instance class, are being applied and require an outage, and only for the minimum amount of time required to make the necessary changes\. 
 

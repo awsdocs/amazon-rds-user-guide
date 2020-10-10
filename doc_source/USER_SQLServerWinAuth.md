@@ -1,4 +1,4 @@
-# Using Windows Authentication with an Amazon RDS for SQL Server DB Instance<a name="USER_SQLServerWinAuth"></a>
+# Using Windows Authentication with an Amazon RDS for SQL Server DB instance<a name="USER_SQLServerWinAuth"></a>
 
 You can use Microsoft Windows Authentication to authenticate users when they connect to your Amazon RDS for Microsoft SQL Server DB instance\. The DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to enable Windows Authentication\. When users authenticate with a SQL Server DB instance joined to the trusting domain, authentication requests are forwarded to the domain directory that you create with AWS Directory Service\. 
 
@@ -6,9 +6,9 @@ Amazon RDS supports Windows Authentication for SQL Server in all AWS Regions\.
 
 Amazon RDS uses mixed mode for Windows Authentication\. This approach means that the *master user* \(the name and password used to create your SQL Server DB instance\) uses SQL Authentication\. Because the master user account is a privileged credential, you should restrict access to this account\.
 
-To get Windows Authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust\. The trust can be one\-way or two\-way\. For more information on setting up forest trusts using AWS Directory Service, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
+To get Windows Authentication using an on\-premises or self\-hosted Microsoft Active Directory, create a forest trust\. The trust can be one\-way or two\-way\. For more information on setting up forest trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
-To set up Windows authentication for a SQL Server DB instance, do the following steps, explained in greater detail in [Setting Up Windows Authentication for SQL Server DB Instances](#USER_SQLServerWinAuth.SettingUp):
+To set up Windows authentication for a SQL Server DB instance, do the following steps, explained in greater detail in [Setting up Windows Authentication for SQL Server DB instances](#USER_SQLServerWinAuth.SettingUp):
 
 1. Use AWS Managed Microsoft AD, either from the AWS Management Console or AWS Directory Service API, to create an AWS Managed Microsoft AD directory\. 
 
@@ -16,7 +16,7 @@ To set up Windows authentication for a SQL Server DB instance, do the following 
 
    For the role to allow access, the AWS Security Token Service \(AWS STS\) endpoint must be activated in the AWS Region for your AWS account\. AWS STS endpoints are active by default in all AWS Regions, and you can use them without any further actions\. For more information, see [Managing AWS STS in an AWS Region](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html) in the *IAM User Guide*\.
 
-1. Create and configure users and groups in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users and groups in your Active Directory, see [Manage Users and Groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
+1. Create and configure users and groups in the AWS Managed Microsoft AD directory using the Microsoft Active Directory tools\. For more information about creating users and groups in your Active Directory, see [Manage users and groups in AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html) in the *AWS Directory Service Administration Guide*\.
 
 1. If you plan to locate the directory and the DB instance in different VPCs, enable cross\-VPC traffic\.
 
@@ -24,7 +24,7 @@ To set up Windows authentication for a SQL Server DB instance, do the following 
 
 1. Use the Amazon RDS master user credentials to connect to the SQL Server DB instance as you do any other DB instance\. Because the DB instance is joined to the AWS Managed Microsoft AD domain, you can provision SQL Server logins and users from the Active Directory users and groups in their domain\. \(These are known as SQL Server "Windows" logins\.\) Database permissions are managed through standard SQL Server permissions granted and revoked to these Windows logins\. 
 
-## Creating the Endpoint for Kerberos Authentication<a name="USER_SQLServerWinAuth.KerberosEndpoint"></a>
+## Creating the endpoint for Kerberos authentication<a name="USER_SQLServerWinAuth.KerberosEndpoint"></a>
 
 Kerberos\-based authentication requires that the endpoint be the customer\-specified host name, a period, and then the fully qualified domain name \(FQDN\)\. For example, the following is an example of an endpoint you might use with Kerberos\-based authentication\. In this example, the SQL Server DB instance host name is `ad-test` and the domain name is `corp-ad.company.com`\. 
 
@@ -40,11 +40,11 @@ If you want to make sure your connection is using Kerberos, run the following qu
 3.  WHERE session_id = @@SPID;
 ```
 
-## Setting Up Windows Authentication for SQL Server DB Instances<a name="USER_SQLServerWinAuth.SettingUp"></a>
+## Setting up Windows Authentication for SQL Server DB instances<a name="USER_SQLServerWinAuth.SettingUp"></a>
 
 You use AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD, to set up Windows Authentication for a SQL Server DB instance\. To set up Windows Authentication, take the following steps\. 
 
-### Step 1: Create a Directory Using the AWS Directory Service for Microsoft Active Directory<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
+### Step 1: Create a directory using the AWS Directory Service for Microsoft Active Directory<a name="USER_SQLServerWinAuth.SettingUp.CreateDirectory"></a>
 
 AWS Directory Service creates a fully managed, Microsoft Active Directory in the AWS Cloud\. When you create an AWS Managed Microsoft AD directory, AWS Directory Service creates two domain controllers and Domain Name Service \(DNS\) servers on your behalf\. The directory servers are created in two subnets in two different Availability Zones within a VPC\. This redundancy helps ensure that your directory remains accessible even if a failure occurs\.
 
@@ -103,7 +103,7 @@ Retype the administrator password\.
 1. On the **Choose VPC and subnets** page, provide the following information:  
 **VPC**  
 Choose the VPC for the directory\.  
-You can locate the directory and the DB instance in different VPCs, but if you do so, make sure to enable cross\-VPC traffic\. For more information, see [Step 4: Enable Cross\-VPC Traffic Between the Directory and the DB Instance](#USER_SQLServerWinAuth.SettingUp.VPC-Peering)\.  
+You can locate the directory and the DB instance in different VPCs, but if you do so, make sure to enable cross\-VPC traffic\. For more information, see [Step 4: Enable cross\-VPC traffic between the directory and the DB instance](#USER_SQLServerWinAuth.SettingUp.VPC-Peering)\.  
 **Subnets**  
 Choose the subnets for the directory servers\. The two subnets must be in different Availability Zones\.
 
@@ -118,7 +118,7 @@ To see information about your directory, choose the directory ID in the director
 
 ![\[Directory details page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth3.png)
 
-### Step 2: Create the IAM Role for Use by Amazon RDS<a name="USER_SQLServerWinAuth.SettingUp.CreateIAMRole"></a>
+### Step 2: Create the IAM role for use by Amazon RDS<a name="USER_SQLServerWinAuth.SettingUp.CreateIAMRole"></a>
 
 If you use the console to create your SQL Server DB instance, you can skip this step\. If you use the CLI or RDS API to create your SQL Server DB instance, you must create an IAM role that uses the `AmazonRDSDirectoryServiceAccess` managed IAM policy\. This role allows Amazon RDS to make calls to the AWS Directory Service for you\. 
 
@@ -144,21 +144,21 @@ The following IAM policy, `AmazonRDSDirectoryServiceAccess`, provides access to 
 }
 ```
 
-Create an IAM role using this policy\. For more information about creating IAM roles, see [Creating Customer Managed Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) in the *IAM User Guide*\.
+Create an IAM role using this policy\. For more information about creating IAM roles, see [Creating customer managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) in the *IAM User Guide*\.
 
-### Step 3: Create and Configure Users and Groups<a name="USER_SQLServerWinAuth.SettingUp.CreateUsers"></a>
+### Step 3: Create and configure users and groups<a name="USER_SQLServerWinAuth.SettingUp.CreateUsers"></a>
 
 You can create users and groups with the Active Directory Users and Computers tool\. This tool is one of the Active Directory Domain Services and Active Directory Lightweight Directory Services tools\. Users represent individual people or entities that have access to your directory\. Groups are very useful for giving or denying privileges to groups of users, rather than having to apply those privileges to each individual user\.
 
-To create users and groups in an AWS Directory Service directory, you must be connected to a Windows EC2 instance that is a member of the AWS Directory Service directory\. You must also be logged in as a user that has privileges to create users and groups\. For more information, see [Add Users and Groups \(Simple AD and AWS Managed Microsoft AD\)](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/creating_ad_users_and_groups.html) in the *AWS Directory Service Administration Guide*\.
+To create users and groups in an AWS Directory Service directory, you must be connected to a Windows EC2 instance that is a member of the AWS Directory Service directory\. You must also be logged in as a user that has privileges to create users and groups\. For more information, see [Add users and groups \(Simple AD and AWS Managed Microsoft AD\)](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/creating_ad_users_and_groups.html) in the *AWS Directory Service Administration Guide*\.
 
-### Step 4: Enable Cross\-VPC Traffic Between the Directory and the DB Instance<a name="USER_SQLServerWinAuth.SettingUp.VPC-Peering"></a>
+### Step 4: Enable cross\-VPC traffic between the directory and the DB instance<a name="USER_SQLServerWinAuth.SettingUp.VPC-Peering"></a>
 
-If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or Modify a SQL Server DB Instance](#USER_SQLServerWinAuth.SettingUp.CreateModify)\.
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [Step 5: Create or modify a SQL Server DB instance](#USER_SQLServerWinAuth.SettingUp.CreateModify)\.
 
 If you plan to locate the directory and the DB instance in different VPCs, configure cross\-VPC traffic using VPC peering or [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html)\.
 
-The following procedure enables traffic between VPCs using VPC peering\. Follow the instructions in [What is VPC Peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud Peering Guide*\.
+The following procedure enables traffic between VPCs using VPC peering\. Follow the instructions in [What is VPC peering?](https://docs.aws.amazon.com/vpc/latest/peering/Welcome.html) in the *Amazon Virtual Private Cloud Peering Guide*\.
 
 **To enable cross\-VPC traffic using VPC peering**
 
@@ -172,27 +172,27 @@ If a different AWS account owns the directory, you must share the directory\.
 
 **To share the directory between AWS accounts**
 
-1. Start sharing the directory with the AWS account that the DB instance will be created in by following the instructions in [Tutorial: Sharing Your AWS Managed Microsoft AD Directory for Seamless EC2 Domain\-Join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
+1. Start sharing the directory with the AWS account that the DB instance will be created in by following the instructions in [Tutorial: Sharing your AWS Managed Microsoft AD directory for seamless EC2 domain\-join](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_tutorial_directory_sharing.html) in the *AWS Directory Service Administration Guide*\.
 
 1. Sign in to the AWS Directory Service console using the account for the DB instance, and ensure that the domain has the `SHARED` status before proceeding\.
 
 1. While signed into the AWS Directory Service console using the account for the DB instance, note the **Directory ID** value\. You use this directory ID to join the DB instance to the domain\.
 
-### Step 5: Create or Modify a SQL Server DB Instance<a name="USER_SQLServerWinAuth.SettingUp.CreateModify"></a>
+### Step 5: Create or modify a SQL Server DB instance<a name="USER_SQLServerWinAuth.SettingUp.CreateModify"></a>
 
 Create or modify a SQL Server DB instance for use with your directory\. You can use the console, CLI, or RDS API to associate a DB instance with a directory\. You can do this in one of the following ways:
 + Create a new SQL Server DB instance using the console, the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) RDS API operation\.
 
-  For instructions, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+  For instructions, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 + Modify an existing SQL Server DB instance using the console, the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 
-  For instructions, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+  For instructions, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 + Restore a SQL Server DB instance from a DB snapshot using the console, the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\.
 
-  For instructions, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
+  For instructions, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 + Restore a SQL Server DB instance to a point\-in\-time using the console, the [restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\.
 
-  For instructions, see [Restoring a DB Instance to a Specified Time](USER_PIT.md)\.
+  For instructions, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
  Windows Authentication is only supported for SQL Server DB instances in a VPC\. 
 
@@ -229,7 +229,7 @@ aws rds modify-db-instance ^
 **Important**  
 If you modify a DB instance to enable Kerberos authentication, reboot the DB instance after making the change\.
 
-### Step 6: Create Windows Authentication SQL Server Logins<a name="USER_SQLServerWinAuth.CreateLogins"></a>
+### Step 6: Create Windows Authentication SQL Server logins<a name="USER_SQLServerWinAuth.CreateLogins"></a>
 
 Use the Amazon RDS master user credentials to connect to the SQL Server DB instance as you do any other DB instance\. Because the DB instance is joined to the AWS Managed Microsoft AD domain, you can provision SQL Server logins and users\. You do this from the Active Directory users and groups in your domain\. Database permissions are managed through standard SQL Server permissions granted and revoked to these Windows logins\.
 
@@ -246,7 +246,7 @@ Specify users or groups using the pre\-Windows 2000 login name in the format `do
 
 Users \(both humans and applications\) from your domain can now connect to the RDS SQL Server instance from a domain\-joined client machine using Windows authentication\.
 
-## Managing a DB Instance in a Domain<a name="USER_SQLServerWinAuth.Managing"></a>
+## Managing a DB instance in a Domain<a name="USER_SQLServerWinAuth.Managing"></a>
 
  You can use the console, AWS CLI, or the Amazon RDS API to manage your DB instance and its relationship with your domain\. For example, you can move the DB instance into, out of, or between domains\. 
 
@@ -257,26 +257,26 @@ Users \(both humans and applications\) from your domain can now connect to the R
 +  To move a DB instance from one domain to another, use the `ModifyDBInstance` API operation and specify the domain identifier of the new domain as the domain parameter\. 
 +  To list membership for each DB instance, use the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/DescribeDBInstances.html) API operation\. 
 
-### Understanding Domain Membership<a name="USER_SQLServerWinAuth.Understanding"></a>
+### Understanding Domain membership<a name="USER_SQLServerWinAuth.Understanding"></a>
 
  After you create or modify your DB instance, the instance becomes a member of the domain\. The AWS console indicates the status of the domain membership for the DB instance\. The status of the DB instance can be one of the following: 
-+  **joined** – The instance is a member of the domain\. 
-+  **joining** – The instance is in the process of becoming a member of the domain\. 
-+  **pending\-join** – The instance membership is pending\. 
-+  **pending\-maintenance\-join** – AWS will attempt to make the instance a member of the domain during the next scheduled maintenance window\. 
-+  **pending\-removal** – The removal of the instance from the domain is pending\. 
-+  **pending\-maintenance\-removal** – AWS will attempt to remove the instance from the domain during the next scheduled maintenance window\. 
-+  **failed** – A configuration problem has prevented the instance from joining the domain\. Check and fix your configuration before reissuing the instance modify command\. 
-+  **removing** – The instance is being removed from the domain\. 
++  **joined** – The instance is a member of the domain\.
++  **joining** – The instance is in the process of becoming a member of the domain\.
++  **pending\-join** – The instance membership is pending\.
++  **pending\-maintenance\-join** – AWS will attempt to make the instance a member of the domain during the next scheduled maintenance window\.
++  **pending\-removal** – The removal of the instance from the domain is pending\.
++  **pending\-maintenance\-removal** – AWS will attempt to remove the instance from the domain during the next scheduled maintenance window\.
++  **failed** – A configuration problem has prevented the instance from joining the domain\. Check and fix your configuration before reissuing the instance modify command\.
++  **removing** – The instance is being removed from the domain\.
 
-A request to become a member of a domain can fail because of a network connectivity issue or an incorrect IAM role\. For example, you might create a DB instance or modify an existing instance and have the attempt fail for the DB instance to become a member of a domain\. In this case, either reissue the command to create or modify the DB instance or modify the newly created instance to join the domain\. 
+A request to become a member of a domain can fail because of a network connectivity issue or an incorrect IAM role\. For example, you might create a DB instance or modify an existing instance and have the attempt fail for the DB instance to become a member of a domain\. In this case, either reissue the command to create or modify the DB instance or modify the newly created instance to join the domain\.
 
-## Connecting to SQL Server with Windows Authentication<a name="USER_SQLServerWinAuth.Connecting"></a>
+## Connecting to SQL Server with Windows authentication<a name="USER_SQLServerWinAuth.Connecting"></a>
 
  To connect to SQL Server with Windows Authentication, you must be logged into a domain\-joined computer as a domain user\. After launching SQL Server Management Studio, choose **Windows Authentication** as the authentication type, as shown following\. 
 
 ![\[Connect to SQL Server 2012\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/WinAuth4.png)
 
-## Restoring a SQL Server DB Instance and then Adding It to a Domain<a name="USER_SQLServerWinAuth.Restore"></a>
+## Restoring a SQL Server DB instance and then adding it to a domain<a name="USER_SQLServerWinAuth.Restore"></a>
 
-You can restore a DB snapshot or do a point\-in\-time restore \(PITR\) for a SQL Server DB instance and then add it to a domain\. Once the DB instance is restored, modify the instance using the process explained in [Step 5: Create or Modify a SQL Server DB Instance](#USER_SQLServerWinAuth.SettingUp.CreateModify) to add the DB instance to a domain\. 
+You can restore a DB snapshot or do a point\-in\-time restore \(PITR\) for a SQL Server DB instance and then add it to a domain\. Once the DB instance is restored, modify the instance using the process explained in [Step 5: Create or modify a SQL Server DB instance](#USER_SQLServerWinAuth.SettingUp.CreateModify) to add the DB instance to a domain\.

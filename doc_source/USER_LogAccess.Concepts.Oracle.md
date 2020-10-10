@@ -1,12 +1,12 @@
-# Oracle Database Log Files<a name="USER_LogAccess.Concepts.Oracle"></a>
+# Oracle database log files<a name="USER_LogAccess.Concepts.Oracle"></a>
 
-You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS Database Log Files](USER_LogAccess.md)\. 
+You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS database log files](USER_LogAccess.md)\. 
 
 The Oracle audit files provided are the standard Oracle auditing files\. Amazon RDS supports the Oracle fine\-grained auditing \(FGA\) feature\. However, log access doesn't provide access to FGA events that are stored in the `SYS.FGA_LOG$` table and that are accessible through the `DBA_FGA_AUDIT_TRAIL` view\. 
 
 The `DescribeDBLogFiles` API operation that lists the Oracle log files that are available for a DB instance ignores the `MaxRecords` parameter and returns up to 1,000 records\. 
 
-## Retention Schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
+## Retention schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
 
 The Oracle database engine might rotate logs files if they get very large\. To retain audit or trace files, download them\. Storing the files locally reduces your Amazon RDS storage costs and makes more space available for your data\. 
 
@@ -15,7 +15,7 @@ The following is the retention schedule for Oracle alert logs, audit files, and 
 
 ****  
 
-| Log Type | Retention Schedule | 
+| Log type | Retention schedule | 
 | --- | --- | 
 |  Alert logs  |   The text alert log is rotated daily with 30\-day retention managed by Amazon RDS\. The XML alert log is retained for at least seven days\. You can access this log by using the `ALERTLOG` view\.    | 
 |  Audit files  |   The default retention period for audit files is seven days\. Amazon RDS might delete audit files older than seven days\.    | 
@@ -25,19 +25,19 @@ The following is the retention schedule for Oracle alert logs, audit files, and 
 **Note**  
 Audit files and trace files share the same retention configuration\.
 
-## Switching Online Log files<a name="USER_LogAccess.Concepts.Oracle.SwitchingLogfiles"></a>
+## Switching online log files<a name="USER_LogAccess.Concepts.Oracle.SwitchingLogfiles"></a>
 
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.switch_logfile` to switch online log files\. For more information, see [Switching Online Log Files](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.SwitchingLogfiles)\. 
+You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.switch_logfile` to switch online log files\. For more information, see [Switching online log files](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.SwitchingLogfiles)\. 
 
-## Retrieving Archived Redo Logs<a name="USER_LogAccess.Concepts.Oracle.ArchivedRedoLogs"></a>
+## Retrieving archived redo log files<a name="USER_LogAccess.Concepts.Oracle.ArchivedRedoLogs"></a>
 
-You can retain archived redo logs\. For more information, see [Retaining Archived Redo Logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. 
+You can retain archived redo log files\. For more information, see [Retaining archived redo logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. 
 
-## Working with Oracle Trace Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles"></a>
+## Working with Oracle trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles"></a>
 
 Following, you can find descriptions of Amazon RDS procedures to create, refresh, access, and delete trace files\. 
 
-### Listing Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.ViewingBackgroundDumpDest"></a>
+### Listing files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.ViewingBackgroundDumpDest"></a>
 
 You can use either of two procedures to allow access to any file in the `background_dump_dest` path\. The first procedure refreshes a view containing a listing of all files currently in `background_dump_dest`\. 
 
@@ -75,21 +75,21 @@ On a read replica, get the name of the BDUMP directory by querying `V$DATABASE.D
 7. SELECT TEXT FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP_B','alert_DATABASE.log.2020-06-23'));
 ```
 
-### Generating Trace Files and Tracing a Session<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Generating"></a>
+### Generating trace files and tracing a session<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Generating"></a>
 
 Because there are no restrictions on `alter session`, many standard methods to generate trace files in Oracle remain available to an Amazon RDS DB instance\. The following procedures are provided for trace files that require greater access\. 
 
 
 ****  
 
-|  Oracle Method  |  Amazon RDS Method | 
+|  Oracle method  |  Amazon RDS method | 
 | --- | --- | 
 |  `oradebug hanganalyze 3 `  |  `exec rdsadmin.manage_tracefiles.hanganalyze; `  | 
 |  `oradebug dump systemstate 266 `  |  `exec rdsadmin.manage_tracefiles.dump_systemstate;`  | 
 
-You can use many standard methods to trace individual sessions connected to an Oracle DB instance in Amazon RDS\. To enable tracing for a session, you can run subprograms in PL/SQL packages supplied by Oracle, such as the DBMS\_SESSION and DBMS\_MONITOR packages\. For more information, see [ Enabling Tracing for a Session](https://docs.oracle.com/database/121/TGSQL/tgsql_trace.htm#GUID-F872D6F9-E015-481F-80F6-8A7036A6AD29) in the Oracle documentation\. 
+You can use many standard methods to trace individual sessions connected to an Oracle DB instance in Amazon RDS\. To enable tracing for a session, you can run subprograms in PL/SQL packages supplied by Oracle, such as the DBMS\_SESSION and DBMS\_MONITOR packages\. For more information, see [ Enabling tracing for a session](https://docs.oracle.com/database/121/TGSQL/tgsql_trace.htm#GUID-F872D6F9-E015-481F-80F6-8A7036A6AD29) in the Oracle documentation\. 
 
-### Retrieving Trace Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Retrieving"></a>
+### Retrieving trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Retrieving"></a>
 
 You can retrieve any trace file in `background_dump_dest` using a standard SQL query on an Amazon RDS–managed external table\. To use this method, you must execute the procedure to set the location for this table to the specific trace file\. 
 
@@ -107,7 +107,7 @@ The following example creates an external table in the current schema with the l
 3. spool off;
 ```
 
-### Purging Trace Files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Purging"></a>
+### Purging trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Purging"></a>
 
 Trace files can accumulate and consume disk space\. Amazon RDS purges trace files by default and log files that are older than seven days\. You can view and set the trace file retention period using the `show_configuration` procedure\. You should run the command `SET SERVEROUTPUT ON` so that you can view the configuration results\. 
 
@@ -142,7 +142,7 @@ You can also purge all files that match a specific pattern \(if you do, don't in
 1. exec rdsadmin.manage_tracefiles.purge_tracefiles('SCHPOC1_ora_5935');
 ```
 
-## Publishing Oracle Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs"></a>
+## Publishing Oracle logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs"></a>
 
 You can configure your Amazon RDS Oracle DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can analyze the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
@@ -265,7 +265,7 @@ Run one of these RDS API operations with the following parameters:
 
 Other parameters might be required depending on the RDS operation that you run\.
 
-## Previous Methods for Accessing Alert Logs and Listener Logs<a name="USER_LogAccess.Concepts.Oracle.AlertLogAndListenerLog"></a>
+## Previous methods for accessing alert logs and listener logs<a name="USER_LogAccess.Concepts.Oracle.AlertLogAndListenerLog"></a>
 
 You can view the alert log using the Amazon RDS console\. You can also use the following SQL statement to access the alert log\.
 

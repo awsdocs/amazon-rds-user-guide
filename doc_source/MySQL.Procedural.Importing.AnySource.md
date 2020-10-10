@@ -1,6 +1,6 @@
-# Importing Data From Any Source to a MySQL or MariaDB DB Instance<a name="MySQL.Procedural.Importing.AnySource"></a>
+# Importing data from any source to a MySQL or MariaDB DB instance<a name="MySQL.Procedural.Importing.AnySource"></a>
 
-If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- A Data Import Program](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html) in the MySQL documentation\.
+If you have more than 1 GiB of data to load, or if your data is coming from somewhere other than a MySQL or MariaDB database, we recommend creating flat files and loading them with mysqlimport\. mysqlimport is another command line utility bundled with the MySQL and MariaDB client software whose purpose is to load flat files into MySQL or MariaDB\. For information about mysqlimport, see [mysqlimport \- a data import program](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html) in the MySQL documentation\.
 
 We also recommend creating DB snapshots of the target Amazon RDS DB instance before and after the data load\. Amazon RDS DB snapshots are complete backups of your DB instance that can be used to restore your DB instance to a known state\. When you initiate a DB snapshot, I/O operations to your database instance are momentarily suspended while your database is backed up\. 
 
@@ -20,7 +20,7 @@ The following list shows the steps to take\. Each step is discussed in more deta
 
 1. Enable automated backups again\.
 
-## Step 1: Create Flat Files Containing the Data to be Loaded<a name="MySQL.Procedural.Importing.AnySource.Step1"></a>
+## Step 1: Create flat files containing the data to be loaded<a name="MySQL.Procedural.Importing.AnySource.Step1"></a>
 
 Use a common format, such as CSV \(Comma\-Separated Values\), to store the data to be loaded\. Each table must have its own file; data for multiple tables cannot be combined in the same file\. Give each file the same name as the table it corresponds to\. The file extension can be anything you like\. For example, if the table name is "sales", the file name could be "sales\.csv" or "sales\.txt", but not "sales\_01\.csv"\.
 
@@ -36,13 +36,13 @@ split -C 1024m -d sales.csv sales.part_
 
 Similar utilities are available on other operating systems\.
 
-## Step 2: Stop Any Applications Accessing the Target DB Instance<a name="MySQL.Procedural.Importing.AnySource.Step2"></a>
+## Step 2: Stop any applications accessing the target DB instance<a name="MySQL.Procedural.Importing.AnySource.Step2"></a>
 
 Before starting a large load, stop all application activity accessing the target DB instance that you plan to load to\. We recommend this particularly if other sessions will be modifying the tables being loaded or tables they reference\. Doing this reduces the risk of constraint violations occurring during the load and improves load performance\. It also makes it possible to restore the database instance to the point just before the load without losing changes made by processes not involved in the load\. 
 
 Of course, this might not be possible or practical\. If you are unable to stop applications from accessing the DB instance before the load, take steps to ensure the availability and integrity of your data\. The specific steps required vary greatly depending upon specific use cases and site requirements\. 
 
-## Step 3: Create a DB Snapshot<a name="MySQL.Procedural.Importing.AnySource.Step3"></a>
+## Step 3: Create a DB snapshot<a name="MySQL.Procedural.Importing.AnySource.Step3"></a>
 
 If you plan to load data into a new DB instance that contains no data, you can skip this step\. Otherwise, creating a DB snapshot of your DB instance allows you to restore the DB instance to the point just before the load, if it becomes necessary\. As previously mentioned, when you initiate a DB snapshot, I/O operations to your database instance are suspended for a few minutes while the database is backed up\. 
 
@@ -114,7 +114,7 @@ aws rds restore-db-instance-from-db-snapshot ^
 
 The example takes a final DB snapshot of the database instance before deleting it\. This is optional, but recommended\. 
 
-## Step 4: Consider Disabling Amazon RDS Automated Backups<a name="MySQL.Procedural.Importing.AnySource.Step4"></a>
+## Step 4: Consider disabling Amazon RDS automated backups<a name="MySQL.Procedural.Importing.AnySource.Step4"></a>
 
 **Warning**  
 Do not disable automated backups if you need the ability to perform point\-in\-time recovery\.
@@ -153,7 +153,7 @@ aws rds describe-db-instances --db-instance-identifier AcmeRDS --query "*[].{DBI
 
 When the DB instance status is `available`, you're ready to proceed\. 
 
-## Step 5: Load the Data<a name="MySQL.Procedural.Importing.AnySource.Step5"></a>
+## Step 5: Load the data<a name="MySQL.Procedural.Importing.AnySource.Step5"></a>
 
 Use the mysqlimport utility to load the flat files into Amazon RDS\. In the example we tell mysqlimport to load all of the files named "sales" with an extension starting with "part\_"\. This is a convenient way to load all of the files created in the "split" example\. Use the \-\-compress option to minimize network traffic\. The \-\-fields\-terminated\-by=',' option is used for CSV files and the \-\-local option specifies that the incoming data is located on the client\. Without the \-\-local option, the Amazon RDS DB instance looks for the data on the database host, so always specify the \-\-local option\.
 
@@ -181,7 +181,7 @@ mysqlimport --local ^
 
 For very large data loads, take additional DB snapshots periodically between loading files and note which files have been loaded\. If a problem occurs, you can easily resume from the point of the last DB snapshot, avoiding lengthy reloads\. 
 
-## Step 6: Enable Amazon RDS Automated Backups<a name="MySQL.Procedural.Importing.AnySource.Step6"></a>
+## Step 6: Enable Amazon RDS automated backups<a name="MySQL.Procedural.Importing.AnySource.Step6"></a>
 
 After the load is finished, re\-enable Amazon RDS automated backups by setting the backup retention period back to its pre\-load value\. As noted earlier, Amazon RDS restarts the DB instance, so be prepared for a brief outage\. 
 

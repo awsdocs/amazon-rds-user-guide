@@ -15,7 +15,7 @@ The following table shows the format that you should use when constructing an AR
 
 ****  
 
-| Resource Type | ARN Format | 
+| Resource type | ARN format | 
 | --- | --- | 
 | DB instance  |  arn:aws:rds:*<region>*:*<account>*:db:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:db:my-mysql-instance-1</pre>  | 
 | Event subscription  |  arn:aws:rds:*<region>*:*<account>*:es:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:es:my-subscription</pre>  | 
@@ -27,7 +27,7 @@ The following table shows the format that you should use when constructing an AR
 | Manual DB snapshot |  arn:aws:rds:*<region>*:*<account>*:snapshot:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:snapshot:my-mysql-db-snap</pre>  | 
 | DB subnet group |  arn:aws:rds:*<region>*:*<account>*:subgrp:*<name>* For example: <pre>arn:aws:rds:us-east-2:123456789012:subgrp:my-subnet-10</pre>  | 
 
-## Getting an Existing ARN<a name="USER_Tagging.ARN.Getting"></a>
+## Getting an existing ARN<a name="USER_Tagging.ARN.Getting"></a>
 
 You can get the ARN of an RDS resource by using the AWS Management Console, AWS Command Line Interface \(AWS CLI\), or RDS API\. 
 

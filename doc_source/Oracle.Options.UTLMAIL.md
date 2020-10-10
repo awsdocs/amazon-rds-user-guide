@@ -10,9 +10,9 @@ Amazon RDS supports Oracle UTL\_MAIL through the use of the UTL\_MAIL option and
 The following are some limitations to using UTL\_MAIL: 
 + UTL\_MAIL does not support Transport Layer Security \(TLS\) and therefore emails are not encrypted\. 
 
-  To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [Using utl\_http, utl\_tcp, and utl\_smtp with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.ONA)\.
+  To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [Using utl\_http, utl\_tcp, and utl\_smtp with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.ONA)\.
 
-  The specific certificates that are required for your wallet vary by service\. For AWS services, these can typically be found in the [Amazon Trust Services Repository](https://www.amazontrust.com/repository/)\.
+  The specific certificates that are required for your wallet vary by service\. For AWS services, these can typically be found in the [Amazon trust services repository](https://www.amazontrust.com/repository/)\.
 + UTL\_MAIL does not support authentication with SMTP servers\. 
 + You can only send a single attachment in an email\. 
 + You can't send attachments larger than 32 K\. 
@@ -27,10 +27,10 @@ We recommend that you enable Oracle's built\-in auditing feature to track the us
 ## Prerequisites for Oracle UTL\_MAIL<a name="Oracle.Options.UTLMAIL.PreReqs"></a>
 
 The following are prerequisites for using Oracle UTL\_MAIL: 
-+ One or more SMTP servers, and the corresponding IP addresses or public or private Domain Name Server \(DNS\) names\. For more information about private DNS names resolved through a custom DNS server, see [Setting Up a Custom DNS Server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\. 
++ One or more SMTP servers, and the corresponding IP addresses or public or private Domain Name Server \(DNS\) names\. For more information about private DNS names resolved through a custom DNS server, see [Setting up a custom DNS server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\. 
 + For Oracle versions prior to 12c, your DB instance must also use the XML DB option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 
-## Adding the Oracle UTL\_MAIL Option<a name="Oracle.Options.UTLMAIL.Add"></a>
+## Adding the Oracle UTL\_MAIL option<a name="Oracle.Options.UTLMAIL.Add"></a>
 
 The general process for adding the Oracle UTL\_MAIL option to a DB instance is the following: 
 
@@ -50,13 +50,13 @@ After you add the UTL\_MAIL option, as soon as the option group is active, UTL\_
 
    1. For **Major engine version**, choose the version of your DB instance\. 
 
-   For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+   For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the **UTL\_MAIL** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
+1. Add the **UTL\_MAIL** option to the option group\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Using Oracle UTL\_MAIL<a name="Oracle.Options.UTLMAIL.Using"></a>
 
@@ -72,21 +72,17 @@ You can set the default SMTP\_OUT\_SERVER for a DB instance by using a [DB param
 
 After the UTL\_MAIL option is enabled, and your SMTP\_OUT\_SERVER is configured, you can send mail by using the `SEND` procedure\. For more information, see [UTL\_MAIL](http://docs.oracle.com/cd/B19306_01/appdev.102/b14258/u_mail.htm#BABFJJBD) in the Oracle documentation\. 
 
-## Removing the Oracle UTL\_MAIL Option<a name="Oracle.Options.UTLMAIL.Remove"></a>
+## Removing the Oracle UTL\_MAIL option<a name="Oracle.Options.UTLMAIL.Remove"></a>
 
 You can remove Oracle UTL\_MAIL from a DB instance\. 
 
 To remove UTL\_MAIL from a DB instance, do one of the following: 
-+ To remove UTL\_MAIL from multiple DB instances, remove the UTL\_MAIL option from the option group they belong to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ To remove UTL\_MAIL from a single DB instance, modify the DB instance and specify a different option group that doesn't include the UTL\_MAIL option\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ To remove UTL\_MAIL from multiple DB instances, remove the UTL\_MAIL option from the option group they belong to\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ To remove UTL\_MAIL from a single DB instance, modify the DB instance and specify a different option group that doesn't include the UTL\_MAIL option\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Troubleshooting<a name="Oracle.Options.UTLMAIL.Troubleshooting"></a>
 
 The following are issues you might encounter when you use UTL\_MAIL with Amazon RDS\. 
-+ Throttling\. SMTP port \(25\) is throttled based on the elastic network interface owner's policies\. If you can successfully send email by using UTL\_MAIL, and you see the error `ORA-29278: SMTP transient error: 421 Service not available`, you are possibly being throttled\. If you experience throttling with email delivery, we recommend that you implement a backoff algorithm\. For more information about backoff algorithms, see [Error Retries and Exponential Backoff in AWS](https://docs.aws.amazon.com/general/latest/gr/api-retries.html) and [How to handle a "Throttling – Maximum sending rate exceeded" error](http://aws.amazon.com/blogs/ses/how-to-handle-a-throttling-maximum-sending-rate-exceeded-error/)\. 
++ Throttling\. SMTP port \(25\) is throttled based on the elastic network interface owner's policies\. If you can successfully send email by using UTL\_MAIL, and you see the error `ORA-29278: SMTP transient error: 421 Service not available`, you are possibly being throttled\. If you experience throttling with email delivery, we recommend that you implement a backoff algorithm\. For more information about backoff algorithms, see [Error retries and exponential backoff in AWS](https://docs.aws.amazon.com/general/latest/gr/api-retries.html) and [How to handle a "throttling – Maximum sending rate exceeded" error](http://aws.amazon.com/blogs/ses/how-to-handle-a-throttling-maximum-sending-rate-exceeded-error/)\. 
 
   You can request that this throttle be removed\. For more information, see [How do I remove the throttle on port 25 from my EC2 instance?](http://aws.amazon.com/premiumsupport/knowledge-center/ec2-port-25-throttle/)\.
-
-## Related Topics<a name="Oracle.Options.UTLMAIL.Related"></a>
-+ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

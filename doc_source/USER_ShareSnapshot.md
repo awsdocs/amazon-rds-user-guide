@@ -1,4 +1,4 @@
-# Sharing a DB Snapshot<a name="USER_ShareSnapshot"></a>
+# Sharing a DB snapshot<a name="USER_ShareSnapshot"></a>
 
 Using Amazon RDS, you can share a manual DB snapshot in the following ways:
 + Sharing a manual DB snapshot, whether encrypted or unencrypted, enables authorized AWS accounts to copy the snapshot\.
@@ -7,7 +7,7 @@ Using Amazon RDS, you can share a manual DB snapshot in the following ways:
 **Note**  
 To share an automated DB snapshot, create a manual DB snapshot by copying the automated snapshot, and then share that copy\. This process also applies to AWS Backup–generated resources\.
 
-For more information on copying a snapshot, see [Copying a Snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB snapshot, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
+For more information on copying a snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB snapshot, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
 You can share a manual snapshot with up to 20 other AWS accounts\. You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Take care when sharing a snapshot as public so that none of your private information is included in any of your public snapshots\. 
 
@@ -20,15 +20,15 @@ The following limitations apply when sharing manual snapshots with other AWS acc
   The following table lists permanent and persistent options and their related DB engines\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
 
-For Oracle DB instances, you can copy shared DB snapshots that have the `Timezone` or `OLS` option \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle Time Zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
+For Oracle DB instances, you can copy shared DB snapshots that have the `Timezone` or `OLS` option \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
 
-## Sharing an Encrypted Snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
+## Sharing an encrypted snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
 
-You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS Resources](Overview.Encryption.md)\. To do this, you must take the following steps:
+You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS resources](Overview.Encryption.md)\. To do this, you must take the following steps:
 
 1. Share the AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
 
-   You can share AWS KMS CMKs with another AWS account by adding the other account to the AWS KMS key policy\. For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing Access to an AWS KMS Customer Master Key \(CMK\)](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
+   You can share AWS KMS CMKs with another AWS account by adding the other account to the AWS KMS key policy\. For details on updating a key policy, see [Key policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\. For an example of creating a key policy, see [Allowing access to an AWS KMS customer master key \(CMK\)](#USER_ShareSnapshot.Encrypted.KeyPolicy) later in this topic\.
 
 1. Use the AWS Management Console, AWS CLI, or Amazon RDS API to share the encrypted snapshot with the other accounts\.
 
@@ -37,7 +37,7 @@ These restrictions apply to sharing encrypted snapshots:
 + You can't share Oracle or Microsoft SQL Server snapshots that are encrypted using Transparent Data Encryption \(TDE\)\.
 + You can't share a snapshot that has been encrypted using the default AWS KMS CMK of the AWS account that shared the snapshot\. 
 
-### Allowing Access to an AWS KMS Customer Master Key \(CMK\)<a name="USER_ShareSnapshot.Encrypted.KeyPolicy"></a>
+### Allowing access to an AWS KMS customer master key \(CMK\)<a name="USER_ShareSnapshot.Encrypted.KeyPolicy"></a>
 
 For another AWS account to copy an encrypted DB snapshot shared from your account, the account that you share your snapshot with must have access to the AWS KMS customer master key \(CMK\) that encrypted the snapshot\. To allow another AWS account access to an AWS KMS CMK, update the key policy for the AWS KMS CMK with the ARN of the AWS account that you are sharing to as a `Principal` in the AWS KMS key policy, and then allow the `kms:CreateGrant` action\.
 
@@ -86,7 +86,7 @@ In the following key policy example, user `111122223333` is the owner of the AWS
 }
 ```
 
-#### Creating an IAM Policy to Enable Copying of the Encrypted Snapshot<a name="USER_ShareSnapshot.Encrypted.KeyPolicy.IAM"></a>
+#### Creating an IAM policy to enable copying of the encrypted snapshot<a name="USER_ShareSnapshot.Encrypted.KeyPolicy.IAM"></a>
 
 Once the external AWS account has access to your AWS KMS customer master key \(CMK\), the owner of that AWS account can create a policy that allows an IAM user created for that account to copy an encrypted snapshot encrypted with that AWS KMS CMK\.
 
@@ -129,9 +129,9 @@ The following example shows a policy that can be attached to an IAM user for AWS
 }
 ```
 
-For details on updating a key policy, see [Key Policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\.
+For details on updating a key policy, see [Key policies](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the *AWS KMS Developer Guide*\.
 
-## Sharing a Snapshot<a name="USER_ShareSnapshot.Sharing"></a>
+## Sharing a snapshot<a name="USER_ShareSnapshot.Sharing"></a>
 
 You can share a DB snapshot using the AWS Management Console, the AWS CLI, or the RDS API\.
 

@@ -21,13 +21,13 @@ JSON payload that contains the contents of the following \.pem format files for 
 + "ssl\_cert":"*Client certificate*"
 + "ssl\_key":"*Client key*"
 
-## Usage Notes<a name="mysql_rds_import_binlog_ssl_material-usage-notes"></a>
+## Usage notes<a name="mysql_rds_import_binlog_ssl_material-usage-notes"></a>
 
 Prepare for encrypted replication before you run this procedure:
 + If you don't have SSL enabled on the external MySQL source database instance and don't have a client key and client certificate prepared, enable SSL on the MySQL database server and generate the required client key and client certificate\.
 + If SSL is enabled on the external source database instance, supply a client key and certificate for the Aurora MySQL DB cluster\. If you don't have these, generate a new key and certificate for the Aurora MySQL DB cluster\. To sign the client certificate, you must have the certificate authority key you used to configure SSL on the external MySQL source database instance\.
 
-For more information, see [ Creating SSL Certificates and Keys Using openssl](https://dev.mysql.com/doc/refman/8.0/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
+For more information, see [ Creating SSL certificates and keys using openssl](https://dev.mysql.com/doc/refman/8.0/en/creating-ssl-files-using-openssl.html) in the MySQL documentation\.
 
 **Important**  
 After you prepare for encrypted replication, use an SSL connection to run this procedure\. The client key must not be transferred across an insecure connection\. 

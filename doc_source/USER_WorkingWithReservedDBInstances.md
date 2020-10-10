@@ -1,16 +1,16 @@
-# Reserved DB Instances for Amazon RDS<a name="USER_WorkingWithReservedDBInstances"></a>
+# Reserved DB instances for Amazon RDS<a name="USER_WorkingWithReservedDBInstances"></a>
 
 Using reserved DB instances, you can reserve a DB instance for a one\- or three\-year term\. Reserved DB instances provide you with a significant discount compared to on\-demand DB instance pricing\. Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on\-demand DB instances in your account\. Discounts for reserved DB instances are tied to instance type and AWS Region\. 
 
 The general process for working with reserved DB instances is: First get information about available reserved DB instance offerings, then purchase a reserved DB instance offering, and finally get information about your existing reserved DB instances\. 
 
-## Overview of Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances.Overview"></a>
+## Overview of reserved DB instances<a name="USER_WorkingWithReservedDBInstances.Overview"></a>
 
 When you purchase a reserved DB instance in Amazon RDS, you purchase a commitment to getting a discounted rate, on a specific DB instance type, for the duration of the reserved DB instance\. To use an Amazon RDS reserved DB instance, you create a new DB instance just like you do for an on\-demand instance\. The new DB instance that you create must match the specifications of the reserved DB instance\. If the specifications of the new DB instance match an existing reserved DB instance for your account, you are billed at the discounted rate offered for the reserved DB instance\. Otherwise, the DB instance is billed at an on\-demand rate\. 
 
-For more information about reserved DB instances, including pricing, see [Amazon RDS Reserved Instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
+For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
 
-### Offering Types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>
+### Offering types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>
 
 Reserved DB instances are available in three varieties—No Upfront, Partial Upfront, and All Upfront—that let you optimize your Amazon RDS costs based on your expected usage\. 
 
@@ -23,11 +23,11 @@ This option requires a part of the reserved DB instance to be paid upfront\. The
 **All Upfront**  
 Full payment is made at the start of the term, with no other costs incurred for the remainder of the term regardless of the number of hours used\. 
 
-If you are using consolidated billing, all the accounts in the organization are treated as one account\. This means that all accounts in the organization can receive the hourly cost benefit of reserved DB instances that are purchased by any other account\. For more information about consolidated billing, see [Amazon RDS Reserved DB Instances](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidatedbilling-other.html#consolidatedbilling-rds) in the *AWS Billing and Cost Management User Guide*\.
+If you are using consolidated billing, all the accounts in the organization are treated as one account\. This means that all accounts in the organization can receive the hourly cost benefit of reserved DB instances that are purchased by any other account\. For more information about consolidated billing, see [Amazon RDS reserved DB instances](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidatedbilling-other.html#consolidatedbilling-rds) in the *AWS Billing and Cost Management User Guide*\.
 
-### Size\-Flexible Reserved DB Instances<a name="USER_WorkingWithReservedDBInstances.SizeFlexible"></a>
+### Size\-flexible reserved DB instances<a name="USER_WorkingWithReservedDBInstances.SizeFlexible"></a>
 
-When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
+When you purchase a reserved DB instance, one thing that you specify is the instance class, for example db\.m4\.large\. For more information about instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 
 If you have a DB instance, and you need to scale it to larger capacity, your reserved DB instance is automatically applied to your scaled DB instance\. That is, your reserved DB instances are automatically applied across all DB instance class sizes\. Size\-flexible reserved DB instances are available for DB instances with the same AWS Region and database engine\. Size\-flexible reserved DB instances can only scale in their instance class type\. For example, a reserved DB instance for a db\.m4\.large can apply to a db\.m4\.xlarge, but not to a db\.m5\.large, because db\.m4 and db\.m5 are different instance class types\. Reserved DB instance benefits also apply for both Multi\-AZ and Single\-AZ configurations\. Flexibility means that you can move freely between configurations within the same DB instance class type\. For example, you can move from a Single\-AZ deployment running on one large DB instance class to a Multi\-AZ deployment running on two small DB instance classes\. 
 
@@ -37,14 +37,14 @@ Size\-flexible reserved DB instances are available for the following Amazon RDS 
 + Oracle, Bring Your Own License
 + PostgreSQL
 
-For details about using size\-flexible reserved instances with Aurora, see [Reserved DB Instances for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithReservedDBInstances.html)\. 
+For details about using size\-flexible reserved instances with Aurora, see [Reserved DB instances for Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithReservedDBInstances.html)\. 
 
 You can compare usage for different reserved DB instance sizes by using normalized units\. For example, one unit of usage on two db\.m3\.large DB instances is equivalent to eight normalized units of usage on one db\.m3\.small\. The following table shows the number of normalized units for each DB instance size\. 
 
 
 ****  
 
-| Instance Size | Single\-AZ Normalized Units | Multi\-AZ Normalized Units | 
+| Instance size | Single\-AZ normalized units | Multi\-AZ normalized units | 
 | --- | --- | --- | 
 | micro | 0\.5 | 1 | 
 | small | 1 | 2 | 
@@ -69,7 +69,7 @@ Alternatively, if you have one `db.t2.large` instance running in your account in
 
 ![\[Applying a reserved DB instance in part to a larger DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-instance-flex-partial.png)
 
-### Reserved DB Instance Billing Example<a name="USER_WorkingWithReservedDBInstances.BillingExample"></a>
+### Reserved DB instance billing example<a name="USER_WorkingWithReservedDBInstances.BillingExample"></a>
 
 The price for a reserved DB instance doesn't include regular costs associated with storage, backups, and I/O\. The following example illustrates the total cost per month for a reserved DB instance:
 + An Amazon RDS MySQL reserved Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) with the No Upfront option at a cost of $0\.12 for the instance, or $90 per month
@@ -84,7 +84,7 @@ If you chose to use an on\-demand DB instance instead of a reserved DB instance,
 The prices in this example are sample prices and might not match actual prices\.  
 For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 
-### Deleting a Reserved DB Instance<a name="USER_WorkingWithReservedDBInstances.Cancelling"></a>
+### Deleting a reserved DB instance<a name="USER_WorkingWithReservedDBInstances.Cancelling"></a>
 
 The terms for a reserved DB instance involve a one\-year or three\-year commitment\. You can't cancel a reserved DB instance\. However, you can delete a DB instance that is covered by a reserved DB instance discount\. The process for deleting a DB instance that is covered by a reserved DB instance discount is the same as for any other DB instance\. 
 
@@ -166,7 +166,7 @@ After you have purchased reserved DB instances, you can get information about yo
 
 You can use the AWS CLI to work with reserved DB instances as shown in the following examples\. 
 
-**Example Get Available Reserved DB Instance Offerings**  
+**Example Get available reserved DB instance offerings**  
 To get information about available reserved DB instance offerings, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html)\.   
 
 ```
@@ -189,7 +189,7 @@ This call returns output similar to the following:
 
 After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following example\. 
 
-**Example Purchase a Reserved DB Instance**  
+**Example Purchase a reserved DB instance**  
 To purchase a reserved DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html](https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html) with the following parameters:   
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
@@ -217,7 +217,7 @@ The command returns output similar to the following:
 
 After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following example\. 
 
-**Example Get Your Reserved DB Instances**  
+**Example Get your reserved DB instances**  
 To get information about reserved DB instances for your AWS account, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html)\.   
 
 ```
@@ -234,7 +234,7 @@ The command returns output similar to the following:
 
 You can use the RDS API to work with reserved DB instances as shown in the following examples\. 
 
-**Example Get Available Reserved DB Instance Offerings**  
+**Example Get available reserved DB instance offerings**  
 To get information about available reserved DB instance offerings, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html)\.   
 
 ```
@@ -289,7 +289,7 @@ This call returns output similar to the following:
 
 After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following example\. 
 
-**Example Purchase a Reserved DB Instance**  
+**Example Purchase a reserved DB instance**  
 To purchase a reserved DB instance, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) with the following parameters:   
 + `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
 + `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
@@ -340,7 +340,7 @@ This call returns output similar to the following:
 
 After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following example\. 
 
-**Example Get Your Reserved DB Instances**  
+**Example Get your reserved DB instances**  
 To get information about reserved DB instances for your AWS account, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html)\.   
 
 ```

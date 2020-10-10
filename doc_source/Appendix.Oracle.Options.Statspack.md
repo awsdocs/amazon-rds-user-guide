@@ -5,7 +5,7 @@ The Oracle Statspack option installs and enables the Oracle Statspack performanc
 **Note**  
 Oracle Statspack is no longer supported by Oracle and has been replaced by the more advanced Automatic Workload Repository \(AWR\)\. AWR is available only for Oracle Enterprise Edition customers who have purchased the Diagnostics Pack\. You can use Oracle Statspack with any Oracle DB engine on Amazon RDS\. You can't run Oracle Statspack on Amazon RDS read replicas\. 
 
-## Setting Up Oracle Statspack<a name="Appendix.Oracle.Options.Statspack.setting-up"></a>
+## Setting up Oracle Statspack<a name="Appendix.Oracle.Options.Statspack.setting-up"></a>
 
 To run Statspack scripts, you must add the Statspack option\.
 
@@ -23,7 +23,7 @@ To run Statspack scripts, you must add the Statspack option\.
 
      Otherwise, attempting to add the Statspack option generates an error and `RDS-Event-0058`\.
 
-1. Add the Statspack option to an option group\. See [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+1. Add the Statspack option to an option group\. See [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
    Amazon RDS automatically installs the Statspack scripts on the DB instance and then sets up the `PERFSTAT` account\.
 
@@ -55,7 +55,7 @@ To run Statspack scripts, you must add the Statspack option\.
    COMMIT;
    ```
 
-## Generating Statspack Reports<a name="Appendix.Oracle.Options.Statspack.generating-reports"></a>
+## Generating Statspack reports<a name="Appendix.Oracle.Options.Statspack.generating-reports"></a>
 
 A Statspack report compares two snapshots\.
 
@@ -115,14 +115,14 @@ A Statspack report compares two snapshots\.
 
 1. \(Optional\) 
 
-   To retrieve the report, call the trace file procedures, as explained in [Working with Oracle Trace Files](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles)\. 
+   To retrieve the report, call the trace file procedures, as explained in [Working with Oracle trace files](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles)\. 
 
    Alternatively, download the Statspack report from the RDS console\. Go to the **Log** section of the DB instance details and choose **Download**:  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/statspack1.png)
 
    If an error occurs while generating a report, the DB engine uses the same naming conventions as for a report but with an extension of \.err\. For example, if an error occurred while creating a report using Statspack snapshots 1 and 7, the report file would be named `ORCL_spreport_1_7.err`\. You can download the error report using the same techniques as for a standard Snapshot report\.
 
-## Removing Statspack Files<a name="Appendix.Oracle.Options.Statspack.removing-files"></a>
+## Removing Statspack files<a name="Appendix.Oracle.Options.Statspack.removing-files"></a>
 
 To remove Oracle Statspack files, use the following command:
 

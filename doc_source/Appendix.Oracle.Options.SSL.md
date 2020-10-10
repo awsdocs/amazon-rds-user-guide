@@ -5,7 +5,7 @@ You enable Secure Sockets Layer \(SSL\) encryption for an Oracle DB instance by 
 You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL option to the option group associated with the DB instance\. Amazon RDS uses a second port, as required by Oracle, for SSL connections\. This approach allows both clear text and SSL\-encrypted communication to occur at the same time between a DB instance and SQL\*Plus\. For example, you can use the port with clear text communication to communicate with other resources inside a VPC while using the port with SSL\-encrypted communication to communicate with resources outside the VPC\. 
 
 **Note**  
-You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle Native Network Encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
+You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 
 You can use SSL encryption with the following Oracle database versions and editions: 
 + 19\.0\.0\.0: All versions, all editions including Standard Edition Two
@@ -18,7 +18,7 @@ You can use SSL encryption with the following Oracle database versions and editi
 **Note**  
 You cannot use both SSL and Oracle native network encryption \(NNE\) on the same instance\. If you use SSL encryption, you must disable any other connection encryption\.
 
-## TLS Versions for the Oracle SSL Option<a name="Appendix.Oracle.Options.SSL.TLS"></a>
+## TLS versions for the Oracle SSL option<a name="Appendix.Oracle.Options.SSL.TLS"></a>
 
 Amazon RDS for Oracle supports Transport Layer Security \(TLS\) versions 1\.0 and 1\.2\. To use the Oracle SSL option, use the `SQLNET.SSL_VERSION` option setting\. The following values are allowed for this option setting:
 + `"1.0"` – Clients can connect to the DB instance using TLS 1\.0 only\.
@@ -34,7 +34,7 @@ The following table shows the TLS option settings that are supported for differe
 
 ****  
 
-| Oracle Engine Version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
+| Oracle engine version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
 | --- | --- | --- | --- | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
@@ -44,7 +44,7 @@ The following table shows the TLS option settings that are supported for differe
 |  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
-## Cipher Suites for the Oracle SSL Option<a name="Appendix.Oracle.Options.SSL.CipherSuites"></a>
+## Cipher suites for the Oracle SSL option<a name="Appendix.Oracle.Options.SSL.CipherSuites"></a>
 
 Amazon RDS for Oracle supports multiple SSL cipher suites\. By default, the Oracle SSL option is configured to use the `SSL_RSA_WITH_AES_256_CBC_SHA` cipher suite\. To specify a different cipher suite to use over SSL connections, use the `SQLNET.CIPHER_SUITE` option setting\. Following are the allowed values for this option setting:
 + `"SSL_RSA_WITH_AES_256_CBC_SHA"` – The default setting, which is compatible with TLS 1\.0 and TLS 1\.2
@@ -58,7 +58,7 @@ The following table shows the cipher suite option settings that are supported fo
 
 ****  
 
-| Oracle Engine Version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
+| Oracle engine version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
 | --- | --- | --- | --- | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
@@ -68,7 +68,7 @@ The following table shows the cipher suite option settings that are supported fo
 |  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
 |  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
-## FIPS Support<a name="Appendix.Oracle.Options.SSL.FIPS"></a>
+## FIPS support<a name="Appendix.Oracle.Options.SSL.FIPS"></a>
 
 Amazon RDS for Oracle enables you to use the Federal Information Processing Standard \(FIPS\) standard for 140\-2\. FIPS 140\-2 is a United States government standard that defines cryptographic module security requirements\. You enable the FIPS standard by setting the setting `FIPS.SSLFIPS_140` to `TRUE` for the Oracle SSL option\. When FIPS 140\-2 is configured for SSL, the cryptographic libraries are designed to encrypt data between the client and the Oracle DB instance\. 
 
@@ -83,14 +83,14 @@ Clients must use the cipher suite that is FIPS\-compliant\. When establishing a 
 
 ****  
 
-| SQLNET\.SSL\_VERSION | Supported Cipher Suites | 
+| SQLNET\.SSL\_VERSION | Supported cipher suites | 
 | --- | --- | 
 |  1\.0  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA  | 
 |  1\.2  |  SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384  | 
 
-For more information, see [Oracle Database FIPS 140\-2 Settings](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/oracle-database-fips-140-settings.html#GUID-DDBEB3F9-B216-44BB-8C18-43B5E468CBBB) in the Oracle documentation\.
+For more information, see [Oracle database FIPS 140\-2 settings](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/oracle-database-fips-140-settings.html#GUID-DDBEB3F9-B216-44BB-8C18-43B5E468CBBB) in the Oracle documentation\.
 
-## Adding the SSL Option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
+## Adding the SSL option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
 
 To use SSL, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `SSL` option\.
 
@@ -100,19 +100,19 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Create a new option group or identify an existing option group to which you can add the `SSL` option\.
 
-   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+   For information about creating an option group, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
 1. Add the `SSL` option to the option group\.
 
-   If you want to use only FIPS\-verified cipher suites for SSL connections, set the option `FIPS.SSLFIPS_140` to `TRUE`\. For information about the FIPS standard, see [FIPS Support](#Appendix.Oracle.Options.SSL.FIPS)\.
+   If you want to use only FIPS\-verified cipher suites for SSL connections, set the option `FIPS.SSLFIPS_140` to `TRUE`\. For information about the FIPS standard, see [FIPS support](#Appendix.Oracle.Options.SSL.FIPS)\.
 
-   For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+   For information about adding an option to an option group, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ### AWS CLI<a name="Appendix.Oracle.Options.SSL.OptionGroup.CLI"></a>
 
@@ -120,7 +120,7 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Create a new option group or identify an existing option group to which you can add the `SSL` option\.
 
-   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+   For information about creating an option group, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
 1. Add the `SSL` option to the option group\.
 
@@ -148,16 +148,16 @@ To use SSL, your Amazon RDS Oracle DB instance must be associated with an option
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## Configuring SQL\*Plus to Use SSL with an Oracle DB Instance<a name="Appendix.Oracle.Options.SSL.ClientConfiguration"></a>
+## Configuring SQL\*Plus to use SSL with an Oracle DB instance<a name="Appendix.Oracle.Options.SSL.ClientConfiguration"></a>
 
 You must configure SQL\*Plus before connecting to an Oracle DB instance that uses the Oracle SSL option\.
 
 **Note**  
-To allow access to the DB instance from the appropriate clients, ensure that your security groups are configured correctly\. For more information, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\. Also, these instructions are for SQL\*Plus and other clients that directly use an Oracle home\. For JDBC connections, see [Setting Up an SSL Connection Over JDBC](#Appendix.Oracle.Options.SSL.JDBC)\.
+To allow access to the DB instance from the appropriate clients, ensure that your security groups are configured correctly\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. Also, these instructions are for SQL\*Plus and other clients that directly use an Oracle home\. For JDBC connections, see [Setting up an SSL connection over JDBC](#Appendix.Oracle.Options.SSL.JDBC)\.
 
 **To configure SQL\*Plus to use SSL to connect to an Oracle DB instance**
 
@@ -169,7 +169,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
    prompt>export ORACLE_HOME=/home/user/app/user/product/12.1.0/dbhome_1
    ```
 
-   For information about setting Oracle environment variables, see [SQL\*Plus Environment Variables](http://docs.oracle.com/database/121/SQPUG/ch_two.htm#SQPUG331) in the Oracle documentation, and also see the Oracle installation guide for your operating system\.
+   For information about setting Oracle environment variables, see [SQL\*Plus environment variables](http://docs.oracle.com/database/121/SQPUG/ch_two.htm#SQPUG331) in the Oracle documentation, and also see the Oracle installation guide for your operating system\.
 
 1. Append `$ORACLE_HOME/lib` to the `LD_LIBRARY_PATH` environment variable\.
 
@@ -189,7 +189,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
 
 1. Download the root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
 
-   For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. In the `$ORACLE_HOME/network/admin` directory, modify or create the tnsnames\.ora file and include the following entry\.
 
@@ -201,7 +201,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
 
 1. In the same directory, modify or create the sqlnet\.ora file and include the following parameters\.
 **Note**  
-To communicate with entities over a TLS secured connection, Oracle requires a wallet with the necessary certificates for authentication\. You can use Oracle's ORAPKI utility to create and maintain Oracle wallets, as shown in step 7\. For more information, see [Setting Up Oracle Wallet Using ORAPKI](https://docs.oracle.com/cd/E87544_01/pt856pbr1/eng/pt/tsvt/task_SettingUpOracleWalletUsingORAPKI.html) in the Oracle documentation\.
+To communicate with entities over a TLS secured connection, Oracle requires a wallet with the necessary certificates for authentication\. You can use Oracle's ORAPKI utility to create and maintain Oracle wallets, as shown in step 7\. For more information, see [Setting up Oracle wallet using ORAPKI](https://docs.oracle.com/cd/E87544_01/pt856pbr1/eng/pt/tsvt/task_SettingUpOracleWalletUsingORAPKI.html) in the Oracle documentation\.
 
    ```
    WALLET_LOCATION = (SOURCE = (METHOD = FILE) (METHOD_DATA = (DIRECTORY = $ORACLE_HOME/ssl_wallet))) 
@@ -224,7 +224,7 @@ You can set `SSL_VERSION` to a higher value if your DB instance supports it\.
 
    Replace the file name with the one you downloaded\.
 
-## Connecting to an Oracle DB Instance Using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
+## Connecting to an Oracle DB instance using SSL<a name="Appendix.Oracle.Options.SSL.Connecting"></a>
 
 After you configure SQL\*Plus to use SSL as described previously, you can connect to the Oracle DB instance with the SSL option\. Optionally, you can first export the `TNS_ADMIN` value that points to the directory that contains the tnsnames\.ora and sqlnet\.ora files\. Doing so ensures that SQL\*Plus can find these files consistently\. The following example exports the `TNS_ADMIN` value\.
 
@@ -253,7 +253,7 @@ sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <endpoint>
 
 If you want to close Transmission Control Protocol \(TCP\) port access, create a security group with no IP address ingresses and add it to the instance\. This addition closes connections over the TCP port, while still allowing connections over the SSL port that are specified from IP addresses within the range permitted by the SSL option security group\.
 
-## Setting Up an SSL Connection Over JDBC<a name="Appendix.Oracle.Options.SSL.JDBC"></a>
+## Setting up an SSL connection over JDBC<a name="Appendix.Oracle.Options.SSL.JDBC"></a>
 
 To use an SSL connection over JDBC, you must create a keystore, trust the Amazon RDS root CA certificate, and use the code snippet specified following\.
 
@@ -269,7 +269,7 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 
 1. Download the root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
 
-   For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1.  Convert the certificate to \.der format using the following command\.
 
@@ -328,7 +328,7 @@ public class OracleSslConnectionTest {
 }
 ```
 
-## Enforcing a DN Match with an SSL Connection<a name="Appendix.Oracle.Options.SSL.DNMatch"></a>
+## Enforcing a DN match with an SSL connection<a name="Appendix.Oracle.Options.SSL.DNMatch"></a>
 
 You can use the Oracle parameter `SSL_SERVER_DN_MATCH` to enforce that the distinguished name \(DN\) for the database server matches its service name\. If you enforce the match verifications, then SSL ensures that the certificate is from the server\. If you don't enforce the match verification, then SSL performs the check but allows the connection, regardless if there is a match\. If you do not enforce the match, you allow the server to potentially fake its identify\.
 

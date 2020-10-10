@@ -1,4 +1,4 @@
-# Amazon RDS DB Instances<a name="Overview.DBInstance"></a>
+# Amazon RDS DB instances<a name="Overview.DBInstance"></a>
 
 A *DB instance* is an isolated database environment running in the cloud\. It is the basic building block of Amazon RDS\. A DB instance can contain multiple user\-created databases, and can be accessed using the same client tools and applications you might use to access a standalone database instance\. DB instances are simple to create and modify with the Amazon AWS command line tools, Amazon RDS API operations, or the AWS Management Console\. 
 

@@ -13,7 +13,7 @@ Following are the supported Oracle versions for each SQLT version\.
 
 ****  
 
-| SQLT Version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
+| SQLT version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
 | --- | --- | --- | --- | --- | --- | 
 |  12\.2\.180725  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.180331  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
@@ -63,7 +63,7 @@ The following are prerequisites for using SQLT:
 
   If your DB instance has these tablespaces, log in to the DB instance using a SQL client, and drop them\.
 
-## SQLT Option Settings<a name="Oracle.Options.SQLT.Options"></a>
+## SQLT option settings<a name="Oracle.Options.SQLT.Options"></a>
 
  SQLT can work with licensed features that are provided by the Oracle Tuning Pack and the Oracle Diagnostics Pack\. The Oracle Tuning Pack includes the SQL Tuning Advisor, and the Oracle Diagnostics Pack includes the Automatic Workload Repository\. The SQLT settings enable or disable access to these features from SQLT\. 
 
@@ -72,12 +72,12 @@ Amazon RDS supports the following settings for the SQLT option\.
 
 ****  
 
-| Option Setting | Valid Values | Default Value | Description | 
+| Option setting | Valid values | Default value | Description | 
 | --- | --- | --- | --- | 
 |  `LICENSE_PACK`  |  `T`, `D`, `N`  |  `N`   |  The Oracle Management Packs that you want to access with SQLT\. Enter one of the following values: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Options.SQLT.html)  Amazon RDS does not provide licenses for these Oracle Management Packs\. If you indicate that you want to use a pack that is not included in your DB instance, you can use SQLT with the DB instance\. However, SQLT can't access the pack, and the SQLT report doesn't include the data for the pack\. For example, if you specify `T`, but the DB instance doesn't include the Oracle Tuning Pack, SQLT works on the DB instance, but the report it generates doesn't contain data related to the Oracle Tuning Pack\.   | 
 |  `VERSION`  |  `2016-04-29.v1`, `2018-03-31.v1`, `2018-07-25.v1`  |  `2016-04-29.v1`   |  The version of SQLT that you want to install\.  For Oracle version 19\.0\.0\.0, the only supported version is `2018-07-25.v1`\. This version is also the default for Oracle version 19\.0\.0\.0\.   | 
 
-## Adding the SQLT Option<a name="Oracle.Options.SQLT.Add"></a>
+## Adding the SQLT option<a name="Oracle.Options.SQLT.Add"></a>
 
 The following is the general process for adding the SQLT option to a DB instance: 
 
@@ -97,19 +97,19 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
 
    1. For **Major engine version**, choose the version of your DB instance\. 
 
-   For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+   For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the **SQLT** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
+1. Add the **SQLT** option to the option group\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 1. \(Optional\) Verify the SQLT installation on each DB instance with the SQLT option\. 
 
    1. Use a SQL client to connect to the DB instance as the master user\.
 
-      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)\.
+      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
    1. Run the following query:
 
@@ -154,7 +154,7 @@ You can't download SQLT 12\.1\.160429 from the My Oracle Support site\. Oracle h
 
 1.  From the command prompt, open SQL\*Plus, and connect to the DB instance as the master user\. 
 
-   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to a DB Instance Running the Oracle Database Engine](USER_ConnectToOracleInstance.md)\.
+   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 1.  Get the SQL ID of a SQL statement: 
 
@@ -192,7 +192,7 @@ You can't download SQLT 12\.1\.160429 from the My Oracle Support site\. Oracle h
 **Note**  
 Oracle does not recommend running SQLT with the `SYS` user or with users that have the `DBA` role\. It is a best practice to run SQLT diagnostics using the application user's account, by granting `SQLT_USER_ROLE` to the application user\.
 
-## Upgrading the SQLT Option<a name="Oracle.Options.SQLT.Upgrading"></a>
+## Upgrading the SQLT option<a name="Oracle.Options.SQLT.Upgrading"></a>
 
 With Amazon RDS for Oracle, you can upgrade the SQLT option from your existing version to a higher version\. To upgrade the SQLT option, complete steps 1–3 in [Using SQLT](#Oracle.Options.SQLT.Using) for the new version of SQLT\. Also, if you granted privileges for the previous version of SQLT in step 7 of that section, grant the privileges again for the new SQLT version\. 
 
@@ -201,20 +201,20 @@ Upgrading the SQLT option results in the loss of the older SQLT version's metada
 **Note**  
 Version downgrades are not supported\.
 
-## Modifying SQLT Settings<a name="Oracle.Options.SQLT.ModifySettings"></a>
+## Modifying SQLT settings<a name="Oracle.Options.SQLT.ModifySettings"></a>
 
 After you enable SQLT, you can modify the `LICENSE_PACK` and `VERSION` settings for the option\.
 
-For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [SQLT Option Settings](#Oracle.Options.SQLT.Options)\. 
+For more information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [SQLT option settings](#Oracle.Options.SQLT.Options)\. 
 
-## Removing the SQLT Option<a name="Oracle.Options.SQLT.Remove"></a>
+## Removing the SQLT option<a name="Oracle.Options.SQLT.Remove"></a>
 
 You can remove SQLT from a DB instance\. 
 
 To remove SQLT from a DB instance, do one of the following: 
-+ To remove SQLT from multiple DB instances, remove the SQLT option from the option group to which the DB instances belong\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ To remove SQLT from a single DB instance, modify the DB instance and specify a different option group that doesn't include the SQLT option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ To remove SQLT from multiple DB instances, remove the SQLT option from the option group to which the DB instances belong\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ To remove SQLT from a single DB instance, modify the DB instance and specify a different option group that doesn't include the SQLT option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-## Related Topics<a name="Oracle.Options.SQLT.Related"></a>
-+ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)
+## Related topics<a name="Oracle.Options.SQLT.Related"></a>
++ [Working with option groups](USER_WorkingWithOptionGroups.md)
++ [Options for Oracle DB instances](Appendix.Oracle.Options.md)

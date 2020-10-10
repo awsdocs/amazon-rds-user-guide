@@ -1,10 +1,10 @@
-# Support for Native Backup and Restore in SQL Server<a name="Appendix.SQLServer.Options.BackupRestore"></a>
+# Support for native backup and restore in SQL Server<a name="Appendix.SQLServer.Options.BackupRestore"></a>
 
-By using native backup and restore for SQL Server databases, you can create a differential or full backup of your on\-premises database and store the backup files on Amazon S3\. You can then restore to an existing Amazon RDS DB instance running SQL Server\. You can also back up an RDS SQL Server database, store it on Amazon S3, and restore it in other locations\. In addition, you can restore the backup to an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and Exporting SQL Server Databases](SQLServer.Procedural.Importing.md)\.
+By using native backup and restore for SQL Server databases, you can create a differential or full backup of your on\-premises database and store the backup files on Amazon S3\. You can then restore to an existing Amazon RDS DB instance running SQL Server\. You can also back up an RDS SQL Server database, store it on Amazon S3, and restore it in other locations\. In addition, you can restore the backup to an on\-premises server, or a different Amazon RDS DB instance running SQL Server\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\.
 
 Amazon RDS supports native backup and restore for Microsoft SQL Server databases by using differential and full backup files \(\.bak files\)\.
 
-## Adding the Native Backup and Restore Option<a name="Appendix.SQLServer.Options.BackupRestore.Add"></a>
+## Adding the native backup and restore option<a name="Appendix.SQLServer.Options.BackupRestore.Add"></a>
 
 The general process for adding the native backup and restore option to a DB instance is the following:
 
@@ -28,11 +28,11 @@ After you add the native backup and restore option, you don't need to restart yo
 
 1. In the navigation pane, choose **Option groups**\.
 
-1. Create a new option group or use an existing option group\. For information on how to create a custom DB option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+1. Create a new option group or use an existing option group\. For information on how to create a custom DB option group, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
    To use an existing option group, skip to the next step\.
 
-1. Add the **SQLSERVER\_BACKUP\_RESTORE** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+1. Add the **SQLSERVER\_BACKUP\_RESTORE** option to the option group\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
 1. Do one of the following:
    + To use an existing IAM role and Amazon S3 settings, choose an existing IAM role for **IAM Role**\. If you use an existing IAM role, RDS uses the Amazon S3 settings configured for this role\.
@@ -50,20 +50,20 @@ After you add the native backup and restore option, you don't need to restart yo
 
      1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. Choose **No** to leave the backup file unencrypted\.
 
-        If you choose **Yes**, choose an encryption key for **Master Key**\. For more information about encryption keys, see [Getting Started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
+        If you choose **Yes**, choose an encryption key for **Master Key**\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
 
 1. Choose **Add option**\.
 
 1. Apply the option group to a new or existing DB instance:
-   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ### CLI<a name="Add.Native.Backup.Restore.CLI"></a>
 
 This procedure makes the following assumptions:
-+ You're adding the SQLSERVER\_BACKUP\_RESTORE option to an option group that already exists\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
++ You're adding the SQLSERVER\_BACKUP\_RESTORE option to an option group that already exists\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 + You're associating the option with an IAM role that already exists and has access to an S3 bucket to store the backups\.
-+ You're applying the option group to a DB instance that already exists\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ You're applying the option group to a DB instance that already exists\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 **To add the native backup and restore option**
 
@@ -114,14 +114,14 @@ When using the Windows command prompt, you must escape double quotes \("\) in JS
    	--apply-immediately
    ```
 
-## Modifying Native Backup and Restore Option Settings<a name="Appendix.SQLServer.Options.BackupRestore.ModifySettings"></a>
+## Modifying native backup and restore option settings<a name="Appendix.SQLServer.Options.BackupRestore.ModifySettings"></a>
 
-After you enable the native backup and restore option, you can modify the settings for the option\. For more information about how to modify option settings, see [Modifying an Option Setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\.
+After you enable the native backup and restore option, you can modify the settings for the option\. For more information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\.
 
-## Removing the Native Backup and Restore Option<a name="Appendix.SQLServer.Options.BackupRestore.Remove"></a>
+## Removing the native backup and restore option<a name="Appendix.SQLServer.Options.BackupRestore.Remove"></a>
 
 You can turn off native backup and restore by removing the option from your DB instance\. After you remove the native backup and restore option, you don't need to restart your DB instance\. 
 
 To remove the native backup and restore option from a DB instance, do one of the following: 
-+ Remove the option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ Modify the DB instance and specify a different option group that doesn't include the native backup and restore option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ Remove the option from the option group it belongs to\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ Modify the DB instance and specify a different option group that doesn't include the native backup and restore option\. This change affects a single DB instance\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 

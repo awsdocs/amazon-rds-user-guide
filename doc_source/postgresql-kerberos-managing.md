@@ -1,4 +1,4 @@
-# Managing a DB Instance in a Domain<a name="postgresql-kerberos-managing"></a>
+# Managing a DB instance in a Domain<a name="postgresql-kerberos-managing"></a>
 
 You can use the console, the CLI, or the RDS API to manage your DB instance and its relationship with your Microsoft Active Directory\. For example, you can associate an Active Directory to enable Kerberos authentication\. You can also remove the association for an Active Directory to disable Kerberos authentication\. You can also move a DB instance to be externally authenticated by one Microsoft Active Directory to another\.
 
@@ -7,7 +7,7 @@ For example, using the CLI, you can do the following:
 + To disable Kerberos authentication on a DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command\. Specify `none` for the `--domain` option\.
 + To move a DB instance from one domain to another, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command\. Specify the domain identifier of the new domain for the `--domain` option\.
 
-## Understanding Domain Membership<a name="postgresql-kerberos-managing.understanding"></a>
+## Understanding Domain membership<a name="postgresql-kerberos-managing.understanding"></a>
 
 After you create or modify your DB instance, it becomes a member of the domain\. You can view the status of the domain membership in the console or by running the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command\. The status of the DB instance can be one of the following: 
 + `kerberos-enabled` – The DB instance has Kerberos authentication enabled\.
@@ -22,4 +22,4 @@ After you create or modify your DB instance, it becomes a member of the domain\.
 A request to enable Kerberos authentication can fail because of a network connectivity issue or an incorrect IAM role\. In some cases, the attempt to enable Kerberos authentication might fail when you create or modify a DB instance\. If so, make sure that you are using the correct IAM role, then modify the DB instance to join the domain\.
 
 **Note**  
-Only Kerberos authentication with RDS for PostgreSQL sends traffic to the domain's DNS servers\. All other DNS requests are treated as outbound network access on your DB instances running PostgreSQL\. For more information about outbound network access with RDS for PostgreSQL, see [Using a Custom DNS Server for Outbound Network Access](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)\.
+Only Kerberos authentication with RDS for PostgreSQL sends traffic to the domain's DNS servers\. All other DNS requests are treated as outbound network access on your DB instances running PostgreSQL\. For more information about outbound network access with RDS for PostgreSQL, see [Using a custom DNS server for outbound network access](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.CustomDNS)\.

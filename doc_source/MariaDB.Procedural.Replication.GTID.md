@@ -1,16 +1,16 @@
-# Configuring GTID\-Based Replication into an Amazon RDS MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
+# Configuring GTID\-based replication into an Amazon RDS MariaDB DB instance<a name="MariaDB.Procedural.Replication.GTID"></a>
 
 You can set up GTID\-based replication from an external MariaDB instance of version 10\.0\.24 or greater into an Amazon RDS MariaDB DB instance\. Be sure to follow these guidelines when you set up an external source instance and a replica on Amazon RDS:
-+ Monitor failover events for the Amazon RDS MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS Event Notification](USER_Events.md)\.
++ Monitor failover events for the Amazon RDS MariaDB DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
 + Maintain the binlogs on your source instance until you have verified that they have been applied to the replica\. This maintenance ensures that you can restore your source instance in the event of a failure\.
-+ Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your source instance and replica\. For information on backups and Point\-In\-Time Restore, see [Backing Up and Restoring an Amazon RDS DB Instance](CHAP_CommonTasks.BackupRestore.md)\.
++ Turn on automated backups on your MariaDB DB instance on Amazon RDS\. Turning on automated backups ensures that you can restore your replica to a particular point in time if you need to re\-synchronize your source instance and replica\. For information on backups and Point\-In\-Time Restore, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 
 **Note**  
 The permissions required to start replication on an Amazon RDS MariaDB DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use the Amazon RDS [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) and [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) commands to set up replication between your live database and your Amazon RDS MariaDB database\. 
 
 To start replication between an external source instance and a MariaDB DB instance on Amazon RDS, use the following procedure\. <a name="MariaDB.Procedural.Importing.External.Repl.Procedure"></a>
 
-**To Start Replication**
+**To start replication**
 
 1. Make the source MariaDB instance read\-only:
 
@@ -21,9 +21,9 @@ To start replication between an external source instance and a MariaDB DB instan
 
 1. Get the current GTID of the external MariaDB instance\. You can do this by using `mysql` or the query editor of your choice to run `SELECT @@gtid_current_pos;`\. 
 
-   The GTID is formatted as `<domain-id>-<server-id>-<sequence-id>`\. A typical GTID looks something like **0\-1234510749\-1728**\. For more information about GTIDs and their component parts, see [Global Transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\. 
+   The GTID is formatted as `<domain-id>-<server-id>-<sequence-id>`\. A typical GTID looks something like **0\-1234510749\-1728**\. For more information about GTIDs and their component parts, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\. 
 
-1. Copy the database from the external MariaDB instance to the Amazon RDS MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing Data to an Amazon RDS MySQL or MariaDB DB Instance with Reduced Downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
+1. Copy the database from the external MariaDB instance to the Amazon RDS MariaDB DB instance using `mysqldump`\. For very large databases, you might want to use the procedure in [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)\. 
 **Note**  
 Make sure there is not a space between the `-p` option and the entered password\. 
 
@@ -68,7 +68,7 @@ Make sure there is not a space between the `-p` option and the entered password\
    mysql> UNLOCK TABLES;
    ```
 
-1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MariaDB database to the VPC security group for the Amazon RDS MariaDB DB instance\. For more information on modifying a VPC security group, go to [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
+1. In the Amazon RDS Management Console, add the IP address of the server that hosts the external MariaDB database to the VPC security group for the Amazon RDS MariaDB DB instance\. For more information on modifying a VPC security group, go to [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
    The IP address can change when the following conditions are met:
    + You are using a public IP address for communication between the external source instance and the DB instance\.

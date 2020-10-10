@@ -4,19 +4,19 @@ Amazon RDS on AWS Outposts extends Amazon RDS for MySQL and PostgreSQL databases
 
 You use the same AWS Management Console, AWS CLI, and RDS API to provision and manage on\-premises RDS on Outposts DB instances as you do for RDS DB instances running in the AWS Cloud\. RDS on Outposts automates tasks, such as database provisioning, operating system and database patching, backup, and long\-term archival in Amazon S3\.
 
-RDS on Outposts supports automated backups of DB instances\. Network connectivity between your Outpost and your AWS Region is required to back up and restore DB instances\. All DB snapshots and transaction logs from an Outpost are stored in your AWS Region\. From your AWS Region, you can restore a DB instance from a DB snapshot to a different Outpost\. For more information, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
+RDS on Outposts supports automated backups of DB instances\. Network connectivity between your Outpost and your AWS Region is required to back up and restore DB instances\. All DB snapshots and transaction logs from an Outpost are stored in your AWS Region\. From your AWS Region, you can restore a DB instance from a DB snapshot to a different Outpost\. For more information, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
-RDS on Outposts supports automated maintenance and upgrades of DB instances\. For more information, see [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)\.
+RDS on Outposts supports automated maintenance and upgrades of DB instances\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
-RDS on Outposts uses encryption at rest for DB instances and DB snapshots using your AWS Key Management Service \(AWS KMS\) key\. For more information about encryption at rest, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+RDS on Outposts uses encryption at rest for DB instances and DB snapshots using your AWS Key Management Service \(AWS KMS\) key\. For more information about encryption at rest, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 When network connectivity to the AWS Region isn't available, your DB instance continues to run locally\. You can't create new DB instances or take new actions on existing DB instances\. Automatic backups don't occur when there is no connectivity\. If there is a DB instance failure, the DB instance isn't automatically replaced until connectivity is restored\. We recommend restoring network connectivity as soon as possible\.
 
 **Topics**
 + [Prerequisites for Amazon RDS on AWS Outposts](#rds-on-outposts.prerequisites)
-+ [Amazon RDS on AWS Outposts Support for Amazon RDS Features](#rds-on-outposts.rds-feature-support)
-+ [Supported DB Instance Classes for Amazon RDS on AWS Outposts](#rds-on-outposts.db-instance-classes)
-+ [Creating DB Instances for Amazon RDS on AWS Outposts](#rds-on-outposts.creating)
++ [Amazon RDS on AWS Outposts support for Amazon RDS features](#rds-on-outposts.rds-feature-support)
++ [Supported DB instance classes for Amazon RDS on AWS Outposts](#rds-on-outposts.db-instance-classes)
++ [Creating DB instances for Amazon RDS on AWS Outposts](#rds-on-outposts.creating)
 
 ## Prerequisites for Amazon RDS on AWS Outposts<a name="rds-on-outposts.prerequisites"></a>
 
@@ -25,52 +25,52 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 + Make sure that you have at least one subnet available for RDS on Outposts\. You can use the same subnet for other workloads\.
 + Make sure that you have a reliable network connection between your Outpost and an AWS Region\.
 
-## Amazon RDS on AWS Outposts Support for Amazon RDS Features<a name="rds-on-outposts.rds-feature-support"></a>
+## Amazon RDS on AWS Outposts support for Amazon RDS features<a name="rds-on-outposts.rds-feature-support"></a>
 
 
 ****  
 
-| Feature | Supported | Notes | More Information | 
+| Feature | Supported | Notes | More information | 
 | --- | --- | --- | --- | 
-|  DB instance provisioning  |  Yes  |  You can only create DB instances for RDS for MySQL and RDS for PostgreSQL DB instances\. Only MySQL 8\.0\.17 and PostgreSQL version 12\.2 are supported\. Currently, other DB engines aren't supported\.  |  [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)  | 
-|  Modifying the master user password  |  Yes  |  —  |  [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)  | 
-|  Renaming a DB instance  |  Yes  |  —  |  [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)  | 
-|  Rebooting a DB instance  |  Yes  |  —  |  [Rebooting a DB Instance](USER_RebootInstance.md)  | 
-|  Stopping a DB instance  |  Yes  |  —  |  [Stopping an Amazon RDS DB Instance Temporarily](USER_StopInstance.md)  | 
-|  Starting a DB instance  |  Yes  |  —  |  [Starting an Amazon RDS DB Instance That Was Previously Stopped](USER_StartInstance.md)  | 
-|  Multi\-AZ deployments  |  No  |  —  |  [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
-|  DB parameter groups  |  Yes  |  —  |  [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)  | 
-|  Read replicas  |  No  |  —  |  [Working with Read Replicas](USER_ReadRepl.md)  | 
-|  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS Resources](Overview.Encryption.md)  | 
-|  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM Database Authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
+|  DB instance provisioning  |  Yes  |  You can only create DB instances for RDS for MySQL and RDS for PostgreSQL DB instances\. Only MySQL 8\.0\.17 and PostgreSQL version 12\.2 are supported\. Currently, other DB engines aren't supported\.  |  [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)  | 
+|  Modifying the master user password  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Renaming a DB instance  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Rebooting a DB instance  |  Yes  |  —  |  [Rebooting a DB instance](USER_RebootInstance.md)  | 
+|  Stopping a DB instance  |  Yes  |  —  |  [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)  | 
+|  Starting a DB instance  |  Yes  |  —  |  [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)  | 
+|  Multi\-AZ deployments  |  No  |  —  |  [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
+|  DB parameter groups  |  Yes  |  —  |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
+|  Read replicas  |  No  |  —  |  [Working with read replicas](USER_ReadRepl.md)  | 
+|  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 
+|  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
 |  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
-|  Kerberos authentication  |  No  |  —  |  [Kerberos Authentication](database-authentication.md#kerberos-authentication)  | 
-|  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS Resources](USER_Tagging.md)  | 
-|  Option groups  |  No  |  —  |  [Working with Option Groups](USER_WorkingWithOptionGroups.md)  | 
-|  Modifying the maintenance window  |  Yes  |  —  |  [Maintaining a DB Instance](USER_UpgradeDBInstance.Maintenance.md)  | 
-|  Automatic minor version upgrade  |  Yes  |  —  |  [Automatically Upgrading the Minor Engine Version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)  | 
-|  Modifying the backup window  |  Yes  |  —  |  [Working With Backups](USER_WorkingWithAutomatedBackups.md) and [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)  | 
-|  DB instance scaling  |  Yes  |  To scale a DB instance, modify its on\-premises DB instance class\. Storage scaling isn't supported\.  |  [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)  | 
-|  Manual and automatic DB instance snapshots  |  Yes  |  Manual and automatic DB instance snapshots are stored in your AWS Region\.  |  [Creating a DB Snapshot](USER_CreateSnapshot.md)  | 
-|  Restoring from a DB snapshot  |  Yes  |  —  |  [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)  | 
-|  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)  | 
-|  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB Snapshot Data to Amazon S3](USER_ExportSnapshot.md)  | 
-|  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB Instance to a Specified Time](USER_PIT.md)  | 
+|  Kerberos authentication  |  No  |  —  |  [Kerberos authentication](database-authentication.md#kerberos-authentication)  | 
+|  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS resources](USER_Tagging.md)  | 
+|  Option groups  |  No  |  —  |  [Working with option groups](USER_WorkingWithOptionGroups.md)  | 
+|  Modifying the maintenance window  |  Yes  |  —  |  [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)  | 
+|  Automatic minor version upgrade  |  Yes  |  —  |  [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)  | 
+|  Modifying the backup window  |  Yes  |  —  |  [Working with backups](USER_WorkingWithAutomatedBackups.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  DB instance scaling  |  Yes  |  To scale a DB instance, modify its on\-premises DB instance class\. Storage scaling isn't supported\.  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Manual and automatic DB instance snapshots  |  Yes  |  Manual and automatic DB instance snapshots are stored in your AWS Region\.  |  [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
+|  Restoring from a DB snapshot  |  Yes  |  —  |  [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
+|  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)  | 
+|  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
+|  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB instance to a specified time](USER_PIT.md)  | 
 |  Enhanced monitoring  |  No  |  —  |  [Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  No  |  —  |  [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)  | 
-|  Publishing database engine logs to CloudWatch Logs  |  No  |  —  |  [Publishing Database Logs to Amazon CloudWatch Logs](USER_LogAccess.md#USER_LogAccess.Procedural.UploadtoCloudWatch)  | 
-|  Event notification  |  Yes  |  —  |  [Using Amazon RDS Event Notification](USER_Events.md)  | 
+|  Publishing database engine logs to CloudWatch Logs  |  No  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.md#USER_LogAccess.Procedural.UploadtoCloudWatch)  | 
+|  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
 |  Amazon RDS Performance Insights  |  No  |  —  |  [Using Amazon RDS Performance Insights](USER_PerfInsights.md)  | 
-|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Amazon RDS Database Log Files](USER_LogAccess.md)  | 
-|  Amazon RDS Proxy  |  No  |  —  |  [Managing Connections with Amazon RDS Proxy](rds-proxy.md)  | 
-|  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL Reference](Appendix.MySQL.SQLRef.md)  | 
-|  Replication with external databases for Amazon RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB Instance Running External to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
+|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Amazon RDS database log files](USER_LogAccess.md)  | 
+|  Amazon RDS Proxy  |  No  |  —  |  [Managing connections with Amazon RDS Proxy](rds-proxy.md)  | 
+|  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
+|  Replication with external databases for Amazon RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
 
 **Note**  
 RDS on Outposts doesn't support use cases that require all data to remain in your data center\.  
 RDS on Outposts stores database backups and logs in your AWS Region\.
 
-## Supported DB Instance Classes for Amazon RDS on AWS Outposts<a name="rds-on-outposts.db-instance-classes"></a>
+## Supported DB instance classes for Amazon RDS on AWS Outposts<a name="rds-on-outposts.db-instance-classes"></a>
 
 Amazon RDS on AWS Outposts supports the following DB instance classes:
 + General Purpose DB instance classes
@@ -88,9 +88,9 @@ Amazon RDS on AWS Outposts supports the following DB instance classes:
   + db\.r5\.xlarge
   + db\.r5\.large
 
-Only General Purpose SSD storage is supported for RDS on Outposts DB instances\. For more information about DB instance classes, see [DB Instance Classes](Concepts.DBInstanceClass.md)\.
+Only General Purpose SSD storage is supported for RDS on Outposts DB instances\. For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
-## Creating DB Instances for Amazon RDS on AWS Outposts<a name="rds-on-outposts.creating"></a>
+## Creating DB instances for Amazon RDS on AWS Outposts<a name="rds-on-outposts.creating"></a>
 
 Creating an Amazon RDS on AWS Outposts DB instance is similar to creating an Amazon RDS DB instance in the AWS Cloud\. However, you must specify a DB subnet group that is associated with your Outpost\.
 
@@ -159,7 +159,7 @@ If you haven't configured any Outposts, either the **Database location** section
 
    1. For the remaining sections, specify your DB instance settings\.
 
-      For information about each setting when creating a DB instance, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+      For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
    1. Choose **Create database**\. 
 
@@ -170,7 +170,7 @@ If you haven't configured any Outposts, either the **Database location** section
 
       To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
    1. For **Databases**, choose the name of the new DB instance\.
 
@@ -254,7 +254,7 @@ For Windows:
 
 To create a PostgreSQL DB instance, specify `postgres` for the `--engine` option\.
 
-For information about each setting when creating a DB instance, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
 ### RDS API<a name="rds-on-outposts.creating.api"></a>
 
@@ -274,4 +274,4 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `StorageEncrypted`
 + `KmsKeyID`
 
-For information about each setting when creating a DB instance, see [Settings for DB Instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.

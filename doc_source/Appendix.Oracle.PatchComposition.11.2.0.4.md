@@ -1,4 +1,4 @@
-# Database Engine: 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.11.2.0.4"></a>
+# Database engine: 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.11.2.0.4"></a>
 
 The following versions are available for database engine 11\.2\.0\.4:
 + [Version 11\.2\.0\.4\.v25](#Appendix.Oracle.PatchComposition.11.2.0.4.v25)
@@ -24,7 +24,7 @@ The following versions are available for database engine 11\.2\.0\.4:
 + [Version 11\.2\.0\.4\.v5](#Appendix.Oracle.PatchComposition.11.2.0.4.v5)
 + [Version 11\.2\.0\.4\.v4](#Appendix.Oracle.PatchComposition.11.2.0.4.v4)
 + [Version 11\.2\.0\.4\.v3](#Appendix.Oracle.PatchComposition.11.2.0.4.v3)
-+ [Version 11\.2\.0\.4\.v2 \(Deprecated\)](#Appendix.Oracle.PatchComposition.11.2.0.4.v2)
++ [Version 11\.2\.0\.4\.v2 \(deprecated\)](#Appendix.Oracle.PatchComposition.11.2.0.4.v2)
 + [Version 11\.2\.0\.4\.v1](#Appendix.Oracle.PatchComposition.11.2.0.4.v1)
 
 ## Version 11\.2\.0\.4\.v25<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v25"></a>
@@ -38,7 +38,7 @@ Version 11\.2\.0\.4\.v25 includes the following:
 + Patch 22188219: "L1 VALIDATION" WAIT EVENT USED TO BACK OFF WHEN HW ENQUEUE CANNOT BE ACQUIRED
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Combined Patches for Version 11\.2\.0\.4\.v25, Released July 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v25.Bugs-Fixed"></a>
+### Combined patches for version 11\.2\.0\.4\.v25, released July 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v25.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -196,10 +196,10 @@ Version 11\.2\.0\.4\.v24 includes the following:
 + Patch 29997959: DSTV34 OJVM \(TZDATA2019B\)
 + Patch 31192454: Oracle GoldenGate \- Oracle RDBMS Server Recommended Patches
 + Patch 22188219: "L1 VALIDATION" WAIT EVENT USED TO BACK OFF WHEN HW ENQUEUE CANNOT BE ACQUIRED
-+ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAupport for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
-+ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
++ Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAupport for [Purging the recycle bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)\.
++ Support for [Generating performance reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
-### Combined Patches for Version 11\.2\.0\.4, Released April 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24-Bugs-Fixed"></a>
+### Combined patches for version 11\.2\.0\.4, released April 2020<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v24-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -1474,8 +1474,8 @@ Version 11\.2\.0\.4\.v13 includes the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 26554712\)
 + RSA Micro\-Edition Suite Bundle \(patch 26770426\)
 + Timezone file DSTv30 \(patch 25881255, OJVM patch 25881271\)
-+ Support for [Validating DB Instance Files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
-+ Support for [Setting the Default Edition for a DB Instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
++ Support for [Validating DB instance files](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.ValidateDBFiles) with the `RMAN` logical validation utility
++ Support for [Setting the default edition for a DB instance](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.DefaultEdition) 
 
 ### Oracle patch 26609445, released July 2017<a name="w127aac31d107c19c30b7"></a>
 
@@ -1734,7 +1734,7 @@ Version 11\.2\.0\.4\.v10 includes the following:
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24491261\)
 + MES Bundle \(patch 24975421 for 11\.2\.0\.4\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w127aac31d107c19c36b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.161018 \(patch 24006111, released October 2016\)<a name="w127aac31d107c19c36b6"></a>
 
 Bugs fixed:
 
@@ -1814,10 +1814,10 @@ Version 11\.2\.0\.4\.v9 includes the following:
 + Timezone file DSTv26 \(patch 22873635 for 11\.2\.0\.4\)
 + Oracle recommended RDBMS patches for Oracle GoldenGate \(patch 24320398 for 11\.2\.0\.4\.160719\)
 + MES Bundle \(patch 22695784 for 11\.2\.0\.4\)
-+ Added the ability to create custom password verify functions\. For more information, see [Creating Custom Functions to Verify Passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
++ Added the ability to create custom password verify functions\. For more information, see [Creating custom functions to verify passwords](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomPassword)\. 
 + Fixed a bug that prevented implicit recompilation of views owned by SYS
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w127aac31d107c19c38b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.160719 \(patch 23054359, released July 2016\)<a name="w127aac31d107c19c38b6"></a>
 
 Bugs fixed:
 
@@ -1900,7 +1900,7 @@ Version 11\.2\.0\.4\.v8 includes the following:
 + Adds the ability for the master user to grant privileges on SYS objects with the grant option using the RDSADMIN\.RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT procedure
 + Adds master user privileges to support most common schemas created by the Oracle Fusion Middleware Repository Creation Utility \(RCU\)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w127aac31d107c19c40b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.160419 \(patch 22502456, released April 2016\)<a name="w127aac31d107c19c40b6"></a>
 
 Bugs fixed:
 
@@ -1980,7 +1980,7 @@ Version 11\.2\.0\.4\.v7 includes the following:
 + Fixed an issue that prevented customers from creating more than 10 Directory objects in the database 
 + Fixed an issue that prevented customers from re\-granting read privileges on the ADUMP and BDUMP Directory objects
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w127aac31d107c19c42b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.160119 \(patch 21948347, released January 2016\)<a name="w127aac31d107c19c42b6"></a>
 
 Bugs fixed:
 
@@ -2059,7 +2059,7 @@ Version 11\.2\.0\.4\.v5 includes the following:
 + Oracle PSU 11\.2\.0\.4\.8 \(21352635\)
 +  Includes the Daylight Saving Time Patch, patch 20875898: DST\-24, that came out after the April 2015 PSU\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w127aac31d107c19c46b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.8 \(patch 21352635, released October 2015\)<a name="w127aac31d107c19c46b6"></a>
 
 Bugs fixed:
 
@@ -2131,7 +2131,7 @@ Version 11\.2\.0\.4\.v4 includes the following:
 +  Provides access to DBMS\_REPAIR through RDSADMIN\.RDSADMIN\_DBMS\_REPAIR 
 + Grants ALTER DATABASE LINK, ALTER PUBLIC DATABASE LINK, EXEMPT ACCESS POLICY, EXEMPT IDENTITY POLICY, and EXEMPT REDACTION POLICY to master user 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w127aac31d107c19c48b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.6 \(patch 20299013, released April 2015\)<a name="w127aac31d107c19c48b6"></a>
 
 Bugs fixed:
 
@@ -2197,7 +2197,7 @@ Version 11\.2\.0\.4\.v3 includes the following:
 + Oracle PSU 11\.2\.0\.4\.4 \(19121551\)
 + Latest DST file \(DSTv23 – patch 19396455, released Oct 2014\)\. This patch is incorporated by default in new instances only\. 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w127aac31d107c19c50b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.4 \(patch 19121551, released October 2014\)<a name="w127aac31d107c19c50b6"></a>
 
 Bugs fixed:
 
@@ -2236,7 +2236,7 @@ Bugs fixed:
                     17346671, 18996843, 14852021, 17783588, 16618694, 17672719, 17546761
 ```
 
-## Version 11\.2\.0\.4\.v2 \(Deprecated\)<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v2"></a>
+## Version 11\.2\.0\.4\.v2 \(deprecated\)<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v2"></a>
 
 Version 11\.2\.0\.4\.v2 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.3 \(18522509\) 
@@ -2248,7 +2248,7 @@ Version 11\.2\.0\.4\.v2 includes the following:
 + Installs schema objects to support XA Transactions, allowing transactions to be managed by an external transaction manager 
 + Permits truncation of temporary SYS and SYSTEM objects, allowing tools like LogMiner to function correctly 
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w127aac31d107c19c52b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.3 \(patch 18522509, released July 2014\)<a name="w127aac31d107c19c52b6"></a>
 
 Bugs fixed:
 
@@ -2279,9 +2279,9 @@ Bugs fixed:
 
 Version 11\.2\.0\.4\.v1 includes the following: 
 + Oracle PSU 11\.2\.0\.4\.1
-+ [Creating and Dropping Directories in the Main Data Storage Space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)
++ [Creating and dropping directories in the main data storage space](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.NewDirectories)
 
-### Baseline: Oracle Database Patch Set Update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w127aac31d107c19c54b6"></a>
+### Baseline: Oracle database patch set update 11\.2\.0\.4\.1 \(released January 2014\)<a name="w127aac31d107c19c54b6"></a>
 
 Bugs fixed:
 
@@ -2291,7 +2291,3 @@ Bugs fixed:
                     17446237, 16450169, 17811438, 17288409, 17811456, 12905058, 17088068
                     16285691, 17332800
 ```
-
-## Related Topics<a name="Appendix.Oracle.PatchComposition.11.2.0.4.Related"></a>
-+ [Upgrading the Oracle DB Engine](USER_UpgradeDBInstance.Oracle.md)
-+ [Oracle on Amazon RDS](CHAP_Oracle.md)

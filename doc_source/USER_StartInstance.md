@@ -1,6 +1,6 @@
-# Starting an Amazon RDS DB Instance That Was Previously Stopped<a name="USER_StartInstance"></a>
+# Starting an Amazon RDS DB instance that was previously stopped<a name="USER_StartInstance"></a>
 
-You can stop your Amazon RDS DB instance temporarily to save money\. After you stop your DB instance, you can restart it to begin using it again\. For more details about stopping and starting DB instances, see [Stopping an Amazon RDS DB Instance Temporarily](USER_StopInstance.md)\. 
+You can stop your Amazon RDS DB instance temporarily to save money\. After you stop your DB instance, you can restart it to begin using it again\. For more details about stopping and starting DB instances, see [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)\. 
 
 When you start a DB instance that you previously stopped, the DB instance retains the ID, Domain Name Server \(DNS\) endpoint, parameter group, security group, and option group\. When you start a stopped instance, you are charged a full instance hour\. 
 
@@ -16,18 +16,18 @@ When you start a DB instance that you previously stopped, the DB instance retain
 
 ## AWS CLI<a name="USER_StartInstance.CLI"></a>
 
-To start a DB instance by using the AWS CLI, call the [start\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following parameters: 
+To start a DB instance by using the AWS CLI, call the [start\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following option: 
 + `--db-instance-identifier` – the name of the DB instance\. 
 
 **Example**  
 
 ```
-1. start-db-instance --db-instance-identifier mydbinstance
+1. aws rds start-db-instance --db-instance-identifier mydbinstance
 ```
 
 ## RDS API<a name="USER_StartInstance.API"></a>
 
-To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) operation with the following parameters: 
+To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 
 
 **Example**  
@@ -45,7 +45,3 @@ To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](h
 10.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
 11.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
 ```
-
-## Related Topics<a name="USER_StartInstance.Related"></a>
-+ [Deleting a DB Instance](USER_DeleteInstance.md)
-+ [Rebooting a DB Instance](USER_RebootInstance.md)

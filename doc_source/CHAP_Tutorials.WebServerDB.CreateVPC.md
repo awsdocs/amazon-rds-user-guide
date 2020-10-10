@@ -1,8 +1,8 @@
-# Tutorial: Create an Amazon VPC for Use with a DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
+# Tutorial: Create an Amazon VPC for use with a DB instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC"></a>
 
 A common scenario includes a DB instance in an Amazon VPC, that shares data with a web server that is running in the same VPC\. In this tutorial you create the VPC for this scenario\. 
 
-The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for Accessing a DB Instance in a VPC](USER_VPC.Scenarios.md)\. 
+The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
 ![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
@@ -11,9 +11,9 @@ Because your DB instance only needs to be available to your web server, and not 
 This tutorial describes configuring a VPC for Amazon RDS DB instances\. For more information about Amazon VPC, see [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/) and [Amazon VPC User Guide](https://docs.aws.amazon.com/vpc/latest/userguide/)\. 
 
 **Note**  
-For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md)\.
+For a tutorial that shows you how to create a web server for this VPC scenario, see [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)\.
 
-## Create a VPC with Private and Public Subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets"></a>
+## Create a VPC with private and public subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets"></a>
 
 Use the following procedure to create a VPC with both public and private subnets\. 
 
@@ -49,7 +49,7 @@ If the t2\.small instance type is not listed, you can choose a different instanc
 
 1. When you're finished, choose **Create VPC**\.
 
-## Create Additional Subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets"></a>
+## Create additional subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets"></a>
 
 You must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC\. Because the DB instance for this tutorial is private, add a second private subnet to the VPC\. 
 
@@ -81,7 +81,7 @@ Choose an Availability Zone that is different from the one that you chose for th
 
    1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route Table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
 
-## Create a VPC Security Group for a Public Web Server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
+## Create a VPC security group for a public web server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 
 Next you create a security group for public access\. To connect to public instances in your VPC, you add inbound rules to your VPC security group that allow traffic to connect from the internet\. 
 
@@ -120,7 +120,7 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
 
    Note the security group ID because you need it later in this tutorial\.
 
-## Create a VPC Security Group for a Private DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
+## Create a VPC security group for a private DB instance<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupDB"></a>
 
 To keep your DB instance private, create a second security group for private access\. To connect to private instances in your VPC, you add inbound rules to your VPC security group that allow traffic from your web server only\. 
 
@@ -145,7 +145,7 @@ To keep your DB instance private, create a second security group for private acc
 
 1. To create the security group, choose **Create security group**\.
 
-## Create a DB Subnet Group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
+## Create a DB subnet group<a name="CHAP_Tutorials.WebServerDB.CreateVPC.DBSubnetGroup"></a>
 
 A DB subnet group is a collection of subnets that you create in a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when creating DB instances\.
 
@@ -175,4 +175,4 @@ If you have enabled a Local Zone, you can choose an Availability Zone group on t
     Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\.
 
 **Note**  
-If you created this VPC to complete [Tutorial: Create a Web Server and an Amazon RDS DB Instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md) \.
+If you created this VPC to complete [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md) \.

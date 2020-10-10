@@ -1,10 +1,10 @@
-# Oracle Database Engine Release Notes<a name="Appendix.Oracle.PatchComposition"></a>
+# Oracle database engine release notes<a name="Appendix.Oracle.PatchComposition"></a>
 
 Updates to your Amazon RDS for Oracle DB instances keep them current\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\. 
 
 You can specify any currently supported Oracle version when creating a new DB instance\. You can specify the major version \(such as Oracle 12\.1\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version that you have specified\. To see a list of supported versions and defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
-## Oracle Versions 19\.0\.0, 18\.0\.0, and 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.180-122"></a>
+## Oracle versions 19\.0\.0, 18\.0\.0, and 12\.2\.0\.1<a name="Appendix.Oracle.PatchComposition.180-122"></a>
 
 For Amazon RDS for Oracle versions 19\.0\.0\.0, 18\.0\.0\.0, and 12\.2\.0\.1, Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 
@@ -24,7 +24,7 @@ To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0
 | 2019 January | — | — | [12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2019-01.rur-2019-01.r1) | 
 | 2018 October | — | — | [12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2018-10.rur-2018-10.r1) | 
 
-## Oracle Versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
+## Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
 
 For Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, Amazon RDS incorporates bug fixes from Oracle by using their quarterly Database Patch Set Updates \(PSUs\)\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\. 
 

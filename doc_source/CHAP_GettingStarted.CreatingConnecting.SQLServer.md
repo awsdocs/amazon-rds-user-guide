@@ -1,4 +1,4 @@
-# Creating a Microsoft SQL Server DB Instance and Connecting to a DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.SQLServer"></a>
+# Creating a Microsoft SQL Server DB instance and connecting to a DB instance<a name="CHAP_GettingStarted.CreatingConnecting.SQLServer"></a>
 
 The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB instance is similar to your on\-premises Microsoft SQL Server\. After you create your SQL Server DB instance, you can add one or more custom databases to it\. 
 
@@ -7,7 +7,7 @@ You must have an AWS account before you can create a DB instance\. If you don't 
 
 In this topic, you create a sample SQL Server DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\.
 
-## Creating a Sample SQL Server DB Instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
+## Creating a sample SQL Server DB instance<a name="CHAP_GettingStarted.Creating.SQLServer"></a>
 
 The DB instance is where you run your Microsoft SQL Server databases\.
 
@@ -18,7 +18,7 @@ You can create a DB instance running Microsoft SQL Server with the AWS Managemen
 For this example, you use **Easy Create** to create a DB instance running the Microsoft SQL Server database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 **To create a Microsoft SQL Server DB instance with Easy Create enabled**
 
@@ -60,14 +60,14 @@ For information about creating DB instances with **Easy Create** not enabled, se
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new Microsoft SQL Server DB instance\.
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQLSvr-Launch05.png)
 
-## Connecting to Your Sample SQL Server DB Instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
+## Connecting to your sample SQL Server DB instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
 
 In this procedure, you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
@@ -111,9 +111,9 @@ Also, make sure you have SSMS installed\. If you can also connect to SQL Server 
 
    After a few moments, SSMS connects to your DB instance\.
 
-   If you can't connect to your DB instance, see [Troubleshooting Connections to Your SQL Server DB Instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\.
+   If you can't connect to your DB instance, see [Troubleshooting connections to your SQL Server DB instance](USER_ConnectToMicrosoftSQLServerInstance.md#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\.
 
-## Exploring Your Sample SQL Server DB Instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
+## Exploring your sample SQL Server DB instance<a name="CHAP_GettingStarted.SQLServer.Exploring"></a>
 
 In this procedure, you continue the previous procedure and explore your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
@@ -141,7 +141,7 @@ In this procedure, you continue the previous procedure and explore your sample D
    1. Run the query\. SSMS returns the SQL Server version of your Amazon RDS DB instance\.   
 ![\[SQL Query Window\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-Connect-Query.png)
 
-## Deleting Your Sample DB Instance<a name="CHAP_GettingStarted.Deleting.SQLServer"></a>
+## Deleting your sample DB instance<a name="CHAP_GettingStarted.Deleting.SQLServer"></a>
 
 After you are done exploring the sample DB instance that you created, you should delete the DB instance so that you are no longer charged for it\. 
 

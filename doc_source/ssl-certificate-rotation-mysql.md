@@ -1,4 +1,4 @@
-# Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates<a name="ssl-certificate-rotation-mysql"></a>
+# Updating applications to connect to MySQL DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-mysql"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
@@ -23,17 +23,17 @@ MySQL 5\.5\.57 and earlier MySQL 5\.5 versions
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MySQL DB instances, see [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
+For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with MySQL DB instances, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
 
 **Topics**
-+ [Determining Whether any Applications are Connecting to Your MySQL DB Instance Using SSL](#ssl-certificate-rotation-mysql.determining-server)
-+ [Determining Whether a Client Requires Certificate Verification to Connect](#ssl-certificate-rotation-mysql.determining-client)
-+ [Updating Your Application Trust Store](#ssl-certificate-rotation-mysql.updating-trust-store)
-+ [Example Java Code for Establishing SSL Connections](#ssl-certificate-rotation-mysql.java-example)
++ [Determining whether any applications are connecting to your MySQL DB instance using SSL](#ssl-certificate-rotation-mysql.determining-server)
++ [Determining whether a client requires certificate verification to connect](#ssl-certificate-rotation-mysql.determining-client)
++ [Updating your application trust store](#ssl-certificate-rotation-mysql.updating-trust-store)
++ [Example Java code for establishing SSL connections](#ssl-certificate-rotation-mysql.java-example)
 
-## Determining Whether any Applications are Connecting to Your MySQL DB Instance Using SSL<a name="ssl-certificate-rotation-mysql.determining-server"></a>
+## Determining whether any applications are connecting to your MySQL DB instance using SSL<a name="ssl-certificate-rotation-mysql.determining-server"></a>
 
-If you are using Amazon RDS for MySQL version 5\.7 or 8\.0 and the Performance Schema is enabled, run the following query to check if connections are using SSL/TLS\. For information about enabling the Performance Schema, see [ Performance Schema Quick Start](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html) in the MySQL documentation\.
+If you are using Amazon RDS for MySQL version 5\.7 or 8\.0 and the Performance Schema is enabled, run the following query to check if connections are using SSL/TLS\. For information about enabling the Performance Schema, see [ Performance Schema quick start](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html) in the MySQL documentation\.
 
 ```
 mysql> SELECT id, user, host, connection_type 
@@ -57,13 +57,13 @@ In this sample output, you can see both your own session \(`admin`\) and an appl
 
 If you are using Amazon RDS for MySQL versions 5\.5 or 5\.6, then you can't determine from the server side whether applications are connecting with or without SSL\. For those versions, you can determine whether SSL is used by examining the application's connection method\. In the following section, you can find more information on examining the client connection configuration\.
 
-## Determining Whether a Client Requires Certificate Verification to Connect<a name="ssl-certificate-rotation-mysql.determining-client"></a>
+## Determining whether a client requires certificate verification to connect<a name="ssl-certificate-rotation-mysql.determining-client"></a>
 
 You can check whether JDBC clients and MySQL clients require certificate verification to connect\.
 
 ### JDBC<a name="ssl-certificate-rotation-mysql.determining-client.jdbc"></a>
 
-The following example with MySQL Connector/J 8\.0 shows one way to check an application's JDBC connection properties to determine whether successful connections require a valid certificate\. For more information on all of the JDBC connection options for MySQL, see [ Configuration Properties](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) in the MySQL documentation\.
+The following example with MySQL Connector/J 8\.0 shows one way to check an application's JDBC connection properties to determine whether successful connections require a valid certificate\. For more information on all of the JDBC connection options for MySQL, see [ Configuration properties](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) in the MySQL documentation\.
 
 When using the MySQL Connector/J 8\.0, an SSL connection requires verification against the server CA certificate if your connection properties have `sslMode` set to `VERIFY_CA` or `VERIFY_IDENTITY`, as in the following example\.
 
@@ -79,7 +79,7 @@ If you use either the MySQL Java Connector v5\.1\.38 or later, or the MySQL Java
 
 ### MySQL<a name="ssl-certificate-rotation-mysql.determining-client.mysql"></a>
 
-The following examples with the MySQL Client show two ways to check a script's MySQL connection to determine whether successful connections require a valid certificate\. For more information on all of the connection options with the MySQL Client, see [ Client\-Side Configuration for Encrypted Connections](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration) in the MySQL documentation\.
+The following examples with the MySQL Client show two ways to check a script's MySQL connection to determine whether successful connections require a valid certificate\. For more information on all of the connection options with the MySQL Client, see [ Client\-side configuration for encrypted connections](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration) in the MySQL documentation\.
 
 When using the MySQL 5\.7 or MySQL 8\.0 Client, an SSL connection requires verification against the server CA certificate if for the `--ssl-mode` option you specify `VERIFY_CA` or `VERIFY_IDENTITY`, as in the following example\.
 
@@ -93,14 +93,14 @@ When using the MySQL 5\.6 Client, an SSL connection requires verification agains
 mysql -h mysql-database.rds.amazonaws.com -uadmin -ppassword --ssl-ca=/tmp/ssl-cert.pem --ssl-verify-server-cert            
 ```
 
-## Updating Your Application Trust Store<a name="ssl-certificate-rotation-mysql.updating-trust-store"></a>
+## Updating your application trust store<a name="ssl-certificate-rotation-mysql.updating-trust-store"></a>
 
-For information about updating the trust store for MySQL applications, see [Installing SSL Certificates](https://dev.mysql.com/doc/mysql-monitor/8.0/en/mem-ssl-installation.html) in the MySQL documentation\.
+For information about updating the trust store for MySQL applications, see [Installing SSL certificates](https://dev.mysql.com/doc/mysql-monitor/8.0/en/mem-ssl-installation.html) in the MySQL documentation\.
 
 **Note**  
 When you update the trust store, you can retain older certificates in addition to adding the new certificates\.
 
-### Updating Your Application Trust Store for JDBC<a name="ssl-certificate-rotation-mysql.updating-trust-store.jdbc"></a>
+### Updating your application trust store for JDBC<a name="ssl-certificate-rotation-mysql.updating-trust-store.jdbc"></a>
 
 You can update the trust store for applications that use JDBC for SSL/TLS connections\.
 
@@ -108,7 +108,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 
 1. Download the 2019 root certificate that works for all AWS Regions and put the file in the trust store directory\.
 
-   For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. Convert the certificate to \.der format using the following command\.
 
@@ -154,7 +154,7 @@ When you start the application, set the following properties\.
 java -Djavax.net.ssl.trustStore=/path_to_truststore/MyTruststore.jks -Djavax.net.ssl.trustStorePassword=my_truststore_password com.companyName.MyApplication        
 ```
 
-## Example Java Code for Establishing SSL Connections<a name="ssl-certificate-rotation-mysql.java-example"></a>
+## Example Java code for establishing SSL connections<a name="ssl-certificate-rotation-mysql.java-example"></a>
 
 The following code example shows how to set up the SSL connection that validates the server certificate using JDBC\.
 
@@ -213,4 +213,4 @@ public class MySQLSSLTest {
 ```
 
 **Important**  
-After you have determined that your database connections use SSL/TLS and have updated your application trust store, you can update your database to use the rds\-ca\-2019 certificates\. For instructions, see step 3 in [Updating Your CA Certificate by Modifying Your DB Instance](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-updating)\.
+After you have determined that your database connections use SSL/TLS and have updated your application trust store, you can update your database to use the rds\-ca\-2019 certificates\. For instructions, see step 3 in [Updating your CA certificate by modifying your DB instance](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-updating)\.

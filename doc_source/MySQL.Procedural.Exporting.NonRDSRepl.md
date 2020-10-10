@@ -1,4 +1,4 @@
-# Exporting Data from a MySQL DB Instance by Using Replication<a name="MySQL.Procedural.Exporting.NonRDSRepl"></a>
+# Exporting data from a MySQL DB instance by using replication<a name="MySQL.Procedural.Exporting.NonRDSRepl"></a>
 
 To export data from a MySQL 5\.6 or later DB instance to a MySQL instance running external to Amazon RDS, you can use replication\. In this scenario, the Amazon RDS MySQL DB instance is the *source MySQL DB instance*, and the MySQL instance running external to Amazon RDS is the *external MySQL database*\.
 
@@ -18,7 +18,7 @@ The following list shows the steps to take\. Each step is discussed in more deta
 
 1. After the export completes, stop replication\.
 
-## Prepare an External MySQL Database<a name="MySQL.Procedural.Exporting.NonRDSRepl.PrepareRDS"></a>
+## Prepare an external MySQL database<a name="MySQL.Procedural.Exporting.NonRDSRepl.PrepareRDS"></a>
 
 Perform the following steps to prepare the external MySQL database\.
 
@@ -33,7 +33,7 @@ Perform the following steps to prepare the external MySQL database\.
 1. Configure an egress rule for the external MySQL database to operate as a read replica during the export\. The egress rule allows the external MySQL database to connect to the source MySQL DB instance during replication\. Specify an egress rule that allows Transmission Control Protocol \(TCP\) connections to the port and IP address of the source MySQL DB instance\.
 
    Specify the appropriate egress rules for your environment:
-   + If the external MySQL database is running in an Amazon EC2 instance in a virtual private cloud \(VPC\) based on the Amazon VPC service, specify the egress rules in a VPC security group\. For more information, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
+   + If the external MySQL database is running in an Amazon EC2 instance in a virtual private cloud \(VPC\) based on the Amazon VPC service, specify the egress rules in a VPC security group\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
    + If the external MySQL database is running in an Amazon EC2 instance that is not in a VPC, specify the egress rules in an EC2\-Classic security group\.
    + If the external MySQL database is installed on\-premises, specify the egress rules in a firewall\.
 
@@ -45,7 +45,7 @@ Perform the following steps to prepare the external MySQL database\.
 
 1. \(Optional\) Set the `max_allowed_packet` parameter to the maximum size to avoid replication errors\. We recommend this setting\.
 
-## Prepare the Source MySQL DB Instance<a name="MySQL.Procedural.Exporting.NonRDSRepl.PrepareSource"></a>
+## Prepare the source MySQL DB instance<a name="MySQL.Procedural.Exporting.NonRDSRepl.PrepareSource"></a>
 
 Perform the following steps to prepare the source MySQL DB instance as the replication source\.
 
@@ -53,13 +53,13 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
 1. Ensure that your client computer has enough disk space available to save the binary logs while setting up replication\.
 
-1. Connect to the source MySQL DB instance, and create a replication account by following the directions in [Creating a User for Replication](http://dev.mysql.com/doc/refman/8.0/en/replication-howto-repuser.html) in the MySQL documentation\.
+1. Connect to the source MySQL DB instance, and create a replication account by following the directions in [Creating a user for replication](http://dev.mysql.com/doc/refman/8.0/en/replication-howto-repuser.html) in the MySQL documentation\.
 
 1. Configure ingress rules on the system running the source MySQL DB instance to allow the external MySQL database to connect during replication\. Specify an ingress rule that allows TCP connections to the port used by the source MySQL DB instance from the IP address of the external MySQL database\.
 
 1. Specify the egress rules:
-   + If the source MySQL DB instance is running in a VPC, specify the ingress rules in a VPC security group\. For more information, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)\.
-   + If the source MySQL DB instance isn't running in a VPC, specify the ingress rules in a DB security group\. For more information, see [Authorizing Network Access to a DB Security Group from an IP Range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
+   + If the source MySQL DB instance is running in a VPC, specify the ingress rules in a VPC security group\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
+   + If the source MySQL DB instance isn't running in a VPC, specify the ingress rules in a DB security group\. For more information, see [Authorizing network access to a DB security group from an IP range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
 
 1. If source MySQL DB instance is running in a VPC, configure VPC ACL rules in addition to the security group ingress rule:
    + Configure an ACL ingress rule to allow TCP connections to the port used by the Amazon RDS instance from the IP address of the external MySQL database\.
@@ -67,17 +67,17 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
    For more information about Amazon VPC network ACLs, see [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in the *Amazon VPC User Guide\.*
 
-1. Ensure that the backup retention period is set long enough that no binary logs are purged during the export\. If any of the logs are purged before the export has completed, you must restart replication from the beginning\. For more information about setting the backup retention period, see [Working With Backups](USER_WorkingWithAutomatedBackups.md)\.
+1. Ensure that the backup retention period is set long enough that no binary logs are purged during the export\. If any of the logs are purged before the export has completed, you must restart replication from the beginning\. For more information about setting the backup retention period, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
-1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL Binary Logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
+1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL binary logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
 
-1. Create an Amazon RDS read replica from the source MySQL DB instance to further ensure that the binary logs of the source MySQL DB instance are not purged\. For more information, see [Creating a Read Replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
+1. Create an Amazon RDS read replica from the source MySQL DB instance to further ensure that the binary logs of the source MySQL DB instance are not purged\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
 
 1. After the Amazon RDS read replica has been created, call the `mysql.rds_stop_replication` stored procedure to stop the replication process\. The source MySQL DB instance no longer purges its binary log files, so they are available for the replication process\.
 
-1. \(Optional\) Set both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. We recommend this setting for both parameters\. For information about setting parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+1. \(Optional\) Set both the `max_allowed_packet` parameter and the `slave_max_allowed_packet` parameter to the maximum size to avoid replication errors\. The maximum size for both parameters is 1 GB\. We recommend this setting for both parameters\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
 
-## Copy the Database<a name="MySQL.Procedural.Exporting.NonRDSRepl.CopyData"></a>
+## Copy the database<a name="MySQL.Procedural.Exporting.NonRDSRepl.CopyData"></a>
 
 Perform the following steps to copy the database\.
 
@@ -89,7 +89,7 @@ Perform the following steps to copy the database\.
    + `Master_Log_File`
    + `Exec_Master_Log_Pos`
 
-1. Use the mysqldump utility to create a snapshot, which copies the data from Amazon RDS to your local client computer\. Then run another utility to load the data into the external MySQL database\. Ensure that your client computer has enough space to hold the `mysqldump` files from the databases to be replicated\. This process can take several hours for very large databases\. Follow the directions in [Creating a Data Snapshot Using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
+1. Use the mysqldump utility to create a snapshot, which copies the data from Amazon RDS to your local client computer\. Then run another utility to load the data into the external MySQL database\. Ensure that your client computer has enough space to hold the `mysqldump` files from the databases to be replicated\. This process can take several hours for very large databases\. Follow the directions in [Creating a data snapshot using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
 
    The following example runs `mysqldump` on a client, and then pipes the dump into the `mysql` client utility, which loads the data into the external MySQL database\.
 
@@ -151,7 +151,7 @@ Perform the following steps to copy the database\.
        --databases  database database2 > path\rds-dump.sql
    ```
 
-## Complete the Export<a name="MySQL.Procedural.Exporting.NonRDSRepl.CompleteExp"></a>
+## Complete the export<a name="MySQL.Procedural.Exporting.NonRDSRepl.CompleteExp"></a>
 
 Perform the following steps to complete the export\.
 

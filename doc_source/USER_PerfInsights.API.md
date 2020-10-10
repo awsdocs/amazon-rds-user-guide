@@ -1,8 +1,8 @@
-# Retrieving Data with the Performance Insights API<a name="USER_PerfInsights.API"></a>
+# Retrieving data with the Performance Insights API<a name="USER_PerfInsights.API"></a>
 
 The Amazon RDS Performance Insights API provides visibility into the performance of your RDS instance, when Performance Insights is enabled for supported engine types\. Amazon CloudWatch Logs provides the authoritative source for vended monitoring metrics for AWS services\. Performance Insights offers a domain\-specific view of database load measured as average active sessions and provided to API consumers as a two\-dimensional time\-series dataset\. The time dimension of the data provides database load data for each time point in the queried time range\. Each time point decomposes overall load in relation to the requested dimensions, such as `SQL`, `Wait-event`, `User`, or `Host`, measured at that time point\.
 
-Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you can analyze and troubleshoot database performance\. One way to view Performance Insights data is in the AWS Management Console\. Performance Insights also provides a public API so that you can query your own data\. The API can be used to offload data into a database, add Performance Insights data to existing monitoring dashboards, or to build monitoring tools\. To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and Disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
+Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you can analyze and troubleshoot database performance\. One way to view Performance Insights data is in the AWS Management Console\. Performance Insights also provides a public API so that you can query your own data\. The API can be used to offload data into a database, add Performance Insights data to existing monitoring dashboards, or to build monitoring tools\. To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
 
 The Performance Insights API provides the following operations\.
 
@@ -26,7 +26,7 @@ aws pi help
 
 If you don't have the AWS CLI installed, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the *AWS CLI User Guide *for information about installing it\.
 
-## Retrieving Time\-Series Metrics<a name="USER_PerfInsights.API.TimeSeries"></a>
+## Retrieving time\-series metrics<a name="USER_PerfInsights.API.TimeSeries"></a>
 
 The `GetResourceMetrics` operation retrieves one or more time\-series metrics from the Performance Insights data\. `GetResourceMetrics` requires a metric and time period, and returns a response with a list of data points\. 
 
@@ -39,7 +39,7 @@ All the metrics returned by `GetResourceMetrics` are standard time\-series metri
 **Note**  
 `GetResourceMetrics` can also return the `db.sampleload` metric, but the `db.load` metric is appropriate in most cases\.
 
-For information about the counter metrics returned by `GetResourceMetrics`, see [Customizing the Performance Insights Dashboard](USER_PerfInsights_Counters.md)\.
+For information about the counter metrics returned by `GetResourceMetrics`, see [Customizing the Performance Insights dashboard](USER_PerfInsights_Counters.md)\.
 
 The following calculations are supported for the metrics:
 + Average – The average value for the metric over a period of time\. Append `.avg` to the metric name\.
@@ -72,17 +72,17 @@ For the `--metric-queries` option, specify one or more queries that you want to 
 }
 ```
 
-## AWS CLI Examples for Performance Insights<a name="USER_PerfInsights.API.Examples"></a>
+## AWS CLI examples for Performance Insights<a name="USER_PerfInsights.API.Examples"></a>
 
 The following are several examples that use the AWS CLI for Performance Insights\.
 
 **Topics**
-+ [Retrieving Counter Metrics](#USER_PerfInsights.API.Examples.CounterMetrics)
-+ [Retrieving the DB Load Average for Top Wait Events](#USER_PerfInsights.API.Examples.DBLoadAverage)
-+ [Retrieving the DB Load Average for Top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)
++ [Retrieving counter metrics](#USER_PerfInsights.API.Examples.CounterMetrics)
++ [Retrieving the DB load average for top wait events](#USER_PerfInsights.API.Examples.DBLoadAverage)
++ [Retrieving the DB load average for top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)
 + [Retrieving the DB Load Average Filtered by SQL](#USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL)
 
-### Retrieving Counter Metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
+### Retrieving counter metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
 
 The following screenshot shows two counter metrics charts in the AWS Management Console\.
 
@@ -221,9 +221,9 @@ The `MetricList` in the response has a number of entries, each with a `Key` and 
 
 Because the query is for two different counter metrics, there are two elements in the response `MetricList`\.
 
-### Retrieving the DB Load Average for Top Wait Events<a name="USER_PerfInsights.API.Examples.DBLoadAverage"></a>
+### Retrieving the DB load average for top wait events<a name="USER_PerfInsights.API.Examples.DBLoadAverage"></a>
 
-The following example is the same query that the AWS Management Console uses to generate a stacked area line graph\. This example retrieves the `db.load.avg` for the last hour with load divided according to the top seven wait events\. The command is the same as the command in [Retrieving Counter Metrics](#USER_PerfInsights.API.Examples.CounterMetrics)\. However, the query\.json file has the following contents\.
+The following example is the same query that the AWS Management Console uses to generate a stacked area line graph\. This example retrieves the `db.load.avg` for the last hour with load divided according to the top seven wait events\. The command is the same as the command in [Retrieving counter metrics](#USER_PerfInsights.API.Examples.CounterMetrics)\. However, the query\.json file has the following contents\.
 
 ```
 [
@@ -320,7 +320,7 @@ The response looks similar to the following\.
 
 In this response, there are eight entries in the `MetricList`\. There is one entry for the total `db.load.avg`, and seven entries each for the `db.load.avg` divided according to one of the top seven wait events\. Unlike in the first example, because there was a grouping dimension, there must be one key for each grouping of the metric\. There can't be only one key for each metric, as in the basic counter metric use case\.
 
-### Retrieving the DB Load Average for Top SQL<a name="USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL"></a>
+### Retrieving the DB load average for top SQL<a name="USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL"></a>
 
 The following example groups `db.wait_events` by the top 10 SQL statements\. There are two different groups for SQL statements:
 + `db.sql` – The full SQL statement, such as `select * from customers where customer_id = 123`
@@ -328,7 +328,7 @@ The following example groups `db.wait_events` by the top 10 SQL statements\. The
 
 When analyzing database performance, it can be useful to consider SQL statements that only differ by their parameters as one logic item\. So, you can use `db.sql_tokenized` when querying\. However, especially when you are interested in explain plans, sometimes it's more useful to examine full SQL statements with parameters, and query grouping by `db.sql`\. There is a parent\-child relationship between tokenized and full SQL, with multiple full SQL \(children\) grouped under the same tokenized SQL \(parent\)\.
 
-The command in this example is the similar to the command in [Retrieving the DB Load Average for Top Wait Events](#USER_PerfInsights.API.Examples.DBLoadAverage)\. However, the query\.json file has the following contents\.
+The command in this example is the similar to the command in [Retrieving the DB load average for top wait events](#USER_PerfInsights.API.Examples.DBLoadAverage)\. However, the query\.json file has the following contents\.
 
 ```
 [
@@ -437,7 +437,7 @@ When querying, it might be convenient to specify a `Group` in `GroupBy`\. Howeve
 
 The preceding image shows that a particular query is selected, and the top average active sessions stacked area line graph is scoped to that query\. Although the query is still for the top seven overall wait events, the value of the response is filtered\. The filter causes it to take into account only sessions that are a match for the particular filter\.
 
-The corresponding API query in this example is similar to the command in [Retrieving the DB Load Average for Top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)\. However, the query\.json file has the following contents\.
+The corresponding API query in this example is similar to the command in [Retrieving the DB load average for top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)\. However, the query\.json file has the following contents\.
 
 ```
 [

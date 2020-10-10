@@ -1,10 +1,10 @@
-# Migrating Data from a MySQL DB Snapshot to a MariaDB DB Instance<a name="USER_Migrate_MariaDB"></a>
+# Migrating data from a MySQL DB snapshot to a MariaDB DB instance<a name="USER_Migrate_MariaDB"></a>
 
-You can migrate an Amazon RDS MySQL DB snapshot to a new DB instance running MariaDB 10\.1 using the AWS Management Console, AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6\. To learn how to create an RDS MySQL DB snapshot, see [Creating a DB Snapshot](USER_CreateSnapshot.md)\.
+You can migrate an Amazon RDS MySQL DB snapshot to a new DB instance running MariaDB 10\.1 using the AWS Management Console, AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6\. To learn how to create an RDS MySQL DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
-After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associated with the default DB parameter group and option group\. After you restore the DB snapshot, you can associate a custom DB parameter group for the new DB instance\. However, a MariaDB parameter group has a different set of configurable system variables\. For information about the differences between MySQL and MariaDB system variables, see [ System Variable Differences Between MariaDB 10\.1 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-101-and-mysql-56/)\. To learn about DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. To learn about option groups, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\. 
+After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associated with the default DB parameter group and option group\. After you restore the DB snapshot, you can associate a custom DB parameter group for the new DB instance\. However, a MariaDB parameter group has a different set of configurable system variables\. For information about the differences between MySQL and MariaDB system variables, see [ System variable differences between MariaDB 10\.1 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-101-and-mysql-56/)\. To learn about DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. To learn about option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
-## Incompatibilities Between MariaDB and MySQL<a name="USER_Migrate_MariaDB.Incompatibilities"></a>
+## Incompatibilities between MariaDB and MySQL<a name="USER_Migrate_MariaDB.Incompatibilities"></a>
 
 Incompatibilities between MySQL and MariaDB include the following:
 + You can't migrate a DB snapshot created with MySQL 5\.5 to MariaDB 10\.1\.
@@ -20,10 +20,14 @@ Incompatibilities between MySQL and MariaDB include the following:
   WHERE (User, Host) = ('master_user_name', %);
   FLUSH PRIVILEGES;
   ```
-+ If your RDS master user account uses the SHA\-256 password hash, the password has to be reset using the RDS [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, [ ModifyDBInstance ](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, or the AWS Management Console\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
-+ MariaDB doesn't support the Memcached plugin; however, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached Plugin Internals](https://dev.mysql.com/doc/refman/5.6/en/innodb-memcached-internals.html)\.
++ If your RDS master user account uses the SHA\-256 password hash, the password has to be reset using the RDS [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command, [ ModifyDBInstance ](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation, or the AWS Management Console\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
++ MariaDB doesn't support the Memcached plugin; however, the data used by the Memcached plugin is stored as InnoDB tables\. After you migrate a MySQL DB snapshot, you can access the data used by the Memcached plugin using SQL\. For more information about the innodb\_memcache database, see [InnoDB memcached plugin internals](https://dev.mysql.com/doc/refman/5.6/en/innodb-memcached-internals.html)\.
 
-## Console<a name="USER_Migrate_MariaDB.CON"></a>
+## Performing the migration<a name="USER_Migrate_MariaDB.Migrating"></a>
+
+You can migrate an Amazon RDS MySQL DB snapshot to a new MariaDB DB instance using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+### Console<a name="USER_Migrate_MariaDB.CON"></a>
 
 **To migrate a MySQL DB snapshot to a MariaDB DB instance**
 
@@ -36,8 +40,8 @@ Incompatibilities between MySQL and MariaDB include the following:
 1. For **Migrate to DB Engine**, choose **mariadb**\.
 
 1. On the **Migrate Database** page, provide additional information that RDS needs to launch the MariaDB DB instance\.
-   + **DB Engine Version**: Choose the version of the MariaDB database engine that you want to use\. For more information, see [Upgrading the MariaDB DB Engine](USER_UpgradeDBInstance.MariaDB.md)\. 
-   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS SSD Storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB Instance Classes](Concepts.DBInstanceClass.md)\. 
+   + **DB Engine Version**: Choose the version of the MariaDB database engine that you want to use\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\. 
+   + **DB Instance Class**: Choose a DB instance class that has the required storage and capacity for your database, for example db\.r3\.large\. For any production application that requires fast and consistent I/O performance, we recommend Provisioned IOPS storage\. For more information, see [Provisioned IOPS SSD storage](CHAP_Storage.md#USER_PIOPS)\. MariaDB 10\.1 does not support previous\-generation DB instance classes\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
    + **Multi\-AZ Deployment**: Choose **Yes** to deploy your DB instance in multiple Availability Zones; otherwise, **No**\. For more information, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
    + **DB Snapshot ID**: Type a name for the DB snapshot identifier\. 
 
@@ -67,14 +71,14 @@ Incompatibilities between MySQL and MariaDB include the following:
    + **Database Port**: Type the default port to be used when connecting to instances in the DB instance\. The default is `3306`\.
 
      You might be behind a corporate firewall that doesn't allow access to default ports such as the MySQL default port `3306`\. In this case, provide a port value that your corporate firewall allows\.
-   + **Option Group**: Choose the option group that you want associated with the DB instance\. For more information, see [Working with Option Groups](USER_WorkingWithOptionGroups.md)\.
+   + **Option Group**: Choose the option group that you want associated with the DB instance\. For more information, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
    + **Encryption**: Choose **Enable Encryption** for your new MariaDB DB instance to be encrypted "at rest\." If you choose **Enable Encryption**, you will be required to choose an AWS KMS encryption key as the **Master Key** value\.
    +  **Auto minor version upgrade**: Choose **Enable auto minor version upgrade** to enable your DB instance to receive preferred minor DB engine version upgrades automatically when they become available\. Amazon RDS performs automatic minor version upgrades in the maintenance window\. The **Auto minor version upgrade** option only applies to upgrades to MySQL minor engine versions for your MariaDB DB instance\. It doesn't apply to regular patches applied to maintain system stability\.   
 ![\[Migrate to MariaDB from MySQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMariaDB.png)
 
 1. Choose **Migrate**\.
 
-## AWS CLI<a name="USER_Migrate_MariaDB.CLI"></a>
+### AWS CLI<a name="USER_Migrate_MariaDB.CLI"></a>
 
 To migrate data from a MySQL DB snapshot to a MariaDB DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) command with the following parameters:
 + \-\-db\-instance\-identifier – Name of the DB instance to create from the DB snapshot\.
@@ -99,7 +103,7 @@ For Windows:
 4.     --engine mariadb
 ```
 
-## API<a name="USER_Migrate_MariaDB.API"></a>
+### API<a name="USER_Migrate_MariaDB.API"></a>
 
 To migrate data from a MySQL DB snapshot to a MariaDB DB instance, call the Amazon RDS API operation [ `RestoreDBInstanceFromDBSnapshot`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)\.
 

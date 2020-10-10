@@ -1,4 +1,4 @@
-# Analyzing Your Database Workload on an Amazon RDS DB Instance with SQL Server Tuning Advisor<a name="Appendix.SQLServer.CommonDBATasks.Workload"></a>
+# Analyzing your database workload on an Amazon RDS DB instance with SQL Server Tuning Advisor<a name="Appendix.SQLServer.CommonDBATasks.Workload"></a>
 
 The Database Engine Tuning Advisor is a client application provided by Microsoft that analyzes database workload and recommends an optimal set of indexes for your Microsoft SQL Server databases based on the kinds of queries you run\. Like SQL Server Management Studio, you run Tuning Advisor from a client computer that connects to your Amazon RDS DB instance that is running SQL Server\. The client computer can be a local computer that you run on premises within your own network or it can be an Amazon EC2 Windows instance that is running in the same region as your Amazon RDS DB instance\.
 
@@ -14,7 +14,7 @@ For a client\-side trace, when a sufficient amount of trace data has been captur
 
 For a server\-side trace, you must get the trace files on the DB instance into a suitable workload file or you can save the trace to a table on the DB instance after the trace completes\. You can use the SQL Server Profiler to save the trace to a file on your local computer or have the Tuning Advisor read from the trace table on the DB instance\.
 
-## Running a Client\-Side Trace on a SQL Server DB Instance<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.ClientSide"></a>
+## Running a client\-side trace on a SQL Server DB instance<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.ClientSide"></a>
 
  **To run a client\-side trace on a SQL Server DB instance** 
 
@@ -28,7 +28,7 @@ For a server\-side trace, you must get the trace files on the DB instance into a
 
 1. Select **Stop Trace** from the **File** menu when you have completed the trace\. Save the results as a file or as a trace table on you DB instance\.
 
-## Running a Server\-Side Trace on a SQL Server DB Instance<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.ServerSide"></a>
+## Running a server\-side trace on a SQL Server DB instance<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.ServerSide"></a>
 
 Writing scripts to create a server\-side trace can be complex and is beyond the scope of this document\. This section contains sample scripts that you can use as examples\. As with a client\-side trace, the goal is to create a workload file or trace table that you can open using the Database Engine Tuning Advisor\.
 
@@ -79,7 +79,7 @@ SELECT * INTO RDSTrace_1
 FROM fn_trace_gettable('D:\rdsdbdata\Log\RDSTrace_1.trc', 1);
 ```
 
-## Running Tuning Advisor with a Trace<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.Running"></a>
+## Running Tuning Advisor with a trace<a name="Appendix.SQLServer.CommonDBATasks.TuningAdvisor.Running"></a>
 
 Once you create a trace, either as a local file or as a database table, you can then run Tuning Advisor against your DB instance\. Microsoft includes documentation on using the Database Engine Tuning Advisor in [MSDN](http://msdn.microsoft.com/en-us/library/ms173494%28v=sql.105%29.aspx)\. Using Tuning Advisor with Amazon RDS is the same process as when working with a standalone, remote SQL Server instance\. You can either use the Tuning Advisor UI on your client machine or use the dta\.exe utility from the command line\. In both cases, you must connect to the Amazon RDS DB instance using the endpoint for the DB instance and provide your master user name and master user password when using Tuning Advisor\. 
 

@@ -1,4 +1,4 @@
-# Master User Account Privileges<a name="UsingWithRDS.MasterAccounts"></a>
+# Master user account privileges<a name="UsingWithRDS.MasterAccounts"></a>
 
 When you create a new DB instance, the default master user that you use gets certain privileges for that DB instance\. The following table shows the privileges and database roles the master user gets for each of the database engines\.
 
@@ -6,10 +6,10 @@ When you create a new DB instance, the default master user that you use gets cer
 We strongly recommend that you do not use the master user directly in your applications\. Instead, adhere to the best practice of using a database user created with the minimal privileges required for your application\.
 
 **Note**  
-If you accidentally delete the permissions for the master user, you can restore them by modifying the DB instance and setting a new master user password\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+If you accidentally delete the permissions for the master user, you can restore them by modifying the DB instance and setting a new master user password\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 
-| Database Engine | System Privilege | Database Role | 
+| Database engine | System privilege | Database role | 
 | --- | --- | --- | 
 | MySQL and MariaDB | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `RELOAD`, `PROCESS`, `REFERENCES`, `INDEX`, `ALTER`, `SHOW DATABASES`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `REPLICATION CLIENT`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `CREATE USER`, `EVENT`, `TRIGGER ON *.* WITH GRANT OPTION`, `REPLICATION SLAVE` \(only for Amazon RDS MySQL versions 5\.6, 5\.7 and 8\.0, Amazon RDS MariaDB\)  | — | 
 | PostgreSQL | `CREATE ROLE`, `CREATE DB`, `PASSWORD VALID UNTIL INFINITY`, `CREATE EXTENSION`, `ALTER EXTENSION`, `DROP EXTENSION`, `CREATE TABLESPACE`, `ALTER < OBJECT> OWNER`, `CHECKPOINT`, `PG_CANCEL_BACKEND()`, `PG_TERMINATE_BACKEND()`, `SELECT PG_STAT_REPLICATION`, `EXECUTE PG_STAT_STATEMENTS_RESET()`, `OWN POSTGRES_FDW_HANDLER()`, `OWN POSTGRES_FDW_VALIDATOR()`, `OWN POSTGRES_FDW`, `EXECUTE PG_BUFFERCACHE_PAGES()`, `SELECT PG_BUFFERCACHE` | RDS\_SUPERUSER | 

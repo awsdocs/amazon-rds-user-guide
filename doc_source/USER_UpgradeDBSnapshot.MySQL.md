@@ -1,14 +1,12 @@
-# Upgrading a MySQL DB Snapshot<a name="USER_UpgradeDBSnapshot.MySQL"></a>
+# Upgrading a MySQL DB snapshot<a name="USER_UpgradeDBSnapshot.MySQL"></a>
 
-With Amazon RDS, you can create a storage volume DB snapshot of your MySQL DB instance\. When you create a DB snapshot, the snapshot is based on the engine version used by your Amazon RDS instance\. In addition to upgrading the DB engine version of your DB instance, you can also upgrade the engine version for your DB snapshots\. For example, you can upgrade DB snapshots created from the MySQL 5\.1 engine to DB snapshots for the MySQL 5\.5 engine\. After restoring a DB snapshot upgraded to a new engine version, you should test that the upgrade was successful\. To learn how to test a major version upgrade, see [Testing an Upgrade](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.UpgradeTesting)\. To learn how to restore a DB snapshot, see [Restoring from a DB Snapshot](USER_RestoreFromSnapshot.md)\.
+With Amazon RDS, you can create a storage volume DB snapshot of your MySQL DB instance\. When you create a DB snapshot, the snapshot is based on the engine version used by your Amazon RDS instance\. In addition to upgrading the DB engine version of your DB instance, you can also upgrade the engine version for your DB snapshots\. For example, you can upgrade DB snapshots created from the MySQL 5\.1 engine to DB snapshots for the MySQL 5\.5 engine\. After restoring a DB snapshot upgraded to a new engine version, you should test that the upgrade was successful\. To learn how to test a major version upgrade, see [Testing an upgrade](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.UpgradeTesting)\. To learn how to restore a DB snapshot, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
 Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5\.1 to MySQL 5\.5\.
 
-## Upgrading a MySQL DB Snapshot<a name="USER_UpgradeDBSnapshot.MySQL.Upgrading"></a>
-
 You can upgrade manual DB snapshots, which can be encrypted or not encrypted, from MySQL 5\.1 to MySQL 5\.5 within the same AWS Region\. You can't upgrade automated DB snapshots that are created during the automated backup process\.
 
-### Console<a name="USER_UpgradeDBSnapshot.MySQL.Console"></a>
+## Console<a name="USER_UpgradeDBSnapshot.MySQL.Console"></a>
 
 **To upgrade a DB snapshot**
 

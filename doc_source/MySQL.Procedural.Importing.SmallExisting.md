@@ -1,6 +1,6 @@
-# Importing Data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB Instance<a name="MySQL.Procedural.Importing.SmallExisting"></a>
+# Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance<a name="MySQL.Procedural.Importing.SmallExisting"></a>
 
-If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a Backup into an Amazon RDS MySQL DB Instance](MySQL.Procedural.Importing.md)\. 
+If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)\. 
 
 You can also import data from an existing MySQL or MariaDB database to an Amazon RDS MySQL or MariaDB DB instance\. You do so by copying the database with [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and piping it directly into the Amazon RDS MySQL or MariaDB DB instance\. The `mysqldump` command\-line utility is commonly used to make backups and transfer data from one MySQL or MariaDB server to another\. It is included with MySQL and MariaDB client software\.
 

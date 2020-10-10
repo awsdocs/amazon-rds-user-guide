@@ -1,17 +1,17 @@
-# Customizing the Performance Insights Dashboard<a name="USER_PerfInsights_Counters"></a>
+# Customizing the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
 
 With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
 
 **Topics**
-+ [Performance Insights Operating System Counters](#USER_PerfInsights_Counters.OS)
-+ [Performance Insights Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
-+ [Performance Insights Counters for Amazon RDS for Microsoft SQL Server](#USER_PerfInsights_Counters.SQLServer)
-+ [Performance Insights Counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
-+ [Performance Insights Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
++ [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)
++ [Performance Insights counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL)
++ [Performance Insights counters for Amazon RDS for Microsoft SQL Server](#USER_PerfInsights_Counters.SQLServer)
++ [Performance Insights counters for Amazon RDS for Oracle](#USER_PerfInsights_Counters.Oracle)
++ [Performance Insights counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL)
 
-## Performance Insights Operating System Counters<a name="USER_PerfInsights_Counters.OS"></a>
+## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
 
-The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by Using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
+The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
 
 
 | Counter | Type | Metric | 
@@ -78,15 +78,15 @@ The following operating system counters are available with Performance Insights 
 | tx | network | os\.network\.tx | 
 | numVCPUs | general | os\.general\.numVCPUs | 
 
-## Performance Insights Counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
+## Performance Insights counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL"></a>
 
 The following database counters are available with Performance Insights for Amazon RDS for MariaDB and MySQL\.
 
 **Topics**
-+ [Native Counters for RDS MariaDB and RDS MySQL](#USER_PerfInsights_Counters.MySQL.Native)
-+ [Non\-Native Counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
++ [Native counters for RDS MariaDB and RDS MySQL](#USER_PerfInsights_Counters.MySQL.Native)
++ [Non\-native counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
 
-### Native Counters for RDS MariaDB and RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
+### Native counters for RDS MariaDB and RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
 You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
@@ -133,7 +133,7 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Opened\_table\_definitions | Cache | Tables | db\.Cache\.Opened\_table\_definitions | 
 | Qcache\_hits | Cache | Queries | db\.Cache\.Qcache\_hits | 
 
-### Non\-Native Counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
+### Non\-native counters for Amazon RDS for MariaDB and MySQL<a name="USER_PerfInsights_Counters.MySQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 
@@ -151,11 +151,11 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_lock\_timeouts | Locks | db\.Locks\.innodb\_lock\_timeouts | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
 | innodb\_row\_lock\_waits | Locks | db\.Locks\.innodb\_row\_lock\_waits | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
 
-## Performance Insights Counters for Amazon RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer"></a>
+## Performance Insights counters for Amazon RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer"></a>
 
 The following database counters are available with Performance Insights for RDS for Microsoft SQL Server\.
 
-### Native Counters for RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer.Native"></a>
+### Native counters for RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer.Native"></a>
 
 You can find definitions for these native metrics in [Use SQL Server Objects](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/use-sql-server-objects?view=sql-server-2017) in the Microsoft SQL Server documentation\.
 
@@ -183,11 +183,11 @@ You can find definitions for these native metrics in [Use SQL Server Objects](ht
 | SQL Compilations | [SQL Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-sql-statistics-object?view=sql-server-2017) | Compilations per second | db\.SQL Statistics\.SQL Compilations | 
 | SQL Re\-Compilations | [SQL Statistics](https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-sql-statistics-object?view=sql-server-2017) | Re\-compilations per second | db\.SQL Statistics\.SQL Re\-Compilations | 
 
-## Performance Insights Counters for Amazon RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle"></a>
+## Performance Insights counters for Amazon RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle"></a>
 
 The following database counters are available with Performance Insights for RDS for Oracle\.
 
-### Native Counters for RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
+### Native counters for RDS for Oracle<a name="USER_PerfInsights_Counters.Oracle.Native"></a>
 
 You can find definitions for these native metrics in [Statistics Descriptions](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/statistics-descriptions-2.html#GUID-2FBC1B7E-9123-41DD-8178-96176260A639) in the Oracle documentation\.
 
@@ -220,15 +220,15 @@ For the `CPU used by this session` counter metric, the unit has been transformed
 | DB block gets from cache | Cache | Gets per second | db\.Cache\.db block gets from cache | 
 | Consistent gets | Cache | Gets per second | db\.Cache\.consistent gets | 
 
-## Performance Insights Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL"></a>
+## Performance Insights counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL"></a>
 
 The following database counters are available with Performance Insights for Amazon RDS for PostgreSQL\.
 
 **Topics**
-+ [Native Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.Native)
-+ [Non\-Native Counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.NonNative)
++ [Native counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.Native)
++ [Non\-native counters for Amazon RDS for PostgreSQL](#USER_PerfInsights_Counters.PostgreSQL.NonNative)
 
-### Native Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.Native"></a>
+### Native counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.Native"></a>
 
 You can find definitions for these native metrics in [Viewing Statistics](https://www.postgresql.org/docs/10/monitoring-stats.html#MONITORING-STATS-VIEWS) in the PostgreSQL documentation\.
 
@@ -265,7 +265,7 @@ You can find definitions for these native metrics in [Viewing Statistics](https:
 | archived\_count | Write\-ahead log \(WAL\) | Files per minute | db\.WAL\.archived\_count | 
 | archive\_failed\_count | WAL | Files per minute | db\.WAL\.archive\_failed\_count | 
 
-### Non\-Native Counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.NonNative"></a>
+### Non\-native counters for Amazon RDS for PostgreSQL<a name="USER_PerfInsights_Counters.PostgreSQL.NonNative"></a>
 
 Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native metric can be a metric that you get with a specific query\. A non\-native metric also can be a derived metric, where two or more native counters are used in calculations for ratios, hit rates, or latencies\.
 

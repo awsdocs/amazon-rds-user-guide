@@ -1,26 +1,26 @@
-# Microsoft SQL Server Database Log Files<a name="USER_LogAccess.Concepts.SQLServer"></a>
+# Microsoft SQL Server database log files<a name="USER_LogAccess.Concepts.SQLServer"></a>
 
-You can access Microsoft SQL Server error logs, agent logs, trace files, and dump files by using the Amazon RDS console, AWS CLI, or RDS API\. For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS Database Log Files](USER_LogAccess.md)\. 
+You can access Microsoft SQL Server error logs, agent logs, trace files, and dump files by using the Amazon RDS console, AWS CLI, or RDS API\. For more information about viewing, downloading, and watching file\-based database logs, see [Amazon RDS database log files](USER_LogAccess.md)\. 
 
-## Retention Schedule<a name="USER_LogAccess.Concepts.SQLServer.Retention"></a>
+## Retention schedule<a name="USER_LogAccess.Concepts.SQLServer.Retention"></a>
 
 Log files are rotated each day and whenever your DB instance is restarted\. The following is the retention schedule for Microsoft SQL Server logs on Amazon RDS\. 
 
 
 ****  
 
-| Log Type | Retention Schedule | 
+| Log type | Retention schedule | 
 | --- | --- | 
 |  Error logs  |  A maximum of 30 error logs are retained\. Amazon RDS may delete error logs older than 7 days\.    | 
 |  Agent logs  |  A maximum of 10 agent logs are retained\. Amazon RDS may delete agent logs older than 7 days\.    | 
-|  Trace files  |  Trace files are retained according to the trace file retention period of your DB instance\. The default trace file retention period is 7 days\. To modify the trace file retention period for your DB instance, see [Setting the Retention Period for Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
-|  Dump files  |  Dump files are retained according to the dump file retention period of your DB instance\. The default dump file retention period is 7 days\. To modify the dump file retention period for your DB instance, see [Setting the Retention Period for Trace and Dump Files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
+|  Trace files  |  Trace files are retained according to the trace file retention period of your DB instance\. The default trace file retention period is 7 days\. To modify the trace file retention period for your DB instance, see [Setting the retention period for trace and dump files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
+|  Dump files  |  Dump files are retained according to the dump file retention period of your DB instance\. The default dump file retention period is 7 days\. To modify the dump file retention period for your DB instance, see [Setting the retention period for trace and dump files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
 
-## Viewing the SQL Server Error Log by Using the rds\_read\_error\_log Procedure<a name="USER_LogAccess.Concepts.SQLServer.Proc"></a>
+## Viewing the SQL Server error log by using the rds\_read\_error\_log procedure<a name="USER_LogAccess.Concepts.SQLServer.Proc"></a>
 
-You can use the Amazon RDS stored procedure `rds_read_error_log` to view error logs and agent logs\. For more information, see [Viewing Error and Agent Logs](Appendix.SQLServer.CommonDBATasks.Logs.md#Appendix.SQLServer.CommonDBATasks.Logs.SP)\. 
+You can use the Amazon RDS stored procedure `rds_read_error_log` to view error logs and agent logs\. For more information, see [Viewing error and agent logs](Appendix.SQLServer.CommonDBATasks.Logs.md#Appendix.SQLServer.CommonDBATasks.Logs.SP)\. 
 
-## Publishing SQL Server Logs to Amazon CloudWatch Logs<a name="USER_LogAccess.SQLServer.PublishtoCloudWatchLogs"></a>
+## Publishing SQL Server logs to Amazon CloudWatch Logs<a name="USER_LogAccess.SQLServer.PublishtoCloudWatchLogs"></a>
 
 With Amazon RDS for SQL Server, you can publish error and agent log events directly to Amazon CloudWatch Logs\. Analyze the log data with CloudWatch Logs, then use CloudWatch to create alarms and view metrics\.
 

@@ -1,10 +1,10 @@
-# Rotating Your SSL/TLS Certificate<a name="UsingWithRDS.SSL-certificate-rotation"></a>
+# Rotating your SSL/TLS certificate<a name="UsingWithRDS.SSL-certificate-rotation"></a>
 
 As of March 5, 2020, Amazon RDS CA\-2015 certificates have expired\. If you use or plan to use Secure Sockets Layer \(SSL\) or Transport Layer Security \(TLS\) with certificate verification to connect to your RDS DB instances, you require Amazon RDS CA\-2019 certificates, which are enabled by default for new DB instances\. If you currently do not use SSL/TLS with certificate verification, you might still have expired CA\-2015 certificates and must update them to CA\-2019 certificates if you plan to use SSL/TLS with certificate verification to connect to your RDS databases\. 
 
 Follow these instructions to complete your updates\. Before you update your DB instances to use the new CA certificate, make sure that you update your clients or applications connecting to your RDS databases\.
 
-Amazon RDS provides new CA certificates as an AWS security best practice\. For information about the new certificates and the supported AWS Regions, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+Amazon RDS provides new CA certificates as an AWS security best practice\. For information about the new certificates and the supported AWS Regions, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 **Note**  
 Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, when you rotate your SSL/TLS certificate, you don't need to update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
@@ -13,30 +13,30 @@ Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If
 If you are using a Go version 1\.15 application with a DB instance that was created or updated to the `rds-ca-2019` certificate prior to July 28, 2020, you must update the certificate again\. Run the `modify-db-instance` command shown in the AWS CLI section using `rds-ca-2019` as the CA certificate identifier\. In this case, it isn't possible to update the certificate using the AWS Management Console\. If you created your DB instance or updated its certificate after July 28, 2020, no action is required\. For more information, see [Go GitHub issue \#39568](https://github.com/golang/go/issues/39568)\.
 
 **Topics**
-+ [Updating Your CA Certificate by Modifying Your DB Instance](#UsingWithRDS.SSL-certificate-rotation-updating)
-+ [Updating Your CA Certificate by Applying DB Instance Maintenance](#UsingWithRDS.SSL-certificate-rotation-maintenance)
-+ [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)
++ [Updating your CA certificate by modifying your DB instance](#UsingWithRDS.SSL-certificate-rotation-updating)
++ [Updating your CA certificate by applying DB instance maintenance](#UsingWithRDS.SSL-certificate-rotation-maintenance)
++ [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)
 
-## Updating Your CA Certificate by Modifying Your DB Instance<a name="UsingWithRDS.SSL-certificate-rotation-updating"></a>
+## Updating your CA certificate by modifying your DB instance<a name="UsingWithRDS.SSL-certificate-rotation-updating"></a>
 
 Complete the following steps to update your CA certificate\.
 
 **To update your CA certificate by modifying your DB instance**
 
-1. Download the new SSL/TLS certificate as described in [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+1. Download the new SSL/TLS certificate as described in [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. Update your applications to use the new SSL/TLS certificate\.
 
    The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
 
    For information about checking for SSL/TLS connections and updating applications for each DB engine, see the following topics:
-   + [Updating Applications to Connect to MariaDB DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mariadb.md)
-   + [Updating Applications to Connect to Microsoft SQL Server DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-sqlserver.md)
-   + [Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mysql.md)
-   + [Updating Applications to Connect to Oracle DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-oracle.md)
-   + [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
+   + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
+   + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
+   + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
+   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
-   For a sample script that updates a trust store for a Linux operating system, see [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
+   For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 **Note**  
 The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\. If you are using the AWS Database Migration Service to migrate a database to a DB instance, we recommend using the certificate bundle to ensure connectivity during the migration\.
 
@@ -105,26 +105,26 @@ aws rds modify-db-instance ^
     --no-apply-immediately
 ```
 
-## Updating Your CA Certificate by Applying DB Instance Maintenance<a name="UsingWithRDS.SSL-certificate-rotation-maintenance"></a>
+## Updating your CA certificate by applying DB instance maintenance<a name="UsingWithRDS.SSL-certificate-rotation-maintenance"></a>
 
 Complete the following steps to update your CA certificate by applying DB instance maintenance\.
 
 **To update your CA certificate by applying DB instance maintenance**
 
-1. Download the new SSL/TLS certificate as described in [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+1. Download the new SSL/TLS certificate as described in [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. <a name="UpdateAppsForSSL"></a>Update your database applications to use the new SSL/TLS certificate\.
 
    The methods for updating applications for new SSL/TLS certificates depend on your specific applications\. Work with your application developers to update the SSL/TLS certificates for your applications\.
 
    For information about checking for SSL/TLS connections and updating applications for each DB engine, see the following topics:
-   + [Updating Applications to Connect to MariaDB DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mariadb.md)
-   + [Updating Applications to Connect to Microsoft SQL Server DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-sqlserver.md)
-   + [Updating Applications to Connect to MySQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-mysql.md)
-   + [Updating Applications to Connect to Oracle DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-oracle.md)
-   + [Updating Applications to Connect to PostgreSQL DB Instances Using New SSL/TLS Certificates](ssl-certificate-rotation-postgresql.md)
+   + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
+   + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
+   + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
+   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
-   For a sample script that updates a trust store for a Linux operating system, see [Sample Script for Importing Certificates Into Your Trust Store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
+   For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 **Note**  
 The certificate bundle contains certificates for both the old and new CA, so you can upgrade your application safely and maintain connectivity during the transition period\.
 
@@ -134,7 +134,7 @@ You can choose to apply the change immediately\. By default, this operation is s
 
 You can use the AWS Management Console to apply DB instance maintenance to change the CA certificate from **rds\-ca\-2015** to **rds\-ca\-2019** for multiple DB instances\.
 
-### Updating Your CA Certificate by Applying Maintenance to Multiple DB Instances<a name="UsingWithRDS.SSL-certificate-rotation-maintenance.multiple"></a>
+### Updating your CA certificate by applying maintenance to multiple DB instances<a name="UsingWithRDS.SSL-certificate-rotation-maintenance.multiple"></a>
 
 Use the AWS Management Console to change the CA certificate for multiple DB instances\.
 
@@ -170,15 +170,15 @@ Before scheduling the CA certificate rotation on your database, update any clien
 
 1. Repeat steps 3 and 4 for each DB instance that you want to update\.
 
-## Sample Script for Importing Certificates Into Your Trust Store<a name="UsingWithRDS.SSL-certificate-rotation-sample-script"></a>
+## Sample script for importing certificates into your trust store<a name="UsingWithRDS.SSL-certificate-rotation-sample-script"></a>
 
 The following are sample shell scripts that import the certificate bundle into a trust store\.
 
 **Topics**
-+ [Sample Script for Importing Certificates on Linux](#UsingWithRDS.SSL-certificate-rotation-sample-script.linux)
-+ [Sample Script for Importing Certificates on macOS](#UsingWithRDS.SSL-certificate-rotation-sample-script.macos)
++ [Sample script for importing certificates on Linux](#UsingWithRDS.SSL-certificate-rotation-sample-script.linux)
++ [Sample script for importing certificates on macOS](#UsingWithRDS.SSL-certificate-rotation-sample-script.macos)
 
-### Sample Script for Importing Certificates on Linux<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.linux"></a>
+### Sample script for importing certificates on Linux<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.linux"></a>
 
 The following is a sample shell script that imports the certificate bundle into a trust store on a Linux operating system\.
 
@@ -213,7 +213,7 @@ do
 done
 ```
 
-### Sample Script for Importing Certificates on macOS<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.macos"></a>
+### Sample script for importing certificates on macOS<a name="UsingWithRDS.SSL-certificate-rotation-sample-script.macos"></a>
 
 The following is a sample shell script that imports the certificate bundle into a trust store on macOS\.
 

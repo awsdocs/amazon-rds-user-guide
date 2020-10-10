@@ -1,4 +1,4 @@
-# Getting CloudWatch Events and Amazon EventBridge Events for Amazon RDS<a name="rds-cloud-watch-events"></a>
+# Getting CloudWatch Events and Amazon EventBridge events for Amazon RDS<a name="rds-cloud-watch-events"></a>
 
 Amazon CloudWatch Events and Amazon EventBridge both enable you to automate AWS services and respond to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events and EventBridge nearly in real time\. You can write simple rules to indicate which events interest you and what automated actions to take when an event matches a rule\.
 
@@ -7,13 +7,13 @@ You can set a variety of targets—such as an AWS Lambda function or an Amazon S
 For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\.
 
 **Topics**
-+ [Sending Amazon RDS Events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
-+ [DB Instance Events](#rds-cloudwatch-events.db-instances)
-+ [DB Parameter Group Events](#rds-cloudwatch-events.db-parameter-groups)
-+ [DB Security Group Events](#rds-cloudwatch-events.db-security-groups)
-+ [DB Snapshot Events](#rds-cloudwatch-events.db-snapshots)
++ [Sending Amazon RDS events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
++ [DB instance events](#rds-cloudwatch-events.db-instances)
++ [DB parameter group events](#rds-cloudwatch-events.db-parameter-groups)
++ [DB security group events](#rds-cloudwatch-events.db-security-groups)
++ [DB snapshot events](#rds-cloudwatch-events.db-snapshots)
 
-## Sending Amazon RDS Events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
+## Sending Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
 
 You can create CloudWatch Events rules to send Amazon RDS events to CloudWatch Events\.
 
@@ -43,7 +43,7 @@ Use the following steps to create a CloudWatch Events rule that triggers on an e
 
 1. Choose **Create rule**\.
 
-## DB Instance Events<a name="rds-cloudwatch-events.db-instances"></a>
+## DB instance events<a name="rds-cloudwatch-events.db-instances"></a>
 
 The following is an example of a DB instance event\.
 
@@ -72,7 +72,7 @@ The following is an example of a DB instance event\.
 }
 ```
 
-## DB Parameter Group Events<a name="rds-cloudwatch-events.db-parameter-groups"></a>
+## DB parameter group events<a name="rds-cloudwatch-events.db-parameter-groups"></a>
 
 The following is an example of a DB parameter group event\.
 
@@ -101,7 +101,7 @@ The following is an example of a DB parameter group event\.
 }
 ```
 
-## DB Security Group Events<a name="rds-cloudwatch-events.db-security-groups"></a>
+## DB security group events<a name="rds-cloudwatch-events.db-security-groups"></a>
 
 The following is an example of a DB security group event\.
 
@@ -130,7 +130,7 @@ The following is an example of a DB security group event\.
 }
 ```
 
-## DB Snapshot Events<a name="rds-cloudwatch-events.db-snapshots"></a>
+## DB snapshot events<a name="rds-cloudwatch-events.db-snapshots"></a>
 
 The following is an example of a DB snapshot event\.
 

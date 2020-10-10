@@ -1,4 +1,4 @@
-# Amazon S3 Integration<a name="oracle-s3-integration"></a>
+# Amazon S3 integration<a name="oracle-s3-integration"></a>
 
 You can transfer files between an Amazon RDS for Oracle DB instance and an Amazon S3 bucket\. You can use Amazon S3 integration with Oracle features such as Data Pump\. For example, you can download Data Pump files from Amazon S3 to the DB instance host\.
 
@@ -6,12 +6,12 @@ You can transfer files between an Amazon RDS for Oracle DB instance and an Amazo
 The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 **Topics**
-+ [Prerequisites for Amazon RDS Oracle Integration with Amazon S3](#oracle-s3-integration.preparing)
-+ [Adding the Amazon S3 Integration Option](#oracle-s3-integration.preparing.option-group)
-+ [Transferring Files Between Amazon RDS for Oracle and an Amazon S3 Bucket](#oracle-s3-integration.using)
-+ [Removing the Amazon S3 Integration Option](#oracle-s3-integration.removing)
++ [Prerequisites for Amazon RDS Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
++ [Adding the Amazon S3 integration option](#oracle-s3-integration.preparing.option-group)
++ [Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket](#oracle-s3-integration.using)
++ [Removing the Amazon S3 integration option](#oracle-s3-integration.removing)
 
-## Prerequisites for Amazon RDS Oracle Integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
+## Prerequisites for Amazon RDS Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
 To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\. The Amazon VPC used by your DB instance doesn't need to provide access to the Amazon S3 endpoints\.
 
@@ -37,7 +37,7 @@ To add a role to a DB instance, the status of the DB instance must be `available
    + `ListBucket` – Required to transfer files from an Amazon S3 bucket to Amazon RDS\.
    + `PutObject` – Required to transfer files from Amazon RDS to an Amazon S3 bucket\.
 
-   *Object permissions* are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for Object Operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
+   *Object permissions* are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for object operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
 
 1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
 
@@ -51,7 +51,7 @@ To add a role to a DB instance, the status of the DB instance must be `available
 
    For the Amazon S3 bucket, specify the Amazon S3 bucket to allow access to\. For the object, you can choose **Any** to grant permissions to any object in the bucket\.
 **Note**  
-You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing Access Permissions to Your Amazon S3 Resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
+You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing access permissions to your Amazon S3 resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
 1. \(Optional\) Choose **Add additional permissions** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
 **Note**  
@@ -205,7 +205,7 @@ You can repeat this to add corresponding bucket permission statements to your po
       }'
    ```
 
-   For more information, see [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+   For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
 1. After the role is created, note the ARN of the role\. You need the ARN for a subsequent step\.
 
@@ -257,7 +257,7 @@ You can repeat this to add corresponding bucket permission statements to your po
 
    Replace `your-role-arn` with the role ARN that you noted in a previous step\. `S3_INTEGRATION` must be specified for the `--feature-name` option\.
 
-## Adding the Amazon S3 Integration Option<a name="oracle-s3-integration.preparing.option-group"></a>
+## Adding the Amazon S3 integration option<a name="oracle-s3-integration.preparing.option-group"></a>
 
 To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
 
@@ -267,17 +267,17 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 1. Create a new option group or identify an existing option group to which you can add the `S3_INTEGRATION` option\.
 
-   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+   For information about creating an option group, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
 1. Add the `S3_INTEGRATION` option to the option group\.
 
-   For information about adding an option to an option group, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
+   For information about adding an option to an option group, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ### AWS CLI<a name="oracle-s3-integration.preparing.option-group.cli"></a>
 
@@ -285,7 +285,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 1. Create a new option group or identify an existing option group to which you can add the `S3_INTEGRATION` option\.
 
-   For information about creating an option group, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
+   For information about creating an option group, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\.
 
 1. Add the `S3_INTEGRATION` option to the option group\.
 
@@ -310,11 +310,11 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 1. Create a new Oracle DB instance and associate the option group with it, or modify an Oracle DB instance to associate the option group with it\.
 
-   For information about creating a DB instance, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   For information about creating a DB instance, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+   For information about modifying an Oracle DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## Transferring Files Between Amazon RDS for Oracle and an Amazon S3 Bucket<a name="oracle-s3-integration.using"></a>
+## Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket<a name="oracle-s3-integration.using"></a>
 
 You can use Amazon RDS procedures to upload files from an Oracle DB instance to an Amazon S3 bucket\. You can also use Amazon RDS procedures to download files from an Amazon S3 bucket to an Oracle DB instance\. 
 
@@ -322,20 +322,20 @@ You can use Amazon RDS procedures to upload files from an Oracle DB instance to 
 These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\.
 
 **Topics**
-+ [Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket](#oracle-s3-integration.using.upload)
-+ [Downloading Files from an Amazon S3 Bucket to an Oracle DB Instance](#oracle-s3-integration.using.download)
-+ [Monitoring the Status of a File Transfer](#oracle-s3-integration.using.task-status)
++ [Uploading files from an Oracle DB instance to an Amazon S3 bucket](#oracle-s3-integration.using.upload)
++ [Downloading files from an Amazon S3 bucket to an Oracle DB instance](#oracle-s3-integration.using.download)
++ [Monitoring the status of a file transfer](#oracle-s3-integration.using.task-status)
 
-### Uploading Files from an Oracle DB Instance to an Amazon S3 Bucket<a name="oracle-s3-integration.using.upload"></a>
+### Uploading files from an Oracle DB instance to an Amazon S3 bucket<a name="oracle-s3-integration.using.upload"></a>
 
-To upload files from an Oracle DB instance to an Amazon S3 bucket, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3`\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. For more information about performing RMAN backups, see [Common DBA Recovery Manager \(RMAN\) Tasks for Oracle DB Instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
+To upload files from an Oracle DB instance to an Amazon S3 bucket, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3`\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. For more information about performing RMAN backups, see [Common DBA Recovery Manager \(RMAN\) tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
 
 The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Default | Required | Description | 
+| Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to upload files to\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to upload files from\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   You can only upload files from the specified directory\. You can't upload files in subdirectories in the specified directory\.   | 
@@ -401,14 +401,14 @@ Replace *`task-id`* with the task ID returned by the procedure\.
 **Note**  
 Tasks are executed asynchronously\.
 
-### Downloading Files from an Amazon S3 Bucket to an Oracle DB Instance<a name="oracle-s3-integration.using.download"></a>
+### Downloading files from an Amazon S3 bucket to an Oracle DB instance<a name="oracle-s3-integration.using.download"></a>
 
 To download files from an Amazon S3 bucket to an Oracle DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.download_from_s3`\. The `rdsadmin.rdsadmin_s3_tasks.download_from_s3` procedure has the following parameters\.
 
 
 ****  
 
-| Parameter Name | Data Type | Default | Required | Description | 
+| Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 |  `p_bucket_name`  |  VARCHAR2  |  –  |  required  |  The name of the Amazon S3 bucket to download files from\.   | 
 |  `p_directory_name`  |  VARCHAR2  |  –  |  required  |  The name of the Oracle directory object to download files to\. The directory can be any user\-created directory object or the Data Pump directory, such as `DATA_PUMP_DIR`\.   | 
@@ -457,11 +457,11 @@ Replace *`task-id`* with the task ID returned by the procedure\.
 
 **Note**  
 Tasks are executed asynchronously\.  
-You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a directory\. For more information, see [FREMOVE Procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
+You can use the `UTL_FILE.FREMOVE` Oracle procedure to remove files from a directory\. For more information, see [FREMOVE procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
 
-### Monitoring the Status of a File Transfer<a name="oracle-s3-integration.using.task-status"></a>
+### Monitoring the status of a file transfer<a name="oracle-s3-integration.using.task-status"></a>
 
-File transfer tasks publish Amazon RDS events when they start and when they complete\. For information about viewing events, see [Viewing Amazon RDS Events](USER_ListEvents.md)\.
+File transfer tasks publish Amazon RDS events when they start and when they complete\. For information about viewing events, see [Viewing Amazon RDS events](USER_ListEvents.md)\.
 
 You can view the status of an ongoing task in a bdump file\. The bdump files are located in the `/rdsdbdata/log/trace` directory\. Each bdump file name is in the following format\.
 
@@ -480,10 +480,10 @@ You can use the `rdsadmin.rds_file_util.read_text_file` stored procedure to view
 SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','dbtask-1546988886389-2444.log'));            
 ```
 
-## Removing the Amazon S3 Integration Option<a name="oracle-s3-integration.removing"></a>
+## Removing the Amazon S3 integration option<a name="oracle-s3-integration.removing"></a>
 
 You can remove Amazon S3 integration option from a DB instance\. 
 
 To remove the Amazon S3 integration option from a DB instance, do one of the following: 
-+ To remove the Amazon S3 integration option from multiple DB instances, remove the `S3_INTEGRATION` option from the option group to which the DB instances belong\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ To remove the Amazon S3 integration option from a single DB instance, modify the DB instance and specify a different option group that doesn't include the `S3_INTEGRATION` option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ To remove the Amazon S3 integration option from multiple DB instances, remove the `S3_INTEGRATION` option from the option group to which the DB instances belong\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ To remove the Amazon S3 integration option from a single DB instance, modify the DB instance and specify a different option group that doesn't include the `S3_INTEGRATION` option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 

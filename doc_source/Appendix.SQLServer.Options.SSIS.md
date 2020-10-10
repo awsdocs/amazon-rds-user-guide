@@ -1,4 +1,4 @@
-# Support for SQL Server Integration Services in SQL Server<a name="Appendix.SQLServer.Options.SSIS"></a>
+# Support for SQL Server Integration Services in Amazon RDS for SQL Server<a name="Appendix.SQLServer.Options.SSIS"></a>
 
 Microsoft SQL Server Integration Services \(SSIS\) is a component that you can use to perform a broad range of data migration tasks\. SSIS is a platform for data integration and workflow applications\. It features a data warehousing tool used for data extraction, transformation, and loading \(ETL\)\. You can also use this tool to automate maintenance of SQL Server databases and updates to multidimensional cube data\.
 
@@ -10,11 +10,11 @@ RDS supports SSIS for SQL Server Standard and Enterprise Editions on the followi
 + SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
 + SQL Server 2016, version 13\.00\.5426\.0\.v1 and later
 
-## Limitations and Recommendations<a name="SSIS.Limitations"></a>
+## Limitations and recommendations<a name="SSIS.Limitations"></a>
 
 The following limitations and recommendations apply to running SSIS on RDS for SQL Server:
 + The DB instance must use AWS Managed Microsoft AD for SSIS authentication\.
-+ The DB instance must have an associated parameter group with the `clr enabled` parameter set to 1\. For more information, see [Modifying the Parameter for SSIS](#SSIS.ModifyParam)\.
++ The DB instance must have an associated parameter group with the `clr enabled` parameter set to 1\. For more information, see [Modifying the parameter for SSIS](#SSIS.ModifyParam)\.
 **Note**  
 If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the common language runtime \(CLR\) on your DB instance\.
 + The following control flow tasks are supported:
@@ -45,12 +45,12 @@ If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the 
   + Place SSIS project input and output files in the `D:\S3` folder\.
   + For the Data Flow Task, change the location for `BLOBTempStoragePath` and `BufferTempStoragePath` to a file inside the `D:\S3` folder\.
   + Ensure that all parameters, variables, and expressions used for file connections point to the `D:\S3` folder\.
-  + On Multi\-AZ instances, files created by SSIS in the `D:\S3` folder are deleted after a failover\. For more information, see [Multi\-AZ Limitations for S3 Integration](User.SQLServer.Options.S3-integration.md#S3-MAZ)\.
+  + On Multi\-AZ instances, files created by SSIS in the `D:\S3` folder are deleted after a failover\. For more information, see [Multi\-AZ limitations for S3 integration](User.SQLServer.Options.S3-integration.md#S3-MAZ)\.
   + Upload the files created by SSIS in the `D:\S3` folder to your Amazon S3 bucket to make them durable\.
 + Import Column and Export Column transformations and the Script component on the Data Flow Task aren't supported\.
 + You can't enable dump on running SSIS packages, and you can't add data taps on SSIS packages\.
 + The SSIS Scale Out feature isn't supported\.
-+ You can't deploy projects directly\. We provide RDS stored procedures to do this\. For more information, see [Deploying an SSIS Project](#SSIS.Deploy)\.
++ You can't deploy projects directly\. We provide RDS stored procedures to do this\. For more information, see [Deploying an SSIS project](#SSIS.Deploy)\.
 + Build SSIS project \(\.ispac\) files with the `DoNotSavePasswords` protection mode for deploying on RDS\.
 + SSIS isn't supported on Always On instances with read replicas\.
 + You can't back up the SSISDB database that is associated with the `SSIS` option\.
@@ -75,7 +75,7 @@ You enable SSIS by adding the SSIS option to your DB instance\. Use the followin
 **Note**  
 If a database with the name SSISDB or a reserved SSIS login already exists on the DB instance, you can't enable SSIS on the instance\.
 
-### Creating the Option Group for SSIS<a name="SSIS.OptionGroup"></a>
+### Creating the option group for SSIS<a name="SSIS.OptionGroup"></a>
 
 To work with SSIS, create an option group or modify an option group that corresponds to the SQL Server edition and version of the DB instance that you plan to use\. To do this, use the AWS Management Console or the AWS CLI\.
 
@@ -131,7 +131,7 @@ The following procedure creates an option group for SQL Server Standard Edition 
       --option-group-description "SSIS option group for SQL Server SE 2016"
   ```
 
-### Adding the SSIS Option to the Option Group<a name="SSIS.Add"></a>
+### Adding the SSIS option to the option group<a name="SSIS.Add"></a>
 
 Next, use the AWS Management Console or the AWS CLI to add the `SSIS` option to your option group\.
 
@@ -177,7 +177,7 @@ Next, use the AWS Management Console or the AWS CLI to add the `SSIS` option to 
       --apply-immediately
   ```
 
-### Creating the Parameter Group for SSIS<a name="SSIS.CreateParamGroup"></a>
+### Creating the parameter group for SSIS<a name="SSIS.CreateParamGroup"></a>
 
 Create or modify a parameter group for the `clr enabled` parameter that corresponds to the SQL Server edition and version of the DB instance that you plan to use for SSIS\.
 
@@ -229,7 +229,7 @@ The following procedure creates a parameter group for SQL Server Standard Editio
       --description "clr enabled parameter group"
   ```
 
-### Modifying the Parameter for SSIS<a name="SSIS.ModifyParam"></a>
+### Modifying the parameter for SSIS<a name="SSIS.ModifyParam"></a>
 
 Modify the `clr enabled` parameter in the parameter group that corresponds to the SQL Server edition and version of your DB instance\. For SSIS, set the `clr enabled` parameter to 1\.
 
@@ -279,18 +279,18 @@ The following procedure modifies the parameter group that you created for SQL Se
       --parameters "ParameterName='clr enabled',ParameterValue=1,ApplyMethod=immediate"
   ```
 
-### Associating the Option Group and Parameter Group with Your DB Instance<a name="SSIS.Apply"></a>
+### Associating the option group and parameter group with your DB instance<a name="SSIS.Apply"></a>
 
 To associate the SSIS option group and parameter group with your DB instance, use the AWS Management Console or the AWS CLI 
 
 **Note**  
-If you use an existing instance, it must already have an Active Directory domain and AWS Identity and Access Management \(IAM\) role associated with it\. If you create a new instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB Instance](USER_SQLServerWinAuth.md)\.
+If you use an existing instance, it must already have an Active Directory domain and AWS Identity and Access Management \(IAM\) role associated with it\. If you create a new instance, specify an existing Active Directory domain and IAM role\. For more information, see [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)\.
 
 #### Console<a name="SSIS.Apply.Console"></a>
 
 To finish enabling SSIS, associate your SSIS option group and parameter group with a new or existing DB instance:
-+ For a new DB instance, associate them when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
-+ For an existing DB instance, associate them by modifying the instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
++ For a new DB instance, associate them when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ For an existing DB instance, associate them by modifying the instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 #### CLI<a name="SSIS.Apply.CLI"></a>
 
@@ -362,11 +362,11 @@ You can associate the SSIS option group and parameter group with a new or existi
       --apply-immediately
   ```
 
-### Enabling S3 Integration<a name="SSIS.EnableS3"></a>
+### Enabling S3 integration<a name="SSIS.EnableS3"></a>
 
-To download SSIS project \(\.ispac\) files to your host for deployment, use S3 file integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB Instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
+To download SSIS project \(\.ispac\) files to your host for deployment, use S3 file integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
-## Administrative Permissions on SSISDB<a name="SSIS.Permissions"></a>
+## Administrative permissions on SSISDB<a name="SSIS.Permissions"></a>
 
 When the instance is created or modified with the SSIS option, the result is an SSISDB database with the ssis\_admin and ssis\_logreader roles granted to the master user\. The master user has the following privileges in SSISDB:
 + alter on ssis\_admin role
@@ -375,9 +375,9 @@ When the instance is created or modified with the SSIS option, the result is an 
 
 Because the master user is a SQL\-authenticated user, you can't use the master user for executing SSIS packages\. The master user can use these privileges to create new SSISDB users and add them to the ssis\_admin and ssis\_logreader roles\. Doing this is useful for giving access to your domain users for using SSIS\.
 
-### Setting Up a Windows\-Authenticated User for SSIS<a name="SSIS.Use.Auth"></a>
+### Setting up a Windows\-authenticated user for SSIS<a name="SSIS.Use.Auth"></a>
 
-The master user can use the following code example to set up a Windows\-authenticated login in SSISDB and grant the required procedure permissions\. Doing this grants permissions to the domain user to deploy and run SSIS packages, use S3 file transfer procedures, create credentials, and work with the SQL Server Agent proxy\. For more information, see [Credentials \(Database Engine\)](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/credentials-database-engine?view=sql-server-ver15) and [Create a SQL Server Agent Proxy](https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-sql-server-agent-proxy?view=sql-server-ver15) in the Microsoft documentation\.
+The master user can use the following code example to set up a Windows\-authenticated login in SSISDB and grant the required procedure permissions\. Doing this grants permissions to the domain user to deploy and run SSIS packages, use S3 file transfer procedures, create credentials, and work with the SQL Server Agent proxy\. For more information, see [Credentials \(database engine\)](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/credentials-database-engine?view=sql-server-ver15) and [Create a SQL Server Agent proxy](https://docs.microsoft.com/en-us/sql/ssms/agent/create-a-sql-server-agent-proxy?view=sql-server-ver15) in the Microsoft documentation\.
 
 **Note**  
 You can grant some or all of the following permissions as needed to Windows\-authenticated users\.
@@ -420,11 +420,11 @@ GRANT ALTER ANY CREDENTIAL TO [mydomain\user_name]
 GO
 ```
 
-## Deploying an SSIS Project<a name="SSIS.Deploy"></a>
+## Deploying an SSIS project<a name="SSIS.Deploy"></a>
 
 On RDS, you can't deploy SSIS projects directly by using SQL Server Management Studio \(SSMS\) or SSIS procedures\. To download project files from Amazon S3 and then deploy them, use RDS stored procedures\.
 
-To run the stored procedures, log in as any user that you granted permissions for running the stored procedures\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
+To run the stored procedures, log in as any user that you granted permissions for running the stored procedures\. For more information, see [Setting up a Windows\-authenticated user for SSIS](#SSIS.Use.Auth)\.
 
 **To deploy the SSIS project**
 
@@ -449,7 +449,7 @@ To run the stored procedures, log in as any user that you granted permissions fo
    @file_path='D:\S3\ssisproject.ispac;
    ```
 
-## Monitoring the Status of a Deployment Task<a name="SSIS.Monitor"></a>
+## Monitoring the status of a deployment task<a name="SSIS.Monitor"></a>
 
 To track the status of your deployment task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to SSIS\. The second parameter accepts a task ID\. 
 
@@ -468,7 +468,7 @@ SELECT * FROM msdb.dbo.rds_fn_task_status(NULL,42);
 The `rds_fn_task_status` function returns the following information\.
 
 
-| Output Parameter | Description | 
+| Output parameter | Description | 
 | --- | --- | 
 | `task_id` | The ID of the task\. | 
 | `task_type` | `SSIS_DEPLOY_PROJECT` | 
@@ -488,9 +488,9 @@ The `rds_fn_task_status` function returns the following information\.
 
 ## Using SSIS<a name="SSIS.Use"></a>
 
-After deploying the SSIS project into the SSIS catalog, you can run packages directly from SSMS or schedule them by using SQL Server Agent\. You must use a Windows\-authenticated login for executing SSIS packages\. For more information, see [Setting Up a Windows\-Authenticated User for SSIS](#SSIS.Use.Auth)\.
+After deploying the SSIS project into the SSIS catalog, you can run packages directly from SSMS or schedule them by using SQL Server Agent\. You must use a Windows\-authenticated login for executing SSIS packages\. For more information, see [Setting up a Windows\-authenticated user for SSIS](#SSIS.Use.Auth)\.
 
-### Setting Database Connection Managers for SSIS Projects<a name="SSIS.Use.ConnMgrs"></a>
+### Setting database connection managers for SSIS projects<a name="SSIS.Use.ConnMgrs"></a>
 
 When you use a connection manager, you can use these types of authentication:
 + For local database connections, you can use SQL authentication or Windows authentication\. For Windows authentication, use `DB_instance_name.fully_qualified_domain_name` as the server name of the connection string\.
@@ -498,7 +498,7 @@ When you use a connection manager, you can use these types of authentication:
   An example is `myssisinstance.corp-ad.example.com`, where `myssisinstance` is the DB instance name and `corp-ad.example.com` is the fully qualified domain name\.
 + For remote connections, always use SQL authentication\.
 
-### Creating an SSIS Proxy<a name="SSIS.Use.Proxy"></a>
+### Creating an SSIS proxy<a name="SSIS.Use.Proxy"></a>
 
 To be able to schedule SSIS packages using SQL Server Agent, create an SSIS credential and an SSIS proxy\. Run these procedures as a Windows\-authenticated user\.
 
@@ -564,7 +564,7 @@ Whenever the SSISDB primary host is changed, alter the SSIS proxy credentials to
    GO
    ```
 
-### Scheduling an SSIS Package Using SQL Server Agent<a name="SSIS.Use.Schedule"></a>
+### Scheduling an SSIS package using SQL Server Agent<a name="SSIS.Use.Schedule"></a>
 
 After you create the credential and proxy and grant SSIS access to the proxy, you can create a SQL Server Agent job to schedule the SSIS package\.
 
@@ -603,7 +603,7 @@ After you create the credential and proxy and grant SSIS access to the proxy, yo
   GO
   ```
 
-### Revoking SSIS Access from the Proxy<a name="SSIS.Use.Revoke"></a>
+### Revoking SSIS access from the proxy<a name="SSIS.Use.Revoke"></a>
 
 You can revoke access to the SSIS subsystem and delete the SSIS proxy using the following stored procedures\.
 
@@ -690,7 +690,7 @@ The following procedure removes the `SSIS` option\.
       --apply-immediately
   ```
 
-## Dropping the SSISDB Database<a name="SSIS.Drop"></a>
+## Dropping the SSISDB database<a name="SSIS.Drop"></a>
 
 After removing the SSIS option, the SSISDB database isn't deleted\. To drop the SSISDB database, use the `rds_drop_ssis_database` stored procedure after removing the SSIS option\.
 

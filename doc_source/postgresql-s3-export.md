@@ -1,17 +1,17 @@
-# Exporting Data from an RDS for PostgreSQL DB Instance to Amazon S3<a name="postgresql-s3-export"></a>
+# Exporting data from an RDS for PostgreSQL DB instance to Amazon S3<a name="postgresql-s3-export"></a>
 
 You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. 
 
-For more information on storing data with Amazon S3, see [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
 
 **Topics**
-+ [Overview of Exporting Data to Amazon S3](#postgresql-s3-export-overview)
-+ [Specifying the Amazon S3 File Path to Export to](#postgresql-s3-export-file)
-+ [Setting Up Access to an Amazon S3 Bucket](#postgresql-s3-export-access-bucket)
-+ [Exporting Query Data Using the aws\_s3\.query\_export\_to\_s3 Function](#postgresql-s3-export-examples)
-+ [Function Reference](#postgresql-s3-export-functions)
++ [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)
++ [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)
++ [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)
++ [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)
++ [Function reference](#postgresql-s3-export-functions)
 
-## Overview of Exporting Data to Amazon S3<a name="postgresql-s3-export-overview"></a>
+## Overview of exporting data to Amazon S3<a name="postgresql-s3-export-overview"></a>
 
 To export data stored in an RDS PostgreSQL database to an Amazon S3 bucket, use the following procedure\.
 
@@ -25,7 +25,7 @@ To export data stored in an RDS PostgreSQL database to an Amazon S3 bucket, use 
 
    The `aws_s3` extension provides the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function that you use to export data to Amazon S3\. The `aws_commons` extension is included to provide additional helper functions\. 
 
-1. Identify an Amazon S3 file path to use for exporting data\. For details about this process, see [Specifying the Amazon S3 File Path to Export to](#postgresql-s3-export-file)\.
+1. Identify an Amazon S3 file path to use for exporting data\. For details about this process, see [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)\.
 
 1. Provide permission to access the Amazon S3 bucket\.
 
@@ -39,18 +39,18 @@ To export data stored in an RDS PostgreSQL database to an Amazon S3 bucket, use 
 
    1. Add this IAM role to your DB instance\.
 
-   For details about this process, see [Setting Up Access to an Amazon S3 Bucket](#postgresql-s3-export-access-bucket)\.
+   For details about this process, see [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)\.
 
 1. Identify a database query to get the data\. Export the query data by calling the `aws_s3.query_export_to_s3` function\. 
 
-   After you complete the preceding preparation tasks, use the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export query results to Amazon S3\. For details about this process, see [Exporting Query Data Using the aws\_s3\.query\_export\_to\_s3 Function](#postgresql-s3-export-examples)\.
+   After you complete the preceding preparation tasks, use the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export query results to Amazon S3\. For details about this process, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
 
-## Specifying the Amazon S3 File Path to Export to<a name="postgresql-s3-export-file"></a>
+## Specifying the Amazon S3 file path to export to<a name="postgresql-s3-export-file"></a>
 
 Specify the following information to identify the location in Amazon S3 where you want to export data to:
 + Bucket name – A *bucket* is a container for Amazon S3 objects or files\.
 
-  For more information on storing data with Amazon S3, see [Create a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) and [View an Object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+  For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) and [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
 + File path – The file path identifies where the export is stored in the Amazon S3 bucket\. The file path consists of the following:
   + An optional path prefix that identifies a virtual folder path\.
   + A file prefix that identifies one or more files to be stored\. Larger exports are stored in multiple files, each with a maximum size of approximately 6 GB\. The additional file names have the same file prefix but with `_partXX` appended\. The `XX` represents 2, then 3, and so on\.
@@ -72,9 +72,9 @@ psql=> SELECT aws_commons.create_s3_uri(
 ) AS s3_uri_1 \gset
 ```
 
-You later provide this `s3_uri_1` value as a parameter in the call to the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. For examples, see [Exporting Query Data Using the aws\_s3\.query\_export\_to\_s3 Function](#postgresql-s3-export-examples)\.
+You later provide this `s3_uri_1` value as a parameter in the call to the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. For examples, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
 
-## Setting Up Access to an Amazon S3 Bucket<a name="postgresql-s3-export-access-bucket"></a>
+## Setting up access to an Amazon S3 bucket<a name="postgresql-s3-export-access-bucket"></a>
 
 To export data to Amazon S3, give your PostgreSQL DB instance permission to access the Amazon S3 bucket that the files are to go in\. 
 
@@ -94,11 +94,11 @@ To do this, use the following procedure\.
 
    1. Include the Amazon Resource Name \(ARN\) that identifies the Amazon S3 bucket and objects in the bucket\. The ARN format for accessing Amazon S3 is: `arn:aws:s3:::your-s3-bucket/*`
 
-   For more information on creating an IAM policy for Amazon RDS for PostgreSQL, see [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and Attach Your First Customer Managed Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
+   For more information on creating an IAM policy for Amazon RDS for PostgreSQL, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. See also [Tutorial: Create and attach your first customer managed policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide*\.
 
    The following AWS CLI command creates an IAM policy named `rds-s3-export-policy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Warning**  
-We recommend that you set up your database within a private VPC that has endpoint policies configured for accessing specific buckets\. For more information, see [ Using Endpoint Policies for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html#vpc-endpoints-policies-s3) in the Amazon VPC User Guide\.  
+We recommend that you set up your database within a private VPC that has endpoint policies configured for accessing specific buckets\. For more information, see [ Using endpoint policies for Amazon S3](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-s3.html#vpc-endpoints-policies-s3) in the Amazon VPC User Guide\.  
 We strongly recommend that you do not create a policy with all\-resource access\. This access can pose a threat for data security\. If you create a policy that gives `S3:PutObject` access to all resources using `"Resource":"*"`, then a user with export privileges can export data to all buckets in your account\. In addition, the user can export data to *any publicly writable bucket within your AWS Region*\. 
 
    After you create the policy, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\. 
@@ -123,7 +123,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
 
 1. Create an IAM role\. 
 
-   You do this so Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a Role to Delegate Permissions to an IAM User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+   You do this so Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
    The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\. 
 
@@ -186,29 +186,29 @@ We strongly recommend that you do not create a policy with all\-resource access\
 
   ```
   aws rds add-role-to-db-instance ^
-     --db-instance-identifier my-dbi-nstance ^
+     --db-instance-identifier my-db-instance ^
      --feature-name s3Export ^
      --role-arn your-role-arn ^
      --region your-region
   ```
 
-## Exporting Query Data Using the aws\_s3\.query\_export\_to\_s3 Function<a name="postgresql-s3-export-examples"></a>
+## Exporting query data using the aws\_s3\.query\_export\_to\_s3 function<a name="postgresql-s3-export-examples"></a>
 
 Export your PostgreSQL data to Amazon S3 by calling the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. 
 
 **Topics**
 + [Prerequisites](#postgresql-s3-export-examples-prerequisites)
 + [Calling aws\_s3\.query\_export\_to\_s3](#postgresql-s3-export-examples-basic)
-+ [Exporting to a CSV File That Uses a Custom Delimiter](#postgresql-s3-export-examples-custom-delimiter)
-+ [Exporting to a Binary File with Encoding](#postgresql-s3-export-examples-encoded)
-+ [Troubleshooting Access to Amazon S3](#postgresql-s3-export-troubleshoot)
++ [Exporting to a CSV file that uses a custom delimiter](#postgresql-s3-export-examples-custom-delimiter)
++ [Exporting to a binary file with encoding](#postgresql-s3-export-examples-encoded)
++ [Troubleshooting access to Amazon S3](#postgresql-s3-export-troubleshoot)
 
 ### Prerequisites<a name="postgresql-s3-export-examples-prerequisites"></a>
 
 Before you use the `aws_s3.query_export_to_s3` function, be sure to complete the following prerequisites:
-+ Install the required PostgreSQL extensions as described in [Overview of Exporting Data to Amazon S3](#postgresql-s3-export-overview)\.
-+ Determine where to export your data to Amazon S3 as described in [Specifying the Amazon S3 File Path to Export to](#postgresql-s3-export-file)\.
-+ Make sure that the DB cluster has export access to Amazon S3 as described in [Setting Up Access to an Amazon S3 Bucket](#postgresql-s3-export-access-bucket)\.
++ Install the required PostgreSQL extensions as described in [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)\.
++ Determine where to export your data to Amazon S3 as described in [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)\.
++ Make sure that the DB cluster has export access to Amazon S3 as described in [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)\.
 
 The examples following use a database table called `sample_table`\. These examples export the data into a bucket called `sample-bucket`\. The example table and data are created with the following SQL statements in psql\.
 
@@ -270,9 +270,9 @@ s3-us-west-2://my-bucket/my-prefix_part2
 s3-us-west-2://my-bucket/my-prefix_part3
 ```
 
-For the full reference for this function and additional ways to call it, see [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3)\. For more about accessing files in Amazon S3, see [View an Object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+For the full reference for this function and additional ways to call it, see [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3)\. For more about accessing files in Amazon S3, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
 
-### Exporting to a CSV File That Uses a Custom Delimiter<a name="postgresql-s3-export-examples-custom-delimiter"></a>
+### Exporting to a CSV file that uses a custom delimiter<a name="postgresql-s3-export-examples-custom-delimiter"></a>
 
 The following example shows how to call the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export data to a file that uses a custom delimiter\. The example uses arguments of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command to specify the comma\-separated value \(CSV\) format and a colon \(:\) delimiter\.
 
@@ -280,7 +280,7 @@ The following example shows how to call the [aws\_s3\.query\_export\_to\_s3](#aw
 SELECT * from aws_s3.query_export_to_s3('select * from basic_test', :'s3_uri_1', options :='format csv, delimiter $$:$$');
 ```
 
-### Exporting to a Binary File with Encoding<a name="postgresql-s3-export-examples-encoded"></a>
+### Exporting to a binary file with encoding<a name="postgresql-s3-export-examples-encoded"></a>
 
 The following example shows how to call the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export data to a binary file that has Windows\-1253 encoding\.
 
@@ -288,14 +288,14 @@ The following example shows how to call the [aws\_s3\.query\_export\_to\_s3](#aw
 SELECT * from aws_s3.query_export_to_s3('select * from basic_test', :'s3_uri_1', options :='format binary, encoding WIN1253');
 ```
 
-### Troubleshooting Access to Amazon S3<a name="postgresql-s3-export-troubleshoot"></a>
+### Troubleshooting access to Amazon S3<a name="postgresql-s3-export-troubleshoot"></a>
 
 If you encounter connection problems when attempting to export data to Amazon S3, see the following for recommendations:
-+ [Troubleshooting Amazon RDS Identity and Access](security_iam_troubleshoot.md) 
++ [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md) 
 + [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide\.*
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the* IAM User Guide\.*
 
-## Function Reference<a name="postgresql-s3-export-functions"></a>
+## Function reference<a name="postgresql-s3-export-functions"></a>
 
 **Topics**
 + [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3)
@@ -305,7 +305,7 @@ If you encounter connection problems when attempting to export data to Amazon S3
 
 Exports a PostgreSQL query result to an Amazon S3 bucket\. The `aws_s3` extension provides the `aws_s3.query_export_to_s3` function\. 
 
-The two required parameters are `query` and `s3_info`\. These define the query to be exported and identify the Amazon S3 bucket to export to\. An optional parameter called `options` provides for defining various export parameters\. For examples of using the `aws_s3.query_export_to_s3` function, see [Exporting Query Data Using the aws\_s3\.query\_export\_to\_s3 Function](#postgresql-s3-export-examples)\.
+The two required parameters are `query` and `s3_info`\. These define the query to be exported and identify the Amazon S3 bucket to export to\. An optional parameter called `options` provides for defining various export parameters\. For examples of using the `aws_s3.query_export_to_s3` function, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
 
 **Syntax**
 
@@ -332,7 +332,7 @@ To create an `aws_commons._s3_uri_1` composite structure, see the [aws\_commons\
 *options*  
 An optional text string containing arguments for the PostgreSQL `COPY` command\. These arguments specify how the data is to be copied when exported\. For more details, see the [PostgreSQL COPY documentation](https://www.postgresql.org/docs/current/sql-copy.html)\.
 
-#### Alternate Input Parameters<a name="aws_s3.export_query_to_s3-alternate-parameters"></a>
+#### Alternate input parameters<a name="aws_s3.export_query_to_s3-alternate-parameters"></a>
 
 To help with testing, you can use an expanded set of parameters instead of the `s3_info` parameter\. Following are additional syntax variations for the `aws_s3.query_export_to_s3` function\. 
 
@@ -364,7 +364,7 @@ Currently, this value must be the same AWS Region as that of the exporting DB cl
 *options*  
 An optional text string containing arguments for the PostgreSQL `COPY` command\. These arguments specify how the data is to be copied when exported\. For more details, see the [PostgreSQL COPY documentation](https://www.postgresql.org/docs/current/sql-copy.html)\.
 
-#### Output Parameters<a name="aws_s3.export_query_to_s3-output-parameters"></a>
+#### Output parameters<a name="aws_s3.export_query_to_s3-output-parameters"></a>
 
 ```
 aws_s3.query_export_to_s3(
@@ -393,7 +393,7 @@ psql=> SELECT * from aws_s3.query_export_to_s3('select * from sample_table', 'sa
 
 ### aws\_commons\.create\_s3\_uri<a name="aws_commons.create_s3_uri"></a>
 
-Creates an `aws_commons._s3_uri_1` structure to hold Amazon S3 file information\. You use the results of the `aws_commons.create_s3_uri` function in the `s3_info` parameter of the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. For an example of using the `aws_commons.create_s3_uri` function, see [Specifying the Amazon S3 File Path to Export to](#postgresql-s3-export-file)\.
+Creates an `aws_commons._s3_uri_1` structure to hold Amazon S3 file information\. You use the results of the `aws_commons.create_s3_uri` function in the `s3_info` parameter of the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. For an example of using the `aws_commons.create_s3_uri` function, see [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)\.
 
 **Syntax**
 

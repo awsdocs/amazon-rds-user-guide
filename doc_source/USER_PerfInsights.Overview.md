@@ -3,17 +3,17 @@
 By default, Performance Insights is enabled in the console create wizard for Amazon RDS engines\. If you have more than one database on a DB instance, Performance Insights aggregates performance data\.
 
 **Topics**
-+ [DB Load](#USER_PerfInsights.Overview.ActiveSessions)
++ [DB load](#USER_PerfInsights.Overview.ActiveSessions)
 + [Maximum CPU](#USER_PerfInsights.Overview.MaxCPU)
-+ [Supported DB Engines for Performance Insights](#USER_PerfInsights.Overview.Engines)
++ [Supported DB engines for Performance Insights](#USER_PerfInsights.Overview.Engines)
 
-## DB Load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
+## DB load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
 
 The central metric for Performance Insights is `DB Load`\. The DB load represents the average number of active sessions \(AAS\) for the DB engine\. An active session is a connection that has submitted work to the DB engine and is waiting for a response\. For example, if you submit a SQL query to the DB engine, the database session is active while the engine is processing the query\. The `DB Load` metric is collected every second\.
 
 The `DB Load` metric has subcomponents called dimensions\. You can think of dimensions as categories for the different characteristics of the `DB Load` metric\. When you are diagnosing performance issues, the most useful dimensions are wait events and top SQL\.
 
-### Wait Events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
+### Wait events<a name="USER_PerfInsights.Overview.ActiveSessions.waits"></a>
 
 A *wait event* causes a SQL statement to wait for a specific event to happen before it can continue running\. For example, a SQL statement might wait until a locked resource is unlocked\. By combining `DB Load` with wait events, you can get a complete picture of the session state\. Wait events vary by DB engine: 
 + For information about all MariaDB and MySQL wait events, see [Wait Event Summary Tables](https://dev.mysql.com/doc/refman/5.7/en/wait-summary-tables.html) in the MySQL documentation\.
@@ -41,7 +41,7 @@ You can find an overview of Performance Insights in the following video\.
 
 [![AWS Videos](http://img.youtube.com/vi/yOeWcPBT458/0.jpg)](http://www.youtube.com/watch?v=yOeWcPBT458)
 
-## Supported DB Engines for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
+## Supported DB engines for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
 
 Following, you can find the DB engines that support Performance Insights\. 
 

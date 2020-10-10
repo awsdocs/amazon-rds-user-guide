@@ -7,7 +7,7 @@ XML DB is pre\-installed on Oracle version 12c and later\. Amazon RDS supports O
 **Note**  
 The Amazon RDS XMLDB option does not provide support for the Oracle XML DB Protocol Server\. 
 
-## Adding the Oracle XML DB Option<a name="Oracle.Options.XMLDB.Add"></a>
+## Adding the Oracle XML DB option<a name="Oracle.Options.XMLDB.Add"></a>
 
 The general process for adding the Oracle XML DB option to a DB instance is the following: 
 
@@ -27,18 +27,18 @@ After you add the XML DB option, as soon as the option group is active, XML DB i
 
    1. For **Major engine version**, choose **11\.2**\. 
 
-   For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+   For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the **XMLDB** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
+1. Add the **XMLDB** option to the option group\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-## Removing the Oracle XML DB Option<a name="Oracle.Options.XMLDB.Remove"></a>
+## Removing the Oracle XML DB option<a name="Oracle.Options.XMLDB.Remove"></a>
 
 You can remove the XML DB option from a DB instance running version 11g\. 
 
 To remove the XML DB option from a DB instance running version 11g, do one of the following: 
-+ To remove the XMLDB option from multiple DB instances, remove the XMLDB option from the option group they belong to\. This change affects all DB instances that use the option group\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ To remove the XMLDB option from a single DB instance, modify the DB instance and specify a different option group that doesn't include the XMLDB option\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ To remove the XMLDB option from multiple DB instances, remove the XMLDB option from the option group they belong to\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ To remove the XMLDB option from a single DB instance, modify the DB instance and specify a different option group that doesn't include the XMLDB option\. You can specify the default \(empty\) option group, or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 

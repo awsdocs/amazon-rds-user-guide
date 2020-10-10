@@ -1,15 +1,15 @@
-# Upgrading an Oracle DB Snapshot<a name="USER_UpgradeDBSnapshot.Oracle"></a>
+# Upgrading an Oracle DB snapshot<a name="USER_UpgradeDBSnapshot.Oracle"></a>
 
 If you have existing manual DB snapshots, you can upgrade them to a later version of the Oracle database engine\. 
 
-When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle Engine Version Management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn how to upgrade snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE Using Snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
+When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn how to upgrade snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE using snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
 
 The following snapshot upgrades are currently supported\. 
 
 
 ****  
 
-| Current Snapshot Version | Supported Snapshot Upgrade | 
+| Current snapshot version | Supported snapshot upgrade | 
 | --- | --- | 
 |  12\.1\.0\.1  |  12\.1\.0\.2\.v8  | 
 |  11\.2\.0\.4  |  12\.1\.0\.2, 12\.2\.0\.1, 18c, and 19c when the following conditions are met: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.Oracle.html)  | 
@@ -30,7 +30,7 @@ Amazon RDS supports upgrading snapshots in all AWS Regions\.
 
 1. Choose the **New engine version** to upgrade the snapshot to\.
 
-1. \(Optional\) For **Option group**, choose the option group for the upgraded DB snapshot\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
+1. \(Optional\) For **Option group**, choose the option group for the upgraded DB snapshot\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
 
 1. Choose **Save changes** to save your changes\.
 
@@ -44,7 +44,7 @@ To upgrade an Oracle DB snapshot by using the AWS CLI, call the [modify\-db\-sna
 + `--db-snapshot-identifier` – The name of the DB snapshot\. 
 + `--engine-version` – The version to upgrade the snapshot to\. 
 
-You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
+You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
 + `--option-group-name` – The option group for the upgraded DB snapshot\. 
 
 **Example**  
@@ -72,7 +72,7 @@ To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDB
 + `DBSnapshotIdentifier` – The name of the DB snapshot\. 
 + `EngineVersion` – The version to upgrade the snapshot to\. 
 
-You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option Group Considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
+You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
 + `OptionGroupName` – The option group for the upgraded DB snapshot\. 
 
 **Example**  

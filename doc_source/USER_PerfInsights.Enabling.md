@@ -1,4 +1,4 @@
-# Enabling and Disabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
+# Enabling and disabling Performance Insights<a name="USER_PerfInsights.Enabling"></a>
 
 To use Performance Insights, enable it on your DB instance\. If needed, you can disable it later\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
@@ -8,11 +8,11 @@ The Performance Insights agent consumes limited CPU and memory on the DB host\. 
 
 In the console, you can enable or disable Performance Insights when you create or modify a new DB instance\.
 
-### Enabling or Disabling Performance Insights When Creating an Instance<a name="USER_PerfInsights.Console.Creating"></a>
+### Enabling or disabling Performance Insights when creating an instance<a name="USER_PerfInsights.Console.Creating"></a>
 
 When you create a new DB instance, enable Performance Insights by choosing **Enable Performance Insights** in the **Performance Insights** section\. Or choose **Disable Performance Insights**\.
 
-To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+To create a DB instance, follow the instructions for your DB engine in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 The following screenshot shows the **Performance Insights** section\.
 
@@ -20,9 +20,9 @@ The following screenshot shows the **Performance Insights** section\.
 
 If you choose **Enable Performance Insights**, you have the following options:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-+ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
++ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-### Enabling or Disabling Performance Insights When Modifying an Instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
+### Enabling or disabling Performance Insights when modifying an instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
 
 In the console, you can modify a DB instance to enable or disable Performance Insights using the console\.
 
@@ -38,7 +38,7 @@ In the console, you can modify a DB instance to enable or disable Performance In
 
    If you choose **Enable Performance Insights**, you have the following options:
    + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS Resources](Overview.Encryption.md)\.
+   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
 
@@ -128,7 +128,7 @@ When Performance Schema is enabled automatically, Performance Insights changes s
 
 For more information, see [Performance Schema Command Options](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-options.html#option_mysqld_performance-schema-consumer-events-stages-current) and [Performance Schema Option and Variable Reference](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-option-variable-reference.html) in the MySQL documentation\.
 
-### Enabling the Performance Schema Manually<a name="USER_PerfInsights.EnableMySQL.RDS"></a>
+### Enabling the Performance Schema manually<a name="USER_PerfInsights.EnableMySQL.RDS"></a>
 
 Performance Schema is *not* enabled when both the following conditions are true:
 + The `performance_schema` parameter is set to `0` or `1`\.
@@ -152,4 +152,4 @@ Performance Schema is *not* enabled when both the following conditions are true:
 
 1. Restart the DB instance\.
 
-For more information about modifying instance parameters, see [Modifying Parameters in a DB Parameter Group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Monitoring with the Performance Insights Dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.
+For more information about modifying instance parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. For more information about the dashboard, see [Monitoring with the Performance Insights dashboard](USER_PerfInsights.UsingDashboard.md)\. For more information about the MySQL performance schema, see [MySQL 8\.0 Reference Manual](https://dev.mysql.com/doc/refman/8.0/en/performance-schema.html)\.

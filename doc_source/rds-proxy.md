@@ -1,4 +1,4 @@
-# Managing Connections with Amazon RDS Proxy<a name="rds-proxy"></a>
+# Managing connections with Amazon RDS Proxy<a name="rds-proxy"></a>
 
  By using Amazon RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. RDS Proxy also enables you to enforce AWS Identity and Access Management \(IAM\) authentication for databases, and securely store credentials in AWS Secrets Manager\. 
 
@@ -12,16 +12,16 @@
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
 **Topics**
-+ [RDS Proxy Concepts and Terminology](#rds-proxy.howitworks)
-+ [Planning for and Setting Up RDS Proxy](#rds-proxy-setup)
-+ [Connecting to a Database Through RDS Proxy](#rds-proxy-connecting)
++ [RDS Proxy concepts and terminology](#rds-proxy.howitworks)
++ [Planning for and setting up RDS Proxy](#rds-proxy-setup)
++ [Connecting to a database through RDS Proxy](#rds-proxy-connecting)
 + [Managing an RDS Proxy](#rds-proxy-managing)
-+ [Monitoring RDS Proxy Using Amazon CloudWatch](#rds-proxy.monitoring)
-+ [Command\-Line Examples for RDS Proxy](#rds-proxy.examples)
++ [Monitoring RDS Proxy using Amazon CloudWatch](#rds-proxy.monitoring)
++ [Command\-line examples for RDS Proxy](#rds-proxy.examples)
 + [Troubleshooting for RDS Proxy](#rds-proxy.troubleshooting)
 + [Using RDS Proxy with AWS CloudFormation](#rds-proxy-cfn)
 
-## RDS Proxy Concepts and Terminology<a name="rds-proxy.howitworks"></a>
+## RDS Proxy concepts and terminology<a name="rds-proxy.howitworks"></a>
 
  You can simplify connection management for your Amazon RDS DB instances and Amazon Aurora DB clusters by using RDS Proxy\. 
 
@@ -32,13 +32,13 @@
  The infrastructure for RDS Proxy is highly available and deployed over multiple Availability Zones \(AZs\)\. The computation, memory, and storage for RDS Proxy are independent of your RDS DB instances and Aurora DB clusters\. This separation helps lower overhead on your database servers, so that they can devote their resources to serving database workloads\. The RDS Proxy compute resources are serverless, automatically scaling based on your database workload\. 
 
 **Topics**
-+ [Overview of RDS Proxy Concepts](#rds-proxy-overview)
-+ [Connection Pooling](#rds-proxy-connection-pooling)
-+ [RDS Proxy Security](#rds-proxy-security)
++ [Overview of RDS Proxy concepts](#rds-proxy-overview)
++ [Connection pooling](#rds-proxy-connection-pooling)
++ [RDS Proxy security](#rds-proxy-security)
 + [Failover](#rds-proxy-failover)
 + [Transactions](#rds-proxy-transactions)
 
-### Overview of RDS Proxy Concepts<a name="rds-proxy-overview"></a>
+### Overview of RDS Proxy concepts<a name="rds-proxy-overview"></a>
 
  RDS Proxy handles the infrastructure to perform connection pooling and the other features described following\. You see the proxies represented in the RDS console on the **Proxies** page\. 
 
@@ -58,13 +58,13 @@
 
  An *engine family* is a related set of database engines that use the same DB protocol\. You choose the engine family for each proxy that you create\.  
 
-### Connection Pooling<a name="rds-proxy-connection-pooling"></a>
+### Connection pooling<a name="rds-proxy-connection-pooling"></a>
 
  Each proxy performs connection pooling for the writer instance of its associated RDS or Aurora database\. *Connection pooling* is an optimization that reduces the overhead associated with opening and closing connections and with keeping many connections open simultaneously\. This overhead includes memory needed to handle each new connection\. It also involves CPU overhead to close each connection and open a new one, such as Transport Layer Security/Secure Sockets Layer \(TLS/SSL\) handshaking, authentication, negotiating capabilities, and so on\. Connection pooling simplifies your application logic\. You don't need to write application code to minimize the number of simultaneous open connections\. 
 
  Each proxy also performs connection multiplexing, also known as connection reuse\. With *multiplexing*, RDS Proxy perform all the operations for a transaction using one underlying database connection, then can use a different connection for the next transaction\. You can open many simultaneous connections to the proxy, and the proxy keeps a smaller number of connections open to the DB instance or cluster\. Doing so further minimizes the memory overhead for connections on the database server\. This technique also reduces the chance of "too many connections" errors\. 
 
-### RDS Proxy Security<a name="rds-proxy-security"></a>
+### RDS Proxy security<a name="rds-proxy-security"></a>
 
  RDS Proxy uses the existing RDS security mechanisms such as TLS/SSL and AWS Identity and Access Management \(IAM\)\. For general information about those security features, see [Security in Amazon RDS](UsingWithRDS.md)\. If you aren't familiar with how RDS and Aurora work with authentication, authorization, and other areas of security, make sure to familiarize yourself with how RDS and Aurora work with those areas first\.  
 
@@ -106,7 +106,7 @@
 **VERIFY\_IDENTITY**  
  Enforce SSL and verify the CA and CA hostname\. 
 
- When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon Root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+ When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  RDS Proxy uses wildcard certificates, which apply to a both a domain and its subdomains\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
@@ -138,18 +138,18 @@
 
  RDS Proxy detects when a transaction ends through the network protocol used by the database client application\. Transaction detection doesn't rely on keywords such as `COMMIT` or `ROLLBACK` appearing in the text of the SQL statement\. 
 
- In some cases, RDS Proxy might detect a database request that makes it impractical to move your session to a different connection\. In these cases, it turns off multiplexing for that connection the remainder of your session\. The same rule applies if RDS Proxy can't be certain that multiplexing is practical for the session\. This operation is called *pinning*\. For ways to detect and minimize pinning, see [Avoiding Pinning](#rds-proxy-pinning)\. 
+ In some cases, RDS Proxy might detect a database request that makes it impractical to move your session to a different connection\. In these cases, it turns off multiplexing for that connection the remainder of your session\. The same rule applies if RDS Proxy can't be certain that multiplexing is practical for the session\. This operation is called *pinning*\. For ways to detect and minimize pinning, see [Avoiding pinning](#rds-proxy-pinning)\. 
 
-## Planning for and Setting Up RDS Proxy<a name="rds-proxy-setup"></a>
+## Planning for and setting up RDS Proxy<a name="rds-proxy-setup"></a>
 
  In the following sections, you can find how to set up RDS Proxy\. You can also find how to set the related security options that control who can access each proxy and how each proxy connects to DB instances\. 
 
 **Topics**
 + [Limitations for RDS Proxy](#rds-proxy.limitations)
-+ [Identifying DB Instances, Clusters, and Applications to Use with RDS Proxy](#rds-proxy-planning)
-+ [Setting Up Network Prerequisites](#rds-proxy-network-prereqs)
-+ [Setting Up Database Credentials in AWS Secrets Manager](#rds-proxy-secrets-arns)
-+ [Setting Up AWS Identity and Access Management \(IAM\) Policies](#rds-proxy-iam-setup)
++ [Identifying DB instances, clusters, and applications to use with RDS Proxy](#rds-proxy-planning)
++ [Setting up network prerequisites](#rds-proxy-network-prereqs)
++ [Setting up database credentials in AWS Secrets Manager](#rds-proxy-secrets-arns)
++ [Setting up AWS Identity and Access Management \(IAM\) policies](#rds-proxy-iam-setup)
 + [Creating an RDS Proxy](#rds-proxy-creating)
 + [Viewing an RDS Proxy](#rds-proxy-viewing)
 
@@ -179,7 +179,7 @@
 +  You can't use RDS Proxy with Aurora clusters that are part of an Aurora global database\. 
 +  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
 +  You can't use RDS Proxy with a VPC that has dedicated tenancy\. 
-+  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting Up AWS Identity and Access Management \(IAM\) Policies](#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
++  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting up AWS Identity and Access Management \(IAM\) policies](#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
 +  You can't use RDS Proxy with custom DNS\. 
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
@@ -190,7 +190,7 @@
 +  You can't use RDS Proxy with RDS MySQL 8\.0\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\. 
 +  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
-+  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding Pinning](#rds-proxy-pinning)\. 
++  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](#rds-proxy-pinning)\. 
 
  The following RDS Proxy prerequisites and limitations apply to PostgreSQL: 
 +  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\. 
@@ -198,23 +198,23 @@
 +  Query cancellation isn't supported for PostgreSQL\. 
 +  The results of the PostgreSQL function [lastval\(\)](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\. 
 
-### Identifying DB Instances, Clusters, and Applications to Use with RDS Proxy<a name="rds-proxy-planning"></a>
+### Identifying DB instances, clusters, and applications to use with RDS Proxy<a name="rds-proxy-planning"></a>
 
  You can determine which of your DB instances, clusters, and applications might benefit the most from using RDS Proxy\. To do so, consider these factors: 
 +  RDS Proxy is highly available and deployed over multiple Availability Zones \(AZs\)\. To ensure overall high availability for your database, deploy your Amazon RDS DB instance or Aurora cluster in a Multi\-AZ configuration\. 
 +  Any DB instance or cluster that encounters "too many connections" errors is a good candidate for associating with a proxy\. The proxy enables applications to open many client connections, while the proxy manages a smaller number of long\-lived connections to the DB instance or cluster\. 
 +  For DB instances or clusters that use smaller AWS instance classes, such as T2 or T3, using a proxy can help avoid out\-of\-memory conditions\. It can also help reduce the CPU overhead for establishing connections\. These conditions can occur when dealing with large numbers of connections\. 
-+  You can monitor certain Amazon CloudWatch metrics to determine whether a DB instance or cluster is approaching certain types of limit\. These limits are for the number of connections and the memory associated with connection management\. You can also monitor certain CloudWatch metrics to determine whether a DB instance or cluster is handling many short\-lived connections\. Opening and closing such connections can impose performance overhead on your database\. For information about the metrics to monitor, see [Monitoring RDS Proxy Using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
++  You can monitor certain Amazon CloudWatch metrics to determine whether a DB instance or cluster is approaching certain types of limit\. These limits are for the number of connections and the memory associated with connection management\. You can also monitor certain CloudWatch metrics to determine whether a DB instance or cluster is handling many short\-lived connections\. Opening and closing such connections can impose performance overhead on your database\. For information about the metrics to monitor, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
 +  AWS Lambda functions can also be good candidates for using a proxy\. These functions make frequent short database connections that benefit from connection pooling offered by RDS Proxy\. You can take advantage of any IAM authentication you already have for Lambda functions, instead of managing database credentials in your Lambda application code\. 
 +  Applications that use languages and frameworks such as PHP and Ruby on Rails are typically good candidates for using a proxy\. Such applications typically open and close large numbers of database connections, and don't have built\-in connection pooling mechanisms\. 
 +  Applications that keep a large number of connections open for long periods are typically good candidates for using a proxy\. Applications in industries such as software as a service \(SaaS\) or ecommerce often minimize the latency for database requests by leaving connections open\. With RDS Proxy, an application can keep more connections open than it can when connecting directly to the DB instance or cluster\. 
 +  You might not have adopted IAM authentication and Secrets Manager due to the complexity of setting up such authentication for all DB instances and clusters\. If so, you can leave the existing authentication methods in place and delegate the authentication to a proxy\. The proxy can enforce the authentication policies for client connections for particular applications\. You can take advantage of any IAM authentication you already have for Lambda functions, instead of managing database credentials in your Lambda application code\. 
 
-### Setting Up Network Prerequisites<a name="rds-proxy-network-prereqs"></a>
+### Setting up network prerequisites<a name="rds-proxy-network-prereqs"></a>
 
  Using RDS Proxy requires you to have a set of networking resources in place\. These include a virtual private cloud \(VPC\), two or more subnets, an Amazon EC2 instance within the same VPC, and an internet gateway\. If you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\.  
 
-### Setting Up Database Credentials in AWS Secrets Manager<a name="rds-proxy-secrets-arns"></a>
+### Setting up database credentials in AWS Secrets Manager<a name="rds-proxy-secrets-arns"></a>
 
  For each proxy that you create, you first use the Secrets Manager service to store sets of user name and password credentials\. You create a separate Secrets Manager secret for each database user account that the proxy connects to on the RDS DB instance or Aurora DB cluster\. 
 
@@ -228,7 +228,7 @@
 
  When you create a proxy through the AWS CLI or RDS API, you specify the Amazon Resource Names \(ARNs\) of the corresponding secrets for all the DB user accounts that the proxy can access\. In the AWS Management Console, you choose the secrets by their descriptive names\. 
 
- For instructions about creating secrets in Secrets Manager, see the [Creating a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) page in the Secrets Manager documentation\. Use one of the following techniques\. For instructions about creating secrets in Secrets Manager, see [Creating a Secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\. Use one of the following techniques: 
+ For instructions about creating secrets in Secrets Manager, see the [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) page in the Secrets Manager documentation\. Use one of the following techniques\. For instructions about creating secrets in Secrets Manager, see [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\. Use one of the following techniques: 
 +  Use [Secrets Manager](https://aws.amazon.com/secrets-manager/) in the console\. 
 +  To use the CLI to create a Secrets Manager secret for use with RDS Proxy, use a command such as the following\. 
 
@@ -252,18 +252,18 @@ aws secretsmanager create-secret \
 --secret-string '{"username":"app-user","password":"choose_your_own_password"}'
 ```
 
-### Setting Up AWS Identity and Access Management \(IAM\) Policies<a name="rds-proxy-iam-setup"></a>
+### Setting up AWS Identity and Access Management \(IAM\) policies<a name="rds-proxy-iam-setup"></a>
 
- After you create the secrets in Secrets Manager, you create an IAM policy that can access those secrets\. For general information about using IAM with RDS and Aurora, see [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)\. 
+ After you create the secrets in Secrets Manager, you create an IAM policy that can access those secrets\. For general information about using IAM with RDS and Aurora, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
 
 **Tip**  
  The following procedure applies if you use the IAM console\. If you use the AWS Management Console for RDS, RDS can create the IAM policy for you automatically\. In that case, you can skip the following procedure\. 
 
 **To create an IAM policy that accesses your Secrets Manager secrets for use with your proxy**
 
-1.  Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html)\. Include the **Add Role to Database** step\. 
+1.  Sign in to the IAM console\. Follow the **Create role** process, as described in [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html)\. Include the **Add Role to Database** step\. 
 
-1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS customer master key \(CMK\) or your own AWS KMS CMK, depending on which one you used to encrypt the Secrets Manager secrets\. 
+1.  For the new role, perform the **Add inline policy** step\. Use the same general procedures as in [Editing IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-edit.html)\. Paste the following JSON into the JSON text box\. Substitute your own account ID\. Substitute your AWS Region for `us-east-2`\. Substitute the Amazon Resource Names \(ARNs\) for the secrets that you created\. For the `kms:Decrypt` action, substitute the ARN of the default AWS KMS customer master key \(CMK\) or your own AWS KMS CMK, depending on which one you used to encrypt the Secrets Manager secrets\. 
 
    ```
    {
@@ -400,9 +400,9 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
       Consider lowering the idle client connection timeout if you want the proxy to proactively remove stale connections\. If your workload is spiking, consider raising the idle client connection timeout to save the cost of establishing connections\. 
 
     For **Target group configuration**, provide information for the following: 
-   +  **Database**\. Choose one RDS DB instance or Aurora DB cluster to access through this proxy\. The list only includes DB instances and clusters with compatible database engines, engine versions, and other settings\. If the list is empty, create a new DB instance or cluster that's compatible with RDS Proxy\. To do so, follow the procedure in [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md) \. Then try creating the proxy again\. 
-   +  **Connection pool maximum connections**\. Specify a value from 1 through 100\. This setting represents the percentage of the `max_connections` value that RDS Proxy can use for its connections\. If you only intend to use one proxy with this DB instance or cluster, you can set this value to 100\. For details about how RDS Proxy uses this setting, see [Controlling Connection Limits and Timeouts](#rds-proxy-connection-limits)\. 
-   +  **Session pinning filters**\. \(Optional\) This is an advanced setting, for troubleshooting performance issues with particular applications\. Currently, the only choice is `EXCLUDE_VARIABLE_SETS`\. Choose a filter only if both of following are true: Your application isn't reusing connections due to certain kinds of SQL statements, and you can verify that reusing connections with those SQL statements doesn't affect application correctness\. For more information, see [Avoiding Pinning](#rds-proxy-pinning)\. 
+   +  **Database**\. Choose one RDS DB instance or Aurora DB cluster to access through this proxy\. The list only includes DB instances and clusters with compatible database engines, engine versions, and other settings\. If the list is empty, create a new DB instance or cluster that's compatible with RDS Proxy\. To do so, follow the procedure in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md) \. Then try creating the proxy again\. 
+   +  **Connection pool maximum connections**\. Specify a value from 1 through 100\. This setting represents the percentage of the `max_connections` value that RDS Proxy can use for its connections\. If you only intend to use one proxy with this DB instance or cluster, you can set this value to 100\. For details about how RDS Proxy uses this setting, see [Controlling connection limits and timeouts](#rds-proxy-connection-limits)\. 
+   +  **Session pinning filters**\. \(Optional\) This is an advanced setting, for troubleshooting performance issues with particular applications\. Currently, the only choice is `EXCLUDE_VARIABLE_SETS`\. Choose a filter only if both of following are true: Your application isn't reusing connections due to certain kinds of SQL statements, and you can verify that reusing connections with those SQL statements doesn't affect application correctness\. For more information, see [Avoiding pinning](#rds-proxy-pinning)\. 
    +  **Connection borrow timeout**\. In some cases, you might expect the proxy to sometimes use all available database connections\. In such cases, you can specify how long the proxy waits for a database connection to become available before returning a timeout error\. You can specify a period up to a maximum of five minutes\. This setting only applies when the proxy has the maximum number of connections open and all connections are already in use\. 
 
     For **Connectivity**, provide information for the following: 
@@ -530,16 +530,16 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
  To see the RDS instance or Aurora DB cluster associated with the proxy, use the [DescribeDBProxyTargets](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBProxyTargets.html) operation\. It returns values of the [DBProxyTarget](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBProxyTarget.html) data type\. 
 
-## Connecting to a Database Through RDS Proxy<a name="rds-proxy-connecting"></a>
+## Connecting to a database through RDS Proxy<a name="rds-proxy-connecting"></a>
 
  You connect to an RDS DB instance or Aurora DB cluster through a proxy in generally the same way as you connect directly to the database\. The main difference is that you specify the proxy endpoint instead of the instance or cluster endpoint\. For an Aurora DB cluster, all proxy connections have read/write capability and use the writer instance\. If you use the reader endpoint for read\-only connections, you continue using the reader endpoint the same way\. 
 
 **Topics**
-+ [Connecting to a Proxy Using Native Authentication](#rds-proxy-connecting-native)
-+ [Connecting to a Proxy Using IAM Authentication](#rds-proxy-connecting-iam)
-+ [Considerations for Connecting to a Proxy with PostgreSQL](#rds-proxy-connecting-postgresql)
++ [Connecting to a proxy using native authentication](#rds-proxy-connecting-native)
++ [Connecting to a proxy using IAM authentication](#rds-proxy-connecting-iam)
++ [Considerations for connecting to a proxy with PostgreSQL](#rds-proxy-connecting-postgresql)
 
-### Connecting to a Proxy Using Native Authentication<a name="rds-proxy-connecting-native"></a>
+### Connecting to a proxy using native authentication<a name="rds-proxy-connecting-native"></a>
 
  Use the following basic steps to connect to a proxy using native authentication: 
 
@@ -574,7 +574,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
 1.  Supply the same database user name and password as you usually do\. 
 
-### Connecting to a Proxy Using IAM Authentication<a name="rds-proxy-connecting-iam"></a>
+### Connecting to a proxy using IAM authentication<a name="rds-proxy-connecting-iam"></a>
 
  When you use IAM authentication with RDS Proxy, set up your database users to authenticate with regular user names and passwords\. The IAM authentication applies to RDS Proxy retrieving the user name and password credentials from Secrets Manager\. The connection from RDS Proxy to the underlying database doesn't go through IAM\. 
 
@@ -584,7 +584,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 +  You don't configure each individual database user with an authorization plugin\. The database users still have regular user names and passwords within the database\. You set up Secrets Manager secrets containing these user names and passwords, and authorize RDS Proxy to retrieve the credentials from Secrets Manager\. 
 **Important**  
  The IAM authentication applies to the connection between your client program and the proxy\. The proxy then authenticates to the database using the user name and password credentials retrieved from Secrets Manager\. When you use IAM for the connection to a proxy, make sure that the underlying RDS DB instance or Aurora DB cluster doesn't have IAM enabled\. 
-+  Instead of the instance, cluster, or reader endpoint, you specify the proxy endpoint\. For details about the proxy endpoint, see [Connecting to Your DB Instance Using IAM Authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\. 
++  Instead of the instance, cluster, or reader endpoint, you specify the proxy endpoint\. For details about the proxy endpoint, see [Connecting to your DB instance using IAM authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\. 
 +  In the direct DB IAM auth case, you selectively pick database users and configure them to be identified with a special auth plugin\. You can then connect to those users using IAM auth\. 
 
    In the proxy use case, you need to provide the proxy with Secrets that contain some user's username and password \(native auth\)\. You then connect to the proxy using IAM auth \(by generating an auth token with the proxy endpoint, not the database endpoint\) and using a username which matches one of the usernames for the secrets you previously provided\. 
@@ -596,9 +596,9 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 "Resource": "arn:aws:rds-db:us-east-2:1234567890:dbuser:prx-ABCDEFGHIJKL01234/db_user"
 ```
 
-### Considerations for Connecting to a Proxy with PostgreSQL<a name="rds-proxy-connecting-postgresql"></a>
+### Considerations for connecting to a proxy with PostgreSQL<a name="rds-proxy-connecting-postgresql"></a>
 
- For PostgreSQL, when a client starts a connection to a PostgreSQL database, it sends a startup message that includes pairs of parameter name and value strings\. For details, see the `StartupMessage` in [PostgreSQL Message Formats](https://www.postgresql.org/docs/current/protocol-message-formats.html) in the PostgreSQL documentation\. 
+ For PostgreSQL, when a client starts a connection to a PostgreSQL database, it sends a startup message that includes pairs of parameter name and value strings\. For details, see the `StartupMessage` in [PostgreSQL message formats](https://www.postgresql.org/docs/current/protocol-message-formats.html) in the PostgreSQL documentation\. 
 
 When connecting through an RDS proxy, the startup message can include the following currently recognized parameters: 
 +  `user` 
@@ -612,7 +612,7 @@ When connecting through an RDS proxy, the startup message can include the follow
 + `[TimeZone](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-TIMEZONE) `
 +  `[extra\_float\_digits](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-EXTRA-FLOAT-DIGITS) `
 
- For more information about PostgreSQL messaging, see the [Frontend/Backend Protocol](https://www.postgresql.org/docs/current/protocol.html) in the PostgreSQL documentation\.
+ For more information about PostgreSQL messaging, see the [Frontend/Backend protocol](https://www.postgresql.org/docs/current/protocol.html) in the PostgreSQL documentation\.
 
  For PostgreSQL, if you use JDBC we recommend the following to avoid pinning:
 + Set the JDBC connection parameter `assumeMinServerVersion` to at least `9.0` to avoid pinning\. Doing this prevents the JDBC driver from performing an extra round trip during connection startup when it runs `SET extra_float_digits = 3`\. 
@@ -621,7 +621,7 @@ When connecting through an RDS proxy, the startup message can include the follow
 
   The default for the `preferQueryMode` parameter is `extended`, which uses the extended mode for all queries\. The extended mode uses a series of `Prepare`, `Bind`, `Execute`, and `Sync` requests and corresponding responses\. This type of series causes connection pinning in an RDS proxy\. 
 
-For more information, see [Avoiding Pinning](#rds-proxy-pinning)\. For more information about connecting using JDBC, see [Connecting to the Database](https://jdbc.postgresql.org/documentation/head/connect.html) in the PostgreSQL documentation\.
+For more information, see [Avoiding pinning](#rds-proxy-pinning)\. For more information about connecting using JDBC, see [Connecting to the database](https://jdbc.postgresql.org/documentation/head/connect.html) in the PostgreSQL documentation\.
 
 ## Managing an RDS Proxy<a name="rds-proxy-managing"></a>
 
@@ -629,11 +629,11 @@ For more information, see [Avoiding Pinning](#rds-proxy-pinning)\. For more info
 
 **Topics**
 + [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)
-+ [Adding a New Database User](#rds-proxy-new-db-user)
-+ [Changing the Password for a Database User](#rds-proxy-changing-db-user-password)
-+ [Controlling Connection Limits and Timeouts](#rds-proxy-connection-limits)
-+ [Managing and Monitoring Connection Pooling](#rds-proxy-connection-pooling-tuning)
-+ [Avoiding Pinning](#rds-proxy-pinning)
++ [Adding a new database user](#rds-proxy-new-db-user)
++ [Changing the password for a database user](#rds-proxy-changing-db-user-password)
++ [Controlling connection limits and timeouts](#rds-proxy-connection-limits)
++ [Managing and monitoring connection pooling](#rds-proxy-connection-pooling-tuning)
++ [Avoiding pinning](#rds-proxy-pinning)
 + [Deleting an RDS Proxy](#rds-proxy-deleting)
 
 ### Modifying an RDS Proxy<a name="rds-proxy-modifying-proxy"></a>
@@ -846,30 +846,30 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
  With `DeregisterDBProxyTargets` and `RegisterDBProxyTargets`, you change which RDS DB instance or Aurora DB cluster the proxy is associated with through its target group\. Currently, each proxy can connect to one RDS DB instance or Aurora DB cluster\. The target group tracks the connection details for all the RDS DB instances in a Multi\-AZ configuration, or all the DB instances in an Aurora cluster\. 
 
-### Adding a New Database User<a name="rds-proxy-new-db-user"></a>
+### Adding a new database user<a name="rds-proxy-new-db-user"></a>
 
  In some cases, you might add a new database user to an RDS DB instance or Aurora cluster that's associated with a proxy\. If so, add or repurpose a Secrets Manager secret to store the credentials for that user\. To do this, choose one of the following options: 
-+  Create a new Secrets Manager secret, using the procedure described in [Setting Up Database Credentials in AWS Secrets Manager](#rds-proxy-secrets-arns)\. 
++  Create a new Secrets Manager secret, using the procedure described in [Setting up database credentials in AWS Secrets Manager](#rds-proxy-secrets-arns)\. 
 +  Update the IAM role to give RDS Proxy access to the new Secrets Manager secret\. To do so, update the resources section of the IAM role policy\. 
 +  If the new user takes the place of an existing one, update the credentials stored in the proxy's Secrets Manager secret for the existing user\. 
 
-### Changing the Password for a Database User<a name="rds-proxy-changing-db-user-password"></a>
+### Changing the password for a database user<a name="rds-proxy-changing-db-user-password"></a>
 
  In some cases, you might change the password for a database user in an RDS DB instance or Aurora cluster that's associated with a proxy\. If so, update the corresponding Secrets Manager secret with the new password\. 
 
-### Controlling Connection Limits and Timeouts<a name="rds-proxy-connection-limits"></a>
+### Controlling connection limits and timeouts<a name="rds-proxy-connection-limits"></a>
 
  RDS Proxy uses the `max_connections` setting for your RDS DB instance or Aurora DB cluster\. This setting represents the overall upper limit on the connections that the proxy can open at any one time\. In Aurora clusters and RDS Multi\-AZ configurations, the `max_connections` value that the proxy uses is the one for the Aurora primary instance or the RDS writer instance\. 
 
- To set this value for your RDS DB instance or Aurora DB cluster, follow the procedures in [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. These procedures demonstrate how to associate a parameter group with your database and edit the `max_connections` value in the parameter group\. 
+ To set this value for your RDS DB instance or Aurora DB cluster, follow the procedures in [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. These procedures demonstrate how to associate a parameter group with your database and edit the `max_connections` value in the parameter group\. 
 
  The proxy setting for maximum connections represents a percentage of the `max_connections` value for the database that's associated with the proxy\. If you have multiple applications all using the same database, you can effectively divide their connection quotas by using a proxy for each application with a specific percentage of `max_connections`\. If you do so, ensure that the percentages add up to 100 or less for all proxies associated with the same database\. 
 
  RDS Proxy periodically disconnects idle connections and returns them to the connection pool\. You can adjust this timeout interval\. Doing so helps your applications to deal with stale resources, especially if the application mistakenly leaves a connection open while holding important database resources\. 
 
-### Managing and Monitoring Connection Pooling<a name="rds-proxy-connection-pooling-tuning"></a>
+### Managing and monitoring connection pooling<a name="rds-proxy-connection-pooling-tuning"></a>
 
- As described in [Connection Pooling](#rds-proxy-connection-pooling), connection pooling is a crucial RDS Proxy feature\. Following, you can learn how to make the most efficient use of connection pooling and transaction\-level connection reuse \(multiplexing\)\. 
+ As described in [Connection pooling](#rds-proxy-connection-pooling), connection pooling is a crucial RDS Proxy feature\. Following, you can learn how to make the most efficient use of connection pooling and transaction\-level connection reuse \(multiplexing\)\. 
 
  Because the connection pool is managed by RDS Proxy, you can monitor it and adjust connection limits and timeout intervals without changing your application code\. 
 
@@ -883,7 +883,7 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
  You can choose how long to wait for a connection to become available for use by your application\. This setting is represented by the **Connection borrow timeout** option when you create a proxy\. This setting specifies how long to wait for a connection to become available in the connection pool before returning a timeout error\. It applies when the number of connections is at the maximum, and so no connections are available in the connection pool\. It also applies if no writer instance is available because a failover operation is in process\. Using this setting, you can set the best wait period for your application without having to change the query timeout in your application code\. 
 
-### Avoiding Pinning<a name="rds-proxy-pinning"></a>
+### Avoiding pinning<a name="rds-proxy-pinning"></a>
 
  Multiplexing is more efficient when database requests don't rely on state information from previous requests\. In that case, RDS Proxy can reuse a connection at the conclusion of each transaction\. Examples of such state information include most variables and configuration parameters that you can change through `SET` or `SELECT` statements\. SQL transactions on a client connection can multiplex between underlying database connections by default\. 
 
@@ -901,7 +901,7 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
    However, for PostgreSQL setting a variable leads to session pinning\. 
 +  Apply a session pinning filter to the proxy\. You can exempt certain kinds of operations from pinning the session if you know that doing so doesn't affect the correct operation of your application\. 
-+  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy Using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
++  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
 +  If you use `SET` statements to perform identical initialization for each client connection, you can do so while preserving transaction\-level multiplexing\. In this case, you move the statements that set up the initial session state into the initialization query used by a proxy\. This property is a string containing one or more SQL statements, separated by semicolons\. 
 
    For example, you can define an initialization query for a proxy that sets certain configuration parameters\. Then, RDS Proxy applies those settings whenever it sets up a new connection for that proxy\. You can remove the corresponding `SET` statements from your application code, so that they don't interfere with transaction\-level multiplexing\. 
@@ -934,7 +934,7 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
  If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
 
- For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy Using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
+ For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
 
 ### Deleting an RDS Proxy<a name="rds-proxy-deleting"></a>
 
@@ -973,9 +973,9 @@ aws rds deregister-db-proxy-targets
 
  To delete a DB proxy, call the Amazon RDS API function [DeleteDBProxy](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBProxy.html)\. To delete related items and associations, you also call the functions [DeleteDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBProxyTargetGroup.html) and [DeregisterDBProxyTargets](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeregisterDBProxyTargets.html)\. 
 
-## Monitoring RDS Proxy Using Amazon CloudWatch<a name="rds-proxy.monitoring"></a>
+## Monitoring RDS Proxy using Amazon CloudWatch<a name="rds-proxy.monitoring"></a>
 
-You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and processes raw data from the proxies into readable, near\-real\-time metrics\. To find these metrics in the CloudWatch console, choose **Metrics**, then choose **RDS**, and choose **Per\-Proxy Metrics**\. For more information, see [ Using Amazon CloudWatch Metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) in the Amazon CloudWatch User Guide\.
+You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and processes raw data from the proxies into readable, near\-real\-time metrics\. To find these metrics in the CloudWatch console, choose **Metrics**, then choose **RDS**, and choose **Per\-Proxy Metrics**\. For more information, see [ Using Amazon CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) in the Amazon CloudWatch User Guide\.
 
 **Note**  
  RDS publishes these metrics for each underlying Amazon EC2 instance associated with a proxy\. A single proxy might be served by more than one EC2 instance\. Use CloudWatch statistics to aggregate the values for a proxy across all the associated instances\.   
@@ -984,7 +984,7 @@ You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and p
  All RDS Proxy metrics are in the group `proxy`\.
 
 
-|  Metric  |  Description  |  Valid Period  | CloudWatch Dimensions | 
+|  Metric  |  Description  |  Valid period  | CloudWatch dimensions | 
 | --- | --- | --- | --- | 
 |  `AvailabilityPercentage`  |  The percentage of time for which the target group was available in the role indicated by the dimension\. This metric is reported every minute\. The most useful statistic for this metric is `Average`\.  | 1 minute | ProxyName, TargetGroup, TargetRole | 
 |  ClientConnections  |   The current number of client connections\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName | 
@@ -1011,7 +1011,7 @@ You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and p
 |  `QueryRequestsTLS`  | The number of queries received from TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  | 1 minute and above | ProxyName | 
 | QueryResponseLatency | The time in microseconds between getting a query request and the proxy responding to it\. The most useful statistic for this metric is Average\.  | 1 minute and above | ProxyName | 
 
-## Command\-Line Examples for RDS Proxy<a name="rds-proxy.examples"></a>
+## Command\-line examples for RDS Proxy<a name="rds-proxy.examples"></a>
 
  To see how combinations of connection commands and SQL statements interact with RDS Proxy, look at the following examples\. 
 
@@ -1019,7 +1019,7 @@ You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and p
 +  [Preserving Connections to a MySQL Database Across a Failover](#example-mysql-preserve-connections) 
 +  [Adjusting the max_connections Setting for an Aurora DB Cluster](#example-adjust-cluster-max-connections) 
 
-**Example Preserving Connections to a MySQL Database Across a Failover**  
+**Example Preserving connections to a MySQL database across a failover**  
  This MySQL example demonstrates how open connections continue working during a failover, for example when you reboot a database or it becomes unavailable due to a problem\. This example uses a proxy named `the-proxy` and an Aurora DB cluster with DB instances `instance-8898` and `instance-9814`\. When you run the `failover-db-cluster` command from the Linux command line, the writer instance that the proxy is connected to changes to a different DB instance\. You can see that the DB instance associated with the proxy changes while the connection remains open\.   
 
 ```
@@ -1077,7 +1077,7 @@ mysql> select @@aurora_server_id;
 1 row in set (0.02 sec)
 ```
 
-**Example Adjusting the max\_connections Setting for an Aurora DB Cluster**  
+**Example Adjusting the max\_connections setting for an Aurora DB cluster**  
  This example demonstrates how you can adjust the `max_connections` setting for an Aurora MySQL DB cluster\. To do so, you create your own DB cluster parameter group based on the default parameter settings for clusters that are compatible with MySQL 5\.6 or 5\.7\. You specify a value for the `max_connections` setting, overriding the formula that sets the default value\. You associate the DB cluster parameter group with your DB cluster\.   
 
 ```
@@ -1123,25 +1123,25 @@ aws rds describe-db-cluster-parameters --region $REGION \
  Following, you can find troubleshooting ideas for some common RDS Proxy issues and information on CloudWatch logs for RDS Proxy\. 
 
 **Topics**
-+ [Common Issues and Solutions](#rds-proxy-diagnosis)
-+ [Working with CloudWatch Logs for RDS Proxy](#rds-proxy-logs)
-+ [Verifying Connectivity for a Proxy](#rds-proxy-verifying)
++ [Common issues and solutions](#rds-proxy-diagnosis)
++ [Working with CloudWatch logs for RDS Proxy](#rds-proxy-logs)
++ [Verifying connectivity for a proxy](#rds-proxy-verifying)
 
-### Common Issues and Solutions<a name="rds-proxy-diagnosis"></a>
+### Common issues and solutions<a name="rds-proxy-diagnosis"></a>
 
  For possible causes and solutions to some common problems that you might encounter using RDS Proxy, see the following\. 
 
  You might encounter the following issues while creating a new proxy or connecting to a proxy\. 
 
 
-|  Error  |  Causes or Workarounds  | 
+|  Error  |  Causes or workarounds  | 
 | --- | --- | 
 |   `403: The security token included in the request is invalid`   |  Select an existing IAM role instead of choosing to create a new one\.  | 
 
  You might encounter the following issues while connecting to a MySQL proxy\. 
 
 
-|  Error  |  Causes or Workarounds  | 
+|  Error  |  Causes or workarounds  | 
 | --- | --- | 
 |  ERROR 1040 \(HY000\): Connections rate limit exceeded \(limit\_value\)  |  The rate of connection requests from the client to the proxy has exceeded the limit\.  | 
 |  ERROR 1040 \(HY000\): IAM authentication rate limit exceeded  |  The number of simultaneous requests with IAM authentication from the client to the proxy has exceeded the limit\.  | 
@@ -1158,7 +1158,7 @@ aws rds describe-db-cluster-parameters --region $REGION \
 
 |  Error  |  Cause  |  Solution  | 
 | --- | --- | --- | 
-|   `IAM authentication is allowed only with SSL connections.`   |   The user tried to connect to the database using IAM authentication with the setting `sslmode=disable` in the PostgreSQL client\.   |   The user needs to connect to the database using the minimum setting of `sslmode=require` in the PostgreSQL client\. For more information, see the [PostgreSQL SSL Support](https://www.postgresql.org/docs/current/libpq-ssl.html) documentation\.   | 
+|   `IAM authentication is allowed only with SSL connections.`   |   The user tried to connect to the database using IAM authentication with the setting `sslmode=disable` in the PostgreSQL client\.   |   The user needs to connect to the database using the minimum setting of `sslmode=require` in the PostgreSQL client\. For more information, see the [PostgreSQL SSL support](https://www.postgresql.org/docs/current/libpq-ssl.html) documentation\.   | 
 |   `This RDS Proxy requires TLS connections.`   |   The user enabled the option **Require Transport Layer Security** but tried to connect with `sslmode=disable` in the PostgreSQL client\.   |   To fix this error, do one of the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 |   `IAM authentication failed for user user_name. Check the IAM token for this user and try again.`   |   This error might be due to the following reasons:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  |   To fix this error, do the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 |   `This RDS proxy has no credentials for the role role_name. Check the credentials for this role and try again.`   |   There is no Secrets Manager secret for this role\.   |   Add a Secrets Manager secret for this role\.   | 
@@ -1177,14 +1177,14 @@ aws rds describe-db-cluster-parameters --region $REGION \
 |   `Timed-out waiting to acquire database connection.`   |   The proxy timed\-out waiting to acquire a database connection\. Some possible reasons include the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  |   Possible solutions are:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html)  | 
 |   `Request returned an error: database_error.`   |   The database connection established from the proxy returned an error\.   |   The solution depends on the specific database error\. One example is: `Request returned an error: database "your-database-name" does not exist`\. This means the specified database name, or the user name used as a database name \(in case a database name hasn't been specified\), doesn't exist in the database server\.   | 
 
-### Working with CloudWatch Logs for RDS Proxy<a name="rds-proxy-logs"></a>
+### Working with CloudWatch logs for RDS Proxy<a name="rds-proxy-logs"></a>
 
  You can find logs of RDS Proxy activity under CloudWatch in the AWS Management Console\. Each proxy has an entry in the **Log groups** page\. 
 
 **Important**  
  These logs are intended for human consumption for troubleshooting purposes and not for programmatic access\. The format and content of the logs is subject to change\. 
 
-### Verifying Connectivity for a Proxy<a name="rds-proxy-verifying"></a>
+### Verifying connectivity for a proxy<a name="rds-proxy-verifying"></a>
 
  You can use the following commands to verify that all components of the connection mechanism can communicate with the other components\. 
 
@@ -1270,4 +1270,4 @@ Resources:
    DependsOn: DBProxy
 ```
 
- For more information about the Amazon RDS and Aurora resources that you can create using AWS CloudFormation, see [RDS Resource Type Reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_RDS.html)\. 
+ For more information about the Amazon RDS and Aurora resources that you can create using AWS CloudFormation, see [RDS resource type reference](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_RDS.html)\. 

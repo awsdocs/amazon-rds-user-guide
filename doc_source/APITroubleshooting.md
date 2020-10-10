@@ -1,14 +1,14 @@
-# Troubleshooting Applications on Amazon RDS<a name="APITroubleshooting"></a>
+# Troubleshooting applications on Amazon RDS<a name="APITroubleshooting"></a>
 
 Amazon RDS provides specific and descriptive errors to help you troubleshoot problems while interacting with the Amazon RDS API\.
 
 **Topics**
-+ [Retrieving Errors](#RetrievingErrors)
-+ [Troubleshooting Tips](#TroubleshootingTipss)
++ [Retrieving errors](#RetrievingErrors)
++ [Troubleshooting tips](#TroubleshootingTipss)
 
  For information about troubleshooting for Amazon RDS DB instances, see [Troubleshooting for Amazon RDS](CHAP_Troubleshooting.md)\. 
 
-## Retrieving Errors<a name="RetrievingErrors"></a>
+## Retrieving errors<a name="RetrievingErrors"></a>
 
 Typically, you want your application to check whether a request generated an error before you spend any time processing results\. The easiest way to find out if an error occurred is to look for an `Error` node in the response from the Amazon RDS API\.
 
@@ -23,7 +23,7 @@ use XML::XPath;
     $xp->findvalue("//Error[1]/Message"), "\n\n"; }
 ```
 
-## Troubleshooting Tips<a name="TroubleshootingTipss"></a>
+## Troubleshooting tips<a name="TroubleshootingTipss"></a>
 
  We recommend the following processes to diagnose and resolve problems with the Amazon RDS API\. 
 + Verify that Amazon RDS is operating normally in the AWS Region you are targeting by visiting [http://status\.aws\.amazon\.com](http://status.aws.amazon.com/)\.

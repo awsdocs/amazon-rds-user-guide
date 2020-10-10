@@ -1,4 +1,4 @@
-# Configuring Security Protocols and Ciphers<a name="SQLServer.Ciphers"></a>
+# Configuring security protocols and ciphers<a name="SQLServer.Ciphers"></a>
 
 You can turn certain security protocols and ciphers on and off using DB parameters\. The security parameters that you can configure \(except for TLS version 1\.2\) are shown in the following table\. 
 
@@ -10,7 +10,7 @@ You can't disable TLS 1\.2, because Amazon RDS uses it internally\.
 
 ****  
 
-| DB Parameter | Allowed Values \(Default in Bold\) | Description | 
+| DB parameter | Allowed values \(default in bold\) | Description | 
 | --- | --- | --- | 
 | rds\.tls10 | default, enabled, disabled | TLS 1\.0\. | 
 | rds\.tls11 | default, enabled, disabled | TLS 1\.1\. | 
@@ -29,9 +29,9 @@ Use the following process to configure the security protocols and ciphers:
 
 1. Associate the DB parameter group with your DB instance\.
 
-For more information on DB parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.
+For more information on DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
-## Creating the Security\-Related Parameter Group<a name="CreateParamGroup.Ciphers"></a>
+## Creating the security\-related parameter group<a name="CreateParamGroup.Ciphers"></a>
 
 Create a parameter group for your security\-related parameters that corresponds to the SQL Server edition and version of your DB instance\.
 
@@ -83,7 +83,7 @@ The following procedure creates a parameter group for SQL Server Standard Editio
       --description "Parameter group for security protocols and ciphers"
   ```
 
-## Modifying Security\-Related Parameters<a name="ModifyParams.Ciphers"></a>
+## Modifying security\-related parameters<a name="ModifyParams.Ciphers"></a>
 
 Modify the security\-related parameters in the parameter group that corresponds to the SQL Server edition and version of your DB instance\.
 
@@ -133,15 +133,15 @@ The following procedure modifies the parameter group that you created for SQL Se
       --parameters "ParameterName='rds.tls10',ParameterValue='disabled',ApplyMethod=pending-reboot"
   ```
 
-## Associating the Security\-Related Parameter Group with Your DB Instance<a name="AssocParamGroup.Ciphers"></a>
+## Associating the security\-related parameter group with your DB instance<a name="AssocParamGroup.Ciphers"></a>
 
 To associate the parameter group with your DB instance, use the AWS Management Console or the AWS CLI\.
 
 ### Console<a name="AssocParamGroup.Ciphers.Console"></a>
 
 You can associate the parameter group with a new or existing DB instance:
-+ For a new DB instance, associate it when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
-+ For an existing DB instance, associate it by modifying the instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
++ For a new DB instance, associate it when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ For an existing DB instance, associate it by modifying the instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ### CLI<a name="AssocParamGroup.Ciphers.CLI"></a>
 

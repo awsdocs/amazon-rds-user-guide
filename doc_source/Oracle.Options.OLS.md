@@ -10,11 +10,11 @@ For Oracle 19c, Oracle 18c, and Oracle 12c version 12\.2 on Amazon RDS, Oracle L
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
 
 The following are prerequisites for using Oracle Label Security: 
-+ Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle Licensing](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
++ Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 + You must have a valid license for Oracle Enterprise Edition with Software Update License and Support\. 
 + Your Oracle license must include the Label Security option\. 
 
-## Adding the Oracle Label Security Option<a name="Oracle.Options.OLS.Add"></a>
+## Adding the Oracle Label Security option<a name="Oracle.Options.OLS.Add"></a>
 
 The general process for adding the Oracle Label Security option to a DB instance is the following: 
 
@@ -26,7 +26,7 @@ The general process for adding the Oracle Label Security option to a DB instance
 
 After you add the Label Security option, as soon as the option group is active, Label Security is active\. 
 
-**To add the Label Security option to a DB instance**
+**To add the label security option to a DB instance**
 
 1. Determine the option group you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group with the following settings: 
 
@@ -34,19 +34,19 @@ After you add the Label Security option, as soon as the option group is active, 
 
    1. For **Major engine version**, choose the version of your DB instance\. 
 
-   For more information, see [Creating an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+   For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the **OLS** option to the option group\. For more information about adding options, see [Adding an Option to an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
+1. Add the **OLS** option to the option group\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\.  
 **Important**  
 If you add Label Security to an existing option group that is already attached to one or more DB instances, all the DB instances are restarted\. 
 
 1. Apply the option group to a new or existing DB instance: 
-   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
-   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the Label Security option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+   + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+   + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. When you add the Label Security option to an existing DB instance, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Using Oracle Label Security<a name="Oracle.Options.OLS.Using"></a>
 
-To use Oracle Label Security, you create policies that control access to specific rows in your tables\. For more information, see [Creating an Oracle Label Security Policy](https://docs.oracle.com/database/121/OLSAG/getstrtd.htm#OLSAG3096) in the Oracle documentation\. 
+To use Oracle Label Security, you create policies that control access to specific rows in your tables\. For more information, see [Creating an Oracle Label Security policy](https://docs.oracle.com/database/121/OLSAG/getstrtd.htm#OLSAG3096) in the Oracle documentation\. 
 
 When you work with Label Security, you perform all actions as the LBAC\_DBA role\. The master user for your DB instance is granted the LBAC\_DBA role\. You can grant the LBAC\_DBA role to other users so that they can administer Label Security policies\. 
 
@@ -58,13 +58,13 @@ GRANT ALL ON LBACSYS.OLS_ENFORCEMENT TO username;
 
 You can configure Label Security through the Oracle Enterprise Manager \(OEM\) Cloud Control\. Amazon RDS supports the OEM Cloud Control through the Management Agent option\. For more information, see [Oracle Management Agent for Enterprise Manager Cloud Control](Oracle.Options.OEMAgent.md)\. 
 
-## Removing the Oracle Label Security Option<a name="Oracle.Options.OLS.Remove"></a>
+## Removing the Oracle Label Security option<a name="Oracle.Options.OLS.Remove"></a>
 
 You can remove Oracle Label Security from a DB instance\. 
 
 To remove Label Security from a DB instance, do one of the following: 
-+ To remove Label Security from multiple DB instances, remove the Label Security option from the option group they belong to\. This change affects all DB instances that use the option group\. When you remove Label Security from an option group that is attached to multiple DB instances, all the DB instances are restarted\. For more information, see [Removing an Option from an Option Group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
-+ To remove Label Security from a single DB instance, modify the DB instance and specify a different option group that doesn't include the Label Security option\. You can specify the default \(empty\) option group, or a different custom option group\. When you remove the Label Security option, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
++ To remove Label Security from multiple DB instances, remove the Label Security option from the option group they belong to\. This change affects all DB instances that use the option group\. When you remove Label Security from an option group that is attached to multiple DB instances, all the DB instances are restarted\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
++ To remove Label Security from a single DB instance, modify the DB instance and specify a different option group that doesn't include the Label Security option\. You can specify the default \(empty\) option group, or a different custom option group\. When you remove the Label Security option, a brief outage occurs while your DB instance is automatically restarted\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Troubleshooting<a name="Oracle.Options.OLS.Troubleshooting"></a>
 
@@ -73,10 +73,6 @@ The following are issues you might encounter when you use Oracle Label Security\
 
 ****  
 
-| Issue | Troubleshooting Suggestions | 
+| Issue | Troubleshooting suggestions | 
 | --- | --- | 
 |  When you try to create a policy, you see an error message similar to the following: `insufficient authorization for the SYSDBA package`\.   |  A known issue with Oracle's Label Security feature prevents users with usernames of 16 or 24 characters from running Label Security commands\. You can create a new user with a different number of characters, grant LBAC\_DBA to the new user, log in as the new user, and run the OLS commands as the new user\. For additional information, please contact Oracle support\.   | 
-
-## Related Topics<a name="Oracle.Options.OLS.Related"></a>
-+ [Working with Option Groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB Instances](Appendix.Oracle.Options.md)

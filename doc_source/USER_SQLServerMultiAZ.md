@@ -1,4 +1,4 @@
-# Multi\-AZ Deployments for Microsoft SQL Server<a name="USER_SQLServerMultiAZ"></a>
+# Multi\-AZ deployments for Microsoft SQL Server<a name="USER_SQLServerMultiAZ"></a>
 
 Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. In the event of planned database maintenance or unplanned service disruption, Amazon RDS automatically fails over to the up\-to\-date secondary DB instance\. This functionality lets database operations resume quickly without manual intervention\. The primary and standby instances use the same endpoint, whose physical network address transitions to the secondary replica as part of the failover process\. You don't have to reconfigure your application when a failover occurs\. 
 
@@ -18,22 +18,22 @@ Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and
 + SQL Server 2012: Standard and Enterprise Editions
 
 Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the following exceptions:
-+ Asia Pacific \(Osaka\-Local\): Neither DBM nor Always On AGs are supported here
-+ Asia Pacific \(Sydney\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
-+ Asia Pacific \(Tokyo\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
-+ South America \(São Paulo\): Supported on all [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) except m1 and m2
++ Asia Pacific \(Osaka\-Local\): Neither DBM nor Always On AGs are supported here\.
++ Asia Pacific \(Sydney\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
++ Asia Pacific \(Tokyo\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
++ South America \(São Paulo\): Supported on all [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) except m1 and m2\.
 
-## Adding Multi\-AZ to a Microsoft SQL Server DB Instance<a name="USER_SQLServerMultiAZ.Adding"></a>
+## Adding Multi\-AZ to a Microsoft SQL Server DB instance<a name="USER_SQLServerMultiAZ.Adding"></a>
 
-When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\. 
+When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
 
-When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Modify DB Instance** page\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Modify DB Instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 **Note**  
 If your DB instance is running Database Mirroring \(DBM\)—not Always On Availability Groups \(AGs\)—you might need to disable in\-memory optimization before you add Multi\-AZ\. Disable in\-memory optimization with DBM before you add Multi\-AZ if your DB instance runs SQL Server 2014, 2016, or 2017 Enterprise Edition and has in\-memory optimization enabled\.   
 If your DB instance is running AGs, it doesn't require this step\. 
 
-## Microsoft SQL Server Multi\-AZ Deployment Notes and Recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
+## Microsoft SQL Server Multi\-AZ deployment notes and recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 
 The following are some restrictions when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
 + Cross\-Region Multi\-AZ isn't supported\.
@@ -124,7 +124,7 @@ The following are some recommendations for working with Multi\-AZ deployments fo
   ALTER LOGIN [test_dba] SET DEFAULT_DATABASE=[db3]
   ```
 
-## Determining the Location of the Secondary<a name="USER_SQLServerMultiAZ.Location"></a>
+## Determining the location of the secondary<a name="USER_SQLServerMultiAZ.Location"></a>
 
 You can determine the location of the secondary replica by using the AWS Management Console\. You need to know the location of the secondary if you are setting up your primary DB instance in a VPC\. 
 
@@ -132,9 +132,9 @@ You can determine the location of the secondary replica by using the AWS Managem
 
 You can also view the Availability Zone of the secondary using the AWS CLI command `describe-db-instances` or RDS API operation `DescribeDBInstances`\. The output shows the secondary AZ where the standby mirror is located\. 
 
-## Migrating from Database Mirroring to Always On Availability Groups<a name="USER_SQLServerMultiAZ.Migration"></a>
+## Migrating from Database Mirroring to Always On availability groups<a name="USER_SQLServerMultiAZ.Migration"></a>
 
-In version 14\.00\.3049\.1 of Microsoft SQL Server Enterprise edition, Always On Availability Groups \(AGs\) is enabled by default\. 
+In version 14\.00\.3049\.1 of Microsoft SQL Server Enterprise edition, Always On availability groups \(AGs\) is enabled by default\.
 
 To migrate from Database Mirroring \(DBM\) to AGs, first check your version\. If you are using a DB instance with a version prior to Enterprise Edition 13\.00\.5216\.0, modify the instance to patch it to 13\.00\.5216\.0 or later\. If you are using a DB instance with a version prior to Enterprise Edition 14\.00\.3049\.1, modify the instance to patch it to 14\.00\.3049\.1 or later\. 
 

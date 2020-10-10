@@ -1,4 +1,4 @@
-# Updating Applications to Connect to Microsoft SQL Server DB Instances Using New SSL/TLS Certificates<a name="ssl-certificate-rotation-sqlserver"></a>
+# Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-sqlserver"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
@@ -10,16 +10,16 @@ For such applications, you must update your client application trust stores to i
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
-For more information about certificate rotation, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with Microsoft SQL Server DB instances, see [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)\.
+For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with Microsoft SQL Server DB instances, see [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)\.
 
 **Topics**
-+ [Determining Whether Any Applications are Connecting to Your Microsoft SQL Server DB Instance Using SSL](#ssl-certificate-rotation-sqlserver.determining-server)
-+ [Determining Whether a Client Requires Certificate Verification in Order to Connect](#ssl-certificate-rotation-sqlserver.determining-client)
-+ [Updating Your Application Trust Store](#ssl-certificate-rotation-sqlserver.updating-trust-store)
++ [Determining whether any applications are connecting to your Microsoft SQL Server DB instance using SSL](#ssl-certificate-rotation-sqlserver.determining-server)
++ [Determining whether a client requires certificate verification in order to connect](#ssl-certificate-rotation-sqlserver.determining-client)
++ [Updating your application trust store](#ssl-certificate-rotation-sqlserver.updating-trust-store)
 
-## Determining Whether Any Applications are Connecting to Your Microsoft SQL Server DB Instance Using SSL<a name="ssl-certificate-rotation-sqlserver.determining-server"></a>
+## Determining whether any applications are connecting to your Microsoft SQL Server DB instance using SSL<a name="ssl-certificate-rotation-sqlserver.determining-server"></a>
 
-Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. If the `rds.force_ssl` parameter is set to 1 \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\. You can also find the setting for this parameter in the `sys.dm_server_registry` DMV\.
+Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. If the `rds.force_ssl` parameter is set to 1 \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. You can also find the setting for this parameter in the `sys.dm_server_registry` DMV\.
 
 Run the following query to get the current encryption option for all the open connections to a DB instance\. The column `ENCRYPT_OPTION` returns `TRUE` if the connection is encrypted\.
 
@@ -33,7 +33,7 @@ select SESSION_ID,
 
 This query shows only the current connections\. It doesn't show whether applications that have connected and disconnected in the past have used SSL\.
 
-## Determining Whether a Client Requires Certificate Verification in Order to Connect<a name="ssl-certificate-rotation-sqlserver.determining-client"></a>
+## Determining whether a client requires certificate verification in order to connect<a name="ssl-certificate-rotation-sqlserver.determining-client"></a>
 
 You can check whether different types of clients require certificate verification to connect\.
 
@@ -44,17 +44,17 @@ If you use connectors other than the ones listed, see the specific connector's d
 
 Check whether encryption is enforced for SQL Server Management Studio connections:
 
-1. Launch SQL Server Management Studio\. 
+1. Launch SQL Server Management Studio\.
 
-1. For **Connect to server**, enter the server information, login user name, and password\. 
+1. For **Connect to server**, enter the server information, login user name, and password\.
 
-1. Choose **Options**\. 
+1. Choose **Options**\.
 
 1. Check if **Encrypt connection** is selected in the connect page\.
 
 For more information about SQL Server Management Studio, see [Use SQL Server Management Studio](http://msdn.microsoft.com/en-us/library/ms174173.aspx)\.
 
-### sqlcmd<a name="ssl-certificate-rotation-sqlserver.determining-client.sqlcmd"></a>
+### Sqlcmd<a name="ssl-certificate-rotation-sqlserver.determining-client.sqlcmd"></a>
 
 The following example with the `sqlcmd` client shows how to check a script's SQL Server connection to determine whether successful connections require a valid certificate\. For more information, see [Connecting with sqlcmd](https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/connecting-with-sqlcmd?view=sql-server-ver15) in the Microsoft SQL Server documentation\.
 
@@ -106,16 +106,16 @@ To enable SSL encryption for clients that connect using JDBC, you might need to 
 **Note**  
 If you use `TrustServerCertificate=true` \(or its equivalent\) in the connection string, the connection process skips the trust chain validation\. In this case, the application connects even if the certificate can't be verified\. Using `TrustServerCertificate=false` enforces certificate validation and is a best practice\.
 
-## Updating Your Application Trust Store<a name="ssl-certificate-rotation-sqlserver.updating-trust-store"></a>
+## Updating your application trust store<a name="ssl-certificate-rotation-sqlserver.updating-trust-store"></a>
 
-You can update the trust store for applications that use Microsoft SQL Server\. For instructions, see [Encrypting Specific Connections](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Client)\. Also, see [Configuring the client for encryption](https://docs.microsoft.com/en-us/SQL/connect/jdbc/configuring-the-client-for-ssl-encryption?view=sql-server-2017) in the Microsoft SQL Server documentation\.
+You can update the trust store for applications that use Microsoft SQL Server\. For instructions, see [Encrypting specific connections](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Client)\. Also, see [Configuring the client for encryption](https://docs.microsoft.com/en-us/SQL/connect/jdbc/configuring-the-client-for-ssl-encryption?view=sql-server-2017) in the Microsoft SQL Server documentation\.
 
 If you are using an operating system other than Microsoft Windows, see the software distribution documentation for SSL/TLS implementation for information about adding a new root CA certificate\. For example, OpenSSL and GnuTLS are popular options\. Use the implementation method to add trust to the RDS root CA certificate\. Microsoft provides instructions for configuring certificates on some systems\.
 
 **Note**  
 When you update the trust store, you can retain older certificates in addition to adding the new certificates\.
 
-### Updating Your Application Trust Store for JDBC<a name="ssl-certificate-rotation-sqlserver.updating-trust-store.jdbc"></a>
+### Updating your application trust store for JDBC<a name="ssl-certificate-rotation-sqlserver.updating-trust-store.jdbc"></a>
 
 You can update the trust store for applications that use JDBC for SSL/TLS connections\.
 
@@ -123,7 +123,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 
 1. Download the 2019 root certificate that works for all AWS Regions and put the file in the trust store directory\.
 
-   For information about downloading the root certificate, see [Using SSL/TLS to Encrypt a Connection to a DB Instance](UsingWithRDS.SSL.md)\.
+   For information about downloading the root certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1.  Convert the certificate to \.der format using the following command\.
 
@@ -157,4 +157,4 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
    ```
 
 **Important**  
-After you have determined that your database connections use SSL/TLS and have updated your application trust store, you can update your database to use the rds\-ca\-2019 certificates\. For instructions, see step 3 in [Updating Your CA Certificate by Modifying Your DB Instance](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-updating)\.
+After you have determined that your database connections use SSL/TLS and have updated your application trust store, you can update your database to use the rds\-ca\-2019 certificates\. For instructions, see step 3 in [Updating your CA certificate by modifying your DB instance](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-updating)\.

@@ -1,11 +1,11 @@
-# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for \.NET<a name="UsingWithRDS.IAMDBAuth.Connecting.NET"></a>
+# Connecting to your DB instance using IAM authentication and the AWS SDK for \.NET<a name="UsingWithRDS.IAMDBAuth.Connecting.NET"></a>
 
-You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for \.NET as described following\.
+You can connect to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for \.NET as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
-+ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
-+ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
-+ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
 

@@ -1,8 +1,8 @@
-# Create an EC2 Instance and Install a Web Server<a name="CHAP_Tutorials.WebServerDB.CreateWebServer"></a>
+# Create an EC2 instance and install a web server<a name="CHAP_Tutorials.WebServerDB.CreateWebServer"></a>
 
-In this step, you create a web server to connect to the Amazon RDS DB instance that you created in [Create a DB Instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\. 
+In this step, you create a web server to connect to the Amazon RDS DB instance that you created in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\. 
 
-## Launch an EC2 Instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.LaunchEC2"></a>
+## Launch an EC2 instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.LaunchEC2"></a>
 
 First, you create an Amazon EC2 instance in the public subnet of your VPC\. 
 
@@ -22,8 +22,8 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
 
 1. On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
-   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with Private and Public Subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
-   + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
+   + **Network:** Choose the VPC with both public and private subnets that you chose for the DB instance, such as the `vpc-identifier | tutorial-vpc` created in [Create a VPC with private and public subnets](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.VPCAndSubnets)\.
+   + **Subnet:** Choose an existing public subnet, such as `subnet-identifier | Tutorial public | us-west-2a` created in [ Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\.
    + **Auto\-assign Public IP:** Choose **Enable**\.  
 ![\[Configure Instance Details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_14.png)
 
@@ -36,7 +36,7 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 
 1. Choose **Next: Configure Security Group**\.
 
-1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**\. Then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC Security Group for a Public Web Server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.   
+1. On the **Configure Security Group** page, shown following, choose **Select an existing security group**\. Then choose an existing security group, such as the `tutorial-securitygroup` created in [ Create a VPC security group for a public web server](CHAP_Tutorials.WebServerDB.CreateVPC.md#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2)\. Make sure that the security group that you choose includes inbound rules for Secure Shell \(SSH\) and HTTP access\.   
 ![\[Configure Security Group\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_16.png)
 
 1. Choose **Review and Launch**\.
@@ -54,7 +54,7 @@ Don't choose **Amazon Linux 2 AMI** because it doesn't have the software package
 
 1. Wait until **Instance Status** for your instance reads as **Running** before continuing\. 
 
-## Install an Apache Web Server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
+## Install an Apache web server with PHP<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.Apache"></a>
 
 Next, you connect to your EC2 instance and install the web server\.
 
@@ -62,12 +62,12 @@ Next, you connect to your EC2 instance and install the web server\.
 This tutorial is designed to work with a MySQL version 5\.6 DB instance\. If you are using a MySQL 8\.0 DB instance instead, you must set the following parameters to the values specified in a customer\-created DB parameter group:  
 `character_set_server` – `utf8`
 `collation_server` – `utf8_general_ci`
-The default settings for these parameters cause the database connection to fail\. Other parameter settings might also correct the problem\. For more information about setting parameters, see [Working with DB Parameter Groups](USER_WorkingWithParamGroups.md)\.  
-After you reset the parameters, modify your DB instance to use the DB parameter group, and reboot the DB instance\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md) and [Rebooting a DB Instance](USER_RebootInstance.md)\.
+The default settings for these parameters cause the database connection to fail\. Other parameter settings might also correct the problem\. For more information about setting parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.  
+After you reset the parameters, modify your DB instance to use the DB parameter group, and reboot the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [Rebooting a DB instance](USER_RebootInstance.md)\.
 
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
-1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
+1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
 
 1. Get the latest bug fixes and security updates by updating the software on your EC2 instance\. To do this, use the following command\.
 **Note**  
@@ -89,7 +89,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    cat /etc/system-release
    ```
 
-   For more information, see [Updating Instance Software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
+   For more information, see [Updating instance software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
 
 1. Start the web server with the command shown following\.
 
@@ -99,7 +99,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
 
-   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for Use with a DB Instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
+   If you don't see the Apache test page, check your inbound rules for the VPC security group that you created in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md)\. Make sure that your inbound rules include a rule allowing HTTP \(port 80\) access for the IP address you use to connect to the web server\.
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
@@ -157,7 +157,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
    [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +                
    ```
 
-## Connect Your Apache Web Server to Your DB Instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
+## Connect your Apache web server to your DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
 
 Next, you add content to your Apache web server that connects to your Amazon RDS DB instance\.
 

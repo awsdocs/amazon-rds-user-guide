@@ -1,4 +1,4 @@
-# Performance Insights Metrics Published to Amazon CloudWatch<a name="USER_PerfInsights.Cloudwatch"></a>
+# Performance Insights metrics published to Amazon CloudWatch<a name="USER_PerfInsights.Cloudwatch"></a>
 
 Performance Insights automatically publishes metrics to Amazon CloudWatch\. The same data can be queried from Performance Insights, but having the metrics in CloudWatch makes it easy to add CloudWatch alarms\. It also makes it easy to add the metrics to existing CloudWatch Dashboards\.
 
@@ -23,7 +23,7 @@ aws cloudwatch get-metric-statistics --region us-west-2 --namespace AWS/RDS --me
 This example generates output similar to the following\.
 
 ```
-		{
+{
 		"Datapoints": [
 		{
 		"Timestamp": "2018-07-19T21:30:00Z",

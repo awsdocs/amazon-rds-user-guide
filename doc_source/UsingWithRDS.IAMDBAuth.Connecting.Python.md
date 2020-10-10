@@ -1,21 +1,21 @@
-# Connecting to Your DB Instance Using IAM Authentication and the AWS SDK for Python \(Boto3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
+# Connecting to your DB instance using IAM authentication and the AWS SDK for Python \(Boto3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
 
-You can connect from the command line to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
+You can connect to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
-+ [Enabling and Disabling IAM Database Authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
-+ [Creating and Using an IAM Policy for IAM Database Access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
-+ [Creating a Database Account Using IAM Authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
++ [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
++ [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
 The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](http://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
 
 **Topics**
-+ [Generating an IAM Authentication Token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
-+ [Connecting to a DB Instance](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
++ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
++ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
 
-## Generating an IAM Authentication Token<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken"></a>
+## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken"></a>
 
 You can call the `generate_db_auth_token` method to obtain a signed token\. Provide the DB instance endpoint, port, user name, AWS Region, and DB engine to generate the token for connecting to a DB instance with IAM credentials\.
 
@@ -56,7 +56,7 @@ client = boto3.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 ```
 
-## Connecting to a DB Instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
+## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
 
 The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
 

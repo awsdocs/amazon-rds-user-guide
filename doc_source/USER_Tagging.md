@@ -1,4 +1,4 @@
-# Tagging Amazon RDS Resources<a name="USER_Tagging"></a>
+# Tagging Amazon RDS resources<a name="USER_Tagging"></a>
 
 You can use Amazon RDS tags to add metadata to your Amazon RDS resources\. You can also use these tags with IAM policies to manage access to Amazon RDS resources and to control what actions can be applied to the Amazon RDS resources\. Finally, you can use these tags to track costs by grouping expenses for similarly tagged resources\. 
 
@@ -16,9 +16,9 @@ All Amazon RDS resources can be tagged
 + DB security groups
 + DB subnet groups
 
-For information on managing access to tagged resources with IAM policies, see [Identity and Access Management in Amazon RDS](UsingWithRDS.IAM.md)\. 
+For information on managing access to tagged resources with IAM policies, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
 
-## Overview of Amazon RDS Resource Tags<a name="Overview.Tagging"></a>
+## Overview of Amazon RDS resource tags<a name="Overview.Tagging"></a>
 
 An Amazon RDS tag is a name\-value pair that you define and associate with an Amazon RDS resource\. The name is referred to as the key\. Supplying a value for the key is optional\. You can use tags to assign arbitrary information to an Amazon RDS resource\. You can use a tag key, for example, to define a category, and the tag value might be an item in that category\. For example, you might define a tag key of "project" and a tag value of "Salix", indicating that the Amazon RDS resource is assigned to the Salix project\. You can also use tags to designate Amazon RDS resources as being used for test or production by using a key such as `environment=test` or `environment=production`\. We recommend that you use a consistent set of tag keys to make it easier to track metadata associated with Amazon RDS resources\. 
 
@@ -39,7 +39,7 @@ You can use the AWS Management Console, the command line interface, or the Amazo
 
 Tags are cached for authorization purposes\. Because of this, additions and updates to tags on Amazon RDS resources can take several minutes before they are available\. 
 
-### Copying Tags<a name="USER_Tagging.CopyTags"></a>
+### Copying tags<a name="USER_Tagging.CopyTags"></a>
 
 When you create or restore a DB instance, you can specify that the tags from the DB instance are copied to snapshots of the DB instance\. Copying tags ensures that the metadata for the DB snapshots matches that of the source DB instance and any access policies for the DB snapshot also match those of the source DB instance\. Tags are not copied by default\. 
 

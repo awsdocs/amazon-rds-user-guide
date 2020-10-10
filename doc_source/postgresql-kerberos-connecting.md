@@ -1,6 +1,6 @@
-# Connecting to PostgreSQL with Kerberos Authentication<a name="postgresql-kerberos-connecting"></a>
+# Connecting to PostgreSQL with Kerberos authentication<a name="postgresql-kerberos-connecting"></a>
 
-You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command line interface such as psql\. For more information about connecting, see  [Connecting to a DB Instance Running the PostgreSQL Database Engine](USER_ConnectToPostgreSQLInstance.md)  \. 
+You can connect to PostgreSQL with Kerberos authentication with the pgAdmin interface or with a command line interface such as psql\. For more information about connecting, see  [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)  \. 
 
 ## pgAdmin<a name="collapsible-section-pgAdmin"></a>
 
@@ -20,11 +20,11 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
      For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com.`
    + For **Port**, enter the assigned port\.
    + For **Maintenance database**, enter the name of the initial database to which the client will connect\.
-   + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 7: Create Kerberos Authentication PostgreSQL Logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
+   + For **Username**, enter the user name that you entered for Kerberos authentication in [ Step 7: Create Kerberos authentication PostgreSQL logins ](postgresql-kerberos-setting-up.md#postgresql-kerberos-setting-up.create-logins)\. 
 
 1. Choose **Save**\.
 
-## psql<a name="collapsible-section-psql"></a>
+## Psql<a name="collapsible-section-psql"></a>
 
 To use psql to connect to PostgreSQL with Kerberos authentication, take the following steps:
 

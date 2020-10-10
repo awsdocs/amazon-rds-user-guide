@@ -1,14 +1,14 @@
-# Other Common DBA Tasks for Oracle DB Instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
+# Other common DBA tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
 
 Following, you can find how to perform miscellaneous DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
 **Topics**
-+ [Creating and Dropping Directories in the Main Data Storage Space](#Appendix.Oracle.CommonDBATasks.NewDirectories)
-+ [Listing Files in a DB Instance Directory](#Appendix.Oracle.CommonDBATasks.ListDirectories)
-+ [Reading Files in a DB Instance Directory](#Appendix.Oracle.CommonDBATasks.ReadingFiles)
-+ [Accessing Opatch Files](#Appendix.Oracle.CommonDBATasks.accessing-opatch-files)
++ [Creating and dropping directories in the main data storage space](#Appendix.Oracle.CommonDBATasks.NewDirectories)
++ [Listing files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ListDirectories)
++ [Reading files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ReadingFiles)
++ [Accessing Opatch files](#Appendix.Oracle.CommonDBATasks.accessing-opatch-files)
 
-## Creating and Dropping Directories in the Main Data Storage Space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
+## Creating and dropping directories in the main data storage space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
 
 To create directories, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.create_directory`\. You can create up to 10,000 directories, all located in your main data storage space\. To drop directories, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_directory`\.
 
@@ -17,7 +17,7 @@ The `create_directory` and `drop_directory` procedures have the following requir
 
 ****  
 
-| Parameter Name | Data Type | Default | Required | Description | 
+| Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 |  `p_directory_name`  |  varchar2  |  —  |  Yes  |  The name of the directory\.  | 
 
@@ -50,16 +50,16 @@ exec rdsadmin.rdsadmin_util.drop_directory(p_directory_name => 'product_descript
 **Note**  
 You can also drop a directory by using the Oracle SQL command `DROP DIRECTORY`\. 
 
-Dropping a directory doesn't remove its contents\. Because the `rdsadmin.rdsadmin_util.create_directory` procedure can reuse pathnames, files in dropped directories can appear in a newly created directory\. Before you drop a directory, we recommend that you use `UTL_FILE.FREMOVE` to remove files from the directory\. For more information, see [FREMOVE Procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
+Dropping a directory doesn't remove its contents\. Because the `rdsadmin.rdsadmin_util.create_directory` procedure can reuse pathnames, files in dropped directories can appear in a newly created directory\. Before you drop a directory, we recommend that you use `UTL_FILE.FREMOVE` to remove files from the directory\. For more information, see [FREMOVE procedure](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS70924) in the Oracle documentation\.
 
-## Listing Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ListDirectories"></a>
+## Listing files in a DB instance directory<a name="Appendix.Oracle.CommonDBATasks.ListDirectories"></a>
 
 To list the files in a directory, use the Amazon RDS procedure `rdsadmin.rds_file_util.listdir`\. The `listdir` procedure has the following parameters\. 
 
 
 ****  
 
-| Parameter Name | Data Type | Default | Required | Description | 
+| Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 |  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory to list\.  | 
 
@@ -69,14 +69,14 @@ The following example lists the files in the directory named `PRODUCT_DESCRIPTIO
 SELECT * FROM TABLE(rdsadmin.rds_file_util.listdir(p_directory => 'PRODUCT_DESCRIPTIONS'));
 ```
 
-## Reading Files in a DB Instance Directory<a name="Appendix.Oracle.CommonDBATasks.ReadingFiles"></a>
+## Reading files in a DB instance directory<a name="Appendix.Oracle.CommonDBATasks.ReadingFiles"></a>
 
 To read a text file, use the Amazon RDS procedure `rdsadmin.rds_file_util.read_text_file`\. The `read_text_file` procedure has the following parameters\. 
 
 
 ****  
 
-| Parameter Name | Data Type | Default | Required | Description | 
+| Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
 |  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory that contains the file\.  | 
 |  `p_filename`  |  varchar2  |  —  |  Yes  |  The name of the file to read\.  | 
@@ -103,11 +103,14 @@ SELECT * FROM TABLE
         p_filename  => 'rice.txt'));
 ```
 
-## Accessing Opatch Files<a name="Appendix.Oracle.CommonDBATasks.accessing-opatch-files"></a>
+## Accessing Opatch files<a name="Appendix.Oracle.CommonDBATasks.accessing-opatch-files"></a>
 
 Opatch is an Oracle utility that enables the application and rollback of patches to Oracle software\. The Oracle mechanism for determining which patches have been applied to a database is the `opatch lsinventory` command\. To open service requests for Bring Your Own Licence \(BYOL\) customers, Oracle Support requests the `lsinventory` file and sometimes the `lsinventory_detail` file generated by Opatch\.
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to Opatch\. Instead, the Oracle DB instance automatically creates the inventory files every hour in the BDUMP directory\. You have read and write access on this directory\. If you don't see your files in BDUMP, or the files are out of date, wait an hour and then try again\.
+
+**Note**  
+The examples in this section assume that the BDUMP directory is named `BDUMP`\. On a read replica, the BDUMP directory name is different\. To learn how to get the BDUMP name by querying `V$DATABASE.DB_UNIQUE_NAME` on a read replica, see [Listing files](USER_LogAccess.Concepts.Oracle.md#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.ViewingBackgroundDumpDest)\.
 
 The inventory files use the Amazon RDS naming convention `lsinventory-dbv.txt` and `lsinventory_detail-dbv.txt`, where *dbv* is the full name of your DB version\. The `lsinventory-dbv.txt` file is available on all DB versions\. The corresponding detail file is available on the following DB versions:
 + 19\.0\.0\.0, ru\-2020\-01\.rur\-2020\-01\.r1 or later
@@ -151,7 +154,7 @@ In the following sample query, replace *dbv* with your Oracle DB version\. For e
 
 ```
 SELECT text
-FROM   TABLE(rdsadmin.rds_file_util.read_text_file('BDUMP',' lsinventory-dbv.txt'));
+FROM   TABLE(rdsadmin.rds_file_util.read_text_file('BDUMP', 'lsinventory-dbv.txt'));
 ```
 
 ### PL/SQL<a name="Appendix.Oracle.CommonDBATasks.accessing-opatch-files.plsql"></a>
@@ -186,9 +189,9 @@ END;
 Or query `rdsadmin.tracefile_listing`, and spool the output to a file\. The following example spools the output to `/tmp/tracefile.txt`\.
 
 ```
-spool /tmp/tracefile.txt
+SPOOL /tmp/tracefile.txt
 SELECT * 
 FROM   rdsadmin.tracefile_listing 
 WHERE  FILENAME LIKE 'lsinventory%';
-spool off;
+SPOOL OFF;
 ```

@@ -1,4 +1,4 @@
-# Renaming a DB Instance<a name="USER_RenameInstance"></a>
+# Renaming a DB instance<a name="USER_RenameInstance"></a>
 
  You can rename a DB instance by using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` action\. Renaming a DB instance can have far\-reaching effects; the following is a list of things you should know before you rename a DB instance\. 
 +  When you rename a DB instance, the endpoint for the DB instance changes, because the URL includes the name you assigned to the DB instance\. You should always redirect traffic from the old URL to the new one\.
@@ -9,7 +9,7 @@
 +  DB instance tags remain with the DB instance, regardless of renaming\. 
 +  DB snapshots are retained for a renamed DB instance\. 
 
-## Renaming to Replace an Existing DB Instance<a name="USER_RenameInstance.RR"></a>
+## Renaming to replace an existing DB instance<a name="USER_RenameInstance.RR"></a>
 
 The most common reasons for renaming a DB instance are that you are promoting a read replica or you are restoring data from a DB snapshot or PITR\. By renaming the database, you can replace the DB instance without having to change any application code that references the DB instance\. In these cases, you would do the following: 
 
@@ -23,7 +23,7 @@ The most common reasons for renaming a DB instance are that you are promoting a 
 
 If you delete the old primary DB instance, you are responsible for deleting any unwanted DB snapshots of the old primary DB instance\. 
 
-For information about promoting a read replica, see [Promoting a Read Replica to Be a Standalone DB Instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
+For information about promoting a read replica, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
 ## Console<a name="USER_RenameInstance.CON"></a>
 
@@ -41,7 +41,7 @@ For information about promoting a read replica, see [Promoting a Read Replica to
 
 1. Choose **Continue**\.
 
-1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\. 
+1. To apply the changes immediately, choose **Apply immediately**\. Choosing this option can cause an outage in some cases\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 1. On the confirmation page, review your changes\. If they are correct, choose **Modify DB Instance** to save your changes\. 
 

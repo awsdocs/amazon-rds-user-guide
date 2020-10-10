@@ -1,14 +1,14 @@
-# Using SSL/TLS to Encrypt a Connection to a DB Instance<a name="UsingWithRDS.SSL"></a>
+# Using SSL/TLS to encrypt a connection to a DB instance<a name="UsingWithRDS.SSL"></a>
 
 You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB instance, use the link following that corresponds to your DB engine: 
-+ [Using SSL with a MariaDB DB Instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
-+ [Using SSL with a Microsoft SQL Server DB Instance](SQLServer.Concepts.General.SSL.Using.md)
-+ [Using SSL with a MySQL DB Instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
-+ [Using SSL with an Oracle DB Instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
-+ [Using SSL with a PostgreSQL DB Instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
++ [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
++ [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)
++ [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
++ [Using SSL with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.SSL)
++ [Using SSL with a PostgreSQL DB instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
 
 **Important**  
-For information about rotating your certificate, see [Rotating Your SSL/TLS Certificate](UsingWithRDS.SSL-certificate-rotation.md)\.
+For information about rotating your certificate, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\.
 
 **Note**  
 All certificates are only available for download using SSL/TLS connections\.
@@ -24,24 +24,24 @@ If your application is on Microsoft Windows and requires a PKCS7 file, you can d
 **Note**  
 Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
 
-## Root Certificates for Opt\-In AWS Regions<a name="UsingWithRDS.SSL.RootCertificatesOptIn"></a>
+## Root certificates for opt\-in AWS Regions<a name="UsingWithRDS.SSL.RootCertificatesOptIn"></a>
 
 If you are using an opt\-in AWS Region, you can download the root certificate from the following table\.
 
 
-| **Opt\-In AWS Region** | **Root Certificate** | 
+| **Opt\-in AWS Region** | **Root certificate** | 
 | --- | --- | 
 | Africa \(Cape Town\) | [rds\-ca\-af\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-af-south-1-2019-root.pem) | 
 | Asia Pacific \(Hong Kong\) | [rds\-ca\-ap\-east\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-ap-east-1-2019-root.pem) | 
 | Europe \(Milan\) | [rds\-ca\-eu\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-eu-south-1-2019-root.pem) | 
 | Middle East \(Bahrain\) | [rds\-ca\-me\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-me-south-1-2019-root.pem) | 
 
-## Intermediate Certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
+## Intermediate certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
 
 You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL/TLS\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.
 
 
-| **AWS Region** | **Intermediate Certificate** | 
+| **AWS Region** | **Intermediate certificate** | 
 | --- | --- | 
 | Asia Pacific \(Mumbai\) | [rds\-ca\-2019\-ap\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-south-1.pem) | 
 | Asia Pacific \(Tokyo\) | [rds\-ca\-2019\-ap\-northeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-1.pem) | 
@@ -61,7 +61,7 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 | US West \(N\. California\) | [rds\-ca\-2019\-us\-west\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-1.pem) | 
 | US West \(Oregon\) | [rds\-ca\-2019\-us\-west\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-2.pem) | 
 
-## AWS GovCloud \(US\) Certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>
+## AWS GovCloud \(US\) certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>
 
 You can download the root certificate for an AWS GovCloud \(US\) Region from the following list:
 

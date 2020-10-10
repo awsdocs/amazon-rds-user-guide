@@ -1,9 +1,9 @@
-# Stopping an Amazon RDS DB Instance Temporarily<a name="USER_StopInstance"></a>
+# Stopping an Amazon RDS DB instance temporarily<a name="USER_StopInstance"></a>
 
 If you use a DB instance intermittently, for temporary testing, or for a daily development activity, you can stop your Amazon RDS DB instance temporarily to save money\. While your DB instance is stopped, you are charged for provisioned storage \(including Provisioned IOPS\) and backup storage \(including manual snapshots and automated backups within your specified retention window\), but not for DB instance hours\. For more information, see [Billing FAQs](http://aws.amazon.com/rds/faqs/#billing)\. 
 
 **Note**  
-In some cases, a large amount of time is required to stop a DB instance\. If you want to stop your DB instance and restart it immediately, you can reboot the DB instance\. For information about rebooting a DB instance, see [Rebooting a DB Instance](USER_RebootInstance.md)\.
+In some cases, a large amount of time is required to stop a DB instance\. If you want to stop your DB instance and restart it immediately, you can reboot the DB instance\. For information about rebooting a DB instance, see [Rebooting a DB instance](USER_RebootInstance.md)\.
 
 You can stop and start DB instances that are running the following engines: 
 + MariaDB
@@ -41,20 +41,24 @@ The following are some limitations to stopping and starting a DB instance:
 + You can't delete an option group that is associated with a stopped DB instance\.
 + You can't delete a DB parameter group that is associated with a stopped DB instance\.
 
-## Option and Parameter Group Considerations<a name="USER_StopInstance.OGPG"></a>
+## Option and parameter group considerations<a name="USER_StopInstance.OGPG"></a>
 
 You can't remove persistent options \(including permanent options\) from an option group if there are DB instances associated with that option group\. This functionality is also true of any DB instance with a state of `stopping`, `stopped`, or `starting`\. 
 
 You can change the option group or DB parameter group that is associated with a stopped DB instance, but the change does not occur until the next time you start the DB instance\. If you chose to apply changes immediately, the change occurs when you start the DB instance\. Otherwise the changes occurs during the next maintenance window after you start the DB instance\. 
 
-## VPC Considerations<a name="USER_StopInstance.VPC"></a>
+## VPC considerations<a name="USER_StopInstance.VPC"></a>
 
-When you stop a DB instance it retains its DNS endpoint\. If you stop a DB instance that is not in an Amazon Virtual Private Cloud \(Amazon VPC\), Amazon RDS releases the IP addresses of the DB instance\. If you stop a DB instance that is in a VPC, the DB instance retains its IP addresses\. 
+When you stop a DB instance it retains its DNS endpoint\. If you stop a DB instance that isn't in an Amazon Virtual Private Cloud \(Amazon VPC\), Amazon RDS releases the IP addresses of the DB instance\. If you stop a DB instance that is in a VPC, the DB instance retains its IP addresses\. 
 
 **Note**  
 You should always connect to a DB instance using the DNS endpoint, not the IP address\.
 
-## Console<a name="USER_StopInstance.CON"></a>
+## Stopping a DB instance temporarily<a name="USER_StopInstance.Stopping"></a>
+
+You can stop a DB using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+### Console<a name="USER_StopInstance.CON"></a>
 
 **To stop a DB instance**
 
@@ -68,18 +72,18 @@ You should always connect to a DB instance using the DNS endpoint, not the IP ad
 
 1. Choose **Yes, Stop Now** to stop the DB instance, or choose **Cancel** to cancel the operation\.
 
-## AWS CLI<a name="USER_StopInstance.CLI"></a>
+### AWS CLI<a name="USER_StopInstance.CLI"></a>
 
-To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-db-instance.html) command with the following parameters: 
+To stop a DB instance by using the AWS CLI, call the [stop\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/stop-db-instance.html) command with the following option: 
 + `--db-instance-identifier` – the name of the DB instance\. 
 
 **Example**  
 
 ```
-1. stop-db-instance --db-instance-identifier mydbinstance
+1. aws rds stop-db-instance --db-instance-identifier mydbinstance
 ```
 
-## RDS API<a name="USER_StopInstance.API"></a>
+### RDS API<a name="USER_StopInstance.API"></a>
 
 To stop a DB instance by using the Amazon RDS API, call the [StopDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstance.html) operation with the following parameter: 
 + `DBInstanceIdentifier` – the name of the DB instance\. 

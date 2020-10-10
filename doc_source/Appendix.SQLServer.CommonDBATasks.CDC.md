@@ -1,6 +1,6 @@
-# Using Change Data Capture<a name="Appendix.SQLServer.CommonDBATasks.CDC"></a>
+# Using change data capture<a name="Appendix.SQLServer.CommonDBATasks.CDC"></a>
 
-Amazon RDS supports change data capture \(CDC\) for your DB instances running Microsoft SQL Server\. CDC captures changes that are made to the data in your tables\. It stores metadata about each change, which you can access later\. For more information about how CDC works, see [Change Data Capture](https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/track-data-changes-sql-server#Capture) in the Microsoft documentation\. 
+Amazon RDS supports change data capture \(CDC\) for your DB instances running Microsoft SQL Server\. CDC captures changes that are made to the data in your tables\. It stores metadata about each change, which you can access later\. For more information about how CDC works, see [Change data capture](https://docs.microsoft.com/en-us/sql/relational-databases/track-changes/track-data-changes-sql-server#Capture) in the Microsoft documentation\. 
 
 Before you use CDC with your Amazon RDS DB instances, enable it in the database by running `msdb.dbo.rds_cdc_enable_db`\. You must have master user privileges to enable CDC in the Amazon RDS DB instance\. After CDC is enabled, any user who is `db_owner` of that database can enable or disable CDC on tables in that database\.
 
@@ -20,11 +20,11 @@ To disable CDC for a DB instance, run the `msdb.dbo.rds_cdc_disable_db` stored p
 ```
 
 **Topics**
-+ [Tracking Tables with Change Data Capture](#Appendix.SQLServer.CommonDBATasks.CDC.tables)
-+ [Change Data Capture Jobs](#Appendix.SQLServer.CommonDBATasks.CDC.jobs)
-+ [Change Data Capture for Multi\-AZ Instances](#Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ)
++ [Tracking tables with change data capture](#Appendix.SQLServer.CommonDBATasks.CDC.tables)
++ [Change data capture jobs](#Appendix.SQLServer.CommonDBATasks.CDC.jobs)
++ [Change data capture for Multi\-AZ instances](#Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ)
 
-## Tracking Tables with Change Data Capture<a name="Appendix.SQLServer.CommonDBATasks.CDC.tables"></a>
+## Tracking tables with change data capture<a name="Appendix.SQLServer.CommonDBATasks.CDC.tables"></a>
 
 After CDC is enabled on the database, you can start tracking specific tables\. You can choose the tables to track by running [sys\.sp\_cdc\_enable\_table](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sys-sp-cdc-enable-table-transact-sql)\.
 
@@ -58,11 +58,11 @@ To view the CDC configuration for your tables, run [sys\.sp\_cdc\_help\_change\_
 ```
 
 For more information on CDC tables, functions, and stored procedures in SQL Server documentation, see the following:
-+ [Change Data Capture Stored Procedures \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/change-data-capture-stored-procedures-transact-sql)
-+ [Change Data Capture Functions \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/change-data-capture-functions-transact-sql)
-+ [Change Data Capture Tables \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-tables/change-data-capture-tables-transact-sql)
++ [Change data capture stored procedures \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/change-data-capture-stored-procedures-transact-sql)
++ [Change data capture functions \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/change-data-capture-functions-transact-sql)
++ [Change data capture tables \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/relational-databases/system-tables/change-data-capture-tables-transact-sql)
 
-## Change Data Capture Jobs<a name="Appendix.SQLServer.CommonDBATasks.CDC.jobs"></a>
+## Change data capture jobs<a name="Appendix.SQLServer.CommonDBATasks.CDC.jobs"></a>
 
 When you enable CDC, SQL Server creates the CDC jobs\. Database owners \(`db_owner`\) can view, create, modify, and delete the CDC jobs\. However, the RDS system account owns them\. Therefore, the jobs aren't visible from native views, procedures, or in SQL Server Management Studio\.
 
@@ -74,7 +74,7 @@ To get more information regarding the CDC jobs, you can query the following dyna
 + sysjobs
 + sysjobhistory
 
-## Change Data Capture for Multi\-AZ Instances<a name="Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ"></a>
+## Change data capture for Multi\-AZ instances<a name="Appendix.SQLServer.CommonDBATasks.CDC.Multi-AZ"></a>
 
 If you use CDC on a Multi\-AZ instance, make sure the mirror's CDC job configuration matches the one on the principal\. CDC jobs are mapped to the `database_id`\. If the database IDs on the secondary are different from the principal, then the jobs won't be associated with the correct database\. To try to prevent errors after failover, RDS drops and recreates the jobs on the new principal\. The recreated jobs use the parameters that the principal recorded before failover\.
 

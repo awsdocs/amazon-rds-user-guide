@@ -1,16 +1,16 @@
-# Creating a PostgreSQL DB Instance and Connecting to a Database on a PostgreSQL DB Instance<a name="CHAP_GettingStarted.CreatingConnecting.PostgreSQL"></a>
+# Creating a PostgreSQL DB instance and connecting to a database on a PostgreSQL DB instance<a name="CHAP_GettingStarted.CreatingConnecting.PostgreSQL"></a>
 
 The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance, such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 GiB of storage\.
 
 **Important**  
-Before you can create or connect to a DB instance, you must complete the tasks in [Setting Up for Amazon RDS](CHAP_SettingUp.md)\.
+Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
 **Topics**
-+ [Creating a PostgreSQL DB Instance](#CHAP_GettingStarted.Creating.PostgreSQL)
-+ [Connecting to a PostgreSQL DB Instance](#CHAP_GettingStarted.Connecting.PostgreSQL)
-+ [Deleting a DB Instance](#CHAP_GettingStarted.Deleting.PostgreSQL)
++ [Creating a PostgreSQL DB instance](#CHAP_GettingStarted.Creating.PostgreSQL)
++ [Connecting to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL)
++ [Deleting a DB instance](#CHAP_GettingStarted.Deleting.PostgreSQL)
 
-## Creating a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Creating.PostgreSQL"></a>
+## Creating a PostgreSQL DB instance<a name="CHAP_GettingStarted.Creating.PostgreSQL"></a>
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your PostgreSQL databases\.
 
@@ -21,7 +21,7 @@ You can create a DB instance running PostgreSQL with the AWS Management Console 
 In this example, you use **Easy Create** to create a DB instance running the PostgreSQL database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 **To create a PostgreSQL DB instance with Easy Create enabled**
 
@@ -63,14 +63,14 @@ For information about creating DB instances with **Easy Create** not enabled, se
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB Instance](Overview.DBInstance.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new PostgreSQL DB instance\.
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Launch06.png)
 
-## Connecting to a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL"></a>
+## Connecting to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL"></a>
 
 After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. The security group that you assigned to the DB instance when you created it must allow access to the DB instance\. If you have difficulty connecting to the DB instance, the problem is most often with the access rules you set up in the security group you assigned to the DB instance\.
 
@@ -78,7 +78,7 @@ This section shows two ways to connect to a PostgreSQL DB instance\. The first e
 
 In this example, you connect to a PostgreSQL DB instance using pgAdmin\. 
 
-### Using pgAdmin to Connect to a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin"></a>
+### Using pgAdmin to connect to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin"></a>
 
 **To connect to a PostgreSQL DB instance using pgAdmin**
 
@@ -112,7 +112,7 @@ In this example, you connect to a PostgreSQL DB instance using pgAdmin\.
 
 1. Use the command window to enter SQL or psql commands\. Enter `\q` to close the window\.
 
-### Using psql to Connect to a PostgreSQL DB Instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.psql"></a>
+### Using psql to connect to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.psql"></a>
 
 If your client computer has PostgreSQL installed, you can use a local instance of psql to connect to a PostgreSQL DB instance\. To connect to your PostgreSQL DB instance using psql, provide host information and access credentials\.
 
@@ -128,13 +128,13 @@ psql --host=DB_instance_endpoint --port=port --username=master_user_name --passw
 psql --host=database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=postgres
 ```
 
-### Troubleshooting Connection Issues<a name="CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting"></a>
+### Troubleshooting connection issues<a name="CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting"></a>
 
-By far the most common problem that occurs when attempting to connect to a database on a DB instance is the access rules in the security group assigned to the DB instance\. If you used the default DB security group when you created the DB instance, chances are good that the security group did not have the rules that enable you to access the instance\. For more information about Amazon RDS security groups, see [Controlling Access with Security Groups](Overview.RDSSecurityGroups.md)
+By far the most common problem that occurs when attempting to connect to a database on a DB instance is the access rules in the security group assigned to the DB instance\. If you used the default DB security group when you created the DB instance, chances are good that the security group did not have the rules that enable you to access the instance\. For more information about Amazon RDS security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)
 
 The most common error is could not connect to server: Connection timed out\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through any firewall your connection may be going through\.
 
-## Deleting a DB Instance<a name="CHAP_GettingStarted.Deleting.PostgreSQL"></a>
+## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.PostgreSQL"></a>
 
 After you have connected to the sample DB instance that you created, you should delete the DB instance so you are no longer charged for it\.
 

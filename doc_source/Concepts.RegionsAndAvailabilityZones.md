@@ -3,7 +3,7 @@
 Amazon cloud computing resources are hosted in multiple locations world\-wide\. These locations are composed of AWS Regions, Availability Zones, and Local Zones\. Each *AWS Region* is a separate geographic area\. Each AWS Region has multiple, isolated locations known as *Availability Zones*\.
 
 **Note**  
-For information about finding the Availability Zones for an AWS Region, see [Describing Your Regions, Availability Zones, and Local Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#using-regions-availability-zones-describe) in the Amazon EC2 documentation\.
+For information about finding the Availability Zones for an AWS Region, see [Describing your Regions, Availability Zones, and Local Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#using-regions-availability-zones-describe) in the Amazon EC2 documentation\.
 
 By using Local Zones, you can place resources, such as compute and storage, in multiple locations closer to your users\. Amazon RDS enables you to place resources, such as DB instances, and data in multiple locations\. Resources aren't replicated across AWS Regions unless you do so specifically\.
 
@@ -13,7 +13,7 @@ Amazon operates state\-of\-the\-art, highly\-available data centers\. Although r
 
 It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the EC2\_REGION environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
 
-Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What Is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
+Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
 
 To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
 
@@ -27,7 +27,7 @@ When you view your resources, you see only the resources that are tied to the AW
 
 When you create a DB instance, you can choose an Availability Zone or have AWS choose one for you\. An Availability Zone is represented by an AWS Region code followed by a letter identifier \(for example, `us-east-1a`\)\.
 
-In some cases, you might distribute your DB instances across multiple Availability Zones in a Multi\-AZ deployment\. In such cases, if one DB instance fails, you can design your application so that a DB instance in another Availability Zone can handle requests\. For more information about Multi\-AZ deployments, see [High Availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
+In some cases, you might distribute your DB instances across multiple Availability Zones in a Multi\-AZ deployment\. In such cases, if one DB instance fails, you can design your application so that a DB instance in another Availability Zone can handle requests\. For more information about Multi\-AZ deployments, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
 
 ## Local Zones<a name="Concepts.RegionsAndAvailabilityZones.LocalZones"></a>
 
@@ -48,22 +48,22 @@ A Local Zone can't be included in a Multi\-AZ deployment\.
 
 1. Create a subnet in the Local Zone\.
 
-   For more information, see [Creating a Subnet in Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#AddaSubnet) in the *Amazon VPC User Guide\.*
+   For more information, see [Creating a subnet in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#AddaSubnet) in the *Amazon VPC User Guide\.*
 
 1. Create a DB subnet group in the Local Zone\.
 
    When you create a DB subnet group, choose the Availability Zone group for the Local Zone\.
 
-   For more information, see [Creating a DB Instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
+   For more information, see [Creating a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
 
 1. Create a DB instance that uses the DB subnet group in the Local Zone\.
 
-   For more information, see [Creating an Amazon RDS DB Instance](USER_CreateDBInstance.md)\.
+   For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 **Important**  
 Currently, Local Zones are only available in the US West \(Oregon\) Region\. In this AWS Region, the Los Angeles AWS Local Zone is available\.
 
-## Region Availability<a name="Concepts.RegionsAndAvailabilityZones.Availability"></a>
+## Region availability<a name="Concepts.RegionsAndAvailabilityZones.Availability"></a>
 
 The following table shows the AWS Regions where Amazon RDS is currently available and the endpoint for each Region\.
 

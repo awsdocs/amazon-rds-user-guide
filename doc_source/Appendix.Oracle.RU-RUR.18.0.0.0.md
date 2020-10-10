@@ -1,4 +1,4 @@
-# Database Engine: 18\.0\.0\.0<a name="Appendix.Oracle.RU-RUR.18.0.0.0"></a>
+# Database engine: 18\.0\.0\.0<a name="Appendix.Oracle.RU-RUR.18.0.0.0"></a>
 
 The following versions are available for Oracle database engine 18\.0\.0\.0:
 + [Version 18\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1](#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-07.rur-2020-07.r1)
@@ -19,7 +19,7 @@ Version 18\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1 includes the following:
 + Patch 29374604: IE not starting against 18c Oracle RDBMS Standard Edition
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_10\_lf\.zip
 
-### Combined Patches for Version 18\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1, Released July 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-07.rur-2020-07.r1.Bugs-Fixed"></a>
+### Combined patches for version 18\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1, released July 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-07.rur-2020-07.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -295,10 +295,10 @@ Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 includes the following:
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_9\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
-+ Support for [Purging the Recycle Bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
-+ Support for [Generating Performance Reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
++ Support for [Purging the recycle bin](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.PurgeRecycleBin)
++ Support for [Generating performance reports with Automatic Workload Repository \(AWR\)](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.AWR) using the `rdsadmin.rdsadmin_diagnostic_util` package
 
-### Combined Patches for Version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1, Released April 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-04.rur-2020-04.r1.Bugs-Fixed"></a>
+### Combined patches for version 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1, released April 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-04.rur-2020-04.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -550,7 +550,7 @@ Version 18\.0\.0\.0\.ru\-2020\-01\.rur\-2020\-01\.r1 includes the following:
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
 
-### Oracle Release Update 18\.9\.0\.0\.200114, Released January 2020<a name="Appendix.Oracle-RU-18.9.0.0.200114-Bugs-Fixed"></a>
+### Oracle release update 18\.9\.0\.0\.200114, released January 2020<a name="Appendix.Oracle-RU-18.9.0.0.200114-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -753,9 +753,9 @@ Version 18\.0\.0\.0\.ru\-2019\-10\.rur\-2019\-10\.r1 includes the following:
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_8\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR is included in DB PATCH 30138470
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
-+ Support for [Resizing the Temporary Tablespace in a Read Replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
++ Support for [Resizing the temporary tablespace in a read replica](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica)
 
-### Oracle Release Update 18\.8\.0\.0\.0, Released October 2019<a name="Appendix.Oracle-RU-18.0.0.0.191015-Bugs-Fixed"></a>
+### Oracle release update 18\.8\.0\.0\.0, released October 2019<a name="Appendix.Oracle-RU-18.0.0.0.191015-Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -938,7 +938,7 @@ Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 includes the following:
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_7\_lf\.zip
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 
-### Oracle Release Update 18\.7\.0\.0\.190716, Released July 2019<a name="Appendix.Oracle-RU-18.7.0.0.190716-Bugs-Fixed"></a>
+### Oracle release update 18\.7\.0\.0\.190716, released July 2019<a name="Appendix.Oracle-RU-18.7.0.0.190716-Bugs-Fixed"></a>
 
 Bugs fixed:
 
