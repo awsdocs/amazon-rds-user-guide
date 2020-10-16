@@ -87,7 +87,10 @@ WHERE SPACE <> 0 AND LEFT(NAME, INSTR((NAME), '/') - 1) NOT IN ('mysql','');
 ```
 
 **Note**  
-This query is supported on MySQL 5\.6 and later\.
+This query is supported on MySQL 5\.6 and until 8\. After MySQL 8, you should use INFORMATION_SCHEMA\.INNODB_TABLES\.
+
+
+
 
 Rebuilding a MySQL table to move the table's metadata to the shared tablespace requires additional storage space temporarily to rebuild the table, so the DB instance must have storage space available\. During rebuilding, the table is locked and inaccessible to queries\. For small tables or tables not frequently accessed, this might not be an issue\. For large tables or tables frequently accessed in a heavily concurrent environment, you can rebuild tables on a read replica\. 
 
