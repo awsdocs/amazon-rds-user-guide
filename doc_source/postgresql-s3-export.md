@@ -315,7 +315,7 @@ aws_s3.query_export_to_s3(
     s3_info aws_commons._s3_uri_1,    
     options text
 )
-```Input Parameters
+```Input parameters
 
 *query*  
 A required text string containing an SQL query that the PostgreSQL engine runs\. The results of this query are copied to an S3 bucket identified in the `s3_info` parameter\.
@@ -403,7 +403,7 @@ aws_commons.create_s3_uri(
    file_path text,
    region text
 )
-```Input Parameters
+```Input parameters
 
 *bucket*  
 A required text string containing the Amazon S3 bucket name for the file\.

@@ -549,11 +549,11 @@ Amazon RDS Oracle supports the following Oracle Database features:
   For more information, see [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
 + Continuous Query Notification \(version 12\.1\.0\.2\.v7 and later\)
 
-  For more information, see [ Using continuous query notification \(CQN\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/adfns/cqn.html#GUID-373BAF72-3E63-42FE-8BEA-8A2AEFBF1C35) in the Oracle documentation\.
+  For more information, see [ Using Continuous Query Notification \(CQN\)](https://docs.oracle.com/en/database/oracle/oracle-database/19/adfns/cqn.html#GUID-373BAF72-3E63-42FE-8BEA-8A2AEFBF1C35) in the Oracle documentation\.
 + Data Redaction
 + Database Change Notification \(version 11\.2\.0\.4\.v11 and later 11g versions\)
 
-  For more information, see [ Database change notification](https://docs.oracle.com/cd/E11882_01/java.112/e16548/dbchgnf.htm#JJDBC28815) in the Oracle documentation\.
+  For more information, see [ Database Change Notification](https://docs.oracle.com/cd/E11882_01/java.112/e16548/dbchgnf.htm#JJDBC28815) in the Oracle documentation\.
 **Note**  
 This feature changes to Continuous Query Notification in version 12\.1 and later\.
 + Database In\-Memory \(version 12\.1 and later\)

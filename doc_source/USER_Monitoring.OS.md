@@ -21,7 +21,7 @@ Enhanced Monitoring is available for the following database engines:
 + Oracle
 + PostgreSQL
 
-Enhanced Monitoring is available for all DB instance classes except for db\.m1\.small, all db\.m6g instance classes, and all db\.r6g instance classes\. 
+Enhanced Monitoring is available for all DB instance classes except for the db\.m1\.small instance class\. 
 
 ## Differences between CloudWatch and Enhanced Monitoring metrics<a name="USER_Monitoring.OS.CloudWatchComparison"></a>
 

@@ -8,9 +8,9 @@ The `DescribeDBLogFiles` API operation that lists the Oracle log files that are 
 
 ## Retention schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
 
-The Oracle database engine might rotate logs files if they get very large\. To retain audit or trace files, download them\. Storing the files locally reduces your Amazon RDS storage costs and makes more space available for your data\. 
+The Oracle database engine might rotate logs files if they get very large\. To retain audit or trace files, download them\. If you store the files locally, you reduce your Amazon RDS storage costs and make more space available for your data\. 
 
-The following is the retention schedule for Oracle alert logs, audit files, and trace files on Amazon RDS\. 
+The following table shows the retention schedule for Oracle alert logs, audit files, and trace files on Amazon RDS\. 
 
 
 ****  
@@ -42,7 +42,7 @@ Following, you can find descriptions of Amazon RDS procedures to create, refresh
 You can use either of two procedures to allow access to any file in the `background_dump_dest` path\. The first procedure refreshes a view containing a listing of all files currently in `background_dump_dest`\. 
 
 ```
-1. exec rdsadmin.manage_tracefiles.refresh_tracefile_listing;
+1. EXEC rdsadmin.manage_tracefiles.refresh_tracefile_listing;
 ```
 
 After the view is refreshed, query the following view to access the results\.
@@ -51,16 +51,16 @@ After the view is refreshed, query the following view to access the results\.
 1. SELECT * FROM rdsadmin.tracefile_listing;
 ```
 
-An alternative to the previous process is to use `FROM table` to stream nontable data in a table\-like format to list database directory contents\.
+An alternative to the previous process is to use `FROM table` to stream nonrelational data in a table\-like format to list database directory contents\.
 
 ```
-1. SELECT * FROM table(rdsadmin.rds_file_util.listdir('BDUMP'));
+1. SELECT * FROM TABLE(rdsadmin.rds_file_util.listdir('BDUMP'));
 ```
 
 The following query shows the text of a log file\.
 
 ```
-1. SELECT text FROM table(rdsadmin.rds_file_util.read_text_file('BDUMP','alert_dbname.log.date'));
+1. SELECT text FROM TABLE(rdsadmin.rds_file_util.read_text_file('BDUMP','alert_dbname.log.date'));
 ```
 
 On a read replica, get the name of the BDUMP directory by querying `V$DATABASE.DB_UNIQUE_NAME`\. If the unique name is `DATABASE_B`, then the BDUMP directory is `BDUMP_B`\. The following example queries the BDUMP name on a replica and then uses this name to query the contents of `alert_DATABASE.log.2020-06-23`\.
@@ -77,17 +77,17 @@ On a read replica, get the name of the BDUMP directory by querying `V$DATABASE.D
 
 ### Generating trace files and tracing a session<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Generating"></a>
 
-Because there are no restrictions on `alter session`, many standard methods to generate trace files in Oracle remain available to an Amazon RDS DB instance\. The following procedures are provided for trace files that require greater access\. 
+Because there are no restrictions on `ALTER SESSION`, many standard methods to generate trace files in Oracle remain available to an Amazon RDS DB instance\. The following procedures are provided for trace files that require greater access\. 
 
 
 ****  
 
 |  Oracle method  |  Amazon RDS method | 
 | --- | --- | 
-|  `oradebug hanganalyze 3 `  |  `exec rdsadmin.manage_tracefiles.hanganalyze; `  | 
-|  `oradebug dump systemstate 266 `  |  `exec rdsadmin.manage_tracefiles.dump_systemstate;`  | 
+|  `oradebug hanganalyze 3 `  |  `EXEC rdsadmin.manage_tracefiles.hanganalyze; `  | 
+|  `oradebug dump systemstate 266 `  |  `EXEC rdsadmin.manage_tracefiles.dump_systemstate;`  | 
 
-You can use many standard methods to trace individual sessions connected to an Oracle DB instance in Amazon RDS\. To enable tracing for a session, you can run subprograms in PL/SQL packages supplied by Oracle, such as the DBMS\_SESSION and DBMS\_MONITOR packages\. For more information, see [ Enabling tracing for a session](https://docs.oracle.com/database/121/TGSQL/tgsql_trace.htm#GUID-F872D6F9-E015-481F-80F6-8A7036A6AD29) in the Oracle documentation\. 
+You can use many standard methods to trace individual sessions connected to an Oracle DB instance in Amazon RDS\. To enable tracing for a session, you can run subprograms in PL/SQL packages supplied by Oracle, such as `DBMS_SESSION` and `DBMS_MONITOR`\. For more information, see [ Enabling tracing for a session](https://docs.oracle.com/database/121/TGSQL/tgsql_trace.htm#GUID-F872D6F9-E015-481F-80F6-8A7036A6AD29) in the Oracle documentation\. 
 
 ### Retrieving trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Retrieving"></a>
 
@@ -96,15 +96,15 @@ You can retrieve any trace file in `background_dump_dest` using a standard SQL q
 For example, you can use the `rdsadmin.tracefile_listing` view mentioned preceding to list all of the trace files on the system\. You can then set the `tracefile_table` view to point to the intended trace file using the following procedure\. 
 
 ```
-1. exec rdsadmin.manage_tracefiles.set_tracefile_table_location('CUST01_ora_3260_SYSTEMSTATE.trc');
+1. EXEC rdsadmin.manage_tracefiles.set_tracefile_table_location('CUST01_ora_3260_SYSTEMSTATE.trc');
 ```
 
 The following example creates an external table in the current schema with the location set to the file provided\. You can retrieve the contents into a local file using a SQL query\. 
 
 ```
-1. spool /tmp/tracefile.txt
-2. select * from tracefile_table;
-3. spool off;
+1. SPOOL /tmp/tracefile.txt
+2. SELECT * FROM tracefile_table;
+3. SPOOL OFF;
 ```
 
 ### Purging trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Purging"></a>
@@ -115,16 +115,16 @@ The following example shows the current trace file retention period, and then se
 
 ```
  1. # Show the current tracefile retention
- 2. SQL> exec rdsadmin.rdsadmin_util.show_configuration;
+ 2. SQL> EXEC rdsadmin.rdsadmin_util.show_configuration;
  3. NAME:tracefile retention
  4. VALUE:10080
  5. DESCRIPTION:tracefile expiration specifies the duration in minutes before tracefiles in bdump are automatically deleted.
  6. 		
  7. # Set the tracefile retention to 24 hours:
- 8. SQL> exec rdsadmin.rdsadmin_util.set_configuration('tracefile retention',1440);
+ 8. SQL> EXEC rdsadmin.rdsadmin_util.set_configuration('tracefile retention',1440);
  9. 
 10. #show the new tracefile retention
-11. SQL> exec rdsadmin.rdsadmin_util.show_configuration;
+11. SQL> EXEC rdsadmin.rdsadmin_util.show_configuration;
 12. NAME:tracefile retention
 13. VALUE:1440
 14. DESCRIPTION:tracefile expiration specifies the duration in minutes before tracefiles in bdump are automatically deleted.
@@ -133,13 +133,13 @@ The following example shows the current trace file retention period, and then se
 In addition to the periodic purge process, you can manually remove files from the `background_dump_dest`\. The following example shows how to purge all files older than five minutes\. 
 
 ```
-exec rdsadmin.manage_tracefiles.purge_tracefiles(5);
+EXEC rdsadmin.manage_tracefiles.purge_tracefiles(5);
 ```
 
 You can also purge all files that match a specific pattern \(if you do, don't include the file extension, such as \.trc\)\. The following example shows how to purge all files that start with `SCHPOC1_ora_5935`\. 
 
 ```
-1. exec rdsadmin.manage_tracefiles.purge_tracefiles('SCHPOC1_ora_5935');
+1. EXEC rdsadmin.manage_tracefiles.purge_tracefiles('SCHPOC1_ora_5935');
 ```
 
 ## Publishing Oracle logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs"></a>
@@ -270,14 +270,16 @@ Other parameters might be required depending on the RDS operation that you run\.
 You can view the alert log using the Amazon RDS console\. You can also use the following SQL statement to access the alert log\.
 
 ```
-1. select message_text from alertlog;
+1. SELECT message_text FROM alertlog;
 ```
 
-To access the listener log, use the following SQL statement\.
+The `listenerlog` view contains entries for Oracle Database version 12\.1\.0\.2 and earlier\. To access the listener log for these database versions, use the following query\.
 
 ```
-1. select message_text from listenerlog;
+1. SELECT message_text FROM listenerlog;
 ```
+
+For Oracle Database versions 12\.2\.0\.1 and later, access the listener log using Amazon CloudWatch Logs\.
 
 **Note**  
-Oracle rotates the alert and listener logs when they exceed 10 MB, at which point they are unavailable from Amazon RDS views\. 
+Oracle rotates the alert and listener logs when they exceed 10 MB, at which point they are unavailable from Amazon RDS views\.

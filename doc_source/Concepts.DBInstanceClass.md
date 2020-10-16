@@ -16,10 +16,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
-+ Preview **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. 
-**Note**  
-Graviton2 DB instance classes are now available in preview release\.  
-Don't use the db\.m6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS service terms](https://aws.amazon.com/service-terms/)\.
++ **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. 
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
@@ -29,10 +26,7 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.z1d** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
 + **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
 + **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
-+ Preview **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
-**Note**  
-Graviton2 DB instance classes are now available in preview release\.  
-Don't use the db\.r6g preview DB instance classes with production databases\. Your participation in this preview is governed by section 2 of the [AWS service terms](https://aws.amazon.com/service-terms/)\.
++ **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
@@ -51,17 +45,20 @@ For DB instance class hardware specifications, see [Hardware specifications for 
 
 The following are DB engine considerations for DB instance classes:
 
+**MariaDB**  
+The Graviton2 instance classes db\.m6g and db\.r6g are supported for MariaDB version 10\.4\.13 and higher\.
+
 **Microsoft SQL Server**  
 Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
 
 **MySQL**  
-The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS MySQL versions 8\.0\.17 and higher\.
+The Graviton2 instance classes db\.m6g and db\.r6g are supported for Amazon RDS MySQL versions 8\.0\.17 and higher\.
 
 **Oracle**  
 Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 
 **PostgreSQL**  
-The Graviton2 preview instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.
+The Graviton2 instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.
 
 In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
 
@@ -70,15 +67,15 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
-| Preview db\.m6g – Newest Generation Standard Instance Classes | 
-| db\.m6g\.16xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.12xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.8xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.4xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.2xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m6g\.large | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.m5 – Latest Generation Standard Instance Classes | 
+| db\.m6g – Newest generation standard instance classes | 
+| db\.m6g\.16xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.12xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.8xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.4xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.2xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.large | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -87,48 +84,48 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4 – Current Generation Standard Instance Classes | 
+| db\.m4 – Current generation standard instance classes | 
 | db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.m4\.10xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.m3 – Previous Generation Standard Instance Classes | 
+| db\.m3 – Previous generation standard instance classes | 
 | db\.m3\.2xlarge | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.xlarge | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
-| db\.m1 – Previous Generation Standard Instance Classes | 
+| db\.m1 – Previous generation standard instance classes | 
 | db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.large | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.medium | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.z1d – Latest Generation Memory Optimized Instance Classes | 
+| db\.z1d – Latest generation memory optimized instance classes | 
 | db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.3xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.large | No | Yes | No | Yes | No | 
-| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
+| db\.x1e – Latest generation memory optimized instance classes | 
 | db\.x1e\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.16xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.8xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.4xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.2xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.xlarge | No | Yes | No | Yes | No | 
-| db\.x1 – Current Generation Memory Optimized Instance Classes | 
+| db\.x1 – Current generation memory optimized instance classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
-| Preview db\.r6g – Newest Generation Memory Optimized Instance Classes | 
-| db\.r6g\.16xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r6g\.12xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r6g\.4xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r6g\.2xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r6g\.xlarge | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r6g\.large | No | No | Preview for 8\.0\.17 & higher | No | Preview for 12\.3 & higher | 
-| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r6g – Newest generation memory optimized instance classes | 
+| db\.r6g\.16xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.12xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.4xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.2xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.large | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -137,31 +134,31 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4 – Current generation memory optimized instance classes | 
 | db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3 – Previous generation memory optimized instance classes | 
 | db\.r3\.8xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.m2 – Previous Generation Memory Optimized Instance Classes | 
+| db\.m2 – Previous generation memory optimized instance classes | 
 | db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3 – Latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.large | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.medium | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.small | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.micro | Yes | No | Yes | Yes | Yes | 
-| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2 – Current generation burstable performance instance classes | 
 | db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
 | db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
 | db\.t2\.large | Yes | Yes | Yes | Deprecated | Yes | 
@@ -546,7 +543,7 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 
 | Instance class | vCPU | ECU | Memory \(GiB\) | VPC only | EBS optimized | Max\. bandwidth \(mbps\) | Network performance | 
 | --- | --- | --- | --- | --- | --- | --- | --- | 
-| Preview db\.m6g – Newest Generation Standard Instance Classes | 
+| db\.m6g – Newest generation standard instance classes | 
 | db\.m6g\.16xlarge | 64 | – | 256 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m6g\.12xlarge | 48 | – | 192 | Yes | Yes | 13,500 | 20 Gbps | 
 | db\.m6g\.8xlarge | 32 | – | 128 | Yes | Yes | 9,500 | 12 Gbps | 
@@ -554,7 +551,7 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.m6g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.large\* | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m5 – Latest Generation Standard Instance Classes | 
+| db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
 | db\.m5\.12xlarge | 48 | 173 | 192 | Yes | Yes | 9,500 | 10 Gbps | 
@@ -563,48 +560,48 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.m5\.2xlarge\* | 8 | 31 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m5\.xlarge\* | 4 | 15 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m5\.large\* | 2 | 10 | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.m4 – Current Generation Standard Instance Classes | 
+| db\.m4 – Current generation standard instance classes | 
 | db\.m4\.16xlarge | 64 | 188 | 256 | Yes | Yes | 10,000 | 25 Gbps | 
 | db\.m4\.10xlarge | 40 | 124\.5 | 160 | Yes | Yes | 4,000 | 10 Gbps | 
 | db\.m4\.4xlarge | 16 | 53\.5 | 64 | Yes | Yes | 2,000 | High | 
 | db\.m4\.2xlarge | 8 | 25\.5 | 32 | Yes | Yes | 1,000 | High | 
 | db\.m4\.xlarge | 4 | 13 | 16 | Yes | Yes | 750 | High | 
 | db\.m4\.large | 2 | 6\.5 | 8 | Yes | Yes | 450 | Moderate | 
-| db\.m3 – Previous Generation Standard Instance Classes | 
+| db\.m3 – Previous generation standard instance classes | 
 | db\.m3\.2xlarge | 8 | 26 | 30 | No | Yes | 1,000 | High | 
 | db\.m3\.xlarge | 4 | 13 | 15 | No | Yes | 500 | High | 
 | db\.m3\.large | 2 | 6\.5 | 7\.5 | No | No | — | Moderate | 
 | db\.m3\.medium | 1 | 3 | 3\.75 | No | No | — | Moderate | 
-| db\.m1 – Previous Generation Standard Instance Classes | 
+| db\.m1 – Previous generation standard instance classes | 
 | db\.m1\.xlarge | 4 | 4 | 15 | No | Yes | 450 | High | 
 | db\.m1\.large | 2 | 2 | 7\.5 | No | Yes | 450 | Moderate | 
 | db\.m1\.medium | 1 | 1 | 3\.75 | No | No | — | Moderate | 
 | db\.m1\.small | 1 | 1 | 1\.7 | No | No | — | Very Low | 
-| db\.z1d – Latest Generation Memory Optimized Instance Classes | 
+| db\.z1d – Latest generation memory optimized instance classes | 
 | db\.z1d\.12xlarge | 48 | 271 | 384 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.z1d\.6xlarge | 24 | 134 | 192 | Yes | Yes | 7,000 | 10 Gbps | 
 | db\.z1d\.3xlarge | 12 | 75 | 96 | Yes | Yes | 3,500 | Up to 10 Gbps | 
 | db\.z1d\.2xlarge | 8 | 53 | 64 | Yes | Yes | 2,333 | Up to 10 Gbps | 
 | db\.z1d\.xlarge\* | 4 | 28 | 32 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
 | db\.z1d\.large\* | 2 | 15 | 16 | Yes | Yes | Up to 2,333 | Up to 10 Gbps | 
-| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
+| db\.x1e – Latest generation memory optimized instance classes | 
 | db\.x1e\.32xlarge | 128 | 340 | 3,904 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1e\.16xlarge | 64 | 179 | 1,952 | Yes | Yes | 7,000 | 10 Gbps | 
 | db\.x1e\.8xlarge | 32 | 91 | 976 | Yes | Yes | 3,500 | Up to 10 Gbps | 
 | db\.x1e\.4xlarge | 16 | 47 | 488 | Yes | Yes | 1,750 | Up to 10 Gbps | 
 | db\.x1e\.2xlarge | 8 | 23 | 244 | Yes | Yes | 1,000 | Up to 10 Gbps | 
 | db\.x1e\.xlarge | 4 | 12 | 122 | Yes | Yes | 500 | Up to 10 Gbps | 
-| db\.x1 – Current Generation Memory Optimized Instance Classes | 
+| db\.x1 – Current generation memory optimized instance classes | 
 | db\.x1\.32xlarge | 128 | 349 | 1,952 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.x1\.16xlarge | 64 | 174\.5 | 976 | Yes | Yes | 7,000 | 10 Gbps | 
-| Preview db\.r6g – Newest Generation Memory Optimized Instance Classes | 
+| db\.r6g – Newest generation memory optimized instance classes | 
 | db\.r6g\.16xlarge | 64 | – | 512 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r6g\.12xlarge | 48 | – | 384 | Yes | Yes | 13,500 | 20 Gbps | 
 | db\.r6g\.4xlarge | 16 | – | 128 | Yes | Yes | 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.large\* | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
-| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
 | db\.r5\.12xlarge | 48 | 173 | 384 | Yes | Yes | 9,500 | 10 Gbps | 
@@ -613,31 +610,31 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
-| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4 – Current generation memory optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 195 | 488 | Yes | Yes | 14,000 | 25 Gbps | 
 | db\.r4\.8xlarge | 32 | 99 | 244 | Yes | Yes | 7,000 | 10 Gbps | 
 | db\.r4\.4xlarge | 16 | 53 | 122 | Yes | Yes | 3,500 | Up to 10 Gbps | 
 | db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,700 | Up to 10 Gbps | 
 | db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 850 | Up to 10 Gbps | 
 | db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 425 | Up to 10 Gbps | 
-| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3 – Previous generation memory optimized instance classes | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | 
 | db\.r3\.xlarge | 4 | 13 | 30\.5 | No | Yes | 500 | Moderate | 
 | db\.r3\.large | 2 | 6\.5 | 15\.25 | No | No | — | Moderate | 
-| db\.m2 – Previous Generation Memory Optimized Instance Classes | 
+| db\.m2 – Previous generation memory optimized instance classes | 
 | db\.m2\.4xlarge | 8 | 26 | 68\.4 | No | Yes | 1,000 | High | 
 | db\.m2\.2xlarge | 4 | 13 | 34\.2 | No | Yes | 500 | Moderate | 
 | db\.m2\.xlarge | 2 | 6\.5 | 17\.1 | No | No | — | Moderate | 
-| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3 – Latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge\* | 8 | Variable | 32 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.xlarge\* | 4 | Variable | 16 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.large\* | 2 | Variable | 8 | Yes | Yes | Up to 2,048 | Up to 5 Gbps | 
 | db\.t3\.medium\* | 2 | Variable | 4 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.small\* | 2 | Variable | 2 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
 | db\.t3\.micro\* | 2 | Variable | 1 | Yes | Yes | Up to 1,536 | Up to 5 Gbps | 
-| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2 – Current generation burstable performance instance classes | 
 | db\.t2\.2xlarge | 8 | Variable | 32 | Yes | No | — | Moderate | 
 | db\.t2\.xlarge | 4 | Variable | 16 | Yes | No | — | Moderate | 
 | db\.t2\.large | 2 | Variable | 8 | Yes | No | — | Moderate | 

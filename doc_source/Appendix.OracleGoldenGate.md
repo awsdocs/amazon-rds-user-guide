@@ -7,7 +7,7 @@ When working with GoldenGate on Amazon RDS, consider the following:
 + You are responsible for managing GoldenGate licensing \(bring\-your\-own\-license\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 + Amazon RDS supports GoldenGate for Oracle Database Standard Edition Two \(SE2\), Standard Edition One \(SE1\), Standard Edition \(SE\), and Enterprise Edition \(EE\)\. 
 + Amazon RDS supports GoldenGate for database version 11\.2\.0\.4, 12\.1\.0\.2, 12\.2\.0\.1, 18\.0\.0\.0, and 19\.0\.0\. 
-+ Amazon RDS supports GoldenGate version 11\.2\.1 and later, including 12\.1, 12\.2, and 12\.3\. 
++ Amazon RDS supports GoldenGate version 11\.2\.1 and later\. 
 + Amazon RDS supports migration and replication across Oracle databases using GoldenGate\. We do not support nor prevent customers from migrating or replicating across heterogeneous databases\. 
 + You can use GoldenGate on Amazon RDS Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. To maintain the integrity of replicated data, you should configure encryption on the GoldenGate hub using EBS encrypted volumes or trail file encryption\. You should also configure encryption for data sent between the GoldenGate hub and the source and target database instances\. Amazon RDS Oracle DB instances support encryption with [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) or [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 + GoldenGate DDL is supported with GoldenGate version 12\.1 and later when using Integrated capture mode\. 

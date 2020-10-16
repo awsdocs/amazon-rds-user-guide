@@ -64,7 +64,7 @@ When you update the trust store, you can retain older certificates in addition t
 1. Run the following command to confirm that the wallet was updated successfully\.
 
    ```
-   prompt>orapki wallet display -wallet $ORACLE_HOME/ssl_wallet 
+   prompt>orapki wallet display -wallet $ORACLE_HOME/ssl_wallet                     
    ```
 
    Your output should contain the following\.
@@ -87,7 +87,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1. Convert the certificate to \.der format using the following command\.
 
    ```
-   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                    
+   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                
    ```
 
    Replace the file name with the one that you downloaded\.
@@ -95,13 +95,13 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1. Import the certificate into the key store using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                                    
    ```
 
 1. Confirm that the key store was updated successfully\.
 
    ```
-   keytool -list -v -keystore clientkeystore.jks                        
+   keytool -list -v -keystore clientkeystore.jks
    ```
 
    Enter the key store password when you are prompted for it\.

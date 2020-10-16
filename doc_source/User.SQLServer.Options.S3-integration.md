@@ -14,7 +14,8 @@ S3 integration tasks share the same queue as native backup and restore tasks\. A
 **Note**  
 Files with the \.ispac file extension are supported for download when SQL Server Integration Services is enabled\. For more information on enabling SSIS, see [SQL Server Integration Services](Appendix.SQLServer.Options.SSIS.md)\.  
 Files with the following file extensions are supported for download when SQL Server Analysis Services is enabled: \.abf, \.asdatabase, \.configsettings, \.deploymentoptions, \.deploymenttargets, and \.xmla\. For more information on enabling SSAS, see [SQL Server Analysis Services](Appendix.SQLServer.Options.SSAS.md)\.
-+ The S3 bucket must have the same owner as the related AWS Identity and Access Management \(IAM\) role\. Also, the bucket can't be open to the public\.
++ The S3 bucket must have the same owner as the related AWS Identity and Access Management \(IAM\) role\. Therefore, cross\-account S3 integration isn't supported\.
++ The S3 bucket can't be open to the public\.
 + File size for uploads is limited to 50 GB per file\.
 
 **Topics**
