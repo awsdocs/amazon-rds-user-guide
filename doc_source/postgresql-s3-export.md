@@ -69,7 +69,7 @@ psql=> SELECT aws_commons.create_s3_uri(
    'sample-bucket',
    'sample-filepath',
    'us-west-2'
-) AS s3_uri_1 \gset
+) AS s3_uri_1; \gset
 ```
 
 You later provide this `s3_uri_1` value as a parameter in the call to the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function\. For examples, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
