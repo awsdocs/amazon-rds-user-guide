@@ -4,7 +4,7 @@ DB instances for Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsof
 
 ## Amazon RDS storage types<a name="Concepts.Storage"></a>
 
-Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic \(also known as standard\)\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 64 TiB of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.
+Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2\), Provisioned IOPS SSD \(also known as io1\), and magnetic \(also known as standard\)\. They differ in performance characteristics and price, which means that you can tailor your storage performance and cost to the needs of your database workload\. You can create MySQL, MariaDB, Oracle, and PostgreSQL RDS DB instances with up to 64 tebibytes \(TiB\) of storage\. You can create SQL Server RDS DB instances with up to 16 TiB of storage\. For this amount of storage, use the Provisioned IOPS SSD and General Purpose SSD storage types\.
 
 The following list briefly describes the three storage types: 
 + **General Purpose SSD** – General Purpose SSD volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\.
@@ -62,8 +62,8 @@ The burst duration of your storage depends on the size of the storage, the burst
 
 ```
                               (Credit balance)
-   Burst duration =  ------------------------------------
-                     (Burst IOPS) - 3(Storage size in GiB)
+   Burst duration =  --------------------------------------
+                     (Burst IOPS) - 3*(Storage size in GiB)
 ```
 
 You might notice that your storage performance is frequently limited to the base level due to an empty I/O credit balance\. If so, consider allocating more General Purpose SSD storage with a higher base performance level\. Alternatively, you can switch to Provisioned IOPS storage for workloads that require sustained IOPS performance\.

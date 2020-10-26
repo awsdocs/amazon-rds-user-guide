@@ -68,6 +68,40 @@ You can upgrade your existing DB instance to SQL Server 2017 or 2019 from any ve
 |  SQL Server 2012  |  SQL Server 2019 SQL Server 2017 SQL Server 2016 SQL Server 2014  | 
 |  SQL Server 2008 R2 \(Deprecated\)  |  SQL Server 2016 SQL Server 2014 SQL Server 2012  | 
 
+You can use an AWS CLI query, such as the following example, to find the available upgrades for a particular database engine version\.
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds describe-db-engine-versions \
+    --engine sqlserver-se \
+    --engine-version 14.00.3049.1.v1 \
+    --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" \
+    --output table
+```
+For Windows:  
+
+```
+aws rds describe-db-engine-versions ^
+    --engine sqlserver-se ^
+    --engine-version 14.00.3049.1.v1 ^
+    --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" ^
+    --output table
+```
+The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL Server 2017 or 2019 version\.  
+
+```
+--------------------------
+|DescribeDBEngineVersions|
++------------------------+
+|      EngineVersion     |
++------------------------+
+|  14.00.3294.2.v1       |
+|  15.00.4043.16.v1      |
++------------------------+
+```
+
 ### Database compatibility level<a name="USER_UpgradeDBInstance.SQLServer.Major.Compatibility"></a>
 
 You can use Microsoft SQL Server database compatibility levels to adjust some database behaviors to mimic previous versions of SQL Server\. For more information, see [Compatibility level](https://msdn.microsoft.com/en-us/library/bb510680.aspx) in the Microsoft documentation\. 

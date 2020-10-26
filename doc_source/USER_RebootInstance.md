@@ -16,6 +16,8 @@ You can't reboot your DB instance if it is not in the available state\. Your dat
 
 The time required to reboot your DB instance depends on the crash recovery process, database activity at the time of reboot, and the behavior of your specific DB engine\. To improve the reboot time, we recommend that you reduce database activity as much as possible during the reboot process\. Reducing database activity reduces rollback activity for in\-transit transactions\. 
 
+For a DB instance with read replicas, you can reboot the source DB instance and its read replicas independently\. After a reboot completes, replication resumes automatically\.
+
 ## Console<a name="USER_RebootInstance.Console"></a>
 
 **To reboot a DB instance**

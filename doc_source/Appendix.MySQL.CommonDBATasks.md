@@ -78,6 +78,8 @@ ALTER TABLE table_name ENGINE = InnoDB, ALGORITHM=COPY;
 
 For example, the following query returns an `ALTER TABLE` statement for every InnoDB table that is not in the shared tablespace\.
 
+**For MySQL 5\.6 and 5\.7 DB instances:**
+
 ```
 SELECT CONCAT('ALTER TABLE `', 
 REPLACE(LEFT(NAME , INSTR((NAME), '/') - 1), '`', '``'), '`.`', 
@@ -86,11 +88,15 @@ FROM INFORMATION_SCHEMA.INNODB_SYS_TABLES
 WHERE SPACE <> 0 AND LEFT(NAME, INSTR((NAME), '/') - 1) NOT IN ('mysql','');
 ```
 
-**Note**  
-This query is supported on MySQL 5\.6 and until 8\. After MySQL 8, you should use INFORMATION_SCHEMA\.INNODB_TABLES\.
+**For MySQL 8\.0 DB instances:**
 
-
-
+```
+SELECT CONCAT('ALTER TABLE `', 
+REPLACE(LEFT(NAME , INSTR((NAME), '/') - 1), '`', '``'), '`.`', 
+REPLACE(SUBSTR(NAME FROM INSTR(NAME, '/') + 1), '`', '``'), '` ENGINE=InnoDB, ALGORITHM=COPY;') AS Query 
+FROM INFORMATION_SCHEMA.INNODB_TABLES 
+WHERE SPACE <> 0 AND LEFT(NAME, INSTR((NAME), '/') - 1) NOT IN ('mysql','');
+```
 
 Rebuilding a MySQL table to move the table's metadata to the shared tablespace requires additional storage space temporarily to rebuild the table, so the DB instance must have storage space available\. During rebuilding, the table is locked and inaccessible to queries\. For small tables or tables not frequently accessed, this might not be an issue\. For large tables or tables frequently accessed in a heavily concurrent environment, you can rebuild tables on a read replica\. 
 

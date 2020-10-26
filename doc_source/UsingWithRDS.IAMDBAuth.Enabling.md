@@ -1,16 +1,20 @@
 # Enabling and disabling IAM database authentication<a name="UsingWithRDS.IAMDBAuth.Enabling"></a>
 
-By default, IAM database authentication is disabled on DB instances\. You can enable IAM database authentication \(or disable it again\) using the AWS Management Console, AWS CLI, or the API\.
+By default, IAM database authentication is disabled on DB instances\. You can enable or disable IAM database authentication using the AWS Management Console, AWS CLI, or the API\.
+
+You can enable IAM database authentication when you perform one of the following actions:
++ To create a new DB instance with IAM database authentication enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
++ To modify a DB instance to enable IAM database authentication, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
++ To restore a DB instance from a snapshot with IAM database authentication enabled, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
++ To restore a DB instance to a point in time with IAM database authentication enabled, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
 IAM authentication for PostgreSQL DB instances requires that the SSL value be 1\. You can't enable IAM authentication for a PostgreSQL DB instance if the SSL value is 0\. You can't change the SSL value to 0 if IAM authentication is enabled for a PostgreSQL DB instance\. 
 
 ## Console<a name="UsingWithRDS.IAMDBAuth.Enabling.Console"></a>
 
-To create a new DB instance with IAM authentication by using the console, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+Each creation or modification workflow has a **Database authentication** section, where you can enable or disable IAM database authentication\. In that section, choose **Password and IAM database authentication** to enable IAM database authentication\.
 
-Each creation workflow has a **Configure Advanced Settings** page, where you can enable IAM database authentication\. In that page's **Database Options** section, choose **Yes** for **Enable IAM DB Authentication**\.
-
-**To enable or disable IAM authentication for an existing DB instance**
+**To enable or disable IAM database authentication for an existing DB instance**
 
 1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -18,29 +22,17 @@ Each creation workflow has a **Configure Advanced Settings** page, where you can
 
 1. Choose the DB instance that you want to modify\.
 **Note**  
- Make sure that all affected DB instances are compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\. For an Aurora DB cluster, you can only enable IAM authentication if all DB instances in the cluster are compatible with IAM\. 
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 1. Choose **Modify**\.
 
-1. In the **Database options** section, for **IAM DB authentication** choose **Enable IAM DB authentication** or **Disable**, and then choose **Continue**\.
+1. In the **Database authentication** section, choose **Password and IAM database authentication** to enable IAM database authentication, or choose a different option to disable it\.
 
-1. To apply the changes immediately, choose **Apply immediately**\.
+1. Choose **Continue**\.
+
+1. To apply the changes immediately, choose **Immediately** in the **Scheduling of modifications** section\.
 
 1. Choose **Modify DB instance** \.
-
-**To restore a DB instance**
-
-1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Snapshots**\.
-
-1. Choose the snapshot that you want to restore, and then choose **Restore Snapshot** for **Actions**\.
-
-1. In the **Settings** section, enter an identifier for the DB instance for **DB Instance Identifier**\.
-
-1. In the **Database options** section, for **IAM DB authentication**, choose **Enable IAM DB authentication** or **Disable**\.
-
-1. Choose **Restore DB Instance**\.
 
 ## AWS CLI<a name="UsingWithRDS.IAMDBAuth.Enabling.CLI"></a>
 
@@ -60,7 +52,7 @@ aws rds create-db-instance \
 To update an existing DB instance to have or not have IAM authentication, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Specify either the `--enable-iam-database-authentication` or `--no-enable-iam-database-authentication` option, as appropriate\.
 
 **Note**  
- Make sure that all affected DB instances are compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\. For an Aurora DB cluster, you can only enable IAM authentication if all DB instances in the cluster are compatible with IAM\. 
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 By default, Amazon RDS performs the modification during the next maintenance window\. If you want to override this and enable IAM DB authentication as soon as possible, use the `--apply-immediately` parameter\. 
 
@@ -86,10 +78,10 @@ To create a new DB instance with IAM authentication by using the API, use the AP
 To update an existing DB instance to have IAM authentication, use the API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the `EnableIAMDatabaseAuthentication` parameter to `true` to enable IAM authentication, or `false` to disable it\.
 
 **Note**  
- Make sure that all affected DB instances are compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\. For an Aurora DB cluster, you can only enable IAM authentication if all DB instances in the cluster are compatible with IAM\. 
+ Make sure that the DB instance is compatible with IAM authentication\. Check the compatibility requirements in [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability)\.
 
 If you are restoring a DB instance, use one of the following API operations:
-+  [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 + [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)
++  [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html)
 
 The IAM database authentication setting defaults to that of the source snapshot\. To change this setting, set the `EnableIAMDatabaseAuthentication` parameter to `true` to enable IAM authentication, or `false` to disable it\.

@@ -18,7 +18,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Resource | Default quota | 
 | --- | --- | 
 | Authorizations per DB security group | 20 | 
-| Burst balance \(for instances <1 TiB\) | 3000 IOPS | 
+| Burst balance for instances <1 tebibyte \(TiB\) | 3000 IOPS | 
 | Cross\-region snapshot copy requests | 5 | 
 | DB instances | 40 | 
 | DB security groups | 25 | 
@@ -35,7 +35,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 
 | Subnets per subnet group | 20 | 
 | Tags per resource | 50 | 
-| Total storage for all DB instances | 100 TB | 
+| Total storage for all DB instances | 100 terabytes \(TB\) | 
 | VPC security groups | 5 | 
 
 **Note**  

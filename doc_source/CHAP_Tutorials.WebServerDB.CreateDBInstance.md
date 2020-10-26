@@ -23,7 +23,7 @@ A new console interface is available for database creation\. Choose either the *
 1. On the **Create database** page, shown following, make sure that the **Standard Create** option is chosen, and then choose **MySQL**\.   
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MySQL-Launch01.png)
 
-1. In the **Templates** section, choose **Dev/Test**\.
+1. In the **Templates** section, choose **Free tier**\.
 
 1. In the **Settings** section, set these values:
    + **DB instance identifier** – **tutorial\-db\-instance**
@@ -35,8 +35,8 @@ A new console interface is available for database creation\. Choose either the *
 
 1. In the **DB instance size** section, set these values:
    + **Burstable classes \(includes t classes\)**
-   + **db\.t2\.small**  
-![\[DB instance size section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_DB_instance_size.png)
+   + **db\.t2\.micro**  
+![\[DB instance size section\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_DB_instance_micro.png)
 
 1. In the **Storage** and **Availability & durability** sections, use the default values\.
 
@@ -86,12 +86,12 @@ The VPC must have subnets in different Availability Zones\.
 1. On the **Select engine** page, shown following, choose **MySQL**, and then choose **Next**\.   
 ![\[Select engine\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-MySQL-Launch01.png)
 
-1. On the **Choose use case** page, choose **Dev/Test – MySQL**, and then choose **Next**\.
+1. On the **Choose use case** page, choose **Free tier – MySQL**, and then choose **Next**\.
 
 1. On the **Specify DB details** page, shown following, set these values:
    + **License model:** Use the default value\.
    + **DB engine version:** Use the default value\.
-   + **DB instance class:** `db.t2.small`
+   + **DB instance class:** `db.t2.micro`
    + **Multi\-AZ deployment:** `No`
    + **Storage type:** `General Purpose (SSD)`
    + **Allocated storage:** `20 GiB`

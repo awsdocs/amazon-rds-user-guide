@@ -13,9 +13,9 @@ Why do you want a managed relational database service? Because Amazon RDS takes 
 + Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. 
 + To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. 
 + You can have automated backups performed when you need them, or manually create your own backup snapshot\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\. 
-+ You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MySQL, MariaDB, or PostgreSQL read replicas to increase read scaling\. 
-+ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\. 
-+ In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\. 
++ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\.
++ You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL read replicas to increase read scaling\.
++ In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\.
 
 If you are new to AWS products and services, begin learning more with the following resources: 
 + For an overview of all AWS products, see [What is cloud computing?](http://aws.amazon.com/what-is-aws/)

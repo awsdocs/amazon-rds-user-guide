@@ -212,6 +212,6 @@ The following tables list the OS metrics available using Amazon CloudWatch Logs\
 
 <a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w127aac21c17c21b7b9"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w129aac21c22c21b7b9"></a>
 
 <a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

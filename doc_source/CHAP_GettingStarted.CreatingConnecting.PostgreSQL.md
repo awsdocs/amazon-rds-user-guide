@@ -1,6 +1,6 @@
 # Creating a PostgreSQL DB instance and connecting to a database on a PostgreSQL DB instance<a name="CHAP_GettingStarted.CreatingConnecting.PostgreSQL"></a>
 
-The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance, such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 GiB of storage\.
+The easiest way to create a DB instance is to use the RDS console\. After you have created the DB instance, you can use standard SQL client utilities to connect to the DB instance, such as the pgAdmin utility\. In this example, you create a DB instance running the PostgreSQL database engine called database\-1, with a db\.t2\.micro DB instance class and 20 gibibytes \(GiB\) of storage\.
 
 **Important**  
 Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.

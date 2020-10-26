@@ -224,7 +224,7 @@ If you modify a DB instance to enable Kerberos authentication, reboot the DB ins
 
 ### Step 5: Create Kerberos authentication MySQL logins<a name="mysql-kerberos-setting-up.create-logins"></a>
 
- Use the Amazon RDS master user credentials to connect to the MySQL DB instance as you do any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision MySQL logins and users from the Active Directory users and groups in your domain\. Database permissions are managed through standard MySQL permissions that are granted to and revoked from these logins\. 
+ Use the Amazon RDS master user credentials to connect to the MySQL DB instance as you do any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision MySQL logins and users from the Active Directory users in your domain\. Database permissions are managed through standard MySQL permissions that are granted to and revoked from these logins\. 
 
  You can allow an Active Directory user to authenticate with MySQL\. To do this, first use the Amazon RDS master user credentials to connect to the MySQL DB instance as with any other DB instance\. After you're logged in, create an externally authenticated user with PAM \(Pluggable Authentication Modules\) in MySQL as shown following\. 
 

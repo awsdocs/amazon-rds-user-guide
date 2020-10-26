@@ -9,15 +9,10 @@ You can export all types of DB and DB cluster snapshots including manual snapsho
 **Note**  
 Exporting snapshots from DB instances that use magnetic storage isn't supported\.
 
-Exporting snapshots is supported in the following AWS Regions:
-+ US East \(N\. Virginia\)
-+ US East \(Ohio\)
-+ US West \(Oregon\)
-+ Europe \(Ireland\)
-+ Asia Pacific \(Tokyo\)
-
-**Note**  
-You can copy a snapshot from an AWS Region where S3 export isn't supported to one where it is supported, then export the copy\. The S3 bucket must be in the same AWS Region as the copy\.
+Amazon RDS supports exporting snapshots in all AWS Regions except the following:
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
++ China
 
 The following table shows the engine versions that are supported for exporting snapshot data to Amazon S3\.
 
@@ -178,12 +173,17 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
 You can have up to five concurrent DB snapshot export tasks in progress per account\. 
 
 **Note**  
-Exporting RDS snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **Starting**\. When the task switches to exporting data to Amazon S3, progress displays as **In progress**\.  
+Exporting RDS snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **Starting**\. When the task switches to exporting data to S3, progress displays as **In progress**\.  
 The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column will take longer because the export uses a slower single threaded process\. 
 
 You can export a DB snapshot to Amazon S3 using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ### Console<a name="USER_ExportSnapshot.ExportConsole"></a>
+
+The **Export to Amazon S3** console option appears only for snapshots that can be exported to Amazon S3\. A snapshot might not be available for export because of the following reasons:
++ The DB engine isn't supported for S3 export\.
++ The DB instance version isn't supported for S3 export\.
++ S3 export isn't supported in the AWS Region where the snapshot was created\.
 
 **To export a DB snapshot**
 
@@ -468,7 +468,7 @@ The following table shows the mapping from PostgreSQL data types to Parquet data
 
 | PostgreSQL data type | Parquet primitive type | Logical type annotation | Mapping notes | 
 | --- | --- | --- | --- | 
-| Numeric Data Types | 
+| Numeric data types | 
 | BIGINT | INT64 |  |   | 
 | BIGSERIAL | INT64 |  |   | 
 | DECIMAL | BYTE\_ARRAY | STRING | A DECIMAL type is converted to a string in a BYTE\_ARRAY type and encoded as UTF8\.This conversion is to avoid complications due to data precision and data values that are not a number \(NaN\)\. | 
@@ -479,7 +479,7 @@ The following table shows the mapping from PostgreSQL data types to Parquet data
 | SERIAL | INT32 |  |   | 
 | SMALLINT | INT32 | INT\_16 |   | 
 | SMALLSERIAL | INT32 | INT\_16 |   | 
-| String and Related Data Types | 
+| String and related data types | 
 | ARRAY | BYTE\_ARRAY | STRING |  An array is converted to a string and encoded as BINARY \(UTF8\)\. This conversion is to avoid complications due to data precision, data values that are not a number \(NaN\), and time data values\.  | 
 | BIT | BYTE\_ARRAY | STRING |   | 
 | BIT VARYING | BYTE\_ARRAY | STRING |   | 
@@ -492,14 +492,14 @@ The following table shows the mapping from PostgreSQL data types to Parquet data
 | TEXT SEARCH | BYTE\_ARRAY | STRING |   | 
 | VARCHAR\(N\) | BYTE\_ARRAY | STRING |   | 
 | XML | BYTE\_ARRAY | STRING |   | 
-| Date and Time Data Types | 
+| Date and time data types | 
 | DATE | BYTE\_ARRAY | STRING |   | 
 | INTERVAL | BYTE\_ARRAY | STRING |   | 
 | TIME | BYTE\_ARRAY | STRING |  | 
 | TIME WITH TIME ZONE | BYTE\_ARRAY | STRING |  | 
 | TIMESTAMP | BYTE\_ARRAY | STRING |  | 
 | TIMESTAMP WITH TIME ZONE | BYTE\_ARRAY | STRING |  | 
-| Geometric Data Types | 
+| Geometric data types | 
 | BOX | BYTE\_ARRAY | STRING |   | 
 | CIRCLE | BYTE\_ARRAY | STRING |   | 
 | LINE | BYTE\_ARRAY | STRING |   | 
@@ -507,10 +507,10 @@ The following table shows the mapping from PostgreSQL data types to Parquet data
 | PATH | BYTE\_ARRAY | STRING |   | 
 | POINT | BYTE\_ARRAY | STRING |   | 
 | POLYGON | BYTE\_ARRAY | STRING |   | 
-| JSON Data Types | 
+| JSON data types | 
 | JSON | BYTE\_ARRAY | STRING |   | 
 | JSONB | BYTE\_ARRAY | STRING |   | 
-| Other Data Types | 
+| Other data types | 
 | BOOLEAN | BOOLEAN |  |   | 
 | CIDR | BYTE\_ARRAY | STRING |  Network data type | 
 | COMPOSITE | BYTE\_ARRAY | STRING |   | 

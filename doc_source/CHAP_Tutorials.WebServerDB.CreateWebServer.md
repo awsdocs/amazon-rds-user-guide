@@ -18,7 +18,7 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 **Important**  
 Don't choose **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
 
-1. Choose the **t2\.small** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
+1. Choose the **t2\.micro** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
 
 1. On the **Configure Instance Details** page, shown following, set these values and keep the other values as their defaults:
@@ -342,3 +342,7 @@ We recommend placing the user name and password information in a folder that isn
 You can use `SamplePage.php` to add data to your DB instance\. The data that you add is then displayed on the page\. To verify that the data was inserted into the table, you can install MySQL on the Amazon EC2 instance, connect to the DB instance, and query the table\. 
 
 To make sure that your DB instance is as secure as possible, verify that sources outside of the VPC can't connect to your DB instance\. 
+
+After you have finished testing your web server and your database, you should delete your DB instance and your Amazon EC2 instance\.
++ To delete a DB instance, follow the instructions in [Deleting a DB instance](USER_DeleteInstance.md)\. You don't need to create a final snapshot\.
++ To terminate an Amazon EC2 instance\. follow the instruction in [Terminate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide*\.

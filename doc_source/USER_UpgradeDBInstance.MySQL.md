@@ -18,6 +18,46 @@ If your MySQL DB instance is using read replicas, you must upgrade all of the re
 
 ## Overview of upgrading<a name="USER_UpgradeDBInstance.MySQL.Overview"></a>
 
+When you use the AWS Management Console to upgrade a DB instance, it shows the valid upgrade targets for the DB instance\. You can also use the following AWS CLI command to identify the valid upgrade targets for a DB instance:
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+  --engine mysql \
+  --engine-version version-number \
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+  --engine mysql ^
+  --engine-version version-number ^
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For example, to identify the valid upgrade targets for a MySQL version 5\.6\.43 DB instance, run the following AWS CLI command:
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+  --engine mysql \
+  --engine-version 5.6.43 \
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+  --engine mysql ^
+  --engine-version 5.6.43 ^
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
 Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken when the upgrade completes\. 
 
 **Note**  
@@ -27,9 +67,9 @@ After the upgrade is complete, you can't revert to the previous version of the d
 
 You control when to upgrade your DB instance to a new version supported by Amazon RDS\. This level of control helps you maintain compatibility with specific database versions and test new versions with your application before deploying in production\. When you are ready, you can perform version upgrades at the times that best fit your schedule\. 
 
-If your DB instance is using read replication, upgrade all of the read replicas before upgrading the source instance\. 
+If your DB instance is using read replication, you must upgrade all of the Read Replicas before upgrading the source instance\. 
 
-If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you experience an outage until the upgrade is complete\. The time for the outage varies based on the size of your DB instance\. 
+If your DB instance is in a Multi\-AZ deployment, both the primary and standby DB instances are upgraded\. The primary and standby DB instances are upgraded at the same time and you will experience an outage until the upgrade is complete\. The time for the outage varies based on your database engine, engine version, and the size of your DB instance\. 
 
 ## Major version upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Major"></a>
 
@@ -56,8 +96,6 @@ To perform a major version upgrade for a MySQL version 5\.5 DB instance on Amazo
 During a major version upgrade of MySQL, Amazon RDS runs the MySQL binary `mysql_upgrade` to upgrade tables, if necessary\. Also, Amazon RDS empties the `slow_log` and `general_log` tables during a major version upgrade\. To preserve log information, save the log contents before the major version upgrade\. 
 
 MySQL major version upgrades typically complete in about 10 minutes\. Some upgrades might take longer because of the DB instance class size or because the instance doesn't follow certain operational guidelines in [Best practices for Amazon RDS](CHAP_BestPractices.md)\. If you upgrade a DB instance from the Amazon RDS console, the status of the DB instance indicates when the upgrade is complete\. If you upgrade using the AWS Command Line Interface \(AWS CLI\), use the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and check the `Status` value\. 
-
-If you use a custom parameter group, for the new DB engine version you either specify a default parameter group or create your own custom parameter group\. Associating the new parameter group with the DB instance requires a customer\-initiated database reboot after the upgrade completes\. The DB instance's parameter group status shows `pending-reboot` if the DB instance needs to be rebooted to apply the parameter group changes\. You can view a DB instance's parameter group status in the console or by using a call such as `describe-db-instances`\.
 
 ### Upgrades to MySQL version 5\.7 might be slow<a name="USER_UpgradeDBInstance.MySQL.DateTime57"></a>
 
@@ -179,42 +217,51 @@ aws rds describe-db-engine-versions --output=table --engine mysql --engine-versi
 Your output is similar to the following\.
 
 ```
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-|                                                                                 DescribeDBEngineVersions                                                                                 |
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-||                                                                                    DBEngineVersions                                                                                    ||
-|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
-||   DBEngineDescription   | DBEngineVersionDescription  | DBParameterGroupFamily  | Engine  | EngineVersion  |  Status    | SupportsLogExportsToCloudwatchLogs   |  SupportsReadReplica  ||
-|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
-||  MySQL Community Edition|  mysql 5.7.19               |  mysql5.7               |  mysql  |  5.7.19        |  available |  True                                |  True                 ||
-|+-------------------------+-----------------------------+-------------------------+---------+----------------+------------+--------------------------------------+-----------------------+|
-|||                                                                                  ExportableLogTypes                                                                                  |||
-||+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+||
-|||  audit                                                                                                                                                                               |||
-|||  error                                                                                                                                                                               |||
-|||  general                                                                                                                                                                             |||
-|||  slowquery                                                                                                                                                                           |||
-||+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+||
-|||                                                                                  ValidUpgradeTarget                                                                                  |||
-||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
-|||          AutoUpgrade          |           Description            |       Engine        |            EngineVersion            |                 IsMajorVersionUpgrade                 |||
-||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
-|||  False                        |  MySQL 5.7.21                    |  mysql              |  5.7.21                             |  False                                                |||
-|||  False                        |  MySQL 5.7.22                    |  mysql              |  5.7.22                             |  False                                                |||
-|||  False                        |                                  |  mysql              |  5.7.23                             |  False                                                |||
-|||  False                        |  MySQL 5.7.24                    |  mysql              |  5.7.24                             |  False                                                |||
-|||  False                        |  MySQL 5.7.25                    |  mysql              |  5.7.25                             |  False                                                |||
-|||  True                         |  MySQL 5.7.26                    |  mysql              |  5.7.26                             |  False                                                |||
-|||  False                        |  MySQL 5.7.28                    |  mysql              |  5.7.28                             |  False                                                |||
-|||  False                        |  MySQL 5.7.30                    |  mysql              |  5.7.30                             |  False                                                |||
-|||  False                        |  MySQL 8.0.11                    |  mysql              |  8.0.11                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.13                    |  mysql              |  8.0.13                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.15                    |  mysql              |  8.0.15                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.16                    |  mysql              |  8.0.16                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.17                    |  mysql              |  8.0.17                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.19                    |  mysql              |  8.0.19                             |  True                                                 |||
-|||  False                        |  MySQL 8.0.20                    |  mysql              |  8.0.20                             |  True                                                 |||
-||+-------------------------------+----------------------------------+---------------------+-------------------------------------+-------------------------------------------------------+||
+-----------------------------------------------------------------------------------------
+|                               DescribeDBEngineVersions                                |
++---------------------------------------------------------------------------------------+
+||                                  DBEngineVersions                                   ||
+|+-------------------------------------------------+-----------------------------------+|
+||  DBEngineDescription                            |  MySQL Community Edition          ||
+||  DBEngineVersionDescription                     |  mysql 5.7.19                     ||
+||  DBParameterGroupFamily                         |  mysql5.7                         ||
+||  Engine                                         |  mysql                            ||
+||  EngineVersion                                  |  5.7.19                           ||
+||  Status                                         |  available                        ||
+||  SupportsGlobalDatabases                        |  False                            ||
+||  SupportsLogExportsToCloudwatchLogs             |  True                             ||
+||  SupportsParallelQuery                          |  False                            ||
+||  SupportsReadReplica                            |  True                             ||
+|+-------------------------------------------------+-----------------------------------+|
+|||                                ExportableLogTypes                                 |||
+||+-----------------------------------------------------------------------------------+||
+|||  audit                                                                            |||
+|||  error                                                                            |||
+|||  general                                                                          |||
+|||  slowquery                                                                        |||
+||+-----------------------------------------------------------------------------------+||
+|||                                ValidUpgradeTarget                                 |||
+||+-------------+---------------+---------+----------------+--------------------------+||
+||| AutoUpgrade |  Description  | Engine  | EngineVersion  |  IsMajorVersionUpgrade   |||
+||+-------------+---------------+---------+----------------+--------------------------+||
+|||  False      |  MySQL 5.7.21 |  mysql  |  5.7.21        |  False                   |||
+|||  False      |  MySQL 5.7.22 |  mysql  |  5.7.22        |  False                   |||
+|||  False      |               |  mysql  |  5.7.23        |  False                   |||
+|||  False      |  MySQL 5.7.24 |  mysql  |  5.7.24        |  False                   |||
+|||  False      |  MySQL 5.7.25 |  mysql  |  5.7.25        |  False                   |||
+|||  True       |  MySQL 5.7.26 |  mysql  |  5.7.26        |  False                   |||
+|||  False      |  MySQL 5.7.28 |  mysql  |  5.7.28        |  False                   |||
+|||  False      |  MySQL 5.7.30 |  mysql  |  5.7.30        |  False                   |||
+|||  False      |  MySQL 5.7.31 |  mysql  |  5.7.31        |  False                   |||
+|||  False      |  MySQL 8.0.11 |  mysql  |  8.0.11        |  True                    |||
+|||  False      |  MySQL 8.0.13 |  mysql  |  8.0.13        |  True                    |||
+|||  False      |  MySQL 8.0.15 |  mysql  |  8.0.15        |  True                    |||
+|||  False      |  MySQL 8.0.16 |  mysql  |  8.0.16        |  True                    |||
+|||  False      |  MySQL 8.0.17 |  mysql  |  8.0.17        |  True                    |||
+|||  False      |  MySQL 8.0.19 |  mysql  |  8.0.19        |  True                    |||
+|||  False      |  MySQL 8.0.20 |  mysql  |  8.0.20        |  True                    |||
+|||  False      |  MySQL 8.0.21 |  mysql  |  8.0.21        |  True                    |||
+||+-------------+---------------+---------+----------------+--------------------------+||
 ```
 
 In this example, the `AutoUpgrade` value is `True` for MySQL version 5\.7\.26\. So, the automatic minor upgrade target is MySQL version 5\.7\.26, which is highlighted in the output\.
