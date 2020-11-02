@@ -328,9 +328,9 @@ These procedures upload or download the files in a single directory\. You can't 
 
 ### Uploading files from an Oracle DB instance to an Amazon S3 bucket<a name="oracle-s3-integration.using.upload"></a>
 
-To upload files from an Oracle DB instance to an Amazon S3 bucket, use the Amazon RDS procedure `rdsadmin.rdsadmin_s3_tasks.upload_to_s3`\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. For more information about performing RMAN backups, see [Common DBA Recovery Manager \(RMAN\) tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
+You can upload files from an Oracle DB instance to an Amazon S3 bucket\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. The maximum object size in an Amazon S3 bucket is 5 TB\. For more information about working with objects, see [Amazon Simple Storage Service Developer Guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)\. For more information about performing RMAN backups, see [Common DBA Recovery Manager \(RMAN\) tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
 
-The `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure has the following parameters\.
+You upload files using the `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure\. This procedure has the following parameters\.
 
 
 ****  

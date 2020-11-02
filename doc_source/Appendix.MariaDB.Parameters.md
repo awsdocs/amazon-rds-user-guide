@@ -1,6 +1,8 @@
 # Parameters for MariaDB<a name="Appendix.MariaDB.Parameters"></a>
 
-By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. The following MySQL parameters are not available in MariaDB\-specific DB parameter groups:
+By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For information about working with parameter groups and setting parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+The following MySQL parameters are not available in MariaDB\-specific DB parameter groups:
 + bind\_address
 + binlog\_error\_action
 + binlog\_gtid\_simple\_recovery

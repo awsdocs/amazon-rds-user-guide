@@ -34,12 +34,16 @@ You can use the procedure following to restore from a snapshot in the AWS Manage
 
 1. Choose the DB snapshot that you want to restore from\. 
 
-1. For **Actions**, choose **Restore Snapshot**\.  
-![\[Console restore snapshot db\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring2.png)
+1. For **Actions**, choose **Restore snapshot**\.  
+![\[Console restore DB snapshot\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tut-restoring2.png)
 
-   The **Restore DB Instance** page appears\.
+   The **Restore snapshot** page appears\.
 
-1. For **DB Instance Identifier** under **Settings**, enter the name that you want to use for the restored DB instance\. If you are restoring from a DB instance that you deleted after you made the DB snapshot, you can use the name of that DB instance\.
+1. For **DB Instance identifier** under **Settings**, enter the unique name that you want to use for the restored DB instance\.
+
+   If you're restoring from a DB instance that you deleted after you made the DB snapshot, you can use the name of that DB instance\.
+
+1. Choose additional settings as needed\.
 
 1. Choose **Restore DB Instance**\.
 

@@ -38,7 +38,7 @@ The following are the common management tasks you perform with an Amazon RDS SQL
 
 There are also advanced administrative tasks for working with SQL Server DB instances\. For more information, see the following documentation: 
 + [Common DBA tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)\.
-+ [Using Windows Authentication with a DB instance DB instance](USER_SQLServerWinAuth.md)
++ [Using Windows Authentication with a SQL Server DB instance](USER_SQLServerWinAuth.md)
 + [Accessing the tempdb database](SQLServer.TempDB.md)
 
 ## Limits for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.FeatureSupport.Limits"></a>

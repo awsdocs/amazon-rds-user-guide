@@ -163,17 +163,43 @@ The alarm appears in the **CloudWatch alarms** section\.
 
 ## Best practices for working with MySQL storage engines<a name="CHAP_BestPractices.MySQLStorage"></a>
 
-On a MySQL DB instance, observe the following table creation limits:
-+ You're limited to 10,000 tables if you are either using Provisioned IOPS storage, or using General Purpose storage and the DB instance is 200 GiB or larger in size\.
-+ You're limited to 1000 tables if you are either using magnetic storage, or using General Purpose storage and the DB instance is less than 200 GiB in size\.
+Both table sizes and number of tables in a MySQL database can affect performance\.
 
-We recommend these limits because having large numbers of tables significantly increases database recovery time after a failover or database crash\. If you need to create more tables than recommended, set the `innodb_file_per_table` parameter to 0\. For more information, see [Working with InnoDB tablespaces to improve crash recovery times](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.Tables) and [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+### Table size<a name="CHAP_BestPractices.MySQLStorage.TableSize"></a>
 
-For MySQL DB instances that use version 5\.7 or later, you can exceed these table creation limits due to improvements in InnoDB crash recovery\. However, we still recommend that you take caution due to the potential performance impact of creating very large numbers of tables\.
+Typically, operating system constraints on file sizes determine the effective maximum table size for MySQL databases\. So, the limits usually aren't determined by internal MySQL constraints\.
 
 On a MySQL DB instance, avoid tables in your database growing too large\. Although the general storage limit is 64 TiB, provisioned storage limits restrict the maximum size of a MySQL table file to 16 TiB\. Partition your large tables so that file sizes are well under the 16 TiB limit\. This approach can also improve performance and recovery time\. For more information, see [MySQL file size limits in Amazon RDS](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)\.
 
-The Point\-In\-Time Restore and snapshot restore features of Amazon RDS for MySQL require a crash\-recoverable storage engine and are supported for the InnoDB storage engine only\. Although MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, the MyISAM storage engine does not support reliable crash recovery and might prevent a Point\-In\-Time Restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MySQL is restarted after a crash\. 
+Very large tables \(greater than 100 GB in size\) can negatively affect performance for both reads and writes \(including DML statements and especially DDL statements\)\. Indexes on larges tables can significantly improve select performance, but they can also degrade the performance of DML statements\. DDL statements, such as `ALTER TABLE`, can be significantly slower for the large tables because those operations might completely rebuild a table in some cases\. These DDL statements might lock the tables for the duration of the operation\.
+
+The amount of memory required by MySQL for reads and writes depends on the tables involved in the operations\. It is a best practice to have at least enough RAM to the hold the indexes of *actively* used tables\. To find the ten largest tables and indexes in a database, use the following query:
+
+```
+SELECT CONCAT(table_schema, '.', table_name),
+       CONCAT(ROUND(table_rows / 1000000, 2), 'M')                                    rows,
+       CONCAT(ROUND(data_length / ( 1024 * 1024 * 1024 ), 2), 'G')                    DATA,
+       CONCAT(ROUND(index_length / ( 1024 * 1024 * 1024 ), 2), 'G')                   idx,
+       CONCAT(ROUND(( data_length + index_length ) / ( 1024 * 1024 * 1024 ), 2), 'G') total_size,
+       ROUND(index_length / data_length, 2)                                           idxfrac
+FROM   information_schema.TABLES
+ORDER  BY data_length + index_length DESC
+LIMIT  10;
+```
+
+### Number of tables<a name="CHAP_BestPractices.MySQLStorage.NumberOfTables"></a>
+
+While the underlying file system might have a limit on the number of files that represent tables, MySQL has no limit on the number of tables\. However, the total number of tables in the MySQL InnoDB storage engine can contribute to the performance degradation, regardless of the size of those tables\. To limit the operating system impact, you can split the tables across multiple databases in the same MySQL DB instance\. Doing so might limit the number of files in a directory but won't solve the overall problem\.
+
+When there is performance degradation because of a large number of tables \(more than 10 thousand\), it is caused by MySQL working with storage files, including opening and closing them\. To address this issue, you can increase the size of the `table_open_cache` and `table_definition_cache` parameters\. However, increasing the values of those parameters might significantly increase the amount of memory MySQL uses, and might even use all of the available memory\. For more information, see [ How MySQL Opens and Closes Tables](https://dev.mysql.com/doc/refman/8.0/en/table-cache.html) in the MySQL documentation\.
+
+In addition, too many tables can significantly affect MySQL startup time\. Both a clean shutdown and restart and a crash recovery can be affected, especially in versions prior to MySQL 8\.0\.
+
+We recommend having fewer than ten thousand tables total across all of the databases in a DB instance\. For a use case with a large number of tables in a MySQL database, see [ One Million Tables in MySQL 8\.0](https://www.percona.com/blog/2017/10/01/one-million-tables-mysql-8-0/)\.
+
+### Storage engine<a name="CHAP_BestPractices.MySQLStorage.StorageEngine"></a>
+
+The point\-in\-time restore and snapshot restore features of Amazon RDS for MySQL require a crash\-recoverable storage engine and are supported for the InnoDB storage engine only\. Although MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, the MyISAM storage engine does not support reliable crash recovery and might prevent a Point\-In\-Time Restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MySQL is restarted after a crash\. 
 
 InnoDB is the recommended and supported storage engine for MySQL DB instances on Amazon RDS\. InnoDB instances can also be migrated to Aurora, while MyISAM instances can't be migrated\. However, MyISAM performs better than InnoDB if you require intense, full\-text search capability\. If you still choose to use MyISAM with Amazon RDS, following the steps outlined in [Automated backups with unsupported MySQL storage engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictions) can be helpful in certain scenarios for snapshot restore functionality\.
 

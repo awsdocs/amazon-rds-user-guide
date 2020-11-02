@@ -21,7 +21,11 @@ Files with the following file extensions are supported for download when SQL Ser
 **Topics**
 + [Prerequisites for integrating RDS SQL Server with S3](#Appendix.SQLServer.Options.S3-integration.preparing)
 + [Enabling RDS SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.enabling)
-+ [Transferring files between RDS SQL Server and an S3 bucket](#Appendix.SQLServer.Options.S3-integration.using)
++ [Transferring files between RDS SQL Server and Amazon S3](#Appendix.SQLServer.Options.S3-integration.using)
++ [Listing files on the RDS DB instance](#Appendix.SQLServer.Options.S3-integration.using.listing-files)
++ [Deleting files on the RDS DB instance](#Appendix.SQLServer.Options.S3-integration.using.deleting-files)
++ [Monitoring the status of a file transfer task](#Appendix.SQLServer.Options.S3-integration.using.monitortasks)
++ [Canceling a task](#Appendix.SQLServer.Options.S3-integration.canceltasks)
 + [Multi\-AZ limitations for S3 integration](#S3-MAZ)
 + [Disabling RDS SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.disabling)
 
@@ -313,13 +317,13 @@ To add an IAM role to a DB instance, the status of the DB instance must be **ava
 
   Replace `your-role-arn` with the role ARN that you noted in a previous step\. `S3_INTEGRATION` must be specified for the `--feature-name` option\.
 
-## Transferring files between RDS SQL Server and an S3 bucket<a name="Appendix.SQLServer.Options.S3-integration.using"></a>
+## Transferring files between RDS SQL Server and Amazon S3<a name="Appendix.SQLServer.Options.S3-integration.using"></a>
 
-You can use Amazon RDS stored procedures to download and upload files between S3 and your RDS DB instance\. You can also use Amazon RDS stored procedures to list and delete files on the RDS instance\.
+You can use Amazon RDS stored procedures to download and upload files between Amazon S3 and your RDS DB instance\. You can also use Amazon RDS stored procedures to list and delete files on the RDS instance\.
 
-The files that you download from and upload to Amazon S3 are stored in the `D:\S3` folder\. This is the only folder that you can use to access your files\. You can organize your files into subfolders, which are created for you when you include the destination folder during download\.
+The files that you download from and upload to S3 are stored in the `D:\S3` folder\. This is the only folder that you can use to access your files\. You can organize your files into subfolders, which are created for you when you include the destination folder during download\.
 
-Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your Amazon S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name`\. Amazon S3 doesn't require an account number or AWS Region in ARNs\.
+Some of the stored procedures require that you provide an Amazon Resource Name \(ARN\) to your S3 bucket and file\. The format for your ARN is `arn:aws:s3:::bucket_name/file_name`\. Amazon S3 doesn't require an account number or AWS Region in ARNs\.
 
 S3 integration tasks run sequentially and share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. It can take up to five minutes for the task to begin processing\.
 
@@ -373,7 +377,7 @@ exec msdb.dbo.rds_upload_to_s3
 
 If the file previously existed in S3, it's overwritten because the @overwrite\_file parameter is set to `1`\.
 
-### Listing fileson the RDS DB instance<a name="Appendix.SQLServer.Options.S3-integration.using.listing-files"></a>
+## Listing files on the RDS DB instance<a name="Appendix.SQLServer.Options.S3-integration.using.listing-files"></a>
 
 To list the files available on the DB instance, use both a stored procedure and a function\. First, run the following stored procedure to gather file details from the files in `D:\S3\`\. 
 
@@ -397,7 +401,7 @@ The `rds_fn_list_file_details` function returns a table with the following colum
 | last\_modified\_utc | Last modification date and time in UTC format | 
 | is\_directory | Option that indicates whether the item is a directory \(true/false\) | 
 
-### Deleting files on the RDS instance<a name="Appendix.SQLServer.Options.S3-integration.using.deleting-files"></a>
+## Deleting files on the RDS DB instance<a name="Appendix.SQLServer.Options.S3-integration.using.deleting-files"></a>
 
 To delete the files available on the DB instance, use the Amazon RDS stored procedure `msdb.dbo.rds_delete_from_filesystem` with the following parameters\. 
 
@@ -424,9 +428,9 @@ exec msdb.dbo.rds_delete_from_filesystem
     @force_delete=1;
 ```
 
-### Monitoring the status of a file transfer task<a name="Appendix.SQLServer.Options.S3-integration.using.monitortasks"></a>
+## Monitoring the status of a file transfer task<a name="Appendix.SQLServer.Options.S3-integration.using.monitortasks"></a>
 
-To track the status of your S3 integration task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to S3 integration\. The second parameter accepts a task ID\. Set the second parameter to `0` to get results for all tasks\. 
+To track the status of your S3 integration task, call the `rds_fn_task_status` function\. It takes two parameters\. The first parameter should always be `NULL` because it doesn't apply to S3 integration\. The second parameter accepts a task ID\.
 
 To see a list of all tasks, set the first parameter to `NULL` and the second parameter to `0`, as shown in the following example\.
 
@@ -443,25 +447,25 @@ SELECT * FROM msdb.dbo.rds_fn_task_status(NULL,42);
 The `rds_fn_task_status` function returns the following information\.
 
 
-| Output parameter | Description | 
+|  Output parameter  |  Description  | 
 | --- | --- | 
-| `task_id` | The ID of the task\. | 
-| `task_type` | For S3 integration, tasks can have the following task types: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/User.SQLServer.Options.S3-integration.html)  | 
-| `database_name` | Not applicable to S3 integration tasks\. | 
-| `% complete` | The progress of the task as a percentage\. | 
-| `duration(mins)` | The amount of time spent on the task, in minutes\. | 
-| `lifecycle` |  The status of the task\. Possible statuses are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/User.SQLServer.Options.S3-integration.html)  | 
-| `task_info` | Additional information about the task\. If an error occurs during processing, this column contains information about the error\.  | 
-| `last_updated` | The date and time that the task status was last updated\.  | 
-| `created_at` | The date and time that the task was created\. | 
-| `S3_object_arn` | The ARN of the S3 object downloaded from or uploaded to\. | 
-| `overwrite_S3_backup_file` | Not applicable to S3 integration tasks\. | 
-| `KMS_master_key_arn` | Not applicable to S3 integration tasks\. | 
-| `filepath` | The file path on the RDS DB instance\. | 
-| `overwrite_file` | An option that indicates if an existing file is overwritten\. | 
-| `task_metadata` | Not applicable to S3 integration tasks\. | 
+|  `task_id`  |  The ID of the task\.  | 
+|  `task_type`  |  For S3 integration, tasks can have the following task types: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/User.SQLServer.Options.S3-integration.html)  | 
+|  `database_name`  | Not applicable to S3 integration tasks\. | 
+|  `% complete`  |  The progress of the task as a percentage\.  | 
+|  `duration(mins)`  |  The amount of time spent on the task, in minutes\.  | 
+|  `lifecycle`  |  The status of the task\. Possible statuses are the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/User.SQLServer.Options.S3-integration.html)  | 
+|  `task_info`  |  Additional information about the task\. If an error occurs during processing, this column contains information about the error\.   | 
+|  `last_updated`  |  The date and time that the task status was last updated\.   | 
+|  `created_at`  |  The date and time that the task was created\.  | 
+|  `S3_object_arn`  |  The ARN of the S3 object downloaded from or uploaded to\.  | 
+|  `overwrite_S3_backup_file`  |  Not applicable to S3 integration tasks\.  | 
+|  `KMS_master_key_arn`  |  Not applicable to S3 integration tasks\.  | 
+|  `filepath`  |  The file path on the RDS DB instance\.  | 
+|  `overwrite_file`  |  An option that indicates if an existing file is overwritten\.  | 
+|  `task_metadata`  |  Not applicable to S3 integration tasks\.  | 
 
-### Canceling a task<a name="Appendix.SQLServer.Options.S3-integration.canceltasks"></a>
+## Canceling a task<a name="Appendix.SQLServer.Options.S3-integration.canceltasks"></a>
 
 To cancel S3 integration tasks, use the `msdb.dbo.rds_cancel_task` stored procedure with the `task_id` parameter\. Delete and list tasks that are in progress can't be cancelled\. The following example shows a request to cancel a task\. 
 
@@ -480,7 +484,7 @@ We don't recommend using the `D:\S3` folder for file storage\. The best practice
 
 To determine the last failover time, you can use the `msdb.dbo.rds_failover_time` stored procedure\. For more information, see [Determining the last failover time](Appendix.SQLServer.CommonDBATasks.LastFailover.md)\.
 
-**Example Of no recent failover**  
+**Example of no recent failover**  
 This example shows the output when there is no recent failover in the error logs\. No failover has happened since 2020\-04\-29 23:59:00\.01\.  
 Therefore, all files downloaded after that time that haven't been deleted using the `rds_delete_from_filesystem` stored procedure are still accessible on the current host\. Files downloaded before that time might also be available\.  
 
@@ -489,7 +493,7 @@ Therefore, all files downloaded after that time that haven't been deleted using 
 | --- | --- | 
 |  2020\-04\-29 23:59:00\.0100000  |  null  | 
 
-**Example Of recent failover**  
+**Example of recent failover**  
 This example shows the output when there is a failover in the error logs\. The most recent failover was at 2020\-05\-05 18:57:51\.89\.  
 All files downloaded after that time that haven't been deleted using the `rds_delete_from_filesystem` stored procedure are still accessible on the current host\.  
 

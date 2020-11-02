@@ -25,7 +25,7 @@ The following table lists the resources and their quotas per AWS Region\.
 | DB subnet groups | 50 | 
 | Event subscriptions | 20 | 
 | IAM roles per DB instance | 5 | 
-| Manual snapshots | 100 | 
+| Manual DB snapshots | 100 | 
 | Option groups | 20 | 
 | Parameter groups | 50 | 
 | Proxies | 20 | 
@@ -46,7 +46,7 @@ The following limitations apply to the Amazon RDS DB instances:
 40 for MySQL, MariaDB, or PostgreSQL
 40 for Oracle under the "bring\-your\-own\-license" \(BYOL\) licensing model
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
-Backups managed by AWS Backup are considered manual snapshots for the manual snapshots quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Naming constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 

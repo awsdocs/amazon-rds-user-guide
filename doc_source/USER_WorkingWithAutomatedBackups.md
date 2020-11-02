@@ -13,7 +13,7 @@ The first snapshot of a DB instance contains the data for the full DB instance\.
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
 **Note**  
-You can also use AWS Backup to manage backups of Amazon RDS DB instances and Aurora DB clusters\. Backups managed by AWS Backup are considered manual snapshots for the manual snapshots limit\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+You can also use AWS Backup to manage backups of Amazon RDS DB instances\. Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 ## Backup storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 

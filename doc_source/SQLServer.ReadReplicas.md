@@ -25,7 +25,7 @@ For a read replica to receive and apply changes from the source, it should have 
 
 The following limitations apply to SQL Server read replicas on Amazon RDS:
 + Read replicas are only available on the SQL Server Enterprise Edition \(EE\) engine\.
-+ Read replicas are available for SQL Server versions 2016 and 2017\.
++ Read replicas are available for SQL Server versions 2016–2019\.
 + The source DB instance to be replicated must be a Multi\-AZ deployment with Always On AGs\.
 + Read replicas are only available for DB instances on the EC2\-VPC platform\.
 + Read replicas are only available for DB instances running on DB instance classes with four or more vCPUs\.

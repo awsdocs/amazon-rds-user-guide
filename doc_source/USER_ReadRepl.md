@@ -73,9 +73,21 @@ You can't create a read replica in a different AWS account from the source DB in
 
 1. For **Actions**, choose **Create read replica**\. 
 
-1. Choose your instance specifications\. We recommend that you use the same DB instance class and storage type as the source DB instance for the read replica\. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\. Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\.
+1. For **DB instance identifier**, enter a name for the read replica\.
 
-1. Choose the settings that you want to use\. For **DB instance identifier**, enter a name for the read replica\. Adjust other settings as needed\.
+1. Choose your instance specifications\. We recommend that you use the same DB instance class and storage type as the source DB instance for the read replica\.
+
+1. For **Multi\-AZ deployment**, choose **Yes** to create a standby of your replica in another Availability Zone for failover support for the replica\.
+**Note**  
+Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\.
+
+1. To create an encrypted read replica:
+
+   1. Choose **Enable encryption**\.
+
+   1. For **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\)\.
+**Note**  
+ The source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 1. Choose the other settings that you want to use\.
 
@@ -163,7 +175,7 @@ The promotion process takes a few minutes to complete\. When you promote a read 
 
 1. Choose the read replica that you want to promote\.
 
-1. For **Actions**, choose **Promote read replica**\.
+1. For **Actions**, choose **Promote**\.
 
 1. On the **Promote Read Replica** page, enter the backup retention period and the backup window for the newly promoted DB instance\.
 
@@ -236,15 +248,25 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose the MariaDB, MySQL, Oracle, or PostgreSQL DB instance that you want to use as the source for a read replica\. For **Actions**, choose **Create read replica**\. To create an encrypted read replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+1. Choose the MariaDB, MySQL, Oracle, or PostgreSQL DB instance that you want to use as the source for a read replica\.
+
+1. For **Actions**, choose **Create read replica**\.
+
+1. For **DB instance identifier**, enter a name for the read replica\.
+
+1. Choose the **Destination Region\.**
 
 1. Choose the instance specifications you want to use\. We recommend that you use the same DB instance class and storage type for the read replica\.
 
-1. Choose the other settings that you want to use:
-   + For **DB instance identifier**, enter a name for the read replica\.
-   + In the **Network & Security** section, choose a value for **Destination region** and **Destination DB subnet group**\.
-   + To create an encrypted read replica in another AWS Region, choose **Enable Encryption**, and then choose the **Master key**\. For the **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\) of the destination AWS Region\.
-   + Choose the other settings that you want to use\.
+1. To create an encrypted read replica in another AWS Region:
+
+   1. Choose **Enable encryption**\.
+
+   1. For **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\) of the destination AWS Region\.
+**Note**  
+ To create an encrypted read replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+
+1. Choose the other settings that you want to use\.
 
 1. Choose **Create read replica**\.
 
@@ -365,8 +387,11 @@ All of the considerations for performing replication within an AWS Region apply 
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.
 + You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) Region\.
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
-+ Within an AWS Region, all cross\-Region read replicas created from the same source DB instance must either be in the same VPC or be outside of a VPC\. For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
-+ You can create a cross\-Region read replica in a VPC from a source DB instance that is in a VPC in another AWS Region\. You can also create a cross\-Region read replica in a VPC from a source DB instance that is not in a VPC\. You can also create a cross\-Region read replica that is not in a VPC from a source DB instance that is in a VPC\.
++ For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
++ You can create a cross\-Region read replica:
+  +  In a VPC from a source DB instance that is in a VPC in another AWS Region
+  + In a VPC from a source DB instance that isn't in a VPC
+  + That isn't in a VPC from a source DB instance that is in a VPC
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 
 + The read replica uses the default DB parameter group for the specified DB engine\.
 + The read replica uses the default security group\.
