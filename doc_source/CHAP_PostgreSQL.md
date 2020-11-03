@@ -962,16 +962,16 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 | plls | 2\.3\.15 | 
 | [plperl](https://www.postgresql.org/docs/current/plperl.html) | 1\.0 | 
 | [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html) | 1\.0 | 
-| plprofiler | 4\.1 | 
+| [plprofiler](https://github.com/bigsql/plprofiler) | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html) | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.15 | 
 | [PostGIS](http://www.postgis.net/) | 3\.0\.2 | 
-| postgis\_raster | 3\.0\.2 | 
+| [postgis\_raster](https://postgis.net/docs/raster.html) | 3\.0\.2 | 
 | [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.2 | 
 | [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.2 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/current/postgres-fdw.html) | 1\.0 | 
 | [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 
-| rdkit | 3\.8 | 
+| [rdkit](https://github.com/rdkit/rdkit) | 3\.8 | 
 | [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 
@@ -1018,7 +1018,7 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 | [pg\_freespacemap](https://www.postgresql.org/docs/12/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 
 | [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.4 | 1\.3\.5 | 1\.3\.5 | 
 | [ pg\_prewarm](https://www.postgresql.org/docs/12/pgprewarm.html) | 1\.2 | 1\.2 | 1\.2 | 
-| pg\_proctab | NA | NA | 0\.0\.9 | 
+| [pg\_proctab](https://github.com/markwkm/pg_proctab) | NA | NA | 0\.0\.9 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.5 | 1\.4\.5 | 1\.4\.5 | 
 | [pg\_similarity](https://github.com/eulerto/pg_similarity) | 1\.0 | 1\.0 | 1\.0 | 
 | [pg\_stat\_statements](http://www.postgresql.org/docs/12/pgstatstatements.html) | 1\.7 | 1\.7 | 1\.7 | 
@@ -1036,16 +1036,16 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 | plls | 2\.3\.14 | 2\.3\.14 | 2\.3\.14 | 
 | [plperl](https://www.postgresql.org/docs/12/plperl.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [plpgsql](https://www.postgresql.org/docs/12/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 
-| plprofiler | 4\.1 | 4\.1 | 4\.1 | 
+| [plprofiler](https://github.com/bigsql/plprofiler) | 4\.1 | 4\.1 | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/12/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.14 | 2\.3\.14 | 2\.3\.14 | 
 | [PostGIS](http://www.postgis.net/) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
-| postgis\_raster | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
+| [postgis\_raster](https://postgis.net/docs/raster.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/12/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
-| rdkit | NA | NA | 3\.8 | 
+| [rdkit](https://github.com/rdkit/rdkit) | NA | NA | 3\.8 | 
 | [sslinfo](http://www.postgresql.org/docs/12/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/12/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 
@@ -1090,7 +1090,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [pg\_freespacemap](https://www.postgresql.org/docs/11/static/pgfreespacemap.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.2 | 1\.3\.2 | 1\.3\.4 | 1\.3\.4 | 1\.3\.4 | 1\.3\.4 | 1\.3\.5 | 1\.3\.5 | 
 | [ pg\_prewarm](https://www.postgresql.org/docs/11/static/pgprewarm.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| pg\_proctab | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 0\.0\.9 | 
+| [pg\_proctab](https://github.com/markwkm/pg_proctab) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 0\.0\.9 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 
 | pg\_similarity | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [pg\_stat\_statements](http://www.postgresql.org/docs/11/static/pgstatstatements.html) | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
@@ -1117,7 +1117,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [postgres\_fdw](http://www.postgresql.org/docs/11/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ postgresql\-hll](https://github.com/citusdata/postgresql-hll/releases/tag/v2.10.2) | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 2\.11 | 
 |  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 1\.2\.8 | 
-| rdkit | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 3\.8 | 
+| [rdkit](https://github.com/rdkit/rdkit) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 3\.8 | 
 | [sslinfo](http://www.postgresql.org/docs/11/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/11/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
