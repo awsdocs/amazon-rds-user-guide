@@ -115,7 +115,7 @@ DBNAME="mydb"
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
-client = boto3.client('rds')
+client = boto3.client('rds', REGION)
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
