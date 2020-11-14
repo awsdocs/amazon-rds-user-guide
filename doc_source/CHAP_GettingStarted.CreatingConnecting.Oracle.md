@@ -15,7 +15,7 @@ The DB instance is where you run your Oracle databases\.
 
 You can create a DB instance running Oracle with the AWS Management Console with **Easy Create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-For this example, you use **Easy Create** to create a DB instance running the Oracle database engine with a db\.t2\.micro DB instance class\.
+For this example, you use **Easy Create** to create a DB instance running the Oracle database engine with a db\.m4\.large DB instance class\.
 
 **Note**  
 For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.

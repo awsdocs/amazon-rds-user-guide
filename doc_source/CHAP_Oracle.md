@@ -180,30 +180,14 @@ The following are the DB instance classes supported for Oracle\.
 |  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 
 **Note**  
-We encourage all bring\-your\-own\-license customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB instance classes supported by Amazon RDS for Oracle, see [DB instance classes](Concepts.DBInstanceClass.md) and [Configuring the processor for a DB instance class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
-
-### Deprecated db\.t2 DB instance classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedT2"></a>
-
-The db\.t2 DB instance classes are deprecated for Amazon RDS for Oracle\. The db\.t2 DB instance classes have been replaced by the better performing db\.t3 DB instance classes that are generally available at a lower cost\. Starting on January 15, 2020, Amazon RDS for Oracle will automatically scale db\.t2 DB instances to comparable db\.t3 DB instance classes\.
-
-If you have DB instances that use db\.t2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
-
-If you have DB snapshots of DB instances that were using db\.t2 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
+We encourage all BYOL customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB instance classes supported by Amazon RDS for Oracle, see [DB instance classes](Concepts.DBInstanceClass.md) and [Configuring the processor for a DB instance class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
 
 **Note**  
-The db\.t3 DB instance classes have hyper\-threading enabled by default\. When DB instances running the db\.t2 DB instance class are migrated, the number of vCPUs is set automatically to the default number of the comparable db\.t3 DB instance class\. To learn more about the vCPU management features available on Amazon RDS for Oracle, and the default settings for each db\.t3 DB instance class, see [Configuring the processor for a DB instance class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.
-
-### Deprecated db\.m3 and db\.r3 DB instance classes for Oracle<a name="Oracle.Concepts.InstanceClasses.DeprecatedM3R3"></a>
-
- The db\.m3 and db\.r3 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 30, 2019, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
-
-If you have DB instances that use db\.m3 and db\.r3 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-
-If you have DB snapshots of DB instances that were using db\.m3 or db\.r3 DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\. 
+If you have DB snapshots of DB instances that were using deprecated DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
 ### Deprecated db\.m1 and db\.m2 DB instance classes for Oracle<a name="Oracle.Concepts.InstanceClasses.Deprecated"></a>
 
- The db\.m1 and db\.m2 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Starting on September 12, 2018, Amazon RDS for Oracle will automatically scale DB instances to DB instance classes that are not deprecated\. 
+The db\.m1 and db\.m2 DB instance classes are deprecated for Amazon RDS for Oracle\. These DB instance classes have been replaced by better performing DB instance classes that are generally available at a lower cost\. Amazon RDS for Oracle automatically scales DB instances to DB instance classes that are not deprecated\. 
 
 If you have DB instances that use db\.m1 and db\.m2 DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
@@ -681,10 +665,7 @@ HugePages are not enabled by default for the following DB instance classes\.
 | --- | --- | 
 |  db\.m5  |  db\.m5\.large  | 
 |  db\.m4  |  db\.m4\.large, db\.m4\.xlarge, db\.m4\.2xlarge, db\.m4\.4xlarge, db\.m4\.10xlarge  | 
-|  db\.m3  |  db\.m3\.medium, db\.m3\.large, db\.m3\.xlarge, db\.m3\.2xlarge  | 
-|  db\.r3  |  db\.r3\.large, db\.r3\.xlarge, db\.r3\.2xlarge, db\.r3\.4xlarge, db\.r3\.8xlarge  | 
 |  db\.t3  |  db\.t3\.micro, db\.t3\.small, db\.t3\.medium, db\.t3\.large  | 
-|  db\.t2  |  db\.t2\.micro, db\.t2\.small, db\.t2\.medium, db\.t2\.large  | 
 
 For more information about DB instance classes, see [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 
@@ -719,7 +700,7 @@ Assume the following parameters values are set in a parameter group\.
 6. use_large_pages          = {DBInstanceClassHugePagesDefault}
 ```
 
-The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory and a db\.r3 instance with more than 100 GiB memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, HugePages are enabled on the db\.r4 instance, but disabled on the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, HugePages are enabled on the db\.r4 instance\.
 
 Consider another example with following parameters values set in a parameter group\.
 
@@ -732,7 +713,7 @@ Consider another example with following parameters values set in a parameter gro
 6. use_large_pages         = FALSE
 ```
 
-The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instance class, both with less than 100 GiB of memory\. The parameter group is also used by a db\.r3 instance with more than 100 GiB memory\. With these parameter settings, HugePages are disabled on the db\.r4 instance, the db\.r5 instance, and the db\.r3 instance\.
+The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instance class, both with less than 100 GiB of memory\. With these parameter settings, HugePages are disabled on the db\.r4 and db\.r5 instance\.
 
 **Note**  
 If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.

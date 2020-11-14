@@ -209,7 +209,43 @@ In addition, Federated Storage Engine is currently not supported by Amazon RDS f
 
 ## Best practices for working with MariaDB storage engines<a name="CHAP_BestPractices.MariaDB"></a>
 
+Both table sizes and number of tables in a MariaDB database can affect performance\.
+
+### Table size<a name="CHAP_BestPractices.MariaDB.TableSize"></a>
+
+Typically, operating system constraints on file sizes determine the effective maximum table size for MariaDB databases\. So, the limits usually aren't determined by internal MariaDB constraints\.
+
+On a MariaDB DB instance, avoid tables in your database growing too large\. Although the general storage limit is 64 TiB, provisioned storage limits restrict the maximum size of a MariaDB table file to 16 TiB\. Partition your large tables so that file sizes are well under the 16 TiB limit\. This approach can also improve performance and recovery time\.
+
+Very large tables \(greater than 100 GB in size\) can negatively affect performance for both reads and writes \(including DML statements and especially DDL statements\)\. Indexes on larges tables can significantly improve select performance, but they can also degrade the performance of DML statements\. DDL statements, such as `ALTER TABLE`, can be significantly slower for the large tables because those operations might completely rebuild a table in some cases\. These DDL statements might lock the tables for the duration of the operation\.
+
+The amount of memory required by MariaDB for reads and writes depends on the tables involved in the operations\. It is a best practice to have at least enough RAM to the hold the indexes of *actively* used tables\. To find the ten largest tables and indexes in a database, use the following query:
+
+```
+SELECT CONCAT(table_schema, '.', table_name),
+       CONCAT(ROUND(table_rows / 1000000, 2), 'M')                                    rows,
+       CONCAT(ROUND(data_length / ( 1024 * 1024 * 1024 ), 2), 'G')                    DATA,
+       CONCAT(ROUND(index_length / ( 1024 * 1024 * 1024 ), 2), 'G')                   idx,
+       CONCAT(ROUND(( data_length + index_length ) / ( 1024 * 1024 * 1024 ), 2), 'G') total_size,
+       ROUND(index_length / data_length, 2)                                           idxfrac
+FROM   information_schema.TABLES
+ORDER  BY data_length + index_length DESC
+LIMIT  10;
+```
+
+### Number of tables<a name="CHAP_BestPractices.MariaDB.NumberOfTables"></a>
+
+While the underlying file system might have a limit on the number of files that represent tables, MariaDB has no limit on the number of tables\. However, the total number of tables in the MariaDB InnoDB storage engine can contribute to the performance degradation, regardless of the size of those tables\. To limit the operating system impact, you can split the tables across multiple databases in the same MariaDB DB instance\. Doing so might limit the number of files in a directory but won't solve the overall problem\.
+
+When there is performance degradation because of a large number of tables \(more than 10 thousand\), it is caused by MariaDB working with storage files, including opening and closing them\. To address this issue, you can increase the size of the `table_open_cache` and `table_definition_cache` parameters\. However, increasing the values of those parameters might significantly increase the amount of memory MariaDB uses, and might even use all of the available memory\. For more information, see [ Optimizing table\_open\_cache](https://mariadb.com/kb/en/optimizing-table_open_cache/) in the MariaDB documentation\.
+
+In addition, too many tables can significantly affect MariaDB startup time\. Both a clean shutdown and restart and a crash recovery can be affected\. We recommend having fewer than ten thousand tables total across all of the databases in a DB instance\.
+
+### Storage engine<a name="CHAP_BestPractices.MariaDB.StorageEngine"></a>
+
 The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated backups with unsupported MariaDB storage engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
+
+If you want to convert existing MyISAM tables to InnoDB tables, you can use the process outlined in the [MariaDB documentation](https://mariadb.com/kb/en/converting-tables-from-myisam-to-innodb/)\. MyISAM and InnoDB have different strengths and weaknesses, so you should fully evaluate the impact of making this switch on your applications before doing so\. 
 
 ## Best practices for working with Oracle<a name="CHAP_BestPractices.Oracle"></a>
 

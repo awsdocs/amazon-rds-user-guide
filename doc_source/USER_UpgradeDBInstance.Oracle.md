@@ -307,7 +307,6 @@ The following example modifies switches the database named `orcl1` to the BYOL l
 For Linux, macOS, or Unix:  
 
 ```
-       
 aws rds modify-db-instance \
     --db-instance-identifier orcl1 \
     --license_model bring-your-own-license
@@ -331,45 +330,16 @@ We plan to begin automatically upgrading your RDS for Oracle 11\.2 instance on N
 
 The upgrade goes in the following stages:
 
-1. [Scaling your instance class](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling)
+1. [Scaling the t3\.micro instance class](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling)
 
 1. [Upgrading 11\.2\.0\.4 SE1 to 19c SE2](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading)
 
 **Important**  
 Automatic upgrades can have unexpected consequences for AWS CloudFormation stacks\. If you rely on Amazon RDS to upgrade your DB instances automatically, you might encounter issues with AWS CloudFormation\.
 
-#### Scaling your instance class<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling"></a>
+#### Scaling the t3\.micro instance class<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling"></a>
 
-Some DB instance types aren't supported for 19c\. Before beginning the automatic upgrade, Amazon RDS scales the unsupported class to a corresponding supported class\. The following table lists the supported class that corresponds to each unsupported class\.
-
-
-|  Unsupported instance class  |  vCPUs in unsupported class  | Memory in unsupported class |  Supported instance class  |  vCPUs in supported class  | Memory in unsupported class |  HugePages is default?  | 
-| --- | --- | --- | --- | --- | --- | --- | 
-|  t3\.micro  |  2  |  1 GB  |  t3\.small  |  2  |  2 GB  |  No  | 
-|  t2\.micro  |  1  |  1 GB  |  t3\.small  |  2  |  2 GB  |  No  | 
-|  t2\.small  |  1  |  2 GB  |  t3\.small  |  2  |  2 GB  |  No  | 
-|  t2\.medium  |  2  |  4 GB  |  t3\.medium  |  2  |  4 GB  |  No  | 
-|  t2\.large  |  2  |  8 GB  |  t3\.large  |  2  |  8 GB  |  No  | 
-|  t2\.xlarge  |  4  |  16 GB  |  t3\.xlarge  |  4  |  16 GB  |  No  | 
-|  t2\.2xlarge  |  8  |  32 GB  |  t3\.2xlarge  |  8  |  32 GB  |  No  | 
-|  m3\.large  |  2  |  7\.5 GB  |  m5\.large  |  2  |  8 GB  |  No  | 
-|  m3\.xlarge  |  4  |  15 GB  |  m5\.xlarge  |  4  |  16 GB  |  Yes  | 
-|  m3\.2xlarge  |  8  |  30 GB  |  m5\.2xlarge  |  8  |  32 GB  |  Yes  | 
-|  r3\.large  |  2  |  15\.25 GB  |  r5\.large  |  2  |  16 GB  |  Yes  | 
-|  r3\.xlarge  |  4  |  30\.5 GB  |  r5\.xlarge  |  4  |  32 GB  |  Yes  | 
-|  r3\.2xlarge  |  8  |  61 GB  |  r5\.2xlarge  |  8  |  64 GB  |  Yes  | 
-|  r3\.4xlarge  |  16  |  122 GB  |  r5\.4xlarge  |  16  |  128 GB  |  Yes  | 
-|  r3\.8xlarge  |  32  |  244 GB  |  r5\.8xlarge  |  32   |  256 GB  |  Yes  | 
-
-If your new instance class has HugePages as the default, the upgrade performs the following steps:
-
-1. Clones the parameter group\. Amazon RDS explicitly sets the initialization parameter `USE_LARGE_PAGES` to `FALSE`\.
-
-1. Applies the cloned parameter group to the DB instance\.
-
-1. Reboots the DB instance\.
-
-1. Scales the DB instance to the new instance class\.
+The t3\.micro DB instance class isn't supported for 19c\. If your instance is a t3\.micro, then before beginning the automatic upgrade, Amazon RDS scales the instance to the t3\.small class\. The t3\.micro has 2 vCPUs and 1 GB memory, whereas the t3\.small has 2 vCPUs and 2 GB of memory\. In the t3\.small, HugePages isn't enabled by default\.
 
 #### Upgrading 11\.2\.0\.4 SE1 to 19c SE2<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading"></a>
 
