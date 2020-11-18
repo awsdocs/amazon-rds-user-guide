@@ -13,10 +13,16 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
-1. Choose the **Amazon Linux AMI**, as shown following\.  
+1. Choose the **Amazon Linux AMI**\.
+
+   1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, choose **Community AMIs**\.
+
+   1. Under **Operating system**, choose **Amazon Linux**\.
+
+   1. Select the first instance in the list that starts with **amzn\-ami\-hvm\-2018\.03\.0**, as shown following\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
 **Important**  
-Don't choose **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
+Don't choose an **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
 
 1. Choose the **t2\.micro** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)

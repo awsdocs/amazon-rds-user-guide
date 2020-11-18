@@ -10,7 +10,7 @@ A new console interface is available for database creation\. Choose either the *
 
 ## New console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.Console"></a>
 
-**To launch a MySQL DB instance**
+**To create a MySQL DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -71,7 +71,7 @@ The VPC must have subnets in different Availability Zones\.
 
 ## Original console<a name="CHAP_Tutorials.WebServerDB.CreateDBInstance.CurrentConsole"></a>
 
-**To launch a MySQL DB instance**
+**To create a MySQL DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 

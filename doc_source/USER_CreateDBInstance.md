@@ -90,7 +90,7 @@ For information about each setting, see [Settings for DB instances](#USER_Create
 For Linux, macOS, or Unix:  
 
 ```
- 1. aws rds create-db-instance 
+ 1. aws rds create-db-instance \
  2.     --engine sqlserver-se \
  3.     --db-instance-identifier mymsftsqlserver \
  4.     --allocated-storage 250 \

@@ -136,6 +136,11 @@ For example, in the dashboard following, **log file sync** waits account for mos
 
 In Amazon RDS Performance Insights, you can find statistics on running queries in the **Top SQL** section\. Performance Insights collects statistics only for the most common queries\. Typically, these match the top queries by load shown in the Performance Insights dashboard\.
 
+**Topics**
++ [Statistics for MariaDB and MySQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL)
++ [Statistics for Oracle](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle)
++ [Statistics for PostgreSQL](#USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL)
+
 ### Statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
 Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. This table is managed by the database and doesn't have an eviction policy\. If the table becomes full, new SQL queries aren't tracked\. To address this issue, Performance Insights automatically truncates the table when it's nearly full\.
@@ -200,7 +205,7 @@ The following screenshot shows the preferences for MariaDB and MySQL DB instance
 
 ![\[Preferences for metrics for running queries for MariaDB and MySQL DB instances.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_ams.png)
 
-### Statistics for Amazon RDS for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle"></a>
+### Statistics for Oracle<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.Oracle"></a>
 
 The following SQL statistics are available for Oracle DB instances\.
 
@@ -244,6 +249,68 @@ The following screenshot shows the preferences for Oracle DB instances\.
 The following screenshot shows the statistics for a SQL statement\.
 
 ![\[Statistics for a SQL statement\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_stats_oracle.png)
+
+### Statistics for PostgreSQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.PostgreSQL"></a>
+
+To view SQL Digest statistics, the `pg_stat_statements` library must be loaded\. For PostgreSQL DB instances that are compatible with PostgreSQL 11 or later, this library is loaded by default\. For PostgreSQL DB instances that are compatible with PostgreSQL 10 or earlier, you enable this library manually\. To enable it manually, add `pg_stat_statements` to `shared_preload_libraries` in the DB parameter group associated with the DB instance\. Then reboot your DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+**Note**  
+Performance Insights can only collect statistics for queries in `pg_stat_activity` that aren't truncated\. By default, PostgreSQL databases truncate queries longer than 1,024 bytes\. To increase the query size, change the `track_activity_query_size` parameter in the DB parameter group associated with your DB instance\. When you change this parameter, a DB instance reboot is required\.
+
+The following SQL Digest statistics are available for PostgreSQL DB instances\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\_tokenized\.stats\.calls\_per\_sec | Calls per second | 
+| db\.sql\_tokenized\.stats\.rows\_per\_sec | Rows per second | 
+| db\.sql\_tokenized\.stats\.total\_time\_per\_sec | Average active executions per second \(AAE\) | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_sec | Block hits per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_sec | Block reads per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_sec | Blocks dirtied per second | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_sec | Block writes per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_sec | Local block hits per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_sec | Local block reads per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_sec | Local block dirty per second | 
+| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_sec | Local block writes per second | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_written\_per\_sec | Temporary writes per second | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_read\_per\_sec | Temporary reads per second | 
+| db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_sec | Average concurrent reads per second | 
+| db\.sql\_tokenized\.stats\.blk\_write\_time\_per\_sec | Average concurrent writes per second | 
+
+The following metrics provide per call statistics for a SQL statement\.
+
+
+| Metric | Unit | 
+| --- | --- | 
+| db\.sql\_tokenized\.stats\.rows\_per\_call | Rows per call | 
+| db\.sql\_tokenized\.stats\.avg\_latency\_per\_call | Average latency per call \(in ms\) | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_hit\_per\_call | Block hits per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_read\_per\_call | Block reads per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_written\_per\_call | Block writes per call | 
+| db\.sql\_tokenized\.stats\.shared\_blks\_dirtied\_per\_call | Blocks dirtied per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_hit\_per\_call | Local block hits per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_read\_per\_call | Local block reads per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_dirtied\_per\_call | Local block dirty per call | 
+| db\.sql\_tokenized\.stats\.local\_blks\_written\_per\_call | Local block writes per call | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_written\_per\_call | Temporary block writes per call | 
+| db\.sql\_tokenized\.stats\.temp\_blks\_read\_per\_call | Temporary block reads per call | 
+| db\.sql\_tokenized\.stats\.blk\_read\_time\_per\_call | Read time per call \(in ms\) | 
+| db\.sql\_tokenized\.stats\.blk\_write\_time\_per\_call | Write time per call \(in ms\) | 
+
+For more information about these metrics, see [pg\_stat\_statements](https://www.postgresql.org/docs/10/pgstatstatements.html) in the PostgreSQL documentation\.
+
+#### Analyzing PostgreSQL metrics for running SQL statements<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.AnalyzingDigestLevel"></a>
+
+Using the AWS Management Console, you can view the metrics for a running SQL query by choosing the **SQL** tab\.
+
+![\[Viewing metrics for running queries\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_digest.png)
+
+Choose which statistics to display by choosing the gear icon in the upper\-right corner of the chart\.
+
+The following screenshot shows the preferences for PostgreSQL\.
+
+![\[Preferences for metrics for running queries for PostgreSQL DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_per_sql_pref_apg.png)
 
 ## Viewing more SQL text in the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard.SQLTextSize"></a>
 

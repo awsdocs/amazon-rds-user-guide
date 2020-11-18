@@ -117,6 +117,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Configuring security protocols and ciphers](SQLServer.Ciphers.md)
       + [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)
       + [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)
+      + [Using Database Mail on Amazon RDS for SQL Server](SQLServer.DBMail.md)
    + [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)
       + [Support for native backup and restore in SQL Server](Appendix.SQLServer.Options.BackupRestore.md)
       + [Support for Transparent Data Encryption in SQL Server](Appendix.SQLServer.Options.TDE.md)

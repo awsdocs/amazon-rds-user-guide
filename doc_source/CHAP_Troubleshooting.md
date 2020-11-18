@@ -246,6 +246,7 @@ You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
 **Topics**
 + [Maximum MySQL and MariaDB connections](#USER_ConnectToInstance.max_connections)
++ [Diagnosing and resolving incompatible parameters status for a memory limit](#CHAP_Troubleshooting.incompatible-parameters-memory)
 + [Diagnosing and resolving lag between read replicas](#CHAP_Troubleshooting.MySQL.ReplicaLag)
 + [Diagnosing and resolving a MySQL or MariaDB read replication failure](#CHAP_Troubleshooting.MySQL.RR)
 + [Creating triggers with binary logging enabled requires SUPER privilege](#CHAP_Troubleshooting.MySQL.CreatingTriggers)
@@ -270,6 +271,49 @@ You can retrieve the number of active connections to a MySQL or MariaDB DB insta
 ```
 SHOW STATUS WHERE `variable_name` = 'Threads_connected';
 ```
+
+### Diagnosing and resolving incompatible parameters status for a memory limit<a name="CHAP_Troubleshooting.incompatible-parameters-memory"></a>
+
+A MariaDB or MySQL DB instance can be placed in **incompatible\-parameters** status for a memory limit when both of the following conditions are met:
++ The DB instance is either restarted at least three time in one hour or at least five times in one day, or an attempt to restart the DB instance fails\.
++ The potential memory usage of the DB instance exceeds 1\.2 times the memory allocated to its DB instance class\.
+
+When a DB instance is restarted for the third time in one hour or for the fifth time in one day, Amazon RDS for MySQL performs a check for memory usage\. The check makes the a calculation of the potential memory usage of the DB instance\. The value returned by the calculation is the sum of the following values:
++ **Value 1** – The sum of the following parameters: 
+  + `innodb_additional_mem_pool_size`
+  + `innodb_buffer_pool_size`
+  + `innodb_log_buffer_size`
+  + `key_buffer_size`
+  + `query_cache_size` \(MySQL version 5\.6 and 5\.7 only\)
+  + `tmp_table_size`
++ **Value 2** – The `max_connections` parameter multiplied by the sum of the following parameters:
+  + `binlog_cache_size`
+  + `join_buffer_size`
+  + `read_buffer_size`
+  + `read_rnd_buffer_size`
+  + `sort_buffer_size`
+  + `thread_stack`
++ **Value 3** – If the `performance_schema` parameter is enabled, then multiply the `max_connections` parameter by `257700`\.
+
+  If the `performance_schema` parameter is disabled, then this value is zero\.
+
+So, the value returned by the calculation is the following:
+
+`Value 1 + Value 2 + Value 3`
+
+When this value exceeds 1\.2 times the memory allocated to the DB instance class used by the DB instance, the DB instance is placed in **incompatible\-parameters** status\. For information about the memory allocated to DB instance classes, see [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+
+The calculation multiplies the value of the `max_connections` parameter by the sum of several parameters\. If the `max_connections` parameter is set to a large value, it might cause the check to return an inordinately high value for the potential memory usage of the DB instance\. In this case, consider lowering the value of the `max_connections` parameter\.
+
+To resolve the problem, complete the following steps:
+
+1. Adjust the memory parameters in the DB parameter group associated with the DB instance so that the potential memory usage is lower than 1\.2 times the memory allocated to its DB instance class\.
+
+   For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+1. Restart the DB instance\.
+
+   For information about setting parameters, see [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)\.
 
 ### Diagnosing and resolving lag between read replicas<a name="CHAP_Troubleshooting.MySQL.ReplicaLag"></a>
 
@@ -318,7 +362,7 @@ Amazon RDS monitors the replication status of your read replicas and updates the
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
 
-  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. If the `max_allowed_packet` value for the source DB instance is smaller than the `max_allowed_packet` value for the read replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
+  The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. The `max_allowed_packet` parameter is used to specify the maximum size of data manipulation language \(DML\) that can be run on the database\. If the `max_allowed_packet` value for the source DB instance is larger than the `max_allowed_packet` value for the read replica, the replication process can throw an error and stop replication\. The most common error is `packet bigger than 'max_allowed_packet' bytes`\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\.
 + Writing to tables on a read replica\. If you're creating indexes on a read replica, you need to have the `read_only` parameter set to *0* to create the indexes\. If you're writing to tables on the read replica, it can break replication\.
 + Using a nontransactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the following storage engines: InnoDB for MySQL, InnoDB for MariaDB 10\.2 or higher, or XtraDB for MariaDB 10\.1 or lower\.
 

@@ -20,7 +20,7 @@ Event notifications are sent to the addresses that you provide when you create t
 Amazon RDS doesn't guarantee the order of events sent in an event stream\. The event order is subject to change\.
 
 **Note**  
-Amazon RDS event notifications using SMS text messages are currently available for topic Amazon Resource Names \(ARNs\) and Amazon RDS resources in the US\-East \(Northern Virginia\) Region\. For more information on using text messages with SNS, see [Sending and receiving SMS notifications using Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/SMSMessages.html) in the *Amazon Simple Notification Service Developer Guide*\.
+For more information on using text messages with SNS, see [ Mobile text messaging \(SMS\)](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
 Amazon RDS uses the ARN of an Amazon SNS topic to identify each subscription\. The Amazon RDS console creates the ARN for you when you create the subscription\. If you use the CLI or API, you create the ARN by using the Amazon SNS console or the Amazon SNS API when you create a subscription\.
 

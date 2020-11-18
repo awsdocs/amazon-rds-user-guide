@@ -313,7 +313,6 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Buffer pool extension
 + Data Quality Services
 + Database Log Shipping
-+ Database Mail
 + Extended stored procedures, including xp\_cmdshell
 + FILESTREAM support
 + File tables

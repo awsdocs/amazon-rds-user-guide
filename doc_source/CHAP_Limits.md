@@ -75,6 +75,8 @@ For Oracle, you set the maximum number of user processes and user and system ses
 **Maximum database connections**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 
+For MariaDB and MySQL DB instances, setting the `max_connections` parameter to a large value might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
+
 **Note**  
 You might see fewer than the maximum number of DB connections\. This is to avoid potential out\-of\-memory issues\.
 
