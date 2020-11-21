@@ -209,47 +209,60 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
 1. In the navigation pane, choose **Databases**\. 
 
-1. Choose **Restore from S3** to launch the wizard\. 
+1. Choose **Restore from S3**\.
 
-   The wizard opens on the **Select engine** page\. 
+   The **Create database by restoring from S3** page appears\.  
+![\[The page where you specify the details for restoring a DB instance from S3\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mys-s3-ingestion.png)
 
-1. On the **Select engine** page, choose **MySQL**, and then choose **Next**\. 
+1. Under **S3 destination**:
 
-   The **Specify source backup details** page appears\.   
-![\[The page where you specify the details for your source database backup\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/mys-s3-ingestion.png)
+   1. Choose the **S3 bucket** where to write audit logs\.
 
-1. On the **Specify source backup details** page, specify your backup information\. 
+   1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\.
 
-   1. For **Source engine**, choose **mysql**\. 
+      If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\.
 
-   1. For **Source engine version**, choose the MySQL version of your source database\. 
+      For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
 
-   1. For **S3 bucket**, choose your Amazon S3 bucket\. 
+1. Under **Engine options**:
 
-   1. \(Optional\) For **S3 folder path prefix**, enter a file path prefix for the files stored in your Amazon S3 bucket\. If you don't specify a prefix, then RDS creates your DB instance using all of the files and folders in the root folder of the S3 bucket\. If you do specify a prefix, then RDS creates your DB instance using the files and folders in the S3 bucket where the path for the file begins with the specified prefix\. For example, suppose that you store your backup files on S3 in a subfolder named backups, and you have multiple sets of backup files, each in its own directory \(gzip\_backup1, gzip\_backup2, and so on\)\. In this case, you specify a prefix of backups/gzip\_backup1 to restore from the files in the gzip\_backup1 folder\. 
+   1. For **Engine type**, choose **MySQL**\.
 
-   1. For **Create a new role**, choose **Yes** to create a new IAM role in your account, or choose **No** to select an existing IAM role\. 
+   1. For **Source engine version**, choose the MySQL major version of your source database\.
 
-   1. For **IAM role**, select an existing IAM role, or for **IAM role name**, specify the name for a new IAM role\. You can choose to have a new IAM role created for you by choosing **Yes** for **Create a new role**\. 
+   1. For **Version**, choose the MySQL engine version for your restored DB instance\.
 
-1. Choose **Next** to continue\. The **Specify DB details** page appears\. 
+1. For **IAM role**, you can choose an existing IAM role\.
 
-   On the **Specify DB details** page, specify your DB instance information\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
+1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role**\. If so:
+
+   1. Enter the **IAM role name**\.
+
+   1.  Choose whether to **Allow access to KMS key**:
+      + If you didn't encrypt the backup files, choose **No**\.
+      + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
+      + If you encrypted the backup files with AWS\-KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
+
+        The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
+
+      For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+
+1. Specify your DB instance information\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 **Note**  
-Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
+Be sure to allocate enough memory for your new DB instance so that the restore operation can succeed\.  
+You can also choose **Enable storage autoscaling** to allow for future growth automatically\.
 
-1. Choose **Next** to continue\. The **Configure advanced settings** page appears\. 
+1. Choose additional settings as needed\.
 
-   Provide additional information that Amazon RDS needs to launch the DB instance\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
-
-1. Choose **Create database**\. 
+1. Choose **Create database**\.
 
 ### AWS CLI<a name="MySQL.Procedural.Importing.CLI"></a>
 
-To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, call the [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) command with the parameters following\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
+To import data from Amazon S3 to a new MySQL DB instance by using the AWS CLI, call the [restore\-db\-instance\-from\-s3](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-s3.html) command with the following parameters\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 
 **Note**  
-Be sure to allocate enough memory for your new DB instance so that the restore can succeed\. You can also allocate additional memory for future growth\. 
+Be sure to allocate enough memory for your new DB instance so that the restore operation can succeed\.  
+You can also use the `--max-allocated-storage` parameter to enable storage autoscaling and allow for future growth automatically\.
 + `--allocated-storage`
 + `--db-instance-identifier`
 + `--db-instance-class`
@@ -266,36 +279,38 @@ Be sure to allocate enough memory for your new DB instance so that the restore c
 For Linux, macOS, or Unix:  
 
 ```
- 1. aws rds restore-db-instance-from-s3 \  
- 2. --allocated-storage 250 \ 
- 3. --db-instance-identifier myidentifier \
- 4. --db-instance-class db.m4.large \
- 5. --engine mysql \
- 6. --master-username masterawsuser \
- 7. --master-user-password masteruserpassword \
- 8. --s3-bucket-name mybucket \
- 9. --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename \
-10. --s3-prefix bucketprefix \
-11. --source-engine mysql \
-12. --source-engine-version 5.6.40
+ 1. aws rds restore-db-instance-from-s3 \
+ 2.     --allocated-storage 250 \
+ 3.     --db-instance-identifier myidentifier \
+ 4.     --db-instance-class db.m5.large \
+ 5.     --engine mysql \
+ 6.     --master-username admin \
+ 7.     --master-user-password mypassword \
+ 8.     --s3-bucket-name mybucket \
+ 9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename \
+10.     --s3-prefix bucketprefix \
+11.     --source-engine mysql \
+12.     --source-engine-version 5.6.44 \
+13.     --max-allocated-storage 1000
 ```
 For Windows:  
 
 ```
  1. aws rds restore-db-instance-from-s3 ^
- 2. --allocated-storage 250 ^ 
- 3. --db-instance-identifier myidentifier ^
- 4. --db-instance-class db.m4.large ^
- 5. --engine mysql ^
- 6. --master-username masterawsuser ^
- 7. --master-user-password masteruserpassword ^
- 8. --s3-bucket-name mybucket ^
- 9. --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename ^
-10. --s3-prefix bucketprefix ^
-11. --source-engine mysql ^
-12. --source-engine-version 5.6.40
+ 2.     --allocated-storage 250 ^
+ 3.     --db-instance-identifier myidentifier ^
+ 4.     --db-instance-class db.m5.large ^
+ 5.     --engine mysql ^
+ 6.     --master-username admin ^
+ 7.     --master-user-password mypassword ^
+ 8.     --s3-bucket-name mybucket ^
+ 9.     --s3-ingestion-role-arn arn:aws:iam::account-number:role/rolename ^
+10.     --s3-prefix bucketprefix ^
+11.     --source-engine mysql ^
+12.     --source-engine-version 5.6.44 ^
+13.     --max-allocated-storage 1000
 ```
 
 ### RDS API<a name="MySQL.Procedural.Importing.API"></a>
 
-To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) operation\. 
+To import data from Amazon S3 to a new MySQL DB instance by using the Amazon RDS API, call the [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) operation\.

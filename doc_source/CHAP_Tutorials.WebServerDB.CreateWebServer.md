@@ -13,16 +13,8 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 1. Choose **EC2 Dashboard**, and then choose **Launch instance**, as shown following\.  
 ![\[EC2 Dashboard\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_11.png)
 
-1. Choose the **Amazon Linux AMI**\.
-
-   1. On the **Step 1: Choose an Amazon Machine Image \(AMI\)** page, choose **Community AMIs**\.
-
-   1. Under **Operating system**, choose **Amazon Linux**\.
-
-   1. Select the first instance in the list that starts with **amzn\-ami\-hvm\-2018\.03\.0**, as shown following\.  
+1. Choose the **Amazon Linux 2 AMI**\.  
 ![\[Choose an Amazon Machine Image\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_12.png)
-**Important**  
-Don't choose an **Amazon Linux 2 AMI** because it doesn't have the software packages required for this tutorial\.
 
 1. Choose the **t2\.micro** instance type, as shown following, and then choose **Next: Configure Instance Details**\.  
 ![\[Choose an Instance Type\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_13.png)
@@ -83,13 +75,13 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    [ec2-user ~]$ sudo yum update -y
    ```
 
-1. After the updates complete, install the Apache web server with the PHP software package using the `yum install` command\. This command installs multiple software packages and related dependencies at the same time\.
+1. After the updates complete, install the PHP software using the `yum install` command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
-   [ec2-user ~]$ sudo yum install -y httpd24 php56 php56-mysqlnd
+   [ec2-user ~]$ sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
    ```
 
-   If you get the error message `No package package-name available`, then your instance was not launched with the Amazon Linux AMI\. You might be using the Amazon Linux 2 AMI instead\. You can view your version of Amazon Linux with the following command\.
+   If you receive an error stating `sudo: amazon-linux-extras: command not found`, then your instance was not launched with an Amazon Linux 2 AMI \(perhaps you are using the Amazon Linux AMI instead\)\. You can view your version of Amazon Linux using the following command\.
 
    ```
    cat /etc/system-release
@@ -97,10 +89,16 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 
    For more information, see [Updating instance software](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-updates.html)\.
 
+1. Install the Apache web server\.
+
+   ```
+   [ec2-user ~]$ sudo yum install -y httpd
+   ```
+
 1. Start the web server with the command shown following\.
 
    ```
-   [ec2-user ~]$ sudo service httpd start
+   [ec2-user ~]$ sudo systemctl start httpd
    ```
 
    You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
@@ -112,7 +110,7 @@ The Apache test page appears only when there is no content in the document root 
 1. Configure the web server to start with each system boot using the `chkconfig` command\.
 
    ```
-   [ec2-user ~]$ sudo chkconfig httpd on
+   [ec2-user ~]$ sudo systemctl enable httpd
    ```
 
 To allow `ec2-user` to manage files in the default root directory for your Apache web server, modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance\. Then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
@@ -141,7 +139,7 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 
    ```
    [ec2-user ~]$ groups
-   ec2-user wheel www
+   ec2-user adm wheel systemd-journal www
    ```
 
 1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.

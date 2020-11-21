@@ -89,13 +89,13 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 **Note**  
  The source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-1. Choose the other settings that you want to use\.
+1. Choose other options, such as storage autoscaling\.
 
 1. Choose **Create read replica**\.
 
 ### AWS CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
-To create a read replica from a source MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\.
+To create a read replica from a source MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -103,14 +103,16 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-db-instance-read-replica \
     --db-instance-identifier myreadreplica \
-    --source-db-instance-identifier mydbinstance
+    --source-db-instance-identifier mydbinstance \
+    --max-allocated-storage 1000
 ```
 For Windows:  
 
 ```
 aws rds create-db-instance-read-replica ^
     --db-instance-identifier myreadreplica ^
-    --source-db-instance-identifier mydbinstance
+    --source-db-instance-identifier mydbinstance ^
+    --max-allocated-storage 1000
 ```
 
 ### RDS API<a name="USER_ReadRepl.Create.API"></a>
@@ -266,7 +268,7 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 **Note**  
  To create an encrypted read replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-1. Choose the other settings that you want to use\.
+1. Choose other options, such as storage autoscaling\.
 
 1. Choose **Create read replica**\.
 

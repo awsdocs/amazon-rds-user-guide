@@ -21,29 +21,29 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Automated backups**\.
+1. In the navigation pane, choose **Databases**\.
 
 1. Choose the DB instance that you want to restore\.
 
 1. For **Actions**, choose **Restore to point in time**\.
 
-   The **Restore to point in time** window appears\.
+   The **Launch DB Instance** window appears\.
 
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 
-   If you chose **Custom**, enter the date and time that you want to restore the instance to\.
+   If you chose **Custom**, enter the date and time to which you want to restore the instance\.
 **Note**  
-Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
+Times are shown in Coordinated Universal Time \(UTC\)\.
 
 1. For **DB instance identifier**, enter the name of the target restored DB instance\.
 
-1. Choose other options as needed\.
+1. Choose other options as needed, such as storage autoscaling\.
 
-1. Choose **Restore to point in time**\.
+1. Choose **Launch DB Instance**\.
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 
-To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\.
+To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also enables storage autoscaling\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -52,7 +52,8 @@ For Linux, macOS, or Unix:
 1. aws rds restore-db-instance-to-point-in-time \
 2.     --source-db-instance-identifier mysourcedbinstance \
 3.     --target-db-instance-identifier mytargetdbinstance \
-4.     --restore-time 2017-10-14T23:45:00.000Z
+4.     --restore-time 2017-10-14T23:45:00.000Z \
+5.     --max-allocated-storage 1000
 ```
 For Windows:  
 
@@ -60,7 +61,8 @@ For Windows:
 1. aws rds restore-db-instance-to-point-in-time ^
 2.     --source-db-instance-identifier mysourcedbinstance ^
 3.     --target-db-instance-identifier mytargetdbinstance ^
-4.     --restore-time 2017-10-14T23:45:00.000Z
+4.     --restore-time 2017-10-14T23:45:00.000Z ^
+5.     --max-allocated-storage 1000
 ```
 
 ## RDS API<a name="USER_PIT.API"></a>
