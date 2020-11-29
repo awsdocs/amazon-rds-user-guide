@@ -8,7 +8,7 @@ This guide covers using Amazon RDS in the AWS Cloud\. For information about usin
 
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
-Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult or tedious management tasks of a relational database: 
+Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult and tedious management tasks of a relational database: 
 + When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon RDS, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\. 
 + Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. 
 + To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. 
