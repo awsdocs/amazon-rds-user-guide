@@ -7,6 +7,7 @@ SSIS projects are organized into packages saved as XML\-based \.dtsx files\. Pac
 Amazon RDS for SQL Server supports running SSIS directly on an RDS DB instance\. You can enable SSIS on an existing or new DB instance\. SSIS is installed on the same DB instance as your database engine\.
 
 RDS supports SSIS for SQL Server Standard and Enterprise Editions on the following versions:
++ SQL Server 2019, version 15\.00\.4043\.16\.v1 and later
 + SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
 + SQL Server 2016, version 13\.00\.5426\.0\.v1 and later
 

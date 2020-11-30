@@ -12,6 +12,7 @@ Exporting snapshots from DB instances that use magnetic storage isn't supported\
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
++ China
 
 The following table shows the engine versions that are supported for exporting snapshot data to Amazon S3\.
 

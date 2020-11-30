@@ -467,6 +467,7 @@ This section explains the most common issues when using Oracle GoldenGate with A
 **Topics**
 + [Log retention](#Appendix.OracleGoldenGate.Troubleshooting.Logs)
 + [GoldenGate appears to be properly configured but replication is not working](#Appendix.OracleGoldenGate.Troubleshooting.Replication)
++ [Integrated REPLICAT slow due to query on sys\."\_DBA\_APPLY\_CDR\_INFO"](#Appendix.OracleGoldenGate.IR)
 
 ### Log retention<a name="Appendix.OracleGoldenGate.Troubleshooting.Logs"></a>
 
@@ -510,3 +511,22 @@ For pre\-existing tables, GoldenGate must be told which SCN it should work from\
    ```
    start <replicat process name> atcsn 223274 
    ```
+
+### Integrated REPLICAT slow due to query on sys\."\_DBA\_APPLY\_CDR\_INFO"<a name="Appendix.OracleGoldenGate.IR"></a>
+
+Oracle GoldenGate Conflict Detection and Resolution \(CDR\) provides basic conflict resolution routines\. For example, CDR can resolve a unique conflict for an `INSERT` statement\.
+
+When CDR resolves a collision, it can insert records into the exception table `_DBA_APPLY_CDR_INFO` temporarily\. Integrated `REPLICAT` deletes these records later\. In a rare scenario, the integrated `REPLICAT` can process a large number of collisions, but a new integrated `REPLICAT` does not replace it\. Instead of being removed, the existing rows in `_DBA_APPLY_CDR_INFO` are orphaned\. Any new integrated `REPLICAT` processes slow down because they are querying orphaned rows in `_DBA_APPLY_CDR_INFO`\.
+
+To remove the orphaned rows from `_DBA_APPLY_CDR_INFO`, use the Amazon RDS procedure `rdsadmin_util.truncate_apply$_cdr_info`\. This procedure is released as part of the October 2020 release and patch update, available in the following database versions:
++ [Version 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1)
++ [Version 18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1)
++ [Version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1)
++ [Version 12\.1\.0\.2\.v22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22)
+
+The following example truncates the table `_DBA_APPLY_CDR_INFO`\.
+
+```
+SET SERVEROUTPUT ON SIZE 2000
+EXEC rdsadmin.rdsadmin_util.truncate_apply$_cdr_info;
+```

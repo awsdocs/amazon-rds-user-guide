@@ -82,7 +82,18 @@ To see details for any item for the selected time period in the legend, hover ov
 
 ### Top load table<a name="USER_PerfInsights.UsingDashboard.Components.AvgActiveSessions.TopLoadItemsTable"></a>
 
-The Top load table shows the top items contributing to database load\. By default, the console displays top SQL queries that are contributing to the database load, along with relevant statistics for each statement\. You can choose to display top waits, hosts, or users instead\.
+The Top load table shows the top items contributing to database load\. You can choose any of the following dimension tabs:
++ Top SQL – The SQL statements that are currently running
++ Top waits – The event for which the database backend is waiting
++ Top hosts – The host name of the connected client
++ Top users – The user logged in to the database
++ Top databases – The name of the database to which the client is connected \(PostgreSQL, MySQL, and MariaDB only\)
++ Top applications \(PostgreSQL only\) – The name of the application that is connected to the database
++ Top session types \(PostgreSQL only\) – The type of the current session
+
+![\[Top N dimensions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4c.png)
+
+By default, the console displays top SQL queries that are contributing to the database load\. Every line in the table shows relevant statistics for the SQL statement:
 
 ![\[Top SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4.png)
 

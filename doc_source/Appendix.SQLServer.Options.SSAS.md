@@ -5,6 +5,7 @@ Microsoft SQL Server Analysis Services \(SSAS\) is part of the Microsoft Busines
 Amazon RDS for SQL Server supports running SQL Server Analysis Services \(SSAS\) in Tabular mode\. You can enable SSAS on existing or new DB instances\. It's installed on the same DB instance as your database engine\.
 
 RDS supports SSAS for SQL Server Standard and Enterprise Editions on the following versions:
++ SQL Server 2019, version 15\.00\.4043\.16\.v1 and later
 + SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
 + SQL Server 2016, version 13\.00\.5426\.0\.v1 and later
 

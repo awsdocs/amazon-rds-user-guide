@@ -49,7 +49,7 @@ By default, tablespaces are created with auto\-extend enabled, and no maximum si
 The following example creates a tablespace named `users2` with a starting size of 1 gigabyte and a maximum size of 10 gigabytes: 
 
 ```
-CREATE TABLESPACE users2 DATAFILE SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
+CREATE TABLESPACE users2 DATAFILE 'users2.dbf' SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
 ```
 
 The following example creates temporary tablespace named `temp01`:
@@ -71,7 +71,7 @@ ALTER TABLESPACE users2 RESIZE 200M;
 The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
 
 ```
-ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
+ALTER TABLESPACE users2 ADD DATAFILE 'users2b.dbf' SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
 ```
 
 ## Setting the default tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>

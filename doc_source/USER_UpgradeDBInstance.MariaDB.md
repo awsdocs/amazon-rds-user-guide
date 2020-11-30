@@ -80,8 +80,9 @@ Amazon RDS supports the following in\-place upgrades for major versions of the M
 + MariaDB 10\.1 to MariaDB 10\.2
 + MariaDB 10\.2 to MariaDB 10\.3
 + MariaDB 10\.3 to MariaDB 10\.4
++ MariaDB 10\.4 to MariaDB 10\.5
 
-To perform a major version upgrade for a MariaDB version 10\.0 DB instance on Amazon RDS to MariaDB version 10\.1 or later, first upgrade to each major version: 10\.0 to 10\.1, then 10\.1 to 10\.2, then 10\.2 to 10\.3, and then 10\.3 to 10\.4\.
+To perform a major version upgrade for a MariaDB version 10\.0 DB instance on Amazon RDS to MariaDB version 10\.1 or later, first upgrade to each major version: 10\.0 to 10\.1, then 10\.1 to 10\.2, then 10\.2 to 10\.3, 10\.3 to 10\.4, and then 10\.4 to 10\.5\.
 
 If you are using a custom parameter group, and you perform a major version upgrade, you must specify either a default parameter group for the new DB engine version or create your own custom parameter group for the new DB engine version\. Associating the new parameter group with the DB instance requires a customer\-initiated database reboot after the upgrade completes\. The instance's parameter group status will show `pending-reboot` if the instance needs to be rebooted to apply the parameter group changes\. An instance's parameter group status can be viewed in the AWS console or by using a "describe" call such as `describe-db-instances`\.
 

@@ -1,6 +1,7 @@
 # MariaDB on Amazon RDS<a name="CHAP_MariaDB"></a>
 
 Amazon RDS supports DB instances running several versions of MariaDB\. You can use the following major versions: 
++ MariaDB 10\.5
 + MariaDB 10\.4
 + MariaDB 10\.3
 + MariaDB 10\.2
@@ -53,6 +54,7 @@ Amazon RDS currently supports the following versions of MariaDB:
 
 | Major version | Minor version | 
 | --- | --- | 
+| MariaDB 10\.5 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.4 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.3 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.2 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
@@ -80,6 +82,7 @@ For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon
 In the following sections, find MariaDB feature support on Amazon RDS for MariaDB major versions:
 
 **Topics**
++ [MariaDB 10\.5 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-5)
 + [MariaDB 10\.4 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-4)
 + [MariaDB 10\.3 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-3)
 + [MariaDB 10\.2 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-2)
@@ -87,6 +90,28 @@ In the following sections, find MariaDB feature support on Amazon RDS for MariaD
 + [MariaDB 10\.0 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-0)
 
 For information about supported minor versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\.
+
+### MariaDB 10\.5 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-5"></a>
+
+Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.5 or later: 
++ **InnoDB enhancements** – MariaDB version 10\.5 includes InnoDB enhancements\. For more information, see [ InnoDB: Performance Improvements etc\.](https://mariadb.com/kb/en/changes-improvements-in-mariadb-105/#innodb-performance-improvements-etc)\.
++ **Performance schema updates** – MariaDB version 10\.5 includes performance schema updates\. For more information, see [ Performance Schema Updates to Match MySQL 5\.7 Instrumentation and Tables](https://mariadb.com/kb/en/changes-improvements-in-mariadb-105/#performance-schema-updates-to-match-mysql-57-instrumentation-and-tables)\. 
++ **One file in the InnoDB redo log** – In versions of MariaDB before version 10\.5, the value of the `innodb_log_files_in_group` parameter was set to `2`\. In MariaDB version 10\.5, the value of this parameter is set to `1`\.
+
+  If you are upgrading from a prior version to MariaDB version 10\.5, and you don't modify the parameters, the `innodb_log_file_size` parameter value is unchanged\. However, it applies to one log file instead of two\. The result is that your upgraded MariaDB version 10\.5 DB instance uses half of the redo log size that it was using before the upgrade\. This change can have a noticeable performance impact\. To address this issue, you can double the value of the `innodb_log_file_size` parameter\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
++ **SHOW SLAVE STATUS command not supported** – In versions of MariaDB before version 10\.5, the `SHOW SLAVE STATUS` command required the `REPLICATION SLAVE` privilege\. In MariaDB version 10\.5, this command requires the `REPLICATION SLAVE ADMIN` privilege\. This new privilege isn't granted to the RDS master user\. 
+
+  Instead of using the `SHOW SLAVE STATUS` command, run the new `mysql.rds_replica_status` stored procedure to return similar information\. For more information, see [mysql\.rds\_replica\_status](mysql_rds_replica_status.md)\.
++ **SHOW RELAYLOG EVENTS command not supported** – In versions of MariaDB before version 10\.5, the `SHOW RELAYLOG EVENTS` command required the `REPLICATION SLAVE` privilege\. In MariaDB version 10\.5, this command requires the `REPLICATION SLAVE ADMIN` privilege\. This new privilege isn't granted to the RDS master user\. 
++ **New default values for parameters** – The following parameters have new default values for MariaDB version 10\.5 DB instances:
+  + The default value of the [max\_connections](https://mariadb.com/kb/en/server-system-variables/#max_connections) parameter has changed to `LEAST({DBInstanceClassMemory/25165760},12000)`\. For information about the `LEAST` parameter function, see [DB parameter functions](USER_WorkingWithParamGroups.md#USER_ParamFunctions)\. 
+  + The default value of the [ innodb\_adaptive\_hash\_index](https://mariadb.com/kb/en/innodb-system-variables/#innodb_adaptive_hash_index) parameter has changed to `OFF` \(`0`\)\.
+  + The default value of the [ innodb\_checksum\_algorithm](https://mariadb.com/kb/en/innodb-system-variables/#innodb_checksum_algorithm) parameter has changed to `full_crc32`\.
+  + The default value of the [innodb\_log\_file\_size](https://mariadb.com/kb/en/innodb-system-variables/#innodb_log_file_size) parameter has changed to 2 GB\. 
+
+For a list of all MariaDB 10\.5 features and their documentation, see [Changes and improvements in MariaDB 10\.5](https://mariadb.com/kb/en/changes-improvements-in-mariadb-105/) and [Release notes \- MariaDB 10\.5 series](https://mariadb.com/kb/en/release-notes-mariadb-105-series/) on the MariaDB website\. 
+
+For a list of unsupported features, see [Features not supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
 ### MariaDB 10\.4 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-4"></a>
 
@@ -151,6 +176,8 @@ For a list of unsupported features, see [Features not supported](#MariaDB.Concep
 ## Features not supported<a name="MariaDB.Concepts.FeatureNonSupport"></a>
 
 The following MariaDB features are not supported on Amazon RDS:
++ ColumnStore storage engine
++ S3 storage engine
 + Authentication plugin – GSSAPI
 + Authentication plugin – Unix Socket
 + AWS Key Management encryption plugin
@@ -273,6 +300,7 @@ MariaDB uses yaSSL for secure connections in the following versions:
 + MariaDB version 10\.0\.32 and earlier 10\.0 versions
 
 MariaDB uses OpenSSL for secure connections in the following versions:
++ MariaDB 10\.5 versions
 + MariaDB 10\.4 versions
 + MariaDB 10\.3 versions
 + MariaDB 10\.2 versions
@@ -286,6 +314,7 @@ Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 
 
 | MariaDB version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
 | --- | --- | --- | --- | 
+|  MariaDB 10\.5  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.2  |  Supported  |  Supported  |  Supported  | 
@@ -333,7 +362,7 @@ Cache warming is enabled by default on MariaDB 10\.2 and higher DB instances\. T
 Cache warming primarily provides a performance benefit for DB instances that use standard storage\. If you use PIOPS storage, you don't commonly see a significant performance benefit\.
 
 **Important**  
-If your MariaDB DB instance doesn't shut down normally, such as during a failover, then the buffer pool state isn't saved to disk\. In this case, MariaDB loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool prior to the restart\. To ensure that you have a recent state of the buffer pool available to warm the cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand\.  
+If your MariaDB DB instance doesn't shut down normally, such as during a failover, then the buffer pool state isn't saved to disk\. In this case, MariaDB loads whatever buffer pool file is available when the DB instance is restarted\. No harm is done, but the restored buffer pool might not reflect the most recent state of the buffer pool before the restart\. To ensure that you have a recent state of the buffer pool available to warm the cache on startup, we recommend that you periodically dump the buffer pool "on demand\." You can dump or load the buffer pool on demand\.  
 You can create an event to dump the buffer pool automatically and at a regular interval\. For example, the following statement creates an event named `periodic_buffer_pool_dump` that dumps the buffer pool every hour\.   
 
 ```

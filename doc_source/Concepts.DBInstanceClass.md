@@ -46,7 +46,7 @@ For DB instance class hardware specifications, see [Hardware specifications for 
 The following are DB engine considerations for DB instance classes:
 
 **MariaDB**  
-The Graviton2 instance classes db\.m6g and db\.r6g are supported for MariaDB version 10\.4\.13 and higher\.
+The Graviton2 instance classes db\.m6g and db\.r6g are supported for all MariaDB 10\.5 versions and MariaDB version 10\.4\.13 and higher 10\.4 versions\.
 
 **Microsoft SQL Server**  
 Instance class support varies according to the version and edition of SQL Server\. For instance class support by version and edition, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\. 
@@ -68,13 +68,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – Newest generation standard instance classes | 
-| db\.m6g\.16xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.12xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.8xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.4xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.2xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.large | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
@@ -119,12 +119,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | db\.r6g – Newest generation memory optimized instance classes | 
-| db\.r6g\.16xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.12xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.4xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.2xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.xlarge | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.large | MariaDB 10\.4\.13 & higher | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 

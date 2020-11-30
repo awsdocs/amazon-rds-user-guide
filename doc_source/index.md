@@ -101,6 +101,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Options for MariaDB database engine](Appendix.MariaDB.Options.md)
    + [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
    + [MariaDB on Amazon RDS SQL reference](Appendix.MariaDB.SQLRef.md)
+      + [mysql.rds_replica_status](mysql_rds_replica_status.md)
       + [mysql.rds_set_external_master_gtid](mysql_rds_set_external_master_gtid.md)
       + [mysql.rds_kill_query_id](mysql_rds_kill_query_id.md)
 + [Microsoft SQL Server on Amazon RDS](CHAP_SQLServer.md)

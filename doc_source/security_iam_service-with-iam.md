@@ -34,7 +34,7 @@ You can specify multiple actions using wildcards \(\*\)\. For example, to specif
 
 
 
-To see a list of Amazon RDS actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions) in the *IAM User Guide*\.
+To see a list of Amazon RDS actions, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-actions-as-permissions) in the *Service Authorization Reference*\.
 
 ### Resources<a name="security_iam_service-with-iam-id-based-policies-resources"></a>
 
@@ -76,7 +76,7 @@ Many Amazon RDS API operations involve multiple resources\. For example, `Create
       "resource2"
 ```
 
-To see a list of Amazon RDS resource types and their ARNs, see [Resources Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-resources-for-iam-policies) in the *IAM User Guide*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions)\.
+To see a list of Amazon RDS resource types and their ARNs, see [Resources Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-resources-for-iam-policies) in the *Service Authorization Reference*\. To learn with which actions you can specify the ARN of each resource, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-actions-as-permissions)\.
 
 ### Condition keys<a name="UsingWithRDS.IAM.Conditions"></a>
 
@@ -92,7 +92,7 @@ Amazon RDS defines its own set of condition keys and also supports using some gl
 
  All RDS API operations support the `aws:RequestedRegion` condition key\. 
 
-To see a list of Amazon RDS condition keys, see [Condition Keys for Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-policy-keys) in the *IAM User Guide*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonrds.html#amazonrds-actions-as-permissions)\.
+To see a list of Amazon RDS condition keys, see [Condition Keys for Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-policy-keys) in the *Service Authorization Reference*\. To learn with which actions and resources you can use a condition key, see [Actions Defined by Amazon RDS](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonrds.html#amazonrds-actions-as-permissions)\.
 
 ### Examples<a name="security_iam_service-with-iam-id-based-policies-examples"></a>
 

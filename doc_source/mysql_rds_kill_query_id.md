@@ -24,10 +24,6 @@ SELECT USER, HOST, COMMAND, TIME, STATE, INFO, QUERY_ID FROM
 
 The connection to the MariaDB server is retained\.
 
-## Related topics<a name="mysql_rds_kill_query_id.related"></a>
-+ [mysql\.rds\_kill](mysql_rds_kill.md)
-+ [mysql\.rds\_kill\_query](mysql_rds_kill_query.md)
-
 ## Examples<a name="mysql_rds_kill_query_id-examples"></a>
 
 The following example ends a query with a query ID of 230040:

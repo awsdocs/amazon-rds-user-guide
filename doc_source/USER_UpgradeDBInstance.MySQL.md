@@ -14,7 +14,7 @@ If your MySQL DB instance is using read replicas, you must upgrade all of the re
 + [Testing an upgrade](#USER_UpgradeDBInstance.MySQL.UpgradeTesting)
 + [Upgrading a MySQL DB instance](#USER_UpgradeDBInstance.MySQL.Upgrading)
 + [Automatic minor version upgrades for MySQL](#USER_UpgradeDBInstance.MySQL.Minor)
-+ [Upgrading a MySQL database with reduced downtime](#USER_UpgradeDBInstance.MySQL.ReducedDowntime)
++ [Using a read replica to reduce downtime when upgrading a MySQL database](#USER_UpgradeDBInstance.MySQL.ReducedDowntime)
 
 ## Overview of upgrading<a name="USER_UpgradeDBInstance.MySQL.Overview"></a>
 
@@ -272,46 +272,97 @@ A MySQL DB instance is automatically upgraded during your maintenance window if 
 
 For more information, see [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. 
 
-## Upgrading a MySQL database with reduced downtime<a name="USER_UpgradeDBInstance.MySQL.ReducedDowntime"></a>
+## Using a read replica to reduce downtime when upgrading a MySQL database<a name="USER_UpgradeDBInstance.MySQL.ReducedDowntime"></a>
 
 If your MySQL DB instance is currently in use with a production application, you can use the following procedure to upgrade the database version for your DB instance\. This procedure can reduce the amount of downtime for your application\. 
 
-The following procedure shows an example of upgrading from MySQL version 5\.5 to MySQL version 5\.6\. You can use the same general steps for upgrades to other major versions\. 
+By using a read replica, you can perform most of the maintenance steps ahead of time and minimize the necessary changes during the actual outage\. With this technique, you can test and prepare the new DB instance without making any changes to your existing DB instance\.
+
+The following procedure shows an example of upgrading from MySQL version 5\.7 to MySQL version 8\.0\. You can use the same general steps for upgrades to other major versions\. 
+
+**Note**  
+When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete the prechecks before performing the upgrade\. For more information, see [Prechecks for upgrades from MySQL 5\.7 to 8\.0](#USER_UpgradeDBInstance.MySQL.57to80Prechecks)\.
 
 **To upgrade an MySQL database while a DB instance is in use**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Create a read replica of your MySQL 5\.5 DB instance\. This process creates an upgradable copy of your database\.
+1. Create a read replica of your MySQL 5\.7 DB instance\. This process creates an upgradable copy of your database\. Other read replicas of the DB instance might also exist\.
 
-   1. On the console, choose **Databases**, and then choose the DB instance that you want to upgrade\.
+   1. In the console, choose **Databases**, and then choose the DB instance that you want to upgrade\.
 
    1. For **Actions**, choose **Create read replica**\.
 
-   1. Provide a value for **DB instance identifier** for your read replica and ensure that the **DB instance class** and other settings match your MySQL 5\.5 DB instance\.
+   1. Provide a value for **DB instance identifier** for your read replica and ensure that the **DB instance class** and other settings match your MySQL 5\.7 DB instance\.
 
    1. Choose **Create read replica**\.
 
-1. When the read replica has been created and **Status** shows **Available**, upgrade the read replica to MySQL 5\.6:
+1. \(Optional\) When the read replica has been created and **Status** shows **Available**, convert the read replica into a Multi\-AZ deployment and enable backups\.
 
-   1. On the console, choose **Databases**, and then choose the read replica that you just created\.
+   By default, a read replicas is created as a single\-AZ deployment with backups disabled\. Because the read replica will ultimately become the production DB instance, it is a best practice to enable configure a Multi\-AZ deployment and enable backups now\.
+
+   1. In the console, choose **Databases**, and then choose the read replica that you just created\.
 
    1. Choose **Modify**\.
 
-   1. For **DB engine version**, choose the MySQL 5\.6 version to upgrade to, and then choose **Continue**\.
+   1. For **Multi\-AZ deployment**, choose **Create a standby instance**\.
 
-   1. For **Scheduling of Modifications**, choose **Apply immediately**\.
+   1. For **Backup Retention Period**, choose a positive nonzero value, for example 3 days, and then choose **Continue**\.
+
+   1. For **Scheduling of modifications**, choose **Apply immediately**\.
+
+   1. Choose **Modify DB instance**\.
+
+1. When the read replica **Status** shows **Available**, upgrade the read replica to MySQL 8\.0:
+
+   1. In the console, choose **Databases**, and then choose the read replica that you just created\.
+
+   1. Choose **Modify**\.
+
+   1. For **DB engine version**, choose the MySQL 8\.0 version to upgrade to, and then choose **Continue**\.
+
+   1. For **Scheduling of modifications**, choose **Apply immediately**\.
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.5 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\. 
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.7 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\.
 
-1. Make your MySQL 5\.6 read replica a standalone DB instance\. 
+1. \(Optional\) Create a read replica of your read replica\.
+
+   If you want the DB instance to have a read replica after it is promoted to a standalone DB instance, you can create the read replica now\.
+
+   1. In the console, choose **Databases**, and then choose the read replica that you just upgraded\.
+
+   1. For **Actions**, choose **Create read replica**\.
+
+   1. Provide a value for **DB instance identifier** for your read replica and ensure that the **DB instance class** and other settings match your MySQL 5\.7 DB instance\.
+
+   1. Choose **Create read replica**\.
+
+1. \(Optional\) Configure a custom DB parameter group for the read replica\.
+
+   If you want the DB instance to use a custom parameter group after it is promoted to a standalone DB instance, you can create the DB parameter group now can associate it with the read replica\.
+
+   1. Create a custom DB parameter group for MySQL 8\.0\. For instructions, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating)\.
+
+   1. Modify the parameters that you want to change in the DB parameter group you just created\. For instructions, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
+
+   1. In the console, choose **Databases**, and then choose the read replica\.
+
+   1. Choose **Modify**\.
+
+   1. For **DB parameter group**, choose the MySQL 8\.0 DB parameter group you just created, and then choose **Continue**\.
+
+   1. For **Scheduling of modifications**, choose **Apply immediately**\.
+
+   1. Choose **Modify DB instance** to start the upgrade\. 
+
+1. Make your MySQL 8\.0 read replica a standalone DB instance\. 
 **Important**  
-When you promote your MySQL 5\.6 read replica to a standalone, single\-AZ DB instance, it no longer is a replication replica to your MySQL 5\.5 DB instance\. We recommend that you promote your MySQL 5\.6 read replica during a maintenance window when your source MySQL 5\.5 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 5\.6 DB instance to ensure that no write operations are lost\.  
-In addition, we recommend that before promoting your MySQL 5\.6 read replica you perform all necessary data definition language \(DDL\) operations on your MySQL 5\.6 read replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 5\.6 read replica after it has been promoted\. To promote a read replica, use the following procedure\.
+When you promote your MySQL 8\.0 read replica to a standalone DB instance, it no longer is a replica of your MySQL 5\.7 DB instance\. We recommend that you promote your MySQL 8\.0 read replica during a maintenance window when your source MySQL 5\.7 DB instance is in read\-only mode and all write operations are suspended\. When the promotion is completed, you can direct your write operations to the upgraded MySQL 8\.0 DB instance to ensure that no write operations are lost\.  
+In addition, we recommend that, before promoting your MySQL 8\.0 read replica, you perform all necessary data definition language \(DDL\) operations on your MySQL 8\.0 read replica\. An example is creating indexes\. This approach avoids negative effects on the performance of the MySQL 8\.0 read replica after it has been promoted\. To promote a read replica, use the following procedure\.
 
-   1. On the console, choose **Databases**, and then choose the read replica that you just upgraded\.
+   1. In the console, choose **Databases**, and then choose the read replica that you just upgraded\.
 
    1. For **Actions**, choose **Promote**\.
 
@@ -321,4 +372,4 @@ In addition, we recommend that before promoting your MySQL 5\.6 read replica you
 
    1. Choose **Promote Read Replica**\.
 
-1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 5\.6 DB instance, add read replicas, set up Multi\-AZ support, and so on\.
+1. You now have an upgraded version of your MySQL database\. At this point, you can direct your applications to the new MySQL 8\.0 DB instance\.
