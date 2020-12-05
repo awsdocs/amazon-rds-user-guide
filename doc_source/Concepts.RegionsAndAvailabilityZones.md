@@ -11,7 +11,7 @@ Amazon operates state\-of\-the\-art, highly\-available data centers\. Although r
 
 ![\[AWS Region\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Con-AZ-Local.png)
 
-It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the AWS\_DEFAULT\_REGION environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
+It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the [AWS\_DEFAULT\_REGION](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region) environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
 
 Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
 
@@ -22,6 +22,16 @@ To create or work with an Amazon RDS DB instance in a specific AWS Region, use t
 Each AWS Region is designed to be isolated from the other AWS Regions\. This design achieves the greatest possible fault tolerance and stability\.
 
 When you view your resources, you see only the resources that are tied to the AWS Region that you specified\. This is because AWS Regions are isolated from each other, and we don't automatically replicate resources across AWS Regions\.
+
+### Region availability<a name="Concepts.RegionsAndAvailabilityZones.Availability"></a>
+
+The following table shows the AWS Regions where Amazon RDS is currently available and the endpoint for each Region\.
+
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
+
+If you do not explicitly specify an endpoint, the US West \(Oregon\) endpoint is the default\.
+
+When you work with a DB instance using the AWS CLI or API operations, make sure that you specify its regional endpoint\.
 
 ## Availability Zones<a name="Concepts.RegionsAndAvailabilityZones.AvailabilityZones"></a>
 
@@ -62,13 +72,3 @@ A Local Zone can't be included in a Multi\-AZ deployment\.
 
 **Important**  
 Currently, Local Zones are only available in the US West \(Oregon\) Region\. In this AWS Region, the Los Angeles AWS Local Zone is available\.
-
-## Region availability<a name="Concepts.RegionsAndAvailabilityZones.Availability"></a>
-
-The following table shows the AWS Regions where Amazon RDS is currently available and the endpoint for each Region\.
-
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
-
-If you do not explicitly specify an endpoint, the US West \(Oregon\) endpoint is the default\.
-
-When you work with a DB instance using the AWS CLI or API operations, make sure that you specify its regional endpoint\.

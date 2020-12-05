@@ -279,4 +279,4 @@ A request to become a member of a domain can fail because of a network connectiv
 
 ## Restoring a SQL Server DB instance and then adding it to a domain<a name="USER_SQLServerWinAuth.Restore"></a>
 
-You can restore a DB snapshot or do a point\-in\-time restore \(PITR\) for a SQL Server DB instance and then add it to a domain\. Once the DB instance is restored, modify the instance using the process explained in [Step 5: Create or modify a SQL Server DB instance](#USER_SQLServerWinAuth.SettingUp.CreateModify) to add the DB instance to a domain\.
+You can restore a DB snapshot or do point\-in\-time recovery \(PITR\) for a SQL Server DB instance and then add it to a domain\. Once the DB instance is restored, modify the instance using the process explained in [Step 5: Create or modify a SQL Server DB instance](#USER_SQLServerWinAuth.SettingUp.CreateModify) to add the DB instance to a domain\.

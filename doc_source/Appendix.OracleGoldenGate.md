@@ -518,7 +518,7 @@ Oracle GoldenGate Conflict Detection and Resolution \(CDR\) provides basic confl
 
 When CDR resolves a collision, it can insert records into the exception table `_DBA_APPLY_CDR_INFO` temporarily\. Integrated `REPLICAT` deletes these records later\. In a rare scenario, the integrated `REPLICAT` can process a large number of collisions, but a new integrated `REPLICAT` does not replace it\. Instead of being removed, the existing rows in `_DBA_APPLY_CDR_INFO` are orphaned\. Any new integrated `REPLICAT` processes slow down because they are querying orphaned rows in `_DBA_APPLY_CDR_INFO`\.
 
-To remove the orphaned rows from `_DBA_APPLY_CDR_INFO`, use the Amazon RDS procedure `rdsadmin_util.truncate_apply$_cdr_info`\. This procedure is released as part of the October 2020 release and patch update, available in the following database versions:
+To remove all rows from `_DBA_APPLY_CDR_INFO`, use the Amazon RDS procedure `rdsadmin_util.truncate_apply$_cdr_info`\. This procedure is released as part of the October 2020 release and patch update\. The procedure is available in the following database versions:
 + [Version 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1)
 + [Version 18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1)
 + [Version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1)

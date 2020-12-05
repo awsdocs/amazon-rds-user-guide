@@ -200,7 +200,49 @@
 
 ### Setting up network prerequisites<a name="rds-proxy-network-prereqs"></a>
 
- Using RDS Proxy requires you to have a set of networking resources in place\. These include a virtual private cloud \(VPC\), two or more subnets, an Amazon EC2 instance within the same VPC, and an internet gateway\. If you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\.  
+ Using RDS Proxy requires you to have a set of networking resources in place\. These include a virtual private cloud \(VPC\), two or more subnets, an Amazon EC2 instance within the same VPC, and an internet gateway\. If you've successfully connected to any RDS DB instances or Aurora DB clusters, you already have the required network resources\. 
+
+ The following Linux example shows AWS CLI commands that examine the VPCs and subnets owned by your AWS account\. In particular, you pass subnet IDs as parameters when you create a proxy using the CLI\. 
+
+```
+aws ec2 describe-vpcs
+aws ec2 describe-internet-gateways
+aws ec2 describe-subnets --query '*[].[VpcId,SubnetId]' --output text | sort
+```
+
+ The following Linux example shows AWS CLI commands to determine the subnet IDs corresponding to a specific Aurora DB cluster or RDS DB instance\. For an Aurora cluster, first you find the ID for one of the associated DB instances\. You can extract the subnet IDs used by that DB instance by examining the nested fields within the `DBSubnetGroup` and `Subnets` attributes in the describe output for the DB instance\. You specify some or all of those subnet IDs when setting up a proxy for that database server\. 
+
+```
+$ # Optional first step, only needed if you're starting from an Aurora cluster. Find the ID of any DB instance in the cluster.
+$  aws rds describe-db-clusters --db-cluster-id my_cluster_id --query '*[].[DBClusterMembers]|[0]|[0][*].DBInstanceIdentifier' --output text
+my_instance_id
+instance_id_2
+instance_id_3
+...
+
+$ # From the DB instance, trace through the DBSubnetGroup and Subnets to find the subnet IDs.
+$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[DBSubnetGroup]|[0]|[0]|[Subnets]|[0]|[*].SubnetIdentifier' --output text
+subnet_id_1
+subnet_id_2
+subnet_id_3
+...
+```
+
+ As an alternative, you can first find the VPC ID for the DB instance\. Then you can examine the VPC to find its subnets\. The following Linux example shows how\. 
+
+```
+$ # From the DB instance, find the VPC.
+$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[VpcId]' --output text
+my_vpc_id
+
+$ aws ec2 describe-subnets --filters Name=vpc-id,Values=my_vpc_id --query '*[].[SubnetId]' --output text
+subnet_id_1
+subnet_id_2
+subnet_id_3
+subnet_id_4
+subnet_id_5
+subnet_id_6
+```
 
 ### Setting up database credentials in AWS Secrets Manager<a name="rds-proxy-secrets-arns"></a>
 
@@ -222,22 +264,46 @@
 
   ```
   aws secretsmanager create-secret
-  --name "secret_name"
-  --description "secret_description"
-  --region region_name
-  --secret-string '{"username":"db_user","password":"db_user_password"}'
+    --name "secret_name"
+    --description "secret_description"
+    --region region_name
+    --secret-string '{"username":"db_user","password":"db_user_password"}'
   ```
 
  For example, the following commands create Secrets Manager secrets for two database users, one named `admin` and the other named `app-user`\. 
 
 ```
 aws secretsmanager create-secret \
---name admin_secret_name --description "db admin user" \
---secret-string '{"username":"admin","password":"choose_your_own_password"}'
+  --name admin_secret_name --description "db admin user" \
+  --secret-string '{"username":"admin","password":"choose_your_own_password"}'
 
 aws secretsmanager create-secret \
---name proxy_secret_name --description "application user" \
---secret-string '{"username":"app-user","password":"choose_your_own_password"}'
+  --name proxy_secret_name --description "application user" \
+  --secret-string '{"username":"app-user","password":"choose_your_own_password"}'
+```
+
+ To see the secrets owned by your AWS account, use a command such as the following\. 
+
+```
+aws secretsmanager list-secrets
+```
+
+ When you create a proxy using the CLI, you pass the Amazon resource names \(ARNs\) of one or more secrets to the `--auth` parameter\. The following Linux example shows how to prepare a report with only the name and ARN of each secret owned by your AWS account\. This example uses the `--output table` parameter that is available in AWS CLI version 2\. If you are using AWS CLI version 1, use `--output text` instead\. 
+
+```
+aws secretsmanager list-secrets --query '*[].[Name,ARN]' --output table
+```
+
+ To verify that you stored the correct credentials and in the right format in a secret, use a command such as the following\. Substitute the short name or the ARN of the secret for *your\_secret\_name*\. 
+
+```
+aws secretsmanager get-secret-value --secret-id your_secret_name
+```
+
+ The output should include a line displaying a JSON\-encoded value like the following\. 
+
+```
+"SecretString": "{\"username\":\"your_username\",\"password\":\"your_password\"}",
 ```
 
 ### Setting up AWS Identity and Access Management \(IAM\) policies<a name="rds-proxy-iam-setup"></a>
@@ -423,11 +489,11 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-db-proxy \
     --db-proxy-name proxy_name \
-    --role-arn iam_role \
     --engine-family { MYSQL | POSTGRESQL } \
+    --auth ProxyAuthenticationConfig_JSON_string \
+    --role-arn iam_role \
     --vpc-subnet-ids space_separated_list \
     [--vpc-security-group-ids space_separated_list] \
-    [--auth ProxyAuthenticationConfig_JSON_string] \
     [--require-tls | --no-require-tls] \
     [--idle-client-timeout value] \
     [--debug-logging | --no-debug-logging] \
@@ -438,18 +504,21 @@ For Windows:
 ```
 aws rds create-db-proxy ^
     --db-proxy-name proxy_name ^
-    --role-arn iam_role ^
     --engine-family { MYSQL | POSTGRESQL } ^
+    --auth ProxyAuthenticationConfig_JSON_string ^
+    --role-arn iam_role ^
     --vpc-subnet-ids space_separated_list ^
     [--vpc-security-group-ids space_separated_list] ^
-    [--auth ProxyAuthenticationConfig_JSON_string] ^
     [--require-tls | --no-require-tls] ^
     [--idle-client-timeout value] ^
     [--debug-logging | --no-debug-logging] ^
     [--tags comma_separated_list]
 ```
 
- To create the required information and associations for the proxy, you also use the  [register\-db\-proxy\-targets](https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html) command\. Specify the target group name `default`\. RDS Proxy automatically creates a target group with this name when you create each proxy\. 
+**Tip**  
+ If you don't already know the subnet IDs to use for the `--vpc-subnet-ids` parameter, see [Setting up network prerequisites](#rds-proxy-network-prereqs) for examples of how to find the subnet IDs that you can use\. 
+
+ To create the required information and associations for the proxy, you also use the [register\-db\-proxy\-targets](https://docs.aws.amazon.com/cli/latest/reference/rds/register-db-proxy-targets.html) command\. Specify the target group name `default`\. RDS Proxy automatically creates a target group with this name when you create each proxy\. 
 
 ```
 aws rds register-db-proxy-targets

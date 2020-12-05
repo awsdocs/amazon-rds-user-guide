@@ -8,16 +8,16 @@ This guide covers using Amazon RDS in the AWS Cloud\. For information about usin
 
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
-Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult and tedious management tasks of a relational database: 
-+ When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon RDS, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\. 
-+ Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. 
-+ To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. 
+Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult and tedious management tasks of a relational database:
++ When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon RDS, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\.
++ Amazon RDS manages backups, software patching, automatic failure detection, and recovery\.
++ To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\.
 + You can have automated backups performed when you need them, or manually create your own backup snapshot\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\. 
 + You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\.
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL read replicas to increase read scaling\.
 + In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\.
 
-If you are new to AWS products and services, begin learning more with the following resources: 
+If you are new to AWS products and services, begin learning more with the following resources:
 + For an overview of all AWS products, see [What is cloud computing?](http://aws.amazon.com/what-is-aws/)
 + Amazon Web Services provides a number of database services\. For guidance on which service is best for your environment, see [Running databases on AWS](http://aws.amazon.com/running_databases/)\. 
 

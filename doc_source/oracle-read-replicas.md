@@ -91,7 +91,7 @@ Before you can begin using your replica, perform the following tasks\.
 
 ### Enabling automatic backups<a name="oracle-read-replicas.configuration.autobackups"></a>
 
-Before a DB instance can serve as a source DB instance, make sure to enable automatic backups on the source DB instance\. To learn how to perform this procedure, see [Enabling automated backups ](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups.Enabling)\.
+Before a DB instance can serve as a source DB instance, make sure to enable automatic backups on the source DB instance\. To learn how to perform this procedure, see [Enabling automated backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups.Enabling)\.
 
 ### Enabling force logging mode<a name="oracle-read-replicas.configuration.force-logging"></a>
 
@@ -177,7 +177,7 @@ aws rds create-db-instance-read-replica ^
     --replica-mode mounted
 ```
 
-To change a read\-only replica to a mounted state, set `--replica-mode` to `mounted` in the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. To place a mounted replica in read\-only mode, set `--replica-mode` to `read-only`\. 
+To change a read\-only replica to a mounted state, set `--replica-mode` to `mounted` in the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. To place a mounted replica in read\-only mode, set `--replica-mode` to `open-read-only`\. 
 
 ### RDS API<a name="oracle-read-replicas.creating-in-mounted-mode.api"></a>
 
@@ -227,7 +227,7 @@ The change operation can take a few minutes\. During the operation, the DB insta
 
 ### AWS CLI<a name="oracle-read-replicas.changing-replica-mode.cli"></a>
 
-To change a read replica to mounted mode, set `--replica-mode` to `mounted` in the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. To change a mounted replica to read\-only mode, set `--replica-mode` to `read-only`\.
+To change a read replica to mounted mode, set `--replica-mode` to `mounted` in the AWS CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. To change a mounted replica to read\-only mode, set `--replica-mode` to `open-read-only`\.
 
 **Example**  
 For Linux, macOS, or Unix:  

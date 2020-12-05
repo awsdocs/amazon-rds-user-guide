@@ -27,6 +27,7 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
 + **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
 + **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
++ **db\.r5b** – Newest\-generation instance classes that are optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
@@ -125,11 +126,20 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r5b – Newest Generation Memory Optimized Instance Classes | 
+| db\.r5b\.24xlarge | No | Yes | No | Yes | No | 
+| db\.r5b\.16xlarge | No | Yes | No |  Yes  | No | 
+| db\.r5b\.12xlarge | No | Yes | No | Yes | No | 
+| db\.r5b\.8xlarge | No | Yes | No |  Yes  | No | 
+| db\.r5b\.4xlarge | No | Yes | No | Yes | No | 
+| db\.r5b\.2xlarge | No | Yes | No | Yes | No | 
+| db\.r5b\.xlarge | No | Yes | No | Yes | No | 
+| db\.r5b\.large | No | Yes | No | Yes | No | 
 | db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.r5\.8xlarge | Yes | Yes | Yes |  Yes  | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
 | db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -230,6 +240,14 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.r5\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 |  db\.r5\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.r5\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
+|  db\.r5b\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
+|  db\.r5b\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
+|  db\.r5b\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
+|  db\.r5b\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 
+|  db\.r5b\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
+|  db\.r5b\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
+|  db\.r5b\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
+|  db\.r5b\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.r4\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.r4\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 
 |  db\.r4\.2xlarge  |  8  |  4  |  2  |  1, 2, 3, 4  |  1, 2  | 
@@ -601,6 +619,15 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r6g\.2xlarge\* | 8 | – | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.xlarge\* | 4 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
 | db\.r6g\.large\* | 2 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps  | 
+| db\.r5b – Newest Generation Memory Optimized Instance Classes | 
+| db\.r5b\.24xlarge | 96 | 347 | 768 | Yes | Yes | 60,000 | 25 Gbps | 
+| db\.r5b\.16xlarge | 64 | 264 | 512 | Yes | Yes | 40,000 | 20 Gbps | 
+| db\.r5b\.12xlarge | 48 | 173 | 384 | Yes | Yes | 30,000 | 10 Gbps | 
+| db\.r5b\.8xlarge | 32 | 132 | 256 | Yes | Yes | 20,000 | 10 Gbps | 
+| db\.r5b\.4xlarge | 16 | 71 | 128 | Yes | Yes | 10,000 | Up to 10 Gbps | 
+| db\.r5b\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
+| db\.r5b\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
+| db\.r5b\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
 | db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 

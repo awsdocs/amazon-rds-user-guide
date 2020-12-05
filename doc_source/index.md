@@ -56,6 +56,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Deleting a DB instance](USER_DeleteInstance.md)
 + [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)
    + [Working with backups](USER_WorkingWithAutomatedBackups.md)
+   + [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)
    + [Creating a DB snapshot](USER_CreateSnapshot.md)
    + [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
    + [Copying a snapshot](USER_CopySnapshot.md)

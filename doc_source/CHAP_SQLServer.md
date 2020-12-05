@@ -97,9 +97,9 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 | SQL Server edition | 2019 support range | 2017 and 2016 support range | 2014 and 2012 support range | 
 | --- | --- | --- | --- | 
-|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
-|  Web Edition  |  `db.t3.small`–`db.t3.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
+|  Enterprise Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.16xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5b.xlarge`–`db.r5b.24xlarge` `db.m4.xlarge`–`db.m4.16xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.xlarge`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.xlarge`–`db.r3.8xlarge` `db.r4.xlarge`–`db.r4.8xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.r5.xlarge`–`db.r5.24xlarge` `db.m4.xlarge`–`db.m4.10xlarge` `db.m5.xlarge`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Standard Edition  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r4.large`–`db.r4.16xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.m4.large`–`db.m4.16xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge` `db.x1e.xlarge`–`db.x1e.32xlarge` `db.z1d.large`–`db.z1d.12xlarge`  |  `db.t3.xlarge`–`db.t3.2xlarge` `db.r3.large`–`db.r3.8xlarge` `db.r4.large`–`db.r4.8xlarge` `db.r5.large`–`db.r5.24xlarge` `db.r5b.large`–`db.r5b.24xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.10xlarge` `db.m5.large`–`db.m5.24xlarge` `db.x1.16xlarge`–`db.x1.32xlarge`  | 
+|  Web Edition  |  `db.t3.small`–`db.t3.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge` `db.z1d.large`–`db.z1d.3xlarge`  |  `db.t2.small`–`db.t2.medium` `db.t3.small`–`db.t3.2xlarge` `db.r3.large`–`db.r3.2xlarge` `db.r4.large`–`db.r4.2xlarge` `db.r5.large`–`db.r5.4xlarge` `db.r5b.large`–`db.r5b.4xlarge` `db.m3.medium`–`db.m3.2xlarge` `db.m4.large`–`db.m4.4xlarge` `db.m5.large`–`db.m5.4xlarge`  | 
 |  Express Edition  |  `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  |  `db.t2.micro`–`db.t2.medium` `db.t3.small`–`db.t3.xlarge`  | 
 
 ## Microsoft SQL Server security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
@@ -135,28 +135,29 @@ The following server\-level permissions are not available on SQL Server DB insta
 
 ## Compliance program support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.Compliance"></a>
 
-AWS Services in Scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS services in scope by compliance program](https://aws.amazon.com/compliance/services-in-scope/)\. 
+AWS Services in scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS services in scope by compliance program](https://aws.amazon.com/compliance/services-in-scope/)\.
 
 ### HIPAA support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.HIPAA"></a>
 
 You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\.
 
-Amazon RDS for SQL Server supports HIPAA for the following versions and editions: 
+Amazon RDS for SQL Server supports HIPAA for the following versions and editions:
++ SQL Server 2019 Enterprise, Standard, and Web Editions
 + SQL Server 2017 Enterprise, Standard, and Web Editions
 + SQL Server 2016 Enterprise, Standard, and Web Editions
 + SQL Server 2014 Enterprise, Standard, and Web Editions
 + SQL Server 2012 Enterprise, Standard, and Web Editions
 
-To enable HIPAA support on your DB instance, set up the following three components\. 
+To enable HIPAA support on your DB instance, set up the following three components\.
 
 
 ****  
 
 | Component | Details | 
 | --- | --- | 
-|  Auditing  |  To set up auditing, set the parameter `rds.sqlserver_audit` to the value `fedramp_hipaa`\. If your DB instance is not already using a custom DB parameter group, you must create a custom parameter group and attach it to your DB instance before you can modify the `rds.sqlserver_audit` parameter\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.   | 
-|  Transport Encryption  |  To set up transport encryption, force all connections to your DB instance to use Secure Sockets Layer \(SSL\)\. For more information, see [Forcing connections to your DB instance to use SSL](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Forcing)\.   | 
-|  Encryption at Rest  |  To set up encryption at rest, you have two options:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)  | 
+|  Auditing  |  To set up auditing, set the parameter `rds.sqlserver_audit` to the value `fedramp_hipaa`\. If your DB instance is not already using a custom DB parameter group, you must create a custom parameter group and attach it to your DB instance before you can modify the `rds.sqlserver_audit` parameter\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.  | 
+|  Transport encryption  |  To set up transport encryption, force all connections to your DB instance to use Secure Sockets Layer \(SSL\)\. For more information, see [Forcing connections to your DB instance to use SSL](SQLServer.Concepts.General.SSL.Using.md#SQLServer.Concepts.General.SSL.Forcing)\.  | 
+|  Encryption at rest  |  To set up encryption at rest, you have two options: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)  | 
 
 ## SSL support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.SSL"></a>
 
@@ -354,7 +355,7 @@ The following table lists Amazon RDS functions and stored procedures that help a
 
 ## Local time zone for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.TimeZone"></a>
 
-The time zone of an Amazon RDS DB instance running Microsoft SQL Server is set by default\. The current default is Universal Coordinated Time \(UTC\)\. You can set the time zone of your DB instance to a local time zone instead, to match the time zone of your applications\.
+The time zone of an Amazon RDS DB instance running Microsoft SQL Server is set by default\. The current default is Coordinated Universal Time \(UTC\)\. You can set the time zone of your DB instance to a local time zone instead, to match the time zone of your applications\.
 
 You set the time zone when you first create your DB instance\. You can create your DB instance by using the [AWS Management Console](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html), the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html.html) action, or the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\.
 

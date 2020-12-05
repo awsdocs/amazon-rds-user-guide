@@ -24,7 +24,9 @@ When you delete a DB instance, you can choose to do one or both of the following
 You can't create a final DB snapshot of your DB instance if it has the status `creating`, `failed`, `incompatible-restore`, or `incompatible-network`\. For more information, see [DB instance status](Overview.DBInstance.Status.md)\.
 + Retain automated backups\.
   + Your automated backups are retained for the retention period that is set on the DB instance at the time when you delete it\. This set retention period occurs whether or not you choose to create a final DB snapshot\.
-  + If you don't choose to retain automated backups, your automated backups are deleted and can't be recovered after you delete the DB instance\.
+  + If you don't choose to retain automated backups, your automated backups in the same AWS Region as the DB instance are deleted\. They can't be recovered after you delete the DB instance\.
+**Note**  
+Automated backups that are replicated to another AWS Region are retained even if you choose not to retain automated backups\. For more information, see [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)\.
   + You typically don't need to retain automated backups if you create a final DB snapshot\.
   + To delete a retained automated backup, follow the instructions in [Deleting retained automated backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups-Deleting)\.
 

@@ -11,7 +11,7 @@
 
 ## Renaming to replace an existing DB instance<a name="USER_RenameInstance.RR"></a>
 
-The most common reasons for renaming a DB instance are that you are promoting a read replica or you are restoring data from a DB snapshot or PITR\. By renaming the database, you can replace the DB instance without having to change any application code that references the DB instance\. In these cases, you would do the following: 
+The most common reasons for renaming a DB instance are that you are promoting a read replica or you are restoring data from a DB snapshot or point\-in\-time recovery \(PITR\)\. By renaming the database, you can replace the DB instance without having to change any application code that references the DB instance\. In these cases, you would do the following: 
 
 1. Stop all traffic going to the primary DB instance\. This can involve redirecting traffic from accessing the databases on the DB instance or some other way you want to use to prevent traffic from accessing your databases on the DB instance\. 
 

@@ -178,13 +178,13 @@ You can also publish Oracle logs using the following commands:
 + [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html)
 
 **Example**  
-The following example creates an Oracle DB instance with CloudWatch Logs publishing enabled\. The `--enable-cloudwatch-logs-exports` value is a JSON array of strings\. The strings can be any combination of `alert`, `audit`, `listener`, and `trace`\.  
+The following example creates an Oracle DB instance with CloudWatch Logs publishing enabled\. The `--cloudwatch-logs-export-configuration` value is a JSON array of strings\. The strings can be any combination of `alert`, `audit`, `listener`, and `trace`\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds create-db-instance \
     --db-instance-identifier mydbinstance \
-    --enable-cloudwatch-logs-exports '["trace","audit","alert","listener"]' \
+    --cloudwatch-logs-export-configuration '["trace","audit","alert","listener"]' \
     --db-instance-class db.m5.large \
     --allocated-storage 20 \
     --engine oracle-ee \
@@ -198,7 +198,7 @@ For Windows:
 ```
 aws rds create-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --enable-cloudwatch-logs-exports trace alert audit listener ^
+    --cloudwatch-logs-export-configuration trace alert audit listener ^
     --db-instance-class db.m5.large ^
     --allocated-storage 20 ^
     --engine oracle-ee ^

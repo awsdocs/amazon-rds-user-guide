@@ -31,15 +31,23 @@ CloudWatch gathers metrics about CPU utilization from the hypervisor for a DB in
 
 To use Enhanced Monitoring, you must create an IAM role, and then enable Enhanced Monitoring\.
 
-### Before you begin<a name="USER_Monitoring.OS.Enabling.Prerequisites"></a>
+### Creating an IAM role for Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites"></a>
 
-Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring the required permissions using an AWS Identity and Access Management \(IAM\) role\. 
+Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring permissions using an AWS Identity and Access Management \(IAM\) role\. 
 
-The first time that you enable Enhanced Monitoring in the console, you can select the **Default** option for the **Monitoring Role** property to have RDS create the required IAM role\. RDS then automatically creates a role named `rds-monitoring-role` for you, and uses it for the specified DB instance or read replica\.
+#### Creaing the IAM role when you enable Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites.creating-role-automatically"></a>
 
-You can also create the required role before you enable Enhanced Monitoring, and then specify your new role's name when you enable Enhanced Monitoring\. You must create this required role if you enable Enhanced Monitoring using the AWS CLI or the RDS API\.
+When you enable Enhanced Monitoring in the RDS console, Amazon RDS can create the required IAM role for you\. The role is named `rds-monitoring-role`\. RDS uses this role for the specified DB instance or read replica\.
 
-To create the appropriate IAM role to permit Amazon RDS to communicate with the Amazon CloudWatch Logs service on your behalf, take the following steps\.
+**To create the IAM role when enabling Enhanced Monitoring**
+
+1. Follow the steps in [Enabling and disabling Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Procedure)\.
+
+1. Set **Monitoring Role** to **Default** in the step where you choose a role\.
+
+#### Creating the IAM role before you enable Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites.creating-role-manually"></a>
+
+You can create the required role before you enable Enhanced Monitoring\. When you enable Enhanced Monitoring, specify your new role's name\. You must create this required role if you enable Enhanced Monitoring using the AWS CLI or the RDS API\.
 
 The user that enables Enhanced Monitoring must be granted the `PassRole` permission\. For more information, see Example 2 in [Granting a user permissions to pass a role to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.<a name="USER_Monitoring.OS.IAMRole"></a>
 
@@ -59,7 +67,11 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 1. On the **Add tags** page, choose **Next: Review**\.
 
-1. For **Role Name**, enter a name for your role, for example **emaccess**, and then choose **Create role**\.
+1. For **Role Name**, enter a name for your role\. For example, enter **emaccess**\.
+
+   The trusted entity for your role is the AWS service **monitoring\.rds\.amazonaws\.com**\.
+
+1. Choose **Create role**\.
 
 ### Enabling and disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
@@ -74,26 +86,23 @@ You can enable Enhanced Monitoring in the RDS console when you do one of the fol
 + **Create a read replica** – You can enable Enhanced Monitoring in the **Monitoring** section\.
 + **Modify a DB instance** – You can enable Enhanced Monitoring in the **Monitoring** section\.
 
-To enable Enhanced Monitoring by using the RDS console, scroll to the **Monitoring** section and do the following: 
+**To enable Enhanced Monitoring by using the RDS console**
 
-1. Choose **Enable enhanced monitoring** for your DB instance or read replica\.
+1. Scroll to the **Monitoring** section\.
+
+1. Choose **Enable enhanced monitoring** for your DB instance or read replica\. To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\.  
+![\[Enable Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics3.png)
 
 1. Set the **Monitoring Role** property to the IAM role that you created to permit Amazon RDS to communicate with Amazon CloudWatch Logs for you, or choose **Default** to have RDS create a role for you named `rds-monitoring-role`\.
 
 1. Set the **Granularity** property to the interval, in seconds, between points when metrics are collected for your DB instance or read replica\. The **Granularity** property can be set to one of the following values: `1`, `5`, `10`, `15`, `30`, or `60`\.
-
-To disable Enhanced Monitoring, choose **Disable enhanced monitoring**\.
-
-![\[Enable Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics3.png)
-
-Enabling Enhanced Monitoring doesn't require your DB instance to restart\.
 
 **Note**  
 The fastest that the RDS console refreshes is every 5 seconds\. If you set the granularity to 1 second in the RDS console, you still see updated metrics only every 5 seconds\. You can retrieve 1\-second metric updates by using CloudWatch Logs\.
 
 #### AWS CLI<a name="USER_Monitoring.OS.Enabling.Procedure.CLI"></a>
 
-To enable Enhanced Monitoring using the AWS CLI, in the following commands, set the `--monitoring-interval` option to a value other than `0` and set the `--monitoring-role-arn` option to the role you created in [Before you begin](#USER_Monitoring.OS.Enabling.Prerequisites)\.
+To enable Enhanced Monitoring using the AWS CLI, in the following commands, set the `--monitoring-interval` option to a value other than `0` and set the `--monitoring-role-arn` option to the role you created in [Creating an IAM role for Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Prerequisites)\.
 + [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
 + [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)
 + [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)
@@ -123,7 +132,7 @@ aws rds modify-db-instance ^
 
 #### RDS API<a name="USER_Monitoring.OS.Enabling.Procedure.API"></a>
 
-To enable Enhanced Monitoring using the RDS API, in the following operations, set the `MonitoringInterval` parameter to a value other than `0` and set the `MonitoringRoleArn` parameter to the role you created in [Before you begin](#USER_Monitoring.OS.Enabling.Prerequisites)\.
+To enable Enhanced Monitoring using the RDS API, in the following operations, set the `MonitoringInterval` parameter to a value other than `0` and set the `MonitoringRoleArn` parameter to the role you created in [Creating an IAM role for Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Prerequisites)\.
 + [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)
 + [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)
@@ -212,6 +221,6 @@ The following tables list the OS metrics available using Amazon CloudWatch Logs\
 
 <a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w137aac21c22c21b7b9"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w142aac21c22c21b7b9"></a>
 
 <a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

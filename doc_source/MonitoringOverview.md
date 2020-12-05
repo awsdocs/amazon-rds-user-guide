@@ -146,14 +146,14 @@ The Amazon RDS console might display metrics in units that are different from th
 | MaximumUsedTransactionIDs |   **Maximum Used Transaction IDs \(Count\)**   |  The maximum transaction IDs that have been used\. Applies to PostgreSQL\.  Units: Count  | 
 | NetworkReceiveThroughput |   **Network Receive Throughput \(MB/Second\)**   |  The incoming \(receive\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/Second  | 
 | NetworkTransmitThroughput |   **Network Transmit Throughput \(MB/Second\)**   |  The outgoing \(transmit\) network traffic on the DB instance, including both customer database traffic and Amazon RDS traffic used for monitoring and replication\. Units: Bytes/Second  | 
-| OldestReplicationSlotLag |   **Oldest Replication Slot Lag \(MB\)**   |  The lagging size of the replica lagging the most in terms of write\-ahead log \(WAL\) data received\. Applies to PostgreSQL\. Units: Megabytes  | 
+| OldestReplicationSlotLag |   **Oldest Replication Slot Lag \(MB\)**   |  The lagging size of the replica lagging the most in terms of write\-ahead log \(WAL\) data received\. Applies to PostgreSQL\. Units: Bytes  | 
 | ReadIOPS |   **Read IOPS \(Count/Second\)**   |  The average number of disk read I/O operations per second\. Units: Count/Second  | 
 | ReadLatency |   **Read Latency \(Milliseconds\)**   |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 
 | ReadThroughput |   **Read Throughput \(MB/Second\)**   |  The average number of bytes read from disk per second\. Units: Bytes/Second  | 
 | ReplicaLag |   **Replica Lag \(Milliseconds\)**   |  The amount of time a read replica DB instance lags behind the source DB instance\. Applies to MySQL, MariaDB, Oracle, PostgreSQL, and SQL Server read replicas\. Units: Seconds  | 
-| ReplicationSlotDiskUsage |   **Replica Slot Disk Usage \(MB\)**   |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Megabytes  | 
+| ReplicationSlotDiskUsage |   **Replica Slot Disk Usage \(MB\)**   |  The disk space used by replication slot files\. Applies to PostgreSQL\. Units: Bytes  | 
 | SwapUsage |   **Swap Usage \(MB\)**   |  The amount of swap space used on the DB instance\. This metric is not available for SQL Server\. Units: Bytes  | 
-| TransactionLogsDiskUsage |   **Transaction Logs Disk Usage \(MB\)**   |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Megabytes  | 
+| TransactionLogsDiskUsage |   **Transaction Logs Disk Usage \(MB\)**   |  The disk space used by transaction logs\. Applies to PostgreSQL\. Units: Bytes  | 
 | TransactionLogsGeneration |   **Transaction Logs Generation \(MB/Second\)**   |  The size of transaction logs generated per second\. Applies to PostgreSQL\. Units: Bytes/Second  | 
 | WriteIOPS |   **Write IOPS \(Count/Second\)**   |  The average number of disk write I/O operations per second\. Units: Count/Second  | 
 | WriteLatency |   **Write Latency \(Milliseconds\)**   |  The average amount of time taken per disk I/O operation\. Units: Seconds  | 

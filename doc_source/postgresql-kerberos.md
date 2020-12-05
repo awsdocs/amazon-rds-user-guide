@@ -19,13 +19,15 @@ Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the f
 + Asia Pacific \(Sydney\)
 + Asia Pacific \(Tokyo\)
 + Canada \(Central\)
++ China \(Beijing\)
++ China \(Ningxia\)
 + Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
 + Europe \(Stockholm\)
 + South America \(São Paulo\)
-+ China \(Beijing\)
-+ China \(Ningxia\)
++ AWS GovCloud \(US\-East\)
++ AWS GovCloud \(US\-West\)
 
 **Topics**
 + [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)

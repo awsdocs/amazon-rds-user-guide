@@ -4,6 +4,7 @@ This section shows how to back up and restore a DB instance\.
 
 **Topics**
 + [Working with backups](USER_WorkingWithAutomatedBackups.md)
++ [Replicating automated backups to another AWS Region](USER_ReplicateBackups.md)
 + [Creating a DB snapshot](USER_CreateSnapshot.md)
 + [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)
 + [Copying a snapshot](USER_CopySnapshot.md)
