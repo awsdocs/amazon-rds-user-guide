@@ -24,7 +24,7 @@ We recommend that you store historical performance data for Amazon RDS\. Using t
 
 ## Performance guidelines<a name="MonitoringOverview.guidelines"></a>
 
-In general, acceptable values for performance metrics depend what your application is doing relative to your baseline\. Investigate consistent or trending variances from your baseline\. The following metrics are often the source of performance issues:
+In general, acceptable values for performance metrics depend on what your application is doing relative to your baseline\. Investigate consistent or trending variances from your baseline\. The following metrics are often the source of performance issues:
 +  **High CPU or RAM consumption** – High values for CPU or RAM consumption might be appropriate, if they're in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 
 +  **Disk space consumption** – Investigate disk space consumption if space used is consistently at or above 85 percent of the total disk space\. See if it is possible to delete data from the instance or archive data to a different system to free up space\. 
 +  **Network traffic** – For network traffic, talk with your system administrator to understand what expected throughput is for your domain network and internet connection\. Investigate network traffic if throughput is consistently lower than expected\. 
