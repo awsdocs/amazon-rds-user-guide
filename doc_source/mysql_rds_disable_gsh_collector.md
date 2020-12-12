@@ -4,6 +4,8 @@ Disables snapshots taken by the Global Status History \(GoSH\)\. For more inform
 
 ## Syntax<a name="mysql_rds_disable_gsh_collector-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_disable_gsh_collector;
 ```

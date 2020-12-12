@@ -4,6 +4,8 @@ The number of hours that binary logs are retained\.
 
 ## Syntax<a name="mysql_rds_show_configuration-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_show_configuration;
 ```

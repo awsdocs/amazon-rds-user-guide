@@ -387,7 +387,7 @@ All of the considerations for performing replication within an AWS Region apply 
   + PostgreSQL \(all versions\)\.
 + A source DB instance can have cross\-Region read replicas in multiple AWS Regions\.
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.
-+ You can't set up a replication channel into or out of the AWS GovCloud \(US\-West\) Region\.
++ You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud\.
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
 + You can create a cross\-Region read replica:

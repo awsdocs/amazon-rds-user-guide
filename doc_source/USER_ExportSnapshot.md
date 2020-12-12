@@ -1,5 +1,7 @@
 # Exporting DB snapshot data to Amazon S3<a name="USER_ExportSnapshot"></a>
 
+
+
 You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
 
 When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
@@ -382,6 +384,8 @@ Canceling a snapshot export task doesn't remove any data that was exported to Am
 1. Choose **Cancel**\.
 
 1. Choose **Cancel export task** on the confirmation page\.
+
+ 
 
 ### AWS CLI<a name="USER_ExportSnapshot.CancelCLI"></a>
 

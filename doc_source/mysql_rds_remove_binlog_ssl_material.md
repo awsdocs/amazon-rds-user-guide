@@ -7,6 +7,8 @@ Currently, this procedure is only supported for Aurora MySQL version 5\.6\.
 
 ## Syntax<a name="mysql_rds_remove_binlog_ssl_material-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_remove_binlog_ssl_material;
 ```

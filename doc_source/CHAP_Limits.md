@@ -68,6 +68,8 @@ The following table describes naming constraints in Amazon RDS\.
 
 The maximum number of simultaneous database connections varies by the DB engine type and the memory allocation for the DB instance class\. The maximum number of connections is set in the parameter group associated with the DB instance, except for Microsoft SQL Server, where it is set in the server properties for the DB instance in SQL Server Management Studio \(SSMS\)\.
 
+`DBInstanceClassMemory` is in bytes\. You can find the value of `DBInstanceClassMemory` in gibibytes \(GiB\) in the table of [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+
 **Note**  
 For Oracle, you set the maximum number of user processes and user and system sessions\.
 

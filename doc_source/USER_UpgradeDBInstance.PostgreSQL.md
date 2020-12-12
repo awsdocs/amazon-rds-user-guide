@@ -132,6 +132,8 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
            AND n.nspname NOT IN ('pg_catalog', 'information_schema');
      ```
 
+   
+
 1. **Handle read replicas** – An upgrade also upgrades the in\-Region read replicas along with the primary instance\.
 
    You can't upgrade read replicas separately\. If you could, it could lead to situations where the primary and replica instances have different PostgreSQL major versions\. However, replica upgrades might increase downtime on the primary instance\. To prevent a replica upgrade, promote the replica to a standalone instance or delete it before starting the upgrade process\.

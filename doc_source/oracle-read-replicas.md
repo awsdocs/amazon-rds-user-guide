@@ -75,7 +75,7 @@ Before creating a replica for Oracle, check the requirements for option groups:
 
 Before creating an Oracle replica, check the following miscellaneous requirements:
 + If a DB instance is a source for one or more cross\-Region replicas, the source DB retains its archived redo logs until they are applied on all cross\-Region replicas\. The archived redo logs might result in increased storage consumption\.
-+ A login trigger on a primary instance must permit access to the `RDS_DATAGUARD` user and to any user whose `AUTHENTICATED_ENTITY` value is `RDS_DATAGUARD` or `rdsdb`\. Also, the trigger must not set the current schema for the `RDS_DATAGUARD` user\.
++ A login trigger on a primary instance must permit access to the `RDS_DATAGUARD` user and to any user whose `AUTHENTICATED_IDENTITY` value is `RDS_DATAGUARD` or `rdsdb`\. Also, the trigger must not set the current schema for the `RDS_DATAGUARD` user\.
 + To avoid blocking connections from the Data Guard broker process, don't enable restricted sessions\. For more information about restricted sessions, see [Enabling and disabling restricted sessions](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.RestrictedSession)\.
 
 ## Preparing to create an Oracle replica<a name="oracle-read-replicas.Configuration"></a>

@@ -4,6 +4,8 @@ Takes a snapshot on demand for the Global Status History \(GoSH\)\. For more inf
 
 ## Syntax<a name="rds_collect_global_status_history-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_collect_global_status_history;
 ```

@@ -4,6 +4,8 @@ Enables rotation of the contents of the `mysql.global_status_history` table to `
 
 ## Syntax<a name="mysql_rds_enable_gsh_rotation-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_enable_gsh_rotation;
 ```

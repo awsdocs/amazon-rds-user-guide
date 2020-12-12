@@ -36,6 +36,8 @@ You can take the following actions to help increase the security of the `memcach
 
 To access the `memcached` interface, an application must specify both the DNS name of the Amazon RDS instance and the `memcached` port number\. For example, if an instance has a DNS name of `my-cache-instance.cg034hpkmmjt.region.rds.amazonaws.com` and the memcached interface is using port 11212, the connection information specified in PHP would be:
 
+ 
+
 ```
 1. <?php
 2. 

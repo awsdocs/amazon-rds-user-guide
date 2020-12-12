@@ -20,7 +20,7 @@ The following are the Standard DB instance classes available:
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
-+ **db\.m1** – Previous\-generation general\-purpose instance classes\. 
++ **db\.m1** – Earlier\-generation general\-purpose instance classes\. 
 
 The following are the Memory Optimized DB instance classes available:
 + **db\.z1d** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.

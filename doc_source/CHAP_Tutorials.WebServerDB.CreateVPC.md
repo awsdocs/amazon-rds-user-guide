@@ -4,6 +4,8 @@ A common scenario includes a DB instance in an Amazon VPC, that shares data with
 
 The following diagram shows this scenario\. For information about other scenarios, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
+ 
+
 ![\[Single VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
 Because your DB instance only needs to be available to your web server, and not to the public Internet, you create a VPC with both public and private subnets\. The web server is hosted in the public subnet, so that it can reach the public Internet\. The DB instance is hosted in a private subnet\. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance is not available to the public Internet, providing greater security\. 
@@ -102,6 +104,7 @@ Next you create a security group for public access\. To connect to public instan
 
       If you are connecting through an Internet service provider \(ISP\) or from behind your firewall without a static IP address, you need to find out the range of IP addresses used by client computers\.
 **Warning**  
+  
 If you use `0.0.0.0/0`, you enable all IP addresses to access your public instances\. This approach is acceptable for a short time in a test environment, but it's unsafe for production environments\. In production, you'll authorize only a specific IP address or range of addresses to access your instances\.
 
    1. In the **Inbound rules** section, choose **Add rule**\.

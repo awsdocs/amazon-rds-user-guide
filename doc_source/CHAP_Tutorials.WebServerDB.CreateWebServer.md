@@ -72,13 +72,13 @@ After you reset the parameters, modify your DB instance to use the DB parameter 
 The `-y` option installs the updates without asking for confirmation\. To examine updates before installing, omit this option\.
 
    ```
-   [ec2-user ~]$ sudo yum update -y
+   sudo yum update -y
    ```
 
 1. After the updates complete, install the PHP software using the `yum install` command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
-   [ec2-user ~]$ sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+   sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
    ```
 
    If you receive an error stating `sudo: amazon-linux-extras: command not found`, then your instance was not launched with an Amazon Linux 2 AMI \(perhaps you are using the Amazon Linux AMI instead\)\. You can view your version of Amazon Linux using the following command\.
@@ -92,13 +92,13 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 1. Install the Apache web server\.
 
    ```
-   [ec2-user ~]$ sudo yum install -y httpd
+   sudo yum install -y httpd
    ```
 
 1. Start the web server with the command shown following\.
 
    ```
-   [ec2-user ~]$ sudo systemctl start httpd
+   sudo systemctl start httpd
    ```
 
    You can test that your web server is properly installed and started\. To do this, enter the public Domain Name System \(DNS\) name of your EC2 instance in the address bar of a web browser, for example: `http://ec2-42-8-168-21.us-west-1.compute.amazonaws.com`\. If your web server is running, then you see the Apache test page\. 
@@ -110,7 +110,7 @@ The Apache test page appears only when there is no content in the document root 
 1. Configure the web server to start with each system boot using the `chkconfig` command\.
 
    ```
-   [ec2-user ~]$ sudo systemctl enable httpd
+   sudo systemctl enable httpd
    ```
 
 To allow `ec2-user` to manage files in the default root directory for your Apache web server, modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance\. Then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
@@ -120,45 +120,50 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
 1. Add the `www` group to your EC2 instance with the following command\.
 
    ```
-   [ec2-user ~]$ sudo groupadd www                
+   sudo groupadd www
    ```
 
 1. Add the `ec2-user` user to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo usermod -a -G www ec2-user                
+   sudo usermod -a -G www ec2-user
    ```
 
 1. Log out to refresh your permissions and include the new `www` group\.
 
    ```
-   [ec2-user ~]$ exit                
+   exit
    ```
 
 1. Log back in again and verify that the `www` group exists with the `groups` command\.
 
    ```
-   [ec2-user ~]$ groups
+   groups
+   ```
+
+   Your output looks similar to the following:
+
+   ```
    ec2-user adm wheel systemd-journal www
    ```
 
 1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
 
    ```
-   [ec2-user ~]$ sudo chgrp -R www /var/www                
+   sudo chgrp -R www /var/www
    ```
 
 1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.
 
    ```
-   [ec2-user ~]$ sudo chmod 2775 /var/www
-   [ec2-user ~]$ find /var/www -type d -exec sudo chmod 2775 {} +
+   sudo chmod 2775 /var/www
+   find /var/www -type d -exec sudo chmod 2775 {} +
    ```
 
 1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions\.
 
    ```
-   [ec2-user ~]$ find /var/www -type f -exec sudo chmod 0664 {} +                
+   find /var/www -type f -exec sudo chmod 0664 {} +
    ```
 
 ## Connect your Apache web server to your DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
@@ -170,16 +175,16 @@ Next, you add content to your Apache web server that connects to your Amazon RDS
 1. While still connected to your EC2 instance, change the directory to `/var/www` and create a new subdirectory named `inc`\.
 
    ```
-   [ec2-user ~]$ cd /var/www
-   [ec2-user ~]$ mkdir inc
-   [ec2-user ~]$ cd inc
+   cd /var/www
+   mkdir inc
+   cd inc
    ```
 
 1. Create a new file in the `inc` directory named `dbinfo.inc`, and then edit the file by calling nano \(or the editor of your choice\)\.
 
    ```
-   [ec2-user ~]$ >dbinfo.inc
-   [ec2-user ~]$ nano dbinfo.inc
+   >dbinfo.inc
+   nano dbinfo.inc
    ```
 
 1. Add the following contents to the `dbinfo.inc` file\. Here, *db\_instance\_endpoint* is your DB instance endpoint, without the port, and *master password* is the master password for your DB instance\.
@@ -202,14 +207,14 @@ We recommend placing the user name and password information in a folder that isn
 1. Change the directory to `/var/www/html`\.
 
    ```
-   [ec2-user ~]$ cd /var/www/html
+   cd /var/www/html
    ```
 
 1. Create a new file in the `html` directory named `SamplePage.php`, and then edit the file by calling nano \(or the editor of your choice\)\.
 
    ```
-   [ec2-user ~]$ >SamplePage.php
-   [ec2-user ~]$ nano SamplePage.php
+   >SamplePage.php
+   nano SamplePage.php
    ```
 
 1. Add the following contents to the `SamplePage.php` file:

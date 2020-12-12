@@ -247,7 +247,9 @@ Following, you can find details about how to view metrics for your DB instance u
    + **CloudWatch** – Shows a summary of DB instance metrics available from Amazon CloudWatch\. Each metric includes a graph showing the metric monitored over a specific time span\.
    + **Enhanced monitoring** – Shows a summary of OS metrics available for a DB instance with Enhanced Monitoring enabled\. Each metric includes a graph showing the metric monitored over a specific time span\.
    + **OS Process list** – Shows details for each process running in the selected instance\.
-   + **Performance Insights** – Opens the Amazon RDS Performance Insights console for your DB instance\.  
+   + **Performance Insights** – Opens the Amazon RDS Performance Insights console for your DB instance\.
+
+     
 ![\[RDS metrics viewing options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/metrics0.png)
 **Tip**  
 To choose the time range of the metrics represented by the graphs, you can use the time range list\.  

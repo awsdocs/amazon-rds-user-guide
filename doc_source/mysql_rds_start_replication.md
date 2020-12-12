@@ -7,6 +7,8 @@ You can use the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replicat
 
 ## Syntax<a name="mysql_rds_start_replication-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_start_replication;
 ```

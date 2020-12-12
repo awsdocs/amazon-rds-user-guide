@@ -4,6 +4,8 @@ Ends a query running against the MySQL server\.
 
 ## Syntax<a name="mysql_rds_kill_query-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_kill_query(queryID);
 ```

@@ -4,6 +4,8 @@ Rotates the contents of the `mysql.global_status_history` table to `mysql.global
 
 ## Syntax<a name="mysql_rds_rotate_global_status_history-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_rotate_global_status_history;
 ```

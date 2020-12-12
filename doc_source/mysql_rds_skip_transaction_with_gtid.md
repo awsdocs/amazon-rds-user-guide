@@ -6,6 +6,8 @@ You can use this procedure for disaster recovery when a specific GTID transactio
 
 ## Syntax<a name="mysql_rds_skip_transaction_with_gtid-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_skip_transaction_with_gtid (
 gtid_to_skip

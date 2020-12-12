@@ -73,6 +73,7 @@ In this example, you restore from a previously created DB snapshot named *mydbsn
 
 **Example**  
 For Linux, macOS, or Unix:  
+   
 
 ```
 1. aws rds restore-db-instance-from-db-snapshot \
@@ -80,6 +81,7 @@ For Linux, macOS, or Unix:
 3.     --db-snapshot-identifier mydbsnapshot
 ```
 For Windows:  
+   
 
 ```
 1. aws rds restore-db-instance-from-db-snapshot ^

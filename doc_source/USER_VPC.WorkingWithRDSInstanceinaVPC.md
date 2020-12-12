@@ -99,6 +99,8 @@ For instructions on how to create subnets in a VPC, see [Create a VPC with priva
 
  A DB subnet group is a collection of subnets \(typically private\) that you create for a VPC and that you then designate for your DB instances\. A DB subnet group allows you to specify a particular VPC when you create DB instances using the CLI or API\. If you use the console, you can just choose the VPC and subnets you want to use\. Each DB subnet group must have at least one subnet in at least two Availability Zones in the AWS Region\. 
 
+As a best practice, each DB subnet group should have at least one subnet for every Availability Zone in the AWS Region\. For Multi\-AZ deployments, defining a subnet for all Availability Zones in an AWS Region enables Amazon RDS to create a new standby replica in another Availability Zone if necessary\. You can follow this best practice even for Single\-AZ deployments, because you might convert them to Multi\-AZ deployments in the future\.
+
  For a DB instance to be publicly accessible, the subnets in the DB subnet group must have an internet gateway\. For more information about internet gateways for subnets, see [ Internet gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) in the Amazon VPC documentation\. 
 
 **Note**  

@@ -6,6 +6,8 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\.
 
+
+
 Amazon RDS on SQL Server doesn't support automatic minor version upgrades\. You can confirm this by using the `describe-db-engine-versions` AWS CLI command\. For example:
 
 ```

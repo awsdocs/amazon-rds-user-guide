@@ -1,6 +1,8 @@
 # Microsoft SQL Server on Amazon RDS<a name="CHAP_SQLServer"></a>
 
 Amazon RDS supports DB instances running several versions and editions of Microsoft SQL Server\. Following, you can find the most recent supported version of each major version\. For the full list of supported versions, editions, and RDS engine versions, see [Microsoft SQL Server versions on Amazon RDS](#SQLServer.Concepts.General.VersionSupport)\.
+
+
 + SQL Server 2019 CU5 15\.00\.4043\.16, released per [KB4552255](https://support.microsoft.com/en-us/help/4552255/cumulative-update-5-for-sql-server-2019) on June 22, 2020\.
 + SQL Server 2017 CU20 14\.00\.3294\.2, released per [KB4541283](https://support.microsoft.com/en-us/help/4541283/cumulative-update-20-for-sql-server-2017) on June 16, 2020\.
 + SQL Server 2016 SP2 CU13 13\.00\.5820\.21, released per [KB4549825](https://support.microsoft.com/en-us/help/4549825/cumulative-update-13-for-sql-server-2016-sp2) on June 16, 2020\.

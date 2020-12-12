@@ -4,6 +4,8 @@ Loads the saved state of the buffer pool from disk\. For more information, see [
 
 ## Syntax<a name="mysql_rds_innodb_buffer_pool_load_now-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_innodb_buffer_pool_load_now();
 ```

@@ -447,6 +447,8 @@ PostgreSQL version 10\.10 contains several bug fixes for issues in release 10\.9
 
 1. The `PostGIS` extension is updated to version 2\.5\.2\.
 
+
+
 ##### PostgreSQL version 10\.9 on Amazon RDS<a name="PostgreSQL.Concepts.General.version109"></a>
 
 This release contains an important security fix and also bug fixes and improvements done by the PostgreSQL community\. For more information on the security fix, see the [PostgreSQL community announcement](https://www.postgresql.org/about/news/1949/) and [security fix CVE\-2019\-10164](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-10164)\. 

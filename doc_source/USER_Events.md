@@ -237,6 +237,8 @@ The Amazon RDS console indicates that the subscription is being created\.
 
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Create2.png)
 
+
+
 ### AWS CLI<a name="USER_Events.Subscribing.CLI"></a>
 
 To subscribe to RDS event notification, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-event-subscription.html) command\. Include the following required parameters:
@@ -279,6 +281,8 @@ You can list your current Amazon RDS event notification subscriptions\.
 
 1.  In the navigation pane, choose **Event subscriptions**\. The **Event subscriptions** pane shows all your event notification subscriptions\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-ListSubs.png)
+
+   
 
 ### AWS CLI<a name="USER_Events.ListSubscription.CLI"></a>
 
@@ -350,6 +354,8 @@ After you have created a subscription, you can change the subscription name, sou
 
 1. Choose **Edit**\. The Amazon RDS console indicates that the subscription is being modified\.  
 ![\[List DB event notification subscriptions\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Modify2.png)
+
+   
 
 ### AWS CLI<a name="USER_Events.Modifying.CLI"></a>
 
@@ -462,6 +468,8 @@ When you create or modify an event notification subscription, the event categori
 
 ![\[List DB event notification categories\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Categories.png)
 
+
+
 ### AWS CLI<a name="USER_Events.ListingCategories.CLI"></a>
 
 To list the Amazon RDS event notification categories, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-categories.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-event-categories.html) command\. This command has no required parameters\.
@@ -494,6 +502,8 @@ You can delete a subscription when you no longer need it\. All subscribers to th
 
 1. The Amazon RDS console indicates that the subscription is being deleted\.  
 ![\[Delete an event notification subscription\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/EventNotification-Delete.png)
+
+   
 
 ### AWS CLI<a name="USER_Events.Deleting.CLI"></a>
 

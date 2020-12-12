@@ -8,7 +8,7 @@ The `DescribeDBLogFiles` API operation that lists the Oracle log files that are 
 
 ## Retention schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
 
-The Oracle database engine might rotate logs files if they get very large\. To retain audit or trace files, download them\. If you store the files locally, you reduce your Amazon RDS storage costs and make more space available for your data\. 
+The Oracle database engine might rotate log files if they get very large\. To retain audit or trace files, download them\. If you store the files locally, you reduce your Amazon RDS storage costs and make more space available for your data\. 
 
 The following table shows the retention schedule for Oracle alert logs, audit files, and trace files on Amazon RDS\. 
 
@@ -24,14 +24,6 @@ The following table shows the retention schedule for Oracle alert logs, audit fi
 
 **Note**  
 Audit files and trace files share the same retention configuration\.
-
-## Switching online log files<a name="USER_LogAccess.Concepts.Oracle.SwitchingLogfiles"></a>
-
-You can use the Amazon RDS procedure `rdsadmin.rdsadmin_util.switch_logfile` to switch online log files\. For more information, see [Switching online log files](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.SwitchingLogfiles)\. 
-
-## Retrieving archived redo log files<a name="USER_LogAccess.Concepts.Oracle.ArchivedRedoLogs"></a>
-
-You can retain archived redo log files\. For more information, see [Retaining archived redo logs](Appendix.Oracle.CommonDBATasks.Log.md#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. 
 
 ## Working with Oracle trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles"></a>
 

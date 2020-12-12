@@ -88,7 +88,7 @@ The following database counters are available with Performance Insights for Amaz
 
 ### Native counters for RDS MariaDB and RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
-You can find definitions for these native metrics in [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
+For definitions of these native metrics, see [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 
 
 | Counter | Type | Unit | Metric | 
@@ -96,6 +96,7 @@ You can find definitions for these native metrics in [Server Status Variables](h
 | Com\_analyze | SQL | Queries per second | db\.SQL\.Com\_analyze | 
 | Com\_optimize | SQL | Queries per second | db\.SQL\.Com\_optimize | 
 | Com\_select | SQL | Queries per second | db\.SQL\.Com\_select | 
+| Connections | SQL | The number of connection attempts per minute \(successful or not\) to the MySQL server | db\.SQL\.Connections | 
 | Innodb\_rows\_deleted | SQL | Rows per second | db\.SQL\.Innodb\_rows\_deleted | 
 | Innodb\_rows\_inserted | SQL | Rows per second | db\.SQL\.Innodb\_rows\_inserted | 
 | Innodb\_rows\_read | SQL | Rows per second | db\.SQL\.Innodb\_rows\_read | 

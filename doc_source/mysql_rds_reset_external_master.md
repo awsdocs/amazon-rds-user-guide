@@ -7,6 +7,8 @@ To run this procedure, `autocommit` must be enabled\. To enable it, set the `aut
 
 ## Syntax<a name="mysql_rds_reset_external_master-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_reset_external_master;
 ```

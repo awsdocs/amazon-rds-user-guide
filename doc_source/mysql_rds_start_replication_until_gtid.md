@@ -4,6 +4,8 @@ Initiates replication from an Amazon RDS MySQL DB instance and stops replication
 
 ## Syntax<a name="mysql_rds_start_replication_until_gtid-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_start_replication_until_gtid (
 gtid

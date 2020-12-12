@@ -4,6 +4,8 @@ Sets the replication mode to be based on either binary log file positions or on 
 
 ## Syntax<a name="mysql_rds_set_master_auto_position-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_master_auto_position (
 auto_position_mode

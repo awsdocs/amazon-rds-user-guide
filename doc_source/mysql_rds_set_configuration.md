@@ -4,6 +4,8 @@ Specifies the number of hours to retain binary logs or the number of seconds to 
 
 ## Syntax<a name="mysql_rds_set_configuration-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_configuration(name,value);
 ```

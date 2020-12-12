@@ -614,7 +614,7 @@ A required text string containing arguments for the PostgreSQL `COPY` command\. 
  *s3\_info*   
 An `aws_commons._s3_uri_1` composite type containing the following information about the S3 object:  
 + `bucket` – The name of the Amazon S3 bucket containing the file\.
-+ `file_path` – The Amazon S3 path of the file\.
++ `file_path` – The Amazon S3 file name including the path of the file\.
 + `region` – The AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
  *credentials*   
@@ -661,7 +661,7 @@ To help with testing, you can use an expanded set of parameters instead of the `
 A text string containing the name of the Amazon S3 bucket that contains the file\. 
 
 *file\_path*  
-A text string containing the Amazon S3 path of the file\. 
+A text string containing the Amazon S3 file name including the path of the file\. 
 
 *region*  
 A text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
@@ -695,7 +695,7 @@ aws_commons.create_s3_uri(
 A required text string containing the Amazon S3 bucket name for the file\.
 
 *file\_path*  
-A required text string containing the Amazon S3 path of the file\.
+A required text string containing the Amazon S3 file name including the path of the file\.
 
 *region*  
 A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.

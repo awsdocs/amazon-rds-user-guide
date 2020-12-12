@@ -4,6 +4,8 @@ To use Performance Insights, enable it on your DB instance\. If needed, you can 
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
 
+
+
 ## Console<a name="USER_PerfInsights.Enabling.Console"></a>
 
 In the console, you can enable or disable Performance Insights when you create or modify a new DB instance\.

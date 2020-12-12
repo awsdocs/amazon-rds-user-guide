@@ -50,6 +50,8 @@ After you add the NNE option, you don't need to restart your DB instances\. As s
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+
+      
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. After you add the NNE option, you don't need to restart your DB instance\. As soon as the option group is active, NNE is active\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Using NNE<a name="Oracle.Options.NNE.Using"></a>
@@ -79,4 +81,6 @@ You can remove NNE from a DB instance\.
 
 To remove NNE from a DB instance, do one of the following: 
 + To remove NNE from multiple DB instances, remove the NNE option from the option group they belong to\. This change affects all DB instances that use the option group\. After you remove the NNE option, you don't need to restart your DB instances\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
+
+   
 + To remove NNE from a single DB instance, modify the DB instance and specify a different option group that doesn't include the NNE option\. You can specify the default \(empty\) option group, or a different custom option group\. After you remove the NNE option, you don't need to restart your DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 

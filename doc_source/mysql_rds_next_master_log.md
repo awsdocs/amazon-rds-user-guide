@@ -4,6 +4,8 @@ Changes the source database instance log position to the start of the next binar
 
 ## Syntax<a name="mysql_rds_next_master_log-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_next_master_log(
 curr_master_log

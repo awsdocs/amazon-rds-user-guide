@@ -4,6 +4,8 @@ Dumps the current state of the buffer pool to disk\. For more information, see [
 
 ## Syntax<a name="mysql_rds_innodb_buffer_pool_dump_now-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_innodb_buffer_pool_dump_now();
 ```

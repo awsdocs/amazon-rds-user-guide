@@ -4,6 +4,8 @@ Skips and deletes a replication error on a MySQL DB instance\.
 
 ## Syntax<a name="mysql_rds_skip_repl_error-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_skip_repl_error;
 ```

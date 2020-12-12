@@ -6,6 +6,8 @@ You can also import data from an existing MySQL or MariaDB database to an Amazon
 
 A typical `mysqldump` command to move data from an external database to an Amazon RDS DB instance looks similar to the following:
 
+ 
+
 ```
 mysqldump -u local_user \
     --databases database_name \

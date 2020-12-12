@@ -15,6 +15,8 @@ A common use of a DB instance in a VPC is to share data with an application serv
 
 The following diagram shows this scenario\.
 
+ 
+
 ![\[One VPC Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
 The simplest way to manage access between EC2 instances and DB instances in the same VPC is to do the following:
@@ -94,6 +96,8 @@ The following diagram shows this scenario\.
 ![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/GS-VPC-network.png)
 
 We recommend the following configuration:
+
+ 
 + A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
 + A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
 + An Amazon RDS DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.

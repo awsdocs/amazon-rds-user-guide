@@ -323,7 +323,7 @@ A required text string containing an SQL query that the PostgreSQL engine runs\.
 *s3\_info*  
 An `aws_commons._s3_uri_1` composite type containing the following information about the S3 object:  
 + `bucket` – The name of the Amazon S3 bucket to contain the file\.
-+ `file_path` – The Amazon S3 path of the file\.
++ `file_path` – The Amazon S3 file name and path\.
 + `region` – The AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
   Currently, this value must be the same AWS Region as that of the exporting DB cluster\. The default is the AWS Region of the exporting DB cluster\. 
@@ -355,7 +355,7 @@ A required text string containing an SQL query that the PostgreSQL engine runs\.
 A required text string containing the name of the Amazon S3 bucket that contains the file\.
 
 *file\_path*  
-A required text string containing the Amazon S3 path of the file\.
+A required text string containing the Amazon S3 file name including the path of the file\.
 
 *region*  
 An optional text string containing the AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.  
@@ -409,7 +409,7 @@ aws_commons.create_s3_uri(
 A required text string containing the Amazon S3 bucket name for the file\.
 
 *file\_path*  
-A required text string containing the Amazon S3 path of the file\.
+A required text string containing the Amazon S3 file name including the path of the file\.
 
 *region*  
 A required text string containing the AWS Region that the file is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.

@@ -103,6 +103,8 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
 
 1. Apply the option group to a new or existing DB instance: 
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+
+      
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 1. \(Optional\) Verify the SQLT installation on each DB instance with the SQLT option\. 
@@ -213,6 +215,8 @@ You can remove SQLT from a DB instance\.
 
 To remove SQLT from a DB instance, do one of the following: 
 + To remove SQLT from multiple DB instances, remove the SQLT option from the option group to which the DB instances belong\. This change affects all DB instances that use the option group\. For more information, see [Removing an option from an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.RemoveOption)\. 
+
+   
 + To remove SQLT from a single DB instance, modify the DB instance and specify a different option group that doesn't include the SQLT option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Related topics<a name="Oracle.Options.SQLT.Related"></a>

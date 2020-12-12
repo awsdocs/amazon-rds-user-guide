@@ -4,6 +4,8 @@ Initiates replication from an Amazon RDS MySQL DB instance and stops replication
 
 ## Syntax<a name="mysql_rds_start_replication_until-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_start_replication_until (
 replication_log_file

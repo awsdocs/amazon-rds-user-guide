@@ -82,6 +82,8 @@ Add all of these options \($90 \+ $45\.60 \+ $19\) with the reserved DB instance
 
 If you chose to use an on\-demand DB instance instead of a reserved DB instance, an Amazon RDS MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.1386 per hour, or $101\.18 per month\. So, for an on\-demand DB instance, add all of these options \($101\.18 \+ $45\.60 \+ $19\), and the total cost per month is $165\.78\.
 
+
+
 **Note**  
 The prices in this example are sample prices and might not match actual prices\.  
 For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.

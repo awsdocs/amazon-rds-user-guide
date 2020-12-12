@@ -626,7 +626,9 @@ If you enable auto minor version upgrades on your DB instance, they occur automa
 
 Oracle Corporation intends to deprecate support for Oracle Database version 11\.2\.0\.4 on December 31, 2020\. On October 31, 2020, Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 SE1 using the License Included model\. On December 31, 2020, Amazon RDS plans to deprecate support for 11\.2\.0\.4 on all editions that use the Bring Your Own License model \(BYOL\)\.  
 
-Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the following schedule, which includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle 11g SE1](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)\.
+Amazon RDS plans to deprecate support for Oracle version 11\.2\.0\.4 by the following schedule, which includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle 11g](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)\.
+
+
 
 
 | Action or recommendation | 11\.2\.0\.4 on SE1 with License Included | 11\.2\.0\.4 on EE, SE, and SE1 with BYOL | 

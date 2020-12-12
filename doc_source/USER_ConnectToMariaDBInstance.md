@@ -4,6 +4,8 @@ After Amazon RDS provisions your DB instance, you can use any standard MariaDB c
 
 You can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list the details of an Amazon RDS DB instance, including its endpoint\.
 
+
+
 **To find the endpoint for a MariaDB DB instance in the AWS Management Console**
 
 1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 

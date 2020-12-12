@@ -10,6 +10,8 @@ You can use the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_e
 
 ## Syntax<a name="mysql_rds_set_external_master-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_external_master (
   host_name

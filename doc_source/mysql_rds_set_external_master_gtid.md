@@ -6,6 +6,8 @@ Using GTIDs for replication provides crash\-safety features not offered by binar
 
 ## Syntax<a name="mysql_rds_set_external_master_gtid-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_external_master_gtid(
   host_name

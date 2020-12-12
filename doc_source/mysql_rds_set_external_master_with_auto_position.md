@@ -7,6 +7,8 @@ To run this procedure, `autocommit` must be enabled\. To enable it, set the `aut
 
 ## Syntax<a name="mysql_rds_set_external_master_with_auto_position-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_external_master_with_auto_position (
   host_name

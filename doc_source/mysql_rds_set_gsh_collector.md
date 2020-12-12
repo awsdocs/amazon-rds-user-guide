@@ -4,6 +4,8 @@ Specifies the interval, in minutes, between snapshots taken by the Global Status
 
 ## Syntax<a name="mysql_rds_set_gsh_collector-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_gsh_collector(intervalPeriod);
 ```

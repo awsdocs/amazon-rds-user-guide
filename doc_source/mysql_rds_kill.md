@@ -4,6 +4,8 @@ Ends a connection to the MySQL server\.
 
 ## Syntax<a name="mysql_rds_kill-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_kill(processID);
 ```

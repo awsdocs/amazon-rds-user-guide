@@ -4,6 +4,8 @@ Enables the Global Status History \(GoSH\) to take default snapshots at interval
 
 ## Syntax<a name="mysql_rds_enable_gsh_collector-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_enable_gsh_collector;
 ```

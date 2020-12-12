@@ -384,7 +384,7 @@ Delete replicated backups in the destination Region from the **Automated backups
 
 ### AWS CLI<a name="AutomatedBackups.Delete.CLI"></a>
 
-Delete replicated backups by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backups.html](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backups.html) AWS CLI command\.
+Delete replicated backups by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backup.html](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-instance-automated-backup.html) AWS CLI command\.
 
 You can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command to find the Amazon Resource Names \(ARNs\) of the replicated backups\. For more information, see [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)\.
 
@@ -394,14 +394,14 @@ You can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-d
   For Linux, macOS, or Unix:
 
   ```
-  aws rds delete-db-instance-automated-backups \
+  aws rds delete-db-instance-automated-backup \
   --db-instance-automated-backups-arn "arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE"
   ```
 
   For Windows:
 
   ```
-  aws rds delete-db-instance-automated-backups ^
+  aws rds delete-db-instance-automated-backup ^
   --db-instance-automated-backups-arn "arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE"
   ```
 

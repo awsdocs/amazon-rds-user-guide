@@ -8,15 +8,13 @@ The following limitations apply:
 + If you run more than one S3 integration task at a time, the tasks run sequentially, not in parallel\.
 **Note**  
 S3 integration tasks share the same queue as native backup and restore tasks\. At maximum, you can have only two tasks in progress at any time in this queue\. Therefore, two running native backup and restore tasks will block any S3 integration tasks\.
-+ You must re\-enable the S3 integration feature on restored instances\. S3 integration isn't propagated from the source instance to the restored instance\. Files in D:\\S3 are deleted on a restored instance\.
++ You must re\-enable the S3 integration feature on restored instances\. S3 integration isn't propagated from the source instance to the restored instance\. Files in `D:\S3` are deleted on a restored instance\.
 + Downloading to the DB instance is limited to 100 files\. In other words, there can't be more than 100 files in `D:\S3\`\.
-+ Only files without file extensions or with the following file extensions are supported for download: \.bcp, \.csv, \.dat, \.fmt, \.info, \.lst, \.tbl, \.txt, and \.xml\.
-**Note**  
-Files with the \.ispac file extension are supported for download when SQL Server Integration Services is enabled\. For more information on enabling SSIS, see [SQL Server Integration Services](Appendix.SQLServer.Options.SSIS.md)\.  
-Files with the following file extensions are supported for download when SQL Server Analysis Services is enabled: \.abf, \.asdatabase, \.configsettings, \.deploymentoptions, \.deploymenttargets, and \.xmla\. For more information on enabling SSAS, see [SQL Server Analysis Services](Appendix.SQLServer.Options.SSAS.md)\.
++ Only files without file extensions or with the following file extensions are supported for download: \.abf, \.asdatabase, \.bcp, \.configsettings, \.csv, \.dat, \.deploymentoptions, \.deploymenttargets, \.fmt, \.info, \.ispac, \.lst, \.tbl, \.txt, \.xml, and \.xmla\.
 + The S3 bucket must have the same owner as the related AWS Identity and Access Management \(IAM\) role\. Therefore, cross\-account S3 integration isn't supported\.
 + The S3 bucket can't be open to the public\.
-+ File size for uploads is limited to 50 GB per file\.
++ The file size for uploads from RDS to S3 is limited to 50 GB per file\.
++ The file size for downloads from S3 to RDS is limited to the maximum supported by S3\.
 
 **Topics**
 + [Prerequisites for integrating RDS SQL Server with S3](#Appendix.SQLServer.Options.S3-integration.preparing)

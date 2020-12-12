@@ -4,6 +4,8 @@ Cancels a load of the saved buffer pool state while in progress\. For more infor
 
 ## Syntax<a name="mysql_rds_innodb_buffer_pool_load_abort-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_innodb_buffer_pool_load_abort();
 ```

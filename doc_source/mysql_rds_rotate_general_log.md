@@ -4,6 +4,8 @@ Rotates the `mysql.general_log` table to a backup table\. For more information, 
 
 ## Syntax<a name="mysql_rds_rotate_general_log-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_rotate_general_log;
 ```

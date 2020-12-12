@@ -4,6 +4,8 @@ Stops replication from a MySQL DB instance\.
 
 ## Syntax<a name="mysql_rds_stop_replication-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_stop_replication;
 ```

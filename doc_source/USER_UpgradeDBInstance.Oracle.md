@@ -1,31 +1,57 @@
 # Upgrading the Oracle DB engine<a name="USER_UpgradeDBInstance.Oracle"></a>
 
-When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. Amazon RDS supports the following upgrades to an Oracle DB instance: 
-+ Major version upgrades\. 
+When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. For information about which Oracle versions are available on Amazon RDS, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\.
 
-  In general, a *major version upgrade* for a database engine can introduce changes that aren't compatible with existing applications\. To perform a major version upgrade, modify the DB instance manually\.
 **Important**  
-On November 1, 2020, Amazon RDS automatically begins upgrading Oracle 11g SE1 License Included \(LI\) instances to Oracle 19c\. The automatic upgrade moves all 11g DB instances to the latest available Oracle Release Update\. For more information, see [Preparing for the automatic upgrade of Oracle 11g SE1](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)\.
-+ Minor version upgrades\. 
+On November 1, 2020, Amazon RDS began automatically upgrading Oracle 11g SE1 instances on the License Included \(LI\) model to Oracle 19c\. On January 4, 2021, Amazon RDS will begin automatically upgrading all editions of Oracle 11g instances on the Bring Your Own License \(BYOL\) model to Oracle 19c\. All Oracle 11g instances, including reserved instances, will move to the latest available Release Update \(RU\)\.
 
-  A *minor version upgrade* includes only changes that are backward\-compatible with existing applications\. If you enable auto minor version upgrades on your DB instance, minor version upgrades occur automatically\. In all other cases, you must modify the DB instance manually\.
+For more information about the automatic upgrade process, see [Preparing for the automatic upgrade of Oracle 11g](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)\.
 
-When you update the DB engine, an outage occurs\. The time for the outage depends on your engine version and instance size\. 
-
-For information about what Oracle versions are available on Amazon RDS, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\. 
+**Topics**
++ [Overview of Oracle DB engine upgrades](#USER_UpgradeDBInstance.Oracle.Overview)
++ [Major version upgrades](#USER_UpgradeDBInstance.Oracle.Major)
++ [Oracle minor version upgrades](#USER_UpgradeDBInstance.Oracle.Minor)
++ [Oracle SE2 upgrade paths](#USER_UpgradeDBInstance.Oracle.SE2)
++ [Considerations for Oracle DB upgrades](#USER_UpgradeDBInstance.Oracle.OGPG)
++ [Testing an Oracle DB upgrade](#USER_UpgradeDBInstance.Oracle.UpgradeTesting)
++ [Preparing for the automatic upgrade of Oracle 11g](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g)
++ [Upgrading an Oracle DB instance](#USER_UpgradeDBInstance.Oracle.Upgrading)
 
 ## Overview of Oracle DB engine upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview"></a>
 
-If the backup retention period for your DB instance is greater than 0, Amazon RDS takes the following DB snapshots during the upgrade:
+Before upgrading your Oracle DB instance, familiarize yourself with the following key concepts\. 
 
-1. A snapshot of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\.
+**Topics**
++ [Major and minor version upgrades](#USER_UpgradeDBInstance.Oracle.Overview.versions)
++ [Automatic snapshots during Oracle upgrades](#USER_UpgradeDBInstance.Oracle.Overview.snapshots)
++ [Oracle upgrades in a Multi\-AZ deployment](#USER_UpgradeDBInstance.Oracle.Overview.multi-az)
++ [Oracle upgrades of read replicas](#USER_UpgradeDBInstance.Oracle.Overview.read-replicas)
++ [Oracle upgrades of micro DB instances](#USER_UpgradeDBInstance.Oracle.Overview.micro-db)
+
+### Major and minor version upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview.versions"></a>
+
+ Amazon RDS supports the following upgrades to an Oracle DB instance: 
++ Major version upgrades
+
+  In general, a *major version upgrade* for a database engine can introduce changes that aren't compatible with existing applications\. To perform a major version upgrade, modify the DB instance manually\.
++ Minor version upgrades
+
+  A *minor version upgrade* includes only changes that are backward\-compatible with existing applications\. If you enable auto minor version upgrades on your DB instance, minor version upgrades occur automatically\. In all other cases, you must modify the DB instance manually\.
+
+When you upgrade the DB engine, an outage occurs\. The duration of the outage depends on your engine version and instance size\. 
+
+### Automatic snapshots during Oracle upgrades<a name="USER_UpgradeDBInstance.Oracle.Overview.snapshots"></a>
+
+When you upgrade an Oracle DB instance, snapshots offer protection against upgrade issues\. If the backup retention period for your DB instance is greater than 0, Amazon RDS takes the following DB snapshots during the upgrade:
+
+1. A snapshot of the DB instance before any upgrade changes have been made\. If the upgrade fails, you can restore this snapshot to create a DB instance running the old version\.
 
 1. A snapshot of the DB instance after the upgrade completes\.
 
 **Note**  
 To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-After an upgrade completes, you can't revert to the previous version of the DB engine\. However, you create a new DB instance by restoring the DB snapshot taken before the upgrade\.
+After an upgrade completes, you can't revert to the previous version of your Oracle engine\. However, you create a new Oracle DB instance by restoring the DB snapshot taken before the upgrade\.
 
 ### Oracle upgrades in a Multi\-AZ deployment<a name="USER_UpgradeDBInstance.Oracle.Overview.multi-az"></a>
 
@@ -88,11 +114,11 @@ A major version upgrade from 11g to 12c must upgrade to an Oracle Patch Set Upda
 
 ### Supported instance classes for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.instance-classes"></a>
 
-In some cases, your current Oracle DB instance might be running on a DB instance class that isn't supported for the version to which you are upgrading\. In such a case, make sure you migrate the DB instance to a supported DB instance class before you upgrade\. For more information about the supported DB instance classes for each version and edition of Amazon RDS Oracle, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+Your current Oracle DB instance might run on a DB instance class that isn't supported for the version to which you are upgrading\. In this case, before you upgrade, migrate the DB instance to a supported DB instance class\. For more information about the supported DB instance classes for each version and edition of Amazon RDS Oracle, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 ### Gathering statistics before major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.gathering-stats"></a>
 
-Before you perform a major version upgrade, Oracle recommends that you gather optimizer statistics on the DB instance that you are upgrading\. Gathering optimizer statistics can reduce DB instance downtime during the upgrade\.
+Before you perform a major version upgrade, Oracle recommends that you gather optimizer statistics on the DB instance that you are upgrading\. This action can reduce DB instance downtime during the upgrade\.
 
 To gather optimizer statistics, connect to the DB instance as the master user, and run the `DBMS_STATS.GATHER_DICTIONARY_STATS` procedure, as in the following example\.
 
@@ -106,7 +132,7 @@ For more information, see [ Gathering optimizer statistics to decrease Oracle da
 
 A major engine version upgrade might be incompatible with your application\. The upgrade is irreversible\. If you specify a major version for the EngineVersion parameter that is different from the current major version, you must allow major version upgrades\.
 
-If you upgrade a major version using the CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), you must specify `--allow-major-version-upgrade`\. This permission is not a persistent setting, so you must specify `--allow-major-version-upgrade` whenever you perform a major upgrade\. This parameter has no impact on upgrades of minor engine versions\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+If you upgrade a major version using the CLI command [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html), specify `--allow-major-version-upgrade`\. This setting isn't persistent, so you must specify `--allow-major-version-upgrade` whenever you perform a major upgrade\. This parameter has no impact on upgrades of minor engine versions\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
 
 If you upgrade a major version using the console, you don't need to choose an option to allow the upgrade\. Instead, the console displays a warning that major upgrades are irreversible\.
 
@@ -155,15 +181,15 @@ Before upgrading, review the implications for option groups, parameter groups, a
 
 ### Option group considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.OG"></a>
 
-If your DB instance uses a custom option group, in some cases Amazon RDS can't automatically assign your DB instance a new option group\. For example, this occurs when you upgrade to a new major version\. In those cases, you must specify a new option group when you upgrade\. We recommend that you create a new option group, and add the same options to it as in your existing custom option group\. 
+If your DB instance uses a custom option group, sometimes Amazon RDS can't automatically assign a new option group\. For example, this situation occurs when you upgrade to a new major version\. In such cases, specify a new option group when you upgrade\. We recommend that you create a new option group, and add the same options to it as in your existing custom option group\. 
 
 For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create) or [Copying an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Copy)\. 
 
-If your DB instance uses a custom option group that contains the APEX option, in some cases you can reduce the time it takes to upgrade your DB instance\. To do this, upgrade your version of APEX at the same time as your DB instance\. For more information, see [Upgrading the APEX version](Appendix.Oracle.Options.APEX.md#Appendix.Oracle.Options.APEX.Upgrade)\. 
+If your DB instance uses a custom option group that contains the APEX option, you can sometimes reduce the upgrade time\. To do this, upgrade your version of APEX at the same time as your DB instance\. For more information, see [Upgrading the APEX version](Appendix.Oracle.Options.APEX.md#Appendix.Oracle.Options.APEX.Upgrade)\. 
 
 ### Parameter group considerations<a name="USER_UpgradeDBInstance.Oracle.OGPG.PG"></a>
 
-If your DB instance uses a custom parameter group, sometimes Amazon RDS can't automatically assign your DB instance a new parameter group\. For example, this situation occurs when you upgrade to a new major version\. In these cases, make sure to specify a new parameter group when you upgrade\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
+If your DB instance uses a custom parameter group, sometimes Amazon RDS can't automatically assign your DB instance a new parameter group\. For example, this situation occurs when you upgrade to a new major version\. In such cases, make sure to specify a new parameter group when you upgrade\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
 
 For more information, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating) or [Copying a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Copying)\. 
 
@@ -186,9 +212,9 @@ When you migrate data using Oracle Data Pump, the utility raises the error ORA\-
 
 For more information, see [TIMESTAMP WITH TIMEZONE restrictions](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-9B6C92EE-860E-43DD-9728-735B17B9DA89) in the Oracle documentation\. 
 
-## Testing an upgrade<a name="USER_UpgradeDBInstance.Oracle.UpgradeTesting"></a>
+## Testing an Oracle DB upgrade<a name="USER_UpgradeDBInstance.Oracle.UpgradeTesting"></a>
 
-Before you perform a major version upgrade on your DB instance, make sure to thoroughly test your database and all applications that access the database for compatibility with the new version\. We recommend that you use the following procedure\. 
+Before you upgrade your DB instance to a major version, thoroughly test your database and all applications that access the database for compatibility with the new version\. We recommend that you use the following procedure\. 
 
 **To test a major version upgrade**
 
@@ -216,9 +242,9 @@ Before you perform a major version upgrade on your DB instance, make sure to tho
 
 1. If all tests pass, upgrade your production DB instance\. We recommend that you confirm that the DB instance working correctly before allowing write operations to the DB instance\.
 
-## Preparing for the automatic upgrade of Oracle 11g SE1<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g"></a>
+## Preparing for the automatic upgrade of Oracle 11g<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g"></a>
 
-On November 1, 2020, we plan to begin automatically upgrading Oracle 11g SE1 License Included \(LI\) instances to Oracle 19c for Amazon RDS for Oracle\. All 11g instances, including reserved instances, will move to the latest available Oracle Release Update \(RU\)\.
+On November 1, 2020, Amazon RDS began automatically upgrading Oracle 11g SE1 instances on the License Included \(LI\) model to Oracle 19c\. On January 4, 2021, Amazon RDS begins automatically upgrading all editions of Oracle 11g instances on the Bring Your Own License \(BYOL\) model to Oracle 19c\. All Oracle 11g instances, including reserved instances, will move to the latest available Release Update \(RU\)\.
 
 **Important**  
 If your DB instance is in the db\.t2\.micro or db\.t3\.micro instance class, your lease will be canceled\. You can purchase new reserved instances for the new instance class running on Oracle 19c SE2\. For more information, contact AWS Support\.
@@ -226,17 +252,15 @@ If your DB instance is in the db\.t2\.micro or db\.t3\.micro instance class, you
 **Topics**
 + [Choosing an upgrade strategy](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.strategy)
 + [Migrating from SE2 to EE using snapshots](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)
-+ [Changing the license model to BYOL](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model)
 + [How the automatic upgrade of 11g SE1 works](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works)
 
 ### Choosing an upgrade strategy<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.strategy"></a>
 
-Before November 1, 2020, if your DB instance runs 11\.2\.0\.4 SE LI and you don't want Amazon RDS to upgrade it automatically, use one of the following strategies:
-+ Upgrade your DB instance to Oracle versions 12\.1, 12\.2, 18c, or 19c on the LI model\.
+Before January 4, 2020, if your Oracle 11g instance uses the BYOL model, and you don't want Amazon RDS to upgrade it automatically, use one of the following strategies:
++ Upgrade your DB instance to Oracle versions 12\.1, 12\.2, 18c, or 19c\.
 + Upgrade your 11\.2 snapshots, and then restore them\. For more information, see [Migrating from SE2 to EE using snapshots](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\. 
-+ Modify your instance to the Bring Your Own License \(BYOL\) model, if you have the appropriate SE1 license\. For more information, see [Changing the license model to BYOL](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model)\.
 
-If your DB instance runs 11\.2\.0\.4 SE LI, and you want Amazon RDS to upgrade automatically starting on November 1, 2020, make sure that you understand the implications described in [How the automatic upgrade of 11g SE1 works](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works)\.
+If your Oracle 11g DB instance uses the BYOL model, and you want Amazon RDS to upgrade automatically starting on January 4, 2020, learn about the implications described in [How the automatic upgrade of 11g SE1 works](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works)\.
 
 ### Migrating from SE2 to EE using snapshots<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions"></a>
 
@@ -272,76 +296,30 @@ To change the Oracle edition and keep your data, take a snapshot of your running
 
 For more information about upgrading snapshots, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
 
-### Changing the license model to BYOL<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model"></a>
-
-When you switch from LI to BYOL, your DB instance undergoes a few minutes of downtime\. During this period, RDS for Oracle moves your DB instance to a different host\. If you are concerned about downtime, we recommend that you test the license change on a restored production snapshot\.
-
-#### Console<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model.console"></a>
-
-One way of changing the license model to BYOL is by using the AWS Management Console\. 
-
-**To change the license model to BYOL by using the console**
-
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
-
-1. In the navigation pane, choose **Databases**\.
-
-1. For **DB identifier**, choose the ID of the database whose license model you want to change\.
-
-1. Choose **Modify**\.
-
-1. For **License model**, choose **bring\-your\-own\-license**\.
-
-1. Choose **Continue**\.
-
-1. In the **Scheduling of modifications** section, choose **Apply immediately**\.
-
-1. Choose **Modify DB Instance**\.
-
-#### AWS CLI<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model.cli"></a>
-
-To create an option group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the `--license-model` parameter\.
-
-**Example**  
-The following example modifies switches the database named `orcl1` to the BYOL license model\.  
-For Linux, macOS, or Unix:  
-
-```
-aws rds modify-db-instance \
-    --db-instance-identifier orcl1 \
-    --license_model bring-your-own-license
-```
-For Windows:  
-
-```
-aws rds modify-db-instance ^
-    --db-instance-identifier orcl1 ^
-    --license_model bring-your-own-license
-```
-At this point, open a reserved instance cancellation request\. Ask your technical accounts manager to work with the reserved instance operations team\.
-
-#### RDS API<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.changing-license-model.api"></a>
-
-To create an option group, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the `LicenseModel` parameter\.
-
 ### How the automatic upgrade of 11g SE1 works<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works"></a>
 
 We plan to begin automatically upgrading your RDS for Oracle 11\.2 instance on November 1, 2020, only if you haven't implemented a strategy from the previous section\. The automatic upgrade occurs during maintenance windows\. However, if maintenance windows aren't available when the upgrade needs to occur, Amazon RDS for Oracle upgrades the engine immediately\.
 
 The upgrade goes in the following stages:
 
-1. [Scaling the t3\.micro instance class](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling)
+1. [Choosing a supported instance class](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling)
 
-1. [Upgrading 11\.2\.0\.4 SE1 to 19c SE2](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading)
+1. [Upgrading 11g to 19c for BYOL](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading)
 
 **Important**  
 Automatic upgrades can have unexpected consequences for AWS CloudFormation stacks\. If you rely on Amazon RDS to upgrade your DB instances automatically, you might encounter issues with AWS CloudFormation\.
 
-#### Scaling the t3\.micro instance class<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling"></a>
+#### Choosing a supported instance class<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.scaling"></a>
 
 The t3\.micro DB instance class isn't supported for 19c\. If your instance is a t3\.micro, then before beginning the automatic upgrade, Amazon RDS scales the instance to the t3\.small class\. The t3\.micro has 2 vCPUs and 1 GB memory, whereas the t3\.small has 2 vCPUs and 2 GB of memory\. In the t3\.small, HugePages isn't enabled by default\.
 
-#### Upgrading 11\.2\.0\.4 SE1 to 19c SE2<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading"></a>
+Amazon RDS for Oracle doesn't support 8xlarge for SE2\. If your Oracle 11g SE instances currently use an 8xlarge instance class, do either of the following:
++ Switch to a 4xlarge instance class\.
++ Switch from SE to Enterprise Edition\.
+
+Oracle 18c and 19c aren't supported on micro instances\. If your database runs on a micro instance, consider upgrading to a larger instance class\. Changing the instance class may affect your BYOL license consumption\.
+
+#### Upgrading 11g to 19c for BYOL<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.how-it-works.upgrading"></a>
 
 During the automatic upgrade, Amazon RDS performs the following steps:
 

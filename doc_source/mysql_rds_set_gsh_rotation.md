@@ -4,6 +4,8 @@ Specifies the interval, in days, between rotations of the `mysql.global_status_h
 
 ## Syntax<a name="mysql_rds_set_gsh_rotation-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_set_gsh_rotation(intervalPeriod);
 ```

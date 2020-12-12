@@ -4,6 +4,8 @@ Rotates the `mysql.slow_log` table to a backup table\. For more information, see
 
 ## Syntax<a name="mysql_rds_rotate_slow_log-syntax"></a>
 
+ 
+
 ```
 CALL mysql.rds_rotate_slow_log;
 ```

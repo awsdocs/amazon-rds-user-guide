@@ -397,7 +397,7 @@ Your listener is now ready for use\.
 ## Upgrading the APEX version<a name="Appendix.Oracle.Options.APEX.Upgrade"></a>
 
 **Important**  
-Back up your DB instance before you upgrade APEX\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md) and [Testing an upgrade](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.UpgradeTesting)\. 
+Back up your DB instance before you upgrade APEX\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md) and [Testing an Oracle DB upgrade](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.UpgradeTesting)\. 
 
 To upgrade APEX with your DB instance, do the following: 
 + Create a new option group for the upgraded version of your DB instance\. 
