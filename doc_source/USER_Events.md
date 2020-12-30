@@ -182,6 +182,7 @@ The following table shows the event category and a list of events when an Aurora
 |  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
 |  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
 |  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
+|  notification  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
 
 The following table shows the event category and a list of events when an Aurora DB cluster snapshot is the source type\.
 

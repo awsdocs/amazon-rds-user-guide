@@ -5,16 +5,17 @@ The easiest way to create a DB instance is to use the RDS console\. After you ha
 **Important**  
 Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
-**Topics**
+**Contents**
 + [Creating a PostgreSQL DB instance](#CHAP_GettingStarted.Creating.PostgreSQL)
 + [Connecting to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL)
+  + [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
+  + [Using psql to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.psql)
+  + [Troubleshooting connection issues](#CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting)
 + [Deleting a DB instance](#CHAP_GettingStarted.Deleting.PostgreSQL)
 
 ## Creating a PostgreSQL DB instance<a name="CHAP_GettingStarted.Creating.PostgreSQL"></a>
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your PostgreSQL databases\.
-
-### Console<a name="CHAP_GettingStarted.Creating.PostgreSQL.Console"></a>
 
 You can create a DB instance running PostgreSQL with the AWS Management Console with **Easy Create** enabled or disabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
@@ -76,7 +77,10 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 This section shows two ways to connect to a PostgreSQL DB instance\. The first example uses pgAdmin, a popular open\-source administration and development tool for PostgreSQL\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\. The second example uses psql, a command line utility that is part of a PostgreSQL installation\. To use psql, you must have a PostgreSQL installed on your client computer or have installed the psql client on your machine\. 
 
-In this example, you connect to a PostgreSQL DB instance using pgAdmin\. 
+**Topics**
++ [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
++ [Using psql to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.psql)
++ [Troubleshooting connection issues](#CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting)
 
 ### Using pgAdmin to connect to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin"></a>
 

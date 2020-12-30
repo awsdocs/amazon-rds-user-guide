@@ -76,7 +76,7 @@ Amazon RDS supports the following settings for the Management Agent option\.
 
 | Option setting | Required | Valid values | Description | 
 | --- | --- | --- | --- | 
-| **Version** \(`AGENT_VERSION`\) | Yes |  `13.3.0.0.v2` `13.3.0.0.v1` `13.2.0.0.v3` `13.2.0.0.v2` `13.2.0.0.v1` `13.1.0.0.v1` `12.1.0.5.v1` `12.1.0.4.v1`  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\-West\) Region, 12\.1 and 13\.1 versions aren't available\.   | 
+| **Version** \(`AGENT_VERSION`\) | Yes |  `13.3.0.0.v2` `13.3.0.0.v1` `13.2.0.0.v3` `13.2.0.0.v2` `13.2.0.0.v1` `13.1.0.0.v1` `12.1.0.5.v1` `12.1.0.4.v1`  |  The version of the Management Agent software\.  The AWS CLI option name is `OptionVersion`\.  In the AWS GovCloud \(US\) Regions, 12\.1 and 13\.1 versions aren't available\.   | 
 | **Port** \(`AGENT_PORT`\) | Yes | An integer value |  The port on the DB instance that listens for the OMS host\. The default is 3872\. Your OMS host must belong to a security group that has access to this port\.  The AWS CLI option name is `Port`\.  | 
 | **Security Groups** | Yes | Existing security groups |  A security group that has access to **Port**\. Your OMS host must belong to this security group\.  The AWS CLI option name is `VpcSecurityGroupMemberships` or `DBSecurityGroupMemberships`\.  | 
 | **OMS\_HOST** | Yes |  A string value, for example *my\.example\.oms*   |  The publicly accessible host name or IP address of the OMS\.  The AWS CLI option name is `OMS_HOST`\.  | 

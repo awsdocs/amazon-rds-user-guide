@@ -48,11 +48,11 @@ Client connections from IP addresses within the range 169\.254\.0\.0/16 aren't p
 
   1. In the navigation pane, choose **Subnets**, and then select your subnet\.
 
-  1. On the **Route Table** tab, verify that there is a route with `0.0.0.0/0` as the destination and the internet gateway for your VPC as the target\. If you're connecting to your instance using its IPv6 address, verify that there is a route for all IPv6 traffic \(`::/0`\) that points to the internet gateway\. Otherwise, do the following:
+  1. On the **Route Table** tab, verify that there is a route with `0.0.0.0/0` as the destination and the internet gateway for your VPC as the target\.
 
      1. Choose the ID of the route table \(rtb\-*xxxxxxxx*\) to navigate to the route table\.
 
-     1. On the **Routes** tab, choose **Edit routes**\. Choose **Add route**, use `0.0.0.0/0` as the destination and the internet gateway as the target\. For IPv6, choose **Add route**, use `::/0` as the destination and the internet gateway as the target\.
+     1. On the **Routes** tab, choose **Edit routes**\. Choose **Add route**, use `0.0.0.0/0` as the destination and the internet gateway as the target\.
 
      1. Choose **Save routes**\.
 

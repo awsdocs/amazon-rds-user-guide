@@ -138,7 +138,28 @@ You can also purge all files that match a specific pattern \(if you do, don't in
 
 You can configure your Amazon RDS Oracle DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can analyze the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
-Amazon RDS publishes each Oracle database log as a separate database stream in the log group\. For example, if you configure the export function to include the audit log, audit data is stored in an audit log stream in the `/aws/rds/instance/my_instance/audit` log group\. 
+Amazon RDS publishes each Oracle database log as a separate database stream in the log group\. For example, if you configure the export function to include the audit log, audit data is stored in an audit log stream in the `/aws/rds/instance/my_instance/audit` log group\. RDS for Oracle supports the following logs:
++ Alert log
++ Trace log
++ Audit log
++ Listener log
++ Oracle Management Agent log
+
+This Oracle Management Agent log consists of the log streams shown in the following table\.
+
+
+****  
+
+| Log name | CloudWatch log stream | 
+| --- | --- | 
+| emctl\.log | oemagent\-emctl | 
+| emdctlj\.log | oemagent\-emdctlj | 
+| gcagent\.log | oemagent\-gcagent | 
+| gcagent\_errors\.log | oemagent\-gcagent\-errors | 
+| emagent\.nohup | oemagent\-emagent\-nohup | 
+| secure\.log | oemagent\-secure | 
+
+For more information, see [Locating Management Agent Log and Trace Files](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.4/emadm/locating-management-agent-log-and-trace-files1.html#GUID-9C710D78-6AA4-42E4-83CD-47B5FF4892DF) in the Oracle documentation\.
 
 ### Console<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs.console"></a>
 
@@ -176,7 +197,7 @@ For Linux, macOS, or Unix:
 ```
 aws rds create-db-instance \
     --db-instance-identifier mydbinstance \
-    --cloudwatch-logs-export-configuration '["trace","audit","alert","listener"]' \
+    --cloudwatch-logs-export-configuration '["trace","audit","alert","listener","oemagent"]' \
     --db-instance-class db.m5.large \
     --allocated-storage 20 \
     --engine oracle-ee \
@@ -190,7 +211,7 @@ For Windows:
 ```
 aws rds create-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --cloudwatch-logs-export-configuration trace alert audit listener ^
+    --cloudwatch-logs-export-configuration trace alert audit listener oemagent ^
     --db-instance-class db.m5.large ^
     --allocated-storage 20 ^
     --engine oracle-ee ^
@@ -207,14 +228,14 @@ For Linux, macOS, or Unix:
 ```
 aws rds modify-db-instance \
     --db-instance-identifier mydbinstance \
-    --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener"]}'
+    --cloudwatch-logs-export-configuration '{"EnableLogTypes":["trace","alert","audit","listener","oemagent"]}'
 ```
 For Windows:  
 
 ```
 aws rds modify-db-instance ^
     --db-instance-identifier mydbinstance ^
-    --cloudwatch-logs-export-configuration EnableLogTypes=\"trace\",\"alert\",\"audit\",\"listener\"
+    --cloudwatch-logs-export-configuration EnableLogTypes=\"trace\",\"alert\",\"audit\",\"listener\",\"oemagent\"
 ```
 
 **Example**  

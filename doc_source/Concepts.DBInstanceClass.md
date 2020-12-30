@@ -17,6 +17,8 @@ Amazon RDS supports three types of instance classes: Standard, Memory Optimized,
 
 The following are the Standard DB instance classes available:
 + **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. 
+
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
@@ -27,6 +29,8 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
 + **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
 + **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
+
+  You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.r5b** – Newest\-generation instance classes that are optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
@@ -274,7 +278,7 @@ Currently, you can configure the number of CPU cores and threads per core only w
 + Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
 
 **Note**  
-You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS ](logging-using-cloudtrail.md)\.
+You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
 
 ### Setting the CPU cores and threads per CPU core for a DB instance class<a name="USER_ConfigureProcessor.SettingCPUOptions"></a>
 

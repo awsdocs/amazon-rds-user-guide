@@ -58,15 +58,30 @@ The `MASTER_SSL_VERIFY_SERVER_CERT` option isn't supported\. This option is set 
 
 1. Using the MySQL client of your choice, connect to the external instance of MySQL and create a user account to be used for replication\. The following is an example\.
 
+   **MySQL 5\.5, 5\.6, and 5\.7**
+
    ```
-   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password'
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
+   ```
+
+   **MySQL 8\.0**
+
+   ```
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED WITH mysql_native_password BY 'password';
    ```
 
 1. On the external instance of MySQL, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. The following example grants `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the 'repl\_user' user for your domain\.
 
+   **MySQL 5\.5, 5\.6, and 5\.7**
+
    ```
-   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' 
-   IDENTIFIED BY 'password'
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
+   ```
+
+   **MySQL 8\.0**
+
+   ```
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com';
    ```
 
 To use encrypted replication, configure source database instance to use SSL connections\. Also, import the certificate authority certificate, client certificate, and client key into the DB instance or DB cluster using the [mysql\.rds\_import\_binlog\_ssl\_material](mysql_rds_import_binlog_ssl_material.md) procedure\.

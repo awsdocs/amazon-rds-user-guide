@@ -110,14 +110,30 @@ Make sure that there isn't a space between the `-p` option and the entered passw
 
 1. Using the client of your choice, connect to the external instance and create a user to use for replication\. Use this account solely for replication\. and restrict it to your domain to improve security\. The following is an example\. 
 
+   **MySQL 5\.5, 5\.6, and 5\.7**
+
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
-1. For the external instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
+   **MySQL 8\.0**
 
    ```
-   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password'; 
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED WITH mysql_native_password BY 'password';
+   ```
+
+1. For the external instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
+
+   **MySQL 5\.5, 5\.6, and 5\.7**
+
+   ```
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
+   ```
+
+   **MySQL 8\.0**
+
+   ```
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com';
    ```
 
 1. Make the Amazon RDS DB instance the replica\. To do so, first connect to the Amazon RDS DB instance as the master user\. Then identify the external MySQL or MariaDB database as the source instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in step 2\. The following is an example\. 

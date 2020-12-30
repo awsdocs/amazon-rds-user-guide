@@ -50,7 +50,7 @@ The following are limitations for PostgreSQL read replicas:
 In several situations, a PostgreSQL source DB instance can unintentionally break replication with a read replica\. These situations include the following: 
 + The `max_wal_senders` parameter is set too low to provide enough data to the number of read replicas\. This situation causes replication to stop\. 
 + The PostgreSQL parameter `wal_keep_segments` dictates how many WAL files are kept to provide data to the read replicas\. The parameter value specifies the number of logs to keep\. If you set the parameter value too low, you can cause a read replica to fall so far behind that streaming replication stops\. In this case, Amazon RDS reports a replication error and begins recovery on the read replica by replaying the source DB instance's archived WAL logs\. This recovery process continues until the read replica has caught up enough to continue streaming replication\. For more information, see [Troubleshooting a PostgreSQL read replica problem](#USER_ReadRepl.TroubleshootingPostgreSQL)\. 
-+ A PostgreSQL read replica requires a reboot if the IP address of the source DB instance endpoint changes\.
++ A PostgreSQL read replica requires a reboot if the source DB instance IP address changes, such as when its DB instance name or DB instance class changes\.
 
 When the WAL stream that provides data to a read replica is broken, PostgreSQL switches into recovery mode to restore the read replica by using archived WAL files\. When this process is complete, PostgreSQL attempts to re\-establish streaming replication\. 
 

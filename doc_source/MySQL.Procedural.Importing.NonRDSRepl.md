@@ -343,14 +343,30 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
 1. Using the client of your choice, connect to the source instance and create a user to be used for replication\. This account is used solely for replication and must be restricted to your domain to improve security\. The following is an example\.
 
+   **MySQL 5\.5, 5\.6, and 5\.7**
+
    ```
    CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
    ```
 
+   **MySQL 8\.0**
+
+   ```
+   CREATE USER 'repl_user'@'mydomain.com' IDENTIFIED WITH mysql_native_password BY 'password';
+   ```
+
 1. For the source instance, grant `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges to your replication user\. For example, to grant the `REPLICATION CLIENT` and `REPLICATION SLAVE` privileges on all databases for the '`repl_user`' user for your domain, issue the following command\.
+
+   **MySQL 5\.5, 5\.6, and 5\.7**
 
    ```
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com' IDENTIFIED BY 'password';
+   ```
+
+   **MySQL 8\.0**
+
+   ```
+   GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com';
    ```
 
 1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, look at the contents of that file\.

@@ -2,13 +2,13 @@
 
 Amazon RDS supports DB instances running several versions of PostgreSQL\. You can create DB instances and DB snapshots, point\-in\-time restores and backups\. DB instances running PostgreSQL support Multi\-AZ deployments, read replicas, Provisioned IOPS, and can be created inside a VPC\. You can also use Secure Socket Layer \(SSL\) to connect to a DB instance running PostgreSQL\.
 
-Before creating a DB instance, you should complete the steps in the [Setting up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. 
+Before creating a DB instance, you should complete the steps in the [Setting up for Amazon RDS](CHAP_SettingUp.md) section of this guide\.
 
-You can use any standard SQL client application to run commands for the instance from your client computer\. Such applications include *pgAdmin*, a popular Open Source administration and development tool for PostgreSQL, or *psql*, a command line utility that is part of a PostgreSQL installation\. To deliver a managed service experience, Amazon RDS doesn't provide host access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\. 
+You can use any standard SQL client application to run commands for the instance from your client computer\. Such applications include *pgAdmin*, a popular Open Source administration and development tool for PostgreSQL, or *psql*, a command line utility that is part of a PostgreSQL installation\. To deliver a managed service experience, Amazon RDS doesn't provide host access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\.
 
-Amazon RDS for PostgreSQL is compliant with many industry standards\. For example, you can use Amazon RDS for PostgreSQL databases to build HIPAA\-compliant applications and to store healthcare\-related information, including protected health information \(PHI\) under a completed Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for PostgreSQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements\. Amazon RDS for PostgreSQL has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\-West\) Region\. For more information on supported compliance standards, see [AWS cloud compliance](https://aws.amazon.com/compliance/)\.
+Amazon RDS for PostgreSQL is compliant with many industry standards\. For example, you can use Amazon RDS for PostgreSQL databases to build HIPAA\-compliant applications and to store healthcare\-related information, including protected health information \(PHI\) under a completed Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for PostgreSQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements\. Amazon RDS for PostgreSQL has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](https://aws.amazon.com/compliance/)\.
 
-To import PostgreSQL data into a DB instance, follow the information in the [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md) section\. 
+To import PostgreSQL data into a DB instance, follow the information in the [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md) section\.
 
 **Topics**
 + [Common management tasks for PostgreSQL on Amazon RDS](#CHAP_PostgreSQL.CommonTasks)
@@ -26,7 +26,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 
 ## Common management tasks for PostgreSQL on Amazon RDS<a name="CHAP_PostgreSQL.CommonTasks"></a>
 
-The following are the common management tasks you perform with an Amazon RDS for PostgreSQL DB instance, with links to relevant documentation for each task\. 
+The following are the common management tasks you perform with an Amazon RDS for PostgreSQL DB instance, with links to relevant documentation for each task\.
 
 
 | Task area | Relevant documentation | 
@@ -915,7 +915,7 @@ PostgreSQL supports many PostgreSQL extensions and modules\. Extensions and modu
 + [PostgreSQL version 10\.x extensions and modules supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)
 + [PostgreSQL version 9\.6\.x extensions and modules supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x)
 + [PostgreSQL version 9\.5\.x extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x)
-+ [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.SupportedPerVersion)
++ [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS)
 + [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw)
 
 You can find a list of extensions supported by Amazon RDS in the default DB parameter group for that PostgreSQL version\. You can also see the current extensions list using `psql` by showing the `rds.extensions` parameter as in the following example\.
@@ -983,7 +983,7 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 | plprofiler | 4\.1 | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html) | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.15 | 2\.3\.15 | 
-| [PostGIS](http://www.postgis.net/) | 3\.0\.2 | 3\.0\.2 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 3\.0\.2 | 3\.0\.2 | 
 | postgis\_raster | 3\.0\.2 | 3\.0\.2 | 
 | [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.2 | 3\.0\.2 | 
 | [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.2 | 3\.0\.2 | 
@@ -1058,7 +1058,7 @@ The following table shows PostgreSQL extensions and modules for PostgreSQL versi
 | plprofiler | 4\.1 | 4\.1 | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/12/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.14 | 2\.3\.14 | 2\.3\.14 | 
-| [PostGIS](http://www.postgis.net/) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | postgis\_raster | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
@@ -1084,18 +1084,22 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | aws\_s3 —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)  | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 1\.1 | 
+| amcheck | yes | yes | yes | yes | yes | yes | yes | yes | 
+| auto\_explain | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ bloom](https://www.postgresql.org/docs/11/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [btree\_gin](http://www.postgresql.org/docs/11/static/btree-gin.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | [btree\_gist](http://www.postgresql.org/docs/11/static/btree-gist.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 | [citext ](http://www.postgresql.org/docs/11/static/citext.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 | [cube ](http://www.postgresql.org/docs/11/static/cube.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [ dblink](http://www.postgresql.org/docs/11/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| decoder\_raw | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ dict\_int ](http://www.postgresql.org/docs/11/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ dict\_xsyn](https://www.postgresql.org/docs/11/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [earthdistance](http://www.postgresql.org/docs/11/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [fuzzystrmatch](http://www.postgresql.org/docs/11/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [hstore](http://www.postgresql.org/docs/11/static/hstore.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 | [ hstore\_plperl](https://www.postgresql.org/docs/11/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| ICU | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 
 | [ intagg](http://www.postgresql.org/docs/11/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/11/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
@@ -1130,7 +1134,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [plprofiler](https://github.com/bigsql/plprofiler) | N/A | N/A | N/A | N/A | 4\.1 | 4\.1 | 4\.1 | 4\.1 | 
 | [pltcl](https://www.postgresql.org/docs/11/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 2\.3\.8 | 
-| [PostGIS](http://www.postgis.net/) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 | [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 2\.5\.1 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/11/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -1139,23 +1143,13 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | rdkit | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 3\.8 | 
 | [sslinfo](http://www.postgresql.org/docs/11/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/11/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| test\_decoding | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tsm\_system\_rows](https://www.postgresql.org/docs/11/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tsm\_system\_time](https://www.postgresql.org/docs/11/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 |  [unaccent](http://www.postgresql.org/docs/11/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/11/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-
-The following modules are supported as shown for PostgreSQL version 11\.x\.
-
-
-| Module | 11\.1 | 11\.2 | 11\.4 | 11\.5 | 11\.6 | 11\.7 | 11\.8 | 11\.9 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| amcheck | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| auto\_explain | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| decoder\_raw | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| ICU | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | 
-| test\_decoding | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| wal2json | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | version 2\.1 | version 2\.1 | version 2\.3 | 
+| wal2json | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | Commit hash 9e962bad | 2\.1 | 2\.1 | 2\.3 | 
 
 ##### PostgreSQL version 10\.x extensions and modules supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x"></a>
 
@@ -1166,6 +1160,8 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
+| amcheck | N/A | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
+| auto\_explain | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | aws\_s3 —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)  | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 1\.1 | 
 | [ bloom](https://www.postgresql.org/docs/10/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [btree\_gin](http://www.postgresql.org/docs/10/static/btree-gin.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
@@ -1174,12 +1170,14 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [citext](http://www.postgresql.org/docs/10/static/citext.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [cube](http://www.postgresql.org/docs/10/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [dblink](http://www.postgresql.org/docs/10/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| decoder\_raw | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [dict\_int](http://www.postgresql.org/docs/10/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [dict\_xsyn](https://www.postgresql.org/docs/10/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [earthdistance](http://www.postgresql.org/docs/10/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| ICU | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
 | [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.0 | 2\.0 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 
@@ -1212,7 +1210,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [plprofiler](https://github.com/bigsql/plprofiler) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 4\.1 | 4\.1 | 4\.1 | 4\.1 | 
 | [ pltcl](https://www.postgresql.org/docs/10/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 2\.1\.0 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| [PostGIS](http://www.postgis.net/) | 2\.4\.2 | 2\.4\.2 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 2\.4\.2 | 2\.4\.2 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.4\.4 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 | [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 2\.4\.2 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/10/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -1220,26 +1218,16 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 |  [ prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
 | [sslinfo](http://www.postgresql.org/docs/10/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/10/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| test\_decoding | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) \(deprecated in version 10\) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ tsm\_system\_rows](https://www.postgresql.org/docs/10/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ tsm\_system\_time](https://www.postgresql.org/docs/10/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 |  [unaccent ](http://www.postgresql.org/docs/10/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/10/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| wal2json | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | 2\.1 | 2\.1 | 2\.3 | 
 
-The `tsearch2` extension is deprecated in version 10\. The PostgreSQL team plans to remove `tsearch2` from the next major release of PostgreSQL\.
-
-The following modules are supported as shown for versions of PostgreSQL 10\.
-
-
-| Module | 10\.1 | 10\.3 | 10\.4 | 10\.5 | 10\.6 | 10\.7 | 10\.9 | 10\.10 | 10\.11 | 10\.12 | 10\.13 | 10\.14 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| amcheck | Not supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| auto\_explain | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| decoder\_raw | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| ICU | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | Version 60\.2 supported | 
-| test\_decoding | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| wal2json | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | version 2\.1 | version 2\.1 | version 2\.3 | 
+The `tsearch2` extension is deprecated in version 10\. The `tsearch2` extension was remove from [PostgreSQL version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)\.
 
 ##### PostgreSQL version 9\.6\.x extensions and modules supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x"></a>
 
@@ -1250,6 +1238,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
+| auto\_explain | N/A | N/A | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
@@ -1257,6 +1246,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [citext ](http://www.postgresql.org/docs/9.6/static/citext.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | [cube ](http://www.postgresql.org/docs/9.6/static/cube.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ dblink](http://www.postgresql.org/docs/9.6/static/dblink.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| decoder\_raw | N/A | N/A | N/A | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ dict\_int ](http://www.postgresql.org/docs/9.6/static/dict-int.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ dict\_xsyn](https://www.postgresql.org/docs/9.6/static/dict-xsyn.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [earthdistance](http://www.postgresql.org/docs/9.6/static/earthdistance.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
@@ -1267,13 +1257,13 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ intarray](http://www.postgresql.org/docs/9.6/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.0 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 
 | [isn ](http://www.postgresql.org/docs/9.6/static/isn.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| log\_fdw—see [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw) |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw) | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ltree ](http://www.postgresql.org/docs/9.6/static/ltree.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [orafce](https://github.com/orafce/orafce) |  N/A | N/A | N/A | N/A | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.8 | 3\.8 | 3\.8 | 
+| [orafce](https://github.com/orafce/orafce) | N/A | N/A | N/A | N/A | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.6\.1 | 3\.8 | 3\.8 | 3\.8 | 
 | [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | N/A | N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.1 | 1\.1\.2 | 
 | [ pg\_buffercache](http://www.postgresql.org/docs/9.6/static/pgbuffercache.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) |  N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) |  N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.2\.2 | 1\.2\.2 | 1\.2\.3 | 1\.2\.3 | 1\.2\.3 | 1\.2\.5 | 1\.2\.5 | 1\.2\.5 | 1\.2\.5 | 1\.2\.6 | 1\.2\.6 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/static/pgfreespacemap.html) | N/A | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | N/A | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.1\.3 | 1\.2\.2 | 1\.2\.2 | 1\.2\.3 | 1\.2\.3 | 1\.2\.3 | 1\.2\.5 | 1\.2\.5 | 1\.2\.5 | 1\.2\.5 | 1\.2\.6 | 1\.2\.6 | 
 | [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ pg\_repack ](http://reorg.github.io/pg_repack/) | N/A | N/A | 1\.4\.0 | 1\.4\.1 | 1\.4\.2 | 1\.4\.2 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 1\.4\.3 | 
 | pg\_similarity | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -1291,7 +1281,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 1\.5\.3 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| [PostGIS](http://www.postgis.net/) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.3\.7 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 | [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.3\.0 | 2\.3\.2 | 2\.3\.2 | 2\.3\.2 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 2\.3\.4 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
@@ -1299,22 +1289,14 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 |  [ prefix](https://github.com/dimitri/prefix) | N/A | N/A | N/A | N/A | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 1\.2\.6 | 
 | [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| test\_decoding | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 |  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-
-The following modules are supported as shown for versions of PostgreSQL 9\.6\.
-
-
-| Module | 9\.6\.1 | 9\.6\.2 | 9\.6\.3 | 9\.6\.5 | 9\.6\.8 | 9\.6\.9 | 9\.6\.10 | 9\.6\.11 | 9\.6\.12 | 9\.6\.14 | 9\.6\.15 | 9\.6\.16 | 9\.6\.17 | 9\.6\.18 | 9\.6\.19 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| auto\_explain | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| decoder\_raw | N/A | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| test\_decoding | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| wal2json | N/A | N/a | Commit hash 2828409 | Commit hash 645ab69 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | version 2\.1 | version 2\.1 | version 2\.3 | 
+| wal2json | N/A | N/A | Commit hash 2828409 | Commit hash 645ab69 | Commit hash 645ab69 | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 01c5c1e | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | version 2\.1 | version 2\.1 | version 2\.3 | 
 
 ##### PostgreSQL version 9\.5\.x extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.95x"></a>
 
@@ -1325,6 +1307,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
 | [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
+| auto\_explain | N/A | N/A | N/A | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ bloom](https://www.postgresql.org/docs/9.6/static/bloom.html) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 
 | [btree\_gin](http://www.postgresql.org/docs/9.6/static/btree-gin.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [btree\_gist](http://www.postgresql.org/docs/9.6/static/btree-gist.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
@@ -1351,7 +1334,7 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ pg\_prewarm](https://www.postgresql.org/docs/9.6/static/pgprewarm.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [pg\_stat\_statements](http://www.postgresql.org/docs/9.6/static/pgstatstatements.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | [pg\_trgm](http://www.postgresql.org/docs/9.6/static/pgtrgm.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
-| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) |  N/A |  N/A |  N/A |  N/A |  N/A |  N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 
+| [ pg\_visibility](https://www.postgresql.org/docs/9.6/static/pgvisibility.html) | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | 
 | [pgcrypto](http://www.postgresql.org/docs/9.6/static/pgcrypto.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [pgrowlocks](http://www.postgresql.org/docs/9.6/static/pgrowlocks.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [pgstattuple](http://www.postgresql.org/docs/9.6/static/pgstattuple.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
@@ -1361,29 +1344,22 @@ The following tables show PostgreSQL extensions and modules for PostgreSQL versi
 | [ plpgsql](https://www.postgresql.org/docs/current/static/plpgsql.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ pltcl](https://www.postgresql.org/docs/current/static/pltcl-overview.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [plv8](https://github.com/plv8) | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 1\.4\.4 | 2\.1\.0 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 2\.1\.2 | 
-| [PostGIS](http://www.postgis.net/) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 2\.5\.2 | 
 | [ postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
 | [ postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 2\.2\.2 | 2\.2\.2 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 2\.2\.5 | 
 | [postgres\_fdw](http://www.postgresql.org/docs/9.6/static/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [sslinfo](http://www.postgresql.org/docs/9.6/static/sslinfo.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tablefunc](http://www.postgresql.org/docs/9.6/static/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| test\_decoding | N/A | N/A | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
 | [ test\_parser](https://www.postgresql.org/docs/9.4/static/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [tsearch2](http://www.postgresql.org/docs/9.6/static/tsearch2.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) |  N/A |  N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_rows](https://www.postgresql.org/docs/current/static/tsm-system-rows.html) | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| [ tsm\_system\_time](https://www.postgresql.org/docs/current/static/tsm-system-time.html) | N/A | N/A | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 |  [unaccent ](http://www.postgresql.org/docs/9.6/static/unaccent.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| wal2json | N/A | N/a | N/A | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | 2\.1 | 2\.1 | 2\.1 | 
 
-The following modules are supported as shown for versions of PostgreSQL 9\.5\.
-
-
-| Module | 9\.5\.2 | 9\.5\.4 | 9\.5\.6 | 9\.5\.7 | 9\.5\.9 | 9\.5\.12 | 9\.5\.13 | 9\.5\.14 | 9\.5\.15 | 9\.5\.16 | 9\.5\.18 | 9\.5\.19 | 9\.5\.20 | 9\.5\.21 | 9\.5\.22 | 9\.5\.23 | 
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
-| auto\_explain | N/A | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| test\_decoding | N/A | N/A | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | Supported | 
-| wal2json | N/A | N/a | N/A | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | Commit hash 2828409 | version 2\.1 | version 2\.1 | version 2\.1 | 
-
-##### PostgreSQL extension support for PostGIS on Amazon RDS<a name="CHAP_PostgreSQL.Extensions.SupportedPerVersion"></a>
+##### PostgreSQL extension support for PostGIS on Amazon RDS<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
 
 Before you can use the PostGIS extension, you must create it by running the following command\.
 
@@ -1396,21 +1372,21 @@ The following table shows the PostGIS component versions that ship with the Amaz
 
 | PostgreSQL | PostGIS | GEOS | GDAL | PROJ | 
 | --- | --- | --- | --- | --- | 
-| 9\.5\.2 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.0\.2, released 2016/01/26  | Rel\. 4\.9\.2, September 8th, 2015 | 
-| 9\.5\.4 |  2\.2\.2 r14797  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.0\.3, released 2016/07/01  | Rel\. 4\.9\.2, September 8th, 2015 | 
-| 9\.5\.6 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
-| 9\.5\.7 |  2\.2\.5 r15298  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.0\.3, released 2016/07/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
-| 9\.6\.1 |  2\.3\.0 r15146  |  3\.5\.0\-CAPI\-1\.9\.0 r4084  |  2\.1\.1, released 2016/07/07  | Rel\. 4\.9\.2, September 8th, 2016 | 
-| 9\.6\.2 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
-| 9\.6\.3 |  2\.3\.2 r15302  |  3\.5\.1\-CAPI\-1\.9\.1 r4246  |  2\.1\.3, released 2017/20/01  |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.5\.2 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.2, released 2016/01/26 | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.4 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.6 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.5\.7 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.1 | 2\.3\.0 r15146 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.1\.1, released 2016/07/07 | Rel\. 4\.9\.2, September 8th, 2016 | 
+| 9\.6\.2 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.3 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
 | 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
 | 9\.6\.8 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
-| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
-| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
 | 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
 | 10\.3 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 |  Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
 | 10\.5  | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
 | 10\.6 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
 | 11\.1 | 2\.5\.1 r17027 | 3\.7\.0\-CAPI\-1\.11\.0 673b9939 | 2\.3\.1, released 2018/06/22 | Rel\. 5\.2\.0, September 15th, 2018 | 
@@ -1842,6 +1818,8 @@ SSL support is available in all AWS regions for PostgreSQL\. Amazon RDS creates 
    For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 1. Import the certificate into your operating system\.
+
+   For sample scripts that import certificates, see [Sample script for importing certificates into your trust store](UsingWithRDS.SSL-certificate-rotation.md#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
 
 1. Connect to your PostgreSQL DB instance over SSL\.
 

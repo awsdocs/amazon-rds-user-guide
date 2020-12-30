@@ -11,6 +11,8 @@ CREATE USER db_userx;
 GRANT rds_iam TO db_userx;
 ```
 
+The specified database account should have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role are named `db_userx`\. 
+
 ## Using IAM authentication with MySQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.MySQL"></a>
 
 With MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-provided plugin that works seamlessly with IAM to authenticate your IAM users\. Connect to the DB instance and issue the `CREATE USER` statement, as shown in the following example\.

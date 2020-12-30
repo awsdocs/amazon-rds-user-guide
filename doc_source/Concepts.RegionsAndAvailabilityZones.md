@@ -13,9 +13,9 @@ Amazon operates state\-of\-the\-art, highly\-available data centers\. Although r
 
 It is important to remember that each AWS Region is completely independent\. Any Amazon RDS activity you initiate \(for example, creating database instances or listing available database instances\) runs only in your current default AWS Region\. The default AWS Region can be changed in the console, by setting the [AWS\_DEFAULT\_REGION](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-region) environment variable, or it can be overridden by using the `--region` parameter with the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Configuring the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html), specifically the sections about environment variables and command line options\. 
 
-Amazon RDS supports a special AWS Region called AWS GovCloud \(US\-West\) that is designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. AWS GovCloud \(US\-West\) addresses the US government's specific regulatory and compliance requirements\. For more information about AWS GovCloud \(US\-West\), see [What is AWS GovCloud \(US\-West\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
+Amazon RDS supports special AWS Regions called AWS GovCloud \(US\) that are designed to allow US government agencies and customers to move more sensitive workloads into the cloud\. The AWS GovCloud \(US\) Regions address the US government's specific regulatory and compliance requirements\. For more information, see [What is AWS GovCloud \(US\)?](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/whatis.html) 
 
-To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\. 
+To create or work with an Amazon RDS DB instance in a specific AWS Region, use the corresponding regional service endpoint\.
 
 ## AWS Regions<a name="Concepts.RegionsAndAvailabilityZones.Regions"></a>
 

@@ -35,7 +35,7 @@ To use Enhanced Monitoring, you must create an IAM role, and then enable Enhance
 
 Enhanced Monitoring requires permission to act on your behalf to send OS metric information to CloudWatch Logs\. You grant Enhanced Monitoring permissions using an AWS Identity and Access Management \(IAM\) role\. 
 
-#### Creaing the IAM role when you enable Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites.creating-role-automatically"></a>
+#### Creating the IAM role when you enable Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Prerequisites.creating-role-automatically"></a>
 
 When you enable Enhanced Monitoring in the RDS console, Amazon RDS can create the required IAM role for you\. The role is named `rds-monitoring-role`\. RDS uses this role for the specified DB instance or read replica\.
 
@@ -221,6 +221,6 @@ The following tables list the OS metrics available using Amazon CloudWatch Logs\
 
 <a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 
-#### Metrics for Microsoft SQL Server DB instances<a name="w142aac21c22c21b7b9"></a>
+#### Metrics for Microsoft SQL Server DB instances<a name="w145aac21c22c21b7b9"></a>
 
 <a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)

@@ -94,6 +94,7 @@ The following limitations apply to storage autoscaling:
 + If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 + Autoscaling can't be used with magnetic storage\.
 + Autoscaling can't be used with the following previous\-generation instance classes that have less than 6 TiB of orderable storage: db\.m3\.large, db\.m3\.xlarge, and db\.m3\.2xlarge\.
++ Autoscaling operations aren't logged by AWS CloudTrail\. For more information on CloudTrail, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.
 
 Although automatic scaling helps you to increase storage on your Amazon RDS DB instance dynamically, you should still configure the initial storage for your DB instance to an appropriate size for your typical workload\.
 
@@ -118,12 +119,12 @@ When you clone an Amazon RDS DB instance that has storage autoscaling enabled, t
 
 1. In the **Storage autoscaling** section, set the **Maximum storage threshold** value for the DB instance\. 
 
-1. Specify the rest of your DB instance information as described in [Getting started with Amazon RDS](CHAP_GettingStarted.md)\. 
+1. Specify the rest of your DB instance information as described in [Getting started with Amazon RDS](CHAP_GettingStarted.md)\.
 
 #### AWS CLI<a name="USER_PIOPS.EnablingAutoscaling.cli"></a>
 
-To enable storage autoscaling for a new DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\. Set the following parameter: 
-+  `--max-allocated-storage` – Turns on storage autoscaling and sets the upper limit on storage size, in gibibytes\. 
+To enable storage autoscaling for a new DB instance, use the AWS CLI command [ `create-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\. Set the following parameter:
++  `--max-allocated-storage` – Turns on storage autoscaling and sets the upper limit on storage size, in gibibytes\.
 
  To verify that Amazon RDS storage autoscaling is available for your DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html) command\. To check based on the instance class before creating an instance, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command\. Check the following field in the return value: 
 +  `SupportsStorageAutoscaling` – Indicates whether the DB instance or instance class supports storage autoscaling\. 

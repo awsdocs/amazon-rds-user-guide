@@ -33,7 +33,7 @@ The following are some limitations and recommendations for importing backup file
 + Functions are not imported automatically\. Save your functions from your source database and add them to your new DB instance later\. 
 + Stored procedures are not imported automatically\. Save your stored procedures from your source database and add them to your new DB instance later\. 
 + Time zone information is not imported automatically\. Record the time zone information for your source database, and set the time zone of your new DB instance later\. For more information, see [Local time zone for MySQL DB instances](CHAP_MySQL.md#MySQL.Concepts.LocalTimeZone)\. 
-+ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
++ The `innodb_data_file_path` parameter must be configured with only one data file that uses the default data file name `"ibdata1:12M:autoextend"`\. Databases with two data files, or with a data file with a different name, can't be migrated using this method\.
 
   The following are examples of file names that are not allowed: `"innodb_data_file_path=ibdata1:50M; ibdata2:50M:autoextend"` and `"innodb_data_file_path=ibdata01:50M:autoextend"`\.
 + The maximum size of the restored database is the maximum database size supported minus the size of the backup\. So, if the maximum database size supported is 64 TiB, and the size of the backup is 30 TiB, then the maximum size of the restored database is 34 TiB, as in the following example: 

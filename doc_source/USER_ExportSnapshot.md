@@ -132,6 +132,7 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
                 "Action": [
                     "s3:PutObject*",
                     "s3:GetObject*",
+                    "s3:CopyObject*",
                     "s3:DeleteObject*"
                 ],
                 "Resource": [
@@ -179,6 +180,8 @@ Exporting RDS snapshots can take a while depending on your database type and siz
 The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column will take longer because the export uses a slower single threaded process\. 
 
 You can export a DB snapshot to Amazon S3 using the AWS Management Console, the AWS CLI, or the RDS API\.
+
+If you use a Lambda function to export a snapshot, add the `kms:DescribeKey` action to the Lambda function policy\. For more information, see [AWS Lambda permissions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html)\.
 
 ### Console<a name="USER_ExportSnapshot.ExportConsole"></a>
 

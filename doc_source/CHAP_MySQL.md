@@ -1,22 +1,22 @@
 # MySQL on Amazon RDS<a name="CHAP_MySQL"></a>
 
-Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions: 
+Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions:
 + MySQL 8\.0
 + MySQL 5\.7
 + MySQL 5\.6
 + MySQL 5\.5
 
-For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\. 
+For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
-You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\. 
+You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\.
 
-Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\-West\) Region\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\. 
+Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\.
 
 For information about the features in each version of MySQL, see [The main features of MySQL](https://dev.mysql.com/doc/refman/8.0/en/features.html) in the MySQL documentation\.
 
 ## Common management tasks for MySQL on Amazon RDS<a name="MySQL.Concepts.General"></a>
 
-The following are the common management tasks you perform with an Amazon RDS MySQL DB instance, with links to relevant documentation for each task\. 
+The following are the common management tasks you perform with an Amazon RDS MySQL DB instance, with links to relevant documentation for each task\.
 
 
 ****  
@@ -202,7 +202,7 @@ Amazon RDS supports Secure Sockets Layer \(SSL\) connections with DB instances r
 
 Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
-An SSL certificate created by Amazon RDS is the trusted root entity and should work in most cases but might fail if your application does not accept certificate chains\. If your application does not accept certificate chains, you might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL\. 
+An SSL certificate created by Amazon RDS is the trusted root entity and should work in most cases but might fail if your application does not accept certificate chains\. If your application does not accept certificate chains, you might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\) Regions using SSL\.
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For more information about using SSL with MySQL, see [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)\.
 

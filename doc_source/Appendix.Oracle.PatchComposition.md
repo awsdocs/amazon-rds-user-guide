@@ -36,7 +36,7 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 | PSU | Version 12\.1\.0\.2 | Version 11\.2\.0\.4 | 
 | --- | --- | --- | 
-| 2020 October | [12\.1\.0\.2\.v22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) |  | 
+| 2020 October | [12\.1\.0\.2\.v22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) | [11\.2\.0\.4\.v26](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v26) | 
 | 2020 July | [12\.1\.0\.2\.v21](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v21) | [11\.2\.0\.4\.v25](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v25) | 
 | 2020 April | [12\.1\.0\.2\.v20](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v20) | [11\.2\.0\.4\.v24](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v24) | 
 | 2020 January | [12\.1\.0\.2\.v19](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v19) | [11\.2\.0\.4\.v23](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v23) | 
