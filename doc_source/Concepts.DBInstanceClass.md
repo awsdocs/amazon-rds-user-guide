@@ -82,9 +82,9 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.m5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -141,9 +141,9 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5b\.large | No | Yes | No | Yes | No | 
 | db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | Yes | Yes | Yes |  Yes  | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher, 9\.5\.20 & higher | 
+| db\.r5\.8xlarge | Yes | Yes | Yes |  Yes  | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 

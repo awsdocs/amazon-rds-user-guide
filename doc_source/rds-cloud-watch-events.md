@@ -1,8 +1,11 @@
 # Getting CloudWatch Events and Amazon EventBridge events for Amazon RDS<a name="rds-cloud-watch-events"></a>
 
-Amazon CloudWatch Events and Amazon EventBridge both enable you to automate AWS services and respond to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events and EventBridge nearly in real time\. You can write simple rules to indicate which events interest you and what automated actions to take when an event matches a rule\.
+Amazon CloudWatch Events and Amazon EventBridge enable you to automate AWS services and respond to system events such as application availability issues or resource changes\. Events from AWS services are delivered to CloudWatch Events and EventBridge in near real time\. You can write simple rules to indicate which events interest you and what automated actions to take when an event matches a rule\.
 
-You can set a variety of targets—such as an AWS Lambda function or an Amazon SNS topic—which receive events in JSON format\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
+**Note**  
+Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depends on the order or existence of notification events, as they might be out of sequence or missing\. 
+
+You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
 
 For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\.
 

@@ -149,7 +149,7 @@ Non\-native counter metrics are counters defined by Amazon RDS\. A non\-native m
 | innodb\_rows\_changed | SQL | db\.SQL\.innodb\_rows\_changed | The total InnoDB row operations\. | db\.SQL\.Innodb\_rows\_inserted \+ db\.SQL\.Innodb\_rows\_deleted \+ db\.SQL\.Innodb\_rows\_updated | 
 | active\_transactions | Transactions | db\.Transactions\.active\_transactions | The total active transactions\. | SELECT COUNT\(1\) AS active\_transactions FROM INFORMATION\_SCHEMA\.INNODB\_TRX | 
 | innodb\_deadlocks | Locks | db\.Locks\.innodb\_deadlocks | The total number of deadlocks\. | SELECT COUNT AS innodb\_deadlocks FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_deadlocks' | 
-| innodb\_lock\_timeouts | Locks | db\.Locks\.innodb\_lock\_timeouts | The total number of deadlocks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
+| innodb\_lock\_timeouts | Locks | db\.Locks\.innodb\_lock\_timeouts | The total number of locks that timed out\. | SELECT COUNT AS innodb\_lock\_timeouts FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_timeouts' | 
 | innodb\_row\_lock\_waits | Locks | db\.Locks\.innodb\_row\_lock\_waits | The total number of row locks that resulted in a wait\. | SELECT COUNT AS innodb\_row\_lock\_waits FROM INFORMATION\_SCHEMA\.INNODB\_METRICS WHERE NAME='lock\_row\_lock\_waits' | 
 
 ## Performance Insights counters for Amazon RDS for Microsoft SQL Server<a name="USER_PerfInsights_Counters.SQLServer"></a>

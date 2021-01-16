@@ -92,7 +92,11 @@ For information about manually or automatically upgrading a MariaDB DB instance,
 
 ## Automatic minor version upgrades for MariaDB<a name="USER_UpgradeDBInstance.MariaDB.Minor"></a>
 
-If you enable the **Auto minor version upgrade** option when creating or modifying a DB instance, you can have your DB instance automatically upgraded\.
+If you specify the following settings when creating or modifying a DB instance, you can have your DB instance automatically upgraded\.
++ The **Auto minor version upgrade** setting is enabled\.
++ The **Backup retention period** setting is greater than 0\.
+
+For more information about these settings, see [Settings for DB instances](Overview.DBInstance.Modifying.md#USER_ModifyInstance.Settings)\.
 
 For some RDS for MariaDB major versions in some AWS Regions, one minor version is designated by RDS as the automatic upgrade version\. After a minor version has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically during your maintenance window\. RDS doesn't automatically set newer released minor versions as the automatic upgrade version\. Before RDS designates a newer automatic upgrade version, several criteria are considered, such as the following:
 + Known security issues
@@ -153,7 +157,8 @@ Your output is similar to the following\.
 In this example, the `AutoUpgrade` value is `True` for MariaDB version 10\.2\.21\. So, the automatic minor upgrade target is MariaDB version 10\.2\.21, which is highlighted in the output\.
 
 A MariaDB DB instance is automatically upgraded during your maintenance window if the following criteria are met:
-+ The DB instance has the **Auto minor version upgrade** option enabled\.
++ The **Auto minor version upgrade** setting is enabled\.
++ The **Backup retention period** setting is greater than 0\.
 + The DB instance is running a minor DB engine version that is less than the current automatic upgrade minor version\.
 
 For more information, see [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)\. 

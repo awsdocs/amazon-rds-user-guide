@@ -39,7 +39,7 @@ Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the f
 
 To set up Kerberos authentication for a PostgreSQL DB instance, take the following steps, described in more detail later:
 
-1. Use AWS Managed Microsoft AD to create an AWS Managed Microsoft AD directory\. You can use the AWS Management Console, the AWS CLI, or the AWS Directory Service API to create the directory\.
+1. Use AWS Managed Microsoft AD to create an AWS Managed Microsoft AD directory\. You can use the AWS Management Console, the AWS CLI, or the AWS Directory Service API to create the directory\. Make sure to open the relevant outbound ports on the directory security group so that the directory can communicate with the instance\.
 
 1. Create a role that provides Amazon RDS access to make calls to your AWS Managed Microsoft AD directory\. To do so, create an AWS Identity and Access Management \(IAM\) role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess`\. 
 
@@ -55,6 +55,9 @@ To set up Kerberos authentication for a PostgreSQL DB instance, take the followi
    +  [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md) 
    +  [Restoring a DB instance to a specified time](USER_PIT.md) 
 
-   When you create or modify the DB instance, provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory\. Also provide the name of the IAM role that you created\. You can locate the DB instance in the same VPC as the directory or in a different AWS account or VPC\.
+   You can locate the instance in the same Amazon Virtual Private Cloud \(VPC\) as the directory or in a different AWS account or VPC\. When you create or modify the PostgreSQL DB instance, do the following:
+   + Provide the domain identifier \(`d-*` identifier\) that was generated when you created your directory\.
+   + Provide the name of the IAM role that you created\.
+   + Ensure that the DB instance security group can receive inbound traffic from the directory security group\.
 
 1. Use the RDS master user credentials to connect to the PostgreSQL DB instance\. Create the user in PostgreSQL to be identified externally\. Externally identified users can log in to the PostgreSQL DB instance using Kerberos authentication\.

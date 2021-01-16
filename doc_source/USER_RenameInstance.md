@@ -1,6 +1,6 @@
 # Renaming a DB instance<a name="USER_RenameInstance"></a>
 
- You can rename a DB instance by using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` action\. Renaming a DB instance can have far\-reaching effects; the following is a list of things you should know before you rename a DB instance\. 
+ You can rename a DB instance by using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` action\. Renaming a DB instance can have far\-reaching effects\. The following is a list of considerations before you rename a DB instance\. 
 +  When you rename a DB instance, the endpoint for the DB instance changes, because the URL includes the name you assigned to the DB instance\. You should always redirect traffic from the old URL to the new one\.
 +  When you rename a DB instance, the old DNS name that was used by the DB instance is immediately deleted, although it could remain cached for a few minutes\. The new DNS name for the renamed DB instance becomes effective in about 10 minutes\. The renamed DB instance is not available until the new name becomes effective\. 
 +  You cannot use an existing DB instance name when renaming an instance\. 
@@ -8,6 +8,9 @@
 +  Metrics and events associated with the name of a DB instance are maintained if you reuse a DB instance name\. For example, if you promote a read replica and rename it to be the name of the previous primary DB instance, the events and metrics associated with the primary DB instance are associated with the renamed instance\. 
 +  DB instance tags remain with the DB instance, regardless of renaming\. 
 +  DB snapshots are retained for a renamed DB instance\. 
+
+**Note**  
+A DB instance is an isolated database environment running in the cloud\. A DB instance can host multiple databases, or a single Oracle database with multiple schemas\. For information about changing a database name, see the documentation for your DB engine\.
 
 ## Renaming to replace an existing DB instance<a name="USER_RenameInstance.RR"></a>
 
@@ -69,19 +72,6 @@ For Windows:
 
 ## RDS API<a name="USER_RenameInstance.API"></a>
 
-To rename a DB instance, call Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) with the following parameters:
-+ `DBInstanceIdentifier` = existing name for the instance
-+ `NewDBInstanceIdentifier` = new name for the instance
-
-```
- 1. https://rds.amazonaws.com/
- 2. 	?Action=ModifyDBInstance
- 3. 	&DBInstanceIdentifier=mydbinstance
- 4. 	&NewDBInstanceIdentifier=mynewdbinstanceidentifier
- 5. 	&Version=2012-01-15						
- 6. 	&SignatureVersion=2
- 7. 	&SignatureMethod=HmacSHA256
- 8. 	&Timestamp=2012-01-20T22%3A06%3A23.624Z
- 9. 	&AWSAccessKeyId=<AWS Access Key ID>
-10. 	&Signature=<Signature>
-```
+To rename a DB instance, call Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) with the following parameters:
++ `DBInstanceIdentifier` — existing name for the instance
++ `NewDBInstanceIdentifier` — new name for the instance

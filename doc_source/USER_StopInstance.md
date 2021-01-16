@@ -23,6 +23,8 @@ When you stop a DB instance, the DB instance performs a normal shutdown and stop
 
 Stopping a DB instance removes pending actions, except for pending actions for the DB instance's option group or DB parameter group\.
 
+Automated backups aren't created while a DB instance is stopped\. Backups can be retained longer than the backup retention period if a DB instance has been stopped\. RDS doesn't include time spent in the `stopped` state when the backup retention window is calculated\.
+
 **Important**  
 You can stop a DB instance for up to seven days\. If you don't manually start your DB instance after seven days, your DB instance is automatically started so that it doesn't fall behind any required maintenance updates\.
 

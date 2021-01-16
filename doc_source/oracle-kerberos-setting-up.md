@@ -241,12 +241,11 @@ To configure an Oracle client, meet the following requirements:
 + Verify that traffic can flow between the client host and AWS Directory Service over DNS port 53 and Kerberos ports \(88 and 464 for managed AWS Directory Service\) over TCP/UDP\.
 + Verify that traffic can flow between the client host and the DB instance over the database port\.
 
-Following is sample content for AWS Managed Microsoft AD\. In your krb5\.conf or krb5\.ini file, replace *cache\_name* with `/tmp/kerbcache` \(Linux\) or `D:\TEMP\cc` \(Windows\)\.
+Following is sample content for AWS Managed Microsoft AD\.
 
 ```
 [libdefaults]
  default_realm = EXAMPLE.COM
- default_ccache_name = cache_name
 [realms]
  EXAMPLE.COM = {
   kdc = example.com
@@ -257,12 +256,11 @@ Following is sample content for AWS Managed Microsoft AD\. In your krb5\.conf or
  example.com = EXAMPLE.COM
 ```
 
-Following is sample content for on\-premise Microsoft AD\. In your krb5\.conf or krb5\.ini file, replace *cache\_name* with `/tmp/kerbcache` for Linux and `D:\TEMP\cc` for Windows\. Replace *on\-prem\-ad\-server\-name* with the name of your on\-premises AD server\.
+Following is sample content for on\-premise Microsoft AD\. In your krb5\.conf or krb5\.ini file, replace *on\-prem\-ad\-server\-name* with the name of your on\-premises AD server\.
 
 ```
 [libdefaults]
  default_realm = ONPREM.COM
- default_ccache_name = cache_name
 [realms]
  AWSAD.COM = {
   kdc = awsad.com

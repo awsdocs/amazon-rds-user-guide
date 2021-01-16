@@ -19,7 +19,8 @@ The following table lists the resources and their quotas per AWS Region\.
 | --- | --- | 
 | Authorizations per DB security group | 20 | 
 | Burst balance for instances <1 tebibyte \(TiB\) | 3000 IOPS | 
-| Cross\-region snapshot copy requests | 5 | 
+| Concurrent DB snapshot export tasks | 5 | 
+| Cross\-Region DB snapshot copy requests | 5 | 
 | DB instances | 40 | 
 | DB security groups | 25 | 
 | DB subnet groups | 50 | 
@@ -76,6 +77,8 @@ For Oracle, you set the maximum number of user processes and user and system ses
 
 **Maximum database connections**  
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
+
+The following example shows how to calculate `max_connections` for a MariaDB or MySQL DB instance using the db\.m5\.xlarge instance class\. `DBInstanceClassMemory` is 16 GiB, or 17,179,869,184 bytes\. That divided by 12,582,880 = 1365 connections maximum\.
 
 For MariaDB and MySQL DB instances, setting the `max_connections` parameter to a large value might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
 

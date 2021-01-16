@@ -47,7 +47,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
 |  Kerberos authentication  |  No  |  —  |  [Kerberos authentication](database-authentication.md#kerberos-authentication)  | 
 |  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS resources](USER_Tagging.md)  | 
-|  Option groups  |  No  |  —  |  [Working with option groups](USER_WorkingWithOptionGroups.md)  | 
+|  Option groups  |  Yes  |  —  |  [Working with option groups](USER_WorkingWithOptionGroups.md)  | 
 |  Modifying the maintenance window  |  Yes  |  —  |  [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)  | 
 |  Automatic minor version upgrade  |  Yes  |  —  |  [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)  | 
 |  Modifying the backup window  |  Yes  |  —  |  [Working with backups](USER_WorkingWithAutomatedBackups.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
@@ -104,9 +104,9 @@ CoIPs can provide the following benefits for RDS on Outposts DB instances:
 + Enhanced security
 
 You can enable or disable a CoIP for an RDS on Outposts DB instance using the AWS Management Console, the AWS CLI, or the RDS API:
-+ With the AWS Management Console, use the **Customer\-owned IP address \(CoIP\)** setting in **Access type**\.  
++ With the AWS Management Console, use the **Customer\-owned IP address \(CoIP\)** setting in **Access type** to enable a CoIP\. Use one of the other settings to disable it\.  
 ![\[The Customer-owned IP address (CoIPs) setting in the AWS Management Console.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/outpost-coip.png)
-+ With the AWS CLI, use the `enable-customer-owned-ip | no-enable-customer-owned-ip` option\.
++ With the AWS CLI, use the `--enable-customer-owned-ip | --no-enable-customer-owned-ip` option\.
 + With the RDS API, use the `EnableCustomerOwnedIp` parameter\.
 
 You can enable or disable a CoIP when you perform any of the following actions:
@@ -129,6 +129,12 @@ If you enable a CoIP for a DB instance, but Amazon RDS is unable to allocate a C
 The following limitations apply to CoIP support for RDS on Outposts DB instances:
 + When a CoIP is enabled for a DB instance, make sure that public accessibility is disabled for the DB instance\.
 + You can't assign a CoIP from a CoIP pool to a DB instance\. When you enable a CoIP for a DB instance, Amazon RDS automatically assigns a CoIP from a CoIP pool to the DB instance\.
++ You must use the AWS account that owns the Outpost resources \(owner\) or share the following resources with other AWS accounts \(consumers\) in the same organization\.
+  + The Outpost
+  + The local gateway \(LGW\) route table for the DB instance's VPC
+  + The CoIP pool or pools for the LGW route table
+
+  For more information, see [ Working with shared AWS Outposts resources](https://docs.aws.amazon.com/outposts/latest/userguide/sharing-outposts.html) in the *AWS Outposts User Guide*\.
 
 ## Creating DB instances for Amazon RDS on AWS Outposts<a name="rds-on-outposts.creating"></a>
 
@@ -246,13 +252,13 @@ Next, call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/ref
 + `--db-instance-class`
 + `--engine`
 + `--availability-zone`
-+ `--db-security-groups`
++ `--vpc-security-group-ids`
 + `--db-subnet-group-name`
 + `--allocated-storage`
 + `--master-user-name`
 + `--master-user-password`
 + `--backup-retention-period`
-+ `-storage-encrypted`
++ `--storage-encrypted`
 + `--kms-key-id`
 
 **Example**  
@@ -262,34 +268,36 @@ For Linux, macOS, or Unix:
 ```
  1. aws rds create-db-instance \
  2.     --db-instance-identifier myoutpostdbinstance \
- 3.     --db-instance-class db.m5.large \
- 4.     --engine mysql \
- 5.     --availability-zone us-east-1d \
- 6.     --db-security-groups outpost-sg \
- 7.     --db-subnet-group-name myoutpostdbsubnetgr \
- 8.     --allocated-storage 100 \
- 9.     --master-username masterawsuser \
-10.     --master-user-password masteruserpassword \
-11.     --backup-retention-period 3 \
-12.     --storage-encrypted \
-13.     --kms-key-id mykey
+ 3.     --engine-version 8.0.17 \
+ 4.     --db-instance-class db.m5.large \
+ 5.     --engine mysql \
+ 6.     --availability-zone us-east-1d \
+ 7.     --vpc-security-group-ids outpost-sg \
+ 8.     --db-subnet-group-name myoutpostdbsubnetgr \
+ 9.     --allocated-storage 100 \
+10.     --master-username masterawsuser \
+11.     --master-user-password masteruserpassword \
+12.     --backup-retention-period 3 \
+13.     --storage-encrypted \
+14.     --kms-key-id mykey
 ```
 For Windows:  
 
 ```
  1. aws rds create-db-instance ^
  2.     --db-instance-identifier myoutpostdbinstance ^
- 3.     --db-instance-class db.m5.large ^
- 4.     --engine mysql ^
- 5.     --availability-zone us-east-1d ^
- 6.     --db-security-groups outpost-sg ^
- 7.     --db-subnet-group-name myoutpostdbsubnetgr ^
- 8.     --allocated-storage 100 ^
- 9.     --master-username masterawsuser ^
-10.     --master-user-password masteruserpassword ^
-11.     --backup-retention-period 3 ^
-12.     --storage-encrypted ^
-13.     --kms-key-id mykey
+ 3.     --engine-version 8.0.17 ^				
+ 4.     --db-instance-class db.m5.large ^
+ 5.     --engine mysql ^
+ 6.     --availability-zone us-east-1d ^
+ 7.     --vpc-security-group-ids outpost-sg ^
+ 8.     --db-subnet-group-name myoutpostdbsubnetgr ^
+ 9.     --allocated-storage 100 ^
+10.     --master-username masterawsuser ^
+11.     --master-user-password masteruserpassword ^
+12.     --backup-retention-period 3 ^
+13.     --storage-encrypted ^
+14.     --kms-key-id mykey
 ```
 
 To create a PostgreSQL DB instance, specify `postgres` for the `--engine` option\.
@@ -306,9 +314,10 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `BackupRetentionPeriod`
 + `DBInstanceClass`
 + `DBInstanceIdentifier`
-+ `DBSecurityGroups`
++ `VpcSecurityGroupIds`
 + `DBSubnetGroupName`
 + `Engine`
++ `EngineVersion`
 + `MasterUsername`
 + `MasterUserPassword`
 + `StorageEncrypted`

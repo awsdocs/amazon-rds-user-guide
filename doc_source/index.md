@@ -1,7 +1,7 @@
 # Amazon Relational Database Service User Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -260,6 +260,11 @@ Amazon's trademarks and trade dress may not be used in
    + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
    + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
    + [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
+      + [Working with PostgreSQL autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)
+      + [Working with PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
+      + [Using a custom DNS server for outbound network access](Appendix.PostgreSQL.CommonDBATasks.CustomDNS.md)
+      + [Scheduling maintenance with the PostgreSQL pg_cron extension](PostgreSQL_pg_cron.md)
+      + [Managing PostgreSQL partitions with the pg_partman extension](PostgreSQL_Partitions.md)
    + [Using Kerberos authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)
       + [Setting up Kerberos authentication for PostgreSQL DB instances](postgresql-kerberos-setting-up.md)
       + [Managing a DB instance in a Domain](postgresql-kerberos-managing.md)

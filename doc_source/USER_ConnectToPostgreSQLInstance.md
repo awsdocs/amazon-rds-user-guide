@@ -11,6 +11,11 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 Following are two ways to connect to a PostgreSQL DB instance\. The first example uses pgAdmin, a popular open\-source administration and development tool for PostgreSQL\. The second example uses psql, a command line utility that is part of a PostgreSQL installation\. 
 
+**Topics**
++ [Using pgAdmin to connect to a PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.pgAdmin)
++ [Using psql to connect to a PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.psql)
++ [Troubleshooting connections to your PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)
+
 ## Using pgAdmin to connect to a PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.pgAdmin"></a>
 
 You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance\. 
@@ -54,7 +59,10 @@ You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance
 
 You can use a local instance of the psql command line utility to connect to a PostgreSQL DB instance\. You need either PostgreSQL or the psql client installed on your client computer\. To connect to your PostgreSQL DB instance using psql, you need to provide host information and access credentials\.
 
-Use one of the following formats to connect to a PostgreSQL DB instance on Amazon RDS\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\.
+Use one of the following formats to connect to a PostgreSQL DB instance on Amazon RDS\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\. This option is set for the entire session\.
+
+**Note**  
+A connection attempt with `--no-password` fails when the server requires password authentication and a password is not available from other sources\. For more information, see the [psql documentation](https://www.postgresql.org/docs/13/app-psql.html)\.
 
 If this is the first time you are connecting to this DB instance, try using the default database name **postgres** for the `--dbname` option\. 
 
@@ -88,18 +96,33 @@ psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --
 
 ## Troubleshooting connections to your PostgreSQL instance<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
 
-If you can't connect to the DB instance, the most common error is `Could not connect to server: Connection timed out.` If you receive this error, do the following:
-+ Check that the host name used is the DB instance endpoint and that the port number used is correct\.
-+ Make sure that the DB instance's public accessibility is set to **Yes**\.
-+ Check that the security group assigned to the DB instance has rules to allow access through any firewall your connection might go through\. For example, if the DB instance was created using the default port of 5432, your company might have firewall rules blocking connections to that port from company devices\.
+**Topics**
++ [Error – FATAL: database *name* does not exist](#USER_ConnectToPostgreSQLInstance.Troubleshooting-DBname)
++ [Error – Could not connect to server: Connection timed out](#USER_ConnectToPostgreSQLInstance.Troubleshooting-timeout)
++ [Errors with security group access rules](#USER_ConnectToPostgreSQLInstance.Troubleshooting-AccessRules)
 
-  To fix this failure, modify the DB instance to use a different port\. Also, make sure that the security group applied to the DB instance allows connections to the new port\.
-+ Check whether the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\. For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\.
+### Error – FATAL: database *name* does not exist<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting-DBname"></a>
 
-  You can add or edit an inbound rule in the security group\. For **Source**, choosing **My IP** allows access to the DB instance from the IP address detected in your browser\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+If when trying to connect you receive an error like `FATAL: database name does not exist`, try using the default database name **postgres** for the `--dbname` option\. 
 
-  Alternatively, if the DB instance was created outside of a VPC, it must have a database security group that authorizes those connections\.
+### Error – Could not connect to server: Connection timed out<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting-timeout"></a>
 
-By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default DB security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. For more information about Amazon RDS security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
+If you can't connect to the DB instance, the most common error is `Could not connect to server: Connection timed out.` If you receive this error, check the following:
++ Check that the host name used is the DB instance endpoint and that the port number used is correct\. 
++ Make sure that the DB instance's public accessibility is set to **Yes** to allow external connections\. To modify the **Public access** setting, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
++ Check that the security group assigned to the DB instance has rules to allow access through any firewall your connection might go through\. For example, if the DB instance was created using the default port of 5432, your company might have firewall rules blocking connections to that port from external company devices\.
 
-If you receive an error like `FATAL: database some-name does not exist` when connecting, try using the default database name **postgres** for the `--dbname` option\. 
+  To fix this, modify the DB instance to use a different port\. Also, make sure that the security group applied to the DB instance allows connections to the new port\. To modify the **Database port** setting, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
++ See also [ Errors with security group access rules](#USER_ConnectToPostgreSQLInstance.Troubleshooting-AccessRules)\.
+
+### Errors with security group access rules<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting-AccessRules"></a>
+
+By far the most common connection problem is with the security group's access rules assigned to the DB instance\. If you used the default DB security group when you created the DB instance, the security group likely didn't have access rules that allow you to access the instance\. 
+
+For the connection to work, the security group you assigned to the DB instance at its creation must allow access to the DB instance\. For example, if the DB instance was created in a VPC, it must have a VPC security group that authorizes connections\. Check if the DB instance was created using a security group that doesn't authorize connections from the device or Amazon EC2 instance where the application is running\.
+
+You can add or edit an inbound rule in the security group\. For **Source**, choosing **My IP** allows access to the DB instance from the IP address detected in your browser\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+
+Alternatively, if the DB instance was created outside of a VPC, it must have a database security group that authorizes those connections\.
+
+For more information about Amazon RDS security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\. 

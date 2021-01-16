@@ -78,7 +78,7 @@ To create a DB instance by using the AWS CLI, call the [create\-db\-instance](ht
 For information about each setting, see [Settings for DB instances](#USER_CreateDBInstance.Settings)\.
 + `--db-instance-identifier`
 + `--db-instance-class`
-+ `--db-security-groups`
++ `--vpc-security-group-ids`
 + `--db-subnet-group`
 + `--engine`
 + `--master-username`
@@ -95,7 +95,7 @@ For Linux, macOS, or Unix:
  3.     --db-instance-identifier mymsftsqlserver \
  4.     --allocated-storage 250 \
  5.     --db-instance-class db.t3.large \
- 6.     --db-security-groups mydbsecuritygroup \
+ 6.     --vpc-security-group-ids mysecuritygroup \
  7.     --db-subnet-group mydbsubnetgroup \
  8.     --master-username masterawsuser \
  9.     --master-user-password masteruserpassword \
@@ -109,7 +109,7 @@ For Windows:
  3.     --db-instance-identifier mydbinstance ^
  4.     --allocated-storage 250 ^
  5.     --db-instance-class db.t3.large ^
- 6.     --db-security-groups mydbsecuritygroup ^
+ 6.     --vpc-security-group-ids mysecuritygroup ^
  7.     --db-subnet-group mydbsubnetgroup ^
  8.     --master-username masterawsuser ^ 
  9.     --master-user-password masteruserpassword ^
@@ -125,42 +125,18 @@ This command produces output similar to the following\.
 
 ## RDS API<a name="USER_CreateDBInstance.API"></a>
 
-To create a DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the following parameters\. This example uses Microsoft SQL Server\.
+To create a DB instance by using the Amazon RDS API, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the following parameters\.
 
 For information about each setting, see [Settings for DB instances](#USER_CreateDBInstance.Settings)\. 
 + `AllocatedStorage`
 + `BackupRetentionPeriod`
 + `DBInstanceClass`
 + `DBInstanceIdentifier`
-+ `DBSecurityGroups`
++ `VpcSecurityGroupIds`
 + `DBSubnetGroup`
 + `Engine`
 + `MasterUsername`
 + `MasterUserPassword`
-
-**Example**  
-
-```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=CreateDBInstance
- 3.     &AllocatedStorage=250
- 4.     &BackupRetentionPeriod=3
- 5.     &DBInstanceClass=db.t3.large
- 6.     &DBInstanceIdentifier=mydbinstance
- 7.     &DBSecurityGroups.member.1=mysecuritygroup
- 8.     &DBSubnetGroup=mydbsubnetgroup
- 9.     &Engine=sqlserver-se
-10.     &MasterUserPassword=masteruserpassword
-11.     &MasterUsername=masterawsuser
-12.     &SignatureMethod=HmacSHA256
-13.     &SignatureVersion=4
-14.     &Version=2014-10-31
-15.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-16.     &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
-17.     &X-Amz-Date=20140305T185838Z
-18.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-19.     &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
-```
 
 ## Settings for DB instances<a name="USER_CreateDBInstance.Settings"></a>
 
@@ -191,7 +167,7 @@ You can create a DB instance using the console, the [ `create-db-instance`](http
 | Deletion protection |  **Enable deletion protection** to prevent your DB instance from being deleted\. If you create a production DB instance with the AWS Management Console, deletion protection is enabled by default\. For more information, see [Deleting a DB instance](USER_DeleteInstance.md)\.  |  **CLI option:** `--deletion-protection` `--no-deletion-protection` **RDS API parameter:** `DeletionProtection`  | All | 
 |  Encryption  |  **Enable Encryption** to enable encryption at rest for this DB instance\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.  |  **CLI option:** `--storage-encrypted` `--no-storage-encrypted` **RDS API parameter:** `StorageEncrypted`  | All | 
 |  Enhanced Monitoring  |  **Enable enhanced monitoring** to enable gathering metrics in real time for the operating system that your DB instance runs on\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.  |  **CLI options:** `--monitoring-interval` `--monitoring-role-arn` **RDS API parameters:** `MonitoringInterval` `MonitoringRoleArn`  | All | 
-|  Initial database name  |  The name for the database on your DB instance\. If you don't provide a name, Amazon RDS doesn't create a database on the DB instance \(except Oracle\)\. The name can't be a word reserved by the database engine, and has other constraints depending on the DB engine\. MariaDB and MySQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) Oracle: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) PostgreSQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  **CLI option:** `--db-name` **RDS API parameter:** `DBName`  | All except SQL Server | 
+|  Initial database name  |  The name for the database on your DB instance\. If you don't provide a name, Amazon RDS doesn't create a database on the DB instance \(except for Oracle and PostgreSQL\)\. The name can't be a word reserved by the database engine, and has other constraints depending on the DB engine\. MariaDB and MySQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) Oracle: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html) PostgreSQL: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  **CLI option:** `--db-name` **RDS API parameter:** `DBName`  | All except SQL Server | 
 |  License |  The license model: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  **CLI option:** `--license-model` **RDS API parameter:** `LicenseModel`  |  SQL Server Oracle  | 
 |  Maintenance window  |  The 30\-minute window in which pending modifications to your DB instance are applied\. If the time period doesn't matter, choose **No Preference**\. For more information, see [The Amazon RDS maintenance window](USER_UpgradeDBInstance.Maintenance.md#Concepts.DBMaintenance)\.  |  **CLI option:** `--preferred-maintenance-window` **RDS API parameter:** `PreferredMaintenanceWindow`  | All | 
 |  Master password  |  The password for your master user account\. The password has the following number of printable ASCII characters \(excluding `/`, `"`, a space, and `@`\) depending on the DB engine: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)  |  **CLI option:** `--master-user-password` **RDS API parameter:** `MasterUserPassword`  | All | 

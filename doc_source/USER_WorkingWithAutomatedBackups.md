@@ -41,6 +41,8 @@ You can set the backup retention period when you create a DB instance\. If you d
 
 After you create a DB instance, you can modify the backup retention period\. You can set the backup retention period to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. Manual snapshot limits \(100 per Region\) do not apply to automated backups\.
 
+Automated backups aren't created while a DB instance is stopped\. Backups can be retained longer than the backup retention period if a DB instance has been stopped\. RDS doesn't include time spent in the `stopped` state when the backup retention window is calculated\.
+
 **Important**  
 An outage occurs if you change the backup retention period from 0 to a nonzero value or from a nonzero value to 0\. This applies to both Single\-AZ and Multi\-AZ DB instances\.
 

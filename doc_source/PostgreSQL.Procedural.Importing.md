@@ -20,9 +20,10 @@ Modify your DB parameter group to include the following settings\. You should on
 
 | Parameter | Recommended value when importing | Description | 
 | --- | --- | --- | 
-|  `maintenance_work_mem`  |  524288, 1048576, 2097152 or 4194304 \(in KB\)\. These settings are comparable to 512 MB, 1 GB, 2 GB, and 4 GB\.  |  The value for this setting depends on the size of your host\. This parameter is used during CREATE INDEX statements and each parallel command can use this much memory\. Calculate the best value so that you don't set this value so high that you run out of memory\.  | 
-|  `checkpoint_segments`  |   256  |  The value for this setting consumes more disk space, but gives you less contention on a write ahead log \(WAL\)\. For PostgreSQL versions 9\.5\.x and 9\.6\.x, this value is `max_wal_size`\.  | 
-|  `checkpoint_timeout`  |   1800  |  The value for this setting allows for less frequent WAL rotation\.  | 
+|  `maintenance_work_mem`  |  524288, 1048576, 2097152, or 4194304 \(in KB\)\. These settings are comparable to 512 MB, 1 GB, 2 GB, and 4 GB\.  |  The value for this setting depends on the size of your host\. This parameter is used during CREATE INDEX statements and each parallel command can use this much memory\. Calculate the best value so that you don't set this value so high that you run out of memory\.  | 
+|  `checkpoint_segments`  |   256  |  The value for this setting consumes more disk space, but gives you less contention on a write ahead log \(WAL\)\. This setting is only supported for PostgreSQL versions 9\.5 and earlier\. For versions 9\.6 and later, use `max_wal_size`\.  | 
+|  `max_wal_size`  |  256 \(for version 9\.6\), 4096 \(for versions 10 and later\)  |  Maximum size to let the WAL grow during automatic checkpoints\. Increasing this parameter can increase the amount of time needed for crash recovery\. This parameter replaces `checkpoint_segments` for PostgreSQL 9\.6 and later\. For PostgreSQL version 9\.6, this value is in 16 MB units\. For later versions, the value is in 1 MB units\. For example, in version 9\.6, 128 means 128 chunks that are each 16 MB in size\. In version 12\.4, 2048 means 2048 chunks that are each 1 MB in size\.  | 
+|  `checkpoint_timeout`  |  1800  |  The value for this setting allows for less frequent WAL rotation\.  | 
 |  `synchronous_commit`  |  Off  |  Disable this setting to speed up writes\. Turning this parameter off can increase the risk of data loss in the event of a server crash \(do not turn off FSYNC\)\.  | 
 |  `wal_buffers`  |   8192  |  This is value is in 8 KB units\. This again helps your WAL generation speed  | 
 |  `autovacuum`  |  Off  |  Disable the PostgreSQL auto vacuum parameter while you are loading data so that it doesn't use resources  | 
@@ -454,7 +455,7 @@ If you encounter connection problems when attempting to import Amazon S3 file da
 Import your Amazon S3 data by calling the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function\. 
 
 **Note**  
-The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, there are no credential parameters in the `aws_s3.table_import_from_s3` function calls\.
+The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, the `aws_s3.table_import_from_s3` function calls don't include credential parameters\.
 
 The following shows a typical PostgreSQL example using psql\.
 
@@ -473,7 +474,7 @@ The parameters are the following:
 + `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command\. In the preceding example, the `COPY` command uses the comma\-separated value \(CSV\) file format to copy the data\. 
 +  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
 
-For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
+The return value is text\. For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
 
 The following examples show how to specify different kinds of files when importing Amazon S3 data\.
 
@@ -571,13 +572,13 @@ psql=> SELECT aws_s3.table_import_from_s3(
 
 #### aws\_s3\.table\_import\_from\_s3<a name="aws_s3.table_import_from_s3"></a>
 
-Imports Amazon S3 data into an Amazon RDS table\. The `aws_s3` extension provides the `aws_s3.table_import_from_s3` function\. 
+Imports Amazon S3 data into an Amazon RDS table\. The `aws_s3` extension provides the `aws_s3.table_import_from_s3` function\. The return value is text\.
 
 ##### Syntax<a name="aws_s3.table_import_from_s3-syntax"></a>
 
-The three required parameters are `table_name`, `column_list` and `options`\. These identify the database table and specify how the data is copied into the table\. 
+The required parameters are `table_name`, `column_list` and `options`\. These identify the database table and specify how the data is copied into the table\. 
 
-You can also use these parameters: 
+You can also use the following parameters: 
 + The `s3_info` parameter specifies the Amazon S3 file to import\. When you use this parameter, access to Amazon S3 is provided by an IAM role for the PostgreSQL DB instance\.
 
   ```

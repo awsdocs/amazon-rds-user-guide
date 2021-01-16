@@ -4,7 +4,7 @@ Periodically, Amazon RDS performs maintenance on Amazon RDS resources\. Maintena
 
 Some maintenance items require that Amazon RDS take your DB instance offline for a short time\. Maintenance items that require a resource to be offline include required operating system or database patching\. Required patching is automatically scheduled only for patches that are related to security and instance reliability\. Such patching occurs infrequently \(typically once every few months\) and seldom requires more than a fraction of your maintenance window\. 
 
-Deferred DB instance modifications that you have chosen not to apply immediately are applied during the maintenance window\. For example, you may choose to change the DB instance class or parameter group during the maintenance window\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+Deferred DB instance modifications that you have chosen not to apply immediately are also applied during the maintenance window\. For example, you might choose to change the DB instance class or parameter group during the maintenance window\. Such modifications that you specify using the **pending reboot** setting don't show up in the **Pending maintenance** list\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 You can view whether a maintenance update is available for your DB instance by using the RDS console, the AWS CLI, or the Amazon RDS API\. If an update is available, it is indicated in the **Maintenance** column for the DB instance on the Amazon RDS console, as shown following\. 
 

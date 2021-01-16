@@ -278,17 +278,18 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 
 For example, if your source DB instance is in the US East \(N\. Virginia\) Region, the ARN looks similar to this example:
 
-`arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance`
+`arn:aws:rds:us-east-1:123456789012:db:mysql-instance`
 
 For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\.
 
  To create an encrypted read replica in a different AWS Region than the source DB instance, you can use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command from the destination AWS Region\. The following parameters are used to create an encrypted read replica in another AWS Region:
-+  `--source-region` — The AWS Region that the encrypted read replica is created in\. If `source-region` is not specified, you must specify a `pre-signed-url` value\. A `pre-signed-url` is an URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region that the read replica is created from\. To learn more about `pre-signed-url`, see [ `CreateDBInstanceReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
-+  `--source-db-instance-identifier` — The DB instance identifier for the encrypted read replica that is created\. This identifier must be in the ARN format for the source AWS Region\. The AWS Region specified in `source-db-instance-identifier` must match the AWS Region specified as `source-region`\.
-+  `--db-instance-identifier` — The identifier for the encrypted read replica in the destination AWS Region\.
-+  `--kms-key-id` — The AWS KMS key identifier for the customer master key \(CMK\) to use to encrypt the read replica in the destination AWS Region\.
++  `--region` – The AWS Region where the encrypted read replica is created\. You can omit this parameter if you're creating the replica in the default AWS Region set using `aws configure`\.
++  `--source-region` – The AWS Region that contains the source DB instance\. If `source-region` is not specified, you must specify a `pre-signed-url` value\. A `pre-signed-url` is an URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region that the read replica is created from\. To learn more about `pre-signed-url`, see [ `CreateDBInstanceReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
++  `--source-db-instance-identifier` – The DB instance identifier for the encrypted read replica that is created\. This identifier must be in the ARN format for the source AWS Region\. The AWS Region specified in `source-db-instance-identifier` must match the AWS Region specified as `source-region`\.
++  `--db-instance-identifier` – The identifier for the encrypted read replica in the destination AWS Region\.
++  `--kms-key-id` – The AWS KMS key identifier for the customer master key \(CMK\) to use to encrypt the read replica in the destination AWS Region\.
 
-The following code creates a read replica in the `us-west-2` Region\.
+The following code creates a read replica in the US West \(Oregon\) Region\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -297,7 +298,7 @@ For Linux, macOS, or Unix:
 aws rds create-db-instance-read-replica \
     --db-instance-identifier DBInstanceIdentifier \
     --region us-west-2 \
-    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:mysql-instance
 ```
 For Windows:  
 
@@ -305,10 +306,10 @@ For Windows:
 aws rds create-db-instance-read-replica ^
     --db-instance-identifier DBInstanceIdentifier ^
     --region us-west-2 ^
-    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:mysql-instance
 ```
 
-The following code creates a read replica in a different AWS Region than the source DB instance\. The AWS Region where you call the `create-db-instance-read-replica` command is the destination AWS Region for the encrypted read replica\.
+The following code creates an encrypted read replica in the US West \(Oregon\) Region\. The AWS Region where you call the `create-db-instance-read-replica` command is the destination AWS Region for the encrypted read replica\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -317,9 +318,9 @@ For Linux, macOS, or Unix:
 aws rds create-db-instance-read-replica \
     --db-instance-identifier DBInstanceIdentifier \
     --region us-west-2 \
-    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance \
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:mysql-instance \
     --source-region us-east-1 \
-    --kms-key-id my-us-east-1-key
+    --kms-key-id my-us-west-2-key
 ```
 For Windows:  
 
@@ -327,9 +328,9 @@ For Windows:
 aws rds create-db-instance-read-replica ^
     --db-instance-identifier DBInstanceIdentifier ^
     --region us-west-2 ^
-    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance ^
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:mysql-instance ^
     --source-region us-east-1 ^	
-    --kms-key-id my-us-east-1-key
+    --kms-key-id my-us-west-2-key
 ```
 
 ### RDS API<a name="USER_ReadRepl.XRgn.API"></a>

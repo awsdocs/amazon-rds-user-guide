@@ -1,6 +1,6 @@
 # SQL Server performance considerations<a name="Appendix.SQLServer.Options.TDE.Perf"></a>
 
-The performance of a SQL Server DB instance can be impacted by using transparent data encryption\. 
+The performance of a SQL Server DB instance can be impacted by using Transparent Data Encryption\.
 
 Performance for unencrypted databases can also be degraded if the databases are on a DB instance that has at least one encrypted database\. As a result, we recommend that you keep encrypted and unencrypted databases on separate DB instances\.
 

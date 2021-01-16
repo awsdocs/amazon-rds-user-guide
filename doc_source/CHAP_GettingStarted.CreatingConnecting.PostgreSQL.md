@@ -10,7 +10,6 @@ Before you can create or connect to a DB instance, you must complete the tasks i
 + [Connecting to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL)
   + [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
   + [Using psql to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.psql)
-  + [Troubleshooting connection issues](#CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting)
 + [Deleting a DB instance](#CHAP_GettingStarted.Deleting.PostgreSQL)
 
 ## Creating a PostgreSQL DB instance<a name="CHAP_GettingStarted.Creating.PostgreSQL"></a>
@@ -77,10 +76,11 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
 This section shows two ways to connect to a PostgreSQL DB instance\. The first example uses pgAdmin, a popular open\-source administration and development tool for PostgreSQL\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\. The second example uses psql, a command line utility that is part of a PostgreSQL installation\. To use psql, you must have a PostgreSQL installed on your client computer or have installed the psql client on your machine\. 
 
+For more information about connecting to a PostgreSQL DB instance, see [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)\. If you can't connect to your DB instance, see [Troubleshooting connections to your PostgreSQL instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
+
 **Topics**
 + [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
 + [Using psql to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.psql)
-+ [Troubleshooting connection issues](#CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting)
 
 ### Using pgAdmin to connect to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin"></a>
 
@@ -131,12 +131,6 @@ psql --host=DB_instance_endpoint --port=port --username=master_user_name --passw
 ```
 psql --host=database-1.c6c8dntfzzhgv0.us-west-1.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=postgres
 ```
-
-### Troubleshooting connection issues<a name="CHAP_GettingStarted.Connecting.PostgreSQL.Troubleshooting"></a>
-
-By far the most common problem that occurs when attempting to connect to a database on a DB instance is the access rules in the security group assigned to the DB instance\. If you used the default DB security group when you created the DB instance, chances are good that the security group did not have the rules that enable you to access the instance\. For more information about Amazon RDS security groups, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)
-
-The most common error is could not connect to server: Connection timed out\. If you receive this error, check that the host name is the DB instance endpoint and that the port number is correct\. Check that the security group assigned to the DB instance has the necessary rules to allow access through any firewall your connection may be going through\.
 
 ## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.PostgreSQL"></a>
 

@@ -5,17 +5,40 @@ Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes
 To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 **Topics**
-+ [Setting the log retention period](#USER_LogAccess.PostgreSQL.log_retention_period)
-+ [Using query logging](#USER_LogAccess.PostgreSQL.Query_Logging)
-+ [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)
++ [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)
++ [Setting the output format of the logs](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
++ [Enabling query logging](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging)
++ [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)
 
-## Setting the log retention period<a name="USER_LogAccess.PostgreSQL.log_retention_period"></a>
+## Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
 
 To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs)\.  
+To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
-## Using query logging<a name="USER_LogAccess.PostgreSQL.Query_Logging"></a>
+## Setting the output format of the logs<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+
+By default, Amazon RDS PostgreSQL generates logs in standard error \(stderr\) format\. In this format, each log message is prefixed with the information specified by the parameter `log_line_prefix`\. Amazon RDS only allows the following value for `log_line_prefix`:
+
+```
+%t:%r:%u@%d:[%p]:t
+```
+
+The preceding value maps to the following code:
+
+```
+log-time : remote-host : user-name @ db-name : [ process-id ]
+```
+
+For example, the following error message results from querying a column using the wrong name\.
+
+```
+2019-03-10 03:54:59 UTC:10.0.0.123(52834):postgres@tstdb:[20175]:ERROR: column "wrong" does not exist at character 8
+```
+
+To specify the format for output logs, use the parameter `log_destination`\. To make the instance generate both standard and CSV output files, set `log_destination` to `csvlog` in your instance parameter group\. For a discussion of PostgreSQL logs, see [Working with RDS and Aurora PostgreSQL logs: Part 1](https://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/)\.
+
+## Enabling query logging<a name="USER_LogAccess.Concepts.PostgreSQL.Query_Logging"></a>
 
 To enable query logging for your PostgreSQL DB instance, set two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. 
 
@@ -72,7 +95,7 @@ To set up query logging, take the following steps:
    2013-11-05 16:51:18 UTC:[local]:master@postgres:[9193]:LOG:  duration: 3.469 ms
    ```
 
-## Publishing PostgreSQL logs to CloudWatch Logs<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs"></a>
+## Publishing PostgreSQL logs to CloudWatch Logs<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs"></a>
 
 To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. 
 
@@ -87,7 +110,7 @@ You can publish the following log types to CloudWatch Logs for RDS for PostgreSQ
 
 After you complete the configuration, Amazon RDS publishes the log events to log streams within a CloudWatch log group\. For example, the PostgreSQL log data is stored within the log group `/aws/rds/instance/my_instance/postgresql`\. To view your logs, open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch/)\.
 
-### Console<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
+### Console<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs.CON"></a>
 
 **To publish PostgreSQL logs to CloudWatch Logs using the console**
 
@@ -103,7 +126,7 @@ After you complete the configuration, Amazon RDS publishes the log events to log
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
-### AWS CLI<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.CLI"></a>
+### AWS CLI<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs.CLI"></a>
 
 You can publish PostgreSQL logs with the AWS CLI\. You can call the [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) command with the following parameters: 
 + `--db-instance-identifier`
@@ -163,7 +186,7 @@ For Windows:
 5.     --engine postgres
 ```
 
-### RDS API<a name="USER_LogAccess.PostgreSQL.PublishtoCloudWatchLogs.API"></a>
+### RDS API<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs.API"></a>
 
 You can publish PostgreSQL logs with the RDS API\. You can call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) action with the following parameters: 
 + `DBInstanceIdentifier`

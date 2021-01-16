@@ -173,13 +173,13 @@ This procedure also uses the following additional parameters\.
 
 ## Enabling and disabling block change tracking<a name="Appendix.Oracle.CommonDBATasks.BlockChangeTracking"></a>
 
-You can enable block change tracking for a DB instance using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.enable_block_change_tracking`\.
+Block changing tracking records changed blocks in a tracking file\. This technique can improve the performance of incremental backups\. For more information, see [Using Block Change Tracking to Improve Incremental Backup Performance](https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/backing-up-database.html#GUID-4E1F605A-76A7-48D0-9D9B-7343B4327E2A) in the Oracle Database documentation\.
 
-You can disable block change tracking for a DB instance using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.disable_block_change_tracking`\.
+To enable block change tracking for a DB instance, use the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.enable_block_change_tracking`\. To disable block change tracking, use `disable_block_change_tracking`\. These procedures take no parameters\.
 
-These procedures take no parameters\. Enabling block change tracking can improve the performance of incremental backups\.
+Read\-only replicas support block change tracking\. If you create a read\-only replica from a source DB that uses block change tracking, the replica uses block change tracking\. You can't enable block change tracking on a mounted replica\. If you place a mounted replica in read\-only mode, block change tracking isn't enabled, but you can enable it using `enable_block_change_tracking`\. If you promote an Oracle replica to a source DB, you can use block change tracking just as for any other Oracle DB instance\.
 
-These procedures are supported for the following Amazon RDS for Oracle DB engine versions:
+Block change tracking procedures are supported for the following DB engine versions:
 + 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
@@ -189,19 +189,19 @@ These procedures are supported for the following Amazon RDS for Oracle DB engine
 To determine whether block change tracking is enabled for your DB instance, run the following query\.
 
 ```
-SELECT status, filename FROM V$BLOCK_CHANGE_TRACKING;
+SELECT STATUS, FILENAME FROM V$BLOCK_CHANGE_TRACKING;
 ```
 
 The following example enables block change tracking for a DB instance\.
 
 ```
-exec rdsadmin.rdsadmin_rman_util.enable_block_change_tracking;
+EXEC rdsadmin.rdsadmin_rman_util.enable_block_change_tracking;
 ```
 
 The following example disables block change tracking for a DB instance\.
 
 ```
-exec rdsadmin.rdsadmin_rman_util.disable_block_change_tracking;
+EXEC rdsadmin.rdsadmin_rman_util.disable_block_change_tracking;
 ```
 
 ## Crosschecking archived redo logs<a name="Appendix.Oracle.CommonDBATasks.Crosscheck"></a>

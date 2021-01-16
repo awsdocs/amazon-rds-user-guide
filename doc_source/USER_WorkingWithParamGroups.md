@@ -452,6 +452,9 @@ You can specify the value for a DB parameter as any of the following:
 + A character string constant
 + A log expression \(the log function represents log base 2\), such as `value={log(DBInstanceClassMemory/8187281418)*1000}` 
 
+**Note**  
+Currently, you can't specify the MySQL `innodb_log_file_size` parameter with any value other than an integer\.
+
 ### DB parameter formulas<a name="USER_ParamFormulas"></a>
 
 A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.

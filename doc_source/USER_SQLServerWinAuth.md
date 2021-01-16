@@ -235,14 +235,21 @@ Use the Amazon RDS master user credentials to connect to the SQL Server DB insta
 
 For an Active Directory user to authenticate with SQL Server, a SQL Server Windows login must exist for the user or a group that the user is a member of\. Fine\-grained access control is handled through granting and revoking permissions on these SQL Server logins\. A user that doesn't have a SQL Server login or belong to a group with such a login can't access the SQL Server DB instance\.
 
-The ALTER ANY LOGIN permission is required to create an Active Directory SQL Server login\. If you haven't created any logins with this permission, connect as the DB instance's master user using SQL Server Authentication\. Run the following data definition language \(DDL\) command to create a SQL Server login for an Active Directory user or group\.
+The ALTER ANY LOGIN permission is required to create an Active Directory SQL Server login\. If you haven't created any logins with this permission, connect as the DB instance's master user using SQL Server Authentication\.
+
+Run a data definition language \(DDL\) command such as the following example to create a SQL Server login for an Active Directory user or group\.
+
+**Note**  
+Specify users and groups using the pre\-Windows 2000 login name in the format `domainName\login_name`\. You can't use a user principal name \(UPN\) in the format *`login_name`*`@`*`DomainName`*\.
 
 ```
-CREATE LOGIN [<user or group>] FROM WINDOWS WITH DEFAULT_DATABASE = [master],
-   DEFAULT_LANGUAGE = [us_english];
+USE [master]
+GO
+CREATE LOGIN [mydomain\myuser] FROM WINDOWS WITH DEFAULT_DATABASE = [master], DEFAULT_LANGUAGE = [us_english];
+GO
 ```
 
-Specify users or groups using the pre\-Windows 2000 login name in the format `domainName\login_name`\. You can't use a User Principle Name \(UPN\) in the format *`login_name`*`@`*`DomainName`*\. For more information about CREATE LOGIN, see [https://msdn\.microsoft\.com/en\-us/library/ms189751\.aspx](https://msdn.microsoft.com/en-us/library/ms189751.aspx) in the Microsoft Developer Network documentation\.
+For more information, see [CREATE LOGIN \(Transact\-SQL\)](https://msdn.microsoft.com/en-us/library/ms189751.aspx) in the Microsoft Developer Network documentation\.
 
 Users \(both humans and applications\) from your domain can now connect to the RDS SQL Server instance from a domain\-joined client machine using Windows authentication\.
 

@@ -11,8 +11,8 @@ Log files are rotated each day and whenever your DB instance is restarted\. The 
 
 | Log type | Retention schedule | 
 | --- | --- | 
-|  Error logs  |  A maximum of 30 error logs are retained\. Amazon RDS may delete error logs older than 7 days\.    | 
-|  Agent logs  |  A maximum of 10 agent logs are retained\. Amazon RDS may delete agent logs older than 7 days\.    | 
+|  Error logs  |  A maximum of 30 error logs are retained\. Amazon RDS might delete error logs older than 7 days\.    | 
+|  Agent logs  |  A maximum of 10 agent logs are retained\. Amazon RDS might delete agent logs older than 7 days\.    | 
 |  Trace files  |  Trace files are retained according to the trace file retention period of your DB instance\. The default trace file retention period is 7 days\. To modify the trace file retention period for your DB instance, see [Setting the retention period for trace and dump files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
 |  Dump files  |  Dump files are retained according to the dump file retention period of your DB instance\. The default dump file retention period is 7 days\. To modify the dump file retention period for your DB instance, see [Setting the retention period for trace and dump files](Appendix.SQLServer.CommonDBATasks.TraceFiles.md#Appendix.SQLServer.CommonDBATasks.TraceFiles.PurgeTraceFiles)\.   | 
 
@@ -49,7 +49,7 @@ Publishing SQL Server logs to CloudWatch Logs isn't enabled by default\. Publish
 
 1. In the **Log exports** section, choose the logs that you want to start publishing to CloudWatch Logs\.
 
-   You can choose **error**, **agent**, or both\.
+   You can choose **Agent log**, **Error log**, or both\.
 
 1. Choose **Continue**, and then choose **Modify DB Instance** on the summary page\.
 
