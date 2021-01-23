@@ -145,12 +145,13 @@ To capture server audits or a server audit specification from both nodes:
 The audit log files are automatically uploaded from the DB instance to your S3 bucket\. The following restrictions apply to the S3 bucket that you use as a target for audit files: 
 + It must be in the same AWS Region as the DB instance\.
 + It must not be open to the public\.
++ It can't use [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html)\.
 + The bucket owner must also be the IAM role owner\.
 
 The target key that is used to store the data follows this naming schema: `bucket-name/key-prefix/instance-name/audit-name/node_file-name.ext` 
 
 **Note**  
-You set both the bucket name and the key prefix values with the \(`S3_BUCKET_ARN` option setting\.
+You set both the bucket name and the key prefix values with the \(`S3_BUCKET_ARN`\) option setting\.
 
 The schema is composed of the following elements:
 + **`bucket-name`** – The name of your S3 bucket\.

@@ -79,5 +79,5 @@ In addition to your Siebel Database, you can also use Amazon Web Services to sup
 | Web Servers\(with Siebel Web Server Extensions\) |  You can install multiple Web Servers on multiple EC2 instances\. You can then use Elastic Load Balancing to distribute incoming traffic among the instances\. For more information, see [What is Elastic Load Balancing?](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/elastic-load-balancing.html)   | 
 | Siebel Gateway Name Server |  You can host your Siebel Gateway Name Server on an EC2 instance\. You can then put your server in the same VPC with the DB instance and use the VPC security group to access the database\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
 
-## Related topics<a name="w171aac31d103c19c19"></a>
+## Related topics<a name="w173aac31d103c19c19"></a>
 + [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)

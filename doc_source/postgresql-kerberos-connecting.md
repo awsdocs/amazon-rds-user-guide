@@ -15,7 +15,7 @@ To use pgAdmin to connect to PostgreSQL with Kerberos authentication, take the f
 1. On the **Connection** tab, enter the following information from your RDS for PostgreSQL database:
    + For **Host**, enter the endpoint\. Use a format such as `PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com`\.
 
-     If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
+     If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a specialized endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\. 
 
      For example, suppose that the domain name for the AWS Managed Active Directory is `corp.example.com`\. Then for **Host**, use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com.`
    + For **Port**, enter the assigned port\.
@@ -47,7 +47,7 @@ To use psql to connect to PostgreSQL with Kerberos authentication, take the foll
    % echo " 34.210.197.118  PostgreSQL-endpoint.AWS-Region.rds.amazonaws.com" >> /etc/hosts
    ```
 
-   If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a special endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\.
+   If you're using an on\-premises Microsoft Active Directory from a Windows client, then you need to connect using a specialized endpoint\. Instead of using the Amazon domain `rds.amazonaws.com` in the host endpoint, use the domain name of the AWS Managed Active Directory\.
 
    For example, suppose that the domain name for your AWS Managed Active Directory is `corp.example.com`\. Then use the format `PostgreSQL-endpoint.AWS-Region.corp.example.com` for the endpoint and put it in the `/etc/hosts` file\.
 

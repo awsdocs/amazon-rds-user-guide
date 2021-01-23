@@ -7,6 +7,9 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
+**Note**  
+For information about connecting to your database using pgAdmin with IAM authentication, see the blog post [Using IAM authentication to connect with pgAdmin Amazon Aurora PostgreSQL or Amazon RDS for PostgreSQL](http://aws.amazon.com/blogs/database/using-iam-authentication-to-connect-with-pgadmin-amazon-aurora-postgresql-or-amazon-rds-for-postgresql/)\.
+
 **Topics**
 + [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken.PostgreSQL)
 + [Connecting to an Amazon RDS PostgreSQL instance](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.Connect.PostgreSQL)

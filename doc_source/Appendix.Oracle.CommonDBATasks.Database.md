@@ -49,7 +49,7 @@ By default, tablespaces are created with auto\-extend enabled, and no maximum si
 The following example creates a tablespace named `users2` with a starting size of 1 gigabyte and a maximum size of 10 gigabytes: 
 
 ```
-CREATE TABLESPACE users2 DATAFILE 'users2.dbf' SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
+CREATE TABLESPACE users2 DATAFILE SIZE 1G AUTOEXTEND ON MAXSIZE 10G;
 ```
 
 The following example creates temporary tablespace named `temp01`:
@@ -71,7 +71,7 @@ ALTER TABLESPACE users2 RESIZE 200M;
 The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
 
 ```
-ALTER TABLESPACE users2 ADD DATAFILE 'users2b.dbf' SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
+ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
 ```
 
 ## Setting the default tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefaultTablespace"></a>
@@ -88,7 +88,7 @@ To set the default tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_u
 The following example sets the default tablespace to *users2*: 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2');
+EXEC rdsadmin.rdsadmin_util.alter_default_tablespace(tablespace_name => 'users2');
 ```
 
 ## Setting the default temporary tablespace<a name="Appendix.Oracle.CommonDBATasks.SettingDefTempTablespace"></a>
@@ -105,7 +105,7 @@ To set the default temporary tablespace, use the Amazon RDS procedure `rdsadmin.
 The following example sets the default temporary tablespace to *temp01*\. 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
+EXEC rdsadmin.rdsadmin_util.alter_default_temp_tablespace(tablespace_name => 'temp01');
 ```
 
 ## Checkpointing a database<a name="Appendix.Oracle.CommonDBATasks.CheckpointingDatabase"></a>
@@ -115,7 +115,7 @@ To checkpoint the database, use the Amazon RDS procedure `rdsadmin.rdsadmin_util
 The following example checkpoints the database\.
 
 ```
-exec rdsadmin.rdsadmin_util.checkpoint;
+EXEC rdsadmin.rdsadmin_util.checkpoint;
 ```
 
 ## Setting distributed recovery<a name="Appendix.Oracle.CommonDBATasks.SettingDistributedRecovery"></a>
@@ -125,13 +125,13 @@ To set distributed recovery, use the Amazon RDS procedures `rdsadmin.rdsadmin_ut
 The following example enables distributed recovery\.
 
 ```
-exec rdsadmin.rdsadmin_util.enable_distr_recovery;
+EXEC rdsadmin.rdsadmin_util.enable_distr_recovery;
 ```
 
 The following example disables distributed recovery\.
 
 ```
-exec rdsadmin.rdsadmin_util.disable_distr_recovery;
+EXEC rdsadmin.rdsadmin_util.disable_distr_recovery;
 ```
 
 ## Setting the database time zone<a name="Appendix.Oracle.CommonDBATasks.TimeZoneSupport"></a>
@@ -159,13 +159,13 @@ The `alter_db_time_zone` procedure has the following parameters\.
 The following example changes the time zone to UTC plus three hours\. 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => '+3:00');
+EXEC rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => '+3:00');
 ```
 
 The following example changes the time zone to the Africa/Algiers time zone\. 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
+EXEC rdsadmin.rdsadmin_util.alter_db_time_zone(p_new_tz => 'Africa/Algiers');
 ```
 
 After you alter the time zone by using the `alter_db_time_zone` procedure, reboot your DB instance for the change to take effect\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\. For information about upgrading time zones, see [Time zone considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.DST)\.

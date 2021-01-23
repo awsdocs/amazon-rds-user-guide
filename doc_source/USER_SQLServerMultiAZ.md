@@ -24,6 +24,26 @@ Amazon RDS supports Multi\-AZ for SQL Server in all AWS Regions, with the follow
 + Asia Pacific \(Tokyo\): Supported for [DB instances in VPCs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)\.
 + South America \(São Paulo\): Supported on all [DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) except m1 and m2\.
 
+You can use the following SQL query to determine whether your SQL Server DB instance is Single\-AZ, Multi\-AZ with DBM, or Multi\-AZ with Always On AGs:
+
+```
+SELECT CASE WHEN dm.mirroring_state_desc IS NOT NULL THEN 'Multi-AZ (Mirroring)'
+    WHEN dhdrs.group_database_id IS NOT NULL THEN 'Multi-AZ (AlwaysOn)'
+    ELSE 'Single-AZ'
+    END 'high_availability'
+FROM sys.databases sd
+LEFT JOIN sys.database_mirroring dm ON sd.database_id = dm.database_id
+LEFT JOIN sys.dm_hadr_database_replica_states dhdrs ON sd.database_id = dhdrs.database_id AND dhdrs.is_local = 1
+WHERE DB_NAME(sd.database_id) = 'rdsadmin';
+```
+
+The output resembles the following:
+
+```
+high_availability
+Multi-AZ (Mirroring)
+```
+
 ## Adding Multi\-AZ to a Microsoft SQL Server DB instance<a name="USER_SQLServerMultiAZ.Adding"></a>
 
 When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 

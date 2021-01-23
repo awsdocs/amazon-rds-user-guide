@@ -40,10 +40,11 @@ For PostgreSQL read replicas, you can monitor replication lag in Amazon CloudWat
 ## Read replica limitations with PostgreSQL<a name="USER_PostgreSQL.Replication.ReadReplicas.Limitations"></a>
 
 The following are limitations for PostgreSQL read replicas: 
-+ Each PostgreSQL read replicas is read\-only and can't be made a writable read replica\.
-+ You can't create a read replica from another read replica \(that is, you can't create cascading read replicas\)\. 
++ Each PostgreSQL read replicas is read\-only\. You can't make a writable read replica\.
++ You can't create a read replica from another read replica\. Thus, you can't create cascading read replicas\. 
 + You can promote a PostgreSQL read replica to be a new source DB instance\. However, the read replica doesn't become the new source DB instance automatically\. The read replica, when promoted, stops receiving WAL communications and is no longer a read\-only instance\. You must set up any replication you intend to have going forward because the promoted read replica is now a new source DB instance\. 
-+ A PostgreSQL read replica reports a replication lag of up to five minutes if there are no user transactions occurring on the source DB instance\. 
++ If no user transactions are occurring on the source DB instance, a PostgreSQL read replica reports a replication lag of up to five minutes\.
++ You can't create physical replication slots in PostgreSQL\.
 
 ## Replication interruptions with PostgreSQL read replicas<a name="USER_PostgreSQL.Replication.ReadReplicas.Interruptions"></a>
 

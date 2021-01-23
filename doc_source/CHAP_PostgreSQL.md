@@ -1653,6 +1653,10 @@ Beginning with PostgreSQL version 10\.4, RDS supports the publication and subscr
 
 For more information on PostgreSQL logical replication, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/static/logical-replication.html)\. 
 
+**Topics**
++ [Logical decoding and logical replication](#PostgreSQL.Concepts.General.FeatureSupport.LogicalDecoding)
++ [Working with logical replication slots](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplicationSlots)
+
 ##### Logical decoding and logical replication<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalDecoding"></a>
 
 RDS for PostgreSQL supports the streaming of WAL changes using logical replication slots\. Amazon RDS supports logical decoding for a PostgreSQL DB instance version 9\.5\.4 and higher\. You can set up logical replication slots on your instance and stream database changes through these slots to a client such as `pg_recvlogical`\. Logical replication slots are created at the database level and support replication connections to a single database\. 
@@ -1675,15 +1679,10 @@ For more information on PostgreSQL logical decoding, see the [ PostgreSQL docume
 
 ##### Working with logical replication slots<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplicationSlots"></a>
 
-You can use SQL commands to work with logical slots\. For example, the following command creates a logical slot named test\_slot using the default PostgreSQL output plugin test\_decoding\.
+You can use SQL commands to work with logical slots\. For example, the following command creates a logical slot named `test_slot` using the default PostgreSQL output plugin `test_decoding`\.
 
 ```
 SELECT * FROM pg_create_logical_replication_slot('test_slot', 'test_decoding');
-```
-
-The output should be similar to the following\.
-
-```
 slot_name    | xlog_position
 -----------------+---------------
 regression_slot | 0/16B1970
@@ -1700,11 +1699,6 @@ To drop a logical slot, use the following command\.
 
 ```
 SELECT pg_drop_replication_slot('test_slot');
-```
-
-The output should be similar to the following\.
-
-```
 pg_drop_replication_slot
 -----------------------
 
@@ -1713,12 +1707,21 @@ pg_drop_replication_slot
 
 For more examples on working with logical replication slots, see [ Logical decoding examples](https://www.postgresql.org/docs/9.5/static/logicaldecoding-example.html) in the PostgreSQL documentation\.
 
-Once you create the logical replication slot, you can start streaming\. The following example shows how logical decoding is controlled over the streaming replication protocol, using the program pg\_recvlogical included in the PostgreSQL distribution\. This requires that client authentication is set up to allow replication connections\.
+After you create the logical replication slot, you can start streaming\. The following example shows how logical decoding is controlled over the streaming replication protocol\. This uses the program `pg_recvlogical`, which is included in the PostgreSQL distribution\. This requires that client authentication is set up to allow replication connections\.
 
 ```
 pg_recvlogical -d postgres --slot test_slot -U master 
     --host sg-postgresql1.c6c8mresaghgv0.us-west-2.rds.amazonaws.com 
     -f -  --start
+```
+
+To see the contents of the `pg_replication_origin_status` view, query the `pg_show_replication_origin_status()` function\.
+
+```
+SELECT * FROM pg_show_replication_origin_status();
+local_id | external_id | remote_lsn | local_lsn
+----------+-------------+------------+-----------
+(0 rows)
 ```
 
 ##### Event triggers for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.EventTriggers"></a>

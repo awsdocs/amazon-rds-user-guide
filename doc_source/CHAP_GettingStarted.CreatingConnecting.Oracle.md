@@ -79,13 +79,27 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    1. Choose the Oracle DB instance name to display its details\. 
 
-   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+   1. On the **Connectivity & security** tab, copy the following pieces of information:
+      + Endpoint
+      + Port
+
+      You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[My DB instances list\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/OracleConnect1.png)
 
-1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. The value for `Host` is the endpoint for your DB instance, and the value for `Port` is the port you assigned the DB instance\. The value for the Oracle `SID` is the name of the DB instance's database that you specified when you created the DB instance, not the name of the DB instance\. 
+   1. On the **Configuration** tab, copy the following pieces of information:
+      + DB name \(not the DB instance ID\)
+      + Master username
+
+      You need both the DB name and the master username to connect to the DB instance\. 
+
+1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. Use the following values:
+   + For `dbuser`, enter the name of the master user that you copied in the preceding steps\.
+   + For `HOST=endpoint`, enter the endpoint that you copied in the preceding steps\.
+   + For `PORT=portnum`, enter the port number that you copied in the preceding steps\.
+   + For `SID=DB_NAME`, enter the Oracle database name \(not the instance name\) that you copied in the preceding steps\.
 
    ```
-   PROMPT>sqlplus 'mydbusr@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint)(PORT=1521))(CONNECT_DATA=(SID=ORCL)))'
+   sqlplus 'dbuser@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint)(PORT=portnum))(CONNECT_DATA=(SID=DB_NAME)))'
    ```
 
    You should see output similar to the following\. 

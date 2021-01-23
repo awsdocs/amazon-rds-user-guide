@@ -222,7 +222,7 @@ Export your PostgreSQL data to Amazon S3 by calling the [aws\_s3\.query\_export\
 Before you use the `aws_s3.query_export_to_s3` function, be sure to complete the following prerequisites:
 + Install the required PostgreSQL extensions as described in [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)\.
 + Determine where to export your data to Amazon S3 as described in [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)\.
-+ Make sure that the DB cluster has export access to Amazon S3 as described in [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)\.
++ Make sure that the DB instance has export access to Amazon S3 as described in [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)\.
 
 The examples following use a database table called `sample_table`\. These examples export the data into a bucket called `sample-bucket`\. The example table and data are created with the following SQL statements in psql\.
 
@@ -340,7 +340,7 @@ An `aws_commons._s3_uri_1` composite type containing the following information a
 + `file_path` – The Amazon S3 file name and path\.
 + `region` – The AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-  Currently, this value must be the same AWS Region as that of the exporting DB cluster\. The default is the AWS Region of the exporting DB cluster\. 
+  Currently, this value must be the same AWS Region as that of the exporting DB instance\. The default is the AWS Region of the exporting DB instance\. 
 To create an `aws_commons._s3_uri_1` composite structure, see the [aws\_commons\.create\_s3\_uri](#aws_commons.create_s3_uri) function\.
 
 *options*  
@@ -373,7 +373,7 @@ A required text string containing the Amazon S3 file name including the path of 
 
 *region*  
 An optional text string containing the AWS Region that the bucket is in\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.  
-Currently, this value must be the same AWS Region as that of the exporting DB cluster\. The default is the AWS Region of the exporting DB cluster\. 
+Currently, this value must be the same AWS Region as that of the exporting DB instance\. The default is the AWS Region of the exporting DB instance\. 
 
 *options*  
 An optional text string containing arguments for the PostgreSQL `COPY` command\. These arguments specify how the data is to be copied when exported\. For more details, see the [PostgreSQL COPY documentation](https://www.postgresql.org/docs/current/sql-copy.html)\.

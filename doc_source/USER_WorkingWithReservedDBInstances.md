@@ -96,7 +96,11 @@ Your upfront payment for a reserved DB instance reserves the resources for your 
 
 If you delete a DB instance that is covered by a reserved DB instance discount, you can launch another DB instance with compatible specifications\. In this case, you continue to get the discounted rate during the reservation term \(one or three years\)\. 
 
-## Console<a name="USER_WorkingWithReservedDBInstances.CON"></a>
+## Working with reserved DB instances<a name="USER_WorkingWithReservedDBInstances.WorkingWith"></a>
+
+You can use the AWS Management Console, the AWS CLI, and the RDS API to work with reserved DB instances\.
+
+### Console<a name="USER_WorkingWithReservedDBInstances.CON"></a>
 
 You can use the AWS Management Console to work with reserved DB instances as shown in the following procedures\. 
 
@@ -166,7 +170,7 @@ After you have purchased reserved DB instances, you can get information about yo
 
    The reserved DB instances for your account appear\. To see detailed information about a particular reserved DB instance, choose that instance in the list\. You can then see detailed information about that instance in the detail pane at the bottom of the console\. 
 
-## AWS CLI<a name="USER_WorkingWithReservedDBInstances.CLI"></a>
+### AWS CLI<a name="USER_WorkingWithReservedDBInstances.CLI"></a>
 
 You can use the AWS CLI to work with reserved DB instances as shown in the following examples\. 
 
@@ -234,7 +238,7 @@ The command returns output similar to the following:
 2. RESERVATION  MyReservation     db.m1.small  y         2011-12-09T23:37:44.720Z  1y        455.00 USD   0.092 USD    1      retired  mysql        Partial  Upfront
 ```
 
-## RDS API<a name="USER_WorkingWithReservedDBInstances.API"></a>
+### RDS API<a name="USER_WorkingWithReservedDBInstances.API"></a>
 
 You can use the RDS API to work with reserved DB instances as shown in the following examples\. 
 
