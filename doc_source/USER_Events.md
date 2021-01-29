@@ -160,6 +160,8 @@ The following table shows the event category and a list of events when an Aurora
 
 |  Category  | RDS event ID |  Description  | 
 | --- | --- | --- | 
+| creation | RDS\-EVENT\-0170 |  DB cluster created\.  | 
+| deletion | RDS\-EVENT\-0171 |  DB cluster deleted\.  | 
 |  failover  | RDS\-EVENT\-0069 |  A failover for the DB cluster has failed\.  | 
 |  failover  | RDS\-EVENT\-0070 |  A failover for the DB cluster has restarted\.  | 
 |  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
@@ -196,8 +198,6 @@ The following table shows the event category and a list of events when an Aurora
 | notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
 | backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
 | backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
-| creation | RDS\-EVENT\-0170 |  DB cluster created\.  | 
-| deletion | RDS\-EVENT\-0171 |  DB cluster deleted\.  | 
 | notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## Subscribing to Amazon RDS event notification<a name="USER_Events.Subscribing"></a>
