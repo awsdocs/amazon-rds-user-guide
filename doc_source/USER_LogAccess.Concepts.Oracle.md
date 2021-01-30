@@ -4,7 +4,7 @@ You can access Oracle alert logs, audit files, and trace files by using the Amaz
 
 The Oracle audit files provided are the standard Oracle auditing files\. Amazon RDS supports the Oracle fine\-grained auditing \(FGA\) feature\. However, log access doesn't provide access to FGA events that are stored in the `SYS.FGA_LOG$` table and that are accessible through the `DBA_FGA_AUDIT_TRAIL` view\. 
 
-The `DescribeDBLogFiles` API operation that lists the Oracle log files that are available for a DB instance ignores the `MaxRecords` parameter and returns up to 1,000 records\. 
+The [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) API operation that lists the Oracle log files that are available for a DB instance ignores the `MaxRecords` parameter and returns up to 1,000 records\. The call returns `LastWritten` as a POSIX date in milliseconds\.
 
 ## Retention schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
 

@@ -9,25 +9,28 @@ Amazon RDS provides three storage types: General Purpose SSD \(also known as gp2
 The following list briefly describes the three storage types: 
 + **General Purpose SSD** – General Purpose SSD volumes offer cost\-effective storage that is ideal for a broad range of workloads\. These volumes deliver single\-digit millisecond latencies and the ability to burst to 3,000 IOPS for extended periods of time\. Baseline performance for these volumes is determined by the volume's size\.
 
-  For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD storage](#Concepts.Storage.GeneralSSD)\. 
-+ **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\. 
+  For more information about General Purpose SSD storage, including the storage size ranges, see [General Purpose SSD storage](#Concepts.Storage.GeneralSSD)\.
++ **Provisioned IOPS** – Provisioned IOPS storage is designed to meet the needs of I/O\-intensive workloads, particularly database workloads, that require low I/O latency and consistent I/O throughput\.
 
-  For more information about provisioned IOPS storage, including the storage size ranges, see [Provisioned IOPS SSD storage](#USER_PIOPS)\. 
+  For more information about provisioned IOPS storage, including the storage size ranges, see [Provisioned IOPS SSD storage](#USER_PIOPS)\.
 + **Magnetic** – Amazon RDS also supports magnetic storage for backward compatibility\. We recommend that you use General Purpose SSD or Provisioned IOPS for any new storage needs\. The maximum amount of storage allowed for DB instances on magnetic storage is less than that of the other storage types\. For more information, see [Magnetic storage](#CHAP_Storage.Magnetic)\.
 
 Several factors can affect the performance of Amazon EBS volumes, such as instance configuration, I/O characteristics, and workload demand\. For more information about getting the most out of your Provisioned IOPS volumes, see [Amazon EBS volume performance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSPerformance.html)\. 
 
 ## General Purpose SSD storage<a name="Concepts.Storage.GeneralSSD"></a>
 
-General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances: 
+General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances:
 + MariaDB, MySQL, Oracle, and PostgreSQL database instances: 20 GiB–64 TiB
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB
 
-Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\. 
+Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\.
 
-Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits see, [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\. 
+Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
 
-Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\. 
+Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
+
+**Note**  
+DB instances that use General Purpose SSD storage can experience much longer latency after read replica creation, Multi\-AZ conversion, and DB snapshot restoration than instances that use Provisioned IOPS storage\. If you need a DB instance with minimum latency after these operations, we recommend using Provisioned IOPS storage\.
 
 ### I/O credits and burst performance<a name="CHAP_Storage.IO.Credits"></a>
 
@@ -88,7 +91,13 @@ The following table shows the range of Provisioned IOPS and storage size range f
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
-\* Maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, r5, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\. For more information on DB instance IOPS performance, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\.
+**Note**  
+ For SQL Server, the maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, m5d, r5, r5b, r5d, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\.  
+For Oracle, the maximum IOPS of 256,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the r5b instance type\. Other instance families guarantee performance up to 80,000 IOPS\.  
+For PostgreSQL, the maximum IOPS on the db\.m5\.8xlarge, db\.m5\.16xlarge, db\.r5\.8xlarge, and db\.r5\.16xlarge instance classes is 40,000\.
+
+**Important**  
+Depending on the instance class you're using, you might see lower IOPS performance than the maximum that RDS allows you to provision\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
 
 ### Combining Provisioned IOPS storage with Multi\-AZ deployments or read replicas<a name="Overview.ProvisionedIOPS-support"></a>
 
@@ -153,7 +162,8 @@ If there isn't at least one system resource that is at or near a limit, and addi
 
 To get the most performance out of your Amazon RDS database instance, choose a current generation instance type with enough bandwidth to support your storage type\. For example, you can choose EBS\-optimized instances and instances with 10\-gigabit network connectivity\.
 
-For the full list of Amazon EC2 instance types that support EBS optimization, see [Instance types that support EBS optimization](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html#ebs-optimization-support)\. 
+**Important**  
+Depending on the instance class you're using, you might see lower IOPS performance than the maximum that RDS allows you to provision\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
 
 We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. The following table shows the maximum storage that each DB instance class can scale to for each database engine\. All values are in tebibytes \(TiB\)\.
 

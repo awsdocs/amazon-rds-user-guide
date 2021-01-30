@@ -72,24 +72,4 @@ To upgrade an Oracle DB snapshot by using the Amazon RDS API, call the [ModifyDB
 + `DBSnapshotIdentifier` – The name of the DB snapshot\. 
 + `EngineVersion` – The version to upgrade the snapshot to\. 
 
-You might also need to include the following parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 
-+ `OptionGroupName` – The option group for the upgraded DB snapshot\. 
-
-**Example**  
-The following example upgrades a DB snapshot\.   
-
-```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=ModifyDBSnapshot
- 3.     &DBSnapshotIdentifier=mydbsnapshot
- 4.     &EngineVersion=11.2.0.4.v12
- 5.     &OptionGroupName=default:oracle-se1-11-2
- 6.     &SignatureMethod=HmacSHA256
- 7.     &SignatureVersion=4
- 8.     &Version=2014-10-31
- 9.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.     &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
-11.     &X-Amz-Date=20131016T233051Z
-12.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
+You might also need to include the `OptionGroupName` parameter\. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance\. For more information, see [Option group considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.OG)\. 

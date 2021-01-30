@@ -108,7 +108,7 @@ END;
 
 ## Enabling SYS\-owned Oracle Scheduler jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.Enabling"></a>
 
-To enable a SYS\-owned Oracle Scheduler job, use the `rdsadmin.rdsadmin_dbms_scheduler.disable` procedure\.
+To enable a SYS\-owned Oracle Scheduler job, use the `rdsadmin.rdsadmin_dbms_scheduler.enable` procedure\.
 
 This procedure uses the `name` common parameter for Oracle Scheduler tasks\. For more information, see [Common parameters for Oracle Scheduler procedures](#Appendix.Oracle.CommonDBATasks.Scheduler.CommonParameters)\.
 

@@ -132,14 +132,14 @@ aws rds modify-db-instance ^
 
 #### RDS API<a name="USER_Monitoring.OS.Enabling.Procedure.API"></a>
 
-To enable Enhanced Monitoring using the RDS API, in the following operations, set the `MonitoringInterval` parameter to a value other than `0` and set the `MonitoringRoleArn` parameter to the role you created in [Creating an IAM role for Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Prerequisites)\.
+To enable Enhanced Monitoring using the RDS API, set the `MonitoringInterval` parameter to a value other than `0` and set the `MonitoringRoleArn` parameter to the role you created in [Creating an IAM role for Enhanced Monitoring](#USER_Monitoring.OS.Enabling.Prerequisites)\. Set these parameters in the following actions:
 + [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
 + [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)
 + [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)
 
-The `MonitoringInterval` parameter specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values for the parameter are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
+The `MonitoringInterval` parameter specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
 
-To disable Enhanced Monitoring using the RDS API, set the `MonitoringInterval` parameter to `0` in the these operations\.
+To disable Enhanced Monitoring using the RDS API, set `MonitoringInterval` to `0`\.
 
 ## Viewing Enhanced Monitoring<a name="USER_Monitoring.OS.Viewing"></a>
 

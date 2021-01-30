@@ -10,7 +10,9 @@ RDS on Outposts supports automated maintenance and upgrades of DB instances\. Fo
 
 RDS on Outposts uses encryption at rest for DB instances and DB snapshots using your AWS Key Management Service \(AWS KMS\) key\. For more information about encryption at rest, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
-When network connectivity to the AWS Region isn't available, your DB instance continues to run locally\. You can't create new DB instances or take new actions on existing DB instances\. Automatic backups don't occur when there is no connectivity\. If there is a DB instance failure, the DB instance isn't automatically replaced until connectivity is restored\. We recommend restoring network connectivity as soon as possible\.
+By default, EC2 instances in Outposts subnets can use the Amazon Route 53 DNS Service to resolve domain names to IP addresses\. You might encounter longer DNS resolution times with Route 53, depending on the path latency between your Outpost and the AWS Region\. In such cases, you can use the DNS servers installed locally in your on\-premises environment\. For more information, see [DNS](https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#dns) in the *AWS Outposts User Guide*\.
+
+When network connectivity to the AWS Region isn't available, your DB instance continues to run locally\. You can continue to access DB instances using DNS name resolution by configuring a local DNS server as a secondary server\. However, you can't create new DB instances or take new actions on existing DB instances\. Automatic backups don't occur when there is no connectivity\. If there is a DB instance failure, the DB instance isn't automatically replaced until connectivity is restored\. We recommend restoring network connectivity as soon as possible\.
 
 **Topics**
 + [Prerequisites for Amazon RDS on AWS Outposts](#rds-on-outposts.prerequisites)
@@ -90,6 +92,8 @@ Amazon RDS on AWS Outposts supports the following DB instance classes:
   + db\.r5\.large
 
 Only General Purpose SSD storage is supported for RDS on Outposts DB instances\. For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+
+Amazon RDS manages maintenance and recovery for your DB instances and requires active capacity on the Outpost to do so\. We recommend that you configure N\+1 EC2 instances for each DB instance class in your production environments\. RDS on Outposts can use the extra capacity of these EC2 instances for maintenance and repair operations\. For example, if your production environments have 3 db\.m5\.large and 5 db\.r5\.xlarge DB instance classes, then we recommend that they have at least 4 m5\.large EC2 instances and 6 r5\.xlarge EC2 instances\. For more information, see [Resilience in AWS Outposts](https://docs.aws.amazon.com/outposts/latest/userguide/disaster-recovery-resiliency.html) in the *AWS Outposts User Guide*\.
 
 ## Customer\-owned IP addresses for RDS on Outposts<a name="rds-on-outposts.coip"></a>
 

@@ -279,7 +279,7 @@ The following CLI example requires the CloudWatch command line tools\. For more 
 The `StartTime` and `EndTime` values supplied in this example are for illustration only\. Substitute appropriate start and end time values for your DB instance\.
 
 **To view usage and performance statistics for a DB instance**
-+ Call the CloudWatch API `GetMetricStatistics` with the following parameters:
++ Call the CloudWatch API [https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html) with the following parameters:
   + `Statistics.member.1` = `Average`
   + `Namespace` = `AWS/RDS`
   + `StartTime` = `2009-10-16T00:00:00`

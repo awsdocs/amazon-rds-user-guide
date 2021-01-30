@@ -17,7 +17,15 @@ You can examine these metrics using the CloudWatch console, the AWS CLI, or the 
 For example, you can get the statistics for the `DBLoad` metric by running the [get\-metric\-statistics](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html) command\.
 
 ```
-aws cloudwatch get-metric-statistics --region us-west-2 --namespace AWS/RDS --metric-name DBLoad  --period 60 --statistics Average --start-time 1532035185 --end-time 1532036185 --dimensions  Name=DBInstanceIdentifier,Value=db-loadtest-0
+aws cloudwatch get-metric-statistics \
+    --region us-west-2 \
+    --namespace AWS/RDS \
+    --metric-name DBLoad  \
+    --period 60 \
+    --statistics Average \
+    --start-time 1532035185 \
+    --end-time 1532036185 \
+    --dimensions Name=DBInstanceIdentifier,Value=db-loadtest-0
 ```
 
 This example generates output similar to the following\.

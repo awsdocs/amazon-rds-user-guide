@@ -447,6 +447,3 @@ After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the sourc
    ```
 
 1. Enable additional Amazon RDS features such as Multi\-AZ support and read replicas\. For more information, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md) and [Working with read replicas](USER_ReadRepl.md)\.
-
-**Note**  
- If you no longer need the Amazon RDS instance used in this procedure, you should delete the RDS instance to reduce your Amazon AWS resource usage\. To delete an RDS instance, see [Deleting a DB instance](USER_DeleteInstance.md)\. 

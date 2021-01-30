@@ -8,3 +8,4 @@ In the following sections, you can find information about augmenting Amazon RDS 
 + [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)
 + [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)
 + [Using Database Mail on Amazon RDS for SQL Server](SQLServer.DBMail.md)
++ [Instance store support for the tempdb database on Amazon RDS for SQL Server](SQLServer.InstanceStore.md)

@@ -14,7 +14,7 @@
 
 Amazon RDS groups these events into categories that you can subscribe to so that you can be notified when an event in that category occurs\. You can subscribe to an event category for a DB instance, DB snapshot,  DB parameter group, or DB security group\. For example, if you subscribe to the Backup category for a given DB instance, you are notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you are notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 
-Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\. 
+Event notifications are sent to the addresses that you provide when you create the subscription\. You might want to create several different subscriptions, such as one subscription receiving all event notifications and another subscription that includes only critical events for your production DB instances\. You can easily turn off notification without deleting a subscription by choosing **No** for **Enabled** in the Amazon RDS console or by setting the `Enabled` parameter to `false` using the AWS CLI or Amazon RDS API\.
 
 **Important**  
 Amazon RDS doesn't guarantee the order of events sent in an event stream\. The event order is subject to change\.
@@ -303,39 +303,7 @@ aws rds describe-event-subscriptions --subscription-name myfirsteventsubscriptio
 
 ### API<a name="USER_Events.ListSubscription.API"></a>
 
-To list your current Amazon RDS event notification subscriptions, call the Amazon RDS API [ `DescribeEventSubscriptions`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventSubscriptions.html) action\. 
-
-**Example**  
-The following code example lists up to 100 event subscriptions\.  
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=DescribeEventSubscriptions
-   &MaxRecords=100
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &Version=2014-10-31
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140428T161907Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=4208679fe967783a1a149c826199080a066085d5a88227a80c6c0cadb3e8c0d4
-```
-The following example describes the `myfirsteventsubscription`\.  
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=DescribeEventSubscriptions
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &SubscriptionName=myfirsteventsubscription
-   &Version=2014-10-31
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140428T161907Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=4208679fe967783a1a149c826199080a066085d5a88227a80c6c0cadb3e8c0d4
-```
+To list your current Amazon RDS event notification subscriptions, call the Amazon RDS API [ `DescribeEventSubscriptions`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventSubscriptions.html) action\.
 
 ## Modifying an Amazon RDS event notification subscription<a name="USER_Events.Modifying"></a>
 

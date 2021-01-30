@@ -19,6 +19,7 @@ The following are the Standard DB instance classes available:
 + **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. The db\.m6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
++ **db\.m5d** – Newest\-generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
@@ -32,6 +33,7 @@ The following are the Memory Optimized DB instance classes available:
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.r5b** – Newest\-generation instance classes that are optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
++ **db\.r5d** – Newest\-generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
@@ -80,6 +82,15 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m5d – Newest generation standard instance classes | 
+| db\.m5d\.24xlarge | No | Yes | No | No | No | 
+| db\.m5d\.16xlarge | No | Yes | No | No | No | 
+| db\.m5d\.12xlarge | No | Yes | No | No | No | 
+| db\.m5d\.8xlarge | No | Yes | No | No | No | 
+| db\.m5d\.4xlarge | No | Yes | No | No | No | 
+| db\.m5d\.2xlarge | No | Yes | No | No | No | 
+| db\.m5d\.xlarge | No | Yes | No | No | No | 
+| db\.m5d\.large | No | Yes | No | No | No | 
 | db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
@@ -130,6 +141,15 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r5d – Newest Generation Memory Optimized Instance Classes | 
+| db\.r5d\.24xlarge | No | Yes | No | No | No | 
+| db\.r5d\.16xlarge | No | Yes | No |  No  | No | 
+| db\.r5d\.12xlarge | No | Yes | No | No | No | 
+| db\.r5d\.8xlarge | No | Yes | No |  No  | No | 
+| db\.r5d\.4xlarge | No | Yes | No | No | No | 
+| db\.r5d\.2xlarge | No | Yes | No | No | No | 
+| db\.r5d\.xlarge | No | Yes | No | No | No | 
+| db\.r5d\.large | No | Yes | No | No | No | 
 | db\.r5b – Newest Generation Memory Optimized Instance Classes | 
 | db\.r5b\.24xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.16xlarge | No | Yes | No |  Yes  | No | 
@@ -156,7 +176,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r3 – Previous generation memory optimized instance classes | 
-| db\.r3\.8xlarge | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.8xlarge\*\* | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
@@ -229,6 +249,14 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.m5\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 |  db\.m5\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.m5\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
+|  db\.m5d\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
+|  db\.m5d\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
+|  db\.m5d\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
+|  db\.m5d\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 
+|  db\.m5d\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
+|  db\.m5d\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
+|  db\.m5d\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
+|  db\.m5d\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.m4\.10xlarge  |  40  |  20  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20  |  1, 2  | 
 |  db\.m4\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.r3\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
@@ -252,6 +280,14 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.r5b\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
 |  db\.r5b\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.r5b\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
+|  db\.r5d\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
+|  db\.r5d\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
+|  db\.r5d\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
+|  db\.r5d\.4xlarge  |  16  |  8  |  2  |  2, 4, 6, 8  |  1, 2  | 
+|  db\.r5d\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
+|  db\.r5d\.12xlarge  |  48  |  24  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
+|  db\.r5d\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
+|  db\.r5d\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.r4\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.r4\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 
 |  db\.r4\.2xlarge  |  8  |  4  |  2  |  1, 2, 3, 4  |  1, 2  | 
@@ -573,6 +609,15 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.m6g\.2xlarge\* | 8 | – | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.xlarge\* | 4 | – | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m6g\.large\* | 2 | – | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m5d – Newest generation standard instance classes | 
+| db\.m5d\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.m5d\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
+| db\.m5d\.12xlarge | 48 | 173 | 192 | Yes | Yes | 9,500 | 10 Gbps | 
+| db\.m5d\.8xlarge | 32 | 131 | 128 | Yes | Yes | 6,800 | 10 Gbps | 
+| db\.m5d\.4xlarge | 16 | 61 | 64 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.m5d\.2xlarge\* | 8 | 31 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m5d\.xlarge\* | 4 | 15 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.m5d\.large\* | 2 | 10 | 8 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.m5 – Latest generation standard instance classes | 
 | db\.m5\.24xlarge | 96 | 345 | 384 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.m5\.16xlarge | 64 | 262 | 256 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -632,6 +677,15 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r5b\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
 | db\.r5b\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
 | db\.r5b\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 10,000 | Up to 10 Gbps | 
+| db\.r5d – Newest generation memory optimized instance classes | 
+| db\.r5d\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
+| db\.r5d\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
+| db\.r5d\.12xlarge | 48 | 173 | 384 | Yes | Yes | 9,500 | 10 Gbps | 
+| db\.r5d\.8xlarge | 32 | 132 | 256 | Yes | Yes | 6,800 | 10 Gbps | 
+| db\.r5d\.4xlarge | 16 | 71 | 128 | Yes | Yes | 4,750 | Up to 10 Gbps | 
+| db\.r5d\.2xlarge\* | 8 | 38 | 64 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5d\.xlarge\* | 4 | 19 | 32 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
+| db\.r5d\.large\* | 2 | 10 | 16 | Yes | Yes | Up to 4,750 | Up to 10 Gbps | 
 | db\.r5 – Latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 96 | 347 | 768 | Yes | Yes | 19,000 | 25 Gbps | 
 | db\.r5\.16xlarge | 64 | 264 | 512 | Yes | Yes | 13,600 | 20 Gbps | 
@@ -648,7 +702,7 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.r4\.2xlarge | 8 | 27 | 61 | Yes | Yes | 1,700 | Up to 10 Gbps | 
 | db\.r4\.xlarge | 4 | 13\.5 | 30\.5 | Yes | Yes | 850 | Up to 10 Gbps | 
 | db\.r4\.large | 2 | 7 | 15\.25 | Yes | Yes | 425 | Up to 10 Gbps | 
-| db\.r3 – Previous generation memory optimized instance classes | 
+| db\.r3 – Previous generation memory optimized instance classes \(deprecated\) | 
 | db\.r3\.8xlarge | 32 | 104 | 244 | No | No | — | 10 Gbps | 
 | db\.r3\.4xlarge | 16 | 52 | 122 | No | Yes | 2,000 | High | 
 | db\.r3\.2xlarge | 8 | 26 | 61 | No | Yes | 1,000 | High | 
@@ -674,3 +728,5 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 | db\.t2\.micro | 1 | Variable | 1 | Yes | No | — | Low | 
 
 \* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
+
+\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

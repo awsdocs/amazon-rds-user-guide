@@ -182,21 +182,7 @@ To change a read\-only replica to a mounted state, set `--replica-mode` to `moun
 
 ### RDS API<a name="oracle-read-replicas.creating-in-mounted-mode.api"></a>
 
-To create an Oracle replica in mounted mode, specify `ReplicaMode=mounted` in the RDS API operation [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. 
-
-```
-https://rds.amazonaws.com/
-	?Action=CreateDBInstanceReadReplica
-	&DBInstanceIdentifier=myreadreplica
-	&SourceDBInstanceIdentifier=mydbinstance
-	&Version=2012-01-15
-	&SignatureVersion=2
-	&SignatureMethod=HmacSHA256
-	&Timestamp=2012-01-20T22%3A06%3A23.624Z
-	&AWSAccessKeyId=<AWS Access Key ID>
-	&Signature=<Signature>
-	&ReplicaMode=mounted
-```
+To create an Oracle replica in mounted mode, specify `ReplicaMode=mounted` in the RDS API operation [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
 
 ## Modifying the Oracle replica mode<a name="oracle-read-replicas.changing-replica-mode"></a>
 
@@ -248,21 +234,7 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="oracle-read-replicas.changing-replica-mode.api"></a>
 
-To change a read\-only replica to mounted mode, set `ReplicaMode=mounted` in [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. To change a mounted replica to read\-only mode, set `ReplicaMode=read-only`\. 
-
-```
-https://rds.amazonaws.com/
-	?Action=ModifyDBInstance
-	&DBInstanceIdentifier=myreadreplica
-	&SourceDBInstanceIdentifier=mysourcedb
-	&Version=2012-01-15
-	&SignatureVersion=2
-	&SignatureMethod=HmacSHA256
-	&Timestamp=2012-01-20T22%3A06%3A23.624Z
-	&AWSAccessKeyId=<AWS Access Key ID>
-	&Signature=<Signature>
-	&ReplicaMode=mode
-```
+To change a read\-only replica to mounted mode, set `ReplicaMode=mounted` in [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. To change a mounted replica to read\-only mode, set `ReplicaMode=read-only`\.
 
 ## Troubleshooting Oracle replicas<a name="oracle-read-replicas.troubleshooting"></a>
 

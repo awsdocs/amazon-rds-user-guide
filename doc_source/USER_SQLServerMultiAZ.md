@@ -46,9 +46,9 @@ Multi-AZ (Mirroring)
 
 ## Adding Multi\-AZ to a Microsoft SQL Server DB instance<a name="USER_SQLServerMultiAZ.Adding"></a>
 
-When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
+When you create a new SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with Database Mirroring \(DBM\) or Always On AGs\. You do so by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from the **Multi\-AZ Deployment** list on the **Modify DB Instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+When you modify an existing SQL Server DB instance using the AWS Management Console, you can add Multi\-AZ with DBM or AGs by choosing **Yes \(Mirroring / Always On\)** from **Multi\-AZ deployment** on the **Modify DB instance** page\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 **Note**  
 If your DB instance is running Database Mirroring \(DBM\)—not Always On Availability Groups \(AGs\)—you might need to disable in\-memory optimization before you add Multi\-AZ\. Disable in\-memory optimization with DBM before you add Multi\-AZ if your DB instance runs SQL Server 2014, 2016, or 2017 Enterprise Edition and has in\-memory optimization enabled\.   
@@ -83,40 +83,36 @@ The following are some recommendations for working with Multi\-AZ deployments fo
   + "Memory optimized" rather than "General purpose"
 + You can't select the Availability Zone \(AZ\) for the secondary instance, so when you deploy application hosts, take this into account\. Your database might fail over to another AZ, and the application hosts might not be in the same AZ as the database\. For this reason, we recommend that you balance your application hosts across all AZs in the given AWS Region\. 
 + For best performance, don't enable Database Mirroring or Always On AGs during a large data load operation\. If you want your data load to be as fast as possible, finish loading data before you convert your DB instance to a Multi\-AZ deployment\. 
-+ Applications that access the SQL Server databases should have exception handling that catches connection errors\. The following code sample shows a try/catch block that catches a communication error\. 
++ Applications that access the SQL Server databases should have exception handling that catches connection errors\. The following code sample shows a try/catch block that catches a communication error\. In this example, the `break` statement exits the `while` loop if the connection is successful, but retries up to 10 times if an exception is thrown\.
 
   ```
-  for (int iRetryCount = 0; (iRetryCount < RetryMaxAttempts && keepInserting); iRetryCount++) 
+  int RetryMaxAttempts = 10;
+  int RetryIntervalPeriodInSeconds = 1;
+  int iRetryCount = 0;
+  while (iRetryCount < RetryMaxAttempts)
   {
      using (SqlConnection connection = new SqlConnection(DatabaseConnString)) 
      {
         using (SqlCommand command = connection.CreateCommand()) 
         {
            command.CommandText = "INSERT INTO SOME_TABLE VALUES ('SomeValue');";
-  
-           try 
+           try
            {
               connection.Open();
-  				
-              while (keepInserting) 
-              {
-                 command.ExecuteNonQuery();
-                 intervalCount++;
-              }
-                    connection.Close();          
+              command.ExecuteNonQuery();
+              break;
            }
-           
            catch (Exception ex) 
            {
-                    Logger(ex.Message);
+              Logger(ex.Message);
+              iRetryCount++;
+           }
+           finally {
+              connection.Close();
            }
         }
      }
-  
-     if (iRetryCount < RetryMaxAttempts && keepInserting) 
-     {
-              Thread.Sleep(RetryIntervalPeriodInSeconds * 1000);
-     }
+     Thread.Sleep(RetryIntervalPeriodInSeconds * 1000);
   }
   ```
 + Don't use the `Set Partner Off` command when working with Multi\-AZ instances\. For example, don't do the following\. 

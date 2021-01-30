@@ -99,9 +99,12 @@ By default, the console displays top SQL queries that are contributing to the da
 
 ![\[Top SQL\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4.png)
 
-To see the components of a query, select the query, and then choose the \+\. A *SQL digest* is a composite of multiple actual queries that are structurally similar but that possibly have different literal values\. In the following screenshot, the selected query is a digest\.
+To see the components of a query, select the query, and then choose the \+\. A *SQL digest* is a composite of multiple actual queries that are structurally similar but that possibly have different literal values\. In the following screenshot, the selected query is a digest\. The digest replaces hardcoded values with a question mark\.
 
 ![\[Selected SQL digest\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_insights_4b.png)
+
+**Note**  
+A SQL digest groups similar SQL statements, but does not redact sensitive information\.
 
 In **Top sql**, the **Load by waits \(AAS\)** column illustrates the percentage of the database load associated with each top load item\. This column reflects the load for that item by whatever grouping is currently selected in the **DB Load Chart**\. For example, you might group the **DB Load Chart** chart by wait states\. You examine SQL queries in the top load items table\. In this case, the **DB Load by Waits** bar is sized, segmented, and color\-coded to show how much of a given wait state that query is contributing to\. It also shows which wait states are affecting the selected query\.
 

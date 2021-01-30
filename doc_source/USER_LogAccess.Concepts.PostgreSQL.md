@@ -1,14 +1,43 @@
 # PostgreSQL database log files<a name="USER_LogAccess.Concepts.PostgreSQL"></a>
 
-Amazon RDS for PostgreSQL generates query and error logs\. RDS PostgreSQL writes autovacuum information and rds\_admin actions to the error log\. PostgreSQL also logs connections, disconnections, and checkpoints to the error log\. For more information, see the [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\.
-
-To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+Amazon RDS PostgreSQL generates query and error logs\. You can use log messages to troubleshoot performance and auditing issues while using the database\.
 
 **Topics**
++ [Overview of PostgreSQL logs](#USER_LogAccess.Concepts.PostgreSQL.overview)
 + [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)
-+ [Setting the output format of the logs](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
++ [Setting the message format](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
 + [Enabling query logging](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging)
 + [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)
+
+## Overview of PostgreSQL logs<a name="USER_LogAccess.Concepts.PostgreSQL.overview"></a>
+
+PostgreSQL generates event log files that contain useful information for DBAs\.
+
+### Log contents<a name="USER_LogAccess.Concepts.PostgreSQL.overview.log-contents"></a>
+
+The default logging level captures errors that affect your server\. By default, Amazon RDS PostgreSQL logging parameters capture all server errors, including the following:
++ Query failures
++ Login failures
++ Fatal server errors
++ Deadlocks
+
+To identify application issues, you can use the preceding error messages\. For example, if you converted a legacy application from Oracle to Amazon RDS PostgreSQL, some queries may not convert correctly\. These incorrectly formatted queries generate error messages in the logs, which you can use to identify the problematic code\.
+
+You can modify PostgreSQL logging parameters to capture additional information, including the following:
++ Connections and disconnections
++ Checkpoints
++ Schema modification queries
++ Queries waiting for locks
++ Queries consuming temporary disk storage
++ Backend autovacuum process consuming resources
+
+The preceding log information can help troubleshoot potential performance and auditing issues\. For more information, see [Error reporting and logging](https://www.postgresql.org/docs/current/runtime-config-logging.html) in the PostgreSQL documentation\. For a useful AWS blog about PostgreSQL logging, see [Working with RDS and Aurora PostgreSQL logs: Part 1](https://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-1/) and [Working with RDS and Aurora PostgreSQL logs: Part 2](https://aws.amazon.com/blogs/database/working-with-rds-and-aurora-postgresql-logs-part-2/)\.
+
+### Parameter groups<a name="USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups"></a>
+
+Each Amazon RDS PostgreSQL instance is associated with a *parameter group* that contains the engine specific configurations\. The engine configurations also include several parameters that control PostgreSQL logging behavior\. AWS provides the parameter groups with default configuration settings to use for your instances\. However, to change the default settings, you must create a clone of the default parameter group, modify it, and attach it to your instance\.
+
+To set logging parameters for a DB instance, set the parameters in a DB parameter group and associate that parameter group with the DB instance\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Setting the log retention period<a name="USER_LogAccess.Concepts.PostgreSQL.log_retention_period"></a>
 
@@ -16,7 +45,7 @@ To set the retention period for system logs, use the `rds.log_retention_period` 
 
 To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
-## Setting the output format of the logs<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
+## Setting the message format<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
 
 By default, Amazon RDS PostgreSQL generates logs in standard error \(stderr\) format\. In this format, each log message is prefixed with the information specified by the parameter `log_line_prefix`\. Amazon RDS only allows the following value for `log_line_prefix`:
 
@@ -97,7 +126,7 @@ To set up query logging, take the following steps:
 
 ## Publishing PostgreSQL logs to CloudWatch Logs<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs"></a>
 
-To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. 
+To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. For example, if you set `log_statements` to `ddl`, you can set up an alarm to alert whenever a DDL statement is executed\.
 
 To work with CloudWatch Logs, configure your RDS for PostgreSQL DB instance to publish log data to a log group\.
 

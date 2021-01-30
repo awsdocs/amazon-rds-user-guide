@@ -69,7 +69,7 @@ You can't view the master user password again\. If you don't record it, you migh
 
 ## Connecting to your sample Oracle DB instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure, you connect to your sample DB instance by using the Oracle sqlplus command line utility\. To download a stand\-alone version of this utility, see [SQL\*Plus User's Guide and Reference](http://download.oracle.com/docs/cd/B19306_01/server.102/b14357/ape.htm)\. 
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure, you connect to your sample DB instance by using the Oracle sqlplus command line utility\. To download a stand\-alone version of this utility, see [SQL\*Plus User's Guide and Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/SQL-Plus-instant-client.html#GUID-9DC272F8-0805-4582-87C6-67B2BC816A2C)\.
 
 **To connect to a DB instance using SQL\*Plus**
 
