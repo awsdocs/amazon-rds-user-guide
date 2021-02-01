@@ -37,11 +37,11 @@ The following are basic operational guidelines that everyone should follow when 
 
 An Amazon RDS performance best practice is to allocate enough RAM so that your *working set* resides almost completely in memory\. The working set is the data and indexes that are frequently in use on your instance\. The more you use the DB instance, the more the working set will grow\.
 
-To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring)\.
+To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\.
 
 ## Using Enhanced Monitoring to identify operating system issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
-When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Enhanced Monitoring](USER_Monitoring.OS.md)
+When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)
 
 ## Using metrics to identify performance issues<a name="CHAP_BestPractices.UsingMetrics"></a>
 
@@ -67,7 +67,7 @@ To troubleshoot performance issues, it's important to understand the baseline pe
 **Note**  
  Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
- You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring)\. 
+ You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\. 
 
 ****To set a CloudWatch alarm****
 
@@ -122,7 +122,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 **Database connections**
 +  DB Connections – The number of client sessions that are connected to the DB instance\. 
 
- For more detailed individual descriptions of the performance metrics available, see [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)\. 
+ For more detailed individual descriptions of the performance metrics available, see [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\. 
 
  Generally speaking, acceptable values for performance metrics depend on what your baseline looks like and what your application is doing\. Investigate consistent or trending variances from your baseline\. Advice about specific types of metrics follows: 
 +  **High CPU or RAM consumption –** High values for CPU or RAM consumption might be appropriate, provided that they are in keeping with your goals for your application \(like throughput or concurrency\) and are expected\. 

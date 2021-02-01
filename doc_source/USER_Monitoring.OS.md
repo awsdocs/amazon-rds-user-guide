@@ -1,4 +1,4 @@
-# Enhanced Monitoring<a name="USER_Monitoring.OS"></a>
+# Using Enhanced Monitoring<a name="USER_Monitoring.OS"></a>
 
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console\. Also, you can consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\.
 

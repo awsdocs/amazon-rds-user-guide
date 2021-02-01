@@ -128,7 +128,7 @@ Amazon RDS also supports magnetic storage for backward compatibility\. We recomm
 
 ## Monitoring storage performance<a name="Concepts.Storage.Metrics"></a>
 
-Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 The following metrics are useful for monitoring storage for your DB instance: 
 +  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\. 
