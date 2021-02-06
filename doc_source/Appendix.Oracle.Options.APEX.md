@@ -22,7 +22,8 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 | APEX version | Storage requirements | Supported Oracle database versions | Notes | 
 | --- | --- | --- | --- | 
-|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All  |  APEX version 20\.1\.v1 includes patch 30990551\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
+|  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All  |  This version includes patch p32006852\_2020\_Generic\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
+|  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All  |  This version includes patch 30990551\.  | 
 |  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All  |  | 
 |  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All  |  | 
 |  Oracle APEX version 18\.2\.v1  |  146 MiB  |  All except 19c  |  | 

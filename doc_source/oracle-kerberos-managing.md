@@ -7,7 +7,7 @@ For example, using the CLI, you can do the following:
 + To disable Kerberos authentication on a DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command and specify `none` for the `--domain` option\.
 + To move a DB instance from one domain to another, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command and specify the domain identifier of the new domain for the `--domain` option\.
 
-## Domain membership<a name="oracle-kerberos-managing.understanding"></a>
+## Viewing the status of domain membership<a name="oracle-kerberos-managing.understanding"></a>
 
 After you create or modify your DB instance, the DB instance becomes a member of the domain\. You can view the status of the domain membership for the DB instance in the console or by running the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command\. The status of the DB instance can be one of the following: 
 + `kerberos-enabled` – The DB instance has Kerberos authentication enabled\.
@@ -19,7 +19,7 @@ After you create or modify your DB instance, the DB instance becomes a member of
 + `enable-kerberos-failed` – A configuration problem has prevented AWS from enabling Kerberos authentication on the DB instance\. Correct the configuration problem before reissuing the command to modify the DB instance\.
 + `disabling-kerberos` – AWS is in the process of disabling Kerberos authentication on this DB instance\.
 
-A request to enable Kerberos authentication can fail because of a network connectivity issue or an incorrect IAM role\. If the attempt to enable Kerberos authentication fails when you create or modify a DB instance, first make sure that you are using the correct IAM role\. Then modify the DB instance to join the domain\.
+A request to enable Kerberos authentication can fail because of a network connectivity issue or an incorrect IAM role\. If the attempt to enable Kerberos authentication fails when you create or modify a DB instance, make sure that you're using the correct IAM role\. Then modify the DB instance to join the domain\.
 
 **Note**  
 Only Kerberos authentication with Amazon RDS for Oracle sends traffic to the domain's DNS servers\. All other DNS requests are treated as outbound network access on your DB instances running Oracle\. For more information about outbound network access with Amazon RDS for Oracle, see [Setting up a custom DNS server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\.

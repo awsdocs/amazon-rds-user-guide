@@ -6,6 +6,9 @@ There are two kinds of upgrades: major version upgrades and minor version upgrad
 
 The version numbering sequence is specific to each database engine\. For example, Amazon RDS MySQL 5\.7 and 8\.0 are major engine versions and upgrading from any 5\.7 version to any 8\.0 version is a major version upgrade\. Amazon RDS MySQL version 5\.7\.22 and 5\.7\.23 are minor versions and upgrading from 5\.7\.22 to 5\.7\.23 is a minor version upgrade\.
 
+**Important**  
+You can't modify a DB instance when it is being upgraded\. During an upgrade, the DB instance status is `upgrading`\.
+
 For more information about major and minor version upgrades for a specific DB engine, see the following documentation for your DB engine: 
 + [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)
 + [Upgrading the Microsoft SQL Server DB engine](USER_UpgradeDBInstance.SQLServer.md)

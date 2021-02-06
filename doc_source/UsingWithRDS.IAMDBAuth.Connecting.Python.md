@@ -33,7 +33,7 @@ os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
-client = boto3.client('rds')
+client = session.client('rds')
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 ```
@@ -51,7 +51,7 @@ REGION="us-east-1"
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
-client = boto3.client('rds')
+client = session.client('rds')
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 ```
@@ -86,7 +86,7 @@ os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='default')
-client = boto3.client('rds')
+client = session.client('rds')
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
@@ -115,7 +115,7 @@ DBNAME="mydb"
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
-client = boto3.client('rds')
+client = session.client('rds')
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 

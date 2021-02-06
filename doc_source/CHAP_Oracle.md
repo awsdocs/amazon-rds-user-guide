@@ -34,8 +34,8 @@ Following are the common management tasks you perform with an Amazon RDS Oracle 
 |  **Option Groups** If your DB instance will require specific database options, you should create an option group before you create the DB instance\.   |  [Options for Oracle DB instances](Appendix.Oracle.Options.md)  | 
 |  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL\*Plus\.   |  [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)  | 
 |  **Backup and Restore** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)  | 
-|  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Amazon RDS database log files](USER_LogAccess.md)  | 
+|  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md)  | 
 
 There are also advanced tasks and optional features for working with Oracle DB instances\. For more information, see the following documentation\.
 + For information on common DBA tasks for Oracle on Amazon RDS, see [Common DBA tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.md)\.
@@ -720,7 +720,7 @@ The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instan
 **Note**  
 If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
 
-After HugePages are active on your DB instance, you can view HugePages information by enabling enhanced monitoring\. For more information, see [Enhanced Monitoring](USER_Monitoring.OS.md)\. 
+After HugePages are active on your DB instance, you can view HugePages information by enabling enhanced monitoring\. For more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\. 
 
 ## Using utl\_http, utl\_tcp, and utl\_smtp with an Oracle DB instance<a name="Oracle.Concepts.ONA"></a>
 

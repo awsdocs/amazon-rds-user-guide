@@ -161,7 +161,7 @@ Using custom XA dynamic link libraries isn't supported\.
    	"OptionName":"MSDTC",
    	"Port":5000,
    	"VpcSecurityGroupMemberships":["sg-0abcdef123"],
-   	"OptionSettings":[{"Name":"AUTHENTICATION","Value":"MUTUAL"},{"Name":"TRANSACTION_LOG_SIZE","Value":4}]
+   	"OptionSettings":[{"Name":"AUTHENTICATION","Value":"MUTUAL"},{"Name":"TRANSACTION_LOG_SIZE","Value":"4"}]
    	}],
    "ApplyImmediately": true
    }
@@ -450,7 +450,7 @@ Logfile D:\rdsdbdata\MSDTC\Trace\dtctrace.log:
 Processing completed   Buffers: 1, Events: 3, EventsLost: 0 :: Format Errors: 0, Unknowns: 3
 Event traces dumped to d:\rdsdbdata\Log\msdtc_<timestamp>.log
 ```
-You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Amazon RDS database log files](USER_LogAccess.md)\.  
+You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\.  
 The trace session logs remain on the instance for 35 days\. Any older trace session logs are automatically deleted\.
 
 **Example of STATUS tracing action**  

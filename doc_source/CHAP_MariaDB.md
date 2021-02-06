@@ -5,6 +5,8 @@ Amazon RDS supports DB instances running several versions of MariaDB\. You can u
 + MariaDB 10\.4
 + MariaDB 10\.3
 + MariaDB 10\.2
++ MariaDB 10\.1
++ MariaDB 10\.0
 
 For more information about minor version support, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\. 
 
@@ -34,8 +36,8 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Replication** You can offload read traffic from your source MariaDB DB instance by creating read replicas\.   |  [Working with read replicas](USER_ReadRepl.md)  | 
 |  **Connecting to Your DB Instance** Connect to your DB instance using a standard SQL client application\.   |  [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)  | 
 |  **Backup and Restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md)  | 
-|  **Monitoring** Monitor your RDS MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MariaDB DB instance\.   |  [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
+|  **Monitoring** Monitor your RDS MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MariaDB DB instance\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
 There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
 + [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
@@ -56,6 +58,8 @@ Amazon RDS currently supports the following versions of MariaDB:
 | MariaDB 10\.4 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.3 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.2 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
+| MariaDB 10\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
+| MariaDB 10\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 
 You can specify any currently supported MariaDB version when creating a new DB instance\. You can specify the major version \(such as MariaDB 10\.5\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
@@ -70,6 +74,22 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 ```
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.3 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
 ```
+
+### Deprecation of MariaDB versions 10\.0 and 10\.1<a name="MariaDB.Concepts.VersionMgmt.Deprecation1-10.0-10.1"></a>
+
+On March 9, 2021, Amazon RDS plans to deprecate support for MariaDB 10\.0 and 10\.1 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
+
+
+| Action or recommendation | Dates | 
+| --- | --- | 
+|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 DB instances manually to the version of your choice\.   |  Now–March 9, 2021  | 
+|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 snapshots manually to the version of your choice\.  |  Now–March 9, 2021  | 
+|  You can no longer create new MariaDB 10\.0 and 10\.1 DB instances\.  |  December 3, 2020  | 
+|  Amazon RDS starts automatic upgrades of your MariaDB 10\.0 and 10\.1 DB instances to version 10\.3 or 10\.4\.  |  February 9, 2021  | 
+|  Amazon RDS starts automatic upgrades to version 10\.3 or 10\.4 for any MariaDB 10\.0 and 10\.1 DB instances restored from snapshots\.  |  February 9, 2021  | 
+|  Amazon RDS automatically upgrades any remaining MariaDB 10\.0 and 10\.1 DB instances to version 10\.3 or 10\.4 whether or not they are in a maintenance window\.  |  March 9, 2021  | 
+
+For more information, see [ Announcement: Amazon RDS for MariaDB 10\.0 and 10\.1 End\-of\-Life date is approaching](https://forums.aws.amazon.com/ann.jspa?annID=8174)\.
 
 For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
 

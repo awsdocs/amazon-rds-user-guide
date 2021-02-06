@@ -313,12 +313,16 @@ With object auditing, you can refine the audit logging to work with specific com
    + Use the shared preload libraries that contain `pgaudit`\.
    + Set `pgaudit.role` to the role `rds_pgaudit`\.
 
-   The following command modifies a custom parameter group\.
+   The following commands modify a custom parameter group\.
 
    ```
    aws rds modify-db-parameter-group \
       --db-parameter-group-name rds-parameter-group-96 \
       --parameters "ParameterName=pgaudit.role,ParameterValue=rds_pgaudit,ApplyMethod=pending-reboot" \
+      --region us-west-2
+   
+   aws rds modify-db-parameter-group \
+      --db-parameter-group-name rds-parameter-group-96 \
       --parameters "ParameterName=shared_preload_libraries,ParameterValue=pgaudit,ApplyMethod=pending-reboot" \
       --region us-west-2
    ```
@@ -379,7 +383,7 @@ OBJECT,1,1,READ,SELECT,TABLE,public.t1,select * from t1;
 ...
 ```
 
-For information on viewing the logs, see [Amazon RDS database log files](USER_LogAccess.md)\.
+For information on viewing the logs, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\.
 
 ## Working with the pg\_repack extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 

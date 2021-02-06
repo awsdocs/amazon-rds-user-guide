@@ -59,12 +59,12 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)  | 
 |  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
 |  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB instance to a specified time](USER_PIT.md)  | 
-|  Enhanced monitoring  |  No  |  —  |  [Enhanced Monitoring](USER_Monitoring.OS.md)  | 
-|  Amazon CloudWatch monitoring  |  No  |  —  |  [Monitoring with Amazon CloudWatch](MonitoringOverview.md#monitoring-cloudwatch)  | 
+|  Enhanced monitoring  |  No  |  —  |  [Using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
+|  Amazon CloudWatch monitoring  |  No  |  —  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  No  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.md#USER_LogAccess.Procedural.UploadtoCloudWatch)  | 
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
-|  Amazon RDS Performance Insights  |  No  |  —  |  [Using Amazon RDS Performance Insights](USER_PerfInsights.md)  | 
-|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Amazon RDS database log files](USER_LogAccess.md)  | 
+|  Amazon RDS Performance Insights  |  No  |  —  |  [Using Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
+|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Accessing Amazon RDS database log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Managing connections with Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for Amazon RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 

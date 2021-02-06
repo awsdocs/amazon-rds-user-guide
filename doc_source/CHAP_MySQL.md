@@ -35,7 +35,7 @@ The following are the common management tasks you perform with an Amazon RDS MyS
 |  **Modifying a DB instance running the MySQL database engine** Change the settings of a DB instance to accomplish tasks such as adding additional storage or changing the DB instance class\.  |   [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)   | 
 |  **Configuring database backup and restore** Configure your DB instance to take automated backups\. You can also back up and restore your databases manually by using full backup files\.   |   [Working with backups](USER_WorkingWithAutomatedBackups.md)   [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)   | 
 |  **Importing and exporting data** Import data from other RDS MySQL DB instances, MySQL instances running external to Amazon RDS, and other types of data sources, and export data to MySQL instances running external to Amazon RDS\.  |   [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)   | 
-|  **Monitoring a MySQL DB instance** Monitor your RDS MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MySQL DB instance\.  |   [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)   [Viewing DB instance metrics](MonitoringOverview.md#USER_Monitoring)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Amazon RDS database log files](USER_LogAccess.md)   [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
+|  **Monitoring a MySQL DB instance** Monitor your RDS MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MySQL DB instance\.  |   [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)   [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Accessing Amazon RDS database log files](USER_LogAccess.md)   [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
 |  **Replicating your data** Create a MySQL read replica, in the same AWS Region or a different one\. You can use read replicas for load balancing, disaster recovery, and processing read\-heavy database workloads, such as for analysis and reporting\.   |   [Working with read replicas](USER_ReadRepl.md)   [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)   | 
 
 There are also several sections with useful information about working with Amazon RDS MySQL DB instances: 
@@ -45,7 +45,7 @@ There are also several sections with useful information about working with Amazo
 
 ## MySQL on Amazon RDS versions<a name="MySQL.Concepts.VersionMgmt"></a>
 
-For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.6 to 5\.7\. A version change is considered minor if only the minor version number changes—for example, going from version 5\.7\.16 to 5\.7\.21\. 
+For MySQL, version numbers are organized as version = X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes—for example, going from version 5\.7 to 8\.0\. A version change is considered minor if only the minor version number changes—for example, going from version 5\.7\.16 to 5\.7\.21\. 
 
 Amazon RDS currently supports the following versions of MySQL: 
 
@@ -83,7 +83,37 @@ Amazon RDS currently supports the major version upgrades from MySQL version 5\.5
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
-For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
+### Deprecation of MySQL version 5\.6<a name="MySQL.Concepts.VersionMgmt.Deprecation56"></a>
+
+On August 3, 2021, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
+
+
+| Action or recommendation | Dates | 
+| --- | --- | 
+|  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–August 3, 2021  | 
+|  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–August 3, 2021  | 
+|  You can no longer create new MySQL 5\.6 DB instances\.  |  April 1, 2021  | 
+|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  August 3, 2021  | 
+|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  August 3, 2021  | 
+|  Amazon RDS automatically upgrades any remaining MySQL 5\.6 DB instances to version 5\.7 whether or not they are in a maintenance window\.  |  September 1, 2021  | 
+
+For more information, see [ Announcement: Amazon Relational Database Service \(RDS\) for MySQL 5\.6 End\-of\-Life date is August 3, 2021](https://forums.aws.amazon.com/ann.jspa?annID=8498)\.
+
+### Deprecation of MySQL version 5\.5<a name="MySQL.Concepts.VersionMgmt.Deprecation55"></a>
+
+On March 9, 2021, Amazon RDS plans to deprecate support for MySQL 5\.5 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
+
+
+| Action or recommendation | Dates | 
+| --- | --- | 
+|  We recommend that you upgrade MySQL 5\.5 DB instances manually to the version of your choice\.   |  Now–March 9, 2021  | 
+|  We recommend that you upgrade MySQL 5\.5 snapshots manually to the version of your choice\.  |  Now–March 9, 2021  | 
+|  You can no longer create new MySQL 5\.5 DB instances\.  |  December 3, 2020  | 
+|  Amazon RDS starts automatic upgrades of your MySQL 5\.5 DB instances to version 5\.7\.  |  February 9, 2021  | 
+|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.5 DB instances restored from snapshots\.  |  February 9, 2021  | 
+|  Amazon RDS automatically upgrades any remaining MySQL 5\.5 DB instances to version 5\.7 whether or not they are in a maintenance window\.  |  March 9, 2021  | 
+
+For more information, see [ Announcement: Amazon RDS for MySQL 5\.5 End\-of\-Life date is approaching](https://forums.aws.amazon.com/ann.jspa?annID=8175)\.
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
@@ -344,3 +374,9 @@ You can set your local time zone to one of the following values\.
 ## Known issues and limitations for MySQL on Amazon RDS<a name="MySQL.Concepts.KnownIssuesAndLimitations"></a>
 
 There are some known issues and limitations for working with MySQL on Amazon RDS\. For more information, see [Known issues and limitations for MySQL on Amazon RDS](MySQL.KnownIssuesAndLimitations.md)\. 
+
+## Deprecated MySQL on Amazon RDS versions<a name="MySQL.Concepts.DeprecatedVersions"></a>
+
+MySQL on Amazon RDS version 5\.1 is deprecated\.
+
+For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.

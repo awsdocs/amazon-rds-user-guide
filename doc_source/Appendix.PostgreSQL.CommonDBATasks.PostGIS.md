@@ -17,7 +17,6 @@ The following example uses `SELECT` to show you the current user\. In this case,
 
 ```
 SELECT CURRENT_USER;
-
  current_user
  -------------
   myawsuser
@@ -94,9 +93,9 @@ SET search_path=public,tiger;
 Test `tiger` by using the following SELECT statement\.
 
 ```
-select na.address, na.streetname, na.streettypeabbrev, na.zip
-from normalize_address('1 Devonshire Place, Boston, MA 02109') as na;
- address | streetname | streettypeabbrev |  zip
+SELECT na.address, na.streetname, na.streettypeabbrev, na.zip
+FROM normalize_address('1 Devonshire Place, Boston, MA 02109') AS na;
+address | streetname | streettypeabbrev |  zip
 ---------+------------+------------------+-------
        1 | Devonshire | Pl               | 02109
 (1 row)
@@ -105,7 +104,7 @@ from normalize_address('1 Devonshire Place, Boston, MA 02109') as na;
 Test `topology` by using the following SELECT statement\.
 
 ```
-select topology.createtopology('my_new_topo',26986,0.5);
+SELECT topology.createtopology('my_new_topo',26986,0.5);
  createtopology
 ----------------
               1

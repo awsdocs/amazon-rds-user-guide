@@ -16,32 +16,32 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
-+ **db\.m6g** – Newest\-generation general\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. The db\.m6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
++ **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. The db\.m6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.m5d** – Newest\-generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.m5** – Latest\-generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
-+ **db\.m4** – Current\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
-+ **db\.m3** – Previous\-generation general\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
++ **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
++ **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
 + **db\.m1** – Earlier\-generation general\-purpose instance classes\. 
 
 The following are the Memory Optimized DB instance classes available:
-+ **db\.z1d** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
-+ **db\.x1e** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
-+ **db\.x1** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
-+ **db\.r6g** – Newest\-generation instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. The db\.r6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
++ **db\.z1d** – Instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
++ **db\.x1e** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
++ **db\.x1** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
++ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. The db\.r6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
-+ **db\.r5b** – Newest\-generation instance classes that are optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
-+ **db\.r5d** – Newest\-generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
++ **db\.r5b** – Instance classes that are memory\-optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
++ **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
-+ **db\.r4** – Current\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
-+ **db\.r3** – Previous\-generation instance classes that provide memory optimization\. The db\.r3 instances classes are not available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
-+ **db\.m2** – Previous\-generation memory\-optimized instance classes\. 
++ **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
++ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
++ **db\.m2** – Earlier\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
-+ **db\.t3** – Latest\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
-+ **db\.t2** – Current\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
++ **db\.t3** – Next\-generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
++ **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
 
 **Note**  
 The DB instance classes that use the AWS Nitro System \(db\.m5, db\.r5, db\.t3\) are throttled on combined read plus write workload\.
@@ -74,7 +74,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
-| db\.m6g – Newest generation standard instance classes | 
+| db\.m6g – Standard instance classes powered by AWS Graviton2 processors | 
 | db\.m6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.m6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
@@ -91,7 +91,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5d\.2xlarge | No | Yes | No | No | No | 
 | db\.m5d\.xlarge | No | Yes | No | No | No | 
 | db\.m5d\.large | No | Yes | No | No | No | 
-| db\.m5 – Latest generation standard instance classes | 
+| db\.m5 – Latest\-generation standard instance classes | 
 | db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -100,41 +100,41 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m5\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4 – Current generation standard instance classes | 
+| db\.m4 – Standard instance classes | 
 | db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.m4\.10xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.m4\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.m3 – Previous generation standard instance classes | 
+| db\.m3 – Standard instance classes | 
 | db\.m3\.2xlarge | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.xlarge | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
-| db\.m1 – Previous generation standard instance classes | 
+| db\.m1 – Standard instance classes | 
 | db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.large | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.medium | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.small | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.z1d – Latest generation memory optimized instance classes | 
+| db\.z1d – Memory\-optimized instance classes | 
 | db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.3xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.2xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.large | No | Yes | No | Yes | No | 
-| db\.x1e – Latest generation memory optimized instance classes | 
+| db\.x1e – Memory\-optimized instance classes | 
 | db\.x1e\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.16xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.8xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.4xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.2xlarge | No | Yes | No | Yes | No | 
 | db\.x1e\.xlarge | No | Yes | No | Yes | No | 
-| db\.x1 – Current generation memory optimized instance classes | 
+| db\.x1 – Memory\-optimized instance classes | 
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
-| db\.r6g – Newest generation memory optimized instance classes | 
+| db\.r6g – Memory\-optimized instance classes powered by AWS Graviton2 processors | 
 | db\.r6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
 | db\.r6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
@@ -150,7 +150,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5d\.2xlarge | No | Yes | No | No | No | 
 | db\.r5d\.xlarge | No | Yes | No | No | No | 
 | db\.r5d\.large | No | Yes | No | No | No | 
-| db\.r5b – Newest Generation Memory Optimized Instance Classes | 
+| db\.r5b – Memory\-optimized instance classes | 
 | db\.r5b\.24xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.16xlarge | No | Yes | No |  Yes  | No | 
 | db\.r5b\.12xlarge | No | Yes | No | Yes | No | 
@@ -159,7 +159,7 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5b\.2xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.large | No | Yes | No | Yes | No | 
-| db\.r5 – Latest generation memory optimized instance classes | 
+| db\.r5 – Latest\-generation memory\-optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
 | db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
@@ -168,31 +168,31 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.r5\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.r4 – Current generation memory optimized instance classes | 
+| db\.r4 – Memory\-optimized instance classes | 
 | db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
 | db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r3 – Previous generation memory optimized instance classes | 
+| db\.r3 – Memory\-optimized instance classes | 
 | db\.r3\.8xlarge\*\* | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.m2 – Previous generation memory optimized instance classes | 
+| db\.m2 – Memory\-optimized instance classes | 
 | db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.t3 – Latest generation burstable performance instance classes | 
+| db\.t3 – Next\-generation burstable performance instance classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.large | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.medium | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.small | Yes | Yes | Yes | Yes | Yes | 
 | db\.t3\.micro | Yes | No | Yes | Yes | Yes | 
-| db\.t2 – Current generation burstable performance instance classes | 
+| db\.t2 – Burstable performance instance classes | 
 | db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
 | db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
 | db\.t2\.large | Yes | Yes | Yes | Deprecated | Yes | 
