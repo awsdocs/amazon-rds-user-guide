@@ -11,7 +11,7 @@ In this topic, you create a sample SQL Server DB instance\. You then connect to 
 
 You can create a DB instance running Microsoft SQL Server with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for other configuration options\. With **Easy create** not enabled \(**Standard create**\), you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-For this example, you use **Easy create** to create a DB instance running the Microsoft SQL Server database engine with a db\.m4\.large DB instance class\.
+For this example, you use **Easy create** to create a DB instance running SQL Server Express Edition with a db\.t2\.micro DB instance class\.
 
 **Note**  
 For information about creating DB instances with **Standard create**, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
@@ -31,13 +31,13 @@ For information about creating DB instances with **Standard create**, see [Creat
 
 1. From **Engine type**, choose **Microsoft SQL Server**\.
 
-1. For **DB instance size**, choose **Dev/Test**\.
+1. For **DB instance size**, choose **Free tier**\.
 
 1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name\.
 
 1. For **Master username**, enter a name for the master user, or leave the default name\.
 
-1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** check box is chosen\.
+1. To use an automatically generated master password for the DB instance, choose the **Auto generate a password** check box\.
 
    To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
 
@@ -45,16 +45,16 @@ For information about creating DB instances with **Standard create**, see [Creat
 ![\[Engine options\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-sqlserver.png)
 
 1. \(Optional\) Expand **View default settings for Easy create**\.  
-![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-sqlserver.png)
+![\[Easy create default settings\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-sqlserver.png)
 
-   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+   You can examine the default settings used when **Easy create** is enabled\. If you want to change one or more settings during database creation, choose **Standard create** to set them\. The **Editable after database is created** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard create**\. For settings with **Yes** in that column, you can either use **Standard create** or modify the DB instance after it's created to change the setting\.
 
 1. Choose **Create database**\.
 
    If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
 
    To view the master user name and password for the DB instance, choose **View credential details**\.  
-![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+![\[Master user credentials after automatic password generation\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
@@ -63,21 +63,21 @@ You can't view the master user password again\. If you don't record it, you migh
 1. For **Databases**, choose the name of the new Microsoft SQL Server DB instance\.
 
    On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
-![\[Screenshot of the DB instance details.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-sqlserver-launch.png)
+![\[Screen capture of the DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-sqlserver-launch.png)
 
 ## Connecting to your sample SQL Server DB instance<a name="CHAP_GettingStarted.Connecting.SQLServer"></a>
 
 In this procedure, you connect to your sample DB instance by using Microsoft SQL Server Management Studio \(SSMS\)\.
 
-Before you begin, your database should have a status of **Available**\. If it has a status of **Creating** or **Backup\-up**, wait until it's **Available**\. The status updates without requiring you to refresh the page\. This process can take up to 20 minutes\. 
+Before you begin, your database should have a status of `Available`\. If it has a status of `Creating` or `Backing-up`, wait until it's `Available`\. The status updates without requiring you to refresh the page\. This process can take up to 20 minutes\.
 
-Also, make sure you have SSMS installed\. If you can also connect to SQL Server on RDS by using a different tools, such as an add\-in for your development environment or some other database tool\. However, this tutorial only covers using SSMS\. To download a stand\-alone version of this SSMS, see [Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) in the Microsoft documentation\. 
+Also, make sure you have SSMS installed\. If you can also connect to SQL Server on RDS by using a different tools, such as an add\-in for your development environment or some other database tool\. However, this tutorial only covers using SSMS\. To download a stand\-alone version of this SSMS, see [Download SQL Server Management Studio \(SSMS\)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms) in the Microsoft documentation\.
 
 **To connect to a DB instance using SSMS**
 
-1. Find the DNS name and port number for your DB instance\. 
+1. Find the DNS name and port number for your DB instance\.
 
-   1. Open the RDS console, and then choose **Databases** to display a list of your DB instances\. 
+   1. Open the RDS console, and then choose **Databases** to display a list of your DB instances\.
 
    1. Hover your mouse cursor over the name **sample\-instance**, which is blue\. When you do this, the mouse cursor changes into a selection icon \(for example, a pointing hand\)\. Also, the DB instance name, becomes underlined\. 
 
@@ -151,15 +151,19 @@ After you are done exploring the sample DB instance that you created, you should
 
 1. Choose the button next to **sample\-instance**, or whatever you named your sample DB instance\. 
 
-1. Choose **Delete** from the **Actions** above \(it's to the left of the orange **Create database** button\. 
+1. From **Actions**, choose **Delete**\.
 
-   If you see a message that says **This database has deletion protection option enabled**, follow these steps:
-   + Choose **Modify**\.
-   + On the **Deletion protection** card \(near the bottom of the page\), clear the box next to **Enable deletion protection**\. Then choose **Continue**\. 
-   + On the **Scheduling of modifications** card, choose **Apply immediately\.** Then choose **Modify DB instance**\.
-   + Try again to delete the instance by choosing **Delete** from the **Actions** menu\.
+1. If you see a message that says **This database has deletion protection option enabled**, follow these steps:
 
-1. Clear the box for **Create final snapshot**\. Because this isn't a production database, you don't need to save a copy of it\. 
+   1. Choose **Modify**\.
+
+   1. On the **Deletion protection** card \(near the bottom of the page\), clear the box next to **Enable deletion protection**\. Then choose **Continue**\.
+
+   1. On the **Scheduling of modifications** card, choose **Apply immediately\.** Then choose **Modify DB instance**\.
+
+   1. Try again to delete the instance by choosing **Delete** from the **Actions** menu\.
+
+1. Clear the box for **Create final snapshot**\. Because this isn't a production database, you don't need to save a copy of it\.
 
 1. Verify that you selected the correct database to delete\. The name "sample\-instance" displays in the title of the screen: **Delete sample\-instance instance?** 
 

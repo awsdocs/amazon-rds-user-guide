@@ -28,7 +28,7 @@ For example, if you modify your DB instance class from `db.m5.2xlarge` to `db.m5
 
 You might need to retain backups for long periods, incurring costs over time\. The `tempdb` data and log blocks can change very often depending on the workload\. This can greatly increase the DB snapshot size\.
 
-When `tempdb` is on the instance store, snapshots don't include temporary files\.
+When `tempdb` is on the instance store, snapshots don't include temporary files\. This means that snapshot sizes are smaller and consume less of the free backup allocation compared to EBS\-only storage\.
 
 ## Disk full errors<a name="SQLServer.InstanceStore.DiskFull"></a>
 

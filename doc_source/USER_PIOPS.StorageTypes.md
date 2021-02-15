@@ -24,7 +24,7 @@ You can't make further storage modifications until six \(6\) hours after storage
 However, a special case is if you have a SQL Server DB instance and haven't modified the storage configuration since November 2017\. In this case, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the `storage-optimization` state\. Performance might be degraded during storage optimization\. 
 
 **Note**  
-You can't reduce the amount of storage for a DB instance after storage has been allocated\.
+You can't reduce the amount of storage for a DB instance after storage has been allocated\. When you increase the allocated storage, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
 
 ### Console<a name="USER_PIOPS.ModifyingExisting.console"></a>
 
@@ -40,8 +40,6 @@ You can't reduce the amount of storage for a DB instance after storage has been 
 
 1. Enter a new value for **Allocated storage**\. It must be greater than the current value\.   
 ![\[Modify the amount of storage for a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/scale-gs2.png)
-**Note**  
-When you increase the allocated storage, it must be by at least 10 percent\. If you try to increase the value by less than 10 percent, you get an error\.
 
 1. Choose **Continue** to move to the next screen\.
 

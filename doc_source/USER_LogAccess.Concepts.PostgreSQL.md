@@ -71,7 +71,14 @@ To specify the format for output logs, use the parameter `log_destination`\. To 
 
 To enable query logging for your PostgreSQL DB instance, set two parameters in the DB parameter group associated with your DB instance: `log_statement` and `log_min_duration_statement`\. 
 
-The `log_statement` parameter controls which SQL statements are logged\. We recommend that you set this parameter to `all` to log all statements when you debug issues in your DB instance\. The default value is `none`\. To log all data definition language \(DDL\) statements \(CREATE, ALTER, DROP, and so on\), set this value to `ddl`\. To log all DDL and data modification language \(DML\) statements \(INSERT, UPDATE, DELETE, and so on\), set this value to `mod`\.
+The `log_statement` parameter controls which SQL statements are logged\. The default value is `none`\. We recommend that when you debug issues in your DB instance, set this parameter to `all` to log all statements\. To log all data definition language \(DDL\) statements \(CREATE, ALTER, DROP, and so on\), set this value to `ddl`\. To log all DDL and data modification language \(DML\) statements \(INSERT, UPDATE, DELETE, and so on\), set the value to `mod`\.
+
+**Warning**  
+Sensitive information such as passwords can be exposed if you set the `log_statement` parameter to `ddl`, `mod`, or `all`\. To avaoid this risk, set the `log_statement` to `none`\. Also consider the following solutions:  
+Encrypt the sensitive information on the client side and use the `ENCRYPTED` and `UNENCRYPTED` options of the `CREATE` and `ALTER` statements\.
+Restrict access to the CloudWatch logs\.
+Use stronger authentication mechanisms such as IAM\. 
+For auditing, you can use the PostgreSQL `pgAudit` extension because it redacts the sensitive information for CREATE and ALTER commands\.
 
 The `log_min_duration_statement` parameter sets the limit in milliseconds of a statement to be logged\. All SQL statements that run longer than the parameter setting are logged\. This parameter is disabled and set to \-1 by default\. Enabling this parameter can help you find unoptimized queries\. 
 

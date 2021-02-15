@@ -1,9 +1,10 @@
 # Working with MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas"></a>
 
-This section contains specific information about working with read replicas on Amazon RDS MySQL\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
+Following, you can find specific information about working with read replicas on Amazon RDS for MySQL\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
 
 **Topics**
 + [Read replica configuration with MySQL](#USER_MySQL.Replication.ReadReplicas.Configuration)
++ [Configuring replication filters with MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters)
 + [Configuring delayed replication with MySQL](#USER_MySQL.Replication.ReadReplicas.DelayReplication)
 + [Read replica updates with MySQL](#USER_MySQL.Replication.ReadReplicas.Updates)
 + [Multi\-AZ read replica deployments with MySQL](#USER_MySQL.Replication.ReadReplicas.MultiAZ)
@@ -15,7 +16,7 @@ This section contains specific information about working with read replicas on A
 
 Before a MySQL DB instance can serve as a replication source, make sure to enable automatic backups on the source DB instance\. To do this, set the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. Automatic backups are supported only for read replicas running any version of MySQL 5\.6 and later\. You can configure replication based on binary log coordinates for a MySQL DB instance\. 
 
-On Amazon RDS MySQL version 5\.7\.23 and later MySQL 5\.7 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+On Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
 
 You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
@@ -23,7 +24,7 @@ If a read replica is running any version of MySQL 5\.6 and later, you can specif
 
 If you promote a MySQL read replica that is in turn replicating to other read replicas, those read replicas remain active\. Consider an example where MyDBInstance1 replicates to MyDBInstance2, and MyDBInstance2 replicates to MyDBInstance3\. If you promote MyDBInstance2, replication from MyDBInstance1 to MyDBInstance2 no longer occurs, but MyDBInstance2 still replicates to MyDBInstance3\. 
 
-To enable automatic backups on a read replica for Amazon RDS MySQL version 5\.6 and later, first create the read replica\. Then modify the read replica to enable automatic backups\. 
+To enable automatic backups on a read replica for Amazon RDS for MySQL version 5\.6 and later, first create the read replica\. Then modify the read replica to enable automatic backups\. 
 
 You can run multiple read replica create or delete actions at the same time that reference the same source DB instance\. To do this, stay within the limit of five read replicas for each source instance\. 
 
@@ -41,6 +42,214 @@ If your MySQL DB instance uses a nontransactional engine such as MyISAM, you nee
 
 1. Check the progress of the read replica creation using, for example, the `DescribeDBInstances` API operation\. Once the read replica is available, unlock the tables of the source DB instance and resume normal database operations\. 
 
+## Configuring replication filters with MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters"></a>
+
+You can use replication filters to specify which databases and tables are replicated with a read replica\. Replication filters can include databases and tables in replication or exclude them from replication\.
+
+The following are some use cases for replication filters:
++ To reduce the size of a read replica\. With replication filtering, you can exclude the databases and tables that aren't needed on the read replica\.
++ To exclude databases and tables from read replicas for security reasons\.
++ To replicate different databases and tables for specific use cases at different read replicas\. For example, you might use specific read replicas for analytics or sharding\.
++ For a DB instance that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
+
+**Topics**
++ [Replication filtering parameters for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring)
++ [Replication filtering limitations for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations)
++ [Replication filtering examples for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples)
++ [Viewing the replication filters for a read replica](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Viewing)
+
+### Replication filtering parameters for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring"></a>
+
+To configure replication filters, set the following replication filtering parameters on the read replica:
++ `replicate-do-db` – Replicate changes to the specified databases\. When you set this parameter for a read replica, only the databases specified in the parameter are replicated\.
++ `replicate-ignore-db` – Don't replicate changes to the specified databases\. When the `replicate-do-db` parameter is set for a read replica, this parameter isn't evaluated\.
++ `replicate-do-table` – Replicate changes to the specified tables\. When you set this parameter for a read replica, only the tables specified in the parameter are replicated\. Also, when the `replicate-do-db` or `replicate-ignore-db` parameter is set, make sure to include the database that includes the specified tables in replication with the read replica\.
++ `replicate-ignore-table` – Don't replicate changes to the specified tables\. When the `replicate-do-table` parameter is set for a read replica, this parameter isn't evaluated\.
++ `replicate-wild-do-table` – Replicate tables based on the specified database and table name patterns\. The `%` and `_` wildcard characters are supported\. When the `replicate-do-db` or `replicate-ignore-db` parameter is set, make sure to include the database that includes the specified tables in replication with the read replica\.
++ `replicate-wild-ignore-table` – Don't replicate tables based on the specified database and table name patterns\. The `%` and `_` wildcard characters are supported\. When the `replicate-do-table` or `replicate-wild-do-table` parameter is set for a read replica, this parameter isn't evaluated\.
+
+The parameters are evaluated in the order that they are listed\. For more information about how these parameters work, see the MySQL documentation:
++ For general information, see [ Replica Server Options and Variables](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html)\.
++ For information about how database replication filtering parameters are evaluated, see [ Evaluation of Database\-Level Replication and Binary Logging Options](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)\.
++ For information about how table replication filtering parameters are evaluated, see [ Evaluation of Table\-Level Replication Options](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)\.
+
+By default, each of these parameters has an empty value\. On each read replica, you can use these parameters to set, change, and delete replication filters\. When you set one of these parameters, separate each filter from others with a comma\.
+
+You can use the `%` and `_` wildcard characters in the `replicate-wild-do-table` and `replicate-wild-ignore-table` parameters\. The `%` wildcard matches any number of characters, and the `_` wildcard matches only one character\. 
+
+The binary logging format of the source DB instance is important for replication because it determines the record of data changes\. The setting of the `binlog_format` parameter determines whether the replication is row\-based or statement\-based\. For more information, see [Binary logging format](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.BinaryFormat)\.
+
+**Note**  
+All data definition language \(DDL\) statements are replicated as statements, regardless of the `binlog_format` setting on the source DB instance\. 
+
+### Replication filtering limitations for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations"></a>
+
+The following limitations apply to replication filtering for Amazon RDS for MySQL:
++ Each replication filtering parameter has a 2,000\-character limit\.
++ Commas aren't supported in replication filters\.
++ The MySQL `--binlog-do-db` and `--binlog-ignore-db` options for binary log filtering aren't supported\.
++ Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
++ Replication filtering isn't supported for Amazon RDS for MySQL version 5\.5 or 5\.6\.
++ Replication filtering isn't supported in the China \(Beijing\) Region and China \(Ningxia\) Region\.
+
+### Replication filtering examples for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
+
+To configure replication filtering for a read replica, modify the replication filtering parameters in the parameter group associated with the read replica\.
+
+**Note**  
+You can't modify a default parameter group\. If the read replica is using a default parameter group, create a new parameter group and associate it with the read replica\. For more information on DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+You can set parameters in a parameter group using the AWS Management Console, AWS CLI, or RDS API\. For information about setting parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. When you set parameters in a parameter group, all of the DB instances associated with the parameter group use the parameter settings\. If you set the replication filtering parameters in a parameter group, make sure that the parameter group is associated only with read replicas\. Leave the replication filtering parameters empty for source DB instances\.
+
+The following examples set the parameters using the AWS CLI\. These examples set `ApplyMethod` to `immediate` so that the parameter changes occur immediately after the CLI command completes\. If you want a pending change to be applied after the read replica is rebooted, set `ApplyMethod` to `pending-reboot`\. 
+
+The following examples set replication filters:
++ [Including databases in replication](#rep-filter-in-dbs-mysql)
++ [Including tables in replication](#rep-filter-in-tables-mysql)
++ [Including tables in replication with wildcard characters](#rep-filter-in-tables-wildcards-mysql)
++ [Escaping wildcard characters in names](#rep-filter-escape-wildcards-mysql)
++ [Excluding databases from replication](#rep-filter-ex-dbs-mysql)
++ [Excluding tables from replication](#rep-filter-ex-tables-mysql)
++ [Excluding tables from replication using wildcard characters](#rep-filter-ex-tables-wildcards-mysql)<a name="rep-filter-in-dbs-mysql"></a>
+
+**Example Including databases in replication**  
+The following example includes the `mydb1` and `mydb2` databases in replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-do-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-in-tables-mysql"></a>
+
+**Example Including tables in replication**  
+The following example includes the `table1` and `table2` tables in database `mydb1` in replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-do-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-in-tables-wildcards-mysql"></a>
+
+**Example Including tables in replication using wildcard characters**  
+The following example includes tables with names that begin with `orders` and `returns` in database `mydb` in replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-escape-wildcards-mysql"></a>
+
+**Example Escaping wildcard characters in names**  
+The following example shows you how to use the escape character `\` to escape a wildcard character that is part of a name\.   
+Assume that you have several table names in database `mydb1` that start with `my_table`, and you want to include these tables in replication\. The table names include an underscore, which is also a wildcard character, so the example escapes the underscore in the table names\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-wild-do-table", "ParameterValue": "my\_table%", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-ex-dbs-mysql"></a>
+
+**Example Excluding databases from replication**  
+The following example excludes the `mydb1` and `mydb2` databases from replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-ignore-db", "ParameterValue": "mydb1,mydb2", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-ex-tables-mysql"></a>
+
+**Example Excluding tables from replication**  
+The following example excludes tables `table1` and `table2` in database `mydb1` from replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-ignore-table", "ParameterValue": "mydb1.table1,mydb1.table2", "ApplyMethod":"immediate"}]"
+```<a name="rep-filter-ex-tables-wildcards-mysql"></a>
+
+**Example Excluding tables from replication using wildcard characters**  
+The following example excludes tables with names that begin with `orders` and `returns` in database `mydb` from replication\.  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-parameter-group \
+  --db-parameter-group-name myparametergroup \
+  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+```
+For Windows:  
+
+```
+aws rds modify-db-parameter-group ^
+  --db-parameter-group-name myparametergroup ^
+  --parameters "[{"ParameterName": "replicate-wild-ignore-table", "ParameterValue": "mydb.orders%,mydb.returns%", "ApplyMethod":"immediate"}]"
+```
+
+### Viewing the replication filters for a read replica<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Viewing"></a>
+
+You can view the replication filters for a read replica in the following ways:
++ Check the settings of the replication filtering parameters in the parameter group associated with the read replica\.
+
+  For instructions, see [Viewing parameter values for a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
++ In a MySQL client, connect to the read replica and run the `SHOW SLAVE STATUS` statement\.
+
+  In the output, the following fields show the replication filters for the read replica:
+  + `Replicate_Do_DB`
+  + `Replicate_Ignore_DB`
+  + `Replicate_Do_Table`
+  + `Replicate_Ignore_Table`
+  + `Replicate_Wild_Do_Table`
+  + `Replicate_Wild_Ignore_Table`
+
+  For more information about these fields, see [Checking Replication Status](https://dev.mysql.com/doc/refman/8.0/en/replication-administration-status.html) in the MySQL documentation\.
+
 ## Configuring delayed replication with MySQL<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication"></a>
 
 You can use delayed replication as a strategy for disaster recovery\. With delayed replication, you specify the minimum amount of time, in seconds, to delay replication from the source to the read replica\. In the event of a disaster, such as a table deleted unintentionally, you complete the following steps to recover from the disaster quickly:
@@ -53,9 +262,9 @@ You can use delayed replication as a strategy for disaster recovery\. With delay
 + Promote the read replica to be the new source DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
-On Amazon RDS MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and later\. On Amazon RDS MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and later\. Delayed replication is not supported on Amazon RDS MySQL 8\.0\.
+On Amazon RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and later\. On Amazon RDS for MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and later\. Delayed replication is not supported on Amazon RDS for MySQL 8\.0\.
 Use stored procedures to configure delayed replication\. You can't configure delayed replication with the AWS Management Console, the AWS CLI, or the Amazon RDS API\.
-On Amazon RDS MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can use GTID\-based replication in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+On Amazon RDS for MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
 
 **Topics**
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)
@@ -154,7 +363,7 @@ If replication is stopped for more than 30 consecutive days, either manually or 
 
 ## Troubleshooting a MySQL read replica problem<a name="USER_ReadRepl.Troubleshooting"></a>
 
-For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following dynamic variable values: `sync_binlog=1`, `innodb_flush_log_at_trx_commit=1`, and `innodb_support_xa=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\. For MySQL 5\.5, `sync_binlog` defaults to `0`, but in MySQL 5\.6 and later, problems are less likely to occur because these parameters are all set to the recommended values by default\.
+For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\. For MySQL 5\.5, `sync_binlog` defaults to `0`, but in MySQL 5\.6 and later, problems are less likely to occur because these parameters are all set to the recommended values by default\.
 
 The replication technologies for MySQL are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the read replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the read replica are serialized using a single I/O thread, which can lead to a lag between the source instance and read replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication implementation details](https://dev.mysql.com/doc/refman/8.0/en/replication-implementation-details.html)\.
 

@@ -21,6 +21,23 @@ Use the following procedure to create a VPC with both public and private subnets
 
 **To create a VPC and subnets**
 
+1. If you don't have an Elastic IP address to associate with a network address translation \(NAT\) gateway, allocate one now\. A NAT gateway is required for this tutorial\. If you have an available Elastic IP address, move on to the next step\.
+
+   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+   1. In the navigation pane, choose **Elastic IPs**\.
+
+   1. Choose **Allocate Elastic IP address**\.
+
+   1. For **Public IPv4 address pool**, choose one of the following:
+      + **Amazon's pool of IPv4 addresses**—If you want an IPv4 address to be allocated from Amazon's pool of IPv4 addresses\.
+      + **My pool of public IPv4 addresses**—If you want to allocate an IPv4 address from an IP address pool that you have brought to your AWS account\. This option is disabled if you do not have any IP address pools\.
+      + **Customer owned pool of IPv4 addresses**—If you want to allocate an IPv4 address from a pool created from your on\-premises network for use with an AWS Outpost\. This option is disabled if you do not have an AWS Outpost\.
+
+   1. Choose **Allocate**\.
+
+   For more information about Elastic IP addresses, see [Elastic IP addresses](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) in the *Amazon EC2 User Guide*\. For more information about NAT gateways, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
+
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
 1. In the top\-right corner of the AWS Management Console, choose the region to create your VPC in\. This example uses the US West \(Oregon\) region\.
@@ -38,18 +55,14 @@ Use the following procedure to create a VPC with both public and private subnets
    + **Public subnet name:** `Tutorial public`
    + **Private subnet's IPv4 CIDR:** `10.0.1.0/24`
    + **Availability Zone:** `us-west-2a`
-   + **Private subnet name:** `Tutorial Private 1` 
-   + **Instance type:** `t2.small`
-**Important**  
-If you don't see the **Instance type** box in the console, choose **Use a NAT instance instead**\. This link is on the right\.
-**Note**  
-If the t2\.small instance type is not listed, you can choose a different instance type\.
+   + **Private subnet name:** `Tutorial private 1` 
+   + **Elastic IP Allocation ID:** An Elastic IP address to associate with the NAT gateway
    + **Key pair name:** `No key pair`
    + **Service endpoints:** Skip this field\.
    + **Enable DNS hostnames:** `Yes`
    + **Hardware tenancy:** `Default`
 
-1. When you're finished, choose **Create VPC**\.
+1. Choose **Create VPC**\.
 
 ## Create additional subnets<a name="CHAP_Tutorials.WebServerDB.CreateVPC.AdditionalSubnets"></a>
 
@@ -62,26 +75,26 @@ You must have either two private subnets or two public subnets available to crea
 1. To add the second private subnet to your VPC, choose **VPC Dashboard**, choose **Subnets**, and then choose **Create subnet**\.
 
 1. On the **Create subnet** page, set these values: 
-   + **Name tag:** `Tutorial private 2`
-   + **VPC:** Choose the VPC that you created in the previous step, for example: `vpc-identifier tutorial-vpc`
+   + **VPC ID:** Choose the VPC that you created in the previous step, for example: `vpc-identifier (tutorial-vpc)`
+   + **Subnet name:** `Tutorial private 2`
    + **Availability Zone:** `us-west-2b` 
 **Note**  
 Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
    + **IPv4 CIDR block:** `10.0.2.0/24`
 
-1. When you're finished, choose **Create**\. Next, choose **Close** on the confirmation page\.
+1. Choose **Create subnet**\. Next, choose **Close** on the confirmation page\.
 
 1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, complete the following steps:
 
    1. Choose **VPC Dashboard**, choose **Subnets**, and then choose the first private subnet that you created for the VPC, `Tutorial private 1`\. 
 
-   1. Below the list of subnets, choose the **Route Table** tab, and note the value for **Route Table**—for example: `rtb-98b613fd`\. 
+   1. Below the list of subnets, choose the **Route table** tab, and note the value for **Route Table**—for example: `rtb-98b613fd`\. 
 
    1. In the list of subnets, deselect the first private subnet\.
 
-   1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route Table** tab\. 
+   1. In the list of subnets, choose the second private subnet `Tutorial private 2`, and choose the **Route table** tab\. 
 
-   1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route Table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
+   1. If the current route table is not the same as the route table for the first private subnet, choose **Edit route table association**\. For **Route table ID**, choose the route table that you noted earlier—for example: `rtb-98b613fd`\. Next, to save your selection, choose **Save**\.
 
 ## Create a VPC security group for a public web server<a name="CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2"></a>
 

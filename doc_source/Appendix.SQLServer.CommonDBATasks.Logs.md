@@ -28,3 +28,5 @@ The following example requests the current error log\.
 ```
 EXEC rdsadmin.dbo.rds_read_error_log @index = 0, @type = 1;
 ```
+
+For more information on SQL Server errors, see [Database engine errors](https://docs.microsoft.com/en-us/sql/relational-databases/errors-events/database-engine-events-and-errors) in the Microsoft documentation\.

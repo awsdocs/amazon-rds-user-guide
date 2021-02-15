@@ -190,6 +190,8 @@ Be sure to copy sensitive data using a secure network transfer protocol\.
    ```
 
    For more information, see [Connect to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html) in the *Amazon Elastic Compute Cloud User Guide for Linux*\.
+**Important**  
+This example installs the MySQL client on an Amazon Linux AMI distribution\. If you want to install the MySQL client on a different distribution, such as Ubuntu or RedHat Enterprise Linux, this example won't work\. For information about installing MySQL, see [Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html) in the MySQL documentation\.
 
 1. While connected to your Amazon EC2 instance, decompress your database backup file\. For example:
    + To decompress SQL output, use the following command:

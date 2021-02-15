@@ -1,4 +1,4 @@
-# Amazon RDS and interface VPC endpoints \(AWS PrivateLink\)<a name="vpc-interface-endpoints"></a>
+# Amazon RDS API and interface VPC endpoints \(AWS PrivateLink\)<a name="vpc-interface-endpoints"></a>
 
 You can establish a private connection between your VPC and Amazon RDS API endpoints by creating an *interface VPC endpoint*\. Interface endpoints are powered by [AWS PrivateLink](http://aws.amazon.com/privatelink)\. 
 
@@ -8,21 +8,22 @@ Each interface endpoint is represented by one or more elastic network interfaces
 
 For more information about VPC endpoints, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html) in the *Amazon VPC User Guide*\. For more information about RDS API operations, see [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\.
 
-## Considerations for Amazon RDS VPC endpoints<a name="vpc-endpoint-considerations"></a>
+## Considerations for VPC endpoints<a name="vpc-endpoint-considerations"></a>
 
 Before you set up an interface VPC endpoint for Amazon RDS API endpoints, ensure that you review [Interface endpoint properties and limitations](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#vpce-interface-limitations) in the *Amazon VPC User Guide*\. 
 
-Amazon RDS supports making calls to all of its API actions from your VPC\.
+All RDS API operations relevant to managing Amazon RDS resources are available from your VPC using AWS PrivateLink\.
 
-VPC endpoint policies are supported for Amazon RDS\. By default, full access to Amazon RDS is allowed through the endpoint\. For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
+VPC endpoint policies are supported for RDS API endpoints\. By default, full access to RDS API operations is allowed through the endpoint\. For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\.
 
 ## Availability<a name="rds-and-vpc-interface-endpoints-availability"></a>
 
-Amazon RDS currently supports VPC endpoints in the following AWS Regions:
+Amazon RDS API currently supports VPC endpoints in the following AWS Regions:
 + US East \(Ohio\)
 + US East \(N\. Virginia\)
 + US West \(N\. California\)
 + US West \(Oregon\)
++ Africa \(Cape Town\)
 + Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Mumbai\)
 + Asia Pacific \(Seoul\)
@@ -35,6 +36,7 @@ Amazon RDS currently supports VPC endpoints in the following AWS Regions:
 + Europe \(London\)
 + Europe \(Paris\)
 + Europe \(Stockholm\)
++ Europe \(Milan\)
 + Middle East \(Bahrain\)
 + South America \(São Paulo\)
 + China \(Beijing\)
@@ -42,27 +44,27 @@ Amazon RDS currently supports VPC endpoints in the following AWS Regions:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 
-## Creating an interface VPC endpoint for Amazon RDS<a name="vpc-endpoint-create"></a>
+## Creating an interface VPC endpoint for Amazon RDS API<a name="vpc-endpoint-create"></a>
 
 You can create a VPC endpoint for the Amazon RDS API using either the Amazon VPC console or the AWS Command Line Interface \(AWS CLI\)\. For more information, see [Creating an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint) in the *Amazon VPC User Guide*\.
 
-Create a VPC endpoint for Amazon RDS using the service name `com.amazonaws.region.rds`\.
+Create a VPC endpoint for Amazon RDS API using the service name `com.amazonaws.region.rds`\.
 
 Excluding AWS Regions in China, if you enable private DNS for the endpoint, you can make API requests to Amazon RDS with the VPC endpoint using its default DNS name for the AWS Region, for example `rds.us-east-1.amazonaws.com`\. For the China \(Beijing\) and China \(Ningxia\) AWS Regions, you can make API requests with the VPC endpoint using `rds-api.cn-north-1.amazonaws.com.cn` and `rds-api.cn-northwest-1.amazonaws.com.cn`, respectively\. 
 
 For more information, see [Accessing a service through an interface endpoint](https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#access-service-though-endpoint) in the *Amazon VPC User Guide*\.
 
-## Creating a VPC endpoint policy for Amazon RDS<a name="vpc-endpoint-policy"></a>
+## Creating a VPC endpoint policy for Amazon RDS API<a name="vpc-endpoint-policy"></a>
 
-You can attach an endpoint policy to your VPC endpoint that controls access to Amazon RDS\. The policy specifies the following information:
+You can attach an endpoint policy to your VPC endpoint that controls access to Amazon RDS API\. The policy specifies the following information:
 + The principal that can perform actions\.
 + The actions that can be performed\.
 + The resources on which actions can be performed\.
 
 For more information, see [Controlling access to services with VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints-access.html) in the *Amazon VPC User Guide*\. 
 
-**Example: VPC endpoint policy for Amazon RDS actions**  
-The following is an example of an endpoint policy for Amazon RDS\. When attached to an endpoint, this policy grants access to the listed Amazon RDS actions for all principals on all resources\.
+**Example: VPC endpoint policy for Amazon RDS API actions**  
+The following is an example of an endpoint policy for Amazon RDS API\. When attached to an endpoint, this policy grants access to the listed Amazon RDS API actions for all principals on all resources\.
 
 ```
 {

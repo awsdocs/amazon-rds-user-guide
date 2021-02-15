@@ -208,7 +208,6 @@ The following MariaDB features are not supported on Amazon RDS:
 + Multisource replication
 + MyRocks storage engine
 + Password validation plugin, `simple_password_check`, and `cracklib_password_check` 
-+ Replication filters
 + Spider storage engine
 + Sphinx storage engine
 + TokuDB storage engine

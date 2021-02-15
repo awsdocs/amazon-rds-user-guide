@@ -1,6 +1,6 @@
 # Replication with a MySQL or MariaDB instance running external to Amazon RDS<a name="MySQL.Procedural.Importing.External.Repl"></a>
 
-You can set up replication between an Amazon RDS MySQL or MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\.
+You can set up replication between an Amazon RDS for MySQL or MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\.
 
 **Topics**
 + [Before you begin](#MySQL.Procedural.Importing.External.Repl.BeforeYouBegin)
@@ -18,7 +18,7 @@ To set the binary logging format for a MySQL or MariaDB database, update the `bi
 For information about setting the `binlog_format` parameter, see [Binary logging format](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.BinaryFormat)\. For information about the implications of different MySQL replication types, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Note**  
-Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-based replication into an Amazon RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
+Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-based replication into an RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
 
 ## Configuring binary log file position replication with an external source instance<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
 
@@ -142,7 +142,7 @@ Make sure that there isn't a space between the `-p` option and the entered passw
    CALL mysql.rds_set_external_master ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 'mysql-bin-changelog.000031', 107, 0);
    ```
 **Note**  
-On Amazon RDS MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
+On Amazon RDS for MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
 
 1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication:
 
@@ -155,7 +155,7 @@ On Amazon RDS MySQL, you can choose to use delayed replication by running the [m
 When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
 
 **Important**  
-GTID\-based replication is only supported on Amazon RDS MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. GTID\-based replication is not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.
+GTID\-based replication is only supported on Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. GTID\-based replication is not supported for Amazon RDS for MySQL 5\.5, 5\.6, or 8\.0\.
 
 **To configure GTID\-based replication with an external source instance**
 
@@ -263,7 +263,7 @@ Make sure that there is not a space between the `-p` option and the entered pass
    CALL mysql.rds_set_external_master_with_auto_position ('mymasterserver.mydomain.com', 3306, 'repl_user', 'password', 0, 0);
    ```
 **Note**  
-On Amazon RDS MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
+On Amazon RDS for MySQL, you can choose to use delayed replication by running the [mysql\.rds\_set\_external\_master\_with\_delay](mysql_rds_set_external_master_with_delay.md) stored procedure instead\. One reason to use delayed replication is to enable disaster recovery with the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. Currently, delayed replication is not supported on Amazon RDS MariaDB\.
 
 1. On the Amazon RDS DB instance, issue the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication\.
 

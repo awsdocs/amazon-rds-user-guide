@@ -127,7 +127,6 @@ Amazon RDS doesn't currently support the following MySQL features:
   The MariaDB Audit Plugin is supported for Amazon RDS MySQL version 5\.5, 5\.6, and 5\.7\.
 + Password Strength Plugin
 + Persisted system variables
-+ Replication filters
 + Semisynchronous replication
 + Transportable tablespace
 + X Plugin
