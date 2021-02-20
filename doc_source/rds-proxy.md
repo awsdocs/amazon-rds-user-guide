@@ -156,7 +156,7 @@
 ### Limitations for RDS Proxy<a name="rds-proxy.limitations"></a>
 
  The following limitations apply to RDS Proxy: 
-+  RDS Proxy is available only in certain AWS Regions only\. For more information, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
++  RDS Proxy is available only in certain AWS Regions only\. For more information, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
 
    You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
 +  Each proxy can have up to 200 associated Secrets Manager secrets\. Thus, each proxy can connect to with up to 200 different user accounts at any given time\. 

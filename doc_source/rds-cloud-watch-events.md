@@ -10,13 +10,13 @@ You can set a variety of targets, such as an AWS Lambda function or an Amazon SN
 For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\.
 
 **Topics**
-+ [Sending Amazon RDS events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
++ [Creating rules to send Amazon RDS events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
 + [DB instance events](#rds-cloudwatch-events.db-instances)
 + [DB parameter group events](#rds-cloudwatch-events.db-parameter-groups)
 + [DB security group events](#rds-cloudwatch-events.db-security-groups)
 + [DB snapshot events](#rds-cloudwatch-events.db-snapshots)
 
-## Sending Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
+## Creating rules to send Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
 
 You can create CloudWatch Events rules to send Amazon RDS events to CloudWatch Events\.
 
@@ -38,13 +38,23 @@ Use the following steps to create a CloudWatch Events rule that triggers on an e
 
    1. For **Event Type**, choose the type of Amazon RDS resource that triggers the event\. For example, if a DB instance triggers the event, choose **RDS DB Instance Event**\.
 
-1. For **Targets**, choose **Add Target**, then choose the **CloudWatch log group**\. 
+1. For **Targets**, choose **Add Target** and choose the AWS service that is to act when an event of the selected type is detected\. 
 
-1. For **Log Group**, enter a name for the log group to store the events\. 
+1. In the other fields in this section, enter information specific to this target type, if any is needed\. 
 
-1. Choose **Configure details**\. For **Rule definition**, type a name and description for the rule\. 
+1. For many target types, CloudWatch Events needs permissions to send events to the target\. In these cases, CloudWatch Events can create the IAM role needed for your event to run: 
+   + To create an IAM role automatically, choose **Create a new role for this specific resource**\.
+   + To use an IAM role that you created before, choose **Use existing role**\.
+
+1. Optionally, repeat steps 5\-7 to add another target for this rule\.
+
+1. Choose **Configure details**\. For **Rule definition**, type a name and description for the rule\.
+
+   The rule name must be unique within this Region\.
 
 1. Choose **Create rule**\.
+
+For more information, see [Creating a CloudWatch Events Rule That Triggers on an Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/Create-CloudWatch-Events-Rule.html) in the *Amazon CloudWatch User Guide*\.
 
 ## DB instance events<a name="rds-cloudwatch-events.db-instances"></a>
 

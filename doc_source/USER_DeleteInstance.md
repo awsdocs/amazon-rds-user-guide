@@ -115,39 +115,3 @@ aws rds delete-db-instance ^
 To delete a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html) operation with the following parameters:
 + `DBInstanceIdentifier`
 + `FinalDBSnapshotIdentifier` or `SkipFinalSnapshot`
-
-**Example With a final snapshot and no retained automated backups**  
-
-```
-https://rds.amazonaws.com/ 
-    ?Action=DeleteDBInstance
-    &DBInstanceIdentifier=mydbinstance
-    &FinalDBSnapshotIdentifier=mydbinstancefinalsnapshot
-    &DeleteAutomatedBackups=true
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2014-10-31
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
-    &X-Amz-Date=20140305T185838Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
-```
-
-**Example With retained automated backups and no final snapshot**  
-
-```
-https://rds.amazonaws.com/
-    ?Action=DeleteDBInstance
-    &DBInstanceIdentifier=mydbinstance
-    &SkipFinalSnapshot=true
-    &DeleteAutomatedBackups=false
-    &SignatureMethod=HmacSHA256
-    &SignatureVersion=4
-    &Version=2014-10-31
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20140305/us-west-1/rds/aws4_request
-    &X-Amz-Date=20140305T185838Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=b441901545441d3c7a48f63b5b1522c5b2b37c137500c93c45e209d4b3a064a3
-```

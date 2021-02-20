@@ -15,7 +15,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
 + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
-+ [Upgrading a PostgreSQL DB snapshot](USER_UpgradeDBSnapshot.PostgreSQL.md)
++ [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
 + [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
 + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
 + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
@@ -998,6 +998,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [fuzzystrmatch](http://www.postgresql.org/docs/current/fuzzystrmatch.html) | 1\.1 | 1\.1 | 
 | [hstore](http://www.postgresql.org/docs/current/hstore.html) | 1\.7 | 1\.7 | 
 | [ hstore\_plperl](https://www.postgresql.org/docs/current/hstore.html) | 1\.0 | 1\.0 | 
+| ICU | 60\.2 | 60\.2 | 
 | [ intagg](http://www.postgresql.org/docs/current/intagg.html) | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/current/intarray.html) | 1\.3 | 1\.3 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 2\.4 | 
@@ -1071,6 +1072,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 12 that a
 | [hll](https://github.com/citusdata/postgresql-hll) | 2\.14 | 2\.14 | 2\.14 | 2\.14 | 
 | [hstore](http://www.postgresql.org/docs/12/hstore.html) | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
 | [ hstore\_plperl](https://www.postgresql.org/docs/12/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
+| ICU | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
 | [ intagg](http://www.postgresql.org/docs/12/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/12/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 2\.4 | 2\.4 | 2\.4 | 

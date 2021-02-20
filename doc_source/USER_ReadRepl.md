@@ -98,7 +98,7 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 
 ### AWS CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
-To create a read replica from a source MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
+To create a read replica from a source DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
 
 **Example**  
 For Linux, macOS, or Unix:  
@@ -120,20 +120,7 @@ aws rds create-db-instance-read-replica ^
 
 ### RDS API<a name="USER_ReadRepl.Create.API"></a>
 
-To create a read replica from a source MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB instance, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
-
-```
-https://rds.amazonaws.com/
-	?Action=CreateDBInstanceReadReplica
-	&DBInstanceIdentifier=myreadreplica
-	&SourceDBInstanceIdentifier=mydbinstance
-	&Version=2012-01-15						
-	&SignatureVersion=2
-	&SignatureMethod=HmacSHA256
-	&Timestamp=2012-01-20T22%3A06%3A23.624Z
-	&AWSAccessKeyId=<AWS Access Key ID>
-	&Signature=<Signature>
-```
+To create a read replica from a source DB instance, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation\.
 
 ## Promoting a read replica to be a standalone DB instance<a name="USER_ReadRepl.Promote"></a>
 
@@ -208,19 +195,7 @@ aws rds promote-read-replica ^
 
 ### RDS API<a name="USER_ReadRepl.Promote.API"></a>
 
-To promote a read replica to a DB instance, call [ `PromoteReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplica.html)\.
-
-```
-https://rds.amazonaws.com/
-	?Action=PromoteReadReplica
-	&DBInstanceIdentifier=myreadreplica
-	&Version=2012-01-15						
-	&SignatureVersion=2
-	&SignatureMethod=HmacSHA256
-	&Timestamp=2012-01-20T22%3A06%3A23.624Z
-	&AWSAccessKeyId=<AWS Access Key ID>
-	&Signature=<Signature>
-```
+To promote a read replica to a DB instance, call the Amazon RDS API [ `PromoteReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PromoteReadReplica.html) operation\.
 
 ## Creating a read replica in a different AWS Region<a name="USER_ReadRepl.XRgn"></a>
 
@@ -231,7 +206,7 @@ You create a read replica in a different AWS Region to do the following:
 + Scale read operations into an AWS Region closer to your users\.
 + Make it easier to migrate from a data center in one AWS Region to a data center in another AWS Region\.
 
-Creating a read replica in a different AWS Region from the source instance is similar to creating a replica in the same AWS Region\. You can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) API operation\.
+Creating a read replica in a different AWS Region from the source instance is similar to creating a replica in the same AWS Region\. You can use the AWS Management Console, run the [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command, or call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation\.
 
 To create an encrypted read replica in a different AWS Region from the source DB instance, the source DB instance must be encrypted\.
 
@@ -338,7 +313,7 @@ aws rds create-db-instance-read-replica ^
 
 ### RDS API<a name="USER_ReadRepl.XRgn.API"></a>
 
- To create a read replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API function [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the read replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\.
+ To create a read replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the read replica and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\.
 
  To create an encrypted read replica in a different AWS Region than the source DB instance, you can use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation from the destination AWS Region\. To create an encrypted read replica in another AWS Region, you must specify a value for `PreSignedURL`\. `PreSignedURL` should contain a request for the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation to call in the source AWS Region where the read replica is created in\. To learn more about `PreSignedUrl`, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
 
@@ -347,37 +322,6 @@ For example, if your source DB instance is in the US East \(N\. Virginia\) Regio
 `arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance`
 
 For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\.
-
-**Example**  
-
-```
-https://us-west-2.rds.amazonaws.com/
-    ?Action=CreateDBInstanceReadReplica
-    &KmsKeyId=my-us-east-1-key
-    &PreSignedUrl=https%253A%252F%252Frds.us-west-2.amazonaws.com%252F
-         %253FAction%253D CreateDBInstanceReadReplica
-         %2526DestinationRegion%253Dus-east-1
-         %2526KmsKeyId%253Dmy-us-east-1-key
-         %2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%1234567890
-12%25253Adb%25253Amy-mysql-instance
-         %2526SignatureMethod%253DHmacSHA256
-         %2526SignatureVersion%253D4%2526SourceDBInstanceIdentifier%253Darn%25253Aaws%25253Ards%25253Aus-west-2%25253A123456789012%25253Ainstance%25253Amysql-instance1-instance-20161115
-         %2526Version%253D2014-10-31
-         %2526X-Amz-Algorithm%253DAWS4-HMAC-SHA256
-         %2526X-Amz-Credential%253DAKIADQKE4SARGYLE%252F20161117%252Fus-west-2%252Frds%252Faws4_request
-         %2526X-Amz-Date%253D20161117T215409Z
-         %2526X-Amz-Expires%253D3600
-         %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
-         %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
-    &DBInstanceIdentifier=myreadreplica
-    &SourceDBInstanceIdentifier=arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance
-    &Version=2012-01-15						
-    &SignatureVersion=2
-    &SignatureMethod=HmacSHA256
-    &Timestamp=2012-01-20T22%3A06%3A23.624Z
-    &AWSAccessKeyId=<AWS Access Key ID>
-    &Signature=<Signature>
-```
 
 ### Cross\-Region replication considerations<a name="USER_ReadRepl.XRgn.Cnsdr"></a>
 

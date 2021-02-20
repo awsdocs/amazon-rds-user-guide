@@ -6,7 +6,7 @@ You can export DB snapshot data to an Amazon S3 bucket\. After the data is expor
 
 When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
-You can export all types of DB and DB cluster snapshots including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
+You can export all types of DB snapshots—including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 
 **Note**  
 Exporting snapshots from DB instances that use magnetic storage isn't supported\.
@@ -14,7 +14,6 @@ Exporting snapshots from DB instances that use magnetic storage isn't supported\
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
-+ China
 
 The following table shows the engine versions that are supported for exporting snapshot data to Amazon S3\.
 

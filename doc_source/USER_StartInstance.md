@@ -17,7 +17,7 @@ When you start a DB instance that you previously stopped, the DB instance retain
 ## AWS CLI<a name="USER_StartInstance.CLI"></a>
 
 To start a DB instance by using the AWS CLI, call the [start\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance.html) command with the following option: 
-+ `--db-instance-identifier` – the name of the DB instance\. 
++ `--db-instance-identifier` – The name of the DB instance\. 
 
 **Example**  
 
@@ -28,20 +28,4 @@ To start a DB instance by using the AWS CLI, call the [start\-db\-instance](http
 ## RDS API<a name="USER_StartInstance.API"></a>
 
 To start a DB instance by using the Amazon RDS API, call the [StartDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StartDBInstance.html) operation with the following parameter: 
-+ `DBInstanceIdentifier` – the name of the DB instance\. 
-
-**Example**  
-
-```
- 1. https://rds.amazonaws.com/
- 2.     ?Action=StartDBInstance
- 3.     &DBInstanceIdentifier=mydbinstance
- 4.     &SignatureMethod=HmacSHA256
- 5.     &SignatureVersion=4
- 6.     &Version=2014-10-31
- 7.     &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 8.     &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
- 9.     &X-Amz-Date=20131016T233051Z
-10.     &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-11.     &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
++ `DBInstanceIdentifier` – The name of the DB instance\. 

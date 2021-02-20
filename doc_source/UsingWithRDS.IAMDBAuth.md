@@ -34,7 +34,7 @@ IAM database authentication is available for the following database engines:
 
 When using IAM database authentication, the following limitations apply:
 + The maximum number of connections per second for your DB instance might be limited depending on its DB instance class and your workload\.
-+ Currently, IAM database authentication doesn't support global condition context keys\.
++ Currently, IAM database authentication doesn't support all global condition context keys\.
 
   For more information about global condition context keys, see [ AWS global condition context keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html) in the *IAM User Guide*\.
 + Currently, IAM database authentication isn't supported for CNAMEs\.

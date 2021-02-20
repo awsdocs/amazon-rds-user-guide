@@ -258,7 +258,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
    + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
    + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
-   + [Upgrading a PostgreSQL DB snapshot](USER_UpgradeDBSnapshot.PostgreSQL.md)
+   + [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
    + [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
    + [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)
    + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)

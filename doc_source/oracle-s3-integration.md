@@ -13,10 +13,17 @@ The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 ## Prerequisites for Amazon RDS Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
-To work with Amazon RDS for Oracle integration with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. For this, you create an AWS Identity and Access Management \(IAM\) policy and an IAM role\. The Amazon VPC used by your DB instance doesn't need to provide access to the Amazon S3 endpoints\.
+For Amazon RDS for Oracle to integrate with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. Prepare for the integration as follows:
 
+1. Create an AWS Identity and Access Management \(IAM\) policy with the permissions required to transfer files from your bucket to RDS\. 
+
+   To create the policy, you need the Amazon Resource Name \(ARN\) value for your bucket\. Also, RDS for Oracle supports SSE\-KMS and SSE\-S3 encryption\. If your bucket is encrypted, you need the ARN for your AWS KMS key\. For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
 **Note**  
-To add a role to a DB instance, the status of the DB instance must be `available`\.
+An Oracle DB instance can't access Amazon S3 buckets encrypted with SSE\-C\.
+
+1. Create an IAM role, attach your new policy to it, and then attach the role to your Oracle DB instance\. The status of the DB instance must be `available`\.
+
+The Amazon VPC used by your DB instance doesn't need to provide access to the Amazon S3 endpoints\.
 
 ### Console<a name="oracle-s3-integration.preparing.console"></a>
 
@@ -24,26 +31,24 @@ To add a role to a DB instance, the status of the DB instance must be `available
 
 1. Open the [IAM Management Console](https://console.aws.amazon.com/iam/home?#home)\.
 
-1. In the navigation pane, choose **Policies**\.
+1. Under **Access management**, choose **Policies**\.
 
 1. Choose **Create policy**\.
 
 1. On the **Visual editor** tab, choose **Choose a service**, and then choose **S3**\.
 
-1. For **Actions**, choose **Expand all**, and then choose the bucket permissions and object permissions needed for the IAM policy\.
+1. For **Actions**, choose **Expand all**, and then choose the bucket permissions and object permissions required to transfer files from an Amazon S3 bucket to Amazon RDS\. For example, do the following:
+   + Expand **List**, and then select **ListBucket**\.
+   + Expand **Read**, and then select **GetObject**\.
+   + Expand **Write**, and then select **PutObject**\.
 
-   Include the appropriate actions in the policy based on the type of access required:
-   + `GetObject` – Required to transfer files from an Amazon S3 bucket to Amazon RDS\.
-   + `ListBucket` – Required to transfer files from an Amazon S3 bucket to Amazon RDS\.
-   + `PutObject` – Required to transfer files from Amazon RDS to an Amazon S3 bucket\.
-
-   *Object permissions* are permissions for object operations in Amazon S3, and need to be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for object operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
+   *Object permissions* are permissions for object operations in Amazon S3, and must be granted for objects in a bucket, not the bucket itself\. For more information about permissions for object operations in Amazon S3, see [Permissions for object operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-objects)\.
 
 1. Choose **Resources**, and choose **Add ARN** for **bucket**\.
 
 1. In the **Add ARN\(s\)** dialog box, provide the details about your resource, and choose **Add**\.
 
-   Specify the Amazon S3 bucket to allow access to\. For instance, if you want to allow Amazon RDS to access the Amazon S3 bucket named `example-bucket`, then set the Amazon Resource Name \(ARN\) value to `arn:aws:s3:::example-bucket`\.
+   Specify the Amazon S3 bucket to allow access to\. For instance, to allow Amazon RDS to access the Amazon S3 bucket named `example-bucket`, set the ARN value to `arn:aws:s3:::example-bucket`\.
 
 1. If the **object** resource is listed, choose **Add ARN** for **object**\.
 
@@ -53,11 +58,11 @@ To add a role to a DB instance, the status of the DB instance must be `available
 **Note**  
 You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing access permissions to your Amazon S3 resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
-1. \(Optional\) Choose **Add additional permissions** to add another Amazon S3 bucket to the policy, and repeat the previous steps for the bucket\.
-**Note**  
-You can repeat this to add corresponding bucket permission statements to your policy for each Amazon S3 bucket that you want Amazon RDS to access\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
+1. \(Optional\) Choose **Add additional permissions** to add resources to the policy\. For example, do the following:
+   + If your bucket is encrypted with a custom KMS key, select **KMS** for the service\. Select **Encrypt**, **ReEncrypt**, **Decrypt**, **DescribeKey**, and **GenerateDataKey** for actions\. Enter the ARN of your custom key as the resource\. For more information, see [Protecting Data Using Server\-Side Encryption with CMKs Stored in AWS Key Management Service \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   + If you want Amazon RDS to access to access other buckets, add the ARNs for these buckets\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
 
-1. Choose **Review policy**\.
+1. Choose **Next: Tags** and then **Next: Review**\.
 
 1. For **Name**, enter a name for your IAM policy, for example `rds-s3-integration-policy`\. You use this name when you create an IAM role to associate with your DB instance\. You can also add an optional **Description** value\.
 
@@ -81,11 +86,15 @@ You can repeat this to add corresponding bucket permission statements to your po
 
 1. Set **Role name** to a name for your IAM role, for example `rds-s3-integration-role`\. You can also add an optional **Role description** value\.
 
-1. Choose **Create Role**\.
+1. Choose **Create role**\.
 
 **To associate your IAM role with your DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Choose **Databases** from the navigation pane\.
+
+1. If your database instance is unavailable, choose **Actions** and then **Start**\. When the instance status shows **Started**, go to the next step\.
 
 1. Choose the Oracle DB instance name to display its details\.
 
@@ -135,6 +144,37 @@ You can repeat this to add corresponding bucket permission statements to your po
       }'
    ```
 
+   The following example includes permissions for custom KMS keys\.
+
+   ```
+   aws iam create-policy \
+      --policy-name rds-s3-integration-policy \
+      --policy-document '{
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "s3integration",
+            "Action": [
+              "s3:GetObject",
+              "s3:ListBucket",
+              "s3:PutObject",
+              "kms:Decrypt",
+              "kms:Encrypt",
+              "kms:ReEncrypt",
+              "kms:GenerateDataKey",
+              "kms:DescribeKey",
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "arn:aws:s3:::your-s3-bucket-arn", 
+              "arn:aws:s3:::your-s3-bucket-arn/*",
+              "arn:aws:kms:::your-kms-arn"
+            ]
+          }
+        ]
+      }'
+   ```
+
    For Windows:
 
    ```
@@ -154,6 +194,37 @@ You can repeat this to add corresponding bucket permission statements to your po
             "Resource": [
               "arn:aws:s3:::your-s3-bucket-arn", 
               "arn:aws:s3:::your-s3-bucket-arn/*"
+            ]
+          }
+        ]
+      }'
+   ```
+
+   The following example includes permissions for custom KMS keys\.
+
+   ```
+   aws iam create-policy ^
+      --policy-name rds-s3-integration-policy ^
+      --policy-document '{
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "s3integration",
+            "Action": [
+              "s3:GetObject",
+              "s3:ListBucket",
+              "s3:PutObject",
+              "kms:Decrypt",
+              "kms:Encrypt",
+              "kms:ReEncrypt",
+              "kms:GenerateDataKey",
+              "kms:DescribeKey",
+            ],
+            "Effect": "Allow",
+            "Resource": [
+              "arn:aws:s3:::your-s3-bucket-arn", 
+              "arn:aws:s3:::your-s3-bucket-arn/*",
+              "arn:aws:kms:::your-kms-arn"
             ]
           }
         ]
@@ -316,7 +387,7 @@ To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle 
 
 ## Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket<a name="oracle-s3-integration.using"></a>
 
-You can use Amazon RDS procedures to upload files from an Oracle DB instance to an Amazon S3 bucket\. You can also use Amazon RDS procedures to download files from an Amazon S3 bucket to an Oracle DB instance\. 
+You can use Amazon RDS procedures to transfer files between an Oracle DB instance and an Amazon S3 bucket\.
 
 **Note**  
 These procedures upload or download the files in a single directory\. You can't include subdirectories in these operations\.

@@ -9,7 +9,23 @@ To share an automated DB snapshot, create a manual DB snapshot by copying the au
 
 For more information on copying a snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB snapshot, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
-You can share a manual snapshot with up to 20 other AWS accounts\. You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Take care when sharing a snapshot as public so that none of your private information is included in any of your public snapshots\. 
+You can share a manual snapshot with up to 20 other AWS accounts\. You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Take care when sharing a snapshot as public so that none of your private information is included in any of your public snapshots\.
+
+You can use the following AWS CLI command \(Unix only\) to find the public snapshots for your AWS account in a particular AWS Region:
+
+```
+aws rds describe-db-snapshots --snapshot-type public --include-public | grep account_number
+```
+
+The output returned is similar to the following example if you have public snapshots:
+
+```
+"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot1",
+"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot2",
+```
+
+**Note**  
+You might see duplicate entries for `DBSnapshotIdentifier` or `SourceDBSnapshotIdentifier`\.
 
 The following limitations apply when sharing manual snapshots with other AWS accounts:
 + When you restore a DB instance from a shared snapshot using the AWS Command Line Interface \(AWS CLI\) or Amazon RDS API, you must specify the Amazon Resource Name \(ARN\) of the shared snapshot as the snapshot identifier\.

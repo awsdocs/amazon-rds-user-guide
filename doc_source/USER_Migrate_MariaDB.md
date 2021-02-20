@@ -106,21 +106,3 @@ For Windows:
 ### API<a name="USER_Migrate_MariaDB.API"></a>
 
 To migrate data from a MySQL DB snapshot to a MariaDB DB instance, call the Amazon RDS API operation [ `RestoreDBInstanceFromDBSnapshot`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html)\.
-
-**Example**  
-
-```
- 1. https://rds.us-west-2.amazonaws.com/
- 2.    ?Action=RestoreDBInstanceFromDBSnapshot
- 3.    &DBInstanceIdentifier= newmariadbinstance
- 4.    &DBSnapshotIdentifier= mysqlsnapshot
- 5.    &Engine= mariadb
- 6.    &SignatureMethod=HmacSHA256
- 7.    &SignatureVersion=4
- 8.    &Version=2013-09-09
- 9.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-10.    &X-Amz-Credential=AKIADQKE4SARGYLE/20140428/us-west-2/rds/aws4_request
-11.    &X-Amz-Date=20140428T232655Z
-12.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-13.    &X-Amz-Signature=78ac761e8c8f54a8c0727f4e67ad0a766fbb0024510b9aa34ea6d1f7df52fe92
-```

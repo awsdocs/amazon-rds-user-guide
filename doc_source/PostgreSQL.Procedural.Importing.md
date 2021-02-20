@@ -411,6 +411,10 @@ Also, be sure the database you use doesn't have any restrictions noted in [Impor
      --region your-region
   ```
 
+##### RDS API<a name="collapsible-section-3"></a>
+
+To add an IAM role for a PostgreSQL DB instance using the Amazon RDS API, call the [ AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) operation\. 
+
 #### Using security credentials to access an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.Credentials"></a>
 
 If you prefer, you can use security credentials to provide access to an Amazon S3 bucket instead of providing access with an IAM role\. To do this, use the `credentials` parameter in the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function call\. 

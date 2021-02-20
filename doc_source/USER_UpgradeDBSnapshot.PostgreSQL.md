@@ -1,4 +1,4 @@
-# Upgrading a PostgreSQL DB snapshot<a name="USER_UpgradeDBSnapshot.PostgreSQL"></a>
+# Upgrading a PostgreSQL DB snapshot engine version<a name="USER_UpgradeDBSnapshot.PostgreSQL"></a>
 
 With Amazon RDS, you can create a storage volume DB snapshot of your PostgreSQL DB instance\. When you create a DB snapshot, the snapshot is based on the engine version used by your Amazon RDS instance\. In addition to upgrading the DB engine version of your DB instance, you can also upgrade the engine version for your DB snapshots\. 
 
@@ -62,19 +62,3 @@ For Windows:
 To upgrade a DB snapshot to a new database engine version, call the Amazon RDS API [ ModifyDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshot.html) operation\. 
 + `DBSnapshotIdentifier` – The identifier of the DB snapshot to upgrade\. The identifier must be a unique Amazon Resource Name \(ARN\)\. For more information, see [Working with Amazon Resource Names \(ARNs\) in Amazon RDS](USER_Tagging.ARN.md)\. 
 + `EngineVersion` – The engine version to upgrade the DB snapshot to\.
-
-**Example**  
-
-```
- 1. https://rds.us-west-2.amazonaws.com/
- 2.    ?Action=ModifyDBSnapshot
- 3.    &DBSnapshotIdentifier=mydbsnapshot
- 4.    &EngineVersion=newversion
- 5.    &SignatureVersion=4
- 6.    &Version=2014-10-31
- 7.    &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 8.    &X-Amz-Credential=AKIADQKE4SARGYLE/20161222/us-west-1/rds/aws4_request
- 9.    &X-Amz-Date=20161222T233051Z
-10.    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-11.    &X-Amz-Signature=8052a76dfb18469393c5f0182cdab0ebc224a9c7c5c949155376c1c250fc7ec3
-```

@@ -209,24 +209,6 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
-To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
-+ `DBInstanceIdentifier = mydbinstance`
-+ `PreferredMaintenanceWindow = Tue:04:00-Tue:04:30`
-
-**Example**  
-The following code example sets the maintenance window to Tuesdays from 4:00\-4:30AM UTC\.  
-
-```
- 1. https://rds.us-west-2.amazonaws.com/
- 2. ?Action=ModifyDBInstance
- 3. &DBInstanceIdentifier=mydbinstance
- 4. &PreferredMaintenanceWindow=Tue:04:00-Tue:04:30
- 5. &SignatureMethod=HmacSHA256
- 6. &SignatureVersion=4
- 7. &Version=2014-09-01
- 8. &X-Amz-Algorithm=AWS4-HMAC-SHA256
- 9. &X-Amz-Credential=AKIADQKE4SARGYLE/20140425/us-east-1/rds/aws4_request
-10. &X-Amz-Date=20140425T192732Z
-11. &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-12. &X-Amz-Signature=1dc9dd716f4855e9bdf188c70f1cf9f6251b070b68b81103b59ec70c3e7854b3
-```
+To adjust the preferred maintenance window, use the Amazon RDS API [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
++ `DBInstanceIdentifier`
++ `PreferredMaintenanceWindow`

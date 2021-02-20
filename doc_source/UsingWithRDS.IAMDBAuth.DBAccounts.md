@@ -2,16 +2,12 @@
 
 With IAM database authentication, you don't need to assign database passwords to the user accounts you create\. If you remove an IAM user that is mapped to a database account, you should also remove the database account with the `DROP USER` statement\.
 
-## Using IAM authentication with PostgreSQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL"></a>
+**Note**  
+The user name used for IAM authentication must match the case of the user name in the database\.
 
-To use IAM authentication with PostgreSQL, connect to the DB instance, create database users, and then grant them the `rds_iam` role as shown in the following example\.
-
-```
-CREATE USER db_userx; 
-GRANT rds_iam TO db_userx;
-```
-
-The specified database account should have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role are named `db_userx`\. 
+**Topics**
++ [Using IAM authentication with MySQL](#UsingWithRDS.IAMDBAuth.DBAccounts.MySQL)
++ [Using IAM authentication with PostgreSQL](#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL)
 
 ## Using IAM authentication with MySQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.MySQL"></a>
 
@@ -29,3 +25,14 @@ If you see the following message, it means that the AWS\-provided plugin is not 
 To troubleshoot this error, verify that you are using a supported configuration and that you have enabled IAM database authentication on your DB instance\. For more information, see [Availability for IAM database authentication](UsingWithRDS.IAMDBAuth.md#UsingWithRDS.IAMDBAuth.Availability) and [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)\.
 
 After you create an account using `AWSAuthenticationPlugin`, you manage it in the same way as other database accounts\. For example, you can modify account privileges with `GRANT` and `REVOKE` statements, or modify various account attributes with the `ALTER USER` statement\. 
+
+## Using IAM authentication with PostgreSQL<a name="UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL"></a>
+
+To use IAM authentication with PostgreSQL, connect to the DB instance, create database users, and then grant them the `rds_iam` role as shown in the following example\.
+
+```
+CREATE USER db_userx; 
+GRANT rds_iam TO db_userx;
+```
+
+The specified database account should have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role are named `db_userx`\. 

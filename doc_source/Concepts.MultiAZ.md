@@ -5,9 +5,9 @@ Amazon RDS provides high availability and failover support for DB instances usin
 In a Multi\-AZ deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone\. The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy, eliminate I/O freezes, and minimize latency spikes during system backups\. Running a DB instance with high availability can enhance availability during planned system maintenance, and help protect your databases against DB instance failure and Availability Zone disruption\. For more information on Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
 **Note**  
-The high\-availability feature is not a scaling solution for read\-only scenarios; you cannot use a standby replica to serve read traffic\. To service read\-only traffic, you should use a read replica\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
+The high\-availability feature isn't a scaling solution for read\-only scenarios; you can't use a standby replica to serve read traffic\. To serve read\-only traffic, you use a read replica instead\. For more information, see [Working with read replicas](USER_ReadRepl.md)\.
 
-![\[High Availability Scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
+![\[High availability scenario\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-multi-AZ.png)
 
 Using the RDS console, you can create a Multi\-AZ deployment by simply specifying Multi\-AZ when creating a DB instance\. You can use the console to convert existing DB instances to Multi\-AZ deployments by modifying the DB instance and specifying the Multi\-AZ option\. You can also specify a Multi\-AZ deployment with the AWS CLI or Amazon RDS API\. Use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) or [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) or [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) API operation\.
 
@@ -34,17 +34,23 @@ In the event of a planned or unplanned outage of your DB instance, Amazon RDS au
 **Note**  
 You can force a failover manually when you reboot a DB instance\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.
 
-Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention\. The primary DB instance switches over automatically to the standby replica if any of the following conditions occur: 
-+ An Availability Zone outage 
-+ The primary DB instance fails 
-+ The DB instance's server type is changed 
-+ The operating system of the DB instance is undergoing software patching 
-+ A manual failover of the DB instance was initiated using **Reboot with failover**
+Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention\. The primary DB instance switches over automatically to the standby replica if any of the conditions described in the following table occurs\. You can view these failover reasons in the event log\.
+
+
+| Failover reason | Description | 
+| --- | --- | 
+| The operating system underlying the RDS database instance is being patched in an offline operation\. |  A failover was triggered during the maintenance window for an OS patch or a security update\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.  | 
+| The primary host of the RDS Multi\-AZ instance is unhealthy\. | The Multi\-AZ deployment detected an impaired primary DB instance and failed over\. | 
+| The primary host of the RDS Multi\-AZ instance is unreachable due to loss of network connectivity\. |  RDS monitoring detected a network reachability failure to the primary DB instance and triggered a failover\.  | 
+| The RDS instance was modified by customer\. |  An RDS DB instance modification triggered a failover\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.  | 
+| The RDS Multi\-AZ primary instance is busy and unresponsive\. |  The primary DB instance is unresponsive\. We recommend that you do the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) For more information on these recommendations, see [Overview of monitoring Amazon RDS](MonitoringOverview.md) and [Best practices for Amazon RDS](CHAP_BestPractices.md)\.  | 
+| The storage volume underlying the primary host of the RDS Multi\-AZ instance experienced a failure\. | The Multi\-AZ deployment detected a storage issue on the primary DB instance and failed over\. | 
+| The user requested a failover of the DB instance\. |  You rebooted the DB instance and chose **Reboot with failover**\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.  | 
 
 There are several ways to determine if your Multi\-AZ DB instance has failed over:
-+  DB event subscriptions can be set up to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\. 
++ DB event subscriptions can be set up to notify you by email or SMS that a failover has been initiated\. For more information about events, see [Using Amazon RDS event notification](USER_Events.md)\.
 + You can view your DB events by using the Amazon RDS console or API operations\.
-+  You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API operations\. 
++ You can view the current state of your Multi\-AZ deployment by using the Amazon RDS console and API operations\.
 
 For information on how you can respond to failovers, reduce recovery time, and other best practices for Amazon RDS, see [Best practices for Amazon RDS](CHAP_BestPractices.md)\.
 
@@ -52,22 +58,22 @@ For information on how you can respond to failovers, reduce recovery time, and o
 
 The failover mechanism automatically changes the Domain Name System \(DNS\) record of the DB instance to point to the standby DB instance\. As a result, you need to re\-establish any existing connections to your DB instance\. In a Java virtual machine \(JVM\) environment, due to how the Java DNS caching mechanism works, you might need to reconfigure JVM settings\.
 
-The JVM caches DNS name lookups\. When the JVM resolves a hostname to an IP address, it caches the IP address for a specified period of time, known as the *time\-to\-live* \(TTL\)\. 
+The JVM caches DNS name lookups\. When the JVM resolves a hostname to an IP address, it caches the IP address for a specified period of time, known as the *time\-to\-live* \(TTL\)\.
 
-Because AWS resources use DNS name entries that occasionally change, we recommend that you configure your JVM with a TTL value of no more than 60 seconds\. Doing this makes sure that when a resource's IP address changes, your application can receive and use the resource's new IP address by requerying the DNS\. 
+Because AWS resources use DNS name entries that occasionally change, we recommend that you configure your JVM with a TTL value of no more than 60 seconds\. Doing this makes sure that when a resource's IP address changes, your application can receive and use the resource's new IP address by requerying the DNS\.
 
-On some Java configurations, the JVM default TTL is set so that it never refreshes DNS entries until the JVM is restarted\. Thus, if the IP address for an AWS resource changes while your application is still running, it can't use that resource until you manually restart the JVM and the cached IP information is refreshed\. In this case, it's crucial to set the JVM's TTL so that it periodically refreshes its cached IP information\. 
+On some Java configurations, the JVM default TTL is set so that it never refreshes DNS entries until the JVM is restarted\. Thus, if the IP address for an AWS resource changes while your application is still running, it can't use that resource until you manually restart the JVM and the cached IP information is refreshed\. In this case, it's crucial to set the JVM's TTL so that it periodically refreshes its cached IP information\.
 
 **Note**  
 The default TTL can vary according to the version of your JVM and whether a security manager is installed\. Many JVMs provide a default TTL less than 60 seconds\. If you're using such a JVM and not using a security manager, you can ignore the rest of this topic\. For more information on security managers in Oracle, see [The security manager](https://docs.oracle.com/javase/tutorial/essential/environment/security.html) in the Oracle documentation\.
 
-To modify the JVM's TTL, set the [ `networkaddress.cache.ttl`](https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html) property value\. Use one of the following methods, depending on your needs: 
-+  To set the property value globally for all applications that use the JVM, set `networkaddress.cache.ttl` in the `$JAVA_HOME/jre/lib/security/java.security` file\.
+To modify the JVM's TTL, set the [ `networkaddress.cache.ttl`](https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html) property value\. Use one of the following methods, depending on your needs:
++ To set the property value globally for all applications that use the JVM, set `networkaddress.cache.ttl` in the `$JAVA_HOME/jre/lib/security/java.security` file\.
 
   ```
   networkaddress.cache.ttl=60					
   ```
-+  To set the property locally for your application only, set `networkaddress.cache.ttl` in your application's initialization code before any network connections are established\.
++ To set the property locally for your application only, set `networkaddress.cache.ttl` in your application's initialization code before any network connections are established\.
 
   ```
   java.security.Security.setProperty("networkaddress.cache.ttl" , "60");					

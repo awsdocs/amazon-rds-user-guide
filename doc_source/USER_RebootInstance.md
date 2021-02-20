@@ -73,34 +73,4 @@ aws rds reboot-db-instance ^
 
 ## RDS API<a name="USER_RebootInstance.API"></a>
 
-To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) action\. 
-
-**Example Simple reboot**  
-
-```
-https://rds.amazonaws.com/
-	?Action=RebootDBInstance
-    &DBInstanceIdentifier=mydbinstance
-    &Version=2014-10-31						
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
-    &X-Amz-Date=20131016T233051Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
-
-**Example Reboot with failover**  
-To force a failover from one AZ to the other, set the `ForceFailover` parameter to `true`\.   
-
-```
-https://rds.amazonaws.com/
-    ?Action=RebootDBInstance
-    &DBInstanceIdentifier=mydbinstance
-    &ForceFailover=true
-    &Version=2014-10-31						
-    &X-Amz-Algorithm=AWS4-HMAC-SHA256
-    &X-Amz-Credential=AKIADQKE4SARGYLE/20131016/us-west-1/rds/aws4_request
-    &X-Amz-Date=20131016T233051Z
-    &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-    &X-Amz-Signature=087a8eb41cb1ab5f99e81575f23e73757ffc6a1e42d7d2b30b9cc0be988cff97
-```
+To reboot a DB instance by using the Amazon RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RebootDBInstance.html) operation\. 
