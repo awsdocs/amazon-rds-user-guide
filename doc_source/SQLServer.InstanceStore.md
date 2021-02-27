@@ -2,7 +2,10 @@
 
 An *instance store* provides temporary block\-level storage for your DB instance\. This storage is located on disks that are physically attached to the host computer\. These disks have Non\-Volatile Memory Express \(NVMe\) instance storage that is based on solid\-state drives \(SSDs\)\. This storage is optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 
-By placing `tempdb` data files and log files on the instance store, you can achieve lower read and write latencies compared to standard storage based on Amazon EBS\.
+By placing `tempdb` data files and `tempdb` log files on the instance store, you can achieve lower read and write latencies compared to standard storage based on Amazon EBS\.
+
+**Note**  
+SQL Server database files and database log files aren't placed on the instance store\.
 
 ## Enabling the instance store<a name="SQLServer.InstanceStore.Enable"></a>
 

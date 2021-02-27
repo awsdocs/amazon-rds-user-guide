@@ -7,12 +7,11 @@ Amazon RDS supports Multi\-AZ deployments for Microsoft SQL Server by using eith
 When you set up SQL Server Multi\-AZ, RDS automatically configures all databases on the instance to use DBM or AGs\. Amazon RDS handles the primary, the witness, and the secondary DB instance for you\. Because configuration is automatic, RDS selects DBM or Always On AGs based on the version of SQL Server that you deploy\.
 
 Amazon RDS supports Multi\-AZ with Always On AGs for the following SQL Server versions and editions:
-+ SQL Server 2019: Enterprise Edition
++ SQL Server 2019: Standard and Enterprise Editions
 + SQL Server 2017: Enterprise Edition 14\.00\.3049\.1 or later 
 + SQL Server 2016: Enterprise Edition 13\.00\.5216\.0 or later
 
-Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and editions, except for the versions of Enterprise Edition noted previously:
-+ SQL Server 2019: Standard Edition
+Amazon RDS supports Multi\-AZ with DBM for the following SQL Server versions and editions, except for the versions noted previously:
 + SQL Server 2017: Standard and Enterprise Editions
 + SQL Server 2016: Standard and Enterprise Editions 
 + SQL Server 2014: Standard and Enterprise Editions

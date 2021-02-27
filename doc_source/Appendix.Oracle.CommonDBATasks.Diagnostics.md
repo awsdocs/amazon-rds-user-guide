@@ -1,4 +1,4 @@
-# Common DBA diagnostic tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Diagnostics"></a>
+# Performing common diagnostic tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Diagnostics"></a>
 
 Oracle Database includes a fault diagnosability infrastructure that you can use to investigate database problems\. In Oracle terminology, a *problem* is a critical error such as a code bug or data corruption\. An *incident* is the occurrence of a problem\. If the same error occurs three times, then the infrastructure shows three incidents of this problem\. For more information, see [Diagnosing and resolving problems](https://docs.oracle.com/en/database/oracle/oracle-database/19/admin/diagnosing-and-resolving-problems.html#GUID-8DEB1BE0-8FB9-4FB2-A19A-17CF6F5791C3) in the Oracle Database documentation\.
 

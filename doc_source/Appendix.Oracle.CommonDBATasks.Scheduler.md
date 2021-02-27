@@ -1,4 +1,4 @@
-# Common DBA Oracle Scheduler tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Scheduler"></a>
+# Performing common scheduling tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Scheduler"></a>
 
 Some SYS\-owned scheduler jobs can interfere with normal database operations, and Oracle Support recommends they be disabled or the job schedule be modified\. You can use the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler` to perform tasks for SYS\-owned Oracle Scheduler jobs\.
 
@@ -39,7 +39,7 @@ end;
 ```
 
 **Note**  
-Some SYS\-owned Oracle Scheduler jobs can interfere with normal database operations\. Oracle Support recommends that they be disabled or that the job schedule be modified\. Amazon RDS for Oracle doesn't provide the required privileges to modify SYS\-owned Oracle Scheduler jobs using the `DBMS_SCHEDULER` package\. Instead, you can use the procedures in the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler` to perform tasks for SYS\-owned Oracle Scheduler jobs\. For information about using these procedures, see [Common DBA Oracle Scheduler tasks for Oracle DB instances](#Appendix.Oracle.CommonDBATasks.Scheduler)\.
+Some SYS\-owned Oracle Scheduler jobs can interfere with normal database operations\. Oracle Support recommends that they be disabled or that the job schedule be modified\. Amazon RDS for Oracle doesn't provide the required privileges to modify SYS\-owned Oracle Scheduler jobs using the `DBMS_SCHEDULER` package\. Instead, you can use the procedures in the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler` to perform tasks for SYS\-owned Oracle Scheduler jobs\. For information about using these procedures, see [Performing common scheduling tasks for Oracle DB instances](#Appendix.Oracle.CommonDBATasks.Scheduler)\.
 
 ## Setting the time zone for Oracle Scheduler jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone"></a>
 

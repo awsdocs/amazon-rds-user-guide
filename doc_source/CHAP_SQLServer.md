@@ -63,7 +63,9 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   +  Database instance put into incompatible\-restore\. The instance has 76 databases, but after conversion it would only support 75\. 
 + Some ports are reserved for Amazon RDS, and you can't use them when you create a DB instance\.
 + Client connections from IP addresses within the range 169\.254\.0\.0/16 are not permitted\. This is the Automatic Private IP Addressing Range \(APIPA\), which is used for local\-link addressing\.
-+ SQL Server Standard Edition will use only a subset of the available processors if the DB instance has more processors than the software limits \(24 cores, 4 sockets, and 128GB RAM\)\. Examples of this are the db\.m5\.24xlarge and db\.r5\.24xlarge instance classes\.
++ SQL Server Standard Edition uses only a subset of the available processors if the DB instance has more processors than the software limits \(24 cores, 4 sockets, and 128GB RAM\)\. Examples of this are the db\.m5\.24xlarge and db\.r5\.24xlarge instance classes\.
+
+  For more information, see the table of scale limits under [Editions and supported features of SQL Server 2019 \(15\.x\)](https://docs.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-version-15) in the Microsoft documentation\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\.
 + The maximum storage size for SQL Server DB instances is the following: 

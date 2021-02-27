@@ -33,7 +33,7 @@ Complete the following steps to update your CA certificate\.
    + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
    + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
-   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](Oracle.Concepts.RestrictedDBAPrivileges.md#ssl-certificate-rotation-oracle)
    + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
    For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.
@@ -121,7 +121,7 @@ Complete the following steps to update your CA certificate by applying DB instan
    + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
    + [Updating applications to connect to Microsoft SQL Server DB instances using new SSL/TLS certificates](ssl-certificate-rotation-sqlserver.md)
    + [Updating applications to connect to MySQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mysql.md)
-   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](ssl-certificate-rotation-oracle.md)
+   + [Updating applications to connect to Oracle DB instances using new SSL/TLS certificates](Oracle.Concepts.RestrictedDBAPrivileges.md#ssl-certificate-rotation-oracle)
    + [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
 
    For a sample script that updates a trust store for a Linux operating system, see [Sample script for importing certificates into your trust store](#UsingWithRDS.SSL-certificate-rotation-sample-script)\.

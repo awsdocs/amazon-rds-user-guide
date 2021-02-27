@@ -100,7 +100,7 @@ Make sure that your on\-premises Microsoft Active Directory domain name includes
 
 ## Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service<a name="postgresql-kerberos-setting-up.CreateIAMRole"></a>
 
-For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to AWS Directory Service\.
+For Amazon RDS to call AWS Directory Service for you, an IAM role that uses the managed IAM policy `AmazonRDSDirectoryServiceAccess` is required\. This role allows Amazon RDS to make calls to AWS Directory Service\. 
 
 When a DB instance is created using the AWS Management Console and the console user has the `iam:CreateRole` permission, the console creates this role automatically\. In this case, the role name is `rds-directoryservice-kerberos-access-role`\. Otherwise, create the IAM role manually\. Choose **RDS** and then **RDS \- Directory Service**\. Attach the AWS managed policy `AmazonRDSDirectoryServiceAccess` to this role\.
 
@@ -190,15 +190,13 @@ Create or modify a PostgreSQL DB instance for use with your directory\. You can 
 +   Restore a PostgreSQL DB instance from a DB snapshot using the console, the [restore\-db\-instance\-from\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-from-db-snapshot.html) CLI command, or the [ RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) RDS API operation\. For instructions, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\. 
 +   Restore a PostgreSQL DB instance to a point\-in\-time using the console, the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) CLI command, or the [ RestoreDBInstanceToPointInTime](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceToPointInTime.html) RDS API operation\. For instructions, see [Restoring a DB instance to a specified time](USER_PIT.md)\. 
 
-Kerberos authentication is only supported for PostgreSQL DB instancesin a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows ingress and egress within the directory's VPC so the DB instance can communicate with the directory\.
+Kerberos authentication is only supported for PostgreSQL DB instances in a VPC\. The DB instance can be in the same VPC as the directory, or in a different VPC\. The DB instance must use a security group that allows ingress and egress within the directory's VPC so the DB instance can communicate with the directory\.
 
-When you use the console to create a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Choose **Browse Directory** and then select the directory, or choose **Create a new directory**\.
+### Console<a name="postgresql-kerberos-setting-up.create-modify.Console"></a>
 
-![\[Kerberos authentication setting when creating a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-authentication.png)
+When you use the console to create, modify, or restore a DB instance, choose **Password and Kerberos authentication** in the **Database authentication** section\. Then choose **Browse Directory**\. Select the directory or choose **Create a new directory** to use the Directory Service\.
 
-When you use the console to modify or restore a DB instance, choose the directory in the **Kerberos authentication** section, or choose **Create a new directory**\.
-
-![\[Kerberos authentication setting when modifying or restoring a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/kerberos-auth-modify-restore.png)
+### AWS CLI<a name="postgresql-kerberos-setting-up.create-modify.CLI"></a>
 
 When you use the AWS CLI, the following parameters are required for the DB instance to be able to use the directory that you created:
 + For the `--domain` parameter, use the domain identifier \("d\-\*" identifier\) generated when you created the directory\.
@@ -217,7 +215,7 @@ If you modify a DB instance to enable Kerberos authentication, reboot the DB ins
 
 Use the RDS master user credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. The DB instance is joined to the AWS Managed Microsoft AD domain\. Thus, you can provision PostgreSQL logins and users from the Microsoft Active Directory users and groups in your domain\. To manage database permissions, you grant and revoke standard PostgreSQL permissions to these logins\. 
 
-To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\.
+To allow an Active Directory user to authenticate with PostgreSQL, use the RDS master user credentials\. You use these credentials to connect to the PostgreSQL DB instance as you do with any other DB instance\. After you're logged in, create an externally authenticated user in PostgreSQL and grant the `rds_ad` role to this user\. 
 
 ```
 CREATE USER "username@CORP.EXAMPLE.COM" WITH LOGIN; 
@@ -225,6 +223,8 @@ GRANT rds_ad TO "username@CORP.EXAMPLE.COM";
 ```
 
  Replace `username ` with the user name and include the domain name in uppercase\. Users \(both humans and applications\) from your domain can now connect to the RDS PostgreSQL instance from a domain\-joined client machine using Kerberos authentication\. 
+
+Note that a database user can use either Kerberos or IAM authentication but not both, so this user can't also have the `rds_iam` role\. This also applies to nested memberships\. For more information, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
 ## Step 8: Configure a PostgreSQL client<a name="postgresql-kerberos-setting-up.configure-client"></a>
 

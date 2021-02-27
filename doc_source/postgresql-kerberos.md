@@ -6,7 +6,14 @@ You create an AWS Managed Microsoft AD directory to store user credentials\. You
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 
-Kerberos provides a different authentication method than AWS Identity and Access Management \(IAM\)\. A database can use either Kerberos or IAM authentication but not both\. For more information about IAM authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. 
+**Topics**
++ [Availability of Kerberos authentication](#postgresql-kerberos-availability)
++ [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)
++ [Setting up Kerberos authentication for PostgreSQL DB instances](postgresql-kerberos-setting-up.md)
++ [Managing a DB instance in a Domain](postgresql-kerberos-managing.md)
++ [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
+
+## Availability of Kerberos authentication<a name="postgresql-kerberos-availability"></a>
 
 Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the following AWS Regions: 
 
@@ -33,12 +40,6 @@ Amazon RDS supports Kerberos authentication for PostgreSQL DB instances in the f
 | South America \(São Paulo\) | sa\-east\-1 | 
 | AWS GovCloud \(US\-East\) | gov\-us\-east\-1  | 
 | AWS GovCloud \(US\-West\) | gov\-us\-west\-1 | 
-
-**Topics**
-+ [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)
-+ [Setting up Kerberos authentication for PostgreSQL DB instances](postgresql-kerberos-setting-up.md)
-+ [Managing a DB instance in a Domain](postgresql-kerberos-managing.md)
-+ [Connecting to PostgreSQL with Kerberos authentication](postgresql-kerberos-connecting.md)
 
 ## Overview of Kerberos authentication for PostgreSQL DB instances<a name="postgresql-kerberos-overview"></a>
 

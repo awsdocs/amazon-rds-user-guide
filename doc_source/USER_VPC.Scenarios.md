@@ -1,13 +1,11 @@
 # Scenarios for accessing a DB instance in a VPC<a name="USER_VPC.Scenarios"></a>
 
-Amazon RDS supports the following scenarios for accessing a DB instance:
-
-
-****  
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Scenarios.html)
-
-**Note**  
-If your DB instance is in a VPC but isn't publicly accessible, you can also use an AWS Site\-to\-Site VPN connection or an AWS Direct Connect connection to access it from a private network\. For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
+Amazon RDS supports the following scenarios for accessing a DB instance in a VPC:
++ [An EC2 instance in the same VPC](#USER_VPC.Scenario1)
++ [An EC2 instance in a different VPC](#USER_VPC.Scenario3)
++ [A client application through the internet](#USER_VPC.Scenario4)
++ [A private network](#USER_VPC.NotPublic)
++ [An EC2 instance not in a VPC](#USER_VPC.ClassicLink)
 
 ## A DB instance in a VPC accessed by an EC2 instance in the same VPC<a name="USER_VPC.Scenario1"></a>
 
@@ -32,9 +30,9 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1.  In the navigation pane, choose **Security Groups**\. 
 
-1. Choose or create a security group for which you want to allow access to members of another security group\. In the scenario preceding, this is the security group that you use for your DB instances\. Choose the **Inbound Rules** tab, and then choose **Edit rule**\.
+1. Choose or create a security group for which you want to allow access to members of another security group\. In the scenario preceding, this is the security group that you use for your DB instances\. Choose the **Inbound rules** tab, and then choose **Edit inbound rules**\.
 
-1. On the **Edit inbound rules** page, choose **Add Rule**\.
+1. On the **Edit inbound rules** page, choose **Add rule**\.
 
 1. From **Type**, choose the entry that corresponds to the port you used when you created your DB instance, such as **MYSQL/Aurora**\.
 
@@ -42,11 +40,11 @@ For a tutorial that shows you how to create a VPC with both public and private s
 
 1. If required, repeat the steps for the TCP protocol by creating a rule with **All TCP** as the **Type** and your security group in the **Source** box\. If you intend to use the UDP protocol, create a rule with **All UDP** as the **Type** and your security group in the **Source** box\.
 
-1. Choose **Save** when you are done\.
+1. Choose **Save rules** when you are done\.
 
-The following screen shows several inbound rules\.
+The following screen shows an inbound rule with a security group for its source\.
 
-![\[adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-vpc-add-sg-rule.png)
+![\[Adding a security group to another security group's rules\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/con-vpc-add-sg-rule.png)
 
 ## A DB instance in a VPC accessed by an EC2 instance in a different VPC<a name="USER_VPC.Scenario3"></a>
 
@@ -58,9 +56,43 @@ The following diagram shows this scenario\.
 
 A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses\. Instances in either VPC can communicate with each other as if they are within the same network\. You can create a VPC peering connection between your own VPCs, with a VPC in another AWS account, or with a VPC in a different AWS Region\. To learn more about VPC peering, see [VPC peering](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-peering.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
+## A DB instance in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario4"></a>
+
+To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an internet gateway to enable communication over the internet\. 
+
+The following diagram shows this scenario\. 
+
+![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/GS-VPC-network.png)
+
+We recommend the following configuration:
+
+ 
++ A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
++ A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
++ An Amazon RDS DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
++ An internet gateway which connects the VPC to the internet and to other AWS products\.
++ A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
+
+For information about creating a DB instance in a VPC, see [Creating a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
+
+## A DB instance in a VPC accessed by a private network<a name="USER_VPC.NotPublic"></a>
+
+If your DB instance is isn't publicly accessible, you have the following options for accessing it from a private network:
++ An AWS Site\-to\-Site VPN connection\. For more information, see [What is AWS Site\-to\-Site VPN?](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
++ An AWS Direct Connect connection\. For more information, see [What is AWS Direct Connect?](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html)
+
+The following diagram shows a scenario with an AWS Site\-to\-Site VPN connection\. 
+
+![\[A DB Instance in a VPC Accessed by a private network\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/site-to-site-vpn-connection.png)
+
+For more information, see [Internetwork traffic privacy](inter-network-traffic-privacy.md)\.
+
 ## A DB instance in a VPC accessed by an EC2 instance not in a VPC<a name="USER_VPC.ClassicLink"></a>
 
-You can communicate between an Amazon RDS DB instance that is in a VPC and an EC2 instance that is not in an Amazon VPC by using *ClassicLink*\. When you use Classic Link, an application on the EC2 instance can connect to the DB instance by using the endpoint for the DB instance\. ClassicLink is available at no charge\. 
+You can communicate between an Amazon RDS DB instance that is in a VPC and an EC2 instance that is not in an Amazon VPC by using *ClassicLink*\. When you use ClassicLink, an application on the EC2 instance can connect to the DB instance by using the endpoint for the DB instance\. ClassicLink is available at no charge\. 
+
+**Important**  
+If your EC2 instance was created after 2013, it is probably in a VPC\.
 
 The following diagram shows this scenario\. 
 
@@ -86,91 +118,3 @@ Using ClassicLink, you can connect an EC2 instance to a logically isolated datab
 
 **Note**  
  The ClassicLink features are only visible in the consoles for accounts and regions that support EC2\-Classic\. For more information, see [ ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
-
-## A DB instance in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario4"></a>
-
-To access a DB instance in a VPC from a client application through the internet, you configure a VPC with a single public subnet, and an internet gateway to enable communication over the internet\. 
-
-The following diagram shows this scenario\. 
-
-![\[A DB Instance in a VPC Accessed by a Client Application Through the internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/GS-VPC-network.png)
-
-We recommend the following configuration:
-
- 
-+ A VPC of size /16 \(for example CIDR: 10\.0\.0\.0/16\)\. This size provides 65,536 private IP addresses\.
-+ A subnet of size /24 \(for example CIDR: 10\.0\.0\.0/24\)\. This size provides 256 private IP addresses\.
-+ An Amazon RDS DB instance that is associated with the VPC and the subnet\. Amazon RDS assigns an IP address within the subnet to your DB instance\.
-+ An internet gateway which connects the VPC to the internet and to other AWS products\.
-+ A security group associated with the DB instance\. The security group's inbound rules allow your client application to access to your DB instance\.
-
-For information about creating a DB instance in a VPC, see [Creating a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.InstanceInVPC)\.
-
-## A DB instance not in a VPC accessed by an EC2 instance in a VPC<a name="USER_VPC.Scenario5"></a>
-
-In the case where you have an EC2 instance in a VPC and an RDS DB instance not in a VPC, you can connect them over the public internet\. 
-
-The following diagram shows this scenario\. 
-
-![\[A DB Instance not in a VPC Accessed by an EC2 Instance in a VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/legacyRDS2EC2VPC.png)
-
-**Note**  
-*ClassicLink*, as described in [A DB instance in a VPC accessed by an EC2 instance not in a VPC](#USER_VPC.ClassicLink), is not available for this scenario\. 
-
-To connect your DB instance and your EC2 instance over the public internet, do the following:
-+ Ensure that the EC2 instance is in a public subnet in the VPC\.
-+ Ensure that the RDS DB instance was marked as publicly accessible\.
-+ A note about network ACLs here\. A network ACL is like a firewall for your entire subnet\. Therefore, all instances in that subnet are subject to network ACL rules\. By default, network ACLs allow all traffic and you generally don't need to worry about them, unless you particularly want to add rules as an extra layer of security\. A security group, on the other hand, is associated with individual instances, and you do need to worry about security group rules\.
-+ Add the necessary ingress rules to the DB security group for the RDS DB instance\.
-
-  An ingress rule specifies a network port and a CIDR/IP range\. For example, you can add an ingress rule that allows port 3306 to connect to a MySQL RDS DB instance, and a CIDR/IP range of `203.0.113.25/32`\. For more information, see [Authorizing network access to a DB security group from an IP range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
-
-**Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
-
-## A DB instance not in a VPC accessed by an EC2 instance not in a VPC<a name="USER_VPC.Scenario7"></a>
-
-When neither your DB instance nor an application on an EC2 instance are in a VPC, you can access the DB instance by using its endpoint and port\. 
-
-The following diagram shows this scenario\. 
-
-![\[A DB Instance Not in a VPC Accessed by an EC2 Instance Not in a VPC\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/legacyRDS2legacyec2.png)
-
-You must create a security group for the DB instance that permits access from the port you specified when creating the DB instance\. For example, you could use a connection string similar to this connection string used with *sqlplus* to access an Oracle DB instance:
-
-```
-PROMPT>sqlplus 'mydbusr@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<endpoint>)
-    (PORT=<port number>))(CONNECT_DATA=(SID=<database name>)))'
-```
-
-For more information, see the following documentation\. 
-
-
-****  
-
-| Database engine | Relevant documentation | 
-| --- | --- | 
-| MariaDB | [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md) | 
-| Microsoft SQL Server | [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md) | 
-| MySQL | [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md) | 
-| Oracle | [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md) | 
-| PostgreSQL | [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md) | 
-
-**Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
-
-## A DB instance not in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario6"></a>
-
-New Amazon RDS customers can only create a DB instance in a VPC\. However, you might need to connect to an existing Amazon RDS DB instance that is not in a VPC from a client application through the internet\. 
-
-The following diagram shows this scenario\. 
-
-![\[A DB Instance not in a VPC Accessed by a Client Application via the Internet\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/legacyRDS2client.png)
-
-In this scenario, you must ensure that the DB security group for the RDS DB instance includes the necessary ingress rules for your client application to connect\. An ingress rule specifies a network port and a CIDR/IP range\. For example, you can add an ingress rule that allows port 3306 to connect to a MySQL RDS DB instance, and a CIDR/IP range of `203.0.113.25/32`\. For more information, see [Authorizing network access to a DB security group from an IP range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
-
-**Warning**  
-If you intend to access a DB instance behind a firewall, talk with your network administrator to determine the IP addresses you should use\.
-
-**Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 

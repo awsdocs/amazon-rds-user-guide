@@ -4,7 +4,10 @@ For added disaster recovery capability, you can configure your Amazon RDS databa
 
 DB snapshot copy charges apply to the data transfer\. After the DB snapshot is copied, standard charges apply to storage in the destination Region\. For more details, see [RDS Pricing](https://aws.amazon.com/rds/oracle/pricing/)\.
 
-Backup replication is available for RDS DB instances running the Oracle database engine\. Backup replication isn't supported for encrypted DB instances\.
+Backup replication is available for RDS DB instances running the following database engines:
++ Oracle version 12\.1\.0\.2\.v10 and higher
+
+Backup replication isn't supported for encrypted DB instances\.
 
 ## Enabling cross\-Region automated backups<a name="AutomatedBackups.Replicating.Enable"></a>
 
@@ -261,11 +264,11 @@ For general information on point\-in\-time recovery \(PITR\), see [Restoring a D
 
    If you chose **Custom**, enter the date and time that you want to restore the instance to\.
 **Note**  
-Times are shown in your local time zone, which is indicated by an offset from Universal Coordinated Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
+Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
 1. For **DB instance identifier**, enter the name of the target restored DB instance\.
 
-1. \(Optional\) Choose other options as needed\.
+1. \(Optional\) Choose other options as needed, such as enabling autoscaling\.
 
 1. Choose **Restore to point in time**\.
 

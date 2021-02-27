@@ -166,16 +166,16 @@ After you have purchased reserved DB instances, you can get information about yo
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the **Navigation** pane, choose **Reserved instances**\. 
+1. In the **Navigation** pane, choose **Reserved instances**\.
 
-   The reserved DB instances for your account appear\. To see detailed information about a particular reserved DB instance, choose that instance in the list\. You can then see detailed information about that instance in the detail pane at the bottom of the console\. 
+   The reserved DB instances for your account appear\. To see detailed information about a particular reserved DB instance, choose that instance in the list\. You can then see detailed information about that instance in the detail pane at the bottom of the console\.
 
 ### AWS CLI<a name="USER_WorkingWithReservedDBInstances.CLI"></a>
 
-You can use the AWS CLI to work with reserved DB instances as shown in the following examples\. 
+You can use the AWS CLI to work with reserved DB instances as shown in the following examples\.
 
-**Example Get available reserved DB instance offerings**  
-To get information about available reserved DB instance offerings, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html)\.   
+**Example of getting available reserved DB instance offerings**  
+To get information about available reserved DB instance offerings, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances-offerings.html)\.  
 
 ```
 aws rds describe-reserved-db-instances-offerings
@@ -195,13 +195,14 @@ This call returns output similar to the following:
 10. OFFERING  123456cd-ab1c-17d0-bfa6-12345667234e  db.m1.xlarge  n         1y        4242.00 USD   2.42 USD    mysql        No       Upfront
 ```
 
-After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following example\. 
+After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering\.
 
-**Example Purchase a reserved DB instance**  
-To purchase a reserved DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html](https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html) with the following parameters:   
-+ `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
-+ `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
-The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
+To purchase a reserved DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html](https://docs.aws.amazon.com/cli/latest/reference/rds/purchase-reserved-db-instances-offering.html) with the following parameters:
++ `--reserved-db-instances-offering-id` – The ID of the offering that you want to purchase\. See the preceding example to get the offering ID\.
++ `--reserved-db-instance-id` – You can assign your own identifier to the reserved DB instances that you purchase to help track them\.
+
+**Example of purchasing a reserved DB instance**  
+The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.  
 For Linux, macOS, or Unix:  
 
 ```
@@ -223,10 +224,11 @@ The command returns output similar to the following:
 2. RESERVATION  MyReservation      db.m1.small  y         2011-12-19T00:30:23.247Z  1y        455.00 USD   0.092 USD    1      payment-pending  mysql        Partial  Upfront
 ```
 
-After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following example\. 
+After you have purchased reserved DB instances, you can get information about your reserved DB instances\.
 
-**Example Get your reserved DB instances**  
-To get information about reserved DB instances for your AWS account, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html)\.   
+To get information about reserved DB instances for your AWS account, call the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-reserved-db-instances.html), as shown in the following example\.
+
+**Example of getting your reserved DB instances**  
 
 ```
 aws rds describe-reserved-db-instances
@@ -240,171 +242,9 @@ The command returns output similar to the following:
 
 ### RDS API<a name="USER_WorkingWithReservedDBInstances.API"></a>
 
-You can use the RDS API to work with reserved DB instances as shown in the following examples\. 
-
-**Example Get available reserved DB instance offerings**  
-To get information about available reserved DB instance offerings, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html)\.   
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=DescribeReservedDBInstancesOfferings
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140411/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140411T203327Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=545f04acffeb4b80d2e778526b1c9da79d0b3097151c24f28e83e851d65422e2
-```
-This call returns output similar to the following:   
-
-```
- 1. <DescribeReservedDBInstancesOfferingsResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
- 2.   <DescribeReservedDBInstancesOfferingsResult>
- 3.     <ReservedDBInstancesOfferings>
- 4.       <ReservedDBInstancesOffering>
- 5.         <Duration>31536000</Duration>
- 6.         <OfferingType>Partial Upfront</OfferingType>
- 7.         <CurrencyCode>USD</CurrencyCode>
- 8.         <RecurringCharges/>
- 9.         <FixedPrice>1820.0</FixedPrice>
-10.         <ProductDescription>mysql</ProductDescription>
-11.         <UsagePrice>0.368</UsagePrice>
-12.         <MultiAZ>true</MultiAZ>
-13.         <ReservedDBInstancesOfferingId>438012d3-4052-4cc7-b2e3-8d3372e0e706</ReservedDBInstancesOfferingId>
-14.         <DBInstanceClass>db.m1.large</DBInstanceClass>
-15.       </ReservedDBInstancesOffering>
-16.       <ReservedDBInstancesOffering>
-17.         <Duration>31536000</Duration>
-18.         <OfferingType>Partial Upfront</OfferingType>
-19.         <CurrencyCode>USD</CurrencyCode>
-20.         <RecurringCharges/>
-21.         <FixedPrice>227.5</FixedPrice>
-22.         <ProductDescription>mysql</ProductDescription>
-23.         <UsagePrice>0.046</UsagePrice>
-24.         <MultiAZ>false</MultiAZ>
-25.         <ReservedDBInstancesOfferingId>649fd0c8-cf6d-47a0-bfa6-060f8e75e95f</ReservedDBInstancesOfferingId>
-26.         <DBInstanceClass>db.m1.small</DBInstanceClass>
-27.       </ReservedDBInstancesOffering>
-28.     </ReservedDBInstancesOfferings>
-29.   </DescribeReservedDBInstancesOfferingsResult>
-30.   <ResponseMetadata>
-31.     <RequestId>5e4ec40b-2978-11e1-9e6d-771388d6ed6b</RequestId>
-32.   </ResponseMetadata>
-33. </DescribeReservedDBInstancesOfferingsResponse>
-```
-
-After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering as shown in the following example\. 
-
-**Example Purchase a reserved DB instance**  
-To purchase a reserved DB instance, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) with the following parameters:   
-+ `--reserved-db-instances-offering-id` – the id of the offering that you want to purchase\. See the preceding example to get the offering ID\. 
-+ `--reserved-db-instance-id` – you can assign your own identifier to the reserved DB instances that you purchase to help you track them\.  
-The following example purchases the reserved DB instance offering with ID *649fd0c8\-cf6d\-47a0\-bfa6\-060f8e75e95f*, and assigns the identifier of *MyReservation*\.   
-
-```
-https://rds.us-east-1.amazonaws.com/
-   ?Action=PurchaseReservedDBInstancesOffering
-   &ReservedDBInstanceId=MyReservation
-   &ReservedDBInstancesOfferingId=438012d3-4052-4cc7-b2e3-8d3372e0e706
-   &DBInstanceCount=10
-   &SignatureMethod=HmacSHA256
-   &SignatureVersion=4
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140415/us-east-1/rds/aws4_request
-   &X-Amz-Date=20140415T232655Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=c2ac761e8c8f54a8c0727f5a87ad0a766fbb0024510b9aa34ea6d1f7df52fb11
-```
-This call returns output similar to the following:   
-
-```
- 1. <PurchaseReservedDBInstancesOfferingResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
- 2.   <PurchaseReservedDBInstancesOfferingResult>
- 3.     <ReservedDBInstance>
- 4.       <OfferingType>Partial Upfront</OfferingType>
- 5.       <CurrencyCode>USD</CurrencyCode>
- 6.       <RecurringCharges/>
- 7.       <ProductDescription>mysql</ProductDescription>
- 8.       <ReservedDBInstancesOfferingId>649fd0c8-cf6d-47a0-bfa6-060f8e75e95f</ReservedDBInstancesOfferingId>
- 9.       <MultiAZ>true</MultiAZ>
-10.       <State>payment-pending</State>
-11.       <ReservedDBInstanceId>MyReservation</ReservedDBInstanceId>
-12.       <DBInstanceCount>10</DBInstanceCount>
-13.       <StartTime>2011-12-18T23:24:56.577Z</StartTime>
-14.       <Duration>31536000</Duration>
-15.       <FixedPrice>123.0</FixedPrice>
-16.       <UsagePrice>0.123</UsagePrice>
-17.       <DBInstanceClass>db.m1.small</DBInstanceClass>
-18.     </ReservedDBInstance>
-19.   </PurchaseReservedDBInstancesOfferingResult>
-20.   <ResponseMetadata>
-21.     <RequestId>7f099901-29cf-11e1-bd06-6fe008f046c3</RequestId>
-22.   </ResponseMetadata>
-23. </PurchaseReservedDBInstancesOfferingResponse>
-```
-
-After you have purchased reserved DB instances, you can get information about your reserved DB instances as shown in the following example\. 
-
-**Example Get your reserved DB instances**  
-To get information about reserved DB instances for your AWS account, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html)\.   
-
-```
-https://rds.us-west-2.amazonaws.com/
-   ?Action=DescribeReservedDBInstances
-   &SignatureMethod=HmacSHA256 
-   &SignatureVersion=4
-   &Version=2014-09-01
-   &X-Amz-Algorithm=AWS4-HMAC-SHA256
-   &X-Amz-Credential=AKIADQKE4SARGYLE/20140420/us-west-2/rds/aws4_request
-   &X-Amz-Date=20140420T162211Z
-   &X-Amz-SignedHeaders=content-type;host;user-agent;x-amz-content-sha256;x-amz-date
-   &X-Amz-Signature=3312d17a4c43bcd209bc22a0778dd23e73f8434254abbd7ac53b89ade3dae88e
-```
-The API returns output similar to the following:   
-
-```
- 1. <DescribeReservedDBInstancesResponse xmlns="http://rds.amazonaws.com/doc/2014-10-31/">
- 2.   <DescribeReservedDBInstancesResult>
- 3.     <ReservedDBInstances>
- 4.       <ReservedDBInstance>
- 5.         <OfferingType>Partial Upfront</OfferingType>
- 6.         <CurrencyCode>USD</CurrencyCode>
- 7.         <RecurringCharges/>
- 8.         <ProductDescription>mysql</ProductDescription>
- 9.         <ReservedDBInstancesOfferingId>649fd0c8-cf6d-47a0-bfa6-060f8e75e95f</ReservedDBInstancesOfferingId>
-10.         <MultiAZ>false</MultiAZ>
-11.         <State>payment-failed</State>
-12.         <ReservedDBInstanceId>MyReservation</ReservedDBInstanceId>
-13.         <DBInstanceCount>1</DBInstanceCount>
-14.         <StartTime>2010-12-15T00:25:14.131Z</StartTime>
-15.         <Duration>31536000</Duration>
-16.         <FixedPrice>227.5</FixedPrice>
-17.         <UsagePrice>0.046</UsagePrice>
-18.         <DBInstanceClass>db.m1.small</DBInstanceClass>
-19.       </ReservedDBInstance>
-20.       <ReservedDBInstance>
-21.         <OfferingType>Partial Upfront</OfferingType>
-22.         <CurrencyCode>USD</CurrencyCode>
-23.         <RecurringCharges/>
-24.         <ProductDescription>mysql</ProductDescription>
-25.         <ReservedDBInstancesOfferingId>649fd0c8-cf6d-47a0-bfa6-060f8e75e95f</ReservedDBInstancesOfferingId>
-26.         <MultiAZ>false</MultiAZ>
-27.         <State>payment-failed</State>
-28.         <ReservedDBInstanceId>MyReservation</ReservedDBInstanceId>
-29.         <DBInstanceCount>1</DBInstanceCount>
-30.         <StartTime>2010-12-15T01:07:22.275Z</StartTime>
-31.         <Duration>31536000</Duration>
-32.         <FixedPrice>227.5</FixedPrice>
-33.         <UsagePrice>0.046</UsagePrice>
-34.         <DBInstanceClass>db.m1.small</DBInstanceClass>
-35.       </ReservedDBInstance>
-36.     </ReservedDBInstances>
-37.   </DescribeReservedDBInstancesResult>
-38.   <ResponseMetadata>
-39.     <RequestId>23400d50-2978-11e1-9e6d-771388d6ed6b</RequestId>
-40.   </ResponseMetadata>
-41. </DescribeReservedDBInstancesResponse>
-```
+You can use the RDS API to work with reserved DB instances:
++ To get information about available reserved DB instance offerings, call the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstancesOfferings.html)\.
++ After you have information about the available reserved DB instance offerings, you can use the information to purchase an offering\. Call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_PurchaseReservedDBInstancesOffering.html) RDS API operation with the following parameters:
+  + `--reserved-db-instances-offering-id` – The ID of the offering that you want to purchase\.
+  + `--reserved-db-instance-id` – You can assign your own identifier to the reserved DB instances that you purchase to help track them\.
++ After you have purchased reserved DB instances, you can get information about your reserved DB instances\. Call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html) RDS API operation\.

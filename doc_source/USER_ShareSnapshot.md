@@ -197,9 +197,27 @@ If you set **DB snapshot visibility** to **Public**, all AWS accounts can restor
 
 To share a DB snapshot, use the `aws rds modify-db-snapshot-attribute` command\. Use the `--values-to-add` parameter to add a list of the IDs for the AWS accounts that are authorized to restore the manual snapshot\. 
 
-The following example enables two AWS account identifiers, `111122223333` and `444455556666`, to restore the DB snapshot named `manual-snapshot1`\.
+**Example of sharing a snapshot with a single account**  
+The following example enables AWS account identifier `123456789012` to restore the DB snapshot named `db7-snapshot`\.  
+For Linux, macOS, or Unix:  
 
-**Example**  
+```
+aws rds modify-db-snapshot-attribute \
+--db-snapshot-identifier db7-snapshot \
+--attribute-name restore \
+--values-to-add 123456789012
+```
+For Windows:  
+
+```
+aws rds modify-db-snapshot-attribute ^
+--db-snapshot-identifier db7-snapshot ^
+--attribute-name restore ^
+--values-to-add 123456789012
+```
+
+**Example of sharing a snapshot with multiple accounts**  
+The following example enables two AWS account identifiers, `111122223333` and `444455556666`, to restore the DB snapshot named `manual-snapshot1`\.  
 For Linux, macOS, or Unix:  
 
 ```
@@ -218,16 +236,17 @@ aws rds modify-db-snapshot-attribute ^
 ```
 When using the Windows command prompt, you must escape double quotes \("\) in JSON code by prefixing them with a backslash \(\\\)\.
 
-To remove an AWS account identifier from the list, use the `--values-to-remove` parameter\. The following example prevents AWS account ID 444455556666 from restoring the snapshot\.
+To remove an AWS account identifier from the list, use the `--values-to-remove` parameter\.
 
-**Example**  
+**Example of stopping snapshot sharing**  
+The following example prevents AWS account ID 444455556666 from restoring the snapshot\.  
 For Linux, macOS, or Unix:  
 
 ```
 aws rds modify-db-snapshot-attribute \
 --db-snapshot-identifier manual-snapshot1 \
 --attribute-name restore \
---values-to-remove {"444455556666"}
+--values-to-remove 444455556666
 ```
 For Windows:  
 
@@ -235,9 +254,8 @@ For Windows:
 aws rds modify-db-snapshot-attribute ^
 --db-snapshot-identifier manual-snapshot1 ^
 --attribute-name restore ^
---values-to-remove "[\"444455556666\"]"
+--values-to-remove 444455556666
 ```
-When using the Windows command prompt, you must escape double quotes \("\) in JSON code by prefixing them with a backslash \(\\\)\.
 
 To list the AWS accounts enabled to restore a snapshot, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-snapshot-attributes.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-snapshot-attributes.html) AWS CLI command\.
 

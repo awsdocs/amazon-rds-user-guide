@@ -26,7 +26,7 @@ Each creation or modification workflow has a **Database authentication** section
 
 1. Choose **Modify**\.
 
-1. In the **Database authentication** section, choose **Password and IAM database authentication** to enable IAM database authentication, or choose a different option to disable it\.
+1. In the **Database authentication** section, choose **Password and IAM database authentication** to enable IAM database authentication\.
 
 1. Choose **Continue**\.
 

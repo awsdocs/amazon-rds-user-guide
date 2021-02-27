@@ -1,4 +1,4 @@
-# Other common DBA tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
+# Performing miscellaneous tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Misc"></a>
 
 Following, you can find how to perform miscellaneous DBA tasks on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 
@@ -7,6 +7,9 @@ Following, you can find how to perform miscellaneous DBA tasks on your Amazon RD
 + [Listing files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ListDirectories)
 + [Reading files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ReadingFiles)
 + [Accessing Opatch files](#Appendix.Oracle.CommonDBATasks.accessing-opatch-files)
++ [Setting parameters for advisor tasks](#Appendix.Oracle.CommonDBATasks.setting-task-parameters)
++ [Disabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.dropping-advisor-task)
++ [Re\-enabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.recreating-advisor-task)
 
 ## Creating and dropping directories in the main data storage space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
 
@@ -194,4 +197,73 @@ SELECT *
 FROM   rdsadmin.tracefile_listing 
 WHERE  FILENAME LIKE 'lsinventory%';
 SPOOL OFF;
+```
+
+## Setting parameters for advisor tasks<a name="Appendix.Oracle.CommonDBATasks.setting-task-parameters"></a>
+
+Oracle Database includes a number of advisors\. Each advisor supports automated and manual tasks\.
+
+To set parameters for some advisor tasks, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_set_parameter`\. The `advisor_task_set_parameter` procedure has the following parameters\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_task_name`  |  varchar2  |  —  |  Yes  |  The name of the advisor task whose parameters you want to change\. The following values are valid: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Misc.html)  | 
+|  `p_parameter`  |  varchar2  |  —  |  Yes  |  The name of the task parameter\. To find valid parameters for an advisor task, run the following query\. Substitute *p\_task\_name* with a valid value for `p_task_name`: <pre>COL PARAMETER_NAME FORMAT a30<br />COL PARAMETER_VALUE FORMAT a30<br />SELECT PARAMETER_NAME, PARAMETER_VALUE<br />FROM DBA_ADVISOR_PARAMETERS<br />WHERE TASK_NAME='p_task_name'<br />AND PARAMETER_VALUE != 'UNUSED'<br />ORDER BY PARAMETER_NAME;</pre>  | 
+|  `p_value`  |  varchar2  |  —  |  Yes  |  The value for a task parameter\. To find valid values for task parameters, run the following query\. Substitute *p\_task\_name* with a valid value for `p_task_name`: <pre>COL PARAMETER_NAME FORMAT a30<br />COL PARAMETER_VALUE FORMAT a30<br />SELECT PARAMETER_NAME, PARAMETER_VALUE<br />FROM DBA_ADVISOR_PARAMETERS<br />WHERE TASK_NAME='p_task_name'<br />AND PARAMETER_VALUE != 'UNUSED'<br />ORDER BY PARAMETER_NAME;</pre>  | 
+
+The following PL/SQL program sets `ACCEPT_PLANS` to `FALSE` for `SYS_AUTO_SPM_EVOLVE_TASK`\. The SQL Plan Management automated task verifies the plans and generates a report of its findings, but does not evolve the plans automatically\. You can use a report to identify new SQL plan baselines and accept them manually\.
+
+```
+BEGIN 
+  rdsadmin.rdsadmin_util.advisor_task_set_parameter(
+    p_task_name => 'SYS_AUTO_SPM_EVOLVE_TASK',
+    p_parameter => 'ACCEPT_PLANS',
+    p_value     => 'FALSE');
+END;
+```
+
+The following PL/SQL program sets `EXECUTION_DAYS_TO_EXPIRE` to `10` for `AUTO_STATS_ADVISOR_TASK`\. The predefined task `AUTO_STATS_ADVISOR_TASK` runs automatically in the maintenance window once per day\. The example sets the retention period for the task execution to 10 days\. 
+
+```
+BEGIN 
+  rdsadmin.rdsadmin_util.advisor_task_set_parameter(
+    p_task_name => 'AUTO_STATS_ADVISOR_TASK',
+    p_parameter => 'EXECUTION_DAYS_TO_EXPIRE',
+    p_value     => '10');
+END;
+```
+
+## Disabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.dropping-advisor-task"></a>
+
+To disable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_drop`\. The `advisor_task_drop` procedure accepts the following parameter\.
+
+**Note**  
+This procedure is available in Oracle Database version 12\.2\.0\.1 and later\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `p_task_name`  |  varchar2  |  —  |  Yes  |  The name of the advisor task to be disabled\. The only valid value is `AUTO_STATS_ADVISOR_TASK`\.  | 
+
+The following command drops `AUTO_STATS_ADVISOR_TASK`\.
+
+```
+EXEC rdsadmin.rdsadmin_util.advisor_task_drop('AUTO_STATS_ADVISOR_TASK')
+```
+
+You can re\-enabling `AUTO_STATS_ADVISOR_TASK` using `rdsadmin.rdsadmin_util.dbms_stats_init`\.
+
+## Re\-enabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.recreating-advisor-task"></a>
+
+To re\-enable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.dbms_stats_init`\. The `dbms_stats_init` procedure takes no parameters\.
+
+The following command re\-enables `AUTO_STATS_ADVISOR_TASK`\.
+
+```
+EXEC rdsadmin.rdsadmin_util.dbms_stats_init()
 ```

@@ -65,7 +65,7 @@ The Graviton2 instance classes db\.m6g and db\.r6g are supported for Amazon RDS 
 Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 
 **PostgreSQL**  
-The Graviton2 instance classes db\.m6g and db\.r6g are supported for Amazon RDS PostgreSQL versions 12\.3 and higher\.
+PostgreSQL versions 13 and higher support the db\.m6g, db\.m5, db\.r6g, db\.r5, db\.t3 instance classes\. Previous generations of classes are supported only by PostgreSQL versions lower than 13 and include db\.m4, db\.m3, db\.r4, db\.r3, and db\.t2\.
 
 In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
 
@@ -75,13 +75,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
 | db\.m6g – Standard instance classes powered by AWS Graviton2 processors | 
-| db\.m6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.m6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
+| db\.m6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13,12\.3 & higher | 
 | db\.m5d – Newest generation standard instance classes | 
 | db\.m5d\.24xlarge | No | Yes | No | No | No | 
 | db\.m5d\.16xlarge | No | Yes | No | No | No | 
@@ -92,26 +92,26 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m5d\.xlarge | No | Yes | No | No | No | 
 | db\.m5d\.large | No | Yes | No | No | No | 
 | db\.m5 – Latest\-generation standard instance classes | 
-| db\.m5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
-| db\.m5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
-| db\.m5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m5\.large | Yes | Yes | Yes | Yes | Yes | 
+| db\.m5\.24xlarge | Yes | Yes | Yes | Yes |  PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher  | 
+| db\.m5\.16xlarge | Yes | Yes | Yes | Yes |  PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher  | 
+| db\.m5\.12xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.m5\.8xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.m5\.4xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.m5\.2xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.m5\.xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.m5\.large | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
 | db\.m4 – Standard instance classes | 
-| db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.m4\.10xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4\.xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.m4\.large | Yes | Yes | Yes | Yes | Yes | 
+| db\.m4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.10xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.4xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.2xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.xlarge | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
+| db\.m4\.large | Yes | Yes | Yes | Yes | Lower than PostgreSQL 13 | 
 | db\.m3 – Standard instance classes | 
-| db\.m3\.2xlarge | No | Yes | Yes | Deprecated | Yes | 
-| db\.m3\.xlarge | No | Yes | Yes | Deprecated | Yes | 
-| db\.m3\.large | No | Yes | Yes | Deprecated | Yes | 
-| db\.m3\.medium | No | Yes | Yes | Deprecated | Yes | 
+| db\.m3\.2xlarge | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m3\.xlarge | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m3\.large | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.m3\.medium | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m1 – Standard instance classes | 
 | db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m1\.large | No | Yes | Deprecated | Deprecated | Deprecated | 
@@ -135,12 +135,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.x1\.32xlarge | No | Yes | No | Yes | No | 
 | db\.x1\.16xlarge | No | Yes | No | Yes | No | 
 | db\.r6g – Memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.r6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
-| db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 12\.3 & higher | 
+| db\.r6g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
+| db\.r6g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
+| db\.r6g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
+| db\.r6g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
+| db\.r6g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
+| db\.r6g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | PostgreSQL 13, 12\.3 & higher | 
 | db\.r5d – Newest Generation Memory Optimized Instance Classes | 
 | db\.r5d\.24xlarge | No | Yes | No | No | No | 
 | db\.r5d\.16xlarge | No | Yes | No |  No  | No | 
@@ -160,45 +160,45 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5b\.xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.large | No | Yes | No | Yes | No | 
 | db\.r5 – Latest\-generation memory\-optimized instance classes | 
-| db\.r5\.24xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
-| db\.r5\.12xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.8xlarge | Yes | Yes | Yes |  Yes  | PostgreSQL 11\.6 & higher, 10\.11 & higher, 9\.6\.16 & higher | 
-| db\.r5\.4xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.r5\.large | Yes | Yes | Yes | Yes | Yes | 
+| db\.r5\.24xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.12xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.8xlarge | Yes | Yes | Yes |  Yes  | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.4xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.2xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
+| db\.r5\.large | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
 | db\.r4 – Memory\-optimized instance classes | 
-| db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
-| db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Yes | 
+| db\.r4\.16xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.8xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.4xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.2xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.xlarge | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
+| db\.r4\.large | Yes | Yes | MySQL 8\.0, 5\.7, 5\.6 | Yes | Lower than PostgreSQL 13 | 
 | db\.r3 – Memory\-optimized instance classes | 
-| db\.r3\.8xlarge\*\* | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.r3\.large | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.r3\.8xlarge\*\* | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r3\.4xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.r3\.large | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m2 – Memory\-optimized instance classes | 
 | db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.t3 – Next\-generation burstable performance instance classes | 
-| db\.t3\.2xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.t3\.xlarge | Yes | Yes | Yes | Yes | Yes | 
-| db\.t3\.large | Yes | Yes | Yes | Yes | Yes | 
-| db\.t3\.medium | Yes | Yes | Yes | Yes | Yes | 
-| db\.t3\.small | Yes | Yes | Yes | Yes | Yes | 
-| db\.t3\.micro | Yes | No | Yes | Yes | Yes | 
+| db\.t3\.2xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
+| db\.t3\.xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
+| db\.t3\.large | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
+| db\.t3\.medium | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
+| db\.t3\.small | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
+| db\.t3\.micro | Yes | No | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
 | db\.t2 – Burstable performance instance classes | 
-| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
-| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | PostgreSQL 9\.6, 9\.5 | 
-| db\.t2\.large | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.t2\.medium | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.t2\.small | Yes | Yes | Yes | Deprecated | Yes | 
-| db\.t2\.micro | Yes | Yes | Yes | Deprecated | Yes | 
+| db\.t2\.2xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.xlarge | Yes | No | MySQL 8\.0, 5\.7, 5\.6 | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.large | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.medium | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.small | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+| db\.t2\.micro | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 
 ## Changing your DB instance class<a name="Concepts.DBInstanceClass.Changing"></a>
 

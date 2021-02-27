@@ -354,4 +354,4 @@ To make sure that your DB instance is as secure as possible, verify that sources
 
 After you have finished testing your web server and your database, you should delete your DB instance and your Amazon EC2 instance\.
 + To delete a DB instance, follow the instructions in [Deleting a DB instance](USER_DeleteInstance.md)\. You don't need to create a final snapshot\.
-+ To terminate an Amazon EC2 instance\. follow the instruction in [Terminate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide*\.
++ To terminate an Amazon EC2 instance, follow the instruction in [Terminate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) in the *Amazon EC2 User Guide*\.

@@ -157,7 +157,7 @@ The following options are used to copy a DB snapshot\. Not all options are requi
   + If you copy an encrypted snapshot to a different AWS Region, then you must specify a AWS KMS CMK for the destination AWS Region\. AWS KMS CMKs are specific to the AWS Region that they are created in, and you cannot use encryption keys from one AWS Region in another AWS Region\. 
 + `--source-region` – The ID of the AWS Region of the source DB snapshot\. If you copy an encrypted snapshot to a different AWS Region, then you must specify this option\. 
 
-**Example From unencrypted, to same Region**  
+**Example from unencrypted, to the same Region**  
 The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
 For Linux, macOS, or Unix:  
 
@@ -176,8 +176,8 @@ aws rds copy-db-snapshot ^
     --copy-tags
 ```
 
-**Example From unencrypted, across Regions**  
-The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the AWS Region in which the command is run\.   
+**Example from unencrypted, across Regions**  
+The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the AWS Region in which the command is run\.  
 For Linux, macOS, or Unix:  
 
 ```
@@ -193,8 +193,8 @@ aws rds copy-db-snapshot ^
     --target-db-snapshot-identifier mydbsnapshotcopy
 ```
 
-**Example From encrypted, across Regions**  
-The following code example copies an encrypted DB snapshot from the us\-west\-2 Region in the us\-east\-1 Region\. Run the command in the us\-east\-1 Region\.   
+**Example from encrypted, across Regions**  
+The following code example copies an encrypted DB snapshot from the US West \(Oregon\) Region in the US East \(N\. Virginia\) Region\. Run the command in the destination \(us\-east\-1\) Region\.  
 For Linux, macOS, or Unix:  
 
 ```
@@ -253,8 +253,8 @@ The following parameters are used to copy a DB snapshot\. Not all parameters are
   + [Authenticating requests: Using query parameters \(AWS signature version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the Amazon Simple Storage Service API Reference
   + [Signature version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the AWS General Reference
 
-**Example From unencrypted, to same Region**  
-The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.   
+**Example from unencrypted, to the same Region**  
+The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the same AWS Region as the source snapshot\. When the copy is made, all tags on the original snapshot are copied to the snapshot copy\.  
 
 ```
 https://rds.us-west-1.amazonaws.com/
@@ -272,8 +272,8 @@ https://rds.us-west-1.amazonaws.com/
 	&X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
 ```
 
-**Example From unencrypted, across Regions**  
-The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the us\-west\-1 Region\.   
+**Example from unencrypted, across Regions**  
+The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the US West \(N\. California\) Region\.  
 
 ```
 https://rds.us-west-1.amazonaws.com/
@@ -290,8 +290,8 @@ https://rds.us-west-1.amazonaws.com/
 	&X-Amz-Signature=9164337efa99caf850e874a1cb7ef62f3cea29d0b448b9e0e7c53b288ddffed2
 ```
 
-**Example From encrypted, across Regions**  
-The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the us\-east\-1 Region\.   
+**Example from encrypted, across Regions**  
+The following code creates a copy of a snapshot, with the new name `mydbsnapshotcopy`, in the US East \(N\. Virginia\) Region\.  
 
 ```
 https://rds.us-east-1.amazonaws.com/

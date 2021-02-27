@@ -21,6 +21,9 @@ You can't disable TLS 1\.2, because Amazon RDS uses it internally\.
 | rds\.curve25519 | default, enabled, disabled | Curve25519 elliptic\-curve encryption cipher\. This parameter isn't supported for all engine versions\. | 
 | rds\.3des168 | default, enabled, disabled | Triple Data Encryption Standard \(DES\) encryption cipher with a 168\-bit key length\. | 
 
+**Note**  
+For more information on the default values for SQL Server security protocols and ciphers, see [Protocols in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-) and [Cipher Suites in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/cipher-suites-in-schannel) in the Microsoft documentation\.
+
 Use the following process to configure the security protocols and ciphers:
 
 1. Create a custom DB parameter group\.

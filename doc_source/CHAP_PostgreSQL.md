@@ -181,51 +181,13 @@ Amazon RDS supports the following PostgreSQL versions\.
 
 #### PostgreSQL 13 versions<a name="PostgreSQL.Concepts.General.version13"></a>
 
-**Topics**
-+ [PostgreSQL version 13 on Amazon RDS in the database preview environment](#PostgreSQL.Concepts.General.version130)
-+ [PostgreSQL version 13 beta 3 on Amazon RDS in the database preview environment](#PostgreSQL.Concepts.General.version13beta3)
-+ [PostgreSQL version 13 beta 1 on Amazon RDS in the database preview environment](#PostgreSQL.Concepts.General.version13beta1)
+##### PostgreSQL version 13\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version131"></a>
 
-##### PostgreSQL version 13 on Amazon RDS in the database preview environment<a name="PostgreSQL.Concepts.General.version130"></a>
+PostgreSQL version 13\.1 is now available on Amazon RDS\. PostgreSQL contains several improvements that were announced in [PostgreSQL 13\.0](https://www.postgresql.org/docs/13/release-13.html) and [PostgreSQL 13\.1](https://www.postgresql.org/docs/13/release-13-1.html)\.
 
-PostgreSQL version 13 contains several improvements that are described in [PostgreSQL 13 released](https://www.postgresql.org/about/news/postgresql-13-released-2077/)\. 
-
-For information on the database preview environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the preview environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
-
-This version updates the `aws_s3` extension to version 1\.1 and adds the following extensions:
-+ `orafce`
-+ `pg_hint_plan`
-+ `pg_proctab`
-+ `wal2json`
-
-##### PostgreSQL version 13 beta 3 on Amazon RDS in the database preview environment<a name="PostgreSQL.Concepts.General.version13beta3"></a>
-
-PostgreSQL version 13 Beta 3 contains several improvements that are described in [PostgreSQL 12\.4, 11\.9, 10\.14, 9\.6\.19, 9\.5\.23, and 13 beta 3 released\!](https://www.postgresql.org/about/news/2060/) 
-
-For information on the database preview environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the preview environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
-
-This version also adds the following extensions:
-+ address\_standardizer
-+ address\_standardizer\_data\_us
-+ log\_fdw
-+ pgaudit
-+ plcoffee
-+ plls
-+ plv8
-+ PostGIS
-+ postgis\_raster
-+ postgis\_tiger\_geocoder
-+ postgis\_topology
-+ postgresql\-hll
-+ rdkit
+This version added the `bool_plperl` extension version 1\.0\. 
 
 For information on all extensions, see [PostgreSQL version 13 extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)\.
-
-##### PostgreSQL version 13 beta 1 on Amazon RDS in the database preview environment<a name="PostgreSQL.Concepts.General.version13beta1"></a>
-
-PostgreSQL version 13 Beta 1 contains several improvements that are described in [PostgreSQL 13 beta 1 released](https://www.postgresql.org/about/news/2040/)\. 
-
-For information on the database preview environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the preview environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
 #### PostgreSQL 12 versions<a name="PostgreSQL.Concepts.General.version12"></a>
 
@@ -295,7 +257,6 @@ For information on all extensions, see [PostgreSQL version 12 extensions support
 + [PostgreSQL version 11\.4 on Amazon RDS](#PostgreSQL.Concepts.General.version114)
 + [PostgreSQL version 11\.2 on Amazon RDS](#PostgreSQL.Concepts.General.version112)
 + [PostgreSQL version 11\.1 on Amazon RDS](#PostgreSQL.Concepts.General.version111)
-+ [PostgreSQL version 11 on Amazon RDS in the database preview environment](#PostgreSQL.Concepts.General.version110)
 
 ##### PostgreSQL version 11\.10 on Amazon RDS<a name="PostgreSQL.Concepts.General.version1110"></a>
 
@@ -403,15 +364,6 @@ PostgreSQL version 11\.1 contains several bug fixes for issues in release 11\. F
   + `wal2json` is updated to hash 9e962bad\.
 
 For the complete list of extensions supported by Amazon RDS for PostgreSQL, see [Supported PostgreSQL features and extensions](#PostgreSQL.Concepts.General.FeaturesExtensions)\.
-
-##### PostgreSQL version 11 on Amazon RDS in the database preview environment<a name="PostgreSQL.Concepts.General.version110"></a>
-
-**Note**  
-PostgreSQL Version 11 on Amazon RDS has been released in the production environment\. It is no longer supported in the Database Preview Environment\.
-
-PostgreSQL version 11 contains several improvements that are described in [PostgreSQL 11 released\!](https://www.postgresql.org/about/news/1894/) 
-
-For information on the Database Preview Environment, see [Working with the database preview environment](#working-with-the-database-preview-environment)\. To access the Preview Environment from the console, select [https://console\.aws\.amazon\.com/rds\-preview/](https://console.aws.amazon.com/rds-preview/)\. 
 
 #### PostgreSQL 10 versions<a name="PostgreSQL.Concepts.General.version10"></a>
 
@@ -955,8 +907,9 @@ Amazon RDS supports many of the most common PostgreSQL extensions and features\.
 
 PostgreSQL supports many PostgreSQL extensions\. The PostgreSQL community sometimes refers to these as modules\. Extensions expand on the functionality provided by the PostgreSQL engine\. The following sections show the extensions supported by Amazon RDS for the major PostgreSQL versions\.
 
-**Topics**
+**Contents**
 + [PostgreSQL version 13 extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)
+  + [PostgreSQL trusted extensions](#PostgreSQL.Concepts.General.Extensions.Trusted)
 + [PostgreSQL version 12 extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x)
 + [PostgreSQL version 11\.x extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x)
 + [PostgreSQL version 10\.x extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x)
@@ -979,73 +932,107 @@ Parameters added in a minor version release might display inaccurately when usin
 The following table shows PostgreSQL extensions for PostgreSQL version 13 that are currently supported on Amazon RDS\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/13/extend-extensions.html)\. 
 
 
-| Extension | Version 13 beta 3 | Version 13 | 
-| --- | --- | --- | 
-| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 3\.0\.2 | 
-| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 3\.0\.2 | 
-| [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 1\.2 | 
-| aws\_commons —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import) | 1\.0 | 1\.0 | 
-| aws\_s3 —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)  | 1\.0 | 1\.1 | 
-| [ bloom](https://www.postgresql.org/docs/current/bloom.html) | 1\.0 | 1\.0 | 
-| [btree\_gin](http://www.postgresql.org/docs/current/btree-gin.html) | 1\.3 | 1\.3 | 
-| [btree\_gist](http://www.postgresql.org/docs/current/btree-gist.html) | 1\.5 | 1\.5 | 
-| [citext ](http://www.postgresql.org/docs/current/citext.html) | 1\.6 | 1\.6 | 
-| [cube ](http://www.postgresql.org/docs/current/cube.html) | 1\.4 | 1\.4 | 
-| [ dblink](http://www.postgresql.org/docs/current/dblink.html) | 1\.2 | 1\.2 | 
-| [ dict\_int ](http://www.postgresql.org/docs/current/dict-int.html) | 1\.0 | 1\.0 | 
-| [ dict\_xsyn](https://www.postgresql.org/docs/current/dict-xsyn.html) | 1\.0 | 1\.0 | 
-| [earthdistance](http://www.postgresql.org/docs/current/earthdistance.html) | 1\.1 | 1\.1 | 
-| [fuzzystrmatch](http://www.postgresql.org/docs/current/fuzzystrmatch.html) | 1\.1 | 1\.1 | 
-| [hstore](http://www.postgresql.org/docs/current/hstore.html) | 1\.7 | 1\.7 | 
-| [ hstore\_plperl](https://www.postgresql.org/docs/current/hstore.html) | 1\.0 | 1\.0 | 
-| ICU | 60\.2 | 60\.2 | 
-| [ intagg](http://www.postgresql.org/docs/current/intagg.html) | 1\.1 | 1\.1 | 
-| [ intarray](http://www.postgresql.org/docs/current/intarray.html) | 1\.3 | 1\.3 | 
-| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 2\.4 | 
-| [isn ](http://www.postgresql.org/docs/current/isn.html) | 1\.2 | 1\.2 | 
-| jsonb\_plperl | 1\.0 | 1\.0 | 
-| log\_fdw—see [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.2 | 1\.2 | 
-| [ltree ](http://www.postgresql.org/docs/current/ltree.html) | 1\.2 | 1\.2 | 
-| [orafce](https://github.com/orafce/orafce) | NA | 3\.13 | 
-| [pageinspect](https://www.postgresql.org/docs/current/pageinspect.html) | 1\.8 | 1\.8 | 
-| [ pg\_buffercache](http://www.postgresql.org/docs/current/pgbuffercache.html) | 1\.3 | 1\.3 | 
-| [pg\_freespacemap](https://www.postgresql.org/docs/current/pgfreespacemap.html) | 1\.2 | 1\.2 | 
-| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | NA | 1\.3\.6 | 
-| [ pg\_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html) | 1\.2 | 1\.2 | 
-| [pg\_proctab](https://github.com/markwkm/pg_proctab) | NA | 0\.0\.9 | 
-| [pg\_similarity](https://github.com/eulerto/pg_similarity) | 1\.0 | 1\.0 | 
-| [pg\_stat\_statements](http://www.postgresql.org/docs/current/pgstatstatements.html) | 1\.8 | 1\.8 | 
-| pg\_transport — see [Transporting PostgreSQL databases between DB instances ](PostgreSQL.Procedural.Importing.md#PostgreSQL.TransportableDB)  | 1\.0 | 1\.0 | 
-| [pg\_trgm](http://www.postgresql.org/docs/current/pgtrgm.html) | 1\.5 | 1\.5 | 
-| [pg\_visibility](https://www.postgresql.org/docs/current/pgvisibility.html) | 1\.2 | 1\.2 | 
-| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.5 | 1\.5 | 
-| [pgcrypto](http://www.postgresql.org/docs/current/pgcrypto.html) | 1\.3 | 1\.3 | 
-| [pgrouting](http://docs.pgrouting.org/latest/en/index.html) | 3\.0\.0 | 3\.0\.0 | 
-| [pgrowlocks](http://www.postgresql.org/docs/current/pgrowlocks.html) | 1\.2 | 1\.2 | 
-| [pgstattuple](http://www.postgresql.org/docs/current/pgstattuple.html) | 1\.5 | 1\.5 | 
-| [pgTAP](https://pgtap.org/)  | 1\.1\.0 | 1\.1\.0 | 
-| plcoffee | 2\.3\.15 | 2\.3\.15 | 
-| plls | 2\.3\.15 | 2\.3\.15 | 
-| [plperl](https://www.postgresql.org/docs/current/plperl.html) | 1\.0 | 1\.0 | 
-| [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html) | 1\.0 | 1\.0 | 
-| plprofiler | 4\.1 | 4\.1 | 
-| [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html) | 1\.0 | 1\.0 | 
-| [plv8](https://github.com/plv8) | 2\.3\.15 | 2\.3\.15 | 
-| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 3\.0\.2 | 3\.0\.2 | 
-| postgis\_raster | 3\.0\.2 | 3\.0\.2 | 
-| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.2 | 3\.0\.2 | 
-| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.2 | 3\.0\.2 | 
-| [postgres\_fdw](http://www.postgresql.org/docs/current/postgres-fdw.html) | 1\.0 | 1\.0 | 
-| [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 
-| rdkit | 3\.8 | 3\.8 | 
-| [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 1\.2 | 
-| [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 1\.0 | 
-| [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 1\.0 | 
-| [tsm\_system\_rows](https://www.postgresql.org/docs/current/tsm-system-rows.html) | 1\.0 | 1\.0 | 
-| [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html) | 1\.0 | 1\.0 | 
-| [unaccent](http://www.postgresql.org/docs/current/unaccent.html) | 1\.1 | 1\.1 | 
-| [uuid\-ossp](http://www.postgresql.org/docs/current/uuid-ossp.html) | 1\.1 | 1\.1 | 
-| [wal2json](https://github.com/eulerto/wal2json) | NA | 2\.3 | 
+| Extension | 13\.1 | 
+| --- | --- | 
+| [ address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
+| [ address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.0\.2 | 
+| [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 
+| aws\_commons —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import) | 1\.1 | 
+| aws\_s3 —see [ Importing data into PostgreSQL on Amazon RDS ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import)  | 1\.1 | 
+| [ bloom](https://www.postgresql.org/docs/current/bloom.html) | 1\.0 | 
+| bool\_plperl | 1\.0 | 
+| [btree\_gin](http://www.postgresql.org/docs/current/btree-gin.html) | 1\.3 | 
+| [btree\_gist](http://www.postgresql.org/docs/current/btree-gist.html) | 1\.5 | 
+| [citext ](http://www.postgresql.org/docs/current/citext.html) | 1\.6 | 
+| [cube ](http://www.postgresql.org/docs/current/cube.html) | 1\.4 | 
+| [ dblink](http://www.postgresql.org/docs/current/dblink.html) | 1\.2 | 
+| [ dict\_int ](http://www.postgresql.org/docs/current/dict-int.html) | 1\.0 | 
+| [ dict\_xsyn](https://www.postgresql.org/docs/current/dict-xsyn.html) | 1\.0 | 
+| [earthdistance](http://www.postgresql.org/docs/current/earthdistance.html) | 1\.1 | 
+| [fuzzystrmatch](http://www.postgresql.org/docs/current/fuzzystrmatch.html) | 1\.1 | 
+| [hll](https://github.com/citusdata/postgresql-hll) | 2\.15 | 
+| [hstore](http://www.postgresql.org/docs/current/hstore.html) | 1\.7 | 
+| [ hstore\_plperl](https://www.postgresql.org/docs/current/hstore.html) | 1\.0 | 
+| [ICU module](http://site.icu-project.org/) | 60\.2 | 
+| [ intagg](http://www.postgresql.org/docs/current/intagg.html) | 1\.1 | 
+| [ intarray](http://www.postgresql.org/docs/current/intarray.html) | 1\.3 | 
+| [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 
+| [isn ](http://www.postgresql.org/docs/current/isn.html) | 1\.2 | 
+| jsonb\_plperl | 1\.0 | 
+| log\_fdw—see [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.2 | 
+| [ltree ](http://www.postgresql.org/docs/current/ltree.html) | 1\.2 | 
+| [orafce](https://github.com/orafce/orafce) | 3\.13\.4 | 
+| [pageinspect](https://www.postgresql.org/docs/current/pageinspect.html) | 1\.8 | 
+| [ pg\_buffercache](http://www.postgresql.org/docs/current/pgbuffercache.html) | 1\.3 | 
+| pg\_cron — see [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md) | 1\.3\.0 | 
+| [pg\_freespacemap](https://www.postgresql.org/docs/current/pgfreespacemap.html) | 1\.2 | 
+| [pg\_hint\_plan](http://pghintplan.osdn.jp/pg_hint_plan.html) | 1\.3\.7 | 
+| pg\_partman — see [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md) | 4\.4\.0 | 
+| [ pg\_prewarm](https://www.postgresql.org/docs/current/pgprewarm.html) | 1\.2 | 
+| [pg\_proctab](https://github.com/markwkm/pg_proctab) | 0\.0\.9 | 
+| pg\_repack | 1\.4\.6 | 
+| [pg\_similarity](https://github.com/eulerto/pg_similarity) | 1\.0 | 
+| [pg\_stat\_statements](http://www.postgresql.org/docs/current/pgstatstatements.html) | 1\.8 | 
+| pg\_transport — see [Transporting PostgreSQL databases between DB instances ](PostgreSQL.Procedural.Importing.md#PostgreSQL.TransportableDB)  | 1\.0 | 
+| [pg\_trgm](http://www.postgresql.org/docs/current/pgtrgm.html) | 1\.5 | 
+| [pg\_visibility](https://www.postgresql.org/docs/current/pgvisibility.html) | 1\.2 | 
+| [pgaudit](https://github.com/pgaudit/pgaudit/blob/master/README.md) | 1\.5 | 
+| [pgcrypto](http://www.postgresql.org/docs/current/pgcrypto.html) | 1\.3 | 
+| [pglogical](https://github.com/2ndQuadrant/pglogical) | 2\.3\.3 | 
+| [pgrouting](http://docs.pgrouting.org/latest/en/index.html) | 3\.1\.0 | 
+| [pgrowlocks](http://www.postgresql.org/docs/current/pgrowlocks.html) | 1\.2 | 
+| [pgstattuple](http://www.postgresql.org/docs/current/pgstattuple.html) | 1\.5 | 
+| [pgTAP](https://pgtap.org/)  | 1\.1\.0 | 
+| plcoffee | 2\.3\.15 | 
+| plls | 2\.3\.15 | 
+| [plperl](https://www.postgresql.org/docs/current/plperl.html) | 1\.0 | 
+| [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html) | 1\.0 | 
+| plprofiler | 4\.1 | 
+| [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html) | 1\.0 | 
+| [plv8](https://github.com/plv8) | 2\.3\.15 | 
+| [PostGIS](http://www.postgis.net/)\. See [PostgreSQL extension support for PostGIS on Amazon RDS](#CHAP_PostgreSQL.Extensions.PostGIS) | 3\.0\.2 | 
+| postgis\_raster | 3\.0\.2 | 
+| [postgis\_tiger\_geocoder](http://postgis.net/docs/Geocode.html) | 3\.0\.2 | 
+| [postgis\_topology](http://postgis.net/docs/manual-dev/Topology.html) | 3\.0\.2 | 
+| [postgres\_fdw](http://www.postgresql.org/docs/current/postgres-fdw.html) | 1\.0 | 
+| [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 
+| rdkit | 3\.8 | 
+| [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 
+| [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 
+| [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 
+| [tsm\_system\_rows](https://www.postgresql.org/docs/current/tsm-system-rows.html) | 1\.0 | 
+| [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html) | 1\.0 | 
+| [unaccent](http://www.postgresql.org/docs/current/unaccent.html) | 1\.1 | 
+| [uuid\-ossp](http://www.postgresql.org/docs/current/uuid-ossp.html) | 1\.1 | 
+| [wal2json](https://github.com/eulerto/wal2json) | 2\.3 | 
+
+##### PostgreSQL trusted extensions<a name="PostgreSQL.Concepts.General.Extensions.Trusted"></a>
+
+To install most PostgreSQL extensions requires `rds_superuser` privileges\. PostgreSQL 13 introduced [ trusted extensions](https://www.postgresql.org/about/featurematrix/detail/347/), which reduces the need to grant `rds_superuser` privileges to regular users\. With this feature, users can install many extensions if they have the `CREATE` privilege on the current database instead of requiring the `rds_superuser` role\. For more information, see the SQL [CREATE EXTENSION](https://www.postgresql.org/docs/current/sql-createextension.html) command in the PostgreSQL documentation\. 
+
+The following lists the extensions that can be installed by a user who has the `CREATE` privilege on the current database and do not require the `rds_superuser` role:
++ bool\_plperl
++ [btree\_gin](http://www.postgresql.org/docs/current/btree-gin.html)
++ [btree\_gist](http://www.postgresql.org/docs/current/btree-gist.html)
++ [citext ](http://www.postgresql.org/docs/current/citext.html)
++ [cube ](http://www.postgresql.org/docs/current/cube.html)
++ [ dict\_int ](http://www.postgresql.org/docs/current/dict-int.html)
++ [fuzzystrmatch](http://www.postgresql.org/docs/current/fuzzystrmatch.html)
++  [hstore](http://www.postgresql.org/docs/current/hstore.html)
++ [ intarray](http://www.postgresql.org/docs/current/intarray.html)
++ [isn](http://www.postgresql.org/docs/current/isn.html)
++ jsonb\_plperl
++ [ltree ](http://www.postgresql.org/docs/current/ltree.html)
++ [pg\_trgm](http://www.postgresql.org/docs/current/pgtrgm.html)
++ [pgcrypto](http://www.postgresql.org/docs/current/pgcrypto.html)
++ [plperl](https://www.postgresql.org/docs/current/plperl.html)
++ [plpgsql](https://www.postgresql.org/docs/current/plpgsql.html)
++ [pltcl](https://www.postgresql.org/docs/current/pltcl-overview.html)
++ [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) 
++ [tsm\_system\_rows](https://www.postgresql.org/docs/current/tsm-system-rows.html)
++ [tsm\_system\_time](https://www.postgresql.org/docs/current/tsm-system-time.html)
++ [unaccent](http://www.postgresql.org/docs/current/unaccent.html)
++ [uuid\-ossp](http://www.postgresql.org/docs/current/uuid-ossp.html)
 
 ##### PostgreSQL version 12 extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x"></a>
 
@@ -1072,7 +1059,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 12 that a
 | [hll](https://github.com/citusdata/postgresql-hll) | 2\.14 | 2\.14 | 2\.14 | 2\.14 | 
 | [hstore](http://www.postgresql.org/docs/12/hstore.html) | 1\.6 | 1\.6 | 1\.6 | 1\.6 | 
 | [ hstore\_plperl](https://www.postgresql.org/docs/12/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| ICU | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
+| [ICU module](http://site.icu-project.org/) | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
 | [ intagg](http://www.postgresql.org/docs/12/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/12/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 2\.4 | 2\.4 | 2\.4 | 
@@ -1150,7 +1137,7 @@ The following tables show PostgreSQL extensions for PostgreSQL version 11\.x tha
 | [fuzzystrmatch](http://www.postgresql.org/docs/11/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [hstore](http://www.postgresql.org/docs/11/static/hstore.html) | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 1\.5 | 
 | [ hstore\_plperl](https://www.postgresql.org/docs/11/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| ICU | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 
+| [ICU module](http://site.icu-project.org/) | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 60\.2  | 
 | [ intagg](http://www.postgresql.org/docs/11/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/11/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 2\.3 | 
@@ -1228,7 +1215,7 @@ The following tables show PostgreSQL extensions for PostgreSQL version 10 that a
 | [fuzzystrmatch](http://www.postgresql.org/docs/10/static/fuzzystrmatch.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [hstore](http://www.postgresql.org/docs/10/static/hstore.html) | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 1\.4 | 
 | [hstore\_plperl](https://www.postgresql.org/docs/10/static/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| ICU | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
+| [ICU module](http://site.icu-project.org/) | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
 | [ intagg](http://www.postgresql.org/docs/10/static/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [ intarray](http://www.postgresql.org/docs/10/static/intarray.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.0 | 2\.0 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 2\.1\.1 | 
@@ -1864,6 +1851,8 @@ There are two types of upgrades you can manage for your PostgreSQL DB instance:
 #### Using SSL with a PostgreSQL DB instance<a name="PostgreSQL.Concepts.General.SSL"></a>
 
 Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. 
+
+Amazon RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\. Amazon RDS doesn't enforce TLS connections so they must be enforced from your application\. 
 
 For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 

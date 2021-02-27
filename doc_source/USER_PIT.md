@@ -1,6 +1,10 @@
 # Restoring a DB instance to a specified time<a name="USER_PIT"></a>
 
-You can restore a DB instance to a specific point in time, creating a new DB instance\. When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` operation after the DB instance is available\.
+You can restore a DB instance to a specific point in time, creating a new DB instance\.
+
+When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` operation after the DB instance is available\.
+
+Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
 RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To determine the latest restorable time for a DB instance, use the AWS CLI [ describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 
@@ -25,26 +29,25 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. In the navigation pane, choose **Databases**\.
+1. In the navigation pane, choose **Automated backups**\.
 
 1. Choose the DB instance that you want to restore\.
 
 1. For **Actions**, choose **Restore to point in time**\.
 
-   The **Launch DB Instance** window appears\.  
-![\[Launch DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/pitr-launch-db-instance.png)
+   The **Restore to point in time** window appears\.
 
 1. Choose **Latest restorable time** to restore to the latest possible time, or choose **Custom** to choose a time\.
 
    If you chose **Custom**, enter the date and time to which you want to restore the instance\.
 **Note**  
-Times are shown in Coordinated Universal Time \(UTC\)\.
+Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
 1. For **DB instance identifier**, enter the name of the target restored DB instance\.
 
-1. Choose other options as needed, such as storage autoscaling\.
+1. Choose other options as needed, such as DB instance class, storage, and whether you want to use storage autoscaling\.
 
-1. Choose **Launch DB Instance**\.
+1. Choose **Restore to point in time**\.
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 

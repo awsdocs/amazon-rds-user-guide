@@ -1,4 +1,4 @@
-# Common DBA system tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.System"></a>
+# Performing common system tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.System"></a>
 
 Following, you can find how to perform certain common DBA tasks related to the system on your Amazon RDS DB instances running Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. 
 

@@ -150,9 +150,9 @@ The following table shows the event category and a list of events when a DB snap
 | creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
 | creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
 |  deletion  | RDS\-EVENT\-0041 |  A DB snapshot has been deleted\.  | 
-|  notification  | RDS\-EVENT\-0059 |  Started the copy of the cross region DB snapshot \[DB snapshot name\] from source region \[region name\]\.  | 
-|  notification  | RDS\-EVENT\-0060 |  Finished the copy of the cross region DB snapshot \[DB snapshot name\] from source region \[region name\] in \[time\] minutes\.  | 
-|  notification  | RDS\-EVENT\-0061 |  The copy of a cross region DB snapshot failed\.  | 
+|  notification  | RDS\-EVENT\-0059 |  Started copy of snapshot \[DB snapshot name\] from region \[region name\]\.  | 
+|  notification  | RDS\-EVENT\-0060 |  Finished copy of snapshot \[DB snapshot name\] from region \[region name\] in \[time\] minutes\.  | 
+|  notification  | RDS\-EVENT\-0061 |  Canceled snapshot copy request of \[DB snapshot name\] from region %\[region name\]\.  | 
 | notification | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
 | notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
 | notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 

@@ -45,6 +45,7 @@ The following are limitations for PostgreSQL read replicas:
 + You can promote a PostgreSQL read replica to be a new source DB instance\. However, the read replica doesn't become the new source DB instance automatically\. The read replica, when promoted, stops receiving WAL communications and is no longer a read\-only instance\. You must set up any replication you intend to have going forward because the promoted read replica is now a new source DB instance\. 
 + If no user transactions are occurring on the source DB instance, a PostgreSQL read replica reports a replication lag of up to five minutes\.
 + You can't create physical replication slots in PostgreSQL\.
++ You can't enable automated backups on PostgreSQL read replicas\.
 
 ## Replication interruptions with PostgreSQL read replicas<a name="USER_PostgreSQL.Replication.ReadReplicas.Interruptions"></a>
 
