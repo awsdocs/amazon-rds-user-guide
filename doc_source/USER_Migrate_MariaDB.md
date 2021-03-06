@@ -97,7 +97,7 @@ For Linux, macOS, or Unix:
 For Windows:  
 
 ```
-1. aws rds restore-db-instance-from-db-snapshot \
+1. aws rds restore-db-instance-from-db-snapshot ^
 2.     --db-instance-identifier newmariadbinstance ^
 3.     --db-snapshot-identifier mysqlsnapshot ^
 4.     --engine mariadb

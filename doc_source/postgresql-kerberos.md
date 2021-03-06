@@ -6,6 +6,8 @@ You create an AWS Managed Microsoft AD directory to store user credentials\. You
 
 Keeping all of your credentials in the same directory can save you time and effort\. You have a centralized place for storing and managing credentials for multiple DB instances\. Using a directory can also improve your overall security profile\.
 
+You can also access credentials from your own on\-premises Microsoft Active Directory\. To do so you create a trusting domain relationship so that the AWS Managed Microsoft AD directory trusts your on\-premises Microsoft Active Directory\. In this way, your users can access your PostgreSQL instances with the same Windows single sign\-on \(SSO\) experience as when they access workloads in your on\-premises network\.
+
 **Topics**
 + [Availability of Kerberos authentication](#postgresql-kerberos-availability)
 + [Overview of Kerberos authentication for PostgreSQL DB instances](#postgresql-kerberos-overview)

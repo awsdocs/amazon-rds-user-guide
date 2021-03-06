@@ -368,7 +368,7 @@ The Bring Your Own License model is supported on Amazon RDS for the following Or
 To make it easier to monitor Oracle license usage in the BYOL model, [ AWS License Manager](https://aws.amazon.com/license-manager/) integrates with Amazon RDS for Oracle\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
 
 **Note**  
-RDS for Oracle integration with License Manager isn't supported in the Asia Pacific \(Osaka\-Local\) Region\.
+RDS for Oracle integration with License Manager isn't supported in the Asia Pacific \(Osaka\) Region\.
 
 The following table shows the product information filters for RDS for Oracle\.
 
@@ -455,7 +455,7 @@ If you use the Bring Your Own License model, you must have a license for both th
 
 The computation and memory capacity of a DB instance is determined by its DB instance class\. The DB instance class you need depends on your processing power and memory requirements\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 
-The following are the DB instance classes supported for Oracle\. 
+The following are the DB instance classes supported for Oracle\.
 
 
 ****  
@@ -463,11 +463,11 @@ The following are the DB instance classes supported for Oracle\.
 | Oracle edition | 19c, 18c, and 12c version 12\.2\.0\.1 support | 12c version 12\.1\.0\.2 support | 11g version 11\.2\.0\.4 support | 
 | --- | --- | --- | --- | 
 |  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r5b\.large–db\.r5b\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r5b\.large–db\.r5b\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r5b\.large–db\.r5b\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
-|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
+|  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
 |  Standard Edition 2 \(SE2\) License Included  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  |  —  | 
-|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.x1e\.xlarge–db\.x1e\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition 1 \(SE1\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 |  Standard Edition 1 \(SE1\) License Included  |  —  |  —  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.r5\.large–db\.r5\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
-|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.x1e\.xlarge–db\.x1e\.8xlarge db\.r5\.large–db\.r5\.8xlarge db\.r5b\.large–db\.r5b\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
+|  Standard Edition \(SE\) Bring Your Own License \(BYOL\)  |  —  |  —  |  db\.m5\.large–db\.m5\.8xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.6xlarge db\.r5\.large–db\.r5\.8xlarge db\.r5b\.large–db\.r5b\.8xlarge db\.r4\.large–db\.r4\.8xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 
 **Note**  
 We encourage all BYOL customers to consult their licensing agreement to assess the impact of Amazon RDS for Oracle deprecations\. For more information on the compute capacity of DB instance classes supported by Amazon RDS for Oracle, see [DB instance classes](Concepts.DBInstanceClass.md) and [Configuring the processor for a DB instance class](Concepts.DBInstanceClass.md#USER_ConfigureProcessor)\.

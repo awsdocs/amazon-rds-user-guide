@@ -36,15 +36,14 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
 + [Troubleshooting PostgreSQL permissions errors](#USER_ExportSnapshot.postgres-permissions)
++ [File naming convention](#USER_ExportSnapshot.FileNames)
 + [Data conversion when exporting to an Amazon S3 bucket](#USER_ExportSnapshot.data-types)
 
 ## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 
-The following procedure provides a high\-level view of how to export DB snapshot data to an Amazon S3 bucket\. For more details, see the following sections\.
+You use the following process to export DB snapshot data to an Amazon S3 bucket\. For more details, see the following sections\.
 
-**To export DB snapshot data to Amazon S3**
-
-1. Identify the snapshot to export\. 
+1. Identify the snapshot to export\.
 
    Use an existing automated or manual snapshot, or create a manual snapshot of a DB instance\.
 
@@ -427,6 +426,40 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA schema_name TO superuser_name
 ```
 
 For more information on superuser privileges, see [Master user account privileges](UsingWithRDS.MasterAccounts.md)\.
+
+## File naming convention<a name="USER_ExportSnapshot.FileNames"></a>
+
+Exported data for specific tables is stored in the format `base_prefix/files`, where the base prefix is the following:
+
+```
+export_identifier/database_name/schema_name.table_name/
+```
+
+For example:
+
+```
+export-1234567890123-459/rdststdb/rdststdb.DataInsert_7ADB5D19965123A2/
+```
+
+There are two conventions for how files are named:
++ `part-partition_index-random_uuid.format-based_extension`
++ `partition_index/part-00000-random_uuid.format-based_extension`
+
+For example:
+
+```
+part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet
+part-00001-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
+part-00002-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
+```
+
+```
+1/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet
+2/part-00000-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
+3/part-00000-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
+```
+
+The file naming convention is subject to change\. Therefore, when reading target tables we recommend that you read everything inside the base prefix for the table\.
 
 ## Data conversion when exporting to an Amazon S3 bucket<a name="USER_ExportSnapshot.data-types"></a>
 

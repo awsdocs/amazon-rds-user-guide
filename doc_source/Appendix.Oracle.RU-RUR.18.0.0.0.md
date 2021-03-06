@@ -23,6 +23,7 @@ Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1 includes the following:
 + Patch 29782284: ORA\-06508:"MDSYS\.MDPRVT\_IDX" WHILE UPGRADING DATABASE TO 18\.3
 + PreUpgrade Jar: preupgrade\_181\_cbuild\_10\_lf\.zip
 + Java Cryptography Extension \(JCE\): Unlimited Strength Jurisdiction Policy Files for JVM version 8
++ Support for [Setting parameters for advisor tasks](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.setting-task-parameters) using procedures in the `rdsadmin.rdsadmin_util` package
 
 ### Combined Patches for Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1, Released January 2021<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
 

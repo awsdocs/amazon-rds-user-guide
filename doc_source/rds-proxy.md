@@ -764,7 +764,7 @@ aws rds modify-db-proxy --db-proxy-name the-proxy --new-db-proxy-name the_new_na
 
  To modify connection\-related settings or rename the target group, use the `modify-db-proxy-target-group` command\. Currently, all proxies have a single target group named `default`\. When working with this target group, you specify the name of the proxy and `default` for the name of the target group\. 
 
- The following example shows how to first check the `MaxConnectionsPercent` setting for a proxy and then change it, using the target group\. 
+ The following example shows how to first check the `MaxIdleConnectionsPercent` setting for a proxy and then change it, using the target group\. 
 
 ```
 aws rds describe-db-proxy-target-groups --db-proxy-name the-proxy

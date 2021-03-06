@@ -46,7 +46,7 @@ You might need to use an intermediate certificate to connect to your AWS Region\
 | Asia Pacific \(Mumbai\) | [rds\-ca\-2019\-ap\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-south-1.pem) | 
 | Asia Pacific \(Tokyo\) | [rds\-ca\-2019\-ap\-northeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-1.pem) | 
 | Asia Pacific \(Seoul\) | [rds\-ca\-2019\-ap\-northeast\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-2.pem) | 
-| Asia Pacific \(Osaka\-Local\) | [rds\-ca\-2019\-ap\-northeast\-3\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-3.pem) | 
+| Asia Pacific \(Osaka\) | [rds\-ca\-2019\-ap\-northeast\-3\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-3.pem) | 
 | Asia Pacific \(Singapore\) | [rds\-ca\-2019\-ap\-southeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-southeast-1.pem) | 
 | Asia Pacific \(Sydney\) | [rds\-ca\-2019\-ap\-southeast\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-southeast-2.pem) | 
 | Canada \(Central\) | [rds\-ca\-2019\-ca\-central\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ca-central-1.pem) | 

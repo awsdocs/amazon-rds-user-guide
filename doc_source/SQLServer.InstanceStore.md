@@ -21,11 +21,16 @@ The instance store is available in all AWS Regions where one or more of these in
 
 ## File location and size considerations<a name="SQLServer.InstanceStore.Files"></a>
 
-On instances without an instance store, RDS stores the `tempdb.mdf` and `templog.ldf` files in the `D:\rdsdbdata\DATA` directory\. Both files start at 8 MB by default\.
+On instances without an instance store, RDS stores the `tempdb` data and log files in the `D:\rdsdbdata\DATA` directory\. Both files start at 8 MB by default\.
 
-On instances with an instance store, RDS stores the `tempdb.mdf` and `templog.ldf` files in the `T:\rdsdbdata\DATA` directory\. While `templog.ldf` starts at 8 MB by default, `tempdb.mdf` starts at 80% or more of the instance's storage capacity\. Twenty percent of the storage capacity or 200 GB, whichever is less, is kept free to start\.
+On instances with an instance store, RDS stores the `tempdb` data and log files in the `T:\rdsdbdata\DATA` directory\.
 
-For example, if you modify your DB instance class from `db.m5.2xlarge` to `db.m5d.2xlarge`, the default `tempdb.mdf` file size increases from 8 MB to 234 GB\.
+When `tempdb` has only one data file \(`tempdb.mdf`\) and one log file \(`templog.ldf`\), `templog.ldf` starts at 8 MB by default and `tempdb.mdf` starts at 80% or more of the instance's storage capacity\. Twenty percent of the storage capacity or 200 GB, whichever is less, is kept free to start\. Multiple `tempdb` data files split the 80% disk space evenly, while log files always have an 8\-MB initial size\.
+
+For example, if you modify your DB instance class from `db.m5.2xlarge` to `db.m5d.2xlarge`, the size of `tempdb` data files increases from 8 MB each to 234 GB in total\.
+
+**Note**  
+Besides the `tempdb` data and log files on the instance store \(`T:\rdsdbdata\DATA`\), you can still create extra `tempdb` data and log files on the data volume \(`D:\rdsdbdata\DATA`\)\. Those files always have an 8 MB initial size\.
 
 ## Backup considerations<a name="SQLServer.InstanceStore.Backups"></a>
 

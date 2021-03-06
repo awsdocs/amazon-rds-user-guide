@@ -36,7 +36,7 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest\-generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
-+ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) region and the South America \(São Paulo\) region\. 
++ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) Region and the South America \(São Paulo\) Region\. 
 + **db\.m2** – Earlier\-generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
@@ -67,7 +67,7 @@ Instance class support varies according to the version and edition of Oracle\. F
 **PostgreSQL**  
 PostgreSQL versions 13 and higher support the db\.m6g, db\.m5, db\.r6g, db\.r5, db\.t3 instance classes\. Previous generations of classes are supported only by PostgreSQL versions lower than 13 and include db\.m4, db\.m3, db\.r4, db\.r3, and db\.t2\.
 
-In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\. 
+In the following table, you can find details about supported Amazon RDS DB instance classes for each Amazon RDS DB engine\.
 
 
 ****  
@@ -592,7 +592,7 @@ General Purpose SSD \(gp2\) volumes for Amazon RDS DB instances have a throughpu
 **Network Performance**  
 The network speed relative to other DB instance classes\.
 
-In the following table, you can find hardware details about the Amazon RDS DB instance classes \. 
+In the following table, you can find hardware details about the Amazon RDS DB instance classes\. 
 
 For information about Amazon RDS DB engine support for each DB instance class, see [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)\. 
 
@@ -729,4 +729,6 @@ For information about Amazon RDS DB engine support for each DB instance class, s
 
 \* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
 
-\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.
+\*\* These DB instance classes can support maximum performance for 30 minutes at least once every 24 hours\. For more information on baseline performance of these instance types, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.*
+
+\*\*\* The r3\.8xlarge instance doesn't have dedicated EBS bandwidth and therefore doesn't offer EBS optimization\. On this instance, network traffic and Amazon EBS traffic share the same 10\-gigabit network interface\.

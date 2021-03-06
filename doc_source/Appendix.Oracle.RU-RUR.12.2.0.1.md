@@ -33,6 +33,7 @@ Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1 includes the following:
 + Patch 29213893: DBMS\_STATS FAILING WITH ERROR ORA\-01422 WHEN GATHERING STATS FOR USER$ TABLE
 + PreUpgrade Jar: preupgrade\_12201\_cbuild\_23\_lf\.zip
 + Java Cryptography Extension \(JCE\): Unlimited Strength Jurisdiction Policy Files for JVM version 8
++ Support for [Managing advisor tasks](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.managing-advisor-tasks) using procedures in the `rdsadmin.rdsadmin_util` package
 
 ### Combined Patches for Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1, Released January 2021<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
 

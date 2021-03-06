@@ -248,21 +248,21 @@ To change a read\-only replica to mounted mode, set `ReplicaMode=mounted` in [Mo
 
 ## Troubleshooting Oracle replicas<a name="oracle-read-replicas.troubleshooting"></a>
 
-BPT
+This section describes possible replication problems and suggests solutions\. 
 
 ### Replication lag<a name="oracle-read-replicas.troubleshooting.lag"></a>
 
 To monitor replication lag in Amazon CloudWatch, view the Amazon RDS `ReplicaLag` metric\. For information about replication lag time, see [Monitoring read replication](USER_ReadRepl.md#USER_ReadRepl.Monitoring)\.
 
-If replication lag is too long, you can query the following views for information about the lag:
+If replication lag is too long, query the following views:
 + `V$ARCHIVED_LOG` – Shows which commits have been applied to the read replica\.
 + `V$DATAGUARD_STATS` – Shows a detailed breakdown of the components that make up the `replicaLag` metric\.
 + `V$DATAGUARD_STATUS` – Shows the log output from Oracle's internal replication processes\.
 
 ### Replication failure after adding or modifying triggers<a name="oracle-read-replicas.troubleshooting.triggers"></a>
 
-If you add or modify any triggers, and if replication fails afterward, the triggers may be the problem\. Ensure that the trigger excludes the following users, which are required by RDS for replication:
-+ Users with administrator privileges
+If you add or modify any triggers, and if replication fails afterward, the triggers may be the problem\. Ensure that the trigger excludes the following user accounts, which are required by RDS for replication:
++ User accounts with administrator privileges
 + `SYS`
 + `SYSTEM`
 + `RDS_DATAGUARD`

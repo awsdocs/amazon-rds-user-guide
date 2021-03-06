@@ -58,7 +58,7 @@ The following example creates temporary tablespace named `temp01`:
 CREATE TEMPORARY TABLESPACE temp01;
 ```
 
- We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a datafile to a smallfile tablespace\. 
+ We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a data file to a smallfile tablespace\. 
 
 You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specify the size in kilobytes \(K\), megabytes \(M\), gigabytes \(G\), or terabytes \(T\)\. 
 
@@ -68,7 +68,7 @@ The following example resizes a bigfile tablespace named `users2` to 200 MB\.
 ALTER TABLESPACE users2 RESIZE 200M;
 ```
 
-The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
+The following example adds an additional data file to a smallfile tablespace named **users2**\. 
 
 ```
 ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;

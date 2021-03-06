@@ -184,7 +184,7 @@ To allow access to the DB instance from the appropriate clients, ensure that you
    The following is an example that creates the Oracle wallet directory\.
 
    ```
-   prompt>mkdir $ORACLE_HOME/ssl_wallet 
+   prompt>mkdir $ORACLE_HOME/ssl_wallet
    ```
 
 1. Download the root certificate that works for all AWS Regions and put the file in the ssl\_wallet directory\.
@@ -229,26 +229,25 @@ You can set `SSL_VERSION` to a higher value if your DB instance supports it\.
 After you configure SQL\*Plus to use SSL as described previously, you can connect to the Oracle DB instance with the SSL option\. Optionally, you can first export the `TNS_ADMIN` value that points to the directory that contains the tnsnames\.ora and sqlnet\.ora files\. Doing so ensures that SQL\*Plus can find these files consistently\. The following example exports the `TNS_ADMIN` value\.
 
 ```
-  
-export TNS_ADMIN = ${ORACLE_HOME}/network/admin
+export TNS_ADMIN = ${ORACLE_HOME}/network/admin          
 ```
 
 Connect to the DB instance\. For example, you can connect using SQL\*Plus and a *<net\_service\_name>* in a tnsnames\.ora file\.
 
 ```
-sqlplus <mydbuser>@<net_service_name>
+sqlplus <mydbuser>@<net_service_name>          
 ```
 
 You can also connect to the DB instance using SQL\*Plus without using a tnsnames\.ora file by using the following command\.
 
 ```
-sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCPS)(HOST = <endpoint>) (PORT = <ssl port number>))(CONNECT_DATA = (SID = <database name>)))'
+sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCPS)(HOST = <endpoint>) (PORT = <ssl port number>))(CONNECT_DATA = (SID = <database name>)))'          
 ```
 
 You can also connect to the Oracle DB instance without using SSL\. For example, the following command connects to the DB instance through the clear text port without SSL encryption\.
 
 ```
-sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <endpoint>) (PORT = <port number>))(CONNECT_DATA = (SID = <database name>)))'
+sqlplus '<mydbuser>@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = <endpoint>) (PORT = <port number>))(CONNECT_DATA = (SID = <database name>)))'          
 ```
 
 If you want to close Transmission Control Protocol \(TCP\) port access, create a security group with no IP address ingresses and add it to the instance\. This addition closes connections over the TCP port, while still allowing connections over the SSL port that are specified from IP addresses within the range permitted by the SSL option security group\.
@@ -260,7 +259,7 @@ To use an SSL connection over JDBC, you must create a keystore, trust the Amazon
 To create the keystore in JKS format, use the following command\. For more information about creating the keystore, see the [Oracle documentation](https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html)\. 
 
 ```
-keytool -keystore clientkeystore -genkey -alias client
+keytool -keystore clientkeystore -genkey -alias client            
 ```
 
 Next, take the following steps to trust the Amazon RDS root CA certificate\.
@@ -274,7 +273,7 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 1.  Convert the certificate to \.der format using the following command\.
 
    ```
-   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                    
+   openssl x509 -outform der -in rds-ca-2019-root.pem -out rds-ca-2019-root.der                
    ```
 
    Replace the file name with the one you downloaded\.
@@ -282,13 +281,13 @@ Next, take the following steps to trust the Amazon RDS root CA certificate\.
 1.  Import the certificate into the keystore using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore.jks -file rds-ca-2019-root.der                
    ```
 
 1. Confirm that the key store was created successfully\.
 
    ```
-   keytool -list -v -keystore clientkeystore.jks                        
+   keytool -list -v -keystore clientkeystore.jks                                            
    ```
 
    Enter the keystore password when you are prompted for it\.
@@ -337,7 +336,7 @@ To enforce DN matching, add the DN match property and use the connection string 
 Add the property to the client connection to enforce DN matching\.
 
 ```
-properties.put("oracle.net.ssl_server_dn_match", "TRUE");                
+properties.put("oracle.net.ssl_server_dn_match", "TRUE");            
 ```
 
 Use the following connection string to enforce DN matching when using SSL\.

@@ -21,6 +21,7 @@ Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1 includes the following:
 + Patch 28730253: SUPPORT NEW ERA REIWA FOR JAPANESE IMPERIAL CALENDAR
 + Patch 29374604: IE not starting against 18c Oracle RDBMS Standard Edition
 + PreUpgrade Jar: preupgrade\_19\_cbuild\_9\_lf\.zip
++ Support for [Managing advisor tasks](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.managing-advisor-tasks) using procedures in the `rdsadmin.rdsadmin_util` package
 
 ### Combined Patches for Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1, Released January 2021<a name="Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
 

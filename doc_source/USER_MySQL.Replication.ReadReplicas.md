@@ -90,7 +90,6 @@ The following limitations apply to replication filtering for Amazon RDS for MySQ
 + The MySQL `--binlog-do-db` and `--binlog-ignore-db` options for binary log filtering aren't supported\.
 + Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
 + Replication filtering isn't supported for Amazon RDS for MySQL version 5\.5 or 5\.6\.
-+ Replication filtering isn't supported in the China \(Beijing\) Region and China \(Ningxia\) Region\.
 
 ### Replication filtering examples for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 

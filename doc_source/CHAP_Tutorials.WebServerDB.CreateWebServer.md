@@ -75,7 +75,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
    sudo yum update -y
    ```
 
-1. After the updates complete, install the PHP software using the `yum install` command\. This command installs multiple software packages and related dependencies at the same time\.
+1. After the updates complete, install the PHP software using the `amazon-linux-extras install` command\. This command installs multiple software packages and related dependencies at the same time\.
 
    ```
    sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
@@ -113,29 +113,23 @@ The Apache test page appears only when there is no content in the document root 
    sudo systemctl enable httpd
    ```
 
-To allow `ec2-user` to manage files in the default root directory for your Apache web server, modify the ownership and permissions of the `/var/www` directory\. In this tutorial, you add a group named `www` to your EC2 instance\. Then you give that group ownership of the `/var/www` directory and add write permissions for the group\. Any members of that group can then add, delete, and modify files for the web server\.
+To allow `ec2-user` to manage files in the default root directory for your Apache web server, modify the ownership and permissions of the `/var/www` directory\. There are many ways to accomplish this task\. In this tutorial, you add `ec2-user` to the `apache` group, to give the `apache` group ownership of the `/var/www` directory and assign write permissions to the group\.
 
 **To set file permissions for the Apache web server**
 
-1. Add the `www` group to your EC2 instance with the following command\.
+1. Add the `ec2-user` user to the `apache` group\.
 
    ```
-   sudo groupadd www
+   sudo usermod -a -G apache ec2-user
    ```
 
-1. Add the `ec2-user` user to the `www` group\.
-
-   ```
-   sudo usermod -a -G www ec2-user
-   ```
-
-1. Log out to refresh your permissions and include the new `www` group\.
+1. Log out to refresh your permissions and include the new `apache` group\.
 
    ```
    exit
    ```
 
-1. Log back in again and verify that the `www` group exists with the `groups` command\.
+1. Log back in again and verify that the `apache` group exists with the `groups` command\.
 
    ```
    groups
@@ -144,27 +138,32 @@ To allow `ec2-user` to manage files in the default root directory for your Apach
    Your output looks similar to the following:
 
    ```
-   ec2-user adm wheel systemd-journal www
+   ec2-user adm wheel apache systemd-journal
    ```
 
-1. Change the group ownership of the `/var/www` directory and its contents to the `www` group\.
+1. Change the group ownership of the `/var/www` directory and its contents to the `apache` group\.
 
    ```
-   sudo chgrp -R www /var/www
+   sudo chown -R ec2-user:apache /var/www
    ```
 
 1. Change the directory permissions of `/var/www` and its subdirectories to add group write permissions and set the group ID on subdirectories created in the future\.
 
    ```
    sudo chmod 2775 /var/www
-   find /var/www -type d -exec sudo chmod 2775 {} +
+   find /var/www -type d -exec sudo chmod 2775 {} \;
    ```
 
 1. Recursively change the permissions for files in the `/var/www` directory and its subdirectories to add group write permissions\.
 
    ```
-   find /var/www -type f -exec sudo chmod 0664 {} +
+   find /var/www -type f -exec sudo chmod 0664 {} \;
    ```
+
+Now, `ec2-user` \(and any future members of the `apache` group\) can add, delete, and edit files in the Apache document root, enabling you to add content, such as a static website or a PHP application\. 
+
+**Note**  
+A web server running the HTTP protocol provides no transport security for the data that it sends or receives\. When you connect to an HTTP server using a web browser, the URLs that you visit, the content of web pages that you receive, and the contents \(including passwords\) of any HTML forms that you submit are all visible to eavesdroppers anywhere along the network pathway\. The best practice for securing your web server is to install support for HTTPS \(HTTP Secure\), which protects your data with SSL/TLS encryption\. For more information, see [ Tutorial: Configure SSL/TLS with the Amazon Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-ami.html) in the *Amazon EC2 User Guide*\.
 
 ## Connect your Apache web server to your DB instance<a name="CHAP_Tutorials.WebServerDB.CreateWebServer.PHPContent"></a>
 

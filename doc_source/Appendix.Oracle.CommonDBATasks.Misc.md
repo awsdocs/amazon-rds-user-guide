@@ -7,9 +7,7 @@ Following, you can find how to perform miscellaneous DBA tasks on your Amazon RD
 + [Listing files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ListDirectories)
 + [Reading files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ReadingFiles)
 + [Accessing Opatch files](#Appendix.Oracle.CommonDBATasks.accessing-opatch-files)
-+ [Setting parameters for advisor tasks](#Appendix.Oracle.CommonDBATasks.setting-task-parameters)
-+ [Disabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.dropping-advisor-task)
-+ [Re\-enabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.recreating-advisor-task)
++ [Managing advisor tasks](#Appendix.Oracle.CommonDBATasks.managing-advisor-tasks)
 
 ## Creating and dropping directories in the main data storage space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
 
@@ -199,9 +197,21 @@ WHERE  FILENAME LIKE 'lsinventory%';
 SPOOL OFF;
 ```
 
-## Setting parameters for advisor tasks<a name="Appendix.Oracle.CommonDBATasks.setting-task-parameters"></a>
+## Managing advisor tasks<a name="Appendix.Oracle.CommonDBATasks.managing-advisor-tasks"></a>
 
-Oracle Database includes a number of advisors\. Each advisor supports automated and manual tasks\.
+Oracle Database includes a number of advisors\. Each advisor supports automated and manual tasks\. You can use procedures in the `rdsadmin.rdsadmin_util` package to manage some advisor tasks\.
+
+The advisor task procedures are available in the following engine versions:
++ [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) or higher 19c versions 
++ [Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1) or higher 18c versions 
++ [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) or higher 12\.2\.0\.1 versions 
+
+**Topics**
++ [Setting parameters for advisor tasks](#Appendix.Oracle.CommonDBATasks.setting-task-parameters)
++ [Disabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.dropping-advisor-task)
++ [Re\-enabling AUTO\_STATS\_ADVISOR\_TASK](#Appendix.Oracle.CommonDBATasks.recreating-advisor-task)
+
+### Setting parameters for advisor tasks<a name="Appendix.Oracle.CommonDBATasks.setting-task-parameters"></a>
 
 To set parameters for some advisor tasks, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_set_parameter`\. The `advisor_task_set_parameter` procedure has the following parameters\.
 
@@ -236,7 +246,7 @@ BEGIN
 END;
 ```
 
-## Disabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.dropping-advisor-task"></a>
+### Disabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.dropping-advisor-task"></a>
 
 To disable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_drop`\. The `advisor_task_drop` procedure accepts the following parameter\.
 
@@ -258,7 +268,7 @@ EXEC rdsadmin.rdsadmin_util.advisor_task_drop('AUTO_STATS_ADVISOR_TASK')
 
 You can re\-enabling `AUTO_STATS_ADVISOR_TASK` using `rdsadmin.rdsadmin_util.dbms_stats_init`\.
 
-## Re\-enabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.recreating-advisor-task"></a>
+### Re\-enabling AUTO\_STATS\_ADVISOR\_TASK<a name="Appendix.Oracle.CommonDBATasks.recreating-advisor-task"></a>
 
 To re\-enable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.dbms_stats_init`\. The `dbms_stats_init` procedure takes no parameters\.
 

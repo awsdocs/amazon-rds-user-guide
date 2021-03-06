@@ -49,9 +49,9 @@ You can't remove persistent options \(including permanent options\) from an opti
 
 You can change the option group or DB parameter group that is associated with a stopped DB instance, but the change does not occur until the next time you start the DB instance\. If you chose to apply changes immediately, the change occurs when you start the DB instance\. Otherwise the changes occurs during the next maintenance window after you start the DB instance\. 
 
-## VPC considerations<a name="USER_StopInstance.VPC"></a>
+## Public IP address<a name="USER_StopInstance.PublicIPAddress"></a>
 
-When you stop a DB instance it retains its DNS endpoint\. If you stop a DB instance that isn't in an Amazon Virtual Private Cloud \(Amazon VPC\), Amazon RDS releases the IP addresses of the DB instance\. If you stop a DB instance that is in a VPC, the DB instance retains its IP addresses\. 
+When you stop a DB instance, it retains its DNS endpoint\. If you stop a DB instance that has a public IP address, Amazon RDS releases its public IP address\. When the DB instance is restarted, it has a different public IP address\. 
 
 **Note**  
 You should always connect to a DB instance using the DNS endpoint, not the IP address\.

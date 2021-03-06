@@ -68,9 +68,8 @@ The following limitations apply to replication filtering for Amazon RDS for Mari
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MariaDB `binlog_do_db` and `binlog_ignore_db` options for binary log filtering aren't supported\.
-+ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, and version 10\.4\.8 and higher 10\.4 versions\.
++ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, version 10\.4\.8 and higher 10\.4 versions, and all 10\.5 versions\.
 + Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.0, 10\.1, and 10\.2\.
-+ Replication filtering isn't supported in the China \(Beijing\) Region and China \(Ningxia\) Region\.
 
 ### Replication filtering examples for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 
