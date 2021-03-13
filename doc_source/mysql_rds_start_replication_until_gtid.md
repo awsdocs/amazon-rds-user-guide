@@ -1,6 +1,6 @@
 # mysql\.rds\_start\_replication\_until\_gtid<a name="mysql_rds_start_replication_until_gtid"></a>
 
-Initiates replication from an Amazon RDS MySQL DB instance and stops replication immediately after the specified global transaction identifier \(GTID\)\.
+Initiates replication from an RDS for MySQL DB instance and stops replication immediately after the specified global transaction identifier \(GTID\)\.
 
 ## Syntax<a name="mysql_rds_start_replication_until_gtid-syntax"></a>
 
@@ -21,7 +21,7 @@ The GTID after which replication is to stop\.
 
 The master user must run the `mysql.rds_start_replication_until_gtid` procedure\.
 
-For Amazon RDS MySQL 5\.7, this procedure is supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. This procedure is not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.
+For RDS for MySQL 5\.7, this procedure is supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. This procedure is not supported for RDS for MySQL 5\.5, 5\.6, or 8\.0\.
 
 You can use this procedure with delayed replication for disaster recovery\. If you have delayed replication configured, you can use this procedure to roll forward changes to a delayed read replica to the time just before a disaster\. After this procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 

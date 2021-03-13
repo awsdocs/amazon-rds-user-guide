@@ -1,15 +1,20 @@
 # Using Oracle GoldenGate with Amazon RDS<a name="Appendix.OracleGoldenGate"></a>
 
-Oracle GoldenGate \(GoldenGate\) is used to collect, replicate, and manage transactional data between databases\. It is a log\-based change data capture \(CDC\) and replication software package used with Oracle databases for online transaction processing \(OLTP\) systems\. GoldenGate creates trail files that contain the most recent changed data from the source database and then pushes these files to the target database\. You can use GoldenGate with Amazon RDS for Active\-Active database replication, zero\-downtime migration and upgrades, disaster recovery, data protection, and in\-region and cross\-region replication\. 
+Oracle GoldenGate \(GoldenGate\) collects, replicates, and manages transactional data between databases\. It is a log\-based change data capture \(CDC\) and replication software package used with Oracle databases for online transaction processing \(OLTP\) systems\. GoldenGate creates trail files that contain the most recent changed data from the source database and then pushes these files to the target database\. Amazon RDS supports GoldenGate for Oracle Database Standard Edition Two \(SE2\) and Enterprise Edition \(EE\)\.
+
+You can use GoldenGate with Amazon RDS to do the following:
++ Active\-Active database replication
++ Zero\-downtime migration and upgrades
++ Disaster recovery
++ Data protection
++ In\-region and cross\-region replication
 
 When working with GoldenGate on Amazon RDS, consider the following: 
 + You are responsible for setting up and managing GoldenGate for use with Amazon RDS\. 
-+ You are responsible for managing GoldenGate licensing \(bring\-your\-own\-license\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
-+ Amazon RDS supports GoldenGate for Oracle Database Standard Edition Two \(SE2\), Standard Edition One \(SE1\), Standard Edition \(SE\), and Enterprise Edition \(EE\)\. 
-+ Amazon RDS supports GoldenGate for database version 11\.2\.0\.4, 12\.1\.0\.2, 12\.2\.0\.1, 18\.0\.0\.0, and 19\.0\.0\. 
++ You are responsible for managing GoldenGate licensing \(BYOL\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 + Amazon RDS supports GoldenGate version 11\.2\.1 and later\. 
 + Amazon RDS supports migration and replication across Oracle databases using GoldenGate\. We do not support nor prevent customers from migrating or replicating across heterogeneous databases\. 
-+ You can use GoldenGate on Amazon RDS Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. To maintain the integrity of replicated data, you should configure encryption on the GoldenGate hub using EBS encrypted volumes or trail file encryption\. You should also configure encryption for data sent between the GoldenGate hub and the source and target database instances\. Amazon RDS Oracle DB instances support encryption with [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) or [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
++ You can use GoldenGate on Amazon RDS for Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. To maintain the integrity of replicated data, you should configure encryption on the GoldenGate hub using EBS encrypted volumes or trail file encryption\. You should also configure encryption for data sent between the GoldenGate hub and the source and target database instances\. Amazon RDS for Oracle DB instances support encryption with [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) or [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 + GoldenGate DDL is supported with GoldenGate version 12\.1 and later when using Integrated capture mode\. 
 
 ## Overview<a name="Appendix.OracleGoldenGate.Overview"></a>
@@ -47,7 +52,7 @@ Scenario 5: An Oracle database on an Amazon RDS DB instance connected to an Amaz
 **Note**  
 Any issues that affect running GoldenGate on an on\-premises environment also affect running GoldenGate on AWS\. We strongly recommend that you monitor the GoldenGate hub to ensure that `EXTRACT` and `REPLICAT` are resumed if a failover occurs\. Because the GoldenGate hub is run on an Amazon EC2 instance, Amazon RDS does not manage the GoldenGate hub and cannot ensure that it is running\.
 
-You can use GoldenGate using Amazon RDS to upgrade to major versions of Oracle\. For example, you can use GoldenGate with Amazon RDS to upgrade from an Oracle version 8 on\-premises database to an Oracle database running version 11\.2\.0\.4 on an Amazon RDS DB instance\.
+You can use GoldenGate using Amazon RDS to upgrade to major versions of Oracle\. For example, you can use GoldenGate with Amazon RDS to upgrade from an Oracle version 8 on\-premises database to an Oracle database running version 19c on an Amazon RDS DB instance\.
 
 To set up GoldenGate using Amazon RDS, you configure the hub on the Amazon EC2 instance, and then configure the source and target databases\. The following steps show how to set up GoldenGate for use with Amazon RDS\. Each step is explained in detail in the following sections: 
 + [Setting up a GoldenGate hub on Amazon EC2](#Appendix.OracleGoldenGate.Hub)
@@ -57,9 +62,12 @@ To set up GoldenGate using Amazon RDS, you configure the hub on the Amazon EC2 i
 
 ## Setting up a GoldenGate hub on Amazon EC2<a name="Appendix.OracleGoldenGate.Hub"></a>
 
-To create a GoldenGate hub on an Amazon EC2 instance, you complete several steps\. First, you create an Amazon EC2 instance with a full client installation of Oracle RDBMS\. For Oracle version 11\.2\.0\.4, you install patch 13328193\. The Amazon EC2 instance must also have Oracle GoldenGate software installed\. The exact software versions depend on the source and target database versions\. For more information about installing GoldenGate, see the [Oracle documentation](http://docs.oracle.com/cd/E35209_01/index.htm)
+To create a GoldenGate hub on an Amazon EC2 instance, you complete several steps\. First, you create an Amazon EC2 instance with a full client installation of Oracle RDBMS\. The Amazon EC2 instance must also have Oracle GoldenGate software installed\. The exact software versions depend on the source and target database versions\. For more information about installing GoldenGate, see the [Oracle documentation](http://docs.oracle.com/cd/E35209_01/index.htm)
 
-The Amazon EC2 instance that serves as the GoldenGate hub stores and processes the transaction information from the source database into trail files\. To support this process, make sure that you have enough allocated storage to store the trail files\. Also, make sure that the Amazon EC2 instance has enough processing power to manage the amount of data being processed\. In addition, make sure that the EC2 instance has enough memory to store the transaction information before it's written to the trail file\.
+The Amazon EC2 instance that serves as the GoldenGate hub stores and processes the transaction information from the source database into trail files\. To support this process, make sure that you meet the following conditions:
++ You have allocated enough storage for the trail files
++ The Amazon EC2 instance has enough processing power to manage the amount of data\.
++ The EC2 instance has enough memory to store the transaction information before it's written to the trail file\.
 
 The following tasks set up a GoldenGate hub on an Amazon EC2 instance; each task is explained in detail in this section:
 
@@ -100,9 +108,7 @@ Once you have completed these steps, the GoldenGate hub is ready for use\. Next,
 
 ## Setting up a source database for use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Source"></a>
 
- When your source database is running version 11\.2\.0\.4 or later, complete the following tasks to set up a source database for use with GoldenGate: 
-
-1. Set the `compatible` parameter to 11\.2\.0\.4 or later\. 
+ When your source Oracle database is running version 12c or later, complete the following tasks to set up a source database for use with GoldenGate: 
 
 1. Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. This parameter turns on supplemental logging for the source database\. If your source database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\.
 
@@ -113,56 +119,6 @@ Once you have completed these steps, the GoldenGate hub is ready for use\. Next,
 1. Grant the necessary privileges to the GoldenGate user\.
 
 1. Add a TNS alias for the source database to the `tnsnames.ora` file on the GoldenGate hub\.
-
-### Set COMPATIBLE on the source DB<a name="Appendix.OracleGoldenGate.Source.Compatible"></a>
-
-Make sure that the source database has the `COMPATIBLE` initialization parameter set to 11\.2\.0\.4 or later\. If you use an Oracle database on an Amazon RDS DB instance as the source, make sure that you have a parameter group with `COMPATIBLE` set to 11\.2\.0\.4 or later associated with the DB instance\. If you change the `COMPATIBLE` parameter in a parameter group associated with the DB instance, the change requires an instance reboot\. 
-
-Use the following Amazon RDS CLI commands to create a new parameter group and set the `COMPATIBLE` parameter\. Make sure that you associate the new parameter group with the source DB instance\.
-
-For Linux, macOS, or Unix:
-
-```
-aws rds create-db-parameter-group \
-    --db-parameter-group-name example-goldengate \
-    --description "Parameters to allow GoldenGate" \
-    --db-parameter-group-family oracle-ee-11.2
-
-aws rds modify-db-parameter-group \
-    --db-parameter-group-name example-goldengate \
-    --parameters "ParameterName=compatible, ParameterValue=11.2.0.4, ApplyMethod=pending-reboot"
-
-aws rds modify-db-instance \
-    --db-instance-identifier example-test \
-    --db-parameter-group-name example-goldengate \
-    --apply-immediately
-
-aws rds reboot-db-instance \
-    --db-instance-identifier example-test
-```
-
-For Windows:
-
-```
-aws rds create-db-parameter-group ^
-    --db-parameter-group-name example-goldengate ^
-    --description "Parameters to allow GoldenGate" ^
-    --db-parameter-group-family oracle-ee-11.2
-
-aws rds modify-db-parameter-group ^
-    --db-parameter-group-name example-goldengate ^
-    --parameters "ParameterName=compatible, ParameterValue=11.2.0.4, ApplyMethod=pending-reboot"
-
-aws rds modify-db-instance ^
-    --db-instance-identifier example-test ^
-    --db-parameter-group-name example-goldengate ^
-    --apply-immediately
-
-aws rds reboot-db-instance ^
-    --db-instance-identifier example-test
-```
-
-Always retain the parameter group with the `COMPATIBLE` parameter\. If you restore an instance from a DB snapshot, modify the restored instance to use the parameter group that has a matching or greater `COMPATIBLE` parameter value\. Do this modification as soon as possible after the restore action\. It requires a reboot of the instance\.
 
 ### Enable supplemental logging on the source DB<a name="Appendix.OracleGoldenGate.Source.Logging"></a>
 
@@ -259,8 +215,6 @@ OGGSOURCE=
 ## Setting up a target database for use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Target"></a>
 
 The following tasks set up a target DB instance for use with GoldenGate:
-
-1. Set the `compatible` parameter to 11\.2\.0\.4 or later
 
 1.  Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to `TRUE`\. If your target database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to `TRUE`\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\. 
 

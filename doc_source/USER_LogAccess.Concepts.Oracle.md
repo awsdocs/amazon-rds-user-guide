@@ -136,7 +136,7 @@ You can also purge all files that match a specific pattern \(if you do, don't in
 
 ## Publishing Oracle logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Oracle.PublishtoCloudWatchLogs"></a>
 
-You can configure your Amazon RDS Oracle DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can analyze the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
+You can configure your Amazon RDS for Oracle DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can analyze the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
 Amazon RDS publishes each Oracle database log as a separate database stream in the log group\. For example, if you configure the export function to include the audit log, audit data is stored in an audit log stream in the `/aws/rds/instance/my_instance/audit` log group\. RDS for Oracle supports the following logs:
 + Alert log

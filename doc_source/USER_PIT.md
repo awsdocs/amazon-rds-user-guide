@@ -21,6 +21,9 @@ Some of the database engines used by Amazon RDS have special considerations when
 + For a SQL Server DB instance, the `OFFLINE`, `EMERGENCY`, and `SINGLE_USER` modes aren't supported\. Setting any database into one of these modes causes the latest restorable time to stop moving ahead for the whole instance\.
 + Some actions, such as changing the recovery model of a SQL Server database, can break the sequence of logs that are used for point\-in\-time recovery\. In some cases, Amazon RDS can detect this issue and the latest restorable time is prevented from moving forward\. In other cases, such as when a SQL Server database uses the `BULK_LOGGED` recovery model, the break in log sequence isn't detected\. It might not be possible to restore a SQL Server DB instance to a point in time if there is a break in the log sequence\. For these reasons, Amazon RDS doesn't support changing the recovery model of SQL Server databases\.
 
+**Note**  
+You can also use AWS Backup to manage backups of Amazon RDS DB instances\. If your DB instance is associated with a backup plan in AWS Backup, that backup plan is used for point\-in\-time recovery\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+
 You can restore a DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="USER_PIT.CON"></a>

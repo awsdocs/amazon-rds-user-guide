@@ -1,4 +1,4 @@
-# Tools and third\-party software for Oracle DB instances<a name="Oracle.Resources"></a>
+# Using your Oracle DB instance with third\-party software<a name="Oracle.Resources"></a>
 
 This section provides information about tools and third\-party software for Oracle DB instances on Amazon RDS\. 
 

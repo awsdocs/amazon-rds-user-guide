@@ -2,7 +2,7 @@
 
 You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\. For specific information about working with read replicas on Amazon RDS for MySQL, see [Working with MySQL read replicas](USER_MySQL.Replication.ReadReplicas.md)\. 
 
-You can use global transaction identifiers \(GTIDs\) for replication with Amazon RDS for MySQL\. For more information, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+You can use global transaction identifiers \(GTIDs\) for replication with Amazon RDS for MySQL\. For more information, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 You can also set up replication between an Amazon RDS for MySQL DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\. For information about configuring replication with an external source, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
@@ -13,5 +13,5 @@ You can configure replication to import databases from a MySQL or MariaDB instan
 
 **Topics**
 + [Working with MySQL read replicas](USER_MySQL.Replication.ReadReplicas.md)
-+ [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)
++ [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)
 + [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)

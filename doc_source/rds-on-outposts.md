@@ -56,7 +56,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  DB instance scaling  |  Yes  |  To scale a DB instance, modify its on\-premises DB instance class\. Storage scaling isn't supported\.  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Manual and automatic DB instance snapshots  |  Yes  |  Manual and automatic DB instance snapshots are stored in your AWS Region\.  |  [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
 |  Restoring from a DB snapshot  |  Yes  |  —  |  [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
-|  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)  | 
+|  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
 |  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
 |  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB instance to a specified time](USER_PIT.md)  | 
 |  Enhanced monitoring  |  No  |  —  |  [Using Enhanced Monitoring](USER_Monitoring.OS.md)  | 

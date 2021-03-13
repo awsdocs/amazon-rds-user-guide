@@ -6,6 +6,7 @@ DB snapshot copy charges apply to the data transfer\. After the DB snapshot is c
 
 Backup replication is available for RDS DB instances running the following database engines:
 + Oracle version 12\.1\.0\.2\.v10 and higher
++ PostgreSQL version 9\.6 and higher
 
 Backup replication isn't supported for encrypted DB instances\.
 

@@ -54,7 +54,7 @@ The VPC must have subnets in different Availability Zones\.
 
 1. Open the **Additional configuration** section, and enter **sample** for **Initial database name**\. Keep the default settings for the other options\.
 
-1. Choose **Create database** to create your RDS MySQL DB instance\.
+1. Choose **Create database** to create your MySQL DB instance\.
 
    Your new DB instance appears in the **Databases** list with the status **Creating**\.
 
@@ -116,7 +116,7 @@ The VPC must have subnets in different Availability Zones\.
    Keep the default settings for the other options\.  
 ![\[Configure Advanced Settings Panel\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/CURRENT-Tutorial_WebServer_09.png)
 
-1. Choose **Create database** to create your RDS MySQL DB instance\.
+1. Choose **Create database** to create your MySQL DB instance\.
 
 1. On the next page, choose **View DB instances details** to view your DB instance\.
 

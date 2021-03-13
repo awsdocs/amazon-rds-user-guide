@@ -3,7 +3,7 @@
 Initiates replication from a MySQL DB instance\.
 
 **Note**  
-You can use the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) or [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure to initiate replication from an Amazon RDS MySQL DB instance and stop replication at the specified binary log file location\.
+You can use the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) or [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure to initiate replication from an RDS for MySQL DB instance and stop replication at the specified binary log file location\.
 
 ## Syntax<a name="mysql_rds_start_replication-syntax"></a>
 
@@ -17,7 +17,7 @@ CALL mysql.rds_start_replication;
 
 The master user must run the `mysql.rds_start_replication` procedure\.
 
-If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_start_replication` on the read replica to start the replication process after you have called [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) to build the replication configuration\. For more information, see [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)\.
+If you are configuring replication to import data from an instance of MySQL running external to Amazon RDS, you call `mysql.rds_start_replication` on the read replica to start the replication process after you have called [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) to build the replication configuration\. For more information, see [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)\.
 
 If you are configuring replication to export data to an instance of MySQL external to Amazon RDS, you call `mysql.rds_start_replication` and `mysql.rds_stop_replication` on the read replica to control some replication actions, such as purging binary logs\. For more information, see [Exporting data from a MySQL DB instance by using replication](MySQL.Procedural.Exporting.NonRDSRepl.md)\.
 

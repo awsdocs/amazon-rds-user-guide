@@ -6,12 +6,12 @@ You can transfer files between an Amazon RDS for Oracle DB instance and an Amazo
 The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 **Topics**
-+ [Prerequisites for Amazon RDS Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
++ [Prerequisites for Amazon RDS for Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
 + [Adding the Amazon S3 integration option](#oracle-s3-integration.preparing.option-group)
 + [Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket](#oracle-s3-integration.using)
 + [Removing the Amazon S3 integration option](#oracle-s3-integration.removing)
 
-## Prerequisites for Amazon RDS Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
+## Prerequisites for Amazon RDS for Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
 For Amazon RDS for Oracle to integrate with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. Prepare for the integration as follows:
 
@@ -330,7 +330,7 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
 
 ## Adding the Amazon S3 integration option<a name="oracle-s3-integration.preparing.option-group"></a>
 
-To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
+To use Amazon RDS for Oracle Integration with Amazon S3, your Amazon RDS for Oracle DB instance must be associated with an option group that includes the `S3_INTEGRATION` option\.
 
 ### Console<a name="oracle-s3-integration.preparing.option-group.console"></a>
 

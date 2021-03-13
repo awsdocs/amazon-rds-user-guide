@@ -23,7 +23,7 @@ A detailed discussion of Transparent Data Encryption is beyond the scope of this
 
 ## Enabling TDE<a name="TDE.Enabling"></a>
 
-To enable Transparent Data Encryption for an RDS SQL Server DB instance, specify the TDE option in an RDS option group that is associated with that DB instance\.
+To enable Transparent Data Encryption for an RDS for SQL Server DB instance, specify the TDE option in an RDS option group that is associated with that DB instance\.
 
 1. Determine whether your DB instance is already associated with an option group that has the TDE option\. To view the option group that a DB instance is associated with, you can use the RDS console, the [describe\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) AWS CLI command, or the API operation [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html)\.
 

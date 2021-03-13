@@ -1,6 +1,6 @@
 # mysql\.rds\_set\_external\_master\_with\_auto\_position<a name="mysql_rds_set_external_master_with_auto_position"></a>
 
-Configures an Amazon RDS MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\. This procedure also configures delayed replication and replication based on global transaction identifiers \(GTIDs\)\.
+Configures an RDS for MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS\. This procedure also configures delayed replication and replication based on global transaction identifiers \(GTIDs\)\.
 
 **Important**  
 To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
@@ -46,7 +46,7 @@ The limit for this parameter is one day \(86,400 seconds\)\.
 
 The master user must run the `mysql.rds_set_external_master_with_auto_position` procedure\. This procedure must be run on the MySQL DB instance to be configured as the read replica of a MySQL instance running external to Amazon RDS\. 
 
-For Amazon RDS MySQL 5\.7, this procedure is supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. This procedure is not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.
+For RDS for MySQL 5\.7, this procedure is supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. This procedure is not supported for RDS for MySQL 5\.5, 5\.6, or 8\.0\.
 
 Before you run `mysql.rds_set_external_master_with_auto_position`, you must configure the instance of MySQL running external to Amazon RDS to be a source database instance\. To connect to the MySQL instance running external to Amazon RDS, you must specify values for `replication_user_name` and `replication_user_password`\. These values must indicate a replication user that has `REPLICATION CLIENT` and `REPLICATION SLAVE` permissions on the external instance of MySQL\. 
 
@@ -76,7 +76,7 @@ When you call `mysql.rds_set_external_master_with_auto_position`, Amazon RDS rec
 
 For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) or [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. To roll forward changes to a delayed read replica to the time just before a disaster, you can run the `mysql.rds_set_external_master_with_auto_position` procedure\. After the `mysql.rds_start_replication_until_gtid` procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
-To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](mysql_rds_skip_transaction_with_gtid.md) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](mysql_rds_skip_transaction_with_gtid.md) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 ## Examples<a name="mysql_rds_set_external_master_with_auto_position-examples"></a>
 

@@ -7,7 +7,6 @@ These procedures are supported for the following Amazon RDS for Oracle DB engine
 + 18c
 + 12\.2\.0\.2\.ru\-2019\-07\.rur\-2019\-07\.r1 or higher 12\.2 versions
 + 12\.1\.0\.2\.v17 or higher 12\.1 versions
-+ 11\.2\.0\.4\.v21 or higher 11\.2 versions
 
 ## Common parameters for Oracle Scheduler procedures<a name="Appendix.Oracle.CommonDBATasks.Scheduler.CommonParameters"></a>
 
@@ -18,9 +17,9 @@ To perform tasks with Oracle Scheduler, use procedures in the Amazon RDS package
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `name` | varchar2 | `'SYS.BSLN_MAINTAIN_STATS_JOB'`,`'SYS.CLEANUP_ONLINE_IND_BUILD'`  | — | Yes |  The name of the job to modify\.  Currently, you can only modify `SYS.CLEANUP_ONLINE_IND_BUILD` and `SYS.BSLN_MAINTAIN_STATS_JOB` jobs\.   | 
-| `attribute` | varchar2 | `'REPEAT_INTERVAL'`,`'SCHEDULE_NAME'` | – | Yes |  Attribute to modify\. To modify the repeat interval for the job, specify `'REPEAT_INTERVAL'`\. To modify the schedule name for the job, specify `'SCHEDULE_NAME'`\.  | 
-| `value` | varchar2 | A valid schedule interval or schedule name, depending on attribute used\. | – | Yes |  The new value of the attribute\.  | 
+|  `name`  |  varchar2  |  `'SYS.BSLN_MAINTAIN_STATS_JOB'`,`'SYS.CLEANUP_ONLINE_IND_BUILD'`   |  —  |  Yes  |  The name of the job to modify\.  Currently, you can only modify `SYS.CLEANUP_ONLINE_IND_BUILD` and `SYS.BSLN_MAINTAIN_STATS_JOB` jobs\.   | 
+|  `attribute`  |  varchar2  |  `'REPEAT_INTERVAL'`,`'SCHEDULE_NAME'`  |  –  |  Yes  |  Attribute to modify\. To modify the repeat interval for the job, specify `'REPEAT_INTERVAL'`\. To modify the schedule name for the job, specify `'SCHEDULE_NAME'`\.  | 
+|  `value`  |  varchar2  |  A valid schedule interval or schedule name, depending on attribute used\.  |  –  |  Yes  |  The new value of the attribute\.  | 
 
 ## Modifying DBMS\_SCHEDULER jobs<a name="Appendix.Oracle.CommonDBATasks.ModifyScheduler"></a>
 

@@ -28,7 +28,10 @@ To find what RUs and RURs are applied to Amazon RDS for Oracle versions 19\.0\.0
 
 ## Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
 
-For Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, Amazon RDS incorporates bug fixes from Oracle by using their quarterly Database Patch Set Updates \(PSUs\)\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\. 
+For Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, Amazon RDS incorporates bug fixes from Oracle by using their quarterly Database Patch Set Updates \(PSUs\)\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\.
+
+**Note**  
+RDS for Oracle 11g is deprecated\. The 11\.2\.0\.4 information in this section is only relevant when you want to upgrade an 11g snapshot\.
 
 To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, see the following table\. 
 

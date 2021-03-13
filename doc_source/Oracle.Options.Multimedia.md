@@ -9,7 +9,6 @@ Amazon RDS supports Oracle Multimedia for the following editions and versions of
 + Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 18\.0\.0\.0, all versions
 + Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.2\.0\.1, all versions
 + Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.1\.0\.2\.v13 or later
-+ Oracle Standard Edition \(SE and SE1\) or Oracle Enterprise Edition, version 11\.2\.0\.4\.v17 or later
 
 **Note**  
 Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multimedia isn't supported for Oracle 19c DB instances\. For more information, see [Desupport of Oracle Multimedia](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/behavior-changes-deprecated-desupport-oracle-database.html#GUID-BABC1C60-EA07-4EBE-8C67-B69B59E4F742) in the Oracle documentation\.
@@ -18,9 +17,8 @@ Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multime
 
 The following are prerequisites for using Oracle Multimedia: 
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of sufficient class\. Oracle Multimedia is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
++ Your DB instance must be of sufficient class\. Oracle Multimedia is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available and is required for any options that install the Oracle Java Virtual Machine \(JVM\)\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 
 ## Best practices for Oracle Multimedia<a name="Oracle.Options.Multimedia.BestPractces"></a>
 

@@ -12,9 +12,6 @@ The first snapshot of a DB instance contains the data for the full DB instance\.
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
-**Note**  
-You can also use AWS Backup to manage backups of Amazon RDS DB instances\. Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
-
 ## Backup storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
 Your Amazon RDS backup storage for each AWS Region is composed of the automated backups and manual DB snapshots for that Region\. Total backup storage space equals the sum of the storage for all backups in that Region\. Moving a DB snapshot to another Region increases the backup storage in the destination Region\. Backups are stored in Amazon S3\.
@@ -25,11 +22,11 @@ If you chose to retain automated backups when you delete a DB instance, the auto
 
 ## Backup window<a name="USER_WorkingWithAutomatedBackups.BackupWindow"></a>
 
-Automated backups occur daily during the preferred backup window\. If the backup requires more time than allotted to the backup window, the backup continues after the window ends, until it finishes\. The backup window can't overlap with the weekly maintenance window for the DB instance\. 
+Automated backups occur daily during the preferred backup window\. If the backup requires more time than allotted to the backup window, the backup continues after the window ends, until it finishes\. The backup window can't overlap with the weekly maintenance window for the DB instance\.
 
-During the automatic backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. You might experience elevated latencies for a few minutes during backups for Multi\-AZ deployments\.  For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\. 
+During the automatic backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. You might experience elevated latencies for a few minutes during backups for Multi\-AZ deployments\.  For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\.
 
-If you don't specify a preferred backup window when you create the DB instance, Amazon RDS assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\. 
+If you don't specify a preferred backup window when you create the DB instance, Amazon RDS assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\.
 
 
 ****  
@@ -37,7 +34,7 @@ If you don't specify a preferred backup window when you create the DB instance, 
 
 ## Backup retention period<a name="USER_WorkingWithAutomatedBackups.BackupRetention"></a>
 
-You can set the backup retention period when you create a DB instance\. If you don't set the backup retention period, the default backup retention period is one day if you create the DB instance using the Amazon RDS API or the AWS CLI\. The default backup retention period is seven days if you create the DB instance using the console\. 
+You can set the backup retention period when you create a DB instance\. If you don't set the backup retention period, the default backup retention period is one day if you create the DB instance using the Amazon RDS API or the AWS CLI\. The default backup retention period is seven days if you create the DB instance using the console\.
 
 After you create a DB instance, you can modify the backup retention period\. You can set the backup retention period to between 0 and 35 days\. Setting the backup retention period to 0 disables automated backups\. Manual snapshot limits \(100 per Region\) do not apply to automated backups\.
 
@@ -50,6 +47,9 @@ An outage occurs if you change the backup retention period from 0 to a nonzero v
 
 If your DB instance doesn't have automated backups enabled, you can enable them at any time\. You enable automated backups by setting the backup retention period to a positive nonzero value\. When automated backups are enabled, your RDS instance and database is taken offline and a backup is immediately created\.
 
+**Note**  
+If you manage your backups in AWS Backup, you can't enable automated backups\. For more information, see [Using AWS Backup to manage automated backups](#AutomatedBackups.AWSBackup)\.
+
 ### Console<a name="USER_WorkingWithAutomatedBackups.Enabling.CON"></a>
 
 **To enable automated backups immediately**
@@ -58,15 +58,15 @@ If your DB instance doesn't have automated backups enabled, you can enable them 
 
 1. In the navigation pane, choose **Databases**, and then choose the DB instance that you want to modify\.
 
-1. Choose **Modify**\. The **Modify DB Instance** page appears\.
+1. Choose **Modify**\. The **Modify DB instance** page appears\.
 
-1. For **Backup Retention Period**, choose a positive nonzero value, for example 3 days\.
+1. For **Backup retention period**, choose a positive nonzero value, for example 3 days\.
 
 1. Choose **Continue**\.
 
-1. Choose **Apply Immediately**\.
+1. Choose **Apply immediately**\.
 
-1. On the confirmation page, choose **Modify DB Instance** to save your changes and enable automated backups\.
+1. On the confirmation page, choose **Modify DB instance** to save your changes and enable automated backups\.
 
 ### AWS CLI<a name="USER_WorkingWithAutomatedBackups.Enabling.CLI"></a>
 
@@ -286,6 +286,27 @@ https://rds.amazonaws.com/
     &AWSAccessKeyId=<AWS Access Key ID>
     &Signature=<Signature>
 ```
+
+## Using AWS Backup to manage automated backups<a name="AutomatedBackups.AWSBackup"></a>
+
+AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud and on premises\. You can manage backups of your Amazon RDS DB instances in AWS Backup\.
+
+To enable backups in AWS Backup, you use resource tagging to associate your DB instance with a backup plan\. For more information, see [Using tags to enable backups in AWS Backup](USER_Tagging.md#Tagging.RDS.AWSBackup)\.
+
+**Note**  
+Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. 
+
+For more information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
+
+**To view backups managed by AWS Backup**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Snapshots**\.
+
+1. Choose the **Backup service** tab\.
+
+   Your AWS Backup backups are listed under **Backup service snapshots**\.
 
 ## Automated backups with unsupported MySQL storage engines<a name="Overview.BackupDeviceRestrictions"></a>
 

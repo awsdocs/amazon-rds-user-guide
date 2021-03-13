@@ -12,7 +12,7 @@ The following diagram shows the supported scenarios\.
 
 Using native \.bak files to back up and restore databases is usually the fastest way to back up and restore databases\. There are many additional advantages to using native backup and restore\. For example, you can do the following:
 + Migrate databases to or from Amazon RDS\.
-+ Move databases between RDS SQL Server DB instances\.
++ Move databases between RDS for SQL Server DB instances\.
 + Migrate data, schemas, stored procedures, triggers, and other database code inside \.bak files\.
 + Backup and restore single databases, instead of entire DB instances\.
 + Create copies of databases for development, testing, training, and demonstrations\.

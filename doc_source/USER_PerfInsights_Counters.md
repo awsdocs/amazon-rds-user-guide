@@ -83,10 +83,10 @@ The following operating system counters are available with Performance Insights 
 The following database counters are available with Performance Insights for Amazon RDS for MariaDB and MySQL\.
 
 **Topics**
-+ [Native counters for RDS MariaDB and RDS MySQL](#USER_PerfInsights_Counters.MySQL.Native)
++ [Native counters for RDS for MariaDB and RDS for MySQL](#USER_PerfInsights_Counters.MySQL.Native)
 + [Non\-native counters for Amazon RDS for MariaDB and MySQL](#USER_PerfInsights_Counters.MySQL.NonNative)
 
-### Native counters for RDS MariaDB and RDS MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
+### Native counters for RDS for MariaDB and RDS for MySQL<a name="USER_PerfInsights_Counters.MySQL.Native"></a>
 
 For definitions of these native metrics, see [Server Status Variables](https://dev.mysql.com/doc/refman/5.6/en/server-status-variables.html) in the MySQL documentation\.
 

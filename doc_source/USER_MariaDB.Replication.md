@@ -2,7 +2,7 @@
 
 You usually use read replicas to configure replication between Amazon RDS DB instances\. For general information about read replicas, see [Working with read replicas](USER_ReadRepl.md)\. For specific information about working with read replicas on Amazon RDS for MariaDB, see [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)\. 
 
-You can also configure replication based on binary log coordinates for a MariaDB DB instance\. For MariaDB instances, you can also configure replication based on global transaction IDs \(GTIDs\), which provides better crash safety\. For more information, see [Configuring GTID\-based replication into an RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md)\. 
+You can also configure replication based on binary log coordinates for a MariaDB DB instance\. For MariaDB instances, you can also configure replication based on global transaction IDs \(GTIDs\), which provides better crash safety\. For more information, see [Configuring GTID\-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md)\. 
 
 The following are other replication options available with Amazon RDS for MariaDB:
 + You can set up replication between an Amazon RDS for MariaDB DB instance and a MySQL or MariaDB instance that is external to Amazon RDS\. For information about configuring replication with an external source, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
@@ -12,4 +12,4 @@ For any of these replication options, you can use either row\-based replication,
 
 **Topics**
 + [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)
-+ [Configuring GTID\-based replication into an RDS MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md)
++ [Configuring GTID\-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md)

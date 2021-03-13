@@ -10,7 +10,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
 + [Amazon RDS DB instance running out of storage](#CHAP_Troubleshooting.Storage)
 + [Amazon RDS insufficient DB instance capacity](#CHAP_Troubleshooting.Capacity)
-+ [Amazon RDS MySQL and MariaDB issues](#CHAP_Troubleshooting.MySQL)
++ [MySQL and MariaDB issues](#CHAP_Troubleshooting.MySQL)
 + [Can't set backup retention period to 0](#CHAP_Troubleshooting.Backup.Retention)
 
  For information about debugging problems using the Amazon RDS API, see [Troubleshooting applications on Amazon RDS](APITroubleshooting.md)\. 
@@ -240,7 +240,7 @@ The `InsufficientDBInstanceCapacity` error can be returned when you try to creat
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## Amazon RDS MySQL and MariaDB issues<a name="CHAP_Troubleshooting.MySQL"></a>
+## MySQL and MariaDB issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
 You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
@@ -256,7 +256,7 @@ You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
 ### Maximum MySQL and MariaDB connections<a name="USER_ConnectToInstance.max_connections"></a>
 
-The maximum number of connections allowed to an RDS MySQL or MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+The maximum number of connections allowed to an RDS for MySQL or RDS for MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 The connection limit for a DB instance is set by default to the maximum for the DB instance class\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed\. Use the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Maximum number of database connections](CHAP_Limits.md#RDS_Limits.MaxConnections) and [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
@@ -381,15 +381,15 @@ If a replication error is fixed, the **Replication State** changes to **replicat
 
 ### Creating triggers with binary logging enabled requires SUPER privilege<a name="CHAP_Troubleshooting.MySQL.CreatingTriggers"></a>
 
-When trying to create triggers in an RDS MySQL or MariaDB DB instance, you might receive the following error\.
+When trying to create triggers in an RDS for MySQL or RDS for MariaDB DB instance, you might receive the following error\.
 
 ```
 "You do not have the SUPER privilege and binary logging is enabled" 
 ```
 
-To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS MySQL and MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
+To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS for MySQL and RDS for MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
 
-To create a new DB parameter group that allows you to create triggers in your RDS MySQL or MariaDB DB instance with binary logging enabled, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
+To create a new DB parameter group that allows you to create triggers in your RDS for MySQL or RDS for MariaDB DB instance with binary logging enabled, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
 
 **To create a new parameter group to allow triggers with binary logging enabled using the CLI**
 

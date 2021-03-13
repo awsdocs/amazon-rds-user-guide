@@ -168,7 +168,7 @@ The following table shows the event category and a list of events when an Aurora
 |  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
 |  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
 |  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
-|  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from an external MySQL database to an Amazon Aurora MySQL DB cluster](url-aurora-user;AuroraMySQL.Migrating.ExtMySQL.html)\.   | 
+|  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from an external MySQL database to an Aurora MySQL DB cluster](url-aurora-user;AuroraMySQL.Migrating.ExtMySQL.html)\.   | 
 |  failure  | RDS\-EVENT\-0143 |  Scaling failed for the Aurora Serverless DB cluster\.  | 
 |  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
 |  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 

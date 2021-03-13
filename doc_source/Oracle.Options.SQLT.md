@@ -13,11 +13,11 @@ Following are the supported Oracle versions for each SQLT version\.
 
 ****  
 
-| SQLT version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | Oracle 11g | 
-| --- | --- | --- | --- | --- | --- | 
-|  12\.2\.180725  |  Supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  12\.2\.180331  |  Not supported  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  12\.1\.160429  |  Not supported  |  Not supported  |  Supported  |  Supported  |  Supported  | 
+| SQLT version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | 
+| --- | --- | --- | --- | --- | 
+|  12\.2\.180725  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  12\.2\.180331  |  Not supported  |  Supported  |  Supported  |  Supported  | 
+|  12\.1\.160429  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
 
 To download SQLT and access instructions for using it:
 + Log in to your My Oracle Support account, and open the following documents:
@@ -32,7 +32,6 @@ To download SQLT and access instructions for using it:
 + Oracle 18c, 18\.0\.0\.0
 + Oracle 12c, 12\.2\.0\.1
 + Oracle 12c, 12\.1\.0\.2
-+ Oracle 11g, 11\.2\.0\.4
 
 Amazon RDS does not support the following SQLT methods: 
 + `XPLORE` 
@@ -111,7 +110,7 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
 
    1. Use a SQL client to connect to the DB instance as the master user\.
 
-      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+      For information about connecting to an Oracle DB instance using a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
    1. Run the following query:
 
@@ -138,7 +137,7 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
       ```
 
 **Note**  
-Upgrading SQLT requires uninstalling an older version of SQLT and then installing the new version\. So, all SQLT metadata can be lost when you upgrade SQLT\. A major version upgrade of a database also uninstalls and re\-installs SQLT\. An example of a major version upgrade is an upgrade from Oracle 11g to Oracle 12c\.
+Upgrading SQLT requires uninstalling an older version of SQLT and then installing the new version\. So, all SQLT metadata can be lost when you upgrade SQLT\. A major version upgrade of a database also uninstalls and re\-installs SQLT\. An example of a major version upgrade is an upgrade from Oracle 18c to Oracle 19c\.
 
 ## Using SQLT<a name="Oracle.Options.SQLT.Using"></a>
 
@@ -156,7 +155,7 @@ You can't download SQLT 12\.1\.160429 from the My Oracle Support site\. Oracle h
 
 1.  From the command prompt, open SQL\*Plus, and connect to the DB instance as the master user\. 
 
-   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+   For information about connecting to a DB instance using SQL\*Plus, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 1.  Get the SQL ID of a SQL statement: 
 
@@ -218,7 +217,3 @@ To remove SQLT from a DB instance, do one of the following:
 
    
 + To remove SQLT from a single DB instance, modify the DB instance and specify a different option group that doesn't include the SQLT option\. You can specify the default \(empty\) option group or a different custom option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-
-## Related topics<a name="Oracle.Options.SQLT.Related"></a>
-+ [Working with option groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB instances](Appendix.Oracle.Options.md)

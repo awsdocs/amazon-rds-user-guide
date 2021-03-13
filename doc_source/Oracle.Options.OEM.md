@@ -9,7 +9,7 @@ Amazon RDS supports OEM through the following options\.
 
 | Option | Option ID | Support for | 
 | --- | --- | --- | 
-|  [OEM Database Express](Appendix.Oracle.Options.OEM_DBControl.md)  |  `OEM`  |  OEM Database Express 12c OEM 11g Database Control  | 
+|  [OEM Database Express](Appendix.Oracle.Options.OEM_DBControl.md)  |  `OEM`  |  OEM Database Express 12c  | 
 |  [OEM Management Agent](Oracle.Options.OEMAgent.md)  |  `OEM_AGENT`  |  OEM Cloud Control for 13c OEM Cloud Control for 12c   | 
 
 **Note**  

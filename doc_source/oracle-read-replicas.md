@@ -128,7 +128,7 @@ Modify the logging configuration for a DB instance by using the Amazon RDS proce
 
 ### Setting the MAX\_STRING\_SIZE parameter<a name="oracle-read-replicas.configuration.string-size"></a>
 
-Before you create an Oracle replica, ensure that the setting of the `MAX_STRING_SIZE` parameter is the same on the source DB instance and the replica\. You can do this by associating them with the same parameter group\. If you have different parameter groups for the source and the replica, you can set `MAX_STRING_SIZE` to the same value\. For more information about setting this parameter, see [Enabling extended data types for a new DB instance](CHAP_Oracle.md#Oracle.Concepts.ExtendedDataTypes.CreateDBInstance)\.
+Before you create an Oracle replica, ensure that the setting of the `MAX_STRING_SIZE` parameter is the same on the source DB instance and the replica\. You can do this by associating them with the same parameter group\. If you have different parameter groups for the source and the replica, you can set `MAX_STRING_SIZE` to the same value\. For more information about setting this parameter, see [Enabling extended data types for a new DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.ExtendedDataTypes.CreateDBInstance)\.
 
 ### Planning compute and storage resources<a name="oracle-read-replicas.configuration.planning-resources"></a>
 
@@ -248,7 +248,7 @@ To change a read\-only replica to mounted mode, set `ReplicaMode=mounted` in [Mo
 
 ## Troubleshooting Oracle replicas<a name="oracle-read-replicas.troubleshooting"></a>
 
-This section describes possible replication problems and suggests solutions\. 
+This section describes possible replication problems and solutions\.
 
 ### Replication lag<a name="oracle-read-replicas.troubleshooting.lag"></a>
 
@@ -261,7 +261,7 @@ If replication lag is too long, query the following views:
 
 ### Replication failure after adding or modifying triggers<a name="oracle-read-replicas.troubleshooting.triggers"></a>
 
-If you add or modify any triggers, and if replication fails afterward, the triggers may be the problem\. Ensure that the trigger excludes the following user accounts, which are required by RDS for replication:
+If you add or modify any triggers, and if replication fails afterward, the problem may be the triggers\. Ensure that the trigger excludes the following user accounts, which are required by RDS for replication:
 + User accounts with administrator privileges
 + `SYS`
 + `SYSTEM`

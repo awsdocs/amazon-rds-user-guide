@@ -74,7 +74,7 @@ You can set the `long_query_time` parameter to a floating point value which allo
 
 ## MySQL file size limits in Amazon RDS<a name="MySQL.Concepts.Limits.FileSize"></a>
 
-For Amazon RDS MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for Amazon RDS MySQL DB instances\. 
+For MySQL DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) is set by default for MySQL DB instances\. 
 
 **Note**  
 Some existing DB instances have a lower limit\. For example, MySQL DB instances created before April 2014 have a file and table size limit of 2 TB\. This 2 TB file size limit also applies to DB instances or read replicas created from DB snapshots taken before April 2014, regardless of when the DB instance was created\.

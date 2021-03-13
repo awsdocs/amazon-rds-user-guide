@@ -7,7 +7,6 @@ You can use Oracle JVM with the following Oracle Database versions:
 + Oracle 18c, 18\.0\.0\.0, all versions
 + Oracle 12c, 12\.2\.0\.1, all versions
 + Oracle 12c, 12\.1\.0\.2\.v13 or later
-+ Oracle 11g, 11\.2\.0\.4\.v17 or later
 
 Java implementation in Amazon RDS has a limited set of permissions\. The master user is granted the `RDS_JAVA_ADMIN` role, which grants a subset of the privileges granted by the `JAVA_ADMIN` role\. To list the privileges granted to the `RDS_JAVA_ADMIN` role, run the following query on your DB instance:
 
@@ -24,7 +23,6 @@ The following are prerequisites for using Oracle Java:
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
 + Your DB instance must be of a large enough class\. Oracle Java isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 
 ## Best practices for Oracle JVM<a name="oracle-options-java.best-practices"></a>
 

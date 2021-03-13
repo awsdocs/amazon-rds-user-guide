@@ -45,7 +45,7 @@ Microsoft SQL Server, MySQL, and PostgreSQL DB instances support one\- and two\-
 For information about Kerberos authentication with a specific DB engine, see the following:
 + [Using Windows Authentication with an Amazon RDS for SQL Server DB instance](USER_SQLServerWinAuth.md)
 + [Using Kerberos authentication for MySQL](mysql-kerberos.md)
-+ [Configuring Kerberos authentication for Amazon RDS for Oracle](Oracle.Concepts.RestrictedDBAPrivileges.md#oracle-kerberos)
++ [Configuring Kerberos authentication for Amazon RDS for Oracle](oracle-kerberos.md)
 + [Using Kerberos authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)
 
 **Note**  

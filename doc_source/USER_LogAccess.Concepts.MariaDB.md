@@ -46,7 +46,7 @@ For more information about the slow query and general logs, go to the following 
 
 ## Publishing MariaDB logs to Amazon CloudWatch Logs<a name="USER_LogAccess.MariaDB.PublishtoCloudWatchLogs"></a>
 
-You can configure your Amazon RDS MariaDB DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
+You can configure your MariaDB DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
 Amazon RDS publishes each MariaDB database log as a separate database stream in the log group\. For example, if you configure the export function to include the slow query log, slow query data is stored in a slow query log stream in the `/aws/rds/instance/my_instance/slowquery` log group\.
 

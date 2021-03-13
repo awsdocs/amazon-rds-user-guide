@@ -1,6 +1,6 @@
 # Migrating data from a MySQL DB snapshot to a MariaDB DB instance<a name="USER_Migrate_MariaDB"></a>
 
-You can migrate an Amazon RDS MySQL DB snapshot to a new DB instance running MariaDB 10\.1 using the AWS Management Console, AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6\. To learn how to create an RDS MySQL DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+You can migrate an RDS for MySQL DB snapshot to a new DB instance running MariaDB 10\.1 using the AWS Management Console, AWS CLI, or Amazon RDS API\. You must create the DB snapshot from an Amazon RDS DB instance running MySQL 5\.6\. To learn how to create an RDS for MySQL DB snapshot, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
 After you migrate from MySQL to MariaDB, the MariaDB DB instance will be associated with the default DB parameter group and option group\. After you restore the DB snapshot, you can associate a custom DB parameter group for the new DB instance\. However, a MariaDB parameter group has a different set of configurable system variables\. For information about the differences between MySQL and MariaDB system variables, see [ System variable differences between MariaDB 10\.1 and MySQL 5\.6](https://mariadb.com/kb/en/mariadb/system-variable-differences-between-mariadb-101-and-mysql-56/)\. To learn about DB parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. To learn about option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
@@ -25,7 +25,7 @@ Incompatibilities between MySQL and MariaDB include the following:
 
 ## Performing the migration<a name="USER_Migrate_MariaDB.Migrating"></a>
 
-You can migrate an Amazon RDS MySQL DB snapshot to a new MariaDB DB instance using the AWS Management Console, the AWS CLI, or the RDS API\.
+You can migrate an RDS for MySQL DB snapshot to a new MariaDB DB instance using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ### Console<a name="USER_Migrate_MariaDB.CON"></a>
 

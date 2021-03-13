@@ -25,7 +25,7 @@ To set force logging, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.force
 
 | Parameter name | Data type | Default | Yes | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_enable` | boolean | true | No |  Set to `true` to put the database in force logging mode, `false` to remove the database from force logging mode\.   | 
+|  `p_enable`  |  boolean  |  true  |  No  |  Set to `true` to put the database in force logging mode, `false` to remove the database from force logging mode\.   | 
 
 The following example puts the database in force logging mode\. 
 
@@ -46,8 +46,8 @@ The `alter_supplemental_logging` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_action` | varchar2 | — | Yes |  `'ADD'` to add supplemental logging, `'DROP'` to drop supplemental logging\.   | 
-| `p_type` | varchar2 | null | No |  The type of supplemental logging\. Valid values are `'ALL'`, `'FOREIGN KEY'`, `'PRIMARY KEY'`, `'UNIQUE'`, or `PROCEDURAL`\.   | 
+|  `p_action`  |  varchar2  |  —  |  Yes  |  `'ADD'` to add supplemental logging, `'DROP'` to drop supplemental logging\.   | 
+|  `p_type`  |  varchar2  |  null  |  No  |  The type of supplemental logging\. Valid values are `'ALL'`, `'FOREIGN KEY'`, `'PRIMARY KEY'`, `'UNIQUE'`, or `PROCEDURAL`\.   | 
 
 The following example enables supplemental logging\.
 
@@ -105,8 +105,8 @@ The parameters are mutually exclusive\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `bytes` | positive | null | No | The size of the log file in bytes\. | 
-| `p_size` | varchar2 | — | Yes |  The size of the log file\. You can specify the size in kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+|  `bytes`  |  positive  |  null  |  No  |  The size of the log file in bytes\.  | 
+|  `p_size`  |  varchar2  |  —  |  Yes  |  The size of the log file\. You can specify the size in kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The following command adds a 100 MB log file\.
 
@@ -123,7 +123,7 @@ To drop redo logs, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_log
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `grp` | positive | — | Yes | The group number of the log\. | 
+|  `grp`  |  positive  |  —  |  Yes  |  The group number of the log\.  | 
 
 The following example drops the log with group number 3\. 
 
@@ -275,8 +275,8 @@ To retain archived redo logs, use the Amazon RDS procedure `rdsadmin.rdsadmin_ut
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `name` | varchar | — | Yes | The name of the configuration to update\. | 
-| `value` | varchar | — | Yes | The value for the configuration\. | 
+|  `name`  |  varchar  |  —  |  Yes  |  The name of the configuration to update\.  | 
+|  `value`  |  varchar  |  —  |  Yes  |  The value for the configuration\.  | 
 
 The following example retains 24 hours of redo logs\. 
 
@@ -327,7 +327,7 @@ In some cases, you might be using JDBC on Linux to download archived redo logs a
 
 ## Accessing transaction logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
 
-Accessing transaction logs is supported for Oracle version 11\.2\.0\.4\.v11 and later, Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+Accessing transaction logs is supported for Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
 
 You might want to access your online and archived redo log files for mining with external tools such as GoldenGate, Attunity, Informatica, and others\. If you want to access your online and archived redo log files, you must first create directory objects that provide read\-only access to the physical file paths\. 
 

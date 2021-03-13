@@ -545,7 +545,7 @@ Returns the number of the port used when connecting to the DB instance\.
 
 *DBInstanceClassHugePagesDefault*  
 Returns a Boolean value\. Currently, it is only supported for Oracle engines\.  
-For more information, see [Using HugePages with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.HugePages)\.
+For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.
 
 ### DB parameter formula operators<a name="USER_FormulaOperators"></a>
 
@@ -575,7 +575,7 @@ The parameter arguments can be specified as either integers or formulas\. Each f
 
 *IF\(\)*  
 Returns an argument\.  
-Currently, it is only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Using HugePages with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.HugePages)\.  
+Currently, it is only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.  
 Syntax  
 
 ```

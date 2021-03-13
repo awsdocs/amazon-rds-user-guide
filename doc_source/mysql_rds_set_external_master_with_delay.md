@@ -1,6 +1,6 @@
 # mysql\.rds\_set\_external\_master\_with\_delay<a name="mysql_rds_set_external_master_with_delay"></a>
 
-Configures an Amazon RDS MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS and configures delayed replication\.
+Configures an RDS for MySQL DB instance to be a read replica of an instance of MySQL running external to Amazon RDS and configures delayed replication\.
 
 **Important**  
 To run this procedure, `autocommit` must be enabled\. To enable it, set the `autocommit` parameter to `1`\. For information about modifying parameters, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\.
@@ -82,9 +82,9 @@ When you call `mysql.rds_set_external_master_with_delay`, Amazon RDS records the
 
 For disaster recovery, you can use this procedure with the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) or [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure\. To roll forward changes to a delayed read replica to the time just before a disaster, you can run the `mysql.rds_set_external_master_with_delay` procedure\. After the `mysql.rds_start_replication_until` procedure stops replication, you can promote the read replica to be the new primary DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
-To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](mysql_rds_skip_transaction_with_gtid.md) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+To use the `mysql.rds_rds_start_replication_until_gtid` procedure, GTID\-based replication must be enabled\. To skip a specific GTID\-based transaction that is known to cause disaster, you can use the [mysql\.rds\_skip\_transaction\_with\_gtid](mysql_rds_skip_transaction_with_gtid.md) stored procedure\. For more information about working with GTID\-based replication, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
-The `mysql.rds_set_external_master_with_delay` procedure is available in these versions of Amazon RDS MySQL:
+The `mysql.rds_set_external_master_with_delay` procedure is available in these versions of RDS for MySQL:
 + MySQL 5\.6\.40 and later 5\.6 versions
 + MySQL 5\.7\.22 and later 5\.7 versions
 

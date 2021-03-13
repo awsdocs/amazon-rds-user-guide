@@ -120,5 +120,5 @@ The following values can be used for the time zone option\.
 
 ## Related topics<a name="Appendix.Oracle.Options.Timezone.Related"></a>
 + [Working with option groups](USER_WorkingWithOptionGroups.md)
-+ [Options for Oracle DB instances](Appendix.Oracle.Options.md)
++ [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)
 + [Setting the time zone for Oracle Scheduler jobs](Appendix.Oracle.CommonDBATasks.Scheduler.md#Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone)

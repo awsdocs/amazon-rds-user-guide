@@ -1,6 +1,6 @@
 # Tutorial: Create a web server and an Amazon RDS DB instance<a name="TUT_WebAppWithRDS"></a>
 
-This tutorial helps you install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is an Amazon RDS MySQL DB instance\. Both the Amazon EC2 instance and the DB instance run in a virtual private cloud \(VPC\) based on the Amazon VPC service\. 
+This tutorial helps you install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is an MySQL DB instance\. Both the Amazon EC2 instance and the DB instance run in a virtual private cloud \(VPC\) based on the Amazon VPC service\. 
 
 **Important**  
 There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.

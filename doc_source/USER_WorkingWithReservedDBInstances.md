@@ -74,13 +74,13 @@ Alternatively, if you have one `db.t2.large` instance running in your account in
 ### Reserved DB instance billing example<a name="USER_WorkingWithReservedDBInstances.BillingExample"></a>
 
 The price for a reserved DB instance doesn't include regular costs associated with storage, backups, and I/O\. The following example illustrates the total cost per month for a reserved DB instance:
-+ An Amazon RDS MySQL reserved Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) with the No Upfront option at a cost of $0\.12 for the instance, or $90 per month
++ An RDS for MySQL reserved Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) with the No Upfront option at a cost of $0\.12 for the instance, or $90 per month
 + 400 GiB of General Purpose SSD \(gp2\) storage at a cost of 0\.115 per GiB per month, or $45\.60 per month
 + 600 GiB of backup storage at $0\.095, or $19 per month \(400 GiB free\)
 
 Add all of these options \($90 \+ $45\.60 \+ $19\) with the reserved DB instance, and the total cost per month is $154\.60\.
 
-If you chose to use an on\-demand DB instance instead of a reserved DB instance, an Amazon RDS MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.1386 per hour, or $101\.18 per month\. So, for an on\-demand DB instance, add all of these options \($101\.18 \+ $45\.60 \+ $19\), and the total cost per month is $165\.78\.
+If you chose to use an on\-demand DB instance instead of a reserved DB instance, an RDS for MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.1386 per hour, or $101\.18 per month\. So, for an on\-demand DB instance, add all of these options \($101\.18 \+ $45\.60 \+ $19\), and the total cost per month is $165\.78\.
 
 
 

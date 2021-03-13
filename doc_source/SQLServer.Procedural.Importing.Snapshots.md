@@ -267,20 +267,20 @@ bcp store.dbo.customers in C:\customers.txt -n -S rds.ckz2kqd4qsn1.us-east-1.rds
 
 ## Exporting data from SQL Server on Amazon RDS<a name="SQLServer.Procedural.Exporting"></a>
 
-You can choose one of the following options to export data from an RDS SQL Server DB instance: 
+You can choose one of the following options to export data from an RDS for SQL Server DB instance: 
 + **Native database backup using a full backup file \(\.bak\)** – Using \.bak files to backup databases is heavily optimized, and is usually the fastest way to export data\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
 + **SQL Server Import and Export Wizard** – For more information, see [SQL Server Import and Export Wizard](#SQLServer.Procedural.Exporting.SSIEW)\. 
 + **SQL Server Generate and Publish Scripts Wizard and bcp utility** – For more information, see [SQL Server Generate and Publish Scripts Wizard and bcp utility](#SQLServer.Procedural.Exporting.SSGPSW)\. 
 
 ### SQL Server Import and Export Wizard<a name="SQLServer.Procedural.Exporting.SSIEW"></a>
 
-You can use the SQL Server Import and Export Wizard to copy one or more tables, views, or queries from your RDS SQL Server DB instance to another data store\. This choice is best if the target data store is not SQL Server\. For more information, see [ SQL Server Import and Export Wizard](http://msdn.microsoft.com/en-us/library/ms141209%28v=sql.110%29.aspx) in the SQL Server documentation\. 
+You can use the SQL Server Import and Export Wizard to copy one or more tables, views, or queries from your RDS for SQL Server DB instance to another data store\. This choice is best if the target data store is not SQL Server\. For more information, see [ SQL Server Import and Export Wizard](http://msdn.microsoft.com/en-us/library/ms141209%28v=sql.110%29.aspx) in the SQL Server documentation\. 
 
 The SQL Server Import and Export Wizard is available as part of Microsoft SQL Server Management Studio\. This graphical SQL Server client is included in all Microsoft SQL Server editions except the Express Edition\. SQL Server Management Studio is available only as a Windows\-based application\. SQL Server Management Studio Express is available from Microsoft as a free download\. To find this download, see [the Microsoft website](http://www.microsoft.com/en-us/search/Results.aspx?q=sql%20server%20management%20studio)\. 
 
 **To use the SQL Server Import and Export Wizard to export data**
 
-1. In SQL Server Management Studio, connect to your RDS SQL Server DB instance\. For details on how to do this, see [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)\. 
+1. In SQL Server Management Studio, connect to your RDS for SQL Server DB instance\. For details on how to do this, see [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)\. 
 
 1. In **Object Explorer**, expand **Databases**, open the context \(right\-click\) menu for the source database, choose **Tasks**, and then choose **Export Data**\. The wizard appears\. 
 
@@ -288,9 +288,9 @@ The SQL Server Import and Export Wizard is available as part of Microsoft SQL Se
 
    1. For **Data source**, choose **SQL Server Native Client 11\.0**\. 
 
-   1. Verify that the **Server name** box shows the endpoint of your RDS SQL Server DB instance\.
+   1. Verify that the **Server name** box shows the endpoint of your RDS for SQL Server DB instance\.
 
-   1. Select **Use SQL Server Authentication**\. For **User name** and **Password**, type the master user name and password of your Amazon RDS SQL DB\. 
+   1. Select **Use SQL Server Authentication**\. For **User name** and **Password**, type the master user name and password of your DB instance\.
 
    1. Verify that the **Database** box shows the database from which you want to export data\.
 
@@ -340,13 +340,13 @@ The SQL Server Generate and Publish Scripts Wizard is available as part of Micro
 
 **To use the SQL Server Generate and Publish Scripts Wizard and the bcp utility to export data**
 
-1. In SQL Server Management Studio, connect to your RDS SQL Server DB instance\. For details on how to do this, see [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)\. 
+1. In SQL Server Management Studio, connect to your RDS for SQL Server DB instance\. For details on how to do this, see [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)\. 
 
 1. In **Object Explorer**, expand the **Databases** node and select the database you want to script\. 
 
-1. Follow the instructions in [Generate and publish scripts Wizard](http://msdn.microsoft.com/en-us/library/bb895179%28v=sql.110%29.aspx) in the SQL Server documentation to create a script file\. 
+1. Follow the instructions in [Generate and publish scripts Wizard](http://msdn.microsoft.com/en-us/library/bb895179%28v=sql.110%29.aspx) in the SQL Server documentation to create a script file\.
 
-1. In SQL Server Management Studio, connect to your target SQL Server DB instance\. 
+1. In SQL Server Management Studio, connect to your target SQL Server DB instance\.
 
 1. With the target SQL Server DB instance selected in **Object Explorer**, choose **Open** on the **File** menu, choose **File**, and then open the script file\. 
 
@@ -356,7 +356,7 @@ The SQL Server Generate and Publish Scripts Wizard is available as part of Micro
 
 1. Choose **\!Execute** on the SQL Editor menu to run the script file and create the database objects\. When the script finishes, verify that all database objects exist as expected\.
 
-1. Use the bcp utility to export data from the RDS SQL Server DB instance into files\. Open a command prompt and type the following command\.
+1. Use the bcp utility to export data from the RDS for SQL Server DB instance into files\. Open a command prompt and type the following command\.
 
    ```
    bcp database_name.schema_name.table_name out data_file -n -S aws_rds_sql_endpoint -U username -P password

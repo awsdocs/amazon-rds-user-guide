@@ -20,7 +20,7 @@ Before creating your first DB instance, you should complete the steps in the set
 
 ## Common management tasks for Microsoft SQL Server on Amazon RDS<a name="SQLServer.Concepts.General"></a>
 
-The following are the common management tasks you perform with an Amazon RDS SQL Server DB instance, with links to relevant documentation for each task\. 
+The following are the common management tasks you perform with an Amazon RDS for SQL Server DB instance, with links to relevant documentation for each task\. 
 
 
 ****  

@@ -116,10 +116,3 @@ For information about creating a DB instance, see [Creating an Amazon RDS DB ins
 In the preceding procedures, we use the AWS Management Console to perform tasks\. Amazon Web Services also provides the AWS Command Line Interface \(AWS CLI\), and an application programming interface \(API\)\. You can use the AWS CLI or the API to automate many of the tasks for managing Amazon RDS, including tasks to manage an Oracle DB instance with Amazon RDS\. 
 
 For more information, see [AWS Command Line Interface reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 
-
-## Related topics<a name="w189aac31c87b7c15"></a>
-+ [Setting up for Amazon RDS](CHAP_SettingUp.md)
-+ [Using the Oracle Repository Creation Utility on Amazon RDS for Oracle](Oracle.Resources.RCU.md)
-+ [Installing a Siebel database on Oracle on Amazon RDS](Oracle.Resources.Siebel.md)
-+ [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)
-+ [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)

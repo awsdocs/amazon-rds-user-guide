@@ -1,8 +1,8 @@
-# Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance<a name="MySQL.Procedural.Importing.SmallExisting"></a>
+# Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance<a name="MySQL.Procedural.Importing.SmallExisting"></a>
 
-If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)\. 
+If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)\. 
 
-You can also import data from an existing MySQL or MariaDB database to an Amazon RDS MySQL or MariaDB DB instance\. You do so by copying the database with [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and piping it directly into the Amazon RDS MySQL or MariaDB DB instance\. The `mysqldump` command\-line utility is commonly used to make backups and transfer data from one MySQL or MariaDB server to another\. It is included with MySQL and MariaDB client software\.
+You can also import data from an existing MySQL or MariaDB database to a MySQL or MariaDB DB instance\. You do so by copying the database with [mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html) and piping it directly into the MySQL or MariaDB DB instance\. The `mysqldump` command\-line utility is commonly used to make backups and transfer data from one MySQL or MariaDB server to another\. It is included with MySQL and MariaDB client software\.
 
 A typical `mysqldump` command to move data from an external database to an Amazon RDS DB instance looks similar to the following:
 
@@ -34,14 +34,14 @@ The parameters used are as follows:
 + `--compress` – Use to reduce network bandwidth consumption by compressing the data from the local database before sending it to Amazon RDS\.
 + `--order-by-primary` – Use to reduce load time by sorting each table's data by its primary key\.
 + `-plocal_password` – Use to specify a password\. In the first usage of this parameter, you specify the password for the user account identified by the first `-u` parameter\.
-+ `-u RDS_user` – Use to specify a user name\. In the second usage of this parameter, you specify the name of a user account on the default database for the Amazon RDS MySQL or MariaDB DB instance identified by the `--host` parameter\.
-+ `--port port_number` – Use to specify the port for your Amazon RDS MySQL or MariaDB DB instance\. By default, this is 3306 unless you changed the value when creating the instance\.
++ `-u RDS_user` – Use to specify a user name\. In the second usage of this parameter, you specify the name of a user account on the default database for the MySQL or MariaDB DB instance identified by the `--host` parameter\.
++ `--port port_number` – Use to specify the port for your MySQL or MariaDB DB instance\. By default, this is 3306 unless you changed the value when creating the instance\.
 + `--host host_name` – Use to specify the DNS name from the Amazon RDS DB instance endpoint, for example, `myinstance.123456789012.us-east-1.rds.amazonaws.com`\. You can find the endpoint value in the instance details in the Amazon RDS Management Console\.
 + `-pRDS_password` – Use to specify a password\. In the second usage of this parameter, you specify the password for the user account identified by the second `-u` parameter\.
 
 You must create any stored procedures, triggers, functions, or events manually in your Amazon RDS database\. If you have any of these objects in the database that you are copying, then exclude them when you run `mysqldump` by including the following parameters with your `mysqldump` command: `--routines=0 --triggers=0 --events=0`\.
 
-The following example copies the `world` sample database on the local host to an Amazon RDS MySQL DB instance\.
+The following example copies the `world` sample database on the local host to a MySQL DB instance\.
 
 For Linux, macOS, or Unix:
 

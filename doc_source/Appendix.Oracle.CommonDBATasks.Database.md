@@ -30,7 +30,7 @@ To change the global name of a database, use the Amazon RDS procedure `rdsadmin.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_global_name` | varchar2 | — | Yes | The new global name for the database\. | 
+|  `p_new_global_name`  |  varchar2  |  —  |  Yes  |  The new global name for the database\.  | 
 
 The database must be open for the name change to occur\. For more information about changing the global name of a database, see [ALTER DATABASE](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_1004.htm#SQLRF52547) in the Oracle documentation\. 
 
@@ -58,7 +58,7 @@ The following example creates temporary tablespace named `temp01`:
 CREATE TEMPORARY TABLESPACE temp01;
 ```
 
- We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a data file to a smallfile tablespace\. 
+ We recommend that you don't use smallfile tablespaces because you can't resize smallfile tablespaces with Amazon RDS for Oracle\. However, you can add a datafile to a smallfile tablespace\. 
 
 You can resize a bigfile tablespace by using `ALTER TABLESPACE`\. You can specify the size in kilobytes \(K\), megabytes \(M\), gigabytes \(G\), or terabytes \(T\)\. 
 
@@ -68,7 +68,7 @@ The following example resizes a bigfile tablespace named `users2` to 200 MB\.
 ALTER TABLESPACE users2 RESIZE 200M;
 ```
 
-The following example adds an additional data file to a smallfile tablespace named **users2**\. 
+The following example adds an additional datafile to a smallfile tablespace named **users2**\. 
 
 ```
 ALTER TABLESPACE users2 ADD DATAFILE SIZE 100000M AUTOEXTEND ON NEXT 250m MAXSIZE UNLIMITED;
@@ -83,7 +83,7 @@ To set the default tablespace, use the Amazon RDS procedure `rdsadmin.rdsadmin_u
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Yes | The name of the default tablespace\. | 
+|  `tablespace_name`  |  varchar  |  —  |  Yes  |  The name of the default tablespace\.  | 
 
 The following example sets the default tablespace to *users2*: 
 
@@ -100,7 +100,7 @@ To set the default temporary tablespace, use the Amazon RDS procedure `rdsadmin.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `tablespace_name` | varchar | — | Yes | The name of the default temporary tablespace\. | 
+|  `tablespace_name`  |  varchar  |  —  |  Yes  |  The name of the default temporary tablespace\.  | 
 
 The following example sets the default temporary tablespace to *temp01*\. 
 
@@ -154,7 +154,7 @@ The `alter_db_time_zone` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_new_tz` | varchar2 | — | Yes |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
+|  `p_new_tz`  |  varchar2  |  —  |  Yes  |  The new time zone as a named region or an absolute offset from Coordinated Universal Time \(UTC\)\. Valid offsets range from \-12:00 to \+14:00\.   | 
 
 The following example changes the time zone to UTC plus three hours\. 
 
@@ -239,7 +239,6 @@ When working with AWR, we recommend using the `rdsadmin.rdsadmin_diagnostic_util
 The `rdsadmin_diagnostic_util` procedures save the reports to the DB instance file system\. You can access these reports from the console\. You can also access reports using the `rdsadmin.rds_file_util` procedures, and you can access reports that are copied to Amazon S3 using the S3 Integration option\. For more information, see [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) and [Amazon S3 integration](oracle-s3-integration.md)\. 
 
 You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v24 or higher 11\.2 versions
 + 12\.1\.0\.2\.v20 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
 + 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 18c versions
@@ -371,7 +370,6 @@ For more information about Oracle edition\-based redefinition, see [About editio
 To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
 
 Enabling auditing is supported for Oracle DB instances running the following versions:
-+ 11\.2\.0\.4\.v18 and later 11\.2 versions
 + 12\.1\.0\.2\.v14 and later 12\.1 versions
 + All 12\.2\.0\.1 versions
 + All 18\.0\.0\.0 versions
@@ -384,7 +382,7 @@ The `audit_all_sys_aud_table` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_by_access` | boolean | true | No | Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\. | 
+|  `p_by_access`  |  boolean  |  true  |  No  |  Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\.  | 
 
 The following query returns the current audit configuration for `SYS.AUD$` for a database\.
 
@@ -437,8 +435,8 @@ The `online_index_clean` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `object_id` | binary\_integer | `ALL_INDEX_ID` | No | The object ID of the index\. Typically, you can use the object ID from the ORA\-08104 error text\. | 
-| `wait_for_lock` | binary\_integer | `rdsadmin.rdsadmin_dbms_repair.lock_wait` | No | Specify `rdsadmin.rdsadmin_dbms_repair.lock_wait`, the default, to try to get a lock on the underlying object and retry until an internal limit is reached if the lock fails\. Specify `rdsadmin.rdsadmin_dbms_repair.lock_nowait` to try to get a lock on the underlying object but not retry if the lock fails\. | 
+|  `object_id`  |  binary\_integer  |  `ALL_INDEX_ID`  |  No  |  The object ID of the index\. Typically, you can use the object ID from the ORA\-08104 error text\.  | 
+|  `wait_for_lock`  |  binary\_integer  |  `rdsadmin.rdsadmin_dbms_repair.lock_wait`  |  No  |  Specify `rdsadmin.rdsadmin_dbms_repair.lock_wait`, the default, to try to get a lock on the underlying object and retry until an internal limit is reached if the lock fails\. Specify `rdsadmin.rdsadmin_dbms_repair.lock_nowait` to try to get a lock on the underlying object but not retry if the lock fails\.  | 
 
 The following example cleans up a failed online index build:
 
@@ -583,8 +581,8 @@ The `resize_temp_tablespace` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `temp_tbs` | varchar2 | — | Yes | The name of the temporary tablespace to resize\. | 
-| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+|  `temp_tbs`  |  varchar2  |  —  |  Yes  |  The name of the temporary tablespace to resize\.  | 
+|  `size`  |  varchar2  |  —  |  Yes  |  You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The `resize_tempfile` procedure has the following parameters\.
 
@@ -593,8 +591,8 @@ The `resize_tempfile` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `file_id` | binary\_integer | — | Yes | The file identifier of the temporary tablespace to resize\. | 
-| `size` | varchar2 | — | Yes | You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
+|  `file_id`  |  binary\_integer  |  —  |  Yes  |  The file identifier of the temporary tablespace to resize\.  | 
+|  `size`  |  varchar2  |  —  |  Yes  |  You can specify the size in bytes \(the default\), kilobytes \(K\), megabytes \(M\), or gigabytes \(G\)\.   | 
 
 The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a read replica\.
 

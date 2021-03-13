@@ -14,7 +14,7 @@ CALL mysql.rds_innodb_buffer_pool_load_abort();
 
 The master user must run the `mysql.rds_innodb_buffer_pool_load_abort` procedure\. 
 
-The `mysql.rds_innodb_buffer_pool_load_abort` procedure is available in these versions of Amazon RDS MySQL:
+The `mysql.rds_innodb_buffer_pool_load_abort` procedure is available in these versions of RDS for MySQL:
 + MySQL 5\.6
 + MySQL 5\.7
 + MySQL 8\.0

@@ -1,4 +1,4 @@
-# Using Kerberos authentication with Amazon RDS for Oracle<a name="oracle-kerberos"></a>
+# Configuring Kerberos authentication for Amazon RDS for Oracle<a name="oracle-kerberos"></a>
 
 You can use Kerberos authentication to authenticate users when they connect to your Amazon RDS DB instance running Oracle\. In this configuration, your DB instance works with AWS Directory Service for Microsoft Active Directory, also called AWS Managed Microsoft AD\. When users authenticate with an Oracle DB instance joined to the trusting domain, authentication requests are forwarded to the directory that you create with AWS Directory Service\.
 
@@ -24,7 +24,7 @@ Amazon RDS supports Kerberos authentication for Oracle DB instances in the follo
 + AWS GovCloud \(US\-West\)
 
 **Note**  
-Kerberos authentication isn't supported for DB instance classes that are deprecated for Oracle DB instances\. For more information, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.
+Kerberos authentication isn't supported for DB instance classes that are deprecated for Oracle DB instances\. For more information, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.
 
 **Topics**
 + [Setting up Kerberos authentication for Oracle DB instances](oracle-kerberos-setting-up.md)

@@ -1,4 +1,4 @@
-# Updating applications to connect to Oracle DB instances using new SSL/TLS certificates<a name="ssl-certificate-rotation-oracle"></a>
+# Updating applications to use new SSL/TLS certificates<a name="ssl-certificate-rotation-oracle"></a>
 
 As of September 19, 2019, Amazon RDS has published new Certificate Authority \(CA\) certificates for connecting to your RDS DB instances using Secure Socket Layer or Transport Layer Security \(SSL/TLS\)\. Following, you can find information about updating your applications to use the new certificates\.
 
@@ -15,11 +15,11 @@ After you update your CA certificates in the client application trust stores, yo
 For more information about certificate rotation, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\. For more information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. For information about using SSL/TLS with Oracle DB instances, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
 
 **Topics**
-+ [Determining whether applications use SSL to your DB instance](#ssl-certificate-rotation-oracle.determining)
++ [Finding out whether applications connect using SSL](#ssl-certificate-rotation-oracle.determining)
 + [Updating your application trust store](#ssl-certificate-rotation-oracle.updating-trust-store)
 + [Example Java code for establishing SSL connections](#ssl-certificate-rotation-oracle.java-example)
 
-## Determining whether applications use SSL to your DB instance<a name="ssl-certificate-rotation-oracle.determining"></a>
+## Finding out whether applications connect using SSL<a name="ssl-certificate-rotation-oracle.determining"></a>
 
 If your Oracle DB instance uses an option group with the `SSL` option added, you might be using SSL\. Check this by following the instructions in [Listing the options and option settings for an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ListOption)\. For information about the `SSL` option, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
 

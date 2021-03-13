@@ -328,7 +328,7 @@ Best practices for a Multi\-AZ deployment with a SQL Server DB instance include 
 
 When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS creates replicas for all SQL Server databases on your instance\. If you don't want specific databases to have secondary replicas, set up a separate DB instance that doesn't use Multi\-AZ for those databases\.
 
-### Amazon RDS SQL Server best practices video<a name="CHAP_BestPractices.SQLServer.Presentation"></a>
+### Amazon RDS for SQL Server best practices video<a name="CHAP_BestPractices.SQLServer.Presentation"></a>
 
 The 2019 AWS re:Invent conference included a presentation on new features and best practices for working with SQL Server on Amazon RDS\. A video of the presentation is available here:
 
