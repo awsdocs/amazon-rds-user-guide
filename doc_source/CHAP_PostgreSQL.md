@@ -858,7 +858,7 @@ PostgreSQL supports the streaming of WAL changes using logical replication decod
 
 Beginning with PostgreSQL version 9\.5\.4 for Amazon RDS, the command ALTER USER WITH BYPASSRLS is supported\. 
 
-PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. You can use the master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
+PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. The master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
 
 ##### PostgreSQL version 9\.5\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version952"></a>
 
