@@ -93,6 +93,7 @@ The following table shows the event category and a list of events when a DB inst
 |  failure  | RDS\-EVENT\-0079 |  Enhanced Monitoring cannot be enabled without the enhanced monitoring IAM role\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS enhanced monitoring](USER_Monitoring.OS.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0080 |  Enhanced Monitoring was disabled due to an error making the configuration change\. It is likely that the enhanced monitoring IAM role is configured incorrectly\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS enhanced monitoring](USER_Monitoring.OS.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0081 |  The IAM role that you use to access your Amazon S3 bucket for SQL Server native backup and restore is configured incorrectly\. For more information, see [Setting up for native backup and restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
+|  failure  | RDS\-EVENT\-0188 |  Amazon RDS was unable to upgrade a MySQL DB instance from version 5\.7 to version 8\.0 because of incompatibilities related to the data dictionary\. The DB instance was rolled back to MySQL version 5\.7\. For more information, see [Rollback after failure to upgrade from MySQL 5\.7 to 8\.0](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.Major.RollbackAfterFailure)\.  | 
 |  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
@@ -157,51 +158,6 @@ The following table shows the event category and a list of events when a DB snap
 | notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
 | notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
 |  restoration  | RDS\-EVENT\-0043 |  A DB instance is being restored from a DB snapshot\.  | 
-
-The following table shows the event category and a list of events when an Aurora DB cluster is the source type\.
-
-
-|  Category  | RDS event ID |  Description  | 
-| --- | --- | --- | 
-|  failover  | RDS\-EVENT\-0069 |  A failover for the DB cluster has failed\.  | 
-|  failover  | RDS\-EVENT\-0070 |  A failover for the DB cluster has restarted\.  | 
-|  failover  | RDS\-EVENT\-0071 |  A failover for the DB cluster has finished\.  | 
-|  failover  | RDS\-EVENT\-0072 |  A failover for the DB cluster has begun within the same Availability Zone\.  | 
-|  failover  | RDS\-EVENT\-0073 |  A failover for the DB cluster has begun across Availability Zones\.  | 
-|  failure  | RDS\-EVENT\-0083 |  Aurora was unable to copy backup data from an Amazon S3 bucket\. It is likely that the permissions for Aurora to access the Amazon S3 bucket are configured incorrectly\. For more information, see [Migrating data from an external MySQL database to an Aurora MySQL DB cluster](url-aurora-user;AuroraMySQL.Migrating.ExtMySQL.html)\.   | 
-|  failure  | RDS\-EVENT\-0143 |  Scaling failed for the Aurora Serverless DB cluster\.  | 
-|  maintenance  | RDS\-EVENT\-0156 |  The DB cluster has a DB engine minor version upgrade available\.  | 
-|  notification  | RDS\-EVENT\-0076 |  Migration to an Aurora DB cluster failed\.  | 
-|  notification  | RDS\-EVENT\-0077 |  An attempt to convert a table from the source database to InnoDB failed during the migration to an Aurora DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0141 |  Scaling initiated for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0142 |  Scaling completed for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0144 |  Automatic pause initiated for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0145 |  The Aurora Serverless DB cluster paused\.  | 
-|  notification  | RDS\-EVENT\-0146 |  Pause cancelled for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0147 |  Resume initiated for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0148 |  Resume completed for the Aurora Serverless DB cluster\.  | 
-|  notification  | RDS\-EVENT\-0149 |  Seamless scaling completed with the force option for the Aurora Serverless DB cluster\. Connections might have been interrupted as required\.  | 
-|  notification  | RDS\-EVENT\-0150 |  The DB cluster stopped\.  | 
-|  notification  | RDS\-EVENT\-0151 |  The DB cluster started\.  | 
-|  notification  | RDS\-EVENT\-0152 |  The DB cluster stop failed\.  | 
-|  notification  | RDS\-EVENT\-0153 |  The DB cluster is being started due to it exceeding the maximum allowed time being stopped\.  | 
-|  notification  | RDS\-EVENT\-0173 |  Patching of the DB cluster has completed\.  | 
-
-The following table shows the event category and a list of events when an Aurora DB cluster snapshot is the source type\.
-
-
-|  Category  | RDS event ID |  Description  | 
-| --- | --- | --- | 
-|  backup  | RDS\-EVENT\-0074 |  Creation of a manual DB cluster snapshot has started\.  | 
-|  backup  | RDS\-EVENT\-0075 |  A manual DB cluster snapshot has been created\.  | 
-| notification | RDS\-EVENT\-0162 |  DB cluster snapshot export task failed\.  | 
-| notification | RDS\-EVENT\-0163 |  DB cluster snapshot export task canceled\.  | 
-| notification | RDS\-EVENT\-0164 |  DB cluster snapshot export task completed\.  | 
-| backup | RDS\-EVENT\-0168 |  Creating automated cluster snapshot\.  | 
-| backup | RDS\-EVENT\-0169 |  Automated cluster snapshot created\.  | 
-| creation | RDS\-EVENT\-0170 |  DB cluster created\.  | 
-| deletion | RDS\-EVENT\-0171 |  DB cluster deleted\.  | 
-| notification | RDS\-EVENT\-0172 |  Renamed DB cluster from \[old DB cluster name\] to \[new DB cluster name\]\.  | 
 
 ## Subscribing to Amazon RDS event notification<a name="USER_Events.Subscribing"></a>
 

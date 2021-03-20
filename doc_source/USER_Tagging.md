@@ -25,7 +25,8 @@ You can tag the following Amazon RDS resources:
 + [Adding, listing, and removing tags](#Tagging.HowTo)
 + [Using the AWS Tag Editor](#Tagging.TagEditor)
 + [Copying tags to DB instance snapshots](#USER_Tagging.CopyTags)
-+ [Examples of using tags for Amazon RDS automation](#Tagging.Examples)
++ [Tutorial: Use tags to specify which DB instances to stop](#Tagging.RDS.Autostop)
++ [Using tags to enable backups in AWS Backup](#Tagging.RDS.AWSBackup)
 
 ## Overview of Amazon RDS resource tags<a name="Overview.Tagging"></a>
 
@@ -164,76 +165,78 @@ You can specify that tags are copied to DB snapshots for the following actions:
 **Note**  
 If you include a value for the `--tag-key` parameter of the [create\-db\-snapshot](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-snapshot.html) AWS CLI command \(or supply at least one tag to the [CreateDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSnapshot.html) API operation\) then RDS doesn't copy tags from the source DB instance to the new DB snapshot\. This functionality applies even if the source DB instance has the `--copy-tags-to-snapshot` \(`CopyTagsToSnapshot`\) option enabled\. If you take this approach, you can create a copy of a DB instance from a DB snapshot and avoid adding tags that don't apply to the new DB instance\. Once you have created your DB snapshot using the AWS CLI `create-db-snapshot` command \(or the `CreateDBSnapshot` Amazon RDS API operation\) you can then add tags as described later in this topic\.
 
-## Examples of using tags for Amazon RDS automation<a name="Tagging.Examples"></a>
-
- The following AWS CLI examples demonstrate how you might assign tags to certain Amazon RDS resources and then use those tags to automate maintenance operations for those resources\.
-
-**Topics**
-+ [Using tags to specify which DB instances to stop](#Tagging.Aurora.Autostop)
-+ [Using tags to enable backups in AWS Backup](#Tagging.RDS.AWSBackup)
-
-### Using tags to specify which DB instances to stop<a name="Tagging.Aurora.Autostop"></a>
+## Tutorial: Use tags to specify which DB instances to stop<a name="Tagging.RDS.Autostop"></a>
 
  Suppose that you're creating a number of DB instances in a development or test environment\. You need to keep all of these DB instances for several days\. Some of the DB instances run tests overnight\. Other DB instances can be stopped overnight and started again the next day\. The following example shows how to assign a tag to those DB instances that are suitable to stop overnight\. Then the example shows how a script can detect which DB instances have that tag and then stop those DB instances\. In this example, the value portion of the key\-value pair doesn't matter\. The presence of the `stoppable` tag signifies that the DB instance has this user\-defined property\. 
 
- First, determine the ARN of a DB instance that we want to designate as stoppable\. The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the DB instance ID in CLI commands that operate on DB instances\. Substitute the name of your own DB instances for *dev\-test\-db\-instance*\. In subsequent commands that use ARN parameters, substitute the ARN of your own DB instance\. The ARN includes your own AWS account ID and the name of the AWS Region where your DB instance is located\. 
+**To specify which DB instances to stop**
 
-```
-$ aws rds describe-db-instances --db-instance-id dev-test-db-instance \
-  --query "*[].{DBInstance:DBInstanceArn}" --output text
-arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance
-```
+1. Determine the ARN of a DB instance that you want to designate as stoppable\.
 
- Next, add the tag `stoppable` to this DB instance\. The name for this tag is chosen by you\. Using a tag like this is an alternative to devising a naming convention that encodes all the relevant information in the name of the DB instance \(or other types of resources\)\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
+   The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the DB instance ID in CLI commands that operate on DB instances\. Substitute the name of your own DB instances for *dev\-test\-db\-instance*\. In subsequent commands that use ARN parameters, substitute the ARN of your own DB instance\. The ARN includes your own AWS account ID and the name of the AWS Region where your DB instance is located\. 
 
-```
-$ aws rds add-tags-to-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance \
-  --tags Key=stoppable
-```
+   ```
+   $ aws rds describe-db-instances --db-instance-id dev-test-db-instance \
+     --query "*[].{DBInstance:DBInstanceArn}" --output text
+   arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance
+   ```
 
- Confirm that the tag is present in the DB instance\. These commands retrieve the tag information for the DB instance in JSON format and in plain tab\-separated text\. 
+1. Add the tag `stoppable` to this DB instance\.
 
-```
-$ aws rds list-tags-for-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance 
-{
-    "TagList": [
-        {
-            "Key": "stoppable",
-            "Value": ""
+   The name for this tag is chosen by you\. Using a tag like this is an alternative to devising a naming convention that encodes all the relevant information in the name of the DB instance \(or other types of resources\)\. Because this example treats the tag as an attribute that is either present or absent, it omits the `Value=` part of the `--tags` parameter\. 
 
-        }
-    ]
-}
-aws rds list-tags-for-resource \
-  --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance --output text
-TAGLIST stoppable
-```
+   ```
+   $ aws rds add-tags-to-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance \
+     --tags Key=stoppable
+   ```
 
- To stop all the DB instances that are designated as `stoppable`, prepare a list of all your DB instances\. Loop through the list and check if each DB instance is tagged with the relevant attribute\. This Linux example uses shell scripting to save the list of DB instance ARNs to a temporary file and then perform CLI commands for each DB instance\. 
+1. Confirm that the tag is present in the DB instance\.
 
-```
-$ aws rds describe-db-instances --query "*[].[DBInstanceArn]" --output text >/tmp/db_instance_arns.lst
-$ for arn in $(cat /tmp/db_instance_arns.lst)
-do
-  match="$(aws rds list-tags-for-resource --resource-name $arn --output text | grep stoppable)"
-  if [[ ! -z "$match" ]]
-  then
-      echo "DB instance $arn is tagged as stoppable. Stopping it now."
-# Note that we need to get the DB instance identifier from the ARN.
-      dbid=$(echo $arn | sed -e 's/.*://')
-      aws rds stop-db-instance --db-instance-identifier $dbid
-  fi
-done
+   These commands retrieve the tag information for the DB instance in JSON format and in plain tab\-separated text\. 
 
-DB instance arn:arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance is tagged as stoppable. Stopping it now.
-{
-    "DBInstance": {
-        "DBInstanceIdentifier": "dev-test-db-instance",
-        "DBInstanceClass": "db.t3.medium",
-        ...
-```
+   ```
+   $ aws rds list-tags-for-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance 
+   {
+       "TagList": [
+           {
+               "Key": "stoppable",
+               "Value": ""
+   
+           }
+       ]
+   }
+   aws rds list-tags-for-resource \
+     --resource-name arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance --output text
+   TAGLIST stoppable
+   ```
+
+1. To stop all the DB instances that are designated as `stoppable`, prepare a list of all your DB instances\. Loop through the list and check if each DB instance is tagged with the relevant attribute\.
+
+   This Linux example uses shell scripting to save the list of DB instance ARNs to a temporary file and then perform CLI commands for each DB instance\. 
+
+   ```
+   $ aws rds describe-db-instances --query "*[].[DBInstanceArn]" --output text >/tmp/db_instance_arns.lst
+   $ for arn in $(cat /tmp/db_instance_arns.lst)
+   do
+     match="$(aws rds list-tags-for-resource --resource-name $arn --output text | grep stoppable)"
+     if [[ ! -z "$match" ]]
+     then
+         echo "DB instance $arn is tagged as stoppable. Stopping it now."
+   # Note that you need to get the DB instance identifier from the ARN.
+         dbid=$(echo $arn | sed -e 's/.*://')
+         aws rds stop-db-instance --db-instance-identifier $dbid
+     fi
+   done
+   
+   DB instance arn:arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance is tagged as stoppable. Stopping it now.
+   {
+       "DBInstance": {
+           "DBInstanceIdentifier": "dev-test-db-instance",
+           "DBInstanceClass": "db.t3.medium",
+           ...
+   ```
 
  You can run a script like this at the end of each day to make sure that nonessential DB instances are stopped\. You might also schedule a job using a utility such as `cron` to perform such a check each night, in case some DB instances were left running by mistake\. In that case, you might fine\-tune the command that prepares the list of DB instances to check\. The following command produces a list of your DB instances, but only the ones in `available` state\. The script can ignore DB instances that are already stopped, because they will have different status values such as `stopped` or `stopping`\. 
 
@@ -250,7 +253,7 @@ arn:aws:rds:us-east-1:123456789102:db:pg2-db-instance
 **Tip**  
  Once you're familiar with the general procedure of assigning tags and finding DB instances that have those tags, you can use the same technique to reduce costs in other ways\. For example, in this scenario with DB instances used for development and testing, you might designate some DB instances to be deleted at the end of each day, or to have their DB instances changed to a small DB instance classes during times of expected low usage\. 
 
-### Using tags to enable backups in AWS Backup<a name="Tagging.RDS.AWSBackup"></a>
+## Using tags to enable backups in AWS Backup<a name="Tagging.RDS.AWSBackup"></a>
 
 AWS Backup is a fully managed backup service that makes it easy to centralize and automate the backup of data across AWS services in the cloud and on premises\. You can manage backups of your Amazon RDS DB instances in AWS Backup\.
 
@@ -264,7 +267,7 @@ For more information about AWS Backup, see the [https://docs.aws.amazon.com/aws-
 
 You can assign a tag to a DB instance using the AWS Management Console, the AWS CLI, or the RDS API\. The following examples are for the console and CLI\.
 
-#### Console<a name="Tagging.RDS.AWSBackup.Console"></a>
+### Console<a name="Tagging.RDS.AWSBackup.Console"></a>
 
 **To assign a tag to a DB instance**
 
@@ -290,7 +293,7 @@ The result is shown under **Tags**\.
 
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/tagged-instance.png)
 
-#### CLI<a name="Tagging.RDS.AWSBackup.CLI"></a>
+### CLI<a name="Tagging.RDS.AWSBackup.CLI"></a>
 
 **To assign a tag to a DB instance**
 + Use the following CLI command:

@@ -28,7 +28,7 @@ Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1 includes the following:
 + Java Cryptography Extension \(JCE\): Unlimited Strength Jurisdiction Policy Files for JVM version 8
 + Support for [Setting parameters for advisor tasks](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.setting-task-parameters) using procedures in the `rdsadmin.rdsadmin_util` package
 
-### Combined Patches for Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1, Released January 2021<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
+### Combined patches for version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1, released January 2021<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -333,7 +333,7 @@ Version 18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1 includes the following:
 + Support for [Setting and unsetting system diagnostic events](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.SystemEvents) using procedures in the `rdsadmin.rdsadmin_util` package
 + Support for the procedure `rdsadmin_util.truncate_apply$_cdr_info` described in [Integrated REPLICAT slow due to query on sys\."\_DBA\_APPLY\_CDR\_INFO"](Appendix.OracleGoldenGate.md#Appendix.OracleGoldenGate.IR)
 
-### Combined Patches for Version 18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1, Released October 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1.Bugs-Fixed"></a>
+### Combined patches for version 18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1, released October 2020<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 

@@ -1,15 +1,16 @@
 # Oracle Management Agent for Enterprise Manager Cloud Control<a name="Oracle.Options.OEMAgent"></a>
 
-Amazon RDS supports Oracle Enterprise Manager \(OEM\) Management Agent through the use of the `OEM_AGENT` option\. Amazon RDS supports Management Agent for the following versions of OEM: 
+Oracle Enterprise Manager \(OEM\) Management Agent is a software component that monitors targets running on hosts and communicates that information to the middle\-tier Oracle Management Service \(OMS\)\. For more information, see [Overview of Oracle Enterprise Manager cloud control 12c](http://docs.oracle.com/cd/E24628_01/doc.121/e25353/overview.htm) and [Overview of Oracle Enterprise Manager cloud control 13c](http://docs.oracle.com/cd/E63000_01/EMCON/overview.htm#EMCON109) in the Oracle documentation\.
+
+Amazon RDS supports Management Agent through the use of the `OEM_AGENT` option\. Management Agent requires an Amazon RDS DB instance running Oracle Database version 19\.0\.0\.0, 18\.0\.0\.0, 12\.2\.0\.1, or 12\.1\.0\.2\. 
+
+Amazon RDS supports Management Agent for the following versions of OEM: 
 + Oracle Enterprise Manager Cloud Control for 13c
 + Oracle Enterprise Manager Cloud Control for 12c
 
-Management Agent is a software component that monitors targets running on hosts and communicates that information to the middle\-tier Oracle Management Service \(OMS\)\. For more information, see [Overview of Oracle Enterprise Manager cloud control 12c](http://docs.oracle.com/cd/E24628_01/doc.121/e25353/overview.htm) and [Overview of Oracle Enterprise Manager cloud control 13c](http://docs.oracle.com/cd/E63000_01/EMCON/overview.htm#EMCON109) in the Oracle documentation\.
-
 **Topics**
-+ [Supported Oracle versions for Management Agent](#Oracle.Options.OEMAgent.supported-versions)
-+ [Limitations for Management Agent](#Oracle.Options.OEMAgent.limitations)
 + [Prerequisites for Management Agent](#Oracle.Options.OEMAgent.PreReqs)
++ [Limitations for Management Agent](#Oracle.Options.OEMAgent.limitations)
 + [Option settings for Management Agent](#Oracle.Options.OEMAgent.Options)
 + [Adding the Management Agent option](#Oracle.Options.OEMAgent.Add)
 + [Using the Management Agent](#Oracle.Options.OEMAgent.Using)
@@ -17,9 +18,29 @@ Management Agent is a software component that monitors targets running on hosts 
 + [Performing database tasks with the Management Agent](#Oracle.Options.OEMAgent.DBTasks)
 + [Removing the Management Agent option](#Oracle.Options.OEMAgent.Remove)
 
-## Supported Oracle versions for Management Agent<a name="Oracle.Options.OEMAgent.supported-versions"></a>
+## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
 
-Following are the supported Oracle versions for each Management Agent version\.
+To use Management Agent, ensure that you meet the following prerequisites\.
+
+### General prerequisites<a name="Oracle.Options.OEMAgent.PreReqs.general"></a>
+
+Following are general prerequisites for using Management Agent: 
++ You need an Oracle Management Service \(OMS\) that is configured to connect to your Amazon RDS DB instance\. 
++ In most cases, you must configure your VPC to allow connections from OMS to your DB instance\. If you aren't familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
++ Management Agent version 13\.4\.0\.9\.v1 requires OMS version 13\.4\.0\.9 or later and patch 32198287\.
++ Ensure that you have sufficient storage space for your OEM release:
+  + At least 8\.5 GiB for OEM 13c Release 4
+  + At least 8\.5 GiB for OEM 13c Release 3
+  + At least 5\.5 GiB for OEM 13c Release 2
+  + At least 4\.5 GiB OEM 13c Release 1
+  + At least 2\.5 GiB for OEM 12c 
++ If you are using Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`, and if you want to use TCPS connectivity, follow the instructions in [Configuring third party CA certificates for communication with target databases](https://docs.oracle.com/cd/E73210_01/EMSEC/GUID-8337AD48-1A32-4CD5-84F3-256FAE93D043.htm#EMSEC15996) in the Oracle documentation\. Also, update the JDK on your OMS by following the instructions in the Oracle document with the Oracle Doc ID 2241358\.1\. This step ensures that OMS supports all the cipher suites that the database supports\.
+**Note**  
+TCPS connectivity between the Management Agent and the DB instance is only supported for Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`\.
+
+### Oracle Database release prerequisites<a name="Oracle.Options.OEMAgent.PreReqs.db-release"></a>
+
+Following are the supported Oracle Database versions for each Management Agent version\.
 
 
 ****  
@@ -36,40 +57,9 @@ Following are the supported Oracle versions for each Management Agent version\.
 |  12\.1\.0\.5\.v1  |  Not supported  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.4\.v1  |  Not supported  |  Supported  |  Supported  |  Supported  | 
 
-## Limitations for Management Agent<a name="Oracle.Options.OEMAgent.limitations"></a>
-
-Following are some limitations to using Management Agent: 
-+ Administrative tasks such as job execution and database patching, that require host credentials, aren't supported\. 
-+ Host metrics and the process list aren't guaranteed to reflect the actual system state\. Thus, you shouldn't use OEM to monitor the root file system or mount point file system\. For more information about monitoring the operating system, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
-+ Autodiscovery isn't supported\. You must manually add database targets\. 
-+ OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
-+ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ The user running the `OEM_AGENT` on the Amazon RDS host doesn't have operating system access to the alert log\. Thus, you can't collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
-
-## Prerequisites for Management Agent<a name="Oracle.Options.OEMAgent.PreReqs"></a>
-
-To use Management Agent, ensure that you meet the following prerequisites\.
-
-### General prerequisites<a name="Oracle.Options.OEMAgent.PreReqs.general"></a>
-
-Following are general prerequisites for using Management Agent: 
-+ You need an Oracle Management Service \(OMS\) that is configured to connect to your Amazon RDS DB instance\. 
-+ Ensure that you have sufficient storage space for your OEM release:
-  + At least 8\.5 GiB for OEM 13c Release 4
-  + At least 8\.5 GiB for OEM 13c Release 3
-  + At least 5\.5 GiB for OEM 13c Release 2
-  + At least 4\.5 GiB OEM 13c Release 1
-  + At least 2\.5 GiB for OEM 12c 
-+ In most cases, you must configure your VPC to allow connections from OMS to your DB instance\. If you aren't familiar with Amazon Virtual Private Cloud \(Amazon VPC\), we recommend that you complete the steps in [Tutorial: Create an Amazon VPC for use with a DB instance](CHAP_Tutorials.WebServerDB.CreateVPC.md) before continuing\. 
-+ If you are using Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`, and if you want to use TCPS connectivity, follow the instructions in [Configuring third party CA certificates for communication with target databases](https://docs.oracle.com/cd/E73210_01/EMSEC/GUID-8337AD48-1A32-4CD5-84F3-256FAE93D043.htm#EMSEC15996) in the Oracle documentation\. Also, update the JDK on your OMS by following the instructions in the Oracle document with the Oracle Doc ID 2241358\.1\. This step ensures that OMS supports all the cipher suites that the database supports\.
-**Note**  
-TCPS connectivity between the Management Agent and the DB instance is only supported for Management Agent versions `OEM_AGENT 13.2.0.0.v3` and `13.3.0.0.v2`\.
-
-### Oracle database release prerequisites<a name="Oracle.Options.OEMAgent.PreReqs.db-release"></a>
-
-The OEM agent requires an Amazon RDS DB instance running Oracle version 19\.0\.0\.0, 18\.0\.0\.0, 12\.2\.0\.1, or 12\.1\.0\.2\. Following are prerequisites for different Oracle Database versions:
-+ For an Amazon RDS DB instance running Oracle version 19\.0\.0\.0, the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
-+ For an Amazon RDS DB instance running Oracle version 18\.0\.0\.0 or higher, meet the following requirements:
+Following are prerequisites for different database versions:
++ For an Amazon RDS DB instance running Oracle Database version 19\.0\.0\.0, the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
++ For an Amazon RDS DB instance running Oracle Database version 18\.0\.0\.0 or higher, meet the following requirements:
   + For OMS 13c2, apply the Enterprise Manager 13\.2 Master Bundle Patch List, which includes plugins 13\.2\.1, 13\.2\.2, 13\.2\.3, 13\.2\.4 \(Oracle Doc ID 2219797\.1\)\.
   + For OMS 13c2, apply the OMS PSU System Patch 28970534\.
   + For OMS 13c2, apply the OMS\-Side Plugin System 13\.2\.2\.0\.190131 Patch 29201709\.
@@ -91,6 +81,16 @@ Make sure that your OMS host and your Amazon RDS DB instance can communicate\. D
 + To connect from your OMS to the Management Agent, if your OMS doesn't have a publicly resolvable host name, use one of the following: 
   + If your OMS is hosted on an Amazon Elastic Compute Cloud \(Amazon EC2\) instance in a private VPC, you can set up VPC peering to connect from OMS to Management Agent\. For more information, see [A DB instance in a VPC accessed by an EC2 instance in a different VPC](USER_VPC.Scenarios.md#USER_VPC.Scenario3)\. 
   + If your OMS is hosted on\-premises, you can set up a VPN connection to allow access from OMS to Management Agent\. For more information, see [A DB instance in a VPC accessed by a client application through the internet](USER_VPC.Scenarios.md#USER_VPC.Scenario4) or [VPN connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html)\. 
+
+## Limitations for Management Agent<a name="Oracle.Options.OEMAgent.limitations"></a>
+
+Following are some limitations to using Management Agent: 
++ Administrative tasks such as job execution and database patching, that require host credentials, aren't supported\. 
++ Host metrics and the process list aren't guaranteed to reflect the actual system state\. Thus, you shouldn't use OEM to monitor the root file system or mount point file system\. For more information about monitoring the operating system, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
++ Autodiscovery isn't supported\. You must manually add database targets\. 
++ OMS module availability depends on your database edition\. For example, the database performance diagnosis and tuning module is only available for Oracle Database Enterprise Edition\. 
++ Management Agent consumes additional memory and computing resources\. If you experience performance problems after enabling the `OEM_AGENT` option, we recommend that you scale up to a larger DB instance class\. For more information, see [DB instance classes](Concepts.DBInstanceClass.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
++ The user running the `OEM_AGENT` on the Amazon RDS host doesn't have operating system access to the alert log\. Thus, you can't collect metrics for `DB Alert Log` and `DB Alert Log Error Status` in OEM\.
 
 ## Option settings for Management Agent<a name="Oracle.Options.OEMAgent.Options"></a>
 

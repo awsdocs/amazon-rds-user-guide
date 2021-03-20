@@ -1,8 +1,6 @@
 # Configuring outbound network access on your Oracle DB instance<a name="Oracle.Concepts.ONA"></a>
 
 Amazon RDS supports outbound network access on your Oracle DB instances\. To connect your instance to the network, you can use the following PL/SQL packages:
-
-a
 + `UTL_HTTP` – makes HTTP callouts from SQL and PL/SQL\. You can use it to access data on the Internet over HTTP\. For more information, see [UTL\_HTTP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_HTTP.html#GUID-A85D2D1F-90FC-45F1-967F-34368A23C9BB) in the Oracle documentation\.
 + `UTL_TCP` – provides TCP/IP client\-side access functionality in PL/SQL\. This package is useful to PL/SQL applications that use Internet protocols and email\. For more information, see [UTL\_TCP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_TCP.html#GUID-348AFFE8-78B2-4217-AE73-384F46A1D292) in the Oracle documentation\.
 + `UTL_SMTP` – provides interfaces to the SMTP commands that enable a client to dispatch emails to an SMTP server\. For more information, see [UTL\_SMTP](https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/UTL_SMTP.html#GUID-F0065C52-D618-4F8A-A361-7B742D44C520) in the Oracle documentation\.

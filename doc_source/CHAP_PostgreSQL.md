@@ -6,7 +6,7 @@ Before creating a DB instance, you should complete the steps in the [Setting up 
 
 You can use any standard SQL client application to run commands for the instance from your client computer\. Such applications include *pgAdmin*, a popular Open Source administration and development tool for PostgreSQL, or *psql*, a command line utility that is part of a PostgreSQL installation\. To deliver a managed service experience, Amazon RDS doesn't provide host access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet or Secure Shell \(SSH\)\.
 
-Amazon RDS for PostgreSQL is compliant with many industry standards\. For example, you can use Amazon RDS for PostgreSQL databases to build HIPAA\-compliant applications and to store healthcare\-related information, including protected health information \(PHI\) under a completed Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for PostgreSQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements\. Amazon RDS for PostgreSQL has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](https://aws.amazon.com/compliance/)\.
+Amazon RDS for PostgreSQL is compliant with many industry standards\. For example, you can use Amazon RDS for PostgreSQL databases to build HIPAA\-compliant applications and to store healthcare\-related information, including protected health information \(PHI\) under a completed Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for PostgreSQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements\. Amazon RDS for PostgreSQL has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\.
 
 To import PostgreSQL data into a DB instance, follow the information in the [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md) section\.
 
@@ -37,7 +37,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read\-only read replicas \(primary and standbys\)** PostgreSQL on Amazon RDS supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.md#USER_ReadRepl.XRgn)  | 
+|  **Setting up read\-only read replicas \(primary and standbys\)** PostgreSQL on Amazon RDS supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)  | 
 |  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. If your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Controlling access with security groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
@@ -57,7 +57,7 @@ DB instances in the Database Preview Environment are similar to DB instances in 
 + You can only create a DB instance in a virtual private cloud \(VPC\) based on the Amazon VPC service\.
 + You can only create M6g, M5, T3, R6g, and R5 instance types\. For more information about RDS instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
 + You can only use General Purpose SSD and Provisioned IOPS SSD storage\. 
-+ You can't get help from AWS Support with DB instances\. You can post your questions in the [RDS database preview environment forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
++ You can't get help from AWS Support with DB instances\. You can post your questions in the [ RDS database preview environment forum](https://forums.aws.amazon.com/forum.jspa?forumID=301)\.
 + You can't copy a snapshot of a DB instance to a production environment\.
 + You can use both single\-AZ and multi\-AZ deployments\.
 + You can use standard PostgreSQL dump and load functions to export databases from or import databases to the Database Preview Environment\.
@@ -314,7 +314,7 @@ PostgreSQL version 11\.5 contains several bug fixes for issues in release 11\.4\
 
 This version also includes the following changes:
 + A new extension `pg_transport` is added\.
-+ The extension `aws_s3` has been updated to support virtual\-hosted style requests\. For more information, see [Amazon S3 path deprecation plan – The rest of the story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\. 
++ The extension `aws_s3` has been updated to support virtual\-hosted style requests\. For more information, see [Amazon S3 path deprecation plan – The rest of the story](http://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\. 
 + The `PostGIS` extension is updated to version 2\.5\.2\.
 
 ##### PostgreSQL version 11\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version114"></a>
@@ -428,7 +428,7 @@ PostgreSQL version 10\.11 contains several bug fixes for issues in release 10\.1
 
 PostgreSQL version 10\.10 contains several bug fixes for issues in release 10\.9\. For more information on the fixes in PostgreSQL 10\.10, see the [PostgreSQL documentation](https://www.postgresql.org/docs/10/release-10-10.html)\. Changes in this version include the following:
 
-1. The `aws_s3` extension is updated to support virtual\-hosted style requests\. For more information, see [Amazon S3 path deprecation plan – The rest of the story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\. 
+1. The `aws_s3` extension is updated to support virtual\-hosted style requests\. For more information, see [Amazon S3 path deprecation plan – The rest of the story](http://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)\. 
 
 1. The `PostGIS` extension is updated to version 2\.5\.2\.
 
@@ -699,7 +699,7 @@ PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. Fo
 
 ##### PostgreSQL version 9\.6\.1 on Amazon RDS<a name="PostgreSQL.Concepts.General.version961"></a>
 
-PostgreSQL version 9\.6\.1 contains several new features and improvements\. For more information about the fixes and improvements in PostgreSQL 9\.6\.1, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/release-9-6-1.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB instance](#PostgreSQL.Concepts.General.Patching)\. For information about performing parallel queries and phrase searching using Amazon RDS for PostgreSQL 9\.6\.1, see the [AWS database blog](https://aws.amazon.com/blogs/database/performing-parallel-queries-and-phrase-searching-with-amazon-rds-for-postgresql-9-6-1/)\.
+PostgreSQL version 9\.6\.1 contains several new features and improvements\. For more information about the fixes and improvements in PostgreSQL 9\.6\.1, see the [PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/release-9-6-1.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading a PostgreSQL DB instance](#PostgreSQL.Concepts.General.Patching)\. For information about performing parallel queries and phrase searching using Amazon RDS for PostgreSQL 9\.6\.1, see the [AWS database blog](http://aws.amazon.com/blogs/database/performing-parallel-queries-and-phrase-searching-with-amazon-rds-for-postgresql-9-6-1/)\.
 
 PostgreSQL version 9\.6\.1 includes the following changes:
 + **Parallel query processing**: Supports parallel processing of large read\-only queries, allowing sequential scans, hash joins, nested loops, and aggregates to be run in parallel\. By default, parallel query processing is not enabled\. To enable parallel query processing, set the parameter `max_parallel_workers_per_gather` to a value larger than zero\.

@@ -88,6 +88,9 @@ The following limitations apply to replication filtering for Amazon RDS for MySQ
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MySQL `--binlog-do-db` and `--binlog-ignore-db` options for binary log filtering aren't supported\.
++ Replication filtering doesn't support XA transactions\.
+
+  For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
 + Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
 + Replication filtering isn't supported for Amazon RDS for MySQL version 5\.5 or 5\.6\.
 

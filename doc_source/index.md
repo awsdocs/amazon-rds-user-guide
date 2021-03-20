@@ -1,7 +1,7 @@
 # Amazon Relational Database Service User Guide
 
 -----
-*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -33,7 +33,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)
       + [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)
       + [Create an EC2 instance and install a web server](CHAP_Tutorials.WebServerDB.CreateWebServer.md)
-+ [Tutorials](CHAP_Tutorials.md)
++ [Amazon RDS Tutorials](CHAP_Tutorials.md)
 + [Best practices for Amazon RDS](CHAP_BestPractices.md)
 + [Configuring an Amazon RDS DB instance](CHAP_RDS_Configuring.md)
    + [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)
@@ -50,6 +50,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Renaming a DB instance](USER_RenameInstance.md)
    + [Rebooting a DB instance](USER_RebootInstance.md)
    + [Working with read replicas](USER_ReadRepl.md)
+      + [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)
    + [Tagging Amazon RDS resources](USER_Tagging.md)
    + [Working with Amazon Resource Names (ARNs) in Amazon RDS](USER_Tagging.ARN.md)
    + [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)

@@ -19,7 +19,7 @@ Here are some important points about working with parameters in a DB parameter g
 
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\. For more information about changing the DB parameter group, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
-+ You can specify the value for a DB parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [DB parameter values](#USER_ParamValuesRef)\.
++ You can specify the value for a DB parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   You can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -39,7 +39,7 @@ Here are some important points about working with parameters in a DB parameter g
 + [Listing DB parameter groups](#USER_WorkingWithParamGroups.Listing)
 + [Viewing parameter values for a DB parameter group](#USER_WorkingWithParamGroups.Viewing)
 + [Comparing DB parameter groups](#USER_WorkingWithParamGroups.Comparing)
-+ [DB parameter values](#USER_ParamValuesRef)
++ [Specifying DB parameters](#USER_ParamValuesRef)
 
 ## Creating a DB parameter group<a name="USER_WorkingWithParamGroups.Creating"></a>
 
@@ -505,23 +505,38 @@ You can use the AWS Management Console to view the differences between two param
 **Note**  
 If the items you selected aren't equivalent, you can't choose **Compare**\. For example, you can't compare a MySQL 5\.6 and a MySQL 5\.7 parameter group\. You can't compare a DB parameter group and an Aurora DB cluster parameter group\.
 
-## DB parameter values<a name="USER_ParamValuesRef"></a>
+## Specifying DB parameters<a name="USER_ParamValuesRef"></a>
 
-You can specify the value for a DB parameter as any of the following:
-+ An integer constant
-+ A DB parameter formula
-+ A DB parameter function
-+ A character string constant
-+ A log expression \(the log function represents log base 2\), such as `value={log(DBInstanceClassMemory/8187281418)*1000}` 
+DB parameter types include the following:
++ integer
++ Boolean
++ string
++ long
++ double
++ timestamp
++ object of other defined data types
++ array of values of type integer, Boolean, string, long, double, timestamp, or object
 
-**Note**  
-Currently, you can't specify the MySQL `innodb_log_file_size` parameter with any value other than an integer\.
+You can also specify integer and Boolean DB parameters using expressions, formulas, and functions\. 
+
+For the Oracle engine, you can use the `DBInstanceClassHugePagesDefault` formula variable to specify a Boolean DB parameter\. See [DB parameter formula variables](#USER_FormulaVariables)\. 
+
+For the PostgreSQL engine, you can use an expression to specify a Boolean DB parameter\. See [Boolean DB parameter expressions](#USER_ParamBooleanExpressions)\.
+
+**Contents**
++ [DB parameter formulas](#USER_ParamFormulas)
+  + [DB parameter formula variables](#USER_FormulaVariables)
+  + [DB parameter formula operators](#USER_FormulaOperators)
++ [DB parameter functions](#USER_ParamFunctions)
++ [Boolean DB parameter expressions](#USER_ParamBooleanExpressions)
++ [DB parameter log expressions](#USER_ParamLogExpressions)
++ [DB parameter value examples](#USER_ParamValueExamples)
 
 ### DB parameter formulas<a name="USER_ParamFormulas"></a>
 
-A DB parameter formula is an expression that resolves to an integer value or a Boolean value, and is enclosed in braces: \{\}\. You can specify formulas for either a DB parameter value or as an argument to a DB parameter function\.
+A DB parameter formula is an expression that resolves to an integer value or a Boolean value\. You enclose the expression in braces: \{\}\. You can use a formula for either a DB parameter value or as an argument to a DB parameter function\.
 
-#### Syntax<a name="USER_ParamFormulas.Syntax"></a>
+**Syntax**  
 
 ```
 {FormulaVariable}
@@ -530,28 +545,31 @@ A DB parameter formula is an expression that resolves to an integer value or a B
 {FormulaVariable/Integer}
 ```
 
-### DB parameter formula variables<a name="USER_FormulaVariables"></a>
+#### DB parameter formula variables<a name="USER_FormulaVariables"></a>
 
-Each formula variable returns integer or a Boolean value\. The names of the variables are case\-sensitive\.
+Each formula variable returns an integer or a Boolean value\. The names of the variables are case\-sensitive\.
 
 *AllocatedStorage*  
-Returns the size, in bytes, of the data volume\.
-
-*DBInstanceClassMemory*  
-Returns the number of bytes of memory allocated to the DB instance class associated with the current DB instance, less the memory used by the Amazon RDS processes that manage the instance\.
-
-*EndPointPort*  
-Returns the number of the port used when connecting to the DB instance\.
+Returns an integer representing the size, in bytes, of the data volume\.
 
 *DBInstanceClassHugePagesDefault*  
-Returns a Boolean value\. Currently, it is only supported for Oracle engines\.  
+Returns a Boolean value\. Currently, it's only supported for Oracle engines\.  
 For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.
 
-### DB parameter formula operators<a name="USER_FormulaOperators"></a>
+*DBInstanceClassMemory*  
+Returns an integer of the number of bytes of memory allocated to the DB instance class associated with the current DB instance, less the memory used by RDS processes that manage the instance\.
+
+*DBInstanceVCPU*  
+Returns an integer representing the number of virtual central processing units \(vCPUs\) used by Amazon RDS to manage the instance\. Currently, it's only supported for the PostgreSQL engine\.
+
+*EndPointPort*  
+Returns an integer representing the port used when connecting to the DB instance\.
+
+#### DB parameter formula operators<a name="USER_FormulaOperators"></a>
 
 DB parameter formulas support two operators: division and multiplication\.
 
-*Division Operator: /*  
+*Division operator: /*  
 Divides the dividend by the divisor, returning an integer quotient\. Decimals in the quotient are truncated, not rounded\.  
 Syntax  
 
@@ -560,7 +578,7 @@ dividend / divisor
 ```
 The dividend and divisor arguments must be integer expressions\.
 
-*Multiplication Operator: \**  
+*Multiplication operator: \**  
 Multiplies the expressions, returning the product of the expressions\. Decimals in the expressions are truncated, not rounded\.  
 Syntax  
 
@@ -571,11 +589,11 @@ Both expressions must be integers\.
 
 ### DB parameter functions<a name="USER_ParamFunctions"></a>
 
-The parameter arguments can be specified as either integers or formulas\. Each function must have at least one argument\. Multiple arguments can be specified as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
+You specify the arguments of DB parameter functions as either integers or formulas\. Each function must have at least one argument\. Specify multiple arguments as a comma\-separated list\. The list can't have any empty members, such as *argument1*,,*argument3*\. Function names are case\-insensitive\.
 
-*IF\(\)*  
+*IF*  
 Returns an argument\.  
-Currently, it is only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.  
+Currently, it's only supported for Oracle engines, and the only supported first argument is `{DBInstanceClassHugePagesDefault}`\. For more information, see [Enabling HugePages for an Oracle DB instance](Appendix.Oracle.CommonDBATasks.Misc.md#Oracle.Concepts.HugePages)\.  
 Syntax  
 
 ```
@@ -583,7 +601,7 @@ IF(argument1, argument2, argument3)
 ```
 Returns the second argument if the first argument evaluates to true\. Returns the third argument otherwise\.
 
-*GREATEST\(\)*  
+*GREATEST*  
 Returns the largest value from a list of integers or parameter formulas\.  
 Syntax  
 
@@ -592,7 +610,7 @@ GREATEST(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
-*LEAST\(\)*  
+*LEAST*  
 Returns the smallest value from a list of integers or parameter formulas\.  
 Syntax  
 
@@ -601,7 +619,7 @@ LEAST(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
-*SUM\(\)*  
+*SUM*  
 Adds the values of the specified integers or parameter formulas\.  
 Syntax  
 
@@ -610,20 +628,96 @@ SUM(argument1, argument2,...argumentn)
 ```
 Returns an integer\.
 
+### Boolean DB parameter expressions<a name="USER_ParamBooleanExpressions"></a>
+
+A Boolean DB parameter expression resolves to a Boolean value of 1 or 0\. The expression is enclosed in quotation marks\.
+
+**Note**  
+Boolean DB parameter expressions are only supported for the PostgreSQL engine\.
+
+**Syntax**  
+
+```
+"expression operator expression"
+```
+Both expressions must resolve to integers\. An expression can be the following:  
++ integer constant
++ DB parameter formula
++ DB parameter function
++ DB parameter variable
+
+Boolean DB parameter expressions support the following inequality operators:
+
+*The greater than operator: >*  
+Syntax  
+
+```
+"expression > expression"
+```
+
+*The less than operator: <*  
+Syntax  
+
+```
+"expression < expression"
+```
+
+* The greater than or equal to operators: >=, =>*  
+Syntax  
+
+```
+"expression >= expression"
+"expression => expression"
+```
+
+*The less than or equal to operators: <=, =<*  
+Syntax  
+
+```
+"expression <= expression"
+"expression =< expression"
+```
+
+**Example using a Boolean DB parameter expression**  
+The following Boolean DB parameter expression example compares the result of a parameter formula with an integer to modify the Boolean DB parameter `wal_compression` for a PostgreSQL DB instance\. The parameter expression compares the number of vCPUs with the value 2\. If the number of vCPUs is greater than 2, then the `wal_compression` DB parameter is set to true\.  
+
+```
+aws rds modify-db-parameter-group --db-parameter-group-name group-name \
+--parameters "ParameterName=wal_compression,ParameterValue=\"{DBInstanceVCPU} > 2\" "
+```
+
+### DB parameter log expressions<a name="USER_ParamLogExpressions"></a>
+
+You can set an integer DB parameter value to a log expression\. You enclose the expression in braces: \{\}\. For example:
+
+```
+{log(DBInstanceClassMemory/8187281418)*1000}
+```
+
+The `log` function represents log base 2\. This example also uses the `DBInstanceClassMemory` formula variable\. See [DB parameter formula variables](#USER_FormulaVariables)\. 
+
+**Note**  
+Currently, you can't specify the MySQL `innodb_log_file_size` parameter with any value other than an integer\.
+
 ### DB parameter value examples<a name="USER_ParamValueExamples"></a>
 
-These examples show using formulas and functions in the values for DB parameters\.
+These examples show using formulas, functions, and expressions for the values of DB parameters\.
+
+**Note**  
+DB Parameter functions are currently supported only in the console and aren't supported in the AWS CLI\.
 
 **Warning**  
-Improperly setting parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying database parameters and back up your data before modifying your DB parameter group\. Try out parameter group changes on a test DB instances, created using point\-in\-time\-restores, before applying those parameter group changes to your production DB instances\. 
+Improperly setting parameters in a DB parameter group can have unintended adverse effects\. These might include degraded performance and system instability\. Use caution when modifying database parameters and back up your data before modifying your DB parameter group\. Try out parameter group changes on a test DB instance, created using point\-in\-time\-restores, before applying those parameter group changes to your production DB instances\. 
 
-You can specify the `GREATEST` function in an Oracle processes parameter to set the number of user processes to the larger of either 80 or `DBInstanceClassMemory` divided by 9,868,951\.
+**Example using the DB parameter function GREATEST**  
+You can specify the `GREATEST` function in an Oracle processes parameter\. Use it to set the number of user processes to the larger of either 80 or `DBInstanceClassMemory` divided by 9,868,951\.  
 
 ```
 GREATEST({DBInstanceClassMemory/9868951},80)
 ```
 
-You can specify the `LEAST()` function in a MySQL `max_binlog_cache_size` parameter value to set the maximum cache size a transaction can use in a MySQL instance to the lesser of 1 MB or `DBInstanceClass`/256\.
+**Example using the DB parameter function LEAST**  
+You can specify the `LEAST` function in a MySQL `max_binlog_cache_size` parameter value\. Use it to set the maximum cache size a transaction can use in a MySQL instance to the lesser of 1 MB or `DBInstanceClass`/256\.  
 
 ```
 LEAST({DBInstanceClassMemory/256},10485760)

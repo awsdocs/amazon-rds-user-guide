@@ -74,10 +74,10 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   + Magnetic storage – 1 TiB for all editions 
 
   If you have a scenario that requires a larger amount of storage, you can use sharding across multiple DB instances to get around the limit\. This approach requires data\-dependent routing logic in applications that connect to the sharded system\. You can use an existing sharding framework, or you can write custom code to enable sharding\. If you use an existing framework, the framework can't install any components on the same server as the DB instance\. 
-+ The minimum storage size for SQL Server DB instances is the following: 
-  + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express editions 
-  + Provisioned IOPS storage – 20 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
-  + Magnetic storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
++ The minimum storage size for SQL Server DB instances is the following:
+  + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
+  + Provisioned IOPS storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
+  + Magnetic storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
 + Amazon RDS doesn't support running these services on the same server as your RDS DB instance:
   + Data Quality Services
   + Master Data Services

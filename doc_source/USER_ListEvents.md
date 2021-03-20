@@ -15,7 +15,7 @@ If you need to store events for longer periods of time, you can send Amazon RDS 
 
 1. In the navigation pane, choose **Events**\. The available events appear in a list\.
 
-1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the DB instance event type and containing the characters **1318**\.  
+1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the characters **stopped**\.  
 ![\[List DB events\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ListEvents.png)
 
 ## AWS CLI<a name="USER_ListEvents.CLI"></a>

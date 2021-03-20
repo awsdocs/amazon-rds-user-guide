@@ -86,6 +86,7 @@ In some cases, you want to upgrade a MySQL version 5\.6 DB instance running on a
 + [Overview of MySQL major version upgrades](#USER_UpgradeDBInstance.MySQL.Major.Overview)
 + [Upgrades to MySQL version 5\.7 might be slow](#USER_UpgradeDBInstance.MySQL.DateTime57)
 + [Prechecks for upgrades from MySQL 5\.7 to 8\.0](#USER_UpgradeDBInstance.MySQL.57to80Prechecks)
++ [Rollback after failure to upgrade from MySQL 5\.7 to 8\.0](#USER_UpgradeDBInstance.MySQL.Major.RollbackAfterFailure)
 
 ### Overview of MySQL major version upgrades<a name="USER_UpgradeDBInstance.MySQL.Major.Overview"></a>
 
@@ -163,6 +164,21 @@ Due to the nature of the prechecks, they analyze the objects in your database\. 
 
 **Note**  
 Amazon RDS runs prechecks only for an upgrade from MySQL 5\.7 to MySQL 8\.0\. They aren't run for upgrades to releases lower than MySQL 8\.0\. For example, prechecks aren't run for an upgrade from MySQL 5\.6 to MySQL 5\.7\.
+
+### Rollback after failure to upgrade from MySQL 5\.7 to 8\.0<a name="USER_UpgradeDBInstance.MySQL.Major.RollbackAfterFailure"></a>
+
+When you upgrade a DB instance from MySQL version 5\.7 to MySQL version 8\.0, the upgrade can fail\. In particular, it can fail if the data dictionary contains incompatibilities that weren't captured by the prechecks\. In this case, the database fails to start up successfully in the new MySQL 8\.0 version\. At this point, Amazon RDS rolls back the changes performed for the upgrade\. After the rollback, the MySQL DB instance is running MySQL version 5\.7\. When an upgrade fails and is rolled back, Amazon RDS generates an event with the event ID RDS\-EVENT\-0188\.
+
+Typically, an upgrade fails because there are incompatibilities in the metadata between the databases in your DB instance and the target MySQL version\. When an upgrade fails, you can view the details about these incompatibilities in the `upgradeFailure.log` file\. Resolve the incompatibilities before attempting to upgrade again\.
+
+During an unsuccessful upgrade attempt and rollback, your DB instance is restarted\. Any pending parameter changes are applied during the restart and persist after the rollback\.
+
+For more information about upgrading to MySQL 8\.0, see the following topics in the MySQL documentation:
++ [ Preparing Your Installation for Upgrade](https://dev.mysql.com/doc/refman/8.0/en/upgrade-prerequisites.html)
++ [ Upgrading to MySQL 8\.0? Here is what you need to know…](https://mysqlserverteam.com/upgrading-to-mysql-8-0-here-is-what-you-need-to-know/)
+
+**Note**  
+Currently, automatic rollback after upgrade failure is supported only for MySQL 5\.7 to 8\.0 major version upgrades\.
 
 ## Testing an upgrade<a name="USER_UpgradeDBInstance.MySQL.UpgradeTesting"></a>
 
