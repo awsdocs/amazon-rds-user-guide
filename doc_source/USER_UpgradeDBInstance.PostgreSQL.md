@@ -223,7 +223,7 @@ After the major version upgrade is complete, we recommend the following:
 + A PostgreSQL upgrade doesn't upgrade any PostgreSQL extensions\. To upgrade extensions, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. 
 + Optionally, use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon RDS appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\.
 
-  You can also upload the upgrade logs to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](USER_LogAccess.Concepts.PostgreSQL.md#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.
+  You can also upload the upgrade logs to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to Amazon CloudWatch Logs](USER_LogAccess.Concepts.PostgreSQL.md#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.
 + To verify that everything works as expected, test your application on the upgraded database with a similar workload\. After the upgrade is verified, you can delete this test instance\.
 
 ## Automatic minor version upgrades for PostgreSQL<a name="USER_UpgradeDBInstance.PostgreSQL.Minor"></a>

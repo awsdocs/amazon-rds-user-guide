@@ -1650,7 +1650,7 @@ For more information on PostgreSQL logical replication, see the [PostgreSQL docu
 
 RDS for PostgreSQL supports the streaming of WAL changes using logical replication slots\. Amazon RDS supports logical decoding for a PostgreSQL DB instance version 9\.5\.4 and higher\. You can set up logical replication slots on your instance and stream database changes through these slots to a client such as `pg_recvlogical`\. Logical replication slots are created at the database level and support replication connections to a single database\. 
 
-The most common clients for PostgreSQL logical replication are the AWS Database Migration Service or a custom\-managed host on an AWS EC2 instance\. The logical replication slot knows nothing about the receiver of the stream, and there is no requirement that the target be a replica database\. If you set up a logical replication slot and don't read from the slot, data can be written and quickly fill up your DB instance's storage\.
+The most common clients for PostgreSQL logical replication are the AWS Database Migration Service or a custom\-managed host on an Amazon EC2 instance\. The logical replication slot knows nothing about the receiver of the stream, and there is no requirement that the target be a replica database\. If you set up a logical replication slot and don't read from the slot, data can be written and quickly fill up your DB instance's storage\.
 
 PostgreSQL logical replication and logical decoding on Amazon RDS are enabled with a parameter, a replication connection type, and a security role\. The client for logical decoding can be any client that is capable of establishing a replication connection to a database on a PostgreSQL DB instance\. 
 
@@ -1860,7 +1860,7 @@ For general information about SSL support and PostgreSQL databases, see [SSL sup
 + [Requiring an SSL connection to a PostgreSQL DB instance](#PostgreSQL.Concepts.General.SSL.Requiring)
 + [Determining the SSL connection status](#PostgreSQL.Concepts.General.SSL.Status)
 
-SSL support is available in all AWS regions for PostgreSQL\. Amazon RDS creates an SSL certificate for your PostgreSQL DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
+SSL support is available in all AWS Regions for PostgreSQL\. Amazon RDS creates an SSL certificate for your PostgreSQL DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
 **To connect to a PostgreSQL DB instance over SSL**
 

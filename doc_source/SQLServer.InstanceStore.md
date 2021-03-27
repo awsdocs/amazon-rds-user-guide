@@ -9,7 +9,7 @@ SQL Server database files and database log files aren't placed on the instance s
 
 ## Enabling the instance store<a name="SQLServer.InstanceStore.Enable"></a>
 
-When RDS provisions DB instances with one of the following instance types, the `tempdb` database is automatically placed onto the instance store:
+When RDS provisions DB instances with one of the following instance classes, the `tempdb` database is automatically placed onto the instance store:
 + db\.m5d
 + db\.r5d
 
@@ -17,7 +17,7 @@ To enable the instance store, do one of the following:
 + Create a SQL Server DB instance using one of these instance types\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 + Modify an existing SQL Server DB instance to use one of them\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-The instance store is available in all AWS Regions where one or more of these instance types are supported\. For more information on the `db.m5d` and `db.r5d`instance types, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information on the instance classes supported by Amazon RDS for SQL Server, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\.
+The instance store is available in all AWS Regions where one or more of these instance types are supported\. For more information on the `db.m5d` and `db.r5d` instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information on the instance classes supported by Amazon RDS for SQL Server, see [DB instance class support for Microsoft SQL Server](CHAP_SQLServer.md#SQLServer.Concepts.General.InstanceClasses)\.
 
 ## File location and size considerations<a name="SQLServer.InstanceStore.Files"></a>
 
@@ -41,8 +41,8 @@ When `tempdb` is on the instance store, snapshots don't include temporary files\
 ## Disk full errors<a name="SQLServer.InstanceStore.DiskFull"></a>
 
 If you use all of the available space in the instance store, you might receive errors such as the following:
-+  The transaction log for database 'tempdb' is full due to 'ACTIVE\_TRANSACTION'\. 
-+  Could not allocate space for object 'dbo\.SORT temporary run storage: 140738941419520' in database 'tempdb' because the 'PRIMARY' filegroup is full\. Create disk space by deleting unneeded files, dropping objects in the filegroup, adding additional files to the filegroup, or setting autogrowth on for existing files in the filegroup\.
++ The transaction log for database 'tempdb' is full due to 'ACTIVE\_TRANSACTION'\.
++ Could not allocate space for object 'dbo\.SORT temporary run storage: 140738941419520' in database 'tempdb' because the 'PRIMARY' filegroup is full\. Create disk space by deleting unneeded files, dropping objects in the filegroup, adding additional files to the filegroup, or setting autogrowth on for existing files in the filegroup\.
 
 You can do one or more of the following when the instance store is full:
 + Adjust your workload or the way you use `tempdb`\.

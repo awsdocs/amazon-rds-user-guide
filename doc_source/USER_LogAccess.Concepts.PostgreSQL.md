@@ -9,7 +9,7 @@ To view, download, and watch file\-based database logs, see [Accessing Amazon RD
 + [Setting the log retention period](#USER_LogAccess.Concepts.PostgreSQL.log_retention_period)
 + [Setting the message format](#USER_LogAccess.Concepts.PostgreSQL.Log_Format)
 + [Enabling query logging](#USER_LogAccess.Concepts.PostgreSQL.Query_Logging)
-+ [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)
++ [Publishing PostgreSQL logs to Amazon CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)
 
 ## Overview of PostgreSQL logs<a name="USER_LogAccess.Concepts.PostgreSQL.overview"></a>
 
@@ -45,7 +45,7 @@ To set logging parameters for a DB instance, set the parameters in a DB paramete
 
 To set the retention period for system logs, use the `rds.log_retention_period` parameter\. You can find `rds.log_retention_period` in the DB parameter group associated with your DB instance\. The unit for this parameter is minutes\. For example, a setting of 1,440 retains logs for one day\. The default value is 4,320 \(three days\)\. The maximum value is 10,080 \(seven days\)\. Your instance must have enough allocated storage to contain the retained log files\. 
 
-To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
+To retain older logs, publish them to Amazon CloudWatch Logs\. For more information, see [Publishing PostgreSQL logs to Amazon CloudWatch Logs](#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs)\.  
 
 ## Setting the message format<a name="USER_LogAccess.Concepts.PostgreSQL.Log_Format"></a>
 
@@ -133,9 +133,9 @@ To set up query logging, take the following steps:
    2013-11-05 16:51:18 UTC:[local]:master@postgres:[9193]:LOG:  duration: 3.469 ms
    ```
 
-## Publishing PostgreSQL logs to CloudWatch Logs<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs"></a>
+## Publishing PostgreSQL logs to Amazon CloudWatch Logs<a name="USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs"></a>
 
-To store your PostgreSQL log records in highly durable storage, you can use CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. For example, if you set `log_statements` to `ddl`, you can set up an alarm to alert whenever a DDL statement is executed\.
+To store your PostgreSQL log records in highly durable storage, you can use Amazon CloudWatch Logs\. With CloudWatch Logs, you can also perform real\-time analysis of log data and use CloudWatch to view metrics and create alarms\. For example, if you set `log_statements` to `ddl`, you can set up an alarm to alert whenever a DDL statement is executed\.
 
 To work with CloudWatch Logs, configure your RDS for PostgreSQL DB instance to publish log data to a log group\.
 

@@ -8,7 +8,7 @@ Native backup and restore is available in all AWS Regions for Single\-AZ and Mul
 
 The following diagram shows the supported scenarios\.
 
-![\[Native Backup and Restore Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-bak-files.png)
+![\[Native Backup and Restore Architecture\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/SQL-bak-file.png)
 
 Using native \.bak files to back up and restore databases is usually the fastest way to back up and restore databases\. There are many additional advantages to using native backup and restore\. For example, you can do the following:
 + Migrate databases to or from Amazon RDS\.

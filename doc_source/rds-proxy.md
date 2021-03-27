@@ -105,9 +105,10 @@
  Enforce SSL and verify the certificate authority \(CA\)\. 
 
 **VERIFY\_IDENTITY**  
- Enforce SSL and verify the CA and CA hostname\. 
+ Enforce SSL and verify the CA and CA hostname\.   
+ You can use the SSL mode `VERIFY_IDENTITY` when connecting to the default proxy endpoint\. You can't use that SSL mode when you connect to proxy endpoints that you create\. 
 
- When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+ When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in `.pem` format\. For a `.pem` file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  RDS Proxy uses wildcard certificates, which apply to a both a domain and its subdomains\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
@@ -1387,6 +1388,8 @@ aws rds delete-db-proxy-endpoint ^
  To use cross\-VPC capability with RDS Proxy, all the VPCs must be owned by the same AWS account\. 
 
  Reader endpoints aren't available for Aurora multi\-writer clusters\. 
+
+ You can connect to proxy endpoints that you create using the SSL modes `REQUIRED` and `VERIFY_CA`\. You can't connect to an endpoint that you create using the SSL mode `VERIFY_IDENTITY`\. 
 
 ## Command\-line examples for RDS Proxy<a name="rds-proxy.examples"></a>
 

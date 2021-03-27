@@ -318,7 +318,7 @@ If you used any data\-formatting options with `mysqldump` when you initially dum
 1. Run a simple SELECT query against one or two of the tables in the imported database to verify that the import was successful\.
 
 **Note**  
- If you no longer need the Amazon EC2 instance used in this procedure, terminate the EC2 instance to reduce your AWS resource usage\. To terminate an EC2 instance, see [Terminating an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#terminating-instances-console)\. 
+ If you no longer need the Amazon EC2 instance used in this procedure, terminate the EC2 instance to reduce your AWS resource usage\. To terminate an EC2 instance, see [Terminating an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#terminating-instances-console)\.
 
 ## Replicate between your external database and new Amazon RDS DB instance<a name="MySQL.Procedural.Importing.Start.Repl"></a>
 

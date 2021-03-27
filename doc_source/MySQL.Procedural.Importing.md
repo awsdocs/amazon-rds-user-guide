@@ -234,18 +234,7 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
 1. For **IAM role**, you can choose an existing IAM role\.
 
-1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role**\. If so:
-
-   1. Enter the **IAM role name**\.
-
-   1.  Choose whether to **Allow access to KMS key**:
-      + If you didn't encrypt the backup files, choose **No**\.
-      + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
-      + If you encrypted the backup files with AWS\-KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
-
-        The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
-
-      For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role** and entering the **IAM role name**\.
 
 1. Specify your DB instance information\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 **Note**  

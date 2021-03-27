@@ -134,7 +134,7 @@ For more information, see [Performance Schema Command Options](https://dev.mysql
 
 Performance Schema is *not* enabled when both the following conditions are true:
 + The `performance_schema` parameter is set to `0` or `1`\.
-+ The `performance_schema` parameter `source` is set to `user`\.
++ The **Source** column for the `performance_schema` parameter is set to `user`\.
 
 **To enable the Performance Schema manually**
 
@@ -142,15 +142,18 @@ Performance Schema is *not* enabled when both the following conditions are true:
 
 1. Choose **Parameter groups**\.
 
-1. Select the parameter group for your DB instance\.
+1. Select the name of the parameter group for your DB instance\.
 
-1. Select the `performance_schema` parameter\.
+1. Choose **Edit parameters**\.
 
-1. Select **Edit parameters**\.
+1. Enter **perf** in the search bar\.
 
-1. Select **Reset**\.
+1. Select the `performance_schema` parameter\.  
+![\[Select performance_schema\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf_schema.png)
 
-1. Select **Reset parameters**\.
+1. Choose **Reset**\.
+
+1. Choose **Reset parameters**\.
 
 1. Restart the DB instance\.
 

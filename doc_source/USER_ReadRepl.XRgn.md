@@ -117,7 +117,7 @@ aws rds create-db-instance-read-replica ^
 
 ### RDS API<a name="USER_ReadRepl.XRgn.API"></a>
 
- To create a read replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API function [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the read replica \(destination Region\) and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\.
+To create a read replica from a source MySQL, MariaDB, Oracle, or PostgreSQL DB instance in a different AWS Region, you can call the Amazon RDS API function [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\. In this case, you call [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) from the AWS Region where you want the read replica \(destination Region\) and specify the Amazon Resource Name \(ARN\) for the source DB instance\. An ARN uniquely identifies a resource created in Amazon Web Services\.
 
  To create an encrypted read replica in a different AWS Region from the source DB instance, you can use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation from the destination AWS Region\. To create an encrypted read replica in another AWS Region, you must specify a value for `PreSignedURL`\. `PreSignedURL` should contain a request for the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) operation to call in the source AWS Region where the read replica is created in\. To learn more about `PreSignedUrl`, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
 
@@ -183,13 +183,13 @@ All of the considerations for performing replication within an AWS Region apply 
 + You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
   + MariaDB \(all versions\)\.
   + MySQL version 5\.6 and later\.
-  + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, all versions of 12\.2, and all versions of 18\.0\.
+  + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, and all versions of 12\.2, 18c, and 19c\.
 
     An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Replica requirements for Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
   + PostgreSQL \(all versions\)\.
 + A source DB instance can have cross\-Region read replicas in multiple AWS Regions\.
 + You can only create a cross\-Region Amazon RDS read replica from a source Amazon RDS DB instance that is not a read replica of another Amazon RDS DB instance\.
-+ You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud\.
++ You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud \(US\)\.
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
 + You can create a cross\-Region read replica:

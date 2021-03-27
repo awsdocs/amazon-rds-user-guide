@@ -10,7 +10,7 @@ For more information about viewing, downloading, and watching file\-based databa
 + [Accessing MySQL error logs](#USER_LogAccess.MySQL.Errorlog)
 + [Accessing the MySQL slow query and general logs](#USER_LogAccess.MySQL.Generallog)
 + [Accessing the MySQL audit log](#USER_LogAccess.MySQL.Auditlog)
-+ [Publishing MySQL logs to CloudWatch Logs](#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
++ [Publishing MySQL logs to Amazon CloudWatch Logs](#USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs)
 + [Log file size](#USER_LogAccess.MySQL.LogFileSize)
 + [Managing table\-based MySQL logs](#Appendix.MySQL.CommonDBATasks.Logs)
 + [Binary logging format](#USER_LogAccess.MySQL.BinaryFormat)
@@ -58,7 +58,7 @@ For more information about the slow query and general logs, go to the following 
 
 To access the audit log, the DB instance must use a custom option group with the `MARIADB_AUDIT_PLUGIN` option\. For more information, see [MariaDB Audit Plugin support](Appendix.MySQL.Options.AuditPlugin.md)\.
 
-## Publishing MySQL logs to CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs"></a>
+## Publishing MySQL logs to Amazon CloudWatch Logs<a name="USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs"></a>
 
 You can configure your MySQL DB instance to publish log data to a log group in Amazon CloudWatch Logs\. With CloudWatch Logs, you can perform real\-time analysis of the log data, and use CloudWatch to create alarms and view metrics\. You can use CloudWatch Logs to store your log records in highly durable storage\. 
 
