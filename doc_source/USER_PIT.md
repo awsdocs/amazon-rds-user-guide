@@ -24,10 +24,6 @@ Some of the database engines used by Amazon RDS have special considerations when
 **Note**  
 You can also use AWS Backup to manage backups of Amazon RDS DB instances\. If your DB instance is associated with a backup plan in AWS Backup, that backup plan is used for point\-in\-time recovery\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
-RDS uploads transaction logs for DB clusters to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB cluster, use the AWS CLI [ describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterss.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
-
-You can restore to any point in time within your backup retention period\. To see the earliest restorable time for a DB cluster, use the AWS CLI [ describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusterss.html) command and look at the value returned in the `LatestRestorableTime` field for the DB cluster\.
-
 You can restore a DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
 ## Console<a name="USER_PIT.CON"></a>

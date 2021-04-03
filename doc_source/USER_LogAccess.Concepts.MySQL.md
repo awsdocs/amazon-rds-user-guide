@@ -18,7 +18,7 @@ For more information about viewing, downloading, and watching file\-based databa
 
 ## Accessing MySQL error logs<a name="USER_LogAccess.MySQL.Errorlog"></a>
 
-The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
+The MySQL error log is written to the `mysql-error.log` file\. You can view `mysql-error.log` by using the Amazon RDS console or by retrieving the log using the Amazon RDS API, Amazon RDS CLI, or AWS SDKs\. `mysql-error.log` is flushed every 5 minutes, and its contents are appended to `mysql-error-running.log`\. The `mysql-error-running.log` file is then rotated every hour and the hourly files generated during the last two weeks are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
 
 Each log file has the hour it was generated \(in UTC\) appended to its name\. The log files also have a timestamp that helps you determine when the log entries were written\.
 
@@ -39,7 +39,7 @@ You can control MySQL logging by using the parameters in this list:
   + **NONE** – Disable logging\.
 
 When logging is enabled, Amazon RDS rotates table logs or deletes log files at regular intervals\. This measure is a precaution to reduce the possibility of a large log file either blocking database use or affecting performance\. `FILE` and `TABLE` logging approach rotation and deletion as follows:
-+ When `FILE` logging is enabled, log files are examined every hour and log files older than 24 hours are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
++ When `FILE` logging is enabled, log files are examined every hour and log files more than two weeks old are deleted\. In some cases, the remaining combined log file size after the deletion might exceed the threshold of 2 percent of a DB instance's allocated space\. In these cases, the largest log files are deleted until the log file size no longer exceeds the threshold\. 
 + When `TABLE` logging is enabled, in some cases log tables are rotated every 24 hours\. This rotation occurs if the space used by the table logs is more than 20 percent of the allocated storage space or the size of all logs combined is greater than 10 GB\. If the amount of space used for a DB instance is greater than 90 percent of the DB instance's allocated storage space, then the thresholds for log rotation are reduced\. Log tables are then rotated if the space used by the table logs is more than 10 percent of the allocated storage space or the size of all logs combined is greater than 5 GB\. You can subscribe to the `low_free_storage` event to be notified when log tables are rotated to free up space\. For more information, see [Using Amazon RDS event notification](USER_Events.md)\.
 
   When log tables are rotated, the current log table is copied to a backup log table and the entries in the current log table are removed\. If the backup log table already exists, then it is deleted before the current log table is copied to the backup\. You can query the backup log table if needed\. The backup log table for the `mysql.general_log` table is named `mysql.general_log_backup`\. The backup log table for the `mysql.slow_log` table is named `mysql.slow_log_backup`\.
@@ -48,7 +48,7 @@ When logging is enabled, Amazon RDS rotates table logs or deletes log files at r
 
   Table logs are rotated during a database version upgrade\.
 
-To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous 24 hours are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
+To work with the logs from the Amazon RDS console, Amazon RDS API, Amazon RDS CLI, or AWS SDKs, set the `log_output` parameter to FILE\. Like the MySQL error log, these log files are rotated hourly\. The log files that were generated during the previous two weeks are retained\. Note that the retention period is different between Amazon RDS and Aurora\.
 
 For more information about the slow query and general logs, go to the following topics in the MySQL documentation:
 + [The slow query log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html)
@@ -177,7 +177,7 @@ Other parameters might be required depending on the AWS CLI command you run\.
 
 ## Log file size<a name="USER_LogAccess.MySQL.LogFileSize"></a>
 
-The MySQL slow query log, error log, and the general log file sizes are constrained to no more than 2 percent of the allocated storage space for a DB instance\. To maintain this threshold, logs are automatically rotated every hour and log files older than 24 hours are removed\. If the combined log file size exceeds the threshold after removing old log files, then the largest log files are deleted until the log file size no longer exceeds the threshold\.
+The MySQL slow query log, error log, and the general log file sizes are constrained to no more than 2 percent of the allocated storage space for a DB instance\. To maintain this threshold, logs are automatically rotated every hour and log files more than two weeks old are removed\. If the combined log file size exceeds the threshold after removing old log files, then the oldest log files are deleted until the log file size no longer exceeds the threshold\.
 
 For MySQL, there is a size limit on BLOBs written to the redo log\. To account for this limit, ensure that the `innodb_log_file_size` parameter for your MySQL DB instance is 10 times larger than the largest BLOB data size found in your tables, plus the length of other variable length fields \(`VARCHAR`, `VARBINARY`, `TEXT`\) in the same tables\. For information on how to set parameter values, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. For information on the redo log BLOB size limit, go to [Changes in MySQL 5\.6\.20](http://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-20.html)\.
 

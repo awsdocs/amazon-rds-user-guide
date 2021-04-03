@@ -116,8 +116,8 @@ On Windows, run the command window as an administrator\.
      ```
      mysqldump ^
          --tab=target_directory ^
-         --fields-terminated-by ',' ^
-         --fields-enclosed-by '"' ^
+         --fields-terminated-by "," ^
+         --fields-enclosed-by """ ^
          --lines-terminated-by 0x0d0a ^
          database_name ^
          --master-data=2 ^

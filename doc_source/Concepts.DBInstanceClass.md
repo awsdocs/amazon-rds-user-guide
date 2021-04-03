@@ -7,6 +7,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 **Topics**
 + [DB instance class types](#Concepts.DBInstanceClass.Types)
 + [Supported DB engines for DB instance classes](#Concepts.DBInstanceClass.Support)
++ [Determining DB instance class support in AWS Regions](#Concepts.DBInstanceClass.RegionSupport)
 + [Changing your DB instance class](#Concepts.DBInstanceClass.Changing)
 + [Configuring the processor for a DB instance class](#USER_ConfigureProcessor)
 + [Hardware specifications for DB instance classes](#Concepts.DBInstanceClass.Summary)
@@ -16,7 +17,7 @@ For more information about instance class pricing, see [Amazon RDS pricing](http
 Amazon RDS supports three types of instance classes: Standard, Memory Optimized, and Burstable Performance\. For more information about Amazon EC2 instance types, see [Instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the Amazon EC2 documentation\. 
 
 The following are the Standard DB instance classes available:
-+ **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\. The db\.m6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
++ **db\.m6g** – General\-purpose instance classes powered by AWS Graviton2 processors\. These deliver balanced compute, memory, and networking for a broad range a general purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.m5d** – Newest generation instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
@@ -27,16 +28,16 @@ The following are the Standard DB instance classes available:
 
 The following are the Memory Optimized DB instance classes available:
 + **db\.z1d** – Instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
-+ **db\.x1e** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\. The db\.x1e instance classes are available only in the following regions: US East \(N\. Virginia\), US West \(Oregon\), Europe \(Ireland\), Asia Pacific \(Tokyo\), and Asia Pacific \(Sydney\)\.
++ **db\.x1e** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per gibibyte \(GiB\) of RAM among the DB instance classes and up to 3,904 GiB of DRAM\-based instance memory\.
 + **db\.x1** – Instance classes optimized for memory\-intensive applications\. These offer one of the lowest price per GiB of RAM among the DB instance classes and up to 1,952 GiB of DRAM\-based instance memory\. 
-+ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\. The db\.r6g DB instance classes are available only in the following regions: US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\), Europe \(Ireland\), Europe \(Frankfurt\), Asia Pacific \(Tokyo\), Asia Pacific \(Mumbai\), Asia Pacific \(Singapore\), and Asia Pacific \(Sydney\)\.
++ **db\.r6g** – Instance classes powered by AWS Graviton2 processors\. These are ideal for running memory\-intensive workloads in open\-source databases such as MySQL and PostgreSQL\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as any other DB instance modification\.
 + **db\.r5b** – Instance classes that are memory\-optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
-+ **db\.r3** – Instance classes that provide memory optimization\. The db\.r3 instances classes aren't available in the Europe \(Paris\) Region and the South America \(São Paulo\) Region\. 
++ **db\.r3** – Instance classes that provide memory optimization\.
 + **db\.m2** – Earlier generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
@@ -200,6 +201,145 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.t2\.medium | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.small | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.t2\.micro | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
+
+## Determining DB instance class support in AWS Regions<a name="Concepts.DBInstanceClass.RegionSupport"></a>
+
+To determine the DB instance classes supported by each DB engine in a specific AWS Region, you can use the AWS Management Console, the [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/) page, or the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command for the AWS Command Line Interface \(AWS CLI\)\.
+
+**Note**  
+When you perform operations with the AWS CLI, such as creating or modifying a DB instance, it automatically shows the supported DB instance classes for a specific DB engine, DB engine version, and AWS Region\.
+
+**Contents**
++ [Using the Amazon RDS pricing page to determine DB instance class support in AWS Regions](#Concepts.DBInstanceClass.RegionSupport.PricingPage)
++ [Using the AWS CLI to determine DB instance class support in AWS Regions](#Concepts.DBInstanceClass.RegionSupport.CLI)
+  + [Listing the DB instance classes that are supported by a specific DB engine version in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example1)
+  + [Listing the DB engine versions that support a specific DB instance class in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example2)
+
+### Using the Amazon RDS pricing page to determine DB instance class support in AWS Regions<a name="Concepts.DBInstanceClass.RegionSupport.PricingPage"></a>
+
+You can use the [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/) page to determine the DB instance classes supported by each DB engine in a specific AWS Region\. 
+
+**To use the pricing page to determine the DB instance classes supported by each engine in a Region**
+
+1. Go to [Amazon RDS Pricing](http://aws.amazon.com/rds/pricing/)\.
+
+1. Choose a DB engine\.
+
+1. On the pricing page for the DB engine, choose **On\-Demand DB Instances** or **Reserved DB Instances**\.
+
+1. To see the DB instance classes available in an AWS Region, choose the AWS Region in **Region**\.
+
+   Other choices might be available for some DB engines, such as **Single\-AZ Deployment** or **Multi\-AZ Deployment**\.
+
+### Using the AWS CLI to determine DB instance class support in AWS Regions<a name="Concepts.DBInstanceClass.RegionSupport.CLI"></a>
+
+You can use the AWS CLI to determine which DB instance classes are supported for specific DB engines and DB engine versions in an AWS Region\. The following table shows the valid DB engine values\.
+
+
+****  
+
+| Engine names | Engine values in CLI commands | More information about versions | 
+| --- | --- | --- | 
+|  MariaDB  |  `mariadb`  |  [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)  | 
+|  Microsoft SQL Server  |  `sqlserver-ee` `sqlserver-se` `sqlserver-ex` `sqlserver-web`  |  [Microsoft SQL Server versions on Amazon RDS](CHAP_SQLServer.md#SQLServer.Concepts.General.VersionSupport)  | 
+|  MySQL  |  `mysql`  |  [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)  | 
+|  Oracle  |  `oracle-ee` `oracle-se2` `oracle-se`  |  [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)  | 
+|  PostgreSQL  |  `postgres`  |  [Amazon RDS for PostgreSQL versions and extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts)  | 
+
+For information about AWS Region names, see [AWS RegionsAvailability Zones](Concepts.RegionsAndAvailabilityZones.md#Concepts.RegionsAndAvailabilityZones.Regions)\.
+
+The following examples demonstrate how to determine DB instance class support in an AWS Region using the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) AWS CLI command\.
+
+**Note**  
+To limit the output, these examples show results only for the General Purpose SSD \(`gp2`\) storage type\. If necessary, you can change the storage type to Provisioned IOPS \(`io1`\) or magnetic \(`standard`\) in the commands\.
+
+**Topics**
++ [Listing the DB instance classes that are supported by a specific DB engine version in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example1)
++ [Listing the DB engine versions that support a specific DB instance class in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example2)
+
+#### Listing the DB instance classes that are supported by a specific DB engine version in an AWS Region<a name="Concepts.DBInstanceClass.RegionSupport.CLI.Example1"></a>
+
+To list the DB instance classes that are supported by a specific DB engine version in an AWS Region, run the following command\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version \
+    --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" \
+    --output text \
+    --region region
+```
+
+For Windows:
+
+```
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version ^
+    --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" ^
+    --output text ^
+    --region region
+```
+
+For example, the following command lists the supported DB instance classes for version 12\.4 of the RDS for PostgreSQL DB engine in US East \(N\. Virginia\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 \
+    --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" \
+    --output text \
+    --region us-east-1
+```
+
+For Windows:
+
+```
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 ^
+    --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" ^
+    --output text ^
+    --region us-east-1
+```
+
+#### Listing the DB engine versions that support a specific DB instance class in an AWS Region<a name="Concepts.DBInstanceClass.RegionSupport.CLI.Example2"></a>
+
+To list the DB engine versions that support a specific DB instance class in an AWS Region, run the following command\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class \
+    --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" \
+    --output text \
+    --region region
+```
+
+For Windows:
+
+```
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class ^
+    --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" ^
+    --output text ^
+    --region region
+```
+
+For example, the following command lists the DB engine versions of the RDS for PostgreSQL DB engine that support the db\.r5\.large DB instance class in US East \(N\. Virginia\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large \
+    --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" \
+    --output text \
+    --region us-east-1
+```
+
+For Windows:
+
+```
+aws rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large ^
+    --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" ^
+    --output text ^
+    --region us-east-1
+```
 
 ## Changing your DB instance class<a name="Concepts.DBInstanceClass.Changing"></a>
 

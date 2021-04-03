@@ -243,7 +243,7 @@ The output shows the source DB instance in US West \(Oregon\), with replicated b
 
 ## Restoring to a specified time from a replicated backup<a name="AutomatedBackups.PiTR"></a>
 
-You can restore a DB instance to a specific point in time from a replicated backup using the Amazon RDS console\. You can also use the `restore-db-instance-to-point-in-time` AWS CLI command or the `RestoreDbInstanceToPointInTime` RDS API operation\.
+You can restore a DB instance to a specific point in time from a replicated backup using the Amazon RDS console\. You can also use the `restore-db-instance-to-point-in-time` AWS CLI command or the `RestoreDBInstanceToPointInTime` RDS API operation\.
 
 For general information on point\-in\-time recovery \(PITR\), see [Restoring a DB instance to a specified time](USER_PIT.md)\.
 
@@ -307,7 +307,7 @@ To restore a DB instance to a specified time, call the [https://docs.aws.amazon.
 
 ## Stopping automated backup replication<a name="AutomatedBackups.StopReplicating"></a>
 
-You can stop backup replication for DB instances using the Amazon RDS console\. You can also use the `stop-db-instance-automated-backups-replication` AWS CLI command or the `StopDbInstanceAutomatedBackupsReplication` RDS API operation\.
+You can stop backup replication for DB instances using the Amazon RDS console\. You can also use the `stop-db-instance-automated-backups-replication` AWS CLI command or the `StopDBInstanceAutomatedBackupsReplication` RDS API operation\.
 
 Replicated backups are retained, subject to the backup retention period set when they were created\.
 
@@ -360,13 +360,13 @@ The following CLI example stops automated backups of a DB instance from replicat
 
 ### RDS API<a name="AutomatedBackups.StopReplicating.API"></a>
 
-Stop backup replication by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDbInstanceAutomatedBackupsReplication.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDbInstanceAutomatedBackupsReplication.html) RDS API operation with the following parameters:
+Stop backup replication by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstanceAutomatedBackupsReplication.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_StopDBInstanceAutomatedBackupsReplication.html) RDS API operation with the following parameters:
 + `Region`
 + `SourceDBInstanceArn`
 
 ## Deleting replicated backups<a name="AutomatedBackups.Delete"></a>
 
-You can delete replicated backups for DB instances using the Amazon RDS console\. You can also use the `delete-db-instance-automated-backups` AWS CLI command or the `DeleteDbInstanceAutomatedBackups` RDS API operation\.
+You can delete replicated backups for DB instances using the Amazon RDS console\. You can also use the `delete-db-instance-automated-backups` AWS CLI command or the `DeleteDBInstanceAutomatedBackup` RDS API operation\.
 
 ### Console<a name="AutomatedBackups.Delete.Console"></a>
 
@@ -411,6 +411,6 @@ You can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-d
 
 ### RDS API<a name="AutomatedBackups.Delete.API"></a>
 
-Delete replicated backups by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html) RDS API operation with the `DbInstanceAutomatedBackupsArn` parameter\.
+Delete replicated backups by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html) RDS API operation with the `DBInstanceAutomatedBackupsArn` parameter\.
 
 ## <a name="USER_WorkingWithAutomatedBackups.related"></a>

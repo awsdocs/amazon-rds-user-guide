@@ -57,13 +57,13 @@ You can restore a DB instance from a DB snapshot using the AWS Management Consol
 
 1. In the navigation pane, choose **Snapshots**\.
 
-1. Choose the DB snapshot that you want to restore from\. 
+1. Choose the DB snapshot that you want to restore from\.
 
-1. For **Actions**, choose **Restore Snapshot**\. 
+1. For **Actions**, choose **Restore snapshot**\.
 
-1. On the **Restore DB Instance** page, for **DB Instance Identifier**, enter the name for your restored DB instance\. 
+1. On the **Restore snapshot** page, for **DB instance identifier**, enter the name for your restored DB instance\.
 
-1. Choose **Restore DB Instance**\. 
+1. Choose **Restore DB instance**\. 
 
 ### AWS CLI<a name="USER_RestoreFromSnapshot.CLI"></a>
 

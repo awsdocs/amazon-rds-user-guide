@@ -18,6 +18,15 @@ Modify the values of the following variables as needed:
 
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
+**Important**  
+The examples in this section use the following code to provide credentials that access a database from a local environment:  
+`creds := credentials.NewEnvCredentials()`  
+If you are accessing a database from an AWS service, such as Amazon EC2 or Amazon ECS, you can replace the code with the following code:  
+`sess := session.Must(session.NewSession())`  
+`creds := sess.Config.Credentials`  
+If you make this change, make sure you add the following import:  
+`"github.com/aws/aws-sdk-go/aws/session"`
+
 **Topics**
 + [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Go.AuthToken)
 + [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)

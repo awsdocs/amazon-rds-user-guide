@@ -3,7 +3,7 @@
 When Amazon RDS supports a new version of Oracle, you can upgrade your DB instances to the new version\. For information about which Oracle versions are available on Amazon RDS, see [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)\.
 
 **Important**  
-RDS for Oracle 11g is deprecated\. You can't upgrade an Oracle 11g engine\. If you maintain Oracle 11g snapshots, you can upgrade them to a later release\.
+RDS for Oracle 11g is deprecated\. If you maintain Oracle 11g snapshots, you can upgrade them to a later release\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
 
 **Topics**
 + [Overview of Oracle DB engine upgrades](#USER_UpgradeDBInstance.Oracle.Overview)
