@@ -24,6 +24,7 @@ This code generates an IAM authentication token for a MySQL DB instance\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
