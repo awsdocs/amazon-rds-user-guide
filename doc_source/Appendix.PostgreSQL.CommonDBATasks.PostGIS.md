@@ -1,19 +1,22 @@
-# Working with PostGIS<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS"></a>
+# Working with the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS"></a>
 
-PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, see [PostGIS\.net](https://postgis.net/)\.
+PostGIS is an extension to PostgreSQL for storing and managing spatial information\. If you are not familiar with PostGIS, see [PostGIS\.net](https://postgis.net/)\. 
 
-You need to perform a bit of setup before you can use the PostGIS extension\. The following list shows what you need to do; each step is described in greater detail later in this section\.
-+ Connect to the DB instance using the master user name used to create the DB instance\.
-+ Load the PostGIS extensions\.
-+ Transfer ownership of the extensions to the `rds_superuser` role\.
-+ Transfer ownership of the objects to the `rds_superuser` role\.
-+ Test the extensions\.
+You need to perform some setup before you can use the PostGIS extension\. The following list shows what you need to do\. Each step is described in greater detail later in this section\.
 
-## Step 1: Connect to the DB instance using the master user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
+**Topics**
++ [Step 1: Connect to the DB instance using the user name used to create the DB instance](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect)
++ [Step 2: Load the PostGIS extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions)
++ [Step 3: Transfer ownership of the extensions to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership)
++ [Step 4: Transfer ownership of the objects to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects)
++ [Step 5: Test the extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Test)
++ [PostGIS extension components](#CHAP_PostgreSQL.Extensions.PostGIS)
 
-First, you connect to the DB instance using the master user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
+## Step 1: Connect to the DB instance using the user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
-The following example uses `SELECT` to show you the current user\. In this case, the current user should be the master user name you chose when creating the DB instance\.
+First, you connect to the DB instance using the user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
+
+The following example uses `SELECT` to show you the current user\. In this case, the current user should be the user name you chose when creating the DB instance\.
 
 ```
 SELECT CURRENT_USER;
@@ -110,3 +113,32 @@ SELECT topology.createtopology('my_new_topo',26986,0.5);
               1
 (1 row)
 ```
+
+## PostGIS extension component versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
+
+The following table shows the PostGIS component versions that ship with the RDS for PostgreSQL versions\.
+
+
+| PostgreSQL | PostGIS | GEOS | GDAL | PROJ | 
+| --- | --- | --- | --- | --- | 
+| 11\.1 | 2\.5\.1 r17027 | 3\.7\.0\-CAPI\-1\.11\.0 673b9939 | 2\.3\.1, released 2018/06/22 | Rel\. 5\.2\.0, September 15th, 2018 | 
+| 10\.6 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.5  | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
+| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 10\.3 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.8 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.3 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.2 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.6\.1 | 2\.3\.0 r15146 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.1\.1, released 2016/07/07 | Rel\. 4\.9\.2, September 8th, 2016 | 
+| 9\.5\.7 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.5\.6 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
+| 9\.5\.4 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.2, September 8th, 2015 | 
+| 9\.5\.2 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.2, released 2016/01/26 | Rel\. 4\.9\.2, September 8th, 2015 | 
+
+**Note**  
+PostgreSQL 10\.5 added support for the `libprotobuf` extension version 1\.3\.0 to the PostGIS component\. 

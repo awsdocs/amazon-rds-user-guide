@@ -9,7 +9,7 @@ Amazon RDS for PostgreSQL supports outbound network access on your DB instances 
 
 ## Enabling custom DNS resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable"></a>
 
-To enable DNS resolution in your customer VPC, associate a custom DB parameter group to your RDS PostgreSQL instance, turn on the `rds.custom_dns_resolution` parameter by setting it to 1, and then restart the DB instance for the changes to take place\. 
+To enable DNS resolution in your customer VPC, associate a custom DB parameter group to your RDS for PostgreSQL instance, turn on the `rds.custom_dns_resolution` parameter by setting it to 1, and then restart the DB instance for the changes to take place\. 
 
 ## Disabling custom DNS resolution<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Disable"></a>
 
@@ -22,7 +22,7 @@ After you set up your custom DNS name server, it takes up to 30 minutes to propa
 **Note**  
 If you don't set up a custom DNS server, and `rds.custom_dns_resolution` is set to 1, hosts are resolved using a Route 53 private zone\. For more information, see [Working with private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html)\.
 
-**To set up a custom DNS server for your Amazon RDS PostgreSQL DB instance**
+**To set up a custom DNS server for your Amazon RDS for PostgreSQL DB instance**
 
 1. From the DHCP options set attached to your VPC, set the `domain-name-servers` option to the IP address of your DNS name server\. For more information, see [DHCP options sets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)\. 
 **Note**  

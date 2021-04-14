@@ -25,22 +25,25 @@ Use the following procedure to create a VPC with both public and private subnets
 
    1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
+   1. In the top\-right corner of the AWS Management Console, choose the Region to allocate your Elastic IP address in\. The Region of your Elastic IP address should be the same as the Region where you want to create your VPC\. This example uses the US West \(Oregon\) Region\.
+
    1. In the navigation pane, choose **Elastic IPs**\.
 
    1. Choose **Allocate Elastic IP address**\.
 
-   1. For **Public IPv4 address pool**, choose one of the following:
-      + **Amazon's pool of IPv4 addresses**—If you want an IPv4 address to be allocated from Amazon's pool of IPv4 addresses\.
-      + **My pool of public IPv4 addresses**—If you want to allocate an IPv4 address from an IP address pool that you have brought to your AWS account\. This option is disabled if you do not have any IP address pools\.
-      + **Customer owned pool of IPv4 addresses**—If you want to allocate an IPv4 address from a pool created from your on\-premises network for use with an AWS Outpost\. This option is disabled if you do not have an AWS Outpost\.
+   1. If the console shows the **Network Border Group** field, keep the default value for it\.
+
+   1. For **Public IPv4 address pool**, choose **Amazon's pool of IPv4 addresses**\.
 
    1. Choose **Allocate**\.
+
+      Note the allocation ID of the new Elastic IP address because you'll need this information when you create your VPC\.
 
    For more information about Elastic IP addresses, see [Elastic IP addresses](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) in the *Amazon EC2 User Guide*\. For more information about NAT gateways, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*\.
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. In the top\-right corner of the AWS Management Console, choose the region to create your VPC in\. This example uses the US West \(Oregon\) region\.
+1. In the top\-right corner of the AWS Management Console, choose the Region to create your VPC in\. This example uses the US West \(Oregon\) Region\.
 
 1. In the upper\-left corner, choose **VPC Dashboard**\. To begin creating a VPC, choose **Launch VPC Wizard**\.
 
@@ -57,7 +60,6 @@ Use the following procedure to create a VPC with both public and private subnets
    + **Availability Zone:** `us-west-2a`
    + **Private subnet name:** `Tutorial private 1` 
    + **Elastic IP Allocation ID:** An Elastic IP address to associate with the NAT gateway
-   + **Key pair name:** `No key pair`
    + **Service endpoints:** Skip this field\.
    + **Enable DNS hostnames:** `Yes`
    + **Hardware tenancy:** `Default`
@@ -191,4 +193,4 @@ If you have enabled a Local Zone, you can choose an Availability Zone group on t
     Your new DB subnet group appears in the DB subnet groups list on the RDS console\. You can click the DB subnet group to see details, including all of the subnets associated with the group, in the details pane at the bottom of the window\.
 
 **Note**  
-If you created this VPC to complete [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md) \.
+If you created this VPC to complete [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\.

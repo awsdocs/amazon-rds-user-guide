@@ -17,17 +17,18 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 + [Accessing external data with the postgres\_fdw extension](#postgresql-commondbatasks-fdw)
 + [Restricting password management](#Appendix.PostgreSQL.CommonDBATasks.RestrictPasswordMgmt)
 + [Working with PostgreSQL autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)
-+ [Working with PostGIS](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
++ [Working with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)
 + [Using a custom DNS server for outbound network access](Appendix.PostgreSQL.CommonDBATasks.CustomDNS.md)
 + [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)
 + [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)
++ [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)
 
 ## Creating roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
 When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named `postgres` in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges for your DB instance\. You should not assign this role to users unless they need the most access to the DB instance\.
 
 The `rds_superuser` role can do the following:
-+ Add extensions that are available for use with Amazon RDS\. For more information, see [Supported PostgreSQL features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Some supported PostgreSQL features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
 + Manage tablespaces, including creating and deleting them\. For more information, see [ Tablespaces for PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces) and the [Tablespaces](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
 + View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and stop their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
 + Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/9.4/static/sql-grant.html) section in the PostgreSQL documentation\.
@@ -417,7 +418,7 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
 
 You can use a log analyzer such as [pgbadger](http://dalibo.github.io/pgbadger/) to analyze PostgreSQL logs\. The *pgbadger* documentation states that the %l pattern \(log line for session/process\) should be a part of the prefix\. However, if you provide the current rds log\_line\_prefix as a parameter to *pgbadger* it should still produce a report\. 
 
-For example, the following command correctly formats an Amazon RDS PostgreSQL log file dated 2014\-02\-04 using *pgbadger*\.
+For example, the following command correctly formats an Amazon RDS for PostgreSQL log file dated 2014\-02\-04 using *pgbadger*\.
 
 ```
 ./pgbadger -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 

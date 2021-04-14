@@ -117,7 +117,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 +  Queue Depth – The number of I/O operations that are waiting to be written to or read from disk\. 
 
 **Network traffic**
-+  Network Receive Throughput, Network Transmit Throughput – The rate of network traffic to and from the DB instance in megabytes per second\. 
++  Network Receive Throughput, Network Transmit Throughput – The rate of network traffic to and from the DB instance in bytes per second\. 
 
 **Database connections**
 +  DB Connections – The number of client sessions that are connected to the DB instance\. 
