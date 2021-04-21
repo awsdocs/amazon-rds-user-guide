@@ -252,7 +252,7 @@ END;
 To disable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_drop`\. The `advisor_task_drop` procedure accepts the following parameter\.
 
 **Note**  
-This procedure is available in Oracle Database version 12\.2\.0\.1 and later\.
+This procedure is available in Oracle Database 12c Release 2 \(12\.2\.0\.1\) and later\.
 
 
 ****  
@@ -363,7 +363,7 @@ After HugePages are active on your DB instance, you can view HugePages informati
 
 ## Enabling extended data types<a name="Oracle.Concepts.ExtendedDataTypes"></a>
 
-Amazon RDS Oracle version 12c supports extended data types\. With extended data types, the maximum size is 32,767 bytes for the VARCHAR2, NVARCHAR2, and RAW data types\. To use extended data types, set the `MAX_STRING_SIZE` parameter to `EXTENDED`\. For more information, see [Extended data types](https://docs.oracle.com/database/121/SQLRF/sql_elements001.htm#SQLRF55623) in the Oracle documentation\. 
+Amazon RDS Oracle Database 12c supports extended data types\. With extended data types, the maximum size is 32,767 bytes for the VARCHAR2, NVARCHAR2, and RAW data types\. To use extended data types, set the `MAX_STRING_SIZE` parameter to `EXTENDED`\. For more information, see [Extended data types](https://docs.oracle.com/database/121/SQLRF/sql_elements001.htm#SQLRF55623) in the Oracle documentation\. 
 
 If you don't want to use extended data types, keep the `MAX_STRING_SIZE` parameter set to `STANDARD` \(the default\)\. When this parameter is set to `STANDARD`, the size limits are 4,000 bytes for the VARCHAR2 and NVARCHAR2 data types, and 2,000 bytes for the RAW data type\.
 

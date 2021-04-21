@@ -85,7 +85,7 @@ You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` para
 To cancel a SQL statement in a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.cancel`\.
 
 **Note**  
-This procedure is supported for Oracle version 18\.0\.0\.0 and later\.
+This procedure is supported for Oracle Database 18c \(18\.0\.0\.0\) and later\.
 
 The `cancel` procedure has the following parameters\. 
 
@@ -305,7 +305,7 @@ You can create a custom password verification function in two ways\. If you want
 
 ### The create\_verify\_function procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Standard"></a>
 
-The `create_verify_function` procedure is supported for Oracle version 12\.1\.0\.2\.v5 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure has the following parameters\. 
 
@@ -391,7 +391,7 @@ RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 
 ### The create\_passthrough\_verify\_fcn procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
 
-The `create_passthrough_verify_fcn` procedure is supported for Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn`\. The `create_passthrough_verify_fcn` procedure has the following parameters\. 
 

@@ -203,7 +203,7 @@ Amazon RDS supports the following sqlnet\.ora parameters\. Changes to dynamic sq
 |  `sqlnetora.tcp.connect_timeout`  |  `0` or `10` to `7200`   |  Dynamic  |  Time, in seconds, for a client to establish a TCP connection to the database server\.   | 
 |  `sqlnetora.trace_level_server`  |  `0`, `4`, `10`, `16`, `OFF`, `USER`, `ADMIN`, `SUPPORT`   |  Dynamic  |  For non\-ADR tracing, turns server tracing on at a specified level or turns it off\.   | 
 
-The default value for each supported sqlnet\.ora parameter is the Oracle default for the release\. For information about default values for Oracle 12c, see [Parameters for the sqlnet\.ora file](https://docs.oracle.com/database/121/NETRF/sqlnet.htm#NETRF006) in the 12c Oracle documentation\. 
+The default value for each supported sqlnet\.ora parameter is the Oracle default for the release\. For information about default values for Oracle Database 12c, see [Parameters for the sqlnet\.ora file](https://docs.oracle.com/database/121/NETRF/sqlnet.htm#NETRF006) in the Oracle Database 12c documentation\. 
 
 ### Viewing sqlnet\.ora parameters<a name="USER_ModifyInstance.Oracle.sqlnet.Viewing"></a>
 

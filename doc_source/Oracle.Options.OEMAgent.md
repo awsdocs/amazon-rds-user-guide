@@ -2,7 +2,7 @@
 
 Oracle Enterprise Manager \(OEM\) Management Agent is a software component that monitors targets running on hosts and communicates that information to the middle\-tier Oracle Management Service \(OMS\)\. For more information, see [Overview of Oracle Enterprise Manager cloud control 12c](http://docs.oracle.com/cd/E24628_01/doc.121/e25353/overview.htm) and [Overview of Oracle Enterprise Manager cloud control 13c](http://docs.oracle.com/cd/E63000_01/EMCON/overview.htm#EMCON109) in the Oracle documentation\.
 
-Amazon RDS supports Management Agent through the use of the `OEM_AGENT` option\. Management Agent requires an Amazon RDS DB instance running Oracle Database version 19\.0\.0\.0, 18\.0\.0\.0, 12\.2\.0\.1, or 12\.1\.0\.2\. 
+Amazon RDS supports Management Agent through the use of the `OEM_AGENT` option\. Management Agent requires an Amazon RDS DB instance running Oracle Database 19c \(19\.0\.0\.0\), 18\.0\.0\.0, 12\.2\.0\.1, or 12\.1\.0\.2\. 
 
 Amazon RDS supports Management Agent for the following versions of OEM: 
 + Oracle Enterprise Manager Cloud Control for 13c
@@ -45,7 +45,7 @@ Following are the supported Oracle Database versions for each Management Agent v
 
 ****  
 
-| Management Agent version | Oracle 19c | Oracle 18c | Oracle 12c version 12\.2 | Oracle 12c version 12\.1 | 
+| Management Agent version | Oracle Database 19c | Oracle Database 18c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
 | --- | --- | --- | --- | --- | 
 |  13\.4\.0\.9\.v1  |  Supported  |  Supported  |  Supported  |  Supported  | 
 |  13\.3\.0\.0\.v2  |  Supported  |  Supported  |  Supported  |  Supported  | 
@@ -58,12 +58,12 @@ Following are the supported Oracle Database versions for each Management Agent v
 |  12\.1\.0\.4\.v1  |  Not supported  |  Supported  |  Supported  |  Supported  | 
 
 Following are prerequisites for different database versions:
-+ For an Amazon RDS DB instance running Oracle Database version 19\.0\.0\.0, the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
-+ For an Amazon RDS DB instance running Oracle Database version 18\.0\.0\.0 or higher, meet the following requirements:
++ For an Amazon RDS DB instance running Oracle Database 19c \(19\.0\.0\.0\), the minimum `AGENT_VERSION` is 13\.1\.0\.0\.v1\. 
++ For an Amazon RDS DB instance running Oracle Database 18c \(18\.0\.0\.0\) or higher, meet the following requirements:
   + For OMS 13c2, apply the Enterprise Manager 13\.2 Master Bundle Patch List, which includes plugins 13\.2\.1, 13\.2\.2, 13\.2\.3, 13\.2\.4 \(Oracle Doc ID 2219797\.1\)\.
   + For OMS 13c2, apply the OMS PSU System Patch 28970534\.
   + For OMS 13c2, apply the OMS\-Side Plugin System 13\.2\.2\.0\.190131 Patch 29201709\.
-+ For an Amazon RDS DB instance running Oracle version 12\.2\.0\.1 or lower, meet the following requirements:
++ For an Amazon RDS DB instance running Oracle Database Release 2 \(12\.2\.0\.1\) or lower, meet the following requirements:
   + For OMS 13c Release 2 with Oracle patch 25163555 applied, use OEM Agent 13\.2\.0\.0\.v2 or later\.
 
     Use OMSPatcher to apply the patch\.

@@ -3,10 +3,10 @@
 Amazon RDS supports Oracle Java Virtual Machine \(JVM\) through the use of the `JVM` option\. Oracle Java provides a SQL schema and functions that facilitate Oracle Java features in an Oracle database\. For more information, see [ Introduction to Java in Oracle database](https://docs.oracle.com/database/121/JJDEV/chone.htm) in the Oracle documentation\.
 
 You can use Oracle JVM with the following Oracle Database versions:
-+ Oracle 19c, 19\.0\.0\.0, all versions
-+ Oracle 18c, 18\.0\.0\.0, all versions
-+ Oracle 12c, 12\.2\.0\.1, all versions
-+ Oracle 12c, 12\.1\.0\.2\.v13 or later
++ Oracle Database 19c \(19\.0\.0\.0\), all versions
++ Oracle Database 18c \(18\.0\.0\.0\), all versions
++ Oracle Database 12c Release 2 \(12\.2\), all versions
++ Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 
 Java implementation in Amazon RDS has a limited set of permissions\. The master user is granted the `RDS_JAVA_ADMIN` role, which grants a subset of the privileges granted by the `JAVA_ADMIN` role\. To list the privileges granted to the `RDS_JAVA_ADMIN` role, run the following query on your DB instance:
 

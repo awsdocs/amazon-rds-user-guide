@@ -10,7 +10,7 @@ You need to perform some setup before you can use the PostGIS extension\. The fo
 + [Step 3: Transfer ownership of the extensions to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership)
 + [Step 4: Transfer ownership of the objects to the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferObjects)
 + [Step 5: Test the extensions](#Appendix.PostgreSQL.CommonDBATasks.PostGIS.Test)
-+ [PostGIS extension components](#CHAP_PostgreSQL.Extensions.PostGIS)
++ [PostGIS extension versions](#CHAP_PostgreSQL.Extensions.PostGIS)
 
 ## Step 1: Connect to the DB instance using the user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
@@ -114,31 +114,29 @@ SELECT topology.createtopology('my_new_topo',26986,0.5);
 (1 row)
 ```
 
-## PostGIS extension component versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
+## PostGIS extension versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
 
-The following table shows the PostGIS component versions that ship with the RDS for PostgreSQL versions\.
+The following table shows the PostGIS versions that ship with the RDS for PostgreSQL versions\.
 
 
-| PostgreSQL | PostGIS | GEOS | GDAL | PROJ | 
-| --- | --- | --- | --- | --- | 
-| 11\.1 | 2\.5\.1 r17027 | 3\.7\.0\-CAPI\-1\.11\.0 673b9939 | 2\.3\.1, released 2018/06/22 | Rel\. 5\.2\.0, September 15th, 2018 | 
-| 10\.6 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
-| 10\.5  | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016  | 
-| 10\.4 | 2\.4\.4 r16526 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 10\.3 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 10\.1 | 2\.4\.2 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01  | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.11 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.10 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.9 | 2\.3\.7 r16523 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.4, released 2017/06/23 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.8 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.6 | 2\.3\.4 r16009 | 3\.6\.2\-CAPI\-1\.10\.2 4d2925d6 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.3 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.2 | 2\.3\.2 r15302 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.1\.3, released 2017/20/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.6\.1 | 2\.3\.0 r15146 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.1\.1, released 2016/07/07 | Rel\. 4\.9\.2, September 8th, 2016 | 
-| 9\.5\.7 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.5\.6 | 2\.2\.5 r15298 | 3\.5\.1\-CAPI\-1\.9\.1 r4246 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.3, September 15th, 2016 | 
-| 9\.5\.4 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.3, released 2016/07/01 | Rel\. 4\.9\.2, September 8th, 2015 | 
-| 9\.5\.2 | 2\.2\.2 r14797 | 3\.5\.0\-CAPI\-1\.9\.0 r4084 | 2\.0\.2, released 2016/01/26 | Rel\. 4\.9\.2, September 8th, 2015 | 
+| PostgreSQL version | PostGIS version | 
+| --- | --- | 
+| 13\.2, 13\.1 | 3\.0\.2 | 
+| 12\.6 | 3\.0\.2 | 
+| 12\.5, 12\.4, 12\.3, 12\.2 | 3\.0\.0 | 
+| 11\.11, 11\.10, 11\.9, 11\.8, 11\.7, 11\.6, 11\.5 | 2\.5\.2 | 
+| 11\.4, 11\.2, 11\.1 | 2\.5\.1 | 
+| 10\.16, 10\.15, 10\.14, 10\.13, 10\.12, 10\.11, 10\.10 | 2\.5\.2 | 
+| 10\.9, 10\.7, 10\.6\. 10\.5, 10\.4 | 2\.4\.4 | 
+| 10\.3, 10\.1 | 2\.4\.2 | 
+| 9\.6\.21, 9\.6\.20, 9\.6\.19, 9\.6\.18, 9\.6\.17, 9\.6\.16, 9\.6\.15 | 2\.5\.2 | 
+| 9\.6\.14, 9\.6\.12, 9\.6\.11, 9\.6\.10, 9\.6\.9 | 2\.3\.7 | 
+| 9\.6\.8, 9\.6\.6 | 2\.3\.4 | 
+| 9\.6\.5, 9\.6\.3, 9\.6\.2 | 2\.3\.2 | 
+| 9\.6\.1 | 2\.3\.0 | 
+| 9\.5\.25, 9\.5\.24, 9\.5\.23, 9\.5\.22, 9\.5\.21, 9\.5\.20, 9\.5\.19 | 2\.5\.2 | 
+| 9\.5\.18, 9\.5\.16, 9\.5\.15, 9\.5\.14, 9\.5\.13, 9\.5\.12, 9\.5\.10, 9\.5\.9, 9\.5\.7, 9\.5\.6 | 2\.2\.5 | 
+| 9\.5\.4, 9\.5\.2 | 2\.2\.2 | 
 
 **Note**  
 PostgreSQL 10\.5 added support for the `libprotobuf` extension version 1\.3\.0 to the PostGIS component\. 

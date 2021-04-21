@@ -52,7 +52,7 @@ Scenario 5: An Oracle database on an Amazon RDS DB instance connected to an Amaz
 **Note**  
 Any issues that affect running GoldenGate on an on\-premises environment also affect running GoldenGate on AWS\. We strongly recommend that you monitor the GoldenGate hub to ensure that `EXTRACT` and `REPLICAT` are resumed if a failover occurs\. Because the GoldenGate hub is run on an Amazon EC2 instance, Amazon RDS does not manage the GoldenGate hub and cannot ensure that it is running\.
 
-You can use GoldenGate using Amazon RDS to upgrade to major versions of Oracle\. For example, you can use GoldenGate with Amazon RDS to upgrade from an Oracle version 8 on\-premises database to an Oracle database running version 19c on an Amazon RDS DB instance\.
+You can use GoldenGate using Amazon RDS to upgrade to major versions of Oracle\. For example, you can use GoldenGate with Amazon RDS to upgrade from an Oracle version 8 on\-premises database to Oracle Database 19c on an Amazon RDS DB instance\.
 
 To set up GoldenGate using Amazon RDS, you configure the hub on the Amazon EC2 instance, and then configure the source and target databases\. The following steps show how to set up GoldenGate for use with Amazon RDS\. Each step is explained in detail in the following sections: 
 + [Setting up a GoldenGate hub on Amazon EC2](#Appendix.OracleGoldenGate.Hub)
@@ -108,7 +108,7 @@ Once you have completed these steps, the GoldenGate hub is ready for use\. Next,
 
 ## Setting up a source database for use with GoldenGate on Amazon RDS<a name="Appendix.OracleGoldenGate.Source"></a>
 
- When your source Oracle database is running version 12c or later, complete the following tasks to set up a source database for use with GoldenGate: 
+ When your source database is running Oracle Database 12c or later, complete the following tasks to set up a source database for use with GoldenGate: 
 
 1. Set the `ENABLE_GOLDENGATE_REPLICATION` parameter to *True*\. This parameter turns on supplemental logging for the source database\. If your source database is on an Amazon RDS DB instance, make sure that you have a parameter group assigned to the DB instance with the `ENABLE_GOLDENGATE_REPLICATION` parameter set to *true*\. For more information about the `ENABLE_GOLDENGATE_REPLICATION` parameter, see the [Oracle documentation](http://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams086.htm#REFRN10346)\.
 
@@ -179,7 +179,7 @@ GRANT ALTER ANY TABLE TO oggadm1;
 ```
 
 Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `dbms_goldengate_auth` or `rdsadmin_dbms_goldengate_auth`, depends on the Oracle DB engine version\.
-+ For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
++ For Oracle DB versions that are *earlier than* Oracle Database 12c Release 2 \(12\.2\), run the following PL/SQL program\.
 
   ```
   exec dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
@@ -187,7 +187,7 @@ Finally, grant the privileges needed by a user account to be a GoldenGate admini
      grant_select_privileges=>true, 
      do_grants=>TRUE);
   ```
-+ For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
++ For Oracle DB versions that are *later than or equal to* Oracle Database 12c Release 2 \(12\.2\), which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
 
   ```
   exec rdsadmin.rdsadmin_dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
@@ -266,7 +266,7 @@ GRANT DELETE ANY TABLE      TO oggadm1;
 ```
 
 Finally, grant the privileges needed by a user account to be a GoldenGate administrator\. The package that you use to perform the grant, `dbms_goldengate_auth` or `rdsadmin_dbms_goldengate_auth`, depends on the Oracle DB engine version\.
-+ For Oracle DB versions that are *earlier than* Oracle 12\.2, run the following PL/SQL program\.
++ For Oracle DB versions that are *earlier than* Oracle Database 12c Release 2 \(12\.2\), run the following PL/SQL program\.
 
   ```
   exec dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',
@@ -274,7 +274,7 @@ Finally, grant the privileges needed by a user account to be a GoldenGate admini
      grant_select_privileges=>true, 
      do_grants=>TRUE);
   ```
-+ For Oracle DB versions that are *later than or equal to* Oracle 12\.2, which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
++ For Oracle DB versions that are *later than or equal to* Oracle Database 12c Release 2 \(12\.2\), which requires patch level 12\.2\.0\.1\.ru\-2019\-04\.rur\-2019\-04\.r1 or later, run the following PL/SQL program\.
 
   ```
   exec rdsadmin.rdsadmin_dbms_goldengate_auth.grant_admin_privilege (grantee=>'OGGADM1',

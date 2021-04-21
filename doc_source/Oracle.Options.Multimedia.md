@@ -6,12 +6,12 @@ Amazon RDS supports Oracle Multimedia through the use of the `MULTIMEDIA` option
 If you use Oracle Multimedia, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Multimedia for the following editions and versions of Oracle: 
-+ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 18\.0\.0\.0, all versions
-+ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.2\.0\.1, all versions
-+ Oracle Standard Edition \(SE2\) or Oracle Enterprise Edition, version 12\.1\.0\.2\.v13 or later
++ Standard Edition \(SE2\) or Enterprise Edition of Oracle Database 18c \(18\.0\.0\.0\), all versions
++ Standard Edition \(SE2\) or Enterprise Edition of Oracle Database 12c Release 2 \(12\.2\), all versions
++ Standard Edition \(SE2\) or Enterprise Edition of Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 
 **Note**  
-Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multimedia isn't supported for Oracle 19c DB instances\. For more information, see [Desupport of Oracle Multimedia](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/behavior-changes-deprecated-desupport-oracle-database.html#GUID-BABC1C60-EA07-4EBE-8C67-B69B59E4F742) in the Oracle documentation\.
+Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multimedia isn't supported for Oracle Database 19c DB instances\. For more information, see [Desupport of Oracle Multimedia](https://docs.oracle.com/en/database/oracle/oracle-database/19/upgrd/behavior-changes-deprecated-desupport-oracle-database.html#GUID-BABC1C60-EA07-4EBE-8C67-B69B59E4F742) in the Oracle documentation\.
 
 ## Prerequisites for Oracle Multimedia<a name="Oracle.Options.Multimedia.PreReqs"></a>
 

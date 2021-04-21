@@ -1,14 +1,14 @@
 # Oracle on Amazon RDS<a name="CHAP_Oracle"></a>
 
 Amazon RDS supports DB instances that run the following versions and editions of Oracle Database: 
-+ Oracle 19c, Version 19\.0\.0\.0
-+ Oracle 18c, Version 18\.0\.0\.0
-+ Oracle 12c, Version 12\.2\.0\.1
-+ Oracle 12c, Version 12\.1\.0\.2
++ Oracle Database 19c \(19\.0\.0\.0\)
++ Oracle Database 18c \(18\.0\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ Oracle Database 12c Release 1 \(12\.1\.0\.2\)
 
 **Note**  
-Oracle 18c, Version 18\.0\.0\.0 is on a deprecation path\. Oracle Corporation will no longer provide patches for 18c after the end\-of\-support date\. For more information, see [Preparing for the automatic upgrade of Oracle 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.  
-RDS for Oracle 11g is no longer supported\.
+Oracle Database 18c \(18\.0\.0\.0\) is on a deprecation path\. Oracle Corporation will no longer provide patches for Oracle Database 18c after the end\-of\-support date\. For more information, see [Preparing for the automatic upgrade of Oracle Database 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.  
+RDS for Oracle Database 11g is no longer supported\.
 
 You can create DB instances and DB snapshots, point\-in\-time restores, and automated or manual backups\. You can use DB instances running Oracle inside a VPC\. You can also add features to your Oracle DB instance by enabling various options\. Amazon RDS supports Multi\-AZ deployments for Oracle as a high\-availability, failover solution\. 
 
@@ -23,21 +23,21 @@ Before creating a DB instance, complete the steps in the [Setting up for Amazon 
 Amazon RDS for Oracle supports the following major database releases\.
 
 **Topics**
-+ [Oracle 19c with Amazon RDS](#Oracle.Concepts.FeatureSupport.19c)
-+ [Oracle 18c on Amazon RDS](#Oracle.Concepts.FeatureSupport.18c)
-+ [Oracle 12c with Amazon RDS](#Oracle.Concepts.FeatureSupport.12c)
++ [Oracle Database 19c with Amazon RDS](#Oracle.Concepts.FeatureSupport.19c)
++ [Oracle Database 18c on Amazon RDS](#Oracle.Concepts.FeatureSupport.18c)
++ [Oracle Database 12c with Amazon RDS](#Oracle.Concepts.FeatureSupport.12c)
 
-### Oracle 19c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.19c"></a>
+### Oracle Database 19c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.19c"></a>
 
-Amazon RDS supports Oracle version 19c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
+Amazon RDS supports Oracle Database 19c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\.
 
-Oracle 19c version 19\.0\.0\.0 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. For a complete list of the changes, see the [Oracle database 19c](https://docs.oracle.com/en/database/oracle/oracle-database/19/index.html) documentation\. For a complete list of features supported by each Oracle 19c edition, see [ Permitted features, options, and management packs by Oracle database offering](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+Oracle Database 19c \(19\.0\.0\.0\) includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle Database 19c \(19\.0\.0\.0\) on Amazon RDS\. For a complete list of the changes, see the [Oracle database 19c](https://docs.oracle.com/en/database/oracle/oracle-database/19/index.html) documentation\. For a complete list of features supported by each Oracle Database 19c edition, see [ Permitted features, options, and management packs by Oracle database offering](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
 
-#### Amazon RDS parameter changes for Oracle 19c version 19\.0\.0\.0<a name="Oracle.Concepts.FeatureSupport.19c.Parameters"></a>
+#### Amazon RDS parameter changes for Oracle Database 19c \(19\.0\.0\.0\)<a name="Oracle.Concepts.FeatureSupport.19c.Parameters"></a>
 
-Oracle 19c version 19\.0\.0\.0 includes several new parameters and parameters with new ranges and new default values\.
+Oracle Database 19c \(19\.0\.0\.0\) includes several new parameters and parameters with new ranges and new default values\.
 
-The following table shows the new Amazon RDS parameters for Oracle 19c version 19\.0\.0\.0\.
+The following table shows the new Amazon RDS parameters for Oracle Database 19c \(19\.0\.0\.0\)\.
 
 
 ****  
@@ -47,52 +47,52 @@ The following table shows the new Amazon RDS parameters for Oracle 19c version 1
 |   [ lob\_signature\_enable](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/lob_signature_enable.html#GUID-62997AB5-1084-4C9A-8258-8CB695C7A1D6)   |  TRUE, FALSE \(default\)  |  Y  |  Enables or disables the LOB locator signature feature\.  | 
 |   [ max\_datapump\_parallel\_per\_job](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/MAX_DATAPUMP_PARALLEL_PER_JOB.html#GUID-33B1F962-B8C3-4DCE-BE68-66FC5D34ECA3)   |  1 to 1024, or AUTO  |  Y  |  Specifies the maximum number of parallel processes allowed for each Oracle Data Pump job\.  | 
 
-The `compatible` parameter has a new maximum value for Oracle 19c version 19\.0\.0\.0 on Amazon RDS\. The following table shows the new default value\. 
+The `compatible` parameter has a new maximum value for Oracle Database 19c \(19\.0\.0\.0\) on Amazon RDS\. The following table shows the new default value\. 
 
 
 ****  
 
-|  Parameter name  |  Oracle 19c version 19\.0\.0\.0 maximum value  |  Oracle 18c version 18\.0\.0\.0 maximum value  | 
+|  Parameter name  |  Oracle Database 19c \(19\.0\.0\.0\) maximum value  |  Oracle Database 18c \(18\.0\.0\.0\) maximum value  | 
 | --- | --- | --- | 
 |  [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9)  |  19\.0\.0  |  18\.0\.0  | 
 
-The following parameters were removed in Oracle 19c Version 19\.0\.0\.0:
+The following parameters were removed in Oracle Database 19c \(19\.0\.0\.0\):
 + exafusion\_enabled
 + max\_connections
 + o7\_dictionary\_access
 
-### Oracle 18c on Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
+### Oracle Database 18c on Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
 
-Oracle Corporation intends to deprecate support for Oracle Database version 18\.0\.0\.0 on July 1, 2021\. On this date, Amazon RDS plans to do the following:
-+ Deprecate support for Oracle version 18c for both BYOL and LI
-+ Begin upgrading all 18c DB instances automatically
+Oracle Corporation intends to deprecate support for Oracle Database 18c \(18\.0\.0\.0\) on July 1, 2021\. On this date, Amazon RDS plans to do the following:
++ Deprecate support for Oracle Database 18c for both BYOL and LI
++ Begin upgrading all Oracle Database 18c instances automatically
 
-The following schedule includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.
+The following schedule includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle Database 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.
 
 
-| Action or recommendation | Oracle Database version 18c | 
+| Action or recommendation | Oracle Database 18c | 
 | --- | --- | 
-|  We recommend that you upgrade Oracle 18c DB instances manually to Oracle 19c and validate your applications\.   |  Now–June 30, 2021  | 
-|  We recommend that you upgrade Oracle 18c snapshots manually to Oracle 19c\.  |  May 1, 2021  | 
-|  You can no longer create new Oracle 18c instances with Amazon RDS\. You can continue to restore 18c DB snapshots without being automatically upgraded until June 30, 2021\.  |  May 1, 2021  | 
-|  Amazon RDS for Oracle plans to start automatic upgrades of your Oracle 18c instances to version 19c\.  |  July 1, 2021  | 
-|  Amazon RDS for Oracle plans to start automatic upgrades to version 19c for any Oracle 18c DB instances restored from snapshots\.  |  July 1, 2021  | 
+|  We recommend that you upgrade Oracle Database 18c DB instances manually to Oracle Database 19c and validate your applications\.   |  Now–June 30, 2021  | 
+|  We recommend that you upgrade Oracle Database 18c snapshots manually to Oracle Database 19c\.  |  May 1, 2021  | 
+|  You can no longer create new Oracle Database 18c instances with Amazon RDS\. You can continue to restore 18c DB snapshots without being automatically upgraded until June 30, 2021\.  |  May 1, 2021  | 
+|  Amazon RDS plans to start automatic upgrades of your Oracle Database 18c instances to Oracle Database 19c\.  |  July 1, 2021  | 
+|  Amazon RDS plans to start automatic upgrades to Oracle Database 19c for any Oracle Database 18c DB instances restored from snapshots\.  |  July 1, 2021  | 
 
-### Oracle 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
+### Oracle Database 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
 
-Amazon RDS supports Oracle version 12c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\. Oracle version 12c includes two major versions:
-+ [Oracle 12c version 12\.2\.0\.1 with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV2Overview)
-+ [Oracle 12c version 12\.1\.0\.2 with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV1Overview)
+Amazon RDS supports Oracle Database 12c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\. Oracle Database 12c includes two major versions:
++ [Oracle Database 12c Release 2 \(12\.2\.0\.1\) with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV2Overview)
++ [Oracle Database 12c Release 1 \(12\.1\.0\.2\) with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV1Overview)
 
-#### Oracle 12c version 12\.2\.0\.1 with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV2Overview"></a>
+#### Oracle Database 12c Release 2 \(12\.2\.0\.1\) with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV2Overview"></a>
 
-Oracle 12c version 12\.2\.0\.1 includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. For a complete list of the changes, see the [Oracle 12c version 12\.2 documentation](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/index.html)\. For a complete list of features supported by each Oracle 12c edition, see [ Permitted features, options, and management packs by Oracle database offering](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
+Oracle Database 12c Release 2 \(12\.2\.0\.1\) includes many new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle Database 12c Release 2 \(12\.2\.0\.1\) on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 12c Release 2 \(12\.2\) documentation](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/index.html)\. For a complete list of features supported by each Oracle Database 12c edition, see [ Permitted features, options, and management packs by Oracle database offering](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dblic/Licensing-Information.html#GUID-0F9EB85D-4610-4EDF-89C2-4916A0E7AC87) in the Oracle documentation\. 
 
-##### Amazon RDS parameter changes for Oracle 12c version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Parameters"></a>
+##### Amazon RDS parameter changes for Oracle Database 12c Release 2 \(12\.2\.0\.1\)<a name="Oracle.Concepts.FeatureSupport.12cV2.Parameters"></a>
 
-Oracle 12c version 12\.2\.0\.1 includes 20 new parameters in addition to several parameters with new ranges and new default values\.
+Oracle Database 12c Release 2 \(12\.2\.0\.1\) includes 20 new parameters in addition to several parameters with new ranges and new default values\.
 
-The following table shows the new Amazon RDS parameters for Oracle 12c version 12\.2\.0\.1\.
+The following table shows the new Amazon RDS parameters for Oracle Database 12c Release 2 \(12\.2\.0\.1\)\.
 
 
 ****  
@@ -120,25 +120,25 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |   [ standby\_db\_preserve\_states](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/STANDBY_DB_PRESERVE_STATES.html#GUID-8D332556-30B7-4C45-8557-50988DC2219E)   |  NONE \(default\), SESSION, ALL  |  N  |  Controls whether user sessions and other internal states of the instance are retained when a readable physical standby database is converted to a primary database\.   | 
 |   [ uniform\_log\_timestamp\_format](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/UNIFORM_LOG_TIMESTAMP_FORMAT.html#GUID-041BC204-EA0E-4260-9726-D25C2C86A2F5)   |  TRUE \(default\), FALSE  |  Y  |  Specifies that a uniform timestamp format be used in Oracle Database trace \(\.trc\) files and log files \(such as the alert log\)\.  | 
 
-The `compatible` parameter has a new default value for Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. The following table shows the new default value\. 
+The `compatible` parameter has a new default value for Oracle Database 12c Release 2 \(12\.2\.0\.1\) on Amazon RDS\. The following table shows the new default value\. 
 
 
 ****  
 
-|  Parameter name  |  Oracle 12c version 12\.2\.0\.1 default value  |  Oracle 12c version 12\.1\.0\.2 default value  | 
+|  Parameter name  |  Oracle Database 12c Release 2 \(12\.2\.0\.1\) default value  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\) default value  | 
 | --- | --- | --- | 
 |  [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9)  |  12\.2\.0  |  12\.0\.0  | 
 
-The `optimizer_features_enable` parameter has a new value range for Oracle 12c version 12\.2\.0\.1 on Amazon RDS\. For the old and new value ranges, see the following table\.
+The `optimizer_features_enable` parameter has a new value range for Oracle Database 12c Release 2 \(12\.2\.0\.1\) on Amazon RDS\. For the old and new value ranges, see the following table\.
 
 
 ****  
 
-|  Parameter name  |  12c version 12\.2\.0\.1 range  |  12c version 12\.1\.0\.2 range  | 
+|  Parameter name  |  Oracle Database 12c Release 2 \(12\.2\.0\.1\) range  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\) range  | 
 | --- | --- | --- | 
 |   [optimizer\_features\_enable](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/refrn/OPTIMIZER_FEATURES_ENABLE.html#GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C)   |   8\.0\.0 to 12\.2\.0\.1   |   8\.0\.0 to 12\.1\.0\.2   | 
 
-The following parameters were removed in Oracle 12c Version 12\.2\.0\.1:
+The following parameters were removed in Oracle Database 12c Release 2 \(12\.2\.0\.1\):
 + global\_context\_pool\_size
 + max\_enabled\_roles
 + optimizer\_adaptive\_features
@@ -146,24 +146,24 @@ The following parameters were removed in Oracle 12c Version 12\.2\.0\.1:
 + parallel\_degree\_level
 + use\_indirect\_data\_buffers
 
-The following parameter is not supported in Oracle 12c Version 12\.2\.0\.1 and later:
+The following parameter is not supported in Oracle Database 12c Release 2 \(12\.2\.0\.1\) and later:
 + sec\_case\_sensitive\_logon
 
-##### Amazon RDS security changes for Oracle 12c version 12\.2\.0\.1<a name="Oracle.Concepts.FeatureSupport.12cV2.Security"></a>
+##### Amazon RDS security changes for Oracle Database 12c Release 2 \(12\.2\.0\.1\)<a name="Oracle.Concepts.FeatureSupport.12cV2.Security"></a>
 
-In Oracle 12c version 12\.2\.0\.1, direct grant of the privilege `ADMINISTER DATABASE TRIGGER` is required for the owners of database\-level triggers\. During a major version upgrade to Oracle 12c version 12\.2\.0\.1, Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
+In Oracle Database 12c Release 2 \(12\.2\.0\.1\), direct grant of the privilege `ADMINISTER DATABASE TRIGGER` is required for the owners of database\-level triggers\. During a major version upgrade to Oracle Database 12c Release 2 \(12\.2\.0\.1\), Amazon RDS grants this privilege to any user that owns a trigger so that the trigger owner has the required privileges\. For more information, see the My Oracle Support document [2275535\.1](https://support.oracle.com/epmos/faces/DocContentDisplay?id=2275535.1)\.
 
-#### Oracle 12c version 12\.1\.0\.2 with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV1Overview"></a>
+#### Oracle Database 12c Release 1 \(12\.1\.0\.2\) with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12cV1Overview"></a>
 
-Oracle 12c version 12\.1\.0\.2 brings over 500 new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle 12c version 12\.1\.0\.2 on Amazon RDS\. For a complete list of the changes, see the [Oracle 12c version 12\.1 documentation](http://docs.oracle.com/database/121/index.htm)\. For a complete list of features supported by each Oracle 12c edition, see [Permitted features, options, and management packs by Oracle database edition](https://docs.oracle.com/database/121/DBLIC/editions.htm#DBLIC116) in the Oracle documentation\. 
+Oracle Database 12c Release 1 \(12\.1\.0\.2\) brings over 500 new features and updates from the previous version\. In this section, you can find the features and changes important to using Oracle Database 12c Release 1 \(12\.1\.0\.2\) on Amazon RDS\. For a complete list of the changes, see the [Oracle Database 12c Release 1 \(12\.1\) documentation](http://docs.oracle.com/database/121/index.htm)\. For a complete list of features supported by each Oracle Database 12c edition, see [Permitted features, options, and management packs by Oracle database edition](https://docs.oracle.com/database/121/DBLIC/editions.htm#DBLIC116) in the Oracle documentation\. 
 
-Oracle 12c version 12\.1\.0\.2 includes 16 new parameters that impact your Amazon RDS DB instance, and also 18 new system privileges, several no longer supported packages, and several new option group settings\. For more information on these changes, see the following sections\. 
+Oracle Database 12c Release 1 \(12\.1\.0\.2\) includes 16 new parameters that impact your Amazon RDS DB instance, and also 18 new system privileges, several no longer supported packages, and several new option group settings\. For more information on these changes, see the following sections\. 
 
-##### Amazon RDS parameter changes for Oracle 12c version 12\.1\.0\.2<a name="Oracle.Concepts.FeatureSupport.12c.Parameters"></a>
+##### Amazon RDS parameter changes for Oracle Database 12c Release 1 \(12\.1\.0\.2\)<a name="Oracle.Concepts.FeatureSupport.12c.Parameters"></a>
 
-Oracle 12c version 12\.1\.0\.2 includes 16 new parameters in addition to several parameters with new ranges and new default values\.
+Oracle Database 12c Release 1 \(12\.1\.0\.2\) includes 16 new parameters in addition to several parameters with new ranges and new default values\.
 
-The following table shows the new Amazon RDS parameters for Oracle 12c version 12\.1\.0\.2\.
+The following table shows the new Amazon RDS parameters for Oracle Database 12c Release 1 \(12\.1\.0\.2\)\.
 
 
 ****  
@@ -194,12 +194,12 @@ The following table shows the new Amazon RDS parameters for Oracle 12c version 1
 |   [unified\_audit\_sga\_queue\_size](http://docs.oracle.com/database/121/REFRN/GUID-060707DF-8431-4866-8B9F-4F450472D95E.htm#REFRN10343)   |  1 MB \- 30 MB  |  Y  |  Specifies the size of the system global area \(SGA\) queue for unified auditing\.   | 
 |   [use\_dedicated\_broker](http://docs.oracle.com/database/121/REFRN/GUID-643239D0-FABF-43C0-9791-BED46CB8FE07.htm#REFRN10341)   |   TRUE, FALSE   |  N  |  Determines how dedicated servers are spawned\.   | 
 
-Several parameters have new value ranges for Oracle 12c version 12\.1\.0\.2 on Amazon RDS\. For the old and new value ranges, see the following table\.
+Several parameters have new value ranges for Oracle Database 12c Release 1 \(12\.1\.0\.2\) on Amazon RDS\. For the old and new value ranges, see the following table\.
 
 
 ****  
 
-|  Parameter name  |  12c version 12\.1\.0\.2 range  | 
+|  Parameter name  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\) range  | 
 | --- | --- | 
 |   [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)   |   os \| db \[, extended\] \| xml \[, extended\]   | 
 |   [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)   |  If you upgrade to 12\.2\.0\.1, 18c, or 19c, `COMPATIBLE` must be 11\.2\.0 or higher\. We recommend that you use the default settings for `COMPATIBLE` for your version of Oracle Database unless you have a reason to change it\. If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to 12\.0\.0\.  | 
@@ -209,18 +209,18 @@ Several parameters have new value ranges for Oracle 12c version 12\.1\.0\.2 on A
 |   [parallel\_degree\_policy](http://docs.oracle.com/database/121/REFRN/GUID-BF09265F-8545-40D4-BD29-E58D5F02B0E5.htm#REFRN10310)   |   MANUAL,LIMITED,AUTO,ADAPTIVE   | 
 |   [parallel\_min\_server](http://docs.oracle.com/database/121/REFRN/GUID-1D7EC131-7B5B-40E5-A0F8-ABC7B4C5B0E8.htm#REFRN10160)   |   0 to parallel\_max\_servers   | 
 
-One parameter has a new default value for Oracle 12c on Amazon RDS\. The following table shows the new default value\.
+One parameter has a new default value for Oracle Database 12c on Amazon RDS\. The following table shows the new default value\.
 
 
 ****  
 
-|  Parameter name  |  Oracle 12c default value  | 
+|  Parameter name  |  Oracle Database 12c default value  | 
 | --- | --- | 
 |   job\_queue\_processes   |   50   | 
 
-##### Amazon RDS system privileges for Oracle 12c version 12\.1\.0\.2<a name="Oracle.Concepts.FeatureSupport.12c.Privileges"></a>
+##### Amazon RDS system privileges for Oracle Database 12c Release 1 \(12\.1\.0\.2\)<a name="Oracle.Concepts.FeatureSupport.12c.Privileges"></a>
 
-Several new system privileges have been granted to the system account for Oracle 12c version 12\.1\.0\.2\. These new system privileges include the following:
+Several new system privileges have been granted to the system account for Oracle Database 12c Release 1 \(12\.1\.0\.2\)\. These new system privileges include the following:
 + ALTER ANY CUBE BUILD PROCESS
 + ALTER ANY MEASURE FOLDER
 + ALTER ANY SQL TRANSLATION PROFILE
@@ -237,15 +237,15 @@ Several new system privileges have been granted to the system account for Oracle
 + SELECT ANY MEASURE FOLDER
 + USE ANY SQL TRANSLATION PROFILE
 
-##### Amazon RDS options for Oracle 12c version 12\.1\.0\.2<a name="Oracle.Concepts.FeatureSupport.12c.Options"></a>
+##### Amazon RDS options for Oracle Database 12c Release 1 \(12\.1\.0\.2\)<a name="Oracle.Concepts.FeatureSupport.12c.Options"></a>
 
-Several Oracle options changed between Oracle 11g and Oracle 12c version 12\.1\.0\.2, though most of the options remain the same between the two versions\. The Oracle 12c version 12\.1\.0\.2 changes include the following: 
+Several Oracle options changed between Oracle Database 11g and Oracle Database 12c Release 1 \(12\.1\.0\.2\), though most of the options remain the same between the two versions\. The Oracle Database 12c Release 1 \(12\.1\.0\.2\) changes include the following: 
 + Oracle Enterprise Manager Database Express 12c replaced Oracle Enterprise Manager 11g Database Control\. For more information, see [Oracle Enterprise Manager Database Express](Appendix.Oracle.Options.OEM_DBControl.md)\. 
-+ The option XMLDB is installed by default in Oracle 12c version 12\.1\.0\.2\. You no longer need to install this option yourself\. 
++ The option XMLDB is installed by default in Oracle Database 12c Release 1 \(12\.1\.0\.2\)\. You no longer need to install this option yourself\. 
 
-##### Amazon RDS PL/SQL packages for Oracle 12c version 12\.1\.0\.2<a name="Oracle.Concepts.FeatureSupport.12c.Packages"></a>
+##### Amazon RDS PL/SQL packages for Oracle Database 12c Release 1 \(12\.1\.0\.2\)<a name="Oracle.Concepts.FeatureSupport.12c.Packages"></a>
 
-Oracle 12c version 12\.1\.0\.2 includes a number of new built\-in PL/SQL packages\. The packages included with Amazon RDS for Oracle 12c version 12\.1\.0\.2 include the following\. 
+Oracle Database 12c Release 1 \(12\.1\.0\.2\) includes a number of new built\-in PL/SQL packages\. The packages included with Amazon RDS for Oracle Database 12c Release 1 \(12\.1\.0\.2\) include the following\. 
 
 
 ****  
@@ -278,9 +278,9 @@ Oracle 12c version 12\.1\.0\.2 includes a number of new built\-in PL/SQL package
 |   [DBMS\_XSTREAM\_AUTH](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/d_xstrm_auth.htm)   |  The DBMS\_XSTREAM\_AUTH package provides subprograms for granting privileges to and revoking privileges from XStream administrators\.   | 
 |   [UTL\_CALL\_STACK](http://docs.oracle.com/cd/E16655_01/appdev.121/e17602/u_call_stack.htm)   |  The UTL\_CALL\_STACK package provides an interface to provide information about currently executing subprograms\.   | 
 
-##### Oracle 12c version 12\.1\.0\.2 packages not supported<a name="Oracle.Concepts.FeatureSupport.12c.NotSupported"></a>
+##### Oracle Database 12c Release 1 \(12\.1\.0\.2\) packages not supported<a name="Oracle.Concepts.FeatureSupport.12c.NotSupported"></a>
 
-Several Oracle 11g PL/SQL packages are not supported in Oracle 12c version 12\.1\.0\.2\. These packages include the following:
+Several Oracle Database 11g PL/SQL packages are not supported in Oracle Database 12c Release 1 \(12\.1\.0\.2\)\. These packages include the following:
 + DBMS\_AUTO\_TASK\_IMMEDIATE
 + DBMS\_CDC\_PUBLISH
 + DBMS\_CDC\_SUBSCRIBE
@@ -399,7 +399,7 @@ The following are the DB instance classes supported for Oracle\.
 
 ****  
 
-| Oracle edition | 19c, 18c, and 12c version 12\.2\.0\.1 support | 12c version 12\.1\.0\.2 support | 
+| Oracle edition | Oracle Database 19c, Oracle Database 18c, and Oracle Database 12c Release 2 \(12\.2\.0\.1\) support | Oracle Database 12c Release 1 \(12\.1\.0\.2\) support | 
 | --- | --- | --- | 
 |  Enterprise Edition \(EE\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r5b\.large–db\.r5b\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.24xlarge db\.m4\.large–db\.m4\.16xlarge db\.z1d\.large–db\.z1d\.12xlarge db\.x1e\.xlarge–db\.x1e\.32xlarge db\.x1\.16xlarge–db\.x1\.32xlarge db\.r5\.large–db\.r5\.24xlarge db\.r5b\.large–db\.r5b\.24xlarge db\.r4\.large–db\.r4\.16xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
 |  Standard Edition 2 \(SE2\) Bring Your Own License \(BYOL\)  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.small–db\.t3\.2xlarge  |  db\.m5\.large–db\.m5\.4xlarge db\.m4\.large–db\.m4\.4xlarge db\.z1d\.large–db\.z1d\.3xlarge db\.r5\.large–db\.r5\.4xlarge db\.r5b\.large–db\.r5b\.4xlarge db\.r4\.large–db\.r4\.4xlarge db\.t3\.micro–db\.t3\.2xlarge  | 
@@ -458,8 +458,8 @@ Amazon RDS Oracle supports the following Oracle Database features:
 
   For more information, see [ Database Change Notification](https://docs.oracle.com/cd/E11882_01/java.112/e16548/dbchgnf.htm#JJDBC28815) in the Oracle documentation\.
 **Note**  
-This feature changes to Continuous Query Notification in version 12\.1 and later\.
-+ Database In\-Memory \(version 12\.1 and later\)
+This feature changes to Continuous Query Notification in Oracle Database 12c Release 1 \(12\.1\) and later\.
++ Database In\-Memory \(Oracle Database 12c and later\)
 + Distributed Queries and Transactions
 + Edition\-Based Redefinition
 
@@ -475,7 +475,7 @@ This feature changes to Continuous Query Notification in version 12\.1 and later
 + Java Virtual Machine \(JVM\)
 
   For more information, see [Oracle Java virtual machine](oracle-options-java.md)\.
-+ Label Security \(version 12\.1 and later\)
++ Label Security \(Oracle Database 12c and later\)
 
   For more information, see [Oracle Label Security](Oracle.Options.OLS.md)\.
 + Locator
@@ -500,7 +500,7 @@ This feature changes to Continuous Query Notification in version 12\.1 and later
 + Transparent Data Encryption \(TDE\)
 
   For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\.
-+ Unified Auditing, Mixed Mode \(version 12\.1 and later\)
++ Unified Auditing, Mixed Mode \(Oracle Database 12c and later\)
 
   For more information, see [ Mixed mode auditing](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/dbseg/introduction-to-auditing.html#GUID-4A3AEFC3-5422-4320-A048-8219EC96EAC1) in the Oracle documentation\.
 + XML DB \(without the XML DB Protocol Server\)
@@ -529,7 +529,7 @@ In general, Amazon RDS doesn't prevent you from creating schemas for unsupported
 
 In Amazon RDS, you manage parameters using parameter groups\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. To view the supported parameters for a specific Oracle Database edition and version, run the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-engine-default-parameters.html) command\.
 
-For example, to view the supported parameters for Oracle Enterprise Edition version 12\.2, run the following command\.
+For example, to view the supported parameters for the Enterprise Edition of Oracle Database 12c Release 2 \(12\.2\), run the following command\.
 
 ```
 aws rds describe-engine-default-parameters \

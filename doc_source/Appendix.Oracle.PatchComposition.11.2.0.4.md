@@ -29,7 +29,7 @@ The following versions are available for database engine 11\.2\.0\.4
 + [Version 11\.2\.0\.4\.v1](#Appendix.Oracle.PatchComposition.11.2.0.4.v1)
 
 **Important**  
-RDS for Oracle 11g is deprecated\. This information is only useful if you want to upgrade an Oracle 11g snapshot\.
+RDS for Oracle Database 11g is deprecated\. This information is only useful if you want to upgrade an Oracle Database 11g snapshot\.
 
 ## Version 11\.2\.0\.4\.v26<a name="Appendix.Oracle.PatchComposition.11.2.0.4.v26"></a>
 

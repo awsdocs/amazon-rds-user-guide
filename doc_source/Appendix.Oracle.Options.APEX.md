@@ -63,9 +63,9 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
 
    For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the options to the option group\. If you want to deploy only the Oracle APEX run\-time environment, add only the `APEX` option\. If you want to deploy the full development environment, add both the `APEX` and `APEX-DEV` options\. For Oracle 12c, add the **APEX** and **APEX\-DEV** options\.
+1. Add the options to the option group\. If you want to deploy only the Oracle APEX run\-time environment, add only the `APEX` option\. If you want to deploy the full development environment, add both the `APEX` and `APEX-DEV` options\. For Oracle Database 12c, add the **APEX** and **APEX\-DEV** options\.
 
-   For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.2\.6\.v1 is the default for 12c\. 
+   For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.2\.6\.v1 is the default for Oracle Database 12c\. 
 **Important**  
 If you add the APEX options to an existing option group that is already attached to one or more DB instances, a brief outage occurs\. During this outage, all the DB instances are automatically restarted\. 
 

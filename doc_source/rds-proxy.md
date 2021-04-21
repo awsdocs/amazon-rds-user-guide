@@ -45,7 +45,7 @@
 
  Each proxy handles connections to a single RDS DB instance or Aurora DB cluster\. The proxy automatically determines the current writer instance for RDS Multi\-AZ DB instances and Aurora provisioned clusters\. For Aurora multi\-master clusters, the proxy connects to one of the writer instances and uses the other writer instances as hot standby targets\.  
 
- The connections that a proxy keeps open and available for your database application to use form the *connection pool*\. 
+ The connections that a proxy keeps open and available for your database application to use make up the *connection pool*\. 
 
  By default, RDS Proxy can reuse a connection after each transaction in your session\. This transaction\-level reuse is called *multiplexing*\. When RDS Proxy temporarily removes a connection from the connection pool to reuse it, that operation is called *borrowing* the connection\. When it's safe to do so, RDS Proxy returns that connection to the connection pool\. 
 
@@ -1144,7 +1144,7 @@ aws rds deregister-db-proxy-targets
 
 1.  Now instead of accepting the defaults for subnets and security groups from the same VPC as the Aurora DB cluster or RDS instance, make new selections\. Make these based on the subnets and security groups from the VPC that you chose\. 
 
-1.  You don't need to change any of the settings for the SageMaker secrets\. The same credentials work for all endpoints for your proxy, regardless of which VPC each endpoint is in\. 
+1.  You don't need to change any of the settings for the Secrets Manager secrets\. The same credentials work for all endpoints for your proxy, regardless of which VPC each endpoint is in\. 
 
 1.  Wait for the new endpoint to reach the **Available** state\. 
 

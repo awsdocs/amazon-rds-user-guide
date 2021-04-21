@@ -68,6 +68,12 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   For more information, see the table of scale limits under [Editions and supported features of SQL Server 2019 \(15\.x\)](https://docs.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-version-15) in the Microsoft documentation\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\.
++ Make sure that you use these guidelines when setting the following DB parameters on RDS for SQL Server:
+  + `max server memory (mb)` >= 256 MB
+  + `max worker threads` >= \(number of logical CPUs \* 7\)
+  + For the upper limit on `max worker threads`, see [Configure the max worker threads server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option) in the Microsoft documentation\.
+
+  For more information on setting DB parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 + The maximum storage size for SQL Server DB instances is the following: 
   + General Purpose \(SSD\) storage – 16 TiB for all editions 
   + Provisioned IOPS storage – 16 TiB for all editions 

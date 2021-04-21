@@ -5,7 +5,8 @@ By default, Performance Insights is enabled in the console create wizard for Ama
 **Topics**
 + [DB load](#USER_PerfInsights.Overview.ActiveSessions)
 + [Maximum CPU](#USER_PerfInsights.Overview.MaxCPU)
-+ [Supported DB engines for Performance Insights](#USER_PerfInsights.Overview.Engines)
++ [DB engine support for Performance Insights](#USER_PerfInsights.Overview.Engines)
++ [AWS Region support for Performance Insights](#USER_PerfInsights.Overview.Regions)
 
 ## DB load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
 
@@ -57,23 +58,27 @@ You can find an overview of Performance Insights in the following video\.
 
 [![AWS Videos](http://img.youtube.com/vi/yOeWcPBT458/0.jpg)](http://www.youtube.com/watch?v=yOeWcPBT458)
 
-## Supported DB engines for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
+## DB engine support for Performance Insights<a name="USER_PerfInsights.Overview.Engines"></a>
 
 Following, you can find the DB engines that support Performance Insights\. 
 
 
 |  DB Engine  | Supported DB Engine Versions | 
 | --- | --- | 
-|  Amazon Aurora MySQL\-Compatible Edition  |  2\.04\.2 and higher 2\.x versions \(compatible with MySQL 5\.7\), and 1\.17\.3 and higher 1\.x versions \(compatible with MySQL 5\.6\)\.  Not supported on db\.t2 or db\.t3 DB instance classes\. For DB clusters enabled for parallel query, the minimum Aurora MySQL versions are 2\.09\.0 and 1\.23\.0\.   | 
-|  Amazon Aurora PostgreSQL\-Compatible Edition  |  All versions\.  | 
 |  Amazon RDS for MariaDB  |  All 10\.5 versions, all 10\.4 versions, 10\.3\.13 and higher 10\.3 versions, and 10\.2\.21 and higher 10\.2 versions\.  Not supported for MariaDB version 10\.0 or 10\.1\. Not supported for MariaDB version 10\.3\.13 DB instances in the Europe \(Frankfurt\) and Europe \(Stockholm\) AWS Regions\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
 |  Amazon RDS for MySQL  |  8\.0\.17 and higher 8\.0 versions, version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions\.  Not supported for version 5\.5\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
 |  Amazon RDS for Microsoft SQL Server  |  All versions except SQL Server 2008\.   | 
-|  Amazon RDS for PostgreSQL  |  Versions 10, 11, 12, and 13\.  | 
+|  Amazon RDS for PostgreSQL  | Versions 10, 11, 12, and 13\.is | 
 |  Amazon RDS for Oracle  |  All versions\.   | 
 
-**Note**  
-Amazon RDS Performance Insights isn't supported in the Middle East \(Bahrain\) Region, Europe \(Milan\) Region, Africa \(Cape Town\) Region, or in AWS GovCloud \(US\) Regions\. 
+## AWS Region support for Performance Insights<a name="USER_PerfInsights.Overview.Regions"></a>
+
+Performance Insights for Amazon RDS isn't supported in the following AWS Regions:
++ Middle East \(Bahrain\) Region
++ Europe \(Milan\) Region
++ Africa \(Cape Town\) Region
++ Asia Pacific \(Osaka\)
++ AWS GovCloud \(US\) Regions
 
 **Important**  
 This guide describes using Amazon RDS Performance Insights with non\-Aurora DB engines\. For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.

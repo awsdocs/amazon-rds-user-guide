@@ -6,10 +6,10 @@ Amazon RDS supports Oracle Locator through the use of the `LOCATOR` option\. Ora
 If you use Oracle Locator, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
 Amazon RDS supports Oracle Locator for the following versions of Oracle Database: 
-+ Version 19\.0\.0\.0
-+ Version 18\.0\.0\.0
-+ Version 12\.2\.0\.1
-+ Version 12\.1\.0\.2\.v13 or later
++ Oracle Database 19c \(19\.0\.0\.0\)
++ Oracle Database 18c \(18\.0\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 
 ## Prerequisites for Oracle Locator<a name="Oracle.Options.Locator.PreReqs"></a>
 

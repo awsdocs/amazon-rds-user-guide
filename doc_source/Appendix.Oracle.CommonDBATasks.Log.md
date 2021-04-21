@@ -327,7 +327,7 @@ In some cases, you might be using JDBC on Linux to download archived redo logs a
 
 ## Accessing transaction logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
 
-Accessing transaction logs is supported for Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+Accessing transaction logs is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
 
 You might want to access your online and archived redo log files for mining with external tools such as GoldenGate, Attunity, Informatica, and others\. If you want to access your online and archived redo log files, you must first create directory objects that provide read\-only access to the physical file paths\. 
 
