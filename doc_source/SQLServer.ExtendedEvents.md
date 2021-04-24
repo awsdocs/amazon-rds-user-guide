@@ -25,6 +25,7 @@ When using extended events on RDS for SQL Server, the following limitations appl
   + `debug_break`
   + `create_dump_all_threads`
   + `create_dump_single_threads`
++ The `rpc_completed` event is supported on the following versions and later: 15\.0\.4083\.2, 14\.0\.3370\.1, 13\.0\.5865\.1, 12\.0\.6433\.1, 11\.0\.7507\.2\.
 
 ## Configuring extended events on RDS for SQL Server<a name="SQLServer.ExtendedEvents.Config"></a>
 
@@ -56,7 +57,7 @@ exec rdsadmin..rds_set_configuration 'xe_session_max_memory', 4
 
 ## Considerations for Multi\-AZ deployments<a name="SQLServer.ExtendedEvents.MAZ"></a>
 
-When you create an extended event session on a primary DB instance, it doesn't propagate to the standby replica\. You can fail over and create the extended event session on the new primary DB instance\. Or you can remove and then readd the Multi\-AZ configuration to propagate the extended event session to the standby replica\. RDS stops all nondefault extended event sessions on the standby replica, so that these sessions don't consume resources on the standby\. Because of this, after a standby replica becomes the primary DB instance, make sure to manually start the extended event sessions on the new primary\.
+When you create an extended event session on a primary DB instance, it doesn't propagate to the standby replica\. You can fail over and create the extended event session on the new primary DB instance\. Or you can remove and then re\-add the Multi\-AZ configuration to propagate the extended event session to the standby replica\. RDS stops all nondefault extended event sessions on the standby replica, so that these sessions don't consume resources on the standby\. Because of this, after a standby replica becomes the primary DB instance, make sure to manually start the extended event sessions on the new primary\.
 
 **Note**  
 This approach applies to both Always On Availability Groups and Database Mirroring\.

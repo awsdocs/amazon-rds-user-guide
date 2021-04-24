@@ -45,7 +45,7 @@ There are also advanced administrative tasks for working with DB instances runni
 
 ## MariaDB on Amazon RDS versions<a name="MariaDB.Concepts.VersionMgmt"></a>
 
-For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.4 to 10\.5\. A version change is considered minor if only the minor version number changes, for example going from version 10\.4\.8 to 10\.4\.13\. 
+For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.4 to 10\.5\. A version change is considered minor if only the minor version number changes, for example going from version 10\.3\.20 to 10\.3\.23\. 
 
 Amazon RDS currently supports the following versions of MariaDB: 
 

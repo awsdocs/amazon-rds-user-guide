@@ -18,9 +18,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [PostgreSQL extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
 + [Some supported PostgreSQL features](#PostgreSQL.Concepts.General.FeatureSupport)
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
-+ [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)
-+ [Updating applications to connect to PostgreSQL DB instances using new SSL/TLS certificates](ssl-certificate-rotation-postgresql.md)
-+ [Using Kerberos authentication with Amazon RDS for PostgreSQL](postgresql-kerberos.md)
++ [Security with RDS for PostgreSQL](PostgreSQL.Concepts.General.Security.md)
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
 + [Upgrading a PostgreSQL DB snapshot engine version](USER_UpgradeDBSnapshot.PostgreSQL.md)
 + [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)
@@ -955,7 +953,7 @@ RDS for PostgreSQL version 9\.5\.2 includes the following new extensions:
 
 ## PostgreSQL extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions"></a>
 
-Aurora PostgreSQL supports many PostgreSQL extensions\. The PostgreSQL community sometimes refers to these as modules\. Extensions expand on the functionality provided by the PostgreSQL engine\. You can find a list of extensions supported by Amazon RDS in the default DB parameter group for that PostgreSQL version\. You can also see the current extensions list using `psql` by showing the `rds.extensions` parameter as in the following example\.
+RDS for PostgreSQL supports many PostgreSQL extensions\. The PostgreSQL community sometimes refers to these as modules\. Extensions expand on the functionality provided by the PostgreSQL engine\. You can find a list of extensions supported by Amazon RDS in the default DB parameter group for that PostgreSQL version\. You can also see the current extensions list using `psql` by showing the `rds.extensions` parameter as in the following example\.
 
 ```
 SHOW rds.extensions; 

@@ -112,21 +112,27 @@ When you create a new DB instance using the [CreateDBInstance](https://docs.aws.
 
 You can also specify the `EnablePerformanceInsights` value using the following API operations:
 +  [ModifyDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) 
-+  [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
+
+   [CreateDBInstanceReadReplica](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html) 
 +  [RestoreDBInstanceFromS3](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromS3.html) 
 
 When you enable Performance Insights, you can optionally specify the amount of time, in days, to retain Performance Insights data with the `PerformanceInsightsRetentionPeriod` parameter\. Valid values are 7 \(the default\) or 731 \(2 years\)\.
 
 ## Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL<a name="USER_PerfInsights.EnableMySQL"></a>
 
-When the Performance Schema feature is enabled for Amazon RDS for MariaDB or MySQL, Performance Insights provides more detailed information\. For example, Performance Insights displays DB load categorized by detailed wait events\. Without the Performance Schema enabled, Performance Insights displays DB load categorized by the list state of the MySQL process\.
+When the Performance Schema is enabled for Amazon RDS for MariaDB or MySQL, Performance Insights provides more detailed information\. For example, Performance Insights displays DB load categorized by detailed wait events\. When Performance Schema isn't enabled, Performance Insights displays DB load categorized by the list state of the MySQL process\.
 
-Performance Schema is enabled automatically when you create an Amazon RDS for MariaDB or MySQL DB instance with Performance Insights enabled\. In this case, Performance Insights automatically manages the parameters in the following table\.
+You have the following options for enabling the Performance Schema:
++ Allow Performance Insights to manage required parameters automatically\.
+
+  When you create an Amazon RDS for MariaDB or MySQL DB instance with Performance Insights enabled, Performance Schema is enabled automatically\. In this case, Performance Insights automatically manages your parameters\.
+**Important**  
+In this scenario, Performance Insights changes schema\-related parameters on the DB instance\. These changes aren't visible in the parameter group associated with the DB instance\. However, these changes are visible in the output of the `SHOW GLOBAL VARIABLES` command\.
++ Set the required parameters yourself\.
+
+  For Performance Insights to list wait events, you must set all parameters as shown in the following table\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Enabling.html)
-
-**Important**  
-When Performance Schema is enabled automatically, Performance Insights changes schema\-related parameters on the DB instance\. These changes aren't visible in the parameter group associated with the DB instance\.
 
 For more information, see [Performance Schema Command Options](https://dev.mysql.com/doc/refman/5.6/en/performance-schema-options.html#option_mysqld_performance-schema-consumer-events-stages-current) and [Performance Schema Option and Variable Reference](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-option-variable-reference.html) in the MySQL documentation\.
 

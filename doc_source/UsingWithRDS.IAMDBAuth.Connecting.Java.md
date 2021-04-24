@@ -6,6 +6,7 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
 + [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
++ [Set up the AWS SDK for Java](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-install.html)
 
 **Topics**
 + [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Java.AuthToken)

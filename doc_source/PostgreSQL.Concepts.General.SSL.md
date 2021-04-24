@@ -9,8 +9,12 @@ For general information about SSL support and PostgreSQL databases, see [SSL sup
 SSL support is available in all AWS Regions for PostgreSQL\. Amazon RDS creates an SSL certificate for your PostgreSQL DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
 **Topics**
++ [Connecting to a PostgreSQL DB instance over SSL](#PostgreSQL.Concepts.General.SSL.Connecting)
 + [Requiring an SSL connection to a PostgreSQL DB instance](#PostgreSQL.Concepts.General.SSL.Requiring)
 + [Determining the SSL connection status](#PostgreSQL.Concepts.General.SSL.Status)
++ [SSL cipher suites in RDS for PostgreSQL](#PostgreSQL.Concepts.General.SSL.Ciphers)
+
+## Connecting to a PostgreSQL DB instance over SSL<a name="PostgreSQL.Concepts.General.SSL.Connecting"></a>
 
 **To connect to a PostgreSQL DB instance over SSL**
 
@@ -100,3 +104,19 @@ $
 ```
 
 For information about the `sslmode` option, see [Database connection control functions](https://www.postgresql.org/docs/11/libpq-connect.html#LIBPQ-CONNECT-SSLMODE) in the PostgreSQL documentation\.
+
+## SSL cipher suites in RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.SSL.Ciphers"></a>
+
+The PostgreSQL configuration parameter [ssl\_ciphers](https://www.postgresql.org/docs/current/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SSL) specifies the categories of cipher suites that are allowed for SSL connections\. The following table lists the default cipher suites used in RDS for PostgreSQL\.
+
+
+| PostgreSQL engine version | Cipher suites | 
+| --- | --- | 
+| 13 | HIGH:\!aNULL:\!3DES | 
+| 12 | HIGH:\!aNULL:\!3DES | 
+| 11\.4 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
+| 11\.1, 11\.2 | HIGH:MEDIUM:\+3DES:\!aNULL | 
+| 10\.9 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
+| 10\.7 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL | 
+| 9\.6\.14 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
+| 9\.6\.12 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL | 

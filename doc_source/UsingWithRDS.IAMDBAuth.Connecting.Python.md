@@ -24,6 +24,7 @@ This code generates an IAM authentication token for a MySQL DB instance\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
@@ -43,6 +44,7 @@ This code generates an IAM authentication token for a PostgreSQL DB instance\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
@@ -106,6 +108,7 @@ This code connects to a PostgreSQL DB instance\.
 import psycopg2
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"

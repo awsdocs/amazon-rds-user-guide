@@ -71,7 +71,7 @@ The following limitations apply to replication filtering for Amazon RDS for Mari
 + Replication filtering doesn't support XA transactions\.
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
-+ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, version 10\.4\.8 and higher 10\.4 versions, and all 10\.5 versions\.
++ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, all 10\.4 versions, and all 10\.5 versions\.
 + Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.0, 10\.1, and 10\.2\.
 
 ### Replication filtering examples for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>

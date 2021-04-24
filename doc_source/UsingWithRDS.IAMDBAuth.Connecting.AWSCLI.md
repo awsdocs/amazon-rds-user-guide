@@ -84,3 +84,7 @@ The following lines in the output show more details\.
 | ...           | ...
 +-----------------------------+
 ```
+
+**Note**  
+If an error is returned which states that `--enable-cleartext-plugin` is an unknown option, install a version of MySQL that supports this option\. For information about installing MySQL, see [ Installing and Upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html) in the MySQL documentation\.  
+If you are using a MariaDB client, the `--enable-cleartext-plugin` option isn't required\.
