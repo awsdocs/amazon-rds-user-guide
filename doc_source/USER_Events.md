@@ -46,6 +46,7 @@ The following section lists all categories and events that you can be notified o
 
  Amazon RDS generates a significant number of events in categories that you can subscribe to using the Amazon RDS Console, AWS CLI, or the API\. Each category applies to a source type, which can be one of the following:
 + DB instance
++ DB snapshot
 + DB security group
 + DB parameter group
 
