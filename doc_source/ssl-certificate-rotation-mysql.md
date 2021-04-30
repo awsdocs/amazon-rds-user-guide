@@ -121,7 +121,7 @@ You can update the trust store for applications that use JDBC for SSL/TLS connec
 1. Import the certificate into the key store using the following command\. 
 
    ```
-   keytool -import -alias rds-root -keystore clientkeystore -file rds-ca-2019-root.der                    
+   keytool -import -alias rds-root -keystore clientkeystore.jks -file rds-ca-2019-root.der                    
    ```
 
 1. Confirm that the key store was updated successfully\.
