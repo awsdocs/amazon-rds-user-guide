@@ -359,7 +359,7 @@ The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instan
 **Note**  
 If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
 
-After HugePages are active on your DB instance, you can view HugePages information by enabling enhanced monitoring\. For more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\. 
+After HugePages are active on your DB instance, you can view HugePages information by enabling enhanced monitoring\. For more information, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\. 
 
 ## Enabling extended data types<a name="Oracle.Concepts.ExtendedDataTypes"></a>
 

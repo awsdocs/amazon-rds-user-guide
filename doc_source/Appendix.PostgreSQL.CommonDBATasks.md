@@ -384,7 +384,7 @@ OBJECT,1,1,READ,SELECT,TABLE,public.t1,select * from t1;
 ...
 ```
 
-For information on viewing the logs, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\.
+For information on viewing the logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.
 
 ## Working with the pg\_repack extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 

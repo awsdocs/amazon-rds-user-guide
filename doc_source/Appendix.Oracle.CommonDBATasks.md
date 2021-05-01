@@ -17,8 +17,8 @@ The following tasks are common to all RDS databases, but Oracle has special cons
 |  **Option Groups** If your DB instance will require specific database options, you should create an option group before you create the DB instance\.   |  [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)  | 
 |  **Connecting to Your DB Instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Oracle SQL\*Plus\.   |  [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)  | 
 |  **Backup and Restore** You can configure your DB instance to take automated backups, or take manual snapshots, and then restore instances from the backups or snapshots\.   |  [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)  | 
-|  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md)  | 
+|  **Monitoring** You can monitor an Oracle DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your Oracle DB instance\.   |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
 
 Following, you can find a description for Amazon RDS–specific implementations of common DBA tasks for RDS Oracle\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and restricts access to certain system procedures and tables that require advanced privileges\. In many of the tasks, you run the `rdsadmin` package, which is an Amazon RDS–specific tool that enables you to administer your database\.
 

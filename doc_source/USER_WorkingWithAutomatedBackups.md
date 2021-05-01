@@ -12,6 +12,18 @@ The first snapshot of a DB instance contains the data for the full DB instance\.
 
 You can copy both automatic and manual DB snapshots, and share manual DB snapshots\. For more information about copying a DB snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information about sharing a DB snapshot, see [Sharing a DB snapshot](USER_ShareSnapshot.md)\.
 
+**Topics**
++ [Backup storage](#USER_WorkingWithAutomatedBackups.BackupStorage)
++ [Backup window](#USER_WorkingWithAutomatedBackups.BackupWindow)
++ [Backup retention period](#USER_WorkingWithAutomatedBackups.BackupRetention)
++ [Enabling automated backups](#USER_WorkingWithAutomatedBackups.Enabling)
++ [Retaining automated backups](#USER_WorkingWithAutomatedBackups.Retaining)
++ [Deleting retained automated backups](#USER_WorkingWithAutomatedBackups-Deleting)
++ [Disabling automated backups](#USER_WorkingWithAutomatedBackups.Disabling)
++ [Using AWS Backup to manage automated backups](#AutomatedBackups.AWSBackup)
++ [Automated backups with unsupported MySQL storage engines](#Overview.BackupDeviceRestrictions)
++ [Automated backups with unsupported MariaDB storage engines](#Overview.BackupDeviceRestrictionsMariaDB)
+
 ## Backup storage<a name="USER_WorkingWithAutomatedBackups.BackupStorage"></a>
 
 Your Amazon RDS backup storage for each AWS Region is composed of the automated backups and manual DB snapshots for that Region\. Total backup storage space equals the sum of the storage for all backups in that Region\. Moving a DB snapshot to another Region increases the backup storage in the destination Region\. Backups are stored in Amazon S3\.

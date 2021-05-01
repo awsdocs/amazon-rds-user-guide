@@ -1,10 +1,15 @@
 # Importing data into Oracle on Amazon RDS<a name="Oracle.Procedural.Importing"></a>
 
-How you import data into an Amazon RDS DB instance depends on the amount of data you have and the number and variety of database objects in your database\. For example, you can use Oracle SQL Developer to import a simple, 20 MB database\. You can use Oracle Data Pump to import complex databases, or databases that are several hundred megabytes or several terabytes in size\. 
+How you import data into an Amazon RDS DB instance depends on the following: 
++ The amount of data you have
++ The number of database objects in your database 
++ The variety of database objects in your database
 
-You can also use AWS Database Migration Service \(AWS DMS\) to import data into an Amazon RDS DB instance\. AWS DMS can migrate databases without downtime and, for many database engines, continue ongoing replication until you are ready to switch over to the target database\. You can migrate to Oracle from either the same database engine or a different database engine using AWS DMS\. If you are migrating from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. 
+For example, you can use Oracle SQL Developer to import a simple, 20 MB database\. You can use Oracle Data Pump to import complex databases, or databases that are several hundred megabytes or several terabytes in size\. 
 
-Before you use any of these migration techniques, we recommend the best practice of taking a backup of your database\. After you import the data, you can back up your Amazon RDS DB instances by creating snapshots\. Later, you can restore the database from the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\. 
+You can also use AWS Database Migration Service \(AWS DMS\) to import data into an Amazon RDS DB instance\. AWS DMS can migrate databases without downtime\. For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can migrate to Oracle from either the same database engine or a different database engine using AWS DMS\. If you are migrating from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. 
+
+Before you use any of these migration techniques, we recommend that you back up your database\. After you import the data, you can back up your Amazon RDS DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\. 
 
 **Note**  
 You can also import data into Oracle using files from Amazon S3\. For example, you can download Data Pump files from Amazon S3 to the DB instance host\. For more information, see [Amazon S3 integration](oracle-s3-integration.md)\.
@@ -32,16 +37,43 @@ For compatibility considerations when migrating between versions of Oracle Datab
 
 When you import data with Oracle Data Pump, you must transfer the dump file that contains the data from the source database to the target database\. You can transfer the dump file using an Amazon S3 bucket or by using a database link between the two databases\.
 
-The following are best practices for using Oracle Data Pump to import data into an Amazon RDS for Oracle DB instance:
+When you use Oracle Data Pump to import data into an Oracle DB instance, we recommend the following best practices:
 + Perform imports in `schema` or `table` mode to import specific schemas and objects\.
 + Limit the schemas you import to those required by your application\.
-+ Do not import in `full` mode\.
++ Don't import in `full` mode\.
 
   Because Amazon RDS for Oracle does not allow access to `SYS` or `SYSDBA` administrative users, importing in `full` mode, or importing schemas for Oracle\-maintained components, might damage the Oracle data dictionary and affect the stability of your database\.
 + When loading large amounts of data, transfer the dump file to the target Amazon RDS for Oracle DB instance, take a DB snapshot of your instance, and then test the import to verify that it succeeds\. If database components are invalidated, you can delete the DB instance and re\-create it from the DB snapshot\. The restored DB instance includes any dump files staged on the DB instance when you took the DB snapshot\.
-+ Do not import dump files that were created using the Oracle Data Pump export parameters `TRANSPORT_TABLESPACES`, `TRANSPORTABLE`, or `TRANSPORT_FULL_CHECK`\. Amazon RDS for Oracle DB instances do not support importing these dump files\.
++ Don't import dump files that were created using the Oracle Data Pump export parameters `TRANSPORT_TABLESPACES`, `TRANSPORTABLE`, or `TRANSPORT_FULL_CHECK`\. Amazon RDS for Oracle DB instances don't support importing these dump files\.
++ Don't import dump files that contain Oracle Scheduler objects \(jobs, programs, and schedules\) in the schemas `SYS`, `SYSTEM`, `RDSADMIN`, `RDSSEC`, and `RDS_DATAGUARD`\. Amazon RDS for Oracle DB instances do not support importing these dump files\. 
 
-The examples in this section show one way to import data into an Oracle database, but there are many ways to do so with Oracle Data Pump\. For complete information about using Oracle Data Pump, see [ the Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump.html#GUID-501A9908-BCC5-434C-8853-9A6096766B5A)\.
+**Note**  
+To exclude unsupported Scheduler objects, use additional directives during the Data Pump export\. If you use `DBMS_DATAPUMP`, add an additional `METADATA_FILTER` before the `DBMS_METADATA.START_JOB`:  
+
+```
+DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
+   q'[IN (SELECT NAME FROM SYS.OBJ$ 
+          WHERE TYPE# IN (66,67,74) 
+          AND OWNER# IN
+            (SELECT USER# FROM SYS.USER$ 
+             WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+            )
+          )]','PROCOBJ');
+```
+If you use `expdp`, create a parameter file that contains the exclude directive shown in the following example\. Then use `PARFILE=parameter_file` with your `expdp` command\.  
+
+```
+exclude=procobj:"IN 
+  (SELECT NAME FROM sys.OBJ$
+   WHERE TYPE# IN (66,67,74) 
+   AND OWNER# IN 
+     (SELECT USER# FROM SYS.USER$
+      WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+     )
+  )"
+```
+
+The examples in this section show one way to import data into an Oracle database\. However, Oracle Data Pump permits many ways to import data\. To learn more about Oracle Data Pump, see [ the Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump.html#GUID-501A9908-BCC5-434C-8853-9A6096766B5A)\.
 
 The examples in this section use the `DBMS_DATAPUMP` package\. The same tasks can be accomplished by using the Oracle Data Pump command line utilities `impdp` and `expdp`\. You can install these utilities on a remote host as part of an Oracle Client installation, including Oracle Instant Client\.
 
@@ -100,13 +132,13 @@ Replace `schema_1` with the name of your schema in this step and in the followin
 
  Use SQL Plus or Oracle SQL Developer to connect to the source Oracle instance with an administrative user\. If the source database is an Amazon RDS for Oracle DB instance, connect with the Amazon RDS master user\. Next, use the Oracle Data Pump utility to create a dump file\. 
 
-The following script creates a dump file named *sample\.dmp* in the `DATA_PUMP_DIR` directory that contains the `SCHEMA_1` schema\. Replace `SCHEMA_1` with the name of the schema you want to export\. 
+The following script creates a dump file named *sample\.dmp* in the `DATA_PUMP_DIR` directory that contains the `SCHEMA_1` schema\. Replace `SCHEMA_1` with the name of the schema that you want to export\.
 
 ```
 DECLARE
   v_hdnl NUMBER;
 BEGIN
-  v_hdnl := DBMS_DATAPUMP.OPEN( operation => 'EXPORT', job_mode => 'SCHEMA', job_name=>null);
+  v_hdnl := DBMS_DATAPUMP.OPEN(operation => 'EXPORT', job_mode => 'SCHEMA', job_name=>null);
   DBMS_DATAPUMP.ADD_FILE( 
     handle    => v_hdnl, 
     filename  => 'sample.dmp', 
@@ -118,6 +150,10 @@ BEGIN
     directory => 'DATA_PUMP_DIR', 
     filetype  => dbms_datapump.ku$_file_type_log_file);
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
+  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
+    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74) AND OWNER# IN 
+      (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
+        ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /
@@ -306,6 +342,10 @@ BEGIN
     directory => 'DATA_PUMP_DIR', 
     filetype  => dbms_datapump.ku$_file_type_log_file);
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
+  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
+    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74) AND OWNER# IN 
+      (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
+        ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /
@@ -327,7 +367,8 @@ The following command creates a database link named `to_rds` that connects to th
 ```
 CREATE DATABASE LINK to_rds 
   CONNECT TO <master_user_account> IDENTIFIED BY <password>
-  USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<dns or ip address of remote db>)(PORT=<listener port>))(CONNECT_DATA=(SID=<remote SID>)))';
+  USING '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<dns or ip address of remote db>)
+         (PORT=<listener port>))(CONNECT_DATA=(SID=<remote SID>)))';
 ```
 
 #### Step 5: Use DBMS\_FILE\_TRANSFER to copy the exported dump file to the target DB instance<a name="Oracle.Procedural.Importing.DataPumpDBLink.Step5"></a>
@@ -362,7 +403,7 @@ BEGIN
     job_name  => null);
   DBMS_DATAPUMP.ADD_FILE( 
     handle    => v_hdnl, 
-    filename  => 'sample_copied.dmp', 
+    filename  => 'sample_copied.dmp',
     directory => 'DATA_PUMP_DIR', 
     filetype  => dbms_datapump.ku$_file_type_dump_file );
   DBMS_DATAPUMP.ADD_FILE( 

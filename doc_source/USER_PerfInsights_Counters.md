@@ -11,7 +11,7 @@ With counter metrics, you can customize the Performance Insights dashboard to in
 
 ## Performance Insights operating system counters<a name="USER_PerfInsights_Counters.OS"></a>
 
-The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing Enhanced Monitoring by using CloudWatch Logs](USER_Monitoring.OS.md#USER_Monitoring.OS.CloudWatchLogs)\. 
+The following operating system counters are available with Performance Insights for Aurora PostgreSQL\. You can find definitions for these metrics in [Viewing OS metrics using CloudWatch Logs](USER_Monitoring.OS.CloudWatchLogs.md)\. 
 
 
 | Counter | Type | Metric | 

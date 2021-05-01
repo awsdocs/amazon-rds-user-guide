@@ -69,7 +69,7 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
 1. Ensure that the backup retention period is set long enough that no binary logs are purged during the export\. If any of the logs are purged before the export has completed, you must restart replication from the beginning\. For more information about setting the backup retention period, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
-1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL binary logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
+1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL binary logs](USER_LogAccess.MySQL.Binarylog.md)\.
 
 1. Create an Amazon RDS read replica from the source MySQL DB instance to further ensure that the binary logs of the source MySQL DB instance are not purged\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
 

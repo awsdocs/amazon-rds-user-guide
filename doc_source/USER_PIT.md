@@ -6,7 +6,7 @@ When you restore a DB instance to a point in time, the default DB security group
 
 Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
-RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB instance, use the AWS CLI [ describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
+RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB instance, use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.
 
@@ -46,7 +46,7 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 **Note**  
 Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
-1. For **DB instance identifier**, enter the name of the target restored DB instance\.
+1. For **DB instance identifier**, enter the name of the target restored DB instance\. The name must be unique\.
 
 1. Choose other options as needed, such as DB instance class, storage, and whether you want to use storage autoscaling\.
 

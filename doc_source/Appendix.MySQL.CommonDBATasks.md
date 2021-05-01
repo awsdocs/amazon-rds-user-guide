@@ -2,7 +2,7 @@
 
 This section describes the Amazon RDS\-specific implementations of some common DBA tasks for DB instances running the MySQL database engine\. In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
 
-For information about working with MySQL log files on Amazon RDS, see [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
+For information about working with MySQL log files on Amazon RDS, see [Accessing MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
 
 **Topics**
 + [Ending a session or query](#Appendix.MySQL.CommonDBATasks.End)

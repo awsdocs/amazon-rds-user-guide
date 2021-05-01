@@ -36,8 +36,8 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Replication** You can offload read traffic from your source MariaDB DB instance by creating read replicas\.   |  [Working with read replicas](USER_ReadRepl.md)  | 
 |  **Connecting to Your DB Instance** Connect to your DB instance using a standard SQL client application\.   |  [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)  | 
 |  **Backup and Restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md)  | 
-|  **Monitoring** Monitor your MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MariaDB DB instance\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
+|  **Monitoring** Monitor your MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MariaDB DB instance\.   |  [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Working with Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
 There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
 + [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)

@@ -4,7 +4,7 @@ Amazon RDS on\-demand DB instances are billed based on the class of the DB insta
 
 Billing starts for a DB instance as soon as the DB instance is available\. Pricing is listed on a per\-hour basis, but bills are calculated down to the second and show times in decimal form\. Amazon RDS usage is billed in one\-second increments, with a minimum of 10 minutes\. In the case of billable configuration change, such as scaling compute or storage capacity, you're charged a 10\-minute minimum\. Billing continues until the DB instance terminates, which occurs when you delete the DB instance or if the DB instance fails\.
 
-If you no longer want to be charged for your DB instance, you must stop or delete it to avoid being billed for additional DB instance hours\. For more information about the DB instance states for which you are billed, see [DB instance status](Overview.DBInstance.Status.md)\.
+If you no longer want to be charged for your DB instance, you must stop or delete it to avoid being billed for additional DB instance hours\. For more information about the DB instance states for which you are billed, see [Viewing DB instance status](accessing-monitoring.md#Overview.DBInstance.Status)\.
 
 ## Stopped DB instances<a name="USER_OnDemandDBInstances.Stopped"></a>
 

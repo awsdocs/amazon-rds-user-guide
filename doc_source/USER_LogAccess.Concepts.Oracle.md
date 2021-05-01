@@ -1,10 +1,16 @@
 # Oracle database log files<a name="USER_LogAccess.Concepts.Oracle"></a>
 
-You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\. 
+You can access Oracle alert logs, audit files, and trace files by using the Amazon RDS console or API\. For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\. 
 
 The Oracle audit files provided are the standard Oracle auditing files\. Amazon RDS supports the Oracle fine\-grained auditing \(FGA\) feature\. However, log access doesn't provide access to FGA events that are stored in the `SYS.FGA_LOG$` table and that are accessible through the `DBA_FGA_AUDIT_TRAIL` view\. 
 
 The [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBLogFiles.html) API operation that lists the Oracle log files that are available for a DB instance ignores the `MaxRecords` parameter and returns up to 1,000 records\. The call returns `LastWritten` as a POSIX date in milliseconds\.
+
+**Topics**
++ [Retention schedule](#USER_LogAccess.Concepts.Oracle.Retention)
++ [Working with Oracle trace files](#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles)
++ [Publishing Oracle logs to Amazon CloudWatch Logs](#USER_LogAccess.Oracle.PublishtoCloudWatchLogs)
++ [Previous methods for accessing alert logs and listener logs](#USER_LogAccess.Concepts.Oracle.AlertLogAndListenerLog)
 
 ## Retention schedule<a name="USER_LogAccess.Concepts.Oracle.Retention"></a>
 
@@ -27,7 +33,13 @@ Audit files and trace files share the same retention configuration\.
 
 ## Working with Oracle trace files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles"></a>
 
-Following, you can find descriptions of Amazon RDS procedures to create, refresh, access, and delete trace files\. 
+Following, you can find descriptions of Amazon RDS procedures to create, refresh, access, and delete trace files\.
+
+**Topics**
++ [Listing files](#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.ViewingBackgroundDumpDest)
++ [Generating trace files and tracing a session](#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Generating)
++ [Retrieving trace files](#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Retrieving)
++ [Purging trace files](#USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.Purging)
 
 ### Listing files<a name="USER_LogAccess.Concepts.Oracle.WorkingWithTracefiles.ViewingBackgroundDumpDest"></a>
 
