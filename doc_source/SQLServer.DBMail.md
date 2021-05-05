@@ -370,7 +370,7 @@ GO
 
 EXEC msdb.dbo.sp_send_dbmail
      @profile_name       = 'Notifications',
-     @recipients         = 'recipient1@example.com;'recipient2@example.com',
+     @recipients         = 'recipient1@example.com;recipient2@example.com',
      @subject            = 'Automated DBMail message - 2',
      @body               = 'This is a message.';
 GO
