@@ -93,7 +93,7 @@ client = session.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
 try:
-    conn =  mysql.connector.connect(host=ENDPOINT, user=USR, passwd=token, port=PORT, database=DBNAME)
+    conn =  mysql.connector.connect(host=ENDPOINT, user=USR, passwd=token, port=PORT, database=DBNAME, ssl_ca='[full path]rds-combined-ca-bundle.pem')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()
@@ -123,7 +123,7 @@ client = session.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
 try:
-    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USR, password=token)
+    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USR, password=token, ssl_ca='[full path]rds-combined-ca-bundle.pem')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()

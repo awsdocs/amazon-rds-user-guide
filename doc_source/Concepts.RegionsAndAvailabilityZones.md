@@ -7,7 +7,7 @@ For information about finding the Availability Zones for an AWS Region, see [Des
 
 By using Local Zones, you can place resources, such as compute and storage, in multiple locations closer to your users\. Amazon RDS enables you to place resources, such as DB instances, and data in multiple locations\. Resources aren't replicated across AWS Regions unless you do so specifically\.
 
-Amazon operates state\-of\-the\-art, highly\-available data centers\. Although rare, failures can occur that affect the availability of instances that are in the same location\. If you host all your instances in a single location that is affected by such a failure, none of your instances is available\.
+Amazon operates state\-of\-the\-art, highly\-available data centers\. Although rare, failures can occur that affect the availability of DB instances that are in the same location\. If you host all your DB instances in a single location that is affected by such a failure, none of your DB instances will be available\.
 
 ![\[AWS Region\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Con-AZ-Local.png)
 

@@ -51,6 +51,8 @@ The parameters are as follows:
 + `--port` – The port number used for connecting to your DB instance
 + `--ssl-ca` – The SSL certificate file that contains the public key
 
+  For more information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
+
   For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection
 

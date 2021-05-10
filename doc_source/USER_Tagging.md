@@ -176,7 +176,7 @@ If you include a value for the `--tag-key` parameter of the [create\-db\-snapsho
    The commands and APIs for tagging work with ARNs\. That way, they can work seamlessly across AWS Regions, AWS accounts, and different types of resources that might have identical short names\. You can specify the ARN instead of the DB instance ID in CLI commands that operate on DB instances\. Substitute the name of your own DB instances for *dev\-test\-db\-instance*\. In subsequent commands that use ARN parameters, substitute the ARN of your own DB instance\. The ARN includes your own AWS account ID and the name of the AWS Region where your DB instance is located\. 
 
    ```
-   $ aws rds describe-db-instances --db-instance-id dev-test-db-instance \
+   $ aws rds describe-db-instances --db-instance-identifier dev-test-db-instance \
      --query "*[].{DBInstance:DBInstanceArn}" --output text
    arn:aws:rds:us-east-1:123456789102:db:dev-test-db-instance
    ```

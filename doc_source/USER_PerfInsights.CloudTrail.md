@@ -1,4 +1,4 @@
-# Logging Performance Insights calls by using AWS CloudTrail<a name="USER_PerfInsights.CloudTrail"></a>
+# Logging Performance Insights calls using AWS CloudTrail<a name="USER_PerfInsights.CloudTrail"></a>
 
 Performance Insights runs with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in Performance Insights\. CloudTrail captures all API calls for Performance Insights as events\. This capture includes calls from the Amazon RDS console and from code calls to the Performance Insights API operations\. 
 

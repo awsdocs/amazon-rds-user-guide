@@ -125,32 +125,24 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
 
    ```
    aws iam create-policy  --policy-name ExportPolicy --policy-document '{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::*"
-                ]
-            },
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:PutObject*",
-                    "s3:GetObject*",
-                    "s3:CopyObject*",
-                    "s3:DeleteObject*"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::your-s3-bucket",
-                    "arn:aws:s3:::your-s3-bucket/*"
-                ]
-            }
-        ]
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "ExportPolicy",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject*",
+                   "s3:ListBucket",
+                   "s3:GetObject*",
+                   "s3:DeleteObject*",
+                   "s3:GetBucketLocation"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::your-s3-bucket",
+                   "arn:aws:s3:::your-s3-bucket/*"
+               ]
+           }
+       ]
    }'
    ```
 

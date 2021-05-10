@@ -85,7 +85,7 @@ To find the connection information for a DB instance by using the Amazon RDS API
 
 ## Connecting from the mysql utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
 
-To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<quartermaster>`*\. Provide the master password that you used when prompted for a password\.
+To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<mymasteruser>`*\. Provide the master password that you used when prompted for a password\.
 
 ```
 mysql -h <endpoint> -P 3306 -u <mymasteruser> -p

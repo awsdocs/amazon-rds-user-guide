@@ -7,8 +7,31 @@ DB snapshot copy charges apply to the data transfer\. After the DB snapshot is c
 Backup replication is available for RDS DB instances running the following database engines:
 + Oracle version 12\.1\.0\.2\.v10 and higher
 + PostgreSQL version 9\.6 and higher
++ Microsoft SQL Server version 2012 and higher
 
-Backup replication isn't supported for encrypted DB instances\.
+  Backup replication isn't supported for encrypted SQL Server DB instances\.
+
+Backup replication is supported between the following AWS Regions:
+
+
+****  
+
+| Source Region | Destination Region | 
+| --- | --- | 
+| US East \(N\. Virginia\)  | US West \(Oregon\) | 
+| US West \(Oregon\) | US East \(N\. Virginia\) | 
+| Europe \(Frankfurt\) | Europe \(Ireland\) | 
+| Europe \(Ireland\) | Europe \(Frankfurt\) | 
+| Asia Pacific \(Tokyo\) | Asia Pacific \(Osaka\) | 
+
+You can also use the `describe-source-regions` AWS CLI command to find out which AWS Regions can replicate to each other\. For more information, see [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)\.
+
+**Topics**
++ [Enabling cross\-Region automated backups](#AutomatedBackups.Replicating.Enable)
++ [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)
++ [Restoring to a specified time from a replicated backup](#AutomatedBackups.PiTR)
++ [Stopping automated backup replication](#AutomatedBackups.StopReplicating)
++ [Deleting replicated backups](#AutomatedBackups.Delete)
 
 ## Enabling cross\-Region automated backups<a name="AutomatedBackups.Replicating.Enable"></a>
 
@@ -16,8 +39,6 @@ You can enable backup replication on new or existing DB instances using the Amaz
 
 **Note**  
 To be able to replicate automated backups, make sure to enable them\. For more information, see [Enabling automated backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups.Enabling)\.
-
-You can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-source-regions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-source-regions.html) CLI command to list the source AWS Regions that can replicate automated backups to a particular destination Region\. For more information, see [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)\.
 
 ### Console<a name="AutomatedBackups.Replicating.Enable.Console"></a>
 
@@ -41,6 +62,8 @@ You can enable backup replication for a new or existing DB instance:
 
 1. Choose the **Replicated backup retention period**\.
 
+1. If you've enabled encryption on the source DB instance, choose the **Master key** for encrypting the backups\.
+
 1. Choose **Save**\.
 
 In the source Region, replicated backups are listed on the **Current Region** tab of the **Automated backups** page\. In the destination Region, replicated backups are listed on the **Replicated backups** tab of the **Automated backups** page\.
@@ -49,7 +72,11 @@ In the source Region, replicated backups are listed on the **Current Region** ta
 
 Enable backup replication by using the [ `start-db-instance-automated-backups-replication`](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html) AWS CLI command\.
 
-The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. 
+The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. It also encrypts the replicated backups, using an AWS KMS customer master key in the destination Region\.
+
+**Note**  
+If you encrypt the backups, you must also include the `--source-region` option\. Specifying the source AWS Region autogenerates a presigned URL that is a valid request for the operation that can be executed in the source Region\.  
+For more information on presigned URLs, see [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the *Amazon Simple Storage Service API Reference* and [Signature Version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference*\.
 
 **To enable backup replication**
 + Run one of the following commands\.
@@ -60,6 +87,8 @@ The following CLI example replicates automated backups from a DB instance in the
   aws rds start-db-instance-automated-backups-replication \
   --region us-east-1 \
   --source-db-instance-arn "arn:aws:rds:us-west-2:123456789012:db:mydatabase" \
+  --kms-key-id "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE" \
+  --source-region us-west-2 \
   --backup-retention-period 7
   ```
 
@@ -69,6 +98,8 @@ The following CLI example replicates automated backups from a DB instance in the
   aws rds start-db-instance-automated-backups-replication ^
   --region us-east-1 ^
   --source-db-instance-arn "arn:aws:rds:us-west-2:123456789012:db:mydatabase" ^
+  --kms-key-id "arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE" ^
+  --source-region us-west-2 ^
   --backup-retention-period 7
   ```
 
@@ -78,6 +109,11 @@ Enable backup replication by using the [https://docs.aws.amazon.com/AmazonRDS/la
 + `Region`
 + `SourceDBInstanceArn`
 + `BackupRetentionPeriod`
++ `KmsKeyId` \(optional\)
++ `PreSignedUrl` \(required if you use `KmsKeyId`\)
+
+**Note**  
+If you encrypt the backups, you must also include a presigned URL\. For more information on presigned URLs, see [Authenticating Requests: Using Query Parameters \(AWS Signature Version 4\)](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html) in the *Amazon Simple Storage Service API Reference* and [Signature Version 4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) in the *AWS General Reference*\.
 
 ## Finding information about replicated backups<a name="AutomatedBackups.Replicating.Describe"></a>
 
@@ -95,24 +131,29 @@ The following `describe-source-regions` example lists the source AWS Regions fro
   aws rds describe-source-regions --region us-west-2
   ```
 
-The output shows that backups can be replicated from Asia Pacific \(Tokyo\), but not from Asia Pacific \(Seoul\), into US West \(Oregon\)\.
+The output shows that backups can be replicated from US East \(N\. Virginia\), but not from US East \(Ohio\) or US West \(N\. California\), into US West \(Oregon\)\.
 
 ```
 {
     "SourceRegions": [
+        ...
         {
-            "RegionName": "ap-northeast-1",
-            "Endpoint": "https://rds.ap-northeast-1.amazonaws.com",
+            "RegionName": "us-east-1",
+            "Endpoint": "https://rds.us-east-1.amazonaws.com",
             "Status": "available",
             "SupportsDBInstanceAutomatedBackupsReplication": true
         },
         {
-            "RegionName": "ap-northeast-2",
-            "Endpoint": "https://rds.ap-northeast-2.amazonaws.com",
+            "RegionName": "us-east-2",
+            "Endpoint": "https://rds.us-east-2.amazonaws.com",
+            "Status": "available",
+            "SupportsDBInstanceAutomatedBackupsReplication": false
+        },
+            "RegionName": "us-west-1",
+            "Endpoint": "https://rds.us-west-1.amazonaws.com",
             "Status": "available",
             "SupportsDBInstanceAutomatedBackupsReplication": false
         }
-        ...
     ]
 }
 ```
@@ -246,6 +287,9 @@ The output shows the source DB instance in US West \(Oregon\), with replicated b
 You can restore a DB instance to a specific point in time from a replicated backup using the Amazon RDS console\. You can also use the `restore-db-instance-to-point-in-time` AWS CLI command or the `RestoreDBInstanceToPointInTime` RDS API operation\.
 
 For general information on point\-in\-time recovery \(PITR\), see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+
+**Note**  
+On RDS for SQL Server, option groups aren't copied across AWS Regions when automated backups are replicated\. If you've associated a custom option group with your RDS for SQL Server DB instance, you can re\-create that option group in the destination Region\. Then restore the DB instance in the destination Region and associate the custom option group with it\. For more information, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
 
 ### Console<a name="AutomatedBackups.PiTR.Console"></a>
 
@@ -412,5 +456,3 @@ You can use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-d
 ### RDS API<a name="AutomatedBackups.Delete.API"></a>
 
 Delete replicated backups by using the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstanceAutomatedBackup.html) RDS API operation with the `DBInstanceAutomatedBackupsArn` parameter\.
-
-## <a name="USER_WorkingWithAutomatedBackups.related"></a>

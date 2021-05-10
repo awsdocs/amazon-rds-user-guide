@@ -219,14 +219,14 @@ aws ec2 describe-subnets --query '*[].[VpcId,SubnetId]' --output text | sort
 
 ```
 $ # Optional first step, only needed if you're starting from an Aurora cluster. Find the ID of any DB instance in the cluster.
-$  aws rds describe-db-clusters --db-cluster-id my_cluster_id --query '*[].[DBClusterMembers]|[0]|[0][*].DBInstanceIdentifier' --output text
+$  aws rds describe-db-clusters --db-cluster-identifier my_cluster_id --query '*[].[DBClusterMembers]|[0]|[0][*].DBInstanceIdentifier' --output text
 my_instance_id
 instance_id_2
 instance_id_3
 ...
 
 $ # From the DB instance, trace through the DBSubnetGroup and Subnets to find the subnet IDs.
-$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[DBSubnetGroup]|[0]|[0]|[Subnets]|[0]|[*].SubnetIdentifier' --output text
+$ aws rds describe-db-instances --db-instance-identifier my_instance_id --query '*[].[DBSubnetGroup]|[0]|[0]|[Subnets]|[0]|[*].SubnetIdentifier' --output text
 subnet_id_1
 subnet_id_2
 subnet_id_3
@@ -237,7 +237,7 @@ subnet_id_3
 
 ```
 $ # From the DB instance, find the VPC.
-$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[VpcId]' --output text
+$ aws rds describe-db-instances --db-instance-identifier my_instance_id --query '*[].[VpcId]' --output text
 my_vpc_id
 
 $ aws ec2 describe-subnets --filters Name=vpc-id,Values=my_vpc_id --query '*[].[SubnetId]' --output text
@@ -1132,7 +1132,7 @@ aws rds deregister-db-proxy-targets
 
  The following steps explain how to create and access a cross\-VPC endpoint through RDS Proxy: 
 
-1.  Create two VPCs, or choose two VPCs that you already use for Aurora and RDS work\. Each VPC should have its own associated network resources such as an Internet gateway, route tables, subnets, and security groups\. If you only have one VPC, you can consult [Getting started with Amazon RDS](CHAP_GettingStarted.md#CHAP_GettingStarted.title) for the steps to set up another VPC to use RDS successfully\. You can also examine your existing VPC in the Amazon EC2 console to see what kinds of resources to connect together\. 
+1.  Create two VPCs, or choose two VPCs that you already use for Aurora and RDS work\. Each VPC should have its own associated network resources such as an Internet gateway, route tables, subnets, and security groups\. If you only have one VPC, you can consult [Getting started with Amazon RDS](CHAP_GettingStarted.md) for the steps to set up another VPC to use RDS successfully\. You can also examine your existing VPC in the Amazon EC2 console to see what kinds of resources to connect together\. 
 
 1.  Create a DB proxy associated with the Aurora DB cluster or RDS instance that you want to connect to\. Follow the procedure in [Creating an RDS Proxy](#rds-proxy-creating)\. 
 
@@ -1418,7 +1418,7 @@ mysql> select @@aurora_server_id;
 mysql>
 [1]+  Stopped                 mysql -h the-proxy.proxy-demo.us-east-1.rds.amazonaws.com -u admin_user -p
 $ # Initially, instance-9814 is the writer.
-$ aws rds failover-db-cluster --db-cluster-id cluster-56-2019-11-14-1399
+$ aws rds failover-db-cluster --db-cluster-identifier cluster-56-2019-11-14-1399
 JSON output
 $ # After a short time, the console shows that the failover operation is complete.
 $ # Now instance-8898 is the writer.
@@ -1435,7 +1435,7 @@ mysql> select @@aurora_server_id;
 
 mysql>
 [1]+  Stopped                 mysql -h the-proxy.proxy-demo.us-east-1.rds.amazonaws.com -u admin_user -p
-$ aws rds failover-db-cluster --db-cluster-id cluster-56-2019-11-14-1399
+$ aws rds failover-db-cluster --db-cluster-identifier cluster-56-2019-11-14-1399
 JSON output
 $ # After a short time, the console shows that the failover operation is complete.
 $ # Now instance-9814 is the writer again.
