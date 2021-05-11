@@ -18,15 +18,13 @@ Amazon RDS supports Oracle Spatial only in Oracle Enterprise Edition \(EE\) and 
 |  18\.0\.0\.0, all versions  |  Yes  |  Yes  | 
 |  12\.2\.0\.1, all versions  |  Yes  |  Yes  | 
 |  12\.1\.0\.2\.v13 or later  |  Yes  |  No  | 
-|  11\.2\.0\.4\.v17 or later  |  Yes  |  N/A  | 
 
 ## Prerequisites for Oracle Spatial<a name="Oracle.Options.Spatial.PreReqs"></a>
 
 The following are prerequisites for using Oracle Spatial: 
 + Make sure that your DB instance is inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Make sure that your DB instance is of a sufficient instance class\. Oracle Spatial isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
++ Make sure that your DB instance is of a sufficient instance class\. Oracle Spatial isn't supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 + Make sure that your DB instance has **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available and is required for any options that install the Oracle Java Virtual Machine \(JVM\)\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ If your DB instance is running on major version 11\.2, make sure that you install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 
 ## Best practices for Oracle Spatial<a name="Oracle.Options.Spatial.BestPractces"></a>
 

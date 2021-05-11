@@ -1,6 +1,11 @@
 # Microsoft SQL Server database log files<a name="USER_LogAccess.Concepts.SQLServer"></a>
 
-You can access Microsoft SQL Server error logs, agent logs, trace files, and dump files by using the Amazon RDS console, AWS CLI, or RDS API\. For more information about viewing, downloading, and watching file\-based database logs, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\. 
+You can access Microsoft SQL Server error logs, agent logs, trace files, and dump files by using the Amazon RDS console, AWS CLI, or RDS API\. For more information about viewing, downloading, and watching file\-based database logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.
+
+**Topics**
++ [Retention schedule](#USER_LogAccess.Concepts.SQLServer.Retention)
++ [Viewing the SQL Server error log by using the rds\_read\_error\_log procedure](#USER_LogAccess.Concepts.SQLServer.Proc)
++ [Publishing SQL Server logs to Amazon CloudWatch Logs](#USER_LogAccess.SQLServer.PublishtoCloudWatchLogs)
 
 ## Retention schedule<a name="USER_LogAccess.Concepts.SQLServer.Retention"></a>
 

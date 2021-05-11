@@ -1,10 +1,10 @@
-# Options for Oracle DB instances<a name="Appendix.Oracle.Options"></a>
+# Adding options to Oracle DB instances<a name="Appendix.Oracle.Options"></a>
 
-Following, you can find a description of options, or additional features, that are available for Amazon RDS instances running the Oracle DB engine\. To enable these options, you add them to an option group, and then associate the option group with your DB instance\. For more information, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
+In Amazon RDS, an option is an additional feature\. Following, you can find a description of options that you can add to Amazon RDS instances running the Oracle DB engine\. To enable these options, you add them to an option group, and then associate the option group with your DB instance\. For more information, see [Working with option groups](USER_WorkingWithOptionGroups.md)\. 
 
 Some options require additional memory to run on your DB instance\. For example, Oracle Enterprise Manager Database Control uses about 300 MB of RAM\. If you enable this option for a small DB instance, you might encounter performance problems due to memory constraints\. You can adjust the Oracle parameters so that the database requires less RAM\. Alternatively, you can scale up to a larger DB instance\. 
 
-Amazon RDS supports the following options for Oracle DB instances\. 
+You can add the following options for Oracle DB instances\. 
 
 
 ****  

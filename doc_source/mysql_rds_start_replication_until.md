@@ -1,6 +1,6 @@
 # mysql\.rds\_start\_replication\_until<a name="mysql_rds_start_replication_until"></a>
 
-Initiates replication from an Amazon RDS MySQL DB instance and stops replication at the specified binary log file location\.
+Initiates replication from an RDS for MySQL DB instance and stops replication at the specified binary log file location\.
 
 ## Syntax<a name="mysql_rds_start_replication_until-syntax"></a>
 
@@ -36,7 +36,7 @@ The file name specified for the `replication_log_file` parameter must match the 
 
 When the `replication_stop_point ` parameter specifies a stop location that is in the past, replication is stopped immediately\.
 
-The `mysql.rds_start_replication_until` procedure is available in these versions of Amazon RDS MySQL:
+The `mysql.rds_start_replication_until` procedure is available in these versions of RDS for MySQL:
 + MySQL 5\.6\.40 and later 5\.6 versions
 + MySQL 5\.7\.22 and later 5\.7 versions
 

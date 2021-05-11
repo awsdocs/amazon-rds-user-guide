@@ -12,8 +12,8 @@ Some DB engines offer additional features that make it easier to manage data and
 |  `MariaDB`  |  [Options for MariaDB database engine](Appendix.MariaDB.Options.md)  | 
 |  `Microsoft SQL Server`  |  [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)  | 
 |  `MySQL`  |  [Options for MySQL DB instances](Appendix.MySQL.Options.md)  | 
-|  `Oracle`  |  [Options for Oracle DB instances](Appendix.Oracle.Options.md)  | 
-|  `PostgreSQL`  |  PostgreSQL does not use options and option groups\. PostgreSQL uses extensions and modules to provide additional features\. For more information, see [Supported PostgreSQL features and extensions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeaturesExtensions)\.  | 
+|  `Oracle`  |  [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)  | 
+|  `PostgreSQL`  |  PostgreSQL does not use options and option groups\. PostgreSQL uses extensions and modules to provide additional features\. For more information, see [PostgreSQL extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions)\.  | 
 
 ## Option groups overview<a name="Overview.OptionGroups"></a>
 

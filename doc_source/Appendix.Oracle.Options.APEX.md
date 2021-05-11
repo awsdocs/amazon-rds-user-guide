@@ -28,11 +28,10 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 |  Oracle APEX version 19\.1\.v1  |  148 MiB  |  All  |  | 
 |  Oracle APEX version 18\.2\.v1  |  146 MiB  |  All except 19c  |  | 
 |  Oracle APEX version 18\.1\.v1  |  145 MiB  | All except 19c |  | 
-|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  All except 19c \(see Notes\)  |  Oracle APEX 5\.1\.4 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.  | 
-|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  12\.1 and 11g only \(see Notes\)  |  Oracle APEX 5\.1\.2 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.  | 
-|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  12\.1 and 11g only \(see Notes\)  |  Oracle APEX 5\.0\.4 for Oracle 11g isn't supported when the DB instance class used by the DB instance has only one vCPU\. For information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.  | 
-|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  12\.1 and 11g only  |  | 
-|  Oracle APEX version 4\.1\.1\.v1  |  130 MiB  |  11g only  |  | 
+|  Oracle APEX version 5\.1\.4\.v1  |  220 MiB  |  All except 19c  |  | 
+|  Oracle APEX version 5\.1\.2\.v1  |  150 MiB  |  12\.1 only  |  | 
+|  Oracle APEX version 5\.0\.4\.v1  |  140 MiB  |  12\.1 only  |  | 
+|  Oracle APEX version 4\.2\.6\.v1  |  160 MiB  |  12\.1 only  |  | 
 
 ## Prerequisites for Oracle APEX and ORDS<a name="Appendix.Oracle.Options.APEX.PreReqs"></a>
 
@@ -64,11 +63,9 @@ When you add the Amazon RDS APEX options, a brief outage occurs while your DB in
 
    For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
-1. Add the options to the option group\. If you want to deploy only the Oracle APEX run\-time environment, add only the `APEX` option\. If you want to deploy the full development environment, add both the `APEX` and `APEX-DEV` options\. 
-   + For Oracle 12c, add the **APEX** and **APEX\-DEV** options\.
-   + For Oracle 11g, first add the **XMLDB** option as a prerequisite, then add the **APEX** and **APEX\-DEV** options\. 
+1. Add the options to the option group\. If you want to deploy only the Oracle APEX run\-time environment, add only the `APEX` option\. If you want to deploy the full development environment, add both the `APEX` and `APEX-DEV` options\. For Oracle Database 12c, add the **APEX** and **APEX\-DEV** options\.
 
-   For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.1\.1\.v1 is the default for 11g, and version 4\.2\.6\.v1 is the default for 12c\. 
+   For **Version**, choose the version of `APEX` that you want to use\. If you don't choose a version, version 4\.2\.6\.v1 is the default for Oracle Database 12c\. 
 **Important**  
 If you add the APEX options to an existing option group that is already attached to one or more DB instances, a brief outage occurs\. During this outage, all the DB instances are automatically restarted\. 
 

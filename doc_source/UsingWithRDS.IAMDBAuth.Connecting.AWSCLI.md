@@ -8,7 +8,7 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 + [Creating a database account using IAM authentication](UsingWithRDS.IAMDBAuth.DBAccounts.md)
 
 **Note**  
-For information about connecting to your database using SQL Workbench/J with IAM authentication, see the blog post [Use IAM authentication to connect with SQL Workbench/J to Amazon Aurora MySQL or Amazon RDS for MySQL](http://aws.amazon.com/blogs/database/use-iam-authentication-to-connect-with-sql-workbenchj-to-amazon-aurora-mysql-or-amazon-rds-for-mysql/)\.
+For information about connecting to your database using SQL Workbench/J with IAM authentication, see the blog post [Use IAM authentication to connect with SQL Workbench/J to Aurora MySQL or Amazon RDS for MySQL](http://aws.amazon.com/blogs/database/use-iam-authentication-to-connect-with-sql-workbenchj-to-amazon-aurora-mysql-or-amazon-rds-for-mysql/)\.
 
 **Topics**
 + [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken)
@@ -51,8 +51,12 @@ The parameters are as follows:
 + `--port` – The port number used for connecting to your DB instance
 + `--ssl-ca` – The SSL certificate file that contains the public key
 
+  For more information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
+
   For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 + `--enable-cleartext-plugin` – A value that specifies that `AWSAuthenticationPlugin` must be used for this connection
+
+  If you are using a MariaDB client, the `--enable-cleartext-plugin` option isn't required\.
 + `--user` – The database account that you want to access
 + `--password` – A signed IAM authentication token
 

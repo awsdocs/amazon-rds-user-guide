@@ -7,7 +7,7 @@ For example, using the CLI, you can do the following:
 + To disable Kerberos authentication on a DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command and specify `none` for the `--domain` option\.
 + To move a DB instance from one domain to another, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command and specify the domain identifier of the new domain for the `--domain` option\.
 
-### Viewing the status of domain membership<a name="oracle-kerberos-managing.understanding"></a>
+## Viewing the status of domain membership<a name="oracle-kerberos-managing.understanding"></a>
 
 After you create or modify your DB instance, the DB instance becomes a member of the domain\. You can view the status of the domain membership for the DB instance in the console or by running the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) CLI command\. The status of the DB instance can be one of the following: 
 + `kerberos-enabled` – The DB instance has Kerberos authentication enabled\.
@@ -24,7 +24,7 @@ A request to enable Kerberos authentication can fail because of a network connec
 **Note**  
 Only Kerberos authentication with Amazon RDS for Oracle sends traffic to the domain's DNS servers\. All other DNS requests are treated as outbound network access on your DB instances running Oracle\. For more information about outbound network access with Amazon RDS for Oracle, see [Setting up a custom DNS server](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.CustomDNS)\.
 
-### Force\-rotating Kerberos keys<a name="oracle-kerberos-managing.rotation"></a>
+## Force\-rotating Kerberos keys<a name="oracle-kerberos-managing.rotation"></a>
 
 A secret key is shared between AWS Managed Microsoft AD and Amazon RDS for Oracle DB instance\. This key is rotated automatically every 45 days\. You can use the following Amazon RDS procedure to force the rotation of this key\.
 

@@ -4,8 +4,8 @@ You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from
 + [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)
-+ [Encrypting client connections with SSL](Oracle.Concepts.RestrictedDBAPrivileges.md#Oracle.Concepts.SSL)
-+ [Using SSL with a PostgreSQL DB instance](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.SSL)
++ [Encrypting client connections with SSL](Oracle.Concepts.SSL.md)
++ [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)
 
 **Important**  
 For information about rotating your certificate, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\.

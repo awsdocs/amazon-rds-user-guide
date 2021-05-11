@@ -1,6 +1,6 @@
 # Exporting data from a MySQL DB instance by using replication<a name="MySQL.Procedural.Exporting.NonRDSRepl"></a>
 
-To export data from a MySQL 5\.6 or later DB instance to a MySQL instance running external to Amazon RDS, you can use replication\. In this scenario, the Amazon RDS MySQL DB instance is the *source MySQL DB instance*, and the MySQL instance running external to Amazon RDS is the *external MySQL database*\.
+To export data from a MySQL 5\.6 or later DB instance to a MySQL instance running external to Amazon RDS, you can use replication\. In this scenario, the MySQL DB instance is the *source MySQL DB instance*, and the MySQL instance running external to Amazon RDS is the *external MySQL database*\.
 
 The source MySQL DB instance must be running version 5\.6\.13 or later\. The external MySQL database can run either on\-premises in your data center, or on an Amazon EC2 instance\. The external MySQL database must run the same version as the source MySQL DB instance, or a later version\.
 
@@ -69,7 +69,7 @@ Perform the following steps to prepare the source MySQL DB instance as the repli
 
 1. Ensure that the backup retention period is set long enough that no binary logs are purged during the export\. If any of the logs are purged before the export has completed, you must restart replication from the beginning\. For more information about setting the backup retention period, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
-1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL binary logs](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.Binarylog)\.
+1. Use the `mysql.rds_set_configuration` stored procedure to set the binary log retention period long enough that the binary logs aren't purged during the export\. For more information, see [Accessing MySQL binary logs](USER_LogAccess.MySQL.Binarylog.md)\.
 
 1. Create an Amazon RDS read replica from the source MySQL DB instance to further ensure that the binary logs of the source MySQL DB instance are not purged\. For more information, see [Creating a read replica](USER_ReadRepl.md#USER_ReadRepl.Create)\.
 

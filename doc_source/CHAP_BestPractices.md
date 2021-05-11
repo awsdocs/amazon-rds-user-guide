@@ -7,8 +7,9 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [DB instance RAM recommendations](#CHAP_BestPractices.Performance.RAM)
 + [Using Enhanced Monitoring to identify operating system issues](#CHAP_BestPractices.EnhancedMonitoring)
 + [Using metrics to identify performance issues](#CHAP_BestPractices.UsingMetrics)
-+ [Best practices for working with MySQL storage engines](#CHAP_BestPractices.MySQLStorage)
-+ [Best practices for working with MariaDB storage engines](#CHAP_BestPractices.MariaDB)
++ [Tuning queries](#CHAP_BestPractices.TuningQueries)
++ [Best practices for working with MySQL](#CHAP_BestPractices.MySQLStorage)
++ [Best practices for working with MariaDB](#CHAP_BestPractices.MariaDB)
 + [Best practices for working with Oracle](#CHAP_BestPractices.Oracle)
 + [Best practices for working with PostgreSQL](#CHAP_BestPractices.PostgreSQL)
 + [Best practices for working with SQL Server](#CHAP_BestPractices.SQLServer)
@@ -16,7 +17,7 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [Amazon RDS new features and best practices presentation video](#CHAP_BestPractices.Presentation)
 
 **Note**  
-For common recommendations for Amazon RDS, see [Using Amazon RDS recommendations](USER_Recommendations.md)\.
+For common recommendations for Amazon RDS, see [Viewing Amazon RDS recommendations](accessing-monitoring.md#USER_Recommendations)\.
 
 ## Amazon RDS basic operational guidelines<a name="CHAP_BestPractices.DiskPerformance"></a>
 
@@ -37,11 +38,11 @@ The following are basic operational guidelines that everyone should follow when 
 
 An Amazon RDS performance best practice is to allocate enough RAM so that your *working set* resides almost completely in memory\. The working set is the data and indexes that are frequently in use on your instance\. The more you use the DB instance, the more the working set will grow\.
 
-To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\.
+To tell if your working set is almost all in memory, check the ReadIOPS metric \(using Amazon CloudWatch\) while the DB instance is under load\. The value of ReadIOPS should be small and stable\. If scaling up the DB instance class—to a class with more RAM—results in a dramatic drop in ReadIOPS, your working set was not almost completely in memory\. Continue to scale up until ReadIOPS no longer drops dramatically after a scaling operation, or ReadIOPS is reduced to a very small amount\. For information on monitoring a DB instance's metrics, see [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)\.
 
 ## Using Enhanced Monitoring to identify operating system issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
-When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 ## Using metrics to identify performance issues<a name="CHAP_BestPractices.UsingMetrics"></a>
 
@@ -67,7 +68,7 @@ To troubleshoot performance issues, it's important to understand the baseline pe
 **Note**  
  Changing the **Statistic**, **Time Range**, and **Period** values changes them for all metrics\. The updated values persist for the remainder of your session or until you change them again\. 
 
- You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\. 
+ You can also view performance metrics using the CLI or API\. For more information, see [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)\. 
 
 ****To set a CloudWatch alarm****
 
@@ -117,7 +118,7 @@ The alarm appears in the **CloudWatch alarms** section\.
 +  Queue Depth – The number of I/O operations that are waiting to be written to or read from disk\. 
 
 **Network traffic**
-+  Network Receive Throughput, Network Transmit Throughput – The rate of network traffic to and from the DB instance in megabytes per second\. 
++  Network Receive Throughput, Network Transmit Throughput – The rate of network traffic to and from the DB instance in bytes per second\. 
 
 **Database connections**
 +  DB Connections – The number of client sessions that are connected to the DB instance\. 
@@ -131,37 +132,24 @@ The alarm appears in the **CloudWatch alarms** section\.
 +  **Database connections –** Consider constraining database connections if you see high numbers of user connections in conjunction with decreases in instance performance and response time\. The best number of user connections for your DB instance will vary based on your instance class and the complexity of the operations being performed\. You can determine the number of database connections by associating your DB instance with a parameter group where the *User Connections* parameter is set to other than 0 \(unlimited\)\. You can either use an existing parameter group or create a new one\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
 +  **IOPS metrics –** The expected values for IOPS metrics depend on disk specification and server configuration, so use your baseline to know what is typical\. Investigate if values are consistently different than your baseline\. For best IOPS performance, make sure your typical working set will fit into memory to minimize read and write operations\. 
 
- For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [ Tuning queries ](#CHAP_BestPractices.TuningQueries)
+ For issues with any performance metrics, one of the first things you can do to improve performance is tune the most used and most expensive queries to see if that lowers the pressure on system resources\. For more information, see [Tuning queries](#CHAP_BestPractices.TuningQueries)\.
 
  If your queries are tuned and an issue persists, consider upgrading your Amazon RDS [DB instance classes](Concepts.DBInstanceClass.md) to one with more of the resource \(CPU, RAM, disk space, network bandwidth, I/O capacity\) that is related to the issue you are experiencing\. 
 
-### Tuning queries<a name="CHAP_BestPractices.TuningQueries"></a>
+## Tuning queries<a name="CHAP_BestPractices.TuningQueries"></a>
 
- One of the best ways to improve DB instance performance is to tune your most commonly used and most resource\-intensive queries to make them less expensive to run\. 
+One of the best ways to improve DB instance performance is to tune your most commonly used and most resource\-intensive queries to make them less expensive to run\. For information on improving queries, use the following resources:
++ MySQL – See [Optimizing SELECT statements](https://dev.mysql.com/doc/refman/8.0/en/select-optimization.html) in the MySQL documentation\. For additional query tuning resources, see [MySQL performance tuning and optimization resources](http://www.mysql.com/why-mysql/performance/)\.
++ Oracle – See [Database SQL Tuning Guide](https://docs.oracle.com/database/121/TGSQL/toc.htm) in the Oracle documentation\.
++ SQL Server – See [Analyzing a query](http://technet.microsoft.com/en-us/library/ms191227.aspx) in the Microsoft documentation\. You can also use the execution\-, index\-, and I/O\-related data management views \(DMVs\) described in [System Dynamic Management Views](https://docs.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/system-dynamic-management-views) in the Microsoft documentation to troubleshoot SQL Server query issues\.
 
- MySQL Query Tuning 
+  A common aspect of query tuning is creating effective indexes\. For potential index improvements for your DB instance, see [Database Engine Tuning Advisor](https://docs.microsoft.com/en-us/sql/relational-databases/performance/database-engine-tuning-advisor) in the Microsoft documentation\. For information on using Tuning Advisor on RDS for SQL Server, see [Analyzing your database workload on an Amazon RDS for SQL Server DB instance with Database Engine Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)\.
++ PostgreSQL – See [Using EXPLAIN](http://www.postgresql.org/docs/current/using-explain.html) in the PostgreSQL documentation to learn how to analyze a query plan\. You can use this information to modify a query or underlying tables in order to improve query performance\.
 
- Go to [Optimizing SELECT statements](https://dev.mysql.com/doc/refman/8.0/en/select-optimization.html) in the MySQL documentation for more information on writing queries for better performance\. You can also go to [MySQL performance tuning and optimization resources](http://www.mysql.com/why-mysql/performance/) for additional query tuning resources\. 
+  For information about how to specify joins in your query for the best performance, see [Controlling the planner with explicit JOIN clauses](http://www.postgresql.org/docs/current/explicit-joins.html)\.
++ MariaDB – See [Query optimizations](https://mariadb.com/kb/en/mariadb/query-optimizations/) in the MariaDB documentation\.
 
- Oracle Query Tuning 
-
- Go to the [Database SQL Tuning Guide](https://docs.oracle.com/database/121/TGSQL/toc.htm) in the Oracle documentation for more information on writing and analyzing queries for better performance\. 
-
- SQL Server Query Tuning 
-
- Go to [Analyzing a query](http://technet.microsoft.com/en-us/library/ms191227.aspx) in the SQL Server documentation to improve queries for SQL Server DB instances\. You can also use the execution\-, index\- and I/O\-related data management views \(DMVs\) described in the [Dynamic management views and functions](http://msdn.microsoft.com/en-us/library/ms188754%28v=sql.110%29.aspx) documentation to troubleshoot SQL Server query issues\. 
-
- A common aspect of query tuning is creating effective indexes\. You can use the [Database engine Tuning Advisor](http://msdn.microsoft.com/en-us/library/hh231122%28v=sql.110%29.aspx) to get potential index improvements for your DB instance\. For more information, see [Analyzing your database workload on an Amazon RDS DB instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)\. 
-
- PostgreSQL Query Tuning 
-
- Go to [Using EXPLAIN](http://www.postgresql.org/docs/8.2/static/using-explain.html) in the PostgreSQL documentation to learn how to analyze a query plan\. You can use this information to modify a query or underlying tables in order to improve query performance\. You can also go to [Controlling the planner with explicit JOIN clauses](http://www.postgresql.org/docs/8.2/static/explicit-joins.html) to get tips about how to specify joins in your query for the best performance\. 
-
- MariaDB Query Tuning 
-
- Go to [Query optimizations](https://mariadb.com/kb/en/mariadb/query-optimizations/) in the MariaDB documentation for more information on writing queries for better performance\.
-
-## Best practices for working with MySQL storage engines<a name="CHAP_BestPractices.MySQLStorage"></a>
+## Best practices for working with MySQL<a name="CHAP_BestPractices.MySQLStorage"></a>
 
 Both table sizes and number of tables in a MySQL database can affect performance\.
 
@@ -207,7 +195,7 @@ If you want to convert existing MyISAM tables to InnoDB tables, you can use the 
 
 In addition, Federated Storage Engine is currently not supported by Amazon RDS for MySQL\.
 
-## Best practices for working with MariaDB storage engines<a name="CHAP_BestPractices.MariaDB"></a>
+## Best practices for working with MariaDB<a name="CHAP_BestPractices.MariaDB"></a>
 
 Both table sizes and number of tables in a MariaDB database can affect performance\.
 
@@ -259,6 +247,8 @@ A 2020 AWS virtual workshop included a presentation on running production Oracle
 
 Two important areas where you can improve performance with PostgreSQL on Amazon RDS are when loading data into a DB instance and when using the PostgreSQL autovacuum feature\. The following sections cover some of the practices we recommend for these areas\.
 
+For information on how Amazon RDS implements other common PostgreSQL DBA tasks, see [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)\.
+
 ### Loading data into a PostgreSQL DB instance<a name="CHAP_BestPractices.PostgreSQL.LoadingData"></a>
 
 When loading data into an Amazon RDS PostgreSQL DB instance, you should modify your DB instance settings and your DB parameter group values to allow for the most efficient importing of data into your DB instance\.
@@ -268,11 +258,11 @@ Modify your DB instance settings to the following:
 + Disable Multi\-AZ
 
 Modify your DB parameter group to include the following settings\. You should test the parameter settings to find the most efficient settings for your DB instance:
-+ Increase the value of the `maintenance_work_mem` parameter\. For more information about PostgreSQL resource consumption parameters, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/runtime-config-resource.html)\.
++ Increase the value of the `maintenance_work_mem` parameter\. For more information about PostgreSQL resource consumption parameters, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/runtime-config-resource.html)\.
 + Increase the value of the `checkpoint_segments` and `checkpoint_timeout` parameters to reduce the number of writes to the wal log\.
 + Disable the `synchronous_commit` parameter \(do not turn off FSYNC\)\.
 + Disable the PostgreSQL autovacuum parameter\.
-+ Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information, see [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/static/sql-createtable.html)\.
++ Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information, see [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/sql-createtable.html)\.
 
 Use the `pg_dump -Fc` \(compressed\) or `pg_restore -j` \(parallel\) commands with these settings\.
 
@@ -280,25 +270,25 @@ After the load operation completes, return your DB instance and DB parameters to
 
 ### Working with the PostgreSQL autovacuum feature<a name="CHAP_BestPractices.PostgreSQL.Autovacuum"></a>
 
- The autovacuum feature for PostgreSQL databases is a feature that we strongly recommend you use to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the execution of the VACUUM and ANALYZE command; using autovacuum is required by PostgreSQL, not imposed by Amazon RDS, and its use is critical to good performance\. The feature is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related configuration parameters are appropriately set by default\. 
+The autovacuum feature for PostgreSQL databases is a feature that we strongly recommend you use to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the execution of the VACUUM and ANALYZE command; using autovacuum is required by PostgreSQL, not imposed by Amazon RDS, and its use is critical to good performance\. The feature is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related configuration parameters are appropriately set by default\.
 
- Your database administrator needs to know and understand this maintenance operation\. For the PostgreSQL documentation on autovacuum, see [ Routine vacuuming](http://www.postgresql.org/docs/current/static/routine-vacuuming.html#AUTOVACUUM)\. 
+Your database administrator needs to know and understand this maintenance operation\. For the PostgreSQL documentation on autovacuum, see [The Autovacuum Daemon](http://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM)\.
 
- Autovacuum is not a "resource free" operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to transaction ID wraparound\. For more information, see [Preventing transaction ID wraparound failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\.
+Autovacuum is not a "resource free" operation, but it works in the background and yields to user operations as much as possible\. When enabled, autovacuum checks for tables that have had a large number of updated or deleted tuples\. It also protects against loss of very old data due to transaction ID wraparound\. For more information, see [Preventing transaction ID wraparound failures](https://www.postgresql.org/docs/current/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND)\.
 
- Autovacuum should not be thought of as a high\-overhead operation that can be reduced to gain better performance\. On the contrary, tables that have a high velocity of updates and deletes will quickly deteriorate over time if autovacuum is not run\. 
+Autovacuum should not be thought of as a high\-overhead operation that can be reduced to gain better performance\. On the contrary, tables that have a high velocity of updates and deletes will quickly deteriorate over time if autovacuum is not run\.
 
 **Important**  
  Not running autovacuum can result in an eventual required outage to perform a much more intrusive vacuum operation\. When an Amazon RDS PostgreSQL DB instance becomes unavailable because of an over conservative use of autovacuum, the PostgreSQL database will shut down to protect itself\. At that point, Amazon RDS must perform a single\-user\-mode full vacuum directly on the DB instance , which can result in a multi\-hour outage\.* *Thus, we strongly recommend that you do not turn off autovacuum, which is enabled by default\. 
 
-The autovacuum parameters determine when and how hard autovacuum works\. The` autovacuum_vacuum_threshold` and `autovacuum_vacuum_scale_factor` parameters determine when autovacuum is run\. The `autovacuum_max_workers`, `autovacuum_nap_time`, `autovacuum_cost_limit`, and `autovacuum_cost_delay` parameters determine how hard autovacuum works\. For more information about autovacuum, when it runs, and what parameters are required, see the [PostgreSQL documentation](https://www.postgresql.org/docs/current/routine-vacuuming.html)\.
+The autovacuum parameters determine when and how hard autovacuum works\. The`autovacuum_vacuum_threshold` and `autovacuum_vacuum_scale_factor` parameters determine when autovacuum is run\. The `autovacuum_max_workers`, `autovacuum_nap_time`, `autovacuum_cost_limit`, and `autovacuum_cost_delay` parameters determine how hard autovacuum works\. For more information about autovacuum, when it runs, and what parameters are required, see [Routine Vacuuming](https://www.postgresql.org/docs/current/routine-vacuuming.html) in the PostgreSQL documentation\.
 
- The following query shows the number of "dead" tuples in a table named table1 : 
+ The following query shows the number of "dead" tuples in a table named table1: 
 
 ```
 PROMPT> select relname, n_dead_tup, last_vacuum, last_autovacuum from 
 pg_catalog.pg_stat_all_tables
-where n_dead_tup > 0 and relname =  'table1';
+where n_dead_tup > 0 and relname = 'table1';
 ```
 
 The results of the query will resemble the following:
@@ -309,6 +299,12 @@ relname | n_dead_tup | last_vacuum | last_autovacuum
  tasks   |   81430522 |             |
 (1 row)
 ```
+
+### Amazon RDS for PostgreSQL best practices video<a name="CHAP_BestPractices.pgSQL.Presentation"></a>
+
+The 2020 AWS re:Invent conference included a presentation on new features and best practices for working with PostgreSQL on Amazon RDS\. A video of the presentation is available here:
+
+[![AWS Videos](http://img.youtube.com/vi/https://www.youtube.com/embed/3JLPWOoiVB8/0.jpg)](http://www.youtube.com/watch?v=https://www.youtube.com/embed/3JLPWOoiVB8)
 
 ## Best practices for working with SQL Server<a name="CHAP_BestPractices.SQLServer"></a>
 
@@ -328,7 +324,7 @@ Best practices for a Multi\-AZ deployment with a SQL Server DB instance include 
 
 When working with a Multi\-AZ deployment of SQL Server, remember that Amazon RDS creates replicas for all SQL Server databases on your instance\. If you don't want specific databases to have secondary replicas, set up a separate DB instance that doesn't use Multi\-AZ for those databases\.
 
-### Amazon RDS SQL Server best practices video<a name="CHAP_BestPractices.SQLServer.Presentation"></a>
+### Amazon RDS for SQL Server best practices video<a name="CHAP_BestPractices.SQLServer.Presentation"></a>
 
 The 2019 AWS re:Invent conference included a presentation on new features and best practices for working with SQL Server on Amazon RDS\. A video of the presentation is available here:
 

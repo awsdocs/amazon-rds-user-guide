@@ -1,15 +1,10 @@
 # Exporting DB snapshot data to Amazon S3<a name="USER_ExportSnapshot"></a>
 
-
-
 You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
 
 When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
 You can export all types of DB snapshots—including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
-
-**Note**  
-Exporting snapshots from DB instances that use magnetic storage isn't supported\.
 
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
@@ -30,6 +25,7 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Supported PostgreSQL database versions](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.DBVersions)
 
 **Topics**
++ [Limitations](#USER_ExportSnapshot.Limits)
 + [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
 + [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
@@ -38,6 +34,22 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Troubleshooting PostgreSQL permissions errors](#USER_ExportSnapshot.postgres-permissions)
 + [File naming convention](#USER_ExportSnapshot.FileNames)
 + [Data conversion when exporting to an Amazon S3 bucket](#USER_ExportSnapshot.data-types)
+
+## Limitations<a name="USER_ExportSnapshot.Limits"></a>
+
+Exporting DB snapshot data to S3 has the following limitations:
++ Exporting snapshots from DB instances that use magnetic storage isn't supported\.
++ If a database, schema, or table has characters in its name other than the following, partial export isn't supported\. However, you can export the entire DB snapshot\.
+  + Latin letters \(A–Z\)
+  + Digits \(0–9\)
+  + Dollar symbol \($\)
+  + Underscore \(\_\)
++ Some characters aren't supported in database table column names\. Tables with the following characters in column names are skipped during export:
+
+  ```
+  , ; { } ( ) \n \t =
+  ```
++ If the data contains a huge value close to or greater than 500 MB, the export fails\.
 
 ## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 
@@ -113,32 +125,24 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
 
    ```
    aws iam create-policy  --policy-name ExportPolicy --policy-document '{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::*"
-                ]
-            },
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:PutObject*",
-                    "s3:GetObject*",
-                    "s3:CopyObject*",
-                    "s3:DeleteObject*"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::your-s3-bucket",
-                    "arn:aws:s3:::your-s3-bucket/*"
-                ]
-            }
-        ]
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "ExportPolicy",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject*",
+                   "s3:ListBucket",
+                   "s3:GetObject*",
+                   "s3:DeleteObject*",
+                   "s3:GetBucketLocation"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::your-s3-bucket",
+                   "arn:aws:s3:::your-s3-bucket/*"
+               ]
+           }
+       ]
    }'
    ```
 
@@ -480,15 +484,6 @@ The Parquet data types are few to reduce the complexity of reading and writing t
 When the `STRING` logical type annotates a `BYTE_ARRAY` type, it indicates that the byte array should be interpreted as a UTF\-8 encoded character string\. After an export task completes, Amazon RDS notifies you if any string conversion occurred\. The underlying data exported is always the same as the data from the source\. However, due to the encoding difference in UTF\-8, some characters might appear different from the source when read in tools such as Athena\.
 
 For more information, see [Parquet logical type definitions](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md) in the Parquet documentation\.
-
-**Note**  
-Some characters aren't supported in database table column names\. Tables with the following characters in column names are skipped during export\.   
-
-  ```
-  ,;{}()\n\t=
-  ```
-If the data contains a huge value close to or greater than 500 MB, the export fails\.
-If the database, schema, or table name contains spaces, partial export isn't supported\. However, you can export the entire DB snapshot\.
 
 **Topics**
 + [MySQL and MariaDB data type mapping to Parquet](#USER_ExportSnapshot.data-types.MySQL)

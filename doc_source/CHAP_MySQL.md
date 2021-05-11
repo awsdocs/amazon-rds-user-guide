@@ -8,7 +8,7 @@ Amazon RDS supports DB instances running several versions of MySQL\. You can use
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
-You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\.
+You first use the Amazon RDS management tools or interfaces to create an RDS for MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\.
 
 Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\.
 
@@ -16,7 +16,7 @@ For information about the features in each version of MySQL, see [The main featu
 
 ## Common management tasks for MySQL on Amazon RDS<a name="MySQL.Concepts.General"></a>
 
-The following are the common management tasks you perform with an Amazon RDS MySQL DB instance, with links to relevant documentation for each task\.
+The following are the common management tasks you perform with an RDS for MySQL DB instance, with links to relevant documentation for each task\.
 
 
 ****  
@@ -30,15 +30,15 @@ The following are the common management tasks you perform with an Amazon RDS MyS
 |  **Managing security for your DB instance** By default, DB instances are created with a firewall that prevents access to them\. You must create a security group with the correct IP addresses and network configuration to access the DB instance\. You can also use AWS Identity and Access Management \(IAM\) policies to assign permissions that determine who is allowed to manage RDS resources\.  |   [Security in Amazon RDS](UsingWithRDS.md)   [Managing access using policies](UsingWithRDS.IAM.md#security_iam_access-manage)   [Controlling access with security groups](Overview.RDSSecurityGroups.md)   [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)   | 
 |  **Connecting to your DB instance** Connect to your DB instance using a standard SQL client application such as the MySQL command line utility or MySQL Workbench\.  |   [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)   | 
 |  **Configuring high availability for a production DB instance ** Provide high availability with synchronous standby replication in a different Availability Zone, automatic failover, fault tolerance for DB instances using Multi\-AZ deployments, and read replicas\.  |   [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)   | 
-|  **Configuring a DB instance in an Amazon Virtual Private Cloud** Configure a virtual private cloud \(VPC\) in the Amazon VPC service\. An Amazon VPC is a virtual network logically isolated from other virtual networks in AWS\.   |   [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)   [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)   | 
+|  **Configuring a DB instance in an Amazon Virtual Private Cloud** Configure a virtual private cloud \(VPC\) in the Amazon VPC service\. An Amazon VPC is a virtual network logically isolated from other virtual networks in AWS\.  |   [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)   [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)   | 
 |  **Configuring specific MySQL database parameters and features** Configure specific MySQL database parameters with a parameter group that can be associated with many DB instances\. You can also configure specific MySQL database features with an option group that can be associated with many DB instances\.  |   [Working with DB parameter groups](USER_WorkingWithParamGroups.md)   [Working with option groups](USER_WorkingWithOptionGroups.md)   [Options for MySQL DB instances](Appendix.MySQL.Options.md)   | 
 |  **Modifying a DB instance running the MySQL database engine** Change the settings of a DB instance to accomplish tasks such as adding additional storage or changing the DB instance class\.  |   [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)   | 
 |  **Configuring database backup and restore** Configure your DB instance to take automated backups\. You can also back up and restore your databases manually by using full backup files\.   |   [Working with backups](USER_WorkingWithAutomatedBackups.md)   [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)   | 
-|  **Importing and exporting data** Import data from other RDS MySQL DB instances, MySQL instances running external to Amazon RDS, and other types of data sources, and export data to MySQL instances running external to Amazon RDS\.  |   [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)   | 
-|  **Monitoring a MySQL DB instance** Monitor your RDS MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MySQL DB instance\.  |   [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)   [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Accessing Amazon RDS database log files](USER_LogAccess.md)   [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
+|  **Importing and exporting data** Import data from other MySQL DB instances, MySQL instances running external to Amazon RDS, and other types of data sources, and export data to MySQL instances running external to Amazon RDS\.  |   [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)   | 
+|  **Monitoring a MySQL DB instance** Monitor your MySQL DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MySQL DB instance\.  |   [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)   [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)   [Viewing Amazon RDS events](USER_ListEvents.md)   [Working with Amazon RDS database log files](USER_LogAccess.md)   [Accessing MySQL database log files](USER_LogAccess.Concepts.MySQL.md)   | 
 |  **Replicating your data** Create a MySQL read replica, in the same AWS Region or a different one\. You can use read replicas for load balancing, disaster recovery, and processing read\-heavy database workloads, such as for analysis and reporting\.   |   [Working with read replicas](USER_ReadRepl.md)   [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)   | 
 
-There are also several sections with useful information about working with Amazon RDS MySQL DB instances: 
+There are also several sections with useful information about working with MySQL DB instances: 
 + [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)
 + [Options for MySQL DB instances](Appendix.MySQL.Options.md)
 + [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)
@@ -101,19 +101,19 @@ For more information, see [ Announcement: Amazon Relational Database Service \(R
 
 ### Deprecation of MySQL version 5\.5<a name="MySQL.Concepts.VersionMgmt.Deprecation55"></a>
 
-On March 9, 2021, Amazon RDS plans to deprecate support for MySQL 5\.5 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
+On May 25, 2021, Amazon RDS plans to deprecate support for MySQL 5\.5 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
 
 
 | Action or recommendation | Dates | 
 | --- | --- | 
-|  We recommend that you upgrade MySQL 5\.5 DB instances manually to the version of your choice\.   |  Now–March 9, 2021  | 
-|  We recommend that you upgrade MySQL 5\.5 snapshots manually to the version of your choice\.  |  Now–March 9, 2021  | 
+|  We recommend that you upgrade MySQL 5\.5 DB instances manually to the version of your choice\.   |  Now–May 25, 2021  | 
+|  We recommend that you upgrade MySQL 5\.5 snapshots manually to the version of your choice\.  |  Now–May 25, 2021  | 
 |  You can no longer create new MySQL 5\.5 DB instances\.  |  December 3, 2020  | 
-|  Amazon RDS starts automatic upgrades of your MySQL 5\.5 DB instances to version 5\.7\.  |  February 9, 2021  | 
-|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.5 DB instances restored from snapshots\.  |  February 9, 2021  | 
-|  Amazon RDS automatically upgrades any remaining MySQL 5\.5 DB instances to version 5\.7 whether or not they are in a maintenance window\.  |  March 9, 2021  | 
+|  Amazon RDS starts automatic upgrades of your MySQL 5\.5 DB instances to version 5\.6\.  |  March 29, 2021  | 
+|  Amazon RDS starts automatic upgrades to version 5\.6 for any MySQL 5\.5 DB instances restored from snapshots\.  |  March 29, 2021  | 
+|  Amazon RDS automatically upgrades any remaining MySQL 5\.5 DB instances to version 5\.6 whether or not they are in a maintenance window\.  |  May 25, 2021  | 
 
-For more information, see [ Announcement: Amazon RDS for MySQL 5\.5 End\-of\-Life date is approaching](https://forums.aws.amazon.com/ann.jspa?annID=8175)\.
+For more information, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.5](https://forums.aws.amazon.com/ann.jspa?annID=8570)\.
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
@@ -122,9 +122,9 @@ Amazon RDS doesn't currently support the following MySQL features:
 + Error Logging to the System Log
 + Group Replication Plugin
 + InnoDB Tablespace Encryption
-+ MariaDB Audit Plugin \(not supported for Amazon RDS MySQL version 8\.0 only\)
++ MariaDB Audit Plugin \(not supported for RDS for MySQL version 8\.0 only\)
 
-  The MariaDB Audit Plugin is supported for Amazon RDS MySQL version 5\.5, 5\.6, and 5\.7\.
+  The MariaDB Audit Plugin is supported for RDS for MySQL version 5\.5, 5\.6, and 5\.7\.
 + Password Strength Plugin
 + Persisted system variables
 + Semisynchronous replication
@@ -132,7 +132,7 @@ Amazon RDS doesn't currently support the following MySQL features:
 + X Plugin
 
 **Note**  
-Global transaction IDs are supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. Global transaction IDs are not supported for Amazon RDS MySQL 5\.5, 5\.6, or 8\.0\.  
+Global transaction IDs are supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. Global transaction IDs are not supported for RDS for MySQL 5\.5, 5\.6, or 8\.0\.  
 IAM database authentication is supported for MySQL for MySQL 5\.6, 5\.7, and 8\.0\. IAM database authentication is not supported for MySQL 5\.5\.  
 Amazon RDS Performance Insights is supported for MySQL 5\.6, 5\.7, and 8\.0\. Amazon RDS Performance Insights is not supported for MySQL 5\.5\.
 
@@ -155,7 +155,7 @@ MySQL 5\.1 is no longer supported in Amazon RDS\. However, you can restore exist
 
 ## MySQL security on Amazon RDS<a name="MySQL.Concepts.UsersAndPrivileges"></a>
 
-Security for Amazon RDS MySQL DB instances is managed at three levels:
+Security for MySQL DB instances is managed at three levels:
 + AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\. 
 + When you create a DB instance, you use either a VPC security group or a DB security group to control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance\. These connections can be made using Secure Sockets Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to the DB instance\. 
 + To authenticate login and permissions for a MySQL DB instance, you can take either of the following approaches, or a combination of them\. 
@@ -322,7 +322,7 @@ For MySQL version 5\.6\.19 and later, you can save and load the InnoDB cache "on
 
 ## Local time zone for MySQL DB instances<a name="MySQL.Concepts.LocalTimeZone"></a>
 
-By default, the time zone for an RDS MySQL DB instance is Universal Time Coordinated \(UTC\)\. You can set the time zone for your DB instance to the local time zone for your application instead\. 
+By default, the time zone for a MySQL DB instance is Universal Time Coordinated \(UTC\)\. You can set the time zone for your DB instance to the local time zone for your application instead\. 
 
 To set the local time zone for a DB instance, set the `time_zone` parameter in the parameter group for your DB instance to one of the supported values listed later in this section\. When you set the `time_zone` parameter for a parameter group, all DB instances and read replicas that are using that parameter group change to use the new local time zone\. For information on setting parameters in a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
 

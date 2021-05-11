@@ -14,7 +14,7 @@ CALL mysql.rds_show_configuration;
 
 To verify the number of hours that Amazon RDS retains binary logs, use the `mysql.rds_show_configuration` stored procedure\.
 
-The `mysql.rds_show_configuration` procedure is available in these versions of Amazon RDS MySQL:
+The `mysql.rds_show_configuration` procedure is available in these versions of RDS for MySQL:
 + MySQL 5\.6
 + MySQL 5\.7
 + MySQL 8\.0

@@ -17,8 +17,8 @@ To perform diagnostic tasks, use functions in the Amazon RDS package `rdsadmin.r
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `incident_id` | number |  A valid incident ID or null  | Null | No |  If the value is null, the function shows all incidents\. If the value isn't null and represents a valid incident ID, the function shows the specified incident\.   | 
-| `problem_id` | number | A valid problem ID or null | Null | No |  If the value is null, the function shows all problems\. If the value isn't null and represents a valid problem ID, the function shows the specified problem\.  | 
+|  `incident_id`  |  number  |  A valid incident ID or null   |  Null  |  No  |  If the value is null, the function shows all incidents\. If the value isn't null and represents a valid incident ID, the function shows the specified incident\.   | 
+|  `problem_id`  |  number  |  A valid problem ID or null  |  Null  |  No  |  If the value is null, the function shows all problems\. If the value isn't null and represents a valid problem ID, the function shows the specified problem\.  | 
 |  `last`  |  number  |  A valid integer greater than 0 or null  |  Null  |  No  |  If the value is null, then the function displays at most 50 items\. If the value isn't null, the function displays the specified number\.  | 
 
 ## Listing incidents<a name="Appendix.Oracle.CommonDBATasks.Incidents"></a>

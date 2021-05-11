@@ -51,7 +51,9 @@ The parameters are as follows:
   When you use `sslmode=verify-full`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
 + `sslrootcert` – The SSL certificate file that contains the public key
 
-  For more information, see [ Using SSL with a PostgreSQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.SSL)\. 
+  For more information, see [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)\.
+
+  For information about downloading the SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 + `dbname` – The database that you want to access
 + `user` – The database account that you want to access
 + `password` – A signed IAM authentication token

@@ -12,8 +12,6 @@ You can use SSL encryption with the following Oracle database versions and editi
 + 18\.0\.0\.0: All versions, all editions including Standard Edition Two
 + 12\.2\.0\.1: All versions, all editions including Standard Edition Two
 + 12\.1\.0\.2: All versions, all editions including Standard Edition Two
-+ 11\.2\.0\.4: All versions, Enterprise Edition
-+ 11\.2\.0\.4: Version 6 and later, Standard Edition, Standard Edition One, Enterprise Edition
 
 **Note**  
 You cannot use both SSL and Oracle native network encryption \(NNE\) on the same instance\. If you use SSL encryption, you must disable any other connection encryption\.
@@ -40,9 +38,6 @@ The following table shows the TLS option settings that are supported for differe
 |  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  11\.2\.0\.4 \(Oracle EE\)  |  Supported  |  Supported for 11\.2\.0\.4\.v8 and later  |  Supported for 11\.2\.0\.4\.v8 and later  | 
-|  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
-|  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
 ## Cipher suites for the Oracle SSL option<a name="Appendix.Oracle.Options.SSL.CipherSuites"></a>
 
@@ -64,9 +59,6 @@ The following table shows the cipher suite option settings that are supported fo
 |  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  11\.2\.0\.4 \(Oracle EE\)  |  Supported  |  Not supported  |  Not supported  | 
-|  11\.2\.0\.4 \(Oracle SE1\)  |  Supported  |  Not supported  |  Not supported  | 
-|  11\.2\.0\.4 \(Oracle SE\)  |  Supported  |  Not supported  |  Not supported  | 
 
 ## FIPS support<a name="Appendix.Oracle.Options.SSL.FIPS"></a>
 
@@ -92,7 +84,7 @@ For more information, see [Oracle database FIPS 140\-2 settings](https://docs.or
 
 ## Adding the SSL option<a name="Appendix.Oracle.Options.SSL.OptionGroup"></a>
 
-To use SSL, your Amazon RDS Oracle DB instance must be associated with an option group that includes the `SSL` option\.
+To use SSL, your Amazon RDS for Oracle DB instance must be associated with an option group that includes the `SSL` option\.
 
 ### Console<a name="Appendix.Oracle.Options.SSL.OptionGroup.Console"></a>
 

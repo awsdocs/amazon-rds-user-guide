@@ -71,7 +71,7 @@ For more information, see the following documentation\.
 | MariaDB | [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md) | 
 | Microsoft SQL Server | [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md) | 
 | MySQL | [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md) | 
-| Oracle | [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md) | 
+| Oracle | [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md) | 
 | PostgreSQL | [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md) | 
 
 **Note**  

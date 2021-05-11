@@ -1,10 +1,10 @@
 # Database engine: 12\.2\.0\.1<a name="Appendix.Oracle.RU-RUR.12.2.0.1"></a>
 
-For Oracle 12c version 12\.2\.0\.1, Oracle changed the way it releases Oracle Database updates\. Instead of Patch Set Updates \(PSUs\), Oracle supplies Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. RUs contain optimizer changes, feature additions, and security fixes\. RURs only contain security fixes for the two preceding quarterly patch cycles\. With this new system, you have more control over the features that you install with each update\.
+For Oracle Database 12c Release 2 \(12\.2\.0\.1\), Oracle changed the way it releases Oracle Database updates\. Instead of Patch Set Updates \(PSUs\), Oracle supplies Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. RUs contain optimizer changes, feature additions, and security fixes\. RURs only contain security fixes for the two preceding quarterly patch cycles\. With this new system, you have more control over the features that you install with each update\.
 
-The naming conventions have also changed for Oracle 12c version 12\.2\.0\.1 versions\. In previous versions, Amazon RDS for Oracle used the PSU naming convention of *oracle\-version*\.v*patch\-version*\. The *patch\-version* corresponded with an Oracle PSU\. For example, in Oracle for Amazon RDS version 12\.1\.0\.2\.v13, the v13 part of the version number corresponds with an Oracle PSU\.
+The naming conventions have also changed for Oracle Database 12c version Release 2 \(12\.2\.0\.1\) versions\. In previous versions, Amazon RDS for Oracle used the PSU naming convention of *oracle\-version*\.v*patch\-version*\. The *patch\-version* corresponded with an Oracle PSU\. For example, in Oracle for Amazon RDS version 12\.1\.0\.2\.v13, the v13 part of the version number corresponds with an Oracle PSU\.
 
-Oracle 12c version 12\.2\.0\.1 naming conventions account for both RU and RUR updates\. For example, the first Amazon RDS for Oracle version available is 12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1\. In this example, 12\.2 is the major version, and 0\.1 is the minor version\. The revision version has the following parts:
+Oracle Database 12c Release 2 \(12\.2\.0\.1\) naming conventions account for both RU and RUR updates\. For example, the first Amazon RDS for Oracle version available is 12\.2\.0\.1\.ru\-2018\-10\.rur\-2018\-10\.r1\. In this example, 12\.2 is the major version, and 0\.1 is the minor version\. The revision version has the following parts:
 + ru\-2018\-10 – the October RU
 + rur\-2018\-10 – the October RUR for the October RU
 + r1 – Internal Amazon RDS revision, which lets Amazon RDS differentiate between emergency patches of pre\-existing RU/RURs
@@ -35,7 +35,7 @@ Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1 includes the following:
 + Java Cryptography Extension \(JCE\): Unlimited Strength Jurisdiction Policy Files for JVM version 8
 + Support for [Managing advisor tasks](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.managing-advisor-tasks) using procedures in the `rdsadmin.rdsadmin_util` package
 
-### Combined Patches for Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1, Released January 2021<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
+### Combined patches for version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1, released January 2021<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 
@@ -356,7 +356,7 @@ Version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1 includes the following:
 + Support for [Setting and unsetting system diagnostic events](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.SystemEvents) using procedures in the `rdsadmin.rdsadmin_util` package
 + Support for the procedure `rdsadmin_util.truncate_apply$_cdr_info` described in [Integrated REPLICAT slow due to query on sys\."\_DBA\_APPLY\_CDR\_INFO"](Appendix.OracleGoldenGate.md#Appendix.OracleGoldenGate.IR)
 
-### Combined Patches for Version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1, Released October 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1.Bugs-Fixed"></a>
+### Combined patches for version 12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1, released October 2020<a name="Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1.Bugs-Fixed"></a>
 
 Bugs fixed:
 

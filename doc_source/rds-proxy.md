@@ -17,6 +17,7 @@
 + [Connecting to a database through RDS Proxy](#rds-proxy-connecting)
 + [Managing an RDS Proxy](#rds-proxy-managing)
 + [Monitoring RDS Proxy using Amazon CloudWatch](#rds-proxy.monitoring)
++ [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints)
 + [Command\-line examples for RDS Proxy](#rds-proxy.examples)
 + [Troubleshooting for RDS Proxy](#rds-proxy.troubleshooting)
 + [Using RDS Proxy with AWS CloudFormation](#rds-proxy-cfn)
@@ -44,13 +45,13 @@
 
  Each proxy handles connections to a single RDS DB instance or Aurora DB cluster\. The proxy automatically determines the current writer instance for RDS Multi\-AZ DB instances and Aurora provisioned clusters\. For Aurora multi\-master clusters, the proxy connects to one of the writer instances and uses the other writer instances as hot standby targets\.  
 
- The connections that a proxy keeps open and available for your database application to use form the *connection pool*\. 
+ The connections that a proxy keeps open and available for your database application to use make up the *connection pool*\. 
 
  By default, RDS Proxy can reuse a connection after each transaction in your session\. This transaction\-level reuse is called *multiplexing*\. When RDS Proxy temporarily removes a connection from the connection pool to reuse it, that operation is called *borrowing* the connection\. When it's safe to do so, RDS Proxy returns that connection to the connection pool\. 
 
  In some cases, RDS Proxy can't be sure that it's safe to reuse a database connection outside of the current session\. In these cases, it keeps the session on the same connection until the session ends\. This fallback behavior is called *pinning*\. 
 
- A proxy has an endpoint\. You connect to this endpoint when you work with an RDS DB instance or Aurora DB cluster, instead of connecting to the read/write endpoint that connects directly to the instance or cluster\. The special\-purpose endpoints for an Aurora cluster remain available for you to use\. 
+ A proxy has a default endpoint\. You connect to this endpoint when you work with an RDS DB instance or Aurora DB cluster, instead of connecting to the read/write endpoint that connects directly to the instance or cluster\. The special\-purpose endpoints for an Aurora cluster remain available for you to use\. For Aurora DB clusters, you can also create additional read/write and read\-only endpoints\. For more information, see [Overview of proxy endpoints](#rds-proxy-endpoints-overview)\. 
 
  For example, you can still connect to the cluster endpoint for read/write connections without connection pooling\. You can still connect to the reader endpoint for load\-balanced read\-only connections\. You can still connect to the instance endpoints for diagnosis and troubleshooting of specific DB instances within an Aurora cluster\. If you are using other AWS services such as AWS Lambda to connect to RDS databases, you change their connection settings to use the proxy endpoint\. For example, you specify the proxy endpoint to allow Lambda functions to access your database while taking advantage of RDS Proxy functionality\. 
 
@@ -82,7 +83,7 @@
  To enforce TLS for all connections between the proxy and your database, you can specify a setting **Require Transport Layer Security** when you create or modify a proxy\. 
 
  RDS Proxy can also ensure that your session uses TLS/SSL between your client and the RDS Proxy endpoint\. To have RDS Proxy do so, specify the requirement on the client side\. SSL session variables are not set for SSL connections to a database using RDS Proxy\. 
-+  For Amazon RDS MySQL and Aurora MySQL, specify the requirement on the client side with the `--ssl-mode` parameter when you run the `mysql` command\. 
++  For RDS for MySQL and Aurora MySQL, specify the requirement on the client side with the `--ssl-mode` parameter when you run the `mysql` command\. 
 +  For Amazon RDS PostgreSQL and Aurora PostgreSQL, specify `sslmode=require` as part of the `conninfo` string when you run the `psql` command\. 
 
  RDS Proxy supports TLS protocol version 1\.0, 1\.1, and 1\.2\. You can connect to the proxy using a higher version of TLS than you use in the underlying database\.  
@@ -104,9 +105,10 @@
  Enforce SSL and verify the certificate authority \(CA\)\. 
 
 **VERIFY\_IDENTITY**  
- Enforce SSL and verify the CA and CA hostname\. 
+ Enforce SSL and verify the CA and CA hostname\.   
+ You can use the SSL mode `VERIFY_IDENTITY` when connecting to the default proxy endpoint\. You can't use that SSL mode when you connect to proxy endpoints that you create\. 
 
- When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in \.pem format\. For a \.pem file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
+ When using a client with `--ssl-mode` `VERIFY_CA` or `VERIFY_IDENTITY`, specify the `--ssl-ca` option pointing to a CA in `.pem` format\. For a `.pem` file that you can use, download the [Amazon root CA 1 trust store](https://www.amazontrust.com/repository/AmazonRootCA1.pem) from Amazon Trust Services\. 
 
  RDS Proxy uses wildcard certificates, which apply to a both a domain and its subdomains\. If you use the `mysql` client to connect with SSL mode `VERIFY_IDENTITY`, currently you must use the MySQL 8\.0\-compatible `mysql` command\. 
 
@@ -132,7 +134,7 @@
 ### Transactions<a name="rds-proxy-transactions"></a>
 
  All the statements within a single transaction always use the same underlying database connection\. The connection becomes available for use by a different session when the transaction ends\. Using the transaction as the unit of granularity has the following consequences: 
-+  Connection reuse can happen after each individual statement when the RDS MySQL or Aurora MySQL `autocommit` setting is enabled\. 
++  Connection reuse can happen after each individual statement when the RDS for MySQL or Aurora MySQL `autocommit` setting is enabled\. 
 +  Conversely, when the `autocommit` setting is disabled, the first statement you issue in a session begins a new transaction\. Thus, if you enter a sequence of `SELECT`, `INSERT`, `UPDATE`, and other data manipulation language \(DML\) statements, connection reuse doesn't happen until you issue a `COMMIT`, `ROLLBACK`, or otherwise end the transaction\. 
 +  Entering a data definition language \(DDL\) statement causes the transaction to end after that statement completes\. 
 
@@ -145,7 +147,7 @@
  In the following sections, you can find how to set up RDS Proxy\. You can also find how to set the related security options that control who can access each proxy and how each proxy connects to DB instances\. 
 
 **Topics**
-+ [Limitations for RDS Proxy](#rds-proxy.limitations)
++ [Limits for RDS Proxy](#rds-proxy.limits)
 + [Identifying DB instances, clusters, and applications to use with RDS Proxy](#rds-proxy-planning)
 + [Setting up network prerequisites](#rds-proxy-network-prereqs)
 + [Setting up database credentials in AWS Secrets Manager](#rds-proxy-secrets-arns)
@@ -153,19 +155,22 @@
 + [Creating an RDS Proxy](#rds-proxy-creating)
 + [Viewing an RDS Proxy](#rds-proxy-viewing)
 
-### Limitations for RDS Proxy<a name="rds-proxy.limitations"></a>
+### Limits for RDS Proxy<a name="rds-proxy.limits"></a>
 
  The following limitations apply to RDS Proxy: 
 +  RDS Proxy is available only in certain AWS Regions only\. For more information, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
 
    You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
 +  Each proxy can have up to 200 associated Secrets Manager secrets\. Thus, each proxy can connect to with up to 200 different user accounts at any given time\. 
-+  In an Aurora cluster, all of the connections in the connection pool are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you still use the reader endpoint directly for the Aurora cluster\. 
++  You can create, view, modify, and delete up to 20 endpoints for each proxy\. These endpoints are in addition to the default endpoint that's automatically created for each proxy\. 
++  In an Aurora cluster, all of the connections using the default proxy endpoint are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you can create a read\-only endpoint for a proxy\. That endpoint passes connections to the reader endpoint of the cluster\. That way, your proxy connections can take advantage of Aurora read scalability\. For more information, see [Overview of proxy endpoints](#rds-proxy-endpoints-overview)\. 
 
-   The same consideration applies for RDS DB instances in replication configurations\. You can associate a proxy only with the writer DB instance, not a read replica\. 
+   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\. 
 +  You can't use RDS Proxy with Aurora Serverless clusters\. 
 +  You can't use RDS Proxy with Aurora clusters that are part of an Aurora global database\. 
 +  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
+**Note**  
+ For Aurora DB clusters, you can enable cross\-VPC access by creating an additional endpoint for a proxy and specifying a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](#rds-proxy-cross-vpc)\. 
 +  You can't use RDS Proxy with a VPC that has dedicated tenancy\. 
 +  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting up AWS Identity and Access Management \(IAM\) policies](#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
 +  You can't use RDS Proxy with custom DNS\. 
@@ -173,9 +178,9 @@
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 
  The following RDS Proxy prerequisites and limitations apply to MySQL: 
-+  For RDS MySQL, RDS Proxy supports MySQL 5\.6 and 5\.7\. For Aurora MySQL, RDS Proxy supports version 1 \(compatible with MySQL 5\.6\) and version 2 \(compatible with MySQL 5\.7\)\. 
++  For RDS for MySQL, RDS Proxy supports MySQL 5\.6 and 5\.7\. For Aurora MySQL, RDS Proxy supports version 1 \(compatible with MySQL 5\.6\) and version 2 \(compatible with MySQL 5\.7\)\. 
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
-+  You can't use RDS Proxy with RDS MySQL 8\.0\. 
++  You can't use RDS Proxy with RDS for MySQL 8\.0\. 
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\. 
 +  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
 +  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](#rds-proxy-pinning)\. 
@@ -184,7 +189,7 @@
 +  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\. 
 +  Currently, all proxies listen on port 5432 for PostgreSQL\. 
 +  Query cancellation isn't supported for PostgreSQL\. 
-+  The results of the PostgreSQL function [lastval\(\)](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\. 
++  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\. 
 
 ### Identifying DB instances, clusters, and applications to use with RDS Proxy<a name="rds-proxy-planning"></a>
 
@@ -214,14 +219,14 @@ aws ec2 describe-subnets --query '*[].[VpcId,SubnetId]' --output text | sort
 
 ```
 $ # Optional first step, only needed if you're starting from an Aurora cluster. Find the ID of any DB instance in the cluster.
-$  aws rds describe-db-clusters --db-cluster-id my_cluster_id --query '*[].[DBClusterMembers]|[0]|[0][*].DBInstanceIdentifier' --output text
+$  aws rds describe-db-clusters --db-cluster-identifier my_cluster_id --query '*[].[DBClusterMembers]|[0]|[0][*].DBInstanceIdentifier' --output text
 my_instance_id
 instance_id_2
 instance_id_3
 ...
 
 $ # From the DB instance, trace through the DBSubnetGroup and Subnets to find the subnet IDs.
-$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[DBSubnetGroup]|[0]|[0]|[Subnets]|[0]|[*].SubnetIdentifier' --output text
+$ aws rds describe-db-instances --db-instance-identifier my_instance_id --query '*[].[DBSubnetGroup]|[0]|[0]|[Subnets]|[0]|[*].SubnetIdentifier' --output text
 subnet_id_1
 subnet_id_2
 subnet_id_3
@@ -232,7 +237,7 @@ subnet_id_3
 
 ```
 $ # From the DB instance, find the VPC.
-$ aws rds describe-db-instances --db-instance-id my_instance_id --query '*[].[VpcId]' --output text
+$ aws rds describe-db-instances --db-instance-identifier my_instance_id --query '*[].[VpcId]' --output text
 my_vpc_id
 
 $ aws ec2 describe-subnets --filters Name=vpc-id,Values=my_vpc_id --query '*[].[SubnetId]' --output text
@@ -258,7 +263,7 @@ subnet_id_6
 
  When you create a proxy through the AWS CLI or RDS API, you specify the Amazon Resource Names \(ARNs\) of the corresponding secrets for all the DB user accounts that the proxy can access\. In the AWS Management Console, you choose the secrets by their descriptive names\. 
 
- For instructions about creating secrets in Secrets Manager, see the [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) page in the Secrets Manager documentation\. Use one of the following techniques\. For instructions about creating secrets in Secrets Manager, see [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) in the *AWS Secrets Manager User Guide*\. Use one of the following techniques: 
+ For instructions about creating secrets in Secrets Manager, see the [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) page in the Secrets Manager documentation\. Use one of the following techniques: 
 +  Use [Secrets Manager](https://aws.amazon.com/secrets-manager/) in the console\. 
 +  To use the CLI to create a Secrets Manager secret for use with RDS Proxy, use a command such as the following\. 
 
@@ -431,7 +436,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
 
 ### Creating an RDS Proxy<a name="rds-proxy-creating"></a>
 
- To manage connections for a specified set of DB instances, you can create a proxy\. You can associate a proxy with an RDS MySQL DB instance, PostgreSQL DB instance, or an Aurora DB cluster\. 
+ To manage connections for a specified set of DB instances, you can create a proxy\. You can associate a proxy with an RDS for MySQL DB instance, PostgreSQL DB instance, or an Aurora DB cluster\. 
 
 #### AWS Management Console<a name="rds-proxy-creating.console"></a>
 
@@ -589,7 +594,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
 ## Connecting to a database through RDS Proxy<a name="rds-proxy-connecting"></a>
 
- You connect to an RDS DB instance or Aurora DB cluster through a proxy in generally the same way as you connect directly to the database\. The main difference is that you specify the proxy endpoint instead of the instance or cluster endpoint\. For an Aurora DB cluster, all proxy connections have read/write capability and use the writer instance\. If you use the reader endpoint for read\-only connections, you continue using the reader endpoint the same way\. 
+ You connect to an RDS DB instance or Aurora DB cluster through a proxy in generally the same way as you connect directly to the database\. The main difference is that you specify the proxy endpoint instead of the instance or cluster endpoint\. For an Aurora DB cluster, by default all proxy connections have read/write capability and use the writer instance\. If you normally use the reader endpoint for read\-only connections, you can create an additional read\-only endpoint for the proxy and use that endpoint the same way\. For more information, see [Overview of proxy endpoints](#rds-proxy-endpoints-overview)\. 
 
 **Topics**
 + [Connecting to a proxy using native authentication](#rds-proxy-connecting-native)
@@ -985,8 +990,8 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 +  Discarding the session state 
 +  Listening on a notification channel 
 +  Loading a library module such as `auto_explain` 
-+  Manipulating sequences using functions such as `nextval()` and `setval()` 
-+  Interacting with locks using functions such as `pg_advisory_lock()` and `pg_try_advisory_lock()` 
++  Manipulating sequences using functions such as `nextval` and `setval` 
++  Interacting with locks using functions such as `pg_advisory_lock` and `pg_try_advisory_lock`
 +  Using prepared statements, setting parameters, or resetting a parameter to its default 
 
  If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
@@ -1032,41 +1037,359 @@ aws rds deregister-db-proxy-targets
 
 ## Monitoring RDS Proxy using Amazon CloudWatch<a name="rds-proxy.monitoring"></a>
 
-You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and processes raw data from the proxies into readable, near\-real\-time metrics\. To find these metrics in the CloudWatch console, choose **Metrics**, then choose **RDS**, and choose **Per\-Proxy Metrics**\. For more information, see [ Using Amazon CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) in the Amazon CloudWatch User Guide\.
+ You can monitor RDS Proxy by using Amazon CloudWatch\. CloudWatch collects and processes raw data from the proxies into readable, near\-real\-time metrics\. To find these metrics in the CloudWatch console, choose **Metrics**, then choose **RDS**, and choose **Per\-Proxy Metrics**\. For more information, see [Using Amazon CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) in the Amazon CloudWatch User Guide\. 
 
 **Note**  
  RDS publishes these metrics for each underlying Amazon EC2 instance associated with a proxy\. A single proxy might be served by more than one EC2 instance\. Use CloudWatch statistics to aggregate the values for a proxy across all the associated instances\.   
  Some of these metrics might not be visible until after the first successful connection by a proxy\. 
 
- All RDS Proxy metrics are in the group `proxy`\.
+ In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. 
+
+ All RDS Proxy metrics are in the group `proxy`\. 
+
+ Each proxy endpoint has its own CloudWatch metrics\. You can monitor the usage of each proxy endpoint independently\. For more information about proxy endpoints, see [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints)\. 
+
+ You can aggregate the values for each metric using one of the following dimension sets\. For example, by using the `ProxyName` dimension set, you can analyze all the traffic for a particular proxy\. By using the other dimension sets, you can split the metrics in different ways\. You can split the metrics based on the different endpoints or target databases of each proxy, or the read/write and read\-only traffic to each database\. 
++   Dimension set 1: `ProxyName` 
++   Dimension set 2: `ProxyName`, `EndpointName` 
++   Dimension set 3: `ProxyName`, `TargetGroup`, `Target` 
++   Dimension set 4: `ProxyName`, `TargetGroup`, `TargetRole` 
 
 
-|  Metric  |  Description  |  Valid period  | CloudWatch dimensions | 
+|  Metric  |  Description  |  Valid period  |  CloudWatch dimension set  | 
 | --- | --- | --- | --- | 
-|  `AvailabilityPercentage`  |  The percentage of time for which the target group was available in the role indicated by the dimension\. This metric is reported every minute\. The most useful statistic for this metric is `Average`\.  | 1 minute | ProxyName, TargetGroup, TargetRole | 
-|  ClientConnections  |   The current number of client connections\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName | 
-|  ClientConnectionsClosed  |   The number of client connections closed\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName | 
-|  `ClientConnectionsNoTLS`  | The current number of client connections without Transport Layer Security \(TLS\)\. This metric is reported every minute\. The most useful statistic for this metric is Sum\.  | 1 minute and above | ProxyName | 
-|   `ClientConnectionsReceived`   |   The number of client connection requests received\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName | 
-|  ClientConnectionsSetupFailedAuth  |   The number of client connection attempts that failed due to misconfigured authentication or TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName | 
-|  ClientConnectionsSetupSucceeded  |   The number of client connections successfully established with any authentication mechanism with or without TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName | 
-| ClientConnectionsTLS | The current number of client connections with TLS\. This metric is reported every minute\. The most useful statistic for this metric is Sum\. | 1 minute and above | ProxyName | 
-|  DatabaseConnectionRequests  |   The number of requests to create a database connection\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName, TargetGroup, Target | 
-|  `DatabaseConnectionRequestsWithTLS`  | The number of requests to create a database connection with TLS\. The most useful statistic for this metric is Sum\.  | 1 minute and above | ProxyName, TargetGroup, Target | 
-|  DatabaseConnections  |   The current number of database connections\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName, TargetGroup, Target | 
-|  `DatabaseConnectionsBorrowLatency`  | The time in microseconds that it takes for the proxy being monitored to get a database connection\. The most useful statistic for this metric is Average\.  | 1 minute and above | ProxyName | 
-|  DatabaseConnectionsCurrentlyBorrowed  |  The current number of database connections in the borrow state\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName, TargetGroup, Target | 
-| DatabaseConnectionsCurrentlyInTransaction  |   The current number of database connections in a transaction\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.  |   1 minute   | ProxyName, TargetGroup, Target | 
-| DatabaseConnectionsCurrentlySessionPinned  |   The current number of database connections currently pinned because of operations in client requests that change session state\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName, TargetGroup, Target | 
-|  DatabaseConnectionsSetupFailed  |   The number of database connection requests that failed\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName, TargetGroup, Target | 
-|  DatabaseConnectionsSetupSucceeded  |   The number of database connections successfully established with or without TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName, TargetGroup, Target | 
-|  `DatabaseConnectionsWithTLS`  | The current number of database connections with TLS\. This metric is reported every minute\. The most useful statistic for this metric is Sum\.  | 1 minute | ProxyName, TargetGroup, Target | 
-|  MaxDatabaseConnectionsAllowed  |   The maximum number of database connections allowed\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   | ProxyName, TargetGroup, Target | 
-|  `QueryDatabaseResponseLatency`  | The time in microseconds that the database took to respond to the query\. The most useful statistic for this metric is Average\.  | 1 minute and above | ProxyName, TargetGroup, Target | 
-|  QueryRequests  |   The number of queries received\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   | ProxyName | 
-| QueryRequestsNoTLS | The number of queries received from non\-TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  | 1 minute and above | ProxyName | 
-|  `QueryRequestsTLS`  | The number of queries received from TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  | 1 minute and above | ProxyName | 
-| QueryResponseLatency | The time in microseconds between getting a query request and the proxy responding to it\. The most useful statistic for this metric is Average\.  | 1 minute and above | ProxyName | 
+|   `AvailabilityPercentage`   |   The percentage of time for which the target group was available in the role indicated by the dimension\. This metric is reported every minute\. The most useful statistic for this metric is `Average`\.   |  1 minute  |  [Dimension set 4](#proxy-dimension-set-4)  | 
+|  ClientConnections  |   The current number of client connections\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  ClientConnectionsClosed  |   The number of client connections closed\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|   `ClientConnectionsNoTLS`   |  The current number of client connections without Transport Layer Security \(TLS\)\. This metric is reported every minute\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|   `ClientConnectionsReceived`   |   The number of client connection requests received\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  ClientConnectionsSetupFailedAuth  |   The number of client connection attempts that failed due to misconfigured authentication or TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  ClientConnectionsSetupSucceeded  |   The number of client connections successfully established with any authentication mechanism with or without TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  ClientConnectionsTLS  |  The current number of client connections with TLS\. This metric is reported every minute\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  DatabaseConnectionRequests  |   The number of requests to create a database connection\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|   `DatabaseConnectionRequestsWithTLS`   |  The number of requests to create a database connection with TLS\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  DatabaseConnections  |   The current number of database connections\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|   `DatabaseConnectionsBorrowLatency`   |  The time in microseconds that it takes for the proxy being monitored to get a database connection\. The most useful statistic for this metric is Average\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  DatabaseConnectionsCurrentlyBorrowed  |   The current number of database connections in the borrow state\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  DatabaseConnectionsCurrentlyInTransaction  |   The current number of database connections in a transaction\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  DatabaseConnectionsCurrentlySessionPinned  |   The current number of database connections currently pinned because of operations in client requests that change session state\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  DatabaseConnectionsSetupFailed  |   The number of database connection requests that failed\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  DatabaseConnectionsSetupSucceeded  |   The number of database connections successfully established with or without TLS\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|   `DatabaseConnectionsWithTLS`   |  The current number of database connections with TLS\. This metric is reported every minute\. The most useful statistic for this metric is Sum\.  |  1 minute  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  MaxDatabaseConnectionsAllowed  |   The maximum number of database connections allowed\. This metric is reported every minute\. The most useful statistic for this metric is `Sum`\.   |   1 minute   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|   `QueryDatabaseResponseLatency`   |  The time in microseconds that the database took to respond to the query\. The most useful statistic for this metric is Average\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2), [Dimension set 3](#proxy-dimension-set-3), [Dimension set 4](#proxy-dimension-set-4)  | 
+|  QueryRequests  |   The number of queries received\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is `Sum`\.   |   1 minute and above   |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  QueryRequestsNoTLS  |  The number of queries received from non\-TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|   `QueryRequestsTLS`   |  The number of queries received from TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+|  QueryResponseLatency  |  The time in microseconds between getting a query request and the proxy responding to it\. The most useful statistic for this metric is Average\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+
+## Endpoints for Amazon RDS Proxy<a name="rds-proxy-endpoints"></a>
+
+ Following, you can learn about endpoints for RDS Proxy and how to use them\. By using endpoints, you can take advantage of the following capabilities: 
++  You can use multiple endpoints with a proxy to monitor and troubleshoot connections from different applications independently\. 
++  You can use reader endpoints with Aurora DB clusters to improve read scalability and high availability for your query\-intensive applications\. 
++  You can use a cross\-VPC endpoint to allow access to databases in one VPC from resources such as Amazon EC2 instances in a different VPC\. 
+
+**Topics**
++ [Overview of proxy endpoints](#rds-proxy-endpoints-overview)
++ [Reader endpoints](#rds-proxy-endpoints-reader-stub)
++ [Accessing Aurora and RDS databases across VPCs](#rds-proxy-cross-vpc)
++ [Creating a proxy endpoint](#rds-proxy-endpoints.CreatingEndpoint)
++ [Viewing proxy endpoints](#rds-proxy-endpoints.DescribingEndpoint)
++ [Modifying a proxy endpoint](#rds-proxy-endpoints.ModifyingEndpoint)
++ [Deleting a proxy endpoint](#rds-proxy-endpoints.DeletingEndpoint)
++ [Limits for proxy endpoints](#rds-proxy-endpoints-limits)
+
+### Overview of proxy endpoints<a name="rds-proxy-endpoints-overview"></a>
+
+ Working with RDS Proxy endpoints involves the same kinds of procedures as with Aurora DB cluster and reader endpoints and RDS instance endpoints\. If you aren't familiar with RDS endpoints, find more information in [Connecting to a DB instance running the MySQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html) and [Connecting to a DB instance running the PostgreSQL database engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html)\. 
+
+ By default, the endpoint that you connect to when you use RDS Proxy with an Aurora cluster has read/write capability\. As a consequence, this endpoint sends all requests to the writer instance of the cluster, and all of those connections count against the `max_connections` value for the writer instance\. If your proxy is associated with an Aurora DB cluster, you can create additional read/write or read\-only endpoints for that proxy\. 
+
+ You can use a read\-only endpoint with your proxy for read\-only queries, the same way that you use the reader endpoint for an Aurora provisioned cluster\. Doing so helps you to take advantage of the read scalability of an Aurora cluster with one or more reader DB instances\. You can run more simultaneous queries and make more simultaneous connections by using a read\-only endpoint and adding more reader DB instances to your Aurora cluster as needed\. 
+
+ For a proxy endpoint that you create, you can also associate the endpoint with a different virtual private cloud \(VPC\) than the proxy itself uses\. By doing so, you can connect to the proxy from a different VPC, for example a VPC used by a different application within your organization\. Both VPCs must be owned by the same AWS account\. 
+
+ For information about limits associated with proxy endpoints, see [Limits for proxy endpoints](#rds-proxy-endpoints-limits)\. 
+
+ In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. 
+
+ Each proxy endpoint has its own set of CloudWatch metrics\. You can monitor the metrics for all endpoints of a proxy\. You can also monitor metrics for a specific endpoint, or for all the read/write or read\-only endpoints of a proxy\. For more information, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](#rds-proxy.monitoring)\. 
+
+ A proxy endpoint uses the same authentication mechanism as its associated proxy\. RDS Proxy automatically sets up permissions and authorizations for the user\-defined endpoint, consistent with the properties of the associated proxy\. 
+
+### Reader endpoints<a name="rds-proxy-endpoints-reader-stub"></a>
+
+ With RDS Proxy, you can create and use reader endpoints\. However, these endpoints only work for proxies associated with Aurora DB clusters\. You might see references to reader endpoints in the AWS Management Console\. If you use the RDS CLI or API, you might see the `TargetRole` attribute with a value of `READ_ONLY`\. You can take advantage of these features by changing the target of a proxy from an RDS DB instance to an Aurora DB cluster\. To learn about reader endpoints, see [Managing connections with Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy-.html) in the *Aurora User Guide\.* 
+
+### Accessing Aurora and RDS databases across VPCs<a name="rds-proxy-cross-vpc"></a>
+
+ By default, the components of your RDS and Aurora technology stack are all in the same Amazon VPC\. For example, suppose that an application running on an Amazon EC2 instance connects to an Amazon RDS DB instance or an Aurora DB cluster\. In this case, the application server and database must both be within the same VPC\. 
+
+ With RDS Proxy, you can set up access to an Aurora cluster or RDS instance in one VPC from resources such as EC2 instances in another VPC\. For example, your organization might have multiple applications that access the same database resources\. Each application might be in its own VPC\. To use cross\-VPC capability with RDS Proxy, all the VPCs must be owned by the same AWS account\. 
+
+ To enable cross\-VPC access, you create a new endpoint for the proxy\. If you aren't familiar with creating proxy endpoints, see [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints) for details\. The proxy itself resides in the same VPC as the Aurora DB cluster or RDS instance\. However, the cross\-VPC endpoint resides in the other VPC, along with the other resources such as the EC2 instances\. The cross\-VPC endpoint is associated with subnets and security groups from the same VPC as the EC2 and other resources\. These associations let you connect to the endpoint from the applications that otherwise can't access the database due to the VPC restrictions\. 
+
+ The following steps explain how to create and access a cross\-VPC endpoint through RDS Proxy: 
+
+1.  Create two VPCs, or choose two VPCs that you already use for Aurora and RDS work\. Each VPC should have its own associated network resources such as an Internet gateway, route tables, subnets, and security groups\. If you only have one VPC, you can consult [Getting started with Amazon RDS](CHAP_GettingStarted.md) for the steps to set up another VPC to use RDS successfully\. You can also examine your existing VPC in the Amazon EC2 console to see what kinds of resources to connect together\. 
+
+1.  Create a DB proxy associated with the Aurora DB cluster or RDS instance that you want to connect to\. Follow the procedure in [Creating an RDS Proxy](#rds-proxy-creating)\. 
+
+1.  On the **Details** page for your proxy in the RDS console, under the **Proxy endpoints** section, choose **Create endpoint**\. Follow the procedure in [Creating a proxy endpoint](#rds-proxy-endpoints.CreatingEndpoint)\. 
+
+1.  Choose whether to make the cross\-VPC endpoint read/write or read\-only\. 
+
+1.  Instead of accepting the default of the same VPC as the Aurora DB cluster or RDS instance, choose a different VPC\. This VPC must be in the same AWS Region as the VPC where the proxy resides\. 
+
+1.  Now instead of accepting the defaults for subnets and security groups from the same VPC as the Aurora DB cluster or RDS instance, make new selections\. Make these based on the subnets and security groups from the VPC that you chose\. 
+
+1.  You don't need to change any of the settings for the Secrets Manager secrets\. The same credentials work for all endpoints for your proxy, regardless of which VPC each endpoint is in\. 
+
+1.  Wait for the new endpoint to reach the **Available** state\. 
+
+1.  Make a note of the full endpoint name\. This is the value ending in `Region_name.rds.amazonaws.com` that you supply as part of the connection string for your database application\. 
+
+1.  Access the new endpoint from a resource in the same VPC as the endpoint\. A simple way to test this process is to create a new EC2 instance in this VPC\. Then you can log into the EC2 instance and run the `mysql` or `psql` commands to connect by using the endpoint value in your connection string\. 
+
+### Creating a proxy endpoint<a name="rds-proxy-endpoints.CreatingEndpoint"></a>
+
+
+
+#### Console<a name="rds-proxy-endpoints.CreatingEndpoint.CON"></a>
+
+**To create a proxy endpoint**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1.  In the navigation pane, choose **Proxies**\. 
+
+1.  Click the name of the proxy that you want to create a new endpoint for\. 
+
+    The details page for that proxy appears\. 
+
+1.  In the **Proxy endpoints** section, choose **Create proxy endpoint**\. 
+
+    The **Create proxy endpoint** window appears\. 
+
+1.  For **Proxy endpoint name**, enter a descriptive name of your choice\. 
+
+1.  For **Target role**, choose whether to make the endpoint read/write or read\-only\. 
+
+    Connections that use a read/write endpoint can perform any kind of operation: data definition language \(DDL\) statements, data manipulation language \(DML\) statements, and queries\. These endpoints always connect to the primary instance of the Aurora cluster\. You can use read/write endpoints for general database operations when you only use a single endpoint in your application\. You can also use read/write endpoints for administrative operations, online transaction processing \(OLTP\) applications, and extract\-transform\-load \(ETL\) jobs\. 
+
+    Connections that use a read\-only endpoint can only perform queries\. When there are multiple reader instances in the Aurora cluster, RDS Proxy can use a different reader instance for each connection to the endpoint\. That way, a query\-intensive application can take advantage of Aurora's clustering capability\. You can add more query capacity to the cluster by adding more reader DB instances\. These read\-only connections don't impose any overhead on the primary instance of the cluster\. That way, your reporting and analysis queries don't slow down the write operations of your OLTP applications\. 
+
+1.  For **Virtual Private Cloud \(VPC\)**, choose the default if you plan to access the endpoint from the same EC2 instances or other resources where you normally access the proxy or its associated database\. If you want to set up cross\-VPC access for this proxy, choose a VPC other than the default\. For more information about cross\-VPC access, see [Accessing Aurora and RDS databases across VPCs](#rds-proxy-cross-vpc)\. 
+
+1.  For **Subnets**, RDS Proxy fills in the same subnets as the associated proxy by default\. If you want to restrict access to the endpoint so that only a portion of the address range of the VPC can connect to it, remove one or more subnets from the set of choices\. 
+
+1.  For **VPC security group**, you can choose an existing security group or create a new one\. RDS Proxy fills in the same security group or groups as the associated proxy by default\. If the inbound and outbound rules for the proxy are appropriate for this endpoint, you can leave the default choice\. 
+
+    If you choose to create a new security group, specify a name for the security group on this page\. Then edit the security group settings from the EC2 console afterward\. 
+
+1.  Choose **Create proxy endpoint**\. 
+
+#### AWS CLI<a name="rds-proxy-endpoints.CreatingEndpoint.CLI"></a>
+
+ To create a proxy endpoint, use the AWS CLI [create\-db\-proxy\-endpoint](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-proxy-endpoint.html) command\. 
+
+ Include the following required parameters: 
++  `--db-proxy-name value` 
++  `--db-proxy-endpoint-name value` 
++  `--vpc-subnet-ids list_of_ids`\. Separate the subnet IDs with spaces\. You don't specify the ID of the VPC itself\. 
+
+ You can also include the following optional parameters: 
++  `--target-role { READ_WRITE | READ_ONLY }`\. This parameter defaults to `READ_WRITE`\. The `READ_ONLY` value only has an effect on Aurora provisioned clusters that contain one or more reader DB instances\. When the proxy is associated with an RDS instance or with an Aurora cluster that only contains a writer DB instance, you can't specify `READ_ONLY`\. 
++  `--vpc-security-group-ids value`\. Separate the security group IDs with spaces\. If you omit this parameter, RDS Proxy uses the default security group for the VPC\. RDS Proxy determines the VPC based on the subnet IDs that you specify for the `--vpc-subnet-ids` parameter\. 
+
+**Example**  
+ The following example creates a proxy endpoint named `my-endpoint`\.   
+For Linux, macOS, or Unix:  
+
+```
+aws rds create-db-proxy-endpoint \
+  --db-proxy-name my-proxy \
+  --db-proxy-endpoint-name my-endpoint \
+  --vpc-subnet-ids subnet_id subnet_id subnet_id ... \
+  --target-role READ_ONLY \
+  --vpc-security-group-ids security_group_id ]
+```
+For Windows:  
+
+```
+aws rds create-db-proxy-endpoint ^
+  --db-proxy-name my-proxy ^
+  --db-proxy-endpoint-name my-endpoint ^
+  --vpc-subnet-ids subnet_id_1 subnet_id_2 subnet_id_3 ... ^
+  --target-role READ_ONLY ^
+  --vpc-security-group-ids security_group_id
+```
+
+#### RDS API<a name="rds-proxy-endpoints.CreatingEndpoint.API"></a>
+
+ To create a proxy endpoint, use the RDS API [CreateProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBClusterParameterGroup.html) action\. 
+
+### Viewing proxy endpoints<a name="rds-proxy-endpoints.DescribingEndpoint"></a>
+
+
+
+#### Console<a name="rds-proxy-endpoints.DescribingEndpoint.CON"></a>
+
+**To view the details for a proxy endpoint**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1.  In the navigation pane, choose **Proxies**\. 
+
+1.  In the list, choose the proxy whose endpoint you want to view\. Click the proxy name to view its details page\. 
+
+1.  In the **Proxy endpoints** section, choose the endpoint that you want to view\. Click its name to view the details page\. 
+
+1.  Examine the parameters whose values you're interested in\. You can check properties such as the following: 
+   +  Whether the endpoint is read/write or read\-only\. 
+   +  The endpoint address that you use in a database connection string\. 
+   +  The VPC, subnets, and security groups associated with the endpoint\. 
+
+#### AWS CLI<a name="rds-proxy-endpoints.DescribingEndpoint.CLI"></a>
+
+ To view one or more DB proxy endpoints, use the AWS CLI [describe\-db\-proxy\-endpoints](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-proxy-endpoints.html) command\. 
+
+ You can include the following optional parameters: 
++  `--db-proxy-endpoint-name` 
++  `--db-proxy-name` 
+
+ The following example describes the `my-endpoint` proxy endpoint\. 
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds describe-db-proxy-endpoints \
+  --db-proxy-endpoint-name my-endpoint
+```
+For Windows:  
+
+```
+aws rds describe-db-proxy-endpoints ^
+  --db-proxy-endpoint-name my-endpoint
+```
+
+#### RDS API<a name="rds-proxy-endpoints.DescribingEndpoint.API"></a>
+
+ To describe one or more proxy endpoints, use the RDS API [DescribeDBProxyEndpoints](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBProxyEndpoints.html) operation\. 
+
+### Modifying a proxy endpoint<a name="rds-proxy-endpoints.ModifyingEndpoint"></a>
+
+
+
+#### Console<a name="rds-proxy-endpoints.ModifyingEndpoint.CON"></a>
+
+**To modify one or more proxy endpoints**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1.  In the navigation pane, choose **Proxies**\. 
+
+1.  In the list, choose the proxy whose endpoint you want to modify\. Click the proxy name to view its details page\. 
+
+1.  In the **Proxy endpoints** section, choose the endpoint that you want to modify\. You can select it in the list, or click its name to view the details page\. 
+
+1.  On the proxy details page, under the **Proxy endpoints** section, choose **Edit**\. Or on the proxy endpoint details page, for **Actions**, choose **Edit**\. 
+
+1.  Change the values of the parameters that you want to modify\. 
+
+1.  Choose **Save changes**\. 
+
+#### AWS CLI<a name="rds-proxy-endpoints.ModifyingEndpoint.CLI"></a>
+
+ To modify a DB proxy endpoint, use the AWS CLI [modify\-db\-proxy\-endpoint](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-endpoint.html) command with the following required parameters: 
++  `--db-proxy-endpoint-name` 
+
+ Specify changes to the endpoint properties by using one or more of the following parameters: 
++  `--new-db-proxy-endpoint-name` 
++  `--vpc-security-group-ids`\. Separate the security group IDs with spaces\. 
+
+ The following example renames the `my-endpoint` proxy endpoint to `new-endpoint-name`\. 
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+aws rds modify-db-proxy-endpoint \
+  --db-proxy-endpoint-name my-endpoint \
+  --new-db-proxy-endpoint-name new-endpoint-name
+```
+For Windows:  
+
+```
+aws rds modify-db-proxy-endpoint ^
+  --db-proxy-endpoint-name my-endpoint ^
+  --new-db-proxy-endpoint-name new-endpoint-name
+```
+
+#### RDS API<a name="rds-proxy-endpoints.ModifyingEndpoint.API"></a>
+
+ To modify a proxy endpoint, use the RDS API [ModifyDBProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyEndpoint.html) operation\. 
+
+### Deleting a proxy endpoint<a name="rds-proxy-endpoints.DeletingEndpoint"></a>
+
+ You can delete an endpoint for your proxy using the console as described following\. 
+
+**Note**  
+ You can't delete the default endpoint that RDS Proxy automatically creates for each proxy\.   
+ When you delete a proxy, RDS Proxy automatically deletes all the associated endpoints\. 
+
+#### Console<a name="rds-proxy-endpoints.DeleteEndpoint.console"></a>
+
+**To delete a proxy endpoint using the AWS Management Console**
+
+1.  In the navigation pane, choose **Proxies**\. 
+
+1.  In the list, choose the proxy whose endpoint you want to endpoint\. Click the proxy name to view its details page\. 
+
+1.  In the **Proxy endpoints** section, choose the endpoint that you want to delete\. You can select one or more endpoints in the list, or click the name of a single endpoint to view the details page\. 
+
+1.  On the proxy details page, under the **Proxy endpoints** section, choose **Delete**\. Or on the proxy endpoint details page, for **Actions**, choose **Delete**\. 
+
+#### AWS CLI<a name="rds-proxy-endpoints.DeleteEndpoint.cli"></a>
+
+ To delete a proxy endpoint, run the [delete\-db\-proxy\-endpoint](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-proxy-endpoint.html) command with the following required parameters: 
++  `--db-proxy-endpoint-name` 
+
+ The following command deletes the proxy endpoint named `my-endpoint`\. 
+
+For Linux, macOS, or Unix:
+
+```
+aws rds delete-db-proxy-endpoint \
+  --db-proxy-endpoint-name my-endpoint
+```
+
+For Windows:
+
+```
+aws rds delete-db-proxy-endpoint ^
+  --db-proxy-endpoint-name my-endpoint
+```
+
+#### RDS API<a name="rds-proxy-endpoints.DeleteEndpoint.api"></a>
+
+ To delete a proxy endpoint with the RDS API, run the [DeleteDBProxyEndpoint](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBProxyEndpoint.html) operation\. Specify the name of the proxy endpoint for the `DBProxyEndpointName` parameter\. 
+
+### Limits for proxy endpoints<a name="rds-proxy-endpoints-limits"></a>
+
+ Each proxy has a default endpoint that you can modify but not create or delete\. 
+
+ The maximum number of user\-defined endpoints for a proxy is 20\. Thus, a proxy can have up to 21 endpoints: the default endpoint, plus 20 that you create\. 
+
+ When you associate additional endpoints with a proxy, RDS Proxy automatically determines which DB instances in your cluster to use for each endpoint\. You can't choose specific instances the way that you can with Aurora custom endpoints\. 
+
+ To use cross\-VPC capability with RDS Proxy, all the VPCs must be owned by the same AWS account\. 
+
+ Reader endpoints aren't available for Aurora multi\-writer clusters\. 
+
+ You can connect to proxy endpoints that you create using the SSL modes `REQUIRED` and `VERIFY_CA`\. You can't connect to an endpoint that you create using the SSL mode `VERIFY_IDENTITY`\. 
 
 ## Command\-line examples for RDS Proxy<a name="rds-proxy.examples"></a>
 
@@ -1095,7 +1418,7 @@ mysql> select @@aurora_server_id;
 mysql>
 [1]+  Stopped                 mysql -h the-proxy.proxy-demo.us-east-1.rds.amazonaws.com -u admin_user -p
 $ # Initially, instance-9814 is the writer.
-$ aws rds failover-db-cluster --db-cluster-id cluster-56-2019-11-14-1399
+$ aws rds failover-db-cluster --db-cluster-identifier cluster-56-2019-11-14-1399
 JSON output
 $ # After a short time, the console shows that the failover operation is complete.
 $ # Now instance-8898 is the writer.
@@ -1112,7 +1435,7 @@ mysql> select @@aurora_server_id;
 
 mysql>
 [1]+  Stopped                 mysql -h the-proxy.proxy-demo.us-east-1.rds.amazonaws.com -u admin_user -p
-$ aws rds failover-db-cluster --db-cluster-id cluster-56-2019-11-14-1399
+$ aws rds failover-db-cluster --db-cluster-identifier cluster-56-2019-11-14-1399
 JSON output
 $ # After a short time, the console shows that the failover operation is complete.
 $ # Now instance-9814 is the writer again.
@@ -1179,6 +1502,8 @@ aws rds describe-db-cluster-parameters --region $REGION \
 
  Following, you can find troubleshooting ideas for some common RDS Proxy issues and information on CloudWatch logs for RDS Proxy\. 
 
+ In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. For more information about proxy endpoints, see [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints)\. 
+
 **Topics**
 + [Common issues and solutions](#rds-proxy-diagnosis)
 + [Working with CloudWatch logs for RDS Proxy](#rds-proxy-logs)
@@ -1239,7 +1564,8 @@ aws rds describe-db-cluster-parameters --region $REGION \
  You can find logs of RDS Proxy activity under CloudWatch in the AWS Management Console\. Each proxy has an entry in the **Log groups** page\. 
 
 **Important**  
- These logs are intended for human consumption for troubleshooting purposes and not for programmatic access\. The format and content of the logs is subject to change\. 
+ These logs are intended for human consumption for troubleshooting purposes and not for programmatic access\. The format and content of the logs is subject to change\.   
+ In particular, older logs don't contain any prefixes indicating the endpoint for each request\. In newer logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name that you specified for a user\-defined endpoint, or the special name `default` for requests using the default endpoint of a proxy\. 
 
 ### Verifying connectivity for a proxy<a name="rds-proxy-verifying"></a>
 
@@ -1320,9 +1646,9 @@ Resources:
  ProxyTargetGroup: 
    Type: AWS::RDS::DBProxyTargetGroup
    Properties:
-     DbProxyName: CanaryProxy
+     DBProxyName: CanaryProxy
      TargetGroupName: default
-     InstanceIdentifiers: 
+     DBInstanceIdentifiers: 
        - Fn::ImportValue: DBInstanceName
    DependsOn: DBProxy
 ```

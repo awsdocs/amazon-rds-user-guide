@@ -20,7 +20,7 @@ Before creating your first DB instance, you should complete the steps in the set
 
 ## Common management tasks for Microsoft SQL Server on Amazon RDS<a name="SQLServer.Concepts.General"></a>
 
-The following are the common management tasks you perform with an Amazon RDS SQL Server DB instance, with links to relevant documentation for each task\. 
+The following are the common management tasks you perform with an Amazon RDS for SQL Server DB instance, with links to relevant documentation for each task\. 
 
 
 ****  
@@ -35,8 +35,8 @@ The following are the common management tasks you perform with an Amazon RDS SQL
 |  **Option groups** If your DB instance is going to require specific database options, you should create an option group before you create the DB instance\.   |  [Options for the Microsoft SQL Server database engine](Appendix.SQLServer.Options.md)  | 
 |  **Connecting to your DB instance** After creating a security group and associating it to a DB instance, you can connect to the DB instance using any standard SQL client application such as Microsoft SQL Server Management Studio\.   |  [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)  | 
 |  **Backup and restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md) [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
-|  **Monitoring** You can monitor your SQL Server DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log files** You can access the log files for your SQL Server DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md) [Microsoft SQL Server database log files](USER_LogAccess.Concepts.SQLServer.md)  | 
+|  **Monitoring** You can monitor your SQL Server DB instance by using CloudWatch Amazon RDS metrics, events, and enhanced monitoring\.   |  [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log files** You can access the log files for your SQL Server DB instance\.   |  [Working with Amazon RDS database log files](USER_LogAccess.md) [Microsoft SQL Server database log files](USER_LogAccess.Concepts.SQLServer.md)  | 
 
 There are also advanced administrative tasks for working with SQL Server DB instances\. For more information, see the following documentation: 
 + [Common DBA tasks for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.md)\.
@@ -68,16 +68,22 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
   For more information, see the table of scale limits under [Editions and supported features of SQL Server 2019 \(15\.x\)](https://docs.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-version-15) in the Microsoft documentation\.
 + Amazon RDS for SQL Server doesn't support importing data into the msdb database\. 
 + You can't rename databases on a DB instance in a SQL Server Multi\-AZ deployment\.
++ Make sure that you use these guidelines when setting the following DB parameters on RDS for SQL Server:
+  + `max server memory (mb)` >= 256 MB
+  + `max worker threads` >= \(number of logical CPUs \* 7\)
+  + For the upper limit on `max worker threads`, see [Configure the max worker threads server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option) in the Microsoft documentation\.
+
+  For more information on setting DB parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 + The maximum storage size for SQL Server DB instances is the following: 
   + General Purpose \(SSD\) storage – 16 TiB for all editions 
   + Provisioned IOPS storage – 16 TiB for all editions 
   + Magnetic storage – 1 TiB for all editions 
 
   If you have a scenario that requires a larger amount of storage, you can use sharding across multiple DB instances to get around the limit\. This approach requires data\-dependent routing logic in applications that connect to the sharded system\. You can use an existing sharding framework, or you can write custom code to enable sharding\. If you use an existing framework, the framework can't install any components on the same server as the DB instance\. 
-+ The minimum storage size for SQL Server DB instances is the following: 
-  + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express editions 
-  + Provisioned IOPS storage – 20 GiB for Enterprise and Standard editions, 100 GiB for Web and Express editions 
-  + Magnetic storage – 200 GiB for Enterprise and Standard editions, 20 GiB for Web and Express editions 
++ The minimum storage size for SQL Server DB instances is the following:
+  + General Purpose \(SSD\) storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
+  + Provisioned IOPS storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
+  + Magnetic storage – 20 GiB for Enterprise, Standard, Web, and Express Editions
 + Amazon RDS doesn't support running these services on the same server as your RDS DB instance:
   + Data Quality Services
   + Master Data Services

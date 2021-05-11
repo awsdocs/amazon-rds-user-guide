@@ -89,7 +89,7 @@ https://rds.amazonaws.com/
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
     &Timestamp=2012-01-20T22%3A06%3A23.624Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<Access Key ID>
     &Signature=<Signature>
 ```
 
@@ -134,7 +134,7 @@ https://rds.amazonaws.com/
     &Version=2009-10-16
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<Access Key ID>
     &Signature=<Signature>
 ```
 
@@ -187,7 +187,7 @@ https://rds.amazonaws.com/
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
     &Timestamp=2009-10-16T22%3A23%3A07.107Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<Access Key ID>
     &Signature=<Signature>
 ```
 
@@ -268,7 +268,7 @@ https://rds.amazonaws.com/
 	&SignatureVersion=2
 	&SignatureMethod=HmacSHA256
 	&Timestamp=2009-10-22T17%3A10%3A50.274Z
-	&AWSAccessKeyId=<AWS Access Key ID>
+	&AWSAccessKeyId=<Access Key ID>
 	&Signature=<Signature>
 ```
 
@@ -344,7 +344,7 @@ https://rds.amazonaws.com/
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
     &Timestamp=2009-10-22T17%3A10%3A50.274Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<Access Key ID>
     &Signature=<Signature>
 ```
 
@@ -412,6 +412,6 @@ https://rds.amazonaws.com/
     &Version=2009-10-16
     &SignatureVersion=2&SignatureMethod=HmacSHA256
     &Timestamp=2009-10-22T22%3A32%3A12.515Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<Access Key ID>
     &Signature=<Signature>
 ```

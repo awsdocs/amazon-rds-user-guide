@@ -1,16 +1,15 @@
 # Oracle UTL\_MAIL<a name="Oracle.Options.UTLMAIL"></a>
 
 Amazon RDS supports Oracle UTL\_MAIL through the use of the UTL\_MAIL option and SMTP servers\. You can send email directly from your database by using the UTL\_MAIL package\. Amazon RDS supports UTL\_MAIL for the following versions of Oracle: 
-+ Oracle version 19\.0\.0\.0, all versions
-+ Oracle version 18\.0\.0\.0, all versions
-+ Oracle version 12\.2\.0\.1, all versions
-+ Oracle version 12\.1\.0\.2\.v5 and later
-+ Oracle version 11\.2\.0\.4\.v9 and later
++ Oracle Database 19c \(19\.0\.0\.0\), all versions
++ Oracle Database 18c \(18\.0\.0\.0\), all versions
++ Oracle Database 12c Release 2 \(12\.2\), all versions
++ Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v5 and later
 
 The following are some limitations to using UTL\_MAIL: 
 + UTL\_MAIL does not support Transport Layer Security \(TLS\) and therefore emails are not encrypted\. 
 
-  To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [Using utl\_http, utl\_tcp, and utl\_smtp with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.ONA)\.
+  To connect securely to remote SSL/TLS resources by creating and uploading custom Oracle wallets, follow the instructions in [Configuring outbound network access on your Oracle DB instance](Oracle.Concepts.ONA.md)\.
 
   The specific certificates that are required for your wallet vary by service\. For AWS services, these can typically be found in the [Amazon trust services repository](https://www.amazontrust.com/repository/)\.
 + UTL\_MAIL does not support authentication with SMTP servers\. 

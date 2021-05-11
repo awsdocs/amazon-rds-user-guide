@@ -2,7 +2,7 @@
 
 We strongly recommend that you use the autovacuum feature for PostgreSQL databases to maintain the health of your PostgreSQL DB instance\. Autovacuum automates the start of the VACUUM and the ANALYZE commands\. Autovacuum checks for tables that have had a large number of inserted, updated, or deleted tuples\. Autovacuum then reclaims storage by removing obsolete data or tuples from the PostgreSQL database\. 
 
-Autovacuum is enabled by default for all new Amazon RDS PostgreSQL DB instances, and the related autovacuum configuration parameters are appropriately set by default\. Because our defaults are somewhat generic, you can benefit from tuning parameters to your specific workload\. The following section can help you perform the needed autovacuum tuning\.
+Autovacuum is enabled by default for all new Amazon RDS for PostgreSQL DB instances, and the related autovacuum configuration parameters are appropriately set by default\. Because our defaults are somewhat generic, you can benefit from tuning parameters to your specific workload\. The following section can help you perform the needed autovacuum tuning\.
 
 **Topics**
 + [Allocating memory for autovacuum](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.WorkMemory)
@@ -32,9 +32,9 @@ In general terms, for large hosts set the [https://www.postgresql.org/docs/curre
 
 In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, Amazon RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
 
-Adaptive autovacuum parameter tuning is enabled by default for RDS PostgreSQL instances with the dynamic parameter `rds.adaptive_autovacuum` set to ON\. We strongly recommend that you keep this enabled\. However, to turn off adaptive autovacuum parameter tuning, set the `rds.adaptive_autovacuum` parameter to 0 or OFF\. 
+Adaptive autovacuum parameter tuning is enabled by default for RDS for PostgreSQL instances with the dynamic parameter `rds.adaptive_autovacuum` set to ON\. We strongly recommend that you keep this enabled\. However, to turn off adaptive autovacuum parameter tuning, set the `rds.adaptive_autovacuum` parameter to 0 or OFF\. 
 
-Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
+Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](http://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
 With adaptive autovacuum parameter tuning enabled, RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
 
@@ -81,7 +81,7 @@ If a table is constantly breaching these thresholds, you need to modify your aut
 We recommend the following:
 + Be aware and enable a monitoring mechanism so that you are aware of the age of your oldest transactions\.
 
-  For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](https://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
+  For information on creating a process that warns you about transaction ID wraparound, see the AWS Database Blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](http://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 + For busier tables, perform a manual vacuum freeze regularly during a maintenance window, in addition to relying on autovacuum\. For information on performing a manual vacuum freeze, see [ Performing a manual vacuum freeze](#Appendix.PostgreSQL.CommonDBATasks.Autovacuum.VacuumFreeze)\.
 
 ## Determining which tables are currently eligible for autovacuum<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.EligibleTables"></a>
@@ -144,7 +144,7 @@ If you need to manually vacuum a table, you need to determine if autovacuum is c
 
 Use the following query to determine if autovacuum is running, how long it has been running, and if it is waiting on another session\. 
 
-If you are using Amazon RDS PostgreSQL 9\.6\+ or higher, use this query:
+If you are using RDS for PostgreSQL 9\.6\+ or higher, use this query:
 
 ```
 SELECT datname, usename, pid, state, wait_event, current_timestamp - xact_start AS xact_runtime, query

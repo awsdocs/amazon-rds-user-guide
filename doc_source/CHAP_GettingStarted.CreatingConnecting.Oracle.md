@@ -110,7 +110,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
    SQL>
    ```
 
-For more information about connecting to an Oracle DB instance, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\. For information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+For more information about connecting to an Oracle DB instance, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\. For information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
 ## Deleting your sample DB instance<a name="CHAP_GettingStarted.Deleting.Oracle"></a>
 

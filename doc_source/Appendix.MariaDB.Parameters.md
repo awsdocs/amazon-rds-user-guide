@@ -55,7 +55,7 @@ The following MySQL parameters are not available in MariaDB\-specific DB paramet
 
 For more information on MySQL parameters, go to the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/)\.
 
-The MariaDB\-specific DB parameter groups also contain the following parameters that are applicable to MariaDB only\. Acceptable ranges for the modifiable parameters are the same as specified in the MariaDB documentation except where noted\. Amazon RDS MariaDB parameters are set to the default values of the storage engine you have selected\.
+The MariaDB\-specific DB parameter groups also contain the following parameters that are applicable to MariaDB only\. Acceptable ranges for the modifiable parameters are the same as specified in the MariaDB documentation except where noted\. RDS for MariaDB parameters are set to the default values of the storage engine you have selected\.
 + aria\_block\_size
 + aria\_checkpoint\_interval
 + aria\_checkpoint\_log\_activity
@@ -71,7 +71,7 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + aria\_pagecache\_division\_limit
 + aria\_recover
 
-  Amazon RDS MariaDB supports the values of NORMAL, OFF, and QUICK, but not FORCE or BACKUP\.
+  RDS for MariaDB supports the values of NORMAL, OFF, and QUICK, but not FORCE or BACKUP\.
 + aria\_repair\_threads
 + aria\_sort\_buffer\_size
 + aria\_stats\_method

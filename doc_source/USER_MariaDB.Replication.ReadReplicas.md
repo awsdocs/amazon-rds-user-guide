@@ -68,7 +68,10 @@ The following limitations apply to replication filtering for Amazon RDS for Mari
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MariaDB `binlog_do_db` and `binlog_ignore_db` options for binary log filtering aren't supported\.
-+ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, version 10\.4\.8 and higher 10\.4 versions, and all 10\.5 versions\.
++ Replication filtering doesn't support XA transactions\.
+
+  For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
++ Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, all 10\.4 versions, and all 10\.5 versions\.
 + Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.0, 10\.1, and 10\.2\.
 
 ### Replication filtering examples for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
@@ -266,7 +269,7 @@ You can do several things to reduce the lag between updates to a source DB insta
 
 Amazon RDS monitors the replication status of your read replicas and updates the `Replication State` field of the read replica instance to `Error` if replication stops for any reason\. An example might be if DML queries run on your read replica conflict with the updates made on the source DB instance\. 
 
-You can review the details of the associated error thrown by the MariaDB engine by viewing the `Replication Error` field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MariaDB error message is returned, review the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
+You can review the details of the associated error thrown by the MariaDB engine by viewing the `Replication Error` field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MariaDB error message is returned, review the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
 
 One common issue that can cause replication errors is when the value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group that is used to specify the maximum size of DML code that can be run on the database\. In some cases, the `max_allowed_packet` parameter value in the DB parameter group associated with a source DB instance is smaller than the `max_allowed_packet` parameter value in the DB parameter group associated with the source's read replica\. In these cases, the replication process can throw an error \(Packet bigger than 'max\_allowed\_packet' bytes\) and stop replication\. You can fix the error by having the source and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\. 
 

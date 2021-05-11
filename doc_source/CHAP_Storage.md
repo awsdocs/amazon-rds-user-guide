@@ -45,22 +45,6 @@ Suppose that your storage uses all of its I/O credit balance\. If so, its maximu
 **Note**  
 Storage conversions between magnetic storage and General Purpose SSD storage can potentially deplete your I/O credit balance, resulting in longer conversion times\. For more information about scaling storage, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\.
 
-The following table lists several storage sizes\. For each storage size, it lists the associated base performance of the storage, which is also the rate at which it accumulates I/O credits\. The table also lists the burst duration at the 3,000 IOPS maximum, when starting with a full I/O credit balance\. In addition, the table lists the time in seconds that the storage takes to refill an empty I/O credit balance\.
-
-**Note**  
-The IOPS figure reaches its maximum value at a volume storage size of 5,334 GiB\.
-
-
-|  **Storage size \(GiB\)**  |  **Base performance \(IOPS\)**  | **Maximum burst duration at 3,000 IOPS \(seconds\)**  | **Seconds to fill empty I/O credit balance**  | 
-| --- | --- | --- | --- | 
-|  1  |  100  |  1,862  |  54,000  | 
-|  100  |  300  |  2,000  |  18,000  | 
-|  250  |  750  |  2,400  |  7,200  | 
-|  500  |  1,500  |  3,600  |  3,600  | 
-|  750  |  2,250  |  7,200  |  2,400  | 
-|  1,000  |  3,000  |  Infinite  |  N/A  | 
-|  5,334 |  16,000  |  N/A  |  N/A  | 
-
 The burst duration of your storage depends on the size of the storage, the burst IOPS required, and the I/O credit balance when the burst begins\. This relationship is shown in the equation following\.
 
 ```
@@ -128,7 +112,7 @@ Amazon RDS also supports magnetic storage for backward compatibility\. We recomm
 
 ## Monitoring storage performance<a name="Concepts.Storage.Metrics"></a>
 
-Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 The following metrics are useful for monitoring storage for your DB instance: 
 +  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\. 

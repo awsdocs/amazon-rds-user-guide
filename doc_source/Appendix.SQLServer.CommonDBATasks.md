@@ -7,7 +7,7 @@ When working with a SQL Server DB instance, you can run scripts to modify a newl
 
 **Topics**
 + [Accessing the tempdb database on Microsoft SQL Server DB instances on Amazon RDS](SQLServer.TempDB.md)
-+ [Analyzing your database workload on an Amazon RDS DB instance with SQL Server Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)
++ [Analyzing your database workload on an Amazon RDS for SQL Server DB instance with Database Engine Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)
 + [Collations and character sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
 + [Determining a recovery model for your Microsoft SQL Server database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
 + [Determining the last failover time](Appendix.SQLServer.CommonDBATasks.LastFailover.md)

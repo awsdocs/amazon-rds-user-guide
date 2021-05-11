@@ -2,7 +2,7 @@
 
 If you have existing manual DB snapshots, you can upgrade them to a later version of the Oracle database engine\. 
 
-When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](CHAP_Oracle.md#Oracle.Concepts.Patching)\. To learn how to upgrade snapshots in preparation for the automatic upgrade of 11\.2, see [Migrating from SE2 to EE using snapshots](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-11g.migrating-editions)\.
+When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](USER_UpgradeDBInstance.Oracle.md#Oracle.Concepts.Patching)\.
 
 The following snapshot upgrades are currently supported\. 
 
@@ -53,17 +53,17 @@ For Linux, macOS, or Unix:
 
 ```
 aws rds modify-db-snapshot \
-    --db-snapshot-identifier <mydbsnapshot> \
-    --engine-version <11.2.0.4.v12> \
-    --option-group-name <default:oracle-se1-11-2>
+    --db-snapshot-identifier mydbsnapshot \
+    --engine-version 11.2.0.4.v12 \
+    --option-group-name default:oracle-se1-11-2
 ```
 For Windows:  
 
 ```
 aws rds modify-db-snapshot ^
-    --db-snapshot-identifier <mydbsnapshot> ^
-    --engine-version <11.2.0.4.v12> ^
-    --option-group-name <default:oracle-se1-11-2>
+    --db-snapshot-identifier mydbsnapshot ^
+    --engine-version 11.2.0.4.v12 ^
+    --option-group-name default:oracle-se1-11-2
 ```
 
 ## RDS API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>

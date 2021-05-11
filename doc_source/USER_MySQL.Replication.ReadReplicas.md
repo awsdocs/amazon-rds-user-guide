@@ -16,7 +16,7 @@ Following, you can find specific information about working with read replicas on
 
 Before a MySQL DB instance can serve as a replication source, make sure to enable automatic backups on the source DB instance\. To do this, set the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. Automatic backups are supported only for read replicas running any version of MySQL 5\.6 and later\. You can configure replication based on binary log coordinates for a MySQL DB instance\. 
 
-On Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+On Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
@@ -77,7 +77,7 @@ By default, each of these parameters has an empty value\. On each read replica, 
 
 You can use the `%` and `_` wildcard characters in the `replicate-wild-do-table` and `replicate-wild-ignore-table` parameters\. The `%` wildcard matches any number of characters, and the `_` wildcard matches only one character\. 
 
-The binary logging format of the source DB instance is important for replication because it determines the record of data changes\. The setting of the `binlog_format` parameter determines whether the replication is row\-based or statement\-based\. For more information, see [Binary logging format](USER_LogAccess.Concepts.MySQL.md#USER_LogAccess.MySQL.BinaryFormat)\.
+The binary logging format of the source DB instance is important for replication because it determines the record of data changes\. The setting of the `binlog_format` parameter determines whether the replication is row\-based or statement\-based\. For more information, see [Setting the binary logging format](USER_LogAccess.MySQL.BinaryFormat.md)\.
 
 **Note**  
 All data definition language \(DDL\) statements are replicated as statements, regardless of the `binlog_format` setting on the source DB instance\. 
@@ -88,6 +88,9 @@ The following limitations apply to replication filtering for Amazon RDS for MySQ
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MySQL `--binlog-do-db` and `--binlog-ignore-db` options for binary log filtering aren't supported\.
++ Replication filtering doesn't support XA transactions\.
+
+  For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
 + Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
 + Replication filtering isn't supported for Amazon RDS for MySQL version 5\.5 or 5\.6\.
 
@@ -263,7 +266,7 @@ You can use delayed replication as a strategy for disaster recovery\. With delay
 **Note**  
 On Amazon RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and later\. On Amazon RDS for MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and later\. Delayed replication is not supported on Amazon RDS for MySQL 8\.0\.
 Use stored procedures to configure delayed replication\. You can't configure delayed replication with the AWS Management Console, the AWS CLI, or the Amazon RDS API\.
-On Amazon RDS for MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for Amazon RDS MySQL](mysql-replication-gtid.md)\.
+On Amazon RDS for MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 **Topics**
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)
@@ -372,7 +375,7 @@ You can do several things to reduce the lag between updates to a source DB insta
 
 Amazon RDS monitors the replication status of your read replicas and updates the `Replication State` field of the read replica instance to `Error` if replication stops for any reason\. An example might be if DML queries run on your read replica conflict with the updates made on the source DB instance\. 
 
-You can review the details of the associated error thrown by the MySQL engine by viewing the `Replication Error` field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, review the error number in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\.
+You can review the details of the associated error thrown by the MySQL engine by viewing the `Replication Error` field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, review the error number in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\.
 
 One common issue that can cause replication errors is when the value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. The `max_allowed_packet` parameter is a custom parameter that you can set in a DB parameter group\. You use `max_allowed_packet` to specify the maximum size of DML code that can be run on the database\. In some cases, the `max_allowed_packet` value in the DB parameter group associated with a read replica is smaller than the `max_allowed_packet` value in the DB parameter group associated with the source DB instance\. In these cases, the replication process can throw the error `Packet bigger than 'max_allowed_packet' bytes` and stop replication\. To fix the error, have the source DB instance and read replica use DB parameter groups with the same `max_allowed_packet` parameter values\. 
 

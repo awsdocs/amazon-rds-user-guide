@@ -10,7 +10,7 @@ Use the following sections to help troubleshoot problems you have with DB instan
 + [Amazon RDS DB parameter changes not taking effect](#CHAP_Troubleshooting.Parameters)
 + [Amazon RDS DB instance running out of storage](#CHAP_Troubleshooting.Storage)
 + [Amazon RDS insufficient DB instance capacity](#CHAP_Troubleshooting.Capacity)
-+ [Amazon RDS MySQL and MariaDB issues](#CHAP_Troubleshooting.MySQL)
++ [MySQL and MariaDB issues](#CHAP_Troubleshooting.MySQL)
 + [Can't set backup retention period to 0](#CHAP_Troubleshooting.Backup.Retention)
 
  For information about debugging problems using the Amazon RDS API, see [Troubleshooting applications on Amazon RDS](APITroubleshooting.md)\. 
@@ -240,7 +240,7 @@ The `InsufficientDBInstanceCapacity` error can be returned when you try to creat
 
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-## Amazon RDS MySQL and MariaDB issues<a name="CHAP_Troubleshooting.MySQL"></a>
+## MySQL and MariaDB issues<a name="CHAP_Troubleshooting.MySQL"></a>
 
 You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
@@ -256,7 +256,7 @@ You can diagnose and correct issues with MySQL and MariaDB DB instances\.
 
 ### Maximum MySQL and MariaDB connections<a name="USER_ConnectToInstance.max_connections"></a>
 
-The maximum number of connections allowed to an RDS MySQL or MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+The maximum number of connections allowed to an RDS for MySQL or RDS for MariaDB DB instance is based on the amount of memory available for its DB instance class\. A DB instance class with more memory available results in a larger number of connections available\. For more information on DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 The connection limit for a DB instance is set by default to the maximum for the DB instance class\. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed\. Use the `max_connections` parameter in the parameter group for the DB instance\. For more information, see [Maximum number of database connections](CHAP_Limits.md#RDS_Limits.MaxConnections) and [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
@@ -357,7 +357,7 @@ You can reduce the lag between updates to a source DB instance and the subsequen
 
 ### Diagnosing and resolving a MySQL or MariaDB read replication failure<a name="CHAP_Troubleshooting.MySQL.RR"></a>
 
-Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. If a MariaDB error message is returned, check the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
+Amazon RDS monitors the replication status of your read replicas and updates the **Replication State** field of the read replica instance to `Error` if replication stops for any reason\. You can review the details of the associated error thrown by the MySQL or MariaDB engines by viewing the **Replication Error** field\. Events that indicate the status of the read replica are also generated, including [RDS-EVENT-0045](USER_Events.Messages.md#RDS-EVENT-0045), [RDS-EVENT-0046](USER_Events.Messages.md#RDS-EVENT-0046), and [RDS-EVENT-0047](USER_Events.Messages.md#RDS-EVENT-0047)\. For more information about events and subscribing to events, see [Using Amazon RDS event notification](USER_Events.md)\. If a MySQL error message is returned, check the error in the [MySQL error message documentation](https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html)\. If a MariaDB error message is returned, check the error in the [MariaDB error message documentation](http://mariadb.com/kb/en/mariadb/mariadb-error-codes/)\.
 
 Common situations that can cause replication errors include the following:
 + The value for the `max_allowed_packet` parameter for a read replica is less than the `max_allowed_packet` parameter for the source DB instance\. 
@@ -381,15 +381,15 @@ If a replication error is fixed, the **Replication State** changes to **replicat
 
 ### Creating triggers with binary logging enabled requires SUPER privilege<a name="CHAP_Troubleshooting.MySQL.CreatingTriggers"></a>
 
-When trying to create triggers in an RDS MySQL or MariaDB DB instance, you might receive the following error\.
+When trying to create triggers in an RDS for MySQL or RDS for MariaDB DB instance, you might receive the following error\.
 
 ```
 "You do not have the SUPER privilege and binary logging is enabled" 
 ```
 
-To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS MySQL and MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
+To use triggers when binary logging is enabled requires the SUPER privilege, which is restricted for RDS for MySQL and RDS for MariaDB DB instances\. You can create triggers when binary logging is enabled without the SUPER privilege by setting the `log_bin_trust_function_creators` parameter to true\. To set the `log_bin_trust_function_creators` to true, create a new DB parameter group or modify an existing DB parameter group\.
 
-To create a new DB parameter group that allows you to create triggers in your RDS MySQL or MariaDB DB instance with binary logging enabled, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
+To create a new DB parameter group that allows you to create triggers in your RDS for MySQL or RDS for MariaDB DB instance with binary logging enabled, use the following CLI commands\. To modify an existing parameter group, start with step 2\.
 
 **To create a new parameter group to allow triggers with binary logging enabled using the CLI**
 

@@ -11,10 +11,10 @@ Find techniques to import data into an Amazon RDS for MySQL DB instance in the f
 
 | Source | Amount of data | One time or ongoing | Application downtime | Technique | More information | 
 | --- | --- | --- | --- | --- | --- | 
-| Existing MySQL database on premises or on Amazon EC2 | Any | One time | Some | Create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file to a new Amazon RDS DB instance running MySQL\. | [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md) | 
+| Existing MySQL database on premises or on Amazon EC2 | Any | One time | Some | Create a backup of your on\-premises database, store it on Amazon S3, and then restore the backup file to a new Amazon RDS DB instance running MySQL\. | [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md) | 
 | Any existing database | Any | One time or ongoing | Minimal | Use AWS Database Migration Service to migrate the database with minimal downtime and, for many database DB engines, continue ongoing replication\. | [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) in the AWS Database Migration Service User Guide | 
-| Existing Amazon RDS MySQL DB instance | Any | One time or ongoing | Minimal | Create a read replica for ongoing replication\. Promote the read replica for one\-time creation of a new DB instance\. | [Working with read replicas](USER_ReadRepl.md) | 
-| Existing MySQL or MariaDB database | Small | One time | Some | Copy the data directly to your Amazon RDS MySQL DB instance using a command\-line utility\. | [Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md) | 
+| Existing MySQL DB instance | Any | One time or ongoing | Minimal | Create a read replica for ongoing replication\. Promote the read replica for one\-time creation of a new DB instance\. | [Working with read replicas](USER_ReadRepl.md) | 
+| Existing MySQL or MariaDB database | Small | One time | Some | Copy the data directly to your MySQL DB instance using a command\-line utility\. | [Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md) | 
 | Data not stored in an existing database | Medium | One time | Some | Create flat files and import them using the mysqlimport utility\. | [Importing data from any source to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.AnySource.md) | 
 | Existing MySQL or MariaDB database on premises or on Amazon EC2 | Any | Ongoing | Minimal | Configure replication with an existing MySQL database as the replication source\. | [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md) or [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md) | 
 
@@ -118,7 +118,7 @@ Using innodb\_flush\_log\_at\_trx\_commit=0 causes InnoDB to flush its logs ever
 **Topics**
 + [Overview](#MySQL.Procedural.Importing.Overview)
 + [Importing data considerations](#MySQL.Procedural.Importing.Advanced)
-+ [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)
-+ [Importing data from a MySQL or MariaDB DB to an Amazon RDS MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md)
++ [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)
++ [Importing data from a MySQL or MariaDB DB to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.SmallExisting.md)
 + [Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime](MySQL.Procedural.Importing.NonRDSRepl.md)
 + [Importing data from any source to a MySQL or MariaDB DB instance](MySQL.Procedural.Importing.AnySource.md)

@@ -1,6 +1,6 @@
 # mysql\.rds\_rotate\_slow\_log<a name="mysql_rds_rotate_slow_log"></a>
 
-Rotates the `mysql.slow_log` table to a backup table\. For more information, see [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
+Rotates the `mysql.slow_log` table to a backup table\. For more information, see [Accessing MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
 
 ## Syntax<a name="mysql_rds_rotate_slow_log-syntax"></a>
 

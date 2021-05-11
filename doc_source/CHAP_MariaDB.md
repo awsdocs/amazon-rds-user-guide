@@ -10,7 +10,7 @@ Amazon RDS supports DB instances running several versions of MariaDB\. You can u
 
 For more information about minor version support, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\. 
 
-You first use the Amazon RDS management tools or interfaces to create an Amazon RDS MariaDB DB instance\. You can then use the Amazon RDS tools to perform management actions for the DB instance, such as reconfiguring or resizing the DB instance, authorizing connections to the DB instance, creating and restoring from backups or snapshots, creating Multi\-AZ secondaries, creating read replicas, and monitoring the performance of the DB instance\. You use standard MariaDB utilities and applications to store and access the data in the DB instance\. 
+You first use the Amazon RDS management tools or interfaces to create a MariaDB DB instance\. You can then use the Amazon RDS tools to perform management actions for the DB instance, such as reconfiguring or resizing the DB instance, authorizing connections to the DB instance, creating and restoring from backups or snapshots, creating Multi\-AZ secondaries, creating read replicas, and monitoring the performance of the DB instance\. You use standard MariaDB utilities and applications to store and access the data in the DB instance\. 
 
 MariaDB is available in all of the AWS Regions\. For more information about AWS Regions, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
@@ -36,8 +36,8 @@ The following are the common management tasks you perform with an Amazon RDS DB 
 |  **Replication** You can offload read traffic from your source MariaDB DB instance by creating read replicas\.   |  [Working with read replicas](USER_ReadRepl.md)  | 
 |  **Connecting to Your DB Instance** Connect to your DB instance using a standard SQL client application\.   |  [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)  | 
 |  **Backup and Restore** When you create your DB instance, you can configure it to take automated backups\. You can also back up and restore your databases manually by using full backup files \(\.bak files\)\.   |  [Working with backups](USER_WorkingWithAutomatedBackups.md)  | 
-|  **Monitoring** Monitor your RDS MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your RDS MariaDB DB instance\.   |  [Viewing DB instance metrics](publishing_cloudwatchlogs.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
-|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Accessing Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
+|  **Monitoring** Monitor your MariaDB DB instance by using Amazon CloudWatch RDS metrics, events, and Enhanced Monitoring\. View log files for your MariaDB DB instance\.   |  [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring) [Viewing Amazon RDS events](USER_ListEvents.md)  | 
+|  **Log Files** You can access the log files for your MariaDB DB instance\.   |  [Working with Amazon RDS database log files](USER_LogAccess.md) [MariaDB database log files](USER_LogAccess.Concepts.MariaDB.md)  | 
 
 There are also advanced administrative tasks for working with DB instances running MariaDB\. For more information, see the following documentation: 
 + [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)
@@ -45,7 +45,7 @@ There are also advanced administrative tasks for working with DB instances runni
 
 ## MariaDB on Amazon RDS versions<a name="MariaDB.Concepts.VersionMgmt"></a>
 
-For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.4 to 10\.5\. A version change is considered minor if only the minor version number changes, for example going from version 10\.4\.8 to 10\.4\.13\. 
+For MariaDB, version numbers are organized as version X\.Y\.Z\. In Amazon RDS terminology, X\.Y denotes the major version, and Z is the minor version number\. For Amazon RDS implementations, a version change is considered major if the major version number changes, for example going from version 10\.4 to 10\.5\. A version change is considered minor if only the minor version number changes, for example going from version 10\.3\.20 to 10\.3\.23\. 
 
 Amazon RDS currently supports the following versions of MariaDB: 
 
@@ -77,19 +77,19 @@ aws rds describe-db-engine-versions --default-only --engine mariadb --engine-ver
 
 ### Deprecation of MariaDB versions 10\.0 and 10\.1<a name="MariaDB.Concepts.VersionMgmt.Deprecation1-10.0-10.1"></a>
 
-On March 9, 2021, Amazon RDS plans to deprecate support for MariaDB 10\.0 and 10\.1 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
+On May 18, 2021, Amazon RDS plans to deprecate support for MariaDB 10\.0 and 10\.1 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
 
 
 | Action or recommendation | Dates | 
 | --- | --- | 
-|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 DB instances manually to the version of your choice\.   |  Now–March 9, 2021  | 
-|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 snapshots manually to the version of your choice\.  |  Now–March 9, 2021  | 
+|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 DB instances manually to the version of your choice\.   |  Now–May 18, 2021  | 
+|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 snapshots manually to the version of your choice\.  |  Now–May 18, 2021  | 
 |  You can no longer create new MariaDB 10\.0 and 10\.1 DB instances\.  |  December 3, 2020  | 
-|  Amazon RDS starts automatic upgrades of your MariaDB 10\.0 and 10\.1 DB instances to version 10\.3 or 10\.4\.  |  February 9, 2021  | 
-|  Amazon RDS starts automatic upgrades to version 10\.3 or 10\.4 for any MariaDB 10\.0 and 10\.1 DB instances restored from snapshots\.  |  February 9, 2021  | 
-|  Amazon RDS automatically upgrades any remaining MariaDB 10\.0 and 10\.1 DB instances to version 10\.3 or 10\.4 whether or not they are in a maintenance window\.  |  March 9, 2021  | 
+|  Amazon RDS starts automatic upgrades of your MariaDB 10\.0 and 10\.1 DB instances to version 10\.2\.  |  March 22, 2021  | 
+|  Amazon RDS starts automatic upgrades to version 10\.2 for any MariaDB 10\.0 and 10\.1 DB instances restored from snapshots\.  |  March 22, 2021  | 
+|  Amazon RDS automatically upgrades any remaining MariaDB 10\.0 and 10\.1 DB instances to version 10\.2 whether or not they are in a maintenance window\.  |  May 18, 2021  | 
 
-For more information, see [ Announcement: Amazon RDS for MariaDB 10\.0 and 10\.1 End\-of\-Life date is approaching](https://forums.aws.amazon.com/ann.jspa?annID=8174)\.
+For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](https://forums.aws.amazon.com/ann.jspa?annID=8571)\.
 
 For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
 
@@ -224,7 +224,7 @@ Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
 ## MariaDB file size limits in Amazon RDS<a name="RDS_Limits.FileSize.MariaDB"></a>
 
-For Amazon RDS MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for Amazon RDS MariaDB DB instances\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. 
+For MariaDB DB instances, the maximum provisioned storage limit constrains the size of a table to a maximum size of 16 TB when using InnoDB file\-per\-table tablespaces\. This limit also constrains the system tablespace to a maximum size of 16 TB\. InnoDB file\-per\-table tablespaces \(with tables each in their own tablespace\) are set by default for MariaDB DB instances\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. 
 
 There are advantages and disadvantages to using InnoDB file\-per\-table tablespaces, depending on your application\. To determine the best approach for your application, see [File\-per\-table tablespaces](https://dev.mysql.com/doc/refman/5.7/en/innodb-file-per-table-tablespaces.html) in the MySQL documentation\.
 
@@ -259,7 +259,7 @@ When you have enabled or disabled InnoDB file\-per\-table tablespaces, you can i
 
 ## MariaDB security on Amazon RDS<a name="MariaDB.Concepts.UsersAndPrivileges"></a>
 
-Security for Amazon RDS MariaDB DB instances is managed at three levels:
+Security for MariaDB DB instances is managed at three levels:
 + AWS Identity and Access Management controls who can perform Amazon RDS management actions on DB instances\. When you connect to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS management operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\.
 + When you create a DB instance, you use either a VPC security group or a DB security group to control which devices and Amazon EC2 instances can open connections to the endpoint and port of the DB instance\. These connections can be made using Secure Socket Layer \(SSL\)\. In addition, firewall rules at your company can control whether devices running at your company can open connections to the DB instance\.
 + Once a connection has been opened to a MariaDB DB instance, authentication of the login and permissions are applied the same way as in a stand\-alone instance of MariaDB\. Commands such as `CREATE USER`, `RENAME USER`, `GRANT`, `REVOKE`, and `SET PASSWORD` work just as they do in stand\-alone databases, as does directly modifying database schema tables\.
@@ -284,7 +284,7 @@ Security for Amazon RDS MariaDB DB instances is managed at three levels:
 +  `references` 
 +  `reload` 
 
-  This privilege is limited on Amazon RDS MariaDB DB instances\. It doesn't grant access to the FLUSH LOGS or FLUSH TABLES WITH READ LOCK operations\.
+  This privilege is limited on MariaDB DB instances\. It doesn't grant access to the FLUSH LOGS or FLUSH TABLES WITH READ LOCK operations\.
 +  `replication client` 
 +  `replication slave` 
 +  `select` 
@@ -296,7 +296,7 @@ Security for Amazon RDS MariaDB DB instances is managed at three levels:
 For more information about these privileges, see [User account management](http://mariadb.com/kb/en/mariadb/grant/) in the MariaDB documentation\.
 
 **Note**  
-Although you can delete the master user on a DB instance, we don't recommend doing so\. To recreate the master user, use the `ModifyDBInstance` API or the `modify-db-instance` AWS command line tool and specify a new master user password with the appropriate parameter\. If the master user does not exist in the instance, the master user is created with the specified password\. 
+Although you can delete the master user on a DB instance, we don't recommend doing so\. To recreate the master user, use the `ModifyDBInstance` API or the `modify-db-instance` AWS CLI and specify a new master user password with the appropriate parameter\. If the master user does not exist in the instance, the master user is created with the specified password\. 
 
 To provide management services for each DB instance, the `rdsadmin` user is created when the DB instance is created\. Attempting to drop, rename, change the password for, or change privileges for the `rdsadmin` account results in an error\.
 
@@ -396,15 +396,15 @@ You can save and load the cache on demand using the following stored procedures:
 
 ## Database parameters for MariaDB<a name="MariaDB.Concepts.Parameters"></a>
 
-By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For more information on the parameters available for the Amazon RDS MariaDB DB engine, see [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)\.
+By default, a MariaDB DB instance uses a DB parameter group that is specific to a MariaDB database\. This parameter group contains some but not all of the parameters contained in the Amazon RDS DB parameter groups for the MySQL database engine\. It also contains a number of new, MariaDB\-specific parameters\. For more information on the parameters available for the RDS for MariaDB DB engine, see [Parameters for MariaDB](Appendix.MariaDB.Parameters.md)\.
 
 ## Common DBA tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 
-Ending sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in an Amazon RDS MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
+Ending sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in a MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
 
 ## Local time zone for MariaDB DB instances<a name="MariaDB.Concepts.LocalTimeZone"></a>
 
-By default, the time zone for an RDS MariaDB DB instance is Universal Time Coordinated \(UTC\)\. You can set the time zone for your DB instance to the local time zone for your application instead\.
+By default, the time zone for a MariaDB DB instance is Universal Time Coordinated \(UTC\)\. You can set the time zone for your DB instance to the local time zone for your application instead\.
 
 To set the local time zone for a DB instance, set the `time_zone` parameter in the parameter group for your DB instance to one of the supported values listed later in this section\. When you set the `time_zone` parameter for a parameter group, all DB instances and read replicas that are using that parameter group change to use the new local time zone\. For information on setting parameters in a parameter group, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 

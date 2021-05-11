@@ -6,7 +6,7 @@ When you restore a DB instance to a point in time, the default DB security group
 
 Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
-RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To determine the latest restorable time for a DB instance, use the AWS CLI [ describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
+RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB instance, use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.
 
@@ -20,6 +20,9 @@ Some of the database engines used by Amazon RDS have special considerations when
 + When you restore a SQL Server DB instance to a point in time, each database within that instance is restored to a point in time within 1 second of each other database within the instance\. Transactions that span multiple databases within the instance might be restored inconsistently\.
 + For a SQL Server DB instance, the `OFFLINE`, `EMERGENCY`, and `SINGLE_USER` modes aren't supported\. Setting any database into one of these modes causes the latest restorable time to stop moving ahead for the whole instance\.
 + Some actions, such as changing the recovery model of a SQL Server database, can break the sequence of logs that are used for point\-in\-time recovery\. In some cases, Amazon RDS can detect this issue and the latest restorable time is prevented from moving forward\. In other cases, such as when a SQL Server database uses the `BULK_LOGGED` recovery model, the break in log sequence isn't detected\. It might not be possible to restore a SQL Server DB instance to a point in time if there is a break in the log sequence\. For these reasons, Amazon RDS doesn't support changing the recovery model of SQL Server databases\.
+
+**Note**  
+You can also use AWS Backup to manage backups of Amazon RDS DB instances\. If your DB instance is associated with a backup plan in AWS Backup, that backup plan is used for point\-in\-time recovery\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
 You can restore a DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -43,7 +46,7 @@ You can restore a DB instance to a point in time using the AWS Management Consol
 **Note**  
 Times are shown in your local time zone, which is indicated by an offset from Coordinated Universal Time \(UTC\)\. For example, UTC\-5 is Eastern Standard Time/Central Daylight Time\.
 
-1. For **DB instance identifier**, enter the name of the target restored DB instance\.
+1. For **DB instance identifier**, enter the name of the target restored DB instance\. The name must be unique\.
 
 1. Choose other options as needed, such as DB instance class, storage, and whether you want to use storage autoscaling\.
 

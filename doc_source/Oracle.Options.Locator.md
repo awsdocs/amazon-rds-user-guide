@@ -5,20 +5,18 @@ Amazon RDS supports Oracle Locator through the use of the `LOCATOR` option\. Ora
 **Important**  
 If you use Oracle Locator, Amazon RDS automatically updates your DB instance to the latest Oracle PSU if there are security vulnerabilities with a Common Vulnerability Scoring System \(CVSS\) score of 9\+ or other announced security vulnerabilities\. 
 
-Amazon RDS supports Oracle Locator for the following editions and versions of Oracle: 
-+ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 19\.0\.0\.0, all versions
-+ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 18\.0\.0\.0, all versions
-+ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.2\.0\.1, all versions
-+ Oracle Standard Edition \(SE2\) or Enterprise Edition, version 12\.1\.0\.2\.v13 or later
-+ Oracle Standard Edition \(SE, SE1\) or Enterprise Edition, version 11\.2\.0\.4\.v17 or later
+Amazon RDS supports Oracle Locator for the following versions of Oracle Database: 
++ Oracle Database 19c \(19\.0\.0\.0\)
++ Oracle Database 18c \(18\.0\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 
 ## Prerequisites for Oracle Locator<a name="Oracle.Options.Locator.PreReqs"></a>
 
 The following are prerequisites for using Oracle Locator: 
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of sufficient class\. Oracle Locator is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [DB instance class support for Oracle](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
++ Your DB instance must be of sufficient class\. Oracle Locator is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available and is required for any options that install the Oracle Java Virtual Machine \(JVM\)\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
-+ If your DB instance is running on major version 11\.2, you must install the `XMLDB` option\. For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\. 
 
 ## Best practices for Oracle Locator<a name="Oracle.Options.Locator.BestPractces"></a>
 

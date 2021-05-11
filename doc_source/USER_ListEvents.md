@@ -1,6 +1,9 @@
 # Viewing Amazon RDS events<a name="USER_ListEvents"></a>
 
- Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the date and time of the event, the source name and source type of the event, and a message associated with the event\.
+Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the following: 
++ The date and time of the event
++ The source name and source type of the event
++ A message associated with the event\.
 
 You can retrieve events for your RDS resources through the AWS Management Console, which shows events from the past 24 hours\. You can also retrieve events for your RDS resources by using the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command, or the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API operation\. If you use the AWS CLI or the RDS API to view events, you can retrieve events for up to the past 14 days\. 
 
@@ -15,7 +18,7 @@ If you need to store events for longer periods of time, you can send Amazon RDS 
 
 1. In the navigation pane, choose **Events**\. The available events appear in a list\.
 
-1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the DB instance event type and containing the characters **1318**\.  
+1. Use the **Filter** list to filter the events by type, and use the text box to the right of the **Filter** list to further filter your results\. For example, the following screenshot shows a list of events filtered by the characters **stopped**\.  
 ![\[List DB events\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ListEvents.png)
 
 ## AWS CLI<a name="USER_ListEvents.CLI"></a>
@@ -29,5 +32,3 @@ You can view all Amazon RDS instance events for the past 7 days by calling the [
 ## API<a name="USER_ListEvents.API"></a>
 
 You can view all Amazon RDS instance events for the past 14 days by calling the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API operation and setting the `Duration` parameter to `20160`\.
-
-## <a name="USER_ListEvents.related"></a>

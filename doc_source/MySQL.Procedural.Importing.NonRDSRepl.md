@@ -1,12 +1,12 @@
 # Importing data to an Amazon RDS MySQL or MariaDB DB instance with reduced downtime<a name="MySQL.Procedural.Importing.NonRDSRepl"></a>
 
-If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into an Amazon RDS MySQL DB instance](MySQL.Procedural.Importing.md)\. 
+If your scenario supports it, it is easier to move data in and out of Amazon RDS by using backup files and Amazon S3\. For more information, see [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)\. 
 
-In some cases, you might need to import data from an external MySQL or MariaDB database that supports a live application to an Amazon RDS MySQL or MariaDB DB instance\. In these cases, you can use the following procedure to minimize the impact on application availability\. This procedure can also help if you are working with a very large database\. Here, the procedure helps because you can reduce the cost of the import by reducing the amount of data that is passed across the network to AWS\.
+In some cases, you might need to import data from an external MySQL or MariaDB database that supports a live application to a MySQL or MariaDB DB instance\. In these cases, you can use the following procedure to minimize the impact on application availability\. This procedure can also help if you are working with a very large database\. Here, the procedure helps because you can reduce the cost of the import by reducing the amount of data that is passed across the network to AWS\.
 
-In this procedure, you transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS DB instance\. You then use replication to bring the Amazon RDS DB instance up\-to\-date with your live external instance, before redirecting your application to the Amazon RDS DB instance\. You configure MariaDB replication based on global transaction identifiers \(GTIDs\) if the external instance is MariaDB 10\.0\.2 or greater and the target instance is Amazon RDS MariaDB; otherwise, you configure replication based on binary log coordinates\. We recommend GTID\-based replication if your external database supports it due to its enhanced crash\-safety features\. For more information, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
+In this procedure, you transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS DB instance\. You then use replication to bring the Amazon RDS DB instance up\-to\-date with your live external instance, before redirecting your application to the Amazon RDS DB instance\. You configure MariaDB replication based on global transaction identifiers \(GTIDs\) if the external instance is MariaDB 10\.0\.2 or greater and the target instance is RDS for MariaDB; otherwise, you configure replication based on binary log coordinates\. We recommend GTID\-based replication if your external database supports it due to its enhanced crash\-safety features\. For more information, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_1.png)
+![\[Import an external MySQL database to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_1.png)
 
 **Note**  
 We don't recommend that you use this procedure with source MySQL databases from MySQL versions earlier than version 5\.1, due to potential replication issues\. For more information, see [Replication compatibility between MySQL versions](https://dev.mysql.com/doc/refman/8.0/en/replication-compatibility.html) in the MySQL documentation\.
@@ -15,7 +15,7 @@ We don't recommend that you use this procedure with source MySQL databases from 
 
 The first step in the process of migrating a large amount of data to an Amazon RDS MySQL or MariaDB DB instance with minimal downtime is to create a copy of the source data\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_2.png)
+![\[Create a backup of the MySQL database\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_2.png)
 
 You can use the `mysqldump` utility to create a database backup in either SQL or delimited\-text format\. You should do a test run with each format in a nonproduction environment to see which method minimizes the amount of time that `mysqldump` runs\.
 
@@ -116,8 +116,8 @@ On Windows, run the command window as an administrator\.
      ```
      mysqldump ^
          --tab=target_directory ^
-         --fields-terminated-by ',' ^
-         --fields-enclosed-by '"' ^
+         --fields-terminated-by "," ^
+         --fields-enclosed-by """ ^
          --lines-terminated-by 0x0d0a ^
          database_name ^
          --master-data=2 ^
@@ -160,9 +160,9 @@ You must create any stored procedures, triggers, functions, or events manually i
 
 ## Create an Amazon EC2 instance and copy the compressed database<a name="MySQL.Procedural.Importing.Import.Database"></a>
 
-Copying your compressed database backup file to an Amazon EC2 instance takes fewer network resources than doing a direct copy of uncompressed data between database instances\. After your data is in Amazon EC2, you can copy it from there directly to your Amazon RDS MySQL or MariaDB DB instance\. For you to save on the cost of network resources, your Amazon EC2 instance must be in the same AWS Region as your Amazon RDS DB instance\. Having the Amazon EC2 instance in the same AWS Region as your Amazon RDS DB instance also reduces network latency during the import\.
+Copying your compressed database backup file to an Amazon EC2 instance takes fewer network resources than doing a direct copy of uncompressed data between database instances\. After your data is in Amazon EC2, you can copy it from there directly to your MySQL or MariaDB DB instance\. For you to save on the cost of network resources, your Amazon EC2 instance must be in the same AWS Region as your Amazon RDS DB instance\. Having the Amazon EC2 instance in the same AWS Region as your Amazon RDS DB instance also reduces network latency during the import\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_3.png)
+![\[Copy the database backup to an EC2 instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_3.png)
 
 ### To create an Amazon EC2 instance and copy your data<a name="MySQL.Procedural.Importing.Create.EC2"></a>
 
@@ -205,13 +205,13 @@ This example installs the MySQL client on an Amazon Linux AMI distribution\. If 
      tar xzvf backup.tar.gz
      ```
 
-## Create an Amazon RDS MySQL or MariaDB DB instance and import data from your Amazon EC2 instance<a name="MySQL.Procedural.Importing.Create.RDS.Database"></a>
+## Create a MySQL or MariaDB DB instance and import data from your Amazon EC2 instance<a name="MySQL.Procedural.Importing.Create.RDS.Database"></a>
 
-By creating an Amazon RDS MySQL or MariaDB DB instance in the same AWS Region as your Amazon EC2 instance, you can import the database backup file from EC2 faster than over the internet\.
+By creating a MySQL or MariaDB DB instance in the same AWS Region as your Amazon EC2 instance, you can import the database backup file from EC2 faster than over the internet\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_4.png)
+![\[Import the backup from the EC2 instance to the MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_4.png)
 
-### To create an Amazon RDS MySQL or MariaDB DB instance and import your data<a name="MySQL.Procedural.Importing.Create.RDS.Database.Procedure"></a>
+### To create a MySQL or MariaDB DB instance and import your data<a name="MySQL.Procedural.Importing.Create.RDS.Database.Procedure"></a>
 
 ****
 
@@ -318,13 +318,13 @@ If you used any data\-formatting options with `mysqldump` when you initially dum
 1. Run a simple SELECT query against one or two of the tables in the imported database to verify that the import was successful\.
 
 **Note**  
- If you no longer need the Amazon EC2 instance used in this procedure, terminate the EC2 instance to reduce your AWS resource usage\. To terminate an EC2 instance, see [Terminating an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#terminating-instances-console)\. 
+ If you no longer need the Amazon EC2 instance used in this procedure, terminate the EC2 instance to reduce your AWS resource usage\. To terminate an EC2 instance, see [Terminating an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#terminating-instances-console)\.
 
 ## Replicate between your external database and new Amazon RDS DB instance<a name="MySQL.Procedural.Importing.Start.Repl"></a>
 
-Your source database was likely updated during the time that it took to copy and transfer the data to the Amazon RDS MySQL or MariaDB DB instance\. That being the case, you can use replication to bring the copied database up\-to\-date with the source database\.
+Your source database was likely updated during the time that it took to copy and transfer the data to the MySQL or MariaDB DB instance\. That being the case, you can use replication to bring the copied database up\-to\-date with the source database\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_5.png)
+![\[Replicate data from the external MySQL database to the MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_5.png)
 
 **Note**  
 The permissions required to start replication on an Amazon RDS DB instance are restricted and not available to your Amazon RDS master user\. Because of this, you must use either the Amazon RDS [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command or the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command to configure replication, and the [mysql\.rds\_start\_replication](mysql_rds_start_replication.md) command to start replication between your live database and your Amazon RDS database\.
@@ -418,11 +418,11 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 
 ## Redirect your live application to your Amazon RDS instance<a name="MySQL.Procedural.Importing.Redirect.App"></a>
 
-After the Amazon RDS MySQL or MariaDB DB instance is up\-to\-date with the source replication instance, you can now update your live application to use the Amazon RDS instance\.
+After the MySQL or MariaDB DB instance is up\-to\-date with the source replication instance, you can now update your live application to use the Amazon RDS instance\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_6.png)
+![\[Stop replication and direct the live application to the MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_6.png)
 
-### To redirect your live application to your Amazon RDS MySQL or MariaDB DB instance and stop replication<a name="MySQL.Procedural.Importing.Redirect.App.Procedure"></a>
+### To redirect your live application to your MySQL or MariaDB DB instance and stop replication<a name="MySQL.Procedural.Importing.Redirect.App.Procedure"></a>
 
 1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 

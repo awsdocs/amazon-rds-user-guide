@@ -1,4 +1,4 @@
-# Restoring a backup into an Amazon RDS MySQL DB instance<a name="MySQL.Procedural.Importing"></a>
+# Restoring a backup into a MySQL DB instance<a name="MySQL.Procedural.Importing"></a>
 
 Amazon RDS supports importing MySQL databases by using backup files\. You can create a backup of your database, store it on Amazon S3, and then restore the backup file onto a new Amazon RDS DB instance running MySQL\. 
 
@@ -21,7 +21,7 @@ The following are some limitations and recommendations for importing backup file
 + You must import your data to the default minor version of your MySQL major version in your AWS Region\. For example, if your major version is MySQL 5\.6, and the default minor version for your AWS Region is 5\.6\.44, then you must import your data into a MySQL version 5\.6\.44 DB instance\. You can upgrade your DB instance after importing\. For information about determining the default minor version, see [MySQL on Amazon RDS versions](CHAP_MySQL.md#MySQL.Concepts.VersionMgmt)\.
 + Backward migration is not supported for both major versions and minor versions\. For example, you can't migrate from version 5\.7 to version 5\.6, and you can't migrate from version 5\.6\.39 to version 5\.6\.37\.
 + You can't import a MySQL 5\.5 database\. 
-+ You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. Similarly, you can't import a MySQL 5\.7 database to an Amazon RDS MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
++ You can't import an on\-premises MySQL database from one major version to another\. For example, you can't import a MySQL 5\.6 database to an Amazon RDS MySQL 5\.7 or 8\.0 database\. Similarly, you can't import a MySQL 5\.7 database to an RDS for MySQL 8\.0 database\. You can upgrade your DB instance after you complete the import\. 
 + You can't restore from an encrypted source database, but you can restore to an encrypted Amazon RDS DB instance\. 
 + You can't restore from an encrypted backup in the Amazon S3 bucket\. 
 + You can't restore from an Amazon S3 bucket in a different AWS Region than your Amazon RDS DB instance\. 
@@ -60,7 +60,7 @@ If you already have an IAM role, you can use that\. If you don't have an IAM rol
 Use the Percona XtraBackup software to create your backup\. You can install Percona XtraBackup from [Download Percona XtraBackup](https://www.percona.com/downloads/Percona-XtraBackup-LATEST/)\. 
 
 **Note**  
-For MySQL 8\.0 migration, you must use Percona XtraBackup 8\.0\. Percona XtraBackup 8\.0\.12 and higher versions support migration of all versions of MySQL\. If you are migrating to Amazon RDS MySQL 8\.0\.20 or higher, you must use Percona XtraBackup 8\.0\.12 or higher\.  
+For MySQL 8\.0 migration, you must use Percona XtraBackup 8\.0\. Percona XtraBackup 8\.0\.12 and higher versions support migration of all versions of MySQL\. If you are migrating to RDS for MySQL 8\.0\.20 or higher, you must use Percona XtraBackup 8\.0\.12 or higher\.  
 For MySQL 5\.7 migrations, you can also use Percona XtraBackup 2\.4\. For migrations of earlier MySQL versions, you can also use Percona XtraBackup 2\.3 or 2\.4\.
 
 You can create a full backup of your MySQL database files using Percona XtraBackup\. Alternatively, if you already use Percona XtraBackup to back up your MySQL database files, you can upload your existing full and incremental backup directories and files\. 
@@ -234,18 +234,7 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
 1. For **IAM role**, you can choose an existing IAM role\.
 
-1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role**\. If so:
-
-   1. Enter the **IAM role name**\.
-
-   1.  Choose whether to **Allow access to KMS key**:
-      + If you didn't encrypt the backup files, choose **No**\.
-      + If you encrypted the backup files with AES\-256 \(SSE\-S3\) when you uploaded them to Amazon S3, choose **No**\. In this case, the data is decrypted automatically\.
-      + If you encrypted the backup files with AWS\-KMS \(SSE\-KMS\) server\-side encryption when you uploaded them to Amazon S3, choose **Yes**\. Next, choose the correct master key for **Master key**\.
-
-        The AWS Management Console creates an IAM policy that enables Aurora to decrypt the data\.
-
-      For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in the *Amazon S3 Developer Guide*\.
+1. \(Optional\) You can also have a new IAM role created for you by choosing **Create a new role** and entering the **IAM role name**\.
 
 1. Specify your DB instance information\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. 
 **Note**  

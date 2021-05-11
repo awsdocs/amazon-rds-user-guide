@@ -450,7 +450,7 @@ Logfile D:\rdsdbdata\MSDTC\Trace\dtctrace.log:
 Processing completed   Buffers: 1, Events: 3, EventsLost: 0 :: Format Errors: 0, Unknowns: 3
 Event traces dumped to d:\rdsdbdata\Log\msdtc_<timestamp>.log
 ```
-You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Accessing Amazon RDS database log files](USER_LogAccess.md)\.  
+You can use the detailed information to query the name of the generated log file\. For more information about downloading log files from the RDS DB instance, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.  
 The trace session logs remain on the instance for 35 days\. Any older trace session logs are automatically deleted\.
 
 **Example of STATUS tracing action**  
@@ -527,9 +527,9 @@ To disable MSDTC, remove the `MSDTC` option from its option group\.
       --apply-immediately
   ```
 
-## Troubleshooting MSDTC for RDS SQL Server<a name="Appendix.SQLServer.Options.MSDTC.Troubleshooting"></a>
+## Troubleshooting MSDTC for RDS for SQL Server<a name="Appendix.SQLServer.Options.MSDTC.Troubleshooting"></a>
 
-In some cases, you might have trouble establishing a connection between MSDTC running on a client computer and the MSDTC service running on an RDS SQL Server DB instance\. If so, make sure of the following:
+In some cases, you might have trouble establishing a connection between MSDTC running on a client computer and the MSDTC service running on an RDS for SQL Server DB instance\. If so, make sure of the following:
 + The inbound rules for the security group associated with the DB instance are configured correctly\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 + Your client computer is configured correctly\.
 + The MSDTC firewall rules on your client computer are enabled\.

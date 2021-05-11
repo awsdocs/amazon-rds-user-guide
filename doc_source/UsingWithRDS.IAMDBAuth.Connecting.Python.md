@@ -1,6 +1,6 @@
 # Connecting to your DB instance using IAM authentication and the AWS SDK for Python \(Boto3\)<a name="UsingWithRDS.IAMDBAuth.Connecting.Python"></a>
 
-You can connect to an Amazon RDS MySQL or PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
+You can connect to an RDS for MySQL or RDS for PostgreSQL DB instance with the AWS SDK for Python \(Boto3\) as described following\.
 
 The following are prerequisites for connecting to your DB instance using IAM authentication:
 + [Enabling and disabling IAM database authentication](UsingWithRDS.IAMDBAuth.Enabling.md)
@@ -24,6 +24,7 @@ This code generates an IAM authentication token for a MySQL DB instance\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
@@ -43,6 +44,7 @@ This code generates an IAM authentication token for a PostgreSQL DB instance\.
 ```
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
@@ -91,7 +93,7 @@ client = session.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
 try:
-    conn =  mysql.connector.connect(host=ENDPOINT, user=USR, passwd=token, port=PORT, database=DBNAME)
+    conn =  mysql.connector.connect(host=ENDPOINT, user=USR, passwd=token, port=PORT, database=DBNAME, ssl_ca='[full path]rds-combined-ca-bundle.pem')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()
@@ -106,6 +108,7 @@ This code connects to a PostgreSQL DB instance\.
 import psycopg2
 import sys
 import boto3
+import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
@@ -120,7 +123,7 @@ client = session.client('rds')
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
 
 try:
-    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USR, password=token)
+    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USR, password=token, ssl_ca='[full path]rds-combined-ca-bundle.pem')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()

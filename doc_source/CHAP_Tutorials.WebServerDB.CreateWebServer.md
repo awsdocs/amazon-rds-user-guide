@@ -56,13 +56,6 @@ First, you create an Amazon EC2 instance in the public subnet of your VPC\.
 
 Next, you connect to your EC2 instance and install the web server\.
 
-**Note**  
-This tutorial is designed to work with a MySQL version 5\.6 DB instance\. If you are using a MySQL 8\.0 DB instance instead, you must set the following parameters to the values specified in a customer\-created DB parameter group:  
-`character_set_server` – `utf8`
-`collation_server` – `utf8_general_ci`
-The default settings for these parameters cause the database connection to fail\. Other parameter settings might also correct the problem\. For more information about setting parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.  
-After you reset the parameters, modify your DB instance to use the DB parameter group, and reboot the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [Rebooting a DB instance](USER_RebootInstance.md)\.
-
 **To connect to your EC2 instance and install the Apache web server with PHP**
 
 1. Connect to the EC2 instance that you created earlier by following the steps in [Connect to your Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html)\.
@@ -107,7 +100,7 @@ The `-y` option installs the updates without asking for confirmation\. To examin
 **Note**  
 The Apache test page appears only when there is no content in the document root directory, `/var/www/html`\. After you add content to the document root directory, your content appears at the public DNS address of your EC2 instance instead of the Apache test page\.
 
-1. Configure the web server to start with each system boot using the `chkconfig` command\.
+1. Configure the web server to start with each system boot using the `systemctl` command\.
 
    ```
    sudo systemctl enable httpd

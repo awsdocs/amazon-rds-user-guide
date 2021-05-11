@@ -4,7 +4,7 @@ Amazon RDS provides newer versions of each supported database engine so you can 
 
 There are two kinds of upgrades: major version upgrades and minor version upgrades\. In general, a *major engine version upgrade* can introduce changes that are not compatible with existing applications\. In contrast, a *minor version upgrade* includes only changes that are backward\-compatible with existing applications\.
 
-The version numbering sequence is specific to each database engine\. For example, Amazon RDS MySQL 5\.7 and 8\.0 are major engine versions and upgrading from any 5\.7 version to any 8\.0 version is a major version upgrade\. Amazon RDS MySQL version 5\.7\.22 and 5\.7\.23 are minor versions and upgrading from 5\.7\.22 to 5\.7\.23 is a minor version upgrade\.
+The version numbering sequence is specific to each database engine\. For example, RDS for MySQL 5\.7 and 8\.0 are major engine versions and upgrading from any 5\.7 version to any 8\.0 version is a major version upgrade\. RDS for MySQL version 5\.7\.22 and 5\.7\.23 are minor versions and upgrading from 5\.7\.22 to 5\.7\.23 is a minor version upgrade\.
 
 **Important**  
 You can't modify a DB instance when it is being upgraded\. During an upgrade, the DB instance status is `upgrading`\.
@@ -108,3 +108,6 @@ When you perform these tasks, you can control whether auto minor version upgrade
 + Using the RDS API, set the `AutoMinorVersionUpgrade` parameter\.
 
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
+
+**Important**  
+If you plan to migrate an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster in the near future, we strongly recommend that you disable auto minor version upgrades for the DB instance early in the migration planning phase\. Migration to Aurora PostgreSQL might be delayed if the RDS for PostgreSQL version isn't yet supported by Aurora PostgreSQL\. For information about Aurora PostgreSQL versions, see [ Engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.

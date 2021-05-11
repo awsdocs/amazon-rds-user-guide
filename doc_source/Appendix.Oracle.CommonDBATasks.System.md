@@ -25,9 +25,9 @@ To disconnect the current session by ending the dedicated server process, use th
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `sid` | number | — | Yes | The session identifier\. | 
-| `serial` | number | — | Yes | The serial number of the session\. | 
-| `method` | varchar | 'IMMEDIATE' | No | Valid values are `'IMMEDIATE'` or `'POST_TRANSACTION'`\. | 
+|  `sid`  |  number  |  —  |  Yes  |  The session identifier\.  | 
+|  `serial`  |  number  |  —  |  Yes  |  The serial number of the session\.  | 
+|  `method`  |  varchar  |  'IMMEDIATE'  |  No  |  Valid values are `'IMMEDIATE'` or `'POST_TRANSACTION'`\.  | 
 
 The following example disconnects a session\.
 
@@ -57,9 +57,9 @@ To terminate a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.kil
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `sid` | number | — | Yes | The session identifier\. | 
-| `serial` | number | — | Yes | The serial number of the session\. | 
-| `method` | varchar | null | No |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
+|  `sid`  |  number  |  —  |  Yes  |  The session identifier\.  | 
+|  `serial`  |  number  |  —  |  Yes  |  The serial number of the session\.  | 
+|  `method`  |  varchar  |  null  |  No  |  Valid values are `'IMMEDIATE'` or `'PROCESS'`\.   | 
 
 The following example terminates a session\.
 
@@ -85,7 +85,7 @@ You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` para
 To cancel a SQL statement in a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.cancel`\.
 
 **Note**  
-This procedure is supported for Oracle version 18\.0\.0\.0 and later\.
+This procedure is supported for Oracle Database 18c \(18\.0\.0\.0\) and later\.
 
 The `cancel` procedure has the following parameters\. 
 
@@ -94,9 +94,9 @@ The `cancel` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `sid` | number | — | Yes | The session identifier\. | 
-| `serial` | number | — | Yes | The serial number of the session\. | 
-| `sql_id` | varchar2 | null | No |  The SQL identifier of the SQL statement\.   | 
+|  `sid`  |  number  |  —  |  Yes  |  The session identifier\.  | 
+|  `serial`  |  number  |  —  |  Yes  |  The serial number of the session\.  | 
+|  `sql_id`  |  varchar2  |  null  |  No  |  The SQL identifier of the SQL statement\.   | 
 
 The following example cancels a SQL statement in a session\.
 
@@ -125,7 +125,7 @@ To enable and disable restricted sessions, use the Amazon RDS procedure `rdsadmi
 
 | Parameter name | Data type | Default | Yes | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_enable` | boolean | true | No |  Set to `true` to enable restricted sessions, `false` to disable restricted sessions\.   | 
+|  `p_enable`  |  boolean  |  true  |  No  |  Set to `true` to enable restricted sessions, `false` to disable restricted sessions\.   | 
 
 The following example shows how to enable and disable restricted sessions\. 
 
@@ -137,7 +137,6 @@ SELECT LOGINS FROM V$INSTANCE;
 LOGINS
 -------
 ALLOWED
-
 
 /* Enable restricted sessions */
 
@@ -201,10 +200,10 @@ For all parameter values, use uppercase unless you created the user with a case\
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_obj_name` | varchar2 | — | Yes |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in uppercase, so we recommend that you try that first\.   | 
-| `p_grantee` | varchar2 | — | Yes |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
-| `p_privilege` | varchar2 | null | Yes | — | 
-| `p_grant_option` | boolean | false | No |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for Oracle versions 11\.2\.0\.4\.v8 and later, 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.   | 
+|  `p_obj_name`  |  varchar2  |  —  |  Yes  |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in uppercase, so we recommend that you try that first\.   | 
+|  `p_grantee`  |  varchar2  |  —  |  Yes  |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
+|  `p_privilege`  |  varchar2  |  null  |  Yes  |  —  | 
+|  `p_grant_option`  |  boolean  |  false  |  No  |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.   | 
 
 The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`\.
 
@@ -253,9 +252,9 @@ The `revoke_sys_object` procedure has the following parameters\.
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_obj_name` | varchar2 | — | Yes |  The name of the object to revoke privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
-| `p_revokee` | varchar2 | — | Yes |  The name of the object to revoke privileges for\. The object can be a schema or a role\.   | 
-| `p_privilege` | varchar2 | null | Yes | — | 
+|  `p_obj_name`  |  varchar2  |  —  |  Yes  |  The name of the object to revoke privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in upper case, so we recommend you try that first\.   | 
+|  `p_revokee`  |  varchar2  |  —  |  Yes  |  The name of the object to revoke privileges for\. The object can be a schema or a role\.   | 
+|  `p_privilege`  |  varchar2  |  null  |  Yes  |  —  | 
 
 The following example revokes select privileges on an object named `V_$SESSION` from a user named `USER1`\.
 
@@ -306,7 +305,7 @@ You can create a custom password verification function in two ways\. If you want
 
 ### The create\_verify\_function procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Standard"></a>
 
-The `create_verify_function` procedure is supported for Oracle version 11\.2\.0\.4\.v9 and later, Oracle version 12\.1\.0\.2\.v5 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure has the following parameters\. 
 
@@ -315,21 +314,21 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_verify_function_name` | varchar2 | — | Yes |  The name for your custom function\. This function is created for you in the SYS schema\. You assign this function to user profiles\.   | 
-| `p_min_length` | number | 8 | No | The minimum number of characters required\. | 
-| `p_max_length` | number | 256 | No | The maximum number of characters allowed\. | 
-| `p_min_letters` | number | 1 | No | The minimum number of letters required\. | 
-| `p_min_uppercase` | number | 0 | No | The minimum number of uppercase letters required\. | 
-| `p_min_lowercase` | number | 0 | No | The minimum number of lowercase letters required\. | 
-| `p_min_digits` | number | 1 | No | The minimum number of digits required\. | 
-| `p_min_special` | number | 0 | No | The minimum number of special characters required\. | 
-| `p_min_different_chars` | number | 3 | No | The minimum number of different characters required between the old and new password\. | 
-| `p_disallow_username` | boolean | true | No | Set to `true` to disallow the user name in the password\. | 
-| `p_disallow_reverse` | boolean | true | No | Set to `true` to disallow the reverse of the user name in the password\. | 
-| `p_disallow_db_name` | boolean | true | No | Set to `true` to disallow the database or server name in the password\. | 
-| `p_disallow_simple_strings` | boolean | true | No | Set to `true` to disallow simple strings as the password\. | 
-| `p_disallow_whitespace` | boolean | false | No | Set to `true` to disallow white space characters in the password\. | 
-| `p_disallow_at_sign` | boolean | false | No | Set to `true` to disallow the @ character in the password\. | 
+|  `p_verify_function_name`  |  varchar2  |  —  |  Yes  |  The name for your custom function\. This function is created for you in the SYS schema\. You assign this function to user profiles\.   | 
+|  `p_min_length`  |  number  |  8  |  No  |  The minimum number of characters required\.  | 
+|  `p_max_length`  |  number  |  256  |  No  |  The maximum number of characters allowed\.  | 
+|  `p_min_letters`  |  number  |  1  |  No  |  The minimum number of letters required\.  | 
+|  `p_min_uppercase`  |  number  |  0  |  No  |  The minimum number of uppercase letters required\.  | 
+|  `p_min_lowercase`  |  number  |  0  |  No  |  The minimum number of lowercase letters required\.  | 
+|  `p_min_digits`  |  number  |  1  |  No  |  The minimum number of digits required\.  | 
+|  `p_min_special`  |  number  |  0  |  No  |  The minimum number of special characters required\.  | 
+|  `p_min_different_chars`  |  number  |  3  |  No  |  The minimum number of different characters required between the old and new password\.  | 
+|  `p_disallow_username`  |  boolean  |  true  |  No  |  Set to `true` to disallow the user name in the password\.  | 
+|  `p_disallow_reverse`  |  boolean  |  true  |  No  |  Set to `true` to disallow the reverse of the user name in the password\.  | 
+|  `p_disallow_db_name`  |  boolean  |  true  |  No  |  Set to `true` to disallow the database or server name in the password\.  | 
+|  `p_disallow_simple_strings`  |  boolean  |  true  |  No  |  Set to `true` to disallow simple strings as the password\.  | 
+|  `p_disallow_whitespace`  |  boolean  |  false  |  No  |  Set to `true` to disallow white space characters in the password\.  | 
+|  `p_disallow_at_sign`  |  boolean  |  false  |  No  |  Set to `true` to disallow the @ character in the password\.  | 
 
 You can create multiple password verification functions\.
 
@@ -384,7 +383,6 @@ The following example gets all profiles and the password verification functions 
 ```
 SELECT * FROM DBA_PROFILES WHERE RESOURCE_NAME = 'PASSWORD_VERIFY_FUNCTION';
 
-
 PROFILE                    RESOURCE_NAME                     RESOURCE  LIMIT
 -------------------------  --------------------------------  --------  ------------------------
 DEFAULT                    PASSWORD_VERIFY_FUNCTION          PASSWORD  CUSTOM_PASSWORD_FUNCTION
@@ -393,7 +391,7 @@ RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 
 ### The create\_passthrough\_verify\_fcn procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
 
-The `create_passthrough_verify_fcn` procedure is supported for Oracle version 11\.2\.0\.4\.v11 and later, Oracle version 12\.1\.0\.2\.v7 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.
+The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn`\. The `create_passthrough_verify_fcn` procedure has the following parameters\. 
 
@@ -402,9 +400,9 @@ You can create a custom function to verify passwords by using the Amazon RDS pro
 
 | Parameter name | Data type | Default | Required | Description | 
 | --- | --- | --- | --- | --- | 
-| `p_verify_function_name` | varchar2 | — | Yes |  The name for your custom verification function\. This is a wrapper function that is created for you in the SYS schema, and it doesn't contain any verification logic\. You assign this function to user profiles\.   | 
-| `p_target_owner` | varchar2 | — | Yes | The schema owner for your custom verification function\. | 
-| `p_target_function_name` | varchar2 | — | Yes |  The name of your existing custom function that contains the verification logic\. Your custom function must return a boolean\. Your function should return `true` if the password is valid and `false` if the password is invalid\.   | 
+|  `p_verify_function_name`  |  varchar2  |  —  |  Yes  |  The name for your custom verification function\. This is a wrapper function that is created for you in the SYS schema, and it doesn't contain any verification logic\. You assign this function to user profiles\.   | 
+|  `p_target_owner`  |  varchar2  |  —  |  Yes  |  The schema owner for your custom verification function\.  | 
+|  `p_target_function_name`  |  varchar2  |  —  |  Yes  |  The name of your existing custom function that contains the verification logic\. Your custom function must return a boolean\. Your function should return `true` if the password is valid and `false` if the password is invalid\.   | 
 
 The following example creates a password verification function that uses the logic from the function named `PASSWORD_LOGIC_EXTRA_STRONG`\. 
 
@@ -426,7 +424,7 @@ ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION CUSTOM_PASSWORD_FUNCTION;
 
 ## Setting up a custom DNS server<a name="Appendix.Oracle.CommonDBATasks.CustomDNS"></a>
 
-Amazon RDS supports outbound network access on your DB instances running Oracle\.  For more information about outbound network access, including prerequisites, see [Using utl\_http, utl\_tcp, and utl\_smtp with an Oracle DB instance](CHAP_Oracle.md#Oracle.Concepts.ONA)\. 
+Amazon RDS supports outbound network access on your DB instances running Oracle\.  For more information about outbound network access, including prerequisites, see [Configuring outbound network access on your Oracle DB instance](Oracle.Concepts.ONA.md)\. 
 
 Amazon RDS Oracle allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
 

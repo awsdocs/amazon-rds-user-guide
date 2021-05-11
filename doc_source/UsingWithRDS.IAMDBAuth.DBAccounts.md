@@ -17,7 +17,7 @@ With MySQL, authentication is handled by `AWSAuthenticationPlugin`—an AWS\-pro
 CREATE USER jane_doe IDENTIFIED WITH AWSAuthenticationPlugin AS 'RDS'; 
 ```
 
-The `IDENTIFIED WITH` clause allows MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause refers to the authentication method, and the specified database account should have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role are named `jane_doe`\. 
+The `IDENTIFIED WITH` clause allows MySQL to use the `AWSAuthenticationPlugin` to authenticate the database account \(`jane_doe`\)\. The `AS 'RDS'` clause refers to the authentication method\. Make sure the specified database user name is the same as a resource in the IAM policy for IAM database access\. For more information, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 
 
 **Note**  
 If you see the following message, it means that the AWS\-provided plugin is not available for the current DB instance\.  
@@ -35,4 +35,4 @@ CREATE USER db_userx;
 GRANT rds_iam TO db_userx;
 ```
 
-The specified database account should have the same name as the IAM user or role\. In this example, both the database account and the IAM user or role are named `db_userx`\. 
+Make sure the specified database user name is the same as a resource in the IAM policy for IAM database access\. For more information, see [Creating and using an IAM policy for IAM database access](UsingWithRDS.IAMDBAuth.IAMPolicy.md)\. 

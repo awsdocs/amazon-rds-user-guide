@@ -251,7 +251,7 @@ GO
 
 For more information, see [CREATE LOGIN \(Transact\-SQL\)](https://msdn.microsoft.com/en-us/library/ms189751.aspx) in the Microsoft Developer Network documentation\.
 
-Users \(both humans and applications\) from your domain can now connect to the RDS SQL Server instance from a domain\-joined client machine using Windows authentication\.
+Users \(both humans and applications\) from your domain can now connect to the RDS for SQL Server instance from a domain\-joined client machine using Windows authentication\.
 
 ## Managing a DB instance in a Domain<a name="USER_SQLServerWinAuth.Managing"></a>
 

@@ -35,17 +35,17 @@ You can use procedures in the Amazon RDS package `rdsadmin.rdsadmin_rman_util` t
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_owner` | varchar2 | A valid owner of the directory specified in `p_directory_name`\. | — | Yes |  The owner of the directory to contain the backup files\.  | 
-| `p_directory_name` | varchar2 | A valid database directory name\. | – | Yes |  The name of the directory to contain the backup files\.  | 
-| `p_label` | varchar2 | `a-z`, `A-Z`, `0-9`, `'_'`, `'-'`, `'.'` | — | No |  A unique string that is included in the backup file names\.  The limit is 30 characters\.   | 
-| `p_compress` | boolean | `TRUE`, `FALSE` | `FALSE` | No |  Specify `TRUE` to enable BASIC backup compression\. Specify `FALSE` to disable BASIC backup compression\.  | 
-| `p_include_archive_logs` | boolean | `TRUE`, `FALSE` | `FALSE` | No |  Specify `TRUE` to include archived redo logs in the backup\. Specify `FALSE` to exclude archived redo logs from the backup\. If you include archived redo logs in the backup, set retention to one hour or greater using the `rdsadmin.rdsadmin_util.set_configuration` procedure\. Also, call the `rdsadmin.rdsadmin_rman_util.crosscheck_archivelog` procedure immediately before running the backup\. Otherwise, the backup might fail due to missing archived redo log files that have been deleted by Amazon RDS management procedures\.  | 
-| `p_include_controlfile` | boolean | `TRUE`, `FALSE` | `FALSE` | No |  Specify `TRUE` to include the control file in the backup\. Specify `FALSE` to exclude the control file from the backup\.  | 
-| `p_optimize` | boolean | `TRUE`, `FALSE` | `TRUE` | No |  Specify `TRUE` to enable backup optimization, if archived redo logs are included, to reduce backup size\. Specify `FALSE` to disable backup optimization\.  | 
-| `p_parallel` | number | A valid integer between `1` and `254` for Oracle Database Enterprise Edition \(EE\) `1` for other Oracle Database editions | `1` | No | Number of channels\. | 
-| `p_rman_to_dbms_output` | boolean | `TRUE`, `FALSE` | `FALSE` | No | When `TRUE`, the RMAN output is sent to the `DBMS_OUTPUT` package in addition to a file in the `BDUMP` directory\. In SQL\*Plus, use `SET SERVEROUTPUT ON` to see the output\. When `FALSE`, the RMAN output is only sent to a file in the `BDUMP` directory\.  | 
-| `p_section_size_mb` | number | A valid integer | `NULL` | No | The section size in megabytes \(MB\)\. Validates in parallel by dividing each file into the specified section size\. When `NULL`, the parameter is ignored\. | 
-| `p_validation_type` | varchar2 | `'PHYSICAL'`, `'PHYSICAL+LOGICAL'` | `'PHYSICAL'` | No | The level of corruption detection\. Specify `'PHYSICAL'` to check for physical corruption\. An example of physical corruption is a block with a mismatch in the header and footer\. Specify `'PHYSICAL+LOGICAL'` to check for logical inconsistencies in addition to physical corruption\. An example of logical corruption is a corrupt block\.  | 
+|  `p_owner`  |  varchar2  |  A valid owner of the directory specified in `p_directory_name`\.  |  —  |  Yes  |  The owner of the directory to contain the backup files\.  | 
+|  `p_directory_name`  |  varchar2  |  A valid database directory name\.  |  –  |  Yes  |  The name of the directory to contain the backup files\.  | 
+|  `p_label`  |  varchar2  |  `a-z`, `A-Z`, `0-9`, `'_'`, `'-'`, `'.'`  |  —  |  No  |  A unique string that is included in the backup file names\.  The limit is 30 characters\.   | 
+|  `p_compress`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to enable BASIC backup compression\. Specify `FALSE` to disable BASIC backup compression\.  | 
+|  `p_include_archive_logs`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to include archived redo logs in the backup\. Specify `FALSE` to exclude archived redo logs from the backup\. If you include archived redo logs in the backup, set retention to one hour or greater using the `rdsadmin.rdsadmin_util.set_configuration` procedure\. Also, call the `rdsadmin.rdsadmin_rman_util.crosscheck_archivelog` procedure immediately before running the backup\. Otherwise, the backup might fail due to missing archived redo log files that have been deleted by Amazon RDS management procedures\.  | 
+|  `p_include_controlfile`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  Specify `TRUE` to include the control file in the backup\. Specify `FALSE` to exclude the control file from the backup\.  | 
+|  `p_optimize`  |  boolean  |  `TRUE`, `FALSE`  |  `TRUE`  |  No  |  Specify `TRUE` to enable backup optimization, if archived redo logs are included, to reduce backup size\. Specify `FALSE` to disable backup optimization\.  | 
+|  `p_parallel`  |  number  |  A valid integer between `1` and `254` for Oracle Database Enterprise Edition \(EE\) `1` for other Oracle Database editions  |  `1`  |  No  |  Number of channels\.  | 
+|  `p_rman_to_dbms_output`  |  boolean  |  `TRUE`, `FALSE`  |  `FALSE`  |  No  |  When `TRUE`, the RMAN output is sent to the `DBMS_OUTPUT` package in addition to a file in the `BDUMP` directory\. In SQL\*Plus, use `SET SERVEROUTPUT ON` to see the output\. When `FALSE`, the RMAN output is only sent to a file in the `BDUMP` directory\.   | 
+|  `p_section_size_mb`  |  number  |  A valid integer  |  `NULL`  |  No  |  The section size in megabytes \(MB\)\. Validates in parallel by dividing each file into the specified section size\. When `NULL`, the parameter is ignored\.  | 
+|  `p_validation_type`  |  varchar2  |  `'PHYSICAL'`, `'PHYSICAL+LOGICAL'`  |  `'PHYSICAL'`  |  No  |  The level of corruption detection\. Specify `'PHYSICAL'` to check for physical corruption\. An example of physical corruption is a block with a mismatch in the header and footer\. Specify `'PHYSICAL+LOGICAL'` to check for logical inconsistencies in addition to physical corruption\. An example of logical corruption is a corrupt block\.  | 
 
 ## Validating DB instance files<a name="Appendix.Oracle.CommonDBATasks.ValidateDBFiles"></a>
 
@@ -126,7 +126,7 @@ This procedure also uses the following additional parameter\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_tablespace_name` | varchar2 | A valid tablespace name | — | Yes | The name of the tablespace\. | 
+|  `p_tablespace_name`  |  varchar2  |  A valid tablespace name  |  —  |  Yes  |  The name of the tablespace\.  | 
 
 ### Validating a control file<a name="Appendix.Oracle.CommonDBATasks.ValidateControlFile"></a>
 
@@ -167,9 +167,9 @@ This procedure also uses the following additional parameters\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_datafile` | varchar2 | A valid data file ID number or a valid data file name including complete path | — | Yes | The data file ID number \(from `v$datafile.file#`\) or the full data file name including the path \(from `v$datafile.name`\)\. | 
-| `p_from_block` | number | A valid integer | `NULL` | No | The number of the block where the validation starts within the data file\. When this is `NULL`, `1` is used\. | 
-| `p_to_block` | number | A valid integer | `NULL` | No | The number of the block where the validation ends within the data file\. When this is `NULL`, the maximum block in the data file is used\. | 
+|  `p_datafile`  |  varchar2  |  A valid datafile ID number or a valid datafile name including complete path  |  —  |  Yes  |  The datafile ID number \(from `v$datafile.file#`\) or the full datafile name including the path \(from `v$datafile.name`\)\.  | 
+|  `p_from_block`  |  number  |  A valid integer  |  `NULL`  |  No  |  The number of the block where the validation starts within the data file\. When this is `NULL`, `1` is used\.  | 
+|  `p_to_block`  |  number  |  A valid integer  |  `NULL`  |  No  |  The number of the block where the validation ends within the data file\. When this is `NULL`, the maximum block in the data file is used\.  | 
 
 ## Enabling and disabling block change tracking<a name="Appendix.Oracle.CommonDBATasks.BlockChangeTracking"></a>
 
@@ -180,7 +180,6 @@ To enable block change tracking for a DB instance, use the Amazon RDS procedure 
 Read\-only replicas support block change tracking\. If you create a read\-only replica from a source DB that uses block change tracking, the replica uses block change tracking\. You can't enable block change tracking on a mounted replica\. If you place a mounted replica in read\-only mode, block change tracking isn't enabled, but you can enable it using `enable_block_change_tracking`\. If you promote an Oracle replica to a source DB, you can use block change tracking just as for any other Oracle DB instance\.
 
 Block change tracking procedures are supported for the following DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
@@ -224,10 +223,9 @@ This procedure also uses the following additional parameter\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_delete_expired` | boolean | `TRUE`, `FALSE` | `TRUE` | No | When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.  | 
+|  `p_delete_expired`  |  boolean  |  `TRUE`, `FALSE`  |  `TRUE`  |  No  |  When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.   | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
@@ -260,7 +258,6 @@ END;
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to back up archived redo logs for an Amazon RDS Oracle DB instance\.
 
 The procedures for backing up archived redo logs are supported for the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
@@ -320,8 +317,8 @@ This procedure also uses the following additional parameters\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_from_date` | date | A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_date`\. | — | Yes |  The starting date for the archived log backups\.  | 
-| `p_to_date` | date | A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_date`\. | — | Yes |  The ending date for the archived log backups\.  | 
+|  `p_from_date`  |  date  |  A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_date`\.  |  —  |  Yes  |  The starting date for the archived log backups\.  | 
+|  `p_to_date`  |  date  |  A date that is between the `start_date` and `next_date` of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_date`\.  |  —  |  Yes  |  The ending date for the archived log backups\.  | 
 
 The following example backs up archived redo logs in the date range for the DB instance\.
 
@@ -359,8 +356,8 @@ This procedure also uses the following additional parameters\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_from_scn` | number | An SCN of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_scn`\. | — | Yes |  The starting SCN for the archived log backups\.  | 
-| `p_to_scn` | number | An SCN of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_scn`\. | — | Yes |  The ending SCN for the archived log backups\.  | 
+|  `p_from_scn`  |  number  |  An SCN of an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_scn`\.  |  —  |  Yes  |  The starting SCN for the archived log backups\.  | 
+|  `p_to_scn`  |  number  |  An SCN of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_scn`\.  |  —  |  Yes  |  The ending SCN for the archived log backups\.  | 
 
 The following example backs up archived redo logs in the SCN range for the DB instance\.
 
@@ -398,8 +395,8 @@ This procedure also uses the following additional parameters\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_from_sequence` | number | A sequence number an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_sequence`\. | — | Yes |  The starting sequence number for the archived log backups\.  | 
-| `p_to_sequence` | number | A sequence number of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_sequence`\. | — | Yes |  The ending sequence number for the archived log backups\.  | 
+|  `p_from_sequence`  |  number  |  A sequence number an archived redo log that exists on disk\. The value must be less than or equal to the value specified for `p_to_sequence`\.  |  —  |  Yes  |  The starting sequence number for the archived log backups\.  | 
+|  `p_to_sequence`  |  number  |  A sequence number of an archived redo log that exists on disk\. The value must be greater than or equal to the value specified for `p_from_sequence`\.  |  —  |  Yes  |  The ending sequence number for the archived log backups\.  | 
 
 The following example backs up archived redo logs in the sequence number range for the DB instance\.
 
@@ -434,7 +431,6 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
@@ -475,7 +471,6 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions
@@ -488,7 +483,7 @@ This procedure also uses the following additional parameter\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_level` | number | `0`, `1` | `0` | No |  Specify `0` to enable a full incremental backup\. Specify `1` to enable a non\-cumulative incremental backup\.  | 
+|  `p_level`  |  number  |  `0`, `1`  |  `0`  |  No  |  Specify `0` to enable a full incremental backup\. Specify `1` to enable a non\-cumulative incremental backup\.  | 
 
 The following example performs an incremental backup of the DB instance using the specified values for the parameters\.
 
@@ -530,10 +525,9 @@ This procedure also uses the following additional parameter\.
 
 | Parameter name | Data type | Valid values | Default | Required | Description | 
 | --- | --- | --- | --- | --- | --- | 
-| `p_tablespace_name` | varchar2 | A valid tablespace name\. | — | Yes |  The name of the tablespace to back up\.  | 
+|  `p_tablespace_name`  |  varchar2  |  A valid tablespace name\.  |  —  |  Yes  |  The name of the tablespace to back up\.  | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 11\.2\.0\.4\.v19 or higher 11\.2 versions
 + 12\.1\.0\.2\.v15 or higher 12\.1 versions
 + 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
 + All 18\.0\.0\.0 versions

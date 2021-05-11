@@ -77,7 +77,7 @@ For information about creating a DB instance in a VPC, see [Creating a DB instan
 
 ## A DB instance in a VPC accessed by a private network<a name="USER_VPC.NotPublic"></a>
 
-If your DB instance is isn't publicly accessible, you have the following options for accessing it from a private network:
+If your DB instance isn't publicly accessible, you have the following options for accessing it from a private network:
 + An AWS Site\-to\-Site VPN connection\. For more information, see [What is AWS Site\-to\-Site VPN?](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html)
 + An AWS Direct Connect connection\. For more information, see [What is AWS Direct Connect?](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html)
 

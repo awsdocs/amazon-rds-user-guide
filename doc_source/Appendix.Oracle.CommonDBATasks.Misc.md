@@ -8,6 +8,8 @@ Following, you can find how to perform miscellaneous DBA tasks on your Amazon RD
 + [Reading files in a DB instance directory](#Appendix.Oracle.CommonDBATasks.ReadingFiles)
 + [Accessing Opatch files](#Appendix.Oracle.CommonDBATasks.accessing-opatch-files)
 + [Managing advisor tasks](#Appendix.Oracle.CommonDBATasks.managing-advisor-tasks)
++ [Enabling HugePages for an Oracle DB instance](#Oracle.Concepts.HugePages)
++ [Enabling extended data types](#Oracle.Concepts.ExtendedDataTypes)
 
 ## Creating and dropping directories in the main data storage space<a name="Appendix.Oracle.CommonDBATasks.NewDirectories"></a>
 
@@ -118,7 +120,6 @@ The inventory files use the Amazon RDS naming convention `lsinventory-dbv.txt` a
 + 18\.0\.0\.0, ru\-2020\-01\.rur\-2020\-01\.r1 or later
 + 12\.2\.0\.1, ru\-2020\-01\.rur\-2020\-01\.r1 or later
 + 12\.1\.0\.2, v19 or later
-+ 11\.2\.0\.4, v23 or later
 
 For example, if your DB version is 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1, then your inventory files have the following names\.
 
@@ -251,7 +252,7 @@ END;
 To disable `AUTO_STATS_ADVISOR_TASK`, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.advisor_task_drop`\. The `advisor_task_drop` procedure accepts the following parameter\.
 
 **Note**  
-This procedure is available in Oracle Database version 12\.2\.0\.1 and later\.
+This procedure is available in Oracle Database 12c Release 2 \(12\.2\.0\.1\) and later\.
 
 
 ****  
@@ -277,3 +278,143 @@ The following command re\-enables `AUTO_STATS_ADVISOR_TASK`\.
 ```
 EXEC rdsadmin.rdsadmin_util.dbms_stats_init()
 ```
+
+## Enabling HugePages for an Oracle DB instance<a name="Oracle.Concepts.HugePages"></a>
+
+Amazon RDS for Oracle supports Linux kernel HugePages for increased database scalability\. HugePages results in smaller page tables and less CPU time spent on memory management, increasing the performance of large database instances\. For more information, see [Overview of HugePages](https://docs.oracle.com/database/121/UNXAR/appi_vlm.htm#UNXAR400) in the Oracle documentation\. 
+
+You can use HugePages with the following versions and editions of Oracle Database: 
++ 19\.0\.0\.0, all editions
++ 18\.0\.0\.0, all editions
++ 12\.2\.0\.1, all editions
++ 12\.1\.0\.2, all editions
+
+ The `use_large_pages` parameter controls whether HugePages are enabled for a DB instance\. The possible settings for this parameter are `ONLY`, `FALSE`, and `{DBInstanceClassHugePagesDefault}`\. The `use_large_pages` parameter is set to `{DBInstanceClassHugePagesDefault}` in the default DB parameter group for Oracle\. 
+
+To control whether HugePages are enabled for a DB instance automatically, you can use the `DBInstanceClassHugePagesDefault` formula variable in parameter groups\. The value is determined as follows:
++ For the DB instance classes mentioned in the table following, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE` by default, and `use_large_pages` evaluates to `FALSE`\. You can enable HugePages manually for these DB instance classes if the DB instance class has at least 14 GiB of memory\.
++ For DB instance classes not mentioned in the table following, if the DB instance class has less than 14 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `FALSE`\. Also, `use_large_pages` evaluates to `FALSE`\.
++ For DB instance classes not mentioned in the table following, if the instance class has at least 14 GiB of memory and less than 100 GiB of memory, `DBInstanceClassHugePagesDefault` evaluates to `TRUE` by default\. Also, `use_large_pages` evaluates to `ONLY`\. You can disable HugePages manually by setting `use_large_pages` to `FALSE`\.
++ For DB instance classes not mentioned in the table following, if the instance class has at least 100 GiB of memory, `DBInstanceClassHugePagesDefault` always evaluates to `TRUE`\. Also, `use_large_pages` evaluates to `ONLY` and HugePages can't be disabled\.
+
+HugePages are not enabled by default for the following DB instance classes\. 
+
+
+****  
+
+| DB instance class family | DB instance classes with HugePages not enabled by default | 
+| --- | --- | 
+|  db\.m5  |  db\.m5\.large  | 
+|  db\.m4  |  db\.m4\.large, db\.m4\.xlarge, db\.m4\.2xlarge, db\.m4\.4xlarge, db\.m4\.10xlarge  | 
+|  db\.t3  |  db\.t3\.micro, db\.t3\.small, db\.t3\.medium, db\.t3\.large  | 
+
+For more information about DB instance classes, see [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
+
+To enable HugePages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use HugePages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+You can also set the `sga_target`, `sga_max_size`, and `pga_aggregate_target` parameters\. When you set system global area \(SGA\) and program global area \(PGA\) memory parameters, add the values together\. Subtract this total from your available instance memory \(`DBInstanceClassMemory`\) to determine the free memory beyond the HugePages allocation\. You must leave free memory of at least 2 GiB, or 10 percent of the total available instance memory, whichever is smaller\. 
+
+After you configure your parameters, you must reboot your DB instance for the changes to take effect\. For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\. 
+
+**Note**  
+The Oracle DB instance defers changes to SGA\-related initialization parameters until you reboot the instance without failover\. In the Amazon RDS console, choose **Reboot** but *do not* choose **Reboot with failover**\. In the AWS CLI, call the `reboot-db-instance` command with the `--no-force-failover` parameter\. The DB instance does not process the SGA\-related parameters during failover or during other maintenance operations that cause the instance to restart\.
+
+The following is a sample parameter configuration for HugePages that enables HugePages manually\. You should set the values to meet your needs\. 
+
+```
+1. memory_target            = 0
+2. memory_max_target        = 0
+3. pga_aggregate_target     = {DBInstanceClassMemory*1/8}
+4. sga_target               = {DBInstanceClassMemory*3/4}
+5. sga_max_size             = {DBInstanceClassMemory*3/4}
+6. use_large_pages          = ONLY
+```
+
+Assume the following parameters values are set in a parameter group\.
+
+```
+1. memory_target            = IF({DBInstanceClassHugePagesDefault}, 0, {DBInstanceClassMemory*3/4})
+2. memory_max_target        = IF({DBInstanceClassHugePagesDefault}, 0, {DBInstanceClassMemory*3/4})
+3. pga_aggregate_target     = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*1/8}, 0)
+4. sga_target               = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*3/4}, 0)
+5. sga_max_size             = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*3/4}, 0)
+6. use_large_pages          = {DBInstanceClassHugePagesDefault}
+```
+
+The parameter group is used by a db\.r4 DB instance class with less than 100 GiB of memory\. With these parameter settings and `use_large_pages` set to `{DBInstanceClassHugePagesDefault}`, HugePages are enabled on the db\.r4 instance\.
+
+Consider another example with following parameters values set in a parameter group\.
+
+```
+1. memory_target           = IF({DBInstanceClassHugePagesDefault}, 0, {DBInstanceClassMemory*3/4})
+2. memory_max_target       = IF({DBInstanceClassHugePagesDefault}, 0, {DBInstanceClassMemory*3/4})
+3. pga_aggregate_target    = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*1/8}, 0)
+4. sga_target              = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*3/4}, 0)
+5. sga_max_size            = IF({DBInstanceClassHugePagesDefault}, {DBInstanceClassMemory*3/4}, 0)
+6. use_large_pages         = FALSE
+```
+
+The parameter group is used by a db\.r4 DB instance class and a db\.r5 DB instance class, both with less than 100 GiB of memory\. With these parameter settings, HugePages are disabled on the db\.r4 and db\.r5 instance\.
+
+**Note**  
+If this parameter group is used by a db\.r4 DB instance class or db\.r5 DB instance class with at least 100 GiB of memory, the `FALSE` setting for `use_large_pages` is overridden and set to `ONLY`\. In this case, a customer notification regarding the override is sent\.
+
+After HugePages are active on your DB instance, you can view HugePages information by enabling enhanced monitoring\. For more information, see [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\. 
+
+## Enabling extended data types<a name="Oracle.Concepts.ExtendedDataTypes"></a>
+
+Amazon RDS Oracle Database 12c supports extended data types\. With extended data types, the maximum size is 32,767 bytes for the VARCHAR2, NVARCHAR2, and RAW data types\. To use extended data types, set the `MAX_STRING_SIZE` parameter to `EXTENDED`\. For more information, see [Extended data types](https://docs.oracle.com/database/121/SQLRF/sql_elements001.htm#SQLRF55623) in the Oracle documentation\. 
+
+If you don't want to use extended data types, keep the `MAX_STRING_SIZE` parameter set to `STANDARD` \(the default\)\. When this parameter is set to `STANDARD`, the size limits are 4,000 bytes for the VARCHAR2 and NVARCHAR2 data types, and 2,000 bytes for the RAW data type\.
+
+You can enable extended data types on a new or existing DB instance\. For new DB instances, DB instance creation time is typically longer when you enable extended data types\. For existing DB instances, the DB instance is unavailable during the conversion process\.
+
+The following are considerations for a DB instance with extended data types enabled:
++ When you enable extended data types for a DB instance, you can't change the DB instance back to use the standard size for data types\. After a DB instance is converted to use extended data types, if you set the `MAX_STRING_SIZE` parameter back to `STANDARD` it results in the `incompatible-parameters` status\.
++ When you restore a DB instance that uses extended data types, you must specify a parameter group with the `MAX_STRING_SIZE` parameter set to `EXTENDED`\. During restore, if you specify the default parameter group or any other parameter group with `MAX_STRING_SIZE` set to `STANDARD` it results in the `incompatible-parameters` status\.
++ We recommend that you don't enable extended data types for Oracle DB instances running on the t2\.micro DB instance class\.
+
+When the DB instance status is `incompatible-parameters` because of the `MAX_STRING_SIZE` setting, the DB instance remains unavailable until you set the `MAX_STRING_SIZE` parameter to `EXTENDED` and reboot the DB instance\.
+
+### Enabling extended data types for a new DB instance<a name="Oracle.Concepts.ExtendedDataTypes.CreateDBInstance"></a>
+
+**To enable extended data types for a new DB instance**
+
+1. Set the `MAX_STRING_SIZE` parameter to `EXTENDED` in a parameter group\.
+
+   To set the parameter, you can either create a new parameter group or modify an existing parameter group\.
+
+   For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+1. Create a new Amazon RDS Oracle DB instance, and associate the parameter group with `MAX_STRING_SIZE` set to `EXTENDED` with the DB instance\.
+
+   For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+
+### Enabling extended data types for an existing DB instance<a name="Oracle.Concepts.ExtendedDataTypes.ModifyDBInstance"></a>
+
+When you modify a DB instance to enable extended data types, the data in the database is converted to use the extended sizes\. The DB instance is unavailable during the conversion\. The amount of time it takes to convert the data depends on the DB instance class used by the DB instance and the size of the database\.
+
+**Note**  
+After you enable extended data types, you can't perform a point\-in\-time restore to a time during the conversion\. You can restore to the time immediately before the conversion or after the conversion\.
+
+**To enable extended data types for an existing DB instance**
+
+1. Take a snapshot of the database\.
+
+   If there are invalid objects in the database, Amazon RDS tries to recompile them\. The conversion to extended data types can fail if Amazon RDS can't recompile an invalid object\. The snapshot enables you to restore the database if there is a problem with the conversion\. Always check for invalid objects before conversion and fix or drop those invalid objects\. For production databases, we recommend testing the conversion process on a copy of your DB instance first\.
+
+   For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+
+1. Set the `MAX_STRING_SIZE` parameter to `EXTENDED` in a parameter group\.
+
+   To set the parameter, you can either create a new parameter group or modify an existing parameter group\.
+
+   For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
+
+1. Modify the DB instance to associate it with the parameter group with `MAX_STRING_SIZE` set to `EXTENDED`\.
+
+   For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+1. Reboot the DB instance for the parameter change to take effect\.
+
+   For more information, see [Rebooting a DB instance](USER_RebootInstance.md)\.

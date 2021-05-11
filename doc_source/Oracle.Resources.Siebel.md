@@ -11,7 +11,7 @@ To install a Siebel Database on Oracle on Amazon RDS, you need to use the master
 
 To install a Siebel Database on Amazon RDS, you must use your own Oracle Database license, and your own Siebel license\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
 
-Oracle Database Enterprise Edition is the only edition certified by Siebel for this scenario\. Amazon RDS supports Siebel CRM version 15\.0 or 16\.0\. Use Oracle 12c, version 12\.1\.0\.2\.0\. For the procedures following, we use Siebel CRM version 15\.0 and Oracle 12\.1\.0\.2 or 12\.2\.0\.1\. For more information, see [Oracle 12c with Amazon RDS](CHAP_Oracle.md#Oracle.Concepts.FeatureSupport.12c)\. 
+Oracle Database Enterprise Edition is the only edition certified by Siebel for this scenario\. Amazon RDS supports Siebel CRM version 15\.0 or 16\.0\. Use Oracle Database 12c Release 1 \(12\.1\.0\.2\.0\)\. For the procedures following, we use Siebel CRM version 15\.0 and Oracle Database Release 1 \(12\.1\.0\.2\) or Oracle Database Release 2 \(12\.2\.0\.1\)\. For more information, see [Oracle Database 12c with Amazon RDS](CHAP_Oracle.md#Oracle.Concepts.FeatureSupport.12c)\. 
 
 Amazon RDS supports database version upgrades\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
 
@@ -78,6 +78,3 @@ In addition to your Siebel Database, you can also use Amazon Web Services to sup
 | Siebel Enterprise\(with one or more Siebel Servers\) |  You can host your Siebel Servers on Amazon Elastic Compute Cloud \(Amazon EC2\) instances\. You can use Amazon EC2 to launch as many or as few virtual servers as you need\. Using Amazon EC2, you can scale up or down easily to handle changes in requirements\. For more information, see [What is Amazon EC2?](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)  You can put your servers in the same VPC with your DB instance and use the VPC security group to access the database\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
 | Web Servers\(with Siebel Web Server Extensions\) |  You can install multiple Web Servers on multiple EC2 instances\. You can then use Elastic Load Balancing to distribute incoming traffic among the instances\. For more information, see [What is Elastic Load Balancing?](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/elastic-load-balancing.html)   | 
 | Siebel Gateway Name Server |  You can host your Siebel Gateway Name Server on an EC2 instance\. You can then put your server in the same VPC with the DB instance and use the VPC security group to access the database\. For more information, see [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\.   | 
-
-## Related topics<a name="w189aac31c87c19c19"></a>
-+ [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)

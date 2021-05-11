@@ -17,19 +17,19 @@ S3 integration tasks share the same queue as native backup and restore tasks\. A
 + The file size for downloads from S3 to RDS is limited to the maximum supported by S3\.
 
 **Topics**
-+ [Prerequisites for integrating RDS SQL Server with S3](#Appendix.SQLServer.Options.S3-integration.preparing)
-+ [Enabling RDS SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.enabling)
-+ [Transferring files between RDS SQL Server and Amazon S3](#Appendix.SQLServer.Options.S3-integration.using)
++ [Prerequisites for integrating RDS for SQL Server with S3](#Appendix.SQLServer.Options.S3-integration.preparing)
++ [Enabling RDS for SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.enabling)
++ [Transferring files between RDS for SQL Server and Amazon S3](#Appendix.SQLServer.Options.S3-integration.using)
 + [Listing files on the RDS DB instance](#Appendix.SQLServer.Options.S3-integration.using.listing-files)
 + [Deleting files on the RDS DB instance](#Appendix.SQLServer.Options.S3-integration.using.deleting-files)
 + [Monitoring the status of a file transfer task](#Appendix.SQLServer.Options.S3-integration.using.monitortasks)
 + [Canceling a task](#Appendix.SQLServer.Options.S3-integration.canceltasks)
 + [Multi\-AZ limitations for S3 integration](#S3-MAZ)
-+ [Disabling RDS SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.disabling)
++ [Disabling RDS for SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.disabling)
 
 For more information on working with files in Amazon S3, see [Getting started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg)\.
 
-## Prerequisites for integrating RDS SQL Server with S3<a name="Appendix.SQLServer.Options.S3-integration.preparing"></a>
+## Prerequisites for integrating RDS for SQL Server with S3<a name="Appendix.SQLServer.Options.S3-integration.preparing"></a>
 
 Before you begin, find or create the S3 bucket that you want to use\. Also, add permissions so that the RDS DB instance can access the S3 bucket\. To configure this access, you create both an IAM policy and an IAM role\.
 
@@ -267,7 +267,7 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
 
    Replace `your-policy-arn` with the policy ARN that you noted in a previous step\.
 
-## Enabling RDS SQL Server integration with S3<a name="Appendix.SQLServer.Options.S3-integration.enabling"></a>
+## Enabling RDS for SQL Server integration with S3<a name="Appendix.SQLServer.Options.S3-integration.enabling"></a>
 
 In the following section, you can find how to enable Amazon S3 integration with Amazon RDS for SQL Server\. To work with S3 integration, your DB instance must be associated with the IAM role that you previously created before you use the `S3_INTEGRATION` feature\-name parameter\.
 
@@ -280,7 +280,7 @@ To add an IAM role to a DB instance, the status of the DB instance must be **ava
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose the RDS SQL Server DB instance name to display its details\.
+1. Choose the RDS for SQL Server DB instance name to display its details\.
 
 1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the IAM role to add for **Add IAM roles to this instance**\.
 
@@ -291,8 +291,8 @@ To add an IAM role to a DB instance, the status of the DB instance must be **ava
 
 ### AWS CLI<a name="Appendix.SQLServer.Options.S3-integration.enabling.cli"></a>
 
-**To add the IAM role to the RDS SQL Server DB instance**
-+ The following AWS CLI command adds your IAM role to an RDS SQL Server DB instance named `mydbinstance`\.  
+**To add the IAM role to the RDS for SQL Server DB instance**
++ The following AWS CLI command adds your IAM role to an RDS for SQL Server DB instance named `mydbinstance`\.  
 **Example**  
 
   For Linux, macOS, or Unix:
@@ -315,7 +315,7 @@ To add an IAM role to a DB instance, the status of the DB instance must be **ava
 
   Replace `your-role-arn` with the role ARN that you noted in a previous step\. `S3_INTEGRATION` must be specified for the `--feature-name` option\.
 
-## Transferring files between RDS SQL Server and Amazon S3<a name="Appendix.SQLServer.Options.S3-integration.using"></a>
+## Transferring files between RDS for SQL Server and Amazon S3<a name="Appendix.SQLServer.Options.S3-integration.using"></a>
 
 You can use Amazon RDS stored procedures to download and upload files between Amazon S3 and your RDS DB instance\. You can also use Amazon RDS stored procedures to list and delete files on the RDS instance\.
 
@@ -327,7 +327,7 @@ S3 integration tasks run sequentially and share the same queue as native backup 
 
 ### Downloading files from an Amazon S3 bucket to a SQL Server DB instance<a name="Appendix.SQLServer.Options.S3-integration.using.download"></a>
 
-To download files from an S3 bucket to an RDS SQL Server DB instance, use the Amazon RDS stored procedure `msdb.dbo.rds_download_from_s3` with the following parameters\.
+To download files from an S3 bucket to an RDS for SQL Server DB instance, use the Amazon RDS stored procedure `msdb.dbo.rds_download_from_s3` with the following parameters\.
 
 
 | Parameter name | Data type | Default | Required | Description | 
@@ -355,7 +355,7 @@ The example `rds_download_from_s3` operation creates a folder named `seed_data` 
 
 ### Uploading files from a SQL Server DB instance to an Amazon S3 bucket<a name="Appendix.SQLServer.Options.S3-integration.using.upload"></a>
 
-To upload files from an RDS SQL Server DB instance to an S3 bucket, use the Amazon RDS stored procedure `msdb.dbo.rds_upload_to_s3` with the following parameters\.
+To upload files from an RDS for SQL Server DB instance to an S3 bucket, use the Amazon RDS stored procedure `msdb.dbo.rds_upload_to_s3` with the following parameters\.
 
 
 | Parameter name | Data type | Default | Required | Description | 
@@ -500,7 +500,7 @@ All files downloaded after that time that haven't been deleted using the `rds_de
 | --- | --- | 
 |  2020\-04\-29 23:59:00\.0100000  |  2020\-05\-05 18:57:51\.8900000  | 
 
-## Disabling RDS SQL Server integration with S3<a name="Appendix.SQLServer.Options.S3-integration.disabling"></a>
+## Disabling RDS for SQL Server integration with S3<a name="Appendix.SQLServer.Options.S3-integration.disabling"></a>
 
 Following, you can find how to disable Amazon S3 integration with Amazon RDS for SQL Server\. Files in `D:\S3\` aren't deleted when disabling S3 integration\.
 
@@ -513,7 +513,7 @@ To remove an IAM role from a DB instance, the status of the DB instance must be 
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-1. Choose the RDS SQL Server DB instance name to display its details\.
+1. Choose the RDS for SQL Server DB instance name to display its details\.
 
 1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the IAM role to remove\.
 
@@ -521,8 +521,8 @@ To remove an IAM role from a DB instance, the status of the DB instance must be 
 
 ### AWS CLI<a name="Appendix.SQLServer.Options.S3-integration.disabling.cli"></a>
 
-**To remove the IAM role from the RDS SQL Server DB instance**
-+ The following AWS CLI command removes the IAM role from a RDS SQL Server DB instance named `mydbinstance`\.  
+**To remove the IAM role from the RDS for SQL Server DB instance**
++ The following AWS CLI command removes the IAM role from a RDS for SQL Server DB instance named `mydbinstance`\.  
 **Example**  
 
   For Linux, macOS, or Unix:

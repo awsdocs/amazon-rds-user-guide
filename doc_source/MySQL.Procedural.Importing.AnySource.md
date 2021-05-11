@@ -176,7 +176,7 @@ mysqlimport --local ^
     --user=username ^
     --password ^
     --host=hostname ^
-    --fields-terminated-by=',' Acme sales.part_*
+    --fields-terminated-by="," Acme sales.part_*
 ```
 
 For very large data loads, take additional DB snapshots periodically between loading files and note which files have been loaded\. If a problem occurs, you can easily resume from the point of the last DB snapshot, avoiding lengthy reloads\. 

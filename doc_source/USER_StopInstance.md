@@ -47,7 +47,7 @@ The following are some limitations to stopping and starting a DB instance:
 
 You can't remove persistent options \(including permanent options\) from an option group if there are DB instances associated with that option group\. This functionality is also true of any DB instance with a state of `stopping`, `stopped`, or `starting`\. 
 
-You can change the option group or DB parameter group that is associated with a stopped DB instance, but the change does not occur until the next time you start the DB instance\. If you chose to apply changes immediately, the change occurs when you start the DB instance\. Otherwise the changes occurs during the next maintenance window after you start the DB instance\. 
+You can change the option group or DB parameter group that is associated with a stopped DB instance, but the change does not occur until the next time you start the DB instance\. If you chose to apply changes immediately, the change occurs when you start the DB instance\. Otherwise the change occurs during the next maintenance window after you start the DB instance\. 
 
 ## Public IP address<a name="USER_StopInstance.PublicIPAddress"></a>
 

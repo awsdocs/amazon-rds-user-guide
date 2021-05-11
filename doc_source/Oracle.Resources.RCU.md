@@ -23,7 +23,6 @@ You can store the schemas for any Fusion Middleware components in your Amazon RD
 Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\. You can use the RCU in the following configurations: 
 + RCU 12c with Oracle database 12\.2\.0\.1
 + RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
-+ RCU 12c with Oracle database 11\.2\.0\.4\.v8 or later
 
 Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle fusion middleware licensing information user manual ](https://docs.oracle.com/en/middleware/fusion-middleware/fmwlc/) in the Oracle documentation\. 
 
@@ -186,5 +185,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related topics<a name="w189aac31c87c15c19"></a>
+## Related topics<a name="w268aac31c67c15c19"></a>
 + [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)
