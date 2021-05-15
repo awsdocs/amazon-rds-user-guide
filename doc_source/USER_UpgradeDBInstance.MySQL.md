@@ -163,7 +163,7 @@ Amazon RDS records detailed information about each incompatibility in the log fi
 Due to the nature of the prechecks, they analyze the objects in your database\. This analysis results in resource consumption and increases the time for the upgrade to complete\.
 
 **Note**  
-Amazon RDS runs prechecks only for an upgrade from MySQL 5\.7 to MySQL 8\.0\. They aren't run for upgrades to releases lower than MySQL 8\.0\. For example, prechecks aren't run for an upgrade from MySQL 5\.6 to MySQL 5\.7\.
+Amazon RDS runs all of these prechecks only for an upgrade from MySQL 5\.7 to MySQL 8\.0\. For an upgrade from MySQL 5\.6 to MySQL 5\.7, prechecks are limited to confirming that there are no orphan tables and that there is enough storage space to rebuild tables\. Prechecks aren't run for upgrades to releases lower than MySQL 5\.7\. 
 
 ### Rollback after failure to upgrade from MySQL 5\.7 to 8\.0<a name="USER_UpgradeDBInstance.MySQL.Major.RollbackAfterFailure"></a>
 

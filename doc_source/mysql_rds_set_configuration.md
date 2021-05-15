@@ -31,7 +31,9 @@ The `mysql.rds_set_configuration` procedure supports the following configuration
 
 ### Binlog retention hours<a name="mysql_rds_set_configuration-usage-notes.binlog-retention-hours"></a>
 
-The `binlog retention hours` parameter is used to specify the number of hours to retain binary log files\. Amazon RDS normally purges a binary log as soon as possible, but the binary log might still be required for replication with a MySQL database external to Amazon RDS\. For RDS for MySQL, the default value of `binlog retention hours` is NULL \(do not retain binary logs\)\. The default value for Aurora MySQL is 24 \(retain binary logs for 1 day\)\.
+The `binlog retention hours` parameter is used to specify the number of hours to retain binary log files\. Amazon RDS normally purges a binary log as soon as possible, but the binary log might still be required for replication with a MySQL database external to Amazon RDS\. The default value of `binlog retention hours` is `NULL`\. This default value is interpreted as follows: 
++  For RDS for MySQL, `NULL` means binary logs are not retained \(0 hours\)\. 
++  For Aurora MySQL, `NULL` means binary logs are cleaned up lazily\. Aurora MySQL binary logs might remain in the system for a certain period, usually not longer than a day\. 
 
 To specify the number of hours for Amazon RDS to retain binary logs on a DB instance, use the `mysql.rds_set_configuration` stored procedure and specify a period with enough time for replication to occur, as shown in the following example\.
 

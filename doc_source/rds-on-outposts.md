@@ -1,6 +1,6 @@
 # Working with Amazon RDS on AWS Outposts<a name="rds-on-outposts"></a>
 
-Amazon RDS on AWS Outposts extends Amazon RDS for MySQL and PostgreSQL databases to AWS Outposts environments\. AWS Outposts uses the same hardware as in public AWS Regions to bring AWS services, infrastructure, and operation models on\-premises\. With RDS on Outposts, you can provision managed DB instances close to the business applications that must run on\-premises\. For more information about AWS Outposts, see [AWS Outposts](http://aws.amazon.com/outposts/)\.
+Amazon RDS on AWS Outposts extends RDS for SQL Server, RDS for MySQL, and RDS for PostgreSQL databases to AWS Outposts environments\. AWS Outposts uses the same hardware as in public AWS Regions to bring AWS services, infrastructure, and operation models on\-premises\. With RDS on Outposts, you can provision managed DB instances close to the business applications that must run on\-premises\. For more information about AWS Outposts, see [AWS Outposts](http://aws.amazon.com/outposts/)\.
 
 You use the same AWS Management Console, AWS CLI, and RDS API to provision and manage on\-premises RDS on Outposts DB instances as you do for RDS DB instances running in the AWS Cloud\. RDS on Outposts automates tasks, such as database provisioning, operating system and database patching, backup, and long\-term archival in Amazon S3\.
 
@@ -35,7 +35,8 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 
 | Feature | Supported | Notes | More information | 
 | --- | --- | --- | --- | 
-|  DB instance provisioning  |  Yes  |  You can only create DB instances for RDS for MySQL and RDS for PostgreSQL DB engines\. The following versions are supported: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)  |  [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)  | 
+|  DB instance provisioning  |  Yes  |  You can only create DB instances for RDS for SQL Server, RDS for MySQL, and RDS for PostgreSQL DB engines\. The following versions are supported: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)  |  [Creating DB instances for Amazon RDS on AWS Outposts](#rds-on-outposts.creating)  | 
+|  Connect to a Microsoft SQL Server DB instance with Microsoft SQL Server Management Studio  |  Yes  |  Some TLS versions and encryption ciphers might not be secure\. To turn them off, follow the instructions in [ Customizing security parameters on Amazon RDS for SQL Server](https://aws.amazon.com/blogs/database/customizing-security-parameters-on-amazon-rds-for-sql-server/)\.  |  [Connecting to a DB instance running the Microsoft SQL Server database engine](USER_ConnectToMicrosoftSQLServerInstance.md)  | 
 |  Modifying the master user password  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Renaming a DB instance  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Rebooting a DB instance  |  Yes  |  —  |  [Rebooting a DB instance](USER_RebootInstance.md)  | 
@@ -67,7 +68,8 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Managing connections with Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
-|  Replication with external databases for Amazon RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
+|  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
+|  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
 
 **Note**  
 RDS on Outposts doesn't support use cases that require all data to remain in your data center\.  
@@ -304,7 +306,7 @@ For Windows:
 14.     --kms-key-id mykey
 ```
 
-To create a PostgreSQL DB instance, specify `postgres` for the `--engine` option\.
+To create a PostgreSQL DB instance, specify `postgres` for the `--engine` option\. To create a Microsoft SQL Server DB instance, specify `sqlserver-ee`, `sqlserver-se`, `sqlserver-ex`, or `sqlserver-web` for the `--engine` option\.
 
 For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 

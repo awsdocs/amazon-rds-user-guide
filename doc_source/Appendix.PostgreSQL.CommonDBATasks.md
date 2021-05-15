@@ -398,6 +398,13 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
    CREATE EXTENSION pg_repack;
    ```
 
+1. Run the following commands to grant write access to repack temporary log tables created by `pg_repack`\.
+
+   ```
+   ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT INSERT ON TABLES TO PUBLIC;
+   ALTER DEFAULT PRIVILEGES IN SCHEMA repack GRANT USAGE, SELECT ON SEQUENCES TO PUBLIC;
+   ```
+
 1. Use the pg\_repack client utility to connect to a database\. Use a database role that has *rds\_superuser* privileges to connect to the database\. In the following connection example, the *rds\_test* role has *rds\_superuser* privileges, and the database endpoint used is *rds\-test\-instance\.cw7jjfgdr4on8\.us\-west\-2\.rds\.amazonaws\.com*\.
 
    ```
@@ -416,12 +423,12 @@ You can use the `pg_repack` extension to remove bloat from tables and indexes\. 
 
 ## Using pgBadger for log analysis with PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks.Badger"></a>
 
-You can use a log analyzer such as [pgbadger](http://dalibo.github.io/pgbadger/) to analyze PostgreSQL logs\. The *pgbadger* documentation states that the %l pattern \(log line for session/process\) should be a part of the prefix\. However, if you provide the current rds log\_line\_prefix as a parameter to *pgbadger* it should still produce a report\. 
+You can use a log analyzer such as [pgbadger](http://dalibo.github.io/pgbadger/) to analyze PostgreSQL logs\. The *pgbadger* documentation states that the %l pattern \(log line for session/process\) should be a part of the prefix\. However, if you provide the current rds log\_line\_prefix as a parameter to *pgbadger* it should still produce a report\.
 
 For example, the following command correctly formats an Amazon RDS for PostgreSQL log file dated 2014\-02\-04 using *pgbadger*\.
 
 ```
-./pgbadger -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
+./pgbadger -f stderr -p '%t:%r:%u@%d:[%p]:' postgresql.log.2014-02-04-00 
 ```
 
 ## Viewing the contents of pg\_config<a name="Appendix.PostgreSQL.CommonDBATasks.Viewingpgconfig"></a>

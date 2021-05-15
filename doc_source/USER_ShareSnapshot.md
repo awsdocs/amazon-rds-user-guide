@@ -29,14 +29,14 @@ You might see duplicate entries for `DBSnapshotIdentifier` or `SourceDBSnapshotI
 
 The following limitations apply when sharing manual snapshots with other AWS accounts:
 + When you restore a DB instance from a shared snapshot using the AWS Command Line Interface \(AWS CLI\) or Amazon RDS API, you must specify the Amazon Resource Name \(ARN\) of the shared snapshot as the snapshot identifier\.
-+ You cannot share a DB snapshot that uses an option group with permanent or persistent options, except for Oracle DB instances that have the `Timezone` or `OLS` option \(or both\)\.
++ You can't share a DB snapshot that uses an option group with permanent or persistent options, except for Oracle DB instances that have the `Timezone` or `OLS` option \(or both\)\.
 
-  A *permanent option* cannot be removed from an option group\. Option groups with persistent options cannot be removed from a DB instance once the option group has been assigned to the DB instance\.
+  A *permanent option* can't be removed from an option group\. Option groups with persistent options can't be removed from a DB instance once the option group has been assigned to the DB instance\.
 
-  The following table lists permanent and persistent options and their related DB engines\.     
+  The following table lists permanent and persistent options and their related DB engines\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
 
-For Oracle DB instances, you can copy shared DB snapshots that have the `Timezone` or `OLS` option \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
+  For Oracle DB instances, you can copy shared DB snapshots that have the `Timezone` or `OLS` option \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
 
 ## Sharing an encrypted snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
 

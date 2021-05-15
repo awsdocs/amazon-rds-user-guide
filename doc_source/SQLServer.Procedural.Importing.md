@@ -22,6 +22,7 @@ Using native \.bak files to back up and restore databases is usually the fastest
 
 The following are some limitations to using native backup and restore: 
 + You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\.
++ You can't restore a database with the same name as an existing database\. Database names are unique\.
 + We strongly recommend that you don't restore backups from one time zone to a different time zone\. If you restore backups from one time zone to a different time zone, you must audit your queries and applications for the effects of the time zone change\.  
 + Amazon S3 has a size limit of 5 TB per file\. For native backups of larger databases, you can use multifile backup\.
 + The maximum database size that can be backed up to S3 depends on the available memory, CPU, I/O, and network resources on the DB instance\. The larger the database, the more memory the backup agent consumes\. Our testing shows that you can make a compressed backup of a 16\-TB database on our newest\-generation instance types from `2xlarge` instance sizes and larger, given sufficient system resources\.
@@ -334,7 +335,7 @@ exec msdb.dbo.rds_restore_database
 ```
 
 The following parameters are required:
-+ `@restore_db_name` – The name of the database to restore\.
++ `@restore_db_name` – The name of the database to restore\. Database names are unique\. You can't restore a database with the same name as an existing database\.
 + `@s3_arn_to_restore_from` – The ARN indicating the Amazon S3 prefix and names of the backup files used to restore the database\.
   + For a single\-file backup, provide the entire file name\.
   + For a multifile backup, provide the prefix that the files have in common, then suffix that with an asterisk \(`*`\)\.
@@ -671,20 +672,21 @@ To turn off compression for your backup files, run the following code:
 
 ## Troubleshooting<a name="SQLServer.Procedural.Importing.Native.Troubleshooting"></a>
 
-The following are issues you might encounter when you use native backup and restore\. 
+The following are issues you might encounter when you use native backup and restore\.
 
 
 ****  
 
 | Issue | Troubleshooting suggestions | 
 | --- | --- | 
-|  `Access Denied`  | The backup or restore process can't access the backup file\. This is usually caused by issues like the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)  | 
-|  `BACKUP DATABASE WITH COMPRESSION isn't supported on <edition_name> Edition`  |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\. For more information, see [Compressing backup files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
-|  `Key <ARN> does not exist`  |  You attempted to restore an encrypted backup, but didn't provide a valid encryption key\. Check your encryption key and retry\. For more information, see [Restoring a database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.   | 
-|  `Please reissue task with correct type and overwrite property`  |  If you attempt to back up your database and provide the name of a file that already exists, but set the overwrite property to false, the save operation fails\. To fix this error, either provide the name of a file that doesn't already exist, or set the overwrite property to true\. For more information, see [Backing up a database](#SQLServer.Procedural.Importing.Native.Using.Backup)\. It's also possible that you intended to restore your database, but called the `rds_backup_database` stored procedure accidentally\. In that case, call the `rds_restore_database` stored procedure instead\. For more information, see [Restoring a database](#SQLServer.Procedural.Importing.Native.Using.Restore)\. If you intended to restore your database and called the `rds_restore_database` stored procedure, make sure that you provided the name of a valid backup file\. For more information, see [Using native backup and restore](#SQLServer.Procedural.Importing.Native.Using)\.  | 
-|  `Please specify a bucket that is in the same region as RDS instance`  |  You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\. You can use Amazon S3 replication to copy the backup file to the correct AWS Region\. For more information, see [Cross\-Region replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the Amazon S3 documentation\.  | 
-|  `The specified bucket does not exist`  | Verify that you have provided the correct ARN for your bucket and file, in the correct format\.  For more information, see [Using native backup and restore](#SQLServer.Procedural.Importing.Native.Using)\.  | 
-|  `User <ARN> is not authorized to perform <kms action> on resource <ARN>`  |  You requested an encrypted operation, but didn't provide correct AWS KMS permissions\. Verify that you have the correct permissions, or add them\.  For more information, see [Setting up for native backup and restore](#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
-|  `The Restore task is unable to restore from more than 10 backup file(s). Please reduce the number of files matched and try again.`  |  Reduce the number of files that you're trying to restore from\. You can make each individual file larger if necessary\.   | 
+|  Access Denied  | The backup or restore process can't access the backup file\. This is usually caused by issues like the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)  | 
+|  BACKUP DATABASE WITH COMPRESSION isn't supported on <edition\_name> Edition  |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\. For more information, see [Compressing backup files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
+|  Key <ARN> does not exist  |  You attempted to restore an encrypted backup, but didn't provide a valid encryption key\. Check your encryption key and retry\. For more information, see [Restoring a database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.   | 
+|  Please reissue task with correct type and overwrite property  |  If you attempt to back up your database and provide the name of a file that already exists, but set the overwrite property to false, the save operation fails\. To fix this error, either provide the name of a file that doesn't already exist, or set the overwrite property to true\. For more information, see [Backing up a database](#SQLServer.Procedural.Importing.Native.Using.Backup)\. It's also possible that you intended to restore your database, but called the `rds_backup_database` stored procedure accidentally\. In that case, call the `rds_restore_database` stored procedure instead\. For more information, see [Restoring a database](#SQLServer.Procedural.Importing.Native.Using.Restore)\. If you intended to restore your database and called the `rds_restore_database` stored procedure, make sure that you provided the name of a valid backup file\. For more information, see [Using native backup and restore](#SQLServer.Procedural.Importing.Native.Using)\.  | 
+|  Please specify a bucket that is in the same region as RDS instance  |  You can't back up to, or restore from, an Amazon S3 bucket in a different AWS Region from your Amazon RDS DB instance\. You can use Amazon S3 replication to copy the backup file to the correct AWS Region\. For more information, see [Cross\-Region replication](https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html) in the Amazon S3 documentation\.  | 
+|  The specified bucket does not exist  | Verify that you have provided the correct ARN for your bucket and file, in the correct format\.  For more information, see [Using native backup and restore](#SQLServer.Procedural.Importing.Native.Using)\.  | 
+|  User <ARN> is not authorized to perform <kms action> on resource <ARN>  |  You requested an encrypted operation, but didn't provide correct AWS KMS permissions\. Verify that you have the correct permissions, or add them\.  For more information, see [Setting up for native backup and restore](#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
+|  The Restore task is unable to restore from more than 10 backup file\(s\)\. Please reduce the number of files matched and try again\.  |  Reduce the number of files that you're trying to restore from\. You can make each individual file larger if necessary\.   | 
+|  Database '*database\_name*' already exists\. Two databases that differ only by case or accent are not allowed\. Choose a different database name\.  |  You can't restore a database with the same name as an existing database\. Database names are unique\.  | 
 
 ## <a name="SQLServer.Procedural.Importing.Native.Related"></a>
