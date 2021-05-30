@@ -14,16 +14,19 @@ CALL mysql.rds_skip_repl_error;
 
 The master user must run the `mysql.rds_skip_repl_error` procedure\.
 
-To determine if there are errors, run the MySQL `show slave status\G` command\. If a replication error isn't critical, you can run `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `show slave status\G` to determine the correct course of action for the next error\. For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\.
+To determine if there are errors, run the MySQL `SHOW REPLICA STATUS\G` command\. If a replication error isn't critical, you can run `mysql.rds_skip_repl_error` to skip the error\. If there are multiple errors, `mysql.rds_skip_repl_error` deletes the first error, then warns that others are present\. You can then use `SHOW REPLICA STATUS\G` to determine the correct course of action for the next error\. For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html)\.
+
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 For more information about addressing replication errors with Amazon RDS, see [Troubleshooting a MySQL read replica problem](USER_MySQL.Replication.ReadReplicas.md#USER_ReadRepl.Troubleshooting)\.
 
 **Important**  
 If you try to call `mysql.rds_skip_repl_error`, you might encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`\. If you do, upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in this topic\.
 
-### Replication stopped error<a name="w268aac29c89c39b7c11"></a>
+### Replication stopped error<a name="w283aac29c91c39b7c13"></a>
 
-When you call the `mysql.rds_skip_repl_error` command, you might receive the following error message: `Slave is down or disabled.`
+When you call the `mysql.rds_skip_repl_error` command, you might receive an error message stating that the replica is down or disabled\.
 
 This error message appears because replication has stopped and could not be restarted\.
 

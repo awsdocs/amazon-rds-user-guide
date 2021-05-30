@@ -78,7 +78,7 @@ Performance Insights uses an AWS KMS customer master key \(CMK\) to encrypt sens
   Amazon RDS uses the AWS managed CMK for your new DB instance\. Amazon RDS creates an AWS managed CMK for your AWS account\. Your AWS account has a different AWS managed CMK for Amazon RDS for each AWS Region\.
 + Choose a customer managed CMK\.
 
-  If you specify a customer\-managed CMK, users in your account that call the Performance Insights API need the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the CMK\. You can configure these permissions through IAM policies\. However, we recommend that you manage these permissions through your KMS key policy\. For more information, see [Using key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\.
+  If you specify a customer\-managed CMK, users in your account that call the Performance Insights API need the `kms:Decrypt` and `kms:GenerateDataKey` permissions on the CMK\. You can configure these permissions through IAM policies\. However, we recommend that you manage these permissions through your KMS key policy\. For more information, see [ Using key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)\. 
 
 **Example**  
 The following sample key policy shows how to add statements to your CMK policy\. These statements allow access to Performance Insights\. Depending on how you use the KMS key, you might want to change some restrictions\. Before adding statements to your policy, remove all comments\.  

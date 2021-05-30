@@ -185,6 +185,9 @@ Block change tracking procedures are supported for the following DB engine versi
 + All 18\.0\.0\.0 versions
 + All 19\.0\.0\.0 versions
 
+**Note**  
+In a single\-tenant CDB, the following operations work, but no customer\-visible mechanism can detect the current status of the operations\. See also [Limitations of a single\-tenant CDB](CHAP_Oracle.md#Oracle.Concepts.single-tenant-limitations)\.
+
 To determine whether block change tracking is enabled for your DB instance, run the following query\.
 
 ```

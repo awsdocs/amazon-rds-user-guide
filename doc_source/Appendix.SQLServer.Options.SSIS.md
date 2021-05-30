@@ -44,7 +44,7 @@ If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the 
 + Only SQL Server–based logging is supported\.
 + Use only the `D:\S3` folder for working with files\. Files placed in any other directory are deleted\. Be aware of a few other file location details:
   + Place SSIS project input and output files in the `D:\S3` folder\.
-  + For the Data Flow Task, change the location for `BLOBTempStoragePath` and `BufferTempStoragePath` to a file inside the `D:\S3` folder\.
+  + For the Data Flow Task, change the location for `BLOBTempStoragePath` and `BufferTempStoragePath` to a file inside the `D:\S3` folder\. The file path must start with `D:\S3\`\.
   + Ensure that all parameters, variables, and expressions used for file connections point to the `D:\S3` folder\.
   + On Multi\-AZ instances, files created by SSIS in the `D:\S3` folder are deleted after a failover\. For more information, see [Multi\-AZ limitations for S3 integration](User.SQLServer.Options.S3-integration.md#S3-MAZ)\.
   + Upload the files created by SSIS in the `D:\S3` folder to your Amazon S3 bucket to make them durable\.

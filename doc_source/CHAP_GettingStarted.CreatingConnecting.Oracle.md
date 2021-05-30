@@ -11,6 +11,9 @@ In this topic, you create a sample Oracle DB instance\. You then connect to the 
 
 The DB instance is where you run your Oracle databases\.
 
+**Note**  
+RDS for Oracle supports a single\-tenant architecture, where a pluggable database \(PDB\) resides in a multitenant container database \(CDB\)\. For more information, see [RDS for Oracle architecture](CHAP_Oracle.md#Oracle.Concepts.single-tenant)\.
+
 ### Console<a name="CHAP_GettingStarted.Creating.Oracle.Console"></a>
 
 You can create a DB instance running Oracle with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
@@ -35,7 +38,7 @@ For information about creating DB instances with **Easy create** not enabled, se
 
 1. For **DB instance size**, choose **Free tier**\. If **Free tier** isn't available, choose **Dev/Test**\.
 
-1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name\.
+1. For **DB instance identifier**, enter a name for the DB instance, or leave the default name of **database\-1**\.
 
 1. For **Master username**, enter a name for the master user, or leave the default name\.
 

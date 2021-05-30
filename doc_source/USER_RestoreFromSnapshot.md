@@ -39,11 +39,13 @@ When you restore a Microsoft SQL Server DB snapshot to a new instance, you can a
 
 If you want to change from one edition to a new edition that is not supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether or not your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
 
-## Oracle considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
+## Oracle Database considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
 
-If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. When you restore a DB instance from a DB snapshot, you must specify the parameter group that has a matching or greater `compatible` parameter value\. 
+If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. When you restore a DB instance from a DB snapshot, specify a parameter group that has a matching or greater `compatible` value\. 
 
-You can upgrade a DB snapshot while it is still a DB snapshot, before you restore it\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\. 
+If you restore a snapshot of a CDB instance, you can change the PDB name\. You can't change the CDB name, which is always `RDSCDB`\. This CDB name is the same for all RDS instances that use a single\-tenant architecture\. For more information, see [Snapshots in a single\-tenant architecture](CHAP_Oracle.md#Oracle.Concepts.single-tenant.snapshots)\.
+
+Before you restore a DB snapshot, you can upgrade it to a later release\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
 
 ## Restoring from a snapshot<a name="USER_RestoreFromSnapshot.Restoring"></a>
 

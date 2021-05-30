@@ -1,22 +1,26 @@
 # Setting up for Amazon RDS<a name="CHAP_SettingUp"></a>
 
-Complete the tasks in this section to set up Amazon Relational Database Service \(Amazon RDS\) for the first time\. If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting started](Welcome.md#Welcome.WhatsNext.GettingStarted)\. 
+Before you use Amazon Relational Database Service for the first time, complete the following tasks:
 
-A couple things you should know about Amazon Web Services \(AWS\):
-+ When you sign up for AWS, your AWS account automatically has access to all services in AWS, including Amazon RDS\. However, you are charged only for the services that you use\.
-+ With Amazon RDS, you pay only for the RDS instances that are active\. The Amazon RDS DB instance that you create is live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for the instance until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. 
+1. [Sign up for AWS](#CHAP_SettingUp.SignUp)
 
-**Topics**
-+ [Sign up for AWS](#CHAP_SettingUp.SignUp)
-+ [Create an IAM user](#CHAP_SettingUp.IAM)
-+ [Determine requirements](#CHAP_SettingUp.Requirements)
-+ [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
+1. [Create an IAM user](#CHAP_SettingUp.IAM)
+
+1. [Determine requirements](#CHAP_SettingUp.Requirements)
+
+1. [Provide access to your DB instance in your VPC by creating a security group](#CHAP_SettingUp.SecurityGroup)
+
+If you already have an AWS account, know your Amazon RDS requirements, and prefer to use the defaults for IAM and VPC security groups, skip ahead to [Getting started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
 ## Sign up for AWS<a name="CHAP_SettingUp.SignUp"></a>
 
+When you sign up for AWS, your AWS account is automatically signed up for all services in AWS, including Amazon RDS\. You are charged only for the services that you use\.
+
+With Amazon RDS, you pay only for the resources you use\. The Amazon RDS DB instances that you create are live \(not running in a sandbox\)\. You incur the standard Amazon RDS usage fees for each DB instance until you terminate it\. For more information about Amazon RDS usage rates, see the [Amazon RDS product page](http://aws.amazon.com/rds)\. If you are a new AWS customer, you can get started with Amazon RDS for free; for more information, see [AWS free tier](http://aws.amazon.com/free/)\.
+
 If you have an AWS account already, skip to the next section, [Create an IAM user](#CHAP_SettingUp.IAM)\. 
 
-If you don't have an AWS account, you can use the following procedure to create one\. If you are a new AWS customer, you can get started with Amazon RDS for free; for more information, see [AWS free usage tier](http://aws.amazon.com/free/)\.
+If you don't have an AWS account, you can use the following procedure to create one\.
 
 **To create a new AWS account**
 
@@ -25,6 +29,8 @@ If you don't have an AWS account, you can use the following procedure to create 
 1. Follow the online instructions\.
 
    Part of the sign\-up procedure involves receiving a phone call and entering a verification code on the phone keypad\.
+
+Note your AWS account number, because you'll need it for the next task\.
 
 ## Create an IAM user<a name="CHAP_SettingUp.IAM"></a>
 
@@ -88,33 +94,30 @@ https://your_account_alias.signin.aws.amazon.com/console/
 
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
 
-You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the* [Amazon RDS API reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
+You can also create access keys for your AWS account\. These access keys can be used to access AWS through the AWS Command Line Interface \(AWS CLI\) or through the Amazon RDS API\. For more information, see [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html), [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html), and the *[Amazon RDS API reference\.](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/Welcome.html)*
 
 ## Determine requirements<a name="CHAP_SettingUp.Requirements"></a>
 
 The basic building block of Amazon RDS is the DB instance\. In a DB instance, you create your databases\. A DB instance provides a network address called an *endpoint*\. Your applications use this endpoint to connect to your DB instance\. When you create a DB instance, you specify details like storage, memory, database engine and version, network configuration, security, and maintenance periods\. You control network access to a DB instance through a security group\. 
 
-Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider: 
+Before you create a DB instance and a security group, you must know your DB instance and network needs\. Here are some important things to consider:
 + **Resource requirements **– What are the memory and processor requirements for your application or service? You use these settings to help you determine what DB instance class to use\. For specifications about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\.
-+ **VPC, subnet, and security group – **Your DB instance is most likely in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it: in a default VPC, in a user\-defined VPC, or outside of a VPC\. 
-**Note**  
-Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or you are a new RDS user \(after 2013\), you are most likely creating a DB instance inside a VPC\. 
-
-  For information on how to determine if your account has a default VPC in a particular AWS Region, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\.
++ **VPC, subnet, and security group – **Your DB instance will most likely be in a virtual private cloud \(VPC\)\. To connect to your DB instance, you need to set up security group rules\. These rules are set up differently depending on what kind of VPC you use and how you use it: in a default VPC or in a user\-defined VPC\. 
 
   The following list describes the rules for each VPC option:
   + **Default VPC** – If your AWS account has a default VPC in the current AWS Region, that VPC is configured to support DB instances\. If you specify the default VPC when you create the DB instance, do the following:
-    + Create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC console to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\. 
+    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance\. Use the **Security Group** option on the VPC console or the AWS CLI to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
     + Specify the default DB subnet group\. If this is the first DB instance you have created in this AWS Region, Amazon RDS creates the default DB subnet group when it creates the DB instance\.
   + **User\-defined VPC – **If you want to specify a user\-defined VPC when you create a DB instance, be aware of the following:
-    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance with the database\. Use the [Amazon EC2 API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html) or the **Security Group** option on the VPC console to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
-    + The VPC must meet certain requirements in order to host DB instances, such as having at least two subnets, each in a separate availability zone\. For information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
+    + Make sure to create a *VPC security group* that authorizes connections from the application or service to the Amazon RDS DB instance\. Use the **Security Group** option on the VPC console or the AWS CLI to create VPC security groups\. For information, see [Step 4: Create a VPC security group](USER_VPC.WorkingWithRDSInstanceinaVPC.md#USER_VPC.CreateVPCSecurityGroup)\.
+    + The VPC must meet certain requirements in order to host DB instances, such as having at least two subnets, each in a separate Availability Zone\. For information, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\.
     + Make sure to specify a DB subnet group that defines which subnets in that VPC can be used by the DB instance\. For information, see the DB subnet group section in [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md#Overview.RDSVPC.Create)\.
-  + **No VPC – **If your AWS account doesn't have a default VPC and you don't specify a user\-defined VPC, create a DB security group\. A *DB security group* authorizes connections from the devices and Amazon RDS instances running the applications or utilities to access the databases in the DB instance\. For more information, see [Working with DB security groups \(EC2\-Classic platform\)](USER_WorkingWithSecurityGroups.md)\.
+**Note**  
+Some legacy accounts don't use a VPC\. If you are accessing a new AWS Region or you are a new RDS user \(after 2013\), you are most likely creating a DB instance inside a VPC\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\.
 + **High availability: **Do you need failover support? On Amazon RDS, a Multi\-AZ deployment creates a primary DB instance and a secondary standby DB instance in another Availability Zone for failover support\. We recommend Multi\-AZ deployments for production workloads to maintain high availability\. For development and test purposes, you can use a deployment that isn't Multi\-AZ\. For more information, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
 + **IAM policies: **Does your AWS account have policies that grant the permissions needed to perform Amazon RDS operations? If you are connecting to AWS using IAM credentials, your IAM account must have IAM policies that grant the permissions required to perform Amazon RDS operations\. For more information, see [Identity and access management in Amazon RDS](UsingWithRDS.IAM.md)\.
 + **Open ports: **What TCP/IP port does your database listen on? The firewall at some companies might block connections to the default port for your database engine\. If your company firewall blocks the default port, choose another port for the new DB instance\. When you create a DB instance that listens on a port you specify, you can change the port by modifying the DB instance\.
-+ **AWS Region: **What AWS Region do you want your database in? Having your database in close proximity to your application or web service can reduce network latency\.
++ **AWS Region: **What AWS Region do you want your database in? Having your database in close proximity to your application or web service can reduce network latency\. For more information, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 + **DB disk subsystem: **What are your storage requirements? Amazon RDS provides three storage types: 
   + Magnetic \(Standard Storage\)
   + General Purpose \(SSD\)
@@ -126,47 +129,50 @@ When you have the information you need to create the security group and the DB i
 
 ## Provide access to your DB instance in your VPC by creating a security group<a name="CHAP_SettingUp.SecurityGroup"></a>
 
-VPC security groups provide access to DB instances in a VPC\. They act as a firewall for the associated DB instance, controlling both inbound and outbound traffic at the instance level\. DB instances are created by default with a firewall and a default security group that protect the DB instance\. 
+VPC security groups provide access to DB instances in a VPC\. They act as a firewall for the associated DB instance, controlling both inbound and outbound traffic at the DB instance level\. DB instances are created by default with a firewall and a default security group that protect the DB instance\. 
 
-Before you can connect to your DB instance, you must add rules to security group that enable you to connect\. Use your network and configuration information to create rules to allow access to your DB instance\.
-
-**Note**  
-If your legacy DB instance was created before March 2013 and isn't in a VPC, it might not have associated security groups\. If your DB instance was created after this date, it might be inside a default VPC\. 
+Before you can connect to your DB instance, you must add rules to a security group that enable you to connect\. Use your network and configuration information to create rules to allow access to your DB instance\.
 
 For example, suppose that you have an application that accesses a database on your DB instance in a VPC\. In this case, you must add a custom TCP rule that specifies the port range and IP addresses that your application uses to access the database\. If you have an application on an Amazon EC2 instance, you can use the security group that you set up for the Amazon EC2 instance\.
+
+For information about common scenarios for accessing a DB instance, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\.
 
 **To create a VPC security group**
 
 1. Sign in to the AWS Management Console and open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc](https://console.aws.amazon.com/vpc)\.
+**Note**  
+Make sure you are in the VPC console, not the RDS console\.
 
 1. In the top right corner of the AWS Management Console, choose the AWS Region where you want to create your VPC security group and DB instance\. In the list of Amazon VPC resources for that AWS Region, you should see at least one VPC and several subnets\. If you don't, you don't have a default VPC in that AWS Region\.
 
 1. In the navigation pane, choose **Security Groups**\.
 
-1. Choose **Create Security Group**\.
+1. Choose **Create security group**\.
 
-1. In the **Create Security Group** window, type **Name tag**, **Group name**, and **Description** values for your security group\. For **VPC**, choose the VPC that you want to create your DB instance in\. Choose **Yes, Create**\.
+   The **Create security group** page appears\.
 
-1. The VPC security group that you created should still be selected\. If not, locate it in the list, and choose it\. The details pane at the bottom of the console window displays the details for the security group, and tabs for working with inbound and outbound rules\. Choose the **Inbound Rules** tab\.
+1. In **Basic details**, enter the **Security group name** and **Description**\. For **VPC**, choose the VPC that you want to create your DB instance in\.
 
-1. On the **Inbound Rules** tab, choose **Edit**\.
+1. In **Inbound rules**, choose **Add rule**\.
 
-   1. For **Type**, choose **Custom TCP Rule**\.
+   1. For **Type**, choose **Custom TCP**\.
 
-   1. For **Port Range**, type the port value to use for your DB instance\.
+   1. For **Port range**, enter the port value to use for your DB instance\.
 
-   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the instance\. If you choose **My IP**, this allows access to the DB instance from the IP address detected in your browser\.
+   1. For **Source**, choose a security group name or type the IP address range \(CIDR value\) from where you access the DB instance\. If you choose **My IP**, this allows access to the DB instance from the IP address detected in your browser\.
 
-1. Choose **Add another rule** if you need to add more IP addresses or different port ranges\.
+1. If you need to add more IP addresses or different port ranges, choose **Add rule** and enter the information for the rule\.
 
-1. \(Optional\) Use the **Outbound Rules** tab to add rules for outbound traffic\. By default, all outbound traffic is allowed\.
+1. \(Optional\) In **Outbound rules**, add rules for outbound traffic\. By default, all outbound traffic is allowed\.
 
-You can use the VPC security group that you just created as the security group for your DB instance when you create it\. If your DB instance isn't going to be in a VPC, see [Working with DB security groups \(EC2\-Classic platform\)](USER_WorkingWithSecurityGroups.md) to create a DB security group to use when you create your DB instance\.
+1. Choose **Create security group**\.
+
+You can use the VPC security group that you just created as the security group for your DB instance when you create it\.
 
 **Note**  
 If you use a default VPC, a default subnet group spanning all of the VPC's subnets is created for you\. When you create a DB instance, you can select the default VPC and use **default** for **DB Subnet Group**\.
 
-Once you have completed the setup requirements, you can launch a DB instance using your requirements and security group\. For information on creating a DB instance, see the relevant documentation in the following table\.
+Once you have completed the setup requirements, you can create a DB instance using your requirements and security group by following the instructions in [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. For information about getting started by creating a DB instance that uses a specific DB engine, see the relevant documentation in the following table\.
 
 
 ****  

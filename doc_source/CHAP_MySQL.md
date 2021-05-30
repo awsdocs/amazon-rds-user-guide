@@ -8,13 +8,13 @@ Amazon RDS supports DB instances running several versions of MySQL\. You can use
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
-You first use the Amazon RDS management tools or interfaces to create an RDS for MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\.
+You first use the Amazon RDS management tools or interfaces to create an Amazon RDS for MySQL DB instance\. You can then resize the DB instance, authorize connections to the DB instance, create and restore from backups or snapshots, create Multi\-AZ secondaries, create read replicas, and monitor the performance of the DB instance\. You use standard MySQL utilities and applications to store and access the data in the DB instance\.
 
-Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use Amazon RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\.
+Amazon RDS for MySQL is compliant with many industry standards\. For example, you can use RDS for MySQL databases to build HIPAA\-compliant applications and to store healthcare related information, including protected health information \(PHI\) under a Business Associate Agreement \(BAA\) with AWS\. Amazon RDS for MySQL also meets Federal Risk and Authorization Management Program \(FedRAMP\) security requirements and has received a FedRAMP Joint Authorization Board \(JAB\) Provisional Authority to Operate \(P\-ATO\) at the FedRAMP HIGH Baseline within the AWS GovCloud \(US\) Regions\. For more information on supported compliance standards, see [AWS cloud compliance](http://aws.amazon.com/compliance/)\.
 
 For information about the features in each version of MySQL, see [The main features of MySQL](https://dev.mysql.com/doc/refman/8.0/en/features.html) in the MySQL documentation\.
 
-## Common management tasks for MySQL on Amazon RDS<a name="MySQL.Concepts.General"></a>
+## Common management tasks for Amazon RDS for MySQL<a name="MySQL.Concepts.General"></a>
 
 The following are the common management tasks you perform with an RDS for MySQL DB instance, with links to relevant documentation for each task\.
 
@@ -138,7 +138,7 @@ Amazon RDS Performance Insights is supported for MySQL 5\.6, 5\.7, and 8\.0\. Am
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those used for backups\. Amazon RDS manages backups for you\. 
 
-## Supported storage engines for MySQL on Amazon RDS<a name="MySQL.Concepts.Storage"></a>
+## Supported storage engines for RDS for MySQL<a name="MySQL.Concepts.Storage"></a>
 
 While MySQL supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. Amazon RDS fully supports the InnoDB storage engine for MySQL DB instances\. Amazon RDS features such as Point\-In\-Time restore and snapshot restore require a recoverable storage engine and are supported for the InnoDB storage engine only\. You must be running an instance of MySQL 5\.6 or later to use the InnoDB `memcached` interface\. For more information, see [MySQL memcached support](Appendix.MySQL.Options.memcached.md)\. 
 
@@ -152,6 +152,25 @@ System tables in the `mysql` schema can be in MyISAM storage\.
 If you want to convert existing MyISAM tables to InnoDB tables, you can use the `ALTER TABLE` command \(for example, `alter table TABLE_NAME engine=innodb;`\)\. Bear in mind that MyISAM and InnoDB have different strengths and weaknesses, so you should fully evaluate the impact of making this switch on your applications before doing so\. 
 
 MySQL 5\.1 is no longer supported in Amazon RDS\. However, you can restore existing MySQL 5\.1 snapshots\. When you restore a MySQL 5\.1 snapshot, the instance is automatically upgraded to MySQL 5\.5\. 
+
+## Storage\-full behavior for Amazon RDS for MySQL<a name="MySQL.Concepts.StorageFullBehavior"></a>
+
+When storage becomes full for a MySQL DB instance, there can be metadata inconsistencies, dictionary mismatches, and orphan tables\. To prevent these issues, Amazon RDS automatically stops a DB instance that reaches the `storage-full` state\.
+
+A MySQL DB instance reaches the `storage-full` state in the following cases:
++ The DB instance has less than 20,000 MiB of storage, and available storage reaches 200 MiB or less\.
++ The DB instance has more than 102,400 MiB of storage, and available storage reaches 1024 MiB or less\.
++ The DB instance has between 20,000 MiB and 102,400 MiB of storage, and has less than 1% of storage available\.
+
+After Amazon RDS stops a DB instance automatically because it reached the `storage-full` state, you can still modify it\. To restart the DB instance, complete at least one of the following:
++ Modify the DB instance to enable storage autoscaling\.
+
+  For more information about storage autoscaling, see [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)\.
++ Modify the DB instance to increase its storage capacity\.
+
+  For more information about increasing storage capacity, see [Increasing DB instance storage capacity](USER_PIOPS.StorageTypes.md#USER_PIOPS.ModifyingExisting)\.
+
+After you make one of these changes, the DB instance is restarted automatically\. For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## MySQL security on Amazon RDS<a name="MySQL.Concepts.UsersAndPrivileges"></a>
 
@@ -370,11 +389,11 @@ You can set your local time zone to one of the following values\.
 | `Asia/Baghdad` | `Australia/Adelaide` | `US/Pacific` | 
 | `Asia/Baku` | `Australia/Brisbane` | `UTC` | 
 
-## Known issues and limitations for MySQL on Amazon RDS<a name="MySQL.Concepts.KnownIssuesAndLimitations"></a>
+## Known issues and limitations for Amazon RDS for MySQL<a name="MySQL.Concepts.KnownIssuesAndLimitations"></a>
 
-There are some known issues and limitations for working with MySQL on Amazon RDS\. For more information, see [Known issues and limitations for MySQL on Amazon RDS](MySQL.KnownIssuesAndLimitations.md)\. 
+There are some known issues and limitations for working with MySQL on Amazon RDS for MySQL\. For more information, see [Known issues and limitations for Amazon RDS for MySQL](MySQL.KnownIssuesAndLimitations.md)\. 
 
-## Deprecated MySQL on Amazon RDS versions<a name="MySQL.Concepts.DeprecatedVersions"></a>
+## Deprecated versions for Amazon RDS for MySQL<a name="MySQL.Concepts.DeprecatedVersions"></a>
 
 MySQL on Amazon RDS version 5\.1 is deprecated\.
 

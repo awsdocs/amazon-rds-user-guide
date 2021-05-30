@@ -109,6 +109,8 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 
 1. Choose **Create read replica**\.
 
+After the read replica is created, you can see it on the **Databases** page in the RDS console\. It shows **Replica** in the **Role** column\.
+
 ### AWS CLI<a name="USER_ReadRepl.Create.CLI"></a>
 
 To create a read replica from a source DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html)\. This example also enables storage autoscaling\.
@@ -235,14 +237,19 @@ The status of a read replica can be one of the following:
 + ****replication stop point set** \(MySQL only\)** – A customer\-initiated stop point was set using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure and the replication is in progress\.
 + ****replication stop point reached** \(MySQL only\)** – A customer\-initiated stop point was set using the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure and replication is stopped because the stop point was reached\.
 
+You can see where a DB instance is being replicated and if so, check its replication status\. On the **Databases** page in the RDS console, it shows **Primary** in the **Role** column\. Choose its DB instance name\. On its detail page, on the **Connectivity & security** tab, its replication status is under **Replication**\.
+
 ### Monitoring replication lag<a name="USER_ReadRepl.Monitoring.Lag"></a>
 
 You can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\.
 
-For MySQL and MariaDB, the `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW SLAVE STATUS` command\. Common causes for replication lag for MySQL and MariaDB are the following:
+For MariaDB and MySQL, the `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW REPLICA STATUS` command\. Common causes for replication lag for MySQL and MariaDB are the following:
 + A network outage\.
 + Writing to tables with indexes on a read replica\. If the `read_only` parameter is not set to 0 on the read replica, it can break replication\.
 + Using a nontransactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MySQL and the XtraDB storage engine on MariaDB\.
+
+**Note**  
+Previous versions of MariaDB and MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MariaDB version before 10\.5 or a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 When the `ReplicaLag` metric reaches 0, the replica has caught up to the primary DB instance\. If the `ReplicaLag` metric returns `-1`, then replication is currently not active\. `ReplicaLag = -1` is equivalent to `Seconds_Behind_Master = NULL`\.
 

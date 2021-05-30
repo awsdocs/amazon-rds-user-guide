@@ -37,7 +37,7 @@ You can't alter the schema for an individual partition\. However, you can alter 
 You can use the PostgreSQL pg\_partman extension to automate the creation and maintenance of table partitions\. For more general information, see [PG Partition Manager](https://github.com/pgpartman/pg_partman) in the pg\_partman documentation\.
 
 **Note**  
-The pg\_partman extension is supported on RDS PostgreSQL engine versions 12\.5 and higher\.
+The pg\_partman extension is supported on RDS for PostgreSQL engine versions 12\.5 and higher\.
 
 Instead of having to manually create each partition, you configure pg\_partman with the following settings: 
 + Table to be partitioned

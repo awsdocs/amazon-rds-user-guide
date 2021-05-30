@@ -412,7 +412,9 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    CALL mysql.rds_start_replication;
    ```
 
-1. On the Amazon RDS DB instance, run the [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html) command to determine when the replica is up\-to\-date with the source replication instance\. The results of the `SHOW SLAVE STATUS` command include the `Seconds_Behind_Master` field\. When the `Seconds_Behind_Master` field returns 0, then the replica is up\-to\-date with the source replication instance\.
+1. On the Amazon RDS DB instance, run the [SHOW REPLICA STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html) command to determine when the replica is up\-to\-date with the source replication instance\. The results of the `SHOW REPLICA STATUS` command include the `Seconds_Behind_Master` field\. When the `Seconds_Behind_Master` field returns 0, then the replica is up\-to\-date with the source replication instance\.
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 1. After the Amazon RDS DB instance is up\-to\-date, enable automated backups so you can restore that database if needed\. You can enable or modify automated backups for your Amazon RDS DB instance using the [Amazon RDS management console](https://console.aws.amazon.com/rds/)\. For more information, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
@@ -426,11 +428,13 @@ After the MySQL or MariaDB DB instance is up\-to\-date with the source replicati
 
 1. To add the VPC security group for the Amazon RDS DB instance, add the IP address of the server that hosts the application\. For more information on modifying a VPC security group, see [Security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon Virtual Private Cloud User Guide*\. 
 
-1. Verify that the `Seconds_Behind_Master` field in the [SHOW SLAVE STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html) command results is 0, which indicates that the replica is up\-to\-date with the source replication instance\.
+1. Verify that the `Seconds_Behind_Master` field in the [SHOW REPLICA STATUS](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html) command results is 0, which indicates that the replica is up\-to\-date with the source replication instance\.
 
    ```
-   SHOW SLAVE STATUS;
+   SHOW REPLICA STATUS;
    ```
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 1. Close all connections to the source when their transactions complete\.
 

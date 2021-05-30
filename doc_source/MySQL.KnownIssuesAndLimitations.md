@@ -1,6 +1,6 @@
-# Known issues and limitations for MySQL on Amazon RDS<a name="MySQL.KnownIssuesAndLimitations"></a>
+# Known issues and limitations for Amazon RDS for MySQL<a name="MySQL.KnownIssuesAndLimitations"></a>
 
-Known issues and limitations for working with MySQL on Amazon RDS are as follows\.
+Known issues and limitations for working with Amazon RDS for MySQL are as follows\.
 
 **Topics**
 + [Inconsistent InnoDB buffer pool size](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize)

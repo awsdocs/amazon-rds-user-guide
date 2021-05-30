@@ -2,7 +2,7 @@
 
 Updates to your Amazon RDS for Oracle DB instances keep them current\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\.
 
-You can specify any currently supported Oracle version when creating a new DB instance\. You can specify the major version, such as Oracle Database 12c Release 1 \(12\.1\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version that you have specified\. To see a list of supported versions and defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
+You can specify any currently supported Oracle Database version when creating a new DB instance\. You can specify the major version, such as Oracle Database 12c Release 1 \(12\.1\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version that you have specified\. To see a list of supported versions and defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
 ## Oracle Database 19c \(19\.0\.0\), Oracle Database 18c \(18\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\)<a name="Appendix.Oracle.PatchComposition.180-122"></a>
 
@@ -15,6 +15,7 @@ To find what RUs and RURs are applied to Amazon RDS for Oracle Database 19c \(19
 
 |  RU and RUR  |  Oracle Database 19c \(19\.0\.0\.0\)  |  Oracle Database 18c \(18\.0\.0\.0\)  |  Oracle Database 12c Release 2 \(12\.2\.0\.1\)  | 
 | --- | --- | --- | --- | 
+|  2021 April  |  [Version 19\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-04.rur-2021-04.r1)  |  [Version 18\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-04.rur-2021-04.r1)  |  [Version 12\.2\.0\.1\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-04.rur-2021-04.r1)  | 
 |  2021 January  |  [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r2](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r2) and [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1)  |  [Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1)  |  [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1)  | 
 |  2020 October  |  [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1)  |  [18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1)  |  [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1)  | 
 |  2020 July  |  [19\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-07.rur-2020-07.r1)  |  [18\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-07.rur-2020-07.r1)  |  [12\.2\.0\.1\.ru\-2020\-07\.rur\-2020\-07\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-07.rur-2020-07.r1)  | 
@@ -28,19 +29,20 @@ To find what RUs and RURs are applied to Amazon RDS for Oracle Database 19c \(19
 
 ## Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4<a name="Appendix.Oracle.PatchComposition.121-112"></a>
 
-For Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, Amazon RDS incorporates bug fixes from Oracle by using their quarterly Database Patch Set Updates \(PSUs\)\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\.
+For Amazon RDS for Oracle Database 12c Release 1 \(12\.1\.0\.2\) and Oracle Database 11g Release 2 \(11\.2\.0\.4\), Amazon RDS incorporates bug fixes from Oracle by using their quarterly Database Patch Set Updates \(PSUs\)\. If you apply updates, you can be confident that your DB instance is running a version of the database software that has been tested by both Oracle and Amazon\. We don't support applying one\-off patches to individual DB instances\.
 
 **Note**  
 RDS for Oracle Database 11g is deprecated\. The 11\.2\.0\.4 information in this section is only relevant when you want to upgrade an 11g snapshot\.
 
-To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Oracle versions 12\.1\.0\.2 and 11\.2\.0\.4, see the following table\. 
+To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Oracle Database 12c Release 1 \(12\.1\.0\.2\) and Oracle Database 11g Release 2 \(11\.2\.0\.4\), see the following table\. 
 
 
 ****  
 
 |  PSU  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\)  |  Oracle Database 11g \(11\.2\.0\.4\)  | 
 | --- | --- | --- | 
-|  2021 January  | [12\.1\.0\.2\.v23](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v23) |  N/A  | 
+|  2021 April  |  [12\.1\.0\.2\.v24](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v24)  |  N/A  | 
+|  2021 January  |  [12\.1\.0\.2\.v23](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v23)  |  N/A  | 
 |  2020 October  |  [12\.1\.0\.2\.v22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22)  |  [11\.2\.0\.4\.v26](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v26)  | 
 |  2020 July  |  [12\.1\.0\.2\.v21](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v21)  |  [11\.2\.0\.4\.v25](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v25)  | 
 |  2020 April  |  [12\.1\.0\.2\.v20](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v20)  |  [11\.2\.0\.4\.v24](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v24)  | 

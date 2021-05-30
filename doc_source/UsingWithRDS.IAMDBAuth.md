@@ -49,3 +49,6 @@ We recommend the following when using the MySQL DB engine:
 + Use IAM database authentication when your application requires fewer than 200 new IAM database authentication connections per second\.
 
   The database engines that work with Amazon RDS don't impose any limits on authentication attempts per second\. However, when you use IAM database authentication, your application must generate an authentication token\. Your application then uses that token to connect to the DB instance\. If you exceed the limit of maximum new connections per second, then the extra overhead of IAM database authentication can cause connection throttling\. The extra overhead can cause even existing connections to drop\.  For information about the maximum total connections for MySQL, see [Maximum MySQL and MariaDB connections](CHAP_Troubleshooting.md#USER_ConnectToInstance.max_connections)\.   
+
+**Note**  
+These recommendations don't apply to Amazon RDS for PostgreSQL DB instances\.

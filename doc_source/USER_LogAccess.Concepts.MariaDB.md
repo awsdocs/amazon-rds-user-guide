@@ -274,7 +274,7 @@ call mysql.rds_show_configuration;
 
 In a MariaDB DB instance, you can use the `Annotate_rows` event to annotate a row event with a copy of the SQL query that caused the row event\. This approach provides similar functionality to enabling the `binlog_rows_query_log_events` parameter on a DB instance on MySQL version 5\.6 or later\.
 
-You can enable binary log annotations globally by creating a custom parameter group and setting the `binlog_annotate_row_events` parameter to **1**\. You can also enable annotations at the session level, by calling `SET SESSION binlog_annotate_row_events = 1`\. Use the `replicate_annotate_row_events` to replicate binary log annotations to the slave instance if binary logging is enabled on it\. No special privileges are required to use these settings\.
+You can enable binary log annotations globally by creating a custom parameter group and setting the `binlog_annotate_row_events` parameter to **1**\. You can also enable annotations at the session level, by calling `SET SESSION binlog_annotate_row_events = 1`\. Use the `replicate_annotate_row_events` to replicate binary log annotations to the replica instance if binary logging is enabled on it\. No special privileges are required to use these settings\.
 
 The following is an example of a row\-based transaction in MariaDB\. The use of row\-based logging is triggered by setting the transaction isolation level to read\-committed\.
 

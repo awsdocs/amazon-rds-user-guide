@@ -1,150 +1,14 @@
-# Getting CloudWatch Events and Amazon EventBridge events for Amazon RDS<a name="rds-cloud-watch-events"></a>
+# Creating a rule that triggers on an Amazon RDS<a name="rds-cloud-watch-events"></a>
 
 Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS services and respond to system events such as application availability issues or resource changes\. 
 
 **Topics**
-+ [Overview of events for Amazon RDS](#rds-cloudwatch-events.sample)
 + [Creating rules to send Amazon RDS events to CloudWatch Events](#rds-cloudwatch-events.sending-to-cloudwatch-events)
 + [Tutorial: log the state of an Amazon RDS instance using EventBridge](#log-rds-instance-state)
 
-## Overview of events for Amazon RDS<a name="rds-cloudwatch-events.sample"></a>
-
-An *event* indicates a change in an environment\. This can be an AWS environment, an SaaS partner service or application, or one of your own custom applications or services\. For example, Amazon RDS generates an event when the state of an instance changes from pending to running\. Amazon RDS deliver events to CloudWatch Events and EventBridge in near real time\. 
-
-**Note**  
-Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depends on the order or existence of notification events, as they might be out of sequence or missing\. 
-
-You can write simple rules to indicate which events interest you and what automated actions to take when an event matches a rule\. You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
-
-**Topics**
-+ [DB instance events](#rds-cloudwatch-events.db-instances)
-+ [DB parameter group events](#rds-cloudwatch-events.db-parameter-groups)
-+ [DB security group events](#rds-cloudwatch-events.db-security-groups)
-+ [DB snapshot events](#rds-cloudwatch-events.db-snapshots)
-
-### DB instance events<a name="rds-cloudwatch-events.db-instances"></a>
-
-The following is an example of a DB instance event\.
-
-```
-{
-  "version": "0",
-  "id": "68f6e973-1a0c-d37b-f2f2-94a7f62ffd4e",
-  "detail-type": "RDS DB Instance Event",
-  "source": "aws.rds",
-  "account": "123456789012",
-  "time": "2018-09-27T22:36:43Z",
-  "region": "us-east-1",
-  "resources": [
-    "arn:aws:rds:us-east-1:123456789012:db:my-db-instance"
-  ],
-  "detail": {
-    "EventCategories": [
-      "failover"
-    ],
-    "SourceType": "DB_INSTANCE",
-    "SourceArn": "arn:aws:rds:us-east-1:123456789012:db:my-db-instance",
-    "Date": "2018-09-27T22:36:43.292Z",
-    "Message": "A Multi-AZ failover has completed.",
-    "SourceIdentifier": "rds:my-db-instance",
-    "EventID": "RDS-EVENT-0049"
-  }
-}
-```
-
-### DB parameter group events<a name="rds-cloudwatch-events.db-parameter-groups"></a>
-
-The following is an example of a DB parameter group event\.
-
-```
-{
-  "version": "0",
-  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
-  "detail-type": "RDS DB Parameter Group Event",
-  "source": "aws.rds",
-  "account": "123456789012",
-  "time": "2018-10-06T12:26:13Z",
-  "region": "us-east-1",
-  "resources": [
-    "arn:aws:rds:us-east-1:123456789012:pg:my-db-param-group"
-  ],
-  "detail": {
-    "EventCategories": [
-      "configuration change"
-    ],
-    "SourceType": "DB_PARAM",
-    "SourceArn": "arn:aws:rds:us-east-1:123456789012:pg:my-db-param-group",
-    "Date": "2018-10-06T12:26:13.882Z",
-    "Message": "Updated parameter time_zone to UTC with apply method immediate",
-    "SourceIdentifier": "rds:my-db-param-group",
-    "EventID": "RDS-EVENT-0037"
-  }
-}
-```
-
-### DB security group events<a name="rds-cloudwatch-events.db-security-groups"></a>
-
-The following is an example of a DB security group event\.
-
-```
-{
-  "version": "0",
-  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
-  "detail-type": "RDS DB Security Group Event",
-  "source": "aws.rds",
-  "account": "123456789012",
-  "time": "2018-10-06T12:26:13Z",
-  "region": "us-east-1",
-  "resources": [
-    "arn:aws:rds:us-east-1:123456789012:secgrp:my-security-group"
-  ],
-  "detail": {
-    "EventCategories": [
-      "configuration change"
-    ],
-    "SourceType": "SECURITY_GROUP",
-    "SourceArn": "arn:aws:rds:us-east-1:123456789012:secgrp:my-security-group",
-    "Date": "2018-10-06T12:26:13.882Z",
-    "Message": "Applied change to security group",
-    "SourceIdentifier": "rds:my-security-group",
-    "EventID": "RDS-EVENT-0038"
-  }
-}
-```
-
-### DB snapshot events<a name="rds-cloudwatch-events.db-snapshots"></a>
-
-The following is an example of a DB snapshot event\.
-
-```
-{
-  "version": "0",
-  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
-  "detail-type": "RDS DB Snapshot Event",
-  "source": "aws.rds",
-  "account": "123456789012",
-  "time": "2018-10-06T12:26:13Z",
-  "region": "us-east-1",
-  "resources": [
-    "arn:aws:rds:us-east-1:123456789012:snapshot:rds:my-db-snapshot"
-  ],
-  "detail": {
-    "EventCategories": [
-      "deletion"
-    ],
-    "SourceType": "SNAPSHOT",
-    "SourceArn": "arn:aws:rds:us-east-1:123456789012:snapshot:rds:my-db-snapshot",
-    "Date": "2018-10-06T12:26:13.882Z",
-    "Message": "Deleted manual snapshot",
-    "SourceIdentifier": "rds:my-db-snapshot",
-    "EventID": "RDS-EVENT-0041"
-  }
-}
-```
-
 ## Creating rules to send Amazon RDS events to CloudWatch Events<a name="rds-cloudwatch-events.sending-to-cloudwatch-events"></a>
 
-You can create CloudWatch Events rules to send Amazon RDS events to CloudWatch Events\.
+You can write simple rules to indicate which Amazon RDSAmazon Aurora events interest you and which automated actions to take when an event matches a rule\. You can set a variety of targets, such as an AWS Lambda function or an Amazon SNS topic, which receive events in JSON format\. For example, you can configure Amazon RDS to send events to CloudWatch Events or Amazon EventBridge whenever a DB instance is created or deleted\. For more information, see the [Amazon CloudWatch Events User Guide](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/) and the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/)\.
 
 Use the following steps to create a CloudWatch Events rule that triggers on an event emitted by an AWS service\.
 
@@ -184,7 +48,7 @@ For more information, see [Creating a CloudWatch Events Rule That Triggers on an
 
 ## Tutorial: log the state of an Amazon RDS instance using EventBridge<a name="log-rds-instance-state"></a>
 
-You can create an AWS Lambda function that logs the changes in state for an Amazon RDS instance\. You can choose to create a rule that runs the function whenever there is a state transition or a transition to one or more states that are of interest\.
+You can create an AWS Lambda function that logs the state changes for an Amazon RDS instance\. You can choose to create a rule that runs the function whenever there is a state transition or a transition to one or more states that are of interest\.
 
 In this tutorial, you log any state change of an existing RDS DB instance\. The tutorial assumes that you have a small running test instance that you can shut down temporarily\.
 

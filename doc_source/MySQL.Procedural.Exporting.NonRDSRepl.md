@@ -83,11 +83,13 @@ Perform the following steps to copy the database\.
 
 **To copy the database**
 
-1. Connect to the RDS read replica of the source MySQL DB instance, and run the MySQL `SHOW SLAVE STATUS\G` statement\. Note the values for the following:
+1. Connect to the RDS read replica of the source MySQL DB instance, and run the MySQL `SHOW REPLICA STATUS\G` statement\. Note the values for the following:
    + `Master_Host`
    + `Master_Port`
    + `Master_Log_File`
    + `Exec_Master_Log_Pos`
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 1. Use the mysqldump utility to create a snapshot, which copies the data from Amazon RDS to your local client computer\. Then run another utility to load the data into the external MySQL database\. Ensure that your client computer has enough space to hold the `mysqldump` files from the databases to be replicated\. This process can take several hours for very large databases\. Follow the directions in [Creating a data snapshot using mysqldump](https://dev.mysql.com/doc/mysql-replication-excerpt/8.0/en/replication-howto-mysqldump.html) in the MySQL documentation\.
 
@@ -161,12 +163,18 @@ Perform the following steps to complete the export\.
 
 1. On the Amazon RDS read replica, call the `mysql.rds_start_replication` stored procedure\. Doing this starts replication from the source MySQL DB instance and exports all source changes that have occurred after you stopped replication from the Amazon RDS read replica\.
 
-1. Use the MySQL `CHANGE MASTER` statement to configure the external MySQL database\. Specify the ID and password of the user granted `REPLICATION SLAVE` permissions\. Specify the `Master_Host`, `Master_Port`, `Relay_Master_Log_File`, and `Exec_Master_Log_Pos` values that you got from the MySQL `SHOW SLAVE STATUS\G` statement that you ran on the RDS read replica\. For more information, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/change-master-to.html)\.
+1. Use the MySQL `CHANGE MASTER` statement to configure the external MySQL database\. Specify the ID and password of the user granted `REPLICATION SLAVE` permissions\. Specify the `Master_Host`, `Master_Port`, `Relay_Master_Log_File`, and `Exec_Master_Log_Pos` values that you got from the MySQL `SHOW REPLICA STATUS\G` statement that you ran on the RDS read replica\. For more information, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/change-master-to.html)\.
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
-1. Use the MySQL `START SLAVE` command to initiate replication from the source MySQL DB instance to the external MySQL database\.
+1. Use the MySQL `START REPLICA` command to initiate replication from the source MySQL DB instance to the external MySQL database\.
+**Note**  
+Previous versions of MySQL used `START SLAVE` instead of `START REPLICA`\. If you are using a MySQL version before 8\.0\.23, then use `START SLAVE`\. 
 
-1. Run the MySQL `SHOW SLAVE STATUS\G` command on the external MySQL database to verify that it is operating as a read replica\. For more information about interpreting the results, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\.
+1. Run the MySQL `SHOW REPLICA STATUS\G` command on the external MySQL database to verify that it is operating as a read replica\. For more information about interpreting the results, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\.
 
-1. After replication on the external MySQL database has caught up with the source MySQL DB instance, use the MySQL `STOP SLAVE` command to stop replication from the source MySQL DB instance\.
+1. After replication on the external MySQL database has caught up with the source MySQL DB instance, use the MySQL `STOP REPLICA` command to stop replication from the source MySQL DB instance\.
+**Note**  
+Previous versions of MySQL used `STOP SLAVE` instead of `STOP REPLICA`\. If you are using a MySQL version before 8\.0\.23, then use `STOP SLAVE`\. 
 
 1. On the Amazon RDS read replica, call the `mysql.rds_start_replication` stored procedure\. Doing this allows Amazon RDS to start purging the binary log files from the source MySQL DB instance\.

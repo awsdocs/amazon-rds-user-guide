@@ -1,10 +1,12 @@
 # Exporting DB snapshot data to Amazon S3<a name="USER_ExportSnapshot"></a>
 
-You can export DB snapshot data to an Amazon S3 bucket\. After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
+You can export DB snapshot data to an Amazon S3 bucket\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
 
 When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
 You can export all types of DB snapshots—including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
+
+After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the Amazon Redshift Database Developer Guide\.
 
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
 + AWS GovCloud \(US\-East\)
@@ -71,7 +73,7 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
 1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
 
-1. To access your exported data in the Amazon S3 bucket, see [ Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+1. To access your exported data in the Amazon S3 bucket, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ## Setting up access to an Amazon S3 bucket<a name="USER_ExportSnapshot.Setup"></a>
 

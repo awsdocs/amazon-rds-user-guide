@@ -346,7 +346,9 @@ When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete t
 
    1. Choose **Modify DB instance** to start the upgrade\. 
 
-1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.7 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW SLAVE STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\.
+1. When the upgrade is complete and **Status** shows **Available**, verify that the upgraded read replica is up\-to\-date with the source MySQL 5\.7 DB instance\. You can do this by connecting to the read replica and issuing the `SHOW REPLICA STATUS` command\. If the `Seconds_Behind_Master` field is `0`, then replication is up\-to\-date\.
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 1. \(Optional\) Create a read replica of your read replica\.
 

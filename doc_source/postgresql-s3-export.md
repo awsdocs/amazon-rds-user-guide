@@ -13,6 +13,7 @@ You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS
 + [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)
 + [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)
 + [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)
++ [Troubleshooting access to Amazon S3](#postgresql-s3-export-troubleshoot)
 + [Function reference](#postgresql-s3-export-functions)
 
 ## Overview of exporting data to Amazon S3<a name="postgresql-s3-export-overview"></a>
@@ -218,7 +219,6 @@ Export your PostgreSQL data to Amazon S3 by calling the [aws\_s3\.query\_export\
 + [Calling aws\_s3\.query\_export\_to\_s3](#postgresql-s3-export-examples-basic)
 + [Exporting to a CSV file that uses a custom delimiter](#postgresql-s3-export-examples-custom-delimiter)
 + [Exporting to a binary file with encoding](#postgresql-s3-export-examples-encoded)
-+ [Troubleshooting access to Amazon S3](#postgresql-s3-export-troubleshoot)
 
 ### Prerequisites<a name="postgresql-s3-export-examples-prerequisites"></a>
 
@@ -305,9 +305,11 @@ The following example shows how to call the [aws\_s3\.query\_export\_to\_s3](#aw
 SELECT * from aws_s3.query_export_to_s3('select * from basic_test', :'s3_uri_1', options :='format binary, encoding WIN1253');
 ```
 
-### Troubleshooting access to Amazon S3<a name="postgresql-s3-export-troubleshoot"></a>
+## Troubleshooting access to Amazon S3<a name="postgresql-s3-export-troubleshoot"></a>
 
-If you encounter connection problems when attempting to export data to Amazon S3, see the following for recommendations:
+If you encounter connection problems when attempting to export data to Amazon S3, first confirm that the outbound access rules for the VPC security group associated with your DB instance permit network connectivity\. Specifically, they must allow access to port 443 for SSL connections\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+
+See also the following for recommendations:
 + [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md) 
 + [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide\.*
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the* IAM User Guide\.*

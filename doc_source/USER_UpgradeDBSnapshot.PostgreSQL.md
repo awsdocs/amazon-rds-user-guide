@@ -9,8 +9,6 @@ You can upgrade manual DB snapshots that are either encrypted or not encrypted\.
 For the list of engine versions that are available for upgrading a DB snapshot, see [ Upgrading the PostgreSQL DB engine for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. 
 
 **Note**  
-The DB snapshot must be from the same AWS Region as the account\.
-You can't upgrade DB snapshots that are copied within region, copied across regions, or shared across accounts\.
 You can't upgrade automated DB snapshots that are created during the automated backup process\.
 
 ## Console<a name="USER_UpgradeDBSnapshot.PostgreSQL.Console"></a>

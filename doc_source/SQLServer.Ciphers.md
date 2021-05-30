@@ -2,7 +2,7 @@
 
 You can turn certain security protocols and ciphers on and off using DB parameters\. The security parameters that you can configure \(except for TLS version 1\.2\) are shown in the following table\. 
 
-A value of `default` means that the operating system default value is used, whether it is `enabled` or `disabled`\.
+For parameters other than `rds.fips`, the value of `default` means that the operating system default value is used, whether it is `enabled` or `disabled`\.
 
 **Note**  
 You can't disable TLS 1\.2, because Amazon RDS uses it internally\.
@@ -15,6 +15,7 @@ You can't disable TLS 1\.2, because Amazon RDS uses it internally\.
 | rds\.tls10 | default, enabled, disabled | TLS 1\.0\. | 
 | rds\.tls11 | default, enabled, disabled | TLS 1\.1\. | 
 | rds\.tls12 | default | TLS 1\.2\. You can't modify this value\. | 
+| rds\.fips | 0, 1 |  When you set the parameter to 1, RDS forces the use of modules that are compliant with the Federal Information Processing Standard \(FIPS\) 140\-2 standard\. For more information, see [Use SQL Server 2016 in FIPS 140\-2\-compliant mode](https://docs.microsoft.com/en-us/troubleshoot/sql/security/sql-2016-fips-140-2-compliant-mode) in the Microsoft documentation\.  You must reboot the DB instance after the modification to make it effective\.   | 
 | rds\.rc4 | default, enabled, disabled | RC4 stream cipher\. | 
 | rds\.diffie\-hellman | default, enabled, disabled | Diffie\-Hellman key\-exchange encryption\. | 
 | rds\.diffie\-hellman\-min\-key\-bit\-length | default, 1024, 2048, 4096 | Minimum bit length for Diffie\-Hellman keys\. | 
@@ -22,7 +23,8 @@ You can't disable TLS 1\.2, because Amazon RDS uses it internally\.
 | rds\.3des168 | default, enabled, disabled | Triple Data Encryption Standard \(DES\) encryption cipher with a 168\-bit key length\. | 
 
 **Note**  
-For more information on the default values for SQL Server security protocols and ciphers, see [Protocols in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-) and [Cipher Suites in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/cipher-suites-in-schannel) in the Microsoft documentation\.
+For more information on the default values for SQL Server security protocols and ciphers, see [Protocols in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-) and [Cipher Suites in TLS/SSL \(Schannel SSP\)](https://docs.microsoft.com/en-us/windows/win32/secauthn/cipher-suites-in-schannel) in the Microsoft documentation\.  
+For more information on viewing and setting these values in the Windows Registry, see [Transport Layer Security \(TLS\) best practices with the \.NET Framework](https://docs.microsoft.com/en-us/dotnet/framework/network-programming/tls) in the Microsoft documentation\.
 
 Use the following process to configure the security protocols and ciphers:
 

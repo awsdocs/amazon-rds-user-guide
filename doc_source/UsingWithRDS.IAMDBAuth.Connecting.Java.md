@@ -167,7 +167,7 @@ public class CreateRDSAuthTokenManually {
 
     //Step 3: Calculate signature
     /**
-     * Step 3 of the AWS Signature version 4 calculation. It involves deriving
+     * Step 3 of the &AWS; Signature version 4 calculation. It involves deriving
      * the signing key and computing the signature. Refer to
      * http://docs.aws.amazon
      * .com/general/latest/gr/sigv4-calculate-signature.html
@@ -275,7 +275,7 @@ import java.util.Properties;
 import java.net.URL;
 
 public class IAMDatabaseAuthenticationTester {
-    //AWS Credentials of the IAM user with policy enabling IAM Database Authenticated access to the db by the db user.
+    //&AWS; Credentials of the IAM user with policy enabling IAM Database Authenticated access to the db by the db user.
     private static final DefaultAWSCredentialsProviderChain creds = new DefaultAWSCredentialsProviderChain();
     private static final String AWS_ACCESS_KEY = creds.getCredentials().getAWSAccessKeyId();
     private static final String AWS_SECRET_KEY = creds.getCredentials().getAWSSecretKey();

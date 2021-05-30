@@ -29,6 +29,12 @@ The following are prerequisites for using Oracle Java:
 The following are best practices for using Oracle Java: 
 + For maximum security, use the `JVM` option with Secure Sockets Layer \(SSL\)\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 + Configure your DB instance to restrict network access\. For more information, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md) and [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)\. 
++ Update the configuration of your HTTPS endpoints to support TLSv1\.2 if you meet the following conditions:
+  + You use Oracle Java Virtual Machine \(JVM\) to connect an HTTPS endpoint over TLSv1 or TLSv1\.1 protocols\.
+  + Your endpoint doesn't support the TLSv1\.2 protocol\.
+  + You haven't applied the April 2021 release update to your Oracle DB\.
+
+  By updating your endpoint configuration, you ensure that the connectivity of the JVM to the HTTPS endpoint will continue to work\. For more information about TLS changes in the Oracle JRE and JDK, see [Oracle JRE and JDK Cryptographic Roadmap](https://java.com/en/jre-jdk-cryptoroadmap.html)\.
 
 ## Adding the Oracle JVM option<a name="oracle-options-java.add"></a>
 

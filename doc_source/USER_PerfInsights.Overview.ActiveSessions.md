@@ -1,6 +1,6 @@
 # DB load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
 
-The central metric for Performance Insights is `DB Load`\. The `DB Load` metric is collected every second\.
+The central metric for Performance Insights is `DB Load`, which is collected every second\. The DB load represents the average active sessions \(AAS\) for the DB engine\. 
 
 **Topics**
 + [Average active sessions](#USER_PerfInsights.Overview.ActiveSessions.AAS)
@@ -11,9 +11,9 @@ The central metric for Performance Insights is `DB Load`\. The `DB Load` metric 
 
 ## Average active sessions<a name="USER_PerfInsights.Overview.ActiveSessions.AAS"></a>
 
-An active session is a connection that has submitted work to the DB engine and is waiting for a response\. The DB load represents the average active sessions \(AAS\) for the DB engine\. For example, if you submit a SQL query to the DB engine, the database session is active while the engine is processing the query\. 
+An active session is a connection that has submitted work to the DB engine and is waiting for a response\. For example, if you submit a SQL query to the DB engine, the database session is active while the engine is processing the query\. 
 
-To obtain the AAS, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples\. The following table shows 5 consecutive samples of a running query\.
+To obtain the average active sessions, Performance Insights samples the number of sessions concurrently running a query\. The AAS is the total number of sessions divided by the total number of samples\. The following table shows 5 consecutive samples of a running query\.
 
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.ActiveSessions.html)
 

@@ -155,7 +155,7 @@ https://us-west-2.rds.amazonaws.com/
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
     &Timestamp=2012-01-20T22%3A06%3A23.624Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<&AWS; Access Key ID>
     &Signature=<Signature>
 ```
 

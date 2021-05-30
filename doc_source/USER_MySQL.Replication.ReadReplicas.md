@@ -240,7 +240,7 @@ You can view the replication filters for a read replica in the following ways:
 + Check the settings of the replication filtering parameters in the parameter group associated with the read replica\.
 
   For instructions, see [Viewing parameter values for a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Viewing)\.
-+ In a MySQL client, connect to the read replica and run the `SHOW SLAVE STATUS` statement\.
++ In a MySQL client, connect to the read replica and run the `SHOW REPLICA STATUS` statement\.
 
   In the output, the following fields show the replication filters for the read replica:
   + `Replicate_Do_DB`
@@ -251,6 +251,8 @@ You can view the replication filters for a read replica in the following ways:
   + `Replicate_Wild_Ignore_Table`
 
   For more information about these fields, see [Checking Replication Status](https://dev.mysql.com/doc/refman/8.0/en/replication-administration-status.html) in the MySQL documentation\.
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 ## Configuring delayed replication with MySQL<a name="USER_MySQL.Replication.ReadReplicas.DelayReplication"></a>
 
@@ -348,7 +350,10 @@ To create a read replica as a Multi\-AZ DB instance, the DB instance must be MyS
 
 ## Monitoring MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas.Monitor"></a>
 
-For MySQL read replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW SLAVE STATUS` command\. 
+For MySQL read replicas, you can monitor replication lag in Amazon CloudWatch by viewing the Amazon RDS `ReplicaLag` metric\. The `ReplicaLag` metric reports the value of the `Seconds_Behind_Master` field of the `SHOW REPLICA STATUS` command\. 
+
+**Note**  
+Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 Common causes for replication lag for MySQL are the following: 
 + A network outage\.

@@ -39,9 +39,10 @@ Amazon RDS provides a mechanism for you to skip an error on your read replicas i
  You should first verify that the error can be safely skipped\. In a MySQL utility, connect to the read replica and run the following MySQL command:   
 
 ```
-SHOW SLAVE STATUS\G 
+SHOW REPLICA STATUS\G 
 ```
-For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html)\.
+For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html)\.  
+Previous versions of and MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
  To skip the error, you can issue the following command: 
 

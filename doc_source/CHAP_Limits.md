@@ -14,30 +14,7 @@ Each AWS account has quotas, for each AWS Region, on the number of Amazon RDS re
 
 The following table lists the resources and their quotas per AWS Region\.
 
-
-| Resource | Default quota | 
-| --- | --- | 
-| Authorizations per DB security group | 20 | 
-| Burst balance for instances <1 tebibyte \(TiB\) | 3000 IOPS | 
-| Concurrent DB snapshot export tasks | 5 | 
-| Cross\-Region DB snapshot copy requests | 5 | 
-| DB instances | 40 | 
-| DB security groups | 25 | 
-| DB subnet groups | 50 | 
-| Event subscriptions | 20 | 
-| IAM roles per DB instance | 5 | 
-| Manual DB snapshots | 100 | 
-| Option groups | 20 | 
-| Parameter groups | 50 | 
-| Proxies | 20 | 
-| Read replicas per primary | 5 | 
-| Reserved DB instances | 40 | 
-| Rules per security group | 20 | 
-| Rules per virtual private cloud \(VPC\) security group | 50 inbound, 50 outbound | 
-| Subnets per subnet group | 20 | 
-| Tags per resource | 50 | 
-| Total storage for all DB instances | 100 terabytes \(TB\) | 
-| VPC security groups | 5 | 
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 
 **Note**  
 By default, you can have up to a total of 40 DB instances\. RDS DB instances, Aurora DB instances, Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota\.  

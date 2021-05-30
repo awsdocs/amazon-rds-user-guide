@@ -5,7 +5,7 @@ For added disaster recovery capability, you can configure your Amazon RDS databa
 DB snapshot copy charges apply to the data transfer\. After the DB snapshot is copied, standard charges apply to storage in the destination Region\. For more details, see [RDS Pricing](https://aws.amazon.com/rds/oracle/pricing/)\.
 
 Backup replication is available for RDS DB instances running the following database engines:
-+ Oracle version 12\.1\.0\.2\.v10 and higher
++ Oracle Database version 12\.1\.0\.2\.v10 and higher
 + PostgreSQL version 9\.6 and higher
 + Microsoft SQL Server version 2012 and higher
 

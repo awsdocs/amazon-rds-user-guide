@@ -1,8 +1,8 @@
 # Oracle Enterprise Manager Database Express<a name="Appendix.Oracle.Options.OEM_DBControl"></a>
 
-Amazon RDS supports Oracle Enterprise Manager \(OEM\) Database Express through the use of the OEM option\. Amazon RDS supports Oracle Enterprise Manager Database Express for Oracle Database 19c, Oracle Database 18c, and Oracle Database 12c\. 
+Amazon RDS supports Oracle Enterprise Manager \(OEM\) Database Express through the use of the OEM option\. Amazon RDS supports Oracle Enterprise Manager Database Express for Oracle Database 19c, Oracle Database 18c, and Oracle Database 12c\.
 
-OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager database Express 18c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-18c.html) and [Accessing Enterprise Manager database Express 12c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-12c.html) in the Oracle documentation\.
+OEM Database Express and Database Control are similar tools that have a web\-based interface for Oracle database administration\. For more information about these tools, see [Accessing Enterprise Manager database Express 18c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-18c.html) and [Accessing Enterprise Manager Database Express 12c](https://docs.oracle.com/en/cloud/paas/database-dbaas-cloud/csdbi/access-em-database-express-12c.html) in the Oracle documentation\.
 
 The following is a limitation for OEM Database Express: 
 + OEM Database Express isn't supported on the db\.t3\.micro or db\.t3\.small DB instance classes\. 

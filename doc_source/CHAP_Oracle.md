@@ -80,7 +80,7 @@ The following schedule includes upgrade recommendations\. For more information, 
 
 ### Oracle Database 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
 
-Amazon RDS supports Oracle Database 12c, which includes Oracle Enterprise Edition and Oracle Standard Edition Two\. Oracle Database 12c includes two major versions:
+Amazon RDS supports Oracle Database 12c, which includes Oracle Enterprise Edition and Oracle Standard Edition 2\. Oracle Database 12c includes the following major versions:
 + [Oracle Database 12c Release 2 \(12\.2\.0\.1\) with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV2Overview)
 + [Oracle Database 12c Release 1 \(12\.1\.0\.2\) with Amazon RDS](#Oracle.Concepts.FeatureSupport.12cV1Overview)
 
@@ -202,7 +202,7 @@ Several parameters have new value ranges for Oracle Database 12c Release 1 \(12\
 |  Parameter name  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\) range  | 
 | --- | --- | 
 |   [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)   |   os \| db \[, extended\] \| xml \[, extended\]   | 
-|   [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)   |  If you upgrade to 12\.2\.0\.1, 18c, or 19c, `COMPATIBLE` must be 11\.2\.0 or higher\. We recommend that you use the default settings for `COMPATIBLE` for your version of Oracle Database unless you have a reason to change it\. If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to 12\.0\.0\.  | 
+|   [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)   |  If you upgrade to Oracle Database 12c Release 2 \(12\.2\.0\.1\), Oracle Database 18c, or Oracle Database 19c, `COMPATIBLE` must be `11.2.0` or higher\. We recommend that you use the default settings for `COMPATIBLE` for your version of Oracle Database unless you have a reason to change it\. If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to `12.0.0`\.  | 
 |   [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)   |  PERMITTED \| PREFERRED \| ALWAYS \| IGNORE \| FORCE  | 
 |   [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)   |  1\-100  | 
 |   [optimizer\_features\_enable](http://docs.oracle.com/database/121/REFRN/GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C.htm#REFRN10141)   |   8\.0\.0 to 12\.1\.0\.2   | 
@@ -422,7 +422,53 @@ The preceding DB instance classes have been replaced by better performing DB ins
 
 If you have DB instances that use deprecated DB instance classes, Amazon RDS will modify each one automatically to use a comparable DB instance class that is not deprecated\. You can change the DB instance class for a DB instance yourself by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-If you have DB snapshots of DB instances that were using deprecated DB instance classes, you can choose a DB instance class that is not deprecated when you restore the DB snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
+If you have snapshots of DB instances that were using deprecated instance classes, you can choose an that isn't deprecated when you restore the snapshots\. For more information, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
+
+## RDS for Oracle architecture<a name="Oracle.Concepts.single-tenant"></a>
+
+The multitenant architecture enables an Oracle database to function as a multitenant container database \(CDB\)\. A CDB can include customer\-created pluggable databases \(PDBs\)\. A non\-CDB is an Oracle database that uses the traditional architecture, which can't contain PDBs\. For more information about the multitenant architecture, see [https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22](https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22)\.
+
+For Oracle Database 19c, you must create a DB instance either as a CDB or a non\-CDB\. The architecture is a permanent characteristic and can't be changed later\. For RDS for Oracle versions other than Oracle Database 19c, the architecture is always non\-multitenant\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+
+Currently, RDS for Oracle supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\. 
+
+The following sections explain the principal differences between the non\-multitenant and single\-tenant architectures\. For more information, see [Limitations of a single\-tenant CDB](#Oracle.Concepts.single-tenant-limitations)\.
+
+**Topics**
++ [Database creation and connections in a single\-tenant architecture](#Oracle.Concepts.single-tenant.creation)
++ [User accounts and privileges in a single\-tenant architecture](#Oracle.Concepts.single-tenant.users)
++ [Parameters in a single\-tenant architecture](#Oracle.Concepts.single-tenant.parameters)
++ [Snapshots in a single\-tenant architecture](#Oracle.Concepts.single-tenant.snapshots)
+
+### Database creation and connections in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.creation"></a>
+
+When you create a CDB, specify the DB instance identifier just as for a non\-CDB\. The instance identifier forms the first part of your endpoint\. The system identifier \(SID\) is the name of the CDB\. The SID of every CDB is `RDSCDB`\. You can't choose a different value\.
+
+In the single\-tenant architecture, you always connect to the PDB rather than the CDB\. Specify the endpoint for the PDB just as for a non\-CDB\. The only difference is that you specify *pdb\_name* for the database name, where *pdb\_name* is the name you chose for your PDB\. The following example shows the format for the connection string in SQL\*Plus\.
+
+```
+sqlplus 'dbuser@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=endpoint)(PORT=port))(CONNECT_DATA=(SID=pdb_name)))'
+```
+
+### User accounts and privileges in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.users"></a>
+
+In the Oracle multitenant architecture, all users accounts are either common users or local users\. A CDB common user is a database user whose single identity and password are known in the CDB root and in every existing and future PDB\. In contrast, a local user exists only in a single PDB\.
+
+The RDS master user is a local user account in the PDB\. If you create new user accounts, these users will also be local users residing in the PDB\. You can't use any user accounts to create new PDBs or modify the state of the existing PDB\.
+
+The `rdsadmin` user is a common user account\. You can run Oracle for RDS packages that exist in this account, but you can't log in as `rdsadmin`\. For more information, see [About Common Users and Local Users](https://docs.oracle.com/en/database/oracle/oracle-database/19/dbseg/managing-security-for-oracle-database-users.html#GUID-BBBD9904-F2F3-442B-9AFC-8ACDD9A588D8) in the Oracle documentation\.
+
+### Parameters in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.parameters"></a>
+
+CDBs have their own parameter classes and different default parameter values\. The CDB parameter classes are as follows:
++ oracle\-ee\-cdb\-19
++ oracle\-se2\-cdb\-19
+
+You specify parameters at the CDB level rather than the PDB level\. The PDB inherits parameter settings from the CDB\. For more information about setting parameters, see [Working with DB parameter groups](CHAP_BestPractices.md#CHAP_BestPractices.DBParameterGroup)\.
+
+### Snapshots in a single\-tenant architecture<a name="Oracle.Concepts.single-tenant.snapshots"></a>
+
+Snapshots work the same in a single\-tenant and non\-multitenant architecture\. The only difference is that when you restore a snapshot, you can only rename the PDB, not the CDB\. The CDB is always named `RDSCDB`\. For more information, see [Oracle Database considerations](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Oracle)\.
 
 ## RDS for Oracle features<a name="Oracle.Concepts.FeatureSupport"></a>
 
@@ -485,6 +531,9 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
 + Multimedia
 
   For more information, see [Oracle Multimedia](Oracle.Options.Multimedia.md)\.
++ Multitenant \(single\-tenant architecture only\)
+
+  This feature is available only in Oracle Database 19c\. For more information, see [RDS for Oracle architecture](#Oracle.Concepts.single-tenant) and [Limitations of a single\-tenant CDB](#Oracle.Concepts.single-tenant-limitations)\.
 + Network encryption
 
   For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md) and [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\.
@@ -515,7 +564,6 @@ Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Database Vault
 + Flashback Database
 + Messaging Gateway
-+ Multitenant
 + Oracle Enterprise Manager Cloud Control Management Repository
 + Real Application Clusters \(Oracle RAC\)
 + Real Application Testing
@@ -548,7 +596,10 @@ You set the character set when you create a DB instance\. You can't change the D
 
 #### Supported DB character sets<a name="Appendix.OracleCharacterSets.db-character-set.supported"></a>
 
-The following table lists the Oracle DB character sets that are supported in Amazon RDS\. You can use a value from this table with the `--character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `CharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. 
+The following table lists the Oracle DB character sets that are supported in Amazon RDS\. You can use a value from this table with the `--character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `CharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\.
+
+**Note**  
+The character set for a CDB is always AL32UTF8\. You can set a different character set for the PDB only\.
 
 
 ****  
@@ -638,6 +689,8 @@ This list is not exhaustive\.
 + [Public synonyms for Oracle\-supplied schemas](#Oracle.Concepts.PublicSynonyms)
 + [Schemas for unsupported features](#Oracle.Concepts.unsupported-features)
 + [Limitations for Oracle DBA privileges](#Oracle.Concepts.dba-limitations)
++ [Limitations of a single\-tenant CDB](#Oracle.Concepts.single-tenant-limitations)
++ [Deprecation of TLS 1\.0 and 1\.1 Transport Layer Security](#Oracle.Concepts.tls)
 
 ### Oracle file size limits in Amazon RDS<a name="Oracle.Concepts.file-size-limits"></a>
 
@@ -674,3 +727,22 @@ The predefined role `DBA` normally allows all administrative privileges on an Or
 + `GRANT ANY ROLE`
 
 Use the master user account for administrative tasks such as creating additional user accounts in the database\. You can't use `SYS`, `SYSTEM`, and other Oracle\-supplied administrative accounts\. 
+
+### Limitations of a single\-tenant CDB<a name="Oracle.Concepts.single-tenant-limitations"></a>
+
+The following options aren't supported for the single\-tenant architecture:
++ Oracle Data Guard
++ Oracle Enterprise Manager
++ Oracle Enterprise Manager Agent
++ Oracle Label Security
+
+The following operations work in a single\-tenant CDB, but no customer\-visible mechanism can detect the current status of the operations:
++ [Enabling and disabling block change tracking](Appendix.Oracle.CommonDBATasks.RMAN.md#Appendix.Oracle.CommonDBATasks.BlockChangeTracking)
++ [Enabling auditing for the SYS\.AUD$ table](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.EnablingAuditing)
+
+**Note**  
+Auditing information isn't available from within the PDB\.
+
+### Deprecation of TLS 1\.0 and 1\.1 Transport Layer Security<a name="Oracle.Concepts.tls"></a>
+
+Transport Layer Security protocol versions 1\.0 and 1\.1 \(TLS 1\.0 and TLS 1\.1\) are deprecated\. In accordance with security best practices, Oracle has deprecated the use of TLS 1\.0 and TLS 1\.1\. To meet your security requirements, RDS for Oracle strongly recommends that you use TLS 1\.2 instead\.

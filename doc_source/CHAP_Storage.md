@@ -23,7 +23,7 @@ General Purpose SSD storage offers cost\-effective storage that is acceptable fo
 + MariaDB, MySQL, Oracle, and PostgreSQL database instances: 20 GiB–64 TiB
 + SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB
 
-Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. And baseline performance for a 5\.34\-TiB volume is 16,000 IOPS\.
+Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(5\.34 TiB and greater\) is 16,000 IOPS\.
 
 Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
 
@@ -69,7 +69,7 @@ For a production application that requires fast and consistent I/O performance, 
 **Note**  
 Your database workload might not be able to achieve 100 percent of the IOPS that you have provisioned\. For more information, see [Factors that affect storage performance](#CHAP_Storage.Other.Factors)\.
 
-When you create a DB instance, you specify the IOPS rate and the size of the volume\. The ratio of IOPS to allocated storage \(in GiB\) must be at least 0\.5\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
+When you create a DB instance, you specify the IOPS rate and the size of the volume\. The ratio of IOPS to allocated storage \(in GiB\) must be at least 0\.5 \(1\.0 on RDS for SQL Server\) and not more than 50\. Amazon RDS provides that IOPS rate for the DB instance until you change it\.
 
 The following table shows the range of Provisioned IOPS and storage size range for each database engine\.
 

@@ -295,7 +295,7 @@ https://rds.amazonaws.com/
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256
     &Timestamp=2009-10-14T17%3A48%3A21.746Z
-    &AWSAccessKeyId=<AWS Access Key ID>
+    &AWSAccessKeyId=<&AWS; Access Key ID>
     &Signature=<Signature>
 ```
 
