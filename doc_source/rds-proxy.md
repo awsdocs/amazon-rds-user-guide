@@ -264,7 +264,7 @@ subnet_id_6
  When you create a proxy through the AWS CLI or RDS API, you specify the Amazon Resource Names \(ARNs\) of the corresponding secrets for all the DB user accounts that the proxy can access\. In the AWS Management Console, you choose the secrets by their descriptive names\. 
 
  For instructions about creating secrets in Secrets Manager, see the [Creating a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html) page in the Secrets Manager documentation\. Use one of the following techniques: 
-+  Use [Secrets Manager](https://aws.amazon.com/secrets-manager/) in the console\. 
++  Use [Secrets Manager](http://aws.amazon.com/secrets-manager/) in the console\. 
 +  To use the CLI to create a Secrets Manager secret for use with RDS Proxy, use a command such as the following\. 
 
   ```

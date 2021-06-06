@@ -174,7 +174,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
 
 **To add an IAM role for a PostgreSQL DB instance using the console**
 
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)\. 
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. Choose the PostgreSQL DB instance name to display its details\.
 
@@ -310,9 +310,9 @@ SELECT * from aws_s3.query_export_to_s3('select * from basic_test', :'s3_uri_1',
 If you encounter connection problems when attempting to export data to Amazon S3, first confirm that the outbound access rules for the VPC security group associated with your DB instance permit network connectivity\. Specifically, they must allow access to port 443 for SSL connections\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
 
 See also the following for recommendations:
-+ [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md) 
-+ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide\.*
-+ [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the* IAM User Guide\.*
++ [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
++ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide*
++ [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the *IAM User Guide*
 
 ## Function reference<a name="postgresql-s3-export-functions"></a>
 

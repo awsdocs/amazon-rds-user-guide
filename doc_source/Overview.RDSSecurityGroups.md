@@ -77,7 +77,7 @@ DB VPC security groups are deprecated, and they are different from DB security g
 
 We strongly recommend that you delete any DB VPC security groups that you currently use\. If you don't delete your DB VPC security groups, you might encounter unintended behaviors with your DB instances, which can be as severe as losing access to a DB instance\. The unintended behaviors might result from taking an action such as an update to a DB instance, a parameter group, or similar\. Such updates cause RDS to resynchronize the DB VPC security group with the VPC security group\. This resynchronization can result in your security information being overwritten with incorrect and outdated security information\. This in turn can have a severe impact on your ability to access to your DB instances\.
 
-### How can I determine if I have a DB VPC security group?<a name="w283aac36c61c41b9"></a>
+### How can I determine if I have a DB VPC security group?<a name="w355aac36c61c41b9"></a>
 
 Because DB VPC security groups have been deprecated, they don't appear in the RDS console\. However, you can call the [describe\-db\-security\-groups](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-security-groups.html) AWS CLI command or the [DescribeDBSecurityGroups](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html) API operation to determine if you have any DB VPC security groups\.
 
@@ -129,13 +129,13 @@ If you run the `DescribeDBSecurityGroups` API operation, then you can identify D
 </DBSecurityGroup>
 ```
 
-### How do I delete a DB VPC security group?<a name="w283aac36c61c41c11"></a>
+### How do I delete a DB VPC security group?<a name="w355aac36c61c41c11"></a>
 
 Because DB VPC security groups don't appear in the RDS console, you must call the [delete\-db\-security\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/delete-db-security-group.html) AWS CLI command or the [DeleteDBSecurityGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBSecurityGroup.html) API operation to delete a DB VPC security group\.
 
 After you delete a DB VPC security group, your DB instances in your VPC continue to be secured by the VPC security group for that VPC\. The DB VPC security group that was deleted was merely a copy of the VPC security group information\.
 
-### Review your AWS CloudFormation templates<a name="w283aac36c61c41c13"></a>
+### Review your AWS CloudFormation templates<a name="w355aac36c61c41c13"></a>
 
 Older versions of AWS CloudFormation templates can contain instructions to create a DB VPC security group\. Because DB VPC security groups are not yet fully deprecated, they can still be created\. Make sure that any AWS CloudFormation templates that you use to provision a DB instance with security settings don't also create a DB VPC security group\. Don't use AWS CloudFormation templates that create an RDS `DBSecurityGroup` with an `EC2VpcId` as shown in the following example\.
 

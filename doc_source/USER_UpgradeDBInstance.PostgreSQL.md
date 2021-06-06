@@ -95,11 +95,11 @@ The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or lat
 | 9\.5\.15 | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) |  |  | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) | 
 | 9\.5\.14, 9\.5\.13, 9\.5\.12, 9\.5\.10, 9\.5\.9, 9\.5\.9, 9\.5\.7, 9\.5\.6, 9\.5\.4  | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) |  |  |  |  | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) | 
 
-To get a list of all valid upgrade targets for a current source version, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. For example:
+To get a list of all valid upgrade targets for a current source version in a particular AWS Region, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. For example:
 
 ```
-export REGION=AWS-Region                         
-export ENDPOINT=https://rds.AWS-Region.amazonaws.com
+export REGION=eu-central-1
+export ENDPOINT=https://rds.eu-central-1.amazonaws.com
 
 aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query '*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}' --engine-version DB-current-version
 ```

@@ -67,7 +67,7 @@ To connect securely to remote SSL/TLS resources, you can create and upload custo
    END;
    ```
 
-1. Access the URL from above over SSL/TLS\. The following example accesses https://status\.aws\.amazon\.com/robots\.txt\.
+1. Access the URL from above over SSL/TLS, as shown in the following example\.
 
    ```
    SELECT utl_http.request('https://status.aws.amazon.com/robots.txt') AS ROBOTS_TXT FROM DUAL;
@@ -81,6 +81,6 @@ To connect securely to remote SSL/TLS resources, you can create and upload custo
 **Note**  
 The specific certificates that are required for your wallet vary by service\. For AWS services, the certificates can typically be found in the [Amazon trust services repository](https://www.amazontrust.com/repository/)\.
 
-You can use a similar setup to send emails through UTL\_SMTP over SSL/TLS \(including [ Amazon Simple Email Service](https://aws.amazon.com/ses/)\)\.
+You can use a similar setup to send emails through UTL\_SMTP over SSL/TLS \(including [Amazon Simple Email Service](http://aws.amazon.com/ses/)\)\.
 
 You can establish database links between Oracle DB instances over an SSL/TLS endpoint if the Oracle SSL option is configured for each instance\. No further configuration is required\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 

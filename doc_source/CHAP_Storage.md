@@ -60,7 +60,7 @@ For workloads with steady state I/O requirements, provisioning less than 100 GiB
 **Note**  
 In general, most workloads never exceed the I/O credit balance\.
 
-For a more detailed description of how baseline performance and I/O credit balance affect performance see [Understanding burst vs\. baseline performance with Amazon RDS and GP2](https://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/)\. 
+For a more detailed description of how baseline performance and I/O credit balance affect performance see [Understanding burst vs\. baseline performance with Amazon RDS and GP2](http://aws.amazon.com/blogs/database/understanding-burst-vs-baseline-performance-with-amazon-rds-and-gp2/)\. 
 
 ## Provisioned IOPS SSD storage<a name="USER_PIOPS"></a>
 
@@ -230,4 +230,4 @@ For Oracle, scaling up to 80,000 IOPS is only supported on the following instanc
 + db\.x1\.32xlarge
 + db\.x1e\.32xlarge 
 
-For more details on all instance classes supported, see [Previous generation DB instances](https://aws.amazon.com/rds/previous-generation/)\.
+For more details on all instance classes supported, see [Previous generation DB instances](http://aws.amazon.com/rds/previous-generation/)\.

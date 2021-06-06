@@ -2,7 +2,7 @@
 
 For added disaster recovery capability, you can configure your Amazon RDS database instance to replicate snapshots and transaction logs to a destination AWS Region of your choice\. When backup replication is configured for a DB instance, RDS initiates a cross\-Region copy of all snapshots and transaction logs as soon as they are ready on the DB instance\.
 
-DB snapshot copy charges apply to the data transfer\. After the DB snapshot is copied, standard charges apply to storage in the destination Region\. For more details, see [RDS Pricing](https://aws.amazon.com/rds/oracle/pricing/)\.
+DB snapshot copy charges apply to the data transfer\. After the DB snapshot is copied, standard charges apply to storage in the destination Region\. For more details, see [RDS Pricing](http://aws.amazon.com/rds/oracle/pricing/)\.
 
 Backup replication is available for RDS DB instances running the following database engines:
 + Oracle Database version 12\.1\.0\.2\.v10 and higher

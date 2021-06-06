@@ -912,13 +912,13 @@ PostgreSQL version 9\.5\.6 on Amazon RDS also supports altering enum values\. Fo
 
 #### PostgreSQL version 9\.5\.4 on Amazon RDS<a name="PostgreSQL.Concepts.General.version954"></a>
 
-PostgreSQL version 9\.5\.4 contains several fixes to issue found in previous versions\. For more information on the fixes in 9\.5\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-4.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
+PostgreSQL version 9\.5\.4 contains several fixes to issues found in previous versions\. For more information on the fixes in 9\.5\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/static/release-9-5-4.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
 PostgreSQL supports the streaming of WAL changes using logical replication decoding\. Amazon RDS supports logical replication for PostgreSQL version 9\.5\.4 and higher\. For more information about PostgreSQL logical replication on Amazon RDS, see [Logical replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\. 
 
 Beginning with PostgreSQL version 9\.5\.4 for Amazon RDS, the command ALTER USER WITH BYPASSRLS is supported\. 
 
-PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. The master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
+PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. You can use the master user account to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\. For more information about PostgreSQL event triggers on Amazon RDS, see [Event triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)\.
 
 #### PostgreSQL version 9\.5\.2 on Amazon RDS<a name="PostgreSQL.Concepts.General.version952"></a>
 
@@ -1764,7 +1764,7 @@ local_id | external_id | remote_lsn | local_lsn
 
 ### Event triggers for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.EventTriggers"></a>
 
-PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. The master user account can be used to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\.
+PostgreSQL versions 9\.5\.4 and later support event triggers, and Amazon RDS supports event triggers for these versions\. You can use the master user account to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\.
 
 For example, the following code creates an event trigger that prints the current user at the end of every DDL command\.
 

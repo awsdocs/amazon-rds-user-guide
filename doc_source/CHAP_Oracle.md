@@ -307,7 +307,7 @@ Amazon RDS supports the BYOL model only for Oracle Database Enterprise Edition \
 
 #### Integrating with AWS License Manager<a name="oracle-lms-integration"></a>
 
-To make it easier to monitor Oracle license usage in the BYOL model, [ AWS License Manager](https://aws.amazon.com/license-manager/) integrates with Amazon RDS for Oracle\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
+To make it easier to monitor Oracle license usage in the BYOL model, [ AWS License Manager](http://aws.amazon.com/license-manager/) integrates with Amazon RDS for Oracle\. License Manager supports tracking of RDS for Oracle engine editions and licensing packs based on virtual cores \(vCPUs\)\. You can also use License Manager with AWS Organizations to manage all of your organizational accounts centrally\.
 
 The following table shows the product information filters for RDS for Oracle\.
 

@@ -97,7 +97,7 @@ On August 3, 2021, Amazon RDS plans to deprecate support for MySQL 5\.6 using th
 |  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  August 3, 2021  | 
 |  Amazon RDS automatically upgrades any remaining MySQL 5\.6 DB instances to version 5\.7 whether or not they are in a maintenance window\.  |  September 1, 2021  | 
 
-For more information, see [ Announcement: Amazon Relational Database Service \(RDS\) for MySQL 5\.6 End\-of\-Life date is August 3, 2021](https://forums.aws.amazon.com/ann.jspa?annID=8498)\.
+For more information, see [ Announcement: Amazon Relational Database Service \(RDS\) for MySQL 5\.6 End\-of\-Life date is August 3, 2021](http://forums.aws.amazon.com/ann.jspa?annID=8498)\.
 
 ### Deprecation of MySQL version 5\.5<a name="MySQL.Concepts.VersionMgmt.Deprecation55"></a>
 
@@ -113,7 +113,7 @@ On May 25, 2021, Amazon RDS plans to deprecate support for MySQL 5\.5 using the 
 |  Amazon RDS starts automatic upgrades to version 5\.6 for any MySQL 5\.5 DB instances restored from snapshots\.  |  March 29, 2021  | 
 |  Amazon RDS automatically upgrades any remaining MySQL 5\.5 DB instances to version 5\.6 whether or not they are in a maintenance window\.  |  May 25, 2021  | 
 
-For more information, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.5](https://forums.aws.amazon.com/ann.jspa?annID=8570)\.
+For more information, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.5](http://forums.aws.amazon.com/ann.jspa?annID=8570)\.
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 

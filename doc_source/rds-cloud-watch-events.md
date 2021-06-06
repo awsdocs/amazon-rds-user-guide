@@ -1,4 +1,4 @@
-# Creating a rule that triggers on an Amazon RDS<a name="rds-cloud-watch-events"></a>
+# Creating a rule that triggers on an Amazon RDS event<a name="rds-cloud-watch-events"></a>
 
 Using Amazon CloudWatch Events and Amazon EventBridge, you can automate AWS services and respond to system events such as application availability issues or resource changes\. 
 

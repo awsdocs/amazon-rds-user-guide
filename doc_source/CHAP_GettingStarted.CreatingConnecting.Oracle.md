@@ -3,7 +3,7 @@
 The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB instance is similar to your on\-premises Oracle database\. 
 
 **Important**  
-You must have an AWS account before you can create a DB instance\. If you don't have an AWS account, open [https://aws\.amazon\.com/](https://aws.amazon.com/), and then choose **Create an AWS Account**\. 
+Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
 In this topic, you create a sample Oracle DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\. 
 

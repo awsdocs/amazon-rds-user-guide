@@ -24,5 +24,5 @@ Each connection to the MySQL server runs in a separate thread\. To end a connect
 The following example ends a connection with a thread ID of 4243:
 
 ```
-call mysql.rds_kill(4243);               
+call mysql.rds_kill(4243);
 ```

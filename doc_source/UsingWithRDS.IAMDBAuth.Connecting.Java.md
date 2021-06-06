@@ -246,7 +246,7 @@ To run this code example, you need the [AWS SDK for Java](http://aws.amazon.com/
   + `DB_USER` – The database account that you want to access\.
   + `SSL_CERTIFICATE` – An SSL certificate for Amazon RDS that is specific to an AWS Region\.
 
-    To download a certificate for your AWS Region, see [Intermediate certificates](UsingWithRDS.SSL.md#UsingWithRDS.SSL.IntermediateCertificates)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
+    To download a certificate for your AWS Region, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\. Place the SSL certificate in the same directory as this Java program file, so that the class loader can find the certificate at runtime\.
 
 This code example obtains AWS credentials from the [default credential provider chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default)\.
 

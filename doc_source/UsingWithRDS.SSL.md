@@ -7,74 +7,55 @@ You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from
 + [Encrypting client connections with SSL](Oracle.Concepts.SSL.md)
 + [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)
 
-**Important**  
-For information about rotating your certificate, see [Rotating your SSL/TLS certificate](UsingWithRDS.SSL-certificate-rotation.md)\.
-
 **Note**  
 All certificates are only available for download using SSL/TLS connections\.
 
-To get a root certificate that works for all AWS Regions, excluding opt\-in AWS Regions, download it from [ https://s3\.amazonaws\.com/rds\-downloads/rds\-ca\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem)\.
+To get a certificate bundle that contains both the intermediate and root certificates for all AWS Regions, download from [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem)\. 
 
-This root certificate is a trusted root entity and should work in most cases but might fail if your application doesn't accept certificate chains\. If your application doesn't accept certificate chains, download the AWS Region–specific certificate from the list of intermediate certificates found later in this section\.
-
-To get a certificate bundle that contains both the intermediate and root certificates, download from [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)\. 
-
-If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://s3\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-bundle\.p7b](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.p7b)\. 
+If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/global/global-bundle.p7b)\. 
 
 **Note**  
 Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
 
-## Root certificates for opt\-in AWS Regions<a name="UsingWithRDS.SSL.RootCertificatesOptIn"></a>
+## Certificate bundles for AWS Regions<a name="UsingWithRDS.SSL.RegionCertificates"></a>
 
-If you are using an opt\-in AWS Region, you can download the root certificate from the following table\.
-
-
-| **Opt\-in AWS Region** | **Root certificate** | 
-| --- | --- | 
-| Africa \(Cape Town\) | [rds\-ca\-af\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-af-south-1-2019-root.pem) | 
-| Asia Pacific \(Hong Kong\) | [rds\-ca\-ap\-east\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-ap-east-1-2019-root.pem) | 
-| Europe \(Milan\) | [rds\-ca\-eu\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-eu-south-1-2019-root.pem) | 
-| Middle East \(Bahrain\) | [rds\-ca\-me\-south\-1\-2019\-root\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-me-south-1-2019-root.pem) | 
-
-## Intermediate certificates<a name="UsingWithRDS.SSL.IntermediateCertificates"></a>
-
-You might need to use an intermediate certificate to connect to your AWS Region\. For example, you must use an intermediate certificate to connect to the AWS GovCloud \(US\-West\) Region using SSL/TLS\. If you need an intermediate certificate for a particular AWS Region, download the certificate from the following table\.
+To get a certificate bundle that contains both the intermediate and root certificates for an AWS Region, download from the link for the AWS Region in the following table\.
 
 
-| **AWS Region** | **Intermediate certificate** | 
-| --- | --- | 
-| Asia Pacific \(Mumbai\) | [rds\-ca\-2019\-ap\-south\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-south-1.pem) | 
-| Asia Pacific \(Tokyo\) | [rds\-ca\-2019\-ap\-northeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-1.pem) | 
-| Asia Pacific \(Seoul\) | [rds\-ca\-2019\-ap\-northeast\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-2.pem) | 
-| Asia Pacific \(Osaka\) | [rds\-ca\-2019\-ap\-northeast\-3\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-northeast-3.pem) | 
-| Asia Pacific \(Singapore\) | [rds\-ca\-2019\-ap\-southeast\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-southeast-1.pem) | 
-| Asia Pacific \(Sydney\) | [rds\-ca\-2019\-ap\-southeast\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ap-southeast-2.pem) | 
-| Canada \(Central\) | [rds\-ca\-2019\-ca\-central\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-ca-central-1.pem) | 
-| Europe \(Frankfurt\) | [rds\-ca\-2019\-eu\-central\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-eu-central-1.pem) | 
-| Europe \(Ireland\) | [rds\-ca\-2019\-eu\-west\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-eu-west-1.pem) | 
-| Europe \(London\) | [rds\-ca\-2019\-eu\-west\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-eu-west-2.pem) | 
-| Europe \(Paris\) | [rds\-ca\-2019\-eu\-west\-3\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-eu-west-3.pem) | 
-| Europe \(Stockholm\) | [rds\-ca\-2019\-eu\-north\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-eu-north-1.pem) | 
-| South America \(São Paulo\) | [rds\-ca\-2019\-sa\-east\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-sa-east-1.pem) | 
-| US East \(N\. Virginia\) | [rds\-ca\-2019\-us\-east\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-east-1.pem) | 
-| US East \(Ohio\) | [rds\-ca\-2019\-us\-east\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-east-2.pem) | 
-| US West \(N\. California\) | [rds\-ca\-2019\-us\-west\-1\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-1.pem) | 
-| US West \(Oregon\) | [rds\-ca\-2019\-us\-west\-2\.pem](https://s3.amazonaws.com/rds-downloads/rds-ca-2019-us-west-2.pem) | 
+| **AWS Region** | **Certificate bundle \(PEM\)** | **Certificate bundle \(PKCS7\)** | 
+| --- | --- | --- | 
+| US East \(N\. Virginia\) | [us\-east\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/us-east-1/us-east-1-bundle.pem) | [us\-east\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/us-east-1/us-east-1-bundle.p7b) | 
+| US East \(Ohio\) | [us\-east\-2\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/us-east-2/us-east-2-bundle.pem) | [us\-east\-2\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/us-east-2/us-east-2-bundle.p7b) | 
+| US West \(N\. California\) | [us\-west\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/us-west-1/us-west-1-bundle.pem) | [us\-west\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/us-west-1/us-west-1-bundle.p7b) | 
+| US West \(Oregon\) | [us\-west\-2\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/us-west-2/us-west-2-bundle.pem) | [us\-west\-2\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/us-west-2/us-west-2-bundle.p7b) | 
+| Africa \(Cape Town\) | [af\-south\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/af-south-1/af-south-1-bundle.pem) | [af\-south\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/af-south-1/af-south-1-bundle.p7b) | 
+| Asia Pacific \(Hong Kong\) | [ap\-east\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-east-1/ap-east-1-bundle.pem) | [ap\-east\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-east-1/ap-east-1-bundle.p7b) | 
+| Asia Pacific \(Mumbai\) | [ap\-south\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-south-1/ap-south-1-bundle.pem) | [ap\-south\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-south-1/ap-south-1-bundle.p7b) | 
+| Asia Pacific \(Osaka\) | [ap\-northeast\-3\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-northeast-3/ap-northeast-3-bundle.pem) | [ap\-northeast\-3\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-northeast-3/ap-northeast-3-bundle.p7b) | 
+| Asia Pacific \(Tokyo\) | [ap\-northeast\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-northeast-1/ap-northeast-1-bundle.pem) | [ap\-northeast\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-northeast-1/ap-northeast-1-bundle.p7b) | 
+| Asia Pacific \(Seoul\) | [ap\-northeast\-2\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-northeast-2/ap-northeast-2-bundle.pem) | [ap\-northeast\-2\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-northeast-2/ap-northeast-2-bundle.p7b) | 
+| Asia Pacific \(Singapore\) | [ap\-southeast\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-southeast-1/ap-southeast-1-bundle.pem) | [ap\-southeast\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-southeast-1/ap-southeast-1-bundle.p7b) | 
+| Asia Pacific \(Sydney\) | [ap\-southeast\-2\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ap-southeast-2/ap-southeast-2-bundle.pem) | [ap\-southeast\-2\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ap-southeast-2/ap-southeast-2-bundle.p7b) | 
+| Canada \(Central\) | [ca\-central\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/ca-central-1/ca-central-1-bundle.pem) | [ca\-central\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/ca-central-1/ca-central-1-bundle.p7b) | 
+| Europe \(Frankfurt\) | [eu\-central\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-central-1/eu-central-1-bundle.pem) | [eu\-central\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-central-1/eu-central-1-bundle.p7b) | 
+| Europe \(Ireland\) | [eu\-west\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-west-1/eu-west-1-bundle.pem) | [eu\-west\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-west-1/eu-west-1-bundle.p7b) | 
+| Europe \(London\) | [eu\-west\-2\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-west-2/eu-west-2-bundle.pem) | [eu\-west\-2\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-west-2/eu-west-2-bundle.p7b) | 
+| Europe \(Milan\) | [eu\-south\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-south-1/eu-south-1-bundle.pem) | [eu\-south\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-south-1/eu-south-1-bundle.p7b) | 
+| Europe \(Paris\) | [eu\-west\-3\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-west-3/eu-west-3-bundle.pem) | [eu\-west\-3\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-west-3/eu-west-3-bundle.p7b) | 
+| Europe \(Stockholm\) | [eu\-north\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/eu-north-1/eu-north-1-bundle.pem) | [eu\-north\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/eu-north-1/eu-north-1-bundle.p7b) | 
+| Middle East \(Bahrain\) | [me\-south\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/me-south-1/me-south-1-bundle.pem) | [me\-south\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/me-south-1/me-south-1-bundle.p7b) | 
+| South America \(São Paulo\) | [sa\-east\-1\-bundle\.pem](https://truststore.pki.rds.amazonaws.com/sa-east-1/sa-east-1-bundle.pem) | [sa\-east\-1\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/sa-east-1/sa-east-1-bundle.p7b) | 
 
 ## AWS GovCloud \(US\) certificates<a name="UsingWithRDS.SSL.GovCloudCertificates"></a>
 
-You can download the root certificate for an AWS GovCloud \(US\) Region from the following list:
+To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://truststore\.pki\.us\-gov\-west\-1\.rds\.amazonaws\.com/global/global\-bundle\.pem](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/global/global-bundle.pem)\. 
 
-[AWS GovCloud \(US\-East\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-east-1-2017-root.pem) \(Root CA\-2017\)
+If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://truststore\.pki\.us\-gov\-west\-1\.rds\.amazonaws\.com/global/global\-bundle\.p7b](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/global/global-bundle.p7b)\. 
 
-[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-us-gov-west-1-2017-root.pem) \(Root CA\-2017\)
+To get a certificate bundle that contains both the intermediate and root certificates for an AWS GovCloud \(US\) Region, download from the link for the AWS GovCloud \(US\) Region in the following table\.
 
-You can download the intermediate certificate for an AWS GovCloud \(US\) Region from the following list:
 
-[AWS GovCloud \(US\-East\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-east-1-intermediate.pem) \(CA\-2017\)
-
-[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2017-us-gov-west-1.pem) \(CA\-2017\)
-
-[AWS GovCloud \(US\-West\)](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-ca-2012-us-gov-west-1.pem) \(CA\-2012\)
-
-To get a certificate bundle that contains both the intermediate and root certificates for the AWS GovCloud \(US\) Regions, download from [ https://s3\.us\-gov\-west\-1\.amazonaws\.com/rds\-downloads/rds\-combined\-ca\-us\-gov\-bundle\.pem](https://s3.us-gov-west-1.amazonaws.com/rds-downloads/rds-combined-ca-us-gov-bundle.pem)\. 
+| **AWS GovCloud \(US\) Region** | **Certificate bundle \(PEM\)** | **Certificate bundle \(PKCS7\)** | 
+| --- | --- | --- | 
+| AWS GovCloud \(US\-East\) | [us\-gov\-east\-1\-bundle\.pem](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/us-gov-east-1/us-gov-east-1-bundle.pem) | [us\-gov\-east\-1\-bundle\.p7b](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/us-gov-east-1/us-gov-east-1-bundle.p7b) | 
+| AWS GovCloud \(US\-West\) | [us\-gov\-west\-1\-bundle\.pem](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/us-gov-west-1/us-gov-west-1-bundle.pem) | [us\-gov\-west\-1\-bundle\.p7b](https://truststore.pki.us-gov-west-1.rds.amazonaws.com/us-gov-west-1/us-gov-west-1-bundle.p7b) | 

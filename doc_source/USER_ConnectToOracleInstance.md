@@ -149,7 +149,7 @@ Server processes handle user connections to an Oracle DB instance\. By default, 
 
 You might consider using shared server processes when a high number of user sessions are using too much memory on the server\. You might also consider shared server processes when sessions connect and disconnect very often, resulting in performance issues\. There are also disadvantages to using shared server processes\. For example, they can strain CPU resources, and they are more complicated to configure and administer\.
 
-For more information about dedicated and shared server processes, see [About dedicated and shared server processes](https://docs.oracle.com/database/121/ADMIN/manproc.htm#ADMIN11166) in the Oracle documentation\. For more information about configuring shared server processes on an RDS for Oracle DB instance, see [How do I configure Amazon RDS for Oracle database to work with shared servers?](https://aws.amazon.com/premiumsupport/knowledge-center/oracle-db-shared/) in the Knowledge Center\.
+For more information about dedicated and shared server processes, see [About dedicated and shared server processes](https://docs.oracle.com/database/121/ADMIN/manproc.htm#ADMIN11166) in the Oracle documentation\. For more information about configuring shared server processes on an RDS for Oracle DB instance, see [How do I configure Amazon RDS for Oracle database to work with shared servers?](http://aws.amazon.com/premiumsupport/knowledge-center/oracle-db-shared/) in the Knowledge Center\.
 
 ## Troubleshooting connections to your Oracle DB instance<a name="USER_ConnectToOracleInstance.Troubleshooting"></a>
 

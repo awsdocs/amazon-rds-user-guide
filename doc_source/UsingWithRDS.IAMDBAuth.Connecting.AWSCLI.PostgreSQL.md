@@ -16,7 +16,7 @@ For information about connecting to your database using pgAdmin with IAM authent
 
 ## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.AWSCLI.AuthToken.PostgreSQL"></a>
 
-The authentication token consists of several hundred characters so it can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows how to use the AWS CLI to get a signed authentication token using the `generated-db-auth-token` command, and store it in a `PGPASSWORD` environment variable\.
+The authentication token consists of several hundred characters so it can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows how to use the AWS CLI to get a signed authentication token using the `generate-db-auth-token` command, and store it in a `PGPASSWORD` environment variable\.
 
 ```
 export RDSHOST="rdspostgres.123456789012.us-west-2.rds.amazonaws.com"

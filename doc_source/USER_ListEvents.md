@@ -3,7 +3,7 @@
 You can retrieve events for your RDS resources through the AWS Management Console, which shows events from the past 24 hours\. You can also retrieve events for your RDS resources by using the [describe\-events](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-events.html) AWS CLI command, or the [DescribeEvents](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html) RDS API operation\. If you use the AWS CLI or the RDS API to view events, you can retrieve events for up to the past 14 days\. 
 
 **Note**  
-If you need to store events for longer periods of time, you can send Amazon RDS events to CloudWatch Events\. For more information, see [Creating a rule that triggers on an Amazon RDS](rds-cloud-watch-events.md)
+If you need to store events for longer periods of time, you can send Amazon RDS events to CloudWatch Events\. For more information, see [Creating a rule that triggers on an Amazon RDS event](rds-cloud-watch-events.md)
 
 ## Console<a name="USER_ListEvents.CON"></a>
 

@@ -7,7 +7,7 @@ The legacy *EC2\-Classic* platform is the original platform used by Amazon RDS\.
 **Important**  
 If you are a new Amazon RDS customer, if you have never created a DB instance before, or if you are creating a DB instance in an AWS Region you have not used before, in almost all cases you are on the *EC2\-VPC* platform and have a default VPC\.
 
-You can tell which platform your AWS account in a given AWS Region is using by looking at the dashboard on the [RDS console](https://console.aws.amazon.com/rds/) or [EC2](https://console.aws.amazon.com/ec2/) console\. If you are a new Amazon RDS customer, if you have never created a DB instance before, or if you are creating a DB instance in an AWS Region you have not used before, you might be redirected to the first\-run console page and not see the home page following\.
+You can tell which platform your AWS account in a given AWS Region is using by looking at the dashboard on the [RDS console](https://console.aws.amazon.com/rds/) or [EC2 console](https://console.aws.amazon.com/ec2/)\. If you are a new Amazon RDS customer, if you have never created a DB instance before, or if you are creating a DB instance in an AWS Region you have not used before, you might be redirected to the first\-run console page and not see the home page following\.
 
 ## EC2\-VPC platform in the console<a name="USER_VPC.FindDefaultVPC.EC2-VPC-Platform"></a>
 

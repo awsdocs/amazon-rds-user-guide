@@ -306,7 +306,7 @@ AWS Backup is a fully managed backup service that makes it easy to centralize an
 To enable backups in AWS Backup, you use resource tagging to associate your DB instance with a backup plan\. For more information, see [Using tags to enable backups in AWS Backup](USER_Tagging.md#Tagging.RDS.AWSBackup)\.
 
 **Note**  
-Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:AWS-Backup-job-number`\. 
+Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the DB snapshot quota for RDS\. Backups that were created with AWS Backup have names ending in `awsbackup:backup-job-number`\.
 
 For more information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 

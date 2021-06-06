@@ -118,7 +118,7 @@ You can change the compatibility level of a database by using the ALTER DATABASE
 
 ## Multi\-AZ and in\-memory optimization considerations<a name="USER_UpgradeDBInstance.SQLServer.MAZ"></a>
 
-Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. For more information, see [Multi\-AZ deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.
+Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL Server by using SQL Server Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. For more information, see [Multi\-AZ deployments for Amazon RDS for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.
 
 If your DB instance is in a Multi\-AZ deployment, both the primary and standby instances are upgraded\. Amazon RDS does rolling upgrades\. You have an outage only for the duration of a failover\.
 
@@ -169,7 +169,7 @@ Before you perform a major version upgrade on your DB instance, you should thoro
 
 For information about manually or automatically upgrading a SQL Server DB instance, see the following:
 + [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)
-+ [Best practices for upgrading SQL Server 2008 R2 to SQL Server 2016 on Amazon RDS for SQL Server](https://aws.amazon.com/blogs/database/best-practices-for-upgrading-sql-server-2008-r2-to-sql-server-2016-on-amazon-rds-for-sql-server/)
++ [Best practices for upgrading SQL Server 2008 R2 to SQL Server 2016 on Amazon RDS for SQL Server](http://aws.amazon.com/blogs/database/best-practices-for-upgrading-sql-server-2008-r2-to-sql-server-2016-on-amazon-rds-for-sql-server/)
 
 **Important**  
 If you have any snapshots that are encrypted using AWS KMS, we recommend that you initiate an upgrade before support ends\. 

@@ -114,11 +114,11 @@ The following list of DB instance classes supported for Microsoft SQL Server is 
 
 ## Microsoft SQL Server security<a name="SQLServer.Concepts.General.FeatureSupport.UnsupportedRoles"></a>
 
-The Microsoft SQL Server database engine uses role\-based security\. The master user name you use when you create a DB instance is a SQL Server Authentication login that is a member of the `processadmin`, `public`, and `setupadmin` fixed server roles\. 
+The Microsoft SQL Server database engine uses role\-based security\. The master user name that you specify when you create a DB instance is a SQL Server Authentication login that is a member of the `processadmin`, `public`, and `setupadmin` fixed server roles\.
 
-Any user who creates a database is assigned to the db\_owner role for that database and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\. 
+Any user who creates a database is assigned to the db\_owner role for that database and has all database\-level permissions except for those that are used for backups\. Amazon RDS manages backups for you\.
 
-The following server\-level roles are not currently available in Amazon RDS: 
+The following server\-level roles aren't available in Amazon RDS for SQL Server:
 + bulkadmin
 + dbcreator
 + diskadmin
@@ -126,10 +126,10 @@ The following server\-level roles are not currently available in Amazon RDS:
 + serveradmin
 + sysadmin
 
-The following server\-level permissions are not available on SQL Server DB instances: 
+The following server\-level permissions aren't available on RDS for SQL Server DB instances:
 + ALTER ANY CREDENTIAL
++ ALTER ANY DATABASE
 + ALTER ANY EVENT NOTIFICATION
-+ ALTER ANY EVENT SESSION
 + ALTER RESOURCES
 + ALTER SETTINGS \(you can use the DB parameter group API operations to modify parameters; for more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\) 
 + AUTHENTICATE SERVER
@@ -137,6 +137,7 @@ The following server\-level permissions are not available on SQL Server DB insta
 + CREATE DDL EVENT NOTIFICATION
 + CREATE ENDPOINT
 + CREATE TRACE EVENT NOTIFICATION
++ DROP ANY DATABASE
 + EXTERNAL ACCESS ASSEMBLY
 + SHUTDOWN \(You can use the RDS reboot option instead\)
 + UNSAFE ASSEMBLY
@@ -145,11 +146,11 @@ The following server\-level permissions are not available on SQL Server DB insta
 
 ## Compliance program support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.Compliance"></a>
 
-AWS Services in scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS services in scope by compliance program](https://aws.amazon.com/compliance/services-in-scope/)\.
+AWS Services in scope have been fully assessed by a third\-party auditor and result in a certification, attestation of compliance, or Authority to Operate \(ATO\)\. For more information, see [AWS services in scope by compliance program](http://aws.amazon.com/compliance/services-in-scope/)\.
 
 ### HIPAA support for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.HIPAA"></a>
 
-You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA compliance](https://aws.amazon.com/compliance/hipaa-compliance/)\.
+You can use Amazon RDS for Microsoft SQL Server databases to build HIPAA\-compliant applications\. You can store healthcare\-related information, including protected health information \(PHI\), under a Business Associate Agreement \(BAA\) with AWS\. For more information, see [HIPAA compliance](http://aws.amazon.com/compliance/hipaa-compliance/)\.
 
 Amazon RDS for SQL Server supports HIPAA for the following versions and editions:
 + SQL Server 2019 Enterprise, Standard, and Web Editions
@@ -325,11 +326,12 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + Custom password policies
 + Data Quality Services
 + Database Log Shipping
++ Database snapshots \(Amazon RDS supports only DB instance snapshots\)
 + Extended stored procedures, including xp\_cmdshell
 + FILESTREAM support
 + File tables
 + Machine Learning and R Services \(requires OS access to install it\)
-+ Maintenance Plans
++ Maintenance plans
 + Performance Data Collector
 + Policy\-Based Management
 + PolyBase
@@ -342,7 +344,7 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + WCF Data Services
 
 The following Microsoft SQL Server features have limited support on Amazon RDS: 
-+ Distributed Queries / Linked Servers\. For more information, see: [Implementing linked servers with Amazon RDS for Microsoft SQL Server](https://aws.amazon.com/blogs/database/implement-linked-servers-with-amazon-rds-for-microsoft-sql-server/)\.
++ Distributed queries/linked servers\. For more information, see [Implement linked servers with Amazon RDS for Microsoft SQL Server](http://aws.amazon.com/blogs/database/implement-linked-servers-with-amazon-rds-for-microsoft-sql-server/)\.
 
 ## Multi\-AZ deployments using Microsoft SQL Server Database Mirroring or Always On availability groups<a name="SQLServer.Concepts.General.Mirroring"></a>
 
@@ -350,7 +352,7 @@ Amazon RDS supports Multi\-AZ deployments for DB instances running Microsoft SQL
 
 Amazon RDS manages failover by actively monitoring your Multi\-AZ deployment and initiating a failover when a problem with your primary occurs\. Failover doesn't occur unless the standby and primary are fully in sync\. Amazon RDS actively maintains your Multi\-AZ deployment by automatically repairing unhealthy DB instances and re\-establishing synchronous replication\. You don't have to manage anything\. Amazon RDS handles the primary, the witness, and the standby instance for you\. When you set up SQL Server Multi\-AZ, RDS configures passive secondary instances for all of the databases on the instance\. 
 
-For more information, see [Multi\-AZ deployments for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\. 
+For more information, see [Multi\-AZ deployments for Amazon RDS for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\. 
 
 ## Using Transparent Data Encryption to encrypt data at rest<a name="SQLServer.Concepts.General.Options"></a>
 

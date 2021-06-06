@@ -24,5 +24,5 @@ To stop a query running against the MySQL server, use the `mysql_rds_kill_query`
 The following example stops a query with a thread ID of 230040:
 
 ```
-call mysql.rds_kill_query(230040);               
+call mysql.rds_kill_query(230040);
 ```

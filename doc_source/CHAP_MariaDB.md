@@ -89,7 +89,7 @@ On May 18, 2021, Amazon RDS plans to deprecate support for MariaDB 10\.0 and 10\
 |  Amazon RDS starts automatic upgrades to version 10\.2 for any MariaDB 10\.0 and 10\.1 DB instances restored from snapshots\.  |  March 22, 2021  | 
 |  Amazon RDS automatically upgrades any remaining MariaDB 10\.0 and 10\.1 DB instances to version 10\.2 whether or not they are in a maintenance window\.  |  May 18, 2021  | 
 
-For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](https://forums.aws.amazon.com/ann.jspa?annID=8571)\.
+For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](http://forums.aws.amazon.com/ann.jspa?annID=8571)\.
 
 For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
 

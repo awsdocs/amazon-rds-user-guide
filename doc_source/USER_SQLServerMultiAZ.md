@@ -1,4 +1,4 @@
-# Multi\-AZ deployments for Microsoft SQL Server<a name="USER_SQLServerMultiAZ"></a>
+# Multi\-AZ deployments for Amazon RDS for Microsoft SQL Server<a name="USER_SQLServerMultiAZ"></a>
 
 Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\. In the event of planned database maintenance or unplanned service disruption, Amazon RDS automatically fails over to the up\-to\-date secondary DB instance\. This functionality lets database operations resume quickly without manual intervention\. The primary and standby instances use the same endpoint, whose physical network address transitions to the secondary replica as part of the failover process\. You don't have to reconfigure your application when a failover occurs\. 
 
@@ -53,11 +53,11 @@ When you modify an existing SQL Server DB instance using the AWS Management Cons
 If your DB instance is running Database Mirroring \(DBM\)—not Always On Availability Groups \(AGs\)—you might need to disable in\-memory optimization before you add Multi\-AZ\. Disable in\-memory optimization with DBM before you add Multi\-AZ if your DB instance runs SQL Server 2014, 2016, or 2017 Enterprise Edition and has in\-memory optimization enabled\.   
 If your DB instance is running AGs, it doesn't require this step\. 
 
-## Microsoft SQL Server Multi\-AZ deployment notes and recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
+## Microsoft SQL Server Multi\-AZ deployment limitations, notes, and recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 
-The following are some restrictions when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
+The following are some limitations when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
 + Cross\-Region Multi\-AZ isn't supported\.
-+ You can't configure the secondary DB instance to accept database read activity\. 
++ You can't configure the secondary DB instance to accept database read activity\.
 + Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\.
 + Multi\-AZ with Always On Availability Groups \(AGs\) doesn't support Kerberos authentication for the availability group listener\. This is because the listener has no Service Principal Name \(SPN\)\.
 + You can't rename a database on a SQL Server DB instance that is in a SQL Server Multi\-AZ deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ for the DB instance, then rename the database\. Finally, turn Multi\-AZ back on for the DB instance\. 
@@ -74,6 +74,9 @@ The following are some notes about working with Multi\-AZ deployments for Micros
 + If you have SQL Server Agent jobs, recreate them on the secondary\. You do so because these jobs are stored in the msdb database, and you can't replicate this database by using Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. Create the jobs first in the original primary, then fail over, and create the same jobs in the new primary\. 
 + You might observe elevated latencies compared to a standard DB instance deployment \(in a single Availability Zone\) because of the synchronous data replication\. 
 + Failover times are affected by the time it takes to complete the recovery process\. Large transactions increase the failover time\. 
++ In SQL Server Multi\-AZ deployments, when the primary DB instance is running normally \(no failure\), if you reboot with failover the primary and secondary aren't rebooted\. Instead, the roles of the primary and secondary DB instances are switched\.
+
+  To make a static parameter modification, reboot without failover to force both the primary and secondary DB instances to shut down and restart\. Then they both make the parameter modification\.
 
 The following are some recommendations for working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
 + For databases used in production or preproduction, we recommend the following options:
@@ -148,10 +151,10 @@ You can determine the location of the secondary replica by using the AWS Managem
 
 You can also view the Availability Zone of the secondary using the AWS CLI command `describe-db-instances` or RDS API operation `DescribeDBInstances`\. The output shows the secondary AZ where the standby mirror is located\. 
 
-## Migrating from Database Mirroring to Always On availability groups<a name="USER_SQLServerMultiAZ.Migration"></a>
+## Migrating from Database Mirroring to Always On Availability Groups<a name="USER_SQLServerMultiAZ.Migration"></a>
 
-In version 14\.00\.3049\.1 of Microsoft SQL Server Enterprise edition, Always On availability groups \(AGs\) is enabled by default\.
+In version 14\.00\.3049\.1 of Microsoft SQL Server Enterprise Edition, Always On Availability Groups \(AGs\) are enabled by default\.
 
-To migrate from Database Mirroring \(DBM\) to AGs, first check your version\. If you are using a DB instance with a version prior to Enterprise Edition 13\.00\.5216\.0, modify the instance to patch it to 13\.00\.5216\.0 or later\. If you are using a DB instance with a version prior to Enterprise Edition 14\.00\.3049\.1, modify the instance to patch it to 14\.00\.3049\.1 or later\. 
+To migrate from Database Mirroring \(DBM\) to AGs, first check your version\. If you are using a DB instance with a version prior to Enterprise Edition 13\.00\.5216\.0, modify the instance to patch it to 13\.00\.5216\.0 or later\. If you are using a DB instance with a version prior to Enterprise Edition 14\.00\.3049\.1, modify the instance to patch it to 14\.00\.3049\.1 or later\.
 
-If you want to upgrade a mirrored DB instance to use AGs, run the upgrade first, modify the instance to remove Multi\-AZ, and then modify it again to add Multi\-AZ\. This converts your instance to use Always On AGs\. 
+If you want to upgrade a mirrored DB instance to use AGs, run the upgrade first, modify the instance to remove Multi\-AZ, and then modify it again to add Multi\-AZ\. This converts your instance to use Always On AGs\.

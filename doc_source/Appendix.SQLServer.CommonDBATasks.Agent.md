@@ -8,7 +8,11 @@ To view the history of an individual SQL Server Agent job in the SQL Server Mana
 
 Because SQL Server Agent is running on a managed host in a DB instance, there are some actions that are not supported\. Running replication jobs and running command\-line scripts by using ActiveX, Windows command shell, or Windows PowerShell are not supported\. In addition, you cannot manually start, stop, or restart SQL Server Agent because its operation is managed by the host\. Email notifications through SQL Server Agent are not available from a DB instance\. 
 
-When you create a SQL Server DB instance, the master user name is enrolled in the SQLAgentUserRole role\. To allow an additional login/user to use SQL Server Agent, you must log in as the master user and do the following\. 
+When you create a SQL Server DB instance, the master user name is enrolled in the SQLAgentUserRole role\.
+
+## Adding a user to the SQLAgentUser role<a name="Appendix.SQLServer.CommonDBATasks.Agent.AddUser"></a>
+
+To allow an additional login/user to use SQL Server Agent, you must log in as the master user and do the following:
 
 1. Create another server\-level login by using the `CREATE LOGIN` command\. 
 
@@ -16,35 +20,49 @@ When you create a SQL Server DB instance, the master user name is enrolled in th
 
 1. Add the user to the SQLAgentUserRole using the `sp_addrolemember` system stored procedure\.
 
-For example, suppose your master user name is **admin** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\. You would log in using the master user name and run the following commands\.
+For example, suppose your master user name is **admin** and you want to give access to SQL Server Agent to a user named **theirname** with a password **theirpassword**\.
 
-```
---Initially set context to master database
-USE [master];
-GO
---Create a server-level login named theirname with password theirpassword
-CREATE LOGIN [theirname] WITH PASSWORD = 'theirpassword';
-GO
---Set context to msdb database
-USE [msdb];
-GO
---Create a database user named theirname and link it to server-level login theirname
-CREATE USER [theirname] FOR LOGIN [theirname];
-GO
---Added database user theirname in msdb to SQLAgentUserRole in msdb
-EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
-```
+**To add a user to the SQLAgentUser role**
 
-To delete a SQL Server Agent job, run the following T\-SQL statement\.
+1. Log in as the master user\.
 
-```
-EXEC msdb..sp_delete_job @job_name = 'job_name';
-```
+1. Run the following commands:
 
-**Note**  
-Don't use the UI in SQL Server Management Console \(SSMS\) to delete a SQL Server Agent job\. If you do, you get an error message similar to the following:  
+   ```
+   --Initially set context to master database
+   USE [master];
+   GO
+   --Create a server-level login named theirname with password theirpassword
+   CREATE LOGIN [theirname] WITH PASSWORD = 'theirpassword';
+   GO
+   --Set context to msdb database
+   USE [msdb];
+   GO
+   --Create a database user named theirname and link it to server-level login theirname
+   CREATE USER [theirname] FOR LOGIN [theirname];
+   GO
+   --Added database user theirname in msdb to SQLAgentUserRole in msdb
+   EXEC sp_addrolemember [SQLAgentUserRole], [theirname];
+   ```
+
+## Deleting a SQL Server Agent job<a name="Appendix.SQLServer.CommonDBATasks.Agent.DeleteJob"></a>
+
+You use the `sp_delete_job` stored procedure to delete SQL Server Agent jobs on Amazon RDS for Microsoft SQL Server\.
+
+You can't use SQL Server Management Studio \(SSMS\) to delete SQL Server Agent jobs\. If you try to do so, you get an error message similar to the following:
 
 ```
 The EXECUTE permission was denied on the object 'xp_regread', database 'mssqlsystemresource', schema 'sys'.
 ```
-This error occurs because, as a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS to delete the job, it tries to run a process \(`xp_regread`\) that RDS isn't authorized to do\.
+
+As a managed service, RDS is restricted from running procedures that access the Windows registry\. When you use SSMS, it tries to run a process \(`xp_regread`\) for which RDS isn't authorized\.
+
+**Note**  
+On RDS for SQL Server, you can delete only SQL Server Agent jobs that were created by the same login\.
+
+**To delete a SQL Server Agent job**
++ Run the following T\-SQL statement:
+
+  ```
+  EXEC msdb..sp_delete_job @job_name = 'job_name';
+  ```

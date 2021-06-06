@@ -229,7 +229,7 @@ Before the automatic upgrades begin, we highly recommend that you upgrade your e
 
 You can upgrade your Oracle Database 18c instance to Oracle Database 19c\. Before upgrading, consider the following:
 + Your SQL statements might perform differently after the upgrade\. If so, you can use the `OPTIMIZER_FEATURES_ENABLE` parameter to retain the behavior of the Oracle Database 18c optimizer\. For more information, see [Influencing the Optimizer](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/influencing-the-optimizer.html#GUID-8758EF88-1CC6-41BD-8581-246702414D1D) in the Oracle documentation\.
-+ If you have Extended Support for Oracle Database 18c on the BYOL model, consider the implications\. In this case, you must have Extended Support agreements from Oracle Support for Oracle Database 19c\. For details on licensing and support requirements for BYOL, see [Amazon RDS for Oracle FAQs](https://aws.amazon.com/rds/oracle/faqs/)\.
++ If you have Extended Support for Oracle Database 18c on the BYOL model, consider the implications\. In this case, you must have Extended Support agreements from Oracle Support for Oracle Database 19c\. For details on licensing and support requirements for BYOL, see [Amazon RDS for Oracle FAQs](http://aws.amazon.com/rds/oracle/faqs/)\.
 
 ### Upgrade your Oracle Database 18c DB snapshots<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.snapshots"></a>
 

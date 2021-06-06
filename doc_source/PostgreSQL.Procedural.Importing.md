@@ -375,7 +375,7 @@ Also, be sure the database you use doesn't have any restrictions noted in [Impor
 
 **To add an IAM role for a PostgreSQL DB instance using the console**
 
-1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console.aws.amazon.com/rds/](https://console.aws.amazon.com/rds/)\. 
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
 1. Choose the PostgreSQL DB instance name to display its details\.
 
@@ -450,9 +450,9 @@ psql=> SELECT aws_s3.table_import_from_s3(
 #### Troubleshooting access to Amazon S3<a name="USER_PostgreSQL.S3Import.troubleshooting"></a>
 
 If you encounter connection problems when attempting to import Amazon S3 file data, see the following for recommendations:
-+ [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md) 
-+ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
-+ [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html)
++ [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
++ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide*
++ [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the *IAM User Guide*
 
 ### Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
 
