@@ -7,7 +7,7 @@ Amazon RDS supports the following options for MariaDB:
 
 | Option ID | Engine versions | 
 | --- | --- | 
-|  `MARIADB_AUDIT_PLUGIN`  |  MariaDB 10\.0\.24 and later  | 
+|  `MARIADB_AUDIT_PLUGIN`  |  MariaDB 10\.2 and higher  | 
 
 ## MariaDB Audit Plugin support<a name="Appendix.MariaDB.Options.AuditPlugin"></a>
 
@@ -43,7 +43,7 @@ After you add the MariaDB Audit Plugin, you don't need to restart your DB instan
 
 **To add the MariaDB Audit Plugin**
 
-1. Determine the option group you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group\. Choose **mariadb** for **Engine**, and choose **10\.0** or later for **Major engine version**\. For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
+1. Determine the option group you want to use\. You can create a new option group or use an existing option group\. If you want to use an existing option group, skip to the next step\. Otherwise, create a custom DB option group\. Choose **mariadb** for **Engine**, and choose **10\.2** or higher for **Major engine version**\. For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create)\. 
 
 1. Add the **MARIADB\_AUDIT\_PLUGIN** option to the option group, and configure the option settings\. For more information about adding options, see [Adding an option to an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.AddOption)\. For more information about each setting, see [Audit Plugin option settings](#Appendix.MariaDB.Options.AuditPlugin.Options)\. 
 

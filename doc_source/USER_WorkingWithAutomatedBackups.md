@@ -142,7 +142,7 @@ Final snapshots are independent of retained automated backups\. We strongly sugg
 
 ### Viewing retained backups<a name="USER_WorkingWithAutomatedBackups.Viewing"></a>
 
-To view your retained automated backups, switch to the automated backups page\. You can view individual snapshots associated with a retained automated backup on the database snapshots page in the console\. Alternatively, you can describe individual snapshots associated with a retained automated backup\. From there, you can restore a DB instance directly from one of those snapshots\.
+To view your retained automated backups, choose **Automated backups** in the navigation pane, then choose **Retained**\. To view individual snapshots associated with a retained automated backup, choose **Snapshots** in the navigation pane\. Alternatively, you can describe individual snapshots associated with a retained automated backup\. From there, you can restore a DB instance directly from one of those snapshots\.
 
 To describe your retained automated backups using the AWS CLI, use one of the following commands:
 
@@ -347,7 +347,7 @@ For the MySQL DB engine, automated backups are only supported for the InnoDB sto
 
 ## Automated backups with unsupported MariaDB storage engines<a name="Overview.BackupDeviceRestrictionsMariaDB"></a>
 
-For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine \(version 10\.2 and later\) and XtraDB storage engine \(versions 10\.0 and 10\.1\)\. Use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the XtraDB storage engine\. 
+For the MariaDB DB engine, automated backups are only supported with the InnoDB storage engine\. Use of these features with other MariaDB storage engines, including Aria, might lead to unreliable behavior while restoring from backups\. Even though Aria is a crash\-resistant alternative to MyISAM, your tables can still be corrupted in the event of a crash\. For this reason, we encourage you to use the XtraDB storage engine\. 
 + To convert existing Aria tables to InnoDB tables, you can use the `ALTER TABLE` command\. For example: `ALTER TABLE table_name ENGINE=innodb, ALGORITHM=COPY;` 
 + To convert existing Aria tables to XtraDB tables, you can use the `ALTER TABLE` command\. For example: `ALTER TABLE table_name ENGINE=xtradb, ALGORITHM=COPY;` 
 + If you choose to use Aria, you can attempt to manually repair tables that become damaged after a crash by using the `REPAIR TABLE` command\. For more information, see [http://mariadb\.com/kb/en/mariadb/repair\-table/](http://mariadb.com/kb/en/mariadb/repair-table/)\. 

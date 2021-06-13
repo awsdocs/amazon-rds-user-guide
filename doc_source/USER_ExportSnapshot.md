@@ -19,7 +19,7 @@ The following table shows the engine versions that are supported for exporting s
 
 | MariaDB | MySQL | PostgreSQL | 
 | --- | --- | --- | 
-|  10\.3 10\.2\.12 and higher 10\.1\.26 and higher 10\.0\.32 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
+|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
 
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)
@@ -210,9 +210,21 @@ The **Export to Amazon S3** console option appears only for snapshots that can b
 
 1. For **Export identifier**, enter a name to identify the export task\. This value is also used for the name of the file created in the S3 bucket\.
 
-1. Choose the amount of data to be exported:
+1. Choose the data to be exported:
    + Choose **All** to export all data in the snapshot\.
-   + Choose **Partial** to export specific parts of the snapshot\. To identify which parts of the snapshot to export, enter one or more tables for **Identifiers**\. 
+   + Choose **Partial** to export specific parts of the snapshot\. To identify which parts of the snapshot to export, enter one or more databases, schemas, or tables for **Identifiers**, separated by spaces\.
+
+     Use the following format:
+
+     ```
+     database[.schema][.table] database2[.schema2][.table2] ... databasen[.scheman][.tablen]
+     ```
+
+     For example:
+
+     ```
+     mydatabase mydatabase2.myschema1 mydatabase2.myschema2.mytable1 mydatabase2.myschema2.mytable2
+     ```
 
 1. For **S3 bucket**, choose the bucket to export to\. 
 

@@ -32,6 +32,4 @@ use XML::XPath;
   Each Amazon RDS operation has a reference page in the *Amazon RDS API Reference*\. Double\-check that you are using parameters correctly\. In order to give you ideas regarding what might be wrong, look at the sample requests or user scenarios to see if those examples are doing similar operations\.
 + Check the forum
 
-  Amazon RDS has a development community forum where you can search for solutions to problems others have experienced along the way\. To view the forum, go to 
-
-   [https://forums\.aws\.amazon\.com/](https://forums.aws.amazon.com/) 
+  Amazon RDS has a development community forum where you can search for solutions to problems others have experienced along the way\. To view the forum, go to [AWS Discussion Forums](http://forums.aws.amazon.com/index.jspa)\.

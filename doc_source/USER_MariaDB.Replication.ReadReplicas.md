@@ -72,7 +72,7 @@ The following limitations apply to replication filtering for Amazon RDS for Mari
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
 + Replication filtering is supported for Amazon RDS for MariaDB version 10\.3\.13 and higher 10\.3 versions, all 10\.4 versions, and all 10\.5 versions\.
-+ Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.0, 10\.1, and 10\.2\.
++ Replication filtering isn't supported for Amazon RDS for MariaDB version 10\.2\.
 
 ### Replication filtering examples for Amazon RDS for MariaDB<a name="USER_MariaDB.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 
@@ -254,7 +254,7 @@ Previous versions of MariaDB used `SHOW SLAVE STATUS` instead of `SHOW REPLICA S
 Common causes for replication lag for MariaDB are the following: 
 + A network outage\.
 + Writing to tables with indexes on a read replica\. If the `read_only` parameter is not set to 0 on the read replica, it can break replication\.
-+ Using a nontransactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MariaDB 10\.2 and later and the XtraDB storage engine on MariaDB 10\.1 and earlier\.
++ Using a nontransactional storage engine such as MyISAM\. Replication is only supported for the InnoDB storage engine on MariaDB\.
 
 When the `ReplicaLag` metric reaches 0, the replica has caught up to the source DB instance\. If the `ReplicaLag` metric returns \-1, then replication is currently not active\. `ReplicaLag` = \-1 is equivalent to `Seconds_Behind_Master` = `NULL`\. 
 
@@ -280,7 +280,7 @@ One common issue that can cause replication errors is when the value for the `ma
 
 Other common situations that can cause replication errors include the following:
 + Writing to tables on a read replica\. If you are creating indexes on a read replica, you need to have the `read_only` parameter set to **0** to create the indexes\. If you are writing to tables on the read replica, it might break replication\. 
-+ Using a non\-transactional storage engine such as MyISAM\. read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MariaDB 10\.2 and later and the XtraDB storage engine on MariaDB 10\.1 and earlier\.
++ Using a non\-transactional storage engine such as MyISAM\. read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MariaDB\.
 + Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of safe and unsafe statements in binary logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html)\. 
 
 If you decide that you can safely skip an error, you can follow the steps described in the section [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Otherwise, you can delete the read replica and create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old read replica\. If a replication error is fixed, the `Replication State` changes to *replicating*\.

@@ -1,6 +1,6 @@
 # mysql\.rds\_set\_external\_master\_gtid<a name="mysql_rds_set_external_master_gtid"></a>
 
-Configures GTID\-based replication from a MariaDB instance running external to Amazon RDS to a MariaDB DB instance\. This stored procedure is supported only where the external MariaDB instance is version 10\.0\.24 or greater\. When setting up replication where one or both instances do not support MariaDB global transaction identifiers \(GTIDs\), use [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)\.
+Configures GTID\-based replication from a MariaDB instance running external to Amazon RDS to a MariaDB DB instance\. This stored procedure is supported only where the external MariaDB instance is version 10\.0\.24 or higher\. When setting up replication where one or both instances do not support MariaDB global transaction identifiers \(GTIDs\), use [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md)\.
 
 Using GTIDs for replication provides crash\-safety features not offered by binary log replication, so we recommend it in cases where the replicating instances support it\. 
 

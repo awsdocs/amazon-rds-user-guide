@@ -1,10 +1,15 @@
 # Retrieving data with the Performance Insights API<a name="USER_PerfInsights.API"></a>
 
-When Performance Insights is enabled for supported engine types, the API provides visibility into instance performance\. Amazon CloudWatch Logs provides the authoritative source for vended monitoring metrics for AWS services\. 
+When Performance Insights is enabled, the API provides visibility into instance performance\. Amazon CloudWatch Logs provides the authoritative source for vended monitoring metrics for AWS services\. 
 
 Performance Insights offers a domain\-specific view of database load measured as average active sessions \(AAS\)\. This metric appears to API consumers as a two\-dimensional time\-series dataset\. The time dimension of the data provides DB load data for each time point in the queried time range\. Each time point decomposes overall load in relation to the requested dimensions, such as `SQL`, `Wait-event`, `User`, or `Host`, measured at that time point\.
 
-Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you can analyze and troubleshoot database performance\. One way to view Performance Insights data is in the AWS Management Console\. Performance Insights also provides a public API so that you can query your own data\. You can use the API to offload data into a database, add Performance Insights data to existing monitoring dashboards, or to build monitoring tools\. To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
+Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you can analyze and troubleshoot database performance\. One way to view Performance Insights data is in the AWS Management Console\. Performance Insights also provides a public API so that you can query your own data\. You can use the API to do the following:
++ Offload data into a database
++ Add Performance Insights data to existing monitoring dashboards
++ Build monitoring tools
+
+To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
 
 The Performance Insights API provides the following operations\.
 
@@ -14,7 +19,8 @@ The Performance Insights API provides the following operations\.
 |  Performance Insights Operation  |  AWS CLI Command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html](https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html)  |  Retrieves the top N dimension keys for a metric for a specific time period\.  | 
-|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)  |  Retrieves Performance Insights metrics for a set of data sources, over a time period\. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group\.  | 
+|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html)  | [https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html) |  Retrieves the attributes of the specified dimension group for a DB instance or data source\. For example, if you specify a SQL ID, and if the dimension details are available, `GetDimensionKeyDetails` retrieves the full text of the dimension `db.sql.statement` associated with this ID\. This operation is useful because `GetResourceMetrics` and `DescribeDimensionKeys` don't support retrieval of large SQL statement text\.   | 
+|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)  |  Retrieves Performance Insights metrics for a set of data sources over a time period\. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group\.  | 
 
 For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
 
@@ -32,11 +38,11 @@ If you don't have the AWS CLI installed, see [Installing the AWS Command Line In
 
 The `GetResourceMetrics` operation retrieves one or more time\-series metrics from the Performance Insights data\. `GetResourceMetrics` requires a metric and time period, and returns a response with a list of data points\. 
 
-For example, the AWS Management Console uses `GetResourceMetrics` in two places in the Performance Insights dashboard\. `GetResourceMetrics` is used to populate the **Counter Metrics** chart and in the **Database Load** chart, as seen in the following image\.
+For example, the AWS Management Console uses `GetResourceMetrics` to populate the **Counter Metrics** chart and the **Database Load** chart, as seen in the following image\.
 
 ![\[Counter Metrics and Database Load charts\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-charts.png)
 
-All the metrics returned by `GetResourceMetrics` are standard time\-series metrics with one exception\. The exception is `db.load`, which is the core metric in Performance Insights\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
+All metrics returned by `GetResourceMetrics` are standard time\-series metrics, with the exception of `db.load`\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
 
 **Note**  
 `GetResourceMetrics` can also return the `db.sampleload` metric, but the `db.load` metric is appropriate in most cases\.
@@ -71,18 +77,18 @@ For the `--metric-queries` option, specify one or more queries that you want to 
    },
    "Filter": {"string": "string"
      ...}
-}
 ```
 
 ## AWS CLI examples for Performance Insights<a name="USER_PerfInsights.API.Examples"></a>
 
-The following are several examples that use the AWS CLI for Performance Insights\.
+The following examples show how to use the AWS CLI for Performance Insights\.
 
 **Topics**
 + [Retrieving counter metrics](#USER_PerfInsights.API.Examples.CounterMetrics)
 + [Retrieving the DB load average for top wait events](#USER_PerfInsights.API.Examples.DBLoadAverage)
 + [Retrieving the DB load average for top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)
 + [Retrieving the DB Load Average Filtered by SQL](#USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL)
++ [Retrieving the full text of a SQL statement](#USER_PerfInsights.API.Examples.GetDimensionKeyDetails)
 
 ### Retrieving counter metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
 
@@ -598,3 +604,46 @@ The response looks similar to the following\.
 ```
 
 In this response, all values are filtered according to the contribution of tokenized SQL AKIAIOSFODNN7EXAMPLE specified in the query\.json file\. The keys also might follow a different order than a query without a filter, because it's the top five wait events that affected the filtered SQL\.
+
+### Retrieving the full text of a SQL statement<a name="USER_PerfInsights.API.Examples.GetDimensionKeyDetails"></a>
+
+The following example retrieves the full text of a SQL statement for DB instance `db-10BCD2EFGHIJ3KL4M5NO6PQRS5`\. The `--dimension-group` is `db.sql`, and the `--dimension-group-identifier` is `db.sql.id`\. In this example, *my\-sql\-id* represents a SQL ID retrieved by invoking `pi get-resource-metrics` or `pi describe-dimension-keys`\.
+
+Run the following command\.
+
+For Linux, macOS, or Unix:
+
+```
+aws pi get-dimension-key-details \
+   --service-type RDS \
+   --identifier db-10BCD2EFGHIJ3KL4M5NO6PQRS5 \
+   --dimension-group db.sql \
+   --dimension-group-identifier my-sql-id \
+   --requested-dimensions statement
+```
+
+For Windows:
+
+```
+aws pi get-dimension-key-details ^
+   --service-type RDS ^
+   --identifier db-10BCD2EFGHIJ3KL4M5NO6PQRS5 ^
+   --dimension-group db.sql ^
+   --dimension-group-identifier my-sql-id ^
+   --requested-dimensions statement
+```
+
+In this example, the dimensions details are available\. Thus, Peformance Insights retrieves the full text of the SQL statement, without truncating it\.
+
+```
+{
+    "Dimensions":[
+    {
+        "Value": "SELECT e.last_name, d.department_name FROM employees e, departments d WHERE e.department_id=d.department_id",
+        "Dimension": "db.sql.statement",
+        "Status": "AVAILABLE"
+    },
+    ...
+    ]
+}
+```

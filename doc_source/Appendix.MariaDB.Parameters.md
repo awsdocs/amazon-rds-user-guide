@@ -79,12 +79,12 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + binlog\_annotate\_row\_events
 + binlog\_commit\_wait\_count
 + binlog\_commit\_wait\_usec
-+ binlog\_row\_image \(MariaDB version 10\.1 and later\)
++ binlog\_row\_image
 + deadlock\_search\_depth\_long
 + deadlock\_search\_depth\_short
 + deadlock\_timeout\_long
 + deadlock\_timeout\_short
-+ explicit\_defaults\_for\_timestamp \(MariaDB version 10\.1 and later\)
++ explicit\_defaults\_for\_timestamp
 + extra\_max\_connections
 + extra\_port
 + feedback
@@ -97,28 +97,28 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + histogram\_size
 + histogram\_type
 + innodb\_adaptive\_hash\_index\_partitions
-+ innodb\_background\_scrub\_data\_check\_interval \(MariaDB version 10\.1 and later\)
-+ innodb\_background\_scrub\_data\_compressed \(MariaDB version 10\.1 and later\)
-+ innodb\_background\_scrub\_data\_interval \(MariaDB version 10\.1 and later\)
-+ innodb\_background\_scrub\_data\_uncompressed \(MariaDB version 10\.1 and later\)
-+ innodb\_buf\_dump\_status\_frequency \(MariaDB version 10\.1 and later\)
++ innodb\_background\_scrub\_data\_check\_interval
++ innodb\_background\_scrub\_data\_compressed
++ innodb\_background\_scrub\_data\_interval
++ innodb\_background\_scrub\_data\_uncompressed
++ innodb\_buf\_dump\_status\_frequency
 + innodb\_buffer\_pool\_populate
 + innodb\_cleaner\_lsn\_age\_factor
-+ innodb\_compression\_algorithm \(MariaDB version 10\.1 and later\)
++ innodb\_compression\_algorithm
 + innodb\_corrupt\_table\_action
-+ innodb\_defragment \(MariaDB version 10\.1 and later\)
-+ innodb\_defragment\_fill\_factor \(MariaDB version 10\.1 and later\)
-+ innodb\_defragment\_fill\_factor\_n\_recs \(MariaDB version 10\.1 and later\)
-+ innodb\_defragment\_frequency \(MariaDB version 10\.1 and later\)
-+ innodb\_defragment\_n\_pages \(MariaDB version 10\.1 and later\)
-+ innodb\_defragment\_stats\_accuracy \(MariaDB version 10\.1 and later\)
++ innodb\_defragment
++ innodb\_defragment\_fill\_factor
++ innodb\_defragment\_fill\_factor\_n\_recs
++ innodb\_defragment\_frequency
++ innodb\_defragment\_n\_pages
++ innodb\_defragment\_stats\_accuracy
 + innodb\_empty\_free\_List\_algorithm
 + innodb\_fake\_changes
-+ innodb\_fatal\_semaphore\_wait\_threshold \(MariaDB version 10\.1 and later\)
++ innodb\_fatal\_semaphore\_wait\_threshold
 + innodb\_foreground\_preflush
-+ innodb\_idle\_flush\_pct \(MariaDB version 10\.1 and later\)
-+ innodb\_immediate\_scrub\_data\_uncompressed \(MariaDB version 10\.1 and later\)
-+ innodb\_instrument\_semaphores \(MariaDB version 10\.1 and later\)
++ innodb\_idle\_flush\_pct
++ innodb\_immediate\_scrub\_data\_uncompressed
++ innodb\_instrument\_semaphores
 + innodb\_locking\_fake\_changes
 + innodb\_log\_arch\_dir
 + innodb\_log\_arch\_expire\_sec
@@ -127,10 +127,10 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + innodb\_log\_checksum\_algorithm
 + innodb\_max\_bitmap\_file\_size
 + innodb\_max\_changed\_pages
-+ innodb\_prefix\_index\_cluster\_optimization \(MariaDB version 10\.1 and later\)
++ innodb\_prefix\_index\_cluster\_optimization
 + innodb\_sched\_priority\_cleaner
-+ innodb\_scrub\_log \(MariaDB version 10\.1 and later\)
-+ innodb\_scrub\_log\_speed \(MariaDB version 10\.1 and later\)
++ innodb\_scrub\_log
++ innodb\_scrub\_log\_speed
 + innodb\_show\_locks\_held
 + innodb\_show\_verbose\_locks
 + innodb\_simulate\_comp\_failures
@@ -140,14 +140,14 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + innodb\_use\_fallocate
 + innodb\_use\_global\_flush\_log\_at\_trx\_commit
 + innodb\_use\_stacktrace
-+ innodb\_use\_trim \(MariaDB version 10\.1 and later\)
++ innodb\_use\_trim
 + join\_buffer\_space\_limit
 + join\_cache\_level
 + key\_cache\_file\_hash\_size
 + key\_cache\_segments
-+ max\_digest\_length \(MariaDB version 10\.1 and later\)
-+ max\_statement\_time \(MariaDB version 10\.1 and later\)
-+ mysql56\_temporal\_format \(MariaDB version 10\.1 and later\)
++ max\_digest\_length
++ max\_statement\_time
++ mysql56\_temporal\_format
 + progress\_report\_time
 + query\_cache\_strip\_comments
 + replicate\_annotate\_row\_events
@@ -159,9 +159,9 @@ The MariaDB\-specific DB parameter groups also contain the following parameters 
 + replicate\_wild\_ignore\_table
 + slave\_domain\_parallel\_threads
 + slave\_parallel\_max\_queued
-+ slave\_parallel\_mode \(MariaDB version 10\.1 and later\)
++ slave\_parallel\_mode
 + slave\_parallel\_threads
-+ slave\_run\_triggers\_for\_rbr \(MariaDB version 10\.1 and later\)
++ slave\_run\_triggers\_for\_rbr
 + sql\_error\_log\_filename
 + sql\_error\_log\_rate
 + sql\_error\_log\_rotate

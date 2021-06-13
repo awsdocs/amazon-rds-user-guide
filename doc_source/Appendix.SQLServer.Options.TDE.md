@@ -12,12 +12,12 @@ Amazon RDS supports TDE for the following SQL Server versions and editions:
 Transparent Data Encryption for SQL Server provides encryption key management by using a two\-tier key architecture\. A certificate, which is generated from the database master key, is used to protect the data encryption keys\. The database encryption key performs the actual encryption and decryption of data on the user database\. Amazon RDS backs up and manages the database master key and the TDE certificate\.
 
 **Note**  
-RDS doesn't support exporting TDE certificates\.
+RDS doesn't support importing or exporting TDE certificates\.
 
 Transparent Data Encryption is used in scenarios where you need to encrypt sensitive data\. For example, you might want to provide data files and backups to a third party, or address security\-related regulatory compliance issues\. You can't encrypt the system databases for SQL Server, such as the `model` or `master` databases\.
 
 **Note**  
-You can create native backups of TDE\-enabled databases, but you can't restore those backups to on\-premises databases\.
+You can create native backups of TDE\-enabled databases, but you can't restore those backups to on\-premises databases\. You can't restore native backups of TDE\-enabled, on\-premises databases\.
 
 A detailed discussion of Transparent Data Encryption is beyond the scope of this guide, but you should understand the security strengths and weaknesses of each encryption algorithm and key\. For information about Transparent Data Encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) on the Microsoft website\.
 

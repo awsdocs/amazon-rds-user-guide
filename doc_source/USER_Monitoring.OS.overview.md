@@ -13,7 +13,7 @@ Amazon RDS provides metrics in real time for the operating system \(OS\) that yo
 Enhanced Monitoring is available for the following database engines:
 + MariaDB
 + Microsoft SQL Server
-+ MySQL version 5\.5 or later
++ MySQL
 + Oracle
 + PostgreSQL
 

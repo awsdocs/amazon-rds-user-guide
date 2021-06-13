@@ -74,7 +74,6 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby D
 ## Major version upgrades for MySQL<a name="USER_UpgradeDBInstance.MySQL.Major"></a>
 
 Amazon RDS supports the following in\-place upgrades for major versions of the MySQL database engine:
-+ MySQL 5\.5 to MySQL 5\.6
 + MySQL 5\.6 to MySQL 5\.7
 + MySQL 5\.7 to MySQL 8\.0
 
@@ -92,7 +91,7 @@ In some cases, you want to upgrade a MySQL version 5\.6 DB instance running on a
 
 Major version upgrades can contain database changes that are not backward\-compatible with existing applications\. As a result, Amazon RDS doesn't apply major version upgrades automatically; you must manually modify your DB instance\. We recommend that you thoroughly test any upgrade before applying it to your production instances\. 
 
-To perform a major version upgrade for a MySQL version 5\.5 DB instance on Amazon RDS to MySQL version 5\.6 or later, first perform any available OS updates\. After OS updates are complete, upgrade to each major version: 5\.5 to 5\.6, then 5\.6 to 5\.7, and then 5\.7 to 8\.0\. MySQL DB instances created before April 24, 2014, show an available OS update until the update has been applied\. For more information on OS updates, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
+To perform a major version upgrade for a MySQL version 5\.6 DB instance on Amazon RDS to MySQL version 5\.7 or later, first perform any available OS updates\. After OS updates are complete, upgrade to each major version: 5\.6 to 5\.7 and then 5\.7 to 8\.0\. MySQL DB instances created before April 24, 2014, show an available OS update until the update has been applied\. For more information on OS updates, see [Applying updates for a DB instance](USER_UpgradeDBInstance.Maintenance.md#USER_UpgradeDBInstance.OSUpgrades)\. 
 
 During a major version upgrade of MySQL, Amazon RDS runs the MySQL binary `mysql_upgrade` to upgrade tables, if necessary\. Also, Amazon RDS empties the `slow_log` and `general_log` tables during a major version upgrade\. To preserve log information, save the log contents before the major version upgrade\. 
 

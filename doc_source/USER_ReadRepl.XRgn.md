@@ -150,7 +150,7 @@ https://us-west-2.rds.amazonaws.com/
          %2526X-Amz-SignedHeaders%253Dcontent-type%253Bhost%253Buser-agent%253Bx-amz-content-sha256%253Bx-amz-date
          %2526X-Amz-Signature%253D255a0f17b4e717d3b67fad163c3ec26573b882c03a65523522cf890a67fca613
     &DBInstanceIdentifier=myreadreplica
-    &SourceDBInstanceIdentifier=arn:aws:rds:us-east-1:123456789012:db:mydbinstance
+    &SourceDBInstanceIdentifier=&region-arn;rds:us-east-1:123456789012:db:mydbinstance
     &Version=2012-01-15						
     &SignatureVersion=2
     &SignatureMethod=HmacSHA256

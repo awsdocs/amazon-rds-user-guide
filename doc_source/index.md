@@ -122,7 +122,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)
    + [Updating applications to connect to MariaDB DB instances using new SSL/TLS certificates](ssl-certificate-rotation-mariadb.md)
    + [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)
-   + [Migrating data from a MySQL DB snapshot to a MariaDB DB instance](USER_Migrate_MariaDB.md)
    + [Working with MariaDB replication in Amazon RDS](USER_MariaDB.Replication.md)
       + [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)
       + [Configuring GTID-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md)

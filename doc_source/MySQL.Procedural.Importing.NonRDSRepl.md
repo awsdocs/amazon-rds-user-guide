@@ -4,12 +4,12 @@ If your scenario supports it, it is easier to move data in and out of Amazon RDS
 
 In some cases, you might need to import data from an external MySQL or MariaDB database that supports a live application to a MySQL or MariaDB DB instance\. In these cases, you can use the following procedure to minimize the impact on application availability\. This procedure can also help if you are working with a very large database\. Here, the procedure helps because you can reduce the cost of the import by reducing the amount of data that is passed across the network to AWS\.
 
-In this procedure, you transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS DB instance\. You then use replication to bring the Amazon RDS DB instance up\-to\-date with your live external instance, before redirecting your application to the Amazon RDS DB instance\. You configure MariaDB replication based on global transaction identifiers \(GTIDs\) if the external instance is MariaDB 10\.0\.2 or greater and the target instance is RDS for MariaDB; otherwise, you configure replication based on binary log coordinates\. We recommend GTID\-based replication if your external database supports it due to its enhanced crash\-safety features\. For more information, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
+In this procedure, you transfer a copy of your database data to an Amazon EC2 instance and import the data into a new Amazon RDS DB instance\. You then use replication to bring the Amazon RDS DB instance up\-to\-date with your live external instance, before redirecting your application to the Amazon RDS DB instance\. You configure MariaDB replication based on global transaction identifiers \(GTIDs\) if the external instance is MariaDB 10\.0\.24 or higher and the target instance is RDS for MariaDB; otherwise, you configure replication based on binary log coordinates\. We recommend GTID\-based replication if your external database supports it due to its enhanced crash\-safety features\. For more information, see [Global transaction ID](http://mariadb.com/kb/en/mariadb/global-transaction-id/) in the MariaDB documentation\.
 
 ![\[Import an external MySQL database to a MySQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MigrateMySQLToRDS_1.png)
 
 **Note**  
-We don't recommend that you use this procedure with source MySQL databases from MySQL versions earlier than version 5\.1, due to potential replication issues\. For more information, see [Replication compatibility between MySQL versions](https://dev.mysql.com/doc/refman/8.0/en/replication-compatibility.html) in the MySQL documentation\.
+We don't recommend that you use this procedure with source MySQL databases from MySQL versions earlier than version 5\.5, due to potential replication issues\. For more information, see [Replication compatibility between MySQL versions](https://dev.mysql.com/doc/refman/8.0/en/replication-compatibility.html) in the MySQL documentation\.
 
 ## Create a copy of your existing database<a name="MySQL.Procedural.Importing.Copy.Database"></a>
 
@@ -128,7 +128,7 @@ On Windows, run the command window as an administrator\.
 **Note**  
 You must create any stored procedures, triggers, functions, or events manually in your Amazon RDS database\. If you have any of these objects in the database that you are copying, exclude them when you run `mysqldump` by including the following arguments with your `mysqldump` command: `--routines=0 --triggers=0 --events=0`\.
 
-     When using the delimited\-text format, a `CHANGE MASTER TO` comment is returned when you run `mysqldump`\. This comment contains the master log file name and position\. If the external instance is other than MariaDB version 10\.0\.2 or greater, note the values for `MASTER_LOG_FILE` and `MASTER_LOG_POS`\. You need these values when setting up replication\.
+     When using the delimited\-text format, a `CHANGE MASTER TO` comment is returned when you run `mysqldump`\. This comment contains the master log file name and position\. If the external instance is other than MariaDB version 10\.0\.24 or higher, note the values for `MASTER_LOG_FILE` and `MASTER_LOG_POS`\. You need these values when setting up replication\.
 
      ```
      -- Position to start replication or point-in-time recovery from
@@ -136,9 +136,9 @@ You must create any stored procedures, triggers, functions, or events manually i
      -- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin-changelog.000031', MASTER_LOG_POS=107;
      ```
 
-     If you are using SQL format, you can get the master log file name and position in step 4 of the procedure at [Replicate between your external database and new Amazon RDS DB instance](#MySQL.Procedural.Importing.Start.Repl)\. If the external instance is MariaDB version 10\.0\.2 or greater, you can get the GTID in the next step\.
+     If you are using SQL format, you can get the master log file name and position in step 4 of the procedure at [Replicate between your external database and new Amazon RDS DB instance](#MySQL.Procedural.Importing.Start.Repl)\. If the external instance is MariaDB version 10\.0\.24 or higher, you can get the GTID in the next step\.
 
-1. If the external instance you are using is MariaDB version 10\.0\.2 or greater, you use GTID\-based replication\. Run `SHOW MASTER STATUS` on the external MariaDB instance to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance\.
+1. If the external instance you are using is MariaDB version 10\.0\.24 or higher, you use GTID\-based replication\. Run `SHOW MASTER STATUS` on the external MariaDB instance to get the binary log file name and position, then convert them to a GTID by running `BINLOG_GTID_POS` on the external MariaDB instance\.
 
    ```
    SELECT BINLOG_GTID_POS('binary log file name', binary log file position);
@@ -230,12 +230,10 @@ By creating a MySQL or MariaDB DB instance in the same AWS Region as your Amazon
    1. In the **Engine options** section, choose **MySQL** or **MariaDB**, as appropriate\.
 
    1. For **Version**, choose the version that is compatible with your source MySQL instance, as follows:
-      + If your source instance is MySQL 5\.1\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x\.
       + If your source instance is MySQL 5\.5\.x, the Amazon RDS DB instance must be MySQL 5\.5\.x or greater\.
       + If your source instance is MySQL 5\.6\.x, the Amazon RDS DB instance must be MySQL 5\.6\.x or MariaDB\.
       + If your source instance is MySQL 5\.7\.x, the Amazon RDS DB instance must be MySQL 5\.7\.x, 5\.6\.x, or MariaDB\.
       + If your source instance is MySQL 8\.0\.x, the Amazon RDS DB instance must be MySQL 8\.0\.x\.
-      + If your source instance is MariaDB 5\.1, 5\.2, or 5\.3, the Amazon RDS DB instance must be MySQL 5\.1\.x\.
       + If your source instance is MariaDB 5\.5 or greater, the Amazon RDS DB instance must be MariaDB\.
 
    1. In the **Templates** section, choose **Dev/Test** to skip configuring Multi\-AZ deployment and provisioned IOPS storage\.
@@ -371,7 +369,7 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    GRANT REPLICATION CLIENT, REPLICATION SLAVE ON *.* TO 'repl_user'@'mydomain.com';
    ```
 
-1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, look at the contents of that file\.
+1. If you used SQL format to create your backup file and the external instance is not MariaDB 10\.0\.24 or higher, look at the contents of that file\.
 
    ```
    cat backup.sql
@@ -387,18 +385,18 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
    -- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin-changelog.000031', MASTER_LOG_POS=107;
    ```
 
-   If you used delimited text format to create your backup file and the external instance is not MariaDB 10\.0\.2 or greater, you should already have binary log coordinates from step 1 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
+   If you used delimited text format to create your backup file and the external instance is not MariaDB 10\.0\.24 or higher, you should already have binary log coordinates from step 1 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
 
-   If the external instance is MariaDB 10\.0\.2 or greater, you should already have the GTID from which to start replication from step 2 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
+   If the external instance is MariaDB 10\.0\.24 or higher, you should already have the GTID from which to start replication from step 2 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\.
 
-1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
+1. Make the Amazon RDS DB instance the replica\. If the external instance is not MariaDB 10\.0\.24 or higher, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master](mysql_rds_set_external_master.md) command\. Use the master log file name and master log position that you determined in the previous step if you have a SQL format backup file\. Alternatively, use the name and position that you determined when creating the backup files if you used delimited\-text format\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master ('myserver.mydomain.com', 3306,
        'repl_user', 'password', 'mysql-bin-changelog.000031', 107, 0);
    ```
 
-   If the external instance is MariaDB 10\.0\.2 or greater, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example\.
+   If the external instance is MariaDB 10\.0\.24 or higher, connect to the Amazon RDS DB instance as the master user and identify the source database as the source replication instance by using the [mysql\.rds\_set\_external\_master\_gtid](mysql_rds_set_external_master_gtid.md) command\. Use the GTID that you determined in step 2 of the procedure at [To create a backup copy of your existing database](#MySQL.Procedural.Importing.Database.Backup.Procedure)\. The following is an example\.
 
    ```
    CALL mysql.rds_set_external_master_gtid ('source_server_ip_address', 3306, 'ReplicationUser', 'password', 'GTID', 0); 

@@ -419,7 +419,6 @@ aws rds describe-db-parameter-groups
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  default.mysql5.5     mysql5.5  Default parameter group for MySQL5.5
 DBPARAMETERGROUP  default.mysql5.6     mysql5.6  Default parameter group for MySQL5.6
 DBPARAMETERGROUP  mydbparametergroup   mysql5.6  My new parameter group
 ```
@@ -439,7 +438,7 @@ aws rds describe-db-parameter-groups ^
 The command returns a response like the following:  
 
 ```
-DBPARAMETERGROUP  mydbparametergroup1  mysql5.5  My new parameter group
+DBPARAMETERGROUP  mydbparametergroup1  mysql5.6  My new parameter group
 ```
 
 ### RDS API<a name="USER_WorkingWithParamGroups.Listing.API"></a>

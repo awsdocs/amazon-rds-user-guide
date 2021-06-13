@@ -13,13 +13,11 @@ The following MySQL minor versions use the OpenSSL protocol:
 All MySQL 8\.0 versions
 MySQL 5\.7\.21 and later MySQL 5\.7 versions
 MySQL 5\.6\.39 and later MySQL 5\.6 versions
-MySQL 5\.5\.59 and later MySQL 5\.5 versions
 For older MySQL minor versions, an error is returned\.  
 Because these older versions use the yaSSL protocol, certificate verification is strictly enforced and the connection is unsuccessful\.  
 The following MySQL minor versions use the yaSSL protocol:  
 MySQL 5\.7\.19 and earlier MySQL 5\.7 versions
 MySQL 5\.6\.37 and earlier MySQL 5\.6 versions
-MySQL 5\.5\.57 and earlier MySQL 5\.5 versions
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 
@@ -55,7 +53,7 @@ In this sample output, you can see both your own session \(`admin`\) and an appl
 3 rows in set (0.00 sec)
 ```
 
-If you are using Amazon RDS for MySQL versions 5\.5 or 5\.6, then you can't determine from the server side whether applications are connecting with or without SSL\. For those versions, you can determine whether SSL is used by examining the application's connection method\. In the following section, you can find more information on examining the client connection configuration\.
+If you are using Amazon RDS for MySQL version 5\.6, then you can't determine from the server side whether applications are connecting with or without SSL\. For those versions, you can determine whether SSL is used by examining the application's connection method\. In the following section, you can find more information on examining the client connection configuration\.
 
 ## Determining whether a client requires certificate verification to connect<a name="ssl-certificate-rotation-mysql.determining-client"></a>
 

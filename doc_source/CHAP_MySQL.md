@@ -4,7 +4,6 @@ Amazon RDS supports DB instances running several versions of MySQL\. You can use
 + MySQL 8\.0
 + MySQL 5\.7
 + MySQL 5\.6
-+ MySQL 5\.5
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
@@ -57,7 +56,6 @@ Amazon RDS currently supports the following versions of MySQL:
 | MySQL 8\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
 | MySQL 5\.7 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
 | MySQL 5\.6 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
-| MySQL 5\.5 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)  | 
 
 You can specify any currently supported MySQL version when creating a new DB instance\. You can specify the major version \(such as MySQL 5\.7\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
@@ -79,7 +77,7 @@ When automatic minor version upgrade is enabled, your DB instance will be upgrad
 
 If you opt out of automatically scheduled upgrades, you can manually upgrade to a supported minor version release by following the same procedure as you would for a major version update\. For information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
 
-Amazon RDS currently supports the major version upgrades from MySQL version 5\.5 to version 5\.6, from MySQL version 5\.6 to version 5\.7, and from MySQL version 5\.7 to version 8\.0\. Because major version upgrades involve some compatibility risk, they do not occur automatically; you must make a request to modify the DB instance\. You should thoroughly test any upgrade before upgrading your production instances\. For information about upgrading a MySQL DB instance, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\. 
+Amazon RDS currently supports the major version upgrades from MySQL version 5\.6 to version 5\.7, and from MySQL version 5\.7 to version 8\.0\. Because major version upgrades involve some compatibility risk, they do not occur automatically; you must make a request to modify the DB instance\. You should thoroughly test any upgrade before upgrading your production instances\. For information about upgrading a MySQL DB instance, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\. 
 
 You can test a DB instance against a new version before upgrading by creating a DB snapshot of your existing DB instance, restoring from the DB snapshot to create a new DB instance, and then initiating a version upgrade for the new DB instance\. You can then experiment safely on the upgraded clone of your DB instance before deciding whether or not to upgrade your original DB instance\. 
 
@@ -99,22 +97,6 @@ On August 3, 2021, Amazon RDS plans to deprecate support for MySQL 5\.6 using th
 
 For more information, see [ Announcement: Amazon Relational Database Service \(RDS\) for MySQL 5\.6 End\-of\-Life date is August 3, 2021](http://forums.aws.amazon.com/ann.jspa?annID=8498)\.
 
-### Deprecation of MySQL version 5\.5<a name="MySQL.Concepts.VersionMgmt.Deprecation55"></a>
-
-On May 25, 2021, Amazon RDS plans to deprecate support for MySQL 5\.5 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
-
-
-| Action or recommendation | Dates | 
-| --- | --- | 
-|  We recommend that you upgrade MySQL 5\.5 DB instances manually to the version of your choice\.   |  Now–May 25, 2021  | 
-|  We recommend that you upgrade MySQL 5\.5 snapshots manually to the version of your choice\.  |  Now–May 25, 2021  | 
-|  You can no longer create new MySQL 5\.5 DB instances\.  |  December 3, 2020  | 
-|  Amazon RDS starts automatic upgrades of your MySQL 5\.5 DB instances to version 5\.6\.  |  March 29, 2021  | 
-|  Amazon RDS starts automatic upgrades to version 5\.6 for any MySQL 5\.5 DB instances restored from snapshots\.  |  March 29, 2021  | 
-|  Amazon RDS automatically upgrades any remaining MySQL 5\.5 DB instances to version 5\.6 whether or not they are in a maintenance window\.  |  May 25, 2021  | 
-
-For more information, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.5](http://forums.aws.amazon.com/ann.jspa?annID=8570)\.
-
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
 Amazon RDS doesn't currently support the following MySQL features: 
@@ -124,7 +106,7 @@ Amazon RDS doesn't currently support the following MySQL features:
 + InnoDB Tablespace Encryption
 + MariaDB Audit Plugin \(not supported for RDS for MySQL version 8\.0 only\)
 
-  The MariaDB Audit Plugin is supported for RDS for MySQL version 5\.5, 5\.6, and 5\.7\.
+  The MariaDB Audit Plugin is supported for RDS for MySQL version 5\.6 and 5\.7\.
 + Password Strength Plugin
 + Persisted system variables
 + Semisynchronous replication
@@ -132,9 +114,7 @@ Amazon RDS doesn't currently support the following MySQL features:
 + X Plugin
 
 **Note**  
-Global transaction IDs are supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. Global transaction IDs are not supported for RDS for MySQL 5\.5, 5\.6, or 8\.0\.  
-IAM database authentication is supported for MySQL for MySQL 5\.6, 5\.7, and 8\.0\. IAM database authentication is not supported for MySQL 5\.5\.  
-Amazon RDS Performance Insights is supported for MySQL 5\.6, 5\.7, and 8\.0\. Amazon RDS Performance Insights is not supported for MySQL 5\.5\.
+Global transaction IDs are supported for MySQL 5\.7\.23 and later MySQL 5\.7 versions\. Global transaction IDs are not supported for RDS for MySQL 5\.6 or 8\.0\.
 
 To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\. Amazon RDS supports access to databases on a DB instance using any standard SQL client application\. Amazon RDS doesn't allow direct host access to a DB instance by using Telnet, Secure Shell \(SSH\), or Windows Remote Desktop Connection\. When you create a DB instance, you are assigned to the *db\_owner* role for all databases on that instance, and you have all database\-level permissions except for those used for backups\. Amazon RDS manages backups for you\. 
 
@@ -151,7 +131,7 @@ System tables in the `mysql` schema can be in MyISAM storage\.
 
 If you want to convert existing MyISAM tables to InnoDB tables, you can use the `ALTER TABLE` command \(for example, `alter table TABLE_NAME engine=innodb;`\)\. Bear in mind that MyISAM and InnoDB have different strengths and weaknesses, so you should fully evaluate the impact of making this switch on your applications before doing so\. 
 
-MySQL 5\.1 is no longer supported in Amazon RDS\. However, you can restore existing MySQL 5\.1 snapshots\. When you restore a MySQL 5\.1 snapshot, the instance is automatically upgraded to MySQL 5\.5\. 
+MySQL 5\.1 and 5\.5 are no longer supported in Amazon RDS\. However, you can restore existing MySQL 5\.1 and 5\.5 snapshots\. When you restore a MySQL 5\.1 or 5\.5 snapshot, the DB instance is automatically upgraded to MySQL 5\.6\. 
 
 ## Storage\-full behavior for Amazon RDS for MySQL<a name="MySQL.Concepts.StorageFullBehavior"></a>
 
@@ -257,13 +237,11 @@ For information about downloading certificates, see [Using SSL/TLS to encrypt a 
 MySQL uses yaSSL for secure connections in the following versions:
 + MySQL version 5\.7\.19 and earlier 5\.7 versions
 + MySQL version 5\.6\.37 and earlier 5\.6 versions
-+ MySQL version 5\.5\.57 and earlier 5\.5 versions
 
 MySQL uses OpenSSL for secure connections in the following versions:
 + MySQL version 8\.0
 + MySQL version 5\.7\.21 and later 5\.7 versions
 + MySQL version 5\.6\.39 and later 5\.6 versions
-+ MySQL version 5\.5\.59 and later 5\.5 versions
 
 Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
 
@@ -275,7 +253,6 @@ Amazon RDS for MySQL supports Transport Layer Security \(TLS\) versions 1\.0, 1\
 |  MySQL 8\.0  |  Supported  |  Supported  |  Supported  | 
 |  MySQL 5\.7  |  Supported  |  Supported  |  Supported for MySQL 5\.7\.21 and later  | 
 |  MySQL 5\.6  |  Supported  |  Supported for MySQL 5\.6\.46 and later  |  Supported for MySQL 5\.6\.46 and later  | 
-|  MySQL 5\.5  |  Supported  |  Not supported  |  Not supported  | 
 
 To encrypt connections using the default `mysql` client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\. 
 
@@ -395,6 +372,8 @@ There are some known issues and limitations for working with MySQL on Amazon RDS
 
 ## Deprecated versions for Amazon RDS for MySQL<a name="MySQL.Concepts.DeprecatedVersions"></a>
 
-MySQL on Amazon RDS version 5\.1 is deprecated\.
+Amazon RDS for MySQL version 5\.1 and 5\.5 are deprecated\.
+
+For more information about Amazon RDS for MySQL 5\.5 deprecation, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.5](http://forums.aws.amazon.com/ann.jspa?annID=8570)\.
 
 For information about the Amazon RDS deprecation policy for MySQL, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.

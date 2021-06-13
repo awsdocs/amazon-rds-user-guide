@@ -14,7 +14,9 @@ The general process for adding the native backup and restore option to a DB inst
 
 1. Associate an AWS Identity and Access Management \(IAM\) role with the option\. The IAM role must have access to an S3 bucket to store the database backups\.
 
-   That is, it must have as its option setting a valid Amazon Resource Name \(ARN\) in the format `arn:aws:iam::account-id:role/role-name`\. For more information, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam) in the *AWS General Reference\.*
+   That is, the option must have as its option setting a valid Amazon Resource Name \(ARN\) in the format `arn:aws:iam::account-id:role/role-name`\. For more information, see [Amazon Resource Names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam) in the *AWS General Reference\.*
+
+   The IAM role must also have a trust relationship and a permissions policy attached\. The trust relationship allows RDS to assume the role, and the permissions policy defines the actions that the role can perform\. For more information, see [Manually creating an IAM role for native backup and restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling.IAM)\.
 
 1. Associate the option group with the DB instance\.
 

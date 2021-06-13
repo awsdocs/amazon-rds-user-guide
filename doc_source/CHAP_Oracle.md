@@ -472,7 +472,10 @@ Snapshots work the same in a single\-tenant and non\-multitenant architecture\. 
 
 ## RDS for Oracle features<a name="Oracle.Concepts.FeatureSupport"></a>
 
-Amazon RDS for Oracle supports most of the features and capabilities of Oracle Database\. Some features might have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version you're using\. 
+Amazon RDS for Oracle supports most of the features and capabilities of Oracle Database\. Some features might have limited support or restricted privileges\. Some features are only available in Enterprise Edition, and some require additional licenses\. For more information about Oracle Database features for specific Oracle Database versions, see the *Oracle Database Licensing Information User Manual* for the version you're using\.
+
+**Note**  
+You can filter new RDS for Oracle features on the [ What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products** filter, choose **Amazon RDS**\. Then search using keywords such as "Oracle 2021"\.
 
 **Note**  
 These lists are not exhaustive\.

@@ -18,7 +18,7 @@ To set the binary logging format for a MySQL or MariaDB database, update the `bi
 For information about setting the `binlog_format` parameter, see [Setting the binary logging format](USER_LogAccess.MySQL.BinaryFormat.md)\. For information about the implications of different MySQL replication types, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Note**  
-Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.2 or greater and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
+Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.24 or higher and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.
 
 ## Configuring binary log file position replication with an external source instance<a name="MySQL.Procedural.Importing.External.Repl.Procedure"></a>
 
@@ -155,7 +155,7 @@ On Amazon RDS for MySQL, you can choose to use delayed replication by running th
 When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.
 
 **Important**  
-GTID\-based replication is only supported on Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. GTID\-based replication is not supported for Amazon RDS for MySQL 5\.5, 5\.6, or 8\.0\.
+GTID\-based replication is only supported on Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. GTID\-based replication is not supported for Amazon RDS for MySQL 5\.6 or 8\.0\.
 
 **To configure GTID\-based replication with an external source instance**
 

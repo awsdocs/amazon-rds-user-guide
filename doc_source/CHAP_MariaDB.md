@@ -5,8 +5,6 @@ Amazon RDS supports DB instances running several versions of MariaDB\. You can u
 + MariaDB 10\.4
 + MariaDB 10\.3
 + MariaDB 10\.2
-+ MariaDB 10\.1
-+ MariaDB 10\.0
 
 For more information about minor version support, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\. 
 
@@ -58,8 +56,6 @@ Amazon RDS currently supports the following versions of MariaDB:
 | MariaDB 10\.4 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.3 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 | MariaDB 10\.2 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
-| MariaDB 10\.1 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
-| MariaDB 10\.0 |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html)  | 
 
 You can specify any currently supported MariaDB version when creating a new DB instance\. You can specify the major version \(such as MariaDB 10\.5\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
@@ -75,24 +71,6 @@ Replace *major\-engine\-version* with the major engine version, and replace *reg
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.3 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
 ```
 
-### Deprecation of MariaDB versions 10\.0 and 10\.1<a name="MariaDB.Concepts.VersionMgmt.Deprecation1-10.0-10.1"></a>
-
-On May 18, 2021, Amazon RDS plans to deprecate support for MariaDB 10\.0 and 10\.1 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MariaDB DB engine](USER_UpgradeDBInstance.MariaDB.md)\.
-
-
-| Action or recommendation | Dates | 
-| --- | --- | 
-|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 DB instances manually to the version of your choice\.   |  Now–May 18, 2021  | 
-|  We recommend that you upgrade MariaDB 10\.0 and 10\.1 snapshots manually to the version of your choice\.  |  Now–May 18, 2021  | 
-|  You can no longer create new MariaDB 10\.0 and 10\.1 DB instances\.  |  December 3, 2020  | 
-|  Amazon RDS starts automatic upgrades of your MariaDB 10\.0 and 10\.1 DB instances to version 10\.2\.  |  March 22, 2021  | 
-|  Amazon RDS starts automatic upgrades to version 10\.2 for any MariaDB 10\.0 and 10\.1 DB instances restored from snapshots\.  |  March 22, 2021  | 
-|  Amazon RDS automatically upgrades any remaining MariaDB 10\.0 and 10\.1 DB instances to version 10\.2 whether or not they are in a maintenance window\.  |  May 18, 2021  | 
-
-For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](http://forums.aws.amazon.com/ann.jspa?annID=8571)\.
-
-For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.
-
 ## MariaDB feature support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
 
 In the following sections, find MariaDB feature support on Amazon RDS for MariaDB major versions:
@@ -102,8 +80,6 @@ In the following sections, find MariaDB feature support on Amazon RDS for MariaD
 + [MariaDB 10\.4 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-4)
 + [MariaDB 10\.3 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-3)
 + [MariaDB 10\.2 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-2)
-+ [MariaDB 10\.1 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-1)
-+ [MariaDB 10\.0 support on Amazon RDS](#MariaDB.Concepts.FeatureSupport.10-0)
 
 For information about supported minor versions of Amazon RDS for MariaDB, see [MariaDB on Amazon RDS versions](#MariaDB.Concepts.VersionMgmt)\.
 
@@ -172,23 +148,6 @@ For a list of all MariaDB 10\.2 features and their documentation, see [Changes &
 
 For a list of unsupported features, see [Features not supported](#MariaDB.Concepts.FeatureNonSupport)\. 
 
-### MariaDB 10\.1 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-1"></a>
-
-Amazon RDS supports the following new features for your DB instances running MariaDB version 10\.1 or later: 
-+ Optimistic in\-order parallel replication
-+ Page Compression
-+ XtraDB data scrubbing and defragmentation
-
-For a list of all MariaDB 10\.1 features and their documentation, see [Changes & improvements in MariaDB 10\.1](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-101/) and [Release notes \- MariaDB 10\.1 series](https://mariadb.com/kb/en/library/release-notes-mariadb-101-series/) on the MariaDB website\. 
-
-For a list of unsupported features, see [Features not supported](#MariaDB.Concepts.FeatureNonSupport)\. 
-
-### MariaDB 10\.0 support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport.10-0"></a>
-
-For a list of all MariaDB 10\.0 features and their documentation, see [Changes & improvements in MariaDB 10\.0](https://mariadb.com/kb/en/library/changes-improvements-in-mariadb-100/) and [Release notes \- MariaDB 10\.0 series](https://mariadb.com/kb/en/library/release-notes-mariadb-100-series/) on the MariaDB website\. 
-
-For a list of unsupported features, see [Features not supported](#MariaDB.Concepts.FeatureNonSupport)\. 
-
 ## Features not supported<a name="MariaDB.Concepts.FeatureNonSupport"></a>
 
 The following MariaDB features are not supported on Amazon RDS:
@@ -218,7 +177,7 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 
 ## Supported storage engines for MariaDB on Amazon RDS<a name="MariaDB.Concepts.Storage"></a>
 
-While MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. Amazon RDS features such as Point\-In\-Time Restore and snapshot restore require a recoverable storage engine and are supported only for the recommended storage engine for the MariaDB version\. Amazon RDS also supports Aria, although using Aria might have a negative impact on recovery in the event of an instance failure\. However, if you need to use spatial indexes to handle geographic data on MariaDB 10\.1 or 10\.0, you should use Aria because spatial indexes are not supported by XtraDB\. On MariaDB 10\.2 and higher, the InnoDB storage engine supports spatial indexes\.
+While MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for recovery and data durability\. InnoDB is the recommended and supported storage engine for MariaDB DB instances on Amazon RDS\. Amazon RDS features such as Point\-In\-Time Restore and snapshot restore require a recoverable storage engine and are supported only for the recommended storage engine for the MariaDB version\. Amazon RDS also supports Aria, although using Aria might have a negative impact on recovery in the event of an instance failure\.
 
 Other storage engines are not currently supported by Amazon RDS for MariaDB\.
 
@@ -304,23 +263,11 @@ To allow management of the DB instance, the standard `kill` and `kill_query` com
 
 ## Using SSL with a MariaDB DB instance<a name="MariaDB.Concepts.SSLSupport"></a>
 
-Amazon RDS supports Secure Sockets Layer \(SSL\) connections with DB instances running the MariaDB database engine\. 
+Amazon RDS supports Secure Sockets Layer \(SSL\) connections with DB instances running the MariaDB database engine\. MariaDB uses OpenSSL for secure connections\.
 
 Amazon RDS creates an SSL certificate and installs the certificate on the DB instance when Amazon RDS provisions the instance\. These certificates are signed by a certificate authority\. The SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. 
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
-
-MariaDB uses yaSSL for secure connections in the following versions:
-+ MariaDB version 10\.1\.26 and earlier 10\.1 versions
-+ MariaDB version 10\.0\.32 and earlier 10\.0 versions
-
-MariaDB uses OpenSSL for secure connections in the following versions:
-+ MariaDB 10\.5 versions
-+ MariaDB 10\.4 versions
-+ MariaDB 10\.3 versions
-+ MariaDB 10\.2 versions
-+ MariaDB version 10\.1\.31 and later 10\.1 versions
-+ MariaDB version 10\.0\.34 and later 10\.0 versions
 
 Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
 
@@ -333,8 +280,6 @@ Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 
 |  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  | 
 |  MariaDB 10\.2  |  Supported  |  Supported  |  Supported  | 
-|  MariaDB 10\.1  |  Supported  |  Supported for 10\.1\.31 and later 10\.1 versions  |  Supported for 10\.1\.31 and later 10\.1 versions  | 
-|  MariaDB 10\.0  |  Supported  |  Supported for 10\.0\.34 and later 10\.0 versions  |  Supported for 10\.0\.34 and later 10\.0 versions  | 
 
 To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\.
 
@@ -345,32 +290,19 @@ mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
 --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=REQUIRED
 ```
 
-The following example shows how to launch the client using the `--ssl-ca` parameter for MariaDB 10\.1 and earlier\.
-
-```
-mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
-```
-
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MariaDB version, to require SSL connections on the user account `encrypted_user`\.
 
-For MariaDB 10\.2 and later, use the following statement\.
+Use the following statement\.
 
 ```
 ALTER USER 'encrypted_user'@'%' REQUIRE SSL;            
-```
-
-For MariaDB 10\.1 and earlier, use the following statement\.
-
-```
-GRANT USAGE ON *.* TO 'encrypted_user'@'%' REQUIRE SSL;            
 ```
 
 For more information on SSL connections with MariaDB, see [SSL overview](http://mariadb.com/kb/en/mariadb/ssl-connections/) in the MariaDB documentation\. 
 
 ## Cache warming<a name="MariaDB.Concepts.XtraDBCacheWarming"></a>
 
-InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) cache warming can provide performance gains for your MariaDB DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This approach bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. For more information on cache warming, see [ Dumping and restoring the buffer pool](http://mariadb.com/kb/en/mariadb/xtradbinnodb-buffer-pool/#dumping-and-restoring-the-buffer-pool) in the MariaDB documentation\.
+InnoDB cache warming can provide performance gains for your MariaDB DB instance by saving the current state of the buffer pool when the DB instance is shut down, and then reloading the buffer pool from the saved information when the DB instance starts up\. This approach bypasses the need for the buffer pool to "warm up" from normal database use and instead preloads the buffer pool with the pages for known common queries\. For more information on cache warming, see [ Dumping and restoring the buffer pool](http://mariadb.com/kb/en/mariadb/xtradbinnodb-buffer-pool/#dumping-and-restoring-the-buffer-pool) in the MariaDB documentation\.
 
 Cache warming is enabled by default on MariaDB 10\.2 and higher DB instances\. To enable it, set the `innodb_buffer_pool_dump_at_shutdown` and `innodb_buffer_pool_load_at_startup` parameters to 1 in the parameter group for your DB instance\. Changing these parameter values in a parameter group affects all MariaDB DB instances that use that parameter group\. To enable cache warming for specific MariaDB DB instances, you might need to create a new parameter group for those DB instances\. For information on parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
@@ -400,7 +332,7 @@ By default, a MariaDB DB instance uses a DB parameter group that is specific to 
 
 ## Common DBA tasks for MariaDB<a name="MariaDB.Concepts.DBA.Tasks"></a>
 
-Ending sessions or queries, skipping replication errors, working with InnoDB \(version 10\.2 and later\) and XtraDB \(versions 10\.0 and 10\.1\) tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in a MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
+Ending sessions or queries, skipping replication errors, working with InnoDB tablespaces to improve crash recovery times, and managing the global status history are common DBA tasks you might perform in a MariaDB DB instance\. You can handle these tasks just as in a MySQL DB instance, as described in [Common DBA tasks for MySQL DB instances](Appendix.MySQL.CommonDBATasks.md)\. The crash recovery instructions there refer to the MySQL InnoDB engine, but they are applicable to a MariaDB instance running InnoDB or XtraDB as well\.
 
 ## Local time zone for MariaDB DB instances<a name="MariaDB.Concepts.LocalTimeZone"></a>
 
@@ -451,3 +383,11 @@ You can set your local time zone to one of the following values\.
 | `Asia/Ashgabat` | `Atlantic/Azores` | `US/East-Indiana` | 
 | `Asia/Baghdad` | `Australia/Adelaide` | `US/Pacific` | 
 | `Asia/Baku` | `Australia/Brisbane` | `UTC` | 
+
+## Deprecated versions for Amazon RDS for MariaDB<a name="MariaDB.Concepts.DeprecatedVersions"></a>
+
+Amazon RDS for MariaDB version 10\.0 and 10\.1 are deprecated\.
+
+For more information, see [ Announcement: Extending end\-of\-life Process for Amazon RDS for MariaDB 10\.0 and 10\.1](http://forums.aws.amazon.com/ann.jspa?annID=8571)\.
+
+For information about the Amazon RDS deprecation policy for MariaDB, see [Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/)\.

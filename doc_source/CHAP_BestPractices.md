@@ -14,6 +14,7 @@ Learn best practices for working with Amazon RDS\. As new best practices are ide
 + [Best practices for working with PostgreSQL](#CHAP_BestPractices.PostgreSQL)
 + [Best practices for working with SQL Server](#CHAP_BestPractices.SQLServer)
 + [Working with DB parameter groups](#CHAP_BestPractices.DBParameterGroup)
++ [Best practices for automating DB instance creation](#CHAP_BestPractices.AutoDBCreation)
 + [Amazon RDS new features and best practices presentation video](#CHAP_BestPractices.Presentation)
 
 **Note**  
@@ -231,7 +232,7 @@ In addition, too many tables can significantly affect MariaDB startup time\. Bot
 
 ### Storage engine<a name="CHAP_BestPractices.MariaDB.StorageEngine"></a>
 
-The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB \(for version 10\.2 and higher\) and XtraDB \(for version 10\.0 and 10\.1\) are the recommended and supported storage engines for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated backups with unsupported MariaDB storage engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
+The point\-in\-time restore and snapshot restore features of Amazon RDS for MariaDB require a crash\-recoverable storage engine\. Although MariaDB supports multiple storage engines with varying capabilities, not all of them are optimized for crash recovery and data durability\. For example, although Aria is a crash\-safe replacement for MyISAM, it might still prevent a point\-in\-time restore or snapshot restore from working as intended\. This might result in lost or corrupt data when MariaDB is restarted after a crash\. InnoDB is the recommended and supported storage engine for MariaDB DB instances on Amazon RDS\. If you still choose to use Aria with Amazon RDS, following the steps outlined in [Automated backups with unsupported MariaDB storage engines](USER_WorkingWithAutomatedBackups.md#Overview.BackupDeviceRestrictionsMariaDB) can be helpful in certain scenarios for snapshot restore functionality\.
 
 If you want to convert existing MyISAM tables to InnoDB tables, you can use the process outlined in the [MariaDB documentation](https://mariadb.com/kb/en/converting-tables-from-myisam-to-innodb/)\. MyISAM and InnoDB have different strengths and weaknesses, so you should fully evaluate the impact of making this switch on your applications before doing so\. 
 
@@ -335,6 +336,34 @@ The 2019 AWS re:Invent conference included a presentation on new features and be
 We recommend that you try out DB parameter group changes on a test DB instance before applying parameter group changes to your production DB instances\. Improperly setting DB engine parameters in a DB parameter group can have unintended adverse effects, including degraded performance and system instability\. Always exercise caution when modifying DB engine parameters and back up your DB instance before modifying a DB parameter group\. 
 
 For information about backing up your DB instance, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
+
+## Best practices for automating DB instance creation<a name="CHAP_BestPractices.AutoDBCreation"></a>
+
+It’s an Amazon RDS best practice to create a DB instance with the preferred minor version of the database engine\. You can use the AWS CLI, Amazon RDS API, or AWS CloudFormation to automate DB instance creation\. When you use these methods, you can specify only the major version and Amazon RDS automatically creates the instance with the preferred minor version\. For example, if PostgreSQL 12\.5 is the preferred minor version, and if you specify version 12 with `create-db-instance`, the DB instance with be version 12\.5\.
+
+To determine the preferred minor version, you can run the `describe-db-engine-versions` command with the `--default-only` option as shown in the following example\.
+
+```
+aws rds describe-db-engine-versions --default-only --engine postgres
+
+{
+    "DBEngineVersions": [
+        {
+            "Engine": "postgres",
+            "EngineVersion": "12.5",
+            "DBParameterGroupFamily": "postgres12",
+            "DBEngineDescription": "PostgreSQL",
+            "DBEngineVersionDescription": "PostgreSQL 12.5-R1",
+            ...some output truncated...
+        }
+    ]
+}
+```
+
+For information on creating DB instances programmatically, see the following resources:
++ Using the AWS CLI – [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)
++ Using the Amazon RDS API – [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)
++ Using AWS CloudFormation – [AWS::RDS::DBInstance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html)
 
 ## Amazon RDS new features and best practices presentation video<a name="CHAP_BestPractices.Presentation"></a>
 

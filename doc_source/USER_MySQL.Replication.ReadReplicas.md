@@ -92,7 +92,7 @@ The following limitations apply to replication filtering for Amazon RDS for MySQ
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
 + Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
-+ Replication filtering isn't supported for Amazon RDS for MySQL version 5\.5 or 5\.6\.
++ Replication filtering isn't supported for Amazon RDS for MySQL version 5\.6\.
 
 ### Replication filtering examples for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 
@@ -370,7 +370,7 @@ If replication is stopped for more than 30 consecutive days, either manually or 
 
 ## Troubleshooting a MySQL read replica problem<a name="USER_ReadRepl.Troubleshooting"></a>
 
-For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\. For MySQL 5\.5, `sync_binlog` defaults to `0`, but in MySQL 5\.6 and later, problems are less likely to occur because these parameters are all set to the recommended values by default\.
+For MySQL DB instances, in some cases read replicas present replication errors or data inconsistencies between the read replica and its source DB instance\. This problem occurs when some binary log \(binlog\) events or InnoDB redo logs aren't flushed during a failure of the read replica or the source DB instance\. In these cases, manually delete and recreate the read replicas\. You can reduce the chance of this happening by setting the following parameter values: `sync_binlog=1` and `innodb_flush_log_at_trx_commit=1`\. These settings might reduce performance, so test their impact before implementing the changes in a production environment\. For MySQL DB instances, problems are less likely to occur because these parameters are all set to the recommended values by default\.
 
 The replication technologies for MySQL are asynchronous\. Because they are asynchronous, occasional `BinLogDiskUsage` increases on the source DB instance and `ReplicaLag` on the read replica are to be expected\. For example, a high volume of write operations to the source DB instance can occur in parallel\. In contrast, write operations to the read replica are serialized using a single I/O thread, which can lead to a lag between the source instance and read replica\. For more information about read\-only replicas in the MySQL documentation, see [Replication implementation details](https://dev.mysql.com/doc/refman/8.0/en/replication-implementation-details.html)\.
 
