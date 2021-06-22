@@ -4,7 +4,7 @@ If you have existing manual DB snapshots, you can upgrade them to a later versio
 
 When Oracle stops providing patches for a version, and Amazon RDS deprecates the version, you can upgrade your snapshots that correspond to the deprecated version\. For more information, see [Oracle engine version management](USER_UpgradeDBInstance.Oracle.md#Oracle.Concepts.Patching)\.
 
-The following snapshot upgrades are currently supported\. 
+The following snapshot upgrades are currently supported\. You can't upgrade a snapshot and downgrade the minor version\. For example, you can't upgrade a snapshot from the 11\.2\.0\.4 October 2020 PSU to the 19\.0 July 2020 PSU\.
 
 
 ****  
@@ -12,7 +12,8 @@ The following snapshot upgrades are currently supported\.
 | Current snapshot version | Supported snapshot upgrade | 
 | --- | --- | 
 |  12\.1\.0\.1  |  12\.1\.0\.2\.v8  | 
-|  11\.2\.0\.4  |  12\.1\.0\.2, 12\.2\.0\.1, 18c, and 19c when the following conditions are met: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.Oracle.html)  | 
+|  11\.2\.0\.4  |  19\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1 or 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1  | 
+|  18\.0\.0\.0  |  19\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1  | 
 | 11\.2\.0\.3 | 11\.2\.0\.4\.v11 | 
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
 
@@ -54,16 +55,16 @@ For Linux, macOS, or Unix:
 ```
 aws rds modify-db-snapshot \
     --db-snapshot-identifier mydbsnapshot \
-    --engine-version 11.2.0.4.v12 \
-    --option-group-name default:oracle-se1-11-2
+    --engine-version 19.0.0.0.ru-2020-10.rur-2020-10.r1 \
+    --option-group-name default:oracle-se2-19
 ```
 For Windows:  
 
 ```
 aws rds modify-db-snapshot ^
     --db-snapshot-identifier mydbsnapshot ^
-    --engine-version 11.2.0.4.v12 ^
-    --option-group-name default:oracle-se1-11-2
+    --engine-version 19.0.0.0.ru-2020-10.rur-2020-10.r1 ^
+    --option-group-name default:oracle-se2-19
 ```
 
 ## RDS API<a name="USER_UpgradeDBSnapshot.Oracle.API"></a>

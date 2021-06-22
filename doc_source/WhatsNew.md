@@ -5,10 +5,11 @@
 The following table describes important changes in each release of the *Amazon RDS User Guide* after May 2018\. For notification about updates to this documentation, you can subscribe to an RSS feed\. 
 
 **Note**  
-You can filter new Amazon RDS features on the [ What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products** filter, choose **Amazon RDS**\. Then search using keywords such as "RDS Proxy" or "Oracle 2021"\.
+You can filter new Amazon RDS features on the [What's New with Database?](http://aws.amazon.com/about-aws/whats-new/database/) page\. For **Products**, choose **Amazon RDS**\. Then search using keywords such as **RDS Proxy** or **Oracle 2021**\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support for MySQL 8\.0\.25](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL version 8\.0\.25\. For more information, see [MySQL on Amazon RDS versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)\. | June 18, 2021 | 
 | [Amazon RDS on AWS Outposts supports additional RDS for PostgreSQL versions](#WhatsNew) | RDS on Outposts now supports RDS for PostgreSQL versions 12\.5, 12\.6, 13\.1, and 13\.2\. For more information, see [Amazon RDS on AWS Outposts support for Amazon RDS features](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html#rds-on-outposts.rds-feature-support)\. | May 28, 2021 | 
 | [Amazon RDS for Oracle includes the April 2021 PSU for Oracle Database 12c Release 1 \(12\.1\.0\.2\)](#WhatsNew) | Amazon RDS has released the 12\.1\.0\.2\.v24 patch set update \(PSU\)\. For more information, see [Oracle database engine release notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.12.1.0.2.html#Appendix.Oracle.PatchComposition.12.1.0.2.v24)\. | May 28, 2021 | 
 | [Support for MariaDB 10\.2\.37 and 10\.3\.28](#WhatsNew) | You can now create Amazon RDS DB instances running MariaDB versions 10\.2\.37 and 10\.3\.28\. For more information, see [MariaDB on Amazon RDS versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)\. | May 27, 2021 | 

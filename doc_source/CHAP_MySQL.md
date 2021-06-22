@@ -104,9 +104,6 @@ Amazon RDS doesn't currently support the following MySQL features:
 + Error Logging to the System Log
 + Group Replication Plugin
 + InnoDB Tablespace Encryption
-+ MariaDB Audit Plugin \(not supported for RDS for MySQL version 8\.0 only\)
-
-  The MariaDB Audit Plugin is supported for RDS for MySQL version 5\.6 and 5\.7\.
 + Password Strength Plugin
 + Persisted system variables
 + Semisynchronous replication

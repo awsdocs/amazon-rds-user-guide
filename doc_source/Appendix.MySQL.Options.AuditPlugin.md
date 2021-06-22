@@ -4,8 +4,9 @@ Amazon RDS supports using the MariaDB Audit Plugin on MySQL database instances\.
 
 **Note**  
 Currently, the MariaDB Audit Plugin is only supported for the following RDS for MySQL versions:   
+MySQL 8\.0\.25 and higher 8\.0 versions
+MySQL 5\.7\.16 and higher 5\.7 versions
 All 5\.6 versions
-MySQL 5\.7\.16 and later 5\.7 versions
 
 ## Audit Plugin option settings<a name="Appendix.MySQL.Options.AuditPlugin.Options"></a>
 
@@ -19,7 +20,7 @@ Amazon RDS supports the following settings for the MariaDB Audit Plugin option\.
 | `SERVER_AUDIT_FILE_PATH` | `/rdsdbdata/log/audit/` | `/rdsdbdata/log/audit/` |  The location of the log file\. The log file contains the record of the activity specified in `SERVER_AUDIT_EVENTS`\. For more information, see [Viewing and listing database log files](USER_LogAccess.md#USER_LogAccess.Procedural.Viewing) and [Accessing MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.   | 
 | `SERVER_AUDIT_FILE_ROTATE_SIZE` | 1–1000000000 | 1000000 |  The size in bytes that when reached, causes the file to rotate\. For more information, see [Overview of MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)\.   | 
 | `SERVER_AUDIT_FILE_ROTATIONS` | 0–100 | 9 |  The number of log rotations to save\. For more information, see [Overview of MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md) and [Downloading a database log file](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\.   | 
-| `SERVER_AUDIT_EVENTS` | `CONNECT`, `QUERY`, `QUERY_DDL`, `QUERY_DML`, `QUERY_DCL` | `CONNECT`, `QUERY` |  The types of activity to record in the log\. Installing the MariaDB Audit Plugin is itself logged\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.Options.AuditPlugin.html) For MySQL, `TABLE` is not supported\.  | 
+| `SERVER_AUDIT_EVENTS` | `CONNECT`, `QUERY`, `QUERY_DDL`, `QUERY_DML`, `QUERY_DML_NO_SELECT`, `QUERY_DCL` | `CONNECT`, `QUERY` |  The types of activity to record in the log\. Installing the MariaDB Audit Plugin is itself logged\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.Options.AuditPlugin.html) For MySQL, `TABLE` is not supported\.  | 
 | `SERVER_AUDIT_INCL_USERS` | Multiple comma\-separated values | None |  Include only activity from the specified users\. By default, activity is recorded for all users\. `SERVER_AUDIT_INCL_USERS` and `SERVER_AUDIT_EXCL_USERS` are mutually exclusive\. If you add values to `SERVER_AUDIT_INCL_USERS`, make sure no values are added to `SERVER_AUDIT_EXCL_USERS`\.   | 
 | `SERVER_AUDIT_EXCL_USERS` | Multiple comma\-separated values | None |  Exclude activity from the specified users\. By default, activity is recorded for all users\. `SERVER_AUDIT_INCL_USERS` and `SERVER_AUDIT_EXCL_USERS` are mutually exclusive\. If you add values to `SERVER_AUDIT_EXCL_USERS`, make sure no values are added to `SERVER_AUDIT_INCL_USERS`\.   The `rdsadmin` user queries the database every second to check the health of the database\. Depending on your other settings, this activity can possibly cause the size of your log file to grow very large, very quickly\. If you don't need to record this activity, add the `rdsadmin` user to the `SERVER_AUDIT_EXCL_USERS` list\.    `CONNECT` activity is always recorded for all users, even if the user is specified for this option setting\.    | 
 | `SERVER_AUDIT_LOGGING` | `ON` | `ON` |  Logging is active\. The only valid value is `ON`\. Amazon RDS does not support deactivating logging\. If you want to deactivate logging, remove the MariaDB Audit Plugin\. For more information, see [Removing the MariaDB Audit Plugin](#Appendix.MySQL.Options.AuditPlugin.Remove)\.   | 

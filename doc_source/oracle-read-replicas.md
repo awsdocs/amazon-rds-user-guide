@@ -14,6 +14,10 @@ To configure replication between Oracle DB instances, you can create replica dat
 
 An Oracle *replica* database is either mounted or read\-only\. An Oracle replica in read\-only mode is called a *read replica*\. An Oracle replica in mounted mode is called a *mounted replica*\.
 
+**Topics**
++ [Read\-only and mounted replicas](#oracle-read-replicas.overview.modes)
++ [Outages during replication](#oracle-read-replicas.overview.outages)
+
 ### Read\-only and mounted replicas<a name="oracle-read-replicas.overview.modes"></a>
 
 When creating or modifying an Oracle replica, you can place it in either of the following modes:
@@ -33,6 +37,11 @@ When you create an Oracle replica, no outage occurs for the source DB instance\.
 ## Replica requirements for Oracle<a name="oracle-read-replicas.limitations"></a>
 
 Before creating an Oracle replica, check the following requirements\.
+
+**Topics**
++ [Version and licensing requirements for Oracle replicas](#oracle-read-replicas.limitations.versions-and-licenses)
++ [Option requirements for Oracle replicas](#oracle-read-replicas.limitations.options)
++ [Miscellaneous requirements for Oracle replicas](#oracle-read-replicas.limitations.miscellaneous)
 
 ### Version and licensing requirements for Oracle replicas<a name="oracle-read-replicas.limitations.versions-and-licenses"></a>
 

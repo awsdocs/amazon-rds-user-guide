@@ -2,9 +2,9 @@
 
 You can restore a DB instance to a specific point in time, creating a new DB instance\.
 
-When you restore a DB instance to a point in time, the default DB security group is applied to the new DB instance\. If you need custom DB security groups applied to your DB instance, you must apply them explicitly using the AWS Management Console, the AWS CLI `modify-db-instance` command, or the Amazon RDS API `ModifyDBInstance` operation after the DB instance is available\.
+When you restore a DB instance to a point in time, you can choose the default VPC security group or apply a custom VPC security group to your DB instance\.
 
-Restored DB instances are automatically associated with the default parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
+Restored DB instances are automatically associated with the default DB parameter and option groups\. However, you can apply a custom parameter group and option group by specifying them during a restore\.
 
 RDS uploads transaction logs for DB instances to Amazon S3 every 5 minutes\. To see the latest restorable time for a DB instance, use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 

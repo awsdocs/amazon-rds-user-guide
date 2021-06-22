@@ -447,7 +447,7 @@ To run the stored procedures, log in as any user that you granted permissions fo
    @task_type='SSIS_DEPLOY_PROJECT',
    @folder_name='DEMO',
    @project_name='ssisproject',
-   @file_path='D:\S3\ssisproject.ispac;
+   @file_path='D:\S3\ssisproject.ispac';
    ```
 
 ## Monitoring the status of a deployment task<a name="SSIS.Monitor"></a>

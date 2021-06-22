@@ -230,7 +230,9 @@ You can import data from Amazon S3 to a new MySQL DB instance using the AWS Mana
 
    1. For **Source engine version**, choose the MySQL major version of your source database\.
 
-   1. For **Version**, choose the MySQL engine version for your restored DB instance\.
+   1. For **Version**, choose the default minor version of your MySQL major version in your AWS Region\.
+
+      In the AWS Management Console, only the default minor version is available\. You can upgrade your DB instance after importing\.
 
 1. For **IAM role**, you can choose an existing IAM role\.
 

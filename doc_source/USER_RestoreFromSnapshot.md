@@ -2,6 +2,12 @@
 
 Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a DB instance by restoring from this DB snapshot\. When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
 
+You can use the restored DB instance as soon as its status is `available`\. The DB instance continues to load data in the background\. This is known as *lazy loading*\.
+
+If you access data that hasn't been loaded yet, the DB instance immediately downloads the requested data from Amazon S3, and then continues loading the rest of the data in the background\. For more information, see [Amazon EBS snapshots](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html)\.
+
+To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full table scans, such as `SELECT *`\. This allows Amazon RDS to download the entirety of the backed\-up table data from S3\.
+
 You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from magnetic storage, the migration process is the slowest\. That's because magnetic storage doesn't have the IOPS capability of Provisioned IOPS or General Purpose \(SSD\) storage\.
 
 **Note**  

@@ -26,6 +26,7 @@ Amazon RDS API currently supports VPC endpoints in the following AWS Regions:
 + Africa \(Cape Town\)
 + Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Mumbai\)
++ Asia Pacific \(Osaka\)
 + Asia Pacific \(Seoul\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)

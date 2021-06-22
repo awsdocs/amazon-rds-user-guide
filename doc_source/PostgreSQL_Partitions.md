@@ -34,25 +34,25 @@ You can't alter the schema for an individual partition\. However, you can alter 
 
 ## Overview of the PostgreSQL pg\_partman extension<a name="PostgreSQL_Partitions.pg_partman"></a>
 
-You can use the PostgreSQL pg\_partman extension to automate the creation and maintenance of table partitions\. For more general information, see [PG Partition Manager](https://github.com/pgpartman/pg_partman) in the pg\_partman documentation\.
+You can use the PostgreSQL `pg_partman` extension to automate the creation and maintenance of table partitions\. For more general information, see [PG Partition Manager](https://github.com/pgpartman/pg_partman) in the `pg_partman` documentation\.
 
 **Note**  
-The pg\_partman extension is supported on RDS for PostgreSQL engine versions 12\.5 and higher\.
+The `pg_partman` extension is supported on RDS for PostgreSQL versions 12\.5 and higher\.
 
-Instead of having to manually create each partition, you configure pg\_partman with the following settings: 
+Instead of having to manually create each partition, you configure `pg_partman` with the following settings: 
 + Table to be partitioned
 + Partition type
 + Partition key
 + Partition granularity
 + Partition precreation and management options
 
-After you create a PostgreSQL partitioned table, you register it with pg\_partman by calling the `create_parent` function\. Doing this creates the necessary partitions based on the parameters you pass to the function\.
+After you create a PostgreSQL partitioned table, you register it with `pg_partman` by calling the `create_parent` function\. Doing this creates the necessary partitions based on the parameters you pass to the function\.
 
-The pg\_partman extension also provides the `run_maintenance_proc` function, which you can call on a scheduled basis to automatically manage partitions\. To ensure that the proper partitions are created as needed, schedule this function to run periodically \(such as hourly\)\. You can also ensure that partitions are automatically dropped\.
+The `pg_partman` extension also provides the `run_maintenance_proc` function, which you can call on a scheduled basis to automatically manage partitions\. To ensure that the proper partitions are created as needed, schedule this function to run periodically \(such as hourly\)\. You can also ensure that partitions are automatically dropped\.
 
 ## Enabling the pg\_partman extension<a name="PostgreSQL_Partitions.enable"></a>
 
-If you have multiple databases inside the same DB instance for which you want to manage partitions, enable the pg\_partman extension separately for each database\. To enable the pg\_partman extension for a specific database, create the partition maintenance schema and then create the pg\_partman extension as follows\.
+If you have multiple databases inside the same PostgreSQL DB instance for which you want to manage partitions, enable the `pg_partman` extension separately for each database\. To enable the `pg_partman` extension for a specific database, create the partition maintenance schema and then create the `pg_partman` extension as follows\.
 
 ```
 CREATE SCHEMA partman;
@@ -60,7 +60,7 @@ CREATE EXTENSION pg_partman WITH SCHEMA partman;
 ```
 
 **Note**  
-To create the pg\_partman extension, make sure that you have `rds_superuser` privileges\. 
+To create the `pg_partman` extension, make sure that you have `rds_superuser` privileges\. 
 
 If you receive an error such as the following, grant the `rds_superuser` privileges to the account or use your superuser account\. 
 
@@ -116,7 +116,7 @@ CREATE INDEX idx_event_type ON  data_mart.events(event_type);
 
 ## Configuring partitions using the create\_parent function<a name="PostgreSQL_Partitions.create_parent"></a>
 
-After you enable the pg\_partman extension, you use the `create_parent` function to configure partitions inside the partition maintenance schema\. The following example uses the `events` table example created in [Enabling the pg\_partman extensionConfiguring partition maintenance using the run\_maintenance\_proc function](#PostgreSQL_Partitions.enable)\. Call the `create_parent` function as follows\.
+After you enable the `pg_partman` extension, use the `create_parent` function to configure partitions inside the partition maintenance schema\. The following example uses the `events` table example created in [Enabling the pg\_partman extensionConfiguring partition maintenance using the run\_maintenance\_proc function](#PostgreSQL_Partitions.enable)\. Call the `create_parent` function as follows\.
 
 ```
 SELECT partman.create_parent( p_parent_table => 'data_mart.events',
@@ -127,23 +127,21 @@ SELECT partman.create_parent( p_parent_table => 'data_mart.events',
 ```
 
 The parameters are as follows:
-+ `p_parent_table` – The parent partitioned table\. This table must already exist and be fully qualified including the schema\. 
-+ `p_control` – The column on which the partitioning is to be based\. The data type must be integer or time\-based\.
-+ `p_type` – The type is either native or partman\. You typically use the native type for its performance improvements and flexibility\. The partman type relies on inheritance\.
-+ `p_interval` – The time interval or integer range for each partition\. Example values include daily, hourly, and so on\.
++ `p_parent_table` – The parent partitioned table\. This table must already exist and be fully qualified, including the schema\. 
++ `p_control` – The column on which the partitioning is to be based\. The data type must be an integer or time\-based\.
++ `p_type` – The type is either `'native'` or `'partman'`\. You typically use the `native` type for its performance improvements and flexibility\. The `partman` type relies on inheritance\.
++ `p_interval` – The time interval or integer range for each partition\. Example values include `daily`, hourly, and so on\.
 + `p_premake` – The number of partitions to create in advance to support new inserts\.
 
-For a complete description of the `create_parent` function, see [Creation Functions](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman.md#user-content-creation-functions) in the pg\_partman documentation\.
+For a complete description of the `create_parent` function, see [Creation Functions](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman.md#user-content-creation-functions) in the `pg_partman` documentation\.
 
 ## Configuring partition maintenance using the run\_maintenance\_proc function<a name="PostgreSQL_Partitions.run_maintenance_proc"></a>
 
-You can run partition maintenance operations to automatically create new partitions, detach partitions, or remove old partitions\. Partition maintenance relies on the `run_maintenance_proc` function of pg\_partman and the `pg_cron` extension, which initiates an internal scheduler\. The `pg_cron` scheduler automatically executes SQL statements, functions, and procedures defined in your databases\. 
+You can run partition maintenance operations to automatically create new partitions, detach partitions, or remove old partitions\. Partition maintenance relies on the `run_maintenance_proc` function of the `pg_partman` extension and the `pg_cron` extension, which initiates an internal scheduler\. The `pg_cron` scheduler automatically executes SQL statements, functions, and procedures defined in your databases\. 
 
-The following example uses the `events` table example created in [Enabling the pg\_partman extensionConfiguring partition maintenance using the run\_maintenance\_proc function](#PostgreSQL_Partitions.enable) to set partition maintenance operations to run automatically\.
+The following example uses the `events` table example created in [Enabling the pg\_partman extensionConfiguring partition maintenance using the run\_maintenance\_proc function](#PostgreSQL_Partitions.enable) to set partition maintenance operations to run automatically\. As a prerequisite, add `pg_cron` to the `shared_preload_libraries` parameter in the DB instance's parameter group\.
 
 ```
--- Prerequisite: add pg_cron to the shared_preload_libraries parameter in the DB instance's parameter group.
-
 CREATE EXTENSION pg_cron;
 
 UPDATE partman.part_config 
@@ -160,7 +158,7 @@ Following, you can find a step\-by\-step explanation of the preceding example:
 
 1. Run the command `CREATE EXTENSION pg_cron;` using an account that has the `rds_superuser` permissions\. Doing this enables the `pg_cron` extension\. For more information, see [Scheduling maintenance with the PostgreSQL pg\_cron extension](PostgreSQL_pg_cron.md)\.
 
-1. Run the command `UPDATE partman.part_config` to adjust the pg\_partman settings for the `data_mart.events` table\. 
+1. Run the command `UPDATE partman.part_config` to adjust the `pg_partman` settings for the `data_mart.events` table\. 
 
 1. Run the command `SET` \. \. \. to configure the `data_mart.events` table, with these clauses:
 
@@ -170,6 +168,6 @@ Following, you can find a step\-by\-step explanation of the preceding example:
 
    1. `retention_keep_table=true `– Configures the table so that when the retention period is due, the table isn't deleted automatically\. Instead, partitions that are older than the retention period are only detached from the parent table\.
 
-1. Run the command `SELECT cron.schedule` \. \. \. to make a `pg_cron` function call\. This call defines how often the scheduler runs the pg\_partman maintenance procedure, `partman.run_maintenance_proc`\. For this example, the procedure runs every hour\. 
+1. Run the command `SELECT cron.schedule` \. \. \. to make a `pg_cron` function call\. This call defines how often the scheduler runs the `pg_partman` maintenance procedure, `partman.run_maintenance_proc`\. For this example, the procedure runs every hour\. 
 
-For a complete description of the `run_maintenance_proc` function, see [Maintenance Functions](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman.md#maintenance-functions) in the pg\_partman documentation\. 
+For a complete description of the `run_maintenance_proc` function, see [Maintenance Functions](https://github.com/pgpartman/pg_partman/blob/master/doc/pg_partman.md#maintenance-functions) in the `pg_partman` documentation\. 
