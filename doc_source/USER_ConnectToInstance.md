@@ -19,8 +19,8 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 
 **Topics**
 + [Finding the connection information for a MySQL DB instance](#USER_ConnectToInstance.EndpointAndPort)
-+ [Connecting from the MySQL client](#USER_ConnectToInstance.CLI)
-+ [Connecting with SSL](#USER_ConnectToInstanceSSL.CLI)
++ [Connecting from the MySQL client \(unencrypted\)](#USER_ConnectToInstance.CLI)
++ [Connecting with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
 + [Connecting from MySQL Workbench](#USER_ConnectToInstance.MySQLWorkbench)
 + [Troubleshooting connections to your MySQL DB instance](#USER_ConnectToInstance.Troubleshooting)
 
@@ -93,7 +93,10 @@ Your output should be similar to the following\.
 
 To find the connection information for a DB instance by using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. In the output, find the values for the endpoint address, endpoint port, and master user name\. 
 
-## Connecting from the MySQL client<a name="USER_ConnectToInstance.CLI"></a>
+## Connecting from the MySQL client \(unencrypted\)<a name="USER_ConnectToInstance.CLI"></a>
+
+**Important**  
+Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)\.
 
 To connect to a DB instance using the MySQL client, enter the following command at a command prompt to connect to a DB instance using the MySQL client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
 
@@ -113,7 +116,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 mysql>
 ```
 
-## Connecting with SSL<a name="USER_ConnectToInstanceSSL.CLI"></a>
+## Connecting with SSL \(encrypted\)<a name="USER_ConnectToInstanceSSL.CLI"></a>
 
 Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication\. To connect to your DB instance using IAM database authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. To connect to your DB instance using native password authentication, you can follow these steps: 
 

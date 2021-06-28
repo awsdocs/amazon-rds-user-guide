@@ -10,8 +10,8 @@ You can use SSL encryption on connections to a MariaDB DB instance\. For informa
 
 **Topics**
 + [Finding the connection information for a MariaDB DB instance](#USER_ConnectToMariaDBInstance.EndpointAndPort)
-+ [Connecting from the mysql utility](#USER_ConnectToMariaDBInstance.CLI)
-+ [Connecting with SSL](#USER_ConnectToMariaDBInstanceSSL.CLI)
++ [Connecting from the mysql utility \(unencrypted\)](#USER_ConnectToMariaDBInstance.CLI)
++ [Connecting with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)
 + [Troubleshooting connections to your MariaDB DB instance](#USER_ConnectToMariaDBInstance.Troubleshooting)
 
 ## Finding the connection information for a MariaDB DB instance<a name="USER_ConnectToMariaDBInstance.EndpointAndPort"></a>
@@ -83,7 +83,10 @@ Your output should be similar to the following\.
 
 To find the connection information for a DB instance by using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. In the output, find the values for the endpoint address, endpoint port, and master user name\. 
 
-## Connecting from the mysql utility<a name="USER_ConnectToMariaDBInstance.CLI"></a>
+## Connecting from the mysql utility \(unencrypted\)<a name="USER_ConnectToMariaDBInstance.CLI"></a>
+
+**Important**  
+Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)\.
 
 To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<mymasteruser>`*\. Provide the master password that you used when prompted for a password\.
 
@@ -94,22 +97,18 @@ mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
 After you enter the password for the user, you see output similar to the following\.
 
 ```
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 272
-Server version: 5.5.5-10.0.17-MariaDB-log MariaDB Server
-
-Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 31
+Server version: 10.5.8-MariaDB-log Source distribution
+ 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql >
+  
+MariaDB [(none)]>
 ```
 
-## Connecting with SSL<a name="USER_ConnectToMariaDBInstanceSSL.CLI"></a>
+## Connecting with SSL \(encrypted\)<a name="USER_ConnectToMariaDBInstanceSSL.CLI"></a>
 
 Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, follow these steps:
 
@@ -136,19 +135,15 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 You should see output similar to the following\.
 
 ```
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 272
-Server version: 5.5.5-10.0.17-MariaDB-log MariaDB Server
-
-Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 31
+Server version: 10.5.8-MariaDB-log Source distribution
+ 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+  
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql >
+MariaDB [(none)]>
 ```
 
 ## Troubleshooting connections to your MariaDB DB instance<a name="USER_ConnectToMariaDBInstance.Troubleshooting"></a>

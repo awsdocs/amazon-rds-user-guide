@@ -11,3 +11,4 @@ This section shows you how to monitor Amazon RDS\.
 + [Working with Amazon RDS events](working-with-events.md)
 + [Working with Amazon RDS database log files](USER_LogAccess.md)
 + [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)
++ [Monitoring Amazon RDS for Oracle using Database Activity Streams](DBActivityStreams.md)

@@ -65,10 +65,10 @@ The default MariaDB version might vary by AWS Region\. To create a DB instance w
 aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version major-engine-version --region region --query "*[].{Engine:Engine,EngineVersion:EngineVersion}" --output text
 ```
 
-Replace *major\-engine\-version* with the major engine version, and replace *region* with the AWS Region\. For example, the following AWS CLI command returns the default MariaDB minor engine version for the 10\.3 major version and the US West \(Oregon\) AWS Region \(us\-west\-2\):
+Replace *major\-engine\-version* with the major engine version, and replace *region* with the AWS Region\. For example, the following AWS CLI command returns the default MariaDB minor engine version for the 10\.5 major version and the US West \(Oregon\) AWS Region \(us\-west\-2\):
 
 ```
-aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.3 --region us-west-2 --query '*[].{Engine:Engine,EngineVersion:EngineVersion}' --output text
+aws rds describe-db-engine-versions --default-only --engine mariadb --engine-version 10.5 --region us-west-2 --query "*[].{Engine:Engine,EngineVersion:EngineVersion}" --output text
 ```
 
 ## MariaDB feature support on Amazon RDS<a name="MariaDB.Concepts.FeatureSupport"></a>
@@ -269,26 +269,45 @@ Amazon RDS creates an SSL certificate and installs the certificate on the DB ins
 
 For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
-Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, and 1\.2\. The following table shows the TLS support for MySQL versions\. 
+Amazon RDS for MariaDB supports Transport Layer Security \(TLS\) versions 1\.0, 1\.1, 1\.2, and 1\.3\. The following table shows the TLS support for MySQL versions\. 
 
 
 ****  
 
-| MariaDB version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | 
-| --- | --- | --- | --- | 
-|  MariaDB 10\.5  |  Supported  |  Supported  |  Supported  | 
-|  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  | 
-|  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  | 
-|  MariaDB 10\.2  |  Supported  |  Supported  |  Supported  | 
+| MariaDB version | TLS 1\.0 | TLS 1\.1 | TLS 1\.2 | TLS 1\.3 | 
+| --- | --- | --- | --- | --- | 
+|  MariaDB 10\.5  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  MariaDB 10\.4  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  MariaDB 10\.3  |  Supported  |  Supported  |  Supported  |  Supported  | 
+|  MariaDB 10\.2  |  Supported  |  Supported  |  Supported  |  Supported  | 
+
+**Important**  
+The `mysql` client program parameters are slightly different if you are using the MySQL 5\.7 version, the MySQL 8\.0 version, or the MariaDB version\.  
+To find out which version you have, run the `mysql` command with the `--version` option\. In the following example, the output shows that the client program is from MariaDB\.  
+
+```
+$ mysql --version
+mysql  Ver 15.1 Distrib 10.5.9-MariaDB, for osx10.15 (x86_64) using readline 5.1
+```
+Most Linux distributions, such as Amazon Linux, CentOS, SUSE, and Debian have replaced MySQL with MariaDB, and the `mysql` version in them is from MariaDB\.
 
 To encrypt connections using the default mysql client, launch the mysql client using the `--ssl-ca` parameter to reference the public key, as shown in the examples following\.
 
-The following example shows how to launch the client using the `--ssl-ca` parameter for MariaDB 10\.2 and later\.
+The following example shows how to launch the client using the `--ssl-ca` parameter using the MySQL 5\.7 client or later:
 
 ```
-mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
---ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-mode=REQUIRED
+mysql -h myinstance.123456789012.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]global-bundle.pem --ssl-mode=REQUIRED
 ```
+
+The following example shows how to launch the client using the `--ssl-ca` parameter using the MariaDB client:
+
+```
+mysql -h myinstance.123456789012.rds-us-east-1.amazonaws.com
+--ssl-ca=[full path]global-bundle.pem --ssl
+```
+
+For information about downloading certificate bundles, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MariaDB version, to require SSL connections on the user account `encrypted_user`\.
 
@@ -353,36 +372,51 @@ You can set your local time zone to one of the following values\.
 
 ****  
 
-|  |  |  | 
-| --- |--- |--- |
-| `Africa/Cairo` | `Asia/Bangkok` | `Australia/Darwin` | 
-| `Africa/Casablanca` | `Asia/Beirut` | `Australia/Hobart` | 
-| `Africa/Harare` | `Asia/Calcutta` | `Australia/Perth` | 
-| `Africa/Monrovia` | `Asia/Damascus` | `Australia/Sydney` | 
-| `Africa/Nairobi` | `Asia/Dhaka` | `Brazil/East` | 
-| `Africa/Tripoli` | `Asia/Irkutsk` | `Canada/Newfoundland` | 
-| `Africa/Windhoek` | `Asia/Jerusalem` | `Canada/Saskatchewan` | 
-| `America/Araguaina` | `Asia/Kabul` | `Europe/Amsterdam` | 
-| `America/Asuncion` | `Asia/Karachi` | `Europe/Athens` | 
-| `America/Bogota` | `Asia/Kathmandu` | `Europe/Dublin` | 
-| `America/Caracas` | `Asia/Krasnoyarsk` | `Europe/Helsinki` | 
-| `America/Chihuahua` | `Asia/Magadan` | `Europe/Istanbul` | 
-| `America/Cuiaba` | `Asia/Muscat` | `Europe/Kaliningrad` | 
-| `America/Denver` | `Asia/Novosibirsk` | `Europe/Moscow` | 
-| `America/Fortaleza` | `Asia/Riyadh` | `Europe/Paris` | 
-| `America/Guatemala` | `Asia/Seoul` | `Europe/Prague` | 
-| `America/Halifax` | `Asia/Shanghai` | `Europe/Sarajevo` | 
-| `America/Manaus` | `Asia/Singapore` | `Pacific/Auckland` | 
-| `America/Matamoros` | `Asia/Taipei` | `Pacific/Fiji` | 
-| `America/Monterrey` | `Asia/Tehran` | `Pacific/Guam` | 
-| `America/Montevideo` | `Asia/Tokyo` | `Pacific/Honolulu` | 
-| `America/Phoenix` | `Asia/Ulaanbaatar` | `Pacific/Samoa` | 
-| `America/Santiago` | `Asia/Vladivostok` | `US/Alaska` | 
-| `America/Tijuana` | `Asia/Yakutsk` | `US/Central` | 
-| `Asia/Amman` | `Asia/Yerevan` | `US/Eastern` | 
-| `Asia/Ashgabat` | `Atlantic/Azores` | `US/East-Indiana` | 
-| `Asia/Baghdad` | `Australia/Adelaide` | `US/Pacific` | 
-| `Asia/Baku` | `Australia/Brisbane` | `UTC` | 
+|  |  | 
+| --- |--- |
+| `Africa/Cairo` | `Asia/Riyadh` | 
+| `Africa/Casablanca` | `Asia/Seoul` | 
+| `Africa/Harare` | `Asia/Shanghai` | 
+| `Africa/Monrovia` | `Asia/Singapore` | 
+| `Africa/Nairobi` | `Asia/Taipei` | 
+| `Africa/Tripoli` | `Asia/Tehran` | 
+| `Africa/Windhoek` | `Asia/Tokyo` | 
+| `America/Araguaina` | `Asia/Ulaanbaatar` | 
+| `America/Asuncion` | `Asia/Vladivostok` | 
+| `America/Bogota` | `Asia/Yakutsk` | 
+| `America/Buenos_Aires` | `Asia/Yerevan` | 
+| `America/Caracas` | `Atlantic/Azores` | 
+| `America/Chihuahua` | `Australia/Adelaide` | 
+| `America/Cuiaba` | `Australia/Brisbane` | 
+| `America/Denver` | `Australia/Darwin` | 
+| `America/Fortaleza` | `Australia/Hobart` | 
+| `America/Guatemala` | `Australia/Perth` | 
+| `America/Halifax` | `Australia/Sydney` | 
+| `America/Manaus` | `Brazil/East` | 
+| `America/Matamoros` | `Canada/Newfoundland` | 
+| `America/Monterrey` | `Canada/Saskatchewan` | 
+| `America/Montevideo` | `Canada/Yukon` | 
+| `America/Phoenix` | `Europe/Amsterdam` | 
+| `America/Santiago` | `Europe/Athens` | 
+| `America/Tijuana` | `Europe/Dublin` | 
+| `Asia/Amman` | `Europe/Helsinki` | 
+| `Asia/Ashgabat` | `Europe/Istanbul` | 
+| `Asia/Baghdad` | `Europe/Kaliningrad` | 
+| `Asia/Baku` | `Europe/Moscow` | 
+| `Asia/Bangkok` | `Europe/Paris` | 
+| `Asia/Beirut` | `Europe/Prague` | 
+| `Asia/Calcutta` | `Europe/Sarajevo` | 
+| `Asia/Damascus` | `Pacific/Auckland` | 
+| `Asia/Dhaka` | `Pacific/Fiji` | 
+| `Asia/Irkutsk` | `Pacific/Guam` | 
+| `Asia/Jerusalem` | `Pacific/Honolulu` | 
+| `Asia/Kabul` | `Pacific/Samoa` | 
+| `Asia/Karachi` | `US/Alaska` | 
+| `Asia/Kathmandu` | `US/Central` | 
+| `Asia/Krasnoyarsk` | `US/Eastern` | 
+| `Asia/Magadan` | `US/East-Indiana` | 
+| `Asia/Muscat` | `US/Pacific` | 
+| `Asia/Novosibirsk` | `UTC` | 
 
 ## Deprecated versions for Amazon RDS for MariaDB<a name="MariaDB.Concepts.DeprecatedVersions"></a>
 

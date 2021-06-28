@@ -6,7 +6,7 @@ You can use the restored DB instance as soon as its status is `available`\. The 
 
 If you access data that hasn't been loaded yet, the DB instance immediately downloads the requested data from Amazon S3, and then continues loading the rest of the data in the background\. For more information, see [Amazon EBS snapshots](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html)\.
 
-To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full table scans, such as `SELECT *`\. This allows Amazon RDS to download the entirety of the backed\-up table data from S3\.
+To help mitigate the effects of lazy loading on tables to which you require quick access, you can perform operations that involve full\-table scans, such as `SELECT *`\. This allows Amazon RDS to download all of the backed\-up table data from S3\.
 
 You can restore a DB instance and use a different storage type than the source DB snapshot\. In this case, the restoration process is slower because of the additional work required to migrate the data to the new storage type\. If you restore to or from magnetic storage, the migration process is the slowest\. That's because magnetic storage doesn't have the IOPS capability of Provisioned IOPS or General Purpose \(SSD\) storage\.
 

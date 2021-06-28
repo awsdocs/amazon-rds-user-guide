@@ -6,7 +6,8 @@ This topic can help you to determine whether your applications require certifica
 
 **Note**  
 Some applications are configured to connect to MariaDB only if they can successfully verify the certificate on the server\. For such applications, you must update your client application trust stores to include the new CA certificates\.   
-You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the connection falls back to not using SSL and still connects successfully\.
+You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the connection falls back to not using SSL and still connects successfully\.  
+We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection encounters an invalid certificate, it stops using encryption and proceeds unencrypted\.
 
 After you update your CA certificates in the client application trust stores, you can rotate the certificates on your DB instances\. We strongly recommend testing these procedures in a development or staging environment before implementing them in your production environments\.
 

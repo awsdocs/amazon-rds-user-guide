@@ -87,7 +87,7 @@ For example, SQL Server Standard Edition on db\.m5\.xlarge has a default allocat
 We recommend that you carefully choose the maximum storage threshold based on usage patterns and customer needs\. If there are any aberrations in the usage patterns, the maximum storage threshold can prevent scaling storage to an unexpectedly high value when autoscaling predicts a very high threshold\. After a DB instance has been autoscaled, its allocated storage can't be reduced\.
 
 The following limitations apply to storage autoscaling:
-+ Autoscaling doesn't occur if the maximum storage threshold would be exceeded by the storage increment\.
++ Autoscaling doesn't occur if the maximum storage threshold would be equaled or exceeded by the storage increment\.
 + Autoscaling can't completely prevent storage\-full situations for large data loads, because further storage modifications can't be made until six hours after storage optimization has completed on the instance\. If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.
 + If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 + Autoscaling can't be used with magnetic storage\.

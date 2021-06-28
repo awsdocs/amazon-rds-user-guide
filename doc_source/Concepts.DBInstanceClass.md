@@ -63,7 +63,7 @@ Instance class support varies according to the version and edition of SQL Server
 The Graviton2 instance classes db\.m6g and db\.r6g are supported for RDS for MySQL versions 8\.0\.17 and higher\.
 
 **Oracle**  
-Instance class support varies according to the version and edition of Oracle\. For instance class support by version and edition, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
+Instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported Oracle DB instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 **PostgreSQL**  
 PostgreSQL versions 13 and higher support the db\.m6g, db\.m5, db\.r6g, db\.r5, db\.t3 instance classes\. Previous generations of classes are supported only by PostgreSQL versions lower than 13 and include db\.m4, db\.m3, db\.r4, db\.r3, and db\.t2\.
@@ -161,6 +161,19 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5b\.2xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.xlarge | No | Yes | No | Yes | No | 
 | db\.r5b\.large | No | Yes | No | Yes | No | 
+| db\.r5 – Latest generation memory\-optimized instance classes preconfigured for high memory, storage, and I/O | 
+| db\.r5\.12xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
+| db\.r5\.8xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
+| db\.r5\.6xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5\.4xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5\.4xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
+| db\.r5\.4xlarge\.tpc2\.mem2x  | No | No | No | Yes | No | 
+| db\.r5\.2xlarge\.tpc2\.mem8x | No | No | No | Yes | No | 
+| db\.r5\.2xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5\.2xlarge\.tpc1\.mem2x | No | No | No | Yes | No | 
+| db\.r5\.xlarge\.tpc2\.mem4x | No | No | No | Yes | No | 
+| db\.r5\.xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
+| db\.r5\.large\.tpc1\.mem2x | No | No | No | Yes | No | 
 | db\.r5 – Latest generation memory\-optimized instance classes | 
 | db\.r5\.24xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
 | db\.r5\.16xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10\.4 & higher, 9\.6\.9 & higher | 
@@ -349,14 +362,14 @@ Some instance classes require that your DB instance is in a VPC\. If your curren
 
 ## Configuring the processor for a DB instance class<a name="USER_ConfigureProcessor"></a>
 
-Amazon RDS DB instance classes support Intel Hyper\-Threading Technology, which enables multiple threads to run concurrently on a single Intel Xeon CPU core\. Each thread is represented as a virtual CPU \(vCPU\) on the DB instance\. A DB instance has a default number of CPU cores, which varies according to DB instance type\. For example, a db\.m4\.xlarge DB instance type has two CPU cores and two threads per core by default—four vCPUs in total\.
+Amazon RDS DB instance classes support Intel Hyper\-Threading Technology, which enables multiple threads to run concurrently on a single Intel Xeon CPU core\. Each thread is represented as a virtual CPU \(vCPU\) on the DB instance\. A DB instance has a default number of CPU cores, which varies according to DB instance class\. For example, a db\.m4\.xlarge DB instance class has two CPU cores and two threads per core by default—four vCPUs in total\.
 
 **Note**  
 Each vCPU is a hyperthread of an Intel Xeon CPU core\.
 
 **Topics**
 + [Overview of configuring the processor](#USER_ConfigureProcessor.Overview)
-+ [CPU cores and threads per CPU core per DB instance class](#USER_ConfigureProcessor.CPUOptionsDBInstanceClass)
++ [DB instance classes that support processor configuration](#USER_ConfigureProcessor.CPUOptionsDBInstanceClass)
 + [Setting the CPU cores and threads per CPU core for a DB instance class](#USER_ConfigureProcessor.SettingCPUOptions)
 
 ### Overview of configuring the processor<a name="USER_ConfigureProcessor.Overview"></a>
@@ -373,7 +386,12 @@ If you modify the DB instance class for a DB instance with nondefault processor 
 
 There is no additional or reduced charge for specifying processor features on an Amazon RDS DB instance\. You're charged the same as for DB instances that are launched with default CPU configurations\.
 
-### CPU cores and threads per CPU core per DB instance class<a name="USER_ConfigureProcessor.CPUOptionsDBInstanceClass"></a>
+### DB instance classes that support processor configuration<a name="USER_ConfigureProcessor.CPUOptionsDBInstanceClass"></a>
+
+You can configure the number of CPU cores and threads per core only when the following conditions are met:
++ You're configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.
++ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
++ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported Oracle DB instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 In the following table, you can find the DB instance classes that support setting a number of CPU cores and CPU threads per core\. You can also find the default value and the valid values for the number of CPU cores and CPU threads per core for each DB instance class\.
 
@@ -449,10 +467,6 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.z1d\.3xlarge  |  12  |  6  |  2  |  2, 4, 6  |  1, 2  | 
 |  db\.z1d\.6xlarge  |  24  |  12  |  2  |  2, 4, 6, 8, 10, 12  |  1, 2  | 
 |  db\.z1d\.12xlarge  |  48  |  24  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24  |  1, 2  | 
-
-Currently, you can configure the number of CPU cores and threads per core only when the following conditions are met:
-+ You are configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)
-+ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
 
 **Note**  
 You can use AWS CloudTrail to monitor and audit changes to the process configuration of Amazon RDS for Oracle DB instances\. For more information about using CloudTrail, see [Working with AWS CloudTrail and Amazon RDS](logging-using-cloudtrail.md)\.

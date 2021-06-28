@@ -3,7 +3,7 @@
 Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions:
 + MySQL 8\.0
 + MySQL 5\.7
-+ MySQL 5\.6
++ MySQL 5\.6 \(Deprecation scheduled for August 2, 2021\)
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
@@ -83,19 +83,16 @@ You can test a DB instance against a new version before upgrading by creating a 
 
 ### Deprecation of MySQL version 5\.6<a name="MySQL.Concepts.VersionMgmt.Deprecation56"></a>
 
-On August 3, 2021, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
+On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. We recommend that you update all MySQL 5\.6 DB instances to MySQL 5\.7 or higher as soon as possible\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
 
 
 | Action or recommendation | Dates | 
 | --- | --- | 
-|  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–August 3, 2021  | 
-|  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–August 3, 2021  | 
-|  You can no longer create new MySQL 5\.6 DB instances\.  |  April 1, 2021  | 
-|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  August 3, 2021  | 
-|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  August 3, 2021  | 
-|  Amazon RDS automatically upgrades any remaining MySQL 5\.6 DB instances to version 5\.7 whether or not they are in a maintenance window\.  |  September 1, 2021  | 
-
-For more information, see [ Announcement: Amazon Relational Database Service \(RDS\) for MySQL 5\.6 End\-of\-Life date is August 3, 2021](http://forums.aws.amazon.com/ann.jspa?annID=8498)\.
+|  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–February 1, 2022  | 
+|  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–February 1, 2022  | 
+|  You can no longer create new MySQL 5\.6 DB instances\.  |  August 2, 2021  | 
+|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  February 1, 2022  | 
+|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  February 1, 2022  | 
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
@@ -267,6 +264,8 @@ mysql -h myinstance.c9akciq32.rds-us-east-1.amazonaws.com
 --ssl-ca=[full path]rds-combined-ca-bundle.pem --ssl-verify-server-cert
 ```
 
+For information about downloading certificate bundles, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+
 You can require SSL connections for specific users accounts\. For example, you can use one of the following statements, depending on your MySQL version, to require SSL connections on the user account `encrypted_user`\.
 
 For MySQL 5\.7 and later, use the following statement\.
@@ -332,36 +331,51 @@ You can set your local time zone to one of the following values\.
 
 ****  
 
-|  |  |  | 
-| --- |--- |--- |
-| `Africa/Cairo` | `Asia/Bangkok` | `Australia/Darwin` | 
-| `Africa/Casablanca` | `Asia/Beirut` | `Australia/Hobart` | 
-| `Africa/Harare` | `Asia/Calcutta` | `Australia/Perth` | 
-| `Africa/Monrovia` | `Asia/Damascus` | `Australia/Sydney` | 
-| `Africa/Nairobi` | `Asia/Dhaka` | `Brazil/East` | 
-| `Africa/Tripoli` | `Asia/Irkutsk` | `Canada/Newfoundland` | 
-| `Africa/Windhoek` | `Asia/Jerusalem` | `Canada/Saskatchewan` | 
-| `America/Araguaina` | `Asia/Kabul` | `Europe/Amsterdam` | 
-| `America/Asuncion` | `Asia/Karachi` | `Europe/Athens` | 
-| `America/Bogota` | `Asia/Kathmandu` | `Europe/Dublin` | 
-| `America/Caracas` | `Asia/Krasnoyarsk` | `Europe/Helsinki` | 
-| `America/Chihuahua` | `Asia/Magadan` | `Europe/Istanbul` | 
-| `America/Cuiaba` | `Asia/Muscat` | `Europe/Kaliningrad` | 
-| `America/Denver` | `Asia/Novosibirsk` | `Europe/Moscow` | 
-| `America/Fortaleza` | `Asia/Riyadh` | `Europe/Paris` | 
-| `America/Guatemala` | `Asia/Seoul` | `Europe/Prague` | 
-| `America/Halifax` | `Asia/Shanghai` | `Europe/Sarajevo` | 
-| `America/Manaus` | `Asia/Singapore` | `Pacific/Auckland` | 
-| `America/Matamoros` | `Asia/Taipei` | `Pacific/Fiji` | 
-| `America/Monterrey` | `Asia/Tehran` | `Pacific/Guam` | 
-| `America/Montevideo` | `Asia/Tokyo` | `Pacific/Honolulu` | 
-| `America/Phoenix` | `Asia/Ulaanbaatar` | `Pacific/Samoa` | 
-| `America/Santiago` | `Asia/Vladivostok` | `US/Alaska` | 
-| `America/Tijuana` | `Asia/Yakutsk` | `US/Central` | 
-| `Asia/Amman` | `Asia/Yerevan` | `US/Eastern` | 
-| `Asia/Ashgabat` | `Atlantic/Azores` | `US/East-Indiana` | 
-| `Asia/Baghdad` | `Australia/Adelaide` | `US/Pacific` | 
-| `Asia/Baku` | `Australia/Brisbane` | `UTC` | 
+|  |  | 
+| --- |--- |
+| `Africa/Cairo` | `Asia/Riyadh` | 
+| `Africa/Casablanca` | `Asia/Seoul` | 
+| `Africa/Harare` | `Asia/Shanghai` | 
+| `Africa/Monrovia` | `Asia/Singapore` | 
+| `Africa/Nairobi` | `Asia/Taipei` | 
+| `Africa/Tripoli` | `Asia/Tehran` | 
+| `Africa/Windhoek` | `Asia/Tokyo` | 
+| `America/Araguaina` | `Asia/Ulaanbaatar` | 
+| `America/Asuncion` | `Asia/Vladivostok` | 
+| `America/Bogota` | `Asia/Yakutsk` | 
+| `America/Buenos_Aires` | `Asia/Yerevan` | 
+| `America/Caracas` | `Atlantic/Azores` | 
+| `America/Chihuahua` | `Australia/Adelaide` | 
+| `America/Cuiaba` | `Australia/Brisbane` | 
+| `America/Denver` | `Australia/Darwin` | 
+| `America/Fortaleza` | `Australia/Hobart` | 
+| `America/Guatemala` | `Australia/Perth` | 
+| `America/Halifax` | `Australia/Sydney` | 
+| `America/Manaus` | `Brazil/East` | 
+| `America/Matamoros` | `Canada/Newfoundland` | 
+| `America/Monterrey` | `Canada/Saskatchewan` | 
+| `America/Montevideo` | `Canada/Yukon` | 
+| `America/Phoenix` | `Europe/Amsterdam` | 
+| `America/Santiago` | `Europe/Athens` | 
+| `America/Tijuana` | `Europe/Dublin` | 
+| `Asia/Amman` | `Europe/Helsinki` | 
+| `Asia/Ashgabat` | `Europe/Istanbul` | 
+| `Asia/Baghdad` | `Europe/Kaliningrad` | 
+| `Asia/Baku` | `Europe/Moscow` | 
+| `Asia/Bangkok` | `Europe/Paris` | 
+| `Asia/Beirut` | `Europe/Prague` | 
+| `Asia/Calcutta` | `Europe/Sarajevo` | 
+| `Asia/Damascus` | `Pacific/Auckland` | 
+| `Asia/Dhaka` | `Pacific/Fiji` | 
+| `Asia/Irkutsk` | `Pacific/Guam` | 
+| `Asia/Jerusalem` | `Pacific/Honolulu` | 
+| `Asia/Kabul` | `Pacific/Samoa` | 
+| `Asia/Karachi` | `US/Alaska` | 
+| `Asia/Kathmandu` | `US/Central` | 
+| `Asia/Krasnoyarsk` | `US/Eastern` | 
+| `Asia/Magadan` | `US/East-Indiana` | 
+| `Asia/Muscat` | `US/Pacific` | 
+| `Asia/Novosibirsk` | `UTC` | 
 
 ## Known issues and limitations for Amazon RDS for MySQL<a name="MySQL.Concepts.KnownIssuesAndLimitations"></a>
 

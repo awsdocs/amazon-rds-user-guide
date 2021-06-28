@@ -7,7 +7,8 @@ This topic can help you to determine whether any client applications use SSL/TLS
 **Note**  
 Some applications are configured to connect to MySQL DB instances only if they can successfully verify the certificate on the server\. For such applications, you must update your client application trust stores to include the new CA certificates\.   
 You can specify the following SSL modes: `disabled`, `preferred`, and `required`\. When you use the `preferred` SSL mode and the CA certificate doesn't exist or isn't up to date, the following behavior applies:  
-For newer MySQL minor versions, the connection falls back to not using SSL and still connects successfully\.  
+We recommend avoiding `preferred` mode\. In `preferred` mode, if the connection encounters an invalid certificate, it stops using encryption and proceeds unencrypted\.
+For newer MySQL minor versions, the connection falls back to not using SSL and connects without encryption\.  
 Because these later versions use the OpenSSL protocol, an expired server certificate doesn't prevent successful connections unless the `required` SSL mode is specified\.  
 The following MySQL minor versions use the OpenSSL protocol:  
 All MySQL 8\.0 versions
