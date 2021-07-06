@@ -182,7 +182,7 @@ Amazon RDS uses the following process to create a cross\-Region read replica\. D
 All of the considerations for performing replication within an AWS Region apply to cross\-Region replication\. The following extra considerations apply when replicating between AWS Regions:
 + You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
   + MariaDB \(all versions\)\.
-  + MySQL version 5\.6 and later\.
+  + MySQL version 5\.6 and higher\.
   + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, and all versions of 12\.2, 18c, and 19c\.
 
     An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Replica requirements for Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
@@ -199,8 +199,10 @@ All of the considerations for performing replication within an AWS Region apply 
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 
 + The read replica uses the default DB parameter group for the specified DB engine\.
 + The read replica uses the default security group\.
-+ For MariaDB, MySQL, and Oracle DB instances, when the source for a cross\-Region read replica is deleted, the read replica is promoted\.
-+ For PostgreSQL DB instances, when the source for a cross\-Region read replica is deleted, the replication status of the read replica is set to `terminated`\. The read replica isn't promoted\.
++ For MariaDB, MySQL, and Oracle DB instances, when the source DB instance for a cross\-Region read replica is deleted, the read replica is promoted\.
++ For PostgreSQL DB instances, when the source DB instance for a cross\-Region read replica is deleted, the replication status of the read replica is set to `terminated`\. The read replica isn't promoted\.
+
+  You have to promote the read replica manually or delete it\.
 
 ### Requesting a cross\-Region read replica<a name="ReadRepl.XRgn.Policy"></a>
 

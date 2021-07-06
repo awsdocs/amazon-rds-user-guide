@@ -12,7 +12,8 @@ For more information, see [Oracle database log files](USER_LogAccess.Concepts.Or
 + [Dropping online redo logs](#Appendix.Oracle.CommonDBATasks.DroppingRedoLogs)
 + [Resizing online redo logs](#Appendix.Oracle.CommonDBATasks.ResizingRedoLogs)
 + [Retaining archived redo logs](#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)
-+ [Accessing transaction logs](#Appendix.Oracle.CommonDBATasks.Log.Download)
++ [Accessing online and archived redo logs](#Appendix.Oracle.CommonDBATasks.Log.Download)
++ [Downloading archived redo logs from Amazon S3](#Appendix.Oracle.CommonDBATasks.download-redo-logs)
 
 ## Setting force logging<a name="Appendix.Oracle.CommonDBATasks.SettingForceLogging"></a>
 
@@ -266,7 +267,7 @@ GROUP#     BYTES      STATUS
 
 ## Retaining archived redo logs<a name="Appendix.Oracle.CommonDBATasks.RetainRedoLogs"></a>
 
-You can retain archived redo logs locally on your DB instance for use with products like Oracle LogMiner \(DBMS\_LOGMNR\)\. After you have retained the redo logs, you can use LogMiner to analyze the logs\. For more information, see [Using LogMiner to analyze redo log files](http://docs.oracle.com/cd/E11882_01/server.112/e22490/logminer.htm) in the Oracle documentation\. 
+You can retain archived redo logs locally on your DB instance for use with products like Oracle LogMiner \(`DBMS_LOGMNR`\)\. After you have retained the redo logs, you can use LogMiner to analyze the logs\. For more information, see [Using LogMiner to analyze redo log files](http://docs.oracle.com/cd/E11882_01/server.112/e22490/logminer.htm) in the Oracle documentation\. 
 
 To retain archived redo logs, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.set_configuration`\. The `set_configuration` procedure has the following parameters\. 
 
@@ -313,23 +314,35 @@ DESCRIPTION:ArchiveLog expiration specifies the duration in hours before archive
 Because the archived redo logs are retained on your DB instance, ensure that your DB instance has enough allocated storage for the retained logs\. To determine how much space your DB instance has used in the last X hours, you can run the following query, replacing X with the number of hours\. 
 
 ```
-select sum(BLOCKS * BLOCK_SIZE) bytes 
-  from V$ARCHIVED_LOG
- where FIRST_TIME >= SYSDATE-(X/24) and DEST_ID=1;
+SELECT SUM(BLOCKS * BLOCK_SIZE) bytes 
+  FROM V$ARCHIVED_LOG
+ WHERE FIRST_TIME >= SYSDATE-(X/24) AND DEST_ID=1;
 ```
 
-Archived redo logs are only generated if the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero, so unless you explicitly set yours to zero, archived redo logs are generated for your DB instance\. 
+RDS for Oracle only generates archived redo logs when the backup retention period of your DB instance is greater than zero\. By default the backup retention period is greater than zero\.
 
-After the archived redo logs are removed from your DB instance, you can't download them again to your DB instance\. Amazon RDS retains the archived redo logs outside of your DB instance to support restoring your DB instance to a point in time\. Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period configured for your DB instance\. To modify the backup retention period for your DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
+When the archived log retention period expires, RDS for Oracle removes the archived redo logs from your DB instance\. To support restoring your DB instance to a point in time, Amazon RDS retains the archived redo logs outside of your DB instance based on the backup retention period\. To modify the backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 **Note**  
-In some cases, you might be using JDBC on Linux to download archived redo logs and experience long latency times and connection resets\. In such cases, the issues might be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a nonblocking random number generator\. 
+In some cases, you might be using JDBC on Linux to download archived redo logs and experience long latency times and connection resets\. In such cases, the issues might be caused by the default random number generator setting on your Java client\. We recommend setting your JDBC drivers to use a nonblocking random number generator\.
 
-## Accessing transaction logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
+## Accessing online and archived redo logs<a name="Appendix.Oracle.CommonDBATasks.Log.Download"></a>
 
-Accessing transaction logs is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
+You might want to access your online and archived redo log files for mining with external tools such as GoldenGate, Attunity, Informatica, and others\. To access these files, do the following:
 
-You might want to access your online and archived redo log files for mining with external tools such as GoldenGate, Attunity, Informatica, and others\. If you want to access your online and archived redo log files, you must first create directory objects that provide read\-only access to the physical file paths\. 
+1. Create directory objects that provide read\-only access to the physical file paths\.
+
+   Use `rdsadmin.rdsadmin_master_util.create_archivelog_dir` and `rdsadmin.rdsadmin_master_util.create_onlinelog_dir`\.
+
+1. Read the files using PL/SQL\.
+
+   You can read the files by using PL/SQL\. For more information about reading files from directory objects, see [Listing files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ListDirectories) and [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\.
+
+Accessing transaction logs is supported for the following releases:
++ Oracle Database 19c
++ Oracle Database 18c
++ Oracle Database 12c Release 2 \(12\.2\.0\.1\)
++ Oracle Database 12c Release 1 \(12\.1\)
 
 The following code creates directories that provide read\-only access to your online and archived redo log files: 
 
@@ -340,8 +353,6 @@ This code also revokes the `DROP ANY DIRECTORY` privilege\.
 exec rdsadmin.rdsadmin_master_util.create_archivelog_dir;
 exec rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
 ```
-
-After you create directory objects for your online and archived redo log files, you can read the files by using PL/SQL\. For more information about reading files from directory objects, see [Listing files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ListDirectories) and [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles)\. 
 
 The following code drops the directories for your online and archived redo log files\. 
 
@@ -355,4 +366,69 @@ The following code grants and revokes the `DROP ANY DIRECTORY` privilege\.
 ```
 exec rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
 exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
+```
+
+## Downloading archived redo logs from Amazon S3<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs"></a>
+
+You can download archived redo logs on your DB instance using the `rdsadmin.rdsadmin_archive_log_download` package\. If archived redo logs are no longer on your DB instance, you might want to download them again from Amazon S3\. Then you can mine the logs or use them to recover or replicate your database\.
+
+### Downloading archived redo logs: basic steps<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.basic-process"></a>
+
+The availability of your archived redo logs depends on the following retention policies:
++ Backup retention policy – Logs inside of this policy are available in Amazon S3\. Logs outside of this policy are removed\.
++ Archived log retention policy – Logs inside of this policy are available on your DB instance\. Logs outside of this policy are removed\.
+
+If logs aren't on your instance but are protected by your backup retention period, use `rdsadmin.rdsadmin_archive_log_download` to download them again\. RDS for Oracle saves the logs to the `/rdsdbdata/log/arch` directory on your DB instance\.
+
+**To download archived redo logs from Amazon S3**
+
+1. Increase your archived redo log retention period so that RDS won't delete the logs that you download\. Make sure to `COMMIT` your change\. 
+
+   To learn how to set the retention policy, see [Retaining archived redo logs](#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\.
+
+1. Wait up to 5 minutes for the archived log retention policy change to take effect\.
+
+1. Download the archived redo logs from Amazon S3 using `rdsadmin.rdsadmin_archive_log_download`\.
+
+   For more information, see [Downloading a single archived redo log](#Appendix.Oracle.CommonDBATasks.download-redo-logs.single-log) and [Downloading a series of archived redo logs](#Appendix.Oracle.CommonDBATasks.download-redo-logs.series)\.
+
+RDS automatically checks the available storage before downloading\. If the requested logs consume a high percentage of space, you receive an alert\.
+
+### Downloading a single archived redo log<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.single-log"></a>
+
+To download a single archived redo log to the `/rdsdbdata/log/arch` directory, use `rdsadmin.rdsadmin_archive_log_download.download_log_with_seqnum`\. This procedure has the following parameter\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `seqnum`  |  number  |  —  |  Yes  |  The sequence number of the archived redo log\.  | 
+
+The following example downloads the log with sequence number 20\.
+
+```
+SELECT rdsadmin.rdsadmin_archive_log_download.download_log_with_seqnum(seqnum => 20) 
+       AS TASK_ID 
+FROM   DUAL;
+```
+
+### Downloading a series of archived redo logs<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.series"></a>
+
+To download a series of archived redo logs to the `/rdsdbdata/log/arch` directory, use `download_logs_in_seqnum_range`\. This procedure has the following parameter\.
+
+
+****  
+
+| Parameter name | Data type | Default | Required | Description | 
+| --- | --- | --- | --- | --- | 
+|  `start_seq`  |  number  |  —  |  Yes  |  The starting sequence number for the series\.  | 
+|  `end_seq`  |  number  |  —  |  Yes  |  The ending sequence number for the series\.  | 
+
+The following example downloads the logs from sequence 50 to 100\.
+
+```
+SELECT rdsadmin.rdsadmin_archive_log_download.download_logs_in_seqnum_range(start_seq => 50, end_seq => 100) 
+       AS TASK_ID 
+FROM   DUAL;
 ```

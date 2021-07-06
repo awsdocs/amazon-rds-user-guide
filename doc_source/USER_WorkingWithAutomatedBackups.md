@@ -38,6 +38,8 @@ Automated backups occur daily during the preferred backup window\. If the backup
 
 During the automatic backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. You might experience elevated latencies for a few minutes during backups for Multi\-AZ deployments\.  For MariaDB, MySQL, Oracle, and PostgreSQL, I/O activity is not suspended on your primary during backup for Multi\-AZ deployments, because the backup is taken from the standby\. For SQL Server, I/O activity is suspended briefly during backup for Multi\-AZ deployments\.
 
+Automated backups might occasionally be skipped if the DB instance has a heavy workload at the time a backup is supposed to start\. If a backup is skipped, you can still do a point\-in\-time\-recovery \(PITR\), and a backup is still attempted during the next backup window\. For more information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+
 If you don't specify a preferred backup window when you create the DB instance, Amazon RDS assigns a default 30\-minute backup window\. This window is selected at random from an 8\-hour block of time for each AWS Region\. The following table lists the time blocks for each AWS Region from which the default backup windows are assigned\.
 
 

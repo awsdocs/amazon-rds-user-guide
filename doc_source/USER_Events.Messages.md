@@ -119,13 +119,16 @@ The following table shows the event category and a list of events when a DB snap
 | --- | --- | --- | 
 |  creation  | RDS\-EVENT\-0040 |  A manual DB snapshot is being created\.  | 
 |  creation  | RDS\-EVENT\-0042 |  A manual DB snapshot has been created\.  | 
-| creation | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
-| creation | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
+|  creation  | RDS\-EVENT\-0090 | An automated DB snapshot is being created\. | 
+|  creation  | RDS\-EVENT\-0091 | An automated DB snapshot has been created\. | 
 |  deletion  | RDS\-EVENT\-0041 |  A DB snapshot has been deleted\.  | 
-|  notification  | RDS\-EVENT\-0059 |  Started copy of snapshot \[DB snapshot name\] from region \[region name\]\.  | 
-|  notification  | RDS\-EVENT\-0060 |  Finished copy of snapshot \[DB snapshot name\] from region \[region name\] in \[time\] minutes\.  | 
-|  notification  | RDS\-EVENT\-0061 |  Canceled snapshot copy request of \[DB snapshot name\] from region %\[region name\]\.  | 
-| notification | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
-| notification | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
-| notification | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
+|  notification  | RDS\-EVENT\-0059 |  Started copy of snapshot \[DB snapshot name\] from region \[region name\]\.  This is a cross\-Region snapshot copy\.   | 
+|  notification  | RDS\-EVENT\-0060 |  Finished copy of snapshot \[DB snapshot name\] from region \[region name\] in \[time\] minutes\.  This is a cross\-Region snapshot copy\.   | 
+|  notification  | RDS\-EVENT\-0061 |  Canceled snapshot copy request of \[DB snapshot name\] from region \[region name\]\.  This is a cross\-Region snapshot copy\.   | 
+|  notification  | RDS\-EVENT\-0159 |  DB snapshot export task failed\.  | 
+|  notification  | RDS\-EVENT\-0160 |  DB snapshot export task canceled\.  | 
+|  notification  | RDS\-EVENT\-0161 |  DB snapshot export task completed\.  | 
+|  notification  | RDS\-EVENT\-0196 |  Started copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
+|  notification  | RDS\-EVENT\-0197 |  Finished copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
+|  notification  | RDS\-EVENT\-0190 |  Canceled snapshot copy request of \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  restoration  | RDS\-EVENT\-0043 |  A DB instance is being restored from a DB snapshot\.  | 

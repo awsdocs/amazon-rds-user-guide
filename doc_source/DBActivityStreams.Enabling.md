@@ -38,7 +38,7 @@ Update the last archived time stamp
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
 To start database activity streams for an Oracle database, configure the database using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\.
-+ `--kms-key-id key` – Specifies the AWS KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key \(CMK\)\.
++ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key \(CMK\)\.
 + `--resource-arn arn` – Specifies the Amazon Resource Name \(ARN\) of the DB instance\.
 + `--region` – Identifies the AWS Region for the DB instance\.
 + `--engine-native-audit-fields-included` – Includes engine\-specific unified auditing fields in the data stream\. To exclude these fields, specify `--no-engine-native-audit-fields-included` \(default\)\.

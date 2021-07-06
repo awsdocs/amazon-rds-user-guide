@@ -21,7 +21,7 @@ Several factors can affect the performance of Amazon EBS volumes, such as instan
 
 General Purpose SSD storage offers cost\-effective storage that is acceptable for most database workloads\. The following are the storage size ranges for General Purpose SSD DB instances:
 + MariaDB, MySQL, Oracle, and PostgreSQL database instances: 20 GiB–64 TiB
-+ SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB
++ SQL Server Enterprise, Standard, Web, and Express Editions: 20 GiB–16 TiB
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(5\.34 TiB and greater\) is 16,000 IOPS\.
 
@@ -173,10 +173,10 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.m4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.large | 64 | 16 | 64 | 64 | 64 | 
 | db\.m3 – Previous Generation Standard Instance Classes | 
-| db\.m3\.2xlarge | 6 | 16 | 6 | 6 | 6 | 
-| db\.m3\.xlarge | 6 | 16 | 6 | 6 | 6 | 
-| db\.m3\.large | 6 | 16 | 6 | 6 | 6 | 
-| db\.m3\.medium | 32 | 16 | 32 | 32 | 32 | 
+| db\.m3\.2xlarge | 6 | 16 | 6 |  | 6 | 
+| db\.m3\.xlarge | 6 | 16 | 6 |  | 6 | 
+| db\.m3\.large | 6 | 16 | 6 |  | 6 | 
+| db\.m3\.medium | 32 | 16 | 32 |  | 32 | 
 | db\.r5 – Latest Generation Memory Optimized Instance Classes | 
 | db\.r5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -194,11 +194,11 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.r4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.large | 64 | 16 | 64 | 64 | 64 | 
 | db\.r3 – Previous Generation Memory Optimized Instance Classes | 
-| db\.r3\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3\.large | 64 | 16 | 64 | 64 | 64 | 
+| db\.r3\.8xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.r3\.4xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.r3\.2xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.r3\.xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.r3\.large | 64 | 16 | 64 |  | 64 | 
 | db\.t3 – Latest Generation Burstable Performance Instance Classes | 
 | db\.t3\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.t3\.xlarge | 16 | 16 | 16 | 64 | 64 | 
@@ -207,12 +207,12 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.t3\.small | 16 | 16 | 16 | 32 | 16 | 
 | db\.t3\.micro | 16 | 16 | 16 | 32 | 16 | 
 | db\.t2 – Current Generation Burstable Performance Instance Classes | 
-| db\.t2\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.t2\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.t2\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.t2\.medium | 32 | 16 | 32 | 32 | 32 | 
-| db\.t2\.small | 16 | 16 | 16 | 16 | 16 | 
-| db\.t2\.micro | 16 | 16 | 16 | 16 | 16 | 
+| db\.t2\.2xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.t2\.xlarge | 64 | 16 | 64 |  | 64 | 
+| db\.t2\.large | 64 | 16 | 64 |  | 64 | 
+| db\.t2\.medium | 32 | 16 | 32 |  | 32 | 
+| db\.t2\.small | 16 | 16 | 16 |  | 16 | 
+| db\.t2\.micro | 16 | 16 | 16 |  | 16 | 
 | db\.x1e – Latest Generation Memory Optimized Instance Classes | 
 | db\.x1e\.32xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.16xlarge |  | 16 |  | 64 |  | 

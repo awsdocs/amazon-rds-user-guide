@@ -24,7 +24,6 @@ The following are the Standard DB instance classes available:
 + **db\.m5** – Latest generation general\-purpose instance classes that provide a balance of compute, memory, and network resources, and are a good choice for many applications\. The db\.m5 instance classes provide more computing capacity than the previous db\.m4 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.m4** – General\-purpose instance classes that provide more computing capacity than the previous db\.m3 instance classes\. 
 + **db\.m3** – General\-purpose instance classes that provide more computing capacity than the previous db\.m1 instance classes\. 
-+ **db\.m1** – Earlier generation general\-purpose instance classes\. 
 
 The following are the Memory Optimized DB instance classes available:
 + **db\.z1d** – Instance classes optimized for memory\-intensive applications\. These offer both high compute capacity and a high memory footprint\. High frequency z1d instances deliver a sustained all core frequency of up to 4\.0 GHz\.
@@ -38,7 +37,6 @@ The following are the Memory Optimized DB instance classes available:
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
 + **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Instance classes that provide memory optimization\.
-+ **db\.m2** – Earlier generation memory\-optimized instance classes\. 
 
 The following are the Burstable Performance DB instance classes available:
 + **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
@@ -113,11 +111,6 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m3\.xlarge | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m3\.large | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
-| db\.m1 – Standard instance classes | 
-| db\.m1\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.m1\.large | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.m1\.medium | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.m1\.small | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.z1d – Memory\-optimized instance classes | 
 | db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
@@ -196,10 +189,6 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r3\.2xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.r3\.xlarge | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.r3\.large | Yes | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
-| db\.m2 – Memory\-optimized instance classes | 
-| db\.m2\.4xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
-| db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.t3 – Next generation burstable performance instance classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | PostgreSQL 13, 12, 11, 10, 9\.6\.9 & higher | 
@@ -418,11 +407,6 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.m5d\.24xlarge  |  96  |  48  |  2  |  4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48  |  1, 2  | 
 |  db\.m4\.10xlarge  |  40  |  20  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20  |  1, 2  | 
 |  db\.m4\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
-|  db\.r3\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
-|  db\.r3\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 
-|  db\.r3\.2xlarge  |  8  |  4  |  2  |  1, 2, 3, 4  |  1, 2  | 
-|  db\.r3\.4xlarge  |  16  |  8  |  2  |  1, 2, 3, 4, 5, 6, 7, 8  |  1, 2  | 
-|  db\.r3\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
 |  db\.r5\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
 |  db\.r5\.xlarge  |  4  |  2  |  2  |  2  |  1, 2  | 
 |  db\.r5\.2xlarge  |  8  |  4  |  2  |  2, 4  |  1, 2  | 
@@ -453,6 +437,11 @@ In the following table, you can find the DB instance classes that support settin
 |  db\.r4\.4xlarge  |  16  |  8  |  2  |  1, 2, 3, 4, 5, 6, 7, 8  |  1, 2  | 
 |  db\.r4\.8xlarge  |  32  |  16  |  2  |  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16  |  1, 2  | 
 |  db\.r4\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
+|  db\.r3\.large  |  2  |  1  |  2  |  1  |  1, 2  | 
+|  db\.r3\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 
+|  db\.r3\.2xlarge  |  8  |  4  |  2  |  1, 2, 3, 4  |  1, 2  | 
+|  db\.r3\.4xlarge  |  16  |  8  |  2  |  1, 2, 3, 4, 5, 6, 7, 8  |  1, 2  | 
+|  db\.r3\.8xlarge  |  32  |  16  |  2  |  2, 4, 6, 8, 10, 12, 14, 16  |  1, 2  | 
 |  db\.x1\.16xlarge  |  64  |  32  |  2  |  2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32  |  1, 2  | 
 |  db\.x1\.32xlarge  |  128  |  64  |  2  |  4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64  |  1, 2  | 
 |  db\.x1e\.xlarge  |  4  |  2  |  2  |  1, 2  |  1, 2  | 

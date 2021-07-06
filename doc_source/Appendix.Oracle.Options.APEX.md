@@ -160,22 +160,24 @@ Before you can use APEX, you need to download the ords\.war file, use Java to in
 
 1. Grant the master user the required privileges to install ORDS\.
 
-   After the Amazon RDS APEX option is installed, give the master user the required privileges to install the ORDS schema\. You can do this by connecting to the database and running the following commands\. Replace `master_user` with the name of your master user\.
+   After the Amazon RDS APEX option is installed, give the master user the required privileges to install the ORDS schema\. You can do this by connecting to the database and running the following commands\. Replace `MASTER_USER` with the uppercase name of your master user\.
+**Important**  
+When you enter the user name, use uppercase unless you created the user with a case\-sensitive identifier\. For example, if you run `CREATE USER myuser` or `CREATE USER MYUSER`, the data dictionary stores `MYUSER`\. However, if you use double quotes in `CREATE USER "MyUser"`, the data dictionary stores `MyUser`\. For more information, see [Granting SELECT or EXECUTE privileges to SYS objects](Appendix.Oracle.CommonDBATasks.System.md#Appendix.Oracle.CommonDBATasks.TransferPrivileges)\.
 
    ```
-   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_ROLE_PRIVS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_TAB_COLUMNS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_CONS_COLUMNS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_CONSTRAINTS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_OBJECTS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_PROCEDURES', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TAB_COLUMNS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TABLES', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'master_user', 'SELECT', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('WPIUTL', 'master_user', 'EXECUTE', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_SESSION', 'master_user', 'EXECUTE', true);
-   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_UTILITY', 'master_user', 'EXECUTE', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_ROLE_PRIVS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_TAB_COLUMNS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_CONS_COLUMNS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_CONSTRAINTS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_OBJECTS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_PROCEDURES', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TAB_COLUMNS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_TABLES', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('USER_VIEWS', 'MASTER_USER', 'SELECT', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('WPIUTL', 'MASTER_USER', 'EXECUTE', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_SESSION', 'MASTER_USER', 'EXECUTE', true);
+   exec rdsadmin.rdsadmin_util.grant_sys_object('DBMS_UTILITY', 'MASTER_USER', 'EXECUTE', true);
    ```
 **Note**  
 These commands apply to ORDS version 19\.1 and later\.

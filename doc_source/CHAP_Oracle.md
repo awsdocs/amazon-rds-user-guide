@@ -63,20 +63,14 @@ The following parameters were removed in Oracle Database 19c \(19\.0\.0\.0\):
 
 ### Oracle Database 18c on Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
 
-Oracle Corporation intends to deprecate support for Oracle Database 18c \(18\.0\.0\.0\) on July 1, 2021\. On this date, Amazon RDS plans to do the following:
-+ Deprecate support for Oracle Database 18c for both BYOL and LI
-+ Begin upgrading all Oracle Database 18c instances automatically
+Oracle Corporation deprecated support for Oracle Database 18c \(18\.0\.0\.0\) on July 1, 2021\. Consequently, Amazon RDS has Deprecated support for Oracle Database 18c for both BYOL and LI\. 
 
-The following schedule includes upgrade recommendations\. For more information, see [Preparing for the automatic upgrade of Oracle Database 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.
+On July 1, RDS for Oracle began the process of upgrading all Oracle Database 18c instances to Oracle Database 19c automatically\. You can no longer do the following:
++ Create new Oracle Database 18c instances with Amazon RDS
++ Restore Oracle Database 18c DB snapshots without being automatically upgraded
 
-
-| Action or recommendation | Oracle Database 18c | 
-| --- | --- | 
-|  We recommend that you upgrade Oracle Database 18c DB instances manually to Oracle Database 19c and validate your applications\.   |  Now–June 30, 2021  | 
-|  We recommend that you upgrade Oracle Database 18c snapshots manually to Oracle Database 19c\.  |  May 1, 2021  | 
-|  You can no longer create new Oracle Database 18c instances with Amazon RDS\. You can continue to restore 18c DB snapshots without being automatically upgraded until June 30, 2021\.  |  May 1, 2021  | 
-|  Amazon RDS plans to start automatic upgrades of your Oracle Database 18c instances to Oracle Database 19c\.  |  July 1, 2021  | 
-|  Amazon RDS plans to start automatic upgrades to Oracle Database 19c for any Oracle Database 18c DB instances restored from snapshots\.  |  July 1, 2021  | 
+**Important**  
+If your Oracle Database 18c instance has not yet been upgraded, we recommend that you upgrade it immediately to Oracle Database 19c, and validate your applications\. 
 
 ### Oracle Database 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
 

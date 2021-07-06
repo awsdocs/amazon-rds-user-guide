@@ -1,4 +1,4 @@
-# Retrieving data with the Performance Insights API<a name="USER_PerfInsights.API"></a>
+# Retrieving metrics with the Performance Insights API<a name="USER_PerfInsights.API"></a>
 
 When Performance Insights is enabled, the API provides visibility into instance performance\. Amazon CloudWatch Logs provides the authoritative source for vended monitoring metrics for AWS services\. 
 

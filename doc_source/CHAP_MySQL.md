@@ -3,7 +3,7 @@
 Amazon RDS supports DB instances running several versions of MySQL\. You can use the following major versions:
 + MySQL 8\.0
 + MySQL 5\.7
-+ MySQL 5\.6 \(Deprecation scheduled for August 2, 2021\)
++ MySQL 5\.6 \(Deprecation scheduled for February 1, 2022\)
 
 For more information about minor version support, see [MySQL on Amazon RDS versions](#MySQL.Concepts.VersionMgmt)\.
 
@@ -83,16 +83,16 @@ You can test a DB instance against a new version before upgrading by creating a 
 
 ### Deprecation of MySQL version 5\.6<a name="MySQL.Concepts.VersionMgmt.Deprecation56"></a>
 
-On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. We recommend that you update all MySQL 5\.6 DB instances to MySQL 5\.7 or higher as soon as possible\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
+On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using the following schedule, which includes upgrade recommendations\. We recommend that you upgrade all MySQL 5\.6 DB instances to MySQL 5\.7 or higher as soon as possible\. For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
 
 
 | Action or recommendation | Dates | 
 | --- | --- | 
 |  We recommend that you upgrade MySQL 5\.6 DB instances manually to the version of your choice\.   |  Now–February 1, 2022  | 
 |  We recommend that you upgrade MySQL 5\.6 snapshots manually to the version of your choice\.  |  Now–February 1, 2022  | 
-|  You can no longer create new MySQL 5\.6 DB instances\.  |  August 2, 2021  | 
-|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  February 1, 2022  | 
-|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  February 1, 2022  | 
+|  You can no longer create new MySQL 5\.6 DB instances\.  |  February 1, 2022  | 
+|  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  March 1, 2022  | 
+|  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  March 1, 2022  | 
 
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 

@@ -12,7 +12,7 @@ The following snapshot upgrades are currently supported\. You can't upgrade a sn
 | Current snapshot version | Supported snapshot upgrade | 
 | --- | --- | 
 |  12\.1\.0\.1  |  12\.1\.0\.2\.v8  | 
-|  11\.2\.0\.4  |  19\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1 or 19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1  | 
+|  11\.2\.0\.4  |  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.Oracle.html)  | 
 |  18\.0\.0\.0  |  19\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1  | 
 | 11\.2\.0\.3 | 11\.2\.0\.4\.v11 | 
 | 11\.2\.0\.2 | 11\.2\.0\.4\.v12 | 
