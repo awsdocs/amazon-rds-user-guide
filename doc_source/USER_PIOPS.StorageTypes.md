@@ -16,10 +16,10 @@ Scaling storage for Amazon RDS for Microsoft SQL Server DB instances is supporte
 
 To monitor the amount of free storage for your DB instance so you can respond when necessary, we recommend that you create an Amazon CloudWatch alarm\. For more information on setting CloudWatch alarms, see [Using CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html)\.
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\.
 
 **Note**  
-You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.
+Storage optimization can take several hours\. You can't make further storage modifications for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
 
 However, a special case is if you have a SQL Server DB instance and haven't modified the storage configuration since November 2017\. In this case, you might experience a short outage of a few minutes when you modify your DB instance to increase the allocated storage\. After the outage, the DB instance is online but in the `storage-optimization` state\. Performance might be degraded during storage optimization\. 
 
@@ -223,10 +223,10 @@ You can modify the settings for a DB instance that uses Provisioned IOPS SSD sto
 
 Although you can reduce the amount of IOPS provisioned for your instance, you can't reduce the amount of General Purpose SSD or magnetic storage allocated\. 
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage IOPS for a DB instance, the status of the DB instance is **storage\-optimization**\. The DB instance is fully operational after a storage modification\.
+In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage IOPS for a DB instance, the status of the DB instance is **storage\-optimization**\.
 
 **Note**  
-You can't make further storage modifications until six \(6\) hours after storage optimization has completed on the instance\.
+Storage optimization can take several hours\. You can't make further storage modifications for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
 
 ### Console<a name="User_PIOPS.Increase.con"></a>
 

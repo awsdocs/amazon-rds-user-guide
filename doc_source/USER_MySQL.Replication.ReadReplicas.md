@@ -52,6 +52,9 @@ The following are some use cases for replication filters:
 + To replicate different databases and tables for specific use cases at different read replicas\. For example, you might use specific read replicas for analytics or sharding\.
 + For a DB instance that has read replicas in different AWS Regions, to replicate different databases or tables in different AWS Regions\.
 
+**Note**  
+You can also use replication filters to specify which databases and tables are replicated with a primary MySQL DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
+
 **Topics**
 + [Replication filtering parameters for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring)
 + [Replication filtering limitations for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations)

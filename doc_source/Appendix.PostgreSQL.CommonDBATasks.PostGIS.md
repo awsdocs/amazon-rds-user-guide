@@ -121,7 +121,9 @@ The following table shows the PostGIS versions that ship with the RDS for Postgr
 
 | PostgreSQL version | PostGIS version | 
 | --- | --- | 
+| 13\.3 | 3\.0\.3 | 
 | 13\.2, 13\.1 | 3\.0\.2 | 
+| 12\.7 | 3\.0\.3 | 
 | 12\.6 | 3\.0\.2 | 
 | 12\.5, 12\.4, 12\.3, 12\.2 | 3\.0\.0 | 
 | 11\.11, 11\.10, 11\.9, 11\.8, 11\.7, 11\.6, 11\.5 | 2\.5\.2 | 

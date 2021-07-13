@@ -94,6 +94,8 @@ On February 1, 2022, Amazon RDS plans to deprecate support for MySQL 5\.6 using 
 |  Amazon RDS starts automatic upgrades of your MySQL 5\.6 DB instances to version 5\.7\.  |  March 1, 2022  | 
 |  Amazon RDS starts automatic upgrades to version 5\.7 for any MySQL 5\.6 DB instances restored from snapshots\.  |  March 1, 2022  | 
 
+For more information about Amazon RDS for MySQL 5\.6 deprecation, see [ Announcement: Extending end\-of\-life process for Amazon RDS for MySQL 5\.6](http://forums.aws.amazon.com/ann.jspa?annID=8790)\.
+
 ## MySQL features not supported by Amazon RDS<a name="MySQL.Concepts.Features"></a>
 
 Amazon RDS doesn't currently support the following MySQL features: 

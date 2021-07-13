@@ -2,7 +2,31 @@
 
 After Amazon RDS provisions your DB instance, you can use any standard MariaDB client application or utility to connect to the instance\. In the connection string, you specify the Domain Name System \(DNS\) address from the DB instance endpoint as the host parameter\. You also specify the port number from the DB instance endpoint as the port parameter\.
 
-You can connect to an Amazon RDS for MariaDB DB instance by using tools like the mysql command line utility\. For more information on using the mysql utility, see [mysql command\-line client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application that you can use to connect is Heidi\. For more information, see the [Download heidi](http://www.heidisql.com/download.php) page\.
+You can connect to an Amazon RDS for MariaDB DB instance by using tools like the MySQL command\-line client\. For more information on using the MySQL command\-line client, see [mysql command\-line client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application that you can use to connect is Heidi\. For more information, see the [Download heidi](http://www.heidisql.com/download.php) page\. For information about installing MySQL \(including the MySQL command\-line client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
+
+Most Linux distributions include the MariaDB client instead of the Oracle MySQL client\. To install the MySQL command\-line client on most RPM\-based Linux distributions, including Amazon Linux 2, run the following command:
+
+```
+yum install mariadb
+```
+
+To install the MySQL command\-line client on most DEB\-based Linux distributions, run the following command:
+
+```
+apt-get install mariadb-client
+```
+
+To check the version of your MySQL command\-line client, run the following command:
+
+```
+mysql --version
+```
+
+To read the MySQL documentation for your current client version, run the following command:
+
+```
+man mysql
+```
 
 To connect to a DB instance from outside of a virtual private cloud \(VPC\) based on Amazon VPC, the DB instance must be publicly accessible\. Also, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
@@ -10,8 +34,8 @@ You can use SSL encryption on connections to a MariaDB DB instance\. For informa
 
 **Topics**
 + [Finding the connection information for a MariaDB DB instance](#USER_ConnectToMariaDBInstance.EndpointAndPort)
-+ [Connecting from the mysql utility \(unencrypted\)](#USER_ConnectToMariaDBInstance.CLI)
-+ [Connecting with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)
++ [Connecting from the MySQL command\-line client \(unencrypted\)](#USER_ConnectToMariaDBInstance.CLI)
++ [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)
 + [Troubleshooting connections to your MariaDB DB instance](#USER_ConnectToMariaDBInstance.Troubleshooting)
 
 ## Finding the connection information for a MariaDB DB instance<a name="USER_ConnectToMariaDBInstance.EndpointAndPort"></a>
@@ -21,7 +45,7 @@ The connection information for a DB instance includes its endpoint, port, and a 
 + For port, specify `3306`\.
 + For user, specify `admin`\.
 
-To connect to a DB instance, use any client for a DB engine\. For example, you might use the mysql utility to connect to a MariaDB or MySQL DB instance\. You might use Microsoft SQL Server Management Studio to connect to a SQL Server DB instance\. You might use Oracle SQL Developer to connect to an Oracle DB instance, or the psql command line utility to connect to a PostgreSQL DB instance\.
+To connect to a DB instance, use any client for the MariaDB DB engine\. For example, you might use the MySQL command\-line client or MySQL Workbench\.
 
 To find the connection information for a DB instance, you can use the AWS Management Console, the AWS Command Line Interface \(AWS CLI\) [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list its details\. 
 
@@ -83,12 +107,12 @@ Your output should be similar to the following\.
 
 To find the connection information for a DB instance by using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. In the output, find the values for the endpoint address, endpoint port, and master user name\. 
 
-## Connecting from the mysql utility \(unencrypted\)<a name="USER_ConnectToMariaDBInstance.CLI"></a>
+## Connecting from the MySQL command\-line client \(unencrypted\)<a name="USER_ConnectToMariaDBInstance.CLI"></a>
 
 **Important**  
-Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)\.
+Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToMariaDBInstanceSSL.CLI)\.
 
-To connect to a DB instance using the mysql utility, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<mymasteruser>`*\. Provide the master password that you used when prompted for a password\.
+To connect to a DB instance using the MySQL command\-line client, enter the following command at a command prompt on a client computer\. Doing this connects you to a database on a MariaDB DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for *`<endpoint>`* and the master user name that you used for *`<mymasteruser>`*\. Provide the master password that you used when prompted for a password\.
 
 ```
 mysql -h <endpoint> -P 3306 -u <mymasteruser> -p
@@ -108,11 +132,11 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 MariaDB [(none)]>
 ```
 
-## Connecting with SSL \(encrypted\)<a name="USER_ConnectToMariaDBInstanceSSL.CLI"></a>
+## Connecting from the MySQL command\-line client with SSL \(encrypted\)<a name="USER_ConnectToMariaDBInstanceSSL.CLI"></a>
 
 Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, follow these steps:
 
-**To connect to a DB instance with SSL using the mysql utility**
+**To connect to a DB instance with SSL using the MySQL command\-line client**
 
 1. Download a root certificate that works for all AWS Regions\.
 
@@ -121,13 +145,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
 1. Enter the following command at a command prompt to connect to a DB instance with SSL using the `mysql` utility\. For the `-h` parameter, substitute the DNS name for your DB instance\. For the `--ssl-ca` parameter, substitute the SSL certificate file name as appropriate\.
 
    ```
-   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p
+   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem -p
    ```
 
 1. Include the `--ssl-verify-server-cert` parameter so that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. For example:
 
    ```
-   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert -p
+   mysql -h mariadb-instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-verify-server-cert -p
    ```
 
 1. Enter the master user password when prompted\.

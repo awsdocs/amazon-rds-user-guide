@@ -6,7 +6,31 @@ To authenticate to your RDS DB instance, you can use one of the authentication m
 + To learn how to authenticate to MySQL using one of the authentication methods for MySQL, see [ Authentication method](https://dev.mysql.com/doc/internals/en/authentication-method.html) in the MySQL documentation\.
 + To learn how to authenticate to MySQL using IAM database authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\.
 
-You can connect to a MySQL DB instance by using tools like the MySQL command line utility\. For more information on using the MySQL client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
+You can connect to a MySQL DB instance by using tools like the MySQL command\-line client\. For more information on using the MySQL command\-line client, see [mysql \- the MySQL command\-line client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) in the MySQL documentation\. One GUI\-based application you can use to connect is MySQL Workbench\. For more information, see the [Download MySQL Workbench](http://dev.mysql.com/downloads/workbench/) page\. For information about installing MySQL \(including the MySQL command\-line client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
+
+Most Linux distributions include the MariaDB client instead of the Oracle MySQL client\. To install the MySQL command\-line client on most RPM\-based Linux distributions, including Amazon Linux 2, run the following command:
+
+```
+yum install mariadb
+```
+
+To install the MySQL command\-line client on most DEB\-based Linux distributions, run the following command:
+
+```
+apt-get install mariadb-client
+```
+
+To check the version of your MySQL command\-line client, run the following command:
+
+```
+mysql --version
+```
+
+To read the MySQL documentation for your current client version, run the following command:
+
+```
+man mysql
+```
 
 To connect to a DB instance from outside of its Amazon VPC, the DB instance must be publicly accessible, access must be granted using the inbound rules of the DB instance's security group, and other requirements must be met\. For more information, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
@@ -19,8 +43,8 @@ For information on connecting to a MariaDB DB instance, see [Connecting to a DB 
 
 **Topics**
 + [Finding the connection information for a MySQL DB instance](#USER_ConnectToInstance.EndpointAndPort)
-+ [Connecting from the MySQL client \(unencrypted\)](#USER_ConnectToInstance.CLI)
-+ [Connecting with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
++ [Connecting from the MySQL command\-line client \(unencrypted\)](#USER_ConnectToInstance.CLI)
++ [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)
 + [Connecting from MySQL Workbench](#USER_ConnectToInstance.MySQLWorkbench)
 + [Troubleshooting connections to your MySQL DB instance](#USER_ConnectToInstance.Troubleshooting)
 
@@ -31,7 +55,7 @@ The connection information for a DB instance includes its endpoint, port, and a 
 + For port, specify `3306`\.
 + For user, specify `admin`\.
 
-To connect to a DB instance, use any client for a DB engine\. For example, you might use the mysql utility to connect to a MariaDB or MySQL DB instance\. You might use Microsoft SQL Server Management Studio to connect to a SQL Server DB instance\. You might use Oracle SQL Developer to connect to an Oracle DB instance, or the psql command line utility to connect to a PostgreSQL DB instance\.
+To connect to a DB instance, use any client for the MySQL DB engine\. For example, you might use the MySQL command\-line client or MySQL Workbench\.
 
 To find the connection information for a DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation to list its details\. 
 
@@ -93,12 +117,12 @@ Your output should be similar to the following\.
 
 To find the connection information for a DB instance by using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. In the output, find the values for the endpoint address, endpoint port, and master user name\. 
 
-## Connecting from the MySQL client \(unencrypted\)<a name="USER_ConnectToInstance.CLI"></a>
+## Connecting from the MySQL command\-line client \(unencrypted\)<a name="USER_ConnectToInstance.CLI"></a>
 
 **Important**  
-Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)\.
+Only use an unencrypted MySQL connection when the client and server are in the same VPC and the network is trusted\. For information about using encrypted connections, see [Connecting from the MySQL command\-line client with SSL \(encrypted\)](#USER_ConnectToInstanceSSL.CLI)\.
 
-To connect to a DB instance using the MySQL client, enter the following command at a command prompt to connect to a DB instance using the MySQL client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
+To connect to a DB instance using the MySQL command\-line client, enter the following command at a command prompt to connect to a DB instance using the MySQL command\-line client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\. 
 
 ```
 mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u mymasteruser -p
@@ -116,20 +140,20 @@ Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
 mysql>
 ```
 
-## Connecting with SSL \(encrypted\)<a name="USER_ConnectToInstanceSSL.CLI"></a>
+## Connecting from the MySQL command\-line client with SSL \(encrypted\)<a name="USER_ConnectToInstanceSSL.CLI"></a>
 
 Amazon RDS creates an SSL certificate for your DB instance when the instance is created\. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name \(CN\) for the SSL certificate to guard against spoofing attacks\. To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication\. To connect to your DB instance using IAM database authentication, see [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)\. To connect to your DB instance using native password authentication, you can follow these steps: 
 
-**To connect to a DB instance with SSL using the MySQL client**
+**To connect to a DB instance with SSL using the MySQL command\-line client**
 
 1. Download a root certificate that works for all AWS Regions\.
 
    For information about downloading certificates, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
-1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\.
+1. Enter the following command at a command prompt to connect to a DB instance with SSL using the MySQL command\-line client\. For the \-h parameter, substitute the DNS name \(endpoint\) for your DB instance\. For the \-\-ssl\-ca parameter, substitute the SSL certificate file name as appropriate\. For the \-P parameter, substitute the port for your DB instance\. For the \-u parameter, substitute the user name of a valid database user, such as the master user\. Enter the master user password when prompted\.
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -P 3306 -u mymasteruser -p
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem -P 3306 -u mymasteruser -p
    ```
 
 1. You can require that the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\. 
@@ -137,13 +161,13 @@ Amazon RDS creates an SSL certificate for your DB instance when the instance is 
    For MySQL 5\.7 and later:
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-mode=VERIFY_IDENTITY -P 3306 -u mymasteruser -p
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-mode=VERIFY_IDENTITY -P 3306 -u mymasteruser -p
    ```
 
    For MySQL 5\.6 and earlier:
 
    ```
-   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert -P 3306 -u mymasteruser -p
+   mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com --ssl-ca=global-bundle.pem --ssl-verify-server-cert -P 3306 -u mymasteruser -p
    ```
 
 1. Enter the master user password when prompted\.
