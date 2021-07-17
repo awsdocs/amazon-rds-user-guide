@@ -84,7 +84,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Retrieving metrics with the Performance Insights API](USER_PerfInsights.API.md)
       + [Performance Insights metrics published to Amazon CloudWatch](USER_PerfInsights.Cloudwatch.md)
       + [Logging Performance Insights calls using AWS CloudTrail](USER_PerfInsights.CloudTrail.md)
-   + [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)
+   + [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)
       + [Overview of Enhanced Monitoring](USER_Monitoring.OS.overview.md)
       + [Setting up and enabling Enhanced Monitoring](USER_Monitoring.OS.Enabling.md)
       + [Viewing OS metrics in the RDS console](USER_Monitoring.OS.Viewing.md)

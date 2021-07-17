@@ -215,9 +215,11 @@ For information on all extensions, see [PostgreSQL version 13 extensions support
 
 PostgreSQL version 13\.1 is now available on Amazon RDS\. PostgreSQL contains several improvements that were announced in [PostgreSQL 13\.0](https://www.postgresql.org/docs/13/release-13.html) and [PostgreSQL 13\.1](https://www.postgresql.org/docs/13/release-13-1.html)\.
 
-This version added the `bool_plperl` extension version 1\.0\. 
+This version added: 
++ The `bool_plperl` extension version 1\.0\. 
++ The `rds_tools` extension version 1\.0\. For more information, see [ Checking for users with non\-SCRAM passwords ](https://aws.amazon.com/blogs/database/scram-authentication-in-rds-for-postgresql-13/)\. 
 
-For information on all extensions, see [PostgreSQL version 13 extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)\.
+For information on all extensions, see [PostgreSQL version 13 extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)\. 
 
 ### PostgreSQL 12 versions<a name="PostgreSQL.Concepts.General.version12"></a>
 
@@ -1108,6 +1110,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [postgres\_fdw](http://www.postgresql.org/docs/current/postgres-fdw.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
 | [rdkit](https://github.com/rdkit/rdkit) | 3\.8 | 3\.8 | 3\.8 | 
+| [rds\_tools](https://aws.amazon.com/blogs/database/scram-authentication-in-rds-for-postgresql-13) | 1\.0 | 1\.0 | 1\.0 | 
 | [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 

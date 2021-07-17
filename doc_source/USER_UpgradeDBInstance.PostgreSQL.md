@@ -56,7 +56,7 @@ You can upgrade a PostgreSQL database to its next major version\. From some Post
 **Note**  
 Upgrade targets are enabled to a higher version released at the same time as the source minor version or later\.  
 If a database uses the `PostGIS` extension, you can't skip major versions for some source to target combinations\. For these circumstances, upgrade to a recent minor version, then upgrade to PostgreSQL 12, and finally upgrade to your desired target version\.  
-The `pgRouting` extension isn't supported for an upgrade that skips a major version to versions 11\.x\. A major version is skipped when the upgrade goes from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x\. You can drop the `pgRouting` extension and then add it again after an upgrade\.   
+The `pgRouting` extension isn't supported for an upgrade that skips a major version to versions 11\.x\. A major version is skipped when the upgrade goes from versions 9\.5\.x or 9\.6\.x to versions 11\.x or higher\. You can drop the `pgRouting` extension and then add it again after an upgrade\.   
 The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or later\. If you are upgrading to version 11\.x, drop these extensions before the upgrade\.
 
 
@@ -152,7 +152,7 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
 1. **Perform a backup** – We recommend that you perform a backup before performing the major version upgrade so that you have a known restore point for your database\. If your backup retention period is greater than 0, the upgrade process creates DB snapshots of your DB instance before and after upgrading\. To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. To perform a backup manually, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
-1. **Upgrade certain extensions before the major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.4\.x, 9\.5\.x, or 9\.6\.x to versions 11\.x skip a major version\. The extensions to update include:
+1. **Upgrade certain extensions before a major version upgrade** – If you plan to skip a major version with the upgrade, you need to update certain extensions *before* performing the major version upgrade\. Upgrading from versions 9\.5\.x or 9\.6\.x to version 11\.x skips a major version\. The extensions to update include:
    + `address_standardizer`
    + `address_standardizer_data_us`
    + `postGIS`
@@ -248,7 +248,7 @@ For each RDS for PostgreSQL major version, one minor version is designated by RD
 You can use the following AWS CLI command and script to determine the current automatic upgrade minor versions\. 
 
 ```
-aws rds describe-db-engine-versions --engine postgres | grep -A 1 AutoUpgrade| grep -A 2 true |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
+aws rds describe-db-engine-versions --engine postgres | grep -A 1 AutoUpgrade| grep -A 2 True |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
 ```
 
 **Note**  

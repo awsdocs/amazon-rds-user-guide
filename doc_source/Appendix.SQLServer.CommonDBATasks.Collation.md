@@ -23,22 +23,29 @@ Currently, Amazon RDS supports the following server collations:
 |  Finnish\_Swedish\_CI\_AS  |  Finnish, Swedish, and Swedish \(Finland\), case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  French\_CI\_AS  |  French, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Hebrew\_BIN  |  Hebrew, binary sort  | 
+|  Hebrew\_CI\_AS  |  Hebrew, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Japanese\_BIN  | Japanese, binary sort | 
 |  Japanese\_CI\_AS  |  Japanese, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  Japanese\_CS\_AS  |  Japanese, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Korean\_Wansung\_CI\_AS  |  Korean\-Wansung, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Latin1\_General\_100\_BIN  |  Latin1\-General\-100, binary sort  | 
 |  Latin1\_General\_100\_BIN2  |  Latin1\-General\-100, binary code point comparison sort  | 
 |  Latin1\_General\_100\_CI\_AS  |  Latin1\-General\-100, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Latin1\_General\_BIN  |  Latin1\-General, binary sort  | 
+|  Latin1\_General\_BIN2  |  Latin1\-General, binary code point comparison sort  | 
 |  Latin1\_General\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Latin1\_General\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
-|  Latin1\_General\_CS\_AS  | Latin1\-General, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive | 
+|  Latin1\_General\_CI\_AS\_KS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-sensitive, width\-insensitive  | 
+|  Latin1\_General\_CS\_AS  |  Latin1\-General, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
 |  Modern\_Spanish\_CI\_AS  |  Modern\-Spanish, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive  | 
+|  SQL\_1xCompat\_CP850\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 49 on Code Page 850 for non\-Unicode Data  | 
 |  SQL\_Latin1\_General\_CP1\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 54 on Code Page 1252 for non\-Unicode Data  | 
-|  **SQL\_Latin1\_General\_CP1\_CI\_AS \(default\)**  | Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 52 on Code Page 1252 for non\-Unicode Data | 
+|  **SQL\_Latin1\_General\_CP1\_CI\_AS \(default\)**  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 52 on Code Page 1252 for non\-Unicode Data  | 
 |  SQL\_Latin1\_General\_CP1\_CS\_AS  |  Latin1\-General, case\-sensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 51 on Code Page 1252 for non\-Unicode Data  | 
-|  SQL\_Latin1\_General\_CP437\_CI\_AI  | Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 34 on Code Page 437 for non\-Unicode Data | 
+|  SQL\_Latin1\_General\_CP437\_CI\_AI  |  Latin1\-General, case\-insensitive, accent\-insensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 34 on Code Page 437 for non\-Unicode Data  | 
 |  SQL\_Latin1\_General\_CP850\_BIN2  |  Latin1\-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non\-Unicode Data  | 
 |  SQL\_Latin1\_General\_CP850\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 42 on Code Page 850 for non\-Unicode Data  | 
+|  SQL\_Latin1\_General\_CP1256\_CI\_AS  |  Latin1\-General, case\-insensitive, accent\-sensitive, kanatype\-insensitive, width\-insensitive for Unicode Data, SQL Server Sort Order 146 on Code Page 1256 for non\-Unicode Data  | 
 
 To choose the collation:
 + If you're using the Amazon RDS console, when creating a new DB instance choose **Additional configuration**, then choose the collation from the **Collation** menu under **Database options**\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 

@@ -16,15 +16,3 @@ After you have enabled Enhanced Monitoring for your DB instance, you can view th
 ![\[Multi-AZ standby replica log file\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/enhanced-monitoring-cloudwatch-secondary.png)
 
 1. Choose the log stream that you want to view from the list of log streams\.
-
-## Available OS metrics<a name="USER_Monitoring-Available-OS-Metrics"></a>
-
-The following tables list the OS metrics available using Amazon CloudWatch Logs\.
-
-### Metrics for MariaDB, MySQL, Oracle, and PostgreSQL DB instances<a name="USER_Monitoring-Available-OS-Metrics-RDS"></a>
-
-<a name="cloudwatch-os-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.CloudWatchLogs.html)
-
-### Metrics for Microsoft SQL Server DB instances<a name="USER_Monitoring-Available-OS-Metrics-RDS.SQLServer"></a>
-
-<a name="cloudwatch-sql-server-metrics"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.CloudWatchLogs.html)

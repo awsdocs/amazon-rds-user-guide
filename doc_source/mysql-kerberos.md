@@ -283,8 +283,8 @@ At a command prompt, connect to one of the endpoints associated with your MySQL 
  The following limitations apply to Kerberos authentication for MySQL: 
 +  A Managed Active Directory that has been shared with you isn't supported\. 
 +  Kerberos authentication is supported for the following Amazon RDS for MySQL versions: 
-  + Amazon RDS for MySQL version 8\.0\.13, 8\.0\.15, and 8\.0\.16
-  + Amazon RDS for MySQL version 5\.7\.24, 5\.7\.25, and 5\.7\.26
+  + Amazon RDS for MySQL version 8\.0\.13 and higher 8\.0 versions
+  + Amazon RDS for MySQL version 5\.7\.24 and higher 5\.7 versions
 +  You must reboot the DB instance after enabling the feature\. 
 +  The domain name length can't be longer than 61 characters\. 
 +  You can't enable Kerberos authentication and IAM authentication at the same time\. Choose one authentication method or the other for your MySQL DB instance\. 

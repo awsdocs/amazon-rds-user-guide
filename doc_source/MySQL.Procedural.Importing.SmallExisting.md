@@ -26,6 +26,7 @@ Make sure not to leave a space between the `-p` option and the entered password\
 **Note**  
 Exclude the following schemas from the dump file: `sys`, `performance_schema`, and `information_schema`\. The `mysqldump` utility excludes these schemas by default\.
 If you need to migrate users and privileges, consider using a tool that generates the data control language \(DCL\) for recreating them, such as the [pt\-show\-grants](https://www.percona.com/doc/percona-toolkit/LATEST/pt-show-grants.html) utility\.
+The user performing the import must have access to the DB instance\. For more information, see [Controlling access with security groups](Overview.RDSSecurityGroups.md)\.
 
 The parameters used are as follows:
 + `-u local_user` – Use to specify a user name\. In the first usage of this parameter, you specify the name of a user account on the local MySQL or MariaDB database identified by the `--databases` parameter\.

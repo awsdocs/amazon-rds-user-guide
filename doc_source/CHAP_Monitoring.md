@@ -6,7 +6,7 @@ This section shows you how to monitor Amazon RDS\.
 + [Overview of monitoring Amazon RDS](MonitoringOverview.md)
 + [Viewing key monitoring information](accessing-monitoring.md)
 + [Monitoring with Performance Insights on Amazon RDS](USER_PerfInsights.md)
-+ [Monitoring OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)
++ [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)
 + [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)
 + [Working with Amazon RDS events](working-with-events.md)
 + [Working with Amazon RDS database log files](USER_LogAccess.md)

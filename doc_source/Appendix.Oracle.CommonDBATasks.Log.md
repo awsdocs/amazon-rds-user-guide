@@ -372,6 +372,9 @@ exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
 
 You can download archived redo logs on your DB instance using the `rdsadmin.rdsadmin_archive_log_download` package\. If archived redo logs are no longer on your DB instance, you might want to download them again from Amazon S3\. Then you can mine the logs or use them to recover or replicate your database\.
 
+**Note**  
+The `rdsadmin.rdsadmin_archive_log_download` package isn't supported for DB instances that use the time zone option\. For more information about this option, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md)\.
+
 ### Downloading archived redo logs: basic steps<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.basic-process"></a>
 
 The availability of your archived redo logs depends on the following retention policies:
@@ -391,8 +394,12 @@ If logs aren't on your instance but are protected by your backup retention perio
 1. Download the archived redo logs from Amazon S3 using `rdsadmin.rdsadmin_archive_log_download`\.
 
    For more information, see [Downloading a single archived redo log](#Appendix.Oracle.CommonDBATasks.download-redo-logs.single-log) and [Downloading a series of archived redo logs](#Appendix.Oracle.CommonDBATasks.download-redo-logs.series)\.
-
+**Note**  
 RDS automatically checks the available storage before downloading\. If the requested logs consume a high percentage of space, you receive an alert\.
+
+1. Confirm that the logs were downloaded from Amazon S3 successfully\.
+
+   You can view the status of your download task in a bdump file\. The bdump files have the path name `/rdsdbdata/log/trace/dbtask-task-id.log`\. In the preceding download step, you run a `SELECT` statement that returns the task ID in a `VARCHAR2` data type\. For more information, see similar examples in [Monitoring the status of a file transfer](oracle-s3-integration.md#oracle-s3-integration.using.task-status)\.
 
 ### Downloading a single archived redo log<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.single-log"></a>
 
