@@ -507,14 +507,14 @@ If the items you selected aren't equivalent, you can't choose **Compare**\. For 
 ## Specifying DB parameters<a name="USER_ParamValuesRef"></a>
 
 DB parameter types include the following:
-+ integer
++ Integer
 + Boolean
-+ string
-+ long
-+ double
-+ timestamp
-+ object of other defined data types
-+ array of values of type integer, Boolean, string, long, double, timestamp, or object
++ String
++ Long
++ Double
++ Timestamp
++ Object of other defined data types
++ Array of values of type integer, Boolean, string, long, double, timestamp, or object
 
 You can also specify integer and Boolean DB parameters using expressions, formulas, and functions\. 
 

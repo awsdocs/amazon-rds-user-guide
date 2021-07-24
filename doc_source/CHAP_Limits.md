@@ -26,6 +26,11 @@ The following limitations apply to the Amazon RDS DB instances:
 If your application requires more DB instances, you can request additional DB instances by opening the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/dashboard)\. In the navigation pane, choose **AWS services**\. Choose **Amazon Relational Database Service \(Amazon RDS\)**, choose a quota, and follow the directions to request a quota increase\. For more information, see [Requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-increase.html) in the *Service Quotas User Guide*\.  
 Backups managed by AWS Backup are considered manual DB snapshots, but don't count toward the manual snapshot quota\. For information about AWS Backup, see the [https://docs.aws.amazon.com/aws-backup/latest/devguide](https://docs.aws.amazon.com/aws-backup/latest/devguide)\.
 
+If you use any of the Amazon RDS APIs and exceed the default quota for the number of calls per second, the Amazon RDS API issues an error similar to the following: ClientError: An error occurred \(ThrottlingException\) when calling the *API\_name* operation: Rate exceeded\. Reduce the number of calls per second\. The quota is meant to cover most use cases\. If higher limits are needed, request a quota increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
+
+**Note**  
+This quota can't be changed in the Amazon RDS Service Quotas console\.
+
 ## Naming constraints in Amazon RDS<a name="RDS_Limits.Constraints"></a>
 
 The following table describes naming constraints in Amazon RDS\. 
@@ -57,7 +62,7 @@ For Oracle, you set the maximum number of user processes and user and system ses
 
 The following example shows how to calculate `max_connections` for a MariaDB or MySQL DB instance using the db\.m5\.xlarge instance class\. `DBInstanceClassMemory` is 16 GiB, or 17,179,869,184 bytes\. That divided by 12,582,880 = 1365 connections maximum\.
 
-For MariaDB and MySQL DB instances, setting the `max_connections` parameter to a large value might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
+Database connections consume memory\. Setting one of these parameters too high can cause a low memory condition that might cause a DB instance to be placed in the **incompatible\-parameters** status\. For more information, see [Diagnosing and resolving incompatible parameters status for a memory limit](CHAP_Troubleshooting.md#CHAP_Troubleshooting.incompatible-parameters-memory)\.
 
 **Note**  
 You might see fewer than the maximum number of DB connections\. This is to avoid potential out\-of\-memory issues\.
@@ -67,4 +72,4 @@ You might see fewer than the maximum number of DB connections\. This is to avoid
 File size limits apply to certain Amazon RDS DB instances\. For more information, see the following engine\-specific limits:
 + [MariaDB file size limits in Amazon RDS](CHAP_MariaDB.md#RDS_Limits.FileSize.MariaDB)
 + [MySQL file size limits in Amazon RDS](MySQL.KnownIssuesAndLimitations.md#MySQL.Concepts.Limits.FileSize)
-+ [Oracle file size limits in Amazon RDS](CHAP_Oracle.md#Oracle.Concepts.file-size-limits)
++ [Oracle file size limits in Amazon RDS](Oracle.Concepts.limitations.md#Oracle.Concepts.file-size-limits)

@@ -2,17 +2,29 @@
 
 How you import data into an Amazon RDS DB instance depends on the following: 
 + The amount of data you have
-+ The number of database objects in your database 
++ The number of database objects in your database
 + The variety of database objects in your database
 
-For example, you can use Oracle SQL Developer to import a simple, 20 MB database\. You can use Oracle Data Pump to import complex databases, or databases that are several hundred megabytes or several terabytes in size\. 
+For example, use the following mechanisms:
++ Oracle SQL Developer – Import a simple, 20 MB database\.
++ Oracle Data Pump – Import complex databases, or databases that are several hundred megabytes or several terabytes in size\. You can use Amazon S3 in this task\. For example, download Data Pump files from Amazon S3 to the DB instance\. For more information, see [Amazon S3 integration](oracle-s3-integration.md)\.
++ AWS Database Migration Service \(AWS DMS\) – Migrate databases without downtime\. For more information about AWS DMS, see [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) and the blog post [Migrating Oracle databases with near\-zero downtime using AWS DMS](http://aws.amazon.com/blogs/database/migrating-oracle-databases-with-near-zero-downtime-using-aws-dms/)\.
 
-You can also use AWS Database Migration Service \(AWS DMS\) to import data into an Amazon RDS DB instance\. AWS DMS can migrate databases without downtime\. For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can migrate to Oracle from either the same database engine or a different database engine using AWS DMS\. If you are migrating from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that are not migrated by AWS DMS\. For more information about AWS DMS, see [ What is AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html)\. 
+**Important**  
+Before you use any of these migration techniques, we recommend that you back up your database\. After you import the data, you can back up your Amazon RDS DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\.
 
-Before you use any of these migration techniques, we recommend that you back up your database\. After you import the data, you can back up your Amazon RDS DB instances by creating snapshots\. Later, you can restore the snapshots\. For more information, see [Backing up and restoring an Amazon RDS DB instance](CHAP_CommonTasks.BackupRestore.md)\. 
+For many database engines, ongoing replication can continue until you are ready to switch over to the target database\. You can migrate to Oracle from either the same database engine or a different database engine using AWS DMS\. If you migrate from a different database engine, you can use the AWS Schema Conversion Tool to migrate schema objects that aren't migrated by AWS DMS\. 
 
-**Note**  
-You can also import data into Oracle using files from Amazon S3\. For example, you can download Data Pump files from Amazon S3 to the DB instance host\. For more information, see [Amazon S3 integration](oracle-s3-integration.md)\.
+The following video provides a helpful introduction to Oracle migration techniques\.
+
+[![AWS Videos](http://img.youtube.com/vi/z9c_FYJmtv4/0.jpg)](http://www.youtube.com/watch?v=z9c_FYJmtv4)
+
+**Topics**
++ [Importing using Oracle SQL Developer](#Oracle.Procedural.Importing.SQLDeveloper)
++ [Importing using Oracle Data Pump](#Oracle.Procedural.Importing.DataPump)
++ [Oracle Export/Import utilities](#Oracle.Procedural.Importing.ExportImport)
++ [Oracle SQL\*Loader](#Oracle.Procedural.Importing.SQLLoader)
++ [Oracle materialized views](#Oracle.Procedural.Importing.Materialized)
 
 ## Importing using Oracle SQL Developer<a name="Oracle.Procedural.Importing.SQLDeveloper"></a>
 
@@ -43,9 +55,26 @@ When you use Oracle Data Pump to import data into an Oracle DB instance, we reco
 + Don't import in `full` mode\.
 
   Because Amazon RDS for Oracle does not allow access to `SYS` or `SYSDBA` administrative users, importing in `full` mode, or importing schemas for Oracle\-maintained components, might damage the Oracle data dictionary and affect the stability of your database\.
-+ When loading large amounts of data, transfer the dump file to the target Amazon RDS for Oracle DB instance, take a DB snapshot of your instance, and then test the import to verify that it succeeds\. If database components are invalidated, you can delete the DB instance and re\-create it from the DB snapshot\. The restored DB instance includes any dump files staged on the DB instance when you took the DB snapshot\.
++ When loading large amounts of data, do the following:
+
+  1. Transfer the dump file to the target Amazon RDS for Oracle DB instance\.
+
+  1. Take a DB snapshot of your instance\.
+
+  1. Test the import to verify that it succeeds\.
+
+  If database components are invalidated, you can delete the DB instance and re\-create it from the DB snapshot\. The restored DB instance includes any dump files staged on the DB instance when you took the DB snapshot\.
 + Don't import dump files that were created using the Oracle Data Pump export parameters `TRANSPORT_TABLESPACES`, `TRANSPORTABLE`, or `TRANSPORT_FULL_CHECK`\. Amazon RDS for Oracle DB instances don't support importing these dump files\.
-+ Don't import dump files that contain Oracle Scheduler objects \(jobs, programs, and schedules\) in the schemas `SYS`, `SYSTEM`, `RDSADMIN`, `RDSSEC`, and `RDS_DATAGUARD`\. Amazon RDS for Oracle DB instances do not support importing these dump files\. 
++ Don't import dump files that contain Oracle Scheduler objects in `SYS`, `SYSTEM`, `RDSADMIN`, `RDSSEC`, and `RDS_DATAGUARD`, and belong to the following categories:
+  + Jobs
+  + Programs
+  + Schedules
+  + Chains
+  + Rules
+  + Evaluation contexts
+  + Rule sets
+
+  Amazon RDS for Oracle DB instances don't support importing these dump files\. 
 
 **Note**  
 To exclude unsupported Scheduler objects, use additional directives during the Data Pump export\. If you use `DBMS_DATAPUMP`, add an additional `METADATA_FILTER` before the `DBMS_METADATA.START_JOB`:  
@@ -53,10 +82,8 @@ To exclude unsupported Scheduler objects, use additional directives during the D
 ```
 DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
    q'[IN (SELECT NAME FROM SYS.OBJ$ 
-          WHERE TYPE# IN (66,67,74) 
-          AND OWNER# IN
-            (SELECT USER# FROM SYS.USER$ 
-             WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+          WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN
+            (SELECT USER# FROM SYS.USER$ WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
             )
           )]','PROCOBJ');
 ```
@@ -65,15 +92,13 @@ If you use `expdp`, create a parameter file that contains the exclude directive 
 ```
 exclude=procobj:"IN 
   (SELECT NAME FROM sys.OBJ$
-   WHERE TYPE# IN (66,67,74) 
-   AND OWNER# IN 
-     (SELECT USER# FROM SYS.USER$
-      WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+   WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN 
+     (SELECT USER# FROM SYS.USER$WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
      )
   )"
 ```
 
-The examples in this section show one way to import data into an Oracle database\. However, Oracle Data Pump permits many ways to import data\. To learn more about Oracle Data Pump, see [ the Oracle documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump.html#GUID-501A9908-BCC5-434C-8853-9A6096766B5A)\.
+The examples in this section show one way to import data into an Oracle database\. However, Oracle Data Pump permits many ways to import data\. To learn more about Oracle Data Pump, see the [Oracle Database documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump.html#GUID-501A9908-BCC5-434C-8853-9A6096766B5A)\.
 
 The examples in this section use the `DBMS_DATAPUMP` package\. The same tasks can be accomplished by using the Oracle Data Pump command line utilities `impdp` and `expdp`\. You can install these utilities on a remote host as part of an Oracle Client installation, including Oracle Instant Client\.
 
@@ -151,7 +176,7 @@ BEGIN
     filetype  => dbms_datapump.ku$_file_type_log_file);
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
-    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74) AND OWNER# IN 
+    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN 
       (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
         ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
@@ -342,10 +367,10 @@ BEGIN
     directory => 'DATA_PUMP_DIR', 
     filetype  => dbms_datapump.ku$_file_type_log_file);
   DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'SCHEMA_EXPR','IN (''SCHEMA_1'')');
-  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
-    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74) AND OWNER# IN 
+  DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',DBMS_DATAPUMP.METADATA_FILTER(v_hdnl,'EXCLUDE_NAME_EXPR',
+    q'[IN (SELECT NAME FROM sys.OBJ$ WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN  
       (SELECT USER# FROM SYS.USER$ WHERE NAME IN 
-        ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
+      ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')))]','PROCOBJ');
   DBMS_DATAPUMP.START_JOB(v_hdnl);
 END;
 /

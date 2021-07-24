@@ -1,4 +1,4 @@
-# Oracle character sets supported in Amazon RDS<a name="Appendix.OracleCharacterSets"></a>
+# RDS for Oracle character sets<a name="Appendix.OracleCharacterSets"></a>
 
 Amazon RDS for Oracle supports two types of character sets: the DB character set and national character set\. 
 
@@ -10,7 +10,10 @@ You set the character set when you create a DB instance\. You can't change the D
 
 ### Supported DB character sets<a name="Appendix.OracleCharacterSets.db-character-set.supported"></a>
 
-The following table lists the Oracle DB character sets that are supported in Amazon RDS\. You can use a value from this table with the `--character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `CharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. 
+The following table lists the Oracle DB character sets that are supported in Amazon RDS\. You can use a value from this table with the `--character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `CharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\.
+
+**Note**  
+The character set for a CDB is always AL32UTF8\. You can set a different character set for the PDB only\.
 
 
 ****  
@@ -74,7 +77,7 @@ You can set other NLS initialization parameters in your SQL client\. For example
 ALTER SESSION SET NLS_LANGUAGE=GERMAN;
 ```
 
-For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to an Oracle DB instance](USER_ConnectToOracleInstance.md)\.
+For information about connecting to an Oracle DB instance with a SQL client, see [Connecting to your Oracle DB instance](USER_ConnectToOracleInstance.md)\.
 
 ## National character set<a name="Appendix.OracleCharacterSets.nchar-character-set"></a>
 
@@ -84,6 +87,6 @@ The NCHAR character set supports the following character sets:
 + AL16UTF16 \(default\)
 + UTF8
 
-You can specify either of these values with the `--nchar-character-set-name` parameter of the AWS CLI [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command or with the `NcharCharacterSetName` parameter of the Amazon RDS API [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. You can't change the national character set after you create the database\.
+You can specify either value with the `--nchar-character-set-name` parameter of the [create\-db\-instance](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-instance.html) command \(AWS CLI version 2 only\)\. If you use the Amazon RDS API, specify the `NcharCharacterSetName` parameter of [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation\. You can't change the national character set after you create the database\.
 
 For more information about Unicode in Oracle databases, see [Supporting multilingual databases with unicode](https://docs.oracle.com/en/database/oracle/oracle-database/19/nlspg/supporting-multilingual-databases-with-unicode.html) in the Oracle documentation\.

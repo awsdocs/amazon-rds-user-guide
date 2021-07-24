@@ -14,6 +14,10 @@ To configure replication between Oracle DB instances, you can create replica dat
 
 An Oracle *replica* database is either mounted or read\-only\. An Oracle replica in read\-only mode is called a *read replica*\. An Oracle replica in mounted mode is called a *mounted replica*\.
 
+The following video provides a helpful overview of Oracle disaster recovery\. For more information, see the blog post [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/) and [Managed disaster recovery with Amazon RDS for Oracle cross\-Region automated backups](http://aws.amazon.com/blogs/database/part-2-managed-disaster-recovery-with-amazon-rds-for-oracle-xrab/)\. 
+
+[![AWS Videos](http://img.youtube.com/vi/-XpzhIevwVg/0.jpg)](http://www.youtube.com/watch?v=-XpzhIevwVg)
+
 **Topics**
 + [Read\-only and mounted replicas](#oracle-read-replicas.overview.modes)
 + [Outages during replication](#oracle-read-replicas.overview.outages)

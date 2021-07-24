@@ -1,4 +1,4 @@
-# Monitoring with the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
+# Analyzing metrics with the Performance Insights dashboard<a name="USER_PerfInsights.UsingDashboard"></a>
 
 The Performance Insights dashboard contains database performance information to help you analyze and troubleshoot performance issues\. On the main dashboard page, you can view information about the database load\. You can also drill into details for a particular wait state, SQL query, host, or user\.
 
@@ -159,14 +159,26 @@ In Amazon RDS Performance Insights, you can find statistics on running queries i
 
 ### Statistics for MariaDB and MySQL<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL"></a>
 
-Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. This table is managed by the database and doesn't have an eviction policy\. If the table becomes full, new SQL queries aren't tracked\. To address this issue, Performance Insights automatically truncates the table when it's nearly full\.
+Performance Insights collects SQL digest statistics from the `events_statements_summary_by_digest` table\. 
 
-Performance Insights automatically truncates the table only if your parameter group doesn't have an explicitly set value for the `performance_schema` parameter\. You can examine the `performance_schema` parameter, and if the value of source is `user`, then you set a value\. If you want Performance Insights to truncate the table automatically, then reset the value for the `performance_schema` parameter\. You can view the source of a parameter value by viewing the parameter in the AWS Management Console or by running the AWS CLI [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\. The following message is shown in the AWS Management Console when the table is full:
+#### Automatic truncation of the digest table<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation"></a>
+
+The `events_statements_summary_by_digest` table is managed by the database\. This table doesn't have an eviction policy\. The following message is shown in the AWS Management Console when the table is full:
 
 ```
 Performance Insights is unable to collect SQL Digest statistics on new queries because the table events_statements_summary_by_digest is full. 
 Please truncate events_statements_summary_by_digest table to clear the issue. Check the User Guide for more details.
 ```
+
+If the table becomes full, MariaDB and MySQL don't track SQL queries\. To address this issue, Performance Insights automatically truncates the digest table when both of the following conditions are met:
++ The table is full\.
++ Performance Insights manages the Performance Schema automatically\. For automatic management, the `performance_schema` parameter must be set to `0` and the **Source** must not be set to `user`\.
+
+If Performance Insights isn't managing the Performance Automatically, see [Enabling the Performance Schema for Performance Insights on Amazon RDS for MariaDB or MySQL](USER_PerfInsights.EnableMySQL.md)\.
+
+In the AWS CLI, check the source of a parameter value by running the [describe\-db\-parameters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html) command\.
+
+#### Per\-second statistics<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.per-second"></a>
 
 The following SQL statistics are available for MariaDB and MySQL DB instances\.
 
@@ -188,6 +200,8 @@ The following SQL statistics are available for MariaDB and MySQL DB instances\.
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_disk\_tables\_per\_sec | Created temporary disk tables per second | 
 | db\.sql\_tokenized\.stats\.sum\_created\_tmp\_tables\_per\_sec | Created temporary tables per second | 
 | db\.sql\_tokenized\.stats\.sum\_lock\_time\_per\_sec | Lock time per second \(in ms\) | 
+
+#### Per\-call statistics<a name="USER_PerfInsights.UsingDashboard.AnalyzeDBLoad.AdditionalMetrics.MySQL.truncation.per-call"></a>
 
 The following metrics provide per call statistics for a SQL statement\.
 

@@ -64,7 +64,7 @@ For information about ARNs, see [Working with Amazon Resource Names \(ARNs\) in 
 
  To create a read replica in a different AWS Region from the source DB instance, you can use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) command from the destination AWS Region\. The following parameters are required for creating a read replica in another AWS Region:
 +  `--region` – The destination AWS Region where the read replica is created\.
-+  `--source-db-instance-identifier` – The DB instance identifier for the source DB instance\. This identifier must be in the ARN format for the source AWS Region\. The AWS Region specified in `source-db-instance-identifier` must match the AWS Region specified in `--region`\.
++  `--source-db-instance-identifier` – The DB instance identifier for the source DB instance\. This identifier must be in the ARN format for the source AWS Region\.
 +  `--db-instance-identifier` – The identifier for the read replica in the destination AWS Region\.
 
 **Example of a cross\-Region read replica**  

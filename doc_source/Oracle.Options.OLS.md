@@ -10,10 +10,10 @@ For Oracle Database 19c, Oracle Database 18c, and Oracle Database 12c Release 2 
 ## Prerequisites for Oracle Label Security<a name="Oracle.Options.OLS.PreReqs"></a>
 
 The following are prerequisites for using Oracle Label Security: 
-+ Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
++ Your DB instance must use the Bring Your Own License model\. For more information, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 + You must have a valid license for Oracle Enterprise Edition with Software Update License and Support\. 
 + Your Oracle license must include the Label Security option\. 
-+ You must be using the non\-multitenant database architecture rather than the single\-tenant architecture\. For more information, see [RDS for Oracle architecture](CHAP_Oracle.md#Oracle.Concepts.single-tenant)\.
++ You must be using the non\-multitenant database architecture rather than the single\-tenant architecture\. For more information, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.
 
 ## Adding the Oracle Label Security option<a name="Oracle.Options.OLS.Add"></a>
 

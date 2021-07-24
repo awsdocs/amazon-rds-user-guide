@@ -25,7 +25,7 @@ You need both the endpoint and the port number to connect to the DB instance\.
 
 1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region of your DB instance\.
 
-1. Find the Domain Name System \(DNS\) name and port number for your DB instance:
+1. Find the Domain Name System \(DNS\) name \(endpoint\) and port number for your DB instance:
 
    1. Open the RDS console and choose **Databases** to display a list of your DB instances\.
 
@@ -51,9 +51,9 @@ In this procedure, you connect to your sample DB instance by using Microsoft SQL
 
    1. For **Server type**, choose **Database Engine**\. 
 
-   1. For **Server name**, enter the DNS name and port number of your DB instance, separated by a comma\. 
+   1. For **Server name**, enter the DNS name \(endpoint\) and port number of your DB instance, separated by a comma\. 
 **Important**  
-Change the colon between the DNS name and port number to a comma\. 
+Change the colon between the endpoint and port number to a comma\. 
 
       Your server name should look like the following example\.
 
@@ -69,7 +69,9 @@ Change the colon between the DNS name and port number to a comma\.
 
 1. Choose **Connect**\. 
 
-   After a few moments, SSMS connects to your DB instance\. If you can't connect to your DB instance, see [Security group considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting connections to your SQL Server DB instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
+   After a few moments, SSMS connects to your DB instance\.
+
+   If you can't connect to your DB instance, see [Security group considerations](#USER_ConnectToMicrosoftSQLServerInstance.Security) and [Troubleshooting connections to your SQL Server DB instance](#USER_ConnectToMicrosoftSQLServerInstance.Troubleshooting)\. 
 
 1. Your SQL Server DB instance comes with SQL Server's standard built\-in system databases \(`master`, `model`, `msdb`, and `tempdb`\)\. To explore the system databases, do the following:
 

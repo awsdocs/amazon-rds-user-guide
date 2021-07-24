@@ -385,7 +385,7 @@ The `audit_all_sys_aud_table` procedure has the following parameters\.
 |  `p_by_access`  |  boolean  |  true  |  No  |  Set to `true` to audit `BY ACCESS`\. Set to `false` to audit `BY SESSION`\.  | 
 
 **Note**  
-In a single\-tenant CDB, the following operations work, but no customer\-visible mechanism can detect the current status of the operations\. Auditing information isn't available from within the PDB\. For more information, see [Limitations of a single\-tenant CDB](CHAP_Oracle.md#Oracle.Concepts.single-tenant-limitations)\.
+In a single\-tenant CDB, the following operations work, but no customer\-visible mechanism can detect the current status of the operations\. Auditing information isn't available from within the PDB\. For more information, see [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
 
 The following query returns the current audit configuration for `SYS.AUD$` for a database\.
 

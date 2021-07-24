@@ -61,7 +61,7 @@ Instance class support varies according to the version and edition of SQL Server
 The Graviton2 instance classes db\.m6g and db\.r6g are supported for RDS for MySQL versions 8\.0\.17 and higher\.
 
 **Oracle**  
-Instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported Oracle DB instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses.Supported)\.
+Instance class support varies according to the Oracle Database version and edition\. RDS for Oracle supports additional memory\-optimized instance classes\. These classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For the vCPU count and memory allocation for each optimized class, see [Supported Oracle DB instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 **PostgreSQL**  
 PostgreSQL versions 13 and higher support the db\.m6g, db\.m5, db\.r6g, db\.r5, db\.t3 instance classes\. Previous generations of classes are supported only by PostgreSQL versions lower than 13 and include db\.m4, db\.m3, db\.r4, db\.r3, and db\.t2\.
@@ -378,9 +378,9 @@ There is no additional or reduced charge for specifying processor features on an
 ### DB instance classes that support processor configuration<a name="USER_ConfigureProcessor.CPUOptionsDBInstanceClass"></a>
 
 You can configure the number of CPU cores and threads per core only when the following conditions are met:
-+ You're configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\.
-+ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\.
-+ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported Oracle DB instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses.Supported)\.
++ You're configuring an Oracle DB instance\. For information about the DB instance classes supported by different Oracle database editions, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\.
++ Your instance is using the Bring Your Own License \(BYOL\) licensing option\. For more information about Oracle licensing options, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\.
++ Your instance isn't one of the db\.r5 instance classes that have predefined processor configurations\. These instance classes have names of the form db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*\. For example, db\.r5\.xlarge\.tpc2\.mem4x is preconfigured with 2 threads per core \(tpc2\) and 4x as much memory as the standard db\.r5\.xlarge instance class\. You can't configure the processor features of these optimized instance classes\. For more information, see [Supported Oracle DB instance classes](Oracle.Concepts.InstanceClasses.md#Oracle.Concepts.InstanceClasses.Supported)\.
 
 In the following table, you can find the DB instance classes that support setting a number of CPU cores and CPU threads per core\. You can also find the default value and the valid values for the number of CPU cores and CPU threads per core for each DB instance class\.
 

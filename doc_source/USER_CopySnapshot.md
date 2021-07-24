@@ -31,7 +31,7 @@ You can copy snapshots shared to you by other AWS accounts\. In some cases, you 
 You can copy a shared DB snapshot across AWS Regions if the snapshot is unencrypted\. However, if the shared DB snapshot is encrypted, you can only copy it in the same Region\.
 
 **Note**  
-Copying shared incremental snapshots in the same AWS Region is supported when they're unencrypted, or encrypted using the same AWS KMS key as the initial full snapshot\. If you use a different KMS key to encrypt subsequent snapshots when copying them, those shared snapshots are full snapshots\.
+Copying shared incremental snapshots in the same AWS Region is supported when they're unencrypted, or encrypted using the same AWS KMS key as the initial full snapshot\. If you use a different KMS key to encrypt subsequent snapshots when copying them, those shared snapshots are full snapshots\. For more information, see [Incremental snapshot copying](#USER_CopySnapshot.Incremental)\.
 
 ## Handling encryption<a name="USER_CopySnapshot.Encryption"></a>
 
@@ -45,19 +45,40 @@ That is, you can create a snapshot of your DB instance when you are ready to enc
 
 ## Incremental snapshot copying<a name="USER_CopySnapshot.Incremental"></a>
 
+### <a name="incremental-nonaurora"></a>
+
 An *incremental* snapshot contains only the data that has changed after the most recent snapshot of the same DB instance\. Incremental snapshot copying is faster and results in lower storage costs than full snapshot copying\.
 
 **Note**  
 When you copy a source snapshot that is a snapshot copy itself, the new copy isn't incremental\. This is because the source snapshot copy doesn't include the required metadata for incremental copies\.
 
-Whether a snapshot copy is incremental is determined by the most recently completed snapshot copy\. If the most recent snapshot copy was deleted, the next copy is a full copy, not an incremental copy\. If a copy is still pending when you start another copy, the second copy doesn't start until the first copy finishes\.
+Whether a snapshot copy is incremental is determined by the most recently completed snapshot copy\. If the most recent snapshot copy was deleted, the next copy is a full copy, not an incremental copy\.
+
+If a copy is still pending when you start another copy, the second copy doesn't start until the first copy finishes\.
 
 When you copy a snapshot across AWS accounts, the copy is an incremental copy if the following conditions are met:
-+ The snapshot was previously copied to the destination account\.
++ A different snapshot of the same source DB instance was previously copied to the destination account\.
 + The most recent snapshot copy still exists in the destination account\.
 + All copies of the snapshot in the destination account are either unencrypted, or were encrypted using the same CMK\.
 
-  For shared snapshots, copying incremental snapshots across AWS accounts is only supported when they're unencrypted\.
+The following examples illustrate the difference between full and incremental snapshots\. They apply to both shared and unshared snapshots\.
+
+
+| Snapshot | Encryption key | Full or incremental | 
+| --- | --- | --- | 
+| S1 | K1 | Full | 
+| S2 | K1 | Incremental of S1 | 
+| S3 | K1 | Incremental of S2 | 
+| S4 | K1 | Incremental of S3 | 
+| Copy of S1 \(S1C\) | K2 | Full | 
+| Copy of S2 \(S2C\) | K3 | Full | 
+| Copy of S3 \(S3C\) | K3 | Incremental of S2C | 
+| Copy of S4 \(S4C\) | K3 | Incremental of S3C | 
+| Copy 2 of S4 \(S4C2\) | K4 | Full | 
+
+**Note**  
+In these examples, snapshots S2, S3, and S4 are incremental only if the previous snapshot still exists\.  
+The same applies to copies\. Snapshot copies S3C and S4C are incremental only if the previous copy still exists\.
 
 For information on copying incremental snapshots across AWS Regions, see [Full and incremental copies](#USER_CopySnapshot.AcrossRegions.Full)\.
 

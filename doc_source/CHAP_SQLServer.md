@@ -4,8 +4,8 @@ Amazon RDS supports DB instances running several versions and editions of Micros
 
 
 + SQL Server 2019 CU8 15\.00\.4073\.23, released per [KB4577194](https://support.microsoft.com/en-us/help/4577194/cumulative-update-8-for-sql-server-2019) on October 1, 2020\.
-+ SQL Server 2017 CU22 14\.00\.3356\.20, released per [KB4577467](https://support.microsoft.com/en-us/help/4577467/cumulative-update-20-for-sql-server-2017) on September 10, 2020\.
-+ SQL Server 2016 SP2 CU15 13\.00\.5850\.14, released per [KB4577775](https://support.microsoft.com/en-us/help/4577775/cumulative-update-15-for-sql-server-2016-sp2) on September 28, 2020\.
++ SQL Server 2017 CU23 14\.00\.3381\.3, released per [KB5000685](https://support.microsoft.com/en-us/help/5000685) on February 24, 2021\.
++ SQL Server 2016 SP2 CU16 13\.00\.5882\.1, released per [KB5000645](https://support.microsoft.com/en-us/help/5000645) on February 11, 2021\.
 + SQL Server 2014 SP3 CU4 12\.00\.6329\.1, released per [KB4500181](https://support.microsoft.com/en-us/help/4500181/cumulative-update-4-for-sql-server-2014-sp3) on July 29, 2019\.
 + SQL Server 2012 SP4 GDR 11\.0\.7493\.4, released per [KB4532098](https://support.microsoft.com/en-us/help/4532098/security-update-for-sql-server-2012-sp4-gdr) on February 11, 2020\.
 + SQL Server 2008: It's no longer possible to provision new instances in any Region\. Amazon RDS is actively migrating existing instances off this version\.
@@ -187,9 +187,9 @@ The following table shows the supported versions for all editions and all AWS Re
 
 | Major version | Minor version | RDS API `EngineVersion` and CLI `engine-version` | 
 | --- | --- | --- | 
-| SQL Server 2019 |  15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |  `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
-| SQL Server 2017 |  14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\) 14\.00\.3281\.6 \(CU19\) 14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 \(CU15 GDR\) 14\.00\.3049\.1 \(CU13 hotfix update\) 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3356.20.v1` `14.00.3294.2.v1` `14.00.3281.6.v1` `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
-| SQL Server 2016 |  13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\) 13\.00\.5598\.27 \(SP2 CU11\) 13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 security update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5850.14.v1` `13.00.5820.21.v1` `13.00.5598.27.v1` `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
+| SQL Server 2019 |   15\.00\.4073\.23 \(CU8\) 15\.00\.4043\.16 \(CU5\)  |   `15.00.4073.23.v1` `15.00.4043.16.v1`  | 
+| SQL Server 2017 |  14\.00\.3381\.3 \(CU23\) 14\.00\.3356\.20 \(CU22\) 14\.00\.3294\.2 \(CU20\) 14\.00\.3281\.6 \(CU19\) 14\.00\.3223\.3 \(CU16\) 14\.00\.3192\.2 \(CU15 GDR\) 14\.00\.3049\.1 \(CU13 hotfix update\) 14\.00\.3035\.2 \(CU9 GDR\) 14\.00\.3015\.40 \(CU3\) 14\.00\.1000\.169 \(RTM\)  |  `14.00.3381.3.v1` `14.00.3356.20.v1` `14.00.3294.2.v1` `14.00.3281.6.v1` `14.00.3223.3.v1` `14.00.3192.2.v1` `14.00.3049.1.v1` `14.00.3035.2.v1` `14.00.3015.40.v1` `14.00.1000.169.v1`  | 
+| SQL Server 2016 |  13\.00\.5882\.1 \(SP2 CU16\) 13\.00\.5850\.14 \(SP2 CU15\) 13\.00\.5820\.21 \(SP2 CU13\) 13\.00\.5598\.27 \(SP2 CU11\) 13\.00\.5426\.0 \(SP2 CU8\) 13\.00\.5366\.0 \(SP2\) 13\.00\.5292\.0 \(CU6\) 13\.00\.5216\.0 \(CU3\) 13\.00\.4522\.0 \(SP1 CU10 security update\) 13\.00\.4466\.4 \(SP1 CU7\) 13\.00\.4451\.0 \(SP1 CU5\) 13\.00\.4422\.0 \(SP1 CU2\) 13\.00\.2164\.0 \(RTM CU2\)  |  `13.00.5882.1.v1` `13.00.5850.14.v1` `13.00.5820.21.v1` `13.00.5598.27.v1` `13.00.5426.0.v1` `13.00.5366.0.v1` `13.00.5292.0.v1` `13.00.5216.0.v1` `13.00.4522.0.v1` `13.00.4466.4.v1` `13.00.4451.0.v1` `13.00.4422.0.v1` `13.00.2164.0.v1`  | 
 | SQL Server 2014 |  12\.00\.6329\.1 \(SP3 CU4\) 12\.00\.6293\.0 \(SP3 CU3\) 12\.00\.5571\.0 \(SP2 CU10\) 12\.00\.5546\.0 \(SP2 CU5\) 12\.00\.5000\.0 \(SP2\)  |  `12.00.6329.1.v1` `12.00.6293.0.v1` `12.00.5571.0.v1` `12.00.5546.0.v1` `12.00.5000.0.v1`  | 
 | SQL Server 2012 |  11\.00\.7493\.4 \(SP4 GDR\) 11\.00\.7462\.6 \(SP4 GDR\) 11\.00\.6594\.0 \(SP3 CU8\) 11\.00\.6020\.0 \(SP3\) 11\.00\.5058\.0 \(SP2\), except US East \(Ohio\), Canada \(Central\), and Europe \(London\)  |  `11.00.7493.4.v1` `11.00.7462.6.v1` `11.00.6594.0.v1` `11.00.6020.0.v1` `11.00.5058.0.v1`  | 
 

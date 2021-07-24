@@ -260,8 +260,8 @@ Modify your DB instance settings to the following:
 
 Modify your DB parameter group to include the following settings\. You should test the parameter settings to find the most efficient settings for your DB instance:
 + Increase the value of the `maintenance_work_mem` parameter\. For more information about PostgreSQL resource consumption parameters, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/runtime-config-resource.html)\.
-+ Increase the value of the `checkpoint_segments` and `checkpoint_timeout` parameters to reduce the number of writes to the wal log\.
-+ Disable the `synchronous_commit` parameter \(do not turn off FSYNC\)\.
++ Increase the value of the `max_wal_size` and `checkpoint_timeout` parameters to reduce the number of writes to the wal log\.
++ Disable the `synchronous_commit` parameter\.
 + Disable the PostgreSQL autovacuum parameter\.
 + Make sure none of the tables you are importing are unlogged\. Data stored in unlogged tables can be lost during a failover\. For more information, see [CREATE TABLE UNLOGGED](https://www.postgresql.org/docs/current/sql-createtable.html)\.
 

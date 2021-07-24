@@ -11,7 +11,7 @@ You can use GoldenGate with Amazon RDS to do the following:
 
 When working with GoldenGate on Amazon RDS, consider the following: 
 + You are responsible for setting up and managing GoldenGate for use with Amazon RDS\. 
-+ You are responsible for managing GoldenGate licensing \(BYOL\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
++ You are responsible for managing GoldenGate licensing \(BYOL\) for use with Amazon RDS in all AWS regions\. For more information, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 + Amazon RDS supports GoldenGate version 11\.2\.1 and later\. 
 + Amazon RDS supports migration and replication across Oracle databases using GoldenGate\. We do not support nor prevent customers from migrating or replicating across heterogeneous databases\. 
 + You can use GoldenGate on Amazon RDS for Oracle DB instances that use Oracle Transparent Data Encryption \(TDE\)\. To maintain the integrity of replicated data, you should configure encryption on the GoldenGate hub using EBS encrypted volumes or trail file encryption\. You should also configure encryption for data sent between the GoldenGate hub and the source and target database instances\. Amazon RDS for Oracle DB instances support encryption with [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md) or [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 

@@ -49,7 +49,7 @@ If you want to change from one edition to a new edition that is not supported by
 
 If you use Oracle GoldenGate, always retain the parameter group with the `compatible` parameter\. When you restore a DB instance from a DB snapshot, specify a parameter group that has a matching or greater `compatible` value\. 
 
-If you restore a snapshot of a CDB instance, you can change the PDB name\. You can't change the CDB name, which is always `RDSCDB`\. This CDB name is the same for all RDS instances that use a single\-tenant architecture\. For more information, see [Snapshots in a single\-tenant architecture](CHAP_Oracle.md#Oracle.Concepts.single-tenant.snapshots)\.
+If you restore a snapshot of a CDB instance, you can change the PDB name\. You can't change the CDB name, which is always `RDSCDB`\. This CDB name is the same for all RDS instances that use a single\-tenant architecture\. For more information, see [Snapshots in a single\-tenant architecture](Oracle.Concepts.single-tenant.md#Oracle.Concepts.single-tenant.snapshots)\.
 
 Before you restore a DB snapshot, you can upgrade it to a later release\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
 

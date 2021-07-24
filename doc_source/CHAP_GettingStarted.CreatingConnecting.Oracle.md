@@ -12,7 +12,7 @@ In this topic, you create a sample Oracle DB instance\. You then connect to the 
 The DB instance is where you run your Oracle databases\.
 
 **Note**  
-RDS for Oracle supports a single\-tenant architecture, where a pluggable database \(PDB\) resides in a multitenant container database \(CDB\)\. For more information, see [RDS for Oracle architecture](CHAP_Oracle.md#Oracle.Concepts.single-tenant)\.
+RDS for Oracle supports a single\-tenant architecture, where a pluggable database \(PDB\) resides in a multitenant container database \(CDB\)\. For more information, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.
 
 ### Console<a name="CHAP_GettingStarted.Creating.Oracle.Console"></a>
 

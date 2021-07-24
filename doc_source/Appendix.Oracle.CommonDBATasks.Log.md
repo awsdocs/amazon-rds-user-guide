@@ -372,9 +372,6 @@ exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
 
 You can download archived redo logs on your DB instance using the `rdsadmin.rdsadmin_archive_log_download` package\. If archived redo logs are no longer on your DB instance, you might want to download them again from Amazon S3\. Then you can mine the logs or use them to recover or replicate your database\.
 
-**Note**  
-The `rdsadmin.rdsadmin_archive_log_download` package isn't supported for DB instances that use the time zone option\. For more information about this option, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md)\.
-
 ### Downloading archived redo logs: basic steps<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.basic-process"></a>
 
 The availability of your archived redo logs depends on the following retention policies:

@@ -10,7 +10,7 @@ OEM Database Express and Database Control are similar tools that have a web\-bas
 The following is a limitation for OEM Database Express: 
 + OEM Database Express isn't supported on the db\.t3\.micro or db\.t3\.small DB instance classes\. 
 
-  For more information about DB instance classes, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
+  For more information about DB instance classes, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\. 
 
 ## OEM Database option settings<a name="Appendix.Oracle.Options.OEM_DBControl.Options"></a>
 

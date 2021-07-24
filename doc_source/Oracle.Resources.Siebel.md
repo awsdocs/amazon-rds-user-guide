@@ -9,9 +9,9 @@ To install a Siebel Database on Oracle on Amazon RDS, you need to use the master
 
 ## Licensing and versions<a name="Oracle.Resources.Siebel.Versions"></a>
 
-To install a Siebel Database on Amazon RDS, you must use your own Oracle Database license, and your own Siebel license\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition\. For more information, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
+To install a Siebel Database on Amazon RDS, you must use your own Oracle Database license, and your own Siebel license\. You must have the appropriate Oracle Database license \(with Software Update License and Support\) for the DB instance class and Oracle Database edition\. For more information, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 
-Oracle Database Enterprise Edition is the only edition certified by Siebel for this scenario\. Amazon RDS supports Siebel CRM version 15\.0 or 16\.0\. Use Oracle Database 12c Release 1 \(12\.1\.0\.2\.0\)\. For the procedures following, we use Siebel CRM version 15\.0 and Oracle Database Release 1 \(12\.1\.0\.2\) or Oracle Database Release 2 \(12\.2\.0\.1\)\. For more information, see [Oracle Database 12c with Amazon RDS](CHAP_Oracle.md#Oracle.Concepts.FeatureSupport.12c)\. 
+Oracle Database Enterprise Edition is the only edition certified by Siebel for this scenario\. Amazon RDS supports Siebel CRM version 15\.0 or 16\.0\. Use Oracle Database 12c Release 1 \(12\.1\.0\.2\.0\)\. For the procedures following, we use Siebel CRM version 15\.0 and Oracle Database Release 1 \(12\.1\.0\.2\) or Oracle Database Release 2 \(12\.2\.0\.1\)\. For more information, see [Oracle Database 12c with Amazon RDS](Oracle.Concepts.database-versions.md#Oracle.Concepts.FeatureSupport.12c)\. 
 
 Amazon RDS supports database version upgrades\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
 

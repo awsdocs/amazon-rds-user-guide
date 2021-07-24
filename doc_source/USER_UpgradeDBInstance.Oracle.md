@@ -165,7 +165,7 @@ Minor version downgrades aren't supported\.
 
 ## Oracle SE2 upgrade paths<a name="USER_UpgradeDBInstance.Oracle.SE2"></a>
 
-The following table shows supported upgrade paths to Standard Edition Two \(SE2\)\. For more information about the License Included and Bring Your Own License \(BYOL\) models, see [Oracle licensing options](CHAP_Oracle.md#Oracle.Concepts.Licensing)\. 
+The following table shows supported upgrade paths to Standard Edition Two \(SE2\)\. For more information about the License Included and Bring Your Own License \(BYOL\) models, see [Oracle licensing options](Oracle.Concepts.Licensing.md)\. 
 
 
 ****  

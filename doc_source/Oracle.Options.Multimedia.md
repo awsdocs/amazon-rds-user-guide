@@ -17,7 +17,7 @@ Oracle desupported Oracle Multimedia in Oracle Database 19c\. So, Oracle Multime
 
 The following are prerequisites for using Oracle Multimedia: 
 + Your DB instance must be inside a virtual private cloud \(VPC\)\. For more information, see [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md)\. 
-+ Your DB instance must be of sufficient class\. Oracle Multimedia is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](CHAP_Oracle.md#Oracle.Concepts.InstanceClasses)\. 
++ Your DB instance must be of sufficient class\. Oracle Multimedia is not supported for the db\.t3\.micro or db\.t3\.small DB instance classes\. For more information, see [RDS for Oracle instance classes](Oracle.Concepts.InstanceClasses.md)\. 
 + Your DB instance must have **Auto Minor Version Upgrade** enabled\. This option enables your DB instance to receive minor DB engine version upgrades automatically when they become available and is required for any options that install the Oracle Java Virtual Machine \(JVM\)\. Amazon RDS uses this option to update your DB instance to the latest Oracle Patch Set Update \(PSU\) or Release Update \(RU\)\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
 ## Best practices for Oracle Multimedia<a name="Oracle.Options.Multimedia.BestPractces"></a>

@@ -11,27 +11,44 @@ Backup replication is available for RDS DB instances running the following datab
 
   Backup replication isn't supported for encrypted SQL Server DB instances\.
 
-Backup replication is supported between the following AWS Regions:
-
-
-****  
-
-| Source Region | Destination Region | 
-| --- | --- | 
-| US East \(N\. Virginia\)  | US West \(Oregon\) | 
-| US West \(Oregon\) | US East \(N\. Virginia\) | 
-| Europe \(Frankfurt\) | Europe \(Ireland\) | 
-| Europe \(Ireland\) | Europe \(Frankfurt\) | 
-| Asia Pacific \(Tokyo\) | Asia Pacific \(Osaka\) | 
-
-You can also use the `describe-source-regions` AWS CLI command to find out which AWS Regions can replicate to each other\. For more information, see [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)\.
-
 **Topics**
++ [AWS Region support](#USER_ReplicateBackups.Regions)
 + [Enabling cross\-Region automated backups](#AutomatedBackups.Replicating.Enable)
 + [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)
 + [Restoring to a specified time from a replicated backup](#AutomatedBackups.PiTR)
 + [Stopping automated backup replication](#AutomatedBackups.StopReplicating)
 + [Deleting replicated backups](#AutomatedBackups.Delete)
+
+## AWS Region support<a name="USER_ReplicateBackups.Regions"></a>
+
+Backup replication is supported between the following AWS Regions\.
+
+
+****  
+
+| Source Region | Destination Regions available | 
+| --- | --- | 
+| Asia Pacific \(Mumbai\) |  Asia Pacific \(Singapore\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| Asia Pacific \(Osaka\) | Asia Pacific \(Tokyo\) | 
+| Asia Pacific \(Seoul\) |  Asia Pacific \(Singapore\), Asia Pacific \(Tokyo\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| Asia Pacific \(Singapore\) |  Asia Pacific \(Mumbai\), Asia Pacific \(Seoul\), Asia Pacific \(Sydney\), Asia Pacific \(Tokyo\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| Asia Pacific \(Sydney\) |  Asia Pacific \(Singapore\) US East \(N\. Virginia\), US West \(N\. California\), US West \(Oregon\)  | 
+| Asia Pacific \(Tokyo\) |  Asia Pacific \(Osaka\), Asia Pacific \(Seoul\), Asia Pacific \(Singapore\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| Canada \(Central\) |  Europe \(Ireland\) US East \(N\. Virginia\), US East \(Ohio\), US West \(N\. California\), US West \(Oregon\)  | 
+| Europe \(Frankfurt\) |  Europe \(Ireland\), Europe \(London\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| Europe \(Ireland\) |  Canada \(Central\) Europe \(Frankfurt\), Europe \(London\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\), US East \(Ohio\), US West \(N\. California\), US West \(Oregon\)  | 
+| Europe \(London\) |  Europe \(Frankfurt\), Europe \(Ireland\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\)  | 
+| Europe \(Paris\) |  Europe \(Frankfurt\), Europe \(Ireland\), Europe \(London\), Europe \(Stockholm\) US East \(N\. Virginia\)  | 
+| Europe \(Stockholm\) |  Europe \(Frankfurt\), Europe \(Ireland\), Europe \(London\), Europe \(Paris\) US East \(N\. Virginia\)  | 
+| South America \(São Paulo\) | US East \(N\. Virginia\), US East \(Ohio\) | 
+| AWS GovCloud \(US\-East\) | AWS GovCloud \(US\-West\) | 
+| AWS GovCloud \(US\-West\) | AWS GovCloud \(US\-East\) | 
+| US East \(N\. Virginia\) |  Asia Pacific \(Mumbai\), Asia Pacific \(Seoul\), Asia Pacific \(Singapore\), Asia Pacific \(Sydney\), Asia Pacific \(Tokyo\) Canada \(Central\) Europe \(Frankfurt\), Europe \(Ireland\), Europe \(London\), Europe \(Paris\), Europe \(Stockholm\) South America \(São Paulo\) US East \(Ohio\), US West \(N\. California\), US West \(Oregon\)  | 
+| US East \(Ohio\) |  Asia Pacific \(Mumbai\), Asia Pacific \(Seoul\), Asia Pacific \(Singapore\), Asia Pacific \(Tokyo\) Canada \(Central\) Europe \(Frankfurt\), Europe \(Ireland\) South America \(São Paulo\) US East \(N\. Virginia\), US West \(N\. California\), US West \(Oregon\)  | 
+| US West \(N\. California\) |  Asia Pacific \(Sydney\) Canada \(Central\) Europe \(Ireland\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
+| US West \(Oregon\) |  Asia Pacific \(Mumbai\), Asia Pacific \(Seoul\), Asia Pacific \(Singapore\), Asia Pacific \(Sydney\), Asia Pacific \(Tokyo\) Canada \(Central\) Europe \(Frankfurt\), Europe \(Ireland\) US East \(N\. Virginia\), US East \(Ohio\), US West \(N\. California\)  | 
+
+You can also use the `describe-source-regions` AWS CLI command to find out which AWS Regions can replicate to each other\. For more information, see [Finding information about replicated backups](#AutomatedBackups.Replicating.Describe)\.
 
 ## Enabling cross\-Region automated backups<a name="AutomatedBackups.Replicating.Enable"></a>
 
