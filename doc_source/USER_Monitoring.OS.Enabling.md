@@ -22,7 +22,7 @@ You can create the required role before you enable Enhanced Monitoring\. When yo
 
 The user that enables Enhanced Monitoring must be granted the `PassRole` permission\. For more information, see Example 2 in [Granting a user permissions to pass a role to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html) in the *IAM User Guide*\.<a name="USER_Monitoring.OS.IAMRole"></a>
 
-**To create an IAM role for Amazon RDS enhanced monitoring**
+**To create an IAM role for Amazon RDS enhanced monitoring in the console**
 
 1. Open the [IAM console](https://console.aws.amazon.com/iam/home?#home) at [https://console\.aws\.amazon\.com](https://console.aws.amazon.com/)\.
 
@@ -43,6 +43,27 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
    The trusted entity for your role is the AWS service **monitoring\.rds\.amazonaws\.com**\.
 
 1. Choose **Create role**\.
+
+**To create an IAM role for Amazon RDS enhanced monitoring programmatically**
+
+To create the IAM role programmatically, the role must allow the `monitoring.rds.amazonaws.com` service principal to assume the role in the trust relationship:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "monitoring.rds.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+The role should have the managed policy ARN `arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole` attached to it, or permissions equivalent to those expressed in the policy. If you are using the GovCloud US or China partition, replase `arn:aws:` with `awn:aws-us-gov:` or `arn:aws-cn:`, respectively.
 
 ## Enabling and disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
