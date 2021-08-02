@@ -235,13 +235,21 @@ To create the Database Mail profile, you use the [sysmail\_add\_profile\_sp](htt
   
   EXECUTE msdb.dbo.sysmail_add_profile_sp  
       @profile_name         = 'Notifications',  
-      @description          = 'Profile used for sending outgoing notifications using Gmail.';
+      @description          = 'Profile used for sending outgoing notifications using Amazon SES.';
   GO
   ```
 
 ### Creating the Database Mail account<a name="SQLServer.DBMail.Configure.Account"></a>
 
-To create the Database Mail account, you use the [sysmail\_add\_account\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-account-sp-transact-sql) stored procedure\. The following example creates an account named `Gmail`\.
+To create the Database Mail account, you use the [sysmail\_add\_account\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-account-sp-transact-sql) stored procedure\. The following example creates an account named `SES` that uses Amazon Simple Email Service\.
+
+Using Amazon SES requires the following parameters:
++ `@email_address` – An Amazon SES verified identity\. For more information, see [Verified identities in Amazon SES](https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html)\.
++ `@mailserver_name` – An Amazon SES SMTP endpoint\. For more information, see [Connecting to an Amazon SES SMTP endpoint](https://docs.aws.amazon.com/ses/latest/dg/smtp-connect.html)\.
++ `@username` – An Amazon SES SMTP user name\. For more information, see [Obtaining Amazon SES SMTP credentials](https://docs.aws.amazon.com/ses/latest/dg/smtp-credentials.html)\.
+
+  Don't use an AWS Identity and Access Management user name\.
++ `@password` – An Amazon SES SMTP password\. For more information, see [Obtaining Amazon SES SMTP credentials](https://docs.aws.amazon.com/ses/latest/dg/smtp-credentials.html)\.
 
 **To create the account**
 + Use the following SQL statement\.
@@ -251,21 +259,21 @@ To create the Database Mail account, you use the [sysmail\_add\_account\_sp](htt
   GO
   
   EXECUTE msdb.dbo.sysmail_add_account_sp
-      @account_name        = 'Gmail',
+      @account_name        = 'SES',
       @description         = 'Mail account for sending outgoing notifications.',
-      @email_address       = 'dbmail-test@gmail.com',
+      @email_address       = 'nobody@example.com',
       @display_name        = 'Automated Mailer',
-      @mailserver_name     = 'smtp.gmail.com',
+      @mailserver_name     = 'email-smtp.us-west-2.amazonaws.com',
       @port                = 587,
       @enable_ssl          = 1,
-      @username            = 'dbmail-test@gmail.com',
-      @password            = 'mypassword';
+      @username            = 'Smtp_Username',
+      @password            = 'Smtp_Password';
   GO
   ```
 
 ### Adding the Database Mail account to the Database Mail profile<a name="SQLServer.DBMail.Configure.AddAccount"></a>
 
-To add the Database Mail account to the Database Mail profile, you use the [sysmail\_add\_profileaccount\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-profileaccount-sp-transact-sql) stored procedure\. The following example adds the `Gmail` account to the `Notifications` profile\.
+To add the Database Mail account to the Database Mail profile, you use the [sysmail\_add\_profileaccount\_sp](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sysmail-add-profileaccount-sp-transact-sql) stored procedure\. The following example adds the `SES` account to the `Notifications` profile\.
 
 **To add the account to the profile**
 + Use the following SQL statement\.
@@ -276,7 +284,7 @@ To add the Database Mail account to the Database Mail profile, you use the [sysm
   
   EXECUTE msdb.dbo.sysmail_add_profileaccount_sp
       @profile_name        = 'Notifications',
-      @account_name        = 'Gmail',
+      @account_name        = 'SES',
       @sequence_number     = 1;
   GO
   ```
@@ -303,7 +311,7 @@ The following example grants public access to the `Notifications` profile\.
 
 ## Amazon RDS stored procedures and functions for Database Mail<a name="SQLServer.DBMail.StoredProc"></a>
 
-In addition to the [stored procedures](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/database-mail-stored-procedures-transact-sql) provided by Microsoft, RDS provides the stored procedures and functions for Database Mail shown in the following table\.
+Microsoft provides [stored procedures](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/database-mail-stored-procedures-transact-sql) for using Database Mail, such as creating, listing, updating, and deleting accounts and profiles\. In addition, RDS provides the stored procedures and functions for Database Mail shown in the following table\.
 
 
 | Procedure/Function | Description | 

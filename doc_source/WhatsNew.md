@@ -9,6 +9,7 @@ You can filter new Amazon RDS features on the [What's New with Database?](http:/
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon RDS for Oracle adds the `TIMEZONE_FILE_AUTOUPGRADE` option](#WhatsNew) | With this option, you can upgrade the current time zone file to the latest version on your Oracle DB instance\. For more information, see [Oracle time zone file autoupgrade](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.Timezone-file-autoupgrade.html)\. | July 30, 2021 | 
 | [Amazon RDS extends support for cross\-Region automated backups](#WhatsNew) | You can now replicate DB snapshots and transaction logs between more AWS Regions\. For more information, see [Replicating automated backups to another AWS Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)\. | July 19, 2021 | 
 | [Support for MySQL 5\.7\.34](#WhatsNew) | You can now create Amazon RDS DB instances running MySQL version 5\.7\.34\. For more information, see [MySQL on Amazon RDS versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)\. | July 8, 2021 | 
 | [Amazon RDS on AWS Outposts supports additional RDS for PostgreSQL versions](#WhatsNew) | RDS on Outposts now supports RDS for PostgreSQL versions 12\.7 and 13\.3\. For more information, see [Amazon RDS on AWS Outposts support for Amazon RDS features](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html#rds-on-outposts.rds-feature-support)\. | July 8, 2021 | 

@@ -2,9 +2,9 @@
 
 The multitenant architecture enables an Oracle database to function as a multitenant container database \(CDB\)\. A CDB can include customer\-created pluggable databases \(PDBs\)\. A non\-CDB is an Oracle database that uses the traditional architecture, which can't contain PDBs\. For more information about the multitenant architecture, see [https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22](https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22)\.
 
-For Oracle Database 19c, you must create a DB instance either as a CDB or a non\-CDB\. The architecture is a permanent characteristic and can't be changed later\. For RDS for Oracle versions other than Oracle Database 19c, the architecture is always non\-multitenant\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+For Oracle Database 19c, create a DB instance either as a CDB or a non\-CDB\. The architecture is a permanent characteristic that you can't change later\. For versions other than Oracle Database 19c, the architecture is always non\-multitenant\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-Currently, RDS for Oracle supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\. 
+Currently, RDS for Oracle supports a subset of multitenant architecture called the single\-tenant architecture\. In this case, your CDB contains only one PDB\. The single\-tenant architecture uses the same RDS APIs as the non\-CDB architecture\. Your experience with a non\-CDB is mostly identical to your experience with a PDB\. You can't access the CDB itself\.
 
 The following sections explain the principal differences between the non\-multitenant and single\-tenant architectures\. For more information, see [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
 

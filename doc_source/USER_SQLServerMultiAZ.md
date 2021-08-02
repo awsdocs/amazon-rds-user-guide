@@ -57,7 +57,7 @@ If your DB instance is running AGs, it doesn't require this step\.
 
 ## Microsoft SQL Server Multi\-AZ deployment limitations, notes, and recommendations<a name="USER_SQLServerMultiAZ.Recommendations"></a>
 
-The following are some limitations when working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
+The following are some limitations when working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
 + Cross\-Region Multi\-AZ isn't supported\.
 + You can't configure the secondary DB instance to accept database read activity\.
 + Multi\-AZ with Always On Availability Groups \(AGs\) supports in\-memory optimization\.
@@ -65,22 +65,20 @@ The following are some limitations when working with Multi\-AZ deployments for M
 + You can't rename a database on a SQL Server DB instance that is in a SQL Server Multi\-AZ deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ for the DB instance, then rename the database\. Finally, turn Multi\-AZ back on for the DB instance\. 
 + You can only restore Multi\-AZ DB instances that are backed up using the full recovery model\.
 
-The following are some notes about working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
-+ Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\. 
-+ Amazon RDS supports [availability group multisubnet failovers](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. 
+The following are some notes about working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
++ Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\.
++ Amazon RDS supports [availability group multisubnet failovers](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\.
 + To use SQL Server Multi\-AZ with a SQL Server DB instance in a VPC, first create a DB subnet group that has subnets in at least two distinct Availability Zones\. Then assign the DB subnet group to the primary replica of the SQL Server DB instance\. 
-+ When a DB instance is modified to be a Multi\-AZ deployment, during the modification it has a status of **modifying**\. Amazon RDS creates the standby, and makes a backup of the primary DB instance\. After the process is complete, the status of the primary DB instance becomes **available**\. 
-+ Multi\-AZ deployments maintain all databases on the same node\. If a database on the primary host fails over, all your SQL Server databases fail over as one atomic unit to your standby host\. Amazon RDS provisions a new healthy host, and replaces the unhealthy host\. 
++ When a DB instance is modified to be a Multi\-AZ deployment, during the modification it has a status of **modifying**\. Amazon RDS creates the standby, and makes a backup of the primary DB instance\. After the process is complete, the status of the primary DB instance becomes **available**\.
++ Multi\-AZ deployments maintain all databases on the same node\. If a database on the primary host fails over, all your SQL Server databases fail over as one atomic unit to your standby host\. Amazon RDS provisions a new healthy host, and replaces the unhealthy host\.
 + Multi\-AZ with DBM or AGs supports a single standby replica\.
-+ Users, logins, and permissions are automatically replicated for you on the secondary\. You don't need to recreate them\. User\-defined server roles \(a SQL Server 2012 feature\) are only replicated in Multi\-AZ instances for AGs instances\. 
-+ If you have SQL Server Agent jobs, recreate them on the secondary\. You do so because these jobs are stored in the msdb database, and you can't replicate this database by using Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. Create the jobs first in the original primary, then fail over, and create the same jobs in the new primary\. 
-+ You might observe elevated latencies compared to a standard DB instance deployment \(in a single Availability Zone\) because of the synchronous data replication\. 
-+ Failover times are affected by the time it takes to complete the recovery process\. Large transactions increase the failover time\. 
-+ In SQL Server Multi\-AZ deployments, when the primary DB instance is running normally \(no failure\), if you reboot with failover the primary and secondary aren't rebooted\. Instead, the roles of the primary and secondary DB instances are switched\.
++ Users, logins, and permissions are automatically replicated for you on the secondary\. You don't need to recreate them\. User\-defined server roles \(a SQL Server 2012 feature\) are only replicated in Multi\-AZ instances for AGs instances\.
++ If you have SQL Server Agent jobs, recreate them on the secondary\. You do so because these jobs are stored in the msdb database, and you can't replicate this database by using Database Mirroring \(DBM\) or Always On Availability Groups \(AGs\)\. Create the jobs first in the original primary, then fail over, and create the same jobs in the new primary\.
++ You might observe elevated latencies compared to a standard DB instance deployment \(in a single Availability Zone\) because of the synchronous data replication\.
++ Failover times are affected by the time it takes to complete the recovery process\. Large transactions increase the failover time\.
++ In SQL Server Multi\-AZ deployments, reboot with failover reboots only the primary DB instance\. After the failover, the primary DB instance becomes the new secondary DB instance\. Parameters might not be updated for Multi\-AZ instances\. For reboot without failover, both the primary and secondary DB instances reboot, and parameters are updated after the reboot\. If the DB instance is unresponsive, we recommend reboot without failover\.
 
-  To make a static parameter modification, reboot without failover to force both the primary and secondary DB instances to shut down and restart\. Then they both make the parameter modification\.
-
-The following are some recommendations for working with Multi\-AZ deployments for Microsoft SQL Server DB instances: 
+The following are some recommendations for working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
 + For databases used in production or preproduction, we recommend the following options:
   + Multi\-AZ deployments for high availability
   + "Provisioned IOPS" for fast, consistent performance

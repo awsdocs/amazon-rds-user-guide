@@ -24,7 +24,8 @@ You can add the following options for Oracle DB instances\.
 |  [Oracle Spatial](Oracle.Options.Spatial.md)  |  `SPATIAL`  | 
 |  [Oracle SQLT](Oracle.Options.SQLT.md)  |  `SQLT`  | 
 |  [Oracle Statspack](Appendix.Oracle.Options.Statspack.md)  |  `STATSPACK`  | 
-|  [Oracle time zone](Appendix.Oracle.Options.Timezone.md)  |  `Timezone`  | 
+|  [Oracle time zone](Appendix.Oracle.Options.Timezone.md)  |  `TIMEZONE`  | 
+|  [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)  |  `TIMEZONE_FILE_AUTOUPGRADE`  | 
 |  [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)  |  `TDE`  | 
 |  [Oracle UTL\_MAIL](Oracle.Options.UTLMAIL.md)  |  `UTL_MAIL`  | 
 |  [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)  |  `XMLDB`  | 

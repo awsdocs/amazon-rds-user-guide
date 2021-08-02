@@ -1,6 +1,6 @@
 # Oracle time zone<a name="Appendix.Oracle.Options.Timezone"></a>
 
-You can use the time zone option to change the system time zone used by your Oracle DB instance\. For example, you might change the time zone of a DB instance to be compatible with an on\-premises environment, or a legacy application\. The time zone option changes the time zone at the host level\. Changing the time zone impacts all date columns and values, including `SYSDATE` and `SYSTIMESTAMP`\.
+To change the system time zone used by your Oracle DB instance, use the time zone option\. For example, you might change the time zone of a DB instance to be compatible with an on\-premises environment, or a legacy application\. The time zone option changes the time zone at the host level\. Changing the time zone impacts all date columns and values, including `SYSDATE` and `SYSTIMESTAMP`\.
 
 The time zone option differs from the `rdsadmin_util.alter_db_time_zone` command\. The `alter_db_time_zone` command changes the time zone only for certain data types\. The time zone option changes the time zone for all date columns and values\. For more information about `alter_db_time_zone`, see [Setting the database time zone](Appendix.Oracle.CommonDBATasks.Database.md#Appendix.Oracle.CommonDBATasks.TimeZoneSupport)\. For more information about upgrade considerations, see [Time zone considerations](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.OGPG.DST)\.
 
@@ -98,7 +98,7 @@ The time zone option is a permanent and persistent option\. You can't remove the
 
 ## Available time zones<a name="Appendix.Oracle.Options.Timezone.Zones"></a>
 
-The following values can be used for the time zone option\. 
+You can use the following values for the time zone option\. 
 
 
 ****  
@@ -117,8 +117,3 @@ The following values can be used for the time zone option\.
 |  Pacific  |  Pacific/Apia, Pacific/Auckland, Pacific/Chatham, Pacific/Fiji, Pacific/Guam, Pacific/Honolulu, Pacific/Kiritimati, Pacific/Marquesas, Pacific/Samoa, Pacific/Tongatapu, Pacific/Wake   | 
 |  US  |  US/Alaska, US/Central, US/East\-Indiana, US/Eastern, US/Pacific   | 
 |  UTC  |  UTC  | 
-
-## Related topics<a name="Appendix.Oracle.Options.Timezone.Related"></a>
-+ [Working with option groups](USER_WorkingWithOptionGroups.md)
-+ [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)
-+ [Setting the time zone for Oracle Scheduler jobs](Appendix.Oracle.CommonDBATasks.Scheduler.md#Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone)

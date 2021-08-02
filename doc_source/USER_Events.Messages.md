@@ -18,7 +18,7 @@ The following table shows the event category and a list of events when a DB inst
 |  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
 |  availability  | RDS\-EVENT\-0004 |  DB instance shutdown\.  | 
 |  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
-|  backup  | RDS\-EVENT\-0001 |  Backing up DB instance\.  | 
+|  backup  | RDS\-EVENT\-0001 |  Backing up the DB instance\.  | 
 |  backup  | RDS\-EVENT\-0002 |  Finished DB Instance backup\.  | 
 |  backup  | RDS\-EVENT\-0075 |  RDS finished creating a user\-initiated snapshot\.  | 
 |  backup  | RDS\-EVENT\-0086 |  RDS was unable to associate the option group with the database instance\. Confirm that the option group is supported on your DB instance class and configuration\. For more information see [Working with option groups](USER_WorkingWithOptionGroups.md)\.  | 
@@ -61,10 +61,15 @@ The following table shows the event category and a list of events when a DB inst
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
-| maintenance | RDS\-EVENT\-0047 | Patching of the DB instance has completed\. | 
+| maintenance | RDS\-EVENT\-0047 |  Patching of the DB instance has completed\.  | 
 |  maintenance  | RDS\-EVENT\-0155 |  The DB instance has a DB engine minor version upgrade available\.  | 
-|  notification  | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
-|  notification  | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
+| maintenance, notification | RDS\-EVENT\-0191 |  An Oracle time zone file update is available\. If you update your Oracle engine, Amazon RDS generates this event if you haven't chosen a time zone file upgrade and the database doesn’t use the latest DST time zone file available on the instance\.  For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
+|  maintenance, notification  | RDS\-EVENT\-0192 |  The upgrade of your Oracle time zone file has begun\.  For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
+|  maintenance, notification  | RDS\-EVENT\-0193 |  Your Oracle DB instance is using latest time zone file version, and either of the following is true: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html) For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
+|  maintenance, notification  | RDS\-EVENT\-0194 |  The upgrade of your Oracle time zone file has completed\.  For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
+|  maintenance, failure  | RDS\-EVENT\-0195 |  The upgrade of the time zone file failed\. For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
+| notification | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
+| notification | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
 |  notification  | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [ Supported storage engines for MySQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.Storage.html)\. | 
 |  notification  | RDS\-EVENT\-0055 |  The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of tables on your DB instance\.    For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
 |  notification  | RDS\-EVENT\-0056 |  The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of databases on your DB instance\.    For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
@@ -75,7 +80,6 @@ The following table shows the event category and a list of events when a DB inst
 |  notification  | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
 |  notification  | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limits for Microsoft SQL Server DB instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
 |  notification  | RDS\-EVENT\-0158 |  DB instance is in a state that can't be upgraded\.  | 
-|  notification  | RDS\-EVENT\-0189 |  The gp2 burst balance credits for the DB instance are running low\. This can lead to a noticeable performance decline in the DB\. To resolve this issue, reduce IOPS usage or modify your storage settings to enable more performance\. For more information, see [I/O credits and burst performance](CHAP_Storage.md#CHAP_Storage.IO.Credits)\.  | 
 |  read replica  | RDS\-EVENT\-0045 |  An error has occurred in the read replication process\. For more information, see the event message\.  In addition, see the troubleshooting section for read replicas for your DB engine\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html)   | 
 |  read replica  | RDS\-EVENT\-0046 | The read replica has resumed replication\. This message appears when you first create a read replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the read replica was terminated\.  | 

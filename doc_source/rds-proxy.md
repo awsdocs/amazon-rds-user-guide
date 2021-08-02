@@ -165,8 +165,8 @@
 +  You can create, view, modify, and delete up to 20 endpoints for each proxy\. These endpoints are in addition to the default endpoint that's automatically created for each proxy\. 
 +  In an Aurora cluster, all of the connections using the default proxy endpoint are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you can create a read\-only endpoint for a proxy\. That endpoint passes connections to the reader endpoint of the cluster\. That way, your proxy connections can take advantage of Aurora read scalability\. For more information, see [Overview of proxy endpoints](#rds-proxy-endpoints-overview)\. 
 
-   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\. 
-+  You can't use RDS Proxy with Aurora Serverless clusters\. 
+   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\.
++  You can't use RDS Proxy with Aurora Serverless clusters\.
 +  Using RDS Proxy with Aurora clusters that are part of an Aurora global database isn't currently supported\.
 +  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
 **Note**  
@@ -180,16 +180,17 @@
  The following RDS Proxy prerequisites and limitations apply to MySQL: 
 +  For RDS for MySQL, RDS Proxy supports MySQL 5\.6 and 5\.7\. For Aurora MySQL, RDS Proxy supports version 1 \(compatible with MySQL 5\.6\) and version 2 \(compatible with MySQL 5\.7\)\. 
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
-+  You can't use RDS Proxy with RDS for MySQL 8\.0\. 
-+  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\. 
-+  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\. 
-+  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](#rds-proxy-pinning)\. 
++  You can't use RDS Proxy with RDS for MySQL 8\.0\.
++  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
++  You can't use RDS Proxy with an RDS for MySQL DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
++  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
++  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](#rds-proxy-pinning)\.
 
- The following RDS Proxy prerequisites and limitations apply to PostgreSQL: 
-+  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\. 
-+  Currently, all proxies listen on port 5432 for PostgreSQL\. 
-+  Query cancellation isn't supported for PostgreSQL\. 
-+  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\. 
+ The following RDS Proxy prerequisites and limitations apply to PostgreSQL:
++  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\.
++  Currently, all proxies listen on port 5432 for PostgreSQL\.
++  Query cancellation isn't supported for PostgreSQL\.
++  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.
 
 ### Identifying DB instances, clusters, and applications to use with RDS Proxy<a name="rds-proxy-planning"></a>
 

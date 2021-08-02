@@ -283,6 +283,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Oracle SQLT](Oracle.Options.SQLT.md)
       + [Oracle Statspack](Appendix.Oracle.Options.Statspack.md)
       + [Oracle time zone](Appendix.Oracle.Options.Timezone.md)
+      + [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)
       + [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)
       + [Oracle UTL_MAIL](Oracle.Options.UTLMAIL.md)
       + [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)
