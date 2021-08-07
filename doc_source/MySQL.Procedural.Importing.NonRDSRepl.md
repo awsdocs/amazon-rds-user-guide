@@ -414,6 +414,8 @@ Earlier, you enabled binary logging and set a unique server ID for your source d
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
+   For a MariaDB 10\.5 DB instance, run the [mysql\.rds\_replica\_status](mysql_rds_replica_status.md) procedure instead of the MySQL command\.
+
 1. After the Amazon RDS DB instance is up\-to\-date, enable automated backups so you can restore that database if needed\. You can enable or modify automated backups for your Amazon RDS DB instance using the [Amazon RDS management console](https://console.aws.amazon.com/rds/)\. For more information, see [Working with backups](USER_WorkingWithAutomatedBackups.md)\.
 
 ## Redirect your live application to your Amazon RDS instance<a name="MySQL.Procedural.Importing.Redirect.App"></a>
@@ -433,6 +435,8 @@ After the MySQL or MariaDB DB instance is up\-to\-date with the source replicati
    ```
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
+
+   For a MariaDB 10\.5 DB instance, run the [mysql\.rds\_replica\_status](mysql_rds_replica_status.md) procedure instead of the MySQL command\.
 
 1. Close all connections to the source when their transactions complete\.
 

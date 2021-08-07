@@ -57,7 +57,7 @@ Use the following procedure to create a VPC with both public and private subnets
    + **Availability Zone:** `us-west-2a`
    + **Public subnet name:** `Tutorial public`
    + **Private subnet's IPv4 CIDR:** `10.0.1.0/24`
-   + **Availability Zone:** `us-west-2a`
+   + **Availability Zone:** `us-west-2b`
    + **Private subnet name:** `Tutorial private 1` 
    + **Elastic IP Allocation ID:** An Elastic IP address to associate with the NAT gateway
    + **Service endpoints:** Skip this field\.
@@ -79,12 +79,12 @@ You must have either two private subnets or two public subnets available to crea
 1. On the **Create subnet** page, set these values: 
    + **VPC ID:** Choose the VPC that you created in the previous step, for example: `vpc-identifier (tutorial-vpc)`
    + **Subnet name:** `Tutorial private 2`
-   + **Availability Zone:** `us-west-2b` 
+   + **Availability Zone:** `us-west-2c` 
 **Note**  
 Choose an Availability Zone that is different from the one that you chose for the first private subnet\.
    + **IPv4 CIDR block:** `10.0.2.0/24`
 
-1. Choose **Create subnet**\. Next, choose **Close** on the confirmation page\.
+1. Choose **Create subnet**\.
 
 1. To ensure that the second private subnet that you created uses the same route table as the first private subnet, complete the following steps:
 
@@ -132,7 +132,7 @@ If you use `0.0.0.0/0`, you enable all IP addresses to access your public instan
 
    1. Set the following values for your new inbound rule to allow HTTP access to your web server\. 
       + **Type:** `HTTP`
-      + **Source:** `0.0.0.0/0`\.
+      + **Source:** `0.0.0.0/0`
 
 1. To create the security group, choose **Create security group**\.
 
@@ -184,7 +184,7 @@ Make sure you connect to the Amazon RDS console, not to the Amazon VPC console\.
 
 1. In the **Add subnets** section, choose the **Availability Zones** and **Subnets**\.
 
-   For this tutorial, choose `us-west-2a` and `us-west-2b` for the **Availability Zones**\. Next, for **Subnets**, choose the subnets for IPv4 CIDR block 10\.0\.0\.0/24, 10\.0\.1\.0/24, and 10\.0\.2\.0/24\.
+   For this tutorial, choose `us-west-2b` and `us-west-2c` for the **Availability Zones**\. Next, for **Subnets**, choose the subnets for IPv4 CIDR block 10\.0\.1\.0/24 and 10\.0\.2\.0/24\.
 **Note**  
 If you have enabled a Local Zone, you can choose an Availability Zone group on the **Create DB subnet group** page\. In this case, choose the **Availability Zone group**, **Availability Zones**, and **Subnets**\.
 

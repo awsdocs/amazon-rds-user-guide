@@ -51,7 +51,7 @@ Exporting DB snapshot data to S3 has the following limitations:
   ```
   , ; { } ( ) \n \t =
   ```
-+ If the data contains a huge value close to or greater than 500 MB, the export fails\.
++ If the data contains a large object such as a BLOB or CLOB, close to or greater than 500 MB, the export fails\.
 
 ## Overview of exporting snapshot data<a name="USER_ExportSnapshot.Overview"></a>
 

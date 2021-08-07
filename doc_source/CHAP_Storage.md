@@ -156,7 +156,7 @@ We encourage you to use the latest generation of instances to get the best perfo
 
 | Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
 | --- | --- | --- | --- | --- | --- | 
-| db\.m5 – Latest Generation Standard Instance Classes | 
+| db\.m5 – latest generation standard instance classes | 
 | db\.m5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -165,19 +165,19 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.m5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m5\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4 – Current Generation Standard Instance Classes | 
+| db\.m4 – current generation standard instance classes | 
 | db\.m4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.10xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.m4\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.m3 – Previous Generation Standard Instance Classes | 
+| db\.m3 – previous generation standard instance classes | 
 | db\.m3\.2xlarge | 6 | 16 | 6 |  | 6 | 
 | db\.m3\.xlarge | 6 | 16 | 6 |  | 6 | 
 | db\.m3\.large | 6 | 16 | 6 |  | 6 | 
 | db\.m3\.medium | 32 | 16 | 32 |  | 32 | 
-| db\.r5 – Latest Generation Memory Optimized Instance Classes | 
+| db\.r5 – latest generation memory optimized instance classes | 
 | db\.r5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
@@ -186,41 +186,41 @@ We encourage you to use the latest generation of instances to get the best perfo
 | db\.r5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r5\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4 – Current Generation Memory Optimized Instance Classes | 
+| db\.r4 – Current Generation memory optimized instance classes | 
 | db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
 | db\.r4\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3 – Previous Generation Memory Optimized Instance Classes | 
+| db\.r3 – previous generation memory optimized instance classes | 
 | db\.r3\.8xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.r3\.4xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.r3\.2xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.r3\.xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.r3\.large | 64 | 16 | 64 |  | 64 | 
-| db\.t3 – Latest Generation Burstable Performance Instance Classes | 
+| db\.t3 – latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.t3\.xlarge | 16 | 16 | 16 | 64 | 64 | 
 | db\.t3\.large | 16 | 16 | 16 | 64 | 64 | 
 | db\.t3\.medium | 16 | 16 | 16 | 32 | 32 | 
 | db\.t3\.small | 16 | 16 | 16 | 32 | 16 | 
 | db\.t3\.micro | 16 | 16 | 16 | 32 | 16 | 
-| db\.t2 – Current Generation Burstable Performance Instance Classes | 
+| db\.t2 – current generation burstable performance instance classes | 
 | db\.t2\.2xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.t2\.xlarge | 64 | 16 | 64 |  | 64 | 
 | db\.t2\.large | 64 | 16 | 64 |  | 64 | 
 | db\.t2\.medium | 32 | 16 | 32 |  | 32 | 
 | db\.t2\.small | 16 | 16 | 16 |  | 16 | 
 | db\.t2\.micro | 16 | 16 | 16 |  | 16 | 
-| db\.x1e – Latest Generation Memory Optimized Instance Classes | 
+| db\.x1e – latest generation memory optimized instance classes | 
 | db\.x1e\.32xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.16xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.8xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.4xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.2xlarge |  | 16 |  | 64 |  | 
 | db\.x1e\.xlarge |  | 16 |  | 64 |  | 
-| db\.x1 – Current Generation Memory Optimized Instance Classes | 
+| db\.x1 – current generation memory optimized instance classes | 
 | db\.x1\.32xlarge |  | 16 |  | 64 |  | 
 | db\.x1\.16xlarge |  | 16 |  | 64 |  | 
 

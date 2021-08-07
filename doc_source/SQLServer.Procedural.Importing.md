@@ -680,6 +680,7 @@ The following are issues you might encounter when you use native backup and rest
 
 | Issue | Troubleshooting suggestions | 
 | --- | --- | 
+|  Database backup/restore option is not enabled yet or is in the process of being enabled\. Please try again later\.  |  Make sure that you have added the `SQLSERVER_BACKUP_RESTORE` option to the DB option group associated with your DB instance\. For more information, see [Adding the native backup and restore option](Appendix.SQLServer.Options.BackupRestore.md#Appendix.SQLServer.Options.BackupRestore.Add)\.  | 
 |  Access Denied  | The backup or restore process can't access the backup file\. This is usually caused by issues like the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)  | 
 |  BACKUP DATABASE WITH COMPRESSION isn't supported on <edition\_name> Edition  |  Compressing your backup files is only supported for Microsoft SQL Server Enterprise Edition and Standard Edition\. For more information, see [Compressing backup files](#SQLServer.Procedural.Importing.Native.Compression)\.   | 
 |  Key <ARN> does not exist  |  You attempted to restore an encrypted backup, but didn't provide a valid encryption key\. Check your encryption key and retry\. For more information, see [Restoring a database](#SQLServer.Procedural.Importing.Native.Using.Restore)\.   | 

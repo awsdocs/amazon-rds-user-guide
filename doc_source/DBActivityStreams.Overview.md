@@ -78,7 +78,7 @@ In RDS for Oracle, database activity streams have the following requirements and
   + db\.r4\.\*
   + db\.r5\.\*
 **Note**  
-The memory\-optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
+The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
 + In an RDS for Oracle DB instance, you must create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.

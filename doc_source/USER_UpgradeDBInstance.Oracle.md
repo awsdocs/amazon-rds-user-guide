@@ -203,9 +203,13 @@ When you create an Oracle DB instance, the database automatically sets the *data
 
 Between Oracle Database releases, patch sets or individual patches may include new DST versions\. These patches reflect the changes in transition rules for various time zone regions\. For example, a government might change when DST takes effect\. Changes to DST rules may affect existing data of the `TIMESTAMP WITH TIME ZONE` data type\.
 
-If you upgrade an RDS for Oracle instance, Amazon RDS does not upgrade the database time zone automatically\. To upgrade the database time zone manually, create a new Oracle DB instance that has the desired DST patch\. Then migrate the data from your current instance to the new instance\. You can migrate data using several techniques, including the following:
-+ Oracle GoldenGate
+If you upgrade an RDS for Oracle DB instance, Amazon RDS doesn't upgrade the database time zone file automatically\. To upgrade the time zone file automatically, you can include the `TIMEZONE_FILE_AUTOUPGRADE` option in the option group associated with your DB instance during or after the engine version upgrade\. For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.
+
+Alternatively, to upgrade the database time zone file manually, create a new Oracle DB instance that has the desired DST patch\. However, we recommend that you upgrade the database time zone file using the `TIMEZONE_FILE_AUTOUPGRADE` option\.
+
+After upgrading the time zone file, migrate the data from your current instance to the new instance\. You can migrate data using several techniques, including the following:
 + AWS Database Migration Service
++ Oracle GoldenGate
 + Oracle Data Pump
 + Original Export/Import \(desupported for general use\)
 

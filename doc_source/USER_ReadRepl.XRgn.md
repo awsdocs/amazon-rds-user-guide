@@ -192,10 +192,6 @@ All of the considerations for performing replication within an AWS Region apply 
 + You can replicate between the AWS GovCloud \(US\-East\) and AWS GovCloud \(US\-West\) Regions, but not into or out of AWS GovCloud \(US\)\.
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
-+ You can create a cross\-Region read replica:
-  +  In a VPC from a source DB instance that is in a VPC in another AWS Region
-  + In a VPC from a source DB instance that isn't in a VPC
-  + That isn't in a VPC from a source DB instance that is in a VPC
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 
 + The read replica uses the default DB parameter group for the specified DB engine\.
 + The read replica uses the default security group\.

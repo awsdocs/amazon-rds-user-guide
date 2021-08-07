@@ -35,6 +35,8 @@ Backup replication is supported between the following AWS Regions\.
 | Asia Pacific \(Sydney\) |  Asia Pacific \(Singapore\) US East \(N\. Virginia\), US West \(N\. California\), US West \(Oregon\)  | 
 | Asia Pacific \(Tokyo\) |  Asia Pacific \(Osaka\), Asia Pacific \(Seoul\), Asia Pacific \(Singapore\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
 | Canada \(Central\) |  Europe \(Ireland\) US East \(N\. Virginia\), US East \(Ohio\), US West \(N\. California\), US West \(Oregon\)  | 
+| China \(Beijing\) | China \(Ningxia\) | 
+| China \(Ningxia\) | China \(Beijing\) | 
 | Europe \(Frankfurt\) |  Europe \(Ireland\), Europe \(London\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\), US East \(Ohio\), US West \(Oregon\)  | 
 | Europe \(Ireland\) |  Canada \(Central\) Europe \(Frankfurt\), Europe \(London\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\), US East \(Ohio\), US West \(N\. California\), US West \(Oregon\)  | 
 | Europe \(London\) |  Europe \(Frankfurt\), Europe \(Ireland\), Europe \(Paris\), Europe \(Stockholm\) US East \(N\. Virginia\)  | 

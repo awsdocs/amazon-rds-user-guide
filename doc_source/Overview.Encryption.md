@@ -49,9 +49,9 @@ Amazon RDS encryption is available for most DB instance classes\. The following 
 
 | Instance type | Instance class | 
 | --- | --- | 
-| General Purpose \(M1\) |  db\.m1\.small db\.m1\.medium db\.m1\.large db\.m1\.xlarge  | 
-| Memory Optimized \(M2\) |  db\.m2\.xlarge db\.m2\.2xlarge db\.m2\.4xlarge  | 
-| Burst Capable \(T2\) |  db\.t2\.micro  | 
+| General purpose \(M1\) |  db\.m1\.small db\.m1\.medium db\.m1\.large db\.m1\.xlarge  | 
+| Memory optimized \(M2\) |  db\.m2\.xlarge db\.m2\.2xlarge db\.m2\.4xlarge  | 
+| Burstable \(T2\) |  db\.t2\.micro  | 
 
 **Note**  
 Encryption at rest is not available for DB instances running SQL Server Express Edition\.   
