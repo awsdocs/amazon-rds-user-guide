@@ -505,7 +505,7 @@ After changing default parameter values for a MySQL or MariaDB DB instance, you 
 Some default parameter values for MySQL and MariaDB DB instances help to make sure that the database is ACID compliant and read replicas are crash\-safe\. They do this by making sure that each commit is fully synchronized by writing the transaction to the binary log before it's committed\. Changing these parameters from their default values to improve performance can cause replication to fail when a transaction hasn't been written to the binary log\.
 
 To resolve this issue, set the following parameter values:
-+ `sync-binlog = 1`
++ `sync_binlog = 1`
 + `innodb_support_xa = 1`
 + `innodb_flush_log_at_trx_commit = 1`
 
