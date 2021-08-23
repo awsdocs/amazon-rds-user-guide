@@ -13,11 +13,11 @@ Following are the supported Oracle versions for each SQLT version\.
 
 ****  
 
-| SQLT version | Oracle Database 19c | Oracle Database 18c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
-| --- | --- | --- | --- | --- | 
-|  12\.2\.180725  |  Supported  |  Supported  |  Supported  |  Supported  | 
-|  12\.2\.180331  |  Not supported  |  Supported  |  Supported  |  Supported  | 
-|  12\.1\.160429  |  Not supported  |  Not supported  |  Supported  |  Supported  | 
+| SQLT version | Oracle Database 19c | Oracle Database 12c Release 2 \(12\.2\) | Oracle Database 12c Release 1 \(12\.1\) | 
+| --- | --- | --- | --- | 
+|  12\.2\.180725  |  Supported  |  Supported  |  Supported  | 
+|  12\.2\.180331  |  Not supported  |  Supported  |  Supported  | 
+|  12\.1\.160429  |  Not supported  |  Supported  |  Supported  | 
 
 To download SQLT and access instructions for using it:
 + Log in to your My Oracle Support account, and open the following documents:
@@ -29,7 +29,6 @@ To download SQLT and access instructions for using it:
 
  You can use SQLT with any edition of the following Oracle Database versions: 
 + Oracle Database 19c \(19\.0\.0\.0\)
-+ Oracle Database 18c \(18\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\_
 
@@ -137,7 +136,7 @@ After you add the SQLT option, as soon as the option group is active, SQLT is ac
       ```
 
 **Note**  
-Upgrading SQLT requires uninstalling an older version of SQLT and then installing the new version\. So, all SQLT metadata can be lost when you upgrade SQLT\. A major version upgrade of a database also uninstalls and re\-installs SQLT\. An example of a major version upgrade is an upgrade from Oracle Database 18c to Oracle Database 19c\.
+Upgrading SQLT requires uninstalling an older version of SQLT and then installing the new version\. So, all SQLT metadata can be lost when you upgrade SQLT\. A major version upgrade of a database also uninstalls and re\-installs SQLT\. An example of a major version upgrade is an upgrade from Oracle Database 12c Release 2 \(12\.2\) to Oracle Database 19c\.
 
 ## Using SQLT<a name="Oracle.Options.SQLT.Using"></a>
 

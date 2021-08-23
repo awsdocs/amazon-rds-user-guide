@@ -4,7 +4,6 @@ Amazon RDS supports Oracle Java Virtual Machine \(JVM\) through the use of the `
 
 You can use Oracle JVM with the following Oracle Database versions:
 + Oracle Database 19c \(19\.0\.0\.0\), all versions
-+ Oracle Database 18c \(18\.0\.0\.0\), all versions
 + Oracle Database 12c Release 2 \(12\.2\), all versions
 + Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 

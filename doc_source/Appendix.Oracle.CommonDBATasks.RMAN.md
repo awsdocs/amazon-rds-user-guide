@@ -180,10 +180,9 @@ To enable block change tracking for a DB instance, use the Amazon RDS procedure 
 Read\-only replicas support block change tracking\. If you create a read\-only replica from a source DB that uses block change tracking, the replica uses block change tracking\. You can't enable block change tracking on a mounted replica\. If you place a mounted replica in read\-only mode, block change tracking isn't enabled, but you can enable it using `enable_block_change_tracking`\. If you promote an Oracle replica to a source DB, you can use block change tracking just as for any other Oracle DB instance\.
 
 Block change tracking procedures are supported for the following DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 **Note**  
 In a single\-tenant CDB, the following operations work, but no customer\-visible mechanism can detect the current status of the operations\. See also [Limitations of a single\-tenant CDB](Oracle.Concepts.limitations.md#Oracle.Concepts.single-tenant-limitations)\.
@@ -229,10 +228,9 @@ This procedure also uses the following additional parameter\.
 |  `p_delete_expired`  |  boolean  |  `TRUE`, `FALSE`  |  `TRUE`  |  No  |  When `TRUE`, delete expired archived redo log records from the control file\. When `FALSE`, retain the expired archived redo log records in the control file\.   | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 The following example marks archived redo log records in the control file as expired, but does not delete the records\.
 
@@ -261,10 +259,9 @@ END;
 You can use the Amazon RDS package `rdsadmin.rdsadmin_rman_util` to back up archived redo logs for an Amazon RDS Oracle DB instance\.
 
 The procedures for backing up archived redo logs are supported for the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 **Topics**
 + [Backing up all archived redo logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs.All)
@@ -434,10 +431,9 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 The following example performs a full backup of the DB instance using the specified values for the parameters\.
 
@@ -474,10 +470,9 @@ This procedure uses the following common parameters for RMAN tasks:
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 This procedure also uses the following additional parameter\.
 
@@ -531,10 +526,9 @@ This procedure also uses the following additional parameter\.
 |  `p_tablespace_name`  |  varchar2  |  A valid tablespace name\.  |  —  |  Yes  |  The name of the tablespace to back up\.  | 
 
 This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v15 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher 12\.2 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
 
 The following example performs a tablespace backup using the specified values for the parameters\.
 

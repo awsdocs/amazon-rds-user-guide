@@ -7,7 +7,6 @@ If you use Oracle OLAP, Amazon RDS automatically updates your DB instance to the
 
 Amazon RDS supports Oracle OLAP for the following editions and versions of Oracle: 
 + Oracle Database 19c Enterprise Edition, all versions
-+ Oracle Database 18c Enterprise Edition, all versions
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\) Enterprise Edition, all versions
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\) Enterprise Edition, version 12\.1\.0\.2\.v13 or later
 

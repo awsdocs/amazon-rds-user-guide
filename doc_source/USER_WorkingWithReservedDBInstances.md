@@ -8,6 +8,8 @@ The general process for working with reserved DB instances is: First get informa
 
 When you purchase a reserved DB instance in Amazon RDS, you purchase a commitment to getting a discounted rate, on a specific DB instance type, for the duration of the reserved DB instance\. To use an Amazon RDS reserved DB instance, you create a new DB instance just like you do for an on\-demand instance\. The new DB instance that you create must match the specifications of the reserved DB instance\. If the specifications of the new DB instance match an existing reserved DB instance for your account, you are billed at the discounted rate offered for the reserved DB instance\. Otherwise, the DB instance is billed at an on\-demand rate\. 
 
+You can modify a reserved DB instance\. If the modification is within the specifications of the reserved DB instance, part or all of the discount still applies to the modified DB instance\. If the modification is outside the specifications, such as changing the instance class, the discount no longer applies\. For more information, see [Size\-flexible reserved DB instances](#USER_WorkingWithReservedDBInstances.SizeFlexible)\.
+
 For more information about reserved DB instances, including pricing, see [Amazon RDS reserved instances](http://aws.amazon.com/rds/reserved-instances/#2)\. 
 
 ### Offering types<a name="USER_WorkingWithReservedDBInstances.OfferingTypes"></a>

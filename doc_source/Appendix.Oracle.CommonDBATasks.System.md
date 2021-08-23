@@ -85,7 +85,7 @@ You can specify either `IMMEDIATE` or `PROCESS` as a value for the `method` para
 To cancel a SQL statement in a session, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.cancel`\.
 
 **Note**  
-This procedure is supported for Oracle Database 18c \(18\.0\.0\.0\) and later\.
+This procedure is supported for Oracle Database 19c and later\.
 
 The `cancel` procedure has the following parameters\. 
 
@@ -203,7 +203,7 @@ For all parameter values, use uppercase unless you created the user with a case\
 |  `p_obj_name`  |  varchar2  |  —  |  Yes  |  The name of the object to grant privileges for\. The object can be a directory, function, package, procedure, sequence, table, or view\. Object names must be spelled exactly as they appear in `DBA_OBJECTS`\. Most system objects are defined in uppercase, so we recommend that you try that first\.   | 
 |  `p_grantee`  |  varchar2  |  —  |  Yes  |  The name of the object to grant privileges to\. The object can be a schema or a role\.   | 
 |  `p_privilege`  |  varchar2  |  null  |  Yes  |  —  | 
-|  `p_grant_option`  |  boolean  |  false  |  No  |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, all 18\.0\.0\.0 versions, and all 19\.0\.0 versions\.   | 
+|  `p_grant_option`  |  boolean  |  false  |  No  |  Set to `true` to use the with grant option\. The `p_grant_option` parameter is supported for 12\.1\.0\.2\.v4 and later, all 12\.2\.0\.1 versions, and all 19\.0\.0 versions\.   | 
 
 The following example grants select privileges on an object named `V_$SESSION` to a user named `USER1`\.
 
@@ -305,7 +305,7 @@ You can create a custom password verification function in two ways\. If you want
 
 ### The create\_verify\_function procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Standard"></a>
 
-The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
+The `create_verify_function` procedure is supported for version 12\.1\.0\.2\.v5 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\.0\.1\) versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_verify_function`\. The `create_verify_function` procedure has the following parameters\. 
 
@@ -391,7 +391,7 @@ RDSADMIN                   PASSWORD_VERIFY_FUNCTION          PASSWORD  NULL
 
 ### The create\_passthrough\_verify\_fcn procedure<a name="Appendix.Oracle.CommonDBATasks.CustomPassword.Custom"></a>
 
-The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\) versions, all Oracle Database 18c versions, and all Oracle Database 19c versions\.
+The `create_passthrough_verify_fcn` procedure is supported for version 12\.1\.0\.2\.v7 and later of Oracle Database 12c Release 1 \(12\.1\), all Oracle Database 12c Release 2 \(12\.2\) versions, and all Oracle Database 19c versions\.
 
 You can create a custom function to verify passwords by using the Amazon RDS procedure `rdsadmin.rdsadmin_password_verify.create_passthrough_verify_fcn`\. The `create_passthrough_verify_fcn` procedure has the following parameters\. 
 
@@ -450,7 +450,6 @@ The `domain-name-servers` option accepts up to four values, but your Amazon RDS 
 
 To set and unset diagnostic events at the session level, you can use the Oracle SQL statement `ALTER SESSION SET EVENTS`\. However, to set events at the system level you can't use Oracle SQL\. Instead, use the system event procedures in the `rdsadmin.rdsadmin_util` package\. The system event procedures are available in the following engine versions:
 + [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1) or higher 19c versions
-+ [18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1) or higher 18c versions
 + [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1) or higher 12\.2\.0\.1 versions
 + [12\.1\.0\.2\.V22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22) or higher 12\.1 versions
 

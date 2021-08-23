@@ -4,7 +4,6 @@ Amazon RDS for Oracle supports the following major database releases\.
 
 **Topics**
 + [Oracle Database 19c with Amazon RDS](#Oracle.Concepts.FeatureSupport.19c)
-+ [Oracle Database 18c on Amazon RDS](#Oracle.Concepts.FeatureSupport.18c)
 + [Oracle Database 12c with Amazon RDS](#Oracle.Concepts.FeatureSupport.12c)
 
 ## Oracle Database 19c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.19c"></a>
@@ -32,25 +31,14 @@ The `compatible` parameter has a new maximum value for Oracle Database 19c \(19\
 
 ****  
 
-|  Parameter name  |  Oracle Database 19c \(19\.0\.0\.0\) maximum value  |  Oracle Database 18c \(18\.0\.0\.0\) maximum value  | 
-| --- | --- | --- | 
-|  [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9)  |  19\.0\.0  |  18\.0\.0  | 
+|  Parameter name  |  Oracle Database 19c \(19\.0\.0\.0\) maximum value  | 
+| --- | --- | 
+|  [ compatible](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/COMPATIBLE.html#GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9)  |  19\.0\.0  | 
 
 The following parameters were removed in Oracle Database 19c \(19\.0\.0\.0\):
 + exafusion\_enabled
 + max\_connections
 + o7\_dictionary\_access
-
-## Oracle Database 18c on Amazon RDS<a name="Oracle.Concepts.FeatureSupport.18c"></a>
-
-Oracle Corporation deprecated support for Oracle Database 18c \(18\.0\.0\.0\) on July 1, 2021\. Consequently, Amazon RDS has Deprecated support for Oracle Database 18c for both BYOL and LI\. 
-
-On July 1, RDS for Oracle began the process of upgrading all Oracle Database 18c instances to Oracle Database 19c automatically\. You can no longer do the following:
-+ Create new Oracle Database 18c instances with Amazon RDS
-+ Restore Oracle Database 18c DB snapshots without being automatically upgraded
-
-**Important**  
-If your Oracle Database 18c instance has not yet been upgraded, we recommend that you upgrade it immediately to Oracle Database 19c, and validate your applications\. 
 
 ## Oracle Database 12c with Amazon RDS<a name="Oracle.Concepts.FeatureSupport.12c"></a>
 
@@ -176,7 +164,7 @@ Several parameters have new value ranges for Oracle Database 12c Release 1 \(12\
 |  Parameter name  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\) range  | 
 | --- | --- | 
 |   [audit\_trail](http://docs.oracle.com/database/121/REFRN/GUID-BD86F593-B606-4367-9FB6-8DAB2E47E7FA.htm#REFRN10006)   |   os \| db \[, extended\] \| xml \[, extended\]   | 
-|   [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)   |  If you upgrade to Oracle Database 12c Release 2 \(12\.2\.0\.1\), Oracle Database 18c, or Oracle Database 19c, `COMPATIBLE` must be `11.2.0` or higher\. We recommend that you use the default settings for `COMPATIBLE` for your version of Oracle Database unless you have a reason to change it\. If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to `12.0.0`\.  | 
+|   [compatible](http://docs.oracle.com/database/121/REFRN/GUID-6C57EE11-BD06-4BB8-A0F7-D6CDDD086FA9.htm#REFRN10019)   |  If you upgrade to Oracle Database 12c Release 2 \(12\.2\.0\.1\) or Oracle Database 19c, `COMPATIBLE` must be `11.2.0` or higher\. We recommend that you use the default settings for `COMPATIBLE` for your version of Oracle Database unless you have a reason to change it\. If `COMPATIBLE` is not explicitly set, Amazon RDS automatically sets this parameter to `12.0.0`\.  | 
 |   [db\_securefile](http://docs.oracle.com/database/121/REFRN/GUID-6F7C5E21-3929-4AB1-9C72-1BB9BDDB011F.htm#REFRN10290)   |  PERMITTED \| PREFERRED \| ALWAYS \| IGNORE \| FORCE  | 
 |   [db\_writer\_processes](http://docs.oracle.com/database/121/REFRN/GUID-75774634-3B5E-49F8-A5C5-65923F596845.htm#REFRN10043)   |  1\-100  | 
 |   [optimizer\_features\_enable](http://docs.oracle.com/database/121/REFRN/GUID-E193EC9E-B642-4C01-99EC-24E04AEA1A2C.htm#REFRN10141)   |   8\.0\.0 to 12\.1\.0\.2   | 

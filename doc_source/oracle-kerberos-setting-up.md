@@ -270,8 +270,8 @@ Following is sample content for AWS Managed Microsoft AD\.
   admin_server = example.com
  }
 [domain_realm]
- .example.com = EXAMPLE.COM
- example.com = EXAMPLE.COM
+ .example.com = CORP.EXAMPLE.COM
+ example.com = CORP.EXAMPLE.COM
 ```
 
 Following is sample content for on\-premise Microsoft AD\. In your krb5\.conf or krb5\.ini file, replace *on\-prem\-ad\-server\-name* with the name of your on\-premises AD server\.

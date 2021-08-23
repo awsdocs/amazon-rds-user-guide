@@ -7,7 +7,6 @@ If you use Oracle Locator, Amazon RDS automatically updates your DB instance to 
 
 Amazon RDS supports Oracle Locator for the following versions of Oracle Database: 
 + Oracle Database 19c \(19\.0\.0\.0\)
-+ Oracle Database 18c \(18\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\), version 12\.1\.0\.2\.v13 or later
 

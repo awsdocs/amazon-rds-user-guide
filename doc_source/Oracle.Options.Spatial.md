@@ -15,7 +15,6 @@ Amazon RDS supports Oracle Spatial only in Oracle Enterprise Edition \(EE\) and 
 | Oracle DB Version | EE | SE2 | 
 | --- | --- | --- | 
 |  19\.0\.0\.0, all versions  |  Yes  |  Yes  | 
-|  18\.0\.0\.0, all versions  |  Yes  |  Yes  | 
 |  12\.2\.0\.1, all versions  |  Yes  |  Yes  | 
 |  12\.1\.0\.2\.v13 or later  |  Yes  |  No  | 
 

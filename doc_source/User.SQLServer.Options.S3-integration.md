@@ -27,7 +27,7 @@ S3 integration tasks share the same queue as native backup and restore tasks\. A
 + [Multi\-AZ limitations for S3 integration](#S3-MAZ)
 + [Disabling RDS for SQL Server integration with S3](#Appendix.SQLServer.Options.S3-integration.disabling)
 
-For more information on working with files in Amazon S3, see [Getting started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/gsg)\.
+For more information on working with files in Amazon S3, see [Getting started with Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3)\.
 
 ## Prerequisites for integrating RDS for SQL Server with S3<a name="Appendix.SQLServer.Options.S3-integration.preparing"></a>
 

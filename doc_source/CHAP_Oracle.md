@@ -2,15 +2,11 @@
 
 Amazon RDS supports DB instances that run the following versions and editions of Oracle Database: 
 + Oracle Database 19c \(19\.0\.0\.0\)
-+ Oracle Database 18c \(18\.0\.0\.0\)
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\.0\.2\)
 
 **Note**  
-Oracle Database 18c \(18\.0\.0\.0\) is on a deprecation path\. Oracle Corporation will no longer provide patches for Oracle Database 18c after the end\-of\-support date\. For more information, see [Preparing for the automatic upgrade of Oracle Database 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.
-
-**Note**  
-RDS for Oracle Database 11g is no longer supported\.
+RDS for Oracle Database 11g and Oracle Database 18c \(18\.0\.0\.0\) are no longer supported\.
 
 Before creating a DB instance, complete the steps in the [Setting up for Amazon RDS](CHAP_SettingUp.md) section of this guide\. When you create a DB instance using your master account, the account gets DBA privileges, with some limitations\. Use this account for administrative tasks such as creating additional database accounts\. You can't use SYS, SYSTEM, or other Oracle\-supplied administrative accounts\.
 

@@ -117,7 +117,6 @@ The examples in this section assume that the BDUMP directory is named `BDUMP`\. 
 
 The inventory files use the Amazon RDS naming convention `lsinventory-dbv.txt` and `lsinventory_detail-dbv.txt`, where *dbv* is the full name of your DB version\. The `lsinventory-dbv.txt` file is available on all DB versions\. The corresponding detail file is available on the following DB versions:
 + 19\.0\.0\.0, ru\-2020\-01\.rur\-2020\-01\.r1 or later
-+ 18\.0\.0\.0, ru\-2020\-01\.rur\-2020\-01\.r1 or later
 + 12\.2\.0\.1, ru\-2020\-01\.rur\-2020\-01\.r1 or later
 + 12\.1\.0\.2, v19 or later
 
@@ -204,7 +203,6 @@ Oracle Database includes a number of advisors\. Each advisor supports automated 
 
 The advisor task procedures are available in the following engine versions:
 + [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1) or higher 19c versions 
-+ [Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1) or higher 18c versions 
 + [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1) or higher 12\.2\.0\.1 versions 
 
 **Topics**
@@ -285,7 +283,6 @@ Amazon RDS for Oracle supports Linux kernel HugePages for increased database sca
 
 You can use HugePages with the following versions and editions of Oracle Database: 
 + 19\.0\.0\.0, all editions
-+ 18\.0\.0\.0, all editions
 + 12\.2\.0\.1, all editions
 + 12\.1\.0\.2, all editions
 

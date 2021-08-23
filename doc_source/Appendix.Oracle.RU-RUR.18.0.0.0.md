@@ -11,7 +11,7 @@ The following versions are available for Oracle database engine 18\.0\.0\.0:
 + [Version 18\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1](#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2019-07.rur-2019-07.r1)
 
 **Note**  
-Oracle Database 18c, Version 18\.0\.0\.0 is on a deprecation path\. Oracle Corporation will no longer provide patches for 18c after the end\-of\-support date\. For more information, see [Preparing for the automatic upgrade of Oracle Database 18c](USER_UpgradeDBInstance.Oracle.md#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)\.
+Oracle Database 18c \(18\.0\.0\) is no longer supported\. This information is only useful if you want to upgrade an Oracle Database 18c snapshot\.
 
 ## Version 18\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1<a name="Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-04.rur-2021-04.r1"></a>
 

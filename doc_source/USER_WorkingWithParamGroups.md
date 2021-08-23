@@ -1,10 +1,15 @@
 # Working with DB parameter groups<a name="USER_WorkingWithParamGroups"></a>
 
- You manage your DB engine configuration by associating your DB instances with parameter groups\. Amazon RDS defines parameter groups with default settings that apply to newly created DB instances\. 
+*Database parameters* specify how the database is configured\. For example, database parameters can specify the amount of resources, such as memory, to allocate to a database\.
+
+ You manage your database configuration by associating your DB instances with parameter groups\. Amazon RDS defines parameter groups with default settings\. 
 
 **Important**  
 You can define your own parameter groups with customized settings\. Then you can modify your DB instances to use your own parameter groups\.  
 For information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+**Note**  
+Some DB engines offer additional features that you can add to your database as options in an option group\. For information about option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
 
  A *DB parameter group* acts as a container for engine configuration values that are applied to one or more DB instances\. 
 
@@ -15,7 +20,7 @@ For information about modifying a DB instance, see [Modifying an Amazon RDS DB i
  You can copy an existing DB parameter group with the AWS CLI [copy\-db\-parameter\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/copy-db-parameter-group.html) command\. Copying a parameter group can be convenient when you want to include most of an existing DB parameter group's custom parameters and values in a new DB parameter group\. 
 
 Here are some important points about working with parameters in a DB parameter group:
-+ When you change a dynamic parameter and save the DB parameter group, the change is applied immediately regardless of the **Apply Immediately** setting\. When you change a static parameter and save the DB parameter group, the parameter change takes effect after you manually reboot the DB instance\. You can reboot a DB instance using the RDS console, by calling the `reboot-db-instance` CLI command, or by calling the `RebootDbInstance` API operation\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\.
++ Database parameters are either static or dynamic\. When you change a *static parameter*, a database reboot is required take it into effect\. When you change a dynamic parameter and save the DB parameter group, the change is applied immediately regardless of the **Apply Immediately** setting\. When you change a static parameter and save the DB parameter group, the parameter change takes effect after you manually reboot the DB instance\. You can reboot a DB instance using the RDS console, by calling the `reboot-db-instance` CLI command, or by calling the `RebootDbInstance` API operation\. The requirement to reboot the associated DB instance after a static parameter change helps mitigate the risk of a parameter misconfiguration affecting an API call, such as calling `ModifyDBInstance` to change DB instance class or scale storage\.
 
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you change the DB parameter group associated with a DB instance, you must manually reboot the instance before the DB instance can use the new DB parameter group\. For more information about changing the DB parameter group, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.

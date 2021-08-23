@@ -11,7 +11,6 @@ RDS for Oracle Database 11g is deprecated\. If you maintain Oracle Database 11g 
 + [Oracle minor version upgrades](#USER_UpgradeDBInstance.Oracle.Minor)
 + [Oracle SE2 upgrade paths](#USER_UpgradeDBInstance.Oracle.SE2)
 + [Considerations for Oracle DB upgrades](#USER_UpgradeDBInstance.Oracle.OGPG)
-+ [Preparing for the automatic upgrade of Oracle Database 18c](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c)
 + [Testing an Oracle DB upgrade](#USER_UpgradeDBInstance.Oracle.UpgradeTesting)
 + [Upgrading an Oracle DB instance](#USER_UpgradeDBInstance.Oracle.Upgrading)
 
@@ -96,8 +95,6 @@ You can upgrade micro DB instances with small amounts of storage \(10–20 GiB\)
 
 ## Major version upgrades<a name="USER_UpgradeDBInstance.Oracle.Major"></a>
 
-Amazon RDS supports the following major version upgrades\.
-
 To perform a major version upgrade, modify the DB instance manually\. Major version upgrades don't occur automatically\. 
 
 ### Supported versions for major upgrades<a name="USER_UpgradeDBInstance.Oracle.Major.supported-versions"></a>
@@ -109,9 +106,8 @@ Amazon RDS supports the following major version upgrades\.
 
 | Current version | Upgrade supported | 
 | --- | --- | 
-|  18\.0\.0\.0  |  19\.0\.0\.0  | 
-|  12\.2\.0\.1  |  19\.0\.0\.0 18\.0\.0\.0  | 
-|  12\.1\.0\.2  |  19\.0\.0\.0 18\.0\.0\.0 12\.2\.0\.1  | 
+|  12\.2\.0\.1  |  19\.0\.0\.0  | 
+|  12\.1\.0\.2  |  19\.0\.0\.0 12\.2\.0\.1  | 
 
 A major version upgrade of Oracle Database must upgrade to a Release Update \(RU\) that was released in the same month or later\. Major version downgrades aren't supported for any Oracle versions\.
 
@@ -217,38 +213,6 @@ After upgrading the time zone file, migrate the data from your current instance 
 When you migrate data using Oracle Data Pump, the utility raises the error ORA\-39405 when the target time zone version is lower than the source time zone version\.
 
 For more information, see [TIMESTAMP WITH TIMEZONE restrictions](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-data-pump-overview.html#GUID-9B6C92EE-860E-43DD-9728-735B17B9DA89) in the Oracle documentation\. 
-
-## Preparing for the automatic upgrade of Oracle Database 18c<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c"></a>
-
-On July 1, 2021, Amazon RDS plans to begin automatically upgrading Oracle Database 18c instances to Oracle Database 19c\. The automatic upgrades are not guaranteed to occur in your maintenance window\. All Oracle Database 18c instances, including reserved instances, will move to the latest available Release Update \(RU\)\.
-
-Before the automatic upgrades begin, we highly recommend that you upgrade your existing Oracle Database 18c DB instances to Oracle Database 19c manually\. When you upgrade manually, you can validate that your applications work correctly\. To avoid the automatic upgrade, use one of the following strategies before July 1, 2021\.
-
-**Topics**
-+ [Upgrade your Oracle Database 18c DB instance](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.upgrade)
-+ [Upgrade your Oracle Database 18c DB snapshots](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.snapshots)
-+ [Downgrade your Oracle Database 18c DB instance](#USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.downgrade)
-
-### Upgrade your Oracle Database 18c DB instance<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.upgrade"></a>
-
-You can upgrade your Oracle Database 18c instance to Oracle Database 19c\. Before upgrading, consider the following:
-+ Your SQL statements might perform differently after the upgrade\. If so, you can use the `OPTIMIZER_FEATURES_ENABLE` parameter to retain the behavior of the Oracle Database 18c optimizer\. For more information, see [Influencing the Optimizer](https://docs.oracle.com/en/database/oracle/oracle-database/19/tgsql/influencing-the-optimizer.html#GUID-8758EF88-1CC6-41BD-8581-246702414D1D) in the Oracle documentation\.
-+ If you have Extended Support for Oracle Database 18c on the BYOL model, consider the implications\. In this case, you must have Extended Support agreements from Oracle Support for Oracle Database 19c\. For details on licensing and support requirements for BYOL, see [Amazon RDS for Oracle FAQs](http://aws.amazon.com/rds/oracle/faqs/)\.
-
-### Upgrade your Oracle Database 18c DB snapshots<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.snapshots"></a>
-
-You can upgrade your existing snapshots to Oracle Database 19c, and then restore them\. For more information, see [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)\.
-
-If you plan to upgrade using snapshots, the planned deadline to avoid the automatic upgrade is June 30, 2021\.
-
-### Downgrade your Oracle Database 18c DB instance<a name="USER_UpgradeDBInstance.Oracle.auto-upgrade-of-18c.downgrade"></a>
-
-You may decide not to upgrade your DB instances to Oracle Database 19c\. In this case, you can downgrade your instance to Oracle Database Release 1 \(12\.1\.0\.2\) or Release 2 \(12\.2\.0\.1\)\. Use any of the following techniques:
-+ Oracle Data Pump
-+ AWS Database Migration Service \(DMS\)
-+ Any supported logical replication tool
-
-For more information about import options, see [Importing data into Oracle on Amazon RDS](Oracle.Procedural.Importing.md)\.
 
 ## Testing an Oracle DB upgrade<a name="USER_UpgradeDBInstance.Oracle.UpgradeTesting"></a>
 

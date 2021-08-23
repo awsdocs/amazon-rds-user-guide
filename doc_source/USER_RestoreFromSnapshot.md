@@ -1,6 +1,6 @@
 # Restoring from a DB snapshot<a name="USER_RestoreFromSnapshot"></a>
 
-Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a DB instance by restoring from this DB snapshot\. When you restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
+Amazon RDS creates a storage volume snapshot of your DB instance, backing up the entire DB instance and not just individual databases\. You can create a DB instance by restore the DB instance, you provide the name of the DB snapshot to restore from, and then provide a name for the new DB instance that is created from the restore\. You can't restore from a DB snapshot to an existing DB instance; a new DB instance is created when you restore\. 
 
 You can use the restored DB instance as soon as its status is `available`\. The DB instance continues to load data in the background\. This is known as *lazy loading*\.
 
@@ -36,14 +36,14 @@ When you assign an option group to a DB instance, the option group is also linke
 
 ## Microsoft SQL Server considerations<a name="USER_RestoreFromSnapshot.MSSQL"></a>
 
-When you restore a Microsoft SQL Server DB snapshot to a new instance, you can always restore to the same edition as your snapshot\. In some cases, you can also change the edition of the DB instance\. The following are the limitations when you change editions: 
-+ The DB snapshot must have enough storage allocated for the new edition\. 
-+ Only the following edition changes are supported: 
-  + From Standard Edition to Enterprise Edition 
-  + From Web Edition to Standard Edition or Enterprise Edition 
-  + From Express Edition to Web Edition, Standard Edition or Enterprise Edition 
+When you restore an RDS for Microsoft SQL Server DB snapshot to a new instance, you can always restore to the same edition as your snapshot\. In some cases, you can also change the edition of the DB instance\. The following limitations apply when you change editions:
++ The DB snapshot must have enough storage allocated for the new edition\.
++ Only the following edition changes are supported:
+  + From Standard Edition to Enterprise Edition
+  + From Web Edition to Standard Edition or Enterprise Edition
+  + From Express Edition to Web Edition, Standard Edition, or Enterprise Edition
 
-If you want to change from one edition to a new edition that is not supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether or not your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\. 
+If you want to change from one edition to a new edition that isn't supported by restoring a snapshot, you can try using the native backup and restore feature\. SQL Server verifies whether your database is compatible with the new edition based on what SQL Server features you have enabled on the database\. For more information, see [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)\.
 
 ## Oracle Database considerations<a name="USER_RestoreFromSnapshot.Oracle"></a>
 

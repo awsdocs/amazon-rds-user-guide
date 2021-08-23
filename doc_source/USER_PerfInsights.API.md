@@ -87,7 +87,7 @@ The following examples show how to use the AWS CLI for Performance Insights\.
 + [Retrieving counter metrics](#USER_PerfInsights.API.Examples.CounterMetrics)
 + [Retrieving the DB load average for top wait events](#USER_PerfInsights.API.Examples.DBLoadAverage)
 + [Retrieving the DB load average for top SQL](#USER_PerfInsights.API.Examples.DBLoadAverageTop10SQL)
-+ [Retrieving the DB Load Average Filtered by SQL](#USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL)
++ [Retrieving the DB load average filtered by SQL](#USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL)
 + [Retrieving the full text of a SQL statement](#USER_PerfInsights.API.Examples.GetDimensionKeyDetails)
 
 ### Retrieving counter metrics<a name="USER_PerfInsights.API.Examples.CounterMetrics"></a>
@@ -439,7 +439,7 @@ When querying, it might be convenient to specify a `Group` in `GroupBy`\. Howeve
 ]
 ```
 
-### Retrieving the DB Load Average Filtered by SQL<a name="USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL"></a>
+### Retrieving the DB load average filtered by SQL<a name="USER_PerfInsights.API.Examples.DBLoadAverageFilterBySQL"></a>
 
 ![\[Filter by SQL chart.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-filter-chart.png)
 

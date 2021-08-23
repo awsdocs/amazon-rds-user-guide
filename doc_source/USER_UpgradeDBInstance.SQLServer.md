@@ -6,15 +6,13 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\.
 
-
-
-Amazon RDS on SQL Server doesn't support automatic minor version upgrades\. You can confirm this by using the `describe-db-engine-versions` AWS CLI command\. For example:
+Alternatively, you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. You can confirm whether the minor version upgrade will be automatic by using the `describe-db-engine-versions` AWS CLI command\. For example:
 
 ```
 aws rds describe-db-engine-versions --engine sqlserver-se --engine-version 14.00.3049.1.v1
 ```
 
-In this example, the CLI command returns the following response that indicates that the upgrade will *not* be automatic, even if **Auto minor version upgrade** had been enabled:
+In the following example, the CLI command returns a response indicating that upgrades are automatic\.
 
 ```
 ...
@@ -24,7 +22,7 @@ In this example, the CLI command returns the following response that indicates t
         "Engine": "sqlserver-se",
         "EngineVersion": "14.00.3192.2.v1",
         "Description": "SQL Server 2017 14.00.3192.2.v1",
-        "AutoUpgrade": false,
+        "AutoUpgrade": true,
         "IsMajorVersionUpgrade": false
     }
 
@@ -37,21 +35,22 @@ For more information about performing upgrades, see [Upgrading a SQL Server DB i
 + [Overview of upgrading](#USER_UpgradeDBInstance.SQLServer.Overview)
 + [Major version upgrades](#USER_UpgradeDBInstance.SQLServer.Major)
 + [Multi\-AZ and in\-memory optimization considerations](#USER_UpgradeDBInstance.SQLServer.MAZ)
-+ [Option and parameter group considerations](#USER_UpgradeDBInstance.SQLServer.OGPG)
++ [Option group considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.OG)
++ [Parameter group considerations](#USER_UpgradeDBInstance.SQLServer.OGPG.PG)
 + [Testing an upgrade](#USER_UpgradeDBInstance.SQLServer.UpgradeTesting)
 + [Upgrading a SQL Server DB instance](#USER_UpgradeDBInstance.SQLServer.Upgrading)
 + [Upgrading deprecated DB instances before support ends](#USER_UpgradeDBInstance.SQLServer.DeprecatedVersions)
 
 ## Overview of upgrading<a name="USER_UpgradeDBInstance.SQLServer.Overview"></a>
 
-Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
+Amazon RDS takes two DB snapshots during the upgrade process\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. The second DB snapshot is taken after the upgrade finishes\.
 
 **Note**  
 Amazon RDS only takes DB snapshots if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-After an upgrade is complete, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore the DB snapshot that was taken before the upgrade to create a new DB instance\. 
+After an upgrade is completed, you can't revert to the previous version of the database engine\. If you want to return to the previous version, restore from the DB snapshot that was taken before the upgrade to create a new DB instance\. 
 
-During a minor or major version upgrade of SQL Server, the **Free Storage Space** and **Disk Queue Depth** metrics will display `-1`\. After the upgrade is complete, both metrics will return to normal\.
+During a minor or major version upgrade of SQL Server, the **Free Storage Space** and **Disk Queue Depth** metrics will display `-1`\. After the upgrade is completed, both metrics will return to normal\.
 
 ## Major version upgrades<a name="USER_UpgradeDBInstance.SQLServer.Major"></a>
 
@@ -91,7 +90,7 @@ aws rds describe-db-engine-versions ^
     --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" ^
     --output table
 ```
-The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL Server 2017 or 2019 version\.  
+The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL Server 2017 or 2019 versions\.  
 
 ```
 --------------------------
@@ -100,7 +99,10 @@ The output shows that you can upgrade version 14\.00\.3049\.1 to the latest SQL 
 |      EngineVersion     |
 +------------------------+
 |  14.00.3294.2.v1       |
+|  14.00.3356.20.v1      |
+|  14.00.3381.3.v1       |
 |  15.00.4043.16.v1      |
+|  15.00.4073.23.v1      |
 +------------------------+
 ```
 
@@ -124,15 +126,13 @@ If your DB instance is in a Multi\-AZ deployment, both the primary and standby i
 
 SQL Server 2014 through 2019 Enterprise Edition support in\-memory optimization\.
 
-## Option and parameter group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG"></a>
-
-### Option group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.OG"></a>
+## Option group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.OG"></a>
 
 If your DB instance uses a custom option group, in some cases Amazon RDS can't automatically assign your DB instance a new option group\. For example, when you upgrade to a new major version\. In that case, you must specify a new option group when you upgrade\. We recommend that you create a new option group, and add the same options to it as your existing custom option group\.
 
 For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create) or [Copying an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Copy)\.
 
-### Parameter group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.PG"></a>
+## Parameter group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.PG"></a>
 
 If your DB instance uses a custom parameter group, in some cases Amazon RDS can't automatically assign your DB instance a new parameter group\. For example, when you upgrade to a new major version\. In that case, you must specify a new parameter group when you upgrade\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
 

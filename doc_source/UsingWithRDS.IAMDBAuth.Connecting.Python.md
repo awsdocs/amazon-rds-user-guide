@@ -9,7 +9,7 @@ The following are prerequisites for connecting to your DB instance using IAM aut
 
 In addition, make sure the imported libraries in the sample code exist on your system\.
 
-The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/index.htmlguide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
+The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
 
 **Topics**
 + [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)

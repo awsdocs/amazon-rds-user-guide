@@ -7,11 +7,10 @@ You enable SSL encryption for an Oracle DB instance by adding the Oracle SSL opt
 **Note**  
 You can use Secure Sockets Layer or Native Network Encryption, but not both\. For more information, see [Oracle native network encryption](Appendix.Oracle.Options.NetworkEncryption.md)\. 
 
-You can use SSL encryption with the following Oracle database versions and editions: 
-+ 19\.0\.0\.0: All versions, all editions including Standard Edition Two
-+ 18\.0\.0\.0: All versions, all editions including Standard Edition Two
-+ 12\.2\.0\.1: All versions, all editions including Standard Edition Two
-+ 12\.1\.0\.2: All versions, all editions including Standard Edition Two
+You can use SSL encryption with all editions of the following Oracle database versions: 
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\)
++ Oracle Database 12c Release 1 \(12\.1\)
 
 **Note**  
 You cannot use both SSL and Oracle native network encryption \(NNE\) on the same instance\. If you use SSL encryption, you must disable any other connection encryption\.
@@ -35,7 +34,6 @@ The following table shows the TLS option settings that are supported for differe
 | Oracle engine version | SQLNET\.SSL\_VERSION = "1\.0" | SQLNET\.SSL\_VERSION = "1\.2" | SQLNET\.SSL\_VERSION = "1\.2 or 1\.0" | 
 | --- | --- | --- | --- | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 
@@ -56,7 +54,6 @@ The following table shows the cipher suite option settings that are supported fo
 | Oracle engine version | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_CBC\_SHA256" | SQLNET\.CIPHER\_SUITE = "SSL\_RSA\_WITH\_AES\_256\_GCM\_SHA384" | 
 | --- | --- | --- | --- | 
 |  19\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
-|  18\.0\.0\.0 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.2\.0\.1 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 |  12\.1\.0\.2 \(All editions\)  |  Supported  |  Supported  |  Supported  | 
 
@@ -66,7 +63,6 @@ Amazon RDS for Oracle enables you to use the Federal Information Processing Stan
 
 You can enable the FIPS setting with the following Oracle database versions and editions: 
 + 19\.0\.0\.0: All versions, all editions including Standard Edition Two
-+ 18\.0\.0\.0: All versions, all editions including Standard Edition Two
 + 12\.2\.0\.1: All versions, all editions including Standard Edition Two
 + 12\.1\.0\.2: Version 2 and later, all editions including Standard Edition Two
 

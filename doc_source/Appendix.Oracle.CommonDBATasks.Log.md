@@ -340,7 +340,6 @@ You might want to access your online and archived redo log files for mining with
 
 Accessing transaction logs is supported for the following releases:
 + Oracle Database 19c
-+ Oracle Database 18c
 + Oracle Database 12c Release 2 \(12\.2\.0\.1\)
 + Oracle Database 12c Release 1 \(12\.1\)
 

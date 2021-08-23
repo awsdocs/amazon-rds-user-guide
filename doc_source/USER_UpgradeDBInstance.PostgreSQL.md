@@ -101,7 +101,7 @@ To get a list of all valid upgrade targets for a current source version in a par
 export REGION=eu-central-1
 export ENDPOINT=https://rds.eu-central-1.amazonaws.com
 
-aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query '*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}' --engine-version DB-current-version
+aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query "*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}" --engine-version DB-current-version
 ```
 
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>

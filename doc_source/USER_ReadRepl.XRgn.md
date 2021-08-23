@@ -183,7 +183,7 @@ All of the considerations for performing replication within an AWS Region apply 
 + You can only replicate between AWS Regions when using the following Amazon RDS DB instances:
   + MariaDB \(all versions\)\.
   + MySQL version 5\.6 and higher\.
-  + Oracle Enterprise Edition \(EE\) engine version 12\.1\.0\.2\.v10 and higher 12\.1 versions, and all versions of 12\.2, 18c, and 19c\.
+  + Oracle Enterprise Edition \(EE\) of Oracle Database 12c Release 1 \(12\.1\) using 12\.1\.0\.2\.v10 and higher, Oracle Database 12c Release 2 \(12\.2\), and Oracle Database 19c\.
 
     An Active Data Guard license is required\. For information about limitations for Oracle cross\-Region read replicas, see [Replica requirements for Oracle](oracle-read-replicas.md#oracle-read-replicas.limitations)\.
   + PostgreSQL \(all versions\)\.

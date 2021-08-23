@@ -9,6 +9,7 @@ When working with a SQL Server DB instance, you can run scripts to modify a newl
 + [Accessing the tempdb database on Microsoft SQL Server DB instances on Amazon RDS](SQLServer.TempDB.md)
 + [Analyzing your database workload on an Amazon RDS for SQL Server DB instance with Database Engine Tuning Advisor](Appendix.SQLServer.CommonDBATasks.Workload.md)
 + [Collations and character sets for Microsoft SQL Server](Appendix.SQLServer.CommonDBATasks.Collation.md)
++ [Creating a database user](Appendix.SQLServer.CommonDBATasks.CreateUser.md)
 + [Determining a recovery model for your Microsoft SQL Server database](Appendix.SQLServer.CommonDBATasks.DatabaseRecovery.md)
 + [Determining the last failover time](Appendix.SQLServer.CommonDBATasks.LastFailover.md)
 + [Disabling fast inserts during bulk loading](Appendix.SQLServer.CommonDBATasks.DisableFastInserts.md)

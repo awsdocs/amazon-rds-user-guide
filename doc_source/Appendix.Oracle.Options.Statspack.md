@@ -36,7 +36,7 @@ To run Statspack scripts, you must add the Statspack option\.
    You can log in using the `PERFSTAT` user account and run the Statspack scripts\.
 
 1. Do either of the following actions, depending on your DB engine version:
-   + If you are using Oracle Database 18c or lower, skip this step\.
+   + If you are using Oracle Database 12c Release 2 \(12\.2\) or lower, skip this step\.
    + If you are using Oracle Database 19c or higher, grant the `CREATE JOB` privilege to the `PERFSTAT` account using the following statement:
 
      ```

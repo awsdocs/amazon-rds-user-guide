@@ -9,23 +9,7 @@ To share an automated DB snapshot, create a manual DB snapshot by copying the au
 
 For more information on copying a snapshot, see [Copying a snapshot](USER_CopySnapshot.md)\. For more information on restoring a DB instance from a DB snapshot, see [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)\.
 
-You can share a manual snapshot with up to 20 other AWS accounts\. You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Take care when sharing a snapshot as public so that none of your private information is included in any of your public snapshots\.
-
-You can use the following AWS CLI command \(Unix only\) to find the public snapshots for your AWS account in a particular AWS Region:
-
-```
-aws rds describe-db-snapshots --snapshot-type public --include-public | grep account_number
-```
-
-The output returned is similar to the following example if you have public snapshots:
-
-```
-"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot1",
-"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot2",
-```
-
-**Note**  
-You might see duplicate entries for `DBSnapshotIdentifier` or `SourceDBSnapshotIdentifier`\.
+You can share a manual snapshot with up to 20 other AWS accounts\.
 
 The following limitations apply when sharing manual snapshots with other AWS accounts:
 + When you restore a DB instance from a shared snapshot using the AWS Command Line Interface \(AWS CLI\) or Amazon RDS API, you must specify the Amazon Resource Name \(ARN\) of the shared snapshot as the snapshot identifier\.
@@ -38,9 +22,57 @@ The following limitations apply when sharing manual snapshots with other AWS acc
 
   For Oracle DB instances, you can copy shared DB snapshots that have the `Timezone` or `OLS` option \(or both\)\. To do so, specify a target option group that includes these options when you copy the DB snapshot\. The OLS option is permanent and persistent only for Oracle DB instances running Oracle version 12\.2 or higher\. For more information about these options, see [Oracle time zone](Appendix.Oracle.Options.Timezone.md) and [Oracle Label Security](Oracle.Options.OLS.md)\.
 
-## Sharing an encrypted snapshot<a name="USER_ShareSnapshot.Encrypted"></a>
 
-You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS resources](Overview.Encryption.md)\. To do this, you must take the following steps:
+
+## Sharing public snapshots<a name="USER_ShareSnapshot.Public"></a>
+
+You can also share an unencrypted manual snapshot as public, which makes the snapshot available to all AWS accounts\. Make sure when sharing a snapshot as public that none of your private information is included in the public snapshot\.
+
+When a snapshot is shared publicly, it gives all AWS accounts permission both to copy the snapshot and to create DB instances from it\.
+
+You aren't billed for the backup storage of public snapshots owned by other accounts\. You're billed only for snapshots that you own\.
+
+If you copy a public snapshot, you own the copy\. You're billed for the backup storage of your snapshot copy\. If you create a DB instance from a public snapshot, you're billed for that DB instance\. For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
+
+You can delete only the public snapshots that you own\. To delete a shared or public snapshot, make sure to log into the AWS account that owns the snapshot\.
+
+### Viewing public snapshots owned by other AWS accounts<a name="USER_ShareSnapshot.Public.View.Console"></a>
+
+You can view public snapshots owned by other accounts in a particular AWS Region on the **Public** tab of the **Snapshots** page in the Amazon RDS console\. Your snapshots \(those owned by your account\) don't appear on this tab\.
+
+**To view public snapshots**
+
+1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Snapshots**\.
+
+1. Choose the **Public** tab\.
+
+   The public snapshots appear\. You can see which account owns a public snapshot in the **Owner** column\.
+**Note**  
+You might have to modify the page preferences, by selecting the gear icon at the upper right of the **Public snapshots** list, to see this column\.
+
+### Viewing your own public snapshots<a name="USER_ShareSnapshot.Public.View.CLI"></a>
+
+You can use the following AWS CLI command \(Unix only\) to view the public snapshots owned by your AWS account in a particular AWS Region\.
+
+```
+aws rds describe-db-snapshots --snapshot-type public --include-public | grep account_number
+```
+
+The output returned is similar to the following example if you have public snapshots\.
+
+```
+"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot1",
+"DBSnapshotArn": "arn:aws:rds:us-east-1:123456789012:snapshot:mysnapshot2",
+```
+
+**Note**  
+You might see duplicate entries for `DBSnapshotIdentifier` or `SourceDBSnapshotIdentifier`\.
+
+## Sharing encrypted snapshots<a name="USER_ShareSnapshot.Encrypted"></a>
+
+You can share DB snapshots that have been encrypted "at rest" using the AES\-256 encryption algorithm, as described in [Encrypting Amazon RDS resources](Overview.Encryption.md)\. To do this, take the following steps:
 
 1. Share the AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) that was used to encrypt the snapshot with any accounts that you want to be able to access the snapshot\.
 

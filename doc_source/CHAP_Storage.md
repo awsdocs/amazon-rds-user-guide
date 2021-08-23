@@ -124,110 +124,59 @@ Measured IOPS values are independent of the size of the individual I/O operation
 
 ## Factors that affect storage performance<a name="CHAP_Storage.Other.Factors"></a>
 
-Both system activities and database workload can affect storage performance\. 
+System activities, database workload, and DB instance class can affect storage performance\.
 
-**System activities**
+### System activities<a name="other-factors-system"></a>
 
-The following system\-related activities consume I/O capacity and might reduce database instance performance while in progress:
+The following system\-related activities consume I/O capacity and might reduce DB instance performance while in progress:
 + Multi\-AZ standby creation
 + Read replica creation
 + Changing storage types
 
-**Database workload**
+### Database workload<a name="other-factors-workload"></a>
 
-In some cases your database or application design results in concurrency issues, locking, or other forms of database contention\. In these cases, you might not be able to use all the provisioned bandwidth directly\. In addition, you may encounter the following workload\-related situations:
+In some cases, your database or application design results in concurrency issues, locking, or other forms of database contention\. In these cases, you might not be able to use all the provisioned bandwidth directly\. In addition, you might encounter the following workload\-related situations:
 + The throughput limit of the underlying instance type is reached\.
 + Queue depth is consistently less than 1 because your application is not driving enough I/O operations\.
 + You experience query contention in the database even though some I/O capacity is unused\.
 
-If there isn't at least one system resource that is at or near a limit, and adding threads doesn't increase the database transaction rate, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, you should seek the advice of a database performance tuning expert\. 
+In some cases, there isn't a system resource that is at or near a limit, and adding threads doesn't increase the database transaction rate\. In such cases, the bottleneck is most likely contention in the database\. The most common forms are row lock and index page lock contention, but there are many other possibilities\. If this is your situation, seek the advice of a database performance tuning expert\. 
 
-**DB instance class**
+### DB instance class<a name="other-factors-instance"></a>
 
-To get the most performance out of your Amazon RDS database instance, choose a current generation instance type with enough bandwidth to support your storage type\. For example, you can choose EBS\-optimized instances and instances with 10\-gigabit network connectivity\.
+To get the most performance out of your Amazon RDS DB instance, choose a current generation instance type with enough bandwidth to support your storage type\. For example, you can choose Amazon EBS–optimized instances and instances with 10\-gigabit network connectivity\.
 
 **Important**  
-Depending on the instance class you're using, you might see lower IOPS performance than the maximum that RDS allows you to provision\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS\-optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
+Depending on the instance class you're using, you might see lower IOPS performance than the maximum that you can provision with RDS\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
 
-We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances have a lower instance storage limit\. The following table shows the maximum storage that each DB instance class can scale to for each database engine\. All values are in tebibytes \(TiB\)\.
+We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances can also have lower maximum storage\.
+
+The following list shows the maximum storage that most DB instance classes can scale to for each database engine:
++ MariaDB: 64 TiB
++ Microsoft SQL Server: 16 TiB
++ MySQL: 64 TiB
++ Oracle: 64 TiB
++ PostgreSQL: 64 TiB
+
+The following table shows some exceptions\. All RDS for Microsoft SQL Server DB instances have a maximum storage of 16 TiB, so there are no entries for SQL Server\.
 
 
 ****  
 
-| Instance class | MariaDB | Microsoft SQL Server | MySQL | Oracle | PostgreSQL | 
-| --- | --- | --- | --- | --- | --- | 
-| db\.m5 – latest generation standard instance classes | 
-| db\.m5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m5\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4 – current generation standard instance classes | 
-| db\.m4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4\.10xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.m4\.large | 64 | 16 | 64 | 64 | 64 | 
+| Instance class | MariaDB | MySQL | Oracle | PostgreSQL | 
+| --- | --- | --- | --- | --- | 
 | db\.m3 – previous generation standard instance classes | 
-| db\.m3\.2xlarge | 6 | 16 | 6 |  | 6 | 
-| db\.m3\.xlarge | 6 | 16 | 6 |  | 6 | 
-| db\.m3\.large | 6 | 16 | 6 |  | 6 | 
-| db\.m3\.medium | 32 | 16 | 32 |  | 32 | 
-| db\.r5 – latest generation memory optimized instance classes | 
-| db\.r5\.24xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.12xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r5\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4 – Current Generation memory optimized instance classes | 
-| db\.r4\.16xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4\.8xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4\.4xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4\.2xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4\.xlarge | 64 | 16 | 64 | 64 | 64 | 
-| db\.r4\.large | 64 | 16 | 64 | 64 | 64 | 
-| db\.r3 – previous generation memory optimized instance classes | 
-| db\.r3\.8xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.r3\.4xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.r3\.2xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.r3\.xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.r3\.large | 64 | 16 | 64 |  | 64 | 
+| db\.m3\.2xlarge | N/A | 6 | N/A | 6 | 
+| db\.m3\.xlarge | N/A | 6 | N/A | 6 | 
+| db\.m3\.large | N/A | 6 | N/A | 6 | 
+| db\.m3\.medium | N/A | 32 | N/A | 32 | 
 | db\.t3 – latest generation burstable performance instance classes | 
-| db\.t3\.2xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.t3\.xlarge | 16 | 16 | 16 | 64 | 64 | 
-| db\.t3\.large | 16 | 16 | 16 | 64 | 64 | 
-| db\.t3\.medium | 16 | 16 | 16 | 32 | 32 | 
-| db\.t3\.small | 16 | 16 | 16 | 32 | 16 | 
-| db\.t3\.micro | 16 | 16 | 16 | 32 | 16 | 
+| db\.t3\.medium | 16 | 16 | 32 | 32 | 
+| db\.t3\.small | 16 | 16 | 32 | 16 | 
+| db\.t3\.micro | 16 | 16 | 32 | 16 | 
 | db\.t2 – current generation burstable performance instance classes | 
-| db\.t2\.2xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.t2\.xlarge | 64 | 16 | 64 |  | 64 | 
-| db\.t2\.large | 64 | 16 | 64 |  | 64 | 
-| db\.t2\.medium | 32 | 16 | 32 |  | 32 | 
-| db\.t2\.small | 16 | 16 | 16 |  | 16 | 
-| db\.t2\.micro | 16 | 16 | 16 |  | 16 | 
-| db\.x1e – latest generation memory optimized instance classes | 
-| db\.x1e\.32xlarge |  | 16 |  | 64 |  | 
-| db\.x1e\.16xlarge |  | 16 |  | 64 |  | 
-| db\.x1e\.8xlarge |  | 16 |  | 64 |  | 
-| db\.x1e\.4xlarge |  | 16 |  | 64 |  | 
-| db\.x1e\.2xlarge |  | 16 |  | 64 |  | 
-| db\.x1e\.xlarge |  | 16 |  | 64 |  | 
-| db\.x1 – current generation memory optimized instance classes | 
-| db\.x1\.32xlarge |  | 16 |  | 64 |  | 
-| db\.x1\.16xlarge |  | 16 |  | 64 |  | 
+| db\.t2\.medium | 32 | 32 | N/A | 32 | 
+| db\.t2\.small | 16 | 16 | N/A | 16 | 
+| db\.t2\.micro | 16 | 16 | N/A | 16 | 
 
-For Oracle, scaling up to 80,000 IOPS is only supported on the following instance classes\.
-+ db\.m5\.24xlarge
-+ db\.r5\.24xlarge
-+ db\.x1\.32xlarge
-+ db\.x1e\.32xlarge 
-
-For more details on all instance classes supported, see [Previous generation DB instances](http://aws.amazon.com/rds/previous-generation/)\.
+For more details about all instance classes supported, see [Previous generation DB instances](http://aws.amazon.com/rds/previous-generation/)\.

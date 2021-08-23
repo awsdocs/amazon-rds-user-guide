@@ -8,11 +8,11 @@ You can filter new Amazon RDS features on the [What's New with Database?](http:/
 These lists are not exhaustive\.
 
 **Topics**
-+ [Oracle new features](#Oracle.Concepts.FeatureSupport.new)
-+ [Supported features for RDS for Oracle](#Oracle.Concepts.FeatureSupport.supported)
-+ [Unsupported features for RDS for Oracle](#Oracle.Concepts.FeatureSupport.unsupported)
++ [New features in RDS for Oracle](#Oracle.Concepts.FeatureSupport.new)
++ [Supported features in RDS for Oracle](#Oracle.Concepts.FeatureSupport.supported)
++ [Unsupported features in RDS for Oracle](#Oracle.Concepts.FeatureSupport.unsupported)
 
-## Oracle new features<a name="Oracle.Concepts.FeatureSupport.new"></a>
+## New features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.new"></a>
 
 To see new Oracle features, use the following techniques:
 + Search [Document history](WhatsNew.md) for the keyword **Oracle**\.
@@ -22,7 +22,7 @@ The following video shows a recent video from re:Invent about Oracle new feature
 
 [![AWS Videos](http://img.youtube.com/vi/GzXPHtS-PoA/0.jpg)](http://www.youtube.com/watch?v=GzXPHtS-PoA)
 
-## Supported features for RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.supported"></a>
+## Supported features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.supported"></a>
 
 Amazon RDS Oracle supports the following Oracle Database features:
 + Advanced Compression
@@ -101,7 +101,7 @@ This feature changes to Continuous Query Notification in Oracle Database 12c Rel
   For more information, see [Oracle XML DB](Appendix.Oracle.Options.XMLDB.md)\.
 + Virtual Private Database
 
-## Unsupported features for RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.unsupported"></a>
+## Unsupported features in RDS for Oracle<a name="Oracle.Concepts.FeatureSupport.unsupported"></a>
 
 Amazon RDS Oracle doesn't support the following Oracle Database features:
 + Automatic Storage Management \(ASM\)

@@ -126,12 +126,13 @@ The following example shows the current trace file retention period, and then se
  6. 		
  7. # Set the tracefile retention to 24 hours:
  8. SQL> EXEC rdsadmin.rdsadmin_util.set_configuration('tracefile retention',1440);
- 9. 
-10. #show the new tracefile retention
-11. SQL> EXEC rdsadmin.rdsadmin_util.show_configuration;
-12. NAME:tracefile retention
-13. VALUE:1440
-14. DESCRIPTION:tracefile expiration specifies the duration in minutes before tracefiles in bdump are automatically deleted.
+ 9. SQL> commit;
+10. 
+11. #show the new tracefile retention
+12. SQL> EXEC rdsadmin.rdsadmin_util.show_configuration;
+13. NAME:tracefile retention
+14. VALUE:1440
+15. DESCRIPTION:tracefile expiration specifies the duration in minutes before tracefiles in bdump are automatically deleted.
 ```
 
 In addition to the periodic purge process, you can manually remove files from the `background_dump_dest`\. The following example shows how to purge all files older than five minutes\. 

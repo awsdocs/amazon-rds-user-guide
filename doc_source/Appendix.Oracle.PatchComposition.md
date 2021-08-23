@@ -4,7 +4,7 @@ Updates to your Amazon RDS for Oracle DB instances keep them current\. If you ap
 
 You can specify any currently supported Oracle Database version when creating a new DB instance\. You can specify the major version, such as Oracle Database 12c Release 1 \(12\.1\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version that you have specified\. To see a list of supported versions and defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\.
 
-## Oracle Database 19c \(19\.0\.0\), Oracle Database 18c \(18\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\)<a name="Appendix.Oracle.PatchComposition.180-122"></a>
+## Oracle Database 19c \(19\.0\.0\) and Oracle Database 12c Release 2 \(12\.2\.0\.1\)<a name="Appendix.Oracle.PatchComposition.180-122"></a>
 
 For Amazon RDS for Oracle Database 19c \(19\.0\.0\.0\), Oracle Database 18c \(18\.0\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\), Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 

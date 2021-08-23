@@ -239,10 +239,9 @@ When working with AWR, we recommend using the `rdsadmin.rdsadmin_diagnostic_util
 The `rdsadmin_diagnostic_util` procedures save the reports to the DB instance file system\. You can access these reports from the console\. You can also access reports using the `rdsadmin.rds_file_util` procedures, and you can access reports that are copied to Amazon S3 using the S3 Integration option\. For more information, see [Reading files in a DB instance directory](Appendix.Oracle.CommonDBATasks.Misc.md#Appendix.Oracle.CommonDBATasks.ReadingFiles) and [Amazon S3 integration](oracle-s3-integration.md)\. 
 
 You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RDS for Oracle DB engine versions:
-+ 12\.1\.0\.2\.v20 or higher 12\.1 versions
-+ 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
-+ 18\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 18c versions
 + 19\.0\.0\.0\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 19c versions
++ 12\.2\.0\.1\.ru\-2020\-04\.rur\-2020\-04\.r1 or higher 12\.2 versions
++ 12\.1\.0\.2\.v20 or higher 12\.1 versions
 
 ### Common parameters for the diagnostic utility package<a name="Appendix.Oracle.CommonDBATasks.CommonAWRParam"></a>
 
@@ -370,10 +369,9 @@ For more information about Oracle edition\-based redefinition, see [About editio
 To enable auditing on the database audit trail table `SYS.AUD$`, use the Amazon RDS procedure `rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table`\. The only supported audit property is `ALL`\. You can't audit or not audit individual statements or operations\. 
 
 Enabling auditing is supported for Oracle DB instances running the following versions:
-+ 12\.1\.0\.2\.v14 and later 12\.1 versions
-+ All 12\.2\.0\.1 versions
-+ All 18\.0\.0\.0 versions
-+ All 19\.0\.0\.0 versions
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\)
++ Oracle Database 12c Release 1 \(12\.1\.0\.2\.v14\) and later
 
 The `audit_all_sys_aud_table` procedure has the following parameters\.
 
