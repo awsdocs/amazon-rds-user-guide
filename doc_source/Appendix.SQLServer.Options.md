@@ -51,7 +51,7 @@ The output resembles the following:
             "OptionGroupOptionSettings": [
                 {
                     "SettingName": "ENABLE_SNA_LU",
-                    "SettingDescription": "nable support for SNA LU protocol",
+                    "SettingDescription": "Enable support for SNA LU protocol",
                     "DefaultValue": "true",
                     "ApplyType": "DYNAMIC",
                     "AllowedValues": "true,false",
