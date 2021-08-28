@@ -35,7 +35,6 @@ The following are the memory optimized DB instance classes available:
 + **db\.r5b** – Instance classes that are memory optimized for throughput\-intensive applications\. Powered by the AWS Nitro System, db\.r5b instances deliver up to 60 Gbps bandwidth and 260,000 IOPS of EBS performance, which is the fastest block storage performance on EC2\.
 + **db\.r5d** – Instance classes that are optimized for low latency, very high random I/O performance, and high sequential read throughput\.
 + **db\.r5** – Latest generation instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon Elastic Block Store \(Amazon EBS\) performance\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\.
-+ **db\.r4** – Instance classes optimized for memory\-intensive applications\. These offer improved networking and Amazon EBS performance\.
 + **db\.r3** – Instance classes that provide memory optimization\.
 
 The following are the burstable performance DB instance classes available:

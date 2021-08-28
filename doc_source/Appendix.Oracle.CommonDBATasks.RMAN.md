@@ -75,7 +75,7 @@ For more information, see [Common parameters for RMAN procedures](#Appendix.Orac
 The following example validates the DB instance using the default values for the parameters\.
 
 ```
-exec rdsadmin.rdsadmin_rman_util.validate_database;
+EXEC rdsadmin.rdsadmin_rman_util.validate_database;
 ```
 
 The following example validates the DB instance using the specified values for the parameters\.

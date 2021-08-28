@@ -18,6 +18,12 @@ Oracle Database stores transition rules and UTC offsets in *time zone files*\. T
 
 If a government changes the rules for Daylight Savings Time \(DST\), Oracle publishes new time zone files\. Oracle releases time zone files separately from PSUs and RUs\. The time zone file names use the format DSTv*version*, as in DSTv35\. When you add the `TIMEZONE_FILE_AUTOUPGRADE` option in Amazon RDS for Oracle, you can update your time zone files\. 
 
+The `TIMEZONE_FILE_AUTOUPGRADE` option is useful when you move data between different environments\. If you try to import data from a source database with a higher time zone file version than the target database, you receive the `ORA-39405` error\. Previously, you had to work around the error by using either of the following techniques:
++ Create an RDS for Oracle instance with the desired time zone file, export data from your source database, and then import it into the new database\.
++ Use AWS DMS or logical replication to migrate your data\.
+
+With the `TIMEZONE_FILE_AUTOUPGRADE` option, you can upgrade the time zone file on the source database without using the preceding cumbersome techniques\.
+
 ## Considerations for updating your time zone file<a name="Appendix.Oracle.Options.Timezone-file-autoupgrade.considerations"></a>
 
 When you update your time zone file, data that uses `TIMESTAMP WITH TIME ZONE` might change\. Your primary consideration is downtime\.

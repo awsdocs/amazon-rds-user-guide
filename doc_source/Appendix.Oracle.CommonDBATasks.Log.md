@@ -31,7 +31,7 @@ To set force logging, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.force
 The following example puts the database in force logging mode\. 
 
 ```
-exec rdsadmin.rdsadmin_util.force_logging(p_enable => true);
+EXEC rdsadmin.rdsadmin_util.force_logging(p_enable => true);
 ```
 
 ## Setting supplemental logging<a name="Appendix.Oracle.CommonDBATasks.AddingSupplementalLogging"></a>
@@ -89,7 +89,7 @@ To switch log files, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.switch
 The following example switches log files\.
 
 ```
-exec rdsadmin.rdsadmin_util.switch_logfile;
+EXEC rdsadmin.rdsadmin_util.switch_logfile;
 ```
 
 ## Adding online redo logs<a name="Appendix.Oracle.CommonDBATasks.RedoLogs"></a>
@@ -112,7 +112,7 @@ The parameters are mutually exclusive\.
 The following command adds a 100 MB log file\.
 
 ```
-exec rdsadmin.rdsadmin_util.add_logfile(p_size => '100M');
+EXEC rdsadmin.rdsadmin_util.add_logfile(p_size => '100M');
 ```
 
 ## Dropping online redo logs<a name="Appendix.Oracle.CommonDBATasks.DroppingRedoLogs"></a>
@@ -129,7 +129,7 @@ To drop redo logs, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.drop_log
 The following example drops the log with group number 3\. 
 
 ```
-exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
+EXEC rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
 ```
 
 You can only drop logs that have a status of unused or inactive\. The following example gets the statuses of the logs\.
@@ -165,10 +165,10 @@ GROUP#     BYTES      STATUS
 
 /* Add four new logs that are each 512 MB */
 
-exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
-exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
-exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
-exec rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+EXEC rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+EXEC rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+EXEC rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
+EXEC rdsadmin.rdsadmin_util.add_logfile(bytes => 536870912);
 
 
 /* Query V$LOG to see the logs. */ 
@@ -190,9 +190,9 @@ GROUP#     BYTES      STATUS
 
 /* Drop each inactive log using the group number. */
 
-exec rdsadmin.rdsadmin_util.drop_logfile(grp => 1);
-exec rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
-exec rdsadmin.rdsadmin_util.drop_logfile(grp => 4);
+EXEC rdsadmin.rdsadmin_util.drop_logfile(grp => 1);
+EXEC rdsadmin.rdsadmin_util.drop_logfile(grp => 3);
+EXEC rdsadmin.rdsadmin_util.drop_logfile(grp => 4);
 
 
 /* Query V$LOG to see the logs. */ 
@@ -211,7 +211,7 @@ GROUP#     BYTES      STATUS
 
 /* Switch logs so that group 2 is no longer current. */
 
-exec rdsadmin.rdsadmin_util.switch_logfile;
+EXEC rdsadmin.rdsadmin_util.switch_logfile;
 
 
 /* Query V$LOG to see the logs.        */ 
@@ -230,7 +230,7 @@ GROUP#     BYTES      STATUS
 
 /* If the status of log 2 is still "ACTIVE", issue a checkpoint to clear it to "INACTIVE".  */
 
-exec rdsadmin.rdsadmin_util.checkpoint;
+EXEC rdsadmin.rdsadmin_util.checkpoint;
 
 
 /* Query V$LOG to see the logs.            */ 
@@ -249,7 +249,7 @@ GROUP#     BYTES      STATUS
 
 # Drop the final inactive log.
 
-exec rdsadmin.rdsadmin_util.drop_logfile(grp => 2);
+EXEC rdsadmin.rdsadmin_util.drop_logfile(grp => 2);
 
 
 /* Query V$LOG to see the logs.    */ 
@@ -300,7 +300,7 @@ The following example shows the log retention time\.
 
 ```
 set serveroutput on
-exec rdsadmin.rdsadmin_util.show_configuration;
+EXEC rdsadmin.rdsadmin_util.show_configuration;
 ```
 
 The output shows the current setting for `archivelog retention hours`\. The following output shows that archived redo logs are kept for 48 hours\.
@@ -349,22 +349,22 @@ The following code creates directories that provide read\-only access to your on
 This code also revokes the `DROP ANY DIRECTORY` privilege\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.create_archivelog_dir;
-exec rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
+EXEC rdsadmin.rdsadmin_master_util.create_archivelog_dir;
+EXEC rdsadmin.rdsadmin_master_util.create_onlinelog_dir;
 ```
 
 The following code drops the directories for your online and archived redo log files\. 
 
 ```
-exec rdsadmin.rdsadmin_master_util.drop_archivelog_dir;
-exec rdsadmin.rdsadmin_master_util.drop_onlinelog_dir;
+EXEC rdsadmin.rdsadmin_master_util.drop_archivelog_dir;
+EXEC rdsadmin.rdsadmin_master_util.drop_onlinelog_dir;
 ```
 
 The following code grants and revokes the `DROP ANY DIRECTORY` privilege\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
-exec rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
+EXEC rdsadmin.rdsadmin_master_util.revoke_drop_any_directory;
+EXEC rdsadmin.rdsadmin_master_util.grant_drop_any_directory;
 ```
 
 ## Downloading archived redo logs from Amazon S3<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs"></a>

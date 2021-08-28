@@ -37,7 +37,7 @@ The database must be open for the name change to occur\. For more information ab
 The following example changes the global name of a database to `new_global_name`\.
 
 ```
-exec rdsadmin.rdsadmin_util.rename_global_name(p_new_global_name => 'new_global_name');
+EXEC rdsadmin.rdsadmin_util.rename_global_name(p_new_global_name => 'new_global_name');
 ```
 
 ## Creating and sizing tablespaces<a name="Appendix.Oracle.CommonDBATasks.CreatingTablespacesAndDatafiles"></a>
@@ -260,13 +260,13 @@ To generate an AWR report, use the `rdsadmin.rdsadmin_diagnostic_util.awr_report
 The following example generates a AWR report for the snapshot range 101–106\. The output text file is named `awrrpt_101_106.txt`\. You can access this report from the AWS Management Console\. 
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.awr_report(101,106,'TEXT');
+EXEC rdsadmin.rdsadmin_diagnostic_util.awr_report(101,106,'TEXT');
 ```
 
 The following example generates an HTML report for the snapshot range 63–65\. The output HTML file is named `awrrpt_63_65.html`\. The procedure writes the report to the nondefault database directory named `AWR_RPT_DUMP`\.
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.awr_report(63,65,'HTML','AWR_RPT_DUMP');
+EXEC rdsadmin.rdsadmin_diagnostic_util.awr_report(63,65,'HTML','AWR_RPT_DUMP');
 ```
 
 ### Extracting AWR data into a dump file<a name="Appendix.Oracle.CommonDBATasks.ExtractAWR"></a>
@@ -276,13 +276,13 @@ To extract AWR data into a dump file, use the `rdsadmin.rdsadmin_diagnostic_util
 The following example extracts the snapshot range 101–106\. The output dump file is named `awrextract_101_106.dmp`\. You can access this file through the console\.
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.awr_extract(101,106);
+EXEC rdsadmin.rdsadmin_diagnostic_util.awr_extract(101,106);
 ```
 
 The following example extracts the snapshot range 63–65\. The output dump file is named `awrextract_63_65.dmp`\. The file is stored in the nondefault database directory named `AWR_RPT_DUMP`\.
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.awr_extract(63,65,'AWR_RPT_DUMP');
+EXEC rdsadmin.rdsadmin_diagnostic_util.awr_extract(63,65,'AWR_RPT_DUMP');
 ```
 
 ### Generating an ADDM report<a name="Appendix.Oracle.CommonDBATasks.ADDM"></a>
@@ -292,13 +292,13 @@ To generate an ADDM report, use the `rdsadmin.rdsadmin_diagnostic_util.addm_repo
 The following example generates an ADDM report for the snapshot range 101–106\. The output text file is named `addmrpt_101_106.txt`\. You can access the report through the console\.
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.addm_report(101,106);
+EXEC rdsadmin.rdsadmin_diagnostic_util.addm_report(101,106);
 ```
 
 The following example generates an ADDM report for the snapshot range 63–65\. The output text file is named `addmrpt_63_65.txt`\. The file is stored in the nondefault database directory named `ADDM_RPT_DUMP`\.
 
 ```
-exec rdsadmin.rdsadmin_diagnostic_util.addm_report(63,65,'ADDM_RPT_DUMP');
+EXEC rdsadmin.rdsadmin_diagnostic_util.addm_report(63,65,'ADDM_RPT_DUMP');
 ```
 
 ### Generating an ASH report<a name="Appendix.Oracle.CommonDBATasks.ASH"></a>
@@ -353,13 +353,13 @@ You can set the default edition of an Amazon RDS Oracle DB instance using the Am
 The following example sets the default edition for the Amazon RDS Oracle DB instance to `RELEASE_V1`\. 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_default_edition('RELEASE_V1');
+EXEC rdsadmin.rdsadmin_util.alter_default_edition('RELEASE_V1');
 ```
 
 The following example sets the default edition for the Amazon RDS Oracle DB instance back to the Oracle default\. 
 
 ```
-exec rdsadmin.rdsadmin_util.alter_default_edition('ORA$BASE');
+EXEC rdsadmin.rdsadmin_util.alter_default_edition('ORA$BASE');
 ```
 
 For more information about Oracle edition\-based redefinition, see [About editions and edition\-based redefinition](https://docs.oracle.com/database/121/ADMIN/general.htm#ADMIN13167) in the Oracle documentation\.
@@ -394,15 +394,15 @@ SELECT * FROM DBA_OBJ_AUDIT_OPTS WHERE OWNER='SYS' AND OBJECT_NAME='AUD$';
 The following commands enable audit of `ALL` on `SYS.AUD$` `BY ACCESS`\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table;
+EXEC rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table;
 
-exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => true);
+EXEC rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => true);
 ```
 
 The following command enables audit of `ALL` on `SYS.AUD$` `BY SESSION`\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => false);
+EXEC rdsadmin.rdsadmin_master_util.audit_all_sys_aud_table(p_by_access => false);
 ```
 
 For more information, see [AUDIT \(traditional auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/AUDIT-Traditional-Auditing.html#GUID-ADF45B07-547A-4096-8144-50241FA2D8DD) in the Oracle documentation\. 
@@ -420,7 +420,7 @@ SELECT * FROM DBA_OBJ_AUDIT_OPTS WHERE OWNER='SYS' AND OBJECT_NAME='AUD$';
 The following command disables audit of `ALL` on `SYS.AUD$`\.
 
 ```
-exec rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;
+EXEC rdsadmin.rdsadmin_master_util.noaudit_all_sys_aud_table;
 ```
 
 For more information, see [NOAUDIT \(traditional auditing\)](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/sqlrf/NOAUDIT-Traditional-Auditing.html#GUID-9D8EAF18-4AB3-4C04-8BF7-37BD0E15434D) in the Oracle documentation\. 
@@ -450,7 +450,7 @@ begin
     wait_for_lock => rdsadmin.rdsadmin_dbms_repair.lock_nowait
   );
 end;
- /
+/
 ```
 
 For more information, see [ONLINE\_INDEX\_CLEAN function](https://docs.oracle.com/database/121/ARPLS/d_repair.htm#ARPLS67555) in the Oracle documentation\. 
@@ -486,8 +486,8 @@ Before attempting to repair corrupt blocks, review the [DBMS\_REPAIR](https://do
 1. Run the following procedures to create repair tables if they don't already exist\.
 
    ```
-   exec rdsadmin.rdsadmin_dbms_repair.create_repair_table;
-   exec rdsadmin.rdsadmin_dbms_repair.create_orphan_keys_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.create_repair_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.create_orphan_keys_table;
    ```
 
 1. Run the following procedures to check for existing records and purge them if appropriate\.
@@ -498,8 +498,8 @@ Before attempting to repair corrupt blocks, review the [DBMS\_REPAIR](https://do
    SELECT COUNT(*) FROM SYS.DBA_REPAIR_TABLE;
    SELECT COUNT(*) FROM SYS.DBA_ORPHAN_KEY_TABLE;
    
-   exec rdsadmin.rdsadmin_dbms_repair.purge_repair_table;
-   exec rdsadmin.rdsadmin_dbms_repair.purge_orphan_keys_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.purge_repair_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.purge_orphan_keys_table;
    ```
 
 1. Run the following procedure to check for corrupt blocks\.
@@ -565,8 +565,8 @@ Before attempting to repair corrupt blocks, review the [DBMS\_REPAIR](https://do
 1. When you have completed all repair work, run the following procedures to drop the repair tables\.
 
    ```
-   exec rdsadmin.rdsadmin_dbms_repair.drop_repair_table;
-   exec rdsadmin.rdsadmin_dbms_repair.drop_orphan_keys_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.drop_repair_table;
+   EXEC rdsadmin.rdsadmin_dbms_repair.drop_orphan_keys_table;
    ```
 
 ## Resizing the temporary tablespace in a read replica<a name="Appendix.Oracle.CommonDBATasks.ResizeTempSpaceReadReplica"></a>
@@ -598,17 +598,17 @@ The `resize_tempfile` procedure has the following parameters\.
 The following examples resize a temporary tablespace named `TEMP` to the size of 4 gigabytes on a read replica\.
 
 ```
-exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');
+EXEC rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4G');
 ```
 
 ```
-exec rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');
+EXEC rdsadmin.rdsadmin_util.resize_temp_tablespace('TEMP','4096000000');
 ```
 
 The following example resizes a temporary tablespace based on the tempfile with the file identifier `1` to the size of 2 megabytes on a read replica\.
 
 ```
-exec rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
+EXEC rdsadmin.rdsadmin_util.resize_tempfile(1,'2M');
 ```
 
 For more information about read replicas for Oracle DB instances, see [Working with Oracle replicas for Amazon RDS](oracle-read-replicas.md)\.
@@ -622,5 +622,5 @@ To purge the entire recycle bin, use the Amazon RDS procedure `rdsadmin.rdsadmin
 The following example purges the entire recycle bin\.
 
 ```
-exec rdsadmin.rdsadmin_util.purge_dba_recyclebin;
+EXEC rdsadmin.rdsadmin_util.purge_dba_recyclebin;
 ```

@@ -44,7 +44,7 @@ To list all incidents, call the `rdsadmin.rdsadmin_adrci_util.list_adrci_inciden
 
 ```
 SQL> VAR task_id VARCHAR2(80);
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_incidents;
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_incidents;
 
 PL/SQL procedure successfully completed.
 ```
@@ -87,7 +87,7 @@ INCIDENT_ID PROBLEM_KEY                                                 CREATE_T
 To list a particular incident, specify its ID using the `incident_id` parameter\. In the following example, you query the log file for incident 53523 only\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_incidents(incident_id=>53523);
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_incidents(incident_id=>53523);
 
 PL/SQL procedure successfully completed.
 
@@ -122,7 +122,7 @@ This function uses the common parameter `problem_id`\. For more information, see
 To get the task ID for all problems, call the `rdsadmin.rdsadmin_adrci_util.list_adrci_problems` function without any arguments, and store the output in a SQL client variable\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_problems;
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_problems;
 
 PL/SQL procedure successfully completed.
 ```
@@ -155,7 +155,7 @@ PROBLEM_ID   PROBLEM_KEY                                                 LAST_IN
 In the following example, you list problem 3 only\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_problems(problem_id=>3);
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.list_adrci_problems(problem_id=>3);
 
 PL/SQL procedure successfully completed.
 ```
@@ -196,7 +196,7 @@ Make sure to specify one of the preceding parameters\. If you specify both param
 To create a package for a specific incident, call the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.create_adrci_package` with the `incident_id` parameter\. The following example creates a package for incident 53523\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.create_adrci_package(incident_id=>53523);
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.create_adrci_package(incident_id=>53523);
 
 PL/SQL procedure successfully completed.
 ```
@@ -204,7 +204,7 @@ PL/SQL procedure successfully completed.
 To read the log file, call the `rdsadmin.rds_file_util.read_text_file`\. You can supply the task ID as part of the file name\. The output shows that you generated incident package `ORA700EVE_20200529212043_COM_1.zip`\.
 
 ```
-SSQL> SELECT * FROM TABLE(rdsadmin.rds_file_util.read_text_file('BDUMP', 'dbtask-'||:task_id||'.log'));
+SQL> SELECT * FROM TABLE(rdsadmin.rds_file_util.read_text_file('BDUMP', 'dbtask-'||:task_id||'.log'));
 
 TEXT
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ TEXT
 To package diagnostic data for a particular problem, specify its ID using the `problem_id` parameter\. In the following example, you package data for problem 3 only\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.create_adrci_package(problem_id=>3);
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.create_adrci_package(problem_id=>3);
 
 PL/SQL procedure successfully completed.
 ```
@@ -251,7 +251,7 @@ This function uses the following parameter\.
 To show the trace file, call the Amazon RDS function `rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile` with the `incident_id` parameter\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile;
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile;
 
 PL/SQL procedure successfully completed.
 ```
@@ -279,7 +279,7 @@ TEXT
 In the following example, you generate output for alert\_ORCL\.log\.
 
 ```
-SQL> exec :task_id := rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile('diag/rdbms/orcl_a/ORCL/trace/alert_ORCL.log');
+SQL> EXEC :task_id := rdsadmin.rdsadmin_adrci_util.show_adrci_tracefile('diag/rdbms/orcl_a/ORCL/trace/alert_ORCL.log');
 
 PL/SQL procedure successfully completed.
 ```

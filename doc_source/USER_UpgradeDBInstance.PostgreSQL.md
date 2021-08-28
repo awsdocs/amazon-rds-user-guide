@@ -62,21 +62,25 @@ The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or lat
 
 | Current source version | Newest upgrade target | Preferred major upgrade targets | 
 | --- | --- | --- | 
-| 12\.6, 12\.5, 12\.4, 12\.3, 12\.2 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) |  |  |  |  | 
-| 11\.11 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132),  | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  |  |  | 
+| 12\.7, 12\.6, 12\.4 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) |  |  |  |  | 
+| 12\.5, 12\.3, 12\.2 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) |  |  |  |  | 
+| 11\.12 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) |  |  |  |  | 
+| 11\.11 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  |  |  | 
 | 11\.10 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 11\.9, 11\.8, 11\.7, 11\.6, 11\.5, 11\.4, 11\.2, 11\.1 | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
+| 10\.17 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) |  |  |  |  | 
 | 10\.16 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 10\.15 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version125) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 10\.14 | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) |  | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 10\.13 | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) |  | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 10\.12 | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) |  | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
 | 10\.11, 10\.10, 10\.9, 10\.7, 10\.6, 10\.5, 10\.4, 10\.3, 10\.1 | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) |  |  | 
-| 9\.6\.21 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132),  | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
+| 9\.6\.22 | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) | [13\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version133) |  |  |  |  | 
+| 9\.6\.21 | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132) | [13\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version132)  | [12\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version126) |  [11\.11](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
 | 9\.6\.20 | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [13\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version131) | [12\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version125) | [11\.10](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1110) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
 | 9\.6\.19 | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) |  | [12\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version124) | [11\.9](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version119) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
-| 9\.6\.18 | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) |  | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [11\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version118),  | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
-| 9\.6\.17 | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) |  | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [11\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version117), | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
+| 9\.6\.18 | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) |  | [12\.3](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version123) | [11\.8](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version118)  | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
+| 9\.6\.17 | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) |  | [12\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version122) | [11\.7](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version117) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
 | 9\.6\.16 | [11\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version116) |  |  | [11\.6](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version116) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
 | 9\.6\.15 | [11\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) |  |  | [11\.5](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version115) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
 | 9\.6\.14 | [11\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) |  |  | [11\.4](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version114) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) |  | 
@@ -100,6 +104,8 @@ To get a list of all valid upgrade targets for a current source version in a par
 ```
 export REGION=eu-central-1
 export ENDPOINT=https://rds.eu-central-1.amazonaws.com
+export DBCURRENTVERSION=10.11
+
 
 aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query "*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}" --engine-version DB-current-version
 ```

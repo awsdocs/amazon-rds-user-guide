@@ -1,8 +1,8 @@
 # Performing common scheduling tasks for Oracle DB instances<a name="Appendix.Oracle.CommonDBATasks.Scheduler"></a>
 
-Some SYS\-owned scheduler jobs can interfere with normal database operations, and Oracle Support recommends they be disabled or the job schedule be modified\. You can use the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler` to perform tasks for SYS\-owned Oracle Scheduler jobs\.
+Some scheduler jobs owned by `SYS` can interfere with normal database operations\. Oracle Support recommends you disable these jobs or modify the schedule\. To perform tasks for Oracle Scheduler jobs owned by `SYS`, use the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler`\.
 
-These procedures are supported for the following Amazon RDS for Oracle DB engine versions:
+The `rdsadmin.rdsadmin_dbms_scheduler` procedures are supported for the following Amazon RDS for Oracle DB engine versions:
 + Oracle Database 19c
 + Oracle Database 12c Release 2 \(12\.2\) on 12\.2\.0\.2\.ru\-2019\-07\.rur\-2019\-07\.r1 or higher 12\.2 versions
 + Oracle Database 12c Release 1 \(12\.1\) on 12\.1\.0\.2\.v17 or higher 12\.1 versions
@@ -22,22 +22,93 @@ To perform tasks with Oracle Scheduler, use procedures in the Amazon RDS package
 
 ## Modifying DBMS\_SCHEDULER jobs<a name="Appendix.Oracle.CommonDBATasks.ModifyScheduler"></a>
 
-You can use the Oracle procedure `dbms_scheduler.set_attribute` to modify certain components of Oracle Scheduler\. For more information, see [DBMS\_SCHEDULER](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72235) and [SET\_ATTRIBUTE procedure](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72399) in the Oracle documentation\. 
+To modify certain components of Oracle Scheduler, use the Oracle procedure `dbms_scheduler.set_attribute`\. For more information, see [DBMS\_SCHEDULER](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72235) and [SET\_ATTRIBUTE procedure](https://docs.oracle.com/database/121/ARPLS/d_sched.htm#ARPLS72399) in the Oracle documentation\. 
 
 When working with Amazon RDS DB instances, prepend the schema name `SYS` to the object name\. The following example sets the resource plan attribute for the Monday window object\.
 
 ```
-begin
-    dbms_scheduler.set_attribute(
+BEGIN
+    DBMS_SCHEDULER.SET_ATTRIBUTE(
         name      => 'SYS.MONDAY_WINDOW',
         attribute => 'RESOURCE_PLAN',
         value     => 'resource_plan_1');
-end;
+END;
 /
 ```
 
-**Note**  
-Some SYS\-owned Oracle Scheduler jobs can interfere with normal database operations\. Oracle Support recommends that they be disabled or that the job schedule be modified\. Amazon RDS for Oracle doesn't provide the required privileges to modify SYS\-owned Oracle Scheduler jobs using the `DBMS_SCHEDULER` package\. Instead, you can use the procedures in the Amazon RDS package `rdsadmin.rdsadmin_dbms_scheduler` to perform tasks for SYS\-owned Oracle Scheduler jobs\. For information about using these procedures, see [Performing common scheduling tasks for Oracle DB instances](#Appendix.Oracle.CommonDBATasks.Scheduler)\.
+## Modifying AutoTask maintenance windows<a name="Appendix.Oracle.CommonDBATasks.Scheduler.maintenance-windows"></a>
+
+Amazon RDS for Oracle instances are created with default settings for maintenance windows\. Automated maintenance tasks such as optimizer statistics collection run during these windows\. By default, the maintenance windows turn on Oracle Database Resource Manager\.
+
+To modify the window, use the `DBMS_SCHEDULER` package\. You might need to modify the maintenance window settings for the following reasons:
++ You want maintenance jobs to run at a different time, with different settings, or not at all\. For example, might want to modify the window duration, or change the repeat time and interval\.
++ You want to avoid the performance impact of enabling Resource Manager during maintenance\. For example, if the default maintenance plan is specified, and if the maintenance window opens while the database is under load, you might see wait events such as `resmgr:cpu quantum`\. This wait event is related to Database Resource Manager\. You have the following options:
+  + Ensure that maintenance windows are active during off\-peak times for your DB instance\.
+  + Disable the default maintenance plan by setting the `resource_plan` attribute to an empty string\.
+  + Set the `resource_manager_plan` parameter to `FORCE:` in your parameter group\. If your instance uses Enterprise Edition, this setting prevents Database Resource Manager plans from activating\.
+
+**To modify your maintenance window settings**
+
+1. Connect to your database using an Oracle SQL client\.
+
+1. Query the current configuration for a scheduler window\. 
+
+   The following example queries the configuration for `MONDAY_WINDOW`\.
+
+   ```
+   SELECT ENABLED, RESOURCE_PLAN, DURATION, REPEAT_INTERVAL
+   FROM   DBA_SCHEDULER_WINDOWS 
+   WHERE  WINDOW_NAME='MONDAY_WINDOW';
+   ```
+
+   The following output shows that the window is using the default values\.
+
+   ```
+   ENABLED         RESOURCE_PLAN                  DURATION         REPEAT_INTERVAL
+   --------------- ------------------------------ ---------------- ------------------------------
+   TRUE            DEFAULT_MAINTENANCE_PLAN       +000 04:00:00    freq=daily;byday=MON;byhour=22
+                                                                   ;byminute=0; bysecond=0
+   ```
+
+1. Modify the window using the `DBMS_SCHEDULER` package\.
+
+   The following example sets the resource plan to null so that the Resource Manager won't run during the maintenance window\.
+
+   ```
+   BEGIN
+     -- disable the window to make changes
+     DBMS_SCHEDULER.DISABLE(name=>'"SYS"."MONDAY_WINDOW"',force=>TRUE);
+   
+     -- specify the empty string to use no plan
+     DBMS_SCHEDULER.SET_ATTRIBUTE(name=>'"SYS"."MONDAY_WINDOW"', attribute=>'RESOURCE_PLAN', value=>'');
+   
+     -- re-enable the window
+     DBMS_SCHEDULER.ENABLE(name=>'"SYS"."MONDAY_WINDOW"');
+   END;
+   /
+   ```
+
+   The following example sets the maximum duration of the window to 2 hours\.
+
+   ```
+   BEGIN
+     DBMS_SCHEDULER.DISABLE(name=>'"SYS"."MONDAY_WINDOW"',force=>TRUE);
+     DBMS_SCHEDULER.SET_ATTRIBUTE(name=>'"SYS"."MONDAY_WINDOW"', attribute=>'DURATION', value=>'0 2:00:00');
+     DBMS_SCHEDULER.ENABLE(name=>'"SYS"."MONDAY_WINDOW"');
+   END;
+   /
+   ```
+
+   The following example sets the repeat interval to every Monday at 10 AM\.
+
+   ```
+   BEGIN
+     DBMS_SCHEDULER.DISABLE(name=>'"SYS"."MONDAY_WINDOW"',force=>TRUE);
+     DBMS_SCHEDULER.SET_ATTRIBUTE(name=>'"SYS"."MONDAY_WINDOW"', attribute=>'REPEAT_INTERVAL', value=>'freq=daily;byday=MON;byhour=10;byminute=0;bysecond=0');
+     DBMS_SCHEDULER.ENABLE(name=>'"SYS"."MONDAY_WINDOW"');
+   END;
+   /
+   ```
 
 ## Setting the time zone for Oracle Scheduler jobs<a name="Appendix.Oracle.CommonDBATasks.Scheduler.TimeZone"></a>
 
@@ -50,12 +121,12 @@ To modify the time zone for Oracle Scheduler, you can use the Oracle procedure `
 1. Set the default time zone as following, substituting your time zone for `time_zone_name`\.
 
    ```
-   begin
-     dbms_scheduler.set_scheduler_attribute(
+   BEGIN
+     DBMS_SCHEDULER.SET_SCHEDULER_ATTRIBUTE(
        attribute => 'default_timezone',
        value => 'time_zone_name'
      );
-   end;
+   END;
    /
    ```
 
@@ -78,12 +149,12 @@ Etc/UTC
 Then you set the time zone to Asia/Shanghai\.
 
 ```
-begin
-  dbms_scheduler.set_scheduler_attribute(
+BEGIN
+  DBMS_SCHEDULER.SET_SCHEDULER_ATTRIBUTE(
     attribute => 'default_timezone',
     value => 'Asia/Shanghai'
   );
-end;
+END;
 /
 ```
 
@@ -157,7 +228,7 @@ The following example modifies the repeat interval of the `SYS.BSLN_MAINTAIN_STA
 
 ```
 BEGIN
-     dbms_scheduler.create_schedule (
+     DBMS_SCHEDULER.CREATE_SCHEDULE (
           schedule_name   => 'rds_master_user.new_schedule',
           start_date      => SYSTIMESTAMP,
           repeat_interval => 'freq=daily;byday=MON,TUE,WED,THU,FRI;byhour=0;byminute=0;bysecond=0',

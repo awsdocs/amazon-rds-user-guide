@@ -43,7 +43,7 @@ end;
 To get the session identifier and the session serial number, query the `V$SESSION` view\. The following example gets all sessions for the user `AWSUSER`\.
 
 ```
-select SID, SERIAL#, STATUS from V$SESSION where USERNAME = 'AWSUSER';
+SELECT SID, SERIAL#, STATUS FROM V$SESSION WHERE USERNAME = 'AWSUSER';
 ```
 
 The database must be open to use this method\. For more information about disconnecting a session, see [ALTER SYSTEM](http://docs.oracle.com/cd/E11882_01/server.112/e41084/statements_2014.htm#SQLRF53166) in the Oracle documentation\. 
@@ -140,7 +140,7 @@ ALLOWED
 
 /* Enable restricted sessions */
 
-exec rdsadmin.rdsadmin_util.restricted_session(p_enable => true);
+EXEC rdsadmin.rdsadmin_util.restricted_session(p_enable => true);
  
 
 /* Verify that the database is now restricted. */
@@ -154,7 +154,7 @@ RESTRICTED
 
 /* Disable restricted sessions */
 
-exec rdsadmin.rdsadmin_util.restricted_session(p_enable => false);
+EXEC rdsadmin.rdsadmin_util.restricted_session(p_enable => false);
  
 
 /* Verify that the database is now unrestricted again. */
@@ -173,7 +173,7 @@ To flush the shared pool, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.f
 The following example flushes the shared pool\.
 
 ```
-exec rdsadmin.rdsadmin_util.flush_shared_pool;
+EXEC rdsadmin.rdsadmin_util.flush_shared_pool;
 ```
 
 ## Flushing the buffer cache<a name="Appendix.Oracle.CommonDBATasks.FlushingBufferCache"></a>
@@ -183,7 +183,7 @@ To flush the buffer cache, use the Amazon RDS procedure `rdsadmin.rdsadmin_util.
 The following example flushes the buffer cache\.
 
 ```
-exec rdsadmin.rdsadmin_util.flush_buffer_cache;
+EXEC rdsadmin.rdsadmin_util.flush_buffer_cache;
 ```
 
 ## Granting SELECT or EXECUTE privileges to SYS objects<a name="Appendix.Oracle.CommonDBATasks.TransferPrivileges"></a>
