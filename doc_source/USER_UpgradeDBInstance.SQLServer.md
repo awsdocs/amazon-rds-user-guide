@@ -128,13 +128,17 @@ SQL Server 2014 through 2019 Enterprise Edition support in\-memory optimization\
 
 ## Option group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.OG"></a>
 
-If your DB instance uses a custom option group, in some cases Amazon RDS can't automatically assign your DB instance a new option group\. For example, when you upgrade to a new major version\. In that case, you must specify a new option group when you upgrade\. We recommend that you create a new option group, and add the same options to it as your existing custom option group\.
+If your DB instance uses a custom DB option group, in some cases Amazon RDS can't automatically assign your DB instance a new option group\. For example, when you upgrade to a new major version, you must specify a new option group\. We recommend that you create a new option group, and add the same options to it as your existing custom option group\.
 
 For more information, see [Creating an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Create) or [Copying an option group](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.Copy)\.
 
 ## Parameter group considerations<a name="USER_UpgradeDBInstance.SQLServer.OGPG.PG"></a>
 
-If your DB instance uses a custom parameter group, in some cases Amazon RDS can't automatically assign your DB instance a new parameter group\. For example, when you upgrade to a new major version\. In that case, you must specify a new parameter group when you upgrade\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
+If your DB instance uses a custom DB parameter group:
++ Amazon RDS automatically reboots the DB instance after an upgrade\.
++ In some cases, RDS can't automatically assign a new parameter group to your DB instance\.
+
+  For example, when you upgrade to a new major version, you must specify a new parameter group\. We recommend that you create a new parameter group, and configure the parameters as in your existing custom parameter group\.
 
 For more information, see [Creating a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Creating) or [Copying a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Copying)\.
 

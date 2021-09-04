@@ -19,7 +19,7 @@ To get a certificate bundle that contains both the intermediate and root certifi
 If your application is on Microsoft Windows and requires a PKCS7 file, you can download the PKCS7 certificate bundle\. This bundle contains both the intermediate and root certificates at [ https://truststore\.pki\.rds\.amazonaws\.com/global/global\-bundle\.p7b](https://truststore.pki.rds.amazonaws.com/global/global-bundle.p7b)\. 
 
 **Note**  
-Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.md#rds-proxy-security.tls)\.
+Amazon RDS Proxy uses certificates from the AWS Certificate Manager \(ACM\)\. If you are using RDS Proxy, you don't need to download Amazon RDS certificates or update applications that use RDS Proxy connections\. For more information about using TLS/SSL with RDS Proxy, see [Using TLS/SSL with RDS Proxy](rds-proxy.howitworks.md#rds-proxy-security.tls)\.
 
 ## Certificate bundles for AWS Regions<a name="UsingWithRDS.SSL.RegionCertificates"></a>
 

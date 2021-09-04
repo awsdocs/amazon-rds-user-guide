@@ -1,9 +1,9 @@
 # Creating a MariaDB DB instance and connecting to a database on a MariaDB DB instance<a name="CHAP_GettingStarted.CreatingConnecting.MariaDB"></a>
 
-The easiest way to create a MariaDB DB instance is to use the Amazon RDS console\. After you create the DB instance, you can use command line tools such as mysql or standard graphical tools such as HeidiSQL to connect to a database on the DB instance\.
+The easiest way to create a MariaDB DB instance is to use the AWS Management Console\. After you create the DB instance, you can use command line tools such as mysql or graphical tools such as HeidiSQL to connect to a database on the DB instance\.
 
 **Important**  
-Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
+Before you can create or connect to a DB instance, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
 **Topics**
 + [Creating a MariaDB DB instance](#CHAP_GettingStarted.Creating.MariaDB)
@@ -14,16 +14,14 @@ Before you can create or connect to a DB instance, you must complete the tasks i
 
 The basic building block of Amazon RDS is the DB instance\. This environment is where you run your MariaDB databases\.
 
-### Console<a name="CHAP_GettingStarted.Creating.MariaDB.Console"></a>
+You can use **Easy create** to create a DB instance running MariaDB with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-You can create a DB instance running MariaDB with the AWS Management Console with **Easy Create** enabled or not enabled\. With **Easy Create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy Create** uses the default setting for other configuration options\. With **Easy Create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
-
-In this example, you use **Easy Create** to create a DB instance running the MariaDB database engine with a db\.t2\.micro DB instance class\.
+In this example, you use **Easy create** to create a DB instance running the MariaDB database engine with a db\.t2\.micro DB instance class\.
 
 **Note**  
-For information about creating DB instances with **Easy Create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+For information about creating DB instances with **Standard create**, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
-**To create a MariaDB DB instance with Easy Create enabled**
+**To create a MariaDB DB instance with Easy create**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -31,8 +29,8 @@ For information about creating DB instances with **Easy Create** not enabled, se
 
 1. In the navigation pane, choose **Databases**\.
 
-1. Choose **Create database** and make sure that **Easy Create** is chosen\.   
-![\[Easy Create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
+1. Choose **Create database** and make sure that **Easy create** is chosen\.   
+![\[Easy create option\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-option.png)
 
 1. In **Configuration**, choose **MariaDB**\.
 
@@ -45,14 +43,22 @@ For information about creating DB instances with **Easy Create** not enabled, se
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-mariadb.png)
 
-1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** check box is chosen\.
+1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** box is selected\.
 
-   To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
+   To enter your master password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
-![\[Easy Create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-maria.png)
+![\[Easy create default settings.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-maria.png)
 
-   You can examine the default settings used when **Easy Create** is enabled\. If you want to change one or more settings during database creation, choose **Standard Create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard Create**\. For settings with **Yes** in that column, you can either use **Standard Create** or modify the DB instance after it's created to change the setting\.
+   You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after database creation\.
+   + To change settings with **No** in that column, use **Standard create**\. 
+   + To change settings with **Yes** in that column, either use **Standard create**, or modify the DB instance after it is created to change the settings\.
+
+   The following are important considerations for changing the default settings:
+   + In some cases, you might want your DB instance to use a specific virtual private cloud \(VPC\) based on the Amazon VPC service\. Or you might require a specific subnet group or security group\. If so, use **Standard create** to specify these resources\. You might have created these resources when you set up for Amazon RDS\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+   + If you want to be able to access the DB instance from a client outside of its VPC, use **Standard create** to set **Public access** to **Yes**\.
+
+     If the DB instance should be private, leave **Public access** set to **No**\.
 
 1. Choose **Create database**\.
 
@@ -63,18 +69,27 @@ For information about creating DB instances with **Easy Create** not enabled, se
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\.   
+If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new Maria DB instance\.
 
-   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
+   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is ready to use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Summary during DB instance creation\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDB-Launch06.png)
 
 ## Connecting to a database on a DB instance running the MariaDB database engine<a name="CHAP_GettingStarted.Connecting.MariaDB"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a Maria DB instance using the mysql command\-line tool\. One GUI\-based application you can use to connect is HeidiSQL\. For more information, see the [ Download HeidiSQL](http://www.heidisql.com/download.php) page\. For more information on using MariaDB, see the [MariaDB documentation](https://mariadb.com/kb/en/mariadb/documentation/)\.
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to a database on the DB instance\. In this example, you connect to a database on a Maria DB instance using the mysql command\-line tool\. For more information on using MariaDB, see the [MariaDB documentation](https://mariadb.com/kb/en/mariadb/documentation/)\.
 
- **To connect to a database on a DB instance using the `mysql` command\-line tool** 
+**To connect to a database on a DB instance using the mysql command\-line tool**
+
+1. Install a SQL client that you can use to connect to the DB instance\.
+
+   You can connect to an Amazon RDS for MariaDB DB instance by using tools like the mysql command\-line client\. For more information on using the mysql command\-line client, see [mysql command\-line client](http://mariadb.com/kb/en/mariadb/mysql-command-line-client/) in the MariaDB documentation\. One GUI\-based application that you can use to connect is Heidi\. For more information, see the [Download HeidiSQL](http://www.heidisql.com/download.php) page\. For information about installing MySQL \(including the mysql command\-line client\), see [Installing and upgrading MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)\. 
+
+1. Make sure that your DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+
+   If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
@@ -85,7 +100,7 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
    1. On the **Connectivity & security** tab, copy the endpoint\. Also note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a Maria DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/MariaDBConnect1.png)
 
-1. Enter the following command at a command prompt on a client computer to connect to a database on a Maria DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for `<endpoint>`, the master user name you used for *`<mymasteruser>`*, and provide the master password you used when prompted for a password\.
+1. Enter the following command at a command prompt on a client computer to connect to a database on a Maria DB instance\. Substitute the DNS name \(endpoint\) for your DB instance for `<endpoint>`\. In addition, substitute the master user name that you used for *`<mymasteruser>`* and provide the master password that you used when prompted for a password\.
 
    ```
    PROMPT> mysql -h <endpoint> -P 3306 -u <mymasteruser>  -p
@@ -94,22 +109,18 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
    After you enter the password for the user, you should see output similar to the following\.
 
    ```
-   Welcome to the MySQL monitor.  Commands end with ; or \g.
-   Your MySQL connection id is 272
-   Server version: 5.5.5-10.0.17-MariaDB-log MariaDB Server
-   
-   Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
-   
-   Oracle is a registered trademark of Oracle Corporation and/or its
-   affiliates. Other names may be trademarks of their respective
-   owners.
-   
+   Welcome to the MariaDB monitor.  Commands end with ; or \g.
+   Your MariaDB connection id is 31
+   Server version: 10.5.8-MariaDB-log Source distribution
+    
+   Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+     
    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-   
-   mysql >
+     
+   MariaDB [(none)]>
    ```
 
-For more information about connecting to a MariaDB DB instance, see [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)\. For information on connection issues, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
+For more information about connecting to a MariaDB DB instance, see [Connecting to a DB instance running the MariaDB database engine](USER_ConnectToMariaDBInstance.md)\. If you can't connect to your DB instance, see [Can't connect to Amazon RDS DB instance](CHAP_Troubleshooting.md#CHAP_Troubleshooting.Connecting)\.
 
 ## Deleting a DB instance<a name="CHAP_GettingStarted.Deleting.MariaDB"></a>
 

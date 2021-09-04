@@ -9,7 +9,6 @@
 + [Scenarios for accessing a DB instance in a VPC](#CHAP_CommonTasks.Connect.ScenariosForAccess)
 + [Connecting to a DB instance that is running a specific DB engine](#CHAP_CommonTasks.Connect.DBEngine)
 + [Managing connections with RDS Proxy](#CHAP_CommonTasks.Connect.RDSProxy)
-+ [Managing connections with Amazon RDS Proxy](rds-proxy.md)
 
 ## Finding the connection information for an Amazon RDS DB instance<a name="CHAP_CommonTasks.Connect.EndpointAndPort"></a>
 
@@ -135,4 +134,4 @@ For information about connecting to a DB instance that is running a specific DB 
 ## Managing connections with RDS Proxy<a name="CHAP_CommonTasks.Connect.RDSProxy"></a>
 
 You can also use Amazon RDS Proxy to manage connections to MySQL and PostgreSQL DB instances\. RDS Proxy allows applications to pool and share database connections to improve scalability\. 
-+ [Managing connections with Amazon RDS Proxy](rds-proxy.md)
++ [Using Amazon RDS Proxy](rds-proxy.md)

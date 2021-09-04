@@ -64,6 +64,9 @@ The following are some limitations when working with Multi\-AZ deployments on RD
 + Multi\-AZ with Always On Availability Groups \(AGs\) doesn't support Kerberos authentication for the availability group listener\. This is because the listener has no Service Principal Name \(SPN\)\.
 + You can't rename a database on a SQL Server DB instance that is in a SQL Server Multi\-AZ deployment\. If you need to rename a database on such an instance, first turn off Multi\-AZ for the DB instance, then rename the database\. Finally, turn Multi\-AZ back on for the DB instance\. 
 + You can only restore Multi\-AZ DB instances that are backed up using the full recovery model\.
++ Multi\-AZ deployments have a limit of 100 SQL Server Agent jobs\.
+
+  If you need a higher limit, request an increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
 
 The following are some notes about working with Multi\-AZ deployments on RDS for Microsoft SQL Server DB instances:
 + Amazon RDS exposes the Always On AGs [availability group listener endpoint](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/listeners-client-connectivity-application-failover)\. The endpoint is visible in the console, and is returned by the `DescribeDBInstances` API as an entry in the endpoints field\.

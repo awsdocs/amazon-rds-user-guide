@@ -3,7 +3,7 @@
 To use Performance Insights, enable it on your DB instance\. If needed, you can disable it later\. Enabling and disabling Performance Insights doesn't cause downtime, a reboot, or a failover\.
 
 **Note**  
-Changing Performance Schema, which an optional performance tool used by Amazon RDS for MariaDB or MySQL, does require a reboot\.
+Performance Schema is an optional performance tool used by Amazon RDS for MariaDB or MySQL\. If you turn Performance Schema on or off, you need to reboot\. If you turn Performance Insights on or off, however, you don't need to reboot\.
 
 The Performance Insights agent consumes limited CPU and memory on the DB host\. When the DB load is high, the agent limits the performance impact by collecting data less frequently\.
 

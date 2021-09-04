@@ -12,5 +12,6 @@ The options and parameters that are available depend on the DB engine and DB eng
 + [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)
 + [Creating Amazon RDS resources with AWS CloudFormation](creating-resources-with-cloudformation.md)
 + [Connecting to an Amazon RDS DB instance](CHAP_CommonTasks.Connect.md)
++ [Using Amazon RDS Proxy](rds-proxy.md)
 + [Working with option groups](USER_WorkingWithOptionGroups.md)
 + [Working with DB parameter groups](USER_WorkingWithParamGroups.md)

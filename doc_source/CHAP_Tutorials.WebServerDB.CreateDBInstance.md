@@ -23,7 +23,7 @@ Before you begin this step, make sure that you have a VPC with both public and p
 1. In the **Settings** section, set these values:
    + **DB instance identifier** – **tutorial\-db\-instance**
    + **Master username** – **tutorial\_user**
-   + **Auto generate a password** – Disable the option\.
+   + **Auto generate a password** – Clear the check box\.
    + **Master password** – Choose a password\.
    + **Confirm password** – Retype the password\.  
 ![\[Settings sections\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Tutorial_WebServer_Settings.png)

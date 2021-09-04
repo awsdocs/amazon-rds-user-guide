@@ -66,7 +66,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
 |  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
 |  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
-|  Amazon RDS Proxy  |  No  |  —  |  [Managing connections with Amazon RDS Proxy](rds-proxy.md)  | 
+|  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
 |  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 

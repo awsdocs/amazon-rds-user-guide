@@ -8,13 +8,14 @@ You can specify any currently supported Oracle Database version when creating a 
 
 For Amazon RDS for Oracle Database 19c \(19\.0\.0\.0\), Oracle Database 18c \(18\.0\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\), Amazon RDS incorporates bug fixes from Oracle by using Release Updates \(RUs\) and Release Updates Revisions \(RURs\)\. We don't support applying one\-off patches to individual DB instances\.
 
-To find what RUs and RURs are applied to Amazon RDS for Oracle Database 19c \(19\.0\.0\), Oracle Database 18c \(18\.0\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\), see the following table\. 
+To find what RUs and RURs are applied to Amazon RDS for Oracle Database 19c \(19\.0\.0\), Oracle Database 18c \(18\.0\.0\.0\), and Oracle Database 12c Release 2 \(12\.2\.0\.1\), see the following table\.
 
 
 ****  
 
 |  RU and RUR  |  Oracle Database 19c \(19\.0\.0\.0\)  |  Oracle Database 18c \(18\.0\.0\.0\)  |  Oracle Database 12c Release 2 \(12\.2\.0\.1\)  | 
 | --- | --- | --- | --- | 
+|  2021 July  |  [Version 19\.0\.0\.0\.ru\-2020\-07\.rur\-2020\-07\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-07.rur-2020-07.r1)  |  N/A  |  [Version 12\.2\.0\.1\.ru\-2021\-07\.rur\-2021\-07\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-07.rur-2021-07.r1)  | 
 |  2021 April  |  [Version 19\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-04.rur-2021-04.r1)  |  [Version 18\.0\.0\.0\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-04.rur-2021-04.r1)  |  [Version 12\.2\.0\.1\.ru\-2021\-04\.rur\-2021\-04\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-04.rur-2021-04.r1)  | 
 |  2021 January  |  [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r2](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r2) and [Version 19\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2021-01.rur-2021-01.r1)  |  [Version 18\.0\.0\.0\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2021-01.rur-2021-01.r1)  |  [Version 12\.2\.0\.1\.ru\-2021\-01\.rur\-2021\-01\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2021-01.rur-2021-01.r1)  | 
 |  2020 October  |  [19\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.19.0.0.0.md#Appendix.Oracle.RU-RUR.19.0.0.0.ru-2020-10.rur-2020-10.r1)  |  [18\.0\.0\.0\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.18.0.0.0.md#Appendix.Oracle.RU-RUR.18.0.0.0.ru-2020-10.rur-2020-10.r1)  |  [12\.2\.0\.1\.ru\-2020\-10\.rur\-2020\-10\.r1](Appendix.Oracle.RU-RUR.12.2.0.1.md#Appendix.Oracle.RU-RUR.12.2.0.1.ru-2020-10.rur-2020-10.r1)  | 
@@ -41,6 +42,7 @@ To find what Oracle Patch Set Updates \(PSUs\) are applied to Amazon RDS for Ora
 
 |  PSU  |  Oracle Database 12c Release 1 \(12\.1\.0\.2\)  |  Oracle Database 11g \(11\.2\.0\.4\)  | 
 | --- | --- | --- | 
+|  2021 July  |  [12\.1\.0\.2\.v25](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v25)  |  N/A  | 
 |  2021 April  |  [12\.1\.0\.2\.v24](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v24)  |  N/A  | 
 |  2021 January  |  [12\.1\.0\.2\.v23](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v23)  |  N/A  | 
 |  2020 October  |  [12\.1\.0\.2\.v22](Appendix.Oracle.PatchComposition.12.1.0.2.md#Appendix.Oracle.PatchComposition.12.1.0.2.v22)  |  [11\.2\.0\.4\.v26](Appendix.Oracle.PatchComposition.11.2.0.4.md#Appendix.Oracle.PatchComposition.11.2.0.4.v26)  | 

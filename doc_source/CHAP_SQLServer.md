@@ -43,7 +43,7 @@ There are also advanced administrative tasks for working with SQL Server DB inst
 + [Using Windows Authentication with a SQL Server DB instance](USER_SQLServerWinAuth.md)
 + [Accessing the tempdb database](SQLServer.TempDB.md)
 
-## Limits for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.FeatureSupport.Limits"></a>
+## Limitations for Microsoft SQL Server DB instances<a name="SQLServer.Concepts.General.FeatureSupport.Limits"></a>
 
 The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some limitations that you should be aware of:
 + The maximum number of databases supported on a DB instance depends on the instance class type and the availability mode—Single\-AZ, Multi\-AZ Database Mirroring \(DBM\), or Multi\-AZ Availability Groups \(AGs\)\. The Microsoft SQL Server system databases don't count toward this limit\. 
@@ -71,7 +71,11 @@ The Amazon RDS implementation of Microsoft SQL Server on a DB instance has some 
 + Make sure that you use these guidelines when setting the following DB parameters on RDS for SQL Server:
   + `max server memory (mb)` >= 256 MB
   + `max worker threads` >= \(number of logical CPUs \* 7\)
-  + For the upper limit on `max worker threads`, see [Configure the max worker threads server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option) in the Microsoft documentation\.
+
+    For the upper limit on `max worker threads`, see [Configure the max worker threads server configuration option](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option) in the Microsoft documentation\.
+**Note**  
+If you set `max worker threads` too high, the DB instance status is `incompatible-parameters` after the DB parameter group is applied\. Set `max worker threads` to a value within the limits\.  
+If you don't set the value correctly, the DB parameter group remains in the `pending-reboot` state even after you reboot the DB instance\.
 
   For more information on setting DB parameters, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 + The maximum storage size for SQL Server DB instances is the following: 
@@ -215,7 +219,7 @@ The following table displays the planned schedule of deprecations for major engi
 | --- | --- | 
 | July 12, 2022 |  Microsoft will stop critical patch updates for SQL Server 2012\. For more information, see [Microsoft SQL Server 2012](https://docs.microsoft.com/en-us/lifecycle/products/microsoft-sql-server-2012) in the Microsoft documentation\.  | 
 | June 1, 2022 |  Amazon RDS plans to end support of Microsoft SQL Server 2012 on RDS for SQL Server\. At that time, any remaining instances will be scheduled to migrate to SQL Server 2014 \(latest minor version available\)\. For more information, see [Announcement: Amazon RDS for SQL Server end of support for SQL Server 2012 major versions](http://forums.aws.amazon.com/ann.jspa?annID=8726)\. To avoid an automatic upgrade from Microsoft SQL Server 2012, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
-| September 1, 2021 | Amazon RDS is disabling the creation of new RDS for SQL Server DB instances using Microsoft SQL Server 2012\. For more information, see [Announcement: Amazon RDS for SQL Server end of support for SQL Server 2012 major versions](http://forums.aws.amazon.com/ann.jspa?annID=8726)\. | 
+| September 1, 2021 | Amazon RDS is starting to disable the creation of new RDS for SQL Server DB instances using Microsoft SQL Server 2012\. For more information, see [Announcement: Amazon RDS for SQL Server end of support for SQL Server 2012 major versions](http://forums.aws.amazon.com/ann.jspa?annID=8726)\. | 
 | July 12, 2019 |  The Amazon RDS team deprecated support for Microsoft SQL Server 2008 R2 in June 2019\. Remaining instances of Microsoft SQL Server 2008 R2 are migrating to SQL Server 2012 \(latest minor version available\)\.  To avoid an automatic upgrade from Microsoft SQL Server 2008 R2, you can upgrade at a time that is convenient to you\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.  | 
 | April 25, 2019 | Before the end of April 2019, you will no longer be able to create new Amazon RDS for SQL Server database instances using Microsoft SQL Server 2008R2\. | 
 

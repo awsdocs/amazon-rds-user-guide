@@ -7,7 +7,8 @@ When you create a SQL Server DB instance, the master user name is enrolled in th
 SQL Server Agent can run a job on a schedule, in response to a specific event, or on demand\. For more information, see [SQL Server Agent](http://msdn.microsoft.com/en-us/library/ms189237) in the Microsoft documentation\.
 
 **Note**  
-Avoid scheduling jobs to run during the maintenance and backup windows for your DB instance\. The maintenance and backup processes that are launched by AWS could interrupt a job or cause it to be canceled\.
+Avoid scheduling jobs to run during the maintenance and backup windows for your DB instance\. The maintenance and backup processes that are launched by AWS could interrupt a job or cause it to be canceled\.  
+Multi\-AZ deployments have a limit of 100 SQL Server Agent jobs\. If you need a higher limit, request an increase by contacting AWS Support\. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and choose **Create case**\. Choose **Service limit increase**\. Complete and submit the form\.
 
 To view the history of an individual SQL Server Agent job in SQL Server Management Studio \(SSMS\), open Object Explorer, right\-click the job, and then choose **View History**\.
 

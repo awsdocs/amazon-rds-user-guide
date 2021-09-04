@@ -3,9 +3,11 @@
 The basic building block of Amazon RDS is the DB instance\. Your Amazon RDS DB instance is similar to your on\-premises Oracle database\. 
 
 **Important**  
-Before you can create or connect to a DB instance, you must complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
+Before you can create or connect to a DB instance, make sure to complete the tasks in [Setting up for Amazon RDS](CHAP_SettingUp.md)\.
 
-In this topic, you create a sample Oracle DB instance\. You then connect to the DB instance and run a simple query\. Finally, you delete the sample DB instance\. 
+There's no charge for creating an AWS account\. However, by completing this tutorial, you might incur costs for the AWS resources that you use\. You can delete these resources after you complete the tutorial if they are no longer needed\.
+
+In this topic, you create a sample Oracle DB instance and connect to it\. Finally, you delete the sample DB instance\. 
 
 ## Creating a sample Oracle DB instance<a name="CHAP_GettingStarted.Creating.Oracle"></a>
 
@@ -14,14 +16,11 @@ The DB instance is where you run your Oracle databases\.
 **Note**  
 RDS for Oracle supports a single\-tenant architecture, where a pluggable database \(PDB\) resides in a multitenant container database \(CDB\)\. For more information, see [RDS for Oracle architecture](Oracle.Concepts.single-tenant.md)\.
 
-### Console<a name="CHAP_GettingStarted.Creating.Oracle.Console"></a>
+You can use **Easy create** to create a DB instance running Oracle with the AWS Management Console\. With **Easy create**, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default settings for the other configuration options\. When you use **Standard create** instead of **Easy create**, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
 
-You can create a DB instance running Oracle with the AWS Management Console with **Easy create** enabled or not enabled\. With **Easy create** enabled, you specify only the DB engine type, DB instance size, and DB instance identifier\. **Easy create** uses the default setting for other configuration options\. With **Easy create** not enabled, you specify more configuration options when you create a database, including ones for availability, security, backups, and maintenance\.
+In this example, you use **Easy create** to create a DB instance running the Oracle database engine with a db\.m4\.large DB instance class\.
 
-For this example, you use **Easy create** to create a DB instance running the Oracle database engine with a db\.m4\.large DB instance class\.
-
-**Note**  
-For information about creating DB instances with **Easy create** not enabled, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+For information about creating DB instances with **Standard create**, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. If you want to use free tier, use **Standard create**\.
 
 **To create an Oracle DB instance with Easy create enabled**
 
@@ -45,14 +44,23 @@ For information about creating DB instances with **Easy create** not enabled, se
    The **Create database** page should look similar to the following image\.  
 ![\[Create database page\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-oracle.png)
 
-1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** check box is chosen\.
+1. To use an automatically generated master password for the DB instance, make sure that the **Auto generate a password** box is selected\.
 
-   To enter your master password, clear the **Auto generate a password** check box, and then enter the same password in **Master password** and **Confirm password**\.
+   To enter your master password, clear the **Auto generate a password** box, and then enter the same password in **Master password** and **Confirm password**\.
 
 1. \(Optional\) Open **View default settings for Easy create**\.  
 ![\[Display Easy create settings for Oracle DB\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-view-default-settings.png)
 
-   You can examine the default settings that are used when **Easy create** is enabled\. If you want to change one or more settings during database creation, choose **Standard create** to set them\. The **Editable after database creation** column shows which options you can change after database creation\. To change a setting with **No** in that column, use **Standard create**\. For settings with **Yes** in that column, you can either use **Standard create** or modify the DB instance after it's created to change the setting\.
+   You can examine the default settings used with **Easy create**\. The **Editable after database is created** column shows which options you can change after database creation\.
+   + To change settings with **No** in that column, use **Standard create**\. 
+   + To change settings with **Yes** in that column, either use **Standard create**, or modify the DB instance after it is created to change the settings\.
+
+   The following are important considerations for changing the default settings:
+   + In some cases, you might want your DB instance to use a specific virtual private cloud \(VPC\) based on the Amazon VPC service\. Or you might require a specific subnet group or security group\. If so, use **Standard create** to specify these resources\. You might have created these resources when you set up for Amazon RDS\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+   + If you want to be able to access the DB instance from a client outside of its VPC, use **Standard create** to set **Public access** to **Yes**\.
+
+     If the DB instance should be private, leave **Public access** set to **No**\.
+   + If you want to use free tier, use **Standard create** to set the Oracle version lower than version 12\.2, and then choose **Free tier** in **Templates**\.
 
 1. Choose **Create database**\.
 
@@ -63,20 +71,25 @@ For information about creating DB instances with **Easy create** not enabled, se
 
    To connect to the DB instance as the master user, use the user name and password that appear\.
 **Important**  
-You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+You can't view the master user password again\. If you don't record it, you might have to change it\.   
+If you need to change the master user password after the DB instance is available, you can modify the DB instance to do so\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 1. For **Databases**, choose the name of the new Oracle DB instance\.
 
-   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **creating** until the DB instance is ready to use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
+   On the RDS console, the details for new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is ready to use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and the amount of storage, it can take up to 20 minutes before the new instance is available\.   
 ![\[Displays the DB instance details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Oracle-Launch05.png)
 
 ## Connecting to your sample Oracle DB instance<a name="CHAP_GettingStarted.Connecting.Oracle"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure, you connect to your sample DB instance by using the Oracle sqlplus command line utility\. To download a stand\-alone version of this utility, see [SQL\*Plus User's Guide and Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/SQL-Plus-instant-client.html#GUID-9DC272F8-0805-4582-87C6-67B2BC816A2C)\.
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the DB instance\. In this procedure, you connect to your sample DB instance by using the Oracle sqlplus command line utility\. To download a standalone version of this utility, see [SQL\*Plus User's Guide and Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqpug/SQL-Plus-instant-client.html#GUID-9DC272F8-0805-4582-87C6-67B2BC816A2C)\.
 
 **To connect to a DB instance using SQL\*Plus**
 
-1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
+1. Make sure your DB instance is associated with a security group that provides access to it\. For more information, see [Provide access to your DB instance in your VPC by creating a security group](CHAP_SettingUp.md#CHAP_SettingUp.SecurityGroup)\.
+
+   If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+
+1. Find the endpoint \(DNS name\) and port number for your DB instance\. 
 
    1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
 
@@ -91,9 +104,9 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 
    1. On the **Configuration** tab, copy the following pieces of information:
       + DB name \(not the DB instance ID\)
-      + Master username
+      + Master user name
 
-      You need both the DB name and the master username to connect to the DB instance\. 
+      You need both the DB name and the master user name to connect to the DB instance\. 
 
 1. Enter the following command on one line at a command prompt to connect to your DB instance by using the sqlplus utility\. Use the following values:
    + For `dbuser`, enter the name of the master user that you copied in the preceding steps\.
