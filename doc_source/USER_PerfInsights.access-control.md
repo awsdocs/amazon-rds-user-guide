@@ -39,7 +39,7 @@ For users who don't have full access with the `AmazonRDSFullAccess` policy, you 
            {
                "Effect": "Allow",
                "Action": "pi:*",
-               "Resource": "arn:aws::pi:*:*:metrics/rds/*"
+               "Resource": "arn:aws:pi:*:*:metrics/rds/*"
            }
        ]
    }
