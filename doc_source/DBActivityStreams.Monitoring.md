@@ -450,9 +450,9 @@ The `databaseActivityEvents` JSON object contains the following information\.
  An encrypted string representing one or more activity events\. It's represented as a base64 byte array\. When you decrypt the string, the result is a record in JSON format with fields as shown in the examples in this section\.
 
 **key**  
- The encrypted data key used to encrypt the `databaseActivityEvents` string\. This is the same AWS KMS customer master key \(CMK\) that you provided when you started the database activity stream\.
+ The encrypted data key used to encrypt the `databaseActivityEvents` string\. This is the same AWS KMS key that you provided when you started the database activity stream\.
 
- The following example shows the format of this record\.s
+ The following example shows the format of this record\.
 
 ```
 {
@@ -465,7 +465,7 @@ The `databaseActivityEvents` JSON object contains the following information\.
 
 Take the following steps to decrypt the contents of the `databaseActivityEvents` field:
 
-1.  Decrypt the value in the `key` JSON field using the AWS KMS CMK you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
+1.  Decrypt the value in the `key` JSON field using the KMS key you provided when starting database activity stream\. Doing so returns the data encryption key in clear text\. 
 
 1.  Base64\-decode the value in the `databaseActivityEvents` JSON field to obtain the ciphertext, in binary format, of the audit payload\. 
 

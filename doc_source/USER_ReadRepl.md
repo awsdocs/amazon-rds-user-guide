@@ -103,7 +103,7 @@ Creating your read replica as a Multi\-AZ DB instance is independent of whether 
 
    1. Choose **Enable encryption**\.
 
-   1. For **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\)\.
+   1. For **AWS KMS key**, choose the AWS KMS key identifier of the KMS key\.
 **Note**  
  The source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 

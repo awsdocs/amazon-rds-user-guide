@@ -43,7 +43,7 @@ To tell if your working set is almost all in memory, check the ReadIOPS metric \
 
 ## Using Enhanced Monitoring to identify operating system issues<a name="CHAP_BestPractices.EnhancedMonitoring"></a>
 
-When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)\.
+When Enhanced Monitoring is enabled, Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information about Enhanced Monitoring, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 ## Using metrics to identify performance issues<a name="CHAP_BestPractices.UsingMetrics"></a>
 

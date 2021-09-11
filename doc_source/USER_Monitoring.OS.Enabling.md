@@ -46,7 +46,7 @@ The user that enables Enhanced Monitoring must be granted the `PassRole` permiss
 
 ## Enabling and disabling Enhanced Monitoring<a name="USER_Monitoring.OS.Enabling.Procedure"></a>
 
-You can enable and disable Enhanced Monitoring using the AWS Management Console, AWS CLI, or RDS API\.
+You can enable and disable Enhanced Monitoring using the AWS Management Console, AWS CLI, or RDS API\. You choose the RDS instances on which you want to enable Enhanced Monitoring\. You can set different granularities for metric collection on each instance\.
 
 ### Console<a name="USER_Monitoring.OS.Enabling.Procedure.Console"></a>
 

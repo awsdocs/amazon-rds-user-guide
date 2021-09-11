@@ -34,7 +34,7 @@ With CloudWatch Logs, you can do the following:
 + Search and filter log data\.
 + Share log data between accounts\.
 + Export logs to Amazon S3\.
-+ Stream data to Amazon Elasticsearch Service\.
++ Stream data to Amazon OpenSearch Service\.
 + Process log data in real time with Amazon Kinesis Data Streams\.
 
  Amazon RDS publishes each SQL Server database log as a separate database stream in the log group\. For example, if you publish error logs, error data is stored in an error log stream in the `/aws/rds/instance/my_instance/error` log group\. 

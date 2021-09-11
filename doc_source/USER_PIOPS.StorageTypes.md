@@ -16,7 +16,7 @@ Scaling storage for Amazon RDS for Microsoft SQL Server DB instances is supporte
 
 To monitor the amount of free storage for your DB instance so you can respond when necessary, we recommend that you create an Amazon CloudWatch alarm\. For more information on setting CloudWatch alarms, see [Using CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AlarmThatSendsEmail.html)\.
 
-In most cases, scaling storage doesn't require any outage and doesn't degrade performance of the server\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\.
+Scaling storage usually doesn't cause any outage or performance degradation of the DB instance\. After you modify the storage size for a DB instance, the status of the DB instance is **storage\-optimization**\.
 
 **Note**  
 Storage optimization can take several hours\. You can't make further storage modifications for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.

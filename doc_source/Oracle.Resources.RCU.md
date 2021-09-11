@@ -185,5 +185,5 @@ The following are some known issues for working with RCU, with some troubleshoot
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
 
-## Related topics<a name="w402aac31c57c15c19"></a>
+## Related topics<a name="w405aac31c57c15c19"></a>
 + [Oracle licensing options](Oracle.Concepts.Licensing.md)

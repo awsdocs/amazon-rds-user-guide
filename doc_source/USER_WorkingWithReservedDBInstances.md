@@ -92,11 +92,11 @@ For Amazon RDS pricing information, see the [Amazon RDS product page](https://aw
 
 ### Deleting a reserved DB instance<a name="USER_WorkingWithReservedDBInstances.Cancelling"></a>
 
-The terms for a reserved DB instance involve a one\-year or three\-year commitment\. You can't cancel a reserved DB instance\. However, you can delete a DB instance that is covered by a reserved DB instance discount\. The process for deleting a DB instance that is covered by a reserved DB instance discount is the same as for any other DB instance\. 
+The terms for a reserved DB instance involve a one\-year or three\-year commitment\. You can't cancel a reserved DB instance\. However, you can delete a DB instance that is covered by a reserved DB instance discount\. The process for deleting a DB instance that is covered by a reserved DB instance discount is the same as for any other DB instance\.
 
-Your upfront payment for a reserved DB instance reserves the resources for your use\. Because these resources are reserved for you, you are billed for the resources regardless of whether you use them\. 
+You're billed for the upfront costs regardless of whether you use the resources\.
 
-If you delete a DB instance that is covered by a reserved DB instance discount, you can launch another DB instance with compatible specifications\. In this case, you continue to get the discounted rate during the reservation term \(one or three years\)\. 
+If you delete a DB instance that is covered by a reserved DB instance discount, you can launch another DB instance with compatible specifications\. In this case, you continue to get the discounted rate during the reservation term \(one or three years\)\.
 
 ## Working with reserved DB instances<a name="USER_WorkingWithReservedDBInstances.WorkingWith"></a>
 

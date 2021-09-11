@@ -418,7 +418,7 @@ FROM   DUAL;
 
 ### Downloading a series of archived redo logs<a name="Appendix.Oracle.CommonDBATasks.download-redo-logs.series"></a>
 
-To download a series of archived redo logs to the `/rdsdbdata/log/arch` directory, use `download_logs_in_seqnum_range`\. This procedure has the following parameter\.
+To download a series of archived redo logs to the `/rdsdbdata/log/arch` directory, use `download_logs_in_seqnum_range`\. Your download is limited to 300 logs per request\. The `download_logs_in_seqnum_range` procedure has the following parameters\.
 
 
 ****  

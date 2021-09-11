@@ -52,7 +52,7 @@ After you add the native backup and restore option, you don't need to restart yo
 
      1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. Choose **No** to leave the backup file unencrypted\.
 
-        If you choose **Yes**, choose an encryption key for **Master Key**\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
+        If you choose **Yes**, choose an encryption key for **AWS KMS key**\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
 
 1. Choose **Add option**\.
 

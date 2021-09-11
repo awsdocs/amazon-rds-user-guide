@@ -194,3 +194,84 @@ If you have enabled a Local Zone, you can choose an Availability Zone group on t
 
 **Note**  
 If you created this VPC to complete [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md), create the DB instance by following the instructions in [Create a DB instance](CHAP_Tutorials.WebServerDB.CreateDBInstance.md)\.
+
+## Deleting the VPC<a name="CHAP_Tutorials.WebServerDB.CreateVPC.Delete"></a>
+
+After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
+
+**Note**  
+If you addded resrouces in the Amazon VPC you created for this tutorial, such as Amazon EC2 instances or Amazon RDS DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+
+**To delete a VPC and related resources**
+
+1. Delete the DB subnet group\.
+
+   1. Open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+   1. In the navigation pane, choose **Subnet groups**\.
+
+   1. Select the DB subnet group you want to delete, such as **tutorial\-db\-subnet\-group**\.
+
+   1. Choose **Delete**, and then choose **Delete** in the confirmation window\.
+
+1. Note the VPC ID\.
+
+   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+   1. Choose **VPC Dashboard**, and then choose **VPCs**\.
+
+   1. In the list, identify the VPC you created, such as **tutorial\-vpc**\.
+
+   1. Note the **VPC ID** of the VPC you created\. You will need the VPC ID in subsequent steps\.
+
+1. Delete the security groups\.
+
+   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+   1. Choose **VPC Dashboard**, and then choose **Security Groups**\.
+
+   1. Select the security group for the Amazon RDS DB instance, such as **tutorial\-db\-securitygroup**\.
+
+   1. From **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
+
+   1. On the **Security Groups** page, select the security group for the Amazon EC2 instance, such as **tutorial\-securitygroup**\.
+
+   1. From **Actions**, choose **Delete security groups**, and then choose **Delete** on the confirmation page\.
+
+1. Delete the NAT gateway\.
+
+   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+   1. Choose **VPC Dashboard**, and then choose **NAT Gateways**\.
+
+   1. Select the NAT gateway of the VPC you created\. Use the VPC ID to identify the correct NAT gateway\.
+
+   1. From **Actions**, choose **Delete NAT gateway**\.
+
+   1. On the confirmation page, enter **delete**, and then choose **Delete**\.
+
+1. Delete the VPC\.
+
+   1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
+
+   1. Choose **VPC Dashboard**, and then choose **VPCs**\.
+
+   1. Select the VPC you want to delete, such as **tutorial\-vpc**\.
+
+   1. From **Actions**, choose **Delete VPC**\.
+
+      The confirmation page shows other resources that are associated with the VPC that will also be deleted, including the subnets associated with it\.
+
+   1. On the confirmation page, enter **delete**, and then choose **Delete**\.
+
+1. Release the Elastic IP addresses\.
+
+   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+   1. Choose **EC2 Dashboard**, and then choose **Elastic IPs**\.
+
+   1. Select the Elastic IP address you want to release\.
+
+   1. From **Actions**, choose **Release Elastic IP addresses**\.
+
+   1. On the confirmation page, choose **Release**\.

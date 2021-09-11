@@ -42,7 +42,7 @@ You can create a read replica across AWS Regions using the AWS Management Consol
 
    1. Choose **Enable encryption**\.
 
-   1. For **Master key**, choose the AWS Key Management Service \(AWS KMS\) key identifier of the customer master key \(CMK\) of the destination AWS Region\.
+   1. For **AWS KMS key**, choose the AWS KMS key identifier of the KMS key in the destination AWS Region\.
 **Note**  
  To create an encrypted read replica, the source DB instance must be encrypted\. To learn more about encrypting the source DB instance, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
@@ -90,7 +90,7 @@ The following parameters are also required for creating an encrypted read replic
 +  `--source-region` – The AWS Region of the source DB instance\.
 
   If `--source-region` isn't specified, you must specify a `--pre-signed-url` value\. A presigned URL is a URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region\. For more information about presigned URLs, see [ `CreateDBInstanceReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
-+  `--kms-key-id` – The AWS KMS key identifier for the customer master key \(CMK\) to use to encrypt the read replica in the destination AWS Region\.
++  `--kms-key-id` – The AWS KMS key identifier of the KMS key to use to encrypt the read replica in the destination AWS Region\.
 
 **Example of an encrypted cross\-Region read replica**  
 The following code creates an encrypted read replica in the US West \(Oregon\) Region from a source DB instance in the US East \(N\. Virginia\) Region\.  

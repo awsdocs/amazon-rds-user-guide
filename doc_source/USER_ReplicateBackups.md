@@ -81,7 +81,7 @@ You can enable backup replication for a new or existing DB instance:
 
 1. Choose the **Replicated backup retention period**\.
 
-1. If you've enabled encryption on the source DB instance, choose the **Master key** for encrypting the backups\.
+1. If you've enabled encryption on the source DB instance, choose the **AWS KMS key** for encrypting the backups\.
 
 1. Choose **Save**\.
 
@@ -91,7 +91,7 @@ In the source Region, replicated backups are listed on the **Current Region** ta
 
 Enable backup replication by using the [ `start-db-instance-automated-backups-replication`](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html) AWS CLI command\.
 
-The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. It also encrypts the replicated backups, using an AWS KMS customer master key in the destination Region\.
+The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. It also encrypts the replicated backups, using an AWS KMS key in the destination Region\.
 
 **Note**  
 If you encrypt the backups, you must also include the `--source-region` option\. Specifying the source AWS Region autogenerates a presigned URL that is a valid request for the operation that can be executed in the source Region\.  

@@ -25,7 +25,7 @@ The following screenshot shows the **Performance Insights** section\.
 
 If you choose **Enable Performance Insights**, you have the following options:
 + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-+ **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Configuring a KMS policy for Performance Insights](USER_PerfInsights.access-control.md#USER_PerfInsights.access-control.cmk-policy)\.
++ **AWS KMS key** – Specify your AWS KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Configuring an AWS KMS policy for Performance Insights](USER_PerfInsights.access-control.md#USER_PerfInsights.access-control.cmk-policy)\.
 
 ### Enabling or disabling Performance Insights when modifying an instance<a name="USER_PerfInsights.Enabling.Console.Modifying"></a>
 
@@ -43,7 +43,7 @@ In the console, you can modify a DB instance to enable or disable Performance In
 
    If you choose **Enable Performance Insights**, you have the following options:
    + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
-   + **Master key** – Specify your AWS Key Management Service \(AWS KMS\) customer master key \(CMK\)\. Performance Insights encrypts all potentially sensitive data using your AWS KMS CMK\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+   + **AWS KMS key** – Specify your KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
 

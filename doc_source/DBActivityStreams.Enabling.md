@@ -20,12 +20,12 @@ Update the last archived time stamp
 
 1. For **Actions**, choose **Start activity stream**\. 
 
-   The **Start database activity stream: *name*** window appears, where *name* is your RDS instance\. 
+   The **Start database activity stream: *name*** window appears, where *name* is your RDS instance\.
 
 1. Enter the following settings:
-   + For **Master key**, choose a key from the list of AWS KMS customer master keys \(CMKs\)\.
+   + For **AWS KMS key**, choose a key from the list of AWS KMS keys\.
 
-     RDS for Oracle uses the master key to encrypt the key that in turn encrypts database activity\. Choose a master key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
+     RDS for Oracle uses the KMS key to encrypt the key that in turn encrypts database activity\. Choose a KMS key other than the default key\. For more information about encryption keys and AWS KMS, see [What is AWS Key Management Service?](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) in the *AWS Key Management Service Developer Guide\.*
    + For **Database activity events**, choose **Include Oracle native audit fields** to include Oracle\-specific audit fields in the stream\.
    + Choose **Immediately**\.
 
@@ -38,7 +38,7 @@ Update the last archived time stamp
 ## AWS CLI<a name="DBActivityStreams.Enabling-collapsible-section-E2"></a>
 
 To start database activity streams for an Oracle database, configure the database using the [start\-activity\-stream](https://docs.aws.amazon.com/cli/latest/reference/rds/start-activity-stream.html) AWS CLI command\.
-+ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key \(CMK\)\.
++ `--kms-key-id key` – Specifies the KMS key identifier for encrypting messages in the database activity stream\. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS key\.
 + `--resource-arn arn` – Specifies the Amazon Resource Name \(ARN\) of the DB instance\.
 + `--region` – Identifies the AWS Region for the DB instance\.
 + `--engine-native-audit-fields-included` – Includes engine\-specific unified auditing fields in the data stream\. To exclude these fields, specify `--no-engine-native-audit-fields-included` \(default\)\.

@@ -1,12 +1,12 @@
-# Support for Microsoft Distributed Transaction Coordinator in SQL Server<a name="Appendix.SQLServer.Options.MSDTC"></a>
+# Support for Microsoft Distributed Transaction Coordinator in RDS for SQL Server<a name="Appendix.SQLServer.Options.MSDTC"></a>
 
-A *distributed transaction* is a database transaction in which two or more network hosts are involved\. Amazon RDS for SQL Server supports distributed transactions among hosts, where a single host can be one of the following:
+A *distributed transaction* is a database transaction in which two or more network hosts are involved\. RDS for SQL Server supports distributed transactions among hosts, where a single host can be one of the following:
 + RDS for SQL Server DB instance
 + On\-premises SQL Server host
 + Amazon EC2 host with SQL Server installed
 + Any other EC2 host or RDS DB instance with a database engine that supports distributed transactions
 
-In RDS, starting with SQL Server 2012 \(version 11\.00\.5058\.0\.v1 and later\), all editions of SQL Server support distributed transactions\. The support is provided using Microsoft Distributed Transaction Coordinator \(MSDTC\)\. For in\-depth information about MSDTC, see [Distributed Transaction Coordinator](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms684146(v=vs.85)) in the Microsoft documentation\.
+In RDS, starting with SQL Server 2012 \(version 11\.00\.5058\.0\.v1 and later\), all editions of RDS for SQL Server support distributed transactions\. The support is provided using Microsoft Distributed Transaction Coordinator \(MSDTC\)\. For in\-depth information about MSDTC, see [Distributed Transaction Coordinator](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms684146(v=vs.85)) in the Microsoft documentation\.
 
 ## Limitations<a name="Appendix.SQLServer.Options.MSDTC.Limitations"></a>
 
@@ -14,7 +14,9 @@ The following limitations apply to using MSDTC on RDS for SQL Server:
 + MSDTC isn't supported on instances using SQL Server Database Mirroring\. For more information, see [Transactions \- availability groups and database mirroring](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/transactions-always-on-availability-and-database-mirroring?view=sql-server-ver15#non-support-for-distributed-transactions)\.
 + The `in-doubt xact resolution` parameter must be set to 1 or 2\. For more information, see [Modifying the parameter for MSDTC](#ModifyParam.MSDTC)\.
 + MSDTC requires all host names participating in distributed transactions to be resolvable using their computer names\. RDS automatically maintains this functionality for domain\-joined instances\. However, for standalone instances make sure to configure the DNS server manually\.
++ Java Database Connectivity \(JDBC\) XA transactions are supported for SQL Server 2017 version 14\.00\.3223\.3 and higher, and SQL Server 2019\.
 + Distributed transactions that depend on client dynamic link libraries \(DLLs\) on RDS instances aren't supported\.
++ Using custom XA dynamic link libraries isn't supported\.
 
 ## Enabling MSDTC<a name="Appendix.SQLServer.Options.MSDTC.Enabling"></a>
 
@@ -107,8 +109,6 @@ The following option settings are optional:
 + **Enable inbound connections** – Whether to allow inbound MSDTC connections to instances associated with this option group\.
 + **Enable outbound connections** – Whether to allow outbound MSDTC connections from instances associated with this option group\.
 + **Enable XA** – Whether to allow XA transactions\. For more information on the XA protocol, see [XA specification](https://publications.opengroup.org/c193)\.
-**Note**  
-Using custom XA dynamic link libraries isn't supported\.
 + **Enable SNA LU** – Whether to allow the SNA LU protocol to be used for distributed transactions\. For more information on SNA LU protocol support, see [Managing IBM CICS LU 6\.2 transactions](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms685136(v=vs.85)) in the Microsoft documentation\.
 
 #### Console<a name="Options.MSDTC.Add.Console"></a>
@@ -388,10 +388,14 @@ In Amazon RDS for SQL Server, you run distributed transactions in the same way a
 
   In this case, promotion is automatic and doesn't require you to make any intervention\. If there's only one resource manager within the transaction, no promotion is performed\. For more information about implicit transaction scopes, see [Implementing an implicit transaction using transaction scope](https://docs.microsoft.com/en-us/dotnet/framework/data/transactions/implementing-an-implicit-transaction-using-transaction-scope) in the Microsoft documentation\.
 
-  Promotable transactions are supported with these \.NET implementations: 
+  Promotable transactions are supported with these \.NET implementations:
   + Starting with ADO\.NET 2\.0, `System.Data.SqlClient` supports promotable transactions with SQL Server\. For more information, see [System\.Transactions integration with SQL Server](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/system-transactions-integration-with-sql-server) in the Microsoft documentation\.
   + ODP\.NET supports `System.Transactions`\. A local transaction is created for the first connection opened in the `TransactionsScope` scope to Oracle Database 11g release 1 \(version 11\.1\) and later\. When a second connection is opened, this transaction is automatically promoted to a distributed transaction\. For more information about distributed transaction support in ODP\.NET, see [Microsoft Distributed Transaction Coordinator integration](https://docs.oracle.com/en/database/oracle/oracle-data-access-components/18.3/ntmts/using-mts-with-oracledb.html) in the Microsoft documentation\.
 + Using the `BEGIN DISTRIBUTED TRANSACTION` statement\. For more information, see [BEGIN DISTRIBUTED TRANSACTION \(Transact\-SQL\)](https://docs.microsoft.com/en-us/sql/t-sql/language-elements/begin-distributed-transaction-transact-sql) in the Microsoft documentation\.
+
+## Using XA transactions<a name="MSDTC.XA"></a>
+
+Starting from RDS for SQL Server 2017 version14\.00\.3223\.3, you can control distributed transactions using JDBC\. When you set the `Enable XA` option setting to `true` in the `MSDTC` option, RDS automatically enables JDBC transactions and grants the `SqlJDBCXAUser` role to the `guest` user\. This allows executing distributed transactions through JDBC\. For more information, including a code example, see [Understanding XA transactions](https://docs.microsoft.com/en-us/sql/connect/jdbc/understanding-xa-transactions) in the Microsoft documentation\.
 
 ## Using transaction tracing<a name="MSDTC.Tracing"></a>
 

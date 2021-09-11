@@ -8,7 +8,7 @@ RDS on Outposts supports automated backups of DB instances\. Network connectivit
 
 RDS on Outposts supports automated maintenance and upgrades of DB instances\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
-RDS on Outposts uses encryption at rest for DB instances and DB snapshots using your AWS Key Management Service \(AWS KMS\) key\. For more information about encryption at rest, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+RDS on Outposts uses encryption at rest for DB instances and DB snapshots using your AWS KMS key\. For more information about encryption at rest, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 By default, EC2 instances in Outposts subnets can use the Amazon Route 53 DNS Service to resolve domain names to IP addresses\. You might encounter longer DNS resolution times with Route 53, depending on the path latency between your Outpost and the AWS Region\. In such cases, you can use the DNS servers installed locally in your on\-premises environment\. For more information, see [DNS](https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#dns) in the *AWS Outposts User Guide*\.
 
@@ -60,7 +60,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
 |  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
 |  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB instance to a specified time](USER_PIT.md)  | 
-|  Enhanced monitoring  |  No  |  —  |  [Tracking OS metrics using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
+|  Enhanced monitoring  |  No  |  —  |  [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  No  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.md#USER_LogAccess.Procedural.UploadtoCloudWatch)  | 
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 

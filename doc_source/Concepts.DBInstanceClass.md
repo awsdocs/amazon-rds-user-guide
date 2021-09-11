@@ -38,7 +38,7 @@ The following are the memory optimized DB instance classes available:
 + **db\.r3** – Instance classes that provide memory optimization\.
 
 The following are the burstable performance DB instance classes available:
-+ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
++ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous `db.t2` instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
 
 **Note**  

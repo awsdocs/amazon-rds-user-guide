@@ -67,7 +67,7 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
    1. Identify the S3 bucket where the snapshot is to be exported to\. The S3 bucket must be in the same AWS Region as the snapshot\. For more information, see [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)\.
 
-   1. Create an AWS Key Management Service \(AWS KMS\) customer master key \(CMK\) for the server\-side encryption\. The AWS KMS CMK is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+   1. Create an AWS KMS key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
    1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)\. 
 
@@ -234,7 +234,7 @@ The **Export to Amazon S3** console option appears only for snapshots that can b
    + If you created a role by following the steps in [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole), choose that role\.
    + If you didn't create a role that grants you write access to your chosen S3 bucket, choose **Create a new role** to create the role automatically\. Next, enter a name for the role in **IAM role name**\.
 
-1. For **Master key**, enter the ARN for the key to use for encrypting the exported data\.
+1. For **AWS KMS key**, enter the ARN for the key to use for encrypting the exported data\.
 
 1. Choose **Export to Amazon S3**\.
 
