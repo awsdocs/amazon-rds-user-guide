@@ -1,6 +1,6 @@
 # mysql\.rds\_rotate\_general\_log<a name="mysql_rds_rotate_general_log"></a>
 
-Rotates the `mysql.general_log` table to a backup table\. For more information, see [Accessing MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
+Rotates the `mysql.general_log` table to a backup table\. For more information, see [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
 
 ## Syntax<a name="mysql_rds_rotate_general_log-syntax"></a>
 

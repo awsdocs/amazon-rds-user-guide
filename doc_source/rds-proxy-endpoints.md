@@ -1,4 +1,4 @@
-# Endpoints for Amazon RDS Proxy<a name="rds-proxy-endpoints"></a>
+# Working with Amazon RDS Proxy endpoints<a name="rds-proxy-endpoints"></a>
 
  Following, you can learn about endpoints for RDS Proxy and how to use them\. By using endpoints, you can take advantage of the following capabilities: 
 +  You can use multiple endpoints with a proxy to monitor and troubleshoot connections from different applications independently\. 
@@ -43,7 +43,7 @@
 
  With RDS Proxy, you can set up access to an Aurora cluster or RDS instance in one VPC from resources such as EC2 instances in another VPC\. For example, your organization might have multiple applications that access the same database resources\. Each application might be in its own VPC\.  
 
- To enable cross\-VPC access, you create a new endpoint for the proxy\. If you aren't familiar with creating proxy endpoints, see [Endpoints for Amazon RDS Proxy](#rds-proxy-endpoints) for details\. The proxy itself resides in the same VPC as the Aurora DB cluster or RDS instance\. However, the cross\-VPC endpoint resides in the other VPC, along with the other resources such as the EC2 instances\. The cross\-VPC endpoint is associated with subnets and security groups from the same VPC as the EC2 and other resources\. These associations let you connect to the endpoint from the applications that otherwise can't access the database due to the VPC restrictions\. 
+ To enable cross\-VPC access, you create a new endpoint for the proxy\. If you aren't familiar with creating proxy endpoints, see [Working with Amazon RDS Proxy endpoints](#rds-proxy-endpoints) for details\. The proxy itself resides in the same VPC as the Aurora DB cluster or RDS instance\. However, the cross\-VPC endpoint resides in the other VPC, along with the other resources such as the EC2 instances\. The cross\-VPC endpoint is associated with subnets and security groups from the same VPC as the EC2 and other resources\. These associations let you connect to the endpoint from the applications that otherwise can't access the database due to the VPC restrictions\. 
 
  The following steps explain how to create and access a cross\-VPC endpoint through RDS Proxy: 
 

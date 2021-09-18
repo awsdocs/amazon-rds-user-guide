@@ -72,7 +72,7 @@ For example, you might use this feature for a new mobile gaming application that
 With storage autoscaling enabled, when Amazon RDS detects that you are running out of free database space it automatically scales up your storage\. Amazon RDS starts a storage modification for an autoscaling\-enabled DB instance when these factors apply:
 + Free available space is less than 10 percent of the allocated storage\.
 + The low\-storage condition lasts at least five minutes\.
-+ At least six hours have passed since the last storage modification\.
++ At least six hours have passed since the last storage modification, or storage optimization has completed on the instance, whichever is longer\.
 
 The additional storage is in increments of whichever of the following is greater:
 + 5 GiB
@@ -86,9 +86,13 @@ For example, SQL Server Standard Edition on db\.m5\.xlarge has a default allocat
 **Note**  
 We recommend that you carefully choose the maximum storage threshold based on usage patterns and customer needs\. If there are any aberrations in the usage patterns, the maximum storage threshold can prevent scaling storage to an unexpectedly high value when autoscaling predicts a very high threshold\. After a DB instance has been autoscaled, its allocated storage can't be reduced\.
 
+### Limitations<a name="autoscaling-limitations"></a>
+
 The following limitations apply to storage autoscaling:
 + Autoscaling doesn't occur if the maximum storage threshold would be equaled or exceeded by the storage increment\.
-+ Autoscaling can't completely prevent storage\-full situations for large data loads, because further storage modifications can't be made until six hours after storage optimization has completed on the instance\. If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.
++ Autoscaling can't completely prevent storage\-full situations for large data loads\. This is because further storage modifications can't be made for either six \(6\) hours or until storage optimization has completed on the instance, whichever is longer\.
+
+   If you perform a large data load, and autoscaling doesn't provide enough space, the database might remain in the storage\-full state for several hours\. This can harm the database\.
 + If you start a storage scaling operation at the same time that Amazon RDS starts an autoscaling operation, your storage modification takes precedence\. The autoscaling operation is canceled\.
 + Autoscaling can't be used with magnetic storage\.
 + Autoscaling can't be used with the following previous\-generation instance classes that have less than 6 TiB of orderable storage: db\.m3\.large, db\.m3\.xlarge, and db\.m3\.2xlarge\.

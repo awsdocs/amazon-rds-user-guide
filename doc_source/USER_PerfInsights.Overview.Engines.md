@@ -13,3 +13,6 @@ For Amazon Aurora, see [Amazon Aurora DB engine support for Performance Insights
 |  Amazon RDS for Microsoft SQL Server  |  All versions except SQL Server 2008\.   | 
 |  Amazon RDS for PostgreSQL  |  Versions 10, 11, 12, and 13\.  | 
 |  Amazon RDS for Oracle  |  All versions\.   | 
+
+**Note**  
+Aurora Serverless doesn't support Performance Insights\.

@@ -25,6 +25,8 @@ To use the customer managed key for an RDS resource on your behalf, a user must 
 
 You can specify these required permissions in a key policy, or in an IAM policy if the key policy allows it\.
 
-You can make the IAM policy stricter in various ways\. For example, to allow the customer managed key to be used only for requests that originate in RDS , you can use the [ kms:ViaService condition key](https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-via-service) with the `rds.<region>.amazonaws.com` value\.
+You can make the IAM policy stricter in various ways\. For example, to allow the customer managed key to be used only for requests that originate in RDS, you can use the [ kms:ViaService condition key](https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-via-service) with the `rds.<region>.amazonaws.com` value\.
 
 You can also use the keys or values in the [encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/services-rds.html#rds-encryptioncontext) as a condition for using the customer managed key for cryptographic operations\.
+
+For more information, see [Allowing users in other accounts to use a KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html) in the *AWS Key Management Service Developer Guide*\.

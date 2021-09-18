@@ -14,7 +14,7 @@ The Oracle DB engine supports replica databases in mounted mode\. A mounted repl
 
 In some cases, a read replica resides in a different AWS Region from its primary DB instance\. In these cases, Amazon RDS sets up a secure communications channel between the primary DB instance and the read replica\. Amazon RDS establishes any AWS security configurations needed to enable the secure channel, such as adding security group entries\. For more information about cross\-Region read replicas, see [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)\.
 
-You can configure a read replica for a DB instance that also has a standby replica configured for high availability\. Replication with the standby replica is synchronous, and the standby replica can't serve read traffic\.
+You can configure a read replica for a DB instance that also has a standby replica configured for high availability in a Multi\-AZ deployment\. Replication with the standby replica is synchronous, and the standby replica can't serve read traffic\.
 
 ![\[Read replica and standby replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-and-standby-replica.png)
 

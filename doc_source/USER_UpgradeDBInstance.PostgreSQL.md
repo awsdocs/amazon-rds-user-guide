@@ -9,8 +9,8 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 **Major version upgrades**  
 *Major version upgrades* can contain database changes that are not backward\-compatible with existing applications\. As a result, you must manually perform major version upgrades of your DB instances\. You can initiate a major version upgrade by modifying your DB instance\. However, before you perform a major version upgrade, we recommend that you follow the steps described in [ Choosing a major version upgrade for PostgreSQL ](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion)\. During a major version upgrade, Amazon RDS also upgrades all of your in\-Region read replicas along with the primary DB instance\.
 
-**minor version upgrades**  
-In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. If your PostgreSQL DB instance is using read replicas, you must upgrade all of the read replicas before the minor version upgrade of the source instance\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
+**Minor version upgrades**  
+In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. If your PostgreSQL DB instance is using read replicas, you must upgrade all of the read replicas before the minor version upgrade of the primary DB instance\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
 **Topics**
 + [Overview of upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
@@ -29,7 +29,7 @@ Amazon RDS takes two DB snapshots during the upgrade process if your backup rete
 **Note**  
 Amazon RDS takes DB snapshots during the upgrade process only if you have set the backup retention period for your DB instance to a number greater than 0\. To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-When you upgrade the primary DB instance, all the in\-Region read replicas are also automatically upgraded\. After the upgrade workflow starts, the replica instances wait for the `pg_upgrade` to complete successfully on the primary DB instance\. Then the primary instance upgrade waits for the replica instance upgrades to complete\. You experience an outage until the upgrade is complete\. If you have any older replicas from earlier major versions they aren't upgraded\. 
+When you perform a major version upgrade of the primary DB instance, all the in\-Region read replicas are also automatically upgraded\. After the upgrade workflow starts, the read replicas wait for the `pg_upgrade` to complete successfully on the primary DB instance\. Then the primary DB instance upgrade waits for the read replica upgrades to complete\. You experience an outage until the upgrade is complete\.
 
 If your DB instance is in a Multi\-AZ deployment, both the primary writer DB instance and standby DB instances are upgraded\. The writer and standby DB instances are upgraded at the same time\. 
 
@@ -51,7 +51,7 @@ Major version upgrades can contain database changes that are not backward\-compa
 
 As a result, Amazon RDS doesn't apply major version upgrades automatically\. To perform a major version upgrade, you modify your DB instance manually\. Make sure that you thoroughly test any upgrade to verify that your applications work correctly before applying the upgrade to your production DB instances\. When you do a PostgreSQL major version upgrade, we recommend that you follow the steps described in [How to perform a major version upgrade](#USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process)\. 
 
-You can upgrade a PostgreSQL database to its next major version\. From some PostgreSQL database versions, you can skip to a higher major version when upgrading\. If your upgrade skips a major version, the read replicas are also upgraded to that target major version\. The following table lists the source PostgreSQL database versions and the associated target major versions available for upgrading\.
+You can upgrade a PostgreSQL DB instance to its next major version, and any read replicas of the DB instance are also upgraded to that next major version\. From some PostgreSQL database versions, you can skip to a higher major version when upgrading\. If your upgrade skips a major version, the read replicas are also upgraded to that target major version\. The following table lists the source PostgreSQL database versions and the associated target major versions available for upgrading\.
 
 **Note**  
 Upgrade targets are enabled to a higher version released at the same time as the source minor version or later\.  
@@ -114,9 +114,7 @@ aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoin
 
 We recommend the following process when upgrading an Amazon RDS PostgreSQL DB instance:
 
-1. **Have a version\-compatible parameter group ready** – If you are using a custom parameter group, you have two options\. You can specify a default parameter group for the new DB engine version\. Or you can create your own custom parameter group for the new DB engine version\. 
-
-   If you associate a new parameter group with a DB instance, reboot the database after the upgrade completes\. If the instance needs to be rebooted to apply the parameter group changes, the instance's parameter group status shows `pending-reboot`\. You can view an instance's parameter group status in the console or by using a describe command, such as [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)\.
+1. **Have a version\-compatible parameter group ready** – If you are using a custom parameter group, you have two options\. You can specify a default parameter group for the new DB engine version\. Or you can create your own custom parameter group for the new DB engine version\. For more information, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)
 
 1. **Check for unsupported DB instance classes** – Check that your database's instance class is compatible with the PostgreSQL version you are upgrading to\. For more information, see [Supported DB engines for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Support)\.
 
@@ -148,13 +146,13 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
    
 
-1. **Handle read replicas** – An upgrade also upgrades the in\-Region read replicas along with the primary instance\.
+1. **Handle read replicas** – An upgrade also upgrades the in\-Region read replicas along with the primary DB instance\.
 
-   You can't upgrade read replicas separately\. If you could, it could lead to situations where the primary and replica instances have different PostgreSQL major versions\. However, replica upgrades might increase downtime on the primary instance\. To prevent a replica upgrade, promote the replica to a standalone instance or delete it before starting the upgrade process\.
+   You can't upgrade read replicas separately\. If you could, it could lead to situations where the primary and replica DB instances have different PostgreSQL major versions\. However, read replica upgrades might increase downtime on the primary DB instance\. To prevent a read replica upgrade, promote the replica to a standalone instance or delete it before starting the upgrade process\.
 
-   The upgrade process recreates the replica's parameter group based on the replica instance's current parameter group\. You can apply a custom parameter group to a replica only after the upgrade completes by using the [ `modify-db-parameter-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-parameter-group.html) CLI command\.
+   The upgrade process recreates the read replica's parameter group based on the read replica's current parameter group\. You can apply a custom parameter group to a read replica only after the upgrade completes by modifying the read replica\.
 
-   Read replicas on the virtual private cloud \(VPC\) platform are upgraded but replicas on the EC2\-Classic platform aren't upgraded\. Any EC2\-Classic replicas are left in the replication terminated state after the upgrade process completes\. To move a DB instance from the EC2\-Classic platform into a VPC, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. For more information, see [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)\.
+   Read replicas on the virtual private cloud \(VPC\) platform are upgraded but replicas on the EC2\-Classic platform aren't upgraded\. Any EC2\-Classic replicas are left in the replication terminated state after the upgrade process completes\. To move a DB instance from the EC2\-Classic platform into a VPC, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. For more information about read replicas, see [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md)\.
 
 1. **Perform a backup** – We recommend that you perform a backup before performing the major version upgrade so that you have a known restore point for your database\. If your backup retention period is greater than 0, the upgrade process creates DB snapshots of your DB instance before and after upgrading\. To change your backup retention period, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. To perform a backup manually, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
@@ -203,7 +201,7 @@ During the major version upgrade process, you can't do a point\-in\-time restore
 
    If the precheck encounters an issue, it creates a log event indicating the upgrade precheck failed\. The precheck process details are in an upgrade log named `pg_upgrade_precheck.log` for all the databases of a DB instance\. Amazon RDS appends a timestamp to the file name\. For more information about viewing logs, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.
 
-   If a replica upgrade fails at precheck, replication on the failed replica is broken and the replica is put in the terminated state\. Delete the replica and recreate a new replica based on the upgraded primary instance\.
+   If a read replica upgrade fails at precheck, replication on the failed read replica is broken and the read replica is put in the terminated state\. Delete the read replica and recreate a new read replica based on the upgraded primary DB instance\.
 
    Resolve all of the issues identified in the precheck log and then retry the major version upgrade\. The following is an example of a precheck log\.
 
@@ -223,14 +221,14 @@ During the major version upgrade process, you can't do a point\-in\-time restore
    * The following issues in the database 'mydb' need to be corrected before upgrading:** The database has views or materialized views that depend on 'pg_stat_activity'. Drop the views.
    ```
 
-1. **If a replica upgrade fails while upgrading the database, resolve the issue** – A failed replica is placed in the `incompatible-restore` state and replication is terminated on the DB instance\. Delete the replica and recreate a new replica based on the upgraded primary instance\.
+1. **If a read replica upgrade fails while upgrading the database, resolve the issue** – A failed read replica is placed in the `incompatible-restore` state and replication is terminated on the DB instance\. Delete the read replica and recreate a new read replica based on the upgraded primary DB instance\.
 
-   A replica upgrade might fail for the following reasons:
-   + It was unable to catch up with the primary instance even after a wait time\.
+   A read replica upgrade might fail for the following reasons:
+   + It was unable to catch up with the primary DB instance even after a wait time\.
    + It was in a terminal or incompatible lifecycle state such as storage\-full, incompatible\-restore, and so on\.
-   + When the primary instance upgrade started, there was a separate minor version upgrade running on the replica\.
-   + The replica instance used incompatible parameters\.
-   + The replica instance was unable to communicate with the primary instance to synchronize the data folder\.
+   + When the primary DB instance upgrade started, there was a separate minor version upgrade running on the read replica\.
+   + The read replica used incompatible parameters\.
+   + The read replica was unable to communicate with the primary DB instance to synchronize the data folder\.
 
 1. **Upgrade your production instance** – When the dry\-run major version upgrade is successful, you should be able to upgrade your production database with confidence\. For more information, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 

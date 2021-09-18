@@ -506,7 +506,6 @@ For this example, assume that the following information is organized into pipe\-
 
    ```
    psql=> CREATE TABLE test (a text, b text, c text, d text, e text);
-   CREATE TABLE
    ```
 
 1. Use the following form of the [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3) function to import data from the Amazon S3 file\. 
@@ -548,7 +547,6 @@ Import the gzip file into your RDS for PostgreSQL DB instance as shown following
 
 ```
 psql=> CREATE TABLE test_gzip(id int, a text, b text, c text, d text);
-CREATE TABLE
 psql=> SELECT aws_s3.table_import_from_s3(
  'test_gzip', '', '(format csv)',
  'myS3Bucket', 'test-data.gz', 'us-east-2'

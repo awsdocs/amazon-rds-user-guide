@@ -327,7 +327,7 @@ You can use CDC and AWS Database Migration Service to enable ongoing replication
 
 ## Features not supported and features with limited support<a name="SQLServer.Concepts.General.FeatureNonSupport"></a>
 
-The following Microsoft SQL Server features are not supported on Amazon RDS: 
+The following Microsoft SQL Server features aren't supported on Amazon RDS: 
 + Backing up to Microsoft Azure Blob Storage
 + Buffer pool extension
 + Custom password policies
@@ -350,8 +350,9 @@ The following Microsoft SQL Server features are not supported on Amazon RDS:
 + T\-SQL endpoints \(all operations using CREATE ENDPOINT are unavailable\)
 + WCF Data Services
 
-The following Microsoft SQL Server features have limited support on Amazon RDS: 
+The following Microsoft SQL Server features have limited support on Amazon RDS:
 + Distributed queries/linked servers\. For more information, see [Implement linked servers with Amazon RDS for Microsoft SQL Server](http://aws.amazon.com/blogs/database/implement-linked-servers-with-amazon-rds-for-microsoft-sql-server/)\.
++ Common Runtime Language \(CLR\)\. On RDS for SQL Server 2016 and lower versions, CLR is supported in `SAFE` mode and using assembly bits only\. CLR isn't supported on RDS for SQL Server 2017 and higher versions\. For more information, see [Common Runtime Language Integration](https://docs.microsoft.com/en-us/sql/relational-databases/clr-integration/common-language-runtime-integration-overview) in the Microsoft documentation\.
 
 ## Multi\-AZ deployments using Microsoft SQL Server Database Mirroring or Always On availability groups<a name="SQLServer.Concepts.General.Mirroring"></a>
 

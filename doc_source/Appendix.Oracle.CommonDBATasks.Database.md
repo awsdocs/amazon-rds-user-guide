@@ -332,7 +332,7 @@ END;
 
 ### Accessing AWR reports from the console or CLI<a name="Appendix.Oracle.CommonDBATasks.AWRConsole"></a>
 
-To access AWR reports or export dump files, you can use the AWS Management Console or AWS CLI\. For more information, see [Downloading a database log file](USER_LogAccess.md#USER_LogAccess.Procedural.Downloading)\. 
+To access AWR reports or export dump files, you can use the AWS Management Console or AWS CLI\. For more information, see [Downloading a database log file](USER_LogAccess.Procedural.Downloading.md)\. 
 
 ## Adjusting database links for use with DB instances in a VPC<a name="Appendix.Oracle.CommonDBATasks.DBLinks"></a>
 

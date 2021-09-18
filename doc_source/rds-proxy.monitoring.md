@@ -10,7 +10,7 @@
 
  All RDS Proxy metrics are in the group `proxy`\. 
 
- Each proxy endpoint has its own CloudWatch metrics\. You can monitor the usage of each proxy endpoint independently\. For more information about proxy endpoints, see [Endpoints for Amazon RDS Proxy](rds-proxy-endpoints.md)\. 
+ Each proxy endpoint has its own CloudWatch metrics\. You can monitor the usage of each proxy endpoint independently\. For more information about proxy endpoints, see [Working with Amazon RDS Proxy endpoints](rds-proxy-endpoints.md)\. 
 
  You can aggregate the values for each metric using one of the following dimension sets\. For example, by using the `ProxyName` dimension set, you can analyze all the traffic for a particular proxy\. By using the other dimension sets, you can split the metrics in different ways\. You can split the metrics based on the different endpoints or target databases of each proxy, or the read/write and read\-only traffic to each database\. 
 +   Dimension set 1: `ProxyName` 
@@ -45,3 +45,9 @@
 |  QueryRequestsNoTLS  |  The number of queries received from non\-TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
 |   `QueryRequestsTLS`   |  The number of queries received from TLS connections\. A query including multiple statements is counted as one query\. The most useful statistic for this metric is Sum\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
 |  QueryResponseLatency  |  The time in microseconds between getting a query request and the proxy responding to it\. The most useful statistic for this metric is Average\.  |  1 minute and above  |  [Dimension set 1](#proxy-dimension-set-1), [Dimension set 2](#proxy-dimension-set-2)  | 
+
+ You can find logs of RDS Proxy activity under CloudWatch in the AWS Management Console\. Each proxy has an entry in the **Log groups** page\. 
+
+**Important**  
+ These logs are intended for human consumption for troubleshooting purposes and not for programmatic access\. The format and content of the logs is subject to change\.   
+ In particular, older logs don't contain any prefixes indicating the endpoint for each request\. In newer logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name that you specified for a user\-defined endpoint, or the special name `default` for requests using the default endpoint of a proxy\. 

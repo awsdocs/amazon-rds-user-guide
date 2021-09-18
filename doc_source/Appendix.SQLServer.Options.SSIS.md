@@ -7,9 +7,9 @@ SSIS projects are organized into packages saved as XML\-based \.dtsx files\. Pac
 Amazon RDS for SQL Server supports running SSIS directly on an RDS DB instance\. You can enable SSIS on an existing or new DB instance\. SSIS is installed on the same DB instance as your database engine\.
 
 RDS supports SSIS for SQL Server Standard and Enterprise Editions on the following versions:
-+ SQL Server 2019, version 15\.00\.4043\.16\.v1 and later
-+ SQL Server 2017, version 14\.00\.3223\.3\.v1 and later
-+ SQL Server 2016, version 13\.00\.5426\.0\.v1 and later
++ SQL Server 2019, version 15\.00\.4043\.16\.v1 and higher
++ SQL Server 2017, version 14\.00\.3223\.3\.v1 and higher
++ SQL Server 2016, version 13\.00\.5426\.0\.v1 and higher
 
 ## Limitations and recommendations<a name="SSIS.Limitations"></a>
 
@@ -17,7 +17,7 @@ The following limitations and recommendations apply to running SSIS on RDS for S
 + The DB instance must use AWS Managed Microsoft AD for SSIS authentication\.
 + The DB instance must have an associated parameter group with the `clr enabled` parameter set to 1\. For more information, see [Modifying the parameter for SSIS](#SSIS.ModifyParam)\.
 **Note**  
-If you enable the `clr enabled` parameter on SQL Server 2017, you can't use the common language runtime \(CLR\) on your DB instance\.
+If you enable the `clr enabled` parameter on SQL Server 2017 or 2019, you can't use the common language runtime \(CLR\) on your DB instance\. For more information, see [Features not supported and features with limited support](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureNonSupport)\.
 + The following control flow tasks are supported:
   + Analysis Services Execute DDL Task
   + Analysis Services Processing Task

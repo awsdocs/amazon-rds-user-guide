@@ -1,8 +1,6 @@
 # Using SSL with a PostgreSQL DB instance<a name="PostgreSQL.Concepts.General.SSL"></a>
 
-Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. 
-
-Amazon RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\. Amazon RDS doesn't enforce TLS connections so they must be enforced from your application\. 
+Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. Amazon RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\.
 
 For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 

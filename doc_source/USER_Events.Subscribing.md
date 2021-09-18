@@ -1,12 +1,15 @@
 # Subscribing to Amazon RDS event notification<a name="USER_Events.Subscribing"></a>
 
-You can create an Amazon RDS event notification subscription so you can be notified when an event occurs for a given DB instance, DB snapshot, DB security group, or DB parameter group\. The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API operations\. For information on creating an SNS topic and subscribing to it, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) in the *Amazon Simple Notification Service Developer Guide*\.
+The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API operations\. For information on creating an SNS topic and subscribing to it, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
-You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. If you specify both the **SourceType** and **SourceIdentifier**, such as `SourceType = db-instance` and `SourceIdentifier = myDBInstance1`, you receive all the DB instance events for the specified source\. If you specify a **SourceType** but don't specify a **SourceIdentifier**, you receive notice of the events for that source type for all your Amazon RDS sources\. If you don't specify either the **SourceType** or the **SourceIdentifier**, you are notified of events generated from all Amazon RDS sources belonging to your customer account\.
+You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. For example, **SourceType** might be `SourceType = db-instance`, whereas**SourceIdentifier** might be `SourceIdentifier = myDBInstance1`\. The following table shows possible combinations\.
 
-**Note**  
-Event notifications might take up to five minutes to be delivered\.  
-Amazon RDS event notification is only available for unencrypted SNS topics\. If you specify an encrypted SNS topic, event notifications aren't sent for the topic\.
+
+|  SourceType  |  SourceIdentifier  |  Description  | 
+| --- | --- | --- | 
+|  Specified  |  Specified  |  You receive notice of all DB instance events for the specified source\.  | 
+|  Specified  |  Not specified  |  You receive notice of the events for that source type for all your Amazon RDS sources\.  | 
+|  Not specified  |  Not specified  |  You receive notice of all events from all Amazon RDS sources belonging to your customer account\.  | 
 
 ## Console<a name="USER_Events.Subscribing.Console"></a>
 

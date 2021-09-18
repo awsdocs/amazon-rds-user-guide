@@ -281,7 +281,7 @@ At a command prompt, connect to one of the endpoints associated with your MySQL 
 ## Kerberos authentication MySQL limitations<a name="mysql-kerberos.limitations"></a>
 
  The following limitations apply to Kerberos authentication for MySQL: 
-+  A Managed Active Directory that has been shared with you isn't supported\. 
++ Only an AWS Managed Microsoft AD is supported\. However, you can join RDS for MySQL DB instances to shared Managed Microsoft AD domains owned by different accounts in the same AWS Region\.
 +  Kerberos authentication is supported for the following Amazon RDS for MySQL versions: 
   + Amazon RDS for MySQL version 8\.0\.13 and higher 8\.0 versions
   + Amazon RDS for MySQL version 5\.7\.24 and higher 5\.7 versions
