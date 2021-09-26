@@ -28,7 +28,7 @@ To connect your DB instance and your EC2 instance over the public internet, do t
   An ingress rule specifies a network port and a CIDR/IP range\. For example, you can add an ingress rule that allows port 3306 to connect to a MySQL RDS DB instance, and a CIDR/IP range of `203.0.113.25/32`\. For more information, see [Authorizing network access to a DB security group from an IP range](USER_WorkingWithSecurityGroups.md#USER_WorkingWithSecurityGroups.Authorizing)\.
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 
 
 ## A DB instance not in a VPC accessed by a client application through the internet<a name="USER_VPC.Scenario6"></a>
 
@@ -44,7 +44,7 @@ In this scenario, you must ensure that the DB security group for the RDS DB inst
 If you intend to access a DB instance behind a firewall, talk with your network administrator to determine the IP addresses you should use\.
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 
 
 ## A DB instance not in a VPC accessed by an EC2 instance not in a VPC<a name="USER_VPC.Scenario7"></a>
 
@@ -75,4 +75,4 @@ For more information, see the following documentation\.
 | PostgreSQL | [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md) | 
 
 **Note**  
-If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+If you are interested in moving an existing DB instance into a VPC, you can use the AWS Management Console to do it easily\. For more information\. see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 

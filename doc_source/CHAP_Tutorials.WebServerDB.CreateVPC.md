@@ -200,7 +200,7 @@ If you created this VPC to complete [Tutorial: Create a web server and an Amazon
 After you create the VPC and other resources for this tutorial, you can delete them if they are no longer needed\.
 
 **Note**  
-If you addded resrouces in the Amazon VPC you created for this tutorial, such as Amazon EC2 instances or Amazon RDS DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
+If you added resources in the Amazon VPC you created for this tutorial, such as Amazon EC2 instances or Amazon RDS DB instances, you might need to delete these resources before you can delete the VPC\. For more information, see [Delete your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html#VPC_Deleting) in the *Amazon VPC User Guide*\.
 
 **To delete a VPC and related resources**
 

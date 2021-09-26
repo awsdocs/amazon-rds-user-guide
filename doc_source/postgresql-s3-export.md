@@ -9,7 +9,7 @@ You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS
 
 **Topics**
 + [Overview of exporting data to Amazon S3](#postgresql-s3-export-overview)
-+ [Verify that your PostgreSQL version supports exports](#postgresql-s3-supported)
++ [Verify that your RDS for PostgreSQL version supports exports](#postgresql-s3-supported)
 + [Specifying the Amazon S3 file path to export to](#postgresql-s3-export-file)
 + [Setting up access to an Amazon S3 bucket](#postgresql-s3-export-access-bucket)
 + [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)
@@ -21,8 +21,6 @@ You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS
 To export data stored in an RDS for PostgreSQL database to an Amazon S3 bucket, use the following procedure\.
 
 **To export RDS for PostgreSQL data to S3**
-
-1. Ensure that your version of RDS for PostgreSQL supports Amazon S3 exports\. Currently, exports are supported for PostgreSQL 10\.14, 11\.9, 12\.4 and later\.
 
 1. Install the required PostgreSQL extensions\. These include the `aws_s3` and `aws_commons` extensions\. To do so, start psql and use the following commands\.
 
@@ -52,9 +50,15 @@ To export data stored in an RDS for PostgreSQL database to an Amazon S3 bucket, 
 
    After you complete the preceding preparation tasks, use the [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3) function to export query results to Amazon S3\. For details about this process, see [Exporting query data using the aws\_s3\.query\_export\_to\_s3 function](#postgresql-s3-export-examples)\.
 
-## Verify that your PostgreSQL version supports exports<a name="postgresql-s3-supported"></a>
+## Verify that your RDS for PostgreSQL version supports exports<a name="postgresql-s3-supported"></a>
 
-Currently, Amazon S3 exports are supported for PostgreSQL 10\.14, 11\.9, and 12\.4 and later\. You can also verify support by using the `describe-db-engine-versions` command\. The following example verify support for version 10\.14\.
+Currently, Amazon S3 exports are supported for the following versions of RDS for PostgreSQL:
++ 10\.14 and higher 10 versions
++ 11\.9 and higher 11 versions
++ 12\.4 and higher 12 versions
++ 13\.1 and higher 13 versions
+
+You can also verify support by using the `describe-db-engine-versions` command\. The following example verify support for version 10\.14\.
 
 ```
 aws rds describe-db-engine-versions --region us-east-1 \

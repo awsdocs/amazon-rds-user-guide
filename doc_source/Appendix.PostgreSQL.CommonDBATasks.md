@@ -474,13 +474,6 @@ aliasing -fwrapv -fexcess-precision=standard -g -O2
 (23 rows)
 ```
 
-If you attempt to access the view directly, the request fails\.
-
-```
-select * from pg_config;
-ERROR:  permission denied for relation pg_config
-```
-
 ## Working with the orafce extension<a name="Appendix.PostgreSQL.CommonDBATasks.orafce"></a>
 
 The `orafce` extension provides functions that are common in commercial databases, and can make it easier for you to port a commercial database to PostgreSQL\. Amazon RDS for PostgreSQL versions 9\.6\.6 and later support this extension\. For more information about `orafce`, see the [orafce project on GitHub](https://github.com/orafce/orafce)\. 

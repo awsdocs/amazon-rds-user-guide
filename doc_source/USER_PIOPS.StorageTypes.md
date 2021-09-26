@@ -43,7 +43,9 @@ You can't reduce the amount of storage for a DB instance after storage has been 
 
 1. Choose **Continue** to move to the next screen\.
 
-1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the storage changes to the DB instance immediately\. Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
+1. Choose **Apply immediately** in the **Scheduling of modifications** section to apply the storage changes to the DB instance immediately\.
+
+   Or choose **Apply during the next scheduled maintenance window** to apply the changes during the next maintenance window\.
 
 1. When the settings are as you want them, choose **Modify DB instance**\.
 
@@ -51,7 +53,9 @@ You can't reduce the amount of storage for a DB instance after storage has been 
 
 To increase the storage for a DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html)\. Set the following parameters:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `--apply-immediately` – Use `--apply-immediately` to change to the new storage type immediately\. Or use `--no-apply-immediately` \(the default\) to apply storage changes during the next maintenance window\. An immediate outage occurs when the changes are applied\.
++ `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
+
+  Or use `--no-apply-immediately` \(the default\) to apply the changes during the next maintenance window\. An immediate outage occurs when the changes are applied\.
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
@@ -59,7 +63,7 @@ For more information about storage, see [Amazon RDS DB instance storage](CHAP_St
 
 To increase storage for a DB instance, use the Amazon RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html)\. Set the following parameters:
 + `AllocatedStorage` – Amount of storage to be allocated for the DB instance, in gibibytes\.
-+ `ApplyImmediately` – Set this option to `True` to apply scaling changes immediately\. Set this option to `False` \(the default\) to apply scaling changes during the next maintenance window\. An immediate outage occurs when the changes are applied\.
++ `ApplyImmediately` – Set this option to `True` to apply the storage changes immediately\. Set this option to `False` \(the default\) to apply the changes during the next maintenance window\. An immediate outage occurs when the changes are applied\.
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 

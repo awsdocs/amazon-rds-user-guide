@@ -159,15 +159,13 @@ Perform the following steps to complete the export\.
 
 **To complete the export**
 
-1. Load the mysqldump files to create the databases on the external MySQL database\.
-
-1. On the Amazon RDS read replica, call the `mysql.rds_start_replication` stored procedure\. Doing this starts replication from the source MySQL DB instance and exports all source changes that have occurred after you stopped replication from the Amazon RDS read replica\.
-
 1. Use the MySQL `CHANGE MASTER` statement to configure the external MySQL database\. Specify the ID and password of the user granted `REPLICATION SLAVE` permissions\. Specify the `Master_Host`, `Master_Port`, `Relay_Master_Log_File`, and `Exec_Master_Log_Pos` values that you got from the MySQL `SHOW REPLICA STATUS\G` statement that you ran on the RDS read replica\. For more information, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/change-master-to.html)\.
 **Note**  
 Previous versions of MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
 1. Use the MySQL `START REPLICA` command to initiate replication from the source MySQL DB instance to the external MySQL database\.
+
+   Doing this starts replication from the source MySQL DB instance and exports all source changes that have occurred after you stopped replication from the Amazon RDS read replica\.
 **Note**  
 Previous versions of MySQL used `START SLAVE` instead of `START REPLICA`\. If you are using a MySQL version before 8\.0\.23, then use `START SLAVE`\. 
 

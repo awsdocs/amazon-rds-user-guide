@@ -1,13 +1,15 @@
 # Oracle native network encryption<a name="Appendix.Oracle.Options.NetworkEncryption"></a>
 
-Amazon RDS supports Oracle native network encryption \(NNE\)\. With native network encryption, you can encrypt data as it moves to and from a DB instance\. Amazon RDS supports NNE for all editions of Oracle\. 
+Amazon RDS supports Oracle native network encryption \(NNE\)\. With native network encryption, you can encrypt data as it moves to and from a DB instance\. Amazon RDS supports NNE for all editions of Oracle\.
 
-A detailed discussion of Oracle native network encryption is beyond the scope of this guide, but you should understand the strengths and weaknesses of each algorithm and key before you decide on a solution for your deployment\. For information about the algorithms and keys that are available through Oracle native network encryption, see [Configuring network data encryption](http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r2/prod/security/network_encrypt/ntwrkencrypt.htm) in the Oracle documentation\. For more information about AWS security, see the [AWS security center](http://aws.amazon.com/security)\. 
+A detailed discussion of Oracle native network encryption is beyond the scope of this guide, but you should understand the strengths and weaknesses of each algorithm and key before you decide on a solution for your deployment\. For information about the algorithms and keys that are available through Oracle native network encryption, see [Configuring network data encryption](http://www.oracle.com/webfolder/technetwork/tutorials/obe/db/11g/r2/prod/security/network_encrypt/ntwrkencrypt.htm) in the Oracle documentation\. For more information about AWS security, see the [AWS security center](http://aws.amazon.com/security)\.
 
 **Note**  
 You can use Native Network Encryption or Secure Sockets Layer, but not both\. For more information, see [Oracle Secure Sockets Layer](Appendix.Oracle.Options.SSL.md)\. 
 
 ## NNE option settings<a name="Oracle.Options.NNE.Options"></a>
+
+You can specify encryption requirements on both the server and the client\. The DB instance can act as a client when, for example, it uses a database link to connect to another database\. You might want to avoid forcing encryption on the server side\. For example, you might not want to force all client communications to use encryption because the server requires it\. In this case, you can force encryption on the client side using the `SQLNET.*CLIENT` options\. 
 
 Amazon RDS supports the following settings for the NNE option\. 
 
@@ -17,12 +19,16 @@ When you use commas to separate values for an option setting, don't put a space 
 
 ****  
 
-| Option setting | Valid values | Default value | Description | 
+| Option setting | Valid values | Default values | Description | 
 | --- | --- | --- | --- | 
-| **SQLNET\.ENCRYPTION\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The encryption behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require traffic from the client to be encrypted\.  | 
-| **SQLNET\.CRYPTO\_CHECKSUM\_SERVER** |  `Accepted`, `Rejected`, `Requested`, `Required`   | `Requested` |  The data integrity behavior when a client, or a server acting as a client, connects to the DB instance\.  `Requested` indicates that the DB instance does not require the client to perform a checksum\.  | 
-| **SQLNET\.ENCRYPTION\_TYPES\_SERVER** |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance uses each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) You can specify either one value or a comma\-separated list of values\. If you a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\.  | 
-| **SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_SERVER** |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  A list of checksum algorithms\. You can specify either one value or a comma\-separated list of values\. If you use a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\.  | 
+|  `SQLNET.CRYPTO_CHECKSUM_CLIENT`  |  `Accepted`, `Rejected`, `Requested`, `Required`   |  `Requested`  |  The data integrity behavior when a DB instance connects to the client, or a server acting as a client\. When a DB instance uses a database link, it acts as a client\. `Requested` indicates that the client doesn't require the DB instance to perform a checksum\.  | 
+|  `SQLNET.CRYPTO_CHECKSUM_SERVER`  |  `Accepted`, `Rejected`, `Requested`, `Required`   |  `Requested`  |  The data integrity behavior when a client, or a server acting as a client, connects to the DB instance\. When a DB instance uses a database link, it acts as a client\. `Requested` indicates that the DB instance doesn't require the client to perform a checksum\.  | 
+|  `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`  |  A list of checksum algorithms\. You can specify either one value or a comma\-separated list of values\. If you use a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\. This parameter and `SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER `must have a common cipher\.  | 
+|  `SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  `SHA256`, `SHA384`, `SHA512`, `SHA1`, `MD5`  |  A list of checksum algorithms\. You can specify either one value or a comma\-separated list of values\. If you use a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\. This parameter and `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT` must have a common cipher\.  | 
+|  `SQLNET.ENCRYPTION_CLIENT`  |  `Accepted`, `Rejected`, `Requested`, `Required`   |  `Requested`  |  The encryption behavior of the client when a client, or a server acting as a client, connects to the DB instance\. When a DB instance uses a database link, it acts as a client\. `Requested` indicates that the client does not require traffic from the server to be encrypted\.  | 
+|  `SQLNET.ENCRYPTION_SERVER`  |  `Accepted`, `Rejected`, `Requested`, `Required`   |  `Requested`  |  The encryption behavior of the server when a client, or a server acting as a client, connects to the DB instance\. When a DB instance uses a database link, it acts as a client\. `Requested` indicates that the DB instance does not require traffic from the client to be encrypted\.  | 
+|  `SQLNET.ENCRYPTION_TYPES_CLIENT`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the client\. The client uses each algorithm, in order, to attempt to decrypt the server input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the DB instance will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) You can specify either one value or a comma\-separated list of values\. If you a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\. This parameter and `SQLNET.SQLNET.ENCRYPTION_TYPES_SERVER` must have a common cipher\.  | 
+|  `SQLNET.ENCRYPTION_TYPES_SERVER`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  `RC4_256`, `AES256`, `AES192`, `3DES168`, `RC4_128`, `AES128`, `3DES112`, `RC4_56`, `DES`, `RC4_40`, `DES40`  |  A list of encryption algorithms used by the DB instance\. The DB instance uses each algorithm, in order, to attempt to decrypt the client input until an algorithm succeeds or until the end of the list is reached\.  Amazon RDS uses the following default list from Oracle\. You can change the order or limit the algorithms that the client will accept\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.Options.NetworkEncryption.html) You can specify either one value or a comma\-separated list of values\. If you a comma, don't insert a space after the comma; otherwise, you receive an `InvalidParameterValue` error\. This parameter and `SQLNET.SQLNET.ENCRYPTION_TYPES_SERVER` must have a common cipher\.  | 
 
 ## Adding the NNE option<a name="Oracle.Options.NNE.Add"></a>
 
@@ -34,7 +40,7 @@ The general process for adding the NNE option to a DB instance is the following:
 
 1. Associate the option group with the DB instance\.
 
-After you add the NNE option, as soon as the option group is active, NNE is active\. 
+When the option group is active, NNE is active\. 
 
 **To add the NNE option to a DB instance**
 
@@ -54,26 +60,34 @@ After you add the NNE option, you don't need to restart your DB instances\. As s
       
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. After you add the NNE option, you don't need to restart your DB instance\. As soon as the option group is active, NNE is active\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-## Using NNE<a name="Oracle.Options.NNE.Using"></a>
+## Setting NNE values in the sqlnet\.ora<a name="Oracle.Options.NNE.Using"></a>
 
- With Oracle native network encryption, you can also specify network encryption on the client side\. On the client \(the computer used to connect to the DB instance\), you can use the sqlnet\.ora file to specify the following client settings: SQLNET\.CRYPTO\_CHECKSUM\_CLIENT , SQLNET\.CRYPTO\_CHECKSUM\_TYPES\_CLIENT, SQLNET\.ENCRYPTION\_CLIENT,  and SQLNET\.ENCRYPTION\_TYPES\_CLIENT\. For information, see [Configuring network data encryption and integrity for Oracle servers and clients](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asoconfg.htm) in the Oracle documentation\. 
+ With Oracle native network encryption, you can set network encryption on the server side and client side\. The client is the computer used to connect to the DB instance\. You can specify the following client settings in the slqnet\.ora: 
++ `SQLNET.CRYPTO_CHECKSUM_CLIENT`
++ `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT`
++ `SQLNET.ENCRYPTION_CLIENT`
++ `SQLNET.ENCRYPTION_TYPES_CLIENT`
 
- Sometimes, the DB instance will reject a connection request from an application, for example, if there is a mismatch between the encryption algorithms on the client and on the server\. 
+For information, see [Configuring network data encryption and integrity for Oracle servers and clients](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asoconfg.htm) in the Oracle documentation\.
 
- To test Oracle native network encryption , add the following lines to the sqlnet\.ora file on the client: 
+Sometimes, the DB instance rejects a connection request from an application, for example, if there is a mismatch between the encryption algorithms on the client and on the server\. To test Oracle native network encryption, add the following lines to the sqlnet\.ora file on the client: 
 
 ```
-DIAG_ADR_ENABLED=off   
-TRACE_DIRECTORY_CLIENT=/tmp   
-TRACE_FILE_CLIENT=nettrace   
+DIAG_ADR_ENABLED=off
+TRACE_DIRECTORY_CLIENT=/tmp
+TRACE_FILE_CLIENT=nettrace
 TRACE_LEVEL_CLIENT=16
 ```
 
- These lines generate a trace file on the client called `/tmp/nettrace*` when the connection is attempted\. The trace file contains information on the connection\. For more information about connection\-related issues when you are using Oracle Native Network Encryption, see [About negotiating encryption and integrity](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asoconfg.htm#autoId12) in the Oracle documentation\. 
+When a connection is attempted, the preceding lines generate a trace file on the client called `/tmp/nettrace*`\. The trace file contains information on the connection\. For more information about connection\-related issues when you are using Oracle Native Network Encryption, see [About negotiating encryption and integrity](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asoconfg.htm#autoId12) in the Oracle documentation\. 
 
-## Modifying NNE settings<a name="Oracle.Options.NNE.ModifySettings"></a>
+## Modifying NNE option settings<a name="Oracle.Options.NNE.ModifySettings"></a>
 
 After you enable NNE, you can modify settings for the option\. For more information about how to modify option settings, see [Modifying an option setting](USER_WorkingWithOptionGroups.md#USER_WorkingWithOptionGroups.ModifyOption)\. For more information about each setting, see [NNE option settings](#Oracle.Options.NNE.Options)\. 
+
+If you modify NNE option settings, make sure that `SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER` and `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT` have at least one common cipher\. For example, assume that `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT` has the default values `SHA256,SHA384,SHA512`\. You modify `SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER` to have values `SHA1,MD5,SHA256`\. The configuration is valid because the two parameters share `SHA256`\.
+
+For another example, assume that you want to modify `SQLNET.CRYPTO_CHECKSUM_TYPES_SERVER` from its default setting to `SHA1,MD5`\. In this case, make sure you set `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT` to `SHA1` or `MD5`\. These algorithms aren't included in the default values for `SQLNET.CRYPTO_CHECKSUM_TYPES_CLIENT`\.
 
 ## Removing the NNE option<a name="Oracle.Options.NNE.Remove"></a>
 

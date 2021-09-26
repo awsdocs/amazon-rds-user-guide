@@ -54,7 +54,15 @@ The process for using Oracle Transparent Data Encryption \(TDE\) with Amazon RDS
 
 ## Removing the TDE option<a name="Appendix.Oracle.Options.AdvSecurity.Remove"></a>
 
- If you no longer want to use the TDE option with a DB instance, you must decrypt all your data on the DB instance, copy the data to a new DB instance that is not associated with an option group with TDE enabled, and then delete the original instance\. You can rename the new instance to be the same name as the previous DB instance if you prefer\. 
+To remove the **TDE** option with a DB instance, complete the following steps: 
+
+1.  Decrypt all your data on the DB instance\. 
+
+1.  Copy the data to a new DB instance that is not associated with an option group with **TDE** enabled\. 
+
+1.  Delete the original instance\. 
+
+You can name the new instance the same name as the previous DB instance\. 
 
 ## Using TDE with Oracle Data Pump<a name="Appendix.Oracle.Options.AdvSecurity.Pump"></a>
 

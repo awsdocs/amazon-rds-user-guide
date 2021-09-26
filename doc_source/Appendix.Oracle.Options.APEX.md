@@ -1,19 +1,35 @@
 # Oracle Application Express \(APEX\)<a name="Appendix.Oracle.Options.APEX"></a>
 
-Amazon RDS supports Oracle Application Express \(APEX\) through the use of the `APEX` and `APEX-DEV` options\. Oracle APEX can be deployed as a run\-time environment or as a full development environment for web\-based applications\. Using Oracle APEX, developers can build applications entirely within the web browser\. For more information, see [Oracle application Express](https://apex.oracle.com/) in the Oracle documentation\. 
+Amazon RDS supports Oracle Application Express \(APEX\) through the use of the `APEX` and `APEX-DEV` options\. Oracle APEX can be deployed as a run\-time environment or as a full development environment for web\-based applications\. Using Oracle APEX, developers can build applications entirely within the web browser\. For more information, see [Oracle application Express](https://apex.oracle.com/) in the Oracle documentation\.
+
+**Topics**
++ [APEX components](#Appendix.Oracle.Options.APEX.components)
++ [APEX version requirements](#Appendix.Oracle.Options.APEX.versions)
++ [Prerequisites for Oracle APEX and ORDS](#Appendix.Oracle.Options.APEX.PreReqs)
++ [Adding the Amazon RDS APEX options](#Appendix.Oracle.Options.APEX.Add)
++ [Unlocking the public user account](#Appendix.Oracle.Options.APEX.PublicUser)
++ [Configuring RESTful services for Oracle APEX](#Appendix.Oracle.Options.APEX.ConfigureRESTful)
++ [Setting up ORDS for Oracle APEX](#Appendix.Oracle.Options.APEX.ORDS)
++ [Setting up Oracle APEX listener](#Appendix.Oracle.Options.APEX.Listener)
++ [Upgrading the APEX version](#Appendix.Oracle.Options.APEX.Upgrade)
++ [Removing the APEX option](#Appendix.Oracle.Options.APEX.Remove)
+
+## APEX components<a name="Appendix.Oracle.Options.APEX.components"></a>
 
 Oracle APEX consists of the following main components:
-+ A *repository* that stores the metadata for APEX applications and components\. The repository consists of tables, indexes, and other objects that are installed in your Amazon RDS DB instance\. 
++ A *repository* that stores the metadata for APEX applications and components\. The repository consists of tables, indexes, and other objects that are installed in your Amazon RDS DB instance\.
 + A *listener* that manages HTTP communications with Oracle APEX clients\. The listener accepts incoming connections from web browsers, forwards them to the Amazon RDS DB instance for processing, and then sends results from the repository back to the browsers\. Amazon RDS for Oracle supports the following types of listeners:
-  + For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\. We recommend that you use the latest supported version of Oracle APEX and ORDS\. The documentation describes older versions for backwards compatibility only\.
+  + For APEX version 5\.0 and later, use Oracle Rest Data Services \(ORDS\) version 19\.1 and higher\. We recommend that you use the latest supported version of Oracle APEX and ORDS\. This documentation describes older versions for backwards compatibility only\.
   + For APEX version 4\.1\.1, you can use Oracle APEX Listener version 1\.1\.4\.
-  + Oracle HTTP Server and `mod_plsql`\.
+  + You can use Oracle HTTP Server and `mod_plsql` listeners\.
 **Note**  
 Amazon RDS doesn't support the Oracle XML DB HTTP server with the embedded PL/SQL gateway; you can't use this as a listener for APEX\. In general, Oracle recommends against using the embedded PL/SQL gateway for applications that run on the internet\. 
 
   For more information about these listener types, see [About choosing a web listener](https://docs.oracle.com/database/apex-5.1/HTMIG/choosing-web-listener.htm#HTMIG29321) in the Oracle documentation\.
 
 When you add the Amazon RDS APEX options to your DB instance, Amazon RDS installs the Oracle APEX repository only\. Install your listener on a separate host, such as an Amazon EC2 instance, an on\-premises server at your company, or your desktop computer\.
+
+## APEX version requirements<a name="Appendix.Oracle.Options.APEX.versions"></a>
 
 The APEX option uses storage on the DB instance class for your DB instance\. Following are the supported versions and approximate storage requirements for Oracle APEX\.
 
@@ -22,6 +38,7 @@ The APEX option uses storage on the DB instance class for your DB instance\. Fol
 
 | APEX version | Storage requirements | Supported Oracle database versions | Notes | 
 | --- | --- | --- | --- | 
+|  Oracle APEX version 21\.1\.v1  |  125 MiB  |  All  |  This version includes patch 32598392: PSE BUNDLE FOR APEX 21\.1\.  | 
 |  Oracle APEX version 20\.2\.v1  |  148 MiB  |  All  |  This version includes patch p32006852\_2020\_Generic\. You can see the patch number and date by running the following query: <pre>SELECT PATCH_VERSION, PATCH_NUMBER <br />FROM   APEX_PATCHES;</pre>  | 
 |  Oracle APEX version 20\.1\.v1  |  173 MiB  |  All  |  This version includes patch 30990551\.  | 
 |  Oracle APEX version 19\.2\.v1  |  149 MiB  |  All  |  | 
@@ -43,7 +60,7 @@ To use Oracle APEX and ORDS, make sure you have the following:
 
 ## Adding the Amazon RDS APEX options<a name="Appendix.Oracle.Options.APEX.Add"></a>
 
-The general process for adding the Amazon RDS APEX options to a DB instance is the following: 
+To add the Amazon RDS APEX options to a DB instance, do the following: 
 
 1. Create a new option group, or copy or modify an existing option group\.
 
@@ -77,11 +94,17 @@ If you add the APEX options to an existing option group that is already attached
 
 ## Unlocking the public user account<a name="Appendix.Oracle.Options.APEX.PublicUser"></a>
 
-After the Amazon RDS APEX options are installed, you must change the password for the APEX public user account, and then unlock the account\. You can do this by using the Oracle SQL\*Plus command line utility\. Connect to your DB instance as the master user, and issue the following commands\. Replace `new_password` with a password of your choice\. 
+After the Amazon RDS APEX options are installed, make sure to do the following:
+
+1. Change the password for the APEX public user account\.
+
+1. Unlock the account\.
+
+You can do this by using the Oracle SQL\*Plus command line utility\. Connect to your DB instance as the master user, and issue the following commands\. Replace `new_password` with a password of your choice\. 
 
 ```
-1. alter user APEX_PUBLIC_USER identified by new_password;
-2. alter user APEX_PUBLIC_USER account unlock;
+1. ALTER USER APEX_PUBLIC_USER IDENTIFIED BY new_password;
+2. ALTER USER APEX_PUBLIC_USER ACCOUNT UNLOCKED;
 ```
 
 ## Configuring RESTful services for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ConfigureRESTful"></a>
@@ -98,7 +121,7 @@ Configuration isn't required for Oracle APEX version 4\.1\.1\.v1\. For this Orac
 The following command runs the stored procedure\.
 
 ```
-1. exec rdsadmin.rdsadmin_run_apex_rest_config('apex_listener_password', 'apex_rest_public_user_password');
+1. EXEC rdsadmin.rdsadmin_run_apex_rest_config('apex_listener_password', 'apex_rest_public_user_password');
 ```
 
 ## Setting up ORDS for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ORDS"></a>
@@ -134,7 +157,7 @@ Before you can install ORDS, you need to create a nonprivileged OS user, and the
 1. Unzip the file in the `/home/apexuser` directory\.
 
    ```
-   unzip apex_<version>.zip                
+   unzip apex_<version>.zip
    ```
 
    After you unzip the file, there is an `apex` directory in the `/home/apexuser` directory\.

@@ -339,7 +339,7 @@ For information about backing up your DB instance, see [Backing up and restoring
 
 ## Best practices for automating DB instance creation<a name="CHAP_BestPractices.AutoDBCreation"></a>
 
-It’s an Amazon RDS best practice to create a DB instance with the preferred minor version of the database engine\. You can use the AWS CLI, Amazon RDS API, or AWS CloudFormation to automate DB instance creation\. When you use these methods, you can specify only the major version and Amazon RDS automatically creates the instance with the preferred minor version\. For example, if PostgreSQL 12\.5 is the preferred minor version, and if you specify version 12 with `create-db-instance`, the DB instance with be version 12\.5\.
+It’s an Amazon RDS best practice to create a DB instance with the preferred minor version of the database engine\. You can use the AWS CLI, Amazon RDS API, or AWS CloudFormation to automate DB instance creation\. When you use these methods, you can specify only the major version and Amazon RDS automatically creates the instance with the preferred minor version\. For example, if PostgreSQL 12\.5 is the preferred minor version, and if you specify version 12 with `create-db-instance`, the DB instance will be version 12\.5\.
 
 To determine the preferred minor version, you can run the `describe-db-engine-versions` command with the `--default-only` option as shown in the following example\.
 

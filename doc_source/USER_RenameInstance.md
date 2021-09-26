@@ -28,6 +28,9 @@ If you delete the old primary DB instance, you are responsible for deleting any 
 
 For information about promoting a read replica, see [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\. 
 
+**Important**  
+The DB instance is rebooted when it is renamed\.
+
 ## Console<a name="USER_RenameInstance.CON"></a>
 
 **To rename a DB instance**

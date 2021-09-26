@@ -108,13 +108,13 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m3\.large | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.m3\.medium | No | Yes | Yes | Deprecated | Lower than PostgreSQL 13 | 
 | db\.x2g – memory\-optimized instance classes powered by AWS Graviton2 processors | 
-| db\.x2g\.16xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.12xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.8xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.4xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions  | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions  | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.x2g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions  | No | MySQL 8\.0\.23 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.16xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.12xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.8xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.4xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.2xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.x2g\.large | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.z1d – memory\-optimized instance classes | 
 | db\.z1d\.12xlarge | No | Yes | No | Yes | No | 
 | db\.z1d\.6xlarge | No | Yes | No | Yes | No | 
@@ -150,14 +150,14 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.r5d\.xlarge | No | Yes | No | No | No | 
 | db\.r5d\.large | No | Yes | No | No | No | 
 | db\.r5b – memory optimized instance classes | 
-| db\.r5b\.24xlarge | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.16xlarge | No | Yes | MySQL 8\.0\.17 & higher |  Yes  | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.12xlarge | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.8xlarge | No | Yes | MySQL 8\.0\.17 & higher |  Yes  | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.4xlarge | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.2xlarge | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.xlarge | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.r5b\.large | No | Yes | MySQL 8\.0\.17 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.24xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.16xlarge | No | Yes | MySQL 8\.0\.25 & higher |  Yes  | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.12xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.8xlarge | No | Yes | MySQL 8\.0\.25 & higher |  Yes  | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.4xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.2xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.xlarge | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.r5b\.large | No | Yes | MySQL 8\.0\.25 & higher | Yes | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.r5 – latest generation memory optimized instance classes preconfigured for high memory, storage, and I/O | 
 | db\.r5\.12xlarge\.tpc2\.mem2x | No | No | No | Yes | No | 
 | db\.r5\.8xlarge\.tpc2\.mem3x | No | No | No | Yes | No | 
@@ -198,12 +198,12 @@ In the following table, you can find details about supported Amazon RDS DB insta
 | db\.m2\.2xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.m2\.xlarge | No | Yes | Deprecated | Deprecated | Deprecated | 
 | db\.t4g – newest generation burstable performance instance classes | 
-| db\.t4g\.2xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.xlarge | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.large | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.medium | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.small | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions  | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
-| db\.t4g\.micro | All MariaDB 10\.5 versions and MariaDB version 10\.4\.13 & higher 10\.4 versions  | No | MySQL 8\.0\.17 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.2xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.xlarge | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.large | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.medium | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.small | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
+| db\.t4g\.micro | MariaDB version 10\.5\.9 & higher 10\.5 versions and MariaDB version 10\.4\.18 & higher 10\.4 versions  | No | MySQL 8\.0\.25 & higher | No | All PostgreSQL 13 versions and PostgreSQL 12\.5 & higher 12 versions | 
 | db\.t3 – latest generation burstable performance instance classes | 
 | db\.t3\.2xlarge | Yes | Yes | Yes | Yes | All PostgreSQL 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
 | db\.t3\.xlarge | Yes | Yes | Yes | Yes | All PostgreSQL 13, 12, 11, and 10 versions, and PostgreSQL 9\.6\.9 & higher versions | 
@@ -362,7 +362,7 @@ aws rds describe-orderable-db-instance-options --engine postgres --db-instance-c
 
 You can change the CPU and memory available to a DB instance by changing its DB instance class\. To change the DB instance class, modify your DB instance by following the instructions in [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
-Some instance classes require that your DB instance is in a VPC\. If your current DB instance isn't in a VPC, and you want to use an instance class that requires one, first move your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+Some instance classes require that your DB instance is in a VPC\. If your current DB instance isn't in a VPC, and you want to use an instance class that requires one, first move your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 
 
 ## Configuring the processor for a DB instance class<a name="USER_ConfigureProcessor"></a>
 
@@ -739,7 +739,7 @@ The relative measure of the integer processing power of an Amazon EC2 instance\.
 The RAM, in gibibytes, allocated to the DB instance\. There is often a consistent ratio between memory and vCPU\. As an example, take the db\.r4 instance class, which has a memory to vCPU ratio similar to the db\.r5 instance class\. However, for most use cases the db\.r5 instance class provides better, more consistent performance than the db\.r4 instance class\. 
 
 **VPC Only**  
-The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.md#USER_VPC.Non-VPC2VPC)\. 
+The instance class is supported only for DB instances that are in a VPC based on the Amazon VPC service\. In some cases, you might want to use an instance class that requires a VPC but your current DB instance isn't in a VPC\. In these cases, start by moving your DB instance into a VPC\. For more information, see [Moving a DB instance not in a VPC into a VPC](USER_VPC.Non-VPC2VPC.md)\. 
 
 **EBS\-Optimized**  
 The DB instance uses an optimized configuration stack and provides additional, dedicated capacity for I/O\. This optimization provides the best performance by minimizing contention between I/O and other traffic from your instance\. For more information about Amazon EBS–optimized instances, see [Amazon EBS–Optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the *Amazon EC2 User Guide for Linux Instances\.* 
