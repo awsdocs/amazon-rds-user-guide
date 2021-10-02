@@ -12,7 +12,7 @@ Security threats are both external and internal\. To protect against internal th
 
 ## How database activity streams work<a name="DBActivityStreams.Overview.how-they-work"></a>
 
-Database activity streams provide a near real\-time stream of the activity in your Oracle DB instance\. Amazon RDS pushes activities to an Amazon Kinesis data stream\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
+Database activity streams provide a near\-real\-time stream of the activity in your Oracle DB instance\. Amazon RDS pushes activities to an Amazon Kinesis data stream\. The Kinesis stream is created automatically\. From Kinesis, you can configure AWS services such as Amazon Kinesis Data Firehose and AWS Lambda to consume the stream and store the data\.
 
 **Important**  
 Database Activity Streams is a free feature, but Amazon Kinesis charges for a data stream\. For more information, see [Amazon Kinesis Data Streams pricing](https://aws.amazon.com/kinesis/data-streams/pricing/)\.

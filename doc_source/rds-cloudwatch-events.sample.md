@@ -1,9 +1,9 @@
 # Overview of events for Amazon RDS<a name="rds-cloudwatch-events.sample"></a>
 
-An *RDS event* indicates a change in the RDS environment\. For example, Amazon RDS generates an event when the state of an instance changes from pending to running\. Amazon RDS deliver events to CloudWatch Events and EventBridge in near real time\.
+An *RDS event* indicates a change in the RDS environment\. For example, Amazon RDS generates an event when the state of an instance changes from pending to running\. Amazon RDS delivers events to CloudWatch Events and EventBridge in near\-real time\.
 
 **Note**  
-Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depends on the order or existence of notification events, as they might be out of sequence or missing\. 
+Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depend on the order or existence of notification events, because they might be out of sequence or missing\. 
 
 Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the following: 
 + The date and time of the event

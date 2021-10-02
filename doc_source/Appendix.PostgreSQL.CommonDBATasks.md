@@ -297,13 +297,31 @@ There are several parameters you can set to log activity that occurs on your Pos
 
 ## Working with the pgaudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
 
-The `pgaudit` extension provides detailed session and object audit logging for Amazon RDS for PostgreSQL version 9\.6\.3 and later and version 9\.5\.7 version and later\. You can enable session auditing or object auditing using this extension\. 
+The `pgaudit` extension provides detailed session and object audit logging for RDS for PostgreSQL\. You can enable session auditing or object auditing using this extension\. You can use the `pgaudit` extension with the following versions:
++ RDS for PostgreSQL version 13, all minor versions
++ RDS for PostgreSQL version 12, all minor versions
++ RDS for PostgreSQL version 11, all minor versions
++ RDS for PostgreSQL version 10, all minor versions
++ RDS for PostgreSQL version 9\.6\.3 and higher 9\.6 versions
++ RDS for PostgreSQL version 9\.5\.7 and higher 9\.5 versions
 
-With session auditing, you can log audit events from various sources and includes the fully qualified command text when available\. For example, you can use session auditing to log all READ statements that connect to a database by setting pgaudit\.log to `READ`\.
+For more information on the `pgaudit` extension, see the [GitHub project documentation](https://github.com/pgaudit/pgaudit/blob/master/README.md)\. Choose the documentation for your PostgreSQL version\.
 
-With object auditing, you can refine the audit logging to work with specific commands\. For example, you can specify that you want audit logging for READ operations on a specific number of tables\.
+To use the `pgaudit` extension, make sure a custom DB parameter group is associated with your DB instance and set parameters in this custom DB parameter group\. For information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
-**To use object based logging with the `pgaudit` extension**
+With *session auditing*, you can log audit events from various sources and include the fully qualified command text when available\. Modify the custom parameter group that is associated with your DB instance so that `shared_preload_libraries` contains `pgaudit` and then set the `pgaudit.log` parameter to log any of the following types of events:
++ `READ` – Audits `SELECT` and `COPY` when the source is a relation or a query\.
++ `WRITE` – Audits `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` when the destination is a relation\.
++ `FUNCTION` – Audits function calls and `DO` blocks\.
++ `ROLE` – Audits statements related to roles and privileges, such as `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`\.
++ `DDL` – Audits all data definition language \(DDL\) statements that aren't included in the `ROLE` class\.
++ `MISC` – Audits miscellaneous commands, such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`\.
+
+To log more than one of these types of events with session auditing, use a comma\-separated list\. To log all of these types of events, set `pgaudit.log` to `ALL`\. You might need to reboot your DB instance to apply the changes\.
+
+With *object auditing*, you can refine the audit logging to work with specific relations\. For example, you can specify that you want audit logging for `READ` operations on a specific number of tables\.
+
+**To use object auditing with the `pgaudit` extension**
 
 1. Create a database role called `rds_pgaudit` using the following command\.
 
@@ -311,20 +329,20 @@ With object auditing, you can refine the audit logging to work with specific com
    CREATE ROLE rds_pgaudit;
    ```
 
-1. Modify the parameter group that is associated with your DB instance to do the following:
-   + Use the shared preload libraries that contain `pgaudit`\.
+1. Modify the custom parameter group that is associated with your DB instance to do the following:
    + Set `pgaudit.role` to the role `rds_pgaudit`\.
+   + Use the shared preload libraries that contain `pgaudit`\.
 
    The following commands modify a custom parameter group\.
 
    ```
    aws rds modify-db-parameter-group \
-      --db-parameter-group-name rds-parameter-group-96 \
+      --db-parameter-group-name my-parameter-group \
       --parameters "ParameterName=pgaudit.role,ParameterValue=rds_pgaudit,ApplyMethod=pending-reboot" \
       --region us-west-2
    
    aws rds modify-db-parameter-group \
-      --db-parameter-group-name rds-parameter-group-96 \
+      --db-parameter-group-name my-parameter-group \
       --parameters "ParameterName=shared_preload_libraries,ParameterValue=pgaudit,ApplyMethod=pending-reboot" \
       --region us-west-2
    ```
@@ -354,7 +372,7 @@ With object auditing, you can refine the audit logging to work with specific com
    CREATE EXTENSION pgaudit;
    ```
 
-1. Run the following command to confirm `pgaudit.role` is set to *rds\_pgaudit*\.
+1. Run the following command to confirm `pgaudit.role` is set to `rds_pgaudit`\.
 
    ```
    SHOW pgaudit.role;

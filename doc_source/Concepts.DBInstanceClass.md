@@ -44,7 +44,7 @@ The following are the burstable performance DB instance classes available:
 + **db\.t4g** – Newest\-generation general\-purpose instance classes powered by Arm\-based AWS Graviton2 processors\. These deliver better price performance than previous\-generation burstable performance DB instance classes for a broad set of burstable general\-purpose workloads\.
 
   You can modify a DB instance to use one of the DB instance classes powered by AWS Graviton2 processors by completing the same steps as with any other DB instance modification\.
-+ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous `db.t2` instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
++ **db\.t3** – Next generation instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. These instance classes provide more computing capacity than the previous db\.t2 instance classes\. They are powered by the AWS Nitro System, a combination of dedicated hardware and lightweight hypervisor\. 
 + **db\.t2** – Instance classes that provide a baseline performance level, with the ability to burst to full CPU usage\. 
 
 **Note**  
@@ -268,7 +268,7 @@ For information about AWS Region names, see [AWS RegionsAvailability Zones](Conc
 The following examples demonstrate how to determine DB instance class support in an AWS Region using the [describe\-orderable\-db\-instance\-options](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) AWS CLI command\.
 
 **Note**  
-To limit the output, these examples show results only for the General Purpose SSD \(`gp2`\) storage type\. If necessary, you can change the storage type to Provisioned IOPS \(`io1`\) or magnetic \(`standard`\) in the commands\.
+To limit the output, these examples show results only for the General Purpose SSD \(gp2\) storage type\. If necessary, you can change the storage type to Provisioned IOPS \(io1\) or magnetic \(standard\) in the commands\.
 
 **Topics**
 + [Listing the DB instance classes that are supported by a specific DB engine version in an AWS Region](#Concepts.DBInstanceClass.RegionSupport.CLI.Example1)

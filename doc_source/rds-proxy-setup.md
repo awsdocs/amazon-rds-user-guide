@@ -273,7 +273,7 @@ aws kms create-key --description "$PREFIX-test-key" --policy """
    +  **Initialization query**\. \(Optional\) You can specify one or more SQL statements for the proxy to run when opening each new database connection\. The setting is typically used with `SET` statements to make sure that each connection has identical settings such as time zone and character set\. For multiple statements, use semicolons as the separator\. You can also include multiple variables in a single `SET` statement, such as `SET x=1, y=2`\. Initialization query is not currently supported for PostgreSQL\.
 
     For **Connectivity**, provide information for the following: 
-   +  **Secrets Manager ARNs**\. Choose at least one Secrets Manager secret that contains DB user credentials for the RDS DB instance or Aurora DB cluster that you intend to access with this proxy\. 
+   +  **Secrets Manager secrets**\. Choose at least one Secrets Manager secret that contains DB user credentials for the RDS DB instance or Aurora DB cluster that you intend to access with this proxy\. 
    +  **IAM role**\. Choose an IAM role that has permission to access the Secrets Manager secrets that you chose earlier\. You can also choose for the AWS Management Console to create a new IAM role for you and use that\. 
    +  **IAM Authentication**\. Choose whether to require or disallow IAM authentication for connections to your proxy\. The choice of IAM authentication or native database authentication applies to all DB users that access this proxy\. 
    +  **Subnets**\. This field is prepopulated with all the subnets associated with your VPC\. You can remove any subnets that you don't need for this proxy\. You must leave at least two subnets\. 

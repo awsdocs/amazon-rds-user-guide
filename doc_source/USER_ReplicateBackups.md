@@ -11,6 +11,8 @@ Backup replication is available for RDS DB instances running the following datab
 
   Backup replication isn't supported for encrypted SQL Server DB instances\.
 
+For an example of using backup replication, see the AWS online tech talk [Managed Disaster Recovery with Amazon RDS for Oracle Cross\-Region Automated Backups](https://pages.awscloud.com/Managed-Disaster-Recovery-with-Amazon-RDS-for-Oracle-Cross-Region-Automated-Backups_2021_0908-DAT_OD.html)\.
+
 **Topics**
 + [AWS Region support](#USER_ReplicateBackups.Regions)
 + [Enabling cross\-Region automated backups](#AutomatedBackups.Replicating.Enable)

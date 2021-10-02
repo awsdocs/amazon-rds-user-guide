@@ -1,6 +1,6 @@
 # Managing an RDS Proxy<a name="rds-proxy-managing"></a>
 
- Following, you can find an explanation of how to manage RDS proxy operation and configuration\. These procedures help your application make the most efficient use of database connections and achieve maximum connection reuse\. The more that you can take advantage of connection reuse, the more CPU and memory overhead that you can save\. This in turn reduces latency for your application and enables the database to devote more of its resources to processing application requests\. 
+ Following, you can find an explanation of how to manage RDS Proxy operation and configuration\. These procedures help your application make the most efficient use of database connections and achieve maximum connection reuse\. The more that you can take advantage of connection reuse, the more CPU and memory overhead that you can save\. This in turn reduces latency for your application and enables the database to devote more of its resources to processing application requests\. 
 
 **Topics**
 + [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)
@@ -27,15 +27,15 @@
 
 1.  For **Actions**, choose **Modify**\. 
 
-1.  Enter or choose the properties to modify\. You can do the following:  
-   +  Rename the proxy by entering a new identifier\. 
-   +  Turn the requirement for Transport layer Security \(TLS\) on or off\. 
-   +  Enter a time period for the idle connection timeout\. 
-   +  Add or remove Secrets Manager secrets\. These secrets correspond to database user names and passwords\. 
-   +  Change the IAM role used to retrieve the secrets from Secrets Manager\. 
-   +  Require or disallow IAM authentication for connections to the proxy\. 
-   +  Add or remove VPC security groups for the proxy to use\. 
-   +  Enable or disable enhanced logging\. 
+1.  Enter or choose the properties to modify\. You can modify the following:  
+   +  **Proxy identifier** – Rename the proxy by entering a new identifier\. 
+   +  **Require Transport Layer Security** – Turn the requirement for Transport layer Security \(TLS\) on or off\. 
+   +  **Idle client connection timeout** – Enter a time period for the idle client connection timeout\. 
+   +  **Secrets Manager secrets** – Add or remove Secrets Manager secrets\. These secrets correspond to database user names and passwords\. 
+   +  **IAM role** – Change the IAM role used to retrieve the secrets from Secrets Manager\. 
+   +  **IAM Authentication** – Require or disallow IAM authentication for connections to the proxy\. 
+   +  **VPC security group** – Add or remove VPC security groups for the proxy to use\. 
+   +  **Enable enhanced logging** – Enable or disable enhanced logging\. 
 
 1.  Choose **Modify**\. 
 
@@ -52,11 +52,11 @@
 1.  On the details page for the **default** target group, choose **Modify**\. 
 
 1.  Choose new settings for the properties that you can modify: 
-   +  Choose a different RDS DB instance or Aurora cluster\. 
-   +  Adjust what percentage of the maximum available connections the proxy can use\. 
-   +  Choose a session pinning filter\. Doing this can help reduce performance issues due to insufficient transaction\-level reuse for connections\. Using this setting requires understanding of application behavior and the circumstances under which RDS Proxy pins a session to a database connection\. 
-   +  Adjust the connection borrow timeout interval\. This setting applies when the maximum number of connections is already being used for the proxy\. The setting determines how long the proxy waits for a connection to become available before returning a timeout error\. 
-   +  \(Optional\) Add an intialization query, or modify the current one\. You can specify one or more SQL statements for the proxy to run when opening each new database connection\. The setting is typically used with `SET` statements to make sure that each connection has identical settings such as time zone and character set\. For multiple statements, use semicolons as the separator\. You can also include multiple variables in a single `SET` statement, such as `SET x=1, y=2`\. Initialization query is not currently supported for PostgreSQL\.
+   +  **Database** – Choose a different RDS DB instance or Aurora cluster\. 
+   +  **Connection pool maximum connections** – Adjust what percentage of the maximum available connections the proxy can use\. 
+   +  **Session pinning filters** – \(Optional\) Choose a session pinning filter\. Doing this can help reduce performance issues due to insufficient transaction\-level reuse for connections\. Using this setting requires understanding of application behavior and the circumstances under which RDS Proxy pins a session to a database connection\. 
+   +  **Connection borrow timeout** – Adjust the connection borrow timeout interval\. This setting applies when the maximum number of connections is already being used for the proxy\. The setting determines how long the proxy waits for a connection to become available before returning a timeout error\. 
+   + **Initialization query** – \(Optional\) Add an initialization query, or modify the current one\. You can specify one or more SQL statements for the proxy to run when opening each new database connection\. The setting is typically used with `SET` statements to make sure that each connection has identical settings such as time zone and character set\. For multiple statements, use semicolons as the separator\. You can also include multiple variables in a single `SET` statement, such as `SET x=1, y=2`\. Initialization query is not currently supported for PostgreSQL\.
 
     You can't change certain properties, such as the target group identifier and the database engine\.  
 
@@ -244,19 +244,24 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
 ## Managing and monitoring connection pooling<a name="rds-proxy-connection-pooling-tuning"></a>
 
- As described in [Connection pooling](rds-proxy.howitworks.md#rds-proxy-connection-pooling), connection pooling is a crucial RDS Proxy feature\. Following, you can learn how to make the most efficient use of connection pooling and transaction\-level connection reuse \(multiplexing\)\. 
+ As described in [Connection pooling](rds-proxy.howitworks.md#rds-proxy-connection-pooling), connection pooling is an important RDS Proxy feature\. Following, you can learn how to make efficient use of connection pooling\.
 
- Because the connection pool is managed by RDS Proxy, you can monitor it and adjust connection limits and timeout intervals without changing your application code\. 
+ Because the connection pool is managed by RDS Proxy, you can monitor it and adjust connection limits and timeout intervals without changing your application code\.
 
- For each proxy, you can specify an upper limit on the number of connections used by the connection pool\. You specify the limit as a percentage\. This percentage applies to the maximum connections configured in the database\. The exact number varies depending on the DB instance size and configuration settings\. 
+ For each proxy, you can specify an upper limit on the number of database connections used by the connection pool\. This setting is represented by the **Connection pool maximum connections** field in the RDS Proxy console or the `MaxConnectionsPercent` parameter in the AWS CLI or API\. You specify the limit as a percentage\. This percentage applies to the maximum connections configured in the database\. The exact number varies depending on the DB instance size and configuration settings\.
 
  For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for the database\. For MySQL, the maximum value is defined by the `max_connections` configuration parameter\. In this case, the other 25 percent of maximum connections remain available to assign to other proxies or for connections that don't go through a proxy\. In some cases, the proxy might keep less than 75 percent of the maximum connections open at a particular time\. Those cases might include situations where the database doesn't have many simultaneous connections, or some connections stay idle for long periods\. 
 
- The overall number of connections available for the connection pool changes as you update the `max_connections` configuration setting that applies to an RDS DB instance or an Aurora cluster\. 
+ The overall number of connections available for the connection pool changes as you update the `max_connections` configuration setting that applies to an RDS DB instance or an Aurora cluster\.
 
  The proxy doesn't reserve all of these connections in advance\. Thus, you can specify a relatively large percentage, and those connections are only opened when the proxy becomes busy enough to need them\. 
 
- You can choose how long to wait for a connection to become available for use by your application\. This setting is represented by the **Connection borrow timeout** option when you create a proxy\. This setting specifies how long to wait for a connection to become available in the connection pool before returning a timeout error\. It applies when the number of connections is at the maximum, and so no connections are available in the connection pool\. It also applies if no writer instance is available because a failover operation is in process\. Using this setting, you can set the best wait period for your application without having to change the query timeout in your application code\. 
+ You can choose how long to wait for a database connection to become available for use by your application\. This setting is represented by the **Connection borrow timeout** field in the RDS Proxy console or the `ConnectionBorrowTimeout` parameter in the AWS CLI or API\. This setting specifies how long to wait for a connection to become available in the connection pool before returning a timeout error\. It applies when the number of connections is at the maximum, and so no connections are available in the connection pool\. It also applies if no appropriate database instance is available to handle the request because, for example, a failover operation is in process\. Using this setting, you can set the best wait period for your application without having to change the query timeout in your application code\.
+
+You can control how actively the proxy closes idle database connections in the connection pool\. This setting is represented by the `MaxIdleConnectionsPercent` parameter of the `DBProxyTargetGroup` in the AWS CLI or API\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. For Aurora MySQL, it's expressed as a percentage of the `max_connections` setting for the RDS DB instance or Aurora DB cluster used by the target group\. The default value is 50 percent\. To change the value of `MaxIdleConnectionsPercent`, use the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
+
+**Note**  
+RDS Proxy closes database connections after 24 hours when they are no longer in use\. The proxy performs this action regardless of the value of the maximum idle connections setting\.
 
 ## Avoiding pinning<a name="rds-proxy-pinning"></a>
 
@@ -295,7 +300,7 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
  Calling MySQL stored procedures and stored functions doesn't cause pinning\. RDS Proxy doesn't detect any session state changes resulting from such calls\. Therefore, make sure that your application doesn't change session state inside stored routines and rely on that session state to persist across transactions\. For example, if a stored procedure creates a temporary table that is intended to persist across transactions, that application currently isn't compatible with RDS Proxy\. 
 
- For PostgreSQL, the following interactions cause pinning: 
+ For PostgreSQL, the following interactions also cause pinning: 
 +  Using SET commands 
 +  Using the extended query protocol such as by using JDBC default settings 
 +  Creating temporary sequences, tables, or views 

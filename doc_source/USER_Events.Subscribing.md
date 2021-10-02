@@ -2,7 +2,7 @@
 
 The simplest way to create a subscription is with the RDS console\. If you choose to create event notification subscriptions using the CLI or API, you must create an Amazon Simple Notification Service topic and subscribe to that topic with the Amazon SNS console or Amazon SNS API\. You will also need to retain the Amazon Resource Name \(ARN\) of the topic because it is used when submitting CLI commands or API operations\. For information on creating an SNS topic and subscribing to it, see [Getting started with Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) in the *Amazon Simple Notification Service Developer Guide*\.
 
-You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. For example, **SourceType** might be `SourceType = db-instance`, whereas**SourceIdentifier** might be `SourceIdentifier = myDBInstance1`\. The following table shows possible combinations\.
+You can specify the type of source you want to be notified of and the Amazon RDS source that triggers the event\. These are defined by the **SourceType** \(type of source\) and the **SourceIdentifier** \(the Amazon RDS source generating the event\)\. For example, **SourceType** might be `SourceType = db-instance`, whereas **SourceIdentifier** might be `SourceIdentifier = myDBInstance1`\. The following table shows possible combinations\.
 
 
 |  SourceType  |  SourceIdentifier  |  Description  | 

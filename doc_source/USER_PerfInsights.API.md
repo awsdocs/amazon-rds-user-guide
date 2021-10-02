@@ -633,7 +633,7 @@ aws pi get-dimension-key-details ^
    --requested-dimensions statement
 ```
 
-In this example, the dimensions details are available\. Thus, Peformance Insights retrieves the full text of the SQL statement, without truncating it\.
+In this example, the dimensions details are available\. Thus, Performance Insights retrieves the full text of the SQL statement, without truncating it\.
 
 ```
 {

@@ -80,7 +80,7 @@ To enable Enhanced Monitoring using the AWS CLI, in the following commands, set 
 
 The `--monitoring-interval` option specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values for the option are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
 
-To disable Enhanced Monitoring using the AWS CLI, set the `--monitoring-interval` option to `0` in the these commands\.
+To disable Enhanced Monitoring using the AWS CLI, set the `--monitoring-interval` option to `0` in these commands\.
 
 **Example**  
 The following example enables Enhanced Monitoring for a DB instance:  

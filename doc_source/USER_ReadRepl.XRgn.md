@@ -193,7 +193,7 @@ All of the considerations for performing replication within an AWS Region apply 
 + You can expect to see a higher level of lag time for any read replica that is in a different AWS Region than the source instance\. This lag time comes from the longer network channels between regional data centers\.
 + For cross\-Region read replicas, any of the create read replica commands that specify the `--db-subnet-group-name` parameter must specify a DB subnet group from the same VPC\.
 + Due to the limit on the number of access control list \(ACL\) entries for a VPC, we can't guarantee more than five cross\-Region read replica instances\. 
-+ The read replica uses the default DB parameter group for the specified DB engine\.
++ The read replica uses the default DB parameter group and DB option group for the specified DB engine\.
 + The read replica uses the default security group\.
 + For MariaDB, MySQL, and Oracle DB instances, when the source DB instance for a cross\-Region read replica is deleted, the read replica is promoted\.
 + For PostgreSQL DB instances, when the source DB instance for a cross\-Region read replica is deleted, the replication status of the read replica is set to `terminated`\. The read replica isn't promoted\.
