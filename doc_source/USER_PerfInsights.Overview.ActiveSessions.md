@@ -1,6 +1,6 @@
-# DB load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
+# Database load<a name="USER_PerfInsights.Overview.ActiveSessions"></a>
 
-The key metric for Performance Insights is `DB Load`, which is collected every second\. The unit for DB load is the average active sessions \(AAS\) for the DB engine\. 
+Database load \(DB load\) measures the level of activity in your database\. The key metric in Performance Insights is `DBLoad`, which is collected every second\. The unit for the `DBLoad` metric is the average active sessions \(AAS\) for the DB engine\. 
 
 **Topics**
 + [Average active sessions](#USER_PerfInsights.Overview.ActiveSessions.AAS)

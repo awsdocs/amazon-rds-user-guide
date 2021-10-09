@@ -73,7 +73,7 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
 1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
 
-1. To access your exported data in the Amazon S3 bucket, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service Console User Guide*\.
+1. To access your exported data in the Amazon S3 bucket, see [Uploading, downloading, and managing objects](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/upload-download-objects.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Setting up access to an Amazon S3 bucket<a name="USER_ExportSnapshot.Setup"></a>
 
@@ -90,7 +90,7 @@ Identify the Amazon S3 bucket to export the DB snapshot to\. Use an existing S3 
 **Note**  
 The S3 bucket to export to must be in the same AWS Region as the snapshot\.
 
-For more information about working with Amazon S3 buckets, see the following in the *Amazon Simple Storage Service Console User Guide*:
+For more information about working with Amazon S3 buckets, see the following in the *Amazon Simple Storage Service User Guide*:
 + [ How do I view the properties for an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/view-bucket-properties.html)
 + [ How do I enable default encryption for an Amazon S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html)
 + [ How do I create an S3 bucket?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)

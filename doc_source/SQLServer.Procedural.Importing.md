@@ -53,7 +53,7 @@ To set up for native backup and restore, you need three components:
 
    You must have an S3 bucket to use for your backup files and then upload backups you want to migrate to RDS\. If you already have an Amazon S3 bucket, you can use that\. If you don't, you can [ create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/CreatingaBucket.html)\. Alternatively, you can choose to have a new bucket created for you when you add the `SQLSERVER_BACKUP_RESTORE` option by using the AWS Management Console\. 
 
-   For information on using S3, see the *Amazon Simple Storage Service Getting Started Guide *for a simple introduction\. For more depth, see the *Amazon Simple Storage Service Console User Guide*\.
+   For information on using S3, see the *Amazon Simple Storage Service User Guide *for a simple introduction\. For more depth, see the *Amazon Simple Storage Service User Guide*\.
 
 1. An AWS Identity and Access Management \(IAM\) role to access the bucket\.
 

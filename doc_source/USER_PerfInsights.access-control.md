@@ -30,7 +30,7 @@ For users who don't have full access with the `AmazonRDSFullAccess` policy, you 
 
 1. On the **Create Policy** page, choose the JSON tab\. 
 
-1. Copy and paste the following\.
+1. Copy and paste the following text, replacing *us\-east\-1* with the name of your AWS Region and *111122223333* with your customer account number\.
 
    ```
    {
@@ -39,7 +39,7 @@ For users who don't have full access with the `AmazonRDSFullAccess` policy, you 
            {
                "Effect": "Allow",
                "Action": "pi:*",
-               "Resource": "arn:aws:pi:::metrics/rds/*"
+               "Resource": "arn:aws:pi:us-east-1:111122223333:metrics/rds/*
            },
            {
                "Effect": "Allow",

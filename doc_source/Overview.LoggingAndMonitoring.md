@@ -12,7 +12,7 @@ CloudTrail provides a record of actions taken by a user, role, or an AWS service
 Amazon RDS provides metrics in real time for the operating system \(OS\) that your DB instance runs on\. You can view the metrics for your DB instance using the console, or consume the Enhanced Monitoring JSON output from Amazon CloudWatch Logs in a monitoring system of your choice\. For more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 **Amazon RDS Performance Insights**  
-Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Monitoring with Performance Insights on Amazon RDS](USER_PerfInsights.md)\.
+Performance Insights expands on existing Amazon RDS monitoring features to illustrate your database's performance and help you analyze any issues that affect it\. With the Performance Insights dashboard, you can visualize the database load and filter the load by waits, SQL statements, hosts, or users\. For more information, see [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)\.
 
 **Database Logs**  
 You can view, download, and watch database logs using the AWS Management Console, AWS CLI, or RDS API\. For more information, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.

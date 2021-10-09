@@ -24,6 +24,46 @@ In contrast, *minor version upgrades* include only changes that are backward\-co
 
 To safely upgrade your DB instances, Amazon RDS uses the `pg_upgrade` utility described in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)\. 
 
+When you use the AWS Management Console to upgrade a DB instance, it shows the valid upgrade targets for the DB instance\. You can also use the following AWS CLI command to identify the valid upgrade targets for a DB instance:
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+  --engine postgres \
+  --engine-version version-number \
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+  --engine postgres ^
+  --engine-version version-number ^
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For example, to identify the valid upgrade targets for a PostgreSQL version 10\.11 DB instance, run the following AWS CLI command:
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+  --engine postgres \
+  --engine-version 10.11 \
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+  --engine postgres ^
+  --engine-version 10.11 ^
+  --query "DBEngineVersions[*].ValidUpgradeTarget[*].{EngineVersion:EngineVersion}" --output text
+```
+
 Amazon RDS takes two DB snapshots during the upgrade process if your backup retention period is greater than 0\. The first DB snapshot is of the DB instance before any upgrade changes have been made\. If the upgrade doesn't work for your databases, you can restore this snapshot to create a DB instance running the old version\. The second DB snapshot is taken after the upgrade completes\. 
 
 **Note**  
@@ -102,17 +142,6 @@ The `tsearch2` and `chkpass` extensions aren't supported in PostgreSQL 11 or lat
 | 9\.5\.16 | [11\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version112) |  |  | [11\.2](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version112) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) | 
 | 9\.5\.15 | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) |  |  | [11\.1](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version111) | [10\.16](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version1016) | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) | 
 | 9\.5\.14, 9\.5\.13, 9\.5\.12, 9\.5\.10, 9\.5\.9, 9\.5\.9, 9\.5\.7, 9\.5\.6, 9\.5\.4  | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) |  |  |  |  | [9\.6\.21](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.version9621) | 
-
-To get a list of all valid upgrade targets for a current source version in a particular AWS Region, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) CLI command\. For example:
-
-```
-export REGION=eu-central-1
-export ENDPOINT=https://rds.eu-central-1.amazonaws.com
-export DBCURRENTVERSION=10.11
-
-
-aws rds describe-db-engine-versions --engine postgres --region $REGION --endpoint $ENDPOINT --output text --query "*[].ValidUpgradeTarget[?IsMajorVersionUpgrade==`true`].{EngineVersion:EngineVersion}" --engine-version DB-current-version
-```
 
 ## How to perform a major version upgrade<a name="USER_UpgradeDBInstance.PostgreSQL.MajorVersion.Process"></a>
 
@@ -253,14 +282,81 @@ For each RDS for PostgreSQL major version, one minor version is designated by RD
 + Bugs in the PostgreSQL community version
 + Overall fleet stability since the minor version was released
 
-You can use the following AWS CLI command and script to determine the current automatic upgrade minor versions\. 
+You can use the following AWS CLI command to determine the current automatic minor upgrade target version for a specified PostgreSQL minor version in a specific AWS Region\. 
+
+For Linux, macOS, or Unix:
 
 ```
-aws rds describe-db-engine-versions --engine postgres | grep -A 1 AutoUpgrade| grep -A 2 True |grep PostgreSQL | sort --unique | sed -e 's/"Description": "//g'
+aws rds describe-db-engine-versions \
+--engine postgres \
+--engine-version minor-version \
+--region region \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output text
 ```
 
-**Note**  
-If no results are returned, there is no automatic minor version upgrade available and scheduled\.
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine postgres ^
+--engine-version minor-version ^
+--region region ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output text
+```
+
+For example, the following AWS CLI command determines the automatic minor upgrade target for PostgreSQL minor version 10\.11 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+--engine postgres \
+--engine-version 10.11 \
+--region us-east-2 \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output table
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine postgres ^
+--engine-version 10.11 ^
+--region us-east-2 ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output table
+```
+
+Your output is similar to the following\.
+
+```
+----------------------------------
+|    DescribeDBEngineVersions    |
++--------------+-----------------+
+|  AutoUpgrade |  EngineVersion  |
++--------------+-----------------+
+|  False       |  10.12          |
+|  False       |  10.13          |
+|  False       |  10.14          |
+|  False       |  10.15          |
+|  False       |  10.16          |
+|  True        |  10.17          |
+|  False       |  10.18          |
+|  False       |  11.6           |
+|  False       |  11.7           |
+|  False       |  11.8           |
+|  False       |  11.9           |
+|  False       |  11.10          |
+|  False       |  11.11          |
+|  False       |  11.12          |
+|  False       |  11.13          |
++--------------+-----------------+
+```
+
+In this example, the `AutoUpgrade` value is `True` for PostgreSQL version 10\.17\. So, the automatic minor upgrade target is PostgreSQL version 10\.17, which is highlighted in the output\.
 
 A PostgreSQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The DB instance has the **Auto minor version upgrade** option enabled\.

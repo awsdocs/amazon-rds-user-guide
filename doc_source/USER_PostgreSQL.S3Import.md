@@ -5,7 +5,7 @@ You can import data from Amazon S3 into a table belonging to an RDS for PostgreS
 **Note**  
 To import from Amazon S3 into RDS for PostgreSQL, your database must be running PostgreSQL version 10\.7 or later\. 
 
-For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
 **Topics**
 + [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)
@@ -43,7 +43,7 @@ To import data stored in an Amazon S3 bucket to a PostgreSQL database table, fol
       + File path – The file path locates the file in the Amazon S3 bucket\.
       + AWS Region – The AWS Region is the location of the Amazon S3 bucket\. For example, if the S3 bucket is in the US East \(N\. Virginia\) Region, use `us-east-1`\. For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
 
-      To find how to get this information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
+      To find how to get this information, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\. You can confirm the information by using the AWS CLI command `aws s3 cp`\. If the information is correct, this command downloads a copy of the Amazon S3 file\. 
 
       ```
       aws s3 cp s3://sample_s3_bucket/sample_file_path ./ 
@@ -305,7 +305,7 @@ psql=> SELECT aws_s3.table_import_from_s3(
 
 If you encounter connection problems when attempting to import Amazon S3 file data, see the following for recommendations:
 + [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
-+ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide*
++ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service User Guide*
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the *IAM User Guide*
 
 ## Using the aws\_s3\.table\_import\_from\_s3 function to import Amazon S3 data<a name="USER_PostgreSQL.S3Import.FileFormats"></a>
@@ -396,7 +396,7 @@ Ensure that the file contains the following Amazon S3 metadata:
 + Key: `Content-Encoding`
 + Value: `gzip`
 
-For more about adding these values to Amazon S3 metadata, see [How do I add metadata to an S3 object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service Console User Guide*\.
+For more about adding these values to Amazon S3 metadata, see [How do I add metadata to an S3 object?](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-metadata.html) in the *Amazon Simple Storage Service User Guide*\.
 
 Import the gzip file into your RDS for PostgreSQL DB instance as shown following\.
 

@@ -17,10 +17,9 @@ The following table shows the event category and a list of events when a DB inst
 | --- | --- | --- | 
 |  availability  | RDS\-EVENT\-0006 |  The DB instance restarted\.  | 
 |  availability  | RDS\-EVENT\-0004 |  DB instance shutdown\.  | 
-|  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL or MariaDB\.  | 
+|  availability  | RDS\-EVENT\-0022 |  An error has occurred while restarting MySQL\.  | 
 |  backup  | RDS\-EVENT\-0001 |  Backing up the DB instance\.  | 
 |  backup  | RDS\-EVENT\-0002 |  Finished DB Instance backup\.  | 
-|  backup  | RDS\-EVENT\-0075 |  RDS finished creating a user\-initiated snapshot\.  | 
 |  backup  | RDS\-EVENT\-0086 |  RDS was unable to associate the option group with the database instance\. Confirm that the option group is supported on your DB instance class and configuration\. For more information see [Working with option groups](USER_WorkingWithOptionGroups.md)\.  | 
 |  configuration change  | RDS\-EVENT\-0009 |  The DB instance has been added to a security group\.  | 
 |  configuration change  | RDS\-EVENT\-0024 |  The DB instance is being converted to a Multi\-AZ DB instance\.  | 
@@ -42,23 +41,23 @@ The following table shows the event category and a list of events when a DB inst
 |  configuration change  | RDS\-EVENT\-0078 |  The Enhanced Monitoring configuration has been changed\.  | 
 |  creation  | RDS\-EVENT\-0005 |  DB instance created\.  | 
 |  deletion  | RDS\-EVENT\-0003 |  The DB instance has been deleted\.  | 
-|  failover  | RDS\-EVENT\-0034 |  Amazon RDS is not attempting a requested failover because a failover recently occurred on the DB instance\.  | 
 |  failover  | RDS\-EVENT\-0013 |  A Multi\-AZ failover that resulted in the promotion of a standby instance has started\.  | 
 |  failover  | RDS\-EVENT\-0015 |  A Multi\-AZ failover that resulted in the promotion of a standby instance is complete\. It may take several minutes for the DNS to transfer to the new primary DB instance\.  | 
-|  failover  | RDS\-EVENT\-0065 |  The instance has recovered from a partial failover\.  | 
+|  failover  | RDS\-EVENT\-0034 |  Amazon RDS is not attempting a requested failover because a failover recently occurred on the DB instance\.  | 
 |  failover  | RDS\-EVENT\-0049 | A Multi\-AZ failover has completed\. | 
 |  failover  | RDS\-EVENT\-0050 |  A Multi\-AZ activation has started after a successful instance recovery\.  | 
 |  failover  | RDS\-EVENT\-0051 |  A Multi\-AZ activation is complete\. Your database should be accessible now\.  | 
+|  failover  | RDS\-EVENT\-0065 |  The instance has recovered from a partial failover\.  | 
 |  failure  | RDS\-EVENT\-0031 |  The DB instance has failed due to an incompatible configuration or an underlying storage issue\. Begin a point\-in\-time\-restore for the DB instance\.  | 
-|  failure  | RDS\-EVENT\-0036 |  The DB instance is in an incompatible network\. Some of the specified subnet IDs are invalid or do not exist\.  | 
 |  failure  | RDS\-EVENT\-0035 |  The DB instance has invalid parameters\. For example, if the DB instance could not start because a memory\-related parameter is set too high for this instance class, the customer action would be to modify the memory parameter and reboot the DB instance\.  | 
-|  failure  | RDS\-EVENT\-0058 |  Error while creating Statspack user account PERFSTAT\. Please drop the account before adding the Statspack option\.  | 
+|  failure  | RDS\-EVENT\-0036 |  The DB instance is in an incompatible network\. Some of the specified subnet IDs are invalid or do not exist\.  | 
+|  failure  | RDS\-EVENT\-0058 |  Error while creating Statspack user account PERFSTAT\. Drop the account before you add the Statspack option\.  | 
 |  failure  | RDS\-EVENT\-0079 |  Enhanced Monitoring cannot be enabled without the enhanced monitoring IAM role\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS enhanced monitoring](USER_Monitoring.OS.Enabling.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0080 |  Enhanced Monitoring was disabled due to an error making the configuration change\. It is likely that the enhanced monitoring IAM role is configured incorrectly\. For information on creating the enhanced monitoring IAM role, see [To create an IAM role for Amazon RDS enhanced monitoring](USER_Monitoring.OS.Enabling.md#USER_Monitoring.OS.IAMRole)\.  | 
 |  failure  | RDS\-EVENT\-0081 |  The IAM role that you use to access your Amazon S3 bucket for SQL Server native backup and restore is configured incorrectly\. For more information, see [Setting up for native backup and restore](SQLServer.Procedural.Importing.md#SQLServer.Procedural.Importing.Native.Enabling)\.  | 
 |  failure  | RDS\-EVENT\-0188 |  Amazon RDS was unable to upgrade a MySQL DB instance from version 5\.7 to version 8\.0 because of incompatibilities related to the data dictionary\. The DB instance was rolled back to MySQL version 5\.7\. For more information, see [Rollback after failure to upgrade from MySQL 5\.7 to 8\.0](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.Major.RollbackAfterFailure)\.  | 
-|  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  low storage  | RDS\-EVENT\-0007 |  The allocated storage for the DB instance has been consumed\. To resolve this issue, allocate additional storage for the DB instance\. For more information, see the [RDS FAQ](https://aws.amazon.com/rds/faqs/#20)\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
+|  low storage  | RDS\-EVENT\-0089 |  The DB instance has consumed more than 90% of its allocated storage\. You can monitor the storage space for a DB instance using the **Free Storage Space** metric\.  | 
 |  maintenance  | RDS\-EVENT\-0026 |  Offline maintenance of the DB instance is taking place\. The DB instance is currently unavailable\.  | 
 |  maintenance  | RDS\-EVENT\-0027 |  Offline maintenance of the DB instance is complete\. The DB instance is now available\.  | 
 | maintenance | RDS\-EVENT\-0047 |  Patching of the DB instance has completed\.  | 
@@ -70,9 +69,9 @@ The following table shows the event category and a list of events when a DB inst
 |  maintenance, failure  | RDS\-EVENT\-0195 |  The upgrade of the time zone file failed\. For more information, see [Oracle time zone file autoupgrade](Appendix.Oracle.Options.Timezone-file-autoupgrade.md)\.  | 
 | notification | RDS\-EVENT\-0044 | Operator\-issued notification\. For more information, see the event message\. | 
 | notification | RDS\-EVENT\-0048 | Patching of the DB instance has been delayed\. | 
-|  notification  | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [ Supported storage engines for MySQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.Storage.html)\. | 
-|  notification  | RDS\-EVENT\-0055 |  The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of tables on your DB instance\.    For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
-|  notification  | RDS\-EVENT\-0056 |  The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Please reduce the number of databases on your DB instance\.    For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.   | 
+|  notification  | RDS\-EVENT\-0054 | The MySQL storage engine you are using is not InnoDB, which is the recommended MySQL storage engine for Amazon RDS\. For information about MySQL storage engines, see [Supported storage engines for MySQL on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Concepts.Storage.html)\. | 
+|  notification  | RDS\-EVENT\-0055 |  The number of tables you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Reduce the number of tables on your DB instance\. For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
+|  notification  | RDS\-EVENT\-0056 |  The number of databases you have for your DB instance exceeds the recommended best practices for Amazon RDS\. Reduce the number of databases on your DB instance\.   For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
 |  notification  | RDS\-EVENT\-0064 | The TDE key has been rotated\. For information about recommended best practices, see [Amazon RDS basic operational guidelines](CHAP_BestPractices.md#CHAP_BestPractices.DiskPerformance)\.  | 
 |  notification  | RDS\-EVENT\-0084 |  You attempted to convert a DB instance to Multi\-AZ, but it contains in\-memory file groups that are not supported for Multi\-AZ\. For more information, see [Multi\-AZ deployments for Amazon RDS for Microsoft SQL Server](USER_SQLServerMultiAZ.md)\.   | 
 |  notification  | RDS\-EVENT\-0087 |  The DB instance has been stopped\.   | 
@@ -80,12 +79,12 @@ The following table shows the event category and a list of events when a DB inst
 |  notification  | RDS\-EVENT\-0154 |  The DB instance is being started due to it exceeding the maximum allowed time being stopped\.  | 
 |  notification  | RDS\-EVENT\-0157 |  RDS can't modify the DB instance class because the target instance class can't support the number of databases that exist on the source DB instance\. The error message appears as: "The instance has *N* databases, but after conversion it would only support *N*"\. For more information, see [Limitations for Microsoft SQL Server DB instances](CHAP_SQLServer.md#SQLServer.Concepts.General.FeatureSupport.Limits)\.  | 
 |  notification  | RDS\-EVENT\-0158 |  DB instance is in a state that can't be upgraded\.  | 
-|  read replica  | RDS\-EVENT\-0202 |  Read replica creation failed\.  | 
 |  read replica  | RDS\-EVENT\-0045 |  An error has occurred in the read replication process\. For more information, see the event message\.  In addition, see the troubleshooting section for read replicas for your DB engine\.  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html)   | 
 |  read replica  | RDS\-EVENT\-0046 | The read replica has resumed replication\. This message appears when you first create a read replica, or as a monitoring message confirming that replication is functioning properly\. If this message follows an RDS\-EVENT\-0045 notification, then replication has resumed following an error or after replication was stopped\. | 
 |  read replica  | RDS\-EVENT\-0057 |  Replication on the read replica was terminated\.  | 
 |  read replica  | RDS\-EVENT\-0062 |  Replication on the read replica was manually stopped\.  | 
 |  read replica  | RDS\-EVENT\-0063 |  Replication on the read replica was reset\.  | 
+|  read replica  | RDS\-EVENT\-0202 |  Read replica creation failed\.  | 
 |  recovery  | RDS\-EVENT\-0020 |  Recovery of the DB instance has started\. Recovery time will vary with the amount of data to be recovered\.  | 
 |  recovery  | RDS\-EVENT\-0021 |  Recovery of the DB instance is complete\.  | 
 |  recovery  | RDS\-EVENT\-0023 |  A manual backup has been requested but Amazon RDS is currently in the process of creating a DB snapshot\. Submit the request again after Amazon RDS has completed the DB snapshot\.  | 

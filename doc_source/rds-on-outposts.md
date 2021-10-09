@@ -54,7 +54,9 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Modifying the maintenance window  |  Yes  |  —  |  [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)  | 
 |  Automatic minor version upgrade  |  Yes  |  —  |  [Automatically upgrading the minor engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.AutoMinorVersionUpgrades)  | 
 |  Modifying the backup window  |  Yes  |  —  |  [Working with backups](USER_WorkingWithAutomatedBackups.md) and [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
-|  DB instance scaling  |  Yes  |  To scale a DB instance, modify its on\-premises DB instance class\. Storage scaling isn't supported\.  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Changing the DB instance class  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Changing the allocated storage  |  No  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
+|  Storage autoscaling  |  No  |  —  |  [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)  | 
 |  Manual and automatic DB instance snapshots  |  Yes  |  Manual and automatic DB instance snapshots are stored in your AWS Region\.  |  [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
 |  Restoring from a DB snapshot  |  Yes  |  —  |  [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
@@ -64,7 +66,7 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  No  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)  | 
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
-|  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
+|  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
 |  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 

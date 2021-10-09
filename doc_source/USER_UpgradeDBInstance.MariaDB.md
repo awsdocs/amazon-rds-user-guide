@@ -101,61 +101,76 @@ For more information about these settings, see [Settings for DB instances](Overv
 
 For some RDS for MariaDB major versions in some AWS Regions, one minor version is designated by RDS as the automatic upgrade version\. After a minor version has been tested and approved by Amazon RDS, the minor version upgrade occurs automatically during your maintenance window\. RDS doesn't automatically set newer released minor versions as the automatic upgrade version\. Before RDS designates a newer automatic upgrade version, several criteria are considered, such as the following:
 + Known security issues
-+ Bugs in the MySQL community version
++ Bugs in the MariaDB community version
 + Overall fleet stability since the minor version was released
 
-You can use the following AWS CLI command and script to determine the current automatic minor upgrade target version for a specified MariaDB minor version in a specific AWS Region\. 
+You can use the following AWS CLI command to determine the current automatic minor upgrade target version for a specified MariaDB minor version in a specific AWS Region\. 
+
+For Linux, macOS, or Unix:
 
 ```
-aws rds describe-db-engine-versions --output=table --engine mariadb --engine-version minor-version --region region
+aws rds describe-db-engine-versions \
+--engine mariadb \
+--engine-version minor-version \
+--region region \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output text
 ```
 
-For example, the following AWS CLI command determines the automatic minor upgrade target for MariaDB minor version 10\.2\.11 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+For Windows:
 
 ```
-aws rds describe-db-engine-versions --output=table --engine mariadb --engine-version 10.2.11 --region us-east-2
+aws rds describe-db-engine-versions ^
+--engine mariadb ^
+--engine-version minor-version ^
+--region region ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output text
+```
+
+For example, the following AWS CLI command determines the automatic minor upgrade target for MariaDB minor version 10\.3\.8 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+--engine mariadb \
+--engine-version 10.3.8 \
+--region us-east-2 \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output table
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine mariadb ^
+--engine-version 10.3.8 ^
+--region us-east-2 ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output table
 ```
 
 Your output is similar to the following\.
 
 ```
----------------------------------------------------------------------------------------------
-|                                 DescribeDBEngineVersions                                  |
-+-------------------------------------------------------------------------------------------+
-||                                    DBEngineVersions                                     ||
-|+--------------------------------------------------+--------------------------------------+|
-||  DBEngineDescription                             |  MariaDb Community Edition           ||
-||  DBEngineVersionDescription                      |  MariaDB 10.2.11                     ||
-||  DBParameterGroupFamily                          |  mariadb10.2                         ||
-||  Engine                                          |  mariadb                             ||
-||  EngineVersion                                   |  10.2.11                             ||
-||  Status                                          |  available                           ||
-||  SupportsGlobalDatabases                         |  False                               ||
-||  SupportsLogExportsToCloudwatchLogs              |  True                                ||
-||  SupportsParallelQuery                           |  False                               ||
-||  SupportsReadReplica                             |  True                                ||
-|+--------------------------------------------------+--------------------------------------+|
-|||                                  ExportableLogTypes                                   |||
-||+---------------------------------------------------------------------------------------+||
-|||  audit                                                                                |||
-|||  error                                                                                |||
-|||  general                                                                              |||
-|||  slowquery                                                                            |||
-||+---------------------------------------------------------------------------------------+||
-|||                                  ValidUpgradeTarget                                   |||
-||+-------------+------------------+----------+----------------+--------------------------+||
-||| AutoUpgrade |   Description    | Engine   | EngineVersion  |  IsMajorVersionUpgrade   |||
-||+-------------+------------------+----------+----------------+--------------------------+||
-|||  False      |  MariaDB 10.2.12 |  mariadb |  10.2.12       |  False                   |||
-|||  False      |  MariaDB 10.2.15 |  mariadb |  10.2.15       |  False                   |||
-|||  True       |  MariaDB 10.2.21 |  mariadb |  10.2.21       |  False                   |||
-|||  False      |  MariaDB 10.3.8  |  mariadb |  10.3.8        |  True                    |||
-|||  False      |  MariaDB 10.3.20 |  mariadb |  10.3.20       |  True                    |||
-|||  False      |  MariaDB 10.3.23 |  mariadb |  10.3.23       |  True                    |||
-||+-------------+------------------+----------+----------------+--------------------------+||
+----------------------------------
+|    DescribeDBEngineVersions    |
++--------------+-----------------+
+|  AutoUpgrade |  EngineVersion  |
++--------------+-----------------+
+|  False       |  10.3.20        |
+|  True        |  10.3.23        |
+|  False       |  10.3.28        |
+|  False       |  10.3.31        |
+|  False       |  10.4.13        |
+|  False       |  10.4.18        |
+|  False       |  10.4.21        |
++--------------+-----------------+
 ```
 
-In this example, the `AutoUpgrade` value is `True` for MariaDB version 10\.2\.21\. So, the automatic minor upgrade target is MariaDB version 10\.2\.21, which is highlighted in the output\.
+In this example, the `AutoUpgrade` value is `True` for MariaDB version 10\.3\.23\. So, the automatic minor upgrade target is MariaDB version 10\.3\.23, which is highlighted in the output\.
 
 A MariaDB DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The **Auto minor version upgrade** setting is enabled\.

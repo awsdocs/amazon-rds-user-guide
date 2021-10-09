@@ -1,6 +1,6 @@
-# Amazon RDS Tutorials<a name="CHAP_Tutorials"></a>
+# Amazon RDS tutorials and sample code<a name="CHAP_Tutorials"></a>
 
-The AWS documentation includes several tutorials that guide you through common Amazon RDS use cases\. Many of these tutorials show you how to use Amazon RDS with other AWS services\. 
+The AWS documentation includes several tutorials that guide you through common Amazon RDS use cases\. Many of these tutorials show you how to use Amazon RDS with other AWS services\. In addition, you can access sample code in GitHub\. 
 
 **Note**  
 You can find more tutorials at the [AWS Database Blog](http://aws.amazon.com/blogs/database/)\. For information about training, see [AWS Training and Certification](https://www.aws.training/)\.
@@ -51,18 +51,18 @@ The following tutorials in other AWS guides show you how to perform common tasks
 ## Tutorials and sample code in GitHub<a name="CHAP_Tutorials.GitHub"></a>
 
 The following tutorials and sample code in GitHub show you how to perform common tasks with Amazon RDS:
-+ [ Creating the Amazon Relational Database Service item tracker](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javav2/usecases/Creating_rds_item_tracker)
++ [ Creating the Amazon Relational Database Service item tracker](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/usecases/Creating_rds_item_tracker)
 
   Learn how to create an application that tracks and reports on work items using Amazon RDS, Amazon Simple Email Service, Elastic Beanstalk, and SDK for Java 2\.x\.
-+ [ SDK for Go code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/go/rds)
++ [ SDK for Go code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/go/rds)
 
   View a collection of SDK for Go code samples for Amazon RDS and Aurora\.
-+ [ SDK for Java 2\.x code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javav2/example_code/rds/src/main/java/com/example/rds)
++ [ SDK for Java 2\.x code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/rds/src/main/java/com/example/rds)
 
   View a collection of SDK for Java 2\.x code samples for Amazon RDS and Aurora\.
-+ [ SDK for PHP code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/php/example_code/rds)
++ [ SDK for PHP code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/php/example_code/rds)
 
   View a collection of SDK for PHP code samples for Amazon RDS and Aurora\.
-+ [ SDK for Ruby code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/ruby/example_code/rds)
++ [ SDK for Ruby code samples for Amazon RDS](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/ruby/example_code/rds)
 
   View a collection of SDK for Ruby code samples for Amazon RDS and Aurora\.

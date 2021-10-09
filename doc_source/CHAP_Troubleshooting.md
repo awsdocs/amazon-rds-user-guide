@@ -229,7 +229,7 @@ aws rds describe-events --source-type db-instance --source-identifier mydbinstan
 
 ## Amazon RDS insufficient DB instance capacity<a name="CHAP_Troubleshooting.Capacity"></a>
 
-The `InsufficientDBInstanceCapacity` error can be returned when you try to create or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
+The `InsufficientDBInstanceCapacity` error can be returned when you try to create, start or modify a DB instance, or when you try to restore a DB instance from a DB snapshot\. When this error is returned, the following are common causes:
 + The specific DB instance class isn't available in the requested Availability Zone\. You can try one of the following to solve the problem:
   + Retry the request with a different DB instance class\.
   + Retry the request with a different Availability Zone\.

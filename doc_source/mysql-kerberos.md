@@ -230,14 +230,18 @@ If you modify a DB instance to enable Kerberos authentication, reboot the DB ins
 
 ```
 CREATE USER 'testuser'@'%' IDENTIFIED WITH 'auth_pam';
-UPDATE mysql.user SET ssl_type = 'any' WHERE ssl_type = '' AND PLUGIN = 'auth_pam' and USER = 'testuser';
-FLUSH PRIVILEGES;
 ```
 
  Replace `testuser` with the user name\. Users \(both humans and applications\) from your domain can now connect to the DB instance from a domain joined client machine using Kerberos authentication\. 
 
 **Important**  
-We strongly recommended that clients use SSL/TLS connections when using PAM authentication\. If they don't use SSL/TLS connections, the password might be sent as clear text in some cases\.
+We strongly recommended that clients use SSL/TLS connections when using PAM authentication\. If they don't use SSL/TLS connections, the password might be sent as clear text in some cases\. To require an SSL/TLS encrypted connection for your AD user, run the following command:  
+
+```
+UPDATE mysql.user SET ssl_type = 'any' WHERE ssl_type = '' AND PLUGIN = 'auth_pam' and USER = 'testuser';
+FLUSH PRIVILEGES;
+```
+For more information, see [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)\.
 
 ## Managing a DB instance in a domain<a name="mysql-kerberos-managing"></a>
 
@@ -290,6 +294,7 @@ At a command prompt, connect to one of the endpoints associated with your MySQL 
 +  You can't enable Kerberos authentication and IAM authentication at the same time\. Choose one authentication method or the other for your MySQL DB instance\. 
 +  Don't modify the DB instance port after enabling the feature\. 
 +  Don't use Kerberos authentication with read replicas\. 
++ If you have auto minor version upgrade turned on for a MySQL DB instance that is using Kerberos authentication, you must turn off Kerberos authentication and then turn it back on after an automatic upgrade\. For more information about auto minor version upgrades, see [Automatic minor version upgrades for MySQL](USER_UpgradeDBInstance.MySQL.md#USER_UpgradeDBInstance.MySQL.Minor)\.
 +  To delete a DB instance with this feature enabled, first disable the feature\. To do this, use the `modify-db-instance` CLI command for the DB instance and specify `none` for the `--domain` parameter\. 
 
    If you use the CLI or RDS API to delete a DB instance with this feature enabled, expect a delay\. 

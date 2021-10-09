@@ -1,6 +1,6 @@
-# Customizing the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
+# Adding counter metrics to the Performance Insights dashboard<a name="USER_PerfInsights_Counters"></a>
 
-With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs that show a selection of dozens of operating system and database performance metrics\. This information can be correlated with database load to help identify and analyze performance problems\.
+With counter metrics, you can customize the Performance Insights dashboard to include up to 10 additional graphs\. These graphs show a selection of dozens of operating system and database performance metrics\. You can correlate this information with DB load to help identify and analyze performance problems\.
 
 **Topics**
 + [Performance Insights operating system counters](#USER_PerfInsights_Counters.OS)

@@ -2,7 +2,7 @@
 
 You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. The upload to S3 uses server\-side encryption by default\.
 
-For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service Getting Started Guide*\.
+For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
 **Note**  
 You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.
@@ -72,7 +72,7 @@ If the output includes the string `"s3Export"`, then the engine supports Amazon 
 Specify the following information to identify the location in Amazon S3 where you want to export data to:
 + Bucket name – A *bucket* is a container for Amazon S3 objects or files\.
 
-  For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) and [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+  For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) and [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\. 
 + File path – The file path identifies where the export is stored in the Amazon S3 bucket\. The file path consists of the following:
   + An optional path prefix that identifies a virtual folder path\.
   + A file prefix that identifies one or more files to be stored\. Larger exports are stored in multiple files, each with a maximum size of approximately 6 GB\. The additional file names have the same file prefix but with `_partXX` appended\. The `XX` represents 2, then 3, and so on\.
@@ -291,7 +291,7 @@ s3-us-west-2://my-bucket/my-prefix_part2
 s3-us-west-2://my-bucket/my-prefix_part3
 ```
 
-For the full reference for this function and additional ways to call it, see [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3)\. For more about accessing files in Amazon S3, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service Getting Started Guide*\. 
+For the full reference for this function and additional ways to call it, see [aws\_s3\.query\_export\_to\_s3](#aws_s3.export_query_to_s3)\. For more about accessing files in Amazon S3, see [View an object](https://docs.aws.amazon.com/AmazonS3/latest/gsg/OpeningAnObject.html) in the *Amazon Simple Storage Service User Guide*\. 
 
 ### Exporting to a CSV file that uses a custom delimiter<a name="postgresql-s3-export-examples-custom-delimiter"></a>
 
@@ -315,7 +315,7 @@ If you encounter connection problems when attempting to export data to Amazon S3
 
 See also the following for recommendations:
 + [Troubleshooting Amazon RDS identity and access](security_iam_troubleshoot.md)
-+ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service Developer Guide*
++ [Troubleshooting Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html) in the *Amazon Simple Storage Service User Guide*
 + [Troubleshooting Amazon S3 and IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_iam-s3.html) in the *IAM User Guide*
 
 ## Function reference<a name="postgresql-s3-export-functions"></a>

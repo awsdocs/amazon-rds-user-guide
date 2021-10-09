@@ -17,7 +17,7 @@ For Amazon RDS for Oracle to integrate with Amazon S3, the Amazon RDS DB instanc
 
 1. Create an AWS Identity and Access Management \(IAM\) policy with the permissions required to transfer files from your bucket to RDS\. 
 
-   To create the policy, you need the Amazon Resource Name \(ARN\) value for your bucket\. Also, RDS for Oracle supports SSE\-KMS and SSE\-S3 encryption\. If your bucket is encrypted, you need the ARN for your AWS KMS key\. For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   To create the policy, you need the Amazon Resource Name \(ARN\) value for your bucket\. Also, RDS for Oracle supports SSE\-KMS and SSE\-S3 encryption\. If your bucket is encrypted, you need the ARN for your AWS KMS key\. For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon Simple Storage Service User Guide*\.
 **Note**  
 An Oracle DB instance can't access Amazon S3 buckets encrypted with SSE\-C\.
 
@@ -59,7 +59,7 @@ The Amazon VPC used by your DB instance doesn't need to provide access to the Am
 You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to allow Amazon RDS to access only specific files or folders in an Amazon S3 bucket\. For more information about how to define an access policy for Amazon S3, see [Managing access permissions to your Amazon S3 resources](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)\.
 
 1. \(Optional\) Choose **Add additional permissions** to add resources to the policy\. For example, do the following:
-   + If your bucket is encrypted with a custom KMS key, select **KMS** for the service\. Select **Encrypt**, **ReEncrypt**, **Decrypt**, **DescribeKey**, and **GenerateDataKey** for actions\. Enter the ARN of your custom key as the resource\. For more information, see [Protecting Data Using Server\-Side Encryption with KMS keys Stored in AWS Key Management Service \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) in the *Amazon Simple Storage Service Console User Guide*\.
+   + If your bucket is encrypted with a custom KMS key, select **KMS** for the service\. Select **Encrypt**, **ReEncrypt**, **Decrypt**, **DescribeKey**, and **GenerateDataKey** for actions\. Enter the ARN of your custom key as the resource\. For more information, see [Protecting Data Using Server\-Side Encryption with KMS keys Stored in AWS Key Management Service \(SSE\-KMS\)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html) in the *Amazon Simple Storage Service User Guide*\.
    + If you want Amazon RDS to access to access other buckets, add the ARNs for these buckets\. Optionally, you can also grant access to all buckets and objects in Amazon S3\.
 
 1. Choose **Next: Tags** and then **Next: Review**\.
@@ -399,7 +399,7 @@ These procedures upload or download the files in a single directory\. You can't 
 
 ### Uploading files from an Oracle DB instance to an Amazon S3 bucket<a name="oracle-s3-integration.using.upload"></a>
 
-You can upload files from an Oracle DB instance to an Amazon S3 bucket\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. The maximum object size in an Amazon S3 bucket is 5 TB\. For more information about working with objects, see [Amazon Simple Storage Service Developer Guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)\. For more information about performing RMAN backups, see [Performing common RMAN tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
+You can upload files from an Oracle DB instance to an Amazon S3 bucket\. For example, you can upload Oracle Recovery Manager \(RMAN\) backup files\. The maximum object size in an Amazon S3 bucket is 5 TB\. For more information about working with objects, see [Amazon Simple Storage Service User Guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)\. For more information about performing RMAN backups, see [Performing common RMAN tasks for Oracle DB instances](Appendix.Oracle.CommonDBATasks.RMAN.md)\.
 
 You upload files using the `rdsadmin.rdsadmin_s3_tasks.upload_to_s3` procedure\. This procedure has the following parameters\.
 

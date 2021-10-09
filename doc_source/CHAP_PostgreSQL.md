@@ -1155,6 +1155,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.2 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.2 | 
 | [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [autoinc \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
 | [aws\_commons](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.Reference) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [aws\_lambda](PostgreSQL-Lambda.md) | 1\.0 | 1\.0 | 1\.0 | N/A | 
 |  [aws\_s3\.table\_import\_from\_s3](USER_PostgreSQL.S3Import.md#aws_s3.table_import_from_s3) [aws\_s3\.query\_export\_to\_s3](postgresql-s3-export.md#aws_s3.export_query_to_s3)  | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
@@ -1173,6 +1174,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [hstore](http://www.postgresql.org/docs/current/hstore.html) | 1\.7 | 1\.7 | 1\.7 | 1\.7 | 
 | [hstore\_plperl](https://www.postgresql.org/docs/current/hstore.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [ICU module](http://site.icu-project.org/) | 60\.2 | 60\.2 | 60\.2 | 60\.2 | 
+| [insert\_username \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
 | [intagg](http://www.postgresql.org/docs/current/intagg.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [intarray](http://www.postgresql.org/docs/current/intarray.html) | 1\.3 | 1\.3 | 1\.3 | 1\.3 | 
 | [ip4r](https://github.com/RhodiumToad/ip4r) | 2\.4 | 2\.4 | 2\.4 | 2\.4 | 
@@ -1180,6 +1182,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | jsonb\_plperl | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [log\_fdw](#CHAP_PostgreSQL.Extensions.log_fdw) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [ltree](http://www.postgresql.org/docs/current/ltree.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| [moddatetime \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
 | [oracle\_fdw](https://github.com/laurenz/oracle_fdw) | 2\.3\.0 | 2\.3\.0 | N/A | N/A | 
 | [orafce](https://github.com/orafce/orafce) | 3\.15 | 3\.15 | 3\.13\.4 | 3\.13\.4 | 
 | [pageinspect](https://www.postgresql.org/docs/current/pageinspect.html) | 1\.8 | 1\.8 | 1\.8 | 1\.8 | 
@@ -1219,7 +1222,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [prefix](https://github.com/dimitri/prefix) | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 1\.2\.0 | 
 | [rdkit](https://github.com/rdkit/rdkit) | 3\.8 | 3\.8 | 3\.8 | 3\.8 | 
 | [rds\_tools](https://aws.amazon.com/blogs/database/scram-authentication-in-rds-for-postgresql-13) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
-| [spi module](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
+| [refint \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
 | [sslinfo](http://www.postgresql.org/docs/current/sslinfo.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
 | [tablefunc](http://www.postgresql.org/docs/current/tablefunc.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [test\_parser](https://www.postgresql.org/docs/9.4/test-parser.html) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 

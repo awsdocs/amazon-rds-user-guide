@@ -225,69 +225,74 @@ For some RDS for MySQL major versions in some AWS Regions, one minor version is 
 + Bugs in the MySQL community version
 + Overall fleet stability since the minor version was released
 
-You can use the following AWS CLI command and script to determine the current automatic minor upgrade target version for a specified MySQL minor version in a specific AWS Region\. 
+You can use the following AWS CLI command to determine the current automatic minor upgrade target version for a specified MySQL minor version in a specific AWS Region\. 
+
+For Linux, macOS, or Unix:
 
 ```
-aws rds describe-db-engine-versions --output=table --engine mysql --engine-version minor-version --region region
+aws rds describe-db-engine-versions \
+--engine mysql \
+--engine-version minor-version \
+--region region \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output text
 ```
 
-For example, the following AWS CLI command determines the automatic minor upgrade target for MySQL minor version 5\.7\.19 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+For Windows:
 
 ```
-aws rds describe-db-engine-versions --output=table --engine mysql --engine-version 5.7.19 --region us-east-2
+aws rds describe-db-engine-versions ^
+--engine mysql ^
+--engine-version minor-version ^
+--region region ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output text
+```
+
+For example, the following AWS CLI command determines the automatic minor upgrade target for MySQL minor version 8\.0\.11 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+--engine mysql \
+--engine-version 8.0.11 \
+--region us-east-2 \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output table
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine mysql ^
+--engine-version 8.0.11 ^
+--region us-east-2 ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output table
 ```
 
 Your output is similar to the following\.
 
 ```
------------------------------------------------------------------------------------------
-|                               DescribeDBEngineVersions                                |
-+---------------------------------------------------------------------------------------+
-||                                  DBEngineVersions                                   ||
-|+-------------------------------------------------+-----------------------------------+|
-||  DBEngineDescription                            |  MySQL Community Edition          ||
-||  DBEngineVersionDescription                     |  mysql 5.7.19                     ||
-||  DBParameterGroupFamily                         |  mysql5.7                         ||
-||  Engine                                         |  mysql                            ||
-||  EngineVersion                                  |  5.7.19                           ||
-||  Status                                         |  available                        ||
-||  SupportsGlobalDatabases                        |  False                            ||
-||  SupportsLogExportsToCloudwatchLogs             |  True                             ||
-||  SupportsParallelQuery                          |  False                            ||
-||  SupportsReadReplica                            |  True                             ||
-|+-------------------------------------------------+-----------------------------------+|
-|||                                ExportableLogTypes                                 |||
-||+-----------------------------------------------------------------------------------+||
-|||  audit                                                                            |||
-|||  error                                                                            |||
-|||  general                                                                          |||
-|||  slowquery                                                                        |||
-||+-----------------------------------------------------------------------------------+||
-|||                                ValidUpgradeTarget                                 |||
-||+-------------+---------------+---------+----------------+--------------------------+||
-||| AutoUpgrade |  Description  | Engine  | EngineVersion  |  IsMajorVersionUpgrade   |||
-||+-------------+---------------+---------+----------------+--------------------------+||
-|||  False      |  MySQL 5.7.21 |  mysql  |  5.7.21        |  False                   |||
-|||  False      |  MySQL 5.7.22 |  mysql  |  5.7.22        |  False                   |||
-|||  False      |               |  mysql  |  5.7.23        |  False                   |||
-|||  False      |  MySQL 5.7.24 |  mysql  |  5.7.24        |  False                   |||
-|||  False      |  MySQL 5.7.25 |  mysql  |  5.7.25        |  False                   |||
-|||  True       |  MySQL 5.7.26 |  mysql  |  5.7.26        |  False                   |||
-|||  False      |  MySQL 5.7.28 |  mysql  |  5.7.28        |  False                   |||
-|||  False      |  MySQL 5.7.30 |  mysql  |  5.7.30        |  False                   |||
-|||  False      |  MySQL 5.7.31 |  mysql  |  5.7.31        |  False                   |||
-|||  False      |  MySQL 8.0.11 |  mysql  |  8.0.11        |  True                    |||
-|||  False      |  MySQL 8.0.13 |  mysql  |  8.0.13        |  True                    |||
-|||  False      |  MySQL 8.0.15 |  mysql  |  8.0.15        |  True                    |||
-|||  False      |  MySQL 8.0.16 |  mysql  |  8.0.16        |  True                    |||
-|||  False      |  MySQL 8.0.17 |  mysql  |  8.0.17        |  True                    |||
-|||  False      |  MySQL 8.0.19 |  mysql  |  8.0.19        |  True                    |||
-|||  False      |  MySQL 8.0.20 |  mysql  |  8.0.20        |  True                    |||
-|||  False      |  MySQL 8.0.21 |  mysql  |  8.0.21        |  True                    |||
-||+-------------+---------------+---------+----------------+--------------------------+||
+----------------------------------
+|    DescribeDBEngineVersions    |
++--------------+-----------------+
+|  AutoUpgrade |  EngineVersion  |
++--------------+-----------------+
+|  False       |  8.0.15         |
+|  False       |  8.0.16         |
+|  False       |  8.0.17         |
+|  False       |  8.0.19         |
+|  False       |  8.0.20         |
+|  False       |  8.0.21         |
+|  True        |  8.0.23         |
+|  False       |  8.0.25         |
++--------------+-----------------+
 ```
 
-In this example, the `AutoUpgrade` value is `True` for MySQL version 5\.7\.26\. So, the automatic minor upgrade target is MySQL version 5\.7\.26, which is highlighted in the output\.
+In this example, the `AutoUpgrade` value is `True` for MySQL version 8\.0\.23\. So, the automatic minor upgrade target is MySQL version 8\.0\.23, which is highlighted in the output\.
 
 A MySQL DB instance is automatically upgraded during your maintenance window if the following criteria are met:
 + The **Auto minor version upgrade** setting is enabled\.
