@@ -42,14 +42,12 @@ In the console, you can modify a DB instance to enable or disable Performance In
 1. In the **Performance Insights** section, choose either **Enable Performance Insights** or **Disable Performance Insights**\.
 
    If you choose **Enable Performance Insights**, you have the following options:
-   + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\.
+   + **Retention** – The amount of time to retain Performance Insights data\. Choose either 7 days \(the default\) or 2 years\. If you chose Long Term Retention \(2 years\) when you enable Performance Insights, All displays 2 years of data\. If you chose Default \(7 days\) instead, All displays only the past week\.
    + **AWS KMS key** – Specify your KMS key\. Performance Insights encrypts all potentially sensitive data using your KMS key\. Data is encrypted in flight and at rest\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
 
 1. Choose **Continue**\.
 
-1. For **Scheduling of Modifications**, choose one of the following:
-   + **Apply during the next scheduled maintenance window** – Wait to apply the **Performance Insights** modification until the next maintenance window\.
-   + **Apply immediately** – Apply the **Performance Insights** modification as soon as possible\.
+1. For **Scheduling of Modifications**, choose Apply immediately\. If you choose Apply during the next scheduled maintenance window, your instance ignores this setting and enables Performance Insights immediately\.
 
 1. Choose **Modify instance**\.
 

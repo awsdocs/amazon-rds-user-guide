@@ -42,6 +42,7 @@ The following are some limitations to stopping and starting a DB instance:
 + You can't modify a stopped DB instance\.
 + You can't delete an option group that is associated with a stopped DB instance\.
 + You can't delete a DB parameter group that is associated with a stopped DB instance\.
++ In a Multi\-AZ configuration, the primary and secondary Availability Zones might be switched after you start the DB instance\.
 
 ## Option and parameter group considerations<a name="USER_StopInstance.OGPG"></a>
 

@@ -19,7 +19,7 @@ For more information about certificate rotation, see [Rotating your SSL/TLS cert
 
 ## Determining whether any applications are connecting to your Microsoft SQL Server DB instance using SSL<a name="ssl-certificate-rotation-sqlserver.determining-server"></a>
 
-Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. If the `rds.force_ssl` parameter is set to 1 \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. You can also find the setting for this parameter in the `sys.dm_server_registry` DMV\.
+Check the DB instance configuration for the value of the `rds.force_ssl` parameter\. By default, the `rds.force_ssl` parameter is set to 0 \(off\)\. If the `rds.force_ssl` parameter is set to 1 \(on\), clients are required to use SSL/TLS for connections\. For more information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 Run the following query to get the current encryption option for all the open connections to a DB instance\. The column `ENCRYPT_OPTION` returns `TRUE` if the connection is encrypted\.
 

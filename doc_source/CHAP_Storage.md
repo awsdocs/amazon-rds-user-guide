@@ -75,9 +75,10 @@ The following table shows the range of Provisioned IOPS and storage size range f
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
 
+The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for SQL Server, and 0\.5–50 on other RDS DB engines\.
+
 **Note**  
- For SQL Server, the maximum IOPS of 64,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, m5d, r5, r5b, r5d, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\.  
-For Oracle, the maximum IOPS of 256,000 is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the r5b instance type\. Other instance families guarantee performance up to 80,000 IOPS\.  
+ For SQL Server, the maximum 64,000 IOPS is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, m5d, r5, r5b, r5d, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\.  
 For PostgreSQL, the maximum IOPS on the db\.m5\.8xlarge, db\.m5\.16xlarge, db\.r5\.8xlarge, and db\.r5\.16xlarge instance classes is 40,000\.
 
 **Important**  

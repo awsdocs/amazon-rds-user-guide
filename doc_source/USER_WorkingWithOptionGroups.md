@@ -17,7 +17,7 @@ Some DB engines offer additional features that make it easier to manage data and
 
 ## Option groups overview<a name="Overview.OptionGroups"></a>
 
-Amazon RDS provides an empty default option group for each new DB instance\. You cannot modify this default option group, but any new option group that you create derives its settings from the default option group\. To apply an option to a DB instance, you must do the following: 
+Amazon RDS provides an empty default option group for each new DB instance\. You can't modify or delete this default option group, but any new option group that you create derives its settings from the default option group\. To apply an option to a DB instance, you must do the following: 
 
 1. Create a new option group, or copy or modify an existing option group\.
 
@@ -497,7 +497,7 @@ Include the following parameters:
 
 You can delete an option group that is not associated with any Amazon RDS resource\. An option group can be associated with a DB instance, a manual DB snapshot, or an automated DB snapshot\.
 
-If you try to delete an option group that is associated with an Amazon RDS resource, an error similar to the following is returned\. 
+You can't delete a default option group\. In addition, if you try to delete an option group that is associated with an Amazon RDS resource, an error similar to the following is returned\. 
 
 ```
 An error occurred (InvalidOptionGroupStateFault) when calling the DeleteOptionGroup operation: The option group 'optionGroupName' cannot be deleted because it is in use.            
