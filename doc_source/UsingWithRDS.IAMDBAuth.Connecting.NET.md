@@ -68,24 +68,23 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresqldb.123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
-// for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
+            using NpgsqlConnection conn = new NpgsqlConnection("Server=postgresqldb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Database=mydb;SSL Mode=Require;Trust Server Certificate=true;");
 
-            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresqldb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password={pwd};Database=mydb;SSL Mode=Require;Trust Server Certificate=true;");
+            // Add a callback to provide the password
+            conn.ProvidePasswordCallback = (host, port, _, username) =>
+                RDSAuthTokenGenerator.GenerateAuthToken(host, port, username);
+
             conn.Open();
 
             // Define a query
-                   NpgsqlCommand cmd = new NpgsqlCommand("select count(*) FROM pg_user", conn);
+            using var cmd = new NpgsqlCommand("select count(*) FROM pg_user", conn);
 
             // Execute a query
-            NpgsqlDataReader dr = cmd.ExecuteReader();
+            using var dr = cmd.ExecuteReader();
 
             // Read all rows and output the first column in each row
             while (dr.Read())
                 Console.Write("{0}\n", dr[0]);
-
-            // Close connection
-            conn.Close();
         }
     }
 }
