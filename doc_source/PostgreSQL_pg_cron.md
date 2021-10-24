@@ -1,8 +1,8 @@
 # Scheduling maintenance with the PostgreSQL pg\_cron extension<a name="PostgreSQL_pg_cron"></a>
 
-You can use the PostgreSQL pg\_cron extension to schedule maintenance commands within a PostgreSQL database\. For a complete description, see [ What is pg\_cron?](https://github.com/citusdata/pg_cron) in the pg\_cron documentation\. 
+You can use the PostgreSQL `pg_cron` extension to schedule maintenance commands within a PostgreSQL database\. For a complete description, see [ What is pg\_cron?](https://github.com/citusdata/pg_cron) in the pg\_cron documentation\. 
 
-The pg\_cron extension is supported on the RDS for PostgreSQL engine versions 12\.5 and higher\.
+The `pg_cron` extension is supported on the RDS for PostgreSQL engine versions 12\.5 and higher\.
 
 **Topics**
 + [Enabling the pg\_cron extension](#PostgreSQL_pg_cron.enable)
@@ -12,7 +12,7 @@ The pg\_cron extension is supported on the RDS for PostgreSQL engine versions 12
 
 ## Enabling the pg\_cron extension<a name="PostgreSQL_pg_cron.enable"></a>
 
-Enable the pg\_cron extension as follows:
+Enable the `pg_cron` extension as follows:
 
 1. Modify the parameter group associated with your PostgreSQL DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a PostgreSQL DB instance restart to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
@@ -22,7 +22,7 @@ Enable the pg\_cron extension as follows:
    CREATE EXTENSION pg_cron;
    ```
 
-1. Either use the default settings, or schedule jobs to run in other databases within your PostgreSQL DB instance\. The pg\_cron scheduler is set in the default PostgreSQL database named `postgres`\. The `pg_cron` objects are created in this `postgres` database and all scheduling actions run in this database\. 
+1. Either use the default settings, or schedule jobs to run in other databases within your PostgreSQL DB instance\. The `pg_cron` scheduler is set in the default PostgreSQL database named `postgres`\. The `pg_cron` objects are created in this `postgres` database and all scheduling actions run in this database\. 
 
    To schedule jobs to run in other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)\.
 
@@ -65,10 +65,10 @@ For more information, see [The pg\_cron tables](#PostgreSQL_pg_cron.tables)\.
 
 ## Scheduling pg\_cron jobs<a name="PostgreSQL_pg_cron.examples"></a>
 
-The following sections demonstrate scheduling pg\_cron jobs to perform management tasks\.
+The following sections demonstrate scheduling `pg_cron` jobs to perform management tasks\.
 
 **Note**  
- When creating pg\_cron jobs, make sure that the number of `max_worker_processes` is always greater than the number of `cron.max_running_jobs`\. A pg\_cron job will fail if it runs out of background worker processes\. The default number of pg\_cron jobs is `5`; for more information, see [The pg\_cron parameters](#PostgreSQL_pg_cron.parameters)\.
+ When creating `pg_cron` jobs, make sure that the number of `max_worker_processes` is always greater than the number of `cron.max_running_jobs`\. A `pg_cron` job will fail if it runs out of background worker processes\. The default number of `pg_cron` jobs is `5`; for more information, see [The pg\_cron parameters](#PostgreSQL_pg_cron.parameters)\.
 
 **Topics**
 + [Vacuuming a table](#PostgreSQL_pg_cron.vacuum)

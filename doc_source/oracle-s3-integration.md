@@ -98,7 +98,9 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
 
 1. Choose the Oracle DB instance name to display its details\.
 
-1. On the **Connectivity & security** tab, in the **Manage IAM roles** section, choose the role to add under **Add IAM roles to this instance**\.
+1. On the **Connectivity & security** tab, scroll down to the **Manage IAM roles** section at the bottom of the page\.
+
+1. Choose the role to add in the **Add IAM roles to this instance** section\.
 
 1. For **Feature**, choose **S3\_INTEGRATION**\.  
 ![\[Add S3_INTEGRATION role\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ora-s3-integration-role.png)

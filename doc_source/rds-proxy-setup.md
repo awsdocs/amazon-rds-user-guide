@@ -22,7 +22,7 @@ aws ec2 describe-internet-gateways
 aws ec2 describe-subnets --query '*[].[VpcId,SubnetId]' --output text | sort
 ```
 
- The following Linux example shows AWS CLI commands to determine the subnet IDs corresponding to a specific Aurora DB cluster or RDS DB instance\. For an Aurora cluster, first you find the ID for one of the associated DB instances\. You can extract the subnet IDs used by that DB instance by examining the nested fields within the `DBSubnetGroup` and `Subnets` attributes in the describe output for the DB instance\. You specify some or all of those subnet IDs when setting up a proxy for that database server\. 
+The following Linux example shows AWS CLI commands to determine the subnet IDs corresponding to a specific Aurora DB cluster or RDS DB instance\. For an Aurora cluster, first you find the ID for one of the associated DB instances\. You can extract the subnet IDs used by that DB instance by examining the nested fields within the `DBSubnetGroup` and `Subnets` attributes in the describe output for the DB instance\. You specify some or all of those subnet IDs when setting up a proxy for that database server\. 
 
 ```
 $ # Optional first step, only needed if you're starting from an Aurora cluster. Find the ID of any DB instance in the cluster.
@@ -100,7 +100,7 @@ aws secretsmanager create-secret \
 aws secretsmanager list-secrets
 ```
 
- When you create a proxy using the CLI, you pass the Amazon resource names \(ARNs\) of one or more secrets to the `--auth` parameter\. The following Linux example shows how to prepare a report with only the name and ARN of each secret owned by your AWS account\. This example uses the `--output table` parameter that is available in AWS CLI version 2\. If you are using AWS CLI version 1, use `--output text` instead\. 
+ When you create a proxy using the CLI, you pass the Amazon Resource Names \(ARNs\) of one or more secrets to the `--auth` parameter\. The following Linux example shows how to prepare a report with only the name and ARN of each secret owned by your AWS account\. This example uses the `--output table` parameter that is available in AWS CLI version 2\. If you are using AWS CLI version 1, use `--output text` instead\. 
 
 ```
 aws secretsmanager list-secrets --query '*[].[Name,ARN]' --output table
@@ -460,10 +460,10 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
    The IAM authentication applies to the connection between your client program and the proxy\. The proxy then authenticates to the database using the user name and password credentials retrieved from Secrets Manager\. 
 +  Instead of the instance, cluster, or reader endpoint, you specify the proxy endpoint\. For details about the proxy endpoint, see [Connecting to your DB instance using IAM authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\. 
-+  In the direct DB IAM auth case, you selectively pick database users and configure them to be identified with a special auth plugin\. You can then connect to those users using IAM auth\. 
++  In the direct database IAM authentication case, you selectively choose database users and configure them to be identified with a special authenthication plugin\. You can then connect to those users using IAM authentication\. 
 
-   In the proxy use case, you need to provide the proxy with Secrets that contain some user's username and password \(native auth\)\. You then connect to the proxy using IAM auth \(by generating an auth token with the proxy endpoint, not the database endpoint\) and using a username which matches one of the usernames for the secrets you previously provided\. 
-+  Make sure that you use Transport Layer Security \(TLS\) / Secure Sockets Layer \(SSL\) when connecting to a proxy using IAM authentication\. 
+   In the proxy use case, you provide the proxy with Secrets that contain some user's user name and password \(native authentication\)\. You then connect to the proxy using IAM authentication\. Here, you do this by generating an authentication token with the proxy endpoint, not the database endpoint\. You also use a user name that matches one of the user names for the secrets that you provided\. 
++  Make sure that you use Transport Layer Security \(TLS\)/Secure Sockets Layer \(SSL\) when connecting to a proxy using IAM authentication\. 
 
  You can grant a specific user access to the proxy by modifying the IAM policy\. An example follows\. 
 

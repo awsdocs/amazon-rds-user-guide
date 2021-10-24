@@ -66,7 +66,7 @@ DB instances in the Database Preview Environment are similar to DB instances in 
 
 **Topics**
 + [Features not supported in the preview environment](#preview-environment-exclusions)
-+ [PostgreSQL extensions supported in the preview environment](#preview-environment-extensions)
++ [PostgreSQL version 14 RC 1 available](#preview-environment-postgresql-14-rc-1)
 + [Creating a new DB instance in the preview environment](#create-db-instance-in-preview-environment)
 
 ### Features not supported in the preview environment<a name="preview-environment-exclusions"></a>
@@ -74,87 +74,10 @@ DB instances in the Database Preview Environment are similar to DB instances in 
 The following features are not available in the preview environment:
 + Cross\-region snapshot copy
 + Cross\-region read replicas
-+ Extensions not in the following table of supported extensions
 
-### PostgreSQL extensions supported in the preview environment<a name="preview-environment-extensions"></a>
+### PostgreSQL version 14 RC 1 available<a name="preview-environment-postgresql-14-rc-1"></a>
 
-The PostgreSQL extensions supported in the Database Preview Environment are listed in the following table\.
-
-
-| Extension | Version | 
-| --- | --- | 
-|  address\_standardizer  |  3\.1\.3  | 
-|  address\_standardizer\_data\_us  |  3\.1\.3  | 
-|  amcheck  |  1\.3  | 
-| aws\_commons | 1\.2 | 
-|  aws\_lambda  |  1\.0  | 
-| aws\_s3 | 1\.0 | 
-|  bloom  |  1\.0  | 
-|  btree\_gin  |  1\.3  | 
-|  btree\_gist  |  1\.5  | 
-|  citext  |  1\.6  | 
-|  cube  |  1\.5  | 
-|  dblink  |  1\.2  | 
-|  dict\_int  |  1\.0  | 
-|  dict\_xsyn  |  1\.0  | 
-|  earthdistance  |  1\.1  | 
-|  fuzzystrmatch  |  1\.1  | 
-|  hll  |  2\.1\.5  | 
-|  hstore  |  1\.8  | 
-|  hstore\_plper  |  1\.0  | 
-|  intagg  |  1\.1  | 
-|  intarray  |  1\.5  | 
-| ip4r | 2\.4 | 
-|  isn  |  1\.2  | 
-| jsonb\_plperl | 1\.0 | 
-|  log\_fdw  |  1\.2  | 
-|  ltree  |  1\.2  | 
-|  old\_snapshot  |  1\.0  | 
-|  orafce  |  3\.15\.1  | 
-| pageinspect | 1\.9 | 
-|  pg\_bigm  |  1\.2  | 
-|  pg\_buffercache  |  1\.3  | 
-|  pg\_cron  |  1\.3  | 
-|  pg\_freespacemap  |  1\.2  | 
-|  pg\_partman  |  4\.4\.0  | 
-|  pg\_prewarm  |  1\.2  | 
-|  pg\_proctab  |  0\.0\.9  | 
-| pg\_similarity | 1\.0  | 
-|  pg\_stat\_statements  |  1\.9  | 
-|  pg\_surgery  |  1\.0  | 
-| pg\_transport | 1\.0 RC7 | 
-|  pg\_trgm  |  1\.6  | 
-|  pg\_visibility  |  1\.2  | 
-|  pgaudit  |  1\.6 beta 1  | 
-|  pgcrypto  |  1\.3  | 
-| pgrouting | 3\.1\.0 | 
-|  pgrowlocks  |  1\.2  | 
-|  pgstattuple  |  1\.5  | 
-| pgtap | 1\.1\.0 | 
-|  plcoffee  |  2\.3\.15  | 
-|  plls  |  2\.3\.15  | 
-|  plperl  |  1\.0  | 
-|  plpgsql  |  1\.0  | 
-| plprofiler | 4\.1 | 
-|  pltcl  |  1\.0  | 
-|  plv8  |  2\.3\.15  | 
-|  postgis  |  3\.1\.3  | 
-|  postgis\_raster  |  3\.1\.3  | 
-|  postgis\_tiger\_geocoder  |  3\.1\.3  | 
-|  postgis\_topology  |  3\.1\.3  | 
-|  postgres\_fdw  |  1\.1  | 
-| prefix | 1\.2\.0 | 
-|  rdkit  |  3\.8  | 
-|  rds\_tools  |  1\.0  | 
-|  spgist\_name\_ops  |  1\.0  | 
-|  sslinfo  |  1\.2  | 
-|  tablefunc  |  1\.0  | 
-|  test\_parser  |  1\.0  | 
-|  test\_regex  |  1\.0  | 
-|  tsm\_system\_rows  |  1\.0  | 
-|  tsm\_system\_time  |  1\.0  | 
-|  unaccent  |  1\.1  | 
-|  uuid\_ossp  |  1\.1  | 
+PostgreSQL version 14 RC 1 is now available in the database preview environment in the US East \(Ohio\) AWS Region\. For more information, see [PostgreSQL 14 RC 1 Released\!](https://www.postgresql.org/about/news/postgresql-14-rc-1-released-2309/) in the PostgreSQL documentation\.
 
 ### Creating a new DB instance in the preview environment<a name="create-db-instance-in-preview-environment"></a>
 

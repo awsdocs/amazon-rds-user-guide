@@ -38,21 +38,21 @@ After you add the native backup and restore option, you don't need to restart yo
 
 1. Do one of the following:
    + To use an existing IAM role and Amazon S3 settings, choose an existing IAM role for **IAM Role**\. If you use an existing IAM role, RDS uses the Amazon S3 settings configured for this role\.
-   + To create a new role and configure new Amazon S3 settings, do the following: 
+   + To create a new role and configure Amazon S3 settings, do the following: 
 
-     1. For **IAM Role**, choose **Create a New Role**\.
+     1. For **IAM role**, choose **Create a new role**\.
 
-     1. For **Select S3 Bucket**, either create an S3 bucket or use an existing one\. To create a new bucket, choose **Create a New S3 Bucket**\. To use an existing bucket, choose it from the list\.
+     1. For **S3 bucket**, choose an S3 bucket from the list\.
 
-     1. For **S3 folder path prefix \(optional\)**, specify a prefix to use for the files stored in your Amazon S3 bucket\. 
+     1. For **S3 prefix \(optional\)**, specify a prefix to use for the files stored in your Amazon S3 bucket\. 
 
         This prefix can include a file path but doesn't have to\. If you provide a prefix, RDS attaches that prefix to all backup files\. RDS then uses the prefix during a restore to identify related files and ignore irrelevant files\. For example, you might use the S3 bucket for purposes besides holding backup files\. In this case, you can use the prefix to have RDS perform native backup and restore only on a particular folder and its subfolders\.
 
         If you leave the prefix blank, then RDS doesn't use a prefix to identify backup files or files to restore\. As a result, during a multiple\-file restore, RDS attempts to restore every file in every folder of the S3 bucket\.
 
-     1. For **Enable Encryption**, choose **Yes** to encrypt the backup file\. Choose **No** to leave the backup file unencrypted\.
+     1. Choose the **Enable encryption** check box to encrypt the backup file\. Leave the check box cleared \(the default\) to have the backup file unencrypted\.
 
-        If you choose **Yes**, choose an encryption key for **AWS KMS key**\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
+        If you chose **Enable encryption**, choose an encryption key for **AWS KMS key**\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide\.*
 
 1. Choose **Add option**\.
 

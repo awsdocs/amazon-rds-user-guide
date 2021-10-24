@@ -12,6 +12,8 @@ When Amazon RDS supports a new version of a database engine, you can upgrade you
 **Minor version upgrades**  
 In contrast, *minor version upgrades* include only changes that are backward\-compatible with existing applications\. You can initiate a minor version upgrade manually by modifying your DB instance\. Or you can enable the **Auto minor version upgrade** option when creating or modifying a DB instance\. Doing so means that your DB instance is automatically upgraded after Amazon RDS tests and approves the new version\. If your PostgreSQL DB instance is using read replicas, you must upgrade all of the read replicas before the minor version upgrade of the primary DB instance\. For more details, see [Automatic minor version upgrades for PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Minor)\. For information about manually performing a minor version upgrade, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\.
 
+For more information about database engine versions, and the policy for deprecating database engine versions, see [Database Engine Versions in the Amazon RDS FAQs](http://aws.amazon.com/rds/faqs/#Database_Engine_Versions)\.
+
 **Topics**
 + [Overview of upgrading PostgreSQL](#USER_UpgradeDBInstance.PostgreSQL.Overview)
 + [PostgreSQL version numbers](#USER_UpgradeDBInstance.PostgreSQL.VersionID)

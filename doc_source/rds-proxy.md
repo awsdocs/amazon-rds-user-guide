@@ -1,6 +1,6 @@
 # Using Amazon RDS Proxy<a name="rds-proxy"></a>
 
- By using Amazon RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. RDS Proxy also enables you to enforce AWS Identity and Access Management \(IAM\) authentication for databases, and securely store credentials in AWS Secrets Manager\. 
+ By using Amazon RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale\. RDS Proxy makes applications more resilient to database failures by automatically connecting to a standby DB instance while preserving application connections\. By using RDS Proxy, you can also enforce AWS Identity and Access Management \(IAM\) authentication for databases, and securely store credentials in AWS Secrets Manager\. 
 
 **Note**  
  RDS Proxy is fully compatible with MySQL and PostgreSQL\. You can enable RDS Proxy for most applications with no code changes\. 
@@ -12,7 +12,8 @@
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
 **Topics**
-+ [Limitations for RDS Proxy](#rds-proxy.limits)
++ [Support and availability of RDS Proxy](#rds-proxy.support)
++ [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
 + [Getting started with RDS Proxy](rds-proxy-setup.md)
@@ -23,12 +24,31 @@
 + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
 + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
 
-## Limitations for RDS Proxy<a name="rds-proxy.limits"></a>
+## Support and availability of RDS Proxy<a name="rds-proxy.support"></a>
 
- The following limitations apply to RDS Proxy: 
-+  RDS Proxy is available only in certain AWS Regions\. For more information, see [Amazon RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraFeaturesRegionsDBEngines.grids.html#Concepts.Aurora_Fea_Regions_DB-eng.Feature.RDS_Proxy)\. 
+RDS Proxy supports the following database engine versions:
++ RDS for MySQL – MySQL 5\.6, 5\.7, and 8\.0
++ RDS for PostgreSQL – version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions
 
-   You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
+RDS Proxy is available in the following Regions:
++ US East \(Ohio\)
++ US East \(N\. Virginia\)
++ US West \(N\. California\)
++ US West \(Oregon\)
++ Asia Pacific \(Mumbai\)
++ Asia Pacific \(Seoul\)
++ Asia Pacific \(Singapore\)
++ Asia Pacific \(Sydney\)
++ Asia Pacific \(Tokyo\)
++ Canada \(Central\)
++ Europe \(Frankfurt\)
++ Europe \(Ireland\)
++ Europe \(London\)
+
+## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
+
+ The following quotas and limitations apply to RDS Proxy: 
++  You can have up to 20 proxies for each AWS account ID\. If your application requires more proxies, you can request additional proxies by opening a ticket with the AWS Support organization\.  
 +  Each proxy can have up to 200 associated Secrets Manager secrets\. Thus, each proxy can connect to with up to 200 different user accounts at any given time\. 
 +  You can create, view, modify, and delete up to 20 endpoints for each proxy\. These endpoints are in addition to the default endpoint that's automatically created for each proxy\. 
 +  In an Aurora cluster, all of the connections using the default proxy endpoint are handled by the Aurora writer instance\. To perform load balancing for read\-intensive workloads, you can create a read\-only endpoint for a proxy\. That endpoint passes connections to the reader endpoint of the cluster\. That way, your proxy connections can take advantage of Aurora read scalability\. For more information, see [Overview of proxy endpoints](rds-proxy-endpoints.md#rds-proxy-endpoints-overview)\. 
@@ -36,26 +56,24 @@
   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\.
 + You can't use RDS Proxy with Aurora Serverless clusters\.
 + Using RDS Proxy with Aurora clusters that are part of an Aurora global database isn't currently supported\.
-+  Your RDS Proxy must be in the same VPC as the database\. The proxy can't be publicly accessible, although the database can be\. 
++  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. 
 **Note**  
- For Aurora DB clusters, you can enable cross\-VPC access by creating an additional endpoint for a proxy and specifying a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](rds-proxy-endpoints.md#rds-proxy-cross-vpc)\. 
+ For Aurora DB clusters, you can turn on cross\-VPC access\. To do this, create an additional endpoint for a proxy and specify a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](rds-proxy-endpoints.md#rds-proxy-cross-vpc)\. 
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 
 +  If you use RDS Proxy with an RDS DB instance or Aurora DB cluster that has IAM authentication enabled, make sure that all users who connect through a proxy authenticate through user names and passwords\. See [Setting up AWS Identity and Access Management \(IAM\) policies](rds-proxy-setup.md#rds-proxy-iam-setup) for details about IAM support in RDS Proxy\. 
 +  You can't use RDS Proxy with custom DNS\. 
 +  RDS Proxy is available for the MySQL and PostgreSQL engine families\. 
 +  Each proxy can be associated with a single target DB instance or cluster\. However, you can associate multiple proxies with the same DB instance or cluster\. 
 
- The following RDS Proxy prerequisites and limitations apply to MySQL: 
-+  For RDS for MySQL, RDS Proxy supports MySQL 5\.6 and 5\.7\. For Aurora MySQL, RDS Proxy supports version 1 \(compatible with MySQL 5\.6\) and version 2 \(compatible with MySQL 5\.7\)\. 
+ The following RDS Proxy limitations apply to MySQL: 
++ RDS Proxy doesn't support the MySQL `sha256_password` and `caching_sha2_password` authentication plugins\. These plugins implement SHA\-256 hashing for user account passwords\. 
 +  Currently, all proxies listen on port 3306 for MySQL\. The proxies still connect to your database using the port that you specified in the database settings\. 
-+  You can't use RDS Proxy with RDS for MySQL 8\.0\.
 +  You can't use RDS Proxy with self\-managed MySQL databases in EC2 instances\.
 +  You can't use RDS Proxy with an RDS for MySQL DB instance that has the `read_only` parameter in its DB parameter group set to `1`\.
 +  Proxies don't support MySQL compressed mode\. For example, they don't support the compression used by the `--compress` or `-C` options of the `mysql` command\.
 +  Some SQL statements and functions can change the connection state without causing pinning\. For the most current pinning behavior, see [Avoiding pinning](rds-proxy-managing.md#rds-proxy-pinning)\.
 
- The following RDS Proxy prerequisites and limitations apply to PostgreSQL:
-+  For RDS PostgreSQL, RDS Proxy supports version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions\. For Aurora PostgreSQL, RDS Proxy supports version 10\.11 and higher minor versions, and 11\.6 and higher minor versions\.
+ The following RDS Proxy limitations apply to PostgreSQL:
 +  Currently, all proxies listen on port 5432 for PostgreSQL\.
 +  Query cancellation isn't supported for PostgreSQL\.
 +  The results of the PostgreSQL function [lastval](https://www.postgresql.org/docs/current/functions-sequence.html) aren't always accurate\. As a work\-around, use the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html) statement with the `RETURNING` clause\.

@@ -52,6 +52,9 @@ sudo mysqldump -u localuser \
     --single-transaction \
     --compress \
     --order-by-primary  \
+    --routines=0 \
+    --triggers=0 \
+    --events=0 \
     -plocalpassword | mysql -u rdsuser \
         --port=3306 \
         --host=myinstance.123456789012.us-east-1.rds.amazonaws.com \
@@ -66,6 +69,9 @@ mysqldump -u localuser ^
     --single-transaction ^
     --compress ^
     --order-by-primary  ^
+    --routines=0 ^
+    --triggers=0 ^
+    --events=0 ^
     -plocalpassword | mysql -u rdsuser ^
         --port=3306 ^
         --host=myinstance.123456789012.us-east-1.rds.amazonaws.com ^

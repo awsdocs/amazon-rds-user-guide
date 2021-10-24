@@ -261,7 +261,7 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 You can control how actively the proxy closes idle database connections in the connection pool\. This setting is represented by the `MaxIdleConnectionsPercent` parameter of the `DBProxyTargetGroup` in the AWS CLI or API\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. For Aurora MySQL, it's expressed as a percentage of the `max_connections` setting for the RDS DB instance or Aurora DB cluster used by the target group\. The default value is 50 percent\. To change the value of `MaxIdleConnectionsPercent`, use the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
 **Note**  
-RDS Proxy closes database connections after 24 hours when they are no longer in use\. The proxy performs this action regardless of the value of the maximum idle connections setting\.
+RDS Proxy closes database connections some time after 24 hours when they are no longer in use\. The proxy performs this action regardless of the value of the maximum idle connections setting\.
 
 ## Avoiding pinning<a name="rds-proxy-pinning"></a>
 
