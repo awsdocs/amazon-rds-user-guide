@@ -1,0 +1,419 @@
+# Creating and connecting to an Amazon RDS Custom DB instance<a name="custom-creating"></a>
+
+You can create an RDS Custom DB instance, and then connect to it using Secure Shell \(SSH\) or AWS Systems Manager\.
+
+**Important**  
+Before you can create or connect to an RDS Custom DB instance, make sure to complete the tasks in [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)\.  
+You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom resources](custom-managing.md#custom-managing.tagging)\.
+
+**Topics**
++ [Creating an RDS Custom DB instance](#custom-creating.create)
++ [RDS Custom service\-linked role](#custom-creating.slr)
++ [Connecting to your RDS Custom DB instance using SSH](#custom-creating.ssh)
++ [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)
+
+## Creating an RDS Custom DB instance<a name="custom-creating.create"></a>
+
+Create an Amazon RDS Custom DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\.
+
+For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
+
+### Console<a name="custom-creating.console"></a>
+
+**To create an RDS Custom DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose **Create database**\.
+
+1. In **Choose a database creation method**, select **Standard create**\.
+
+1. In **Engine options**, choose **Oracle** for the DB engine type\. Oracle Database is the only supported DB engine\.
+
+1. For **Database management type**, choose **Amazon RDS Custom**\.
+
+1. For **Edition**, choose **Oracle Enterprise Edition**\.
+
+1. For **Database version**, choose the RDS Custom custom engine version \(CEV\) that you previously created\. The CEV has the following format: `19.customized_string`\. An example identifier is `19.my_cev1`\.
+
+1. In **Templates**, choose **Production**\.
+
+1. In **Settings**, enter a unique name for the **DB instance identifier**\.
+
+1. Enter your master password by doing the following:
+
+   1. In the **Settings** section, open **Credential Settings**\.
+
+   1. Clear the **Auto generate a password** check box\.
+
+   1. Change the **Master username** value and enter the same password in **Master password** and **Confirm password**\.
+
+   By default, the new RDS Custom DB instance uses an automatically generated password for the master user\.
+
+1. In **DB instance size**, choose a **DB instance class**\.
+
+   For supported classes, see [DB instance class support for RDS Custom ](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+
+1. Choose **Storage** settings\.
+
+1. For **RDS Custom security**, do the following:
+
+   1. For **IAM instance profile**, choose the instance profile for your RDS Custom for Oracle DB instance\.
+
+      The IAM instance profile must begin with `AWSRDSCustom`, for example *AWSRDSCustomInstanceProfileForRdsCustomInstance*\.
+
+   1. For **Encryption**, choose **Enter a key ARN** to list the available AWS KMS keys\. Then choose your key from the list\. 
+
+      An AWS KMS key is required for RDS Custom\. For more information, see [Make sure that you have a symmetric AWS KMS key](custom-setup-orcl.md#custom-setup-orcl.cmk)\.
+
+1. \(Optional\) In **Additional configuration**, enter an **Initial database name** if you want\.
+
+   The default database name is `ORCL`\.
+
+1. For the remaining sections, specify your preferred RDS Custom DB instance settings\. For information about each setting, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\. The following settings don't appear in the console and aren't supported:
+   + **Processor features**
+   + **Storage autoscaling**
+   + **Availability & durability**
+   + **Password and Kerberos authentication** option in **Database authentication** \(only **Password authentication** is supported\)
+   + **Database options** group in **Additional configuration**
+   + **Performance Insights**
+   + **Log exports**
+   + **Enable auto minor version upgrade**
+   + **Deletion protection**
+
+   **Backup retention period** is supported, but you can't choose **0 days**\.
+
+1. Choose **Create database**\. 
+
+   The **View credential details** button appears on the **Databases** page\.
+
+   To view the master user name and password for the RDS Custom DB instance, choose **View credential details**\.
+
+   To connect to the DB instance as the master user, use the user name and password that appear\.
+**Important**  
+You can't view the master user password again\. If you don't record it, you might have to change it\. If you need to change the master user password after the RDS Custom DB instance is available, modify the DB instance to do so\. For more information about modifying a DB instance, see [Managing an Amazon RDS Custom DB instance](custom-managing.md)\.
+
+1. Choose **Databases** to view the list of RDS Custom DB instances\.
+
+1. Choose the RDS Custom DB instance that you just created\.
+
+   On the RDS console, the details for the new RDS Custom DB instance appear:
+   + The DB instance has a status of **creating** until the RDS Custom DB instance is created and ready for use\. When the state changes to **available**, you can connect to the DB instance\. Depending on the instance class and storage allocated, it can take several minutes for the new DB instance to be available\.
+   + **Role** has the value **Instance \(RDS Custom\)**\.
+   + **RDS Custom automation mode** has the value **Full automation**\. This setting means that the DB instance provides automatic monitoring and instance recovery\.
+
+### AWS CLI<a name="USER_CreateDBInstance.CLI"></a>
+
+You create an RDS Custom DB instance by using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command\.
+
+The following options are required:
++ `--db-instance-identifier`
++ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom ](custom-reqs-limits.md#custom-reqs-limits.instances)\)
++ `--engine custom-oracle-ee`
++ `--engine-version cev` \(where *`cev`* with the name of the custom engine version that you specified in [Creating a CEV](custom-cev.md#custom-cev.create)\)
++ `--kms-key-id`
++ `--no-auto-minor-version-upgrade`
++ `--custom-iam-instance-profile`
+
+The following example creates an RDS Custom DB instance named `my-custom-instance`\. The backup retention period is three days\.
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+ 1. aws create-db-instance \
+ 2.     --engine custom-oracle-ee \
+ 3.     --db-instance-identifier my-custom-instance \
+ 4.     --engine-version 19.my_cev1 \
+ 5.     --allocated-storage 250 \
+ 6.     --db-instance-class db.m5.xlarge \
+ 7.     --db-subnet-group mydbsubnetgroup \
+ 8.     --master-username myawsuser \
+ 9.     --master-user-password mypassword \
+10.     --backup-retention-period 3 \
+11.     --no-multi-az \
+12.     --port 8200 \
+13.     --license-model bring-your-own-license \
+14.     --kms-key-id my-kms-key \
+15.     --no-auto-minor-version-upgrade \
+16.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+```
+For Windows:  
+
+```
+ 1. aws rds create-db-instance ^
+ 2.     --engine custom-oracle-ee ^
+ 3.     --db-instance-identifier my-custom-instance ^
+ 4.     --engine-version 19.my_cev1 ^
+ 5.     --allocated-storage 250 ^
+ 6.     --db-instance-class db.m5.xlarge ^
+ 7.     --db-subnet-group mydbsubnetgroup ^
+ 8.     --master-username myawsuser ^
+ 9.     --master-user-password mypassword ^
+10.     --backup-retention-period 3 ^
+11.     --no-multi-az ^
+12.     --port 8200 ^
+13.     --license-model bring-your-own-license ^
+14.     --kms-key-id my-kms-key ^
+15.     --no-auto-minor-version-upgrade ^
+16.     --custom-iam-instance-profile AWSRDSCustomInstanceProfileForRdsCustomInstance
+```
+
+Get details about your instance by using the `describe-db-instances` command\.
+
+**Example**  
+
+```
+1. aws rds describe-db-instances --db-instance-identifier my-custom-instance
+```
+The following partial output shows the engine, parameter groups, and other information\.  
+
+```
+ 1. {
+ 2.     "DBInstances": [
+ 3.         {
+ 4.             "PendingModifiedValues": {},
+ 5.             "Engine": "custom-oracle-ee",
+ 6.             "MultiAZ": false,
+ 7.             "DBSecurityGroups": [],
+ 8.             "DBParameterGroups": [
+ 9.                 {
+10.                     "DBParameterGroupName": "default.custom-oracle-ee-19",
+11.                     "ParameterApplyStatus": "in-sync"
+12.                 }
+13.             ],
+14.             "AutomationMode": "full",
+15.             "DBInstanceIdentifier": "my-custom-instance",
+16.             ...
+17.             "TagList": [
+18.                 {
+19.                     "Key": "AWSRDSCustom",
+20.                     "Value": "custom-oracle"
+21.                 }
+22.             ]
+23.         }
+24.     ]
+25. }
+```
+
+## RDS Custom service\-linked role<a name="custom-creating.slr"></a>
+
+A *service\-linked role* gives Amazon RDS Custom access to resources in your AWS account\. It makes using RDS Custom easier because you don't have to manually add the necessary permissions\. RDS Custom defines the permissions of its service\-linked roles, and unless defined otherwise, only RDS Custom can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy can't be attached to any other IAM entity\.
+
+When you create an RDS Custom DB instance, both the Amazon RDS and RDS Custom service\-linked roles are created \(if they don't already exist\) and used\. For more information, see [Using service\-linked roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
+
+## Connecting to your RDS Custom DB instance using SSH<a name="custom-creating.ssh"></a>
+
+After you create your RDS Custom DB instance, you can connect to this instance using an SSH client\. The procedure is the same as for connecting to an Amazon EC2 instance\. For more information, see [Connecting to your Linux instance using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)\.
+
+To connect to the DB instance, you need the key pair associated with the instance\. RDS Custom creates the key pair on your behalf\. The pair name uses the prefix `do-not-delete-rds-custom-ssh-privatekey-db-`\. AWS Secrets Manager stores your private key as a secret\.
+
+Complete the task in the following steps:
+
+1. [Configure your DB instance to allow SSH connections](#custom-managing.ssh.port-22)
+
+1. [Retrieve your secret key](#custom-managing.ssh.obtaining-key)
+
+1. [Connect to your EC2 instance using the ssh utility](#custom-managing.ssh.connecting)
+
+### Configure your DB instance to allow SSH connections<a name="custom-managing.ssh.port-22"></a>
+
+Make sure that your DB instance security group permits inbound connections on port 22 for TCP\. To learn how to configure your instance security group, see [Configure your instance security group](custom-setup-orcl.md#custom-setup-orcl.vpc.sg)\.
+
+### Retrieve your secret key<a name="custom-managing.ssh.obtaining-key"></a>
+
+Retrieve the secret key using either AWS Management Console or the AWS CLI\.
+
+#### Console<a name="custom-managing.ssh.obtaining-key.console"></a>
+
+**To retrieve the secret key**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance to which you want to connect\.
+
+1. Choose **Configuration**\.
+
+1. Note the **Resource ID** value\. For example, the resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Instances**\.
+
+1. Find the name of your EC2 instance, and choose the instance ID associated with it\. For example, the EC2 instance ID might be `i-abcdefghijklm01234`\.
+
+1. In **Details**, find **Key pair name**\. The pair name includes the resource ID\. For example, the pair name might be `do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c`\.
+
+1. In the instance summary, find **Public IPv4 DNS**\. For the example, the public Domain Name System \(DNS\) address might be `ec2-12-345-678-901.us-east-2.compute.amazonaws.com`\.
+
+1. Open the AWS Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager/](https://console.aws.amazon.com/secretsmanager/)\.
+
+1. Choose the secret that has the same name as your key pair\.
+
+1. Choose **Retrieve secret value**\.
+
+1. Copy the private key into a text file, and then save the file with the `.pem` extension\. For example, save the file as `/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem`\.
+
+#### AWS CLI<a name="custom-managing.ssh.obtaining-key.CLI"></a>
+
+To retrieve the private key, use the AWS CLI\.
+
+**Example**  
+To find the DB resource ID of your RDS Custom DB instance, use `aws rds [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)`\.  
+
+```
+aws rds describe-db-instances \
+    --query 'DBInstances[*].[DBInstanceIdentifier,DbiResourceId]' \
+    --output text
+```
+The following sample output shows the resource ID for your RDS Custom instance\. The prefix is `db-`\.  
+
+```
+db-ABCDEFGHIJKLMNOPQRS0123456
+```
+To find the EC2 instance ID of your DB instance, use `aws ec2 describe-instances`\. The following example uses `db-ABCDEFGHIJKLMNOPQRS0123456` for the resource ID\.  
+
+```
+aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=db-ABCDEFGHIJKLMNOPQRS0123456" \
+    --output text \
+    --query 'Reservations[*].Instances[*].InstanceId'
+```
+The following sample output shows the EC2 instance ID\.  
+
+```
+i-abcdefghijklm01234
+```
+To find the key name, specify the EC2 instance ID\.  
+
+```
+aws ec2 describe-instances \
+    --instance-ids i-0bdc4219e66944afa \
+    --output text \
+    --query 'Reservations[*].Instances[*].KeyName'
+```
+The following sample output shows the key name, which uses the prefix `do-not-delete-rds-custom-ssh-privatekey-`\.  
+
+```
+do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c
+```
+To save the private key in a \.pem file named after the key, use `aws secretsmanager`\. The following example saves the file in your `/tmp` directory\.  
+
+```
+aws secretsmanager get-secret-value \
+    --secret-id do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c \
+    --query SecretString \
+    --output text >/tmp/do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
+```
+
+### Connect to your EC2 instance using the ssh utility<a name="custom-managing.ssh.connecting"></a>
+
+The following example assumes that you created a \.pem file that contains your private key\.
+
+Change to the directory that contains your \.pem file\. Using `chmod`, set the permissions to `400`\.
+
+```
+cd /tmp
+chmod 400 do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem
+```
+
+To obtain your public DNS name, use the command `ec2 describe-instances`\.
+
+```
+aws ec2 describe-instances \
+    --instance-ids i-abcdefghijklm01234 \
+    --output text \
+    --query 'Reservations[*].Instances[*].PublicDnsName'
+```
+
+The following sample output shows the public DNS name\.
+
+```
+ec2-12-345-678-901.us-east-2.compute.amazonaws.com
+```
+
+In the ssh utility, specify the \.pem file and the public DNS name of the instance\.
+
+```
+ssh -i \
+    "do-not-delete-rds-custom-ssh-privatekey-db-ABCDEFGHIJKLMNOPQRS0123456-0d726c.pem" \
+    ec2-user@ec2-12-345-678-901.us-east-2.compute.amazonaws.com
+```
+
+## Connecting to your RDS Custom DB instance using AWS Systems Manager<a name="custom-creating.ssm"></a>
+
+After you create your RDS Custom DB instance, you can connect to it using AWS Systems Manager Session Manager\. Session Manager is an AWS Systems Manager capability that lets you manage Amazon EC2 instances through a browser\-based shell or through the AWS CLI\. For more information, see [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)\.
+
+### Console<a name="custom-managing.ssm.console"></a>
+
+**To connect to your DB instance using Session Manager**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance to which you want to connect\.
+
+1. Choose **Configuration**\.
+
+1. Note the **Resource id** for your DB instance\. For example, the resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
+
+1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
+
+1. In the navigation pane, choose **Instances**\.
+
+1. Look for the name of your EC2 instance, and then click the instance ID associated with it\. For example, the instance ID might be `i-abcdefghijklm01234`\.
+
+1. Choose **Connect**\.
+
+1. Choose **Session Manager**\.
+
+1. Choose **Connect**\.
+
+   A window opens for your session\.
+
+### AWS CLI<a name="custom-managing.ssm.CLI"></a>
+
+You can connect to your RDS Custom DB instance using the AWS CLI\. This technique requires the Session Manager plugin for the AWS CLI\. To learn how to install the plugin, see [Install the Session Manager plugin for the AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)\.
+
+To find the DB resource ID of your RDS Custom DB instance, use `aws rds [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html)`\.
+
+```
+aws rds describe-db-instances \
+    --query 'DBInstances[*].[DBInstanceIdentifier,DbiResourceId]' \
+    --output text
+```
+
+The following sample output shows the resource ID for your RDS Custom instance\. The prefix is `db-`\.
+
+```
+db-ABCDEFGHIJKLMNOPQRS0123456
+```
+
+To find the EC2 instance ID of your DB instance, use `aws ec2 describe-instances`\. The following example uses `db-ABCDEFGHIJKLMNOPQRS0123456` for the resource ID\.
+
+```
+aws ec2 describe-instances \
+    --filters "Name=tag:Name,Values=db-ABCDEFGHIJKLMNOPQRS0123456" \
+    --output text \
+    --query 'Reservations[*].Instances[*].InstanceId'
+```
+
+The following sample output shows the EC2 instance ID\.
+
+```
+i-abcdefghijklm01234
+```
+
+Use the `aws ssm start-session` command, supplying the EC2 instance ID in the `--target` parameter\.
+
+```
+aws ssm start-session --target "i-abcdefghijklm01234"
+```
+
+A successful connection looks like the following\.
+
+```
+Starting session with SessionId: yourid-abcdefghijklm1234
+[ssm-user@ip-123-45-67-89 bin]$
+```

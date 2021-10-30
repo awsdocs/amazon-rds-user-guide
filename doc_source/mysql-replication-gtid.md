@@ -4,8 +4,7 @@
 
 If you use binlog replication and aren't familiar with GTID\-based replication with MySQL, see [Replication with global transaction identifiers](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids.html) in the MySQL documentation for background\.
 
-**Note**  
-GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions\. All MySQL DB instances in a replication configuration must meet this requirement\. GTID\-based replication isn't supported for RDS for MySQL 5\.6 or 8\.0\.
+GTID\-based replication is supported for RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions, and RDS for MySQL version 8\.0\.26 and higher MySQL 8\.0 versions\. All MySQL DB instances in a replication configuration must meet this requirement\. GTID\-based replication isn't supported for RDS for MySQL 5\.6\.
 
 **Topics**
 + [Overview of global transaction identifiers \(GTIDs\)](#mysql-replication-gtid.overview)
@@ -29,7 +28,7 @@ In a replication configuration, GTIDs are unique across all DB instances\. GTIDs
 
 You can use GTID\-based replication to replicate data with Amazon RDS MySQL read replicas or with an external MySQL database\. For RDS for MySQL read replicas, you can configure GTID\-based replication when you are creating new read replicas, or you can convert existing read replicas to use GTID\-based replication\.
 
-You can also use GTID\-based replication in a delayed replication configuration with RDS for MySQL \. For more information, see [Configuring delayed replication with MySQL](USER_MySQL.Replication.ReadReplicas.md#USER_MySQL.Replication.ReadReplicas.DelayReplication)\.
+You can also use GTID\-based replication in a delayed replication configuration with RDS for MySQL\. For more information, see [Configuring delayed replication with MySQL](USER_MySQL.Replication.ReadReplicas.md#USER_MySQL.Replication.ReadReplicas.DelayReplication)\.
 
 ## Parameters for GTID\-based replication<a name="mysql-replication-gtid.parameters"></a>
 
@@ -77,7 +76,9 @@ For an existing MySQL DB instance with read replicas that doesn't use GTID\-base
 
 **To enable GTID\-based replication for existing read replicas**
 
-1. If the DB instance or any read replica is using RDS for MySQL version 5\.7\.22 or lower, upgrade the DB instance or read replica\. Upgrade to RDS for MySQL version 5\.7\.23 or a later MySQL 5\.7 version\.
+1. If the DB instance or any read replica is using an RDS for MySQL version that doesn't support GTID\-based replication, upgrade the engine version:
+   + If the DB instance or any read replica is using an 8\.0 version of RDS for MySQL version lower than 8\.0\.26, upgrade the DB instance or read replica to 8\.0\.26 or a higher MySQL 8\.0 version\.
+   + If the DB instance or any read replica is using a 5\.7 version of RDS for MySQL version lower than 5\.7\.23, upgrade the DB instance or read replica to 5\.7\.23 or a higher MySQL 5\.7 version\.
 
    For more information, see [Upgrading the MySQL DB engine](USER_UpgradeDBInstance.MySQL.md)\.
 

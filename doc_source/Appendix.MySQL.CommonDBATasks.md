@@ -1,6 +1,6 @@
 # Common DBA tasks for MySQL DB instances<a name="Appendix.MySQL.CommonDBATasks"></a>
 
-This section describes the Amazon RDS\-specific implementations of some common DBA tasks for DB instances running the MySQL database engine\. In order to deliver a managed service experience, Amazon RDS does not provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
+Following, you can find descriptions of the Amazon RDS–specific implementations of some common DBA tasks for DB instances running the MySQL database engine\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. Also, it restricts access to certain system procedures and tables that require advanced privileges\. 
 
 For information about working with MySQL log files on Amazon RDS, see [MySQL database log files](USER_LogAccess.Concepts.MySQL.md)\.
 
@@ -33,10 +33,10 @@ CALL mysql.rds_kill_query(99);
 
 ## Skipping the current replication error<a name="Appendix.MySQL.CommonDBATasks.SkipError"></a>
 
-Amazon RDS provides a mechanism for you to skip an error on your read replicas if the error is causing your read replica to stop responding and the error doesn't affect the integrity of your data\. First connect to your MySQL DB instance, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)\. 
+You can skip an error on your read replica if the error is causing your read replica to stop responding and the error doesn't affect the integrity of your data\. Amazon RDS provides a stored procedure that you can call to skip an error on your read replicas\. First connect to your read replica, then issue the appropriate commands as shown following\. For more information, see [Connecting to a DB instance running the MySQL database engine](USER_ConnectToInstance.md)\. 
 
 **Note**  
- You should first verify that the error can be safely skipped\. In a MySQL utility, connect to the read replica and run the following MySQL command:   
+First verify that the error in question can be safely skipped\. In a MySQL utility, connect to the read replica and run the following MySQL command\.   
 
 ```
 SHOW REPLICA STATUS\G 
@@ -44,18 +44,18 @@ SHOW REPLICA STATUS\G
 For information about the values returned, see [the MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/show-replica-status.html)\.  
 Previous versions of and MySQL used `SHOW SLAVE STATUS` instead of `SHOW REPLICA STATUS`\. If you are using a MySQL version before 8\.0\.23, then use `SHOW SLAVE STATUS`\. 
 
- To skip the error, you can issue the following command: 
+ To skip the error, issue the following command\.
 
 ```
 CALL mysql.rds_skip_repl_error; 
 ```
 
-This command has no effect if you run it on the source DB instance, or on a read replica that has not encountered a replication error\. 
+This command has no effect if you run it on the source DB instance, or on a read replica that hasn't encountered a replication error\. 
 
 For more information, such as the versions of MySQL that support `mysql.rds_skip_repl_error`, see [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\. 
 
 **Important**  
-If you attempt to call *mysql\.rds\_skip\_repl\_error* and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
+If you attempt to call `mysql.rds_skip_repl_error` and encounter the following error: `ERROR 1305 (42000): PROCEDURE mysql.rds_skip_repl_error does not exist`, then upgrade your MySQL DB instance to the latest minor version or one of the minimum minor versions listed in [mysql\.rds\_skip\_repl\_error](mysql_rds_skip_repl_error.md)\.
 
 ## Working with InnoDB tablespaces to improve crash recovery times<a name="Appendix.MySQL.CommonDBATasks.Tables"></a>
 

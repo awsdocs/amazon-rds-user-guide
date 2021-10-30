@@ -59,4 +59,4 @@ The limit for the `target delay` parameter is one day \(86400 seconds\)\.
 
 **Note**  
 The `target delay` parameter is only supported for RDS for MySQL\.  
-The `target delay` parameter is not supported for RDS for MySQL version 8\.0\.
+The `target delay` parameter isn't supported for RDS for MySQL version 8\.0\.

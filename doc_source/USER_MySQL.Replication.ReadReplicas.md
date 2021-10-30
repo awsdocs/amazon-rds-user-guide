@@ -1,6 +1,6 @@
 # Working with MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas"></a>
 
-Following, you can find specific information about working with read replicas on Amazon RDS for MySQL\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
+Following, you can find specific information about working with read replicas on RDS for MySQL\. For general information about read replicas and instructions for using them, see [Working with read replicas](USER_ReadRepl.md)\.
 
 **Topics**
 + [Read replica configuration with MySQL](#USER_MySQL.Replication.ReadReplicas.Configuration)
@@ -14,17 +14,17 @@ Following, you can find specific information about working with read replicas on
 
 ## Read replica configuration with MySQL<a name="USER_MySQL.Replication.ReadReplicas.Configuration"></a>
 
-Before a MySQL DB instance can serve as a replication source, make sure to enable automatic backups on the source DB instance\. To do this, set the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. Automatic backups are supported only for read replicas running any version of MySQL 5\.6 and later\. You can configure replication based on binary log coordinates for a MySQL DB instance\. 
+Before a MySQL DB instance can serve as a replication source, make sure to enable automatic backups on the source DB instance\. To do this, set the backup retention period to a value other than 0\. This requirement also applies to a read replica that is the source DB instance for another read replica\. Automatic backups are supported only for read replicas running any version of MySQL 5\.6 and higher\. You can configure replication based on binary log coordinates for a MySQL DB instance\. 
 
-On Amazon RDS for MySQL version 5\.7\.23 and later MySQL 5\.7 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
+On RDS for MySQL version 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can configure replication using global transaction identifiers \(GTIDs\)\. For more information, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 You can create up to five read replicas from one DB instance\. For replication to operate effectively, each read replica should have the same amount of compute and storage resources as the source DB instance\. If you scale the source DB instance, also scale the read replicas\. 
 
-If a read replica is running any version of MySQL 5\.6 and later, you can specify it as the source DB instance for another read replica\. For example, you can create ReadReplica1 from MyDBInstance, and then create ReadReplica2 from ReadReplica1\. Updates made to MyDBInstance are replicated to ReadReplica1 and then replicated from ReadReplica1 to ReadReplica2\. You can't have more than four instances involved in a replication chain\. For example, you can create ReadReplica1 from MySourceDBInstance, and then create ReadReplica2 from ReadReplica1, and then create ReadReplica3 from ReadReplica2, but you can't create a ReadReplica4 from ReadReplica3\. 
+If a read replica is running any version of MySQL 5\.6 and higher, you can specify it as the source DB instance for another read replica\. For example, you can create ReadReplica1 from MyDBInstance, and then create ReadReplica2 from ReadReplica1\. Updates made to MyDBInstance are replicated to ReadReplica1 and then replicated from ReadReplica1 to ReadReplica2\. You can't have more than four instances involved in a replication chain\. For example, you can create ReadReplica1 from MySourceDBInstance, and then create ReadReplica2 from ReadReplica1, and then create ReadReplica3 from ReadReplica2, but you can't create a ReadReplica4 from ReadReplica3\. 
 
 If you promote a MySQL read replica that is in turn replicating to other read replicas, those read replicas remain active\. Consider an example where MyDBInstance1 replicates to MyDBInstance2, and MyDBInstance2 replicates to MyDBInstance3\. If you promote MyDBInstance2, replication from MyDBInstance1 to MyDBInstance2 no longer occurs, but MyDBInstance2 still replicates to MyDBInstance3\. 
 
-To enable automatic backups on a read replica for Amazon RDS for MySQL version 5\.6 and later, first create the read replica\. Then modify the read replica to enable automatic backups\. 
+To enable automatic backups on a read replica for RDS for MySQL version 5\.6 and higher, first create the read replica\. Then modify the read replica to enable automatic backups\. 
 
 You can run multiple read replica create or delete actions at the same time that reference the same source DB instance\. To do this, stay within the limit of five read replicas for each source instance\. 
 
@@ -56,12 +56,12 @@ The following are some use cases for replication filters:
 You can also use replication filters to specify which databases and tables are replicated with a primary MySQL DB instance that is configured as a replica in an inbound replication topology\. For more information about this configuration, see [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)\.
 
 **Topics**
-+ [Replication filtering parameters for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring)
-+ [Replication filtering limitations for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations)
-+ [Replication filtering examples for Amazon RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples)
++ [Replication filtering parameters for RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring)
++ [Replication filtering limitations for RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations)
++ [Replication filtering examples for RDS for MySQL](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples)
 + [Viewing the replication filters for a read replica](#USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Viewing)
 
-### Replication filtering parameters for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring"></a>
+### Replication filtering parameters for RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Configuring"></a>
 
 To configure replication filters, set the following replication filtering parameters on the read replica:
 + `replicate-do-db` – Replicate changes to the specified databases\. When you set this parameter for a read replica, only the databases specified in the parameter are replicated\.
@@ -85,19 +85,19 @@ The binary logging format of the source DB instance is important for replication
 **Note**  
 All data definition language \(DDL\) statements are replicated as statements, regardless of the `binlog_format` setting on the source DB instance\. 
 
-### Replication filtering limitations for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations"></a>
+### Replication filtering limitations for RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Limitations"></a>
 
-The following limitations apply to replication filtering for Amazon RDS for MySQL:
+The following limitations apply to replication filtering for RDS for MySQL:
 + Each replication filtering parameter has a 2,000\-character limit\.
 + Commas aren't supported in replication filters\.
 + The MySQL `--binlog-do-db` and `--binlog-ignore-db` options for binary log filtering aren't supported\.
 + Replication filtering doesn't support XA transactions\.
 
   For more information, see [ Restrictions on XA Transactions](https://dev.mysql.com/doc/refman/8.0/en/xa-restrictions.html) in the MySQL documentation\.
-+ Replication filtering is supported for Amazon RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
-+ Replication filtering isn't supported for Amazon RDS for MySQL version 5\.6\.
++ Replication filtering is supported for RDS for MySQL version 8\.0\.17 and higher 8\.0 versions and version 5\.7\.26 and higher 5\.7 versions\.
++ Replication filtering isn't supported for RDS for MySQL version 5\.6\.
 
-### Replication filtering examples for Amazon RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
+### Replication filtering examples for RDS for MySQL<a name="USER_MySQL.Replication.ReadReplicas.ReplicationFilters.Examples"></a>
 
 To configure replication filtering for a read replica, modify the replication filtering parameters in the parameter group associated with the read replica\.
 
@@ -269,9 +269,9 @@ You can use delayed replication as a strategy for disaster recovery\. With delay
 + Promote the read replica to be the new source DB instance by using the instructions in [Promoting a read replica to be a standalone DB instance](USER_ReadRepl.md#USER_ReadRepl.Promote)\.
 
 **Note**  
-On Amazon RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and later\. On Amazon RDS for MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and later\. Delayed replication is not supported on Amazon RDS for MySQL 8\.0\.
+On RDS for MySQL 8\.0, delayed replication is supported for MySQL 8\.0\.26 and higher\. On RDS for MySQL 5\.7, delayed replication is supported for MySQL 5\.7\.22 and higher\. On RDS for MySQL 5\.6, delayed replication is supported for MySQL 5\.6\.40 and higher\.
 Use stored procedures to configure delayed replication\. You can't configure delayed replication with the AWS Management Console, the AWS CLI, or the Amazon RDS API\.
-On Amazon RDS for MySQL 5\.7\.23 and later MySQL 5\.7 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
+On RDS for MySQL 5\.7\.23 and higher MySQL 5\.7 versions and RDS for MySQL 8\.0\.26 and higher 8\.0 versions, you can use replication based on global transaction identifiers \(GTIDs\) in a delayed replication configuration\. If you use GTID\-based replication, use the [mysql\.rds\_start\_replication\_until\_gtid](mysql_rds_start_replication_until_gtid.md) stored procedure instead of the [mysql\.rds\_start\_replication\_until](mysql_rds_start_replication_until.md) stored procedure\. For more information about GTID\-based replication, see [Using GTID\-based replication for RDS for MySQL](mysql-replication-gtid.md)\.
 
 **Topics**
 + [Configuring delayed replication during read replica creation](#USER_MySQL.Replication.ReadReplicas.DelayReplication.ReplicaCreation)
@@ -349,7 +349,7 @@ You can create a read replica from either single\-AZ or Multi\-AZ DB instance de
 You can create a read replica as a Multi\-AZ DB instance\. Amazon RDS creates a standby of your replica in another Availability Zone for failover support for the replica\. Creating your read replica as a Multi\-AZ DB instance is independent of whether the source database is a Multi\-AZ DB instance\. 
 
 **Note**  
-To create a read replica as a Multi\-AZ DB instance, the DB instance must be MySQL 5\.6 or later\.
+To create a read replica as a Multi\-AZ DB instance, the DB instance must be MySQL 5\.6 or higher\.
 
 ## Monitoring MySQL read replicas<a name="USER_MySQL.Replication.ReadReplicas.Monitor"></a>
 
@@ -390,6 +390,6 @@ One common issue that can cause replication errors is when the value for the `ma
 Other common situations that can cause replication errors include the following:
 + Writing to tables on a read replica\. In some cases, you might create indexes on a read replica that are different from the indexes on the source DB instance\. If you do, set the `read_only` parameter to `0` to create the indexes\. If you write to tables on the read replica, it might break replication if the read replica becomes incompatible with the source DB instance\. After you perform maintenance tasks on the read replica, we recommend that you set the `read_only` parameter back to `1`\.
 +  Using a non\-transactional storage engine such as MyISAM\. Read replicas require a transactional storage engine\. Replication is only supported for the InnoDB storage engine on MySQL\.
-+  Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [Determination of safe and unsafe statements in binary logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html)\. 
++  Using unsafe nondeterministic queries such as `SYSDATE()`\. For more information, see [ Determination of safe and unsafe statements in binary logging](https://dev.mysql.com/doc/refman/8.0/en/replication-rbr-safe-unsafe.html)\. 
 
 If you decide that you can safely skip an error, you can follow the steps described in the section [Skipping the current replication error](Appendix.MySQL.CommonDBATasks.md#Appendix.MySQL.CommonDBATasks.SkipError)\. Otherwise, you can first delete the read replica\. Then you create an instance using the same DB instance identifier so that the endpoint remains the same as that of your old read replica\. If a replication error is fixed, the `Replication State` changes to *replicating*\.

@@ -1,0 +1,211 @@
+# Troubleshooting DB issues for Amazon RDS Custom<a name="custom-troubleshooting"></a>
+
+You can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
+
+**Topics**
++ [Viewing RDS Custom events](#custom-troubleshooting.support-perimeter.viewing-events)
++ [Subscribing to event notifications](#custom-troubleshooting.support-perimeter.subscribing)
++ [Troubleshooting custom engine version creation for RDS Custom for Oracle](#custom-cev.troubleshoot)
++ [Responding to an unsupported configuration](#custom-troubleshooting.support-perimeter)
++ [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
++ [Troubleshooting upgrade issues for RDS Custom for Oracle DB instances](#custom-troubleshooting-upgrade)
+
+## Viewing RDS Custom events<a name="custom-troubleshooting.support-perimeter.viewing-events"></a>
+
+The procedure for viewing events is the same for RDS Custom and Amazon RDS DB instances\. For more information, see [Viewing Amazon RDS events](USER_ListEvents.md)\.
+
+To view RDS Custom event notification using the AWS CLI, use the `describe-events` command\. RDS Custom introduces several new events\. The event categories are the same as for Amazon RDS\. For the list of events, see [Amazon RDS event categories and event messages](USER_Events.Messages.md)\.
+
+The following example retrieves details for the events that have occurred for the specified RDS Custom DB instance\.
+
+```
+1. aws rds describe-events \
+2.     --source-identifier my-custom-instance \
+3.     --source-type db-instance
+```
+
+## Subscribing to event notifications<a name="custom-troubleshooting.support-perimeter.subscribing"></a>
+
+The procedure for subscribing to events is the same for RDS Custom and Amazon RDS DB instances\. For more information, see [Subscribing to Amazon RDS event notification](USER_Events.Subscribing.md)\.
+
+To subscribe to RDS Custom event notification using the CLI, use `create-event-subscription` command\. Include the following required parameters:
++ `--subscription-name`
++ `--sns-topic-arn`
+
+The following example creates a subscription for backup and recovery events for an RDS Custom DB instance in the current AWS account\. Notifications are sent to an Amazon Simple Notification Service \(Amazon SNS\) topic, specified by `--sns-topic-arn`\.
+
+```
+1. aws rds create-event-subscription \
+2.     --subscription-name my-instance-events \
+3.     --source-type db-instance \
+4.     --event-categories '["backup","recovery"]' \
+5.     --sns-topic-arn arn:aws:sns:us-east-1:123456789012:interesting-events
+```
+
+## Troubleshooting custom engine version creation for RDS Custom for Oracle<a name="custom-cev.troubleshoot"></a>
+
+If custom engine version \(CEV\) creation fails, make sure that the Amazon S3 bucket containing your installation files is in the same AWS Region as your CEV\.
+
+If the AWS Region isn't the problem, run the command `describe-events`\. The default duration is 60 minutes\. If no events are returned, specify a longer duration, as shown in the following example\.
+
+```
+aws rds describe-events --duration 360
+```
+
+Currently, the MediaImport service that imports files from Amazon S3 to create CEVs isn't integrated with AWS CloudTrail\. Therefore, if you turn on data logging for Amazon RDS in CloudTrail, calls to the MediaImport service such as the `CreateCustomDbEngineVersion` event aren't logged\.
+
+However, you might see calls from the API gateway that accesses your Amazon S3 bucket\. These calls come from the MediaImport service for the `CreateCustomDbEngineVersion` event\.
+
+## Responding to an unsupported configuration<a name="custom-troubleshooting.support-perimeter"></a>
+
+  RDS Custom provides a monitoring service called the support perimeter\. The *support perimeter* ensures that your RDS Custom instance uses a supported AWS infrastructure, operating system, and database\.
+
+The support perimeter checks that the requirements listed in [Fixing unsupported configurations](#custom-troubleshooting.fix-unsupported) are met\. If any of these requirements aren't met, RDS Custom considers the DB instance to be outside of the support perimeter\. RDS Custom then changes the DB instance status to `unsupported-configuration`, and sends event notifications\. After you fix the configuration problems, RDS Custom changes the DB instance status to `available`\.
+
+### What happens in the `unsupported-configuration` state<a name="custom-troubleshooting.unsupported"></a>
+
+While the DB instance is in the `unsupported-configuration` state, the following is the case:
++ You can't modify the DB instance\.
++ You can't take DB snapshots\.
++ Automated backups aren't created\.
++ RDS Custom automation doesn't replace the underlying Amazon EC2 instance if it becomes impaired\.
+
+However, the following RDS Custom automation continues to run:
++ The RDS Custom agent monitors the DB instance and sends notifications to the support perimeter of further changes\.  
++ The support perimeter continues to run and captures change events for the DB instance\. This has two purposes:
+  + When you fix the configuration that caused the DB instance to be in the `unsupported-configuration` state, the support perimeter can return the DB instance to the `available` state\.
+  + If you make other unsupported configurations, the support perimeter notifies you about them so that you can correct them\.
++ Redo logs are still archived and uploaded to Amazon S3 to facilitate point\-in\-time recovery \(PITR\)\. However, be aware of the following:
+  + PITR can take a long time to completely restore to a new DB instance\. This is because you can't take either automated or manual snapshots while the DB instance is in the `unsupported-configuration` state\.
+
+    PITR has to replay more redo logs starting from the most recent snapshot taken before the instance entered the `unsupported-configuration` state\.
+  + In some cases, the DB instance is in the `unsupported-configuration` state because of changes you made that impacted redo log upload functionality\. In these cases, PITR can't restore the DB instance to the latest restorable time\.
+
+### Fixing unsupported configurations<a name="custom-troubleshooting.fix-unsupported"></a>
+
+It's your responsibility to fix configuration issues that put your RDS Custom DB instance into the `unsupported-configuration` state\. If the issue is with the AWS infrastructure, you can use the console or the AWS CLI to fix it\. If the issue is with the operating system or the database configuration, you can log in to the host to fix it\.
+
+In the following table, you can find descriptions of the notifications that the support perimeter sends and how to fix them\.
+
+
+| Notification | Description | Action | 
+| --- | --- | --- | 
+|  Database health: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  The support perimeter monitors the DB instance state\. It also monitors how many restarts occurred during the previous hour and day\. You're notified when the instance is in a state where it still exists, but you can't interact with it\.   |  Log in to the host and examine the database state\. <pre>ps -eo pid,state,command | grep smon</pre> Restart the DB instance if necessary to get it running again\. Sometimes it's necessary to reboot the host\. After the restart, the RDS Custom agent detects that the DB instance is no longer in an unresponsive state\. It then notifies the support perimeter to reevaluate the DB instance state\.   | 
+|  Database archive lag target: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  The support perimeter monitors the `ARCHIVE_LAG_TARGET` database parameter to verify that the DB instance's latest restorable time is within reasonable bounds\.  |  Log in to the host, connect to the DB instance, and change the `ARCHIVE_LAG_TARGET` parameter to a value from 60–7200\. For example, use the following SQL command\. <pre>alter system set archive_lag_target=300 scope=both;</pre> The DB instance becomes available within 30 minutes\.  | 
+|  Database log mode: The monitored log mode of the database on Amazon EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] has changed from \[ARCHIVELOG\] to \[NOARCHIVELOG\]\.  | The DB instance log mode must be set to ARCHIVELOG\. |  Log in to the host and shut down the DB instance\. You can use the following SQL command\. <pre>shutdown immediate;</pre> The RDS Custom agent restarts the DB instance and sets the log mode to `ARCHIVELOG`\. The DB instance becomes available within 30 minutes\.  | 
+|  RDS Custom agent status: The monitored state of the RDS Custom Agent on EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] has changed from RUNNING to STOPPED\.  |  The RDS Custom agent must always be running\. The agent publishes the `IamAlive` metric to Amazon CloudWatch every 30 seconds\. An alarm is triggered if the metric hasn't been published for 30 seconds\. The support perimeter also monitors the RDS Custom agent process state on the host every 30 minutes\.  |  Log in to the host and make sure that the RDS Custom agent is running\. You can use the following commands to find the agent's status\.   <pre>ps -ef | grep RDSCustomAgent</pre> <pre>pgrep java</pre> When the RDS Custom agent is running again, the `IamAlive` metric is published to Amazon CloudWatch, and the alarm switches to the `OK` state\. This switch notifies the support perimeter that the agent is running\.  | 
+|  AWS Systems Manager agent \(SSM agent\) status: The AWS Systems Manager agent on EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] is currently unreachable\. Make sure you have correctly configured the network, agent, and IAM permissions\.  |  The SSM agent must always be running\. The RDS Custom agent is responsible for making sure that the Systems Manager agent is running\. If the SSM agent was down and restarted, the RDS Custom agent publishes a metric to CloudWatch\. The RDS Custom agent has an alarm on the metric set to trigger when there has been a restart in each of the previous three minutes\. The support perimeter also monitors the SSM agent process state on the host every 30 minutes\.  |  For more information, see [Troubleshooting SSM Agent](https://docs.aws.amazon.com/systems-manager/latest/userguide/troubleshooting-ssm-agent.html)\. When the SSM agent is running again, the alarm switches to the `OK` state\. This switch notifies the support perimeter that the agent is running\.  | 
+|  `sudo` configurations: The sudo configurations on EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] have changed\.  |  The support perimeter monitors that certain OS users are allowed to run certain commands on the box\. It monitors `sudo` configurations against the supported state\. When the `sudo` configurations aren't supported, the RDS Custom tries to overwrite them back to the previous supported state\. If that is successful, the following notification is sent: RDS Custom successfully overwrote your configuration\.  |  If the overwrite is unsuccessful, you can log in to the host and investigate why recent changes to the `sudo` configurations aren't supported\. You can use the following command\. <pre>visudo -c -f /etc/sudoers.d/individual_sudo_files</pre> After the support perimeter determines that the `sudo` configurations are supported, the DB instance becomes available within 30 minutes\.  | 
+|  Amazon Elastic Block Store \(EBS\) volumes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  RDS Custom creates two types of EBS volume, besides the root volume created from the AMI, and associates them with the EC2 instance\. The binary volume is where the database software binaries are located\. The data volumes are where database files are located\. The storage configurations that you set when creating the DB instance are used to configure the data volumes\. The support perimeter monitors the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  If you attached any additional EBS volumes, do either of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html) If you detached any initial EBS volumes, contact the RDS Custom operator\. If you modified the storage type or Provisioned IOPS of an EBS volume, revert the modifications to the original storage type and IOPS value\. If you modified the storage size of an EBS volume, contact the RDS Custom operator\.  | 
+|  EBS\-optimized instances: The EBS\-optimized attribute of Amazon EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] has changed from \[enabled\] to \[disabled\]\.  |  Amazon EC2 instances should be EBS optimized\. If the `EBS-optimized` attribute is turned off \(`disabled`\), the support perimeter doesn't put the DB instance into the `unsupported-configuration` state\.  |  To turn on the `EBS-optimized` attribute: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  | 
+|  Amazon EC2 state: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  The support perimeter monitors EC2 instance state\-change notifications\. The EC2 instance must always be running\.  |  If the EC2 instance is stopped, start it and remount the binary and data volumes\. If the EC2 instance is terminated, delete the RDS Custom DB instance\.   | 
+|  Amazon EC2 attributes: The attributes of Amazon EC2 instance \[i\-*xxxxxxxxxxxxxxxxx*\] have changed\.  |  The support perimeter monitors the instance type of the EC2 instance where the RDS Custom DB instance is running\. The EC2 instance type must stay the same as when you set it up during RDS Custom DB instance creation\.  |  Change the EC2 instance type back to the original type using the EC2 console or CLI\. To change the instance type because of scaling requirements, do a PITR and specify the new instance type and class\. However, doing this results in a new RDS Custom DB instance with a new host and Domain Name System \(DNS\) name\.  | 
+|  Oracle Data Guard role: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-troubleshooting.html)  |  The support perimeter monitors the current database role every 15 seconds and sends a CloudWatch notification if the database role has changed\. The Oracle Data Guard `DATABASE_ROLE` parameter must be either `PRIMARY` or `PHYSICAL STANDBY`\.  |  Restore the Oracle Data Guard database role to a supported value\. After the support perimeter determines that the database role is supported, the DB instance becomes available within 15 seconds\.  | 
+
+## How Amazon RDS Custom replaces an impaired host<a name="custom-troubleshooting.host-problems"></a>
+
+When a host is impaired, RDS Custom automatically shuts down the virtual Amazon EC2 host and then starts it up on new hardware\. This technique uses the same stop and start feature included in Amazon EC2\. After the operation, RDS Custom retains all database and customer data, including root volume data\. No user intervention is required\.
+
+**Topics**
++ [How RDS Custom host replacement works](#custom-troubleshooting.host-problems.replacement)
++ [Best practices for Amazon EC2 hosts](#custom-troubleshooting.host-problems.best-practices)
+
+### How RDS Custom host replacement works<a name="custom-troubleshooting.host-problems.replacement"></a>
+
+In RDS Custom, you have full control over the root device volume and EBS storage volumes\. The root volume can contain important data and configurations that you don't want to lose\.
+
+**Topics**
++ [Stopping and starting the host](#custom-troubleshooting.host-problems.replacement.stop-start)
++ [Effects of host replacement](#custom-troubleshooting.host-problems.replacement.host-state)
+
+#### Stopping and starting the host<a name="custom-troubleshooting.host-problems.replacement.stop-start"></a>
+
+If the Amazon EC2 host becomes impaired, RDS Custom attempts to reboot it\. If this effort fails, RDS Custom automatically takes the following steps, with no user intervention required:
+
+1. Stops the Amazon EC2 host\.
+
+   The EC2 instance performs a normal shutdown and stops running\. Any Amazon EBS volumes remain attached to the instance, and their data persists\. Any data stored in the instance store volumes \(not supported on RDS Custom\) or RAM of the host computer is gone\.
+
+   For more information, see [Stop and start your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+1. Starts the Amazon EC2 host\.
+
+   The EC2 instance migrates to a new underlying host hardware\. In some cases, the RDS Custom DB instance remains on the original host\.
+
+#### Effects of host replacement<a name="custom-troubleshooting.host-problems.replacement.host-state"></a>
+
+After the replacement process, the Amazon EC2 host has a new public IP address\. The host retains the following:
++ Instance ID
++ Private IP addresses
++ Elastic IP addresses
++ Instance metadata
++ Data storage volume data
++ Root volume data
+
+### Best practices for Amazon EC2 hosts<a name="custom-troubleshooting.host-problems.best-practices"></a>
+
+The Amazon EC2 host replacement feature covers the majority of Amazon EC2 impairment scenarios\. We recommend that you adhere to the following best practices:
++ Before you change your configuration or the operating system, back up your data\. If the root volume becomes corrupt, host replacement can't repair it\. Your only options are restoring from a DB snapshot or point\-in\-time recovery\.
++ Don't manually stop or delete the physical Amazon EC2 host\. Both actions result in the instance being put outside of RDS Custom support\.
++ If you attach additional volumes to the Amazon EC2 host, configure them to remount upon restart\. If the host is impaired, RDS Custom might stop and start the host automatically\.
+
+## Troubleshooting upgrade issues for RDS Custom for Oracle DB instances<a name="custom-troubleshooting-upgrade"></a>
+
+The shared responsibility model of RDS Custom provides OS shell–level access and database administrator access\. RDS Custom runs resources in your account, unlike Amazon RDS, which runs resources in a system account\. With greater access comes greater responsibility\. Therefore, you might have to intervene if certain events occur, such as upgrade failure\. 
+
+Following, you can find some important techniques, files, and commands that you can use during upgrades of RDS Custom DB for Oracle DB instances:
++ Examine the following log files:
+  + All upgrade output log files are kept in the `/tmp` directory on the DB instance\.
+  + These log files are named `catupg*.log`\.
+  + A master output file named `/tmp/catupgrd0.log` reports all errors, and the steps performed\.
+  + The `alert.log` file for the DB instance is located in the `/rdsdbdata/log/trace` directory\. Examine this file regularly as a best practice\.
++ Run the following `grep` command in the `root` directory to track the upgrade OS process\. This command shows where the log files are being written and determine the state of the upgrade process\.
+
+  ```
+  ps -aux | grep upg
+  ```
+
+  The output resembles the following\.
+
+  ```
+  root     18884  0.0  0.0 235428  8172 ?        S<   17:03   0:00 /usr/bin/sudo -u rdsdb /rdsdbbin/scripts/oracle-control ORCL op_apply_upgrade_sh RDS-UPGRADE/2.upgrade.sh
+  rdsdb    18886  0.0  0.0 153968 12164 ?        S<   17:03   0:00 /usr/bin/perl -T -w /rdsdbbin/scripts/oracle-control ORCL op_apply_upgrade_sh RDS-UPGRADE/2.upgrade.sh
+  rdsdb    18887  0.0  0.0 113196  3032 ?        S<   17:03   0:00 /bin/sh /rdsdbbin/oracle/rdbms/admin/RDS-UPGRADE/2.upgrade.sh
+  rdsdb    18900  0.0  0.0 113196  1812 ?        S<   17:03   0:00 /bin/sh /rdsdbbin/oracle/rdbms/admin/RDS-UPGRADE/2.upgrade.sh
+  rdsdb    18901  0.1  0.0 167652 20620 ?        S<   17:03   0:07 /rdsdbbin/oracle/perl/bin/perl catctl.pl -n 4 -d /rdsdbbin/oracle/rdbms/admin -l /tmp catupgrd.sql
+  root     29944  0.0  0.0 112724  2316 pts/0    S+   18:43   0:00 grep --color=auto upg
+  ```
++ Run the following SQL query to verify the current state of the components to find the database version and the options installed on the DB instance\.
+
+  ```
+  set linesize 180
+  column comp_id format a15
+  column comp_name format a40 trunc
+  column status format a15 trunc
+  select comp_id, comp_name, version, status from dba_registry order by 1;
+  ```
+
+  The output resembles the following\.
+
+  ```
+  COMP_NAME                                STATUS               PROCEDURE
+  ---------------------------------------- -------------------- --------------------------------------------------
+  Oracle Database Catalog Views            VALID                DBMS_REGISTRY_SYS.VALIDATE_CATALOG
+  Oracle Database Packages and Types       VALID                DBMS_REGISTRY_SYS.VALIDATE_CATPROC
+  Oracle Text                              VALID                VALIDATE_CONTEXT
+  Oracle XML Database                      VALID                DBMS_REGXDB.VALIDATEXDB
+  
+  4 rows selected.
+  ```
++ Run the following SQL query to check for invalid objects that might interfere with the upgrade process\.
+
+  ```
+  set pages 1000 lines 2000
+  col OBJECT for a40
+  Select substr(owner,1,12) owner,
+         substr(object_name,1,30) object,
+         substr(object_type,1,30) type, status,
+         created
+  from
+         dba_objects where status <>'VALID' and owner in ('SYS','SYSTEM','RDSADMIN','XDB');
+  ```

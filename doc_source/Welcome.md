@@ -6,33 +6,143 @@ Amazon Relational Database Service \(Amazon RDS\) is a web service that makes it
 This guide covers Amazon RDS database engines other than Amazon Aurora\. For information about using Amazon Aurora, see the [https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)\.  
 This guide covers using Amazon RDS in the AWS Cloud\. For information about using Amazon RDS in on\-premises VMware environments, see the [https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html](https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html)\.
 
-## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
-
-Why do you want a managed relational database service? Because Amazon RDS takes over many of the difficult and tedious management tasks of a relational database:
-+ When you buy a server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon RDS, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\.
-+ Amazon RDS manages backups, software patching, automatic failure detection, and recovery\.
-+ To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances\. It also restricts access to certain system procedures and tables that require advanced privileges\.
-+ You can have automated backups performed when you need them, or manually create your own backup snapshot\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\. 
-+ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\.
-+ You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL read replicas to increase read scaling\.
-+ In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud\.
-
 If you are new to AWS products and services, begin learning more with the following resources:
 + For an overview of all AWS products, see [What is cloud computing?](http://aws.amazon.com/what-is-aws/)
 + Amazon Web Services provides a number of database services\. For guidance on which service is best for your environment, see [Running databases on AWS](http://aws.amazon.com/running_databases/)\. 
 
+## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
+
+Why do you want run a relational database in the AWS Cloud? Because AWS takes over many of the difficult and tedious management tasks of a relational database\.
+
+**Topics**
++ [Amazon EC2 and on\-premises databases](#Welcome.Concepts.on-prem)
++ [Amazon RDS and Amazon EC2](#Welcome.Concepts.RDS)
++ [Amazon RDS Custom for Oracle](#Welcome.Concepts.Custom)
+
+### Amazon EC2 and on\-premises databases<a name="Welcome.Concepts.on-prem"></a>
+
+Amazon Elastic Compute Cloud \(Amazon EC2\) provides scalable computing capacity in the AWS Cloud\. Amazon EC2 eliminates your need to invest in hardware up front, so you can develop and deploy applications faster\.
+
+When you buy an on\-premises server, you get CPU, memory, storage, and IOPS, all bundled together\. With Amazon EC2, these are split apart so that you can scale them independently\. If you need more CPU, less IOPS, or more storage, you can easily allocate them\.
+
+For a relational database in an on\-premises server, you assume full responsibility for the server, operating system, and software\. For a database on an Amazon EC2 instance, AWS manages the layers below the operating system\. In this way, Amazon EC2 eliminates some of the burden of managing an on\-premises database server\. 
+
+In the following table, you can find a comparison of the management models for on\-premises databases and Amazon EC2\.
+
+
+|  Feature  |  On\-premises management  |  Amazon EC2 management  | 
+| --- | --- | --- | 
+|  Application optimization  |  Customer  |  Customer  | 
+|  Scaling  |  Customer  |  Customer  | 
+|  High availability  |  Customer  |  Customer  | 
+|  Database backups  |  Customer  |  Customer  | 
+|  Database software patching  |  Customer  |  Customer  | 
+|  Database software install  |  Customer  |  Customer  | 
+|  Operating system \(OS\) patching  |  Customer  |  Customer  | 
+|  OS installation  |  Customer  |  Customer  | 
+|  Server maintenance  |  Customer  |  AWS  | 
+|  Hardware lifecycle  |  Customer  |  AWS  | 
+|  Power, network, and cooling  |  Customer  |  AWS  | 
+
+Amazon EC2 isn't a fully managed service\. Thus, when you run a database on Amazon EC2, you're more prone to user errors\. For example, when you update the operating system or database software manually, you might accidentally cause application downtime\. You might spend hours checking every change to identify and fix an issue\.
+
+### Amazon RDS and Amazon EC2<a name="Welcome.Concepts.RDS"></a>
+
+Amazon RDS is a managed database service\. It's responsible for most management tasks\. By eliminating tedious manual tasks, Amazon RDS frees you to focus on your application and your users\. We recommend Amazon RDS over Amazon EC2 as your default choice for most database deployments\.
+
+In the following table, you can find a comparison of the management models in Amazon EC2 and Amazon RDS\.
+
+
+|  Feature  |  Amazon EC2 management  |  Amazon RDS management  | 
+| --- | --- | --- | 
+|  Application optimization  |  Customer  |  Customer  | 
+|  Scaling  |  Customer  |  AWS  | 
+|  High availability  |  Customer  |  AWS  | 
+|  Database backups  |  Customer  |  AWS  | 
+|  Database software patching  |  Customer  |  AWS  | 
+|  Database software install  |  Customer  |  AWS  | 
+|  OS patching  |  Customer  |  AWS  | 
+|  OS installation  |  Customer  |  AWS  | 
+|  Server maintenance  |  AWS  |  AWS  | 
+|  Hardware lifecycle  |  AWS  |  AWS  | 
+|  Power, network, and cooling  |  AWS  |  AWS  | 
+
+Amazon RDS provides the following specific advantages over database deployments that aren't fully managed:
++ You can use the database products you are already familiar with: MySQL, MariaDB, PostgreSQL, Oracle, Microsoft SQL Server\.
++ Amazon RDS manages backups, software patching, automatic failure detection, and recovery\.
++ You can turn on automated backups, or manually create your own backup snapshots\. You can use these backups to restore a database\. The Amazon RDS restore process works reliably and efficiently\.
++ You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use read replicas to increase read scaling\.
++ In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud \(VPC\)\.
+
+### Amazon RDS Custom for Oracle<a name="Welcome.Concepts.Custom"></a>
+
+Amazon RDS Custom is an RDS management type that gives you full access to your database and operating system\.
+
+You can use the control capabilities of RDS Custom to access and customize the database environment and operating system for legacy and packaged business applications\. Meanwhile, Amazon RDS automates database administration tasks and operations\. 
+
+In this deployment model, you can install applications and change configuration settings to suit your applications\. At the same time, you can offload database administration tasks such as provisioning, scaling, upgrading, and backup to AWS\. You can take advantage of the database management benefits of Amazon RDS, with more control and flexibility\.
+
+For Oracle Database, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\.
+
+
+**Shared responsibility model for RDS Custom**  
+
+|  Feature  |  Amazon RDS management  |  RDS Custom management  | 
+| --- | --- | --- | 
+|  Application optimization  |  Customer  |  Customer  | 
+|  Scaling  |  AWS  |  Shared  | 
+|  High availability  |  AWS  |  Shared  | 
+|  Database backups  |  AWS  |  Shared  | 
+|  Database software patching  |  AWS  |  Shared  | 
+|  Database software install  |  AWS  |  Shared  | 
+|  OS patching  |  AWS  |  Shared  | 
+|  OS installation  |  AWS  |  Shared  | 
+|  Server maintenance  |  AWS  |  AWS  | 
+|  Hardware lifecycle  |  AWS  |  AWS  | 
+|  Power, network, and cooling  |  AWS  | AWS | 
+
+With the shared responsibility model of RDS Custom, you get more control than in Amazon RDS, but also more responsibility\. To meet your application and business requirements, you manage everything at or above the OS layer yourself\.
+
+For more information on RDS Custom, see [Working with Amazon RDS Custom](rds-custom.md)\.
+
 ## DB instances<a name="Welcome.Concepts.DBInstance"></a>
 
-The basic building block of Amazon RDS is the DB instance\. A *DB instance* is an isolated database environment in the AWS Cloud\. Your DB instance can contain multiple user\-created databases\. You can access your DB instance by using the same tools and applications that you use with a standalone database instance\. You can create and modify a DB instance by using the AWS Command Line Interface, the Amazon RDS API, or the AWS Management Console\. 
+A *DB instance* is an isolated database environment in the AWS Cloud\. The basic building block of Amazon RDS is the DB instance\. 
 
- Each DB instance runs a *DB engine*\. Amazon RDS currently supports the MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server DB engines\. Each DB engine has its own supported features, and each version of a DB engine may include specific features\. Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\. 
+Your DB instance can contain one or more user\-created databases\. You can access your DB instance by using the same tools and applications that you use with a standalone database instance\. You can create and modify a DB instance by using the AWS Command Line Interface, the Amazon RDS API, or the AWS Management Console\.
 
- The computation and memory capacity of a DB instance is determined by its *DB instance class*\. You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB instance classes](Concepts.DBInstanceClass.md)\. 
+### DB engines<a name="Welcome.Concepts.DBInstance.engine"></a>
+
+A *DB engine* is the specific relational database software that runs on your DB instance\. Amazon RDS currently supports the following engines:
++ MySQL
++ MariaDB
++ PostgreSQL
++ Oracle
++ Microsoft SQL Server
+
+Each DB engine has its own supported features, and each version of a DB engine may include specific features\. Additionally, each DB engine has a set of parameters in a DB parameter group that control the behavior of the databases that it manages\.
+
+### DB instance classes<a name="Welcome.Concepts.DBInstance.instance-class"></a>
+
+A *DB instance class* determines the computation and memory capacity of a DB instance\. Each instance type offers different compute, memory, and storage capabilities\. For example, db\.m6g is a general\-purpose DB instance classes powered by AWS Graviton2 processors\.
+
+You can select the DB instance that best meets your needs\. If your needs change over time, you can change DB instances\. For information, see [DB instance classes](Concepts.DBInstanceClass.md)\.
 
 **Note**  
 For pricing information on DB instance classes, see the Pricing section of the [Amazon RDS](http://aws.amazon.com/rds/) product page\. 
 
-DB instance storage comes in three types: Magnetic, General Purpose \(SSD\), and Provisioned IOPS \(PIOPS\)\. They differ in performance characteristics and price, allowing you to tailor your storage performance and cost to the needs of your database\. Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It's important to have sufficient storage so that your databases have room to grow\. Also, sufficient storage makes sure that features for the DB engine have room to write content or log entries\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. 
+### DB instance storage<a name="Welcome.Concepts.DBInstance.storage"></a>
+
+Amazon EBS provides durable, block\-level storage volumes that you can attach to a running instance\. DB instance storage comes in the following types:
++ General Purpose \(SSD\)
++ Provisioned IOPS \(PIOPS\)
++ Magnetic
+
+The storage types differ in performance characteristics and price\. You can tailor your storage performance and cost to the needs of your database\. 
+
+Each DB instance has minimum and maximum storage requirements depending on the storage type and the database engine it supports\. It's important to have sufficient storage so that your databases have room to grow\. Also, sufficient storage makes sure that features for the DB engine have room to write content or log entries\. For more information, see [Amazon RDS DB instance storage](CHAP_Storage.md)\. 
+
+### Amazon Virtual Private Cloud \(Amazon VPC\)<a name="Welcome.Concepts.DBInstance.VPC"></a>
 
 You can run a DB instance on a virtual private cloud \(VPC\) using the Amazon Virtual Private Cloud \(Amazon VPC\) service\. When you use a VPC, you have control over your virtual networking environment\. You can choose your own IP address range, create subnets, and configure routing and access control lists\. The basic functionality of Amazon RDS is the same whether it's running in a VPC or not\. Amazon RDS manages backups, software patching, automatic failure detection, and recovery\. There's no additional cost to run your DB instance in a VPC\. For more information on using Amazon VPC with RDS, see [Amazon Virtual Private Cloud VPCs and Amazon RDS](USER_VPC.md)\. 
 
@@ -54,7 +164,7 @@ For more information about security groups, see [Security in Amazon RDS](UsingWi
 
 ## Monitoring an Amazon RDS DB instance<a name="Welcome.Monitoring"></a>
 
- There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)\. 
+There are several ways that you can track the performance and health of a DB instance\. You can use the Amazon CloudWatch service to monitor the performance and health of a DB instance\. CloudWatch performance charts are shown in the Amazon RDS console\. You can also subscribe to Amazon RDS events to be notified about changes to a DB instance, DB snapshot, DB parameter group, or DB security group\. For more information, see [Monitoring an Amazon RDS DB instance](CHAP_Monitoring.md)\. 
 
 ## How to work with Amazon RDS<a name="Welcome.Interfaces"></a>
 
@@ -90,7 +200,7 @@ The preceding section introduced you to the basic infrastructure components that
 
 Create a DB instance using instructions in [Getting started with Amazon RDS](CHAP_GettingStarted.md)\. 
 
-### Database engine–Specific topics<a name="Welcome.WhatsNext.DBTopics"></a>
+### Topics specific to database engines<a name="Welcome.WhatsNext.DBTopics"></a>
 
 You can review information specific to a particular DB engine in the following sections: 
 + [MariaDB on Amazon RDS](CHAP_MariaDB.md)

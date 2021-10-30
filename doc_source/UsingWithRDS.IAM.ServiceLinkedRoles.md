@@ -10,7 +10,7 @@ For information about other services that support service\-linked roles, see [AW
 
 ## Service\-linked role permissions for Amazon RDS<a name="service-linked-role-permissions"></a>
 
-Amazon RDS uses the service\-linked role named **AWSServiceRoleForRDS** – to allow Amazon RDS to call AWS services on behalf of your DB instances\.
+Amazon RDS uses the service\-linked role named AWSServiceRoleForRDS to allow Amazon RDS to call AWS services on behalf of your DB instances\.
 
 The AWSServiceRoleForRDS service\-linked role trusts the following services to assume the role:
 + `rds.amazonaws.com`
@@ -116,7 +116,7 @@ You must configure permissions to allow an IAM entity \(such as a user, group, o
 ```
  For more information, see [Service\-linked role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#service-linked-role-permissions) in the *IAM User Guide*\.
 
-## Creating a service\-linked role for Amazon RDS<a name="create-service-linked-role"></a>
+### Creating a service\-linked role for Amazon RDS<a name="create-service-linked-role"></a>
 
 You don't need to manually create a service\-linked role\. When you create a DB instance, Amazon RDS creates the service\-linked role for you\. 
 
@@ -125,15 +125,15 @@ If you were using the Amazon RDS service before December 1, 2017, when it began 
 
 If you delete this service\-linked role, and then need to create it again, you can use the same process to recreate the role in your account\. When you create a DB instance, Amazon RDS creates the service\-linked role for you again\.
 
-## Editing a service\-linked role for Amazon RDS<a name="edit-service-linked-role"></a>
+### Editing a service\-linked role for Amazon RDS<a name="edit-service-linked-role"></a>
 
 Amazon RDS does not allow you to edit the AWSServiceRoleForRDS service\-linked role\. After you create a service\-linked role, you cannot change the name of the role because various entities might reference the role\. However, you can edit the description of the role using IAM\. For more information, see [Editing a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#edit-service-linked-role) in the *IAM User Guide*\.
 
-## Deleting a service\-linked role for Amazon RDS<a name="delete-service-linked-role"></a>
+### Deleting a service\-linked role for Amazon RDS<a name="delete-service-linked-role"></a>
 
 If you no longer need to use a feature or service that requires a service\-linked role, we recommend that you delete that role\. That way you don't have an unused entity that is not actively monitored or maintained\. However, you must delete all of your DB instances before you can delete the service\-linked role\.
 
-### Cleaning up a service\-linked role<a name="service-linked-role-review-before-delete"></a>
+#### Cleaning up a service\-linked role<a name="service-linked-role-review-before-delete"></a>
 
 Before you can use IAM to delete a service\-linked role, you must first confirm that the role has no active sessions and remove any resources used by the role\.
 
@@ -151,7 +151,7 @@ If you are unsure whether Amazon RDS is using the AWSServiceRoleForRDS role, you
 
 If you want to remove the AWSServiceRoleForRDS role, you must first delete *all* of your DB instances \.
 
-#### Deleting all of your instances<a name="delete-service-linked-role.delete-rds-instances"></a>
+##### Deleting all of your instances<a name="delete-service-linked-role.delete-rds-instances"></a>
 
 Use one of these procedures to delete each of your instances\.
 
@@ -178,3 +178,513 @@ See `[delete\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds
 See `[DeleteDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DeleteDBInstance.html)` in the *Amazon RDS API Reference*\.
 
 You can use the IAM console, the IAM CLI, or the IAM API to delete the AWSServiceRoleForRDS service\-linked role\. For more information, see [Deleting a service\-linked role](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role) in the *IAM User Guide*\.
+
+## Service\-linked role permissions for Amazon RDS Custom<a name="slr-permissions-custom"></a>
+
+Amazon RDS Custom uses the service\-linked role named AmazonRDSCustomServiceRolePolicy to allow RDS Custom to call AWS services on behalf of your DB instances\.
+
+The AmazonRDSCustomServiceRolePolicy service\-linked role trusts the following services to assume the role:
++ `custom.rds.amazonaws.com`
+
+The role permissions policy allows RDS Custom to complete the following actions on the specified resources:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ecc1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "ec2:DescribeInstanceAttribute",
+                "ec2:DescribeRegions",
+                "ec2:DescribeSnapshots",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeInstanceStatus",
+                "ec2:DescribeIamInstanceProfileAssociations",
+                "ec2:DescribeImages",
+                "ec2:DescribeVpcs",
+                "ec2:RegisterImage",
+                "ec2:DeregisterImage",
+                "ec2:DescribeTags",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeVolumesModifications",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "ecc2",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DisassociateIamInstanceProfile",
+                "ec2:AssociateIamInstanceProfile",
+                "ec2:ReplaceIamInstanceProfileAssociation",
+                "ec2:TerminateInstances",
+                "ec2:StartInstances",
+                "ec2:StopInstances",
+                "ec2:RebootInstances"
+            ],
+            "Resource": "arn:aws:ec2:*:*:instance/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ecc1scoping",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AllocateAddress"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ecc1scoping2",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AssociateAddress",
+                "ec2:DisassociateAddress",
+                "ec2:ReleaseAddress"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccRunInstances1",
+            "Effect": "Allow",
+            "Action": "ec2:RunInstances",
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:volume/*",
+                "arn:aws:ec2:*:*:network-interface/*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccRunInstances2",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:subnet/*",
+                "arn:aws:ec2:*:*:security-group/*",
+                "arn:aws:ec2:*::image/*",
+                "arn:aws:ec2:*:*:key-pair/do-not-delete-rds-custom-*",
+                "arn:aws:ec2:*:*:placement-group/*"
+            ]
+        },
+        {
+            "Sid": "eccRunInstances3keyPair1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances",
+                "ec2:DeleteKeyPair"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:key-pair/do-not-delete-rds-custom-*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccKeyPair2",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateKeyPair"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:key-pair/do-not-delete-rds-custom-*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccCreateTag1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateTags"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccCreateTag2",
+            "Effect": "Allow",
+            "Action": "ec2:CreateTags",
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ],
+                    "ec2:CreateAction": [
+                        "CreateKeyPair",
+                        "RunInstances",
+                        "CreateVolume",
+                        "CreateSnapshots",
+                        "CopySnapshot",
+                        "AllocateAddress"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccVolume1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DetachVolume",
+                "ec2:AttachVolume"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:volume/*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccVolume2",
+            "Effect": "Allow",
+            "Action": "ec2:CreateVolume",
+            "Resource": "arn:aws:ec2:*:*:volume/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccVolume3",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:ModifyVolumeAttribute",
+                "ec2:DeleteVolume",
+                "ec2:ModifyVolume"
+            ],
+            "Resource": "arn:aws:ec2:*:*:volume/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccVolume4snapshot1",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateVolume",
+                "ec2:DeleteSnapshot"
+            ],
+            "Resource": "arn:aws:ec2:*::snapshot/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccSnapshot2",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CopySnapshot",
+                "ec2:CreateSnapshots"
+            ],
+            "Resource": "arn:aws:ec2:*::snapshot/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eccSnapshot3",
+            "Effect": "Allow",
+            "Action": "ec2:CreateSnapshots",
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:volume/*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "iam1",
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListInstanceProfiles",
+                "iam:GetInstanceProfile",
+                "iam:GetRole",
+                "iam:ListRolePolicies",
+                "iam:GetRolePolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:GetPolicy",
+                "iam:GetPolicyVersion"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "iam2",
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam::*:role/AWSRDSCustom*",
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": "ec2.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Sid": "cloudtrail1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:GetTrailStatus"
+            ],
+            "Resource": "arn:aws:cloudtrail:*:*:trail/do-not-delete-rds-custom-*"
+        },
+        {
+            "Sid": "cw1",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:EnableAlarmActions",
+                "cloudwatch:DeleteAlarms",
+                "cloudwatch:DescribeAlarms"
+            ],
+            "Resource": "arn:aws:cloudwatch:*:*:alarm:do-not-delete-rds-custom-*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "cw2",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricAlarm",
+                "cloudwatch:TagResource"
+            ],
+            "Resource": "arn:aws:cloudwatch:*:*:alarm:do-not-delete-rds-custom-*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ssm1",
+            "Effect": "Allow",
+            "Action": "ssm:SendCommand",
+            "Resource": "arn:aws:ssm:*:*:document/*"
+        },
+        {
+            "Sid": "ssm2",
+            "Effect": "Allow",
+            "Action": "ssm:SendCommand",
+            "Resource": "arn:aws:ec2:*:*:instance/*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ssm3",
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetCommandInvocation",
+                "ssm:GetConnectionStatus",
+                "ssm:DescribeInstanceInformation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "eb1",
+            "Effect": "Allow",
+            "Action": [
+                "events:PutRule",
+                "events:TagResource"
+            ],
+            "Resource": "arn:aws:events:*:*:rule/do-not-delete-rds-custom-*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "eb2",
+            "Effect": "Allow",
+            "Action": [
+                "events:PutTargets",
+                "events:DescribeRule",
+                "events:EnableRule",
+                "events:ListTargetsByRule",
+                "events:DeleteRule",
+                "events:RemoveTargets",
+                "events:DisableRule"
+            ],
+            "Resource": "arn:aws:events:*:*:rule/do-not-delete-rds-custom-*",
+            "Condition": {
+                "StringLike": {
+                    "aws:ResourceTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "secretmanager1",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:TagResource",
+                "secretsmanager:CreateSecret"
+            ],
+            "Resource": "arn:aws:secretsmanager:*:*:secret:do-not-delete-rds-custom-*",
+            "Condition": {
+                "StringLike": {
+                    "aws:RequestTag/AWSRDSCustom": [
+                        "custom-oracle",
+                        "custom-sqlserver"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "secretmanager2",
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:TagResource",
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:DeleteSecret",
+                "secretsmanager:PutSecretValue"
+            ],
+            "Resource": "arn:aws:secretsmanager:*:*:secret:do-not-delete-rds-custom-*",
+            "Condition": {
+            	"StringLike": {
+					"aws:ResourceTag/AWSRDSCustom": [
+						"custom-oracle",
+						"custom-sqlserver"
+					]
+				}
+			}
+		}
+	]
+}
+```
+
+Creating, editing, or deleting the service\-linked role for RDS Custom works the same as for Amazon RDS\. For more information, see [Service\-linked role permissions for Amazon RDS](#service-linked-role-permissions)\.
+
+**Note**  
+You must configure permissions to allow an IAM entity \(such as a user, group, or role\) to create, edit, or delete a service\-linked role\. If you encounter the following error message:  
+**Unable to create the resource\. Verify that you have permission to create service linked role\. Otherwise wait and try again later\.**  
+ Make sure you have the following permissions enabled:   
+
+```
+{
+    "Action": "iam:CreateServiceLinkedRole",
+    "Effect": "Allow",
+    "Resource": "arn:aws:iam::*:role/aws-service-role/custom.rds.amazonaws.com/AmazonRDSCustomServiceRolePolicy",
+    "Condition": {
+        "StringLike": {
+            "iam:AWSServiceName":"custom.rds.amazonaws.com"
+        }
+    }
+}
+```
+ For more information, see [Service\-linked role permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#service-linked-role-permissions) in the *IAM User Guide*\.
