@@ -328,7 +328,7 @@ When you are upgrading from MySQL version 5\.7 to MySQL version 8\.0, complete t
 
 1. \(Optional\) When the read replica has been created and **Status** shows **Available**, convert the read replica into a Multi\-AZ deployment and enable backups\.
 
-   By default, a read replicas is created as a single\-AZ deployment with backups disabled\. Because the read replica will ultimately become the production DB instance, it is a best practice to enable configure a Multi\-AZ deployment and enable backups now\.
+   By default, a read replicas is created as a single\-AZ deployment with backups disabled\. Because the read replica will ultimately become the production DB instance, it is a best practice to configure a Multi\-AZ deployment and enable backups now\.
 
    1. In the console, choose **Databases**, and then choose the read replica that you just created\.
 

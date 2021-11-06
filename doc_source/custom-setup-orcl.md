@@ -39,9 +39,9 @@ You can choose the same symmetric key when you create a CEV and a DB instance, o
 
 ## Download and install the AWS CLI<a name="custom-setup-orcl.cli"></a>
 
-AWS provides you with a command\-line interface to use RDS Custom features\. RDS Custom uses AWS CLI version 1\.
+AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI
 
-For information on downloading and installing the AWS CLI, see [Installing, updating, and uninstalling the AWS CLI version 1](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv1.html)\.
+For information on downloading and installing the AWS CLI, see [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv1.html)\.
 
 If you plan to access RDS Custom only from the AWS Management Console, skip this step\.
 

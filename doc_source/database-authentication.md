@@ -18,9 +18,7 @@ Don't assign both the `rds_iam` and `rds_ad` roles to a user of a PostgreSQL dat
 
 ## Password authentication<a name="password-authentication"></a>
 
-With *password authentication,* your DB instance performs all administration of user accounts\. You create users with SQL statements such as `CREATE USER` and specify passwords in the `IDENTIFIED BY` clause\.
-
-All RDS DB engines support password authentication\. For more information about password authentication, see the documentation for your DB engine\.
+With *password authentication,* your DB instance performs all administration of user accounts\. You create users with SQL statements such as `CREATE USER`, with the appropriate clause required by the DB engine for specifying passwords\. For example, in MySQL the statement is `CREATE USER` *name* `IDENTIFIED BY` *password*, while in PostgreSQL, the statement is `CREATE USER` *name* `WITH PASSWORD` *password*\. 
 
 With password authentication, your database controls and authenticates user accounts\. If a DB engine has strong password management features, they can enhance security\. Database authentication might be easier to administer using password authentication when you have small user communities\. Because clear text passwords are generated in this case, integrating with AWS Secrets Manager can enhance security\.
 

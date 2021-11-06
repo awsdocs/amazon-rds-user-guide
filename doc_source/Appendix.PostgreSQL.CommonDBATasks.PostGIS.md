@@ -47,6 +47,9 @@ CREATE EXTENSION postgis_topology;
 (4 rows)
 ```
 
+**Note**  
+Extra extensions aren't required for some use cases\.
+
 ## Step 3: Transfer ownership of the extensions to the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.TransferOwnership"></a>
 
 Use the ALTER SCHEMA statements to transfer ownership of the schemas to the `rds_superuser` role\.

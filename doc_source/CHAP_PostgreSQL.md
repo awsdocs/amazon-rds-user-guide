@@ -1078,6 +1078,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 13 that a
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.2 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.2 | 
 | [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| auto\_explain | yes | yes | yes | yes | 
 | [autoinc \(contrib\-spi\)](https://www.postgresql.org/docs/13/contrib-spi.html) | 1\.0 | N/A | N/A | N/A | 
 | [aws\_commons](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.Reference) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [aws\_lambda](PostgreSQL-Lambda.md) | 1\.0 | 1\.0 | 1\.0 | N/A | 
@@ -1193,6 +1194,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 12 that a
 | [address\_standardizer](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [address\_standardizer\_data\_us](http://postgis.net/docs/Address_Standardizer.html) | 3\.1\.4 | 3\.0\.3 | 3\.0\.2 | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 3\.0\.0 | 
 | [amcheck](https://www.postgresql.org/docs/current/amcheck.html) | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 1\.2 | 
+| auto\_explain | yes | yes | yes | yes | yes | yes | yes | 
 | [aws\_commons](USER_PostgreSQL.S3Import.md#USER_PostgreSQL.S3Import.Reference) | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 1\.0 | 
 | [aws\_lambda](PostgreSQL-Lambda.md) | 1\.0 | 1\.0 | 1\.0 | N/A | N/A | N/A | N/A | 
 |  [aws\_s3\.table\_import\_from\_s3](USER_PostgreSQL.S3Import.md#aws_s3.table_import_from_s3) [aws\_s3\.query\_export\_to\_s3](postgresql-s3-export.md#aws_s3.export_query_to_s3)  | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.0 | 1\.0 | 

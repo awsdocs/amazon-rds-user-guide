@@ -27,6 +27,7 @@ Transportable databases have the following limitations:
 + **Extensions** – The only extension that you can install on the source DB instance during transport is `pg_transport`\.
 + **Roles and ACLs** – The source database's access privileges and ownership information aren't carried over to the destination database\. All database objects are created and owned by the local destination user of the transport\.
 + **Concurrent transports** – You can run up to 32 total transports at the same time on a DB instance, including both imports and exports\. To define the worker processes used for each transport, use the `pg_transport.work_mem` and `pg_transport.num_workers` parameters\. To accommodate concurrent transports, you might need to increase the `max_worker_processes` parameter quite a bit\. For more information, see [ Configuration parameters for the pg\_transport extension](#PostgreSQL.TransportableDB.Parameters)\.
++ **Only RDS for PostgreSQL DB instances** – You can only use PostgreSQL transportable databases with RDS for PostgreSQL DB instances\. You can't use it with on\-premises databases or databases running on Amazon EC2\.
 
 ## Setting up to transport PostgreSQL databases<a name="PostgreSQL.TransportableDB.Setup"></a>
 

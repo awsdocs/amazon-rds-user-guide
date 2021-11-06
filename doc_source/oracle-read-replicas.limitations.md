@@ -14,7 +14,7 @@ Before creating an Oracle replica, check the following version and licensing req
 + Oracle replicas are only available on the Oracle Enterprise Edition \(EE\) engine\.
 + Oracle replicas are available for Oracle version 12\.1\.0\.2\.v10 and higher versions of Oracle Database 12c Release 1 \(12\.1\), for all Oracle Database 12c Release 2 \(12\.2\) versions, and for all Oracle Database 19c versions\.
 + Oracle replicas are available for DB instances only on the EC2\-VPC platform\.
-+ Oracle replicas are available for DB instances running only on DB instance classes with two or more vCPUs\. A source DB instance can't use the db\.t3\.micro instance class\.
++ Oracle replicas are available for DB instances running only on DB instance classes with two or more vCPUs\. A source DB instance can't use the db\.t3\.micro or db\.t3\.small instance classes\.
 + The Oracle DB engine version of the source DB instance and all of its replicas must be the same\. Amazon RDS upgrades the replicas immediately after upgrading the source DB instance, regardless of a replica's maintenance window\. For major version upgrades of cross\-Region replicas, Amazon RDS automatically does the following:
   + Generates an option group for the target version\.
   + Copies all options and option settings from the original option group to the new option group\.

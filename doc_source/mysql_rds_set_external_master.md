@@ -42,7 +42,8 @@ The password of the user ID specified in `replication_user_name`\.
 The name of the binary log on the source database instance that contains the replication information\.
 
  *mysql\_binary\_log\_file\_location*   
-The location in the `mysql_binary_log_file_name` binary log at which replication starts reading the replication information\.
+The location in the `mysql_binary_log_file_name` binary log at which replication starts reading the replication information\.  
+You can determine the binlog file name and location by running `SHOW MASTER STATUS` on the source database instance\.
 
  *ssl\_encryption*   
 A value that specifies whether Secure Socket Layer \(SSL\) encryption is used on the replication connection\. 1 specifies to use SSL encryption, 0 specifies to not use encryption\. The default is 0\.  

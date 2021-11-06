@@ -69,23 +69,48 @@ Activity streams in RDS for Oracle are always asynchronous\. When a database ses
 
 ## Requirements for database activity streams<a name="DBActivityStreams.Overview.requirements"></a>
 
-In RDS for Oracle, database activity streams have the following requirements and limitations:
-+ Database activity streams are supported for Oracle Database 19c release 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and later in both Enterprise Edition and Standard Edition 2 \(SE2\)\.
-+ Database activity streams support the following instance classes:
-  + db\.z1d
-  + db\.m4\.\*
-  + db\.m5\.\*
-  + db\.r4\.\*
-  + db\.r5\.\*
+In RDS for Oracle, database activity streams have the following requirements and limitations\.
+
+**Topics**
++ [Supported RDS for Oracle engine versions](#DBActivityStreams.Overview.requirements.version)
++ [Supported DB instance classes](#DBActivityStreams.Overview.requirements.classes)
++ [Oracle feature requirements](#DBActivityStreams.Overview.requirements.oracle)
++ [AWS Region support](#DBActivityStreams.Overview.requirements.Regions)
++ [Miscellaneous requirements](#DBActivityStreams.Overview.requirements.misc)
+
+### Supported RDS for Oracle engine versions<a name="DBActivityStreams.Overview.requirements.version"></a>
+
+Database activity streams are supported for Oracle Database 19c using version 19\.0\.0\.0\.ru\-2019\-07\.rur\-2019\-07\.r1 and higher\. Your database can use either Enterprise Edition or Standard Edition 2 \(SE2\)\.
+
+### Supported DB instance classes<a name="DBActivityStreams.Overview.requirements.classes"></a>
+
+For Oracle for RDS, you can use database activity streams with the following DB instance classes:
++ db\.m4
++ db\.m5\.\*
++ db\.r4
++ db\.r5\.\*
++ db\.z1d
++ 
 **Note**  
 The memory optimized db\.r5 classes, which use the naming pattern db\.r5\.*instance\_size*\.tpc*threads\_per\_core*\.mem*ratio*, aren't supported\.
+
+For more information about instance class types, see [DB instance classes](Concepts.DBInstanceClass.md)\.
+
+### Oracle feature requirements<a name="DBActivityStreams.Overview.requirements.oracle"></a>
+
+RDS for Oracle has the following requirements for database activity streams:
 + CDBs aren't supported\.
 + Oracle read replicas aren't supported\.
-+ In an RDS for Oracle DB instance, you must create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
-+ Database activity streams aren't supported in the following AWS Regions:
-  + China \(Beijing\) Region, `cn-north-1`
-  + China \(Ningxia\) Region, `cn-northwest-1`
-  + AWS GovCloud \(US\-East\), `us-gov-east-1`
-  + AWS GovCloud \(US\-West\), `us-gov-west-1`
++ In an RDS for Oracle DB instance, you create and manage audit policies yourself\. Unlike Amazon Aurora, RDS for Oracle doesn't capture database activities by default\.
+
+### AWS Region support<a name="DBActivityStreams.Overview.requirements.Regions"></a>
+
+Database activity streams are supported in all AWS Regions except the following:
++ China \(Beijing\) Region, `cn-north-1`
++ China \(Ningxia\) Region, `cn-northwest-1`
++ AWS GovCloud \(US\-East\), `us-gov-east-1`
++ AWS GovCloud \(US\-West\), `us-gov-west-1`
+
+### Miscellaneous requirements<a name="DBActivityStreams.Overview.requirements.misc"></a>
 + Database activity streams require use of AWS Key Management Service \(AWS KMS\)\. AWS KMS is required because the activity streams are always encrypted\.
 + Database activity streams require use of Amazon Kinesis\.

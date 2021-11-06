@@ -2,7 +2,7 @@
 
 You can export DB snapshot data to an Amazon S3 bucket\. The export process runs in the background and doesn't affect the performance of your active DB instance\.
 
-When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket in your account\. The data is stored in an Apache Parquet format that is compressed and consistent\.
+When you export a DB snapshot, Amazon RDS extracts data from the snapshot and stores it in an Amazon S3 bucket\. The data is stored in an Apache Parquet format that is compressed and consistent\.
 
 You can export all types of DB snapshots—including manual snapshots, automated system snapshots, and snapshots created by the AWS Backup service\. By default, all data in the snapshot is exported\. However, you can choose to export specific sets of databases, schemas, or tables\.
 
@@ -19,7 +19,7 @@ The following table shows the engine versions that are supported for exporting s
 
 | MariaDB | MySQL | PostgreSQL | 
 | --- | --- | --- | 
-|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
+|  10\.3 10\.2\.12 and higher  |  8\.0\.13 and higher 5\.7\.24 and higher 5\.6\.40 and higher  |  All 12 and 13 versions 11\.2 and higher 10\.7 and higher 9\.6\.6–9\.6\.9, 9\.6\.12 and higher   | 
 
 For complete lists of engine versions supported by Amazon RDS, see the following:
 + [MariaDB on Amazon RDS versions](CHAP_MariaDB.md#MariaDB.Concepts.VersionMgmt)
@@ -30,6 +30,7 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Limitations](#USER_ExportSnapshot.Limits)
 + [Overview of exporting snapshot data](#USER_ExportSnapshot.Overview)
 + [Setting up access to an Amazon S3 bucket](#USER_ExportSnapshot.Setup)
++ [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)
 + [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
 + [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
@@ -39,7 +40,7 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 
 ## Limitations<a name="USER_ExportSnapshot.Limits"></a>
 
-Exporting DB snapshot data to S3 has the following limitations:
+Exporting DB snapshot data to Amazon S3 has the following limitations:
 + Exporting snapshots from DB instances that use magnetic storage isn't supported\.
 + If a database, schema, or table has characters in its name other than the following, partial export isn't supported\. However, you can export the entire DB snapshot\.
   + Latin letters \(A–Z\)
@@ -67,9 +68,11 @@ You use the following process to export DB snapshot data to an Amazon S3 bucket\
 
    1. Identify the S3 bucket where the snapshot is to be exported to\. The S3 bucket must be in the same AWS Region as the snapshot\. For more information, see [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)\.
 
-   1. Create an AWS KMS key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
-
    1. Create an AWS Identity and Access Management \(IAM\) role that grants the snapshot export task access to the S3 bucket\. For more information, see [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)\. 
+
+1. Create an AWS KMS key for the server\-side encryption\. The KMS key is used by the snapshot export task to set up AWS KMS server\-side encryption when writing the export data to S3\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\.
+
+   You can use a KMS key within your AWS account, or you can use a cross\-account KMS key\. For more information, see [Using a cross\-account AWS KMS key for encrypting Amazon S3 exports](#USER_ExportSnapshot.CMK)\.
 
 1. Export the snapshot to Amazon S3 using the console or the `start-export-task` CLI command\. For more information, see [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)\. 
 
@@ -82,6 +85,7 @@ To export DB snapshot data to an Amazon S3 file, you first give the snapshot per
 **Topics**
 + [Identifying the Amazon S3 bucket for export](#USER_ExportSnapshot.SetupBucket)
 + [Providing access to an Amazon S3 bucket using an IAM role](#USER_ExportSnapshot.SetupIAMRole)
++ [Using a cross\-account Amazon S3 bucket](#USER_ExportSnapshot.Setup.XAcctBucket)
 
 ### Identifying the Amazon S3 bucket for export<a name="USER_ExportSnapshot.SetupBucket"></a>
 
@@ -175,13 +179,97 @@ After you create the policy, note the ARN of the policy\. You need the ARN for a
    aws iam attach-role-policy  --policy-arn your-policy-arn  --role-name rds-s3-export-role
    ```
 
+### Using a cross\-account Amazon S3 bucket<a name="USER_ExportSnapshot.Setup.XAcctBucket"></a>
+
+You can use Amazon S3 buckets across AWS accounts\. To use a cross\-account bucket, add a bucket policy to allow access to the IAM role that you're using for the S3 exports\. For more information, see [Example 2: Bucket owner granting cross\-account bucket permissions](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example2.html)\.To add a bucket policy
++ Attach a bucket policy to your bucket, as shown in the following example\.
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Principal": {
+                  "AWS": "arn:aws:iam::123456789012:role/Admin"
+              },
+              "Action": [
+                  "s3:PutObject*",
+                  "s3:ListBucket",
+                  "s3:GetObject*",
+                  "s3:DeleteObject*",
+                  "s3:GetBucketLocation"
+              ],
+              "Resource": [
+                  "arn:aws:s3:::mycrossaccountbucket",
+                  "arn:aws:s3:::mycrossaccountbucket/*"
+              ]
+          }
+      ]
+  }
+  ```
+
+## Using a cross\-account AWS KMS key for encrypting Amazon S3 exports<a name="USER_ExportSnapshot.CMK"></a>
+
+You can use a cross\-account AWS KMS key to encrypt Amazon S3 exports\. First, you add a key policy to the local account, then you add IAM policies in the external account\. For more information, see [Allowing users in other accounts to use a KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)\.
+
+**To use a cross\-account KMS key**
+
+1. Add a key policy to the local account\.
+
+   The following example gives `ExampleRole` and `ExampleUser` in the external account 444455556666 permissions in the local account 123456789012\.
+
+   ```
+   {
+       "Sid": "Allow an external account to use this KMS key",
+       "Effect": "Allow",
+       "Principal": {
+           "AWS": [
+               "arn:aws:iam::444455556666:role/ExampleRole",
+               "arn:aws:iam::444455556666:user/ExampleUser"
+           ]
+       },
+       "Action": [
+           "kms:Encrypt",
+           "kms:Decrypt",
+           "kms:ReEncrypt*",
+           "kms:GenerateDataKey*",
+           "kms:CreateGrant",
+           "kms:DescribeKey",
+           "kms:RetireGrant"
+       ],
+       "Resource": "*"
+   }
+   ```
+
+1. Add IAM policies to the external account\.
+
+   The following example IAM policy allows the principal to use the KMS key in account 123456789012 for cryptographic operations\. To give this permission to `ExampleRole` and `ExampleUser` in account 444455556666, [attach the policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#attach-managed-policy-console) to them in that account\.
+
+   ```
+   {
+       "Sid": "Allow use of KMS key in account 123456789012",
+       "Effect": "Allow",
+       "Action": [
+           "kms:Encrypt",
+           "kms:Decrypt",
+           "kms:ReEncrypt*",
+           "kms:GenerateDataKey*",
+           "kms:CreateGrant",
+           "kms:DescribeKey",
+           "kms:RetireGrant"
+       ],
+       "Resource": "arn:aws:kms:us-west-2:123456789012:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+   }
+   ```
+
 ## Exporting a snapshot to an Amazon S3 bucket<a name="USER_ExportSnapshot.Exporting"></a>
 
 You can have up to five concurrent DB snapshot export tasks in progress per account\. 
 
 **Note**  
 Exporting RDS snapshots can take a while depending on your database type and size\. The export task first restores and scales the entire database before extracting the data to Amazon S3\. The task's progress during this phase displays as **Starting**\. When the task switches to exporting data to S3, progress displays as **In progress**\.  
-The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well distributed numeric primary key or index columns will export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column will take longer because the export uses a slower single threaded process\. 
+The time it takes for the export to complete depends on the data stored in the database\. For example, tables with well\-distributed numeric primary key or index columns export the fastest\. Tables that don't contain a column suitable for partitioning and tables with only one index on a string\-based column take longer\. This longer export time occurs because the export uses a slower single\-threaded process\. 
 
 You can export a DB snapshot to Amazon S3 using the AWS Management Console, the AWS CLI, or the RDS API\.
 
@@ -247,43 +335,43 @@ To export a DB snapshot to Amazon S3 using the AWS CLI, use the [start\-export\-
 + `--iam-role-arn` 
 + `--kms-key-id` 
 
-In the following examples, the snapshot export task is named *my\_snapshot\_export*, which exports a snapshot to an S3 bucket named *my\_export\_bucket*\.
+In the following examples, the snapshot export task is named *my\-snapshot\-export*, which exports a snapshot to an S3 bucket named *my\-export\-bucket*\.
 
 **Example**  
 For Linux, macOS, or Unix:  
 
 ```
 1. aws rds start-export-task \
-2.     --export-task-identifier my_snapshot_export \
-3.     --source-arn arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot_name \
-4.     --s3-bucket-name my_export_bucket \
-5.     --iam-role-arn iam_role \
-6.     --kms-key-id master_key
+2.     --export-task-identifier my-snapshot-export \
+3.     --source-arn arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot-name \
+4.     --s3-bucket-name my-export-bucket \
+5.     --iam-role-arn iam-role \
+6.     --kms-key-id my-key
 ```
 For Windows:  
 
 ```
 1. aws rds start-export-task ^
-2.     --export-task-identifier my_snapshot_export ^
-3.     --source-arn arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot_name ^
-4.     --s3-bucket-name my_export_bucket ^
-5.     --iam-role-arn iam_role ^
-6.     --kms-key-id master_key
+2.     --export-task-identifier my-snapshot-export ^
+3.     --source-arn arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot-name ^
+4.     --s3-bucket-name my-export-bucket ^
+5.     --iam-role-arn iam-role ^
+6.     --kms-key-id my-key
 ```
 Sample output follows\.  
 
 ```
 {
     "Status": "STARTING", 
-    "IamRoleArn": "iam_role", 
+    "IamRoleArn": "iam-role", 
     "ExportTime": "2019-08-12T01:23:53.109Z", 
-    "S3Bucket": "my_export_bucket", 
+    "S3Bucket": "my-export-bucket", 
     "PercentProgress": 0, 
-    "KmsKeyId": "master_key", 
-    "ExportTaskIdentifier": "my_snapshot_export", 
+    "KmsKeyId": "my-key", 
+    "ExportTaskIdentifier": "my-snapshot-export", 
     "TotalExtractedDataInGB": 0, 
     "TaskStartTime": "2019-11-13T19:46:00.173Z", 
-    "SourceArn": "arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot_name"
+    "SourceArn": "arn:aws:rds:AWS_Region:123456789012:snapshot:snapshot-name"
 }
 ```
 To provide a folder path in the S3 bucket for the snapshot export, include the `--s3-prefix` option in the [start\-export\-task](https://docs.aws.amazon.com/cli/latest/reference/rds/start-export-task.html) command\.
@@ -459,9 +547,25 @@ For example:
 export-1234567890123-459/rdststdb/rdststdb.DataInsert_7ADB5D19965123A2/
 ```
 
-There are two conventions for how files are named:
-+ `part-partition_index-random_uuid.format-based_extension`
-+ `partition_index/part-00000-random_uuid.format-based_extension`
+There are two conventions for how files are named\. The current convention is the following:
+
+```
+partition_index/part-00000-random_uuid.format-based_extension
+```
+
+For example:
+
+```
+1/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet
+2/part-00000-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
+3/part-00000-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
+```
+
+The older convention is the following:
+
+```
+part-partition_index-random_uuid.format-based_extension
+```
 
 For example:
 
@@ -469,12 +573,6 @@ For example:
 part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet
 part-00001-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
 part-00002-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
-```
-
-```
-1/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet
-2/part-00000-d7a881cc-88cc-5ab7-2222-c41ecab340a4-c000.gz.parquet
-3/part-00000-f5a991ab-59aa-7fa6-3333-d41eccd340a7-c000.gz.parquet
 ```
 
 The file naming convention is subject to change\. Therefore, when reading target tables we recommend that you read everything inside the base prefix for the table\.
