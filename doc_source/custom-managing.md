@@ -21,7 +21,7 @@ You can configure your high availability environment in the following ways:
 + Fail over or switch over from the primary database to a standby database with no data loss\.
 + Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
 
-To learn how to configure high availability, see the technical guide "Enabling high availability with Data Guard on Amazon RDS Custom for Oracle" on the [AWS Whitepapers & Guides](http://aws.amazon.com/whitepapers/?awsf.whitepapers-content-type=content-type%23tech-guide) page\. You can perform the following tasks:
+To learn how to configure high availability, see the white paper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\. You can perform the following tasks:
 + Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
 + Configure Oracle Fast\-Failover Observer \(FSFO\) to monitor your high availability instances\.
 + Allow the observer to perform automatic failover when necessary conditions are met\.

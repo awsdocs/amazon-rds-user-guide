@@ -90,7 +90,7 @@ Before you attempt to connect to the DB instance, make sure that the DB instance
 
 In some cases, you might have difficulty connecting to the DB instance\. If so, the problem is most often with the access rules that you set up in the security group that you assigned to the DB instance\. If you didn't specify the appropriate security group when you created the DB instance, you can modify the DB instance to change its security group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-For more information about connecting to a PostgreSQL DB instance, see [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)\. If you can't connect to your DB instance, see [Troubleshooting connections to your PostgreSQL instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
+For more information about connecting to a PostgreSQL DB instance, see [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)\. If you can't connect to your DB instance, see [Troubleshooting connections to your RDS for PostgreSQL instance](USER_ConnectToPostgreSQLInstance.md#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
 
 **Topics**
 + [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin)
@@ -108,6 +108,9 @@ For more information about connecting to a PostgreSQL DB instance, see [Connecti
 
    1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
 ![\[Connect to a PostgreSQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-endpoint.png)
+
+   1. On the **Configuration** tab, note the DB name\. You don't need this to connect using pgAdmin, but you do need it to connect using psql\.  
+![\[Name of the database (DB name) on the Configuration tab\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-db-name.png)
 
 1. Install pgAdmin from [https://www\.pgadmin\.org/](https://www.pgadmin.org/)\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\.
 
@@ -132,7 +135,7 @@ For more information about connecting to a PostgreSQL DB instance, see [Connecti
 
 ### Using psql to connect to a PostgreSQL DB instance<a name="CHAP_GettingStarted.Connecting.PostgreSQL.psql"></a>
 
-If your client computer has PostgreSQL installed, you can use a local instance of psql to connect to a PostgreSQL DB instance\. To connect to your PostgreSQL DB instance using psql, provide host information and access credentials\.
+If your client computer has PostgreSQL installed, you can use a local instance of psql to connect to a PostgreSQL DB instance\. To connect to your PostgreSQL DB instance using psql, you provide host information, port number, access credentials, and the database name\. You can obtain these details by following the first step in the procedure for [Using pgAdmin to connect to a PostgreSQL DB instance](#CHAP_GettingStarted.Connecting.PostgreSQL.pgAdmin) 
 
 The following format is used to connect to a PostgreSQL DB instance on Amazon RDS\.
 

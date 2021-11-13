@@ -2,6 +2,8 @@
 
 You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. 
 
+If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't import data from a bucket that is encrypted with a customer managed key\.
+
 **Note**  
 To import from Amazon S3 into RDS for PostgreSQL, your database must be running PostgreSQL version 10\.7 or later\. 
 
@@ -483,7 +485,7 @@ For information about creating an `aws_commons._aws_credentials_1` composite str
 
 #### Alternate syntax<a name="aws_s3.table_import_from_s3-alternative-syntax"></a>
 
-To he lp with testing, you can use an expanded set of parameters instead of the `s3_info` and `credentials` parameters\. Following are additional syntax variations for the `aws_s3.table_import_from_s3` function: 
+To help with testing, you can use an expanded set of parameters instead of the `s3_info` and `credentials` parameters\. Following are additional syntax variations for the `aws_s3.table_import_from_s3` function: 
 + Instead of using the `s3_info` parameter to identify an Amazon S3 file, use the combination of the `bucket`, `file_path`, and `region` parameters\. With this form of the function, access to Amazon S3 is provided by an IAM role on the PostgreSQL DB instance\.
 
   ```

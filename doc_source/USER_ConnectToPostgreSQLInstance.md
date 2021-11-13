@@ -1,37 +1,45 @@
 # Connecting to a DB instance running the PostgreSQL database engine<a name="USER_ConnectToPostgreSQLInstance"></a>
 
-After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. To list the details of an Amazon RDS DB instance, you can use the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. You need the following information to connect:
-+ The host or host name for the DB instance, for example: 
+After Amazon RDS provisions your DB instance, you can use any standard SQL client application to connect to the instance\. Before you can connect, the DB instance must be available and accessible\. Whether you can connect to the instance from outside the VPC depends on how you created the Amazon RDS DB instance: 
++ If you created your DB instance as *public*, devices and Amazon EC2 instances outside the VPC can connect to your database\. 
++ If you created your DB instance as *private*, only Amazon EC2 instances and devices inside the Amazon VPC can connect to your database\. 
 
-  ```
-  myinstance.123456789012.us-east-1.rds.amazonaws.com
-  ```
-+ The port on which the DB instance is listening\. For example, the default PostgreSQL port is 5432\. 
-+ The user name and password for the DB instance\.
+To learn more about different Amazon RDS and Amazon VPC configurations and how they affect accessibility, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
+
+If the DB instance is available and accessible, you can connect by providing the following information to the SQL client application: 
++ The DB instance endpoint, which serves as the host name \(DNS name\) for the instance\.
++ The port on which the DB instance is listening\. For PostgreSQL, the default port is 5432\. 
++ The user name and password for the DB instance\. The default 'master username' for PostgreSQL is `postgres`\. 
++ The name and password of the database \(DB name\)\. 
+
+ You can obtain these details by using the AWS Management Console, the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command, or the Amazon RDS API [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation\. 
+
+**To find the endpoint, port number, and DB name using the AWS Management Console**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
+
+1. Choose the PostgreSQL DB instance name to display its details\. 
+
+1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
+![\[Obtain the endpoint from the RDS Console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-endpoint.png)
+
+1. On the **Configuration** tab, note the DB name\. If you created a database when you created the RDS for PostgreSQL instance, you see the name listed under DB name\. If you didn't create a database, the DB name displays a dash \(‐\)\.  
+![\[Obtain the DB name from the RDS Console\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-db-name.png)
 
 Following are two ways to connect to a PostgreSQL DB instance\. The first example uses pgAdmin, a popular open\-source administration and development tool for PostgreSQL\. The second example uses psql, a command line utility that is part of a PostgreSQL installation\. 
 
 **Topics**
-+ [Using pgAdmin to connect to a PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.pgAdmin)
-+ [Using psql to connect to a PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.psql)
-+ [Troubleshooting connections to your PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)
++ [Using pgAdmin to connect to a RDS for PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.pgAdmin)
++ [Using psql to connect to your RDS for PostgreSQL DB instance](#USER_ConnectToPostgreSQLInstance.psql)
++ [Troubleshooting connections to your RDS for PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)
 
-## Using pgAdmin to connect to a PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.pgAdmin"></a>
+## Using pgAdmin to connect to a RDS for PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.pgAdmin"></a>
 
-You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance\. 
+You can use the open\-source tool pgAdmin to connect to your RDS for PostgreSQL DB instance\. You can download and install pgAdmin from [http://www\.pgadmin\.org/](http://www.pgadmin.org/) without having a local instance of PostgreSQL on your client computer\.
 
-**To connect to a PostgreSQL DB instance using pgAdmin**
-
-1. Find the endpoint \(DNS name\) and port number for your DB Instance\. 
-
-   1. Open the RDS console and then choose **Databases** to display a list of your DB instances\. 
-
-   1. Choose the PostgreSQL DB instance name to display its details\. 
-
-   1. On the **Connectivity & security** tab, copy the endpoint\. Also, note the port number\. You need both the endpoint and the port number to connect to the DB instance\.   
-![\[Connect to a PostgreSQL DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/PostgreSQL-endpoint.png)
-
-1. Install pgAdmin from [http://www\.pgadmin\.org/](http://www.pgadmin.org/)\. You can download and use pgAdmin without having a local instance of PostgreSQL on your client computer\.
+**To connect to your RDS for PostgreSQL DB instance using pgAdmin**
 
 1. Launch the pgAdmin application on your client computer\. 
 
@@ -42,29 +50,31 @@ You can use the open\-source tool pgAdmin to connect to a PostgreSQL DB instance
 1. On the **Connection** tab, type the following information from your DB instance:
    + For **Host**, type the endpoint, for example `mypostgresql.c6c8dntfzzhgv0.us-east-2.rds.amazonaws.com`\.
    + For **Port**, type the assigned port\. 
-   + For **Username**, type the user name that you entered when you created the DB instance\.
+   + For **Username**, type the user name that you entered when you created the DB instance \(if you changed the 'master username' from the default, `postgres`\)\. 
    + For **Password**, type the password that you entered when you created the DB instance\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect01.png)
 
 1. Choose **Save**\. 
 
-   If you have any problems connecting, see [Troubleshooting connections to your PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
+   If you have any problems connecting, see [Troubleshooting connections to your RDS for PostgreSQL instance](#USER_ConnectToPostgreSQLInstance.Troubleshooting)\. 
 
 1. To access a database in the pgAdmin browser, expand **Servers**, the DB instance, and **Databases**\. Choose the DB instance's database name\.  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/Postgres-Connect02.png)
 
 1. To open a panel where you can enter SQL commands, choose **Tools**, **Query Tool**\. 
 
-## Using psql to connect to a PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.psql"></a>
+## Using psql to connect to your RDS for PostgreSQL DB instance<a name="USER_ConnectToPostgreSQLInstance.psql"></a>
 
-You can use a local instance of the psql command line utility to connect to a PostgreSQL DB instance\. You need either PostgreSQL or the psql client installed on your client computer\. To connect to your PostgreSQL DB instance using psql, you need to provide host information and access credentials\.
+You can use a local instance of the psql command line utility to connect to a RDS for PostgreSQL DB instance\. You need either PostgreSQL or the psql client installed on your client computer\. 
 
-Use one of the following formats to connect to a PostgreSQL DB instance on Amazon RDS\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\. This option is set for the entire session\.
+To connect to your RDS for PostgreSQL DB instance using psql, you need to provide host \(DNS\) information, access credentials, and the name of the database\.
+
+Use one of the following formats to connect to your RDS for PostgreSQL DB instance\. When you connect, you're prompted for a password\. For batch jobs or scripts, use the `--no-password` option\. This option is set for the entire session\.
 
 **Note**  
 A connection attempt with `--no-password` fails when the server requires password authentication and a password is not available from other sources\. For more information, see the [psql documentation](https://www.postgresql.org/docs/13/app-psql.html)\.
 
-If this is the first time you are connecting to this DB instance, try using the default database name **postgres** for the `--dbname` option\. 
+If this is the first time you are connecting to this DB instance, or if you didn't yet create a database for this RDS for PostgreSQL instance, you can connect to the **postgres** database using the 'master username' and password\.
 
 For Unix, use the following format\.
 
@@ -94,7 +104,7 @@ For example, the following command connects to a database called `mypgdb` on a P
 psql --host=mypostgresql.c6c8mwvfdgv0.us-west-2.rds.amazonaws.com --port=5432 --username=awsuser --password --dbname=mypgdb 
 ```
 
-## Troubleshooting connections to your PostgreSQL instance<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
+## Troubleshooting connections to your RDS for PostgreSQL instance<a name="USER_ConnectToPostgreSQLInstance.Troubleshooting"></a>
 
 **Topics**
 + [Error – FATAL: database *name* does not exist](#USER_ConnectToPostgreSQLInstance.Troubleshooting-DBname)

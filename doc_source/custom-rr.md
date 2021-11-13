@@ -36,7 +36,7 @@ RDS Custom for Oracle read replicas have the following limitations:
 + Deleting the primary DB instance for a read replica isn't supported\. Delete the read replicas first, then delete the primary\.
 + Promoting a read replica using the [promote\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/promote-read-replica.html) AWS CLI command isn't supported, but you can promote a read replica manually\.
 
-  For information on promoting read replicas manually, see the technical guide "Enabling high availability with Data Guard on Amazon RDS Custom for Oracle" on the [AWS Whitepapers & Guides](http://aws.amazon.com/whitepapers/?awsf.whitepapers-content-type=content-type%23tech-guide) page\.
+  For information on promoting read replicas manually, see the white paper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\.
 + RDS Custom uses the `RDS_DATAGUARD` database user to administer the Oracle Data Guard configuration for the DB instance\. This user is reserved for RDS Custom automation\.
 
   Don't modify the `RDS_DATAGUARD` user\. Doing so can result in undesired outcomes, such as not being able to create read replicas for your RDS Custom DB instance\.

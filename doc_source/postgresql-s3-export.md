@@ -1,8 +1,10 @@
 # Exporting data from an RDS for PostgreSQL DB instance to Amazon S3<a name="postgresql-s3-export"></a>
 
-You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. The upload to S3 uses server\-side encryption by default\.
+You can query data from an RDS for PostgreSQL DB instance and export it directly into files stored in an Amazon S3 bucket\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\.
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\.
+
+The upload to Amazon S3 uses server\-side encryption by default\. If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't export data to a bucket that is encrypted with a customer managed key\.
 
 **Note**  
 You can save DB snapshot data to Amazon S3 using the AWS Management Console, AWS CLI, or Amazon RDS API\. For more information, see [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)\.

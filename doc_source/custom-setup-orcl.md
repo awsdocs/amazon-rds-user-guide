@@ -35,11 +35,15 @@ You have the following options:
 + If you have an existing symmetric KMS key in your account, you can use it with RDS Custom\. No further action is necessary\.
 + If you don't already have a symmetric KMS key in your account, create one by following the instructions in [Creating keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.
 
-You can choose the same symmetric key when you create a CEV and a DB instance, or choose different keys\.
+You can choose the same symmetric key when you create a CEV and a DB instance, or choose different keys\. RDS Custom doesn't support AWS\-managed KMS keys\.
+
+The symmetric key you wish to use must provide the IAM role in your IAM instance profile for RDS Custom with access to the `kms:Decrypt` and `kms:GenerateDataKey` operations\. If you have created a new symmetric key in your account, no changes are required\. Otherwise, make sure that your symmetric key's policy can provide access to these operations\.
+
+For more information on configuring IAM for RDS Custom for Oracle, see [Configure IAM and your VPC](#custom-setup-orcl.iam-vpc)\.
 
 ## Download and install the AWS CLI<a name="custom-setup-orcl.cli"></a>
 
-AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI
+AWS provides you with a command\-line interface to use RDS Custom features\. You can use either version 1 or version 2 of the AWS CLI\.
 
 For information on downloading and installing the AWS CLI, see [Installing, updating, and uninstalling the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv1.html)\.
 
@@ -263,7 +267,7 @@ aws iam put-role-policy \
             "Condition": {
                 "StringEquals": {
                     "cloudwatch:namespace": [
-                        "custom/RDSCustomAgent"
+                        "RDSCustomForOracle/Agent"
                     ]
                 }
             }

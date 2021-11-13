@@ -212,3 +212,56 @@ aws rds modify-db-instance ^
 To adjust the preferred maintenance window, use the Amazon RDS API [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
 + `DBInstanceIdentifier`
 + `PreferredMaintenanceWindow`
+
+## Working with mandatory operating system updates<a name="Mandatory_OS_Updates"></a>
+
+RDS for MySQL and RDS for PostgreSQL DB instances require mandatory operating system updates\. These updates provide critical security fixes\. The updates don't affect how the DB instances function\.
+
+Whether a DB instance is eligible for mandatory operating system updates depends on its DB engine version and DB instance class\. In the following sections, you can find descriptions of the eligible DB engine versions and DB instance classes for RDS for MySQL and RDS for PostgreSQL\.
+
+### Mandatory operating system updates for RDS for MySQL<a name="Aurora.Maintenance.Mandatory_OS_Updates.MySQL"></a>
+
+We plan to use the following schedule for operating system updates for RDS for MySQL\.
+
+
+| Action or recommendation | Date range | 
+| --- | --- | 
+|  We recommend that you upgrade the operating system for your RDS for MySQL DB instances\.  |  Now–January 31, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for MySQL DB instances to the latest version in a maintenance window\.  |  January 31, 2022–March 30, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for MySQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After March 30, 2022  | 
+
+Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. Only RDS for MySQL versions 8\.0\.26, 8\.0\.25, 8\.0\.23, 5\.7\.35, 5\.733, and 5\.6\.51 using the following DB instance classes are eligible for this operating system update:
++ db\.t2
++ db\.t3
++ db\.m4
++ db\.m5
++ db\.r4
++ db\.r5
+
+### Mandatory operating system updates for RDS for PostgreSQL<a name="Aurora.Maintenance.Mandatory_OS_Updates.PostgreSQL"></a>
+
+We plan to use the following schedule for operating system updates for RDS for PostgreSQL\.
+
+
+| Action or recommendation | Date range | 
+| --- | --- | 
+|  We recommend that you upgrade the operating system for your RDS for PostgreSQL DB instances\.  |  Now–January 10, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version in a maintenance window\.  |  January 10, 2022–March 30, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After March 30, 2022  | 
+
+Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. To be eligible for this operating system update, a DB instance must be running the versions in the following table for each DB instance class\.
+
+
+| RDS for PostgreSQL version | db\.t2 | db\.r4 | db\.m4 | db\.t3 | db\.r5 | db\.m5 | 
+| --- | --- | --- | --- | --- | --- | --- | 
+|  13\.3  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  13\.2  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  13\.1  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  12\.7  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  12\.6  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  11\.12  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  11\.11  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  10\.17  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  10\.16  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  9\.6\.22  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  9\.6\.21  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 

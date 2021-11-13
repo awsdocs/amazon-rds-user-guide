@@ -34,6 +34,7 @@ For complete lists of engine versions supported by Amazon RDS, see the following
 + [Exporting a snapshot to an Amazon S3 bucket](#USER_ExportSnapshot.Exporting)
 + [Monitoring snapshot exports](#USER_ExportSnapshot.Monitoring)
 + [Canceling a snapshot export task](#USER_ExportSnapshot.Canceling)
++ [Failure messages for Amazon S3 export tasks](#USER_ExportSnapshot.failure-msg)
 + [Troubleshooting PostgreSQL permissions errors](#USER_ExportSnapshot.postgres-permissions)
 + [File naming convention](#USER_ExportSnapshot.FileNames)
 + [Data conversion when exporting to an Amazon S3 bucket](#USER_ExportSnapshot.data-types)
@@ -520,6 +521,23 @@ To cancel a snapshot export task using the AWS CLI, use the [cancel\-export\-tas
 ### RDS API<a name="USER_ExportSnapshot.CancelAPI"></a>
 
 To cancel a snapshot export task using the Amazon RDS API, use the [CancelExportTask](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CancelExportTask.html) operation with the `ExportTaskIdentifier` parameter\.
+
+## Failure messages for Amazon S3 export tasks<a name="USER_ExportSnapshot.failure-msg"></a>
+
+The following table describes the messages that are returned when Amazon S3 export tasks fail\.
+
+
+| Failure message | Description | 
+| --- | --- | 
+| An unknown internal error occurred\. |  The task has failed because of an unknown error, exception, or failure\.  | 
+| An unknown internal error occurred writing the export task's metadata to the S3 bucket \[bucket name\]\. |  The task has failed because of an unknown error, exception, or failure\.  | 
+| The RDS export failed to write the export task's metadata because it can't assume the IAM role \[role ARN\]\. |  The export task assumes your IAM role to validate whether it is allowed to write metadata to your S3 bucket\. If the task can't assume your IAM role, it fails\.  | 
+| The RDS export failed to write the export task's metadata to the S3 bucket \[bucket name\] using the IAM role \[role ARN\] with the KMS key \[key ID\]\. Error code: \[error code\] |  One or more permissions are missing, so the export task can't access the S3 bucket\. This failure message is raised when receiving one of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html) This means that there are settings misconfigured among the IAM role, S3 bucket, or KMS key\.  | 
+| The IAM role \[role ARN\] isn't authorized to call \[S3 action\] on the S3 bucket \[bucket name\]\. Review your permissions and retry the export\. |  The IAM policy is misconfigured\. Permission for the specific S3 action on the S3 bucket is missing\. This causes the export task to fail\.  | 
+| KMS key check failed\. Check the credentials on your KMS key and try again\. | The KMS key credential check failed\. | 
+| S3 credential check failed\. Check the permissions on your S3 bucket and IAM policy\. | The S3 credential check failed\. | 
+| The S3 bucket \[bucket name\] isn't valid\. Either it isn't located in the current AWS Region or it doesn't exist\. Review your S3 bucket name and retry the export\. | The S3 bucket is invalid\. | 
+| The S3 bucket \[bucket name\] isn't located in the current AWS Region\. Review your S3 bucket name and retry the export\. | The S3 bucket is in the wrong AWS Region\. | 
 
 ## Troubleshooting PostgreSQL permissions errors<a name="USER_ExportSnapshot.postgres-permissions"></a>
 
