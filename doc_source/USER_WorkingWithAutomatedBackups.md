@@ -117,6 +117,26 @@ To enable automated backups, use the RDS API [https://docs.aws.amazon.com/Amazon
 + `DBInstanceIdentifier`
 + `BackupRetentionPeriod`
 
+### Viewing automated backups<a name="USER_WorkingWithAutomatedBackups.viewing"></a>
+
+To view your automated backups, choose **Automated backups** in the navigation pane\. To view individual snapshots associated with an automated backup, choose **Snapshots** in the navigation pane\. Alternatively, you can describe individual snapshots associated with an automated backup\. From there, you can restore a DB instance directly from one of those snapshots\.
+
+To describe the automated backups for your existing DB instances using the AWS CLI, use one of the following commands:
+
+```
+aws rds describe-db-instance-automated-backups --db-instance-identifier DBInstanceIdentifier
+```
+
+or
+
+```
+aws rds describe-db-instance-automated-backups --dbi-resource-id DbiResourceId
+```
+
+To describe the retained automated backups for your existing DB instances using the RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html) action with one of the following parameters:
++ `DBInstanceIdentifier`
++ `DbiResourceId`
+
 ## Retaining automated backups<a name="USER_WorkingWithAutomatedBackups.Retaining"></a>
 
 When you delete a DB instance, you can retain automated backups\.
@@ -129,7 +149,7 @@ You can restore or remove retained automated backups using the AWS Management Co
 
 **Topics**
 + [Retention period](#USER_WorkingWithAutomatedBackups.RetentionPeriods)
-+ [Viewing retained backups](#USER_WorkingWithAutomatedBackups.Viewing)
++ [Viewing retained backups](#USER_WorkingWithAutomatedBackups.viewing-retained)
 + [Restoration](#USER_WorkingWithAutomatedBackups.Restoration)
 + [Retention costs](#USER_WorkingWithAutomatedBackups.RetentionCosts)
 + [Limitations and recommendations](#USER_WorkingWithAutomatedBackups.Limits)
@@ -142,25 +162,17 @@ You can remove a retained automated backup in the same way that you can delete a
 
 Final snapshots are independent of retained automated backups\. We strongly suggest that you take a final snapshot even if you retain automated backups, because the retained automated backups eventually expire\. The final snapshot doesn't expire\.
 
-### Viewing retained backups<a name="USER_WorkingWithAutomatedBackups.Viewing"></a>
+### Viewing retained backups<a name="USER_WorkingWithAutomatedBackups.viewing-retained"></a>
 
 To view your retained automated backups, choose **Automated backups** in the navigation pane, then choose **Retained**\. To view individual snapshots associated with a retained automated backup, choose **Snapshots** in the navigation pane\. Alternatively, you can describe individual snapshots associated with a retained automated backup\. From there, you can restore a DB instance directly from one of those snapshots\.
 
-To describe your retained automated backups using the AWS CLI, use one of the following commands:
-
-```
-aws rds describe-db-instance-automated-backups --db-instance-identifier DBInstanceIdentifier
-```
-
-or
+To describe your retained automated backups using the AWS CLI, use the following command:
 
 ```
 aws rds describe-db-instance-automated-backups --dbi-resource-id DbiResourceId
 ```
 
-To describe your retained automated backups using the RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html) action with one of the following parameters:
-+ `DBInstanceIdentifier`
-+ `DbiResourceId`
+To describe your retained automated backups using the RDS API, call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstanceAutomatedBackups.html) action with the `DbiResourceId` parameter\.
 
 ### Restoration<a name="USER_WorkingWithAutomatedBackups.Restoration"></a>
 

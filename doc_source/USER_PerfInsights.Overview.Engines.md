@@ -6,13 +6,13 @@ Following, you can find the Amazon RDS DB engines that support Performance Insig
 For Amazon Aurora, see [Amazon Aurora DB engine support for Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.Overview.Engines.html) in *Amazon Aurora User Guide*\.
 
 
-|  Amazon RDS DB Engine  | Supported DB Engine Versions | 
-| --- | --- | 
-|  Amazon RDS for MariaDB  |  All 10\.5 versions, all 10\.4 versions, 10\.3\.13 and higher 10\.3 versions, and 10\.2\.21 and higher 10\.2 versions\.  Not supported for MariaDB version 10\.3\.13 DB instances in the Europe \(Frankfurt\) and Europe \(Stockholm\) AWS Regions\. Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
-|  Amazon RDS for MySQL  |  8\.0\.17 and higher 8\.0 versions, version 5\.7\.22 and higher 5\.7 versions, and version 5\.6\.41 and higher 5\.6 versions\.  Not supported on the following DB instance classes: db\.t2\.micro, db\.t2\.small, db\.t3\.micro, and db\.t3\.small\.  | 
-|  Amazon RDS for Microsoft SQL Server  |  All versions except SQL Server 2008\.   | 
-|  Amazon RDS for PostgreSQL  |  Versions 10, 11, 12, and 13\.  | 
-|  Amazon RDS for Oracle  |  All versions\.   | 
+|  Amazon RDS DB engine  | Supported engine versions | Unsupported instance classes | 
+| --- | --- | --- | 
+|  Amazon RDS for MariaDB  |  Performance Insights is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.Engines.html) \* 10\.3\.13 isn't supported in the Europe \(Frankfurt\) and Europe \(Stockholm\) AWS Regions\.  |  Performance Insights isn't supported for the following instance classes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.Engines.html)  | 
+|  Amazon RDS for MySQL  |  Performance Insights is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.Engines.html)  |  Performance Insights isn't supported for the following instance classes: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.Engines.html)  | 
+|  Amazon RDS for Microsoft SQL Server  |  Performance Insights is supported for all engine versions except SQL Server 2008\.  |  N/A  | 
+|  Amazon RDS for PostgreSQL  |  Performance Insights is supported for the following engine versions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.Overview.Engines.html)  |  N/A  | 
+|  Amazon RDS for Oracle  |  Performance Insights is supported for all engine versions\.  |  N/A  | 
 
 **Note**  
 Aurora Serverless doesn't support Performance Insights\.

@@ -1,11 +1,8 @@
 # Importing Amazon S3 data into an RDS for PostgreSQL DB instance<a name="USER_PostgreSQL.S3Import"></a>
 
-You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. 
+You can import data from Amazon S3 into a table belonging to an RDS for PostgreSQL DB instance\. To do this, you use the `aws_s3` PostgreSQL extension that Amazon RDS provides\. Your database must be running PostgreSQL version 10\.7 or higher to import from Amazon S3 into RDS for PostgreSQL \. 
 
 If you are using encryption, the Amazon S3 bucket must be encrypted with an AWS managed key\. Currently, you can't import data from a bucket that is encrypted with a customer managed key\.
-
-**Note**  
-To import from Amazon S3 into RDS for PostgreSQL, your database must be running PostgreSQL version 10\.7 or later\. 
 
 For more information on storing data with Amazon S3, see [Create a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) in the *Amazon Simple Storage Service User Guide*\. For instructions on how to upload a file to an Amazon S3 bucket, see [Add an object to a bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/PuttingAnObjectInABucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
@@ -73,7 +70,7 @@ To import data stored in an Amazon S3 bucket to a PostgreSQL database table, fol
 
 ## Setting up access to an Amazon S3 bucket<a name="USER_PostgreSQL.S3Import.AccessPermission"></a>
 
-To import data from an Amazon S3 file, give the RDS for PostgreSQL DB instance permission to access the Amazon S3 bucket the file is in\. You provide access to an Amazon S3 bucket in one of two ways, as described in the following topics\.
+To import data from an Amazon S3 file, give the RDS for PostgreSQL DB instance permission to access the Amazon S3 bucket containing the file\. You provide access to an Amazon S3 bucket in one of two ways, as described in the following topics\.
 
 **Topics**
 + [Using an IAM role to access an Amazon S3 bucket](#USER_PostgreSQL.S3Import.ARNRole)
@@ -104,7 +101,7 @@ To do this, create an IAM policy that provides access to the Amazon S3 bucket\. 
 
    The following AWS CLI command creates an IAM policy named `rds-s3-import-policy` with these options\. It grants access to a bucket named `your-s3-bucket`\. 
 **Note**  
-After you create the policy, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\.   
+Note the Amazon Resource Name \(ARN\) of the policy returned by this command\. You need the ARN when you attach the policy to an IAM role, in a subsequent step\.  
 **Example**  
 
    For Linux, macOS, or Unix:
@@ -157,9 +154,15 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
 
 1. Create an IAM role\. 
 
-   You do this so Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+   You do this so Amazon RDS can assume this IAM role to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
-   The following example shows using the AWS CLI command to create a role named `rds-s3-import-role`\.   
+   We recommend using the `[aws:SourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn)` and `[aws:SourceAccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount)` global condition context keys in resource\-based policies to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\. 
+
+   If you use both global condition context keys and the `aws:SourceArn` value contains the account ID, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same policy statement\.
+   + Use `aws:SourceArn` if you want cross\-service access for a single resource\. 
+   + Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+   In the policy, be sure to use the `aws:SourceArn` global condition context key with the full ARN of the resource\. The following example shows how to do so using the AWS CLI command to create a role named `rds-s3-import-role`\.   
 **Example**  
 
    For Linux, macOS, or Unix:
@@ -176,6 +179,12 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
                "Service": "rds.amazonaws.com"
              },
             "Action": "sts:AssumeRole"
+            "Condition": {
+                "StringEquals": {
+                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceArn": arn:aws:rds:us-east-1:111122223333db:dbname
+                   }
+                }
           }
         ] 
       }'
@@ -195,6 +204,12 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
                "Service": "rds.amazonaws.com"
              },
             "Action": "sts:AssumeRole"
+            "Condition": {
+                "StringEquals": {
+                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceArn": arn:aws:rds:us-east-1:111122223333db:dbname
+                   }
+                }
           }
         ] 
       }'
@@ -202,7 +217,7 @@ After you create the policy, note the Amazon Resource Name \(ARN\) of the policy
 
 1. Attach the IAM policy that you created to the IAM role that you created\.
 
-   The following AWS CLI command attaches the policy created earlier to the role named `rds-s3-import-role` Replace `your-policy-arn` with the policy ARN that you noted in an earlier step\.   
+   The following AWS CLI command attaches the policy created in the previous step to the role named `rds-s3-import-role` Replace `your-policy-arn` with the policy ARN that you noted in an earlier step\.   
 **Example**  
 
    For Linux, macOS, or Unix:

@@ -460,7 +460,7 @@ aws rds describe-db-proxy-targets --db-proxy-name proxy_name
 
    The IAM authentication applies to the connection between your client program and the proxy\. The proxy then authenticates to the database using the user name and password credentials retrieved from Secrets Manager\. 
 +  Instead of the instance, cluster, or reader endpoint, you specify the proxy endpoint\. For details about the proxy endpoint, see [Connecting to your DB instance using IAM authentication](UsingWithRDS.IAMDBAuth.Connecting.md)\. 
-+  In the direct database IAM authentication case, you selectively choose database users and configure them to be identified with a special authenthication plugin\. You can then connect to those users using IAM authentication\. 
++  In the direct database IAM authentication case, you selectively choose database users and configure them to be identified with a special authentication plugin\. You can then connect to those users using IAM authentication\. 
 
    In the proxy use case, you provide the proxy with Secrets that contain some user's user name and password \(native authentication\)\. You then connect to the proxy using IAM authentication\. Here, you do this by generating an authentication token with the proxy endpoint, not the database endpoint\. You also use a user name that matches one of the user names for the secrets that you provided\. 
 +  Make sure that you use Transport Layer Security \(TLS\)/Secure Sockets Layer \(SSL\) when connecting to a proxy using IAM authentication\. 

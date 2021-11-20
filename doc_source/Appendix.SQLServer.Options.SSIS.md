@@ -56,6 +56,7 @@ If you enable the `clr enabled` parameter on SQL Server 2017 or 2019, you can't 
 + SSIS isn't supported on Always On instances with read replicas\.
 + You can't back up the SSISDB database that is associated with the `SSIS` option\.
 + Importing and restoring the SSISDB database from other instances of SSIS isn't supported\.
++ Connecting to other database engines, such as Oracle, isn't supported for SSIS on RDS for SQL Server\. You can connect only to other SQL Server DB instances\.
 
 ## Enabling SSIS<a name="SSIS.Enabling"></a>
 

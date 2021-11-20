@@ -1,6 +1,6 @@
 # Copying a snapshot<a name="USER_CopySnapshot"></a>
 
-With Amazon RDS, you can copy automated backups or manual DB snapshots\. After you copy a snapshot, the copy is a manual snapshot\. 
+With Amazon RDS, you can copy automated backups or manual DB snapshots\. After you copy a snapshot, the copy is a manual snapshot\. You can make multiple copies of an automated backup or manual snapshot, but each copy must have a unique identifier\.
 
 You can copy a snapshot within the same AWS Region, you can copy a snapshot across AWS Regions, and you can copy shared snapshots\.
 
@@ -285,6 +285,8 @@ The following procedure copies an encrypted or unencrypted DB snapshot, in the s
 The destination AWS Region must have the same database engine version available as the source AWS Region\.
 
 1. For **New DB Snapshot Identifier**, type the name of the DB snapshot copy\.
+
+   You can make multiple copies of an automated backup or manual snapshot, but each copy must have a unique identifier\.
 
 1. \(Optional\) For **Target Option Group**, choose a new option group\.
 

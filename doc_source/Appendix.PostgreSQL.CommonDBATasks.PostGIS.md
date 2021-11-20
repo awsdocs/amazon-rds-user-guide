@@ -15,12 +15,13 @@ You need to perform some setup before you can use the PostGIS extension\. The fo
 
 ## Step 1: Connect to the DB instance using the user name used to create the DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Connect"></a>
 
-First, you connect to the DB instance using the user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role that is needed to do the remaining steps\.
+First, you connect to the DB instance using the user name that was used to create the DB instance\. That name is automatically assigned the `rds_superuser` role\. You need the `rds_superuser` role to do the remaining steps\.
 
 The following example uses `SELECT` to show you the current user\. In this case, the current user should be the user name you chose when creating the DB instance\.
 
 ```
 SELECT CURRENT_USER;
+
  current_user
  -------------
   myawsuser
@@ -29,15 +30,29 @@ SELECT CURRENT_USER;
 
 ## Step 2: Load the PostGIS extensions<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.LoadExtensions"></a>
 
-Use `CREATE EXTENSION` statements to load the PostGIS extensions\. You must also load the `` extension\. You can then use the `\dn` command to list the owners of the PostGIS schemas\.
+Use `CREATE EXTENSION` statements to load the PostGIS extensions\. 
 
 ```
 CREATE EXTENSION postgis;
+CREATE EXTENSION
 CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION
 CREATE EXTENSION postgis_tiger_geocoder;
+CREATE EXTENSION
 CREATE EXTENSION postgis_topology;
-\dn
-     List of schemas
+CREATE EXTENSION
+```
+
+You can verify the results by running the SQL query shown in this example, which lists the extensions and their owners\. 
+
+```
+SELECT n.nspname AS "Name",
+  pg_catalog.pg_get_userbyid(n.nspowner) AS "Owner"
+  FROM pg_catalog.pg_namespace n
+  WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+  ORDER BY 1;
+
+   List of schemas
      Name     |   Owner
 --------------+-----------
  public       | myawsuser
@@ -46,6 +61,8 @@ CREATE EXTENSION postgis_topology;
  topology     | rdsadmin
 (4 rows)
 ```
+
+If you use the `psql` command\-line, you can obtain the same information by running the `\dn` meta\-command\. 
 
 **Note**  
 Extra extensions aren't required for some use cases\.
@@ -56,9 +73,23 @@ Use the ALTER SCHEMA statements to transfer ownership of the schemas to the `rds
 
 ```
 ALTER SCHEMA tiger OWNER TO rds_superuser;
-ALTER SCHEMA tiger_data OWNER TO rds_superuser;
+ALTER SCHEMA
+ALTER SCHEMA tiger_data OWNER TO rds_superuser; 
+ALTER SCHEMA
 ALTER SCHEMA topology OWNER TO rds_superuser;
-\dn
+ALTER SCHEMA
+```
+
+If you want to confirm the ownership change, you can run this SQL query \(or, you can use the `\dn` meta\-command from the `psql` command\-line\)\. 
+
+```
+SELECT n.nspname AS "Name",
+  pg_catalog.pg_get_userbyid(n.nspowner) AS "Owner"
+  FROM pg_catalog.pg_namespace n
+  WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
+  ORDER BY 1;
+
+
        List of schemas
      Name     |     Owner
 --------------+---------------

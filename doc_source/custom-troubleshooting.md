@@ -5,7 +5,7 @@ You can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
 **Topics**
 + [Viewing RDS Custom events](#custom-troubleshooting.support-perimeter.viewing-events)
 + [Subscribing to event notifications](#custom-troubleshooting.support-perimeter.subscribing)
-+ [Troubleshooting custom engine version creation for RDS Custom for Oracle](#custom-cev.troubleshoot)
++ [Troubleshooting custom engine version creation for RDS Custom for Oracle](#custom-troubleshooting.cev)
 + [Responding to an unsupported configuration](#custom-troubleshooting.support-perimeter)
 + [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
 + [Troubleshooting upgrade issues for RDS Custom for Oracle DB instances](#custom-troubleshooting-upgrade)
@@ -42,11 +42,24 @@ The following example creates a subscription for backup and recovery events for 
 5.     --sns-topic-arn arn:aws:sns:us-east-1:123456789012:interesting-events
 ```
 
-## Troubleshooting custom engine version creation for RDS Custom for Oracle<a name="custom-cev.troubleshoot"></a>
+## Troubleshooting custom engine version creation for RDS Custom for Oracle<a name="custom-troubleshooting.cev"></a>
 
-If custom engine version \(CEV\) creation fails, make sure that the Amazon S3 bucket containing your installation files is in the same AWS Region as your CEV\.
+When CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version 19.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
 
-If the AWS Region isn't the problem, run the command `describe-events`\. The default duration is 60 minutes\. If no events are returned, specify a longer duration, as shown in the following example\.
+CEV creation might fail because of the following issues:
++ The Amazon S3 bucket containing your installation files isn't in the same AWS Region as your CEV\.
++ When you request CEV creation in an AWS Region for the first time, RDS Custom creates an S3 bucket for storing RDS Custom resources \(such as CEV artifacts, AWS CloudTrail logs, and transaction logs\)\.
+
+  CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
++ The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Adding necessary IAM permissions](custom-cev.md#custom-cev.preparing.iam)\.
++ Installation media files listed in the CEV manifest aren't in your S3 bucket\.
++ The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
+
+  Confirm that the SHA\-256 checksums of the provided files match the SHA\-256 checksum on the Oracle website\. If the checksums match, contact [AWS Support](http://aws.amazon.com/premiumsupport) and provide the failed CEV name, file name, and checksum\.
++ The OPatch version is incompatible with the patch files\.
++ The patches specified in the CEV manifest are in the wrong order\.
+
+You can view RDS events either on the RDS console \(in the navigation pane, choose **Events**\) or by using the `describe-events` AWS CLI command\. The default duration is 60 minutes\. If no events are returned, specify a longer duration, as shown in the following example\.
 
 ```
 aws rds describe-events --duration 360

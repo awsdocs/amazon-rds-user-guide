@@ -149,10 +149,21 @@ We strongly recommend that you do not create a policy with all\-resource access\
 
    You do this so Amazon RDS can assume this IAM role on your behalf to access your Amazon S3 buckets\. For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
 
-   The following example shows using the AWS CLI command to create a role named `rds-s3-export-role`\. 
+   We recommend using the `[aws:SourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn)` and `[aws:SourceAccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount)` global condition context keys in resource\-based policies to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\. 
+
+   If you use both global condition context keys and the `aws:SourceArn` value contains the account ID, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same policy statement\.
+   + Use `aws:SourceArn` if you want cross\-service access for a single resource\. 
+   + Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+    In the policy, be sure to use the `aws:SourceArn` global condition context key with the full ARN of the resource\. The following example shows how to do so using the AWS CLI command to create a role named `rds-s3-export-role`\.   
+**Example**  
+
+   For Linux, macOS, or Unix:
 
    ```
-   aws iam create-role  --role-name rds-s3-export-role  --assume-role-policy-document '{
+   aws iam create-role  \
+       --role-name rds-s3-export-role  \
+       --assume-role-policy-document '{
         "Version": "2012-10-17",
         "Statement": [
           {
@@ -161,6 +172,37 @@ We strongly recommend that you do not create a policy with all\-resource access\
                "Service": "rds.amazonaws.com"
              },
             "Action": "sts:AssumeRole"
+            "Condition": {
+                "StringEquals": {
+                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceArn": arn:aws:rds:us-east-1:111122223333db:dbname
+                   }
+                }
+          }
+        ] 
+      }'
+   ```
+
+   For Windows:
+
+   ```
+   aws iam create-role  ^
+       --role-name rds-s3-export-role  ^
+       --assume-role-policy-document '{
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+               "Service": "rds.amazonaws.com"
+             },
+            "Action": "sts:AssumeRole"
+            "Condition": {
+                "StringEquals": {
+                   "aws:SourceAccount": 111122223333,
+                   "aws:SourceArn": arn:aws:rds:us-east-1:111122223333db:dbname
+                   }
+                }
           }
         ] 
       }'

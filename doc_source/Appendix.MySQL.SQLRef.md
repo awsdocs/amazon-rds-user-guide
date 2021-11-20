@@ -4,7 +4,7 @@ This appendix describes system stored procedures that are available for Amazon R
 
 ## Overview<a name="Appendix.MySQL.SQLRef.Overview"></a>
 
-The following system stored procedures are supported for Amazon RDS DB instances running MySQL\.
+The following system stored procedures are supported for Amazon RDS DB instances running MySQL\. The master user must run these procedures\.
 
 **Replication** 
 + [mysql\.rds\_set\_master\_auto\_position](mysql_rds_set_master_auto_position.md)

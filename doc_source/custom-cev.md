@@ -167,9 +167,28 @@ The following table describes the JSON fields\.
 | --- | --- | --- | 
 | MediaImportTemplateVersion |  Version of the CEV manifest\. The date is in the format `YYYY-MM-DD`\.  |  2020\-08\-14  | 
 | databaseInstallationFileNames |  Ordered list of installation files for the database\.  |  V982063\-01\.zip  | 
-| opatchFileNames |  Ordered list of OPatch installers used for the Oracle DB engine\. Only one value is valid\.  |  p6880880\_190000\_Linux\-x86\-64\.zip  | 
+| opatchFileNames |  Ordered list of OPatch installers used for the Oracle DB engine\. Only one value is valid\.  |  p6880880\_190000\_Linux\-x86\-64\.zip  If you include a `psuRuPatchFileNames` or `OtherPatchFileNames` section \(or both\), the `opatchFileNames` section is required\. Values for `opatchFileNames` must start with `p6880880_`\.   | 
 | psuRuPatchFileNames |  The PSU and RU patches for this database\.  |  p32126828\_190000\_Linux\-x86\-64\.zip  | 
 | OtherPatchFileNames |  The patches that aren't in the list of PSU and RU patches\. RDS Custom applies these patches after applying the PSU and RU patches\.  |  p29213893\_1910000DBRU\_Generic\.zip p29782284\_1910000DBRU\_Generic\.zip p28730253\_190000\_Linux\-x86\-64\.zip p29374604\_1910000DBRU\_Linux\-x86\-64\.zip p28852325\_190000\_Linux\-x86\-64\.zip p29997937\_190000\_Linux\-x86\-64\.zip p31335037\_190000\_Linux\-x86\-64\.zip p31335142\_190000\_Generic\.zip  | 
+
+If you include a JSON field, it can't be empty\. For example, the following manifest is invalid because `otherPatchFileNames` is empty\.
+
+```
+{
+    "mediaImportTemplateVersion": "2020-08-14",
+    "databaseInstallationFileNames": [
+        "V982063-01.zip"
+    ],
+    "opatchFileNames": [
+        "p6880880_190000_Linux-x86-64.zip"
+    ],
+    "psuRuPatchFileNames": [
+        "p32126828_190000_Linux-x86-64.zip"
+    ],
+    "otherPatchFileNames": [
+    ]
+}
+```
 
 ### Validating the CEV manifest<a name="custom-cev.preparing.validating"></a>
 
@@ -221,7 +240,7 @@ The following JSON example grants access to `mediaimport` and Amazon S3\.
 }
 ```
 
-Or you can grant similar permissions to callers' accounts using an S3 bucket policy\.
+You can also grant similar permissions for Amazon S3 to callers' accounts using an S3 bucket policy\.
 
 ## Creating a CEV<a name="custom-cev.create"></a>
 
@@ -266,8 +285,6 @@ For more information, see [Creating an RDS Custom DB instance](custom-creating.m
    If the CEV manifest has an invalid form, the console displays **Error validating the CEV manifest**\. Fix the problems, and try again\.
 
 The **Custom engine versions** page appears\. Your CEV is shown with the status **Creating**\. Creation takes approximately two hours\. 
-
-If creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version 19.my_cev1`, and includes details about the failure\. For example, the event prints missing files\.
 
 ### AWS CLI<a name="custom-cev.create.CEV"></a>
 
@@ -352,6 +369,12 @@ The following partial output shows the engine, parameter groups, and other infor
 21.     }
 22. ]
 ```
+
+### CEV creation failure<a name="custom-cev.create.failure"></a>
+
+If CEV creation fails, RDS Custom issues `RDS-EVENT-0196` with the message `Creation failed for custom engine version 19.cev_name`, and includes details about the failure\. For example, the event prints missing files\.
+
+You can't modify a failed CEV\. You can only delete it, then try again to create a CEV after fixing the causes of the failure\. For information on troubleshooting the reasons for CEV creation failure, see [Troubleshooting custom engine version creation for RDS Custom for Oracle](custom-troubleshooting.md#custom-troubleshooting.cev)\.
 
 ## Modifying CEV status<a name="custom-cev.modify"></a>
 

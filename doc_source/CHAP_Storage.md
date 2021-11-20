@@ -25,9 +25,11 @@ General Purpose SSD storage offers cost\-effective storage that is acceptable fo
 
 Baseline I/O performance for General Purpose SSD storage is 3 IOPS for each GiB, with a minimum of 100 IOPS\. This relationship means that larger volumes have better performance\. For example, baseline performance for a 100\-GiB volume is 300 IOPS\. Baseline performance for a 1\-TiB volume is 3,000 IOPS\. Maximum baseline performance for a gp2 volume \(5\.34 TiB and greater\) is 16,000 IOPS\.
 
-Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Burst is not relevant for volumes above 1 TiB\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
+Volumes below 1 TiB in size also have ability to burst to 3,000 IOPS for extended periods of time\. Instance I/O credit balance determines burst performance\. For more information about instance I/O credits, see [I/O credits and burst performance](#CHAP_Storage.IO.Credits)\.
 
 Many workloads never deplete the burst balance, making General Purpose SSD an ideal storage choice for many workloads\. However, some workloads can exhaust the 3,000 IOPS burst storage credit balance, so you should plan your storage capacity to meet the needs of your workloads\.
+
+For gp2 volumes larger than 1 TiB, the baseline performance is greater than the burst performance\. For such volumes, burst is irrelevant because the baseline performance is better than the 3,000 IOPS burst performance\.
 
 **Note**  
 DB instances that use General Purpose SSD storage can experience much longer latency after read replica creation, Multi\-AZ conversion, and DB snapshot restoration than instances that use Provisioned IOPS storage\. If you need a DB instance with minimum latency after these operations, we recommend using Provisioned IOPS storage\.
@@ -79,6 +81,7 @@ The ratio of IOPS to allocated storage \(in GiB\) must be from 1–50 on RDS for
 
 **Note**  
  For SQL Server, the maximum 64,000 IOPS is guaranteed only on [Nitro\-based instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances) that are on the m5, m5d, r5, r5b, r5d, and z1d instance types\. Other instance families guarantee performance up to 32,000 IOPS\.  
+For Oracle, you can provision the maximum 256,000 IOPS only on the r5b instance type\.  
 For PostgreSQL, the maximum IOPS on the db\.m5\.8xlarge, db\.m5\.16xlarge, db\.r5\.8xlarge, and db\.r5\.16xlarge instance classes is 40,000\.
 
 **Important**  
@@ -116,12 +119,12 @@ Amazon RDS also supports magnetic storage for backward compatibility\. We recomm
 Amazon RDS provides several metrics that you can use to determine how your DB instance is performing\. You can view the metrics on the summary page for your instance in Amazon RDS Management Console\. You can also use Amazon CloudWatch to monitor these metrics\. For more information, see [Viewing DB instance metrics](accessing-monitoring.md#USER_Monitoring)\. Enhanced Monitoring provides more detailed I/O metrics; for more information, see [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)\.
 
 The following metrics are useful for monitoring storage for your DB instance: 
-+  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\. 
-+  **Latency** – The elapsed time between the submission of an I/O request and its completion\. This metric is reported as the average latency for a given time interval\. Amazon RDS reports read and write latency separately on 1\-minute intervals in units of seconds\. Typical values for latency are in the millisecond \(ms\)\. For example, Amazon RDS reports 2 ms as 0\.002 seconds\. 
-+  **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel's maximum bandwidth\. 
-+  **Queue Depth** – The number of I/O requests in the queue waiting to be serviced\. These are I/O requests that have been submitted by the application but have not been sent to the device because the device is busy servicing other I/O requests\. Time spent waiting in the queue is a component of latency and service time \(not available as a metric\)\. This metric is reported as the average queue depth for a given time interval\. Amazon RDS reports queue depth in 1\-minute intervals\. Typical values for queue depth range from zero to several hundred\. 
++  **IOPS** – The number of I/O operations completed each second\. This metric is reported as the average IOPS for a given time interval\. Amazon RDS reports read and write IOPS separately on 1\-minute intervals\. Total IOPS is the sum of the read and write IOPS\. Typical values for IOPS range from zero to tens of thousands per second\.
++  **Latency** – The elapsed time between the submission of an I/O request and its completion\. This metric is reported as the average latency for a given time interval\. Amazon RDS reports read and write latency separately at 1\-minute intervals\. Typical values for latency are in milliseconds \(ms\)\.
++  **Throughput** – The number of bytes each second that are transferred to or from disk\. This metric is reported as the average throughput for a given time interval\. Amazon RDS reports read and write throughput separately on 1\-minute intervals using units of megabytes per second \(MB/s\)\. Typical values for throughput range from zero to the I/O channel's maximum bandwidth\.
++  **Queue Depth** – The number of I/O requests in the queue waiting to be serviced\. These are I/O requests that have been submitted by the application but have not been sent to the device because the device is busy servicing other I/O requests\. Time spent waiting in the queue is a component of latency and service time \(not available as a metric\)\. This metric is reported as the average queue depth for a given time interval\. Amazon RDS reports queue depth in 1\-minute intervals\. Typical values for queue depth range from zero to several hundred\.
 
-Measured IOPS values are independent of the size of the individual I/O operation\. This means that when you measure I/O performance, you should look at the throughput of the instance, not simply the number of I/O operations\. 
+Measured IOPS values are independent of the size of the individual I/O operation\. This means that when you measure I/O performance, you should look at the throughput of the instance, not simply the number of I/O operations\.
 
 ## Factors that affect storage performance<a name="CHAP_Storage.Other.Factors"></a>
 
@@ -151,6 +154,8 @@ To get the most performance out of your Amazon RDS DB instance, choose a current
 Depending on the instance class you're using, you might see lower IOPS performance than the maximum that you can provision with RDS\. For specific information on IOPS performance for DB instance classes, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)\. We recommend that you determine the maximum IOPS for the instance class before setting a Provisioned IOPS value for your DB instance\.
 
 We encourage you to use the latest generation of instances to get the best performance\. Previous generation DB instances can also have lower maximum storage\.
+
+Some older 32\-bit file systems might have lower storage capacities\. To determine the storage capacity of your DB instance, you can use the [describe\-valid\-db\-instance\-modifications](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html) AWS CLI command\.
 
 The following list shows the maximum storage that most DB instance classes can scale to for each database engine:
 + MariaDB: 64 TiB

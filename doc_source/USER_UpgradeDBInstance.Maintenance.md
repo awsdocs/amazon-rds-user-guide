@@ -215,53 +215,101 @@ To adjust the preferred maintenance window, use the Amazon RDS API [ `ModifyDBIn
 
 ## Working with mandatory operating system updates<a name="Mandatory_OS_Updates"></a>
 
-RDS for MySQL and RDS for PostgreSQL DB instances require mandatory operating system updates\. These updates provide critical security fixes\. The updates don't affect how the DB instances function\.
+RDS for MySQL and RDS for PostgreSQL DB instances occasionally require mandatory operating system updates\. In some cases, these updates provide critical security fixes for specific vulnerabilities \(such as CVEs\) which should be patched quickly\. In other cases, Amazon RDS wants to upgrade the operating system to a newer release to improve customers’ overall security posture\. The mandatory operating system updates described in this section are for the latter reason\. Typically, the updates take about 10 minutes\. The updates don't affect how the DB instances function\.
 
-Whether a DB instance is eligible for mandatory operating system updates depends on its DB engine version and DB instance class\. In the following sections, you can find descriptions of the eligible DB engine versions and DB instance classes for RDS for MySQL and RDS for PostgreSQL\.
+Whether a mandatory operating system update is required for a DB instance depends on its DB engine version and DB instance class\. In the following sections, you can find descriptions of the affected DB engine versions and DB instance classes for RDS for MySQL and RDS for PostgreSQL\.
+
+**Topics**
++ [Mandatory operating system updates for RDS for MySQL](#Aurora.Maintenance.Mandatory_OS_Updates.MySQL)
++ [Mandatory operating system updates for RDS for PostgreSQL](#Aurora.Maintenance.Mandatory_OS_Updates.PostgreSQL)
++ [Recommended actions for mandatory operating system updates](#Aurora.Maintenance.Mandatory_OS_Updates.Recommended_Actions)
 
 ### Mandatory operating system updates for RDS for MySQL<a name="Aurora.Maintenance.Mandatory_OS_Updates.MySQL"></a>
 
-We plan to use the following schedule for operating system updates for RDS for MySQL\.
+We plan to use the following schedule for operating system updates for RDS for MySQL\. For each date in the table, the start time is 00:00 Universal Coordinated Time \(UTC\)\.
 
 
 | Action or recommendation | Date range | 
 | --- | --- | 
-|  We recommend that you upgrade the operating system for your RDS for MySQL DB instances\.  |  Now–January 31, 2022  | 
+|  We recommend that you update the operating system for your RDS for MySQL DB instances\. To update the operating system, follow the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.  |  Now–January 31, 2022  | 
 |  Amazon RDS starts automatic upgrades of the operating system for your RDS for MySQL DB instances to the latest version in a maintenance window\.  |  January 31, 2022–March 30, 2022  | 
 |  Amazon RDS starts automatic upgrades of the operating system for your RDS for MySQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After March 30, 2022  | 
 
-Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. Only RDS for MySQL versions 8\.0\.26, 8\.0\.25, 8\.0\.23, 5\.7\.35, 5\.733, and 5\.6\.51 using the following DB instance classes are eligible for this operating system update:
-+ db\.t2
-+ db\.t3
-+ db\.m4
-+ db\.m5
-+ db\.r4
-+ db\.r5
+Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. For this operating system update to be required, a DB instance must be running the versions with "Yes" in the following table for each DB instance class\.
+
+
+**Mandatory operating system updates by version and DB instance class for RDS for MySQL**  
+
+| RDS for MySQL version | db\.t2 | db\.r4 | db\.m4 | db\.t3 | db\.r5 | db\.m5 | 
+| --- | --- | --- | --- | --- | --- | --- | 
+|  8\.0\.23 and higher 8\.0 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  8\.0\.21 and lower 8\.0 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
+|  5\.7\.33 and higher 5\.7 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  5\.7\.31 and lower 5\.7 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
+|  5\.6\.51 and higher 5\.6 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  5\.6\.49 and lower 5\.6 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
 
 ### Mandatory operating system updates for RDS for PostgreSQL<a name="Aurora.Maintenance.Mandatory_OS_Updates.PostgreSQL"></a>
 
-We plan to use the following schedule for operating system updates for RDS for PostgreSQL\.
+We plan to use the following schedule for operating system updates for RDS for PostgreSQL\. For each date in the table, the start time is 00:00 Universal Coordinated Time \(UTC\)\.
 
 
 | Action or recommendation | Date range | 
 | --- | --- | 
-|  We recommend that you upgrade the operating system for your RDS for PostgreSQL DB instances\.  |  Now–January 10, 2022  | 
+|  We recommend that you update the operating system for your RDS for PostgreSQL DB instances\. To update the operating system, follow the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.  |  Now–January 10, 2022  | 
 |  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version in a maintenance window\.  |  January 10, 2022–March 30, 2022  | 
 |  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After March 30, 2022  | 
 
-Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. To be eligible for this operating system update, a DB instance must be running the versions in the following table for each DB instance class\.
+Amazon RDS won't upgrade the DB engine version or modify the DB instance class of your DB instances automatically\. For this operating system update to be required, a DB instance must be running the versions with "Yes" in the following table for each DB instance class\.
 
+
+**Mandatory operating system updates by version and DB instance class for RDS for PostgreSQL**  
 
 | RDS for PostgreSQL version | db\.t2 | db\.r4 | db\.m4 | db\.t3 | db\.r5 | db\.m5 | 
 | --- | --- | --- | --- | --- | --- | --- | 
-|  13\.3  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  13\.2  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  13\.1  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  12\.7  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  All 13 versions  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  12\.7 and higher 12 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
 |  12\.6  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  11\.12  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  12\.5 and lower 12 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
+|  11\.12 and higher 11 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
 |  11\.11  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  10\.17  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  11\.10 and lower 11 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
+|  10\.17 and higher 10 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
 |  10\.16  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
-|  9\.6\.22  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
+|  10\.15 and lower 10 versions  |  No  |  No  |  No  |  No  |  No  |  No  | 
+|  9\.6\.22 and higher 9\.6 versions  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  | 
 |  9\.6\.21  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+|  9\.6\.20 and lower 9\.6 versions  |  No  |  No  |  No  |  Yes  |  Yes  |  Yes  | 
+
+### Recommended actions for mandatory operating system updates<a name="Aurora.Maintenance.Mandatory_OS_Updates.Recommended_Actions"></a>
+
+Whether a mandatory operating system update is required for a DB instance depends on its DB engine version and DB instance class\. You can find the affected DB engine versions and DB instance classes in [Mandatory operating system updates by DB engine version and DB instance class for RDS for MySQL](#mandatory-os-updates-version-db-instance-class-mysql) and [Mandatory operating system updates by DB engine version and DB instance class for RDS for PostgreSQL](#mandatory-os-updates-version-db-instance-class-postgresql)\.
+
+If an operating system update is required for your DB instance based on its DB engine version and DB instance class, the required update appears in the AWS Management Console\. In this case, update the operating system by following the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.
+
+If you are unable to identify any mandatory operating system updates in the AWS Management Console, we recommend the following actions:
++ Your DB instance doesn't use a DB engine version that requires this operating system update\. Your DB instance uses an affected DB instance class\.
+
+  Take the following recommended actions:
+
+  1. Upgrade your DB engine version to a version that requires this operating system update\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+
+  1. Update the operating system by following the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.
++ Your DB instance uses a DB engine version that requires this operating system update\. Your DB instance uses an older DB instance class in a DB instance class family that is affected by this update\.
+
+  We recommend that you modify your DB instance to use a DB instance class that requires this operating system update\. For example, if your DB instance uses a db\.r3 DB instance class, we recommend that you modify your DB instance to use a db\.r4 or db\.r5 DB instance class\. Similarly, if your DB instance uses a db\.m3 DB instance class, we recommend that you modify your DB instance to use a db\.m4 or db\.m5 DB instance class\. In this case, you don't need to update the operating system because the DB instance class modification applies the operating system update\. You can also modify your DB instance to use a different DB instance class family, such as db\.m6g or db\.r6g\.
+
+  If your DB instance already uses a DB instance class that isn't in a DB instance class family that is affected by this operating system update, then you don't need to modify its DB instance class\. For example, if your DB instance uses a db\.m6g, db\.x2g, or db\.z1d DB instance class, then you don't need to modify its DB instance class\.
+
+  For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
++ Your DB instance doesn't use a DB engine version that requires this operating system update\. Your DB instance uses an older DB instance class in a DB instance class family that is affected by this operating system update\.
+
+  Take the following recommended actions:
+
+  1. Upgrade your DB engine version to a version that requires this operating system update\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\.
+
+  1. Modify your DB instance to use a newer DB instance class to use newer DB instance in the same DB instance class family in a different DB instance class family\.
+
+     For example, if your DB instance uses a db\.r3 DB instance class, we recommend that you modify your DB instance to use a db\.r4 or db\.r5 DB instance class\. Similarly, if your DB instance uses a db\.m3 DB instance class, we recommend that you modify your DB instance to use a db\.m4 or db\.m5 DB instance class\. In this case, you don't need to update the operating system because the DB instance class modification applies the operating system update\. You can also modify your DB instance to use a different DB instance class family, such as db\.m6g or db\.r6g\.
+
+     For more information about DB instance classes, see [DB instance classes](Concepts.DBInstanceClass.md)\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
