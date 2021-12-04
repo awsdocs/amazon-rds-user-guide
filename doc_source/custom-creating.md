@@ -1,26 +1,27 @@
-# Creating and connecting to an Amazon RDS Custom DB instance<a name="custom-creating"></a>
+# Creating and connecting to a DB instance for Amazon RDS Custom for Oracle<a name="custom-creating"></a>
 
 You can create an RDS Custom DB instance, and then connect to it using Secure Shell \(SSH\) or AWS Systems Manager\.
 
 **Important**  
 Before you can create or connect to an RDS Custom DB instance, make sure to complete the tasks in [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)\.  
-You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom resources](custom-managing.md#custom-managing.tagging)\.
+You can tag RDS Custom DB instances when you create them, but don't create or modify the `AWSRDSCustom` tag that's required for RDS Custom automation\. For more information, see [Tagging RDS Custom resources](custom-managing.md#custom-managing.tagging)\.  
+The first time that you create an RDS Custom for Oracle DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
 
 **Topics**
-+ [Creating an RDS Custom DB instance](#custom-creating.create)
++ [Creating an RDS Custom for Oracle DB instance](#custom-creating.create)
 + [RDS Custom service\-linked role](#custom-creating.slr)
 + [Connecting to your RDS Custom DB instance using SSH](#custom-creating.ssh)
 + [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating.ssm)
 
-## Creating an RDS Custom DB instance<a name="custom-creating.create"></a>
+## Creating an RDS Custom for Oracle DB instance<a name="custom-creating.create"></a>
 
-Create an Amazon RDS Custom DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\.
+Create an Amazon RDS Custom for Oracle DB instance using either the AWS Management Console or the AWS CLI\. The procedure is similar to the procedure for creating an Amazon RDS DB instance\.
 
 For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\.
 
 ### Console<a name="custom-creating.console"></a>
 
-**To create an RDS Custom DB instance**
+**To create an RDS Custom for Oracle DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -54,7 +55,7 @@ For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInst
 
 1. In **DB instance size**, choose a **DB instance class**\.
 
-   For supported classes, see [DB instance class support for RDS Custom ](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+   For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
 
 1. Choose **Storage** settings\.
 
@@ -104,13 +105,13 @@ You can't view the master user password again\. If you don't record it, you migh
    + **Role** has the value **Instance \(RDS Custom\)**\.
    + **RDS Custom automation mode** has the value **Full automation**\. This setting means that the DB instance provides automatic monitoring and instance recovery\.
 
-### AWS CLI<a name="USER_CreateDBInstance.CLI"></a>
+### AWS CLI<a name="custom-creating.CLI"></a>
 
 You create an RDS Custom DB instance by using the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) AWS CLI command\.
 
 The following options are required:
 + `--db-instance-identifier`
-+ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom ](custom-reqs-limits.md#custom-reqs-limits.instances)\)
++ `--db-instance-class` \(for a list of supported instance classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\)
 + `--engine custom-oracle-ee`
 + `--engine-version cev` \(where *`cev`* is the name of the custom engine version that you specified in [Creating a CEV](custom-cev.md#custom-cev.create)\)
 + `--kms-key-id`
@@ -203,6 +204,8 @@ The following partial output shows the engine, parameter groups, and other infor
 A *service\-linked role* gives Amazon RDS Custom access to resources in your AWS account\. It makes using RDS Custom easier because you don't have to manually add the necessary permissions\. RDS Custom defines the permissions of its service\-linked roles, and unless defined otherwise, only RDS Custom can assume its roles\. The defined permissions include the trust policy and the permissions policy, and that permissions policy can't be attached to any other IAM entity\.
 
 When you create an RDS Custom DB instance, both the Amazon RDS and RDS Custom service\-linked roles are created \(if they don't already exist\) and used\. For more information, see [Using service\-linked roles for Amazon RDS](UsingWithRDS.IAM.ServiceLinkedRoles.md)\.
+
+The first time that you create an RDS Custom for Oracle DB instance, you might receive the following error: The service\-linked role is in the process of being created\. Try again later\. If you do, wait a few minutes and then try again to create the DB instance\.
 
 ## Connecting to your RDS Custom DB instance using SSH<a name="custom-creating.ssh"></a>
 
@@ -344,7 +347,7 @@ ssh -i \
 
 ## Connecting to your RDS Custom DB instance using AWS Systems Manager<a name="custom-creating.ssm"></a>
 
-After you create your RDS Custom DB instance, you can connect to it using AWS Systems Manager Session Manager\. Session Manager is an AWS Systems Manager capability that lets you manage Amazon EC2 instances through a browser\-based shell or through the AWS CLI\. For more information, see [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)\.
+After you create your RDS Custom DB instance, you can connect to it using AWS Systems Manager Session Manager\. Session Manager is an Systems Manager capability that you can use to manage Amazon EC2 instances through a browser\-based shell or through the AWS CLI\. For more information, see [AWS Systems Manager Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html)\.
 
 ### Console<a name="custom-managing.ssm.console"></a>
 
@@ -356,7 +359,7 @@ After you create your RDS Custom DB instance, you can connect to it using AWS Sy
 
 1. Choose **Configuration**\.
 
-1. Note the **Resource id** for your DB instance\. For example, the resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
+1. Note the **Resource ID** for your DB instance\. For example, the resource ID might be `db-ABCDEFGHIJKLMNOPQRS0123456`\.
 
 1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 

@@ -18,7 +18,7 @@ You can configure a read replica for a DB instance that also has a standby repli
 
 ![\[Read replica and standby replica configuration\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/read-and-standby-replica.png)
 
-For more information about high availability and standby replicas, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
+For more information about high availability and standby replicas, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
 
 Read replicas are supported by the MariaDB, Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB engines\. In this section, you can find general information about using read replicas with all of these engines\. For information about using read replicas with a specific engine, see the following sections:
 + [Working with MariaDB read replicas](USER_MariaDB.Replication.ReadReplicas.md)
@@ -174,7 +174,7 @@ The following steps show the general process for promoting a read replica to a D
 **Note**  
 The promotion process takes a few minutes to complete\. When you promote a read replica, replication is stopped and the read replica is rebooted\. When the reboot is complete, the read replica is available as a new DB instance\.
 
-1. \(Optional\) Modify the new DB instance to be a Multi\-AZ deployment\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
+1. \(Optional\) Modify the new DB instance to be a Multi\-AZ deployment\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md) and [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 ### Console<a name="USER_ReadRepl.Promote.Console"></a>
 

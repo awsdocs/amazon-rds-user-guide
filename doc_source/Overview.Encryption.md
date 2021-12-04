@@ -10,6 +10,7 @@ For encrypted and unencrypted DB instances, data that is in transit between the 
 **Topics**
 + [Overview of encrypting Amazon RDS resources](#Overview.Encryption.Overview)
 + [Enabling Amazon RDS encryption for a DB instance](#Overview.Encryption.Enabling)
++ [Determining whether encryption is turned on for a DB instance](#Overview.Encryption.Determining)
 + [Availability of Amazon RDS encryption](#Overview.Encryption.Availability)
 + [Limitations of Amazon RDS encrypted DB instances](#Overview.Encryption.Limitations)
 
@@ -39,6 +40,43 @@ If you use the AWS CLI `create-db-instance` command to create an encrypted DB in
 
 **Important**  
 If Amazon RDS loses access to the KMS key for a DB instance—for example, when RDS access to a KMS key is revoked—then the encrypted DB instance goes into a terminal state\. In this case, you can only restore the DB instance from a backup\. We strongly recommend that you always enable backups for encrypted DB instances to guard against the loss of encrypted data in your databases\.
+
+## Determining whether encryption is turned on for a DB instance<a name="Overview.Encryption.Determining"></a>
+
+You can use the AWS Management Console, AWS CLI, or RDS API to determine whether encryption at rest is turned on for a DB instance\.
+
+### Console<a name="Overview.Encryption.Determining.CON"></a>
+
+**To determine whether encryption at rest is turned on for a DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the name of the DB instance that you want to check to view its details\.
+
+1. Choose the **Configuration** tab, and check the **Encryption** value under **Storage**\.
+
+   It shows either **Enabled** or **Not enabled**\.  
+![\[Checking encryption at rest for a DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/encryption-check-db-instance.png)
+
+### AWS CLI<a name="Overview.Encryption.Determining.CLI"></a>
+
+To determine whether encryption at rest is turned on for a DB instance by using the AWS CLI, call the [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command with the following option: 
++ `--db-instance-identifier` – The name of the DB instance\.
+
+The following example uses a query to return either `TRUE` or `FALSE` regarding encryption at rest for the `mydb` DB instance\.
+
+**Example**  
+
+```
+1. aws rds describe-db-instances --db-instance-identifier mydb --query "*[].{StorageEncrypted:StorageEncrypted}" --output text
+```
+
+### RDS API<a name="Overview.Encryption.Determining.API"></a>
+
+To determine whether encryption at rest is turned on for a DB instance by using the Amazon RDS API, call the [DescribeDBInstances](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html) operation with the following parameter: 
++ `DBInstanceIdentifier` – The name of the DB instance\.
 
 ## Availability of Amazon RDS encryption<a name="Overview.Encryption.Availability"></a>
 

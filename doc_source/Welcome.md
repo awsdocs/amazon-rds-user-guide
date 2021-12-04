@@ -12,12 +12,12 @@ If you are new to AWS products and services, begin learning more with the follow
 
 ## Overview of Amazon RDS<a name="Welcome.Concepts"></a>
 
-Why do you want run a relational database in the AWS Cloud? Because AWS takes over many of the difficult and tedious management tasks of a relational database\.
+Why do you want to run a relational database in the AWS Cloud? Because AWS takes over many of the difficult and tedious management tasks of a relational database\.
 
 **Topics**
 + [Amazon EC2 and on\-premises databases](#Welcome.Concepts.on-prem)
 + [Amazon RDS and Amazon EC2](#Welcome.Concepts.RDS)
-+ [Amazon RDS Custom for Oracle](#Welcome.Concepts.Custom)
++ [Amazon RDS Custom for Oracle and Microsoft SQL Server](#Welcome.Concepts.Custom)
 
 ### Amazon EC2 and on\-premises databases<a name="Welcome.Concepts.on-prem"></a>
 
@@ -74,18 +74,18 @@ Amazon RDS provides the following specific advantages over database deployments 
 + You can get high availability with a primary instance and a synchronous secondary instance that you can fail over to when problems occur\. You can also use read replicas to increase read scaling\.
 + In addition to the security in your database package, you can help control who can access your RDS databases by using AWS Identity and Access Management \(IAM\) to define users and permissions\. You can also help protect your databases by putting them in a virtual private cloud \(VPC\)\.
 
-### Amazon RDS Custom for Oracle<a name="Welcome.Concepts.Custom"></a>
+### Amazon RDS Custom for Oracle and Microsoft SQL Server<a name="Welcome.Concepts.Custom"></a>
 
 Amazon RDS Custom is an RDS management type that gives you full access to your database and operating system\.
 
-You can use the control capabilities of RDS Custom to access and customize the database environment and operating system for legacy and packaged business applications\. Meanwhile, Amazon RDS automates database administration tasks and operations\. 
+You can use the control capabilities of RDS Custom to access and customize the database environment and operating system for legacy and packaged business applications\. Meanwhile, Amazon RDS automates database administration tasks and operations\.
 
 In this deployment model, you can install applications and change configuration settings to suit your applications\. At the same time, you can offload database administration tasks such as provisioning, scaling, upgrading, and backup to AWS\. You can take advantage of the database management benefits of Amazon RDS, with more control and flexibility\.
 
-For Oracle Database, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\.
+For Oracle Database and Microsoft SQL Server, RDS Custom combines the automation of Amazon RDS with the flexibility of Amazon EC2\. 
 
+The following table shows the shared responsibility model for RDS Custom\. 
 
-**Shared responsibility model for RDS Custom**  
 
 |  Feature  |  Amazon RDS management  |  RDS Custom management  | 
 | --- | --- | --- | 
@@ -154,7 +154,7 @@ Amazon cloud computing resources are housed in highly available data center faci
 
 Each AWS Region contains multiple distinct locations called Availability Zones, or AZs\. Each Availability Zone is engineered to be isolated from failures in other Availability Zones\. Each is engineered to provide inexpensive, low\-latency network connectivity to other Availability Zones in the same AWS Region\. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location\. For more information, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
 
-You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you choose this option, Amazon automatically provisions and maintains a secondary standby DB instance in a different Availability Zone\. Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance\. This approach helps provide data redundancy and failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. For more information, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\. 
+You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you choose this option, Amazon automatically provisions and maintains a secondary standby DB instance in a different Availability Zone\. Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance\. This approach helps provide data redundancy and failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 ## Security<a name="Welcome.Concepts.SecurityGroups"></a>
 

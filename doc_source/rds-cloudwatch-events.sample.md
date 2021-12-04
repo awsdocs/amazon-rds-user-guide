@@ -1,11 +1,11 @@
 # Overview of events for Amazon RDS<a name="rds-cloudwatch-events.sample"></a>
 
-An *RDS event* indicates a change in the RDS environment\. For example, Amazon RDS generates an event when the state of an instance changes from pending to running\. Amazon RDS delivers events to CloudWatch Events and EventBridge in near\-real time\.
+An *RDS event* indicates a change in the Amazon RDS environment\. For example, Amazon RDS generates an event when the state of a DB instance changes from pending to running\. Amazon RDS delivers events to CloudWatch Events and EventBridge in near\-real time\.
 
 **Note**  
 Amazon RDS emits events on a best effort basis\. We recommend that you avoid writing programs that depend on the order or existence of notification events, because they might be out of sequence or missing\. 
 
-Amazon RDS keeps a record of events that relate to your DB instances, DB snapshots, DB security groups, and DB parameter groups\. This information includes the following: 
+Amazon RDS records events that relate to your DB instances, DB snapshots, and DB parameter groups\. This information includes the following: 
 + The date and time of the event
 + The source name and source type of the event
 + A message associated with the event\.
@@ -13,7 +13,6 @@ Amazon RDS keeps a record of events that relate to your DB instances, DB snapsho
 **Topics**
 + [Example of a DB instance event](#rds-cloudwatch-events.db-instances)
 + [Example of a DB parameter group event](#rds-cloudwatch-events.db-parameter-groups)
-+ [Example of a DB security group event](#rds-cloudwatch-events.db-security-groups)
 + [Example of a DB snapshot event](#rds-cloudwatch-events.db-snapshots)
 
 ## Example of a DB instance event<a name="rds-cloudwatch-events.db-instances"></a>
@@ -72,36 +71,6 @@ The following is an example of a DB parameter group event in JSON format\. The e
     "Message": "Updated parameter time_zone to UTC with apply method immediate",
     "SourceIdentifier": "rds:my-db-param-group",
     "EventID": "RDS-EVENT-0037"
-  }
-}
-```
-
-## Example of a DB security group event<a name="rds-cloudwatch-events.db-security-groups"></a>
-
-The following is an example of a DB security group event in JSON format\. The event shows that the security group `my-security-group` was modified\. The event ID is RDS\-EVENT\-0038\.
-
-```
-{
-  "version": "0",
-  "id": "844e2571-85d4-695f-b930-0153b71dcb42",
-  "detail-type": "RDS DB Security Group Event",
-  "source": "aws.rds",
-  "account": "123456789012",
-  "time": "2018-10-06T12:26:13Z",
-  "region": "us-east-1",
-  "resources": [
-    "arn:aws:rds:us-east-1:123456789012:secgrp:my-security-group"
-  ],
-  "detail": {
-    "EventCategories": [
-      "configuration change"
-    ],
-    "SourceType": "SECURITY_GROUP",
-    "SourceArn": "arn:aws:rds:us-east-1:123456789012:secgrp:my-security-group",
-    "Date": "2018-10-06T12:26:13.882Z",
-    "Message": "Applied change to security group",
-    "SourceIdentifier": "rds:my-security-group",
-    "EventID": "RDS-EVENT-0038"
   }
 }
 ```

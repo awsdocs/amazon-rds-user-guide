@@ -7,7 +7,7 @@ You can find an overview of Performance Insights in the following video\.
 [![AWS Videos](http://img.youtube.com/vi/yOeWcPBT458/0.jpg)](http://www.youtube.com/watch?v=yOeWcPBT458)
 
 **Important**  
-This guide describes using Amazon RDS Performance Insights with non\-Aurora DB engines\. For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.
+The following topics describe using Amazon RDS Performance Insights with non\-Aurora DB engines\. For information about using Amazon RDS Performance Insights with Amazon Aurora, see the [Using Amazon RDS Performance Insights](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html) in the *Amazon Aurora User Guide*\.
 
 **Topics**
 + [Database load](USER_PerfInsights.Overview.ActiveSessions.md)

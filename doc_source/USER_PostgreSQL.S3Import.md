@@ -332,7 +332,7 @@ Import your Amazon S3 data by calling the [aws\_s3\.table\_import\_from\_s3](#aw
 **Note**  
 The following examples use the IAM role method for providing access to the Amazon S3 bucket\. Thus, the `aws_s3.table_import_from_s3` function calls don't include credential parameters\.
 
-The following shows a typical PostgreSQL example using psql\.
+The following shows a typical PostgreSQL example using `psql`\.
 
 ```
 psql=> SELECT aws_s3.table_import_from_s3(
@@ -349,9 +349,9 @@ The parameters are the following:
 + `(format csv)` – PostgreSQL COPY arguments\. The copy process uses the arguments and format of the [PostgreSQL COPY](https://www.postgresql.org/docs/current/sql-copy.html) command\. In the preceding example, the `COPY` command uses the comma\-separated value \(CSV\) file format to copy the data\. 
 +  `s3_uri` – A structure that contains the information identifying the Amazon S3 file\. For an example of using the [aws\_commons\.create\_s3\_uri](#USER_PostgreSQL.S3Import.create_s3_uri) function to create an `s3_uri` structure, see [Overview of importing Amazon S3 data](#USER_PostgreSQL.S3Import.Overview)\.
 
-The return value is text\. For the full reference of this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
+For more information about this function, see [aws\_s3\.table\_import\_from\_s3](#aws_s3.table_import_from_s3)\.
 
-The following examples show how to specify different kinds of files when importing Amazon S3 data\.
+The `aws_s3.table_import_from_s3` function returns text\. To specify other kinds of files for import from an Amazon S3 bucket, see one of the following examples\. 
 
 **Topics**
 + [Importing an Amazon S3 file that uses a custom delimiter](#USER_PostgreSQL.S3Import.FileFormats.CustomDelimiter)

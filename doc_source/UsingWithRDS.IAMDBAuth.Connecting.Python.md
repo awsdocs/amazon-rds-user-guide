@@ -28,7 +28,7 @@ import os
 
 ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
-USR="jane_doe"
+USER="jane_doe"
 REGION="us-east-1"
 os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
@@ -36,7 +36,7 @@ os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 session = boto3.Session(profile_name='RDSCreds')
 client = session.client('rds')
 
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
+token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 ```
 
 This code generates an IAM authentication token for a PostgreSQL DB instance\.
@@ -48,14 +48,14 @@ import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
-USR="jane_doe"
+USER="jane_doe"
 REGION="us-east-1"
 
 #gets the credentials from .aws/credentials
 session = boto3.Session(profile_name='RDSCreds')
 client = session.client('rds')
 
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
+token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 ```
 
 ## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
@@ -70,8 +70,15 @@ Modify the values of the following variables as needed:
 + `USER` – The database account that you want to access\.
 + `REGION` – The AWS Region where the DB instance is running
 + `DBNAME` – The database that you want to access
++ `SSLCERTIFICATE` – The full path to the SSL certificate for Amazon RDS
+
+  To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+
+For `ssl_ca`, specify an SSL certificate\. To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 This code connects to a MySQL DB instance\.
+
+Before running this code, install Connector/Python by following the instructions in [ Connector/Python Installation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation.html) in the MySQL documentation\.
 
 ```
 import mysql.connector
@@ -81,7 +88,7 @@ import os
 
 ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="3306"
-USR="jane_doe"
+USER="jane_doe"
 REGION="us-east-1"
 DBNAME="mydb"
 os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
@@ -90,10 +97,10 @@ os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 session = boto3.Session(profile_name='default')
 client = session.client('rds')
 
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
+token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 
 try:
-    conn =  mysql.connector.connect(host=ENDPOINT, user=USR, passwd=token, port=PORT, database=DBNAME, ssl_ca='[full path]rds-combined-ca-bundle.pem')
+    conn =  mysql.connector.connect(host=ENDPOINT, user=USER, passwd=token, port=PORT, database=DBNAME, ssl-mode='require', ssl_ca='SSLCERTIFICATE')
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()
@@ -104,6 +111,8 @@ except Exception as e:
 
 This code connects to a PostgreSQL DB instance\.
 
+Before running this code, install `psycopg2` by following the instructions in [Psycopg documentation](https://pypi.org/project/psycopg2/)\.
+
 ```
 import psycopg2
 import sys
@@ -112,7 +121,7 @@ import os
 
 ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
 PORT="5432"
-USR="jane_doe"
+USER="jane_doe"
 REGION="us-east-1"
 DBNAME="mydb"
 
@@ -120,10 +129,10 @@ DBNAME="mydb"
 session = boto3.Session(profile_name='RDSCreds')
 client = session.client('rds')
 
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USR, Region=REGION)
+token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 
 try:
-    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USR, password=token, sslmode='prefer', sslrootcert="[full path]rds-combined-ca-bundle.pem")
+    conn = psycopg2.connect(host=ENDPOINT, port=PORT, database=DBNAME, user=USER, password=token, sslmode='require', sslrootcert="SSLCERTIFICATE")
     cur = conn.cursor()
     cur.execute("""SELECT now()""")
     query_results = cur.fetchall()

@@ -21,7 +21,7 @@ If the DB instance is a Multi\-AZ deployment, you can view the OS metrics for th
 
 ![\[Primary and secondary choice for Enhanced Monitoring\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/enhanced-monitoring-primary-secondary.png)
 
-For more information about Multi\-AZ deployments, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
+For more information about Multi\-AZ deployments, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.
 
 **Note**  
 Currently, viewing OS metrics for a Multi\-AZ standby replica is not supported for MariaDB or Microsoft SQL Server DB instances\.

@@ -281,7 +281,7 @@ To list the DB instance classes that are supported by a specific DB engine versi
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --engine-version version \
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version \
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" \
     --output text \
     --region region
@@ -290,7 +290,7 @@ rds describe-orderable-db-instance-options --engine engine --engine-version vers
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --engine-version version ^
+aws rds describe-orderable-db-instance-options --engine engine --engine-version version ^
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" ^
     --output text ^
     --region region
@@ -301,7 +301,7 @@ For example, the following command lists the supported DB instance classes for v
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 \
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 \
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" \
     --output text \
     --region us-east-1
@@ -310,7 +310,7 @@ rds describe-orderable-db-instance-options --engine postgres --engine-version 12
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 ^
+aws rds describe-orderable-db-instance-options --engine postgres --engine-version 12.4 ^
     --query "*[].{DBInstanceClass:DBInstanceClass,StorageType:StorageType}|[?StorageType=='gp2']|[].{DBInstanceClass:DBInstanceClass}" ^
     --output text ^
     --region us-east-1
@@ -323,7 +323,7 @@ To list the DB engine versions that support a specific DB instance class in an A
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class \
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class \
     --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" \
     --output text \
     --region region
@@ -332,7 +332,7 @@ rds describe-orderable-db-instance-options --engine engine --db-instance-class D
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class ^
+aws rds describe-orderable-db-instance-options --engine engine --db-instance-class DB_instance_class ^
     --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" ^
     --output text ^
     --region region
@@ -343,7 +343,7 @@ For example, the following command lists the DB engine versions of the RDS for P
 For Linux, macOS, or Unix:
 
 ```
-rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large \
+aws rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large \
     --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" \
     --output text \
     --region us-east-1
@@ -352,7 +352,7 @@ rds describe-orderable-db-instance-options --engine postgres --db-instance-class
 For Windows:
 
 ```
-rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large ^
+aws rds describe-orderable-db-instance-options --engine postgres --db-instance-class db.r5.large ^
     --query "*[].{EngineVersion:EngineVersion,StorageType:StorageType}|[?StorageType=='gp2']|[].{EngineVersion:EngineVersion}" ^
     --output text ^
     --region us-east-1

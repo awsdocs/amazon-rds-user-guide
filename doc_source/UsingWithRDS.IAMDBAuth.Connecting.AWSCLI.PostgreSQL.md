@@ -40,7 +40,7 @@ rdspostgres.123456789012.us-west-2.rds.amazonaws.com:5432/?Action=connect&DBUser
 The general format for using psql to connect is shown following\.
 
 ```
-psql "host=hostName port=portNumber sslmode=verify-full sslrootcert=certificateFile dbname=DBName user=userName password=authToken"
+psql "host=hostName port=portNumber sslmode=verify-full sslrootcert=full_path_to_ssl_certificate dbname=DBName user=userName password=authToken"
 ```
 
 The parameters are as follows:
@@ -49,17 +49,17 @@ The parameters are as follows:
 + `sslmode` – The SSL mode to use
 
   When you use `sslmode=verify-full`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
-+ `sslrootcert` – The SSL certificate file that contains the public key
++ `sslrootcert` – The full path to the SSL certificate file that contains the public key
 
   For more information, see [Using SSL with a PostgreSQL DB instance](PostgreSQL.Concepts.General.SSL.md)\.
 
-  For information about downloading the SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+  To download an SSL certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 + `dbname` – The database that you want to access
 + `user` – The database account that you want to access
 + `password` – A signed IAM authentication token
 
-The following example shows using psql to connect\. In the example psql uses the environment variable `PGPASSWORD` that was set when the token was generated in the previous section\.
+The following example shows using psql to connect\. In the example psql uses the environment variable `PGPASSWORD` that was set when the token was generated in the previous section\. In the example, */sample\_dir/* is the full path to the SSL certificate file that contains the public key\.
 
 ```
-psql "host=$RDSHOST port=5432 sslmode=verify-full sslrootcert=/sample_dir/rds-combined-ca-bundle.pem dbname=DBName user=jane_doe password=$PGPASSWORD"
+psql "host=$RDSHOST port=5432 sslmode=verify-full sslrootcert=/sample_dir/global-bundle.pem dbname=DBName user=jane_doe password=$PGPASSWORD"
 ```

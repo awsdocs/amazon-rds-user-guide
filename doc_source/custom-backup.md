@@ -19,7 +19,7 @@ RDS Custom creates a storage volume snapshot of your DB instance, backing up the
 
 When you create a snapshot, RDS Custom creates an Amazon EBS snapshot for every volume attached to the DB instance\. RDS Custom uses the EBS snapshot of the root volume to register a new Amazon Machine Image \(AMI\)\. To make snapshots easy to associate with a specific DB instance, they're tagged with `DBSnapshotIdentifier`, `DbiResourceId`, and `VolumeType`\.
 
-Creating a DB snapshot results in a brief I/O suspension\. This suspension can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. The snapshot creation time varies with the size of your database\. Because the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects snapshot creation time\. To learn more about creating snapshots in RDS for Oracle, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+Creating a DB snapshot results in a brief I/O suspension\. This suspension can last from a few seconds to a few minutes, depending on the size and class of your DB instance\. The snapshot creation time varies with the size of your database\. Because the snapshot includes the entire storage volume, the size of files, such as temporary files, also affects snapshot creation time\. To learn more about creating snapshots, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
 
 Create an RDS Custom snapshot using the console or the AWS CLI\.
 
@@ -73,7 +73,7 @@ When you restore an RDS Custom DB instance, you provide the name of the DB snaps
 
 The restore process differs in the following ways from restore in Amazon RDS:
 + Before restoring a snapshot, RDS Custom backs up existing configuration files\. These files are available on the restored instance in the directory `/rdsdbdata/config/backup`\. RDS Custom restores the DB snapshot with default parameters and overwrites the previous database configuration files with existing ones\. Thus, the restored instance doesn't preserve custom parameters and changes to database configuration files\.
-+ The restored database has the same name as in the snapshot\. The default is `ORCL`\. You can't specify a different name\.
++ The restored database has the same name as in the snapshot\. You can't specify a different name\. \(For RDS Custom for Oracle, the default is `ORCL`\.\)
 
 ### Console<a name="custom-backup.restoring.console"></a>
 
@@ -121,24 +121,33 @@ aws restore-db-instance-from-db-snapshot ^
 
 ## Restoring an RDS Custom instance to a point in time<a name="custom-backup.pitr"></a>
 
-You can restore a DB instance to a specific point in time \(PITR\), creating a new DB instance\.
+You can restore a DB instance to a specific point in time \(PITR\), creating a new DB instance\. To support PITR, your DB instances must have backup retention set to a nonzero value\.
 
 The latest restorable time for an RDS Custom DB instance depends on several factors, but is typically within 5 minutes of the current time\. To see the latest restorable time for a DB instance, use the AWS CLI [describe\-db\-instances](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-instances.html) command and look at the value returned in the `LatestRestorableTime` field for the DB instance\. To see the latest restorable time for each DB instance in the Amazon RDS console, choose **Automated backups**\.
 
 You can restore to any point in time within your backup retention period\. To see the earliest restorable time for each DB instance, choose **Automated backups** in the Amazon RDS console\.
 
-In RDS Custom, PITR differs in the following important ways from PITR in Amazon RDS:
-+ The restored database has the same name as in the source DB instance\. The default is `ORCL`\. You can't specify a different name\.
+For general information on PITR, see [Restoring a DB instance to a specified time](USER_PIT.md)\.
+
+**Topics**
++ [PITR considerations for RDS Custom for Oracle](#custom-backup.pitr.oracle)
++ [PITR considerations for RDS Custom for SQL Server](#custom-backup.pitr.sqlserver)
++ [Restoring an RDS Custom instance to a point in time](#custom-backup.pitr2)
+
+### PITR considerations for RDS Custom for Oracle<a name="custom-backup.pitr.oracle"></a>
+
+In RDS Custom for Oracle, PITR differs in the following important ways from PITR in Amazon RDS:
++ The restored database has the same name as in the source DB instance\. You can't specify a different name\. The default is `ORCL`\.
 + `AWSRDSCustomIamRolePolicy` requires new permissions\. For more information, see [Add an access policy to AWSRDSCustomInstanceRoleForRdsCustomInstance](custom-setup-orcl.md#custom-setup-orcl.iam.add-policy)\.
-+ To support PITR, all RDS Custom instances must have backup retention set to a nonzero value\.
-+ Time zone changes aren't supported\. If you change the OS or DB time zone, PITR doesn't work\.
-+ If you set automation to `ALL_PAUSED`, RDS Custom pauses the upload of archived redo logs, including logs created before the latest restorable time \(LRT\)\. We recommend that you pause automation for a brief period\. 
++ All RDS Custom for Oracle DB instances must have backup retention set to a nonzero value\.
++ If you change the operating system or DB instance time zone, PITR might not work\. For information on changing time zones, see [Changing the time zone of an RDS Custom for Oracle DB instance](custom-managing.md#custom-managing.timezone)\.
++ If you set automation to `ALL_PAUSED`, RDS Custom pauses the upload of archived redo logs, including logs created before the latest restorable time \(LRT\)\. We recommend that you pause automation for a brief period\.
 
   To illustrate, assume that your LRT is 10 minutes ago\. You pause automation\. During the pause, RDS Custom doesn't upload archived redo logs\. If your DB instance crashes, you can only recover to a time before the LRT that existed when you paused\. When you resume automation, RDS Custom resumes uploading logs\. The LRT advances\. Normal PITR rules apply\. 
 + In RDS Custom, you can manually specify an arbitrary number of hours to retain archived redo logs before RDS Custom deletes them after upload\. For the procedure, see [Retaining archived redo logs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Log.html#Appendix.Oracle.CommonDBATasks.RetainRedoLogs)\. In RDS Custom, make sure to specify the number of logs manually in the following file: `/opt/amazon/rdscustomagent/config/redo_logs_custom_configuration.json`\. The format is `{ "archivedLogRetentionHours" : "num_of_hours"}`\. 
 + We recommend that you don't customize database initialization parameters\. For example, modifying the following parameters affects PITR:
   + `CONTROL_FILE_RECORD_KEEP_TIME` affects the rules for uploading and deleting logs\.
-  + `LOG_ARCHIVE_DEST_n` does not support multiple destinations\.
+  + `LOG_ARCHIVE_DEST_n` doesn't support multiple destinations\.
   + `ARCHIVE_LAG_TARGET` affects the latest restorable time\.
 + If you customize database initialization parameters, we strongly recommend that you only customize the following:
   + `COMPATIBLE` 
@@ -152,9 +161,81 @@ In RDS Custom, PITR differs in the following important ways from PITR in Amazon 
 
   For all other initialization parameters, RDS Custom restores the default values\. If you modify a parameter that isn't in the preceding list, it might have an adverse effect on PITR and lead to unpredictable results\. For example, `CONTROL_FILE_RECORD_KEEP_TIME` affects the rules for uploading and deleting logs\.
 
+### PITR considerations for RDS Custom for SQL Server<a name="custom-backup.pitr.sqlserver"></a>
+
+In RDS Custom for SQL Server, PITR differs in the following important ways from PITR in Amazon RDS:
++ PITR only restores the databases in the DB instance\. It doesn't restore the operating system or files on the C: drive\.
++ For an RDS Custom for SQL Server DB instance, a database is backed up automatically and is eligible for PITR only under the following conditions:
+  + The database is online\.
+  + Its recovery model is set to `FULL`\.
+  + It's writable\.
+  + It has its physical files on the D: drive\.
+  + It's not listed in the `rds_pitr_blocked_databases` table\. For more information, see [Making databases ineligible for PITR](#custom-backup.pitr.sqlserver.ineligible)\.
++ The maximum number of databases restored by a PITR operation for an RDS Custom for SQL Server DB instance is 100\. The 100 databases are determined by the order of their database ID\.
+
+  Other databases that aren't part of PITR can be restored from DB snapshots, including the automated backups used for PITR\.
++ Adding a new database, renaming a database, or restoring a database that is eligible for PITR initiates a snapshot of the DB instance\.
++ Restored databases have the same name as in the source DB instance\. You can't specify a different name\.
++ `AWSRDSCustomSQLServerIamRolePolicy` requires new permissions\. For more information, see [Add an access policy to AWSRDSCustomSQLServerInstanceRole](custom-setup-sqlserver.md#custom-setup-sqlserver.iam.add-policy)\.
++ Time zone changes aren't supported for RDS Custom for SQL Server\. If you change the operating system or DB instance time zone, PITR \(and other automation\) doesn't work\.
+
+#### Making databases ineligible for PITR<a name="custom-backup.pitr.sqlserver.ineligible"></a>
+
+You can specify that certain RDS Custom for SQL Server databases aren't part of automated backups and PITR\. To do this, put their `database_id` values into a `rds_pitr_blocked_databases` table\. Use the following SQL script to create the table\.
+
+**To create the rds\_pitr\_blocked\_databases table**
++ Run the following SQL script\.
+
+  ```
+  create table msdb..rds_pitr_blocked_databases
+  (
+  database_id INT NOT NULL,
+  database_name SYSNAME NOT NULL,
+  db_entry_updated_date datetime NOT NULL DEFAULT GETDATE(),
+  db_entry_updated_by SYSNAME NOT NULL DEFAULT CURRENT_USER,
+  PRIMARY KEY (database_id)
+  );
+  ```
+
+For the list of eligible and ineligible databases, see the `RI.End` file in the `RDSCustomForSQLServer/Instances/DB_instance_resource_ID/TransactionLogMetadata` directory in the Amazon S3 bucket `do-not-delete-rds-custom-$ACCOUNT_ID-$REGION-unique_identifier`\. For more information about the `RI.End` file, see [Transaction logs in Amazon S3](#custom-backup.pitr.sqlserver.tlogs)\.
+
+#### Transaction logs in Amazon S3<a name="custom-backup.pitr.sqlserver.tlogs"></a>
+
+The backup retention period determines whether transaction logs for RDS Custom for SQL Server DB instances are automatically extracted and uploaded to Amazon S3\. A nonzero value means that automatic backups are created, and that the RDS Custom agent uploads the transaction logs to S3 every 5 minutes\.
+
+Transaction log files on S3 are encrypted at rest using the AWS KMS key that you provided when you created your DB instance\. For more information, see [Protecting data using server\-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon Simple Storage Service User Guide*\.
+
+The transaction logs for each database are uploaded to an S3 bucket named `do-not-delete-rds-custom-$ACCOUNT_ID-$REGION-unique_identifier`\. The `RDSCustomForSQLServer/Instances/DB_instance_resource_ID` directory in the S3 bucket contains two subdirectories:
++ `TransactionLogs` – Contains the transaction logs for each database and their respective metadata\.
+
+  The transaction log file name follows the pattern `yyyyMMddHHmm.database_id.timestamp`, for example:
+
+  ```
+  202110202230.11.1634769287
+  ```
+
+  The same file name with the suffix `_metadata` contains information about the transaction log such as log sequence numbers, database name, and `RdsChunkCount`\. `RdsChunkCount` determines how many physical files represent a single transaction log file\. You might see files with suffixes `_0001`, `_0002`, and so on, which mean the physical chunks of a transaction log file\. If you want to use a chunked transaction log file, make sure to merge the chunks after downloading them\.
+
+  Consider a scenario where you have the following files:
+  + `202110202230.11.1634769287`
+  + ` 202110202230.11.1634769287_0001`
+  + ` 202110202230.11.1634769287_0002 `
+  + ` 202110202230.11.1634769287_metadata`
+
+  The `RdsChunkCount` is `3`\. The order for merging the files is the following: `202110202230.11.1634769287`, ` 202110202230.11.1634769287_0001`, `202110202230.11.1634769287_0002`\.
++ `TransactionLogMetadata` – Contains metadata information about each iteration of transaction log extraction\.
+
+  The `RI.End` file contains information for all databases that had their transaction logs extracted, and all databases that exist but didn't have their transaction logs extracted\. The `RI.End` file name follows the pattern `yyyyMMddHHmm.RI.End.timestamp`, for example:
+
+  ```
+  202110202230.RI.End.1634769281
+  ```
+
+### Restoring an RDS Custom instance to a point in time<a name="custom-backup.pitr2"></a>
+
 You can restore an RDS Custom DB instance to a point in time using the AWS Management Console, the AWS CLI, or the RDS API\.
 
-### Console<a name="custom-backup.pitr.CON"></a>
+#### Console<a name="custom-backup.pitr2.CON"></a>
 
 **To restore an RDS Custom DB instance to a specified time**
 
@@ -180,7 +261,7 @@ You can restore an RDS Custom DB instance to a point in time using the AWS Manag
 
 1. Choose **Restore to point in time**\.
 
-### AWS CLI<a name="custom-backup.pitr.CLI"></a>
+#### AWS CLI<a name="custom-backup.pitr2.CLI"></a>
 
 You restore a DB instance to a specified time by using the [ restore\-db\-instance\-to\-point\-in\-time](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) AWS CLI command to create a new RDS Custom DB instance\.
 

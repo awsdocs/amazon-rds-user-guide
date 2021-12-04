@@ -12,7 +12,7 @@
  You can reduce the overhead to process credentials and establish a secure connection for each new connection\. RDS Proxy can handle some of that work on behalf of the database\. 
 
 **Topics**
-+ [Support and availability of RDS Proxy](#rds-proxy.support)
++ [Supported engines and Region availability for RDS Proxy](#rds-proxy.support)
 + [Quotas and limitations for RDS Proxy](#rds-proxy.limits)
 + [Planning where to use RDS Proxy](rds-proxy-planning.md)
 + [RDS Proxy concepts and terminology](rds-proxy.howitworks.md)
@@ -24,11 +24,11 @@
 + [Troubleshooting for RDS Proxy](rds-proxy.troubleshooting.md)
 + [Using RDS Proxy with AWS CloudFormation](rds-proxy-cfn.md)
 
-## Support and availability of RDS Proxy<a name="rds-proxy.support"></a>
+## Supported engines and Region availability for RDS Proxy<a name="rds-proxy.support"></a>
 
 RDS Proxy supports the following database engine versions:
 + RDS for MySQL – MySQL 5\.6, 5\.7, and 8\.0
-+ RDS for PostgreSQL – version 10\.10 and higher minor versions, and version 11\.5 and higher minor versions
++ RDS for PostgreSQL – version 10\.10 and higher minor versions, version 11\.5 and higher minor versions, and version 12\.5 and higher minor versions
 
 RDS Proxy is available in the following Regions:
 + US East \(Ohio\)

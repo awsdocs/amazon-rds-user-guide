@@ -41,7 +41,7 @@ You can connect to a DB instance using IAM authentication and the AWS SDK for Go
 
 ### Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV2.AuthToken"></a>
 
-The auth package provides utilities for generating authentication tokens for connecting to Amazon RDS MySQL and PostgreSQL database instances\. Using the BuildAuthToken method, you generate a database authorization token by providing the database endpoint, AWS Region, username, and an `aws.CredentialProvider` implantation that returns IAM credentials with permission connect to the database using IAM database authentication\.
+The auth package provides utilities for generating authentication tokens for connecting to Amazon RDS MySQL and PostgreSQL database instances\. Using the BuildAuthToken method, you generate a database authorization token by providing the database endpoint, AWS Region, username, and an `aws.CredentialProvider` implementation that returns IAM credentials with permission connect to the database using IAM database authentication\.
 
 The following example shows how to use `BuildAuthToken` to create an authentication token for connecting to a MySQL DB instance\.
 

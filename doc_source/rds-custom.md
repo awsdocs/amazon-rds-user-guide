@@ -1,6 +1,6 @@
 # Working with Amazon RDS Custom<a name="rds-custom"></a>
 
-Amazon RDS Custom automates database administration tasks and operations, while making it possible for you as a database administrator to access and customize your database environment and operating system\. With RDS Custom, you can customize to meet the requirements of legacy, custom, and packaged applications\.
+Amazon RDS Custom automates database administration tasks and operations and makes it possible for you as a database administrator to access and customize your database environment and operating system\. With RDS Custom, you can customize to meet the requirements of legacy, custom, and packaged applications\.
 
 **Topics**
 + [Addressing the challenge of database customization](#custom-intro.challenge)
@@ -8,12 +8,16 @@ Amazon RDS Custom automates database administration tasks and operations, while 
 + [Amazon RDS Custom architecture](custom-concept.md)
 + [Requirements and limitations for Amazon RDS Custom](custom-reqs-limits.md)
 + [Setting up your environment for Amazon RDS Custom for Oracle](custom-setup-orcl.md)
++ [Setting up your environment for Amazon RDS Custom for SQL Server](custom-setup-sqlserver.md)
 + [Working with custom engine versions for Amazon RDS Custom for Oracle](custom-cev.md)
-+ [Creating and connecting to an Amazon RDS Custom DB instance](custom-creating.md)
++ [Creating and connecting to a DB instance for Amazon RDS Custom for Oracle](custom-creating.md)
++ [Creating and connecting to a DB instance for Amazon RDS Custom for SQL Server](custom-creating-sqlserver.md)
 + [Managing an Amazon RDS Custom DB instance](custom-managing.md)
 + [Working with read replicas for RDS Custom for Oracle](custom-rr.md)
 + [Backing up and restoring an Amazon RDS Custom DB instance](custom-backup.md)
++ [Migrating an on\-premises database to Amazon RDS Custom for SQL Server](custom-migrating.md)
 + [Upgrading a DB instance for Amazon RDS Custom for Oracle](custom-upgrading.md)
++ [Upgrading a DB instance for Amazon RDS Custom for SQL Server](custom-upgrading-sqlserver.md)
 + [Troubleshooting DB issues for Amazon RDS Custom](custom-troubleshooting.md)
 
 ## Addressing the challenge of database customization<a name="custom-intro.challenge"></a>
@@ -52,7 +56,7 @@ When you manage database software yourself, you gain more control, but you're al
 
 Amazon RDS Custom is a managed database service for legacy, custom, and packaged applications that require access to the underlying operating system and database environment\. Amazon RDS Custom automates setup, operation, and scaling of databases in the AWS Cloud while granting you access to the database and underlying operating system\. With this access, you can configure settings, install patches, and enable native features to meet the dependent application's requirements\. With RDS Custom, you can run your database workload using the AWS Management Console or the AWS CLI\.
 
-Currently, Amazon RDS Custom supports only the Oracle Database engine\.
+Currently, Amazon RDS Custom supports only the Oracle Database and Microsoft SQL Server engines\.
 
 ### Shared responsibility model<a name="custom-intro.solution.shared"></a>
 
@@ -77,13 +81,17 @@ The following table details the shared responsibility model for RDS Custom\.
 
 In the shared responsibility model of RDS Custom, you get more control than in Amazon RDS but also more responsibility\. To meet your application and business requirements, you manage the host yourself\.
 
-You can create an RDS Custom DB instance using Oracle Database\. You do the following:
+You can create an RDS Custom DB instance using Oracle Database\. In this case, you do the following:
 + Manage your own media\.
 
   When using RDS Custom, you upload your own database installation files and patches\. You create a custom engine version \(CEV\) from these files\. Then you can create an RDS Custom DB instance by using this CEV\.
 + Manage your own licenses\.
 
   You bring your own Oracle Database licenses and manage licenses by yourself\.
+
+You can create an RDS Custom DB instance using Microsoft SQL Server\. In this case:
++ You don't manage your own media\.
++ You don't need to purchase SQL Server licenses separately\. AWS holds the license for the SQL Server database software\.
 
 ### Key benefits of RDS Custom<a name="custom-intro.solution.benefits"></a>
 

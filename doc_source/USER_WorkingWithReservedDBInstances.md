@@ -82,7 +82,7 @@ The price for a reserved DB instance doesn't include regular costs associated wi
 
 Add all of these options \($90 \+ $45\.60 \+ $19\) with the reserved DB instance, and the total cost per month is $154\.60\.
 
-If you chose to use an on\-demand DB instance instead of a reserved DB instance, an RDS for MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.1386 per hour, or $101\.18 per month\. So, for an on\-demand DB instance, add all of these options \($101\.18 \+ $45\.60 \+ $19\), and the total cost per month is $165\.78\.
+If you chose to use an on\-demand DB instance instead of a reserved DB instance, an RDS for MySQL Single\-AZ db\.r4\.large DB instance class in US East \(N\. Virginia\) costs $0\.1386 per hour, or $101\.18 per month\. So, for an on\-demand DB instance, add all of these options \($101\.18 \+ $45\.60 \+ $19\), and the total cost per month is $165\.78\. You save a little over $11 per month by using the reserved DB instance\.
 
 
 
@@ -250,3 +250,39 @@ You can use the RDS API to work with reserved DB instances:
   + `--reserved-db-instances-offering-id` – The ID of the offering that you want to purchase\.
   + `--reserved-db-instance-id` – You can assign your own identifier to the reserved DB instances that you purchase to help track them\.
 + After you have purchased reserved DB instances, you can get information about your reserved DB instances\. Call the [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html) RDS API operation\.
+
+## Viewing the billing for your reserved DB instances<a name="reserved-instances-billing"></a>
+
+You can view the billing for your reserved DB instances in the Billing Dashboard in the AWS Management Console\.
+
+**To view reserved DB instance billing**
+
+1. Sign in to the AWS Management Console\.
+
+1. From the **account menu** at the upper right, choose **Billing Dashboard**\.
+
+1. Choose **Bill Details** at the upper right of the dashboard\.
+
+1. Under **AWS Service Charges**, expand **Relational Database Service**\.
+
+1. Expand the AWS Region where your reserved DB instances are, for example **US West \(Oregon\)**\.
+
+   Your reserved DB instances and their hourly charges for the current month are shown under **Amazon Relational Database Service for *Database Engine* Reserved Instances**\.  
+![\[View monthly costs for a reserved DB instance\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-billing1.png)
+
+   The reserved DB instance in this example was purchased All Upfront, so there are no hourly charges\.
+
+1. Choose the **Cost Explorer** \(bar graph\) icon next to the **Reserved Instances** heading\.
+
+   The Cost Explorer displays the **Monthly EC2 running hours costs and usage** graph\.
+
+1. Clear the **Usage Type Group** filter to the right of the graph\.
+
+1. Choose the time period and time unit for which you want to examine usage costs\.
+
+   The following example shows usage costs for on\-demand and reserved DB instances for the year to date by month\.  
+![\[View usage costs for on-demand and reserved DB instances\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ri-db-billing2.png)
+
+   The reserved DB instance costs from January through June 2021 are monthly charges for a Partial Upfront instance, while the cost in August 2021 is a one\-time charge for an All Upfront instance\.
+
+   The reserved instance discount for the Partial Upfront instance expired in June 2021, but the DB instance wasn't deleted\. After the expiration date, it was simply charged at the on\-demand rate\.

@@ -19,7 +19,7 @@ Transparent Data Encryption is used in scenarios where you need to encrypt sensi
 **Note**  
 You can create native backups of TDE\-enabled databases, but you can't restore those backups to on\-premises databases\. You can't restore native backups of TDE\-enabled, on\-premises databases\.
 
-A detailed discussion of Transparent Data Encryption is beyond the scope of this guide, but you should understand the security strengths and weaknesses of each encryption algorithm and key\. For information about Transparent Data Encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) on the Microsoft website\.
+A detailed discussion of Transparent Data Encryption is beyond the scope of this guide, but you should understand the security strengths and weaknesses of each encryption algorithm and key\. For information about Transparent Data Encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) in the Microsoft documentation\.
 
 ## Enabling TDE<a name="TDE.Enabling"></a>
 

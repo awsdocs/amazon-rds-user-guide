@@ -5,7 +5,7 @@ This section describes the Amazon RDS implementations of some common DBA tasks f
 For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
 **Topics**
-+ [Creating roles](#Appendix.PostgreSQL.CommonDBATasks.Roles)
++ [Understanding the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL database access](#Appendix.PostgreSQL.CommonDBATasks.Access)
 + [Working with PostgreSQL parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
 + [Audit logging for a PostgreSQL DB instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
@@ -24,21 +24,25 @@ For information about working with PostgreSQL log files on Amazon RDS, see [Post
 + [Managing PostgreSQL partitions with the pg\_partman extension](PostgreSQL_Partitions.md)
 + [Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance](PostgreSQL-Lambda.md)
 
-## Creating roles<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
+## Understanding the rds\_superuser role<a name="Appendix.PostgreSQL.CommonDBATasks.Roles"></a>
 
-When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named `postgres` in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges for your DB instance\. You should not assign this role to users unless they need the most access to the DB instance\.
+When you create a DB instance, the master user system account that you create is assigned to the `rds_superuser` role\. The `rds_superuser` role is a predefined Amazon RDS role similar to the PostgreSQL superuser role \(customarily named `postgres` in local instances\), but with some restrictions\. As with the PostgreSQL superuser role, the `rds_superuser` role has the most privileges for your DB instance\. You should not assign this role to users unless they need the most access to the DB instance\. 
 
 The `rds_superuser` role can do the following:
-+ Add extensions that are available for use with Amazon RDS\. For more information, see [Some supported PostgreSQL features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/9.4/static/sql-createextension.html)\.
-+ Manage tablespaces, including creating and deleting them\. For more information, see [ Tablespaces for PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces) and the [Tablespaces](http://www.postgresql.org/docs/9.4/static/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
++ Add extensions that are available for use with Amazon RDS\. For more information, see [Some supported PostgreSQL features](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport) and the [PostgreSQL documentation](http://www.postgresql.org/docs/current/sql-createextension.html)\.
++ Manage tablespaces, including creating and deleting them\. For more information, see [ Tablespaces for PostgreSQL on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces) and the [Tablespaces](http://www.postgresql.org/docs/current/manage-ag-tablespaces.html) section in the PostgreSQL documentation\.
 + View all users not assigned the `rds_superuser` role using the `pg_stat_activity` command and stop their connections using the `pg_terminate_backend` and `pg_cancel_backend` commands\.
-+ Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/9.4/static/sql-grant.html) section in the PostgreSQL documentation\.
++ Grant and revoke the `rds_replication` role for all roles that are not the `rds_superuser` role\. For more information, see the [GRANT](http://www.postgresql.org/docs/current/sql-grant.html) section in the PostgreSQL documentation\.
 
-The following example shows how to create a user and then grant the user the `rds_superuser` role\. User\-defined roles, such as `rds_superuser`, have to be granted\.
+As mentioned, the `rds_superuser` role can't do everything that the `postgres` superuser can do\. For example, `rds_superuser` can't by\-pass the `CONNECT` privilege when connecting to a database\. This role must be specifically granted to any users you create that should have `rds_superuser` privileges\. 
+
+The following example shows how to create a user and then grant the user the `rds_superuser` role\. 
 
 ```
-create role testuser with password 'testuser' login;
-grant rds_superuser to testuser;
+pgres=> CREATE ROLE bus_app_admin WITH PASSWORD 'change_me' LOGIN;
+CREATE ROLE
+pgres=> GRANT rds_superuser TO bus_app_admin;
+GRANT ROLE
 ```
 
 ## Managing PostgreSQL database access<a name="Appendix.PostgreSQL.CommonDBATasks.Access"></a>

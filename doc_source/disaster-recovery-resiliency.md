@@ -26,4 +26,4 @@ For more information, see [Working with read replicas](USER_ReadRepl.md)\.
 
 Amazon RDS provides high availability and failover support for DB instances using Multi\-AZ deployments\. Amazon RDS uses several different technologies to provide failover support\. Multi\-AZ deployments for Oracle, PostgreSQL, MySQL, and MariaDB DB instances use Amazon's failover technology\. SQL Server DB instances use SQL Server Database Mirroring \(DBM\)\.
 
-For more information, see [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)\.
+For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\.

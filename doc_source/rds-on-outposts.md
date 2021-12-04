@@ -20,6 +20,7 @@ When network connectivity to the AWS Region isn't available, your DB instance co
 + [Supported DB instance classes for Amazon RDS on AWS Outposts](#rds-on-outposts.db-instance-classes)
 + [Customer\-owned IP addresses for RDS on Outposts](#rds-on-outposts.coip)
 + [Creating DB instances for Amazon RDS on AWS Outposts](#rds-on-outposts.creating)
++ [Considerations for restoring DB instances](#rds-on-outposts.restoring)
 
 ## Prerequisites for Amazon RDS on AWS Outposts<a name="rds-on-outposts.prerequisites"></a>
 
@@ -42,12 +43,12 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Rebooting a DB instance  |  Yes  |  —  |  [Rebooting a DB instance](USER_RebootInstance.md)  | 
 |  Stopping a DB instance  |  Yes  |  —  |  [Stopping an Amazon RDS DB instance temporarily](USER_StopInstance.md)  | 
 |  Starting a DB instance  |  Yes  |  —  |  [Starting an Amazon RDS DB instance that was previously stopped](USER_StartInstance.md)  | 
-|  Multi\-AZ deployments  |  No  |  —  |  [High availability \(Multi\-AZ\) for Amazon RDS](Concepts.MultiAZ.md)  | 
+|  Multi\-AZ deployments  |  No  |  —  |  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)  | 
 |  DB parameter groups  |  Yes  |  —  |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  Read replicas  |  No  |  —  |  [Working with read replicas](USER_ReadRepl.md)  | 
 |  Encryption at rest  |  Yes  |  RDS on Outposts doesn't support unencrypted DB instances\.  |  [Encrypting Amazon RDS resources](Overview.Encryption.md)  | 
 |  AWS Identity and Access Management \(IAM\) database authentication  |  No  |  —  |  [IAM database authentication for MySQL and PostgreSQL](UsingWithRDS.IAMDBAuth.md)  | 
-|  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
+|  Associating an IAM role with a DB instance  |  No  |  —  |  [add\-role\-to\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/add-role-to-db-instance.html) AWS CLI command and [AddRoleToDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_AddRoleToDBInstance.html) RDS API operation  | 
 |  Kerberos authentication  |  No  |  —  |  [Kerberos authentication](database-authentication.md#kerberos-authentication)  | 
 |  Tagging Amazon RDS resources  |  Yes  |  —  |  [Tagging Amazon RDS resources](USER_Tagging.md)  | 
 |  Option groups  |  Yes  |  —  |  [Working with option groups](USER_WorkingWithOptionGroups.md)  | 
@@ -57,25 +58,24 @@ The following are prerequisites for using Amazon RDS on AWS Outposts:
 |  Changing the DB instance class  |  Yes  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Changing the allocated storage  |  No  |  —  |  [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)  | 
 |  Storage autoscaling  |  No  |  —  |  [Managing capacity automatically with Amazon RDS storage autoscaling](USER_PIOPS.StorageTypes.md#USER_PIOPS.Autoscaling)  | 
-|  Manual and automatic DB instance snapshots  |  Yes  |  Manual and automatic DB instance snapshots are stored in your AWS Region\.  |  [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
-|  Restoring from a DB snapshot  |  Yes  |  —  |  [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
+|  Manual and automatic DB instance snapshots  |  Yes  | You can store automated backups and manual snapshots in your AWS Region or locally on your Outpost\.To store backups on your Outpost, make sure that you have Amazon S3 on Outposts configured\. |  [Creating DB instances for Amazon RDS on AWS Outposts](#rds-on-outposts.creating) [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/) [Creating a DB snapshot](USER_CreateSnapshot.md)  | 
+|  Restoring from a DB snapshot  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost\.  |  [Considerations for restoring DB instances](#rds-on-outposts.restoring) [Restoring from a DB snapshot](USER_RestoreFromSnapshot.md)  | 
 |  Restoring a DB instance from Amazon S3  |  No  |  —  |  [Restoring a backup into a MySQL DB instance](MySQL.Procedural.Importing.md)  | 
 |  Exporting snapshot data to Amazon S3  |  Yes  |  —  |  [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)  | 
-|  Point\-in\-time recovery  |  Yes  |  —  |  [Restoring a DB instance to a specified time](USER_PIT.md)  | 
+|  Point\-in\-time recovery  |  Yes  |  You can store automated backups and manual snapshots for the restored DB instance in the parent AWS Region or locally on your Outpost, with one exception\.  |  [Considerations for restoring DB instances](#rds-on-outposts.restoring) [Restoring a DB instance to a specified time](USER_PIT.md)  | 
 |  Enhanced monitoring  |  No  |  —  |  [Monitoring the OS by using Enhanced Monitoring](USER_Monitoring.OS.md)  | 
 |  Amazon CloudWatch monitoring  |  Yes  |  You can view the same set of metrics that are available for your databases in the AWS Region\.  |  [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)  | 
 |  Publishing database engine logs to CloudWatch Logs  |  Yes  |  —  |  [Publishing database logs to Amazon CloudWatch Logs](USER_LogAccess.Procedural.UploadtoCloudWatch.md)  | 
 |  Event notification  |  Yes  |  —  |  [Using Amazon RDS event notification](USER_Events.md)  | 
 |  Amazon RDS Performance Insights  |  No  |  —  |  [Monitoring DB load with Performance Insights on Amazon RDS](USER_PerfInsights.md)  | 
-|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
+|  Viewing or downloading database logs  |  No  |  RDS on Outposts doesn't support viewing database logs using the console or describing database logs using the AWS CLI or RDS API\. RDS on Outposts doesn't support downloading database logs using the console or downloading database logs using the AWS CLI or RDS API\.  |  [Working with Amazon RDS database log files](USER_LogAccess.md)  | 
 |  Amazon RDS Proxy  |  No  |  —  |  [Using Amazon RDS Proxy](rds-proxy.md)  | 
 |  Stored procedures for Amazon RDS for MySQL  |  Yes  |  —  |  [MySQL on Amazon RDS SQL reference](Appendix.MySQL.SQLRef.md)  | 
 |  Replication with external databases for RDS for MySQL  |  No  |  —  |  [Replication with a MySQL or MariaDB instance running external to Amazon RDS](MySQL.Procedural.Importing.External.Repl.md)  | 
 |  Native backup and restore for Amazon RDS for Microsoft SQL Server  |  Yes  |  —  |  [Importing and exporting SQL Server databases](SQLServer.Procedural.Importing.md)  | 
 
 **Note**  
-RDS on Outposts doesn't support use cases that require all data to remain in your data center\.  
-RDS on Outposts stores database backups and logs in your AWS Region\.
+RDS on Outposts doesn't support use cases that require all data to remain in your data center\.
 
 ## Supported DB instance classes for Amazon RDS on AWS Outposts<a name="rds-on-outposts.db-instance-classes"></a>
 
@@ -146,9 +146,9 @@ The following limitations apply to CoIP support for RDS on Outposts DB instances
 
 ## Creating DB instances for Amazon RDS on AWS Outposts<a name="rds-on-outposts.creating"></a>
 
-Creating an Amazon RDS on AWS Outposts DB instance is similar to creating an Amazon RDS DB instance in the AWS Cloud\. However, you must specify a DB subnet group that is associated with your Outpost\.
+Creating an Amazon RDS on AWS Outposts DB instance is similar to creating an Amazon RDS DB instance in the AWS Cloud\. However, make sure that you specify a DB subnet group that is associated with your Outpost\.
 
-An Amazon VPC can span all of the Availability Zones in an AWS Region\. You can extend any VPC in the AWS Region to your Outpost by adding an Outpost subnet\. To add an Outpost subnet to a VPC, specify the Amazon Resource Name \(ARN\) of the Outpost when you create the subnet\.
+A virtual private cloud \(VPC\) based on the Amazon VPC service can span all of the Availability Zones in an AWS Region\. You can extend any VPC in the AWS Region to your Outpost by adding an Outpost subnet\. To add an Outpost subnet to a VPC, specify the Amazon Resource Name \(ARN\) of the Outpost when you create the subnet\.
 
 Before you create an RDS on Outposts DB instance, you can create a DB subnet group that includes one subnet that is associated with your Outpost\. When you create an RDS on Outposts DB instance, specify this DB subnet group\. You can also choose to create a new DB subnet group when you create your DB instance\.
 
@@ -156,121 +156,162 @@ For information about configuring AWS Outposts, see the [AWS Outposts User Guide
 
 ### Console<a name="rds-on-outposts.creating.console"></a>
 
-**To create an RDS on Outposts DB instance using the console**
+#### Creating a DB subnet group<a name="rds-on-outposts.creating.console.subnet"></a>
 
-1. Create a DB subnet group with one subnet that is associated with your Outpost\.
+Create a DB subnet group with one subnet that is associated with your Outpost\.
 
-   To create a new DB subnet group for the Outpost when you create your DB instance, skip this step\. 
+You can also create a new DB subnet group for the Outpost when you create your DB instance\. If you want to do so, then skip this procedure\.
+
 **Note**  
-To create a DB subnet group for the AWS Cloud, you specify at least two subnets\. However, for an Outpost DB subnet group, you can specify only one subnet\.
+To create a DB subnet group for the AWS Cloud, specify at least two subnets\. However, for an Outpost DB subnet group, specify only one subnet\.
 
-   1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+**To create a DB subnet group for your Outpost**
 
-   1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB subnet group\.
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
-   1. Choose **Subnet groups**, and then choose **Create DB Subnet Group**\.
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB subnet group\.
 
-      The **Create DB subnet group** page appears\.  
+1. Choose **Subnet groups**, and then choose **Create DB Subnet Group**\.
+
+   The **Create DB subnet group** page appears\.  
 ![\[Create DB subnet group page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/create-db-subnet-group.png)
 
-   1. Set the following values for your new DB subnet group:
-      + ****Name** –** The name of the DB subnet group
-      + ****Description** –** A description for the DB subnet group
-      + ****VPC** –** The VPC for which you're creating the DB subnet group
+1. For **Name**, choose the name of the DB subnet group\.
 
-   1. For **Availability Zones**, choose the Availability Zone for your Outpost\.
+1. For **Description**, choose a description for the DB subnet group\.
 
-   1. For **Subnets**, choose the subnet for use by RDS on Outposts\.
+1. For **VPC**, choose the VPC that you're creating the DB subnet group for\.
 
-      Your DB subnet group must have only one subnet\.
+1. For **Availability Zones**, choose the Availability Zone for your Outpost\.
 
-   1. Choose **Create** to create the DB subnet group\.
+1. For **Subnets**, choose the subnet for use by RDS on Outposts\.
 
-1. Create the DB instance, and choose the Outpost for your DB instance\. 
+   Your DB subnet group can have only one subnet\.
 
-   1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+1. Choose **Create** to create the DB subnet group\.
 
-   1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB instance\.
+#### Creating the RDS on Outposts DB instance<a name="rds-on-outposts.creating.console.DB"></a>
 
-   1. In the navigation pane, choose **Databases**\.
+Create the DB instance, and choose the Outpost for your DB instance\.
 
-   1. Choose **Create database**\.
+**To create an RDS on Outposts DB instance using the console**
 
-      The AWS Management Console detects available Outposts that you have configured and presents the **On\-premises** option in the **Database location** section\.  
-![\[Creating an RDS on Outposts DB instance page.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/create-outpost-db-instance.png)
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the upper\-right corner of the Amazon RDS console, choose the AWS Region where you want to create the DB instance\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose **Create database**\.
+
+   The AWS Management Console detects available Outposts that you have configured and presents the **On\-premises** option in the **Database location** section\.
 **Note**  
 If you haven't configured any Outposts, either the **Database location** section doesn't appear or the **RDS on Outposts** option isn't available in the **Choose an on\-premises creation method** section\.
 
-   1. Choose the following settings:
-      + ****Database location** –** **On\-premises**
-      + ****On\-premises creation method** –** **RDS on Outposts**
-      + ****Outpost** –** The Outpost that uses the virtual private cloud \(VPC\) that has the DB subnet group for your DB instance\. Your VPC here must be based on the Amazon VPC service\.
-      + ****Virtual Private Cloud \(VPC\)** –** The VPC that contains the DB subnet group for your DB instance\.
-      + ****VPC security group** –** The Amazon VPC security group for your DB instance\.
-      + ****Subnet group** –** The DB subnet group for your DB instance\.
+1. For **Database location**, choose **On\-premises**\.
 
-        You can choose an existing DB subnet group that is associated with the Outpost\. If you didn't create a DB subnet group, you can create a new DB subnet group for the Outpost\. Only one subnet is allowed in this DB subnet group\.
+1. For **On\-premises creation method**, choose **RDS on Outposts**\.
 
-   1. For the remaining sections, specify your DB instance settings\.
+1. Specify your settings for **Outposts Connectivity**\. These settings are for the Outpost that uses the VPC that has the DB subnet group for your DB instance\. Your VPC must be based on the Amazon VPC service\.
 
-      For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+   1. For **Virtual Private Cloud \(VPC\)**, choose the VPC that contains the DB subnet group for your DB instance\.
 
-   1. Choose **Create database**\. 
+   1. For **VPC security group**, choose the Amazon VPC security group for your DB instance\.
 
-      If you chose to use an automatically generated password, the **View credential details** button appears on the **Databases** page\.
+   1. For **Subnet group**, choose the DB subnet group for your DB instance\.
 
-      To view the master user name and password for the DB instance, choose **View credential details**\.  
-![\[Master user credentials after automatic password generation.\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+      You can choose an existing DB subnet group that is associated with the Outpost—for example, if you performed the procedure in [Creating a DB subnet group](#rds-on-outposts.creating.console.subnet)\.
 
-      To connect to the DB instance as the master user, use the user name and password that appear\.
+      You can also create a new DB subnet group for the Outpost\. Only one subnet is allowed in this DB subnet group\.
+
+1. Under **Backup**, do the following:
+
+   1. For **Backup target**, choose one of the following:
+      + **AWS Cloud** to store automated backups and manual snapshots in the parent AWS Region\.
+      + **Outposts \(on\-premises\)** to create local backups\.
+**Note**  
+To store backups on your Outpost, make sure that you have Amazon S3 on Outposts configured\. For more information, see [Amazon S3 on Outposts](https://aws.amazon.com/s3/outposts/)\.
+
+   1. Choose **Enable automated backups** to create point\-in\-time snapshots of your DB instance\.
+
+      If you enable automated backups, then you can choose the **Backup retention period** and **Backup window**, or leave the default values\.\.
+
+1. Specify other DB instance settings as needed\.
+
+   For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+
+1. Choose **Create database**\.
+
+   The **Databases** page appears\. A banner tells you that your DB instance is being created, and displays the **View credential details** button\.
+
+#### Viewing DB instance details<a name="rds-on-outposts.creating.console.view"></a>
+
+After you create your DB instance, you can view credentials and other details for it\.
+
+**To view DB instance details**
+
+1. To view the master user name and password for the DB instance, choose **View credential details** on the **Databases** page\.  
+![\[View credential details button\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/easy-create-credentials.png)
+
+   You can connect to the DB instance as the master user by using these credentials\.
 **Important**  
 You can't view the master user password again\. If you don't record it, you might have to change it\. To change the master user password after the DB instance is available, modify the DB instance\. For more information about modifying a DB instance, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-   1. For **Databases**, choose the name of the new DB instance\.
+1. Choose the name of the new DB instance on the **Databases** page\.
 
-      On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is created and ready for use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it can take several minutes for the new DB instance to be available\.   
+   On the RDS console, the details for the new DB instance appear\. The DB instance has a status of **Creating** until the DB instance is created and ready for use\. When the state changes to **Available**, you can connect to the DB instance\. Depending on the DB instance class and storage allocated, it can take several minutes for the new DB instance to be available\.   
 ![\[My DB instances details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/create-outpost-launch.png)
 
-      After the DB instance is available, you can manage it the same way that you manage RDS DB instances in the cloud\.
+   After the DB instance is available, you can manage it the same way that you manage RDS DB instances in the AWS Cloud\.
 
 ### AWS CLI<a name="rds-on-outposts.creating.cli"></a>
 
-To create a new DB instance in an Outpost with the AWS CLI, first create a DB subnet group for use by RDS on Outposts by calling the [create\-db\-subnet\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-subnet-group.html) command\. For `--subnet-ids`, specify the subnet group in the Outpost for use by RDS on Outposts\. 
+Before you create a new DB instance in an Outpost with the AWS CLI, first create a DB subnet group for use by RDS on Outposts\.
 
-For Linux, macOS, or Unix:
+**To create a DB subnet group for your Outpost**
++ Use the [create\-db\-subnet\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-subnet-group.html) command\. For `--subnet-ids`, specify the subnet group in the Outpost for use by RDS on Outposts\.
 
-```
-1. aws rds create-db-subnet-group \
-2.     --db-subnet-group-name myoutpostdbsubnetgr \
-3.     --db-subnet-group-description "DB subnet group for RDS on Outposts" \
-4.     --subnet-ids subnet-abc123
-```
+  For Linux, macOS, or Unix:
 
-For Windows:
+  ```
+  1. aws rds create-db-subnet-group \
+  2.     --db-subnet-group-name myoutpostdbsubnetgr \
+  3.     --db-subnet-group-description "DB subnet group for RDS on Outposts" \
+  4.     --subnet-ids subnet-abc123
+  ```
 
-```
-1. aws rds create-db-subnet-group ^
-2.     --db-subnet-group-name myoutpostdbsubnetgr ^
-3.     --db-subnet-group-description "DB subnet group for RDS on Outposts" ^
-4.     --subnet-ids subnet-abc123
-```
+  For Windows:
 
-Next, call the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command with the parameters below\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. You can include the following options: 
-+ `--db-instance-identifier`
-+ `--db-instance-class`
-+ `--engine`
-+ `--availability-zone`
-+ `--vpc-security-group-ids`
-+ `--db-subnet-group-name`
-+ `--allocated-storage`
-+ `--master-user-name`
-+ `--master-user-password`
-+ `--backup-retention-period`
-+ `--storage-encrypted`
-+ `--kms-key-id`
+  ```
+  1. aws rds create-db-subnet-group ^
+  2.     --db-subnet-group-name myoutpostdbsubnetgr ^
+  3.     --db-subnet-group-description "DB subnet group for RDS on Outposts" ^
+  4.     --subnet-ids subnet-abc123
+  ```
+
+**To create an RDS on Outposts DB instance using the AWS CLI**
++ Use the [create\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html) command\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. You can include the following options:
+  + `--db-instance-identifier`
+  + `--db-instance-class`
+  + `--engine` – The database engine\. Use one of the following values:
+    + MySQL – Specify `mysql`\.
+    + PostgreSQL – Specify `postgres`\.
+    + Microsoft SQL Server – Specify `sqlserver-ee`, `sqlserver-se`, `sqlserver-ex`, or `sqlserver-web`\.
+  + `--availability-zone`
+  + `--vpc-security-group-ids`
+  + `--db-subnet-group-name`
+  + `--allocated-storage`
+  + `--master-username`
+  + `--master-user-password`
+  + `--backup-retention-period`
+  + `--backup-target` – \(Optional\) Where to store automated backups and manual snapshots\. Use one of the following values:
+    + `outposts` – Store them locally on your Outpost\.
+    + `region` – Store them in the parent AWS Region\. This is the default value\.
+  + `--storage-encrypted`
+  + `--kms-key-id`
 
 **Example**  
-The following example creates a MySQL DB instance named `myoutpostdbinstance`\.  
+The following example creates a MySQL DB instance named `myoutpostdbinstance` with backups stored on your Outpost\.  
 For Linux, macOS, or Unix:  
 
 ```
@@ -286,15 +327,16 @@ For Linux, macOS, or Unix:
 10.     --master-username masterawsuser \
 11.     --master-user-password masteruserpassword \
 12.     --backup-retention-period 3 \
-13.     --storage-encrypted \
-14.     --kms-key-id mykey
+13.     --backup-target outposts \
+14.     --storage-encrypted \
+15.     --kms-key-id mykey
 ```
 For Windows:  
 
 ```
  1. aws rds create-db-instance ^
  2.     --db-instance-identifier myoutpostdbinstance ^
- 3.     --engine-version 8.0.17 ^				
+ 3.     --engine-version 8.0.17 ^
  4.     --db-instance-class db.m5.large ^
  5.     --engine mysql ^
  6.     --availability-zone us-east-1d ^
@@ -304,11 +346,10 @@ For Windows:
 10.     --master-username masterawsuser ^
 11.     --master-user-password masteruserpassword ^
 12.     --backup-retention-period 3 ^
-13.     --storage-encrypted ^
-14.     --kms-key-id mykey
+13.     --backup-target outposts ^
+14.     --storage-encrypted ^
+15.     --kms-key-id mykey
 ```
-
-To create a PostgreSQL DB instance, specify `postgres` for the `--engine` option\. To create a Microsoft SQL Server DB instance, specify `sqlserver-ee`, `sqlserver-se`, `sqlserver-ex`, or `sqlserver-web` for the `--engine` option\.
 
 For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
 
@@ -316,10 +357,11 @@ For information about each setting when creating a DB instance, see [Settings fo
 
 To create a new DB instance in an Outpost with the RDS API, first create a DB subnet group for use by RDS on Outposts by calling the [CreateDBSubnetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBSubnetGroup.html) operation\. For `SubnetIds`, specify the subnet group in the Outpost for use by RDS on Outposts\. 
 
-Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the parameters below\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. 
+Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) operation with the parameters following\. Specify an Availability Zone for the Outpost, an Amazon VPC security group associated with the Outpost, and the DB subnet group you created for the Outpost\. 
 + `AllocatedStorage`
 + `AvailabilityZone`
 + `BackupRetentionPeriod`
++ `BackupTarget`
 + `DBInstanceClass`
 + `DBInstanceIdentifier`
 + `VpcSecurityGroupIds`
@@ -332,3 +374,13 @@ Next, call the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/A
 + `KmsKeyID`
 
 For information about each setting when creating a DB instance, see [Settings for DB instances](USER_CreateDBInstance.md#USER_CreateDBInstance.Settings)\.
+
+## Considerations for restoring DB instances<a name="rds-on-outposts.restoring"></a>
+
+When you restore a DB instance in Amazon RDS on AWS Outposts, you can choose the storage location for automated backups and manual snapshots of the restored DB instance\.
+
+Restoring from a manual DB snapshot, you can store backups either in the parent AWS Region or locally on your Outpost\.
+
+Restoring from an automated backup \(point\-in\-time recovery\), you have fewer choices:
++ If restoring from the parent AWS Region, you can store backups either in the AWS Region or on your Outpost\.
++ If restoring from your Outpost, you can store backups only on your Outpost\.

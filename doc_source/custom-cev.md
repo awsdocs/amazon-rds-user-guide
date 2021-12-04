@@ -53,18 +53,18 @@ The SHA\-256 hash is `BA8329C757133DA313ED3B6D7F86C5AC42CD9970A28BF2E6233F323523
 Upload your Oracle installation and patch files to Amazon S3 using the AWS CLI\. The S3 bucket that contains your installation files must be in the same AWS Region as your CEV\.
 
 Choose either of the following options:
-+ Use `aws s3 cp` to upload a single \.zip file\. 
++ Use `aws s3 cp` to upload a single \.zip file\.
 
-  Use `aws s3` to upload each installation \.zip file separately\. Do not combine the \.zip files into a single \.zip file\.
+  Upload each installation \.zip file separately\. Don't combine the \.zip files into a single \.zip file\.
 + Use `aws s3 sync` to upload a directory\.
 
 List your installation files using either the AWS Management Console or the AWS CLI\. 
 
 Examples in this section use the following placeholders:
-+ `install-or-patch-file.zip` – Oracle installation media file\. For example, p32126828\_190000\_Linux\-x86\-64\.zip is a patch
-+ `my-custom-installation-files` – Your Amazon S3 bucket designated for your uploaded installation files
-+ *123456789012/cev1* – An optional prefix in your Amazon S3 bucket
-+ *source\-bucket* – An Amazon S3 bucket where you can optionally stage files
++ `install-or-patch-file.zip` – Oracle installation media file\. For example, p32126828\_190000\_Linux\-x86\-64\.zip is a patch\.
++ `my-custom-installation-files` – Your Amazon S3 bucket designated for your uploaded installation files\.
++ *123456789012/cev1* – An optional prefix in your Amazon S3 bucket\.
++ *source\-bucket* – An Amazon S3 bucket where you can optionally stage files\.
 
 The following example uploads `install-or-patch-file.zip` to the `123456789012/cev1` folder in the RDS Custom Amazon S3 bucket\. Run a separate `aws s3` command for each \.zip that you want to upload\.
 
@@ -248,7 +248,7 @@ You can create a CEV using the AWS Management Console or the AWS CLI\. Typically
 
 You can then use the CEV to create an RDS Custom instance\. The Amazon S3 bucket containing your installation files must be in the same AWS Region as your CEV\. Otherwise, creation fails\.
 
-For more information, see [Creating an RDS Custom DB instance](custom-creating.md#custom-creating.create)\.
+For more information, see [Creating an RDS Custom for Oracle DB instance](custom-creating.md#custom-creating.create)\.
 
 ### Console<a name="custom-cev.create.console"></a>
 

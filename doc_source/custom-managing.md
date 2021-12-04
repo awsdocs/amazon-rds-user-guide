@@ -4,8 +4,10 @@ Amazon RDS Custom supports a subset of the usual management tasks for Amazon RDS
 
 **Topics**
 + [Working with high availability features for RDS Custom for Oracle](#custom-managing.ha)
++ [Working with high availability features for RDS Custom for SQL Server](#custom-managing.AO)
 + [Pausing and resuming RDS Custom automation](#custom-managing.pausing)
-+ [Working with storage for RDS Custom DB instances](#custom-managing.storage)
++ [Modifying an RDS Custom for SQL Server DB instance](#custom-managing.modify-sqlserver)
++ [Modifying the storage for an RDS Custom for Oracle DB instance](#custom-managing.storage-modify)
 + [Changing the time zone of an RDS Custom for Oracle DB instance](#custom-managing.timezone)
 + [Support for Transparent Data Encryption](#custom-managing.tde)
 + [Tagging RDS Custom resources](#custom-managing.tagging)
@@ -21,9 +23,24 @@ You can configure your high availability environment in the following ways:
 + Fail over or switch over from the primary database to a standby database with no data loss\.
 + Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
 
-To learn how to configure high availability, see the white paper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\. You can perform the following tasks:
+To learn how to configure high availability, see the whitepaper [Enabling high availability with Data Guard on Amazon RDS Custom for Oracle](https://d1.awsstatic.com/whitepapers/enabling-high-availability-with-data-guard-on-amazon-rds-custom-for-oracle.pdf)\. You can perform the following tasks:
 + Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
 + Configure Oracle Fast\-Failover Observer \(FSFO\) to monitor your high availability instances\.
++ Allow the observer to perform automatic failover when necessary conditions are met\.
+
+## Working with high availability features for RDS Custom for SQL Server<a name="custom-managing.AO"></a>
+
+To support replication between RDS Custom for SQL Server instances, you can configure high availability \(HA\) with Always On Availability Groups \(AGs\)\. The primary DB instance automatically synchronizes data to the standby instances\.
+
+You can configure your high availability environment in the following ways:
++ Configure standby instances in different Availability Zones \(AZs\) to be resilient to AZ failures\.
++ Place your standby databases in mounted or read\-only mode\.
++ Fail over or switch over from the primary database to a standby database with no data loss\.
++ Migrate data by configuring high availability for your on\-premises instance, and then failing over or switching over to the RDS Custom standby database\.
+
+To learn how to configure high availability, see the blog post *Configuring high availability with Always On Availability Groups on Amazon RDS Custom for SQL Server*\. You can perform the following tasks:
++ Use a virtual private network \(VPN\) tunnel to encrypt data in transit for your high availability instances\. Encryption in transit isn't configured automatically by RDS Custom\.
++ Configure Always On AGs to monitor your high availability instances\.
 + Allow the observer to perform automatic failover when necessary conditions are met\.
 
 You can also use other encryption technology, such as Secure Sockets Layer \(SSL\), to encrypt data in transit\.
@@ -206,14 +223,72 @@ In the following partial sample output, the pending `AutomationMode` value is `f
     }
 ```
 
-## Working with storage for RDS Custom DB instances<a name="custom-managing.storage"></a>
+## Modifying an RDS Custom for SQL Server DB instance<a name="custom-managing.modify-sqlserver"></a>
 
-Modifying the storage for an RDS Custom DB instance is similar to doing this for Amazon RDS, but the changes that you can make are limited to the following:
+Modifying an RDS Custom for SQL Server DB instance is similar to doing this for Amazon RDS, but the changes that you can make are limited to the following:
++ Changing the DB instance class
++ Changing the backup retention period and backup window
++ Changing the maintenance window
++ Upgrading the DB engine version when a new version becomes available
+
+The following limitations apply to modifying an RDS Custom for SQL Server DB instance:
++ Multi\-AZ deployments aren't supported\.
++ Custom DB option and parameter groups aren't supported\.
++ You can't modify the allocated storage\.
++ Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
+
+  For more information, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+
+### Console<a name="custom-managing.modify-sqlserver.CON"></a>
+
+**To modify an RDS Custom for SQL Server DB instance**
+
+1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
+
+1. In the navigation pane, choose **Databases**\.
+
+1. Choose the DB instance that you want to modify\.
+
+1. Choose **Modify**\.
+
+1. Make the following changes as needed:
+
+   1. For **DB engine version**, choose the new version\.
+
+   1. Change the value for **DB instance class**\. For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
+
+   1. Change the value for **Backup retention period**\.
+
+   1. For **Backup window**, set values for the **Start time** and **Duration**\.
+
+   1. For **DB instance maintenance window**, set values for the **Start day**, **Start time**, and **Duration**\.
+
+1. Choose **Continue**\.
+
+1. Choose **Apply immediately** or **Apply during the next scheduled maintenance window**\.
+
+1. Choose **Modify DB instance**\.
+
+### AWS CLI<a name="custom-managing.modify-sqlserver.CLI"></a>
+
+To modify an RDS Custom for SQL Server DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
++ `--db-instance-class` – For supported classes, see [DB instance class support for RDS Custom](custom-reqs-limits.md#custom-reqs-limits.instances)\.
++ `--engine-version` – The version number of the database engine to which you're upgrading\.
++ `--backup-retention-period` – How long to retain automated backups, from 0–35 days\.
++ `--preferred-backup-window` – The daily time range during which automated backups are created\.
++ `--preferred-maintenance-window` – The weekly time range \(in UTC\) during which system maintenance can occur\.
++ `--apply-immediately` – Use `--apply-immediately` to apply the storage changes immediately\.
+
+  Or use `--no-apply-immediately` \(the default\) to apply the changes during the next maintenance window\.
+
+## Modifying the storage for an RDS Custom for Oracle DB instance<a name="custom-managing.storage-modify"></a>
+
+Modifying the storage for an RDS Custom for Oracle DB instance is similar to doing this for Amazon RDS, but the changes that you can make are limited to the following:
 + Increasing the allocated storage
 + Changing the storage type from io1 to gp2, or gp2 to io1
 + Changing the Provisioned IOPS, if you're using the io1 storage type
 
-The following limitations apply to modifying the storage for an RDS Custom DB instance:
+The following limitations apply to modifying the storage for an RDS Custom for Oracle DB instance:
 + The minimum allocated storage for RDS Custom for Oracle is 40 GiB, and the maximum is 64 TiB\.
 + As with Amazon RDS, you can't decrease the allocated storage\. This is a limitation of Amazon EBS volumes\.
 + Storage autoscaling isn't supported for RDS Custom DB instances\.
@@ -224,13 +299,11 @@ The following limitations apply to modifying the storage for an RDS Custom DB in
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 
-### Modifying the storage for an RDS Custom DB instance<a name="custom-managing.storage-modify"></a>
-
 For general information on storage modification, see [Working with storage for Amazon RDS DB instances](USER_PIOPS.StorageTypes.md)\. The following procedures are specific to RDS Custom\.
 
-#### Console<a name="custom-managing.storage-modify.CON"></a>
+### Console<a name="custom-managing.storage-modify.CON"></a>
 
-**To modify the storage for an RDS Custom DB instance**
+**To modify the storage for an RDS Custom for Oracle DB instance**
 
 1. Sign in to the AWS Management Console and open the Amazon RDS console at [https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\.
 
@@ -244,7 +317,7 @@ For general information on storage modification, see [Working with storage for A
 
    1. Enter a new value for **Allocated storage**\. It must be greater than the current value, and from 40 GiB–64 TiB\.
 
-   1. Change the **Storage type**\. You can use General Purpose \(gp2\) or Provisioned IOPS \(io1\) storage\.
+   1. Change the value for **Storage type**\. You can use General Purpose \(gp2\) or Provisioned IOPS \(io1\) storage\.
 
    1. If using io1 storage, you can change the **Provisioned IOPS** value\.
 
@@ -254,9 +327,9 @@ For general information on storage modification, see [Working with storage for A
 
 1. Choose **Modify DB instance**\.
 
-#### AWS CLI<a name="custom-managing.storage-modify.CLI"></a>
+### AWS CLI<a name="custom-managing.storage-modify.CLI"></a>
 
-To modify the storage for an RDS Custom DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
+To modify the storage for an RDS Custom for Oracle DB instance, use the [modify\-db\-instance](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) AWS CLI command\. Set the following parameters as needed:
 + `--allocated-storage` – Amount of storage to be allocated for the DB instance, in gibibytes\. It must be greater than the current value, and from 40–65,536 GiB\.
 + `--storage-type` – The storage type, gp2 or io1\.
 + `--iops` – Provisioned IOPS for the DB instance, if using the io1 storage type\.
@@ -333,9 +406,9 @@ Make sure to follow these procedures\. If they aren't followed, it can result in
 
 ## Support for Transparent Data Encryption<a name="custom-managing.tde"></a>
 
-RDS Custom supports Transparent Data Encryption \(TDE\) for RDS Custom for Oracle DB instances\.
+RDS Custom supports Transparent Data Encryption \(TDE\) for RDS Custom for Oracle and RDS Custom for SQL Server DB instances\.
 
-However, you can't enable TDE using an option in a custom option group as you can in RDS for Oracle\. You turn on TDE manually\. For information about using Oracle Transparent Data Encryption, see [Securing stored data using Transparent Data Encryption](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asotrans.htm#BABFGJAG) in the Oracle documentation\.
+However, you can't enable TDE using an option in a custom option group as you can in RDS for Oracle or RDS for SQL Server\. You turn on TDE manually\. For information about using Oracle Transparent Data Encryption, see [Securing stored data using Transparent Data Encryption](http://docs.oracle.com/cd/E11882_01/network.112/e40393/asotrans.htm#BABFGJAG) in the Oracle documentation\. For information about Transparent Data Encryption for SQL Server, see [Transparent Data Encryption \(TDE\)](http://msdn.microsoft.com/en-us/library/bb934049.aspx) in the Microsoft documentation\.
 
 ## Tagging RDS Custom resources<a name="custom-managing.tagging"></a>
 
@@ -364,8 +437,6 @@ You can delete an RDS Custom DB instance using the console or the CLI\. The time
 1. In the navigation pane, choose **Databases**, and then choose the RDS Custom DB instance that you want to delete\. RDS Custom DB instances show the role **Instance \(RDS Custom\)**\.
 
 1. For **Actions**, choose **Delete**\.
-
-1. Don't choose **Create final snapshot?**\. Final snapshots aren't supported\.
 
 1. To retain automated backups, choose **Retain automated backups**\.
 

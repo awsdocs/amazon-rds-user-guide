@@ -11,12 +11,20 @@ The following code example shows how to generate an authentication token, and th
 
 To run this code example, you need the [AWS SDK for \.NET](http://aws.amazon.com/sdk-for-net/), found on the AWS site\. The `AWSSDK.CORE` and the `AWSSDK.RDS` packages are required\. To connect to a DB instance, use the \.NET database connector for the DB engine, such as MySqlConnector for MySQL or Npgsql for PostgreSQL\.
 
+This code connects to a MySQL DB instance\.
+
 Modify the values of the following variables as needed:
 + `server` – The endpoint of the DB instance that you want to access
++ `user` – The database account that you want to access
++ `password` – The password for the specified user
++ `database` – The database that you want to access
 + `port` – The port number used for connecting to your DB instance
-+ `user` – The database account that you want to access\.
++ `SslMode` – The SSL mode to use
 
-This code connects to a MySQL DB instance\.
+  When you use `SslMode=Required`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
++ `SslCa` – The full path to the SSL certificate for Amazon RDS
+
+  To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
 
 ```
 using System;
@@ -34,7 +42,7 @@ namespace ubuntu
       var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.USEast1, "mysqldb.123456789012.us-east-1.rds.amazonaws.com", 3306, "jane_doe");
       // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-      MySqlConnection conn = new MySqlConnection($"server=mysqldb.123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password={pwd};SslMode=Required;SslCa=../rds-ca-2019-root.pem");
+      MySqlConnection conn = new MySqlConnection($"server=mysqldb.123456789012.us-east-1.rds.amazonaws.com;user=jane_doe;database=mydB;port=3306;password=password;SslMode=Required;SslCa=full_path_to_ssl_certificate");
       conn.Open();
 
       // Define a query
@@ -57,6 +65,19 @@ namespace ubuntu
 
 This code connects to a PostgreSQL DB instance\.
 
+Modify the values of the following variables as needed:
++ `Server` – The endpoint of the DB instance that you want to access
++ `User ID` – The database account that you want to access
++ `Password` – The password for the specified user
++ `Database` – The database that you want to access
++ `Port` – The port number used for connecting to your DB instance
++ `SSL Mode` – The SSL mode to use
+
+  When you use `SSL Mode=Required`, the SSL connection verifies the DB instance endpoint against the endpoint in the SSL certificate\.
++ `SSL Certificate` – The full path to the SSL certificate for Amazon RDS
+
+  To download a certificate, see [Using SSL/TLS to encrypt a connection to a DB instance](UsingWithRDS.SSL.md)\.
+
 ```
 using System;
 using Npgsql;
@@ -71,7 +92,7 @@ namespace ConsoleApp1
             var pwd = RDSAuthTokenGenerator.GenerateAuthToken("postgresqldb.123456789012.us-east-1.rds.amazonaws.com", 5432, "jane_doe");
 // for debug only Console.Write("{0}\n", pwd);  //this verifies the token is generated
 
-            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresqldb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password={pwd};Database=mydb;SSL Mode=Require;Trust Server Certificate=true;");
+            NpgsqlConnection conn = new NpgsqlConnection($"Server=postgresqldb.123456789012.us-east-1.rds.amazonaws.com;User Id=jane_doe;Password=password;Database=mydb;SSL Mode=Require;SSL Certificate=full_path_to_ssl_certificate");
             conn.Open();
 
             // Define a query

@@ -1,6 +1,6 @@
 # Working with Amazon RDS events<a name="working-with-events"></a>
 
-An *event* indicates a change in an environment\. This can be an AWS environment, an SaaS partner service or application, or one of your own custom applications or services\.
+An *event* indicates a change in an environment\. This can be an AWS environment, an SaaS partner service or application, or a custom application or service\.
 
 **Topics**
 + [Overview of events for Amazon RDS](rds-cloudwatch-events.sample.md)
