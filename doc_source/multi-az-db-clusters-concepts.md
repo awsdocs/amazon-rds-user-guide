@@ -984,7 +984,7 @@ For more information about Amazon CloudWatch metrics, see [Monitoring Amazon RDS
 ## Limitations for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts.Limitations"></a>
 
 The following limitations apply to the Multi\-AZ DB cluster preview:
-+ You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.26 and PostgreSQL version 13\.4\.
++ You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.26 and PostgreSQL version 13\.4 and higher 13 versions\.
 + You can create Multi\-AZ DB clusters only in the following AWS Regions:
   + US East \(N\. Virginia\)
   + US West \(Oregon\)
@@ -996,6 +996,7 @@ The following limitations apply to the Multi\-AZ DB cluster preview:
 + Multi\-AZ DB clusters don't support the following features:
   + Amazon RDS Proxy
   + AWS Backup
+  + AWS CloudFormation
   + Exporting Multi\-AZ DB cluster snapshot data to an Amazon S3 bucket
   + IAM DB authentication
   + Kerberos authentication

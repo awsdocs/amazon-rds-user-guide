@@ -128,6 +128,8 @@ If you are using a custom policy for joining a domain, rather than using the AWS
 
 The following IAM policy, `AmazonRDSDirectoryServiceAccess`, provides access to AWS Directory Service\.
 
+**Example IAM policy for providing access to AWS Directory Service**  
+
 ```
 {
   "Version": "2012-10-17",
@@ -146,7 +148,39 @@ The following IAM policy, `AmazonRDSDirectoryServiceAccess`, provides access to 
 }
 ```
 
-Create an IAM role using this policy\. For more information about creating IAM roles, see [Creating customer managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) in the *IAM User Guide*\.
+We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based trust relationships to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
+
+You might use both global condition context keys and have the `aws:SourceArn` value contain the account ID\. In this case, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same statement\.
++ Use `aws:SourceArn` if you want cross\-service access for a single resource\.
++ Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+In the trust relationship, make sure to use the `aws:SourceArn` global condition context key with the full Amazon Resource Name \(ARN\) of the resources accessing the role\. For Windows Authentication, make sure to include the DB instances, as shown in the following example\.
+
+**Example trust relationship with global condition context key for Windows Authentication**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "rds.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceArn": [
+                        "arn:aws:rds:Region:my_account_ID:db:db_instance_identifier"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+Create an IAM role using this IAM policy and trust relationship\. For more information about creating IAM roles, see [Creating customer managed policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-using.html#create-managed-policy-console) in the *IAM User Guide*\.
 
 ### Step 3: Create and configure users and groups<a name="USER_SQLServerWinAuth.SettingUp.CreateUsers"></a>
 

@@ -1,4 +1,21 @@
-# Setting the binary logging format<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
+# Configuring MySQL binary logging<a name="USER_LogAccess.MySQL.BinaryFormat"></a>
+
+The *binary log* is a set of log files that contain information about data modifications made to an MySQL server instance\. The binary log contains information such as the following:
++ Events that describe database changes such as table creation or row modifications
++ Information about the duration of each statement that updated data
++ Events for statements that could have updated data but didn't
+
+The binary log records statements that are sent during replication\. It is also required for some recovery operations\. For more information, see [The Binary Log](https://dev.mysql.com/doc/refman/8.0/en/binary-log.html) and [Binary Log Overview](https://dev.mysql.com/doc/internals/en/binary-log-overview.html) in the MySQL documentation\.
+
+The automated backups feature determines whether binary logging is turned on or off for MySQL\. You have the following options:
+
+Turn binary logging on  
+Set the backup retention period to a positive nonzero value\.
+
+Turn binary logging off  
+Set the backup retention period to zero\.
+
+For more information, see [Enabling automated backups](USER_WorkingWithAutomatedBackups.md#USER_WorkingWithAutomatedBackups.Enabling)\.
 
 MySQL on Amazon RDS supports the *row\-based*, *statement\-based*, and *mixed* binary logging formats for MySQL version 5\.6 and later\. The default binary logging format is mixed\. For details on the different MySQL binary log formats, see [Binary logging formats](https://dev.mysql.com/doc/refman/8.0/en/binary-log-formats.html) in the MySQL documentation\.
 

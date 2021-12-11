@@ -82,23 +82,31 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
 
    The preceding is an abbreviated guide to setting up a role\. If you want more detailed instructions on creating roles, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide\.*
 
-### AWS CLI<a name="Appendix.SQLServer.Options.S3-integration.preparing.cli"></a>
+### AWS CLI<a name="Appendix.SQLServer.Options.S3-integration.preparing.CLI"></a>
 
-**To grant Amazon RDS access to an Amazon S3 bucket**
+To grant Amazon RDS access to an Amazon S3 bucket, use the following process:
 
 1. Create an IAM policy that grants Amazon RDS access to an S3 bucket\.
 
-   Include the appropriate actions to grant the access your DB instance requires:
-   + `ListAllMyBuckets` – required
-   + `ListBucket` – required
-   + `GetBucketACL` – required
-   + `GetBucketLocation` – required
-   + `GetObject` – required for downloading files from S3 to `D:\S3\`
-   + `PutObject` – required for uploading files from `D:\S3\` to S3
-   + `ListMultipartUploadParts` – required for uploading files from `D:\S3\` to S3
-   + `AbortMultipartUpload` – required for uploading files from `D:\S3\` to S3
+1. Create an IAM role that Amazon RDS can assume on your behalf to access your S3 buckets\.
 
-   The following AWS CLI command creates an IAM policy named `rds-s3-integration-policy` with these options\. It grants access to a bucket named `your-s3-bucket-arn`\.  
+   For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+
+1. Attach the IAM policy that you created to the IAM role that you created\.
+
+**To create the IAM policy**
+
+Include the appropriate actions to grant the access your DB instance requires:
++ `ListAllMyBuckets` – required
++ `ListBucket` – required
++ `GetBucketACL` – required
++ `GetBucketLocation` – required
++ `GetObject` – required for downloading files from S3 to `D:\S3\`
++ `PutObject` – required for uploading files from `D:\S3\` to S3
++ `ListMultipartUploadParts` – required for uploading files from `D:\S3\` to S3
++ `AbortMultipartUpload` – required for uploading files from `D:\S3\` to S3
+
+1. The following AWS CLI command creates an IAM policy named `rds-s3-integration-policy` with these options\. It grants access to a bucket named `bucket_name`\.  
 **Example**  
 
    For Linux, macOS, or Unix:
@@ -180,92 +188,143 @@ Before you begin, find or create the S3 bucket that you want to use\. Also, add 
    ```
    aws iam create-policy ^
         --policy-name rds-s3-integration-policy ^
-        --policy-document file://policy_file_path
+        --policy-document file://file_path/assume_role_policy.json
    ```
 
 1. After the policy is created, note the Amazon Resource Name \(ARN\) of the policy\. You need the ARN for a later step\.
 
-1. Create an IAM role that Amazon RDS can assume on your behalf to access your S3 buckets\.
-
-   The following AWS CLI command creates the `rds-s3-integration-role` for this purpose\.  
+**To create the IAM role**
++ The following AWS CLI command creates the `rds-s3-integration-role` IAM role for this purpose\.  
 **Example**  
 
-   For Linux, macOS, or Unix:
+  For Linux, macOS, or Unix:
 
-   ```
-   aws iam create-role \
-   	   --role-name rds-s3-integration-role \
-   	   --assume-role-policy-document '{
-   	     "Version": "2012-10-17",
-   	     "Statement": [
-   	       {
-   	         "Effect": "Allow",
-   	         "Principal": {
-   	            "Service": "rds.amazonaws.com"
-   	          },
-   	         "Action": "sts:AssumeRole"
-   	       }
-   	     ]
-   	   }'
-   ```
+  ```
+  aws iam create-role \
+  	   --role-name rds-s3-integration-role \
+  	   --assume-role-policy-document '{
+  	     "Version": "2012-10-17",
+  	     "Statement": [
+  	       {
+  	         "Effect": "Allow",
+  	         "Principal": {
+  	            "Service": "rds.amazonaws.com"
+  	          },
+  	         "Action": "sts:AssumeRole"
+  	       }
+  	     ]
+  	   }'
+  ```
 
-   For Windows:
+  For Windows:
 
-   Make sure to change the line endings to the ones supported by your interface \(`^` instead of `\`\)\. Also, in Windows, you must escape all double quotes with a `\`\. To avoid the need to escape the quotes in the JSON, you can save it to a file instead and pass that in as a parameter\. 
+  Make sure to change the line endings to the ones supported by your interface \(`^` instead of `\`\)\. Also, in Windows, you must escape all double quotes with a `\`\. To avoid the need to escape the quotes in the JSON, you can save it to a file instead and pass that in as a parameter\. 
 
-   First, create the `assume_role_policy.json` file with the following policy:
+  First, create the `assume_role_policy.json` file with the following policy:
 
-   ```
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Effect": "Allow",
-               "Principal": {
-                   "Service": [
-                       "rds.amazonaws.com"
-                   ]
-               },
-               "Action": "sts:AssumeRole"
-           }
-       ]
-   }
-   ```
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": [
+                      "rds.amazonaws.com"
+                  ]
+              },
+              "Action": "sts:AssumeRole"
+          }
+      ]
+  }
+  ```
 
-   Then use the following command to create the IAM role:
+  Then use the following command to create the IAM role:
 
-   ```
-   aws iam create-role ^
-        --role-name rds-s3-integration-role ^
-        --assume-role-policy-document file://assume_role_policy_file_path
-   ```
+  ```
+  aws iam create-role ^
+       --role-name rds-s3-integration-role ^
+       --assume-role-policy-document file://file_path/assume_role_policy.json
+  ```  
+**Example of using the global condition context key to create the IAM role**  
 
-   For more information, see [Creating a role to delegate permissions to an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide*\.
+  We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based policies to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
 
-1. After the IAM role is created, note the ARN of the role\. You need the ARN for a later step\.
+  You might use both global condition context keys and have the `aws:SourceArn` value contain the account ID\. In this case, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same policy statement\.
+  + Use `aws:SourceArn` if you want cross\-service access for a single resource\.
+  + Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
 
-1. Attach the IAM policy that you created to the IAM role that you created\.
+  In the policy, make sure to use the `aws:SourceArn` global condition context key with the full Amazon Resource Name \(ARN\) of the resources accessing the role\. For S3 integration, make sure to include the DB instance ARNs, as shown in the following example\.
 
-   The following AWS CLI command attaches the policy to the role named `rds-s3-integration-role`\.  
+  For Linux, macOS, or Unix:
+
+  ```
+  aws iam create-role \
+  	   --role-name rds-s3-integration-role \
+  	   --assume-role-policy-document '{
+  	     "Version": "2012-10-17",
+  	     "Statement": [
+  	       {
+  	         "Effect": "Allow",
+  	         "Principal": {
+  	            "Service": "rds.amazonaws.com"
+  	          },
+  	         "Action": "sts:AssumeRole"
+                  "Condition": {
+                      "StringEquals": {
+                          "aws:SourceArn":"arn:aws:rds:Region:my_account_ID:db:db_instance_identifier"
+                      }
+                  }
+  	       }
+  	     ]
+  	   }'
+  ```
+
+  For Windows:
+
+  Add the global condition context key to `assume_role_policy.json`\.
+
+  ```
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": [
+                      "rds.amazonaws.com"
+                  ]
+              },
+              "Action": "sts:AssumeRole"
+              "Condition": {
+                  "StringEquals": {
+                      "aws:SourceArn":"arn:aws:rds:Region:my_account_ID:db:db_instance_identifier"
+                  }
+              }
+          }
+      ]
+  }
+  ```
+
+**To attach the IAM policy to the IAM role**
++ The following AWS CLI command attaches the policy to the role named `rds-s3-integration-role`\. Replace `your-policy-arn` with the policy ARN that you noted in a previous step\.  
 **Example**  
 
-   For Linux, macOS, or Unix:
+  For Linux, macOS, or Unix:
 
-   ```
-   aws iam attach-role-policy \
-   	   --policy-arn your-policy-arn \
-   	   --role-name rds-s3-integration-role
-   ```
+  ```
+  aws iam attach-role-policy \
+  	   --policy-arn your-policy-arn \
+  	   --role-name rds-s3-integration-role
+  ```
 
-   For Windows:
+  For Windows:
 
-   ```
-   aws iam attach-role-policy ^
-   	   --policy-arn your-policy-arn ^
-   	   --role-name rds-s3-integration-role
-   ```
-
-   Replace `your-policy-arn` with the policy ARN that you noted in a previous step\.
+  ```
+  aws iam attach-role-policy ^
+  	   --policy-arn your-policy-arn ^
+  	   --role-name rds-s3-integration-role
+  ```
 
 ## Enabling RDS for SQL Server integration with S3<a name="Appendix.SQLServer.Options.S3-integration.enabling"></a>
 

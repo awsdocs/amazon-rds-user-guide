@@ -1,8 +1,28 @@
 # Using the Oracle Repository Creation Utility on Amazon RDS for Oracle<a name="Oracle.Resources.RCU"></a>
 
-You can use Amazon RDS to host an Oracle DB instance that holds the schemas to support your Fusion Middleware components\. Before you can use Fusion Middleware components, you must create and populate schemas for them in your database\. You create and populate the schemas by using the Oracle Repository Creation Utility \(RCU\)\. 
+You can use Amazon RDS to host an Oracle DB instance that holds the schemas to support your Oracle Fusion Middleware components\. Before you can use Fusion Middleware components, create and populate schemas for them in your database\. You create and populate the schemas by using the Oracle Repository Creation Utility \(RCU\)\.
 
-You can store the schemas for any Fusion Middleware components in your Amazon RDS DB instance\. The following is a list of schemas that have been verified to install correctly: 
+## Supported versions and licensing options for RCU<a name="Oracle.Resources.RCU.Versions"></a>
+
+Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\. You can use the RCU in the following configurations: 
++ RCU 12c with Oracle database 12\.2\.0\.1
++ RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
+
+Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle fusion middleware licensing information user manual ](https://docs.oracle.com/en/middleware/fusion-middleware/fmwlc/) in the Oracle documentation\. 
+
+Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Editions \(SE, SE One, or SE Two\)\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\. 
+
+Before you create your Oracle DB instance, confirm the Oracle database version that you need to support the components that you want to deploy\. You can use the Certification Matrix to find the requirements for the Fusion Middleware components and versions you want to deploy\. For more information, see [ Oracle fusion middleware supported system configurations](http://www.oracle.com/technetwork/middleware/ias/downloads/fusion-certification-100350.html) in the Oracle documentation\. 
+
+Amazon RDS supports Oracle database version upgrades as needed\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
+
+## Requirements and limitations for RCU<a name="Oracle.Resources.RCU.BeforeYouBegin"></a>
+
+To use RCU, you need an Amazon VPC\. Your Amazon RDS DB instance must be available only to your Fusion Middleware components, and not to the public Internet\. Thus, host your Amazon RDS DB instance in a private subnet, which provides greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating a VPC for use with an Oracle database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
+
+You also need an Oracle DB instance\. For information about how to create an Oracle DB instance for use with Fusion Middleware metadata, see [Creating an Oracle DB instance](Oracle.Resources.Shared.md#Oracle.Resources.Shared.Database.RDS)\. 
+
+You can store the schemas for any Fusion Middleware components in your Amazon RDS DB instance\. The following schemas have been verified to install correctly: 
 + Analytics \(ACTIVITIES\)
 + Audit Services \(IAU\)
 + Audit Services Append \(IAU\_APPEND\)
@@ -18,27 +38,7 @@ You can store the schemas for any Fusion Middleware components in your Amazon RD
 + User Messaging Service \(UCSUMS\)
 + WebLogic Services \(WLS\)
 
-## Licensing and versions<a name="Oracle.Resources.RCU.Versions"></a>
-
-Amazon RDS supports Oracle Repository Creation Utility \(RCU\) version 12c only\. You can use the RCU in the following configurations: 
-+ RCU 12c with Oracle database 12\.2\.0\.1
-+ RCU 12c with Oracle database 12\.1\.0\.2\.v4 or later
-
-Before you can use RCU, you need a license for Oracle Fusion Middleware\. You also need to follow the Oracle licensing guidelines for the Oracle database that hosts the repository\. For more information, see [ Oracle fusion middleware licensing information user manual ](https://docs.oracle.com/en/middleware/fusion-middleware/fmwlc/) in the Oracle documentation\. 
-
-Fusion MiddleWare supports repositories on Oracle Database Enterprise Edition and Standard Editions \(SE, SE One, or SE Two\)\. Oracle recommends Enterprise Edition for production installations that require partitioning and installations that require online index rebuild\. 
-
-Before you create your Oracle DB instance, confirm the Oracle database version that you need to support the components that you want to deploy\. You can use the Certification Matrix to find the requirements for the Fusion Middleware components and versions you want to deploy\. For more information, see [ Oracle fusion middleware supported system configurations](http://www.oracle.com/technetwork/middleware/ias/downloads/fusion-certification-100350.html) in the Oracle documentation\. 
-
-Amazon RDS supports Oracle database version upgrades as needed\. For more information, see [Upgrading a DB instance engine version](USER_UpgradeDBInstance.Upgrading.md)\. 
-
-## Before you begin<a name="Oracle.Resources.RCU.BeforeYouBegin"></a>
-
-Before you begin, you need an Amazon VPC\. Because your Amazon RDS DB instance needs to be available only to your Fusion Middleware components, and not to the public Internet, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. For information about how to create an Amazon VPC for use with an Oracle DB instance, see [Creating a VPC for use with an Oracle database](Oracle.Resources.Shared.md#Oracle.Resources.Shared.VPC)\. 
-
-Before you begin, you also need an Oracle DB instance\. For information about how to create an Oracle DB instance for use with Fusion Middleware metadata, see [Creating an Oracle DB instance](Oracle.Resources.Shared.md#Oracle.Resources.Shared.Database.RDS)\. 
-
-## Recommendations<a name="Oracle.Resources.RCU.Recommendations"></a>
+## Guidelines for using RCU<a name="Oracle.Resources.RCU.Recommendations"></a>
 
 The following are some recommendations for working with your DB instance in this scenario: 
 + We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
@@ -47,9 +47,14 @@ The following are some recommendations for working with your DB instance in this
   Amazon RDS also provides an encryption at rest option for all database editions\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\. 
 + Configure your VPC Security Groups to allow communication between your application servers and your Amazon RDS DB instance\. The application servers that host the Fusion Middleware components can be on Amazon EC2 or on\-premises\. 
 
-## Using the Oracle Repository Creation Utility<a name="Oracle.Resources.RCU.Installing"></a>
+## Running RCU<a name="Oracle.Resources.RCU.Installing"></a>
 
-You use the Oracle Repository Creation Utility \(RCU\) to create and populate the schemas to support your Fusion Middleware components\. 
+To create and populate the schemas to support your Fusion Middleware components, use the Oracle Repository Creation Utility \(RCU\)\. You can run RCU in different ways\.
+
+**Topics**
++ [Running RCU using the command line in one step](#Oracle.Resources.RCU.SilentSingle)
++ [Running RCU using the command line in multiple steps](#Oracle.Resources.RCU.SilentMulti)
++ [Running RCU in interactive mode](#Oracle.Resources.RCU.Interactive)
 
 ### Running RCU using the command line in one step<a name="Oracle.Resources.RCU.SilentSingle"></a>
 
@@ -88,7 +93,7 @@ For more information, see [ Running Repository Creation Utility from the command
 
 ### Running RCU using the command line in multiple steps<a name="Oracle.Resources.RCU.SilentMulti"></a>
 
-If you need to manually edit your schema scripts, you can run the RCU in multiple steps: 
+To manually edit your schema scripts, run RCU in multiple steps: 
 
 1. Run RCU in **Prepare Scripts for System Load** mode by using the `-generateScript` command\-line parameter to create the scripts for your schemas\. 
 
@@ -96,12 +101,12 @@ If you need to manually edit your schema scripts, you can run the RCU in multipl
 
 1. Run RCU again in **Perform Product Load** mode by using the `-dataLoad` command\-line parameter to populate the schemas\. 
 
-1. Run the generated clean\-up script `script_postDataLoad.sql`\.
+1. Run the generated cleanup script `script_postDataLoad.sql`\.
 
-You can run the RCU in silent mode by using the command\-line parameter `-silent`\. When you run RCU in silent mode, you can avoid typing passwords on the command line by creating a text file containing the passwords\. Create a text file with the password for `dbUser` on the first line, and the password for each component on subsequent lines\. You specify the name of the password file as the last parameter to the RCU command\. 
+To run RCU in silent mode, specify the command\-line parameter `-silent`\. When you run RCU in silent mode, you can avoid typing passwords on the command line by creating a text file containing the passwords\. Create a text file with the password for `dbUser` on the first line, and the password for each component on subsequent lines\. Specify the name of the password file as the last parameter to the RCU command\. 
 
 **Example**  
-The following example creates schema scripts for the SOA Infrastructure component \(and its dependencies\)\.   
+The following example creates schema scripts for the SOA Infrastructure component and its dependencies\.   
 For Linux, macOS, or Unix:  
 
 ```
@@ -159,7 +164,7 @@ For more information, see [ Running Repository Creation Utility from the command
 
 ### Running RCU in interactive mode<a name="Oracle.Resources.RCU.Interactive"></a>
 
-To use the RCU graphical user interface, you can run RCU in interactive mode\. To run RCU in interactive mode, include the `-interactive` parameter and omit the `-silent` parameter\. For more information, see [ Understanding Repository Creation Utility screens](https://docs.oracle.com/middleware/1213/core/RCUUG/rcu_screens.htm#RCUUG143) in the Oracle documentation\. 
+To use the RCU graphical user interface, run RCU in interactive mode\. Include the `-interactive` parameter and omit the `-silent` parameter\. For more information, see [ Understanding Repository Creation Utility screens](https://docs.oracle.com/middleware/1213/core/RCUUG/rcu_screens.htm#RCUUG143) in the Oracle documentation\. 
 
 **Example**  
 The following example starts RCU in interactive mode and pre\-populates the connection information\.   
@@ -176,7 +181,7 @@ ${ORACLE_HOME}/oracle_common/bin/rcu \
 -dbRole Normal
 ```
 
-## Known issues<a name="Oracle.Resources.RCU.KnownIssues"></a>
+## Troubleshooting RCU<a name="Oracle.Resources.RCU.KnownIssues"></a>
 
 The following are some known issues for working with RCU, with some troubleshooting suggestions: 
 + Oracle Managed Files \(OMF\) — Amazon RDS uses OMF data files to simplify storage management\. You can customize tablespace attributes, such as size and extent management\. However, specifying a data file name when you run RCU causes tablespace code to fail with `ORA-20900`\. The RCU can be used with OMF in the following ways: 
@@ -184,6 +189,3 @@ The following are some known issues for working with RCU, with some troubleshoot
   + In RCU 12\.1\.0\.3 and later, use multiple steps and edit the generated script\. For more information, see [Running RCU using the command line in multiple steps](#Oracle.Resources.RCU.SilentMulti)\. 
 + SYSDBA — Because Amazon RDS is a managed service, you don't have full SYSDBA access to your Oracle DB instance\. However, RCU 12c supports users with lower privileges\. In most cases, the master user privilege is sufficient to create repositories\. In some cases, the RCU might fail with `ORA-01031` when attempting to grant SYS object privileges\. You can retry and run the RDSADMIN\_UTIL\.GRANT\_SYS\_OBJECT\(\) stored procedure, or contact AWS Support\. 
 + Dropping Enterprise Scheduler Service — When you use the RCU to drop an Enterprise Scheduler Service repository, the RCU might fail with `Error: Component drop check failed`\. 
-
-## Related topics<a name="w470aac33c57c15c19"></a>
-+ [Oracle licensing options](Oracle.Concepts.Licensing.md)

@@ -170,9 +170,11 @@ The schema is composed of the following elements:
 
 Typically, when you create a new option, the AWS Management Console creates the IAM role and the IAM trust policy for you\. However, you can manually create a new IAM role to use with SQL Server Audits, so that you can customize it with any additional requirements you might have\. To do this, you create an IAM role and delegate permissions so that the Amazon RDS service can use your Amazon S3 bucket\. When you create this IAM role, you attach trust and permissions policies\. The trust policy allows Amazon RDS to assume this role\. The permission policy defines the actions that this role can do\. For more information, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *AWS Identity and Access Management User Guide*\. 
 
-You can use the examples in this section to create the trust and permissions policies you need\.
+You can use the examples in this section to create the trust relationships and permissions policies you need\.
 
-The following example shows a trust policy for SQL Server Audit\. The policy uses the *service principal* `rds.amazonaws.com` to allow RDS to write to the S3 bucket\. A *service principal* is an identifier that is used to grant permissions to a service\. Anytime you allow access to `rds.amazonaws.com` in this way, you are allowing RDS to perform an action on your behalf\. For more information about service principals, see [AWS JSON policy elements: Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)\.
+The following example shows a trust relationship for SQL Server Audit\. It uses the *service principal* `rds.amazonaws.com` to allow RDS to write to the S3 bucket\. A *service principal* is an identifier that is used to grant permissions to a service\. Anytime you allow access to `rds.amazonaws.com` in this way, you are allowing RDS to perform an action on your behalf\. For more information about service principals, see [AWS JSON policy elements: Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)\.
+
+**Example trust relationship for SQL Server Audit**  
 
 ```
 {
@@ -189,7 +191,42 @@ The following example shows a trust policy for SQL Server Audit\. The policy use
 	}
 ```
 
-In the following example of a permissions policy for SQL Server Audit, we specify an Amazon Resource Name \(ARN\) for the Amazon S3 bucket\. You can use ARNs to identify a specific account, user, or role that you want grant access to\. For more information about using ARNs, see [ Amazon resource names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\.
+We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based trust relationships to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
+
+You might use both global condition context keys and have the `aws:SourceArn` value contain the account ID\. In this case, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same statement\.
++ Use `aws:SourceArn` if you want cross\-service access for a single resource\.
++ Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+In the trust relationship, make sure to use the `aws:SourceArn` global condition context key with the full Amazon Resource Name \(ARN\) of the resources accessing the role\. For SQL Server Audit, make sure to include both the DB option group and the DB instances, as shown in the following example\.
+
+**Example trust relationship with global condition context key for SQL Server Audit**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "rds.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceArn": [
+                        "arn:aws:rds:Region:my_account_ID:db:db_instance_identifier",
+                        "arn:aws:rds:Region:my_account_ID:og:option_group_name"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+In the following example of a permissions policy for SQL Server Audit, we specify an ARN for the Amazon S3 bucket\. You can use ARNs to identify a specific account, user, or role that you want grant access to\. For more information about using ARNs, see [ Amazon resource names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\.
+
+**Example permissions policy for SQL Server Audit**  
 
 ```
 {

@@ -6,7 +6,8 @@ You can learn how to troubleshoot issues with Amazon RDS Custom DB instances\.
 + [Viewing RDS Custom events](#custom-troubleshooting.support-perimeter.viewing-events)
 + [Subscribing to event notifications](#custom-troubleshooting.support-perimeter.subscribing)
 + [Troubleshooting custom engine version creation for RDS Custom for Oracle](#custom-troubleshooting.cev)
-+ [Responding to an unsupported configuration](#custom-troubleshooting.support-perimeter)
++ [RDS Custom support perimeter and unsupported configurations](#custom-troubleshooting.support-perimeter)
++ [Fixing unsupported configurations](#custom-troubleshooting.fix-unsupported)
 + [How Amazon RDS Custom replaces an impaired host](#custom-troubleshooting.host-problems)
 + [Troubleshooting upgrade issues for RDS Custom for Oracle DB instances](#custom-troubleshooting-upgrade)
 
@@ -52,6 +53,7 @@ CEV creation might fail because of the following issues:
 
   CEV creation fails if RDS Custom can't create the S3 bucket\. Either the caller doesn't have S3 permissions as described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user), or the number of S3 buckets has reached the limit\.
 + The caller doesn't have permissions to get files from your S3 bucket that contains the installation media files\. These permissions are described in [Adding necessary IAM permissions](custom-cev.md#custom-cev.preparing.iam)\.
++ Your IAM policy has an `aws:SourceIp` condition\. Make sure to follow the recommendations in [AWS Denies access to AWS based on the source IP](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html) in the *AWS Identity and Access Management User Guide*\. Also make sure that the caller has the S3 permissions described in [Grant required permissions to your IAM user](custom-setup-orcl.md#custom-setup-orcl.iam-user)\.
 + Installation media files listed in the CEV manifest aren't in your S3 bucket\.
 + The SHA\-256 checksums of the installation files are unknown to RDS Custom\.
 
@@ -69,7 +71,7 @@ Currently, the MediaImport service that imports files from Amazon S3 to create C
 
 However, you might see calls from the API gateway that accesses your Amazon S3 bucket\. These calls come from the MediaImport service for the `CreateCustomDbEngineVersion` event\.
 
-## Responding to an unsupported configuration<a name="custom-troubleshooting.support-perimeter"></a>
+## RDS Custom support perimeter and unsupported configurations<a name="custom-troubleshooting.support-perimeter"></a>
 
 RDS Custom provides monitoring capability called the *support perimeter*\. The support perimeter ensures that your RDS Custom instance uses a supported AWS infrastructure, operating system, and database\.
 
@@ -94,7 +96,7 @@ However, the following RDS Custom automation continues to run:
     PITR has to replay more redo logs starting from the most recent snapshot taken before the instance entered the `unsupported-configuration` state\.
   + In some cases, the DB instance is in the `unsupported-configuration` state because of changes you made that impacted redo log upload functionality\. In these cases, PITR can't restore the DB instance to the latest restorable time\.
 
-### Fixing unsupported configurations<a name="custom-troubleshooting.fix-unsupported"></a>
+## Fixing unsupported configurations<a name="custom-troubleshooting.fix-unsupported"></a>
 
 It's your responsibility to fix configuration issues that put your RDS Custom DB instance into the `unsupported-configuration` state\. If the issue is with the AWS infrastructure, you can use the console or the AWS CLI to fix it\. If the issue is with the operating system or the database configuration, you can log in to the host to fix it\.
 

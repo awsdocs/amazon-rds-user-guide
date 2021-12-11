@@ -255,7 +255,7 @@ Create an inbound rule for the specified SSAS listener port in the VPC security 
 
 ### Enabling S3 integration<a name="SSAS.EnableS3"></a>
 
-To download model configuration files to your host for deployment, use S3 integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
+To download model configuration files to your host for deployment, use S3 integration\. For more information, see [](User.SQLServer.Options.S3-integration.md)\.
 
 ## Deploying SSAS projects on Amazon RDS<a name="SSAS.Deploy"></a>
 
@@ -265,7 +265,7 @@ On RDS, you can't deploy SSAS projects directly by using SQL Server Management S
 Using \.xmla files for deployment isn't supported\.
 
 Before you deploy projects, make sure of the following:
-+ S3 integration is enabled\. For more information, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
++ S3 integration is enabled\. For more information, see [](User.SQLServer.Options.S3-integration.md)\.
 + The `Processing Option` configuration setting is set to `Do Not Process`\. This setting means that no processing happens after deployment\.
 + You have both the `myssasproject.asdatabase` and `myssasproject.deploymentoptions` files\. They're automatically generated when you build the SSAS project\.
 

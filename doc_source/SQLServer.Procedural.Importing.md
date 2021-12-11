@@ -71,7 +71,7 @@ If you want to manually create a new IAM role to use with native backup and rest
 
 For the native backup and restore feature, use trust relationships and permissions policies similar to the examples in this section\. In the following example, we use the service principal name `rds.amazonaws.com` as an alias for all service accounts\. In the other examples, we specify an Amazon Resource Name \(ARN\) to identify another account, user, or role that we're granting access to in the trust policy\.
 
-**Example Trust relationship for native backup and restore**  
+**Example trust relationship for native backup and restore**  
 
 ```
 1. {
@@ -85,9 +85,42 @@ For the native backup and restore feature, use trust relationships and permissio
 9. }
 ```
 
+We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based trust relationships to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
+
+You might use both global condition context keys and have the `aws:SourceArn` value contain the account ID\. In this case, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same statement\.
++ Use `aws:SourceArn` if you want cross\-service access for a single resource\.
++ Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+In the trust relationship, make sure to use the `aws:SourceArn` global condition context key with the full ARN of the resources accessing the role\. For native backup and restore, make sure to include both the DB option group and the DB instances, as shown in the following example\.
+
+**Example trust relationship with global condition context key for native backup and restore**  
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "rds.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceArn": [
+                        "arn:aws:rds:Region:my_account_ID:db:db_instance_identifier",
+                        "arn:aws:rds:Region:my_account_ID:og:option_group_name"
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
 The following example uses an ARN to specify a resource\. For more information on using ARNs, see [ Amazon resource names \(ARNs\)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)\. 
 
-**Example Permissions policy for native backup and restore without encryption support**  
+**Example permissions policy for native backup and restore without encryption support**  
 
 ```
  1. {
@@ -118,7 +151,7 @@ The following example uses an ARN to specify a resource\. For more information o
 26. }
 ```
 
-**Example Permissions policy for native backup and restore with encryption support**  
+**Example permissions policy for native backup and restore with encryption support**  
 If you want to encrypt your backup files, include an encryption key in your permissions policy\. For more information about encryption keys, see [Getting started](https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html) in the *AWS Key Management Service Developer Guide*\.  
 You must use a symmetric KMS key to encrypt your backups\. Amazon RDS doesn't support asymmetric KMS keys\. For more information, see [Using symmetric and asymmetric keys](https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html) in the *AWS Key Management Service Developer Guide*\.  
 The IAM role must also be a key user and key administrator for the KMS key, that is, it must be specified in the key policy\. For more information, see [Creating symmetric KMS keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *AWS Key Management Service Developer Guide*\.

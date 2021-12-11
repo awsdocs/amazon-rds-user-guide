@@ -15,7 +15,7 @@ The permissions required to start replication on an Amazon RDS DB instance are r
 
 To set the binary logging format for a MySQL or MariaDB database, update the `binlog_format` parameter\. If your DB instance uses the default DB instance parameter group, create a new DB parameter group to modify `binlog_format` settings\. We recommend that you use the default setting for `binlog_format`, which is `MIXED`\. However, you can also set `binlog_format` to `ROW` or `STATEMENT` if you need a specific binlog format\. Reboot your DB instance for the change to take effect\.
 
-For information about setting the `binlog_format` parameter, see [Setting the binary logging format](USER_LogAccess.MySQL.BinaryFormat.md)\. For information about the implications of different MySQL replication types, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
+For information about setting the `binlog_format` parameter, see [Configuring MySQL binary logging](USER_LogAccess.MySQL.BinaryFormat.md)\. For information about the implications of different MySQL replication types, see [Advantages and disadvantages of statement\-based and row\-based replication](https://dev.mysql.com/doc/refman/8.0/en/replication-sbr-rbr.html) in the MySQL documentation\.
 
 **Note**  
 Use the procedure in this topic to configure replication in all cases except when the external instance is MariaDB version 10\.0\.24 or higher and the Amazon RDS instance is MariaDB\. In that case, use the procedure at [Configuring GTID\-based replication into a MariaDB DB instance](MariaDB.Procedural.Replication.GTID.md) to set up GTID\-based replication\.

@@ -35,13 +35,13 @@ Copying shared incremental snapshots in the same AWS Region is supported when th
 
 ## Handling encryption<a name="USER_CopySnapshot.Encryption"></a>
 
-You can copy a snapshot that has been encrypted using a KMS key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS key as the original snapshot\. Or you can specify a different KMS key\. If you copy an encrypted snapshot across Regions, you can't use the same KMS key for the copy as used for the source snapshot\. This is because KMS keys are Region\-specific\. Instead, you must specify a KMS key valid in the destination AWS Region\.
+You can copy a snapshot that has been encrypted using a KMS key\. If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted\. If you copy an encrypted snapshot within the same AWS Region, you can encrypt the copy with the same KMS key as the original snapshot\. Or you can specify a different KMS key\.
+
+If you copy an encrypted snapshot across Regions, you must specify a KMS key valid in the destination AWS Region\. It can be a Region\-specific KMS key, or a multi\-Region key\. For more information on multi\-Region KMS keys, see [Using multi\-Region keys in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)\.
 
 The source snapshot remains encrypted throughout the copy process\. For more information, see [Limitations of Amazon RDS encrypted DB instances](Overview.Encryption.md#Overview.Encryption.Limitations)\.
 
-You can also encrypt a copy of an unencrypted snapshot\. This way, you can quickly add encryption to a previously unencrypted DB instance\. 
-
-That is, you can create a snapshot of your DB instance when you are ready to encrypt it\. You then create a copy of that snapshot and specify a KMS key to encrypt that snapshot copy\. You can then restore an encrypted DB instance from the encrypted snapshot\.
+You can also encrypt a copy of an unencrypted snapshot\. This way, you can quickly add encryption to a previously unencrypted DB instance\. To do this, you create a snapshot of your DB instance when you are ready to encrypt it\. You then create a copy of that snapshot and specify a KMS key to encrypt that snapshot copy\. You can then restore an encrypted DB instance from the encrypted snapshot\.
 
 ## Incremental snapshot copying<a name="USER_CopySnapshot.Incremental"></a>
 

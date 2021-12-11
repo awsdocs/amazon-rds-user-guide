@@ -51,8 +51,7 @@ SELECT n.nspname AS "Name",
   FROM pg_catalog.pg_namespace n
   WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
   ORDER BY 1;
-
-   List of schemas
+List of schemas
      Name     |   Owner
 --------------+-----------
  public       | myawsuser
@@ -88,7 +87,6 @@ SELECT n.nspname AS "Name",
   FROM pg_catalog.pg_namespace n
   WHERE n.nspname !~ '^pg_' AND n.nspname <> 'information_schema'
   ORDER BY 1;
-
 
        List of schemas
      Name     |     Owner
@@ -151,9 +149,9 @@ SELECT topology.createtopology('my_new_topo',26986,0.5);
 
 ## Step 6: Update the PostGIS extension<a name="Appendix.PostgreSQL.CommonDBATasks.PostGIS.Update"></a>
 
-PostgreSQL minor versions 13\.4, 12\.8, 11\.13, and 10\.18 now support version 3\.1\.4 of the PostGIS extension\. This support makes it easier to upgrade to later major versions of PostgreSQL\. 
+PostgreSQL minor versions 13\.4, 12\.8, 11\.13, and 10\.18 now support version 3\.1\.4 of the PostGIS extension\. This support makes it easier to upgrade to later major versions of PostgreSQL\.
 
-If you have an older version of PostGIS installed, use the following command to upgrade your extension from the older version to 3\.1\.4\.
+If you have an older version of PostGIS installed, use the following command to upgrade your extension from the older version to 3\.1\.4\. This function is available with PostGIS 2\.5\.0 and higher versions\.
 
 ```
 SELECT PostGIS_Extensions_Upgrade();
@@ -173,39 +171,20 @@ If you want to upgrade to a specific PostGIS VERSION from an older version, you 
 ALTER EXTENSION postgis UPDATE TO "2.5.5"
 ```
 
-You can check what versions are available in your release by using the following command\.
+## PostGIS extension versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
+
+You can list the versions that are available in your release by using the following command\.
 
 ```
 SELECT * from pg_available_extension_versions where name='postgis';
 ```
 
-## PostGIS extension versions<a name="CHAP_PostgreSQL.Extensions.PostGIS"></a>
-
-The following table shows the PostGIS versions that ship with the RDS for PostgreSQL versions\.
-
-
-| PostgreSQL version | PostGIS version | 
-| --- | --- | 
-| 13\.4, 12\.8, 11\.13, 10\.18 | 3\.1\.4 | 
-| 13\.3 | 3\.0\.3 | 
-| 13\.2, 13\.1 | 3\.0\.2 | 
-| 12\.7 | 3\.0\.3 | 
-| 12\.6 | 3\.0\.2 | 
-| 12\.5, 12\.4, 12\.3, 12\.2 | 3\.0\.0 | 
-| 11\.11, 11\.10, 11\.9, 11\.8, 11\.7, 11\.6, 11\.5 | 2\.5\.2 | 
-| 11\.4, 11\.2, 11\.1 | 2\.5\.1 | 
-| 10\.16, 10\.15, 10\.14, 10\.13, 10\.12, 10\.11, 10\.10 | 2\.5\.2 | 
-| 10\.9, 10\.7, 10\.6\. 10\.5, 10\.4 | 2\.4\.4 | 
-| 10\.3, 10\.1 | 2\.4\.2 | 
-| 9\.6\.23 | 2\.5\.5, 2\.3\.7 | 
-| 9\.6\.21, 9\.6\.20, 9\.6\.19, 9\.6\.18, 9\.6\.17, 9\.6\.16, 9\.6\.15 | 2\.5\.2 | 
-| 9\.6\.14, 9\.6\.12, 9\.6\.11, 9\.6\.10, 9\.6\.9 | 2\.3\.7 | 
-| 9\.6\.8, 9\.6\.6 | 2\.3\.4 | 
-| 9\.6\.5, 9\.6\.3, 9\.6\.2 | 2\.3\.2 | 
-| 9\.6\.1 | 2\.3\.0 | 
-| 9\.5\.25, 9\.5\.24, 9\.5\.23, 9\.5\.22, 9\.5\.21, 9\.5\.20, 9\.5\.19 | 2\.5\.2 | 
-| 9\.5\.18, 9\.5\.16, 9\.5\.15, 9\.5\.14, 9\.5\.13, 9\.5\.12, 9\.5\.10, 9\.5\.9, 9\.5\.7, 9\.5\.6 | 2\.2\.5 | 
-| 9\.5\.4, 9\.5\.2 | 2\.2\.2 | 
+You can also obtain information about versions for PostGIS and all other extensions for each release of RDS for PostgreSQL on the following pages:
++ [PostgreSQL version 13 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x)
++  [PostgreSQL version 12 extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.12x) 
++  [PostgreSQL version 11\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x) 
++  [PostgreSQL version 10\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x) 
++  [PostgreSQL version 9\.6\.x extensions supported on Amazon RDS](CHAP_PostgreSQL.md#PostgreSQL.Concepts.General.FeatureSupport.Extensions.96x) 
 
 **Note**  
 PostgreSQL 10\.5 added support for the `libprotobuf` extension version 1\.3\.0 to the PostGIS component\. 

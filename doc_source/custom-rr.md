@@ -4,7 +4,7 @@ You can create read replicas for RDS Custom for Oracle DB instances\. Read repli
 
 Not all options are supported when you create RDS Custom read replicas\. For more information, see the documentation for the [create\-db\-instance\-read\-replica](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance-read-replica.html) AWS CLI command\.
 
-As with RDS for Oracle, you can have up to six managed read replicas\. You can create your own manually configured \(external\) RDS Custom for Oracle read replicas, which don't count toward the limit, but they're outside the support perimeter\. For more information on the support perimeter, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+As with RDS for Oracle, you can have up to six managed read replicas\. You can create your own manually configured \(external\) RDS Custom for Oracle read replicas, which don't count toward the limit, but they're outside the support perimeter\. For more information on the support perimeter, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 
 Read replicas are named after the database unique name, with letters appended sequentially: `DB_UNIQUE_NAME_X`, for example `ORCL_A`\. The first six letters, A–F, are reserved for RDS Custom\. Database parameters are copied from the primary DB instance to the replicas\. For more information, see [DB\_UNIQUE\_NAME](https://docs.oracle.com/database/121/REFRN/GUID-3547C937-5DDA-49FF-A9F9-14FF306545D8.htm#REFRN10242) in the Oracle documentation\.
 
@@ -47,7 +47,7 @@ RDS Custom for Oracle read replicas have the following limitations:
   do-not-delete-rds-custom-db-DB_resource_id-6-digit_UUID-dg
   ```
 
-  Don't change the password, because this might put your read replica outside the support perimeter\. For more information, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+  Don't change the password, because this might put your read replica outside the support perimeter\. For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 + While RDS Custom is creating a read replica, RDS Custom automation temporarily pauses the cleanup of redo logs\. It does this so that these logs can be applied to the new read replica when it's available\.
 + RDS Custom detects instance role changes upon manual failover, such as FSFO, for read replicas managed by RDS Custom, but not for external read replicas\.
 

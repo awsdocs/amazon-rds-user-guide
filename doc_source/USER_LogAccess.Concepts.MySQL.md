@@ -8,5 +8,5 @@ For more information about viewing, downloading, and watching file\-based databa
 + [Overview of MySQL database logs](USER_LogAccess.MySQL.LogFileSize.md)
 + [Publishing MySQL logs to Amazon CloudWatch Logs](USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs.md)
 + [Managing table\-based MySQL logs](Appendix.MySQL.CommonDBATasks.Logs.md)
-+ [Setting the binary logging format](USER_LogAccess.MySQL.BinaryFormat.md)
++ [Configuring MySQL binary logging](USER_LogAccess.MySQL.BinaryFormat.md)
 + [Accessing MySQL binary logs](USER_LogAccess.MySQL.Binarylog.md)

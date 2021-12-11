@@ -6,8 +6,7 @@
 + [Modifying an RDS Proxy](#rds-proxy-modifying-proxy)
 + [Adding a new database user](#rds-proxy-new-db-user)
 + [Changing the password for a database user](#rds-proxy-changing-db-user-password)
-+ [Controlling connection limits and timeouts](#rds-proxy-connection-limits)
-+ [Managing and monitoring connection pooling](#rds-proxy-connection-pooling-tuning)
++ [Configuring connection settings](#rds-proxy-connection-pooling-tuning)
 + [Avoiding pinning](#rds-proxy-pinning)
 + [Deleting an RDS Proxy](#rds-proxy-deleting)
 
@@ -232,36 +231,50 @@ aws rds register-db-proxy-targets --db-proxy-name the-proxy --db-cluster-identif
 
  In some cases, you might change the password for a database user in an RDS DB instance or Aurora cluster that's associated with a proxy\. If so, update the corresponding Secrets Manager secret with the new password\. 
 
-## Controlling connection limits and timeouts<a name="rds-proxy-connection-limits"></a>
+## Configuring connection settings<a name="rds-proxy-connection-pooling-tuning"></a>
 
- RDS Proxy uses the `max_connections` setting for your RDS DB instance or Aurora DB cluster\. This setting represents the overall upper limit on the connections that the proxy can open at any one time\. In Aurora clusters and RDS Multi\-AZ configurations, the `max_connections` value that the proxy uses is the one for the Aurora primary instance or the RDS writer instance\. 
+To adjust RDS Proxy's connection pooling, you can modify the following settings:
++ [IdleClientTimeout](#rds-proxy-connection-pooling-tuning.idleclienttimeout)
++ [MaxConnectionsPercent](#rds-proxy-connection-pooling-tuning.maxconnectionspercent)
++ [MaxIdleConnectionsPercent](#rds-proxy-connection-pooling-tuning.maxidleconnectionspercent)
++ [ConnectionBorrowTimeout](#rds-proxy-connection-pooling-tuning.connectionborrowtimeout)
 
- To set this value for your RDS DB instance or Aurora DB cluster, follow the procedures in [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. These procedures demonstrate how to associate a parameter group with your database and edit the `max_connections` value in the parameter group\. 
+### IdleClientTimeout<a name="rds-proxy-connection-pooling-tuning.idleclienttimeout"></a>
 
- The proxy setting for maximum connections represents a percentage of the `max_connections` value for the database that's associated with the proxy\. If you have multiple applications all using the same database, you can effectively divide their connection quotas by using a proxy for each application with a specific percentage of `max_connections`\. If you do so, ensure that the percentages add up to 100 or less for all proxies associated with the same database\. 
+You can specify how long a client connection can be idle before the proxy can close it\. The default is 1,800 seconds \(30 minutes\)\. 
 
- RDS Proxy periodically disconnects idle connections and returns them to the connection pool\. You can adjust this timeout interval\. Doing so helps your applications to deal with stale resources, especially if the application mistakenly leaves a connection open while holding important database resources\. 
+A client connection is considered *idle* when the application doesn't submit a new request within the specified time after the previous request completed\. The underlying database connection stays open and is returned to the connection pool\. Thus, it's available to be reused for new client connections\. If you want the proxy to proactively remove stale connections, consider lowering the idle client connection timeout\. If your workload establishes frequent connections with the proxy, consider raising the idle client connection timeout to save the cost of establishing connections\.
 
-## Managing and monitoring connection pooling<a name="rds-proxy-connection-pooling-tuning"></a>
+This setting is represented by the **Idle client connection timeout** field in the RDS console and the `IdleClientTimeout` setting in the AWS CLI and the API\. To learn how to change the value of the **Idle client connection timeout** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `IdleClientTimeout` setting, see the CLI command [modify\-db\-proxy](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy.html) or the API operation [ModifyDBProxy](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxy.html)\.
 
- As described in [Connection pooling](rds-proxy.howitworks.md#rds-proxy-connection-pooling), connection pooling is an important RDS Proxy feature\. Following, you can learn how to make efficient use of connection pooling\.
+### MaxConnectionsPercent<a name="rds-proxy-connection-pooling-tuning.maxconnectionspercent"></a>
 
- Because the connection pool is managed by RDS Proxy, you can monitor it and adjust connection limits and timeout intervals without changing your application code\.
+You can limit the number of connections that an RDS Proxy can establish with the database\. You specify the limit as a percentage of the maximum connections available for your database\. The proxy doesn't create all of these connections in advance\. This setting reserves the right for the proxy to establish these connections as the workload needs them\.
 
- For each proxy, you can specify an upper limit on the number of database connections used by the connection pool\. This setting is represented by the **Connection pool maximum connections** field in the RDS Proxy console or the `MaxConnectionsPercent` parameter in the AWS CLI or API\. You specify the limit as a percentage\. This percentage applies to the maximum connections configured in the database\. The exact number varies depending on the DB instance size and configuration settings\.
+For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for your database that supports a maximum of 1,000 concurrent connections\. In that case, RDS Proxy can open up to 750 database connections\.
 
- For example, suppose that you configured RDS Proxy to use 75 percent of the maximum connections for the database\. The maximum value is defined by the `max_connections` configuration parameter\. In this case, the other 25 percent of maximum connections remain available to assign to other proxies or for connections that don't go through a proxy\. In some cases, the proxy might keep less than 75 percent of the maximum connections open at a particular time\. Those cases might include situations where the database doesn't have many simultaneous connections, or some connections stay idle for long periods\. 
+This setting is represented by the **Connection pool maximum connections** field in the RDS console and the `MaxConnectionsPercent` setting in the AWS CLI and the API\. To learn how to change the value of the **Connection pool maximum connections** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `MaxConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
- The overall number of connections available for the connection pool changes as you update the `max_connections` configuration setting that applies to an RDS DB instance or an Aurora cluster\.
+ For information on database connection limits, see [Maximum number of database connections](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.MaxConnections)\. 
 
- The proxy doesn't reserve all of these connections in advance\. Thus, you can specify a relatively large percentage, and those connections are only opened when the proxy becomes busy enough to need them\. 
+### MaxIdleConnectionsPercent<a name="rds-proxy-connection-pooling-tuning.maxidleconnectionspercent"></a>
 
- You can choose how long to wait for a database connection to become available for use by your application\. This setting is represented by the **Connection borrow timeout** field in the RDS Proxy console or the `ConnectionBorrowTimeout` parameter in the AWS CLI or API\. This setting specifies how long to wait for a connection to become available in the connection pool before returning a timeout error\. It applies when the number of connections is at the maximum, and so no connections are available in the connection pool\. It also applies if no appropriate database instance is available to handle the request because, for example, a failover operation is in process\. Using this setting, you can set the best wait period for your application without having to change the query timeout in your application code\.
+You can control the number of idle database connections that RDS Proxy can keep in the connection pool\. RDS Proxy considers a database connection in it's pool to be *idle* when there's been no activity on the connection for five minutes\. 
 
-You can control how actively the proxy closes idle database connections in the connection pool\. This setting is represented by the `MaxIdleConnectionsPercent` parameter of the `DBProxyTargetGroup` in the AWS CLI or API\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. It's expressed as a percentage of the `max_connections` setting for the RDS DB instance or Aurora DB cluster used by the target group\. The default value is 50 percent\. To change the value of `MaxIdleConnectionsPercent`, use the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
+You specify the limit as a percentage of the maximum connections available for your database\. The default value is 50 percent and the upper limit is the value of `MaxConnectionsPercent`\. With a high value, the proxy leaves a high percentage of idle database connections open\. With a low value, the proxy closes a high percentage of idle database connections\. If your workloads are unpredictable, consider setting a high value for `MaxIdleConnectionsPercent` so that RDS Proxy can accommodate surges in activity without opening a lot of new database connections\. 
+
+This setting is represented by the `MaxIdleConnectionsPercent` setting of `DBProxyTargetGroup` in the AWS CLI and the API\. To learn how to change the value of the `MaxIdleConnectionsPercent` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
 **Note**  
 RDS Proxy closes database connections some time after 24 hours when they are no longer in use\. The proxy performs this action regardless of the value of the maximum idle connections setting\.
+
+ For information on database connection limits, see [Maximum number of database connections](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.MaxConnections)\. 
+
+### ConnectionBorrowTimeout<a name="rds-proxy-connection-pooling-tuning.connectionborrowtimeout"></a>
+
+You can choose how long RDS Proxy waits for a database connection in the connection pool to become available for use before returning a timeout error\. The default is 120 seconds\. This setting applies when the number of connections is at the maximum, and so no connections are available in the connection pool\. It also applies if no appropriate database instance is available to handle the request because, for example, a failover operation is in process\. Using this setting, you can set the best wait period for your application without having to change the query timeout in your application code\.
+
+This setting is represented by the **Connection borrow timeout** field in the RDS console or the `ConnectionBorrowTimeout` setting of `DBProxyTargetGroup` in the AWS CLI or API\. To learn how to change the value of the **Connection borrow timeout** field in the RDS console, see [AWS Management Console](#rds-proxy-modifying-proxy.console)\. To learn how to change the value of the `ConnectionBorrowTimeout` setting, see the CLI command [modify\-db\-proxy\-target\-group](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-proxy-target-group.html) or the API operation [ModifyDBProxyTargetGroup](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBProxyTargetGroup.html)\.
 
 ## Avoiding pinning<a name="rds-proxy-pinning"></a>
 

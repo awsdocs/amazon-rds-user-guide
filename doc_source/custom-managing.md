@@ -237,7 +237,7 @@ The following limitations apply to modifying an RDS Custom for SQL Server DB ins
 + You can't modify the allocated storage\.
 + Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
 
-  For more information, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+  For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 
 ### Console<a name="custom-managing.modify-sqlserver.CON"></a>
 
@@ -294,7 +294,7 @@ The following limitations apply to modifying the storage for an RDS Custom for O
 + Storage autoscaling isn't supported for RDS Custom DB instances\.
 + Any storage volumes that you attach manually to your RDS Custom DB instance are outside the support perimeter\.
 
-  For more information, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+  For more information, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
 + Magnetic \(standard\) storage isn't supported for RDS Custom\.
 
 For more information about storage, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.

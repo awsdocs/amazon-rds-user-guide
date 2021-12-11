@@ -14,3 +14,4 @@ The following topics describe using Amazon RDS Performance Insights with non\-Au
 + [Maximum CPU](USER_PerfInsights.Overview.MaxCPU.md)
 + [Amazon RDS DB engine support for Performance Insights](USER_PerfInsights.Overview.Engines.md)
 + [AWS Region support for Performance Insights](USER_PerfInsights.Overview.Regions.md)
++ [Cost of Performance Insights](USER_PerfInsights.Overview.cost.md)

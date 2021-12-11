@@ -171,7 +171,7 @@ In RDS Custom for SQL Server, PITR differs in the following important ways from 
   + It's writable\.
   + It has its physical files on the D: drive\.
   + It's not listed in the `rds_pitr_blocked_databases` table\. For more information, see [Making databases ineligible for PITR](#custom-backup.pitr.sqlserver.ineligible)\.
-+ The maximum number of databases restored by a PITR operation for an RDS Custom for SQL Server DB instance is 100\. The 100 databases are determined by the order of their database ID\.
++ RDS Custom for SQL Server allows up to 5,000 databases per DB instance\. However, the maximum number of databases restored by a PITR operation for an RDS Custom for SQL Server DB instance is 100\. The 100 databases are determined by the order of their database ID\.
 
   Other databases that aren't part of PITR can be restored from DB snapshots, including the automated backups used for PITR\.
 + Adding a new database, renaming a database, or restoring a database that is eligible for PITR initiates a snapshot of the DB instance\.

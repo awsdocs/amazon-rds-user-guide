@@ -4,11 +4,16 @@ You can use Amazon RDS to host an Oracle DB instance that supports software and 
 + Siebel Customer Relationship Management \(CRM\)
 + Oracle Fusion Middleware Metadata — installed by the Repository Creation Utility \(RCU\)
 
-The following procedures help you create an Oracle DB instance on Amazon RDS that you can use to host additional software and components for Oracle\. 
+The following procedures help you create an Oracle DB instance on Amazon RDS that you can use to host additional software and components for Oracle\.
+
+**Topics**
++ [Creating a VPC for use with an Oracle database](#Oracle.Resources.Shared.VPC)
++ [Creating an Oracle DB instance](#Oracle.Resources.Shared.Database.RDS)
++ [Additional Amazon RDS interfaces](#Oracle.Resources.Shared.CLIAPI)
 
 ## Creating a VPC for use with an Oracle database<a name="Oracle.Resources.Shared.VPC"></a>
 
-In the following procedure, you create a virtual private cloud \(VPC\) based on the Amazon VPC service, a private subnet, and a security group\. Your Amazon RDS DB instance needs to be available only to your middle\-tier components, and not to the public internet\. Thus, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\. 
+In the following procedure, you create a virtual private cloud \(VPC\) based on the Amazon VPC service, a private subnet, and a security group\. Your Amazon RDS DB instance needs to be available only to your middle\-tier components, and not to the public internet\. Thus, your Amazon RDS DB instance is hosted in a private subnet, providing greater security\.
 
 **To create a VPC based on Amazon VPC**
 
@@ -113,6 +118,6 @@ For information about creating a DB instance, see [Creating an Amazon RDS DB ins
 
 ## Additional Amazon RDS interfaces<a name="Oracle.Resources.Shared.CLIAPI"></a>
 
-In the preceding procedures, we use the AWS Management Console to perform tasks\. Amazon Web Services also provides the AWS Command Line Interface \(AWS CLI\), and an application programming interface \(API\)\. You can use the AWS CLI or the API to automate many of the tasks for managing Amazon RDS, including tasks to manage an Oracle DB instance with Amazon RDS\. 
+In the preceding tasks, you use the AWS Management Console to perform tasks\. Amazon Web Services also provides the AWS Command Line Interface \(AWS CLI\), and an application programming interface \(API\)\. You can use the AWS CLI or the API to automate many of the tasks for managing Amazon RDS, including tasks to manage an Oracle DB instance with Amazon RDS\. 
 
 For more information, see [AWS Command Line Interface reference for Amazon RDS](https://docs.aws.amazon.com/cli/latest/reference/rds/index.html) and [Amazon RDS API Reference](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/)\. 

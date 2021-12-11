@@ -66,4 +66,4 @@ You can name the new instance the same name as the previous DB instance\.
 
 ## Using TDE with Oracle Data Pump<a name="Appendix.Oracle.Options.AdvSecurity.Pump"></a>
 
-You can use Oracle Data Pump to import or export encrypted dump files\. Amazon RDS supports the password encryption mode \(ENCRYPTION\_MODE=PASSWORD\) for Oracle Data Pump\. Amazon RDS does not support transparent encryption mode \(ENCRYPTION\_MODE=TRANSPARENT\) for Oracle Data Pump\. For more information about using Oracle Data Pump with Amazon RDS, see [Importing using Oracle Data Pump](Oracle.Procedural.Importing.md#Oracle.Procedural.Importing.DataPump)\. 
+You can use Oracle Data Pump to import or export encrypted dump files\. Amazon RDS supports the password encryption mode \(ENCRYPTION\_MODE=PASSWORD\) for Oracle Data Pump\. Amazon RDS does not support transparent encryption mode \(ENCRYPTION\_MODE=TRANSPARENT\) for Oracle Data Pump\. For more information about using Oracle Data Pump with Amazon RDS, see [Importing using Oracle Data Pump](Oracle.Procedural.Importing.DataPump.md)\. 

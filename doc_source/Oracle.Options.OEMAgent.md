@@ -254,12 +254,12 @@ To view the result by displaying the task's output file, see [Viewing the status
 
 ### Restarting the Management Agent<a name="Oracle.Options.OEMAgent.DBTasks.RestartAgent"></a>
 
-To restart the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.get_status_oem_agent`\. This procedure is equivalent to running the `emctl stop agent` and `emctl start agent` commands\.
+To restart the Management Agent, run the Amazon RDS procedure `rdsadmin.rdsadmin_oem_agent_tasks.restart_oem_agent`\. This procedure is equivalent to running the `emctl stop agent` and `emctl start agent` commands\.
 
 The following procedure creates a task to restart the Management Agent and returns the ID of the task\.
 
 ```
-SELECT rdsadmin.rdsadmin_oem_agent_tasks.restart_oem_agent() as TASK_ID from DUAL;    
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.restart_oem_agent as TASK_ID from DUAL;    
 ```
 
 To view the result by displaying the task's output file, see [Viewing the status of an ongoing task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.
@@ -271,7 +271,7 @@ To list the targets monitored by the Management Agent, run the Amazon RDS proced
 The following procedure creates a task to list the targets monitored by the Management Agent and returns the ID of the task\.
 
 ```
-SELECT rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent() as TASK_ID from DUAL;
+SELECT rdsadmin.rdsadmin_oem_agent_tasks.list_targets_oem_agent as TASK_ID from DUAL;
 ```
 
 To view the result by displaying the task's output file, see [Viewing the status of an ongoing task](#Oracle.Options.OEMAgent.DBTasks.ViewTaskStatus)\.

@@ -32,5 +32,5 @@ To deliver a managed service experience, Amazon RDS doesn't provide shell access
 + [Adding options to Oracle DB instances](Appendix.Oracle.Options.md)
 + [Upgrading the Oracle DB engine](USER_UpgradeDBInstance.Oracle.md)
 + [Upgrading an Oracle DB snapshot](USER_UpgradeDBSnapshot.Oracle.md)
-+ [Using your Oracle DB instance with third\-party software](Oracle.Resources.md)
++ [Using third\-party software with your RDS for Oracle DB instance](Oracle.Resources.md)
 + [Oracle database engine release notes](Appendix.Oracle.PatchComposition.md)

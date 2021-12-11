@@ -139,4 +139,4 @@ The only customer\-visible change when a host is replaced is a new public IP add
 
 ### Support perimeter<a name="custom-concept.workflow.automation.support-perimeter"></a>
 
-RDS Custom provides additional monitoring capability called the *support perimeter*\. This additional monitoring ensures that your RDS Custom instance uses a supported AWS infrastructure, operating system, and database\. For more information about the support perimeter, see [Responding to an unsupported configuration](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.
+RDS Custom provides additional monitoring capability called the *support perimeter*\. This additional monitoring ensures that your RDS Custom instance uses a supported AWS infrastructure, operating system, and database\. For more information about the support perimeter, see [RDS Custom support perimeter and unsupported configurations](custom-troubleshooting.md#custom-troubleshooting.support-perimeter)\.

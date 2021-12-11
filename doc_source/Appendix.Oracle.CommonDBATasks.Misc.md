@@ -66,9 +66,10 @@ To list the files in a directory, use the Amazon RDS procedure `rdsadmin.rds_fil
 | --- | --- | --- | --- | --- | 
 |  `p_directory`  |  varchar2  |  —  |  Yes  |  The name of the directory to list\.  | 
 
-The following example lists the files in the directory named `PRODUCT_DESCRIPTIONS`\. 
+The following example grants read/write privileges on the directory `PRODUCT_DESCRIPTIONS` to user `rdsadmin`, and then lists the files in this directory\. 
 
 ```
+GRANT READ,WRITE ON DIRECTORY PRODUCT_DESCRIPTIONS TO rdsadmin;
 SELECT * FROM TABLE(rdsadmin.rds_file_util.listdir(p_directory => 'PRODUCT_DESCRIPTIONS'));
 ```
 

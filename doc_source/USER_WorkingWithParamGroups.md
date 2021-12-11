@@ -24,7 +24,7 @@ Here are some important points about working with parameters in a DB parameter g
 
   If a DB instance isn't using the latest changes to its associated DB parameter group, the AWS Management Console shows the DB parameter group with a status of **pending\-reboot**\. The **pending\-reboot** parameter groups status doesn't result in an automatic reboot during the next maintenance window\. To apply the latest parameter changes to that DB instance, manually reboot the DB instance\.
 + When you associate a new DB parameter group with a DB instance, the modified static and dynamic parameters are applied only after the DB instance is rebooted\. However, if you modify dynamic parameters in the newly associated DB parameter group, these changes are applied immediately without a reboot\. For more information about changing the DB parameter group, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
-+ You can specify the value for a DB parameter as an integer or as an integer expression built from formulas, variables, functions, and operators\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
++ You can specify integer and Boolean parameters using expressions, formulas, and functions\. Functions can include a mathematical log expression\. For more information, see [Specifying DB parameters](#USER_ParamValuesRef)\.
 + Set any parameters that relate to the character set or collation of your database in your parameter group before creating the DB instance and before you create a database in your DB instance\. This ensures that the default database and new databases in your DB instance use the character set and collation values that you specify\. If you change character set or collation parameters for your DB instance, the parameter changes are not applied to existing databases\.
 
   For some DB engines, you can change character set or collation values for an existing database using the `ALTER DATABASE` command, for example:
@@ -523,7 +523,7 @@ DB parameter types include the following:
 + Object of other defined data types
 + Array of values of type integer, Boolean, string, long, double, timestamp, or object
 
-You can also specify integer and Boolean DB parameters using expressions, formulas, and functions\. 
+You can also specify integer and Boolean parameters using expressions, formulas, and functions\. 
 
 For the Oracle engine, you can use the `DBInstanceClassHugePagesDefault` formula variable to specify a Boolean DB parameter\. See [DB parameter formula variables](#USER_FormulaVariables)\. 
 
