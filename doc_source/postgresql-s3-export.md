@@ -171,7 +171,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
             "Principal": {
                "Service": "rds.amazonaws.com"
              },
-            "Action": "sts:AssumeRole"
+            "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
                    "aws:SourceAccount": 111122223333,
@@ -196,7 +196,7 @@ We strongly recommend that you do not create a policy with all\-resource access\
             "Principal": {
                "Service": "rds.amazonaws.com"
              },
-            "Action": "sts:AssumeRole"
+            "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
                    "aws:SourceAccount": 111122223333,
