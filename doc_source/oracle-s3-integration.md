@@ -6,12 +6,12 @@ You can transfer files between an Amazon RDS for Oracle DB instance and an Amazo
 The DB instance and the Amazon S3 bucket must be in the same AWS Region\.
 
 **Topics**
-+ [Prerequisites for Amazon RDS for Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
++ [Configuring IAM permissions for Amazon RDS for Oracle integration with Amazon S3](#oracle-s3-integration.preparing)
 + [Adding the Amazon S3 integration option](#oracle-s3-integration.preparing.option-group)
 + [Transferring files between Amazon RDS for Oracle and an Amazon S3 bucket](#oracle-s3-integration.using)
 + [Removing the Amazon S3 integration option](#oracle-s3-integration.removing)
 
-## Prerequisites for Amazon RDS for Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
+## Configuring IAM permissions for Amazon RDS for Oracle integration with Amazon S3<a name="oracle-s3-integration.preparing"></a>
 
 For Amazon RDS for Oracle to integrate with Amazon S3, the Amazon RDS DB instance must have access to an Amazon S3 bucket\. Prepare for the integration as follows:
 
@@ -21,7 +21,11 @@ For Amazon RDS for Oracle to integrate with Amazon S3, the Amazon RDS DB instanc
 **Note**  
 An Oracle DB instance can't access Amazon S3 buckets encrypted with SSE\-C\.
 
-1. Create an IAM role, attach your new policy to it, and then attach the role to your Oracle DB instance\. The status of the DB instance must be `available`\.
+1. Create an IAM role, and then attach your new policy to it\.
+
+1. Attach the role to your Oracle DB instance\. 
+
+   The status of the DB instance must be `available`\.
 
 The Amazon VPC used by your DB instance doesn't need to provide access to the Amazon S3 endpoints\.
 
@@ -237,7 +241,15 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
 
 1. Create an IAM role that Amazon RDS can assume on your behalf to access your Amazon S3 buckets\.
 
-   The following AWS CLI command creates the `rds-s3-integration-role` for this purpose\.  
+   We recommend using the [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) and [https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount) global condition context keys in resource\-based trust relationships to limit the service's permissions to a specific resource\. This is the most effective way to protect against the [confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
+
+   You might use both global condition context keys and have the `aws:SourceArn` value contain the account ID\. In this case, the `aws:SourceAccount` value and the account in the `aws:SourceArn` value must use the same account ID when used in the same statement\.
+   + Use `aws:SourceArn` if you want cross\-service access for a single resource\.
+   + Use `aws:SourceAccount` if you want to allow any resource in that account to be associated with the cross\-service use\.
+
+   In the trust relationship, make sure to use the `aws:SourceArn` global condition context key with the full Amazon Resource Name \(ARN\) of the resources accessing the role\.
+
+   The following AWS CLI command creates the role named `rds-s3-integration-role` for this purpose\.  
 **Example**  
 
    For Linux, macOS, or Unix:
@@ -253,8 +265,13 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
             "Principal": {
                "Service": "rds.amazonaws.com"
              },
-            "Action": "sts:AssumeRole"
-          }
+            "Action": "sts:AssumeRole",
+               "Condition": {
+                   "StringEquals": {
+                       "aws:SourceAccount": my_account_ID,
+                       "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname
+                   }
+               }
         ]
       }'
    ```
@@ -272,8 +289,13 @@ You can set **Amazon Resource Name \(ARN\)** to a more specific ARN value to all
             "Principal": {
                "Service": "rds.amazonaws.com"
              },
-            "Action": "sts:AssumeRole"
-          }
+            "Action": "sts:AssumeRole",
+               "Condition": {
+                   "StringEquals": {
+                       "aws:SourceAccount": my_account_ID,
+                       "aws:SourceArn": "arn:aws:rds:Region:my_account_ID:db:dbname
+                   }
+               }
         ]
       }'
    ```

@@ -1,4 +1,4 @@
-# Monitoring Amazon RDS for Oracle using Database Activity Streams<a name="DBActivityStreams"></a>
+# Monitoring Amazon RDS for Oracle using Database Activity Streams<a name="DBActivityStreams"></a><a name="das"></a>
 
 The Database Activity Streams feature provides a near\-real\-time stream of database activity\.
 

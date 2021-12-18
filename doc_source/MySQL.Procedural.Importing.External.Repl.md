@@ -150,6 +150,8 @@ On RDS for MySQL, you can choose to use delayed replication by running the [mysq
    CALL mysql.rds_start_replication;
    ```
 
+   If replication fails, it can result in a large increase in unintentional I/O on the replica, which can degrade performance\. If replication fails or is no longer needed, you can run the [mysql\.rds\_reset\_external\_master](mysql_rds_reset_external_master.md) stored procedure to remove the replication configuration\.
+
 ## Configuring GTID\-based replication with an external source instance<a name="MySQL.Procedural.Importing.External.Repl.GTIDProcedure"></a>
 
 When you set up an external source instance and a replica on Amazon RDS, monitor failover events for the Amazon RDS DB instance that is your replica\. If a failover occurs, then the DB instance that is your replica might be recreated on a new host with a different network address\. For information on how to monitor failover events, see [Using Amazon RDS event notification](USER_Events.md)\.

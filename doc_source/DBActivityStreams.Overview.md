@@ -106,6 +106,7 @@ RDS for Oracle has the following requirements for database activity streams:
 ### AWS Region support<a name="DBActivityStreams.Overview.requirements.Regions"></a>
 
 Database activity streams are supported in all AWS Regions except the following:
++ Asia Pacific \(Jakarta\) Region, `ap-southeast-3`
 + China \(Beijing\) Region, `cn-north-1`
 + China \(Ningxia\) Region, `cn-northwest-1`
 + AWS GovCloud \(US\-East\), `us-gov-east-1`

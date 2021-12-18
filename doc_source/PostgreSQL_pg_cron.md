@@ -16,15 +16,15 @@ Enable the `pg_cron` extension as follows:
 
 1. Modify the parameter group associated with your PostgreSQL DB instance and add `pg_cron` to the `shared_preload_libraries` parameter value\. This change requires a PostgreSQL DB instance restart to take effect\. For more information, see [Modifying parameters in a DB parameter group](USER_WorkingWithParamGroups.md#USER_WorkingWithParamGroups.Modifying)\. 
 
-1. After the PostgreSQL DB instance has restarted, run the following command using an account that has the `rds_superuser` permissions\.
+1. After the PostgreSQL DB instance has restarted, run the following command using an account that has the `rds_superuser` permissions\. For example, if you used the default settings when you created your RDS for PostgreSQL DB instance, connect as user `postgres` and create the extension\. 
 
    ```
    CREATE EXTENSION pg_cron;
    ```
 
-1. Either use the default settings, or schedule jobs to run in other databases within your PostgreSQL DB instance\. The `pg_cron` scheduler is set in the default PostgreSQL database named `postgres`\. The `pg_cron` objects are created in this `postgres` database and all scheduling actions run in this database\. 
+   The `pg_cron` scheduler is set in the default PostgreSQL database named `postgres`\. The `pg_cron` objects are created in this `postgres` database and all scheduling actions run in this database\.
 
-   To schedule jobs to run in other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)\.
+1. You can use the default settings, or you can schedule jobs to run in other databases within your PostgreSQL DB instance\. To schedule jobs for other databases within your PostgreSQL DB instance, see the example in [Scheduling a cron job for a database other than `postgres`](#PostgreSQL_pg_cron.otherDB)\.
 
 ## Granting permissions to pg\_cron<a name="PostgreSQL_pg_cron.permissions"></a>
 

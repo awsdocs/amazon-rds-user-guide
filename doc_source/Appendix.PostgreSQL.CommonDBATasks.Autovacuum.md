@@ -30,15 +30,15 @@ In general terms, for large hosts set the [https://www.postgresql.org/docs/curre
 
 ## Reducing the likelihood of transaction ID wraparound<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.AdaptiveAutoVacuuming"></a>
 
-In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, Amazon RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
+In some cases, parameter group settings related to autovacuum might not be aggressive enough to prevent transaction ID wraparound\. To address this, RDS for PostgreSQL provides a mechanism that adapts the autovacuum parameter values automatically\. *Adaptive autovacuum parameter tuning* is a feature for RDS for PostgreSQL\. A detailed explanation of [TransactionID wraparound](https://www.postgresql.org/docs/current/static/routine-vacuuming.html#VACUUM-FOR-WRAPAROUND) is found in the PostgreSQL documentation\. 
 
 Adaptive autovacuum parameter tuning is enabled by default for RDS for PostgreSQL instances with the dynamic parameter `rds.adaptive_autovacuum` set to ON\. We strongly recommend that you keep this enabled\. However, to turn off adaptive autovacuum parameter tuning, set the `rds.adaptive_autovacuum` parameter to 0 or OFF\. 
 
-Transaction ID wraparound is still possible even when RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an early warning system for transaction ID wraparound in Amazon RDS for PostgreSQL](http://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
+Transaction ID wraparound is still possible even when Amazon RDS tunes the autovacuum parameters\. We encourage you to implement an Amazon CloudWatch alarm for transaction ID wraparound\. For more information, see the blog post [Implement an early warning system for transaction ID wraparound in RDS for PostgreSQL](http://aws.amazon.com/blogs/database/implement-an-early-warning-system-for-transaction-id-wraparound-in-amazon-rds-for-postgresql/)\.
 
-With adaptive autovacuum parameter tuning enabled, RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
+With adaptive autovacuum parameter tuning enabled, Amazon RDS will begin adjusting autovacuum parameters when the CloudWatch metric `MaximumUsedTransactionIDs` reaches the value of the `autovacuum_freeze_max_age` parameter or 500,000,000, whichever is greater\. 
 
-RDS continues to adjust parameters for autovacuum if a table continues to trend toward transaction ID wraparound\. Each of these adjustments dedicates more resources to autovacuum to avoid wraparound\. RDS updates the following autovacuum\-related parameters: 
+RDS continues to adjust parameters for autovacuum if a table continues to trend toward transaction ID wraparound\. Each of these adjustments dedicates more resources to autovacuum to avoid wraparound\. Amazon RDS updates the following autovacuum\-related parameters: 
 + [autovacuum\_vacuum\_cost\_delay](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-DELAY)
 + [ autovacuum\_vacuum\_cost\_limit](https://www.postgresql.org/docs/current/static/runtime-config-autovacuum.html#GUC-AUTOVACUUM-VACUUM-COST-LIMIT)
 +  [autovacuum\_work\_mem](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-AUTOVACUUM-WORK-MEM) 
@@ -46,7 +46,7 @@ RDS continues to adjust parameters for autovacuum if a table continues to trend 
 
 RDS modifies these parameters only if the new value makes autovacuum more aggressive\. The parameters are modified in memory on the DB instance\. The values in the parameter group aren't changed\. To view the current in\-memory settings, use the PostgreSQL [SHOW](https://www.postgresql.org/docs/current/sql-show.html) SQL command\. 
 
-Whenever RDS modifies any of these autovacuum parameters, it generates an event for the affected DB instance that is visible on the AWS Management Console \([https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\) and through the RDS API\. After the `MaximumUsedTransactionIDs` CloudWatch metric returns below the threshold, RDS resets the autovacuum related parameters in memory back to the values specified in the parameter group and generates another event corresponding to this change\.
+Whenever Amazon RDS modifies any of these autovacuum parameters, it generates an event for the affected DB instance that is visible on the AWS Management Console \([https://console\.aws\.amazon\.com/rds/](https://console.aws.amazon.com/rds/)\) and through the Amazon RDS API\. After the `MaximumUsedTransactionIDs` CloudWatch metric returns below the threshold, Amazon RDS resets the autovacuum related parameters in memory back to the values specified in the parameter group and generates another event corresponding to this change\.
 
 ## Determining if the tables in your database need vacuuming<a name="Appendix.PostgreSQL.CommonDBATasks.Autovacuum.NeedVacuuming"></a>
 
@@ -167,7 +167,7 @@ After running the query, you should see output similar to the following\.
          |          |       |        |            |                         | ORDER BY xact_start;                                                                                  +
 ```
 
-If you are using an Amazon RDS for PostgreSQL version less than 9\.6, use the following query\.
+If you are using an RDS for PostgreSQL version less than 9\.6, use the following query\.
 
 ```
 SELECT datname, usename, pid, waiting, current_timestamp - xact_start AS xact_runtime, query

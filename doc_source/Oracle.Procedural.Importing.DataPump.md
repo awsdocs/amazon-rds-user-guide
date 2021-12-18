@@ -77,7 +77,7 @@ The process has the following requirements:
 + The object that you upload into the Amazon S3 bucket must be 5 TB or less\. For more information about working with objects in Amazon S3, see [Amazon Simple Storage Service User Guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html)\.
 **Note**  
 If you dump file exceeds 5 TB, you can run the Oracle Data Pump export with the parallel option\. This operation spreads the data into multiple dump files so that you do not exceed the 5 TB limit for individual files\.
-+ You must prepare the Amazon S3 bucket for Amazon RDS integration by following the instructions in [Prerequisites for Amazon RDS for Oracle integration with Amazon S3](oracle-s3-integration.md#oracle-s3-integration.preparing)\.
++ You must prepare the Amazon S3 bucket for Amazon RDS integration by following the instructions in [Configuring IAM permissions for Amazon RDS for Oracle integration with Amazon S3](oracle-s3-integration.md#oracle-s3-integration.preparing)\.
 + You must ensure that you have enough storage space to store the dump file on the source instance and the target DB instance\.
 
 **Note**  

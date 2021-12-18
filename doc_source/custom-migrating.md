@@ -27,7 +27,7 @@ Perform the following tasks before migrating the database:
 
 1. Configure Remote Desktop Connection \(RDP\) for your RDS Custom for SQL Server DB instance\. For more information, see [Connecting to your RDS Custom DB instance using RDP](custom-creating-sqlserver.md#custom-creating-sqlserver.rdp)\.
 
-1. Configure access to Amazon S3 so you can upload and download the database backup file\. For more information, see [](User.SQLServer.Options.S3-integration.md)\.
+1. Configure access to Amazon S3 so you can upload and download the database backup file\. For more information, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
 ## Backing up the on\-premises database<a name="custom-migrating.backup"></a>
 

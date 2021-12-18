@@ -1,6 +1,6 @@
 # Using a custom DNS server for outbound network access<a name="Appendix.PostgreSQL.CommonDBATasks.CustomDNS"></a>
 
-Amazon RDS for PostgreSQL supports outbound network access on your DB instances and allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
+RDS for PostgreSQL supports outbound network access on your DB instances and allows Domain Name Service \(DNS\) resolution from a custom DNS server owned by the customer\. You can resolve only fully qualified domain names from your Amazon RDS DB instance through your custom DNS server\. 
 
 **Topics**
 + [Enabling custom DNS resolution](#Appendix.PostgreSQL.CommonDBATasks.CustomDNS.Enable)

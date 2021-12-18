@@ -9,6 +9,7 @@ You can export all types of DB snapshots—including manual snapshots, automated
 After the data is exported, you can analyze the exported data directly through tools like Amazon Athena or Amazon Redshift Spectrum\. For more information on using Athena to read Parquet data, see [Parquet SerDe](https://docs.aws.amazon.com/athena/latest/ug/parquet-serde.html) in the *Amazon Athena User Guide*\. For more information on using Redshift Spectrum to read Parquet data, see [COPY from columnar data formats](https://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-columnar.html) in the Amazon Redshift Database Developer Guide\.
 
 Amazon RDS supports exporting snapshots in all AWS Regions except the following:
++ Asia Pacific \(Jakarta\)
 + AWS GovCloud \(US\-East\)
 + AWS GovCloud \(US\-West\)
 

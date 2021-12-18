@@ -366,7 +366,7 @@ You can associate the SSIS option group and parameter group with a new or existi
 
 ### Enabling S3 integration<a name="SSIS.EnableS3"></a>
 
-To download SSIS project \(\.ispac\) files to your host for deployment, use S3 file integration\. For more information, see [](User.SQLServer.Options.S3-integration.md)\.
+To download SSIS project \(\.ispac\) files to your host for deployment, use S3 file integration\. For more information, see [Integrating an Amazon RDS for SQL Server DB instance with Amazon S3](User.SQLServer.Options.S3-integration.md)\.
 
 ## Administrative permissions on SSISDB<a name="SSIS.Permissions"></a>
 

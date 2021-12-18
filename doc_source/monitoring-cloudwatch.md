@@ -29,7 +29,7 @@ The Amazon RDS console might display metrics in units that are different from th
 | DatabaseConnections |  **DB Connections \(Count\)**   |  The number of database connections in use\. The metric value might not include broken database connections that haven't been cleaned up by your database yet\. So, the number of database connections recorded by your database might be higher than the metric value\.  |  Count  | 
 | DiskQueueDepth |  **Queue Depth \(Count\)**   |  The number of outstanding I/Os \(read/write requests\) waiting to access the disk\.  |  Count  | 
 | EBSByteBalance% |  **EBS Byte Balance \(percent\)**  |  The percentage of throughput credits remaining in the burst bucket of your RDS database\. This metric is available for basic monitoring only\.  To find the instance sizes that support this metric, see the instance sizes with an asterisk \(\*\) in the [EBS optimized by default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#current) table in *Amazon EC2 User Guide for Linux Instances*\. The `Sum` statistic is not applicable to this metric\.  |  Percent  | 
-| EBSIOBalance% |  **EBS IO Balance \(percent\)**  |  The percentage of I/O credits remaining in the burst bucket of your RDS database\. This metric is available for basic monitoring only\.  To find the instance sizes that support this metric, see the instance sizes with an asterisk \(\*\) in the [EBS optimized by default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#current) table in *Amazon EC2 User Guide for Linux Instances*\. The `Sum` statistic is not applicable to this metric\. This metric is different from `BurstBalance`\. To learn how to use this metric, see [Improving application performance and reducing costs with Amazon EBS\-Optimized Instance burst capability](http://aws.amazon.com/blogs/compute/improving-application-performance-and-reducing-costs-with-amazon-ebs-optimized-instance-burst-capability/)\.   |  Percent  | 
+| EBSIOBalance% |  **EBS IO Balance \(percent\)**  |  The percentage of I/O credits remaining in the burst bucket of your RDS database\. This metric is available for basic monitoring only\. To find the instance sizes that support this metric, see the instance sizes with an asterisk \(\*\) in the [EBS optimized by default](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html#current) table in *Amazon EC2 User Guide for Linux Instances*\. The `Sum` statistic is not applicable to this metric\. This metric is different from `BurstBalance`\. To learn how to use this metric, see [Improving application performance and reducing costs with Amazon EBS\-Optimized Instance burst capability](http://aws.amazon.com/blogs/compute/improving-application-performance-and-reducing-costs-with-amazon-ebs-optimized-instance-burst-capability/)\.   |  Percent  | 
 | FailedSQLServerAgentJobsCount  |   **Failed SQL Server Agent Jobs Count \(Count/Minute\)**   |  The number of failed Microsoft SQL Server Agent jobs during the last minute\.  |  Count/Minute  | 
 | FreeableMemory |   **Freeable Memory \(MB\)**   |  The amount of available random access memory\.  For MariaDB, MySQL, Oracle, and PostgreSQL DB instances, this metric reports the value of the `MemAvailable` field of `/proc/meminfo`\.    |  Bytes  | 
 | FreeStorageSpace |   **Free Storage Space \(MB\)**   |  The amount of available storage space\.  |  Bytes  | 
@@ -65,6 +65,8 @@ You can filter Amazon RDS metrics data by using any dimension in the following t
 
 When you use Amazon RDS resources, Amazon RDS sends metrics and dimensions to Amazon CloudWatch every minute\. You can use the following procedures to view the metrics for Amazon RDS\.
 
+### Console<a name="metrics_dimensions.console"></a>
+
 **To view metrics using the Amazon CloudWatch console**
 
 Metrics are grouped first by the service namespace, and then by the various dimension combinations within each namespace\.
@@ -81,12 +83,69 @@ Metrics are grouped first by the service namespace, and then by the various dime
 1. To sort the metrics, use the column heading\. To graph a metric, select the check box next to the metric\. To filter by resource, choose the resource ID, and then choose **Add to search**\. To filter by metric, choose the metric name, and then choose **Add to search**\.  
 ![\[Filter metrics\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/rds-monitoring-03.png)
 
-**To view metrics using the AWS CLI**
-+ At a command prompt, use the following command\.
+### AWS CLI<a name="metrics_dimensions.CLI"></a>
 
-  ```
-  1. aws cloudwatch list-metrics --namespace AWS/RDS
-  ```
+To obtain metric information by using the AWS CLI, use the CloudWatch command [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/list-metrics.html)\. In the following example, you list all metrics in the `AWS/RDS` namespace\.
+
+```
+aws cloudwatch list-metrics --namespace AWS/RDS
+```
+
+To obtain metric statistics, use the command [https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/get-metric-statistics.html)\. The following command gets `CPUUtilization` statistics for instance `my-instance` over the specific 24\-hour period, with a 5\-minute granularity\.
+
+**Example**  
+For Linux, macOS, or Unix:  
+
+```
+1. aws cloudwatch get-metric-statistics --namespace AWS/RDS \
+2.      --metric-name CPUUtilization \
+3.      --start-time 2021-12-15T00:00:00Z \
+4.      --end-time 2021-12-16T00:00:00Z \
+5.      --period 360 \
+6.      --statistics Minimum \
+7.      --dimensions Name=DBInstanceIdentifier,Value=my-instance
+```
+For Windows:  
+
+```
+1. aws cloudwatch get-metric-statistics --namespace AWS/RDS ^
+2.      --metric-name CPUUtilization ^
+3.      --start-time 2021-12-15T00:00:00Z ^
+4.      --end-time 2021-12-16T00:00:00Z ^
+5.      --period 360 ^
+6.      --statistics Minimum ^
+7.      --dimensions Name=DBInstanceIdentifier,Value=my-instance
+```
+Sample output appears as follows:  
+
+```
+{
+    "Datapoints": [
+        {
+            "Timestamp": "2021-12-15T18:00:00Z", 
+            "Minimum": 8.7, 
+            "Unit": "Percent"
+        }, 
+        {
+            "Timestamp": "2021-12-15T23:54:00Z", 
+            "Minimum": 8.12486458559024, 
+            "Unit": "Percent"
+        }, 
+        {
+            "Timestamp": "2021-12-15T17:24:00Z", 
+            "Minimum": 8.841666666666667, 
+            "Unit": "Percent"
+        }, ...
+        {
+            "Timestamp": "2021-12-15T22:48:00Z", 
+            "Minimum": 8.366248354248954, 
+            "Unit": "Percent"
+        }
+    ], 
+    "Label": "CPUUtilization"
+}
+```
+For more information, see [Getting statistics for a metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/getting-metric-statistics.html) in the *Amazon CloudWatch User Guide*\.
 
 ## Creating CloudWatch alarms to monitor Amazon RDS<a name="creating_alarms"></a>
 

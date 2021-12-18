@@ -1,13 +1,13 @@
 # Common DBA tasks for PostgreSQL<a name="Appendix.PostgreSQL.CommonDBATasks"></a>
 
-This section describes the Amazon RDS implementations of some common DBA tasks for DB instances running the PostgreSQL database engine\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
+Following are common DBA tasks for DB instances running the PostgreSQL database engine on Amazon RDS\. To deliver a managed service experience, Amazon RDS doesn't provide shell access to DB instances, and it restricts access to certain system procedures and tables that require advanced privileges\. 
 
-For information about working with PostgreSQL log files on Amazon RDS, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
+For information about working with RDS for PostgreSQL log files, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
 
 **Topics**
 + [Understanding the rds\_superuser role](#Appendix.PostgreSQL.CommonDBATasks.Roles)
 + [Managing PostgreSQL database access](#Appendix.PostgreSQL.CommonDBATasks.Access)
-+ [Working with PostgreSQL parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
++ [Working with RDS for PostgreSQL parameters](#Appendix.PostgreSQL.CommonDBATasks.Parameters)
 + [Audit logging for a PostgreSQL DB instance](#Appendix.PostgreSQL.CommonDBATasks.Auditing)
 + [Working with the pgaudit extension](#Appendix.PostgreSQL.CommonDBATasks.pgaudit)
 + [Working with the pg\_repack extension](#Appendix.PostgreSQL.CommonDBATasks.pg_repack)
@@ -60,13 +60,13 @@ psql> grant connect, temporary on database <database-name> to <user/role name>;
 
 For more information about privileges in PostgreSQL databases, see the [https://www.postgresql.org/docs/current/static/sql-grant.html](https://www.postgresql.org/docs/current/static/sql-grant.html) command in the PostgreSQL documentation\.
 
-## Working with PostgreSQL parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
+## Working with RDS for PostgreSQL parameters<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters"></a>
 
-PostgreSQL parameters that you set for a local PostgreSQL instance in the *postgresql\.conf* file are maintained in the DB parameter group for your DB instance\. If you create a DB instance using the default parameter group, the parameter settings are in the parameter group called *default\.postgres9\.6*\.
+When you create an RDS for PostgreSQL DB instance without specifying a custom parameter group, the instance is created using the default parameter group for the version of PostgreSQL that you choose\. For example, if you create an RDS for PostgreSQL DB instance using PostgreSQL 13\.3, the DB instance is created using the values in the parameter group for PostgreSQL 13 releases, `default.postgres13`\. 
 
- When you create a DB instance, the parameters in the associated DB parameter group are loaded\. You can modify parameter values by changing values in the parameter group\. You can also change parameter values, if you have the security privileges to do so, by using the ALTER DATABASE, ALTER ROLE, and SET commands\. You can't use the command line `postgres` command or the `env PGOPTIONS` command, because you have no access to the host\. 
+You can also create your own custom DB parameter group and modify the settings for you Aurora PostgreSQL DB instance\. To learn how, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
 
-Keeping track of PostgreSQL parameter settings can occasionally be difficult\. Use the following command to list current parameter settings and the default value\.
+You can keep track of the settings on your RDS for PostgreSQL DB instance in many different ways, such as by using the AWS Management Console, or by using the AWS CLI or the Amazon RDS API\. You can also query the values from the PostgreSQL `pg_settings` table of your instance, as shown following\. 
 
 ```
 select name, setting, boot_val, reset_val, unit
@@ -74,23 +74,31 @@ from pg_settings
 order by name;
 ```
 
-For an explanation of the output values, see the [https://www.postgresql.org/docs/current/view-pg-settings.html](https://www.postgresql.org/docs/current/view-pg-settings.html) topic in the PostgreSQL documentation\.
+To learn more about the values returned from this query, see [https://www.postgresql.org/docs/current/view-pg-settings.html](https://www.postgresql.org/docs/current/view-pg-settings.html) in the PostgreSQL documentation\.
 
- If you set the memory settings too large for `max_connections` or `shared_buffers`, you will prevent the PostgreSQL instance from starting up\. Some parameters use units that you might not be familiar with; for example, `shared_buffers` sets the number of 8\-KB shared memory buffers used by the server\. 
-
-The following error is written to the *postgres\.log* file when the instance is attempting to start up, but incorrect parameter settings are preventing it from starting\.
+Be especially careful when changing the settings for `max_connections` and `shared_buffers` on your RDS for PostgreSQL DB instance\. If you modify settings for `max_connections` or `shared_buffers` and you use values that are too high for your actual workload, your RDS for PostgreSQL DB instance won't start\. If this happens, you see an error such as the following in the `postgres.log`:
 
 ```
-2013-09-18 21:13:15 UTC::@:[8097]:FATAL:  could not map anonymous shared
-memory: Cannot allocate memory
-2013-09-18 21:13:15 UTC::@:[8097]:HINT:  This error usually means that 
-PostgreSQL's request for a shared memory segment exceeded available memory or 
-swap space. To reduce the request size (currently 3514134274048 bytes), reduce 
-PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or 
-max_connections.
+2018-09-18 21:13:15 UTC::@:[8097]:FATAL:  could not map anonymous shared memory: Cannot allocate memory
+2018-09-18 21:13:15 UTC::@:[8097]:HINT:  This error usually means that PostgreSQL's request for a shared memory segment
+exceeded available memory or swap space. To reduce the request size (currently 3514134274048 bytes), reduce 
+PostgreSQL's shared memory usage, perhaps by reducing shared_buffers or max_connections.
 ```
 
-There are two types of PostgreSQL parameters, static and dynamic\. Static parameters require that the DB instance be rebooted before they are applied\. Dynamic parameters can be applied immediately\. The following table shows parameters that you can modify for a PostgreSQL DB instance and each parameter's type\. 
+However, note that you can't change any values of the settings contained in the default RDS for PostgreSQL DB parameter groups\. If you want to change settings for any parameters, you need to create a custom DB parameter group, change the settings in that custom group, and then apply the custom parameter group to your RDS for PostgreSQL DB instance\. To learn more, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
+
+There are two types of RDS for PostgreSQL DB parameters\.
++ **Static parameters** – Static parameters require that the RDS for PostgreSQL DB instance be rebooted after a change so that the new value can take effect\.
++ **Dynamic parameters** – Dynamic parameters don't require a reboot after changing their settings\.
+
+**Note**  
+If your RDS for PostgreSQL DB instance is using your own custom DB parameter group, you can change the values of dynamic parameters on the running instance by using the AWS Management Console, the AWS CLI, or the Amazon RDS API\. 
+
+If you have privileges to do so, you can also change parameter values by using the `ALTER DATABASE`, `ALTER ROLE`, and `SET` commands\.  
+
+### RDS for PostgreSQL DB instance parameter list<a name="Appendix.PostgreSQL.CommonDBATasks.Parameters.parameters-list"></a>
+
+The following table lists some of the parameters available in an RDS for PostgreSQL DB instance\. 
 
 
 |  Parameter name  |  Apply\_Type  |  Description  | 
@@ -101,7 +109,9 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `autovacuum`  | Dynamic | Starts the autovacuum subprocess\. | 
 |  `autovacuum_analyze_scale_factor`  | Dynamic | Number of tuple inserts, updates, or deletes before analyze as a fraction of reltuples\. | 
 |  `autovacuum_analyze_threshold`  | Dynamic | Minimum number of tuple inserts, updates, or deletes before analyze\. | 
+|  `autovacuum_freeze_max_age`  | Static | Age at which to autovacuum a table to prevent transaction ID wraparound\.  | 
 |  `autovacuum_naptime`  | Dynamic | Time to sleep between autovacuum runs\. | 
+|  `autovacuum_max_workers`  | Static | Sets the maximum number of simultaneously running autovacuum worker processes\. | 
 |  `autovacuum_vacuum_cost_delay`  | Dynamic | Vacuum cost delay, in milliseconds, for autovacuum\. | 
 |  `autovacuum_vacuum_cost_limit`  | Dynamic | Vacuum cost amount available before napping, for autovacuum\. | 
 |  `autovacuum_vacuum_scale_factor`  | Dynamic | Number of tuple updates or deletes before vacuum as a fraction of reltuples\. | 
@@ -190,6 +200,11 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `log_statement_stats`  | Dynamic | Writes cumulative performance statistics to the server log\. | 
 |  `log_temp_files`  | Dynamic | Logs the use of temporary files larger than this number of kilobytes\. | 
 |  `maintenance_work_mem`  | Dynamic | Sets the maximum memory to be used for maintenance operations\. | 
+|  `max_connections`  | Static | Sets the maximum number of concurrent connections\. | 
+|  `max_files_per_process`  | Static | Sets the maximum number of simultaneously open files for each server process\. | 
+|  `max_locks_per_transaction`  | Static | Sets the maximum number of locks per transaction\. | 
+|  `max_pred_locks_per_transaction`  | Static | Sets the maximum number of predicate locks per transaction\. | 
+|  `max_prepared_transactions`  | Static | Sets the maximum number of simultaneously prepared transactions\. | 
 |  `max_stack_depth`  | Dynamic | Sets the maximum stack depth, in kilobytes\. | 
 |  `max_standby_archive_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing archived WAL data\. | 
 |  `max_standby_streaming_delay`  | Dynamic | Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data\. | 
@@ -203,6 +218,8 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `search_path`  | Dynamic | Sets the schema search order for names that are not schema\-qualified\. | 
 |  `seq_page_cost`  | Dynamic | Sets the planner's estimate of the cost of a sequentially fetched disk page\. | 
 |  `session_replication_role`  | Dynamic | Sets the sessions behavior for triggers and rewrite rules\. | 
+|  `shared_buffers`  | Static | Sets the number of shared memory buffers used by the server\. | 
+|  `ssl`  | Static | Enables SSL connections\. | 
 |  `sql_inheritance`  | Dynamic | Causes subtables to be included by default in various commands\. | 
 |  `ssl_renegotiation_limit`  | Dynamic | Sets the amount of traffic to send and receive before renegotiating the encryption keys\. | 
 |  `standard_conforming_strings`  | Dynamic | Causes \.\.\. strings to treat backslashes literally\. | 
@@ -213,9 +230,11 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `tcp_keepalives_idle`  | Dynamic | Time between issuing TCP keepalives\. | 
 |  `tcp_keepalives_interval`  | Dynamic | Time between TCP keepalive retransmits\. | 
 |  `temp_buffers`  | Dynamic | Sets the maximum number of temporary buffers used by each session\. | 
+| temp\_file\_limit | Static | Sets the maximum size in KB to which the temporary files can grow\. | 
 |  `temp_tablespaces`  | Dynamic | Sets the tablespaces to use for temporary tables and sort files\. | 
 |  `timezone`  | Dynamic | Sets the time zone for displaying and interpreting time stamps\. | 
 |  `track_activities`  | Dynamic | Collects information about running commands\. | 
+|  `track_activity_query_size`  | Static | Sets the size reserved for pg\_stat\_activity\.current\_query, in bytes\. | 
 |  `track_counts`  | Dynamic | Collects statistics on database activity\. | 
 |  `track_functions`  | Dynamic | Collects function\-level statistics on database activity\. | 
 |  `track_io_timing`  | Dynamic | Collects timing statistics on database I/O activity\. | 
@@ -232,71 +251,60 @@ There are two types of PostgreSQL parameters, static and dynamic\. Static parame
 |  `vacuum_defer_cleanup_age`  | Dynamic | Number of transactions by which vacuum and hot cleanup should be deferred, if any\. | 
 |  `vacuum_freeze_min_age`  | Dynamic | Minimum age at which vacuum should freeze a table row\. | 
 |  `vacuum_freeze_table_age`  | Dynamic | Age at which vacuum should scan a whole table to freeze tuples\. | 
+|  `wal_buffers`  | Static | Sets the number of disk\-page buffers in shared memory for WAL\. | 
 |  `wal_writer_delay`  | Dynamic | WAL writer sleep time between WAL flushes\. | 
 |  `work_mem`  | Dynamic | Sets the maximum memory to be used for query workspaces\. | 
 |  `xmlbinary`  | Dynamic | Sets how binary values are to be encoded in XML\. | 
 |  `xmloption`  | Dynamic | Sets whether XML data in implicit parsing and serialization operations is to be considered as documents or content fragments\. | 
-|  `autovacuum_freeze_max_age`  | Static | Age at which to autovacuum a table to prevent transaction ID wraparound\.  | 
-|  `autovacuum_max_workers`  | Static | Sets the maximum number of simultaneously running autovacuum worker processes\. | 
-|  `max_connections`  | Static | Sets the maximum number of concurrent connections\. | 
-|  `max_files_per_process`  | Static | Sets the maximum number of simultaneously open files for each server process\. | 
-|  `max_locks_per_transaction`  | Static | Sets the maximum number of locks per transaction\. | 
-|  `max_pred_locks_per_transaction`  | Static | Sets the maximum number of predicate locks per transaction\. | 
-|  `max_prepared_transactions`  | Static | Sets the maximum number of simultaneously prepared transactions\. | 
-|  `shared_buffers`  | Static | Sets the number of shared memory buffers used by the server\. | 
-|  `ssl`  | Static | Enables SSL connections\. | 
-| temp\_file\_limit | Static | Sets the maximum size in KB to which the temporary files can grow\. | 
-|  `track_activity_query_size`  | Static | Sets the size reserved for pg\_stat\_activity\.current\_query, in bytes\. | 
-|  `wal_buffers`  | Static | Sets the number of disk\-page buffers in shared memory for WAL\. | 
 
 Amazon RDS uses the default PostgreSQL units for all parameters\. The following table shows the PostgreSQL default unit and value for each parameter\.
 
 
 |  Parameter name  |  Unit  | 
 | --- | --- | 
+| `archive_timeout` | s | 
+| `authentication_timeout` | s | 
+| `autovacuum_naptime` | s | 
+| `autovacuum_vacuum_cost_delay` | ms | 
+| `bgwriter_delay` | ms | 
+| `checkpoint_timeout` | s | 
+| `checkpoint_warning` | s | 
+| `deadlock_timeout` | ms | 
 | `effective_cache_size` | 8 KB | 
-| `segment_size` | 8 KB | 
-| `shared_buffers` | 8 KB | 
-| `temp_buffers` | 8 KB | 
-| `wal_buffers` | 8 KB | 
-| `wal_segment_size` | 8 KB | 
+| `lock_timeout` | ms | 
+| `log_autovacuum_min_duration` | ms | 
+| `log_min_duration_statement` | ms | 
+| `log_rotation_age` | minutes | 
 | `log_rotation_size` | KB | 
 | `log_temp_files` | KB | 
 | `maintenance_work_mem` | KB | 
 | `max_stack_depth` | KB | 
-| `ssl_renegotiation_limit` | KB | 
-| temp\_file\_limit | KB | 
-| `work_mem` | KB | 
-| `log_rotation_age` | minutes | 
-| `autovacuum_vacuum_cost_delay` | ms | 
-| `bgwriter_delay` | ms | 
-| `deadlock_timeout` | ms | 
-| `lock_timeout` | ms | 
-| `log_autovacuum_min_duration` | ms | 
-| `log_min_duration_statement` | ms | 
 | `max_standby_archive_delay` | ms | 
 | `max_standby_streaming_delay` | ms | 
-| `statement_timeout` | ms | 
-| `vacuum_cost_delay` | ms | 
-| `wal_receiver_timeout` | ms | 
-| `wal_sender_timeout` | ms | 
-| `wal_writer_delay` | ms | 
-| `archive_timeout` | s | 
-| `authentication_timeout` | s | 
-| `autovacuum_naptime` | s | 
-| `checkpoint_timeout` | s | 
-| `checkpoint_warning` | s | 
 | `post_auth_delay` | s | 
 | `pre_auth_delay` | s | 
+| `segment_size` | 8 KB | 
+| `shared_buffers` | 8 KB | 
+| `statement_timeout` | ms | 
+| `ssl_renegotiation_limit` | KB | 
 | `tcp_keepalives_idle` | s | 
 | `tcp_keepalives_interval` | s | 
+| `temp_file_limit` | KB | 
+| `work_mem` | KB | 
+| `temp_buffers` | 8 KB | 
+| `vacuum_cost_delay` | ms | 
+| `wal_buffers` | 8 KB | 
+| `wal_receiver_timeout` | ms | 
+| `wal_segment_size` | 8 KB | 
+| `wal_sender_timeout` | ms | 
+| `wal_writer_delay` | ms | 
 | `wal_receiver_status_interval` | s | 
 
 ## Audit logging for a PostgreSQL DB instance<a name="Appendix.PostgreSQL.CommonDBATasks.Auditing"></a>
 
 There are several parameters you can set to log activity that occurs on your PostgreSQL DB instance\. These parameters include the following:
 +  The `log_statement` parameter can be used to log user activity in your PostgreSQL database\. For more information, see [PostgreSQL database log files](USER_LogAccess.Concepts.PostgreSQL.md)\.
-+ The `rds.force_admin_logging_level` parameter logs actions by the RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
++ The `rds.force_admin_logging_level` parameter logs actions by the Amazon RDS internal user \(rdsadmin\) in the databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\.
 + The `rds.force_autovacuum_logging_level` parameter logs autovacuum worker operations in all databases on the DB instance, and writes the output to the PostgreSQL error log\. Allowed values are disabled, debug5, debug4, debug3, debug2, debug1, info, notice, warning, error, log, fatal, and panic\. The default value is disabled\. The Amazon RDS recommended setting for rds\.force\_autovacuum\_logging\_level: is LOG\. Set log\_autovacuum\_min\_duration to a value from 1000 or 5000\. Setting this value to 5,000 writes activity to the log that takes more than 5 seconds and shows "vacuum skipped" messages\. For more information on this parameter, see [Best practices for working with PostgreSQL](CHAP_BestPractices.md#CHAP_BestPractices.PostgreSQL)\. 
 
 ## Working with the pgaudit extension<a name="Appendix.PostgreSQL.CommonDBATasks.pgaudit"></a>
@@ -411,11 +419,11 @@ For information on viewing the logs, see [Working with Amazon RDS database log f
 
 ## Working with the pg\_repack extension<a name="Appendix.PostgreSQL.CommonDBATasks.pg_repack"></a>
 
-You can use the `pg_repack` extension to remove bloat from tables and indexes\. This extension is supported on Amazon RDS for PostgreSQL versions 9\.6\.3 and later\. For more information on the `pg_repack` extension, see the [GitHub project documentation](https://reorg.github.io/pg_repack/)\.
+You can use the `pg_repack` extension to remove bloat from tables and indexes\. This extension is supported on RDS for PostgreSQL versions 9\.6\.3 and higher\. For more information on the `pg_repack` extension, see the [GitHub project documentation](https://reorg.github.io/pg_repack/)\.
 
 **To use the pg\_repack extension**
 
-1. Install the `pg_repack` extension on your Amazon RDS for PostgreSQL DB instance by running the following command\.
+1. Install the `pg_repack` extension on your RDS for PostgreSQL DB instance by running the following command\.
 
    ```
    CREATE EXTENSION pg_repack;
@@ -501,7 +509,7 @@ aliasing -fwrapv -fexcess-precision=standard -g -O2
 The `orafce` extension provides functions that are common in commercial databases, and can make it easier for you to port a commercial database to PostgreSQL\. Amazon RDS for PostgreSQL versions 9\.6\.6 and later support this extension\. For more information about `orafce`, see the [orafce project on GitHub](https://github.com/orafce/orafce)\. 
 
 **Note**  
-Amazon RDS for PostgreSQL doesn't support the `utl_file` package that is part of the `orafce` extension\. This is because the `utl_file` schema functions provide read and write operations on operating\-system text files, which requires superuser access to the underlying host\.
+RDS for PostgreSQL doesn't support the `utl_file` package that is part of the `orafce` extension\. This is because the `utl_file` schema functions provide read and write operations on operating\-system text files, which requires superuser access to the underlying host\.
 
 **To use the orafce extension**
 
@@ -710,7 +718,7 @@ You can restrict who can manage database user passwords to a special role\. By d
 
 You enable restricted password management with the static parameter `rds.restrict_password_commands` and use a role called `rds_password`\. When the parameter `rds.restrict_password_commands` is set to 1, only users that are members of the `rds_password` role can run certain SQL commands\. The restricted SQL commands are commands that modify database user passwords and password expiration time\. 
 
-To use restricted password management, your DB instance must be running Amazon RDS for PostgreSQL 10\.6 or higher\. Because the `rds.restrict_password_commands` parameter is static, changing this parameter requires a database restart\.
+To use restricted password management, your DB instance must be running RDS for PostgreSQL 10\.6 or higher\. Because the `rds.restrict_password_commands` parameter is static, changing this parameter requires a database restart\.
 
 When a database has restricted password management enabled, if you try to run restricted SQL commands you get the following error: ERROR: must be a member of rds\_password to alter passwords\.
 
