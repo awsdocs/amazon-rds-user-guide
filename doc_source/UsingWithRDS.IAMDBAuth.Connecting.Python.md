@@ -11,56 +11,7 @@ In addition, make sure the imported libraries in the sample code exist on your s
 
 The code examples use profiles for shared credentials\. For information about the specifying credentials, see [Credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html) in the AWS SDK for Python \(Boto3\) documentation\.
 
-**Topics**
-+ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken)
-+ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect)
-
-## Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken"></a>
-
-You can call the `generate_db_auth_token` method to obtain a signed token\. Provide the DB instance endpoint, port, user name, AWS Region, and DB engine to generate the token for connecting to a DB instance with IAM credentials\.
-
-This code generates an IAM authentication token for a MySQL DB instance\.
-
-```
-import sys
-import boto3
-import os
-
-ENDPOINT="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
-PORT="3306"
-USER="jane_doe"
-REGION="us-east-1"
-os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
-
-#gets the credentials from .aws/credentials
-session = boto3.Session(profile_name='RDSCreds')
-client = session.client('rds')
-
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
-```
-
-This code generates an IAM authentication token for a PostgreSQL DB instance\.
-
-```
-import sys
-import boto3
-import os
-
-ENDPOINT="postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
-PORT="5432"
-USER="jane_doe"
-REGION="us-east-1"
-
-#gets the credentials from .aws/credentials
-session = boto3.Session(profile_name='RDSCreds')
-client = session.client('rds')
-
-token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
-```
-
-## Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.Python.AuthToken.Connect"></a>
-
-The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
+The following code examples show how to generate an authentication token, and then use it to connect to a DB instance\. 
 
 To run this code example, you need the [AWS SDK for Python \(Boto3\)](http://aws.amazon.com/sdk-for-python/), found on the AWS site\.
 

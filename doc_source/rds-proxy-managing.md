@@ -315,7 +315,7 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
  For PostgreSQL, the following interactions also cause pinning: 
 +  Using SET commands 
-+  Using the extended query protocol such as by using JDBC default settings 
++  Using the PostgreSQL extended query protocol such as by using JDBC default settings 
 +  Creating temporary sequences, tables, or views 
 +  Declaring cursors 
 +  Discarding the session state 

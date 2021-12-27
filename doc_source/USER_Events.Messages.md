@@ -104,8 +104,8 @@ The following table shows the event category and a list of events when a DB inst
 |  recovery  | RDS\-EVENT\-0053 |  Recovery of the Multi\-AZ instance is complete\.  | 
 |  recovery  | RDS\-EVENT\-0066 |  The SQL Server DB instance is re\-establishing its mirror\. Performance will be degraded until the mirror is reestablished\. A database was found with non\-FULL recovery model\. The recovery model was changed back to FULL and mirroring recovery was started\. \(<dbname>: <recovery model found>\[,\.\.\.\]\)"  | 
 |  recovery  | RDS\-EVENT\-0166 |  The RDS Custom DB instance is inside the support perimeter\.  | 
-|  restoration  | RDS\-EVENT\-0008 |  The DB instance has been restored from a DB snapshot\.  | 
 |  restoration  | RDS\-EVENT\-0019 |  The DB instance has been restored from a point\-in\-time backup\.  | 
+|  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. The DB instance has been restored from a DB snapshot\.  | 
 |  security  | RDS\-EVENT\-0068 |  RDS is decrypting the CloudHSM partition password to make updates to the instance\. For more information see [Oracle Database Transparent Data Encryption \(TDE\) with AWS CloudHSM](https://docs.aws.amazon.com/cloudhsm/latest/userguide/oracle-tde.html) in the *AWS CloudHSM User Guide*\.  | 
 
 ## DB parameter group events<a name="USER_Events.Messages.parameter-group"></a>
@@ -148,4 +148,4 @@ The following table shows the event category and a list of events when a DB snap
 |  notification  | RDS\-EVENT\-0196 |  Started copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0197 |  Finished copy of snapshot \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
 |  notification  | RDS\-EVENT\-0190 |  Canceled snapshot copy request of \[DB snapshot name\] in region \[region name\]\.  This is a local snapshot copy\.   | 
-|  restoration  | RDS\-EVENT\-0043 |  A DB instance is being restored from a DB snapshot\.  | 
+|  restoration  | RDS\-EVENT\-0043 |  Restored from snapshot \[snapshot\_name\]\. A DB instance is being restored from a DB snapshot\.  | 

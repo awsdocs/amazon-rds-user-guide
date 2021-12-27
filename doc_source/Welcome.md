@@ -95,7 +95,7 @@ The following table shows the shared responsibility model for RDS Custom\.
 |  Database backups  |  AWS  |  Shared  | 
 |  Database software patching  |  AWS  |  Shared  | 
 |  Database software install  |  AWS  |  Shared  | 
-|  OS patching  |  AWS  |  Shared  | 
+|  OS patching  |  AWS  |  Customer  | 
 |  OS installation  |  AWS  |  Shared  | 
 |  Server maintenance  |  AWS  |  AWS  | 
 |  Hardware lifecycle  |  AWS  |  AWS  | 

@@ -63,7 +63,7 @@ The parameters are as follows:
 The authentication token consists of several hundred characters\. It can be unwieldy on the command line\. One way to work around this is to save the token to an environment variable, and then use that variable when you connect\. The following example shows one way to perform this workaround\. In the example, */sample\_dir/* is the full path to the SSL certificate file that contains the public key\.
 
 ```
-RDSHOST="rdsmysql.123456789012.us-west-2.rds.amazonaws.com"
+RDSHOST="mysqldb.123456789012.us-east-1.rds.amazonaws.com"
 TOKEN="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 3306 --region us-west-2 --username jane_doe )"
 
 mysql --host=$RDSHOST --port=3306 --ssl-ca=/sample_dir/global-bundle.pem --enable-cleartext-plugin --user=jane_doe --password=$TOKEN

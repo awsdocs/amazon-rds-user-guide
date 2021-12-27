@@ -477,4 +477,7 @@ The IAM principal that creates the CEV must have either of the following policie
   s3:CreateBucket
   s3:PutBucketPolicy
   mediaimport:CreateDatabaseBinarySnapshot
+  kms:CreateGrant
   ```
+
+  For more information on the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.

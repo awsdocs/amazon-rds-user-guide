@@ -35,86 +35,31 @@ If you make this change, make sure you add the following import:
 
 You can connect to a DB instance using IAM authentication and the AWS SDK for Go V2\.
 
-**Topics**
-+ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.GoV2.AuthToken)
-+ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.GoV2.AuthToken.Connect)
-
-### Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV2.AuthToken"></a>
-
-The auth package provides utilities for generating authentication tokens for connecting to Amazon RDS MySQL and PostgreSQL database instances\. Using the BuildAuthToken method, you generate a database authorization token by providing the database endpoint, AWS Region, username, and an `aws.CredentialProvider` implementation that returns IAM credentials with permission connect to the database using IAM database authentication\.
-
-The following example shows how to use `BuildAuthToken` to create an authentication token for connecting to a MySQL DB instance\.
-
-```
-package main
-
-import "context"
-import "github.com/aws/aws-sdk-go-v2/config"
-import "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
-
-func main() {
-
-    cfg, err := config.LoadDefaultConfig(context.TODO())
-    if err != nil {
-    	panic("configuration error: " + err.Error())
-    }
-
-    authenticationToken, err := auth.BuildAuthToken(
-	    context.TODO(),
-	    "mydb.123456789012.us-east-1.rds.amazonaws.com:3306", // Database Endpoint (With Port)
-    	"us-east-1", // AWS Region
-    	"jane_doe", // Database Account
-    	cfg.Credentials,
-    )
-    if err != nil {
-	    panic("failed to create authentication token: " + err.Error())
-    }
-}
-```
-
-The following example shows how to use `BuildAuthToken` to create an authentication token for connecting to a PostgreSQL DB instance\.
-
-```
-package main
-
-import "context"
-import "github.com/aws/aws-sdk-go-v2/config"
-import "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
-
-func main() {
-
-    cfg, err := config.LoadDefaultConfig(context.TODO())
-    if err != nil {
-    	panic("configuration error: " + err.Error())
-    }
-    
-    authenticationToken, err := auth.BuildAuthToken(
-    	context.TODO(),
-    	"mydb.123456789012.us-east-1.rds.amazonaws.com:5432", // Database Endpoint (With Port)
-    	"us-east-1", // AWS Region
-    	"jane_doe", // Database Account
-    	cfg.Credentials,
-    )
-    if err != nil {
-	    panic("failed to create authentication token: " + err.Error())
-    }
-}
-```
-
-### Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV2.AuthToken.Connect"></a>
-
-The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
+The following code examples show how to generate an authentication token, and then use it to connect to a DB instance\. 
 
 This code connects to a MySQL DB instance\.
 
 ```
 package main
+                
+import (
+     "context"
+     "database/sql"
+     "fmt"
 
-import "context"
-import "github.com/aws/aws-sdk-go-v2/config"
-import "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
+     "github.com/aws/aws-sdk-go-v2/config"
+     "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
+     _ "github.com/lib/pq"
+)
 
 func main() {
+
+     var dbName string = "DatabaseName"
+     var dbUser string = "DatabaseUser"
+     var dbHost string = "mysqldb.123456789012.us-east-1.rds.amazonaws.com "
+     var dbPort int = 3306
+     var dbEndpoint string = fmt.Sprintf("%s:%d", dbHost, dbPort)
+     var region string = "us-east-1"
 
     cfg, err := config.LoadDefaultConfig(context.TODO())
     if err != nil {
@@ -122,18 +67,13 @@ func main() {
     }
 
     authenticationToken, err := auth.BuildAuthToken(
-    	context.TODO(),
-    	"mydb.123456789012.us-east-1.rds.amazonaws.com:3306", // Database Endpoint (With Port)
-	    "us-east-1", // AWS Region
-	    "jane_doe", // Database Account
-	    cfg.Credentials,
-    )
+    	context.TODO(), dbEndpoint, region, dbUser, cfg.Credentials)
     if err != nil {
 	    panic("failed to create authentication token: " + err.Error())
     }
 
     dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?tls=true&allowCleartextPasswords=true",
-        dbUser, authToken, dbEndpoint, dbName,
+        dbUser, authenticationToken, dbEndpoint, dbName,
     )
 
     db, err := sql.Open("mysql", dsn)
@@ -153,11 +93,24 @@ This code connects to a PostgreSQL DB instance\.
 ```
 package main
 
-import "context"
-import "github.com/aws/aws-sdk-go-v2/config"
-import "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
+import (
+     "context"
+     "database/sql"
+     "fmt"
+
+     "github.com/aws/aws-sdk-go-v2/config"
+     "github.com/aws/aws-sdk-go-v2/feature/rds/auth"
+     _ "github.com/lib/pq"
+)
 
 func main() {
+
+     var dbName string = "DatabaseName"
+     var dbUser string = "DatabaseUser"
+     var dbHost string = "postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
+     var dbPort int = 5432
+     var dbEndpoint string = fmt.Sprintf("%s:%d", dbHost, dbPort)
+     var region string = "us-east-1"
 
     cfg, err := config.LoadDefaultConfig(context.TODO())
     if err != nil {
@@ -165,18 +118,13 @@ func main() {
     }
 
     authenticationToken, err := auth.BuildAuthToken(
-    	context.TODO(),
-    	"mydb.123456789012.us-east-1.rds.amazonaws.com:5432", // Database Endpoint (With Port)
-	    "us-east-1", // AWS Region
-	    "jane_doe", // Database Account
-	    cfg.Credentials,
-    )
+    	context.TODO(), dbEndpoint, region, dbUser, cfg.Credentials)
     if err != nil {
 	    panic("failed to create authentication token: " + err.Error())
     }
 
     dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s",
-        dbHost, dbPort, dbUser, authToken, dbName,
+        dbHost, dbPort, dbUser, authenticationToken, dbName,
     )
 
     db, err := sql.Open("postgres", dsn)
@@ -195,83 +143,13 @@ func main() {
 
 You can connect to a DB instance using IAM authentication and the AWS SDK for Go V1
 
-**Topics**
-+ [Generating an IAM authentication token](#UsingWithRDS.IAMDBAuth.Connecting.GoV1.AuthToken)
-+ [Connecting to a DB instance](#UsingWithRDS.IAMDBAuth.Connecting.GoV1.AuthToken.Connect)
-
-### Generating an IAM authentication token<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV1.AuthToken"></a>
-
-You can use the [ `rdsutils`](https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/) package to generate tokens used to connect to a DB instance\. Call the [https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/#BuildAuthToken](https://docs.aws.amazon.com/sdk-for-go/api/service/rds/rdsutils/#BuildAuthToken) function to generate a token\. Provide the DB instance endpoint, AWS region, username, and IAM credentials to generate the token for connecting to a DB instance with IAM credentials\.
-
-The following example shows how to use `BuildAuthToken` to create an authentication token for connecting to a MySQL DB instance\.
-
-```
-package main
-
-import (
-    "database/sql"
-    "fmt"
-    "log"
-
-    "github.com/aws/aws-sdk-go/aws/credentials"
-    "github.com/aws/aws-sdk-go/service/rds/rdsutils"
-)
-
-func main() {
-    dbName := "app"
-    dbUser := "jane_doe"
-    dbHost := "mydb.123456789012.us-east-1.rds.amazonaws.com"
-    dbPort := 3306
-    dbEndpoint := fmt.Sprintf("%s:%d", dbHost, dbPort)
-    region := "us-east-1"
-
-    creds := credentials.NewEnvCredentials()
-    authToken, err := rdsutils.BuildAuthToken(dbEndpoint, region, dbUser, creds)
-    if err != nil {
-        log.Fatalf("failed to build auth token %v", err)
-    }
-}
-```
-
-The following example shows how to use `BuildAuthToken` to create an authentication token for connecting to a PostgreSQL DB instance\.
-
-```
-package main
-
-import (
-    "database/sql"
-    "fmt"
-    "log"
-
-    "github.com/aws/aws-sdk-go/aws/credentials"
-    "github.com/aws/aws-sdk-go/service/rds/rdsutils"
-)
-
-func main() {
-    dbName := "app"
-    dbUser := "jane_doe"
-    dbHost := "mydb.123456789012.us-east-1.rds.amazonaws.com"
-    dbPort := 5432
-    dbEndpoint := fmt.Sprintf("%s:%d", dbHost, dbPort)
-    region := "us-east-1"
-
-    creds := credentials.NewEnvCredentials()
-    authToken, err := rdsutils.BuildAuthToken(dbEndpoint, region, dbUser, creds)
-    if err != nil {
-        log.Fatalf("failed to build auth token %v", err)
-    }
-}
-```
-
-### Connecting to a DB instance<a name="UsingWithRDS.IAMDBAuth.Connecting.GoV1.AuthToken.Connect"></a>
-
-The following code example shows how to generate an authentication token, and then use it to connect to a DB instance\. 
+The following code examples show how to generate an authentication token, and then use it to connect to a DB instance\. 
 
 This code connects to a MySQL DB instance\.
 
 ```
 package main
-
+         
 import (
     "database/sql"
     "fmt"
@@ -285,7 +163,7 @@ import (
 func main() {
     dbName := "app"
     dbUser := "jane_doe"
-    dbHost := "mydb.123456789012.us-east-1.rds.amazonaws.com"
+    dbHost := "mysqldb.123456789012.us-east-1.rds.amazonaws.com"
     dbPort := 3306
     dbEndpoint := fmt.Sprintf("%s:%d", dbHost, dbPort)
     region := "us-east-1"
@@ -329,7 +207,7 @@ import (
 func main() {
     dbName := "app"
     dbUser := "jane_doe"
-    dbHost := "mydb.123456789012.us-east-1.rds.amazonaws.com"
+    dbHost := "postgresmydb.123456789012.us-east-1.rds.amazonaws.com"
     dbPort := 5432
     dbEndpoint := fmt.Sprintf("%s:%d", dbHost, dbPort)
     region := "us-east-1"

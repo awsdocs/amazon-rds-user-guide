@@ -984,7 +984,7 @@ For more information about Amazon CloudWatch metrics, see [Monitoring Amazon RDS
 ## Limitations for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts.Limitations"></a>
 
 The following limitations apply to the Multi\-AZ DB cluster preview:
-+ You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.26 and PostgreSQL version 13\.4 and higher 13 versions\.
++ You can create a Multi\-AZ DB cluster only with MySQL version 8\.0\.26 and higher 8\.0 versions, and PostgreSQL version 13\.4 and higher 13 versions\.
 + You can create Multi\-AZ DB clusters only in the following AWS Regions:
   + US East \(N\. Virginia\)
   + US West \(Oregon\)

@@ -294,17 +294,19 @@ Make sure that the VPC security group associated with your DB instance permits i
 
 To permit inbound connections on port 3389 for TCP, set a firewall rule on the host\. The following examples show how to do this\.
 
-**To use Systems Manager Session Manager to set up a firewall rule**
+We recommend that you use the specific `-Profile` value: `Public`, `Private`, or `Domain`\. Using `Any` refers to all three values\. You can also specify a combination of values separated by a comma\. For more information on setting firewall rules, see [Set\-NetFirewallRule](https://docs.microsoft.com/en-us/powershell/module/netsecurity/set-netfirewallrule?view=windowsserver2019-ps) in the Microsoft documentation\.
+
+**To use Systems Manager Session Manager to set a firewall rule**
 
 1. Connect to Session Manager as shown in [Connecting to your RDS Custom DB instance using AWS Systems Manager](#custom-creating-sqlserver.ssm)\.
 
 1. Run the following command\.
 
    ```
-   Set-NetFirewallRule -DisplayName "Remote Desktop - User Mode (TCP-In)" -Direction Inbound -LocalAddress Any
+   Set-NetFirewallRule -DisplayName "Remote Desktop - User Mode (TCP-In)" -Direction Inbound -LocalAddress Any -Profile Any
    ```
 
-**To use Systems Manager CLI commands to set up a firewall rule**
+**To use Systems Manager CLI commands to set a firewall rule**
 
 1. Use the following command to open RDP on the host\.
 
@@ -312,7 +314,7 @@ To permit inbound connections on port 3389 for TCP, set a firewall rule on the h
    OPEN_RDP_COMMAND_ID=$(aws ssm send-command --region $AWS_REGION \
        --instance-ids $RDS_CUSTOM_INSTANCE_EC2_ID \
        --document-name "AWS-RunPowerShellScript" \
-       --parameters '{"commands":["Set-NetFirewallRule -DisplayName \"Remote Desktop - User Mode (TCP-In)\" -Direction Inbound -LocalAddress Any"]}' \
+       --parameters '{"commands":["Set-NetFirewallRule -DisplayName \"Remote Desktop - User Mode (TCP-In)\" -Direction Inbound -LocalAddress Any -Profile Any"]}' \
        --comment "Open RDP port" | jq -r ".Command.CommandId")
    ```
 

@@ -55,7 +55,7 @@ If you use `expdp`, create a parameter file that contains the exclude directive 
 exclude=procobj:"IN 
   (SELECT NAME FROM sys.OBJ$
    WHERE TYPE# IN (66,67,74,79,59,62,46) AND OWNER# IN 
-     (SELECT USER# FROM SYS.USER$WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
+     (SELECT USER# FROM SYS.USER$ WHERE NAME IN ('RDSADMIN','SYS','SYSTEM','RDS_DATAGUARD','RDSSEC')
      )
   )"
 ```

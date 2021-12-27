@@ -58,8 +58,11 @@ The parameters are as follows:
 + `user` – The database account that you want to access
 + `password` – A signed IAM authentication token
 
-The following example shows using psql to connect\. In the example psql uses the environment variable `PGPASSWORD` that was set when the token was generated in the previous section\. In the example, */sample\_dir/* is the full path to the SSL certificate file that contains the public key\.
+The following example shows using psql to connect\. In the example, psql uses the environment variable `RDSHOST` for the host and the environment variable `PGPASSWORD` for the generated token\. Also, */sample\_dir/* is the full path to the SSL certificate file that contains the public key\.
 
 ```
+export RDSHOST="rdspostgres.123456789012.us-west-2.rds.amazonaws.com"
+export PGPASSWORD="$(aws rds generate-db-auth-token --hostname $RDSHOST --port 5432 --region us-west-2 --username jane_doe )"
+                    
 psql "host=$RDSHOST port=5432 sslmode=verify-full sslrootcert=/sample_dir/global-bundle.pem dbname=DBName user=jane_doe password=$PGPASSWORD"
 ```
