@@ -245,7 +245,7 @@ You can use the `rdsadmin_diagnostic_util` procedures in the following Amazon RD
 
 ### Common parameters for the diagnostic utility package<a name="Appendix.Oracle.CommonDBATasks.CommonAWRParam"></a>
 
-You typically use the following parameters when managing AWR and ADDM with the rdsadmin\_diagnostic\_util package\.
+You typically use the following parameters when managing AWR and ADDM with the `rdsadmin_diagnostic_util` package\.
 
 <a name="rds-provisioned-iops-storage-range-reference"></a>[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Database.html)
 

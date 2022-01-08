@@ -306,7 +306,7 @@ HugePages are not enabled by default for the following DB instance classes\.
 |  db\.m4  |  db\.m4\.large, db\.m4\.xlarge, db\.m4\.2xlarge, db\.m4\.4xlarge, db\.m4\.10xlarge  | 
 |  db\.t3  |  db\.t3\.micro, db\.t3\.small, db\.t3\.medium, db\.t3\.large  | 
 
-For more information about DB instance classes, see [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
+For more information about DB instance classes, see [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\. 
 
 To enable HugePages for new or existing DB instances manually, set the `use_large_pages` parameter to `ONLY`\. You can't use HugePages with Oracle Automatic Memory Management \(AMM\)\. If you set the parameter `use_large_pages` to `ONLY`, then you must also set both `memory_target` and `memory_max_target` to `0`\. For more information about setting DB parameters for your DB instance, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\. 
 

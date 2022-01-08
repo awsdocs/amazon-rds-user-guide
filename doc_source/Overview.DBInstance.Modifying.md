@@ -73,7 +73,7 @@ Changes to some database settings are applied immediately, even if you choose to
 
 ## Settings for DB instances<a name="USER_ModifyInstance.Settings"></a>
 
-In the following table, you can find details about which settings you can and can't modify, when changes can be applied, and whether the changes cause downtime for your DB instance\. 
+In the following table, you can find details about which settings you can and can't modify, when changes can be applied, and whether the changes cause downtime for your DB instance\. Note that by using Amazon RDS features such as Multi\-AZ, you can minimize downtime if you later modify the DB instance\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
 You can modify a DB instance using the console, the [ `modify-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-instance.html) CLI command, or the [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) RDS API operation\.
 

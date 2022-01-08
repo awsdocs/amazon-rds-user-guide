@@ -24,7 +24,8 @@ Currently, RMAN restore isn't supported for Amazon RDS for Oracle DB instances\.
 + [Backing up archived redo logs](#Appendix.Oracle.CommonDBATasks.BackupArchivedLogs)
 + [Performing a full database backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseFull)
 + [Performing an incremental database backup](#Appendix.Oracle.CommonDBATasks.BackupDatabaseIncremental)
-+ [Performing a tablespace backup](#Appendix.Oracle.CommonDBATasks.BackupTablespace)
++ [Backing up a tablespace](#Appendix.Oracle.CommonDBATasks.BackupTablespace)
++ [Backing up a control file](#Appendix.Oracle.CommonDBATasks.backup-control-file)
 
 ## Common parameters for RMAN procedures<a name="Appendix.Oracle.CommonDBATasks.CommonParameters"></a>
 
@@ -280,6 +281,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_parallel`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -290,7 +292,8 @@ BEGIN
     rdsadmin.rdsadmin_rman_util.backup_archivelog_all(
         p_owner               => 'SYS', 
         p_directory_name      => 'MYDIRECTORY',
-        p_parallel            => 4,  
+        p_parallel            => 4, 
+        p_tag                 => 'MY_LOG_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -307,6 +310,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_parallel`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -330,6 +334,7 @@ BEGIN
         p_from_date           => '03/01/2019 00:00:00',
         p_to_date             => '03/02/2019 00:00:00',
         p_parallel            => 4,  
+        p_tag                 => 'MY_LOG_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -346,6 +351,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_parallel`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -368,7 +374,8 @@ BEGIN
         p_directory_name      => 'MYDIRECTORY',
         p_from_scn            => 1533835,
         p_to_scn              => 1892447,
-        p_parallel            => 4,  
+        p_parallel            => 4,
+        p_tag                 => 'MY_LOG_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -385,6 +392,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_parallel`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -408,6 +416,7 @@ BEGIN
         p_from_sequence       => 11160,
         p_to_sequence         => 11160,
         p_parallel            => 4,  
+        p_tag                 => 'MY_LOG_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -427,6 +436,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_optimize`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -444,6 +454,7 @@ BEGIN
         p_directory_name      => 'MYDIRECTORY',
         p_parallel            => 4,  
         p_section_size_mb     => 10,
+        p_tag                 => 'FULL_DB_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
@@ -466,6 +477,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_optimize`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -493,14 +505,15 @@ BEGIN
         p_level               => 1,
         p_parallel            => 4,  
         p_section_size_mb     => 10,
+        p_tag                 => 'MY_INCREMENTAL_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /
 ```
 
-## Performing a tablespace backup<a name="Appendix.Oracle.CommonDBATasks.BackupTablespace"></a>
+## Backing up a tablespace<a name="Appendix.Oracle.CommonDBATasks.BackupTablespace"></a>
 
-You can perform a DB instance tablespace using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_tablespace`\.
+You can back up a tablespace using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_tablespace`\.
 
 This procedure uses the following common parameters for RMAN tasks:
 + `p_owner`
@@ -513,6 +526,7 @@ This procedure uses the following common parameters for RMAN tasks:
 + `p_optimize`
 + `p_compress`
 + `p_rman_to_dbms_output`
++ `p_tag`
 
 For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
 
@@ -540,6 +554,39 @@ BEGIN
         p_tablespace_name     => MYTABLESPACE,
         p_parallel            => 4,  
         p_section_size_mb     => 10,
+        p_tag                 => 'MYTABLESPACE_BACKUP',
+        p_rman_to_dbms_output => FALSE);
+END;
+/
+```
+
+## Backing up a control file<a name="Appendix.Oracle.CommonDBATasks.backup-control-file"></a>
+
+You can back up a control file using the Amazon RDS procedure `rdsadmin.rdsadmin_rman_util.backup_current_controlfile`\.
+
+This procedure uses the following common parameters for RMAN tasks:
++ `p_owner`
++ `p_directory_name`
++ `p_label`
++ `p_compress`
++ `p_rman_to_dbms_output`
++ `p_tag`
+
+For more information, see [Common parameters for RMAN procedures](#Appendix.Oracle.CommonDBATasks.CommonParameters)\.
+
+This procedure is supported for the following Amazon RDS for Oracle DB engine versions:
++ Oracle Database 19c \(19\.0\.0\)
++ Oracle Database 12c Release 2 \(12\.2\), using 12\.2\.0\.1\.ru\-2019\-01\.rur\-2019\-01\.r1 or higher
++ Oracle Database 12c Release 1 \(12\.1\), using 12\.1\.0\.2\.v15 or higher
+
+The following example backs up a control file using the specified values for the parameters\.
+
+```
+BEGIN
+    rdsadmin.rdsadmin_rman_util.backup_tablespace(
+        p_owner               => 'SYS', 
+        p_directory_name      => 'MYDIRECTORY',
+        p_tag                 => 'CONTROL_FILE_BACKUP',
         p_rman_to_dbms_output => FALSE);
 END;
 /

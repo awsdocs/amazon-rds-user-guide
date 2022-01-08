@@ -301,7 +301,7 @@ So, the value returned by the calculation is the following:
 
 `Value 1 + Value 2 + Value 3`
 
-When this value exceeds 1\.2 times the memory allocated to the DB instance class used by the DB instance, the DB instance is placed in **incompatible\-parameters** status\. For information about the memory allocated to DB instance classes, see [Hardware specifications for DB instance classes ](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
+When this value exceeds 1\.2 times the memory allocated to the DB instance class used by the DB instance, the DB instance is placed in **incompatible\-parameters** status\. For information about the memory allocated to DB instance classes, see [Hardware specifications for DB instance classes](Concepts.DBInstanceClass.md#Concepts.DBInstanceClass.Summary)\.
 
 The calculation multiplies the value of the `max_connections` parameter by the sum of several parameters\. If the `max_connections` parameter is set to a large value, it might cause the check to return an inordinately high value for the potential memory usage of the DB instance\. In this case, consider lowering the value of the `max_connections` parameter\.
 

@@ -4,6 +4,8 @@ After Amazon RDS provisions your DB instance, you can use any standard SQL clien
 + If you created your DB instance as *public*, devices and Amazon EC2 instances outside the VPC can connect to your database\. 
 + If you created your DB instance as *private*, only Amazon EC2 instances and devices inside the Amazon VPC can connect to your database\. 
 
+To check whether your DB instance is public or private, use the AWS Management Console to view the **Connectivity & security** tab for your instance\. Under **Security**, you can find the "Publicly accessible" value, with No for private, Yes for public\. 
+
 To learn more about different Amazon RDS and Amazon VPC configurations and how they affect accessibility, see [Scenarios for accessing a DB instance in a VPC](USER_VPC.Scenarios.md)\. 
 
 If the DB instance is available and accessible, you can connect by providing the following information to the SQL client application: 

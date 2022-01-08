@@ -30,12 +30,15 @@ RDS Proxy supports the following database engine versions:
 + RDS for MySQL – MySQL 5\.6, 5\.7, and 8\.0
 + RDS for PostgreSQL – version 10\.10 and higher minor versions, version 11\.5 and higher minor versions, and version 12\.5 and higher minor versions
 
-RDS Proxy is available in the following Regions:
+RDS Proxy is available in the following AWS Regions:
 + US East \(Ohio\)
 + US East \(N\. Virginia\)
 + US West \(N\. California\)
 + US West \(Oregon\)
++ Africa \(Cape Town\)
++ Asia Pacific \(Hong Kong\)
 + Asia Pacific \(Mumbai\)
++ Asia Pacific \(Osaka\)
 + Asia Pacific \(Seoul\)
 + Asia Pacific \(Singapore\)
 + Asia Pacific \(Sydney\)
@@ -44,6 +47,11 @@ RDS Proxy is available in the following Regions:
 + Europe \(Frankfurt\)
 + Europe \(Ireland\)
 + Europe \(London\)
++ Europe \(Milan\)
++ Europe \(Paris\)
++ Europe \(Stockholm\)
++ Middle East \(Bahrain\)
++ South America \(São Paulo\)
 
 ## Quotas and limitations for RDS Proxy<a name="rds-proxy.limits"></a>
 
@@ -56,7 +64,7 @@ RDS Proxy is available in the following Regions:
   For RDS DB instances in replication configurations, you can associate a proxy only with the writer DB instance, not a read replica\.
 + You can't use RDS Proxy with Aurora Serverless clusters\.
 + Using RDS Proxy with Aurora clusters that are part of an Aurora global database isn't currently supported\.
-+  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. 
++  Your RDS Proxy must be in the same virtual private cloud \(VPC\) as the database\. The proxy can't be publicly accessible, although the database can be\. For example, if you're prototyping on a local host, you can't connect to your RDS Proxy because the proxy would be outside of the VPC\.
 **Note**  
  For Aurora DB clusters, you can turn on cross\-VPC access\. To do this, create an additional endpoint for a proxy and specify a different VPC, subnets, and security groups with that endpoint\. For more information, see [Accessing Aurora and RDS databases across VPCs](rds-proxy-endpoints.md#rds-proxy-cross-vpc)\. 
 +  You can't use RDS Proxy with a VPC that has its tenancy set to `dedicated`\. 

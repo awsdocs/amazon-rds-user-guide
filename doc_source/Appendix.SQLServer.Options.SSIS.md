@@ -492,6 +492,12 @@ The `rds_fn_task_status` function returns the following information\.
 
 After deploying the SSIS project into the SSIS catalog, you can run packages directly from SSMS or schedule them by using SQL Server Agent\. You must use a Windows\-authenticated login for executing SSIS packages\. For more information, see [Setting up a Windows\-authenticated user for SSIS](#SSIS.Use.Auth)\.
 
+**Topics**
++ [Setting database connection managers for SSIS projects](#SSIS.Use.ConnMgrs)
++ [Creating an SSIS proxy](#SSIS.Use.Proxy)
++ [Scheduling an SSIS package using SQL Server Agent](#SSIS.Use.Schedule)
++ [Revoking SSIS access from the proxy](#SSIS.Use.Revoke)
+
 ### Setting database connection managers for SSIS projects<a name="SSIS.Use.ConnMgrs"></a>
 
 When you use a connection manager, you can use these types of authentication:

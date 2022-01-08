@@ -1,6 +1,6 @@
 # Backing up and restoring an Amazon RDS DB instance<a name="CHAP_CommonTasks.BackupRestore"></a>
 
-This section shows how to back up and restore a DB instance\. 
+This section shows how to back up and restore a DB instance\.
 
 **Topics**
 + [Working with backups](USER_WorkingWithAutomatedBackups.md)
@@ -12,4 +12,4 @@ This section shows how to back up and restore a DB instance\.
 + [Exporting DB snapshot data to Amazon S3](USER_ExportSnapshot.md)
 + [Restoring a DB instance to a specified time](USER_PIT.md)
 + [Deleting a snapshot](USER_DeleteSnapshot.md)
-+ [Tutorial: Restore a DB instance from a DB snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
++ [Tutorial: Restore an Amazon RDS DB instance from a DB snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)

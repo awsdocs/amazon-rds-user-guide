@@ -61,7 +61,7 @@ You can use the AWS Management Console or the AWS CLI to change the CA certifica
 
    The **Modify DB Instance** page appears\.
 
-1. In the **Network & Security** section, choose **rds\-ca\-2019**\.  
+1. In the **Connectivity** section, choose **rds\-ca\-2019**\.  
 ![\[Choose CA certificate\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/ssl-rotate-cert-ca-2019.png)
 
 1. Choose **Continue** and check the summary of modifications\. 

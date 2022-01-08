@@ -1,122 +1,77 @@
 # Invoking an AWS Lambda function from an RDS for PostgreSQL DB instance<a name="PostgreSQL-Lambda"></a>
 
-You can invoke AWS Lambda functions from an RDS for PostgreSQL DB instance\. To do this, use the `aws_lambda` PostgreSQL extension provided with RDS for PostgreSQL\. 
-
-AWS Lambda is a compute service that you can use to run code\. For example, you can use Lambda functions to process event notifications from a DB instance\. For more information about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the *AWS Lambda Developer Guide\.*
+AWS Lambda is an event\-driven compute service that lets you run code without provisioning or managing servers\. It's available for use with many AWS services, including RDS for PostgreSQL\. For example, you can use Lambda functions to process event notifications from a database, or to load data from files whenever a new file is uploaded to Amazon S3\. To learn more about Lambda, see [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the *AWS Lambda Developer Guide\.* 
 
 **Note**  
-Invoking an AWS Lambda function is supported in the following RDS for PostgreSQL versions:  
-12\.6 and later minor versions
-13\.2 and later minor versions
+Invoking AWS Lambda functions is supported in the following RDS for PostgreSQL versions:  
+13\.2 and higher minor versions
+12\.6 and higher minor versions
+
+Setting up RDS for PostgreSQL to work with Lambda functions is a multi\-step process involving AWS Lambda, IAM, your VPC, and your RDS for PostgreSQL DB instance\. Following, you can find summaries of the necessary steps\. 
+
+For more information about Lambda functions, see [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) and [AWS Lambda foundations](https://docs.aws.amazon.com/lambda/latest/dg/lambda-foundation.html) in the *AWS Lambda Developer Guide*\. 
 
 **Topics**
-+ [Overview of using a Lambda function](#PostgreSQL-Lambda-overview)
-+ [Specifying the Lambda function to use](#PostgreSQL-Lambda-specify-function)
-+ [Giving RDS access to Lambda](#PostgreSQL-Lambda-access)
-+ [Invoking Lambda functions](#PostgreSQL-Lambda-invoke)
-+ [Function reference](#PostgreSQL-Lambda-functions)
++ [Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda](#PostgreSQL-Lambda-network)
++ [Step 2: Configure IAM for your RDS for PostgreSQL DB instance and AWS Lambda](#PostgreSQL-Lambda-access)
++ [Step 3: Install the `aws_lambda` extension for an RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-install-extension)
++ [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function)
++ [Step 5: Invoke a Lambda function from your RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-invoke)
++ [Lambda function error messages](#PostgreSQL-Lambda-errors)
++ [Function reference](PostgreSQL-Lambda-functions.md)
 
-## Overview of using a Lambda function<a name="PostgreSQL-Lambda-overview"></a>
+## Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda<a name="PostgreSQL-Lambda-network"></a>
 
-You can invoke a Lambda function from an RDS for PostgreSQL database with the following procedure\.
+Lambda functions always run inside an Amazon VPC owned by the AWS Lambda service\. Lambda applies network access and security rules to this VPC and it maintains and monitors the VPC automatically\. Your RDS for PostgreSQL DB instance needs to send network traffic to the Lambda service's VPC\. How you configure this depends on whether your DB instance is public or private\.
++ If your RDS for PostgreSQL DB instance is public, you need only configure your security group to allow outbound traffic from your VPC\. 
++ If your RDS for PostgreSQL DB instance is private, you have a couple of choices\. You can use a Network Address Translation\) NAT gateway or you can use a VPC endpoint\. For information about NAT gateways, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)\. The summary of steps for using a VPC endpoint follow\. 
 
-**To invoke a Lambda function from an RDS for PostgreSQL database**
+**To configure connectivity to AWS Lambda for a **public** DB instance**
++ Configure the VPC in which your RDS for PostgreSQL DB instance is running to allow outbound connections\. You do so by creating an outbound rule on your VPC's security group that allows TCP traffic to port 443 and to any IPv4 addresses \(0\.0\.0\.0/0\)\.
 
-1. Install the required PostgreSQL extensions\. These include the `aws_lambda` and `aws_commons` extensions\. To do so, start psql and run the following commands\.
+**To configure connectivity to AWS Lambda for a **private** DB instance**
 
-   ```
-   CREATE EXTENSION IF NOT EXISTS aws_lambda CASCADE;
-   ```
+1. Configure your VPC with a VPC endpoint for AWS Lambda\. For details, see [VPC endpoints](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html) in the *Amazon VPC User Guide*\. The endpoint returns responses to calls made by your RDS for PostgreSQL DB instance to your Lambda functions\. 
 
-   The `aws_lambda` extension provides the [aws\_lambda\.invoke](#aws_lambda.invoke) function that you use to invoke functions in Lambda\. The `aws_commons` extension is included to provide additional helper functions\. 
+1. Add the endpoint to your VPC's route table\. For more information, see [Work with route tables](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the the *Amazon VPC User Guide*\. 
 
-1. Identify the name or Amazon Resource Name \(ARN\) for the Lambda function to use\. For details about this process, see [Specifying the Lambda function to use](#PostgreSQL-Lambda-specify-function)\.
+1. The VPC endpoint uses its own private DNS resolution\. RDS for PostgreSQL can't use the Lambda VPC endpoint until you change the value of the `rds.custom_dns_resolution` from its default value of 0 \(not enabled\) to 1\. 
 
-1. Provide permission to access the Lambda function\.
+   1. Create a custom DB parameter group\.
 
-   To invoke a Lambda function, give the RDS for PostgreSQL DB instance permission to access the Lambda invoke API operation\. Doing this includes the following steps:
+   1. Change the value of the `rds.custom_dns_resulution` parameter from its default of `0` to `1`\. 
 
-   1. Create an AWS Identity and Access Management \(IAM\) policy that provides access to a Lambda function that you want to invoke\.
+   1. Modify your DB instance to use your custom DB parameter group\.
 
-   1. Create an IAM role\.
+   1. Reboot the instance to have the modified parameter take effect\.
 
-   1. Attach the IAM policy that you created to the role that you created\.
+Your VPC can now interact with the AWS Lambda VPC at the network level\. However, you still need to configure the permissions using IAM\.  
 
-   1. Add this IAM role to your DB instance\.
+## Step 2: Configure IAM for your RDS for PostgreSQL DB instance and AWS Lambda<a name="PostgreSQL-Lambda-access"></a>
 
-   For details about this process, see [Giving RDS access to Lambda](#PostgreSQL-Lambda-access)\.
+Invoking Lambda functions from your RDS for PostgreSQL DB instance requires certain privileges\. To configure the necessary privileges, we recommend that you create an IAM policy that allows invoking Lambda functions, assign that policy to a role, and then apply the role to your DB instance\. This approach gives the DB instance privileges to invoke the specified Lambda function on your behalf\. The following steps show you how to do this using the AWS CLI\.
 
-1. Use the `aws_lambda.invoke` function to run the Lambda function\. For details about this process, see [Invoking Lambda functions](#PostgreSQL-Lambda-invoke)\.
+**To configure IAM permissions for using your Amazon RDS instance with Lambda**
 
-## Specifying the Lambda function to use<a name="PostgreSQL-Lambda-specify-function"></a>
-
-To identify the Lambda function to use, specify the following information:
-+ **Function name** – The name of the Lambda function, ARN, version, or alias\. For a listing of possible formats, see [ Lambda function name formats](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestParameters)\.
-+ **AWS Region** – \(Optional\) The AWS Region where the Lambda function is located\. If you don't specify a Region value and it's not specified in the function ARN, RDS uses the same Region as the DB instance\.
-
-  For a listing of AWS Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
-
-To hold the Lambda function name information, you can use the [aws\_commons\.create\_lambda\_function\_arn](#aws_commons.create_lambda_function_arn) function\. This function creates an `aws_commons._lambda_function_arn_1` composite structure to store the name information, as shown following\. 
-
-```
-psql=> SELECT aws_commons.create_lambda_function_arn(
-   'my-function',
-   'us-west-2'
-) AS aws_lambda_arn_1 \gset
-
-psql=> SELECT aws_commons.create_lambda_function_arn(
-   '123456789012:function:my-function',
-   'us-west-2'
-) AS lambda_partial_arn_1 \gset
-
-psql=> SELECT aws_commons.create_lambda_function_arn(
-   'arn:aws:lambda:us-west-2:123456789012:function:my-function'
-) AS lambda_arn_1 \gset
-```
-
-You can later provide any of these values as a parameter in calls to the [aws\_lambda\.invoke](#aws_lambda.invoke) function\. For examples, see [Invoking Lambda functions](#PostgreSQL-Lambda-invoke)\.
-
-## Giving RDS access to Lambda<a name="PostgreSQL-Lambda-access"></a>
-
-To use a Lambda function, give your PostgreSQL DB instance permission to access Lambda\. To do this, use the following procedure\.
-
-**To give a PostgreSQL DB instance access to Lambda**
-
-1. Create an IAM policy\. 
-
-   This policy provides the permissions that allow your PostgreSQL DB instance to invoke Lambda functions\.
-
-   As part of creating this policy, take the following steps:
-
-   1. Include in the policy the required action `lambda:InvokeFunction` to allow Lambda invocation from your RDS for PostgreSQL DB instance\.
-
-   1. Include the Amazon Resource Name \(ARN\) that identifies the Lambda function\. The ARN format for accessing Lambda is: `arn:aws:lambda:::function:example_function/*`
-
-   For more information on creating an IAM policy for RDS for PostgreSQL, see [ Creating and using an IAM policy for IAM database access ](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html)\. See also [ IAM Tutorial: Create and attach your first customer managed policy ](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_managed-policies.html) in the *IAM User Guide\.*
-
-   The following AWS CLI command creates an IAM policy named `rds-lambda-policy` with these options\. It grants access to a function named `example_function`\.
+1. Use the [create\-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/create-policy.html) AWS CLI command to create an IAM policy that allows your RDS for PostgreSQL DB instance to invoke the specified Lambda function\. \(The statement ID \(Sid\) is an optional description for your policy statement and has no effect on usage\.\) This policy gives your  DB instance the minimum permissions needed to invoke the specified Lambda function\. 
 
    ```
-   aws iam create-policy  --policy-name rds-lambda-policy  --policy-document '{
+   aws iam create-policy  --policy-name rds-lambda-policy --policy-document '{
        "Version": "2012-10-17",
        "Statement": [
            {
-               "Sid": "AllowAccessToExampleFunction",
-               "Effect": "Allow",
-               "Action": "lambda:InvokeFunction",
-               "Resource": "arn:aws:lambda:<region>:<123456789012>:function:example_function"
+           "Sid": "AllowAccessToExampleFunction",
+           "Effect": "Allow",
+           "Action": "lambda:InvokeFunction",
+           "Resource": "arn:aws:lambda:aws-region:444455556666:function:my-function"
            }
        ]
    }'
    ```
 
-   After you create the policy, note the ARN of the policy\. You need the ARN for a subsequent step when you attach the policy to an IAM role\.
+   Alternatively, you can use the predefined `AWSLambdaRole` policy that allows you to invoke any of your Lambda functions\. For more information, see [Identity\-based IAM policies for Lambda](https://docs.aws.amazon.com/lambda/latest/dg/access-control-identity-based.html#access-policy-examples-aws-managed) 
 
-1. Create an IAM role\.
-
-   You do this so that RDS for PostgreSQL can assume this IAM role on your behalf to access your Lambda function\. For more information, see [Creating a role to delegate permissions to an IAM user ](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) in the *IAM User Guide\.*
-
-   The following example shows using the AWS CLI command to create a role named `rds-lambda-role`\.
+1. Use the [create\-role](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/create-role.html) AWS CLI command to create an IAM role that the policy can assume at runtime\.
 
    ```
    aws iam create-role  --role-name rds-lambda-role --assume-role-policy-document '{
@@ -129,268 +84,224 @@ To use a Lambda function, give your PostgreSQL DB instance permission to access 
            },
            "Action": "sts:AssumeRole"
            }
-       ] 
+       ]
    }'
    ```
 
-1. Attach the IAM policy that you created to the IAM role that you created\.
-
-   The following AWS CLI command attaches the policy created earlier to the role named `rds-lambda-role`\. Replace `your-policy-arn` with the policy ARN that you noted in an earlier step\.
+1. Apply the policy to the role by using the [attach\-role\-policy](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/iam/attach-role-policy.html) AWS CLI command\.
 
    ```
-   aws iam attach-role-policy  --policy-arn your-policy-arn  --role-name rds-lambda-role
+   aws iam attach-role-policy \
+       --policy-arn arn:aws:iam::444455556666:policy/rds-lambda-policy \
+       --role-name rds-lambda-role --region aws-region
    ```
 
-1. Add the IAM role to the DB instance\. You do so by using the AWS CLI, as described following\. 
-
-   Use the following CLI command to add the IAM role to the RDS for PostgreSQL DB instance named `my-db-instance`\. Replace *`your-role-arn`* with the role ARN that you noted in a previous step\. Use `Lambda` for the value of the `--feature-name` option, as shown following\.
+1. Apply the role to your RDS for PostgreSQL DB instance by using the  [add\-role\-to\-db\-instance](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/add-role-to-db-instance.html) AWS CLI command\. This last step allows your DB instance's database users to invoke Lambda functions\. 
 
    ```
    aws rds add-role-to-db-instance \
-   --db-instance-identifier my-db-instance \
-   --feature-name Lambda \
-   --role-arn your-role-arn   \
-   --region your-region
+          --db-cluster-identifier my-cluster-name \
+          --feature-name Lambda \
+          --role-arn  arn:aws:iam::444455556666:role/rds-lambda-role   \
+          --region aws-region
    ```
 
-## Invoking Lambda functions<a name="PostgreSQL-Lambda-invoke"></a>
+With the VPC and the IAM configurations complete, you can now install the `aws_lambda` extension\. \(Note that you can install the extension at any time, but until you set up the correct VPC support and IAM privileges, the `aws_lambda` extension adds nothing to your RDS for PostgreSQL DB instance's capabilities\.\)
 
-Following, you can find some examples of calling the [aws\_lambda\.invoke](#aws_lambda.invoke) function\. Before you use the `aws_lambda.invoke` function, be sure to complete the following prerequisites:
-+ Install the required PostgreSQL extensions as described in [Overview of using a Lambda function](#PostgreSQL-Lambda-overview)\.
-+ Determine which Lambda function to invoke as described in [Specifying the Lambda function to use](#PostgreSQL-Lambda-specify-function)\.
-+ Make sure that the DB instance has invoke access to Lambda as described in [Giving RDS access to Lambda](#PostgreSQL-Lambda-access)\.
+## Step 3: Install the `aws_lambda` extension for an RDS for PostgreSQL DB instance<a name="PostgreSQL-Lambda-install-extension"></a>
 
-You can invoke a Lambda function synchronously or asynchronously\. You control this with the following values for the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `invocation_type` parameter:
-+ The `RequestResponse` type of invocation for a Lambda function is synchronous and returns a response payload in the result of the `aws_lambda.invoke` function\. Use the `RequestResponse` invocation type when your workflow depends on receiving the Lambda function result immediately\. Most of the following examples use synchronous invocation\. 
+To use AWS Lambda with your RDS for PostgreSQL DB instance, the `aws_lambda` PostgreSQL extension to your RDS for PostgreSQL\. This extension provides your RDS for PostgreSQL DB instance with the ability to call Lambda functions from PostgreSQL\. 
 
-  The `RequestResponse` type of invocation is the default\. 
-+ The `Event` type of invocation for a Lambda function is asynchronous and returns immediately without a returned payload\. Use the `Event` type of invocation when you don't need to know the result of the Lambda function before your workflow moves on\. For an example of asynchronous invocation, see [Asynchronous event invocation of Lambda functions](#PostgreSQL-Lambda-Event)\.
+**To install the `aws_lambda` extension in your RDS for PostgreSQL DB instance**
 
-The following [aws\_lambda\.invoke](#aws_lambda.invoke) examples use a `aws_lambda_arn_1` structure, which contains the identifying information for the Lambda function\. To create the structure, use the [aws\_commons\.create\_lambda\_function\_arn](#aws_commons.create_lambda_function_arn) function\. For an example of using the `aws_commons.create_lambda_function_arn` function, see [Specifying the Lambda function to use](#PostgreSQL-Lambda-specify-function)\.
+Use the PostgreSQL `psql` command\-line or the pgAdmin tool to connect to your RDS for PostgreSQL DB instance\. 
 
-**Topics**
-+ [Synchronous RequestResponse invocation of Lambda functions](#PostgreSQL-Lambda-RequestResponse)
-+ [Asynchronous event invocation of Lambda functions](#PostgreSQL-Lambda-Event)
-+ [Requesting a Lambda execution log in a function response](#PostgreSQL-Lambda-log-response)
-+ [Including client context in a Lambda function](#PostgreSQL-Lambda-client-context)
-+ [Invoking a specific version of a Lambda function](#PostgreSQL-Lambda-function-version)
-+ [Lambda function error handling](#PostgreSQL-Lambda-errors)
+1. Connect to your RDS for PostgreSQL DB instance as a user with `rds_superuser` privileges\. The default `postgres` user is shown in the example\.
 
-### Synchronous RequestResponse invocation of Lambda functions<a name="PostgreSQL-Lambda-RequestResponse"></a>
+   ```
+   psql -h instance.444455556666.aws-region.rds.amazonaws.com -U postgres -p 5432
+   ```
 
-Following is an example of a synchronous Lambda function invocation\. The following two `aws_lambda.invoke` function call results are the same\.
+1. Install the `aws_lambda` extension\. The `aws_commons` extension is also required\. It provides helper functions to `aws_lambda` and many other Aurora extensions for PostgreSQL\. If it's not already on your RDS for PostgreSQLDB instance, it's installed with `aws_lambda` as shown following\. 
+
+   ```
+   CREATE EXTENSION IF NOT EXISTS aws_lambda CASCADE;
+   NOTICE:  installing required extension "aws_commons"
+   CREATE EXTENSION
+   ```
+
+The `aws_lambda` extension is installed in your DB instance\. You can now create convenience structures for invoking your Lambda functions\. 
+
+## Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)<a name="PostgreSQL-Lambda-specify-function"></a>
+
+You can use the helper functions in the `aws_commons` extension to prepare entities that you can more easily invoke from PostgreSQL\. To do this, you need to have the following information about your Lambda functions:
++ **Function name** – The name, Amazon Resource Name \(ARN\), version, or alias of the Lambda function\. The IAM policy created in [Step 2: Configure IAM for your instance and Lambda](#PostgreSQL-Lambda-access) requires the ARN, so we recommend that you use your function's ARN\.
++ **AWS Region** – \(Optional\) The AWS Region where the Lambda function is located if it's not in the same Region as your RDS for PostgreSQL DB instance\.
+
+To hold the Lambda function name information, you use the [aws\_commons\.create\_lambda\_function\_arn](PostgreSQL-Lambda-functions.md#aws_commons.create_lambda_function_arn) function\. This helper function creates an `aws_commons._lambda_function_arn_1` composite structure with the details needed by the invoke function\. Following, you can find three alternative approaches to setting up this composite structure\.
 
 ```
-psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
-psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse');
+SELECT aws_commons.create_lambda_function_arn(
+   'my-function',
+   'aws-region'
+) AS aws_lambda_arn_1 \gset
+```
+
+```
+SELECT aws_commons.create_lambda_function_arn(
+   '111122223333:function:my-function',
+   'aws-region'
+) AS lambda_partial_arn_1 \gset
+```
+
+```
+SELECT aws_commons.create_lambda_function_arn(
+   'arn:aws:lambda:aws-region:111122223333:function:my-function'
+) AS lambda_arn_1 \gset
+```
+
+Any of these values can be used in calls to the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) function\. For examples, see [Step 5: Invoke a Lambda function from your RDS for PostgreSQL DB instance](#PostgreSQL-Lambda-invoke)\.
+
+## Step 5: Invoke a Lambda function from your RDS for PostgreSQL DB instance<a name="PostgreSQL-Lambda-invoke"></a>
+
+The `aws_lambda.invoke` function behaves synchronously or asynchronously, depending on the `invocation_type`\. The two alternatives for this parameter are `RequestResponse` \(the default\) and `Event`, as follows\. 
++ **`RequestResponse`** – This invocation type is *synchronous*\. It's the default behavior when the call is made without specifying an invocation type\. The response payload includes the results of the `aws_lambda.invoke` function\. Use this invocation type when your workflow requires receiving results from the Lambda function before proceeding\. 
++ **`Event`** – This invocation type is *asynchronous*\. The response doesn't include a payload containing results\. Use this invocation type when your workflow doesn't need a result from the Lambda function to continue processing\.
+
+As a simple test of your setup, you can connect to your DB instance using `psql` and invoke an example function from the command line\. Suppose that you have one of the basic functions set up on your Lambda service, such as the simple Python function shown in the following screenshot\.
+
+![\[Example Lambda function shown in the AWS CLI for AWS Lambda\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/lambda_simple_function.png)
+
+**To invoke an example function**
+
+1. Connect to your DB instance using `psql` or pgAdmin\.
+
+   ```
+   psql -h instance.444455556666.aws-region.rds.amazonaws.com -U postgres -p 5432
+   ```
+
+1. Invoke the function using its ARN\.
+
+   ```
+   SELECT * from aws_lambda.invoke(aws_commons.create_lambda_function_arn('arn:aws:lambda:aws-region:444455556666:function:simple', 'us-west-1'), '{"body": "Hello from Postgres!"}'::json );
+   ```
+
+   The response looks as follows\.
+
+   ```
+   status_code |                        payload                        | executed_version | log_result
+   -------------+-------------------------------------------------------+------------------+------------
+            200 | {"statusCode": 200, "body": "\"Hello from Lambda!\""} | $LATEST          |
+   (1 row)
+   ```
+
+If your invocation attempt doesn't succeed, see [Lambda function error messages ](#PostgreSQL-Lambda-errors)\. 
+
+Following, you can find several examples of calling the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) function\. Most all the examples use the composite structure `aws_lambda_arn_1` that you create in [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function) to simplify passing the function details\. For an example of asynchronous invocation, see [Example: Asynchronous \(Event\) invocation of Lambda functions](#PostgreSQL-Lambda-Event)\. All the other examples listed use synchronous invocation\. 
+
+To learn more about Lambda invocation types, see [Invoking Lambda functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html) in the *AWS Lambda Developer Guide*\. For more information about `aws_lambda_arn_1`, see [aws\_commons\.create\_lambda\_function\_arn](PostgreSQL-Lambda-functions.md#aws_commons.create_lambda_function_arn)\. 
+
+**Topics**
++ [Example: Synchronous \(RequestResponse\) invocation of Lambda functions](#PostgreSQL-Lambda-RequestResponse)
++ [Example: Asynchronous \(Event\) invocation of Lambda functions](#PostgreSQL-Lambda-Event)
++ [Example: Capturing the Lambda execution log in a function response](#PostgreSQL-Lambda-log-response)
++ [Example: Including client context in a Lambda function](#PostgreSQL-Lambda-client-context)
++ [Example: Invoking a specific version of a Lambda function](#PostgreSQL-Lambda-function-version)
+
+### Example: Synchronous \(RequestResponse\) invocation of Lambda functions<a name="PostgreSQL-Lambda-RequestResponse"></a>
+
+Following are two examples of a synchronous Lambda function invocation\. The results of these `aws_lambda.invoke` function calls are the same\.
+
+```
+SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
+```
+
+```
+SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse');
 ```
 
 The parameters are described as follows:
-+ `:'aws_lambda_arn_1'` – This parameter is a structure that identifies the Lambda function to call\. This example uses a variable to identify the previously created structure\. You can instead create the structure by including the [aws\_commons\.create\_lambda\_function\_arn](#aws_commons.create_lambda_function_arn) function call inline within the [aws\_lambda\.invoke](#aws_lambda.invoke) function call as follows\.
++ `:'aws_lambda_arn_1'` – This parameter identifies the composite structure created in [Step 4: Use Lambda helper functions with your RDS for PostgreSQL DB instance \(Optional\)](#PostgreSQL-Lambda-specify-function), with the `aws_commons.create_lambda_function_arn` helper function\. You can also create this structure inline within your `aws_lambda.invoke` call as follows\. 
 
   ```
-  psql=> SELECT * FROM aws_lambda.invoke(aws_commons.create_lambda_function_arn('my-function', 'us-west-2'),
+  SELECT * FROM aws_lambda.invoke(aws_commons.create_lambda_function_arn('my-function', 'aws-region'),
   '{"body": "Hello from Postgres!"}'::json
   );
   ```
 + `'{"body": "Hello from PostgreSQL!"}'::json` – The JSON payload to pass to the Lambda function\.
 + `'RequestResponse'` – The Lambda invocation type\.
 
-### Asynchronous event invocation of Lambda functions<a name="PostgreSQL-Lambda-Event"></a>
+### Example: Asynchronous \(Event\) invocation of Lambda functions<a name="PostgreSQL-Lambda-Event"></a>
 
 Following is an example of an asynchronous Lambda function invocation\. The `Event` invocation type schedules the Lambda function invocation with the specified input payload and returns immediately\. Use the `Event` invocation type in certain workflows that don't depend on the results of the Lambda function\.
 
 ```
-psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'Event');
+SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'Event');
 ```
 
-### Requesting a Lambda execution log in a function response<a name="PostgreSQL-Lambda-log-response"></a>
+### Example: Capturing the Lambda execution log in a function response<a name="PostgreSQL-Lambda-log-response"></a>
 
-You can request to include the last 4 KB of the execution log in the function response, as shown following\.
+You can include the last 4 KB of the execution log in the function response by using the `log_type` parameter in your `aws_lambda.invoke` function call\. By default, this parameter is set to `None`, but you can specify `Tail` to capture the results of the Lambda execution log in the response, as shown following\.
 
 ```
-psql=> SELECT *, select convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
+SELECT *, select convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
 ```
 
-Set the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `log_type` parameter to `Tail` to include the execution log in the response\. The default value for the `log_type` parameter is `None`\.
+Set the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) function's `log_type` parameter to `Tail` to include the execution log in the response\. The default value for the `log_type` parameter is `None`\.
 
 The `log_result` that's returned is a `base64` encoded string\. You can decode the contents using a combination of the `decode` and `convert_from` PostgreSQL functions\.
 
-### Including client context in a Lambda function<a name="PostgreSQL-Lambda-client-context"></a>
+For more information about `log_type`, see [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke)\.
 
-You can pass in client context information that is separate from the payload, as shown following\.
+### Example: Including client context in a Lambda function<a name="PostgreSQL-Lambda-client-context"></a>
 
-```
-psql=> SELECT *, convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
-```
-
-To include client context, use a JSON object for the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `context` parameter\.
-
-### Invoking a specific version of a Lambda function<a name="PostgreSQL-Lambda-function-version"></a>
-
-For an example of invoking a specific version of a Lambda function, see the following\.
+The `aws_lambda.invoke` function has a `context` parameter that you can use to pass information separate from the payload, as shown following\. 
 
 ```
-psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'None', NULL, 'custom_version');
+SELECT *, convert_from(decode(log_result, 'base64'), 'utf-8') as log FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'Tail');
 ```
 
-To identify a Lambda function's version, use the [aws\_lambda\.invoke](#aws_lambda.invoke) function's `qualifier` parameter\. In this example, `'custom_version'` is an alias or version that identifies the version of the function to invoke\.
+To include client context, use a JSON object for the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) function's `context` parameter\.
 
-You can instead supply a Lambda function qualifier with the function name information as follows\.
+For more information about the `context` parameter, see the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) reference\. 
+
+### Example: Invoking a specific version of a Lambda function<a name="PostgreSQL-Lambda-function-version"></a>
+
+You can specify a particular version of a Lambda function by including the `qualifier` parameter with the `aws_lambda.invoke` call\. Following, you can find an example that does this using `'custom_version'` as an alias for the version\.
 
 ```
-psql=> SELECT * FROM aws_lambda.invoke(aws_commons.create_lambda_function_arn('my-function:custom_version', 'us-west-2'),
-'{"body": "Hello from Postgres!"}'::json
-);
+SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json, 'RequestResponse', 'None', NULL, 'custom_version');
 ```
 
-### Lambda function error handling<a name="PostgreSQL-Lambda-errors"></a>
+You can also supply a Lambda function qualifier with the function name details instead, as follows\.
+
+```
+SELECT * FROM aws_lambda.invoke(aws_commons.create_lambda_function_arn('my-function:custom_version', 'us-west-2'),
+'{"body": "Hello from Postgres!"}'::json);
+```
+
+For more information about `qualifier` and other parameters, see the [aws\_lambda\.invoke](PostgreSQL-Lambda-functions.md#aws_lambda.invoke) reference\.
+
+## Lambda function error messages<a name="PostgreSQL-Lambda-errors"></a>
+
+Incorrect VPC configuration can result in error messages, such as the following\. 
+
+```
+ERROR:  invoke API failed
+DETAIL: AWS Lambda client returned 'Unable to connect to endpoint'.
+CONTEXT:  SQL function "invoke" statement 1
+```
+
+The first thing to check is your VPC security group\. Make sure you have an outbound rule for TCP open on port 443 so that your VPC can connect to the Lambda VPC\.
+
+If your DB instance is private, check the private DNS setup for your VPC\. Make sure that you set the `rds.custom_dns_resolution` parameter to 1 and setup AWS PrivateLink as outlined in [Step 1: Configure your RDS for PostgreSQL DB instance for outbound connections to AWS Lambda](#PostgreSQL-Lambda-network)\. For more information, see [Interface VPC endpoints \(AWS PrivateLink\)](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-interface.html#vpce-private-dns)\. 
 
 If a Lambda function throws an exception during request processing, `aws_lambda.invoke` fails with a PostgreSQL error such as the following\.
 
 ```
-psql=> SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
+SELECT * FROM aws_lambda.invoke(:'aws_lambda_arn_1', '{"body": "Hello from Postgres!"}'::json);
 ERROR:  lambda invocation failed
-DETAIL:  "arn:aws:lambda:us-west-2:123456789012:function:my-function" returned error "Unhandled", details: "<Error details string>".
+DETAIL:  "arn:aws:lambda:us-west-2:555555555555:function:my-function" returned error "Unhandled", details: "<Error details string>".
 ```
 
-## Function reference<a name="PostgreSQL-Lambda-functions"></a>
-
-Following is the reference for the functions to use for invoking Lambda functions with RDS for PostgreSQL\.
-
-**Topics**
-+ [aws\_lambda\.invoke](#aws_lambda.invoke)
-+ [aws\_commons\.create\_lambda\_function\_arn](#aws_commons.create_lambda_function_arn)
-
-### aws\_lambda\.invoke<a name="aws_lambda.invoke"></a>
-
-Runs a Lambda function for an RDS for PostgreSQL DB instance\.
-
-For more details about invoking Lambda functions, see also [Invoke](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html) in the *AWS Lambda Developer Guide\.*
-
-**Syntax**
-
-------
-#### [ JSON ]
-
-```
-aws_lambda.invoke(
-IN function_name TEXT,
-IN payload JSON,
-IN region TEXT DEFAULT NULL,
-IN invocation_type TEXT DEFAULT 'RequestResponse',
-IN log_type TEXT DEFAULT 'None',
-IN context JSON DEFAULT NULL,
-IN qualifier VARCHAR(128) DEFAULT NULL,
-OUT status_code INT,
-OUT payload JSON,
-OUT executed_version TEXT,
-OUT log_result TEXT)
-```
-
-```
-aws_lambda.invoke(
-IN function_name aws_commons._lambda_function_arn_1,
-IN payload JSON,
-IN invocation_type TEXT DEFAULT 'RequestResponse',
-IN log_type TEXT DEFAULT 'None',
-IN context JSON DEFAULT NULL,
-IN qualifier VARCHAR(128) DEFAULT NULL,
-OUT status_code INT,
-OUT payload JSON,
-OUT executed_version TEXT,
-OUT log_result TEXT)
-```
-
-------
-#### [ JSONB ]
-
-```
-aws_lambda.invoke(
-IN function_name TEXT,
-IN payload JSONB,
-IN region TEXT DEFAULT NULL,
-IN invocation_type TEXT DEFAULT 'RequestResponse',
-IN log_type TEXT DEFAULT 'None',
-IN context JSONB DEFAULT NULL,
-IN qualifier VARCHAR(128) DEFAULT NULL,
-OUT status_code INT,
-OUT payload JSONB,
-OUT executed_version TEXT,
-OUT log_result TEXT)
-```
-
-```
-aws_lambda.invoke(
-IN function_name aws_commons._lambda_function_arn_1,
-IN payload JSONB,
-IN invocation_type TEXT DEFAULT 'RequestResponse',
-IN log_type TEXT DEFAULT 'None',
-IN context JSONB DEFAULT NULL,
-IN qualifier VARCHAR(128) DEFAULT NULL,
-OUT status_code INT,
-OUT payload JSONB,
-OUT executed_version TEXT,
-OUT log_result TEXT
-)
-```
-
-------Input parameters
-
-**function\_name**  
-The identifying name of the Lambda function\. The value can be the function name, an ARN, or a partial ARN\. For a listing of possible formats, see [ Lambda function name formats](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestParameters) in the *AWS Lambda Developer Guide\.*
-
-*payload*  
-The input for the Lambda function\. The format can be JSON or JSONB\. For more information, see [JSON Types](https://www.postgresql.org/docs/current/datatype-json.html) in the PostgreSQL documentation\.
-
-*region*  
-\(Optional\) The Lambda Region for the function\. By default, RDS resolves the AWS Region from the full ARN in the `function_name` or it uses the RDS for PostgreSQL DB instance Region\. If this Region value conflicts with the one provided in the `function_name` ARN, an error is raised\.
-
-*invocation\_type*  
-The invocation type of the Lambda function\. The value is case\-sensitive\. Possible values include the following:  
-+ `RequestResponse` – The default\. This type of invocation for a Lambda function is synchronous and returns a response payload in the result\. Use the `RequestResponse` invocation type when your workflow depends on receiving the Lambda function result immediately\. 
-+ `Event` – This type of invocation for a Lambda function is asynchronous and returns immediately without a returned payload\. Use the `Event` invocation type when you don't need results of the Lambda function before your workflow moves on\.
-+ `DryRun` – This type of invocation tests access without running the Lambda function\. 
-
-*log\_type*  
-The type of Lambda log to return in the `log_result` output parameter\. The value is case\-sensitive\. Possible values include the following:  
-+ Tail – The returned `log_result` output parameter will include the last 4 KB of the execution log\. 
-+ None – No Lambda log information is returned\.
-
-*context*  
-Client context in JSON or JSONB format\. Fields to use include than `custom` and `env`\.
-
-*qualifier*  
-A qualifier that identifies a Lambda function's version to be invoked\. If this value conflicts with one provided in the `function_name` ARN, an error is raised\.Output parameters
-
-*status\_code*  
-An HTTP status response code\. For more information, see [Lambda Invoke response elements](https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_ResponseElements) in the *AWS Lambda Developer Guide\.*
-
-*payload*  
-The information returned from the Lambda function that ran\. The format is in JSON or JSONB\.
-
-*executed\_version*  
-The version of the Lambda function that ran\.
-
-*log\_result*  
-The execution log information returned if the `log_type` value is `Tail` when the Lambda function was invoked\. The result contains the last 4 KB of the execution log encoded in Base64\.
-
-### aws\_commons\.create\_lambda\_function\_arn<a name="aws_commons.create_lambda_function_arn"></a>
-
-Creates an `aws_commons._lambda_function_arn_1` structure to hold Lambda function name information\. You can use the results of the `aws_commons.create_lambda_function_arn` function in the `function_name` parameter of the aws\_lambda\.invoke [aws\_lambda\.invoke](#aws_lambda.invoke) function\. 
-
-**Syntax**
-
-```
-aws_commons.create_lambda_function_arn(
-    function_name TEXT,
-    region TEXT DEFAULT NULL
-    )
-    RETURNS aws_commons._lambda_function_arn_1
-```Input parameters
-
-*function\_name*  
-A required text string containing the Lambda function name\. The value can be a function name, a partial ARN, or a full ARN\.
-
-*region*  
-An optional text string containing the AWS Region that the Lambda function is in\. For a listing of Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
+Be sure to handle errors in your Lambda functions or in your PostgreSQL application\.

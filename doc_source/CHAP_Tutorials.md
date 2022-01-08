@@ -19,7 +19,7 @@ The following tutorials in this guide show you how to perform common tasks with 
 + [Tutorial: Create a web server and an Amazon RDS DB instance](TUT_WebAppWithRDS.md)
 
   Learn how to install an Apache web server with PHP and create a MySQL database\. The web server runs on an Amazon EC2 instance using Amazon Linux, and the MySQL database is a MySQL DB instance\. Both the Amazon EC2 instance and the DB instance run in an Amazon VPC\.
-+ [Tutorial: Restore a DB instance from a DB snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
++ [Tutorial: Restore an Amazon RDS DB instance from a DB snapshot](CHAP_Tutorials.RestoringFromSnapshot.md)
 
   Learn how to restore a DB instance from a DB snapshot\.
 + [Tutorial: Use tags to specify which DB instances to stop](USER_Tagging.md#Tagging.RDS.Autostop)

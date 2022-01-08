@@ -1,10 +1,10 @@
 # Using SSL/TLS to encrypt a connection to a DB instance<a name="UsingWithRDS.SSL"></a>
 
-You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL\. Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB instance, use the link following that corresponds to your DB engine: 
+You can use Secure Socket Layer \(SSL\) or Transport Layer Security \(TLS\) from your application to encrypt a connection to a DB instance running MariaDB, Microsoft SQL Server, MySQL, Oracle, or PostgreSQL\.
 
 SSL/TLS connections provide one layer of security by encrypting data that moves between your client and a DB instance\. Using a server certificate provides an extra layer of security by validating that the connection is being made to an Amazon RDS DB instance\. It does so by checking the server certificate that is automatically installed on all DB instances that you provision\.
 
-Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB cluster, use the link following that corresponds to your DB engine: 
+Each DB engine has its own process for implementing SSL/TLS\. To learn how to implement SSL/TLS for your DB instance, use the link following that corresponds to your DB engine: 
 + [Using SSL with a MariaDB DB instance](CHAP_MariaDB.md#MariaDB.Concepts.SSLSupport)
 + [Using SSL with a Microsoft SQL Server DB instance](SQLServer.Concepts.General.SSL.Using.md)
 + [Using SSL with a MySQL DB instance](CHAP_MySQL.md#MySQL.Concepts.SSLSupport)

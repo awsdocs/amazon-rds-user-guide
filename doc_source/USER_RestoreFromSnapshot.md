@@ -17,24 +17,35 @@ You can't restore a DB instance from a DB snapshot that is both shared and encry
 
 ## Parameter group considerations<a name="USER_RestoreFromSnapshot.Parameters"></a>
 
-We recommend that you retain the parameter group for any DB snapshots you create, so that you can associate your restored DB instance with the correct parameter group\. You can specify the parameter group when you restore the DB instance\. 
+We recommend that you retain the DB parameter group for any DB snapshots you create, so that you can associate your restored DB instance with the correct parameter group\.
+
+The default DB parameter group is associated with the restored instance, unless you choose a different one\. No custom parameter settings are available in the default parameter group\.
+
+You can specify the parameter group when you restore the DB instance\.
+
+For more information about DB parameter groups and DB cluster parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
 ## Security group considerations<a name="USER_RestoreFromSnapshot.Security"></a>
 
-When you restore a DB instance, the default security group is associated with the restored instance by default\.
+When you restore a DB instance, the default virtual private cloud \(VPC\), DB subnet group, and VPC security group are associated with the restored instance, unless you choose different ones\.
++ If you're using the Amazon RDS console, you can specify a custom VPC security group to associate with the instance or create a new VPC security group\.
++ If you're using the AWS CLI, you can specify a custom VPC security group to associate with the instance by including the `--vpc-security-group-ids` option in the `restore-db-instance-from-db-snapshot` command\.
++ If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBInstanceFromDBSnapshot` action\.
 
-**Note**  
-If you're using the Amazon RDS console, you can specify a custom security group to associate with the instance or create a new VPC security group\.
-If you're using the AWS CLI, you can specify a custom security group to associate with the instance by including the `--vpc-security-group-ids` option in the `restore-db-instance-from-db-snapshot` command\.
-If you're using the Amazon RDS API, you can include the `VpcSecurityGroupIds.VpcSecurityGroupId.N` parameter in the `RestoreDBInstanceFromDBSnapshot` action\.
-
-As soon as the restore is complete and your new DB instance is available, you can associate any custom security groups used by the snapshot you restored from\. You must apply these changes by modifying the DB instance with the RDS console, the AWS CLI `modify-db-instance` command, or the `ModifyDBInstance` Amazon RDS API operation\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
+As soon as the restore is complete and your new DB instance is available, you can also change the VPC settings by modifying the DB instance\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
 ## Option group considerations<a name="USER_RestoreFromSnapshot.Options"></a>
 
-When you restore a DB instance, the option group associated with the DB snapshot is associated with the restored DB instance after it is created\. For example, if the DB snapshot you are restoring from uses Oracle Transparent Data Encryption, the restored DB instance will use the same option group\. 
+When you restore a DB instance, the default DB option group is associated with the restored DB instance in most cases\.
 
-When you assign an option group to a DB instance, the option group is also linked to the supported platform the DB instance is on, either VPC or EC2\-Classic \(non\-VPC\)\. If a DB instance is in a VPC, the option group associated with the DB instance is linked to that VPC\. This means that you can't use the option group assigned to a DB instance if you attempt to restore the instance into a different VPC or onto a different platform\. If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance\. For persistent or permanent options, when restoring a DB instance into a different VPC you must create a new option group that includes the persistent or permanent option\. 
+The exception is when the source DB instance is associated with an option group that contains a persistent or permanent option\. For example, if the source DB instance uses Oracle Transparent Data Encryption \(TDE\), the restored DB instance must use an option group that has the TDE option\.
+
+If you restore a DB instance into a different VPC, you must do one of the following to assign a DB option group:
++ Assign the default option group for that VPC group to the instance\.
++ Assign another option group that is linked to that VPC\.
++ Create a new option group and assign it to the DB instance\. With persistent or permanent options, such as Oracle TDE, you must create a new option group that includes the persistent or permanent option\.
+
+For more information about DB option groups, see [Working with option groups](USER_WorkingWithOptionGroups.md)\.
 
 ## Microsoft SQL Server considerations<a name="USER_RestoreFromSnapshot.MSSQL"></a>
 

@@ -48,6 +48,31 @@ Adding the MariaDB Audit Plugin to a DB instance might cause an outage\. We reco
    + For a new DB instance, you apply the option group when you launch the instance\. For more information, see [Creating an Amazon RDS DB instance](USER_CreateDBInstance.md)\. 
    + For an existing DB instance, you apply the option group by modifying the instance and attaching the new option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\. 
 
+## Audit log format<a name="Appendix.MySQL.Options.AuditPlugin.LogFormat"></a>
+
+Log files are represented as comma\-separated variable \(CSV\) files in UTF\-8 format\. The audit log is stored separately on the local \(ephemeral\) storage of each RDS for MySQL DB instance\.
+
+**Tip**  
+Log file entries are not in sequential order\. To order the entries, use the timestamp value\. To see the latest events, you might have to review all log files\. For more flexibility in sorting and searching the log data, turn on the setting to upload the audit logs to CloudWatch and view them using the CloudWatch interface\.  
+ To view audit data with more types of fields and with output in JSON format, you can also use the Database Activity Streams feature\. For more information, see [Monitoring Amazon RDS for Oracle using Database Activity Streams](DBActivityStreams.md)\. 
+
+The audit log files include the following comma\-delimited information in rows, in the specified order:
+
+
+| Field | Description | 
+| --- | --- | 
+|  timestamp  |  The Unix time stamp for the logged event with microsecond precision\.  | 
+|  serverhost  |  The name of the instance that the event is logged for\.  | 
+|  username  |  The connected user name of the user\.  | 
+|  host  |  The host that the user connected from\.  | 
+|  connectionid  |  The connection ID number for the logged operation\.  | 
+|  queryid  |  The query ID number, which can be used for finding the relational table events and related queries\. For `TABLE` events, multiple lines are added\.  | 
+|  operation  |  The recorded action type\. Possible values are: `CONNECT`, `QUERY`, `READ`, `WRITE`, `CREATE`, `ALTER`, `RENAME`, and `DROP`\.  | 
+|  database  |  The active database, as set by the `USE` command\.  | 
+|  object  |  For `QUERY` events, this value indicates the query that the database performed\. For `TABLE` events, it indicates the table name\.  | 
+|  retcode  |  The return code of the logged operation\.  | 
+|  connection\_type  |  The security state of the connection to the server\. Possible values are: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.MySQL.Options.AuditPlugin.html) This field is included only for RDS for MySQL version 5\.7\.34 and higher 5\.7 versions, and all 8\.0 versions\.  | 
+
 ## Viewing and downloading the MariaDB Audit Plugin log<a name="Appendix.MySQL.Options.AuditPlugin.Log"></a>
 
 After you enable the MariaDB Audit Plugin, you access the results in the log files the same way you access any other text\-based log files\. The audit log files are located at `/rdsdbdata/log/audit/`\. For information about viewing the log file in the console, see [Viewing and listing database log files](USER_LogAccess.Procedural.Viewing.md)\. For information about downloading the log file, see [Downloading a database log file](USER_LogAccess.Procedural.Downloading.md)\. 
