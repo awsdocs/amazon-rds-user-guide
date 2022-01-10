@@ -39,7 +39,7 @@ Lambda functions always run inside an Amazon VPC owned by the AWS Lambda service
 
    1. Create a custom DB parameter group\.
 
-   1. Change the value of the `rds.custom_dns_resulution` parameter from its default of `0` to `1`\. 
+   1. Change the value of the `rds.custom_dns_resolution` parameter from its default of `0` to `1`\. 
 
    1. Modify your DB instance to use your custom DB parameter group\.
 
