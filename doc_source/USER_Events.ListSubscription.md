@@ -31,4 +31,4 @@ aws rds describe-event-subscriptions --subscription-name myfirsteventsubscriptio
 
 ## API<a name="USER_Events.ListSubscription.API"></a>
 
-To list your current Amazon RDS event notification subscriptions, call the Amazon RDS API [ `DescribeEventSubscriptions`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventSubscriptions.html) action\.
+To list your current Amazon RDS event notification subscriptions, call the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventSubscriptions.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventSubscriptions.html) action\.

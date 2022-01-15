@@ -9,20 +9,26 @@ Amazon RDS Performance Insights monitors your Amazon RDS DB instance so that you
 + Add Performance Insights data to existing monitoring dashboards
 + Build monitoring tools
 
-To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\.
+To use the Performance Insights API, enable Performance Insights on one of your Amazon RDS DB instances\. For information about enabling Performance Insights, see [Enabling and disabling Performance Insights](USER_PerfInsights.Enabling.md)\. For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
 
 The Performance Insights API provides the following operations\.
 
 
 ****  
 
-|  Performance Insights Operation  |  AWS CLI Command  |  Description  | 
+|  Performance Insights action  |  AWS CLI command  |  Description  | 
 | --- | --- | --- | 
 |  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_DescribeDimensionKeys.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html](https://docs.aws.amazon.com/cli/latest/reference/pi/describe-dimension-keys.html)  |  Retrieves the top N dimension keys for a metric for a specific time period\.  | 
-|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html)  | [https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html) |  Retrieves the attributes of the specified dimension group for a DB instance or data source\. For example, if you specify a SQL ID, and if the dimension details are available, `GetDimensionKeyDetails` retrieves the full text of the dimension `db.sql.statement` associated with this ID\. This operation is useful because `GetResourceMetrics` and `DescribeDimensionKeys` don't support retrieval of large SQL statement text\.   | 
+|  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetDimensionKeyDetails.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-dimension-key-details.html)  |  Retrieves the attributes of the specified dimension group for a DB instance or data source\. For example, if you specify a SQL ID, and if the dimension details are available, `GetDimensionKeyDetails` retrieves the full text of the dimension `db.sql.statement` associated with this ID\. This operation is useful because `GetResourceMetrics` and `DescribeDimensionKeys` don't support retrieval of large SQL statement text\.   | 
+| [GetResourceMetadata](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetadata.html) |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metadata.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metadata.html)  |  Retrieve the metadata for different features\. For example, the metadata might indicate that a feature is turned on or off on a specific DB instance\.   | 
 |  [https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_GetResourceMetrics.html)  |  [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)  |  Retrieves Performance Insights metrics for a set of data sources over a time period\. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group\.  | 
+| [ListAvailableResourceDimensions](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_ListAvailableResourceDimensions.html) |  [https://docs.aws.amazon.com/cli/latest/reference/pi/list-available-resource-dimensions.html](https://docs.aws.amazon.com/cli/latest/reference/pi/list-available-resource-dimensions.html)  |  Retrieve the dimensions that can be queried for each specified metric type on a specified instance\.   | 
+| [ListAvailableResourceMetrics](https://docs.aws.amazon.com/performance-insights/latest/APIReference/API_ListAvailableResourceMetrics.html) |  [https://docs.aws.amazon.com/cli/latest/reference/pi/list-available-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/list-available-resource-metrics.html)  |  Retrieve all available metrics of the specified metric types that can be queried for a specified DB instance\.  | 
 
-For more information about the Performance Insights API, see the [Amazon RDS Performance Insights API Reference](https://docs.aws.amazon.com/performance-insights/latest/APIReference/Welcome.html)\.
+**Topics**
++ [AWS CLI for Performance Insights](#USER_PerfInsights.API.CLI)
++ [Retrieving time\-series metrics](#USER_PerfInsights.API.TimeSeries)
++ [AWS CLI examples for Performance Insights](#USER_PerfInsights.API.Examples)
 
 ## AWS CLI for Performance Insights<a name="USER_PerfInsights.API.CLI"></a>
 
@@ -42,7 +48,7 @@ For example, the AWS Management Console uses `GetResourceMetrics` to populate th
 
 ![\[Counter Metrics and Database Load charts\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/perf-insights-api-charts.png)
 
-All metrics returned by `GetResourceMetrics` are standard time\-series metrics, with the exception of `db.load`\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called dimensions\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
+All metrics returned by `GetResourceMetrics` are standard time\-series metrics, with the exception of `db.load`\. This metric is displayed in the **Database Load** chart\. The `db.load` metric is different from the other time\-series metrics because you can break it into subcomponents called *dimensions*\. In the previous image, `db.load` is broken down and grouped by the waits states that make up the `db.load`\.
 
 **Note**  
 `GetResourceMetrics` can also return the `db.sampleload` metric, but the `db.load` metric is appropriate in most cases\.
@@ -63,7 +69,7 @@ For example, assume that a metric is collected for 300 seconds \(5 minutes\), an
 + Sum – 15
 + Sample count – 5
 
-For information about using the `get-resource-metrics` AWS CLI command, see [ `get-resource-metrics`](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)\.
+For information about using the `get-resource-metrics` AWS CLI command, see [https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html](https://docs.aws.amazon.com/cli/latest/reference/pi/get-resource-metrics.html)\.
 
 For the `--metric-queries` option, specify one or more queries that you want to get results for\. Each query consists of a mandatory `Metric` and optional `GroupBy` and `Filter` parameters\. The following is an example of a `--metric-queries` option specification\.
 
@@ -422,7 +428,7 @@ For tokenized SQL, there are three entries in each dimensions list:
 + `db.sql_tokenized.db_id ` – Either the native database ID used to refer to the SQL, or a synthetic ID that Performance Insights generates for you if the native database ID isn't available\. This example returns the `pi-2372568224` synthetic ID\.
 + `db.sql_tokenized.id` – The ID of the query inside Performance Insights\.
 
-  In the AWS Management Console, this ID is called the Support ID\. It's named this because the ID is data that AWS Support can examine to help you troubleshoot an issue with your database\. AWS takes the security and privacy of your data extremely seriously, and almost all data is stored encrypted with your AWS KMS key\. Therefore, nobody inside AWS can look at this data\. In the example preceding, both the `tokenized.statement` and the `tokenized.db_id` are stored encrypted\. If you have an issue with your database, AWS Support can help you by referencing the Support ID\.
+  In the AWS Management Console, this ID is called the Support ID\. It's named this because the ID is data that AWS Support can examine to help you troubleshoot an issue with your database\. AWS takes the security and privacy of your data extremely seriously, and almost all data is stored encrypted with your AWS KMS customer master key \(CMK\)\. Therefore, nobody inside AWS can look at this data\. In the example preceding, both the `tokenized.statement` and the `tokenized.db_id` are stored encrypted\. If you have an issue with your database, AWS Support can help you by referencing the Support ID\.
 
 When querying, it might be convenient to specify a `Group` in `GroupBy`\. However, for finer\-grained control over the data that's returned, specify the list of dimensions\. For example, if all that is needed is the `db.sql_tokenized.statement`, then a `Dimensions` attribute can be added to the query\.json file\.
 
@@ -617,8 +623,8 @@ For Linux, macOS, or Unix:
 aws pi get-dimension-key-details \
    --service-type RDS \
    --identifier db-10BCD2EFGHIJ3KL4M5NO6PQRS5 \
-   --dimension-group db.sql \
-   --dimension-group-identifier my-sql-id \
+   --group db.sql \
+   --group-identifier my-sql-id \
    --requested-dimensions statement
 ```
 
@@ -628,8 +634,8 @@ For Windows:
 aws pi get-dimension-key-details ^
    --service-type RDS ^
    --identifier db-10BCD2EFGHIJ3KL4M5NO6PQRS5 ^
-   --dimension-group db.sql ^
-   --dimension-group-identifier my-sql-id ^
+   --group db.sql ^
+   --group-identifier my-sql-id ^
    --requested-dimensions statement
 ```
 

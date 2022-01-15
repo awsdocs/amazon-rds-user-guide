@@ -91,7 +91,7 @@ In the source Region, replicated backups are listed on the **Current Region** ta
 
 ### AWS CLI<a name="AutomatedBackups.Replicating.Enable.CLI"></a>
 
-Enable backup replication by using the [ `start-db-instance-automated-backups-replication`](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html) AWS CLI command\.
+Enable backup replication by using the [https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html](https://docs.aws.amazon.com/cli/latest/reference/rds/start-db-instance-automated-backups-replication.html) AWS CLI command\.
 
 The following CLI example replicates automated backups from a DB instance in the US West \(Oregon\) Region to the US East \(N\. Virginia\) Region\. It also encrypts the replicated backups, using an AWS KMS key in the destination Region\.
 

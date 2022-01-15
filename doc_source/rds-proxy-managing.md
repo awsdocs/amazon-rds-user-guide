@@ -294,7 +294,7 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
    However, for PostgreSQL setting a variable leads to session pinning\. 
 +  Apply a session pinning filter to the proxy\. You can exempt certain kinds of operations from pinning the session if you know that doing so doesn't affect the correct operation of your application\. 
-+  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](rds-proxy.monitoring.md)\. 
++  See how frequently pinning occurs by monitoring the CloudWatch metric `DatabaseConnectionsCurrentlySessionPinned`\. For information about this and other CloudWatch metrics, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 +  If you use `SET` statements to perform identical initialization for each client connection, you can do so while preserving transaction\-level multiplexing\. In this case, you move the statements that set up the initial session state into the initialization query used by a proxy\. This property is a string containing one or more SQL statements, separated by semicolons\. 
 
    For example, you can define an initialization query for a proxy that sets certain configuration parameters\. Then, RDS Proxy applies those settings whenever it sets up a new connection for that proxy\. You can remove the corresponding `SET` statements from your application code, so that they don't interfere with transaction\-level multiplexing\. 
@@ -327,7 +327,7 @@ This setting is represented by the **Connection borrow timeout** field in the RD
 
  If you have expert knowledge about your application behavior, you can skip the pinning behavior for certain application statements\. To do so, choose the **Session pinning filters** option when creating the proxy\. Currently, you can opt out of session pinning for setting session variables and configuration settings\. 
 
- For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](rds-proxy.monitoring.md)\. 
+ For metrics about how often pinning occurs for a proxy, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 
 ## Deleting an RDS Proxy<a name="rds-proxy-deleting"></a>
 

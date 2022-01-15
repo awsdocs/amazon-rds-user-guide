@@ -137,4 +137,4 @@ aws_commons.create_lambda_function_arn(
 A required text string containing the Lambda function name\. The value can be a function name, a partial ARN, or a full ARN\.
 
 *region*  
-An optional text string containing the AWS Region that the Lambda function is in\. For a listing of Region names and associated values, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\.
+An optional text string containing the AWS Region that the Lambda function is in\. For a listing of Region names and associated values, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\.

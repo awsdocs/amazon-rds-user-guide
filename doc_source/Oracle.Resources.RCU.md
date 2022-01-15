@@ -41,7 +41,7 @@ You can store the schemas for any Fusion Middleware components in your Amazon RD
 ## Guidelines for using RCU<a name="Oracle.Resources.RCU.Recommendations"></a>
 
 The following are some recommendations for working with your DB instance in this scenario: 
-+ We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
++ We recommend that you use Multi\-AZ for production workloads\. For more information about working with multiple Availability Zones, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 + For additional security, Oracle recommends that you use Transparent Data Encryption \(TDE\) to encrypt your data at rest\. If you have an Enterprise Edition license that includes the Advanced Security Option, you can enable encryption at rest by using the TDE option\. For more information, see [Oracle Transparent Data Encryption](Appendix.Oracle.Options.AdvSecurity.md)\. 
 
   Amazon RDS also provides an encryption at rest option for all database editions\. For more information, see [Encrypting Amazon RDS resources](Overview.Encryption.md)\. 

@@ -114,3 +114,36 @@ To turn on Enhanced Monitoring using the RDS API, set the `MonitoringInterval` p
 The `MonitoringInterval` parameter specifies the interval, in seconds, between points when Enhanced Monitoring metrics are collected\. Valid values are `0`, `1`, `5`, `10`, `15`, `30`, and `60`\.
 
 To turn off Enhanced Monitoring using the RDS API, set `MonitoringInterval` to `0`\.
+
+## Protecting against the confused deputy problem<a name="USER_Monitoring.OS.confused-deputy"></a>
+
+The confused deputy problem is a security issue where an entity that doesn't have permission to perform an action can coerce a more\-privileged entity to perform the action\. In AWS, cross\-service impersonation can result in the confused deputy problem\. Cross\-service impersonation can occur when one service \(the *calling service*\) calls another service \(the *called service*\)\. The calling service can be manipulated to use its permissions to act on another customer's resources in a way it should not otherwise have permission to access\. To prevent this, AWS provides tools that help you protect your data for all services with service principals that have been given access to resources in your account\. For more information, see [The confused deputy problem](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)\.
+
+To limit the permissions to the resource that Amazon RDS can give another service, we recommend using the `aws:SourceArn` and `aws:SourceAccount` global condition context keys in a trust policy for your Enhanced Monitoring role\. If you use both global condition context keys, they must use the same account ID\.
+
+The most effective way to protect against the confused deputy problem is to use the `aws:SourceArn` global condition context key with the full ARN of the resource\. For Amazon RDS, set `aws:SourceArn` to `arn:aws:rds:Region:my-account-id:db/dbname`\.
+
+The following example uses the `aws:SourceArn` and `aws:SourceAccount` global condition context keys in a trust policy to prevent the confused deputy problem\.
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "rds.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringLike": {
+          "aws:SourceArn": "arn:aws:rds:Region:my-account-id:db/dbname"
+        },
+        "StringEquals": {
+          "aws:SourceAccount": "my-account-id"
+        }
+      }
+    }
+  ]
+}
+```

@@ -3,12 +3,17 @@
 Known issues and limitations for working with Amazon RDS for MySQL are as follows\.
 
 **Topics**
++ [InnoDB reserved word](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbDatabaseName)
 + [Inconsistent InnoDB buffer pool size](#MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize)
 + [Index merge optimization returns wrong results](#MySQL.Concepts.KnownIssuesAndLimitations.IndexMergeOptimization)
 + [Log file size](#MySQL.Concepts.KnownIssuesAndLimitations.LogFileSize)
 + [MySQL parameter exceptions for Amazon RDS DB instances](#MySQL.Concepts.ParameterNotes)
 + [MySQL file size limits in Amazon RDS](#MySQL.Concepts.Limits.FileSize)
 + [MySQL Keyring Plugin not supported](#MySQL.Concepts.Limits.KeyRing)
+
+## InnoDB reserved word<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbDatabaseName"></a>
+
+`InnoDB` is a reserved word for RDS for MySQL\. You can't use this name for a MySQL database\.
 
 ## Inconsistent InnoDB buffer pool size<a name="MySQL.Concepts.KnownIssuesAndLimitations.InnodbBufferPoolSize"></a>
 

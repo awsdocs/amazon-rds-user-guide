@@ -87,7 +87,7 @@ Make sure that you save this password\. AWS Directory Service doesn't store this
 
 ## Step 2: \(Optional\) create a trust for an on\-premises Active Directory<a name="postgresql-kerberos-setting-up.create-trust"></a>
 
-If you don't plan to use your own on\-premises Microsoft Active Directory, skip to [Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service ](#postgresql-kerberos-setting-up.CreateIAMRole)\.
+If you don't plan to use your own on\-premises Microsoft Active Directory, skip to [Step 3: Create an IAM role for Amazon RDS to access the AWS Directory Service](#postgresql-kerberos-setting-up.CreateIAMRole)\.
 
 To get Kerberos authentication using your on\-premises Active Directory, you need to create a trusting domain relationship using a forest trust between your on\-premises Microsoft Active Directory and the AWS Managed Microsoft AD directory \(created in [Step 1: Create a directory using AWS Managed Microsoft AD](#postgresql-kerberos-setting-up.create-directory)\)\. The trust can be one\-way, where the AWS Managed Microsoft AD directory trusts the on\-premises Microsoft Active Directory\. The trust can also be two\-way, where both Active Directories trust each other\. For more information about setting up trusts using AWS Directory Service, see [When to create a trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
 
@@ -158,7 +158,7 @@ To create users in an AWS Directory Service directory, you must be connected to 
 
 ## Step 5: Enable cross\-VPC traffic between the directory and the DB instance<a name="postgresql-kerberos-setting-up.vpc-peering"></a>
 
-If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [ Step 6: Create or modify a PostgreSQL DB instance ](#postgresql-kerberos-setting-up.create-modify)\.
+If you plan to locate the directory and the DB instance in the same VPC, skip this step and move on to [ Step 6: Create or modify a PostgreSQL DB instance](#postgresql-kerberos-setting-up.create-modify)\.
 
 If you plan to locate the directory and the DB instance in different VPCs, configure cross\-VPC traffic using VPC peering or [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html)\.
 

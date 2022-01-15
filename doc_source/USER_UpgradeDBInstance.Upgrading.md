@@ -109,5 +109,74 @@ When you perform these tasks, you can control whether auto minor version upgrade
 
 To determine whether a maintenance update, such as a DB engine version upgrade, is available for your DB instance, you can use the console, AWS CLI, or RDS API\. You can also upgrade the DB engine version manually and adjust the maintenance window\. For more information, see [Maintaining a DB instance](USER_UpgradeDBInstance.Maintenance.md)\.
 
+You can use the following AWS CLI command to determine the current automatic minor upgrade target version for a specified minor DB engine version in a specific AWS Region\. You can find the possible `--engine` values for this command in the description for the `Engine` parameter in [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+--engine engine \
+--engine-version minor-version \
+--region region \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output text
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine engine ^
+--engine-version minor-version ^
+--region region ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output text
+```
+
+For example, the following AWS CLI command determines the automatic minor upgrade target for MySQL minor version 8\.0\.11 in the US East \(Ohio\) AWS Region \(us\-east\-2\)\.
+
+For Linux, macOS, or Unix:
+
+```
+aws rds describe-db-engine-versions \
+--engine mysql \
+--engine-version 8.0.11 \
+--region us-east-2 \
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" \
+--output table
+```
+
+For Windows:
+
+```
+aws rds describe-db-engine-versions ^
+--engine mysql ^
+--engine-version 8.0.11 ^
+--region us-east-2 ^
+--query "DBEngineVersions[*].ValidUpgradeTarget[*].{AutoUpgrade:AutoUpgrade,EngineVersion:EngineVersion}" ^
+--output table
+```
+
+Your output is similar to the following\.
+
+```
+----------------------------------
+|    DescribeDBEngineVersions    |
++--------------+-----------------+
+|  AutoUpgrade |  EngineVersion  |
++--------------+-----------------+
+|  False       |  8.0.15         |
+|  False       |  8.0.16         |
+|  False       |  8.0.17         |
+|  False       |  8.0.19         |
+|  False       |  8.0.20         |
+|  False       |  8.0.21         |
+|  True        |  8.0.23         |
+|  False       |  8.0.25         |
++--------------+-----------------+
+```
+
+In this example, the `AutoUpgrade` value is `True` for MySQL version 8\.0\.23\. So, the automatic minor upgrade target is MySQL version 8\.0\.23, which is highlighted in the output\.
+
 **Important**  
 If you plan to migrate an RDS for PostgreSQL DB instance to an Aurora PostgreSQL DB cluster in the near future, we strongly recommend that you disable auto minor version upgrades for the DB instance early in the migration planning phase\. Migration to Aurora PostgreSQL might be delayed if the RDS for PostgreSQL version isn't yet supported by Aurora PostgreSQL\. For information about Aurora PostgreSQL versions, see [ Engine versions for Amazon Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)\.

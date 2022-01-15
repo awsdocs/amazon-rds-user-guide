@@ -16,13 +16,13 @@ Amazon RDS for PostgreSQL is compliant with many industry standards\. For exampl
 To import PostgreSQL data into a DB instance, follow the information in the [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md) section\.
 
 **Topics**
-+ [Common management tasks for PostgreSQL on Amazon RDS](#CHAP_PostgreSQL.CommonTasks)
++ [Common management tasks for RDS for PostgreSQL](#CHAP_PostgreSQL.CommonTasks)
 + [Working with the database preview environment](#working-with-the-database-preview-environment)
 + [Limitations for PostgreSQL DB instances](#PostgreSQL.Concepts.General.Limits)
 + [Supported PostgreSQL database versions](#PostgreSQL.Concepts.General.DBVersions)
 + [Deprecated versions for Amazon RDS for PostgreSQL](#PostgreSQL.Concepts.General.DeprecatedVersions)
 + [PostgreSQL extensions supported on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Extensions)
-+ [Some supported PostgreSQL features](#PostgreSQL.Concepts.General.FeatureSupport)
++ [PostgreSQL features supported by RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport)
 + [Connecting to a DB instance running the PostgreSQL database engine](USER_ConnectToPostgreSQLInstance.md)
 + [Security with RDS for PostgreSQL](PostgreSQL.Concepts.General.Security.md)
 + [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)
@@ -32,7 +32,7 @@ To import PostgreSQL data into a DB instance, follow the information in the [Imp
 + [Exporting data from an RDS for PostgreSQL DB instance to Amazon S3](postgresql-s3-export.md)
 + [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)
 
-## Common management tasks for PostgreSQL on Amazon RDS<a name="CHAP_PostgreSQL.CommonTasks"></a>
+## Common management tasks for RDS for PostgreSQL<a name="CHAP_PostgreSQL.CommonTasks"></a>
 
 The following are the common management tasks you perform with an Amazon RDS for PostgreSQL DB instance, with links to relevant documentation for each task\.
 
@@ -45,7 +45,7 @@ The following are the common management tasks you perform with an Amazon RDS for
 |  **Setting up high availability and failover support** A production DB instance should use Multi\-AZ deployments\. Multi\-AZ deployments provide increased availability, data durability, and fault tolerance for DB instances\.   |  [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)  | 
 |  **Understanding the Amazon Virtual Private Cloud \(VPC\) network** If your AWS account has a default VPC, then your DB instance is automatically created inside the default VPC\. In some cases, your account might not have a default VPC, and you might want the DB instance in a VPC\. In these cases, create the VPC and subnet groups before you create the DB instance\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Working with a DB instance in a VPC](USER_VPC.WorkingWithRDSInstanceinaVPC.md)  | 
 |  **Importing data into Amazon RDS PostgreSQL** You can use several different tools to import data into your PostgreSQL DB instance on Amazon RDS\.   |  [Importing data into PostgreSQL on Amazon RDS](PostgreSQL.Procedural.Importing.md)  | 
-|  **Setting up read\-only read replicas \(primary and standbys\)** PostgreSQL on Amazon RDS supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)  | 
+|  **Setting up read\-only read replicas \(primary and standbys\)** RDS for PostgreSQL supports read replicas in both the same AWS Region and in a different AWS Region from the primary instance\.  |  [Working with read replicas](USER_ReadRepl.md) [Working with PostgreSQL read replicas in Amazon RDS](USER_PostgreSQL.Replication.ReadReplicas.md) [Creating a read replica in a different AWS Region](USER_ReadRepl.XRgn.md)  | 
 |  **Understanding security groups** By default, DB instances are created with a firewall that prevents access to them\. You therefore must create a security group with the correct IP addresses and network configuration to access the DB instance\.  In general, if your DB instance is on the EC2\-Classic platform, you need to create a DB security group\. If your DB instance is on the EC2\-VPC platform, you need to create a VPC security group\.   |  [Determining whether you are using the EC2\-VPC or EC2\-Classic platform](USER_VPC.FindDefaultVPC.md) [Controlling access with security groups](Overview.RDSSecurityGroups.md)  | 
 |  **Setting up parameter groups and features** If your DB instance is going to require specific database parameters, you should create a parameter group before you create the DB instance\.   |  [Working with DB parameter groups](USER_WorkingWithParamGroups.md)  | 
 |  **Performing common DBA tasks for PostgreSQL** Some of the more common tasks for PostgreSQL DBAs include:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html)  |  [Common DBA tasks for PostgreSQL](Appendix.PostgreSQL.CommonDBATasks.md)  | 
@@ -106,7 +106,7 @@ If you want to create an instance in the Database Preview Environment with the A
 
 ## Limitations for PostgreSQL DB instances<a name="PostgreSQL.Concepts.General.Limits"></a>
 
-The following is a list of limitations for PostgreSQL on Amazon RDS:
+The following is a list of limitations for RDS for PostgreSQL:
 + You can have up to 40 PostgreSQL DB instances\.
 + For storage limits, see [Amazon RDS DB instance storage](CHAP_Storage.md)\.
 + Amazon RDS reserves up to 3 connections for system maintenance\. If you specify a value for the user connections parameter, you need to add 3 to the number of connections that you expect to use\. 
@@ -115,7 +115,7 @@ The following is a list of limitations for PostgreSQL on Amazon RDS:
 
 Amazon RDS supports DB instances running several editions of PostgreSQL\. You can specify any currently supported PostgreSQL version when creating a new DB instance\. You can specify the major version \(such as PostgreSQL 10\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\. 
 
-To see a list of supported versions, as well as defaults for newly created DB instances, use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example, to display the default PostgreSQL engine version, use the following command:
+To see a list of supported versions, as well as defaults for newly created DB instances, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command\. For example, to display the default PostgreSQL engine version, use the following command:
 
 ```
 aws rds describe-db-engine-versions ––default-only ––engine postgres
@@ -583,7 +583,7 @@ Amazon RDS for PostgreSQL has announced the removal of the `tsearch2` extension 
 PostgreSQL version 10\.5 contains several bug fixes for issues in release 10\.4\. For more information on the fixes in 10\.5, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-5.html)\.
 
 This version also includes the following changes:
-+ Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
++ Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical replication for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
 + Support for the `pg_similarity` extension version 1\.0\.
 + Support for the `pageinspect` extension version 1\.6\.
 + Support for the `libprotobuf` extension version 1\.3\.0 for the PostGIS component\.
@@ -599,7 +599,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 PostgreSQL version 10\.4 contains several bug fixes for issues in release 10\.3\. For more information on the fixes in 10\.4, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-4.html)\.
 
 This version also includes the following changes:
-+ Support for PostgreSQL 10 Logical Replication using the native publication and subscription framework\. RDS for PostgreSQL databases can function as both publishers and subscribers\. You can specify replication to other PostgreSQL databases at the database\-level or at the table\-level\. With logical replication, the publisher and subscriber databases need not be physically identical \(block\-to\-block\) to each other\. This allows for use cases such as data consolidation, data distribution, and data replication across different database versions for 10\.4 and above\. For more details, refer to [Logical replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
++ Support for PostgreSQL 10 Logical Replication using the native publication and subscription framework\. RDS for PostgreSQL databases can function as both publishers and subscribers\. You can specify replication to other PostgreSQL databases at the database\-level or at the table\-level\. With logical replication, the publisher and subscriber databases need not be physically identical \(block\-to\-block\) to each other\. This allows for use cases such as data consolidation, data distribution, and data replication across different database versions for 10\.4 and above\. For more details, refer to [Logical replication for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\.
 + The temporary file size limitation is user\-configurable\. You require the **rds\_superuser** role to modify the `temp_file_limit` parameter\.
 + Update of the `GDAL` library, which is used by the PostGIS extension\. See [Working with the PostGIS extension](Appendix.PostgreSQL.CommonDBATasks.PostGIS.md)\.
 + Update of the `ip4r` extension to version 2\.1\.1\.
@@ -617,7 +617,7 @@ The `tsearch2` extension is to be removed in the next major release\. We encoura
 
 PostgreSQL version 10\.3 contains several bug fixes for issues in release 10\. For more information on the fixes in 10\.3, see the [PostgreSQL documentation](http://www.postgresql.org/docs/10/static/release-10-3.html)\.
 
-Version 2\.1\.0 of plv8 is now available\. If you use plv8 and upgrade PostgreSQL to a new plv8 version, you immediately take advantage of the new extension but the catalog metadata doesn't reflect this fact\. For the steps to synchronize your catalog metadata with the new version of plv8, see [Upgrading plv8](#PostgreSQL.Concepts.General.UpgradingPLv8)\.
+Version 2\.1\.0 of plv8 is now available\. If you use plv8 and upgrade PostgreSQL to a new plv8 version, you immediately take advantage of the new extension but the catalog metadata doesn't reflect this fact\. For the steps to synchronize your catalog metadata with the new version of plv8, see [Upgrading PLV8 ](#PostgreSQL.Concepts.General.UpgradingPLv8)\.
 
 For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
@@ -762,7 +762,7 @@ For the complete list of extensions supported by Amazon RDS for PostgreSQL, see 
 PostgreSQL version 9\.6\.10 contains several bug fixes for issues in release 9\.6\.9\. For more information on the fixes in 9\.6\.10, see the [PostgreSQL documentation](http://www.postgresql.org/docs/current/static/release-9-6-10.html)\. 
 
 This version includes the following changes: 
-+ Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\. 
++ Support for the `pglogical` extension version 2\.2\.0\. Prerequisites for using this extension are the same as the prerequisites for using logical replication for PostgreSQL as described in [Logical replication for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)\. 
 + Support for the `pg_similarity` extension version 2\.2\.0\.
 + An update for the `wal2json` extension to version 01c5c1e\.
 + An update for the `pg_hint_plan` extension to version 1\.2\.3\.
@@ -834,7 +834,7 @@ PostgreSQL version 9\.6\.2 contains several new features and bug fixes\. The new
 + log\_fdw version 1\.0–Using this extension from Amazon RDS, you can load and query your database engine log from within the database\. For more information, see [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw)\.
 + With this version release, you can now edit the `max_worker_processes` parameter in a DB parameter group\. 
 
-PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. For more information, see [ALTER ENUM for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)\.
+PostgreSQL version 9\.6\.2 on Amazon RDS also supports altering enum values\. For more information, see [ALTER ENUM for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)\.
 
  For more information on the fixes in 9\.6\.2, see the [PostgreSQL documentation](http://www.postgresql.org/docs/9.6/static/release-9-6-2.html)\. For information on upgrading the engine version for your PostgreSQL DB instance, see [Upgrading the PostgreSQL DB engine for Amazon RDS](USER_UpgradeDBInstance.PostgreSQL.md)\. 
 
@@ -895,7 +895,7 @@ The PostgreSQL DB instance engine must be one of the following versions for you 
  To see which extension installations are allowed, use the following psql command\.
 
 ```
-postgres=>SHOW rds.allowed_extensions;
+postgres=> SHOW rds.allowed_extensions;
  rds.allowed_extensions
 ------------------------
  *
@@ -909,7 +909,7 @@ If an extension is not included with the `rds.allowed_extensions` parameter, you
 
 ```
 ERROR: permission denied to create extension "extension-name" 
-       HINT: This extension is not specified in "rds.allowed_extensions".
+HINT: This extension is not specified in "rds.allowed_extensions".
 ```
 
 ### PostgreSQL version 13 extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.13x"></a>
@@ -1112,7 +1112,7 @@ The following table shows PostgreSQL extensions for PostgreSQL version 12 that a
 
 ### PostgreSQL version 11\.x extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.11x"></a>
 
-The following tables show PostgreSQL extensions for PostgreSQL version 11\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
+The following tables show PostgreSQL extensions for PostgreSQL version 11\.x that are currently supported by RDS for PostgreSQL\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/11/extend-extensions.html)\. 
 
 
 | Extension | 11\.13 | 11\.12 | 11\.11 | 11\.10 | 11\.9 | 11\.8 | 11\.7 | 11\.6 | 11\.5 | 11\.4 | 11\.2 | 11\.1 | 
@@ -1191,7 +1191,7 @@ The following tables show PostgreSQL extensions for PostgreSQL version 11\.x tha
 
 ### PostgreSQL version 10\.x extensions supported on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Extensions.101x"></a>
 
-The following tables show PostgreSQL extensions for PostgreSQL version 10 that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/10/extend-extensions.html)\. 
+The following tables show PostgreSQL extensions for PostgreSQL version 10 that are currently supported by RDS for PostgreSQL\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/10/extend-extensions.html)\. 
 
 
 | Extension | 10\.18 | 10\.17 | 10\.16 | 10\.15 | 10\.14 | 10\.13 | 10\.12 | 10\.11 | 10\.10 | 10\.9 | 10\.7 | 10\.6 | 10\.5 | 10\.4 | 10\.3 | 10\.1 | 
@@ -1272,7 +1272,7 @@ The `tsearch2` extension is deprecated in version 10\. The `tsearch2` extension 
 
 RDS for PostgreSQL 9\.6 is deprecated as of January 18, 2022\. For more information, see [Deprecation of PostgreSQL version 9\.6](#PostgreSQL.Concepts.General.DBVersions.Deprecation96)\. The information following is retained for historical purposes only\. 
 
-The following tables show PostgreSQL extensions for PostgreSQL version 9\.6\.x that are currently supported by PostgreSQL on Amazon RDS\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
+The following tables show PostgreSQL extensions for PostgreSQL version 9\.6\.x that are currently supported by RDS for PostgreSQL\. "N/A" indicates that the extension is not available for that PostgreSQL version\. For more information on PostgreSQL extensions, see [Packaging related objects into an extension](https://www.postgresql.org/docs/9.6/static/extend-extensions.html)\. 
 
 
 | Extension | 9\.6\.23 | 9\.6\.22 | 9\.6\.20 | 9\.6\.19 | 9\.6\.18 | 9\.6\.17 | 9\.6\.16 | 9\.6\.15 | 9\.6\.14 | 9\.6\.12 | 9\.6\.11 | 9\.6\.10 | 9\.6\.9 | 9\.6\.8 | 9\.6\.6 | 9\.6\.5 | 9\.6\.3 | 9\.6\.2 | 9\.6\.1 | 
@@ -1339,32 +1339,32 @@ The following tables show PostgreSQL extensions for PostgreSQL version 9\.6\.x t
 | [uuid\-ossp](http://www.postgresql.org/docs/9.6/static/uuid-ossp.html) | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 1\.1 | 
 | [wal2json](https://github.com/eulerto/wal2json) | version 2\.3 | version 2\.3 | version 2\.3 | version 2\.3 | version 2\.1 | version 2\.1 | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 9e962ba | Commit hash 01c5c1e | Commit hash 5352cc4 | Commit hash 5352cc4 | Commit hash 645ab69 | Commit hash 645ab69 | Commit hash 2828409 | N/A | N/A | 
 
-## Some supported PostgreSQL features<a name="PostgreSQL.Concepts.General.FeatureSupport"></a>
+## PostgreSQL features supported by RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport"></a>
 
-Amazon RDS supports many of the most common PostgreSQL extensions and features\.
+RDS for PostgreSQL supports many of the most common PostgreSQL extensions and features\.
 
 **Topics**
 + [Using the log\_fdw extension](#CHAP_PostgreSQL.Extensions.log_fdw)
-+ [Upgrading plv8](#PostgreSQL.Concepts.General.UpgradingPLv8)
-+ [Logical replication for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)
-+ [Event triggers for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)
-+ [Huge pages for Amazon RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.HugePages)
-+ [Tablespaces for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces)
-+ [Autovacuum for PostgreSQL on Amazon RDS](#PostgreSQL.Concepts.General.FeatureSupport.Autovacuum)
++ [Upgrading PLV8](#PostgreSQL.Concepts.General.UpgradingPLv8)
++ [Logical replication for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication)
++ [Event triggers for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.EventTriggers)
++ [Huge pages for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.HugePages)
++ [Tablespaces for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.Tablespaces)
++ [Autovacuum for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.Autovacuum)
 + [RAM disk for the stats\_temp\_directory](#PostgreSQL.Concepts.General.FeatureSupport.RamDisk)
-+ [ALTER ENUM for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)
++ [ALTER ENUM for RDS for PostgreSQL](#PostgreSQL.Concepts.General.FeatureSupport.AlterEnum)
 
 ### Using the log\_fdw extension<a name="CHAP_PostgreSQL.Extensions.log_fdw"></a>
 
-The `log_fdw` extension is new for Amazon RDS for PostgreSQL version 9\.6\.2 and higher\. Using this extension, you can access your database engine log using a SQL interface\. In addition to viewing the *stderr* log files that are generated by default on RDS, you can view CSV logs \(set the `log_destination` parameter to `csvlog`\) and build foreign tables with the data neatly split into several columns\.
+RDS for PostgreSQL supports the `log_fdw` extension which lets you access your database engine log using a SQL interface\. You can view the default *stderr* log files that are generated by Amazon RDS\. You can also view comma\-separated values \(CSV\) logs and build foreign tables with the data neatly split into several columns\. To do so, you first set the `log_destination` parameter to `csvlog` on your RDS for PostgreSQL DB instance, which means that you need to be using a custom DB parameter group for the instance\. To learn how, see [Working with RDS for PostgreSQL parameters](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Parameters)\. 
 
-This extension introduces two new functions that make it easy to create foreign tables for database logs:
+The `log_fdw` extension provides two functions that make it easy to create foreign tables for database logs:
 + `list_postgres_log_files()` – Lists the files in the database log directory and the file size in bytes\.
 + `create_foreign_table_for_log_file(table_name text, server_name text, log_file_name text)` – Builds a foreign table for the specified file in the current database\.
 
 All functions created by `log_fdw` are owned by `rds_superuser`\. Members of the `rds_superuser` role can grant access to these functions to other database users\.
 
-The following example shows how to use the `log_fdw` extension\.
+The following example shows how to use the `log_fdw` extension with an RDS for PostgreSQL DB instance with the `log_destination` parameter set to `csvlog`\. 
 
 **To use the log\_fdw extension**
 
@@ -1385,14 +1385,14 @@ The following example shows how to use the `log_fdw` extension\.
 1. Select all from a list of log files\.
 
    ```
-   postgres=> SELECT * from list_postgres_log_files() order by 1;
+   postgres=> SELECT * from list_postgres_log_files() ORDER BY 1;
    ```
 
    A sample response is as follows\.
 
    ```
-               file_name             | file_size_bytes 
-   ----------------------------------+-----------------
+             file_name           | file_size_bytes
+   ------------------------------+-----------------
     postgresql.log.2016-08-09-22.csv |            1111
     postgresql.log.2016-08-09-23.csv |            1172
     postgresql.log.2016-08-10-00.csv |            1744
@@ -1400,25 +1400,24 @@ The following example shows how to use the `log_fdw` extension\.
    (4 rows)
    ```
 
-1. Create a table with a single 'log\_entry' column for non\-CSV files\.
+1. Create a table with a single 'log\_entry' column for the selected file\.
 
    ```
    postgres=> SELECT create_foreign_table_for_log_file('my_postgres_error_log', 
         'log_server', 'postgresql.log.2016-08-09-22.csv');
    ```
 
-   A sample response is as follows\.
+   The response provides no detail other than that the table now exists\.
 
    ```
    -----------------------------------
-   
    (1 row)
    ```
 
 1. Select a sample of the log file\. The following code retrieves the log time and error message description\.
 
    ```
-   postgres=> SELECT log_time, message from my_postgres_error_log order by 1;
+   postgres=> SELECT log_time, message from my_postgres_error_log ORDER BY 1;
    ```
 
    A sample response is as follows\.
@@ -1436,19 +1435,23 @@ The following example shows how to use the `log_fdw` extension\.
    (7 rows)
    ```
 
-### Upgrading plv8<a name="PostgreSQL.Concepts.General.UpgradingPLv8"></a>
+### Upgrading PLV8<a name="PostgreSQL.Concepts.General.UpgradingPLv8"></a>
 
-If you use [plv8](https://github.com/plv8) and upgrade PostgreSQL to a new plv8 version, you immediately take advantage of the new extension\. Take the following steps to synchronize your catalog metadata with the new version of plv8\. These steps are optional, but we highly recommended that you complete them to avoid metadata mismatch warnings\.
+PLV8 is a trusted Javascript language extension for PostgreSQL\. You can use it for stored procedures, triggers, and other procedural code that's callable from SQL\. This language extension is supported by all current releases of PostgreSQL\. 
 
-**To synchronize your catalog metadata with a new version of plv8**
+If you use [PLV8](https://plv8.github.io/) and upgrade PostgreSQL to a new PLV8 version, you immediately take advantage of the new extension\. Take the following steps to synchronize your catalog metadata with the new version of PLV8\. These steps are optional, but we highly recommended that you complete them to avoid metadata mismatch warnings\.
+
+The upgrade process drops all your existing PLV8 functions, so we recommend that you create a snapshot of your RDS for PostgreSQL DB instance before upgrading\. For more information, see [Creating a DB snapshot](USER_CreateSnapshot.md)\.
+
+**To synchronize your catalog metadata with a new version of PLV8**
 
 1. Verify that you need to update\. To do this, run the following command while connected to your instance\.
 
-   `select * from pg_available_extensions where name in ('plv8','plls','plcoffee');`
+   ```
+   SELECT * FROM pg_available_extensions WHERE name IN ('plv8','plls','plcoffee');
+   ```
 
-   If your results contain values for an installed version that is a lower number than the default version, continue with this procedure to update your extensions\. 
-
-   For example, the following result set indicates that you should update\.
+   If your results contain values for an installed version that is a lower number than the default version, continue with this procedure to update your extensions\. For example, the following result set indicates that you should update\.
 
    ```
    name    | default_version | installed_version |                     comment
@@ -1459,27 +1462,23 @@ If you use [plv8](https://github.com/plv8) and upgrade PostgreSQL to a new plv8 
    (3 rows)
    ```
 
-1. Take a snapshot of your instance as a precaution, because the upgrade drops all your plv8 functions\. You can continue with the following steps while the snapshot is being created\.
+1. Create a snapshot of your RDS for PostgreSQL DB instance if you haven't done so yet\. You can continue with the following steps while the snapshot is being created\. 
 
-   For steps to create a snapshot see, [Creating a DB snapshot](USER_CreateSnapshot.md)
-
-1. Get a count of the number of plv8 functions in your DB instance so you can validate that they are all in place after the upgrade\. 
-
-   The following code returns the number of functions written in plv8, plcoffee, or plls\.
+1. Get a count of the number of PLV8 functions in your DB instance so you can validate that they are all in place after the upgrade\. For example, the following SQL query returns the number of functions written in plv8, plcoffee, and plls\.
 
    ```
-   select proname, nspname, lanname 
-   from pg_proc p, pg_language l, pg_namespace n
-   where p.prolang = l.oid
-   and n.oid = p.pronamespace
-   and lanname in ('plv8','plcoffee','plls');
+   SELECT proname, nspname, lanname 
+   FROM pg_proc p, pg_language l, pg_namespace n
+   WHERE p.prolang = l.oid
+   AND n.oid = p.pronamespace
+   AND lanname IN ('plv8','plcoffee','plls');
    ```
 
-1. Use pg\_dump to create a schema\-only dump file\.
+1. Use pg\_dump to create a schema\-only dump file\. For example, create a file on your client machine in the `/tmp` directory\.
 
-   The following code creates a file on your client machine in the /tmp directory\. 
-
-   `./pg_dump -Fc --schema-only -U master postgres > /tmp/test.dmp`
+   ```
+   ./pg_dump -Fc --schema-only -U master postgres >/tmp/test.dmp
+   ```
 
    This example uses the following options:
    + \-FC "format custom"
@@ -1489,45 +1488,45 @@ If you use [plv8](https://github.com/plv8) and upgrade PostgreSQL to a new plv8 
 
    For more information on pg\_dump, see the [pg\_dump](https://www.postgresql.org/docs/current/static/app-pgdump.html ) page in the PostgreSQL documentation\.
 
-1. Extract the "CREATE FUNCTION" DDL statement that is present in the dump file\.
+1. Extract the "CREATE FUNCTION" DDL statement that is present in the dump file\. The following example uses the `grep` command to extract the DDL statement that creates the functions and save them to a file\. You use this in subsequent steps to recreate the functions\. 
 
-   The following code extracts the DDL statement needed to create the functions\. You use this in subsequent steps to recreate the functions\. The code uses the `grep` command to extract the statements to a file\.
-
-   `./pg_restore -l /tmp/test.dmp | grep FUNCTION > /tmp/function_list/`
+   ```
+   ./pg_restore -l /tmp/test.dmp | grep FUNCTION > /tmp/function_list/
+   ```
 
    For more information on pg\_restore see, [pg\_restore](https://www.postgresql.org/docs/current/static/app-pgrestore.html)\. 
 
-1. Drop the functions and extensions\.
+1. Drop the functions and extensions\. The following example drops any PLV8 based objects\. The cascade option ensures that any dependent are dropped\.
 
-   The following code drops any plv8 based objects\. The cascade option ensures that any dependent are dropped\.
-
-   `drop extension plv8 cascade;`
+   ```
+   DROP EXTENSION pvl8 CASCADE;
+   ```
 
    If your PostgreSQL instance contains objects based on plcoffee or plls, repeat this step for those extensions\.
 
-1. Create the extensions\.
+1. Create the extensions\. The following example creates the plv8, plcoffee, and plls extensions\.
 
-   The following code creates the plv8, plcoffee, and plls extensions\.
-
-   `create extension plv8;`
-
-   `create extension plcoffee;`
-
-   `create extension plls;`
+   ```
+   CREATE EXTENSION plv8;
+   CREATE EXTENSION plcoffee;
+   CREATE EXTENSION plls;
+   ```
 
 1. Create the functions using the dump file and "driver" file\.
 
-   The following code recreates the functions that you extracted previously\.
+   The following example recreates the functions that you extracted previously\.
 
-   `./pg_restore -U master -d postgres -Fc -L /tmp/function_list /tmp/test.dmp`
+   ```
+   ./pg_restore -U master -d postgres -Fc -L /tmp/function_list /tmp/test.dmp
+   ```
 
-1. Verify your functions count\.
+1. Verify that all your functions have been recreated by using the following query\. 
 
-   Validate that your functions have all been recreated by running the following code statement\.
+   ```
+   SELECT * FROM pg_available_extensions WHERE name IN ('plv8','plls','plcoffee'); 
+   ```
 
-   `select * from pg_available_extensions where name in ('plv8','plls','plcoffee'); `
-**Note**  
-The plv8 version 2 adds the following extra row to your result set:  
+   The PLV8 version 2 adds the following extra row to your result set:
 
    ```
        proname    |  nspname   | lanname
@@ -1535,11 +1534,11 @@ The plv8 version 2 adds the following extra row to your result set:
     plv8_version  | pg_catalog | plv8
    ```
 
-### Logical replication for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication"></a>
+### Logical replication for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalReplication"></a>
 
-Beginning with PostgreSQL version 10\.4, RDS supports the publication and subscription SQL Syntax for PostgreSQL 10 Logical Replication\.
+Starting with version 10\.4, RDS for PostgreSQL supports the publication and subscription SQL syntax for PostgreSQL 10 Logical Replication\.
 
-**To enable logical replication for an Amazon RDS for PostgreSQL DB instance**
+**To enable logical replication for an RDS for PostgreSQL DB instance**
 
 1. The AWS user account requires the **rds\_superuser** role to perform logical replication for the PostgreSQL database on Amazon RDS\.
 
@@ -1557,13 +1556,13 @@ For more information on PostgreSQL logical replication, see the [PostgreSQL docu
 
 #### Logical decoding and logical replication<a name="PostgreSQL.Concepts.General.FeatureSupport.LogicalDecoding"></a>
 
-RDS for PostgreSQL supports the streaming of WAL changes using logical replication slots\. Amazon RDS supports logical decoding for a PostgreSQL DB instance version 9\.5\.4 and higher\. You can set up logical replication slots on your instance and stream database changes through these slots to a client such as `pg_recvlogical`\. Logical replication slots are created at the database level and support replication connections to a single database\. 
+RDS for PostgreSQL supports the streaming of WAL changes using PostgreSQL's logical replication slots\. It also supports using logical decoding\. You can set up logical replication slots on your instance and stream database changes through these slots to a client such as `pg_recvlogical`\. Logical replication slots are created at the database level and support replication connections to a single database\. 
 
 The most common clients for PostgreSQL logical replication are the AWS Database Migration Service or a custom\-managed host on an Amazon EC2 instance\. The logical replication slot knows nothing about the receiver of the stream, and there is no requirement that the target be a replica database\. If you set up a logical replication slot and don't read from the slot, data can be written and quickly fill up your DB instance's storage\.
 
 PostgreSQL logical replication and logical decoding on Amazon RDS are enabled with a parameter, a replication connection type, and a security role\. The client for logical decoding can be any client that is capable of establishing a replication connection to a database on a PostgreSQL DB instance\. 
 
-**To enable logical decoding for an Amazon RDS for PostgreSQL DB instance**
+**To enable logical decoding for an RDS for PostgreSQL DB instance**
 
 1. The user account requires the **rds\_superuser** role to enable logical replication\. The user account also requires the **rds\_replication** role to grant permissions to manage logical slots and to stream data using logical slots\.
 
@@ -1599,7 +1598,6 @@ To drop a logical slot, use the following command\.
 SELECT pg_drop_replication_slot('test_slot');
 pg_drop_replication_slot
 -----------------------
-
 (1 row)
 ```
 
@@ -1608,8 +1606,8 @@ For more examples on working with logical replication slots, see [ Logical decod
 After you create the logical replication slot, you can start streaming\. The following example shows how logical decoding is controlled over the streaming replication protocol\. This uses the program `pg_recvlogical`, which is included in the PostgreSQL distribution\. This requires that client authentication is set up to allow replication connections\.
 
 ```
-pg_recvlogical -d postgres --slot test_slot -U master 
-    --host sg-postgresql1.c6c8mresaghgv0.us-west-2.rds.amazonaws.com 
+pg_recvlogical -d postgres --slot test_slot -U postgres
+    --host -instance-name.111122223333.aws-region.rds.amazonaws.com 
     -f -  --start
 ```
 
@@ -1622,24 +1620,24 @@ local_id | external_id | remote_lsn | local_lsn
 (0 rows)
 ```
 
-### Event triggers for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.EventTriggers"></a>
+### Event triggers for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.EventTriggers"></a>
 
-PostgreSQL versions 9\.5\.4 and higher support event triggers, and Amazon RDS supports event triggers for these versions\. You can use the master user account to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\.
+All current PostgreSQL versions support event triggers, and so do all available versions of RDS for PostgreSQL\. You can use the main user account \(default, `postgres`\) to create, modify, rename, and delete event triggers\. Event triggers are at the DB instance level, so they can apply to all databases on an instance\.
 
 For example, the following code creates an event trigger that prints the current user at the end of every DDL command\.
 
 ```
 CREATE OR REPLACE FUNCTION raise_notice_func()
-                RETURNS event_trigger
-                LANGUAGE plpgsql AS
+    RETURNS event_trigger
+    LANGUAGE plpgsql AS
 $$
 BEGIN
-                RAISE NOTICE 'In trigger function: %', current_user;
+    RAISE NOTICE 'In trigger function: %', current_user;
 END;
 $$;
 
 CREATE EVENT TRIGGER event_trigger_1 
-                ON ddl_command_end
+    ON ddl_command_end
 EXECUTE PROCEDURE raise_notice_func();
 ```
 
@@ -1649,42 +1647,45 @@ There are several limitations to using PostgreSQL event triggers on Amazon RDS\.
 + You cannot create event triggers on read replicas\. You can, however, create event triggers on a read replica source\. The event triggers are then copied to the read replica\. The event triggers on the read replica don't fire on the read replica when changes are pushed from the source\. However, if the read replica is promoted, the existing event triggers fire when database operations occur\.
 + To perform a major version upgrade to a PostgreSQL DB instance that uses event triggers, you must delete the event triggers before you upgrade the instance\.
 
-### Huge pages for Amazon RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.HugePages"></a>
+### Huge pages for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.HugePages"></a>
 
-Amazon RDS for PostgreSQL supports multiple page sizes for PostgreSQL versions 9\.5\.6 and higher, and 9\.6\.2 and higher\. This support includes 4 KB and 2 MB page sizes\. 
+Huge pages are a memory management feature that reduces overhead when a database instance is working with large contiguous chunks of memory, such as that used by shared buffers\. This PostgreSQL feature is supported by all currently available RDS for PostgreSQL versions\. You allocate huge pages for your application by using calls to `mmap` or `SYSV` shared memory\. RDS for PostgreSQL supports both 4\-KB and 2\-MB page sizes\. 
 
-Huge pages reduce overhead when using large contiguous chunks of memory\. You allocate huge pages for your application by using calls to `mmap` or `SYSV` shared memory\. You turn on huge pages for an Amazon RDS for PostgreSQL database by setting the `huge_pages` parameter\. To turn on huge pages, set this parameter to `on`\. 
-
-Whether huge pages are turned on by default depends on the following:
-+ For PostgreSQL version 10 and higher, huge pages are turned on for all DB instance classes, except for micro, small, and medium DB instance classes\.
-+ For PostgreSQL versions lower than version 10, huge pages are turned on by default for db\.r4\.\*, db\.m4\.16xlarge, and db\.m5\.\* DB instance classes\. For other DB instance classes, huge pages aren't turned on by default\.
-
-When you set the `huge_pages` parameter to `on`, Amazon RDS uses huge pages based on the available shared memory\. If the DB instance can't use huge pages due to shared memory constraints, Amazon RDS prevents the DB instance from starting\. In this case, Amazon RDS sets the status of the DB instance to an incompatible parameters state\. If this occurs, you can set the `huge_pages` parameter to `off` to allow Amazon RDS to start the DB instance\.
-
-The `shared_buffers` parameter is key to setting the shared memory pool that is required for using huge pages\. The default value for the `shared_buffers` parameter uses a database parameters macro\. This macro sets a percentage of the total 8 KB pages available for the DB instance's memory\. When you use huge pages, those pages are located with the huge pages\. Amazon RDS puts a DB instance into an incompatible parameters state if the shared memory parameters are set to require more than 90 percent of the DB instance memory\. For more information about setting shared memory for PostgreSQL, see [Resource Consumption](https://www.postgresql.org/docs/current/static/runtime-config-resource.html) in the PostgreSQL documentation\.
+Huge pages can be disabled or enabled by the changing the value of the `huge_pages` parameter\. The feature is enabled by default for all DB instance classes other than micro, small, and medium DB instance classes\.
 
 **Note**  
-Huge pages aren't supported for the db\.m1, db\.m2, and db\.m3 DB instance classes\. 
+Huge pages aren't supported for db\.m1, db\.m2, and db\.m3 DB instance classes\.
 
-### Tablespaces for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Tablespaces"></a>
+RDS for PostgreSQL uses huge pages based on the available shared memory\. If the DB instance can't use huge pages due to shared memory constraints, Amazon RDS prevents the DB instance from starting\. In this case, Amazon RDS sets the status of the DB instance to an incompatible parameters state\. If this occurs, you can set the `huge_pages` parameter to `off` to allow Amazon RDS to start the DB instance\.
 
-PostgreSQL on Amazon RDS supports tablespaces for compatibility\. Because all storage is on a single logical volume, you can't use tablespaces for IO splitting or isolation\. Our benchmarks and experience indicate that a single logical volume is the best setup for most use cases\.
+The `shared_buffers` parameter is key to setting the shared memory pool that is required for using huge pages\. The default value for the `shared_buffers` parameter uses a database parameters macro\. This macro sets a percentage of the total 8 KB pages available for the DB instance's memory\. When you use huge pages, those pages are located with the huge pages\. Amazon RDS puts a DB instance into an incompatible parameters state if the shared memory parameters are set to require more than 90 percent of the DB instance memory\.
 
-If you specify a file name when you create a tablespace, the path prefix is `/rdsdbdata/db/base/tablespace`\. The following example places tablespace files in `/rdsdbdata/db/base/tablespace/data`\.
+To learn more about PostgreSQL memory management, see [Resource Consumption](https://www.postgresql.org/docs/current/static/runtime-config-resource.html) in the PostgreSQL documentation\.
+
+### Tablespaces for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.Tablespaces"></a>
+
+RDS for PostgreSQL supports tablespaces for compatibility\. Because all storage is on a single logical volume, you can't use tablespaces for IO splitting or isolation\. Our benchmarks and experience indicate that a single logical volume is the best setup for most use cases\. 
+
+To create and use tablespaces with your RDS for PostgreSQL DB instance requires the `rds_superuser` role\. Your RDS for PostgreSQL DB instance's main user account \(default name, `postgres`\) is a member of this role\. For more information, see [Understanding the rds\_superuser role](Appendix.PostgreSQL.CommonDBATasks.md#Appendix.PostgreSQL.CommonDBATasks.Roles)\. 
+
+If you specify a file name when you create a tablespace, the path prefix is `/rdsdbdata/db/base/tablespace`\. The following example places tablespace files in `/rdsdbdata/db/base/tablespace/data`\. This example assumes that a `dbadmin` user \(role\) exists and that it's been granted the `rds_superuser` role needed to work with tablespaces\.
 
 ```
-CREATE TABLESPACE act_data
+postgres=> CREATE TABLESPACE act_data
   OWNER dbadmin
   LOCATION '/data';
+CREATE TABLESPACE
 ```
 
-### Autovacuum for PostgreSQL on Amazon RDS<a name="PostgreSQL.Concepts.General.FeatureSupport.Autovacuum"></a>
+To learn more about PostgreSQL tablespaces, see [Tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html) in the PostgreSQL documentation\.
 
-The PostgreSQL autovacuum feature is turned on by default for new PostgreSQL DB instances\. Autovacuum is optional, but we highly recommend that you do not turn autovacuum off\. For more information on using autovacuum with Amazon RDS for PostgreSQL, see [Working with PostgreSQL autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)\.
+### Autovacuum for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.Autovacuum"></a>
+
+The PostgreSQL autovacuum feature is turned on by default for new PostgreSQL DB instances\. Autovacuum is optional, but we highly recommend that you do not turn autovacuum off\. For more information on using autovacuum with RDS for PostgreSQL, see [Working with PostgreSQL autovacuum on Amazon RDS](Appendix.PostgreSQL.CommonDBATasks.Autovacuum.md)\.
 
 ### RAM disk for the stats\_temp\_directory<a name="PostgreSQL.Concepts.General.FeatureSupport.RamDisk"></a>
 
-You can use the Amazon RDS for PostgreSQL parameter, `rds.pg_stat_ramdisk_size`, to specify the system memory allocated to a RAM disk for storing the PostgreSQL `stats_temp_directory`\. The RAM disk parameter is available for all PostgreSQL versions on Amazon RDS\. 
+You can use the RDS for PostgreSQL parameter, `rds.pg_stat_ramdisk_size`, to specify the system memory allocated to a RAM disk for storing the PostgreSQL `stats_temp_directory`\. The RAM disk parameter is available for all PostgreSQL versions on Amazon RDS\. 
 
 Under certain workloads, setting this parameter can improve performance and decrease IO requirements\. For more information about the `stats_temp_directory`, see [ the PostgreSQL documentation\.](https://www.postgresql.org/docs/current/static/runtime-config-statistics.html#GUC-STATS-TEMP-DIRECTORY)\.
 
@@ -1701,7 +1702,7 @@ aws rds modify-db-parameter-group \
 After you reboot, run the following command to see the status of the `stats_temp_directory`:
 
 ```
-postgres=>show stats_temp_directory;
+postgres=> SHOW stats_temp_directory;
 ```
 
  The command should return the following: 
@@ -1713,9 +1714,9 @@ stats_temp_directory
 (1 row)
 ```
 
-### ALTER ENUM for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.AlterEnum"></a>
+### ALTER ENUM for RDS for PostgreSQL<a name="PostgreSQL.Concepts.General.FeatureSupport.AlterEnum"></a>
 
-Amazon RDS for PostgreSQL versions 9\.6\.2 and 9\.5\.6 and higher support the ability to alter enumerations\. This feature is not available in other versions on Amazon RDS\.
+PostgreSQL supports creating and altering enumerations\. To learn more, see 
 
 The following code shows an example of altering an enum value\.
 

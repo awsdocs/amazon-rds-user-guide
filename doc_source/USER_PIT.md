@@ -54,7 +54,7 @@ Times are shown in your local time zone, which is indicated by an offset from Co
 
 ## AWS CLI<a name="USER_PIT.CLI"></a>
 
-To restore a DB instance to a specified time, use the AWS CLI command [ `restore-db-instance-to-point-in-time`](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also enables storage autoscaling\.
+To restore a DB instance to a specified time, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html](https://docs.aws.amazon.com/cli/latest/reference/rds/restore-db-instance-to-point-in-time.html) to create a new DB instance\. This example also enables storage autoscaling\.
 
 **Example**  
 For Linux, macOS, or Unix:  

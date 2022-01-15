@@ -1,6 +1,6 @@
 # Using SSL with a PostgreSQL DB instance<a name="PostgreSQL.Concepts.General.SSL"></a>
 
-Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. Amazon RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\.
+Amazon RDS supports Secure Socket Layer \(SSL\) encryption for PostgreSQL DB instances\. Using SSL, you can encrypt a PostgreSQL connection between your applications and your PostgreSQL DB instances\. You can also force all connections to your PostgreSQL DB instance to use SSL\. RDS for PostgreSQL supports Transport Layer Security \(TLS\) versions 1\.1 and 1\.2\.
 
 For general information about SSL support and PostgreSQL databases, see [SSL support](https://www.postgresql.org/docs/11/libpq-ssl.html) in the PostgreSQL documentation\. For information about using an SSL connection over JDBC, see [Configuring the client](https://jdbc.postgresql.org/documentation/head/ssl-client.html) in the PostgreSQL documentation\.
 
@@ -35,7 +35,7 @@ SSL support is available in all AWS Regions for PostgreSQL\. Amazon RDS creates 
 The following is an example of using psql to connect to a PostgreSQL DB instance\.
 
 ```
-$ psql -h testpg.cdhmuqifdpib.us-east-1.rds.amazonaws.com -p 5432 \
+$ psql -h testpg.555555555555.us-east-1.rds.amazonaws.com -p 5432 \
     "dbname=testpg user=testuser sslrootcert=rds-ca-2019-root.pem sslmode=verify-full"
 ```
 
@@ -116,5 +116,3 @@ The PostgreSQL configuration parameter [ssl\_ciphers](https://www.postgresql.org
 | 11\.1, 11\.2 | HIGH:MEDIUM:\+3DES:\!aNULL | 
 | 10\.9 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
 | 10\.7 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL | 
-| 9\.6\.14 and higher minor versions | HIGH:MEDIUM:\+3DES:\!aNULL:\!RC4 | 
-| 9\.6\.12 and lower minor versions | HIGH:MEDIUM:\+3DES:\!aNULL | 

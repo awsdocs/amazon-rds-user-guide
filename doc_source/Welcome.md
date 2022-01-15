@@ -152,7 +152,7 @@ Amazon RDS uses Network Time Protocol \(NTP\) to synchronize the time on DB Inst
 
 Amazon cloud computing resources are housed in highly available data center facilities in different areas of the world \(for example, North America, Europe, or Asia\)\. Each data center location is called an AWS Region\. 
 
-Each AWS Region contains multiple distinct locations called Availability Zones, or AZs\. Each Availability Zone is engineered to be isolated from failures in other Availability Zones\. Each is engineered to provide inexpensive, low\-latency network connectivity to other Availability Zones in the same AWS Region\. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location\. For more information, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. 
+Each AWS Region contains multiple distinct locations called Availability Zones, or AZs\. Each Availability Zone is engineered to be isolated from failures in other Availability Zones\. Each is engineered to provide inexpensive, low\-latency network connectivity to other Availability Zones in the same AWS Region\. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location\. For more information, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\. 
 
 You can run your DB instance in several Availability Zones, an option called a Multi\-AZ deployment\. When you choose this option, Amazon automatically provisions and maintains a secondary standby DB instance in a different Availability Zone\. Your primary DB instance is synchronously replicated across Availability Zones to the secondary instance\. This approach helps provide data redundancy and failover support, eliminate I/O freezes, and minimize latency spikes during system backups\. For more information, see [Multi\-AZ deployments for high availability](Concepts.MultiAZ.md)\. 
 
@@ -188,7 +188,7 @@ AWS also provides libraries, sample code, tutorials, and other resources to help
 
 ## How you are charged for Amazon RDS<a name="Welcome.Costs"></a>
 
-When you use Amazon RDS, you can choose to use on\-demand DB instances or reserved DB instances\. For more information, see [ DB instance billing for Amazon RDS ](User_DBInstanceBilling.md)\. 
+When you use Amazon RDS, you can choose to use on\-demand DB instances or reserved DB instances\. For more information, see [DB instance billing for Amazon RDS](User_DBInstanceBilling.md)\. 
 
 For Amazon RDS pricing information, see the [Amazon RDS product page](https://aws.amazon.com/rds/pricing)\.
 

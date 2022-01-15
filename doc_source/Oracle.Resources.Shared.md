@@ -32,7 +32,7 @@ In the following procedure, you create a virtual private cloud \(VPC\) based on 
 
 1. Choose **Create VPC**\. 
 
-An Amazon RDS DB instance in a VPC requires at least two private subnets or at least two public subnets, to support Multi\-AZ deployment\. For more information about working with multiple Availability Zones, see [ Regions, Availability Zones, and Local Zones ](Concepts.RegionsAndAvailabilityZones.md)\. Because your database is private, add a second private subnet to your VPC\. 
+An Amazon RDS DB instance in a VPC requires at least two private subnets or at least two public subnets, to support Multi\-AZ deployment\. For more information about working with multiple Availability Zones, see [Regions, Availability Zones, and Local Zones](Concepts.RegionsAndAvailabilityZones.md)\. Because your database is private, add a second private subnet to your VPC\. 
 
 **To create an additional subnet**
 

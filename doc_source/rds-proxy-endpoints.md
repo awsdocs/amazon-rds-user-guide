@@ -29,7 +29,7 @@
 
  In the RDS Proxy logs, each entry is prefixed with the name of the associated proxy endpoint\. This name can be the name you specified for a user\-defined endpoint, or the special name `default` for read/write requests using the default endpoint of a proxy\. 
 
- Each proxy endpoint has its own set of CloudWatch metrics\. You can monitor the metrics for all endpoints of a proxy\. You can also monitor metrics for a specific endpoint, or for all the read/write or read\-only endpoints of a proxy\. For more information, see [Monitoring RDS Proxy using Amazon CloudWatchMonitoring RDS Proxy](rds-proxy.monitoring.md)\. 
+ Each proxy endpoint has its own set of CloudWatch metrics\. You can monitor the metrics for all endpoints of a proxy\. You can also monitor metrics for a specific endpoint, or for all the read/write or read\-only endpoints of a proxy\. For more information, see [Monitoring RDS Proxy metrics with Amazon CloudWatchMonitoring RDS Proxy with CloudWatch](rds-proxy.monitoring.md)\. 
 
  A proxy endpoint uses the same authentication mechanism as its associated proxy\. RDS Proxy automatically sets up permissions and authorizations for the user\-defined endpoint, consistent with the properties of the associated proxy\. 
 

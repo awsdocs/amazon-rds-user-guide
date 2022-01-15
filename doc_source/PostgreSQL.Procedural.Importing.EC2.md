@@ -45,7 +45,7 @@ For Linux, macOS, or Unix:
 ```
 psql \
    -f mydb2dump.sql \
-   --host mypginstance.c6c8mntzhgv0.us-west-2.rds.amazonaws.com \
+   --host mypginstance.555555555555.aws-region.rds.amazonaws.com \
    --port 8199 \
    --username myawsuser \
    --password password \
@@ -57,7 +57,7 @@ For Windows:
 ```
 psql ^
    -f mydb2dump.sql ^
-   --host mypginstance.c6c8mntzhgv0.us-west-2.rds.amazonaws.com ^
+   --host mypginstance.555555555555.aws-region.rds.amazonaws.com ^
    --port 8199 ^
    --username myawsuser ^
    --password password ^

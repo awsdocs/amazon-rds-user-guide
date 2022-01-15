@@ -184,7 +184,7 @@ SSL is supported in all AWS Regions and for all supported SQL Server editions\. 
 
 You can specify any currently supported Microsoft SQL Server version when creating a new DB instance\. You can specify the Microsoft SQL Server major version \(such as Microsoft SQL Server 14\.00\), and any supported minor version for the specified major version\. If no version is specified, Amazon RDS defaults to a supported version, typically the most recent version\. If a major version is specified but a minor version is not, Amazon RDS defaults to a recent release of the major version you have specified\.
 
-The following table shows the supported versions for all editions and all AWS Regions, except where noted\. You can also use the [ `describe-db-engine-versions`](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command to see a list of supported versions, as well as defaults for newly created DB instances\.
+The following table shows the supported versions for all editions and all AWS Regions, except where noted\. You can also use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-engine-versions.html) AWS CLI command to see a list of supported versions, as well as defaults for newly created DB instances\.
 
 
 **SQL Server versions supported in RDS**  
@@ -254,7 +254,7 @@ For a list of unsupported features, see [Features not supported and features wit
 
 SQL Server 2017 includes many new features, such as the following: 
 + Adaptive query processing
-+ Automatic plan correction
++ Automatic plan correction \(an automatic tuning feature\)
 + GraphDB
 + Resumable index rebuilds
 

@@ -469,7 +469,7 @@ RDS Custom for Oracle automation uses IMDSv2 by default, by setting `HttpTokens=
 
 The IAM principal that creates the CEV must have either of the following policies:
 + The `AdministratorAccess` policy
-+ The `AmazonRDSFullAccess` policy with the following additional permissions\.
++ The `AmazonRDSFullAccess` policy with the following additional permissions:
 
   ```
   iam:SimulatePrincipalPolicy

@@ -129,7 +129,7 @@ When you clone an Amazon RDS DB instance that has storage autoscaling enabled, t
 
 #### AWS CLI<a name="USER_PIOPS.EnablingAutoscaling.cli"></a>
 
-To enable storage autoscaling for a new DB instance, use the AWS CLI command [ `create-db-instance`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\. Set the following parameter:
+To enable storage autoscaling for a new DB instance, use the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-instance.html)\. Set the following parameter:
 +  `--max-allocated-storage` – Turns on storage autoscaling and sets the upper limit on storage size, in gibibytes\.
 
  To verify that Amazon RDS storage autoscaling is available for your DB instance, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-valid-db-instance-modifications.html) command\. To check based on the instance class before creating an instance, use the [https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-orderable-db-instance-options.html) command\. Check the following field in the return value: 

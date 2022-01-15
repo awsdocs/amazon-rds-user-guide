@@ -9,6 +9,7 @@ You can subscribe to an event category for the following resources:
 + DB snapshot
 + DB parameter group
 + DB security group
++ RDS Proxy
 
 For example, if you subscribe to the backup category for a given DB instance, you're notified whenever a backup\-related event occurs that affects the DB instance\. If you subscribe to a configuration change category for a DB security group, you're notified when the DB security group is changed\. You also receive notification when an event notification subscription changes\.
 

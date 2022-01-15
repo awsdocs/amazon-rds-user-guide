@@ -7,6 +7,7 @@ Before you create and manage a DB instance for Amazon RDS Custom for SQL Server 
 + [Make sure that you have a symmetric AWS KMS key](#custom-setup-sqlserver.cmk)
 + [Download and install the AWS CLI](#custom-setup-sqlserver.cli)
 + [Configuring IAM and your VPC](#custom-setup-sqlserver.iam-vpc)
++ [Grant required permissions to your IAM user](#custom-setup-sqlserver.iam-user)
 
 ## Prerequisites for setting up RDS Custom for SQL Server<a name="custom-setup-sqlserver.review"></a>
 
@@ -480,3 +481,20 @@ Make sure that your instance can do the following:
 + Request instance metadata from `http://169.254.169.254`, the IMDSv2 link\.
 
 For more information, see [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+## Grant required permissions to your IAM user<a name="custom-setup-sqlserver.iam-user"></a>
+
+The IAM principal that creates the RDS Custom for SQL Server DB instance must have either of the following policies:
++ The `AdministratorAccess` policy
++ The `AmazonRDSFullAccess` policy with the following additional permissions:
+
+  ```
+  iam:SimulatePrincipalPolicy
+  cloudtrail:CreateTrail
+  cloudtrail:StartLogging
+  s3:CreateBucket
+  s3:PutBucketPolicy
+  kms:CreateGrant
+  ```
+
+  For more information on the `kms:CreateGrant` permission, see [AWS KMS key management](Overview.Encryption.Keys.md)\.

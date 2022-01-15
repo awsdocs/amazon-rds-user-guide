@@ -209,7 +209,7 @@ aws rds modify-db-instance ^
 
 ### RDS API<a name="AdjustingTheMaintenanceWindow.API"></a>
 
-To adjust the preferred maintenance window, use the Amazon RDS API [ `ModifyDBInstance`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
+To adjust the preferred maintenance window, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBInstance.html) operation with the following parameters:
 + `DBInstanceIdentifier`
 + `PreferredMaintenanceWindow`
 
@@ -256,9 +256,9 @@ We plan to use the following schedule for operating system updates for RDS for P
 
 | Action or recommendation | Date range | 
 | --- | --- | 
-|  We recommend that you update the operating system for your RDS for PostgreSQL DB instances\. To update the operating system, follow the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.  |  Now–January 10, 2022  | 
-|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version in a maintenance window\.  |  January 10, 2022–March 30, 2022  | 
-|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After March 30, 2022  | 
+|  We recommend that you update the operating system for your RDS for PostgreSQL DB instances\. To update the operating system, follow the instructions in [Applying updates for a DB instance](#USER_UpgradeDBInstance.OSUpgrades)\.  |  Now–June 30, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version in a maintenance window\.  |  June 30, 2022–October 30, 2022  | 
+|  Amazon RDS starts automatic upgrades of the operating system for your RDS for PostgreSQL DB instances to the latest version regardless of whether they are in a maintenance window\.  |  After October 30, 2022  | 
 
 For this operating system update to be required, a DB instance must be running the versions with "Yes" in the following table for each DB instance class\.
 

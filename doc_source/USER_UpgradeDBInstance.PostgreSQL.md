@@ -228,6 +228,12 @@ We recommend the following process when upgrading an Amazon RDS PostgreSQL DB in
 
 1. **Perform an upgrade dry run** – We highly recommend testing a major version upgrade on a duplicate of your production database before attempting the upgrade on your production database\. To create a duplicate test instance, you can either restore your database from a recent snapshot or do a point\-in\-time restore of your database to its latest restorable time\. For more information, see [Restoring from a snapshot](USER_RestoreFromSnapshot.md#USER_RestoreFromSnapshot.Restoring) or [Restoring a DB instance to a specified time](USER_PIT.md)\. For details on performing the upgrade, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
+   In upgrading a version 9\.6 DB instance to version 10, be aware that PostgreSQL 10 enables parallel queries by default\. You can test the impact of parallelism *before* the upgrade by changing the `max_parallel_workers_per_gather` parameter on your test DB instance to 2\. 
+**Note**  
+ The default value for `max_parallel_workers_per_gather` parameter in the `default.postgresql10` DB parameter group is 2\. 
+
+   For more information, see [Parallel Query](https://www.postgresql.org/docs/10/parallel-query.html) in the PostgreSQL documentation\. To disable parallelism on version 10, set the `max_parallel_workers_per_gather` parameter to 0\. 
+
    During the major version upgrade, the `public` and `template1` databases and the `public` schema in every database on the instance are temporarily renamed\. These objects appear in the logs with their original name and a random string appended\. The string is appended so that custom settings such as `locale` and `owner` are preserved during the major version upgrade\. After the upgrade completes, the objects are renamed back to their original names\. 
 **Note**  
 During the major version upgrade process, you can't do a point\-in\-time restore of your instance\. After Amazon RDS performs the upgrade, it takes an automatic backup of the instance\. You can perform a point\-in\-time restore to times before the upgrade began and after the automatic backup of your instance has completed\. 
@@ -267,8 +273,17 @@ During the major version upgrade process, you can't do a point\-in\-time restore
 
 1. **Upgrade your production instance** – When the dry\-run major version upgrade is successful, you should be able to upgrade your production database with confidence\. For more information, see [Manually upgrading the engine version](USER_UpgradeDBInstance.Upgrading.md#USER_UpgradeDBInstance.Upgrading.Manual)\. 
 
+1. Run the `ANALYZE` operation to refresh the `pg_statistic` table\. You should do this for every database on all your PostgreSQL DB instances\. Optimizer statistics aren't transferred during a major version upgrade, so you need to regenerate all statistics to avoid performance issues\. Run the command without any parameters to generate statistics for all regular tables in the current database, as follows:
+
+   ```
+   ANALYZE VERBOSE
+   ```
+
+   The `VERBOSE` flag is optional, but using it shows you the progress\. For more information, see [ANALYZE](https://www.postgresql.org/docs/10/sql-analyze.html) in the PostgreSQL documentation\. 
+**Note**  
+Run ANALYZE on your system after the upgrade to avoid performance issues\.
+
 After the major version upgrade is complete, we recommend the following:
-+ Run the `ANALYZE` operation to refresh the `pg_statistic` table\.
 + A PostgreSQL upgrade doesn't upgrade any PostgreSQL extensions\. To upgrade extensions, see [Upgrading PostgreSQL extensions](#USER_UpgradeDBInstance.PostgreSQL.ExtensionUpgrades)\. 
 + Optionally, use Amazon RDS to view two logs that the pg\_upgrade utility produces\. These are `pg_upgrade_internal.log` and `pg_upgrade_server.log`\. Amazon RDS appends a timestamp to the file name for these logs\. You can view these logs as you can any other log\. For more information, see [Working with Amazon RDS database log files](USER_LogAccess.md)\.
 

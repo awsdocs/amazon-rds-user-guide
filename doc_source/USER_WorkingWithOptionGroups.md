@@ -458,7 +458,7 @@ You can use the AWS Management Console to remove an option from an option group\
 
 ### AWS CLI<a name="USER_WorkingWithOptionGroups.RemoveOption.CLI"></a>
 
-To remove an option from an option group, use the AWS CLI [ `remove-option-from-option-group`](https://docs.aws.amazon.com/cli/latest/reference/rds/remove-option-from-option-group.html) command with the option that you want to delete\. By default, the option is removed from each associated DB instance during its next maintenance window\. To apply the change immediately, include the `--apply-immediately` parameter\. 
+To remove an option from an option group, use the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/remove-option-from-option-group.html](https://docs.aws.amazon.com/cli/latest/reference/rds/remove-option-from-option-group.html) command with the option that you want to delete\. By default, the option is removed from each associated DB instance during its next maintenance window\. To apply the change immediately, include the `--apply-immediately` parameter\. 
 
 **Example**  
 The following example removes the Oracle Enterprise Manager Database Control \(OEM\) option from an option group named `testoptiongroup` and immediately applies the change\.   
@@ -487,7 +487,7 @@ OPTIONGROUP    testoptiongroup oracle-ee   12.1    Test option group
 
 ### RDS API<a name="USER_WorkingWithOptionGroups.RemoveOption.API"></a>
 
-To remove an option from an option group, use the Amazon RDS API [ `ModifyOptionGroup`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) action\. By default, the option is removed from each associated DB instance during its next maintenance window\. To apply the change immediately, include the `ApplyImmediately` parameter and set it to `true`\. 
+To remove an option from an option group, use the Amazon RDS API [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyOptionGroup.html) action\. By default, the option is removed from each associated DB instance during its next maintenance window\. To apply the change immediately, include the `ApplyImmediately` parameter and set it to `true`\. 
 
 Include the following parameters: 
 + `OptionGroupName`
@@ -515,7 +515,7 @@ An error occurred (InvalidOptionGroupStateFault) when calling the DeleteOptionGr
 
 If a DB instance is associated with the option group, modify the DB instance to use a different option group\. For more information, see [Modifying an Amazon RDS DB instance](Overview.DBInstance.Modifying.md)\.
 
-If a manual DB snapshot is associated with the option group, modify the DB snapshot to use a different option group using the AWS CLI [ `modify-db-snapshot`](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\.
+If a manual DB snapshot is associated with the option group, modify the DB snapshot to use a different option group using the AWS CLI [https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html](https://docs.aws.amazon.com/cli/latest/reference/rds/modify-db-snapshot.html) command\.
 
 **Note**  
 You can't modify the option group of an automated DB snapshot\.

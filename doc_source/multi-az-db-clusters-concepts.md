@@ -16,6 +16,7 @@ A *Multi\-AZ DB cluster deployment* is a high availability deployment mode of Am
 + [Modifying a Multi\-AZ DB cluster](#modify-multi-az-db-cluster)
 + [Rebooting Multi\-AZ DB clusters and reader DB instances](#multi-az-db-clusters-concepts-rebooting)
 + [Working with parameter groups for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-parameter-groups)
++ [Replica lag and Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-replica-lag)
 + [Failover process for Multi\-AZ DB clusters](#multi-az-db-clusters-concepts-failover)
 + [Creating a Multi\-AZ DB cluster snapshot](#USER_CreateMultiAZDBClusterSnapshot)
 + [Restoring from a snapshot to a Multi\-AZ DB cluster](#USER_RestoreFromMultiAZDBClusterSnapshot.Restoring)
@@ -29,13 +30,15 @@ Multi\-AZ DB clusters aren't the same as Aurora DB clusters\. For information ab
 
 ## Overview of Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-overview"></a>
 
-With a Multi\-AZ DB cluster, Amazon RDS replicates data from the writer DB instance to both of the reader DB instances using the DB engine's native replication capabilities\. When a change is made on the writer DB instance, it's sent to each reader DB instance\. Acknowledgment from at least one reader DB instance is required for a change to be committed and applied\. Reader DB instances act as automatic failover targets and also serve read traffic to increase application read throughput\.
+With a Multi\-AZ DB cluster, Amazon RDS replicates data from the writer DB instance to both of the reader DB instances using the DB engine's native replication capabilities\. When a change is made on the writer DB instance, it's sent to each reader DB instance\. Acknowledgment from at least one reader DB instance is required for a change to be committed and applied\. 
+
+Reader DB instances act as automatic failover targets and also serve read traffic to increase application read throughput\. If an outage occurs on your writer DB instance, RDS manages which of the reader DB instances becomes the failover target\. RDS does this based on which reader DB instance has the least replica lag\.
 
 The following diagram shows a Multi\-AZ DB cluster\.
 
 ![\[Multi-AZ DB cluster\]](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/images/multi-az-db-cluster.png)
 
-Multi\-AZ DB clusters typically have lower write latency when compared to Multi\-AZ DB instance deployments\. The RDS console shows the Availability Zone of the writer DB instance and the Availability Zones of the reader DB instances\. You can also use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI command or the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API operation to find this information\. 
+Multi\-AZ DB clusters typically have lower write latency when compared to Multi\-AZ DB instance deployments\. They also allow read\-only workloads to run on reader DB instances\. The RDS console shows the Availability Zone of the writer DB instance and the Availability Zones of the reader DB instances\. You can also use the [describe\-db\-clusters](https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-clusters.html) CLI command or the [DescribeDBClusters](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html) API operation to find this information\. 
 
 ## Supported DB instance classes for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-db-instance-classes"></a>
 
@@ -296,7 +299,7 @@ For details about settings that you choose when you create a Multi\-AZ DB cluste
 
 ### Settings that don't apply when creating Multi\-AZ DB clusters<a name="create-multi-az-db-cluster-settings-not-applicable"></a>
 
-The following settings in the AWS CLI command [ `create-db-cluster`](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and the RDS API operation [ `CreateDBCluster`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) don't apply to Multi\-AZ DB clusters in the preview\.
+The following settings in the AWS CLI command [https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html](https://docs.aws.amazon.com/cli/latest/reference/rds/create-db-cluster.html) and the RDS API operation [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html) don't apply to Multi\-AZ DB clusters in the preview\.
 
 You also can't specify these settings for Multi\-AZ DB clusters in the console\.
 
@@ -600,6 +603,35 @@ In a Multi\-AZ DB cluster, a *DB parameter group* is set to the default DB param
 
 For information about parameter groups, see [Working with DB parameter groups](USER_WorkingWithParamGroups.md)\.
 
+## Replica lag and Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-replica-lag"></a>
+
+*Replica lag* is the difference in time between the latest transaction on the writer DB instance and the latest applied transaction on a reader DB instance\. The Amazon CloudWatch metric `ReplicaLag` represents this time difference\. For more information about CloudWatch metrics, see [Monitoring Amazon RDS metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\. 
+
+Although Multi\-AZ DB clusters allow for high write performance, replica lag can still occur due to the nature of engine\-based replication\. Because any failover must first resolve the replica lag before it promotes a new writer DB instance, monitoring and managing this replica lag is a consideration\.
+
+### Common causes of replica lag<a name="multi-az-db-clusters-concepts-replica-lag-causes"></a>
+
+In general, replica lag occurs when the write workload is too high for the reader DB instances to apply the transactions efficiently\. Various workloads can incur temporary or continuous replica lag\. Some examples of common causes are the following:
++ High write concurrency or heavy batch updating on the writer DB instance, causing the apply process on the reader DB instances to fall behind\.
++ Heavy read workload that is using resources on one or more reader DB instances\. Running slow or large queries can affect the apply process and can cause replica lag\.
++ Transactions that modify large amounts of data or DDL statements can sometimes cause a temporary increase in replica lag because the database must preserve commit order\.
+
+### Mitigating replica lag<a name="multi-az-db-clusters-concepts-replica-lag-mitigating"></a>
+
+For Multi\-AZ DB clusters for RDS for MySQL and RDS for PostgreSQL, you can mitigate replica lag by reducing the load on your writer DB instance\.
+
+For Multi\-AZ DB clusters for RDS for PostgreSQL, flow control is an optional feature, and it can reduce replica lag\. *Flow control* works by throttling writes on the writer DB instance, which ensures that replica lag doesn't continue to grow unbounded\. Write throttling is accomplished by adding a delay into the end of a transaction, which decreases the write throughput on the writer DB instance\. Although flow control doesn't guarantee lag elimination, it can help reduce overall lag in many workloads\.
+
+For Multi\-AZ DB clusters for RDS for PostgreSQL, flow control is deployed as an extension\. It turns on a background worker for all DB instances in the DB cluster\. By default, the background workers on the reader DB instances communicate the current replica lag with the background worker on the writer DB instance\. If the lag exceeds two minutes on any reader DB instance, the background worker on the writer DB instance adds a delay at the end of a transaction\. To control the lag threshold, use the parameter `flow_control.target_standby_apply_lag`\.
+
+When a flow control throttles a PostgreSQL process, the `Extension` wait event in `pg_stat_activity` and Performance Insights indicates that\. The function `get_flow_control_stats` displays details about how much delay is currently being added\.
+
+Flow control can benefit most online transaction processing \(OLTP\) workloads that have short but highly concurrent transactions\. If the lag is caused by long\-running transactions, such as batch operations, flow control doesn't provide as strong a benefit\.
+
+You can turn off flow control by removing the extension from the `preload_shared_libraries` and rebooting your DB instance\.
+
+Currently, flow control isn't available for Multi\-AZ DB clusters for RDS for MySQL\.
+
 ## Failover process for Multi\-AZ DB clusters<a name="multi-az-db-clusters-concepts-failover"></a>
 
 If a planned or unplanned outage of your writer DB instance in a Multi\-AZ DB cluster results from an infrastructure defect, Amazon RDS automatically switches to a reader DB instance in another Availability Zone\. The time it takes for the failover to complete depends on the database activity and other conditions when the writer DB instance became unavailable\. Failover times are typically 20–40 seconds\. Failover completes when both reader DB instances have applied outstanding transactions from the failed writer\. When the failover is complete, it can take additional time for the RDS console to reflect the new Availability Zone\.
@@ -670,7 +702,7 @@ On some Java configurations, the JVM default TTL is set so that it never refresh
 **Note**  
 The default TTL can vary according to the version of your JVM and whether a security manager is installed\. Many JVMs provide a default TTL less than 60 seconds\. If you're using such a JVM and not using a security manager, you can ignore the rest of this topic\. For more information on security managers in Oracle, see [The security manager](https://docs.oracle.com/javase/tutorial/essential/environment/security.html) in the Oracle documentation\.
 
-To modify the JVM's TTL, set the [ `networkaddress.cache.ttl`](https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html) property value\. Use one of the following methods, depending on your needs:
+To modify the JVM's TTL, set the [https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html](https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html) property value\. Use one of the following methods, depending on your needs:
 + To set the property value globally for all applications that use the JVM, set `networkaddress.cache.ttl` in the `$JAVA_HOME/jre/lib/security/java.security` file\.
 
   ```

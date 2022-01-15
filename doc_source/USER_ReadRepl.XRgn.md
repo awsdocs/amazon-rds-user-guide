@@ -89,7 +89,7 @@ aws rds create-db-instance-read-replica ^
 The following parameters are also required for creating an encrypted read replica in another AWS Region:
 +  `--source-region` – The AWS Region of the source DB instance\.
 
-  If `--source-region` isn't specified, you must specify a `--pre-signed-url` value\. A presigned URL is a URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region\. For more information about presigned URLs, see [ `CreateDBInstanceReadReplica`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
+  If `--source-region` isn't specified, you must specify a `--pre-signed-url` value\. A presigned URL is a URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` operation that is called in the source AWS Region\. For more information about presigned URLs, see [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstanceReadReplica.html)\.
 +  `--kms-key-id` – The AWS KMS key identifier of the KMS key to use to encrypt the read replica in the destination AWS Region\.
 
 **Example of an encrypted cross\-Region read replica**  

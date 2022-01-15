@@ -157,6 +157,14 @@ When the DB instance status is `available`, you're ready to proceed\.
 
 Use the mysqlimport utility to load the flat files into Amazon RDS\. In the example we tell mysqlimport to load all of the files named "sales" with an extension starting with "part\_"\. This is a convenient way to load all of the files created in the "split" example\. Use the \-\-compress option to minimize network traffic\. The \-\-fields\-terminated\-by=',' option is used for CSV files and the \-\-local option specifies that the incoming data is located on the client\. Without the \-\-local option, the Amazon RDS DB instance looks for the data on the database host, so always specify the \-\-local option\. For the \-\-host option, specify the DB instance endpoint of the RDS for MySQL DB instance\.
 
+For RDS for MySQL version 8\.0\.15 and higher, run the following statement before using the mysqlimport utility:
+
+```
+GRANT SESSION_VARIABLES_ADMIN ON *.* TO master_user;
+```
+
+Replace *master\_user* with the master username for your DB instance\.
+
 For Linux, macOS, or Unix:
 
 ```

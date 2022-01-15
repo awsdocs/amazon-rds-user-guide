@@ -67,6 +67,6 @@ aws rds create-event-subscription ^
 
 ## API<a name="USER_Events.Subscribing.API"></a>
 
-To subscribe to Amazon RDS event notification, call the Amazon RDS API function [ `CreateEventSubscription`](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html)\. Include the following required parameters: 
+To subscribe to Amazon RDS event notification, call the Amazon RDS API function [https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateEventSubscription.html)\. Include the following required parameters: 
 + `SubscriptionName`
 + `SnsTopicArn`
