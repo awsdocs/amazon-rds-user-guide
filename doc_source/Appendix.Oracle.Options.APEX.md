@@ -104,7 +104,7 @@ You can do this by using the Oracle SQL\*Plus command line utility\. Connect to 
 
 ```
 1. ALTER USER APEX_PUBLIC_USER IDENTIFIED BY new_password;
-2. ALTER USER APEX_PUBLIC_USER ACCOUNT UNLOCKED;
+2. ALTER USER APEX_PUBLIC_USER ACCOUNT UNLOCK;
 ```
 
 ## Configuring RESTful services for Oracle APEX<a name="Appendix.Oracle.Options.APEX.ConfigureRESTful"></a>
